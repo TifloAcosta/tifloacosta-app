@@ -790,12 +790,13 @@ private struct NativeYouTubeVideoRow: View {
             .frame(maxWidth: .infinity, alignment: .leading)
         }
         .buttonStyle(.plain)
-        .accessibilityElement(children: .ignore)
+        // Conservar el botón real: un elemento artificial pierde la acción de doble toque.
         .accessibilityLabel("\(video.title). Canal: \(video.channelTitle)")
         .accessibilityHint("Doble toque para reproducir. Desliza arriba o abajo para más acciones.")
         .modifier(NativeYouTubeTitleActions(
             video: video, onPlay: onPlay, onComment: onComment
         ))
+        .accessibilityAction(.default) { onPlay(video) }
     }
 }
 

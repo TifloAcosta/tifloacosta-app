@@ -29,6 +29,14 @@ test('Todo título del canal o de resultados abre el mismo reproductor accesible
   assert.match(screens, /NativeYouTubeVideo\(catalog: item\)/);
   assert.match(screens, /youtubeSearch\.videos/);
   assert.match(screens, /\.accessibilityAction\(named: Text\("Reproducir"\)\)/);
+  const row = screens.split('private struct NativeYouTubeVideoRow: View {')[1]
+    .split('private struct NativeYouTubeCommentScreen: View {')[0];
+  assert.match(row, /Button\s*\{\s*onPlay\(video\)\s*\}/);
+  assert.doesNotMatch(row, /\.accessibilityElement\(children: \.ignore\)/);
+  assert.match(row, /\.accessibilityAction\(\.default\)\s*\{\s*onPlay\(video\)/);
+  const favoriteVideo = favorites.split('case .video:')[1].split('\n                    }')[0];
+  assert.doesNotMatch(favoriteVideo, /\.accessibilityElement\(children: \.ignore\)/);
+  assert.match(favoriteVideo, /\.accessibilityAction\(\.default\)/);
   assert.match(favorites, /NativeYouTubeVideo\(catalog: entry\.item\)/);
   assert.match(favorites, /NativeYouTubePlayerScreen\(video: video\)/);
 });
@@ -54,7 +62,11 @@ test('YouTube usa exclusivamente iframe oficial y mandos nativos VoiceOver', () 
   assert.match(player, /NativeYouTubeOfficialPlayer\(videoID: video\.id, engine: engine\)[\s\S]{0,220}\.accessibilityHidden\(true\)/);
   assert.match(player, /onYouTubeIframeAPIReady/);
   // Reproductor creado con la API IFrame y sus controles nativos SwiftUI.
-  assert.match(player, /playerVars:\{playsinline:1,controls:1,enablejsapi:1/);
+  assert.match(player, /playerVars:\{playsinline:1,controls:1,enablejsapi:1,autoplay:0/);
+  assert.match(player, /configuration\.mediaTypesRequiringUserActionForPlayback\s*=\s*\[\]/);
+  assert.match(player, /import AVFoundation/);
+  assert.match(player, /session\.setCategory\(\.playback, mode: \.moviePlayback, options: \[\.mixWithOthers\]\)/);
+  assert.match(player, /coordinator\.restoreAudioConfiguration\(\)/);
   assert.match(player, /height: 225/);
   assert.match(player, /Text\(engine\.playing \? "Pausar" : "Reproducir"\)/);
   assert.match(player, /dynamicTypeSize\.isAccessibilitySize/);

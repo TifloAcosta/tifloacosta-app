@@ -150,13 +150,15 @@ struct NativeFavoritesScreen: View {
                                     .foregroundStyle(TifloVisual.secondaryText)
                             }
                         }
-                        .accessibilityElement(children: .ignore)
                         .accessibilityLabel("\(entry.item.title), vídeo favorito")
                         .accessibilityHint("Doble toque para reproducir en TifloAcosta. Acciones: Abrir en YouTube y Quitar de favoritos.")
                         .accessibilityAction(named: Text("Abrir en YouTube")) {
                             if let url = entry.item.videoURL { openURL(url) }
                         }
                         .accessibilityAction(named: Text("Quitar de favoritos")) { remove(entry) }
+                        .accessibilityAction(.default) {
+                            selectedVideo = NativeYouTubeVideo(catalog: entry.item)
+                        }
                     }
                 }
             }

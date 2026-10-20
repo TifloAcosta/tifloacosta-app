@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 import WebKit
 import UIKit
+import AVFoundation
 
 /// Datos de YouTube: el buscador y toda la interfaz son SwiftUI nativos.
 /// Solo el reproductor oficial necesita un WKWebView, según las condiciones de YouTube.
@@ -253,7 +254,10 @@ private struct NativeYouTubeOfficialPlayer: UIViewRepresentable {
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = content
         configuration.allowsInlineMediaPlayback = true
-        configuration.mediaTypesRequiringUserActionForPlayback = .all
+        // El toque se realiza en el botón nativo; evaluateJavaScript no es
+        // un gesto de usuario dentro del iframe y no debe quedar bloqueado.
+        configuration.mediaTypesRequiringUserActionForPlayback = []
+        context.coordinator.configureMixableAudio()
         let view = WKWebView(frame: .zero, configuration: configuration)
         view.scrollView.isScrollEnabled = false
         view.isOpaque = false
@@ -283,7 +287,7 @@ private struct NativeYouTubeOfficialPlayer: UIViewRepresentable {
           window.tifloPlayer=new YT.Player('player',{
             videoId:'\(videoID)',
             width:'100%',height:'100%',
-            playerVars:{playsinline:1,controls:1,enablejsapi:1,origin:'https://tifloacosta.com'},
+            playerVars:{playsinline:1,controls:1,enablejsapi:1,autoplay:0,origin:'https://tifloacosta.com'},
             events:{onReady:sendState,onStateChange:sendState,
               onError:function(event){
                 window.webkit.messageHandlers.tifloPlayerEvents.postMessage({error:event.data});
@@ -304,11 +308,39 @@ private struct NativeYouTubeOfficialPlayer: UIViewRepresentable {
         uiView.stopLoading()
         uiView.loadHTMLString("", baseURL: nil)
         uiView.configuration.userContentController.removeScriptMessageHandler(forName: "tifloPlayerEvents")
+        coordinator.restoreAudioConfiguration()
     }
 
     final class Coordinator: NSObject, WKScriptMessageHandler {
         let engine: NativeYouTubePlayerEngine
+        private var previousAudio: (category: AVAudioSession.Category,
+                                    mode: AVAudioSession.Mode,
+                                    options: AVAudioSession.CategoryOptions)?
+
         init(engine: NativeYouTubePlayerEngine) { self.engine = engine }
+
+        func configureMixableAudio() {
+            let session = AVAudioSession.sharedInstance()
+            let prior = (category: session.category, mode: session.mode,
+                         options: session.categoryOptions)
+            do {
+                // Evitar una sesión exclusiva que silencie la voz del lector de pantalla.
+                try session.setCategory(.playback, mode: .moviePlayback, options: [.mixWithOthers])
+                try session.setActive(true)
+                previousAudio = prior
+            } catch {
+                try? session.setCategory(prior.category, mode: prior.mode, options: prior.options)
+            }
+        }
+
+        func restoreAudioConfiguration() {
+            guard let prior = previousAudio else { return }
+            try? AVAudioSession.sharedInstance().setCategory(
+                prior.category, mode: prior.mode, options: prior.options
+            )
+            previousAudio = nil
+        }
+
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
             guard let data = message.body as? [String: Any] else { return }
             Task { @MainActor in engine.report(data) }

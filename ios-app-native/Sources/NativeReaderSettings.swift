@@ -163,8 +163,8 @@ struct NativeReaderVisualSettingsScreen: View {
 struct NativeReaderSupportedFormatsScreen: View {
     var body: some View {
         List {
-            ForEach(NativeReaderFormats.supportedFormatGroups, id: \.0) { group in
-                Section(group.0) { Text(group.1) }
+            ForEach(NativeReaderFormats.supportedFormatGroups) { group in
+                Section(group.title) { Text(group.details) }
             }
             Section("Formatos antiguos") {
                 Text("PPS, PPT y XLS todavía necesitan recuperar su conversión a texto accesible. Para las presentaciones y hojas modernas se admiten PPTX y XLSX.")

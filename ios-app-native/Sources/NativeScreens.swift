@@ -71,6 +71,7 @@ struct NativeHomeScreen: View {
     @StateObject private var sharedReadingSpeech = NativeReadingSpeech()
     @EnvironmentObject private var catalog: NativeCatalogStore
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @AppStorage("native-ios-language") private var languageIndex = 0
     @State private var searchText = ""
     @State private var submittedSearch = ""
     @State private var showingSearch = false
@@ -153,6 +154,38 @@ struct NativeHomeScreen: View {
         }
     }
 
+    private var guidePanel: some View {
+        NavigationLink {
+            NativeUsageGuideScreen()
+        } label: {
+            HStack(spacing: 12) {
+                RoundedRectangle(cornerRadius: 2)
+                    .fill(TifloVisual.brandRed)
+                    .frame(width: 4, height: 28)
+                    .accessibilityHidden(true)
+                Text(languageIndex == 1 ? "User guide" : "Guía de uso")
+                    .font(.body.weight(.semibold))
+                    .foregroundStyle(TifloVisual.primaryText)
+                    .fixedSize(horizontal: false, vertical: true)
+                Spacer(minLength: 8)
+                Image(systemName: "chevron.right")
+                    .foregroundStyle(TifloVisual.secondaryText)
+                    .accessibilityHidden(true)
+            }
+            .frame(maxWidth: .infinity, minHeight: 48, alignment: .leading)
+            .padding(16)
+            .background(
+                RoundedRectangle(cornerRadius: TifloVisual.cornerRadius)
+                    .fill(TifloVisual.surfaceRaised)
+            )
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(languageIndex == 1 ? "User guide" : "Guía de uso")
+        .accessibilityHint(languageIndex == 1
+            ? "Instructions for every TifloAcosta section."
+            : "Instrucciones para utilizar cada sección de TifloAcosta.")
+    }
+
     private var destinationsPanel: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Secciones")
@@ -206,6 +239,7 @@ struct NativeHomeScreen: View {
                 VStack(alignment: .leading, spacing: TifloVisual.sectionSpacing) {
                     brandHeader
                     searchPanel
+                    guidePanel
                     destinationsPanel
 
                     if let error = catalog.error {

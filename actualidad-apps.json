@@ -120,6 +120,18 @@
     "publishedAt": null
   },
   {
+    "id": "applevis-apps-89c5c20a2805b328",
+    "title": "Oath & Ash",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/oath-ash",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "Oath &amp; Ash is a turn-based fantasy deck-building card game, built from the start to be fully playable with VoiceOver. Every card, every value, every enemy intent and every result is spoken, and nothing is ever timed, neither in the story acts nor in the Arena. Choose between three heroes: the Knight holds the line with armor and counterattacks, the Hunter sets traps and spreads poison, and the Mage controls the flow of cards with chains and frost. Travel through three acts with ten encounters each and boss fights, set out on Expeditions with branching maps, relics, rests and merchants, take on a new Daily challenge every day, and duel the saved decks of real players in the monthly Arena seasons. Accessibility highlights: a battle log with one heading per round for quick navigation, a narrator guiding you in English and German, a distinct voice for every enemy and its own music for every boss, audio cues for your turn, hit strength and low health, a \"Learn the sounds\" screen that plays every sound and explains it, and support for larger text, reduced motion and haptic feedback. The game is free to download with no ads. Diamonds and the Path Letter are optional in-app purchases; your progress is saved to iCloud. Available in English and German.",
+    "publishedAt": "2026-10-21T07:00:42.000Z"
+  },
+  {
     "id": "applevis-apps-8307d1fac04170e3",
     "title": "Upward: Number Merge Puzzle",
     "sourceId": "applevis-apps",
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "Astonischika is a turn-based pixel role-playing game with a roguelite loop. Build a party from bold classes, climb a branching map and fight turn by turn against monsters, elites and bosses. Every run is different: you choose your path across battles, rest sites, treasure, merchants and minigames. When your party falls, the city remains your permanent home — your heroes, their gold and their gear grow from run to run. FEATURES • Build your party from a range of classes — warrior, mage, cleric, rogue, archer and more • Turn-based battles with skills, spells, elements and status effects • Branching map: battle, elite, boss, rest, treasure and merchant • Level-ups, attribute points, equipment and learnable spells • Minigames: shell game, dice, memory, coin flip and more • A permanent city hub — your progress stays after every run • Endless scaling for long-term motivation • 22 languages, music and sound effects GREAT FOR Quick battle rounds in between, or long dungeon sessions.",
     "publishedAt": "2026-10-13T11:30:06.000Z"
-  },
-  {
-    "id": "applevis-apps-965dfa0d128b3a6c",
-    "title": "RedCoach",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/travel/redcoach",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Welcome to the RedCoach app — your all-in-one travel companion. Book affordable bus tickets, track your ride in real time, and earn rewards by joining RedCoach’s Loyalty Program. Top Features: • Search schedules and book bus trips for yourself, friends, or family • Track your bus in real time with live updates • Rebook or cancel trips with just a few taps • Access mobile tickets instantly for easy boarding • Select your seat and pay for extra baggage • Compare coach class amenities to pick your ride style • Save with promo codes and travel discounts • Join the Red Rider Loyalty Program and earn free trips • Manage your profile, trips, payments, and travel preferences • Reach out to customer support RedCoach puts smarter travel at your fingertips, delivering comfort, convenience, and complete control.",
-    "publishedAt": "2026-10-11T18:24:39.000Z"
   }
 ]

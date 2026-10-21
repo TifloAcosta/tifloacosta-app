@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-21T10:14:26.102Z",
+  "generatedAt": "2026-10-21T15:18:49.052Z",
   "resources": [
     {
       "kind": "resource",
@@ -6101,24 +6101,6 @@
       "originalUrl": "https://conticgo.net/orbit-strata-40-la-nueva-linea-braille-de-40-celdas-que-llegara-al-mercado-en-octubre/",
       "publishedAt": "2026-10-12T06:00:37.000Z",
       "categories": [
-        "tecnologia-accesibilidad",
-        "braille"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "accessible-android-763e95a34e982956:en",
-      "sourceId": "accessible-android-763e95a34e982956",
-      "lang": "en",
-      "title": "MBraille",
-      "summary": "MBraille turns your device into a braille-first workspace for writing, editing, and everyday tasks. It combines fast touchscreen or keyboard braille entry with navigation, powerful…",
-      "body": "Published 11 October 2026 by Harri\n\nMBraille turns your device into a braille-first workspace for writing, editing, and everyday tasks. It combines fast touchscreen or keyboard braille entry with navigation, powerful editing, and file management for an efficient eyes-free workflow.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nIt should be fully accessible, I'm the author so let me know if something does not work.\n\nLast Tested App version and Android version:\n\n26.3, Android 13\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility.",
-      "sourceName": "Accessible Android",
-      "originalUrl": "https://accessibleandroid.com/app/mbraille/",
-      "publishedAt": "2026-10-11T13:28:29.000Z",
-      "categories": [
-        "android",
-        "apps-accesibles",
         "tecnologia-accesibilidad",
         "braille"
       ]

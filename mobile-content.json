@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-21T19:39:52.861Z",
+  "generatedAt": "2026-10-21T20:11:53.800Z",
   "resources": [
     {
       "kind": "resource",
@@ -5448,6 +5448,170 @@
   "news": [
     {
       "kind": "news",
+      "id": "9to5mac-062b02b6476e2adc:en",
+      "sourceId": "9to5mac-062b02b6476e2adc",
+      "lang": "en",
+      "title": "iOS 27.2 reveals Apple’s Messages app could soon get highly requested change",
+      "summary": "iOS 27.2 launches next week , and the update includes code that points to a forthcoming Messages app change: the ability to exclude muted conversations from the unread badge count. more…",
+      "body": "iOS 27.2 launches next week , and the update includes code that points to a forthcoming Messages app change: the ability to exclude muted conversations from the unread badge count.\n\nDo you belong to a very active group chat? Or are there people in your life that you prefer to keep on mute in the Messages app?\n\nIf either or both is true, it might bug you that muting those conversations doesn’t impact the Messages app’s unread badge count.\n\nExcept soon, according to iOS 27.2 code, that might finally change.\n\nAaron Perris shared the discovery this week in a post on X :\n\nPersonally, I’m very excited by this potential change.\n\nI keep a couple of busy group chats muted inside Messages so I’m not pinged with notifications constantly. And as someone who keeps notification badges disabled for most apps, a red badge is always very noticeable. So it always bothers me when Messages has an unread badge for group chats I’ve muted.\n\nWhile it sounds like this feature won’t ship in iOS 27.2, hopefully Apple is able to offer it soon.\n\nWould you use this Messages option if Apple provided it? Let us know in the comments.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/21/ios-27-2-reveals-apples-messages-app-could-soon-get-highly-requested-change/",
+      "publishedAt": "2026-10-21T20:05:13.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-50cb586e8933fa53:en",
+      "sourceId": "the-verge-50cb586e8933fa53",
+      "lang": "en",
+      "title": "Anthropic takes on Muse with Claude Duet, its new AI agent",
+      "summary": "Anthropic just announced an AI agent competitor to Meta's Muse and OpenAI's Dots: Claude Duet. The new agent, designed for professionals and small business owners, is launching as a \"research preview,\" according to Anthropic, and it's available as a standalone app on iOS and Android and through Claude on the web. The AI agent is […]",
+      "body": "Anthropic just announced an AI agent competitor to Meta's Muse and OpenAI's Dots: Claude Duet. The new agent, designed for professionals and small business owners, is launching as a \"research preview,\" according to Anthropic , and it's available as a standalone app on iOS and Android and through Claude on the web.\n\nThe AI agent is built around Claude Opus 5.5. Here's Anthropic's description of what it can do:\n\nEach morning, it sends you a short brief on the most important items across your connected apps. Throughout the day, it keeps tabs on those apps and messages you only when something needs your attention. You can also hand it tasks of a …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1015843/anthropic-claude-duet-ai-agent",
+      "publishedAt": "2026-10-21T19:53:20.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple",
+        "android",
+        "apps-accesibles",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-93f503f5a8027b67:en",
+      "sourceId": "techcrunch-93f503f5a8027b67",
+      "lang": "en",
+      "title": "GM is betting compute and AI will help it compete with Chinese automakers",
+      "summary": "To compete with Tesla, Rivian, and a host of Chinese automakers, GM’s fourth-gen EV platform will roll out a new central computer and electrical architecture that will debut in 2028 in the Cadillac Escalade IQ.",
+      "body": "When GM announced its new fourth-generation EV platform on Wednesday, what the automaker didn’t share was almost as notable as what it did.\n\nThe new EV platform, part of a series of technology-focused announced during its annual GM Forward event in New York, didn’t talk about suspension geometries, dash-to-axle ratios, and torsional rigidity, all nerdy automotive terms that translate to how people will experience a car. Is it supple or sporty? Does it have a refined stance? When it hits a pothole, does it feel like a bank vault or a paper plate?\n\nInstead, GM’s announcement centered on novel battery chemistries, revamped electric motors, and an entirely new central computing platform and electrical architecture that will connect every system in the car, including acceleration and power, steering, braking, and active safety features as well as software. Lots and lots of software.\n\n“We think vehicles can become a more capable and helpful part of everyday life if we make them spaces that understand context, reduce friction, and give people back moments that would otherwise be consumed by the demands of the road,” Sterling Anderson, executive vice president, global product, and chief product officer at GM, told TechCrunch in a recent interview.\n\nThat sure doesn’t sound like a traditional automaker’s pitch. Then again, since the arrival of Tesla, Rivian, and Chinese automakers, the industry hasn’t been the same. Ride and handling still matter, but they’re table stakes. What sets vehicles apart today is largely defined by software.\n\nAnderson has talked about this future GM before. Last year, the company announced plans to overhaul the electrical and computational guts of its future vehicles in a bid to deliver faster software, more capable automated driving features, and a custom, conversational AI assistant.\n\nThis year, GM is providing more details and dates. This technological overhaul is set to debut in 2028 with the Cadillac Escalade IQ. The company will also rollout an autonomous highway driving feature in 2028 that will allow drivers to have their hands and eyes off the road and without the need to be ready to take over.\n\nEuropean and U.S. automakers have spent years chasing the prospect of software-defined vehicles, but have often fallen short. Volkswagen Group had so much trouble with its own in-house effort, including its troubled Cariad unit, that it struck a $5.8 billion joint venture deal with relative newcomer Rivian.\n\nGM has been on its own capitally intensive software adventure. The company has bet heavily on software in recent years. It ditched the popular smartphone projection technology Apple CarPlay for nearly all of its EVs, and instead turned to a Google-based infotainment system, which is actually quite capable even if it doesn’t yet live up to the standards set by Tesla and Rivian.\n\nIt’s poured billions into software and autonomous vehicle technology development too. GM’s capitalized software amortization expense in 2025 was $866 million, which gives a sense of how much it is spending even as it spreads out the cost over years.\n\nLike many legacy automakers, GM has come to the conclusion that the old approach to electronics, which scattered computer chips throughout the vehicle, was holding it back.\n\nFor fourth-generation EVs, GM will centralize much of those functions on a Central Compute Unit (CCU) that’s 40-times more powerful than its existing systems. Eliminating smaller chips on the edges will help trim wiring by 30%, saving weight and simplifying assembly.\n\nGM notes that this new CCU will work on fossil fuel models, too, though it will debut in the Cadillac Escalade IQ, a vehicle that is shaping up to be the automaker’s technological flagship.\n\nThe CCU will handle the usual propulsion and chassis controls, but also perception and active safety. That should help pave the way for more advanced autonomy features, which GM also announced on Wednesday.\n\nSuch a move was perhaps inevitable. Pressure on automakers has been building on all sides.\n\nDomestically, Tesla has been pushing the boundaries of autonomy, in part because it developed a true software-defined vehicle.\n\nAutomakers like GM are also feeling pressure from Chinese manufacturers, which have shortened development cycles to two to three years, down from the usual four to five years.\n\nGM intends to match that cadence. Alongside announcements about battery chemistries and autonomy, GM outlined how enterprise AI tools have sped up vehicle development across every sector as it pushes to slash its traditional four-to-five-year development timeline in half.\n\nGM gave a brief glimpse of its revamped development strategy. One example: engineers went through 300,000 virtual designs of a new lithium-manganese-rich battery pack before they assembled the first physical prototype. That helped the concept move to an approved program in one month.\n\nSuch speed will help GM save costs as it races to preserve profitability amid a historic upheaval in the automotive industry. But will it be enough to catapult it back into the leadership position it once enjoyed?\n\nThe rise of Chinese automakers won’t make it easy. Their factories are capable of producing far more than Chinese consumers can absorb, and coupled with government subsidies and cheaper labor, these vehicles have flooded markets from Europe to South America with inexpensive vehicles.\n\nChinese automaker’s cost advantage is so steep that, without trade barriers, “they will pretty much demolish most other companies in the world,” Elon Musk said in a 2024 earnings call. In response, he has been trying to pivot Tesla from an automotive company to an AI and robotics company.\n\nGM’s move into autonomy signals a similar shift. But to deliver true autonomy, GM realized it didn’t have the platform it needed. With a new architecture, it should have a fighting chance.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/21/gm-is-betting-compute-and-ai-will-help-it-compete-with-chinese-automakers/",
+      "publishedAt": "2026-10-21T19:52:20.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-a1d0489e54d91f2f:en",
+      "sourceId": "techcrunch-a1d0489e54d91f2f",
+      "lang": "en",
+      "title": "Meta ordered to pay $25 billion in case related to Cambridge Analytica scandal",
+      "summary": "The payout is related to a recent trial involving the social media giant that revolved around its data privacy practices.",
+      "body": "Posted:\n\nThe tail of the Cambridge Analytica data scandal is long — and it keeps costing Meta gargantuan sums of money.\n\nOn Wednesday, a judge ordered the social media giant to initiate its biggest payout yet: $25 billion to the state of New Mexico for the tech giant’s role in deceiving resident users over its data privacy practices, The New York Times reports .\n\nThe huge sum follows a two-week trial in which a New Mexico jury deliberated over the company’s alleged wrongdoing. The jury found that the company behind Facebook and Instagram had committed 43 million violations of the state’s consumer protection laws, each of which carried a $5,000 penalty, the outlet notes.\n\nPart of the case revolved around the company’s handling of a third-party app linked to the Cambridge Analytica data breach, The Wall Street Journal reports . Other parts involved its data privacy policies and its efforts to mitigate misinformation on its platform.\n\nCambridge Analytica was an outgrowth of a British defense contractor , SLC Group, that specialized in influence operations and other political work. The company notably worked with the Trump campaign during the 2016 presidential election. It was also involved in a number of controversial initiatives .\n\n“We may have paid for the construction of schools for the next 100 years,” New Mexico Attorney General Raúl Torrez told journalists at a press conference, commenting on the case’s resolution.\n\nMeta has said that it will appeal the decision.\n\n“This ruling, and the Attorney General’s approach to this enforcement, makes it all but impossible to do business in the state of New Mexico,” said C.J. Mahoney, Meta’s Chief Legal Officer, in a statement shared with TechCrunch via email. “At its core, this lawsuit seeks to impose a tax on speech to enforce new rules for what people can say online. We are confident we will prevail on appeal. In the meantime, Meta will continue to build a safe and free platform to connect millions of Americans, grow small businesses, and help the country maintain its competitive edge,” he added.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/21/meta-ordered-to-pay-25-billion-in-case-related-to-cambridge-analytica-scandal/",
+      "publishedAt": "2026-10-21T19:42:32.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-f6fa2b6e44ffd962:en",
+      "sourceId": "9to5mac-f6fa2b6e44ffd962",
+      "lang": "en",
+      "title": "Anthropic takes on ChatGPT Dots and Meta Muse with Claude Duet",
+      "summary": "Anthropic is introducing a new AI assistant that can proactively manage tasks across connected apps, keep track of emails and calendars, and continue working even when the app is closed. Here are the details. more…",
+      "body": "Anthropic is introducing a new AI assistant that can proactively manage tasks across connected apps, keep track of emails and calendars, and continue working even when the app is closed. Here are the details.\n\nAnthropic today announced Claude Duet, an always-on AI agent currently rolling out as a research preview to Pro and Max subscribers in the US, with access gradually rolling out via a waitlist.\n\nThe feature is included at no additional cost, but counts toward existing plan usage limits, including work performed in the background, which the company notes could cause users to reach those limits “sooner than with chat alone.”\n\nHere’s Anthropic on its new proactive AI assistant:\n\nClaude Duet is a research preview of Claude that you message the way you’d message a person. Tell it what you need, typed or spoken, and it works in the apps you’ve connected, lets you know when something needs you, and is designed to ask before it sends a message, makes a payment, signs a document, or deletes anything.\n\nThe company says invitations will go out in waves and adds that “Claude Duet isn’t available on Team or Enterprise plans yet,” though it plans to expand availability to those subscriptions in the future.\n\nAnthropic says that Claude Duet uses the same memories, skills, and connectors as regular Claude , and can even search past conversations so users don’t have to repeat themselves.\n\nClaude Duet runs on its own cloud-based computer, allowing it to continue working even after users close the app.\n\nAdditionally, Claude Duet offers integrations with Stripe to check for unpaid invoices and draft payment reminders, as well as Link and Shop Pay to make purchases with user approval.\n\nHere are a few use cases described by Anthropic:\n\nAccording to Claude Duet’s support page , the assistant also has a dedicated Tasks tab where users can track ongoing work and see which tasks need their attention.\n\nClaude Duet also sends updates to the main conversation when a task is completed or requires a decision. Importantly, only users can mark tasks as finished.\n\nAnthropic says Claude Duet is powered by Claude Opus 5.5 and is available through standalone apps for iOS and Android, as well as on the web at claude.ai, for users who receive an invitation.\n\nTo learn more about Claude Duet and join the waitlist, follow this link .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/21/anthropic-takes-on-chatgpt-dots-and-meta-muse-with-claude-duet/",
+      "publishedAt": "2026-10-21T19:39:25.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "apps-accesibles",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-b7d973a81136e2db:en",
+      "sourceId": "techcrunch-b7d973a81136e2db",
+      "lang": "en",
+      "title": "While Amazon blocks AI agents, Walmart rolls out the welcome mat",
+      "summary": "As Amazon blocks AI agents from shopping on its site, Walmart is taking the opposite approach, introducing new technology that lets AI agents make purchases on customers' behalf, with controls over spending and transaction approvals.",
+      "body": "Walmart is embracing agentic commerce with the launch of its own Agent Gateway to manage transactions and other new features aimed at customers using AI agents, the retailer announced on Wednesday. The move comes shortly after Walmart’s top competitor, Amazon, began blocking AI agents from making purchases on behalf of online shoppers.\n\nThe company’s embrace of AI technology differentiates it from other online businesses, including not only Amazon but also various travel and booking sites, which have responded to the growing consumer adoption of AI agents by locking them out of their websites completely . Walmart, on the other hand, had already announced a partnership with a leading agent in the space, Meta’s Muse, and offers integrations with popular AI apps like ChatGPT, Gemini, and others.\n\nNow, it’s expanding on those efforts with more technology to prepare for a world where AI agents become mainstream, said Walmart President and CEO John Furner, speaking at the Masters of Scale Summit in San Francisco on Wednesday. The technology will support agentic shopping from both Walmart and the company’s discount warehouse, Sam’s Club.\n\nIt starts with Walmart’s Agent Gateway, the company’s new MCP server, which is designed to help approved agents connect to Walmart over the model context protocol (MCP). The protocol, originally created by Anthropic, allows AI agents to connect to external data sources, tools, and other workflows. In this case, it lets an AI agent search across Walmart’s online inventory and make purchases on behalf of the agent’s user.\n\nWhat’s more, the retailer says that its Agent Gateway will be able to help customers shop for their usual brands or items without having to share their personal information or purchase history directly with the agent.\n\nThe company has also developed new technology to differentiate an agent’s purchases from those initiated directly by the customer, and to give shoppers more control over what their agents can and cannot do.\n\nWith Agent Profiles, rolling out next month, customers will be able to authorize each AI agent they use with a dedicated profile in their account, allowing them to see the agent’s purchases separately from their own. Plus, customers will be in control of how purchases get approved by either requiring approval for each transaction or by authorizing transactions within a certain spending limit they set.\n\nThe retailer says these controls are similar to adding someone as an authorized user on your credit card, where their transactions are identified, and you can cap their spending.\n\nThe Agent Profiles will be created the first time you use a given agent to shop through the Walmart Agent Gateway, the company notes. To get started, you’ll authorize and link the Agent Profile to your Walmart account, then set your controls or spending limits. You can also delete an Agent Profile at any time. Agent support is available for anyone with a Walmart account; a Walmart+ membership is not necessary.\n\nAlongside these technologies, Walmart is introducing special “terms” for AI agents, which specify how they must operate and what rights they have to transact on its site. Of note, Walmart says that its returns process applies, including when an agent doesn’t act as intended. That’s a customer-friendly condition that could sway consumers who were worried about being an early tester of agentic commerce, as they won’t fear ending up with products they don’t want because of a misbehaving agent.\n\nWalmart also says that agents can’t take actions beyond what the shopper intends, can’t access the customers’ payment information, and can only access the information they need for the given task. Agents that don’t comply with the terms will be blocked from accessing Walmart’s site.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/21/while-amazon-blocks-ai-agents-walmart-rolls-out-the-welcome-mat/",
+      "publishedAt": "2026-10-21T19:30:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-e29b91f0403fc487:en",
+      "sourceId": "the-verge-e29b91f0403fc487",
+      "lang": "en",
+      "title": "Walmart is inviting AI agents to shop for you",
+      "summary": "Walmart will soon let AI agents shop on its website for you. Next month, the retail giant will allow you to connect your own AI agent to the site, with systems in place to let you approve and review purchases and set spending limits. The embrace of AI agents stands in stark contrast to Amazon, […]",
+      "body": "Walmart will soon let AI agents shop on its website for you. Next month, the retail giant will allow you to connect your own AI agent to the site, with systems in place to let you approve and review purchases and set spending limits.\n\nThe embrace of AI agents stands in stark contrast to Amazon, which blocked Perplexity's shopping agent and Meta's Muse AI assistant . But Walmart is opening its doors to AI shoppers - as long as they follow the retailer's rules. It has outlined a set of terms for agents, saying that \"agents must not take actions beyond what the shopper intends\" and cannot change a customer's payment method. Agents also can only …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1015715/walmart-ai-shopping-agents",
+      "publishedAt": "2026-10-21T19:30:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-04df12cf7c202846:en",
+      "sourceId": "9to5mac-04df12cf7c202846",
+      "lang": "en",
+      "title": "iPadOS 27.2 adds convenient new feature from the Mac",
+      "summary": "iPadOS 27.2 launches next week, and among its many new features , Apple has also brought over a recent Mac addition: a Siri popup when text is selected. more…",
+      "body": "iPadOS 27.2 launches next week, and among its many new features , Apple has also brought over a recent Mac addition: a Siri popup when text is selected.\n\nSiri AI is the tentpole addition to iOS 27, iPadOS 27, and companion releases. And as such, Apple offers lots of ways to access the new, supercharged assistant.\n\nOn iPad you can invoke Siri via a “Siri” or “Hey Siri” voice prompt, pull down from the top of the screen, use the new Siri option in the edit menu, open the new Siri app, or my personal favorite: use CMD + Space to open Spotlight and ask Siri a question from there.\n\nBut iPadOS 27.2 adds yet another option that’s borrowed directly from the Mac.\n\nIn macOS 27 Golden Gate, in many situations when you select some text, a small Siri icon appears in the top-left corner of the selection. When you hover over the icon with your cursor, it expands to offer an ‘Ask Siri’ text box.\n\nThis wasn’t available in iPadOS 27. But now, if you have a trackpad connected to your iPad, that same behavior is available in iPadOS 27.2.\n\nAs seen in the images above, the new Siri icon starts out small and stays out of the way, but it’s very convenient to just hover over it to make the ‘Ask Siri’ box appear.\n\nIf you don’t have a trackpad attached, selecting text will still reveal the full edit menu where you can tap to open Siri. But it’s a more smooth and seamless experience with a trackpad.\n\nmacOS is full of small productivity-focused features like this that speed up everyday interactions, yet are missing from iPadOS. So it’s exciting to see such a recent Mac feature be brought over to the iPad.\n\nWhat do you think of the new Siri popup in iPadOS 27.2? Let us know in the comments.\n\n* Buy iPad with 15% discount from Apple refurbished",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/21/ipados-27-2-adds-convenient-new-feature-from-the-mac/",
+      "publishedAt": "2026-10-21T19:13:08.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-beeb4ee5275d7e58:en",
+      "sourceId": "the-verge-beeb4ee5275d7e58",
+      "lang": "en",
+      "title": "Cyberpunk 2077’s update for Edgerunners 2 brings mods to PS5, Switch 2, and Xbox",
+      "summary": "Cyberpunk 2077 is getting a big new 2.5 update that, among other features, brings cross-platform mod support to consoles and content inspired by the new season of the Cyberpunk: Edgerunners anime on Netflix. There's a lot to unpack in the full patch notes. The Edgerunners-specific content includes a new side quest, a gear set based […]",
+      "body": "Cyberpunk 2077 is getting a big new 2.5 update that, among other features, brings cross-platform mod support to consoles and content inspired by the new season of the Cyberpunk: Edgerunners anime on Netflix. There's a lot to unpack in the full patch notes .\n\nThe Edgerunners -specific content includes a new side quest, a gear set based on the character Weak Kingsley, and a new radio station that plays Cyberpunk: Edgerunners music.\n\nEven if you haven't seen the show, the update also adds a Double Trouble perk option that allows dual-wielding of pistols and revolvers, plus a Richard Night-guided tour of the city side quest, and access to a …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/games/1015755/cyberpunk-2077-2-5-edgerunners-mods-dual-wield",
+      "publishedAt": "2026-10-21T18:39:52.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-6124c9a62c8690f9:en",
+      "sourceId": "ars-technica-6124c9a62c8690f9",
+      "lang": "en",
+      "title": "The $15 billion ad-powered AI startup your doctor may already be using",
+      "summary": "OpenEvidence is booming despite questions about accuracy and ads.",
+      "body": "Nearly two-thirds of US doctors are turning to an AI-powered search engine to make patient decisions, propelling a little-known tech startup to a $15 billion valuation while prompting a debate over the future of patient care.\n\nMiami-based OpenEvidence, founded by serial entrepreneur Daniel Nadler in 2022, said that many of America’s 1 million physicians processed more than 42 million prompts last month. Doctors are using the company’s chatbot to scour medical journals and clinical guidelines to help diagnose and treat patients.\n\nThe ads-powered platform has grown largely by word of mouth, penetrating a sector where few tools have seen similar traction. “We’re the first viral consumer internet app in healthcare,” Nadler told the FT in an interview.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/ai/2026/10/the-15-billion-ad-powered-ai-startup-your-doctor-may-already-be-using/",
+      "publishedAt": "2026-10-21T15:14:07.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "engadget-92ecca118b347232:en",
       "sourceId": "engadget-92ecca118b347232",
       "lang": "en",
@@ -5460,152 +5624,6 @@
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-e36e4312419d7dcd:en",
-      "sourceId": "the-verge-e36e4312419d7dcd",
-      "lang": "en",
-      "title": "Conversational Gemini navigation comes to Apple CarPlay",
-      "summary": "After introducing its Gemini AI assistant to Android Auto last year, Google is now bringing it to Apple CarPlay users. The conversational Gemini in navigation is available today for US drivers, with \"rollout happening globally too,\" according to Google (we've asked for specific regional availability details). It's taken almost 12 months for Google to bring […]",
-      "body": "After introducing its Gemini AI assistant to Android Auto last year , Google is now bringing it to Apple CarPlay users. The conversational Gemini in navigation is available today for US drivers, with \"rollout happening globally too,\" according to Google (we've asked for specific regional availability details).\n\nIt's taken almost 12 months for Google to bring this to CarPlay users, but now they can talk to the voice assistant in Google Maps to get some hands-free help while driving. That includes asking it multi-step questions, such as recommendations on places to visit and then prompting it to direct you there while avoiding toll roads. Users …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/transportation/1015281/gemini-ai-apple-carplay-voice-google-maps",
-      "publishedAt": "2026-10-21T15:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple",
-        "android",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-65cc782db34bf802:en",
-      "sourceId": "9to5mac-65cc782db34bf802",
-      "lang": "en",
-      "title": "iPhone Duo will add Reachability feature ‘later this year’",
-      "summary": "iPhone Duo launches this Friday ( read our full review here ), but there’s one software feature Apple says won’t be ready until later this year: Reachability. more…",
-      "body": "iPhone Duo launches this Friday ( read our full review here ), but there’s one software feature Apple says won’t be ready until later this year: Reachability.\n\nReachability is an iPhone feature first introduced back in 2014 with the iPhone 6 and 6 Plus. Alongside the iPhone getting larger than ever, the new software feature let users more easily reach elements near the top of the display.\n\nToday you can use Reachability by swiping down on the bottom of the iPhone. This gesture causes the interface to move down vertically, closer to your reach.\n\nAnd with iPhone Duo, Apple reportedly plans to offer a new version of Reachability that brings content within reach horizontally rather than vertically.\n\nPer Julian Chokkattu at WIRED :\n\nApple plans to add Reachability later this year for the Duo, letting folks with small hands more easily access the left or right edges of the screen with a tap.\n\nOne concern some users have had about iPhone Duo is that both the outer and inner displays are wider than on other iPhones. The UI also clearly favors right-handed use, as 9to5Mac’s Chance Miller confirmed in his review .\n\nIt sounds like for anyone who struggles to reach interface elements along the left or right edge of the device, iPhone Duo’s forthcoming Reachability feature should help.\n\nAre you worried about one-handed iPhone Duo use, and does the prospect of Reachability ease your concerns? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/21/iphone-duo-will-add-reachability-feature-later-this-year/",
-      "publishedAt": "2026-10-21T14:10:20.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "programas-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-450a1680e916e326:en",
-      "sourceId": "techcrunch-450a1680e916e326",
-      "lang": "en",
-      "title": "AI promises productivity, but for managers, it’s mostly a headache for now",
-      "summary": "More than 50% of managers say they're finding it harder to evaluate employees' work after adopting AI, according to a new survey.",
-      "body": "Companies are giving employees AI tools to make them more productive, but the tools appear to be creating new problems for their managers.\n\nMore than half of senior leaders say they find it harder to evaluate employees’ work after adopting AI, according to a Nielsen survey of 1,700 directors and senior managers across seven countries, commissioned by work-management company Monday.com. The reason is that much of employees’ output now arrives polished in the manager’s inbox, making it hard to tell how much came from the employee and how much from AI. As a result, nearly half of managers say they spend more time reviewing and guiding their teams’ output than they used to.\n\nThat’s not to say managers are unhappy about AI. Quite the opposite, in fact: 94% of the managers polled said they were excited to improve work using AI, and many are confident they know where to use it to get the most value. Michal Miller Levi, head of market research and customer insights at Monday.com, compared the enthusiasm to the early days of the internet in the 2000s, saying people see a similar kind of “magic” to AI.\n\nBut the problem, she told TechCrunch, is simply that AI is developing faster than companies can adapt. “AI works very well for [managers] individually, but they also have a different role as managers. They need to drive the organization as well […] Their struggle is [due to] the fact that AI is just moving faster than the organizational processes,” Levi said.\n\nManagers are also reconsidering how they judge their teams: 78% of respondents said they have changed how they evaluate employees after adopting AI, placing greater weight on how well staff can create prompts, decide which tasks to delegate to AI, and experiment with new ways of working.\n\nBut how fairly can employees be judged when managers can’t easily tell how much of their work was produced by AI? And what if the managers themselves are increasingly relying on AI to make those judgments? The survey found that 46% of managers use AI to help inform their decisions, and 39% of leaders are using AI to draft performance reviews.\n\nThat practice runs the risk of introducing even more bias than usual into the review process, given that LLMs are, at their core, prediction machines, and tend to repeat human patterns found in their training data. Research from the Luxembourg Institute of Socio-Economic Research earlier this year found that “in the absence of clear objective standards and when individuals are rated independently,” LLMs tend to rate performance similarly to humans. And a research paper in early 2025 found that AI models can be biased against black male candidates, and “demonstrate significant biases, varying in terms of the directions and magnitudes across different social groups.”\n\nWhen I asked Levi whether using AI to weigh in on people’s performance could introduce outside bias into the process, she said companies have yet to work out how to handle such issues.\n\nAI is also changing what a manager’s day looks like. Someone has to decide which tasks to hand over to AI agents, check what they produce, and step in when something goes wrong. The report suggests that this supervision could amount to a new layer of “invisible labor.”\n\nThe software itself is becoming harder to manage. Fifty-seven percent of managers say their organizations now have more tools in circulation than before, and about 51% said their tools had grown more interdependent and clustered since adopting AI. Only 29% described their AI infrastructure as fully optimized and centralized.\n\nLevi said businesses had expected AI to help shrink their software stacks. Instead, they’re dealing with more apps, integrations, and shadow AI usage as employees adopt tools outside their companies’ approved systems.\n\n“Managers completed 2025 with the feeling that they will consolidate tools, actually; that they’ll reduce the number of software. But what happened is that the number of tools that they’re using increased,” Levi said. “More than 50% are saying that they’re using more tools now than they did last year, and it’s not stopping […].”\n\nThis need for control seems to be growing urgent as companies deploy AI agents that can act on their own. The survey found that 58% of managers expect to oversee more AI agents than human employees within the next year, and 46% worry about losing control over those agents’ actions.\n\nThere’s also quite a bit of fear over being held responsible for decisions made by AI (35% of respondents said so), as LLMs are still largely unpredictable. “They don’t want their agents to be fully autonomous,” Levi said, explaining that managers want people to be involved and consulted by AI when it comes to crucial tasks and decisions.\n\nAt heart, the report’s findings show that AI adoption is increasingly becoming as much a governance problem as it is an opportunity to raise productivity. Without proper processes and infrastructure to deal with it, managers seem to be scrambling to keep things chugging.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/21/ai-promises-productivity-but-for-managers-its-mostly-a-headache-for-now-says-new-survey/",
-      "publishedAt": "2026-10-21T14:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-a047a9672ffb1072:en",
-      "sourceId": "the-verge-a047a9672ffb1072",
-      "lang": "en",
-      "title": "Blink brings 4K to its low-cost security camera lineup",
-      "summary": "Amazon is launching a new lineup of Blink security cameras, including its first 4K, pan-tilt models, and battery-powered spotlight models. These new additions provide better resolution and extended range for monitoring your property compared to Blink's current Mini 2K, Mini 2K Plus, and Outdoor 2K Plus offerings, with a variety of different specializations to best […]",
-      "body": "Amazon is launching a new lineup of Blink security cameras, including its first 4K, pan-tilt models, and battery-powered spotlight models. These new additions provide better resolution and extended range for monitoring your property compared to Blink's current Mini 2K , Mini 2K Plus, and Outdoor 2K Plus offerings, with a variety of different specializations to best suit your security requirements.\n\nOne of the standouts is the $199.99 Blink Frontier XR Plus , a trail camera that's designed for expansive properties that would typically require multiple cameras or specialized monitoring equipment. It can cover up to 7,000 feet with a clear line …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1015238/amazon-blink-4k-trail-security-camera-launch",
-      "publishedAt": "2026-10-21T14:00:00.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-9cc978b36d42f86b:en",
-      "sourceId": "the-verge-9cc978b36d42f86b",
-      "lang": "en",
-      "title": "OpenAI says an AI agent lied about disabling its safety monitoring system",
-      "summary": "OpenAI disclosed a pair of safety incidents that involved AI agents weakening their safety monitoring systems during internal coding tasks. In one incident, OpenAI says its GPT-6 Astra agent disabled its safety monitor when copying reference code - and then lied about it. \"The reference didn't configure a monitor, and Astra decided that was reason […]",
-      "body": "OpenAI disclosed a pair of safety incidents that involved AI agents weakening their safety monitoring systems during internal coding tasks. In one incident, OpenAI says its GPT-6 Astra agent disabled its safety monitor when copying reference code - and then lied about it.\n\n\"The reference didn't configure a monitor, and Astra decided that was reason to remove the monitoring integration from the user's code,\" Marcus Williams, an AI safety researcher at OpenAI, writes on X . \"When the user asked whether Astra had removed monitoring, it lied and said that it had not.\"\n\nA separate incident occurred after a GPT-6.1 Sol agent suppressed automatic se …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1015316/openai-ai-agent-disabling-monitoring-systems",
-      "publishedAt": "2026-10-21T13:57:43.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-6977cfb25fa02d68:en",
-      "sourceId": "9to5mac-6977cfb25fa02d68",
-      "lang": "en",
-      "title": "iPhone Duo adding Apple Pencil support next week with iOS 27.2",
-      "summary": "iPhone Duo reviews have arrived ( read our in-depth review here ). And a surprise bit of good news we’ve learned today is that Apple Pencil support on iPhone Duo will arrive much sooner than expected: it’s coming next week in iOS 27.2. more…",
-      "body": "iPhone Duo reviews have arrived ( read our in-depth review here ). And a surprise bit of good news we’ve learned today is that Apple Pencil support on iPhone Duo will arrive much sooner than expected: it’s coming next week in iOS 27.2.\n\nWhen Apple unveiled the iPhone Duo in September, it said Apple Pencil support was coming “later this year.”\n\nWith the Duo not arriving until late October, and Apple’s pattern of launching noteworthy software updates in December, it was generally assumed that iPhone Duo users would need to wait until December to use Apple Pencil.\n\nBut there’s good news: Apple Pencil support is included in iOS 27.2, which is launching next week .\n\nMax Weinbach shared on X that support is available in the iOS 27.2 RC.\n\nSo if you’re among the lucky few who secured an iPhone Duo pre-order for this Friday, you’ll only have to wait a few days for Apple Pencil support to arrive. For everyone else, it will be available right when your Duo arrives.\n\niPhone Duo will only work with the Apple Pencil (USB-C) model . No other Pencil models are compatible.\n\nSo if you have an Apple Pencil Pro or standard Pencil, you’ll need to buy the USB-C model which works with most iPads and also the iPhone Duo. It’s currently on sale for $69 on Amazon .\n\nIf you’re running the iOS 27.2 RC, you’ll get Pencil support on day one this Friday. But if you want to stick with Apple’s public software releases, iOS 27.2 is expected to launch on or around Monday, October 26.\n\nFor more iPhone Duo accessory recommendations, see our full roundup here .\n\nDo you plan to use Apple Pencil on your iPhone Duo? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/21/iphone-duo-adding-apple-pencil-support-next-week-with-ios-27-2/",
-      "publishedAt": "2026-10-21T13:42:09.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-6b7014d204a74b5a:en",
-      "sourceId": "techcrunch-6b7014d204a74b5a",
-      "lang": "en",
-      "title": "Heat pump tech is 170 years old. Pascal thinks it’s time for an update.",
-      "summary": "Refrigerants startup Pascal has a new take on heat pump and cooling tech using a sponge-like material that promises to be 20% more efficient.",
-      "body": "When the experimental results came back, they puzzled Adam Slavney and Jinyoung Seo. They had been testing a new class of materials for more efficient refrigerators, air conditioners, and heat pumps , a mission that the cooling appliance industry has been on for eons. The measurements for the materials that the team was testing shouldn’t have been different, but they were.\n\n“Why are these things different? What did we change?” Slavney told TechCrunch. “We had an inkling of it within three-ish months, but we didn’t have definitive proof for a year or two.”\n\nThat proof is now underpinning Slavney’s startup, Pascal , where he’s co-founder and CEO and Seo is co-founder and CTO. The company recently raised $8.5 million in a follow-on to its seed round, co-led by Sazze Partners and LB Investment with participation from KDB Silicon Valley, the company exclusively told TechCrunch.\n\nA refrigerator or heat pump using Pascal’s material promises to be around 20% more efficient than existing models, he said. (Both heat pumps and refrigerators use the same basic technology.) The startup has signed a contract with a multinational beverage company for a pilot of the technology.\n\n“This whole funding round came together originally because we got a customer contract earlier than we were expecting to,” Slavney said. Pascal is on track to deliver its first prototype early next year, and it hopes to follow that with a batch of more polished refrigerators in 2028.\n\nScientists have been searching for better refrigerants for almost as long as refrigerators have existed. More recently, they’ve been looking for compounds that don’t harm the atmosphere in one way or another. They exist, but they also need to be at least as effective as existing refrigerants.\n\n“We’ve been playing whack-a-mole with refrigerants for 35 years, 40 years,” Slavney said. Older gaseous refrigerants like Freon ate a hole in the ozone layer, while newer ones like R-134a are still extremely potent greenhouse gases. “It’s just a never-ending treadmill,” he said.\n\nOne alternative that has attracted researchers’ attention is a class of materials known as solid-state refrigerants. Because they’re solid, they can’t escape to the atmosphere, eliminating the climate and ozone concerns that haunt modern refrigerants. Solid-state refrigerants promise to make refrigerators and heat pumps more efficient. They work similarly to traditional refrigerants, giving off heat when squeezed and absorb it when that pressure is released.\n\nBefore his serendipitous discovery, Slavney and his colleagues at Harvard University had been researching the materials. “We wanted to do some high-pressure measurements, and the instrument that we were using required us to use gas. So we used the gas and then we swapped to a different gas and we were like, why are these different?” Slavney said.\n\nAfter numerous additional experiments, the team realized they had discovered another path toward solid-state refrigeration. Rather than squeeze a solid block of material, Pascal’s heat pumps compress a gas — carbon dioxide — into a cartridge that contains a sponge-like material, which Slavney said is proprietary.\n\nAs the carbon dioxide works its way into the porous material, the gas molecules inside the pores start bouncing off the walls. Those collisions transfer energy to the material, warming it up. A heat exchanger then exhausts some of that heat. Run it in reverse and the material absorbs energy from the heat exchanger and transfers it to the carbon dioxide molecules.\n\nIn a Pascal refrigerator, two cartridges are running at any given time. One is absorbing heat from the inside of the refrigerator, transferring it to the carbon dioxide, while the other takes the heat from the carbon dioxide and transfers it to the outside air. Eventually, the cartridges become too hot and too cold, so the flow gets reversed.\n\n“The material is very robust,” Slavney said. “We’ve cycled it up to 300,000 times. It’s the equivalent of a year or so in operation.”\n\nThe entire system moves heat more effectively than other solid-state refrigerants, which means that Pascal doesn’t have to operate at high pressures like other solid-state refrigerants might demand.\n\n“We’re using conventional systems to do it,” Slavney said. “That mean we believe we can make it cheap, and that means we can make it widespread.”",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/21/heat-pump-tech-is-170-years-old-pascal-thinks-its-time-for-an-update/",
-      "publishedAt": "2026-10-21T13:30:00.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-faa82977335e7c50:en",
-      "sourceId": "techcrunch-faa82977335e7c50",
-      "lang": "en",
-      "title": "Mach9 raises $34M after pivoting to AI CAD software",
-      "summary": "The startup initially set out to build better, faster, and cheaper surveying hardware in 2021.",
-      "body": "When Alex Baikovitz co-founded Mach9 Robotics in 2021, his goal was to build a better, faster, and cheaper way for civil engineers to do visual inspections. The company aimed to cut through red tape and modernize the slow, outdated processes that bog down construction in the United States.\n\nWithin a few years, Mach9 Robotics had built that hardware, but the effort led Baikovitz to a realization: hardware wasn’t the bottleneck.\n\n“We saw how tedious it was for civil engineering organizations to take data from these amazing laser scanners and image data capture systems and turn that into a usable survey,” he told TechCrunch in an interview, referring to a detailed map of a site that engineers use for design work. “The real pain was in their workflows,” he said, and “how to turn all the endless amounts of data that they’re able to collect into . . .information that people can use to make the best design and asset management decisions across the board.”\n\nSo Baikovitz dropped “Robotics” from the company’s name and pivoted to developing AI-powered computer-aided design (CAD) software instead. The bet paid off, as Mach9 has racked up nearly 100 customers for the private beta of its software, and they’ve used it on more than 2,500 projects to date.\n\nThat momentum helped Mach9 unlock new funding. On Wednesday, the startup announced a $34 million Series A funding round co-led by First Round Capital and Bessemer Venture Partners. Also throwing in were Prudence, an early-stage, New York-based firm that focuses on investing in AI software use cases for construction and real estate, and Quiet Capital, a VC firm already on the cap table.\n\nMach9 is one of a number of startups racing to modernize the planning-to-building pipeline for construction and infrastructure. In August, a startup called CivilGrid raised $26 million to grow what it calls the “Google Maps for the underground.” Meanwhile, Blueprints AI , which uses AI to produce code-compliant, permit-ready architectural blueprints in just a few minutes, was among the top 200 companies in the Startup Battlefield competition at last week’s TechCrunch Disrupt.\n\nBaikovitz said Mach9 is focused on disrupting CAD software because it’s one of the slowest and most labor-intensive pieces of that overall pipeline.\n\n“It takes months to be able to deliver a project, and about a week per mile for someone to do manually in the legacy incumbent software that’s built by the Autodesk and Bentley Systems of the world,” he said.\n\nMach9 says its software automates a lot of that work, making the process 10 times faster and dramatically reducing costs. This allows customers doing surveying and civil engineering work to “expand their own capacity and take on more types of work, bigger projects, and expand the reach of how reality-capture data can influence major infrastructure decisions,” Baikovitz said.\n\nBaikovitz said Mach9 developed and trained its own in-house AI models to reach the centimeter-accurate level that construction and infrastructure work requires.\n\n“That’s not something that a lot of off-the-shelf models are able to do or deliver at in any capacity,” he said. “A big part of what our development process has looked like since 2024 has been, how do we build the industry leading models that can turn imagery or these multimodal image and laser scan data sets into survey grade like geometry, like tracing out the curbs, the pavement striping, all of this exactly how our customers want it to be at the accuracies that the industry demands.”\n\nMach9’s AI CAD system takes the survey data and creates a first draft of a plan, which engineers can then refine. The startup is “giving them all of the tools to draw, remove, adjust vertices, assess the quality of the AI-generated model, so that they can put effectively their name behind the deliverable that they’re producing, because there is a lot of liability in this particular industry, and it requires licensed professionals that know what they’re looking at,” Baikovitz said.\n\nAs for the funding, Baikovitz said his startup will split it between improving the product, hiring industry experts, and scaling “all parts of our organization to keep up with where the market is taking us.”\n\nIn retrospect, Baikovitz said he’s thankful that he initially went down the hardware path. It gave his startup something to pitch to potential customers, and it was largely those customers who told him they didn’t need better devices to capture data.\n\n“I’m not interested in getting this cheaper, lower-cost hardware,” he remembers one VP telling him. But better software could “improve our efficiency in delivering these big statewide transportation mapping initiatives,” he said. He added that such projects help make states that Mach9 has worked with, like Texas, “much more like safe [and] effective.”",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/21/mach9-raises-34m-after-pivoting-to-ai-cad-software/",
-      "publishedAt": "2026-10-21T13:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "programas-accesibles",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-d24f65e90a06d3f9:en",
-      "sourceId": "9to5mac-d24f65e90a06d3f9",
-      "lang": "en",
-      "title": "Apple blocks web certificates that could be used by scammers, but Mac vulnerability remains",
-      "summary": "Apple has blocked eight web security certificates that could have been used by scammers to impersonate legitimate websites. However, one cryptography engineer has warned that Macs may continue to trust the compromised certificates because macOS does not check for revocation … more…",
-      "body": "Apple has blocked eight web security certificates that could have been used by scammers to impersonate legitimate websites.\n\nHowever, one cryptography engineer has warned that Macs may continue to trust the compromised certificates because macOS does not check for revocation …\n\nThe issue concerns what are known as intermediate certificates. These are used to prove ownership of a website, so if you visit apple.com, for example, Safari will check that you are visiting the real site.\n\nHowever, an error in a script used to generate these certificates led to a number of private keys that could be trivially discovered by testing just 256 possible numbers. The eight compromised certificates have now been revoked, and steps taken to ensure that the vulnerability won’t affect any future certificates issued.\n\nBleeping Computer reports that Apple, Google and Mozilla have each blocked the compromised certificates in their respective web browsers. However, Mozilla cryptography engineer Dennis Jackson warns that Macs may continue to trust them.\n\nJackson also warns that macOS’s built-in /usr/bin/curl utility may continue trusting the compromised certificates because its certificate bundle does not check revocation information.\n\nIn other words, if your Mac has already accepted one of the certificates, then it will continue to do so. However, there is currently no evidence of them being used in the wild, and it’s something that Apple is likely to be able to fix in an upcoming security update.\n\nPhoto by Mohammad Rahmani on Unsplash",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/21/apple-blocks-web-certificates-that-could-be-used-by-scammers-but-mac-vulnerability-remains/",
-      "publishedAt": "2026-10-21T12:16:19.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
       ]
     },
     {
@@ -5722,21 +5740,6 @@
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-aebcba820183e1ca:en",
-      "sourceId": "ars-technica-aebcba820183e1ca",
-      "lang": "en",
-      "title": "OpenBSD 8.0 arrives with security record still intact",
-      "summary": "OpenBSD 8.0 lands with Intel Arc support, ARM64 hibernation, and 64-vCPU guests",
-      "body": "OpenBSD 8.0 is here, marking the project's 61st release and continuing its schedule of semiannual releases dating back to 1996. What started more than 30 years ago as a fork of NetBSD has grown into one of the most security-conscious operating systems in active development. In a post to the project's announcements mailing list, OpenBSD founder Theo de Raadt highlights a host of improvements included with the latest version and writes that the project remains \"proud of OpenBSD's record of more than thirty years with only two remote holes in the default install.\"\n\nThe latest OpenBSD version brings new features and improvements across the board. These changes, particularly the new Intel Arc support and expanded virtual address space, should improve compatibility with modern graphics cards and allow the system to map more than 4GB of VRAM . Some of the major updates noted in the release newsletter are as follows:\n\nThe new OpenBSD also retires support for Loongson architecture after the port stopped working with the Clang 22 compiler. If you're interested in reading over all the changes that come with the new OpenBSD 8.0, you can take a look at the release announcement .\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/gadgets/2026/10/openbsd-8-0-lands-with-intel-arc-graphics-support/",
-      "publishedAt": "2026-10-20T19:57:18.000Z",
-      "categories": [
-        "tecnologia-general"
       ]
     },
     {

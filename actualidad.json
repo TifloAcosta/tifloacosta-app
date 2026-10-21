@@ -1,5 +1,293 @@
 [
   {
+    "id": "9to5mac-326a497d7365b335",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/21/giant-iphone-duo-installations-spotted-at-apple-fifth-avenue-ahead-of-friday-launch/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-21T23:16:18.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Giant iPhone Duo installations spotted at Apple Fifth Avenue ahead of Friday launch",
+        "summary": "While the iPhone Duo doesn’t launch until Friday, preparations are already underway at Apple’s flagship Fifth Avenue store in New York for the big day. Here are the details. more…",
+        "body": "While the iPhone Duo doesn’t launch until Friday, preparations are already underway at Apple’s flagship Fifth Avenue store in New York for the big day. Here are the details.\n\nAs spotted by @LChenlz on X , Apple has begun setting up several large, rectangular structures around the store’s iconic glass cube entrance.\n\nThe installations are still concealed beneath black cloth and white protective wrapping, but their shapes strongly suggest they could be giant iPhone Duo models.\n\nIn recent years, Apple has celebrated new iPhone launches with special displays and decorations at its flagship stores.\n\nIn 2024, the company illuminated Fifth Avenue’s glass cube in Apple Intelligence colors for the iPhone 16 launch, while last year it installed giant “Pro” and “Air” displays in several locations.\n\nMore recently, Apple decorated the Fifth Avenue cube in burgundy, silver, and blue to celebrate the iPhone 18 Pro launch last month.\n\nInterestingly, there doesn’t appear to be a line outside Apple Fifth Avenue just yet, although customers have reportedly already started lining up at other stores.\n\nAs 9to5Mac covered earlier today , Apple has confirmed that its US retail stores will have a limited number of iPhone Duo units available for walk-in customers on Friday, while stores in several other markets, including mainland China, Japan, and France, will only offer in-store pickup for orders placed online.\n\nWhile Friday’s launch is still a couple of days away, check out 9to5Mac’s in-depth iPhone Duo review , which went live earlier today."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-30a013a594c17391",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/21/blackstones-jas-khaira-says-fears-over-ai-buildout-debt-are-overblown/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-21T22:51:22.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Blackstone’s Jas Khaira says fears over AI-buildout debt are overblown",
+        "summary": "Blackstone’s AI head on why the PE giant isn't panicked by market jitters.",
+        "body": "Private equity giant Blackstone is putting itself at the center of the AI boom, firm veteran Jas Khaira discussed last week on stage at TechCrunch Disrupt.\n\nIt is writing checks via various strategies, ranging from offering massive loans to data centers to investing in frontier AI models and applications.\n\nEarlier this year, the firm launched Blackstone N1 (BXN1), a San Francisco-based central hub for its AI initiatives. The group is led by Khaira, who relocated from New York to be at the epicenter of AI.\n\nUnlike earlier tech cycles such as mobile or SaaS, which allowed companies to reach significant scale with moderate capital, the transition to AI requires staggering amounts of investment. That need for capital is precisely why Blackstone, with its $1.3 trillion in assets under management, could play such a critical role in this tech shift.\n\nKhaira emphasized that Blackstone sets itself apart from traditional venture capitalists through its focus on compute financing and its ability to offer flexible capital structures, ranging from debt to equity. And it has been investing aggressively.\n\n“We’re the largest owner of compute outside of the hyperscalers today, whether it’s investments in neo clouds, investments in data centers, and being able to use that compute strategically to support companies,” Khaira said.\n\nFor instance, BXN1 played a key role in several compute-related deals, among them Crux AI, a neocloud launched in partnership with Google to commercialize its custom TPUs, to which Blackstone committed $5 billion as an investor. It also backed four-year-old Etched , a chip startup whose rapid development has caught investor attention. Neoclouds are cloud providers that rent out AI GPU infrastructure.\n\nBlackstone pioneered a financing structure that allowed it to lend massive sums to venture-backed cloud neoclouds by analyzing both committed customer contracts and using GPUs pledged as collateral.\n\nBlackstone’s first such deal came in 2023 with CoreWeave, shortly after that neocloud saw demand explode following the launch of ChatGPT. Despite having only “30 million of revenue and minimal profitability” at that time, according to Khaira, CoreWeave approached Blackstone for a $2.3 billion loan.\n\nCoreWeave was borrowing against the considerable value of its large collection of Nvidia GPUs, with Nvidia also an investor. Blackstone also grew more comfortable with the loan because CoreWeave had contracts with blue-chip customers like Microsoft.\n\nThat transaction quickly became the financing model for how Blackstone and other credit institutions provided billions in follow-on debt to CoreWeave and rival neoclouds.\n\n“One of the primary things that we’re looking to is the nature of the customer. And if the customer is an investment-grade customer — let’s say it’s Microsoft or let’s say it’s Meta — the risk gets priced relative to that customer,” Khaira said.\n\nBuilding on its success with CoreWeave, Blackstone struck other neocloud financing deals, including co-leading alongside Coatue a $10 billion credit facility for Australian GPU provider Firmus earlier this year.\n\nKhaira acknowledged that in recent weeks, the large debt burdens accumulated by these companies and other neocloud operators have begun to raise red flags. Coreweave’s debt alone has since ballooned to about $50 billion , causing Altimeter Capital founder Brad Gerstner to note in a recent CNBC interview, “The collateral that CoreWeave is putting up which is really only GPUs is not good enough anymore. They used that in the past to get cheap debt.”\n\nKhaira said that on the credit side, the market jitters stem from a combination of factors. Interest rates ticked up in September, and hotter-than-expected inflation signals that borrowing costs may keep climbing. The flood of AI infrastructure debt offerings isn’t helping either.\n\n“We’re also seeing higher credit spreads,” Khaira said, explaining that lenders are charging higher premiums on top of already higher base interest rates to finance the AI buildout. “The cost of capital to price in debt for a Meta or a Microsoft has widened out,” he added, pointing out that even tech giants with massive balance sheets and solid earnings are paying more to borrow.\n\nConcerns about the rising cost of debt have spilled into the stock market. Shares of CoreWeave dropped over 20% in recent days, while Firmus scrapped its planned IPO on the Australian Securities Exchange at a target valuation of roughly $30 billion.\n\n“Ultimately, the market wasn’t there at that valuation, and so I think as a result, that deal didn’t get done,” Khaira said about Firmus’ cancelled listing.\n\n“The market is thinking what is the right price for neoclouds, what is the right price for these businesses in this moment when interest rates are moving up,” he said.\n\nDespite those pressures on some infrastructure providers, AI companies simply can’t get enough compute to power their models. Their appetite continues to drive data center buildout.\n\nKhaira downplayed worries of doom-mongers that the massive accumulation of AI infrastructure debt could lead to a widespread credit crisis, or worse, crash the economy altogether. “This doesn’t feel like something where you’ve got 2008 banks that are shaky credits,” he said.\n\nInstead, he pointed out that because the vast majority of data centers are built for hyperscalers, the debt financing them is ultimately backed “by the most creditworthy companies in the world.”\n\nBeyond funding data centers, Blackstone is helping companies adopt AI through a $1.5 billion joint venture called “Ode with Anthropic,” formed alongside Anthropic and Hellman & Friedman this year. Ode supplies forward-deployed engineers to help companies adopt AI and integrate it into their operations, starting with Blackstone’s 280 portfolio companies.\n\nWhen asked if Blackstone-owned companies are seeing tangible gains from AI, Khaira conceded that “there is definitely ROI, but it is uneven.” He described technology adoption as something that could move in a “sawtooth-type pattern,” which, to skeptics, can look like an oversupply of compute before adoption catches up."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-08c56c301312174b",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/21/meta-wants-to-pay-for-its-broad-ai-buildout-with-a-newly-created-class-of-stock/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-21T22:45:34.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta wants to pay for its broad AI buildout with a newly created class of stock",
+        "summary": "The social media giant is planning a new stock strategy to help power its broad investments in AI models and services.",
+        "body": "Meta is making a big push into AI, and it’s creating a new kind of stock that could help pay for it.\n\nOn Wednesday, as the company reported its third-quarter earnings, Semafor reported the company might issue non-voting stock, meaning shares that don’t give their owners a vote on company decisions, to help fund its push into artificial intelligence.\n\nDuring Meta’s earnings call, the company confirmed that reporting. Meta’s chief financial officer, Susan Li, said the company plans to “create a new class of non-voting capital stock, which will be distributed to all existing shareholders through a stock dividend.”\n\nLi later added that the company “created this new class of shares with the purpose of creating a publicly traded non-voting stock usable for capital raising, employee compensation, acquisitions, and other general corporate purposes while preserving the voting power of existing Class A and B shareholders.”\n\nThe shares will allow the company to maintain its current “founder-led structure,” she added. They will also expand its “funding tools and give us flexibility to invest behind the unprecedented momentum we’re seeing across every part of our business, driven by AI.”\n\nMeta’s earnings were strong this past quarter, beating Wall Street expectations. The company made $64 billion in revenue, a jump of 26% from a year earlier. Its costs and expenses also rose too, however, by 68% year over year.\n\nReality Labs, the division responsible for Meta’s AR glasses, VR headsets, and VR software, continues to lose money, though less than it used to. The company said in its earnings report that it expects the division’s losses to shrink from its 2025 levels to between $18 billion and $19 billion.\n\nMeta has made a big push into AI over the past year. The company has released several AI models, including Muse Spark and Muse Glimmer earlier this year. In recent weeks, it added Muse Wonder and Muse Spark Open, an open-weight model whose underlying parameters are publicly available for outsiders to use and build on. Meta also launched a coding agent for software developers called Muse Code. At its Meta Connect event this year, the company announced a new line of cute and cuddly avatars for AI assistant, Meta Muse, in a push to make its AI services more relatable (and also meme-able ).\n\nAs far as can be discerned, those AI products are doing well. “In just a month and a half, more than 10 million people in the U.S. and Canada have set up Muse personal agents,” CEO Mark Zuckerberg said during Wednesday’s earnings call. “Growth continues to be strong, and we have been number one in the App Store almost every day.”\n\n“Now that Muse has clear product-market fit, we are entering a new phase and a more operational phase that is focused on scaling it,” Zuckerberg added, claiming later that the company expects to grow the product’s appeal to eventually “serve billions of people.”\n\nThe company also noted that certain storm clouds linger on the horizon in the form of ongoing regulatory and legal issues. “We continue to monitor active legal and regulatory matters that could significantly impact our business and financial results,” said Li. “For example, we continue to see scrutiny on youth-related issues in several markets, and have a number of youth-related trials scheduled in the coming months in the United States.”"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-8a219e4aa3af56ba",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/21/daily-october-21-2026/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-21T22:44:33.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "android",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "9to5Mac Daily: October 21, 2026 – New iPhone Duo features, more",
+        "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
+        "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-960f5d2cf2e2c9bb",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1015958/data-center-pollution-rising-report",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-21T22:33:44.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Data centers could erase decades of air quality gains",
+        "summary": "A rush of new data centers could bring air pollution roaring back to levels not seen since the 2000s in Texas, which has become ground zero for the physical infrastructure behind generative AI. New and proposed data centers are demanding a tremendous amount of electricity. How developers and utilities meet that demand - with gas […]",
+        "body": "A rush of new data centers could bring air pollution roaring back to levels not seen since the 2000s in Texas, which has become ground zero for the physical infrastructure behind generative AI.\n\nNew and proposed data centers are demanding a tremendous amount of electricity. How developers and utilities meet that demand - with gas turbines or renewable energy - will determine just how dirty things will get. So far, though, things are looking grim.\n\nTech companies and data center developers are devising new ways to get enough electricity, including building out their own power sources. But if all planned data center projects were to plug into …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-2dddc1d317516bbc",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/information-technology/2026/10/survey-enterprises-waste-28-percent-of-software-budgets-on-unwanted-upgrades/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-21T21:48:52.000Z",
+    "categories": [
+      "tecnologia-general",
+      "programas-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Enterprises keep buying software upgrades that IT thinks will make things worse",
+        "summary": "Survey of 2,018 IT heads at big firms points to a lack of leverage.",
+        "body": "Enterprise-sized businesses spend, on average, 28 percent of their software budgets on unwanted upgrades, migrations, and licensing changes. Often, those firms' IT heads think those changes are detrimental.\n\nThose results are according to a survey of 2,018 chief information officers and senior IT decision-makers at companies with at least 10,000 employees that Origina commissioned for its report, “ The Software Tax .” About half of the respondents (1,011) are from the US, and the rest are from the United Kingdom. All respondents worked at companies with at least $1 billion in annual revenue.\n\nKeep in mind that Origina provides maintenance for various enterprise software. Its report points to independent software maintenance as a way for IT leaders to regain control over software budgets, illustrating its potential bias. A third-party research consultancy, Censuswide , conducted the survey.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-1279991b8aee1442",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1015799/meta-shares-class-ai-q3-2026-earnings",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-21T21:30:02.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta to create a new class of shares to fund AI push",
+        "summary": "Meta says it's issuing a new class of shares to fund its AI initiatives. As part of its third-quarter earnings report released on Wednesday, the company says the non-voting stock will also go toward potential acquisitions and employee compensation, with trading beginning in 2027. \"The scale of investment required to compete, sustain growth, expand infrastructure, […]",
+        "body": "Meta says it's issuing a new class of shares to fund its AI initiatives. As part of its third-quarter earnings report released on Wednesday , the company says the non-voting stock will also go toward potential acquisitions and employee compensation, with trading beginning in 2027.\n\n\"The scale of investment required to compete, sustain growth, expand infrastructure, and pursue new strategic initiatives amidst the AI transformation taking place in the industry is significant,\" Meta says in the press release. Susan Li, Meta's chief financial officer, added during an earnings call that the new class of shares will \"expand our funding tools and gi …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-478cd3c5291ea929",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/21/meta-says-muse-has-over-10m-users-with-shopping-a-top-activity/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-21T21:14:19.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta says Muse has over 10M users, with shopping a top activity",
+        "summary": "Meta Muse users are adopting the app for shopping and personal productivity, the company said during Q3 earnings. The AI app now has over 10M users.",
+        "body": "Meta said during its third-quarter earnings call on Wednesday that its AI app Muse has been adopted by more than 10 million users, confirming estimates released earlier this week by market intelligence firm Sensor Tower.\n\nBut it is how people are using it, and how much they’re spending that has caught CEO Mark Zuckerberg’s attention. Zuckerberg said about 25% of people who set up Muse now use it daily, helping improve retention.\n\nHe also shared that over a quarter of Muse’s engaged users who were shopping via the AI agent, had an average purchase size of over $200, which was surprising even to industry insiders.\n\n“Plaid told us that they hadn’t seen activity like they’re seeing with their connector on any other service before,” Zuckerberg said, referring to the financial technology company that connects payment apps to customers’ bank accounts. Muse uses Plaid’s connector to enable agentic shopping.\n\nBeyond shopping, Zuckerberg said other popular uses for Muse include personal productivity tasks, such as connecting the AI agent to users’ email or calendars. The exec stressed that this indicates users trusted Muse’s security setup, which includes a feature called “Muse Secure VM” designed to protect their data and privacy. He also mentioned that the forthcoming “Muse Confidential VM” will prevent even Meta from seeing users’ content.\n\nNow that Muse has achieved “product-market fit,” Zuckerberg said Meta’s focus will shift to scaling the AI agent, increasing revenue, and optimizing its compute costs. Remarkably, the tech company is forecasting that Muse will eventually bring in more revenue per user than its “family of apps” users do today — meaning its users on Facebook, Instagram, WhatsApp, and Messenger. Currently, that figure is around “several hundreds of dollars annually,” Zuckerberg said.\n\nMeta has said it ultimately intends to monetize Muse by keeping it free for most users, but keeping a percentage of the commerce taking place on the platform. Power users who want access to the most advanced AI models or more tokens will also have to pay.\n\nZuckerberg also noted that Meta believes Muse will be profitable after it scales.\n\n“On the compute side, we are building out the capacity to serve more than a billion people over the next few years,” he told bankers and analysts on the Q3 earnings call. “In the near term, Muse is very compute-intensive to run, but we expect to improve its cost efficiency by more than 10x in the next year, which will enable it to be profitable once the revenue lines are at scale.”\n\nMuse will also play a central role in Meta’s smart glasses strategy. Reality Labs, the division responsible for smart glasses, VR, and the metaverse, is still losing billions. However, the division’s losses are expected to improve from $19.1 billion in 2025 to $15 billion this year.\n\nBeyond scaling and supporting its hardware strategy, Zuckerberg teased the company’s plans for something he called the “Muse network.” He described this as taking Muse from a “single-player game” to one where “your Muses can work with your friends’ and your families’ [Muses].”\n\n“And if you want to buy something, it’s not just navigating to that business’s website; it’s talking to their agent,” he added."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-1201f26ccb73e440",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2293646/claude-duet-is-anthropics-answer-to-meta-muse-and-openai-dots/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-21T21:03:19.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Claude Duet is Anthropic's answer to Meta Muse and OpenAI Dots",
+        "summary": "Anthropic subscribers in the US can join a waitlist to try the company's new agent.",
+        "body": "Anthropic subscribers in the US can join a waitlist to try the new agent.\n\nAnthropic is late to the party, but as of today the company has a personal agent to match the likes of Meta Muse and OpenAI Dots . As part of a new \"research\" preview, the company on Wednesday announced Claude Duet . \"It comes to you with what needs your attention, completes tasks you ask of it, keeps working even when you step away, and checks with you before it acts on your behalf,\" Anthropic says of Duet. For now, you'll need to join a waitlist that's only open to Claude subscribers in the US to try the new tool.\n\nLike OpenAI , Anthropic is billing Duet as a proactive agent. Each day, it will generate a short briefing with a list of action items from your connected apps. \"You can also hand it tasks of all shapes — from simple administrative tasks of scheduling meetings to more complex ones, such as building dashboards with dozens of tools, creating financial or sales forecasts, prototyping, and building web apps,\" the company writes, promising Duet will only message you when something requires your attention.\n\nWhile Duet runs on Opus 5.5 , one of the models Anthropic offers through Claude, the company is releasing standalone Android and iOS apps for people to use Duet. The agent doesn't require you to have a Claude session open at all times. It runs on its own virtual machine where it can complete tasks in the background.\n\nNotably, Anthropic says subscribers of its $20 per month Pro plan will get access once the agent rolls out in general availability. That sets Duet apart from Dots , which are currently only available to OpenAI's Pro tier subscribers. Those plans start at $100 per month. Duet shares usage with all your other Claude tools, including Code, which sounds like a recipe for the new agent to blow through your rate limits, but Anthropic at least appears to be thinking ahead.\n\n\"Duet checks your connected accounts every few hours, because checking nonstop would use up your plan's limits much faster. We're continuing to test its judgment about when to message you, and we'll keep tuning it based on what testers tell us,\" the company says, adding users will be able to set how frequently Duet messages them and in relation to what topics.\n\nOn the security side of things, Anthropic says Duet incorporates a new classifier and system prompt designed to prevent it from leaking sensitive information. According to Anthropic, Duet will never directly see your passwords or sign-in tokens, and information that might relate to your health or personal finances is only let through if you explicitly tell Duet to share it. Anthropic said it would have more information about Duet's safety protections to share in the coming days.\n\nOf course, how much you'll get out of Duet will depend on just how trusting you are of Anthropic. Context is everything to AI models, and for some, sharing their entire digital life with an AI agent, is just too much to ask."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-b5983fbb77a0f7fa",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2293625/government-websites-in-the-eu-and-canada-taken-offline-over-php-vulnerability/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-21T20:56:47.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Government websites in the EU and Canada taken offline over PHP vulnerability",
+        "summary": "All websites using PHP should update to the latest security patch.",
+        "body": "All websites using the common programming language should update to the latest security patch.\n\nOne of the two major issues impacting web security this morning has had a ripple effect. In the wake of an announcement from the PHP Foundation that it was issuing a security release to patch two critical vulnerabilities, several government websites in the EU and Canada were taken offline as a preventive measure.\n\nReuters reported that governments in the Netherlands, Denmark, France and Finland took down at least some websites as a preventive measure. Meanwhile Evan Solomon, Canada's Minister of Artificial Intelligence and Digital Innovation, posted on X about the decision to temporarily go offline, while seconding the call for any website operators using PHP to update as soon as possible.\n\nPHP is a programming language for websites. It's used in several major web publishing services, including WordPress and Drupal. Earlier today, news broke that PHP's software had contained major vulnerabilities for years and they were only just uncovered thanks to AI tools being used by cybersecurity firms. Those flaws could allow a hacker to infiltrate a system running PHP, potentially taking control of it.\n\n\"All servers using any version of PHP released in the last 20 years will be vulnerable,\" said Tiffany Farriss, interim CEO of the ​Drupal Association. \"This issue impacts the majority of the Internet.\"\n\nThus far, the main response from the US government is a missive from the Cybersecurity & Infrastructure Security Agency encouraging organizations to update to the new patch from the PHP Foundation. In a statement to given to Reuters , the White House said it was made aware of the issue on Friday."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-ad80cc2ad557f780",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2293597/new-mexico-court-order-meta-pay-25-billion-privacy-case/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-21T20:43:17.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta ordered to cough up $25 billion in New Mexico privacy case",
+        "summary": "The case stemmed from the nearly decade-old Cambridge Analytica scandal.",
+        "body": "The case stemmed from the nearly decade-old Cambridge Analytica scandal.\n\nIf you thought Meta's self-inflicted blows from the Cambridge Analytica data harvesting scandal were over, think again. On Wednesday, a New Mexico judge ordered the company to pay the state $25 billion in penalties, having found that the company made misleading statements about the privacy of consumers in the state. \"It has been a long time coming holding Big Tech accountable,\" New Mexico Attorney General Raúl Torrez said in a press conference (via Reuters) .\n\nThe case, filed in 2021, wasn't directly about the data harvested by Cambridge Analytica. Instead, it targeted Facebook's statements over the years regarding user data, privacy settings and content moderation.\n\nIn September, a Santa Fe jury found that Meta violated New Mexico's Unfair Practices Act by misleading residents on those issues. The jury counted a staggering 43 million violations. At up to $5,000 for each violation, the maximum penalty came to about $219 billion.\n\nThe state asked for $35 billion to $40 billion , with New Mexico attorney Randi McGinn saying the court \"should speak to Meta in the only language it understands, which is money, and the value of its stock price.\" Meta requested no more than $3.45 billion. Judge Francis Mathew ended up at $25 billion. He didn't hold back in his ruling, describing Facebook's promised post-scandal investigation as \"willfully ineffective\" while noting \"the clear intentional and systematic nature of Facebook's repeated misstatements.\"\n\nThis lawsuit is separate from one the company recently settled with nearly every other US state over child safety concerns. That included nearly $459 million specifically for Cambridge Analytica data harvesting claims. New Mexico skipped that settlement, which opened the door to this trial.\n\nThe money will go to New Mexico's school system, with interest accruing at 15 percent a year until the penalty is paid in full. Meta has said it will appeal, with chief legal officer C.J. Mahoney calling it \"a tax on speech.\""
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-7941ba0f9e34cc10",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1015906/php2shell-vulnerability-october-2026",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-21T20:36:56.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "PHP: The three letters that shut down sites all over the internet today",
+        "summary": "Two bugs found with AI are behind major issues today for 4chan, DeviantArt, Wikipedia, and the blog where the bar around the corner posts pictures of people's dogs. The \"critical vulnerabilities\" were discovered in the PHP programming language, which underpins much of the internet, including any site built on WordPress. But it's far bigger than […]",
+        "body": "Two bugs found with AI are behind major issues today for 4chan, DeviantArt, Wikipedia , and the blog where the bar around the corner posts pictures of people's dogs. The \"critical vulnerabilities\" were discovered in the PHP programming language, which underpins much of the internet, including any site built on WordPress. But it's far bigger than that. Some Dutch and Finnish government agencies took their sites down as a precaution. The NSA Cybersecurity account on X recommended that organizations take their systems offline if \"an immediate update is not feasible,\" as did the UK's National Cyber Security Center . Even Pok&eacute;mon Home and Pok&eacute;mon C …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "9to5mac-062b02b6476e2adc",
     "type": "news",
     "sourceId": "9to5mac",
@@ -25,293 +313,50 @@
     "media": null
   },
   {
-    "id": "the-verge-50cb586e8933fa53",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1015843/anthropic-claude-duet-ai-agent",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T19:53:20.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "android",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Anthropic takes on Muse with Claude Duet, its new AI agent",
-        "summary": "Anthropic just announced an AI agent competitor to Meta's Muse and OpenAI's Dots: Claude Duet. The new agent, designed for professionals and small business owners, is launching as a \"research preview,\" according to Anthropic, and it's available as a standalone app on iOS and Android and through Claude on the web. The AI agent is […]",
-        "body": "Anthropic just announced an AI agent competitor to Meta's Muse and OpenAI's Dots: Claude Duet. The new agent, designed for professionals and small business owners, is launching as a \"research preview,\" according to Anthropic , and it's available as a standalone app on iOS and Android and through Claude on the web.\n\nThe AI agent is built around Claude Opus 5.5. Here's Anthropic's description of what it can do:\n\nEach morning, it sends you a short brief on the most important items across your connected apps. Throughout the day, it keeps tabs on those apps and messages you only when something needs your attention. You can also hand it tasks of a …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-93f503f5a8027b67",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/21/gm-is-betting-compute-and-ai-will-help-it-compete-with-chinese-automakers/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T19:52:20.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "GM is betting compute and AI will help it compete with Chinese automakers",
-        "summary": "To compete with Tesla, Rivian, and a host of Chinese automakers, GM’s fourth-gen EV platform will roll out a new central computer and electrical architecture that will debut in 2028 in the Cadillac Escalade IQ.",
-        "body": "When GM announced its new fourth-generation EV platform on Wednesday, what the automaker didn’t share was almost as notable as what it did.\n\nThe new EV platform, part of a series of technology-focused announced during its annual GM Forward event in New York, didn’t talk about suspension geometries, dash-to-axle ratios, and torsional rigidity, all nerdy automotive terms that translate to how people will experience a car. Is it supple or sporty? Does it have a refined stance? When it hits a pothole, does it feel like a bank vault or a paper plate?\n\nInstead, GM’s announcement centered on novel battery chemistries, revamped electric motors, and an entirely new central computing platform and electrical architecture that will connect every system in the car, including acceleration and power, steering, braking, and active safety features as well as software. Lots and lots of software.\n\n“We think vehicles can become a more capable and helpful part of everyday life if we make them spaces that understand context, reduce friction, and give people back moments that would otherwise be consumed by the demands of the road,” Sterling Anderson, executive vice president, global product, and chief product officer at GM, told TechCrunch in a recent interview.\n\nThat sure doesn’t sound like a traditional automaker’s pitch. Then again, since the arrival of Tesla, Rivian, and Chinese automakers, the industry hasn’t been the same. Ride and handling still matter, but they’re table stakes. What sets vehicles apart today is largely defined by software.\n\nAnderson has talked about this future GM before. Last year, the company announced plans to overhaul the electrical and computational guts of its future vehicles in a bid to deliver faster software, more capable automated driving features, and a custom, conversational AI assistant.\n\nThis year, GM is providing more details and dates. This technological overhaul is set to debut in 2028 with the Cadillac Escalade IQ. The company will also rollout an autonomous highway driving feature in 2028 that will allow drivers to have their hands and eyes off the road and without the need to be ready to take over.\n\nEuropean and U.S. automakers have spent years chasing the prospect of software-defined vehicles, but have often fallen short. Volkswagen Group had so much trouble with its own in-house effort, including its troubled Cariad unit, that it struck a $5.8 billion joint venture deal with relative newcomer Rivian.\n\nGM has been on its own capitally intensive software adventure. The company has bet heavily on software in recent years. It ditched the popular smartphone projection technology Apple CarPlay for nearly all of its EVs, and instead turned to a Google-based infotainment system, which is actually quite capable even if it doesn’t yet live up to the standards set by Tesla and Rivian.\n\nIt’s poured billions into software and autonomous vehicle technology development too. GM’s capitalized software amortization expense in 2025 was $866 million, which gives a sense of how much it is spending even as it spreads out the cost over years.\n\nLike many legacy automakers, GM has come to the conclusion that the old approach to electronics, which scattered computer chips throughout the vehicle, was holding it back.\n\nFor fourth-generation EVs, GM will centralize much of those functions on a Central Compute Unit (CCU) that’s 40-times more powerful than its existing systems. Eliminating smaller chips on the edges will help trim wiring by 30%, saving weight and simplifying assembly.\n\nGM notes that this new CCU will work on fossil fuel models, too, though it will debut in the Cadillac Escalade IQ, a vehicle that is shaping up to be the automaker’s technological flagship.\n\nThe CCU will handle the usual propulsion and chassis controls, but also perception and active safety. That should help pave the way for more advanced autonomy features, which GM also announced on Wednesday.\n\nSuch a move was perhaps inevitable. Pressure on automakers has been building on all sides.\n\nDomestically, Tesla has been pushing the boundaries of autonomy, in part because it developed a true software-defined vehicle.\n\nAutomakers like GM are also feeling pressure from Chinese manufacturers, which have shortened development cycles to two to three years, down from the usual four to five years.\n\nGM intends to match that cadence. Alongside announcements about battery chemistries and autonomy, GM outlined how enterprise AI tools have sped up vehicle development across every sector as it pushes to slash its traditional four-to-five-year development timeline in half.\n\nGM gave a brief glimpse of its revamped development strategy. One example: engineers went through 300,000 virtual designs of a new lithium-manganese-rich battery pack before they assembled the first physical prototype. That helped the concept move to an approved program in one month.\n\nSuch speed will help GM save costs as it races to preserve profitability amid a historic upheaval in the automotive industry. But will it be enough to catapult it back into the leadership position it once enjoyed?\n\nThe rise of Chinese automakers won’t make it easy. Their factories are capable of producing far more than Chinese consumers can absorb, and coupled with government subsidies and cheaper labor, these vehicles have flooded markets from Europe to South America with inexpensive vehicles.\n\nChinese automaker’s cost advantage is so steep that, without trade barriers, “they will pretty much demolish most other companies in the world,” Elon Musk said in a 2024 earnings call. In response, he has been trying to pivot Tesla from an automotive company to an AI and robotics company.\n\nGM’s move into autonomy signals a similar shift. But to deliver true autonomy, GM realized it didn’t have the platform it needed. With a new architecture, it should have a fighting chance."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-a1d0489e54d91f2f",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/21/meta-ordered-to-pay-25-billion-in-case-related-to-cambridge-analytica-scandal/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T19:42:32.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta ordered to pay $25 billion in case related to Cambridge Analytica scandal",
-        "summary": "The payout is related to a recent trial involving the social media giant that revolved around its data privacy practices.",
-        "body": "Posted:\n\nThe tail of the Cambridge Analytica data scandal is long — and it keeps costing Meta gargantuan sums of money.\n\nOn Wednesday, a judge ordered the social media giant to initiate its biggest payout yet: $25 billion to the state of New Mexico for the tech giant’s role in deceiving resident users over its data privacy practices, The New York Times reports .\n\nThe huge sum follows a two-week trial in which a New Mexico jury deliberated over the company’s alleged wrongdoing. The jury found that the company behind Facebook and Instagram had committed 43 million violations of the state’s consumer protection laws, each of which carried a $5,000 penalty, the outlet notes.\n\nPart of the case revolved around the company’s handling of a third-party app linked to the Cambridge Analytica data breach, The Wall Street Journal reports . Other parts involved its data privacy policies and its efforts to mitigate misinformation on its platform.\n\nCambridge Analytica was an outgrowth of a British defense contractor , SLC Group, that specialized in influence operations and other political work. The company notably worked with the Trump campaign during the 2016 presidential election. It was also involved in a number of controversial initiatives .\n\n“We may have paid for the construction of schools for the next 100 years,” New Mexico Attorney General Raúl Torrez told journalists at a press conference, commenting on the case’s resolution.\n\nMeta has said that it will appeal the decision.\n\n“This ruling, and the Attorney General’s approach to this enforcement, makes it all but impossible to do business in the state of New Mexico,” said C.J. Mahoney, Meta’s Chief Legal Officer, in a statement shared with TechCrunch via email. “At its core, this lawsuit seeks to impose a tax on speech to enforce new rules for what people can say online. We are confident we will prevail on appeal. In the meantime, Meta will continue to build a safe and free platform to connect millions of Americans, grow small businesses, and help the country maintain its competitive edge,” he added."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-f6fa2b6e44ffd962",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/21/anthropic-takes-on-chatgpt-dots-and-meta-muse-with-claude-duet/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T19:39:25.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Anthropic takes on ChatGPT Dots and Meta Muse with Claude Duet",
-        "summary": "Anthropic is introducing a new AI assistant that can proactively manage tasks across connected apps, keep track of emails and calendars, and continue working even when the app is closed. Here are the details. more…",
-        "body": "Anthropic is introducing a new AI assistant that can proactively manage tasks across connected apps, keep track of emails and calendars, and continue working even when the app is closed. Here are the details.\n\nAnthropic today announced Claude Duet, an always-on AI agent currently rolling out as a research preview to Pro and Max subscribers in the US, with access gradually rolling out via a waitlist.\n\nThe feature is included at no additional cost, but counts toward existing plan usage limits, including work performed in the background, which the company notes could cause users to reach those limits “sooner than with chat alone.”\n\nHere’s Anthropic on its new proactive AI assistant:\n\nClaude Duet is a research preview of Claude that you message the way you’d message a person. Tell it what you need, typed or spoken, and it works in the apps you’ve connected, lets you know when something needs you, and is designed to ask before it sends a message, makes a payment, signs a document, or deletes anything.\n\nThe company says invitations will go out in waves and adds that “Claude Duet isn’t available on Team or Enterprise plans yet,” though it plans to expand availability to those subscriptions in the future.\n\nAnthropic says that Claude Duet uses the same memories, skills, and connectors as regular Claude , and can even search past conversations so users don’t have to repeat themselves.\n\nClaude Duet runs on its own cloud-based computer, allowing it to continue working even after users close the app.\n\nAdditionally, Claude Duet offers integrations with Stripe to check for unpaid invoices and draft payment reminders, as well as Link and Shop Pay to make purchases with user approval.\n\nHere are a few use cases described by Anthropic:\n\nAccording to Claude Duet’s support page , the assistant also has a dedicated Tasks tab where users can track ongoing work and see which tasks need their attention.\n\nClaude Duet also sends updates to the main conversation when a task is completed or requires a decision. Importantly, only users can mark tasks as finished.\n\nAnthropic says Claude Duet is powered by Claude Opus 5.5 and is available through standalone apps for iOS and Android, as well as on the web at claude.ai, for users who receive an invitation.\n\nTo learn more about Claude Duet and join the waitlist, follow this link ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-b7d973a81136e2db",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/21/while-amazon-blocks-ai-agents-walmart-rolls-out-the-welcome-mat/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T19:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "While Amazon blocks AI agents, Walmart rolls out the welcome mat",
-        "summary": "As Amazon blocks AI agents from shopping on its site, Walmart is taking the opposite approach, introducing new technology that lets AI agents make purchases on customers' behalf, with controls over spending and transaction approvals.",
-        "body": "Walmart is embracing agentic commerce with the launch of its own Agent Gateway to manage transactions and other new features aimed at customers using AI agents, the retailer announced on Wednesday. The move comes shortly after Walmart’s top competitor, Amazon, began blocking AI agents from making purchases on behalf of online shoppers.\n\nThe company’s embrace of AI technology differentiates it from other online businesses, including not only Amazon but also various travel and booking sites, which have responded to the growing consumer adoption of AI agents by locking them out of their websites completely . Walmart, on the other hand, had already announced a partnership with a leading agent in the space, Meta’s Muse, and offers integrations with popular AI apps like ChatGPT, Gemini, and others.\n\nNow, it’s expanding on those efforts with more technology to prepare for a world where AI agents become mainstream, said Walmart President and CEO John Furner, speaking at the Masters of Scale Summit in San Francisco on Wednesday. The technology will support agentic shopping from both Walmart and the company’s discount warehouse, Sam’s Club.\n\nIt starts with Walmart’s Agent Gateway, the company’s new MCP server, which is designed to help approved agents connect to Walmart over the model context protocol (MCP). The protocol, originally created by Anthropic, allows AI agents to connect to external data sources, tools, and other workflows. In this case, it lets an AI agent search across Walmart’s online inventory and make purchases on behalf of the agent’s user.\n\nWhat’s more, the retailer says that its Agent Gateway will be able to help customers shop for their usual brands or items without having to share their personal information or purchase history directly with the agent.\n\nThe company has also developed new technology to differentiate an agent’s purchases from those initiated directly by the customer, and to give shoppers more control over what their agents can and cannot do.\n\nWith Agent Profiles, rolling out next month, customers will be able to authorize each AI agent they use with a dedicated profile in their account, allowing them to see the agent’s purchases separately from their own. Plus, customers will be in control of how purchases get approved by either requiring approval for each transaction or by authorizing transactions within a certain spending limit they set.\n\nThe retailer says these controls are similar to adding someone as an authorized user on your credit card, where their transactions are identified, and you can cap their spending.\n\nThe Agent Profiles will be created the first time you use a given agent to shop through the Walmart Agent Gateway, the company notes. To get started, you’ll authorize and link the Agent Profile to your Walmart account, then set your controls or spending limits. You can also delete an Agent Profile at any time. Agent support is available for anyone with a Walmart account; a Walmart+ membership is not necessary.\n\nAlongside these technologies, Walmart is introducing special “terms” for AI agents, which specify how they must operate and what rights they have to transact on its site. Of note, Walmart says that its returns process applies, including when an agent doesn’t act as intended. That’s a customer-friendly condition that could sway consumers who were worried about being an early tester of agentic commerce, as they won’t fear ending up with products they don’t want because of a misbehaving agent.\n\nWalmart also says that agents can’t take actions beyond what the shopper intends, can’t access the customers’ payment information, and can only access the information they need for the given task. Agents that don’t comply with the terms will be blocked from accessing Walmart’s site."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-e29b91f0403fc487",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1015715/walmart-ai-shopping-agents",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T19:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Walmart is inviting AI agents to shop for you",
-        "summary": "Walmart will soon let AI agents shop on its website for you. Next month, the retail giant will allow you to connect your own AI agent to the site, with systems in place to let you approve and review purchases and set spending limits. The embrace of AI agents stands in stark contrast to Amazon, […]",
-        "body": "Walmart will soon let AI agents shop on its website for you. Next month, the retail giant will allow you to connect your own AI agent to the site, with systems in place to let you approve and review purchases and set spending limits.\n\nThe embrace of AI agents stands in stark contrast to Amazon, which blocked Perplexity's shopping agent and Meta's Muse AI assistant . But Walmart is opening its doors to AI shoppers - as long as they follow the retailer's rules. It has outlined a set of terms for agents, saying that \"agents must not take actions beyond what the shopper intends\" and cannot change a customer's payment method. Agents also can only …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-04df12cf7c202846",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/21/ipados-27-2-adds-convenient-new-feature-from-the-mac/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T19:13:08.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iPadOS 27.2 adds convenient new feature from the Mac",
-        "summary": "iPadOS 27.2 launches next week, and among its many new features , Apple has also brought over a recent Mac addition: a Siri popup when text is selected. more…",
-        "body": "iPadOS 27.2 launches next week, and among its many new features , Apple has also brought over a recent Mac addition: a Siri popup when text is selected.\n\nSiri AI is the tentpole addition to iOS 27, iPadOS 27, and companion releases. And as such, Apple offers lots of ways to access the new, supercharged assistant.\n\nOn iPad you can invoke Siri via a “Siri” or “Hey Siri” voice prompt, pull down from the top of the screen, use the new Siri option in the edit menu, open the new Siri app, or my personal favorite: use CMD + Space to open Spotlight and ask Siri a question from there.\n\nBut iPadOS 27.2 adds yet another option that’s borrowed directly from the Mac.\n\nIn macOS 27 Golden Gate, in many situations when you select some text, a small Siri icon appears in the top-left corner of the selection. When you hover over the icon with your cursor, it expands to offer an ‘Ask Siri’ text box.\n\nThis wasn’t available in iPadOS 27. But now, if you have a trackpad connected to your iPad, that same behavior is available in iPadOS 27.2.\n\nAs seen in the images above, the new Siri icon starts out small and stays out of the way, but it’s very convenient to just hover over it to make the ‘Ask Siri’ box appear.\n\nIf you don’t have a trackpad attached, selecting text will still reveal the full edit menu where you can tap to open Siri. But it’s a more smooth and seamless experience with a trackpad.\n\nmacOS is full of small productivity-focused features like this that speed up everyday interactions, yet are missing from iPadOS. So it’s exciting to see such a recent Mac feature be brought over to the iPad.\n\nWhat do you think of the new Siri popup in iPadOS 27.2? Let us know in the comments.\n\n* Buy iPad with 15% discount from Apple refurbished"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-beeb4ee5275d7e58",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/games/1015755/cyberpunk-2077-2-5-edgerunners-mods-dual-wield",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T18:39:52.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Cyberpunk 2077’s update for Edgerunners 2 brings mods to PS5, Switch 2, and Xbox",
-        "summary": "Cyberpunk 2077 is getting a big new 2.5 update that, among other features, brings cross-platform mod support to consoles and content inspired by the new season of the Cyberpunk: Edgerunners anime on Netflix. There's a lot to unpack in the full patch notes. The Edgerunners-specific content includes a new side quest, a gear set based […]",
-        "body": "Cyberpunk 2077 is getting a big new 2.5 update that, among other features, brings cross-platform mod support to consoles and content inspired by the new season of the Cyberpunk: Edgerunners anime on Netflix. There's a lot to unpack in the full patch notes .\n\nThe Edgerunners -specific content includes a new side quest, a gear set based on the character Weak Kingsley, and a new radio station that plays Cyberpunk: Edgerunners music.\n\nEven if you haven't seen the show, the update also adds a Double Trouble perk option that allows dual-wielding of pistols and revolvers, plus a Richard Night-guided tour of the city side quest, and access to a …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-6124c9a62c8690f9",
+    "id": "ars-technica-1b4e9e16bcb45daf",
     "type": "news",
     "sourceId": "ars-technica",
     "sourceName": "Ars Technica",
     "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/10/the-15-billion-ad-powered-ai-startup-your-doctor-may-already-be-using/",
+    "originalUrl": "https://arstechnica.com/culture/2026/10/the-new-human-crafted-apple-music-brand-matters-in-an-ai-world/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-21T15:14:07.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The $15 billion ad-powered AI startup your doctor may already be using",
-        "summary": "OpenEvidence is booming despite questions about accuracy and ads.",
-        "body": "Nearly two-thirds of US doctors are turning to an AI-powered search engine to make patient decisions, propelling a little-known tech startup to a $15 billion valuation while prompting a debate over the future of patient care.\n\nMiami-based OpenEvidence, founded by serial entrepreneur Daniel Nadler in 2022, said that many of America’s 1 million physicians processed more than 42 million prompts last month. Doctors are using the company’s chatbot to scour medical journals and clinical guidelines to help diagnose and treat patients.\n\nThe ads-powered platform has grown largely by word of mouth, penetrating a sector where few tools have seen similar traction. “We’re the first viral consumer internet app in healthcare,” Nadler told the FT in an interview.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-92ecca118b347232",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2292912/now-you-can-chat-with-gemini-while-using-google-maps-through-carplay/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T15:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Now you can chat with Gemini while using Google Maps through CarPlay",
-        "summary": "Just tap the new Gemini icon to get started.",
-        "body": "Just tap the new Gemini icon to get started.\n\nIf you're one of the many CarPlay users who prefers Google Maps for navigation, Google has begun rolling out a small but meaningful update for the iOS version of Maps. Now you can use the company's conversational driving experience, Gemini in navigation, through CarPlay. With Maps open, you'll see a new Gemini icon toward the bottom right of the interface. Just tap the bottom to start asking questions of the company's chatbot.\n\n\"It's a conversational way to find stops on-the-go, report traffic disruptions, get information about places, and more,\" Google explains, adding Gemini is particularly adept at answering multi-part questions like \"what park is famous for gorgeous views overlooking the city?\" Gemini in navigation is starting to roll out today to CarPlay users in the US and throughout the world. As always, it may take a few days before the update arrives on your device, so be patient if you don't see it right away.\n\nThe update arrives after Google yesterday announced it was beginning to roll out Gemini Personal Intelligence to Android Auto users . When enabled, the feature allows the chatbot to pull information from your other Google apps to personalize its responses. In practice, Google says Personal Intelligence improves Gemini's reasoning capabilities makes the assistant capable of delivering more specific details as they relate to your questions and prompts."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-8963cd2500adfc96",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2292333/apple-iphone-duo-review/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T12:00:00.000Z",
+    "publishedAt": "2026-10-21T19:44:40.000Z",
     "categories": [
       "tecnologia-general",
       "apple",
-      "android"
+      "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Apple iPhone Duo review: A first-class foldable",
-        "summary": "Even though it's heavy and expensive, Apple's first foldable handset is a treat for iPhone users unwilling to switch to Android.",
-        "body": "But a lot of apps still need fine-tuning to look their best on Apple’s first bendy iPhone.\n\nNearly a decade ago, the iPhone X ushered in major changes to the way Apple built its mobile devices and we are still seeing the effects of that today. However, between John Ternus taking the reins as CEO and the arrival of the iPhone Duo ($1,999), it feels like Apple has embarked upon another paradigm shift that could pave the way for the company's next generation of hardware. While the Duo is heavy, expensive and late to the market compared to its Android rivals, it encompasses some of the best tech used by its competitors while also redeeming features that other manufacturers have seemingly left for dead. And even though many apps still need to be optimized to fully take advantage of the Duo's design, the release of Apple's first foldable has been worth the wait.\n\nThe move from one to two screens offers a world of possibilities for phone makers, but also a lot of traps. You make something too sleek and it might not have the durability to withstand the rigors of everyday life. And with not one but two displays to worry about, the handoff between from one panel to another becomes even more important. To balance things out, Apple went with a design that delivers strength and consistency, even though the downside of that decision is a device that's significantly heavier than its closest competitors.\n\nOn the outside, the Duo features a glossy 1,878 x 2,670 5.4-inch OLED display with 120Hz ProMotion support and an impressive peak brightness of up to 3,000 nits. Meanwhile on the inside, there's a larger 1,398 x 2,034 7.6-inch panel with a matching 1:1.4 aspect ratio and lofty luminance. This makes transitioning from one screen to another super smooth, as you get the same viewing experience (homescreen and all), just with twice as much real estate to work with. Additionally, Apple's clever opening animation adds a bit of visual spice to tie everything together.\n\nThe one major difference is that the Duo's inside screen has a matte nanotexture finish instead of a glossy treatment which serves a few purposes. Not only does it help protect the rest of the flexible display underneath, it also cuts down on reflections while hiding the appearance of a crease. To be clear, there is definitely a small divot that runs down the middle of the main display and if you're looking for it at the right angle, it's not hard to find. That said, during normal use when you're looking at the phone head on, the crease basically disappears. A word of caution: While it is replaceable (for a $49 fee ), the Duo's nanotexture layer can be removed if you pick at it too much. And unlike with its Android rivals, there's no warning during setup that this film should not be peeled off by anyone aside from Apple-certified technicians.\n\nRegardless, the iPhone Duo's two displays both provide excellent image quality. Its exterior display is a great size for one-handed use and the textured surface on its main panel should make drawing or taking notes with an Apple Pencil feel great (support for that arrives later this month). I also think the strong matte finish makes things like comics and anime look even better than they typically do on glossy screens. The small trade-off is that perceived color saturation and vividness from the Duo's interior panel isn't quite as pronounced in bright rooms, though at night, that deficiency goes away.\n\nElsewhere, the Duo is held together by a burly titanium chassis and one of the nicest hinges I've used on any foldable. Apple says it's composed of more than 100 different components, but you'd never know just from using it because it's so damn smooth. It can hold itself open in a huge range of positions while the amount of pressure needed to unfold the device changes the wider you go, which adds an extra level of sophistication when switching between screens. And somehow amongst all this, Apple found a way to give the Duo an IP68 rating for dust and water resistance, which is only available from one other family of foldables on sale in the US: the Pixel 11 Pro Fold line.\n\nNotably, instead of Face ID, which has become a standard feature on modern iPhones, the Duo uses a Touch ID sensor built into the lock button on the side. This might seem like a weird choice, but on a device that's meant to be used in a ton of positions, the idea of having to put infrared face readers on both the inside and outside of the phone just doesn't make a ton of sense. Thankfully, Apple's solution is really accurate, though it does take a bit longer to unlock than you might expect. The company says the thought process behind this is that this creates a more consistent experience when compared to other devices that still use Touch ID (like iPads and MacBooks). Apple says this also gives the phone a chance to wake up and display things like notifications on your lock screen before you get access to the entire device.\n\nThe main drawback to the Duo's beefy build is that it weighs 254 grams (8.96 ounces), which is more than 25 percent heavier than a Galaxy Z Fold 8, despite the latter having the same number of cameras and larger displays. And that's before you factor in the extra heft from a case. This kind of bulk is pretty significant to the point where the Duo can feel a bit like an anchor in your pocket if you're wearing loose pants and during longer sessions, so you'll probably want to hold the Duo with two hands instead of one.\n\nPowered by an A20 Pro chip, the same as what you get in an iPhone 18 Pro , the Duo has no shortage of processing power. That said, I won't belabor you with too many anecdotes of how fast Apple's first foldable is. The Duo pumps out strong framerates while gaming and running multiple apps side-by-side is a breeze. You can technically even play multiple games at the same time thanks to the Duo's multitasking capabilities, though at that point, having enough fingers and the brainpower to focus on two simultaneously becomes the bigger challenge.\n\nSpeaking of multitasking, that can be accomplished in a handful of easy ways. You can simply press and hold on an app to summon a menu with a split view option. You can also do the swipe up and hold gesture, at which point you can drag apps to the left or right to have the Duo automatically snap them to either side of the screen. From there, you can even pin a pair of apps together by tapping on the small tab in the middle, so that the next time you open any one of the two, the phone will automatically summon both in split view mode. This is super handy for combos like your preferred email and calendar app, which I often want to see at the same time. You can also do this when holding the Duo vertically, though in that position, you are restricted to a top vs bottom split instead of being able to position them side-by-side.\n\nHowever, to account for the Duo's wider displays, Apple made some major changes to the traditional iPhone UI in iOS 27. Regardless of whether the phone is opened or closed, the standard row of home apps rests on the side of the phone (usually the right), while icons for stuff like Wi-Fi, battery level and anything that would normally live in the Dynamic Island sits in the top right corner. This makes a lot of sense to me, and it allows you to open full-size apps without UI elements getting in the way.\n\nThe one big wrinkle to this is that because the Duo is Apple's first foldable, there are a ton of apps that haven't been optimized yet to run on a device like this. To the company's credit, first-party software doesn't suffer from this shortcoming and it's clear Apple has done a lot of work to utilize the Duo's design. For example, things like the App Store and Contacts have been tweaked to present a dual-pane design that makes the Duo's large inner display really shine. Plus, there are subtle additions like shifting UI elements over to the side and out of the middle when the phone is bent in half, which can make touching the center of the display feel a bit awkward. The Duo even supports multiple positions like when it's halfway closed while resting on a table, which is great for taking photos without a tripod or simply watching a video while eating.\n\nUnfortunately, there is a lot of other software that hasn't been updated yet. Apps like Telegram are big offenders. Even on the Duo's big interior display, when you open Telegram, you get a portrait orientated app with tons of dead space on either side. Apple has tried to account for this by giving you buttons that will rotate and expand the app into landscape for a better fit, but even then, it's far from ideal. Then there are games like Sword of Convallaria , which is landscape by default, that still have significant letter boxing at the top and bottom of the app.\n\nGoogle has been pushing for things like adaptive resolutions in Android apps for several years, so you don't run into the same issues. Sometimes it even feels like Google and others are trolling Apple, because apps like Gmail that have custom UIs on Android foldables don't have a similar setup on the Duo. But I'm going to chalk that up to newness rather than malice this early on. Now I'm sure this will change over time as developers go back and update their apps, and to be fair, there are a number of big names like Netflix, Instagram and OpenTable that have already adjusted themselves for the Duo. But still, the difference between optimized and unoptimized apps is the biggest growing pain you'll face on Apple's first foldable.\n\nThe Duo's primary camera setup consists of dual 48-megapixel sensors in back, which offers a 2x optical zoom along with two main focal lengths (a 26mm equivalent primary view and a 13mm ultra-wide). Meanwhile, in the top right of the exterior display, there's a 12MP Center Stage camera for all your FaceTime and selfie needs, and all three of these cameras do a great job of taking sharp, detailed images. In fact, when tested side-by-side against a Z Fold 8, the Duo easily kept up with Samsung's image quality, and in some cases, like taking low-light photos, Apple's foldable captured more well-exposed pics with more accurate colors.\n\nThe Duo even supports a number of advanced features like 4K video recording at up to 120fps and the same set of adjustable Photographic Styles you get on the main iPhone line. I also like little Duo-specific features such as using the exterior display to give subjects a preview of your shot when using the rear cameras or Kid Cue to stimulate a genuine smile when snapping pics of children (though existing analogues already exist on Android foldables). But if you want the best cameras Apple can put in a handset, the iPhone 18 Pro is still the best option thanks to things like its variable aperture lens and longer zoom range.\n\nBut perhaps my favorite feature on the Duo is the under-display-camera hidden beneath its main display. Instead of a standard punchhole, Apple did some truly clever engineering by changing the sub-pixel layout above the camera, allowing light to pass through so you can still take pictures, but without leaving an ugly black dot on the screen when it's not being used. This feature is similar to the tech Samsung introduced way back on the Galaxy Z Fold 3 , but for some reason later abandoned on the Z Fold 6 , and I've been mad about that ever since. But Apple revived it and made it better than ever, and it really adds to the beautiful widescreen experience you get from the Duo's main display.\n\nApple doesn't publish official battery capacity specs for its phone, but if you believe the leaks , the Duo features a cell of around 4,883 mAh. When I performed a local video rundown test, the Duo lasted 28 hours and 48 minutes, which is about half an hour longer than a Galaxy Z Fold 8 (28:14), but not quite as long as what you get from a Moto Razr Fold (31:00) and its big 6,000 mAh power pack. And in the real world, the Duo's longevity often feels even better. Even while testing the phone, which includes running a handful of benchmarks and prolonged multitasking, Apple's foldable routinely had 40 percent of more juice left in the tank at the end of the day. Depending on how hard you push it, I wouldn't be surprised if people can go two days between charges.\n\nMeanwhile, when it comes to topping off the Duo, Apple says it can get up to 50 percent charge in 20 minutes when using a 60-watt power adapter, or the same amount of juice in half an hour with a slower 35-watt brick. Notably, while Apple doesn't make a first-party 45-watt charger, the company says that's actually all you need in order to max out its wired charging speed. Alternatively, if you prefer a wireless pad, there isn't a huge drop in exchange for the added convenience as the Duo supports Qi2 chargers (and MagSafe accessories) at up to 25 watts.\n\nThere's a warning that often comes up between gadget nerds when considering a new product: Don't buy first-gen devices. As exciting as contraptions with novel form factors can be, they are also often a test to see how a concept will fare in the real world. The big difference here is that Apple allowed rivals like Samsung and Google to explore and revise foldable phone design for several years before making one of its own. The company had the luxury to learn from its competitors' accomplishments and missteps, which means the iPhone Duo has sidestepped most of the growing pains a new class of gadget might normally encounter.\n\nThe result is a foldable iPhone that features an exquisite design with highlights that include a beautiful main display, a tough titanium frame, great battery life, solid cameras and excellent performance. And while I think the Duo's more vertically-aligned UI will need to be tweaked down the line, it makes a lot of sense given Apple's approach to mobile multitasking.\n\nThere's no doubt that starting at $2,000, the iPhone Duo is extremely expensive and I really wish it wasn't as heavy as it is. But sadly, this is just the going rate for a premium foldable these days. The Duo's biggest issue is that it's going to take time for developers to update their apps to support the phone's novel design. When software is properly optimized, the Duo feels more powerful and capable than any iPhone that came before it when it comes to multitasking. And even when they aren't, things may look a bit awkward, but you still get a very functional experience. So even though the Duo is Apple's first attempt at a device like this, there's no doubt Ternus and company have made a first-class foldable."
+        "title": "The new human-crafted Apple Music brand matters in an AI world",
+        "summary": "Opinion: In a world of AI slop, showing the human hands making things helps.",
+        "body": "Apple just revealed a new brand identity for Apple Music, with the expected turn to Liquid Glass. I’m not much of a fan of their new design language in general; this is where I admit that I’m still running MacOS Sequoia and have grumpy things to say about rounded corner radii and text legibility.\n\nIt’s just a trend, it will pass, and at some point I’ll probably cave and upgrade when it starts actually affecting my ability to get work done, or more importantly get security updates. Once I adjust, I’ll stop noticing it, and life will go on.\n\nAs such, I wouldn’t normally find an obvious rebrand like this notable, much less feel like I had much to say about it. But then I happened to catch Apple’s behind-the-scenes video in my YouTube recommendations, and I realized I did have thoughts.\n\nRead full article\n\nComments"
       }
     },
     "media": null
   },
   {
-    "id": "engadget-948f09114637b863",
+    "id": "ars-technica-f0789deca4288b15",
     "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2292647/two-dangerous-internet-security-issues-are-putting-site-admins-on-edge/",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/10/openais-latest-ai-models-are-coming-to-google-cloud-and-antigravity/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-21T11:02:54.000Z",
+    "publishedAt": "2026-10-21T18:51:42.000Z",
     "categories": [
       "tecnologia-general",
-      "windows"
+      "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Two dangerous internet security issues are putting site admins on edge",
-        "summary": "The web is a bit of a hot mess today following the discovery of two severe vulnerabilities.",
-        "body": "Both problems could result in large-scale attacks and require massive cleanup.\n\nThe web is a bit of a hot mess today following the discovery of two severe vulnerabilities, according to security releases seen by Ars Technica . The first involves TLS certificates with extremely weak encryption that could affect everything from VPNs to IoT devices. The other is a severe PHP programming language vulnerability impacting CMS systems including WordPress and Drupal. Both problems could result in large-scale attacks and require massive cleanup jobs, security experts said.\n\ngPHP Foundation said on X that it's releasing security patches for two critical vulnerabilities rated 9.2 out of 10 on the severity scale. Ahead of the release today at 14:00 UTC (10AM ET), the group said that \"PHP users are encouraged to prepare to update,\" adding that it will issue an \"earlier release if details become public or active exploit evidence.\"\n\nThe advisory follows a report showing video of a tool called PHP2Shell running code on web servers including the latest versions of WordPress, MediaWiki, Symphony, Drupal and other PHP-based sites. The security firm watchTowr claims it has confirmed the vulnerability and that it affects every version from PHP 5 (2004) onward. \"According to an unverified report, the vulnerability would let an attacker run their own code on a server running PHP, potentially taking control of it,\" watchTowr's FAQ on the exploit states.\n\nAnother company, Sansec, said it expects \"mass attacks to start within 15 minutes of the release.\" With all this, web admins are likely scrambling to patch the issue, so some PHP-based websites could go down briefly while that happens.\n\nThe other issue with TLS certificates is a whole other bag of excrement. An India-based firm called eMudhra said eight of its intermediate CA certificates have been compromised that \"chain to roots trusted by Mozilla, Microsoft, Apple and Chrome root programs and by many downstream trust stores.\" The issue is that the private keys are weak and could let attackers forge credentials for a range of websites and apps.\n\nThe compromised private key sizes ranged from three to eight bits, rather than the usual 384 bits. Specifically, the private keys used by eMudhra were 4, 56, 66, 115, 155, 156, 230 and 237, according to Hacker News and other reports. Those would allow anyone to recover them by testing just 256 possible numbers.\n\nThe eMudhra certificates were widely trusted by hosts like Cloudflare, as well as browsers, operating systems, IoT (Internet of Things) and other devices that connect to the internet. Once they forge domain certificates, attackers can use those domains to impersonate servers and intercept traffic.\n\nMozilla, Google and Apple have blocked the compromised certificates for their browsers. However, Mozilla's security expert Dennis Jackson warned that a macOS utility may keep trusting the compromised certificates as it doesn't check for revocation information — something that applies to many other clients as well. eMudhra has revoked the eight certificates and blamed a script used to generate them.\n\nAs it stands, the biggest risk is currently to VPNs, particularly where governments actively try to intercept traffic. However, it may also impact IoT devices, unmaintained servers and other parts of the net. \"This will be a massive cleanup job, bigger than Heartbleed,\" cryptography engineer Filippo Valsorda told Ars , referring to a previous TLS bug that caused mass attacks back in 2014 ."
+        "title": "OpenAI's latest AI models are coming to Google Cloud and Antigravity",
+        "summary": "Google Cloud will have GPT 6.1 Astra, Sol, and Luna in the coming weeks.",
+        "body": "Google would certainly prefer that everyone used its Gemini models with Google Cloud services, but soon, you'll have more options. OpenAI and Google have come to an arrangement that will see the former's frontier models arrive in Google Cloud services. Perhaps more importantly, GPT models will soon appear in Antigravity, Google's agent-powered coding tool.\n\nFor enterprise customers and AI enthusiasts, OpenAI's latest model will appear in Google's \"Model Garden\" in the coming weeks, adding to its 200-plus options. The garden already offers access to Google's Gemini models, as well as an assortment of open models like Mistral, Llama, and Gemma. Anthropic's Claude AI has also been available for some time. Google says it's now the only large cloud provider offering access to all three leading closed LLMs.\n\nWhile OpenAI notes that Microsoft continues to be its primary cloud partner, the full suite of current GPT 6 and 6.1 models—Astra, Sol, and Luna—will launch on Google Cloud. Astra will naturally cost the most to run, but Google's system supports dynamically moving workloads between LLMs based on performance, latency, and efficiency.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -387,54 +432,6 @@
         "title": "Ya disponible la primera candidata a liberación de NVDA 2026.3",
         "summary": "Tal y como ha anunciado NV Access mediante esta publicación, la rc 1 de NVDA 2026.3 ya se encuentra disponible para descarga y pruebas. Se recomienda a todos los usuarios descargar esta versión y proporcionar comentarios por los canales de la comunidad, o por el sistema de informe de fallos de NV Access. A menos … Continuar leyendo \"Ya disponible la primera candidata a liberación de NVDA 2026.3\" La entrada Ya disponible la primera candidata a liberación de NVDA 2026.3 se publicó primero en NVDA en español .",
         "body": "Tal y como ha anunciado NV Access mediante esta publicación , la rc 1 de NVDA 2026.3 ya se encuentra disponible para descarga y pruebas. Se recomienda a todos los usuarios descargar esta versión y proporcionar comentarios por los canales de la comunidad, o por el sistema de informe de fallos de NV Access . A menos que se detecten fallos críticos de última hora, esta versión será idéntica a la versión final de NVDA 2026.3. Esta versión no es apta para entornos de producción. Al instalar esta rc te unirás al canal beta, y sólo recibirás avisos de actualización de compilaciones beta y candidatas a liberación (rc). El canal beta/rc siempre te mantendrá al día con la versión más reciente de NVDA. La última rc de un ciclo de liberación es idéntica a la última versión estable. Para regresar al canal de versiones estables, instala a mano la última versión estable.\n\nEsta versión incorpora importantes mejoras de rendimiento, mejoras en los diálogos de NVDA, y entrada expandida por la pantalla táctil. Se han hecho varias mejoras para reducir los retrasos y aumentar el rendimiento. Ahora NVDA recupera y captura más información sobre los controles en segundo plano, mejorando el rendimiento en controles como cuadros combinados y el explorador de archivos. NVDA ya no hace que se rompan el explorador de archivos u otras aplicaciones al cerrarlo o reiniciarlo. NVDA se recupera ahora más rápido cuando una aplicación deja de responder, y ya no se colgará ni inundará el registro con errores en aplicaciones que no responden. En regiones vivas de texto, como las terminales, NVDA ya no se cuelga cuando se vuelcan en pantalla importantes cantidades de texto. Se han añadido menús de contexto y atajos de teclado a los diálogos de perfiles de configuración, gestos de entrada y diccionarios del habla, haciendo que estos diálogos sean más fáciles de usar con el teclado. Ahora también es posible cambiar directamente un gesto existente en el diálogo Gestos de entrada. Se ha modernizado el diálogo que presenta mensajes explorables y ahora soporta mejor cambiar su tamaño, maximizarlo y minimizarlo. Se ha expandido significativamente la entrada por pantalla táctil. Los gestos de dos deslizamientos secuenciales ahora combinan dos deslizamientos en rápida sucesión en un solo gesto, incrementando enormemente la cantidad de gestos asociables. También se soportan ahora los gestos de borde, permitiendo que los gestos que comiencen a 15 mm de cualquier borde de la pantalla se asocien independientemente de los mismos gestos realizados en el centro de la pantalla. Se ha añadido una nueva orden sin asignar para mover el cursor del ratón al centro de la vista ampliada. Se puede usar el OCR de Windows con la lupa o la cortina de pantalla activadas. Se ha actualizado Liblouis con nuevas tablas braille en Elfdaliano, sami, maorí, braille unificado inglés de Nueva Zelanda, y aitiano criollo, una tabla noruega para texto en español, y variantes adicionales de sueco de 6 y 8 puntos. Se ha actualizado Espeak NG añadiendo soporte para liguriano y abkhaz. Para instalar esta rc, puedes configurar el canal «rc y beta» en el complemento Selector del canal de actualización y buscar actualizaciones desde el menú Ayuda de NVDA, o actualizar desde una beta anterior. Y como siempre, también puedes descargar manualmente el instalador de NVDA 2026.3 rc 1 . Su suma de comprobación SHA256, que te permitirá garantizar la integridad del archivo descargado, es f233fe4c2134560c3b945e94ce4c1835a62c511fa22a64bdaa521289bedccc3d. ¡Feliz miércoles!\n\nLa entrada Ya disponible la primera candidata a liberación de NVDA 2026.3 se publicó primero en NVDA en español ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-dd321fe776e4b133",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/tech-policy/2026/10/meta-drops-the-word-train-from-its-commercial-tos-after-ai-backlash/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-20T20:07:58.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta drops the word \"train\" from its commercial TOS after AI backlash",
-        "summary": "Meta changes AI scraping policy but won’t add language respecting robots.txt.",
-        "body": "Hoping to quell criticism, Meta has dropped the word “train” from its “streamlined” commercial terms of service that kick in on October 30.\n\nLast week, Meta faced backlash after legal experts warned that the tech giant’s sweeping new commercial terms of service seemed to give Meta permission to endlessly scrape websites linked on business pages. Talking to Nieman Lab, experts suggested that Meta could possibly use the policy to avoid millions in licensing fees from news organizations by requiring all business users to share a wealth of AI training data simply for running a business page.\n\nA Meta spokesperson confirmed that Meta did not alert users to the changed language following backlash. This potentially only adds to confusion ahead of the policy rollout. In response to backlash, Meta's spokesperson provided a statement to Ars, acknowledging Nieman Lab's initial report but not its follow-up report reiterating experts' concerns:\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-d3e77b1c3f8a0d62",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/google/2026/10/geminis-personal-intelligence-is-coming-to-cars/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-20T20:00:33.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Gemini's Personal Intelligence is coming to cars",
-        "summary": "It's probably time to audit your Gemini settings.",
-        "body": "Google kicked off 2026 with the addition of Personal Intelligence to Gemini, allowing its AI to pull in more of your data to formulate answers. It started as a paid feature but eventually came to all Gemini users. However, this feature wasn't available in the car until now. Google is rolling out Personal Intelligence to Android Auto and Google Built-in, and it is still, thankfully, an optional feature.\n\nAs Google points out , a generative AI's outputs are better \"when it knows the world and knows you,\" which is correct in an uncomfortable sort of way. The more context you can provide to a model, the better the output will be at the end of the token shuffle. Since Google has so much of your data already, it sees Personal Intelligence as a differentiator versus other AI systems. You don't have to provide the AI context because it already has it from apps like Gmail and Calendar.\n\nPersonal Intelligence is beginning its rollout in Android Auto today, and it will come to vehicles with Google built-in in the next few months. As an aside, \"Google built-in\" is questionable branding, but it refers to cars that run Google software in the infotainment system rather than projecting an interface from your phone. Very few vehicles have Google built-in, but Google often releases new car features on them first. This time, it's the other way around.\n\nRead full article\n\nComments"
       }
     },
     "media": null

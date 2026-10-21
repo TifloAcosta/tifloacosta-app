@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-21T15:20:21.676Z",
+  "generatedAt": "2026-10-21T19:39:52.861Z",
   "resources": [
     {
       "kind": "resource",
@@ -6102,22 +6102,6 @@
       "categories": [
         "tecnologia-accesibilidad",
         "braille"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "applevis-apps-965dfa0d128b3a6c:en",
-      "sourceId": "applevis-apps-965dfa0d128b3a6c",
-      "lang": "en",
-      "title": "RedCoach",
-      "summary": "Welcome to the RedCoach app — your all-in-one travel companion. Book affordable bus tickets, track your ride in real time, and earn rewards by joining RedCoach’s Loyalty Program. Top Features: • Search schedules and book bus trips for yourself, friends, or family • Track your bus in real time with live updates • Rebook or cancel trips with just a few taps • Access mobile tickets instantly for easy boarding • Select your seat and pay for extra baggage • Compare coach class amenities to pick your ride style • Save with promo codes and travel discounts • Join the Red Rider Loyalty Program and earn free trips • Manage your profile, trips, payments, and travel preferences • Reach out to customer support RedCoach puts smarter travel at your fingertips, delivering comfort, convenience, and complete control.",
-      "body": "Welcome to the RedCoach app — your all-in-one travel companion. Book affordable bus tickets, track your ride in real time, and earn rewards by joining RedCoach’s Loyalty Program.\n\nTop Features: • Search schedules and book bus trips for yourself, friends, or family • Track your bus in real time with live updates • Rebook or cancel trips with just a few taps • Access mobile tickets instantly for easy boarding • Select your seat and pay for extra baggage • Compare coach class amenities to pick your ride style • Save with promo codes and travel discounts • Join the Red Rider Loyalty Program and earn free trips • Manage your profile, trips, payments, and travel preferences • Reach out to customer support\n\nRedCoach puts smarter travel at your fingertips, delivering comfort, convenience, and complete control.",
-      "sourceName": "AppleVis Apps",
-      "originalUrl": "https://www.applevis.com/apps/ios/travel/redcoach",
-      "publishedAt": "2026-10-11T18:24:39.000Z",
-      "categories": [
-        "apple",
-        "apps-accesibles"
       ]
     }
   ]

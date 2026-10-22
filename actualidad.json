@@ -1,5 +1,268 @@
 [
   {
+    "id": "the-verge-d5542cec6a9b7daa",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/gadgets/1016640/apple-magic-keyboards-ipad-air-pro-deal-sale",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-22T15:14:20.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple’s Magic Keyboards for iPad are about half off, with a small catch",
+        "summary": "You can outfit your iPad Air or iPad Pro with one of Apple’s slick Magic Keyboards for considerably less than the accessory usually costs at Woot. I won’t bury the catch I teased in the headline; These cases have a 90-day warranty via Woot, and aren’t eligible for AppleCare. That said, Woot says they’re in […]",
+        "body": "You can outfit your iPad Air or iPad Pro with one of Apple’s slick Magic Keyboards for considerably less than the accessory usually costs at Woot . I won’t bury the catch I teased in the headline; These cases have a 90-day warranty via Woot, and aren’t eligible for AppleCare. That said, Woot says they’re in “pristine condition, with essentially no visible signs of use.” If you’re still interested, the savings should be worth it.\n\nThe most affordable option is the Magic Keyboard for the 13-inch iPad Air (M2, M3, M4 versions supported). Originally $319, and selling for that price at most retailers, you can nab one in white for just $129 .\n\nWoot also has the Magic Keyboard in black for the 11-inch iPad Pro (M4 and M5 editions) and the 13-inch Pro supporting the same configurations. Those cost $159 and $199 , respectively, which is well over $100 off.\n\nEach Magic Keyboard essentially turns your iPad into a MacBook, of sorts, complete with a trackpad, aluminum design, and a function row of keys. It magnetically attaches to the back of your iPad, and gets power via its pogo pins, keeping the tablet’s USB-C port free for you to plug in accessories. The keyboard accessory features a USB-C port in its cantilevered double-hinged design for charging your iPad (this port doesn’t allow data passthrough, just power). The stand lets you make easy adjustments to the viewing angle of your iPad, which is great if you’re trying to avoid glare."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-b56d45e4e8e3233e",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/22/spotifys-current-ai-bet-is-about-being-the-music-service-that-agents-choose/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-22T15:03:58.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Spotify’s current AI bet is about being the music service that agents choose",
+        "summary": "Spotify co-CEO Gustav Söderström explains why the rise of AI agents could be good news for the music service.",
+        "body": "Spotify had a strong third quarter , reaching 788 million monthly active users and generating nearly €5 billion (around $5.6 billion USD) in revenue. But the more interesting takeaway from its earnings call was how the company sees people listening to music in the future, and why the rise of AI agents could be good news for its business.\n\nCo-CEO Gustav Söderström thinks the music streaming giant is particularly well suited to this shift.\n\n“Spotify is in one of the few categories that actually stands to thrive in the agentic age,” Söderström tells investors. “This is because agents excel at replacing and taking care of things people would rather not do. People love getting rid of chores. But entertainment is the opposite. Nobody asks an agent to ‘summarize a song’ for them.”\n\nInstead of opening Spotify, searching for an artist and building a playlist themselves, listeners could ask an AI assistant to do the work for them. They might want music for a run, a podcast about something they’ve been discussing with an AI, or an audiobook recap that picks up exactly where they left off.\n\nSpotify wants to be the service those agents turn to, letting people discover music and interact with Spotify through conversations rather than just its own app. Notably, Spotify was the first music service to integrate with Meta’s Muse assistant , and it also integrates with ChatGPT and Claude.\n\n“Our goal is to be the media service that you use from any agent, really turning the growth of agents into a tailwind rather than a headwind. That is exactly what we are seeing now. We are seeing really good adoption of Spotify inside these agents. While other companies are maybe trying to figure out what to do and many are leaning out, we are actually leaning in and participating in the growth instead of standing by the roadside and looking at it,” said Söderström.\n\nThe market is already showing signs of friction over how agents access third-party services. Amazon , for example, has blocked Meta’s Muse from shopping on its platform, illustrating how major players may restrict outside agents when questions arise around access, security, privacy, or commercial control.\n\nSpotify’s pitch isn’t just that AI shouldn’t just make entertainment easier to find. It should make the experience more personal, too.\n\nSöderström describes Spotify today as “an intelligent media service encapsulated as an agent, whether you use it directly through our application or via another agent…Spotify is now an agent that you can not only click on in our app, but talk to, ask questions of, and instruct. We can do things today that no other media services can do,” he said.\n\n“For example, you can ask Spotify to go through your listening history song by song back to 2008, picking your true favorites, beat-stretching them by speeding them up or down, and then sorting them by key and BPM. Then you can ask it to mix them together into the perfect running playlist at your exact cadence,” Söderström explained.\n\nSpotify has years of listening history to draw on, including the artists people return to, the songs they skip, and the music they discover. That information can help it make recommendations that feel more personal than a generic playlist generated by an AI assistant that doesn’t know much about someone’s tastes.\n\nHowever, Söderström also emphasized that Spotify isn’t sending its listener data to partners. Instead, the agent asks Spotify for something, and Spotify uses its own systems to reason about the request and choose what to play."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-04d93ef6e04a1173",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/gadgets/1016626/samsung-galaxy-used-amazon",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-22T14:55:29.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "You could just get a refurbished Samsung phone on Amazon",
+        "summary": "I recently bought a used Galaxy phone, and now Samsung is leaning into that market on Amazon after raising prices on its newest phones. Its certified renewed phones are available on Amazon for the first time, with a new battery and a one-year warranty. They currently start at $489 for the Galaxy S24 FE with […]",
+        "body": "I recently bought a used Galaxy phone, and now Samsung is leaning into that market on Amazon after raising prices on its newest phones . Its certified renewed phones are available on Amazon for the first time, with a new battery and a one-year warranty. They currently start at $489 for the Galaxy S24 FE with 128GB of storage, significantly less than its $649 launch price, or $699 for the current-gen S26 FE.\n\nI got that exact same phone in August after cracking the screen on my Nothing CMF Phone 1. But my used 128GB Galaxy S24 FE cost $329 on Back Market, over $100 less than the certified renewed one Samsung is offering. I've gone with preowne …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-0b5b0858bc60e03e",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/22/ios-27-2-introduces-design-changes-for-these-apple-apps/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-22T14:49:17.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27.2 introduces design changes for these Apple apps",
+        "summary": "iOS 27.2 launches next week with a variety of new features , and also design changes for select Apple apps. Here’s what’s coming. more…",
+        "body": "iOS 27.2 launches next week with a variety of new features , and also design changes for select Apple apps. Here’s what’s coming.\n\nApple Music just rolled out a big design rebrand, and iOS 27.2 extends that fresh visual identity to several aspects of the Music app.\n\nFor starters, there’s a new app icon that strips the old red color in favor of black and white. The removal of the old red identity extends to other elements inside the app too.\n\nIn Music’s tab bar, the accent color for the active tab is now blue instead of red. And in your Library, sections like Playlists, Artists, and Albums are entirely monochrome.\n\nIf you use the Music app’s widgets on your Home Screen or Today view, you’ll notice that they drop the former red background too. Now all widgets use a black background instead.\n\nApple’s Books app in iOS 27.2 introduces design updates centered around its reading experience.\n\nAs explained in-depth here , design changes include:\n\nThese changes were likely motivated by the iPhone Duo’s introduction.\n\nNot only does the Duo make a great e-reader, but it’s also a reason to avoid bespoke UI elements for things like menus and buttons, since Apple’s stock options dynamically reposition for different iPhone models in a way the old Books controls likely wouldn’t have.\n\nWhat do you think of iOS 27.2’s design updates for Music and Books? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-6a60f92d7e017641",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/gadgets/1015984/aura-smart-bird-feeder-jbl-charge-6-speaker-deal-sale",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-22T14:41:02.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Coolfly’s solar-powered Aura Smart Bird Feeder is nearly 50 percent off",
+        "summary": "I’m not sure when birdwatching became so popular, but it seems everybody’s getting into it these days. If you want to see what all the fuss is about without leaving your couch, both Coolfly and Birdfy are discounting their camera-equipped bird feeders for a limited time. Right now, you can buy Coolfy’s Aura Smart Bird […]",
+        "body": "I’m not sure when birdwatching became so popular, but it seems everybody’s getting into it these days . If you want to see what all the fuss is about without leaving your couch, both Coolfly and Birdfy are discounting their camera-equipped bird feeders for a limited time. Right now, you can buy Coolfy’s Aura Smart Bird Feeder for $149.90 ($140 off) , or the Birdfy Feeder from Amazon or Birdfy for $109.99 ($90 off). You can also add a solar panel to the latter for an extra $20 from Birdfy, or grab both the panel and lifetime AI-powered bird identification from Amazon or Birdfy for $149.99 ($110 off).\n\nMy colleague Jennifer Pattison Tuohy called the Aura Smart Bird Feeder an impressive package, praising its large seed hopper, exceptional battery life, and dual solar panels. She also liked its unique side-mounted camera, which provides a more natural, wider view of birds than many other smart feeders. It can capture up to 2.5K video with a 150-degree field of view and offers full-color night vision, cloud and local storage, and AI-powered identification of more than 10,000 bird species, all without a subscription.\n\nBirdfy’s feeder offers many of the same perks for less, including 2K video, night vision, and AI-powered identification of more than 6,000 bird species. It also lets you watch visiting birds on your phone, set up notifications for when they stop by, and access recordings via the cloud. Unlike the Aura, however, solar charging and lifetime AI identification aren’t included by default, with a subscription running $49.99 a year if you don’t purchase a bundle."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-aaaf25d365107b05",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/22/leaker-reveals-larger-iphone-duo-details-possible-telephoto-camera/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-22T14:20:22.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Leaker reveals larger iPhone Duo details, possible Telephoto camera",
+        "summary": "Today on Mark Gurman’s Power On podcast , the prolific leaker offered fresh insights into several features in the works for future iPhone Duo models, including larger screen sizes and possibly a Telephoto camera. more…",
+        "body": "Today on Mark Gurman’s Power On podcast , the prolific leaker offered fresh insights into several features in the works for future iPhone Duo models, including larger screen sizes and possibly a Telephoto camera.\n\nThe iPhone Duo isn’t yet available in stores, but Bloomberg’s Mark Gurman already has plenty to share about Apple’s plans for future models.\n\nToday on his Power On podcast , Gurman revealed that Apple is testing iPhone Duo 2 models with Face ID under the outer display, and is exploring ways to add an Action button. You can read more about those details here .\n\nLater in the episode, Gurman looks further out to a 2028 third-gen model that he’s previously reported on .\n\nThe iPhone Duo 3 is expected to be slightly larger, and on the podcast Gurman offered specifics on what to expect. He said:\n\nWhat I heard, just to be specific about the larger screen version of the Duo, is I heard…it’s marginal. It would be that the bigger screen, or the inside screen, increasing by, it’s like, this is rough, like very roughly half an inch. And so, that wouldn’t necessarily make the outer screen much bigger…we’re not talking about an 8.5-inch, 9-inch inner screen. We’re talking about like high sevens, very low eights.\n\nFor reference, iPhone Duo currently has a 7.6-inch folding display.\n\nGurman compares the forthcoming change to how Apple gradually sized up its Pro line in recent years. For example, it went from 6.7 inches on iPhone 15 Pro Max to 6.9 inches on iPhone 16 Pro Max.\n\nAs part of the conversation, Gurman is also asked if Apple is going to add a Telephoto camera to a future iPhone Duo. He says, “That’s on their list. I don’t know when that’s coming, but that’s gonna be hard to do.”\n\nHe adds that it isn’t a matter of cost, but physics: “I think that’s purely a physics issue in terms of the depth needed. It’s going to be interesting to see how they end up solving that.”\n\nWould you want a slightly larger iPhone Duo, and how important is a Telephoto lens to you? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-ba9bb64afd03063c",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2294041/iphone-duos-next-gen-prototypes-are-trying-to-cram-in-face-id/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-22T14:06:33.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iPhone Duo's next-gen prototypes are trying to cram in Face ID",
+        "summary": "Apple's first foldable phone opted for a feature it replaced on most iPhone models nearly 10 years ago.",
+        "body": "For understandable reasons, the first generation returned to Touch ID.\n\nYou might have a hard time trying to get hold of one yourself for the foreseeable future , but the iPhone Duo has been in the hands of reviewers for a little while now. And while it is clearly a first-generation product, overall impressions of Apple's first foldable have been broadly very positive.\n\nOne potential annoyance for anyone coming from another modern iPhone, however, is the lack of Face ID, with Apple instead opting to go back to Touch ID for the first time since 2022's iPhone SE. Most iPhone users will have been using Face ID since the iPhone X. In our own review we said the Touch ID solution here works accurately, but can take a bit longer to unlock the phone than you might expect, and according to reliable Apple insider Mark Gurman, the company is already looking at how it can bring its newer technology to the iPhone Duo's inevitable follow-up.\n\nSpeaking on his new Power On podcast, Gurman said Apple is \"actively working\" on under-display Face ID, and that there are already iPhone Duo 2 prototypes that have the technology built into the phone's outer display. He also pointed to the iPhone 18 Pro and Pro Max , with their shrunken down Dynamic Island hardware, as evidence that Apple is finding ways to move more components underneath its phones' displays. The first-gen iPhone Duo also features Apple's first under-display camera.\n\nAs for why Apple chose to outfit its $2,000 foldable with a feature it largely retired from iPhones almost a decade ago (although plenty of MacBook and lower-end iPad models still use Touch ID), it likely has a lot to do with the fact the iPhone Duo is designed to be used in a number of different orientations. Putting Face ID sensors on both the inner and outer displays might have been a bit of a stretch, and may have pushed up the price of an already enormously expensive device.\n\nGurman points out that the iPhone Duo's display is very thin, so squeezing even more components into it would have also been challenging. Apple wanted uniformity with both displays, so getting Face ID into one but not the other was unlikely to materialize this time. The Bloomberg reporter added that the action button, which Apple introduced on the iPhone 15 Pro, may also feature in an eventual iPhone Duo 2."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-f7211621403feb54",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/22/claude-duet-app-is-anthropics-bet-on-agents/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-22T13:53:26.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Claude Duet app is Anthropic’s bet on agents",
+        "summary": "Claude Duet is available through waitlist for Pro and Max plan users",
+        "body": "The AI world is flooded with personal and productivity-based assistants , with new ones launching every week. Now, Anthropic is entering this battle in the hopes of gaining user attention with a new app called Claude Duet, aimed at rivaling Meta Muse , OpenAI Dots , Hark , Instinct , Grok Bot , and Fo .\n\nAnthropic said the new agent is meant to cater to professionals and small businesses to help them with automating and managing tasks. The company is making a distinction from personal agents such as Instinct , by noting that Duet isn’t good at handling errands or booking tickets, and it can’t show you its browser use as it happens.\n\nInstead, Duet can build a daily briefing for its users, create dashboards, or suggest actions based on the user’s data. Like other agents, Duet can complete tasks in the background through its own virtual machine while you handle other things, then come back to you if it needs your approval.\n\nThe launch arrives as the market shifts beyond AI assistants to agents that can work on users’ behalf. Many of Anthropic’s rivals are focusing on business use cases. While Meta’s Muse is a personal AI assistant, the company also released a version to cater to small businesses with connections to other apps . OpenAI’s Dots has a business slant as well, with its integration with professional tools .\n\nAnthropic says Duet proactively delivers its recommendations as it monitors ongoing tasks. Built on the Claude Opus 5.5 model, Duet can connect to over 6,000 connectors and plugins in the Claude Marketplace. It can also make online purchases on users’ behalf via Stripe’s ⁠Link digital wallet or Shopify’s Shop Pay.\n\nThe company said sensitive steps like payments would require user approval. However, Duet won’t trade securities or move money between accounts.\n\nAnthropic also released a new classifier to check each message to prevent sensitive information from leaking out. It said that, by default, the agent would turn down requests asking for credit card numbers and government identification.\n\nClaude Duet is available as an app on iOS and Android, and on the web through Claude.ai for Pro and Max customers in research preview. Users have to join a waitlist to try it."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-e51043f8ff826556",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/22/first-iphone-duo-pre-orders-now-say-shipped-ahead-of-launch/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-22T13:52:51.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "First iPhone Duo pre-orders now say ‘shipped’ ahead of launch",
+        "summary": "iPhone Duo arrives in stores tomorrow ( details on availability here ), and Apple has started marking early pre-orders with launch day delivery as “shipped.” more…",
+        "body": "iPhone Duo arrives in stores tomorrow ( details on availability here ), and Apple has started marking early pre-orders with launch day delivery as “shipped.”\n\nIf your iPhone Duo delivery date is later than October 23, you might be checking the Apple Store app regularly to see if your delivery window got bumped up .\n\nBut even if you’re one of the lucky few with an October 23 estimate, there’s another reason to check the Apple Store often: your order status.\n\nAnd today, some users have started reporting that Apple says their iPhone Duo has officially shipped.\n\nHere’s Stephen Robles in a post on X :\n\nYou can check your order status by opening the Apple Store app and going to the For You tab. Your iPhone Duo order with its latest status should be at the top of that tab.\n\nApple tracks orders across several stages: Processing, Preparing to Ship, Shipped, and Delivered.\n\nIf you were quoted October 23 delivery but your order doesn’t yet say shipped, don’t panic. iPhone pre-orders are always in transit before the app officially updates to mark their shipping status.\n\nWhat’s your iPhone Duo pre-order status? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-7f6c5021323ab92a",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/22/nirva-raises-33m-for-a-pendant-that-only-listens-to-you/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-22T13:26:52.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Nirva raises $33M for a pendant that only listens to you",
+        "summary": "Nirva will ship its $249 ambient AI pendant by the end of the year.",
+        "body": "Ambient AI is having a moment. Amazon launched a new wrist-worn device with Bee; a former Plaud exec launched ambient apps through a startup called Ambi, which aims to also build its own hardware; and Apple launched Voice Intelligence features during its iPhone launch in September. Now, a company called Nirva is betting on a jewelry-like pendant and its ability to listen only to the wearer.\n\nThe startup today announced a new $25 million pre-Series A round, adding to the $8 million it raised earlier in the year from investors like Lightspeed and South Park Commons, bringing its total raise to $33 million.\n\nNirva was founded in 2025 by two former Meta Reality Labs employees, Wei Lyu and Jason Chen, along with Hanying Hu, who founded a fashion and jewelry brand.\n\nThe company’s first device is a pendant, which can also be worn as a bracelet. The device weighs only around eight grams, making it easy to wear all day. Its battery lasts up to three days on a single charge.\n\nLonger term, Nirva aims to release more devices.\n\nIn a call with TechCrunch, Nirva CEO Lyu said that the company wanted to build a wearable that blends in with fashion, but also provides value to users.\n\n“This is a piece of jewelry that only focuses on listening to your own speech. We are not like a voice recorder or like a meeting note taker. One key difference between us, Taya, Vocci, or Sandbar Ring is that we’re always passively listening to your own speech. So it’s always on. It keeps modeling the user and modeling your mind,” Lyu said.\n\nFor ambient devices, privacy is a big question, as people might not like to be recorded all the time. Plus, devices like the Ray-Ban Meta have instilled fear in those who are around the person wearing the smart glasses that they are being recorded too.\n\nNirva gets around this problem by asking users to record snippets of their voice during onboarding and building its model based on that. During use, the device filters out conversations or data captured from the other people around the device. That means it’s only recording the wearer.\n\nIn addition, Nirva by default doesn’t keep any audio data or transcripts after processing the conversations.\n\nNirva is positioning itself as a personal insights company rather than a productivity startup. However, its app shows you reminders or action items and ways to act on them. Lyu said that through its app, the startup wants to help users show up for others in a better way in their lives.\n\n“I think there’s no universal way to help everyone to solve their problems. We are building a tool to help people to improve their self-understanding, self-compassion, and self-awareness,” Lyu said.\n\nThe companion app parses users’ speech and creates insights that it infers are related to the user’s personality, including patterns, the people who tend to be around them, the places they’ve been to, and other daily notes. Lyu emphasized that the app shows users insights around their emotions, communication style, and ways they can improve.\n\nWyu gave an example of an incident when she forgot to thank her mother for something, and the app later nudged her with a reminder about this.\n\nThe company also said that, before it discards the audio, it’s able to track the tone, pitch, volume, and speed, which are useful for deriving emotion-related understandings that are then surfaced in the app.\n\nNirva will start taking orders for its devices in November, with an aim to ship them to early users by the end of the year. The $249 device will be available in silver, brushed silver, black, and gold.\n\nThe startup has competition in the AI wearables area. There are companies like former Apple employees’ Taya , which is also building intelligent jewelry. Plus, startups like Friend and Bee are trying to be companion gadgets as well."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-223217ac9d7eb17a",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2293844/1password-opens-up-ai-agents-muse-dots-grok/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-22T13:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "1Password will let you hand your data security over to your preferred AI agent",
+        "summary": "If you're willing to let AI book or buy things on your behalf, 1Password just made that easier.",
+        "body": "It now works with Muse from Meta, OpenAI's Dots and SpaceXAI Grok Bot.\n\nAfter introducing Claude integration in July, 1Password just launched a platform for other major AI companies including Muse from Meta , OpenAI's Dots and SpaceXAI Grok Bot. The new 1Password for Agents gives those models access to your logins so they can complete tasks for you, without ever receiving your username, password or vault contents.\n\n1Password is pitching the feature as a way to make your personal AI assistant dreams come true for tasks like booking restaurants, buying gifts and planning vacations. Doing those things usually requires login credentials, but given AI agents' penchant for going rogue , doing so can be fraught. That's why 1Password came up with a login system that ensures the models can't see them.\n\n\"An agent should be able to do the job it's been asked to do without getting permanent access to everything behind the account, and 1Password provides the trust layer that makes this possible across personal agent experiences,\" said 1Passwords chief product officer, Aashish Tripathi.\n\nTo do that, 1Password for Agents lets agents use stored credentials from your 1Password vault without directly sending them to the model. When agents reach a password check in the course of performing actions you requested, they use a special key to verify their identity with 1Password. 1Password then notifies you about which agent needs access and why and, if you approve, fills in the required information.\n\nAccess is granted per session, limited to specific, approved items and not carried over. Since passwords and one-time MFA codes are injected through a secure channel managed by 1Password, they stay outside the model.\n\nThe company said that 1Password now works with Muse, Claude Duet, ChatGPT Work and Dots, Grok Bot and Town. For each of those, it provides approved access when needed and lets users approve sign-ins. Passwords, usernames and MFA codes remain outside each agent's view for each, 1Password says, so they can't spread beyond your own devices.\n\nStill, common sense is required when giving agents unfettered access to accounts. Though they won't spill your password secrets, they can certainly do things like make product ordering errors or book the wrong vacation with no option to cancel. As such, you'd want to be extremely careful if deploying one for such things. The company has yet to reveal other details like pricing or availability, but we should hear more about those things soon."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "cti-once-f841f3b33b600d5e",
     "type": "news",
     "sourceId": "cti-once",
@@ -25,50 +288,25 @@
     "media": null
   },
   {
-    "id": "9to5mac-2a0a22f2dbfeae7e",
+    "id": "conticgo-deb892166b082831",
     "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/22/gurman-iphone-duo-2-face-id/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-22T09:56:28.000Z",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/jornada-de-actualizacion-en-desarrollos-y-avances-tecnologicos/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-10-22T10:58:30.000Z",
     "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Gurman: iPhone Duo 2 prototypes with Face ID are already being tested inside Apple",
-        "summary": "The iPhone Duo comes out tomorrow but, given the strong pre-order demand, it is already looking to be a smash hit. And we are all expecting Apple to follow up with a second-generation model next fall, which means the company has to be already working on the next-gen hardware. On his Power On podcast , Mark Gurman reports that iPhone Duo 2 prototypes inside Apple include Face ID, with the Face ID sensor being integrated beneath the display on the outer screen. more…",
-        "body": "The iPhone Duo comes out tomorrow but, given the strong pre-order demand, it is already looking to be a smash hit. And we are all expecting Apple to follow up with a second-generation model next fall, which means the company has to be already working on the next-gen hardware.\n\nOn his Power On podcast , Mark Gurman reports that iPhone Duo 2 prototypes inside Apple include Face ID, with the Face ID sensor being integrated beneath the display on the outer screen.\n\nThe shift from Face ID to Touch ID on this phone was one of the biggest complaints raised by early iPhone Duo reviewers. 9to5Mac’s Chance Miller called it “the hardest thing to get used to” with the new foldable.\n\nFor the first-gen iPhone Duo, fitting Face ID inside the super-thin enclosure seemed to be the blocker. But Apple has been working on making Face ID smaller and less obtrusive, as seen with the under-display IR camera on the iPhone 18 Pro.\n\nWith iPhone Duo 2 and the twentieth anniversary iPhone Pro, we may see another evolution where both the IR camera and the flood illuminator go behind the screen, allowing the bezel or Dynamic Island cutout to be even smaller still.\n\nObviously, that just because they are testing the technology on iPhone Duo prototypes right now, it is not guaranteed that it will ship in next year’s revision. But it seems like that is what Apple is aiming for, so customers can probably expect it either next year or as part of the iPhone Duo 3, if development slips.\n\nOn the same episode, Gurman also says that employees have been exploring ways to also bring the Action button to a next-generation model of iPhone Duo as well, although he seems less confident about this.\n\nIt’s also unclear if Apple would remove the Touch ID sensor from the power button if it adds Face ID to the device, or whether it would keep both methods of biometrics allowing users to authenticate whether they are looking at the inner or outer display.\n\nMy favorite Apple gear and accessories"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-a24cefd261e4fe36",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/22/security-bite-podcast-who-is-your-ai-agent-really-working-for/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-22T09:00:00.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
+      "tecnologia-accesibilidad",
       "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
-      "en": {
-        "title": "Security Bite Podcast: Who is your AI agent really working for?",
-        "summary": "9to5Mac Security Bite is exclusively brought to you by Mosyle, the only Apple Unified Platform . Making Apple devices work-ready and enterprise-safe is all we do. Our unique integrated approach to management and security combines state-of-the-art Apple-specific security solutions for fully automated Hardening & Compliance, Next Generation EDR, AI-powered Zero Trust, and exclusive Privilege Management with the most powerful and modern Apple MDM on the market. The result is a totally automated Apple Unified Platform currently trusted by over 45,000 organizations to make millions of Apple devices work-ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple . This week, I welcome Ron Zayas to the Security Bite podcast . Ron is the CEO of Ironwall by Incogni, which helps public officials scrub and keep their personal information from data brokers and people-search sites. Earlier this year, he appeared on 60 Minutes to talk about exactly that. But in this episode, we discuss all things privacy around AI agents, and who yours is really working for. Enjoy. more…",
-        "body": "9to5Mac Security Bite is exclusively brought to you by Mosyle, the only Apple Unified Platform . Making Apple devices work-ready and enterprise-safe is all we do. Our unique integrated approach to management and security combines state-of-the-art Apple-specific security solutions for fully automated Hardening & Compliance, Next Generation EDR, AI-powered Zero Trust, and exclusive Privilege Management with the most powerful and modern Apple MDM on the market. The result is a totally automated Apple Unified Platform currently trusted by over 45,000 organizations to make millions of Apple devices work-ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple .\n\nThis week, I welcome Ron Zayas to the Security Bite podcast . Ron is the CEO of Ironwall by Incogni, which helps public officials scrub and keep their personal information from data brokers and people-search sites. Earlier this year, he appeared on 60 Minutes to talk about exactly that. But in this episode, we discuss all things privacy around AI agents, and who yours is really working for. Enjoy.\n\nSecurity Bite is 9to5Mac’s weekly deep dive into the world of Apple security. Each week, Arin Waichulis unpacks new threats, privacy concerns, vulnerabilities, and more, shaping an ecosystem of over 2 billion devices. Every other week on the Security Bite Podcast , he sits down with experts in the field to break down the most pressing topics ."
+      "es": {
+        "title": "Jornada de actualización en desarrollos y avances tecnológicos",
+        "summary": "La inteligencia artificial puede ayudarnos a crear documentos PDF de forma más sencilla y adaptada a nuestras necesidades. En la próxima Jornada de Actualización de Desarrollos y Avances Tecnológicos, aprenderemos cómo utilizar estas herramientas y qué instrucciones debemos darles para obtener los resultados que buscamos. La sesión tendrá lugar el martes 27 de octubre, a […] La entrada Jornada de actualización en desarrollos y avances tecnológicos se publicó primero en Conticgo .",
+        "body": "La inteligencia artificial puede ayudarnos a crear documentos PDF de forma más sencilla y adaptada a nuestras necesidades. En la próxima Jornada de Actualización de Desarrollos y Avances Tecnológicos , aprenderemos cómo utilizar estas herramientas y qué instrucciones debemos darles para obtener los resultados que buscamos.\n\nLa sesión tendrá lugar el martes 27 de octubre, a partir de las 11:00 horas , y será impartida por Iván García. La actividad se desarrollará en línea, a través de Jitsi Meeten: https://meet.jit.si/Saladegrupo\n\nDurante la sesión, conoceremos cómo generar documentos PDF utilizando herramientas de inteligencia artificial. También veremos qué pautas debemos seguir para orientar correctamente el proceso y conseguir documentos que respondan a una tarea específica.\n\nUno de los aspectos principales será el uso de prompts , es decir, las instrucciones que proporcionamos a la inteligencia artificial para indicarle qué necesitamos. Aprenderemos cómo redactarlos y qué información debemos incluir para obtener resultados más precisos y útiles.\n\nEsta jornada será una oportunidad para descubrir nuevas posibilidades de la inteligencia artificial y conocer recursos que pueden facilitarnos las tareas cotidianas.\n\n¡Os animamos a participar y a seguir descubriendo las posibilidades que nos ofrecen los avances tecnológicos!"
       }
     },
     "media": null
@@ -91,105 +329,9 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Fortnite is back on Apple's Australian App Store following court ruling",
+        "title": "Fortnite is coming back to Apple's Australian App Store following court ruling",
         "summary": "Fortnite is back on the App Store in Australia after a federal court ordered Apple to open its iOS ecosystem up to competition.",
         "body": "The ruling also forces Apple to allow alternative app stores and methods of payment.\n\nFortnite is back on the App Store in Australia after a federal court ordered Apple to open its iOS ecosystem up to competition. The judgement will also force Apple to permit alternative app stores without imposing conditions and allow developers to show alternative payment options, among other clauses. Apple disagreed with the court's findings and said it would challenge them.\n\n\"Big news: Fortnite is coming back to the App Store in Australia tomorrow!\" Epic Games wrote in a post on X . \"This is great news for developers worldwide and iOS users in Australia who will benefit from an open mobile app ecosystem.\"\n\nIn May 2026, Fortnite returned to iOS everywhere around the world except Australia because of its ongoing court battle there. Epic said at the time that Apple continued to enforce terms that Australian courts had found to be unlawful and was awaiting a final decision, which arrived yesterday.\n\nAustralian courts followed the EU's blueprint for forcing Apple to open up its ecosystem. At the same time, the ruling includes clauses that would preclude any of the \"malicious compliance\" Apple has been accused of in the past, like \"Core Technology\" or developer fees for using third-party app stores.\n\nAs a brief summary of the 1,104-paragraph filing, the court ordered Apple to open iOS to third party app stores and allow users to download apps directly from developers. Developers will be able to offer alternative payment systems (free from excessive Apple fees and conditions) and not forced to use Apple's in-app payment system. The App Store can't block developers from pointing users to outside apps to make purchases, and users must not find any \"friction\" when paying with alternative systems or installing apps from outside the App Store.\n\nApple was also ordered to pay 85 percent Epic's legal costs and must implement the orders by March 1, 2027 or send proof that it needs an extension by February 15, 2027. However, Apple said it disagreed with many parts of the decision and plans to appeal.\n\n\"We will request a stay and appeal the outcome to seek a resolution ​that ​respects our ⁠intellectual property and protects the safe, ​secure experience that consumers ​and ⁠developers expect from the App Store,\" an spokesperson ⁠told ​Reuters . Engadget has reached out to Epic and Apple for comment."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-326a497d7365b335",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/21/giant-iphone-duo-installations-spotted-at-apple-fifth-avenue-ahead-of-friday-launch/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T23:16:18.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Giant iPhone Duo installations spotted at Apple Fifth Avenue ahead of Friday launch",
-        "summary": "While the iPhone Duo doesn’t launch until Friday, preparations are already underway at Apple’s flagship Fifth Avenue store in New York for the big day. Here are the details. more…",
-        "body": "While the iPhone Duo doesn’t launch until Friday, preparations are already underway at Apple’s flagship Fifth Avenue store in New York for the big day. Here are the details.\n\nAs spotted by @LChenlz on X , Apple has begun setting up several large, rectangular structures around the store’s iconic glass cube entrance.\n\nThe installations are still concealed beneath black cloth and white protective wrapping, but their shapes strongly suggest they could be giant iPhone Duo models.\n\nIn recent years, Apple has celebrated new iPhone launches with special displays and decorations at its flagship stores.\n\nIn 2024, the company illuminated Fifth Avenue’s glass cube in Apple Intelligence colors for the iPhone 16 launch, while last year it installed giant “Pro” and “Air” displays in several locations.\n\nMore recently, Apple decorated the Fifth Avenue cube in burgundy, silver, and blue to celebrate the iPhone 18 Pro launch last month.\n\nInterestingly, there doesn’t appear to be a line outside Apple Fifth Avenue just yet, although customers have reportedly already started lining up at other stores.\n\nAs 9to5Mac covered earlier today , Apple has confirmed that its US retail stores will have a limited number of iPhone Duo units available for walk-in customers on Friday, while stores in several other markets, including mainland China, Japan, and France, will only offer in-store pickup for orders placed online.\n\nWhile Friday’s launch is still a couple of days away, check out 9to5Mac’s in-depth iPhone Duo review , which went live earlier today."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-30a013a594c17391",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/21/blackstones-jas-khaira-says-fears-over-ai-buildout-debt-are-overblown/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T22:51:22.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Blackstone’s Jas Khaira says fears over AI-buildout debt are overblown",
-        "summary": "Blackstone’s AI head on why the PE giant isn't panicked by market jitters.",
-        "body": "Private equity giant Blackstone is putting itself at the center of the AI boom, firm veteran Jas Khaira discussed last week on stage at TechCrunch Disrupt.\n\nIt is writing checks via various strategies, ranging from offering massive loans to data centers to investing in frontier AI models and applications.\n\nEarlier this year, the firm launched Blackstone N1 (BXN1), a San Francisco-based central hub for its AI initiatives. The group is led by Khaira, who relocated from New York to be at the epicenter of AI.\n\nUnlike earlier tech cycles such as mobile or SaaS, which allowed companies to reach significant scale with moderate capital, the transition to AI requires staggering amounts of investment. That need for capital is precisely why Blackstone, with its $1.3 trillion in assets under management, could play such a critical role in this tech shift.\n\nKhaira emphasized that Blackstone sets itself apart from traditional venture capitalists through its focus on compute financing and its ability to offer flexible capital structures, ranging from debt to equity. And it has been investing aggressively.\n\n“We’re the largest owner of compute outside of the hyperscalers today, whether it’s investments in neo clouds, investments in data centers, and being able to use that compute strategically to support companies,” Khaira said.\n\nFor instance, BXN1 played a key role in several compute-related deals, among them Crux AI, a neocloud launched in partnership with Google to commercialize its custom TPUs, to which Blackstone committed $5 billion as an investor. It also backed four-year-old Etched , a chip startup whose rapid development has caught investor attention. Neoclouds are cloud providers that rent out AI GPU infrastructure.\n\nBlackstone pioneered a financing structure that allowed it to lend massive sums to venture-backed cloud neoclouds by analyzing both committed customer contracts and using GPUs pledged as collateral.\n\nBlackstone’s first such deal came in 2023 with CoreWeave, shortly after that neocloud saw demand explode following the launch of ChatGPT. Despite having only “30 million of revenue and minimal profitability” at that time, according to Khaira, CoreWeave approached Blackstone for a $2.3 billion loan.\n\nCoreWeave was borrowing against the considerable value of its large collection of Nvidia GPUs, with Nvidia also an investor. Blackstone also grew more comfortable with the loan because CoreWeave had contracts with blue-chip customers like Microsoft.\n\nThat transaction quickly became the financing model for how Blackstone and other credit institutions provided billions in follow-on debt to CoreWeave and rival neoclouds.\n\n“One of the primary things that we’re looking to is the nature of the customer. And if the customer is an investment-grade customer — let’s say it’s Microsoft or let’s say it’s Meta — the risk gets priced relative to that customer,” Khaira said.\n\nBuilding on its success with CoreWeave, Blackstone struck other neocloud financing deals, including co-leading alongside Coatue a $10 billion credit facility for Australian GPU provider Firmus earlier this year.\n\nKhaira acknowledged that in recent weeks, the large debt burdens accumulated by these companies and other neocloud operators have begun to raise red flags. Coreweave’s debt alone has since ballooned to about $50 billion , causing Altimeter Capital founder Brad Gerstner to note in a recent CNBC interview, “The collateral that CoreWeave is putting up which is really only GPUs is not good enough anymore. They used that in the past to get cheap debt.”\n\nKhaira said that on the credit side, the market jitters stem from a combination of factors. Interest rates ticked up in September, and hotter-than-expected inflation signals that borrowing costs may keep climbing. The flood of AI infrastructure debt offerings isn’t helping either.\n\n“We’re also seeing higher credit spreads,” Khaira said, explaining that lenders are charging higher premiums on top of already higher base interest rates to finance the AI buildout. “The cost of capital to price in debt for a Meta or a Microsoft has widened out,” he added, pointing out that even tech giants with massive balance sheets and solid earnings are paying more to borrow.\n\nConcerns about the rising cost of debt have spilled into the stock market. Shares of CoreWeave dropped over 20% in recent days, while Firmus scrapped its planned IPO on the Australian Securities Exchange at a target valuation of roughly $30 billion.\n\n“Ultimately, the market wasn’t there at that valuation, and so I think as a result, that deal didn’t get done,” Khaira said about Firmus’ cancelled listing.\n\n“The market is thinking what is the right price for neoclouds, what is the right price for these businesses in this moment when interest rates are moving up,” he said.\n\nDespite those pressures on some infrastructure providers, AI companies simply can’t get enough compute to power their models. Their appetite continues to drive data center buildout.\n\nKhaira downplayed worries of doom-mongers that the massive accumulation of AI infrastructure debt could lead to a widespread credit crisis, or worse, crash the economy altogether. “This doesn’t feel like something where you’ve got 2008 banks that are shaky credits,” he said.\n\nInstead, he pointed out that because the vast majority of data centers are built for hyperscalers, the debt financing them is ultimately backed “by the most creditworthy companies in the world.”\n\nBeyond funding data centers, Blackstone is helping companies adopt AI through a $1.5 billion joint venture called “Ode with Anthropic,” formed alongside Anthropic and Hellman & Friedman this year. Ode supplies forward-deployed engineers to help companies adopt AI and integrate it into their operations, starting with Blackstone’s 280 portfolio companies.\n\nWhen asked if Blackstone-owned companies are seeing tangible gains from AI, Khaira conceded that “there is definitely ROI, but it is uneven.” He described technology adoption as something that could move in a “sawtooth-type pattern,” which, to skeptics, can look like an oversupply of compute before adoption catches up."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-08c56c301312174b",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/21/meta-wants-to-pay-for-its-broad-ai-buildout-with-a-newly-created-class-of-stock/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T22:45:34.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta wants to pay for its broad AI buildout with a newly created class of stock",
-        "summary": "The social media giant is planning a new stock strategy to help power its broad investments in AI models and services.",
-        "body": "Meta is making a big push into AI, and it’s creating a new kind of stock that could help pay for it.\n\nOn Wednesday, as the company reported its third-quarter earnings, Semafor reported the company might issue non-voting stock, meaning shares that don’t give their owners a vote on company decisions, to help fund its push into artificial intelligence.\n\nDuring Meta’s earnings call, the company confirmed that reporting. Meta’s chief financial officer, Susan Li, said the company plans to “create a new class of non-voting capital stock, which will be distributed to all existing shareholders through a stock dividend.”\n\nLi later added that the company “created this new class of shares with the purpose of creating a publicly traded non-voting stock usable for capital raising, employee compensation, acquisitions, and other general corporate purposes while preserving the voting power of existing Class A and B shareholders.”\n\nThe shares will allow the company to maintain its current “founder-led structure,” she added. They will also expand its “funding tools and give us flexibility to invest behind the unprecedented momentum we’re seeing across every part of our business, driven by AI.”\n\nMeta’s earnings were strong this past quarter, beating Wall Street expectations. The company made $64 billion in revenue, a jump of 26% from a year earlier. Its costs and expenses also rose too, however, by 68% year over year.\n\nReality Labs, the division responsible for Meta’s AR glasses, VR headsets, and VR software, continues to lose money, though less than it used to. The company said in its earnings report that it expects the division’s losses to shrink from its 2025 levels to between $18 billion and $19 billion.\n\nMeta has made a big push into AI over the past year. The company has released several AI models, including Muse Spark and Muse Glimmer earlier this year. In recent weeks, it added Muse Wonder and Muse Spark Open, an open-weight model whose underlying parameters are publicly available for outsiders to use and build on. Meta also launched a coding agent for software developers called Muse Code. At its Meta Connect event this year, the company announced a new line of cute and cuddly avatars for AI assistant, Meta Muse, in a push to make its AI services more relatable (and also meme-able ).\n\nAs far as can be discerned, those AI products are doing well. “In just a month and a half, more than 10 million people in the U.S. and Canada have set up Muse personal agents,” CEO Mark Zuckerberg said during Wednesday’s earnings call. “Growth continues to be strong, and we have been number one in the App Store almost every day.”\n\n“Now that Muse has clear product-market fit, we are entering a new phase and a more operational phase that is focused on scaling it,” Zuckerberg added, claiming later that the company expects to grow the product’s appeal to eventually “serve billions of people.”\n\nThe company also noted that certain storm clouds linger on the horizon in the form of ongoing regulatory and legal issues. “We continue to monitor active legal and regulatory matters that could significantly impact our business and financial results,” said Li. “For example, we continue to see scrutiny on youth-related issues in several markets, and have a number of youth-related trials scheduled in the coming months in the United States.”"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-960f5d2cf2e2c9bb",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1015958/data-center-pollution-rising-report",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T22:33:44.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Data centers could erase decades of air quality gains",
-        "summary": "A rush of new data centers could bring air pollution roaring back to levels not seen since the 2000s in Texas, which has become ground zero for the physical infrastructure behind generative AI. New and proposed data centers are demanding a tremendous amount of electricity. How developers and utilities meet that demand - with gas […]",
-        "body": "A rush of new data centers could bring air pollution roaring back to levels not seen since the 2000s in Texas, which has become ground zero for the physical infrastructure behind generative AI.\n\nNew and proposed data centers are demanding a tremendous amount of electricity. How developers and utilities meet that demand - with gas turbines or renewable energy - will determine just how dirty things will get. So far, though, things are looking grim.\n\nTech companies and data center developers are devising new ways to get enough electricity, including building out their own power sources. But if all planned data center projects were to plug into …\n\nRead the full story at The Verge."
       }
     },
     "media": null
@@ -214,125 +356,6 @@
         "title": "Enterprises keep buying software upgrades that IT thinks will make things worse",
         "summary": "Survey of 2,018 IT heads at big firms points to a lack of leverage.",
         "body": "Enterprise-sized businesses spend, on average, 28 percent of their software budgets on unwanted upgrades, migrations, and licensing changes. Often, those firms' IT heads think those changes are detrimental.\n\nThose results are according to a survey of 2,018 chief information officers and senior IT decision-makers at companies with at least 10,000 employees that Origina commissioned for its report, “ The Software Tax .” About half of the respondents (1,011) are from the US, and the rest are from the United Kingdom. All respondents worked at companies with at least $1 billion in annual revenue.\n\nKeep in mind that Origina provides maintenance for various enterprise software. Its report points to independent software maintenance as a way for IT leaders to regain control over software budgets, illustrating its potential bias. A third-party research consultancy, Censuswide , conducted the survey.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-1279991b8aee1442",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1015799/meta-shares-class-ai-q3-2026-earnings",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T21:30:02.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta to create a new class of shares to fund AI push",
-        "summary": "Meta says it's issuing a new class of shares to fund its AI initiatives. As part of its third-quarter earnings report released on Wednesday, the company says the non-voting stock will also go toward potential acquisitions and employee compensation, with trading beginning in 2027. \"The scale of investment required to compete, sustain growth, expand infrastructure, […]",
-        "body": "Meta says it's issuing a new class of shares to fund its AI initiatives. As part of its third-quarter earnings report released on Wednesday , the company says the non-voting stock will also go toward potential acquisitions and employee compensation, with trading beginning in 2027.\n\n\"The scale of investment required to compete, sustain growth, expand infrastructure, and pursue new strategic initiatives amidst the AI transformation taking place in the industry is significant,\" Meta says in the press release. Susan Li, Meta's chief financial officer, added during an earnings call that the new class of shares will \"expand our funding tools and gi …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-478cd3c5291ea929",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/21/meta-says-muse-has-over-10m-users-with-shopping-a-top-activity/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T21:14:19.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta says Muse has over 10M users, with shopping a top activity",
-        "summary": "Meta Muse users are adopting the app for shopping and personal productivity, the company said during its Q3 earnings call. The AI app now has over 10M users.",
-        "body": "Meta said during its third-quarter earnings call on Wednesday that its AI app Muse has been adopted by more than 10 million users, confirming estimates released earlier this week by market intelligence firm Sensor Tower.\n\nBut it is how people are using it, and how much they’re spending that has caught CEO Mark Zuckerberg’s attention. Zuckerberg said about 25% of people who set up Muse now use it daily, helping improve retention.\n\nHe also shared that over a quarter of Muse’s engaged users who were shopping via the AI agent, had an average purchase size of over $200, which was surprising even to industry insiders.\n\n“Plaid told us that they hadn’t seen activity like they’re seeing with their connector on any other service before,” Zuckerberg said, referring to the financial technology company that connects payment apps to customers’ bank accounts. Muse uses Plaid’s connector to enable agentic shopping.\n\nBeyond shopping, Zuckerberg said other popular uses for Muse include personal productivity tasks, such as connecting the AI agent to users’ email or calendars. The exec stressed that this indicates users trusted Muse’s security setup, which includes a feature called “Muse Secure VM” designed to protect their data and privacy. He also mentioned that the forthcoming “Muse Confidential VM” will prevent even Meta from seeing users’ content.\n\nNow that Muse has achieved “product-market fit,” Zuckerberg said Meta’s focus will shift to scaling the AI agent, increasing revenue, and optimizing its compute costs. Remarkably, the tech company is forecasting that Muse will eventually bring in more revenue per user than its “family of apps” users do today — meaning its users on Facebook, Instagram, WhatsApp, and Messenger. Currently, that figure is around “several hundreds of dollars annually,” Zuckerberg said.\n\nMeta has said it ultimately intends to monetize Muse by keeping it free for most users, but keeping a percentage of the commerce taking place on the platform. Power users who want access to the most advanced AI models or more tokens will also have to pay.\n\nZuckerberg also noted that Meta believes Muse will be profitable after it scales.\n\n“On the compute side, we are building out the capacity to serve more than a billion people over the next few years,” he told bankers and analysts on the Q3 earnings call. “In the near term, Muse is very compute-intensive to run, but we expect to improve its cost efficiency by more than 10x in the next year, which will enable it to be profitable once the revenue lines are at scale.”\n\nMuse will also play a central role in Meta’s smart glasses strategy. Reality Labs, the division responsible for smart glasses, VR, and the metaverse, is still losing billions. However, the division’s losses are expected to improve from $19.1 billion in 2025 to $15 billion this year.\n\nBeyond scaling and supporting its hardware strategy, Zuckerberg teased the company’s plans for something he called the “Muse network.” He described this as taking Muse from a “single-player game” to one where “your Muses can work with your friends’ and your families’ [Muses].”\n\n“And if you want to buy something, it’s not just navigating to that business’s website; it’s talking to their agent,” he added."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-1201f26ccb73e440",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2293646/claude-duet-is-anthropics-answer-to-meta-muse-and-openai-dots/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T21:03:19.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Claude Duet is Anthropic's answer to Meta Muse and OpenAI Dots",
-        "summary": "Anthropic subscribers in the US can join a waitlist to try the company's new agent.",
-        "body": "Anthropic subscribers in the US can join a waitlist to try the new agent.\n\nAnthropic is late to the party, but as of today the company has a personal agent to match the likes of Meta Muse and OpenAI Dots . As part of a new \"research\" preview, the company on Wednesday announced Claude Duet . \"It comes to you with what needs your attention, completes tasks you ask of it, keeps working even when you step away, and checks with you before it acts on your behalf,\" Anthropic says of Duet. For now, you'll need to join a waitlist that's only open to Claude subscribers in the US to try the new tool.\n\nLike OpenAI , Anthropic is billing Duet as a proactive agent. Each day, it will generate a short briefing with a list of action items from your connected apps. \"You can also hand it tasks of all shapes — from simple administrative tasks of scheduling meetings to more complex ones, such as building dashboards with dozens of tools, creating financial or sales forecasts, prototyping, and building web apps,\" the company writes, promising Duet will only message you when something requires your attention.\n\nWhile Duet runs on Opus 5.5 , one of the models Anthropic offers through Claude, the company is releasing standalone Android and iOS apps for people to use Duet. The agent doesn't require you to have a Claude session open at all times. It runs on its own virtual machine where it can complete tasks in the background.\n\nNotably, Anthropic says subscribers of its $20 per month Pro plan will get access once the agent rolls out in general availability. That sets Duet apart from Dots , which are currently only available to OpenAI's Pro tier subscribers. Those plans start at $100 per month. Duet shares usage with all your other Claude tools, including Code, which sounds like a recipe for the new agent to blow through your rate limits, but Anthropic at least appears to be thinking ahead.\n\n\"Duet checks your connected accounts every few hours, because checking nonstop would use up your plan's limits much faster. We're continuing to test its judgment about when to message you, and we'll keep tuning it based on what testers tell us,\" the company says, adding users will be able to set how frequently Duet messages them and in relation to what topics.\n\nOn the security side of things, Anthropic says Duet incorporates a new classifier and system prompt designed to prevent it from leaking sensitive information. According to Anthropic, Duet will never directly see your passwords or sign-in tokens, and information that might relate to your health or personal finances is only let through if you explicitly tell Duet to share it. Anthropic said it would have more information about Duet's safety protections to share in the coming days.\n\nOf course, how much you'll get out of Duet will depend on just how trusting you are of Anthropic. Context is everything to AI models, and for some, sharing their entire digital life with an AI agent, is just too much to ask."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-b5983fbb77a0f7fa",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2293625/government-websites-in-the-eu-and-canada-taken-offline-over-php-vulnerability/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T20:56:47.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Government websites in the EU and Canada taken offline over PHP vulnerability",
-        "summary": "All websites using PHP should update to the latest security patch.",
-        "body": "All websites using the common programming language should update to the latest security patch.\n\nOne of the two major issues impacting web security this morning has had a ripple effect. In the wake of an announcement from the PHP Foundation that it was issuing a security release to patch two critical vulnerabilities, several government websites in the EU and Canada were taken offline as a preventive measure.\n\nReuters reported that governments in the Netherlands, Denmark, France and Finland took down at least some websites as a preventive measure. Meanwhile Evan Solomon, Canada's Minister of Artificial Intelligence and Digital Innovation, posted on X about the decision to temporarily go offline, while seconding the call for any website operators using PHP to update as soon as possible.\n\nPHP is a programming language for websites. It's used in several major web publishing services, including WordPress and Drupal. Earlier today, news broke that PHP's software had contained major vulnerabilities for years and they were only just uncovered thanks to AI tools being used by cybersecurity firms. Those flaws could allow a hacker to infiltrate a system running PHP, potentially taking control of it.\n\n\"All servers using any version of PHP released in the last 20 years will be vulnerable,\" said Tiffany Farriss, interim CEO of the ​Drupal Association. \"This issue impacts the majority of the Internet.\"\n\nThus far, the main response from the US government is a missive from the Cybersecurity & Infrastructure Security Agency encouraging organizations to update to the new patch from the PHP Foundation. In a statement to given to Reuters , the White House said it was made aware of the issue on Friday."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-7941ba0f9e34cc10",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1015906/php2shell-vulnerability-october-2026",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T20:36:56.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "PHP: The three letters that shut down sites all over the internet today",
-        "summary": "Two bugs found with AI are behind major issues today for 4chan, DeviantArt, Wikipedia, and the blog where the bar around the corner posts pictures of people's dogs. The \"critical vulnerabilities\" were discovered in the PHP programming language, which underpins much of the internet, including any site built on WordPress. But it's far bigger than […]",
-        "body": "Two bugs found with AI are behind major issues today for 4chan, DeviantArt, Wikipedia , and the blog where the bar around the corner posts pictures of people's dogs. The \"critical vulnerabilities\" were discovered in the PHP programming language, which underpins much of the internet, including any site built on WordPress. But it's far bigger than that. Some Dutch and Finnish government agencies took their sites down as a precaution. The NSA Cybersecurity account on X recommended that organizations take their systems offline if \"an immediate update is not feasible,\" as did the UK's National Cyber Security Center . Even Pok&eacute;mon Home and Pok&eacute;mon C …\n\nRead the full story at The Verge."
       }
     },
     "media": null
@@ -1073,31 +1096,6 @@
         "title": "Paperback",
         "summary": "Paperback is a fast, fully accessible reader for ebooks, documents and audio books. It opens over twenty formats and speaks sixteen languages. Opening documents: Use…",
         "body": "Published 9 October 2026 by Quin\n\nPaperback is a fast, fully accessible reader for ebooks, documents and audio books. It opens over twenty formats and speaks sixteen languages.\n\nOpening documents:\n\nReading and listening:\n\nPaperback has two ways to read a document. In text mode, you read the text with your screen reader. In read aloud mode, Paperback reads the text to you with the voice you pick in Settings, and keeps going in the background and from the lock screen. Switch between them from the More Options menu. Audio books, like DAISY, M4B, and MP3 books, play their own recording instead.\n\nThe reading bar:\n\nThe bar at the bottom of the screen has, from left to right:\n\nYou can also swipe up or down on the play button to move by the navigation unit, without reaching for the previous and next buttons. If that is all you use, the Hide previous and next buttons setting takes them out of your screen reader’s way. The Swipe up moves forward setting picks which way a swipe goes.\n\nMore options\n\nThe More Options menu is where everything else lives.\n\nKeyboards and headsets:\n\nWith a keyboard, the desktop shortcuts for opening books, recent documents, Find, Go To, the table of contents, word count, document info, export, and the sleep timer all work. So do the single-letter keys for moving by heading, page, link, and the rest, and Space plays and pauses. A headset button plays and pauses with one press, moves forward with two, and goes back with three.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nPaperback was designed with screen readers, and works flawlessly with both TalkBack and Backtalk.\n\nLast Tested App version and Android version:\n\n1.0.0, pixel 9A running Android 17\n\n★★★★★ 5.0 / 5 based on 1 rating\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "conticgo-ad3e04479c55ad80",
-    "type": "news",
-    "sourceId": "conticgo",
-    "sourceName": "Conticgo",
-    "sourceUrl": "https://conticgo.net/",
-    "originalUrl": "https://conticgo.net/ia-visual-directamente-en-el-movil-hacia-una-asistencia-mas-privada-y-sin-depender-de-la-nube/",
-    "originalLanguage": "es",
-    "publishedAt": "2026-10-09T06:30:24.000Z",
-    "categories": [
-      "tecnologia-accesibilidad",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "IA visual directamente en el móvil: hacia una asistencia más privada y sin depender de la nube",
-        "summary": "La inteligencia artificial visual puede convertirse en una herramienta cada vez más útil para las personas ciegas o con baja visión. Actualmente, muchas aplicaciones utilizan la cámara del teléfono para describir imágenes, reconocer objetos, leer textos o responder preguntas sobre lo que aparece delante del usuario. Sin embargo, habitualmente este procesamiento depende de servicios en […] La entrada IA visual directamente en el móvil: hacia una asistencia más privada y sin depender de la nube se publicó primero en Conticgo .",
-        "body": "La inteligencia artificial visual puede convertirse en una herramienta cada vez más útil para las personas ciegas o con baja visión. Actualmente, muchas aplicaciones utilizan la cámara del teléfono para describir imágenes, reconocer objetos, leer textos o responder preguntas sobre lo que aparece delante del usuario. Sin embargo, habitualmente este procesamiento depende de servicios en la nube.\n\nEn 2026, Envision, Arm y Google están explorando una alternativa: ejecutar modelos de inteligencia artificial visual directamente en el propio teléfono . El objetivo es que determinadas funciones puedan realizarse localmente, sin necesidad de enviar la imagen a servidores externos.\n\nLa tecnología se basa en Gemma 4 , la nueva familia de modelos de inteligencia artificial de Google. Entre sus capacidades se encuentra la comprensión de imágenes, que permite realizar tareas como describir una escena, reconocer elementos de una imagen, responder preguntas sobre su contenido o realizar razonamiento visual. Google indica que determinados modelos de Gemma 4 están diseñados para ejecutarse directamente en dispositivos móviles y otros equipos de computación local.\n\nEn colaboración con Arm, Envision ha probado esta tecnología para trasladar parte de sus funciones de comprensión visual al propio teléfono. En las pruebas descritas por Arm, el usuario puede capturar una fotografía y recibir una descripción detallada de la escena sin necesidad de enviar esa imagen a la nube ni disponer de conexión de red .\n\nLa colaboración aprovecha, además, las capacidades de los procesadores Arm y de Arm Scalable Matrix Extension 2 (SME2) , unas instrucciones diseñadas para acelerar determinadas operaciones relacionadas con inteligencia artificial. Según Arm, las pruebas iniciales con Gemma 4 muestran mejoras de rendimiento al ejecutar estas cargas de trabajo en procesadores Arm compatibles.\n\nEl funcionamiento local de la IA visual podría tener varias ventajas importantes para las tecnologías de apoyo.\n\nMayor privacidad. Si una imagen puede analizarse directamente en el teléfono, no es necesario enviar esa fotografía a un servidor externo para realizar el procesamiento. Esto puede ser especialmente relevante cuando la cámara está captando personas, documentos, espacios privados u otra información sensible.\n\nMenor dependencia de Internet. Una IA que funciona en el propio dispositivo puede seguir ofreciendo determinadas funciones incluso cuando no existe conexión a Internet. Para una persona ciega o con baja visión, esto puede resultar especialmente interesante cuando utiliza herramientas de descripción visual fuera de casa o en lugares con una cobertura deficiente.\n\nMenor latencia. El procesamiento local también puede reducir el tiempo necesario para obtener una respuesta, ya que la imagen no tiene que viajar hasta un servidor y regresar con el resultado. Arm señala precisamente una menor latencia y una mayor disponibilidad como algunos de los posibles beneficios de trasladar la inteligencia artificial al dispositivo.\n\nLa propuesta resulta especialmente interesante porque no se limita a obtener una descripción automática de una fotografía.\n\nEnvision plantea utilizar esta tecnología para funciones como la descripción de escenas y las preguntas y respuestas sobre información visual . En la práctica, una persona podría apuntar con la cámara del teléfono hacia un entorno, obtener una descripción y realizar posteriormente preguntas relacionadas con aquello que aparece en la imagen.\n\nEste planteamiento parte de tecnologías que ya existen en Envision. Su aplicación permite actualmente utilizar la cámara del teléfono para describir escenas, reconocer objetos y responder preguntas sobre textos o imágenes mediante su asistente de inteligencia artificial. La diferencia de esta nueva línea de investigación está en dónde se realiza el procesamiento : el objetivo es llevar una parte cada vez mayor de esa comprensión visual al propio dispositivo.\n\nEs importante aclarar que no estamos ante el lanzamiento de un nuevo producto de Envision que ya ofrezca todas estas funciones de forma general y completamente offline .\n\nEnvision, Arm y Google están trabajando en esta dirección y han mostrado un prototipo basado en Gemma 4 ejecutándose localmente en hardware Arm. Por tanto, se trata de una línea de desarrollo tecnológico , no de una característica que debamos considerar actualmente disponible en todos los teléfonos o en todas las funciones de Envision.\n\nEl avance, sin embargo, apunta hacia un cambio interesante en la evolución de las tecnologías de asistencia: que el teléfono no tenga que enviar continuamente lo que está viendo a la nube para poder comprenderlo .\n\nPara las personas ciegas y con baja visión, esto podría traducirse en herramientas de asistencia visual más rápidas, privadas y capaces de funcionar en más situaciones, incluso cuando no exista conexión a Internet.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuentes: Envision , Arm , Google deepmind ."
       }
     },
     "media": null

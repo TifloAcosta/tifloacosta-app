@@ -60,6 +60,18 @@ window.TIFLO_RESOURCES = [
     "newsDate": "2026-09-23T08:47:29Z"
   },
   {
+    "id": "es-pildoras-2026-23",
+    "lang": "es",
+    "category": "Píldoras",
+    "year": 2026,
+    "title": "Píldoras 23",
+    "searchText": "Píldoras tecnológicas 23 2026 iOS 27.2 iCloud JAWS",
+    "url": "https://tifloacosta.com/docs/es/pildoras/2026/pildoras-23-2026.html",
+    "openUrl": "https://tifloacosta.com/docs/es/pildoras/2026/pildoras-23-2026.html",
+    "new": true,
+    "newsDate": "2026-10-22T07:00:00Z"
+  },
+  {
     "id": "es-pildoras-2026-22",
     "lang": "es",
     "category": "Píldoras",
@@ -664,6 +676,18 @@ window.TIFLO_RESOURCES = [
     "url": "https://tifloacosta.com/docs/es/pildoras/2024/pildoras-24-febrero-2024.html",
     "openUrl": "https://tifloacosta.com/docs/es/pildoras/2024/pildoras-24-febrero-2024.html",
     "new": false
+  },
+  {
+    "id": "en-tech-pills-23-2026",
+    "lang": "en",
+    "category": "Pills",
+    "year": 2026,
+    "title": "Tech Pills 23",
+    "searchText": "Technology Pills Tech Pills 23 2026 iOS 27.2 iCloud JAWS",
+    "url": "https://tifloacosta.com/docs/en/technology-pills-23-2026.html",
+    "openUrl": "https://tifloacosta.com/docs/en/technology-pills-23-2026.html",
+    "new": true,
+    "newsDate": "2026-10-22T07:00:00Z"
   },
   {
     "id": "en-tech-pills-22-2026",

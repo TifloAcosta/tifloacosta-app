@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-22T06:37:11.260Z",
+  "generatedAt": "2026-10-22T08:22:00.000Z",
   "resources": [
     {
       "kind": "resource",
@@ -67,6 +67,17 @@
       "openUrl": "https://tifloacosta.com/docs/es/reader-1wfRfY4IumYSh7At5iaoizBZTSoQhKhdc.html",
       "isNew": true,
       "newsDate": "2026-09-23T08:47:29Z"
+    },
+    {
+      "kind": "resource",
+      "id": "es-pildoras-2026-23",
+      "lang": "es",
+      "category": "Píldoras",
+      "title": "Píldoras 23",
+      "url": "https://tifloacosta.com/docs/es/pildoras/2026/pildoras-23-2026.html",
+      "openUrl": "https://tifloacosta.com/docs/es/pildoras/2026/pildoras-23-2026.html",
+      "isNew": true,
+      "newsDate": "2026-10-22T07:00:00Z"
     },
     {
       "kind": "resource",
@@ -618,6 +629,17 @@
       "url": "https://tifloacosta.com/docs/es/pildoras/2024/pildoras-24-febrero-2024.html",
       "openUrl": "https://tifloacosta.com/docs/es/pildoras/2024/pildoras-24-febrero-2024.html",
       "isNew": false
+    },
+    {
+      "kind": "resource",
+      "id": "en-tech-pills-23-2026",
+      "lang": "en",
+      "category": "Pills",
+      "title": "Tech Pills 23",
+      "url": "https://tifloacosta.com/docs/en/technology-pills-23-2026.html",
+      "openUrl": "https://tifloacosta.com/docs/en/technology-pills-23-2026.html",
+      "isNew": true,
+      "newsDate": "2026-10-22T07:00:00Z"
     },
     {
       "kind": "resource",

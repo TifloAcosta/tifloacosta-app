@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-22T10:15:29.670Z",
+  "generatedAt": "2026-10-22T12:29:48.626Z",
   "resources": [
     {
       "kind": "resource",
@@ -5468,6 +5468,23 @@
     }
   ],
   "news": [
+    {
+      "kind": "news",
+      "id": "cti-once-f841f3b33b600d5e:es",
+      "sourceId": "cti-once-f841f3b33b600d5e",
+      "lang": "es",
+      "title": "Modos-ON ¡Ya disponible el informe de accesibilidad del videojuego Despertar de Endor: Roguelite tanto para iOS como para Android!",
+      "summary": "Desde el Centro de Tiflotecnología e Innovación de la ONCE (CTI) se ha realizado un análisis detallado evaluando sus distintos apartados y su impacto en la experiencia de juego.",
+      "body": "Desde el Centro de Tiflotecnología e Innovación de la ONCE (CTI) se ha realizado un análisis detallado evaluando sus distintos apartados y su impacto en la experiencia de juego.\n\nEn los siguientes enlaces enlace encontrarás todo lo relacionado con la accesibilidad de este videojuego en los diferentes sistemas operativos:",
+      "sourceName": "CTI de la ONCE",
+      "originalUrl": "https://cti.once.es/noticias/ya-disponible-el-informe-de-accesibilidad-del-videojuego-despertar-de-endor-roguelite-tanto-para-ios-como-para-android",
+      "publishedAt": "2026-10-22T12:00:00.000Z",
+      "categories": [
+        "tecnologia-accesibilidad",
+        "apple",
+        "android"
+      ]
+    },
     {
       "kind": "news",
       "id": "9to5mac-2a0a22f2dbfeae7e:en",

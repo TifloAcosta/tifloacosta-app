@@ -1,5 +1,22 @@
 [
   {
+    "id": "imanu-mx:https://www.youtube.com/watch?v=ka4_JHyyer4",
+    "type": "video",
+    "section": "technology",
+    "sourceId": "imanu-mx",
+    "sourceName": "iManu Mx",
+    "sourceUrl": "https://www.youtube.com/@imanumx",
+    "originalUrl": "https://www.youtube.com/watch?v=ka4_JHyyer4",
+    "originalLanguage": "es",
+    "publishedAt": "2026-10-22T02:32:35.000Z",
+    "title": "Pocos en tienda y entrega hasta enero: iPhone Duo en México 🏬",
+    "summary": "",
+    "mediaUrl": null,
+    "embedUrl": "https://www.youtube.com/embed/ka4_JHyyer4",
+    "platform": "youtube",
+    "categories": []
+  },
+  {
     "id": "marcianotech:https://www.youtube.com/watch?v=uGdn68Q9Lpc",
     "type": "video",
     "section": "technology",
@@ -591,23 +608,6 @@
     "summary": "",
     "mediaUrl": null,
     "embedUrl": "https://www.youtube.com/embed/fkfmPULSAQ0",
-    "platform": "youtube",
-    "categories": []
-  },
-  {
-    "id": "imanu-mx:https://www.youtube.com/watch?v=NK1scWM1QjI",
-    "type": "video",
-    "section": "technology",
-    "sourceId": "imanu-mx",
-    "sourceName": "iManu Mx",
-    "sourceUrl": "https://www.youtube.com/@imanumx",
-    "originalUrl": "https://www.youtube.com/watch?v=NK1scWM1QjI",
-    "originalLanguage": "es",
-    "publishedAt": "2026-10-19T18:28:35.000Z",
-    "title": "Siri AI en español hoy, sin esperar a la final (iOS 27.2)",
-    "summary": "",
-    "mediaUrl": null,
-    "embedUrl": "https://www.youtube.com/embed/NK1scWM1QjI",
     "platform": "youtube",
     "categories": []
   },

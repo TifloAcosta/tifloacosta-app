@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-22T17:39:17.366Z",
+  "generatedAt": "2026-10-22T20:10:32.981Z",
   "resources": [
     {
       "kind": "resource",
@@ -5470,15 +5470,139 @@
   "news": [
     {
       "kind": "news",
-      "id": "the-verge-d5542cec6a9b7daa:en",
-      "sourceId": "the-verge-d5542cec6a9b7daa",
+      "id": "techcrunch-55ce190c2a2e8a59:en",
+      "sourceId": "techcrunch-55ce190c2a2e8a59",
       "lang": "en",
-      "title": "Apple’s Magic Keyboards for iPad are about half off, with a small catch",
-      "summary": "You can outfit your iPad Air or iPad Pro with one of Apple’s slick Magic Keyboards for considerably less than the accessory usually costs at Woot. I won’t bury the catch I teased in the headline; These cases have a 90-day warranty via Woot, and aren’t eligible for AppleCare. That said, Woot says they’re in […]",
-      "body": "You can outfit your iPad Air or iPad Pro with one of Apple’s slick Magic Keyboards for considerably less than the accessory usually costs at Woot . I won’t bury the catch I teased in the headline; These cases have a 90-day warranty via Woot, and aren’t eligible for AppleCare. That said, Woot says they’re in “pristine condition, with essentially no visible signs of use.” If you’re still interested, the savings should be worth it.\n\nThe most affordable option is the Magic Keyboard for the 13-inch iPad Air (M2, M3, M4 versions supported). Originally $319, and selling for that price at most retailers, you can nab one in white for just $129 .\n\nWoot also has the Magic Keyboard in black for the 11-inch iPad Pro (M4 and M5 editions) and the 13-inch Pro supporting the same configurations. Those cost $159 and $199 , respectively, which is well over $100 off.\n\nEach Magic Keyboard essentially turns your iPad into a MacBook, of sorts, complete with a trackpad, aluminum design, and a function row of keys. It magnetically attaches to the back of your iPad, and gets power via its pogo pins, keeping the tablet’s USB-C port free for you to plug in accessories. The keyboard accessory features a USB-C port in its cantilevered double-hinged design for charging your iPad (this port doesn’t allow data passthrough, just power). The stand lets you make easy adjustments to the viewing angle of your iPad, which is great if you’re trying to avoid glare.",
+      "title": "Arc browser sunsets December 22 as The Browser Company doubles down on Dia",
+      "summary": "Arc was fiercely beloved by a dedicated group of enthusiasts, but it never quite became the mass-market Chrome alternative its makers once envisioned.",
+      "body": "The Browser Company is sunsetting its design-forward Arc browser on December 22, 2026, and directing users to Dia, its AI-first browser. The company announced the decision on Thursday, citing the rising cost of keeping a browser secure in the age of AI.\n\n“Keeping a browser secure takes constant, dedicated work that is only increasing in the age of AI,” the company wrote.\n\n“Dia was built from the ground up to meet today’s security standards, so that’s where our engineering and security teams will focus moving forward.”\n\nThe wind-down is staged into three parts. As of Thursday, new Arc accounts can no longer be created. On November 23, Arc Search on iOS and Android will lose its AI features, including “Browse for Me.” Users will no longer be able to sign in or sync tabs, though the app will continue functioning as a basic local browser.\n\nOn December 22, Arc will stop working entirely on Mac and Windows. Accounts will be deactivated, and personal data will be deleted within 30 days. Arc Search will also be removed from the Google Play Store.\n\nWhile The Browser Company claims Dia now surpasses Arc in speed, stability, and security benchmarks, user reactions on social media were largely disappointed , with many reviving requests for the company to make Arc open-source.\n\nBut CEO Josh Miller previously pointed out that Arc is built on the Arc Development Kit (ADK)—a proprietary internal SDK that is also the core engine powering Dia. Open-sourcing Arc would mean giving away Dia’s intellectual property.\n\n“While we’d love to open-source Arc someday, we can’t do that meaningfully without also open-sourcing ADK,” Miller previously noted. “And ADK is still core to our company’s value.”\n\nFor users making the switch, Dia will carry over equivalents of several core Arc features. Users can still swipe between different work and personal environments using Dia’s “Profiles” (formerly Arc’s Spaces). Arc’s signature vertical tabs will remain as an optional sidebar layout, while Folders have been rebranded as “Pinned Tab Groups.”\n\nPasswords, bookmarks, extensions, and history will seamlessly transfer to Dia. Arc features will remain free in Dia, with AI optional.\n\nThe shutdown officially closes a chapter that began in 2025, when the startup stopped active feature development on Arc. The Browser Company—which was acquired by Atlassian for $610 million in 2025— conceded at the time that while early adopters loved the browser’s novel interface, the “ novelty tax ” and complexity limited mainstream adoption. Arc was fiercely beloved by a dedicated group of enthusiasts, but it never quite became the mass-market Chrome alternative its makers once envisioned.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/22/arc-browser-sunsets-december-22-as-the-browser-company-doubles-down-on-dia/",
+      "publishedAt": "2026-10-22T20:01:51.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-851941e9674736b1:en",
+      "sourceId": "the-verge-851941e9674736b1",
+      "lang": "en",
+      "title": "Google tells Android users to update as parts of Canada adopt permanent daylight saving time",
+      "summary": "As the US gets closer to permanently adopting daylight saving time following the House advancing the Sunshine Protection Act in July, there could be some unforeseen consequences to getting an extra hour of sun in the evening all year long. Following the Canadian provinces of British Columbia and Manitoba permanently switching to daylight saving this […]",
+      "body": "As the US gets closer to permanently adopting daylight saving time following the House advancing the Sunshine Protection Act in July , there could be some unforeseen consequences to getting an extra hour of sun in the evening all year long. Following the Canadian provinces of British Columbia and Manitoba permanently switching to daylight saving this year, Google has shared some suggested fixes if Android devices are showing the incorrect time when clocks aren't turned back an hour there on November 1st.\n\nIn an announcement shared to the Android community help forums , Google suggests a simple fix for Canadians experiencing issues as a result …\n\nRead the full story at The Verge.",
       "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/gadgets/1016640/apple-magic-keyboards-ipad-air-pro-deal-sale",
-      "publishedAt": "2026-10-22T15:14:20.000Z",
+      "originalUrl": "https://www.theverge.com/tech/1016977/google-android-incorrect-time-daylight-saving-permanent-canada",
+      "publishedAt": "2026-10-22T19:13:42.000Z",
+      "categories": [
+        "tecnologia-general",
+        "android"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-8e2c30eaec825738:en",
+      "sourceId": "techcrunch-8e2c30eaec825738",
+      "lang": "en",
+      "title": "1Password launches a way for AI agents to log in on your behalf without seeing your password",
+      "summary": "The new feature allows agents to log into a customer's personal accounts while still protecting the private credentials that secure those accounts.",
+      "body": "Concerns have swirled over the access that consumers are increasingly entrusting to AI agents. Now, security services are trying to catch up.\n\nPassword manager 1Password on Thursday launched a new tool by which users can allow agents to log into their personal accounts on their behalf, without the agent ever having access to a user’s credentials.\n\nThe new platform, dubbed 1Password for Agents , accomplishes this by creating a system of communication between the agent, the user, and the password manager. When an agent attempts to log in on a user’s behalf, a unique digital key is sent to 1Password to confirm the agent’s digital identity. The user is then sent an alert about the login attempt and can personally confirm the request. 1Password then signs in the agent, filling in the credentials on the digital assistant’s behalf, which allows it to log in and complete whatever task is at hand.\n\n1Password for Agents allows users to choose their agent of choice — whether that’s Claude Duet from Anthropic, OpenAI’s Dots or ChatGPT Work, Grok Bot, Meta’s Muse, or agents from Town, which is an AI assistant startup. The company says it is working with other companies to expand the service.\n\n“Handing over a password, secret, or credential is a common shortcut to an agent, but can leave people with sensitive information in places they can no longer control as a copy gets saved for the next time,” the company said in a blog post . “1Password for Agents gives people a trusted way to delegate tasks to personal AI agents while keeping control of the passwords, secrets, and credentials those tasks require.”\n\nOnline agentic activity has increasingly unsettled major institutions. Indeed, 1Password’s new platform is launching on the same day that Axios reports that U.S. banks have begun to detect agentic activity inside user accounts.\n\nThis isn’t necessarily a case of rogue agents pilfering accounts but, rather, an example of how consumers are increasingly allowing automated services to act on their behalf, including on financial matters. However, the potential for agent-related problems is still large. The big issue appears to be that most banks cannot tell if the agentic activity is tied to user requests or not.\n\nBankers interviewed by the outlet described the situation as “horrifying,” and a Chase spokesperson interviewed by Axios additionally told the outlet that customers “should not give their usernames and passwords to anyone.”",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
+      "publishedAt": "2026-10-22T19:07:09.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-ab5d001faf8cfdad:en",
+      "sourceId": "ars-technica-ab5d001faf8cfdad",
+      "lang": "en",
+      "title": "Electric or gas? BMW goes both ways with new 2027 X5 and iX5.",
+      "summary": "460 kW charging and 450 miles of range are among the reasons the EV is the one to get.",
+      "body": "When we first drove BMW’s first Neue Klasse model, the iX3 , it quickly revealed that BMW knows how to make a good electric vehicle. A clean-sheet design, it featured the automaker’s sixth-generation electric powertrain , a completely reimagined dashboard, and powerful computers to run the whole show. Now, much of that technology is being ported over to the larger X5 line.\n\nBut BMW knows not all its customers are ready to go electric, especially in the US, so it’s sticking with its powertrain-agnostic CLAR platform, as used in cars as diverse as the large 7 Series and the new gasoline 3 Series. Which means in addition to the all-electric iX5, there are also mild hybrid and plug-in hybrid X5s available, and in time, even a hydrogen-powered option. For now, as I’ll explain, I think the EV is the pick of the bunch.\n\nThe most conventional option is the X5 40 xDrive, powered by a 3.0 L turbocharged inline six-cylinder engine that generates 394 hp (294 kW) and 428 lb-ft (580 Nm). The 48 V mild hybrid system can contribute a decent slug of torque (148 lb-ft/200 Nm) if necessary, and the engine operates under the Miller cycle for better efficiency, as well as featuring the usual BMW engine technology, like variable valve timing. Expect around 26 mpg (9 L/100 km) from this powertrain and a full-to-empty range of 569 miles (915 km).\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/cars/2026/10/electric-or-gas-bmw-goes-both-ways-with-new-2027-x5-and-ix5/",
+      "publishedAt": "2026-10-22T19:01:23.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-0ae6f7a9ecf17d3b:en",
+      "sourceId": "engadget-0ae6f7a9ecf17d3b",
+      "lang": "en",
+      "title": "2027 BMW iX5 first drive: You'll love the range, but maybe not the look",
+      "summary": "BMW's latest EV will do over 450 miles on a charge and even close its own doors.",
+      "body": "BMW's latest EV will do over 450 miles on a charge and even close its own doors.\n\nToo many manufacturers are getting too clever in trying to reinvent the humble door handle lately, sometimes with fatal consequences . BMW is certainly joining that crowd with the upcoming electric SUV, the iX5. It's the effective replacement for the iX , the next step up the model line from the recently released iX3, and a battery-powered alternative to the two-row X5.\n\nThe iX5 has little winglets at the top of the front and rear doors containing strain meters that can detect a subtle pull without actually flexing. It's a vastly complex system that enables something surprisingly nice: power doors that actually work.\n\nPull the little winglet and the door swings itself open as far as it can, relying on embedded sensors to avoid slamming into you or the car you parked next to. Get inside, step on the brake pedal and the door quickly closes itself. This isn't novel technology by any means. A fair few cars (mostly expensive ones) have offered this in the past, but I tend to find them extremely annoying.\n\nMost are so slow that I never want to wait for them, so sluggish that they're hard to close manually or so unreliable that I couldn't trust them to not create a power-assisted ding into the next car over. In the iX5, they actually work, adding a little more luxury to the electric version of BMW's second-best-selling machine in the US.\n\nIt's far from the only luxurious touch. The SUV I drove was the 570-horsepower, 593-pound-foot iX5 60 xDrive model, outfitted with plush, massaging seats. The matte silver paint on the outside gave it a premium look, even if the styling is polarizing, to say the least.\n\nThe driver assistance system also has some decidedly premium touches. BMW evocatively calls it \"Symbiotic Drive,\" and though that sounds vaguely alien and ominous, it just means that the system works with you. On the highway it'll steer itself, and you can take your hands off the wheel. But if you want to change lanes, you can either tap the turn stalk, or just grab the wheel and execute the change, then let it go again.\n\nYou can speed up and even slow down manually without the system disengaging, something that definitely takes some getting used to. This isn't like an old-school cruise control system that turns off the second you touch the brake pedal or launches itself up to full speed as soon as it's engaged. You can apply the brake to bring yourself to a complete stop for a light, then lift off again and the car will smoothly resume.\n\nIt works excellently, as does the infotainment system, which runs on a curiously inclined, 17.9-inch touchscreen in the center of the dashboard. Everything is quick and responsive, and though the integrated AI assistant was a little over-eager to chime in whenever anyone in the car said \"BMW,\" it was at least able to find restaurants and answers to all of the inane queries we expect from our agentic future overlords.\n\nAbove that touchscreen, situated far back on the dashboard, is BMW's Panoramic Vision display. It runs from pillar to pillar, with six segments that you can customize to show everything from the current weather to arbitrary pictures of vintage BMWs. It looks a bit much at first, but it's actually quite nice to have, and is a lot easier to see than your average gauge cluster hidden behind the steering wheel.\n\nIt's certainly more useful than the final display in the iX5, the optional 14.6-inch passenger display. This is situated to the right and slightly behind the central display, to obscure it from the driver's view. That's because BMW opted not to use the same kind of perspective-limiting display technology that many other premium SUVs have used.\n\nInstead, the system relies on the driver-monitoring camera to detect when the driver's gaze wanders to the passenger display. When it does, the screen goes blank and whatever video the passenger is watching pauses. The screen turns back on again when the driver looks away, but the passenger has to manually resume the video. As far as user experiences go, it's not ideal.\n\nThe iX5's most luxurious feature might be the range. The iX5 carries a prodigious 144-kilowatt-hour battery slung down below the passenger compartment. It charges at a remarkable 460kW via NACS port, enough to get from 10 to 80 percent in 22 minutes if you can find a charger with enough juice.\n\nBMW hasn't completed its EPA testing, but says to expect more than 450 miles on a charge. To prove that's attainable, one of BMW's engineers drove over 500 miles from San Francisco to LA without stopping and still had 50 miles remaining.\n\nMy road trip was a fair bit shorter, but I did spend about six hours behind the wheel of a pair of BMW's new SUVs. The first half I was in the X5 40 xDrive, the internal combustion version. The second half was in the electric, and it was my clear preference.\n\nThough the gasoline-burning X5 had good power at higher speeds and made a nice sound when I floored it, the throttle response on the iX5 was infinitely sharper. It is certainly heavier, but the lower center of gravity made it feel that much more engaging in the corners, and it can do the same stopping trick as the iX3, relying on the electric motors to come to a standstill so smoothly that if you close your eyes you literally can't tell when the wheels stop rolling.\n\nBut there's honestly not much between the gas-powered X5 and battery-powered iX5. That's a big change of positioning compared to the even more polarizing iX and the prior-generation X5. Though similar in many regards, those two looked and drove nothing alike.\n\nFor this generation, BMW is bringing the family together, making the internal combustion and battery-electric versions look nigh identical. They're even pricing them similarly, with the plug-in X5 50e starting at $77,500, and the iX5 starting at $79,800.\n\nMaybe this, combined with the generous range, will finally help break down some of the EV stigma that still poisons the American automotive landscape. If not, perhaps the cool, automatic doors will woo people over. Yes, you can get them on the gas-powered X5, too, but they cost extra there.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2291166/2027-bmw-ix5-first-drive/",
+      "publishedAt": "2026-10-22T19:01:00.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-81dbc560c41900a2:en",
+      "sourceId": "techcrunch-81dbc560c41900a2",
+      "lang": "en",
+      "title": "OpenAI makes its Jev competitor widely available as decision model competition heats up",
+      "summary": "OpenAI is launching its decision model to the world. Can it compete with the original Jev?",
+      "body": "OpenAI made its Decisions API model widely available to users for the first time, entering the market for fast, cheap intelligence that recently made TypeSafe, a startup founded by a former researcher at the frontier lab, a $7.6 billion company .\n\nTypeSafe’s Jev model created a category for deep learning models that act as super classifiers: Given a set of options, they can quickly make choices and offer a confidence rating in their decision. Software developers quickly found that these decision or System One models could replace LLMs in a variety of workflows, operating more quickly and a at dramatically lower cost.\n\nNikunj Handa, the product lead for OpenAI’s APIs, told TechCrunch that his colleagues saw Jev and said “wow, we we have like a million use cases for this.” Handa’s team sprinted to offer their own version: Rather than building a specifically calibrated decision model, the team took ChatGPT Luna and reconfigured it to speed up the inference and lower the cost.\n\n“The big unlock with Decisions API has been the speed, shrinking things from one to three seconds to 100, 120, 180 milliseconds,” Handa said. “In the future, we may sort of like have specific training to make our models like even better in these ways. But right now, it’s just plain old Luna that gets the job done.”\n\nAnnounced at the company’s developer day on September 29, the Decisions API became available to all customers on Thursday. OpenAI added new voice and visual modalities to the public version, and worked to ensure lower latency in regions around the world by targeting its inference resources geographically.\n\nIn initial trials with customers like Box, Datadog, Ramp, and Speak, engineers used the API to replace OpenAI’s LLMs with higher throughput. Andrew Hsu, the CTO at Speak, which builds AI language tutors, said the Decisions API allowed the company to cut the time between actions from 1.4 seconds to .13 seconds. OpenAI also used the product to improve their Dots voice assistant’s responsiveness.\n\nStill, it’s not clear exactly what makes a good decision model, other than “it works for you” — optimization across intelligence, cost, calibration, and speed seems to differ by workload. TypeSafe CEO Diogo Almeida distrusts benchmarks and urges people to trial the models in their own work, but even TypeSafe released its own rankings last week alongside the release of its latest Jev model, which includes new features including support for images and smart-if statements.\n\nPublic benchmarks like the AIM System One Index and the Artificial Analysis Decision Index tend to favor D1 Ultra, a new decision model that Liquid released last week, and Base Lab’s Elephant-1. The latest Jev model remains competitive on both indices, in seventh and third, with OpenAI’s Decision Model falling eighth and fourteenth, respectively. However, TypeSafe’s offerings are, for now, the most widely-queried on OpenRouter.\n\nThe most fun Jev benchmark, however, is JevMan , a benchmark where decision models play PacMan; the latest Jev model tops that ranking. Felix Wunderlich, the chief growth officer at Opper AI, which built the benchmark, said the classic game “is an interesting test because of its nonstop stream of quick, high-stakes decisions. At every junction the model must decide where to go in a few hundred milliseconds.”\n\nWhere OpenAI’s arguably more capable model may have an advantage is in multi-modality—for image classification, “Luna is extremely powerful and has been showing better calibrations,” Handa told TechCrunch, adding that OpenAI customers want the Decisions API to be more flexible about using images as outputs as well.\n\nHanda also saw further increases in speed enabling new use cases: “Can we get this to something like you know 60 milliseconds, and then you could imagine like an API like call like for every single frame in like a video?”\n\nAs these offerings get faster and cheaper, we can expect them to live up to Jev’s namesake, an economist who explained how using a resource more efficiently makes it more ubiquitous. Or, as Handa sees it, there will be an expanding “crazy set of use cases” that were hiding in plain sight until the decision models revealed them.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/22/openai-makes-its-jev-competitor-widely-available-as-decision-model-competition-heats-up/",
+      "publishedAt": "2026-10-22T19:00:00.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-e599d7e8bb0f8aa0:en",
+      "sourceId": "the-verge-e599d7e8bb0f8aa0",
+      "lang": "en",
+      "title": "Discord now formats Markdown previews right",
+      "summary": "Discord's latest update released today has a big improvement for Markdown previews: they should now render correctly instead of with \"a bunch of symbols,\" according to the company. LLMs and AI agents often rely on Markdown files for instructions and context, so these improved previews could be helpful for people sharing information about AI projects […]",
+      "body": "Discord's latest update released today has a big improvement for Markdown previews: they should now render correctly instead of with \"a bunch of symbols,\" according to the company. LLMs and AI agents often rely on Markdown files for instructions and context, so these improved previews could be helpful for people sharing information about AI projects on the platform.\n\n\"When you upload a Markdown (.md) file, you'll now see the file rendered all nice and neat and pretty instead of with a bunch of symbols,\" Discord says . \"This includes tables, formatting, all that good stuff. Totally great for when you're doing a casual Sunday-night sharing READ …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/news/1017012/discord-markdown-previews-organize-servers-channels",
+      "publishedAt": "2026-10-22T18:58:19.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-8e2abbd9da6d9bd1:en",
+      "sourceId": "engadget-8e2abbd9da6d9bd1",
+      "lang": "en",
+      "title": "The Browser Company is officially killing Arc on December 22",
+      "summary": "The organization is prioritizing an AI browser called Dia.",
+      "body": "The organization is prioritizing an AI browser called Dia.\n\nThe Browser Company will sunset its Arc browser on December 22 . We kind of knew this was coming, as the company has been focusing its resources on an AI browser called Dia . To that end, the organization is trying to get users to switch over from Arc to Dia. It says that all bookmarks, extensions, passwords and history will transfer over automatically. The Browser Company is also trying to lure in customers who are wary of AI by noting that all of those additional features are optional.\n\nAs for Arc, it goes dark on December 22. On that date, users will no longer be able to access their accounts. I guess it never quite caught on, even though it offered people the ability to personalize any website while browsing.\n\nMeet @diabrowser . Now available for Arc members. pic.twitter.com/dqekJNWhgR\n\n— The Browser Company (@browsercompany) June 11, 2025\n\nDia was first announced last year and is, more or less, a standard AI-based web browser. There's a chatbot that the company says can understand context across multiple open tabs. The app can also do stuff like summarize emails and YouTube videos. It pulls together a \"morning brief\" each day that integrates data from calendars, inboxes and web links. You know the drill. It's generative AI.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2294643/the-browser-company-is-officially-killing-arc-on-december-22/",
+      "publishedAt": "2026-10-22T18:52:43.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-44b68b38891b29f6:en",
+      "sourceId": "engadget-44b68b38891b29f6",
+      "lang": "en",
+      "title": "Bluesky adds iPad support in latest feature update",
+      "summary": "Profile links to third-party platforms have also arrived on the social network.",
+      "body": "Profile links to third-party platforms have also arrived on the social network.\n\nBluesky rolled out several features in its latest update, notably beta testing support for iPads. The social network should start looking and performing better on the Apple tablets as a result of the changes. The Beta Features section of the Settings menu can be used to share feedback about any bugs or wonkiness found in the Bluesky iPad app.\n\nAnother update is aimed at self-promotion. Bluesky users can now put links to external platforms at the top of their profiles. The company framed the addition as a way for creators to get better support from their Bluesky audiences by connecting their profiles to crowdfunding platforms such as Patreon or Ko-fi or to more of their content in a website or newsletter. This might also cut down on some of the \"link in bio\" language that's so common in many social media posts. The Edit Profile menu now has a Links section where those external sites can be added.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2294583/bluesky-adds-ipad-support-in-latest-feature-update/",
+      "publishedAt": "2026-10-22T18:26:03.000Z",
       "categories": [
         "tecnologia-general",
         "apple"
@@ -5486,142 +5610,31 @@
     },
     {
       "kind": "news",
-      "id": "techcrunch-b56d45e4e8e3233e:en",
-      "sourceId": "techcrunch-b56d45e4e8e3233e",
+      "id": "9to5mac-d3d680de5dadab12:en",
+      "sourceId": "9to5mac-d3d680de5dadab12",
       "lang": "en",
-      "title": "Spotify’s current AI bet is about being the music service that agents choose",
-      "summary": "Spotify co-CEO Gustav Söderström explains why the rise of AI agents could be good news for the music service.",
-      "body": "Spotify had a strong third quarter , reaching 788 million monthly active users and generating nearly €5 billion (around $5.6 billion USD) in revenue. But the more interesting takeaway from its earnings call was how the company sees people listening to music in the future, and why the rise of AI agents could be good news for its business.\n\nCo-CEO Gustav Söderström thinks the music streaming giant is particularly well suited to this shift.\n\n“Spotify is in one of the few categories that actually stands to thrive in the agentic age,” Söderström tells investors. “This is because agents excel at replacing and taking care of things people would rather not do. People love getting rid of chores. But entertainment is the opposite. Nobody asks an agent to ‘summarize a song’ for them.”\n\nInstead of opening Spotify, searching for an artist and building a playlist themselves, listeners could ask an AI assistant to do the work for them. They might want music for a run, a podcast about something they’ve been discussing with an AI, or an audiobook recap that picks up exactly where they left off.\n\nSpotify wants to be the service those agents turn to, letting people discover music and interact with Spotify through conversations rather than just its own app. Notably, Spotify was the first music service to integrate with Meta’s Muse assistant , and it also integrates with ChatGPT and Claude.\n\n“Our goal is to be the media service that you use from any agent, really turning the growth of agents into a tailwind rather than a headwind. That is exactly what we are seeing now. We are seeing really good adoption of Spotify inside these agents. While other companies are maybe trying to figure out what to do and many are leaning out, we are actually leaning in and participating in the growth instead of standing by the roadside and looking at it,” said Söderström.\n\nThe market is already showing signs of friction over how agents access third-party services. Amazon , for example, has blocked Meta’s Muse from shopping on its platform, illustrating how major players may restrict outside agents when questions arise around access, security, privacy, or commercial control.\n\nSpotify’s pitch isn’t just that AI shouldn’t just make entertainment easier to find. It should make the experience more personal, too.\n\nSöderström describes Spotify today as “an intelligent media service encapsulated as an agent, whether you use it directly through our application or via another agent…Spotify is now an agent that you can not only click on in our app, but talk to, ask questions of, and instruct. We can do things today that no other media services can do,” he said.\n\n“For example, you can ask Spotify to go through your listening history song by song back to 2008, picking your true favorites, beat-stretching them by speeding them up or down, and then sorting them by key and BPM. Then you can ask it to mix them together into the perfect running playlist at your exact cadence,” Söderström explained.\n\nSpotify has years of listening history to draw on, including the artists people return to, the songs they skip, and the music they discover. That information can help it make recommendations that feel more personal than a generic playlist generated by an AI assistant that doesn’t know much about someone’s tastes.\n\nHowever, Söderström also emphasized that Spotify isn’t sending its listener data to partners. Instead, the agent asks Spotify for something, and Spotify uses its own systems to reason about the request and choose what to play.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/22/spotifys-current-ai-bet-is-about-being-the-music-service-that-agents-choose/",
-      "publishedAt": "2026-10-22T15:03:58.000Z",
+      "title": "Apple TV is adding two new features with iOS 27.2",
+      "summary": "iOS 27.2 is coming next week and brings two new features for Apple TV subscribers. Here’s what’s new. more…",
+      "body": "iOS 27.2 is coming next week and brings two new features for Apple TV subscribers. Here’s what’s new.\n\nApple TV is currently the only major streaming service that doesn’t offer user profiles on iPhone and iPad. But that’s about to change with iOS and iPadOS 27.2.\n\nProfiles already exist in tvOS for big-screen viewing of Apple TV content, but now they’re coming to Apple’s other platforms too.\n\nWhen you create user profiles on one platform, they automatically sync to others, letting you keep playback history, queues, and recommendations all personalized for each viewer. And if you set up a profile for your child, they’ll only see age-appropriate Apple TV content.\n\nAlongside the expansion of profiles to more platforms, Apple has added a variety of new profile image options in iOS 27.2. Characters from Apple TV kids’ series like The Snoopy Show, Frog and Toad, and Stillwater are all now available.\n\nApple TV is taking accessibility a step beyond subtitle options by adding official support for sign language on select movies and shows.\n\nWith iOS 27.2, users can optionally enable American Sign Language (ASL) or British Sign Language (BSL).\n\nYou’ll find the option to enable sign language inside the Settings app under Apps ⇾ TV ⇾ Sign Language. It’s unknown how many Apple TV titles will support sign language initially, but it’s great to see the feature added.\n\nFor the latest on Apple TV releases happening soon, see our latest roundup here .\n\nApple TV is available for $14.99 per month , or you can get it discounted through the Apple One bundle .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/22/apple-tv-is-adding-two-new-features-with-ios-27-2/",
+      "publishedAt": "2026-10-22T18:16:52.000Z",
       "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
+        "apple",
+        "tecnologia-general"
       ]
     },
     {
       "kind": "news",
-      "id": "the-verge-04d93ef6e04a1173:en",
-      "sourceId": "the-verge-04d93ef6e04a1173",
+      "id": "the-verge-4a9f6c1162805129:en",
+      "sourceId": "the-verge-4a9f6c1162805129",
       "lang": "en",
-      "title": "You could just get a refurbished Samsung phone on Amazon",
-      "summary": "I recently bought a used Galaxy phone, and now Samsung is leaning into that market on Amazon after raising prices on its newest phones. Its certified renewed phones are available on Amazon for the first time, with a new battery and a one-year warranty. They currently start at $489 for the Galaxy S24 FE with […]",
-      "body": "I recently bought a used Galaxy phone, and now Samsung is leaning into that market on Amazon after raising prices on its newest phones . Its certified renewed phones are available on Amazon for the first time, with a new battery and a one-year warranty. They currently start at $489 for the Galaxy S24 FE with 128GB of storage, significantly less than its $649 launch price, or $699 for the current-gen S26 FE.\n\nI got that exact same phone in August after cracking the screen on my Nothing CMF Phone 1. But my used 128GB Galaxy S24 FE cost $329 on Back Market, over $100 less than the certified renewed one Samsung is offering. I've gone with preowne …\n\nRead the full story at The Verge.",
+      "title": "In Meta’s version of the future, I’ll have my Muse call your Muse",
+      "summary": "Mark Zuckerberg is barrelling toward a future in which an autonomous network of AI agents will run our lives - shopping for us, working for us, talking to other people's AI agents for us. Are humans ready for this very specific and unrelenting vision of a life in which we communicate primarily through bot proxies? […]",
+      "body": "Mark Zuckerberg is barrelling toward a future in which an autonomous network of AI agents will run our lives - shopping for us, working for us, talking to other people's AI agents for us. Are humans ready for this very specific and unrelenting vision of a life in which we communicate primarily through bot proxies? Actually, don't answer that. The more urgent question coming off Meta's quarterly earnings call Wednesday night is more likely to be: \"Is he?\"\n\nZuckerberg is staking Meta's future on Muse, the personal AI agent it released to the general public last month. It's early days, but Zuckerberg told investors on Wednesday's call that he s …\n\nRead the full story at The Verge.",
       "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/gadgets/1016626/samsung-galaxy-used-amazon",
-      "publishedAt": "2026-10-22T14:55:29.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-0b5b0858bc60e03e:en",
-      "sourceId": "9to5mac-0b5b0858bc60e03e",
-      "lang": "en",
-      "title": "iOS 27.2 introduces design changes for these Apple apps",
-      "summary": "iOS 27.2 launches next week with a variety of new features , and also design changes for select Apple apps. Here’s what’s coming. more…",
-      "body": "iOS 27.2 launches next week with a variety of new features , and also design changes for select Apple apps. Here’s what’s coming.\n\nApple Music just rolled out a big design rebrand, and iOS 27.2 extends that fresh visual identity to several aspects of the Music app.\n\nFor starters, there’s a new app icon that strips the old red color in favor of black and white. The removal of the old red identity extends to other elements inside the app too.\n\nIn Music’s tab bar, the accent color for the active tab is now blue instead of red. And in your Library, sections like Playlists, Artists, and Albums are entirely monochrome.\n\nIf you use the Music app’s widgets on your Home Screen or Today view, you’ll notice that they drop the former red background too. Now all widgets use a black background instead.\n\nApple’s Books app in iOS 27.2 introduces design updates centered around its reading experience.\n\nAs explained in-depth here , design changes include:\n\nThese changes were likely motivated by the iPhone Duo’s introduction.\n\nNot only does the Duo make a great e-reader, but it’s also a reason to avoid bespoke UI elements for things like menus and buttons, since Apple’s stock options dynamically reposition for different iPhone models in a way the old Books controls likely wouldn’t have.\n\nWhat do you think of iOS 27.2’s design updates for Music and Books? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/22/ios-27-2-introduces-design-changes-for-these-apple-apps/",
-      "publishedAt": "2026-10-22T14:49:17.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-6a60f92d7e017641:en",
-      "sourceId": "the-verge-6a60f92d7e017641",
-      "lang": "en",
-      "title": "Coolfly’s solar-powered Aura Smart Bird Feeder is nearly 50 percent off",
-      "summary": "I’m not sure when birdwatching became so popular, but it seems everybody’s getting into it these days. If you want to see what all the fuss is about without leaving your couch, both Coolfly and Birdfy are discounting their camera-equipped bird feeders for a limited time. Right now, you can buy Coolfy’s Aura Smart Bird […]",
-      "body": "I’m not sure when birdwatching became so popular, but it seems everybody’s getting into it these days . If you want to see what all the fuss is about without leaving your couch, both Coolfly and Birdfy are discounting their camera-equipped bird feeders for a limited time. Right now, you can buy Coolfy’s Aura Smart Bird Feeder for $149.90 ($140 off) , or the Birdfy Feeder from Amazon or Birdfy for $109.99 ($90 off). You can also add a solar panel to the latter for an extra $20 from Birdfy, or grab both the panel and lifetime AI-powered bird identification from Amazon or Birdfy for $149.99 ($110 off).\n\nMy colleague Jennifer Pattison Tuohy called the Aura Smart Bird Feeder an impressive package, praising its large seed hopper, exceptional battery life, and dual solar panels. She also liked its unique side-mounted camera, which provides a more natural, wider view of birds than many other smart feeders. It can capture up to 2.5K video with a 150-degree field of view and offers full-color night vision, cloud and local storage, and AI-powered identification of more than 10,000 bird species, all without a subscription.\n\nBirdfy’s feeder offers many of the same perks for less, including 2K video, night vision, and AI-powered identification of more than 6,000 bird species. It also lets you watch visiting birds on your phone, set up notifications for when they stop by, and access recordings via the cloud. Unlike the Aura, however, solar charging and lifetime AI identification aren’t included by default, with a subscription running $49.99 a year if you don’t purchase a bundle.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/gadgets/1015984/aura-smart-bird-feeder-jbl-charge-6-speaker-deal-sale",
-      "publishedAt": "2026-10-22T14:41:02.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-aaaf25d365107b05:en",
-      "sourceId": "9to5mac-aaaf25d365107b05",
-      "lang": "en",
-      "title": "Leaker reveals larger iPhone Duo details, possible Telephoto camera",
-      "summary": "Today on Mark Gurman’s Power On podcast , the prolific leaker offered fresh insights into several features in the works for future iPhone Duo models, including larger screen sizes and possibly a Telephoto camera. more…",
-      "body": "Today on Mark Gurman’s Power On podcast , the prolific leaker offered fresh insights into several features in the works for future iPhone Duo models, including larger screen sizes and possibly a Telephoto camera.\n\nThe iPhone Duo isn’t yet available in stores, but Bloomberg’s Mark Gurman already has plenty to share about Apple’s plans for future models.\n\nToday on his Power On podcast , Gurman revealed that Apple is testing iPhone Duo 2 models with Face ID under the outer display, and is exploring ways to add an Action button. You can read more about those details here .\n\nLater in the episode, Gurman looks further out to a 2028 third-gen model that he’s previously reported on .\n\nThe iPhone Duo 3 is expected to be slightly larger, and on the podcast Gurman offered specifics on what to expect. He said:\n\nWhat I heard, just to be specific about the larger screen version of the Duo, is I heard…it’s marginal. It would be that the bigger screen, or the inside screen, increasing by, it’s like, this is rough, like very roughly half an inch. And so, that wouldn’t necessarily make the outer screen much bigger…we’re not talking about an 8.5-inch, 9-inch inner screen. We’re talking about like high sevens, very low eights.\n\nFor reference, iPhone Duo currently has a 7.6-inch folding display.\n\nGurman compares the forthcoming change to how Apple gradually sized up its Pro line in recent years. For example, it went from 6.7 inches on iPhone 15 Pro Max to 6.9 inches on iPhone 16 Pro Max.\n\nAs part of the conversation, Gurman is also asked if Apple is going to add a Telephoto camera to a future iPhone Duo. He says, “That’s on their list. I don’t know when that’s coming, but that’s gonna be hard to do.”\n\nHe adds that it isn’t a matter of cost, but physics: “I think that’s purely a physics issue in terms of the depth needed. It’s going to be interesting to see how they end up solving that.”\n\nWould you want a slightly larger iPhone Duo, and how important is a Telephoto lens to you? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/22/leaker-reveals-larger-iphone-duo-details-possible-telephoto-camera/",
-      "publishedAt": "2026-10-22T14:20:22.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-ba9bb64afd03063c:en",
-      "sourceId": "engadget-ba9bb64afd03063c",
-      "lang": "en",
-      "title": "iPhone Duo's next-gen prototypes are trying to cram in Face ID",
-      "summary": "Apple's first foldable phone opted for a feature it replaced on most iPhone models nearly 10 years ago.",
-      "body": "For understandable reasons, the first generation returned to Touch ID.\n\nYou might have a hard time trying to get hold of one yourself for the foreseeable future , but the iPhone Duo has been in the hands of reviewers for a little while now. And while it is clearly a first-generation product, overall impressions of Apple's first foldable have been broadly very positive.\n\nOne potential annoyance for anyone coming from another modern iPhone, however, is the lack of Face ID, with Apple instead opting to go back to Touch ID for the first time since 2022's iPhone SE. Most iPhone users will have been using Face ID since the iPhone X. In our own review we said the Touch ID solution here works accurately, but can take a bit longer to unlock the phone than you might expect, and according to reliable Apple insider Mark Gurman, the company is already looking at how it can bring its newer technology to the iPhone Duo's inevitable follow-up.\n\nSpeaking on his new Power On podcast, Gurman said Apple is \"actively working\" on under-display Face ID, and that there are already iPhone Duo 2 prototypes that have the technology built into the phone's outer display. He also pointed to the iPhone 18 Pro and Pro Max , with their shrunken down Dynamic Island hardware, as evidence that Apple is finding ways to move more components underneath its phones' displays. The first-gen iPhone Duo also features Apple's first under-display camera.\n\nAs for why Apple chose to outfit its $2,000 foldable with a feature it largely retired from iPhones almost a decade ago (although plenty of MacBook and lower-end iPad models still use Touch ID), it likely has a lot to do with the fact the iPhone Duo is designed to be used in a number of different orientations. Putting Face ID sensors on both the inner and outer displays might have been a bit of a stretch, and may have pushed up the price of an already enormously expensive device.\n\nGurman points out that the iPhone Duo's display is very thin, so squeezing even more components into it would have also been challenging. Apple wanted uniformity with both displays, so getting Face ID into one but not the other was unlikely to materialize this time. The Bloomberg reporter added that the action button, which Apple introduced on the iPhone 15 Pro, may also feature in an eventual iPhone Duo 2.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2294041/iphone-duos-next-gen-prototypes-are-trying-to-cram-in-face-id/",
-      "publishedAt": "2026-10-22T14:06:33.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-f7211621403feb54:en",
-      "sourceId": "techcrunch-f7211621403feb54",
-      "lang": "en",
-      "title": "Claude Duet app is Anthropic’s bet on agents",
-      "summary": "Claude Duet is available through waitlist for Pro and Max plan users",
-      "body": "The AI world is flooded with personal and productivity-based assistants , with new ones launching every week. Now, Anthropic is entering this battle in the hopes of gaining user attention with a new app called Claude Duet, aimed at rivaling Meta Muse , OpenAI Dots , Hark , Instinct , Grok Bot , and Fo .\n\nAnthropic said the new agent is meant to cater to professionals and small businesses to help them with automating and managing tasks. The company is making a distinction from personal agents such as Instinct , by noting that Duet isn’t good at handling errands or booking tickets, and it can’t show you its browser use as it happens.\n\nInstead, Duet can build a daily briefing for its users, create dashboards, or suggest actions based on the user’s data. Like other agents, Duet can complete tasks in the background through its own virtual machine while you handle other things, then come back to you if it needs your approval.\n\nThe launch arrives as the market shifts beyond AI assistants to agents that can work on users’ behalf. Many of Anthropic’s rivals are focusing on business use cases. While Meta’s Muse is a personal AI assistant, the company also released a version to cater to small businesses with connections to other apps . OpenAI’s Dots has a business slant as well, with its integration with professional tools .\n\nAnthropic says Duet proactively delivers its recommendations as it monitors ongoing tasks. Built on the Claude Opus 5.5 model, Duet can connect to over 6,000 connectors and plugins in the Claude Marketplace. It can also make online purchases on users’ behalf via Stripe’s ⁠Link digital wallet or Shopify’s Shop Pay.\n\nThe company said sensitive steps like payments would require user approval. However, Duet won’t trade securities or move money between accounts.\n\nAnthropic also released a new classifier to check each message to prevent sensitive information from leaking out. It said that, by default, the agent would turn down requests asking for credit card numbers and government identification.\n\nClaude Duet is available as an app on iOS and Android, and on the web through Claude.ai for Pro and Max customers in research preview. Users have to join a waitlist to try it.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/22/claude-duet-app-is-anthropics-bet-on-agents/",
-      "publishedAt": "2026-10-22T13:53:26.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-e51043f8ff826556:en",
-      "sourceId": "9to5mac-e51043f8ff826556",
-      "lang": "en",
-      "title": "First iPhone Duo pre-orders now say ‘shipped’ ahead of launch",
-      "summary": "iPhone Duo arrives in stores tomorrow ( details on availability here ), and Apple has started marking early pre-orders with launch day delivery as “shipped.” more…",
-      "body": "iPhone Duo arrives in stores tomorrow ( details on availability here ), and Apple has started marking early pre-orders with launch day delivery as “shipped.”\n\nIf your iPhone Duo delivery date is later than October 23, you might be checking the Apple Store app regularly to see if your delivery window got bumped up .\n\nBut even if you’re one of the lucky few with an October 23 estimate, there’s another reason to check the Apple Store often: your order status.\n\nAnd today, some users have started reporting that Apple says their iPhone Duo has officially shipped.\n\nHere’s Stephen Robles in a post on X :\n\nYou can check your order status by opening the Apple Store app and going to the For You tab. Your iPhone Duo order with its latest status should be at the top of that tab.\n\nApple tracks orders across several stages: Processing, Preparing to Ship, Shipped, and Delivered.\n\nIf you were quoted October 23 delivery but your order doesn’t yet say shipped, don’t panic. iPhone pre-orders are always in transit before the app officially updates to mark their shipping status.\n\nWhat’s your iPhone Duo pre-order status? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/22/first-iphone-duo-pre-orders-now-say-shipped-ahead-of-launch/",
-      "publishedAt": "2026-10-22T13:52:51.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-7f6c5021323ab92a:en",
-      "sourceId": "techcrunch-7f6c5021323ab92a",
-      "lang": "en",
-      "title": "Nirva raises $33M for a pendant that only listens to you",
-      "summary": "Nirva will ship its $249 ambient AI pendant by the end of the year.",
-      "body": "Ambient AI is having a moment. Amazon launched a new wrist-worn device with Bee; a former Plaud exec launched ambient apps through a startup called Ambi, which aims to also build its own hardware; and Apple launched Voice Intelligence features during its iPhone launch in September. Now, a company called Nirva is betting on a jewelry-like pendant and its ability to listen only to the wearer.\n\nThe startup today announced a new $25 million pre-Series A round, adding to the $8 million it raised earlier in the year from investors like Lightspeed and South Park Commons, bringing its total raise to $33 million.\n\nNirva was founded in 2025 by two former Meta Reality Labs employees, Wei Lyu and Jason Chen, along with Hanying Hu, who founded a fashion and jewelry brand.\n\nThe company’s first device is a pendant, which can also be worn as a bracelet. The device weighs only around eight grams, making it easy to wear all day. Its battery lasts up to three days on a single charge.\n\nLonger term, Nirva aims to release more devices.\n\nIn a call with TechCrunch, Nirva CEO Lyu said that the company wanted to build a wearable that blends in with fashion, but also provides value to users.\n\n“This is a piece of jewelry that only focuses on listening to your own speech. We are not like a voice recorder or like a meeting note taker. One key difference between us, Taya, Vocci, or Sandbar Ring is that we’re always passively listening to your own speech. So it’s always on. It keeps modeling the user and modeling your mind,” Lyu said.\n\nFor ambient devices, privacy is a big question, as people might not like to be recorded all the time. Plus, devices like the Ray-Ban Meta have instilled fear in those who are around the person wearing the smart glasses that they are being recorded too.\n\nNirva gets around this problem by asking users to record snippets of their voice during onboarding and building its model based on that. During use, the device filters out conversations or data captured from the other people around the device. That means it’s only recording the wearer.\n\nIn addition, Nirva by default doesn’t keep any audio data or transcripts after processing the conversations.\n\nNirva is positioning itself as a personal insights company rather than a productivity startup. However, its app shows you reminders or action items and ways to act on them. Lyu said that through its app, the startup wants to help users show up for others in a better way in their lives.\n\n“I think there’s no universal way to help everyone to solve their problems. We are building a tool to help people to improve their self-understanding, self-compassion, and self-awareness,” Lyu said.\n\nThe companion app parses users’ speech and creates insights that it infers are related to the user’s personality, including patterns, the people who tend to be around them, the places they’ve been to, and other daily notes. Lyu emphasized that the app shows users insights around their emotions, communication style, and ways they can improve.\n\nWyu gave an example of an incident when she forgot to thank her mother for something, and the app later nudged her with a reminder about this.\n\nThe company also said that, before it discards the audio, it’s able to track the tone, pitch, volume, and speed, which are useful for deriving emotion-related understandings that are then surfaced in the app.\n\nNirva will start taking orders for its devices in November, with an aim to ship them to early users by the end of the year. The $249 device will be available in silver, brushed silver, black, and gold.\n\nThe startup has competition in the AI wearables area. There are companies like former Apple employees’ Taya , which is also building intelligent jewelry. Plus, startups like Friend and Bee are trying to be companion gadgets as well.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/22/nirva-raises-33m-for-a-pendant-that-only-listens-to-you/",
-      "publishedAt": "2026-10-22T13:26:52.000Z",
+      "originalUrl": "https://www.theverge.com/tech/1016905/meta-earnings-fall-2026-muse-network",
+      "publishedAt": "2026-10-22T18:15:00.000Z",
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
@@ -5629,18 +5642,50 @@
     },
     {
       "kind": "news",
-      "id": "engadget-223217ac9d7eb17a:en",
-      "sourceId": "engadget-223217ac9d7eb17a",
+      "id": "9to5mac-811ac72145c9cf5b:en",
+      "sourceId": "9to5mac-811ac72145c9cf5b",
       "lang": "en",
-      "title": "1Password will let you hand your data security over to your preferred AI agent",
-      "summary": "If you're willing to let AI book or buy things on your behalf, 1Password just made that easier.",
-      "body": "It now works with Muse from Meta, OpenAI's Dots and SpaceXAI Grok Bot.\n\nAfter introducing Claude integration in July, 1Password just launched a platform for other major AI companies including Muse from Meta , OpenAI's Dots and SpaceXAI Grok Bot. The new 1Password for Agents gives those models access to your logins so they can complete tasks for you, without ever receiving your username, password or vault contents.\n\n1Password is pitching the feature as a way to make your personal AI assistant dreams come true for tasks like booking restaurants, buying gifts and planning vacations. Doing those things usually requires login credentials, but given AI agents' penchant for going rogue , doing so can be fraught. That's why 1Password came up with a login system that ensures the models can't see them.\n\n\"An agent should be able to do the job it's been asked to do without getting permanent access to everything behind the account, and 1Password provides the trust layer that makes this possible across personal agent experiences,\" said 1Passwords chief product officer, Aashish Tripathi.\n\nTo do that, 1Password for Agents lets agents use stored credentials from your 1Password vault without directly sending them to the model. When agents reach a password check in the course of performing actions you requested, they use a special key to verify their identity with 1Password. 1Password then notifies you about which agent needs access and why and, if you approve, fills in the required information.\n\nAccess is granted per session, limited to specific, approved items and not carried over. Since passwords and one-time MFA codes are injected through a secure channel managed by 1Password, they stay outside the model.\n\nThe company said that 1Password now works with Muse, Claude Duet, ChatGPT Work and Dots, Grok Bot and Town. For each of those, it provides approved access when needed and lets users approve sign-ins. Passwords, usernames and MFA codes remain outside each agent's view for each, 1Password says, so they can't spread beyond your own devices.\n\nStill, common sense is required when giving agents unfettered access to accounts. Though they won't spill your password secrets, they can certainly do things like make product ordering errors or book the wrong vacation with no option to cancel. As such, you'd want to be extremely careful if deploying one for such things. The company has yet to reveal other details like pricing or availability, but we should hear more about those things soon.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2293844/1password-opens-up-ai-agents-muse-dots-grok/",
-      "publishedAt": "2026-10-22T13:00:00.000Z",
+      "title": "Orangetheory adds Apple Watch in-studio workout tracking for a one-time fee",
+      "summary": "Starting tomorrow, Orangetheory Fitness will allow members to connect the Apple Watch to the club’s proprietary in-studio performance-tracking experience. Using a personal Apple Watch with the Orangetheory system will require a one-time fee. more…",
+      "body": "Starting tomorrow, Orangetheory Fitness will allow members to connect the Apple Watch to the club’s proprietary in-studio performance-tracking experience. Using a personal Apple Watch with the Orangetheory system will require a one-time fee.\n\n“The new option, called OTconnect for Apple Watch, is part of Orangetheory’s proprietary connected technology platform, which tracks real-time performance and delivers post-class results,” Orangetheory Fitness announced today.\n\nConnecting a personal Apple Watch to the Orangetheory system will require a one-time $99 fee, the fitness club says. Apple Watch connectivity is optional and joins the existing OTconnect Beat solution for Orangetheory’s connected system.\n\n“For a one-time $99 connection fee, members can now use their Apple Watch during an Orangetheory class to access real-time performance data, including calories burned, heart rate and heart rate zones displayed directly on the wrist, in addition to Splat Points.”\n\nThe company shares more details about how the OTConnect for Apple Watch system will work.\n\n“Before class, members can start their workout on Apple Watch once it connects to OTconnect. After class, they can review their performance summary directly in the app on Apple Watch, with additional workout data and personalized insights available through the OTF app and via email post-class.”\n\nOrangetheory previously introduced Apple Watch integration in 2019 through its OTbeat Link accessory . The $129 device attached to an Apple Watch band and connected the watch to the company’s in-studio heart rate monitoring system.\n\nThe new OTconnect integration eliminates the need for that extra hardware, which was discontinued around 2022.\n\nIn addition to unlocking OTConnect for Apple Watch, the one-time charge also includes two more perks with “up to two free months of Apple Music and Apple Fitness+.”\n\n“OTconnect for Apple Watch requires watchOS 11.6 or later and will be available for Apple Watch Series 6 or later, Apple Watch SE or later, and Apple Watch Ultra or later,” the company says. You can read the announcement in full here .\n\nThe new Apple Watch Series 12 and Ultra 4 are both available now.\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/22/orangetheory-adds-apple-watch-in-studio-workout-tracking-for-a-one-time-fee/",
+      "publishedAt": "2026-10-22T17:48:26.000Z",
       "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-1ed38278ed12b5d7:en",
+      "sourceId": "9to5mac-1ed38278ed12b5d7",
+      "lang": "en",
+      "title": "Pages, Keynote, Numbers just added powerful new AI features",
+      "summary": "Apple is rolling out AI-centric updates to its iWork suite—Pages, Keynote, Numbers—that include a brand new ‘Intelligent Assistant’ with powerful capabilities. Here’s what it can do. more…",
+      "body": "Apple is rolling out AI-centric updates to its iWork suite—Pages, Keynote, Numbers—that include a brand new ‘Intelligent Assistant’ with powerful capabilities. Here’s what it can do.\n\nIf you subscribe to Apple Creator Studio, Apple’s latest updates to Pages, Keynote, and Numbers today add an Intelligent Assistant—seemingly separate from Siri AI—that will help you in a variety of ways inside the apps.\n\nIntelligent Assistant is available in beta in US English only, and requires iOS 27 or later.\n\nHere’s what it can do in each of the iWork apps, per Apple’s release notes:\n\nPages — Intelligent Assistant features\n\nKeynote — Intelligent Assistant features\n\nNumbers — Intelligent Assistant features\n\nBeyond these AI features for Apple Creator Studio subscribers, Apple says all users can benefit from a new file format in Keynote.\n\nKeynote will let you import and export presentations in a new Interchange Format (.keyx), which Apple says is an open file format that will make it easier to edit Keynote files in other apps.\n\nI’ve updated all iWork apps and don’t yet see the Intelligent Assistant, but it’s possible there’s a server-side component that Apple will imminently activate.\n\nHave you tried the Intelligent Assistant yet? How’s it working for you? Let us know in the comments.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/22/pages-keynote-numbers-just-added-powerful-new-ai-features/",
+      "publishedAt": "2026-10-22T17:44:43.000Z",
+      "categories": [
+        "apple",
         "tecnologia-general",
         "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-5428b0d35014997e:en",
+      "sourceId": "ars-technica-5428b0d35014997e",
+      "lang": "en",
+      "title": "This emulator reimagines Nintendo’s Virtual Boy with a full color display",
+      "summary": "Tile-based color palettes go way beyond the four shades of red on original hardware.",
+      "body": "Last year, we reported on Red Viper , a Virtual Boy emulator that added a splash of Super Game Boy-style color to Nintendo's famously failed red-on-black \"portable\" 3D headset from the '90s. Now, a new emulation experiment, VBoy Color , has taken the concept to a higher level, using a tile-based palette system that allows for many more distinct colors in each individual Virtual Boy frame.\n\nRather than simply replacing the Virtual Boy's four shades of red with four different colors, VBoy Color's readme files explain how the emulator's game-specific Color Packs can assign a distinct four-color palette to each 8x8 tile in a Virtual Boy scene. That means the emulator can differentiate between green pipes, grey platforms, and red brick wall in Mario Clash , for instance, even though all those in-game objects share the same overlapping red hues in the original game.\n\nThe Game Boy Color-esque results feel like being transported into an alternate history where Nintendo invested in a full-color display rather than cheaper red LEDs for the Virtual Boy hardware. The increased contrast between differently colored elements is particularly welcome in games like Jack Bros. or Vertical Force , where the original red-on-red display often makes it hard to differentiate the player-character from busy red background elements.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/gaming/2026/10/this-emulator-reimagines-nintendos-virtual-boy-with-a-full-color-display/",
+      "publishedAt": "2026-10-22T15:59:40.000Z",
+      "categories": [
+        "tecnologia-general"
       ]
     },
     {
@@ -5678,23 +5723,6 @@
     },
     {
       "kind": "news",
-      "id": "engadget-28dd2285cd9c3c0f:en",
-      "sourceId": "engadget-28dd2285cd9c3c0f",
-      "lang": "en",
-      "title": "Fortnite is coming back to Apple's Australian App Store following court ruling",
-      "summary": "Fortnite is back on the App Store in Australia after a federal court ordered Apple to open its iOS ecosystem up to competition.",
-      "body": "The ruling also forces Apple to allow alternative app stores and methods of payment.\n\nFortnite is back on the App Store in Australia after a federal court ordered Apple to open its iOS ecosystem up to competition. The judgement will also force Apple to permit alternative app stores without imposing conditions and allow developers to show alternative payment options, among other clauses. Apple disagreed with the court's findings and said it would challenge them.\n\n\"Big news: Fortnite is coming back to the App Store in Australia tomorrow!\" Epic Games wrote in a post on X . \"This is great news for developers worldwide and iOS users in Australia who will benefit from an open mobile app ecosystem.\"\n\nIn May 2026, Fortnite returned to iOS everywhere around the world except Australia because of its ongoing court battle there. Epic said at the time that Apple continued to enforce terms that Australian courts had found to be unlawful and was awaiting a final decision, which arrived yesterday.\n\nAustralian courts followed the EU's blueprint for forcing Apple to open up its ecosystem. At the same time, the ruling includes clauses that would preclude any of the \"malicious compliance\" Apple has been accused of in the past, like \"Core Technology\" or developer fees for using third-party app stores.\n\nAs a brief summary of the 1,104-paragraph filing, the court ordered Apple to open iOS to third party app stores and allow users to download apps directly from developers. Developers will be able to offer alternative payment systems (free from excessive Apple fees and conditions) and not forced to use Apple's in-app payment system. The App Store can't block developers from pointing users to outside apps to make purchases, and users must not find any \"friction\" when paying with alternative systems or installing apps from outside the App Store.\n\nApple was also ordered to pay 85 percent Epic's legal costs and must implement the orders by March 1, 2027 or send proof that it needs an extension by February 15, 2027. However, Apple said it disagreed with many parts of the decision and plans to appeal.\n\n\"We will request a stay and appeal the outcome to seek a resolution ​that ​respects our ⁠intellectual property and protects the safe, ​secure experience that consumers ​and ⁠developers expect from the App Store,\" an spokesperson ⁠told ​Reuters . Engadget has reached out to Epic and Apple for comment.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2293801/fortnite-is-back-on-apple-australian-app-store-following-court-ruling/",
-      "publishedAt": "2026-10-22T08:18:58.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "ars-technica-2dddc1d317516bbc:en",
       "sourceId": "ars-technica-2dddc1d317516bbc",
       "lang": "en",
@@ -5707,39 +5735,6 @@
       "categories": [
         "tecnologia-general",
         "programas-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-1b4e9e16bcb45daf:en",
-      "sourceId": "ars-technica-1b4e9e16bcb45daf",
-      "lang": "en",
-      "title": "The new human-crafted Apple Music brand matters in an AI world",
-      "summary": "Opinion: In a world of AI slop, showing the human hands making things helps.",
-      "body": "Apple just revealed a new brand identity for Apple Music, with the expected turn to Liquid Glass. I’m not much of a fan of their new design language in general; this is where I admit that I’m still running MacOS Sequoia and have grumpy things to say about rounded corner radii and text legibility.\n\nIt’s just a trend, it will pass, and at some point I’ll probably cave and upgrade when it starts actually affecting my ability to get work done, or more importantly get security updates. Once I adjust, I’ll stop noticing it, and life will go on.\n\nAs such, I wouldn’t normally find an obvious rebrand like this notable, much less feel like I had much to say about it. But then I happened to catch Apple’s behind-the-scenes video in my YouTube recommendations, and I realized I did have thoughts.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/culture/2026/10/the-new-human-crafted-apple-music-brand-matters-in-an-ai-world/",
-      "publishedAt": "2026-10-21T19:44:40.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-f0789deca4288b15:en",
-      "sourceId": "ars-technica-f0789deca4288b15",
-      "lang": "en",
-      "title": "OpenAI's latest AI models are coming to Google Cloud and Antigravity",
-      "summary": "Google Cloud will have GPT 6.1 Astra, Sol, and Luna in the coming weeks.",
-      "body": "Google would certainly prefer that everyone used its Gemini models with Google Cloud services, but soon, you'll have more options. OpenAI and Google have come to an arrangement that will see the former's frontier models arrive in Google Cloud services. Perhaps more importantly, GPT models will soon appear in Antigravity, Google's agent-powered coding tool.\n\nFor enterprise customers and AI enthusiasts, OpenAI's latest model will appear in Google's \"Model Garden\" in the coming weeks, adding to its 200-plus options. The garden already offers access to Google's Gemini models, as well as an assortment of open models like Mistral, Llama, and Gemma. Anthropic's Claude AI has also been available for some time. Google says it's now the only large cloud provider offering access to all three leading closed LLMs.\n\nWhile OpenAI notes that Microsoft continues to be its primary cloud partner, the full suite of current GPT 6 and 6.1 models—Astra, Sol, and Luna—will launch on Google Cloud. Astra will naturally cost the most to run, but Google's system supports dynamically moving workloads between LLMs based on performance, latency, and efficiency.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/ai/2026/10/openais-latest-ai-models-are-coming-to-google-cloud-and-antigravity/",
-      "publishedAt": "2026-10-21T18:51:42.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
       ]
     },
     {

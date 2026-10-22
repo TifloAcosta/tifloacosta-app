@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-22T20:50:19.645Z",
+  "generatedAt": "2026-10-22T23:25:55.571Z",
   "resources": [
     {
       "kind": "resource",
@@ -5470,6 +5470,139 @@
   "news": [
     {
       "kind": "news",
+      "id": "9to5mac-e57bb786c7c01160:en",
+      "sourceId": "9to5mac-e57bb786c7c01160",
+      "lang": "en",
+      "title": "MacBook Neo helps Apple soften the blow of global PC market downturn, per report",
+      "summary": "A new Counterpoint Research report on global PC shipments for Q3 2026 shows Apple outperforming the broader market, with the MacBook Neo helping cushion the impact of declining demand. Here are the details. more…",
+      "body": "A new Counterpoint Research report on global PC shipments for Q3 2026 shows Apple outperforming the broader market, with the MacBook Neo helping cushion the impact of declining demand. Here are the details.\n\nIn a new report released today, Counterpoint Research says global PC shipments plunged 21% during Q3 2026, compared with the year-ago period.\n\nIn absolute numbers, Counterpoint says global shipments totaled 57 million units, with Lenovo leading the market with a 26.3% share, despite a 23% year-over-year decline.\n\nHP held second place with an 18.1% share and a 31% decline in shipments, followed by Dell (13.3% share, down 25%), Apple (9.8% share, down 11%), and ASUS, which rounded out the top five with a 9.2% share and a 7% decline. Other vendors accounted for the remaining 23.3% of the market, with shipments down 16% year over year.\n\nHere’s Counterpoint on Apple’s performance for the quarter:\n\n“Apple’s shipments declined 11% YoY to 5.6 million units, giving it a 9.8% market share, up from 8.7% a year earlier. The MacBook Neo helped cushion the decline, allowing Apple to outperform the overall market.”\n\nCommenting on the results, Counterpoint Research senior analyst Minsoo Kang noted that Apple and ASUS outperformed the broader market “through differentiated product portfolios and competitive positioning.”\n\nAs most 9to5Mac readers are probably guessing by now, rising memory and other component costs were major contributors to the market-wide downturn. Counterpoint says higher PC prices discouraged consumers from upgrading their devices and weakened demand across the industry.\n\nAccording to Counterpoint’s data, contract prices for 8GB DDR4 RAM modules rose 24% quarter over quarter in Q3 2026, while 1TB NVMe SSD prices increased 29%.\n\nLooking ahead, Counterpoint expects RAM prices to rise another 13% in Q4 and 15% in Q1 2027, while SSD prices are projected to increase 11% in Q4 before stabilizing in early 2027.\n\nTo read Counterpoint’s full report, follow this link .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/22/macbook-neo-helps-apple-soften-the-blow-of-global-pc-market-downturn-per-report/",
+      "publishedAt": "2026-10-22T22:35:38.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-506c2c75cb975176:en",
+      "sourceId": "9to5mac-506c2c75cb975176",
+      "lang": "en",
+      "title": "9to5Mac Daily: October 22, 2026 – iOS 27.2 features, Apple Music rebrand",
+      "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
+      "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/22/daily-october-22-2026/",
+      "publishedAt": "2026-10-22T22:23:46.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "android",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-d9c699598c73f1eb:en",
+      "sourceId": "9to5mac-d9c699598c73f1eb",
+      "lang": "en",
+      "title": "YouTube removing ‘Subscriptions’ bottom bar tab on Android, iOS after nearly a decade",
+      "summary": "YouTube is making a number of changes to its Android and iOS apps with the launch of custom feeds , including moving Subscriptions out of the bottom bar. more…",
+      "body": "YouTube is making a number of changes to its Android and iOS apps with the launch of custom feeds , including moving Subscriptions out of the bottom bar.\n\nOn mobile, YouTube is “kicking off a series of updates to shape a more seamless Home experience.” This starts with a redesigned top bar with dedicated feeds.\n\nAs part of this change, YouTube is removing the Subscriptions tab from its fourth position in the bottom bar. It’s now in the “top bar on the Home tab.” Testing of the redesign started earlier this year.\n\n“Subs” appears in the second position after “Home” with a red underline that will take some getting used to. This change will break a lot of muscle memory, with Subscriptions appearing in the YouTube bottom bar for nearly a decade (2017).\n\nOld vs. new\n\nMeanwhile, after Subs, you’ll see new dedicated feeds for Live, Music, and Movies & TV, with the latter only appearing if you have active subscriptions (such as Primetime Channels ). This change has the upside of removing YouTube’s navigation drawer.\n\nMore broadly, this change coincides with the launch of custom feeds, which are also available on and sync to the web. This lets you describe “what you want to see in your own words”.\n\nTap “+” at the top of your Home feed and describe the topic, channels, or vibe you’re looking for (for example, “help me unwind after work with guided meditations under 10 minutes”). You’ll then get a new feed tailored to your interests for you to explore.\n\nThey will appear as top tabs in the main feed after Home and Subs so that “you can jump back into them whenever you want.” The prompt box at the top of each feed lets you change it.\n\nNotably, free users “can save up to 3 active custom feeds, while YouTube Premium members can save up to 8.”\n\nCustom feeds are first rolling out on “mobile and desktop in English to U.S. based, signed-in viewers.” It will be available in more countries going forward.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5google.com/2026/10/22/youtube-subscriptions-android-ios/",
+      "publishedAt": "2026-10-22T22:07:34.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "android",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-965408caac6fc621:en",
+      "sourceId": "the-verge-965408caac6fc621",
+      "lang": "en",
+      "title": "Canva’s first AI image model plans designs before generating them",
+      "summary": "Canva is diving even deeper into AI with the launch of an image generation model that competes directly with those from OpenAI, Microsoft, and Google. The model, called Canva Craft, uses a two-stage architecture that allows it to plan a design before generating an image, allowing for \"greater precision, consistency and control,\" according to an […]",
+      "body": "Canva is diving even deeper into AI with the launch of an image generation model that competes directly with those from OpenAI, Microsoft, and Google. The model, called Canva Craft , uses a two-stage architecture that allows it to plan a design before generating an image, allowing for \"greater precision, consistency and control,\" according to an announcement on Thursday .\n\nCanva Craft can generate images at up to 2K resolution and in more than 30 aspect ratios. In addition to generating social media posts and marketing content, it's also supposed to create realistic scenes, digital art, environmental imagery, and more. The model's two-stage sy …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1017151/canva-craft-in-house-ai-model",
+      "publishedAt": "2026-10-22T21:51:25.000Z",
+      "categories": [
+        "tecnologia-general",
+        "windows",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-8b3fe2d850e9e1f0:en",
+      "sourceId": "the-verge-8b3fe2d850e9e1f0",
+      "lang": "en",
+      "title": "PC shipments dropped over 20 percent in Q3 due to RAM price hikes",
+      "summary": "Demand for new PCs took a hit after months of price hikes, with Counterpoint Research reporting global PC shipments fell 21 percent year-over-year in Q3 2026. That's in line with earlier reports from IDC and Omdia. It's not just PCs, either - that same quarter, smartphone shipments also hit a 14-year low. Counterpoint linked the […]",
+      "body": "Demand for new PCs took a hit after months of price hikes, with Counterpoint Research reporting global PC shipments fell 21 percent year-over-year in Q3 2026. That's in line with earlier reports from IDC and Omdia. It's not just PCs, either - that same quarter, smartphone shipments also hit a 14-year low .\n\nCounterpoint linked the decline in PC shipments to higher component prices. Up until Q2 2026 , PC shipments had been growing for over two years straight. But over the last several months, RAM, SSDs , and chips from Intel , AMD , and Qualcomm have all gotten more expensive, leading to price hikes on everything from MacBooks to Raspberry Pis . C …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/gadgets/1017144/global-pc-shipments-dropped-q3-2026-ram",
+      "publishedAt": "2026-10-22T21:30:39.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-64e99d1ac199c335:en",
+      "sourceId": "the-verge-64e99d1ac199c335",
+      "lang": "en",
+      "title": "Fall 2026 earnings watch",
+      "summary": "Every company is suddenly an AI company. Compute is an asset. Cars are flying. We’ve been promised robots — again. It’s time again to dig through earnings reports, listen to investor calls, and call out the latest wins and losses from around the tech sector and what it means for where the companies go next.",
+      "body": "Every company is suddenly an AI company. Compute is an asset. Cars are flying. We’ve been promised robots — again. It’s time again to dig through earnings reports, listen to investor calls, and call out the latest wins and losses from around the tech sector and what it means for where the companies go next.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1016506/fall-2026-earnings-watch",
+      "publishedAt": "2026-10-22T21:15:16.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-f392be0187330d06:en",
+      "sourceId": "techcrunch-f392be0187330d06",
+      "lang": "en",
+      "title": "Rivian buys world model startup to accelerate self-driving ambitions",
+      "summary": "Third Dimension's technology uses AI to match the physical world, which when combined with Rivian's reams of data could turn into a valuable simulator.",
+      "body": "EV maker Rivian has acquired Third Dimension, a U.K. startup founded by veterans of the gaming and autonomous vehicle industries that uses AI to turn images and videos into lifelike 3D worlds.\n\nRivian isn’t getting into gaming, but it does want to leverage Third Dimension’s technology to turn real-world data into 3D worlds that can accelerate the development of its advanced driver-assistance features and the self-driving system for the robotaxis it plans to supply to Uber.\n\nTerms of the deal were not disclosed. The 15-person team at Third Dimension, most of whom are based in the U.K., will be absorbed into Rivian’s autonomy and AI team led by James Philbin. The acquisition also gives Rivian an opportunity to expand its AI hub in London, Philbin said in an exclusive interview.\n\nThird Dimension, which was founded by CEO Tolga Kart and Piotr Sokólski in 2024, raised $7 million in seed funding from venture capital firms, including Abstract Ventures, MVP, Soma Capital, and Solari Capital. While the company’s technology was built to speed up video game development, the founders saw other potential applications, including defense and autonomous vehicles.\n\nNow, under Rivian, they’ll be focused on automated driving.\n\n“The team is excited to be able to focus on one problem,” Kart told TechCrunch in the interview. “I think as a small company, having to serve many, many different masters is very hard, and so we’re very excited to come work on a problem that has such an amount of scale, where our technology makes a true difference.”\n\nSimulation is a critical tool for autonomous vehicle developers, who use it to train and validate self-driving systems. Historically, these simulators were built on rendering or video game engines and often relied on synthetic data. These virtual environments might look like the real world, but a gap between the two remains, Kart said. The workaround typically requires feeding the simulators ever-larger amounts of data in hopes of closing that quality gap.\n\nThird Dimension’s technology uses AI to match the physical world, which when combined with Rivian’s reams of data could turn into a valuable simulator.\n\nRivian collects driving data from tens of thousands of R1S pickup trucks, R1S SUVs, delivery vans, and R2 SUVs on the road today — essentially any vehicle whose owner has enabled external camera sharing. Rivian uses that data, which is aggregated and anonymized, to build training models for driving. According to Philbin, Rivian gets more than 400,000 sequences uploaded from its customer fleets per day.\n\nThird Dimension’s tech will allow Rivian to simulate complex driving conditions without having to wait for rare real-world edge cases to occur, Philbin said.\n\nThis story is developing and will be updated.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/22/rivian-buys-world-model-startup-to-accelerate-self-driving-ambitions/",
+      "publishedAt": "2026-10-22T21:05:05.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "freedom-scientific-blog-d712f869fee0ed07:en",
+      "sourceId": "freedom-scientific-blog-d712f869fee0ed07",
+      "lang": "en",
+      "title": "Access More Online with ZoomText and Fusion",
+      "summary": "ZoomText and Fusion are powerful accessibility tools designed for people with low vision. ZoomText is a screen magnifier and reader, while Fusion combines all of ZoomText’s features with the full JAWS screen reader, offering both magnification and speech. Since October is National Disability Employment Awareness Month, we want to take this opportunity to spotlight powerful …",
+      "body": "ZoomText and Fusion are powerful accessibility tools designed for people with low vision. ZoomText is a screen magnifier and reader, while Fusion combines all of ZoomText’s features with the full JAWS screen reader, offering both magnification and speech.\n\nSince October is National Disability Employment Awareness Month, we want to take this opportunity to spotlight powerful features of ZoomText and Fusion that will help you be more productive in the workplace. This blog series will run throughout October, with a new post every Thursday featuring helpful information and practical tips to make the most of ZoomText and Fusion as you work. Last week, we followed a typical workday from Word to Teams. This week, we’ll provide practical tips for using ZoomText and Fusion when tackling online tasks.\n\nSo much of today’s work happens in a web browser: company intranets, online forms, dashboards, and web-based apps for everything from timesheets to project tracking. Whether you’re researching a topic, filling out a form, or checking the latest numbers, having ZoomText or Fusion set up to support the way you browse can make all the difference. This week, we’ll look at how these tools can help you move around websites, find information quickly, read web content comfortably, and keep an eye on the details you check most often.\n\nBusy web pages are easier to work with when you can see exactly where you are. With ZoomText and Fusion, you can quickly adjust your magnification level or switch between different zoom window types, like Lens or Line view, to focus on the part of the page that matters most. Lens and Line are available when you use a single monitor. Lens works like a magnifying glass. It displays a magnified rectangle that follows the mouse pointer. Line works like a magnifying ruler. It displays a magnified horizontal strip that moves up and down the screen and enlarges whatever is directly beneath it.\n\nPress CAPS LOCK+Z to cycle through the available zoom window types until you reach the one you want.\n\nFocus enhancements highlight the item you are on as you navigate using the Tab and arrow keys through links, buttons, and form fields, making it easy to keep your place even at high magnification. Press CAPS LOCK+F to toggle focus enhancements on and off. You can also customize the appearance of the focus locator to suit your needs.\n\nFusion users can take advantage of the JAWS Virtual Cursor, which simulates a system cursor and lets you read and move through a web page the same way you would a document. The Virtual Cursor is on by default when you are on a web page.\n\nQuick Navigation keys let you jump straight to the content you need without scanning the entire page. Press H to move to the next heading, F to move to the next form field, and L to move to the next list. Add SHIFT to any of these keys, such as SHIFT+H , to move backward. Press TAB to move through links and form controls.\n\nLong pages and crowded web apps can hide the information you are trying to locate. The ZoomText Finder tool lets you search for words or phrases on web pages and in documents. Open Finder from the ZoomText toolbar, type your search term, and use the navigation buttons to jump between results. ZoomText brings each match into the magnified view, so you don’t have to pan around the page looking for it.\n\nFusion users can use the Find command to locate specific text on a web page. Press CTRL+F to open the Find dialog, type your search term, and press ENTER to jump to the next occurrence. Press F3 to navigate to the next occurrence of that text.\n\nFor even faster navigation, JAWS can list every link or heading on a page. Press CAPS LOCK+F7 to open the Links List or CAPS LOCK+F6 to open the Headings List, then choose an item and press ENTER to jump directly to the section or link you need.\n\nArticles, reports, and long web pages are easier to get through when you don’t have to read every word on screen. AppReader reads documents, web pages, and email aloud while you follow along or rest your eyes. It can read from beginning to end, skim forward and backward, or read just the text you select with the mouse. AppReader reads text aloud in three modes: App View reads directly in the source application without changing your view, Text View reformats the text with your choice of fonts, colors, and magnification for easier reading, and the SpeakIt Tool reads any text on the screen that you select by clicking and dragging. Press CAPS LOCK+ALT+A to launch App View. Press CAPS LOCK+ALT+T to launch Text View. Press CAPS LOCK+ALT+S to launch the SpeakIt Tool.\n\nTo start reading at a specific word on a web page, point to it with the mouse and press CAPS LOCK+ALT+LEFT-CLICK . Text View is especially helpful on cluttered pages, since it strips away the layout and shows just the text in a format that’s comfortable for you.\n\nBackground Reader in ZoomText lets you listen to web content while you keep working on other tasks. Select and copy the text you want to hear, then press CAPS LOCK+CTRL+B to start Background Reader. You can continue working in other applications while the content is read aloud.\n\nFusion users can use the JAWS Say All command to read an entire article from the cursor position. Press CAPS LOCK+DOWN ARROW to start continuous reading, and press CTRL to stop. This is perfect for reviewing long articles or reports.\n\nMany of us return to the same web pages and apps every day to check a status, a total, or a notification. Reading Zones put that information one keystroke away. A reading zone is a defined area of an application window that ZoomText can display, speak, or both, at the press of a hotkey. You can set up as many as 10 zones.\n\nTo create a reading zone, open the web page or application, press CAPS LOCK+ALT+C , then drag a rectangle over the area you want the zone to cover. Give the zone a name and choose whether it should be displayed, spoken, or both.\n\nTo trigger a reading zone, press CAPS LOCK+ALT+ the zone’s number (1 through 9, or 0 for zone 10). Press CAPS LOCK+ALT+N to move to the next zone and CAPS LOCK+ALT+P to move to the previous zone, or press CAPS LOCK+ALT+L to list all your zones.\n\nFor example, if you regularly check a dashboard with multiple widgets, set up Reading Zones for the most important ones. With a single keystroke, ZoomText can magnify or speak the data you need, without searching the page for it.\n\nJoin us next week as we explore how to set up ZoomText and Fusion to work the way you do, customizing settings for your workflow, preferences, and productivity. Stay tuned for more tips to help you thrive in your workplace!\n\nHave questions? Email training@vispero.com .",
+      "sourceName": "Freedom Scientific",
+      "originalUrl": "https://training.vispero.com/access-more-online-with-zoomtext-and-fusion/",
+      "publishedAt": "2026-10-22T21:03:01.000Z",
+      "categories": [
+        "windows",
+        "tecnologia-accesibilidad",
+        "jaws"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "techcrunch-55ce190c2a2e8a59:en",
       "sourceId": "techcrunch-55ce190c2a2e8a59",
       "lang": "en",
@@ -5481,22 +5614,6 @@
       "publishedAt": "2026-10-22T20:01:51.000Z",
       "categories": [
         "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-851941e9674736b1:en",
-      "sourceId": "the-verge-851941e9674736b1",
-      "lang": "en",
-      "title": "Google tells Android users to update as parts of Canada adopt permanent daylight saving time",
-      "summary": "As the US gets closer to permanently adopting daylight saving time following the House advancing the Sunshine Protection Act in July, there could be some unforeseen consequences to getting an extra hour of sun in the evening all year long. Following the Canadian provinces of British Columbia and Manitoba permanently switching to daylight saving this […]",
-      "body": "As the US gets closer to permanently adopting daylight saving time following the House advancing the Sunshine Protection Act in July , there could be some unforeseen consequences to getting an extra hour of sun in the evening all year long. Following the Canadian provinces of British Columbia and Manitoba permanently switching to daylight saving this year, Google has shared some suggested fixes if Android devices are showing the incorrect time when clocks aren't turned back an hour there on November 1st.\n\nIn an announcement shared to the Android community help forums , Google suggests a simple fix for Canadians experiencing issues as a result …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1016977/google-android-incorrect-time-daylight-saving-permanent-canada",
-      "publishedAt": "2026-10-22T19:13:42.000Z",
-      "categories": [
-        "tecnologia-general",
-        "android"
       ]
     },
     {
@@ -5547,37 +5664,6 @@
     },
     {
       "kind": "news",
-      "id": "techcrunch-81dbc560c41900a2:en",
-      "sourceId": "techcrunch-81dbc560c41900a2",
-      "lang": "en",
-      "title": "OpenAI makes its Jev competitor widely available as decision model competition heats up",
-      "summary": "OpenAI is launching its decision model to the world. Can it compete with the original Jev?",
-      "body": "OpenAI made its Decisions API model widely available to users for the first time, entering the market for fast, cheap intelligence that recently made TypeSafe, a startup founded by a former researcher at the frontier lab, a $7.6 billion company .\n\nTypeSafe’s Jev model created a category for deep learning models that act as super classifiers: Given a set of options, they can quickly make choices and offer a confidence rating in their decision. Software developers quickly found that these decision or System One models could replace LLMs in a variety of workflows, operating more quickly and a at dramatically lower cost.\n\nNikunj Handa, the product lead for OpenAI’s APIs, told TechCrunch that his colleagues saw Jev and said “wow, we we have like a million use cases for this.” Handa’s team sprinted to offer their own version: Rather than building a specifically calibrated decision model, the team took ChatGPT Luna and reconfigured it to speed up the inference and lower the cost.\n\n“The big unlock with Decisions API has been the speed, shrinking things from one to three seconds to 100, 120, 180 milliseconds,” Handa said. “In the future, we may sort of like have specific training to make our models like even better in these ways. But right now, it’s just plain old Luna that gets the job done.”\n\nAnnounced at the company’s developer day on September 29, the Decisions API became available to all customers on Thursday. OpenAI added new voice and visual modalities to the public version, and worked to ensure lower latency in regions around the world by targeting its inference resources geographically.\n\nIn initial trials with customers like Box, Datadog, Ramp, and Speak, engineers used the API to replace OpenAI’s LLMs with higher throughput. Andrew Hsu, the CTO at Speak, which builds AI language tutors, said the Decisions API allowed the company to cut the time between actions from 1.4 seconds to .13 seconds. OpenAI also used the product to improve their Dots voice assistant’s responsiveness.\n\nStill, it’s not clear exactly what makes a good decision model, other than “it works for you” — optimization across intelligence, cost, calibration, and speed seems to differ by workload. TypeSafe CEO Diogo Almeida distrusts benchmarks and urges people to trial the models in their own work, but even TypeSafe released its own rankings last week alongside the release of its latest Jev model, which includes new features including support for images and smart-if statements.\n\nPublic benchmarks like the AIM System One Index and the Artificial Analysis Decision Index tend to favor D1 Ultra, a new decision model that Liquid released last week, and Base Lab’s Elephant-1. The latest Jev model remains competitive on both indices, in seventh and third, with OpenAI’s Decision Model falling eighth and fourteenth, respectively. However, TypeSafe’s offerings are, for now, the most widely-queried on OpenRouter.\n\nThe most fun Jev benchmark, however, is JevMan , a benchmark where decision models play PacMan; the latest Jev model tops that ranking. Felix Wunderlich, the chief growth officer at Opper AI, which built the benchmark, said the classic game “is an interesting test because of its nonstop stream of quick, high-stakes decisions. At every junction the model must decide where to go in a few hundred milliseconds.”\n\nWhere OpenAI’s arguably more capable model may have an advantage is in multi-modality—for image classification, “Luna is extremely powerful and has been showing better calibrations,” Handa told TechCrunch, adding that OpenAI customers want the Decisions API to be more flexible about using images as outputs as well.\n\nHanda also saw further increases in speed enabling new use cases: “Can we get this to something like you know 60 milliseconds, and then you could imagine like an API like call like for every single frame in like a video?”\n\nAs these offerings get faster and cheaper, we can expect them to live up to Jev’s namesake, an economist who explained how using a resource more efficiently makes it more ubiquitous. Or, as Handa sees it, there will be an expanding “crazy set of use cases” that were hiding in plain sight until the decision models revealed them.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/22/openai-makes-its-jev-competitor-widely-available-as-decision-model-competition-heats-up/",
-      "publishedAt": "2026-10-22T19:00:00.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-e599d7e8bb0f8aa0:en",
-      "sourceId": "the-verge-e599d7e8bb0f8aa0",
-      "lang": "en",
-      "title": "Discord now formats Markdown previews right",
-      "summary": "Discord's latest update released today has a big improvement for Markdown previews: they should now render correctly instead of with \"a bunch of symbols,\" according to the company. LLMs and AI agents often rely on Markdown files for instructions and context, so these improved previews could be helpful for people sharing information about AI projects […]",
-      "body": "Discord's latest update released today has a big improvement for Markdown previews: they should now render correctly instead of with \"a bunch of symbols,\" according to the company. LLMs and AI agents often rely on Markdown files for instructions and context, so these improved previews could be helpful for people sharing information about AI projects on the platform.\n\n\"When you upload a Markdown (.md) file, you'll now see the file rendered all nice and neat and pretty instead of with a bunch of symbols,\" Discord says . \"This includes tables, formatting, all that good stuff. Totally great for when you're doing a casual Sunday-night sharing READ …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/news/1017012/discord-markdown-previews-organize-servers-channels",
-      "publishedAt": "2026-10-22T18:58:19.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "engadget-8e2abbd9da6d9bd1:en",
       "sourceId": "engadget-8e2abbd9da6d9bd1",
       "lang": "en",
@@ -5606,71 +5692,6 @@
       "categories": [
         "tecnologia-general",
         "apple"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-d3d680de5dadab12:en",
-      "sourceId": "9to5mac-d3d680de5dadab12",
-      "lang": "en",
-      "title": "Apple TV is adding two new features with iOS 27.2",
-      "summary": "iOS 27.2 is coming next week and brings two new features for Apple TV subscribers. Here’s what’s new. more…",
-      "body": "iOS 27.2 is coming next week and brings two new features for Apple TV subscribers. Here’s what’s new.\n\nApple TV is currently the only major streaming service that doesn’t offer user profiles on iPhone and iPad. But that’s about to change with iOS and iPadOS 27.2.\n\nProfiles already exist in tvOS for big-screen viewing of Apple TV content, but now they’re coming to Apple’s other platforms too.\n\nWhen you create user profiles on one platform, they automatically sync to others, letting you keep playback history, queues, and recommendations all personalized for each viewer. And if you set up a profile for your child, they’ll only see age-appropriate Apple TV content.\n\nAlongside the expansion of profiles to more platforms, Apple has added a variety of new profile image options in iOS 27.2. Characters from Apple TV kids’ series like The Snoopy Show, Frog and Toad, and Stillwater are all now available.\n\nApple TV is taking accessibility a step beyond subtitle options by adding official support for sign language on select movies and shows.\n\nWith iOS 27.2, users can optionally enable American Sign Language (ASL) or British Sign Language (BSL).\n\nYou’ll find the option to enable sign language inside the Settings app under Apps ⇾ TV ⇾ Sign Language. It’s unknown how many Apple TV titles will support sign language initially, but it’s great to see the feature added.\n\nFor the latest on Apple TV releases happening soon, see our latest roundup here .\n\nApple TV is available for $14.99 per month , or you can get it discounted through the Apple One bundle .",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/22/apple-tv-is-adding-two-new-features-with-ios-27-2/",
-      "publishedAt": "2026-10-22T18:16:52.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-4a9f6c1162805129:en",
-      "sourceId": "the-verge-4a9f6c1162805129",
-      "lang": "en",
-      "title": "In Meta’s version of the future, I’ll have my Muse call your Muse",
-      "summary": "Mark Zuckerberg is barrelling toward a future in which an autonomous network of AI agents will run our lives - shopping for us, working for us, talking to other people's AI agents for us. Are humans ready for this very specific and unrelenting vision of a life in which we communicate primarily through bot proxies? […]",
-      "body": "Mark Zuckerberg is barrelling toward a future in which an autonomous network of AI agents will run our lives - shopping for us, working for us, talking to other people's AI agents for us. Are humans ready for this very specific and unrelenting vision of a life in which we communicate primarily through bot proxies? Actually, don't answer that. The more urgent question coming off Meta's quarterly earnings call Wednesday night is more likely to be: \"Is he?\"\n\nZuckerberg is staking Meta's future on Muse, the personal AI agent it released to the general public last month. It's early days, but Zuckerberg told investors on Wednesday's call that he s …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1016905/meta-earnings-fall-2026-muse-network",
-      "publishedAt": "2026-10-22T18:15:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-811ac72145c9cf5b:en",
-      "sourceId": "9to5mac-811ac72145c9cf5b",
-      "lang": "en",
-      "title": "Orangetheory adds Apple Watch in-studio workout tracking for a one-time fee",
-      "summary": "Starting tomorrow, Orangetheory Fitness will allow members to connect the Apple Watch to the club’s proprietary in-studio performance-tracking experience. Using a personal Apple Watch with the Orangetheory system will require a one-time fee. more…",
-      "body": "Starting tomorrow, Orangetheory Fitness will allow members to connect the Apple Watch to the club’s proprietary in-studio performance-tracking experience. Using a personal Apple Watch with the Orangetheory system will require a one-time fee.\n\n“The new option, called OTconnect for Apple Watch, is part of Orangetheory’s proprietary connected technology platform, which tracks real-time performance and delivers post-class results,” Orangetheory Fitness announced today.\n\nConnecting a personal Apple Watch to the Orangetheory system will require a one-time $99 fee, the fitness club says. Apple Watch connectivity is optional and joins the existing OTconnect Beat solution for Orangetheory’s connected system.\n\n“For a one-time $99 connection fee, members can now use their Apple Watch during an Orangetheory class to access real-time performance data, including calories burned, heart rate and heart rate zones displayed directly on the wrist, in addition to Splat Points.”\n\nThe company shares more details about how the OTConnect for Apple Watch system will work.\n\n“Before class, members can start their workout on Apple Watch once it connects to OTconnect. After class, they can review their performance summary directly in the app on Apple Watch, with additional workout data and personalized insights available through the OTF app and via email post-class.”\n\nOrangetheory previously introduced Apple Watch integration in 2019 through its OTbeat Link accessory . The $129 device attached to an Apple Watch band and connected the watch to the company’s in-studio heart rate monitoring system.\n\nThe new OTconnect integration eliminates the need for that extra hardware, which was discontinued around 2022.\n\nIn addition to unlocking OTConnect for Apple Watch, the one-time charge also includes two more perks with “up to two free months of Apple Music and Apple Fitness+.”\n\n“OTconnect for Apple Watch requires watchOS 11.6 or later and will be available for Apple Watch Series 6 or later, Apple Watch SE or later, and Apple Watch Ultra or later,” the company says. You can read the announcement in full here .\n\nThe new Apple Watch Series 12 and Ultra 4 are both available now.\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/22/orangetheory-adds-apple-watch-in-studio-workout-tracking-for-a-one-time-fee/",
-      "publishedAt": "2026-10-22T17:48:26.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-1ed38278ed12b5d7:en",
-      "sourceId": "9to5mac-1ed38278ed12b5d7",
-      "lang": "en",
-      "title": "Pages, Keynote, Numbers just added powerful new AI features",
-      "summary": "Apple is rolling out AI-centric updates to its iWork suite—Pages, Keynote, Numbers—that include a brand new ‘Intelligent Assistant’ with powerful capabilities. Here’s what it can do. more…",
-      "body": "Apple is rolling out AI-centric updates to its iWork suite—Pages, Keynote, Numbers—that include a brand new ‘Intelligent Assistant’ with powerful capabilities. Here’s what it can do.\n\nIf you subscribe to Apple Creator Studio, Apple’s latest updates to Pages, Keynote, and Numbers today add an Intelligent Assistant—seemingly separate from Siri AI—that will help you in a variety of ways inside the apps.\n\nIntelligent Assistant is available in beta in US English only, and requires iOS 27 or later.\n\nHere’s what it can do in each of the iWork apps, per Apple’s release notes:\n\nPages — Intelligent Assistant features\n\nKeynote — Intelligent Assistant features\n\nNumbers — Intelligent Assistant features\n\nBeyond these AI features for Apple Creator Studio subscribers, Apple says all users can benefit from a new file format in Keynote.\n\nKeynote will let you import and export presentations in a new Interchange Format (.keyx), which Apple says is an open file format that will make it easier to edit Keynote files in other apps.\n\nI’ve updated all iWork apps and don’t yet see the Intelligent Assistant, but it’s possible there’s a server-side component that Apple will imminently activate.\n\nHave you tried the Intelligent Assistant yet? How’s it working for you? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/22/pages-keynote-numbers-just-added-powerful-new-ai-features/",
-      "publishedAt": "2026-10-22T17:44:43.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "ia-accesibilidad"
       ]
     },
     {

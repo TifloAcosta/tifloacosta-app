@@ -1,5 +1,104 @@
 [
   {
+    "id": "cti-once-f841f3b33b600d5e",
+    "type": "news",
+    "sourceId": "cti-once",
+    "sourceName": "CTI de la ONCE",
+    "sourceUrl": "https://cti.once.es/",
+    "originalUrl": "https://cti.once.es/noticias/ya-disponible-el-informe-de-accesibilidad-del-videojuego-despertar-de-endor-roguelite-tanto-para-ios-como-para-android",
+    "originalLanguage": "es",
+    "publishedAt": "2026-10-22T12:00:00.000Z",
+    "categories": [
+      "tecnologia-accesibilidad",
+      "apple",
+      "android"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Modos-ON ¡Ya disponible el informe de accesibilidad del videojuego Despertar de Endor: Roguelite tanto para iOS como para Android!",
+        "summary": "Desde el Centro de Tiflotecnología e Innovación de la ONCE (CTI) se ha realizado un análisis detallado evaluando sus distintos apartados y su impacto en la experiencia de juego.",
+        "body": "Desde el Centro de Tiflotecnología e Innovación de la ONCE (CTI) se ha realizado un análisis detallado evaluando sus distintos apartados y su impacto en la experiencia de juego.\n\nEn los siguientes enlaces enlace encontrarás todo lo relacionado con la accesibilidad de este videojuego en los diferentes sistemas operativos:"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-2a0a22f2dbfeae7e",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/22/gurman-iphone-duo-2-face-id/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-22T09:56:28.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Gurman: iPhone Duo 2 prototypes with Face ID are already being tested inside Apple",
+        "summary": "The iPhone Duo comes out tomorrow but, given the strong pre-order demand, it is already looking to be a smash hit. And we are all expecting Apple to follow up with a second-generation model next fall, which means the company has to be already working on the next-gen hardware. On his Power On podcast , Mark Gurman reports that iPhone Duo 2 prototypes inside Apple include Face ID, with the Face ID sensor being integrated beneath the display on the outer screen. more…",
+        "body": "The iPhone Duo comes out tomorrow but, given the strong pre-order demand, it is already looking to be a smash hit. And we are all expecting Apple to follow up with a second-generation model next fall, which means the company has to be already working on the next-gen hardware.\n\nOn his Power On podcast , Mark Gurman reports that iPhone Duo 2 prototypes inside Apple include Face ID, with the Face ID sensor being integrated beneath the display on the outer screen.\n\nThe shift from Face ID to Touch ID on this phone was one of the biggest complaints raised by early iPhone Duo reviewers. 9to5Mac’s Chance Miller called it “the hardest thing to get used to” with the new foldable.\n\nFor the first-gen iPhone Duo, fitting Face ID inside the super-thin enclosure seemed to be the blocker. But Apple has been working on making Face ID smaller and less obtrusive, as seen with the under-display IR camera on the iPhone 18 Pro.\n\nWith iPhone Duo 2 and the twentieth anniversary iPhone Pro, we may see another evolution where both the IR camera and the flood illuminator go behind the screen, allowing the bezel or Dynamic Island cutout to be even smaller still.\n\nObviously, that just because they are testing the technology on iPhone Duo prototypes right now, it is not guaranteed that it will ship in next year’s revision. But it seems like that is what Apple is aiming for, so customers can probably expect it either next year or as part of the iPhone Duo 3, if development slips.\n\nOn the same episode, Gurman also says that employees have been exploring ways to also bring the Action button to a next-generation model of iPhone Duo as well, although he seems less confident about this.\n\nIt’s also unclear if Apple would remove the Touch ID sensor from the power button if it adds Face ID to the device, or whether it would keep both methods of biometrics allowing users to authenticate whether they are looking at the inner or outer display.\n\nMy favorite Apple gear and accessories"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-a24cefd261e4fe36",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/22/security-bite-podcast-who-is-your-ai-agent-really-working-for/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-22T09:00:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Security Bite Podcast: Who is your AI agent really working for?",
+        "summary": "9to5Mac Security Bite is exclusively brought to you by Mosyle, the only Apple Unified Platform . Making Apple devices work-ready and enterprise-safe is all we do. Our unique integrated approach to management and security combines state-of-the-art Apple-specific security solutions for fully automated Hardening & Compliance, Next Generation EDR, AI-powered Zero Trust, and exclusive Privilege Management with the most powerful and modern Apple MDM on the market. The result is a totally automated Apple Unified Platform currently trusted by over 45,000 organizations to make millions of Apple devices work-ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple . This week, I welcome Ron Zayas to the Security Bite podcast . Ron is the CEO of Ironwall by Incogni, which helps public officials scrub and keep their personal information from data brokers and people-search sites. Earlier this year, he appeared on 60 Minutes to talk about exactly that. But in this episode, we discuss all things privacy around AI agents, and who yours is really working for. Enjoy. more…",
+        "body": "9to5Mac Security Bite is exclusively brought to you by Mosyle, the only Apple Unified Platform . Making Apple devices work-ready and enterprise-safe is all we do. Our unique integrated approach to management and security combines state-of-the-art Apple-specific security solutions for fully automated Hardening & Compliance, Next Generation EDR, AI-powered Zero Trust, and exclusive Privilege Management with the most powerful and modern Apple MDM on the market. The result is a totally automated Apple Unified Platform currently trusted by over 45,000 organizations to make millions of Apple devices work-ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple .\n\nThis week, I welcome Ron Zayas to the Security Bite podcast . Ron is the CEO of Ironwall by Incogni, which helps public officials scrub and keep their personal information from data brokers and people-search sites. Earlier this year, he appeared on 60 Minutes to talk about exactly that. But in this episode, we discuss all things privacy around AI agents, and who yours is really working for. Enjoy.\n\nSecurity Bite is 9to5Mac’s weekly deep dive into the world of Apple security. Each week, Arin Waichulis unpacks new threats, privacy concerns, vulnerabilities, and more, shaping an ecosystem of over 2 billion devices. Every other week on the Security Bite Podcast , he sits down with experts in the field to break down the most pressing topics ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-28dd2285cd9c3c0f",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2293801/fortnite-is-back-on-apple-australian-app-store-following-court-ruling/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-22T08:18:58.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Fortnite is back on Apple's Australian App Store following court ruling",
+        "summary": "Fortnite is back on the App Store in Australia after a federal court ordered Apple to open its iOS ecosystem up to competition.",
+        "body": "The ruling also forces Apple to allow alternative app stores and methods of payment.\n\nFortnite is back on the App Store in Australia after a federal court ordered Apple to open its iOS ecosystem up to competition. The judgement will also force Apple to permit alternative app stores without imposing conditions and allow developers to show alternative payment options, among other clauses. Apple disagreed with the court's findings and said it would challenge them.\n\n\"Big news: Fortnite is coming back to the App Store in Australia tomorrow!\" Epic Games wrote in a post on X . \"This is great news for developers worldwide and iOS users in Australia who will benefit from an open mobile app ecosystem.\"\n\nIn May 2026, Fortnite returned to iOS everywhere around the world except Australia because of its ongoing court battle there. Epic said at the time that Apple continued to enforce terms that Australian courts had found to be unlawful and was awaiting a final decision, which arrived yesterday.\n\nAustralian courts followed the EU's blueprint for forcing Apple to open up its ecosystem. At the same time, the ruling includes clauses that would preclude any of the \"malicious compliance\" Apple has been accused of in the past, like \"Core Technology\" or developer fees for using third-party app stores.\n\nAs a brief summary of the 1,104-paragraph filing, the court ordered Apple to open iOS to third party app stores and allow users to download apps directly from developers. Developers will be able to offer alternative payment systems (free from excessive Apple fees and conditions) and not forced to use Apple's in-app payment system. The App Store can't block developers from pointing users to outside apps to make purchases, and users must not find any \"friction\" when paying with alternative systems or installing apps from outside the App Store.\n\nApple was also ordered to pay 85 percent Epic's legal costs and must implement the orders by March 1, 2027 or send proof that it needs an extension by February 15, 2027. However, Apple said it disagreed with many parts of the decision and plans to appeal.\n\n\"We will request a stay and appeal the outcome to seek a resolution ​that ​respects our ⁠intellectual property and protects the safe, ​secure experience that consumers ​and ⁠developers expect from the App Store,\" an spokesperson ⁠told ​Reuters . Engadget has reached out to Epic and Apple for comment."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "9to5mac-326a497d7365b335",
     "type": "news",
     "sourceId": "9to5mac",
@@ -67,32 +166,6 @@
         "title": "Meta wants to pay for its broad AI buildout with a newly created class of stock",
         "summary": "The social media giant is planning a new stock strategy to help power its broad investments in AI models and services.",
         "body": "Meta is making a big push into AI, and it’s creating a new kind of stock that could help pay for it.\n\nOn Wednesday, as the company reported its third-quarter earnings, Semafor reported the company might issue non-voting stock, meaning shares that don’t give their owners a vote on company decisions, to help fund its push into artificial intelligence.\n\nDuring Meta’s earnings call, the company confirmed that reporting. Meta’s chief financial officer, Susan Li, said the company plans to “create a new class of non-voting capital stock, which will be distributed to all existing shareholders through a stock dividend.”\n\nLi later added that the company “created this new class of shares with the purpose of creating a publicly traded non-voting stock usable for capital raising, employee compensation, acquisitions, and other general corporate purposes while preserving the voting power of existing Class A and B shareholders.”\n\nThe shares will allow the company to maintain its current “founder-led structure,” she added. They will also expand its “funding tools and give us flexibility to invest behind the unprecedented momentum we’re seeing across every part of our business, driven by AI.”\n\nMeta’s earnings were strong this past quarter, beating Wall Street expectations. The company made $64 billion in revenue, a jump of 26% from a year earlier. Its costs and expenses also rose too, however, by 68% year over year.\n\nReality Labs, the division responsible for Meta’s AR glasses, VR headsets, and VR software, continues to lose money, though less than it used to. The company said in its earnings report that it expects the division’s losses to shrink from its 2025 levels to between $18 billion and $19 billion.\n\nMeta has made a big push into AI over the past year. The company has released several AI models, including Muse Spark and Muse Glimmer earlier this year. In recent weeks, it added Muse Wonder and Muse Spark Open, an open-weight model whose underlying parameters are publicly available for outsiders to use and build on. Meta also launched a coding agent for software developers called Muse Code. At its Meta Connect event this year, the company announced a new line of cute and cuddly avatars for AI assistant, Meta Muse, in a push to make its AI services more relatable (and also meme-able ).\n\nAs far as can be discerned, those AI products are doing well. “In just a month and a half, more than 10 million people in the U.S. and Canada have set up Muse personal agents,” CEO Mark Zuckerberg said during Wednesday’s earnings call. “Growth continues to be strong, and we have been number one in the App Store almost every day.”\n\n“Now that Muse has clear product-market fit, we are entering a new phase and a more operational phase that is focused on scaling it,” Zuckerberg added, claiming later that the company expects to grow the product’s appeal to eventually “serve billions of people.”\n\nThe company also noted that certain storm clouds linger on the horizon in the form of ongoing regulatory and legal issues. “We continue to monitor active legal and regulatory matters that could significantly impact our business and financial results,” said Li. “For example, we continue to see scrutiny on youth-related issues in several markets, and have a number of youth-related trials scheduled in the coming months in the United States.”"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-8a219e4aa3af56ba",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/21/daily-october-21-2026/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T22:44:33.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "android",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "9to5Mac Daily: October 21, 2026 – New iPhone Duo features, more",
-        "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
-        "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show."
       }
     },
     "media": null
@@ -188,7 +261,7 @@
     "locales": {
       "en": {
         "title": "Meta says Muse has over 10M users, with shopping a top activity",
-        "summary": "Meta Muse users are adopting the app for shopping and personal productivity, the company said during Q3 earnings. The AI app now has over 10M users.",
+        "summary": "Meta Muse users are adopting the app for shopping and personal productivity, the company said during its Q3 earnings call. The AI app now has over 10M users.",
         "body": "Meta said during its third-quarter earnings call on Wednesday that its AI app Muse has been adopted by more than 10 million users, confirming estimates released earlier this week by market intelligence firm Sensor Tower.\n\nBut it is how people are using it, and how much they’re spending that has caught CEO Mark Zuckerberg’s attention. Zuckerberg said about 25% of people who set up Muse now use it daily, helping improve retention.\n\nHe also shared that over a quarter of Muse’s engaged users who were shopping via the AI agent, had an average purchase size of over $200, which was surprising even to industry insiders.\n\n“Plaid told us that they hadn’t seen activity like they’re seeing with their connector on any other service before,” Zuckerberg said, referring to the financial technology company that connects payment apps to customers’ bank accounts. Muse uses Plaid’s connector to enable agentic shopping.\n\nBeyond shopping, Zuckerberg said other popular uses for Muse include personal productivity tasks, such as connecting the AI agent to users’ email or calendars. The exec stressed that this indicates users trusted Muse’s security setup, which includes a feature called “Muse Secure VM” designed to protect their data and privacy. He also mentioned that the forthcoming “Muse Confidential VM” will prevent even Meta from seeing users’ content.\n\nNow that Muse has achieved “product-market fit,” Zuckerberg said Meta’s focus will shift to scaling the AI agent, increasing revenue, and optimizing its compute costs. Remarkably, the tech company is forecasting that Muse will eventually bring in more revenue per user than its “family of apps” users do today — meaning its users on Facebook, Instagram, WhatsApp, and Messenger. Currently, that figure is around “several hundreds of dollars annually,” Zuckerberg said.\n\nMeta has said it ultimately intends to monetize Muse by keeping it free for most users, but keeping a percentage of the commerce taking place on the platform. Power users who want access to the most advanced AI models or more tokens will also have to pay.\n\nZuckerberg also noted that Meta believes Muse will be profitable after it scales.\n\n“On the compute side, we are building out the capacity to serve more than a billion people over the next few years,” he told bankers and analysts on the Q3 earnings call. “In the near term, Muse is very compute-intensive to run, but we expect to improve its cost efficiency by more than 10x in the next year, which will enable it to be profitable once the revenue lines are at scale.”\n\nMuse will also play a central role in Meta’s smart glasses strategy. Reality Labs, the division responsible for smart glasses, VR, and the metaverse, is still losing billions. However, the division’s losses are expected to improve from $19.1 billion in 2025 to $15 billion this year.\n\nBeyond scaling and supporting its hardware strategy, Zuckerberg teased the company’s plans for something he called the “Muse network.” He described this as taking Muse from a “single-player game” to one where “your Muses can work with your friends’ and your families’ [Muses].”\n\n“And if you want to buy something, it’s not just navigating to that business’s website; it’s talking to their agent,” he added."
       }
     },
@@ -241,29 +314,6 @@
     "media": null
   },
   {
-    "id": "engadget-ad80cc2ad557f780",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2293597/new-mexico-court-order-meta-pay-25-billion-privacy-case/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T20:43:17.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta ordered to cough up $25 billion in New Mexico privacy case",
-        "summary": "The case stemmed from the nearly decade-old Cambridge Analytica scandal.",
-        "body": "The case stemmed from the nearly decade-old Cambridge Analytica scandal.\n\nIf you thought Meta's self-inflicted blows from the Cambridge Analytica data harvesting scandal were over, think again. On Wednesday, a New Mexico judge ordered the company to pay the state $25 billion in penalties, having found that the company made misleading statements about the privacy of consumers in the state. \"It has been a long time coming holding Big Tech accountable,\" New Mexico Attorney General Raúl Torrez said in a press conference (via Reuters) .\n\nThe case, filed in 2021, wasn't directly about the data harvested by Cambridge Analytica. Instead, it targeted Facebook's statements over the years regarding user data, privacy settings and content moderation.\n\nIn September, a Santa Fe jury found that Meta violated New Mexico's Unfair Practices Act by misleading residents on those issues. The jury counted a staggering 43 million violations. At up to $5,000 for each violation, the maximum penalty came to about $219 billion.\n\nThe state asked for $35 billion to $40 billion , with New Mexico attorney Randi McGinn saying the court \"should speak to Meta in the only language it understands, which is money, and the value of its stock price.\" Meta requested no more than $3.45 billion. Judge Francis Mathew ended up at $25 billion. He didn't hold back in his ruling, describing Facebook's promised post-scandal investigation as \"willfully ineffective\" while noting \"the clear intentional and systematic nature of Facebook's repeated misstatements.\"\n\nThis lawsuit is separate from one the company recently settled with nearly every other US state over child safety concerns. That included nearly $459 million specifically for Cambridge Analytica data harvesting claims. New Mexico skipped that settlement, which opened the door to this trial.\n\nThe money will go to New Mexico's school system, with interest accruing at 15 percent a year until the penalty is paid in full. Meta has said it will appeal, with chief legal officer C.J. Mahoney calling it \"a tax on speech.\""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "the-verge-7941ba0f9e34cc10",
     "type": "news",
     "sourceId": "the-verge",
@@ -283,31 +333,6 @@
         "title": "PHP: The three letters that shut down sites all over the internet today",
         "summary": "Two bugs found with AI are behind major issues today for 4chan, DeviantArt, Wikipedia, and the blog where the bar around the corner posts pictures of people's dogs. The \"critical vulnerabilities\" were discovered in the PHP programming language, which underpins much of the internet, including any site built on WordPress. But it's far bigger than […]",
         "body": "Two bugs found with AI are behind major issues today for 4chan, DeviantArt, Wikipedia , and the blog where the bar around the corner posts pictures of people's dogs. The \"critical vulnerabilities\" were discovered in the PHP programming language, which underpins much of the internet, including any site built on WordPress. But it's far bigger than that. Some Dutch and Finnish government agencies took their sites down as a precaution. The NSA Cybersecurity account on X recommended that organizations take their systems offline if \"an immediate update is not feasible,\" as did the UK's National Cyber Security Center . Even Pok&eacute;mon Home and Pok&eacute;mon C …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-062b02b6476e2adc",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/21/ios-27-2-reveals-apples-messages-app-could-soon-get-highly-requested-change/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T20:05:13.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27.2 reveals Apple’s Messages app could soon get highly requested change",
-        "summary": "iOS 27.2 launches next week , and the update includes code that points to a forthcoming Messages app change: the ability to exclude muted conversations from the unread badge count. more…",
-        "body": "iOS 27.2 launches next week , and the update includes code that points to a forthcoming Messages app change: the ability to exclude muted conversations from the unread badge count.\n\nDo you belong to a very active group chat? Or are there people in your life that you prefer to keep on mute in the Messages app?\n\nIf either or both is true, it might bug you that muting those conversations doesn’t impact the Messages app’s unread badge count.\n\nExcept soon, according to iOS 27.2 code, that might finally change.\n\nAaron Perris shared the discovery this week in a post on X :\n\nPersonally, I’m very excited by this potential change.\n\nI keep a couple of busy group chats muted inside Messages so I’m not pinged with notifications constantly. And as someone who keeps notification badges disabled for most apps, a red badge is always very noticeable. So it always bothers me when Messages has an unread badge for group chats I’ve muted.\n\nWhile it sounds like this feature won’t ship in iOS 27.2, hopefully Apple is able to offer it soon.\n\nWould you use this Messages option if Apple provided it? Let us know in the comments."
       }
     },
     "media": null
@@ -2514,30 +2539,6 @@
         "title": "In-Process 7th August 2026",
         "summary": "We’re getting ever closer to NVDA 2026.2 and we hit a new milestone towards that this week. Let’s have a look at what’s in this week’s blog and then dive in: NVDA 2026.2 Beta 10 Getting Help WebAIM Screen Reader User Survey Thanks Acapela Moving by Sentence NVDA 2026.2 Beta 10 NVDA 2026.2 is nearly… Read More",
         "body": "We’re getting ever closer to NVDA 2026.2 and we hit a new milestone towards that this week. Let’s have a look at what’s in this week’s blog and then dive in:\n\nNVDA 2026.2 is nearly here! This week we’re up to NVDA 2026.2 Beta 10 . We are now in the “String freeze” – that is, we don’t make any changes for a couple of weeks to give the translators time to update their work before the stable release. So, the next step should be a release candidate in a couple of weeks. Then, all going to plan, the final release a week or so after that. Let’s have a look at the updates from the betas since the last In-Process:\n\nChanges introduced in NVDA 2026.2 Beta 10 : Updates to translations Fixed touchscreen, touchpad and mouse input for magnifier Added gestures for braille automatic scroll commands Removed True Center Mode and Border Mode from the magnifier due to design bugs Remove non-functional “Custom” option from the math decimal separator setting\n\nChanges introduced in Beta 9: Updates to translations Update Braille Reading and Automatic Scroll Rate in User Guide Moving by sentence in Word (alt+downArrow/alt+upArrow) at the start/end of a document now stops there instead of wrapping around to the opposite end Changed quick access keys for magnifier settings to ensure they are unique Changes introduced in Beta 8: Updates to translations Improve magnifier behaviour when using higher DPI scaling Fix magnifier from interfering with opening dictionary dialogs Improve the handling of failing to activate the magnifier Block touch screen input when using the magnifier where possible, as it is not supported yet\n\nWe try to ensure there are plenty of ways for NVDA users to get help. Since you’re reading this blog post, I HOPE you would consider our blog one of the ways you learn more about NVDA. We have training material and telephone support in our shop, and they are both very popular options (particularly combined in the NVDA Productivity Bundle ). But what about in NVDA itself? There are a couple of ways you can get help while you are using NVDA: The User Guide. (And particularly the quick start guide for new users). The user guide contains information on all of the features of NVDA. It is an excellent resource to refer back to after completing “ Basic Training for NVDA ” and learning about all the features. Press NVDA+n to open the NVDA menu, then h for the help submenu, which starts on the User Guide The other items in the “Help” menu for information including what is new , links to the NV Access website , help and training , and the “ Commands quick reference ” (the tables of keystrokes and gestures extracted from the user guide). Context sensitive help. From within any dialog in NVDA, press f1 to open the user guide to the topic on the current control. Input Help. Press NVDA+1 (the 1 in the number row, above Q). In this mode, NVDA will report any key that you press. If you press an NVDA command (such as NVDA+tab), it will report that. Keys pressed and commands are not executed. This can be a great way of exploring a new keyboard layout. Press NVDA+1 again to turn input help off. Report keystroke: While we’re on help for individual keys, the Report Keystroke command tells you the keystroke to access the currently focussed control. Press shift+numpad 2 (laptop: NVDA+control+shift+dot ) to report the keystroke for the current control .\n\nThe WebAIM screen reader user’s survey is on again. This is the 11th edition of the survey, which is the largest survey we are aware of which collects data on screen reader usage and trends. We encourage everyone to complete it in order to give the community as accurate a picture of how you use a screen reader as possible!\n\nThe one question I’d like to highlight is “ Screen reader satisfaction ”. Please do answer all the questions honestly, including that one – but if there is anything which makes you think “I’m not 100% satisfied with NVDA” – please let us know! You can create an issue on GitHub (and we’ve previously included GitHub instructions here in In-Process , you can email us , reach us in the official NVDA mailing list , or on social media .\n\nWe are very grateful to all our donors . They are one of the main reasons we are able to continue to provide NVDA for free to anyone who can use it anywhere in the world.\n\nThis week, we’d like to give a shoutout to Acapela who make the popular Acapela TTS for NVDA . If you are interested in trying Acapela out, they offer an evaluation version which is fully functional and provides access to all voices and all functionalities for 15 days.\n\nAcapela, along with many other options, are listed on our Extra Voices page .\n\nAnd, if you would like to donate and help keep NVDA free for everyone, we would welcome your support. Please visit our donation page for PayPal or bank donation options. You can also become a GitHub Sponsor .\n\nOne of the fixes in the recent NVDA 2026.2 betas is a fix to moving by sentences in Microsoft Word. In many places in Microsoft Office, you can press alt+down arrow to move to the next sentence and alt+up arrow to move to the previous sentence. While this is a feature of Office, if you appreciate moving by sentence and would like to be able to use it everywhere, try out the “ Sentence Nav ” add-on in the add-on store.\n\nWant more ways of getting around? How about: Word ( control+left arrow and control+right arrow ) Paragraph ( control+up arrow and control+down arrow OR shift+p and p ) And as an added bonus for paragraph navigation, here’s a related feature: Paragraph style , which lets you change how NVDA moves when moving by paragraph Single letter navigation What other ways do you prefer to navigate documents? Continue the conversation on social media .\n\nThat’s all for this week. Next time around we’ll be close to the final 2026.2 release, so for now, do try out the latest beta and be sure to report any issues. Also don’t forget to do the WebAIM Screen Reader User Survey ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "cti-once-77fd076e8dd029a7",
-    "type": "news",
-    "sourceId": "cti-once",
-    "sourceName": "CTI de la ONCE",
-    "sourceUrl": "https://cti.once.es/",
-    "originalUrl": "https://cti.once.es/noticias/evaluaciones-de-app-actualizadas-o-incorporadas-en-el-clubonce-en-el-mes-de-julio-5",
-    "originalLanguage": "es",
-    "publishedAt": "2026-08-06T12:00:00.000Z",
-    "categories": [
-      "tecnologia-accesibilidad",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "Evaluaciones de APP Evaluaciones de APP actualizadas o incorporadas en el ClubONCE en el mes de julio.",
-        "summary": "A lo largo del pasado mes de julio se han evaluado las siguientes APP:",
-        "body": "A lo largo del pasado mes de julio se han evaluado las siguientes APP:\n\nAndroid\n\niOS\n\nEn esta ocasión se han evaluado Apps categorizadas en: Entretenimiento, redes sociales y utilidades.\n\nSi tiene problemas para abrir los enlaces, copie las url que se muestran a continuación en su navegador:\n\nAndroid\n\niOS\n\nRecordamos a las personas afiliadas que estén interesados en estos informes, que pueden suscribirse a Valoraciones Accesibilidad de APP, de esta manera recibirán un correo cada vez que se publique una nueva aplicación, permitiéndoles disponer de la información puntualmente.\n\nEsta información y los documentos completos de evaluación de cada una de estas aplicaciones están disponibles en el apartado de Valoraciones de accesibilidad de aplicaciones para móviles o accediendo con el navegador a la ruta ClubONCE / Servicios / Autonomía Personal y Tecnología / Tiflotecnología / Valoraciones de accesibilidad de aplicaciones móviles."
       }
     },
     "media": null

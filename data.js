@@ -21,7 +21,6 @@ window.TIFLO_RESOURCES = [
     "new": true,
     "newsDate": "2026-10-23T12:00:00Z"
   },
-
   {
     "id": "es-curso-braille-android-talkback-2026",
     "lang": "es",

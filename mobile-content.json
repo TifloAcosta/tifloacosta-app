@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-23T12:00:00.000Z",
+  "generatedAt": "2026-10-23T15:07:16.036Z",
   "resources": [
     {
       "kind": "resource",
@@ -6197,23 +6197,6 @@
       "categories": [
         "apple",
         "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "applevis-apps-e1785f27098d9bd0:en",
-      "sourceId": "applevis-apps-e1785f27098d9bd0",
-      "lang": "en",
-      "title": "Astonischika",
-      "summary": "Astonischika is a turn-based pixel role-playing game with a roguelite loop. Build a party from bold classes, climb a branching map and fight turn by turn against monsters, elites and bosses. Every run is different: you choose your path across battles, rest sites, treasure, merchants and minigames. When your party falls, the city remains your permanent home — your heroes, their gold and their gear grow from run to run. FEATURES • Build your party from a range of classes — warrior, mage, cleric, rogue, archer and more • Turn-based battles with skills, spells, elements and status effects • Branching map: battle, elite, boss, rest, treasure and merchant • Level-ups, attribute points, equipment and learnable spells • Minigames: shell game, dice, memory, coin flip and more • A permanent city hub — your progress stays after every run • Endless scaling for long-term motivation • 22 languages, music and sound effects GREAT FOR Quick battle rounds in between, or long dungeon sessions.",
-      "body": "Astonischika is a turn-based pixel role-playing game with a roguelite loop. Build a party from bold classes, climb a branching map and fight turn by turn against monsters, elites and bosses.\n\nEvery run is different: you choose your path across battles, rest sites, treasure, merchants and minigames. When your party falls, the city remains your permanent home — your heroes, their gold and their gear grow from run to run.\n\nFEATURES • Build your party from a range of classes — warrior, mage, cleric, rogue, archer and more • Turn-based battles with skills, spells, elements and status effects • Branching map: battle, elite, boss, rest, treasure and merchant • Level-ups, attribute points, equipment and learnable spells • Minigames: shell game, dice, memory, coin flip and more • A permanent city hub — your progress stays after every run • Endless scaling for long-term motivation • 22 languages, music and sound effects\n\nGREAT FOR Quick battle rounds in between, or long dungeon sessions.",
-      "sourceName": "AppleVis Apps",
-      "originalUrl": "https://www.applevis.com/apps/ios/games/astonischika",
-      "publishedAt": "2026-10-13T11:30:06.000Z",
-      "categories": [
-        "apple",
-        "apps-accesibles",
-        "android"
       ]
     }
   ]

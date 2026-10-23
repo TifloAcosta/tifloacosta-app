@@ -1,13 +1,61 @@
 [
   {
-    "id": "9to5mac-e57bb786c7c01160",
+    "id": "techcrunch-776732dd9d0db61f",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/22/uber-rival-indrive-eyes-2027-robotaxi-tests-in-central-asia-with-pony-ai-and-nvidia/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-23T04:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Uber rival inDrive eyes 2027 robotaxi tests in Central Asia with Pony.ai and Nvidia",
+        "summary": "inDrive plans to begin testing Pony.ai's robotaxis in Kazakhstan's capital in the first half of 2027.",
+        "body": "Ride-hailing company inDrive , known for letting passengers and drivers negotiate fares, is working with Chinese autonomous driving firm Pony.ai and Nvidia to begin testing robotaxis in Kazakhstan in 2027.\n\nThe companies said Friday that they had signed a memorandum of understanding to explore bringing Pony.ai’s robotaxis to inDrive’s platform — a reflection of the growing interest in self-driving technology beyond the U.S. and China.\n\nTesting will begin in Kazakhstan’s capital, Astana, in the first half of 2027, inDrive CTO Yuri Misnik told TechCrunch. The tests will initially involve a safety operator, with fully driverless rides as the eventual goal.\n\nUnder the proposed plan, Pony.ai would provide its Gen-7 robotaxis, which inDrive would offer through its ride-hailing app and operate in Kazakhstan. Nvidia, on the other hand, would supply the AI technology, including its Hyperion platform and Halos safety system.\n\nThe move comes as ride-hailing companies expand their push into robotaxis. Earlier this month, Uber announced plans to test Pony.ai’s robotaxis in London , where it has also started offering supervised autonomous rides with British startup Wayve, an investor-backed partner . Uber is also working with multiple robotaxi companies in other markets, including the Middle East.\n\ninDrive, which has built its business around affordable rides, is looking to bring a similar focus to autonomous ride-hailing as it explores a market where Uber and other rivals are already making moves.\n\n“Our approach is capital-light by design,” said Misnik. “We work with a range of partners in different markets, combining their expertise with ours to deliver a better customer experience.”\n\nNvidia says its Hyperion platform could lower the cost of developing robotaxis by giving companies a ready-made foundation of sensors and computing technology, rather than requiring them to build and integrate everything themselves. The company also offers its Alpamayo model and tools to generate synthetic data and test autonomous driving systems across different driving scenarios.\n\n“Those savings are particularly relevant in emerging markets, where ride-hailing is already relatively affordable and autonomous services need to compete on cost,” Ali Kani, Nvidia’s vice president of automotive, told TechCrunch.\n\nThe announcement coincides with Nvidia CEO Jensen Huang’s first visit to Kazakhstan on Friday.\n\nThe Kazakhstan proposal would also add to Pony.ai’s ongoing push beyond China. The company aims to have more than 3,500 robotaxis operating in over 20 cities worldwide by the end of 2026, up from a fleet of 1,975 vehicles at the end of June.\n\nLast month, Kazakhstan announced plans to launch autonomous taxi services in 2027, with initial trials planned in Astana and two other cities. It has also introduced rules for autonomous vehicles to be tested on certain public roads.\n\nAstana’s harsh winters could make it a useful testing ground for robotaxis. The city, with a population of around 1.7 million, faces months of snow and ice, posing challenges for autonomous driving systems.\n\n“Launching here will provide an important opportunity to evaluate autonomous driving technology in challenging winter conditions,” inDrive founder and CEO Arsen Tomsky said. “Success in Astana could offer valuable insights for expanding autonomous mobility to other locations facing similar challenges.”\n\nKazakhstan is not the only market where inDrive is exploring robotaxis. In December, the company signed a separate agreement with Saudi Arabia’s AI Driver to explore deploying autonomous vehicles powered by Chinese self-driving firm WeRide, starting with Riyadh. The companies had targeted a pilot in the first half of 2026, though it remains unclear whether testing has begun.\n\n“We are also looking at a number of other markets for future deployments,” said Misnik. “One of the main requisites for successful launch in our view is a favorable and collaborative regulatory environment to facilitate safe and sustainable testing on the roads.”\n\ninDrive operates in more than 1,200 cities across 47 countries. The company has also expanded beyond ride-hailing into delivery, intercity transportation, and financial services."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-apps-c46353a81548921e",
+    "type": "news",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/tanklet-idle-fish-aquarium",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-23T03:55:03.000Z",
+    "categories": [
+      "apple",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Tanklet: Idle Fish Aquarium",
+        "summary": "Tanklet is a cozy aquarium game where you raise a tank of fish that's truly yours. Feed them, clean the tank, keep the water healthy, and watch them drift through a beautifully rendered aquarium — all the joy and companionship of fishkeeping, none of the cost or mess. ■ Care for your fish Feed on schedule, clean the tank, and manage water quality. Well-cared-for fish stay healthy, happy, and earn more coins. Neglect them and they get listless or sick — but good care always brings them back. Your fish never die. ■ Rare visitors Wild fish drop by from time to time. Feed them, keep the water clean, and set out the decorations they love — treat them well and they may stay for good. The rarer the visitor, the pickier they are. ■ Personalities & bonds Every fish has its own personality. Greet them daily and serve their favorite treats to deepen your bond, unlocking little stories and rewards. ■ Collect & breed From clownfish, blue tang and angelfish to golden arowana and koi, collect distinctive species and fill your codex. Breed pairs for offspring, with a chance at rare variants and shiny fish. ■ Eggs with honest odds Hatch mystery eggs for new species — drop rates are disclosed before every purchase, with a pity system that guarantees rare finds. ■ Send fish on treasure hunts Pick 1–2 fish for expeditions to the reef, a shipwreck, or the deep abyss. Hours later they return with coins, decorations — sometimes even pearls. Strong bonds and healthy fish bring better luck. ■ Make the tank yours Buy and freely place plants, driftwood, rocks and more. Resize, restyle, and decorate your tank exactly how you like it. ■ More tanks, real ecosystems Save up for a second and third tank: freshwater, saltwater and coral ecosystems each boost matching fish. Every tank has its own theme and decorations, and fish can move anytime. ■ Ambient Mode: put your tank in a room Hide the interface and let your tank live in a warm little room. Nine rooms to swap — an indigo moon window, a brick loft, a green library, a coastal cottage… each room's light truly falls into the water. Keep the screen on and it becomes living furniture. ■ Grows while you're away Close the app and your fish keep you company while coins keep accruing. Come back to collect offline earnings and see what happened. ■ Calm, anywhere A Home Screen widget brings your tank to your desktop; soft water-sound ambience helps you unwind; iCloud keeps your tank in sync across devices. No ads, no third-party SDKs, zero data collection — your tank is yours alone. Subscribe to Tanklet+ for double coins, offline earnings extended 8→24 hours, auto-care while away, a monthly pearl gift, and exclusive decor. Slow down. Keep some fish.",
+        "body": "Tanklet is a cozy aquarium game where you raise a tank of fish that's truly yours. Feed them, clean the tank, keep the water healthy, and watch them drift through a beautifully rendered aquarium — all the joy and companionship of fishkeeping, none of the cost or mess.\n\n■ Care for your fish Feed on schedule, clean the tank, and manage water quality. Well-cared-for fish stay healthy, happy, and earn more coins. Neglect them and they get listless or sick — but good care always brings them back. Your fish never die.\n\n■ Rare visitors Wild fish drop by from time to time. Feed them, keep the water clean, and set out the decorations they love — treat them well and they may stay for good. The rarer the visitor, the pickier they are.\n\n■ Personalities & bonds Every fish has its own personality. Greet them daily and serve their favorite treats to deepen your bond, unlocking little stories and rewards.\n\n■ Collect & breed From clownfish, blue tang and angelfish to golden arowana and koi, collect distinctive species and fill your codex. Breed pairs for offspring, with a chance at rare variants and shiny fish.\n\n■ Eggs with honest odds Hatch mystery eggs for new species — drop rates are disclosed before every purchase, with a pity system that guarantees rare finds.\n\n■ Send fish on treasure hunts Pick 1–2 fish for expeditions to the reef, a shipwreck, or the deep abyss. Hours later they return with coins, decorations — sometimes even pearls. Strong bonds and healthy fish bring better luck.\n\n■ Make the tank yours Buy and freely place plants, driftwood, rocks and more. Resize, restyle, and decorate your tank exactly how you like it.\n\n■ More tanks, real ecosystems Save up for a second and third tank: freshwater, saltwater and coral ecosystems each boost matching fish. Every tank has its own theme and decorations, and fish can move anytime.\n\n■ Ambient Mode: put your tank in a room Hide the interface and let your tank live in a warm little room. Nine rooms to swap — an indigo moon window, a brick loft, a green library, a coastal cottage… each room's light truly falls into the water. Keep the screen on and it becomes living furniture.\n\n■ Grows while you're away Close the app and your fish keep you company while coins keep accruing. Come back to collect offline earnings and see what happened.\n\n■ Calm, anywhere A Home Screen widget brings your tank to your desktop; soft water-sound ambience helps you unwind; iCloud keeps your tank in sync across devices.\n\nNo ads, no third-party SDKs, zero data collection — your tank is yours alone.\n\nSubscribe to Tanklet+ for double coins, offline earnings extended 8→24 hours, auto-care while away, a monthly pearl gift, and exclusive decor.\n\nSlow down. Keep some fish."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-e3c35e04ed6b6f6f",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/22/macbook-neo-helps-apple-soften-the-blow-of-global-pc-market-downturn-per-report/",
+    "originalUrl": "https://9to5mac.com/2026/10/22/greg-joswiak-talks-iphone-duo-in-store-availability-and-demand-ahead-of-launch/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-22T22:35:38.000Z",
+    "publishedAt": "2026-10-23T03:15:09.000Z",
     "categories": [
       "apple",
       "tecnologia-general"
@@ -16,61 +64,105 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "MacBook Neo helps Apple soften the blow of global PC market downturn, per report",
-        "summary": "A new Counterpoint Research report on global PC shipments for Q3 2026 shows Apple outperforming the broader market, with the MacBook Neo helping cushion the impact of declining demand. Here are the details. more…",
-        "body": "A new Counterpoint Research report on global PC shipments for Q3 2026 shows Apple outperforming the broader market, with the MacBook Neo helping cushion the impact of declining demand. Here are the details.\n\nIn a new report released today, Counterpoint Research says global PC shipments plunged 21% during Q3 2026, compared with the year-ago period.\n\nIn absolute numbers, Counterpoint says global shipments totaled 57 million units, with Lenovo leading the market with a 26.3% share, despite a 23% year-over-year decline.\n\nHP held second place with an 18.1% share and a 31% decline in shipments, followed by Dell (13.3% share, down 25%), Apple (9.8% share, down 11%), and ASUS, which rounded out the top five with a 9.2% share and a 7% decline. Other vendors accounted for the remaining 23.3% of the market, with shipments down 16% year over year.\n\nHere’s Counterpoint on Apple’s performance for the quarter:\n\n“Apple’s shipments declined 11% YoY to 5.6 million units, giving it a 9.8% market share, up from 8.7% a year earlier. The MacBook Neo helped cushion the decline, allowing Apple to outperform the overall market.”\n\nCommenting on the results, Counterpoint Research senior analyst Minsoo Kang noted that Apple and ASUS outperformed the broader market “through differentiated product portfolios and competitive positioning.”\n\nAs most 9to5Mac readers are probably guessing by now, rising memory and other component costs were major contributors to the market-wide downturn. Counterpoint says higher PC prices discouraged consumers from upgrading their devices and weakened demand across the industry.\n\nAccording to Counterpoint’s data, contract prices for 8GB DDR4 RAM modules rose 24% quarter over quarter in Q3 2026, while 1TB NVMe SSD prices increased 29%.\n\nLooking ahead, Counterpoint expects RAM prices to rise another 13% in Q4 and 15% in Q1 2027, while SSD prices are projected to increase 11% in Q4 before stabilizing in early 2027.\n\nTo read Counterpoint’s full report, follow this link ."
+        "title": "Greg Joswiak talks iPhone Duo in-store availability and demand ahead of launch",
+        "summary": "Friday is iPhone Duo launch day, and there are a lot of eager customers hoping to walk into an Apple Store and get one after a messy pre-order launch . In a new interview with TechRadar , Apple marketing SVP Greg Joswiak offered insight into demand and in-store availability for the first foldable iPhone. more…",
+        "body": "Friday is iPhone Duo launch day, and there are a lot of eager customers hoping to walk into an Apple Store and get one after a messy pre-order launch . In a new interview with TechRadar , Apple marketing SVP Greg Joswiak offered insight into demand and in-store availability for the first foldable iPhone.\n\nOn in-store availability, Joswiak said: “You know, we didn’t ship them all away during the pre-order, we have them available at the stores, we’re excited.” … “I’m sure we’ll have some happy customers.”\n\n“Well, I think you saw the pre-order demand last week was extraordinary,” Joswiak added. “People got it. They understood what we were doing.”\n\nIn a statement to 9to5Mac earlier this week, Apple confirmed that stores would have “limited” iPhone Duo availability for walk-in customers in the countries listed below. Joz’s comments add further confirmation that some customers will be happy tomorrow.\n\nJoswiak will be at Apple’s Fifth Avenue flagship store in New York for tomorrow’s iPhone Duo launch. He’ll likely be joined by other Apple executives, including CEO John Ternus.\n\nAre you awaiting an iPhone Duo delivery tomorrow? Are you planning to try your luck at an Apple Store? Let us know down in the comments.\n\nFollow Chance : Threads , X , and Instagram"
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-506c2c75cb975176",
+    "id": "9to5mac-a94c34ad08788d73",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/22/daily-october-22-2026/",
+    "originalUrl": "https://9to5mac.com/2026/10/22/apple-is-finally-catching-up-with-siri-but-the-goalposts-are-moving-again/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-22T22:23:46.000Z",
+    "publishedAt": "2026-10-23T01:42:38.000Z",
     "categories": [
       "apple",
       "tecnologia-general",
-      "android",
-      "apps-accesibles"
+      "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "9to5Mac Daily: October 22, 2026 – iOS 27.2 features, Apple Music rebrand",
-        "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
-        "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show."
+        "title": "Apple is finally catching up with Siri, but the goalposts are moving again",
+        "summary": "9to5Mac is brought to you by Memoket : Memoket Gem is a 0.4 oz AI wearable that slots beside your Apple Watch. One press captures a conversation, and KITE memory connects it to what you said weeks ago. 20-hour battery. Available now from $168.99 on memoket.ai and Amazon. While it is great that Siri AI can finally deliver Apple’s promise of an actually useful, personal assistant for the age of AI, expectations surrounding agentic assistants are quickly shifting. But Apple is showing it might not watch from the sidelines again. more…",
+        "body": "9to5Mac is brought to you by Memoket : Memoket Gem is a 0.4 oz AI wearable that slots beside your Apple Watch. One press captures a conversation, and KITE memory connects it to what you said weeks ago. 20-hour battery. Available now from $168.99 on memoket.ai and Amazon .\n\nWhile it is great that Siri AI can finally deliver Apple’s promise of an actually useful, personal assistant for the age of AI, expectations surrounding agentic assistants are quickly shifting. But Apple is showing it might not watch from the sidelines again.\n\nNow that Siri AI (which is still officially designated as a beta) has been out for a little more than a month, it seems fair to say that its two defining characteristics are that it’s finally useful, but it can be painfully slow to answer even simple queries.\n\nAnd while I had spent the better part of the past few months mocking Silicon Valley’s obsession with AI assistants that can book flights and hotels, I hate to admit that the first time Siri AI actually impressed me was when I asked how much I’d paid for a hotel room for an upcoming trip to San Francisco and how far it was from my first appointment in the city. It got both answers exactly right.\n\nCould I have looked this up myself? Sure. But setting aside the fact that I was in the middle of a 10K run at the time, finding that information on my own would undoubtedly have taken longer than it took Siri to give me the answers.\n\nAs a result, over the past few months, I’ve found myself increasingly relying on Siri AI for questions like “What was the contact information for that plumber who fixed the kitchen sink leak a couple of years ago?” or “What was the name of that PR person who introduced me to so-and-so?”\n\nInformation I know I have somewhere, be it an iMessage conversation or an email receipt, and that although I could just search for it, I’d now rather have Siri AI do it for me.\n\nAnd for the first time in 15 years, I can ask these questions without already expecting Siri to fail halfway through asking them, only to get frustrated when it inevitably gets it wrong and proves me right.\n\nThat’s all well and good. The problem is that Apple has only now caught up with what AI assistants could do in 2024.\n\nParticularly over the past few months, the frontier AI market has increasingly shifted toward agentic assistants, with products from OpenAI, Anthropic, Meta, and xAI (among many others) moving beyond answering questions to actually carrying out tasks on users’ behalf.\n\nI subscribe to ChatGPT, and I’ve been using Codex and ChatGPT Work extensively for everyday tasks involving files and information scattered across my Mac and various cloud services.\n\nAnd it still feels like magic every time I ask one of these tools to do something that involves opening, creating, editing, or organizing files on my computer, as well as interacting with websites and services I’m logged into, and it actually pulls it off.\n\nThe flipside of this is that every time ChatGPT completes one such task, the new Siri AI starts to feel like the old Siri all over again.\n\nIt is still early days, for sure, but it already feels like this is yet another area where Apple seems to be falling increasingly behind, as AI labs continue to improve their agentic capabilities, sometimes rolling out major updates just weeks apart, while Apple remains largely tied to its annual software release cycle.\n\nBut there’s one important limitation to today’s agentic assistants that I think Apple is particularly well positioned to address.\n\nAs impressive as tools like Codex, Dots , and ChatGPT Work can be, they still depend heavily on the user to provide the permissions and the context behind whatever task they’re supposed to accomplish. They can access files, search through emails, and interact with websites, but they generally don’t know what you’re doing, what you’ve been discussing with other people, or what you might need next unless you explicitly tell them.\n\nAnd as these tools become increasingly capable of operating our computers and phones on our behalf, I suspect the next big leap in their usefulness will come not just from improving what they can do, but from improving their proactive understanding of the user’s context in real time.\n\nThat’s where Apple could have an advantage.\n\nApple has recently shown that it’s finally willing to capitalize on the trust it has spent years building around privacy, even if it means testing the boundaries of what users are comfortable sharing with an AI assistant.\n\nLast month, it introduced two Apple Watch features: Siri Recap , which can automatically generate summaries of conversations throughout the day, and Live Rewind , which lets users retrieve the last 15 seconds of a conversation they may have missed.\n\nBoth features rely on the Apple Watch’s microphone to capture information about what’s happening around the user, potentially giving Siri access to an entirely new source of personal context.\n\nOf course, the privacy implications are enormous, particularly because conversations involve other people who haven’t necessarily agreed to have their words processed by an AI assistant.\n\nAnd while those concerns are certainly worth discussing at length (and are probably why these features have yet to roll out), Apple has repeatedly shown that it’s willing to go to extraordinary lengths to address the privacy challenges that come with giving technology access to sensitive personal information. Just look at the lengths it went to in developing its Reference Image system .\n\nAs agentic assistants become more capable, I suspect their biggest limitation will increasingly have less to do with what the underlying models can do, and more with how much we’re willing to let them know about us.\n\nImagine an assistant that doesn’t just wait for you to ask it to find a document or complete a task, but already understands what you’re working on. One that can gather information in the background so it’s ready when you need it, or even take action on your behalf based on what’s happening around you.\n\nThat’s the kind of assistant that could make today’s agentic tools feel as limited as the old Siri (and, increasingly, the new Siri AI) does now.\n\nAnd while Apple still has plenty of catching up to do when it comes to actually building these capabilities, it is in a much better position to compete in this next phase of AI than it was when the generative AI race first began.\n\n9to5Mac is brought to you by Memoket:\n\nApple just added voice recording and note-taking to iPhone and Apple Watch. Useful, but check your battery at 2pm. Dedicated recording is one of the fastest ways to drain a Watch, and your iPhone needs to be out and unlocked to do it. More importantly, neither device connects what was said in today’s meeting to a decision you made three weeks ago. They capture moments. They don’t build memory.\n\nMemoket Gem was built to do more. A 0.4 oz wearable AI agent that slots alongside your Apple Watch on the same wrist. One button, one press, 20 hours of battery. Gem captures conversations and connects them across time using KITE, a long-term memory engine that links what was said today to what mattered weeks ago. When a topic comes back up, Gem surfaces the original conversation automatically. Everything flows into ChatGPT, Claude, Slack, and Notion.\n\n153 languages supported. Available now on memoket.ai and Amazon from $168.99 ."
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-d9c699598c73f1eb",
+    "id": "9to5mac-02505cbab1a60b4d",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5google.com/2026/10/22/youtube-subscriptions-android-ios/",
+    "originalUrl": "https://9to5mac.com/2026/10/22/whatsapp-starts-testing-long-awaited-scheduled-messages-on-iphone/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-22T22:07:34.000Z",
+    "publishedAt": "2026-10-23T01:22:37.000Z",
     "categories": [
       "apple",
-      "tecnologia-general",
-      "android",
-      "apps-accesibles"
+      "tecnologia-general"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "YouTube removing ‘Subscriptions’ bottom bar tab on Android, iOS after nearly a decade",
-        "summary": "YouTube is making a number of changes to its Android and iOS apps with the launch of custom feeds , including moving Subscriptions out of the bottom bar. more…",
-        "body": "YouTube is making a number of changes to its Android and iOS apps with the launch of custom feeds , including moving Subscriptions out of the bottom bar.\n\nOn mobile, YouTube is “kicking off a series of updates to shape a more seamless Home experience.” This starts with a redesigned top bar with dedicated feeds.\n\nAs part of this change, YouTube is removing the Subscriptions tab from its fourth position in the bottom bar. It’s now in the “top bar on the Home tab.” Testing of the redesign started earlier this year.\n\n“Subs” appears in the second position after “Home” with a red underline that will take some getting used to. This change will break a lot of muscle memory, with Subscriptions appearing in the YouTube bottom bar for nearly a decade (2017).\n\nOld vs. new\n\nMeanwhile, after Subs, you’ll see new dedicated feeds for Live, Music, and Movies & TV, with the latter only appearing if you have active subscriptions (such as Primetime Channels ). This change has the upside of removing YouTube’s navigation drawer.\n\nMore broadly, this change coincides with the launch of custom feeds, which are also available on and sync to the web. This lets you describe “what you want to see in your own words”.\n\nTap “+” at the top of your Home feed and describe the topic, channels, or vibe you’re looking for (for example, “help me unwind after work with guided meditations under 10 minutes”). You’ll then get a new feed tailored to your interests for you to explore.\n\nThey will appear as top tabs in the main feed after Home and Subs so that “you can jump back into them whenever you want.” The prompt box at the top of each feed lets you change it.\n\nNotably, free users “can save up to 3 active custom feeds, while YouTube Premium members can save up to 8.”\n\nCustom feeds are first rolling out on “mobile and desktop in English to U.S. based, signed-in viewers.” It will be available in more countries going forward."
+        "title": "WhatsApp starts testing long-awaited scheduled messages on iPhone",
+        "summary": "After years of waiting, WhatsApp is finally making one of its most-requested messaging features available to select iPhone beta testers. Here are the details. more…",
+        "body": "After years of waiting, WhatsApp is finally making one of its most-requested messaging features available to select iPhone beta testers. Here are the details.\n\nWhile Meta doesn’t generally break down active user figures by platform, Mark Zuckerberg said in April last year that WhatsApp had more than 3 billion monthly active users worldwide.\n\nIronically, despite being used by more than a third of the world’s population, WhatsApp still lacks some features competing platforms have offered for years. Case in point: the ability to schedule messages.\n\nEarlier this year, WABetaInfo reported that code references in WhatsApp’s beta suggested the company was working on a message scheduling feature, although it wasn’t available for testing at the time.\n\nNow, according to the site , the feature is finally rolling out to select iOS beta testers, less than two weeks after making its debut on Android beta.\n\nHere’s how the feature works, per WABetaInfo ‘s report:\n\nUsers can schedule a message from the chat interface. After typing the message into the chat composer, they need to tap and hold the send button. WhatsApp opens the schedule message screen with a date and time picker. Users can scroll through the page and tap the green button at the bottom of the screen to confirm. The button shows the exact delivery time before users schedule the message. After scheduling a message, WhatsApp shows a confirmation in the chat, but it is only visible to the user who scheduled it.\n\nWABetaInfo notes that messages can be scheduled as little as 10 minutes in advance or as far as two weeks in advance, and that scheduled messages appear in a dedicated section within the chat info screen or the group info screen for group chats.\n\nInterestingly, in group chats, scheduled messages are only delivered to users who were already members when the message was scheduled. Anyone who joins the group afterward won’t receive it, even if they join before the message is sent.\n\nThe site also says that in addition to scheduling text messages, users can schedule messages containing photos, videos, and links. One current limitation, however, is that users cannot schedule multiple photos or videos at once, meaning each media item must be scheduled separately.\n\nAs is often the case with beta features, scheduled messages are only available to select testers, with no way to enable the feature manually. There’s also no word on when it will launch publicly, although with testing now underway on both iOS and Android, a wider rollout could be coming sooner rather than later.\n\nTo read WABetaInfo ’s full report, follow this link ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-c002a43ea809b94a",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1017261/etsy-ai-rules-policies-restrictions-listing",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-23T00:09:58.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Etsy is cracking down on AI slop listings",
+        "summary": "Etsy is announcing stricter rules about how AI can be used in listings to reduce the volume of AI slop on the platform. In a post, the company says that \"many active buyers say they can't tell which items involve AI-generated content\" and that sellers are \"concerned about your work appearing alongside items that use […]",
+        "body": "Etsy is announcing stricter rules about how AI can be used in listings to reduce the volume of AI slop on the platform. In a post, the company says that \"many active buyers say they can't tell which items involve AI-generated content\" and that sellers are \"concerned about your work appearing alongside items that use AI in misleading ways,\" spurring the new policies and restrictions.\n\nUnder the new policies, every listing must include \"at least one unedited photo of the actual item against a real background,\" and all photos must \"accurately represent the item a buyer will receive.\" The photos that aren't the first one can be edited with softw …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-88f9a01fe7e093f8",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gaming/2026/10/switch-2-jailbreak-gives-hackers-new-ways-to-run-homebrew-and-mod-games/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-22T22:25:33.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Switch 2 security takes a hit as hackers unlock homebrew access",
+        "summary": "\"Userland\" exploit relies on integer overflow found in \"SmileBasic\" interpreter.",
+        "body": "A security researcher has demonstrated a software-only partial jailbreak of the Switch 2, gaining \"userland\" access that he says \"lets us run homebrew, reverse engineer and mod Switch 2 games, back up save files off the Switch, and access most of the Switch 2’s peripherals through MMIO.\"\n\nThe hack relies on the original Switch version of SmileBasic 4 , the latest in a long-running series of programming environments and interpreters that run on Nintendo hardware. The so-called \"tethered\" hack also requires access to a macOS or Linux PC on the same network to run a node.js package that helps enable privileged system access.\n\nResearcher Sammy Hajhamid writes that he used OpenAI's Codex to poke at SmileBasic's language interpreter, using a custom harness that could send USB commands to the system and view results via HDMI (as well as power cycling via a Bluetooth light switch flipping device). After \"substantial effort for ~2 weeks,\" that harness discovered a 32-bit integer overflow that occurs when removing items from an array in SmileBasic. That error gives access to an array pointer, which in turn allows read and write access to portions of system memory.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -124,14 +216,14 @@
     "media": null
   },
   {
-    "id": "the-verge-64e99d1ac199c335",
+    "id": "ars-technica-6156dfd2280e4060",
     "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1016506/fall-2026-earnings-watch",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/tech-policy/2026/10/comcast-loses-more-customers-claims-other-isps-cheap-prices-are-irrational/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-22T21:15:16.000Z",
+    "publishedAt": "2026-10-22T21:07:09.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -140,9 +232,9 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Fall 2026 earnings watch",
-        "summary": "Every company is suddenly an AI company. Compute is an asset. Cars are flying. We’ve been promised robots — again. It’s time again to dig through earnings reports, listen to investor calls, and call out the latest wins and losses from around the tech sector and what it means for where the companies go next.",
-        "body": "Every company is suddenly an AI company. Compute is an asset. Cars are flying. We’ve been promised robots — again. It’s time again to dig through earnings reports, listen to investor calls, and call out the latest wins and losses from around the tech sector and what it means for where the companies go next."
+        "title": "Comcast loses more customers, claims other ISPs' cheap prices are \"irrational\"",
+        "summary": "Comcast plans job cuts and more AI agents for its shrinking cable customer base.",
+        "body": "Comcast reportedly plans significant job cuts in its cable division as the firm continues to lose residential broadband and TV customers. Comcast lost 144,000 residential broadband customers in Q3 2026, up from a 91,000-customer loss in the same quarter a year ago, the company said in its earnings report today.\n\nComcast historically capitalized on a lack of competition for high-speed wired broadband. But now it faces stronger competition from fixed wireless providers and from fiber providers in parts of its cable territory.\n\n\"Fixed wireless remains aggressive and continues to take share, while fiber construction remains elevated, with pockets of irrational pricing and promotional activity,\" Comcast co-CEO Mike Cavanagh said today in an earnings call .\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -215,30 +307,6 @@
         "title": "Arc browser sunsets December 22 as The Browser Company doubles down on Dia",
         "summary": "Arc was fiercely beloved by a dedicated group of enthusiasts, but it never quite became the mass-market Chrome alternative its makers once envisioned.",
         "body": "The Browser Company is sunsetting its design-forward Arc browser on December 22, 2026, and directing users to Dia, its AI-first browser. The company announced the decision on Thursday, citing the rising cost of keeping a browser secure in the age of AI.\n\n“Keeping a browser secure takes constant, dedicated work that is only increasing in the age of AI,” the company wrote.\n\n“Dia was built from the ground up to meet today’s security standards, so that’s where our engineering and security teams will focus moving forward.”\n\nThe wind-down is staged into three parts. As of Thursday, new Arc accounts can no longer be created. On November 23, Arc Search on iOS and Android will lose its AI features, including “Browse for Me.” Users will no longer be able to sign in or sync tabs, though the app will continue functioning as a basic local browser.\n\nOn December 22, Arc will stop working entirely on Mac and Windows. Accounts will be deactivated, and personal data will be deleted within 30 days. Arc Search will also be removed from the Google Play Store.\n\nWhile The Browser Company claims Dia now surpasses Arc in speed, stability, and security benchmarks, user reactions on social media were largely disappointed , with many reviving requests for the company to make Arc open-source.\n\nBut CEO Josh Miller previously pointed out that Arc is built on the Arc Development Kit (ADK)—a proprietary internal SDK that is also the core engine powering Dia. Open-sourcing Arc would mean giving away Dia’s intellectual property.\n\n“While we’d love to open-source Arc someday, we can’t do that meaningfully without also open-sourcing ADK,” Miller previously noted. “And ADK is still core to our company’s value.”\n\nFor users making the switch, Dia will carry over equivalents of several core Arc features. Users can still swipe between different work and personal environments using Dia’s “Profiles” (formerly Arc’s Spaces). Arc’s signature vertical tabs will remain as an optional sidebar layout, while Folders have been rebranded as “Pinned Tab Groups.”\n\nPasswords, bookmarks, extensions, and history will seamlessly transfer to Dia. Arc features will remain free in Dia, with AI optional.\n\nThe shutdown officially closes a chapter that began in 2025, when the startup stopped active feature development on Arc. The Browser Company—which was acquired by Atlassian for $610 million in 2025— conceded at the time that while early adopters loved the browser’s novel interface, the “ novelty tax ” and complexity limited mainstream adoption. Arc was fiercely beloved by a dedicated group of enthusiasts, but it never quite became the mass-market Chrome alternative its makers once envisioned."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-8e2c30eaec825738",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-22T19:07:09.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "1Password launches a way for AI agents to log in on your behalf without seeing your password",
-        "summary": "The new feature allows agents to log into a customer's personal accounts while still protecting the private credentials that secure those accounts.",
-        "body": "Concerns have swirled over the access that consumers are increasingly entrusting to AI agents. Now, security services are trying to catch up.\n\nPassword manager 1Password on Thursday launched a new tool by which users can allow agents to log into their personal accounts on their behalf, without the agent ever having access to a user’s credentials.\n\nThe new platform, dubbed 1Password for Agents , accomplishes this by creating a system of communication between the agent, the user, and the password manager. When an agent attempts to log in on a user’s behalf, a unique digital key is sent to 1Password to confirm the agent’s digital identity. The user is then sent an alert about the login attempt and can personally confirm the request. 1Password then signs in the agent, filling in the credentials on the digital assistant’s behalf, which allows it to log in and complete whatever task is at hand.\n\n1Password for Agents allows users to choose their agent of choice — whether that’s Claude Duet from Anthropic, OpenAI’s Dots or ChatGPT Work, Grok Bot, Meta’s Muse, or agents from Town, which is an AI assistant startup. The company says it is working with other companies to expand the service.\n\n“Handing over a password, secret, or credential is a common shortcut to an agent, but can leave people with sensitive information in places they can no longer control as a copy gets saved for the next time,” the company said in a blog post . “1Password for Agents gives people a trusted way to delegate tasks to personal AI agents while keeping control of the passwords, secrets, and credentials those tasks require.”\n\nOnline agentic activity has increasingly unsettled major institutions. Indeed, 1Password’s new platform is launching on the same day that Axios reports that U.S. banks have begun to detect agentic activity inside user accounts.\n\nThis isn’t necessarily a case of rogue agents pilfering accounts but, rather, an example of how consumers are increasingly allowing automated services to act on their behalf, including on financial matters. However, the potential for agent-related problems is still large. The big issue appears to be that most banks cannot tell if the agentic activity is tied to user requests or not.\n\nBankers interviewed by the outlet described the situation as “horrifying,” and a Chase spokesperson interviewed by Axios additionally told the outlet that customers “should not give their usernames and passwords to anyone.”"
       }
     },
     "media": null
@@ -338,29 +406,6 @@
     "media": null
   },
   {
-    "id": "ars-technica-5428b0d35014997e",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/gaming/2026/10/this-emulator-reimagines-nintendos-virtual-boy-with-a-full-color-display/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-22T15:59:40.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "This emulator reimagines Nintendo’s Virtual Boy with a full color display",
-        "summary": "Tile-based color palettes go way beyond the four shades of red on original hardware.",
-        "body": "Last year, we reported on Red Viper , a Virtual Boy emulator that added a splash of Super Game Boy-style color to Nintendo's famously failed red-on-black \"portable\" 3D headset from the '90s. Now, a new emulation experiment, VBoy Color , has taken the concept to a higher level, using a tile-based palette system that allows for many more distinct colors in each individual Virtual Boy frame.\n\nRather than simply replacing the Virtual Boy's four shades of red with four different colors, VBoy Color's readme files explain how the emulator's game-specific Color Packs can assign a distinct four-color palette to each 8x8 tile in a Virtual Boy scene. That means the emulator can differentiate between green pipes, grey platforms, and red brick wall in Mario Clash , for instance, even though all those in-game objects share the same overlapping red hues in the original game.\n\nThe Game Boy Color-esque results feel like being transported into an alternate history where Nintendo invested in a full-color display rather than cheaper red LEDs for the Virtual Boy hardware. The increased contrast between differently colored elements is particularly welcome in games like Jack Bros. or Vertical Force , where the original red-on-red display often makes it hard to differentiate the player-character from busy red background elements.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "cti-once-f841f3b33b600d5e",
     "type": "news",
     "sourceId": "cti-once",
@@ -405,30 +450,6 @@
         "title": "Jornada de actualización en desarrollos y avances tecnológicos",
         "summary": "La inteligencia artificial puede ayudarnos a crear documentos PDF de forma más sencilla y adaptada a nuestras necesidades. En la próxima Jornada de Actualización de Desarrollos y Avances Tecnológicos, aprenderemos cómo utilizar estas herramientas y qué instrucciones debemos darles para obtener los resultados que buscamos. La sesión tendrá lugar el martes 27 de octubre, a […] La entrada Jornada de actualización en desarrollos y avances tecnológicos se publicó primero en Conticgo .",
         "body": "La inteligencia artificial puede ayudarnos a crear documentos PDF de forma más sencilla y adaptada a nuestras necesidades. En la próxima Jornada de Actualización de Desarrollos y Avances Tecnológicos , aprenderemos cómo utilizar estas herramientas y qué instrucciones debemos darles para obtener los resultados que buscamos.\n\nLa sesión tendrá lugar el martes 27 de octubre, a partir de las 11:00 horas , y será impartida por Iván García. La actividad se desarrollará en línea, a través de Jitsi Meeten: https://meet.jit.si/Saladegrupo\n\nDurante la sesión, conoceremos cómo generar documentos PDF utilizando herramientas de inteligencia artificial. También veremos qué pautas debemos seguir para orientar correctamente el proceso y conseguir documentos que respondan a una tarea específica.\n\nUno de los aspectos principales será el uso de prompts , es decir, las instrucciones que proporcionamos a la inteligencia artificial para indicarle qué necesitamos. Aprenderemos cómo redactarlos y qué información debemos incluir para obtener resultados más precisos y útiles.\n\nEsta jornada será una oportunidad para descubrir nuevas posibilidades de la inteligencia artificial y conocer recursos que pueden facilitarnos las tareas cotidianas.\n\n¡Os animamos a participar y a seguir descubriendo las posibilidades que nos ofrecen los avances tecnológicos!"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-2dddc1d317516bbc",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/information-technology/2026/10/survey-enterprises-waste-28-percent-of-software-budgets-on-unwanted-upgrades/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-21T21:48:52.000Z",
-    "categories": [
-      "tecnologia-general",
-      "programas-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Enterprises keep buying software upgrades that IT thinks will make things worse",
-        "summary": "Survey of 2,018 IT heads at big firms points to a lack of leverage.",
-        "body": "Enterprise-sized businesses spend, on average, 28 percent of their software budgets on unwanted upgrades, migrations, and licensing changes. Often, those firms' IT heads think those changes are detrimental.\n\nThose results are according to a survey of 2,018 chief information officers and senior IT decision-makers at companies with at least 10,000 employees that Origina commissioned for its report, “ The Software Tax .” About half of the respondents (1,011) are from the US, and the rest are from the United Kingdom. All respondents worked at companies with at least $1 billion in annual revenue.\n\nKeep in mind that Origina provides maintenance for various enterprise software. Its report points to independent software maintenance as a way for IT leaders to regain control over software budgets, illustrating its potential bias. A third-party research consultancy, Censuswide , conducted the survey.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -1045,30 +1066,6 @@
         "title": "Orbit Strata 40: la nueva línea Braille de 40 celdas que llegará al mercado en octubre",
         "summary": "Orbit Research prepara el lanzamiento de una nueva línea Braille portátil con 40 celdas, teclado Perkins y conexión Bluetooth. El dispositivo también permite leer libros y tomar notas sin depender de un ordenador. La tiflotecnología sigue avanzando con nuevas alternativas para acceder a la información mediante el tacto. Una de las novedades previstas para este […] La entrada Orbit Strata 40: la nueva línea Braille de 40 celdas que llegará al mercado en octubre se publicó primero en Conticgo .",
         "body": "Orbit Research prepara el lanzamiento de una nueva línea Braille portátil con 40 celdas, teclado Perkins y conexión Bluetooth. El dispositivo también permite leer libros y tomar notas sin depender de un ordenador.\n\nLa tiflotecnología sigue avanzando con nuevas alternativas para acceder a la información mediante el tacto. Una de las novedades previstas para este otoño es el Orbit Strata 40 , una línea Braille diseñada para combinar lectura, escritura y conectividad en un único dispositivo.\n\nLa compañía Orbit Research presentó esta familia de productos en marzo de 2026, durante la conferencia CSUN Assistive Technology Conference. Su objetivo es ampliar las opciones disponibles para las personas ciegas que utilizan dispositivos Braille en sus estudios, su trabajo o su vida cotidiana.\n\nNo consta que esté disponible para su compra directa .\n\nLa página oficial de Orbit Research anuncia que el Strata 40 estará a la venta en octubre de 2026. Sin embargo, a fecha de 10 de octubre, la web sigue ofreciendo un formulario para apuntarse a una lista de espera y recibir un aviso cuando comiencen los envíos.\n\nPor tanto, aunque el lanzamiento está previsto para este mes, no podemos confirmar que ya se esté comercializando ni que se pueda adquirir desde España. La empresa dispone de una red internacional de distribuidores, entre ellos ONCE-CIDAT, pero será necesario consultarles para conocer la disponibilidad y el precio en España.\n\nEl precio anunciado por el fabricante es de 2.595 dólares . Esta cifra no debe interpretarse como un precio final en euros, ya que pueden variar los impuestos, los gastos de distribución y las condiciones de venta.\n\nEl Orbit Strata 40 incorpora 40 celdas Braille actualizables de ocho puntos , que permiten leer información digital mediante el tacto. A diferencia de los modelos tradicionales de la familia Orbit Reader, este dispositivo utiliza tecnología piezoeléctrica.\n\nEl equipo integra un teclado Braille de ocho teclas, con distribución tipo Perkins, y controles de navegación para desplazarse por documentos y menús. También dispone de teclas de posicionamiento del cursor, que permiten situarse directamente en un punto concreto del texto.\n\nSu diseño compacto busca facilitar el transporte y el uso diario. Según las especificaciones oficiales, pesa aproximadamente 600 gramos y mide 30 × 9,5 × 2,8 centímetros.\n\nUna de las características más interesantes del Strata 40 es que puede utilizarse de forma independiente o conectado a un ordenador o teléfono móvil.\n\nEn modo autónomo, permite leer libros y documentos, tomar notas y editar archivos. También incorpora herramientas como calendario, reloj, alarma y calculadora.\n\nEl dispositivo admite archivos de texto y formatos Braille como BRF y BRL. Además, integra traducción Braille en ambos sentidos para más de 70 idiomas, según el fabricante.\n\nEstas funciones pueden resultar útiles para estudiantes, profesionales y usuarios que quieran consultar documentos o escribir notas sin tener que recurrir constantemente a otro equipo.\n\nEl Orbit Strata 40 también funciona como línea Braille externa. Puede conectarse mediante USB-C o Bluetooth a ordenadores y dispositivos móviles compatibles.\n\nOrbit Research indica que es compatible con lectores de pantalla habituales en Windows, macOS, iOS, Android, ChromeOS, Fire OS y Linux. Además, permite mantener conectados hasta cinco dispositivos y cambiar entre ellos.\n\nEsta posibilidad puede facilitar el trabajo de quienes alternan entre el ordenador, el teléfono móvil y otros equipos durante la jornada.\n\nEl fabricante también destaca su batería de larga duración, la carga rápida y la resistencia al polvo y a los líquidos. Incluye una ranura para tarjetas SD y permite acceder a archivos almacenados en memorias USB.\n\nLa principal diferencia está en la combinación de una línea de 40 celdas, funciones de anotador y tecnología piezoeléctrica en un formato portátil.\n\nLa nueva familia Strata también incluye otros modelos. El Strata 40 Pro añade funciones multimedia, síntesis de voz, conectividad Wi-Fi y aplicaciones integradas más amplias. Por su parte, el Strata 20 Pro ofrece un formato de 20 celdas con funciones multimodales.\n\nConviene no confundirlos: el Strata 40 estándar está pensado para leer, escribir y conectarse con otros equipos, mientras que las versiones Pro amplían las posibilidades con voz, audio y servicios adicionales.\n\nEl Orbit Strata 40 es una de las novedades relevantes de la tiflotecnología anunciadas para 2026. Su combinación de lectura Braille, anotación y conectividad puede resultar interesante para quienes buscan un dispositivo portátil para estudiar, trabajar o acceder a documentos digitales.\n\nNo obstante, todavía quedan cuestiones prácticas por confirmar para los usuarios en España: la fecha efectiva de los primeros envíos, la disponibilidad a través de distribuidores nacionales y el precio final en euros.\n\nDesde el punto de vista de la accesibilidad, el lanzamiento amplía las alternativas existentes para acceder a la información mediante Braille. Habrá que esperar a conocer su disponibilidad comercial y las condiciones de distribución para valorar su llegada al mercado español.\n\nEstado del producto: lanzamiento anunciado para octubre de 2026; la web oficial sigue indicando que hay que apuntarse a la lista de espera para recibir un aviso cuando comiencen los envíos.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuentes consultadas: Página oficial del Strata 40 , distribuidoras internacionales , SightCity ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-apps-965dfa0d128b3a6c",
-    "type": "news",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/travel/redcoach",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-11T18:24:39.000Z",
-    "categories": [
-      "apple",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "RedCoach",
-        "summary": "Welcome to the RedCoach app — your all-in-one travel companion. Book affordable bus tickets, track your ride in real time, and earn rewards by joining RedCoach’s Loyalty Program. Top Features: • Search schedules and book bus trips for yourself, friends, or family • Track your bus in real time with live updates • Rebook or cancel trips with just a few taps • Access mobile tickets instantly for easy boarding • Select your seat and pay for extra baggage • Compare coach class amenities to pick your ride style • Save with promo codes and travel discounts • Join the Red Rider Loyalty Program and earn free trips • Manage your profile, trips, payments, and travel preferences • Reach out to customer support RedCoach puts smarter travel at your fingertips, delivering comfort, convenience, and complete control.",
-        "body": "Welcome to the RedCoach app — your all-in-one travel companion. Book affordable bus tickets, track your ride in real time, and earn rewards by joining RedCoach’s Loyalty Program.\n\nTop Features: • Search schedules and book bus trips for yourself, friends, or family • Track your bus in real time with live updates • Rebook or cancel trips with just a few taps • Access mobile tickets instantly for easy boarding • Select your seat and pay for extra baggage • Compare coach class amenities to pick your ride style • Save with promo codes and travel discounts • Join the Red Rider Loyalty Program and earn free trips • Manage your profile, trips, payments, and travel preferences • Reach out to customer support\n\nRedCoach puts smarter travel at your fingertips, delivering comfort, convenience, and complete control."
       }
     },
     "media": null

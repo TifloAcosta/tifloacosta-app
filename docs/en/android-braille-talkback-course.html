@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Accessible on-screen braille typing course for Android and TalkBack, by TifloAcosta."><meta name="author" content="Tony Acosta · TifloAcosta">
+<title>A Complete Course in On-Screen Braille Typing with Android and TalkBack · TifloAcosta</title><style>
+:root{color-scheme:light;--ink:#172b42;--link:#075b80;--accent:#155b7c;--line:#cad9e5;--paper:#ffffff}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:auto}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:1.0625rem;line-height:1.72}
+.wrapper{max-width:54rem;padding:1.2rem 1.35rem 3.2rem;margin-inline:auto}
+.skip{position:absolute;left:-200vw;top:0;padding:.8rem;background:#fff;color:#002f4c;z-index:10}.skip:focus{left:1rem;top:1rem}
+a{color:var(--link);text-underline-offset:.15em;overflow-wrap:anywhere}a:hover{text-decoration-thickness:.15em}
+a:focus-visible{outline:.2rem solid #006fbc;outline-offset:.25rem;border-radius:.1rem}
+.brand{font-weight:750;letter-spacing:.015em;color:#16456a;margin:0 0 .1rem}
+h1,h2,h3{line-height:1.25;letter-spacing:-.015em;color:#153b60;scroll-margin-top:1rem}
+h1{font-size:clamp(1.8rem,4vw,2.35rem);margin:1.2rem 0 .55rem}
+h2{font-size:clamp(1.45rem,3vw,1.85rem);margin:2.8rem 0 .9rem;padding-top:.35rem;border-top:1px solid var(--line)}
+h3{font-size:1.3rem;margin:2rem 0 .7rem}p{margin:.65rem 0 1rem}li{margin:.35rem 0}
+.meta{color:#4f6478;margin:.2rem 0}.contents{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:1rem 0;margin:2rem 0}
+.contents ol{padding-left:1.5rem}.back{font-size:.95em}.footer{margin-top:3rem;padding-top:1.3rem;border-top:1px solid var(--line)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media(prefers-contrast:more){:root{--ink:#000;--link:#003f75;--line:#253949}a:focus-visible{outline-width:3px}}
+@media print{body{font-size:10.5pt}.skip,.site-nav{display:none}.wrapper{max-width:none;padding:0}h2,h3{break-after:avoid}p{orphans:3;widows:3}}
+</style></head>
+<body><a class="skip" href="#contenido">Skip to main content</a>
+<div class="wrapper"><nav class="site-nav" aria-label="TifloAcosta"><a href="https://tifloacosta.com/">Back to the TifloAcosta home page</a></nav>
+<main id="contenido"><article aria-label="A Complete Course in On-Screen Braille Typing with Android and TalkBack">
+<h1 id="a-complete-course-in-on-screen-braille-typing-with-android-and-talkback">A Complete Course in On-Screen Braille Typing with Android and TalkBack</h1>
+<nav class="contents" aria-label="Document navigation"><h2 id="navegacion-documento">Course navigation</h2><ol><li><a href="#module-1-starting-from-scratch">Module 1. Starting from scratch</a></li><li><a href="#module-2-setting-up-android-and-switching-on-the-keyboard">Module 2. Setting up Android and switching on the keyboard</a></li><li><a href="#module-3-finding-the-two-layouts-and-calibrating">Module 3. Finding the two layouts and calibrating</a></li><li><a href="#module-4-learning-the-letters-without-rushing">Module 4. Learning the letters without rushing</a></li><li><a href="#module-5-words-spaces-lines-and-messages">Module 5. Words, spaces, lines and messages</a></li><li><a href="#module-6-numbers-capitals-and-english-ueb-punctuation">Module 6. Numbers, capitals and English UEB punctuation</a></li><li><a href="#module-7-moving-the-cursor-without-deleting-text">Module 7. Moving the cursor without deleting text</a></li><li><a href="#module-8-selecting-copying-cutting-and-pasting">Module 8. Selecting, copying, cutting and pasting</a></li><li><a href="#module-9-proofreading-and-personalising-gestures">Module 9. Proofreading and personalising gestures</a></li><li><a href="#module-10-typing-in-everyday-apps">Module 10. Typing in everyday apps</a></li><li><a href="#module-11-moving-between-braille-a-standard-keyboard-and-dictation">Module 11. Moving between braille, a standard keyboard and dictation</a></li><li><a href="#module-12-comfort-accuracy-and-confidence">Module 12. Comfort, accuracy and confidence</a></li><li><a href="#module-13-diagnosing-and-solving-problems">Module 13. Diagnosing and solving problems</a></li><li><a href="#module-14-final-exercises-and-independence">Module 14. Final exercises and independence</a></li><li><a href="#appendix-a-talkback-braille-keyboard-gesture-reference">Appendix A. TalkBack braille keyboard gesture reference</a></li><li><a href="#appendix-b-english-ueb-letters-numbers-and-signs">Appendix B. English UEB: letters, numbers and signs</a></li><li><a href="#appendix-c-quick-troubleshooting-guide">Appendix C. Quick troubleshooting guide</a></li><li><a href="#appendix-d-scope-versions-evidence-and-sources">Appendix D. Scope, versions, evidence and sources</a></li></ol></nav>
+<p class="meta">From your first six dots to confident everyday writing · Revised October 2026 edition</p>
+<p class="meta">TifloAcosta · Tony Acosta</p>
+<h2 id="introduction">Introduction</h2>
+<p>Hello, hello, lovely people.</p>
+<p>Today we&#x27;re going to write braille straight onto an Android phone&#x27;s touchscreen. No Perkins brailler, no physical keyboard and no refreshable braille display. Just TalkBack, six fingers and a little patience. The glass will remain stubbornly smooth; however enthusiastically we type, it won&#x27;t grow raised dots. What we are doing is entering ordinary text by pressing braille dot combinations.</p>
+<p>We&#x27;ll start at the beginning and work towards notes, messages, emails and longer documents. If you know Braille Screen Input on an iPhone, the idea will be familiar. The gestures aren&#x27;t. Android has its own rules, so leave your iPhone habits at the door for a while. If you&#x27;re new to touchscreen braille altogether, that&#x27;s fine too: I won&#x27;t assume that you already know the code or how to use your phone at speed.</p>
+<p>This course uses the six-dot braille keyboard built into TalkBack and its default gestures. The procedures have been checked against Google&#x27;s published help, not personally tested on every model or Android release. Where experience with a particular combination of phone, app and version would be needed, I&#x27;ll say so. You&#x27;re welcome to share reproducible results; useful evidence improves a course rather more than rumours do.</p>
+<p>Android is not a single, identical experience everywhere. A Pixel and a Samsung can place a setting somewhere different. You can also customise some braille keyboard gestures on recent TalkBack versions. If you have changed yours, the instructions here describe the factory defaults, not a promise about your personal setup.</p>
+<p>One distinction matters throughout the English edition. We use uncontracted Unified English Braille (UEB) as the teaching reference. This is not a word-for-word translation of Spanish braille. Some letters match, but capital indicators, punctuation and other signs differ. A printed character is also not always a guaranteed result of a particular braille cell in an Android text field. We&#x27;ll learn the code, then check what the keyboard actually inserted.</p>
+<p>This is a typing course, not a complete textbook for learning to read braille by touch. Work a little at a time, use the exercises as often as you like and keep the appendices nearby. We&#x27;re starting with the most reassuring skill of all: how to get out of the keyboard if things go wrong.</p>
+<h2 id="how-to-use-this-course">How to use this course</h2>
+<p>The modules follow a practical order: setup, hand position, letters, editing, everyday apps and troubleshooting. Exercises belong in disposable practice notes, not in your bank details or the only copy of an important document. Before cutting or replacing selected text, check what is selected. Phones are efficient at carrying out instructions, including the ones we never meant to give them.</p>
+<p>A phrase we&#x27;ll use often is “hold dot 3 and swipe with another finger”. That is one continuous action: keep one finger touching dot 3, move the other finger, then lift. It is not the same as tapping a braille cell, where you touch the required dots together and lift them. The keyboard takes the difference rather seriously.</p>
+<h2 id="module-1-starting-from-scratch">Module 1. Starting from scratch</h2>
+<h3 id="1-1-what-talkback-s-braille-keyboard-does">1.1. What TalkBack&#x27;s braille keyboard does</h3>
+<p>The keyboard allows you to type six-dot braille using six fingers on the touchscreen. A particular combination of dots produces a letter or sign, and TalkBack can read back the text. There are no raised points to feel on the glass; we learn where our fingers belong and use spoken feedback to check what we&#x27;ve typed.</p>
+<p>Your left index finger is dot 1, your left middle finger dot 2 and your left ring finger dot 3. On the right, index is dot 4, middle dot 5 and ring finger dot 6. The positions on the actual screen depend on how you hold the phone, but this finger-to-dot pairing stays the same.</p>
+<p>A is dot 1, b dots 1-2, c dots 1-4 and d dots 1-4-5. Bring the required fingers down together and lift. If you drag rather than tap, the phone may interpret the movement as a command instead of a character. You&#x27;ll soon discover the difference.</p>
+<h3 id="1-2-what-you-need-and-what-you-don-t">1.2. What you need, and what you don&#x27;t</h3>
+<p>You need a compatible Android phone, TalkBack enabled and its braille keyboard set up. Google specifically says screen magnification must be off. Magnification is a different feature from increasing the text size, so don&#x27;t confuse the two.</p>
+<p>You don&#x27;t need to install the old BrailleBack application or buy a refreshable braille display to follow these touchscreen lessons. Some specialist text fields and forms, however, won&#x27;t behave quite like a simple note. We&#x27;ll deal with those honestly, rather than declaring the whole phone broken.</p>
+<h3 id="1-3-touchscreen-braille-and-a-braille-display-are-different-things">1.3. Touchscreen braille and a braille display are different things</h3>
+<p>A refreshable braille display has physical, raised cells and may include a braille keyboard. TalkBack has settings for Braille display and separate settings for Braille keyboard. This course concerns the keyboard on the phone&#x27;s glass. Mixing commands for these two devices is rather like trying to operate one machine with another one&#x27;s control panel.</p>
+<p>Don&#x27;t confuse TalkBack&#x27;s braille keyboard with Gboard either. Both are input methods, and you can switch between them. Sometimes Gboard is the easiest place to enter an awkward symbol; that is good judgement, not defeat.</p>
+<h3 id="1-4-what-you-ll-learn">1.4. What you&#x27;ll learn</h3>
+<p>First come letters, words, spaces, capitals, numbers and punctuation. Then we&#x27;ll move around a document without deleting it, select and replace words, use the clipboard, and work in apps such as WhatsApp, Gmail, Keep and Chrome. Finally, we&#x27;ll learn to tell the difference between a late finger, a badly calibrated layout and a genuine accessibility problem.</p>
+<p>Exercise. Say the six positions out loud: left index 1, middle 2, ring 3; right index 4, middle 5, ring 6. Repeat until you can do it without pausing. A minute spent on this now is worth several minutes of correcting mysterious letters later.</p>
+<h3 id="1-5-is-talkback-the-only-route-to-braille-on-android">1.5. Is TalkBack the only route to braille on Android?</h3>
+<p>No. TalkBack is the focus here because Google supplies and documents its built-in six-dot touchscreen keyboard. There are also independent Android input methods. Advanced Braille Keyboard advertises touchscreen braille and English variants; Brailliac: Braille Keyboard lists Unified English Braille among its supported codes. They have their own operation and may differ from TalkBack&#x27;s gestures. We cannot teach one set of shortcuts and quietly pretend that it works in all three.</p>
+<p>There are alternative screen readers too. Commentary Screen Reader, also called Jieshuo, is one example. Backtalk is an independent, experimental fork of TalkBack; its project describes changes to the placement of touchscreen braille dots. BRLTTY is mainly intended for using a physical braille display over Bluetooth or USB, including typing on the device&#x27;s own keys. TalkBack also supports physical braille displays without the retired BrailleBack application. A reader, a touchscreen keyboard and a physical braille device are three different parts of the story.</p>
+<p>The existence and advertised functions of these tools have been checked against their published materials. I have not personally verified every reader-keyboard-phone combination. If you&#x27;ve tested one, please include the device, software versions, exact steps and outcome when you report it. That is how a useful observation becomes evidence.</p>
+<h2 id="module-2-setting-up-android-and-switching-on-the-keyboard">Module 2. Setting up Android and switching on the keyboard</h2>
+<h3 id="2-1-enable-talkback">2.1. Enable TalkBack</h3>
+<p>If you already use TalkBack, move on. Otherwise open Settings, Accessibility, TalkBack, or the equivalent route on your device, and enable it. With TalkBack running, a one-finger swipe left or right changes the focused item; a double tap activates it. Some phones provide a volume-key accessibility shortcut, but it only works when configured. Find out what yours does before you need it in a hurry.</p>
+<h3 id="2-2-find-the-braille-keyboard-settings">2.2. Find the braille keyboard settings</h3>
+<p>Open the TalkBack menu with a three-finger tap if the device supports that gesture. Otherwise, make a single down-then-right movement. Choose TalkBack settings, Braille keyboard, then Set up braille keyboard. Follow the prompts that enable the input method. The exact entrance to Settings may vary by manufacturer; the important destination is Braille keyboard, not Braille display.</p>
+<h3 id="2-3-choose-english-and-uncontracted-braille">2.3. Choose English and uncontracted braille</h3>
+<p>Under Braille keyboard, Languages, select the English language or variant available on your phone. Start with just one active language if possible. If you enable several, a three-finger swipe up opens the braille keyboard menu where you can switch between them.</p>
+<p>For this course choose uncontracted, or grade 1, braille. A three-finger swipe up opens the menu containing the switch between contracted and uncontracted braille, when supported for the chosen language. Our written examples use UEB. Google lists several English braille variants for physical displays, and the touchscreen options shown on your own version may differ; don&#x27;t assume the speech language alone determines the braille translation table.</p>
+<h3 id="2-4-open-it-for-the-first-time">2.4. Open it for the first time</h3>
+<p>Open Google Keep, Gmail or another straightforward editor and double-tap a text field. If a standard keyboard appears, find Switch input method, Next language or the equivalent input selector, often near the bottom-right corner. Choose TalkBack braille keyboard. On first use, a tutorial may appear. Follow it. If the braille keyboard isn&#x27;t on the list, return to its setup rather than trying to calibrate a keyboard you haven&#x27;t enabled.</p>
+<h3 id="2-5-hide-it-or-switch-away">2.5. Hide it, or switch away</h3>
+<p>Two fingers swiping down hide the braille keyboard and return control to ordinary TalkBack gestures. Three fingers swiping down switch to the next available keyboard. Those are different actions. Three fingers swiping up open the braille keyboard&#x27;s help and options. Google reserves these three gestures, so they cannot be remapped like many others. It is comforting to have an emergency exit that hasn&#x27;t moved house.</p>
+<h3 id="2-6-your-first-safety-drill">2.6. Your first safety drill</h3>
+<p>Open a practice note, activate the braille keyboard, then swipe down with two fingers. Make sure TalkBack can focus buttons normally. Re-enter the text field, change input method with three fingers down, then return to braille and open its options with three fingers up. Repeat until you can enter, leave and recover ordinary navigation without guessing.</p>
+<h2 id="module-3-finding-the-two-layouts-and-calibrating">Module 3. Finding the two layouts and calibrating</h2>
+<h3 id="3-1-tabletop-mode">3.1. Tabletop mode</h3>
+<p>Lay the phone flat in landscape orientation, screen facing up and charging port to the left. When automatic layout switching is enabled, TalkBack should announce tabletop mode. From left to right the dots are 3, 2, 1, 4, 5, 6. Your index fingers sit towards the middle, with middle and ring fingers towards the outside.</p>
+<p>Keep the fingers hovering rather than resting on the glass. A finger left on the screen has an irritating habit of becoming an unwanted letter. Try a with the left index finger; b with left index and middle; c with both index fingers; and d with left index, right index and right middle.</p>
+<h3 id="3-2-screen-away-mode">3.2. Screen-away mode</h3>
+<p>Hold the phone horizontally with its screen facing away from you. Google&#x27;s instructions place the left hand towards the top and the right hand towards the bottom, where the USB port is. Support the phone with thumbs and little fingers, leaving the three middle fingers of each hand free to type. Dot 1 remains left index, dot 4 remains right index, and so on.</p>
+<p>Try a, b, c and d again. Practise while seated; an escaped phone is not an especially helpful teaching assistant. If holding the phone strains your hands, switch back to tabletop mode.</p>
+<h3 id="3-3-automatic-layout-switching">3.3. Automatic layout switching</h3>
+<p>TalkBack normally selects tabletop or screen-away according to orientation. Look for Layout under TalkBack settings, Braille keyboard if you need to change the behaviour. If letters suddenly go wrong after you move the phone, check the mode before blaming your fingers.</p>
+<h3 id="3-4-calibrate-the-six-dots">3.4. Calibrate the six dots</h3>
+<p>Place all six typing fingers on the screen together and hold for roughly three seconds, until the position update is confirmed. A quick six-finger tap is not enough. Alternatively, swipe up with three fingers, choose Update dot positions, then calibrate the left and right hands as instructed. TalkBack stores positions separately for tabletop and screen-away mode, so calibrate both if you use both.</p>
+<h3 id="3-5-three-common-suspects">3.5. Three common suspects</h3>
+<p>One incorrect letter often means a finger arrived late. Several errors in succession suggest your hands drifted. Errors that begin exactly when you picked up the phone suggest a layout switch. Each problem has a different remedy. There&#x27;s no prize for recalibrating perfectly good dots every thirty seconds.</p>
+<p>Exercise. In tabletop mode, type a, b, c and d five times each, separating groups with a right swipe for a space. Repeat in screen-away mode. Hide the keyboard and listen to the result. Recalibrate only when there&#x27;s evidence that positions have drifted.</p>
+<h2 id="module-4-learning-the-letters-without-rushing">Module 4. Learning the letters without rushing</h2>
+<h3 id="4-1-the-first-ten">4.1. The first ten</h3>
+<p>Braille is built in families. The first ten letters only use dots 1, 2, 4 and 5: a 1; b 12; c 14; d 145; e 15; f 124; g 1245; h 125; i 24; j 245. When you see 145 in this course, press those three dots together, not one after another.</p>
+<p>Start with a to d. Add e and f, then g to j. Type abcdefghij and jihgfedcba. Make words such as badge, cafe, hide and face. They deliberately need no punctuation yet. If you insert one extra character, swipe left with one finger to delete it.</p>
+<h3 id="4-2-the-second-family">4.2. The second family</h3>
+<p>Take the first ten combinations and add dot 3: k 13; l 123; m 134; n 1345; o 135; p 1234; q 12345; r 1235; s 234; t 2345. Compare a with k, b with l, c with m, d with n and e with o. Understanding the pattern is more useful than memorising twenty unrelated shapes.</p>
+<p>Practice words: lamp, milk, stone, plant and tomato. Put a space between each and listen back afterwards.</p>
+<h3 id="4-3-the-remaining-letters">4.3. The remaining letters</h3>
+<p>Complete the English alphabet: u 136; v 1236; w 2456; x 1346; y 13456; z 1356. The w was a late arrival in the traditional braille alphabet, but it deserves the same attention as its neighbours. Unlike Spanish, standard English has no separate letter ñ, and our basic English exercises don&#x27;t use Spanish accented-vowel cells.</p>
+<p>Practice words: wave, voice, zebra, six, yellow and puzzle. We will tackle capitals and punctuation next. Right now, clear finger coordination is the goal.</p>
+<h3 id="4-4-hearing-a-character-is-not-the-whole-check">4.4. Hearing a character is not the whole check</h3>
+<p>TalkBack may speak letters, words or other feedback depending on your settings. That makes mistakes easier to find, but it doesn&#x27;t prove that a password, punctuation mark or web address has been entered exactly as intended. Hide the keyboard and review the text. For four- and five-dot combinations, slow down and get your fingers to land together. Pressing harder won&#x27;t make them more punctual.</p>
+<h3 id="4-5-first-check-in">4.5. First check-in</h3>
+<p>In a practice note, type three sentences without capitals or full stops: today i have time; tomorrow i will make lunch; my friend lives nearby. Once those letters are reliable, we can make the writing look like ordinary English.</p>
+<h2 id="module-5-words-spaces-lines-and-messages">Module 5. Words, spaces, lines and messages</h2>
+<h3 id="5-1-spaces-deletion-and-new-lines">5.1. Spaces, deletion and new lines</h3>
+<p>With the braille keyboard active, swipe right with one finger for a space; left with one finger to delete the preceding character; left with two fingers to delete the preceding word; and right with two fingers for a new line, provided the text field supports it. Remember: one finger deletes a character, two fingers delete a word. And deletion happens at the cursor, which may not be where you think it is.</p>
+<p>Write hello world. Add a stray letter and delete it. Add a different word, remove it with a two-finger left swipe and put it back. The movements should become familiar before we use them in important documents.</p>
+<h3 id="5-2-start-a-new-line">5.2. Start a new line</h3>
+<p>Write shopping list, swipe right with two fingers, then type bread. Repeat the new-line gesture for milk and rice. Hide the keyboard and confirm that each item is on its own line. Some forms and messaging apps use Enter for a different purpose, so a simple notes app is the sensible first testing ground.</p>
+<h3 id="5-3-submit-is-not-always-send">5.3. Submit is not always Send</h3>
+<p>A two-finger swipe up asks the text field to perform its submission or confirmation action. A search field might run a search. A messenger might send a message. Another editor might behave differently. With real recipients, type and review the message, hide the keyboard, locate the application&#x27;s own Send button and activate it deliberately. Accidental messages are very good at finding precisely the wrong recipient.</p>
+<h3 id="5-4-fix-mistakes-immediately">5.4. Fix mistakes immediately</h3>
+<p>For housee, remove the extra e. For lettter, remove the spare t. To replace the final word completely, delete that word and write it again. These shortcuts work at the cursor. Fixing a missing character in the first paragraph of a long note requires the cursor-movement skills in Module 7.</p>
+<h3 id="5-5-your-first-full-note">5.5. Your first full note</h3>
+<p>Write these three lines, using a two-finger right swipe for each line break: today i must prepare lunch; later i will review a document; tomorrow i will call a friend. Hide the keyboard, listen to the whole note, re-enter the field and append one final line. We&#x27;ll tidy up capitals and punctuation in the next module.</p>
+<h2 id="module-6-numbers-capitals-and-english-ueb-punctuation">Module 6. Numbers, capitals and English UEB punctuation</h2>
+<h3 id="6-1-choose-the-right-code">6.1. Choose the right code</h3>
+<p>The letters a to z work in many braille codes, but the punctuation and indicators certainly do not. In this English edition, our reference is uncontracted Unified English Braille, commonly called UEB. Make sure the braille keyboard is set to a suitable English table and uncontracted input. TalkBack&#x27;s actual translation can depend on the selected language or variant, text field and software release. A printed symbol in these lessons is a target to check, not a promise that every Android will insert it identically.</p>
+<p>A particularly dangerous habit would be copying punctuation from the Spanish edition. In Spanish braille the full stop is dot 3; in UEB it is dots 2-5-6. Spanish uses dots 4-6 for a capital letter; UEB uses dot 6. Even people who know both languages benefit from stopping for that reminder.</p>
+<h3 id="6-2-capital-letters">6.2. Capital letters</h3>
+<p>In UEB, a single capital is introduced by dot 6. To type Anne, enter dot 6 and then the a, followed by n, n, e. Practise with Tony, London, Maria, Mexico, England and Android. Two consecutive capital indicators have a special use for capitalised words in UEB, but rather than trust every keyboard to interpret each complex indicator identically, begin with one capital at a time. For initials, acronyms and passwords, verify the inserted characters individually.</p>
+<h3 id="6-3-numbers">6.3. Numbers</h3>
+<p>The numeric indicator is dots 3-4-5-6. After it, the first ten letters stand for digits: a=1, b=2, c=3, d=4, e=5, f=6, g=7, h=8, i=9 and j=0. To type 25, enter the numeric indicator, b, then e. A normal uninterrupted number doesn&#x27;t need the indicator repeated before every digit.</p>
+<p>Practise 10, 25, 150, 2026 and 2027. Then write The meeting is on the 14th and I need 3 notebooks. Check where number mode ends as letters and punctuation begin. Never practise with a real account number; a convincing wrong number is still wrong.</p>
+<h3 id="6-4-letters-with-accents-in-english-text">6.4. Letters with accents in English text</h3>
+<p>Standard English writing generally needs the basic alphabet rather than the Spanish set of accented vowels or ñ. When a person&#x27;s name or a borrowed word genuinely needs an accent, the appropriate UEB treatment can use an additional braille symbol sequence; it is not safe to insert a Spanish accented-vowel cell just because it worked in a Spanish-language keyboard.</p>
+<p>Try the ordinary English words cafe, resume and fiance first. Then, if you need their accented forms—café, résumé or fiancé—check the relevant UEB reference and what your selected English translation table outputs. A standard keyboard may be the simplest reliable method. A name&#x27;s spelling deserves better than a guess made with the wrong language setting.</p>
+<h3 id="6-5-essential-punctuation">6.5. Essential punctuation</h3>
+<p>For English UEB, the comma is dot 2; semicolon dots 2-3; colon dots 2-5; full stop (period) dots 2-5-6; question mark dots 2-3-6; exclamation mark dots 2-3-5; apostrophe dot 3; and hyphen dots 3-6. An opening double quotation mark also uses dots 2-3-6, while the closing double quotation mark uses dots 3-5-6. A standard opening parenthesis is two cells: dot 5, then dots 1-2-6; closing parenthesis is dot 5, then dots 3-4-5.</p>
+<p>You can see the trap. The braille sequence for a question mark also appears as an opening double quote in the basic UEB punctuation system. Context matters, and the keyboard&#x27;s translator must decide which character to insert. For a short note, you may be happy with a plain quotation mark; for code, legal text or a password, a vaguely similar symbol is not enough.</p>
+<p>Write Hello, how are you? and “That was a surprise!” using the appropriate UEB sequences. Then hide the braille keyboard and inspect the text. If a quote or question mark comes out incorrectly, use another input method to fix it. Repeating the same cell indefinitely is not a translation strategy.</p>
+<h3 id="6-6-web-addresses-email-and-passwords">6.6. Web addresses, email and passwords</h3>
+<p>An email address such as person@example.com requires the right @, dot and possibly hyphen; a web address may need slashes, colons and symbols. UEB has defined signs for many of these. For instance, its at sign is a dot-4 cell followed by dot 1, and a slash is dots 4-5-6 followed by dots 3-4. These are code conventions: check whether your own TalkBack language table and text field produce the intended digital characters.</p>
+<p>If an awkward symbol cannot be entered reliably, switch briefly to Gboard, type it, and return to braille. Protected fields may hide or restrict feedback. Never turn off security features merely to pass an exercise, and never use a genuine password for practice.</p>
+<h3 id="6-7-full-punctuation-exercise">6.7. Full punctuation exercise</h3>
+<p>Create a note containing: Saturday, 24 October. I have a meeting at 10. I will prepare 3 questions. Will everything be ready? I certainly hope so! Then add a quoted sentence: “I&#x27;ll check.” Review capitals, the apostrophe, figures, full stops, question mark, exclamation mark and both quotation marks. If something differs from the intended text, document what your keyboard produced and use a reliable alternative.</p>
+<h3 id="6-8-spanish-and-english-cannot-share-one-sign-chart">6.8. Spanish and English cannot share one sign chart</h3>
+<p>Some braille signs happen to match in both languages, but that doesn&#x27;t make the two codes interchangeable. English UEB capital: 6; Spanish capital: 46. English UEB full stop: 256; Spanish full stop: 3. English UEB question mark: 236; the traditional Spanish interrogation sign: 26. Parentheses and quotation marks differ too. These are differences in the codes, not changes to TalkBack&#x27;s swipe gestures. Anyone moving between the language editions should switch the braille language and consult Appendix B for that edition.</p>
+<h2 id="module-7-moving-the-cursor-without-deleting-text">Module 7. Moving the cursor without deleting text</h2>
+<h3 id="7-1-the-insertion-point">7.1. The insertion point</h3>
+<p>The cursor marks where the next character will appear. Normally it starts at the end of your text, but you can move it inside a word, up a line or to the very beginning. If you type huse instead of house, put the cursor after the h and insert o. There is no need to throw the whole word away every time a single letter goes missing.</p>
+<p>TalkBack provides gestures for character, word and line navigation, plus jumps to the beginning and end. Some are compound gestures: hold a braille dot on the screen while another finger moves. Google&#x27;s TalkBack 14.0 documentation introduced these editing gestures; TalkBack 14.1 subsequently added the proofreading gestures. An older version may lack some of these operations. Check which version is installed before assuming that your hands are doing something wrong.</p>
+<h3 id="7-2-move-by-characters">7.2. Move by characters</h3>
+<p>To move to the preceding character, hold dot 3 or dot 6 and swipe up with another finger. To move forward, keep the same dot held and swipe down with another finger. The alternative dots let you choose the more comfortable hand; you do not hold both at once.</p>
+<p>Write kitten, move back a few characters and then forward again, listening to TalkBack&#x27;s announcements. If the spoken character and cursor position seem confusing, insert a test letter in an expendable note and check exactly where it goes. Understanding the insertion point is more useful than trusting our memory of how many swipes we made.</p>
+<h3 id="7-3-move-by-words">7.3. Move by words</h3>
+<p>For the previous word, hold dot 2 or dot 5 and swipe up with another finger. For the next word, hold dot 2 or 5 and swipe down. Write Tomorrow I will take the documents to the meeting. Travel back through the sentence, word by word, then forward again. When correcting an error, use words for the longer journey and characters for the last few steps.</p>
+<h3 id="7-4-move-by-lines">7.4. Move by lines</h3>
+<p>Hold dot 1 or dot 4 and swipe up with another finger to move to the preceding line; swipe down for the following line. An editor may wrap a long paragraph into several screen lines. So a line and a paragraph are not necessarily the same thing. Build a four-line note and practise going from the bottom to the top and back. If the operation fails in one specialised editor, compare it with a simple note.</p>
+<h3 id="7-5-jump-to-the-start-or-end">7.5. Jump to the start or end</h3>
+<p>Hold dots 1 and 2 together—or dots 4 and 5 together—and swipe up with another finger to go to the beginning of the text. Swipe down to reach the end. These gestures save endless character-by-character movements in long documents. Practise with a two-paragraph note: go to the beginning, insert a heading and a new line, then return to the end and review what you&#x27;ve done.</p>
+<h3 id="7-6-navigation-granularity">7.6. Navigation granularity</h3>
+<p>There is another way to move. Three fingers left choose the preceding navigation granularity, and three fingers right choose the next. Once a granularity has been selected, a one-finger swipe up moves backward and a one-finger swipe down moves forward within that unit. Use this for repeated movement by the same unit; the direct dot-holding gestures are useful when you&#x27;re frequently changing between characters, words and lines.</p>
+<h3 id="7-7-correct-an-error-in-place">7.7. Correct an error in place</h3>
+<p>Write Tomorrow I will phone my freind. Find the wrongly ordered letters and correct friend without deleting the whole sentence. Now type I have an importnt meeting. and insert the missing a. If navigation feels uncertain, begin with short words and check the cursor after every move. Slow, deliberate correction eventually becomes quicker than constant rewriting.</p>
+<h2 id="module-8-selecting-copying-cutting-and-pasting">Module 8. Selecting, copying, cutting and pasting</h2>
+<h3 id="8-1-movement-is-not-selection">8.1. Movement is not selection</h3>
+<p>Moving the cursor changes where new text is inserted; selecting marks a stretch of existing text for an action. The gestures are related, but selecting generally uses two moving fingers rather than one. Check the selection before cutting, replacing or deleting it. A misplaced letter is inconvenient. Replacing half a document is a more ambitious mistake.</p>
+<h3 id="8-2-select-characters-and-words">8.2. Select characters and words</h3>
+<p>To select the previous character, hold dot 3 or 6 and swipe up with two other fingers. For the following character, swipe down. To select the preceding word, hold dot 2 or 5 and swipe up with two other fingers; down selects the next. Try the phrase blue jacket: select jacket and replace it with scarf. Check the space so that you haven&#x27;t made bluescarf or blue  scarf.</p>
+<h3 id="8-3-larger-selections">8.3. Larger selections</h3>
+<p>To select everything in the field, hold dot 1 or dot 4 and swipe left with three other fingers. To select from the cursor back to the beginning, hold dots 1-2 or 4-5 and swipe up with two other fingers; swipe down to select through to the end. These actions can cover a great deal of text. Practise on a temporary note, and always confirm the selection before editing it.</p>
+<h3 id="8-4-the-clipboard-copy-cut-and-paste">8.4. The clipboard: copy, cut and paste</h3>
+<p>Copy keeps the original and places a duplicate on the clipboard; cut removes it and puts it on the clipboard; paste inserts the clipboard content at the cursor. For Copy, hold dot 1 or 4 and swipe down with three other fingers. For Cut, hold dot 1 or 4 and swipe up with three fingers. For Paste, hold dot 1 or 4 and swipe right with three fingers. Select All uses the same anchor dots but a three-finger left swipe. It&#x27;s worth practising the direction rather carefully.</p>
+<p>Write Braille helps me type. Select All, copy, move to the end, insert a new line and paste. You should have two copies of the sentence. To move text instead of duplicating it, cut then paste. Don&#x27;t make your first attempt with the only surviving copy of an important paragraph.</p>
+<h3 id="8-5-copy-between-apps">8.5. Copy between apps</h3>
+<p>Write a short practice note in Keep, copy it, hide the braille keyboard and open a Gmail draft. Activate the message body, return to the braille keyboard and paste. The clipboard can be shared across compatible applications. It is temporary, however, and Android may clear some copied data after a while; protected fields can limit clipboard operations too. If Paste appears to do nothing, try the same operation in a simple note before blaming braille.</p>
+<h3 id="8-6-full-editing-practice">8.6. Full editing practice</h3>
+<p>Write three lines: Today I will buy bread. Tomorrow I will call Helen. Later I will read the email. Replace bread with fruit. Copy the last line and paste it at the bottom. Verify that the original remains untouched, then delete only the duplicate. The goal is not speed; it is being absolutely sure where the cursor and selection are.</p>
+<h2 id="module-9-proofreading-and-personalising-gestures">Module 9. Proofreading and personalising gestures</h2>
+<h3 id="9-1-proofreading-from-the-keyboard">9.1. Proofreading from the keyboard</h3>
+<p>TalkBack offers a proofreading or spelling-correction granularity when supported by your configuration. Switch navigation granularity with a three-finger swipe left or right until TalkBack announces the relevant option. In this mode, one finger down moves to the next possible spelling error, and one finger up to the previous one. One finger right reads the next suggestion; one finger left reads the preceding one. Two fingers right accept a suggestion; two fingers left undo that suggestion.</p>
+<p>That last command is not a general-purpose Undo for every cut or deletion. And the spelling checker can only guess what you intended. Seat and seal are both real words, even when one of them is entirely wrong in your sentence. Most importantly, leave proofreading mode before you resume ordinary writing: swipe left or right with three fingers to switch away from proofreading. Otherwise its gestures will continue to interfere with text entry.</p>
+<h3 id="9-2-no-suggestions-appear">9.2. No suggestions appear</h3>
+<p>Proofreading depends on Android&#x27;s spell-checking service, the language and the editor. In an ordinary note, type a deliberate misspelling such as keyboaard. If it isn&#x27;t detected, check the active spelling service, English language options and whether the same problem happens in another application. One app&#x27;s lack of suggestions does not prove that the braille keyboard has failed.</p>
+<p>Listen to a suggested replacement before accepting it. Brand names, place names and technical terms are not always in the dictionary. A spell checker is useful, but it wasn&#x27;t in the room when you decided what to say.</p>
+<h3 id="9-3-customise-gestures-on-newer-releases">9.3. Customise gestures on newer releases</h3>
+<p>Google documents customisable on-screen braille keyboard gestures in TalkBack 16.1. Open TalkBack settings, Braille keyboard, Gestures. Choose an action, select Change gesture where available and make the proposed movement twice. Conflicting assignments are reported, and some operations offer a mirrored gesture for the other hand. You can restore a single default, remove an assignment or reset the keyboard&#x27;s customisable gestures.</p>
+<p>The three safety gestures remain reserved: two fingers down hide the keyboard, three fingers down switch keyboard, and three fingers up open help and options. Write down any other changes you make. When you want to return to normal, a known starting point beats twelve guesses.</p>
+<h3 id="9-4-when-not-to-customise">9.4. When not to customise</h3>
+<p>If you still confuse a one-finger and a two-finger left swipe, changing the assignments won&#x27;t teach your hands the difference. First learn the defaults. Later, change only the gestures that are genuinely awkward for your preferred way of holding the phone. Review the gesture list, practise moving the cursor, selecting and pasting, and customise a single operation only if you have a clear reason.</p>
+<h2 id="module-10-typing-in-everyday-apps">Module 10. Typing in everyday apps</h2>
+<h3 id="10-1-same-braille-different-controls">10.1. Same braille, different controls</h3>
+<p>The braille keyboard enters text. TalkBack operates an application&#x27;s buttons, lists and other controls. This distinction matters in WhatsApp, Telegram, Gmail and Chrome. While the braille keyboard is active, many of TalkBack&#x27;s ordinary gestures are temporarily unavailable. Hide it with two fingers down when you need to explore the rest of the app. Use draft notes and practice conversations until you can distinguish editing from sending.</p>
+<h3 id="10-2-whatsapp-step-by-step">10.2. WhatsApp, step by step</h3>
+<p>Open a conversation where practice won&#x27;t disturb anyone, focus the message field and double-tap. Select TalkBack&#x27;s braille keyboard if necessary. Write Hello, I&#x27;m practising braille typing on Android. Correct mistakes and check the actual inserted punctuation. Then hide the keyboard, find the application&#x27;s Send button with TalkBack and activate it only if you truly want to send the message.</p>
+<p>WhatsApp also has a setting about using Enter to send messages, and its wording may vary by version. That setting belongs to WhatsApp, not to TalkBack&#x27;s braille code. For another exercise, draft a greeting, two paragraphs and a closing, but keep it unsent. No friend should have to volunteer as an accidental accessibility testing service.</p>
+<h3 id="10-3-telegram-and-saved-messages">10.3. Telegram and Saved Messages</h3>
+<p>Telegram uses the same overall method, but it has its own controls for sending and attaching. Saved Messages, when available to your account, is a handy place to send practice material to yourself. Write a sentence, one with a date and one with a question mark. Review it, especially the question mark, then use Telegram&#x27;s Send button when you mean to save the message. A braille new-line gesture is not necessarily the same as the app&#x27;s send action.</p>
+<h3 id="10-4-gmail-recipient-subject-and-body">10.4. Gmail: recipient, subject and body</h3>
+<p>Choose Compose. The recipient, subject and message body are separate fields. In To, pick a contact or enter an address, taking particular care with the at sign, full stops and hyphens. Make sure Gmail has recognised the intended recipient; simply hearing each letter isn&#x27;t enough.</p>
+<p>Enter Braille practice on Android as the subject. In the body type: Hello, good morning. I&#x27;m trying TalkBack&#x27;s braille keyboard. I can write, review and correct messages without always using the standard keyboard. Best wishes. Add line breaks where needed. Hide the keyboard, review the recipient and subject, then save the message as a draft. Only use Send if you intend to deliver it.</p>
+<h3 id="10-5-google-keep-note-and-checklist">10.5. Google Keep: note and checklist</h3>
+<p>Create a note titled For tomorrow. Add three tasks on separate lines: Check email. Prepare the phone call. Read a document. Save the note, reopen it and confirm that the text and line breaks survived. In a checklist, typing the words and checking the boxes are two separate actions: use TalkBack navigation to activate the boxes.</p>
+<p>Keep is a useful test bench. If a capital, selection, cursor command or paste fails in a complicated form, check that operation in Keep before changing your whole TalkBack configuration.</p>
+<h3 id="10-6-chrome-searches-urls-and-forms">10.6. Chrome: searches, URLs and forms</h3>
+<p>Focus the address bar and type TalkBack braille keyboard. Use the field&#x27;s search action or hide braille and activate the relevant command. A search query is not the same as an exact website address. For a URL, check every dot, colon, slash and hyphen. Use Gboard for a symbol if that gives a more reliable result.</p>
+<p>Web forms contain text fields, checkboxes, lists and submit buttons. The braille keyboard enters text in compatible fields; TalkBack handles non-text controls. If a form won&#x27;t accept one command, try a simple editor before assuming that all braille typing is at fault.</p>
+<h3 id="10-7-when-an-app-resists">10.7. When an app resists</h3>
+<p>First check that the field is focused and editing is active. Then try the same character or gesture in a basic note. If it only fails in one app, you may be able to prepare the text elsewhere, copy it and paste it into the destination. Otherwise use another input method. Real accessibility barriers exist, and identifying them is more useful than randomly changing ten settings.</p>
+<p>When reporting a problem, include the application and version, phone model, Android and TalkBack versions, selected braille language, gesture used, expected result and actual result. Avoid including personal data.</p>
+<h3 id="10-8-everyday-practice">10.8. Everyday practice</h3>
+<p>Create three reminders in Keep. Copy one into a Gmail draft and add a sentence. Save a short note to Telegram Saved Messages. Finally, make a Chrome search. If you can move between text entry and app navigation calmly, you have moved beyond alphabet exercises and into genuinely useful braille typing.</p>
+<h2 id="module-11-moving-between-braille-a-standard-keyboard-and-dictation">Module 11. Moving between braille, a standard keyboard and dictation</h2>
+<h3 id="11-1-choosing-a-method-is-a-skill">11.1. Choosing a method is a skill</h3>
+<p>There is no rule that says you must use braille for every character. Sometimes it is fast, accurate and discreet. Sometimes dictation will get a paragraph drafted quickly, and sometimes Gboard will be the easiest way to insert an unusual symbol. Being able to switch without losing what you&#x27;ve already typed is part of independent writing.</p>
+<p>With the braille keyboard open, a three-finger swipe down switches to the next available keyboard. To return to braille, use your device&#x27;s input-method selector. A two-finger swipe down merely hides braille; it doesn&#x27;t necessarily choose Gboard.</p>
+<h3 id="11-2-gboard-as-a-useful-backup">11.2. Gboard as a useful backup</h3>
+<p>Gboard provides a standard on-screen keyboard with letters, digits and symbols. How you activate keys with TalkBack depends on the typing preferences and device. We are not going to turn this into a complete Gboard manual. We simply want a dependable escape route for a difficult symbol or a field that doesn&#x27;t cooperate with braille.</p>
+<p>Write The test email address is in a note using braille. Switch to Gboard and insert the invented address person@example.com, checking the @ and full stop. Switch back and add and I have checked the punctuation. Keep all of it in the same text field.</p>
+<h3 id="11-3-dictation-is-not-a-voice-message">11.3. Dictation is not a voice message</h3>
+<p>Dictation converts speech into written text. A voice message is a sound recording. To dictate in a compatible field, use an input method with a microphone button, such as Gboard, grant the necessary microphone permission and speak a short sentence. Some languages and devices support spoken punctuation or automatic punctuation. Google has introduced additional TalkBack and Gboard dictation shortcuts on some releases, but availability and behaviour vary; use the controls you can actually find on your phone.</p>
+<p>Try saying: Tomorrow I&#x27;ll review the papers and call my friend. Then listen to what appeared. Do not assume every device understands the same voice commands.</p>
+<h3 id="11-4-correct-what-dictation-heard">11.4. Correct what dictation heard</h3>
+<p>Speech recognition can mishear people&#x27;s names, figures and uncommon technical terms. Dictate a paragraph, return to braille and correct any errors. If recognition happens to get everything right, deliberately spoil one word so you have something to fix. Dictation is also not suitable for private material when other people can hear you. Braille is quieter, but TalkBack&#x27;s speech may still be audible unless you use suitable headphones.</p>
+<h3 id="11-5-passwords-and-protected-fields">11.5. Passwords and protected fields</h3>
+<p>Passwords distinguish upper- and lowercase letters, figures and symbols. Protected fields can restrict speaking, feedback or editing. If braille is unavailable or you can&#x27;t verify a character, use a secure input method that the app supports. Don&#x27;t switch off the phone&#x27;s security settings to get through a training exercise, and don&#x27;t practice with a real password or verification code.</p>
+<h3 id="11-6-mixed-method-exercise">11.6. Mixed-method exercise</h3>
+<p>Make a three-paragraph note. Type the first in braille, dictate the second and type the third in braille again. Review everything and correct names, punctuation and numbers. The aim is to change input methods without changing the subject—or losing the cursor and half the text.</p>
+<h2 id="module-12-comfort-accuracy-and-confidence">Module 12. Comfort, accuracy and confidence</h2>
+<h3 id="12-1-start-with-a-stable-setup">12.1. Start with a stable setup</h3>
+<p>For the first few days, keep one suitable English braille language active, use uncontracted braille and retain the default gestures. Choose a comfortable layout, then leave it alone unless you find a real problem. If you change the language, gestures, layout and speech feedback all at once, it will be difficult to identify what fixed or broke something.</p>
+<p>The size of the screen and your hands affects comfort. Some people prefer holding the phone; others type more easily with it resting flat. Neither approach is a medal-winning event. Choose the one that lets you type without straining your fingers.</p>
+<h3 id="12-2-coordination-before-speed">12.2. Coordination before speed</h3>
+<p>Remember the finger that lands late? It is still our usual suspect. A letter such as m needs dots 1-3-4 to land together. Practise related pairs such as a-k, b-l and c-m. Type the word message several times and listen to whether you get the same result. If errors multiply when you speed up, slow down. A gentle simultaneous tap is more useful than an enthusiastic slap on the glass.</p>
+<p>Take breaks. Braille typing should not leave your hands aching.</p>
+<h3 id="12-3-become-fluent-without-becoming-careless">12.3. Become fluent without becoming careless</h3>
+<p>Start with Today I went for a walk. Enter it slowly and correctly, then repeat it a little more smoothly. Change the exercise to Tomorrow I&#x27;ll make a phone call. Finally, write something you genuinely need, such as a shopping list. Fluency means more than raw speed: it includes knowing how to correct an error, navigate the text and recover when an app behaves oddly.</p>
+<h3 id="12-4-speech-and-vibration-feedback">12.4. Speech and vibration feedback</h3>
+<p>TalkBack can announce characters, words and other feedback according to your verbosity settings. Too little feedback makes errors difficult to spot; too much interrupts your train of thought. Change one speech setting at a time and test it. Google&#x27;s TalkBack 16.1 release also documents adjustable typing focus delay. Shortening it can make announcements arrive sooner, but some gestures, including double-tap, may become less comfortable. If a change makes matters worse, restore the previous value.</p>
+<p>Sounds and vibration can confirm that something happened, but they cannot certify the spelling of a proper name or the accuracy of a financial figure. Review important text before using it.</p>
+<h3 id="12-5-short-realistic-practice">12.5. Short, realistic practice</h3>
+<p>Ten minutes of letters, a real note and one focused correction often teach more than an hour of racing through the alphabet. Give one session to numbers, one to punctuation and another to selections. As the movements become familiar, you&#x27;ll spend less time thinking about the keyboard and more time thinking about what you&#x27;re writing. That is the whole point.</p>
+<p>Evaluation. Write three paragraphs, correct a word in the first, replace a figure in the second and copy a sentence from the third. Save, close and reopen the document. If the result is what you intended, you&#x27;re ready for the troubleshooting module.</p>
+<h2 id="module-13-diagnosing-and-solving-problems">Module 13. Diagnosing and solving problems</h2>
+<h3 id="13-1-five-questions-before-changing-settings">13.1. Five questions before changing settings</h3>
+<p>When something fails, ask what you were doing, what happened, where it happened, whether it happens every time, and what changed recently. Begin with reversible checks: focused text field, active input method, layout, calibration and application. Only then consider updates or an ordinary restart. Clearing app storage or resetting the entire phone is not a sensible first response to one wrongly typed letter.</p>
+<h3 id="13-2-the-braille-keyboard-doesn-t-appear">13.2. The braille keyboard doesn&#x27;t appear</h3>
+<p>Try activating a normal text field in Keep. If another keyboard appears, use the input selector and check that TalkBack&#x27;s braille keyboard has been enabled. Confirm that TalkBack is active and that screen magnification is disabled. If the setup isn&#x27;t complete, finish it rather than repeatedly tapping the empty screen.</p>
+<h3 id="13-3-letters-or-numbers-are-wrong">13.3. Letters or numbers are wrong</h3>
+<p>Check the layout and calibrate only when the dot positions have actually drifted. If normal letters work but punctuation looks wrong, check your English braille language, the translation table and whether you are accidentally following a Spanish sign chart. For numbers, enter the numeric indicator and the a, b, c, d combinations in a test note; they should produce 1234 with the intended table. Verify rather than using a real phone or account number as a test.</p>
+<h3 id="13-4-editing-gestures-fail">13.4. Editing gestures fail</h3>
+<p>Keep the indicated dot firmly held while the other finger or fingers swipe. Try the same operation in Keep if it fails in one app. If you&#x27;ve changed gestures, inspect the assignments under Braille keyboard, Gestures. Restore a single default if necessary; resetting all gestures should be a last, deliberate choice. Never cut or replace a selection you haven&#x27;t checked.</p>
+<h3 id="13-5-the-keyboard-stops-responding-after-editing">13.5. The keyboard stops responding after editing</h3>
+<p>Hide braille with two fingers down and check whether TalkBack can still move around the application&#x27;s controls. Reactivate the field and try a simple letter. If necessary, switch to a standard keyboard and compare another app. Google&#x27;s help describes a particular issue on some devices where the Back button may stop working after closing braille in Messages; returning to Home is the documented workaround. Record the exact device, versions and steps if it recurs.</p>
+<h3 id="13-6-talkback-goes-quiet">13.6. TalkBack goes quiet</h3>
+<p>First distinguish complete loss of speech from missing spoken feedback while typing. Check volume, connected headphones and Bluetooth audio output, and whether TalkBack remains on. If the characters are being inserted but not spoken, investigate speech feedback rather than recalibrating your hands. Use the manufacturer&#x27;s normal restart procedure only if you cannot restore control more simply.</p>
+<h3 id="13-7-strange-or-duplicated-characters">13.7. Strange or duplicated characters</h3>
+<p>Review the selected braille language and the exact text output. A symbol translated incorrectly is not always a finger error. If unwanted duplicate letters appear around slashes or other punctuation, reproduce the sequence in a simple editor and record the TalkBack version. A community workaround may help, but a workaround is not the same as a confirmed vendor fix. Temporary fixes have a habit of ageing rather badly.</p>
+<h3 id="13-8-no-spelling-suggestions">13.8. No spelling suggestions</h3>
+<p>Enter a deliberate misspelling, switch into proofreading granularity and look for suggestions. Check English spell-checking services and try another app. You can always correct a word directly, even when no suggestion is offered. Remember to leave proofreading mode before normal typing.</p>
+<h3 id="13-9-copy-and-paste-fail">13.9. Copy and paste fail</h3>
+<p>Copy a small word inside the same note, paste it at the end and check the result. If that works but pasting elsewhere fails, inspect the receiving field. Android&#x27;s clipboard is temporary and some secure fields restrict it. Try a simple example instead of repeatedly cutting important text.</p>
+<h3 id="13-10-problems-after-an-update">13.10. Problems after an update</h3>
+<p>Test the essentials first: a letter, space, delete and hide keyboard. Then try cursor movement, a small selection and copy-and-paste. Only after that review customised gestures and troublesome apps. TalkBack 17.0 documents changes to commands for physical braille displays; community reporting on 17.1 describes further command assignment. Those external-display developments are not, by themselves, proof that the touchscreen typing gestures have changed.</p>
+<h3 id="13-11-information-worth-including-in-a-support-report">13.11. Information worth including in a support report</h3>
+<p>Give the phone maker and model, Android and TalkBack versions, English braille variant and grade, keyboard layout, app and version, precise action, expected result, actual result and how reliably it repeats. Never include passwords, verification codes, private messages or unnecessary personal information.</p>
+<h3 id="13-12-three-troubleshooting-scenarios">13.12. Three troubleshooting scenarios</h3>
+<p>Scenario one: typing works until you lift the phone, when the letters change. Check the layout switch. Scenario two: Keep accepts a gesture but a web form does not. Check the field and app rather than resetting TalkBack. Scenario three: text appears correctly but TalkBack does not announce it. Check speech feedback. Three different causes, three different solutions.</p>
+<h2 id="module-14-final-exercises-and-independence">Module 14. Final exercises and independence</h2>
+<h3 id="14-1-write-something-complete">14.1. Write something complete</h3>
+<p>Start a new note titled My experience with the braille keyboard. Write three short paragraphs about how you hold the phone, which commands are easiest and what still needs practice. Add today&#x27;s date and correct one word in the first paragraph without deleting what follows. Save the note, close it and reopen it. This time the content should be your own, not just another copied example.</p>
+<h3 id="14-2-correct-without-rewriting">14.2. Correct without rewriting</h3>
+<p>Type Tomorrow I&#x27;ll call my freind. Then I&#x27;ll check an importnt letter. Correct friend and important using word and character navigation. Stop only when both words are right and the rest of the text remains intact.</p>
+<h3 id="14-3-move-paragraphs-around">14.3. Move paragraphs around</h3>
+<p>Write two short paragraphs. Copy the first to the end, check that the original is still there and remove the duplicate. Try again using Cut and Paste, but only in a practice note. The distinction between duplicating something and moving it is central to useful editing.</p>
+<h3 id="14-4-a-message-and-an-email">14.4. A message and an email</h3>
+<p>Draft a two-paragraph message in WhatsApp or Telegram, then review it before any send action. Open Gmail, create a draft with subject and body, paste in a sentence taken from a note and save. You don&#x27;t need to send anything to a real person to prove that you can use the method.</p>
+<h3 id="14-5-mix-input-methods">14.5. Mix input methods</h3>
+<p>Write the opening of a note in braille, dictate the second paragraph, correct it in braille and use a standard keyboard for any special symbol you need. Hide braille and listen to the finished note with TalkBack. The exercise succeeds when the document is intact and you can choose the appropriate input method without panic.</p>
+<h3 id="14-6-practical-graduation-check">14.6. Practical graduation check</h3>
+<p>You know the foundation when you can activate and hide the keyboard, find and calibrate its six dots, type letters, capitals, numbers and everyday punctuation, move and select text, copy and paste, work in more than one app, switch keyboard and investigate simple faults. No words-per-minute target is required. This is about independence, not a race.</p>
+<h3 id="14-7-the-course-ends-learning-doesn-t">14.7. The course ends; learning doesn&#x27;t</h3>
+<p>We began with a smooth piece of glass and six imaginary dot positions. Now that same surface can be a writing tool for notes, messages and properly edited documents. We haven&#x27;t replaced braille; we&#x27;ve found another way to use it.</p>
+<p>Some days you&#x27;ll type with the phone flat on the table; others you&#x27;ll hold it. You may dictate one passage, use Gboard for another and connect a physical braille display when it suits you. There is no reason to swear loyalty to a single input method. The best one is the one that lets you do what you need, reliably and safely.</p>
+<p>And when that late-arriving finger makes another appearance—and it will—we&#x27;ll know how to investigate instead of pressing everything in sight and hoping for the best. The keyboard should help us write, not become the most demanding character in the story.</p>
+<p>A warm goodbye,</p>
+<p>Tony Acosta · TifloAcosta</p>
+<h2 id="appendix-a-talkback-braille-keyboard-gesture-reference">Appendix A. TalkBack braille keyboard gesture reference</h2>
+<p>These are Google&#x27;s documented default touchscreen braille gestures. If you have customised an action, your settings take precedence. “Hold a dot” always means keeping that finger in contact while the others make the indicated movement. These commands concern the phone&#x27;s touchscreen, not a refreshable braille display.</p>
+<h3 id="a-1-basic-operations">A.1. Basic operations</h3>
+<ul>
+<li>Space: swipe right with one finger.</li>
+<li>Delete previous character: swipe left with one finger.</li>
+<li>Delete previous word: swipe left with two fingers.</li>
+<li>New line: swipe right with two fingers.</li>
+<li>Submit the field&#x27;s action: swipe up with two fingers, if supported.</li>
+<li>Hide braille keyboard: swipe down with two fingers.</li>
+<li>Switch to next keyboard: swipe down with three fingers.</li>
+<li>Help and braille keyboard options: swipe up with three fingers.</li>
+</ul>
+<h3 id="a-2-cursor-navigation">A.2. Cursor navigation</h3>
+<ul>
+<li>Previous character: hold dot 3 or 6; swipe up with another finger.</li>
+<li>Next character: hold dot 3 or 6; swipe down with another finger.</li>
+<li>Previous word: hold dot 2 or 5; swipe up with another finger.</li>
+<li>Next word: hold dot 2 or 5; swipe down with another finger.</li>
+<li>Previous line: hold dot 1 or 4; swipe up with another finger.</li>
+<li>Next line: hold dot 1 or 4; swipe down with another finger.</li>
+<li>Beginning of text: hold dots 1-2 or 4-5; swipe up with another finger.</li>
+<li>End of text: hold dots 1-2 or 4-5; swipe down with another finger.</li>
+<li>Previous granularity: swipe left with three fingers.</li>
+<li>Next granularity: swipe right with three fingers.</li>
+<li>Backward at current granularity: swipe up with one finger.</li>
+<li>Forward at current granularity: swipe down with one finger.</li>
+</ul>
+<h3 id="a-3-selection-and-editing">A.3. Selection and editing</h3>
+<ul>
+<li>Select preceding character: hold dot 3 or 6; swipe up with two other fingers.</li>
+<li>Select following character: hold dot 3 or 6; swipe down with two other fingers.</li>
+<li>Select preceding word: hold dot 2 or 5; swipe up with two other fingers.</li>
+<li>Select following word: hold dot 2 or 5; swipe down with two other fingers.</li>
+<li>Select all: hold dot 1 or 4; swipe left with three other fingers.</li>
+<li>Select to beginning: hold dots 1-2 or 4-5; swipe up with two other fingers.</li>
+<li>Select to end: hold dots 1-2 or 4-5; swipe down with two other fingers.</li>
+<li>Copy: hold dot 1 or 4; swipe down with three other fingers.</li>
+<li>Cut: hold dot 1 or 4; swipe up with three other fingers.</li>
+<li>Paste: hold dot 1 or 4; swipe right with three other fingers.</li>
+</ul>
+<h3 id="a-4-proofreading-mode">A.4. Proofreading mode</h3>
+<p>Choose the proofreading granularity with a three-finger swipe left or right. The gestures below then apply:</p>
+<ul>
+<li>Next possible typo: one finger down.</li>
+<li>Previous possible typo: one finger up.</li>
+<li>Next suggested correction: one finger right.</li>
+<li>Previous suggested correction: one finger left.</li>
+<li>Accept suggestion: two fingers right.</li>
+<li>Undo suggested correction: two fingers left; this is not a universal Undo command.</li>
+<li>Exit proofreading and resume typing: three fingers left or right until proofreading is no longer selected.</li>
+</ul>
+<h3 id="a-5-calibration">A.5. Calibration</h3>
+<ul>
+<li>Both hands: hold all six typing dots for about three seconds and wait for confirmation.</li>
+<li>One hand at a time: three fingers up, Update dot positions, then follow instructions.</li>
+<li>Remember: TalkBack stores tabletop and screen-away positions separately.</li>
+</ul>
+<h2 id="appendix-b-english-ueb-letters-numbers-and-signs">Appendix B. English UEB: letters, numbers and signs</h2>
+<p>The following references describe uncontracted Unified English Braille, not the Spanish braille code. They are code rules; check the characters your chosen Android braille table actually inserts, particularly in forms and protected fields.</p>
+<h3 id="b-1-alphabet">B.1. Alphabet</h3>
+<ul>
+<li>a: 1; b: 12; c: 14; d: 145; e: 15; f: 124; g: 1245; h: 125; i: 24; j: 245.</li>
+<li>k: 13; l: 123; m: 134; n: 1345; o: 135; p: 1234; q: 12345; r: 1235; s: 234; t: 2345.</li>
+<li>u: 136; v: 1236; w: 2456; x: 1346; y: 13456; z: 1356.</li>
+</ul>
+<h3 id="b-2-indicators">B.2. Indicators</h3>
+<ul>
+<li>Single capital-letter indicator: dot 6.</li>
+<li>Capital word indicator: two dot-6 cells; learn its scope from the UEB rules before using it in an important field.</li>
+<li>Numeric indicator: dots 3-4-5-6.</li>
+<li>Grade 1 symbol indicator: dots 5-6; advanced uses depend on context.</li>
+</ul>
+<h3 id="b-3-digits-after-the-numeric-indicator">B.3. Digits after the numeric indicator</h3>
+<ul>
+<li>a=1; b=2; c=3; d=4; e=5.</li>
+<li>f=6; g=7; h=8; i=9; j=0.</li>
+</ul>
+<h3 id="b-4-punctuation-and-practical-signs">B.4. Punctuation and practical signs</h3>
+<ul>
+<li>Full stop / period: 256.</li>
+<li>Comma: 2.</li>
+<li>Semicolon: 23.</li>
+<li>Colon: 25.</li>
+<li>Question mark: 236; this can also be the opening double quotation mark.</li>
+<li>Exclamation mark: 235.</li>
+<li>Apostrophe: 3.</li>
+<li>Opening double quotation mark: 236.</li>
+<li>Closing double quotation mark: 356.</li>
+<li>Hyphen: 36.</li>
+<li>Opening parenthesis: 5, then 126 (two cells).</li>
+<li>Closing parenthesis: 5, then 345 (two cells).</li>
+<li>Slash: 456, then 34 (two cells).</li>
+<li>At sign: 4, then 1 (two cells).</li>
+<li>Ellipsis in a straightforward literary context: three full-stop cells, 256, 256, 256; check specialised UEB rules for complex contexts.</li>
+</ul>
+<p>For comparison, the Spanish edition uses a different capital indicator (46), full stop (3) and interrogation sign (26). Don&#x27;t combine signs from the two appendices just because some letters happen to match. And don&#x27;t assume all opening and closing quotation marks will be translated exactly as you expect.</p>
+<h2 id="appendix-c-quick-troubleshooting-guide">Appendix C. Quick troubleshooting guide</h2>
+<ul>
+<li>Braille keyboard missing: check TalkBack, magnification, keyboard setup and input method.</li>
+<li>Wrong letters: check tabletop versus screen-away, finger placement and calibration.</li>
+<li>English punctuation comes out strangely: confirm the selected English braille table and UEB rather than Spanish signs.</li>
+<li>Question mark or quotation mark wrong: inspect the inserted character; use another keyboard if necessary.</li>
+<li>A gesture does something unexpected: check held dots, number of moving fingers and custom assignments.</li>
+<li>Too much text is deleted: stop and check the selection and cursor before further edits.</li>
+<li>Only one app fails: reproduce in a basic note before changing TalkBack settings.</li>
+<li>Spell-check suggestions missing: check proofreading mode, English spell checker and app support.</li>
+<li>Paste fails: verify copied selection, clipboard and target field restrictions.</li>
+<li>Speech disappears: check volume, audio devices and TalkBack activation.</li>
+<li>Editing stops working: hide braille, verify ordinary navigation and leave proofreading mode.</li>
+<li>A problem began after an update: recheck essential gestures, version and customisation, then note reproducible steps.</li>
+<li>Never begin by clearing app data or performing a factory reset. You may lose more than the typing problem you intended to solve.</li>
+</ul>
+<h2 id="appendix-d-scope-versions-evidence-and-sources">Appendix D. Scope, versions, evidence and sources</h2>
+<h3 id="d-1-what-has-been-checked">D.1. What has been checked</h3>
+<p>The main setup, layout, calibration, gesture, clipboard, proofreading and customisation instructions have been compared against Google&#x27;s published Android accessibility documentation, including TalkBack 14.0, 14.1 and 16.1. Newer 17.0 and community-reported 17.1 changes have been considered without confusing commands for a *physical braille display* with those for the *on-screen braille keyboard*. The English letter, number and punctuation references have been adapted to uncontracted UEB using the International Council on English Braille&#x27;s rules, not copied from the Spanish sign chart.</p>
+<h3 id="d-2-what-varies">D.2. What varies</h3>
+<p>Settings paths, control names, the input-method selector, Android versions, manufacturer changes, English braille language variants, the availability of contracted braille, spelling suggestions and how third-party apps handle text fields can all vary. Gestures here are Google&#x27;s defaults. A personal gesture assignment overrides the published default.</p>
+<h3 id="d-3-what-has-not-been-tested-personally">D.3. What has not been tested personally</h3>
+<p>I have not personally tested every command on every handset or verified every possible combination of TalkBack, other readers, third-party keyboards and applications. The published documentation supports the functions described, but is not a practical guarantee about a particular phone. Anyone who tests a different result is invited to send the model, Android version, screen reader and keyboard versions, language setting, steps and outcome. Evidence like that can improve a subsequent edition.</p>
+<h3 id="d-4-what-this-course-does-not-promise">D.4. What this course does not promise</h3>
+<p>It does not guarantee that every application accepts every editing gesture, that ambiguous punctuation always translates automatically as intended, or that contracted braille is available with every language variant. Nor does it replace a hands-on test with the actual device. For sensitive data, the characters present in the completed field are what matter—not merely what we intended to type.</p>
+<h3 id="d-5-sources-and-links">D.5. Sources and links</h3>
+<ul>
+<li>Google, Use the TalkBack braille keyboard: <a href="https://support.google.com/accessibility/android/answer/9728765?hl=en">https://support.google.com/accessibility/android/answer/9728765?hl=en</a></li>
+<li>Google, What&#x27;s new with TalkBack 14.0: <a href="https://support.google.com/accessibility/android/answer/13769260?hl=en">https://support.google.com/accessibility/android/answer/13769260?hl=en</a></li>
+<li>Google, What&#x27;s new with TalkBack 14.1: <a href="https://support.google.com/accessibility/android/answer/14252962?hl=en">https://support.google.com/accessibility/android/answer/14252962?hl=en</a></li>
+<li>Google, What&#x27;s new with TalkBack 16.1: <a href="https://support.google.com/accessibility/android/answer/16561624?hl=en">https://support.google.com/accessibility/android/answer/16561624?hl=en</a></li>
+<li>Google, What&#x27;s new with TalkBack 17.0: <a href="https://support.google.com/accessibility/android/answer/17069786?hl=en">https://support.google.com/accessibility/android/answer/17069786?hl=en</a></li>
+<li>International Council on English Braille, UEB rules and resources: <a href="https://iceb.org/ueb.html">https://iceb.org/ueb.html</a></li>
+<li>Brailliac on F-Droid: <a href="https://f-droid.org/packages/com.lukeneedham.braillekeyboard/">https://f-droid.org/packages/com.lukeneedham.braillekeyboard/</a></li>
+<li>Advanced Braille Keyboard, Google Play information: <a href="https://play.google.com/store/apps/details?id=abk.keyboard">https://play.google.com/store/apps/details?id=abk.keyboard</a></li>
+<li>Backtalk project&#x27;s documentation: <a href="https://github.com/trypsynth/backtalk">https://github.com/trypsynth/backtalk</a></li>
+<li>BRLTTY on Android, developer documentation: <a href="https://brltty.app/doc/Android.html">https://brltty.app/doc/Android.html</a></li>
+<li>Accessible Android, community analysis of TalkBack 17.1: <a href="https://accessibleandroid.com/whats-new-in-talkback-17-1/">https://accessibleandroid.com/whats-new-in-talkback-17-1/</a></li>
+</ul>
+<p>This course has a date: October 2026. Android and its accessibility services will continue to change. Published sources are evidence for the version and context they describe, not a reason to stop checking. That&#x27;s as true of braille as of any other part of technology.</p>
+<p>TifloAcosta · Tony Acosta · English adaptation, October 2026</p>
+</article></main><footer class="footer"><p class="brand">TifloAcosta · Tony Acosta</p>
+<p>English adaptation revised October 2026</p></footer></div></body></html>

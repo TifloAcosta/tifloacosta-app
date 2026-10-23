@@ -1,61 +1,86 @@
 [
   {
-    "id": "9to5mac-33041a195d506594",
+    "id": "the-verge-e32eb7c25cc96d12",
     "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/23/next-weeks-macbook-pro-could-be-huge-upgrade-but-with-one-problem/",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1018021/openai-training-top-ai-models-no-internet",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-23T19:10:15.000Z",
+    "publishedAt": "2026-10-23T21:11:07.000Z",
     "categories": [
-      "apple",
-      "tecnologia-general"
+      "tecnologia-general",
+      "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Next week’s MacBook Pro could be huge upgrade, but with one problem",
-        "summary": "Apple has a fully redesigned MacBook Pro launching next week that promises to be a major upgrade, except in one key area. more…",
-        "body": "Apple has a fully redesigned MacBook Pro launching next week that promises to be a major upgrade, except in one key area.\n\nNext week on October 28 at its ‘Pro and tell’ event , Apple is expected to unveil a redesigned MacBook Pro with major improvements.\n\nThe new model is rumored to feature :\n\nIf most or all of these rumors prove true, it’s going to be a big upgrade for the MacBook Pro.\n\nBut there’s one crucial area that’s not expected to improve: performance .\n\nPer Mark Gurman, the new MacBook Pro will include the same M5 Pro and M5 Max chips that first debuted nearly eight months ago . That means a product that specializes in performance is going to offer zero performance boosts.\n\nIt’s an odd move, and reportedly the result of Apple skipping M6 Pro and Max chips altogether in favor of fast-tracking the M7 Pro and Max for 2027.\n\nConsidering how expensive the MacBook Pro is already, and the premium this new model is likely to bring, we may be looking at a ~$2,999 starting price for a model that’s no faster than before.\n\nPerhaps Apple will replace the current M5 Pro and M5 Max models entirely at the same price point. I would love that, but it’s probably wishful thinking in our memory-crisis moment.\n\nOverall, I’m fascinated to see how Apple pitches the new MacBook Pro to prospective upgraders. Will Pro users who passed on M5 Pro and M5 Max chips earlier this year all of a sudden be convinced now? We’ll have to wait and see.\n\nHow likely are you to upgrade to the new MacBook Pro? Let us know in the comments.\n\n* Buy Mac with 15% discount from Apple refurbished"
+        "title": "OpenAI now trains its frontier AI models with no internet access",
+        "summary": "OpenAI is now training its most advanced AI models without internet access following a string of rogue hacking incidents. In a blog post on Friday, OpenAI says it built an offline testing environment where AI models can interact with indexed and cached web content \"without risk of affecting external systems.\" OpenAI paused training its frontier […]",
+        "body": "OpenAI is now training its most advanced AI models without internet access following a string of rogue hacking incidents. In a blog post on Friday , OpenAI says it built an offline testing environment where AI models can interact with indexed and cached web content \"without risk of affecting external systems.\"\n\nOpenAI paused training its frontier AI models in September , after disclosing several incidents in which its AI agents broke out of their testing environments to hack third-party companies and government agencies , or swarm obscure websites . On October 1st, OpenAI resumed reinforcement learning training and internal inference with tighte …\n\nRead the full story at The Verge."
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-ff99cd6871a822b2",
+    "id": "ars-technica-ae8f14d1d0e19089",
     "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/23/download-the-iphone-duos-official-light-and-dark-wallpapers-here/",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gadgets/2026/10/updated-google-privacy-policy-says-your-gmail-might-be-used-for-advertising/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-23T19:06:48.000Z",
+    "publishedAt": "2026-10-23T20:19:55.000Z",
     "categories": [
-      "apple",
       "tecnologia-general"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Download the iPhone Duo’s official light and dark wallpapers here",
-        "summary": "Even if you’re not planning on getting an iPhone Duo, you can now download its light and dark wallpapers for any of your devices. Get them below. more…",
-        "body": "Even if you’re not planning on getting an iPhone Duo, you can now download its light and dark wallpapers for any of your devices. Get them below.\n\nApple released the iPhone Duo today, its first foldable iPhone, with dedicated wallpapers for its displays in both light and dark modes.\n\nThe wallpapers depict a landscape of sand dunes against a mountain range, with subtle differences in lighting and color between the two modes. The light versions feature a clear blue sky, while the dark versions show a starry night.\n\nAnd while the dynamic wallpaper is exclusive to the iPhone Duo, you can download four wallpapers below to use on any of your devices.\n\nBe sure to click the images and save the full-resolution versions before setting them as your wallpaper. Here are Apple’s official guides to set iPhone , iPad , and Mac wallpapers.\n\nWhat do you think of the iPhone Duo wallpapers? Let us know in the comments."
+        "title": "Updated Google privacy policy says your Gmail might be used for advertising",
+        "summary": "Turning on Personal Intelligence gives the company more data for ad targeting.",
+        "body": "Using Google's products and services has always been fundamentally precarious—doing so gives the world's largest advertising company a lot of juicy personal data. Google has long said it won't use the sensitive data from products like Gmail, Drive, and Photos for ad personalization, but a change to the company's privacy policy appears to dismantle that firewall.\n\nOn October 16, Google issued an update to its privacy policy , spotted by Android Authority . The ad personalization section used to include a clear limit on data from certain apps. \"We don’t show you personalized ads based on your content from Drive, Gmail, or Photos,\" the document said. Now, Google has updated it with the following language.\n\nThis equivocation opens the door to using data from apps like Gmail and Photos in ads when it's shared with other Google services, and it just so happens Google has a mechanism for doing that, with Personal Intelligence. The company released Personal Intelligence in early 2026 , allowing users to hand data from multiple apps to Google AI products. The idea is that the added context from your existing data will lead to better AI answers, but it's also proving to be a privacy minefield.\n\nRead full article\n\nComments"
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-3839823460074d1d",
+    "id": "9to5mac-75bfcab0d6b37d9c",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/23/apple-publishes-iphone-duo-support-documents-covering-hinge-touch-id-cases-more/",
+    "originalUrl": "https://9to5mac.com/2026/10/23/daily-october-23-2026/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-23T17:34:43.000Z",
+    "publishedAt": "2026-10-23T20:14:02.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "android",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "9to5Mac Daily: October 23, 2026 – MacBook Pro rumors, iPhone Duo apps",
+        "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
+        "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-0c9082afd1befa83",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/23/iphone-duo-has-hidden-trick-that-solves-a-common-complaint/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-23T19:43:08.000Z",
     "categories": [
       "apple",
       "tecnologia-general"
@@ -64,9 +89,57 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Apple publishes iPhone Duo support documents covering hinge, Touch ID, cases, more",
-        "summary": "Apple is publishing a slew of support documents today corresponding with the launch of iPhone Duo, as it does for every iPhone launch. The support documents cover Touch on iPhone Duo, troubleshooting hinge issues, and much more. more…",
-        "body": "Apple is publishing a slew of support documents today corresponding with the launch of iPhone Duo, as it does for every iPhone launch. The support documents cover Touch on iPhone Duo, troubleshooting hinge issues, and much more.\n\nIn one support document , Apple outlines what to do if you’re having any of the following problems with the hinge on your iPhone Duo:\n\nApple also has a support document outlining the software accommodations for using a case on iPhone Duo that partially covers the left edge of the outer display:\n\nAfter applying iPhone Duo Case, a message appears on the display of iPhone Duo with the option to adjust the screen size to accommodate for the case. Follow the onscreen instructions to make the changes.\n\nYou can adjust the screen at any time: open Settings and tap Display & Brightness. Turn on Shift Left Edge. This shifts the outer display content to accommodate the front portion of the case.\n\nApple will likely continue adding support documents about iPhone Duo over the coming days. You can find a roundup of some of the ones published so far below.\n\nFollow Chance : Threads , X , and Instagram"
+        "title": "iPhone Duo has hidden trick that solves a common complaint",
+        "summary": "iPhone Duo is officially out in the wild, and users keep discovering new details about the device. The latest: there’s a hidden trick that makes opening Control Center significantly easier. more…",
+        "body": "iPhone Duo is officially out in the wild, and users keep discovering new details about the device. The latest: there’s a hidden trick that makes opening Control Center significantly easier.\n\nWhen iPhone Duo reviews dropped earlier this week, one common complaint I saw is that in left-handed use, opening Control Center can be a pain.\n\nLike on other iPhones, you open Control Center by swiping down from the top-right corner.\n\nIf you’re using iPhone Duo two-handed, that’s not a problem. Or if it’s in your right hand, it might be slightly awkward but still ultimately fine.\n\nIn left-handed use though, even when folded, the device’s extra-wide design makes Control Center more of a challenge to open.\n\nExcept it turns out, Apple added a hidden trick that solves that.\n\nAs Stephen Robles shows in a video on X , you can instead just tap the new Battery/Wi-Fi/Cellular icon to open Control Center.\n\nThis shortcut is much more reachable than a top-right corner swipe. And as Robles demonstrates, when you have a Live Activity running the button moves even further down the screen to become even more reachable.\n\nIt’s one of the many unique design implementations iPhone Duo introduces.\n\nWhat are your favorite iPhone Duo tricks you’ve discovered? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-abfc0ba92670ab4e",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1017906/jack-dorsey-block-dessa-ai-voice-speech",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-23T19:32:39.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Jack Dorsey’s Block made an AI model that talks to you like an awkward new friend",
+        "summary": "Jack Dorsey's Block announced an AI model called Dessa that's trained \"from scratch on nothing but human conversation,\" and to show off the model, Block shared chats it has had with humans that can occasionally be a little awkward and uncanny. Take this one, for example, shared by Dessa lead Ragavan Thurairatnam. The conversation between […]",
+        "body": "Jack Dorsey's Block announced an AI model called Dessa that's trained \"from scratch on nothing but human conversation,\" and to show off the model, Block shared chats it has had with humans that can occasionally be a little awkward and uncanny.\n\nTake this one , for example, shared by Dessa lead Ragavan Thurairatnam. The conversation between the model and the speaker does have a mostly natural back and forth (though for some reason, the model initially mistakes the speaker for somebody named \"Ronaldo\").\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-232e082d496e86f0",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/23/watchos-27-2-gets-new-rc-ahead-of-next-weeks-launch/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-23T19:19:09.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "watchOS 27.2 gets new RC ahead of next week’s launch",
+        "summary": "Apple has just released a second RC (release candidate) build of watchOS 27.2 for testing. Here are the details. more…",
+        "body": "Apple has just released a second RC (release candidate) build of watchOS 27.2 for testing. Here are the details.\n\nNext week, Apple is launching its wave of 27.2 software updates—likely early in the week.\n\niOS 27.2 is the biggest highlight, but there are new features also coming to tvOS 27.2 , iPadOS 27.2 , and more.\n\nWhile watchOS 27.2 doesn’t offer as many changes, it seems Apple decided the software wasn’t quite ready to ship yet. After debuting the watchOS 27.2 RC earlier this week , a new RC build has just arrived.\n\nIf you’re running the developer or public beta, the new RC is build 24S118 . The first RC was build 24S5101f.\n\nIt’s unknown what exactly has changed in the latest RC. Likely Apple discovered some new bugs it wanted to address before shipping the software to the public.\n\nHave you installed the new watchOS 27.2 RC? Notice anything new? Let us know in the comments.\n\n* Buy Apple Watch with 15% discount from Apple refurbished"
       }
     },
     "media": null
@@ -114,55 +187,6 @@
         "title": "The iPhone Duo should have been an iPad",
         "summary": "We gave the iPhone Duo a 7 /10. But that wasn't always the score we planned, and it might not be the right score forever. Such are the challenges of reviewing - and assessing - a big, new idea about the most popular smartphone in history. On this episode of The Vergecast, David and Nilay […]",
         "body": "We gave the iPhone Duo a 7 /10 . But that wasn't always the score we planned, and it might not be the right score forever. Such are the challenges of reviewing - and assessing - a big, new idea about the most popular smartphone in history.\n\nOn this episode of The Vergecast , David and Nilay debate whether the Duo deserved the score it got, and try to work through how this device might change over time. Is the outer screen, as Daring Fireball's John Gruber suggested, the worst iPhone ever ? Would it be a better product if it started as an iPad rather than an iPhone? Would we feel differently about this thing if it were simply called the iPad Du …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-05181b9d095e41c5",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1017600/google-personal-intelligence-privacy-policy-ads-update",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-23T16:52:55.000Z",
-    "categories": [
-      "tecnologia-general",
-      "android",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Now Google says it might use your Gmail and Google Photos data to target ads",
-        "summary": "Google has updated its privacy policy in a way that could mean you'll start seeing targeted ads based on your personal data if you're using personalized AI features. The update, spotted by Android Authority, adds an exception to its promise about not using your Drive, Gmail, or Google Photos for personalized ads. While the previous […]",
-        "body": "Google has updated its privacy policy in a way that could mean you'll start seeing targeted ads based on your personal data if you're using personalized AI features. The update, spotted by Android Authority , adds an exception to its promise about not using your Drive, Gmail, or Google Photos for personalized ads. While the previous version simply said it wouldn't do that, as of October 16th, Google has added the line, \"unless you choose to make data from these services available to other Google services that support personalized ads.\"\n\nThat means anyone who has connected their Drive, Gmail, or Google Photos to AI Mode and other Search tools …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-c42c11e045ecb755",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1017450/meta-business-terms-delayed-ai-scraping",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-23T14:47:41.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta delays new business terms after publisher pushback on AI scraping",
-        "summary": "Meta is delaying the enforcement of its new business terms after publishers raised concerns that they could allow the company to scrape news sites for AI training, as reported earlier by Fast Company. In a statement to The Verge, Meta spokesperson Daniel Roberts says the terms will go into effect on November 20th \"to allow […]",
-        "body": "Meta is delaying the enforcement of its new business terms after publishers raised concerns that they could allow the company to scrape news sites for AI training, as reported earlier by Fast Company . In a statement to The Verge , Meta spokesperson Daniel Roberts says the terms will go into effect on November 20th \"to allow more time for us to explain to our partners and stakeholders what's changing and what's not.\"\n\nThe business terms , which were originally supposed to go into effect on October 30th, appeared to give Meta permission to freely scrape the new sites that use its platforms, while using the material for AI training. Though Meta u …\n\nRead the full story at The Verge."
       }
     },
     "media": null
@@ -258,30 +282,6 @@
         "title": "Switch 2 security takes a hit as hackers unlock homebrew access",
         "summary": "\"Userland\" exploit relies on integer overflow found in \"SmileBasic\" interpreter.",
         "body": "A security researcher has demonstrated a software-only partial jailbreak of the Switch 2, gaining \"userland\" access that he says \"lets us run homebrew, reverse engineer and mod Switch 2 games, back up save files off the Switch, and access most of the Switch 2’s peripherals through MMIO.\"\n\nThe hack relies on the original Switch version of SmileBasic 4 , the latest in a long-running series of programming environments and interpreters that run on Nintendo hardware. The so-called \"tethered\" hack also requires access to a macOS or Linux PC on the same network to run a node.js package that helps enable privileged system access.\n\nResearcher Sammy Hajhamid writes that he used OpenAI's Codex to poke at SmileBasic's language interpreter, using a custom harness that could send USB commands to the system and view results via HDMI (as well as power cycling via a Bluetooth light switch flipping device). After \"substantial effort for ~2 weeks,\" that harness discovered a 32-bit integer overflow that occurs when removing items from an array in SmileBasic. That error gives access to an array pointer, which in turn allows read-and-write access to portions of system memory.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-6156dfd2280e4060",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/tech-policy/2026/10/comcast-loses-more-customers-claims-other-isps-cheap-prices-are-irrational/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-22T21:07:09.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Comcast loses more customers, claims other ISPs' cheap prices are \"irrational\"",
-        "summary": "Comcast plans job cuts and more AI agents for its shrinking cable customer base.",
-        "body": "Comcast reportedly plans significant job cuts in its cable division as the firm continues to lose residential broadband and TV customers. Comcast lost 144,000 residential broadband customers in Q3 2026, up from a 91,000-customer loss in the same quarter a year ago, the company said in its earnings report today.\n\nComcast historically capitalized on a lack of competition for high-speed wired broadband. But now it faces stronger competition from fixed wireless providers and from fiber providers in parts of its cable territory.\n\n\"Fixed wireless remains aggressive and continues to take share, while fiber construction remains elevated, with pockets of irrational pricing and promotional activity,\" Comcast co-CEO Mike Cavanagh said today in an earnings call .\n\nRead full article\n\nComments"
       }
     },
     "media": null

@@ -1,13 +1,85 @@
 [
   {
-    "id": "the-verge-8d139516b080727f",
+    "id": "the-verge-c42c11e045ecb755",
     "type": "news",
     "sourceId": "the-verge",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1017090/iphone-duo-screen-size-mini",
+    "originalUrl": "https://www.theverge.com/tech/1017450/meta-business-terms-delayed-ai-scraping",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-23T10:00:00.000Z",
+    "publishedAt": "2026-10-23T14:47:41.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta delays new business terms after publisher pushback on AI scraping",
+        "summary": "Meta is delaying the enforcement of its new business terms after publishers raised concerns that they could allow the company to scrape news sites for AI training, as reported earlier by Fast Company. In a statement to The Verge, Meta spokesperson Daniel Roberts says the terms will go into effect on November 20th \"to allow […]",
+        "body": "Meta is delaying the enforcement of its new business terms after publishers raised concerns that they could allow the company to scrape news sites for AI training, as reported earlier by Fast Company . In a statement to The Verge , Meta spokesperson Daniel Roberts says the terms will go into effect on November 20th \"to allow more time for us to explain to our partners and stakeholders what's changing and what's not.\"\n\nThe business terms , which were originally supposed to go into effect on October 30th, appeared to give Meta permission to freely scrape the new sites that use its platforms, while using the material for AI training. Though Meta u …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-7a73f5dacd21c175",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1017410/sigma-fp2-mirrorless-full-frame-modular-camera-upgrade",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-23T14:42:46.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The Sigma FP2 brings significant upgrades to the ‘world’s smallest’ full-frame camera",
+        "summary": "Seven years after Sigma claimed its original fp was the world's smallest and lightest full-frame mirrorless camera, the company has announced a similarly compact follow-up with several welcome upgrades including an improved sensor, an articulating LCD display, and longer battery life. But this time around Sigma is only claiming its new FP2 is the \"world's […]",
+        "body": "Seven years after Sigma claimed its original fp was the world's smallest and lightest full-frame mirrorless camera, the company has announced a similarly compact follow-up with several welcome upgrades including an improved sensor, an articulating LCD display, and longer battery life. But this time around Sigma is only claiming its new FP2 is the \"world's smallest\" full-frame shooter as those upgrades have increased its body-only weight by about six grams.\n\nThe Sigma FP2 will be available on November 11th and starts at $2,199 for the camera body alone. For $2,749 you can bundle it with Sigma's upgraded EVF-21 viewfinder featuring a 5.76 mill …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-4cd81781f170f2c8",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/23/ios-27-1-is-exclusive-to-iphone-duo-heres-why/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-23T14:28:56.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27.1 is exclusive to iPhone Duo, here’s why",
+        "summary": "iOS 27.1 has officially launched, but you wouldn’t know it by checking your iPhone’s Settings app. That’s because the latest iPhone update is exclusive to iPhone Duo. more…",
+        "body": "iOS 27.1 has officially launched, but you wouldn’t know it by checking your iPhone’s Settings app. That’s because the latest iPhone update is exclusive to iPhone Duo.\n\nLast night, Apple quietly released a major new software update for iPhone.\n\niOS 27.1 was pushed out over the air, and normally that would mean new features for everyone.\n\nHowever, you won’t find iOS 27.1 by opening the Settings app and navigating to General ⇾ Software Update. Instead, iOS 27.0.1 will appear as the most recent update.\n\nThat’s because iOS 27.1 is exclusive to the new iPhone Duo.\n\nIt’s an unusual move, but Apple decided to skip iOS 27.1 for most iPhone models and go straight to iOS 27.2 instead.\n\niOS 27.2 has been in beta testing for the last month and ships to all users next week . It includes new features like:\n\nSo why did Apple ship iOS 27.1 for iPhone Duo only?\n\nEven though the iPhone Duo was officially unveiled last month, there are plenty of features and details we’ve only recently learned about. Bypassing a beta cycle for iOS 27.1 meant Apple was able to keep many of those details hidden until the Duo’s official launch.\n\nAdditionally, there were likely engineering reasons why it was simpler on Apple’s end to keep iOS 27.1 separate and Duo-exclusive. There are all kinds of custom iOS designs and features that the Duo introduces, and it’s expected that managing all of that internally was easier without other models or new features in the mix.\n\nSo next week when your iPhone says iOS 27.2 is available to install, just know that you didn’t somehow miss iOS 27.1 entirely.\n\nHave you been running the iOS 27.2 beta? How’s it running for you? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-bd09420b694860c4",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1017157/iphone-duo-tips-touch-id-magsafe",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-23T14:00:00.000Z",
     "categories": [
       "tecnologia-general",
       "apple"
@@ -16,9 +88,81 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "No, the iPhone Duo isn’t a small phone",
-        "summary": "When we published our review of the iPhone Duo, I got a lot of hopeful questions from my fellow Mini fans who took note of the cover screen's Mini-ish 5.4-inch size. \"Is this… a small phone that turns into a tablet?\" they asked. And I'm sorry to be the bearer of bad news, but no. […]",
-        "body": "When we published our review of the iPhone Duo , I got a lot of hopeful questions from my fellow Mini fans who took note of the cover screen's Mini-ish 5.4-inch size. \"Is this… a small phone that turns into a tablet?\" they asked. And I'm sorry to be the bearer of bad news, but no. The Duo is not the small phone we've been looking for.\n\nI wish it was. I like a small phone. I own an iPhone 13 Mini that I refuse to surrender, even though it barely lasts a full day .\n\nBut the Duo is thick and heavy. You will feel its weight every time you read an email, scroll Instagram, or put it in your pocket. It is a dense phone, and after a week with the Duo, …\n\nRead the full story at The Verge."
+        "title": "Our best tips for using the iPhone Duo",
+        "summary": "The Duo is an entirely new kind of iPhone, so it comes with a bit of a learning curve. That's a wild thing to imagine, since the iPhone has had very few fundamental changes since its inception. But the Duo is built different. If you won the preorder lottery and managed to get your hands […]",
+        "body": "The Duo is an entirely new kind of iPhone, so it comes with a bit of a learning curve. That's a wild thing to imagine, since the iPhone has had very few fundamental changes since its inception. But the Duo is built different. If you won the preorder lottery and managed to get your hands on one today, you'll see what that means. You'll laugh, you'll cry, you'll lose track of the volume buttons as you turn the thing around.\n\nWe've learned a few tricks over the past week of flipping and folding the Duo as much as we could. Here are our favorite tips and hacks for newly minted Duo owners.\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-002bb47bfb3e20a2",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/23/heres-how-to-get-fastest-iphone-duo-charging/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-23T13:56:33.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Here’s how to get fastest iPhone Duo charging",
+        "summary": "iPhone Duo supports fast charging in both wired and wireless setups, but only with the right accessories. Here’s what Apple says you’ll need. more…",
+        "body": "iPhone Duo supports fast charging in both wired and wireless setups, but only with the right accessories. Here’s what Apple says you’ll need.\n\niPhone Duo can fast charge up to 50 percent battery in just 20 minutes. But you’ll need the right power adapter and cable to get top speeds.\n\nHere’s Apple’s official guidance per this support document :\n\nWired Fast Charging\n\nTo fast charge iPhone Duo up to 50 percent battery in around 20 minutes, use the USB-C cable that came in the box and one of these adapters:\n\nWireless Fast Charging\n\nTo wirelessly charge iPhone Duo up to 50 percent in around 30 minutes, use:\n\nThird-party chargers can often be a better deal than Apple’s own power adapters. My top recommendation is Anker’s 100W charging brick , which works great not only for iPhones but also more power-hungry Macs and iPads.\n\nThat said, the Apple 40W Dynamic Power Adapter at its reduced price is a great deal for a first-party option.\n\nAdditionally, if you want to pick up a longer USB-C cable than what comes in the iPhone Duo box, Apple’s official 2m cable is available at a discount here .\n\nWhat’s your iPhone fast charging setup? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-bca318ae974199e0",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/23/apple-overtakes-nvidia-as-most-valuable-company-in-the-world-on-iphone-duo-launch-day/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-23T13:41:59.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple overtakes Nvidia as most valuable company in the world on iPhone Duo launch day",
+        "summary": "It’s iPhone Duo launch day around the world, and Wall Street is pleased. Apple reclaimed the title of most valuable company in the world on Friday as it reached new trading highs. more…",
+        "body": "It’s iPhone Duo launch day around the world, and Wall Street is pleased. Apple reclaimed the title of most valuable company in the world on Friday as it reached new trading highs.\n\nNvidia previously enjoyed the top spot, based on market capitalization. Apple stock traded above $351 per share on Friday, setting a new intraday trading record for the company.\n\nWith a market cap valuation around $5.12 trillion, Apple became the top company in the world once more. Nvidia and Google follow.\n\nAs mentioned, today is also the release date for the iPhone Duo, Apple’s $2000 foldable iPhone. You can read our review here .\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-3ddae10a19870335",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2294849/asus-proart-p16-rtx-spark-review/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-23T12:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "ASUS ProArt P16 review: A sleek showcase for NVIDIA's RTX Spark",
+        "summary": "NVIDIA's RTX Spark platform is off to a good start, but the ProArt P16 is really only meant for AI fanatics.",
+        "body": "But it's really only meant for AI fanatics.\n\nASUS's first laptop featuring an RTX Spark chip confirms what I originally thought: NVIDIA's new PC platform really isn't meant for everyone. The ProArt P16 is yet another one of the company's premium notebooks focused on power-hungry creators — except this time, it's running NVIDIA's first major PC chipset, instead of an Intel or AMD processor. Outside of the hype from Microsoft and NVIDIA, who are positioning RTX spark as a complete \"reinvention\" of the PC, the ProArt P16 is simply a nice laptop. It's particularly appealing if you're running local AI models, since it can squeeze up to 128GB of RAM into a relatively slim case.\n\nThe downsides? It's incredibly expensive, with a starting price of $2,800 and staggering increases as you add more RAM. (Spoiler: Our review model costs $7,000, mostly thanks to its 128GB of RAM.) And even though the ASUS P16 can play games well, you're paying far more here than you would for a dedicated gaming laptop.\n\nMuch like the ProArt PX13 we reviewed earlier this year, the ProArt P16 shows just how far ASUS has come with premium laptops. It sports a beautiful and sturdy aluminum case, a wonderfully bright 16-inch OLED screen, a luxuriously-spaced keyboard and a similarly enormous haptic touchpad. It's MacBook-esque in its sleekness, except it has an ASUS badge. The ProArt P16 is even lighter than the 16-inch MacBook Pro, clocking in at 3.9 pounds, compared to Apple's 4.7 pounds.\n\nFrom afar, the ASUS P16 doesn't look particularly special. But peek under the hood, and you'll quickly see what makes it different. It's powered entirely by NVIDIA's RTX Spark system-on-a-chip, which brings together a 20-core Arm CPU, a modern Blackwell GPU, and, as I mentioned, up to 128GB of unified memory. If that sounds familiar, it's because it's very similar to the way Apple has configured its M-series chips, which was the main reason we've adored that company's computers since 2020.\n\nUnlike Apple's chip revamp, RTX Spark won't completely replace x86 hardware from Intel and AMD. You can think of it as a new fork of PC design aimed squarely at AI researchers and enthusiasts. RTX Spark is also meant to coexist with Qualcomm's Snapdragon X chips, which use a similar Arm-based design for entry-level and midrange systems.\n\nAs I've previously reported , there's a good chance that, despite a niche audience, RTX Spark will likely be a win for Windows PCs in general. Competition is always good for consumers — with NVIDIA planting its flag in the Windows world, you can certainly bet that AMD, Intel and Qualcomm will up their game with future hardware. Unfortunately, RTX Spark likely won't help PCs revert back to their pre-AI boom pricing. It's yet another memory-hungry platform at a time when AI has already driven RAM prices through the roof.\n\nAt least NVIDIA and PC makers are trying to stuff in all of the pro-level features RTX Spark owners may want. In addition to the hardware I've mentioned above, the ASUS P16 also squeezes in just about every port you'd need, including three USB-C connections, USB Type A, HDMI, a headphone jack and a full-sized SD card reader. Ethernet would be nice, but that's become a true rarity in thinner, pro-grade laptops.\n\nUsing the ASUS P16 with RTX Spark reminded me of the first time I turned on a MacBook Pro with an M-series chip: Everything about it feels lightning fast. I was up and running in no time, and I felt unstoppable as I downloaded several massive files simultaneously to start my benchmarking process. But of course, for a $7,000 system with 128GB of RAM, it damn well better feel speedy.\n\nI'll admit, I was a bit surprised by the ASUS P16's initial benchmark scores: Its PCMark 10 (Applications) figure was 3,000 points lower than the ultra-slim ASUS A16 I tested earlier this year, which was powered by a Snapdragon X2 Elite chip. The RTX Spark system also lagged behind slightly in Geekbench 6's single-threaded CPU test, which is a sign that Qualcomm's chips just have more capable CPUs.\n\nBut really, the star of the RTX Spark's design is its GPU, NPU and unified memory, and those all stood out in other tests. The ASUS P16 RTX Spark was 4,700 points higher than the MacBook Pro with M5 Max in Geekbench 6's GPU benchmark, which tests overall graphics performance. The ProArt P16 also scored 3,895 points in UL Procyon's AI Computer Vision 2 benchmark, compared to 3,267 points from that same MacBook. Its 1,519 score in Procyon's AI Image Generation test was also 600 points higher than Apple's. Those Procyon benchmarks all clearly benefitted from the RTX Spark chip' s beefy graphics power.\n\nBeyond benchmarks, the ASUS P16 was able to run OpenClaw and the large Qwen3.8 27B model, which alone takes up 42GB of RAM, while still leaving me with a ton of RAM for other tasks. At the same time, I was even able to play Control: Resonant and Cyberpunk 2077 at high quality settings without breaking a sweat. Sure, the fans sounded like they were about to lift the P16 off my desk, but there was never any noticeable slowdown in performance.\n\nNVIDIA has previously said that the RTX Spark's graphics hardware is about on-par with the RTX 5070 mobile GPU, while also drawing much less power, and that held true in my testing. I was able to play Control Resonant at 70 fps while rendering the game in 1,440p with \"ultra\" graphics settings, ray-tracing set to medium and 4x frame generation. That's a game where the overall fidelity matters more than a triple-digit framerate, but I could get the ProArt P16 to 120 fps by lowering the graphics settings.\n\nWhile I didn't have much trouble running other games, including Star Wars: Galactic Racer and Gears of War: E-Day , there's a chance you'll have trouble with some titles. Since RTX Spark is based on an Arm CPU, it has to rely on Microsoft's Prism emulator to handle most games. That introduces an immediate performance drop, as well as potential issues. There are native Arm64 builds for popular titles like Fortnite , DOTA 2, Marvel Rivals and the upcoming World of Warcraft: Forever , so there's a chance that compatibility concerns will melt away in a few years. But if you don't want to worry about emulation troubles at all, you're better off with a standard gaming laptop running an Intel or AMD chip.\n\nThere are also similar compatibility concerns for older Windows software in general, though I didn't encounter any weirdness during my testing. The whole Windows on Arm experience received a huge upgrade when Copilot+ systems launched two years ago, and since then, it seems like Microsoft has worked to make its x86 emulation even more seamless.\n\nThe ProArt P16's 16-inch \"Lumina Pro\" OLED screen was perfect for Control Resonant : It was able to show off dark black levels and extreme contrast in darker environments, but it also seared my eyeballs at times with its peak 1,600-nit luminance. It's definitely one of the brightest OLED screens I've seen on a laptop, and it directly competes with Apple's Mini LED MacBook Pro displays, which also top out at 1,600 nits. That extreme brightness also made the ProArt P16 perfect for getting work done outside in the sun, as I try to eke out every bit of warmth I can before winter arrives.\n\nI was similarly impressed by every other aspect of the ASUS ProArt P16. Its wide keyboard and luscious key depth made typing a dream, and it also has one of the best haptic touchpads I've ever seen on a Windows PC. While it would have been nice to have a quad-speaker setup, which has become increasingly common in large premium laptops, the ProArt P16's dual speakers still sounded solid. They also offer a bit of spatial audio support, thanks to Dolby Atmos.\n\nThe only major downside to the ProArt P16, like most jet-black PCs, is that it's a horrendous fingerprint magnet. Marks start appearing the instant you touch it, and heaven forbid you eat anything oily while using it. It takes just a few minutes for the P16 to start looking like a gross mess, and it's a bit annoying to keep clean. It'd be great to see ASUS adopt an anti-fingerprint material in the future.\n\nThe ProArt P16 lasted ten hours and 51 minutes in the PCMark 10 Applications battery benchmark, which is well below the 15-plus-hour range we've seen on many premium machines. It was also bested by Dell's latest XPS 16, which disappointed me when it clocked nearly 12 hours on the PCMark battery test. You'll at least be able to do more with the P16 on battery: I noticed that benchmarks and game performance didn't waver at all when I yanked the power cord. According to NVIDIA, the overall efficiency of RTX Spark allows for a high performance curve without burning too much power.\n\nIf you're in the AI industry and know exactly how you're going to tap into the ASUS ProArt P16's RTX Spark hardware, you're the exact buyer NVIDIA is targeting. AI workers can probably justify the high cost just to have the overall leg-up in AI performance, and they likely wouldn't worry so much about running older emulated Windows software. For everyone else, the ProArt P16, and every RTX Spark system, is really less of a sure thing.\n\nIn particular, I'm thinking of gamers. As I write this review, you could snag a similarly-sized ASUS Zephyrus G16 with an RTX 5070 GPU and 240Hz OLED screen for $2,124 at Best Buy. That'll get you better overall gaming performance, a higher refresh rate for fast-paced play and full compatibility with all Windows games without the need for emulation.\n\nSure, it's nice the ProArt P16 can handle some games well, but gaming is only a secondary aspect of the RTX Spark platform. It's unclear how well future games will perform, or what sorts of emulation bugs you'll find in niche titles. NVIDIA claims it's working with the major anti-cheat companies to support RTX Spark, but you may still run into some multiplayer titles that simply won't work on one of these new systems.\n\nAnd if you're mainly interested in editing multimedia content, you'd likely still be better off with an AMD or Intel-based system to have the widest compatibility with existing tools. It's notable that Adobe has brought over its more iconic software to the RTX Spark platform, but it's less of a sure thing with many other multimedia apps.\n\nThe ASUS ProArt P16 is an impressive premium laptop, undoubtedly. But its high starting cost and unique hardware make it something that's truly only tempting for AI professionals. I'd give the entire RTX Spark platform at least a year before I could recommend it to general users or even gamers. There are already great PCs for those consumers — for now, RTX Spark is really only for the AI sickos."
       }
     },
     "media": null
@@ -72,103 +216,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-e3c35e04ed6b6f6f",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/22/greg-joswiak-talks-iphone-duo-in-store-availability-and-demand-ahead-of-launch/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-23T03:15:09.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Greg Joswiak talks iPhone Duo in-store availability and demand ahead of launch",
-        "summary": "Friday is iPhone Duo launch day, and there are a lot of eager customers hoping to walk into an Apple Store and get one after a messy pre-order launch . In a new interview with TechRadar , Apple marketing SVP Greg Joswiak offered insight into demand and in-store availability for the first foldable iPhone. more…",
-        "body": "Friday is iPhone Duo launch day, and there are a lot of eager customers hoping to walk into an Apple Store and get one after a messy pre-order launch . In a new interview with TechRadar , Apple marketing SVP Greg Joswiak offered insight into demand and in-store availability for the first foldable iPhone.\n\nOn in-store availability, Joswiak said: “You know, we didn’t ship them all away during the pre-order, we have them available at the stores, we’re excited.” … “I’m sure we’ll have some happy customers.”\n\n“Well, I think you saw the pre-order demand last week was extraordinary,” Joswiak added. “People got it. They understood what we were doing.”\n\nIn a statement to 9to5Mac earlier this week, Apple confirmed that stores would have “limited” iPhone Duo availability for walk-in customers in the countries listed below. Joz’s comments add further confirmation that some customers will be happy tomorrow.\n\nJoswiak will be at Apple’s Fifth Avenue flagship store in New York for tomorrow’s iPhone Duo launch. He’ll likely be joined by other Apple executives, including CEO John Ternus.\n\nAre you awaiting an iPhone Duo delivery tomorrow? Are you planning to try your luck at an Apple Store? Let us know down in the comments.\n\nFollow Chance : Threads , X , and Instagram"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-a94c34ad08788d73",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/22/apple-is-finally-catching-up-with-siri-but-the-goalposts-are-moving-again/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-23T01:42:38.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple is finally catching up with Siri, but the goalposts are moving again",
-        "summary": "9to5Mac is brought to you by Memoket : Memoket Gem is a 0.4 oz AI wearable that slots beside your Apple Watch. One press captures a conversation, and KITE memory connects it to what you said weeks ago. 20-hour battery. Available now from $168.99 on memoket.ai and Amazon. While it is great that Siri AI can finally deliver Apple’s promise of an actually useful, personal assistant for the age of AI, expectations surrounding agentic assistants are quickly shifting. But Apple is showing it might not watch from the sidelines again. more…",
-        "body": "9to5Mac is brought to you by Memoket : Memoket Gem is a 0.4 oz AI wearable that slots beside your Apple Watch. One press captures a conversation, and KITE memory connects it to what you said weeks ago. 20-hour battery. Available now from $168.99 on memoket.ai and Amazon .\n\nWhile it is great that Siri AI can finally deliver Apple’s promise of an actually useful, personal assistant for the age of AI, expectations surrounding agentic assistants are quickly shifting. But Apple is showing it might not watch from the sidelines again.\n\nNow that Siri AI (which is still officially designated as a beta) has been out for a little more than a month, it seems fair to say that its two defining characteristics are that it’s finally useful, but it can be painfully slow to answer even simple queries.\n\nAnd while I had spent the better part of the past few months mocking Silicon Valley’s obsession with AI assistants that can book flights and hotels, I hate to admit that the first time Siri AI actually impressed me was when I asked how much I’d paid for a hotel room for an upcoming trip to San Francisco and how far it was from my first appointment in the city. It got both answers exactly right.\n\nCould I have looked this up myself? Sure. But setting aside the fact that I was in the middle of a 10K run at the time, finding that information on my own would undoubtedly have taken longer than it took Siri to give me the answers.\n\nAs a result, over the past few months, I’ve found myself increasingly relying on Siri AI for questions like “What was the contact information for that plumber who fixed the kitchen sink leak a couple of years ago?” or “What was the name of that PR person who introduced me to so-and-so?”\n\nInformation I know I have somewhere, be it an iMessage conversation or an email receipt, and that although I could just search for it, I’d now rather have Siri AI do it for me.\n\nAnd for the first time in 15 years, I can ask these questions without already expecting Siri to fail halfway through asking them, only to get frustrated when it inevitably gets it wrong and proves me right.\n\nThat’s all well and good. The problem is that Apple has only now caught up with what AI assistants could do in 2024.\n\nParticularly over the past few months, the frontier AI market has increasingly shifted toward agentic assistants, with products from OpenAI, Anthropic, Meta, and xAI (among many others) moving beyond answering questions to actually carrying out tasks on users’ behalf.\n\nI subscribe to ChatGPT, and I’ve been using Codex and ChatGPT Work extensively for everyday tasks involving files and information scattered across my Mac and various cloud services.\n\nAnd it still feels like magic every time I ask one of these tools to do something that involves opening, creating, editing, or organizing files on my computer, as well as interacting with websites and services I’m logged into, and it actually pulls it off.\n\nThe flipside of this is that every time ChatGPT completes one such task, the new Siri AI starts to feel like the old Siri all over again.\n\nIt is still early days, for sure, but it already feels like this is yet another area where Apple seems to be falling increasingly behind, as AI labs continue to improve their agentic capabilities, sometimes rolling out major updates just weeks apart, while Apple remains largely tied to its annual software release cycle.\n\nBut there’s one important limitation to today’s agentic assistants that I think Apple is particularly well positioned to address.\n\nAs impressive as tools like Codex, Dots , and ChatGPT Work can be, they still depend heavily on the user to provide the permissions and the context behind whatever task they’re supposed to accomplish. They can access files, search through emails, and interact with websites, but they generally don’t know what you’re doing, what you’ve been discussing with other people, or what you might need next unless you explicitly tell them.\n\nAnd as these tools become increasingly capable of operating our computers and phones on our behalf, I suspect the next big leap in their usefulness will come not just from improving what they can do, but from improving their proactive understanding of the user’s context in real time.\n\nThat’s where Apple could have an advantage.\n\nApple has recently shown that it’s finally willing to capitalize on the trust it has spent years building around privacy, even if it means testing the boundaries of what users are comfortable sharing with an AI assistant.\n\nLast month, it introduced two Apple Watch features: Siri Recap , which can automatically generate summaries of conversations throughout the day, and Live Rewind , which lets users retrieve the last 15 seconds of a conversation they may have missed.\n\nBoth features rely on the Apple Watch’s microphone to capture information about what’s happening around the user, potentially giving Siri access to an entirely new source of personal context.\n\nOf course, the privacy implications are enormous, particularly because conversations involve other people who haven’t necessarily agreed to have their words processed by an AI assistant.\n\nAnd while those concerns are certainly worth discussing at length (and are probably why these features have yet to roll out), Apple has repeatedly shown that it’s willing to go to extraordinary lengths to address the privacy challenges that come with giving technology access to sensitive personal information. Just look at the lengths it went to in developing its Reference Image system .\n\nAs agentic assistants become more capable, I suspect their biggest limitation will increasingly have less to do with what the underlying models can do, and more with how much we’re willing to let them know about us.\n\nImagine an assistant that doesn’t just wait for you to ask it to find a document or complete a task, but already understands what you’re working on. One that can gather information in the background so it’s ready when you need it, or even take action on your behalf based on what’s happening around you.\n\nThat’s the kind of assistant that could make today’s agentic tools feel as limited as the old Siri (and, increasingly, the new Siri AI) does now.\n\nAnd while Apple still has plenty of catching up to do when it comes to actually building these capabilities, it is in a much better position to compete in this next phase of AI than it was when the generative AI race first began.\n\n9to5Mac is brought to you by Memoket:\n\nApple just added voice recording and note-taking to iPhone and Apple Watch. Useful, but check your battery at 2pm. Dedicated recording is one of the fastest ways to drain a Watch, and your iPhone needs to be out and unlocked to do it. More importantly, neither device connects what was said in today’s meeting to a decision you made three weeks ago. They capture moments. They don’t build memory.\n\nMemoket Gem was built to do more. A 0.4 oz wearable AI agent that slots alongside your Apple Watch on the same wrist. One button, one press, 20 hours of battery. Gem captures conversations and connects them across time using KITE, a long-term memory engine that links what was said today to what mattered weeks ago. When a topic comes back up, Gem surfaces the original conversation automatically. Everything flows into ChatGPT, Claude, Slack, and Notion.\n\n153 languages supported. Available now on memoket.ai and Amazon from $168.99 ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-02505cbab1a60b4d",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/22/whatsapp-starts-testing-long-awaited-scheduled-messages-on-iphone/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-23T01:22:37.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "WhatsApp starts testing long-awaited scheduled messages on iPhone",
-        "summary": "After years of waiting, WhatsApp is finally making one of its most-requested messaging features available to select iPhone beta testers. Here are the details. more…",
-        "body": "After years of waiting, WhatsApp is finally making one of its most-requested messaging features available to select iPhone beta testers. Here are the details.\n\nWhile Meta doesn’t generally break down active user figures by platform, Mark Zuckerberg said in April last year that WhatsApp had more than 3 billion monthly active users worldwide.\n\nIronically, despite being used by more than a third of the world’s population, WhatsApp still lacks some features competing platforms have offered for years. Case in point: the ability to schedule messages.\n\nEarlier this year, WABetaInfo reported that code references in WhatsApp’s beta suggested the company was working on a message scheduling feature, although it wasn’t available for testing at the time.\n\nNow, according to the site , the feature is finally rolling out to select iOS beta testers, less than two weeks after making its debut on Android beta.\n\nHere’s how the feature works, per WABetaInfo ‘s report:\n\nUsers can schedule a message from the chat interface. After typing the message into the chat composer, they need to tap and hold the send button. WhatsApp opens the schedule message screen with a date and time picker. Users can scroll through the page and tap the green button at the bottom of the screen to confirm. The button shows the exact delivery time before users schedule the message. After scheduling a message, WhatsApp shows a confirmation in the chat, but it is only visible to the user who scheduled it.\n\nWABetaInfo notes that messages can be scheduled as little as 10 minutes in advance or as far as two weeks in advance, and that scheduled messages appear in a dedicated section within the chat info screen or the group info screen for group chats.\n\nInterestingly, in group chats, scheduled messages are only delivered to users who were already members when the message was scheduled. Anyone who joins the group afterward won’t receive it, even if they join before the message is sent.\n\nThe site also says that in addition to scheduling text messages, users can schedule messages containing photos, videos, and links. One current limitation, however, is that users cannot schedule multiple photos or videos at once, meaning each media item must be scheduled separately.\n\nAs is often the case with beta features, scheduled messages are only available to select testers, with no way to enable the feature manually. There’s also no word on when it will launch publicly, although with testing now underway on both iOS and Android, a wider rollout could be coming sooner rather than later.\n\nTo read WABetaInfo ’s full report, follow this link ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-c002a43ea809b94a",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1017261/etsy-ai-rules-policies-restrictions-listing",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-23T00:09:58.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Etsy is cracking down on AI slop listings",
-        "summary": "Etsy is announcing stricter rules about how AI can be used in listings to reduce the volume of AI slop on the platform. In a post, the company says that \"many active buyers say they can't tell which items involve AI-generated content\" and that sellers are \"concerned about your work appearing alongside items that use […]",
-        "body": "Etsy is announcing stricter rules about how AI can be used in listings to reduce the volume of AI slop on the platform. In a post, the company says that \"many active buyers say they can't tell which items involve AI-generated content\" and that sellers are \"concerned about your work appearing alongside items that use AI in misleading ways,\" spurring the new policies and restrictions.\n\nUnder the new policies, every listing must include \"at least one unedited photo of the actual item against a real background,\" and all photos must \"accurately represent the item a buyer will receive.\" The photos that aren't the first one can be edited with softw …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-88f9a01fe7e093f8",
     "type": "news",
     "sourceId": "ars-technica",
@@ -186,32 +233,7 @@
       "en": {
         "title": "Switch 2 security takes a hit as hackers unlock homebrew access",
         "summary": "\"Userland\" exploit relies on integer overflow found in \"SmileBasic\" interpreter.",
-        "body": "A security researcher has demonstrated a software-only partial jailbreak of the Switch 2, gaining \"userland\" access that he says \"lets us run homebrew, reverse engineer and mod Switch 2 games, back up save files off the Switch, and access most of the Switch 2’s peripherals through MMIO.\"\n\nThe hack relies on the original Switch version of SmileBasic 4 , the latest in a long-running series of programming environments and interpreters that run on Nintendo hardware. The so-called \"tethered\" hack also requires access to a macOS or Linux PC on the same network to run a node.js package that helps enable privileged system access.\n\nResearcher Sammy Hajhamid writes that he used OpenAI's Codex to poke at SmileBasic's language interpreter, using a custom harness that could send USB commands to the system and view results via HDMI (as well as power cycling via a Bluetooth light switch flipping device). After \"substantial effort for ~2 weeks,\" that harness discovered a 32-bit integer overflow that occurs when removing items from an array in SmileBasic. That error gives access to an array pointer, which in turn allows read and write access to portions of system memory.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-965408caac6fc621",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1017151/canva-craft-in-house-ai-model",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-22T21:51:25.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Canva’s first AI image model plans designs before generating them",
-        "summary": "Canva is diving even deeper into AI with the launch of an image generation model that competes directly with those from OpenAI, Microsoft, and Google. The model, called Canva Craft, uses a two-stage architecture that allows it to plan a design before generating an image, allowing for \"greater precision, consistency and control,\" according to an […]",
-        "body": "Canva is diving even deeper into AI with the launch of an image generation model that competes directly with those from OpenAI, Microsoft, and Google. The model, called Canva Craft , uses a two-stage architecture that allows it to plan a design before generating an image, allowing for \"greater precision, consistency and control,\" according to an announcement on Thursday .\n\nCanva Craft can generate images at up to 2K resolution and in more than 30 aspect ratios. In addition to generating social media posts and marketing content, it's also supposed to create realistic scenes, digital art, environmental imagery, and more. The model's two-stage sy …\n\nRead the full story at The Verge."
+        "body": "A security researcher has demonstrated a software-only partial jailbreak of the Switch 2, gaining \"userland\" access that he says \"lets us run homebrew, reverse engineer and mod Switch 2 games, back up save files off the Switch, and access most of the Switch 2’s peripherals through MMIO.\"\n\nThe hack relies on the original Switch version of SmileBasic 4 , the latest in a long-running series of programming environments and interpreters that run on Nintendo hardware. The so-called \"tethered\" hack also requires access to a macOS or Linux PC on the same network to run a node.js package that helps enable privileged system access.\n\nResearcher Sammy Hajhamid writes that he used OpenAI's Codex to poke at SmileBasic's language interpreter, using a custom harness that could send USB commands to the system and view results via HDMI (as well as power cycling via a Bluetooth light switch flipping device). After \"substantial effort for ~2 weeks,\" that harness discovered a 32-bit integer overflow that occurs when removing items from an array in SmileBasic. That error gives access to an array pointer, which in turn allows read-and-write access to portions of system memory.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -378,30 +400,6 @@
         "title": "The Browser Company is officially killing Arc on December 22",
         "summary": "The organization is prioritizing an AI browser called Dia.",
         "body": "The organization is prioritizing an AI browser called Dia.\n\nThe Browser Company will sunset its Arc browser on December 22 . We kind of knew this was coming, as the company has been focusing its resources on an AI browser called Dia . To that end, the organization is trying to get users to switch over from Arc to Dia. It says that all bookmarks, extensions, passwords and history will transfer over automatically. The Browser Company is also trying to lure in customers who are wary of AI by noting that all of those additional features are optional.\n\nAs for Arc, it goes dark on December 22. On that date, users will no longer be able to access their accounts. I guess it never quite caught on, even though it offered people the ability to personalize any website while browsing.\n\nMeet @diabrowser . Now available for Arc members. pic.twitter.com/dqekJNWhgR\n\n— The Browser Company (@browsercompany) June 11, 2025\n\nDia was first announced last year and is, more or less, a standard AI-based web browser. There's a chatbot that the company says can understand context across multiple open tabs. The app can also do stuff like summarize emails and YouTube videos. It pulls together a \"morning brief\" each day that integrates data from calendars, inboxes and web links. You know the drill. It's generative AI."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-44b68b38891b29f6",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2294583/bluesky-adds-ipad-support-in-latest-feature-update/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-22T18:26:03.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Bluesky adds iPad support in latest feature update",
-        "summary": "Profile links to third-party platforms have also arrived on the social network.",
-        "body": "Profile links to third-party platforms have also arrived on the social network.\n\nBluesky rolled out several features in its latest update, notably beta testing support for iPads. The social network should start looking and performing better on the Apple tablets as a result of the changes. The Beta Features section of the Settings menu can be used to share feedback about any bugs or wonkiness found in the Bluesky iPad app.\n\nAnother update is aimed at self-promotion. Bluesky users can now put links to external platforms at the top of their profiles. The company framed the addition as a way for creators to get better support from their Bluesky audiences by connecting their profiles to crowdfunding platforms such as Patreon or Ko-fi or to more of their content in a website or newsletter. This might also cut down on some of the \"link in bio\" language that's so common in many social media posts. The Edit Profile menu now has a Links section where those external sites can be added."
       }
     },
     "media": null

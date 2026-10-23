@@ -1,5 +1,28 @@
 window.TIFLO_RESOURCES = [
   {
+    "id": "es-estudio-medico-preferencias-clima-2026",
+    "lang": "es",
+    "category": "Estudios médicos",
+    "title": "El termómetro de la felicidad",
+    "searchText": "Estudio médico sin bata blanca clima meteorología preferencias calor frío lluvia viento bienestar cerebro humor salud felicidad",
+    "url": "https://tifloacosta.com/docs/es/termometro-de-la-felicidad-clima-y-bienestar.html",
+    "openUrl": "https://tifloacosta.com/docs/es/termometro-de-la-felicidad-clima-y-bienestar.html",
+    "new": true,
+    "newsDate": "2026-10-23T12:00:00Z"
+  },
+  {
+    "id": "en-medical-study-weather-preferences-2026",
+    "lang": "en",
+    "category": "Medical Studies",
+    "title": "The Happiness Thermometer",
+    "searchText": "Science weather preferences heat cold wind rain mood happiness well-being Tony Acosta",
+    "url": "https://tifloacosta.com/docs/en/happiness-thermometer-weather-and-wellbeing.html",
+    "openUrl": "https://tifloacosta.com/docs/en/happiness-thermometer-weather-and-wellbeing.html",
+    "new": true,
+    "newsDate": "2026-10-23T12:00:00Z"
+  },
+
+  {
     "id": "es-curso-braille-android-talkback-2026",
     "lang": "es",
     "category": "Android",

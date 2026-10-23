@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Curso de escritura braille con TalkBack en Android, versión TifloAcosta."><meta name="author" content="Tony Acosta · TifloAcosta">
+<title>Curso completo de escritura braille en pantalla con Android y TalkBack · TifloAcosta</title><style>
+:root{color-scheme:light;--ink:#172b42;--link:#075b80;--accent:#155b7c;--line:#cad9e5;--paper:#ffffff}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:auto}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:1.0625rem;line-height:1.72}
+.wrapper{max-width:54rem;padding:1.2rem 1.35rem 3.2rem;margin-inline:auto}
+.skip{position:absolute;left:-200vw;top:0;padding:.8rem;background:#fff;color:#002f4c;z-index:10}.skip:focus{left:1rem;top:1rem}
+a{color:var(--link);text-underline-offset:.15em;overflow-wrap:anywhere}a:hover{text-decoration-thickness:.15em}
+a:focus-visible{outline:.2rem solid #006fbc;outline-offset:.25rem;border-radius:.1rem}
+.brand{font-weight:750;letter-spacing:.015em;color:#16456a;margin:0 0 .1rem}
+h1,h2,h3{line-height:1.25;letter-spacing:-.015em;color:#153b60;scroll-margin-top:1rem}
+h1{font-size:clamp(1.8rem,4vw,2.35rem);margin:1.2rem 0 .55rem}
+h2{font-size:clamp(1.45rem,3vw,1.85rem);margin:2.8rem 0 .9rem;padding-top:.35rem;border-top:1px solid var(--line)}
+h3{font-size:1.3rem;margin:2rem 0 .7rem}p{margin:.65rem 0 1rem}li{margin:.35rem 0}
+.meta{color:#4f6478;margin:.2rem 0}.contents{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:1rem 0;margin:2rem 0}
+.contents ol{padding-left:1.5rem}.back{font-size:.95em}.footer{margin-top:3rem;padding-top:1.3rem;border-top:1px solid var(--line)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media(prefers-contrast:more){:root{--ink:#000;--link:#003f75;--line:#253949}a:focus-visible{outline-width:3px}}
+@media print{body{font-size:10.5pt}.skip,.site-nav{display:none}.wrapper{max-width:none;padding:0}h2,h3{break-after:avoid}p{orphans:3;widows:3}}
+</style></head>
+<body><a class="skip" href="#contenido">Saltar al contenido principal</a>
+<div class="wrapper"><nav class="site-nav" aria-label="TifloAcosta"><a href="https://tifloacosta.com/">Volver al inicio de TifloAcosta</a></nav>
+<main id="contenido"><article aria-label="Curso completo de escritura braille en pantalla con Android y TalkBack">
+<h1 id="curso-completo-de-escritura-braille-en-pantalla-con-android-y-talkback">Curso completo de escritura braille en pantalla con Android y TalkBack</h1>
+<nav class="contents" aria-label="Navegación del documento"><h2 id="navegacion-documento">Índice navegable del curso</h2><ol><li><a href="#modulo-1-empezamos-desde-cero">Módulo 1. Empezamos desde cero</a></li><li><a href="#modulo-2-preparar-android-y-activar-el-teclado">Módulo 2. Preparar Android y activar el teclado</a></li><li><a href="#modulo-3-conocer-las-dos-posiciones-y-calibrar">Módulo 3. Conocer las dos posiciones y calibrar</a></li><li><a href="#modulo-4-aprender-las-letras-sin-prisas">Módulo 4. Aprender las letras sin prisas</a></li><li><a href="#modulo-5-escribir-palabras-lineas-y-mensajes">Módulo 5. Escribir palabras, líneas y mensajes</a></li><li><a href="#modulo-6-numeros-mayusculas-y-signos-del-espanol">Módulo 6. Números, mayúsculas y signos del español</a></li><li><a href="#modulo-7-mover-el-cursor-sin-borrar-el-texto">Módulo 7. Mover el cursor sin borrar el texto</a></li><li><a href="#modulo-8-seleccionar-copiar-cortar-y-pegar">Módulo 8. Seleccionar, copiar, cortar y pegar</a></li><li><a href="#modulo-9-revision-ortografica-y-personalizacion">Módulo 9. Revisión ortográfica y personalización</a></li><li><a href="#modulo-10-escribir-en-aplicaciones-reales">Módulo 10. Escribir en aplicaciones reales</a></li><li><a href="#modulo-11-alternar-braille-teclado-convencional-y-dictado">Módulo 11. Alternar braille, teclado convencional y dictado</a></li><li><a href="#modulo-12-escribir-con-comodidad-y-precision">Módulo 12. Escribir con comodidad y precisión</a></li><li><a href="#modulo-13-diagnosticar-y-resolver-problemas">Módulo 13. Diagnosticar y resolver problemas</a></li><li><a href="#modulo-14-practicas-finales-y-autonomia">Módulo 14. Prácticas finales y autonomía</a></li><li><a href="#anexo-a-referencia-rapida-de-gestos-del-teclado-braille">Anexo A. Referencia rápida de gestos del teclado braille</a></li><li><a href="#anexo-b-braille-espanol-letras-cifras-y-signos">Anexo B. Braille español: letras, cifras y signos</a></li><li><a href="#anexo-c-diagnostico-rapido">Anexo C. Diagnóstico rápido</a></li><li><a href="#anexo-d-alcance-actualizacion-y-compatibilidad">Anexo D. Alcance, actualización y compatibilidad</a></li></ol></nav>
+<p class="meta">De cero al uso avanzado · Edición revisada de octubre de 2026</p>
+<p class="meta">TifloAcosta · Tony Acosta</p>
+<h2 id="presentacion">Presentación</h2>
+<p>Hola hola, gente guapa.</p>
+<p>Vamos a escribir braille directamente sobre la pantalla de un teléfono Android. Sin máquina Perkins, sin teclado físico y sin línea braille conectada. Solo TalkBack, seis dedos y un poco de práctica. El cristal, ya les aviso, seguirá igual de liso: por mucho entusiasmo que le pongamos, no le van a salir puntitos. Lo que haremos es usar las combinaciones del braille para meter en el teléfono texto normal y corriente.</p>
+<p>El curso empieza desde cero y acaba con ustedes escribiendo notas, mensajes, correos y documentos. Si ya conocen la Entrada braille en pantalla del iPhone, la idea les sonará, pero guarden los gestos en un cajón: Android tiene su propio teclado y sus propias reglas, y llevarse las costumbres de un sistema a otro es la forma más rápida de acabar murmurándole cosas feas al teléfono. Y si nunca han escrito con braille táctil, tranquilos: aquí no se da nada por sabido, ni el braille ni la soltura con el móvil.</p>
+<p>Usaremos el teclado braille que viene dentro de TalkBack, con sus gestos de fábrica. He contrastado los procedimientos con la documentación pública de Google disponible al preparar esta edición. Eso no significa que los haya probado personalmente en cada modelo ni en todas las versiones de Android; cuando algo dependa de esa comprobación práctica, se lo diré sin rodeos.</p>
+<p>Y ahora una advertencia que no pienso repetir en cada página: Android no es un sistema uniforme. Samsung, Pixel y compañía cambian las rutas de los ajustes, y las versiones recientes de TalkBack permiten personalizar los gestos. Si han cambiado los suyos, lo que explico aquí no coincidirá con lo que haga su teléfono, y la culpa no será ni suya ni mía. Cuando algo dependa de la aplicación o del aparato, lo diré. Los procedimientos generales sirven como punto de partida, pero ningún fabricante ni versión se libra de las excepciones.</p>
+<p>Esto es un curso de escritura, no un manual para aprender a leer braille desde cero. Repasaremos las combinaciones que hacen falta, sobre todo las del español, y separaremos dos cosas que a menudo se mezclan: el signo del código braille y el carácter que Android acaba metiendo de verdad en el texto. Con las letras sencillas no hay problema. Con los signos de apertura, las comillas, las contraseñas y las direcciones de internet, toca comprobar lo que ha quedado escrito.</p>
+<p>Pueden avanzar por módulos o practicar un ratito cada día. No hace falta aprenderse todos los gestos en una tarde: los anexos están para consultarlos sin rebuscar entre veinte páginas. Y empezaremos por lo más importante, que es saber salir del teclado antes de que a alguien le entren ganas de tirar el móvil por la ventana.</p>
+<h2 id="como-utilizar-este-curso">Cómo utilizar este curso</h2>
+<p>El orden está pensado para no dar saltos. Primero configuramos el teclado, después colocamos las manos, aprendemos las letras, pasamos a editar, practicamos en aplicaciones de verdad y terminamos aprendiendo a arreglar lo que se estropee. Cada módulo trae tareas que se pueden repetir en una nota sin que nada llegue a terceros. Mi consejo es que practiquen en un campo de texto corriente y que no corten, seleccionen ni sustituyan nada que no puedan permitirse perder.</p>
+<p>Una cuestión de vocabulario antes de empezar. Cuando lean «mantener el punto 3 y deslizar otro dedo», se trata de un único movimiento continuo: un dedo se queda apoyado donde está el punto 3, otro hace el recorrido y el primero no se levanta hasta que el segundo termina. Nada que ver con pulsar una celda braille, que consiste en tocar a la vez los puntos necesarios y levantar los dedos. Una cosa es tocar y otra es tocar y arrastrar, y el teléfono distingue muy bien la una de la otra, por desgracia para los despistados.</p>
+<h2 id="1-5-talkback-es-el-unico-camino-para-escribir-braille-en-android">Módulo 1. Empezamos desde cero</h2>
+<h3 id="modulo-1-empezamos-desde-cero">1.1. Qué hace el teclado braille de TalkBack</h3>
+<p>Permite escribir con seis dedos sobre la pantalla táctil usando celdas de seis puntos. A cada dedo le toca un punto, y al tocar varios a la vez sale una letra o un signo. No hay botones dibujados que buscar a tientas, ni puntos en relieve que leer con las yemas: metemos la información con braille y la comprobamos con TalkBack.</p>
+<p>En la mano izquierda, el índice es el punto 1, el corazón el 2 y el anular el 3. En la derecha, el índice es el 4, el corazón el 5 y el anular el 6. Fíjense en que hablamos de los puntos de una celda braille, no de dedos contados de izquierda a derecha sobre la pantalla. La orientación concreta cambia según cómo coloquemos el teléfono, pero la pareja dedo-punto no cambia nunca. Esa es la que hay que grabarse.</p>
+<p>La letra a usa el punto 1. La b, los puntos 1 y 2. La c, el 1 y el 4. La d, el 1, el 4 y el 5. Para escribir cualquiera de ellas tocamos a la vez los puntos necesarios y levantamos los dedos. Ese contacto breve es una pulsación braille. Si en lugar de tocar arrastramos el dedo, ya no estamos escribiendo una letra: estamos ejecutando uno de los gestos de control del teclado.</p>
+<h3 id="1-1-que-hace-el-teclado-braille-de-talkback">1.2. Lo que necesitamos y lo que no</h3>
+<p>Necesitamos un teléfono Android compatible, TalkBack activo y el teclado braille habilitado. Google añade una condición que se pasa por alto con facilidad: la ampliación de pantalla tiene que estar desactivada. Y ojo, que ampliar la pantalla no es lo mismo que aumentar el tamaño del texto.</p>
+<p>No hace falta instalar el viejo BrailleBack ni comprar una línea braille. Con el teléfono y los dedos nos sobra.</p>
+<p>Eso sí, no toda aplicación tratará nuestro braille con el mismo cariño. Algunos formularios y editores especiales gestionan por su cuenta los botones de envío, los saltos de línea o las selecciones. Iremos viendo cada caso a medida que aparezca.</p>
+<h3 id="1-2-lo-que-necesitamos-y-lo-que-no">1.3. Teclado táctil y línea braille no son lo mismo</h3>
+<p>Una línea braille externa tiene celdas en relieve y, según el modelo, teclas físicas para escribir. El teclado braille de TalkBack usa únicamente el cristal del teléfono. Los comandos de una línea externa viven en los ajustes de Pantalla braille, y los que vamos a estudiar aquí pertenecen a Teclado braille. Mezclarlos es como intentar conducir un coche con los mandos de otro modelo: algo se mueve, pero casi nunca lo que uno quería.</p>
+<p>Tampoco hay que confundir el teclado braille con Gboard. Son métodos de entrada distintos y pueden convivir sin pelearse. Podremos volver al teclado convencional cuando necesitemos un símbolo complicado, cuando un campo se ponga difícil o simplemente cuando nos apetezca.</p>
+<h3 id="1-3-teclado-tactil-y-linea-braille-no-son-lo-mismo">1.4. Qué aprenderemos a hacer</h3>
+<p>La primera meta es escribir palabras cortas. Después añadiremos espacios, borrado, mayúsculas, cifras y puntuación. La segunda es corregir sin rehacerlo todo: mover el cursor, seleccionar una palabra, copiar una frase, sustituir un párrafo. Y la tercera es llevarlo a nuestras aplicaciones de cada día y saber distinguir un error de los dedos de un problema real de TalkBack o de la aplicación. Esa última destreza vale oro, porque ahorra muchas horas de culpar al teléfono por lo que ha hecho nuestro dedo anular.</p>
+<p>Ejercicio. Antes de tocar el teclado, repasen mentalmente los seis puntos y los dedos que los representan: índice izquierdo, 1; medio izquierdo, 2; anular izquierdo, 3; índice derecho, 4; medio derecho, 5; anular derecho, 6. Díganlo en voz alta si no hay nadie delante. Esta pequeña letanía nos ahorrará muchas dudas en los próximos capítulos.</p>
+<h2 id="1-4-que-aprenderemos-a-hacer">Módulo 2. Preparar Android y activar el teclado</h2>
+<h3 id="modulo-2-preparar-android-y-activar-el-teclado">2.1. Activar TalkBack</h3>
+<p>Si ya usan Android con TalkBack, pueden saltar al apartado siguiente. Si no, abrimos Ajustes &gt; Accesibilidad &gt; TalkBack (o la ruta equivalente de su fabricante) y activamos el lector. Con TalkBack encendido, deslizamos un dedo a derecha o izquierda para mover el foco y hacemos doble toque para activar el elemento seleccionado.</p>
+<p>Muchos teléfonos tienen un acceso directo de accesibilidad con las teclas de volumen, pero solo funciona si alguien lo ha configurado. Conviene saber de antemano cuál tenemos activo. Descubrirlo justo el día en que la voz se calla es una forma de aprender muy poco recomendable.</p>
+<h3 id="2-1-activar-talkback">2.2. Llegar a la configuración braille</h3>
+<p>Abrimos el menú de TalkBack tocando la pantalla con tres dedos a la vez, si nuestro teléfono admite ese gesto. Si no, vale el truco general: un solo movimiento hacia abajo y enseguida hacia la derecha. Elegimos Ajustes de TalkBack, entramos en Teclado braille y buscamos Configurar teclado braille. Seguimos las instrucciones para habilitarlo como método de entrada.</p>
+<p>La ruta puede empezar en un sitio distinto según el fabricante, pero dentro de TalkBack la palabra clave es Teclado braille. Nada de entrar en Pantalla braille, que es para las líneas con celdas físicas.</p>
+<h3 id="2-2-llegar-a-la-configuracion-braille">2.3. Elegir español y braille sin abreviar</h3>
+<p>En Teclado braille &gt; Idiomas marcamos español. Mi consejo para empezar: un solo idioma activo, a menos que necesiten otros, para que no haya cambios de idioma que se produzcan sin que nadie los haya pedido. Si más adelante activan varios, podrán saltar de uno a otro desde el menú del teclado, con tres dedos hacia arriba.</p>
+<p>También conviene empezar con braille sin abreviar, el llamado grado 1. En ese mismo menú del teclado, con tres dedos hacia arriba, aparece la opción de cambiar entre braille contraído y sin abreviar. Para este curso nos quedamos con el sin abreviar.</p>
+<p>Que TalkBack nos hable en español no garantiza que el teclado esté usando la tabla española. Si un día las letras corrientes salen bien pero las tildes o la eñe se rebelan, el idioma de escritura es el primer sospechoso.</p>
+<h3 id="2-3-elegir-espanol-y-braille-sin-abreviar">2.4. Abrirlo por primera vez</h3>
+<p>Abrimos Google Keep, Gmail o cualquier editor sencillo, creamos una nota o un mensaje de prueba, localizamos el campo de texto y lo activamos con doble toque. Si aparece el teclado de siempre, buscamos el control Cambiar método de introducción, Siguiente idioma o algo parecido. En muchos móviles está abajo a la derecha, aunque su sitio exacto no es universal. Elegimos Teclado braille de TalkBack.</p>
+<p>La primera vez puede saltar un tutorial. Escúchenlo entero, que no es largo. Y si el teclado no aparece entre los métodos de entrada, volvemos a la configuración antes de seguir: de nada sirve recalibrar seis puntos que todavía no están activos.</p>
+<h3 id="2-4-abrirlo-por-primera-vez">2.5. Cómo ocultarlo y cómo cambiarlo</h3>
+<p>Antes de aprender a escribir, dos gestos de rescate. Dos dedos hacia abajo ocultan el teclado braille y devuelven los gestos normales de TalkBack. Tres dedos hacia abajo cambian al siguiente teclado disponible. No son lo mismo: cerrar el teclado no equivale a elegir Gboard.</p>
+<p>Y un tercero, con el teclado braille abierto: tres dedos hacia arriba muestran las opciones de ayuda, la lista de gestos, el idioma, la calibración y el tutorial. Estos tres movimientos no se pueden personalizar como los demás. El sistema los reserva a propósito para que siempre haya una salida de emergencia, y eso, créanme, es de agradecer.</p>
+<h3 id="2-5-como-ocultarlo-y-como-cambiarlo">2.6. Primer ejercicio de seguridad</h3>
+<p>Abrimos una nota, elegimos el teclado braille, deslizamos dos dedos hacia abajo y comprobamos que TalkBack vuelve a recorrer los controles de la aplicación. Regresamos al campo de texto, reactivamos el braille si hace falta y practicamos el cambio con tres dedos hacia abajo. Por último volvemos al teclado braille y abrimos sus opciones con tres dedos hacia arriba.</p>
+<p>Todavía no vamos a escribir ninguna novela. Solo queremos poder entrar, salir y recuperar la navegación sin pedir auxilio. Si lo hacemos varias veces seguidas, el resto de la práctica será mucho más tranquila.</p>
+<h2 id="2-6-primer-ejercicio-de-seguridad">Módulo 3. Conocer las dos posiciones y calibrar</h2>
+<h3 id="modulo-3-conocer-las-dos-posiciones-y-calibrar">3.1. Modo sobremesa</h3>
+<p>Colocamos el teléfono en horizontal sobre una superficie plana, con la pantalla hacia arriba y el puerto de carga a nuestra izquierda. Esperamos a que TalkBack anuncie el modo sobremesa, si el cambio automático está activado. De izquierda a derecha, los puntos quedan ordenados así: 3, 2, 1, 4, 5 y 6. Los índices quedan cerca del centro y los corazones y anulares se reparten hacia los extremos.</p>
+<p>No hace falta tener los seis dedos clavados en el cristal. Los mantenemos cerca de su sitio, flotando, y solo tocamos cuando queremos formar un carácter. Quien descansa los dedos sobre la pantalla acaba escribiendo letras que no pidió, o ejecutando acciones que no pretendía.</p>
+<p>Probamos la a con el índice izquierdo, la b con índice y corazón izquierdos, la c con los dos índices y la d con el índice izquierdo más índice y corazón derechos. Si alguna no coincide, la repetimos despacio antes de tocar un solo ajuste.</p>
+<h3 id="3-1-modo-sobremesa">3.2. Modo con la pantalla hacia fuera</h3>
+<p>Aquí sujetamos el teléfono en horizontal con la pantalla mirando hacia fuera, alejándose de nosotros. Según la descripción de Google, la mano izquierda sujeta la parte de arriba y la derecha la de abajo, que es donde está el puerto USB. Pulgares y meñiques ayudan a aguantar el aparato, y índices, corazones y anulares quedan libres para escribir en la pantalla.</p>
+<p>Los puntos siguen correspondiendo a los mismos dedos: 1, 2 y 3 en la izquierda; 4, 5 y 6 en la derecha. Lo que cambia es la postura y la sensación de contacto. Si estamos acostumbrados a escribir con el teléfono sobre la mesa, los primeros minutos serán raros. Practiquen sentados y en un sitio sin peligro: un móvil que se escurre de las manos no distingue entre escribir braille y hacer paracaidismo.</p>
+<p>Repetimos a, b, c y d. Si el tamaño del teléfono nos obliga a forzar demasiado los dedos, podemos alternar con el modo sobremesa. No existe una postura perfecta para todas las manos.</p>
+<h3 id="3-2-modo-con-la-pantalla-hacia-fuera">3.3. Cambio automático de modo</h3>
+<p>El teclado braille cambia solo entre sobremesa y pantalla hacia fuera según la orientación del teléfono. Los ajustes están en TalkBack &gt; Teclado braille &gt; Diseño. Si las letras empiezan a salir mal justo después de mover el teléfono, no culpemos enseguida a nuestros dedos: lo más probable es que el sistema haya cambiado de modo sin avisarnos con la antelación debida.</p>
+<h3 id="3-3-cambio-automatico-de-modo">3.4. Calibrar los seis puntos</h3>
+<p>Cuando la referencia de los dedos se ha descolocado, apoyamos los seis dedos a la vez en la pantalla y los mantenemos unos tres segundos, hasta que llegue la confirmación de que la posición de los puntos se ha actualizado (en inglés, «Dot position updated»). Un toque rápido no sirve.</p>
+<p>Hay una segunda vía, mano por mano. Deslizamos tres dedos hacia arriba, elegimos Actualizar posición de puntos y seguimos las instrucciones: primero una mano y luego la otra. TalkBack recuerda por separado las posiciones de sobremesa y de pantalla hacia fuera, así que lo ideal es calibrar cada modo al principio y volver a hacerlo solo cuando haya un motivo.</p>
+<h3 id="3-4-calibrar-los-seis-puntos">3.5. Los tres sospechosos habituales</h3>
+<p>Cuando una letra sale mal, casi siempre hay uno de tres culpables. Si falla una letra suelta, lo más probable es que uno de los dedos haya llegado tarde. Ese dedo rezagado, que a todos nos ha pasado, será un personaje recurrente en este curso. Si fallan varias letras seguidas, puede que las manos se hayan desplazado de su sitio. Y si todo cambia justo al levantar el teléfono, seguramente hemos pasado de un modo al otro. Son problemas distintos y se arreglan de maneras distintas, y mezclarlos es receta segura para el desánimo.</p>
+<p>Ejercicio. En sobremesa, escribimos cinco veces cada una de las letras a, b, c y d. Metemos un espacio deslizando un dedo hacia la derecha. Repetimos todo sujetando el teléfono con la pantalla hacia fuera. Para terminar, ocultamos el teclado con dos dedos hacia abajo y escuchamos lo que ha quedado escrito. Solo recalibramos si vemos errores de posición que no se van.</p>
+<h2 id="3-5-los-tres-sospechosos-habituales">Módulo 4. Aprender las letras sin prisas</h2>
+<h3 id="modulo-4-aprender-las-letras-sin-prisas">4.1. Las diez primeras</h3>
+<p>El braille tiene una estructura muy agradecida: no hace falta aprender cada letra como un dibujo suelto. Las diez primeras utilizan solo los puntos 1, 2, 4 y 5. Son estas: a 1; b 12; c 14; d 145; e 15; f 124; g 1245; h 125; i 24; j 245. Cuando en este curso aparezca «145», significa pulsar a la vez los puntos 1, 4 y 5.</p>
+<p>Empezamos con a, b, c y d. Añadimos e y f cuando las anteriores salgan con seguridad, y después g, h, i y j. No tiene ningún sentido buscar velocidad en la primera sesión: una pulsación bien hecha vale más que una carrera de letras que luego hay que corregir.</p>
+<p>Práctica. Escribimos abcdefghij y después jihgfedcba. A continuación, las palabras caja, baja, cada e hija, cada una con su espacio. Si hay que corregir la última letra, ya sabemos que un dedo hacia la izquierda la borra.</p>
+<h3 id="4-1-las-diez-primeras">4.2. La segunda serie</h3>
+<p>Las diez letras siguientes son primas hermanas de las anteriores, solo que añadimos el punto 3: k 13; l 123; m 134; n 1345; o 135; p 1234; q 12345; r 1235; s 234; t 2345. Entender estas familias ayuda más que recitar veinte combinaciones sin parentesco.</p>
+<p>De la a (punto 1) pasamos a la k añadiendo el 3. De la b (puntos 1 y 2) pasamos a la l (1, 2 y 3). De la c (1 y 4) llegamos a la m (1, 3 y 4). Practiquen las parejas a-k, b-l, c-m, d-n, e-o: la mano irá reconociendo el movimiento sin que tengamos que explicárselo.</p>
+<p>Práctica. Escribimos sol, mano, mesa, pato y tomate, con un espacio entre palabra y palabra. Al terminar, ocultamos el teclado y escuchamos el conjunto.</p>
+<h3 id="4-2-la-segunda-serie">4.3. Las letras restantes</h3>
+<p>Completamos el alfabeto con u 136; v 1236; w 2456; x 1346; y 13456; z 1356; ñ 12456. La w tiene una historia peculiar dentro del sistema braille, porque llegó tarde a la fiesta, pero se aprende igual que las demás. La ñ es imprescindible en español y se escribe como una letra propia, no como una n seguida de una virgulilla.</p>
+<p>Práctica. Escribimos uva, voz, yate, zapato, niño, caña y mañana. Aquí no necesitamos tildes: las palabras se han elegido precisamente para concentrarnos en los puntos y dejar los acentos para el módulo 6.</p>
+<h3 id="4-3-las-letras-restantes">4.4. Escuchar no es comprobarlo todo</h3>
+<p>TalkBack puede anunciar letras o palabras según la respuesta hablada que tengamos configurada. Eso nos ayuda a pillar errores, pero no garantiza que una contraseña, una cifra o un símbolo hayan quedado como pensábamos. Revisen el campo de texto al terminar cada práctica, sobre todo mientras estén aprendiendo.</p>
+<p>Si una combinación de cuatro o cinco puntos falla, bajamos la velocidad y comprobamos que todos los dedos llegan prácticamente a la vez. Pulsar fuerte no es pulsar mejor. Y una errata suelta no justifica recalibrar cada cinco minutos: hay días en que el dedo rezagado simplemente ha salido de excursión.</p>
+<h3 id="4-4-escuchar-no-es-comprobarlo-todo">4.5. Primera evaluación</h3>
+<p>Escribimos tres frases en una nota, todavía sin mayúsculas ni puntos, que de eso se encarga el módulo 6: hoy tengo tiempo, mañana preparo la comida y mi amigo vive cerca. Revisamos el texto con TalkBack. Si dominamos las letras, ya podemos construir mensajes completos, y lo que falta es controlar su estructura y corregir sin empezar de cero.</p>
+<h2 id="4-5-primera-evaluacion">Módulo 5. Escribir palabras, líneas y mensajes</h2>
+<h3 id="modulo-5-escribir-palabras-lineas-y-mensajes">5.1. Espacios, borrado y líneas nuevas</h3>
+<p>Ya sabemos hacer letras. Ahora toca separar palabras, que es lo que evita que todo salga pegado como un telegrama sin paradas. Con el teclado braille activo, un dedo hacia la derecha mete un espacio. Un dedo hacia la izquierda borra el carácter anterior al cursor. Dos dedos hacia la izquierda borran la palabra anterior. Y dos dedos hacia la derecha insertan una línea nueva, siempre que el campo lo permita.</p>
+<p>Estos gestos hay que practicarlos hasta que salgan solos. Escribimos hola mundo, metiendo el espacio con un dedo hacia la derecha. Añadimos una letra de más al final, la borramos con un dedo hacia la izquierda y comprobamos que la palabra ha quedado limpia. Después escribimos otra palabra, la eliminamos con dos dedos hacia la izquierda y la volvemos a escribir.</p>
+<p>Hay una trampa clásica: confundir borrar una letra con borrar una palabra. Un dedo es una letra; dos dedos, una palabra entera. Y no olvidemos dónde está el cursor. Si lo hemos movido al centro de un documento, el borrado actuará allí, no al final de la frase, y descubrirlo después es una sorpresa que no se la deseo a nadie.</p>
+<h3 id="5-1-espacios-borrado-y-lineas-nuevas">5.2. Empezar una línea diferente</h3>
+<p>Abrimos una nota y escribimos lista de compras. Deslizamos dos dedos hacia la derecha para pasar a una línea nueva. Escribimos pan, repetimos el gesto y añadimos leche. Repetimos otra vez con arroz. Al ocultar el teclado comprobaremos que cada cosa está en su propia línea.</p>
+<p>En algunos formularios y aplicaciones de mensajería, el campo puede tratar la tecla Intro de otra manera o no admitir saltos de línea. Por eso esta primera práctica la hacemos en una nota, donde nadie nos va a poner pegas. Cuando pasemos a enviar mensajes, miraremos cómo se comporta cada aplicación.</p>
+<h3 id="5-2-empezar-una-linea-diferente">5.3. Enviar y confirmar no siempre son lo mismo</h3>
+<p>Dos dedos hacia arriba ejecutan la acción de enviar o confirmar que tenga asignada el campo. En un buscador puede lanzar la búsqueda. En una aplicación de mensajes puede intentar enviar. En otros editores puede no hacer nada de lo que esperamos. De modo que ojo: no equivale, ni mucho menos, a pulsar siempre el botón Enviar.</p>
+<p>Cuando haya un destinatario real o algo importante de por medio, el procedimiento más prudente es escribir, revisar, ocultar el teclado con dos dedos hacia abajo, localizar con TalkBack el botón correspondiente y activarlo a conciencia. Así separamos escribir de confirmar, y nos ahorramos ese momento tan poco agradable en que un mensaje a medias sale hacia quien no debía.</p>
+<h3 id="5-3-enviar-y-confirmar-no-siempre-son-lo-mismo">5.4. Corrección inmediata</h3>
+<p>Si escribimos casae, basta con retroceder un carácter para quitar la e. Si aparece comprarr, borramos la r sobrante. Y si queremos cambiar la última palabra por otra completamente distinta, borramos la palabra entera y escribimos la nueva. Son arreglos rápidos, pero no nos sirven para corregir una falta en el primer párrafo de una nota de varias páginas. De eso se ocupan los módulos 7 y 8.</p>
+<h3 id="5-4-correccion-inmediata">5.5. Nuestra primera nota completa</h3>
+<p>Escribimos estas tres líneas, separándolas con dos dedos hacia la derecha:</p>
+<p>hoy tengo que preparar la comida</p>
+<p>después revisaré unos documentos</p>
+<p>mañana hablaré con un amigo</p>
+<p>Si las tildes todavía nos dan guerra, podemos volver a escribir las palabras acentuadas cuando terminemos el módulo siguiente. Ocultamos el teclado y escuchamos la nota entera. Reabrimos el campo, añadimos otra línea y volvemos a comprobar. Lo importante es empezar a usar el braille para algo que se parezca a lo que hacemos cada día.</p>
+<h2 id="5-5-nuestra-primera-nota-completa">Módulo 6. Números, mayúsculas y signos del español</h2>
+<h3 id="modulo-6-numeros-mayusculas-y-signos-del-espanol">6.1. Elegir la tabla correcta</h3>
+<p>Las letras básicas coinciden en muchos códigos braille, pero los signos especiales no. Para esta parte comprobamos que el teclado esté usando español y que trabajamos con braille sin abreviar. El código que explicamos es el de la escritura tradicional del español. La conversión que hace un teclado electrónico, en cambio, puede depender del contexto y de las opciones activas, y eso lo iremos viendo.</p>
+<h3 id="6-1-elegir-la-tabla-correcta">6.2. Mayúsculas</h3>
+<p>El signo de mayúscula en braille español usa los puntos 4 y 6 y se escribe antes de la letra que queremos en mayúscula. Para Ana, introducimos el signo 46, después la a y luego n y a. Practicamos con Tony, María, México, Uruguay y Argentina.</p>
+<p>Existen convenciones para palabras enteras en mayúsculas, pero no voy a prometer que cualquier secuencia de signos se traduzca igual en todas las versiones del teclado. Para una sigla o una contraseña, lo primero es probar el procedimiento en una nota y ver qué caracteres produce. Solo cuando lo sepamos con certeza lo usaremos con datos que importen.</p>
+<h3 id="6-2-mayusculas">6.3. Números</h3>
+<p>El signo de número se forma con 3-4-5-6. Después usamos las diez primeras letras como cifras: a=1, b=2, c=3, d=4, e=5, f=6, g=7, h=8, i=9, j=0. Para escribir 25 metemos el signo de número, la combinación de la b y la de la e. No hace falta repetir el signo antes de cada cifra en una secuencia normal. Eso sí, hay que mirar cómo se interpreta cuando cambia el contexto, aparece puntuación o volvemos a las letras.</p>
+<p>Probamos 10, 25, 150, 2026 y 2027. Después escribimos La cita es el día 14. y Necesito 3 cuadernos. Con cantidades y fechas conviene revisar con lupa, porque un número mal escrito tiene la mala costumbre de parecer perfectamente válido.</p>
+<h3 id="6-3-numeros">6.4. Las vocales acentuadas y la diéresis</h3>
+<p>Las combinaciones españolas de seis puntos son estas: á 12356; é 2346; í 34; ó 346; ú 23456; ü 1256. La ñ, como ya sabemos, es 12456. Son caracteres con identidad propia, no una vocal normal a la que se le pega una tilde después de escribirla.</p>
+<p>Practicamos con mamá, café, día, canción, último, pingüino y cigüeña. Después, con nombres como Ángela u Óscar, que combinan el signo de mayúscula con una vocal acentuada. Si TalkBack no devuelve el carácter que esperábamos, revisamos el idioma de escritura antes de tocar la calibración.</p>
+<h3 id="6-4-las-vocales-acentuadas-y-la-dieresis">6.5. Puntuación básica</h3>
+<p>En el código braille español, punto: 3; coma: 2; punto y coma: 23; dos puntos: 25; interrogación: 26; exclamación: 235; guion: 36; comillas: 236; abrir paréntesis: 126; cerrar paréntesis: 345. La interrogación y la exclamación usan la misma celda para abrir y para cerrar, y lo mismo ocurre con las comillas en su forma básica.</p>
+<p>Y aquí viene la diferencia que nunca debemos olvidar: que dos signos compartan celda braille no obliga a Android a escribir el mismo carácter. La apertura ¿ y el cierre ? son caracteres distintos en el texto digital. Que usemos la misma celda tradicional no garantiza que TalkBack acierte con el que esperamos en cada contexto. El resultado puede depender del traductor, de la versión y del campo donde escribamos.</p>
+<p>Así que vamos a hacer una prueba. Escribimos Hola, ¿cómo estás? y ¡Qué bien! con la tabla española. Ocultamos el teclado y revisamos qué caracteres han quedado de verdad en la nota. Si el sistema no pone la apertura correcta, cambiamos un momento al teclado convencional para insertarla. Lo que no hacemos es repetir a ciegas el mismo signo esperando un resultado distinto, que es una de las definiciones más conocidas de la desesperación.</p>
+<p>Los paréntesis tienen celdas diferentes para abrir y cerrar, pero también merece la pena comprobar cómo se convierten. Con las comillas pueden aparecer variantes tipográficas distintas. Para un documento normal hay varias soluciones válidas. Para código, direcciones o contraseñas, necesitamos saber exactamente qué símbolo se ha insertado.</p>
+<h3 id="6-5-puntuacion-basica">6.6. Direcciones, contraseñas y símbolos especiales</h3>
+<p>Una dirección como persona@ejemplo.com necesita la arroba y los puntos exactamente donde corresponden. Una dirección web puede llevar dos puntos, barras, guiones y otros símbolos. No voy a inventarme combinaciones de TalkBack para esos caracteres si no están comprobadas en la tabla que usa realmente nuestro teléfono. Lo práctico es escribir las letras en braille, pasar al teclado convencional para el símbolo y volver después. Esa alternancia forma parte de la autonomía y no tiene nada de fracaso.</p>
+<p>En los campos protegidos, Android o la propia aplicación pueden limitar la lectura y las funciones de edición. Jamás conviene desactivar mecanismos de seguridad solo para completar un ejercicio. Y, por supuesto, las contraseñas de verdad no se usan como material de práctica. Para eso están las inventadas.</p>
+<h3 id="6-6-direcciones-contrasenas-y-simbolos-especiales">6.7. Ejercicio de ortografía completa</h3>
+<p>Escribimos esta nota:</p>
+<p>El sábado 24 tengo una reunión a las 10.</p>
+<p>Prepararé 3 preguntas y revisaré el último documento.</p>
+<p>Después llamaré a María para confirmar la dirección.</p>
+<p>¿Estará todo preparado? ¡Eso espero!</p>
+<p>Comprobamos cifras, acentos, mayúsculas y, muy especialmente, los signos de apertura. Si algún carácter no sale bien, usamos el método alternativo y tomamos nota de que se trata de una diferencia de conversión del teclado, no de una combinación braille mal aprendida.</p>
+<h2 id="6-7-ejercicio-de-ortografia-completa">Módulo 7. Mover el cursor sin borrar el texto</h2>
+<h3 id="modulo-7-mover-el-cursor-sin-borrar-el-texto">7.1. El punto de inserción</h3>
+<p>El cursor es el lugar donde aparecerá el siguiente carácter. Mientras escribimos suele estar al final, pero puede ir a mitad de palabra, al principio del campo o a otra línea. Si escribimos csa y queremos que diga casa, lo razonable es poner el cursor después de la c y meter la a. No hace falta borrar la palabra entera, aunque la tentación del «bueno, la escribo otra vez» es poderosa.</p>
+<p>El teclado braille de TalkBack tiene gestos para retroceder y avanzar por caracteres, palabras y líneas, y para ir directamente al principio o al final. Algunos son gestos compuestos: mantenemos un punto del teclado con un dedo y deslizamos otro sin soltar el primero. Estos gestos de edición son relativamente recientes. según documenta Google, llegaron con TalkBack 14.0; la revisión de erratas se incorporó después, con TalkBack 14.1, así que, si el teléfono es muy antiguo y no responde, puede que le falte una actualización.</p>
+<h3 id="7-1-el-punto-de-insercion">7.2. Por caracteres</h3>
+<p>Para ir al carácter anterior, mantenemos el punto 3 o el punto 6 y deslizamos otro dedo hacia arriba. Para ir al siguiente, mantenemos el 3 o el 6 y deslizamos otro dedo hacia abajo. El 3 y el 6 son alternativas para que cada mano pueda hacerlo cómodamente. No hay que mantenerlos juntos, que ya bastante tenemos con lo que tenemos.</p>
+<p>Escribimos gato, llevamos el cursor al final y retrocedemos varias veces, escuchando qué carácter anuncia TalkBack. Después avanzamos en sentido contrario. Al principio, lo que oímos y el sitio exacto donde queda el cursor pueden no cuadrar con lo que esperamos, así que probamos la inserción en un texto de pruebas antes de arreglar nada importante.</p>
+<h3 id="7-2-por-caracteres">7.3. Por palabras</h3>
+<p>Para retroceder una palabra, mantenemos el punto 2 o el 5 y deslizamos otro dedo hacia arriba. Para avanzar, mantenemos el 2 o el 5 y deslizamos otro dedo hacia abajo. Escribimos Mañana llevaré los documentos a la reunión. y recorremos las palabras desde el final hasta el comienzo. Después volvemos avanzando.</p>
+<p>Cuando hay un error al principio de un párrafo, este sistema ahorra muchísimo tiempo. Saltamos de palabra en palabra y, al llegar a la zona del fallo, afinamos el movimiento por caracteres. Es como acercarse a una dirección: primero la calle, luego el portal.</p>
+<h3 id="7-3-por-palabras">7.4. Por líneas</h3>
+<p>Para ir a la línea anterior, mantenemos el punto 1 o el 4 y deslizamos otro dedo hacia arriba. Hacia abajo, avanzamos a la línea siguiente. En editores con ajuste automático, una línea depende del ancho de la pantalla y puede no coincidir con un párrafo. «Línea» y «párrafo entero» no son sinónimos.</p>
+<p>Preparamos una nota de cuatro líneas de tareas. Desde el final, subimos hasta la primera y bajamos otra vez. Si la aplicación no admite el movimiento, probamos en un editor sencillo antes de dar por roto el teclado.</p>
+<h3 id="7-4-por-lineas">7.5. Al principio y al final del campo</h3>
+<p>Para ir al principio, mantenemos los puntos 1 y 2 a la vez, o como alternativa el 4 y el 5, y deslizamos otro dedo hacia arriba. Hacia abajo nos lleva al final. Es muchísimo más rápido que retroceder cincuenta veces cuando la nota es larga.</p>
+<p>Práctica. Escribimos dos párrafos. Saltamos directamente al principio, añadimos el título Mis notas, creamos una línea nueva y volvemos al final. Revisamos todo el texto antes de guardar. Si el título aparece en otro sitio, repetimos el ejercicio fijándonos en dónde está el cursor y no en las pulsaciones que creemos haber hecho.</p>
+<h3 id="7-5-al-principio-y-al-final-del-campo">7.6. Niveles de navegación</h3>
+<p>Hay otro modo de moverse. Podemos cambiar la granularidad con tres dedos hacia la izquierda (opción anterior) o tres dedos hacia la derecha (opción siguiente). Una vez elegida la unidad, un dedo hacia arriba retrocede y un dedo hacia abajo avanza según esa unidad. Así recorremos caracteres o palabras sin tener que mantener un punto cada vez.</p>
+<p>Los movimientos directos con puntos van mejor cuando alternamos mucho entre unidades. La granularidad es más cómoda cuando queremos repetir el mismo tipo de desplazamiento varias veces seguidas. Pueden usar las dos y quedarse con la que les resulte más natural.</p>
+<h3 id="7-6-niveles-de-navegacion">7.7. Ejercicio de corrección localizada</h3>
+<p>Escribimos Mañana llamaré a mi amgo. Llevamos el cursor hasta donde falta la i y la insertamos para obtener amigo. Después escribimos Tengo una reunón importante. y añadimos la i que falta en reunión. Si el cursor nos da dudas, practicamos primero con palabras de tres letras. Es mucho mejor aprender a insertar con precisión que reescribir frases enteras por miedo a equivocarnos.</p>
+<h2 id="7-7-ejercicio-de-correccion-localizada">Módulo 8. Seleccionar, copiar, cortar y pegar</h2>
+<h3 id="modulo-8-seleccionar-copiar-cortar-y-pegar">8.1. Seleccionar no es mover</h3>
+<p>Mover el cursor cambia el punto de inserción. Seleccionar marca un fragmento para hacer algo con él. Por eso los gestos se parecen, solo que ahora se desliza con dos dedos en lugar de uno. Si una selección abarca más texto del previsto, hay que verificarla antes de cortar, borrar o ponerse a escribir: en un editor normal, escribir sobre una selección la reemplaza, y no siempre es lo que queríamos.</p>
+<h3 id="8-1-seleccionar-no-es-mover">8.2. Seleccionar caracteres y palabras</h3>
+<p>Para seleccionar el carácter anterior, mantenemos el punto 3 o el 6 y deslizamos dos dedos hacia arriba. Hacia abajo, seleccionamos el siguiente. Para la palabra anterior, mantenemos el punto 2 o el 5 y deslizamos dos dedos hacia arriba. Hacia abajo, la siguiente.</p>
+<p>Probamos en una nota con camisa azul. Desde el final seleccionamos azul y escribimos verde, comprobando que el cambio ha afectado solo a esa palabra. Los espacios también cuentan: si quedan dos palabras pegadas o un espacio de más, lo arreglamos antes de seguir.</p>
+<h3 id="8-2-seleccionar-caracteres-y-palabras">8.3. Selecciones extensas</h3>
+<p>Para seleccionar todo el texto del campo, mantenemos el punto 1 o el punto 4 y deslizamos tres dedos hacia la izquierda. Para seleccionar desde el cursor hasta el principio, mantenemos 1 y 2 a la vez, o 4 y 5, y deslizamos dos dedos hacia arriba. Hacia abajo, seleccionamos hasta el final. Son operaciones potentes, de las que conviene practicar en un documento de prueba y comprobar hasta dónde llega la selección antes de tocar nada.</p>
+<h3 id="8-3-selecciones-extensas">8.4. Copiar, cortar y pegar</h3>
+<p>El portapapeles es un almacén temporal. Copiar conserva el original y guarda una copia. Cortar quita el fragmento de su sitio y lo guarda. Pegar pone el contenido del portapapeles donde esté el cursor.</p>
+<p>Para copiar, mantenemos el punto 1 o el 4 y deslizamos tres dedos hacia abajo. Para cortar, mantenemos el 1 o el 4 y deslizamos tres dedos hacia arriba. Para pegar, mantenemos el 1 o el 4 y deslizamos tres dedos hacia la derecha. Ojo con no mezclarlos con el de seleccionar todo, que usa los mismos puntos y se parece bastante.</p>
+<p>Escribimos El braille me permite escribir. Seleccionamos todo y copiamos. Llevamos el cursor al final, creamos una línea nueva y pegamos. Ahora debe haber dos ejemplares de la misma frase. Si queremos mover un fragmento en vez de duplicarlo, lo cortamos y lo pegamos en otra posición, aunque yo no me estrenaría con eso sobre un texto irreemplazable.</p>
+<h3 id="8-4-copiar-cortar-y-pegar">8.5. Copiar entre aplicaciones</h3>
+<p>Escribimos una dirección inventada o una nota breve en Keep. Seleccionamos, copiamos, ocultamos el teclado y abrimos un borrador de Gmail. Activamos el campo del mensaje, volvemos al teclado braille y pegamos. La operación nos enseña que el portapapeles sirve entre aplicaciones compatibles.</p>
+<p>Eso sí, no es un almacén permanente. Android puede eliminar con el tiempo ciertos contenidos copiados, y algunos campos protegidos restringen la operación. Si al pegar no aparece nada, antes de culpar a TalkBack probamos en otra nota y comprobamos que el campo de destino admite texto.</p>
+<h3 id="8-5-copiar-entre-aplicaciones">8.6. Ejercicio de edición completa</h3>
+<p>Creamos tres líneas: Hoy compraré pan., Mañana llamaré a Elena. y Después revisaré el correo. Cambiamos pan por fruta, copiamos la tercera línea, la pegamos al final y comprobamos que la duplicación es correcta. Después eliminamos la copia para recuperar el documento original. El objetivo no es ganar velocidad, sino entender qué estamos moviendo, qué hemos seleccionado y dónde se ha quedado el cursor.</p>
+<h2 id="8-6-ejercicio-de-edicion-completa">Módulo 9. Revisión ortográfica y personalización</h2>
+<h3 id="modulo-9-revision-ortografica-y-personalizacion">9.1. Revisar errores desde el teclado</h3>
+<p>Entre los niveles de navegación del teclado braille hay un modo de revisión, siempre que nuestra configuración lo ofrezca. Para entrar, cambiamos la granularidad con tres dedos hacia la izquierda o hacia la derecha hasta que TalkBack anuncie la opción correspondiente. Una vez dentro, un dedo hacia abajo busca la siguiente errata detectada y uno hacia arriba la anterior. Un dedo hacia la derecha escucha la sugerencia siguiente y uno hacia la izquierda la anterior. Dos dedos hacia la derecha confirman la sugerencia elegida, y dos dedos hacia la izquierda la deshacen.</p>
+<p>Para salir del modo de revisión y escribir de nuevo, cambiamos la granularidad con tres dedos hacia la izquierda o hacia la derecha hasta abandonar esa opción. Si no salimos, los gestos de revisión seguirán interfiriendo con la escritura. Ese último gesto no es un «deshacer» universal que sirva para cualquier corte, pegado o borrado. Se refiere solo a las sugerencias del corrector. Y tampoco esperen milagros: el corrector no detecta una palabra válida usada por error. Casa y masa están perfectamente escritas, aunque una no sea la que queríamos. El corrector, por muy listo que sea, no sabe qué queríamos decir.</p>
+<h3 id="9-1-revisar-errores-desde-el-teclado">9.2. Qué hacer si no aparecen sugerencias</h3>
+<p>La revisión depende del corrector ortográfico de Android, del idioma y del campo en el que escribimos. Metemos a propósito una palabra mal escrita, como tecladdo, en una nota sencilla. Si el modo no la detecta, miramos qué servicio de corrección está activo, si admite español y si funciona en otra aplicación. Que no haya sugerencias no demuestra, ni de lejos, que el teclado braille esté averiado.</p>
+<p>Cuando aparezca una propuesta, la escuchamos entera antes de aceptarla. Con los nombres propios, los lugares y los términos tecnológicos hay que ir con pies de plomo. No tenemos por qué cambiar una palabra correcta solo porque el corrector no la conozca. Es un corrector, no un académico de la lengua.</p>
+<h3 id="9-2-que-hacer-si-no-aparecen-sugerencias">9.3. Personalizar gestos en versiones recientes</h3>
+<p>TalkBack 16.1 incorporó la posibilidad de personalizar los gestos del teclado braille, según documenta Google. Está en Ajustes de TalkBack &gt; Teclado braille &gt; Gestos. Elegimos la acción, pulsamos Cambiar gesto cuando aparezca y hacemos el nuevo movimiento dos veces para confirmarlo. Si choca con otra asignación, el sistema lo avisa. Algunas acciones admiten el equivalente reflejado para las dos manos.</p>
+<p>También se puede restablecer un gesto concreto, quitarle su asignación o recuperar todos los predeterminados con Restablecer todos los gestos. Los tres gestos reservados (ocultar el teclado, cambiar al siguiente y abrir la ayuda) no se tocan. Antes de ponerse a personalizar, apunten en una nota qué piensan cambiar. Así sabremos volver a una configuración conocida cuando algo salga raro.</p>
+<h3 id="9-3-personalizar-gestos-en-versiones-recientes">9.4. Cuándo personalizar y cuándo no</h3>
+<p>Si todavía confundimos un dedo con dos dedos hacia la izquierda, cambiar las asignaciones no nos va a salvar. Primero aprendemos el funcionamiento de fábrica y después cambiamos solo lo que nos dé un problema real. Quien escribe sobre una mesa puede preferir apoyarse en puntos distintos que quien sostiene el teléfono en el aire, y por eso el sistema ofrece alternativas: para que cada cual escoja las más cómodas, no para que las probemos todas el primer día.</p>
+<p>Ejercicio. Consultamos la lista de gestos sin modificar nada. Localizamos los de mover el cursor, seleccionar una palabra, copiar y pegar. Volvemos a una nota y practicamos cada función. Solo si encontramos un problema concreto nos atrevemos a experimentar con una asignación personalizada.</p>
+<h2 id="9-4-cuando-personalizar-y-cuando-no">Módulo 10. Escribir en aplicaciones reales</h2>
+<h3 id="modulo-10-escribir-en-aplicaciones-reales">10.1. La misma idea, interfaces diferentes</h3>
+<p>El teclado braille introduce texto, y TalkBack maneja los controles de la aplicación. Esta distinción nos acompañará en WhatsApp, en Gmail, en Telegram y en Chrome. Mientras escribimos, los gestos del teclado sustituyen temporalmente a muchos de los gestos normales del lector. Al terminar, ocultamos el teclado con dos dedos hacia abajo y recuperamos la exploración y el doble toque para activar botones.</p>
+<p>No todas las aplicaciones tienen el mismo botón Enviar ni tratan igual los saltos de línea. Cuando escribamos para otra persona, mejor revisar antes de confirmar. Las primeras prácticas, en borradores, notas personales o conversaciones de prueba.</p>
+<h3 id="10-1-la-misma-idea-interfaces-diferentes">10.2. WhatsApp, paso a paso</h3>
+<p>Abrimos una conversación donde podamos practicar sin molestar a nadie. Localizamos el campo Escribir mensaje y lo activamos con doble toque. Si aparece otro método de introducción, elegimos el teclado braille de TalkBack. Escribimos Hola, estoy aprendiendo a escribir en braille con Android. y corregimos cualquier falta antes de enviar.</p>
+<p>Para ver los controles de la conversación, ocultamos el teclado con dos dedos hacia abajo, recorremos la pantalla hasta Enviar y activamos el botón. Es mucho más fiable que suponer que el gesto de confirmar funcionará siempre igual. WhatsApp, además, tiene en Ajustes &gt; Chats una opción de que la tecla Intro envíe el mensaje, cuyo nombre exacto puede variar según la versión. Esa opción es de WhatsApp, no del teclado braille.</p>
+<p>Práctica. Preparamos un mensaje con saludo, dos párrafos y despedida. Comprobamos que los saltos de línea no hayan enviado el contenido antes de tiempo. Revisamos tildes y puntuación, ocultamos el teclado y solo entonces usamos el botón de enviar. Si no queremos mandar nada, cancelamos el ejercicio, que es mucho mejor que usar a una persona real como banco de pruebas.</p>
+<h3 id="10-2-whatsapp-paso-a-paso">10.3. Telegram y Mensajes guardados</h3>
+<p>En Telegram elegimos una conversación, activamos el campo y escribimos con el mismo método. La aplicación tiene sus propios controles para enviar, adjuntar y desplazarse por los mensajes. Mensajes guardados, cuando está disponible en nuestra cuenta, es un sitio estupendo para practicar sin escoger a otra persona como destinataria. Allí podemos escribirnos a nosotros mismos con total tranquilidad.</p>
+<p>Escribimos una frase, luego otra con una fecha y otra con signos de interrogación. Revisamos el resultado, sobre todo ¿ y ?, y usamos el control de envío de la aplicación cuando queramos conservar el mensaje. El gesto de nueva línea del teclado braille no tiene por qué hacer lo mismo que una tecla configurada para enviar.</p>
+<h3 id="10-3-telegram-y-mensajes-guardados">10.4. Gmail: destinatario, asunto y cuerpo</h3>
+<p>Abrimos Gmail y elegimos Redactar. La pantalla tiene campos distintos: destinatario, asunto y cuerpo del mensaje. En Para podemos escribir una dirección o elegir un contacto sugerido. Si es una dirección, revisamos con especial cuidado la arroba, el punto y cualquier guion. No basta con oír las letras: hay que comprobar que Gmail ha reconocido bien al destinatario.</p>
+<p>Pasamos al campo Asunto y escribimos Prueba de braille en Android. Después activamos el cuerpo del correo y escribimos:</p>
+<p>Hola, buenos días.</p>
+<p>Estoy probando el teclado braille de TalkBack. Puedo escribir un mensaje, revisarlo y corregirlo sin usar necesariamente el teclado convencional.</p>
+<p>Un saludo.</p>
+<p>Revisamos el texto, ocultamos el teclado y comprobamos destinatario y asunto. Si solo estamos practicando, guardamos el mensaje como borrador. Si de verdad queremos enviarlo, localizamos el botón Enviar y lo activamos. Adjuntar un archivo, elegir un contacto o cambiar las opciones del mensaje son tareas de la interfaz de Gmail, no combinaciones braille.</p>
+<h3 id="10-4-gmail-destinatario-asunto-y-cuerpo">10.5. Google Keep: una nota y una lista</h3>
+<p>Abrimos Keep y creamos una nota de texto. Escribimos el título Para mañana y tres líneas: Revisar el correo., Preparar la llamada. y Leer un documento. Guardamos y volvemos a abrirla para comprobar que ha conservado la estructura. Si creamos una lista de verificación, cada elemento puede tener su propia casilla, y una cosa es escribir el texto y otra marcarlo como hecho, que es operación de TalkBack.</p>
+<p>La ventaja de Keep para este curso es que nos deja ensayar sin enviar nada a nadie. Es el sitio ideal para comprobar una mayúscula, una selección de palabra o un pegado antes de repetir la jugada en un mensaje de verdad.</p>
+<h3 id="10-5-google-keep-una-nota-y-una-lista">10.6. Chrome: búsquedas, direcciones y formularios</h3>
+<p>Abrimos Chrome, activamos la barra de direcciones y escribimos teclado braille de TalkBack. Si el campo ofrece la acción Buscar, usamos el procedimiento que funcione en nuestra versión o, para ir sobre seguro, ocultamos el teclado y activamos el control correspondiente. Una búsqueda no es lo mismo que una dirección web exacta.</p>
+<p>Cuando haya que escribir una dirección, comprobamos los puntos, las barras y demás caracteres. Si el teclado braille no traduce un símbolo como esperamos, cambiamos un momento al teclado convencional, lo insertamos y regresamos. Nadie nos obliga a escribir una dirección enrevesada por un solo método si otro nos da menos disgustos.</p>
+<p>En los formularios encontraremos campos de texto, casillas, desplegables y botones. El teclado braille sirve para escribir en los campos compatibles. Para marcar una casilla, elegir una fecha o activar Enviar formulario, volvemos a los gestos normales de TalkBack. Una dificultad del formulario no es un fallo general del teclado, aunque a las tres de la tarde, con prisa, lo parezca.</p>
+<h3 id="10-6-chrome-busquedas-direcciones-y-formularios">10.7. Cuando una aplicación se resiste</h3>
+<p>Si el braille funciona en Keep pero falla en un editor concreto, comprobamos primero que el campo esté activado. Después probamos el mismo gesto en otra aplicación. Si solo falla en ese editor, podemos redactar en una nota accesible, copiar el texto y pegarlo en el destino, siempre que el campo lo permita. También vale usar un teclado alternativo.</p>
+<p>A veces una aplicación tiene una barrera de accesibilidad de verdad, y reconocerla sirve más que cambiar diez ajustes que antes funcionaban. Si queremos avisar al desarrollador, le damos el nombre y la versión de la aplicación, el modelo del teléfono, las versiones de Android y TalkBack y el gesto que provoca el problema, sin compartir datos personales que no hagan falta.</p>
+<h3 id="10-7-cuando-una-aplicacion-se-resiste">10.8. Ejercicio de vida real</h3>
+<p>Escribimos una nota en Keep con tres recordatorios. Copiamos el segundo a un borrador de Gmail, le añadimos una frase y guardamos. Después escribimos un resumen en Mensajes guardados de Telegram. Para terminar, abrimos Chrome y hacemos una búsqueda corta. Si hemos alternado con soltura entre teclado y navegación, ya podemos usar lo aprendido fuera de los ejercicios de letras.</p>
+<h2 id="10-8-ejercicio-de-vida-real">Módulo 11. Alternar braille, teclado convencional y dictado</h2>
+<h3 id="modulo-11-alternar-braille-teclado-convencional-y-dictado">11.1. Saber elegir también es saber escribir</h3>
+<p>No tenemos por qué usar braille para absolutamente todo. A veces será el método más rápido y más discreto. Otras veces nos convendrá dictar una frase o escribir un símbolo con Gboard. Lo que cuenta es conocer las alternativas y poder cambiar sin perder el texto.</p>
+<p>Con el teclado braille abierto, tres dedos hacia abajo cambian al siguiente teclado disponible. Para volver al braille usamos el selector de métodos de introducción que ofrezca nuestro teléfono. Este cambio no es lo mismo que ocultar el teclado con dos dedos hacia abajo.</p>
+<h3 id="11-1-saber-elegir-tambien-es-saber-escribir">11.2. Gboard como apoyo</h3>
+<p>Gboard es el teclado de Google: teclas convencionales, números, símbolos y bastantes cosas más. Su comportamiento con TalkBack depende de la preferencia de escritura que tengamos configurada. No vamos a convertir este curso en un manual de Gboard, pero sí aprenderemos a recurrir a él cuando un carácter especial se nos resista o una aplicación no acepte algún gesto.</p>
+<p>Práctica. En una nota escribimos El correo de prueba es usando braille. Pasamos al teclado convencional para meter una dirección inventada y comprobamos sus símbolos. Volvemos al braille para añadir y ya he comprobado que está bien escrito. La frase tiene que seguir en el mismo campo durante todo el cambio.</p>
+<h3 id="11-2-gboard-como-apoyo">11.3. Dictar texto no es grabar audio</h3>
+<p>El dictado convierte palabras pronunciadas en texto escrito. Un mensaje de voz, en cambio, es una grabación sonora. Para dictar activamos un campo, elegimos Gboard y buscamos la tecla o el botón del micrófono, siempre que esté disponible y hayamos dado el permiso correspondiente.</p>
+<p>Podemos decir Mañana revisaré los documentos y después llamaré por teléfono. y ver qué aparece escrito. Algunas configuraciones permiten dictar signos de puntuación o los añaden automáticamente, aunque eso depende del idioma, del reconocimiento y del aparato. No hay que prometerse los mismos comandos de voz en cualquier Android. Algunos Pixel tienen funciones de dictado más avanzadas, pero también dependen del modelo, del idioma y de la versión. Para este curso nos basta con el dictado normal y con revisar el resultado mediante TalkBack.</p>
+<h3 id="11-3-dictar-texto-no-es-grabar-audio">11.4. Corrección después de dictar</h3>
+<p>El reconocimiento de voz tropieza con nombres propios, cifras y palabras poco frecuentes. Dictamos una nota breve, volvemos al teclado braille y corregimos dos palabras que el sistema haya entendido mal. Si no se ha equivocado (que a veces pasa), estropeamos a propósito una palabra para practicar la corrección.</p>
+<p>Dictar tampoco es lo más apropiado para información privada si hay gente alrededor. El braille permite escribir sin pronunciar el contenido, aunque la respuesta hablada de TalkBack también puede oírse si usamos el altavoz. La privacidad depende del sitio, de los auriculares y del comportamiento de la aplicación.</p>
+<h3 id="11-4-correccion-despues-de-dictar">11.5. Campos protegidos y contraseñas</h3>
+<p>Una contraseña distingue mayúsculas, minúsculas, números y símbolos. Algunos campos protegidos limitan su lectura o funcionan distinto que un editor normal. Si el teclado braille no aparece o no nos deja verificar un signo, usamos el procedimiento seguro que admita la aplicación. No desactivamos protecciones del dispositivo para completar una práctica.</p>
+<p>Antes de enviar un dato importante, confirmamos destinatario, contenido y consecuencias. Una palabra equivocada en una nota es una molestia. Una cifra mal puesta en un pago, o una dirección de correo errónea, ya es otra cosa.</p>
+<h3 id="11-5-campos-protegidos-y-contrasenas">11.6. Ejercicio mixto</h3>
+<p>Creamos una nota de tres párrafos. El primero lo escribimos en braille, el segundo lo dictamos y el tercero vuelve a escribirse en braille. Después revisamos todo el documento y corregimos tildes, nombres y puntuación. Lo que buscamos es alternar métodos sin perder ni el cursor ni el contenido que ya teníamos.</p>
+<h2 id="11-6-ejercicio-mixto">Módulo 12. Escribir con comodidad y precisión</h2>
+<h3 id="modulo-12-escribir-con-comodidad-y-precision">12.1. Una configuración estable vale más que veinte pruebas</h3>
+<p>Durante los primeros días, lo mejor es usar español, braille sin abreviar, un modo de escritura cómodo y los gestos de fábrica. Ya personalizaremos cuando sepamos qué movimiento nos incomoda de verdad. Si cambiamos muchas cosas a la vez, después será imposible averiguar qué provocó un error.</p>
+<p>El tamaño de la pantalla influye en la postura, pero no hay regla universal. Unas manos pequeñas pueden sentirse mejor con una distribución que unas manos grandes encuentren incómoda. Y no todo el mundo prefiere sujetar el teléfono. Probamos las dos posiciones y nos quedamos con la que permita escribir sin forzar los dedos.</p>
+<h3 id="12-1-una-configuracion-estable-vale-mas-que-veinte-pruebas">12.2. Coordinación antes que velocidad</h3>
+<p>La dificultad típica del principio no es memorizar la m. Es tocar a la vez los puntos 1, 3 y 4 sin que uno de los dedos llegue tarde. Sí, el dedo rezagado otra vez. Practicamos familias cortas, como a-k, b-l, c-m, y después palabras conocidas. Escribimos mesa cinco veces y escuchamos si sale igual todas las veces. Si cometemos más errores al acelerar, volvemos al ritmo anterior.</p>
+<p>No hay que golpear la pantalla. Un contacto breve y coordinado funciona mejor que una pulsación brusca. Podemos hacer pausas para descansar las manos, porque escribir braille no debería obligarnos a adoptar una postura dolorosa.</p>
+<h3 id="12-2-coordinacion-antes-que-velocidad">12.3. Ganar soltura sin perder la precisión</h3>
+<p>Repetimos una frase sencilla: Hoy he salido a caminar. Primero despacio y sin errores. Después intentamos enlazar letras y espacios con menos pausas. Cambiamos de frase para no memorizar solo el movimiento: Mañana prepararé una llamada. Y al final escribimos algo propio, como una lista de compras o la respuesta a un mensaje real.</p>
+<p>La velocidad no es la única medida del progreso. También cuenta encontrar los puntos con seguridad, corregir sin borrar de más, volver al final de una nota o saber qué hacer cuando una aplicación no acepta una operación. Quien escribe un poco más despacio pero corrige con facilidad puede terminar antes que quien tiene que rehacerlo todo.</p>
+<h3 id="12-3-ganar-soltura-sin-perder-la-precision">12.4. Respuesta hablada y táctil</h3>
+<p>TalkBack puede anunciar caracteres, palabras y varios mensajes de confirmación, según la verbosidad que tengamos configurada. Si elimina demasiada información, nos costará detectar errores. Si anuncia demasiado, nos interrumpirá sin parar. Podemos revisar las preferencias de voz y de escritura, pero cambiando una sola opción cada vez y probando qué pasa.</p>
+<p>Desde TalkBack 16.1, además, se puede reducir el retraso de los anuncios al explorar y al escribir. Con un «retraso del foco al escribir» más corto, los anuncios llegan antes después de tocar el teclado. Eso sí, la propia Google avisa de que acortar ese retraso puede dificultar algunos gestos, como el doble toque. Prueben con calma y, si empieza a fallar algo, vuelvan al valor anterior.</p>
+<p>Los sonidos y las vibraciones del equipo también ayudan. Pero una vibración no significa que una dirección, una cifra o un nombre propio hayan quedado correctos. La revisión final sigue siendo imprescindible.</p>
+<h3 id="12-4-respuesta-hablada-y-tactil">12.5. Sesiones de práctica realistas</h3>
+<p>En lugar de escribir alfabetos durante una hora, mejor diez minutos de letras, después una nota auténtica y finalmente una corrección concreta. Un día nos centramos en los números, otro en las tildes y otro en copiar y pegar. Cuando los movimientos se vuelven familiares, la herramienta ocupa cada vez menos atención y podemos concentrarnos en lo que queríamos decir, que era la idea desde el principio.</p>
+<p>Evaluación. En una nota nueva escribimos tres párrafos, corregimos una palabra en el primero, cambiamos una cifra en el segundo y copiamos una frase del tercero. Después guardamos, cerramos y volvemos a abrir. Si el resultado es el esperado, ya podemos afrontar el último bloque.</p>
+<h2 id="12-5-sesiones-de-practica-realistas">Módulo 13. Diagnosticar y resolver problemas</h2>
+<h3 id="modulo-13-diagnosticar-y-resolver-problemas">13.1. Cinco preguntas antes de tocar los ajustes</h3>
+<p>Cuando algo falla, antes de empezar a pulsar cosas conviene preguntarse: ¿qué estaba haciendo?, ¿qué ocurrió?, ¿dónde ocurrió?, ¿se repite siempre? y ¿qué ha cambiado hace poco? No hace falta responder con precisión de notario, pero sí evitar que un problema puntual acabe convertido en una cadena de cambios innecesarios.</p>
+<p>La regla es sencilla: primero se comprueba lo reversible, y solo se pasa a medidas más drásticas si hay una causa que lo justifique. Empezamos por el campo de edición, el teclado activo, el modo, la calibración y la aplicación. Después, las actualizaciones o un reinicio normal. Borrar almacenamiento, eliminar datos o restablecer el teléfono no son soluciones de primera línea, por muy tentadoras que parezcan a las once de la noche.</p>
+<h3 id="13-1-cinco-preguntas-antes-de-tocar-los-ajustes">13.2. El teclado no aparece</h3>
+<p>Activamos un campo de texto convencional en Keep. Si aparece otro teclado, buscamos el selector de métodos y elegimos el braille de TalkBack. Si no figura en la lista, entramos en Ajustes de TalkBack &gt; Teclado braille &gt; Configurar teclado braille y revisamos que esté habilitado. Comprobamos también que TalkBack esté activo y que la ampliación esté desactivada, que es lo que pide Google.</p>
+<p>Si el problema afecta solo a una aplicación, abrimos otra nota para ver si el campo es compatible. Y no reinstalamos el lector de pantalla sin haber hecho antes esta prueba básica.</p>
+<h3 id="13-2-el-teclado-no-aparece">13.3. Las letras salen distintas</h3>
+<p>Repetimos despacio una letra conocida. Comprobamos que seguimos en la disposición correcta: sobremesa o pantalla hacia fuera. Si varias letras fallan de forma persistente, recalibramos. Si solo fallan las tildes, la eñe o los símbolos, miramos el idioma de escritura antes de tocar la posición de los dedos.</p>
+<p>Con los números hacemos una prueba muy simple: signo de número seguido de las combinaciones de a, b, c y d, y esperamos oír 1234. Si falla, revisamos la tabla y el contexto en lugar de usar un número de teléfono o de cuenta de verdad como material de ensayo.</p>
+<h3 id="13-3-las-letras-salen-distintas">13.4. Fallan los gestos de edición</h3>
+<p>Comprobamos que mantenemos realmente el punto indicado mientras deslizamos los demás dedos. Si el gesto solo falla en una aplicación, repetimos la operación en Keep. Si hemos personalizado asignaciones, consultamos Teclado braille &gt; Gestos y vemos cuál está activa. Podemos restablecer solo esa operación o, como último recurso, recuperar todos los gestos de fábrica.</p>
+<p>Si una selección incluye más contenido del previsto, no cortamos ni escribimos sobre ella hasta saber qué está marcado. Una selección equivocada hace más daño que una letra mal puesta.</p>
+<h3 id="13-4-fallan-los-gestos-de-edicion">13.5. El teclado deja de responder después de editar</h3>
+<p>Ocultamos el teclado con dos dedos hacia abajo y miramos si TalkBack sigue recorriendo los controles normales. Volvemos a activar el campo, abrimos el teclado y probamos una letra sencilla. Si el problema continúa, cambiamos temporalmente al teclado convencional y probamos otra aplicación.</p>
+<p>Google menciona un caso concreto: en algunos dispositivos, si cerramos el teclado braille estando en la aplicación Mensajes, el botón Atrás puede dejar de funcionar. La salida que propone es volver a la pantalla de inicio. Si el fallo se reproduce fuera del teclado, probamos a ir a Inicio o a abrir un campo sencillo, y si persiste, un reinicio normal suele ayudar. Apuntamos modelo, versiones y secuencia de gestos para poder contar una incidencia reproducible.</p>
+<h3 id="13-5-el-teclado-deja-de-responder-despues-de-editar">13.6. TalkBack no habla o no anuncia lo escrito</h3>
+<p>Lo primero es distinguir entre perder la voz del todo y no tener eco al escribir. Si TalkBack no habla, comprobamos volumen, auriculares y salida Bluetooth. Revisamos si el lector sigue activo y si el sonido se está yendo a otro dispositivo. Si el teléfono responde pero no anuncia los caracteres, escribimos una palabra de prueba y vemos si de verdad está dentro del campo. Si lo está, el problema es de la respuesta hablada y no de la escritura braille.</p>
+<p>Los ajustes de verbosidad cambian lo que anuncia el lector. No hay que recalibrar las manos cuando el texto entra bien y lo único que ha desaparecido es la confirmación sonora. Si no recuperamos el control, tal vez necesitemos ayuda para reiniciar el teléfono con la combinación de botones que use el fabricante.</p>
+<h3 id="13-6-talkback-no-habla-o-no-anuncia-lo-escrito">13.7. Caracteres extraños o duplicados</h3>
+<p>Si un símbolo aparece mal, revisamos idioma, tabla y conversión real del carácter. Si vemos letras duplicadas junto a barras u otros signos, guardamos un ejemplo breve y anotamos la versión de TalkBack. Mi consejo es mantener TalkBack actualizado desde Google Play, y probar el fallo en un editor sencillo antes de darlo por un problema general.</p>
+<p>Si encontramos una solución provisional en alguna comunidad, hay que distinguirla de una corrección confirmada por el fabricante. Y conviene no enseñar como definitivo un truco que solo sirve para esquivar un fallo pasajero. Los trucos caducan, y los de las comunidades caducan especialmente rápido.</p>
+<h3 id="13-7-caracteres-extranos-o-duplicados">13.8. No aparecen sugerencias ortográficas</h3>
+<p>Activamos el modo de revisión y probamos con una palabra mal escrita a propósito. Si no sale ninguna propuesta, comprobamos idioma, corrector activo y funcionamiento en otra aplicación. Algunos editores usan sus propios servicios. Y que no haya sugerencias no nos impide corregir a mano, por caracteres o por palabras.</p>
+<h3 id="13-8-no-aparecen-sugerencias-ortograficas">13.9. Copiar y pegar falla</h3>
+<p>Seleccionamos y copiamos una palabra sencilla dentro de la misma nota. Pegamos al final. Si funciona, repetimos entre aplicaciones. Si solo deja de funcionar al cambiar de destino, investigamos el campo receptor. Recordemos también que el portapapeles no es un archivo permanente y que algunos campos protegidos lo restringen.</p>
+<h3 id="13-9-copiar-y-pegar-falla">13.10. Después de una actualización</h3>
+<p>Probamos primero lo fundamental: letras, espacio, borrar y ocultar el teclado. Después añadimos la navegación por caracteres y una copia sencilla. Solo entonces revisamos los gestos personalizados y los editores concretos. Una actualización del sistema puede cambiar rutas de ajustes o comportamientos de aplicaciones sin haber tocado el código braille. Antes de cambiar configuraciones, anotamos el problema.</p>
+<h3 id="13-10-despues-de-una-actualizacion">13.11. Qué información ayuda a pedir soporte</h3>
+<p>Escribimos una descripción útil: modelo y fabricante; versión de Android y de TalkBack; idioma braille activo; modo de escritura; aplicación y versión; operación exacta; resultado esperado; resultado obtenido; y si se repite. No incluimos contraseñas, códigos de verificación ni mensajes privados. Cuanto más reproducible sea el fallo, más posibilidades hay de que alguien lo arregle.</p>
+<h3 id="13-11-que-informacion-ayuda-a-pedir-soporte">13.12. Tres situaciones para practicar el diagnóstico</h3>
+<p>Caso uno: podemos escribir casa, pero al coger el teléfono en la mano aparecen letras distintas. Comprobamos primero si ha cambiado la disposición, antes de recalibrar.</p>
+<p>Caso dos: el teclado funciona en Keep pero no en el campo de un formulario web. Miramos el campo y el método de entrada, y probamos con otro editor. No borramos los datos de TalkBack.</p>
+<p>Caso tres: TalkBack recorre los botones pero no anuncia las letras que escribimos. Comprobamos el contenido real y después los ajustes de respuesta hablada. Así distinguimos un fallo de escritura de un fallo de información sonora.</p>
+<h2 id="13-12-tres-situaciones-para-practicar-el-diagnostico">Módulo 14. Prácticas finales y autonomía</h2>
+<h3 id="modulo-14-practicas-finales-y-autonomia">14.1. Un texto completo</h3>
+<p>Abrimos una nota nueva y escribimos el título Mi experiencia con el teclado braille. Debajo redactamos tres párrafos personales sobre cómo nos colocamos, qué gestos usamos mejor y qué parte nos cuesta todavía. Esta vez no copiamos un texto modelo: queremos practicar mientras pensamos en el contenido, igual que haríamos en la vida diaria.</p>
+<p>Revisamos la ortografía, añadimos una fecha y corregimos al menos una palabra del primer párrafo sin borrar lo que viene después. Luego cerramos y volvemos a abrir la nota para asegurarnos de que se ha guardado bien.</p>
+<h3 id="14-1-un-texto-completo">14.2. Un ejercicio de corrección</h3>
+<p>Escribimos a propósito Mañana llamaré a mi amgo. Después revisaré una reunón. Con movimientos por palabras y por caracteres, convertimos amgo en amigo y reunón en reunión. El ejercicio termina cuando las dos palabras están bien escritas y el resto del texto se ha conservado.</p>
+<h3 id="14-2-un-ejercicio-de-correccion">14.3. Una mudanza de párrafos</h3>
+<p>Preparamos dos párrafos breves. Copiamos el primero al final, comprobamos que está duplicado y eliminamos la copia. Repetimos una segunda vez usando cortar y pegar, pero solo dentro de una nota de prácticas. Es una buena manera de comprobar que entendemos la diferencia entre conservar el texto original y trasladarlo.</p>
+<h3 id="14-3-una-mudanza-de-parrafos">14.4. Un mensaje y un correo</h3>
+<p>Redactamos un mensaje de dos párrafos en una conversación de prueba de Telegram o WhatsApp. Lo revisamos antes de enviarlo. Después abrimos Gmail, creamos un borrador, escribimos asunto y cuerpo, pegamos una frase tomada de una nota y guardamos. No hace falta mandar nada a nadie para demostrar que hemos completado el ejercicio.</p>
+<h3 id="14-4-un-mensaje-y-un-correo">14.5. Una sesión combinada</h3>
+<p>Escribimos el comienzo de una nota en braille, dictamos el segundo párrafo, corregimos con el teclado braille y usamos Gboard para algún carácter especial si lo necesitamos. Después ocultamos el teclado y leemos con TalkBack lo que realmente ha quedado escrito. El ejercicio está completo si somos capaces de elegir el método en cada momento sin perder el documento.</p>
+<h3 id="14-5-una-sesion-combinada">14.6. Evaluación práctica</h3>
+<p>Podemos dar por dominada la base cuando sabemos activar y ocultar el teclado, encontrar y calibrar los seis puntos, escribir letras, números, tildes y signos habituales, mover el cursor, seleccionar y copiar texto, trabajar en varias aplicaciones, cambiar al teclado convencional y dar los primeros pasos de un diagnóstico. No hace falta escribir a ninguna velocidad concreta. La meta es la autonomía, no una competición.</p>
+<h3 id="14-6-evaluacion-practica">14.7. Cerrar el curso sin cerrar el aprendizaje</h3>
+<p>Cuando empezamos, el teléfono era una superficie lisa donde teníamos que imaginar seis puntos. Ahora esa misma superficie nos permite redactar notas, enviar mensajes y corregir textos. No hemos sustituido el braille por otra cosa: hemos encontrado una manera nueva de usarlo.</p>
+<p>La práctica de cada día hará el resto. Unas veces escribiremos sobre una mesa y otras sostendremos el teléfono en el aire. A veces dictaremos, a veces usaremos el teclado convencional, a veces una línea braille externa. No hay que elegir una sola herramienta para todas las situaciones. Lo importante es saber cuál necesitamos y poder usarla con seguridad.</p>
+<p>Y si algo falla, ya no empezaremos pulsando todo a ver si suena la flauta. Primero comprobamos y después actuamos. Y cuando el dedo rezagado vuelva a llegar tarde, que volverá, ya sabremos que no es el fin del mundo. Que el teclado nos ayude a escribir y no acabe siendo el protagonista de nuestra atención: esa era, desde el principio, la verdadera finalidad de este curso.</p>
+<p>Un abrazo.</p>
+<p>Tony Acosta · TifloAcosta</p>
+<h2 id="14-7-cerrar-el-curso-sin-cerrar-el-aprendizaje">Anexo A. Referencia rápida de gestos del teclado braille</h2>
+<p>Aquí tienen la chuleta. Recoge las asignaciones de fábrica del teclado braille de TalkBack, tal como las documenta Google. Si han personalizado alguna acción, manda lo que hayan configurado en su teléfono. Y recuerden que «mantener el punto» significa sostener ese contacto mientras otro dedo (o dos, o tres, según el caso) hace el deslizamiento.</p>
+<h3 id="anexo-a-referencia-rapida-de-gestos-del-teclado-braille">A.1. Operaciones esenciales</h3>
+<ul>
+<li>Espacio: un dedo hacia la derecha.</li>
+<li>Borrar el carácter anterior: un dedo hacia la izquierda.</li>
+<li>Borrar la palabra anterior: dos dedos hacia la izquierda.</li>
+<li>Nueva línea: dos dedos hacia la derecha.</li>
+<li>Enviar o confirmar texto: dos dedos hacia arriba, si el campo lo admite.</li>
+<li>Ocultar teclado braille: dos dedos hacia abajo.</li>
+<li>Cambiar al siguiente teclado: tres dedos hacia abajo.</li>
+<li>Ayuda y opciones del teclado: tres dedos hacia arriba.</li>
+</ul>
+<h3 id="a-1-operaciones-esenciales">A.2. Mover el cursor</h3>
+<ul>
+<li>Carácter anterior: mantener punto 3 o 6 y deslizar otro dedo hacia arriba.</li>
+<li>Carácter siguiente: mantener punto 3 o 6 y deslizar otro dedo hacia abajo.</li>
+<li>Palabra anterior: mantener punto 2 o 5 y deslizar otro dedo hacia arriba.</li>
+<li>Palabra siguiente: mantener punto 2 o 5 y deslizar otro dedo hacia abajo.</li>
+<li>Línea anterior: mantener punto 1 o 4 y deslizar otro dedo hacia arriba.</li>
+<li>Línea siguiente: mantener punto 1 o 4 y deslizar otro dedo hacia abajo.</li>
+<li>Principio del campo: mantener puntos 1 y 2 o 4 y 5; deslizar otro dedo hacia arriba.</li>
+<li>Final del campo: mantener puntos 1 y 2 o 4 y 5; deslizar otro dedo hacia abajo.</li>
+<li>Granularidad anterior: tres dedos hacia la izquierda.</li>
+<li>Granularidad siguiente: tres dedos hacia la derecha.</li>
+<li>Retroceder según la granularidad: un dedo hacia arriba.</li>
+<li>Avanzar según la granularidad: un dedo hacia abajo.</li>
+</ul>
+<h3 id="a-2-mover-el-cursor">A.3. Seleccionar y editar</h3>
+<ul>
+<li>Seleccionar carácter anterior: mantener punto 3 o 6; deslizar dos dedos hacia arriba.</li>
+<li>Seleccionar carácter siguiente: mantener punto 3 o 6; deslizar dos dedos hacia abajo.</li>
+<li>Seleccionar palabra anterior: mantener punto 2 o 5; deslizar dos dedos hacia arriba.</li>
+<li>Seleccionar palabra siguiente: mantener punto 2 o 5; deslizar dos dedos hacia abajo.</li>
+<li>Seleccionar todo: mantener punto 1 o 4; deslizar tres dedos hacia la izquierda.</li>
+<li>Seleccionar desde el cursor hasta el principio: mantener 1 y 2 o 4 y 5; deslizar dos dedos hacia arriba.</li>
+<li>Seleccionar desde el cursor hasta el final: mantener 1 y 2 o 4 y 5; deslizar dos dedos hacia abajo.</li>
+<li>Copiar: mantener punto 1 o 4; deslizar tres dedos hacia abajo.</li>
+<li>Cortar: mantener punto 1 o 4; deslizar tres dedos hacia arriba.</li>
+<li>Pegar: mantener punto 1 o 4; deslizar tres dedos hacia la derecha.</li>
+</ul>
+<h3 id="a-3-seleccionar-y-editar">A.4. Revisión de texto</h3>
+<p>Primero hay que entrar en el modo de revisión cambiando la granularidad, y después valen estos gestos.</p>
+<ul>
+<li>Siguiente posible errata: un dedo hacia abajo.</li>
+<li>Errata anterior: un dedo hacia arriba.</li>
+<li>Siguiente sugerencia: un dedo hacia la derecha.</li>
+<li>Sugerencia anterior: un dedo hacia la izquierda.</li>
+<li>Confirmar la sugerencia: dos dedos hacia la derecha.</li>
+<li>Deshacer la sugerencia: dos dedos hacia la izquierda. Recuerden que no es un deshacer universal.</li>
+<li>Para abandonar la revisión ortográfica: tres dedos a izquierda o derecha hasta salir del nivel de revisión y recuperar la escritura habitual.</li>
+</ul>
+<h3 id="a-4-revision-de-texto">A.5. Calibración</h3>
+<ul>
+<li>Ambas manos a la vez: mantener los seis puntos unos tres segundos, hasta recibir la confirmación.</li>
+<li>Una mano y luego la otra: tres dedos hacia arriba, Actualizar posición de puntos y seguir las indicaciones.</li>
+<li>Para recordar: las posiciones se guardan por separado para sobremesa y pantalla hacia fuera.</li>
+</ul>
+<h2 id="a-5-calibracion">Anexo B. Braille español: letras, cifras y signos</h2>
+<p>Estas combinaciones pertenecen al código braille español. Son la referencia del código, no una promesa de que cada campo y cada versión del teclado las traduzca exactamente igual. Los signos que dependen del contexto, sobre todo los que dan caracteres distintos en el texto digital, merecen una comprobación extra.</p>
+<h3 id="anexo-b-braille-espanol-letras-cifras-y-signos">B.1. Alfabeto</h3>
+<ul>
+<li>a: 1; b: 12; c: 14; d: 145; e: 15; f: 124; g: 1245; h: 125; i: 24; j: 245.</li>
+<li>k: 13; l: 123; m: 134; n: 1345; ñ: 12456; o: 135; p: 1234; q: 12345; r: 1235; s: 234.</li>
+<li>t: 2345; u: 136; v: 1236; w: 2456; x: 1346; y: 13456; z: 1356.</li>
+</ul>
+<h3 id="b-1-alfabeto">B.2. Vocales acentuadas y signos de letra</h3>
+<ul>
+<li>á: 12356; é: 2346; í: 34; ó: 346; ú: 23456; ü: 1256.</li>
+<li>Signo de mayúscula: 46.</li>
+<li>Signo de número: 3456.</li>
+</ul>
+<h3 id="b-2-vocales-acentuadas-y-signos-de-letra">B.3. Cifras después del signo de número</h3>
+<ul>
+<li>a = 1; b = 2; c = 3; d = 4; e = 5.</li>
+<li>f = 6; g = 7; h = 8; i = 9; j = 0.</li>
+</ul>
+<h3 id="b-3-cifras-despues-del-signo-de-numero">B.4. Puntuación habitual</h3>
+<ul>
+<li>Punto: 3.</li>
+<li>Coma: 2.</li>
+<li>Punto y coma: 23.</li>
+<li>Dos puntos: 25.</li>
+<li>Puntos suspensivos: tres celdas seguidas del punto 3.</li>
+<li>Interrogación de apertura y de cierre: 26.</li>
+<li>Exclamación de apertura y de cierre: 235.</li>
+<li>Comillas básicas de apertura y de cierre: 236.</li>
+<li>Abrir paréntesis: 126.</li>
+<li>Cerrar paréntesis: 345.</li>
+<li>Guion: 36. Para la raya de diálogo, el código tradicional usa dos celdas seguidas de 36.</li>
+</ul>
+<p>Cuidado con esto: que el código de signos sea el mismo no obliga a Android a elegir bien entre ¿ y ?, entre ¡ y ! o entre unas comillas y otras. El contexto y el traductor tienen voz y voto. Para los caracteres especiales de una dirección o una contraseña, miren siempre qué ha quedado escrito y, si hace falta, recurran al teclado convencional.</p>
+<h2 id="b-4-puntuacion-habitual">Anexo C. Diagnóstico rápido</h2>
+<p>Para cuando algo falla y no apetece releer el módulo 13. Primero lo más sencillo, siempre.</p>
+<ul>
+<li>No aparece el braille: activar TalkBack, comprobar que la ampliación esté desactivada, revisar el método de entrada y que el teclado braille esté habilitado.</li>
+<li>Escribe letras equivocadas: mirar el modo (sobremesa o pantalla hacia fuera), la colocación de los dedos y la calibración.</li>
+<li>Falla la ñ o una vocal acentuada: revisar el idioma de escritura y el tipo de braille.</li>
+<li>No salen bien las interrogaciones o las comillas: mirar el carácter real que se inserta y, si la conversión no es la esperada, usar un método alternativo.</li>
+<li>Un gesto hace otra cosa: verificar cuántos dedos se deslizan, qué punto se mantiene y si hay personalización.</li>
+<li>Se borra demasiado: parar, comprobar la selección y la posición del cursor antes de seguir editando.</li>
+<li>Funciona en una app y en otra no: probar un editor sencillo y valorar si es una limitación del campo.</li>
+<li>No aparecen sugerencias de revisión: comprobar el modo de revisión, el idioma, el servicio de corrección y el editor.</li>
+<li>No se puede pegar: comprobar la selección, el portapapeles y las restricciones del campo de destino.</li>
+<li>TalkBack deja de hablar: revisar volumen, auriculares, salida Bluetooth y si el lector sigue activo; reiniciar con normalidad si hace falta.</li>
+<li>La exploración táctil se descoloca después de editar: ocultar el teclado, salir del campo, probar los controles normales, cambiar de aplicación y anotar si persiste.</li>
+<li>El problema empezó tras una actualización: verificar las funciones básicas y las versiones, probar un editor sencillo, revisar personalizaciones y guardar los pasos para reproducirlo.</li>
+<li>Nunca como primera solución: borrar el almacenamiento o restaurar el teléfono de fábrica. Pueden llevarse por delante configuraciones y otros datos.</li>
+</ul>
+<h2 id="anexo-c-diagnostico-rapido">Anexo D. Alcance, actualización y compatibilidad</h2>
+<h3 id="anexo-d-alcance-actualizacion-y-compatibilidad">D.1. Qué se ha contrastado</h3>
+<p>Para esta edición he cotejado con la ayuda pública de Android de Google —sin presentar esa lectura como una prueba personal en cada teléfono— los procedimientos de instalación, cambio de modo, calibración, navegación, selección, portapapeles, revisión y personalización, incluidas las notas de TalkBack 16.1 sobre gestos personalizables. Las combinaciones del braille español las he contrastado con la signografía publicada por la Comisión Braille Española. Y las incidencias prácticas que cuentan los usuarios las he tenido en cuenta para los apartados de recuperación y diagnóstico, sin convertir el testimonio de uno solo en un defecto universal.</p>
+<h3 id="d-1-que-se-ha-contrastado">D.2. Qué puede variar</h3>
+<p>Las rutas de Ajustes, las etiquetas de los botones, la disposición del selector de teclado, la respuesta de cada aplicación y la disponibilidad de la revisión o del braille contraído pueden cambiar con la versión de Android, de TalkBack, con el fabricante, con el idioma y con la propia aplicación. Los gestos del anexo A son los de fábrica, no los que haya dejado cada usuario después de trastear.</p>
+<p>La ayuda oficial de Google documenta en TalkBack 17.0 la personalización de los comandos de las líneas braille externas; un análisis comunitario de TalkBack 17.1 recoge cambios adicionales en su asignación. Son novedades interesantes, pero no equivalen a cambiar los gestos básicos del teclado braille sobre la pantalla. No he podido comprobar personalmente todos esos comandos en una línea física, por lo que los menciono como información documentada y no como experiencia propia.</p>
+<h3 id="d-2-que-puede-variar">D.3. Qué no se promete</h3>
+<p>Este curso no garantiza que todas las aplicaciones acepten todos los gestos avanzados, ni que los signos ambiguos se traduzcan solos de la forma correcta, ni que el braille contraído esté disponible para el español en cualquier configuración. Tampoco sustituye la prueba física en cada modelo de teléfono. Cuando se trate de datos críticos, la última palabra la tiene siempre el texto que de verdad se ha escrito, no el que creíamos haber escrito.</p>
+<h3 id="d-3-que-no-se-promete">D.4. Para futuras revisiones</h3>
+<p>Antes de actualizar este manual habrá que mirar los cambios de TalkBack, sobre todo la lista de gestos, los idiomas y los problemas conocidos que afecten a la entrada braille. Lo más sensible a cambios es la revisión de texto, la personalización de gestos, la conversión de signos y todo lo que dependa de la aplicación. Dicho de otra manera: esto es un curso con fecha, y la fecha es octubre de 2026. Android, cuando le apetezca, hará lo que quiera.</p>
+<h3 id="d-4-para-futuras-revisiones">D.5. Fuentes para comprobar y ampliar</h3>
+<p>Google, uso del teclado braille de TalkBack: <a href="https://support.google.com/accessibility/android/answer/9728765?hl=es">https://support.google.com/accessibility/android/answer/9728765?hl=es</a></p>
+<p>Google, novedades de TalkBack 14.0 y 14.1: <a href="https://support.google.com/accessibility/android/answer/13769260?hl=en">https://support.google.com/accessibility/android/answer/13769260?hl=en</a> y <a href="https://support.google.com/accessibility/android/answer/14252962?hl=en">https://support.google.com/accessibility/android/answer/14252962?hl=en</a></p>
+<p>Google, personalización del teclado braille en TalkBack 16.1: <a href="https://support.google.com/accessibility/android/answer/16561624?hl=es">https://support.google.com/accessibility/android/answer/16561624?hl=es</a></p>
+<p>Google, novedades de TalkBack 17.0 (comandos de líneas braille externas): <a href="https://support.google.com/accessibility/android/answer/17069786?hl=es">https://support.google.com/accessibility/android/answer/17069786?hl=es</a></p>
+<p>Advanced Braille Keyboard, ficha del desarrollador en Google Play: <a href="https://play.google.com/store/apps/details?id=abk.keyboard">https://play.google.com/store/apps/details?id=abk.keyboard</a></p>
+<p>Brailliac, ficha y fecha de versión en F-Droid: <a href="https://f-droid.org/packages/com.lukeneedham.braillekeyboard/">https://f-droid.org/packages/com.lukeneedham.braillekeyboard/</a></p>
+<p>Backtalk, documentación de su proyecto: <a href="https://github.com/trypsynth/backtalk">https://github.com/trypsynth/backtalk</a></p>
+<p>BRLTTY, guía para Android: <a href="https://brltty.app/doc/Android.html">https://brltty.app/doc/Android.html</a></p>
+<p>International Council on English Braille, reglas del UEB: <a href="https://iceb.org/ueb.html">https://iceb.org/ueb.html</a></p>
+<p>Comisión Braille Española, publicaciones y signografía: <a href="https://www.once.es/servicios-sociales/braille">https://www.once.es/servicios-sociales/braille</a></p>
+<p>Accessible Android, análisis comunitario de TalkBack 17.1: <a href="https://accessibleandroid.com/whats-new-in-talkback-17-1/">https://accessibleandroid.com/whats-new-in-talkback-17-1/</a></p>
+<p>La documentación citada avala las funciones descritas en sus versiones publicadas; no certifica que cada gesto y aplicación se comporten de forma idéntica en todos los dispositivos. El curso no incorpora pruebas de laboratorio propias en cada modelo. Si una persona comprueba una diferencia reproducible, su aportación es bienvenida para próximas revisiones.</p>
+<p>TifloAcosta · Tony Acosta · Edición de octubre de 2026</p>
+</article></main><footer class="footer"><p class="brand">TifloAcosta · Tony Acosta</p>
+<p>Edición revisada: octubre de 2026</p></footer></div></body></html>

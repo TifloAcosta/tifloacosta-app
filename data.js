@@ -1,5 +1,27 @@
 window.TIFLO_RESOURCES = [
   {
+    "id": "es-curso-braille-android-talkback-2026",
+    "lang": "es",
+    "category": "Android",
+    "title": "Curso completo de escritura braille en pantalla con Android y TalkBack",
+    "searchText": "Braille en pantalla Android TalkBack curso teclado seis puntos escritura accesibilidad",
+    "url": "https://tifloacosta.com/docs/es/curso-braille-android-talkback.html",
+    "openUrl": "https://tifloacosta.com/docs/es/curso-braille-android-talkback.html",
+    "new": true,
+    "newsDate": "2026-10-23T08:00:00Z"
+  },
+  {
+    "id": "en-android-braille-talkback-course-2026",
+    "lang": "en",
+    "category": "Android",
+    "title": "A Complete Course in On-Screen Braille Typing with Android and TalkBack",
+    "searchText": "Android braille keyboard TalkBack course UEB uncontracted on screen typing",
+    "url": "https://tifloacosta.com/docs/en/android-braille-talkback-course.html",
+    "openUrl": "https://tifloacosta.com/docs/en/android-braille-talkback-course.html",
+    "new": true,
+    "newsDate": "2026-10-23T08:00:00Z"
+  },
+  {
     "id": "en-medical-study-causes-blindness-2026",
     "lang": "en",
     "category": "Medical Studies",

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-23T19:18:17.061Z",
+  "generatedAt": "2026-10-23T22:21:15.801Z",
   "resources": [
     {
       "kind": "resource",
@@ -6144,23 +6144,6 @@
       "categories": [
         "apple",
         "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "accessible-android-2ace7b704d0866e9:en",
-      "sourceId": "accessible-android-2ace7b704d0866e9",
-      "lang": "en",
-      "title": "Viskey",
-      "summary": "Viskey is a low vision large text keyboard with high contrast and customizable themes. It supports also dictation. It currently does not work with Talkback.",
-      "body": "Published 13 October 2026 by Harri\n\nViskey is a low vision large text keyboard with high contrast and customizable themes. It supports also dictation. It currently does not work with Talkback.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nNot usable with Talkback, for low vision users only, with some self voicing.\n\nLast Tested App version and Android version:\n\n4.1, Android 13, Android 15\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility.",
-      "sourceName": "Accessible Android",
-      "originalUrl": "https://accessibleandroid.com/app/viskey/",
-      "publishedAt": "2026-10-13T19:33:00.000Z",
-      "categories": [
-        "android",
-        "apps-accesibles",
-        "tecnologia-accesibilidad"
       ]
     }
   ]

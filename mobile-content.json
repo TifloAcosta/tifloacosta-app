@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-23T19:16:42.185Z",
+  "generatedAt": "2026-10-23T19:18:17.061Z",
   "resources": [
     {
       "kind": "resource",
@@ -5514,6 +5514,102 @@
   "news": [
     {
       "kind": "news",
+      "id": "9to5mac-33041a195d506594:en",
+      "sourceId": "9to5mac-33041a195d506594",
+      "lang": "en",
+      "title": "Next week’s MacBook Pro could be huge upgrade, but with one problem",
+      "summary": "Apple has a fully redesigned MacBook Pro launching next week that promises to be a major upgrade, except in one key area. more…",
+      "body": "Apple has a fully redesigned MacBook Pro launching next week that promises to be a major upgrade, except in one key area.\n\nNext week on October 28 at its ‘Pro and tell’ event , Apple is expected to unveil a redesigned MacBook Pro with major improvements.\n\nThe new model is rumored to feature :\n\nIf most or all of these rumors prove true, it’s going to be a big upgrade for the MacBook Pro.\n\nBut there’s one crucial area that’s not expected to improve: performance .\n\nPer Mark Gurman, the new MacBook Pro will include the same M5 Pro and M5 Max chips that first debuted nearly eight months ago . That means a product that specializes in performance is going to offer zero performance boosts.\n\nIt’s an odd move, and reportedly the result of Apple skipping M6 Pro and Max chips altogether in favor of fast-tracking the M7 Pro and Max for 2027.\n\nConsidering how expensive the MacBook Pro is already, and the premium this new model is likely to bring, we may be looking at a ~$2,999 starting price for a model that’s no faster than before.\n\nPerhaps Apple will replace the current M5 Pro and M5 Max models entirely at the same price point. I would love that, but it’s probably wishful thinking in our memory-crisis moment.\n\nOverall, I’m fascinated to see how Apple pitches the new MacBook Pro to prospective upgraders. Will Pro users who passed on M5 Pro and M5 Max chips earlier this year all of a sudden be convinced now? We’ll have to wait and see.\n\nHow likely are you to upgrade to the new MacBook Pro? Let us know in the comments.\n\n* Buy Mac with 15% discount from Apple refurbished",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/23/next-weeks-macbook-pro-could-be-huge-upgrade-but-with-one-problem/",
+      "publishedAt": "2026-10-23T19:10:15.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-ff99cd6871a822b2:en",
+      "sourceId": "9to5mac-ff99cd6871a822b2",
+      "lang": "en",
+      "title": "Download the iPhone Duo’s official light and dark wallpapers here",
+      "summary": "Even if you’re not planning on getting an iPhone Duo, you can now download its light and dark wallpapers for any of your devices. Get them below. more…",
+      "body": "Even if you’re not planning on getting an iPhone Duo, you can now download its light and dark wallpapers for any of your devices. Get them below.\n\nApple released the iPhone Duo today, its first foldable iPhone, with dedicated wallpapers for its displays in both light and dark modes.\n\nThe wallpapers depict a landscape of sand dunes against a mountain range, with subtle differences in lighting and color between the two modes. The light versions feature a clear blue sky, while the dark versions show a starry night.\n\nAnd while the dynamic wallpaper is exclusive to the iPhone Duo, you can download four wallpapers below to use on any of your devices.\n\nBe sure to click the images and save the full-resolution versions before setting them as your wallpaper. Here are Apple’s official guides to set iPhone , iPad , and Mac wallpapers.\n\nWhat do you think of the iPhone Duo wallpapers? Let us know in the comments.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/23/download-the-iphone-duos-official-light-and-dark-wallpapers-here/",
+      "publishedAt": "2026-10-23T19:06:48.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-3839823460074d1d:en",
+      "sourceId": "9to5mac-3839823460074d1d",
+      "lang": "en",
+      "title": "Apple publishes iPhone Duo support documents covering hinge, Touch ID, cases, more",
+      "summary": "Apple is publishing a slew of support documents today corresponding with the launch of iPhone Duo, as it does for every iPhone launch. The support documents cover Touch on iPhone Duo, troubleshooting hinge issues, and much more. more…",
+      "body": "Apple is publishing a slew of support documents today corresponding with the launch of iPhone Duo, as it does for every iPhone launch. The support documents cover Touch on iPhone Duo, troubleshooting hinge issues, and much more.\n\nIn one support document , Apple outlines what to do if you’re having any of the following problems with the hinge on your iPhone Duo:\n\nApple also has a support document outlining the software accommodations for using a case on iPhone Duo that partially covers the left edge of the outer display:\n\nAfter applying iPhone Duo Case, a message appears on the display of iPhone Duo with the option to adjust the screen size to accommodate for the case. Follow the onscreen instructions to make the changes.\n\nYou can adjust the screen at any time: open Settings and tap Display & Brightness. Turn on Shift Left Edge. This shifts the outer display content to accommodate the front portion of the case.\n\nApple will likely continue adding support documents about iPhone Duo over the coming days. You can find a roundup of some of the ones published so far below.\n\nFollow Chance : Threads , X , and Instagram",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/23/apple-publishes-iphone-duo-support-documents-covering-hinge-touch-id-cases-more/",
+      "publishedAt": "2026-10-23T17:34:43.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-88cf48df030950ee:en",
+      "sourceId": "ars-technica-88cf48df030950ee",
+      "lang": "en",
+      "title": "Intel gets waiver after worries fuzzy US ban on foreign-made robots may hit fabs",
+      "summary": "Company says foreign-made robotic vehicles are crucial to US chip production.",
+      "body": "US chip champion Intel was so confused by the US government ban on foreign-made robots that it requested and received a waiver “out of an abundance of caution.” The tech company wanted to make sure that it could continue using certain robotic vehicles in its US chip fabs.\n\nThe uncertainty surrounding the Federal Communications Commission ban on certain foreign-made robots was revealed in the agency’s decision to grant Intel’s waiver request. On October 22, the FCC published its order allowing Intel to continue using the foreign-made robots in US semiconductor manufacturing facilities for a period of one year.\n\nThe robots in question are automated guided vehicles operating on “tracks or predefined paths” while often requiring operator oversight, according to Intel’s website. They help to move materials and items around within warehouses and factory floors.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/ai/2026/10/intel-gets-waiver-after-worries-fuzzy-us-ban-on-foreign-made-robots-may-hit-fabs/",
+      "publishedAt": "2026-10-23T17:18:31.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-048c59016f91edda:en",
+      "sourceId": "the-verge-048c59016f91edda",
+      "lang": "en",
+      "title": "The iPhone Duo should have been an iPad",
+      "summary": "We gave the iPhone Duo a 7 /10. But that wasn't always the score we planned, and it might not be the right score forever. Such are the challenges of reviewing - and assessing - a big, new idea about the most popular smartphone in history. On this episode of The Vergecast, David and Nilay […]",
+      "body": "We gave the iPhone Duo a 7 /10 . But that wasn't always the score we planned, and it might not be the right score forever. Such are the challenges of reviewing - and assessing - a big, new idea about the most popular smartphone in history.\n\nOn this episode of The Vergecast , David and Nilay debate whether the Duo deserved the score it got, and try to work through how this device might change over time. Is the outer screen, as Daring Fireball's John Gruber suggested, the worst iPhone ever ? Would it be a better product if it started as an iPad rather than an iPhone? Would we feel differently about this thing if it were simply called the iPad Du …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/podcast/1017447/iphone-duo-ipad-review-score-vergecast",
+      "publishedAt": "2026-10-23T17:00:18.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-05181b9d095e41c5:en",
+      "sourceId": "the-verge-05181b9d095e41c5",
+      "lang": "en",
+      "title": "Now Google says it might use your Gmail and Google Photos data to target ads",
+      "summary": "Google has updated its privacy policy in a way that could mean you'll start seeing targeted ads based on your personal data if you're using personalized AI features. The update, spotted by Android Authority, adds an exception to its promise about not using your Drive, Gmail, or Google Photos for personalized ads. While the previous […]",
+      "body": "Google has updated its privacy policy in a way that could mean you'll start seeing targeted ads based on your personal data if you're using personalized AI features. The update, spotted by Android Authority , adds an exception to its promise about not using your Drive, Gmail, or Google Photos for personalized ads. While the previous version simply said it wouldn't do that, as of October 16th, Google has added the line, \"unless you choose to make data from these services available to other Google services that support personalized ads.\"\n\nThat means anyone who has connected their Drive, Gmail, or Google Photos to AI Mode and other Search tools …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1017600/google-personal-intelligence-privacy-policy-ads-update",
+      "publishedAt": "2026-10-23T16:52:55.000Z",
+      "categories": [
+        "tecnologia-general",
+        "android",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "the-verge-c42c11e045ecb755:en",
       "sourceId": "the-verge-c42c11e045ecb755",
       "lang": "en",
@@ -5526,86 +5622,6 @@
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-7a73f5dacd21c175:en",
-      "sourceId": "the-verge-7a73f5dacd21c175",
-      "lang": "en",
-      "title": "The Sigma FP2 brings significant upgrades to the ‘world’s smallest’ full-frame camera",
-      "summary": "Seven years after Sigma claimed its original fp was the world's smallest and lightest full-frame mirrorless camera, the company has announced a similarly compact follow-up with several welcome upgrades including an improved sensor, an articulating LCD display, and longer battery life. But this time around Sigma is only claiming its new FP2 is the \"world's […]",
-      "body": "Seven years after Sigma claimed its original fp was the world's smallest and lightest full-frame mirrorless camera, the company has announced a similarly compact follow-up with several welcome upgrades including an improved sensor, an articulating LCD display, and longer battery life. But this time around Sigma is only claiming its new FP2 is the \"world's smallest\" full-frame shooter as those upgrades have increased its body-only weight by about six grams.\n\nThe Sigma FP2 will be available on November 11th and starts at $2,199 for the camera body alone. For $2,749 you can bundle it with Sigma's upgraded EVF-21 viewfinder featuring a 5.76 mill …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1017410/sigma-fp2-mirrorless-full-frame-modular-camera-upgrade",
-      "publishedAt": "2026-10-23T14:42:46.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-4cd81781f170f2c8:en",
-      "sourceId": "9to5mac-4cd81781f170f2c8",
-      "lang": "en",
-      "title": "iOS 27.1 is exclusive to iPhone Duo, here’s why",
-      "summary": "iOS 27.1 has officially launched, but you wouldn’t know it by checking your iPhone’s Settings app. That’s because the latest iPhone update is exclusive to iPhone Duo. more…",
-      "body": "iOS 27.1 has officially launched, but you wouldn’t know it by checking your iPhone’s Settings app. That’s because the latest iPhone update is exclusive to iPhone Duo.\n\nLast night, Apple quietly released a major new software update for iPhone.\n\niOS 27.1 was pushed out over the air, and normally that would mean new features for everyone.\n\nHowever, you won’t find iOS 27.1 by opening the Settings app and navigating to General ⇾ Software Update. Instead, iOS 27.0.1 will appear as the most recent update.\n\nThat’s because iOS 27.1 is exclusive to the new iPhone Duo.\n\nIt’s an unusual move, but Apple decided to skip iOS 27.1 for most iPhone models and go straight to iOS 27.2 instead.\n\niOS 27.2 has been in beta testing for the last month and ships to all users next week . It includes new features like:\n\nSo why did Apple ship iOS 27.1 for iPhone Duo only?\n\nEven though the iPhone Duo was officially unveiled last month, there are plenty of features and details we’ve only recently learned about. Bypassing a beta cycle for iOS 27.1 meant Apple was able to keep many of those details hidden until the Duo’s official launch.\n\nAdditionally, there were likely engineering reasons why it was simpler on Apple’s end to keep iOS 27.1 separate and Duo-exclusive. There are all kinds of custom iOS designs and features that the Duo introduces, and it’s expected that managing all of that internally was easier without other models or new features in the mix.\n\nSo next week when your iPhone says iOS 27.2 is available to install, just know that you didn’t somehow miss iOS 27.1 entirely.\n\nHave you been running the iOS 27.2 beta? How’s it running for you? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/23/ios-27-1-is-exclusive-to-iphone-duo-heres-why/",
-      "publishedAt": "2026-10-23T14:28:56.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-bd09420b694860c4:en",
-      "sourceId": "the-verge-bd09420b694860c4",
-      "lang": "en",
-      "title": "Our best tips for using the iPhone Duo",
-      "summary": "The Duo is an entirely new kind of iPhone, so it comes with a bit of a learning curve. That's a wild thing to imagine, since the iPhone has had very few fundamental changes since its inception. But the Duo is built different. If you won the preorder lottery and managed to get your hands […]",
-      "body": "The Duo is an entirely new kind of iPhone, so it comes with a bit of a learning curve. That's a wild thing to imagine, since the iPhone has had very few fundamental changes since its inception. But the Duo is built different. If you won the preorder lottery and managed to get your hands on one today, you'll see what that means. You'll laugh, you'll cry, you'll lose track of the volume buttons as you turn the thing around.\n\nWe've learned a few tricks over the past week of flipping and folding the Duo as much as we could. Here are our favorite tips and hacks for newly minted Duo owners.\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1017157/iphone-duo-tips-touch-id-magsafe",
-      "publishedAt": "2026-10-23T14:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-002bb47bfb3e20a2:en",
-      "sourceId": "9to5mac-002bb47bfb3e20a2",
-      "lang": "en",
-      "title": "Here’s how to get fastest iPhone Duo charging",
-      "summary": "iPhone Duo supports fast charging in both wired and wireless setups, but only with the right accessories. Here’s what Apple says you’ll need. more…",
-      "body": "iPhone Duo supports fast charging in both wired and wireless setups, but only with the right accessories. Here’s what Apple says you’ll need.\n\niPhone Duo can fast charge up to 50 percent battery in just 20 minutes. But you’ll need the right power adapter and cable to get top speeds.\n\nHere’s Apple’s official guidance per this support document :\n\nWired Fast Charging\n\nTo fast charge iPhone Duo up to 50 percent battery in around 20 minutes, use the USB-C cable that came in the box and one of these adapters:\n\nWireless Fast Charging\n\nTo wirelessly charge iPhone Duo up to 50 percent in around 30 minutes, use:\n\nThird-party chargers can often be a better deal than Apple’s own power adapters. My top recommendation is Anker’s 100W charging brick , which works great not only for iPhones but also more power-hungry Macs and iPads.\n\nThat said, the Apple 40W Dynamic Power Adapter at its reduced price is a great deal for a first-party option.\n\nAdditionally, if you want to pick up a longer USB-C cable than what comes in the iPhone Duo box, Apple’s official 2m cable is available at a discount here .\n\nWhat’s your iPhone fast charging setup? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/23/heres-how-to-get-fastest-iphone-duo-charging/",
-      "publishedAt": "2026-10-23T13:56:33.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-bca318ae974199e0:en",
-      "sourceId": "9to5mac-bca318ae974199e0",
-      "lang": "en",
-      "title": "Apple overtakes Nvidia as most valuable company in the world on iPhone Duo launch day",
-      "summary": "It’s iPhone Duo launch day around the world, and Wall Street is pleased. Apple reclaimed the title of most valuable company in the world on Friday as it reached new trading highs. more…",
-      "body": "It’s iPhone Duo launch day around the world, and Wall Street is pleased. Apple reclaimed the title of most valuable company in the world on Friday as it reached new trading highs.\n\nNvidia previously enjoyed the top spot, based on market capitalization. Apple stock traded above $351 per share on Friday, setting a new intraday trading record for the company.\n\nWith a market cap valuation around $5.12 trillion, Apple became the top company in the world once more. Nvidia and Google follow.\n\nAs mentioned, today is also the release date for the iPhone Duo, Apple’s $2000 foldable iPhone. You can read our review here .\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/23/apple-overtakes-nvidia-as-most-valuable-company-in-the-world-on-iphone-duo-launch-day/",
-      "publishedAt": "2026-10-23T13:41:59.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
       ]
     },
     {
@@ -5629,8 +5645,8 @@
       "id": "techcrunch-776732dd9d0db61f:en",
       "sourceId": "techcrunch-776732dd9d0db61f",
       "lang": "en",
-      "title": "Uber rival inDrive eyes 2027 robotaxi tests in Central Asia with Pony.ai and Nvidia",
-      "summary": "inDrive plans to begin testing Pony.ai's robotaxis in Kazakhstan's capital in the first half of 2027.",
+      "title": "Uber rival inDrive eyes 2027 robotaxi tests in Central Asia with Pony AI and Nvidia",
+      "summary": "The company plans to begin testing Pony.ai's robotaxis in Kazakhstan's capital in the first half of 2027.",
       "body": "Ride-hailing company inDrive , known for letting passengers and drivers negotiate fares, is working with Chinese autonomous driving firm Pony.ai and Nvidia to begin testing robotaxis in Kazakhstan in 2027.\n\nThe companies said Friday that they had signed a memorandum of understanding to explore bringing Pony.ai’s robotaxis to inDrive’s platform — a reflection of the growing interest in self-driving technology beyond the U.S. and China.\n\nTesting will begin in Kazakhstan’s capital, Astana, in the first half of 2027, inDrive CTO Yuri Misnik told TechCrunch. The tests will initially involve a safety operator, with fully driverless rides as the eventual goal.\n\nUnder the proposed plan, Pony.ai would provide its Gen-7 robotaxis, which inDrive would offer through its ride-hailing app and operate in Kazakhstan. Nvidia, on the other hand, would supply the AI technology, including its Hyperion platform and Halos safety system.\n\nThe move comes as ride-hailing companies expand their push into robotaxis. Earlier this month, Uber announced plans to test Pony.ai’s robotaxis in London , where it has also started offering supervised autonomous rides with British startup Wayve, an investor-backed partner . Uber is also working with multiple robotaxi companies in other markets, including the Middle East.\n\ninDrive, which has built its business around affordable rides, is looking to bring a similar focus to autonomous ride-hailing as it explores a market where Uber and other rivals are already making moves.\n\n“Our approach is capital-light by design,” said Misnik. “We work with a range of partners in different markets, combining their expertise with ours to deliver a better customer experience.”\n\nNvidia says its Hyperion platform could lower the cost of developing robotaxis by giving companies a ready-made foundation of sensors and computing technology, rather than requiring them to build and integrate everything themselves. The company also offers its Alpamayo model and tools to generate synthetic data and test autonomous driving systems across different driving scenarios.\n\n“Those savings are particularly relevant in emerging markets, where ride-hailing is already relatively affordable and autonomous services need to compete on cost,” Ali Kani, Nvidia’s vice president of automotive, told TechCrunch.\n\nThe announcement coincides with Nvidia CEO Jensen Huang’s first visit to Kazakhstan on Friday.\n\nThe Kazakhstan proposal would also add to Pony.ai’s ongoing push beyond China. The company aims to have more than 3,500 robotaxis operating in over 20 cities worldwide by the end of 2026, up from a fleet of 1,975 vehicles at the end of June.\n\nLast month, Kazakhstan announced plans to launch autonomous taxi services in 2027, with initial trials planned in Astana and two other cities. It has also introduced rules for autonomous vehicles to be tested on certain public roads.\n\nAstana’s harsh winters could make it a useful testing ground for robotaxis. The city, with a population of around 1.7 million, faces months of snow and ice, posing challenges for autonomous driving systems.\n\n“Launching here will provide an important opportunity to evaluate autonomous driving technology in challenging winter conditions,” inDrive founder and CEO Arsen Tomsky said. “Success in Astana could offer valuable insights for expanding autonomous mobility to other locations facing similar challenges.”\n\nKazakhstan is not the only market where inDrive is exploring robotaxis. In December, the company signed a separate agreement with Saudi Arabia’s AI Driver to explore deploying autonomous vehicles powered by Chinese self-driving firm WeRide, starting with Riyadh. The companies had targeted a pilot in the first half of 2026, though it remains unclear whether testing has begun.\n\n“We are also looking at a number of other markets for future deployments,” said Misnik. “One of the main requisites for successful launch in our view is a favorable and collaborative regulatory environment to facilitate safe and sustainable testing on the roads.”\n\ninDrive operates in more than 1,200 cities across 47 countries. The company has also expanded beyond ride-hailing into delivery, intercity transportation, and financial services.",
       "sourceName": "TechCrunch",
       "originalUrl": "https://techcrunch.com/2026/10/22/uber-rival-indrive-eyes-2027-robotaxi-tests-in-central-asia-with-pony-ai-and-nvidia/",
@@ -5731,21 +5747,6 @@
       "sourceName": "TechCrunch",
       "originalUrl": "https://techcrunch.com/2026/10/22/arc-browser-sunsets-december-22-as-the-browser-company-doubles-down-on-dia/",
       "publishedAt": "2026-10-22T20:01:51.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-ab5d001faf8cfdad:en",
-      "sourceId": "ars-technica-ab5d001faf8cfdad",
-      "lang": "en",
-      "title": "Electric or gas? BMW goes both ways with new 2027 X5 and iX5.",
-      "summary": "460 kW charging and 450 miles of range are among the reasons the EV is the one to get.",
-      "body": "When we first drove BMW’s first Neue Klasse model, the iX3 , it quickly revealed that BMW knows how to make a good electric vehicle. A clean-sheet design, it featured the automaker’s sixth-generation electric powertrain , a completely reimagined dashboard, and powerful computers to run the whole show. Now, much of that technology is being ported over to the larger X5 line.\n\nBut BMW knows not all its customers are ready to go electric, especially in the US, so it’s sticking with its powertrain-agnostic CLAR platform, as used in cars as diverse as the large 7 Series and the new gasoline 3 Series. Which means in addition to the all-electric iX5, there are also mild hybrid and plug-in hybrid X5s available, and in time, even a hydrogen-powered option. For now, as I’ll explain, I think the EV is the pick of the bunch.\n\nThe most conventional option is the X5 40 xDrive, powered by a 3.0 L turbocharged inline six-cylinder engine that generates 394 hp (294 kW) and 428 lb-ft (580 Nm). The 48 V mild hybrid system can contribute a decent slug of torque (148 lb-ft/200 Nm) if necessary, and the engine operates under the Miller cycle for better efficiency, as well as featuring the usual BMW engine technology, like variable valve timing. Expect around 26 mpg (9 L/100 km) from this powertrain and a full-to-empty range of 569 miles (915 km).\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/cars/2026/10/electric-or-gas-bmw-goes-both-ways-with-new-2027-x5-and-ix5/",
-      "publishedAt": "2026-10-22T19:01:23.000Z",
       "categories": [
         "tecnologia-general"
       ]
@@ -6160,25 +6161,6 @@
         "android",
         "apps-accesibles",
         "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "applevis-blog-c021df7c88b4c3dd:en",
-      "sourceId": "applevis-blog-c021df7c88b4c3dd",
-      "lang": "en",
-      "title": "Welcome Home: Apple Announces Updated HomePod Mini, Apple TV, All-New HomeView, and New Home Accessories",
-      "summary": "Apple today announced updated models of the HomePod Mini and Apple TV 4K ; as well as an all-new HomeView smart home hub and a collection of smart home accessories . HomePod Mini 2 Powered by the S10 chip and what Apple calls \"advanced computational audio,\" up to four HomePod Mini 2 or HomePod (2nd generation) speakers can be paired to create a surround sound experience with the new Apple TV 4K. Siri AI will be available on HomePod Mini 2 with a future software update. It can recognize up to six people in a household, and can use a user's Apple Intelligence-capable iPhone or iPad to draw on their personal context. With Sound Glow, the top of HomePod Mini 2 can glow and pulse in sync with the currently playing song. Users can additionally customize the displayed animations to promote a relaxing atmosphere. HomePod Mini 2 features 100 percent recycled rare earth elements in all magnets, and 100 percent recycled copper, gold plating, and tin solder in all Apple-designed circuit boards. It can be pre-ordered from Apple starting today in pink, green, blue, white and midnight for US $149, and will begin shipping to customers on Friday, October 30. HomeView HomeView is a smart home hub with a speaker and 7-inch display, which can either be placed on a table or mounted on a wall. It features a variety of Apple apps and widgets on the Home Screen, and allows users to play music, view photos and videos, make and receive FaceTime calls, monitor and control their home, and more using Siri or the touch interface. HomeView can display a generic screen for everyone in the household, or recognize up to six faces to show personalized content for individual users. Apple Silicon and HomeView's speaker array can optimize audio for loudness and bass response at any volume, with tailored profiles for the table-top and wall-mounted models. Siri AI can be used to play media on HomeView, answer general knowledge questions, discuss recipes, and if a user has an Apple Intelligence-capable iPhone or iPad, draw on their personal context for more helpful responses. Like other Apple Intelligence-capable devices, conversations with Siri AI on HomeView are synced via iCloud and viewable in the Siri app on iOS, iPadOS, and macOS. Changes made to Siri's pace or expressiveness on compatible devices are synced to HomeView. HomeView features a wide variety of watchOS-style faces that can display snippets of information at a glance, a user's photos, or interactive art. With a supported iCloud+ subscription, HomeView can integrate with compatible cameras to recognize people, pets, packages, and vehicles, and can describe captured video using AI. With Sound Recognition, HomeView can alert users to smoke and carbon monoxide detectors on their iPhone, iPad, or Apple Watch. Similar to the security and privacy features of other Apple products, data processed by the A18 chip's Secure Exclaves is isolated from the HomeView software and does not leave the device. Users' personal content, like messages and calendar, is only displayed when the user's face is recognized and their iPhone or iPad is present and has been recently unlocked. The wall-mounted HomeView model can optionally be professionally installed. HomeView is made with 100 percent recycled aluminum in the enclosure base and in the enclosure of the wall-mounted model, 100 percent gold plating and tin solder in all Apple-designed circuit boards, and 100 percent recycled rare earth elements in all magnets. It can be pre-ordered from Apple starting today for US $299, and will begin shipping to customers on Friday, November 13. The table-top model is available in silver, starlight, rose pink, and space gray finishes, with the wall-mounted model available in space gray and silver finishes. Apple TV 4K With the A19 chip, Apple claims the new Apple TV 4K delivers up to 50 percent faster CPU performance and up to 2X faster GPU performance when compared to the previous generation. In addition, a new, dedicated AV1 decoder enables more efficient streaming while using less bandwidth. Continuing on the theme of recent Apple product unveilings, the new Apple TV 4K supports Siri AI for smarter voice interactions. Users can find entertainment and control their smart home with more flexible natural language, and Siri AI's awareness of personal context and onscreen content can be used to answer questions about home events or what's currently playing. Users with an Apple Intelligence-capable iPhone or iPad will be able to use Siri AI on Apple TV 4K (2nd and 3rd generation). Three far-field microphones on the new Apple TV 4K support Siri hands-free, allowing users to prompt it by saying \"Siri\" or \"Hey Siri,\" as they do on other Apple devices. The new Siri Remote supports Find My with Precision Finding, which can guide users to the remote's precise location, useful if it, for example, falls between couch cushions. Like other Find My-capable devices, the remote can also play a sound to help users locate it. Similar to other Apple products, data processed by the Secure Exclaves is isolated from tvOS and does not leave the device. The new Apple TV 4K features 100 percent recycled gold plating and tin solder in all Apple-designed circuit boards, and 100 percent recycled rare earth elements in all magnets. It can be pre-ordered from Apple starting today for US $299, and will begin shipping to customers on Friday, November 13. Home Collection In collaboration with LG Electronics and Schneider Electric, Apple has launched a collection of smart home accessories, including a lock, doorbell, thermostats, temperature sensors, and indoor and outdoor cameras. These accessories support NFC for one-tap setup on iPhone, and will begin rolling out in December.",
-      "body": "Apple today announced updated models of the HomePod Mini and Apple TV 4K ; as well as an all-new HomeView smart home hub and a collection of smart home accessories .",
-      "sourceName": "AppleVis Blog",
-      "originalUrl": "https://www.applevis.com/blog/welcome-home-apple-announces-updated-homepod-mini-apple-tv-all-new-homeview-new-home",
-      "publishedAt": "2026-10-13T19:17:05.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-accesibilidad",
-        "apps-accesibles",
-        "programas-accesibles",
-        "ia-accesibilidad"
       ]
     }
   ]

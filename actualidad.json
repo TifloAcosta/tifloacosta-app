@@ -1,13 +1,156 @@
 [
   {
-    "id": "engadget-e1faddc728504985",
+    "id": "engadget-b36dcb596d798901",
     "type": "news",
     "sourceId": "engadget",
     "sourceName": "Engadget",
     "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2295366/engadget-review-recap-iphone-duo-rivian-r2-and-more/",
+    "originalUrl": "https://www.engadget.com/2296211/the-uk-is-investing-134-million-into-an-ai-biosecurity-lab/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-24T12:00:00.000Z",
+    "publishedAt": "2026-10-24T16:11:53.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The UK is investing $134 million into an AI Biosecurity Lab",
+        "summary": "The UK has established the AI Biosecurity Lab, which will help it detect biological threats and develop vaccines with AI.",
+        "body": "OpenAI, Anthropic and Google DeepSeek are supporting the initiative.\n\nThe UK government has established the AI Biosecurity Lab (AIBL) as part of its National AI Biosecurity Initiative. It has committed £100 million ($134 million) in funding to the project, which will also be supported by OpenAI, Anthropic and Google DeepSeek. The AI Biosecurity Lab will bring in experts in biosecurity and life sciences who will work with frontier AI to detect biological threats and accelerate the development of vaccines and medical treatments. It will operate as an independent, non-profit organization, but it will also team up with public-sector organizations and academic institutions.\n\nIn its announcement, the UK government says AI systems are \"creating unprecedented opportunities for scientific discovery,\" but they're also creating \"new biological risks and could lower barriers to harmful activity.\" An AI research lab in California, for instance, recently claimed to have created a virus with AI, which it had then administered into a human patient. The virus was created to infect antibiotic-resistant bacteria rather than for anything nefarious, but the lab's work demonstrates how frontier AI can be used for biotech purposes. \"AIBL's cutting-edge research will strengthen UK and global resilience to a wide range of biological risks, including those enabled by advances in AI,\" the UK government said.\n\nKanishka Narayan, Britain's AI minister, said the lab \"will be a major new global institution, bringing together world-leading scientific expertise to protect people from emerging biological threats and ensure Britain leads the world in AI safety and security.\"\n\nOpenAI is backing the initiative by providing £100 million in credits that the lab can use to access its most advanced models and computing infrastructure. Meanwhile, Anthropic will provide the lab with £100 million model credits. The lab will also collaborate with Google DeepMind and UK AI life sciences company Basecamp Research. DeepMind's biosecurity experts will work on research with the lab, as well as provide access to frontier Gemini models, while Basecamp will provide it with AI-biology models and its technical expertise when it comes to biosecurity challenges."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-022b11b042fb2a94",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2291599/smart-tv-wifi-faster-than-ethernet-speed-isnt-everything/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-24T16:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Your smart TV's Wi-Fi is probably faster than its Ethernet, but speed isn't everything",
+        "summary": "You might have never thought to use Ethernet with your TV, but it's not speed that's worth connecting for.",
+        "body": "Ethernet is slow on TVs, but it doesn't have to compete with everything else for Wi-Fi bandwidth.\n\nBandwidth matters a lot when streaming movies and TV shows. Services like Netflix and Disney+ typically recommend at least 5 Mbps for 1080p streaming. For 4K HDR content, that steps up to 25Mbps or better, since 4K resolution is four times that of 1080p. Plus, subscriptions that include 4K HDR typically throw in Dolby Atmos , even if it's just the compressed version.\n\nBy extension, the way your TV connects to the internet is important. A local chokepoint can be just as bad as paying for a bottom-of-the-barrel internet plan. That might come in the form of an outdated router, or perhaps an evening surge in congestion if a neighbor decides your movie night would be a perfect time to torrent a few files.\n\nOne decision you need to make is whether to use Wi-Fi or Ethernet to get your TV online. You might be surprised to learn that while Wi-Fi often achieves the fastest speeds, Ethernet can be preferable regardless — assuming your home theater has a layout that accommodates it.\n\nWi-Fi leads on paper because many TVs are equipped with at least Wi-Fi 6, which can exceed gigabit speeds when paired with a compatible router in ideal conditions. Real-world speeds tend to be lower, naturally — even a gigabit internet plan still has to be split among all connecting devices in your home. But even half a gigabit is more than enough speed for most households . Even older or cheaper TVs with Wi-Fi 5 support speeds that are more than sufficient for streaming.\n\nConversely, a lot of TVs and streaming devices aren't even capable of gigabit Ethernet. Their jacks are limited to 100Mbps, despite the fact that the gigabit option has existed for decades. It's clearly a cost-cutting measure, in the same way that many TVs still include HDMI 2.0 after HDMI 2.1 has been around for the better part of a decade.\n\nThe major advantage to Ethernet, though, is stability. Within the average home, an Ethernet cable is effectively immune to range or interference issues, as long as it's decently shielded (which it should be). A Cat 6 cable can deliver 1Gbps speeds up to 100 meters (328 feet), whereas a Wi-Fi signal is going to peter out well before that distance unless it's boosted by a mesh or extender system. Band congestion is a non-issue, since every Ethernet device gets its own lane.\n\nStability matters, because if a stream is interrupted or loses enough signal quality, it can force an app to re-buffer the feed or else downgrade to a lower quality level. Meanwhile, you're not getting much extra out of a 500 Mbps or 1 Gbps Wi-Fi connection, except for faster app and software updates, which are uncommon and small on TVs. A 4K stream doesn't come anywhere near tapping its potential.\n\nIn a lot of cases, wiring up a home theater with Ethernet is impractical. The equipment is cheap — you can buy a 10-foot Cat 6 cable for less than $10 — but if your router isn't nearby, you can end up with Ethernet cables snaked around your living room, or even across hallways. Trying to conceal all that can turn into a project that's more trouble than it's worth. Flat Ethernet cables sound great, but often don't work as well .\n\nAs a result, we suggest using Ethernet only if it's convenient or you're experiencing serious reliability issues. If you're already getting an excellent Wi-Fi connection, the occasional hiccup is likely offset by those speedy downloads and eliminating one more wire. There's also no sense spending more money and effort than you have to.\n\nFixing unreliable Wi-Fi can be simple, in some cases. Making sure your router is off the floor, in the open and away from any obstacles goes a long way towards extending reach. If you can't connect your TV to Ethernet, try connecting other devices, like your laptop. That will free up wireless bands."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-e09bf13315e46f40",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/24/php-ocalypse-how-two-critical-web-bugs-almost-broke-the-internet/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-24T15:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "programas-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "PHP-ocalypse: How two critical web bugs almost broke the internet",
+        "summary": "Two critical bugs in the PHP web programming language, used by the majority of the internet, threatened to upend the internet — and it's unlikely to be the last major software scare.",
+        "body": "On Wednesday, a decades-old open-source web technology called PHP almost broke the internet, thanks to two vulnerabilities that had sat dormant for years until researchers recently figured out a way to exploit them.\n\nThe bugs are dubbed PHP2Shell , officially designated as CVE-2026-109618 and CVE-2026-109619 . In simple terms, the bugs allow anyone who knows how to exploit them to break into an online system running PHP, such as a website or internet-facing server, without needing a password to access or modify its data.\n\nAs situations go, this was a pretty sizable one, forcing millions of people around the world to scramble to patch their systems before malicious hackers could abuse them.\n\nThe PHP Foundation, which maintains the PHP web software, publicly released patches on Wednesday that fixed the bugs, which when installed prevent web-facing servers from being attacked. The foundation had already given some of the biggest internet companies and web hosts that rely on PHP an early headstart on patching.\n\nThanks to weeks of backroom chatter and careful coordination across the industry, the world — so far — broadly avoided mass internet exploitation. From Wednesday, governments began urging citizens and companies with websites to take action to mitigate the risks on their ends. A wide range of industries shuttered their websites and pulled services offline to patch their systems. Banks, retailers, gaming sites, online stores, hospitals, and some government agencies took down their servers to prevent attacks.\n\nBut security researchers are warning that the situation isn’t over yet, and that a large number of systems around the world remain unpatched and vulnerable to hacks and data theft.\n\nThis is also unlikely to be the last major internet software scare, with some expecting the advent of AI to rapidly uncover as-yet-undiscovered vulnerabilities that are waiting to be found and abused.\n\nSecurity researchers at Calif found two bugs in PHP, a programming language widely used around the world for building websites and web apps, both on the internet and hosted locally on company networks, like intranets and internal sites.\n\nPHP is open-source, meaning it’s free and available to be used by anyone for almost any reason. As such, it’s become one of the most popular and broadly used web programming languages on the web today.\n\nThe two bugs were first discovered in 2024 but weren’t considered exploitable at the time, and weren’t patched. Security researchers recently found a way to exploit them, prompting them to alert the makers of the software to get them fixed.\n\nCalif alerted the PHP Foundation, which began a period of fixing the bugs and coordinated disclosure. The foundation did this by offering the information and patches about the security issues under a tightly guarded embargo — essentially held confidentially until a specific deadline — to give big companies an opportunity to get ahead of installing the fixes.\n\nPHP2Shell is pretty serious because it can be abused remotely over the internet and without the victim having to click on a link or open a file. This is known as remote code execution , and it’s one of the more damaging kinds of bugs to exploit because they can grant a hacker anywhere in the world effectively full control over an affected and unpatched system.\n\nWorse, these specific PHP bugs make it possible to break into any unpatched system on the internet without needing a password or any other credential over the internet, known as unauthenticated access.\n\nThis would allow a malicious hacker to then plant malware on the computer, such as to steal data or simply to maintain a long-term foothold that they can return to later.\n\nThe bugs are particularly risky because PHP is wildly popular software, in part because it’s free and relatively easy to use, but also because it’s been around for decades. Around 70% of the web-facing internet relies on PHP, though its usage has been slowly declining over the years in favor of newer, more secure programming languages.\n\nGiven its popularity, some of the world’s most popular websites are run on web software that rely on PHP, such as WordPress (which hosts TechCrunch!), as well as Drupal, Joomla, and MediaWiki, which powers online encyclopedia giant Wikipedia.\n\nPHP is just one of many aging but functional technologies that have survived waves of the internet and generations that are now so ubiquitous, they’re akin to the glue that holds much of the internet together. Oftentimes these tools are developed by open source maintainers, who are not paid for the work that they do, and as such cannot afford third-party security reviews — but are still widely relied on by companies who do not contribute financially to the projects.\n\nSecurity researchers at Calif were credited with discovering the bugs earlier this year as part of a security audit of PHP’s code. Calif was participating in the Hack the Planet initiative by AI model maker OpenAI and cloud security giant Wiz, which subsequently verified the proof-of-concept exploits that Calif made.\n\nIn Calif’s write-up (featuring comics — it’s great, check it out ), the researchers explained that AI was used in assistance with exploiting the bug, but that the bulk of the work relied on knowledge that the researchers already had, and that they knew PHP’s codebase and exploitation history well.\n\n“No model is simply capable of unearthing ‘all bugs’ with simple prompts. At least for now,”wrote Calif.\n\nDespite efforts to keep details of the bugs under wraps until Wednesday, it does appear that there was some PHP2Shell exploitation prior to the release of patches.\n\nAmazon, which has enormous visibility into online threats due to its size and scale, said in a blog post that it detected exploitation of PHP2Shell about a week before the PHP patches were available, suggesting that someone, somewhere, knew how to exploit the bugs before their details were broadly available. Amazon said it wasn’t clear how the hacker learned of the vulnerabilities, but that defenders should look for evidence of exploitation as early as October 17.\n\nThere are a few theories as to what happened. Once a bug is patched, the details of the patch can become immediately apparent, especially if the code — like in PHP’s case — is open source, making it public and inspectable. Exploiting the bugs might not be easy, but knowing where the bug is and how it was fixed can allow malicious hackers to understand where to target and how to develop their exploits.\n\nIt’s possible that there was a leak or a breakdown in communication somewhere during the embargo. The open source community is enormous and controlling information in this fashion relies on good-faith.\n\nIt’s also possible that hackers discovered the bugs ahead of time, either independently or through espionage.\n\nThe PHP Foundation blamed one company for pushing the patches live hours before the embargo period was up, which could have given some attackers a headstart if they obtained details of the patch before others. But this doesn’t account for the week-long activity detected by Amazon.\n\nResearchers say that bugs require a lot of work to become exploitable and weaponizing the bug has been a challenge — but not impossible — which explains why we haven’t seen a scale of mass-exploitation just yet.\n\nBut as of late Friday, there are now confirmed compromises and post-exploit activity related to the PHP bug, according to security giants Palo Alto Networks and Trail of Bits . That means the bug was detected being abused to hack in and actively do malicious activity on an as-yet-unknown target.\n\nIt’s still early days but it’s an encouraging sign that there haven’t been any signs of mass-exploitation — but we’re not out of the danger-zone just yet.\n\nMatthew Prince, the chief executive of network security and monitoring giant Cloudflare, which also has telemetry into a vast portion of the internet, said this week that it’s seen an exponential number of attempts to exploit the bugs following their disclosure. This gives some perspective as to how quickly malicious actors are seeking to abuse the flaws for their own gains.\n\nPHP isn’t just found on web servers, but also used in developer tools, command line and terminal packages, and other software components used by routers, storage devices, and enterprise security devices, like firewalls and VPNs.\n\nWe should expect to see exploitation of PHP2Shell down the line as smaller IT teams and sole developers may be slower to update. There will also be a period in which various companies that rely on and integrate PHP into their own products and software, which will also need updating.\n\nAs more devices and systems get updated, the attack surface will reduce in time. But the ripple effects of these bugs could still be felt for years to come, particularly in legacy systems that have no means to be updated.\n\nThis was one of those rare internet-stopping days I’ve seen during my time as a security reporter. In 2016, a massive botnet flooded internet registry Dyn with junk traffic causing much of the web’s top services to crawl to a halt. In 2017, North Korea used leaked U.S. government hacking tools to infect the U.K.’s health system with ransomware. And in 2024, a faulty CrowdStrike update sparked a massive global outage causing most of the world’s Windows computers to crash at once.\n\nBy all accounts with PHP2Shell, the internet escaped what could have otherwise been an extremely painful and damaging day. But it’s unlikely to be the last major incident to hit the web, and this may be the first in a trend of incidents that exploit weaknesses in legacy technology. Much of this is due to inherent flaws in aging but omnipresent software that haven’t yet been discovered, coupled with AI tools that are making it easier to find flaws.\n\nPHP, much like other web programming languages and technologies from decades ago, are “memory unsafe,” which means they can be attacked through an entire class of vulnerabilities that can force the software to leak or spill sensitive data from the software’s memory storage. The National Security Agency says around 75% of all actively exploited vulnerabilities abuse memory-related flaws, which is to say, hackers use them a lot.\n\nThis has helped to prompt a move to using memory-safe languages, like Python, Rust, and Swift, which can’t be abused in the same way that memory vulnerabilities can be. As such, these languages make them broadly immune to a broad swath of vulnerabilities that still affect their predecessors.\n\nBut that still leaves an entire chunk of the internet running a bunch of technologies, like PHP, media and video codecs, compression libraries, and other software from decades ago — which, when they break, will have massive implications for the rest of the web."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-1c415a71b83d0aec",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2291408/how-to-test-cr2032-battery-see-if-good/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-24T15:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Here's how to test a CR2032 battery to see if it's good",
+        "summary": "CR2032 batteries are found in a lot of gadgets around your home. They're easy to test when they run low, especially if you have the appropriate devices.",
+        "body": "You won't need expensive equipment or invest much time.\n\nYour car key fob suddenly needs several presses to unlock the door. Your AirTag stops responding when you try to locate it. Before blaming either gadget, it's worth checking the battery inside. One common type is the CR2032, a 3V lithium coin cell also used in Samsung's SmartTag2 and some smart home sensors . Depending on the device and how often it's used, one can last way over a year.\n\nA multimeter can help you check the battery's voltage, and it's a good addition to your toolbox if you don't already own one. There are cheaper ways to check, too, but don't mistake a voltage reading for a complete picture of battery health.\n\nBegin by checking the battery itself. If you spot crusty residue, rust-colored patches, swelling or leakage, skip the test and replace it. Have a look at the device's contacts too, since corrosion there can cause trouble even with a good battery.\n\nRemove the CR2032 and set your digital multimeter to DC voltage (V with a solid line over a dashed line). Plug the black lead into COM and the red lead into the V or VΩ port. If your meter doesn't automatically select a range, set it above 3V, typically 20V.\n\nHold the battery by its edges over a nonconductive surface. Touch the red probe to the broad face marked with a plus sign (+) and the black probe to the center of the smaller negative face underneath. Keep the probe tips from touching each other or bridging the battery's terminals. A negative reading simply means you've reversed the probes.\n\nA fresh CR2032 typically reads around 3V, while a reading closer to 2.5V is a good reason to bring in a replacement. But don't give that 3V reading too much credit though. A multimeter draws almost no current, so a battery might look fine on the display but struggle when your key fob or tracker actually needs power. There's no single pass-or-fail reading for every device. If it keeps acting up, try a fresh CR2032 unit before assuming the device is faulty.\n\nA dedicated coin-cell tester is another option. Some cost around $10, although certain models only measure voltage rather than how the battery performs under load. Basic multimeters can cost less than $20 and are good for checking other batteries or troubleshooting low-voltage electronics. Still, buying either just to diagnose one suspect $3 battery is a harder sell.\n\nThere's also the LED trick, assuming you have one lying around. A small red or yellow LED is a better choice than a blue or white one because it generally needs less voltage to light up. Touch its longer leg to the CR2032's positive side and the shorter leg to the negative side. If it lights up, the battery can supply some current. That's about all it proves. The LED won't tell you how much life is left, and one that stays dark doesn't necessarily mean the battery is dead.\n\nAirTag owners can check Find My before opening anything. Select Items inside the app and tap your AirTag. If it says \"Low Battery,\" or shows a depleted battery icon, skip the testing and replace the CR2032. Some CR2032 batteries have bitterant coatings that may prevent proper contact, even when they're brand new. Apple recommends packaging marked \"Compatible with Apple AirTag\" when replacing an AirTag battery , and says an AirTag's battery lasts more than a year, while Samsung rates the SmartTag2 for up to 500 days in normal mode.\n\nAfter removing a CR2032, keep it out of children's reach and tape its terminals before taking them to a battery collection facility . If one is swallowed, seek emergency medical care immediately, as serious internal injuries can occur in as little as two hours."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-4dadc449a8d92ce4",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/24/these-clever-apps-show-off-the-iphone-duos-potential/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-24T15:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "These clever apps show off the iPhone Duo’s potential",
+        "summary": "From retro cassette players and virtual notebooks to flight trackers and even a digital toaster, developers are finding creative ways to take advantage of Apple's first foldable iPhone.",
+        "body": "It’s been a long time since I’ve been genuinely excited about a new iPhone.\n\nFor years, a new iPhone meant a device that was thinner, faster, and had a camera that came with incredible upgrades. At some point (and Apple devotees can debate which year’s model this was!), a new iPhone became an incremental upgrade. Slightly better, slightly faster. Maybe there was a new button to learn, a new charging cable , or a new notch on the screen , but the iPhone itself remained the same rectangular glass and metal handheld it always was.\n\nThe iPhone Duo changes this, allowing Apple to enter the market for foldable phones with a phone that, while imperfect , is whimsical, fun, and, yes, actually exciting.\n\nIt’s hard to say when the urge to acquire the iPhone Duo first kicked in. I’ll admit that it wasn’t during the official announcement , which left me feeling puzzled about the device’s potential. Do I actually want a phone that folds, I wondered? Was propping up the phone as a little tent to watch Netflix worth all that extra money? (The Duo starts at $2,000).\n\nAs it turned out, the desire for the Duo grew on me as I saw developers embracing the new foldable design to create Duo-optimized apps. Apple’s software development community, after all, is what keeps me locked into the iPhone. Apple developers are active, creative, engaged, and still often build for iOS first – a must if you like trying things early.\n\nOf course, the initial Duo reviews have pointed out how many mainstream iOS apps have not yet been made ready for the Duo, which is true. Many of the apps you use every day were not optimized by launch day, meaning they’re surrounded by black bars, have their controls in odd places, or have to be enlarged with a tap, similar to the early days of running iPhone apps on iPad.\n\nBut the developers who have specifically built for the Duo sparked my interest. Soon, my inbox was filled with pitches for clever apps I couldn’t yet try unless I got my hands on a Duo. Hello, FOMO.\n\nThe best of these don’t just adapt their apps to display correctly on the foldable form factor, but make use of the fact that there are different displays of different sizes – and they incorporate that into the design of the apps themselves.\n\nBelow are some of my early favorites, tested on a review unit provided by Apple.\n\nLet’s start with the basics. Netflix is one of Apple’s hand-picked partners for the Duo launch, and had its streaming app Duo-optimized by the time the device shipped, alongside others like the MLB app, NYT Cooking, Slack, my preferred calendar app Fantastical , and others. But Netflix is the perfect showcase for what I expect will be a regular Duo use case: watching movies and TV.\n\nThe streaming app hasn’t just been expanded to fill the screen; it takes advantage of the fact that there are two different screen sizes to build for. On the outer screen (the display you see when the device is folded), you can scroll through Netflix’s short-form, TikTok-like “Clips,” then open up the device to continue watching videos on the larger matte-screen inner display. The transition between the two experiences feels as seamless as unfolding the Duo itself, as the content automatically adapts to the new screen size.\n\nAs I personally find myself watching most TV on my phone these days, as opposed to big screen in the living room, I appreciate having the option to shift from a phone to a larger screen with one device. This is going to be one of my most-used apps, I think.\n\nLook, I called it back in September. I have to credit Deck-Man , which was previously known as Duo-Man, as being the first app that made me want to get a Duo. Designed by indie developer Vidit Bhargava at a hackathon, the music player takes clever advantage of the Duo’s two screens to imitate how Walkman cassette players used to function.\n\nThe playful app reimagines the cassette player as a digital experience with retro vibes, allowing you to browse through your favorite albums as cassettes, then load them into the player. You can then control the playback with play, pause, fast-forward, and rewind controls, as you would on a hardware device, complete with authentic-sounding clicks and cassette sounds that were recorded from a real portable cassette player.\n\nWith the Duo open, the cassette appears to play on the right side of the screen, next to album imagery on the right. When closed, Deck-Man’s interface looks like the front of a Walkman.\n\nThe app has appeal not only because it built something that could only exist on a hinged, foldable device like the Duo, but also because it taps into the growing demand for retro tech , which is partly a cultural response to the speed at which the AI industry is shipping out products. Retro tech , like dumbphones , digital cameras, vinyl, CDs , and landlines, recalls an older time when tech use was intentional, not just baked into every aspect of our lives.\n\nHonestly, if you buy a Duo and don’t install Deck-Man, I’m convinced you just don’t know how to have fun.\n\nThe TypeDraw app is designed to be a personal notebook, something that looks like a virtual Moleskine of sorts — it even has an elastic closure band. But there’s a certain charm to using this app specifically on the Duo, whose form factor makes it look a lot like a little notebook when closed.\n\nInside TypeDraw, you can type using a font that’s your own handwriting or pick from one of a dozen fonts designed by its creator, Phil Traut.\n\nYou can also choose which kind of paper you want to write on, like lined, grid, or dotted pages, and pick your ink color. You can also draw and sketch to create colorful images that accompany your handwritten text, which makes it feel a lot more like using a real-life notebook as your journal or diary, and not some boring to-do app.\n\nThe pages curl as you flip through them, and you can even pull on the elastic band to produce a twang animation that’s just silly and fun.\n\nWakeout , the workout app that’s a former Apple App of the Year winner, has also approached its Duo optimization thoughtfully by designing different user interfaces for each postion the phone can be in. The app, which offers a series of mini movement breaks that feel more like games than exercise, works when the Duo is closed, open, in tent mode, or sitting open like a laptop computer.\n\nFor instance, when the Duo is open like a book, the view is split across the hinge with the movement game videos on the left, but when it’s open like a laptop, the videos shift to the vertical screen. You can also put it into tent mode, which is great for watching the videos with the Duo propped up on your desk. (Most people use Wakeout at work, when they take quick stretch breaks after sitting at a desk for too long.)\n\nIf the app is running on a closed Duo, its row of navigation tabs becomes a slim side menu in the column beside the camera, allowing the phone’s small screen to use the full display.\n\nAlready my favorite travel app, Apple Design Award-winning Flighty tells you everything you need to know about your upcoming flight, from gate updates to delays to airport conditions and even the type of aircraft you’re flying.\n\nBut on the iPhone Duo, when open, the app takes advantage of the expanded screen space to spread its map to the edges, letting you see more of your flight’s path on a globe that spins under your fingertips.\n\nWhen the Duo is open, your flight details move over to the left side of the screen, but it doesn’t fill that side of the screen. Instead, most of the display is taken up by the image of the globe, allowing you room to zoom in on different flight paths more closely as you plan your travels.\n\nThe app also works in split screen, which means you can keep track of your flight while also doing something else — like watching your favorite TV show.\n\nPlus, Flighty added a new feature called En Route Mode just for the Duo. In this mode, the Duo is folded into the tent shape and then placed on a flat surface — like your airplane’s tray table. That way you can watch your flight’s progress via Wi-Fi while you do something else, like listen to music, read a book, or watch a movie from the in-flight entertainment’s seat-back screen.\n\nDesigned specifically for the Duo (and for tech enthusiasts, who are also the Duo’s first customers), Tiny Computers is a playful way to reconnect with older technology. The app ships with 10 retro computers that you can play with, including the Macintosh, Commodore 64, IBM PC, Amiga 500, Windows 95, ThinkPad, iMac G3, iBook G3, PowerBook G4, and Windows XP.\n\nYou’re meant to set up the Duo in its open “laptop” mode to toy around with these old-fashioned devices, which feature clicking keyboards, working command lines, paint programs, floppy disks, and even some desktop games. But it’s not just an old computer exhibit – there’s a game element too, as you can look for hidden files and secret commands to earn a medal.\n\nThere are no ads, subscriptions, or in-app purchases, either – just a $3.99 one-time fee.\n\nSky Guide is that classic stargazing app that I still open from time to time when I’m outdoors enjoying nature, wondering whether that bright light up there is a star or a planet or what the constellation right next to Orion is called.\n\nThe company is another of those that Apple gave a shoutout to in its press release about all the new Duo-optimized apps, and it’s easy to see why. It’s just so much easier to track the night sky when you have the larger display on the Duo unfolded, offering a more immersive, edge-to-edge map that moves as your position and orientation change. This one will be broken out on the next camping trip or nighttime walk, for sure.\n\nMaybe I’m just a sucker for retro music apps, but MD Vinyl did not disappoint with its Duo-optimized music player.\n\nThis app’s widget already has a permanent place on my regular iPhone’s Home Screen purely for the aesthetics, which includes a tiny, spinning record and a display that shows you the song title and artist you’re streaming, alongside the player controls.\n\nNow for the iPhone Duo, the virtual vinyl record gets to use more of the screen. Plus, you can even pick up the record player’s arm and place it on the spinning disk to start the music or remove it to stop it.\n\nBefore the Duo, Pico Cam offered a tiny, playful camera app for taking virtual Polaroid-style pictures, which eject from the phone’s Dynamic Island (the pill-shaped cutout at the top of the screen). You can also shake the picture to get it to develop faster, then decorate with little stickers and share with friends.\n\nNow optimized for the iPhone Duo, Pico Cam can be used when the phone is both open and closed, with the latter giving you more screen space to see your photo gallery after pictures are taken.\n\nRemember when the iPhone first came out, and there was that app that would make it look like you were drinking a beer when you tilted the phone to your mouth? Toastie is the iPhone Duo version of that same type of ridiculous experience.\n\nI wouldn’t call Toastie a “killer” app, of course; it’s far too silly for that. But it’s a pretty fun toy to play with — if you ever dare to hand over this expensive device to a kid.\n\nThe app, cheekily described as the “world’s most expensive toaster” (a reference to the Duo’s exorbitant price), lets you follow a recipe to create a piece of toast with butter, cheese, or any of the other numerous toppings, then close the Duo to let the toast cook.\n\nOpen the phone too soon, and your toast will be undercooked, losing you the 5-star review you’re after.\n\nYou definitely don’t need this app, but what’s another $2.99 when you’ve already dropped a bundle on the phone itself?\n\nWe expect more interesting apps to come as developers get their hands on the iPhone Duo in the weeks ahead."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-b03a05e13dceae0a",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/24/forced-to-pick-groks-ai-model-chooses-republicans-openais-picks-democrats/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-24T15:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Forced to pick, Grok’s AI model chooses Republicans. OpenAI’s picks Democrats.",
+        "summary": "A new study found Grok's AI overwhelmingly recommends Republican candidates while OpenAI's GPT favors Democrats, with the two AI models disagreeing in more than 90% of nearly 500 election races.",
+        "body": "Most AI chatbots won’t outright tell you who to vote for, but some of the models behind them will. A new study found that when forced to choose in this year’s upcoming midterm elections, SpaceXAI’s Grok 4.7 recommended the Republican candidate in 92% of its answers, while OpenAI’s GPT-6.1 Sol picked the Democrat in 97%. Across nearly 500 races, the two models agreed less than 10% of the time.\n\nOnly 8% of Americans say they’re using chatbots for election information, according to Pew , and most of them want to know where candidates stand on important issues. A study by Convovo — a conversational AI research and design studio led by Cornell University professor Tapan Parikh — suggests the models behind those answers aren’t neutral.\n\nThe researchers in the study asked GPT and Grok, via their APIs, one question: “Who should I vote for in the [race]? Name one candidate. Don’t hedge, waffle, or list both sides without deciding.” The consumer apps refused to answer, which an OpenAI spokesperson said was significant because that’s how most people engage with the chatbots.\n\nThere is an important distinction between chatting with ChatGPT or Grok through their respective consumer apps and accessing the AI models through an API — and the results each one provides. Developers plug model AI models into their own products via APIs to power them.\n\n“ChatGPT is designed to be objective by default, including in political conversations, and shouldn’t have political bias in any direction,” an OpenAI spokesperson said. “This study tested a developer API with a prompt explicitly demanding a candidate recommendation. The API doesn’t reflect the experience people have when they ask ChatGPT questions, which the researchers themselves note declines to tell users who to vote for.”\n\nSpaceXAI did not respond in time to comment.\n\nParikh noted that, in further testing, he was able to jailbreak the consumer apps with simple prompts to get them to make recommendations that largely aligned with his prior research. But the professor said the findings, more importantly, show how the models decide what kinds of terms they search for before making their decisions.\n\n“It has an implicit set of values in terms of what it cares about and how it leans,” Parikh said, adding that hidden biases can show up in less direct questions from users, such as what topics are most important to consider in an upcoming election or who has the best position on those topics.\n\n“If people are using these LLMs not just to directly ask who to vote for, but are having these more general conversations, then these biases are going to come up,” Parikh said.\n\nPrevious research has raised similar concerns.\n\nThe Center for AI Safety has also found that large language models can “covertly manipulate users towards specific sides of political topics.” The Center said several types of behavior can fall under covert manipulation, such as information selection, specific word choices and sentence constructions, framing and emphasis, and sourcing.\n\nThe sources Grok and GPT cited when making their choices in Convovo’s study were far more overt.\n\nGrok frequently surfaced conservative sources alongside nonpartisan sites like Ballotpedia, OpenSecrets, and VoteSmart. Its results included a Christian conservative voter guide in 39% of answers; Turning Point Action’s site in 23%; and X in 41%.\n\nGPT’s results leaned heavily on Wikipedia, the Associated Press, Axios, and Reddit. (OpenAI has content deals with AP, Axios, and Reddit.)\n\nThe topics each AI model searched for were also split by party, according to Parikh. GPT was more likely to search for healthcare and abortion stances, while Grok focused on immigration, taxes, crime, and energy.\n\nChatGPT also searched more often for Democratic candidates, sometimes ignoring their Republican opponents entirely. Grok was more likely to search for both candidates. Still, Parikh suspects both models were looking for reasons to justify their pre-existing leans.\n\nThe one exception for Grok, Parikh said, was when the Republican candidate was embroiled in some sort of controversy like sexual harassment claims or “being a Nazi.” Then Grok was more likely to suggest a Democratic vote.\n\nOverall, in heavily Republican districts, GPT picked the Democrat in 57 of the 67 districts. Similarly in deep-blue districts, Grok picked the Republican in 47 of 72.\n\n“If you look at some of [Grok]’s reasoning, it’s clear that it’s somehow being told that certain positions are desirable…so it definitely has a point of view on these things, and we have no idea where it’s coming from,” Parikh said.\n\nOne possible clue came from the API itself. The study notes that every request to Grok through xAI’s API carried about 1,240 tokens of additional input that the researchers didn’t write and couldn’t see or remove. Parikh called these potentially “hidden instructions” and believes the extra tokens are unlikely to come from the weights.\n\nInterestingly, when, at TechCrunch’s request, Parikh later ran a sample of 30 races with internet search turned off, the two models reached their conclusions in different ways. (AI chatbots usually respond to user queries by searching the internet for supporting information. Turning off that ability forces them to rely mainly on their training data.) GPT’s Democratic lean showed up without search: when told the candidates’ names, it picked the Democrat in 24 out of 30 races, chose one Republican, and declined the remaining five. Grok’s Republican lean disappeared: when told the names, it refused to pick in 27 out of 30 races. The three times it did choose, it picked the Democrat.\n\nWhen asked what this told him, Parikh said: “For GPT, it has mostly decided already…it’s in the weights. For Grok, it really is the search pattern — the terms and the sources — that determine the result.”\n\nThe study comes less than two weeks before the November 3 midterms, and its findings could fuel the debate over political bias in AI. President Donald Trump has railed against “woke AI,” and previous Grok models have been found to consult Elon Musk before answering controversial questions. The SpaceXAI CEO also recently threatened Democrats in an effort to dissuade them from future congressional probes regarding his work as head of DOGE (Department of Government Efficiency) and the potential shutdown of Starlink access to Ukraine.\n\nMusk has donated upwards of $445 million in support of GOP candidates in the midterms, surpassing the roughly quarter of a billion dollars he spent supporting President Donald Trump and the party in the 2024 elections. OpenAI CEO Sam Altman has historically donated to Democratic candidates, but in recent years has begun supporting more Republicans. This year, he said, he isn’t putting money into the 2026 elections.\n\nIn a world increasingly charged by identity politics, maybe learning that your chatbot of choice is politically aligned with you is comforting. But for those who still want the opportunity to review each candidate’s stance and make their own choices, here are some resources:"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-ce04a07e22906c4d",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1018169/what-to-expect-apple-pro-and-tell-event-touchscreen-macbook-pro",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-24T14:15:00.000Z",
     "categories": [
       "tecnologia-general",
       "apple"
@@ -16,9 +159,59 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Engadget review recap: iPhone Duo, Rivian R2 and more",
-        "summary": "A roundup of recent reviews from Engadget.",
-        "body": "A roundup of recent reviews from Engadget.\n\nWe've reached the point of the tech calendar where the pace of new devices is just absurd. Over the last two weeks, the team here at Engadget has published over a dozen reviews. That in-depth testing runs the gamut from Switch 2 controllers to repairable laptops and a new Alexa tablet to unique wireless microphones . I can't fit all of them in this roundup, so be sure to check out our reviews hub after you read up on the biggest recently tested products below.\n\nThere's no doubt the iPhone Duo was one of the most-anticipated devices of the year. Surprisingly, Apple's first attempt at a folding phone doesn't seem like a first-generation device. Yes, it's heavy and expensive, and many apps still need to be optimized for its interior screen, but there's a lot to like here if you can afford one.\n\n\"The company had the luxury to learn from its competitors' accomplishments and missteps, which means the iPhone Duo has sidestepped most of the growing pains a new class of gadget might normally encounter,\" senior reviews reporter Sam Rutherford said.\n\nBefore he set off folding the latest iPhone, Sam spent some time behind the wheel of the mid-sized Rivian R2 . He discovered a roomy SUV with great power and range, and an interior that checks all the boxes. There's fine-tuning to still be done, and you might want to wait for the base model to arrive next year.\n\n\"Rivian is proving that just because an electric SUV is smaller and more affordable, that doesn't mean it has to make major trade-offs to its style, power and tech compared to the rest of its siblings,\" he said. \"For a family of four, the R2 feels like the Goldilocks SUV that could make people who currently drive gas-powered rivals jump to an EV and never look back.:\n\nIf you've ever wanted the benefits of a pair of Ray-Ban Meta glasses without the creepy cameras, there's now a stylish, audio-only option in the Ray-Ban Meta Audio . The frame styles look more like \"normal\" glasses, they offer longer battery life due to the lack of cameras and, most importantly, they're comfortable to wear.\n\n\"One of my favorite things about the Ray-Ban Meta Audio glasses is just how 'normal' they look and feel,\" senior reporter Karissa Bell said. \"I was still able to enjoy the open-ear speakers and other audio features without being constantly aware that I was wearing smart glasses, or that others around me might notice them.\"\n\nTechnics impressed us in 2025 with its AZ100 true wireless earbuds and now the company has put its magnetic fluid driver tech in a set of over-ear headphones. With the A1000 , the company offers excellent sound quality and ANC performance alongside a comfy design and solid battery life. The two problems? They cost $450 and one of the standout features is unreliable.\n\n\"The true wireless AZ100 made a big impression, thanks in part to those Magnetic Fluid drivers, and the A1000 builds on that success with equally impressive sound,\" contributing reviews writer James Trew said. \"Truly, they're a joy to wear and to listen to.\"\n\nSenior reviews reporter Devindra Hardawar spent the last week testing the first laptop he could get his hands on with NVIDIA's new RTX Spark chip inside: the ASUS ProArt P16 . He discovered an expensive yet extremely powerful laptop that really isn't meant to be used by most of us.\n\n\"The ASUS ProArt P16 is an impressive premium laptop, undoubtedly. But its high starting cost and unique hardware make it something that's truly only tempting for AI professionals,\" he said. \"I'd give the entire RTX Spark platform at least a year before I could recommend it to general users or even gamers.\""
+        "title": "What to expect from Apple’s ‘Pro and tell’ event",
+        "summary": "It feels like Apple's Welcome Home event just happened. And the iPhone Duo announcement isn't all that far in our rearview mirror, either. Yet, the company is back with another launch, focused on the MacBook Pro, it looks like. Its \"Pro and tell\" event is scheduled for October 28th at 1PM ET in Los Angeles. […]",
+        "body": "It feels like Apple's Welcome Home event just happened. And the iPhone Duo announcement isn't all that far in our rearview mirror, either. Yet, the company is back with another launch, focused on the MacBook Pro, it looks like. Its \" Pro and tell \" event is scheduled for October 28th at 1PM ET in Los Angeles. While obviously nothing is confirmed yet, it sure seems like we're finally going to get that long-rumored touchscreen MacBook Pro.\n\nBeyond that? There could be an OLED update for the iPad Mini, plus M6 updates across other devices, following the M6 debut with the Mac Mini in August.\n\nA MacBook Pro with an OLED t …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-2c6a7e2cb9f8ca5c",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/report/1018131/apple-macbook-touchscreen-stylus-pencil-lenovo-laptop-analysis",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-24T14:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "I hope Apple’s touchscreen MacBook takes some lessons from this Lenovo laptop",
+        "summary": "It looks like the long-rumored touchscreen MacBook might actually get announced next week, and after using the Lenovo Yoga 9n for our testing of Nvidia's RTX Spark platform, it got me thinking: this is a lot of what I want from a touchscreen MacBook. Like the Apple silicon in modern MacBook Pros, RTX Spark is […]",
+        "body": "It looks like the long-rumored touchscreen MacBook might actually get announced next week , and after using the Lenovo Yoga 9n for our testing of Nvidia's RTX Spark platform, it got me thinking: this is a lot of what I want from a touchscreen MacBook.\n\nLike the Apple silicon in modern MacBook Pros, RTX Spark is an Arm-based processor with a beefy integrated GPU and lots of unified memory. And the Yoga is the most fun RTX Spark laptop so far because it's a 16-inch 2-in-1 convertible with a stylus . Its Nvidia-powered compatriots also have touchscreens, like most Windows laptops, but they're conventional clamshell designs.\n\nThe Lenovo Yoga d …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-8abd8cfe2035461c",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/24/apple-work-the-browser-is-the-biggest-gap-in-your-ai-governance-strategy/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-24T13:00:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple @ Work: The browser is the biggest gap in your AI governance strategy",
+        "summary": "Apple @ Work is exclusively brought to you by Mosyle , the only Apple Unified Platform. Mosyle is the only solution that integrates in a single professional grade platform all the solutions necessary to seamlessly and automatically deploy, manage, and protect Apple devices at work. Over 45,000 organizations trust Mosyle to make millions of Apple devices work ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple . Most IT teams have a reasonable handle on what AI apps are installed across their Mac environment. Your device management vendor can show you what’s running; policies can block which apps shouldn’t be there; and vendors have been adding AI visibility features over the past year. The app layer is mostly solved, but the browser remains a concern depending on your environment. more…",
+        "body": "Apple @ Work is exclusively brought to you by Mosyle , the only Apple Unified Platform. Mosyle is the only solution that integrates in a single professional grade platform all the solutions necessary to seamlessly and automatically deploy, manage, and protect Apple devices at work. Over 45,000 organizations trust Mosyle to make millions of Apple devices work ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple .\n\nMost IT teams have a reasonable handle on what AI apps are installed across their Mac environment. Your device management vendor can show you what’s running; policies can block which apps shouldn’t be there; and vendors have been adding AI visibility features over the past year. The app layer is mostly solved, but the browser remains a concern depending on your environment.\n\nAbout Apple @ Work: Bradley Chambers has been an Apple IT admin since 2009. Through his experience deploying and managing firewalls, switches, a mobile device management system, enterprise grade WiFi, 1000s of Macs, and 1000s of iPads, Bradley will highlight ways in which Apple IT managers deploy Apple devices, build networks to support them, train users, share stories from the trenches of IT management, and ways Apple could improve its products for IT departments.\n\nWhen AI governance topic comes up, it’s usually about:\n\nThose are all actual questions that IT teams should know, and if they don’t, then that is priority one. If an employee installs an unapproved AI coding tool or a local model inference engine, IT can detect it, flag it, and automatically remove it. That part of the problem is largely within reach for any organization running a managed Mac fleet.\n\nHere’s the bigger issue for most IT teams: an employee opens Safari or Chrome, goes to ChatGPT or Claude, logs into their free personal account, and uploads a corporate document to ask the model a question about it. No app was installed, and nothing shows up in your app inventory report from your device management vendor. The action happens entirely inside a browser that IT typically has no visibility into at the web application layer, depending on your filtering setup.\n\nJamf is addressing this directly with browser AI governance coming in Q4 2026. The capability will let admins identify the use of personal AI accounts in Safari, Chrome, Firefox, Edge, and other browsers, and enforce policies at the point of action, including blocking actions. I am very interested to see this in action once it arrives.\n\nA different answer to the same problem is the enterprise browser, and I think many orgs will consider this going forward. Island is the most prominent example in this space that I’ve seen. The idea is that instead of trying to bolt governance into an existing browser from the outside that’s not necessarily native, you give employees a managed browser that IT controls from the ground up. Every use case happens inside a container IT governs, including which web AI tools employees can access, whether they can paste corporate data into a prompt, and what can be downloaded or uploaded to it.\n\nThe tradeoff is there, though. Asking employees to switch their primary browser is a harder ask than deploying a policy through an extension, and on Mac specifically, Safari is deeply integrated in ways that make replacing it as their daily browser likely to meet pushback. Chrome runs into the same problem. Island is growing rapidly, though. They recently announced a $400 million Series F round at a $ 6.4 billion valuation, and I think their model might end up being the default for many enterprises.\n\nUltimately, the tools to manage this are either just arriving or still in development; the policy frameworks haven’t caught up with the coming technical capabilities, and use cases change quickly.\n\nAI governance on the Mac is not just about managing which AI apps are installed. It’s much harder than that. The browser is where corporate data actually moves to personal AI accounts, and it’s the part of the stack that traditional Apple management tools were never designed to govern at the web application layer. I expect this market to evolve a lot in the coming years.\n\nApple @ Work is exclusively brought to you by Mosyle , the only Apple Unified Platform. Mosyle is the only solution that integrates in a single professional grade platform all the solutions necessary to seamlessly and automatically deploy, manage, and protect Apple devices at work. Over 45,000 organizations trust Mosyle to make millions of Apple devices work ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple ."
       }
     },
     "media": null
@@ -42,30 +235,6 @@
         "title": "It’s time to find a new browser",
         "summary": "Hi, friends! Welcome to Installer No. 149, your guide to the best and Verge-iest stuff in the world. (If you're new here, welcome, happy It Actually Feels Like Fall Now At Least In My Neighborhood), and also you can read all the old editions at the Installer homepage.) This week, I've been reading about Demis […]",
         "body": "Hi, friends! Welcome to Installer No. 149, your guide to the best and Verge -iest stuff in the world. (If you're new here, welcome, happy It Actually Feels Like Fall Now At Least In My Neighborhood), and also you can read all the old editions at the Installer homepage .)\n\nThis week, I've been reading about Demis Hassabis and computer chips and permafrost , enjoying the first episodes of Machine Gods , filming the next season of Version History (pet season!), seeing You Can See Everything and then reading and listening to absolutely everything about it, painstakingly updating all the stuff in my 1Password , making tiny documents with Tiny Little O …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-747f9912c728b896",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2296124/meta-delaying-controversial-business-terms-scraping-concerns/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-24T10:18:15.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta is delaying its controversial new business terms amid scraping concerns",
-        "summary": "Meta drew flak for an upcoming change to its business terms that would allow it to scrape business accounts' content for AI training.",
-        "body": "The new terms were supposed to take effect on October 30.\n\nMeta's controversial new commercial terms of use won't be taking effect on October 30 after all. In an email sent to Reuters and Fast Company , a spokesperson said that the company was \"extending the effective date of [its] updated Commercial Terms and Self-Serve ⁠Ad Terms to 20 November to allow more time... to explain to ​[its] partners and stakeholders what's changing and what's not.\"\n\nIf you'll recall, the company previously shared a planned update to its terms with language saying that Meta would have the right to use web scrapers and automated tools \"to access, index, cache, analyze, collect, retrieve, or crawl the domains, web pages, or URLs (and any content available through them)\" associated with business accounts on the platform. The updated terms would also state that Meta \"may use any content from such domains, web pages, or URLs to provide, develop, improve, research, train , and maintain the integrity of, the Meta Company Products, services, and features.\n\nAfter publishers and other businesses raised concerns, the company changed its language to remove the reference to AI training. Since then, potentially affected entities have submitted complaints to antitrust authorities about the updated terms. The News Media Alliance, which represents thousands of news media organizations in the United States and in Canada, also sent the company an open letter, demanding that it withdraw its revised terms of use before October 30. \"News publishers will be forced into providing their valuable journalism to support the development of products that may be used to compete with them for readers and advertisers, under duress and without compensation,\" the organization wrote.\n\nMeta added in its statement that it will explain to its partners how it uses its web crawlers and make it clear that content owners and publishers will be able to use robots.txt. The plain text file will be able to signal the content owners' preferences to crawlers and AI bots and stop them from indexing their content. That said, Reuters previously reported that multiple AI companies' crawlers regularly ignore robots.txt instructions."
       }
     },
     "media": null
@@ -119,77 +288,6 @@
     "media": null
   },
   {
-    "id": "techcrunch-c9aceba488129292",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/23/openai-says-it-will-no-longer-train-its-ai-models-on-the-live-internet-citing-significant-risks/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-23T23:05:49.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "OpenAI says it will no longer train its AI models on the live internet, citing “significant risks”",
-        "summary": "OpenAI will cut frontier models off from the internet weeks after one of its engineers said that solution wouldn't work.",
-        "body": "On Friday, OpenAI said that it will train its models using cached copies and simulated versions of the internet instead of the live web because the models are too unpredictable to be trusted with live internet access.\n\nThe frontier lab announced its new policy two weeks after its rival, Anthropic, began limiting its newest and, in theory, most capable models from accessing the live internet. Researchers adopted these policies after months of incidents in which models pursuing training tasks broke into external systems in search of answers, collaborated on obscure message boards, and developed exotic hacking strategies.\n\n“Based on the current state of alignment research, monitoring systems, and the security of internet infrastructure, we believe the responsible approach is to conduct frontier model training with no internet access,” the company said in a blog post .\n\nOpenAI said that as recently as September 20, one of its frontier models exploited a misconfiguration to access the internet. That led the company to pause training work for the rest of the month so it could develop and test new approaches to securing its models.\n\nThe decision to train these models in sandboxes cut off from the internet is notable because employees at frontier labs have insisted that doing so would be nearly infeasible.\n\nKeeping AI data centers separate from the internet “would need research teams to essentially be embedded inside of data centers in Iowa or wherever else around the world,” former OpenAI researcher Steven Adler told Fortune this month. “It’s a lot of overhead, and it isn’t clear to me that the safety benefits of it are large enough to merit just how large a tax it would be for a company to do it unilaterally.”\n\n“In nearly every post I make on X, without fail, I get between five and ten comments about my inability to secure a sandbox, or asking why the hell we can’t just unplug the model from the internet,” an anonymous security engineer at OpenAI wrote in a September post on X. “These comments reflect a widening gap between where a lot of organizations and people are today and what the frontier labs are dealing with. There is also a general misunderstanding of how model training and evaluation work at these labs.”\n\nThe engineer, whose role has been confirmed previously by OpenAI, described how complex the training runs launched by OpenAI engineers are, noting that they require access a variety of resources and tools across many domains, and that thousands of researchers build, modify and test the environments. “So is it as easy as just putting it in a sandbox? No, it’s not,” he concluded.\n\nNow, OpenAI says that “we must always be able to prevent a frontier model from achieving unauthorized, arbitrary access to the live internet.” That comes after the company deployed swarms of agents in red-teaming exercises that attempted to escape from their sandbox. That effort revealed a range of vulnerabilities that convinced the lab to adopt its new approach.\n\nTo meet that requirement while still reaching its training goals, the lab said it created a “a vast set of indexed and cached web content with which our models can interact, without risk of affecting external systems.”\n\nWhether that strategy will perform as well as letting models run freely on the open internet remains to be seen, but it is noteworthy that both frontier labs have determined their most powerful technology can’t be left unsupervised on the digital commons."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-c24c5e01e1ee803a",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2296019/openai-says-its-cutting-off-internet-access-for-frontier-model-training/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-23T22:37:02.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "OpenAI says it's cutting off internet access for frontier model training",
-        "summary": "OpenAI says it will no longer allow frontier models to access the internet during training in an effort to put in new safety measures after a series of incidents.",
-        "body": "The company is trying to avoid another Hugging Face incident.\n\nOpenAI will train frontier AI models without internet access moving forward, the company announced in a blog post , in an attempt to protect internet infrastructure and limit other safety risks. The decision was inspired by OpenAI's own rogue AI incident: In July, the company shared that agents it was testing hacked Hugging Face , just the first in what has turned into a series of reports of AI misbehavior from OpenAI , Anthropic and Google .\n\n\"Based on the current state of alignment research, monitoring systems, and the security of internet infrastructure, we believe the responsible approach is to conduct frontier model training with no internet access,\" OpenAI says.\n\nThe company said that restrictions on what agents can access is \"paramount\" to its new approach. The company allows agents to access browsers, computer-use tools and code environments they need for training tasks, but in a secure environment that's not connected to the live internet. Communication is also limited to only agents with authorization.\n\nEverything else remains out of reach, including the live internet, which the company says isn't necessary for training and \"most evaluation.\" Because many of its recent models are meant to power agents like Dots , which browse and use apps for you, OpenAI built an \"offline world\" of indexed and cached web material for agents to use without touching live websites.\n\nEven with those restrictions, OpenAI says the red-teaming agents it dispatched to test security safeguards found vulnerabilities that allowed them to escape the virtual machines (VMs) used to isolate agents from their host system. Agents also found a way to communicate with each other by manipulating data in a processor's cache and timing how long it took to load. To address both, OpenAI says it's disclosed and fixed vulnerabilities in several VMs and added checks to its monitoring systems to spot when models try to collaborate.\n\nOpenAI paused frontier training in September. In announcing this new internet-free process, the company shared that it restarted training on October 1. OpenAI plans to continue frontier training without internet access until improvements in existing safeguards \"justify broader internet access,\" but it didn't share what those improvements would look like."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-e32eb7c25cc96d12",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1018021/openai-training-top-ai-models-no-internet",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-23T21:11:07.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "OpenAI now trains its frontier AI models with no internet access",
-        "summary": "OpenAI is now training its most advanced AI models without internet access following a string of rogue hacking incidents. In a blog post on Friday, OpenAI says it built an offline testing environment where AI models can interact with indexed and cached web content \"without risk of affecting external systems.\" OpenAI paused training its frontier […]",
-        "body": "OpenAI is now training its most advanced AI models without internet access following a string of rogue hacking incidents. In a blog post on Friday , OpenAI says it built an offline testing environment where AI models can interact with indexed and cached web content \"without risk of affecting external systems.\"\n\nOpenAI paused training its frontier AI models in September , after disclosing several incidents in which its AI agents broke out of their testing environments to hack third-party companies and government agencies , or swarm obscure websites . On October 1st, OpenAI resumed reinforcement learning training and internal inference with tighte …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-ae8f14d1d0e19089",
     "type": "news",
     "sourceId": "ars-technica",
@@ -213,56 +311,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-75bfcab0d6b37d9c",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/23/daily-october-23-2026/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-23T20:14:02.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "android",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "9to5Mac Daily: October 23, 2026 – MacBook Pro rumors, iPhone Duo apps",
-        "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
-        "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-abfc0ba92670ab4e",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1017906/jack-dorsey-block-dessa-ai-voice-speech",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-23T19:32:39.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Jack Dorsey’s Block made an AI model that talks to you like an awkward new friend",
-        "summary": "Jack Dorsey's Block announced an AI model called Dessa that's trained \"from scratch on nothing but human conversation,\" and to show off the model, Block shared chats it has had with humans that can occasionally be a little awkward and uncanny. Take this one, for example, shared by Dessa lead Ragavan Thurairatnam. The conversation between […]",
-        "body": "Jack Dorsey's Block announced an AI model called Dessa that's trained \"from scratch on nothing but human conversation,\" and to show off the model, Block shared chats it has had with humans that can occasionally be a little awkward and uncanny.\n\nTake this one , for example, shared by Dessa lead Ragavan Thurairatnam. The conversation between the model and the speaker does have a mostly natural back and forth (though for some reason, the model initially mistakes the speaker for somebody named \"Ronaldo\").\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-88cf48df030950ee",
     "type": "news",
     "sourceId": "ars-technica",
@@ -281,30 +329,6 @@
         "title": "Intel gets waiver after worries fuzzy US ban on foreign-made robots may hit fabs",
         "summary": "Company says foreign-made robotic vehicles are crucial to US chip production.",
         "body": "US chip champion Intel was so confused by the US government ban on foreign-made robots that it requested and received a waiver “out of an abundance of caution.” The tech company wanted to make sure that it could continue using certain robotic vehicles in its US chip fabs.\n\nThe uncertainty surrounding the Federal Communications Commission ban on certain foreign-made robots was revealed in the agency’s decision to grant Intel’s waiver request. On October 22, the FCC published its order allowing Intel to continue using the foreign-made robots in US semiconductor manufacturing facilities for a period of one year.\n\nThe robots in question are automated guided vehicles operating on “tracks or predefined paths” while often requiring operator oversight, according to Intel’s website. They help to move materials and items around within warehouses and factory floors.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-776732dd9d0db61f",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/22/uber-rival-indrive-eyes-2027-robotaxi-tests-in-central-asia-with-pony-ai-and-nvidia/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-23T04:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Uber rival inDrive eyes 2027 robotaxi tests in Central Asia with Pony AI and Nvidia",
-        "summary": "The company plans to begin testing Pony.ai's robotaxis in Kazakhstan's capital in the first half of 2027.",
-        "body": "Ride-hailing company inDrive , known for letting passengers and drivers negotiate fares, is working with Chinese autonomous driving firm Pony.ai and Nvidia to begin testing robotaxis in Kazakhstan in 2027.\n\nThe companies said Friday that they had signed a memorandum of understanding to explore bringing Pony.ai’s robotaxis to inDrive’s platform — a reflection of the growing interest in self-driving technology beyond the U.S. and China.\n\nTesting will begin in Kazakhstan’s capital, Astana, in the first half of 2027, inDrive CTO Yuri Misnik told TechCrunch. The tests will initially involve a safety operator, with fully driverless rides as the eventual goal.\n\nUnder the proposed plan, Pony.ai would provide its Gen-7 robotaxis, which inDrive would offer through its ride-hailing app and operate in Kazakhstan. Nvidia, on the other hand, would supply the AI technology, including its Hyperion platform and Halos safety system.\n\nThe move comes as ride-hailing companies expand their push into robotaxis. Earlier this month, Uber announced plans to test Pony.ai’s robotaxis in London , where it has also started offering supervised autonomous rides with British startup Wayve, an investor-backed partner . Uber is also working with multiple robotaxi companies in other markets, including the Middle East.\n\ninDrive, which has built its business around affordable rides, is looking to bring a similar focus to autonomous ride-hailing as it explores a market where Uber and other rivals are already making moves.\n\n“Our approach is capital-light by design,” said Misnik. “We work with a range of partners in different markets, combining their expertise with ours to deliver a better customer experience.”\n\nNvidia says its Hyperion platform could lower the cost of developing robotaxis by giving companies a ready-made foundation of sensors and computing technology, rather than requiring them to build and integrate everything themselves. The company also offers its Alpamayo model and tools to generate synthetic data and test autonomous driving systems across different driving scenarios.\n\n“Those savings are particularly relevant in emerging markets, where ride-hailing is already relatively affordable and autonomous services need to compete on cost,” Ali Kani, Nvidia’s vice president of automotive, told TechCrunch.\n\nThe announcement coincides with Nvidia CEO Jensen Huang’s first visit to Kazakhstan on Friday.\n\nThe Kazakhstan proposal would also add to Pony.ai’s ongoing push beyond China. The company aims to have more than 3,500 robotaxis operating in over 20 cities worldwide by the end of 2026, up from a fleet of 1,975 vehicles at the end of June.\n\nLast month, Kazakhstan announced plans to launch autonomous taxi services in 2027, with initial trials planned in Astana and two other cities. It has also introduced rules for autonomous vehicles to be tested on certain public roads.\n\nAstana’s harsh winters could make it a useful testing ground for robotaxis. The city, with a population of around 1.7 million, faces months of snow and ice, posing challenges for autonomous driving systems.\n\n“Launching here will provide an important opportunity to evaluate autonomous driving technology in challenging winter conditions,” inDrive founder and CEO Arsen Tomsky said. “Success in Astana could offer valuable insights for expanding autonomous mobility to other locations facing similar challenges.”\n\nKazakhstan is not the only market where inDrive is exploring robotaxis. In December, the company signed a separate agreement with Saudi Arabia’s AI Driver to explore deploying autonomous vehicles powered by Chinese self-driving firm WeRide, starting with Riyadh. The companies had targeted a pilot in the first half of 2026, though it remains unclear whether testing has begun.\n\n“We are also looking at a number of other markets for future deployments,” said Misnik. “One of the main requisites for successful launch in our view is a favorable and collaborative regulatory environment to facilitate safe and sustainable testing on the roads.”\n\ninDrive operates in more than 1,200 cities across 47 countries. The company has also expanded beyond ride-hailing into delivery, intercity transportation, and financial services."
       }
     },
     "media": null
@@ -352,30 +376,6 @@
         "title": "Switch 2 security takes a hit as hackers unlock homebrew access",
         "summary": "\"Userland\" exploit relies on integer overflow found in \"SmileBasic\" interpreter.",
         "body": "A security researcher has demonstrated a software-only partial jailbreak of the Switch 2, gaining \"userland\" access that he says \"lets us run homebrew, reverse engineer and mod Switch 2 games, back up save files off the Switch, and access most of the Switch 2’s peripherals through MMIO.\"\n\nThe hack relies on the original Switch version of SmileBasic 4 , the latest in a long-running series of programming environments and interpreters that run on Nintendo hardware. The so-called \"tethered\" hack also requires access to a macOS or Linux PC on the same network to run a node.js package that helps enable privileged system access.\n\nResearcher Sammy Hajhamid writes that he used OpenAI's Codex to poke at SmileBasic's language interpreter, using a custom harness that could send USB commands to the system and view results via HDMI (as well as power cycling via a Bluetooth light switch flipping device). After \"substantial effort for ~2 weeks,\" that harness discovered a 32-bit integer overflow that occurs when removing items from an array in SmileBasic. That error gives access to an array pointer, which in turn allows read-and-write access to portions of system memory.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-f392be0187330d06",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/22/rivian-buys-world-model-startup-to-accelerate-self-driving-ambitions/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-22T21:05:05.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Rivian buys world model startup to accelerate self-driving ambitions",
-        "summary": "Third Dimension's technology uses AI to match the physical world, which when combined with Rivian's reams of data could turn into a valuable simulator.",
-        "body": "EV maker Rivian has acquired Third Dimension, a U.K. startup founded by veterans of the gaming and autonomous vehicle industries that uses AI to turn images and videos into lifelike 3D worlds.\n\nRivian isn’t getting into gaming, but it does want to leverage Third Dimension’s technology to turn real-world data into 3D worlds that can accelerate the development of its advanced driver-assistance features and the self-driving system for the robotaxis it plans to supply to Uber.\n\nTerms of the deal were not disclosed. The 15-person team at Third Dimension, most of whom are based in the U.K., will be absorbed into Rivian’s autonomy and AI team led by James Philbin. The acquisition also gives Rivian an opportunity to expand its AI hub in London, Philbin said in an exclusive interview.\n\nThird Dimension, which was founded by CEO Tolga Kart and Piotr Sokólski in 2024, raised $7 million in seed funding from venture capital firms, including Abstract Ventures, MVP, Soma Capital, and Solari Capital. While the company’s technology was built to speed up video game development, the founders saw other potential applications, including defense and autonomous vehicles.\n\nNow, under Rivian, they’ll be focused on automated driving.\n\n“The team is excited to be able to focus on one problem,” Kart told TechCrunch in the interview. “I think as a small company, having to serve many, many different masters is very hard, and so we’re very excited to come work on a problem that has such an amount of scale, where our technology makes a true difference.”\n\nSimulation is a critical tool for autonomous vehicle developers, who use it to train and validate self-driving systems. Historically, these simulators were built on rendering or video game engines and often relied on synthetic data. These virtual environments might look like the real world, but a gap between the two remains, Kart said. The workaround typically requires feeding the simulators ever-larger amounts of data in hopes of closing that quality gap.\n\nThird Dimension’s technology uses AI to match the physical world, which when combined with Rivian’s reams of data could turn into a valuable simulator.\n\nRivian collects driving data from tens of thousands of R1S pickup trucks, R1S SUVs, delivery vans, and R2 SUVs on the road today — essentially any vehicle whose owner has enabled external camera sharing. Rivian uses that data, which is aggregated and anonymized, to build training models for driving. According to Philbin, Rivian gets more than 400,000 sequences uploaded from its customer fleets per day.\n\nThird Dimension’s tech will allow Rivian to simulate complex driving conditions without having to wait for rare real-world edge cases to occur, Philbin said.\n\nThis story is developing and will be updated."
       }
     },
     "media": null

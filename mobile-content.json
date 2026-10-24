@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-24T12:43:08.388Z",
+  "generatedAt": "2026-10-24T14:35:14.252Z",
   "resources": [
     {
       "kind": "resource",
@@ -2342,6 +2342,17 @@
     }
   ],
   "videos": [
+    {
+      "kind": "video",
+      "id": "SHkTb-36jWw",
+      "title": "Apple te quiere… proteger. ¡Pero tienes que activarlo! iOS 27",
+      "publishedAt": "2026-10-24T13:56:23Z",
+      "description": "Apple quiere protegernos de las estafas, y con iOS 27 incorpora una nueva función llamada «Detección de riesgo de suplantación de identidad».\n¿En qué consiste? ¿Puede nuestro iPhone detectar que alguien está intentando engañarnos para conseguir nuestro dinero o nuestros datos personales?\nEn este vídeo de TifloAcosta explico cómo funciona esta protección, cuáles son sus limitaciones y cómo podemos activarla desde los ajustes del iPhone utilizando VoiceOver.\nUna novedad importante que viene desactivada de fábrica y que necesita aplicaciones compatibles para funcionar. No evita todas las estafas, pero puede aportar una protección adicional.\nInformación oficial de Apple:",
+      "fullDescription": "Apple quiere protegernos de las estafas, y con iOS 27 incorpora una nueva función llamada «Detección de riesgo de suplantación de identidad».\n\n¿En qué consiste? ¿Puede nuestro iPhone detectar que alguien está intentando engañarnos para conseguir nuestro dinero o nuestros datos personales?\n\nEn este vídeo de TifloAcosta explico cómo funciona esta protección, cuáles son sus limitaciones y cómo podemos activarla desde los ajustes del iPhone utilizando VoiceOver.\n\nUna novedad importante que viene desactivada de fábrica y que necesita aplicaciones compatibles para funcionar. No evita todas las estafas, pero puede aportar una protección adicional.\n\nInformación oficial de Apple:",
+      "excerpt": "Apple quiere protegernos de las estafas, y con iOS 27 incorpora una nueva función llamada «Detección de riesgo de suplantación de identidad».",
+      "thumbnail": "https://i.ytimg.com/vi/SHkTb-36jWw/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=SHkTb-36jWw"
+    },
     {
       "kind": "video",
       "id": "f-5AhrQoieE",

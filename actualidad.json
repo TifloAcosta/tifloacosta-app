@@ -1,5 +1,100 @@
 [
   {
+    "id": "9to5mac-99fba5bfa2fc24cc",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/23/apple-exploring-fix-for-safaris-cramped-layout-on-the-iphone-duos-outer-display/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-23T23:50:49.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple exploring fix for Safari’s cramped layout on the iPhone Duo’s outer display",
+        "summary": "In a new post on the WebKit blog highlighting what’s new in Safari 27.1, Apple’s Jen Simmons said the company is exploring ways to let websites make better use of the iPhone Duo’s outer display. Here are the details. more…",
+        "body": "In a new post on the WebKit blog highlighting what’s new in Safari 27.1, Apple’s Jen Simmons said the company is exploring ways to let websites make better use of the iPhone Duo’s outer display. Here are the details.\n\nOne issue singled out in multiple iPhone Duo reviews ( including ours ) was the fact that Safari’s right-aligned controls take up a significant portion of the outer display’s limited screen space, leaving websites with an unusually narrow area to show their content.\n\nHere’s what Chance Miller had to say about this in his review , published earlier this week:\n\nBut the awkwardness of the iPhone’s 5.4-inch outer display shows up in Safari. The web simply isn’t optimized for this form factor. I’ll talk more about this later, but the right-aligned controls on iPhone Duo eat into the usable screen real estate in Safari especially.\n\n[…]\n\nI can see why Apple chose the design it did for Safari on the iPhone Duo. I don’t think overlapping the controls with the website would’ve made sense. Still, scrolling in Safari is one of the best examples of something that’s better on the inner screen.\n\nFor new iPhone Duo users who have also been frustrated by this issue, Apple’s Jen Simmons shared some good news today.\n\nIn a post highlighting what’s new in Safari 27.1, including how websites adapt to the iPhone Duo’s different screen sizes and folding positions, Simmons acknowledged that websites currently can’t extend behind the controls on the device’s outer display, and said Apple is exploring ways to address that limitation.\n\nFrom her post:\n\nWe would like to give web designers and developers the ability to design and use that space in more creative ways. Perhaps you want to extend your header background across the full width of the display, for example. It might seem like there’s just one obvious way to make this possible, but really there are many possibilities.\n\nSimmons went on to explain that simply using the HTML viewport meta tag with viewport-fit=\"cover\" to extend websites behind Safari’s controls could cause problems, because many websites don’t properly account for those areas, potentially leaving important content obscured.\n\nInstead, she invited developers to share their ideas as Apple explores a better approach:\n\nWe are investigating if there’s a better way to accomplish the same result — something more foolproof and perhaps easier for you to use. If you have ideas, we’d love to hear them. And stay tuned.\n\nIf you’re a web developer and have ideas on how Apple could address this limitation, you can read the full WebKit post for details on how to share your feedback."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-d59ac09d57a4fa41",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/23/apples-official-diy-repair-guides-for-the-iphone-duo-now-available/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-23T23:12:21.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple’s official DIY repair guides for the iPhone Duo now available",
+        "summary": "Following today’s launch of the iPhone Duo , Apple has now published multiple repair guides and manuals for users and independent technicians looking to replace or repair individual components in the device. Here are the details. more…",
+        "body": "Following today’s launch of the iPhone Duo , Apple has now published multiple repair guides and manuals for users and independent technicians looking to replace or repair individual components in the device. Here are the details.\n\nEarlier today, Apple published a series of support documents covering software and hardware issues that might affect the iPhone Duo, including hinge problems, Touch ID, and display troubleshooting.\n\nNow, the company has also released its official repair manual for the device, with detailed step-by-step instructions for replacing individual components.\n\nApple recommends that users and technicians read the entire repair manual before getting started, and only proceed if they feel comfortable performing the repairs as instructed.\n\nThere are also dedicated safety guides for procedures involving broken glass and battery replacements, with Apple outlining the necessary precautions, tools, and steps to minimize the risk of injury or damage.\n\nIt’s worth noting that although Apple also offers genuine replacement parts and tools through its Self Service Repair Store, parts for the iPhone Duo aren’t available just yet.\n\nThat said, Apple’s official iPhone Duo repair manuals include procedures for replacing the following components:\n\nThe iPhone Duo Repair Manual page also offers detailed diagrams of the device’s internals, along with lists of replacement parts and required tools, and you can check it out here ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-c9aceba488129292",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/23/openai-says-it-will-no-longer-train-its-ai-models-on-the-live-internet-citing-significant-risks/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-23T23:05:49.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI says it will no longer train its AI models on the live internet, citing “significant risks”",
+        "summary": "OpenAI will cut frontier models off from the internet weeks after one of its engineers said that solution wouldn't work.",
+        "body": "On Friday, OpenAI said that it will train its models using cached copies and simulated versions of the internet instead of the live web because the models are too unpredictable to be trusted with live internet access.\n\nThe frontier lab announced its new policy two weeks after its rival, Anthropic, began limiting its newest and, in theory, most capable models from accessing the live internet. Researchers adopted these policies after months of incidents in which models pursuing training tasks broke into external systems in search of answers, collaborated on obscure message boards, and developed exotic hacking strategies.\n\n“Based on the current state of alignment research, monitoring systems, and the security of internet infrastructure, we believe the responsible approach is to conduct frontier model training with no internet access,” the company said in a blog post .\n\nOpenAI said that as recently as September 20, one of its frontier models exploited a misconfiguration to access the internet. That led the company to pause training work for the rest of the month so it could develop and test new approaches to securing its models.\n\nThe decision to train these models in sandboxes cut off from the internet is notable because employees at frontier labs have insisted that doing so would be nearly infeasible.\n\nKeeping AI data centers separate from the internet “would need research teams to essentially be embedded inside of data centers in Iowa or wherever else around the world,” former OpenAI researcher Steven Adler told Fortune this month. “It’s a lot of overhead, and it isn’t clear to me that the safety benefits of it are large enough to merit just how large a tax it would be for a company to do it unilaterally.”\n\n“In nearly every post I make on X, without fail, I get between five and ten comments about my inability to secure a sandbox, or asking why the hell we can’t just unplug the model from the internet,” an anonymous security engineer at OpenAI wrote in a September post on X. “These comments reflect a widening gap between where a lot of organizations and people are today and what the frontier labs are dealing with. There is also a general misunderstanding of how model training and evaluation work at these labs.”\n\nThe engineer, whose role has been confirmed previously by OpenAI, described how complex the training runs launched by OpenAI engineers are, noting that they require access a variety of resources and tools across many domains, and that thousands of researchers build, modify and test the environments. “So is it as easy as just putting it in a sandbox? No, it’s not,” he concluded.\n\nNow, OpenAI says that “we must always be able to prevent a frontier model from achieving unauthorized, arbitrary access to the live internet.” That comes after the company deployed swarms of agents in red-teaming exercises that attempted to escape from their sandbox. That effort revealed a range of vulnerabilities that convinced the lab to adopt its new approach.\n\nTo meet that requirement while still reaching its training goals, the lab said it created a “a vast set of indexed and cached web content with which our models can interact, without risk of affecting external systems.”\n\nWhether that strategy will perform as well as letting models run freely on the open internet remains to be seen, but it is noteworthy that both frontier labs have determined their most powerful technology can’t be left unsupervised on the digital commons."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-c24c5e01e1ee803a",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2296019/openai-says-its-cutting-off-internet-access-for-frontier-model-training/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-23T22:37:02.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI says it's cutting off internet access for frontier model training",
+        "summary": "OpenAI says it will no longer allow frontier models to access the internet during training in an effort to put in new safety measures after a series of incidents.",
+        "body": "The company is trying to avoid another Hugging Face incident.\n\nOpenAI will train frontier AI models without internet access moving forward, the company announced in a blog post , in an attempt to protect internet infrastructure and limit other safety risks. The decision was inspired by OpenAI's own rogue AI incident: In July, the company shared that agents it was testing hacked Hugging Face , just the first in what has turned into a series of reports of AI misbehavior from OpenAI , Anthropic and Google .\n\n\"Based on the current state of alignment research, monitoring systems, and the security of internet infrastructure, we believe the responsible approach is to conduct frontier model training with no internet access,\" OpenAI says.\n\nThe company said that restrictions on what agents can access is \"paramount\" to its new approach. The company allows agents to access browsers, computer-use tools and code environments they need for training tasks, but in a secure environment that's not connected to the live internet. Communication is also limited to only agents with authorization.\n\nEverything else remains out of reach, including the live internet, which the company says isn't necessary for training and \"most evaluation.\" Because many of its recent models are meant to power agents like Dots , which browse and use apps for you, OpenAI built an \"offline world\" of indexed and cached web material for agents to use without touching live websites.\n\nEven with those restrictions, OpenAI says the red-teaming agents it dispatched to test security safeguards found vulnerabilities that allowed them to escape the virtual machines (VMs) used to isolate agents from their host system. Agents also found a way to communicate with each other by manipulating data in a processor's cache and timing how long it took to load. To address both, OpenAI says it's disclosed and fixed vulnerabilities in several VMs and added checks to its monitoring systems to spot when models try to collaborate.\n\nOpenAI paused frontier training in September. In announcing this new internet-free process, the company shared that it restarted training on October 1. OpenAI plans to continue frontier training without internet access until improvements in existing safeguards \"justify broader internet access,\" but it didn't share what those improvements would look like."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "the-verge-e32eb7c25cc96d12",
     "type": "news",
     "sourceId": "the-verge",
@@ -73,30 +168,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-0c9082afd1befa83",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/23/iphone-duo-has-hidden-trick-that-solves-a-common-complaint/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-23T19:43:08.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iPhone Duo has hidden trick that solves a common complaint",
-        "summary": "iPhone Duo is officially out in the wild, and users keep discovering new details about the device. The latest: there’s a hidden trick that makes opening Control Center significantly easier. more…",
-        "body": "iPhone Duo is officially out in the wild, and users keep discovering new details about the device. The latest: there’s a hidden trick that makes opening Control Center significantly easier.\n\nWhen iPhone Duo reviews dropped earlier this week, one common complaint I saw is that in left-handed use, opening Control Center can be a pain.\n\nLike on other iPhones, you open Control Center by swiping down from the top-right corner.\n\nIf you’re using iPhone Duo two-handed, that’s not a problem. Or if it’s in your right hand, it might be slightly awkward but still ultimately fine.\n\nIn left-handed use though, even when folded, the device’s extra-wide design makes Control Center more of a challenge to open.\n\nExcept it turns out, Apple added a hidden trick that solves that.\n\nAs Stephen Robles shows in a video on X , you can instead just tap the new Battery/Wi-Fi/Cellular icon to open Control Center.\n\nThis shortcut is much more reachable than a top-right corner swipe. And as Robles demonstrates, when you have a Live Activity running the button moves even further down the screen to become even more reachable.\n\nIt’s one of the many unique design implementations iPhone Duo introduces.\n\nWhat are your favorite iPhone Duo tricks you’ve discovered? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "the-verge-abfc0ba92670ab4e",
     "type": "news",
     "sourceId": "the-verge",
@@ -116,30 +187,6 @@
         "title": "Jack Dorsey’s Block made an AI model that talks to you like an awkward new friend",
         "summary": "Jack Dorsey's Block announced an AI model called Dessa that's trained \"from scratch on nothing but human conversation,\" and to show off the model, Block shared chats it has had with humans that can occasionally be a little awkward and uncanny. Take this one, for example, shared by Dessa lead Ragavan Thurairatnam. The conversation between […]",
         "body": "Jack Dorsey's Block announced an AI model called Dessa that's trained \"from scratch on nothing but human conversation,\" and to show off the model, Block shared chats it has had with humans that can occasionally be a little awkward and uncanny.\n\nTake this one , for example, shared by Dessa lead Ragavan Thurairatnam. The conversation between the model and the speaker does have a mostly natural back and forth (though for some reason, the model initially mistakes the speaker for somebody named \"Ronaldo\").\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-232e082d496e86f0",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/23/watchos-27-2-gets-new-rc-ahead-of-next-weeks-launch/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-23T19:19:09.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "watchOS 27.2 gets new RC ahead of next week’s launch",
-        "summary": "Apple has just released a second RC (release candidate) build of watchOS 27.2 for testing. Here are the details. more…",
-        "body": "Apple has just released a second RC (release candidate) build of watchOS 27.2 for testing. Here are the details.\n\nNext week, Apple is launching its wave of 27.2 software updates—likely early in the week.\n\niOS 27.2 is the biggest highlight, but there are new features also coming to tvOS 27.2 , iPadOS 27.2 , and more.\n\nWhile watchOS 27.2 doesn’t offer as many changes, it seems Apple decided the software wasn’t quite ready to ship yet. After debuting the watchOS 27.2 RC earlier this week , a new RC build has just arrived.\n\nIf you’re running the developer or public beta, the new RC is build 24S118 . The first RC was build 24S5101f.\n\nIt’s unknown what exactly has changed in the latest RC. Likely Apple discovered some new bugs it wanted to address before shipping the software to the public.\n\nHave you installed the new watchOS 27.2 RC? Notice anything new? Let us know in the comments.\n\n* Buy Apple Watch with 15% discount from Apple refurbished"
       }
     },
     "media": null
@@ -336,29 +383,6 @@
     "media": null
   },
   {
-    "id": "techcrunch-55ce190c2a2e8a59",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/22/arc-browser-sunsets-december-22-as-the-browser-company-doubles-down-on-dia/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-22T20:01:51.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Arc browser sunsets December 22 as The Browser Company doubles down on Dia",
-        "summary": "Arc was fiercely beloved by a dedicated group of enthusiasts, but it never quite became the mass-market Chrome alternative its makers once envisioned.",
-        "body": "The Browser Company is sunsetting its design-forward Arc browser on December 22, 2026, and directing users to Dia, its AI-first browser. The company announced the decision on Thursday, citing the rising cost of keeping a browser secure in the age of AI.\n\n“Keeping a browser secure takes constant, dedicated work that is only increasing in the age of AI,” the company wrote.\n\n“Dia was built from the ground up to meet today’s security standards, so that’s where our engineering and security teams will focus moving forward.”\n\nThe wind-down is staged into three parts. As of Thursday, new Arc accounts can no longer be created. On November 23, Arc Search on iOS and Android will lose its AI features, including “Browse for Me.” Users will no longer be able to sign in or sync tabs, though the app will continue functioning as a basic local browser.\n\nOn December 22, Arc will stop working entirely on Mac and Windows. Accounts will be deactivated, and personal data will be deleted within 30 days. Arc Search will also be removed from the Google Play Store.\n\nWhile The Browser Company claims Dia now surpasses Arc in speed, stability, and security benchmarks, user reactions on social media were largely disappointed , with many reviving requests for the company to make Arc open-source.\n\nBut CEO Josh Miller previously pointed out that Arc is built on the Arc Development Kit (ADK)—a proprietary internal SDK that is also the core engine powering Dia. Open-sourcing Arc would mean giving away Dia’s intellectual property.\n\n“While we’d love to open-source Arc someday, we can’t do that meaningfully without also open-sourcing ADK,” Miller previously noted. “And ADK is still core to our company’s value.”\n\nFor users making the switch, Dia will carry over equivalents of several core Arc features. Users can still swipe between different work and personal environments using Dia’s “Profiles” (formerly Arc’s Spaces). Arc’s signature vertical tabs will remain as an optional sidebar layout, while Folders have been rebranded as “Pinned Tab Groups.”\n\nPasswords, bookmarks, extensions, and history will seamlessly transfer to Dia. Arc features will remain free in Dia, with AI optional.\n\nThe shutdown officially closes a chapter that began in 2025, when the startup stopped active feature development on Arc. The Browser Company—which was acquired by Atlassian for $610 million in 2025— conceded at the time that while early adopters loved the browser’s novel interface, the “ novelty tax ” and complexity limited mainstream adoption. Arc was fiercely beloved by a dedicated group of enthusiasts, but it never quite became the mass-market Chrome alternative its makers once envisioned."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "engadget-0ae6f7a9ecf17d3b",
     "type": "news",
     "sourceId": "engadget",
@@ -377,30 +401,6 @@
         "title": "2027 BMW iX5 first drive: You'll love the range, but maybe not the look",
         "summary": "BMW's latest EV will do over 450 miles on a charge and even close its own doors.",
         "body": "BMW's latest EV will do over 450 miles on a charge and even close its own doors.\n\nToo many manufacturers are getting too clever in trying to reinvent the humble door handle lately, sometimes with fatal consequences . BMW is certainly joining that crowd with the upcoming electric SUV, the iX5. It's the effective replacement for the iX , the next step up the model line from the recently released iX3, and a battery-powered alternative to the two-row X5.\n\nThe iX5 has little winglets at the top of the front and rear doors containing strain meters that can detect a subtle pull without actually flexing. It's a vastly complex system that enables something surprisingly nice: power doors that actually work.\n\nPull the little winglet and the door swings itself open as far as it can, relying on embedded sensors to avoid slamming into you or the car you parked next to. Get inside, step on the brake pedal and the door quickly closes itself. This isn't novel technology by any means. A fair few cars (mostly expensive ones) have offered this in the past, but I tend to find them extremely annoying.\n\nMost are so slow that I never want to wait for them, so sluggish that they're hard to close manually or so unreliable that I couldn't trust them to not create a power-assisted ding into the next car over. In the iX5, they actually work, adding a little more luxury to the electric version of BMW's second-best-selling machine in the US.\n\nIt's far from the only luxurious touch. The SUV I drove was the 570-horsepower, 593-pound-foot iX5 60 xDrive model, outfitted with plush, massaging seats. The matte silver paint on the outside gave it a premium look, even if the styling is polarizing, to say the least.\n\nThe driver assistance system also has some decidedly premium touches. BMW evocatively calls it \"Symbiotic Drive,\" and though that sounds vaguely alien and ominous, it just means that the system works with you. On the highway it'll steer itself, and you can take your hands off the wheel. But if you want to change lanes, you can either tap the turn stalk, or just grab the wheel and execute the change, then let it go again.\n\nYou can speed up and even slow down manually without the system disengaging, something that definitely takes some getting used to. This isn't like an old-school cruise control system that turns off the second you touch the brake pedal or launches itself up to full speed as soon as it's engaged. You can apply the brake to bring yourself to a complete stop for a light, then lift off again and the car will smoothly resume.\n\nIt works excellently, as does the infotainment system, which runs on a curiously inclined, 17.9-inch touchscreen in the center of the dashboard. Everything is quick and responsive, and though the integrated AI assistant was a little over-eager to chime in whenever anyone in the car said \"BMW,\" it was at least able to find restaurants and answers to all of the inane queries we expect from our agentic future overlords.\n\nAbove that touchscreen, situated far back on the dashboard, is BMW's Panoramic Vision display. It runs from pillar to pillar, with six segments that you can customize to show everything from the current weather to arbitrary pictures of vintage BMWs. It looks a bit much at first, but it's actually quite nice to have, and is a lot easier to see than your average gauge cluster hidden behind the steering wheel.\n\nIt's certainly more useful than the final display in the iX5, the optional 14.6-inch passenger display. This is situated to the right and slightly behind the central display, to obscure it from the driver's view. That's because BMW opted not to use the same kind of perspective-limiting display technology that many other premium SUVs have used.\n\nInstead, the system relies on the driver-monitoring camera to detect when the driver's gaze wanders to the passenger display. When it does, the screen goes blank and whatever video the passenger is watching pauses. The screen turns back on again when the driver looks away, but the passenger has to manually resume the video. As far as user experiences go, it's not ideal.\n\nThe iX5's most luxurious feature might be the range. The iX5 carries a prodigious 144-kilowatt-hour battery slung down below the passenger compartment. It charges at a remarkable 460kW via NACS port, enough to get from 10 to 80 percent in 22 minutes if you can find a charger with enough juice.\n\nBMW hasn't completed its EPA testing, but says to expect more than 450 miles on a charge. To prove that's attainable, one of BMW's engineers drove over 500 miles from San Francisco to LA without stopping and still had 50 miles remaining.\n\nMy road trip was a fair bit shorter, but I did spend about six hours behind the wheel of a pair of BMW's new SUVs. The first half I was in the X5 40 xDrive, the internal combustion version. The second half was in the electric, and it was my clear preference.\n\nThough the gasoline-burning X5 had good power at higher speeds and made a nice sound when I floored it, the throttle response on the iX5 was infinitely sharper. It is certainly heavier, but the lower center of gravity made it feel that much more engaging in the corners, and it can do the same stopping trick as the iX3, relying on the electric motors to come to a standstill so smoothly that if you close your eyes you literally can't tell when the wheels stop rolling.\n\nBut there's honestly not much between the gas-powered X5 and battery-powered iX5. That's a big change of positioning compared to the even more polarizing iX and the prior-generation X5. Though similar in many regards, those two looked and drove nothing alike.\n\nFor this generation, BMW is bringing the family together, making the internal combustion and battery-electric versions look nigh identical. They're even pricing them similarly, with the plug-in X5 50e starting at $77,500, and the iX5 starting at $79,800.\n\nMaybe this, combined with the generous range, will finally help break down some of the EV stigma that still poisons the American automotive landscape. If not, perhaps the cool, automatic doors will woo people over. Yes, you can get them on the gas-powered X5, too, but they cost extra there."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-8e2abbd9da6d9bd1",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2294643/the-browser-company-is-officially-killing-arc-on-december-22/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-22T18:52:43.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The Browser Company is officially killing Arc on December 22",
-        "summary": "The organization is prioritizing an AI browser called Dia.",
-        "body": "The organization is prioritizing an AI browser called Dia.\n\nThe Browser Company will sunset its Arc browser on December 22 . We kind of knew this was coming, as the company has been focusing its resources on an AI browser called Dia . To that end, the organization is trying to get users to switch over from Arc to Dia. It says that all bookmarks, extensions, passwords and history will transfer over automatically. The Browser Company is also trying to lure in customers who are wary of AI by noting that all of those additional features are optional.\n\nAs for Arc, it goes dark on December 22. On that date, users will no longer be able to access their accounts. I guess it never quite caught on, even though it offered people the ability to personalize any website while browsing.\n\nMeet @diabrowser . Now available for Arc members. pic.twitter.com/dqekJNWhgR\n\n— The Browser Company (@browsercompany) June 11, 2025\n\nDia was first announced last year and is, more or less, a standard AI-based web browser. There's a chatbot that the company says can understand context across multiple open tabs. The app can also do stuff like summarize emails and YouTube videos. It pulls together a \"morning brief\" each day that integrates data from calendars, inboxes and web links. You know the drill. It's generative AI."
       }
     },
     "media": null

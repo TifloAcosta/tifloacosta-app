@@ -42,6 +42,14 @@ android {
         }
     }
     buildTypes {
+        // Explicit opt-in used only for a side-by-side, independently installed
+        // debug APK. Normal builds and Google Play application ID are unchanged.
+        debug {
+            if (project.hasProperty('tifloSafeDebug')) {
+                applicationIdSuffix ".testing"
+                versionNameSuffix "-pruebas"
+            }
+        }
         release {
             if (hasReleaseSigning) {
                 signingConfig signingConfigs.release

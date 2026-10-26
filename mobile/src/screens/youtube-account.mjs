@@ -329,9 +329,11 @@ export function createYoutubeAccountControls({
       await accountPlugin.performAction({ action, videoId: id, ...(action === 'comment' ? { text } : {}) });
       if (disposed || selected?.id !== id) return;
       editing = false;
-      message(action === 'comment' ? copy.commentSent
-        : action.includes('subscribe') ? copy.subscribedDone : copy.likedDone);
+      const confirmation = action === 'comment' ? copy.commentSent
+        : action.includes('subscribe') ? copy.subscribedDone : copy.likedDone;
       await loadVideoState();
+      // Refreshing remote state must not erase the success announcement.
+      if (!disposed && selected?.id === id) message(confirmation);
     } catch (error) {
       if (!disposed) {
         if (error?.message === 'SESSION_EXPIRED') { signedIn = false; state = null; }

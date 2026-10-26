@@ -15,6 +15,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.TextField
 import androidx.compose.material3.Button
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
@@ -24,12 +27,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.CustomAccessibilityAction
+import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -38,6 +45,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 import org.json.JSONObject
 import org.json.JSONTokener
 
@@ -91,6 +100,8 @@ private fun timeText(value: Double): String {
 fun NativeYouTubePlayer(
     item: MediaItem,
     english: Boolean,
+    account: NativeYouTubeAccount,
+    onAuthorize: () -> Unit,
     onBack: () -> Unit
 ) {
     val context = LocalContext.current
@@ -99,6 +110,20 @@ fun NativeYouTubePlayer(
     var state by remember(videoId) { mutableStateOf(YouTubeState()) }
     var seeking by remember(videoId) { mutableStateOf(false) }
     var seekValue by remember(videoId) { mutableFloatStateOf(0f) }
+    var gestureIndex by remember(videoId) { mutableIntStateOf(0) }
+    var editingComment by remember(videoId) { mutableStateOf(false) }
+    var commentText by remember(videoId) { mutableStateOf("") }
+    val scope = rememberCoroutineScope()
+    val actions = if (english)
+        listOf("Play or pause", "Back 30 seconds", "Forward 30 seconds",
+            "Like", "Subscribe", "Comment", "Share", "Open YouTube")
+    else
+        listOf("Reproducir o pausar", "Retroceder 30 segundos", "Avanzar 30 segundos",
+            "Me gusta", "Suscribirme", "Comentar", "Compartir", "Abrir en YouTube")
+
+    LaunchedEffect(videoId, account.authenticated) {
+        if (videoId != null && account.authenticated) account.loadVideoState(videoId)
+    }
 
     DisposableEffect(videoId) {
         onDispose {
@@ -136,6 +161,39 @@ fun NativeYouTubePlayer(
         view?.evaluateJavascript(
             "if(window.ready && window.yt){" + command + "}", null
         )
+    }
+
+    val runAction: (Int) -> Unit = { which ->
+        when (which) {
+            0 -> issue(if (state.playing) "yt.pauseVideo();" else "yt.playVideo();")
+            1 -> issue("yt.seekTo(Math.max(0,yt.getCurrentTime()-30),true);")
+            2 -> issue("yt.seekTo(yt.getCurrentTime()+30,true);")
+            3, 4, 5 -> {
+                if (!account.authenticated) onAuthorize()
+                else if (videoId != null) {
+                    when (which) {
+                        3 -> if (account.videoState.rating != "like") {
+                            scope.launch { account.act("like", videoId) }
+                        }
+                        4 -> if (account.videoState.subscribed != true) {
+                            scope.launch { account.act("subscribe", videoId) }
+                        }
+                        5 -> editingComment = true
+                    }
+                }
+            }
+            6 -> {
+                val link = item.openUrl
+                if (link.isNotBlank()) {
+                    context.startActivity(Intent.createChooser(Intent(Intent.ACTION_SEND).apply {
+                        type = "text/plain"
+                        putExtra(Intent.EXTRA_TEXT, link)
+                    }, if (english) "Share video" else "Compartir vídeo"))
+                }
+            }
+            7 -> if (item.openUrl.isNotBlank())
+                context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(item.openUrl)))
+        }
     }
 
     Column(
@@ -218,11 +276,79 @@ fun NativeYouTubePlayer(
                 timeText(state.seconds) + " / " + timeText(state.length),
                 modifier = Modifier.clearAndSetSemantics { }
             )
+            // One adjustable TalkBack stop: swipe up/down to select an action,
+            // then activate the adjacent button or use the accessibility action.
+            Text(
+                if (english) "Selected action: " + actions[gestureIndex]
+                else "Acción seleccionada: " + actions[gestureIndex],
+                modifier = Modifier.clearAndSetSemantics { }
+            )
+            Slider(
+                value = gestureIndex.toFloat(),
+                onValueChange = { gestureIndex = it.roundToInt().coerceIn(0, actions.lastIndex) },
+                valueRange = 0f..actions.lastIndex.toFloat(),
+                steps = (actions.size - 2).coerceAtLeast(0),
+                modifier = Modifier.fillMaxWidth().semantics {
+                    contentDescription = if (english) "Video action" else "Acción del vídeo"
+                    stateDescription = actions[gestureIndex]
+                    customActions = listOf(
+                        CustomAccessibilityAction(if (english) "Previous action" else "Acción anterior") {
+                            gestureIndex = (gestureIndex - 1).coerceAtLeast(0); true
+                        },
+                        CustomAccessibilityAction(if (english) "Next action" else "Acción siguiente") {
+                            gestureIndex = (gestureIndex + 1).coerceAtMost(actions.lastIndex); true
+                        },
+                        CustomAccessibilityAction(if (english) "Perform action" else "Ejecutar acción") {
+                            runAction(gestureIndex); true
+                        }
+                    )
+                }
+            )
+            Button(onClick = { runAction(gestureIndex) }) {
+                Text((if (english) "Perform: " else "Ejecutar: ") + actions[gestureIndex])
+            }
         } else {
             Text(
                 if (english) "This item does not contain a YouTube video link."
                 else "Este contenido no incluye un enlace directo a un vídeo de YouTube."
             )
+        }
+        if (videoId != null) {
+            if (!account.authenticated) {
+                Text(
+                    if (english) "To like, subscribe or comment, connect a Google account. Playback does not require it."
+                    else "Para indicar Me gusta, suscribirte o comentar, conecta Google. Reproducir no requiere una cuenta."
+                )
+                Button(onClick = onAuthorize) {
+                    Text(if (english) "Sign in with Google" else "Iniciar sesión con Google")
+                }
+            } else {
+                Text(if (english) "Google account connected" else "Cuenta de Google conectada")
+                if (account.videoState.rating == "like") {
+                    Text(if (english) "You already liked this video." else "Ya has indicado Me gusta.")
+                } else {
+                    OutlinedButton(
+                        enabled = !account.busy,
+                        onClick = { runAction(3) }
+                    ) { Text(if (english) "Like this video" else "Me gusta") }
+                }
+                if (account.videoState.subscribed == true) {
+                    Text(if (english) "Already subscribed to the channel." else "Ya estás suscrito al canal.")
+                } else {
+                    OutlinedButton(
+                        enabled = !account.busy,
+                        onClick = { runAction(4) }
+                    ) { Text(if (english) "Subscribe to channel" else "Suscribirme al canal") }
+                }
+                OutlinedButton(
+                    enabled = !account.busy,
+                    onClick = { editingComment = true }
+                ) { Text(if (english) "Comment on this video" else "Comentar este vídeo") }
+                TextButton(onClick = account::signOut) {
+                    Text(if (english) "Sign out" else "Cerrar sesión de YouTube")
+                }
+            }
+            if (account.message.isNotEmpty()) Text(account.message)
         }
         if (item.openUrl.isNotBlank()) {
             TextButton(onClick = {
@@ -232,5 +358,38 @@ fun NativeYouTubePlayer(
             }
         }
         if (item.summary.isNotBlank()) Text(item.summary)
+    }
+
+    if (editingComment && videoId != null) {
+        AlertDialog(
+            onDismissRequest = { editingComment = false },
+            title = { Text(if (english) "Comment on YouTube" else "Comentar en YouTube") },
+            text = {
+                TextField(
+                    value = commentText,
+                    onValueChange = { commentText = it },
+                    label = { Text(if (english) "Your comment" else "Tu comentario") },
+                    maxLines = 5
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    enabled = commentText.isNotBlank() && !account.busy,
+                    onClick = {
+                        scope.launch {
+                            if (account.act("comment", videoId, commentText)) {
+                                commentText = ""
+                                editingComment = false
+                            }
+                        }
+                    }
+                ) { Text(if (english) "Publish comment" else "Publicar comentario") }
+            },
+            dismissButton = {
+                TextButton(onClick = { editingComment = false }) {
+                    Text(if (english) "Cancel" else "Cancelar")
+                }
+            }
+        )
     }
 }

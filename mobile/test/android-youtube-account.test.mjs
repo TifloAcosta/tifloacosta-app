@@ -73,6 +73,7 @@ test('Android account transport has a protected native callback and no new permi
   assert.match(screen, /youtubeAccount\.selectVideo/);
   assert.match(screen, /youtubeAccount\.dispose/);
   assert.match(screen, /player\.open\(item, button\)/);
+  assert.match(screen, /videoRoot: player\.getAccountActionsHost\(\)/);
 });
 
 test('Android YouTube errors are announced clearly in Spanish and English', () => {
@@ -85,6 +86,8 @@ test('Android YouTube errors are announced clearly in Spanish and English', () =
 test('YouTube account panel signs in, shows selected-video actions and signs out', async () => {
   await withDocument(async () => {
     const root = new Node('main');
+    const videoRoot = new Node('div');
+    root.append(videoRoot);
     const links = [];
     let appUrlOpen;
     let removed = false;
@@ -121,12 +124,13 @@ test('YouTube account panel signs in, shows selected-video actions and signs out
       }
     };
     const controller = createYoutubeAccountControls({
-      root, accountPlugin: mockNative, appPlugin,
+      root, videoRoot, accountPlugin: mockNative, appPlugin,
       lang: 'es',
       nativeActions: { openExternal: async url => { links.push(url); return true; } }
     });
     await tick();
     assert.ok(root.querySelector('#youtube-account-signin'));
+    assert.equal(videoRoot.querySelector('#youtube-account-signin'), null);
     controller.selectVideo({ id: 'abcDEF123_-', title: 'Vídeo accesible' });
     root.querySelector('#youtube-account-signin').click();
     await tick();
@@ -136,20 +140,29 @@ test('YouTube account panel signs in, shows selected-video actions and signs out
     await tick();
     await tick();
     assert.ok(root.querySelector('#youtube-account-signout'));
-    assert.ok(root.querySelector('#youtube-account-subscribe'));
-    root.querySelector('#youtube-account-subscribe').click();
+    const subscribeButton = videoRoot.querySelector('#youtube-account-subscribe');
+    assert.ok(subscribeButton, 'The subscribe action is next to the video, not the main account panel');
+    subscribeButton.focus();
+    subscribeButton.click();
     await tick();
-    assert.ok(root.querySelector('#youtube-account-unsubscribe'));
-    root.querySelector('#youtube-account-like').click();
+    assert.strictEqual(videoRoot.querySelector('#youtube-account-unsubscribe'), subscribeButton,
+      'Keep the original focused DOM button on subscribe');
+    assert.equal(subscribeButton.focused, true);
+    const likeButton = videoRoot.querySelector('#youtube-account-like');
+    likeButton.focus();
+    likeButton.click();
     await tick();
-    assert.ok(root.querySelector('#youtube-account-unlike'));
-    root.querySelector('#youtube-account-comment').click();
+    assert.strictEqual(videoRoot.querySelector('#youtube-account-unlike'), likeButton,
+      'Keep the original focused DOM button after liking');
+    videoRoot.querySelector('#youtube-account-comment').click();
     const textarea = root.querySelector('#youtube-account-comment-text');
     assert.ok(textarea);
     textarea.value = 'Gracias por el vídeo';
     root.querySelector('#youtube-account-publish').click();
     await tick();
     assert.equal(published, 'Gracias por el vídeo');
+    assert.equal(videoRoot.querySelector('#youtube-account-comment').focused, true,
+      'Return TalkBack focus to the stable comment action after publishing');
     root.querySelector('#youtube-account-signout').click();
     await tick();
     assert.equal(signedIn, false);

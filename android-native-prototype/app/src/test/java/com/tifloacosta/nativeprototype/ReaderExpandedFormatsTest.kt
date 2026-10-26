@@ -12,7 +12,8 @@ class ReaderExpandedFormatsTest {
             "odt", "ods", "odp", "ppsx", "flac", "opus", "rtf", "fb2"
         )
         assertTrue(NativeReaderFormats.supported.containsAll(formats))
-        assertFalse(NativeReaderFormats.supported.contains("rar"))
+        assertTrue(NativeReaderFormats.supported.contains("rar"))
+        assertTrue(NativeReaderFormats.supported.contains("7z"))
         assertFalse(NativeReaderFormats.supported.contains("azw3"))
     }
 

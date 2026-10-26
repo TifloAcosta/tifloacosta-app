@@ -31,7 +31,7 @@ object NativeReaderFormats {
     val supported = setOf(
         "txt", "text", "md", "markdown", "html", "htm", "rtf", "csv", "json",
         "xml", "log", "srt", "epub", "pdf", "docx", "pptx", "xlsx",
-        "zip", "daisy", "jpg", "jpeg", "png", "webp", "bmp", "heic", "heif",
+        "zip", "daisy", "7z", "rar", "jpg", "jpeg", "png", "webp", "bmp", "heic", "heif",
         "odt", "ods", "odp", "ppsx", "xhtml", "fb2"
     ) + AUDIO_EXTENSIONS
 
@@ -54,6 +54,10 @@ object NativeReaderFormats {
         if (ext !in supported) throw IOException("El formato .$ext aún no dispone de lector compatible.")
         if (input.isEmpty()) throw IOException("El documento está vacío.")
         if (input.size > MAX_ARCHIVE_BYTES) throw IOException("El documento es demasiado grande.")
+        // Compressed books must use the disk-backed importer in NativeReaderStore.
+        if (ext in setOf("zip", "daisy", "7z", "rar")) {
+            throw IOException("Usa el importador de comprimidos que trabaja con disco.")
+        }
         if (ext in AUDIO_EXTENSIONS) return DecodedReaderFile("", ext, listOf("audio.$ext" to input))
         if (ext == "fb2") {
             return DecodedReaderFile(NativeReaderFictionBook.extract(input), ext)

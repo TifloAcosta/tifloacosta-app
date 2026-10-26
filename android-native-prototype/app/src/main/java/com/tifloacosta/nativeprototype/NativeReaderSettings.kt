@@ -183,14 +183,14 @@ fun NativeReaderGeneralSettings(english: Boolean, onBack: () -> Unit) {
                     Text(
                         if (english) "Reader formats: TXT, Markdown, HTML, XHTML, RTF, PDF with text or scanned " +
                             "pages (offline Latin OCR), JPEG, PNG, WebP, BMP, HEIC, EPUB, DOCX, PPTX, PPSX, " +
-                            "XLSX, ODT, ODS, ODP, ZIP, DAISY text/audio and audio files MP3, M4A, M4B, AAC, " +
+                            "XLSX, ODT, ODS, ODP, ZIP, 7Z, RAR, DAISY text/audio and audio files MP3, M4A, M4B, AAC, " +
                             "WAV, OGG, FLAC, OPUS when supported by Android. The old DOC, PPT, PPS and XLS " +
-                            "binary formats, RAR, 7Z, DRM and synchronized DAISY remain unsupported."
+                            "binary formats, DRM and fully synchronized DAISY text/audio remain unsupported."
                         else "Formatos del lector: TXT, Markdown, HTML, XHTML, RTF, PDF con texto o escaneados " +
                             "(OCR latino local), JPEG, PNG, WebP, BMP, HEIC, EPUB, DOCX, PPTX, PPSX, XLSX, " +
-                            "ODT, ODS, ODP, ZIP, DAISY de texto/audio y MP3, M4A, M4B, AAC, WAV, OGG, FLAC " +
+                            "ODT, ODS, ODP, ZIP, 7Z, RAR, DAISY de texto/audio y MP3, M4A, M4B, AAC, WAV, OGG, FLAC " +
                             "y OPUS según el dispositivo. Aún no se admiten DOC, PPT, PPS y XLS binarios " +
-                            "antiguos, RAR, 7Z, DRM ni sincronización DAISY."
+                            "antiguos, DRM ni sincronización completa de texto y audio DAISY."
                     )
                 }
             }

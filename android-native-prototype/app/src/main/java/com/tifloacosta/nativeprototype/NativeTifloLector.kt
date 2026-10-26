@@ -119,9 +119,12 @@ fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
                         withContext(Dispatchers.IO) {
                             store.import(uri) { page, total ->
                                 mainHandler.post {
-                                    importStatus = if (english)
-                                        "Recognizing PDF: page " + page + " of " + total
-                                    else "Reconociendo PDF: página " + page + " de " + total
+                                    importStatus = when {
+                                        total < 0 && english -> "Extracting audiobook: " + page + " files"
+                                        total < 0 -> "Extrayendo audiolibro: " + page + " archivos"
+                                        english -> "Recognizing PDF: page " + page + " of " + total
+                                        else -> "Reconociendo PDF: página " + page + " de " + total
+                                    }
                                 }
                             }
                         }

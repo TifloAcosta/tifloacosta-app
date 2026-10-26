@@ -63,7 +63,9 @@ fun NativeReaderGeneralSettings(english: Boolean, onBack: () -> Unit) {
     val prefs = remember {
         context.getSharedPreferences("native-reader-preferences", 0)
     }
-    val speaker = remember { NativeReaderSpeaker(context.applicationContext) }
+    var nested by remember { mutableStateOf("") }
+    var voiceRefresh by remember { mutableIntStateOf(0) }
+    val speaker = remember(voiceRefresh) { NativeReaderSpeaker(context.applicationContext) }
     DisposableEffect(speaker) { onDispose { speaker.close() } }
     var expanded by remember { mutableIntStateOf(-1) }
     var speed by remember { mutableIntStateOf(
@@ -81,6 +83,15 @@ fun NativeReaderGeneralSettings(english: Boolean, onBack: () -> Unit) {
             "Navigation and steps", "Supported formats")
     else listOf("Audio y voces", "Modo de lectura", "Presentación visual",
         "Navegación y avances", "Formatos compatibles")
+
+    if (nested == "external") {
+        NativeExternalVoiceProvidersScreen(english, onBack = { nested = "" })
+        return
+    }
+    if (nested == "pronunciation") {
+        NativePronunciationSettings(english, onBack = { nested = "" })
+        return
+    }
 
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
@@ -126,6 +137,18 @@ fun NativeReaderGeneralSettings(english: Boolean, onBack: () -> Unit) {
                     ) { idx ->
                         voice = voices.getOrNull(idx - 1)?.name.orEmpty()
                         prefs.edit().putString("voice", voice).apply()
+                    }
+                    Button(onClick = { nested = "external" }) {
+                        Text(if (english) "Find voices from other providers"
+                            else "Buscar voces de otros proveedores")
+                    }
+                    Button(onClick = { nested = "pronunciation" }) {
+                        Text(if (english) "Pronunciation dictionary"
+                            else "Diccionario de pronunciación")
+                    }
+                    Button(onClick = { voiceRefresh++ }) {
+                        Text(if (english) "Refresh installed voices"
+                            else "Actualizar voces instaladas")
                     }
                     Button(onClick = {
                         val intent = Intent("com.android.settings.TTS_SETTINGS")

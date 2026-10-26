@@ -326,6 +326,11 @@ private fun NativeReadingScreen(
     onBack: () -> Unit
 ) {
     val context = LocalContext.current
+    if (book.tracks.isNotEmpty()) {
+        val store = remember { NativeReaderStore(context.applicationContext) }
+        NativeReaderAudioScreen(book, store, english, onUpdate, onBack)
+        return
+    }
     val speaker = remember(book.id) { NativeReaderSpeaker(context.applicationContext) }
     DisposableEffect(speaker) { onDispose { speaker.close() } }
     var playing by remember(book.id) { mutableStateOf(false) }

@@ -144,10 +144,15 @@ fun NativeReaderAudioScreen(
         position = next
         persist()
     }
+    // Older prototype books stored only a millisecond position. Preserve
+    // those bookmarks in the current section until a new mark migrates them.
+    val marks = book.audioMarks.ifEmpty {
+        book.marks.map { ReaderAudioMark(book.trackIndex, it) }
+    }
     fun bookmark() {
         val mark = ReaderAudioMark(track, position)
-        if (mark !in book.audioMarks) {
-            onUpdate(book.copy(audioMarks = book.audioMarks + mark,
+        if (mark !in marks) {
+            onUpdate(book.copy(audioMarks = marks + mark,
                 trackIndex = track, audioPositionMs = position))
             message = if (english) "Bookmark saved" else "Marca guardada"
         }
@@ -314,7 +319,7 @@ fun NativeReaderAudioScreen(
             Button(onClick = { bookmark() }) {
                 Text(if (english) "Save bookmark" else "Guardar marca")
             }
-            book.audioMarks.forEachIndexed { i, mark ->
+            marks.forEachIndexed { i, mark ->
                 TextButton(onClick = { openTrack(mark.segmentIndex, mark.positionMs) }) {
                     Text((if (english) "Bookmark " else "Marca ") + (i + 1) +
                         ", " + (if (english) "section " else "sección ") +

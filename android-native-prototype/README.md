@@ -1,3 +1,31 @@
+# TifloLector 0.11 — comprimidos y DAISY de audio
+
+Versión de prueba. **No modifica Google Play, iOS ni la aplicación Android publicada**. Esta rama depende de las propuestas 0.8–0.10 y debe continuar en borrador hasta las pruebas físicas.
+
+## Compatibilidad nueva
+
+- Abrir **ZIP, RAR y 7Z** desde Archivos o un proveedor de nube reconocido por Android. Se copian a la zona temporal privada y se descomprimen a archivos privados en disco, sin cargar el libro completo en memoria. Los nombres del comprimido son solo identificadores, nunca rutas de extracción; hay límites de origen (1 GB), total descomprimido (1,5 GB), entrada individual (400 MB) y número de archivos (4000). Los formatos protegidos con contraseña, multipartes incompletos o archivos incompatibles dan error, no se anuncian como disponibles.
+- Reconocer paquetes **DAISY 2.02** con NCC.HTML y SMIL y algunos DAISY 3 con OPF/SMIL. NCC/OPF establece el orden de documentos SMIL; los elementos audio de SMIL dan orden de pistas y límites de fragmentos. Los mismos MP3 se reutilizan sin duplicarlos cuando varios segmentos los citan. Resolución de rutas relativas, espacios y acentos. Admitir SMIL con DOCTYPE externo habitual sin resolver ni descargar DTD.
+- El reproductor nativo presenta Reproducir/Pausar, retroceder/avanzar 30 segundos, progreso de sección, Audio (velocidad y apagado automático, cerrado) y Más acciones (sección anterior/siguiente, selector para libros cortos, guardar y recuperar marcas por sección). El título conserva las acciones ajustables con TalkBack.
+- Los comprimidos pueden contener texto TXT/Markdown/HTML/XHTML/RTF/FB2, y documentos Office modernos/EPUB/PDF que quepan en los límites de la extracción de texto. Se conserva el original del archivo y el texto extraído en almacenamiento privado; no se pierde la obra original.
+- Para evitar el gasto de espacio, la copia del comprimido y las pistas extraídas se mueve dentro del almacenamiento local cuando sea posible.
+
+## No declarar finalizados todavía
+
+- **No soportado**: DOC, PPT, PPS y XLS binarios antiguos, MOBI/AZW3/KFX con DRM, conversión de esos ebooks, sincronización DAISY texto-audio con anclajes en cada frase, ZIP/RAR/7Z con contraseña y multipartes incompletos. La decodificación de Office binario requiere una biblioteca Android compatible y pruebas reales antes de habilitarla.
+- **Pendiente de prueba física**: RAR antiguos y RAR5, 7Z de distintos algoritmos, libros DAISY de varias horas, pista FLAC/OPUS según códec Android, pausa/reanudación, marcas de sección, bloqueo de pantalla y compatibilidad con TalkBack. La compilación y las pruebas unitarias no sustituyen ensayos de usuario.
+- **Navegación DAISY**: se respeta la ordenación y los intervalos de sonido de los archivos SMIL compatibles, pero no toda la navegación avanzada por página, nivel de encabezado, notas, frases sincronizadas o subtítulos. El reproductor multimedia avanzado en segundo plano también sigue pendiente.
+- **Restricción de instalación**: las APK debug no tienen todavía firma de pruebas persistente. Desinstalar el prototipo puede borrar todos sus libros de prueba. Conservar originales y no borrar nunca la aplicación publicada.
+
+## Pruebas de aceptación en Pixel
+
+1. Un ZIP con MP3 numerados p1, p2, p10: comprobar orden natural.
+2. Un DAISY 2.02 ZIP que incluya NCC.HTML y SMIL con dos capítulos, MP3 compartido y clips no contiguos: comprobar secuencia exacta y salto de sección.
+3. Un 7Z y un RAR con pistas MP3, libros con y sin carpetas internas.
+4. Un libro de audio superior a 80 MB: comprobar que importa sin error de límite anterior y sin agotar memoria ni almacenamiento.
+5. Salir, reabrir la obra, recuperar posición y marcas por sección. Comprobar Voice/TalkBack durante reproducción.
+6. Intentar importar un archivo con contraseña o entradas peligrosas: obtener error accesible y no crear una obra incompleta.
+
 # Prototipo TifloLector 0.10 — OCR y ampliación real de formatos
 
 RAMA DE PRUEBAS, PR #253. No sustituye a la versión publicada en Google Play ni fusiona automáticamente los PR anteriores.

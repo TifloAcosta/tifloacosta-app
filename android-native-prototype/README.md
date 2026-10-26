@@ -36,6 +36,32 @@ con paquete `com.tifloacosta.nativeprototype`; **no** reemplaza TifloAcosta de G
 - La firma efímera del APK debug puede exigir desinstalar **solo** «TifloAcosta
   Nativa Pruebas» antes de instalar un nuevo APK; nunca la app de Google Play.
 
+## Quinta revisión — módulo Vídeos, cuenta de Google y gestos TalkBack (0.5)
+
+- Nuevo botón «Vídeos» en la portada, separado del catálogo editorial de
+  Actualidad, para los vídeos del catálogo de TifloAcosta.
+- El reproductor integrado permite navegar con **flic arriba/abajo** por un
+  selector ajustable de acciones; control separado «Ejecutar» evita depender
+  de pulsar todos los botones. Conserva botones individuales y saltos 30 s.
+- Acciones de Google dentro del reproductor: «Me gusta», «Suscribirme»,
+  «Comentar» (campo editable + «Publicar» explícito), «Cerrar sesión»,
+  compartir y enlace alternativo a YouTube.
+- Se reutiliza el **Worker OAuth de YouTube ya desplegado**:
+  `/auth/native/start`, `/auth/native/exchange`, `/session`, `/state`,
+  `/like`, `/subscribe`, `/comment`. No cambian rutas del servidor.
+- La identificación de Google se abre en el navegador externo. Android recibe
+  el retorno `tifloacosta://youtube-auth` en la app nativa de pruebas; la
+  app original Android no registra este filtro. Se utiliza desafío PKCE
+  adicional; se cifra la credencial de sesión con Android Keystore (AES-GCM).
+  No se solicita ni almacena la contraseña de Google, ni sus refresh tokens.
+- El vídeo puede reproducirse sin iniciar sesión. Si el servicio de YouTube
+  falla, el reproductor y el acceso externo siguen disponibles.
+- El usuario debe probar **en su Pixel 10** el ciclo completo Google → regreso
+  a la app nativa → Me gusta → Suscripción → Comentar → Cerrar sesión.
+  Compilar no certifica el funcionamiento real de OAuth, cuotas o TalkBack.
+- La firma de las APK de prueba puede cambiar entre compilaciones:
+  el usuario puede tener que desinstalar solo el prototipo. PENDIENTE firma fija.
+
 ## Cuarta revisión — reproductor nativo accesible de YouTube (0.4)
 
 - Al abrir un título de vídeo de YouTube se presenta la reproducción dentro

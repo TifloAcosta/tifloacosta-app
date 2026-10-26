@@ -27,11 +27,12 @@ object NativeReaderFormats {
     const val MAX_ARCHIVE_BYTES = 80 * 1024 * 1024
     private const val MAX_UNPACKED_BYTES = 120 * 1024 * 1024
     private const val MAX_TEXT = 6 * 1024 * 1024
-    val AUDIO_EXTENSIONS = setOf("mp3", "m4a", "m4b", "wav", "ogg", "aac")
+    val AUDIO_EXTENSIONS = setOf("mp3", "m4a", "m4b", "wav", "ogg", "aac", "flac", "opus")
     val supported = setOf(
         "txt", "text", "md", "markdown", "html", "htm", "rtf", "csv", "json",
         "xml", "log", "srt", "epub", "pdf", "docx", "pptx", "xlsx",
-        "zip", "daisy"
+        "zip", "daisy", "jpg", "jpeg", "png", "webp", "bmp", "heic", "heif",
+        "odt", "ods", "odp", "ppsx", "xhtml"
     ) + AUDIO_EXTENSIONS
 
     fun readBounded(stream: InputStream, limit: Int): ByteArray {
@@ -53,30 +54,28 @@ object NativeReaderFormats {
         if (input.isEmpty()) throw IOException("El documento está vacío.")
         if (input.size > MAX_ARCHIVE_BYTES) throw IOException("El documento es demasiado grande.")
         if (ext in AUDIO_EXTENSIONS) return DecodedReaderFile("", ext, listOf("audio.$ext" to input))
-        if (ext == "pdf") {
-            if (input.size > 35 * 1024 * 1024) throw IOException("El PDF supera el límite de esta prueba.")
-            PDFBoxResourceLoader.init(context.applicationContext)
-            return try {
-                PDDocument.load(input).use { document ->
-                    if (document.isEncrypted) throw IOException("El PDF está protegido con contraseña.")
-                    val content = PDFTextStripper().getText(document).take(MAX_TEXT)
-                    if (content.isBlank()) throw IOException(
-                        "Este PDF no contiene texto extraíble. El OCR queda pendiente."
-                    )
-                    DecodedReaderFile(content, "pdf")
-                }
-            } catch (e: IOException) { throw e }
-            catch (_: Exception) { throw IOException("No se pudo extraer el texto del PDF.") }
+        if (ext in setOf("jpg", "jpeg", "png", "webp", "bmp", "heic", "heif")) {
+            val text = NativeReaderOcr.recognizeImage(input)
+            if (text.isBlank()) throw IOException(
+                "No se encontró texto reconocible en la imagen."
+            )
+            return DecodedReaderFile(text.take(MAX_TEXT), ext)
         }
-        if (ext in setOf("zip", "epub", "docx", "pptx", "xlsx", "daisy")) {
+        if (ext == "pdf") {
+            return DecodedReaderFile(NativeReaderOcr.recognizePdf(context, input), "pdf")
+        }
+        if (ext in setOf("zip", "epub", "docx", "pptx", "ppsx",
+                "xlsx", "daisy", "odt", "ods", "odp")) {
             return decodeArchive(ext, input)
         }
         val text = input.toString(Charsets.UTF_8).removePrefix("\uFEFF").let {
             if ('\uFFFD' in it) input.toString(Charset.forName("windows-1252")) else it
         }
-        val body = if (ext in setOf("html", "htm", "xml", "rtf")) {
-            asText(text)
-        } else text
+        val body = when (ext) {
+            "rtf" -> NativeReaderRtf.extract(text)
+            "html", "htm", "xhtml", "xml" -> asText(text)
+            else -> text
+        }
         if (body.isBlank()) throw IOException("No se ha encontrado texto legible.")
         return DecodedReaderFile(body.take(MAX_TEXT), ext)
     }
@@ -190,12 +189,15 @@ object NativeReaderFormats {
             asText(raw)
         }.take(MAX_TEXT)
         return when (ext) {
+            "odt", "ods", "odp" -> {
+                DecodedReaderFile(NativeReaderOpenDocument.extract(ext, files), ext)
+            }
             "docx" -> {
                 val body = files["word/document.xml"]?.let { tagText(it, "w:p", "w:t") }.orEmpty()
                 if (body.isBlank()) throw IOException("El DOCX no contiene texto extraíble.")
                 DecodedReaderFile(body.take(MAX_TEXT), ext)
             }
-            "pptx" -> {
+            "pptx", "ppsx" -> {
                 val paths = find(Regex("ppt/slides/slide\\d+\\.xml"))
                     .sortedBy { it.substringAfter("slide").substringBefore(".").toIntOrNull() ?: 9999 }
                 val text = paths.joinToString("\n\n") {

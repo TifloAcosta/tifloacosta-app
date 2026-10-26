@@ -34,7 +34,7 @@ data class AccountVideoState(
 class NativeYouTubeAccount(private val context: Context) {
     companion object {
         const val BASE = "https://youtube-auth.tifloacosta.com"
-        private const val CALLBACK_SCHEME = "tifloacostanative"
+        private const val CALLBACK_SCHEME = "tifloacosta"
         private const val KEY_ALIAS = "tifloacosta-native-youtube"
         private const val PREFS = "youtube-native-private"
         private const val TOKEN_KEY = "encrypted-ticket"
@@ -106,7 +106,6 @@ class NativeYouTubeAccount(private val context: Context) {
         message = "Abriendo identificación segura de Google."
         return Uri.parse(BASE).buildUpon()
             .appendPath("auth").appendPath("native").appendPath("start")
-            .appendQueryParameter("platform", "android")
             .appendQueryParameter("challenge", challenge)
             .build()
     }

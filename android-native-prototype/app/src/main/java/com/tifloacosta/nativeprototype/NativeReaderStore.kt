@@ -213,7 +213,7 @@ class NativeReaderStore(private val context: Context) {
         title = title.substringAfterLast('/').take(180).ifBlank { "Documento" }
         val ext = title.substringAfterLast('.', "").lowercase(Locale.ROOT)
         if (ext in setOf("zip", "daisy", "7z", "rar")) {
-            return importCompressed(title, ext) {
+            return importCompressed(title, ext, progress) {
                 resolver.openInputStream(uri) ?: throw IOException("No se pudo abrir el comprimido.")
             }
         }
@@ -226,7 +226,7 @@ class NativeReaderStore(private val context: Context) {
     @Synchronized fun importBytes(title: String, ext: String, bytes: ByteArray,
         progress: ((Int, Int) -> Unit)? = null): ReaderBook {
         if (ext in setOf("zip", "daisy", "7z", "rar")) {
-            return importCompressed(title, ext) { bytes.inputStream() }
+            return importCompressed(title, ext, progress) { bytes.inputStream() }
         }
         val payload = NativeReaderFormats.decode(context, ext, bytes, progress)
         if (payload.body.isBlank() && payload.audio.isEmpty()) {
@@ -273,7 +273,9 @@ class NativeReaderStore(private val context: Context) {
      * a 600 MB byte array and compressed entry names never reach the filesystem.
      */
     @Synchronized private fun importCompressed(
-        title: String, ext: String, source: () -> java.io.InputStream
+        title: String, ext: String,
+        progress: ((Int, Int) -> Unit)? = null,
+        source: () -> java.io.InputStream
     ): ReaderBook {
         val id = UUID.randomUUID().toString()
         val stage = File(context.cacheDir, "reader-stage-" + id)
@@ -288,7 +290,7 @@ class NativeReaderStore(private val context: Context) {
             }
             val extracted = NativeReaderArchives.extract(
                 sourceFile, ext, File(stage, "members")
-            )
+            ) { count -> if (count == 1 || count % 10 == 0) progress?.invoke(count, -1) }
             val plan = NativeReaderDaisy.plan(extracted)
             val selected = mutableListOf<String>()
             var length = 0

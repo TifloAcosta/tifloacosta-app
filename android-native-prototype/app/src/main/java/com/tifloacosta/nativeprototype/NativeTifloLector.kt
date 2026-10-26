@@ -343,6 +343,22 @@ private fun NativeReadingScreen(
     var showVisual by rememberSaveable(book.id) { mutableStateOf(false) }
     var showNavigation by rememberSaveable(book.id) { mutableStateOf(false) }
     var selectedAction by rememberSaveable(book.id) { mutableIntStateOf(0) }
+    val prefs = remember { context.getSharedPreferences("native-reader-preferences", 0) }
+    var textSize by rememberSaveable(book.id) {
+        mutableIntStateOf(prefs.getInt("font." + book.id, prefs.getInt("font", 3)).coerceIn(0, 13))
+    }
+    var lineSpacing by rememberSaveable(book.id) {
+        mutableIntStateOf(prefs.getInt("spacing." + book.id, prefs.getInt("spacing", 0)).coerceIn(0, 2))
+    }
+    var boldText by rememberSaveable(book.id) {
+        mutableIntStateOf(prefs.getInt("bold." + book.id, prefs.getInt("bold", 0)).coerceIn(0, 1))
+    }
+    var voiceName by rememberSaveable(book.id) {
+        mutableStateOf(prefs.getString("voice." + book.id, prefs.getString("voice", "")).orEmpty())
+    }
+    var perBookRate by rememberSaveable(book.id) {
+        mutableFloatStateOf(prefs.getFloat("speed." + book.id, rate))
+    }
     var showMarks by rememberSaveable(book.id) { mutableStateOf(false) }
     var jumping by rememberSaveable(book.id) { mutableStateOf(false) }
     var jumpTo by rememberSaveable(book.id) { mutableFloatStateOf(0f) }
@@ -379,10 +395,10 @@ private fun NativeReadingScreen(
         }
     }
 
-    LaunchedEffect(playing, offset, unitType, rate, speaker.ready.value, fullText) {
+    LaunchedEffect(playing, offset, unitType, perBookRate, voiceName, speaker.ready.value, fullText) {
         if (playing && speaker.ready.value && current != null) {
             val nextOffset = units.getOrNull(currentIndex + 1)?.start ?: fullText.length
-            speaker.speak(current.text, rate) {
+            speaker.speak(current.text, perBookRate, voiceName) {
                 if (nextOffset >= fullText.length) playing = false
                 setOffset(nextOffset)
             }
@@ -472,7 +488,12 @@ private fun NativeReadingScreen(
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.semantics { heading() }
             )
-            Text(current.text)
+            Text(
+                current.text,
+                fontSize = (14 + 2 * textSize).sp,
+                lineHeight = (18 + 2 * textSize + 5 * lineSpacing).sp,
+                fontWeight = if (boldText == 1) FontWeight.Bold else FontWeight.Normal
+            )
         }
         TextButton(
             onClick = { showAudio = !showAudio },
@@ -485,16 +506,46 @@ private fun NativeReadingScreen(
             Text(if (english) "Audio and voice" else "Audio y voz")
         }
         if (showAudio) {
-            Text(if (english) "Speech rate" else "Velocidad")
-            Slider(
-                value = rate,
-                onValueChange = onRateChange,
-                valueRange = 0.6f..1.8f,
-                steps = 5,
-                modifier = Modifier.semantics {
-                    contentDescription = if (english) "Speech rate" else "Velocidad de lectura"
-                }
-            )
+            ReaderAdjustableChoice(
+                if (english) "Speech speed" else "Velocidad",
+                listOf("0,75", "0,9", "Normal", "1,25", "1,5"),
+                listOf(.75f, .9f, 1f, 1.25f, 1.5f).indices.minByOrNull { index ->
+                    kotlin.math.abs(listOf(.75f, .9f, 1f, 1.25f, 1.5f)[index] - perBookRate)
+                } ?: 2
+            ) { index ->
+                perBookRate = listOf(.75f, .9f, 1f, 1.25f, 1.5f)[index]
+                prefs.edit().putFloat("speed." + book.id, perBookRate).apply()
+            }
+            val voices = speaker.voices()
+            ReaderAdjustableChoice(
+                if (english) "Voice" else "Voz",
+                listOf(if (english) "System default" else "Predeterminada") +
+                    voices.map { it.name + ", " + it.locale.displayLanguage },
+                voices.indexOfFirst { it.name == voiceName }.let { if (it < 0) 0 else it + 1 }
+            ) { index ->
+                voiceName = voices.getOrNull(index - 1)?.name.orEmpty()
+                prefs.edit().putString("voice." + book.id, voiceName).apply()
+            }
+        }
+        TextButton(
+            onClick = { showVisual = !showVisual },
+            modifier = Modifier.semantics {
+                stateDescription = if (showVisual) "Abierto" else "Cerrado"
+            }
+        ) { Text("Visual") }
+        if (showVisual) {
+            ReaderAdjustableChoice(
+                if (english) "Text size" else "Tamaño de letra",
+                (14..40 step 2).map { it.toString() }, textSize
+            ) { textSize = it; prefs.edit().putInt("font." + book.id, it).apply() }
+            ReaderAdjustableChoice(
+                if (english) "Line spacing" else "Interlineado",
+                listOf("Normal", "Cómodo", "Amplio"), lineSpacing
+            ) { lineSpacing = it; prefs.edit().putInt("spacing." + book.id, it).apply() }
+            ReaderAdjustableChoice(
+                if (english) "Bold text" else "Texto reforzado",
+                listOf("No", "Sí"), boldText
+            ) { boldText = it; prefs.edit().putInt("bold." + book.id, it).apply() }
         }
         TextButton(
             onClick = { jumping = !jumping },

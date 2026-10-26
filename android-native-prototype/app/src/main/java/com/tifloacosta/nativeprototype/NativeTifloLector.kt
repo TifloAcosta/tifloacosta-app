@@ -60,6 +60,7 @@ fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
     var library by remember { mutableStateOf<List<ReaderBook>>(emptyList()) }
     var selectedBook by remember { mutableStateOf<ReaderBook?>(null) }
     var selectedText by remember { mutableStateOf("") }
+    var playOnOpen by remember { mutableStateOf(false) }
     var screen by rememberSaveable { mutableStateOf("home") }
     var filtersExpanded by rememberSaveable { mutableStateOf(false) }
     var filter by rememberSaveable { mutableIntStateOf(0) }
@@ -86,11 +87,12 @@ fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
         library = withContext(Dispatchers.IO) { store.list() }
         loading = false
     }
-    fun open(book: ReaderBook) {
+    fun open(book: ReaderBook, startSpeech: Boolean = false) {
         error = ""
         scope.launch {
             try {
                 selectedText = withContext(Dispatchers.IO) { store.read(book) }
+                playOnOpen = startSpeech
                 selectedBook = book
             } catch (e: Exception) { error = e.message ?: "No se pudo abrir el documento." }
         }
@@ -112,7 +114,7 @@ fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
         }
     }
     fun back() {
-        if (selectedBook != null) { selectedBook = null; selectedText = "" }
+        if (selectedBook != null) { selectedBook = null; selectedText = ""; playOnOpen = false }
         else if (screen == "catalogs") screen = "import"
         else if (screen != "home") screen = "home"
         else onBack()
@@ -123,10 +125,11 @@ fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
             book = book,
             fullText = selectedText,
             english = english,
+            startOnOpen = playOnOpen,
             rate = rate,
             onRateChange = { rate = it; preferences.edit().putFloat("rate", it).apply() },
             onUpdate = ::save,
-            onBack = { selectedBook = null; selectedText = "" }
+            onBack = { selectedBook = null; selectedText = ""; playOnOpen = false }
         )
         return
     }
@@ -235,7 +238,8 @@ fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
             var action by remember(book.id) { mutableIntStateOf(0) }
             fun run(which: Int) {
                 when (which) {
-                    0, 1, 2 -> open(book)
+                    0, 2 -> open(book)
+                    1 -> open(book, startSpeech = true)
                     3 -> save(book.copy(favorite = !book.favorite))
                     4 -> info = book
                     5 -> { proposedTitle = book.title; rename = book }
@@ -323,6 +327,7 @@ private fun NativeReadingScreen(
     book: ReaderBook,
     fullText: String,
     english: Boolean,
+    startOnOpen: Boolean,
     rate: Float,
     onRateChange: (Float) -> Unit,
     onUpdate: (ReaderBook) -> Unit,
@@ -331,7 +336,7 @@ private fun NativeReadingScreen(
     val context = LocalContext.current
     if (book.tracks.isNotEmpty()) {
         val store = remember { NativeReaderStore(context.applicationContext) }
-        NativeReaderAudioScreen(book, store, english, onUpdate, onBack)
+        NativeReaderAudioScreen(book, store, english, startOnOpen, onUpdate, onBack)
         return
     }
     val speaker = remember(book.id) { NativeReaderSpeaker(context.applicationContext) }
@@ -395,6 +400,11 @@ private fun NativeReadingScreen(
         }
     }
 
+    LaunchedEffect(book.id, speaker.ready.value) {
+        if (speaker.ready.value && (startOnOpen || prefs.getInt("mode", 0) == 1)) {
+            playing = true
+        }
+    }
     LaunchedEffect(playing, offset, unitType, perBookRate, voiceName, speaker.ready.value, fullText) {
         if (playing && speaker.ready.value && current != null) {
             val nextOffset = units.getOrNull(currentIndex + 1)?.start ?: fullText.length

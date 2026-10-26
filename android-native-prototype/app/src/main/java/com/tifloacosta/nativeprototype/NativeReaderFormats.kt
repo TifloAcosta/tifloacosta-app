@@ -227,7 +227,9 @@ object NativeReaderFormats {
                         !lower.contains("toc.") && !lower.contains("nav.") &&
                         !lower.endsWith("ncc.html")
                 }.sorted()
-                val text = pages(textPaths)
+                val orderedTextPaths = if (epub) NativeReaderEpub.orderedPages(files)
+                    else textPaths
+                val text = pages(orderedTextPaths)
                 val audio = names.filter { path ->
                     path.substringAfterLast('.').lowercase(Locale.ROOT) in AUDIO_EXTENSIONS
                 }.sorted().map { name -> name to files.getValue(name) }

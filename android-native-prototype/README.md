@@ -1,3 +1,24 @@
+# Prototipo TifloLector 0.10 — OCR y ampliación real de formatos
+
+RAMA DE PRUEBAS, PR #253. No sustituye a la versión publicada en Google Play ni fusiona automáticamente los PR anteriores.
+
+## Cambios implementados
+- Importar **JPG/JPEG, PNG, WebP, BMP, HEIC/HEIF**: reconocimiento de texto latino (español/inglés y otros alfabetos latinos) mediante ML Kit 16.0.1 empaquetado, para funcionar sin descargar el modelo OCR. Los resultados vacíos informan del fallo y no crean un libro fingidamente legible. Compatibilidad HEIC depende del decodificador Android disponible.
+- Importar **PDF escaneado o mixto**: se recupera el texto seleccionable por página. Las páginas sin texto o con menos de 40 caracteres alfanuméricos prueban reconocimiento OCR del renderizado de esa página, conservando el texto seleccionable si el reconocimiento opcional falla. Se procesa y libera una página cada vez con dimensiones/píxeles máximos. Límite provisional: 250 páginas y PDF hasta 40 MB; libros grandes requieren OCR por lotes. El importador informa progreso por página.
+- Conservar una copia **privada del original** de cada importación, además del texto extraído. Nunca se sobrescribe el original con el OCR. Al eliminar una obra se borra también su original y pistas asociadas.
+- Nuevos extractores: ODT, ODS, ODP, PPSX, FB2 (también dentro de ZIP), RTF mejorado. EPUB utiliza la secuencia de capítulos del OPF. FLAC/OPUS se abren mediante MediaPlayer solo donde el sistema los decodifique. Los archivos ZIP se tratan con límites de tamaño y de cantidad de entradas, y XML bloquea entidades externas.
+- Filtros de biblioteca incluyen OCR de imágenes y los OpenDocument dentro de Office. Todos los títulos siguen simples, con gestos TalkBack; no se añade buscador, cola ni se desdoblan menús generales.
+
+## Limitaciones pendientes antes de declarar equivalencia con iOS
+- **No son lectores actuales** los Office binarios antiguos DOC, PPT, PPS y XLS, ni RAR/7Z, MOBI/AZW3/KFX, libros con DRM, audio/video complejo o PDF con contraseña.
+- OCR local incluido para escrituras **latinas**, no para chino/japonés/coreano/devanagari en esta compilación. La calidad depende de imagen/idioma. No se corrigen automáticamente tablas difíciles ni orden en columnas.
+- PDF con escaneo y capa extensa de texto en la *misma página* todavía puede omitir contenido gráfico. El OCR de 250 páginas puede llevar mucho tiempo: falta procesamiento reanudable por lotes, cancelación garantizada y trabajo en segundo plano.
+- Falta navegación DAISY estructural/sincronizada, extracción OCR de imágenes incrustadas en EPUB/Office, exportación, traducción, restauración con firma persistente y reproducción avanzada de fondo. Se conservan como tareas expresas, no como opciones falsamente disponibles.
+- Las pruebas de unidad/build **no equivalen** a pruebas reales en Pixel/TalkBack con EPUB, documentos Office, fotos borrosas y PDF escaneados. No publicar hasta validación.
+
+## Prueba sugerida
+Primero, un TXT ya comprobado como control. Después, un JPG con un párrafo grande y nítido, un PNG de pantalla, un PDF de dos páginas escaneadas, un PDF con texto seleccionable y otra página escaneada, y un ODT/ODS/ODP sencillo. Confirmar importación, lectura, posición, marcas, apertura de carpeta, salida y regreso. Conservar siempre los archivos originales fuera del prototipo. Desinstalar el APK de firma debug variable elimina los datos privados de la app de pruebas.
+
 # Prototipo 0.9 — voces, pronunciación y apagado automático
 
 En esta fase se conservan la portada mínima y el flujo de importación del prototipo 0.8. No modifica la aplicación de Google Play.

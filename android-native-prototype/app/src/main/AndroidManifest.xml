@@ -7,10 +7,17 @@
         android:allowBackup="false"
         android:usesCleartextTraffic="false">
         <activity android:name=".NativePrototypeActivity"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tifloacostanative" android:host="youtube-auth" />
             </intent-filter>
         </activity>
     </application>

@@ -492,19 +492,6 @@ private fun NativeReadingScreen(
                 contentDescription = if (english) "Reading progress" else "Progreso de lectura"
             }
         )
-        if (current != null) {
-            Text(
-                if (english) "Reading text" else "Texto de lectura",
-                style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.semantics { heading() }
-            )
-            Text(
-                current.text,
-                fontSize = (14 + 2 * textSize).sp,
-                lineHeight = (18 + 2 * textSize + 5 * lineSpacing).sp,
-                fontWeight = if (boldText == 1) FontWeight.Bold else FontWeight.Normal
-            )
-        }
         TextButton(
             onClick = { showAudio = !showAudio },
             modifier = Modifier.semantics {
@@ -609,6 +596,20 @@ private fun NativeReadingScreen(
                     }
                 }
             }
+        }
+
+        if (current != null) {
+            Text(
+                if (english) "Reading text" else "Texto de lectura",
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.semantics { heading() }
+            )
+            Text(
+                current.text,
+                fontSize = (14 + 2 * textSize).sp,
+                lineHeight = (18 + 2 * textSize + 5 * lineSpacing).sp,
+                fontWeight = if (boldText == 1) FontWeight.Bold else FontWeight.Normal
+            )
         }
 
     }

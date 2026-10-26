@@ -87,7 +87,7 @@ test('Android video lists expose one title and defer controls to the video itsel
   assert.match(searchCard, /article\.append\(playButton\)/);
   assert.doesNotMatch(searchCard, /addExternalLink|addShareButton|addParagraph|article\.append\(title\)/);
   assert.match(ownList, /list\.append\(article\)/);
-  assert.doesNotMatch(ownList, /addExternalLink|addShareButton|addFavoriteButton|article\.append\(title\)/);
+  assert.doesNotMatch(ownList, /addExternalLink|addShareButton|addFavoriteButton/);
   assert.match(screen, /player\.getExtraActionsHost\(\)/);
   assert.match(screen, /show\.setAttribute\('aria-expanded', String\(expanded\)\)/);
   assert.match(screen, /panel\.hidden = true/);

@@ -36,6 +36,23 @@ con paquete `com.tifloacosta.nativeprototype`; **no** reemplaza TifloAcosta de G
 - La firma efímera del APK debug puede exigir desinstalar **solo** «TifloAcosta
   Nativa Pruebas» antes de instalar un nuevo APK; nunca la app de Google Play.
 
+## Cuarta revisión — reproductor nativo accesible de YouTube (0.4)
+
+- Al abrir un título de vídeo de YouTube se presenta la reproducción dentro
+  de TifloAcosta, sin salir automáticamente a la app de YouTube.
+- Se usa **exclusivamente la API oficial YouTube IFrame**, a través de WebView
+  con `loadDataWithBaseURL` y origen identificado con el ID de esta aplicación.
+  No se descargan ni extraen contenidos de YouTube.
+- Controles Android Compose accesibles por TalkBack: Reproducir/Pausar,
+  retroceder/avanzar 30 segundos y posición ajustable, con botón Volver.
+- Si el vídeo no tiene un enlace individual o YouTube impide embeberlo,
+  sigue disponible «Abrir en YouTube (alternativa)».
+- No se afirma que todos los vídeos se puedan embeber; depende de
+  restricciones del contenido, YouTube y WebView. Validación física pendiente.
+- Los podcasts todavía usan enlace externo hasta añadir reproductor
+  de audio Media3 en la siguiente fase.
+- No modifica TifloAcosta Play Store ni la instalación antigua.
+
 ## Tercera revisión — multimedia editorial en Actualidad
 
 - Contenidos «Podcasts», «Canales de YouTube» y «Todos los formatos»,

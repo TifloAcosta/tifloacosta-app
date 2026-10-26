@@ -228,6 +228,7 @@ export function createYoutubeAccountControls({
     if (disposed) return;
     introduction.hidden = signedIn;
     sessionButton.hidden = !available;
+    sessionButton.id = signedIn ? 'youtube-account-signout' : 'youtube-account-signin';
     sessionButton.textContent = signedIn ? copy.signOut : copy.signIn;
     sessionButton.setAttribute('aria-disabled', String(busy));
     noVideo.hidden = !signedIn || Boolean(selected);
@@ -242,8 +243,11 @@ export function createYoutubeAccountControls({
     videoName.textContent = copy.activeVideo(selected.title);
     const hasState = state !== null;
     subscribeButton.hidden = !hasState || typeof state?.subscribed !== 'boolean';
+    subscribeButton.id = state?.subscribed === true
+      ? 'youtube-account-unsubscribe' : 'youtube-account-subscribe';
     subscribeButton.textContent = state?.subscribed === true ? copy.unsubscribe : copy.subscribe;
     likeButton.hidden = !hasState;
+    likeButton.id = state?.rating === 'like' ? 'youtube-account-unlike' : 'youtube-account-like';
     likeButton.textContent = state?.rating === 'like' ? copy.unlike : copy.like;
     commentButton.hidden = !hasState;
     editor.hidden = !hasState || !editing;

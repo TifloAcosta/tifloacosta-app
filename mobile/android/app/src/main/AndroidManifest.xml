@@ -50,6 +50,14 @@
                 <data android:mimeType="audio/x-wav" />
             </intent-filter>
 
+            <!-- Google OAuth: callback after PKCE authorization in system browser. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tifloacosta" android:host="youtube-auth" />
+            </intent-filter>
+
         </activity>
 
         <service

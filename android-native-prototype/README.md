@@ -1,3 +1,37 @@
+# Prototipo 0.9 — voces, pronunciación y apagado automático
+
+En esta fase se conservan la portada mínima y el flujo de importación del prototipo 0.8. No modifica la aplicación de Google Play.
+
+- En Ajustes generales, dentro de **Audio y voces** (cerrado al entrar): selección de la voz del motor Android activo; botón **Buscar voces de otros proveedores** que abre otra pantalla con Acapela TTS Voices, Vocalizer TTS y Eloquence TTS. Cada enlace externo requiere confirmación. La instalación, disponibilidad, pagos, cambio de motor TTS y descarga son responsabilidad del proveedor/usuario. El lector no descarga voces privativas ni promete que cada motor aparezca en todos los dispositivos. **Actualizar voces instaladas** vuelve a consultar el motor TTS.
+- **Diccionario de pronunciación**, dentro de Audio y voces y también accesible desde Audio de un documento de texto: añadir y borrar parejas «Palabra escrita / Pronunciar como». Límite de 150 entradas, sustitución por palabras completas, sin cascada, solo sobre el fragmento enviado a síntesis, preservando contenido, progreso y marcas. Al abrir su editor desde un documento se pausa la lectura para evitar solapamiento con TalkBack.
+- **Apagado automático** dentro de Audio de cada texto y de cada audiolibro: Desactivado, 5, 10, 15, 30, 45 y 60 minutos. Por defecto desactivado al abrir un libro. El contador se ejecuta mientras se reproduce; al pausar se cancela y al reanudar inicia de nuevo el intervalo. Al vencer la reproducción se detiene o pausa conservando la posición. No es alarma independiente ni se mantiene contando con audio pausado.
+- Pendiente validación física de enlaces de proveedores según región, motores que anuncian sus voces en Android, pronunciación en lenguas mixtas y temporizador con pantalla bloqueada.
+
+## Inventario de formatos — estado real de prototipo 0.9
+
+1. **Decodificadores presentes que exigen pruebas reales**: TXT, Markdown, HTML/HTM, CSV/JSON/XML/log/SRT (texto), PDF con capa de texto, EPUB sin DRM, DOCX, PPTX, XLSX, ZIP de texto/audio, DAISY/ZIP con contenido reconocible (sin sincronía SMIL), MP3, M4A/M4B, WAV, OGG y AAC (según códecs compatibles de Android). RTF se trata por ahora solo de forma básica; **no** se considera fidelidad de conversión a RTF garantizada.
+2. **Prioridad alta, aún no incorporados en el prototipo nativo**: OCR de PDF escaneados, fotografías JPG/JPEG/PNG/WebP y texto integrado en imágenes; extracción estructural de tablas Office y notas/alternativas de imagen; DAISY completo con navegación/sincronía, audio en segundo plano.
+3. **Office legado pendiente**: DOC binario, PPT, PPS y XLS. Formatos de presentación/Office pendientes adicionales: PPSX y OpenDocument ODT/ODS/ODP.
+4. **Otros formatos posibles a evaluar según demanda y licencia/códecs**: FLAC/OPUS, FB2, MOBI/AZW3/KFX (incluido DRM, que no se promete admitir), RAR/7Z, páginas XHTML individuales y archivos de audio/vídeo MP4. MP4 es contenedor multimedia, no necesariamente un libro.
+5. **Otras funciones independientes del formato** todavía pendientes de portarse del lector Android ya publicado a este prototipo nativo: OCR, traducción en dispositivo, exportación/compartir, biblioteca con firma persistente y restauración, continuidad multimedia en segundo plano; comprobar la paridad con las últimas versiones iOS.
+
+No afirmar equivalencia funcional ni publicar hasta pruebas en Pixel con TalkBack y documentos representativos. El repositorio existente ya contiene OCR, traducción y controles avanzados para la app Android anterior, que pueden servir de referencia para portar estas funciones sin perderlas.
+
+# Propuesta 0.8 — paridad mínima TifloLector Android/iOS (26/10/2026)
+
+ESTADO: propuesta en PR #252, independiente de la app Google Play. No dar por aceptada ni publicar hasta ensayo físico con TalkBack y confirmación del usuario.
+
+## Entrada a TifloLector
+La portada del lector muestra únicamente **Importar**, **Ajustes**, **Filtros** (cerrados por defecto), encabezado **Mi biblioteca** y títulos paginados de diez en diez. Sin barra de búsqueda general, sin panel de cola ni bloque de marcas desplegado en Inicio. Las marcas se consultan desde la obra. Se conserva "Volver al inicio".
+
+- **Importar** abre pantalla con dos accesos: «Archivos del dispositivo y nubes», mediante Android Storage Access Framework (document picker, admite proveedores instalados como Google Drive o OneDrive si el usuario tiene sesión y proveedor), y «Bibliotecas externas (OPDS)», con Proyecto Gutenberg y catálogos HTTPS añadidos por el usuario. No se implementa una integración o login de nube propio.
+- **Ajustes** abre submenús independientes y cerrados: Audio y voces (velocidad, filtro de idioma, voces Android instaladas, acceso a ajustes TTS del sistema), Modo manual/automático, Presentación visual (tamaño, interlineado, negrita), Navegación y avances (bloque/párrafo/frase), Formatos reales.
+- **Filtros** usan deslizadores ajustables para formato, fecha, favoritos, marcas, orden y carpeta; sin buscador textual destacado. Los títulos se pueden gestionar con acciones TalkBack: Abrir, Reproducir, Marcas, Favorito, Información, Cambiar título, Mover a carpeta y Eliminar con confirmación. El gesto vertical ajusta la acción seleccionada, y el doble toque la ejecuta; se debe confirmar físicamente porque TalkBack depende de la configuración de controles de lectura.
+- Dentro de un texto, únicamente Reproducir/Pausar, progreso, Navegación, Audio, Visual y Más acciones, todos los submenús cerrados. El título también admite acciones ajustables con gestos; el texto se presenta tras los controles. Preferencias visuales y voz individuales por libro.
+- Decodificadores añadidos: TXT/MD/HTML y otros textos simples; PDF que ya contenga texto (sin OCR), EPUB, DOCX, PPTX, XLSX, ZIP y DAISY de texto/audio (sin sincronización SMIL de momento); pistas MP3, M4A, M4B, WAV, OGG y AAC por reproductor local básico de primer plano. No se afirma lectura de PPT/PPS/XLS antiguos, PDF escaneado, DRM, conversión perfecta de tablas/estructuras, ni audiolibros con servicio multimedia de fondo. La lectura DAISY actual **no** promete navegación sincronizada texto/audio.
+- Los archivos están en la biblioteca privada del prototipo; no se migra ni comparte la biblioteca de la app comercial. Desinstalar una APK debug de distinta firma destruye esos datos del prototipo. Conservar originales hasta que exista firma estable, pruebas de importación y persistencia verificadas.
+- En esta iteración los usuarios todavía deben validar títulos/tipos distintos en Pixel, controles ajustables, su locución, reapertura de libros y estados sin conexión. Compilar NO demuestra usabilidad.
+
 # Estado actual del prototipo — 0.7 (TifloLector, primera fase, 26/10/2026)
 
 Esta sección actualiza el alcance inicial de este README. Las secciones históricas de fases anteriores se mantienen como registro, pero no describen la totalidad de las funciones de la versión 0.7.

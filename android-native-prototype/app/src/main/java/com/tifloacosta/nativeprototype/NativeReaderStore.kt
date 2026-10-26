@@ -24,7 +24,13 @@ data class ReaderBook(
     val length: Int,
     val offset: Int = 0,
     val createdAt: Long = System.currentTimeMillis(),
-    val marks: List<Int> = emptyList()
+    val marks: List<Int> = emptyList(),
+    val format: String = "txt",
+    val favorite: Boolean = false,
+    val folder: String = "",
+    val tracks: List<String> = emptyList(),
+    val trackIndex: Int = 0,
+    val audioPositionMs: Int = 0
 )
 
 data class ReadingUnit(val start: Int, val end: Int, val text: String)
@@ -113,7 +119,17 @@ class NativeReaderStore(private val context: Context) {
                     length = obj.optInt("length", 0),
                     offset = obj.optInt("offset", 0).coerceAtLeast(0),
                     createdAt = obj.optLong("createdAt", 0),
-                    marks = (0 until marks.length()).map { marks.optInt(it, 0).coerceAtLeast(0) }
+                    marks = (0 until marks.length()).map { marks.optInt(it, 0).coerceAtLeast(0) },
+                    format = obj.optString("format", "txt"),
+                    favorite = obj.optBoolean("favorite", false),
+                    folder = obj.optString("folder", ""),
+                    trackIndex = obj.optInt("trackIndex", 0).coerceAtLeast(0),
+                    audioPositionMs = obj.optInt("audioPositionMs", 0).coerceAtLeast(0),
+                    tracks = obj.optJSONArray("tracks")?.let { arr ->
+                        (0 until arr.length()).mapNotNull { n ->
+                            arr.optString(n).takeIf { value -> value.matches(Regex("[a-f0-9-]{36}\\.\\d{3}\\.[A-Za-z0-9]{2,5}")) }
+                        }
+                    } ?: emptyList()
                 )
             }
         } catch (_: Exception) { emptyList() }
@@ -124,7 +140,10 @@ class NativeReaderStore(private val context: Context) {
         books.forEach { book ->
             array.put(JSONObject().put("id", book.id).put("title", book.title)
                 .put("length", book.length).put("offset", book.offset)
-                .put("createdAt", book.createdAt).put("marks", JSONArray(book.marks)))
+                .put("createdAt", book.createdAt).put("marks", JSONArray(book.marks))
+                .put("format", book.format).put("favorite", book.favorite)
+                .put("folder", book.folder).put("tracks", JSONArray(book.tracks))
+                .put("trackIndex", book.trackIndex).put("audioPositionMs", book.audioPositionMs))
         }
         val temp = File(folder, "index.tmp")
         temp.writeText(array.toString(), Charsets.UTF_8)
@@ -145,6 +164,10 @@ class NativeReaderStore(private val context: Context) {
         if (books.any { it.id == book.id }) save(books)
     }
 
+    @Synchronized fun audioFiles(book: ReaderBook): List<File> {
+        return book.tracks.map { File(folder, it) }.filter { it.isFile }
+    }
+
     @Synchronized fun import(uri: Uri): ReaderBook {
         val resolver = context.contentResolver
         var title = "Documento"
@@ -153,101 +176,59 @@ class NativeReaderStore(private val context: Context) {
         }
         title = title.substringAfterLast('/').take(180).ifBlank { "Documento" }
         val ext = title.substringAfterLast('.', "").lowercase(Locale.ROOT)
-        if (ext !in setOf("txt", "text", "md", "markdown", "html", "htm")) {
-            throw IOException("Por ahora solo se admiten TXT, Markdown y HTML.")
-        }
         val bytes = resolver.openInputStream(uri)?.use { stream ->
-            val output = ByteArrayOutputStream()
-            val buffer = ByteArray(8192)
-            while (true) {
-                val count = stream.read(buffer)
-                if (count < 0) break
-                if (output.size() + count > 4 * 1024 * 1024) {
-                    throw IOException("El documento supera el límite de 4 MB de esta prueba.")
-                }
-                output.write(buffer, 0, count)
-            }
-            output.toByteArray()
+            NativeReaderFormats.readBounded(stream, NativeReaderFormats.MAX_ARCHIVE_BYTES)
         } ?: throw IOException("No se pudo abrir el documento.")
-        if (bytes.isEmpty()) throw IOException("El documento está vacío.")
-        var raw = bytes.toString(Charsets.UTF_8).removePrefix("\uFEFF")
-        if ('\uFFFD' in raw) raw = bytes.toString(Charset.forName("windows-1252"))
-        val plain = if (ext == "html" || ext == "htm") {
-            val withoutCode = raw.replace(
-                Regex("<(script|style)\\b[^>]*>[\\s\\S]*?</\\1>", RegexOption.IGNORE_CASE), " "
-            )
-            Html.fromHtml(withoutCode, Html.FROM_HTML_MODE_COMPACT).toString()
-        } else raw
-        if (plain.isBlank()) throw IOException("El documento no contiene texto legible.")
-        val book = ReaderBook(UUID.randomUUID().toString(), title, plain.length)
-        val document = File(folder, book.id + ".txt")
-        document.writeText(plain, Charsets.UTF_8)
+        return importBytes(title, ext, bytes)
+    }
+
+    @Synchronized fun importBytes(title: String, ext: String, bytes: ByteArray): ReaderBook {
+        val payload = NativeReaderFormats.decode(context, ext, bytes)
+        if (payload.body.isBlank() && payload.audio.isEmpty()) {
+            throw IOException("No se ha encontrado contenido accesible en el documento.")
+        }
+        val id = UUID.randomUUID().toString()
+        val names = mutableListOf<String>()
+        val files = mutableListOf<File>()
         try {
+            payload.audio.forEachIndexed { index, audio ->
+                val safeExt = audio.first.substringAfterLast('.', "mp3")
+                    .lowercase(Locale.ROOT).takeIf { it in NativeReaderFormats.AUDIO_EXTENSIONS } ?: "mp3"
+                val name = id + "." + index.toString().padStart(3, '0') + "." + safeExt
+                val file = File(folder, name)
+                file.writeBytes(audio.second)
+                names.add(name)
+                files.add(file)
+            }
+            val body = File(folder, id + ".txt")
+            body.writeText(payload.body, Charsets.UTF_8)
+            files.add(body)
+            val book = ReaderBook(
+                id = id, title = title.take(180), length = payload.body.length,
+                format = payload.format, tracks = names
+            )
             save(list() + book)
+            return book
         } catch (e: Exception) {
-            document.delete()
+            files.forEach { it.delete() }
             throw e
         }
-        return book
-    }
-}
-
-/** Speech is deliberately separate from TalkBack: no live progress announcements. */
-class NativeReaderSpeaker(context: Context) : TextToSpeech.OnInitListener {
-    val ready = mutableStateOf(false)
-    private val main = Handler(Looper.getMainLooper())
-    private val engine = TextToSpeech(context.applicationContext, this)
-    private var active: String? = null
-    private var done: (() -> Unit)? = null
-
-    init {
-        engine.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
-            override fun onStart(utteranceId: String?) {}
-            override fun onError(utteranceId: String?) {
-                main.post {
-                    if (utteranceId == active) { active = null; done = null }
-                }
-            }
-            override fun onDone(utteranceId: String?) {
-                main.post {
-                    if (utteranceId == active) {
-                        active = null
-                        val complete = done
-                        done = null
-                        complete?.invoke()
-                    }
-                }
-            }
-        })
     }
 
-    override fun onInit(status: Int) {
-        main.post {
-            ready.value = status == TextToSpeech.SUCCESS
-            if (ready.value) engine.language = Locale.getDefault()
+    @Synchronized fun folders(): List<String> = list().map { it.folder }
+        .filter { it.isNotBlank() }.distinct().sorted()
+
+    @Synchronized fun rename(book: ReaderBook, title: String) {
+        val clean = title.trim().take(180)
+        if (clean.isNotEmpty()) update(book.copy(title = clean))
+    }
+
+    @Synchronized fun delete(book: ReaderBook) {
+        list().firstOrNull { it.id == book.id }?.let { current ->
+            save(list().filterNot { it.id == book.id })
+            File(folder, book.id + ".txt").delete()
+            current.tracks.forEach { File(folder, it).delete() }
         }
     }
 
-    fun speak(fragment: String, speed: Float, after: () -> Unit) {
-        if (!ready.value || fragment.isBlank()) return
-        val id = UUID.randomUUID().toString()
-        active = id
-        done = after
-        engine.setSpeechRate(speed)
-        if (engine.speak(fragment, TextToSpeech.QUEUE_FLUSH, null, id) != TextToSpeech.SUCCESS) {
-            active = null
-            done = null
-        }
-    }
-
-    fun stop() {
-        active = null
-        done = null
-        engine.stop()
-    }
-
-    fun close() {
-        stop()
-        engine.shutdown()
-    }
 }

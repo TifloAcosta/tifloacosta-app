@@ -44,6 +44,7 @@ fun NativeReaderAudioScreen(
     book: ReaderBook,
     store: NativeReaderStore,
     english: Boolean,
+    startOnOpen: Boolean,
     onUpdate: (ReaderBook) -> Unit,
     onBack: () -> Unit
 ) {
@@ -144,6 +145,9 @@ fun NativeReaderAudioScreen(
         }
     }
 
+    LaunchedEffect(book.id) {
+        if (startOnOpen) toggle()
+    }
     DisposableEffect(book.id) {
         onDispose {
             val current = player

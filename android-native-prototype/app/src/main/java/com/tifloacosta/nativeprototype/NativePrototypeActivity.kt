@@ -123,16 +123,25 @@ private fun PrototypeHome() {
     val english = language == "en"
     var loaded by remember { mutableStateOf(CatalogLoad(Catalog())) }
     var loading by remember { mutableStateOf(true) }
+    var mediaLoad by remember { mutableStateOf(MediaLoad()) }
+    var mediaLoading by remember { mutableStateOf(true) }
     var section by rememberSaveable { mutableIntStateOf(PrototypeNavigation.HOME) }
     var mediaIndex by rememberSaveable { mutableIntStateOf(0) }
+    var mediaSourceIndex by rememberSaveable { mutableIntStateOf(0) }
+    var mediaLanguageIndex by rememberSaveable { mutableIntStateOf(0) }
     var newsCategory by rememberSaveable { mutableIntStateOf(0) }
     var resourceCategory by rememberSaveable { mutableIntStateOf(0) }
     var visibleCount by rememberSaveable { mutableIntStateOf(10) }
     var selectedItem by remember { mutableStateOf<CatalogItem?>(null) }
+    var selectedMediaItem by remember { mutableStateOf<MediaItem?>(null) }
 
     LaunchedEffect(Unit) {
         loaded = CatalogRepository.load(context)
         loading = false
+    }
+    LaunchedEffect(Unit) {
+        mediaLoad = MediaRepository.load(context)
+        mediaLoading = false
     }
 
     val news = loaded.catalog.news.filter { it.language == language }
@@ -148,6 +157,13 @@ private fun PrototypeHome() {
     val resourceChoices = listOf(
         if (english) "Choose a category" else "Selecciona una categoría"
     ) + resourceCategories
+
+    val mediaSourceChoices = listOf(if (english) "All sources" else "Todas las fuentes") +
+        MediaLogic.sources(mediaLoad.items, mediaIndex)
+    val mediaSource = mediaSourceChoices.getOrNull(mediaSourceIndex)?.takeIf { mediaSourceIndex > 0 }
+    val filteredMedia = MediaLogic.select(mediaLoad.items, mediaIndex, mediaSource, mediaLanguageIndex)
+    val mediaLanguages = if (english) listOf("All languages", "Spanish", "English")
+        else listOf("Todos los idiomas", "Español", "Inglés")
 
     val mediaChoices = if (english)
         listOf("News categories", "Podcasts", "YouTube channels", "All media")
@@ -204,13 +220,28 @@ private fun PrototypeHome() {
                 AdjustableSelector(
                     label = if (english) "Content type" else "Tipo de contenido",
                     choices = mediaChoices, selected = mediaIndex, english = english
-                ) { mediaIndex = it; visibleCount = 10 }
+                ) {
+                    if (mediaIndex != it) {
+                        mediaIndex = it
+                        mediaSourceIndex = 0
+                        visibleCount = 10
+                    }
+                }
 
                 if (mediaIndex == 0) {
                     AdjustableSelector(
                         label = if (english) "Category" else "Categoría",
                         choices = newsChoices, selected = newsCategory, english = english
                     ) { newsCategory = it; visibleCount = 10 }
+                } else {
+                    AdjustableSelector(
+                        label = if (english) "Source or channel" else "Fuente o canal",
+                        choices = mediaSourceChoices, selected = mediaSourceIndex, english = english
+                    ) { mediaSourceIndex = it; visibleCount = 10 }
+                    AdjustableSelector(
+                        label = if (english) "Language" else "Idioma",
+                        choices = mediaLanguages, selected = mediaLanguageIndex, english = english
+                    ) { mediaLanguageIndex = it; visibleCount = 10 }
                 }
             } else if (section == PrototypeNavigation.RESOURCES) {
                 AdjustableSelector(
@@ -219,16 +250,47 @@ private fun PrototypeHome() {
                 ) { resourceCategory = it; visibleCount = 10 }
             }
 
-            if (section != PrototypeNavigation.HOME && loading) {
-                Text(if (english) "Loading..." else "Cargando…")
-            }
-            if (section != PrototypeNavigation.HOME && loaded.status.isNotEmpty()) Text(loaded.status)
             if (section == PrototypeNavigation.NEWS && mediaIndex != 0) {
-                Text(
-                    if (english) "Media options are not connected in this first prototype."
-                    else "Los contenidos multimedia todavía no están conectados en este primer prototipo."
-                )
-            } else if (!loading && section != PrototypeNavigation.HOME && filtered.isEmpty()) {
+                if (mediaLoading) {
+                    Text(if (english) "Loading channels..." else "Cargando canales…")
+                } else {
+                    if (mediaLoad.status.isNotEmpty()) Text(mediaLoad.status)
+                    if (filteredMedia.isEmpty()) {
+                        Text(if (english) "No media found." else "No hay contenidos multimedia en esta selección.")
+                    } else {
+                        Text(
+                            if (english) "${filteredMedia.size} results" else "${filteredMedia.size} resultados",
+                            style = MaterialTheme.typography.titleMedium,
+                            modifier = Modifier.padding(vertical = 8.dp).semantics { heading() }
+                        )
+                        LazyColumn(modifier = Modifier.weight(1f)) {
+                            itemsIndexed(
+                                items = filteredMedia.take(visibleCount),
+                                key = { i, item -> "media-$i-${item.id}" }
+                            ) { _, item ->
+                                OutlinedButton(
+                                    modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                                    onClick = { selectedMediaItem = item }
+                                ) {
+                                    Text(item.title)
+                                }
+                            }
+                            if (filteredMedia.size > visibleCount) {
+                                item {
+                                    TextButton(onClick = { visibleCount += 10 }) {
+                                        Text(if (english) "Show ten more" else "Mostrar diez más")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                if (section != PrototypeNavigation.HOME && loading) {
+                    Text(if (english) "Loading..." else "Cargando…")
+                }
+                if (section != PrototypeNavigation.HOME && loaded.status.isNotEmpty()) Text(loaded.status)
+                if (!loading && section != PrototypeNavigation.HOME && filtered.isEmpty()) {
                 val selectionMade = if (section == PrototypeNavigation.NEWS) newsCategory > 0
                     else resourceCategory > 0
                 if (selectionMade) {
@@ -263,7 +325,46 @@ private fun PrototypeHome() {
                     }
                 }
             }
+            }
         }
+    }
+
+    selectedMediaItem?.let { item ->
+        AlertDialog(
+            onDismissRequest = { selectedMediaItem = null },
+            title = { Text(item.title) },
+            text = {
+                Column(
+                    modifier = Modifier.heightIn(max = 340.dp).verticalScroll(rememberScrollState())
+                ) {
+                    Text(
+                        (if (item.type == "audio") "Podcast" else "YouTube") +
+                            ". " + (if (english) "Source: " else "Fuente: ") + item.sourceName
+                    )
+                    if (item.summary.isNotBlank()) Text(item.summary)
+                }
+            },
+            confirmButton = {
+                if (item.openUrl.isNotEmpty()) {
+                    TextButton(onClick = {
+                        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(item.openUrl)))
+                    }) {
+                        Text(
+                            if (item.type == "audio") {
+                                if (english) "Listen at source" else "Escuchar en la fuente"
+                            } else {
+                                if (english) "Open YouTube video" else "Ver vídeo en YouTube"
+                            }
+                        )
+                    }
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { selectedMediaItem = null }) {
+                    Text(if (english) "Close" else "Cerrar")
+                }
+            }
+        )
     }
 
     selectedItem?.let { item ->

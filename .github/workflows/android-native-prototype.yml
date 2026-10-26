@@ -26,12 +26,14 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
-      - uses: android-actions/setup-android@v3
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: "8.14.3"
-      - name: Install standalone Android platform
-        run: yes | sdkmanager "platforms;android-36" "build-tools;35.0.0" || true
+      - name: Verify Android SDK installation
+        run: |
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          ls "$ANDROID_HOME/platforms"
+          ls "$ANDROID_HOME/build-tools"
       - name: Unit tests and debug APK only
         run: gradle --no-daemon -p android-native-prototype :app:testDebugUnitTest :app:assembleDebug
       - name: Upload native prototype APK

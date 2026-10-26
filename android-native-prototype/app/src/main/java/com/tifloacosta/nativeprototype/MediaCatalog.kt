@@ -5,6 +5,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import java.net.HttpURLConnection
+import java.net.URI
+import java.net.URLDecoder
 import java.net.URL
 import java.util.Locale
 
@@ -41,6 +43,31 @@ data class MediaLoad(
 )
 
 object MediaLogic {
+    private val videoIdPattern = Regex("^[A-Za-z0-9_-]{11}$")
+
+    /**
+     * Accept only actual YouTube video links. Never pass untrusted URLs/ids
+     * through to HTML/JavaScript or try to turn channel URLs into video links.
+     */
+    fun youTubeVideoId(raw: String): String? = try {
+        val url = URI(raw.trim())
+        if (url.scheme?.lowercase(Locale.ROOT) != "https") return null
+        val host = url.host?.lowercase(Locale.ROOT) ?: return null
+        val segments = (url.path ?: "").split('/').filter { it.isNotBlank() }
+        val id = when {
+            host == "youtu.be" || host == "www.youtu.be" -> segments.firstOrNull()
+            host in setOf("youtube.com", "www.youtube.com", "m.youtube.com", "music.youtube.com",
+                "www.youtube-nocookie.com", "youtube-nocookie.com") -> when (segments.firstOrNull()) {
+                "watch" -> url.rawQuery?.split('&')?.firstOrNull { it.startsWith("v=") }
+                    ?.substringAfter("v=")?.let { URLDecoder.decode(it, "UTF-8") }
+                "shorts", "embed", "live", "v" -> segments.getOrNull(1)
+                else -> null
+            }
+            else -> null
+        }
+        id?.takeIf { videoIdPattern.matches(it) }
+    } catch (_: Exception) { null }
+
     fun validWebUrl(value: String): Boolean = try {
         val url = URL(value)
         url.protocol.lowercase(Locale.ROOT) == "https" && !url.host.isNullOrBlank()

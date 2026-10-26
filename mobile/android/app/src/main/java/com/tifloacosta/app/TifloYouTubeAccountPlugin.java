@@ -215,7 +215,10 @@ public final class TifloYouTubeAccountPlugin extends Plugin {
             try {
                 JSONObject response = operation.execute();
                 JSObject result = new JSObject();
-                for (String key : response.keySet()) result.put(key, response.opt(key));
+                for (java.util.Iterator<String> keys = response.keys(); keys.hasNext();) {
+                    String key = keys.next();
+                    result.put(key, response.opt(key));
+                }
                 call.resolve(result);
             } catch (ApiFailure error) {
                 call.reject(error.code);

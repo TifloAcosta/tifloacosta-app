@@ -27,11 +27,12 @@ object NativeReaderFormats {
     const val MAX_ARCHIVE_BYTES = 80 * 1024 * 1024
     private const val MAX_UNPACKED_BYTES = 120 * 1024 * 1024
     private const val MAX_TEXT = 6 * 1024 * 1024
-    val AUDIO_EXTENSIONS = setOf("mp3", "m4a", "m4b", "wav", "ogg", "aac")
+    val AUDIO_EXTENSIONS = setOf("mp3", "m4a", "m4b", "wav", "ogg", "aac", "flac", "opus")
     val supported = setOf(
         "txt", "text", "md", "markdown", "html", "htm", "rtf", "csv", "json",
         "xml", "log", "srt", "epub", "pdf", "docx", "pptx", "xlsx",
-        "zip", "daisy"
+        "zip", "daisy", "jpg", "jpeg", "png", "webp", "bmp", "heic", "heif",
+        "odt", "ods", "odp", "ppsx", "xhtml", "fb2"
     ) + AUDIO_EXTENSIONS
 
     fun readBounded(stream: InputStream, limit: Int): ByteArray {
@@ -47,36 +48,38 @@ object NativeReaderFormats {
         return out.toByteArray()
     }
 
-    fun decode(context: Context, extRaw: String, input: ByteArray): DecodedReaderFile {
+    fun decode(context: Context, extRaw: String, input: ByteArray,
+               progress: ((Int, Int) -> Unit)? = null): DecodedReaderFile {
         val ext = extRaw.lowercase(Locale.ROOT)
         if (ext !in supported) throw IOException("El formato .$ext aún no dispone de lector compatible.")
         if (input.isEmpty()) throw IOException("El documento está vacío.")
         if (input.size > MAX_ARCHIVE_BYTES) throw IOException("El documento es demasiado grande.")
         if (ext in AUDIO_EXTENSIONS) return DecodedReaderFile("", ext, listOf("audio.$ext" to input))
-        if (ext == "pdf") {
-            if (input.size > 35 * 1024 * 1024) throw IOException("El PDF supera el límite de esta prueba.")
-            PDFBoxResourceLoader.init(context.applicationContext)
-            return try {
-                PDDocument.load(input).use { document ->
-                    if (document.isEncrypted) throw IOException("El PDF está protegido con contraseña.")
-                    val content = PDFTextStripper().getText(document).take(MAX_TEXT)
-                    if (content.isBlank()) throw IOException(
-                        "Este PDF no contiene texto extraíble. El OCR queda pendiente."
-                    )
-                    DecodedReaderFile(content, "pdf")
-                }
-            } catch (e: IOException) { throw e }
-            catch (_: Exception) { throw IOException("No se pudo extraer el texto del PDF.") }
+        if (ext == "fb2") {
+            return DecodedReaderFile(NativeReaderFictionBook.extract(input), ext)
         }
-        if (ext in setOf("zip", "epub", "docx", "pptx", "xlsx", "daisy")) {
+        if (ext in setOf("jpg", "jpeg", "png", "webp", "bmp", "heic", "heif")) {
+            val text = NativeReaderOcr.recognizeImage(input)
+            if (text.isBlank()) throw IOException(
+                "No se encontró texto reconocible en la imagen."
+            )
+            return DecodedReaderFile(text.take(MAX_TEXT), ext)
+        }
+        if (ext == "pdf") {
+            return DecodedReaderFile(NativeReaderOcr.recognizePdf(context, input, progress), "pdf")
+        }
+        if (ext in setOf("zip", "epub", "docx", "pptx", "ppsx",
+                "xlsx", "daisy", "odt", "ods", "odp")) {
             return decodeArchive(ext, input)
         }
         val text = input.toString(Charsets.UTF_8).removePrefix("\uFEFF").let {
             if ('\uFFFD' in it) input.toString(Charset.forName("windows-1252")) else it
         }
-        val body = if (ext in setOf("html", "htm", "xml", "rtf")) {
-            asText(text)
-        } else text
+        val body = when (ext) {
+            "rtf" -> NativeReaderRtf.extract(text)
+            "html", "htm", "xhtml", "xml" -> asText(text)
+            else -> text
+        }
         if (body.isBlank()) throw IOException("No se ha encontrado texto legible.")
         return DecodedReaderFile(body.take(MAX_TEXT), ext)
     }
@@ -187,15 +190,20 @@ object NativeReaderFormats {
         fun find(pattern: Regex): List<String> = files.keys.filter { pattern.matches(it) }
         fun pages(paths: List<String>): String = paths.joinToString("\n\n") { name ->
             val raw = files.getValue(name).toString(Charsets.UTF_8)
-            asText(raw)
+            if (name.endsWith(".fb2", ignoreCase = true)) {
+                NativeReaderFictionBook.extract(files.getValue(name))
+            } else asText(raw)
         }.take(MAX_TEXT)
         return when (ext) {
+            "odt", "ods", "odp" -> {
+                DecodedReaderFile(NativeReaderOpenDocument.extract(ext, files), ext)
+            }
             "docx" -> {
                 val body = files["word/document.xml"]?.let { tagText(it, "w:p", "w:t") }.orEmpty()
                 if (body.isBlank()) throw IOException("El DOCX no contiene texto extraíble.")
                 DecodedReaderFile(body.take(MAX_TEXT), ext)
             }
-            "pptx" -> {
+            "pptx", "ppsx" -> {
                 val paths = find(Regex("ppt/slides/slide\\d+\\.xml"))
                     .sortedBy { it.substringAfter("slide").substringBefore(".").toIntOrNull() ?: 9999 }
                 val text = paths.joinToString("\n\n") {
@@ -220,11 +228,14 @@ object NativeReaderFormats {
                 val textPaths = names.filter { path ->
                     val lower = path.lowercase(Locale.ROOT)
                     (lower.endsWith(".html") || lower.endsWith(".xhtml") ||
-                        (!epub && (lower.endsWith(".txt") || lower.endsWith(".md")))) &&
+                        (!epub && (lower.endsWith(".txt") || lower.endsWith(".md") ||
+                            lower.endsWith(".fb2")))) &&
                         !lower.contains("toc.") && !lower.contains("nav.") &&
                         !lower.endsWith("ncc.html")
                 }.sorted()
-                val text = pages(textPaths)
+                val orderedTextPaths = if (epub) NativeReaderEpub.orderedPages(files)
+                    else textPaths
+                val text = pages(orderedTextPaths)
                 val audio = names.filter { path ->
                     path.substringAfterLast('.').lowercase(Locale.ROOT) in AUDIO_EXTENSIONS
                 }.sorted().map { name -> name to files.getValue(name) }

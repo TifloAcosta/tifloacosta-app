@@ -168,7 +168,8 @@ class NativeReaderStore(private val context: Context) {
         return book.tracks.map { File(folder, it) }.filter { it.isFile }
     }
 
-    @Synchronized fun import(uri: Uri): ReaderBook {
+    @Synchronized fun import(uri: Uri,
+        progress: ((Int, Int) -> Unit)? = null): ReaderBook {
         val resolver = context.contentResolver
         var title = "Documento"
         resolver.query(uri, arrayOf(OpenableColumns.DISPLAY_NAME), null, null, null)?.use { cursor ->
@@ -179,11 +180,12 @@ class NativeReaderStore(private val context: Context) {
         val bytes = resolver.openInputStream(uri)?.use { stream ->
             NativeReaderFormats.readBounded(stream, NativeReaderFormats.MAX_ARCHIVE_BYTES)
         } ?: throw IOException("No se pudo abrir el documento.")
-        return importBytes(title, ext, bytes)
+        return importBytes(title, ext, bytes, progress)
     }
 
-    @Synchronized fun importBytes(title: String, ext: String, bytes: ByteArray): ReaderBook {
-        val payload = NativeReaderFormats.decode(context, ext, bytes)
+    @Synchronized fun importBytes(title: String, ext: String, bytes: ByteArray,
+        progress: ((Int, Int) -> Unit)? = null): ReaderBook {
+        val payload = NativeReaderFormats.decode(context, ext, bytes, progress)
         if (payload.body.isBlank() && payload.audio.isEmpty()) {
             throw IOException("No se ha encontrado contenido accesible en el documento.")
         }
@@ -191,6 +193,14 @@ class NativeReaderStore(private val context: Context) {
         val names = mutableListOf<String>()
         val files = mutableListOf<File>()
         try {
+            // Keep the original bytes for future OCR retries, alternative
+            // decoders and export. Never replace the original with OCR text.
+            val suffix = ext.lowercase(Locale.ROOT).takeIf {
+                it.matches(Regex("[a-z0-9]{2,8}"))
+            } ?: "bin"
+            val original = File(folder, id + ".source." + suffix)
+            original.writeBytes(bytes)
+            files.add(original)
             payload.audio.forEachIndexed { index, audio ->
                 val safeExt = audio.first.substringAfterLast('.', "mp3")
                     .lowercase(Locale.ROOT).takeIf { it in NativeReaderFormats.AUDIO_EXTENSIONS } ?: "mp3"
@@ -227,6 +237,10 @@ class NativeReaderStore(private val context: Context) {
         list().firstOrNull { it.id == book.id }?.let { current ->
             save(list().filterNot { it.id == book.id })
             File(folder, book.id + ".txt").delete()
+            // Source files use a generated UUID and are never resolved from
+            // untrusted document titles or ZIP entry paths.
+            folder.listFiles()?.filter { it.name.startsWith(book.id + ".source.") }
+                ?.forEach { it.delete() }
             current.tracks.forEach { File(folder, it).delete() }
         }
     }

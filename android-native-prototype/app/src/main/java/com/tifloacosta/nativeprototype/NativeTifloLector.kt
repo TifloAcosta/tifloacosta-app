@@ -1,5 +1,7 @@
 package com.tifloacosta.nativeprototype
 
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -76,6 +78,8 @@ fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
     var proposedFolder by remember { mutableStateOf("") }
     var deleteBook by remember { mutableStateOf<ReaderBook?>(null) }
     var loading by remember { mutableStateOf(true) }
+    var importStatus by remember { mutableStateOf("") }
+    val mainHandler = remember { Handler(Looper.getMainLooper()) }
     val preferences = remember { context.getSharedPreferences("native-reader-preferences", 0) }
     var rate by remember {
         mutableFloatStateOf(preferences.getFloat("rate", 1f).coerceIn(.6f, 1.8f))
@@ -106,12 +110,30 @@ fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
     val importer = rememberLauncherForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) { uris ->
         if (uris.isNotEmpty()) scope.launch {
             error = ""
-            for (uri in uris) {
-                try { withContext(Dispatchers.IO) { store.import(uri) } }
-                catch (e: Exception) { error += (e.message ?: "No se pudo importar.") + "\n" }
+            try {
+                uris.forEachIndexed { index, uri ->
+                    importStatus = if (english)
+                        "Importing file " + (index + 1) + " of " + uris.size
+                    else "Importando archivo " + (index + 1) + " de " + uris.size
+                    try {
+                        withContext(Dispatchers.IO) {
+                            store.import(uri) { page, total ->
+                                mainHandler.post {
+                                    importStatus = if (english)
+                                        "Recognizing PDF: page " + page + " of " + total
+                                    else "Reconociendo PDF: página " + page + " de " + total
+                                }
+                            }
+                        }
+                    } catch (e: Exception) {
+                        error += (e.message ?: "No se pudo importar.") + "\n"
+                    }
+                }
+            } finally {
+                importStatus = ""
+                refresh()
+                screen = "home"
             }
-            refresh()
-            screen = "home"
         }
     }
     fun back() {
@@ -167,6 +189,7 @@ fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
             Text(if (english) "Import" else "Importar",
                 style = MaterialTheme.typography.headlineSmall)
             Button(onClick = { importer.launch(arrayOf("*/*")) },
+                enabled = importStatus.isBlank(),
                 modifier = Modifier.fillMaxWidth()) {
                 Text(if (english) "Device and cloud files" else "Archivos del dispositivo y nubes")
             }
@@ -176,6 +199,7 @@ fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
             Text(if (english)
                 "Android shows device storage and available cloud providers in its document picker."
                 else "El selector de documentos de Android ofrece archivos locales y proveedores de nube instalados.")
+            if (importStatus.isNotBlank()) Text(importStatus)
             if (error.isNotBlank()) Text(error)
         }
         return

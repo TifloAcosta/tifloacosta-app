@@ -14,7 +14,6 @@ export const HOME_ITEMS = [
   'downloads',
   'favorites',
   'videos',
-  'book',
   'podcast',
   'contact',
   'privacy',

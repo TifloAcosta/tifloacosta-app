@@ -335,7 +335,7 @@ class NativeReaderStore(private val context: Context) {
                 val suffix = logical.substringAfterLast('.').lowercase(Locale.ROOT)
                 val name = id + "." + i.toString().padStart(3, '0') + "." + suffix
                 val destination = File(folder, name)
-                existing.copyTo(destination)
+                if (!existing.renameTo(destination)) existing.copyTo(destination)
                 written.add(destination)
                 copied.add(name)
             }

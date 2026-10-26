@@ -134,6 +134,7 @@ private fun PrototypeHome() {
     var visibleCount by rememberSaveable { mutableIntStateOf(10) }
     var selectedItem by remember { mutableStateOf<CatalogItem?>(null) }
     var selectedMediaItem by remember { mutableStateOf<MediaItem?>(null) }
+    var playingMediaItem by remember { mutableStateOf<MediaItem?>(null) }
 
     LaunchedEffect(Unit) {
         loaded = CatalogRepository.load(context)
@@ -180,8 +181,23 @@ private fun PrototypeHome() {
     val first = if (english) "News" else "Actualidad"
     val second = if (english) "Resources" else "Recursos"
 
-    BackHandler(enabled = section != PrototypeNavigation.HOME && selectedItem == null && selectedMediaItem == null) {
+    BackHandler(enabled = playingMediaItem != null) { playingMediaItem = null }
+
+    BackHandler(
+        enabled = section != PrototypeNavigation.HOME &&
+            selectedItem == null && selectedMediaItem == null && playingMediaItem == null
+    ) {
         section = PrototypeNavigation.parentOf(section)
+    }
+
+    val activeVideo = playingMediaItem
+    if (activeVideo != null) {
+        NativeYouTubePlayer(
+            item = activeVideo,
+            english = english,
+            onBack = { playingMediaItem = null }
+        )
+        return
     }
 
     Scaffold(modifier = Modifier.fillMaxSize()) { inner ->
@@ -270,7 +286,10 @@ private fun PrototypeHome() {
                             ) { _, item ->
                                 OutlinedButton(
                                     modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-                                    onClick = { selectedMediaItem = item }
+                                    onClick = {
+                                        if (item.type == "video") playingMediaItem = item
+                                        else selectedMediaItem = item
+                                    }
                                 ) {
                                     Text(item.title)
                                 }

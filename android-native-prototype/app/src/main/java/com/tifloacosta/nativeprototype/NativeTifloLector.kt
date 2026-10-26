@@ -590,25 +590,26 @@ private fun NativeReadingScreen(
             }) {
                 Text(if (english) "Add bookmark" else "Añadir marca")
             }
-        }
-        TextButton(
-            onClick = { showMarks = !showMarks },
-            modifier = Modifier.semantics {
-                stateDescription = if (showMarks)
-                    (if (english) "Expanded" else "Abierto")
-                else (if (english) "Collapsed" else "Cerrado")
+            TextButton(
+                onClick = { showMarks = !showMarks },
+                modifier = Modifier.semantics {
+                    stateDescription = if (showMarks)
+                        (if (english) "Expanded" else "Abierto")
+                    else (if (english) "Collapsed" else "Cerrado")
+                }
+            ) {
+                Text(if (english) "Bookmarks" else "Marcas")
             }
-        ) {
-            Text(if (english) "Bookmarks" else "Marcas")
-        }
-        if (showMarks) {
-            if (book.marks.isEmpty()) Text(if (english) "No bookmarks" else "No hay marcas")
-            book.marks.forEach { mark ->
-                OutlinedButton(onClick = { setOffset(mark) }) {
-                    Text((if (english) "Go to " else "Ir al ") +
-                        ReaderUnits.percent(mark, fullText.length) + "%")
+            if (showMarks) {
+                if (book.marks.isEmpty()) Text(if (english) "No bookmarks" else "No hay marcas")
+                book.marks.forEach { mark ->
+                    OutlinedButton(onClick = { setOffset(mark) }) {
+                        Text((if (english) "Go to " else "Ir al ") +
+                            ReaderUnits.percent(mark, fullText.length) + "%")
+                    }
                 }
             }
         }
+
     }
 }

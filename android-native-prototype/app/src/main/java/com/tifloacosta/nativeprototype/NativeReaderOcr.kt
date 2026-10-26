@@ -53,16 +53,37 @@ object NativeReaderOcr {
             BitmapFactory.decodeByteArray(bytes, 0, bytes.size, opts)
         } catch (_: OutOfMemoryError) { null }
             ?: throw IOException("No hay memoria suficiente para reconocer esta imagen.")
-        val (w, h) = scaledDimensions(decoded.width, decoded.height)
-        val bitmap = if (w != decoded.width || h != decoded.height) {
-            try { Bitmap.createScaledBitmap(decoded, w, h, true) }
-            catch (_: OutOfMemoryError) { decoded }
-        } else decoded
+        val oriented = applyExifOrientation(decoded, bytes)
+        if (oriented !== decoded) decoded.recycle()
+        val (w, h) = scaledDimensions(oriented.width, oriented.height)
+        val bitmap = if (w != oriented.width || h != oriented.height) {
+            try { Bitmap.createScaledBitmap(oriented, w, h, true) }
+            catch (_: OutOfMemoryError) { oriented }
+        } else oriented
         try { return ocrBitmap(bitmap) }
         finally {
-            if (bitmap !== decoded) bitmap.recycle()
-            decoded.recycle()
+            if (bitmap !== oriented) bitmap.recycle()
+            oriented.recycle()
         }
+    }
+
+    private fun applyExifOrientation(bitmap: Bitmap, bytes: ByteArray): Bitmap {
+        val orientation = try {
+            android.media.ExifInterface(ByteArrayInputStream(bytes))
+                .getAttributeInt(android.media.ExifInterface.TAG_ORIENTATION,
+                    android.media.ExifInterface.ORIENTATION_NORMAL)
+        } catch (_: Exception) { android.media.ExifInterface.ORIENTATION_NORMAL }
+        val rotate = when (orientation) {
+            android.media.ExifInterface.ORIENTATION_ROTATE_90 -> 90f
+            android.media.ExifInterface.ORIENTATION_ROTATE_180 -> 180f
+            android.media.ExifInterface.ORIENTATION_ROTATE_270 -> 270f
+            else -> 0f
+        }
+        if (rotate == 0f) return bitmap
+        return try {
+            val matrix = android.graphics.Matrix().apply { postRotate(rotate) }
+            Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+        } catch (_: OutOfMemoryError) { bitmap }
     }
 
     private fun ocrBitmap(bitmap: Bitmap): String {

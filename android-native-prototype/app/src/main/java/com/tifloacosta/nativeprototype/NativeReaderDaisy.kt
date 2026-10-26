@@ -57,7 +57,12 @@ object NativeReaderDaisy {
         factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false)
         factory.isXIncludeAware = false
         factory.isExpandEntityReferences = false
-        return factory.newDocumentBuilder().parse(data.inputStream())
+        // Real DAISY 2.02 books normally declare an external SMIL 1.0 DTD.
+        // Strip that declaration WITHOUT fetching external entities.
+        val xml = data.toString(Charsets.UTF_8).replace(
+            Regex("<!DOCTYPE\\s+smil\\b[^>]*>", RegexOption.IGNORE_CASE), ""
+        )
+        return factory.newDocumentBuilder().parse(xml.byteInputStream(Charsets.UTF_8))
     }
 
     /** Identifies referenced SMIL documents from NCC (or OPF spine) in reading order. */

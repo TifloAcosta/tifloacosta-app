@@ -1,3 +1,22 @@
+# Prototipo 0.9 — voces, pronunciación y apagado automático
+
+En esta fase se conservan la portada mínima y el flujo de importación del prototipo 0.8. No modifica la aplicación de Google Play.
+
+- En Ajustes generales, dentro de **Audio y voces** (cerrado al entrar): selección de la voz del motor Android activo; botón **Buscar voces de otros proveedores** que abre otra pantalla con Acapela TTS Voices, Vocalizer TTS y Eloquence TTS. Cada enlace externo requiere confirmación. La instalación, disponibilidad, pagos, cambio de motor TTS y descarga son responsabilidad del proveedor/usuario. El lector no descarga voces privativas ni promete que cada motor aparezca en todos los dispositivos. **Actualizar voces instaladas** vuelve a consultar el motor TTS.
+- **Diccionario de pronunciación**, dentro de Audio y voces y también accesible desde Audio de un documento de texto: añadir y borrar parejas «Palabra escrita / Pronunciar como». Límite de 150 entradas, sustitución por palabras completas, sin cascada, solo sobre el fragmento enviado a síntesis, preservando contenido, progreso y marcas. Al abrir su editor desde un documento se pausa la lectura para evitar solapamiento con TalkBack.
+- **Apagado automático** dentro de Audio de cada texto y de cada audiolibro: Desactivado, 5, 10, 15, 30, 45 y 60 minutos. Por defecto desactivado al abrir un libro. El contador se ejecuta mientras se reproduce; al pausar se cancela y al reanudar inicia de nuevo el intervalo. Al vencer la reproducción se detiene o pausa conservando la posición. No es alarma independiente ni se mantiene contando con audio pausado.
+- Pendiente validación física de enlaces de proveedores según región, motores que anuncian sus voces en Android, pronunciación en lenguas mixtas y temporizador con pantalla bloqueada.
+
+## Inventario de formatos — estado real de prototipo 0.9
+
+1. **Decodificadores presentes que exigen pruebas reales**: TXT, Markdown, HTML/HTM, CSV/JSON/XML/log/SRT (texto), PDF con capa de texto, EPUB sin DRM, DOCX, PPTX, XLSX, ZIP de texto/audio, DAISY/ZIP con contenido reconocible (sin sincronía SMIL), MP3, M4A/M4B, WAV, OGG y AAC (según códecs compatibles de Android). RTF se trata por ahora solo de forma básica; **no** se considera fidelidad de conversión a RTF garantizada.
+2. **Prioridad alta, aún no incorporados en el prototipo nativo**: OCR de PDF escaneados, fotografías JPG/JPEG/PNG/WebP y texto integrado en imágenes; extracción estructural de tablas Office y notas/alternativas de imagen; DAISY completo con navegación/sincronía, audio en segundo plano.
+3. **Office legado pendiente**: DOC binario, PPT, PPS y XLS. Formatos de presentación/Office pendientes adicionales: PPSX y OpenDocument ODT/ODS/ODP.
+4. **Otros formatos posibles a evaluar según demanda y licencia/códecs**: FLAC/OPUS, FB2, MOBI/AZW3/KFX (incluido DRM, que no se promete admitir), RAR/7Z, páginas XHTML individuales y archivos de audio/vídeo MP4. MP4 es contenedor multimedia, no necesariamente un libro.
+5. **Otras funciones independientes del formato** todavía pendientes de portarse del lector Android ya publicado a este prototipo nativo: OCR, traducción en dispositivo, exportación/compartir, biblioteca con firma persistente y restauración, continuidad multimedia en segundo plano; comprobar la paridad con las últimas versiones iOS.
+
+No afirmar equivalencia funcional ni publicar hasta pruebas en Pixel con TalkBack y documentos representativos. El repositorio existente ya contiene OCR, traducción y controles avanzados para la app Android anterior, que pueden servir de referencia para portar estas funciones sin perderlas.
+
 # Propuesta 0.8 — paridad mínima TifloLector Android/iOS (26/10/2026)
 
 ESTADO: propuesta en PR #252, independiente de la app Google Play. No dar por aceptada ni publicar hasta ensayo físico con TalkBack y confirmación del usuario.

@@ -13,8 +13,8 @@ android {
         applicationId = "com.tifloacosta.nativeprototype"
         minSdk = 26
         targetSdk = 35
-        versionCode = 10
-        versionName = "0.10-prototipo"
+        versionCode = 11
+        versionName = "0.11-prototipo"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -48,6 +48,9 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.activity:activity-compose:1.12.1")
     implementation("com.tom-roush:pdfbox-android:2.0.27.0")
+    implementation("org.apache.commons:commons-compress:1.28.0")
+    implementation("org.tukaani:xz:1.10")
+    implementation("com.github.junrar:junrar:8.1.2")
     // Bundled Latin OCR works offline without a first-run model download.
     implementation("com.google.mlkit:text-recognition:16.0.1")
     implementation("com.google.android.gms:play-services-tasks:18.2.0")

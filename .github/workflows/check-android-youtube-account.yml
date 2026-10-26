@@ -51,4 +51,10 @@ jobs:
         working-directory: mobile/android
         run: |
           chmod +x gradlew
-          ./gradlew --no-daemon assembleDebug testDebugUnitTest --stacktrace
+          ./gradlew --no-daemon assembleDebug testDebugUnitTest -PtifloSafeDebug --stacktrace
+      - name: Upload isolated Android test APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: TifloAcosta-Android-Google-Pruebas
+          if-no-files-found: error
+          path: mobile/android/app/build/outputs/apk/debug/*.apk

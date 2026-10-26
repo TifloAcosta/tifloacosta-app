@@ -150,7 +150,14 @@ fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
         Button(onClick = { importer.launch(arrayOf("*/*")) }, modifier = Modifier.fillMaxWidth()) {
             Text(if (english) "Import" else "Importar")
         }
-        TextButton(onClick = { showSettings = !showSettings }, modifier = Modifier.fillMaxWidth()) {
+        TextButton(
+            onClick = { showSettings = !showSettings },
+            modifier = Modifier.fillMaxWidth().semantics {
+                stateDescription = if (showSettings)
+                    (if (english) "Expanded" else "Abierto")
+                else (if (english) "Collapsed" else "Cerrado")
+            }
+        ) {
             Text(if (english) "Settings" else "Ajustes")
         }
         if (showSettings) {
@@ -171,7 +178,14 @@ fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
                 else "Se utiliza el motor de texto a voz y las voces instaladas en Android."
             )
         }
-        TextButton(onClick = { showFilters = !showFilters }, modifier = Modifier.fillMaxWidth()) {
+        TextButton(
+            onClick = { showFilters = !showFilters },
+            modifier = Modifier.fillMaxWidth().semantics {
+                stateDescription = if (showFilters)
+                    (if (english) "Expanded" else "Abierto")
+                else (if (english) "Collapsed" else "Cerrado")
+            }
+        ) {
             Text(if (english) "Filters" else "Filtros")
         }
         if (showFilters) {
@@ -199,7 +213,14 @@ fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
                 }
             )
         }
-        TextButton(onClick = { showList = !showList }, modifier = Modifier.fillMaxWidth()) {
+        TextButton(
+            onClick = { showList = !showList },
+            modifier = Modifier.fillMaxWidth().semantics {
+                stateDescription = if (showList)
+                    (if (english) "Expanded" else "Abierto")
+                else (if (english) "Collapsed" else "Cerrado")
+            }
+        ) {
             Text(if (english) "My library" else "Mi biblioteca")
         }
         if (showList) {
@@ -220,7 +241,14 @@ fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
                 }
             }
         }
-        TextButton(onClick = { showMarks = !showMarks }, modifier = Modifier.fillMaxWidth()) {
+        TextButton(
+            onClick = { showMarks = !showMarks },
+            modifier = Modifier.fillMaxWidth().semantics {
+                stateDescription = if (showMarks)
+                    (if (english) "Expanded" else "Abierto")
+                else (if (english) "Collapsed" else "Cerrado")
+            }
+        ) {
             Text(if (english) "Bookmarks" else "Marcas")
         }
         if (showMarks) {
@@ -353,7 +381,14 @@ private fun NativeReadingScreen(
             )
             Text(current.text)
         }
-        TextButton(onClick = { showAudio = !showAudio }) {
+        TextButton(
+            onClick = { showAudio = !showAudio },
+            modifier = Modifier.semantics {
+                stateDescription = if (showAudio)
+                    (if (english) "Expanded" else "Abierto")
+                else (if (english) "Collapsed" else "Cerrado")
+            }
+        ) {
             Text(if (english) "Audio and voice" else "Audio y voz")
         }
         if (showAudio) {
@@ -368,7 +403,14 @@ private fun NativeReadingScreen(
                 }
             )
         }
-        TextButton(onClick = { jumping = !jumping }) {
+        TextButton(
+            onClick = { jumping = !jumping },
+            modifier = Modifier.semantics {
+                stateDescription = if (jumping)
+                    (if (english) "Expanded" else "Abierto")
+                else (if (english) "Collapsed" else "Cerrado")
+            }
+        ) {
             Text(if (english) "More actions" else "Más acciones")
         }
         if (jumping) {
@@ -395,7 +437,14 @@ private fun NativeReadingScreen(
                 Text(if (english) "Add bookmark" else "Añadir marca")
             }
         }
-        TextButton(onClick = { showMarks = !showMarks }) {
+        TextButton(
+            onClick = { showMarks = !showMarks },
+            modifier = Modifier.semantics {
+                stateDescription = if (showMarks)
+                    (if (english) "Expanded" else "Abierto")
+                else (if (english) "Collapsed" else "Cerrado")
+            }
+        ) {
             Text(if (english) "Bookmarks" else "Marcas")
         }
         if (showMarks) {

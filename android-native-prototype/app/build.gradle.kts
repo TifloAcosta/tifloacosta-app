@@ -13,8 +13,8 @@ android {
         applicationId = "com.tifloacosta.nativeprototype"
         minSdk = 26
         targetSdk = 35
-        versionCode = 7
-        versionName = "0.7-prototipo"
+        versionCode = 8
+        versionName = "0.8-prototipo"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -47,6 +47,7 @@ dependencies {
     implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.activity:activity-compose:1.12.1")
+    implementation("com.tom-roush:pdfbox-android:2.0.27.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
     testImplementation("junit:junit:4.13.2")
 }

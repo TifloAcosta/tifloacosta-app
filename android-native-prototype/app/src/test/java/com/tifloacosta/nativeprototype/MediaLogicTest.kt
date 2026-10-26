@@ -18,6 +18,17 @@ class MediaLogicTest {
         language = "en", publishedAt = "2026-10-26T12:00:00Z", summary = ""
     )
 
+    @Test fun embeddedYouTubeVideoIdsAreStrictlyValidated() {
+        assertEquals("dQw4w9WgXcQ", MediaLogic.youTubeVideoId("https://www.youtube.com/watch?v=dQw4w9WgXcQ&feature=share"))
+        assertEquals("dQw4w9WgXcQ", MediaLogic.youTubeVideoId("https://youtu.be/dQw4w9WgXcQ?t=4"))
+        assertEquals("dQw4w9WgXcQ", MediaLogic.youTubeVideoId("https://m.youtube.com/shorts/dQw4w9WgXcQ"))
+        assertEquals("dQw4w9WgXcQ", MediaLogic.youTubeVideoId("https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ"))
+        assertEquals(null, MediaLogic.youTubeVideoId("https://youtube.com/@canal"))
+        assertEquals(null, MediaLogic.youTubeVideoId("https://youtube.com/watch?v=invalid"))
+        assertEquals(null, MediaLogic.youTubeVideoId("https://youtube.com.evil.example/watch?v=dQw4w9WgXcQ"))
+        assertEquals(null, MediaLogic.youTubeVideoId("http://www.youtube.com/watch?v=dQw4w9WgXcQ"))
+    }
+
     @Test fun podcastAndVideoDoNotMix() {
         val items = listOf(podcast, video)
         assertTrue(MediaLogic.select(items, 0).isEmpty())

@@ -52,7 +52,7 @@ Aceptación: cambiar filtro no mezcla categorías; búsqueda vacía no rompe la 
 **A3. Vídeos: filtros y orden, sin cambiar reproducción.**  
 Prioridad: alta. Riesgo: medio. Dependencias: P0 + confirmar contrato de `youtube-auth.tifloacosta.com/search` para los filtros soportados.  
 Añadir filtros de «Todos», «Vídeos», «Canales», «Cortos», «En directo» y «Con subtítulos», condicionados a compatibilidad demostrada del backend; orden reciente/antiguo para vídeos del canal; paginación conservada. Reutilizar `mobile/src/screens/videos.mjs`.  
-**Prohibido en esta etapa:** cambiar `video-player.mjs`, IFrame API, política de pantalla encendida, autenticación o permisos.  
+**Prohibido en esta etapa:** cambiar `video-player.mjs`, IFrame API, política de pantalla encendida, inicio/cierre de sesión Google, acciones «Me gusta», comentarios, autenticación o permisos.  
 Aceptación: búsquedas normales, fallos de red y cuotas, paginación por filtro, apertura de canal y reproducción equivalentes a la versión base, posición y saltos ±30 s, retroceso y TalkBack correctos.
 
 **A4. Orden y presentación visual/accesible de Inicio y Recursos.**  
@@ -81,12 +81,10 @@ En Android, `ReadingLibraryDatabase` está en versión 6 y `ReadingBackupService
 Aceptación: upgrade con BD poblada y prueba de restauración, reversión documentada, pruebas de instalaciones antiguas y de pérdida de alimentación.  
 **No implementar ni fusionar mientras no exista una prueba repetible de migración sin pérdida de datos**.
 
-### ETAPA D — YouTube con inicio de sesión (solo con aprobación específica)
+### ETAPA D — Protección de la cuenta Google y acciones YouTube ya existentes
 
-**D1. Diseño Android OAuth y cuentas de Google.**  
-Prioridad: opcional. Riesgo: alto.  
-No copiar tokens, llavero, URLs de callback de iOS ni compartir estado de sesiones entre plataformas. Evaluar autenticación Android, compatibilidad backend, permisos OAuth, cierre de sesión, errores y privacidad. Funciones potenciales: suscripciones, «Me gusta» y comentarios, sin comprometer la búsqueda y reproducción públicas ya disponibles.  
-Aceptar sólo con pruebas de cuenta real, sesión caducada, usuario que nunca se autentica y revisión de privacidad.
+**D1. Mantener y comprobar, NO rediseñar.**  
+El responsable del producto confirma que Android ya ofrece inicio y cierre de sesión de Google y acciones como «Me gusta» y comentar. Son **funciones existentes protegidas**, no mejoras pendientes de desarrollar. Durante A3 y cualquier revisión posterior, no modificar el mecanismo de autenticación, tokens, sesiones, permisos ni acciones sobre cuentas; comprobar inicio, cierre, «Me gusta», comentarios y estados de sesión en la versión Android real. Una diferencia entre la edición distribuida y la rama inspeccionada exige una conciliación del código antes de tocar esa pantalla.
 
 ## 4. Reglas estrictas de seguridad y retorno
 
@@ -119,7 +117,7 @@ Las pruebas en dispositivo se harán con TalkBack —preferentemente Pixel 10—
 - **Paso inicial:** completar P0.1–P0.4 y abrir la tarea A1 en rama aislada.
 - **Primera entrega candidata:** A1, únicamente si supera las pruebas de aceptación y no altera funciones existentes.
 - **Siguientes candidatos:** A2 → A3 → A4 → B1 → B2. Cambiar el orden solo si una dependencia técnica lo justifica.
-- **Fuera de la primera entrega:** carpetas (C1) y cuenta Google (D1), hasta revisión y aceptación separadas.
+- **Fuera de la primera entrega:** carpetas (C1). La cuenta Google, el inicio/cierre de sesión, los «Me gusta» y los comentarios **ya existen y deben preservarse**, sin reimplementación.
 - **Éxito:** Android mantiene las funciones actuales, mejora la organización y localización de operaciones, permite acceder con TalkBack sin obstáculos nuevos y alcanza una mayor paridad de experiencia con iOS sin sustituir sus motores.
 
 ## 7. Puntos abiertos
@@ -127,7 +125,7 @@ Las pruebas en dispositivo se harán con TalkBack —preferentemente Pixel 10—
 - ¿Cuál es la versión y SHA del AAB efectivamente visible en Google Play, frente a los registros locales 1.3.7/1.3.5?
 - ¿Cuál es el SHA exacto del binario iOS 500051 en App Store Connect y cómo se relaciona con los envíos de GitHub?
 - ¿Qué atributos de categorías ofrece hoy el `mobile-content.json` en Android? ¿Son equivalentes a los de iOS?
-- ¿Responde el backend de YouTube correctamente para `all`, `channel`, `short`, `live`, `captions` desde Android?
+- ¿Responde el backend de YouTube correctamente para `all`, `channel`, `short`, `live`, `captions` desde Android sin afectar a la sesión Google y acciones ya operativas?
 - ¿Hay un dispositivo de pruebas y un conjunto de archivos de prueba para comprobar upgrades sobre datos persistidos?
 - ¿Qué resultados reales de TalkBack deben priorizarse frente a las diferencias puramente estéticas?
 

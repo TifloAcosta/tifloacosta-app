@@ -54,17 +54,35 @@ object PrototypeNavigation {
     const val HOME = -1
     const val NEWS = 0
     const val RESOURCES = 1
+    const val VIDEOS = 2
     fun parentOf(destination: Int): Int = HOME
 }
 
 class NativePrototypeActivity : ComponentActivity() {
+    val youTubeAccount by lazy { NativeYouTubeAccount(applicationContext) }
+    private var oauthCallback by mutableStateOf<Uri?>(null)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (intent?.action == Intent.ACTION_VIEW) oauthCallback = intent?.data
         setContent {
             MaterialTheme(colorScheme = if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme()) {
-                PrototypeHome()
+                PrototypeHome(
+                    account = youTubeAccount,
+                    callback = oauthCallback,
+                    onCallbackHandled = { oauthCallback = null },
+                    onSignIn = {
+                        val url = youTubeAccount.startAuthorization()
+                        startActivity(Intent(Intent.ACTION_VIEW, url))
+                    }
+                )
             }
         }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        if (intent.action == Intent.ACTION_VIEW) oauthCallback = intent.data
     }
 }
 
@@ -117,8 +135,21 @@ private fun AdjustableSelector(
 }
 
 @Composable
-private fun PrototypeHome() {
+private fun PrototypeHome(
+    account: NativeYouTubeAccount,
+    callback: Uri?,
+    onCallbackHandled: () -> Unit,
+    onSignIn: () -> Unit
+) {
     val context = LocalContext.current
+
+    LaunchedEffect(callback) {
+        if (callback != null) {
+            account.acceptCallback(callback)
+            onCallbackHandled()
+        }
+    }
+    LaunchedEffect(Unit) { account.checkSession() }
     val language = if (Locale.getDefault().language == "en") "en" else "es"
     val english = language == "en"
     var loaded by remember { mutableStateOf(CatalogLoad(Catalog())) }
@@ -147,6 +178,7 @@ private fun PrototypeHome() {
 
     val news = loaded.catalog.news.filter { it.language == language }
     val resources = loaded.catalog.resources.filter { it.language == language }
+    val videoCatalog = loaded.catalog.videos.filter { it.language == language }
     val newsCategories = CatalogLogic.newsCategories(news)
     val resourceCategories = CatalogLogic.resourceCategories(resources)
 
@@ -180,6 +212,7 @@ private fun PrototypeHome() {
     val title = if (english) "TifloAcosta Native Trial" else "TifloAcosta Nativa Pruebas"
     val first = if (english) "News" else "Actualidad"
     val second = if (english) "Resources" else "Recursos"
+    val third = if (english) "Videos" else "Vídeos"
 
     BackHandler(enabled = playingMediaItem != null) { playingMediaItem = null }
 
@@ -195,6 +228,8 @@ private fun PrototypeHome() {
         NativeYouTubePlayer(
             item = activeVideo,
             english = english,
+            account = account,
+            onAuthorize = onSignIn,
             onBack = { playingMediaItem = null }
         )
         return
@@ -217,6 +252,10 @@ private fun PrototypeHome() {
                         onClick = { section = PrototypeNavigation.RESOURCES; visibleCount = 10 },
                         modifier = Modifier.fillMaxWidth()
                     ) { Text(second) }
+                    Button(
+                        onClick = { section = PrototypeNavigation.VIDEOS; visibleCount = 10 },
+                        modifier = Modifier.fillMaxWidth()
+                    ) { Text(third) }
                 }
             } else {
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -224,7 +263,11 @@ private fun PrototypeHome() {
                         onClick = { section = PrototypeNavigation.parentOf(section) }
                     ) { Text(if (english) "Back" else "Volver") }
                     Text(
-                        if (section == PrototypeNavigation.NEWS) first else second,
+                        when (section) {
+                            PrototypeNavigation.NEWS -> first
+                            PrototypeNavigation.RESOURCES -> second
+                            else -> third
+                        },
                         style = MaterialTheme.typography.headlineSmall,
                         modifier = Modifier.padding(vertical = 12.dp).semantics { heading() }
                     )
@@ -266,7 +309,56 @@ private fun PrototypeHome() {
                 ) { resourceCategory = it; visibleCount = 10 }
             }
 
-            if (section == PrototypeNavigation.NEWS && mediaIndex != 0) {
+            if (section == PrototypeNavigation.VIDEOS) {
+                if (!account.authenticated) {
+                    Button(onClick = onSignIn) {
+                        Text(if (english) "Sign in with Google" else "Iniciar sesión con Google")
+                    }
+                    Text(
+                        if (english) "You can watch videos without logging in. Sign in to like, subscribe and comment."
+                        else "Puedes ver los vídeos sin iniciar sesión. Conecta Google para indicar Me gusta, suscribirte y comentar."
+                    )
+                } else {
+                    Text(if (english) "YouTube account connected" else "Cuenta de YouTube conectada")
+                    TextButton(onClick = account::signOut) {
+                        Text(if (english) "Sign out" else "Cerrar sesión de YouTube")
+                    }
+                }
+                if (account.message.isNotEmpty()) Text(account.message)
+                Text(
+                    if (english) "Videos on TifloAcosta" else "Vídeos de TifloAcosta",
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.semantics { heading() }
+                )
+                LazyColumn(modifier = Modifier.weight(1f)) {
+                    itemsIndexed(
+                        videoCatalog.take(visibleCount),
+                        key = { i, item -> "video-$i-${item.id}" }
+                    ) { _, item ->
+                        OutlinedButton(
+                            modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                            onClick = {
+                                val original = if (item.url.isNotBlank()) item.url
+                                    else if (item.id.matches(Regex("[A-Za-z0-9_-]{11}")))
+                                        "https://www.youtube.com/watch?v=" + item.id else ""
+                                playingMediaItem = MediaItem(
+                                    id = item.id, type = "video", title = item.title,
+                                    sourceName = "TifloAcosta", sourceUrl = "https://www.youtube.com/",
+                                    originalUrl = original, directMediaUrl = "",
+                                    language = item.language, publishedAt = "", summary = item.summary
+                                )
+                            }
+                        ) { Text(item.title) }
+                    }
+                    if (videoCatalog.size > visibleCount) {
+                        item {
+                            TextButton(onClick = { visibleCount += 10 }) {
+                                Text(if (english) "Show ten more" else "Mostrar diez más")
+                            }
+                        }
+                    }
+                }
+            } else if (section == PrototypeNavigation.NEWS && mediaIndex != 0) {
                 if (mediaLoading) {
                     Text(if (english) "Loading channels..." else "Cargando canales…")
                 } else {

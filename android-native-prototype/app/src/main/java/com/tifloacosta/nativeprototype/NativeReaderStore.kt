@@ -13,6 +13,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
 import java.nio.charset.Charset
 import java.util.Locale
@@ -30,7 +31,9 @@ data class ReaderBook(
     val folder: String = "",
     val tracks: List<String> = emptyList(),
     val trackIndex: Int = 0,
-    val audioPositionMs: Int = 0
+    val audioPositionMs: Int = 0,
+    val audioSegments: List<ReaderAudioSegment> = emptyList(),
+    val audioMarks: List<ReaderAudioMark> = emptyList()
 )
 
 data class ReadingUnit(val start: Int, val end: Int, val text: String)
@@ -125,6 +128,26 @@ class NativeReaderStore(private val context: Context) {
                     folder = obj.optString("folder", ""),
                     trackIndex = obj.optInt("trackIndex", 0).coerceAtLeast(0),
                     audioPositionMs = obj.optInt("audioPositionMs", 0).coerceAtLeast(0),
+                    audioSegments = obj.optJSONArray("audioSegments")?.let { entries ->
+                        (0 until entries.length()).mapNotNull { j ->
+                            entries.optJSONObject(j)?.let { part ->
+                                ReaderAudioSegment(
+                                    part.optInt("fileIndex", 0).coerceAtLeast(0),
+                                    part.optInt("startMs", 0).coerceAtLeast(0),
+                                    part.optInt("endMs", -1),
+                                    part.optString("label", "").take(150)
+                                )
+                            }
+                        }
+                    } ?: emptyList(),
+                    audioMarks = obj.optJSONArray("audioMarks")?.let { entries ->
+                        (0 until entries.length()).mapNotNull { j ->
+                            entries.optJSONObject(j)?.let { mark ->
+                                ReaderAudioMark(mark.optInt("segmentIndex", 0).coerceAtLeast(0),
+                                    mark.optInt("positionMs", 0).coerceAtLeast(0))
+                            }
+                        }
+                    } ?: emptyList(),
                     tracks = obj.optJSONArray("tracks")?.let { arr ->
                         (0 until arr.length()).mapNotNull { n ->
                             arr.optString(n).takeIf { value -> value.matches(Regex("[a-f0-9-]{36}\\.\\d{3}\\.[A-Za-z0-9]{2,5}")) }
@@ -143,7 +166,19 @@ class NativeReaderStore(private val context: Context) {
                 .put("createdAt", book.createdAt).put("marks", JSONArray(book.marks))
                 .put("format", book.format).put("favorite", book.favorite)
                 .put("folder", book.folder).put("tracks", JSONArray(book.tracks))
-                .put("trackIndex", book.trackIndex).put("audioPositionMs", book.audioPositionMs))
+                .put("trackIndex", book.trackIndex).put("audioPositionMs", book.audioPositionMs)
+                .put("audioSegments", JSONArray().apply {
+                    book.audioSegments.forEach { part ->
+                        put(JSONObject().put("fileIndex", part.fileIndex)
+                            .put("startMs", part.startMs).put("endMs", part.endMs)
+                            .put("label", part.label))
+                    }
+                }).put("audioMarks", JSONArray().apply {
+                    book.audioMarks.forEach { mark ->
+                        put(JSONObject().put("segmentIndex", mark.segmentIndex)
+                            .put("positionMs", mark.positionMs))
+                    }
+                }))
         }
         val temp = File(folder, "index.tmp")
         temp.writeText(array.toString(), Charsets.UTF_8)
@@ -177,6 +212,11 @@ class NativeReaderStore(private val context: Context) {
         }
         title = title.substringAfterLast('/').take(180).ifBlank { "Documento" }
         val ext = title.substringAfterLast('.', "").lowercase(Locale.ROOT)
+        if (ext in setOf("zip", "daisy", "7z", "rar")) {
+            return importCompressed(title, ext) {
+                resolver.openInputStream(uri) ?: throw IOException("No se pudo abrir el comprimido.")
+            }
+        }
         val bytes = resolver.openInputStream(uri)?.use { stream ->
             NativeReaderFormats.readBounded(stream, NativeReaderFormats.MAX_ARCHIVE_BYTES)
         } ?: throw IOException("No se pudo abrir el documento.")
@@ -185,6 +225,9 @@ class NativeReaderStore(private val context: Context) {
 
     @Synchronized fun importBytes(title: String, ext: String, bytes: ByteArray,
         progress: ((Int, Int) -> Unit)? = null): ReaderBook {
+        if (ext in setOf("zip", "daisy", "7z", "rar")) {
+            return importCompressed(title, ext) { bytes.inputStream() }
+        }
         val payload = NativeReaderFormats.decode(context, ext, bytes, progress)
         if (payload.body.isBlank() && payload.audio.isEmpty()) {
             throw IOException("No se ha encontrado contenido accesible en el documento.")
@@ -222,6 +265,96 @@ class NativeReaderStore(private val context: Context) {
         } catch (e: Exception) {
             files.forEach { it.delete() }
             throw e
+        }
+    }
+
+    /**
+     * Audio books are staged on DISK. A 600 MB narrated DAISY never becomes
+     * a 600 MB byte array and compressed entry names never reach the filesystem.
+     */
+    @Synchronized private fun importCompressed(
+        title: String, ext: String, source: () -> java.io.InputStream
+    ): ReaderBook {
+        val id = UUID.randomUUID().toString()
+        val stage = File(context.cacheDir, "reader-stage-" + id)
+        if (!stage.mkdirs()) throw IOException("No se pudo preparar la importación.")
+        val sourceFile = File(stage, "input." + ext)
+        val written = mutableListOf<File>()
+        try {
+            source().use { input ->
+                FileOutputStream(sourceFile).use { sink ->
+                    NativeReaderArchives.copyBounded(input, sink, NativeReaderArchives.MAX_SOURCE_BYTES)
+                }
+            }
+            val extracted = NativeReaderArchives.extract(
+                sourceFile, ext, File(stage, "members")
+            )
+            val plan = NativeReaderDaisy.plan(extracted)
+            val selected = mutableListOf<String>()
+            var length = 0
+            fun readable(path: String): Boolean {
+                val base = path.substringAfterLast('/').lowercase(Locale.ROOT)
+                return (base.endsWith(".txt") || base.endsWith(".md") ||
+                    base.endsWith(".markdown") || base.endsWith(".html") ||
+                    base.endsWith(".htm") || base.endsWith(".xhtml") ||
+                    base.endsWith(".fb2") || base.endsWith(".rtf") ||
+                    base.endsWith(".docx") || base.endsWith(".odt") ||
+                    base.endsWith(".epub") || base.endsWith(".pdf")) &&
+                    !base.startsWith("ncc.") && !base.startsWith("toc.") &&
+                    !base.startsWith("nav.") && !base.contains("cover")
+            }
+            // A limited number of actual book-text members, not raw SMIL metadata.
+            for ((path, file) in extracted.entries.sortedBy {
+                NativeReaderArchives.naturalKey(it.key)
+            }) {
+                if (!readable(path) || file.length() > NativeReaderFormats.MAX_ARCHIVE_BYTES ||
+                    length >= 6 * 1024 * 1024 || selected.size > 1200) continue
+                try {
+                    val kind = path.substringAfterLast('.').lowercase(Locale.ROOT)
+                    val value = NativeReaderFormats.decode(context, kind, file.readBytes()).body
+                    if (value.isNotBlank()) {
+                        val fragment = value.take((6 * 1024 * 1024 - length).coerceAtLeast(0))
+                        selected.add(fragment)
+                        length += fragment.length
+                    }
+                } catch (_: Exception) {
+                    // Broken optional text should never destroy usable audiobook audio.
+                }
+            }
+            val text = selected.joinToString("\n\n")
+            if (text.isBlank() && plan.audioPaths.isEmpty()) {
+                throw IOException("El comprimido no contiene una obra legible o audio compatible.")
+            }
+            val original = File(folder, id + ".source." + ext)
+            // An atomic move is preferred to copying large book archives.
+            if (!sourceFile.renameTo(original)) sourceFile.copyTo(original, overwrite = false)
+            written.add(original)
+            val copied = mutableListOf<String>()
+            for ((i, logical) in plan.audioPaths.withIndex()) {
+                val existing = extracted.getValue(logical)
+                val suffix = logical.substringAfterLast('.').lowercase(Locale.ROOT)
+                val name = id + "." + i.toString().padStart(3, '0') + "." + suffix
+                val destination = File(folder, name)
+                existing.copyTo(destination)
+                written.add(destination)
+                copied.add(name)
+            }
+            val document = File(folder, id + ".txt")
+            document.writeText(text, Charsets.UTF_8)
+            written.add(document)
+            val book = ReaderBook(
+                id = id, title = title.take(180), length = text.length,
+                format = if (plan.daisy) "daisy" else ext,
+                tracks = copied, audioSegments = plan.segments
+            )
+            save(list() + book)
+            return book
+        } catch (e: Exception) {
+            written.forEach { it.delete() }
+            throw if (e is IOException) e
+                else IOException("No se pudo incorporar el libro comprimido.", e)
+        } finally {
+            stage.deleteRecursively()
         }
     }
 

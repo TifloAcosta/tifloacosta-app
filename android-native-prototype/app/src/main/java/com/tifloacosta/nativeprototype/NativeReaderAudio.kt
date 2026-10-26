@@ -58,6 +58,14 @@ fun NativeReaderAudioScreen(
     var playing by remember(book.id) { mutableStateOf(false) }
     var actionsIndex by remember(book.id) { mutableIntStateOf(0) }
     var more by remember(book.id) { mutableStateOf(false) }
+    var audioExpanded by remember(book.id) { mutableStateOf(false) }
+    var sleepIndex by remember(book.id) { mutableIntStateOf(0) }
+    val timerMinutes = listOf(0, 5, 10, 15, 30, 45, 60)
+    val timerChoices = if (english)
+        listOf("Off", "5 minutes", "10 minutes", "15 minutes",
+            "30 minutes", "45 minutes", "60 minutes")
+    else listOf("Desactivado", "5 minutos", "10 minutos", "15 minutos",
+        "30 minutos", "45 minutos", "60 minutos")
     var speedIndex by remember(book.id) { mutableIntStateOf(2) }
     var message by remember(book.id) { mutableStateOf("") }
     val speeds = listOf(.75f, .9f, 1f, 1.25f, 1.5f)
@@ -148,6 +156,19 @@ fun NativeReaderAudioScreen(
     LaunchedEffect(book.id) {
         if (startOnOpen) toggle()
     }
+    LaunchedEffect(playing, sleepIndex) {
+        if (playing && sleepIndex > 0) {
+            delay(timerMinutes[sleepIndex] * 60_000L)
+            if (playing) {
+                try {
+                    position = player?.currentPosition ?: position
+                    player?.pause()
+                } catch (_: Exception) { }
+                playing = false
+                persist()
+            }
+        }
+    }
     DisposableEffect(book.id) {
         onDispose {
             val current = player
@@ -216,13 +237,13 @@ fun NativeReaderAudioScreen(
             }
         }
         TextButton(
-            onClick = { more = !more },
+            onClick = { audioExpanded = !audioExpanded },
             modifier = Modifier.semantics {
-                stateDescription = if (more) (if (english) "Expanded" else "Abierto")
+                stateDescription = if (audioExpanded) (if (english) "Expanded" else "Abierto")
                     else (if (english) "Collapsed" else "Cerrado")
             }
-        ) { Text(if (english) "More actions" else "Más acciones") }
-        if (more) {
+        ) { Text(if (english) "Audio" else "Audio") }
+        if (audioExpanded) {
             ReaderAdjustableChoice(
                 if (english) "Playback speed" else "Velocidad de reproducción",
                 listOf("0,75", "0,9", "Normal", "1,25", "1,5"), speedIndex
@@ -231,6 +252,19 @@ fun NativeReaderAudioScreen(
                 try { player?.playbackParams = player!!.playbackParams.setSpeed(speeds[idx]) }
                 catch (_: Exception) { }
             }
+            ReaderAdjustableChoice(
+                if (english) "Sleep timer" else "Apagado automático",
+                timerChoices, sleepIndex
+            ) { sleepIndex = it }
+        }
+        TextButton(
+            onClick = { more = !more },
+            modifier = Modifier.semantics {
+                stateDescription = if (more) (if (english) "Expanded" else "Abierto")
+                    else (if (english) "Collapsed" else "Cerrado")
+            }
+        ) { Text(if (english) "More actions" else "Más acciones") }
+        if (more) {
             ReaderAdjustableChoice(
                 if (english) "Track" else "Pista",
                 tracks.indices.map { (it + 1).toString() }, track

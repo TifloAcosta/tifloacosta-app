@@ -8,6 +8,18 @@ class CatalogLogicTest {
     private val android = CatalogItem("1", "Noticia Android", "es", "", listOf("android"), "", "")
     private val apple = CatalogItem("2", "Noticia Apple", "es", "", listOf("apple"), "", "")
 
+    @Test fun backNavigationFromEitherSectionReturnsToHome() {
+        assertEquals(-1, PrototypeNavigation.HOME)
+        assertEquals(
+            PrototypeNavigation.HOME,
+            PrototypeNavigation.parentOf(PrototypeNavigation.NEWS)
+        )
+        assertEquals(
+            PrototypeNavigation.HOME,
+            PrototypeNavigation.parentOf(PrototypeNavigation.RESOURCES)
+        )
+    }
+
     @Test fun newsHasNoResultsUntilAFilterIsChosen() {
         val items = listOf(android, apple)
         assertTrue(CatalogLogic.newsForCategory(items, listOf("android", "apple"), 0).isEmpty())

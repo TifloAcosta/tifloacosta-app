@@ -48,7 +48,7 @@ object ReaderUnits {
         val spans = when (mode) {
             2 -> { // Sentences within each paragraph.
                 pieces.flatMap { (pStart, pEnd) ->
-                    Regex("[^.!?¿¡]+[.!?]*").findAll(text.substring(pStart, pEnd))
+                    Regex("[^.!?]+[.!?]*").findAll(text.substring(pStart, pEnd))
                         .map { (pStart + it.range.first) to (pStart + it.range.last + 1) }
                         .filter { (start, end) -> text.substring(start, end).isNotBlank() }.toList()
                 }

@@ -18,6 +18,10 @@ class CatalogLogicTest {
             PrototypeNavigation.HOME,
             PrototypeNavigation.parentOf(PrototypeNavigation.RESOURCES)
         )
+        assertEquals(
+            PrototypeNavigation.HOME,
+            PrototypeNavigation.parentOf(PrototypeNavigation.VIDEOS)
+        )
     }
 
     @Test fun newsHasNoResultsUntilAFilterIsChosen() {

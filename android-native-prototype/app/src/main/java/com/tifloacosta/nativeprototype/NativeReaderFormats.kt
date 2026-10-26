@@ -32,7 +32,7 @@ object NativeReaderFormats {
         "txt", "text", "md", "markdown", "html", "htm", "rtf", "csv", "json",
         "xml", "log", "srt", "epub", "pdf", "docx", "pptx", "xlsx",
         "zip", "daisy", "jpg", "jpeg", "png", "webp", "bmp", "heic", "heif",
-        "odt", "ods", "odp", "ppsx", "xhtml"
+        "odt", "ods", "odp", "ppsx", "xhtml", "fb2"
     ) + AUDIO_EXTENSIONS
 
     fun readBounded(stream: InputStream, limit: Int): ByteArray {
@@ -55,6 +55,9 @@ object NativeReaderFormats {
         if (input.isEmpty()) throw IOException("El documento está vacío.")
         if (input.size > MAX_ARCHIVE_BYTES) throw IOException("El documento es demasiado grande.")
         if (ext in AUDIO_EXTENSIONS) return DecodedReaderFile("", ext, listOf("audio.$ext" to input))
+        if (ext == "fb2") {
+            return DecodedReaderFile(NativeReaderFictionBook.extract(input), ext)
+        }
         if (ext in setOf("jpg", "jpeg", "png", "webp", "bmp", "heic", "heif")) {
             val text = NativeReaderOcr.recognizeImage(input)
             if (text.isBlank()) throw IOException(
@@ -187,7 +190,9 @@ object NativeReaderFormats {
         fun find(pattern: Regex): List<String> = files.keys.filter { pattern.matches(it) }
         fun pages(paths: List<String>): String = paths.joinToString("\n\n") { name ->
             val raw = files.getValue(name).toString(Charsets.UTF_8)
-            asText(raw)
+            if (name.endsWith(".fb2", ignoreCase = true)) {
+                NativeReaderFictionBook.extract(files.getValue(name))
+            } else asText(raw)
         }.take(MAX_TEXT)
         return when (ext) {
             "odt", "ods", "odp" -> {
@@ -223,7 +228,8 @@ object NativeReaderFormats {
                 val textPaths = names.filter { path ->
                     val lower = path.lowercase(Locale.ROOT)
                     (lower.endsWith(".html") || lower.endsWith(".xhtml") ||
-                        (!epub && (lower.endsWith(".txt") || lower.endsWith(".md")))) &&
+                        (!epub && (lower.endsWith(".txt") || lower.endsWith(".md") ||
+                            lower.endsWith(".fb2")))) &&
                         !lower.contains("toc.") && !lower.contains("nav.") &&
                         !lower.endsWith("ncc.html")
                 }.sorted()

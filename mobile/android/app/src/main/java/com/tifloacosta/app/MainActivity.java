@@ -20,6 +20,7 @@ public class MainActivity extends BridgeActivity {
         registerPlugin(TifloReadingAudioPlugin.class);
         registerPlugin(TifloReadingAudioGroupPlugin.class);
         registerPlugin(TifloVideoScreenPlugin.class);
+        registerPlugin(TifloYouTubeAccountPlugin.class);
         registerPlugin(TifloWebFetchPlugin.class);
         registerPlugin(TifloUpdatePlugin.class);
         super.onCreate(savedInstanceState);

@@ -192,6 +192,13 @@ export function createAccessibleVideoPlayer({
   status.setAttribute('aria-live', 'polite');
   status.setAttribute('aria-atomic', 'true');
 
+  // Reserved space for optional signed-in video actions, adjacent to playback.
+  const accountActionsHost = document.createElement('div');
+  accountActionsHost.className = 'video-player-account-actions';
+  // Optional video-specific actions stay out of the list and are collapsed by default.
+  const extraActionsHost = document.createElement('div');
+  extraActionsHost.className = 'video-player-extra-actions';
+
   const detailsButton = document.createElement('button');
   detailsButton.type = 'button';
   detailsButton.textContent = t('videos.details');
@@ -210,7 +217,7 @@ export function createAccessibleVideoPlayer({
   const closeButton = document.createElement('button');
   closeButton.type = 'button';
   closeButton.textContent = String(closeLabel || '').trim() || t('videos.closePlayer');
-  section.append(heading, title, frameWrap, controls, positionWrap, status, detailsButton, detailsPanel, fallback, closeButton);
+  section.append(heading, title, accountActionsHost, extraActionsHost, controls, positionWrap, status, frameWrap, detailsButton, detailsPanel, fallback, closeButton);
   parent.append(section);
 
   // Only the visible, actively playing embedded player holds the display on.
@@ -271,8 +278,28 @@ export function createAccessibleVideoPlayer({
       detailsPanel.replaceChildren();
       return;
     }
-    const description = String(activeItem?.fullDescription || activeItem?.description || '').trim();
-    if (!appendLinkedDescription(detailsPanel, description, nativeActions)) {
+    const description = String(activeItem?.fullDescription || activeItem?.description || activeItem?.excerpt || '').trim();
+    const metadata = [];
+    if (activeItem?.channelTitle) metadata.push(String(activeItem.channelTitle));
+    if (activeItem?.publishedAt) {
+      const date = new Date(activeItem.publishedAt);
+      if (!Number.isNaN(date.getTime())) metadata.push(
+        new Intl.DateTimeFormat(undefined, { year: 'numeric', month: 'long', day: 'numeric' }).format(date)
+      );
+    }
+    if (Number(activeItem?.durationSeconds) > 0) {
+      metadata.push(formatTime(activeItem.durationSeconds));
+    }
+    detailsPanel.replaceChildren();
+    for (const detail of metadata) {
+      const paragraph = document.createElement('p');
+      paragraph.textContent = detail;
+      detailsPanel.append(paragraph);
+    }
+    const descriptionHost = document.createElement('p');
+    if (appendLinkedDescription(descriptionHost, description, nativeActions)) {
+      detailsPanel.append(descriptionHost);
+    } else if (!metadata.length) {
       detailsPanel.textContent = t('videos.detailsEmpty');
     }
   }
@@ -429,5 +456,5 @@ export function createAccessibleVideoPlayer({
   fallback.addEventListener('click', () => { void openExternal(youtubeUrl(activeItem), nativeActions); });
   setControlsEnabled(false);
 
-  return { open, close, isOpen, destroy };
+  return { open, close, isOpen, destroy, getAccountActionsHost: () => accountActionsHost, getExtraActionsHost: () => extraActionsHost };
 }

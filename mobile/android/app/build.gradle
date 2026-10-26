@@ -42,6 +42,14 @@ android {
         }
     }
     buildTypes {
+        // Explicit opt-in used only for a side-by-side, independently installed
+        // debug APK. Normal builds and Google Play application ID are unchanged.
+        debug {
+            if (project.hasProperty('tifloSafeDebug')) {
+                applicationIdSuffix ".testing"
+                versionNameSuffix "-pruebas"
+            }
+        }
         release {
             if (hasReleaseSigning) {
                 signingConfig signingConfigs.release
@@ -88,7 +96,9 @@ apply from: 'capacitor.build.gradle'
 
 try {
     def servicesJSON = file('google-services.json')
-    if (servicesJSON.text) {
+    // The isolated debug package has its own applicationId. Firebase data
+    // registered for the Play package must never be reused by the test app.
+    if (servicesJSON.text && !project.hasProperty('tifloSafeDebug')) {
         apply plugin: 'com.google.gms.google-services'
     }
 } catch(Exception e) {

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Debug-only label, never included in the Google Play release bundle. -->
+    <string name="app_name">TifloAcosta Pruebas</string>
+    <string name="title_activity_main">TifloAcosta Pruebas</string>
+</resources>

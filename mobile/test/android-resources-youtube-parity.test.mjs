@@ -4,6 +4,7 @@ import test from 'node:test';
 
 const librarySource = await readFile(new URL('../src/screens/library.mjs', import.meta.url), 'utf8');
 const videosSource = await readFile(new URL('../src/screens/videos.mjs', import.meta.url), 'utf8');
+const playerSource = await readFile(new URL('../src/screens/video-player.mjs', import.meta.url), 'utf8');
 
 test('Android Resources exposes only the real category selector', () => {
   assert.match(librarySource, /library-category-filter/);
@@ -17,6 +18,9 @@ test('Android Videos includes accessible public YouTube search with ten-result c
   assert.match(videosSource, /youtube-auth\.tifloacosta\.com/);
   assert.match(videosSource, /Mostrar 10 resultados más/);
   assert.match(videosSource, /pageToken/);
-  assert.match(videosSource, /durationSeconds/);
+  // Video metadata remains available inside the player's expandable details,
+  // without forcing TalkBack to read it in every search result.
+  assert.match(playerSource, /activeItem\?\.durationSeconds/);
+  assert.match(videosSource, /compact-video-item/);
   assert.match(videosSource, /createAccessibleVideoPlayer/);
 });

@@ -1,10 +1,12 @@
 import { addExternalLink, addParagraph, addScreenHeader, addShareButton, clearScreen } from './shared.mjs';
 import { createAccessibleVideoPlayer, videoId, youtubeUrl } from './video-player.mjs';
+import { createYoutubeAccountControls } from './youtube-account.mjs';
+import { TifloYouTubeAccount } from '../native/youtube-account-plugin.mjs';
 
 const YOUTUBE_ENDPOINT = 'https://youtube-auth.tifloacosta.com';
 
 function addFavoriteButton(parent, item, favoritesStore, t) {
-  const ref = { kind: 'video', id: String(item.id || '') };
+  const ref = { kind: 'video', id: videoId(item) || String(item.id || '') };
   const button = document.createElement('button');
   button.type = 'button';
   function update() {
@@ -24,27 +26,6 @@ function matchesInitialVideo(item, initialVideoId) {
   const target = String(initialVideoId || '').trim();
   if (!target) return false;
   return String(item?.id || '').trim() === target || videoId(item) === target;
-}
-
-function formatDate(value, lang) {
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return '';
-  return new Intl.DateTimeFormat(lang === 'en' ? 'en' : 'es-ES', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  }).format(date);
-}
-
-function formatDuration(seconds) {
-  const total = Math.max(0, Math.round(Number(seconds) || 0));
-  if (!total) return '';
-  const hours = Math.floor(total / 3600);
-  const minutes = Math.floor((total % 3600) / 60);
-  const secs = total % 60;
-  return hours
-    ? `${hours}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`
-    : `${minutes}:${String(secs).padStart(2, '0')}`;
 }
 
 export function renderVideos({
@@ -84,7 +65,9 @@ export function renderVideos({
         duration:value => `Duration: ${value}`,
         play:'Play',
         open:'Open on YouTube',
-        own:'TifloAcosta videos'
+        own:'TifloAcosta videos',
+        moreActions:'More video options',
+        hideActions:'Hide additional options'
       }
     : {
         searchHeading:'YouTube accesible',
@@ -106,7 +89,9 @@ export function renderVideos({
         duration:value => `Duración: ${value}`,
         play:'Reproducir',
         open:'Abrir en YouTube',
-        own:'Vídeos de TifloAcosta'
+        own:'Vídeos de TifloAcosta',
+        moreActions:'Más opciones del vídeo',
+        hideActions:'Ocultar opciones adicionales'
       };
 
   let player = null;
@@ -128,8 +113,57 @@ export function renderVideos({
     onClose: () => onBackStateChange?.(null)
   });
 
+  // A sibling panel leaves the existing accessible IFrame/player untouched.
+  const youtubeAccount = createYoutubeAccountControls({
+    root, videoRoot: player.getAccountActionsHost(),
+    nativeActions, accountPlugin: TifloYouTubeAccount, lang
+  });
+
+  function setExtraVideoActions(item) {
+    const host = player.getExtraActionsHost();
+    host.replaceChildren();
+    const url = youtubeUrl(item);
+    const hasFavorite = Boolean(videoId(item) && favoritesStore);
+    const hasShare = Boolean(url && typeof nativeActions?.share === 'function');
+    if (!url && !hasFavorite && !hasShare) return;
+
+    const show = document.createElement('button');
+    show.type = 'button';
+    show.textContent = copy.moreActions;
+    show.setAttribute('aria-expanded', 'false');
+    show.setAttribute('aria-controls', 'youtube-extra-video-options');
+    const panel = document.createElement('div');
+    panel.id = 'youtube-extra-video-options';
+    panel.hidden = true;
+
+    if (url) {
+      addExternalLink(panel, { href: url, label: copy.open, onOpen: nativeActions?.openExternal });
+    }
+    if (hasShare) {
+      addShareButton(panel, {
+        label: t('common.share'),
+        title: item.title || '',
+        text: item.excerpt || item.description || '',
+        url,
+        onShare: nativeActions.share
+      });
+    }
+    if (hasFavorite) addFavoriteButton(panel, item, favoritesStore, t);
+
+    show.addEventListener('click', () => {
+      panel.hidden = !panel.hidden;
+      const expanded = !panel.hidden;
+      show.setAttribute('aria-expanded', String(expanded));
+      show.textContent = expanded ? copy.hideActions : copy.moreActions;
+    });
+    host.append(show, panel);
+  }
+
   async function openVideo(item, button) {
     setPlayerBackHandler();
+    const id = videoId(item);
+    if (id) youtubeAccount.selectVideo({ id, title: item?.title || '' });
+    setExtraVideoActions(item);
     await player.open(item, button);
   }
 
@@ -170,41 +204,20 @@ export function renderVideos({
   more.hidden = true;
 
   function createSearchCard(video) {
+    // One accessible title per result: no duplicate heading, description or
+    // row of buttons to traverse before TalkBack reaches the next title.
     const article = document.createElement('article');
-    article.className = 'content-card';
-
-    const title = document.createElement('h3');
-    title.textContent = video.title || '';
-    article.append(title);
-
-    if (video.channelTitle) addParagraph(article, copy.channel(video.channelTitle), 'muted');
-    const date = formatDate(video.publishedAt, lang);
-    if (date) addParagraph(article, copy.published(date), 'muted');
-    const duration = formatDuration(video.durationSeconds);
-    if (duration) addParagraph(article, copy.duration(duration), 'muted');
-
-    const descriptionText = String(video.description || '').trim();
-    if (descriptionText) {
-      addParagraph(article, descriptionText.length > 350
-        ? `${descriptionText.slice(0, 347).trim()}…`
-        : descriptionText);
-    }
-
-    const playButton = document.createElement('button');
-    playButton.type = 'button';
-    playButton.textContent = `${copy.play}: ${video.title || ''}`;
+    article.className = 'content-card compact-video-item';
     const item = {
       ...video,
-      url: `https://www.youtube.com/watch?v=${encodeURIComponent(video.id || '')}`
+      url: youtubeUrl(video) || `https://www.youtube.com/watch?v=${encodeURIComponent(video.id || '')}`
     };
+    const playButton = document.createElement('button');
+    playButton.type = 'button';
+    playButton.className = 'video-title-button';
+    playButton.textContent = video.title || copy.play;
     playButton.addEventListener('click', () => { void openVideo(item, playButton); });
     article.append(playButton);
-
-    addExternalLink(article, {
-      href: item.url,
-      label: copy.open,
-      onOpen: nativeActions?.openExternal
-    });
     return article;
   }
 
@@ -289,39 +302,22 @@ export function renderVideos({
 
     for (const item of items) {
       const article = document.createElement('article');
-      article.className = 'content-card';
-      const title = document.createElement('h3');
-      title.textContent = item.title || '';
-      article.append(title);
-      if (item.excerpt || item.description) addParagraph(article, item.excerpt || item.description);
-
+      article.className = 'content-card compact-video-item';
       const id = videoId(item);
-      const url = youtubeUrl(item);
       if (id) {
         const playButton = document.createElement('button');
         playButton.type = 'button';
+        playButton.className = 'video-title-button';
         playButton.id = `video-play-${String(item.id || id)}`;
-        playButton.textContent = `${t('videos.play')}: ${item.title || ''}`;
+        playButton.textContent = item.title || t('videos.play');
         playButton.addEventListener('click', () => { void openVideo(item, playButton); });
         article.append(playButton);
         if (matchesInitialVideo(item, initialVideoId)) initialTarget = { item, button: playButton };
+      } else {
+        const title = document.createElement('p');
+        title.textContent = item.title || '';
+        article.append(title);
       }
-
-      if (url) {
-        addExternalLink(article, {
-          href: url,
-          label: t('videos.openYouTube'),
-          onOpen: nativeActions?.openExternal
-        });
-        addShareButton(article, {
-          label: t('common.share'),
-          title: item.title || '',
-          text: item.excerpt || item.description || '',
-          url,
-          onShare: nativeActions?.share
-        });
-      }
-      if (item.id) addFavoriteButton(article, item, favoritesStore, t);
       list.append(article);
     }
     root.append(list);
@@ -335,6 +331,7 @@ export function renderVideos({
 
   setScreenCleanup?.(() => {
     onBackStateChange?.(null);
+    youtubeAccount.dispose();
     player.destroy();
   });
 }

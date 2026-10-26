@@ -35,6 +35,22 @@ export function renderContact({ root, router, nativeActions, t }) {
   clearScreen(root);
   addScreenHeader(root, { router, title: t('screen.contact'), backLabel: t('nav.back') });
 
+  // Same structure as the native iOS Contacto y redes screen. Keep the
+  // existing book route and its content, but open it as a secondary screen.
+  const bookSection = document.createElement('section');
+  bookSection.className = 'content-card section-stack';
+  const bookHeading = document.createElement('h2');
+  bookHeading.textContent = t('screen.book');
+  const bookButton = document.createElement('button');
+  bookButton.id = 'contact-book';
+  bookButton.type = 'button';
+  bookButton.textContent = t('book.title');
+  bookButton.addEventListener('click', () => {
+    router.navigate('book', { originId: bookButton.id });
+  });
+  bookSection.append(bookHeading, bookButton);
+  root.append(bookSection);
+
   addContactSection(root, {
     title: localizedHeading('Contacto directo', 'Direct contact'),
     contacts: DIRECT_CONTACTS,

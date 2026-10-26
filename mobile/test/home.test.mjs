@@ -20,7 +20,6 @@ test('home uses the approved compact order', () => {
     'downloads',
     'favorites',
     'videos',
-    'book',
     'podcast',
     'contact',
     'privacy',
@@ -38,6 +37,33 @@ test('home and secondary screen labels exist in Spanish and English', () => {
       assert.ok(text(lang, `screen.${labelKey}`), `Missing ${lang} screen.${labelKey}`);
     }
   }
+});
+
+test('Android aligns Resources and My book placement with native iOS without losing the reader', async () => {
+  const [home, contact, book, library, iosHome, iosContact] = await Promise.all([
+    read('src/screens/home.mjs'),
+    read('src/screens/contact.mjs'),
+    read('src/screens/book.mjs'),
+    read('src/screens/library.mjs'),
+    read('../ios-app-native/Sources/NativeScreens.swift'),
+    read('../ios-app-native/Sources/NativeContact.swift')
+  ]);
+  assert.equal(text('es', 'home.library'), 'Recursos');
+  assert.equal(text('es', 'screen.library'), 'Recursos');
+  assert.equal(text('en', 'home.library'), 'Resources');
+  assert.equal(text('en', 'screen.library'), 'Resources');
+  assert.equal(text('es', 'home.contact'), 'Contacto y redes');
+  assert.equal(text('en', 'home.contact'), 'Contact and social networks');
+  assert.equal(HOME_ITEMS.includes('book'), false);
+  assert.ok(HOME_ITEMS.includes('reading-library'), 'TifloLector remains on the home screen');
+  assert.match(contact, /bookButton\.id = 'contact-book'/);
+  assert.match(contact, /router\.navigate\('book', \{ originId: bookButton\.id \}\)/);
+  assert.match(contact, /bookButton\.textContent = t\('book\.title'\)/);
+  assert.match(book, /export function renderBook/);
+  assert.match(library, /selectResources\(/);
+  assert.match(home, /router\.navigate\(key/);
+  assert.match(iosHome, /case recursos = "Recursos"/);
+  assert.match(iosContact, /Section\("Mi libro"\)/);
 });
 
 test('home brand header uses the official TifloAcosta symbol without duplicate screen-reader output', async () => {

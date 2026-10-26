@@ -132,7 +132,8 @@ export function renderVideos({
 
   // A sibling panel leaves the existing accessible IFrame/player untouched.
   const youtubeAccount = createYoutubeAccountControls({
-    root, nativeActions, accountPlugin: TifloYouTubeAccount, lang
+    root, videoRoot: player.getAccountActionsHost(),
+    nativeActions, accountPlugin: TifloYouTubeAccount, lang
   });
 
   async function openVideo(item, button) {

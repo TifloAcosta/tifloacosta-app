@@ -76,6 +76,27 @@ test('Android account transport has a protected native callback and no new permi
   assert.match(screen, /videoRoot: player\.getAccountActionsHost\(\)/);
 });
 
+test('Android video lists expose one title and defer controls to the video itself', async () => {
+  const [screen, player] = await Promise.all([
+    source('src/screens/videos.mjs'),
+    source('src/screens/video-player.mjs')
+  ]);
+  const searchCard = screen.split('function createSearchCard(video) {')[1]?.split('function setLoading(')[0];
+  const ownList = screen.split('for (const item of items) {')[1]?.split('root.append(list);')[0];
+  assert.ok(searchCard && ownList);
+  assert.match(searchCard, /article\.append\(playButton\)/);
+  assert.doesNotMatch(searchCard, /addExternalLink|addShareButton|addParagraph|article\.append\(title\)/);
+  assert.match(ownList, /list\.append\(article\)/);
+  assert.doesNotMatch(ownList, /addExternalLink|addShareButton|addFavoriteButton|article\.append\(title\)/);
+  assert.match(screen, /player\.getExtraActionsHost\(\)/);
+  assert.match(screen, /show\.setAttribute\('aria-expanded', String\(expanded\)\)/);
+  assert.match(screen, /panel\.hidden = true/);
+  assert.match(player, /section\.append\(heading, title, accountActionsHost, extraActionsHost, controls, positionWrap, status, frameWrap/);
+  assert.match(player, /getExtraActionsHost: \(\) => extraActionsHost/);
+  assert.match(player, /activeItem\?\.channelTitle/);
+  assert.match(player, /activeItem\?\.durationSeconds/);
+});
+
 test('Android YouTube errors are announced clearly in Spanish and English', () => {
   assert.match(youtubeAccountError('SESSION_EXPIRED', 'es'), /caducado/);
   assert.match(youtubeAccountError('COMMENTS_DISABLED', 'es'), /desactivados/);

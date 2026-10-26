@@ -180,7 +180,7 @@ private fun PrototypeHome() {
     val first = if (english) "News" else "Actualidad"
     val second = if (english) "Resources" else "Recursos"
 
-    BackHandler(enabled = section != PrototypeNavigation.HOME && selectedItem == null) {
+    BackHandler(enabled = section != PrototypeNavigation.HOME && selectedItem == null && selectedMediaItem == null) {
         section = PrototypeNavigation.parentOf(section)
     }
 

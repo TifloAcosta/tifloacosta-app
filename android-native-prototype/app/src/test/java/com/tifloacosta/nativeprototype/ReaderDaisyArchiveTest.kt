@@ -45,6 +45,7 @@ class ReaderDaisyArchiveTest {
                     </smil>
                 """.trimIndent()),
                 "book/ch2.smil" to put("""
+                    <!DOCTYPE smil PUBLIC "-//W3C//DTD SMIL 1.0//EN" "http://www.w3.org/TR/REC-smil/SMIL10.dtd">
                     <smil xmlns="http://www.w3.org/2001/SMIL20/Language">
                       <body><seq>
                         <audio src="p2.mp3" clip-begin="npt=0s" clip-end="npt=1.25s"/>
@@ -97,4 +98,13 @@ class ReaderDaisyArchiveTest {
         assertEquals(61000, NativeReaderDaisy.clock("0:01:01"))
         assertEquals(-1, NativeReaderDaisy.clock("invalid"))
     }
+    @Test fun understandsAccentsAndSpacesInDaisyReferences() {
+        val names = setOf("libro/audio/Capítulo 01.mp3")
+        assertEquals("libro/audio/Capítulo 01.mp3",
+            NativeReaderDaisy.resolve("libro/guiones/uno.smil",
+                "../audio/Cap%C3%ADtulo%2001.mp3", names))
+        assertEquals(null, NativeReaderDaisy.resolve("libro/uno.smil",
+            "../../../fuera.mp3", names))
+    }
+
 }

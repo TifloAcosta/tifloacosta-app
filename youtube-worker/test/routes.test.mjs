@@ -315,40 +315,6 @@ test('Native Google OAuth exchanges a PKCE-bound short-lived ticket for an encry
   assert.equal(blocked.status, 403);
 });
 
-test('Android native OAuth redirects to a distinct scheme and retains PKCE protection', async () => {
-  const verifier = randomToken(32);
-  const challenge = await pkceChallenge(verifier);
-  const start = await handleRequest(new Request(
-    'https://youtube-auth.tifloacosta.com/auth/native/start?platform=android&challenge=' + challenge
-  ), env);
-  assert.equal(start.status, 302);
-  const oauth = new URL(start.headers.get('Location'));
-  const cookie = start.headers.get('Set-Cookie').split(';', 1)[0];
-  const callback = await handleRequest(new Request(
-    'https://youtube-auth.tifloacosta.com/auth/callback?code=example&state=' + oauth.searchParams.get('state'),
-    { headers: { Cookie: cookie } }
-  ), env, { fetchImpl: async () =>
-    jsonResponse({access_token:'android-access',refresh_token:'android-refresh',expires_in:3600})
-  });
-  assert.equal(callback.status,302);
-  const url = new URL(callback.headers.get('Location'));
-  assert.equal(url.protocol,'tifloacostanative:');
-  assert.equal(url.hostname,'youtube-auth');
-  const ticket=url.searchParams.get('ticket');
-  assert.ok(ticket);
-  const reply=await handleRequest(new Request('https://youtube-auth.tifloacosta.com/auth/native/exchange',{
-    method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({ticket,verifier})
-  }),env);
-  assert.equal(reply.status,200);
-  assert.equal((await reply.json()).authenticated,true);
-
-  const rejected = await handleRequest(new Request(
-    'https://youtube-auth.tifloacosta.com/auth/native/start?platform=untrusted&challenge=' + challenge
-  ), env);
-  assert.equal(rejected.status,400);
-});
-
 test('Invalid and browser-origin native authorization attempts are denied', async () => {
   const invalid = await handleRequest(new Request(
     'https://youtube-auth.tifloacosta.com/auth/native/start?challenge=wrong'

@@ -1,3 +1,18 @@
+# Estado actual del prototipo — 0.7 (TifloLector, primera fase, 26/10/2026)
+
+Esta sección actualiza el alcance inicial de este README. Las secciones históricas de fases anteriores se mantienen como registro, pero no describen la totalidad de las funciones de la versión 0.7.
+
+- La portada tiene Actualidad, Recursos, TifloLector y Vídeos. TifloLector usa Compose nativo y una biblioteca **privada del prototipo**, sin leer, modificar ni migrar los archivos de la aplicación Android de Google Play.
+- Una única opción **Importar** permite copiar de Archivos TXT, HTML, HTM, MD y Markdown (hasta 4 MB). El importador rechaza expresamente formatos aún no admitidos. Al abrir un título de Mi biblioteca se entra directamente a la lectura.
+- Lectura por síntesis TTS instalada en Android, reproducir/pausar primero, selector de unidad Bloque/Párrafo/Frase (control ajustable TalkBack), anterior/siguiente, porcentaje, salto en pasos de 10 %, marcas guardadas, velocidad y retorno claro.
+- Portada del lector compacta: Importar, Ajustes, Filtros, Mi biblioteca y Marcas; los submenús abren cerrados y la lista de libros está paginada de diez en diez, con títulos exclusivamente.
+- Los libros se almacenan en archivos privados internos y el índice guarda posiciones y marcas. No se anuncian automáticamente en directo los cambios de progreso para evitar solapamiento con TalkBack.
+- **Importante:** La firma debug de GitHub Actions aún puede variar de una compilación a otra. Desinstalar el prototipo para instalar una APK distinta **borra su biblioteca de pruebas**. No guardar documentos importantes como única copia aquí. Se debe resolver una firma de pruebas persistente antes de tratar la biblioteca como duradera.
+- Todavía no están implementados el importador PDF/DOCX/EPUB/DAISY/Office, OCR, exportación, carpetas, cola, lectura de audio, biblioteca remota, motores de voz alternativos ni migración desde la app publicada. No presentar esta prueba como lector completo.
+- Para considerar la fase aceptada faltan **pruebas reales en Pixel/TalkBack**: importar TXT, lectura con pantalla encendida y bloqueada (no garantizada todavía), suspender y reanudar, uso del selector vertical, marca, porcentaje, regreso a biblioteca, cierre/reapertura y contraste de idioma.
+- El ajuste 0.6 de flic de Vídeos se arrastra a esta rama pero **no se considera validado en dispositivo** hasta que el usuario lo confirme.
+- Sin publicación en Google Play ni cambios en iOS, la web ni las bibliotecas de usuarios.
+
 # TifloAcosta Nativa Pruebas — fase 1
 
 Prototipo **independiente** en Kotlin y Jetpack Compose. Instalación paralela

@@ -49,9 +49,17 @@ fun NativeReaderAudioScreen(
     onBack: () -> Unit
 ) {
     val tracks = remember(book.id) { store.audioFiles(book) }
+    // SMIL may refer repeatedly to different clips of the SAME audio file.
+    // A playlist item therefore means a DAISY segment, not a duplicated MP3.
+    val playlist = remember(book.id) {
+        val items = book.audioSegments.ifEmpty {
+            tracks.indices.map { ReaderAudioSegment(it) }
+        }
+        items.filter { it.fileIndex in tracks.indices }
+    }
     var player by remember(book.id) { mutableStateOf<MediaPlayer?>(null) }
     var track by remember(book.id) {
-        mutableIntStateOf(book.trackIndex.coerceIn(0, (tracks.size - 1).coerceAtLeast(0)))
+        mutableIntStateOf(book.trackIndex.coerceIn(0, (playlist.size - 1).coerceAtLeast(0)))
     }
     var position by remember(book.id) { mutableIntStateOf(book.audioPositionMs) }
     var duration by remember(book.id) { mutableIntStateOf(0) }
@@ -74,19 +82,23 @@ fun NativeReaderAudioScreen(
         onUpdate(book.copy(trackIndex = track, audioPositionMs = position))
     }
     fun openTrack(target: Int, seekPosition: Int = 0) {
-        if (tracks.isEmpty()) return
+        val segment = playlist.getOrNull(target) ?: return
         try {
             player?.release()
             val media = MediaPlayer()
-            media.setDataSource(tracks[target].absolutePath)
+            media.setDataSource(tracks[segment.fileIndex].absolutePath)
             media.prepare()
             track = target
             duration = media.duration
-            position = seekPosition.coerceIn(0, media.duration.coerceAtLeast(0))
+            val clipStart = segment.startMs.coerceIn(0, duration.coerceAtLeast(0))
+            val clipEnd = segment.endMs.takeIf { it > clipStart }
+                ?.coerceAtMost(duration) ?: duration
+            position = (if (seekPosition > 0) seekPosition else clipStart)
+                .coerceIn(clipStart, clipEnd)
             media.seekTo(position)
             media.playbackParams = media.playbackParams.setSpeed(speeds[speedIndex])
             media.setOnCompletionListener {
-                if (track < tracks.lastIndex) openTrack(track + 1, 0)
+                if (track < playlist.lastIndex) openTrack(track + 1, 0)
                 else {
                     playing = false
                     position = 0
@@ -123,14 +135,19 @@ fun NativeReaderAudioScreen(
         persist()
     }
     fun skip(millis: Int) {
-        val next = (position.toLong() + millis).coerceIn(0L, duration.toLong()).toInt()
+        val currentClip = playlist.getOrNull(track)
+        val first = currentClip?.startMs?.toLong()?.coerceAtLeast(0) ?: 0L
+        val last = currentClip?.endMs?.takeIf { it > first }
+            ?.toLong()?.coerceAtMost(duration.toLong()) ?: duration.toLong()
+        val next = (position.toLong() + millis).coerceIn(first, last).toInt()
         player?.seekTo(next)
         position = next
         persist()
     }
     fun bookmark() {
-        if (position !in book.marks) {
-            onUpdate(book.copy(marks = book.marks + position,
+        val mark = ReaderAudioMark(track, position)
+        if (mark !in book.audioMarks) {
+            onUpdate(book.copy(audioMarks = book.audioMarks + mark,
                 trackIndex = track, audioPositionMs = position))
             message = if (english) "Bookmark saved" else "Marca guardada"
         }
@@ -147,7 +164,7 @@ fun NativeReaderAudioScreen(
             1 -> skip(-30000)
             2 -> skip(30000)
             3 -> if (track > 0) openTrack(track - 1)
-            4 -> if (track < tracks.lastIndex) openTrack(track + 1)
+            4 -> if (track < playlist.lastIndex) openTrack(track + 1)
             5 -> bookmark()
             6 -> more = !more
         }
@@ -180,12 +197,24 @@ fun NativeReaderAudioScreen(
             current?.release()
         }
     }
-    LaunchedEffect(player, playing) {
+    LaunchedEffect(player, playing, track) {
         var previousSave = 0
         while (isActive && playing) {
-            delay(1000)
-            position = try { player?.currentPosition ?: 0 } catch (_: Exception) { 0 }
-            if (++previousSave >= 5) {
+            delay(250)
+            val observed = try { player?.currentPosition ?: 0 } catch (_: Exception) { 0 }
+            position = observed
+            // Honor clip-end from SMIL even if the physical MP3 file continues.
+            val limit = playlist.getOrNull(track)?.endMs ?: -1
+            if (limit > 0 && observed >= limit - 100) {
+                if (track < playlist.lastIndex) openTrack(track + 1)
+                else {
+                    playing = false
+                    player?.pause()
+                    persist()
+                }
+                break
+            }
+            if (++previousSave >= 20) {
                 persist()
                 previousSave = 0
             }
@@ -226,8 +255,11 @@ fun NativeReaderAudioScreen(
             }
             TextButton(onClick = { stop() }) { Text(if (english) "Stop" else "Detener") }
         }
-        Text((if (english) "Track " else "Pista ") + (track + 1) + " / " + tracks.size +
-            ", " + (position / 1000) + " / " + (duration / 1000) + " s")
+        Text((if (english) "Section " else "Sección ") + (track + 1) + " / " +
+            playlist.size + ", " + (position / 1000) + " / " + (duration / 1000) + " s")
+        playlist.getOrNull(track)?.label?.takeIf { it.isNotBlank() }?.let {
+            Text(it)
+        }
         Row {
             TextButton(onClick = { skip(-30000) }) {
                 Text(if (english) "Back 30 s" else "Retroceder 30 s")
@@ -265,16 +297,28 @@ fun NativeReaderAudioScreen(
             }
         ) { Text(if (english) "More actions" else "Más acciones") }
         if (more) {
-            ReaderAdjustableChoice(
-                if (english) "Track" else "Pista",
-                tracks.indices.map { (it + 1).toString() }, track
-            ) { idx -> openTrack(idx) }
+            Row {
+                TextButton(enabled = track > 0, onClick = { openTrack(track - 1) }) {
+                    Text(if (english) "Previous section" else "Sección anterior")
+                }
+                TextButton(enabled = track < playlist.lastIndex, onClick = {
+                    openTrack(track + 1)
+                }) { Text(if (english) "Next section" else "Sección siguiente") }
+            }
+            if (playlist.size in 2..80) {
+                ReaderAdjustableChoice(
+                    if (english) "Section" else "Sección",
+                    playlist.indices.map { (it + 1).toString() }, track
+                ) { idx -> openTrack(idx) }
+            }
             Button(onClick = { bookmark() }) {
                 Text(if (english) "Save bookmark" else "Guardar marca")
             }
-            book.marks.forEachIndexed { i, ms ->
-                TextButton(onClick = { skip(ms - position) }) {
-                    Text((if (english) "Bookmark " else "Marca ") + (i + 1))
+            book.audioMarks.forEachIndexed { i, mark ->
+                TextButton(onClick = { openTrack(mark.segmentIndex, mark.positionMs) }) {
+                    Text((if (english) "Bookmark " else "Marca ") + (i + 1) +
+                        ", " + (if (english) "section " else "sección ") +
+                        (mark.segmentIndex + 1))
                 }
             }
         }

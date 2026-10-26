@@ -1,7 +1,6 @@
 package com.tifloacosta.nativeprototype
 
 import java.io.File
-import java.net.URI
 import java.util.Locale
 import javax.xml.parsers.DocumentBuilderFactory
 import org.w3c.dom.Element
@@ -37,12 +36,25 @@ object NativeReaderDaisy {
     }
 
     fun resolve(base: String, target: String, available: Set<String>): String? {
-        if (target.isBlank() || target.startsWith("//") || Regex("^[A-Za-z]+:").containsMatchIn(target))
-            return null
+        if (target.isBlank() || target.startsWith("/") || target.startsWith("//") ||
+            Regex("^[A-Za-z]+:").containsMatchIn(target)) return null
         return try {
-            val resolved = URI("https://local.invalid/" + base)
-                .resolve(target).normalize().path.removePrefix("/")
-            val valid = NativeReaderArchives.validLogicalPath(resolved) ?: return null
+            val relative = java.net.URLDecoder.decode(
+                target.substringBefore('#').substringBefore('?')
+                    .replace("+", "%2B").replace('\\', '/'), "UTF-8"
+            )
+            val parts = ArrayDeque<String>()
+            base.substringBeforeLast('/', "").split('/').filter { it.isNotBlank() }
+                .forEach { parts.addLast(it) }
+            for (element in relative.split('/')) {
+                when (element) {
+                    "", "." -> Unit
+                    ".." -> if (parts.isEmpty()) return null else parts.removeLast()
+                    else -> parts.addLast(element)
+                }
+            }
+            val valid = NativeReaderArchives.validLogicalPath(parts.joinToString("/"))
+                ?: return null
             available.firstOrNull { it == valid }
                 ?: available.firstOrNull { it.equals(valid, ignoreCase = true) }
         } catch (_: Exception) { null }

@@ -35,6 +35,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.ProgressBarRangeInfo
+import androidx.compose.ui.semantics.onClick
+import androidx.compose.ui.semantics.progressBarRangeInfo
+import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -204,7 +208,45 @@ fun NativeYouTubePlayer(
         TextButton(onClick = onBack) {
             Text(if (english) "Back to media" else "Volver a multimedia")
         }
-        Text(item.title, style = MaterialTheme.typography.headlineSmall)
+        // The title itself is the adjustable TalkBack stop, instead of
+        // requiring users to locate a second selector below the player.
+        // TalkBack maps setProgress to the up/down slider gestures.
+        Text(
+            item.title,
+            style = MaterialTheme.typography.headlineSmall,
+            modifier = Modifier.semantics {
+                contentDescription = item.title
+                stateDescription = (if (english) "Selected video action: " else "Acción del vídeo: ") +
+                    actions[gestureIndex]
+                progressBarRangeInfo = ProgressBarRangeInfo(
+                    gestureIndex.toFloat(), 0f..actions.lastIndex.toFloat(),
+                    (actions.size - 2).coerceAtLeast(0)
+                )
+                setProgress { requested ->
+                    gestureIndex = requested.roundToInt().coerceIn(0, actions.lastIndex)
+                    true
+                }
+                onClick(label = if (english) "Perform selected video action"
+                    else "Ejecutar acción del vídeo") {
+                    runAction(gestureIndex)
+                    true
+                }
+                customActions = listOf(
+                    CustomAccessibilityAction(if (english) "Previous action" else "Acción anterior") {
+                        gestureIndex = (gestureIndex - 1).coerceAtLeast(0)
+                        true
+                    },
+                    CustomAccessibilityAction(if (english) "Next action" else "Acción siguiente") {
+                        gestureIndex = (gestureIndex + 1).coerceAtMost(actions.lastIndex)
+                        true
+                    },
+                    CustomAccessibilityAction(if (english) "Perform action" else "Ejecutar acción") {
+                        runAction(gestureIndex)
+                        true
+                    }
+                )
+            }
+        )
         if (videoId != null) {
             // Show official iframe and branding; TalkBack uses the simpler native controls below.
             AndroidView(
@@ -276,34 +318,8 @@ fun NativeYouTubePlayer(
                 timeText(state.seconds) + " / " + timeText(state.length),
                 modifier = Modifier.clearAndSetSemantics { }
             )
-            // One adjustable TalkBack stop: swipe up/down to select an action,
-            // then activate the adjacent button or use the accessibility action.
-            Text(
-                if (english) "Selected action: " + actions[gestureIndex]
-                else "Acción seleccionada: " + actions[gestureIndex],
-                modifier = Modifier.clearAndSetSemantics { }
-            )
-            Slider(
-                value = gestureIndex.toFloat(),
-                onValueChange = { gestureIndex = it.roundToInt().coerceIn(0, actions.lastIndex) },
-                valueRange = 0f..actions.lastIndex.toFloat(),
-                steps = (actions.size - 2).coerceAtLeast(0),
-                modifier = Modifier.fillMaxWidth().semantics {
-                    contentDescription = if (english) "Video action" else "Acción del vídeo"
-                    stateDescription = actions[gestureIndex]
-                    customActions = listOf(
-                        CustomAccessibilityAction(if (english) "Previous action" else "Acción anterior") {
-                            gestureIndex = (gestureIndex - 1).coerceAtLeast(0); true
-                        },
-                        CustomAccessibilityAction(if (english) "Next action" else "Acción siguiente") {
-                            gestureIndex = (gestureIndex + 1).coerceAtMost(actions.lastIndex); true
-                        },
-                        CustomAccessibilityAction(if (english) "Perform action" else "Ejecutar acción") {
-                            runAction(gestureIndex); true
-                        }
-                    )
-                }
-            )
+            // Normal button remains an accessible fallback for users whose
+            // TalkBack reading-control settings reserve the up/down gesture.
             Button(onClick = { runAction(gestureIndex) }) {
                 Text((if (english) "Perform: " else "Ejecutar: ") + actions[gestureIndex])
             }

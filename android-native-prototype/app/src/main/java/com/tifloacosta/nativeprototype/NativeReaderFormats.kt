@@ -48,7 +48,8 @@ object NativeReaderFormats {
         return out.toByteArray()
     }
 
-    fun decode(context: Context, extRaw: String, input: ByteArray): DecodedReaderFile {
+    fun decode(context: Context, extRaw: String, input: ByteArray,
+               progress: ((Int, Int) -> Unit)? = null): DecodedReaderFile {
         val ext = extRaw.lowercase(Locale.ROOT)
         if (ext !in supported) throw IOException("El formato .$ext aún no dispone de lector compatible.")
         if (input.isEmpty()) throw IOException("El documento está vacío.")
@@ -62,7 +63,7 @@ object NativeReaderFormats {
             return DecodedReaderFile(text.take(MAX_TEXT), ext)
         }
         if (ext == "pdf") {
-            return DecodedReaderFile(NativeReaderOcr.recognizePdf(context, input), "pdf")
+            return DecodedReaderFile(NativeReaderOcr.recognizePdf(context, input, progress), "pdf")
         }
         if (ext in setOf("zip", "epub", "docx", "pptx", "ppsx",
                 "xlsx", "daisy", "odt", "ods", "odp")) {

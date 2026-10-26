@@ -55,6 +55,7 @@ object PrototypeNavigation {
     const val NEWS = 0
     const val RESOURCES = 1
     const val VIDEOS = 2
+    const val READER = 3
     fun parentOf(destination: Int): Int = HOME
 }
 
@@ -213,6 +214,7 @@ private fun PrototypeHome(
     val first = if (english) "News" else "Actualidad"
     val second = if (english) "Resources" else "Recursos"
     val third = if (english) "Videos" else "Vídeos"
+    val readerLabel = "TifloLector"
 
     BackHandler(enabled = playingMediaItem != null) { playingMediaItem = null }
 
@@ -235,6 +237,14 @@ private fun PrototypeHome(
         return
     }
 
+    if (section == PrototypeNavigation.READER) {
+        NativeTifloLector(
+            english = english,
+            onBack = { section = PrototypeNavigation.HOME }
+        )
+        return
+    }
+
     Scaffold(modifier = Modifier.fillMaxSize()) { inner ->
         Column(modifier = Modifier.fillMaxSize().padding(inner).padding(horizontal = 16.dp)) {
             if (section == PrototypeNavigation.HOME) {
@@ -252,6 +262,10 @@ private fun PrototypeHome(
                         onClick = { section = PrototypeNavigation.RESOURCES; visibleCount = 10 },
                         modifier = Modifier.fillMaxWidth()
                     ) { Text(second) }
+                    Button(
+                        onClick = { section = PrototypeNavigation.READER },
+                        modifier = Modifier.fillMaxWidth()
+                    ) { Text(readerLabel) }
                     Button(
                         onClick = { section = PrototypeNavigation.VIDEOS; visibleCount = 10 },
                         modifier = Modifier.fillMaxWidth()

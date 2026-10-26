@@ -28,7 +28,9 @@ data class ReaderBook(
     val format: String = "txt",
     val favorite: Boolean = false,
     val folder: String = "",
-    val tracks: List<String> = emptyList()
+    val tracks: List<String> = emptyList(),
+    val trackIndex: Int = 0,
+    val audioPositionMs: Int = 0
 )
 
 data class ReadingUnit(val start: Int, val end: Int, val text: String)
@@ -121,6 +123,8 @@ class NativeReaderStore(private val context: Context) {
                     format = obj.optString("format", "txt"),
                     favorite = obj.optBoolean("favorite", false),
                     folder = obj.optString("folder", ""),
+                    trackIndex = obj.optInt("trackIndex", 0).coerceAtLeast(0),
+                    audioPositionMs = obj.optInt("audioPositionMs", 0).coerceAtLeast(0),
                     tracks = obj.optJSONArray("tracks")?.let { arr ->
                         (0 until arr.length()).mapNotNull { n ->
                             arr.optString(n).takeIf { value -> value.matches(Regex("[a-f0-9-]{36}\\.\\d{3}\\.[A-Za-z0-9]{2,5}")) }
@@ -138,7 +142,8 @@ class NativeReaderStore(private val context: Context) {
                 .put("length", book.length).put("offset", book.offset)
                 .put("createdAt", book.createdAt).put("marks", JSONArray(book.marks))
                 .put("format", book.format).put("favorite", book.favorite)
-                .put("folder", book.folder).put("tracks", JSONArray(book.tracks)))
+                .put("folder", book.folder).put("tracks", JSONArray(book.tracks))
+                .put("trackIndex", book.trackIndex).put("audioPositionMs", book.audioPositionMs))
         }
         val temp = File(folder, "index.tmp")
         temp.writeText(array.toString(), Charsets.UTF_8)

@@ -22,7 +22,7 @@ class ReaderDaisyArchiveTest {
     }
 
     @Test fun smilAndNccControlAudioOrderAndClipBoundaries() {
-        val folder = createTempDir(prefix = "reader-daisy-")
+        val folder = java.nio.file.Files.createTempDirectory("reader-daisy-").toFile()
         try {
             var counter = 0
             fun put(value: String): File {
@@ -69,7 +69,7 @@ class ReaderDaisyArchiveTest {
 
     @Test fun zipDaisyIsExtractedWithoutFollowingArchivePaths() {
         val archive = File.createTempFile("reader-zip-", ".zip")
-        val staging = createTempDir(prefix = "reader-stage-")
+        val staging = java.nio.file.Files.createTempDirectory("reader-stage-").toFile()
         try {
             ZipOutputStream(FileOutputStream(archive)).use { zip ->
                 for ((name, body) in listOf(

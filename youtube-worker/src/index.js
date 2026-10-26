@@ -204,19 +204,20 @@ export async function handleRequest(request, env, deps = {}) {
     });
   }
 
-  // Autorización nativa con ASWebAuthenticationSession y doble PKCE:
-  // Google autentica el flujo web habitual del Worker; el segundo
-  // desafío vincula el ticket de regreso al iPhone iniciador.
+  // Autorización nativa iOS/Android mediante navegador seguro y doble PKCE.
+  // El segundo desafío vincula el ticket a la instalación iniciadora.
   if (url.pathname === '/auth/native/start' && request.method === 'GET') {
     const challenge = url.searchParams.get('challenge') || '';
-    if (!/^[A-Za-z0-9_-]{43}$/.test(challenge) ||
+    const nativePlatform = url.searchParams.get('platform') || 'ios';
+    if (!['ios', 'android'].includes(nativePlatform) ||
+        !/^[A-Za-z0-9_-]{43}$/.test(challenge) ||
         !env.GOOGLE_CLIENT_ID || !env.YOUTUBE_SESSION_SECRET) {
       return json({ error: 'NATIVE_AUTH_INVALID' }, 400, cors);
     }
     const verifier = randomToken(48);
     const state = randomToken(32);
     const oauthCookie = await createOauthCookie({
-      state, verifier, nativeChallenge: challenge,
+      state, verifier, nativeChallenge: challenge, nativePlatform,
       exp: Date.now() + 10 * 60 * 1000
     }, env.YOUTUBE_SESSION_SECRET);
     const authorization = buildAuthorizationUrl({
@@ -279,6 +280,11 @@ export async function handleRequest(request, env, deps = {}) {
     return redirect(authorization.toString(), [oauthCookie]);
   }
 
+  const nativeReturn = (state, params) => {
+    const scheme = state?.nativePlatform === 'android' ? 'tifloacostanative' : 'tifloacosta';
+    return scheme + '://youtube-auth?' + new URLSearchParams(params).toString();
+  };
+
   if (url.pathname === '/auth/callback' && request.method === 'GET') {
     const clearOauth = clearCookie(OAUTH_COOKIE);
     const oauthState = await readOauthCookie(request, env.YOUTUBE_SESSION_SECRET);
@@ -288,7 +294,7 @@ export async function handleRequest(request, env, deps = {}) {
 
     if (denied || !oauthState || !code || !state || oauthState.state !== state) {
       return redirect(oauthState?.nativeChallenge
-        ? 'tifloacosta://youtube-auth?error=denied'
+        ? nativeReturn(oauthState, { error: 'denied' })
         : oauthFailure(env), [clearOauth]);
     }
 
@@ -303,7 +309,7 @@ export async function handleRequest(request, env, deps = {}) {
       });
       if (typeof tokens.refresh_token !== 'string' || !tokens.refresh_token) {
         return redirect(oauthState?.nativeChallenge
-          ? 'tifloacosta://youtube-auth?error=missing_refresh_token'
+          ? nativeReturn(oauthState, { error: 'missing_refresh_token' })
           : oauthFailure(env), [clearOauth]);
       }
 
@@ -321,13 +327,13 @@ export async function handleRequest(request, env, deps = {}) {
           refreshToken: session.refreshToken, accessToken: session.accessToken,
           accessExp: session.accessExp, exp: Date.now() + 60_000
         }, env.YOUTUBE_SESSION_SECRET);
-        return redirect('tifloacosta://youtube-auth?ticket=' + encodeURIComponent(ticket), [clearOauth]);
+        return redirect(nativeReturn(oauthState, { ticket }), [clearOauth]);
       }
       const sessionCookie = await createSessionCookie(session, env.YOUTUBE_SESSION_SECRET);
       return redirect(oauthSuccess(env), [sessionCookie, clearOauth]);
     } catch {
       return redirect(oauthState?.nativeChallenge
-        ? 'tifloacosta://youtube-auth?error=failed'
+        ? nativeReturn(oauthState, { error: 'failed' })
         : oauthFailure(env), [clearOauth]);
     }
   }

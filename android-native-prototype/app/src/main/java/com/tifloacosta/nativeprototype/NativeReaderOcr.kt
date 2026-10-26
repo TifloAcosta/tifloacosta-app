@@ -12,6 +12,7 @@ import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import com.tom_roush.pdfbox.android.PDFBoxResourceLoader
 import com.tom_roush.pdfbox.pdmodel.PDDocument
 import com.tom_roush.pdfbox.text.PDFTextStripper
+import java.io.ByteArrayInputStream
 import java.io.File
 import java.io.IOException
 import kotlin.math.max

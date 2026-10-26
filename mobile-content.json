@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-26T01:46:39.446Z",
+  "generatedAt": "2026-10-26T06:20:13.378Z",
   "resources": [
     {
       "kind": "resource",
@@ -6024,23 +6024,6 @@
       "categories": [
         "windows",
         "nvda"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "conticgo-1060fe9b11944837:es",
-      "sourceId": "conticgo-1060fe9b11944837",
-      "lang": "es",
-      "title": "Un nuevo prototipo busca llevar el Braille electrónico a restaurantes museos y puntos de información",
-      "summary": "Un equipo de estudiantes de Shawnee State University ha desarrollado una línea Braille electrónica actualizable para facilitar el acceso a la información en espacios públicos. El proyecto continúa en desarrollo y sus creadores trabajan para mejorar el dispositivo y reducir sus costes de fabricación. Una línea Braille para consultar información en espacios públicos Dos estudiantes […] La entrada Un nuevo prototipo busca llevar el Braille electrónico a restaurantes museos y puntos de información se publicó primero en Conticgo .",
-      "body": "Un equipo de estudiantes de Shawnee State University ha desarrollado una línea Braille electrónica actualizable para facilitar el acceso a la información en espacios públicos. El proyecto continúa en desarrollo y sus creadores trabajan para mejorar el dispositivo y reducir sus costes de fabricación.\n\nDos estudiantes de Ingeniería Informática y Tecnologías de Computación de Shawnee State University, en Estados Unidos, han creado un prototipo de línea Braille electrónica que podría facilitar el acceso a información en lugares como restaurantes, museos y puntos de información.\n\nLos estudiantes Parker Lauders y Kade Dancy desarrollaron el dispositivo como proyecto final de sus estudios universitarios. Su objetivo es ofrecer una alternativa a los materiales en Braille impresos, especialmente en espacios donde la información cambia con frecuencia.\n\nLa propuesta utiliza tecnología Braille actualizable. En lugar de recurrir a textos impresos de forma permanente, el dispositivo emplea puntos mecánicos que suben y bajan para representar diferentes caracteres. Así, el contenido puede modificarse electrónicamente sin tener que producir un nuevo material en relieve cada vez que cambia la información.\n\nUno de los ejemplos que plantean sus creadores es el de los restaurantes. Los menús pueden cambiar varias veces al año, por lo que mantenerlos disponibles en Braille requiere actualizar e imprimir nuevos materiales.\n\nCon una pantalla electrónica como esta, el establecimiento podría cargar el contenido actualizado en el dispositivo. De este modo, las personas ciegas podrían consultar la información en Braille sin depender exclusivamente de cartas impresas que pueden quedarse desactualizadas.\n\nLa misma idea podría aplicarse a museos, quioscos informativos y otros espacios públicos en los que se ofrecen datos sobre servicios, exposiciones o indicaciones.\n\nEl planteamiento busca que la información accesible sea más fácil de mantener y actualizar. No obstante, su utilidad real dependerá de cómo se implemente el sistema en cada entorno y de que el contenido esté disponible en un formato adecuado para las personas usuarias.\n\nLa idea surgió cuando Parker Lauders era estudiante de primer año. Tras varios años de formación práctica, él y Kade Dancy consiguieron diseñar, construir y programar un prototipo funcional como parte de su proyecto final.\n\nEl trabajo combina componentes electrónicos, programación y piezas mecánicas fabricadas específicamente para el dispositivo. Según la documentación académica del proyecto, el sistema incorpora 20 celdas Braille personalizadas y un microcontrolador STM32.\n\nAunque el proyecto ha permitido desarrollar y probar distintos componentes del sistema, todavía existen aspectos técnicos que deben mejorarse, especialmente en el mecanismo encargado de accionar los puntos Braille.\n\nPor ello, sus creadores continúan trabajando en el hardware, la funcionalidad y la reducción de los costes de fabricación. También prevén explorar la protección mediante patente y las posibilidades de llevar la tecnología al mercado.\n\nEl proyecto se ha presentado en el Capitolio del Estado de Ohio, una oportunidad para mostrar su potencial más allá del entorno universitario.\n\nPor el momento, no se ha anunciado que el dispositivo esté disponible comercialmente . Se trata de un prototipo universitario en fase de desarrollo, no de un producto que pueda comprarse e instalarse actualmente en restaurantes o museos.\n\nSu evolución será interesante para el ámbito de la accesibilidad, ya que plantea una posible forma de facilitar la actualización de información en Braille en espacios públicos.\n\nSi consigue resolver los retos técnicos pendientes y alcanzar un coste de fabricación asumible, podría abrir nuevas posibilidades para que establecimientos y entidades ofrezcan información accesible de manera más flexible.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuentes: Noticia original , descripción del proyecto ,",
-      "sourceName": "Conticgo",
-      "originalUrl": "https://conticgo.net/un-nuevo-prototipo-busca-llevar-el-braille-electronico-a-restaurantes-museos-y-puntos-de-informacion/",
-      "publishedAt": "2026-10-16T06:00:25.000Z",
-      "categories": [
-        "tecnologia-accesibilidad",
-        "proyectos-prototipos",
-        "braille"
       ]
     }
   ]

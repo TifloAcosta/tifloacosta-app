@@ -40,7 +40,13 @@ test('initialVideoId prepares the exact selected video without an autoplay call'
 });
 
 test('external YouTube remains an explicit fallback rather than the primary player', async () => {
-  const screen = await read('src/screens/videos.mjs');
-  assert.match(screen, /addExternalLink\(/);
-  assert.match(screen, /videos\.openYouTube/);
+  const [screen, player] = await Promise.all([
+    read('src/screens/videos.mjs'),
+    read('src/screens/video-player.mjs')
+  ]);
+  // External YouTube is no longer a button in every result; it is reachable
+  // from the selected video's optional actions or the player fallback.
+  assert.match(screen, /addExternalLink\(panel/);
+  assert.match(screen, /copy\.open/);
+  assert.match(player, /videos\.openYouTube/);
 });

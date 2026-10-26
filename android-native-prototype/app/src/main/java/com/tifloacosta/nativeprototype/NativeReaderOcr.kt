@@ -79,7 +79,8 @@ object NativeReaderOcr {
      * Preserve readable PDF text, and OCR pages without a selectable text layer.
      * Render only one page at a time; close bitmap/page before proceeding.
      */
-    fun recognizePdf(context: Context, bytes: ByteArray): String {
+    fun recognizePdf(context: Context, bytes: ByteArray,
+                     progress: ((Int, Int) -> Unit)? = null): String {
         if (bytes.size > 40 * 1024 * 1024) {
             throw IOException("El PDF supera los 40 MB admitidos en esta prueba.")
         }
@@ -128,6 +129,7 @@ object NativeReaderOcr {
                                 printable.append("Página ").append(pageNumber).append('\n')
                                     .append(text).append("\n\n")
                             }
+                            progress?.invoke(pageNumber, document.numberOfPages)
                             if (printable.length > MAX_OUTPUT_CHARS) {
                                 throw IOException("El texto reconocido supera el tamaño permitido.")
                             }

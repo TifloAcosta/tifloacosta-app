@@ -11,6 +11,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.clickable
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import androidx.compose.material3.AlertDialog
 import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.customActions
@@ -337,6 +340,9 @@ private fun NativeReadingScreen(
     var offset by remember(book.id) { mutableIntStateOf(book.offset) }
     var unitType by rememberSaveable(book.id) { mutableIntStateOf(1) }
     var showAudio by rememberSaveable(book.id) { mutableStateOf(false) }
+    var showVisual by rememberSaveable(book.id) { mutableStateOf(false) }
+    var showNavigation by rememberSaveable(book.id) { mutableStateOf(false) }
+    var selectedAction by rememberSaveable(book.id) { mutableIntStateOf(0) }
     var showMarks by rememberSaveable(book.id) { mutableStateOf(false) }
     var jumping by rememberSaveable(book.id) { mutableStateOf(false) }
     var jumpTo by rememberSaveable(book.id) { mutableFloatStateOf(0f) }
@@ -351,6 +357,26 @@ private fun NativeReadingScreen(
         val next = value.coerceIn(0, fullText.length)
         offset = next
         onUpdate(book.copy(offset = next))
+    }
+
+    val actions = if (english)
+        listOf("Play or pause", "Stop", "Previous", "Next", "Bookmark", "More actions")
+    else listOf("Reproducir o pausar", "Detener", "Anterior", "Siguiente",
+        "Añadir marca", "Más acciones")
+    fun execute(which: Int) {
+        when (which) {
+            0 -> playing = !playing
+            1 -> { playing = false; speaker.stop() }
+            2, 3 -> if (units.isNotEmpty()) {
+                val index = (currentIndex + if (which == 2) -1 else 1).coerceIn(0, units.lastIndex)
+                setOffset(units[index].start)
+            }
+            4 -> {
+                val mark = offset.coerceIn(0, fullText.length)
+                if (mark !in book.marks) onUpdate(book.copy(marks = book.marks + mark, offset = offset))
+            }
+            5 -> jumping = true
+        }
     }
 
     LaunchedEffect(playing, offset, unitType, rate, speaker.ready.value, fullText) {
@@ -373,7 +399,21 @@ private fun NativeReadingScreen(
         Text(
             book.title,
             style = MaterialTheme.typography.headlineSmall,
-            modifier = Modifier.semantics { heading() }
+            modifier = Modifier.fillMaxWidth().clickable { execute(selectedAction) }.semantics {
+                heading()
+                contentDescription = book.title
+                stateDescription = actions[selectedAction]
+                progressBarRangeInfo = ProgressBarRangeInfo(
+                    selectedAction.toFloat(), 0f..actions.lastIndex.toFloat(), actions.size - 2
+                )
+                setProgress { value ->
+                    selectedAction = value.roundToInt().coerceIn(0, actions.lastIndex)
+                    true
+                }
+                customActions = actions.mapIndexed { i, label ->
+                    CustomAccessibilityAction(label) { execute(i); true }
+                }
+            }
         )
         Button(
             onClick = { playing = !playing },
@@ -388,6 +428,13 @@ private fun NativeReadingScreen(
         if (!speaker.ready.value) {
             Text(if (english) "Initializing Android speech…" else "Preparando la voz de Android…")
         }
+        TextButton(
+            onClick = { showNavigation = !showNavigation },
+            modifier = Modifier.semantics {
+                stateDescription = if (showNavigation) "Abierto" else "Cerrado"
+            }
+        ) { Text(if (english) "Navigation" else "Navegación") }
+        if (showNavigation) {
         Text(
             (if (english) "Move by: " else "Avanzar y retroceder por: ") + steps[unitType],
             modifier = Modifier.clearAndSetSemantics { }
@@ -411,6 +458,7 @@ private fun NativeReadingScreen(
                 enabled = units.isNotEmpty(),
                 onClick = { setOffset(units[(currentIndex + 1).coerceAtMost(units.lastIndex)].start) }
             ) { Text(if (english) "Next" else "Siguiente") }
+        }
         }
         Text(
             (if (english) "Read: " else "Leído: ") + ReaderUnits.percent(offset, fullText.length) + "%",

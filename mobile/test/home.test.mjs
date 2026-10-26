@@ -14,6 +14,7 @@ test('home uses the approved compact order', () => {
   assert.deepEqual(HOME_ITEMS, [
     'search',
     'new-content',
+    'usage-guide',
     'actualidad',
     'library',
     'reading-library',
@@ -73,7 +74,7 @@ test('home module does not leak podcast platforms, social URLs or setting contro
 });
 
 test('secondary mobile screens use a back control and accessible screen heading without autofocus', async () => {
-  const files = ['new-content.mjs', 'actualidad.mjs', 'library.mjs', 'reading-library.mjs', 'videos.mjs', 'book.mjs', 'podcast.mjs', 'contact.mjs', 'settings.mjs'];
+  const files = ['new-content.mjs', 'usage-guide.mjs', 'actualidad.mjs', 'library.mjs', 'reading-library.mjs', 'videos.mjs', 'book.mjs', 'podcast.mjs', 'contact.mjs', 'settings.mjs'];
   for (const file of files) {
     const source = await read(`src/screens/${file}`);
     assert.match(source, /addScreenHeader\(/, `${file} must use the shared back + heading header`);

@@ -49,7 +49,8 @@ object MediaLogic {
      * Accept only actual YouTube video links. Never pass untrusted URLs/ids
      * through to HTML/JavaScript or try to turn channel URLs into video links.
      */
-    fun youTubeVideoId(raw: String): String? = try {
+    fun youTubeVideoId(raw: String): String? {
+        return try {
         val url = URI(raw.trim())
         if (url.scheme?.lowercase(Locale.ROOT) != "https") return null
         val host = url.host?.lowercase(Locale.ROOT) ?: return null
@@ -66,7 +67,8 @@ object MediaLogic {
             else -> null
         }
         id?.takeIf { videoIdPattern.matches(it) }
-    } catch (_: Exception) { null }
+        } catch (_: Exception) { null }
+    }
 
     fun validWebUrl(value: String): Boolean = try {
         val url = URL(value)

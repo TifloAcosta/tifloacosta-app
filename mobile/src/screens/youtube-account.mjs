@@ -102,7 +102,7 @@ function validVideoId(value) {
 
 /** Screen-scoped account panel; never changes the YouTube IFrame player. */
 export function createYoutubeAccountControls({
-  root, nativeActions, accountPlugin, lang = 'es', appPlugin = App
+  root, videoRoot = null, nativeActions, accountPlugin, lang = 'es', appPlugin = App
 }) {
   const copy = COPY[lang === 'en' ? 'en' : 'es'];
   const section = document.createElement('section');
@@ -117,10 +117,57 @@ export function createYoutubeAccountControls({
   status.setAttribute('aria-live', 'polite');
   status.setAttribute('aria-atomic', 'true');
   status.className = 'muted';
+  const sessionButton = document.createElement('button');
+  sessionButton.id = 'youtube-account-session';
+  sessionButton.type = 'button';
+  const noVideo = document.createElement('p');
+  noVideo.textContent = copy.noVideo;
+  section.append(heading, introduction, status, sessionButton, noVideo);
+  root.append(section);
+
+  // The session is managed once, but contextual actions live with the player.
+  // Keeping all buttons mounted prevents TalkBack from losing focused controls.
+  const videoSection = document.createElement('section');
+  videoSection.className = 'youtube-video-actions';
+  videoSection.setAttribute('aria-label', lang === 'en' ? 'Video actions' : 'Acciones de este vídeo');
+  const videoHeading = document.createElement('h3');
+  videoHeading.textContent = lang === 'en' ? 'Video actions' : 'Acciones de este vídeo';
+  const videoName = document.createElement('p');
+  const videoStatus = document.createElement('p');
+  videoStatus.className = 'muted';
   const actions = document.createElement('div');
   actions.className = 'action-group';
-  section.append(heading, introduction, status, actions);
-  root.append(section);
+  const subscribeButton = document.createElement('button');
+  subscribeButton.id = 'youtube-account-subscribe-action';
+  subscribeButton.type = 'button';
+  const likeButton = document.createElement('button');
+  likeButton.id = 'youtube-account-like-action';
+  likeButton.type = 'button';
+  const commentButton = document.createElement('button');
+  commentButton.id = 'youtube-account-comment';
+  commentButton.type = 'button';
+  commentButton.textContent = copy.comment;
+
+  const editor = document.createElement('div');
+  const commentLabel = document.createElement('label');
+  commentLabel.htmlFor = 'youtube-account-comment-text';
+  commentLabel.textContent = copy.commentLabel;
+  const commentText = document.createElement('textarea');
+  commentText.id = commentLabel.htmlFor;
+  commentText.rows = 4;
+  commentText.maxLength = 10000;
+  const publishButton = document.createElement('button');
+  publishButton.id = 'youtube-account-publish';
+  publishButton.type = 'button';
+  publishButton.textContent = copy.publish;
+  const cancelButton = document.createElement('button');
+  cancelButton.id = 'youtube-account-cancel';
+  cancelButton.type = 'button';
+  cancelButton.textContent = copy.cancel;
+  editor.append(commentLabel, commentText, publishButton, cancelButton);
+  actions.append(subscribeButton, likeButton, commentButton, editor);
+  videoSection.append(videoHeading, videoName, videoStatus, actions);
+  (videoRoot || root).append(videoSection);
 
   let signedIn = false;
   let busy = false;
@@ -136,91 +183,72 @@ export function createYoutubeAccountControls({
       'performAction', 'signOut'].every(key => typeof accountPlugin[key] === 'function');
 
   function message(text) {
-    if (!disposed) status.textContent = text;
+    if (disposed) return;
+    status.textContent = text;
+    // This readable status is next to the actions; only the first is live.
+    videoStatus.textContent = text;
   }
 
-  function button(id, text, action) {
-    const control = document.createElement('button');
-    control.type = 'button';
-    control.id = id;
-    control.textContent = text;
-    control.disabled = busy;
-    control.addEventListener('click', action);
-    actions.append(control);
-    return control;
-  }
+  sessionButton.addEventListener('click', () => {
+    if (busy) return;
+    if (signedIn) void signOut();
+    else void beginSignIn();
+  });
+  subscribeButton.addEventListener('click', () => {
+    if (busy || !state) return;
+    void execute(state.subscribed === true ? 'unsubscribe' : 'subscribe');
+  });
+  likeButton.addEventListener('click', () => {
+    if (busy || !state) return;
+    void execute(state.rating === 'like' ? 'unlike' : 'like');
+  });
+  commentButton.addEventListener('click', () => {
+    if (busy) return;
+    editing = true;
+    render();
+    commentText.focus();
+  });
+  publishButton.addEventListener('click', () => {
+    if (busy) return;
+    const text = commentText.value.trim();
+    if (!text) {
+      message(copy.invalidComment);
+      commentText.focus();
+      return;
+    }
+    void execute('comment', text);
+  });
+  cancelButton.addEventListener('click', () => {
+    editing = false;
+    render();
+    commentButton.focus();
+  });
 
   function render() {
     if (disposed) return;
-    actions.replaceChildren();
+    introduction.hidden = signedIn;
+    sessionButton.hidden = !available;
+    sessionButton.textContent = signedIn ? copy.signOut : copy.signIn;
+    sessionButton.setAttribute('aria-disabled', String(busy));
+    noVideo.hidden = !signedIn || Boolean(selected);
+    videoSection.hidden = !available || !signedIn || !selected;
 
     if (!available) {
       message(copy.notAvailable);
       return;
     }
+    if (!selected || !signedIn) return;
 
-    if (!signedIn) {
-      button('youtube-account-signin', copy.signIn, () => { void beginSignIn(); });
-      return;
-    }
-
-    button('youtube-account-signout', copy.signOut, () => { void signOut(); });
-
-    if (!selected) {
-      const note = document.createElement('p');
-      note.textContent = copy.noVideo;
-      actions.append(note);
-      return;
-    }
-
-    const video = document.createElement('p');
-    video.textContent = copy.activeVideo(selected.title);
-    actions.append(video);
-    if (!state) return;
-
-    if (state.subscribed === true) {
-      button('youtube-account-unsubscribe', copy.unsubscribe, () => { void execute('unsubscribe'); });
-    } else if (state.subscribed === false) {
-      button('youtube-account-subscribe', copy.subscribe, () => { void execute('subscribe'); });
-    }
-    if (state.rating === 'like') {
-      button('youtube-account-unlike', copy.unlike, () => { void execute('unlike'); });
-    } else {
-      button('youtube-account-like', copy.like, () => { void execute('like'); });
-    }
-
-    button('youtube-account-comment', copy.comment, () => {
-      editing = true;
-      render();
-      actions.querySelector('#youtube-account-comment-text')?.focus();
-    });
-
-    if (editing) {
-      const label = document.createElement('label');
-      label.htmlFor = 'youtube-account-comment-text';
-      label.textContent = copy.commentLabel;
-      const textarea = document.createElement('textarea');
-      textarea.id = label.htmlFor;
-      textarea.rows = 4;
-      textarea.maxLength = 10000;
-      const publish = button('youtube-account-publish', copy.publish, () => {
-        const text = textarea.value.trim();
-        if (!text) {
-          message(copy.invalidComment);
-          textarea.focus();
-          return;
-        }
-        void execute('comment', text);
-      });
-      const cancel = button('youtube-account-cancel', copy.cancel, () => {
-        editing = false;
-        render();
-        actions.querySelector('#youtube-account-comment')?.focus();
-      });
-      // The label precedes the editable field; action buttons follow it.
-      actions.insertBefore(label, publish);
-      actions.insertBefore(textarea, publish);
-      void cancel;
+    videoName.textContent = copy.activeVideo(selected.title);
+    const hasState = state !== null;
+    subscribeButton.hidden = !hasState || typeof state?.subscribed !== 'boolean';
+    subscribeButton.textContent = state?.subscribed === true ? copy.unsubscribe : copy.subscribe;
+    likeButton.hidden = !hasState;
+    likeButton.textContent = state?.rating === 'like' ? copy.unlike : copy.like;
+    commentButton.hidden = !hasState;
+    editor.hidden = !hasState || !editing;
+    for (const control of [subscribeButton, likeButton, commentButton, publishButton, cancelButton]) {
+      control.setAttribute('aria-disabled', String(busy));
     }
   }
 
@@ -329,6 +357,7 @@ export function createYoutubeAccountControls({
       await accountPlugin.performAction({ action, videoId: id, ...(action === 'comment' ? { text } : {}) });
       if (disposed || selected?.id !== id) return;
       editing = false;
+      if (action === 'comment') commentText.value = '';
       const confirmation = action === 'comment' ? copy.commentSent
         : action.includes('subscribe') ? copy.subscribedDone : copy.likedDone;
       await loadVideoState();
@@ -342,6 +371,7 @@ export function createYoutubeAccountControls({
     } finally {
       busy = false;
       render();
+      if (action === 'comment' && !editing && !disposed) commentButton.focus();
     }
   }
 
@@ -351,6 +381,7 @@ export function createYoutubeAccountControls({
     selected = { id, title: String(item?.title || '') };
     state = null;
     editing = false;
+    commentText.value = '';
     render();
     if (signedIn) void loadVideoState();
   }

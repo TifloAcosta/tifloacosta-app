@@ -36,12 +36,28 @@ con paquete `com.tifloacosta.nativeprototype`; **no** reemplaza TifloAcosta de G
 - La firma efímera del APK debug puede exigir desinstalar **solo** «TifloAcosta
   Nativa Pruebas» antes de instalar un nuevo APK; nunca la app de Google Play.
 
+## Tercera revisión — multimedia editorial en Actualidad
+
+- Contenidos «Podcasts», «Canales de YouTube» y «Todos los formatos»,
+  integrados en el selector nativo de Actualidad y cargados desde el mismo
+  catálogo `https://tifloacosta.com/actualidad-media.json` usado por iOS.
+- Al elegir el formato, se filtran los episodios/vídeos debajo, sin presentar
+  noticias de otra categoría. Se puede ajustar «Fuente o canal» e «Idioma»
+  deslizando arriba/abajo con TalkBack.
+- Un único botón por título; detalle con fuente, descripción y enlace.
+  El audio y los vídeos se abren en su fuente externa: **todavía no existe
+  reproductor multimedia nativo ni autenticación YouTube**.
+- Mantiene copia del catálogo válido para la consulta sin conexión.
+- Pruebas unitarias de filtros, idioma, canales y enlaces HTTPS seguros.
+- Se mantiene el botón Volver de 0.2 y el regreso desde el diálogo.
+- Versión interna `0.3-prototipo`. No modifica TifloAcosta de Google Play.
+
 ## Fuera de alcance de la fase 1
 Autenticación de Google, comentarios y acciones de YouTube, reproductores,
-podcasts y contenido multimedia, biblioteca personal, TifloLector, importación,
+reproductores y reproducción integrada, biblioteca personal, TifloLector, importación,
 archivos, OCR, Media3, notificaciones y migración de datos. Esas funciones
 **siguen en las aplicaciones existentes**. Las opciones de multimedia de esta
-prueba indican claramente que todavía no están integradas.
+prueba muestran el catálogo editorial por enlace externo; no hay reproductor integrado.
 
 ## Compilación
 Con JDK 17, Android SDK API 36 y Gradle 8.14.3:

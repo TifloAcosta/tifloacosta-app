@@ -17,6 +17,25 @@ con paquete `com.tifloacosta.nativeprototype`; **no** reemplaza TifloAcosta de G
   botón para mostrar otras diez; cache local del último catálogo válido.
 - Español e inglés según idioma del dispositivo, texto grande y tema oscuro.
 
+## Segunda revisión — tras prueba en Pixel
+- El selector ajustable **ya fue probado en Pixel con TalkBack**: funcionan
+  los gestos arriba y abajo, y actualiza los resultados.
+- Portada auténtica con entradas a Actualidad y Recursos; botón «Volver» en
+  ambas pantallas, junto con el gesto o botón Atrás del sistema.
+- Al regresar se conserva la opción elegida; los resultados permanecen filtrados.
+- Menos indicaciones repetidas: se elimina la acción accesible «Abrir detalles»
+  que duplicaba la activación normal del título, y el mensaje de instrucción
+  innecesario que aparecía antes de seleccionar una categoría.
+- Mantener las indicaciones nativas útiles del control ajustable. Para
+  identificar cualquier repetición que persista, registrar la frase exacta
+  que TalkBack anuncia en la prueba física antes de suprimir semántica que
+  sostiene los gestos ya confirmados.
+- En TalkBack existe «Activación con un toque» en Configuración avanzada:
+  ajuste **del sistema**, opcional, a decisión del usuario. También admite
+  el gesto «toque dividido» con dos dedos, uno manteniendo contacto.
+- La firma efímera del APK debug puede exigir desinstalar **solo** «TifloAcosta
+  Nativa Pruebas» antes de instalar un nuevo APK; nunca la app de Google Play.
+
 ## Fuera de alcance de la fase 1
 Autenticación de Google, comentarios y acciones de YouTube, reproductores,
 podcasts y contenido multimedia, biblioteca personal, TifloLector, importación,

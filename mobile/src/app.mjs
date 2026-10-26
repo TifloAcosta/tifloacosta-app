@@ -28,6 +28,7 @@ import { TifloShare } from './native/share-plugin.mjs';
 import { TifloWebFetch, fetchSharedPage } from './native/web-fetch-plugin.mjs';
 import { renderHome } from './screens/home.mjs';
 import { renderNewContent } from './screens/new-content.mjs';
+import { renderUsageGuide } from './screens/usage-guide.mjs';
 import { renderActualidad } from './screens/actualidad.mjs';
 import { renderSearch } from './screens/search.mjs';
 import { renderLibrary } from './screens/library.mjs';
@@ -493,6 +494,7 @@ function render(route) {
   switch (route.name) {
     case 'home': renderHome(context); break;
     case 'new-content': renderNewContent(context); break;
+    case 'usage-guide': renderUsageGuide(context); break;
     case 'actualidad': {
       renderActualidad({
         ...context,
@@ -604,7 +606,12 @@ function render(route) {
     case 'contact': renderContact(context); break;
     case 'privacy': renderPrivacy(context); break;
     case 'settings': renderSettings(context); break;
-    default: renderHome(context);
+    default:
+      if (route.name.startsWith('usage-guide/')) {
+        renderUsageGuide({ ...context, sectionId: route.name.slice('usage-guide/'.length) });
+      } else {
+        renderHome(context);
+      }
   }
 }
 

@@ -8,6 +8,7 @@ const HOME_INTRO = Object.freeze({
 export const HOME_ITEMS = [
   'search',
   'new-content',
+  'usage-guide',
   'actualidad',
   'library',
   'reading-library',

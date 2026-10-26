@@ -1,5 +1,7 @@
 import { addExternalLink, addParagraph, addScreenHeader, addShareButton, clearScreen } from './shared.mjs';
 import { createAccessibleVideoPlayer, videoId, youtubeUrl } from './video-player.mjs';
+import { createYoutubeAccountControls } from './youtube-account.mjs';
+import { TifloYouTubeAccount } from '../native/youtube-account-plugin.mjs';
 
 const YOUTUBE_ENDPOINT = 'https://youtube-auth.tifloacosta.com';
 
@@ -128,8 +130,15 @@ export function renderVideos({
     onClose: () => onBackStateChange?.(null)
   });
 
+  // A sibling panel leaves the existing accessible IFrame/player untouched.
+  const youtubeAccount = createYoutubeAccountControls({
+    root, nativeActions, accountPlugin: TifloYouTubeAccount, lang
+  });
+
   async function openVideo(item, button) {
     setPlayerBackHandler();
+    const id = videoId(item);
+    if (id) youtubeAccount.selectVideo({ id, title: item?.title || '' });
     await player.open(item, button);
   }
 
@@ -335,6 +344,7 @@ export function renderVideos({
 
   setScreenCleanup?.(() => {
     onBackStateChange?.(null);
+    youtubeAccount.dispose();
     player.destroy();
   });
 }

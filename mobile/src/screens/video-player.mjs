@@ -192,6 +192,10 @@ export function createAccessibleVideoPlayer({
   status.setAttribute('aria-live', 'polite');
   status.setAttribute('aria-atomic', 'true');
 
+  // Reserved space for optional signed-in video actions, adjacent to playback.
+  const accountActionsHost = document.createElement('div');
+  accountActionsHost.className = 'video-player-account-actions';
+
   const detailsButton = document.createElement('button');
   detailsButton.type = 'button';
   detailsButton.textContent = t('videos.details');
@@ -210,7 +214,7 @@ export function createAccessibleVideoPlayer({
   const closeButton = document.createElement('button');
   closeButton.type = 'button';
   closeButton.textContent = String(closeLabel || '').trim() || t('videos.closePlayer');
-  section.append(heading, title, frameWrap, controls, positionWrap, status, detailsButton, detailsPanel, fallback, closeButton);
+  section.append(heading, title, frameWrap, controls, positionWrap, status, accountActionsHost, detailsButton, detailsPanel, fallback, closeButton);
   parent.append(section);
 
   // Only the visible, actively playing embedded player holds the display on.
@@ -429,5 +433,5 @@ export function createAccessibleVideoPlayer({
   fallback.addEventListener('click', () => { void openExternal(youtubeUrl(activeItem), nativeActions); });
   setControlsEnabled(false);
 
-  return { open, close, isOpen, destroy };
+  return { open, close, isOpen, destroy, getAccountActionsHost: () => accountActionsHost };
 }

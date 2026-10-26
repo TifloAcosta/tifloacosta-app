@@ -47,6 +47,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.math.roundToInt
@@ -345,6 +346,15 @@ private fun NativeReadingScreen(
     var offset by remember(book.id) { mutableIntStateOf(book.offset) }
     var unitType by rememberSaveable(book.id) { mutableIntStateOf(1) }
     var showAudio by rememberSaveable(book.id) { mutableStateOf(false) }
+    var showPronunciation by rememberSaveable(book.id) { mutableStateOf(false) }
+    val dictionary = remember { NativePronunciationStore(context.applicationContext) }
+    var sleepIndex by remember(book.id) { mutableIntStateOf(0) }
+    val sleepMinutes = listOf(0, 5, 10, 15, 30, 45, 60)
+    val sleepChoices = if (english)
+        listOf("Off", "5 minutes", "10 minutes", "15 minutes",
+            "30 minutes", "45 minutes", "60 minutes")
+    else listOf("Desactivado", "5 minutos", "10 minutos", "15 minutos",
+        "30 minutos", "45 minutos", "60 minutos")
     var showVisual by rememberSaveable(book.id) { mutableStateOf(false) }
     var showNavigation by rememberSaveable(book.id) { mutableStateOf(false) }
     var selectedAction by rememberSaveable(book.id) { mutableIntStateOf(0) }
@@ -405,14 +415,31 @@ private fun NativeReadingScreen(
             playing = true
         }
     }
+    LaunchedEffect(playing, sleepIndex) {
+        if (playing && sleepIndex > 0) {
+            delay(sleepMinutes[sleepIndex] * 60_000L)
+            if (playing) {
+                playing = false
+                speaker.stop()
+            }
+        }
+    }
     LaunchedEffect(playing, offset, unitType, perBookRate, voiceName, speaker.ready.value, fullText) {
         if (playing && speaker.ready.value && current != null) {
             val nextOffset = units.getOrNull(currentIndex + 1)?.start ?: fullText.length
-            speaker.speak(current.text, perBookRate, voiceName) {
+            speaker.speak(
+                NativePronunciation.apply(current.text, dictionary.read()),
+                perBookRate, voiceName
+            ) {
                 if (nextOffset >= fullText.length) playing = false
                 setOffset(nextOffset)
             }
         } else if (!playing) speaker.stop()
+    }
+
+    if (showPronunciation) {
+        NativePronunciationSettings(english, onBack = { showPronunciation = false })
+        return
     }
 
     Column(
@@ -523,6 +550,15 @@ private fun NativeReadingScreen(
                 voiceName = voices.getOrNull(index - 1)?.name.orEmpty()
                 prefs.edit().putString("voice." + book.id, voiceName).apply()
             }
+            ReaderAdjustableChoice(
+                if (english) "Sleep timer" else "Apagado automático",
+                sleepChoices, sleepIndex
+            ) { sleepIndex = it }
+            TextButton(onClick = {
+                playing = false
+                speaker.stop()
+                showPronunciation = true
+            }) { Text(if (english) "Pronunciation dictionary" else "Diccionario de pronunciación") }
         }
         TextButton(
             onClick = { showVisual = !showVisual },

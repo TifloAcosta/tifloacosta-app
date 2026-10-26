@@ -9,7 +9,7 @@ class ReaderExpandedFormatsTest {
     @Test fun ocrImagesAndOpenDocumentFormatsAreSelectable() {
         val formats = setOf(
             "jpg", "jpeg", "png", "webp", "bmp", "heic", "heif",
-            "odt", "ods", "odp", "ppsx", "flac", "opus", "rtf"
+            "odt", "ods", "odp", "ppsx", "flac", "opus", "rtf", "fb2"
         )
         assertTrue(NativeReaderFormats.supported.containsAll(formats))
         assertFalse(NativeReaderFormats.supported.contains("rar"))
@@ -76,4 +76,17 @@ class ReaderExpandedFormatsTest {
             throw AssertionError("External entities unexpectedly permitted")
         } catch (_: java.io.IOException) { }
     }
+    @Test fun fictionBookPreservesParagraphs() {
+        val content = """
+            <FictionBook xmlns="http://www.gribuser.ru/xml/fictionbook/2.0">
+              <body><section><title><p>Capítulo primero</p></title>
+                <p>La primera frase.</p><p>La segunda frase.</p>
+              </section></body>
+            </FictionBook>
+        """.trimIndent().toByteArray()
+        val text = NativeReaderFictionBook.extract(content)
+        assertTrue(text.indexOf("Capítulo primero") < text.indexOf("La primera"))
+        assertTrue(text.indexOf("La primera") < text.indexOf("La segunda"))
+    }
+
 }

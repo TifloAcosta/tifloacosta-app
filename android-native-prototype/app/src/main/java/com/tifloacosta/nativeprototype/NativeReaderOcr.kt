@@ -110,20 +110,28 @@ object NativeReaderOcr {
                             stripper.startPage = pageNumber
                             stripper.endPage = pageNumber
                             var text = stripper.getText(document).trim()
-                            if (text.isBlank()) {
-                                renderer.openPage(pageNumber - 1).use { page ->
-                                    val (w, h) = scaledDimensions(page.width * 2, page.height * 2)
-                                    val bitmap = try {
-                                        Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
-                                    } catch (_: OutOfMemoryError) {
-                                        throw IOException("No hay memoria suficiente para leer la página $pageNumber.")
+                            // Also recognize hybrid PDFs where the scanned body
+                            // is an image but a short selectable footer/header exists.
+                            if (text.count { it.isLetterOrDigit() } < 40) {
+                                val recognized = try {
+                                    renderer.openPage(pageNumber - 1).use { page ->
+                                        val (w, h) = scaledDimensions(page.width * 2, page.height * 2)
+                                        val bitmap = try {
+                                            Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
+                                        } catch (_: OutOfMemoryError) {
+                                            throw IOException("No hay memoria suficiente para leer la página $pageNumber.")
+                                        }
+                                        try {
+                                            bitmap.eraseColor(android.graphics.Color.WHITE)
+                                            page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
+                                            ocrBitmap(bitmap)
+                                        } finally { bitmap.recycle() }
                                     }
-                                    try {
-                                        bitmap.eraseColor(android.graphics.Color.WHITE)
-                                        page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
-                                        text = ocrBitmap(bitmap)
-                                    } finally { bitmap.recycle() }
+                                } catch (e: Exception) {
+                                    if (text.isBlank()) throw e
+                                    "" // Preserve selectable text if optional OCR fails.
                                 }
+                                if (recognized.length > text.length) text = recognized
                             }
                             if (text.isNotBlank()) {
                                 printable.append("Página ").append(pageNumber).append('\n')

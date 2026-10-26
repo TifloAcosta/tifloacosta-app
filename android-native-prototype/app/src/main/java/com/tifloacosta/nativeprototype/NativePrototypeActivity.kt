@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -48,6 +49,13 @@ import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import java.util.Locale
 import kotlin.math.roundToInt
+
+object PrototypeNavigation {
+    const val HOME = -1
+    const val NEWS = 0
+    const val RESOURCES = 1
+    fun parentOf(destination: Int): Int = HOME
+}
 
 class NativePrototypeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -115,7 +123,7 @@ private fun PrototypeHome() {
     val english = language == "en"
     var loaded by remember { mutableStateOf(CatalogLoad(Catalog())) }
     var loading by remember { mutableStateOf(true) }
-    var section by rememberSaveable { mutableIntStateOf(0) }
+    var section by rememberSaveable { mutableIntStateOf(PrototypeNavigation.HOME) }
     var mediaIndex by rememberSaveable { mutableIntStateOf(0) }
     var newsCategory by rememberSaveable { mutableIntStateOf(0) }
     var resourceCategory by rememberSaveable { mutableIntStateOf(0) }
@@ -145,29 +153,54 @@ private fun PrototypeHome() {
         listOf("News categories", "Podcasts", "YouTube channels", "All media")
     else listOf("Categorías de noticias", "Podcasts", "Canales de YouTube", "Todos los formatos")
 
-    val filtered = if (section == 0) {
+    val filtered = if (section == PrototypeNavigation.NEWS) {
         if (mediaIndex == 0) CatalogLogic.newsForCategory(news, newsCategories, newsCategory)
         else emptyList()
-    } else CatalogLogic.resourcesForCategory(resources, resourceCategories, resourceCategory)
+    } else if (section == PrototypeNavigation.RESOURCES) {
+        CatalogLogic.resourcesForCategory(resources, resourceCategories, resourceCategory)
+    } else emptyList()
 
     val title = if (english) "TifloAcosta Native Trial" else "TifloAcosta Nativa Pruebas"
     val first = if (english) "News" else "Actualidad"
     val second = if (english) "Resources" else "Recursos"
 
+    BackHandler(enabled = section != PrototypeNavigation.HOME && selectedItem == null) {
+        section = PrototypeNavigation.parentOf(section)
+    }
+
     Scaffold(modifier = Modifier.fillMaxSize()) { inner ->
         Column(modifier = Modifier.fillMaxSize().padding(inner).padding(horizontal = 16.dp)) {
-            Text(
-                title,
-                style = MaterialTheme.typography.headlineSmall,
-                modifier = Modifier.padding(vertical = 14.dp).semantics { heading() }
-            )
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Button(onClick = { section = 0; visibleCount = 10 }) { Text(first) }
-                Button(onClick = { section = 1; visibleCount = 10 }) { Text(second) }
+            if (section == PrototypeNavigation.HOME) {
+                Text(
+                    title,
+                    style = MaterialTheme.typography.headlineSmall,
+                    modifier = Modifier.padding(vertical = 14.dp).semantics { heading() }
+                )
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Button(
+                        onClick = { section = PrototypeNavigation.NEWS; visibleCount = 10 },
+                        modifier = Modifier.fillMaxWidth()
+                    ) { Text(first) }
+                    Button(
+                        onClick = { section = PrototypeNavigation.RESOURCES; visibleCount = 10 },
+                        modifier = Modifier.fillMaxWidth()
+                    ) { Text(second) }
+                }
+            } else {
+                Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    TextButton(
+                        onClick = { section = PrototypeNavigation.parentOf(section) }
+                    ) { Text(if (english) "Back" else "Volver") }
+                    Text(
+                        if (section == PrototypeNavigation.NEWS) first else second,
+                        style = MaterialTheme.typography.headlineSmall,
+                        modifier = Modifier.padding(vertical = 12.dp).semantics { heading() }
+                    )
+                }
+                HorizontalDivider(Modifier.padding(vertical = 10.dp))
             }
-            HorizontalDivider(Modifier.padding(vertical = 10.dp))
 
-            if (section == 0) {
+            if (section == PrototypeNavigation.NEWS) {
                 AdjustableSelector(
                     label = if (english) "Content type" else "Tipo de contenido",
                     choices = mediaChoices, selected = mediaIndex, english = english
@@ -179,28 +212,29 @@ private fun PrototypeHome() {
                         choices = newsChoices, selected = newsCategory, english = english
                     ) { newsCategory = it; visibleCount = 10 }
                 }
-            } else {
+            } else if (section == PrototypeNavigation.RESOURCES) {
                 AdjustableSelector(
                     label = if (english) "Category" else "Categoría",
                     choices = resourceChoices, selected = resourceCategory, english = english
                 ) { resourceCategory = it; visibleCount = 10 }
             }
 
-            if (loading) {
+            if (section != PrototypeNavigation.HOME && loading) {
                 Text(if (english) "Loading..." else "Cargando…")
             }
-            if (loaded.status.isNotEmpty()) Text(loaded.status)
-            if (section == 0 && mediaIndex != 0) {
+            if (section != PrototypeNavigation.HOME && loaded.status.isNotEmpty()) Text(loaded.status)
+            if (section == PrototypeNavigation.NEWS && mediaIndex != 0) {
                 Text(
                     if (english) "Media options are not connected in this first prototype."
                     else "Los contenidos multimedia todavía no están conectados en este primer prototipo."
                 )
-            } else if (!loading && filtered.isEmpty()) {
-                Text(
-                    if (english) "Choose a category to show its content, or there are no results."
-                    else "Elige una categoría para mostrar su contenido, o no hay resultados."
-                )
-            } else if (!loading) {
+            } else if (!loading && section != PrototypeNavigation.HOME && filtered.isEmpty()) {
+                val selectionMade = if (section == PrototypeNavigation.NEWS) newsCategory > 0
+                    else resourceCategory > 0
+                if (selectionMade) {
+                    Text(if (english) "No results." else "Sin resultados.")
+                }
+            } else if (!loading && section != PrototypeNavigation.HOME) {
                 val count = filtered.size
                 Text(
                     if (english) "$count results" else "$count resultados",
@@ -213,16 +247,7 @@ private fun PrototypeHome() {
                         key = { index, item -> "$index-${item.id}" }
                     ) { _, item ->
                         OutlinedButton(
-                            modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp).semantics {
-                                customActions = listOf(
-                                    CustomAccessibilityAction(
-                                        if (english) "Open details" else "Abrir detalles"
-                                    ) {
-                                        selectedItem = item
-                                        true
-                                    }
-                                )
-                            },
+                            modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
                             onClick = { selectedItem = item }
                         ) {
                             // Single accessible title; no metadata/buttons between rows.

@@ -104,15 +104,39 @@ object NativeReaderArchives {
             }
         }
 
+        fun drainSafely(input: InputStream) {
+            var own = 0L
+            val buffer = ByteArray(32768)
+            while (true) {
+                if (Thread.currentThread().isInterrupted)
+                    throw IOException("Importación interrumpida.")
+                val n = input.read(buffer)
+                if (n < 0) break
+                if (n == 0) continue
+                own += n
+                extracted += n
+                if (own > MAX_MEMBER_BYTES || extracted > MAX_EXPANDED_BYTES) {
+                    throw IOException("El comprimido contiene una entrada demasiado grande.")
+                }
+            }
+        }
+
         try {
             when (kind.lowercase(Locale.ROOT)) {
                 "zip", "daisy" -> {
                     ZipInputStream(BufferedInputStream(FileInputStream(file))).use { zip ->
+                        var totalEntries = 0
                         while (true) {
                             val entry = zip.nextEntry ?: break
+                            totalEntries++
+                            if (totalEntries > MAX_ENTRIES)
+                                throw IOException("Demasiadas entradas en el ZIP.")
                             if (!entry.isDirectory) {
-                                // Closing the entry does not close the outer stream.
+                                val before = output.size
                                 accept(entry.name, zip)
+                                // Even skipped files must be consumed under size limits:
+                                // closeEntry() alone may otherwise inflate a ZIP bomb.
+                                if (output.size == before) drainSafely(zip)
                             }
                             zip.closeEntry()
                         }

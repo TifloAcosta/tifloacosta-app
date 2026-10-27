@@ -47,7 +47,8 @@ object NativeReaderBackup {
 
     private fun bookId(relative: String): String = relative.substringBefore('.')
 
-    fun export(context: Context, uri: Uri, onProgress: (Int, Int) -> Unit) {
+    fun export(context: Context, uri: Uri, onProgress: (Int, Int) -> Unit,
+        keepWorking: () -> Boolean = { true }) {
         val directory = File(context.filesDir, "tiflolector-native")
         val store = NativeReaderStore(context.applicationContext)
         val books = store.list()
@@ -80,10 +81,20 @@ object NativeReaderBackup {
                     write(name, content.toByteArray(Charsets.UTF_8))
                 }
                 entries.forEachIndexed { i, (name, file) ->
+                    if (!keepWorking()) throw InterruptedException("Copia cancelada.")
                     zip.putNextEntry(ZipEntry("data/$name"))
-                    file.inputStream().buffered().use { input -> input.copyTo(zip, 32768) }
+                    file.inputStream().buffered().use { input ->
+                        val bytes = ByteArray(32768)
+                        while (true) {
+                            if (!keepWorking()) throw InterruptedException("Copia cancelada.")
+                            val n = input.read(bytes)
+                            if (n < 0) break
+                            zip.write(bytes, 0, n)
+                        }
+                    }
                     zip.closeEntry()
-                    onProgress(i + 1, entries.size)
+                    if (i % 10 == 0 || i + 1 == entries.size)
+                        onProgress(i + 1, entries.size)
                 }
             }
         }
@@ -135,7 +146,8 @@ object NativeReaderBackup {
      * Restore as an ADDITIVE merge. Existing books and their files are never
      * overwritten. Validate the entire ZIP and stage into cache first.
      */
-    fun restore(context: Context, uri: Uri, onProgress: (Int, Int) -> Unit): RestoreResult {
+    fun restore(context: Context, uri: Uri, onProgress: (Int, Int) -> Unit,
+        keepWorking: () -> Boolean = { true }): RestoreResult {
         val library = File(context.filesDir, "tiflolector-native").apply { mkdirs() }
         val staging = File(context.cacheDir, "reader-backup-" + UUID.randomUUID()).apply {
             if (!mkdirs()) throw IOException("No se pudo preparar la restauración.")
@@ -149,6 +161,7 @@ object NativeReaderBackup {
                 ?: throw IOException("No se pudo abrir la copia.")).use { stream ->
                 ZipInputStream(stream.buffered()).use { zip ->
                     while (true) {
+                        if (!keepWorking()) throw InterruptedException("Restauración cancelada.")
                         val entry = zip.nextEntry ?: break
                         count++
                         if (count > MAX_ENTRIES + 4) throw IOException("Demasiados archivos en la copia.")
@@ -170,6 +183,7 @@ object NativeReaderBackup {
                                 val buffer = ByteArray(32768)
                                 var size = 0L
                                 while (true) {
+                                    if (!keepWorking()) throw InterruptedException("Restauración cancelada.")
                                     val n = zip.read(buffer)
                                     if (n < 0) break
                                     size += n
@@ -182,7 +196,7 @@ object NativeReaderBackup {
                             blobs[path] = target
                         } else throw IOException("Contenido desconocido en la copia.")
                         zip.closeEntry()
-                        onProgress(count, -1)
+                        if (count % 10 == 0) onProgress(count, -1)
                     }
                 }
             }
@@ -217,6 +231,7 @@ object NativeReaderBackup {
                 var committed = false
                 try {
                     for ((name, staged) in blobs) {
+                        if (!keepWorking()) throw InterruptedException("Restauración cancelada.")
                         if (bookId(name) !in selected) continue
                         val dest = File(library, name)
                         if (dest.exists()) throw IOException("Ya existe un archivo con ese identificador.")

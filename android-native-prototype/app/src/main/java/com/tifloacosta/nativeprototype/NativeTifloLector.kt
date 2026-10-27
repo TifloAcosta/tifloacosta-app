@@ -220,6 +220,19 @@ fun NativeTifloLector(
             rate = rate,
             onRateChange = { rate = it; preferences.edit().putFloat("rate", it).apply() },
             onUpdate = ::save,
+            onOcrCompleted = {
+                scope.launch {
+                    val fresh = withContext(Dispatchers.IO) {
+                        val updated = store.list().firstOrNull { it.id == book.id }
+                        if (updated != null) updated to store.read(updated) else null
+                    }
+                    if (fresh != null) {
+                        selectedBook = fresh.first
+                        selectedText = fresh.second
+                        library = library.map { if (it.id == fresh.first.id) fresh.first else it }
+                    }
+                }
+            },
             onBack = { selectedBook = null; selectedText = ""; playOnOpen = false; refresh() }
         )
         return
@@ -517,6 +530,7 @@ private fun NativeReadingScreen(
     rate: Float,
     onRateChange: (Float) -> Unit,
     onUpdate: (ReaderBook) -> Unit,
+    onOcrCompleted: () -> Unit,
     onBack: () -> Unit
 ) {
     val context = LocalContext.current
@@ -646,6 +660,7 @@ private fun NativeReadingScreen(
                 unitType = next
                 if (active) send(NativeReaderPlaybackService.ACTION_UNIT, next)
             },
+            onOcrCompleted = onOcrCompleted,
             onBack = { showTools = false })
         return
     }

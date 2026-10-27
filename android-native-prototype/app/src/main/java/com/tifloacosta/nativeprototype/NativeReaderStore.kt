@@ -228,6 +228,22 @@ class NativeReaderStore(private val context: Context) {
         if (books.any { it.id == book.id }) save(books)
     }
 
+    /** Update readable OCR content while preserving marks, folders and originals. */
+    @Synchronized fun replaceAccessibleText(id: String, text: String, notice: String = "") {
+        if (!ids.matches(id)) throw IOException("Identificador de libro incorrecto.")
+        val existing = list().firstOrNull { it.id == id }
+            ?: throw IOException("El libro ha sido eliminado durante el OCR.")
+        val result = if (notice.isBlank()) text else notice + "\n\n" + text
+        val document = File(folder, id + ".txt")
+        val temp = File(folder, id + ".ocr.tmp")
+        temp.writeText(result, Charsets.UTF_8)
+        if (!temp.renameTo(document)) {
+            temp.copyTo(document, overwrite = true)
+            temp.delete()
+        }
+        update(existing.copy(length = result.length))
+    }
+
     @Synchronized fun replaceFolder(oldName: String, newName: String) {
         save(list().map { if (it.folder.equals(oldName, ignoreCase = true)) it.copy(folder = newName) else it })
     }
@@ -260,6 +276,7 @@ class NativeReaderStore(private val context: Context) {
         }
         title = title.substringAfterLast('/').take(180).ifBlank { "Documento" }
         val ext = title.substringAfterLast('.', "").lowercase(Locale.ROOT)
+        if (ext == "pdf") return importPdfFile(uri, title, progress)
         if (ext in setOf("zip", "daisy", "7z", "rar")) {
             return importCompressed(title, ext, progress) {
                 resolver.openInputStream(uri) ?: throw IOException("No se pudo abrir el comprimido.")
@@ -269,6 +286,45 @@ class NativeReaderStore(private val context: Context) {
             NativeReaderFormats.readBounded(stream, NativeReaderFormats.MAX_ARCHIVE_BYTES)
         } ?: throw IOException("No se pudo abrir el documento.")
         return importBytes(title, ext, bytes, progress)
+    }
+
+    /**
+     * Large PDFs are saved first on disk, not rejected because of the 40 MB/250-page
+     * immediate OCR threshold. Users start/resume advanced OCR from Book tools.
+     */
+    @Synchronized private fun importPdfFile(uri: Uri, title: String,
+        progress: ((Int, Int) -> Unit)?): ReaderBook {
+        val id = UUID.randomUUID().toString()
+        val original = File(folder, id + ".source.pdf")
+        val document = File(folder, id + ".txt")
+        try {
+            (context.contentResolver.openInputStream(uri)
+                ?: throw IOException("No se pudo abrir el PDF.")).use { input ->
+                FileOutputStream(original).use { output ->
+                    NativeReaderArchives.copyBounded(input, output,
+                        NativeReaderAdvancedOcr.MAX_PDF_BYTES)
+                }
+            }
+            val easyPdf = original.length() <= 40L * 1024 * 1024
+            var text = if (easyPdf) {
+                try { NativeReaderOcr.recognizePdf(context, original.readBytes(), progress) }
+                catch (e: IOException) {
+                    if (e.message.orEmpty().contains("más de 250 páginas") ||
+                        e.message.orEmpty().contains("OCR por lotes"))
+                        "OCR pendiente: abre Detalles y herramientas y pulsa Reconocer PDF por lotes."
+                    else throw e
+                }
+            } else "OCR pendiente: abre Detalles y herramientas y pulsa Reconocer PDF por lotes."
+            if (text.isBlank()) text = "PDF sin texto accesible todavía. Inicia el OCR avanzado."
+            document.writeText(text, Charsets.UTF_8)
+            val book = ReaderBook(id = id, title = title.take(180),
+                length = text.length, format = "pdf")
+            save(list() + book)
+            return book
+        } catch (e: Exception) {
+            original.delete(); document.delete()
+            throw e
+        }
     }
 
     @Synchronized fun importBytes(title: String, ext: String, bytes: ByteArray,

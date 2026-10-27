@@ -45,6 +45,7 @@ fun NativeReaderDocumentActions(
     english: Boolean,
     fragment: String,
     onUnitChange: (Int) -> Unit = {},
+    onOcrCompleted: () -> Unit = {},
     onBack: () -> Unit
 ) {
     val context = LocalContext.current
@@ -183,6 +184,9 @@ fun NativeReaderDocumentActions(
         }
         Text((if (english) "Bookmarks: " else "Marcas: ") +
             (book.marks.size + book.audioMarks.size))
+
+        NativeReaderAdvancedOcrPanel(book, store, english,
+            onTextRefreshed = onOcrCompleted)
 
         Text(if (english) "Share and export" else "Compartir y exportar",
             style = MaterialTheme.typography.titleMedium,

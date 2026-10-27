@@ -87,6 +87,9 @@ object NativeReaderOcr {
         } catch (_: OutOfMemoryError) { bitmap }
     }
 
+    /** Available for page-by-page PDF recognition without JPEG re-encoding. */
+    fun recognizeBitmap(bitmap: Bitmap): String = ocrBitmap(bitmap)
+
     private fun ocrBitmap(bitmap: Bitmap): String {
         val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
         try {

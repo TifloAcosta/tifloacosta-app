@@ -1,5 +1,22 @@
 [
   {
+    "id": "migue-baena-ia:https://www.youtube.com/watch?v=JiG32ViUMy8",
+    "type": "video",
+    "section": "technology",
+    "sourceId": "migue-baena-ia",
+    "sourceName": "Migue Baena IA",
+    "sourceUrl": "https://www.youtube.com/@MigueBaenaIA",
+    "originalUrl": "https://www.youtube.com/watch?v=JiG32ViUMy8",
+    "originalLanguage": "es",
+    "publishedAt": "2026-10-27T13:04:01.000Z",
+    "title": "Elimina vulnerabilidades en tu código con esto 🔐",
+    "summary": "¿Usas IA para programar? Esta herramienta puede ayudarte a detectar problemas de seguridad en tu código.🔐\nSecurity Audit, de Cloudflare, utiliza agentes de IA para analizar aplicaciones, buscar vulnerabilidades como inyecciones SQL y revisar los hallazgos para reducir falsas alarmas. 🚨 \n•\n📌 Cloudflare afirma que este sistema permitió identificar más de 7.000 problemas que necesitaban atención.\n👉🏻 Si quieres probarla, ingresa al link https://github.com/cloudflare/security-audit-skill\n📲 Visita el enlace de mi perfil para unirte a mi comunidad exclusiva y descubrir más herramientas de IA.\n•\n#Cloudflare #SecurityAudit #InteligenciaArtificial #Ciberseguridad #ClaudeCode #AITools #Programacion #DesarrolloDeSoftware",
+    "mediaUrl": null,
+    "embedUrl": "https://www.youtube.com/embed/JiG32ViUMy8",
+    "platform": "youtube",
+    "categories": []
+  },
+  {
     "id": "marcianotech:https://www.youtube.com/watch?v=zlkgLU6jw-k",
     "type": "video",
     "section": "technology",
@@ -489,23 +506,6 @@
     "summary": "Crea tu web con Hostinger con Descuento con el código MIGUEBAENA10: https://www.hostg.xyz/SHK1r\n\n💻 Apúntate gratis al directo de del 3 de noviembre desde: https://thebigschool.com/sp/masterclass-chatgpt-a-mb/\ny aprende a usar Work en ChatGPT para delegar tareas complejas y ahorrar horas de trabajo. Además, repasará las novedades de OpenAI que más merece la pena empezar a probar.\n\n\nRecursos del vídeo: https://drive.google.com/file/d/1kX1ZDUNURu0bJJprrXA5lCO6VZnmBQp7/view?usp=sharing\n\n📧 CONTACTO 🫱🏼‍🫲🏽\nColaboraciones: lepetoi@icloud.com\n\n📱 Sígueme en Instagram: https://www.instagram.com/miguebaenaia/\n📱 Sígueme en TikTok: https://www.tiktok.com/@migue.baena\n\n\n0:00 Introducción\n0:31 Por qué todas se parecen \n3:30 Tu prompt base\n6:29 Crea tu web con Hostinger\n8:13 El mismo evento, otro diseño \n10:35 Una idea, 3 estilos \n13:25 Curso Gratuito ChatGPT \n14:18 De foto casera, a campaña\n19:37 Carruseles",
     "mediaUrl": null,
     "embedUrl": "https://www.youtube.com/embed/XOzrfO7YDPc",
-    "platform": "youtube",
-    "categories": []
-  },
-  {
-    "id": "migue-baena-ia:https://www.youtube.com/watch?v=qt9RQi7O4A4",
-    "type": "video",
-    "section": "technology",
-    "sourceId": "migue-baena-ia",
-    "sourceName": "Migue Baena IA",
-    "sourceUrl": "https://www.youtube.com/@MigueBaenaIA",
-    "originalUrl": "https://www.youtube.com/watch?v=qt9RQi7O4A4",
-    "originalLanguage": "es",
-    "publishedAt": "2026-10-25T13:04:43.000Z",
-    "title": "¡Adiós Veo y Kling! Conoce LTX 2.5",
-    "summary": "‼️ Conoce LTX 2.5, un modelo de código abierto que puedes integrar en tu flujo de trabajo audiovisual. \n¿Qué posibilidades ofrece? 🚀\n✅ Crear secuencias con distintos planos y trabajar la coherencia entre escenas.\n✅ Ejecutarlo localmente si tu ordenador cumple los requisitos necesarios.\n✅ Integrarlo con herramientas como ComfyUI para construir flujos de trabajo personalizados.\n✅ Explorar nuevas formas de crear vídeos, anuncios y contenido cinematográfico.\n•\nLo interesante es tener más control sobre el proceso, aunque necesitarás hardware compatible y configurar correctamente las herramientas.\n👉🏻 Si quieres conocerlo, ingresa al link https://ltx.io/model/ltx-2-5\n🚀 Visita el enlace de mi bio para unirte a mi comunidad exclusiva y descubrir más herramientas de inteligencia artificial.\n•\n#LTX #GeneraciónDeVídeo #InteligenciaArtificial #OpenSource #ComfyUI #CreaciónDeContenido #HerramientasIA",
-    "mediaUrl": null,
-    "embedUrl": "https://www.youtube.com/embed/qt9RQi7O4A4",
     "platform": "youtube",
     "categories": []
   },

@@ -1,3 +1,30 @@
+# TifloLector — fase final, bloque 6 de 7: OCR avanzado (prototipo 0.17)
+
+Esta rama depende de los bloques 1–5. PR en borrador; no hay publicación ni fusión en la app de Google Play.
+
+Se mantienen las carpetas de usuario vacías, cola, DAISY, libros electrónicos y reproducción en segundo plano de 0.16. Las nuevas operaciones se abren desde **Detalles y herramientas de cada documento**, sin controles nuevos en la portada.
+
+## PDF grandes y reanudación
+
+- El importador de PDF trabaja ahora con un archivo original almacenado en disco (hasta **400 MB**). Los documentos de hasta 40 MB que caben en el reconocimiento habitual siguen importándose y reconociéndose automáticamente. PDF más grandes, o con más de 250 páginas, se conservan íntegros para OCR avanzado en lugar de rechazarse.
+- **Reconocer PDF por lotes** analiza hasta **4000 páginas**, de una en una, extrayendo primero texto digital de PDFBox. Solo renderiza y aplica ML Kit OCR latino a páginas prácticamente sin texto seleccionable. Evita rasterizar todas las páginas simultáneamente, usa PDFBox con almacenamiento temporal en disco y conserva el original intacto.
+- Cada página terminada se guarda en un **archivo de checkpoint privado individual**, junto con el total de páginas. Tras cancelar el trabajo, salir de la pantalla o cerrar el proceso, **Reanudar OCR** omite las páginas completadas. Los archivos temporales a medio escribir no cuentan como páginas terminadas. Cada 10 páginas se conserva también una versión parcial del texto accesible para su lectura. La escritura final sustituye el texto parcial, pero nunca el PDF original.
+- El contador de progreso informa de páginas terminadas y total. El OCR es opcional y se inicia con un botón; la copia del original no espera a que termine el OCR.
+
+## Imágenes dentro de documentos
+
+- **Reconocer imágenes incrustadas** disponible para EPUB, DOCX, PPTX, PPSX, XLSX, ODT, ODS y ODP no protegidos. Inspecciona los recursos de imagen en el ZIP de cada formato sin extraer ni ejecutar macros. Reconoce JPEG/PNG/WebP/BMP aptos mediante ML Kit latino.
+- Límite de 600 imágenes por documento, 12 MB por imagen y 150 MB de entradas legibles por operación. Los resultados se añaden al texto extraído con un rótulo, usando como base inalterable el texto anterior al primer proceso; no duplica los párrafos reconocidos al reanudar.
+- Las imágenes vacías o decorativas no producen texto inventado. Portadas y miniaturas se omiten. JPG/PNG/HEIC sueltos y PDFs pequeños siguen usando la vía OCR antigua.
+
+## Verificación y limitaciones
+
+Pruebas unitarias: rutas permitidas por formato, rechazo de rutas de ZIP inseguras y SVG, reutilización de checkpoints de páginas ya reconocidas y límites explícitos. La compilación valida dependencias, no la fidelidad del OCR.
+
+**Falta probar en Pixel con TalkBack:** un PDF grande y escaneado de más de 250 páginas, cancelar sobre página 20, salir de la aplicación, regresar y reanudar desde la página 21; comprobar texto parcial, guardado de progreso, desplazamiento de archivos y espacio libre. Repetir con PDF híbrido, EPUB ilustrado, PPTX con imágenes, DOCX y XLSX. Verificar controles de cancelación y Voice/TalkBack; consultar páginas de la obra y no perder marcas o carpetas. Hay que medir batería, tiempo, memoria y comportamiento con Android matando el proceso.
+
+**Limitaciones explícitas:** OCR latino solamente; no interpreta gráficos, tablas, ecuaciones ni orden semántico complejo; no OCR de imágenes OLE dentro de DOC/PPT/XLS antiguos ni de PDFs cifrados; sin ejecución programada cuando la app está cerrada. El OCR se pausa al cerrar la pantalla y se reanuda manualmente. 400 MB/4000 páginas son límites máximos, no una garantía de que todos los documentos terminen en cualquier dispositivo. El texto accesible total sigue acotado a 12 MB. No ofrecer actualización pública antes de validar en un equipo real.
+
 # Fase final de TifloLector — bloque 5 de 7 (biblioteca y carpetas)
 
 Versión de pruebas 0.16-bloque5, basada en 0.15 y separada de Google Play/iOS.

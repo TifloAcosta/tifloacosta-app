@@ -72,6 +72,12 @@ fun NativeTifloLector(
     val organization = remember { NativeReaderOrganization(context.applicationContext) }
     val scope = rememberCoroutineScope()
     var library by remember { mutableStateOf<List<ReaderBook>>(emptyList()) }
+    var legacyState by remember { mutableStateOf<LegacyLibraryState?>(null) }
+    LaunchedEffect(Unit) {
+        legacyState = withContext(Dispatchers.IO) {
+            NativeLegacyLibraryCheck.inspect(context.applicationContext)
+        }
+    }
     var folderNames by remember { mutableStateOf<List<String>>(emptyList()) }
     var queuedIds by remember { mutableStateOf<List<String>>(emptyList()) }
     var bookmarkBook by remember { mutableStateOf<ReaderBook?>(null) }
@@ -434,6 +440,24 @@ fun NativeTifloLector(
             }
             TextButton(onClick = { screen = "queue" }, modifier = Modifier.fillMaxWidth()) {
                 Text(if (english) "Manage reading queue" else "Gestionar cola de lectura")
+            }
+        }
+        // An empty NEW index must not imply the pre-upgrade library was deleted.
+        legacyState?.let { state ->
+            if (state.databasePresent && state.bookCount == null) {
+                Text(
+                    if (english)
+                        "The previous library could not be checked. Its files have not been removed. Return to the existing TifloLector until migration is verified."
+                    else
+                        "No se pudo comprobar la biblioteca anterior. Sus archivos no se han borrado. Vuelve al TifloLector actual hasta verificar la migración."
+                )
+            } else if ((state.bookCount ?: 0) > 0) {
+                Text(
+                    if (english)
+                        "The previous reader contains ${state.bookCount} books. They are still in the existing TifloLector, not in this native preview. Return to the previous reader to use them; no data was migrated or deleted."
+                    else
+                        "El lector anterior contiene ${state.bookCount} libros. Siguen en el TifloLector actual, no en esta vista previa nativa. Vuelve al lector anterior para utilizarlos; no se han migrado ni borrado datos."
+                )
             }
         }
         Text(if (english) "My library" else "Mi biblioteca",

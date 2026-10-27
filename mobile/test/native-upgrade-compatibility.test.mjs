@@ -87,7 +87,7 @@ test('Android API24 legacy Office compatibility trial remains restricted and unr
   assert.match(prototype, /org\.apache\.poi:poi:4\.1\.2/);
   assert.match(office, /setOf\("doc", "xls", "ppt", "pps"\)/);
   assert.match(lib, /CVE-2022-26336/);
-  assert.match(lib, /javax\\.xml\\.bind:jaxb-api:2\\.3\\.1/);
+  assert.match(lib, /javax\.xml\.bind:jaxb-api:2\.3\.1/);
   assert.equal(request.status, 'draft');
   assert.equal(request.confirmProduction, false);
 });
@@ -106,4 +106,7 @@ test('document shares route to TifloLector while ordinary text sharing is preser
   assert.match(share, /String text = sharedText\(intent\)/);
   assert.match(native, /acceptSharedFiles\(intent\)/);
   assert.match(native, /NativeTifloLector\(/);
+  const reader = await source('../../android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativeTifloLector.kt');
+  assert.match(reader, /sharedUris\.size == 1 && importedSharedBooks\.size == 1/);
+  assert.match(reader, /selectedBook = book/);
 });

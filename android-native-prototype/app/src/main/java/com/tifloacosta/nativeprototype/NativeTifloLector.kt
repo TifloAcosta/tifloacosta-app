@@ -402,9 +402,16 @@ private fun NativeReadingScreen(
     val active = playback.bookId == book.id && playback.kind == "text"
     val playing = active && playback.playing
     var offset by remember(book.id) { mutableIntStateOf(book.offset) }
-    var unitType by rememberSaveable(book.id) { mutableIntStateOf(1) }
+    val documentPreferences = remember {
+        context.getSharedPreferences("native-reader-preferences", 0)
+    }
+    var unitType by rememberSaveable(book.id) {
+        mutableIntStateOf(documentPreferences.getInt("unit." + book.id,
+            documentPreferences.getInt("unit", 1)).coerceIn(0, 2))
+    }
     var showAudio by rememberSaveable(book.id) { mutableStateOf(false) }
     var showPronunciation by rememberSaveable(book.id) { mutableStateOf(false) }
+    var showTools by rememberSaveable(book.id) { mutableStateOf(false) }
     val dictionary = remember { NativePronunciationStore(context.applicationContext) }
     var sleepIndex by remember(book.id) { mutableIntStateOf(0) }
     val sleepMinutes = listOf(0, 5, 10, 15, 30, 45, 60)
@@ -491,11 +498,26 @@ private fun NativeReadingScreen(
     }
 
     LaunchedEffect(book.id) {
-        if ((startOnOpen || prefs.getInt("mode", 0) == 1) && !playing) startSpeech()
+        val choice = prefs.getInt("autoplay." + book.id, -1)
+        val enabled = when (choice) {
+            1 -> true
+            0 -> false
+            else -> prefs.getInt("mode", 0) == 1
+        }
+        if ((startOnOpen || enabled) && !playing) startSpeech()
     }
 
     if (showPronunciation) {
         NativePronunciationSettings(english, onBack = { showPronunciation = false })
+        return
+    }
+    if (showTools) {
+        NativeReaderDocumentActions(book, english, current?.text.orEmpty(),
+            onUnitChange = { next ->
+                unitType = next
+                if (active) send(NativeReaderPlaybackService.ACTION_UNIT, next)
+            },
+            onBack = { showTools = false })
         return
     }
 
@@ -538,6 +560,10 @@ private fun NativeReadingScreen(
         if (!speaker.ready.value) {
             Text(if (english) "Initializing Android speech…" else "Preparando la voz de Android…")
         }
+        TextButton(onClick = { showTools = true },
+            modifier = Modifier.fillMaxWidth()) {
+            Text(if (english) "Book details and tools" else "Detalles y herramientas")
+        }
         TextButton(
             onClick = { showNavigation = !showNavigation },
             modifier = Modifier.semantics {
@@ -553,6 +579,7 @@ private fun NativeReadingScreen(
             value = unitType.toFloat(),
             onValueChange = {
                 unitType = it.roundToInt().coerceIn(0, 2)
+                prefs.edit().putInt("unit." + book.id, unitType).apply()
                 if (active) send(NativeReaderPlaybackService.ACTION_UNIT, unitType)
             },
             valueRange = 0f..2f,

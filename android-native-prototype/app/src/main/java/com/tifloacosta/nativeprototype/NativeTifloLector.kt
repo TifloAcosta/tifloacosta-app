@@ -97,6 +97,24 @@ fun NativeTifloLector(
 
     fun refresh() {
         scope.launch {
+            try {
+                val current = withContext(Dispatchers.IO) {
+                    val books = store.list()
+                    Triple(books, organization.folders(books), organization.queue(books))
+                }
+                library = current.first
+                folderNames = current.second
+                queuedIds = current.third
+                error = ""
+            } catch (e: Exception) {
+                // Preserve the last visible library rather than showing an
+                // empty one if metadata storage temporarily fails.
+                error = e.message ?: "No se pudo recuperar la biblioteca. Los archivos no se han borrado."
+            } finally { loading = false }
+        }
+    }
+    LaunchedEffect(Unit) {
+        try {
             val current = withContext(Dispatchers.IO) {
                 val books = store.list()
                 Triple(books, organization.folders(books), organization.queue(books))
@@ -104,17 +122,9 @@ fun NativeTifloLector(
             library = current.first
             folderNames = current.second
             queuedIds = current.third
-        }
-    }
-    LaunchedEffect(Unit) {
-        val current = withContext(Dispatchers.IO) {
-            val books = store.list()
-            Triple(books, organization.folders(books), organization.queue(books))
-        }
-        library = current.first
-        folderNames = current.second
-        queuedIds = current.third
-        loading = false
+        } catch (e: Exception) {
+            error = e.message ?: "No se pudo leer la biblioteca. Conserva sus documentos."
+        } finally { loading = false }
     }
     LaunchedEffect(requestedBookId) {
         if (!requestedBookId.isNullOrBlank()) {
@@ -149,7 +159,13 @@ fun NativeTifloLector(
     fun save(book: ReaderBook) {
         if (selectedBook?.id == book.id) selectedBook = book
         library = library.map { if (it.id == book.id) book else it }
-        scope.launch(Dispatchers.IO) { store.update(book) }
+        scope.launch {
+            try {
+                withContext(Dispatchers.IO) { store.update(book) }
+            } catch (e: Exception) {
+                error = e.message ?: "No se pudo guardar el cambio."
+            }
+        }
     }
     val importer = rememberLauncherForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) { uris ->
         if (uris.isNotEmpty()) scope.launch {

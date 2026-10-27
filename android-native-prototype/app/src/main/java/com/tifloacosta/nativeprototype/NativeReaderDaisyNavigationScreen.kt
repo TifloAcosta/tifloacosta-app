@@ -12,9 +12,11 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -40,6 +42,8 @@ fun NativeDaisyNavigationScreen(
         mutableIntStateOf(if (points.any { it.kind == "heading" }) 0 else 4)
     }
     var level by remember(book.id) { mutableIntStateOf(0) }
+    var requestedPage by remember(book.id) { mutableStateOf("") }
+    var pageMessage by remember(book.id) { mutableStateOf("") }
     var count by remember(book.id, kind, level) { mutableIntStateOf(10) }
     val filtered = when (kind) {
         0 -> NativeDaisyNavigation.filter(points, "heading", level)
@@ -76,6 +80,25 @@ fun NativeDaisyNavigationScreen(
                 else listOf("Todos los niveles", "Nivel 1", "Nivel 2",
                     "Nivel 3", "Nivel 4", "Nivel 5", "Nivel 6"), level
             ) { level = it; count = 10 }
+        }
+        if (kind == 1 && filtered.isNotEmpty()) {
+            TextField(value = requestedPage,
+                onValueChange = { requestedPage = it.take(30); pageMessage = "" },
+                singleLine = true,
+                label = { Text(if (english) "Printed page number" else "Número de página") },
+                modifier = Modifier.fillMaxWidth())
+            Button(onClick = {
+                val match = filtered.firstOrNull {
+                    it.label.trim().equals(requestedPage.trim(), ignoreCase = true)
+                }
+                if (match == null) pageMessage = if (english)
+                    "That page number is not indexed in this DAISY."
+                    else "Esa página no está identificada en este DAISY."
+                else onGo(match.segmentIndex)
+            }, enabled = requestedPage.isNotBlank()) {
+                Text(if (english) "Go to page" else "Ir a página")
+            }
+            if (pageMessage.isNotBlank()) Text(pageMessage)
         }
         Text((if (english) "Entries: " else "Entradas: ") + filtered.size)
         if (filtered.isEmpty()) {

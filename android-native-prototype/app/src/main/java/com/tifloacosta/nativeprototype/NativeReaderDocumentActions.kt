@@ -142,7 +142,8 @@ fun NativeReaderDocumentActions(
             val mime = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension)
                 ?: "application/octet-stream"
             val uri = FileProvider.getUriForFile(
-                context, context.packageName + ".readerprovider", file
+                context, context.packageName + ".readerprovider", file,
+                labelFile(file.extension.ifBlank { book.format })
             )
             val intent = Intent(Intent.ACTION_SEND).apply {
                 type = mime

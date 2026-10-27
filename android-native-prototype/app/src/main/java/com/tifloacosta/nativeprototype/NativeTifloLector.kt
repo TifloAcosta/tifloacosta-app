@@ -65,8 +65,12 @@ fun NativeTifloLector(
 ) {
     val context = LocalContext.current
     val store = remember { NativeReaderStore(context.applicationContext) }
+    val organization = remember { NativeReaderOrganization(context.applicationContext) }
     val scope = rememberCoroutineScope()
     var library by remember { mutableStateOf<List<ReaderBook>>(emptyList()) }
+    var folderNames by remember { mutableStateOf<List<String>>(emptyList()) }
+    var queuedIds by remember { mutableStateOf<List<String>>(emptyList()) }
+    var bookmarkBook by remember { mutableStateOf<ReaderBook?>(null) }
     var selectedBook by remember { mutableStateOf<ReaderBook?>(null) }
     var selectedText by remember { mutableStateOf("") }
     var playOnOpen by remember { mutableStateOf(false) }
@@ -92,10 +96,24 @@ fun NativeTifloLector(
     }
 
     fun refresh() {
-        scope.launch { library = withContext(Dispatchers.IO) { store.list() } }
+        scope.launch {
+            val current = withContext(Dispatchers.IO) {
+                val books = store.list()
+                Triple(books, organization.folders(books), organization.queue(books))
+            }
+            library = current.first
+            folderNames = current.second
+            queuedIds = current.third
+        }
     }
     LaunchedEffect(Unit) {
-        library = withContext(Dispatchers.IO) { store.list() }
+        val current = withContext(Dispatchers.IO) {
+            val books = store.list()
+            Triple(books, organization.folders(books), organization.queue(books))
+        }
+        library = current.first
+        folderNames = current.second
+        queuedIds = current.third
         loading = false
     }
     LaunchedEffect(requestedBookId) {
@@ -168,10 +186,31 @@ fun NativeTifloLector(
     fun back() {
         if (selectedBook != null) { selectedBook = null; selectedText = ""; playOnOpen = false; refresh() }
         else if (screen == "catalogs") screen = "import"
+        else if (screen == "folders" || screen == "queue") screen = "home"
         else if (screen != "home") screen = "home"
         else onBack()
     }
     BackHandler { back() }
+    bookmarkBook?.let { book ->
+        NativeReaderBookmarksPanel(english, book,
+            onTextMark = { mark ->
+                bookmarkBook = null
+                val target = book.copy(offset = mark.coerceIn(0, book.length))
+                if (NativeReaderPlaybackService.snapshot.value.bookId == book.id) {
+                    NativeReaderPlaybackService.send(context,
+                        NativeReaderPlaybackService.ACTION_SEEK, book.id, target.offset)
+                } else save(target)
+                open(target)
+            },
+            onAudioMark = { mark ->
+                bookmarkBook = null
+                NativeReaderPlaybackService.start(context, book.id, audio = true,
+                    segmentIndex = mark.segmentIndex, positionMs = mark.positionMs)
+                open(book)
+            },
+            onBack = { bookmarkBook = null })
+        return
+    }
     selectedBook?.let { book ->
         NativeReadingScreen(
             book = book,
@@ -183,6 +222,19 @@ fun NativeTifloLector(
             onUpdate = ::save,
             onBack = { selectedBook = null; selectedText = ""; playOnOpen = false; refresh() }
         )
+        return
+    }
+    if (screen == "folders") {
+        NativeReaderFolderManager(english, library, folderNames, organization, store,
+            onChanged = { folderFilter = 0; refresh() },
+            onBack = { screen = "home"; refresh() })
+        return
+    }
+    if (screen == "queue") {
+        NativeReaderQueueManager(english, library, queuedIds, organization,
+            onChanged = { refresh() },
+            onOpen = { open(it) },
+            onBack = { screen = "home"; refresh() })
         return
     }
     if (screen == "settings") {
@@ -234,7 +286,7 @@ fun NativeTifloLector(
         return
     }
 
-    val folders = library.map { it.folder }.filter { it.isNotBlank() }.distinct().sorted()
+    val folders = folderNames
     val folderChoices = listOf(
         if (english) "All folders" else "Todas las carpetas",
         if (english) "Unfiled" else "Sin carpeta"
@@ -244,11 +296,14 @@ fun NativeTifloLector(
         1 -> "__none__"
         else -> folders.getOrNull(folderFilter - 2).orEmpty()
     }
-    val shown = NativeReaderBookFilters.apply(library, filter, order, selectedFolder)
+    val shown = NativeReaderBookFilters.apply(library, filter, order, selectedFolder,
+        queueIds = queuedIds)
     val actions = if (english)
-        listOf("Open", "Play", "Bookmarks", "Favorite", "Information", "Rename", "Move to folder", "Delete")
+        listOf("Open", "Play", "Bookmarks", "Favorite", "Information", "Rename",
+            "Move to folder", "Delete", "Add or remove from queue", "Mark read or unread")
     else listOf("Abrir", "Reproducir", "Marcas", "Favorito", "Información",
-        "Cambiar título", "Mover a carpeta", "Eliminar")
+        "Cambiar título", "Mover a carpeta", "Eliminar",
+        "Añadir o quitar de cola", "Marcar como terminado o pendiente")
 
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -280,6 +335,13 @@ fun NativeTifloLector(
                 if (english) "Folder" else "Carpeta",
                 folderChoices, folderFilter.coerceIn(0, folderChoices.lastIndex)
             ) { folderFilter = it; visibleCount = 10 }
+            TextButton(onClick = { screen = "folders" }, modifier = Modifier.fillMaxWidth()) {
+                Text(if (english) "Manage folders and create new folder"
+                    else "Gestionar carpetas y crear nueva carpeta")
+            }
+            TextButton(onClick = { screen = "queue" }, modifier = Modifier.fillMaxWidth()) {
+                Text(if (english) "Manage reading queue" else "Gestionar cola de lectura")
+            }
         }
         Text(if (english) "My library" else "Mi biblioteca",
             style = MaterialTheme.typography.titleMedium,
@@ -292,19 +354,39 @@ fun NativeTifloLector(
             var action by remember(book.id) { mutableIntStateOf(0) }
             fun run(which: Int) {
                 when (which) {
-                    0, 2 -> open(book)
+                    0 -> open(book)
+                    2 -> bookmarkBook = book
                     1 -> open(book, startSpeech = true)
                     3 -> save(book.copy(favorite = !book.favorite))
                     4 -> info = book
                     5 -> { proposedTitle = book.title; rename = book }
                     6 -> { proposedFolder = book.folder; moveBook = book }
                     7 -> deleteBook = book
+                    8 -> scope.launch {
+                        withContext(Dispatchers.IO) {
+                            if (book.id in queuedIds)
+                                organization.removeFromQueue(book.id, store.list())
+                            else organization.enqueue(book.id, store.list())
+                        }
+                        refresh()
+                    }
+                    9 -> save(book.copy(finished = !book.finished))
                 }
             }
             OutlinedButton(onClick = { run(action) },
                 modifier = Modifier.fillMaxWidth().semantics {
                     contentDescription = book.title
-                    stateDescription = actions[action]
+                    stateDescription = actions[action] + ". " + when {
+                        book.finished -> if (english) "Finished" else "Terminado"
+                        book.tracks.isNotEmpty() ->
+                            (if (english) "Audio section " else "Sección de audio ") +
+                            (book.trackIndex + 1) + " / " +
+                            book.audioSegments.ifEmpty { book.tracks.map { ReaderAudioSegment(0) } }.size
+                        else -> (if (english) "Read " else "Leído ") +
+                            ReaderUnits.percent(book.offset, book.length) + "%"
+                    } + if (book.id in queuedIds) {
+                        if (english) ". In reading queue" else ". En cola de lectura"
+                    } else ""
                     progressBarRangeInfo = ProgressBarRangeInfo(
                         action.toFloat(), 0f..actions.lastIndex.toFloat(), actions.size - 2
                     )

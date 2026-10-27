@@ -90,3 +90,19 @@ test('Android API24 legacy Office compatibility trial remains restricted and unr
   assert.equal(request.status, 'draft');
   assert.equal(request.confirmProduction, false);
 });
+
+
+test('document shares route to TifloLector while ordinary text sharing is preserved', async () => {
+  const main = await source('../android/app/src/main/java/com/tifloacosta/app/MainActivity.java');
+  const share = await source('../android/app/src/main/java/com/tifloacosta/app/TifloSharePlugin.java');
+  const native = await source('../../android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativePrototypeActivity.kt');
+  assert.match(main, /forwardDocumentShareToReader\\(getIntent\\(\\)\\)/);
+  assert.match(main, /forwardDocumentShareToReader\\(intent\\)/);
+  assert.match(main, /Intent\\.ACTION_SEND_MULTIPLE/);
+  assert.match(main, /Intent\\.EXTRA_STREAM/);
+  assert.match(main, /Intent\\.FLAG_GRANT_READ_URI_PERMISSION/);
+  assert.match(main, /new Intent\\(incoming\\)/);
+  assert.match(share, /String text = sharedText\\(intent\\)/);
+  assert.match(native, /acceptSharedFiles\\(intent\\)/);
+  assert.match(native, /NativeTifloLector\\(/);
+});

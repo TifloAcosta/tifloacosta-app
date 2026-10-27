@@ -324,7 +324,12 @@ class NativeReaderStore(private val context: Context) {
                     base.endsWith(".htm") || base.endsWith(".xhtml") ||
                     base.endsWith(".fb2") || base.endsWith(".rtf") ||
                     base.endsWith(".docx") || base.endsWith(".odt") ||
-                    base.endsWith(".epub") || base.endsWith(".pdf")) &&
+                    base.endsWith(".epub") || base.endsWith(".pdf") ||
+                    base.endsWith(".doc") || base.endsWith(".xls") ||
+                    base.endsWith(".ppt") || base.endsWith(".pps") ||
+                    base.endsWith(".mobi") || base.endsWith(".prc") ||
+                    base.endsWith(".pdb") || base.endsWith(".azw") ||
+                    base.endsWith(".azw3")) &&
                     !base.startsWith("ncc.") && !base.startsWith("toc.") &&
                     !base.startsWith("nav.") && !base.contains("cover")
             }

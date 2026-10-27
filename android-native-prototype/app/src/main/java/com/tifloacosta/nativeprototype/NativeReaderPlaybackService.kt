@@ -550,10 +550,12 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         val current = book ?: return
         // Preserve simultaneous library changes to favorites, folders and title.
         val latest = store.list().firstOrNull { it.id == current.id } ?: return
+        val now = if (playing) System.currentTimeMillis() else latest.lastReadAt
         val next = if (kind == "audio") latest.copy(
             trackIndex = segmentIndex, audioPositionMs = positionMs,
-            audioMarks = current.audioMarks
-        ) else latest.copy(offset = textOffset, marks = current.marks)
+            audioMarks = current.audioMarks, lastReadAt = now
+        ) else latest.copy(offset = textOffset, marks = current.marks,
+            lastReadAt = now)
         book = next
         store.update(next)
     }

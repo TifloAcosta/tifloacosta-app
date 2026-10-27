@@ -200,8 +200,8 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                 override fun onSkipToNext() { nextSegment() }
                 override fun onSkipToPrevious() { previousSegment() }
                 override fun onSeekTo(pos: Long) { seekTo(pos.toInt()) }
-                override fun onFastForward() { seekTo(positionMs + 30000) }
-                override fun onRewind() { seekTo(positionMs - 30000) }
+                override fun onFastForward() { if (kind == "text") nextSegment() else seekTo(positionMs + 30000) }
+                override fun onRewind() { if (kind == "text") previousSegment() else seekTo(positionMs - 30000) }
             })
             isActive = true
         }
@@ -352,6 +352,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
     }
 
     private fun focusAudio(): Boolean {
+        if (focused) return true
         val mgr = manager ?: return false
         val request = AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
             .setAudioAttributes(audioAttributes)

@@ -380,6 +380,7 @@ class NativeReaderStore(private val context: Context) {
             throw if (e is IOException) e
                 else IOException("No se pudo incorporar el libro comprimido.", e)
         } finally {
+            NativeReaderDaisyText.clear()
             stage.deleteRecursively()
         }
     }

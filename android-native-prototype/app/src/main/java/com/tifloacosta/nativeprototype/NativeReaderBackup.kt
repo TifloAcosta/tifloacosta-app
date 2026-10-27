@@ -65,7 +65,7 @@ object NativeReaderBackup {
         val jsonNames = listOf("index.json", "folders.json", "reading-queue.json")
         val metadata = jsonNames.map { name ->
             name to (NativeReaderPersistence.read(File(directory, name)) ?: "[]")
-        }
+        } + ("preferences.json" to exportPreferences(context))
         val dest = context.contentResolver.openOutputStream(uri, "w")
             ?: throw IOException("No se concedió permiso para guardar la copia.")
         dest.use { output ->
@@ -87,6 +87,46 @@ object NativeReaderBackup {
                 }
             }
         }
+    }
+
+    /** Simple typed backup of voice, typography, per-book navigation and TTS settings. */
+    private fun exportPreferences(context: Context): String {
+        val prefs = context.getSharedPreferences("native-reader-preferences", 0)
+        val json = JSONObject()
+        for ((key, value) in prefs.all) {
+            val entry = JSONObject()
+            when (value) {
+                is String -> entry.put("kind", "string").put("value", value)
+                is Int -> entry.put("kind", "int").put("value", value)
+                is Long -> entry.put("kind", "long").put("value", value)
+                is Float -> entry.put("kind", "float").put("value", value.toDouble())
+                is Boolean -> entry.put("kind", "bool").put("value", value)
+                else -> continue
+            }
+            json.put(key, entry)
+        }
+        return json.toString()
+    }
+
+    /** Merge settings non-destructively: local preferences take priority. */
+    private fun restorePreferences(context: Context, json: String) {
+        val values = JSONObject(json)
+        val prefs = context.getSharedPreferences("native-reader-preferences", 0)
+        val editor = prefs.edit()
+        val keys = values.keys()
+        while (keys.hasNext()) {
+            val key = keys.next()
+            if (prefs.contains(key)) continue
+            val entry = values.optJSONObject(key) ?: continue
+            when (entry.optString("kind")) {
+                "string" -> editor.putString(key, entry.optString("value"))
+                "int" -> editor.putInt(key, entry.optInt("value"))
+                "long" -> editor.putLong(key, entry.optLong("value"))
+                "float" -> editor.putFloat(key, entry.optDouble("value").toFloat())
+                "bool" -> editor.putBoolean(key, entry.optBoolean("value"))
+            }
+        }
+        editor.apply()
     }
 
     data class RestoreResult(val added: Int, val skipped: Int, val folders: Int)
@@ -117,7 +157,7 @@ object NativeReaderBackup {
                             name.contains("\\") || name.split('/').any { it == ".." || it == "." })
                             throw IOException("La copia incluye una ruta peligrosa.")
                         if (name in listOf("manifest.txt", "index.json",
-                                "folders.json", "reading-queue.json")) {
+                                "folders.json", "reading-queue.json", "preferences.json")) {
                             val bytes = NativeReaderFormats.readBounded(zip, 16 * 1024 * 1024)
                             headers[name] = bytes.toString(Charsets.UTF_8)
                         } else if (name.startsWith("data/")) {
@@ -158,6 +198,12 @@ object NativeReaderBackup {
                 val id = obj.optString("id")
                 if (!uuid.matches(id) || !seen.add(id) || !blobs.containsKey("$id.txt"))
                     throw IOException("El índice de la copia contiene libros inválidos o incompletos.")
+                val tracks = obj.optJSONArray("tracks") ?: JSONArray()
+                for (n in 0 until tracks.length()) {
+                    val name = tracks.optString(n)
+                    if (!track.matches(name) || bookId(name) != id || !blobs.containsKey(name))
+                        throw IOException("Faltan archivos de audio de un libro en esta copia.")
+                }
                 candidates.add(obj)
             }
             val incomingFolders = JSONArray(headers["folders.json"] ?: "[]")
@@ -206,6 +252,7 @@ object NativeReaderBackup {
                         }
                     }
                     NativeReaderPersistence.write(queueFile, JSONArray(mergedQueue).toString())
+                    restorePreferences(context, headers["preferences.json"] ?: "{}")
                     RestoreResult(toAdd.size, candidates.size - toAdd.size, mergedFolders.size)
                 } catch (e: Exception) {
                     // Before index commit no restored book is visible to the library.

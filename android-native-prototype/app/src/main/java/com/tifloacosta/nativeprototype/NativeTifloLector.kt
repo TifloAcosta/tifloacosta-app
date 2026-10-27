@@ -57,7 +57,12 @@ import kotlin.math.roundToInt
 
 /** Compact TifloLector home: Importar, Ajustes, Filtros y Mi biblioteca. */
 @Composable
-fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
+fun NativeTifloLector(
+    english: Boolean,
+    requestedBookId: String? = null,
+    onReaderRequestHandled: () -> Unit = {},
+    onBack: () -> Unit
+) {
     val context = LocalContext.current
     val store = remember { NativeReaderStore(context.applicationContext) }
     val scope = rememberCoroutineScope()
@@ -92,6 +97,26 @@ fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
     LaunchedEffect(Unit) {
         library = withContext(Dispatchers.IO) { store.list() }
         loading = false
+    }
+    LaunchedEffect(requestedBookId) {
+        if (!requestedBookId.isNullOrBlank()) {
+            try {
+                val selection = withContext(Dispatchers.IO) {
+                    val match = store.list().firstOrNull { it.id == requestedBookId }
+                    if (match != null) match to store.read(match) else null
+                }
+                if (selection != null) {
+                    selectedText = selection.second
+                    selectedBook = selection.first
+                    playOnOpen = false
+                    screen = "home"
+                } else error = "El documento ya no está disponible en la biblioteca."
+            } catch (e: Exception) {
+                error = e.message ?: "No se pudo recuperar el documento."
+            } finally {
+                onReaderRequestHandled()
+            }
+        }
     }
     fun open(book: ReaderBook, startSpeech: Boolean = false) {
         error = ""

@@ -223,6 +223,42 @@ export function renderSettings({
     });
     nativePreview.append(button);
   }
+  // Read-only preflight for manual upgrade QA. This never initiates migration.
+  const inspect = document.createElement('button');
+  inspect.type = 'button';
+  inspect.textContent = preferences.lang === 'en'
+    ? 'Check existing reading library (no changes)'
+    : 'Comprobar biblioteca existente (sin cambios)';
+  inspect.addEventListener('click', async () => {
+    inspect.disabled = true;
+    previewStatus.textContent = preferences.lang === 'en'
+      ? 'Checking books and their original files…'
+      : 'Comprobando libros y archivos originales…';
+    try {
+      const report = await NativeFeatures.inspectLegacyLibrary();
+      const count = key => Number.isSafeInteger(report?.[key]) ? report[key] : 0;
+      if (!report?.legacyDatabaseExists) {
+        previewStatus.textContent = preferences.lang === 'en'
+          ? 'No previous database detected. Nothing was modified.'
+          : 'No se encontró una base de datos anterior. No se ha modificado nada.';
+      } else {
+        const counts = preferences.lang === 'en'
+          ? `Books: ${count('books')}; bookmarks: ${count('marks')}; queue: ${count('queue')}; settings: ${count('settings')}. Missing book files: ${count('missingBookSources')}; audio tracks: ${count('missingAudioTracks')}; derived files: ${count('missingDerivedFiles')}; unsafe paths: ${count('unsafeStoredPaths')}.`
+          : `Libros: ${count('books')}; marcas: ${count('marks')}; cola: ${count('queue')}; ajustes: ${count('settings')}. Faltan originales: ${count('missingBookSources')}; pistas de audio: ${count('missingAudioTracks')}; archivos derivados: ${count('missingDerivedFiles')}; rutas inseguras: ${count('unsafeStoredPaths')}.`;
+        const finish = preferences.lang === 'en'
+          ? 'No data was modified. Native migration is not yet complete.'
+          : 'No se ha modificado ningún dato. La migración nativa aún no está terminada.';
+        previewStatus.textContent = counts + ' ' + finish;
+      }
+    } catch {
+      previewStatus.textContent = preferences.lang === 'en'
+        ? 'Library verification failed. Existing files were not intentionally changed.'
+        : 'No se pudo comprobar la biblioteca. No se han realizado cambios intencionados en los archivos.';
+    } finally {
+      inspect.disabled = false;
+    }
+  });
+  nativePreview.append(inspect);
   root.append(nativePreview);
 
   const notificationCleanup = addNotificationSettings(root, notificationService, t, onAppResume);

@@ -1,7 +1,7 @@
 import { addScreenHeader, clearScreen } from './shared.mjs';
 import { registerPlugin } from '@capacitor/core';
 
-const NativeFeatures = registerPlugin('TifloNativeFeatures');
+export const NativeFeatures = registerPlugin('TifloNativeFeatures');
 
 function addSelect(parent, { id, label, value, options, onChange }) {
   const wrapper = document.createElement('div');

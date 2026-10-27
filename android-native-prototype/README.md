@@ -1,3 +1,35 @@
+# Fase final de TifloLector — bloque 4 de 7 (herramientas por documento)
+
+Versión **0.15-bloque4**, rama de pruebas y PR #258. Basada en el bloque 3/0.14; no modifica Google Play ni iOS.
+
+La portada del lector permanece igual: Importar, Ajustes, Filtros, Mi biblioteca. «Detalles y herramientas» aparece **dentro** de cada texto y de cada audiolibro, con botón de volver a lectura y orden TalkBack natural.
+
+## Funciones nuevas
+
+- Compartir un archivo original por Android Sharesheet a través de FileProvider restringido a los documentos privados del lector. La autorización de lectura es temporal y solo para el URI elegido. Se conservan bytes originales; no se revela el resto de la biblioteca.
+- Exportar con el selector nativo «Guardar archivo en…» (Storage Access Framework, CreateDocument) el original con extensión correcta o el texto accesible en UTF-8 como TXT, permitiendo carpetas locales y proveedores nube configurados. El usuario elige el destino explícitamente; no se requiere permiso de almacenamiento amplio.
+- Compartir el texto extraído directamente mediante menú de compartir si no supera 80.000 caracteres. Para documentos mayores hay que exportar TXT; no se recorta silenciosamente.
+- Traducción local mediante ML Kit Android 17.0.3, sin servicio remoto de traducción de documentos. Idioma de origen y destino elegidos expresamente (español, inglés, portugués, francés, alemán, italiano, polaco, árabe, japonés, chino, hindi). Se traduce el fragmento de lectura actual o la obra completa hasta 60.000 caracteres, dividida en unidades limitadas preservando todos los caracteres. La primera vez **descarga modelos** y requiere conexión; después, el motor trabaja en el dispositivo sin enviar el texto para traducir a un servidor. Traducción en pantalla, seleccionable y compartible/exportable como TXT. El original nunca es modificado. Traducción automatizada revisable.
+- Detalles: formato, extensión del texto, número de pistas y marcas. Preferencias por obra: lectura automática al abrir (general/nunca/siempre), idioma fuente y destino de traducción, unidad de navegación TTS, velocidad por audiolibro y ajustes de voz y presentación independientes ya existentes (sin duplicar secciones).
+- Audio DAISY mantiene sesión multimedia en segundo plano y navegación del bloque 2. Las herramientas solo intervienen a petición del usuario.
+
+## Pruebas pendientes en Pixel
+
+1. Con TalkBack abrir «Detalles y herramientas» en un EPUB, PDF, DOC, MP3 y DAISY. Volver y comprobar que la lectura sigue en su posición.
+2. Compartir un original EPUB y exportarlo a Archivos o Drive. Leerlo desde otra aplicación; asegurar que Android no solicita acceso a toda la biblioteca.
+3. Exportar un PDF original y un TXT extraído, comparar contenido y extensión.
+4. Traducir un párrafo del inglés al español (descarga inicial), volver a traducir desconectado, guardar TXT, comprobar que texto fuente permanece idéntico. Elegir origen y destino distintos.
+5. Intentar traducir un libro que supera 60.000 caracteres, comprobar que ofrece un límite honesto y la opción de fragmentos.
+6. Cambiar lectura automática y unidad de navegación por obra, salir, reabrir y confirmar persistencia, mientras otras obras conservan ajustes globales.
+7. Con audio de varias horas, compartir ZIP original sin desbordar memoria, volver de hoja de compartir, probar auriculares y pantalla bloqueada.
+
+## Limitaciones
+
+- La traducción por voz no reescribe el texto original; el resultado se muestra y se puede compartir/exportar. No hay reemplazo permanente en la biblioteca ni edición colaborativa.
+- No existe OCR de imágenes de Office incrustadas todavía (bloque 6).
+- ML Kit traduce bajo demanda con modelos descargados en el dispositivo; es traducción automática aproximada, no garantiza fidelidad literaria ni técnica. No confundir con traductor en línea ilimitado. Documento completo limitado a 60.000 caracteres por operación.
+- La firma de compilaciones debug puede variar: desinstalar el prototipo puede eliminar su biblioteca. No desinstalar la app publicada.
+
 # Fase final de TifloLector — bloque 3 de 7 (formatos documentales antiguos y ebooks)
 
 Versión **0.14-bloque3** en rama y PR #257, basada en 0.13. No modifica Google Play ni la aplicación iOS.

@@ -1,5 +1,318 @@
 [
   {
+    "id": "techcrunch-1a84c234d9b03d11",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/27/the-data-center-boom-has-an-upside-innovation-for-the-us-grid/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-27T22:55:41.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The data center boom has an upside: innovation for the US grid",
+        "summary": "As the AI boom stresses the existing power grid, all sort of new opportunities for grid modernization are also emerging as a result, industry insiders say.",
+        "body": "The AI boom has led to a gargantuan surge in energy demand across the country. Critics say this upswell in connections is enacting a stress test on America’s aging grid infrastructure. Worries abound that, in the short term, the energy crunch could lead to surging electrical bills and, in the long term, may eventually lead to outages or other technical problems.\n\nAt TechCrunch Disrupt earlier this month, industry insiders tempered much of this criticism with optimism about how the flood of new energy connections could actually be opening the door for grid modernization. Apoorv Bhargava, founder and CEO of Weavegrid, Tim Heidel, CEO of Veir, and Kristen Eberhard, VP of policy at Rewiring America, said that though the grid faces new challenges, there are also plenty of new opportunities as well.\n\n“It’s a very different electric grid, right?” said Bhargava. “We’re dealing with a ton of new variables, including renewable energy. We’re dealing with a ton of new load in the form of electric vehicles and data centers and heat pumps, and the ability to manage and orchestrate is fundamentally what utilities are now grappling with.”\n\nWhile all of those new connections are driving an ever larger amount of stress to the grid, Bhargava’s company hopes to provide the kind of load orchestration and management that helps utilities maximize the potential of the current system. Weavegrid’s software can help organizations efficiently deploy energy while also optimizing connections to reduce utility payers’ bills, the founder said.\n\nHeidel, on the other hand, runs a company that is working to build out and expand the physical infrastructure of the grid, while also making it run much more efficiently. Veir sells superconductive power lines that promises to transfer energy at a much more efficient rate than traditional ones. Veir’s cables can carry power five times further than traditional cables while also requiring 20 times less space, the company has said . Earlier this month the startup raised $110 million in a series C funding round.\n\n“The scale of the investment in AI infrastructure is driving a tremendous amount of innovation,” said Heidel. “There’s a ton of new technologies that are coming off the shelves and starting to get to scale that, pulled together, can actually really make sure that data centers are the best community neighbors and citizens be right.”\n\nHe added: “I think that we really need to look at ways that we can really adopt all of that as fast as possible to ease this next stage of growth.”\n\nEberhard, whose organization advocates for household electrification , also said that while the surge in data center energy demand has spurred a new urgency to the modernization cause, it has also created an environment where industries are ready to try new things.\n\n“I feel like this era of AI and load growth is a very improv era,” Eberhard said. “There’s a lot of yes-and-ing going on. So yes, we need more transmission lines. Yes, we need more centralized power plants, and we also need to make sure that we’re taking advantage of all this other stuff that we had previously been leaving on the table when we didn’t have this urgency of the AI demand.”"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-c3019e99d6af10b7",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/apple/2026/10/apple-refreshes-the-imac-entry-level-macbook-pro-with-the-m6-chip/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-27T22:37:30.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple refreshes the iMac, entry-level MacBook Pro with the M6 chip",
+        "summary": "Additionally, the N1 chip brings Wi-Fi 7 and Bluetooth 6.",
+        "body": "Apple has announced refreshes for the iMac and the entry-level, 14-inch MacBook Pro . Both machines are getting the M6 chip, which was introduced in the Mac mini several weeks ago.\n\nThe M6 is split into two variants for the iMac. Picking the \"M6 chip with two Thunderbolt ports\" option gets you a 10-core CPU and a 10-core GPU, whereas picking \"M6 chip with four Thunderbolt ports\" gets you 12 cores for each, instead. The two-port variant maxes out at 24 GB of RAM and 1TB of storage, whereas the four-port one maxes out at 32GB of RAM and 2TB of storage.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-3210fca07fcfc8a1",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2296049/best-ways-tell-if-someone-wearing-ai-glasses/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-27T22:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The best ways to tell if someone is using AI glasses",
+        "summary": "While it can be jarring to discover that your companion is using AI glasses, there are some steps you can take to recognize them ASAP.",
+        "body": "Smart glasses are making unwanted surveillance all too easy, but you're far from powerless against this covert tech.\n\nSmart glasses might be the next big trend in consumer tech, as there's certainly real demand for these gadget-intensive pieces of eyewear. However, there are very legitimate concerns about how these glasses can be used for stalking or other shady activity, especially as the prevalence of public recording comes more and more under scrutiny. If you share those concerns, you might want to keep an eye out for some tell-tale signs of AI glasses.\n\nOf course, it could be a little rude to go around asking random people if they're wearing AI glasses when you're going off a gut instinct. Luckily, most (albeit not all) smart glasses brands have built-in signs of use. If you can't rely on those giveaways, there are some solid-enough reasons for you to be suspicious.\n\nSmart glasses are actually pretty easy to recognize at a glance, as their tech-riddled innards often require thick frames, particularly around the temples and the outer sides of the lenses (although this admittedly isn't always the case). That second area is typically where camera lenses are located, while any giveaway ports or grilles might be further back on the design. Most smart glasses also have an indicator light that turns on when they're filming; if you suspect you're being filmed via smart glasses, look for a small LED light.\n\nHowever, there are reports of a variety of low-cost dupe glasses being sold on sites such as TikTok Shop and Temu that don't have a recording light (as well as audio-first glasses that don't have cameras, such as the Ray-Ban Meta Audio Glasses ), so you'll need to look closer at the aforementioned physical traits. You can also check whether someone you suspect is recording is quickly pressing the temples of their glasses, pausing every now and then to zone out (as if to read text on their glasses' display), or whispering quiet voice commands to themselves. These could be signs of someone interacting with their smart glasses, though there is a small chance they are all completely unrelated.\n\nOne of the most recent developments in the arms race against this tech is the arrival of apps that can warn you if smart glasses are nearby . The likes of Nearby Glasses and ZuckOff scan for nearby Bluetooth devices and the identifiers often associated with AI glasses. Admittedly, both of these apps aren't completely reliable. For one thing, there's a chance that anyone wearing smart glasses nearby has turned off their Bluetooth. There's also a risk of false positives. However, both can serve as your first line of defense against nearby smart glasses.\n\nJust because you have a strong suspicion that there are AI glasses nearby, though, doesn't mean you should jump immediately to a confrontation. The best thing to do if someone near you is stirring your suspicions is to move away from the individual and speak to the authorities if you're being followed. If you're hosting a meeting or event that demands a level of confidentiality, it may be worth making a neutral statement about smart glasses not being permitted. In either case, if you need to speak with a stranger about whether they're recording you without your knowledge, do so calmly in a public environment."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-92fb77519bc984fc",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/tech-policy/2026/10/no-human-at-the-helm-delaware-plan-would-let-ai-agents-run-entire-businesses/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-27T21:50:04.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "\"No human at the helm\": Delaware plan would let AI agents run entire businesses",
+        "summary": "Owners of AI-run firms would evade liability for \"reckless\" AI, US Rep. Comer says.",
+        "body": "A Delaware proposal to let companies be operated by AI agents would help the firms' human owners evade legal responsibility for reckless and harmful actions taken by the AI, US Rep. James Comer (R-Ky.) told Delaware Governor Matt Meyer in a letter yesterday.\n\nComer, chairman of the House Committee on Oversight and Government Reform, told Meyer that the committee \"seeks assistance obtaining documents related to your state administration’s efforts to establish a new form of corporate entity to be known as an Artificial Intelligence Company (AIC).\"\n\nComer said the proposal is ripe for abuse. \"We are concerned that Delaware’s AIC proposal could be used to protect powerful AI companies and their investors from responsibility for reckless harmful actions, while also protecting non-transparent forces seeking anticompetitive regulatory capture behind state AI initiatives,\" Comer's letter said.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-c6564a660a4a411e",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/27/gm-is-embracing-hybrids-now/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-27T21:47:02.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "GM is embracing hybrids now",
+        "summary": "GM eschewed hybrids in favor of battery-electric vehicles. Now it's gearing up to offer hybrid versions of its SUVs.",
+        "body": "General Motors plans to invest in its Lansing Delta Township Assembly plant to handle future production of hybrid-electric vehicles, the latest move by the U.S. automaker to claw back market share by appealing to the shifting tastes of consumers.\n\nThe company said on Tuesday that it plans to invest more than $2 billion over the next several years in the broader Lansing region, an amount that includes $1.25 billion to prepare the assembly plant for “future vehicle production.”\n\nThe company said it is working with the U.S. Department of Energy to restructure a previously awarded Domestic Manufacturing Conversion Grant and direct those funds to future hybrid production at the Lansing factory. The company was awarded $500 million under the Biden administration to support converting a different factory in Lansing to produce electric vehicles, including hybrid, battery-electric, plug-in electric hybrid, and hydrogen fuel cell electric vehicles. Those funds were never released, according to GM.\n\nToday, GM assembles the gas-powered Buick Enclave, Chevrolet Traverse, and GMC Acadia at the Lansing Delta Township factory, which produced a record 291,000 vehicles in 2025.\n\nGM didn’t provide specifics on when it would begin producing and selling hybrid vehicles. But insiders told TechCrunch to expect hybrids across multiple brands rather than a single vehicle line. A Reuters report , citing anonymous sources, said the company plans to build hybrid versions of the Chevrolet Traverse, Buick Enclave, and GMC Acadia at the factory.\n\nHybrids have become increasingly popular, thanks in part to rising gas prices. Customers also have more choices than ever before, with most automakers offering a range of hybrid and plug-in hybrid models. Toyota is the U.S. market leader in hybrid sales, followed by Honda. Ford has also gained considerable market share in hybrid sales in the past two years, selling some 228,000 hybrids in 2025.\n\nBut GM has been slow to adopt hybrids. Until recently, the company’s only electric-hybrid vehicle was the Chevrolet Corvette E-Ray , which launched as a 2024 model. (GM sold 2,444 of those vehicles last year.) The E-Ray has since been discontinued; GM began deliveries of the hybrid Corvette ZR1X in March and next year will launch a hybrid Corvette Grand Sport X.\n\nGM eschewed hybrids in favor of battery-electric vehicles. The automaker invested billions of dollars to shift its gas-powered portfolio to an all-electric one. That strategy has changed under the Trump administration with the end of the federal EV tax credit and slower-than-expected demand. GM hasn’t abandoned EVs completely, though it has seen EV sales fall year-over-year. The company still sells numerous battery-electric vehicles across its brands, including the Chevrolet Equinox EV, Blazer EV, and Cadillac Escalade IQ.\n\nGM said Tuesday it will share specific details on its hybrid vehicle production plans closer to launch."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-3df25d69ba433ad0",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/27/bank-of-america-kindly-asks-that-you-dont-share-your-banking-password-with-your-ai-assistant/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-27T21:44:34.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Bank of America kindly asks that you don’t share your banking password with your AI assistant",
+        "summary": "The banking giant reminds customers that \"you're responsible for activity\" resulting from your AI agents' access.",
+        "body": "Financial giant Bank of America is reminding customers to bank safely by kindly not sharing your banking credentials with your AI agent.\n\nIn an email blast to customers titled “Protecting your finances in the Al World,” Bank of America urged customers to never share their username and password with another person or an outside service, “including an Al-enabled tool or agent that offers to act on your behalf.”\n\nYou can practically sense the frustration in the person sending the email. Still, customers are increasingly handing over their log-ins as personal AI assistants grow more popular . Sharing your banking username and password with an AI assistant runs the risk that it could do something with your finances without your knowledge, or that your bank thinks someone’s raiding your account and locks you out of it. Worse, a security flaw in the AI assistant could result in it leaking your banking credentials elsewhere, giving financially motivated hackers a way into your bank account.\n\nThis latest warning comes as banks are still exploring how AI agents fit into the financial world but are reportedly grappling with unauthorized agents accessing their customers’ money . As we discussed onstage at TechCrunch Disrupt , banks, payment providers, and processors are still trying to figure out how to allow customers access to their bank accounts using AI tools, such as for agentic payments, which allow people to set agents to autonomously buy things at the best price or the right time.\n\nBank of America did not immediately respond to a request for comment about the email. But heed the bank’s warning, for if things go wrong, it’s on you. Account agreements at most banks hold customers responsible for anyone they give their log-in to. “If you do share your credentials,” its email reads, “keep in mind that you’re responsible for activity resulting from that access.”\n\n(via Bryan Toporek )"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-569a567fc154edd3",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/27/firefoxs-ai-powered-smart-window-gets-form-autofill-and-website-monitoring/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-27T21:43:14.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Firefox’s AI-powered Smart Window gets form autofill and website monitoring",
+        "summary": "Mozilla today announced two new features for Smart Window, its opt-in AI-powered browsing experience in Firefox. Here are the details. more…",
+        "body": "Mozilla today announced two new features for Smart Window, its opt-in AI-powered browsing experience in Firefox. Here are the details.\n\nNearly one year ago, Mozilla announced plans to introduce AI Window, an opt-in experience that would let Firefox users interact with an AI assistant while browsing, with features like summarizing content, comparing information across tabs, and answering questions without leaving the browser.\n\nSince then, the feature has been renamed Smart Window, and it has gradually gained new capabilities.\n\nA few months ago, for instance, Mozilla introduced AI-powered web search to Smart Window, alongside automatic tab grouping, duplicate tab detection, and the ability to search browsing history using natural language.\n\nToday, the company announced two additional features rolling out to Smart Window beta users: AI-powered form filling and website monitoring.\n\nAs Mozilla explains, the AI-powered form-filling feature can draw context from other open tabs to suggest answers for web forms. This means it goes beyond traditional autofill, which typically handles basic information like names, addresses, and contact details, by generating responses based on information found on other currently open pages.\n\nHere’s Mozilla:\n\nFor example, Smart Window could use information from your online portfolio or professional profile to fill in your work history, or draw on those details to draft an answer to a question like “Tell me about a time when…” Firefox’s regular autofill still handles saved information such as your name and address, which can be entered directly into forms without relying on AI models.\n\nMozilla notes that the feature relies on Google’s Gemini 3.1 Flash Lite model to analyze form fields and extract relevant information from selected tabs, meaning that information from those pages is shared with the AI model for processing.\n\nThe second feature rolling out today is website monitoring, which works similarly to Safari’s new “Notify Me” feature introduced with iOS 27 and macOS 27.\n\nIt lets users type /watch in the Smart Window chat to tell Firefox to monitor webpages for specific changes, such as price drops, product availability, or new job listings. Firefox then notifies users when those changes are detected.\n\nUsers can choose between daily and weekly checks, with up to 5 webpages per task, though monitoring runs only while Firefox is open.\n\nHere’s Mozilla again:\n\nWhen there’s a match, you’ll see an update through the Tasks button in the toolbar. With desktop notifications enabled, Firefox can also notify you directly; click the notification to open the watched pages. You can have up to 15 active tasks at a time, and you can edit, pause or delete tasks. Smart Window will automatically pause tasks after 60 days without a matching change. If 90 days pass without a change, it will stop checking altogether.\n\nAs with AI-powered form filling, the feature relies on an AI model to process information, although in this case Mozilla uses Qwen to identify changes that match what users are looking for.\n\nBoth new features are now available in the Smart Window beta for Firefox desktop, though they’re currently limited to English-language users in the US and Canada. Mozilla says they will “roll out to additional markets in the coming months.”\n\nTo learn more about these features and how to use them, follow this link ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-9aa1384e610371fa",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/10/anthropic-ipo-warns-its-ai-could-blackmail-people-become-sentient-end-humanity/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-27T21:31:14.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Anthropic IPO warns its AI could blackmail people, become sentient, end humanity",
+        "summary": "Seven potential AI nightmares pulled from Anthropic's 93-page \"Risk Factor\" tome.",
+        "body": "The Securities and Exchange Commission 's publication on Monday of Anthropic's S-1 form —ahead of a heavily anticipated initial public offering—has led to plenty of discussion of whether the company's quickly ballooning revenues will be able to overcome its even higher costs. But amid the numbers and forward-looking optimism about AI \"rapidly transform[ing] every sector of the global economy in ways greater than the impact of industrialization, electricity, semiconductors, and the internet,\" Anthropic also spends an inordinate amount of time in its S-1 laying out the myriad risk factors that could bring the company down.\n\nAcross 93 pages and over 70,000 words, Anthropic's S-1 \"Risk Factors\" section discusses literally hundreds of potential problems that could negatively impact its business in the coming years. Many of these potential risks are the kind of standard worries about competition, costs, customer acquisition, and potential regulation that almost any business must worry about. But some risks highlight interesting potential points of failure for Anthropic specifically and the hype-filled AI bubble more generally.\n\nAfter wading through Anthropic's book-length treatise on its greatest risks, we've narrowed the list to the seven most surprising, interesting, or thought-provoking potential problems. Consider this a far-from-comprehensive look that potential Anthropic investors should keep in mind.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-blog-79ac6746035e8691",
+    "type": "news",
+    "sourceId": "applevis-blog",
+    "sourceName": "AppleVis Blog",
+    "sourceUrl": "https://www.applevis.com/blog",
+    "originalUrl": "https://www.applevis.com/blog/announcing-anonymouses-app-pick-month-october-2026-resort-water-sort-puzzle-app",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-27T21:28:52.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-accesibilidad",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Announcing AnonyMouse's App Pick of the Month for October 2026: ReSort: Water Sort Puzzle App",
+        "summary": "Welcome to the October 2026 installment of AnonyMouse's App Pick of the Month, where each month I highlight a new or noteworthy app. This month's pick is ReSort: Water Sort Puzzle App, a fun and relaxing water-sorting puzzle game that has quickly become one of my favorites. I know, I know. Another game for my App Pick of the Month! I realize not everyone here is a gamer, and I'm sorry for picking yet another one. But we've had so many fun new games coming our way lately, I just can't help myself! ReSort was simply too much fun to pass up. Maybe next month I'll pick something different. No promises, though! About ReSort ReSort is a puzzle game where you sort different-colored water into separate tubes until each tube contains just one color. Sounds simple enough, right? Well, it starts out that way, but things get trickier as you progress. Before long, you're moving water back and forth, trying to figure out your next move without getting yourself stuck. What I really enjoy is that there's no rush with ReSort. No timers, no move limits, and no pressure. You can take your time and figure things out at your own pace. But don't mistake relaxing for easy! Some puzzles can really get you scratching your head, and finally solving one that's been giving you trouble is incredibly satisfying. There's plenty to keep you busy, too. Along with the regular levels, ReSort offers daily puzzles with different difficulty settings and a larger Sunday challenge. You can also earn stars, work your way through different ranks, and unlock additional sounds as you progress. Accessibility is another reason ReSort stands out. The game was designed with VoiceOver in mind, with announcements for the colors and their positions in each tube. And I have to say, I absolutely love the sounds in this game! From the satisfying sound of pouring water to the little audio cues and gentle music, everything adds to the experience. It's one of those games where the sounds make playing that much more enjoyable. I also love that you can customize them to your liking. Something else I really appreciate is the developer's involvement with the AppleVis community. Since introducing ReSort in the AppleVis forum , the developer has been actively listening to feedback and making improvements. Suggestions from community members have already led to different daily puzzle difficulties, iCloud syncing, more sound options, and adjustable tube sizes for low-vision players. I love seeing developers take our community's suggestions seriously, especially when those suggestions turn into actual features so quickly. It's wonderful to see that kind of engagement. Why I'm Picking ReSort This Month For me, ReSort is just plain fun. It's easy to learn, challenging enough to keep me interested, and relaxing enough to enjoy whenever I have a few minutes to spare. And that's where the trouble starts! I'll tell myself I'm only going to play a couple of levels, and before I know it, I've played several more. There's always another puzzle waiting, and I can't seem to resist finding out whether I can solve it. I also appreciate getting to enjoy this type of game with VoiceOver. Water-sorting games have been around for years, but finding one that's this accessible isn't something I take for granted. Between the enjoyable gameplay, wonderful sounds, thoughtful accessibility, and a developer who's genuinely listening to our community, ReSort has earned its place as my October App Pick of the Month. If you enjoy puzzle games, or just want something relaxing that gives your brain a little workout, I definitely recommend giving ReSort a try. Just don't blame me if you find yourself playing longer than you planned! Download the App ReSort: Water Sort Puzzle App is available on the App Store for iPhone and iPad. The first 10 levels are free, with a one-time purchase to unlock the remaining levels. There are no ads or subscriptions, and all accessibility features are included for free. Now It's Your Turn Have you tried ReSort yet? Are you finding it as addictive as I am? How far have you made it in the game? I'd love to hear what you think and what other apps or games you've been enjoying this month. Let me know in the comments. I always enjoy hearing what everyone else is playing and discovering!",
+        "body": "Welcome to the October 2026 installment of AnonyMouse's App Pick of the Month, where each month I highlight a new or noteworthy app. This month's pick is ReSort: Water Sort Puzzle App, a fun and relaxing water-sorting puzzle game that has quickly become one of my favorites.\n\nI know, I know. Another game for my App Pick of the Month! I realize not everyone here is a gamer, and I'm sorry for picking yet another one. But we've had so many fun new games coming our way lately, I just can't help myself! ReSort was simply too much fun to pass up. Maybe next month I'll pick something different. No promises, though!\n\nReSort is a puzzle game where you sort different-colored water into separate tubes until each tube contains just one color. Sounds simple enough, right? Well, it starts out that way, but things get trickier as you progress. Before long, you're moving water back and forth, trying to figure out your next move without getting yourself stuck.\n\nWhat I really enjoy is that there's no rush with ReSort. No timers, no move limits, and no pressure. You can take your time and figure things out at your own pace. But don't mistake relaxing for easy! Some puzzles can really get you scratching your head, and finally solving one that's been giving you trouble is incredibly satisfying.\n\nThere's plenty to keep you busy, too. Along with the regular levels, ReSort offers daily puzzles with different difficulty settings and a larger Sunday challenge. You can also earn stars, work your way through different ranks, and unlock additional sounds as you progress.\n\nAccessibility is another reason ReSort stands out. The game was designed with VoiceOver in mind, with announcements for the colors and their positions in each tube. And I have to say, I absolutely love the sounds in this game! From the satisfying sound of pouring water to the little audio cues and gentle music, everything adds to the experience. It's one of those games where the sounds make playing that much more enjoyable. I also love that you can customize them to your liking.\n\nSomething else I really appreciate is the developer's involvement with the AppleVis community. Since introducing ReSort in the AppleVis forum , the developer has been actively listening to feedback and making improvements. Suggestions from community members have already led to different daily puzzle difficulties, iCloud syncing, more sound options, and adjustable tube sizes for low-vision players.\n\nI love seeing developers take our community's suggestions seriously, especially when those suggestions turn into actual features so quickly. It's wonderful to see that kind of engagement.\n\nFor me, ReSort is just plain fun. It's easy to learn, challenging enough to keep me interested, and relaxing enough to enjoy whenever I have a few minutes to spare.\n\nAnd that's where the trouble starts! I'll tell myself I'm only going to play a couple of levels, and before I know it, I've played several more. There's always another puzzle waiting, and I can't seem to resist finding out whether I can solve it.\n\nI also appreciate getting to enjoy this type of game with VoiceOver. Water-sorting games have been around for years, but finding one that's this accessible isn't something I take for granted.\n\nBetween the enjoyable gameplay, wonderful sounds, thoughtful accessibility, and a developer who's genuinely listening to our community, ReSort has earned its place as my October App Pick of the Month.\n\nIf you enjoy puzzle games, or just want something relaxing that gives your brain a little workout, I definitely recommend giving ReSort a try. Just don't blame me if you find yourself playing longer than you planned!\n\nReSort: Water Sort Puzzle App is available on the App Store for iPhone and iPad. The first 10 levels are free, with a one-time purchase to unlock the remaining levels. There are no ads or subscriptions, and all accessibility features are included for free.\n\nHave you tried ReSort yet? Are you finding it as addictive as I am? How far have you made it in the game? I'd love to hear what you think and what other apps or games you've been enjoying this month."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-a72eeba4cf75a579",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2299026/chatgpt-can-work-with-your-icloud-mail-and-calendar-thanks-to-new-plugin-support/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-27T21:13:59.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "ChatGPT can work with your iCloud Mail and Calendar thanks to new plugin support",
+        "summary": "You can use the AI assistant to update calendar events and search your inbox, among other things.",
+        "body": "You can use the AI assistant to update calendar events and search your inbox, among other things.\n\nOpenAI has added support for Apple's email and calendar services to ChatGPT. Thanks to new plugins for iCloud Mail and iCloud Calendar, the AI chatbot can now work with iCloud in the same way that it can with Gmail and Google Calendar.\n\nThe company says once the plugins are enabled — you'll have to log in with an Apple account and create an app-specific password — ChatGPT will work with either service across desktop, the web and iOS, regardless of whether you have a free account or pay for a ChatGPT subscription. If you pay for OpenAI's Pro plan, your Dot , the company's AI agent, can also use either plugin.\n\nMuch requested, and now yours to connect: iCloud Mail and Calendar plugins are available in ChatGPT.\n\nAsk ChatGPT to find that email, catch up on your inbox, check what's next, or update a calendar event. Phew.\n\nAvailable on all ChatGPT plans on web, desktop, and iOS. pic.twitter.com/g68OWoFVg8\n\n— ChatGPT (@ChatGPT) October 27, 2026\n\nYou can use ChatGPT to read and manage iCloud emails or calendar events with just a prompt. These plugins are different from letting ChatGPT interact with Apple's Mail and Calendar apps on macOS directly, though. Both apps can display inboxes and calendars from third-party services like Outlook or Gmail. The iCloud Mail and iCloud Calendar plugins will only give ChatGPT access to the messages and calendar events associated with Apple's services, so they're useless if you don't use iCloud.\n\nThe fact that OpenAI is offering these at all is an interesting expression of the complicated relationship the company has with Apple. ChatGPT was the first AI assistant to be directly integrated with Siri . Apple's decision to work with Google rather than OpenAI to revamp its AI models was the first suggestion that the relationship had soured. Apple's July lawsuit alleging OpenAI employees stole its trade secrets only furthered that impression. And yet, alongside the new M6 iMac and MacBook Pro , Apple announced Creator Studio updates that include a new chatbot experience, partially powered by OpenAI models , in Pages, Numbers and Keynote. Neither company seems willing or able to fully walk away from the other."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-9f0f699a86601a59",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/27/ios-27-2-adds-new-app-icon-for-apple-music-more-design-updates/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-27T20:57:05.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27.2 adds new app icon for Apple Music, more design updates",
+        "summary": "iOS 27.2 launched this week , and the update includes a new app icon for Apple Music alongside other small design changes in the Music app. more…",
+        "body": "iOS 27.2 launched this week , and the update includes a new app icon for Apple Music alongside other small design changes in the Music app.\n\nLast week Apple unveiled a branding refresh for Apple Music that we’d already seen signs of.\n\nFor example, back in September an all-new Apple Music logo debuted for Apple Music Hall. But before long, it started spreading to more places including the streamer’s social media.\n\nAnd now in iOS 27.2, the iPhone has a new app icon for Apple Music too.\n\nAs seen above, the new icon removes Apple Music’s visually distinct red color from its branding. Instead, it’s now a white icon with black music logo by default, and in dark mode it’s black with a white logo.\n\nAlongside this change, the Music app in iOS 27.2 now uses blue in the tab bar for the currently active tab—a stark shift from the previous red branding. Widgets for the Music app similarly use simple black backgrounds now instead of the iconic red.\n\nAdditionally, in the Library tab’s list of different sections like Playlists, Albums, Artists, and Songs, color has been removed in favor of a black-and-white design.\n\nFinally, Apple’s curated playlists and stations throughout the app now use the updated logo with a bolder font and all-lowercase styling.\n\nFor more on Apple Music’s overall rebrand, see our coverage here .\n\nWhat do you think of the Apple Music design updates in iOS 27.2? Let us know in the comments.\n\nApple Music is available for $11.99/month , or you can get it as part of the Apple One bundle ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-51eda93d1a3a4429",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1019921/openai-breakthrough-math-computer-science-physics",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-27T20:48:58.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Researchers are getting tired of OpenAI gatekeeping its breakthroughs",
+        "summary": "On Monday, OpenAI announced impressive breakthroughs in mathematics, computer science, and physics, along with what the company says is an evolving approach to communicating its findings. But despite its apparent course correction, researchers who spoke to The Verge are growing increasingly tired of the company's antics. It has been a turbulent few months between OpenAI […]",
+        "body": "On Monday, OpenAI announced impressive breakthroughs in mathematics, computer science, and physics, along with what the company says is an evolving approach to communicating its findings. But despite its apparent course correction, researchers who spoke to The Verge are growing increasingly tired of the company's antics.\n\nIt has been a turbulent few months between OpenAI and mathematicians, who are still grappling with the hundreds of preprints unceremoniously dumped on them at the start of October. This time, OpenAI says it is working with expert \"shepherds\" to decide how best to share its latest breakthroughs.\n\nAll three results conc …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-4bd78afc450ac8ba",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/27/ios-27-2-new-features-release-date/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-27T20:45:46.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27.2 now available: Here’s everything new for iPhone",
+        "summary": "iOS 27.2 is now available to everyone after six weeks of beta testing. The update was released on Monday , bringing multiple new iPhone features. Here’s everything you need to know. more…",
+        "body": "iOS 27.2 is now available to everyone after six weeks of beta testing. The update was released on Monday , bringing multiple new iPhone features. Here’s everything you need to know.\n\nApple released iOS 27 on September 14, bringing a ton of new iPhone features, including Siri AI. iOS 27.2 entered beta testing just two days later on September 16.\n\nWhat happened to iOS 27.1? iOS 27.1 was exclusive to the iPhone Duo, which was released last week and shipped with iOS 27.1. With iOS 27.2, the software update paths have converged and all iPhones will be on the same page going forward.\n\nSiri AI was the big new feature in iOS 27, and iOS 27.2 expands the feature in multiple ways. First, Siri AI is now available in these five languages:\n\nSecond, iOS 27.2 also adds several new features to Siri AI. From Apple’s release notes:\n\nIn iOS 27, Apple added a new Dual Capture feature for FaceTime that lets you have your front and rear cameras active at the same time. The person on the other end of the call will see you as well as whatever you’re looking at. iOS 27.2 expands this feature to Group FaceTime calls for the first time.\n\nDual Capture requires an iPhone 17 or later, and everyone on the call needs to be running iOS 27.\n\nAlso in iOS 27.2, FaceTime now supports adding a third party sign language interpreter or live captioner to a call.\n\nIn Apple Podcasts, the “Up Next” queue has been refreshed with two new dedicated rows: New Episodes and Continue Playing. The New Episodes list shows the latest episodes from shows you follow, while Continue Playing shows in-progress episodes, organized by most recently played.\n\nAdditionally, episode lists also now use color-matched backgrounds based on the podcast art.\n\nThere are two changes to the TV app included in iOS 27.2. First, the update adds Multiview support to iPhone for the first time. This lets you watch up to four live sports streams simultaneously, including MLS, F1, and MLB.\n\nThe Apple TV app in iOS 27.2 adds support for profiles for the first time. This feature has been available on tvOS for several years, but this is the first time it has come to iPhone.\n\nRead more: iOS 27.2 gives Apple TV a new profiles feature on iPhone\n\nSuggestions in Messages, which feature Apple tested in iOS 27 but removed before the update was released, have returned in iOS 27.2. This feature adds quick shortcut buttons to Messages, making it easy to add things to apps like Calendar and Reminders with a single tap.\n\niOS 27.2 introduces a new brand identity for Apple Music. This includes a new app icon, seen above. There are also various interface tweaks throughout the Music app. For example, the red interface accents are now blue.\n\nThis is part of a larger Apple Music rebrand that the company debuted last week .\n\niOS 27.2 adds two new features for iPhone Duo:\n\niOS 27.2 also includes a ton of security fixes, as Apple outlines on its website . There are security fixes in apps like Mail and Safari, as well as Apple Intelligence, the Neural Engine, and more.\n\nHave you updated to iOS 27.2 yet? What new features stand out most to you? Let us know down in the comments.\n\nFollow Chance : Threads , Bluesky , Instagram , and Mastodon ."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "engadget-881377f36fcbe9c8",
     "type": "news",
     "sourceId": "engadget",
@@ -19,80 +332,6 @@
         "title": "This old Nokia phone got an AI Upgrade it was never designed for",
         "summary": "The GOAT of dumb phones gets a new lease on life.",
         "body": "The GOAT of dumb phones gets a new lease on life.\n\nNearly 20 years ago, Nokia released the Nokia 6300 . Despite arriving the same month Steve Jobs would introduce the iPhone at MacWorld 2007 , the 6300 would go on to become one of Nokia's best-selling phones, thanks to its understated but attractive design, affordable price and easy-to-use software. In 2026, however, the original 6300, not to be confused with the recent 4G rerelease , is a device on borrowed time.\n\nFor one, it's a 2G phone, and finding a carrier that still operates its old 2G network is becoming more difficult with each passing year. Then there's the phone's browser, which Nokia never updated to work with any internet security protocols beyond TLS 1.0. After Apple, Google, Microsoft and Mozilla came together to deprecate the standard in 2020 , less than an estimated 25 percent of all websites support TSL 1.0 connections as of mid last year, meaning the 6300 essentially can't access the modern internet. There's not much that can be done about the former, but one coder has devised a pretty clever solution to get around the 6300's dated browser using the latest chatbots.\n\nIn late September, Turkish entrepreneur Emir Karşıyakalı took to X to show off Claude S40, an app he vibe coded to make his old Nokia 6300 a bit more useable in 2026. In its original form, his app app allowed the 6300 to connect with Claude over a Java and Go backend. Since then, Karşıyakalı has updated the software to make it work with all of the major chatbots, including ChatGPT, Gemini and Grok, and renamed the app Aikon — that's Nokia spelt backwards — to reflect the greater compatibility.\n\nOutside of a phone running either Nokia's S40 or S60 operating systems, you'll need a Go server to hold the API key from Anthropic, Google, OpenAI or SpaceXSI. This part of the equation is essential since it's the server that communicates with Claude, ChatGPT, Gemini or Grok, and truncates their responses into 8kB blocks your old phone can read. It's also worth mentioning, since you're going through each company's API, you'll need to set up token billing.\n\nFor what is ultimately a gimmick, Karşıyakalı's app is quite robust and thoughtful. There's an reading mode, with a dedicated keypad shortcut, to make using a chatbot on the 6300's 240x320 display a bit more manageable. Provided you a memory card, you can also save responses to the 6300 for offline reading. If you want to send photos to your favorite chatbot for analysis, you can do that too. It's even possible to send voice messages up to 30 seconds long, with an OpenAI model handling the speech-to-text conversion. Over on the server side, Aikon will hold messages for up to 30 days, and the app supports English, Spanish, Portuguese, French, German, Russian, Indonesian and Turkish. Karşıyakalı has open sourced the app so others can continue building on the app.\n\nNow, before you dig out your old Nokia phone, just know if you live in the US there's no way you'll get this app running. That's because the nation's last 2G network went offline this summer when T-Mobile shut down its old GSM network in August . If you live outside of North America and want to try Aikon out for yourself, head over to Github and follow the installation instructions."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-2378a91a31318b73",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/27/astropad-workbench-1-4-adds-terminal-access-iphone-duo-support-and-more/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-27T18:29:50.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles",
-      "programas-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Astropad Workbench 1.4 adds terminal access, iPhone Duo support, and more",
-        "summary": "Astropad is out today with Workbench 1.4, the latest update to its remote desktop app for Mac. The release adds a built-in terminal, native iPhone Duo support, and a new way to transfer files between Macs. more…",
-        "body": "Astropad is out today with Workbench 1.4, the latest update to its remote desktop app for Mac. The release adds a built-in terminal, native iPhone Duo support, and a new way to transfer files between Macs.\n\nWorkbench first launched in April with a focus on accessing your Mac from an iPhone or iPad, including checking on AI agents while away from your desk. Version 1.3 arrived in August with faster streaming, a privacy curtain, picture-in-picture support, and tools for keeping unattended Macs accessible.\n\nThe big addition in Workbench 1.4 is the ability to switch between the remote desktop and terminal without reconnecting. A toolbar control lets users move between Screen and Terminal views. On Mac, the terminal opens in a separate window.\n\nThat means you can check logs, edit a script, or restart a process without opening a separate SSH app. Terminal sessions also keep running between connections, so you can start on an iPad and return later from an iPhone or another Mac.\n\nVoice input works with the terminal as well, letting users dictate prompts and commands. For Mac-to-Mac connections, Workbench now supports dragging and dropping files during terminal sessions.\n\nAstropad says the update also runs natively on iPhone Duo, with support for keeping an agent visible in one pane while using the rest of the phone.\n\nWorkbench remains free for 20 minutes of access per day. Unlimited access is currently priced at $14.99/month or $79.99/year. The app requires macOS 15 or later, iOS 26 or later, or iPadOS 26 or later.\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-afe8fea27374bf74",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/27/ios-27-2-has-two-carplay-improvements-heres-whats-new/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-27T18:20:40.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27.2 has two CarPlay improvements, here’s what’s new",
-        "summary": "iOS 27.2 arrived this week with new features for Messages , Apple TV , and more, plus two improvements for CarPlay. Here’s what’s new for CarPlay users. more…",
-        "body": "iOS 27.2 arrived this week with new features for Messages , Apple TV , and more, plus two improvements for CarPlay. Here’s what’s new for CarPlay users.\n\nApple Podcasts in iOS 27.2 adds two new sections to the Home tab: ‘New Episodes’ and ‘Continue Playing.’\n\nEssentially, Apple has rethought how the core ‘Up Next’ queue of its Podcasts app works.\n\nLike you would expect, ‘New Episodes’ contains only the latest episodes from your favorite shows. But after you’ve started an episode, you’ll find it in the ‘Continue Playing’ row just below.\n\nThis overhaul to podcast management makes it easier to find the latest episodes of your shows and also pick up where you previously left off. I’m a big fan of the change.\n\nSiri AI introduces a variety of upgrades in iOS 27.2, including two that carry over to CarPlay as well.\n\nPer Apple’s release notes :\n\nIt can take some adjustment to remember that Siri AI is available in the car just like on iPhone. But CarPlay is an especially useful platform for Apple’s more powerful assistant.\n\nIt’s arguable whether this qualifies as an “improvement,” but it is a change worth mentioning. iOS 27.2 includes a new app icon for Apple Music, plus some minor design tweaks in the app.\n\nThese changes are related to the total rebrand Apple Music unveiled just last week.\n\nFor more new features in CarPlay that recently arrived in iOS 27, see our coverage here .\n\nWhat are your favorite recent changes in CarPlay? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-a396a751869be3ab",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2296036/why-buying-mac-mini-over-macbook-smarter-move/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-27T18:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Why buying a Mac mini over a MacBook might be the smarter move",
-        "summary": "Apple's smallest desktop delivers better performance and value for those willing to leave the laptop behind.",
-        "body": "Apple’s smallest desktop delivers better performance and value for those willing to leave the laptop behind.\n\nLaptops are the first choice for the majority of people looking to buy a new computer, and that holds true when it comes to the Mac lineup. It's no wonder: a MacBook can travel with you wherever you go, and they come fully equipped with a built-in screen, keyboard, trackpad and webcam. There's no need to buy accessories separately. But if you spend most of your time at a desk, shelling out extra for portability might not be worth it.\n\nThe cheapest MacBook available today is the MacBook Neo , which starts at $699 and features entry-level hardware: the iPhone's A18 Pro chip with just 8GB of RAM. That works for many people, but it might not be enough if you want to edit videos or do other more demanding tasks. Then there's the MacBook Air , one of the most popular laptops, which starts at $1,299. Your budget and power needs should make that choice easy, but you might not have thought to look at desktop Macs too.\n\nThe Mac mini is more powerful than a MacBook Neo or Air, plus it costs less. And for some people, it might be the smartest choice.\n\nThe Mac mini is Apple's smallest desktop computer. Unlike the all-in-one iMac , the Mac mini still follows a concept that Steve Jobs used to joke about: BYODKM, or \"bring your own display, keyboard and mouse.\" There is no built-in display, nor are a keyboard and mouse are included in the box. The idea is to buy a small computer and then connect the peripherals you already have at home, helping you save some money.\n\nThe base model of the Mac mini starts at $899 — for that price, you get a Mac with the latest M6 chip and 16GB of RAM. It's more than enough to handle hardware-intensive apps like Final Cut Pro or Xcode, which makes it a good first Mac for those learning to edit video or how to code. But a faster chip isn't the only element that makes the Mac mini better than a MacBook Neo or Air. Unlike those laptops, the Mac mini has a cooling system with a fan. That helps the computer maintain sustained CPU and GPU performance for longer. In comparison, when a fanless MacBook gets hot, the system reduces its performance to prevent it from overheating.\n\nAgain, it all depends on what you plan to do with your computer. For light tasks like browsing the web or editing documents, it doesn't make much of a difference. But for 4K editing, compiling code or even playing some 3D games, having a cooling system makes the experience much better. Plus, the Mac mini offers more ports than any MacBook. It has multiple USB-C Thunderbolt ports plus Ethernet, HDMI and a headphone jack — perfect for a desktop setup.\n\nOf course, there's another side to this. The Mac mini is cheaper than a MacBook Air or an iMac because part of a laptop's cost comes from parts like the display and battery. If you already have a desktop setup at home with your own monitor, keyboard and mouse, great — you can spend the $899 on a Mac mini and take full advantage of it. But if you need to buy new accessories, the cost can quickly add up to nearly the price of a new MacBook Air. So the question is: do you need more performance or portability?\n\nFor those who are constantly on the go, like working from a coffee shop or while traveling, there's no question: you need a MacBook. You won't get the same sustained performance as you would from a Mac mini, but you'll have the freedom to unplug your laptop and use it anywhere. You can also buy an external monitor, keyboard and mouse to use it docked as a \"desktop\" at home. But if portability isn't something you care about, consider buying a Mac mini instead."
       }
     },
     "media": null
@@ -122,30 +361,6 @@
     "media": null
   },
   {
-    "id": "techcrunch-cf456a02e767ac37",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/27/frontier-ai-labs-say-their-models-refuted-the-exponential-time-hypothesis-what-does-that-mean/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-27T17:08:08.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Frontier AI labs say their models refuted the Exponential Time Hypothesis. What does that mean?",
-        "summary": "TechCrunch spoke to the MIT computer scientist charged with explaining OpenAI's latest mind-bending discovery",
-        "body": "OpenAI released solutions to three blockbuster math problems that have long vexed researchers yesterday. One was a surprise rejection of the Exponential Time Hypothesis (ETH), a durable assumption in computer science that plays a large role in how we understand what is difficult to compute.\n\nAs with previous proof-drops from the frontier lab, scientific communities responded with a mixture of thrill and dismay. Anthropic mathematician Levent Alpöge suggested that OpenAI was basing its solutions from pre-existing work, and hours later, Anthropic subsequently released its own refutation of ETH.\n\nHowever, OpenAI’s process is evolving. This time, the lab structured its releases differently for each of the three disciplines involved: Mathematicians got the work dropped on GitHub; the computer scientists formed a working group, asked for the proofs to be shared publicly and OpenAI to fund a conference to discuss them; the physicists formed a working group that will determine how their result will be released.\n\nMIT Professor Ryan Williams is the computer scientist who is organizing his field’s response to the new finding. Williams, whose work focuses on these questions of computational complexity, has criticized OpenAI’s approach in the past, calling its proof dump earlier this October a “DDOS attack on mathematicians.”\n\nHowever, he agreed to collaborate with the frontier labs in order to help shepherd ideas that are vital to the field, he told TechCrunch. The lab asked him to help interpret the solution, along with UC San Diego computer scientists Russell Impagliazzo and Ramamohan Paturi, who first published the ETH in 1999.\n\nTheir first step was to release an open letter calling for feedback from scientists interested in these problems and a discussion of the norms around AI contributions to their work.\n\n“Some parts [of OpenAI’s proof] are, maybe you could say routine, but then yes, there are two or three alien-looking parts, and it’s exactly these parts that that I saw that made me think, wow, this is something that the whole community needs to work on together,” Williams told TechCrunch.\n\nThe ETH is part of a broader class of problems known as P vs NP, which has animated computer science and many other fields for decades. Reductively, researchers are trying to understand if any problem whose solution can be easily verified (NP) can also be easily solved (P).\n\nA simple example is the game Sodoku: Once a solution to a puzzle is in place, it can be quickly verified, but finding the solution is time-consuming. That dynamic is true across a range of important problems, and the insight underpins cryptographic systems: When you have the key to an encoded message, you can reveal it, but actually cracking an effective code takes too long to be useful.\n\nHowever, scientists have yet to prove whether that is always true. “P = NP is saying that, not only can you verify Sudoku solutions when they exist, you can just generate them,” Williams said. “P = NP is asserting that this is true for every single problem you can verify quickly — if you can verify it quickly, you can solve it quickly. So this just seems too good to be true.”\n\nThat’s why most scientists assume that P ≠ NP. ETH provided evidence for that. It basically says that even the fastest computer algorithm needs exponentially more time to find a solution as the number of variables grow in a specific class of tricky logic puzzle.\n\nThe claims from OpenAI and Anthropic is that their models have come up with algorithms that solve those puzzles in “sub-exponential” time, meaning faster than the speeds previously thought possible. If true, they may have proven the EFT to be false — refuted it, in scientific terms — and maybe opened up a path for algorithms that generally perform P = NP.\n\n“Every computer scientist should probably put a little more weight on the plausibility of P = NP, but one’s weight may vary,” Williams said. “I do think that it kind of calls into question a lot of the intuitions that we thought we had about … how tractable [hard NP problems] are. I also think that this is probably not the final answer either. I don’t think that OpenAI’s algorithm could possibly be the best algorithm you can get.”\n\nThe durability of ETH has lead to it being included in many scientific papers over the past decade that will need to be revisited if the AI labs claims that they’ve proven it wrong holds up, Williams said.\n\n“This is partly why I was asking or pushing OpenAI to support a conference on this — it’s going to affect many researchers’ works, and we need to figure out, okay, what happens next besides understanding the algorithms. We need to understand, how should the foundations change compared to what we had before?” he said. Before scientific concerns, there are cybersecurity questions. Williams said that an improved algorithm could imply that cryptographic systems relying on certain key sizes could be considered broken. So one of the first questions he asked OpenAI science lead Dan Roberts “was if they had checked that this affects any crypto systems … is anything insecure now? And apparently, they checked, and they were reasonably confident that this didn’t … imply any breaks.”\n\nThis new AI paradigm of scientific discovery is still a work in progress, but Williams says he is optimistic despite real concerns, particularly about training the next generation of scientists. Being a computer scientist who does high level math has perhaps made the adjustment easier for him than for pure mathematicians.\n\nStill, he says AI is “forcing people to be a little more ambitious about the kind of work that they do, and to think more deeply about, okay, if all the things I used to work on are now low hanging fruit for AI, how can I raise the bar for the kind of scientific questions I want to ask?”"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "the-verge-9615442cc78d2647",
     "type": "news",
     "sourceId": "the-verge",
@@ -165,199 +380,6 @@
         "title": "Anthropic’s elaborate plan to keep Wall Street at bay",
         "summary": "Anthropic wants to have it both ways. With its impending IPO, it wants to tap the vast riches of the public markets and insists it doesn't want to compromise its core mission of developing AI safely and for the benefit of humanity. But greater model capabilities bring greater risks, and shareholders eager for returns may […]",
         "body": "Anthropic wants to have it both ways. With its impending IPO, it wants to tap the vast riches of the public markets and insists it doesn't want to compromise its core mission of developing AI safely and for the benefit of humanity. But greater model capabilities bring greater risks, and shareholders eager for returns may have little patience for costly safety measures that slow products on their way to market.\n\nSam Altman, the CEO of Anthropic's archrival, OpenAI, has cited investor pressures as one reason the company is not pursuing an IPO this year. Anthropic hopes it can resist investor pressures with a mind-boggling governance structure.\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-ace31c8c839ce4cd",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5google.com/2026/10/26/google-photos-collections-redesign/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-27T16:23:35.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "android"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google Photos rolls out customizable redesign of your ‘Collections’ tab",
-        "summary": "Following the floating navigation bar in July, Google Photos is rolling out a big redesign that lets you customize the Collections tab on Android and iOS. more…",
-        "body": "Following the floating navigation bar in July, Google Photos is rolling out a big redesign that lets you customize the Collections tab on Android and iOS.\n\nThe previous design started with a 2×2 grid. Favorites and Trash were at the top, while the other two shortcuts changed based on usage. Then there were large cards for Albums, On this device, People & pets, Wardrobe, Documents, Places, Stickers, and Moments. On Android, this was followed by a list: Screenshots, Videos, Recently Added, Archive, and Locked.\n\nOld\n\nThis redesign of Collections is focused on customization. The first section is called “Pinned” and lets you choose which cards appear. By default, the carousel shows Favorites, Screenshots, and Trash. You also have the option to remove this section entirely.\n\nThat’s followed by carousels for On this device, Albums, People & pets, Wardrobe, Places, and Documents. “View all” at the top-right corner lets you jump straight to the full grid or list view. Other options let you hide each section and rearrange the order in which they appear.\n\nNew\n\nThe “Other Collections” grid rounds out this page: Favorites, Screenshots, Moments, Videos, Recently Added, Stickers, Creations, Archive, Locked, and Trash. The “Reorder” button is found at the very bottom.\n\nThis redesign is now widely rolling out with Google Photos 7.97 (Android) and 7.98 (iOS). Instead of the usual Force stop on Android, we’ve curiously been able to get this server-side update by restarting our devices and then opening the Photos app."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-41d82910ed362c32",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2298428/apple-creator-studio-update-adds-motionvfx-to-final-cut-and-ai-to-everywhere/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-27T16:21:44.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple Creator Studio update adds MotionVFX to Final Cut, and AI to everywhere",
-        "summary": "Final Cut clips can finally be unlocked from the primary timeline - hallelujah.",
-        "body": "Final Cut clips can finally be unlocked from the primary timeline — hallelujah.\n\nApple has updated its Adobe-rivaling Apple Creator Studio software suite just in time for the arrival of the new M6 iMac and 14-inch MacBook Pro .\n\nOne of the biggest additions is built-in MotionVFX tools for the Final Cut Pro app, following Apple's acquisition of the former earlier this year. In a press release, Apple said the integration of MotionVFX provides editors with \"rapid access to extensive professional video effects and content.\" These include graphics, themes, titles and transitions, as well as specialized rotoscoping and color grading tools. The Content Hub that lives within Final Cut Pro also contains curated stock videos, photos and backgrounds that can be used in projects.\n\nApple says it has also improved workflows that spread across multiple apps in the suite, so you can now take any image from your timeline in Final Cut Pro and open it in its advanced image-editing software, Pixelmator Pro, for tweaks. Any changes are applied directly to the original project without needing to reimport the edited version. Another useful addition is the ability to disconnect clips from the primary timeline in Final Cut Pro and place them anywhere (finally).\n\nInevitably, AI's presence can be felt across all of Apple's apps, with text-to-image generation and editing tools added to both Final Cut Pro and Pixelmator Pro. In the latter, you can draw a circle over an area of an image and write a prompt for what edits you want applied. In Logic Pro, Apple has teamed up with OpenAI on a new assistant that can edit existing projects, start new songs and generate vocal tracks from text prompts. The same chatbot can be summoned in Keynote, Pages and Numbers for various app-specific tasks like animating slides or organizing data.\n\nThere are plenty of other smaller quality-of-life additions for creators, like additional keyframe easing options in Final Cut Pro and the ability to isolate or swap out drum parts with the Stem Splitter in Logic Pro.\n\nTo use the new in-beta assistant in Logic Pro for Mac you'll need an Apple Intelligence-supported Mac running macOS 27 Golden Gate or later. Apple's AI tools also need to be built into your iPhone, iPad or Mac running the latest software version to make use of the chatbot in Keynote, Pages and Numbers. Some Final Cut Pro features require Apple silicon to work, and any Mac running the Apple Creator Studio version of the program needs to be running on macOS 26.6 or later.\n\nThe updates will be available for free in November for existing subscribers. Apple Creator Studio costs $13 per month or $129 per year, and any new subscriber can try it out first with a one-month free trial. You also get three free months included with a new Max or certain iPads. Final Cut Pro ($300), Logic Pro ($200) and Pixelmator Pro ($50) can also be purchased individually."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-97d9c78a28df3204",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/cars/2026/10/ford-builds-bidrectional-charging-into-its-30k-electric-truck/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-27T16:17:58.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Ford simplifies using your EV as a home battery with the $30K Fathom",
-        "summary": "The Fathom pickup won’t need a wall-mounted inverter to output 10 kW to your house.",
-        "body": "This morning, Ford revealed that buyers of the forthcoming Fathom —the company's sub-$30,000 electric pickup truck due next year —will get more than just a truck. Until now, vehicle-to-home technology— like the setup Ford developed for the now-discontinued F-150 Lightning—takes DC power from the electric vehicle and runs it through an inverter built into the wallbox to turn it into AC the house can use. But with the Fathom, that inverter is built into the truck from the start. So every Fathom will be able to act as a backup battery for your home.\n\nIt’s typical: You wait a decade for a cheap electric truck, and then two come along almost at once. And they’re two radically different products from two radically different automakers that I think will reveal a few preferences from the EV-buying public. One is the Blank Slate, from a brand new startup offering a bare-bones two-door that capitalizes on features the Internet says it wants, like no onboard modem, no touchscreens, and no infotainment system.\n\nThe other is the result of one of Detroit’s big three taking a long, hard look at Chinese EVs and asking itself, “How do we make a car that cheap?” Although the Ford Fathom will cost $5,000 more than a Slate, that money does buy an extra pair of doors, modern conveniences like an infotainment system, CarPlay, electric windows, and a vast dealership network to service the car. That may be helpful given how many recalls Ford issues each year.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-67cc5c54e390635a",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1019551/firefox-smart-window-ai-fill-forms",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-27T16:14:18.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Firefox’s Smart Window adds AI form filling and webpage monitoring",
-        "summary": "Mozilla is updating Smart Window - Firefox's AI-powered browsing experience - with a new feature that can help you fill out online forms based on your open tabs. As an example, Mozilla says Smart Window can pull information from your online portfolio or LinkedIn page to paste your work history into a job application. You […]",
-        "body": "Mozilla is updating Smart Window - Firefox's AI-powered browsing experience - with a new feature that can help you fill out online forms based on your open tabs. As an example, Mozilla says Smart Window can pull information from your online portfolio or LinkedIn page to paste your work history into a job application.\n\nYou can try out this feature by clicking into a form with at least four text fields. From there, you'll see an option to \"Fill from sources,\" which will show all of the tabs Firefox will draw from. You can then select or deselect tabs that you want Firefox to use, and the browser will generate suggestions based on the informati …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-ed7dde1bd130cfb1",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/google/2026/10/deepminds-genie-4-world-model-adds-audio-and-more-realistic-people-to-simulations/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-27T16:00:22.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "DeepMind unveils Genie 4 world model promising more realistic physics and humans",
-        "summary": "Genie 4 will roll out to developers and Google AI Ultra subscribers soon.",
-        "body": "Last year, Google DeepMind sent gaming stocks tumbling with the reveal of its Genie 3 world model . Since then, world models have become a major focus of AI labs around the world, but Google isn't resting on its laurels. Researchers have been hard at work on an updated model that improves on Genie 3 in almost every way. And if you pay Google enough money, you might actually get to use Genie 4 before too long.\n\nIt's easy to look at the output of Genie 4 and see a video game, which is why Genie 3 caused so much consternation in the gaming industry. DeepMind doesn't think about it that way, though. According to Google , world models are a key element in the march toward artificial general intelligence (AGI). A world model creates a virtual world, but it doesn't require pre-rendering environments or programming interactive elements. You simply tell the model what you want, and it generates the experience frame by frame in real time as you explore it.\n\nDeepMind says this technology could create infinite training environments for physical robots or unlock new avenues of rapid prototyping for creative fields. Of course, that requires the model to accurately simulate what you want. Genie 4 has several improvements that make its simulations more useful, and that's thanks in part to Google's updated Gemini models.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-57ee333e00675929",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/27/meta-ai-director-rohit-patel-leaves-to-take-on-microsoft-office-and-google-workspace/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-27T14:59:09.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta AI director Rohit Patel leaves to take on Microsoft Office and Google Workspace",
-        "summary": "Rohit Patel is departing Meta after eight years working on AI evaluations and reinforcement learning, TechCrunch has exclusively learned. His startup, Ndoc, aims to take on Microsoft Office Suite.",
-        "body": "After eight years developing AI for Meta, Rohit Patel is departing the company, TechCrunch has exclusively learned. The former director at Meta Superintelligence Labs has launched Ndoc , a startup he’s pitching as an AI-native replacement for Microsoft Office suite or Google Workspace.\n\nPatel is the latest in a handful of high-profile departures from Meta following the exits of Chief Global Affairs Officer Joel Kaplan , AI researcher Andrew Tulloch , and Head of Product for AI-for-Work Emily Dalton Smith .\n\nPatel designed Ndoc to be more than just another AI tool layered onto an existing workflow. The goal is to replace the fragmented way people work across tools like Excel, Word, PowerPoint, Tableau, Replit, and “ChatGPT copy-paste” with one unified workspace that all colleagues can access, even if they’re not signed up for Ndoc.\n\nNdoc brings three components together in one layout. The Stage tab is where presentations of key findings live, like slide decks, dashboards, simulations, or mini apps. The Narrative tab features analyses, numbered citations, generated figures, and generally the “why” behind the numbers. The Model tab is where underlying datasets and Python scripts are housed.\n\nThe design reflects Patel’s background. During his tenure at Meta, Patel focused on reinforcement learning — a type of machine learning in which AI agents learn to make decisions through trial and error and maximize rewards — and evaluating whether AI output is trustworthy. Patel believes that if AI is going to build the spreadsheets and slide decks that companies use to make decisions, someone should be able to check its work. For instance, users can find the Python scripts used to create the documents.\n\n“Even if you don’t know any Python, you can ask [the AI chat] to explain, ‘Hey, what does this script do? Which line has my formula?’ And you can verify that formula,” Patel said. “There’s nothing hidden behind the curtain here.”\n\nIn practice, users can upload a dataset and ask Ndoc to perform an analysis and write a narrative about the findings. They can also add document-specific context, including audience, tone, and memory. “It maintains a memory across your person, that particular document, your team, and your company,” Patel said.\n\nPatel also says Ndoc is built and fine-tuned using a mixture of open source models. Because the platform was developed from scratch, he says it costs considerably less to run than alternatives built on frontier AI models.\n\n“I thought that’s what people would be excited about, but people don’t care about that,” he said, referring to his early trial users. “What people are excited about is that they love seeing all their end-to-end in one place.”\n\nPatel’s larger ambition is to reinvent the file itself. He says documents can be exported as a single “.ndoc.html” file that can be opened in any browser, a format he plans to open-source so other developers can build apps that work with it without being locked into Ndoc the way so many have been locked into Microsoft or Google for years.\n\nHis desire to open-source this project was partly why he left Meta and decided to go it alone. At a big company like Meta, getting everyone to agree on an open source format would undoubtedly require the input of “hundreds of people and opinions on how the format should look.”\n\nPatel wanted to move quickly. “Humans can only move at human pace, whereas…I can move at the pace of what AI can do.”\n\nTrying to become the platform where enterprise work happens is a huge bet for a founder with a team of three and no funding, especially when other AI labs are trying to own the same space.\n\nOpenAI, Anthropic , Meta , SpaceXAI , and Google have all come out with enterprise AI tools that allow users to connect to Google Workspace, Microsoft 365, and other workplace apps so their AI models can work directly in those tools. And last month, OpenAI launched Space, a shared workspace inside ChatGPT that’s a more direct competitor to those established tools.\n\nPatel acknowledges that Space could be a threat, but says the labs largely have the wrong idea.\n\n“Companies are basically attaching AI to spreadsheets and it fills your cells for you,” he said. “It just sort of kills my soul. This is like if you just figured out electricity, and then you decided the best use case is to put lights on my bulls that till my soil. No. Get a tractor.”\n\nThere’s a reason the AI labs have tried to bring their models to where people are already working, though. It’s hard to change habits and replace entire workflows. Patel says he understands that, which is why he built connectors so customers can import existing data from the tools they already use.\n\n“My bar was that I’m not going to release anything I don’t love using,” he said. “I have very optimized AI workflows for everything I do. If I start using this tool, and I keep going back to my workflows, I haven’t built a good enough tool…I have a graveyard of tools that did not meet that bar.”\n\nPatel has a similar bar for gaining customer traction before he tries to raise funds. “I didn’t want to take money until I had some proof that people love the product,” he said.\n\nAs of Tuesday, Ndoc is conducting an enterprise pilot and opening an alpha version to a limited number of customers who join the wait list. It’s free to sign up, but customers will pay for usage and tokens. He hopes to release a beta version in the coming weeks, with a full launch planned for next year.\n\nFor Patel, moving as fast as possible is more important than having the perfect product from the get-go.\n\n“Execution is extremely cheap…so go execute on a suboptimal plan and worry about it later,” he said. “By the time you make the best plan, the execution will be done by somebody else.”"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-e58af7c7ae998aab",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/27/ford-fathom-will-be-the-cheapest-american-ev-capable-of-powering-a-house/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-27T14:51:33.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Ford Fathom will be the cheapest American EV capable of powering a house",
-        "summary": "Ford is rolling out two new chargers capable of powering a home or the grid — so-called V2X capability.",
-        "body": "Ford announced two new EV chargers today that will allow its forthcoming Fathom pickup truck to serve as a battery capable of delivering power to the home or grid.\n\nThe new chargers promise to be about half the cost of Ford’s existing equivalent products , which could make the technology available to more households. Ford said the Fathom itself will start at $28,350.\n\nThe Fathom will be capable of delivering “over 10 kW” to a home, Ford said. That would allow the electric vehicle to substitute for a small standby generator. For most U.S. homes, it wouldn’t be enough to power everything, but it could keep a refrigerator and air conditioner operational for about half a day.\n\nSuch capability has been touted as an advantage EVs have over fossil fuel vehicles, but not many EVs come properly equipped, and the chargers required to make use of vehicle-to-everything (V2X) services tend to be costly.\n\nFord’s two devices offer similar but differing capabilities.\n\nThe Home Power Station device can help customers shave their utility bill by charging the Fathom when power prices are low and sending electricity back to the home when prices are high. The automaker says it will cost around $650, about 50% less than its first-generation bidirectional charger.\n\nThe other option, Home Backup Power, is a package that bundles the Home Power Station with a second device, the Home Backup Panel, to allow the Fathom to also power parts or all of a home when the power goes out. Ford says the package will cost around $2,100, about 60% less than its first-generation product.\n\nNone of those prices include installation, which for existing V2X chargers can run up to $10,000, depending on how much electrical work needs to be done to prepare the home. Ford did not announce any partnerships with installers, though a spokesperson told TechCrunch that Ford would release more details at a later date.\n\nWhich loads the Fathom can power will vary by household and the specifics of each installation. Things like air conditioners and refrigerators, for example, typically require a large surge of power to start up, after which point their load drops. So-called soft-start devices can help mitigate the surge, though they add cost to the installation.\n\nBoth chargers will allow Fathom customers to participate in virtual power plants (VPPs), which use software to control a fleet of distributed energy storage devices, such as EVs.\n\nAs strain on the grid grows due to AI data centers, utilities have been exploring whether VPPs can help alleviate congestion at the edges.\n\nFathom owners who enroll and keep their truck plugged in can sell electricity back to the grid, often at a premium. Ford did not say how much Fathom owners can stand to make, but the payouts can be upwards of $1,000 per year, depending on the grid’s needs and the level of participation.\n\nAutomakers, including Ford , have been diving deep into energy storage as demand for such services surges. The Fathom-powered VPP is Ford’s latest foray into the market, but it’s unlikely to be its last."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-d9c88df719bf53a1",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/gadgets/2026/10/apple-iphone-duo-review-two-screens-two-experiences-two-thousand-dollars/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-27T14:20:26.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple iPhone Duo review: Two screens, two experiences, two thousand dollars",
-        "summary": "I respect Apple's first crack at a foldable phone, but I'm not sure I like it.",
-        "body": "I understand the appeal of foldable phones—they let manufacturers keep expanding screen sizes while still producing devices that can reasonably fit in a pocket. In practice, though, every foldable Android phone I've seen in public has had a ridiculously visible seam between the two halves of the screen, often with what looks like delamination from the underlying surface, giving the display an ugly, bubbly appearance.\n\nBack when Android phones began shipping with bigger and bigger screens and the iPhone was stuck at a miserly four inches, I was jealous. But I've never looked at anyone using a chunky, fragile-looking foldable phone in public and pined for Apple's take on the idea.\n\nNevertheless, that take has arrived, in the form of the iPhone Duo . This $1,999-and-up foldable is the biggest change to the iPhone in years, with both hardware and software updates that dramatically change how you interact with the device.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -1966,32 +1988,6 @@
         "title": "Accessimind Screen Reader",
         "summary": "Accessimind Reader is a screen reader application developed to enable visually impaired and partially sighted users to use their Android phones more clearly, quickly, and…",
         "body": "Published 19 September 2026 by Sarper Arıkan\n\nAccessimind Reader is a screen reader application developed to enable visually impaired and partially sighted users to use their Android phones more clearly, quickly, and independently.\n\nAccessimind Reader uses the Android AccessibilityService API to provide screen reading functions. AccessibilityService is used to provide audio versions of on-screen content, detect user interface elements, navigate with gestures, provide audio feedback on focused items, and deliver a screen reader experience. This service is necessary for the screen reading feature, which is the core function of the application, to work.\n\nAccessimind Reader does not use AccessibilityService for user tracking, displaying advertisements, remotely recording calls, bypassing Android security mechanisms, or modifying user settings without permission.\n\nThe application presents audio feedback, gesture navigation, keyboard shortcuts, clipboard operations, reading preferences, and tools for the focused item in a practical accessibility flow. The context menu provides quick access to frequently used areas such as reading controls, clipboard operations, notification access, focused item operations, and Accessimind settings.\n\nKey Features:\n\nAccessimind Reader is designed for users who need voice output and fast navigation. It focuses on providing predictable controls, understandable labels, and quick access to frequently used screen reader operations.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nAccessimind is a screen reader. Users can test it to see how well its features work for them and fit their needs.\n\nLast Tested App version and Android version:\n\nAndroid 16\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-blog-955a031c608e88a1",
-    "type": "news",
-    "sourceId": "applevis-blog",
-    "sourceName": "AppleVis Blog",
-    "sourceUrl": "https://www.applevis.com/blog",
-    "originalUrl": "https://www.applevis.com/blog/iphone-18-pro-hands-initial-impressions",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-18T02:13:03.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-accesibilidad",
-      "programas-accesibles",
-      "sordoceguera"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iPhone 18 Pro: Hands-On and Initial Impressions",
-        "summary": "iPhone 18 Pro and iPhone 18 Pro Max will be available to customers on Friday, September 18, 2026. Ahead of the launch, Apple sent me an iPhone 18 Pro for review. While a full review will come once I’ve had the opportunity to live with iPhone 18 Pro for a while, I do have some initial impressions that I wanted to share. First, and perhaps most noticeably, iPhone 18 Pro has what I would describe as a really big sound for its size. When compared side-by-side to iPhone 17 Pro Max—a device much larger and, presumably, with a bigger bottom speaker—iPhone 18 Pro sounds warmer, fuller, and lacks the treble over-emphasis I observed on the iPhone 17 Pro Max. If I had to describe the sound of iPhone 18 Pro, it would be ‘more complete’. And I do not think it is just software-side equalization: even at a relatively low 25% volume, iPhone 18 Pro has more bass and overall ‘presence’. My best guess is that Apple has made some hardware changes to the speaker on iPhone 18 Pro, and hopefully the iPhone 18 Pro Max too. One last note on sound for now: the earpiece speaker sounds warmer and fuller, as well. Beyond the speaker, iPhone 18 Pro contains some useful under-the-hood improvements, one of which I was not expecting to notice. Compared to last year’s models, iPhone 18 Pro has a larger vaper chamber inside the device for added cooling capacity. This is not just something you hear about at a Keynote and that's the end of it: picking up iPhone 18 Pro on multiple occasions, I noticed how literally 'cool' it felt to the touch. And even after multiple long phone calls on two different occasions, iPhone 18 Pro did not feel warm the way my iPhone 17 Pro Max does under similar circumstances. Cellular performance on iPhone 18 Pro's Apple-designed C2 Modem seems very good so far. On T-Mobile in Chicago, I got speeds right around a gigabyte down while indoors and a grand total of 1,109 Mbps down / 236 Mbps up when outdoors. This is not unheard-of for my area, but it is also not the norm, either. I will continue to test this throughout the review period. In terms of performance from the A20 Pro processor, VoiceOver (the built-in screen reader for blind, DeafBlind, and low vision people) is as fast and responsive as one could possibly want it to be. The moment I put my finger on the screen, VoiceOver is off and talking. That said, VoiceOver in iOS 27 already runs exceptionally well on the A19 series of chips from last year’s devices, and there’s only so much “can this be any more responsive?” before you hit an inevitable ceiling. Is VoiceOver ‘more’ responsive on the A20 Pro processor in iPhone 18 Pro than last year’s A19 Pro? Yes, but not by much—and again, this is only because VoiceOver already runs so well on last year’s A19-equipped devices to begin with. And that’s about all I can confidently speak to right now. Battery life seems good so far, though of course it’s day one and any serious testing will need to wait until after the various background tasks finish in the next couple days. Performance is good. Sound is very good. Call quality and cellular performance also seem good. I am excited for the coming weeks. Watch this space.",
-        "body": "iPhone 18 Pro and iPhone 18 Pro Max will be available to customers on Friday, September 18, 2026. Ahead of the launch, Apple sent me an iPhone 18 Pro for review. While a full review will come once I’ve had the opportunity to live with iPhone 18 Pro for a while, I do have some initial impressions that I wanted to share.\n\nFirst, and perhaps most noticeably, iPhone 18 Pro has what I would describe as a really big sound for its size. When compared side-by-side to iPhone 17 Pro Max—a device much larger and, presumably, with a bigger bottom speaker—iPhone 18 Pro sounds warmer, fuller, and lacks the treble over-emphasis I observed on the iPhone 17 Pro Max. If I had to describe the sound of iPhone 18 Pro, it would be ‘more complete’.\n\nAnd I do not think it is just software-side equalization: even at a relatively low 25% volume, iPhone 18 Pro has more bass and overall ‘presence’. My best guess is that Apple has made some hardware changes to the speaker on iPhone 18 Pro, and hopefully the iPhone 18 Pro Max too. One last note on sound for now: the earpiece speaker sounds warmer and fuller, as well.\n\nBeyond the speaker, iPhone 18 Pro contains some useful under-the-hood improvements, one of which I was not expecting to notice. Compared to last year’s models, iPhone 18 Pro has a larger vaper chamber inside the device for added cooling capacity. This is not just something you hear about at a Keynote and that's the end of it: picking up iPhone 18 Pro on multiple occasions, I noticed how literally 'cool' it felt to the touch. And even after multiple long phone calls on two different occasions, iPhone 18 Pro did not feel warm the way my iPhone 17 Pro Max does under similar circumstances.\n\nCellular performance on iPhone 18 Pro's Apple-designed C2 Modem seems very good so far. On T-Mobile in Chicago, I got speeds right around a gigabyte down while indoors and a grand total of 1,109 Mbps down / 236 Mbps up when outdoors. This is not unheard-of for my area, but it is also not the norm, either. I will continue to test this throughout the review period.\n\nIn terms of performance from the A20 Pro processor, VoiceOver (the built-in screen reader for blind, DeafBlind, and low vision people) is as fast and responsive as one could possibly want it to be. The moment I put my finger on the screen, VoiceOver is off and talking. That said, VoiceOver in iOS 27 already runs exceptionally well on the A19 series of chips from last year’s devices, and there’s only so much “can this be any more responsive?” before you hit an inevitable ceiling. Is VoiceOver ‘more’ responsive on the A20 Pro processor in iPhone 18 Pro than last year’s A19 Pro? Yes, but not by much—and again, this is only because VoiceOver already runs so well on last year’s A19-equipped devices to begin with.\n\nAnd that’s about all I can confidently speak to right now. Battery life seems good so far, though of course it’s day one and any serious testing will need to wait until after the various background tasks finish in the next couple days. Performance is good. Sound is very good. Call quality and cellular performance also seem good. I am excited for the coming weeks. Watch this space."
       }
     },
     "media": null

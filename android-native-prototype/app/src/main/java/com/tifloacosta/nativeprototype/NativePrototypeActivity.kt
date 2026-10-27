@@ -84,6 +84,7 @@ class NativePrototypeActivity : ComponentActivity() {
     val youTubeAccount by lazy { NativeYouTubeAccount(applicationContext) }
     private var oauthCallback by mutableStateOf<Uri?>(null)
     private var requestedReaderBookId by mutableStateOf<String?>(null)
+    private var requestedSection by mutableStateOf<String?>(null)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,6 +92,7 @@ class NativePrototypeActivity : ComponentActivity() {
         requestedReaderBookId = intent?.getStringExtra("tiflolector-open-book")
             ?.takeIf { it.isNotBlank() }
         if (savedInstanceState == null) acceptSharedFiles(intent)
+        requestedSection = intent?.getStringExtra("tifloacosta-open-section")
         setContent {
             MaterialTheme(colorScheme = if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme()) {
                 PrototypeHome(
@@ -99,6 +101,8 @@ class NativePrototypeActivity : ComponentActivity() {
                     onCallbackHandled = { oauthCallback = null },
                     requestedReaderBookId = requestedReaderBookId,
                     onReaderRequestHandled = { requestedReaderBookId = null },
+                    requestedSection = requestedSection,
+                    onRequestedSectionHandled = { requestedSection = null },
                     sharedFiles = pendingSharedFiles,
                     onSharedFilesHandled = { pendingSharedFiles = null },
                     onSignIn = {
@@ -114,6 +118,7 @@ class NativePrototypeActivity : ComponentActivity() {
         super.onNewIntent(intent)
         setIntent(intent)
         acceptSharedFiles(intent)
+        requestedSection = intent.getStringExtra("tifloacosta-open-section")
         if (intent.action == Intent.ACTION_VIEW) oauthCallback = intent.data
         intent.getStringExtra("tiflolector-open-book")
             ?.takeIf { it.isNotBlank() }?.let { requestedReaderBookId = it }
@@ -175,6 +180,8 @@ private fun PrototypeHome(
     onCallbackHandled: () -> Unit,
     requestedReaderBookId: String?,
     onReaderRequestHandled: () -> Unit,
+    requestedSection: String?,
+    onRequestedSectionHandled: () -> Unit,
     sharedFiles: SharedReaderFiles?,
     onSharedFilesHandled: () -> Unit,
     onSignIn: () -> Unit
@@ -197,6 +204,13 @@ private fun PrototypeHome(
     var section by rememberSaveable { mutableIntStateOf(PrototypeNavigation.HOME) }
     LaunchedEffect(requestedReaderBookId) {
         if (requestedReaderBookId != null) section = PrototypeNavigation.READER
+    }
+    LaunchedEffect(requestedSection) {
+        when (requestedSection) {
+            "reader" -> section = PrototypeNavigation.READER
+            "videos" -> section = PrototypeNavigation.VIDEOS
+        }
+        if (requestedSection != null) onRequestedSectionHandled()
     }
     LaunchedEffect(sharedFiles?.serial) {
         if (sharedFiles != null) section = PrototypeNavigation.READER

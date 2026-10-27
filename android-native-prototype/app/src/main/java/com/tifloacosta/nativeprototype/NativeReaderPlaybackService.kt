@@ -60,9 +60,24 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         const val ACTION_SPEED = "reader.SPEED"
         const val ACTION_SLEEP = "reader.SLEEP"
         const val ACTION_BOOKMARK = "reader.BOOKMARK"
+        const val ACTION_SEGMENT = "reader.SEGMENT"
+        const val ACTION_UNIT = "reader.UNIT"
+        const val EXTRA_SPEED = "speedPercent"
+        const val EXTRA_SLEEP = "sleepMinutes"
         const val EXTRA_BOOK = "bookId"
         const val EXTRA_VALUE = "value"
         val snapshot = MutableStateFlow(NativePlaybackSnapshot())
+
+        fun start(context: Context, bookId: String, audio: Boolean, speedPercent: Int = 100,
+            sleepMinutes: Int = 0) {
+            ContextCompat.startForegroundService(context,
+                Intent(context, NativeReaderPlaybackService::class.java).apply {
+                    action = if (audio) ACTION_START_AUDIO else ACTION_START_TEXT
+                    putExtra(EXTRA_BOOK, bookId)
+                    putExtra(EXTRA_SPEED, speedPercent)
+                    putExtra(EXTRA_SLEEP, sleepMinutes)
+                })
+        }
 
         fun send(context: Context, action: String, bookId: String = "", value: Int = 0) {
             val command = Intent(context, NativeReaderPlaybackService::class.java).apply {
@@ -241,6 +256,15 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                 // Begin the foreground service immediately, before large book IO.
                 showNotification(startForegroundNow = true)
                 openBook(id, if (intent.action == ACTION_START_AUDIO) "audio" else "text")
+                val requestedSpeed = intent.getIntExtra(EXTRA_SPEED, 0)
+                if (requestedSpeed != 0) {
+                    speed = (requestedSpeed / 100f).coerceIn(.6f, 2f)
+                    try { player?.playbackParams = player!!.playbackParams.setSpeed(speed) }
+                    catch (_: Exception) {}
+                }
+                remainingSleepMs = intent.getIntExtra(EXTRA_SLEEP, 0).coerceIn(0, 120) * 60_000L
+                lastTick = android.os.SystemClock.elapsedRealtime()
+                publish()
             }
             ACTION_PLAY -> playReading()
             ACTION_PAUSE -> pauseReading()
@@ -266,6 +290,17 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                 publish()
             }
             ACTION_BOOKMARK -> bookmark()
+            ACTION_SEGMENT -> if (kind == "audio") openSegment(
+                intent.getIntExtra(EXTRA_VALUE, segmentIndex).coerceIn(
+                    0, segments.lastIndex.coerceAtLeast(0)
+                )
+            )
+            ACTION_UNIT -> if (kind == "text") {
+                textUnit = intent.getIntExtra(EXTRA_VALUE, textUnit).coerceIn(0, 2)
+                units = ReaderUnits.split(text, textUnit)
+                if (playing) speakCurrent()
+                persist()
+            }
         }
         return START_NOT_STICKY
     }
@@ -414,6 +449,11 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         persist()
         publish()
         stopForegroundIfIdle()
+        if (focused) {
+            focusRequest?.let { manager?.abandonAudioFocusRequest(it) }
+            focused = false
+            focusRequest = null
+        }
     }
 
     private fun stopReading() {

@@ -13,8 +13,8 @@ android {
         applicationId = "com.tifloacosta.nativeprototype"
         minSdk = 26
         targetSdk = 35
-        versionCode = 14
-        versionName = "0.14-bloque3"
+        versionCode = 15
+        versionName = "0.15-bloque4"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -49,6 +49,9 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.12.1")
     implementation("com.tom-roush:pdfbox-android:2.0.27.0")
     implementation("org.jsoup:jsoup:1.18.3")
+    implementation("androidx.core:core:1.16.0")
+    implementation("com.google.mlkit:translate:17.0.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.10.2")
     // Legacy OLE2 Office: HSSF (.xls) + HWPF (.doc) + HSLF (.ppt/.pps).
     implementation("org.apache.poi:poi:5.2.5")
     implementation("org.apache.poi:poi-scratchpad:5.2.5")

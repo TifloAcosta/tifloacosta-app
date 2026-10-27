@@ -349,7 +349,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
             }
         } else {
             text = store.read(found)
-            textUnit = prefs.getInt("unit", 1).coerceIn(0, 2)
+            textUnit = prefs.getInt("unit." + id, prefs.getInt("unit", 1)).coerceIn(0, 2)
             units = ReaderUnits.split(text, textUnit)
             textOffset = found.offset.coerceIn(0, text.length)
             speed = prefs.getFloat("speed." + id, prefs.getFloat("rate", 1f))

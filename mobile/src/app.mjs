@@ -43,7 +43,7 @@ import { renderBook } from './screens/book.mjs';
 import { renderPodcast } from './screens/podcast.mjs';
 import { renderContact } from './screens/contact.mjs';
 import { renderPrivacy } from './screens/privacy.mjs';
-import { renderSettings } from './screens/settings.mjs';
+import { renderSettings, NativeFeatures } from './screens/settings.mjs';
 import { renderShare } from './screens/share.mjs';
 import { renderReader } from './screens/reader.mjs';
 import { createAccessibleVideoPlayer, createSharedVideoItem } from './screens/video-player.mjs';
@@ -289,7 +289,19 @@ async function finishSharedFlow() {
   if (Array.isArray(normalRouterSnapshot) && normalRouterSnapshot.length) {
     router.restore(normalRouterSnapshot, { renderCurrent: true, focus: false });
   } else {
-    router.start('home');
+    async function restoreExistingReaderNavigation() {
+  if (shareMode) return;
+  try {
+    const request = await NativeFeatures.consumeExistingReaderNavigation();
+    if (request?.openExistingReader) router.navigate('reading-library');
+  } catch {
+    // Web preview and earlier builds do not include this native bridge.
+  }
+}
+
+router.start('home');
+void restoreExistingReaderNavigation();
+onAppResume(() => { void restoreExistingReaderNavigation(); });
   }
   normalRouterSnapshot = null;
   await nativeActions.finishSharedFlow();

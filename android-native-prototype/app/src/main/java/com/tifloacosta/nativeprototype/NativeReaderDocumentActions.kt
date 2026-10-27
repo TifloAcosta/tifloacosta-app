@@ -118,9 +118,13 @@ fun NativeReaderDocumentActions(
 
     fun shareText(text: String) {
         if (text.isBlank()) { alert("No hay texto para compartir."); return }
+        if (text.length > 80000) {
+            alert("El texto es demasiado extenso para compartirlo directamente. Exporta un TXT.")
+            return
+        }
         val intent = Intent(Intent.ACTION_SEND).apply {
             type = "text/plain"
-            putExtra(Intent.EXTRA_TEXT, text.take(80000))
+            putExtra(Intent.EXTRA_TEXT, text)
             putExtra(Intent.EXTRA_SUBJECT, book.title)
         }
         try {
@@ -186,7 +190,10 @@ fun NativeReaderDocumentActions(
             Text(if (english) "Share original file" else "Compartir archivo original")
         }
         Button(onClick = {
-            error = ""; exportOriginal.launch(labelFile(book.format))
+            error = ""
+            val suffix = store.originalFile(book)?.extension?.ifBlank { book.format }
+                ?: book.format
+            exportOriginal.launch(labelFile(suffix))
         }, modifier = Modifier.fillMaxWidth()) {
             Text(if (english) "Save original file to…" else "Guardar original en…")
         }

@@ -30,7 +30,8 @@ object NativeReaderBookFilters {
         }
         val filtered = books.filter { b ->
             if (folder == "__none__" && b.folder.isNotBlank()) return@filter false
-            if (folder.isNotBlank() && folder != "__none__" && b.folder != folder) return@filter false
+            if (folder.isNotBlank() && folder != "__none__" &&
+                !b.folder.equals(folder, ignoreCase = true)) return@filter false
             when (filter) {
                 1 -> b.format in setOf("txt", "text", "md", "markdown",
                     "html", "htm", "rtf", "csv", "json", "xml", "log", "srt")

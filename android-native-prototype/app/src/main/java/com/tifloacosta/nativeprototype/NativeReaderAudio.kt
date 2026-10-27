@@ -60,6 +60,7 @@ fun NativeReaderAudioScreen(
     var expandedAudio by remember(book.id) { mutableStateOf(false) }
     var expandedMore by remember(book.id) { mutableStateOf(false) }
     var showDaisyNavigation by remember(book.id) { mutableStateOf(false) }
+    var beforeDaisyJump by remember(book.id) { mutableStateOf<Pair<Int, Int>?>(null) }
     var sleepIndex by remember(book.id) { mutableIntStateOf(0) }
     var speedIndex by remember(book.id) { mutableIntStateOf(2) }
     val speeds = listOf(75, 90, 100, 125, 150)
@@ -112,6 +113,7 @@ fun NativeReaderAudioScreen(
     if (showDaisyNavigation) {
         NativeDaisyNavigationScreen(book, english, current,
             onGo = { segment ->
+                beforeDaisyJump = current to position
                 if (active) command(NativeReaderPlaybackService.ACTION_SEGMENT, segment)
                 else NativeReaderPlaybackService.start(context, book.id,
                     audio = true, speedPercent = speeds[speedIndex],
@@ -160,6 +162,23 @@ fun NativeReaderAudioScreen(
             TextButton(onClick = { showDaisyNavigation = true },
                 modifier = Modifier.fillMaxWidth()) {
                 Text(if (english) "DAISY navigation" else "Navegación DAISY")
+            }
+        }
+        beforeDaisyJump?.let { origin ->
+            TextButton(onClick = {
+                if (active) {
+                    command(NativeReaderPlaybackService.ACTION_SEGMENT, origin.first)
+                    command(NativeReaderPlaybackService.ACTION_SEEK, origin.second)
+                } else {
+                    NativeReaderPlaybackService.start(context, book.id, audio = true,
+                        speedPercent = speeds[speedIndex],
+                        sleepMinutes = sleepTimes[sleepIndex],
+                        segmentIndex = origin.first, positionMs = origin.second)
+                }
+                beforeDaisyJump = null
+            }) {
+                Text(if (english) "Return to position before navigation"
+                    else "Volver a la posición anterior al salto")
             }
         }
         if (active && state.synchronizedText.isNotBlank()) {

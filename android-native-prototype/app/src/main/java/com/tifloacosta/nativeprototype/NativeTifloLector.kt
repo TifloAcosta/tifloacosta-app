@@ -447,6 +447,7 @@ private fun NativeReadingScreen(
     }
 
     val units = remember(fullText, unitType) { ReaderUnits.split(fullText, unitType) }
+    val visibleMarks = if (active) playback.textMarks else book.marks
     val displayOffset = if (active) playback.textOffset else offset
     val currentIndex = ReaderUnits.indexForOffset(units, displayOffset)
     val current = units.getOrNull(currentIndex)
@@ -684,8 +685,8 @@ private fun NativeReadingScreen(
                 Text(if (english) "Bookmarks" else "Marcas")
             }
             if (showMarks) {
-                if (book.marks.isEmpty()) Text(if (english) "No bookmarks" else "No hay marcas")
-                book.marks.forEach { mark ->
+                if (visibleMarks.isEmpty()) Text(if (english) "No bookmarks" else "No hay marcas")
+                visibleMarks.forEach { mark ->
                     OutlinedButton(onClick = { setOffset(mark) }) {
                         Text((if (english) "Go to " else "Ir al ") +
                             ReaderUnits.percent(mark, fullText.length) + "%")

@@ -22,6 +22,18 @@ android {
         }
     }
 }
+// This shared library has JVM unit tests in the prototype but no device-side
+// instrumentation tests. Disable only its empty androidTest variants: running
+// their dex transform needlessly processes POI MethodHandle APIs that require
+// Android 26, even though production deliberately supports API 24/25.
+// Keep app instrumentation tests and the library's JVM tests enabled.
+// This is NOT proof that an unminified release AAB is compatible with API 24.
+androidComponents {
+    beforeVariants(selector().all()) { variantBuilder ->
+        variantBuilder.enableAndroidTest = false
+    }
+}
+
 kotlin {
     compilerOptions { jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17) }
 }

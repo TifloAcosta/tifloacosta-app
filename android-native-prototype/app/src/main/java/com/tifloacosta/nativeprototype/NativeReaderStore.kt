@@ -110,10 +110,9 @@ class NativeReaderStore(private val context: Context) {
     private val index = File(folder, "index.json")
     private val ids = Regex("[a-f0-9\\-]{36}")
 
-    @Synchronized fun list(): List<ReaderBook> {
-        if (!index.isFile) return emptyList()
-        return try {
-            val array = JSONArray(index.readText(Charsets.UTF_8))
+    @Synchronized fun list(): List<ReaderBook> = synchronized(NativeReaderPersistence.lock) {
+        val json = NativeReaderPersistence.read(index) ?: return@synchronized emptyList()
+        val array = JSONArray(json)
             (0 until array.length()).mapNotNull { i ->
                 val obj = array.optJSONObject(i) ?: return@mapNotNull null
                 val id = obj.optString("id")
@@ -174,10 +173,9 @@ class NativeReaderStore(private val context: Context) {
                     } ?: emptyList()
                 )
             }
-        } catch (_: Exception) { emptyList() }
     }
 
-    @Synchronized private fun save(books: List<ReaderBook>) {
+    @Synchronized private fun save(books: List<ReaderBook>) = synchronized(NativeReaderPersistence.lock) {
         val array = JSONArray()
         books.forEach { book ->
             array.put(JSONObject().put("id", book.id).put("title", book.title)
@@ -209,13 +207,7 @@ class NativeReaderStore(private val context: Context) {
                     }
                 }))
         }
-        val temp = File(folder, "index.tmp")
-        temp.writeText(array.toString(), Charsets.UTF_8)
-        if (!temp.renameTo(index)) {
-            // Some filesystems do not replace an existing file on rename.
-            index.writeText(array.toString(), Charsets.UTF_8)
-            temp.delete()
-        }
+        NativeReaderPersistence.write(index, array.toString())
     }
 
     @Synchronized fun read(book: ReaderBook): String {
@@ -223,7 +215,7 @@ class NativeReaderStore(private val context: Context) {
         return File(folder, book.id + ".txt").readText(Charsets.UTF_8)
     }
 
-    @Synchronized fun update(book: ReaderBook) {
+    @Synchronized fun update(book: ReaderBook) = synchronized(NativeReaderPersistence.lock) {
         val books = list().map { if (it.id == book.id) book else it }
         if (books.any { it.id == book.id }) save(books)
     }
@@ -244,9 +236,12 @@ class NativeReaderStore(private val context: Context) {
         update(existing.copy(length = result.length))
     }
 
-    @Synchronized fun replaceFolder(oldName: String, newName: String) {
-        save(list().map { if (it.folder.equals(oldName, ignoreCase = true)) it.copy(folder = newName) else it })
-    }
+    @Synchronized fun replaceFolder(oldName: String, newName: String) =
+        synchronized(NativeReaderPersistence.lock) {
+            save(list().map {
+                if (it.folder.equals(oldName, ignoreCase = true)) it.copy(folder = newName) else it
+            })
+        }
 
     @Synchronized fun audioFiles(book: ReaderBook): List<File> {
         return book.tracks.map { File(folder, it) }.filter { it.isFile }

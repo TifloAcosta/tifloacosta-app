@@ -47,6 +47,11 @@ android {
         }
     }
     buildTypes {
+        // Validate that shrinker can remove Java 9-only POI paths on API 24/25.
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
         release {
             if (hasReleaseSigning) {
                 signingConfig signingConfigs.release

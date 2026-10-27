@@ -20,7 +20,10 @@ object NativeReaderDaisyText {
             // Different DAISY books frequently use the SAME relative path,
             // e.g. text/chapter.xhtml. Cache by real temporary file identity.
             val doc = sourceCache.getOrPut(file.absolutePath) {
-                val source = file.readText(Charsets.UTF_8)
+                val bytes = file.readBytes()
+                val decoded = bytes.toString(Charsets.UTF_8).removePrefix("\uFEFF")
+                val source = if ('\uFFFD' in decoded) bytes.toString(Charsets.ISO_8859_1)
+                    else decoded
                 if (path.endsWith(".xml", true)) Jsoup.parse(source, "", Parser.xmlParser())
                 else Jsoup.parse(source)
             }

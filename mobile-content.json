@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-27T16:02:18.343Z",
+  "generatedAt": "2026-10-27T18:44:36.958Z",
   "resources": [
     {
       "kind": "resource",
@@ -5525,95 +5525,15 @@
   "news": [
     {
       "kind": "news",
-      "id": "9to5mac-8899d14adeb0f333:en",
-      "sourceId": "9to5mac-8899d14adeb0f333",
+      "id": "engadget-881377f36fcbe9c8:en",
+      "sourceId": "engadget-881377f36fcbe9c8",
       "lang": "en",
-      "title": "Apple unveils new 14-inch MacBook Pro powered by M6",
-      "summary": "Alongside a new M6 iMac , Apple has also unveiled a new 14-inch MacBook Pro powered by M6. The new M6 MacBook Pro starts at $1,999 and will be available to pre-order tomorrow, October 28. more…",
-      "body": "Alongside a new M6 iMac , Apple has also unveiled a new 14-inch MacBook Pro powered by M6. The new M6 MacBook Pro starts at $1,999 and will be available to pre-order tomorrow, October 28.\n\nApple says:\n\nApple today announced the new 14-inch MacBook Pro with M6, delivering even more performance, powerful on-device AI capabilities, and faster connectivity for college students, business users, creators, and more. M6 features an advanced 12-core CPU with the world’s fastest CPU core, so everything from productivity tasks to more demanding pro workflows feels incredibly fast and responsive.\n\nThis is the base model MacBook Pro sold by Apple. Apple is also still selling the M5 Pro and M5 Max MacBook Pro models (which rumors say will get a huge upgrade as soon as tomorrow with OLED touchscreens).\n\nThe new M6 MacBook Pro starts at $1,999 with 16GB of unified memory and 1TB of storage. It will be available to pre-order tomorrow, October 28, with the first orders arriving on Friday, November 6. It’s available in silver and space black.\n\nMore to come …",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/27/apple-unveils-new-14-inch-macbook-pro-powered-by-m6/",
-      "publishedAt": "2026-10-27T13:07:41.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-93d60a149bd5d731:en",
-      "sourceId": "the-verge-93d60a149bd5d731",
-      "lang": "en",
-      "title": "Apple refreshes the iMac with M6 chips",
-      "summary": "Apple is updating the iMac with M6 chips. The new iMac generation was introduced today, ahead of Apple's \"Pro and Tell\" event that's scheduled to take place on Wednesday, giving Apple's all-in-one desktop computer a performance boost via the same chipset it launched with the Mac Mini in August. Prices start from $1,499, and the […]",
-      "body": "Apple is updating the iMac with M6 chips. The new iMac generation was introduced today, ahead of Apple's \"Pro and Tell\" event that's scheduled to take place on Wednesday, giving Apple's all-in-one desktop computer a performance boost via the same chipset it launched with the Mac Mini in August . Prices start from $1,499, and the design otherwise appears largely unchanged.\n\nThis refresh comes two years after Apple gave the iMac a colorful M4 overhaul , meaning we're skipping the M5 series entirely on this hardware. That should make this upgrade more meaningful. The M6 is Apple's first 2nm chip and includes a dual 16-core Neural Engine that can …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1018467/apple-imac-m6-chip-announced-price-release",
-      "publishedAt": "2026-10-27T13:05:26.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-148f9f54413b528f:en",
-      "sourceId": "the-verge-148f9f54413b528f",
-      "lang": "en",
-      "title": "Apple updates the MacBook Pro with M6 chips",
-      "summary": "Apple is giving its entry-level MacBook Pro a spec bump. After upgrading the entry-level MacBook Pro with its M5 chip a year ago, Apple is refreshing the laptop today with the M6 chip, which the company launched in August as part of recent upgrades to the new Mac Mini. Last year's entry-level MacBook Pro update […]",
-      "body": "Apple is giving its entry-level MacBook Pro a spec bump. After upgrading the entry-level MacBook Pro with its M5 chip a year ago, Apple is refreshing the laptop today with the M6 chip, which the company launched in August as part of recent upgrades to the new Mac Mini.\n\nLast year's entry-level MacBook Pro update brought minimal changes from the M4 model that debuted a year prior, including the same design, port layout, webcam, and speakers. The most notable updates, aside from the then-new M5 processor, was faster storage and the option to upgrade its capacity to a hefty 4TB for an extra $1,200.\n\nPricing for the new M6 version of the 14-inch …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1017664/apple-macbook-pro-m6-processor-upgrade",
-      "publishedAt": "2026-10-27T13:04:28.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-c7679b550fe38304:en",
-      "sourceId": "9to5mac-c7679b550fe38304",
-      "lang": "en",
-      "title": "Opera One now lets Mac users run Apple’s foundation model directly in the browser",
-      "summary": "Starting today, Opera One users can access a preview feature that lets them tap into local AI models through WebAI, a proposed web standard. Here are the details. more…",
-      "body": "Starting today, Opera One users can access a preview feature that lets them tap into local AI models through WebAI, a proposed web standard. Here are the details.\n\nOpera announced today that its Opera One browser is the first of its browsers to offer built-in access to local AI models, with Opera GX and Opera Neon to follow.\n\nThe feature relies on the WebAI proposed web standard, which allows websites and browser extensions to access AI models running locally on the user’s device.\n\nHere’s Opera:\n\nWebAI is a proposed web standard, backed by companies such as Google and Microsoft, that lets websites and browser extensions use AI hosted through the browser. Opera’s implementation is model-agnostic and built around open models, offering users choice among AI providers. At launch, users can already tap into models from Google and Apple, including Google’s Gemma and, on Macs, Apple’s on-device foundation model, directly in Opera.\n\nThe company notes that WebAI can be used to generate text, classify content, and identify relationships between pieces of information, and adds that the feature is opt-in, with no subscription needed, and with users able to control which websites can access local AI models.\n\nHere’s Opera again on some of the potential uses for local AI in the browser:\n\nWith local AI built into the browser, both users and developers can benefit from new capabilities. Local AI lets anyone build on top of free, open-weight AI models. Developers can add AI features without running AI infrastructure or paying for every request. Users don’t need AI subscriptions, the information the local AI handles stays on their own device, and they stay in control of the AI on their computer. For example, an extension could sort your tabs, flag clickbait or spot relevant job posts using a model on your laptop, with no account, no fee and no data sent to an AI service.\n\nTo help developers (and users) explore what’s possible with WebAI, Opera has released a collection of example extensions that you can find here .\n\nAdditionally, Opera is launching HTML-in-Canvas today, which, as the company explains, “lets developers put real, interactive web pages inside 2D and 3D scenes.”\n\nThe feature allows developers to embed fully functional web pages into 2D and 3D environments, with interactive elements such as menus, buttons, and forms remaining usable even as they move around within a scene. Developers can build these experiences using familiar HTML and CSS.\n\nHere’s Maciej Kocemba, Product Director at Opera GX:\n\n“Honestly, this is a fun one […]. You can take a real web page and throw it into a 3D world, and everything still works: buttons, text, menus, all of it. We wanted users to get their hands on it early and see what they come up with.”\n\nTo demonstrate the possibilities, Opera has created two examples: Webpage Bulldozer, which turns elements of a web page into physical objects, and Gamer Room, a virtual 3D room featuring screens that display live web pages. Both demos work in Opera browsers without any additional setup, and you can check them out ⁠here .",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/27/opera-one-now-lets-mac-users-run-apples-foundation-model-directly-in-the-browser/",
-      "publishedAt": "2026-10-27T13:00:18.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-100154ca1b646442:en",
-      "sourceId": "techcrunch-100154ca1b646442",
-      "lang": "en",
-      "title": "Anduril, Qualcomm launch BlueChip, a new kind of US-made laptop",
-      "summary": "Anduril founder Palmer Luckey is vowing to bring computer manufacturing back to the U.S. and by that he doesn't just mean assembly, but every individual component, some of which are exclusively made in China today.",
-      "body": "Anduril founder Palmer Luckey is vowing to bring computer manufacturing back to the U.S. And by that, he doesn’t just mean assembly, but the production of every individual component, some of which are exclusively made in China today.\n\nAnduril is partnering with Qualcomm to achieve that mission with a new computer called BlueChip, the companies announced Tuesday. BlueChip will be available for preorder in 2027.\n\nWhile technical details are scant — Anduril hasn’t even finished contracting with all its component suppliers yet, according to Luckey — this first product will be a hardened laptop. It will be designed to withstand the most grueling physical environments and meet the security-conscious needs of the military, government, first responders and law enforcement.\n\nFor the first generation, about 90% of its components will be made in the U.S. or in allied countries, Anduril says, most notably its CPU. BlueChip will run on a Snapdragon X Series built at TSCM’s massive new facility in Arizona. The CPU uses the same architecture that powers other laptops, including the Microsoft Surface, Qualcomm CEO Cristiano Amon said during the press conference.\n\n“As of right now, the laptop’s bill of materials is about 90% U.S. and allied [ally countries], and we have a technical roadmap to get to 100% domestic over time,” Luckey said. “The intent in the long run is to have an option that is made entirely in the United States, 100% domestic. And I mean everything. I mean the displays. I mean the metallics. I mean the the magnetics. All of it.”\n\nRight now, for instance, Luckey says he’s found an American supplier for the glass that covers the display, but the display itself is one of several components he says are only manufactured in China.\n\nWhile Luckey says consumers are welcome to order a BlueChip — the company may even create a waiting list for interested consumers — this first PC won’t be designed for them. For one thing, as a hardened computer, it will be heavy and have battery-life constraints because of the engineering required to withstand rain, dust, and other rugged conditions.\n\nThe bigger point is to offer U.S. government agencies a product that complies with regulations requiring them to buy U.S.-made computers. In this case, the selling point is a transparent supply chain that customers can track and audit.\n\n“These computers are the anti-surveillance computer. You fully control it,” Luckey described in a recent interview. “You know everything that is in it, every single component, and you know every software component that is running on it.”\n\nAnduril is also working to ensure that the Arm-based machine works well with Windows apps, apps built for certain Linux distributions used by the government, and even archaic software that various agencies still run.\n\nWhile Anduril hasn’t yet announced pricing, Luckey estimates it will cost about 20% more than typical high-end PCs.\n\n“As much as I love BlueChip, if I was just a normal consumer making a rational decision without a kind of patriotic basis, I’d be better off buying a Dell laptop than an Anduril laptop because it’s going to be cheaper. I’m just talking about your average person consumer, right, who doesn’t have any real need for this,” Luckey said.\n\nBut Luckey clearly hopes Anduril will eventually make U.S.-made laptops more in line with consumer desires. He said the product is the first in what he envisions as a full line of BlueChip computers, noting that he began his career making devices virtual reality headsets for consumers.\n\n“I’m buying American cars, and then I buy a computer that’s made on the other side of the world, not just China, but you know, Japan, Korea,” he said. “It’s kind of humiliating that as an American and my birthright is computers, in my opinion, because America invented them, that I’m not able to buy an American computer.”\n\nAs for the potentially expensive folly of trying to take on China’s electronics components manufacturing industry single-handedly, Luckey joked about his internal reputation for “being a nut” with such big ideas. (He admits that he pushed his board to spend $900 million to build a factory for a jet before the company had even won a contract.)\n\n“This is not one of those things. My investors do not think I’m a crazy person in this particular area,” he said. In fact, rugged computers are already about a $5 billion market .",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/27/anduril-qualcomm-launch-bluechip-a-new-kind-of-us-made-laptop/",
-      "publishedAt": "2026-10-27T13:00:00.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-f0265bca13e5b3fa:en",
-      "sourceId": "techcrunch-f0265bca13e5b3fa",
-      "lang": "en",
-      "title": "Opera introduces a new web standard to let users deploy AI locally in their browser",
-      "summary": "The new standard, WebAI, is designed to work with a variety of AI models.",
-      "body": "Browser maker Opera has introduced a new web standard that lets users to run AI models directly in its browser, without relying on the cloud.\n\nThe new standard, WebAI, is designed to work with a variety of AI models. Opera name drops Google’s Gemma — an open-weight model that Google first introduced two years ago — as one example. On Macs, WebAI also supports Apple’s on-device foundation model, the company says.\n\nBut Opera says WebAI isn’t tied to any particular model and is built to support a wide range of open-weight AI systems. WebAI grew out of previous work by Opera to bring locally run models into its browsers.\n\nOpera is making the new AI features available as an early preview in its flagship Opera One browser. The company says Opera GX, its browser built for gamers and streamers, and Opera Neon, its browser that uses AI agents to perform tasks, will soon get the same treatment. Users have to choose to opt into the feature, according to the company.\n\nOpen-weight models offer a number of benefits to users. For one, they are typically free to download and use. Their underlying model weights are also publicly available, which gives developers more freedom to customize how they work. Although unlike fully open-source software, open-weight models still come with some restrictions.\n\nThere’s the additional advantage of privacy, the company said. Users can tap into AI features without having to send their personal information to a company’s servers or pay for a cloud-based AI subscription.\n\n“Developers can add AI features without running AI infrastructure or paying for every request,” the company said in its announcement. “Users don’t need AI subscriptions, the information the local AI handles stays on their own device, and they stay in control of the AI on their computer.”\n\nThe company said WebAI also allows anyone to generate text, classify content, and understand how pieces of information relate, all directly in the browser.\n\nPrivacy has become a growing concern as AI assistants become more powerful and gain access to personal information. Users often surrender vast amounts of personal information with AI chatbots, sometimes without a clear understanding of how that data is stored or used.\n\nLocally run models offer an alternative because the processing happens on the user’s own device — and not on a company’s cloud server. That doesn’t eliminate every privacy risk, but it does give users a bit more control. It makes sense then that Opera has made digital privacy one of its primary selling points over the years.\n\nThere are trade-offs, however. Running AI models locally puts more demand on a user’s computer, which can affect performance. Opera notes that model performance will depend on the device’s hardware.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/27/opera-introduces-a-new-web-standard-to-let-users-deploy-ai-locally-in-their-browser/",
-      "publishedAt": "2026-10-27T13:00:00.000Z",
+      "title": "This old Nokia phone got an AI Upgrade it was never designed for",
+      "summary": "The GOAT of dumb phones gets a new lease on life.",
+      "body": "The GOAT of dumb phones gets a new lease on life.\n\nNearly 20 years ago, Nokia released the Nokia 6300 . Despite arriving the same month Steve Jobs would introduce the iPhone at MacWorld 2007 , the 6300 would go on to become one of Nokia's best-selling phones, thanks to its understated but attractive design, affordable price and easy-to-use software. In 2026, however, the original 6300, not to be confused with the recent 4G rerelease , is a device on borrowed time.\n\nFor one, it's a 2G phone, and finding a carrier that still operates its old 2G network is becoming more difficult with each passing year. Then there's the phone's browser, which Nokia never updated to work with any internet security protocols beyond TLS 1.0. After Apple, Google, Microsoft and Mozilla came together to deprecate the standard in 2020 , less than an estimated 25 percent of all websites support TSL 1.0 connections as of mid last year, meaning the 6300 essentially can't access the modern internet. There's not much that can be done about the former, but one coder has devised a pretty clever solution to get around the 6300's dated browser using the latest chatbots.\n\nIn late September, Turkish entrepreneur Emir Karşıyakalı took to X to show off Claude S40, an app he vibe coded to make his old Nokia 6300 a bit more useable in 2026. In its original form, his app app allowed the 6300 to connect with Claude over a Java and Go backend. Since then, Karşıyakalı has updated the software to make it work with all of the major chatbots, including ChatGPT, Gemini and Grok, and renamed the app Aikon — that's Nokia spelt backwards — to reflect the greater compatibility.\n\nOutside of a phone running either Nokia's S40 or S60 operating systems, you'll need a Go server to hold the API key from Anthropic, Google, OpenAI or SpaceXSI. This part of the equation is essential since it's the server that communicates with Claude, ChatGPT, Gemini or Grok, and truncates their responses into 8kB blocks your old phone can read. It's also worth mentioning, since you're going through each company's API, you'll need to set up token billing.\n\nFor what is ultimately a gimmick, Karşıyakalı's app is quite robust and thoughtful. There's an reading mode, with a dedicated keypad shortcut, to make using a chatbot on the 6300's 240x320 display a bit more manageable. Provided you a memory card, you can also save responses to the 6300 for offline reading. If you want to send photos to your favorite chatbot for analysis, you can do that too. It's even possible to send voice messages up to 30 seconds long, with an OpenAI model handling the speech-to-text conversion. Over on the server side, Aikon will hold messages for up to 30 days, and the app supports English, Spanish, Portuguese, French, German, Russian, Indonesian and Turkish. Karşıyakalı has open sourced the app so others can continue building on the app.\n\nNow, before you dig out your old Nokia phone, just know if you live in the US there's no way you'll get this app running. That's because the nation's last 2G network went offline this summer when T-Mobile shut down its old GSM network in August . If you live outside of North America and want to try Aikon out for yourself, head over to Github and follow the installation instructions.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2295625/old-nokia-phone-ai-upgrade-never-designed-for/",
+      "publishedAt": "2026-10-27T18:30:00.000Z",
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
@@ -5621,33 +5541,229 @@
     },
     {
       "kind": "news",
-      "id": "the-verge-f46dcaf031177f9e:en",
-      "sourceId": "the-verge-f46dcaf031177f9e",
+      "id": "9to5mac-2378a91a31318b73:en",
+      "sourceId": "9to5mac-2378a91a31318b73",
       "lang": "en",
-      "title": "AirFly’s wireless headphone dongle adds a screen to guide you through the pairing process",
-      "summary": "Twelve South has announced a new version of its Airfly dongle that simplifies the pairing process when connecting wireless headphones to devices that don't natively support Bluetooth. Instead of having to decode flashing or color-changing LEDs, the new Airfly View adds a built-in screen that displays instructions for each step of the pairing process in […]",
-      "body": "Twelve South has announced a new version of its Airfly dongle that simplifies the pairing process when connecting wireless headphones to devices that don't natively support Bluetooth. Instead of having to decode flashing or color-changing LEDs, the new Airfly View adds a built-in screen that displays instructions for each step of the pairing process in one of 24 different languages including Japanese, Arabic, Portuguese, and Polish.\n\nThe Airfly View is available starting today for $79.99 and includes a carrying case and an adapter for connecting the dongle's short 3.5mm headphone cable to an airplane's split headphone jack. That makes it one …\n\nRead the full story at The Verge.",
+      "title": "Astropad Workbench 1.4 adds terminal access, iPhone Duo support, and more",
+      "summary": "Astropad is out today with Workbench 1.4, the latest update to its remote desktop app for Mac. The release adds a built-in terminal, native iPhone Duo support, and a new way to transfer files between Macs. more…",
+      "body": "Astropad is out today with Workbench 1.4, the latest update to its remote desktop app for Mac. The release adds a built-in terminal, native iPhone Duo support, and a new way to transfer files between Macs.\n\nWorkbench first launched in April with a focus on accessing your Mac from an iPhone or iPad, including checking on AI agents while away from your desk. Version 1.3 arrived in August with faster streaming, a privacy curtain, picture-in-picture support, and tools for keeping unattended Macs accessible.\n\nThe big addition in Workbench 1.4 is the ability to switch between the remote desktop and terminal without reconnecting. A toolbar control lets users move between Screen and Terminal views. On Mac, the terminal opens in a separate window.\n\nThat means you can check logs, edit a script, or restart a process without opening a separate SSH app. Terminal sessions also keep running between connections, so you can start on an iPad and return later from an iPhone or another Mac.\n\nVoice input works with the terminal as well, letting users dictate prompts and commands. For Mac-to-Mac connections, Workbench now supports dragging and dropping files during terminal sessions.\n\nAstropad says the update also runs natively on iPhone Duo, with support for keeping an agent visible in one pane while using the rest of the phone.\n\nWorkbench remains free for 20 minutes of access per day. Unlimited access is currently priced at $14.99/month or $79.99/year. The app requires macOS 15 or later, iOS 26 or later, or iPadOS 26 or later.\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/27/astropad-workbench-1-4-adds-terminal-access-iphone-duo-support-and-more/",
+      "publishedAt": "2026-10-27T18:29:50.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "apps-accesibles",
+        "programas-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-afe8fea27374bf74:en",
+      "sourceId": "9to5mac-afe8fea27374bf74",
+      "lang": "en",
+      "title": "iOS 27.2 has two CarPlay improvements, here’s what’s new",
+      "summary": "iOS 27.2 arrived this week with new features for Messages , Apple TV , and more, plus two improvements for CarPlay. Here’s what’s new for CarPlay users. more…",
+      "body": "iOS 27.2 arrived this week with new features for Messages , Apple TV , and more, plus two improvements for CarPlay. Here’s what’s new for CarPlay users.\n\nApple Podcasts in iOS 27.2 adds two new sections to the Home tab: ‘New Episodes’ and ‘Continue Playing.’\n\nEssentially, Apple has rethought how the core ‘Up Next’ queue of its Podcasts app works.\n\nLike you would expect, ‘New Episodes’ contains only the latest episodes from your favorite shows. But after you’ve started an episode, you’ll find it in the ‘Continue Playing’ row just below.\n\nThis overhaul to podcast management makes it easier to find the latest episodes of your shows and also pick up where you previously left off. I’m a big fan of the change.\n\nSiri AI introduces a variety of upgrades in iOS 27.2, including two that carry over to CarPlay as well.\n\nPer Apple’s release notes :\n\nIt can take some adjustment to remember that Siri AI is available in the car just like on iPhone. But CarPlay is an especially useful platform for Apple’s more powerful assistant.\n\nIt’s arguable whether this qualifies as an “improvement,” but it is a change worth mentioning. iOS 27.2 includes a new app icon for Apple Music, plus some minor design tweaks in the app.\n\nThese changes are related to the total rebrand Apple Music unveiled just last week.\n\nFor more new features in CarPlay that recently arrived in iOS 27, see our coverage here .\n\nWhat are your favorite recent changes in CarPlay? Let us know in the comments.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/27/ios-27-2-has-two-carplay-improvements-heres-whats-new/",
+      "publishedAt": "2026-10-27T18:20:40.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-a396a751869be3ab:en",
+      "sourceId": "engadget-a396a751869be3ab",
+      "lang": "en",
+      "title": "Why buying a Mac mini over a MacBook might be the smarter move",
+      "summary": "Apple's smallest desktop delivers better performance and value for those willing to leave the laptop behind.",
+      "body": "Apple’s smallest desktop delivers better performance and value for those willing to leave the laptop behind.\n\nLaptops are the first choice for the majority of people looking to buy a new computer, and that holds true when it comes to the Mac lineup. It's no wonder: a MacBook can travel with you wherever you go, and they come fully equipped with a built-in screen, keyboard, trackpad and webcam. There's no need to buy accessories separately. But if you spend most of your time at a desk, shelling out extra for portability might not be worth it.\n\nThe cheapest MacBook available today is the MacBook Neo , which starts at $699 and features entry-level hardware: the iPhone's A18 Pro chip with just 8GB of RAM. That works for many people, but it might not be enough if you want to edit videos or do other more demanding tasks. Then there's the MacBook Air , one of the most popular laptops, which starts at $1,299. Your budget and power needs should make that choice easy, but you might not have thought to look at desktop Macs too.\n\nThe Mac mini is more powerful than a MacBook Neo or Air, plus it costs less. And for some people, it might be the smartest choice.\n\nThe Mac mini is Apple's smallest desktop computer. Unlike the all-in-one iMac , the Mac mini still follows a concept that Steve Jobs used to joke about: BYODKM, or \"bring your own display, keyboard and mouse.\" There is no built-in display, nor are a keyboard and mouse are included in the box. The idea is to buy a small computer and then connect the peripherals you already have at home, helping you save some money.\n\nThe base model of the Mac mini starts at $899 — for that price, you get a Mac with the latest M6 chip and 16GB of RAM. It's more than enough to handle hardware-intensive apps like Final Cut Pro or Xcode, which makes it a good first Mac for those learning to edit video or how to code. But a faster chip isn't the only element that makes the Mac mini better than a MacBook Neo or Air. Unlike those laptops, the Mac mini has a cooling system with a fan. That helps the computer maintain sustained CPU and GPU performance for longer. In comparison, when a fanless MacBook gets hot, the system reduces its performance to prevent it from overheating.\n\nAgain, it all depends on what you plan to do with your computer. For light tasks like browsing the web or editing documents, it doesn't make much of a difference. But for 4K editing, compiling code or even playing some 3D games, having a cooling system makes the experience much better. Plus, the Mac mini offers more ports than any MacBook. It has multiple USB-C Thunderbolt ports plus Ethernet, HDMI and a headphone jack — perfect for a desktop setup.\n\nOf course, there's another side to this. The Mac mini is cheaper than a MacBook Air or an iMac because part of a laptop's cost comes from parts like the display and battery. If you already have a desktop setup at home with your own monitor, keyboard and mouse, great — you can spend the $899 on a Mac mini and take full advantage of it. But if you need to buy new accessories, the cost can quickly add up to nearly the price of a new MacBook Air. So the question is: do you need more performance or portability?\n\nFor those who are constantly on the go, like working from a coffee shop or while traveling, there's no question: you need a MacBook. You won't get the same sustained performance as you would from a Mac mini, but you'll have the freedom to unplug your laptop and use it anywhere. You can also buy an external monitor, keyboard and mouse to use it docked as a \"desktop\" at home. But if portability isn't something you care about, consider buying a Mac mini instead.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2296036/why-buying-mac-mini-over-macbook-smarter-move/",
+      "publishedAt": "2026-10-27T18:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-b4905ebd8a444d33:en",
+      "sourceId": "the-verge-b4905ebd8a444d33",
+      "lang": "en",
+      "title": "VisionQuest is what happens when AI really goes rogue",
+      "summary": "In Marvel's VisionQuest, a superpowered robot tries to better understand humanity by getting lost in elaborate, digital daydreams in which he and other artificial intelligence-powered beings live together in a home. The series is deeply fantastical, yet it plays with some of the ideas that have come to dominate the conversation about real-world generative artificial […]",
+      "body": "In Marvel's VisionQuest , a superpowered robot tries to better understand humanity by getting lost in elaborate, digital daydreams in which he and other artificial intelligence-powered beings live together in a home. The series is deeply fantastical, yet it plays with some of the ideas that have come to dominate the conversation about real-world generative artificial intelligence, exploring whether we should look at thinking machines as people and if AI truly poses the kind of existential danger that should keep us up at night. It's also a reminder how aggressively Silicon Valley has used the trappings of science fiction to sell us on its AI …\n\nRead the full story at The Verge.",
       "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1018679/twelve-south-airfly-view-screen-display-wireless-headphone-earbuds-airplane-adapter",
-      "publishedAt": "2026-10-27T13:00:00.000Z",
+      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1017064/visionquest-marvel-rogue-ai",
+      "publishedAt": "2026-10-27T17:30:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-cf456a02e767ac37:en",
+      "sourceId": "techcrunch-cf456a02e767ac37",
+      "lang": "en",
+      "title": "Frontier AI labs say their models refuted the Exponential Time Hypothesis. What does that mean?",
+      "summary": "TechCrunch spoke to the MIT computer scientist charged with explaining OpenAI's latest mind-bending discovery",
+      "body": "OpenAI released solutions to three blockbuster math problems that have long vexed researchers yesterday. One was a surprise rejection of the Exponential Time Hypothesis (ETH), a durable assumption in computer science that plays a large role in how we understand what is difficult to compute.\n\nAs with previous proof-drops from the frontier lab, scientific communities responded with a mixture of thrill and dismay. Anthropic mathematician Levent Alpöge suggested that OpenAI was basing its solutions from pre-existing work, and hours later, Anthropic subsequently released its own refutation of ETH.\n\nHowever, OpenAI’s process is evolving. This time, the lab structured its releases differently for each of the three disciplines involved: Mathematicians got the work dropped on GitHub; the computer scientists formed a working group, asked for the proofs to be shared publicly and OpenAI to fund a conference to discuss them; the physicists formed a working group that will determine how their result will be released.\n\nMIT Professor Ryan Williams is the computer scientist who is organizing his field’s response to the new finding. Williams, whose work focuses on these questions of computational complexity, has criticized OpenAI’s approach in the past, calling its proof dump earlier this October a “DDOS attack on mathematicians.”\n\nHowever, he agreed to collaborate with the frontier labs in order to help shepherd ideas that are vital to the field, he told TechCrunch. The lab asked him to help interpret the solution, along with UC San Diego computer scientists Russell Impagliazzo and Ramamohan Paturi, who first published the ETH in 1999.\n\nTheir first step was to release an open letter calling for feedback from scientists interested in these problems and a discussion of the norms around AI contributions to their work.\n\n“Some parts [of OpenAI’s proof] are, maybe you could say routine, but then yes, there are two or three alien-looking parts, and it’s exactly these parts that that I saw that made me think, wow, this is something that the whole community needs to work on together,” Williams told TechCrunch.\n\nThe ETH is part of a broader class of problems known as P vs NP, which has animated computer science and many other fields for decades. Reductively, researchers are trying to understand if any problem whose solution can be easily verified (NP) can also be easily solved (P).\n\nA simple example is the game Sodoku: Once a solution to a puzzle is in place, it can be quickly verified, but finding the solution is time-consuming. That dynamic is true across a range of important problems, and the insight underpins cryptographic systems: When you have the key to an encoded message, you can reveal it, but actually cracking an effective code takes too long to be useful.\n\nHowever, scientists have yet to prove whether that is always true. “P = NP is saying that, not only can you verify Sudoku solutions when they exist, you can just generate them,” Williams said. “P = NP is asserting that this is true for every single problem you can verify quickly — if you can verify it quickly, you can solve it quickly. So this just seems too good to be true.”\n\nThat’s why most scientists assume that P ≠ NP. ETH provided evidence for that. It basically says that even the fastest computer algorithm needs exponentially more time to find a solution as the number of variables grow in a specific class of tricky logic puzzle.\n\nThe claims from OpenAI and Anthropic is that their models have come up with algorithms that solve those puzzles in “sub-exponential” time, meaning faster than the speeds previously thought possible. If true, they may have proven the EFT to be false — refuted it, in scientific terms — and maybe opened up a path for algorithms that generally perform P = NP.\n\n“Every computer scientist should probably put a little more weight on the plausibility of P = NP, but one’s weight may vary,” Williams said. “I do think that it kind of calls into question a lot of the intuitions that we thought we had about … how tractable [hard NP problems] are. I also think that this is probably not the final answer either. I don’t think that OpenAI’s algorithm could possibly be the best algorithm you can get.”\n\nThe durability of ETH has lead to it being included in many scientific papers over the past decade that will need to be revisited if the AI labs claims that they’ve proven it wrong holds up, Williams said.\n\n“This is partly why I was asking or pushing OpenAI to support a conference on this — it’s going to affect many researchers’ works, and we need to figure out, okay, what happens next besides understanding the algorithms. We need to understand, how should the foundations change compared to what we had before?” he said. Before scientific concerns, there are cybersecurity questions. Williams said that an improved algorithm could imply that cryptographic systems relying on certain key sizes could be considered broken. So one of the first questions he asked OpenAI science lead Dan Roberts “was if they had checked that this affects any crypto systems … is anything insecure now? And apparently, they checked, and they were reasonably confident that this didn’t … imply any breaks.”\n\nThis new AI paradigm of scientific discovery is still a work in progress, but Williams says he is optimistic despite real concerns, particularly about training the next generation of scientists. Being a computer scientist who does high level math has perhaps made the adjustment easier for him than for pure mathematicians.\n\nStill, he says AI is “forcing people to be a little more ambitious about the kind of work that they do, and to think more deeply about, okay, if all the things I used to work on are now low hanging fruit for AI, how can I raise the bar for the kind of scientific questions I want to ask?”",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/27/frontier-ai-labs-say-their-models-refuted-the-exponential-time-hypothesis-what-does-that-mean/",
+      "publishedAt": "2026-10-27T17:08:08.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-9615442cc78d2647:en",
+      "sourceId": "the-verge-9615442cc78d2647",
+      "lang": "en",
+      "title": "Anthropic’s elaborate plan to keep Wall Street at bay",
+      "summary": "Anthropic wants to have it both ways. With its impending IPO, it wants to tap the vast riches of the public markets and insists it doesn't want to compromise its core mission of developing AI safely and for the benefit of humanity. But greater model capabilities bring greater risks, and shareholders eager for returns may […]",
+      "body": "Anthropic wants to have it both ways. With its impending IPO, it wants to tap the vast riches of the public markets and insists it doesn't want to compromise its core mission of developing AI safely and for the benefit of humanity. But greater model capabilities bring greater risks, and shareholders eager for returns may have little patience for costly safety measures that slow products on their way to market.\n\nSam Altman, the CEO of Anthropic's archrival, OpenAI, has cited investor pressures as one reason the company is not pursuing an IPO this year. Anthropic hopes it can resist investor pressures with a mind-boggling governance structure.\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1019470/anthropic-ipo-resist-investor-pressure-cut-corners-safety",
+      "publishedAt": "2026-10-27T16:51:22.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-ace31c8c839ce4cd:en",
+      "sourceId": "9to5mac-ace31c8c839ce4cd",
+      "lang": "en",
+      "title": "Google Photos rolls out customizable redesign of your ‘Collections’ tab",
+      "summary": "Following the floating navigation bar in July, Google Photos is rolling out a big redesign that lets you customize the Collections tab on Android and iOS. more…",
+      "body": "Following the floating navigation bar in July, Google Photos is rolling out a big redesign that lets you customize the Collections tab on Android and iOS.\n\nThe previous design started with a 2×2 grid. Favorites and Trash were at the top, while the other two shortcuts changed based on usage. Then there were large cards for Albums, On this device, People & pets, Wardrobe, Documents, Places, Stickers, and Moments. On Android, this was followed by a list: Screenshots, Videos, Recently Added, Archive, and Locked.\n\nOld\n\nThis redesign of Collections is focused on customization. The first section is called “Pinned” and lets you choose which cards appear. By default, the carousel shows Favorites, Screenshots, and Trash. You also have the option to remove this section entirely.\n\nThat’s followed by carousels for On this device, Albums, People & pets, Wardrobe, Places, and Documents. “View all” at the top-right corner lets you jump straight to the full grid or list view. Other options let you hide each section and rearrange the order in which they appear.\n\nNew\n\nThe “Other Collections” grid rounds out this page: Favorites, Screenshots, Moments, Videos, Recently Added, Stickers, Creations, Archive, Locked, and Trash. The “Reorder” button is found at the very bottom.\n\nThis redesign is now widely rolling out with Google Photos 7.97 (Android) and 7.98 (iOS). Instead of the usual Force stop on Android, we’ve curiously been able to get this server-side update by restarting our devices and then opening the Photos app.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5google.com/2026/10/26/google-photos-collections-redesign/",
+      "publishedAt": "2026-10-27T16:23:35.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "android"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-41d82910ed362c32:en",
+      "sourceId": "engadget-41d82910ed362c32",
+      "lang": "en",
+      "title": "Apple Creator Studio update adds MotionVFX to Final Cut, and AI to everywhere",
+      "summary": "Final Cut clips can finally be unlocked from the primary timeline - hallelujah.",
+      "body": "Final Cut clips can finally be unlocked from the primary timeline — hallelujah.\n\nApple has updated its Adobe-rivaling Apple Creator Studio software suite just in time for the arrival of the new M6 iMac and 14-inch MacBook Pro .\n\nOne of the biggest additions is built-in MotionVFX tools for the Final Cut Pro app, following Apple's acquisition of the former earlier this year. In a press release, Apple said the integration of MotionVFX provides editors with \"rapid access to extensive professional video effects and content.\" These include graphics, themes, titles and transitions, as well as specialized rotoscoping and color grading tools. The Content Hub that lives within Final Cut Pro also contains curated stock videos, photos and backgrounds that can be used in projects.\n\nApple says it has also improved workflows that spread across multiple apps in the suite, so you can now take any image from your timeline in Final Cut Pro and open it in its advanced image-editing software, Pixelmator Pro, for tweaks. Any changes are applied directly to the original project without needing to reimport the edited version. Another useful addition is the ability to disconnect clips from the primary timeline in Final Cut Pro and place them anywhere (finally).\n\nInevitably, AI's presence can be felt across all of Apple's apps, with text-to-image generation and editing tools added to both Final Cut Pro and Pixelmator Pro. In the latter, you can draw a circle over an area of an image and write a prompt for what edits you want applied. In Logic Pro, Apple has teamed up with OpenAI on a new assistant that can edit existing projects, start new songs and generate vocal tracks from text prompts. The same chatbot can be summoned in Keynote, Pages and Numbers for various app-specific tasks like animating slides or organizing data.\n\nThere are plenty of other smaller quality-of-life additions for creators, like additional keyframe easing options in Final Cut Pro and the ability to isolate or swap out drum parts with the Stem Splitter in Logic Pro.\n\nTo use the new in-beta assistant in Logic Pro for Mac you'll need an Apple Intelligence-supported Mac running macOS 27 Golden Gate or later. Apple's AI tools also need to be built into your iPhone, iPad or Mac running the latest software version to make use of the chatbot in Keynote, Pages and Numbers. Some Final Cut Pro features require Apple silicon to work, and any Mac running the Apple Creator Studio version of the program needs to be running on macOS 26.6 or later.\n\nThe updates will be available for free in November for existing subscribers. Apple Creator Studio costs $13 per month or $129 per year, and any new subscriber can try it out first with a one-month free trial. You also get three free months included with a new Max or certain iPads. Final Cut Pro ($300), Logic Pro ($200) and Pixelmator Pro ($50) can also be purchased individually.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2298428/apple-creator-studio-update-adds-motionvfx-to-final-cut-and-ai-to-everywhere/",
+      "publishedAt": "2026-10-27T16:21:44.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-97d9c78a28df3204:en",
+      "sourceId": "ars-technica-97d9c78a28df3204",
+      "lang": "en",
+      "title": "Ford simplifies using your EV as a home battery with the $30K Fathom",
+      "summary": "The Fathom pickup won’t need a wall-mounted inverter to output 10 kW to your house.",
+      "body": "This morning, Ford revealed that buyers of the forthcoming Fathom —the company's sub-$30,000 electric pickup truck due next year —will get more than just a truck. Until now, vehicle-to-home technology— like the setup Ford developed for the now-discontinued F-150 Lightning—takes DC power from the electric vehicle and runs it through an inverter built into the wallbox to turn it into AC the house can use. But with the Fathom, that inverter is built into the truck from the start. So every Fathom will be able to act as a backup battery for your home.\n\nIt’s typical: You wait a decade for a cheap electric truck, and then two come along almost at once. And they’re two radically different products from two radically different automakers that I think will reveal a few preferences from the EV-buying public. One is the Blank Slate, from a brand new startup offering a bare-bones two-door that capitalizes on features the Internet says it wants, like no onboard modem, no touchscreens, and no infotainment system.\n\nThe other is the result of one of Detroit’s big three taking a long, hard look at Chinese EVs and asking itself, “How do we make a car that cheap?” Although the Ford Fathom will cost $5,000 more than a Slate, that money does buy an extra pair of doors, modern conveniences like an infotainment system, CarPlay, electric windows, and a vast dealership network to service the car. That may be helpful given how many recalls Ford issues each year.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/cars/2026/10/ford-builds-bidrectional-charging-into-its-30k-electric-truck/",
+      "publishedAt": "2026-10-27T16:17:58.000Z",
       "categories": [
         "tecnologia-general"
       ]
     },
     {
       "kind": "news",
-      "id": "9to5mac-214c9e5d69892e09:en",
-      "sourceId": "9to5mac-214c9e5d69892e09",
+      "id": "the-verge-67cc5c54e390635a:en",
+      "sourceId": "the-verge-67cc5c54e390635a",
       "lang": "en",
-      "title": "US government acting illegally over electronic surveillance of its own citizens, say senators",
-      "summary": "Two senators with notable expertise in intelligence matters say that the US government is acting illegally over electronic surveillance of its own citizens. They say the Foreign Intelligence Surveillance Court (FISC) has permitted intelligence agencies to continue warrantless interception of messages by US citizens despite failing to comply with the administration’s own privacy promise to allow public review of such rulings … more…",
-      "body": "Two senators with notable expertise in intelligence matters say that the US government is acting illegally over electronic surveillance of its own citizens.\n\nThey say the Foreign Intelligence Surveillance Court (FISC) has permitted intelligence agencies to continue warrantless interception of messages by US citizens despite failing to comply with the administration’s own privacy promise to allow public review of such rulings …\n\nThe Foreign Intelligence Surveillance Act (FISA) was supposed to allow interception of communications by agents of foreign powers on US soil. It also put in place safeguards intended to ensure proper oversight. Controversially, however, it has also been used to intercept the communications of American citizens without a warrant under a clause known as Section 702.\n\nThat latter power is supposed to be granted for 12 months at a time by FISC. Decisions to renew the authorization should be made public within 180 days. It was last renewed back in March, with a deadline for public review expiring on September 13th.\n\nAs Wired reports, however, that has still not happened.\n\nSeven months ago, the Foreign Intelligence Surveillance Court objected to search filters that let intelligence analysts pull Americans’ messages from intercepted data without the approvals, written justifications, or records the law requires. The court approved another year of surveillance anyway. The ruling has never been made public, and Senators Ron Wyden of Oregon and Adam Schiff of California say the administration’s own deadline for releasing it passed in September […]\n\n“If this administration won’t follow this simple statutory directive,” the senators told Director of National Intelligence Jay Clayton and Attorney General Todd Blanche in a demand letter obtained exclusively by WIRED, “it is unclear why Congress or the American people should trust this administration to follow any of the other legal limits to Section 702.”\n\nThe report also says that additional oversight through things like internal auditing within the FBI has been abandoned, and it’s no longer possible to track how many times search filters have been used to restrict electronic surveillance to US citizens.\n\nWyden is the longest-serving member of the Senate Intelligence Committee, and Schiff formerly chaired the equivalent House committee.\n\nPhoto by Dmitry Ratushny on Unsplash",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/27/us-government-acting-illegally-over-electronic-surveillance-of-its-own-citizens-say-senators/",
-      "publishedAt": "2026-10-27T12:29:01.000Z",
+      "title": "Firefox’s Smart Window adds AI form filling and webpage monitoring",
+      "summary": "Mozilla is updating Smart Window - Firefox's AI-powered browsing experience - with a new feature that can help you fill out online forms based on your open tabs. As an example, Mozilla says Smart Window can pull information from your online portfolio or LinkedIn page to paste your work history into a job application. You […]",
+      "body": "Mozilla is updating Smart Window - Firefox's AI-powered browsing experience - with a new feature that can help you fill out online forms based on your open tabs. As an example, Mozilla says Smart Window can pull information from your online portfolio or LinkedIn page to paste your work history into a job application.\n\nYou can try out this feature by clicking into a form with at least four text fields. From there, you'll see an option to \"Fill from sources,\" which will show all of the tabs Firefox will draw from. You can then select or deselect tabs that you want Firefox to use, and the browser will generate suggestions based on the informati …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1019551/firefox-smart-window-ai-fill-forms",
+      "publishedAt": "2026-10-27T16:14:18.000Z",
       "categories": [
-        "apple",
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-ed7dde1bd130cfb1:en",
+      "sourceId": "ars-technica-ed7dde1bd130cfb1",
+      "lang": "en",
+      "title": "DeepMind unveils Genie 4 world model promising more realistic physics and humans",
+      "summary": "Genie 4 will roll out to developers and Google AI Ultra subscribers soon.",
+      "body": "Last year, Google DeepMind sent gaming stocks tumbling with the reveal of its Genie 3 world model . Since then, world models have become a major focus of AI labs around the world, but Google isn't resting on its laurels. Researchers have been hard at work on an updated model that improves on Genie 3 in almost every way. And if you pay Google enough money, you might actually get to use Genie 4 before too long.\n\nIt's easy to look at the output of Genie 4 and see a video game, which is why Genie 3 caused so much consternation in the gaming industry. DeepMind doesn't think about it that way, though. According to Google , world models are a key element in the march toward artificial general intelligence (AGI). A world model creates a virtual world, but it doesn't require pre-rendering environments or programming interactive elements. You simply tell the model what you want, and it generates the experience frame by frame in real time as you explore it.\n\nDeepMind says this technology could create infinite training environments for physical robots or unlock new avenues of rapid prototyping for creative fields. Of course, that requires the model to accurately simulate what you want. Genie 4 has several improvements that make its simulations more useful, and that's thanks in part to Google's updated Gemini models.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/google/2026/10/deepminds-genie-4-world-model-adds-audio-and-more-realistic-people-to-simulations/",
+      "publishedAt": "2026-10-27T16:00:22.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-57ee333e00675929:en",
+      "sourceId": "techcrunch-57ee333e00675929",
+      "lang": "en",
+      "title": "Meta AI director Rohit Patel leaves to take on Microsoft Office and Google Workspace",
+      "summary": "Rohit Patel is departing Meta after eight years working on AI evaluations and reinforcement learning, TechCrunch has exclusively learned. His startup, Ndoc, aims to take on Microsoft Office Suite.",
+      "body": "After eight years developing AI for Meta, Rohit Patel is departing the company, TechCrunch has exclusively learned. The former director at Meta Superintelligence Labs has launched Ndoc , a startup he’s pitching as an AI-native replacement for Microsoft Office suite or Google Workspace.\n\nPatel is the latest in a handful of high-profile departures from Meta following the exits of Chief Global Affairs Officer Joel Kaplan , AI researcher Andrew Tulloch , and Head of Product for AI-for-Work Emily Dalton Smith .\n\nPatel designed Ndoc to be more than just another AI tool layered onto an existing workflow. The goal is to replace the fragmented way people work across tools like Excel, Word, PowerPoint, Tableau, Replit, and “ChatGPT copy-paste” with one unified workspace that all colleagues can access, even if they’re not signed up for Ndoc.\n\nNdoc brings three components together in one layout. The Stage tab is where presentations of key findings live, like slide decks, dashboards, simulations, or mini apps. The Narrative tab features analyses, numbered citations, generated figures, and generally the “why” behind the numbers. The Model tab is where underlying datasets and Python scripts are housed.\n\nThe design reflects Patel’s background. During his tenure at Meta, Patel focused on reinforcement learning — a type of machine learning in which AI agents learn to make decisions through trial and error and maximize rewards — and evaluating whether AI output is trustworthy. Patel believes that if AI is going to build the spreadsheets and slide decks that companies use to make decisions, someone should be able to check its work. For instance, users can find the Python scripts used to create the documents.\n\n“Even if you don’t know any Python, you can ask [the AI chat] to explain, ‘Hey, what does this script do? Which line has my formula?’ And you can verify that formula,” Patel said. “There’s nothing hidden behind the curtain here.”\n\nIn practice, users can upload a dataset and ask Ndoc to perform an analysis and write a narrative about the findings. They can also add document-specific context, including audience, tone, and memory. “It maintains a memory across your person, that particular document, your team, and your company,” Patel said.\n\nPatel also says Ndoc is built and fine-tuned using a mixture of open source models. Because the platform was developed from scratch, he says it costs considerably less to run than alternatives built on frontier AI models.\n\n“I thought that’s what people would be excited about, but people don’t care about that,” he said, referring to his early trial users. “What people are excited about is that they love seeing all their end-to-end in one place.”\n\nPatel’s larger ambition is to reinvent the file itself. He says documents can be exported as a single “.ndoc.html” file that can be opened in any browser, a format he plans to open-source so other developers can build apps that work with it without being locked into Ndoc the way so many have been locked into Microsoft or Google for years.\n\nHis desire to open-source this project was partly why he left Meta and decided to go it alone. At a big company like Meta, getting everyone to agree on an open source format would undoubtedly require the input of “hundreds of people and opinions on how the format should look.”\n\nPatel wanted to move quickly. “Humans can only move at human pace, whereas…I can move at the pace of what AI can do.”\n\nTrying to become the platform where enterprise work happens is a huge bet for a founder with a team of three and no funding, especially when other AI labs are trying to own the same space.\n\nOpenAI, Anthropic , Meta , SpaceXAI , and Google have all come out with enterprise AI tools that allow users to connect to Google Workspace, Microsoft 365, and other workplace apps so their AI models can work directly in those tools. And last month, OpenAI launched Space, a shared workspace inside ChatGPT that’s a more direct competitor to those established tools.\n\nPatel acknowledges that Space could be a threat, but says the labs largely have the wrong idea.\n\n“Companies are basically attaching AI to spreadsheets and it fills your cells for you,” he said. “It just sort of kills my soul. This is like if you just figured out electricity, and then you decided the best use case is to put lights on my bulls that till my soil. No. Get a tractor.”\n\nThere’s a reason the AI labs have tried to bring their models to where people are already working, though. It’s hard to change habits and replace entire workflows. Patel says he understands that, which is why he built connectors so customers can import existing data from the tools they already use.\n\n“My bar was that I’m not going to release anything I don’t love using,” he said. “I have very optimized AI workflows for everything I do. If I start using this tool, and I keep going back to my workflows, I haven’t built a good enough tool…I have a graveyard of tools that did not meet that bar.”\n\nPatel has a similar bar for gaining customer traction before he tries to raise funds. “I didn’t want to take money until I had some proof that people love the product,” he said.\n\nAs of Tuesday, Ndoc is conducting an enterprise pilot and opening an alpha version to a limited number of customers who join the wait list. It’s free to sign up, but customers will pay for usage and tokens. He hopes to release a beta version in the coming weeks, with a full launch planned for next year.\n\nFor Patel, moving as fast as possible is more important than having the perfect product from the get-go.\n\n“Execution is extremely cheap…so go execute on a suboptimal plan and worry about it later,” he said. “By the time you make the best plan, the execution will be done by somebody else.”",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/27/meta-ai-director-rohit-patel-leaves-to-take-on-microsoft-office-and-google-workspace/",
+      "publishedAt": "2026-10-27T14:59:09.000Z",
+      "categories": [
+        "tecnologia-general",
+        "windows",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-e58af7c7ae998aab:en",
+      "sourceId": "techcrunch-e58af7c7ae998aab",
+      "lang": "en",
+      "title": "Ford Fathom will be the cheapest American EV capable of powering a house",
+      "summary": "Ford is rolling out two new chargers capable of powering a home or the grid — so-called V2X capability.",
+      "body": "Ford announced two new EV chargers today that will allow its forthcoming Fathom pickup truck to serve as a battery capable of delivering power to the home or grid.\n\nThe new chargers promise to be about half the cost of Ford’s existing equivalent products , which could make the technology available to more households. Ford said the Fathom itself will start at $28,350.\n\nThe Fathom will be capable of delivering “over 10 kW” to a home, Ford said. That would allow the electric vehicle to substitute for a small standby generator. For most U.S. homes, it wouldn’t be enough to power everything, but it could keep a refrigerator and air conditioner operational for about half a day.\n\nSuch capability has been touted as an advantage EVs have over fossil fuel vehicles, but not many EVs come properly equipped, and the chargers required to make use of vehicle-to-everything (V2X) services tend to be costly.\n\nFord’s two devices offer similar but differing capabilities.\n\nThe Home Power Station device can help customers shave their utility bill by charging the Fathom when power prices are low and sending electricity back to the home when prices are high. The automaker says it will cost around $650, about 50% less than its first-generation bidirectional charger.\n\nThe other option, Home Backup Power, is a package that bundles the Home Power Station with a second device, the Home Backup Panel, to allow the Fathom to also power parts or all of a home when the power goes out. Ford says the package will cost around $2,100, about 60% less than its first-generation product.\n\nNone of those prices include installation, which for existing V2X chargers can run up to $10,000, depending on how much electrical work needs to be done to prepare the home. Ford did not announce any partnerships with installers, though a spokesperson told TechCrunch that Ford would release more details at a later date.\n\nWhich loads the Fathom can power will vary by household and the specifics of each installation. Things like air conditioners and refrigerators, for example, typically require a large surge of power to start up, after which point their load drops. So-called soft-start devices can help mitigate the surge, though they add cost to the installation.\n\nBoth chargers will allow Fathom customers to participate in virtual power plants (VPPs), which use software to control a fleet of distributed energy storage devices, such as EVs.\n\nAs strain on the grid grows due to AI data centers, utilities have been exploring whether VPPs can help alleviate congestion at the edges.\n\nFathom owners who enroll and keep their truck plugged in can sell electricity back to the grid, often at a premium. Ford did not say how much Fathom owners can stand to make, but the payouts can be upwards of $1,000 per year, depending on the grid’s needs and the level of participation.\n\nAutomakers, including Ford , have been diving deep into energy storage as demand for such services surges. The Fathom-powered VPP is Ford’s latest foray into the market, but it’s unlikely to be its last.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/27/ford-fathom-will-be-the-cheapest-american-ev-capable-of-powering-a-house/",
+      "publishedAt": "2026-10-27T14:51:33.000Z",
+      "categories": [
         "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-d9c88df719bf53a1:en",
+      "sourceId": "ars-technica-d9c88df719bf53a1",
+      "lang": "en",
+      "title": "Apple iPhone Duo review: Two screens, two experiences, two thousand dollars",
+      "summary": "I respect Apple's first crack at a foldable phone, but I'm not sure I like it.",
+      "body": "I understand the appeal of foldable phones—they let manufacturers keep expanding screen sizes while still producing devices that can reasonably fit in a pocket. In practice, though, every foldable Android phone I've seen in public has had a ridiculously visible seam between the two halves of the screen, often with what looks like delamination from the underlying surface, giving the display an ugly, bubbly appearance.\n\nBack when Android phones began shipping with bigger and bigger screens and the iPhone was stuck at a miserly four inches, I was jealous. But I've never looked at anyone using a chunky, fragile-looking foldable phone in public and pined for Apple's take on the idea.\n\nNevertheless, that take has arrived, in the form of the iPhone Duo . This $1,999-and-up foldable is the biggest change to the iPhone in years, with both hardware and software updates that dramatically change how you interact with the device.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/gadgets/2026/10/apple-iphone-duo-review-two-screens-two-experiences-two-thousand-dollars/",
+      "publishedAt": "2026-10-27T14:20:26.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
       ]
     },
     {
@@ -5664,68 +5780,6 @@
       "categories": [
         "tecnologia-accesibilidad",
         "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-16f76a274a7ca02e:en",
-      "sourceId": "engadget-16f76a274a7ca02e",
-      "lang": "en",
-      "title": "Slate teams up with Smarties to add candy colors to its EV trucks",
-      "summary": "Fancy making your Slate EV look like halloween candy? Now you can.",
-      "body": "The barebones truck company has a similar deal with Crayola.\n\nSlate's barebones EV has taken the automotive world by storm with its cheap base price and total lack of frills. The company knows you'll want to customize your truck to suit your tastes, even if you don't fancy getting your 3D printer and screwdrivers out yourself. That's why it's partnering with colorful candy brand Smarties to roll out six pastel shades you can wrap your truck in.\n\nThe six pastel shades, which you can have your truck wrapped in, are named according to the flavors in the original candy rather than their actual hue. They're named Strawberry (green), Pineapple (yellow), Orange (uh, kinda beige?), Grape (lavender), Cherry (uh, pink?) and Blue Raspberry (light blue).\n\nSlate is selling its trucks in a flat grey color, but the body panels are prepared for wrapping in any shade you wish. The company has already teamed up with crayon-makers Crayola to offer wraps in five of its branded hues. But if you have eyes and the money, you'll opt for the bright yellow version because it's obviously the best .\n\nLike that partnership, you won't just get your truck wrapped in a snazzy color, but some added accessories thrown in as part of the deal. That includes a Smarties-branded Slatelet (a charm for your key fob), a Smarties-branded vent charm and a Smarties logo on your rear gate. There's no word on how much the wraps will cost, but you can add the wrap as an option ahead of your delivery date.\n\nEngadget's Tim Stevens has already driven the Slate EV and his enthusiasm has certainly made me plenty excited. Given that it rides low enough that you can actually see pedestrians and only pushes 181 horsepower, it's small and slow by modern American standards. But given the focus here is on real functionality over soothing the adequacy issues of its driver, those are good things .",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2295050/slate-ev-smarties-candy-color-wraps/",
-      "publishedAt": "2026-10-27T11:00:00.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-ad653f8c7de524b1:en",
-      "sourceId": "engadget-ad653f8c7de524b1",
-      "lang": "en",
-      "title": "20 Years of MacBook: How Apple shaped the laptops we use today",
-      "summary": "Apple has influenced everything from unibody laptop cases to high-res screens.",
-      "body": "Apple has influenced everything from unibody laptop cases to high-res screens.\n\nThe dream of a truly portable Mac is almost as old as the Macintosh itself. Five years after the debut of the original Macintosh desktop in 1984, Apple launched the disastrously expensive, 16-pound Macintosh Portable. It failed quickly. But out of the ashes came the PowerBook 100 in 1991, followed by the more refined PowerBook 500 and PowerBook G3 in 1994. Apple finally struck mainstream consumer gold with the colorful iBook G3 in 1999. With a small handle and an adorably rounded case, what more could you want? It wasn't exactly fast, but it was a clear sign that Apple was aiming to make computers that appeal to the masses.\n\nI can remember the exact moment I first fell in love with an Apple laptop. It was right as I was entering college in 2001: I came in with a desktop I built myself, but I couldn't help but notice the gorgeous PowerBook G4 several classmates had. I adored its sleek titanium case and the way Mac OS X seemed lightyears beyond Windows XP. Then Apple announced the first MacBook Pro in 2006, improving on the PowerBook G4 in every way, and the computing world hasn't been the same since.\n\nNo matter what you think of Apple or its hardware, there's no doubt that MacBooks have been the defining laptops of the last two decades. PC makers rushed to ape the MacBook Pro's sleek unibody design, and the introduction of the MacBook Air spurred on the creation of ultraportable laptops.\n\nSure, Apple has had its missteps — the first MacBook Air was way too slow, and it later made the boneheaded decision to remove crucial ports from the MacBook Pro — but even those served as learning lessons for the PC industry.\n\nOne of the first major stories Engadget covered back in 2005 was Apple's switch to Intel CPUs , moving away from the PowerPC chips it relied on for years. That made the first MacBook Pro and MacBook, as well as the revamped iMac, pretty intriguing systems when they arrived in 2006. They weren't just spiffy new Macs, they were a sign that Apple was now directly competing with PCs using the exact same Intel Core Duo chips.\n\nFor the most part, the MacBook Pro and MacBook were yet another sign of Apple's design prowess, and a warning to the entire PC industry. The MacBook Pro was a slimmer and more refined version of the PowerBook G4's aluminum case, while the PowerBook carried over a similar aesthetic to a plastic frame. At the time, most PC makers focused on less exciting and more utilitarian designs. Sony was the rare PC company actually leaning into a premium aesthetic with its VAIO systems , but they were also notoriously slow and expensive.\n\nIn 2008, Apple debuted the MacBook Pro and MacBook Air which both featured \"unibody\" cases carved out from a single block of aluminum. And really, the PC industry has never been the same since. Apple's unibody cases were stronger, lighter and more attractive than anything we'd seen on mainstream laptops at that point, and the company has continued to evolve that concept over the last two decades.\n\nPC makers struggled to replicate unibody cases for years — mainly, because Apple had a stranglehold on the global metal chassis supply chain . But eventually, Razer was able to get close with its 2011 Blade gaming laptop . Intel's push for ultraportable \"Ultrabooks\" in the early 2010s also led to other PC makers following suit. Dell's first XPS 13 combined an aluminum case and carbon fiber palm rests, while HP covered its Envy 14 laptop in Gorilla Glass to stand out.\n\nApple's first redesign of the 11-inch and 13-inch MacBook Air, which debuted in late 2010, also set a new standard for laptop shapes. Instead of simply being thin, they were slightly wedge-shaped, which gave them more room for larger batteries and faster SSD storage drives. Both ASUS and Acer took clear inspiration from the MacBook Air for all of their ultraportables throughout the 2010s.\n\nWith the 2012 MacBook Pro, Apple brought over the \"Retina Display\" concept it originally debuted on the iPhone 4. It features a resolution that's so sharp you can't discern individual pixels. The Retina Display MacBook Pro started a new trend towards high-resolution laptops. It wasn't long before every PC maker started racing to shove in better screen technology and more pixels into their systems. Ironically, Dell pioneered the razor-thin screen bezel design in the PC world , and it took Apple nearly a decade to seriously shave down its screen bezels.\n\nThe 2016 MacBook Pro was a significant change for several reasons: It was the introduction of the Touch Bar, and Apple also removed all legacy ports, leaving it with only four USB-C ports and a headphone connection. Apple basically double-downed on the design of the 12-inch MacBook , which was notorious for having just a single USB-C port. (The company also released the MacBook Pro without a Touch Bar in 2016, which only had two USB-C ports and a headphone jack.) This redesign made the MacBook Pro lighter and thinner than ever before, but it also left many professionals out in the cold, since it didn't have a built-in SD card reader, Type-A USB ports or an HDMI connection. There wasn't even a dedicated MagSafe power port. The 2016 MacBook Pro was the peak of Apple designer Jony Ive's minimalist style, which often came at the cost of practicality.\n\nThe MacBook Pro's Touch Bar was divisive from the beginning , and aside from ASUS — which experimented with trackpad screens and is still exploring dual screens with the ZenBook Duo — few PC companies tried to compete. But Apple's decision to strip down ports gave PC makers permission to do the same, as we saw in premium systems like the XPS 13, HP Spectre and Microsoft Surface laptops after 2016. ASUS, Acer and others eventually started squeezing more legacy ports into their laptops, both as a response to consumer criticisms and a way to differentiate from Apple's limitations.\n\nIn 2020, Apple completely reshaped its computers around its own M1 chip, an Arm-based system-on-a-chip that proved to be both more powerful and more efficient than Intel's x86 CPUs. Crucially, Apple Silicon brought together CPU cores, GPU cores, RAM, AI NPUs and I/O connections onto a single chip. The M1 MacBook Air and MacBook Pro were a revelation: They were incredibly fast, offered a huge battery boost and you couldn't even tell they were running emulated apps. While we'd seen Windows PCs dabble with Arm support over the years prior to 2020, they were always slow and offered terrible legacy support. Apple Silicon, and the company's reworked OS, demonstrated a far better way to build an Arm-based laptop.\n\nApple followed up with the redesigned M1 Pro and M1 Max MacBook Pro models in 2021, which finally brought back an SD card reader and HDMI port, as well as the M2 MacBook Air in 2022 (which I called a \"near perfect\" computer at the time). As a response, Microsoft rallied its partner Qualcomm to help build Copilot+ laptops , Arm-powered systems that could offer comparable battery life and performance to Apple's hardware. While the Copilot+ branding wasn't hugely successful , it at least helped to spur on better hardware in Windows laptops.\n\nNVIDIA's RTX Spark system-on-a-chip , which powers new high-end AI-focused systems like the Surface Laptop Ultra and ASUS ProArt P16 , is an attempt at delivering the high-end of Apple Silicon performance. RTX Spark systems are incredibly expensive, starting at $2,600 and scaling upwards of $7,000, but the platform's combination of a powerful GPU and up to 128GB of unified RAM makes it a compelling option for AI researchers.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2297565/20-years-of-macbook-how-apple-shaped-the-laptops-we-use-today/",
-      "publishedAt": "2026-10-27T11:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-5da3fe6d0531425f:en",
-      "sourceId": "techcrunch-5da3fe6d0531425f",
-      "lang": "en",
-      "title": "Nvidia backs Indian startup helping companies run AI models with fewer GPUs",
-      "summary": "Simplismart says its annualized revenue run rate has grown 14-fold in six months, with the U.S. accounting for more than half its revenue.",
-      "body": "As the AI boom strains computing capacity, Nvidia has backed Indian startup Simplismart in a $14 million funding round, betting on software that helps companies run AI models more efficiently and, in some cases, with fewer GPUs.\n\nNvidia participated in the all-primary Series B round alongside Accel, Shastra VC, and Micromax, with Dallas Venture Capital leading the investment. The deal values the four-year-old startup at about $100 million, including the new funding.\n\nCompanies are nowadays spending heavily on GPUs to power AI applications, but running those models reliably and economically at scale remains a challenge. Different workloads demand distinct trade-offs between speed, cost, and performance. Deploying and operating AI models to meet business requirements often also requires complex adjustments. Simplismart says its software automates much of that work, tailoring how models run on existing computing infrastructure instead of requiring customers to manage those configurations themselves.\n\n“Nobody actually needs the fastest or the cheapest inference,” Amritanshu Jain (pictured above, left), co-founder and CEO of Simplismart, said in an interview. He added that companies instead need to run AI models at speeds and costs that make sense for their specific applications.\n\nSimplismart’s software sits between AI models and the computing infrastructure they run on and adjusts how models are deployed and managed to meet customers’ requirements. It says it can optimize factors such as how quickly a model responds, how many requests it handles, and how much computing power it consumes, helping companies get more out of their existing GPU stack.\n\nThe Bengaluru-based startup offers companies a way to deploy and run AI models through its own platform or within their existing cloud and on-premises infrastructure. It also provides tools to fine-tune models, automatically scale computing resources as demand changes, and monitor performance. Additionally, Simplismart allows cloud providers build and operate their own AI inference services on GPU infrastructure using its software.\n\nSimplismart says it helped AI video-generation platform InVideo cut its GPU serving costs by 56% using its software. The startup also works with AI video companies HeyGen and Higgsfield, as well as enterprise AI startup Ema, among others. Moreover, Indian cloud provider Yotta uses Simplismart’s technology to power the serverless AI inference service within its Shakti Studio platform.\n\nSimplismart’s annualized revenue run rate has grown 14-fold over the past six months to an eight-figure sum, Jain told TechCrunch. The figure is based on recent customer usage rather than contracted recurring revenue and excludes revenue passed through to infrastructure providers, the company said. He did not disclose the exact figure.\n\nMore than half of Simplismart’s revenue comes from the U.S., despite the startup having more customers in India, Jain said.\n\nAlongside its investment, Nvidia has been working with Simplismart on technical integrations, including around its Dynamo inference software, Jain told TechCrunch. The collaboration involves Simplismart’s engineers and Nvidia’s solutions architects, while Nvidia has also helped introduce the startup to potential customers and partners, Jain stated.\n\nInterestingly, the investment presents an apparent paradox as Nvidia, the dominant supplier of AI chips, is backing software that can help companies run some workloads with fewer GPUs. Jain, however, argued that making AI inference more efficient could ultimately benefit Nvidia by making its hardware more attractive to customers and encouraging wider adoption of AI applications.\n\nSimplismart is serving customers in an increasingly crowded market for AI inference software, competing with offerings from Nvidia itself, as well as major cloud providers and hyperscalers including Amazon Web Services, Google Cloud, and Microsoft Azure. A growing number of startups are also developing tools to make AI models faster and cheaper to run as there is growing demand in this segment, driven by rising demand for AI applications and the need to make better use of expensive GPU resources.\n\n“Where we tend to win is where people have to be more stringent on their SLAs [service-level agreements] and TCO [total cost of ownership],” Jain said, referring to demanding performance requirements and tight cost constraints. Unlike rivals that offer preset options for faster or cheaper inference, Simplismart aims to find a balance tailored to each customer’s needs, he said.\n\nFounded in 2022 by former Oracle engineer Jain and former Google engineer Devansh Ghatak (pictured above, right), Simplismart grew out of the pair’s experience building and deploying machine-learning systems. The two met while studying at BITS Pilani, and the startup now employs 58 people, Jain said.\n\nSimplismart plans to use the new funding to expand its presence in the U.S., grow its team, and invest further in developing its inference software. Jain told TechCrunch that the U.S. remains a key market for the startup as it looks to build on its existing customer base there.\n\nThe funding announcement follows a report by Indian English daily The Economic Times that Simplismart was in talks to raise $40 million to $50 million at a valuation of $300 million to $400 million. Asked about the report, Jain declined to comment, saying the startup was not actively fundraising. He added that the Series B was closed and would not be extended.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/27/nvidia-backs-indian-startup-helping-companies-run-ai-models-with-fewer-gpus/",
-      "publishedAt": "2026-10-27T11:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-3014669e7ec1bf95:en",
-      "sourceId": "engadget-3014669e7ec1bf95",
-      "lang": "en",
-      "title": "OpenAI announces new discoveries in mathematics, computer science and physics",
-      "summary": "OpenAI said its models generated proof that the Exponential Time Hypothesis is false. It also released new results for math and physics problems.",
-      "body": "It formed groups of experts to examine and explain the results.\n\nJust a few weeks after OpenAI released manuscripts with over 700 pages of solutions and progress for 372 major math problems, the company has announced even more discoveries. This time, the discoveries don't just cover math results, but also results for computer science and physics problems.\n\nFor this release, OpenAI has experimented with three different strategies. It has published the math results, so researchers can look them up and make their own efforts to explain them. But for the computer science and physics results, it formed an external group of expert collaborators. OpenAI asked the group working on the computer science results to explain them in their own writeups and materials, while also releasing the AI output to the public. Meanwhile, OpenAI has deferred the release of the physics materials to the group handling them. The company is welcoming feedback \"on how to broaden participation and make this process more useful.\"\n\nOpenAI has added two new manuscripts on GitHub you can access right now. One establishes Sogge's local smoothing for waves in every spatial dimension, which is a conjecture about the behavior of solutions to the wave equation. The other shows proof that the Exponential Time Hypothesis, which is an assumption in computer science that some problems are just too hard to solve quickly, is false.\n\nAs OpenAI notes, ETH is widely believed to be true and has been the basis on hundreds of papers across a wide variety of fields, including databases and computation biology and geometry. If it is indeed false, then we could, in theory, find better algorithms to solve problems in those fields more efficiently. The scientists who proposed ETH are now part of the group OpenAI has asked to examine and explain the results generated by its models.\n\nFinally, the physics results involve proof of interacting quantum field theories containing gauge fields and fermions in four dimensions. The group examining the physics results has yet to publish anything about it, but it has provided an email – YANGMILLS4D[@]gmail.com — for all questions about its efforts.\n\nThe company says it will not seek any academic credit for its models' discoveries. Instead, the people in each group will get credit for the writeups and materials they create. The groups will also be in charge of making sure that the AI-generated results appropriately credit all the researchers, techniques and ideas the company's models drew on.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2297941/openai-new-discoveries-mathematics-computer-science-physics/",
-      "publishedAt": "2026-10-27T08:18:16.000Z",
-      "categories": [
-        "tecnologia-general"
       ]
     },
     {
@@ -5782,23 +5836,6 @@
     },
     {
       "kind": "news",
-      "id": "ars-technica-bd2817b63118cdd5:en",
-      "sourceId": "ars-technica-bd2817b63118cdd5",
-      "lang": "en",
-      "title": "Apple releases iOS and macOS 27.2 with new Siri AI features, new Music logo",
-      "summary": "Included is the ability to limit which applications Siri can directly access.",
-      "body": "Today, Apple rolled out the 27.2 updates for its operating systems, including iOS, macOS, watchOS, tvOS, visionOS, and so on.\n\nLet's start with iOS 27.2. This update is heavily focused on Siri AI. It adds a memory feature to Siri, so it can \"recall your past conversations\" and reference them when chatting with you. It also expands what data sources Siri can access when giving responses to include voicemails, Messages attachments, and more.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/apple/2026/10/apple-releases-ios-and-macos-27-2-with-new-siri-ai-features-new-music-logo/",
-      "publishedAt": "2026-10-26T20:04:16.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "applevis-blog-0bdfce6e8e965c65:en",
       "sourceId": "applevis-blog-0bdfce6e8e965c65",
       "lang": "en",
@@ -5819,22 +5856,6 @@
     },
     {
       "kind": "news",
-      "id": "ars-technica-543a5171d95739ff:en",
-      "sourceId": "ars-technica-543a5171d95739ff",
-      "lang": "en",
-      "title": "Apple reveals updated iPad mini with a bigger OLED screen for $700",
-      "summary": "Apple claims this is the most significant update ever for the iPad mini line.",
-      "body": "The iPhone Duo may be a bit of a risk right now , but there's a new mid-size Apple touchscreen device that might do the job. Starting at $699, the 8th-gen iPad mini price has gone up, but there are some big changes. Apple says the refreshed 8th-gen iPad mini marks the most significant update ever for its petite tablet, featuring an OLED screen and the A20 Pro chip that we first saw in the iPhone 18 Pro and iPhone Duo.\n\nThe new iPad mini has roughly the same footprint as the 2024 release, but the display is slightly larger thanks to a 24 percent reduction in bezel thickness. The device is almost a full millimeter thinner than the last iPad, coming in at just 5.4 mm. The chassis is also IP67 rated for water and dust protection. The 7th-Gen iPad mini didn't have any official IP rating.\n\nThe 8.5-inch Super Retina XDR display (up from 8.3 inches) moves on from the IPS technology of the last-gen device to adopt OLED. That means dapper blacks and a much higher peak brightness—1,200 nits versus just 500 nits for the previous mini. It can also manage 1-nit minimum brightness so as not to sear your retinas in a dark room. There will also be a nano-textured matte display option. The display experience on the new mini should be much more in line with what we've come to expect from Apple's Pro-level devices.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/apple/2026/10/apple-reveals-updated-ipad-mini-with-a-bigger-oled-screen-for-700/",
-      "publishedAt": "2026-10-26T19:04:40.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "applevis-blog-fda9ea230d7ce6c2:en",
       "sourceId": "applevis-blog-fda9ea230d7ce6c2",
       "lang": "en",
@@ -5850,22 +5871,6 @@
         "apps-accesibles",
         "programas-accesibles",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-188a0b59f689c2ad:en",
-      "sourceId": "ars-technica-188a0b59f689c2ad",
-      "lang": "en",
-      "title": "Some iPhone Duo screens are already failing",
-      "summary": "Apple's \"precision-engineered\" hinge is apparently damaging some iPhone Duo screens.",
-      "body": "The iPhone Duo launched last week, offering anyone willing to spend $2,000 a chance to experience Apple's first foldable phone. For some early buyers, the morning after isn't going great. Despite the company's big talk about its \"precision-engineered\" hinge, some devices appear to have a hardware flaw that destroys the device's impressive internal display within hours (or minutes) of use.\n\nThe Internet is currently overflowing with images of busted iPhone Duos, all sporting almost identical damage. The OLED is marred by several bright lines originating just below the midpoint of the display. These bands of damaged pixels extend all the way to the bottom and right edges. Some units also show lines of dead pixels following the crease from the top to the area where the bright lines begin.\n\nAnyone who has seen a damaged OLED panel will be familiar with this type of defect. When the layers of the display are damaged, the pixels no longer receive the correct voltage to illuminate them. Instead, they get the full driving voltage and are permanently on at maximum brightness. Some pixels can get no voltage, leaving them totally black. The only fix is to replace the OLED, but swapping the iPhone Duo's screen reportedly costs half as much as the device itself.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/gadgets/2026/10/some-iphone-duo-screens-are-already-failing/",
-      "publishedAt": "2026-10-26T16:51:49.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple"
       ]
     },
     {

@@ -37,3 +37,13 @@ test('native integration keeps existing video actions and reader accessible whil
   assert.equal(request.status, 'draft', 'Do not publish until real upgrade and OAuth tests pass');
   assert.equal(request.confirmProduction, false);
 });
+
+test('legacy migration preflight is read-only and reports data instead of replacing it', async () => {
+  const bridge = await source('../android/app/src/main/java/com/tifloacosta/app/TifloNativeFeaturesPlugin.java');
+  assert.match(bridge, /inspectLegacyLibrary\(PluginCall call\)/);
+  assert.match(bridge, /SQLiteDatabase\.OPEN_READONLY/);
+  assert.match(bridge, /SELECT COUNT\(\*\) FROM /);
+  assert.match(bridge, /legacyDatabaseExists/);
+  assert.match(bridge, /migrationCompleted", false/);
+  assert.doesNotMatch(bridge, /getWritableDatabase\(|deleteDatabase\(|clearApplicationUserData\(/);
+});

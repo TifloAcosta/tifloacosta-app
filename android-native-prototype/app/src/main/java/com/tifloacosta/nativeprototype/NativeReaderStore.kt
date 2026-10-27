@@ -226,6 +226,21 @@ class NativeReaderStore(private val context: Context) {
         return book.tracks.map { File(folder, it) }.filter { it.isFile }
     }
 
+    @Synchronized fun textFile(book: ReaderBook): File {
+        require(ids.matches(book.id))
+        val file = File(folder, book.id + ".txt")
+        if (!file.isFile) throw IOException("No se encontró el texto de la obra.")
+        return file
+    }
+
+    @Synchronized fun originalFile(book: ReaderBook): File? {
+        require(ids.matches(book.id))
+        return folder.listFiles()?.firstOrNull { candidate ->
+            candidate.isFile && candidate.name.startsWith(book.id + ".source.") &&
+                candidate.name.substringAfterLast('.', "").matches(Regex("[a-z0-9]{2,8}"))
+        }
+    }
+
     @Synchronized fun import(uri: Uri,
         progress: ((Int, Int) -> Unit)? = null): ReaderBook {
         val resolver = context.contentResolver

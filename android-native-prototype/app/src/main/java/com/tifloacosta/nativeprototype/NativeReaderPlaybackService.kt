@@ -162,6 +162,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
             }
         }
     }
+    private var lastProgressWriteMs = 0L
     private val ticker = object : Runnable {
         override fun run() {
             if (playing) {
@@ -184,7 +185,9 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                         nextSegment()
                     } else {
                         publish()
-                        persist()
+                        // Notify UI every second but avoid a full metadata fsync
+                        // every second on a long audiobook.
+                        if (now - lastProgressWriteMs >= 10_000L) persist()
                     }
                 }
                 handler.postDelayed(this, 1000)
@@ -563,6 +566,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                     lastReadAt = now
                 ) else latest.copy(offset = textOffset, lastReadAt = now)
             } ?: current
+            lastProgressWriteMs = android.os.SystemClock.elapsedRealtime()
         } catch (e: Exception) {
             publish("No se pudo guardar la posición: " + e.message.orEmpty())
         }

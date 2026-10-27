@@ -1,6 +1,8 @@
 package com.tifloacosta.nativeprototype
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook
+import org.apache.poi.hslf.usermodel.HSLFSlideShow
+import org.apache.poi.hslf.usermodel.HSLFTextBox
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -29,6 +31,17 @@ class ReaderLegacyFormatsTest {
         assertTrue(text.contains("Concepto"))
         assertTrue(text.contains("Importe"))
         assertTrue(text.contains("Libro"))
+    }
+
+    @Test fun powerpoint97WorksAsPptAndPps() {
+        val bytes = HSLFSlideShow().use { slideShow ->
+            val first = slideShow.createSlide()
+            first.addShape(HSLFTextBox().also { it.text = "Presentación accesible" })
+            ByteArrayOutputStream().also { slideShow.write(it) }.toByteArray()
+        }
+        assertTrue(NativeReaderLegacyOffice.hasOle2Header(bytes))
+        assertTrue(NativeReaderLegacyOffice.extract("ppt", bytes).contains("Presentación"))
+        assertTrue(NativeReaderLegacyOffice.extract("pps", bytes).contains("Presentación"))
     }
 
     @Test fun rejectsFakeOrEncryptedLookingBinaryInsteadOfReadingGarbage() {

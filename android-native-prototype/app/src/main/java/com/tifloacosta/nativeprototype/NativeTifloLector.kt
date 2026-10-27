@@ -1,5 +1,6 @@
 package com.tifloacosta.nativeprototype
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
@@ -472,6 +473,36 @@ fun NativeTifloLector(
                     else
                         "El lector anterior contiene ${state.bookCount} libros. Siguen en el TifloLector actual, no en esta vista previa nativa. Vuelve al lector anterior para utilizarlos; no se han migrado ni borrado datos."
                 )
+            }
+            if (state.databasePresent) {
+                TextButton(
+                    onClick = {
+                        val nav = context.getSharedPreferences(
+                            "tiflo-reader-navigation", android.content.Context.MODE_PRIVATE
+                        )
+                        if (!nav.edit().putBoolean("open-existing-library", true).commit()) {
+                            error = if (english) "Could not open the previous library."
+                                else "No se pudo solicitar la apertura de la biblioteca anterior."
+                        } else {
+                            try {
+                                val backIntent = Intent().setClassName(
+                                    context.packageName, "com.tifloacosta.app.MainActivity"
+                                ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or
+                                    Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                                context.startActivity(backIntent)
+                                (context as? android.app.Activity)?.finish()
+                            } catch (failure: Exception) {
+                                nav.edit().remove("open-existing-library").apply()
+                                error = if (english) "Original reader is unavailable in this test build."
+                                    else "La biblioteca original no está disponible en esta compilación."
+                            }
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(if (english) "Open existing reading library"
+                        else "Abrir biblioteca anterior")
+                }
             }
         }
         Text(if (english) "My library" else "Mi biblioteca",

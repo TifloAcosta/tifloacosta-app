@@ -853,16 +853,20 @@ private fun NativeReadingScreen(
                 if (active) send(NativeReaderPlaybackService.ACTION_SPEED,
                     (perBookRate * 100f).toInt())
             }
-            val voices = speaker.voices()
-            ReaderAdjustableChoice(
-                if (english) "Voice" else "Voz",
-                listOf(if (english) "System default" else "Predeterminada") +
-                    voices.map { it.name + ", " + it.locale.displayLanguage },
-                voices.indexOfFirst { it.name == voiceName }.let { if (it < 0) 0 else it + 1 }
-            ) { index ->
-                voiceName = voices.getOrNull(index - 1)?.name.orEmpty()
-                prefs.edit().putString("voice." + book.id, voiceName).apply()
-            }
+            NativeReaderVoicePicker(
+                english = english,
+                speaker = speaker,
+                selectedVoice = voiceName,
+                speed = perBookRate,
+                filter = 0,
+                onBeforePreview = {
+                    if (active && playing) send(NativeReaderPlaybackService.ACTION_PAUSE)
+                },
+                onVoiceSelected = { chosen ->
+                    voiceName = chosen
+                    prefs.edit().putString("voice." + book.id, chosen).apply()
+                }
+            )
             ReaderAdjustableChoice(
                 if (english) "Sleep timer" else "Apagado automático",
                 sleepChoices, sleepIndex

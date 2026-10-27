@@ -137,3 +137,14 @@ test('public video section exposes native YouTube account actions without requir
   assert.match(native, /fun startAuthorization\(\)/);
   assert.match(native, /fun signOut\(\)/);
 });
+
+test('share manifest advertises OCR images, legacy Office and DAISY archives', async () => {
+  const manifest = await source('../android/app/src/main/AndroidManifest.xml');
+  for (const mime of [
+    'image/jpeg', 'image/png', 'image/webp', 'image/heic',
+    'application/pdf', 'application/epub+zip', 'application/msword',
+    'application/vnd.ms-excel', 'application/vnd.ms-powerpoint',
+    'application/zip', 'application/x-7z-compressed',
+    'application/x-rar-compressed'
+  ]) assert.ok(manifest.includes('android:mimeType="' + mime + '"'), 'missing shared MIME: ' + mime);
+});

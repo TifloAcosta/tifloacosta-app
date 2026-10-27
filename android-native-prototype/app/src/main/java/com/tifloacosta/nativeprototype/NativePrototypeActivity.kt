@@ -62,16 +62,21 @@ object PrototypeNavigation {
 class NativePrototypeActivity : ComponentActivity() {
     val youTubeAccount by lazy { NativeYouTubeAccount(applicationContext) }
     private var oauthCallback by mutableStateOf<Uri?>(null)
+    private var requestedReaderBookId by mutableStateOf<String?>(null)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (intent?.action == Intent.ACTION_VIEW) oauthCallback = intent?.data
+        requestedReaderBookId = intent?.getStringExtra("tiflolector-open-book")
+            ?.takeIf { it.isNotBlank() }
         setContent {
             MaterialTheme(colorScheme = if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme()) {
                 PrototypeHome(
                     account = youTubeAccount,
                     callback = oauthCallback,
                     onCallbackHandled = { oauthCallback = null },
+                    requestedReaderBookId = requestedReaderBookId,
+                    onReaderRequestHandled = { requestedReaderBookId = null },
                     onSignIn = {
                         val url = youTubeAccount.startAuthorization()
                         startActivity(Intent(Intent.ACTION_VIEW, url))
@@ -84,6 +89,8 @@ class NativePrototypeActivity : ComponentActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         if (intent.action == Intent.ACTION_VIEW) oauthCallback = intent.data
+        intent.getStringExtra("tiflolector-open-book")
+            ?.takeIf { it.isNotBlank() }?.let { requestedReaderBookId = it }
     }
 }
 
@@ -140,6 +147,8 @@ private fun PrototypeHome(
     account: NativeYouTubeAccount,
     callback: Uri?,
     onCallbackHandled: () -> Unit,
+    requestedReaderBookId: String?,
+    onReaderRequestHandled: () -> Unit,
     onSignIn: () -> Unit
 ) {
     val context = LocalContext.current
@@ -158,6 +167,9 @@ private fun PrototypeHome(
     var mediaLoad by remember { mutableStateOf(MediaLoad()) }
     var mediaLoading by remember { mutableStateOf(true) }
     var section by rememberSaveable { mutableIntStateOf(PrototypeNavigation.HOME) }
+    LaunchedEffect(requestedReaderBookId) {
+        if (requestedReaderBookId != null) section = PrototypeNavigation.READER
+    }
     var mediaIndex by rememberSaveable { mutableIntStateOf(0) }
     var mediaSourceIndex by rememberSaveable { mutableIntStateOf(0) }
     var mediaLanguageIndex by rememberSaveable { mutableIntStateOf(0) }
@@ -240,6 +252,8 @@ private fun PrototypeHome(
     if (section == PrototypeNavigation.READER) {
         NativeTifloLector(
             english = english,
+            requestedBookId = requestedReaderBookId,
+            onReaderRequestHandled = onReaderRequestHandled,
             onBack = { section = PrototypeNavigation.HOME }
         )
         return

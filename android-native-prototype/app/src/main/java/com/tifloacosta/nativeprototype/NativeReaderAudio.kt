@@ -71,9 +71,8 @@ fun NativeReaderAudioScreen(
         NativeReaderPlaybackService.send(context, action, book.id, value)
     }
     fun start() {
-        command(NativeReaderPlaybackService.ACTION_START_AUDIO)
-        if (sleepIndex > 0) command(NativeReaderPlaybackService.ACTION_SLEEP, sleepTimes[sleepIndex])
-        if (speedIndex != 2) command(NativeReaderPlaybackService.ACTION_SPEED, speeds[speedIndex])
+        NativeReaderPlaybackService.start(context, book.id, audio = true,
+            speedPercent = speeds[speedIndex], sleepMinutes = sleepTimes[sleepIndex])
     }
     fun toggle() {
         if (reading) command(NativeReaderPlaybackService.ACTION_PAUSE)
@@ -193,11 +192,7 @@ fun NativeReaderAudioScreen(
                     if (active) {
                         // Section selection uses successive commands; fine-grained
                         // direct selection arrives in the next DAISY navigation block.
-                        val delta = chosen - current
-                        repeat(kotlin.math.abs(delta).coerceAtMost(80)) {
-                            command(if (delta > 0) NativeReaderPlaybackService.ACTION_NEXT
-                                else NativeReaderPlaybackService.ACTION_PREVIOUS)
-                        }
+                        command(NativeReaderPlaybackService.ACTION_SEGMENT, chosen)
                     }
                 }
             }

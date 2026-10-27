@@ -75,7 +75,8 @@ object NativeReaderArchives {
                 "txt", "md", "markdown", "html", "htm", "xhtml",
                 "xml", "smil", "smi", "ncx", "opf", "fb2", "rtf",
                 "docx", "pptx", "ppsx", "xlsx", "odt", "ods", "odp",
-                "epub", "pdf", "jpg", "jpeg", "png", "webp"
+                "epub", "pdf", "jpg", "jpeg", "png", "webp",
+                "doc", "xls", "ppt", "pps", "mobi", "prc", "pdb", "azw", "azw3"
             )
             if (suffix !in allowed) return
             val temp = File(staging, "member-" + attempted.toString().padStart(5, '0'))
@@ -178,7 +179,8 @@ object NativeReaderArchives {
                             if (suffix !in (NativeReaderFormats.AUDIO_EXTENSIONS + setOf(
                                 "txt","md","markdown","html","htm","xhtml","xml",
                                 "smil","smi","ncx","opf","fb2","rtf","docx",
-                                "pptx","ppsx","xlsx","odt","ods","odp","epub","pdf"
+                                "pptx","ppsx","xlsx","odt","ods","odp","epub","pdf",
+                                "doc","xls","ppt","pps","mobi","prc","pdb","azw","azw3"
                             ))) continue
                             if (header.fullUnpackSize > MAX_MEMBER_BYTES)
                                 throw IOException("Una entrada del RAR supera 400 MB.")

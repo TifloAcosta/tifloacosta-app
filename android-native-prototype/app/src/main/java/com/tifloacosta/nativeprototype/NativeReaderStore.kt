@@ -249,7 +249,7 @@ class NativeReaderStore(private val context: Context) {
             temp.copyTo(document, overwrite = true)
             temp.delete()
         }
-        update(existing.copy(length = result.length))
+        changeBook(id) { latest -> latest.copy(length = result.length) }
     }
 
     @Synchronized fun replaceFolder(oldName: String, newName: String) =
@@ -375,7 +375,7 @@ class NativeReaderStore(private val context: Context) {
                 id = id, title = title.take(180), length = payload.body.length,
                 format = payload.format, tracks = names
             )
-            save(list() + book)
+            synchronized(NativeReaderPersistence.lock) { save(list() + book) }
             return book
         } catch (e: Exception) {
             files.forEach { it.delete() }
@@ -470,7 +470,7 @@ class NativeReaderStore(private val context: Context) {
                 tracks = copied, audioSegments = plan.segments,
                 daisyNavigation = plan.navigation
             )
-            save(list() + book)
+            synchronized(NativeReaderPersistence.lock) { save(list() + book) }
             return book
         } catch (e: Exception) {
             written.forEach { it.delete() }

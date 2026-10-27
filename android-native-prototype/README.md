@@ -1,3 +1,34 @@
+# Fase final de TifloLector — bloque 5 de 7 (biblioteca y carpetas)
+
+Versión de pruebas 0.16-bloque5, basada en 0.15 y separada de Google Play/iOS.
+
+## Carpetas y organización
+
+- En «Filtros» hay **Gestionar carpetas y crear nueva carpeta**, que abre una pantalla con un campo etiquetado «Nombre de nueva carpeta» y un botón real **Crear carpeta**. Las carpetas se guardan en `folders.json` de forma independiente de los libros; una carpeta vacía se conserva al salir y volver a entrar y después de reiniciar la aplicación. Nombres Unicode, límites de longitud y prevención de duplicados insensibles a mayúsculas.
+- Mis carpetas muestra el número de obras en cada carpeta y acciones accesibles de renombrar y eliminar; eliminar carpeta requiere confirmación y **no elimina libros**: pasan a Sin carpeta. Renombrar actualiza los libros de esa carpeta.
+- La acción «Mover a carpeta» del rotor permite seleccionar una existente o usar **Crear carpeta nueva y mover este libro**; una carpeta sin ningún libro es visible en el filtro de carpetas.
+- No crea carpetas físicas arbitrarias en Android ni cambia la estructura de archivos original. Las carpetas son agrupaciones organizativas independientes de las rutas privadas de importación.
+
+## Cola, marcas y progreso
+
+- Dentro de Filtros se ofrecen **Cola de lectura**, **En curso**, **Terminados** y **Gestionar cola de lectura**. Una obra entra o sale de la cola mediante acciones del rotor del título; la pantalla de cola permite abrir, subir, bajar o quitar libros. Se guarda en `reading-queue.json` y conserva el orden, incluso al reiniciar; los IDs de libros eliminados se depuran.
+- «Marcas» del rotor abre realmente una pantalla de marcas, para texto y audio, con posición en porcentaje o segmento y segundo, y acceso directo a esa posición. No obliga a desplazarse por todo el documento.
+- El rotor añade «Marcar como terminado o pendiente». El filtro En curso identifica títulos con actividad anterior que aún no están terminados. La última lectura queda guardada por el servicio de reproducción y se muestra en Información de la obra.
+- La accesibilidad del progreso se expone como descripción de estado del título: leído en porcentaje para texto; sección actual de un audiolibro para audio. No se inventa un porcentaje global de un audio DAISY cuando se desconocen las duraciones de sus pistas.
+- Se conservan los índices antiguos de filtros para evitar confundir las preferencias guardadas de otros bloques, añadiendo las nuevas categorías al final.
+
+## Pruebas de aceptación en Pixel con TalkBack
+
+1. Crear «Novelas» desde Filtros, comprobar que aparece sin libros; salir, cerrar y reabrir; confirmar que se mantiene.
+2. Crear «Historia DAISY» desde «Mover a carpeta», mover dos obras y cambiar su nombre; comprobar que la organización se actualiza en filtros y Mi biblioteca.
+3. Eliminar una carpeta que contiene obras; confirmar que las obras siguen en Sin carpeta y que no se pierden sus marcas ni posición.
+4. Añadir tres obras a cola mediante acciones del rotor, subir y bajar, quitar una, cerrar y abrir; comprobar el orden y que Filtros > Cola de lectura respeta ese orden.
+5. Abrir Marcas desde el rotor y saltar a un porcentaje de texto o segmento+segundo de un DAISY; bloquear pantalla y comprobar el servicio multimedia.
+6. Marcar una obra como terminada, filtrar Terminados/En curso y verificar la última lectura en Información.
+7. Comprobar con TalkBack que todos los campos y acciones están identificados y que la navegación al salir devuelve el foco a la biblioteca.
+
+No fusionar ni distribuir por Play Store hasta que la APK 0.16 supere compilación y pruebas físicas. Los datos de compilaciones debug pueden perderse si Android exige desinstalación por cambio de firma.
+
 # Fase final de TifloLector — bloque 4 de 7 (herramientas por documento)
 
 Versión **0.15-bloque4**, rama de pruebas y PR #258. Basada en el bloque 3/0.14; no modifica Google Play ni iOS.

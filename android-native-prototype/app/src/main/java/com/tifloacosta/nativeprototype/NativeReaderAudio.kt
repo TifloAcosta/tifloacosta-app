@@ -1,6 +1,5 @@
 package com.tifloacosta.nativeprototype
 
-import android.media.MediaPlayer
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -16,14 +15,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.ProgressBarRangeInfo
 import androidx.compose.ui.semantics.contentDescription
@@ -34,11 +34,9 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
 import kotlin.math.roundToInt
 
-/** Simple foreground audio reader; MediaSession/background playback still pending. */
+/** Playback belongs to a foreground service: leaving this screen does not stop audio. */
 @Composable
 fun NativeReaderAudioScreen(
     book: ReaderBook,
@@ -48,285 +46,180 @@ fun NativeReaderAudioScreen(
     onUpdate: (ReaderBook) -> Unit,
     onBack: () -> Unit
 ) {
-    val tracks = remember(book.id) { store.audioFiles(book) }
-    // SMIL may refer repeatedly to different clips of the SAME audio file.
-    // A playlist item therefore means a DAISY segment, not a duplicated MP3.
-    val playlist = remember(book.id) {
-        val items = book.audioSegments.ifEmpty {
-            tracks.indices.map { ReaderAudioSegment(it) }
-        }
-        items.filter { it.fileIndex in tracks.indices }
+    val context = LocalContext.current
+    val state by NativeReaderPlaybackService.snapshot.collectAsState()
+    val active = state.bookId == book.id && state.kind == "audio"
+    val reading = active && state.playing
+    val segments = remember(book.id) {
+        book.audioSegments.ifEmpty { store.audioFiles(book).indices.map { ReaderAudioSegment(it) } }
     }
-    var player by remember(book.id) { mutableStateOf<MediaPlayer?>(null) }
-    var track by remember(book.id) {
-        mutableIntStateOf(book.trackIndex.coerceIn(0, (playlist.size - 1).coerceAtLeast(0)))
-    }
-    var position by remember(book.id) { mutableIntStateOf(book.audioPositionMs) }
-    var duration by remember(book.id) { mutableIntStateOf(0) }
-    var playing by remember(book.id) { mutableStateOf(false) }
-    var actionsIndex by remember(book.id) { mutableIntStateOf(0) }
-    var more by remember(book.id) { mutableStateOf(false) }
-    var audioExpanded by remember(book.id) { mutableStateOf(false) }
+    val current = if (active) state.segment else book.trackIndex
+    val position = if (active) state.positionMs else book.audioPositionMs
+    val duration = if (active) state.durationMs else 0
+    var selectedAction by remember(book.id) { mutableIntStateOf(0) }
+    var expandedAudio by remember(book.id) { mutableStateOf(false) }
+    var expandedMore by remember(book.id) { mutableStateOf(false) }
     var sleepIndex by remember(book.id) { mutableIntStateOf(0) }
-    val timerMinutes = listOf(0, 5, 10, 15, 30, 45, 60)
-    val timerChoices = if (english)
-        listOf("Off", "5 minutes", "10 minutes", "15 minutes",
-            "30 minutes", "45 minutes", "60 minutes")
-    else listOf("Desactivado", "5 minutos", "10 minutos", "15 minutos",
-        "30 minutos", "45 minutos", "60 minutos")
     var speedIndex by remember(book.id) { mutableIntStateOf(2) }
-    var message by remember(book.id) { mutableStateOf("") }
-    val speeds = listOf(.75f, .9f, 1f, 1.25f, 1.5f)
-
-    fun persist() {
-        onUpdate(book.copy(trackIndex = track, audioPositionMs = position))
+    val speeds = listOf(75, 90, 100, 125, 150)
+    val sleepTimes = listOf(0, 5, 10, 15, 30, 45, 60)
+    val marks = remember(book.audioMarks, book.marks) {
+        book.audioMarks.ifEmpty { book.marks.map { ReaderAudioMark(book.trackIndex, it) } }
     }
-    fun openTrack(target: Int, seekPosition: Int = 0) {
-        val segment = playlist.getOrNull(target) ?: return
-        try {
-            player?.release()
-            val media = MediaPlayer()
-            media.setDataSource(tracks[segment.fileIndex].absolutePath)
-            media.prepare()
-            track = target
-            duration = media.duration
-            val clipStart = segment.startMs.coerceIn(0, duration.coerceAtLeast(0))
-            val clipEnd = segment.endMs.takeIf { it > clipStart }
-                ?.coerceAtMost(duration) ?: duration
-            position = (if (seekPosition > 0) seekPosition else clipStart)
-                .coerceIn(clipStart, clipEnd)
-            media.seekTo(position)
-            media.playbackParams = media.playbackParams.setSpeed(speeds[speedIndex])
-            media.setOnCompletionListener {
-                if (track < playlist.lastIndex) openTrack(track + 1, 0)
-                else {
-                    playing = false
-                    position = 0
-                    persist()
-                }
-            }
-            player = media
-            media.start()
-            playing = true
-            persist()
-        } catch (e: Exception) {
-            message = e.message ?: "No se pudo iniciar la pista de audio."
-            playing = false
-            player?.release()
-            player = null
-        }
+
+    fun command(action: String, value: Int = 0) {
+        NativeReaderPlaybackService.send(context, action, book.id, value)
+    }
+    fun start() {
+        command(NativeReaderPlaybackService.ACTION_START_AUDIO)
+        if (sleepIndex > 0) command(NativeReaderPlaybackService.ACTION_SLEEP, sleepTimes[sleepIndex])
+        if (speedIndex != 2) command(NativeReaderPlaybackService.ACTION_SPEED, speeds[speedIndex])
     }
     fun toggle() {
-        if (playing) {
-            player?.pause()
-            position = player?.currentPosition ?: position
-            playing = false
-            persist()
-        } else if (player != null) {
-            player?.start()
-            playing = true
-        } else openTrack(track, position)
+        if (reading) command(NativeReaderPlaybackService.ACTION_PAUSE)
+        else if (active) command(NativeReaderPlaybackService.ACTION_PLAY)
+        else start()
     }
-    fun stop() {
-        playing = false
-        player?.release()
-        player = null
-        position = 0
-        persist()
+    fun bookmark() { if (active) command(NativeReaderPlaybackService.ACTION_BOOKMARK) }
+    fun previous() {
+        if (!active) start()
+        else command(NativeReaderPlaybackService.ACTION_PREVIOUS)
     }
-    fun skip(millis: Int) {
-        val currentClip = playlist.getOrNull(track)
-        val first = currentClip?.startMs?.toLong()?.coerceAtLeast(0) ?: 0L
-        val last = currentClip?.endMs?.takeIf { it > first }
-            ?.toLong()?.coerceAtMost(duration.toLong()) ?: duration.toLong()
-        val next = (position.toLong() + millis).coerceIn(first, last).toInt()
-        player?.seekTo(next)
-        position = next
-        persist()
+    fun next() {
+        if (!active) start()
+        else command(NativeReaderPlaybackService.ACTION_NEXT)
     }
-    // Older prototype books stored only a millisecond position. Preserve
-    // those bookmarks in the current section until a new mark migrates them.
-    val marks = book.audioMarks.ifEmpty {
-        book.marks.map { ReaderAudioMark(book.trackIndex, it) }
-    }
-    fun bookmark() {
-        val mark = ReaderAudioMark(track, position)
-        if (mark !in marks) {
-            onUpdate(book.copy(audioMarks = marks + mark,
-                trackIndex = track, audioPositionMs = position))
-            message = if (english) "Bookmark saved" else "Marca guardada"
-        }
-    }
-
     val actions = if (english)
         listOf("Play or pause", "Back 30 seconds", "Forward 30 seconds",
-            "Previous track", "Next track", "Bookmark", "More actions")
+            "Previous section", "Next section", "Bookmark", "More actions")
     else listOf("Reproducir o pausar", "Retroceder 30 segundos", "Avanzar 30 segundos",
-        "Pista anterior", "Pista siguiente", "Añadir marca", "Más acciones")
-    fun runAction(idx: Int) {
-        when (idx) {
+        "Sección anterior", "Sección siguiente", "Añadir marca", "Más acciones")
+    fun perform(index: Int) {
+        when (index) {
             0 -> toggle()
-            1 -> skip(-30000)
-            2 -> skip(30000)
-            3 -> if (track > 0) openTrack(track - 1)
-            4 -> if (track < playlist.lastIndex) openTrack(track + 1)
+            1 -> command(NativeReaderPlaybackService.ACTION_SKIP_BACK)
+            2 -> command(NativeReaderPlaybackService.ACTION_SKIP_FORWARD)
+            3 -> previous()
+            4 -> next()
             5 -> bookmark()
-            6 -> more = !more
+            6 -> expandedMore = !expandedMore
         }
     }
-
     LaunchedEffect(book.id) {
-        if (startOnOpen) toggle()
-    }
-    LaunchedEffect(playing, sleepIndex) {
-        if (playing && sleepIndex > 0) {
-            delay(timerMinutes[sleepIndex] * 60_000L)
-            if (playing) {
-                try {
-                    position = player?.currentPosition ?: position
-                    player?.pause()
-                } catch (_: Exception) { }
-                playing = false
-                persist()
-            }
-        }
-    }
-    DisposableEffect(book.id) {
-        onDispose {
-            val current = player
-            if (current != null) {
-                try {
-                    onUpdate(book.copy(trackIndex = track, audioPositionMs = current.currentPosition))
-                } catch (_: Exception) {}
-            }
-            current?.release()
-        }
-    }
-    LaunchedEffect(player, playing, track) {
-        var previousSave = 0
-        while (isActive && playing) {
-            delay(250)
-            val observed = try { player?.currentPosition ?: 0 } catch (_: Exception) { 0 }
-            position = observed
-            // Honor clip-end from SMIL even if the physical MP3 file continues.
-            val limit = playlist.getOrNull(track)?.endMs ?: -1
-            if (limit > 0 && observed >= limit - 100) {
-                if (track < playlist.lastIndex) openTrack(track + 1)
-                else {
-                    playing = false
-                    player?.pause()
-                    persist()
-                }
-                break
-            }
-            if (++previousSave >= 20) {
-                persist()
-                previousSave = 0
-            }
-        }
+        if (startOnOpen && !reading) start()
     }
     BackHandler { onBack() }
-    Column(
-        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(10.dp)
-    ) {
-        TextButton(onClick = {
-            player?.pause()
-            persist()
-            onBack()
-        }) { Text(if (english) "Back to library" else "Volver a Mi biblioteca") }
-        Text(book.title,
-            style = MaterialTheme.typography.titleLarge,
-            modifier = Modifier.fillMaxWidth().clickable { runAction(actionsIndex) }.semantics {
+
+    Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        TextButton(onClick = onBack) {
+            Text(if (english) "Back to My library" else "Volver a Mi biblioteca")
+        }
+        Text(book.title, style = MaterialTheme.typography.titleLarge,
+            modifier = Modifier.fillMaxWidth().clickable { perform(selectedAction) }.semantics {
                 heading()
                 contentDescription = book.title
-                stateDescription = actions[actionsIndex]
+                stateDescription = actions[selectedAction]
                 progressBarRangeInfo = ProgressBarRangeInfo(
-                    actionsIndex.toFloat(), 0f..actions.lastIndex.toFloat(), actions.size - 2
+                    selectedAction.toFloat(), 0f..actions.lastIndex.toFloat(), actions.size - 2
                 )
                 setProgress { value ->
-                    actionsIndex = value.roundToInt().coerceIn(0, actions.lastIndex)
+                    selectedAction = value.roundToInt().coerceIn(0, actions.lastIndex)
                     true
                 }
-                customActions = actions.mapIndexed { i, name ->
-                    CustomAccessibilityAction(name) { runAction(i); true }
+                customActions = actions.mapIndexed { i, label ->
+                    CustomAccessibilityAction(label) { perform(i); true }
                 }
-            }
-        )
+            })
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             Button(onClick = { toggle() }) {
-                Text(if (playing) (if (english) "Pause" else "Pausar")
+                Text(if (reading) (if (english) "Pause" else "Pausar")
                     else (if (english) "Play" else "Reproducir"))
             }
-            TextButton(onClick = { stop() }) { Text(if (english) "Stop" else "Detener") }
+            TextButton(onClick = { if (active) command(NativeReaderPlaybackService.ACTION_STOP) }) {
+                Text(if (english) "Stop" else "Detener")
+            }
         }
-        Text((if (english) "Section " else "Sección ") + (track + 1) + " / " +
-            playlist.size + ", " + (position / 1000) + " / " + (duration / 1000) + " s")
-        playlist.getOrNull(track)?.label?.takeIf { it.isNotBlank() }?.let {
-            Text(it)
-        }
+        Text((if (english) "Section " else "Sección ") +
+            (current + 1) + " / " + segments.size +
+            ", " + (position / 1000) + " / " + (duration / 1000) + " s")
         Row {
-            TextButton(onClick = { skip(-30000) }) {
+            TextButton(onClick = { perform(1) }) {
                 Text(if (english) "Back 30 s" else "Retroceder 30 s")
             }
-            TextButton(onClick = { skip(30000) }) {
+            TextButton(onClick = { perform(2) }) {
                 Text(if (english) "Forward 30 s" else "Avanzar 30 s")
             }
         }
-        TextButton(
-            onClick = { audioExpanded = !audioExpanded },
+        TextButton(onClick = { expandedAudio = !expandedAudio },
             modifier = Modifier.semantics {
-                stateDescription = if (audioExpanded) (if (english) "Expanded" else "Abierto")
-                    else (if (english) "Collapsed" else "Cerrado")
-            }
-        ) { Text(if (english) "Audio" else "Audio") }
-        if (audioExpanded) {
+                stateDescription = if (expandedAudio) "Abierto" else "Cerrado"
+            }) { Text(if (english) "Audio" else "Audio") }
+        if (expandedAudio) {
             ReaderAdjustableChoice(
                 if (english) "Playback speed" else "Velocidad de reproducción",
                 listOf("0,75", "0,9", "Normal", "1,25", "1,5"), speedIndex
-            ) { idx ->
-                speedIndex = idx
-                try { player?.playbackParams = player!!.playbackParams.setSpeed(speeds[idx]) }
-                catch (_: Exception) { }
-            }
+            ) { speedIndex = it; if (active) command(NativeReaderPlaybackService.ACTION_SPEED, speeds[it]) }
             ReaderAdjustableChoice(
                 if (english) "Sleep timer" else "Apagado automático",
-                timerChoices, sleepIndex
-            ) { sleepIndex = it }
-        }
-        TextButton(
-            onClick = { more = !more },
-            modifier = Modifier.semantics {
-                stateDescription = if (more) (if (english) "Expanded" else "Abierto")
-                    else (if (english) "Collapsed" else "Cerrado")
+                if (english) listOf("Off","5 minutes","10 minutes","15 minutes",
+                    "30 minutes","45 minutes","60 minutes")
+                else listOf("Desactivado","5 minutos","10 minutos","15 minutos",
+                    "30 minutos","45 minutos","60 minutos"),
+                sleepIndex
+            ) {
+                sleepIndex = it
+                if (active) command(NativeReaderPlaybackService.ACTION_SLEEP, sleepTimes[it])
             }
-        ) { Text(if (english) "More actions" else "Más acciones") }
-        if (more) {
+        }
+        TextButton(onClick = { expandedMore = !expandedMore },
+            modifier = Modifier.semantics {
+                stateDescription = if (expandedMore) "Abierto" else "Cerrado"
+            }) { Text(if (english) "More actions" else "Más acciones") }
+        if (expandedMore) {
             Row {
-                TextButton(enabled = track > 0, onClick = { openTrack(track - 1) }) {
+                TextButton(enabled = current > 0, onClick = { previous() }) {
                     Text(if (english) "Previous section" else "Sección anterior")
                 }
-                TextButton(enabled = track < playlist.lastIndex, onClick = {
-                    openTrack(track + 1)
-                }) { Text(if (english) "Next section" else "Sección siguiente") }
+                TextButton(enabled = current < segments.lastIndex, onClick = { next() }) {
+                    Text(if (english) "Next section" else "Sección siguiente")
+                }
             }
-            if (playlist.size in 2..80) {
+            if (segments.size in 2..80) {
                 ReaderAdjustableChoice(
                     if (english) "Section" else "Sección",
-                    playlist.indices.map { (it + 1).toString() }, track
-                ) { idx -> openTrack(idx) }
+                    segments.indices.map { (it + 1).toString() }, current
+                ) { chosen ->
+                    if (active) {
+                        // Section selection uses successive commands; fine-grained
+                        // direct selection arrives in the next DAISY navigation block.
+                        val delta = chosen - current
+                        repeat(kotlin.math.abs(delta).coerceAtMost(80)) {
+                            command(if (delta > 0) NativeReaderPlaybackService.ACTION_NEXT
+                                else NativeReaderPlaybackService.ACTION_PREVIOUS)
+                        }
+                    }
+                }
             }
-            Button(onClick = { bookmark() }) {
+            Button(onClick = { bookmark() }, enabled = active) {
                 Text(if (english) "Save bookmark" else "Guardar marca")
             }
-            marks.forEachIndexed { i, mark ->
-                TextButton(onClick = { openTrack(mark.segmentIndex, mark.positionMs) }) {
-                    Text((if (english) "Bookmark " else "Marca ") + (i + 1) +
-                        ", " + (if (english) "section " else "sección ") +
-                        (mark.segmentIndex + 1))
+            marks.forEachIndexed { index, mark ->
+                TextButton(onClick = {
+                    // The service can jump to a target section and exact saved clip offset.
+                    if (active) {
+                        command(NativeReaderPlaybackService.ACTION_SEGMENT, mark.segmentIndex)
+                        command(NativeReaderPlaybackService.ACTION_SEEK, mark.positionMs)
+                    }
+                }) {
+                    Text((if (english) "Bookmark " else "Marca ") + (index + 1) +
+                        ", " + (if (english) "section " else "sección ") + (mark.segmentIndex + 1))
                 }
             }
         }
-        if (message.isNotBlank()) Text(message)
+        if (active && state.error.isNotBlank()) Text(state.error)
+        if (reading) Text(if (english)
+            "Playback continues when the screen is locked."
+            else "La reproducción continúa al bloquear la pantalla.")
     }
 }

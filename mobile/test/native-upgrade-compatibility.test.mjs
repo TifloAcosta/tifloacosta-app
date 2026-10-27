@@ -76,3 +76,17 @@ test('native reader warns about unmigrated legacy books instead of showing a fal
   assert.match(reader, /Siguen en el TifloLector actual/);
   assert.match(reader, /No se pudo comprobar la biblioteca anterior/);
 });
+
+test('Android API24 legacy Office compatibility trial remains restricted and unreleased', async () => {
+  const lib = await source('../../android-native-prototype/library/build.gradle');
+  const prototype = await source('../../android-native-prototype/app/build.gradle.kts');
+  const office = await source('../../android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativeReaderLegacyOffice.kt');
+  const request = JSON.parse(await source('../release/request.json'));
+  assert.match(lib, /org\.apache\.poi:poi:4\.1\.2/);
+  assert.match(lib, /org\.apache\.poi:poi-scratchpad:4\.1\.2/);
+  assert.match(prototype, /org\.apache\.poi:poi:4\.1\.2/);
+  assert.match(office, /setOf\("doc", "xls", "ppt", "pps"\)/);
+  assert.match(lib, /CVE-2022-26336/);
+  assert.equal(request.status, 'draft');
+  assert.equal(request.confirmProduction, false);
+});

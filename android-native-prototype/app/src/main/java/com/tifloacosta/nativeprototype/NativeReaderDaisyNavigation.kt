@@ -46,8 +46,8 @@ object NativeDaisyNavigation {
             val cls = element.classNames().joinToString(" ").lowercase(Locale.ROOT)
             val kind = when {
                 tag.matches(Regex("h[1-6]")) -> "heading"
-                "page" in cls || tag == "span" -> "page"
                 "footnote" in cls || "annotation" in cls || "note" in cls -> "note"
+                "page" in cls || tag == "span" -> "page"
                 tag == "div" -> "landmark"
                 else -> continue
             }

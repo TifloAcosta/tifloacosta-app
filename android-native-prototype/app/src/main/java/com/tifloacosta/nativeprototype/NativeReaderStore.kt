@@ -110,14 +110,16 @@ class NativeReaderStore(private val context: Context) {
     private val index = File(folder, "index.json")
     private val ids = Regex("[a-f0-9\\-]{36}")
 
-    @Synchronized fun list(): List<ReaderBook> {
-        if (!index.isFile) return emptyList()
-        return try {
-            val array = JSONArray(index.readText(Charsets.UTF_8))
+    @Synchronized fun list(): List<ReaderBook> = synchronized(NativeReaderPersistence.lock) {
+        val json = NativeReaderPersistence.read(index) ?: return@synchronized emptyList()
+        val array = JSONArray(json)
             (0 until array.length()).mapNotNull { i ->
                 val obj = array.optJSONObject(i) ?: return@mapNotNull null
                 val id = obj.optString("id")
-                if (!ids.matches(id) || !File(folder, id + ".txt").isFile) return@mapNotNull null
+                if (!ids.matches(id)) throw IOException("Identificador de libro inválido en la biblioteca.")
+                if (!File(folder, id + ".txt").isFile) throw IOException(
+                    "Falta el texto de un libro. Conserva los originales; no se modificará el índice."
+                )
                 val marks = obj.optJSONArray("marks") ?: JSONArray()
                 ReaderBook(
                     id = id,
@@ -174,10 +176,9 @@ class NativeReaderStore(private val context: Context) {
                     } ?: emptyList()
                 )
             }
-        } catch (_: Exception) { emptyList() }
     }
 
-    @Synchronized private fun save(books: List<ReaderBook>) {
+    @Synchronized private fun save(books: List<ReaderBook>) = synchronized(NativeReaderPersistence.lock) {
         val array = JSONArray()
         books.forEach { book ->
             array.put(JSONObject().put("id", book.id).put("title", book.title)
@@ -209,13 +210,7 @@ class NativeReaderStore(private val context: Context) {
                     }
                 }))
         }
-        val temp = File(folder, "index.tmp")
-        temp.writeText(array.toString(), Charsets.UTF_8)
-        if (!temp.renameTo(index)) {
-            // Some filesystems do not replace an existing file on rename.
-            index.writeText(array.toString(), Charsets.UTF_8)
-            temp.delete()
-        }
+        NativeReaderPersistence.write(index, array.toString())
     }
 
     @Synchronized fun read(book: ReaderBook): String {
@@ -223,10 +218,23 @@ class NativeReaderStore(private val context: Context) {
         return File(folder, book.id + ".txt").readText(Charsets.UTF_8)
     }
 
-    @Synchronized fun update(book: ReaderBook) {
+    @Synchronized fun update(book: ReaderBook) = synchronized(NativeReaderPersistence.lock) {
         val books = list().map { if (it.id == book.id) book else it }
         if (books.any { it.id == book.id }) save(books)
     }
+
+    /** Atomically change only selected fields from the latest on-disk book metadata. */
+    @Synchronized fun changeBook(id: String, change: (ReaderBook) -> ReaderBook): ReaderBook? =
+        synchronized(NativeReaderPersistence.lock) {
+            val books = list().toMutableList()
+            val index = books.indexOfFirst { it.id == id }
+            if (index < 0) return@synchronized null
+            val next = change(books[index])
+            require(next.id == id) { "No se puede modificar el identificador del libro." }
+            books[index] = next
+            save(books)
+            next
+        }
 
     /** Update readable OCR content while preserving marks, folders and originals. */
     @Synchronized fun replaceAccessibleText(id: String, text: String, notice: String = "") {
@@ -241,12 +249,15 @@ class NativeReaderStore(private val context: Context) {
             temp.copyTo(document, overwrite = true)
             temp.delete()
         }
-        update(existing.copy(length = result.length))
+        changeBook(id) { latest -> latest.copy(length = result.length) }
     }
 
-    @Synchronized fun replaceFolder(oldName: String, newName: String) {
-        save(list().map { if (it.folder.equals(oldName, ignoreCase = true)) it.copy(folder = newName) else it })
-    }
+    @Synchronized fun replaceFolder(oldName: String, newName: String) =
+        synchronized(NativeReaderPersistence.lock) {
+            save(list().map {
+                if (it.folder.equals(oldName, ignoreCase = true)) it.copy(folder = newName) else it
+            })
+        }
 
     @Synchronized fun audioFiles(book: ReaderBook): List<File> {
         return book.tracks.map { File(folder, it) }.filter { it.isFile }
@@ -319,7 +330,7 @@ class NativeReaderStore(private val context: Context) {
             document.writeText(text, Charsets.UTF_8)
             val book = ReaderBook(id = id, title = title.take(180),
                 length = text.length, format = "pdf")
-            save(list() + book)
+            synchronized(NativeReaderPersistence.lock) { save(list() + book) }
             return book
         } catch (e: Exception) {
             original.delete(); document.delete()
@@ -364,7 +375,7 @@ class NativeReaderStore(private val context: Context) {
                 id = id, title = title.take(180), length = payload.body.length,
                 format = payload.format, tracks = names
             )
-            save(list() + book)
+            synchronized(NativeReaderPersistence.lock) { save(list() + book) }
             return book
         } catch (e: Exception) {
             files.forEach { it.delete() }
@@ -459,7 +470,7 @@ class NativeReaderStore(private val context: Context) {
                 tracks = copied, audioSegments = plan.segments,
                 daisyNavigation = plan.navigation
             )
-            save(list() + book)
+            synchronized(NativeReaderPersistence.lock) { save(list() + book) }
             return book
         } catch (e: Exception) {
             written.forEach { it.delete() }
@@ -479,16 +490,21 @@ class NativeReaderStore(private val context: Context) {
         if (clean.isNotEmpty()) update(book.copy(title = clean))
     }
 
-    @Synchronized fun delete(book: ReaderBook) {
-        list().firstOrNull { it.id == book.id }?.let { current ->
-            save(list().filterNot { it.id == book.id })
-            File(folder, book.id + ".txt").delete()
-            // Source files use a generated UUID and are never resolved from
-            // untrusted document titles or ZIP entry paths.
-            folder.listFiles()?.filter { it.name.startsWith(book.id + ".source.") }
-                ?.forEach { it.delete() }
-            current.tracks.forEach { File(folder, it).delete() }
+    @Synchronized fun delete(book: ReaderBook) =
+        synchronized(NativeReaderPersistence.lock) {
+            require(ids.matches(book.id))
+            list().firstOrNull { it.id == book.id }?.let { current ->
+                save(list().filterNot { it.id == book.id })
+                File(folder, book.id + ".txt").delete()
+                folder.listFiles()?.filter { it.name.startsWith(book.id + ".source.") }
+                    ?.forEach { it.delete() }
+                current.tracks.forEach { File(folder, it).delete() }
+                // OCR checkpoints can contain substantial extracted text. Delete
+                // only the fixed sidecars for THIS validated book id.
+                for (kind in listOf("pdf", "images")) {
+                    File(folder, book.id + ".ocr-" + kind).deleteRecursively()
+                }
+            }
         }
-    }
 
 }

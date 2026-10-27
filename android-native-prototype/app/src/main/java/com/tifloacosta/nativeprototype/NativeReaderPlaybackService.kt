@@ -162,6 +162,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
             }
         }
     }
+    private var lastProgressWriteMs = 0L
     private val ticker = object : Runnable {
         override fun run() {
             if (playing) {
@@ -184,7 +185,9 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                         nextSegment()
                     } else {
                         publish()
-                        persist()
+                        // Notify UI every second but avoid a full metadata fsync
+                        // every second on a long audiobook.
+                        if (now - lastProgressWriteMs >= 10_000L) persist()
                     }
                 }
                 handler.postDelayed(this, 1000)
@@ -535,29 +538,38 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
 
     private fun bookmark() {
         val current = book ?: return
-        val marks = if (kind == "audio") {
-            val old = current.audioMarks.ifEmpty {
-                current.marks.map { ReaderAudioMark(current.trackIndex, it) }
-            }
-            current.copy(audioMarks = (old + ReaderAudioMark(segmentIndex, positionMs)).distinct())
-        } else current.copy(marks = (current.marks + textOffset).distinct())
-        book = marks
-        store.update(marks)
-        publish()
+        try {
+            book = store.changeBook(current.id) { latest ->
+                if (kind == "audio") {
+                    val old = latest.audioMarks.ifEmpty {
+                        latest.marks.map { ReaderAudioMark(latest.trackIndex, it) }
+                    }
+                    latest.copy(audioMarks =
+                        (old + ReaderAudioMark(segmentIndex, positionMs)).distinct())
+                } else latest.copy(marks = (latest.marks + textOffset).distinct())
+            } ?: current
+            publish()
+        } catch (e: Exception) {
+            publish("No se pudo guardar la marca: " + e.message.orEmpty())
+        }
     }
 
     private fun persist() {
         val current = book ?: return
-        // Preserve simultaneous library changes to favorites, folders and title.
-        val latest = store.list().firstOrNull { it.id == current.id } ?: return
-        val now = if (playing) System.currentTimeMillis() else latest.lastReadAt
-        val next = if (kind == "audio") latest.copy(
-            trackIndex = segmentIndex, audioPositionMs = positionMs,
-            audioMarks = current.audioMarks, lastReadAt = now
-        ) else latest.copy(offset = textOffset, marks = current.marks,
-            lastReadAt = now)
-        book = next
-        store.update(next)
+        try {
+            // Fetch + modify + save under one metadata lock. Do not replace
+            // a recently renamed title, queue status, folder or favorite.
+            book = store.changeBook(current.id) { latest ->
+                val now = if (playing) System.currentTimeMillis() else latest.lastReadAt
+                if (kind == "audio") latest.copy(
+                    trackIndex = segmentIndex, audioPositionMs = positionMs,
+                    lastReadAt = now
+                ) else latest.copy(offset = textOffset, lastReadAt = now)
+            } ?: current
+            lastProgressWriteMs = android.os.SystemClock.elapsedRealtime()
+        } catch (e: Exception) {
+            publish("No se pudo guardar la posición: " + e.message.orEmpty())
+        }
     }
 
     private fun publish(error: String = "") {

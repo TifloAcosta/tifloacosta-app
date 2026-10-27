@@ -175,7 +175,7 @@ object NativeReaderBackup {
                         if (name in listOf("manifest.txt", "index.json",
                                 "folders.json", "reading-queue.json", "preferences.json")) {
                             if (name in headers) throw IOException("La copia tiene metadatos duplicados.")
-                            val bytes = NativeReaderFormats.readBounded(zip, 16 * 1024 * 1024)
+                            val bytes = NativeReaderFormats.readBounded(zip, 64 * 1024 * 1024)
                             headers[name] = bytes.toString(Charsets.UTF_8)
                         } else if (name.startsWith("data/")) {
                             val path = name.removePrefix("data/")

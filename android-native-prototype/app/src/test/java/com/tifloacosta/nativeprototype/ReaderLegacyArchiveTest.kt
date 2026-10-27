@@ -16,7 +16,7 @@ class ReaderLegacyArchiveTest {
         val source = Files.createTempFile("tiflo-sevenzip-", ".7z").toFile()
         val stage = Files.createTempDirectory("tiflo-sevenzip-stage-").toFile()
         try {
-            SevenZOutputFile.builder().setFile(source).get().use { seven ->
+            SevenZOutputFile(source).use { seven ->
                 val original = File(stage, "source.txt")
                 original.writeText("Un libro de prueba en 7Z")
                 val entry = seven.createArchiveEntry(original, "libros/lectura.txt")

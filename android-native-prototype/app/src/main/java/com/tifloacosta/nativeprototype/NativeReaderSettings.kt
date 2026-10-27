@@ -131,22 +131,17 @@ fun NativeReaderGeneralSettings(
                         if (english) listOf("All", "Spanish", "English")
                         else listOf("Todas", "Español", "Inglés"), voiceFilter
                     ) { voiceFilter = it }
-                    val voices = speaker.voices().filter { v ->
-                        voiceFilter == 0 ||
-                            (voiceFilter == 1 && v.locale.language == "es") ||
-                            (voiceFilter == 2 && v.locale.language == "en")
-                    }
-                    val choices = listOf(if (english) "System default" else "Predeterminada del sistema") +
-                        voices.map { it.name + ", " + it.locale.displayLanguage }
-                    val selected = voices.indexOfFirst { it.name == voice }.let {
-                        if (it == -1) 0 else it + 1
-                    }
-                    ReaderAdjustableChoice(
-                        if (english) "Voice" else "Voz", choices, selected
-                    ) { idx ->
-                        voice = voices.getOrNull(idx - 1)?.name.orEmpty()
-                        prefs.edit().putString("voice", voice).apply()
-                    }
+                    NativeReaderVoicePicker(
+                        english = english,
+                        speaker = speaker,
+                        selectedVoice = voice,
+                        speed = SPEEDS[speed],
+                        filter = voiceFilter,
+                        onVoiceSelected = { chosen ->
+                            voice = chosen
+                            prefs.edit().putString("voice", chosen).apply()
+                        }
+                    )
                     Button(onClick = { nested = "external" }) {
                         Text(if (english) "Find voices from other providers"
                             else "Buscar voces de otros proveedores")

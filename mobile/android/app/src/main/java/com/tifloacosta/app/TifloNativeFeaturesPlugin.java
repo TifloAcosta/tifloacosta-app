@@ -73,6 +73,16 @@ public class TifloNativeFeaturesPlugin extends Plugin {
                 }
                 result.put("schemaVersion", db.getVersion());
                 result.put("books", countRows(db, "books"));
+                JSObject formatCounts = new JSObject();
+                try (Cursor groups = db.rawQuery(
+                        "SELECT format, COUNT(*) FROM books GROUP BY format", null)) {
+                    while (groups.moveToNext()) {
+                        String format = groups.isNull(0) ? "unknown" : groups.getString(0);
+                        // Diagnostic labels only, not used as file names or SQL.
+                        formatCounts.put(format, groups.getInt(1));
+                    }
+                }
+                result.put("formats", formatCounts);
                 result.put("marks", countRows(db, "marks"));
                 result.put("queue", countRows(db, "reading_queue"));
                 result.put("settings", countRows(db, "reading_settings"));

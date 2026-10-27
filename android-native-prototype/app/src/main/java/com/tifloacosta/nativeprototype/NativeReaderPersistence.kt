@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets
  * an existing, invalid database as an empty library.
  */
 object NativeReaderPersistence {
-    private const val MAX_JSON_BYTES = 16 * 1024 * 1024
+    private const val MAX_JSON_BYTES = 64 * 1024 * 1024
     val lock = Any()
 
     fun read(file: File): String? = synchronized(lock) {

@@ -1,3 +1,33 @@
+# Fase final de TifloLector — bloque 1 de 7 (reproducción continua)
+
+Versión de prueba 0.12 (PR #255). Sigue separada de la aplicación publicada en Play Store y de iOS.
+
+## Arquitectura
+
+- `NativeReaderPlaybackService`, un solo propietario de la voz Android TTS y del reproductor MediaPlayer. Android lo mantiene como servicio en primer plano de tipo mediaPlayback mientras habla o reproduce. El contenido de la pantalla Compose NO posee ni apaga el audio al salir; la interfaz se limita a enviar acciones y observar el estado.
+- `android.media.session.MediaSession` activo con estado, título de la obra y acciones de reproducir, pausar, detener, sección anterior/siguiente. Notificación `MediaStyle` con botones de reproducción y acceso directo al libro. Los mandos de medios/auriculares se enrutan a la sesión.
+- Foco de audio de tipo voz hablada: pausar con pérdida definitiva o temporal del foco, reanudar tras recuperación si fue interrupción temporal, pausar sin reanudación automática al desconectar auriculares. Protección frente a otras aplicaciones que comiencen a reproducir audio.
+- Reproducción de audio DAISY con intervalos SMIL y lectura TTS por frases, párrafos o bloques. La sesión persiste periódicamente el índice de sección y milisegundos de audio, o el offset de texto al finalizar cada unidad de locución. Las marcas individuales se conservan al salir de la pantalla.
+- Apagado automático de 5/10/15/30/45/60 minutos, desactivado por defecto. El contador de tiempo de reproducción se conserva pausado durante las interrupciones y se descuenta solo mientras suena el audio. Al vencer pausa sin borrar el punto guardado.
+- Tras tocar la notificación, la aplicación vuelve a la misma obra en TifloLector, preservando el flujo de autorización de YouTube no relacionado. Si el servicio pausado ha sido recreado mientras el proceso sigue activo, puede recuperar el libro desde el estado de la sesión.
+- El visor conserva su interfaz minimalista: Reproducir/Pausar, Navegación, Audio, Visual, Más acciones y títulos con ajustes de TalkBack.
+
+## Verificaciones físicas pendientes antes de integrar
+
+Es requisito probar en Pixel con TalkBack: audio de varias pistas y TTS durante bloqueo prolongado, controles de la pantalla bloqueada, auriculares/Bluetooth, pérdida/recuperación del foco en llamadas y mensajes, desconexión física de auriculares, cambio de app, temporizador con pausas, marcas, salto de sección y retorno desde notificación. La compilación CI solo valida código y pruebas unitarias existentes, no demuestra esos comportamientos en el hardware.
+
+Limitaciones: no se implementa aún un reinicio automático tras reboot, soporte Android Auto, biblioteca de media externa ni pruebas con todos los motores TTS. La reproducción background debe comprobarse con políticas de batería del Pixel. No fusionar ni publicar sin aceptación del usuario.
+
+## Plan de siete bloques
+
+1. Servicio de reproducción continua, sesión de medios, interrupciones y posición (este bloque).
+2. Navegación DAISY completa y sincronización texto-audio.
+3. Conversión fiable de formatos antiguos y nuevos ebooks.
+4. Herramientas por documento: traducción, exportación y compartir.
+5. Biblioteca: cola, marcas, progreso y ajustes individuales.
+6. OCR avanzado y procesamiento reanudable.
+7. Auditoría de accesibilidad, persistencia, datos y entrega estable.
+
 # TifloLector 0.11 — comprimidos y DAISY de audio
 
 Versión de prueba. **No modifica Google Play, iOS ni la aplicación Android publicada**. Esta rama depende de las propuestas 0.8–0.10 y debe continuar en borrador hasta las pruebas físicas.

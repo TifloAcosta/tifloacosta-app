@@ -56,8 +56,13 @@ android {
             if (hasReleaseSigning) {
                 signingConfig signingConfigs.release
             }
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // Experimental in PR #264 only: D8 cannot package POI/log4j
+            // Java 9-only methods for API 24 unless R8 eliminates dead paths.
+            // A passing build is NOT sufficient for Play publication; validate
+            // all legacy Office parsers, Capacitor plugins and data migration
+            // on upgraded physical devices before enabling production.
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }

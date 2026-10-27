@@ -4,12 +4,12 @@ import java.util.Calendar
 
 object NativeReaderBookFilters {
     val formatFiltersEs = listOf(
-        "Todos", "Textos", "PDF", "EPUB", "Office", "Audio y DAISY",
+        "Todos", "Textos", "PDF", "Libros electrónicos", "Office", "Audio y DAISY",
         "Con marcas", "Favoritos", "Importados hoy", "Últimos siete días", "Último mes",
         "Imágenes con OCR"
     )
     val formatFiltersEn = listOf(
-        "All", "Text", "PDF", "EPUB", "Office", "Audio and DAISY",
+        "All", "Text", "PDF", "Ebooks", "Office", "Audio and DAISY",
         "With bookmarks", "Favorites", "Imported today", "Last seven days", "Last month",
         "OCR images"
     )
@@ -34,8 +34,9 @@ object NativeReaderBookFilters {
                 1 -> b.format in setOf("txt", "text", "md", "markdown",
                     "html", "htm", "rtf", "csv", "json", "xml", "log", "srt")
                 2 -> b.format == "pdf"
-                3 -> b.format == "epub"
-                4 -> b.format in setOf("docx", "pptx", "ppsx", "xlsx", "odt", "ods", "odp")
+                3 -> b.format in setOf("epub", "fb2", "mobi", "prc", "pdb", "azw", "azw3")
+                4 -> b.format in setOf("docx", "pptx", "ppsx", "xlsx", "odt", "ods", "odp",
+                    "doc", "xls", "ppt", "pps")
                 5 -> b.tracks.isNotEmpty() || b.format == "daisy"
                 6 -> b.marks.isNotEmpty()
                 7 -> b.favorite

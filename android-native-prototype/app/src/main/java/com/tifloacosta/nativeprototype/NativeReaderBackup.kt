@@ -167,13 +167,14 @@ object NativeReaderBackup {
                         if (!keepWorking()) throw InterruptedException("Restauración cancelada.")
                         val entry = zip.nextEntry ?: break
                         count++
-                        if (count > MAX_ENTRIES + 4) throw IOException("Demasiados archivos en la copia.")
+                        if (count > MAX_ENTRIES + 5) throw IOException("Demasiados archivos en la copia.")
                         val name = entry.name
                         if (entry.isDirectory || name.startsWith("/") ||
                             name.contains("\\") || name.split('/').any { it == ".." || it == "." })
                             throw IOException("La copia incluye una ruta peligrosa.")
                         if (name in listOf("manifest.txt", "index.json",
                                 "folders.json", "reading-queue.json", "preferences.json")) {
+                            if (name in headers) throw IOException("La copia tiene metadatos duplicados.")
                             val bytes = NativeReaderFormats.readBounded(zip, 16 * 1024 * 1024)
                             headers[name] = bytes.toString(Charsets.UTF_8)
                         } else if (name.startsWith("data/")) {

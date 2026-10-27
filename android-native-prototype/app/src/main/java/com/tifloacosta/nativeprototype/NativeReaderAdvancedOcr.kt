@@ -195,18 +195,22 @@ object NativeReaderAdvancedOcr {
             if (entries.size > MAX_IMAGE_ITEMS)
                 throw IOException("Más de 600 imágenes: el OCR debe dividirse en lotes.")
             if (entries.isEmpty()) throw IOException("No hay imágenes incrustadas compatibles.")
+            // Validate the WHOLE archive even when some entries were checkpointed
+            // in a previous session. A resume must not reset the expansion budget.
+            var declared = 0L
+            entries.forEach { entry ->
+                if (entry.size !in 0L..MAX_SINGLE_IMAGE.toLong())
+                    throw IOException("Una imagen incrustada supera 12 MB.")
+                declared += entry.size
+                if (declared > MAX_IMAGE_TOTAL)
+                    throw IOException("Las imágenes superan el límite OCR de 150 MB.")
+            }
             File(root, "total.txt").writeText(entries.size.toString())
-            var accumulated = 0L
             try {
                 for ((n, entry) in entries.withIndex()) {
                     check(continueWork)
                     val number = n + 1
                     if (!isCheckpointComplete(root, number)) {
-                        if (entry.size !in 0L..MAX_SINGLE_IMAGE.toLong())
-                            throw IOException("Imagen demasiado grande: " + entry.name.take(100))
-                        accumulated += entry.size
-                        if (accumulated > MAX_IMAGE_TOTAL) throw IOException(
-                            "Las imágenes superan el límite OCR de 150 MB.")
                         val bytes = zip.getInputStream(entry).use {
                             NativeReaderFormats.readBounded(it, MAX_SINGLE_IMAGE)
                         }

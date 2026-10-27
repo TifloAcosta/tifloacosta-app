@@ -366,6 +366,9 @@ fun NativeTifloLector(
             title = { Text(if (english) "Delete book permanently?" else "¿Eliminar esta obra definitivamente?") },
             text = { Text(book.title) },
             confirmButton = { TextButton(onClick = {
+                if (NativeReaderPlaybackService.snapshot.value.bookId == book.id) {
+                    NativeReaderPlaybackService.send(context, NativeReaderPlaybackService.ACTION_STOP)
+                }
                 scope.launch {
                     withContext(Dispatchers.IO) { store.delete(book) }
                     refresh()

@@ -60,9 +60,13 @@ fun NativeReaderAudioScreen(
     var expandedAudio by remember(book.id) { mutableStateOf(false) }
     var expandedMore by remember(book.id) { mutableStateOf(false) }
     var showDaisyNavigation by remember(book.id) { mutableStateOf(false) }
+    var showTools by remember(book.id) { mutableStateOf(false) }
     var beforeDaisyJump by remember(book.id) { mutableStateOf<Pair<Int, Int>?>(null) }
     var sleepIndex by remember(book.id) { mutableIntStateOf(0) }
-    var speedIndex by remember(book.id) { mutableIntStateOf(2) }
+    val prefs = remember { context.getSharedPreferences("native-reader-preferences", 0) }
+    var speedIndex by remember(book.id) {
+        mutableIntStateOf(prefs.getInt("audio.speed." + book.id, 2).coerceIn(0, 4))
+    }
     val speeds = listOf(75, 90, 100, 125, 150)
     val sleepTimes = listOf(0, 5, 10, 15, 30, 45, 60)
     val marks = if (active) state.audioMarks
@@ -108,7 +112,19 @@ fun NativeReaderAudioScreen(
         }
     }
     LaunchedEffect(book.id) {
-        if (startOnOpen && !reading) start()
+        val perBook = prefs.getInt("autoplay." + book.id, -1)
+        val automatically = when (perBook) {
+            1 -> true
+            0 -> false
+            else -> prefs.getInt("mode", 0) == 1
+        }
+        if ((startOnOpen || automatically) && !reading) start()
+    }
+    if (showTools) {
+        NativeReaderDocumentActions(book, english,
+            fragment = if (active) state.synchronizedText else "",
+            onBack = { showTools = false })
+        return
     }
     if (showDaisyNavigation) {
         NativeDaisyNavigationScreen(book, english, current,
@@ -158,6 +174,10 @@ fun NativeReaderAudioScreen(
         Text((if (english) "Section " else "Sección ") +
             (current + 1) + " / " + segments.size +
             ", " + (position / 1000) + " / " + (duration / 1000) + " s")
+        TextButton(onClick = { showTools = true },
+            modifier = Modifier.fillMaxWidth()) {
+            Text(if (english) "Book details and tools" else "Detalles y herramientas")
+        }
         if (book.format == "daisy" || book.daisyNavigation.isNotEmpty()) {
             TextButton(onClick = { showDaisyNavigation = true },
                 modifier = Modifier.fillMaxWidth()) {
@@ -203,7 +223,11 @@ fun NativeReaderAudioScreen(
             ReaderAdjustableChoice(
                 if (english) "Playback speed" else "Velocidad de reproducción",
                 listOf("0,75", "0,9", "Normal", "1,25", "1,5"), speedIndex
-            ) { speedIndex = it; if (active) command(NativeReaderPlaybackService.ACTION_SPEED, speeds[it]) }
+            ) {
+                speedIndex = it
+                prefs.edit().putInt("audio.speed." + book.id, it).apply()
+                if (active) command(NativeReaderPlaybackService.ACTION_SPEED, speeds[it])
+            }
             ReaderAdjustableChoice(
                 if (english) "Sleep timer" else "Apagado automático",
                 if (english) listOf("Off","5 minutes","10 minutes","15 minutes",

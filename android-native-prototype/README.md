@@ -1,3 +1,20 @@
+# Fase final de TifloLector — bloque 2 de 7 (DAISY navegable)
+
+Versión de pruebas **0.13-bloque2**, PR #256, basada en 0.12. No cambia la app publicada de Android ni la versión iOS.
+
+- DAISY 2.02: NCC.HTML define capítulos y subapartados h1–h6; los elementos con clase de página aportan paginación; div/span que representan notas se separan de páginas. Se resuelven `href` que apuntan a identificadores de `<par>`, `<text>` o `<audio>` de SMIL, y no se deducen por nombres de MP3.
+- DAISY 3: NCX admite la jerarquía de `navMap/navPoint`, `pageList/pageTarget`, y `navList/navTarget` como notas u otros accesos según sus atributos. Referencias a SMIL o a destinos XHTML/XML asociados con audio.
+- Sincronía: se lee `<text src="capitulo.xhtml#id">` por fragmento SMIL, si existe; se adjunta una muestra del texto literal (hasta 200 caracteres), y la pantalla muestra el fragmento mientras se reproduce. No hay transcripción automática, resaltado de palabras ni interpolación de tiempos inexistentes.
+- Navegación interior en pantalla independiente que conserva el estilo limpio y los controles de TalkBack: Encabezados (todos o nivel 1 a 6), Páginas (lista e «Ir a página» por etiqueta), Notas, Otros puntos y Fragmentos de audio. No se habilitan entradas que el DAISY no documenta. Selección mueve el servicio multimedia al fragmento indicado, también si el usuario abre un libro pausado.
+- Compatibilidad: se añaden campos opcionales al índice JSON, sin eliminar marcas, posición, ajustes o pistas anteriores. Libros importados en 0.12 seguirán reproduciéndose, aunque para construir un índice DAISY avanzado de los ya importados hará falta reimportar el original.
+- Seguridad: los recursos del libro se leen del archivo original ya extraído, sin acceder a redes ni resolver entidades XML externas. Se limita el tamaño de NCC/NCX/texto y se libera caché de documentos temporales tras importar.
+
+## Limitaciones y pruebas pendientes
+
+No todas las ediciones DAISY contienen texto sincronizado ni notas o índices de páginas. La calidad de la navegación depende de la estructura del libro. Esta fase no implementa notas emergentes con retorno automático a la posición, navegación avanzada de audio por puntos en tiempo real sin índice ni resaltado palabra a palabra. Se necesita validar DAISY 2.02, DAISY 3, libros solo de audio y mixtos texto/audio en Pixel con TalkBack, y comprobar retroceso desde la navegación y continuidad del servicio del bloque 1.
+
+Prueba sugerida: importar un DAISY con dos encabezados en distintos niveles, páginas etiquetadas y al menos una nota; navegar por cada tipo y confirmar que el salto corresponde al audio correcto. Repetir con un DAISY sin notas: debe decir que no hay puntos de ese tipo. En un DAISY con `text src`, comprobar el texto mostrado al cambiar de fragmento sin VoiceOver/TalkBack duplicando locuciones.
+
 # Fase final de TifloLector — bloque 1 de 7 (reproducción continua)
 
 Versión de prueba 0.12 (PR #255). Sigue separada de la aplicación publicada en Play Store y de iOS.

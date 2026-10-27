@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <queries>
+        <intent><action android:name="android.intent.action.TTS_SERVICE" /></intent>
+    </queries>
+    <application>
+        <activity
+            android:name="com.tifloacosta.nativeprototype.NativePrototypeActivity"
+            android:label="TifloAcosta Nativa"
+            android:exported="true"
+            android:theme="@android:style/Theme.Material.Light.NoActionBar"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tifloacosta" android:host="youtube-auth" />
+            </intent-filter>
+        </activity>
+        <service android:name="com.tifloacosta.nativeprototype.NativeReaderPlaybackService"
+            android:exported="false" android:foregroundServiceType="mediaPlayback" />
+        <provider android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.readerprovider"
+            android:exported="false" android:grantUriPermissions="true">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/reader_share_paths" />
+        </provider>
+    </application>
+</manifest>

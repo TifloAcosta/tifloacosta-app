@@ -29,3 +29,9 @@
 -dontwarn aQute.bnd.annotation.spi.**
 -dontwarn org.osgi.framework.**
 -dontwarn com.gemalto.jp2.**
+
+# The legacy Office reader only opens DOC, XLS, PPT and PPS. HMEF/TNEF
+# is unrelated and vulnerable in POI 4.1.2 (CVE-2022-26336).
+# Never ship if any of the HMEF parser survives shrinking or is inlined.
+-keep,allowshrinking class org.apache.poi.hmef.** { *; }
+-checkdiscard class org.apache.poi.hmef.**

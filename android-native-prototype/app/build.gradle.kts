@@ -53,8 +53,15 @@ dependencies {
     implementation("com.google.mlkit:translate:17.0.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.10.2")
     // Legacy OLE2 Office: HSSF (.xls) + HWPF (.doc) + HSLF (.ppt/.pps).
-    implementation("org.apache.poi:poi:5.2.5")
-    implementation("org.apache.poi:poi-scratchpad:5.2.5")
+    // API24 compatibility candidate, not production-approved: the
+    // historic POI 4.1.2 HMEF/TNEF parser has CVE-2022-26336.
+    // Only DOC/XLS/PPT/PPS OLE2 are permitted in NativeReaderLegacyOffice.
+    implementation("org.apache.poi:poi:4.1.2") {
+        exclude(group = "log4j", module = "log4j")
+    }
+    implementation("org.apache.poi:poi-scratchpad:4.1.2") {
+        exclude(group = "log4j", module = "log4j")
+    }
     implementation("org.apache.commons:commons-compress:1.28.0")
     implementation("org.tukaani:xz:1.10")
     implementation("com.github.junrar:junrar:8.1.2")

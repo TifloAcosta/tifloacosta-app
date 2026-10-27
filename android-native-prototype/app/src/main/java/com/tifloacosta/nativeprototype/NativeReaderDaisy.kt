@@ -9,7 +9,9 @@ data class ReaderAudioSegment(
     val fileIndex: Int,
     val startMs: Int = 0,
     val endMs: Int = -1,
-    val label: String = ""
+    val label: String = "",
+    val textRef: String = "",
+    val synchronizedText: String = ""
 )
 
 data class ReaderAudioMark(val segmentIndex: Int, val positionMs: Int)
@@ -17,7 +19,8 @@ data class ReaderAudioMark(val segmentIndex: Int, val positionMs: Int)
 data class NativeDaisyPlan(
     val audioPaths: List<String>,
     val segments: List<ReaderAudioSegment>,
-    val daisy: Boolean
+    val daisy: Boolean,
+    val navigation: List<ReaderDaisyNavPoint> = emptyList()
 )
 
 /** DAISY 2.02: NCC orders SMIL, SMIL orders audio clips and subpositions. */
@@ -132,6 +135,13 @@ object NativeReaderDaisy {
         val ordered = mutableListOf<String>()
         val clips = mutableListOf<ReaderAudioSegment>()
         val indexByPath = mutableMapOf<String, Int>()
+        val anchors = mutableMapOf<String, Int>()
+        val synced = mutableMapOf<String, String>()
+        fun documentText(reference: String, currentSmil: String): Pair<String, String> {
+            val path = resolve(currentSmil, reference, names) ?: return "" to ""
+            val fragment = reference.substringAfter('#', "")
+            return (if (fragment.isBlank()) path else "$path#$fragment") to reference
+        }
         for (smil in smils) {
             val f = files[smil] ?: continue
             if (f.length() > 4 * 1024 * 1024) continue
@@ -151,7 +161,28 @@ object NativeReaderDaisy {
                     val end = clock(element.getAttribute("clip-end")
                         .ifBlank { element.getAttribute("clipEnd") })
                     if (end >= 0 && end <= begin) continue
-                    clips.add(ReaderAudioSegment(index, begin, end, smil.substringAfterLast('/')))
+                    val par = generateSequence(element.parentNode) { node -> node.parentNode }
+                        .firstOrNull { it.nodeName.substringAfter(':').equals("par", true) }
+                    val anchor = listOfNotNull(par, element).firstOrNull {
+                        it.attributes?.getNamedItem("id")?.nodeValue?.isNotBlank() == true
+                    }?.attributes?.getNamedItem("id")?.nodeValue.orEmpty()
+                    val textNode = par?.childNodes?.let { children ->
+                        (0 until children.length).map { children.item(it) }
+                            .firstOrNull { it.nodeName.substringAfter(':').equals("text", true) }
+                    }
+                    val textElement = textNode as? Element
+                    val textTarget = textElement?.getAttribute("src").orEmpty()
+                    val textKey = documentText(textTarget, smil).first
+                    val position = clips.size
+                    clips.add(ReaderAudioSegment(index, begin, end,
+                        smil.substringAfterLast('/'), textKey))
+                    if (position == 0 || anchors[smil] == null) anchors[smil] = position
+                    for (key in listOfNotNull(anchor.takeIf { it.isNotBlank() },
+                            element.getAttribute("id").takeIf { it.isNotBlank() },
+                            textElement?.getAttribute("id")?.takeIf { it.isNotBlank() })) {
+                        anchors.putIfAbsent("$smil#$key", position)
+                    }
+                    if (textKey.isNotBlank()) anchors.putIfAbsent(textKey, position)
                     if (clips.size > 60000)
                         throw IllegalArgumentException("Demasiados segmentos DAISY.")
                 }
@@ -171,6 +202,18 @@ object NativeReaderDaisy {
                 ReaderAudioSegment(it, 0, -1, allAudio[it].substringAfterLast('/'))
             }, daisy)
         }
-        return NativeDaisyPlan(ordered, clips, daisy)
+        // Obtain a short synchronized excerpt only when the DAISY itself
+        // provides a text link; never invent narration from page-number labels.
+        val excerpts = mutableMapOf<String, String>()
+        val enriched = clips.map { clip ->
+            if (clip.textRef.isBlank()) clip else {
+                val excerpt = excerpts.getOrPut(clip.textRef) {
+                    NativeReaderDaisyText.excerpt(clip.textRef, files)
+                }
+                clip.copy(synchronizedText = excerpt)
+            }
+        }
+        return NativeDaisyPlan(ordered, enriched, daisy,
+            NativeDaisyNavigation.build(files, anchors))
     }
 }

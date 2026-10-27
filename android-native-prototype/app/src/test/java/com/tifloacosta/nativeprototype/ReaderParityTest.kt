@@ -39,14 +39,12 @@ class ReaderParityTest {
         assertEquals("Libro DAISY",
             NativeReaderBookFilters.apply(books, order = 3, now = now).first().title)
     }
-    @Test fun acceptedExtensionsAreNotLegacyBinaryOffice() {
+    @Test fun acceptedExtensionsNowIncludeLegacyOfficeAndMobipocket() {
         for (ext in listOf("epub", "pdf", "docx", "pptx", "xlsx", "zip", "daisy",
-            "mp3", "m4a", "m4b", "txt")) {
+            "mp3", "m4a", "m4b", "txt", "doc", "ppt", "pps", "xls",
+            "mobi", "prc", "pdb", "azw", "azw3")) {
             assertTrue(ext, ext in NativeReaderFormats.supported)
         }
-        assertFalse("ppt" in NativeReaderFormats.supported)
-        assertFalse("pps" in NativeReaderFormats.supported)
-        assertFalse("xls" in NativeReaderFormats.supported)
     }
     @Test fun opdsEnforcesHttps() {
         assertEquals("https://example.org/book.epub",

@@ -14,7 +14,7 @@ class ReaderExpandedFormatsTest {
         assertTrue(NativeReaderFormats.supported.containsAll(formats))
         assertTrue(NativeReaderFormats.supported.contains("rar"))
         assertTrue(NativeReaderFormats.supported.contains("7z"))
-        assertFalse(NativeReaderFormats.supported.contains("azw3"))
+        assertTrue(NativeReaderFormats.supported.contains("azw3"))
     }
 
     @Test fun imageResizeIsBoundedWithNoUpscaling() {

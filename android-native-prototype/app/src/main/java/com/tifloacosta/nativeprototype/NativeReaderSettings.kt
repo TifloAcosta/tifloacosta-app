@@ -181,16 +181,20 @@ fun NativeReaderGeneralSettings(english: Boolean, onBack: () -> Unit) {
                 ) { unit = it; prefs.edit().putInt("unit", it).apply() }
                 4 -> {
                     Text(
-                        if (english) "Reader formats: TXT, Markdown, HTML, XHTML, RTF, PDF with text or scanned " +
-                            "pages (offline Latin OCR), JPEG, PNG, WebP, BMP, HEIC, EPUB, DOCX, PPTX, PPSX, " +
-                            "XLSX, ODT, ODS, ODP, ZIP, 7Z, RAR, DAISY text/audio and audio files MP3, M4A, M4B, AAC, " +
-                            "WAV, OGG, FLAC, OPUS when supported by Android. The old DOC, PPT, PPS and XLS " +
-                            "binary formats, DRM and fully synchronized DAISY text/audio remain unsupported."
-                        else "Formatos del lector: TXT, Markdown, HTML, XHTML, RTF, PDF con texto o escaneados " +
-                            "(OCR latino local), JPEG, PNG, WebP, BMP, HEIC, EPUB, DOCX, PPTX, PPSX, XLSX, " +
-                            "ODT, ODS, ODP, ZIP, 7Z, RAR, DAISY de texto/audio y MP3, M4A, M4B, AAC, WAV, OGG, FLAC " +
-                            "y OPUS según el dispositivo. Aún no se admiten DOC, PPT, PPS y XLS binarios " +
-                            "antiguos, DRM ni sincronización completa de texto y audio DAISY."
+                        if (english) "Reader formats: TXT, Markdown, HTML, XHTML, RTF, PDF with offline Latin OCR, " +
+                            "JPEG, PNG, WebP, BMP, HEIC, EPUB, DOCX, PPTX, PPSX, XLSX, ODT, ODS, ODP, " +
+                            "legacy DOC, PPT, PPS and XLS (text extraction), FB2, unencrypted " +
+                            "PalmDOC/MOBI/PRC/PDB and compatible AZW/AZW3 files, ZIP, RAR and 7Z including DAISY, " +
+                            "and MP3, M4A, M4B, AAC, WAV, OGG, FLAC, OPUS where supported by Android. " +
+                            "DRM, Kindle HUFF/CDIC compression, some KF8 layouts and unsupported encoding " +
+                            "remain unavailable. Office images still require separate OCR."
+                        else "Formatos del lector: TXT, Markdown, HTML, XHTML, RTF, PDF con OCR latino local, " +
+                            "JPEG, PNG, WebP, BMP, HEIC, EPUB, DOCX, PPTX, PPSX, XLSX, ODT, ODS, ODP, " +
+                            "DOC, PPT, PPS y XLS antiguos (extracción de texto), FB2, PalmDOC/MOBI/PRC/PDB " +
+                            "sin cifrar y algunos AZW/AZW3 compatibles, ZIP, RAR y 7Z incluidos DAISY, " +
+                            "y MP3, M4A, M4B, AAC, WAV, OGG, FLAC y OPUS según Android. " +
+                            "Quedan excluidos DRM, compresión Kindle HUFF/CDIC, algunos diseños KF8 " +
+                            "e imágenes de Office que necesiten OCR."
                     )
                 }
             }

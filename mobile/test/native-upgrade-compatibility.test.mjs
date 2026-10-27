@@ -110,3 +110,18 @@ test('document shares route to TifloLector while ordinary text sharing is preser
   assert.match(reader, /sharedUris\.size == 1 && importedSharedBooks\.size == 1/);
   assert.match(reader, /selectedBook = book/);
 });
+
+test('existing library can be reached from native reader without migrating or deleting books', async () => {
+  const bridge = await source('../android/app/src/main/java/com/tifloacosta/app/TifloNativeFeaturesPlugin.java');
+  const app = await source('../src/app.mjs');
+  const settings = await source('../src/screens/settings.mjs');
+  const reader = await source('../../android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativeTifloLector.kt');
+  assert.match(bridge, /consumeExistingReaderNavigation/);
+  assert.match(bridge, /open-existing-library/);
+  assert.match(app, /restoreExistingReaderNavigation/);
+  assert.match(app, /router.navigate\('reading-library'\)/);
+  assert.match(settings, /export const NativeFeatures/);
+  assert.match(reader, /Abrir biblioteca anterior/);
+  assert.match(reader, /FLAG_ACTIVITY_CLEAR_TOP/);
+  assert.doesNotMatch(reader, /deleteDatabase\(/);
+});

@@ -2,7 +2,7 @@ package com.tifloacosta.nativeprototype
 
 import org.apache.poi.hssf.extractor.ExcelExtractor
 import org.apache.poi.hssf.usermodel.HSSFWorkbook
-import org.apache.poi.hslf.extractor.PowerPointExtractor
+import org.apache.poi.sl.extractor.SlideShowExtractor
 import org.apache.poi.hslf.usermodel.HSLFSlideShow
 import org.apache.poi.hwpf.extractor.WordExtractor
 import java.io.ByteArrayInputStream
@@ -13,7 +13,7 @@ import java.util.Locale
 object NativeReaderLegacyOffice {
     private val magic = byteArrayOf(
         0xD0.toByte(), 0xCF.toByte(), 0x11, 0xE0.toByte(),
-        0xA1.toByte(), 0xB1.toByte(), 0x1A, 0xE1
+        0xA1.toByte(), 0xB1.toByte(), 0x1A, 0xE1.toByte()
     )
     private const val MAX_BYTES = 40 * 1024 * 1024
     private const val MAX_TEXT = 6 * 1024 * 1024
@@ -44,9 +44,7 @@ object NativeReaderLegacyOffice {
                     }
                 }
                 else -> HSLFSlideShow(ByteArrayInputStream(data)).use { slides ->
-                    PowerPointExtractor(slides).use { extractor ->
-                        extractor.text
-                    }
+                    SlideShowExtractor(slides).text
                 }
             }
         } catch (e: Exception) {

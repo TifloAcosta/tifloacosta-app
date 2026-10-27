@@ -125,3 +125,15 @@ test('existing library can be reached from native reader without migrating or de
   assert.match(reader, /FLAG_ACTIVITY_CLEAR_TOP/);
   assert.doesNotMatch(reader, /deleteDatabase\(/);
 });
+
+test('public video section exposes native YouTube account actions without requiring login for search', async () => {
+  const videos = await source('../src/screens/videos.mjs');
+  const native = await source('../../android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativeYouTubeAccount.kt');
+  assert.match(videos, /NativeFeatures.openNativeVideos\(\)/);
+  assert.match(videos, /accountButton\.addEventListener\('click'/);
+  assert.match(videos, /accountStatus\.setAttribute\('aria-live', 'polite'\)/);
+  assert.match(videos, /No necesitas iniciar sesión en Google/);
+  assert.match(native, /private const val PREFS = "youtube-native-private"/);
+  assert.match(native, /fun startAuthorization\(\)/);
+  assert.match(native, /fun signOut\(\)/);
+});

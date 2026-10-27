@@ -13,8 +13,8 @@ android {
         applicationId = "com.tifloacosta.nativeprototype"
         minSdk = 26
         targetSdk = 35
-        versionCode = 11
-        versionName = "0.11-prototipo"
+        versionCode = 12
+        versionName = "0.12-bloque1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 

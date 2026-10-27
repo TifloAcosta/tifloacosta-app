@@ -30,6 +30,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -56,7 +57,12 @@ import kotlin.math.roundToInt
 
 /** Compact TifloLector home: Importar, Ajustes, Filtros y Mi biblioteca. */
 @Composable
-fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
+fun NativeTifloLector(
+    english: Boolean,
+    requestedBookId: String? = null,
+    onReaderRequestHandled: () -> Unit = {},
+    onBack: () -> Unit
+) {
     val context = LocalContext.current
     val store = remember { NativeReaderStore(context.applicationContext) }
     val scope = rememberCoroutineScope()
@@ -91,6 +97,26 @@ fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
     LaunchedEffect(Unit) {
         library = withContext(Dispatchers.IO) { store.list() }
         loading = false
+    }
+    LaunchedEffect(requestedBookId) {
+        if (!requestedBookId.isNullOrBlank()) {
+            try {
+                val selection = withContext(Dispatchers.IO) {
+                    val match = store.list().firstOrNull { it.id == requestedBookId }
+                    if (match != null) match to store.read(match) else null
+                }
+                if (selection != null) {
+                    selectedText = selection.second
+                    selectedBook = selection.first
+                    playOnOpen = false
+                    screen = "home"
+                } else error = "El documento ya no está disponible en la biblioteca."
+            } catch (e: Exception) {
+                error = e.message ?: "No se pudo recuperar el documento."
+            } finally {
+                onReaderRequestHandled()
+            }
+        }
     }
     fun open(book: ReaderBook, startSpeech: Boolean = false) {
         error = ""
@@ -140,7 +166,7 @@ fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
         }
     }
     fun back() {
-        if (selectedBook != null) { selectedBook = null; selectedText = ""; playOnOpen = false }
+        if (selectedBook != null) { selectedBook = null; selectedText = ""; playOnOpen = false; refresh() }
         else if (screen == "catalogs") screen = "import"
         else if (screen != "home") screen = "home"
         else onBack()
@@ -155,7 +181,7 @@ fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
             rate = rate,
             onRateChange = { rate = it; preferences.edit().putFloat("rate", it).apply() },
             onUpdate = ::save,
-            onBack = { selectedBook = null; selectedText = ""; playOnOpen = false }
+            onBack = { selectedBook = null; selectedText = ""; playOnOpen = false; refresh() }
         )
         return
     }
@@ -340,6 +366,9 @@ fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
             title = { Text(if (english) "Delete book permanently?" else "¿Eliminar esta obra definitivamente?") },
             text = { Text(book.title) },
             confirmButton = { TextButton(onClick = {
+                if (NativeReaderPlaybackService.snapshot.value.bookId == book.id) {
+                    NativeReaderPlaybackService.send(context, NativeReaderPlaybackService.ACTION_STOP)
+                }
                 scope.launch {
                     withContext(Dispatchers.IO) { store.delete(book) }
                     refresh()
@@ -369,7 +398,9 @@ private fun NativeReadingScreen(
     }
     val speaker = remember(book.id) { NativeReaderSpeaker(context.applicationContext) }
     DisposableEffect(speaker) { onDispose { speaker.close() } }
-    var playing by remember(book.id) { mutableStateOf(false) }
+    val playback by NativeReaderPlaybackService.snapshot.collectAsState()
+    val active = playback.bookId == book.id && playback.kind == "text"
+    val playing = active && playback.playing
     var offset by remember(book.id) { mutableIntStateOf(book.offset) }
     var unitType by rememberSaveable(book.id) { mutableIntStateOf(1) }
     var showAudio by rememberSaveable(book.id) { mutableStateOf(false) }
@@ -404,9 +435,24 @@ private fun NativeReadingScreen(
     var showMarks by rememberSaveable(book.id) { mutableStateOf(false) }
     var jumping by rememberSaveable(book.id) { mutableStateOf(false) }
     var jumpTo by rememberSaveable(book.id) { mutableFloatStateOf(0f) }
+    fun send(action: String, value: Int = 0) {
+        NativeReaderPlaybackService.send(context, action, book.id, value)
+    }
+    fun startSpeech() {
+        NativeReaderPlaybackService.start(context, book.id, audio = false,
+            speedPercent = (perBookRate * 100f).toInt(),
+            sleepMinutes = sleepMinutes[sleepIndex])
+    }
+    fun toggleSpeech() {
+        if (playing) send(NativeReaderPlaybackService.ACTION_PAUSE)
+        else if (active) send(NativeReaderPlaybackService.ACTION_PLAY)
+        else startSpeech()
+    }
 
     val units = remember(fullText, unitType) { ReaderUnits.split(fullText, unitType) }
-    val currentIndex = ReaderUnits.indexForOffset(units, offset)
+    val visibleMarks = if (active) playback.textMarks else book.marks
+    val displayOffset = if (active) playback.textOffset else offset
+    val currentIndex = ReaderUnits.indexForOffset(units, displayOffset)
     val current = units.getOrNull(currentIndex)
     val steps = if (english) listOf("Block", "Paragraph", "Sentence")
         else listOf("Bloque", "Párrafo", "Frase")
@@ -414,7 +460,8 @@ private fun NativeReadingScreen(
     fun setOffset(value: Int) {
         val next = value.coerceIn(0, fullText.length)
         offset = next
-        onUpdate(book.copy(offset = next))
+        if (active) send(NativeReaderPlaybackService.ACTION_SEEK, next)
+        else onUpdate(book.copy(offset = next))
     }
 
     val actions = if (english)
@@ -423,45 +470,28 @@ private fun NativeReadingScreen(
         "Añadir marca", "Más acciones")
     fun execute(which: Int) {
         when (which) {
-            0 -> playing = !playing
-            1 -> { playing = false; speaker.stop() }
+            0 -> toggleSpeech()
+            1 -> if (active) send(NativeReaderPlaybackService.ACTION_STOP)
             2, 3 -> if (units.isNotEmpty()) {
-                val index = (currentIndex + if (which == 2) -1 else 1).coerceIn(0, units.lastIndex)
-                setOffset(units[index].start)
+                if (active) send(if (which == 2)
+                    NativeReaderPlaybackService.ACTION_PREVIOUS else NativeReaderPlaybackService.ACTION_NEXT)
+                else {
+                    val index = (currentIndex + if (which == 2) -1 else 1)
+                        .coerceIn(0, units.lastIndex)
+                    setOffset(units[index].start)
+                }
             }
             4 -> {
-                val mark = offset.coerceIn(0, fullText.length)
-                if (mark !in book.marks) onUpdate(book.copy(marks = book.marks + mark, offset = offset))
+                val mark = displayOffset.coerceIn(0, fullText.length)
+                if (active) send(NativeReaderPlaybackService.ACTION_BOOKMARK)
+                else if (mark !in book.marks) onUpdate(book.copy(marks = book.marks + mark, offset = mark))
             }
             5 -> jumping = true
         }
     }
 
-    LaunchedEffect(book.id, speaker.ready.value) {
-        if (speaker.ready.value && (startOnOpen || prefs.getInt("mode", 0) == 1)) {
-            playing = true
-        }
-    }
-    LaunchedEffect(playing, sleepIndex) {
-        if (playing && sleepIndex > 0) {
-            delay(sleepMinutes[sleepIndex] * 60_000L)
-            if (playing) {
-                playing = false
-                speaker.stop()
-            }
-        }
-    }
-    LaunchedEffect(playing, offset, unitType, perBookRate, voiceName, speaker.ready.value, fullText) {
-        if (playing && speaker.ready.value && current != null) {
-            val nextOffset = units.getOrNull(currentIndex + 1)?.start ?: fullText.length
-            speaker.speak(
-                NativePronunciation.apply(current.text, dictionary.read()),
-                perBookRate, voiceName
-            ) {
-                if (nextOffset >= fullText.length) playing = false
-                setOffset(nextOffset)
-            }
-        } else if (!playing) speaker.stop()
+    LaunchedEffect(book.id) {
+        if ((startOnOpen || prefs.getInt("mode", 0) == 1) && !playing) startSpeech()
     }
 
     if (showPronunciation) {
@@ -473,7 +503,7 @@ private fun NativeReadingScreen(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        TextButton(onClick = { playing = false; speaker.stop(); onBack() }) {
+        TextButton(onClick = onBack) {
             Text(if (english) "Back to my library" else "Volver a Mi biblioteca")
         }
         Text(
@@ -496,8 +526,8 @@ private fun NativeReadingScreen(
             }
         )
         Button(
-            onClick = { playing = !playing },
-            enabled = speaker.ready.value && units.isNotEmpty(),
+            onClick = { toggleSpeech() },
+            enabled = units.isNotEmpty(),
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
@@ -521,7 +551,10 @@ private fun NativeReadingScreen(
         )
         Slider(
             value = unitType.toFloat(),
-            onValueChange = { unitType = it.roundToInt().coerceIn(0, 2) },
+            onValueChange = {
+                unitType = it.roundToInt().coerceIn(0, 2)
+                if (active) send(NativeReaderPlaybackService.ACTION_UNIT, unitType)
+            },
             valueRange = 0f..2f,
             steps = 1,
             modifier = Modifier.semantics {
@@ -541,7 +574,7 @@ private fun NativeReadingScreen(
         }
         }
         Text(
-            (if (english) "Read: " else "Leído: ") + ReaderUnits.percent(offset, fullText.length) + "%",
+            (if (english) "Read: " else "Leído: ") + ReaderUnits.percent(displayOffset, fullText.length) + "%",
             modifier = Modifier.semantics {
                 contentDescription = if (english) "Reading progress" else "Progreso de lectura"
             }
@@ -566,6 +599,8 @@ private fun NativeReadingScreen(
             ) { index ->
                 perBookRate = listOf(.75f, .9f, 1f, 1.25f, 1.5f)[index]
                 prefs.edit().putFloat("speed." + book.id, perBookRate).apply()
+                if (active) send(NativeReaderPlaybackService.ACTION_SPEED,
+                    (perBookRate * 100f).toInt())
             }
             val voices = speaker.voices()
             ReaderAdjustableChoice(
@@ -580,10 +615,12 @@ private fun NativeReadingScreen(
             ReaderAdjustableChoice(
                 if (english) "Sleep timer" else "Apagado automático",
                 sleepChoices, sleepIndex
-            ) { sleepIndex = it }
+            ) {
+                sleepIndex = it
+                if (active) send(NativeReaderPlaybackService.ACTION_SLEEP, sleepMinutes[it])
+            }
             TextButton(onClick = {
-                playing = false
-                speaker.stop()
+                if (active) send(NativeReaderPlaybackService.ACTION_PAUSE)
                 showPronunciation = true
             }) { Text(if (english) "Pronunciation dictionary" else "Diccionario de pronunciación") }
         }
@@ -651,8 +688,8 @@ private fun NativeReadingScreen(
                 Text(if (english) "Bookmarks" else "Marcas")
             }
             if (showMarks) {
-                if (book.marks.isEmpty()) Text(if (english) "No bookmarks" else "No hay marcas")
-                book.marks.forEach { mark ->
+                if (visibleMarks.isEmpty()) Text(if (english) "No bookmarks" else "No hay marcas")
+                visibleMarks.forEach { mark ->
                     OutlinedButton(onClick = { setOffset(mark) }) {
                         Text((if (english) "Go to " else "Ir al ") +
                             ReaderUnits.percent(mark, fullText.length) + "%")

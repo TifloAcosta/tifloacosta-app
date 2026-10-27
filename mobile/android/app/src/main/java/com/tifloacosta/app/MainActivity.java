@@ -22,6 +22,7 @@ public class MainActivity extends BridgeActivity {
         registerPlugin(TifloVideoScreenPlugin.class);
         registerPlugin(TifloWebFetchPlugin.class);
         registerPlugin(TifloUpdatePlugin.class);
+        registerPlugin(TifloNativeFeaturesPlugin.class);
         super.onCreate(savedInstanceState);
     }
 

@@ -32,7 +32,8 @@ object NativeReaderFormats {
         "txt", "text", "md", "markdown", "html", "htm", "rtf", "csv", "json",
         "xml", "log", "srt", "epub", "pdf", "docx", "pptx", "xlsx",
         "zip", "daisy", "7z", "rar", "jpg", "jpeg", "png", "webp", "bmp", "heic", "heif",
-        "odt", "ods", "odp", "ppsx", "xhtml", "fb2"
+        "odt", "ods", "odp", "ppsx", "xhtml", "fb2",
+        "doc", "xls", "ppt", "pps", "mobi", "prc", "pdb", "azw", "azw3"
     ) + AUDIO_EXTENSIONS
 
     fun readBounded(stream: InputStream, limit: Int): ByteArray {
@@ -59,6 +60,12 @@ object NativeReaderFormats {
             throw IOException("Usa el importador de comprimidos que trabaja con disco.")
         }
         if (ext in AUDIO_EXTENSIONS) return DecodedReaderFile("", ext, listOf("audio.$ext" to input))
+        if (ext in setOf("doc", "xls", "ppt", "pps")) {
+            return DecodedReaderFile(NativeReaderLegacyOffice.extract(ext, input), ext)
+        }
+        if (ext in setOf("mobi", "prc", "pdb", "azw", "azw3")) {
+            return DecodedReaderFile(NativeReaderMobipocket.extract(ext, input), ext)
+        }
         if (ext == "fb2") {
             return DecodedReaderFile(NativeReaderFictionBook.extract(input), ext)
         }

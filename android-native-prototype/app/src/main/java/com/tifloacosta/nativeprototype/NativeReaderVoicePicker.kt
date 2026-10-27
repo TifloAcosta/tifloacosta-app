@@ -10,11 +10,14 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
@@ -48,6 +51,14 @@ fun NativeReaderVoicePicker(
     onBeforePreview: () -> Unit = {}
 ) {
     var showing by remember { mutableStateOf(false) }
+    var restoreSettingsFocus by remember { mutableStateOf(false) }
+    val voiceListToggleFocus = remember { FocusRequester() }
+    LaunchedEffect(showing, restoreSettingsFocus) {
+        if (!showing && restoreSettingsFocus) {
+            voiceListToggleFocus.requestFocus()
+            restoreSettingsFocus = false
+        }
+    }
     var playingName by remember { mutableStateOf<String?>(null) }
     var status by remember { mutableStateOf("") }
     val installed = speaker.voices()
@@ -71,7 +82,8 @@ fun NativeReaderVoicePicker(
         Text(if (english) "Loading installed voices…" else "Cargando voces instaladas…")
         return
     }
-    Button(modifier = Modifier.fillMaxWidth(), onClick = { showing = !showing }) {
+    Button(modifier = Modifier.fillMaxWidth().focusRequester(voiceListToggleFocus),
+        onClick = { showing = !showing }) {
         Text(if (showing) (if (english) "Hide voices" else "Ocultar voces")
             else (if (english) "Show available voices (" else "Mostrar voces disponibles (") +
                 voices.size + ")")
@@ -104,6 +116,8 @@ fun NativeReaderVoicePicker(
             speaker.stop()
             playingName = null
             onVoiceSelected("")
+            showing = false
+            restoreSettingsFocus = true
             status = if (english) "System voice selected" else "Voz del sistema seleccionada"
         }) {
             Text(if (english) "Use system voice" else "Utilizar voz del sistema")
@@ -134,6 +148,8 @@ fun NativeReaderVoicePicker(
                 speaker.stop()
                 playingName = null
                 onVoiceSelected(v.name)
+                showing = false
+                restoreSettingsFocus = true
                 status = if (english) "Voice $number selected for reading"
                     else "Voz $number seleccionada para leer"
             }) {

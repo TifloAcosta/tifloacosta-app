@@ -17,7 +17,9 @@ object NativeReaderDaisyText {
         if (file.length() > 4L * 1024 * 1024) return ""
         return try {
             if (sourceCache.size > MAX_CACHE_DOCS) sourceCache.clear()
-            val doc = sourceCache.getOrPut(path) {
+            // Different DAISY books frequently use the SAME relative path,
+            // e.g. text/chapter.xhtml. Cache by real temporary file identity.
+            val doc = sourceCache.getOrPut(file.absolutePath) {
                 val source = file.readText(Charsets.UTF_8)
                 if (path.endsWith(".xml", true)) Jsoup.parse(source, "", Parser.xmlParser())
                 else Jsoup.parse(source)

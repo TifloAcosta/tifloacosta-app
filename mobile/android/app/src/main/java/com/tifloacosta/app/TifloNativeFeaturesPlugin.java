@@ -175,6 +175,19 @@ public class TifloNativeFeaturesPlugin extends Plugin {
         return new int[]{missing, unsafe};
     }
 
+    /** One-shot navigation request written by the native reader when the user
+     * chooses the existing production library. Never touches the book database. */
+    @PluginMethod
+    public void consumeExistingReaderNavigation(PluginCall call) {
+        android.content.SharedPreferences preferences = getContext()
+                .getSharedPreferences("tiflo-reader-navigation", android.content.Context.MODE_PRIVATE);
+        boolean pending = preferences.getBoolean("open-existing-library", false);
+        if (pending) preferences.edit().remove("open-existing-library").commit();
+        JSObject result = new JSObject();
+        result.put("openExistingReader", pending);
+        call.resolve(result);
+    }
+
     @PluginMethod
     public void openNativeReader(PluginCall call) { open(call, "reader"); }
 

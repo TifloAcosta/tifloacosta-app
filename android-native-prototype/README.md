@@ -1,3 +1,30 @@
+# Fase final de TifloLector — bloque 3 de 7 (formatos documentales antiguos y ebooks)
+
+Versión **0.14-bloque3** en rama y PR #257, basada en 0.13. No modifica Google Play ni la aplicación iOS.
+
+## Lectores añadidos
+
+- Office 97–2003: **DOC** (texto Word HWPF), **XLS** (hojas y celdas HSSF), **PPT** y **PPS** (diapositivas HSLF) con Apache POI 5.2.5. Exige firma binaria OLE2 real, rechaza archivos ilegibles/cifrados y limita cada archivo a 40 MB. No ejecuta macros, fórmulas, scripts ni vínculos externos. Se extrae texto, no se conserva la maquetación original; imágenes incluidas, diagramas y tablas visuales requieren OCR posterior.
+- PalmDB/PalmDOC y Mobipocket: **PDB, PRC, MOBI**, algunas variantes **AZW/AZW3** sin cifrado cuando el texto se almacena en registros PalmDOC con compresión simple o LZ77 (tipos 1 y 2). Detecta encabezados, límites, codificación UTF-8 y Windows-1252. Prohíbe explícitamente compresiones HUFF/CDIC, cifrado, DRM, versiones Kindle no decodificables y estructuras incompletas, con error legible y sin crear un libro vacío.
+- ZIP, RAR y 7Z: también aceptan DOC/XLS/PPT/PPS y formatos de libros electrónicos antiguos en sus carpetas internas. Conservan límites de entrada y los nombres se usan solamente como identificadores, nunca rutas absolutas de escritura. La lectura DAISY del bloque 2 permanece intacta.
+- No cambia la portada ni los controles TalkBack. Los libros importados se guardan como texto accesible en TifloLector y conservan el archivo original.
+
+## Verificación
+
+Se añaden pruebas unitarias: XLS 97 creado con POI con valores y hojas, PPT/ PPS creado con HSLF, rechazo de falsas cabeceras OLE, PalmDB/MOBI sintético con texto real y compresión LZ77, rechazo DRM y HUFF/CDIC, extracción ZIP y 7Z auténticos incluyendo extensiones heredadas y rutas peligrosas.
+
+## Limitaciones que no deben anunciarse como resueltas
+
+- **AZW3/KF8 no equivale a todos los Kindle.** Los libros con fragmentos/índices KF8 complejos, HUFF/CDIC y DRM no se pueden tratar como libros PalmDOC ordinarios. Para ellos conviene conseguir una versión EPUB/TXT sin DRM del proveedor.
+- DOC/PPT/PPS/XLS son archivos binarios antiguos muy heterogéneos. La prueba de escritorio y la compilación no demuestran que funcionen con todas las variantes en Android: hay que validar documentos reales, con especial atención a compatibilidad de bibliotecas POI y Android sin java.awt.
+- RAR5, multipartes y 7Z con compresiones variadas requieren muestras reales en Pixel. Archivos cifrados o con contraseña no admitidos; no es correcto prometer eliminar DRM ni descifrar archivos.
+- Libreta de imágenes OCR dentro de documentos Office, gran cantidad de archivos en un ZIP y recuperación de un libro mal formado siguen necesitando desarrollo específico.
+- No fusionar ni distribuir por Play Store hasta validar en Pixel/TalkBack y comprobar que la instalación del prototipo no sustituye la versión publicada.
+
+## Prueba física de aceptación
+
+Comprobar un DOC de Word 2003 con párrafos, un XLS de Excel 2003 con varias hojas, una presentación PPT/PPS con varios títulos, un MOBI libre de DRM y un 7Z de documentos. Revisar texto, orden, controles TalkBack, lectura bloqueando pantalla, volver al mismo punto y conservación de originales. Intentar importar un fichero con contraseña para comprobar que falla con una explicación accesible.
+
 # Fase final de TifloLector — bloque 2 de 7 (DAISY navegable)
 
 Versión de pruebas **0.13-bloque2**, PR #256, basada en 0.12. No cambia la app publicada de Android ni la versión iOS.

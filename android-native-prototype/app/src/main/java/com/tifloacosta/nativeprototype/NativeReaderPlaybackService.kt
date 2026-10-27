@@ -40,7 +40,9 @@ data class NativePlaybackSnapshot(
     val textOffset: Int = 0,
     val textLength: Int = 0,
     val error: String = "",
-    val sleepMinutes: Int = 0
+    val sleepMinutes: Int = 0,
+    val audioMarks: List<ReaderAudioMark> = emptyList(),
+    val textMarks: List<Int> = emptyList()
 )
 
 /** Single audio owner independent of Compose. Keeps DAISY and TTS alive on lock screen. */
@@ -544,7 +546,9 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
             positionMs = positionMs, durationMs = durationMs,
             textOffset = textOffset, textLength = text.length, error = error,
             sleepMinutes = if (remainingSleepMs <= 0L) 0
-                else ((remainingSleepMs + 59999L) / 60000L).toInt()
+                else ((remainingSleepMs + 59999L) / 60000L).toInt(),
+            audioMarks = current.audioMarks,
+            textMarks = current.marks
         )
         session?.setMetadata(android.media.MediaMetadata.Builder()
             .putString(android.media.MediaMetadata.METADATA_KEY_TITLE, current.title)
@@ -570,7 +574,8 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
     private fun showNotification(startForegroundNow: Boolean) {
         val launch = PendingIntent.getActivity(this, 90,
             Intent(this, NativePrototypeActivity::class.java)
-                .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),
+                .putExtra("tiflolector-open-book", book?.id.orEmpty())
+                .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP),
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         val details = (book?.title ?: "TifloLector")
         val prev = Notification.Action.Builder(

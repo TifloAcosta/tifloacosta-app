@@ -55,3 +55,13 @@ test('legacy migration preflight is read-only and reports data instead of replac
   assert.match(bridge, /SELECT relative_path FROM /);
   assert.doesNotMatch(bridge, /getWritableDatabase\(|deleteDatabase\(|clearApplicationUserData\(/);
 });
+
+test('the trial exposes an accessible library check without triggering migration', async () => {
+  const settings = await source('../src/screens/settings.mjs');
+  assert.match(settings, /NativeFeatures\.inspectLegacyLibrary\(\)/);
+  assert.match(settings, /Comprobar biblioteca existente \(sin cambios\)/);
+  assert.match(settings, /previewStatus\.setAttribute\('aria-live', 'polite'\)/);
+  assert.match(settings, /missingBookSources/);
+  assert.match(settings, /missingAudioTracks/);
+  assert.doesNotMatch(settings, /NativeFeatures\.migrateLegacyLibrary\(/);
+});

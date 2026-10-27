@@ -116,7 +116,10 @@ class NativeReaderStore(private val context: Context) {
             (0 until array.length()).mapNotNull { i ->
                 val obj = array.optJSONObject(i) ?: return@mapNotNull null
                 val id = obj.optString("id")
-                if (!ids.matches(id) || !File(folder, id + ".txt").isFile) return@mapNotNull null
+                if (!ids.matches(id)) throw IOException("Identificador de libro inválido en la biblioteca.")
+                if (!File(folder, id + ".txt").isFile) throw IOException(
+                    "Falta el texto de un libro. Conserva los originales; no se modificará el índice."
+                )
                 val marks = obj.optJSONArray("marks") ?: JSONArray()
                 ReaderBook(
                     id = id,

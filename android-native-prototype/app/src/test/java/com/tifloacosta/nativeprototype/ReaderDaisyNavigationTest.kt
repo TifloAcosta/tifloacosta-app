@@ -20,6 +20,7 @@ class ReaderDaisyNavigationTest {
                       <h1><a href="one.smil#t1">Introducción</a></h1>
                       <span class="page-normal"><a href="one.smil#second">12</a></span>
                       <h2><a href="two.smil#last">Detalles</a></h2>
+                      <h3><a href="two.smil#missing">Referencia rota</a></h3>
                       <div class="footnote"><a href="two.smil#last">Nota al pie</a></div>
                     </body></html>""".trimIndent()),
                 "book/one.smil" to add("""

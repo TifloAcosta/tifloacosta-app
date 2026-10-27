@@ -19,3 +19,13 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# Optional desktop-only interfaces referenced by POI / PDFBox and service
+# discoverers. They are not present on Android and are not used by our
+# read-only Office extraction paths. Keep these scoped; do not hide other
+# missing-class diagnostics.
+-dontwarn java.awt.**
+-dontwarn javax.imageio.**
+-dontwarn aQute.bnd.annotation.spi.**
+-dontwarn org.osgi.framework.**
+-dontwarn com.gemalto.jp2.**

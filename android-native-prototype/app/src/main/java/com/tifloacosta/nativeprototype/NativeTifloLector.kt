@@ -157,11 +157,38 @@ fun NativeTifloLector(
         }
     }
     fun save(book: ReaderBook) {
+        // Detect which fields the UI actually edited, so a background audio
+        // progress update cannot be overwritten by an older Compose snapshot.
+        val previous = selectedBook?.takeIf { it.id == book.id }
+            ?: library.firstOrNull { it.id == book.id } ?: book
         if (selectedBook?.id == book.id) selectedBook = book
         library = library.map { if (it.id == book.id) book else it }
         scope.launch {
             try {
-                withContext(Dispatchers.IO) { store.update(book) }
+                val saved = withContext(Dispatchers.IO) {
+                    store.changeBook(book.id) { latest ->
+                        latest.copy(
+                            title = if (book.title != previous.title) book.title else latest.title,
+                            favorite = if (book.favorite != previous.favorite) book.favorite
+                                else latest.favorite,
+                            folder = if (book.folder != previous.folder) book.folder else latest.folder,
+                            finished = if (book.finished != previous.finished) book.finished
+                                else latest.finished,
+                            offset = if (book.offset != previous.offset) book.offset else latest.offset,
+                            marks = if (book.marks != previous.marks) book.marks else latest.marks,
+                            audioMarks = if (book.audioMarks != previous.audioMarks) book.audioMarks
+                                else latest.audioMarks,
+                            trackIndex = if (book.trackIndex != previous.trackIndex)
+                                book.trackIndex else latest.trackIndex,
+                            audioPositionMs = if (book.audioPositionMs != previous.audioPositionMs)
+                                book.audioPositionMs else latest.audioPositionMs
+                        )
+                    }
+                }
+                if (saved != null) {
+                    if (selectedBook?.id == saved.id) selectedBook = saved
+                    library = library.map { if (it.id == saved.id) saved else it }
+                }
             } catch (e: Exception) {
                 error = e.message ?: "No se pudo guardar el cambio."
             }
@@ -485,7 +512,7 @@ fun NativeTifloLector(
                         try {
                             withContext(Dispatchers.IO) {
                                 val name = organization.createFolder(proposed, store.list())
-                                store.update(book.copy(folder = name))
+                                store.changeBook(book.id) { it.copy(folder = name) }
                             }
                             moveBook = null
                             folderFilter = 0
@@ -509,7 +536,7 @@ fun NativeTifloLector(
                                     .firstOrNull { it.equals(requested, ignoreCase = true) }
                                     ?: throw java.io.IOException(
                                         "Esa carpeta no existe. Usa Crear carpeta nueva y mover este libro.")
-                            store.update(book.copy(folder = candidate))
+                            store.changeBook(book.id) { it.copy(folder = candidate) }
                         }
                         moveBook = null
                         folderFilter = 0

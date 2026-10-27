@@ -32,7 +32,7 @@ object NativeDaisyNavigation {
         anchorSegments: Map<String, Int>
     ): List<ReaderDaisyNavPoint> {
         val source = files[path]?.takeIf { it.length() < 4 * 1024 * 1024 } ?: return emptyList()
-        val doc = Jsoup.parse(source.readText(Charsets.UTF_8))
+        val doc = Jsoup.parse(decodeText(source))
         val result = mutableListOf<ReaderDaisyNavPoint>()
         val selector = "h1, h2, h3, h4, h5, h6, span, div"
         for (element in doc.body().select(selector)) {
@@ -66,7 +66,7 @@ object NativeDaisyNavigation {
         anchorSegments: Map<String, Int>
     ): List<ReaderDaisyNavPoint> {
         val source = files[path]?.takeIf { it.length() < 4 * 1024 * 1024 } ?: return emptyList()
-        val doc = Jsoup.parse(source.readText(Charsets.UTF_8), "", Parser.xmlParser())
+        val doc = Jsoup.parse(decodeText(source), "", Parser.xmlParser())
         val found = mutableListOf<ReaderDaisyNavPoint>()
         fun name(element: Element): String = element.tagName().substringAfter(':').lowercase(Locale.ROOT)
         fun navigate(node: Element, level: Int = 0) {
@@ -119,6 +119,13 @@ object NativeDaisyNavigation {
         }
         // Preserve the order in the source navigation tables for list presentation.
         return entries.distinctBy { Triple(it.kind, it.label, it.segmentIndex) }.take(10000)
+    }
+
+    private fun decodeText(file: File): String {
+        val bytes = file.readBytes()
+        val utf8 = bytes.toString(Charsets.UTF_8).removePrefix("\uFEFF")
+        // Legacy DAISY CD-ROM titles may use Western European encodings.
+        return if ('\uFFFD' in utf8) bytes.toString(Charsets.ISO_8859_1) else utf8
     }
 
     private fun findSegment(

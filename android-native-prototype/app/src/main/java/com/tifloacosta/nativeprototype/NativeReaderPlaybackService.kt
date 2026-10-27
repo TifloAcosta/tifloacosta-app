@@ -196,7 +196,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         )
         session = MediaSession(this, "TifloLector").apply {
             setCallback(object : MediaSession.Callback() {
-                override fun onPlay() { playReading() }
+                override fun onPlay() { resumeReading() }
                 override fun onPause() { pauseReading() }
                 override fun onStop() { stopReading() }
                 override fun onSkipToNext() { nextSegment() }
@@ -268,9 +268,9 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                 lastTick = android.os.SystemClock.elapsedRealtime()
                 publish()
             }
-            ACTION_PLAY -> playReading()
+            ACTION_PLAY -> resumeReading()
             ACTION_PAUSE -> pauseReading()
-            ACTION_TOGGLE -> if (playing) pauseReading() else playReading()
+            ACTION_TOGGLE -> if (playing) pauseReading() else resumeReading()
             ACTION_STOP -> stopReading()
             ACTION_PREVIOUS -> previousSegment()
             ACTION_NEXT -> nextSegment()
@@ -368,6 +368,16 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         }
         publish("No se ha podido obtener el control del audio.")
         return false
+    }
+
+    private fun resumeReading() {
+        if (book == null) {
+            val last = snapshot.value
+            if (last.bookId.isNotBlank() && last.kind in setOf("text", "audio")) {
+                showNotification(startForegroundNow = true)
+                openBook(last.bookId, last.kind)
+            }
+        } else playReading()
     }
 
     private fun playReading() {

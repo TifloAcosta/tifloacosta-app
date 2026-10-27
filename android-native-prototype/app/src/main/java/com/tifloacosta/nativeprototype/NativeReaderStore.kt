@@ -229,7 +229,7 @@ class NativeReaderStore(private val context: Context) {
     }
 
     @Synchronized fun replaceFolder(oldName: String, newName: String) {
-        save(list().map { if (it.folder == oldName) it.copy(folder = newName) else it })
+        save(list().map { if (it.folder.equals(oldName, ignoreCase = true)) it.copy(folder = newName) else it })
     }
 
     @Synchronized fun audioFiles(book: ReaderBook): List<File> {

@@ -6,6 +6,28 @@ import java.io.File
 import java.io.IOException
 import java.util.Locale
 
+/** Rules tested independently from Android storage. */
+object ReaderLibraryRules {
+    fun folderName(value: String): String {
+        val name = value.trim().replace(Regex("[\\p{Cntrl}\\\\/]"), " ").trim()
+        if (name.isBlank()) throw IOException("El nombre de la carpeta está vacío.")
+        if (name.length > 70) throw IOException("La carpeta no puede superar 70 caracteres.")
+        if (name.equals("__none__", true)) throw IOException("Nombre de carpeta reservado.")
+        return name
+    }
+    fun move(values: List<String>, id: String, delta: Int): List<String> {
+        val result = values.toMutableList()
+        val from = result.indexOf(id)
+        if (from < 0) return values
+        val to = (from + delta).coerceIn(0, result.lastIndex)
+        if (to != from) {
+            val item = result.removeAt(from)
+            result.add(to, item)
+        }
+        return result
+    }
+}
+
 /** Durable empty folders and ordered reading queue, independently of book contents. */
 class NativeReaderOrganization(context: Context) {
     private val directory = File(context.filesDir, "tiflolector-native").apply { mkdirs() }
@@ -28,13 +50,7 @@ class NativeReaderOrganization(context: Context) {
             temp.delete()
         }
     }
-    fun cleanedFolderName(value: String): String {
-        val name = value.trim().replace(Regex("[\\p{Cntrl}\\\\/]"), " ").trim()
-        if (name.isBlank()) throw IOException("El nombre de la carpeta está vacío.")
-        if (name.length > 70) throw IOException("La carpeta no puede superar 70 caracteres.")
-        if (name.equals("__none__", true)) throw IOException("Nombre de carpeta reservado.")
-        return name
-    }
+    fun cleanedFolderName(value: String): String = ReaderLibraryRules.folderName(value)
     @Synchronized fun folders(existingBooks: List<ReaderBook>): List<String> {
         // Older versions had folder labels exclusively stored on each book.
         val old = existingBooks.map { it.folder }.filter { it.isNotBlank() }
@@ -78,15 +94,9 @@ class NativeReaderOrganization(context: Context) {
         writeArray(queueFile, queue(validBooks).filterNot { it == id })
     }
     @Synchronized fun moveInQueue(id: String, delta: Int, validBooks: List<ReaderBook>) {
-        val values = queue(validBooks).toMutableList()
-        val from = values.indexOf(id)
-        if (from < 0) return
-        val to = (from + delta).coerceIn(0, values.lastIndex)
-        if (to != from) {
-            val entry = values.removeAt(from)
-            values.add(to, entry)
-            writeArray(queueFile, values)
-        }
+        val before = queue(validBooks)
+        val reordered = ReaderLibraryRules.move(before, id, delta)
+        if (before != reordered) writeArray(queueFile, reordered)
     }
     @Synchronized fun pruneQueue(validBooks: List<ReaderBook>) {
         writeArray(queueFile, queue(validBooks))

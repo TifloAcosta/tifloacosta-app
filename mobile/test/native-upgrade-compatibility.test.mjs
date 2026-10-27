@@ -45,5 +45,13 @@ test('legacy migration preflight is read-only and reports data instead of replac
   assert.match(bridge, /SELECT COUNT\(\*\) FROM /);
   assert.match(bridge, /legacyDatabaseExists/);
   assert.match(bridge, /migrationCompleted", false/);
+  assert.match(bridge, /missingBookSources/);
+  assert.match(bridge, /missingAudioTracks/);
+  assert.match(bridge, /missingDerivedFiles/);
+  assert.match(bridge, /unsafeStoredPaths/);
+  assert.match(bridge, /preflightSafe/);
+  assert.match(bridge, /getCanonicalPath\(\)/);
+  assert.match(bridge, /candidate\.isFile\(\)/);
+  assert.match(bridge, /SELECT relative_path FROM /);
   assert.doesNotMatch(bridge, /getWritableDatabase\(|deleteDatabase\(|clearApplicationUserData\(/);
 });

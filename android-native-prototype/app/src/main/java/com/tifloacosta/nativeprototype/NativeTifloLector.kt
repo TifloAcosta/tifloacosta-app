@@ -267,7 +267,10 @@ fun NativeTifloLector(
         return
     }
     if (screen == "settings") {
-        NativeReaderGeneralSettings(english) { screen = "home" }
+        NativeReaderGeneralSettings(english, onDataRestored = { refresh() }) {
+            screen = "home"
+            refresh()
+        }
         return
     }
     if (screen == "catalogs") {

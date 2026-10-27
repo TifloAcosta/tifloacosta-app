@@ -1,5 +1,6 @@
 import { addExternalLink, addParagraph, addScreenHeader, addShareButton, clearScreen } from './shared.mjs';
 import { createAccessibleVideoPlayer, videoId, youtubeUrl } from './video-player.mjs';
+import { NativeFeatures } from './settings.mjs';
 
 const YOUTUBE_ENDPOINT = 'https://youtube-auth.tifloacosta.com';
 
@@ -84,7 +85,9 @@ export function renderVideos({
         duration:value => `Duration: ${value}`,
         play:'Play',
         open:'Open on YouTube',
-        own:'TifloAcosta videos'
+        own:'TifloAcosta videos',
+        accountVideo:'Open accessible YouTube account actions: like, subscribe and comment',
+        accountUnavailable:'Account actions are not available in this build. Public video search remains available.'
       }
     : {
         searchHeading:'YouTube accesible',
@@ -106,7 +109,9 @@ export function renderVideos({
         duration:value => `Duración: ${value}`,
         play:'Reproducir',
         open:'Abrir en YouTube',
-        own:'Vídeos de TifloAcosta'
+        own:'Vídeos de TifloAcosta',
+        accountVideo:'Abrir acciones accesibles de YouTube: Me gusta, suscribirse y comentar',
+        accountUnavailable:'Las acciones con cuenta no están disponibles en esta compilación. Puedes seguir buscando vídeos públicos.'
       };
 
   let player = null;
@@ -274,7 +279,26 @@ export function renderVideos({
   });
   more.addEventListener('click', () => { void searchYouTube({ append: true }); });
 
-  root.append(searchHeading, intro, form, status, results, more);
+
+  const accountButton = document.createElement('button');
+  accountButton.type = 'button';
+  accountButton.textContent = copy.accountVideo;
+  const accountStatus = document.createElement('p');
+  accountStatus.setAttribute('role', 'status');
+  accountStatus.setAttribute('aria-live', 'polite');
+  accountButton.addEventListener('click', async () => {
+    accountButton.disabled = true;
+    try {
+      await NativeFeatures.openNativeVideos();
+      accountStatus.textContent = '';
+    } catch {
+      accountStatus.textContent = copy.accountUnavailable;
+    } finally {
+      accountButton.disabled = false;
+    }
+  });
+
+  root.append(accountButton, accountStatus, searchHeading, intro, form, status, results, more);
 
   const ownHeading = document.createElement('h2');
   ownHeading.textContent = copy.own;

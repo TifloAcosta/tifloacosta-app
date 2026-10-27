@@ -165,7 +165,7 @@ fun NativeTifloLector(
                         withContext(Dispatchers.IO) { store.import(uri) }
                         completed++
                     } catch (e: Exception) {
-                        error += (e.message ?: "No se pudo importar el documento compartido.") + "\\n"
+                        error += (e.message ?: "No se pudo importar el documento compartido.") + "\n"
                     }
                 }
                 sharedImportNotice = if (english)

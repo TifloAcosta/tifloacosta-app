@@ -356,7 +356,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
             units = ReaderUnits.split(text, textUnit)
             textOffset = found.offset.coerceIn(0, text.length)
             speed = prefs.getFloat("speed." + id, prefs.getFloat("rate", 1f))
-            voiceId = prefs.getString("voice." + id, "").orEmpty()
+            voiceId = prefs.getString("voice." + id, prefs.getString("voice", "")).orEmpty()
             if (units.isEmpty()) {
                 publish("Este documento no contiene texto para reproducir.")
                 stopReading()

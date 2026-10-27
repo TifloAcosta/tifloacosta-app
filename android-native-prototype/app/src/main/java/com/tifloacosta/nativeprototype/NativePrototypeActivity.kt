@@ -59,7 +59,28 @@ object PrototypeNavigation {
     fun parentOf(destination: Int): Int = HOME
 }
 
+/** A new share gets a distinct serial even if the same document is shared again. */
+private data class SharedReaderFiles(val serial: Int, val uris: List<Uri>)
+
 class NativePrototypeActivity : ComponentActivity() {
+    private var serial = 0
+    private var pendingSharedFiles by mutableStateOf<SharedReaderFiles?>(null)
+
+    @Suppress("DEPRECATION")
+    private fun acceptSharedFiles(incoming: Intent?) {
+        if (incoming?.action != Intent.ACTION_SEND &&
+            incoming?.action != Intent.ACTION_SEND_MULTIPLE) return
+        val collected = mutableListOf<Uri>()
+        incoming.clipData?.let { clip ->
+            for (index in 0 until clip.itemCount.coerceAtMost(40))
+                clip.getItemAt(index).uri?.let(collected::add)
+        }
+        incoming.getParcelableExtra<Uri>(Intent.EXTRA_STREAM)?.let(collected::add)
+        incoming.getParcelableArrayListExtra<Uri>(Intent.EXTRA_STREAM)?.let(collected::addAll)
+        incoming.data?.let(collected::add)
+        val files = collected.distinct().filter { it.scheme == "content" || it.scheme == "file" }.take(40)
+        if (files.isNotEmpty()) pendingSharedFiles = SharedReaderFiles(++serial, files)
+    }
     val youTubeAccount by lazy { NativeYouTubeAccount(applicationContext) }
     private var oauthCallback by mutableStateOf<Uri?>(null)
     private var requestedReaderBookId by mutableStateOf<String?>(null)
@@ -69,6 +90,7 @@ class NativePrototypeActivity : ComponentActivity() {
         if (intent?.action == Intent.ACTION_VIEW) oauthCallback = intent?.data
         requestedReaderBookId = intent?.getStringExtra("tiflolector-open-book")
             ?.takeIf { it.isNotBlank() }
+        if (savedInstanceState == null) acceptSharedFiles(intent)
         setContent {
             MaterialTheme(colorScheme = if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme()) {
                 PrototypeHome(
@@ -77,6 +99,8 @@ class NativePrototypeActivity : ComponentActivity() {
                     onCallbackHandled = { oauthCallback = null },
                     requestedReaderBookId = requestedReaderBookId,
                     onReaderRequestHandled = { requestedReaderBookId = null },
+                    sharedFiles = pendingSharedFiles,
+                    onSharedFilesHandled = { pendingSharedFiles = null },
                     onSignIn = {
                         val url = youTubeAccount.startAuthorization()
                         startActivity(Intent(Intent.ACTION_VIEW, url))
@@ -88,6 +112,8 @@ class NativePrototypeActivity : ComponentActivity() {
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
+        setIntent(intent)
+        acceptSharedFiles(intent)
         if (intent.action == Intent.ACTION_VIEW) oauthCallback = intent.data
         intent.getStringExtra("tiflolector-open-book")
             ?.takeIf { it.isNotBlank() }?.let { requestedReaderBookId = it }
@@ -149,6 +175,8 @@ private fun PrototypeHome(
     onCallbackHandled: () -> Unit,
     requestedReaderBookId: String?,
     onReaderRequestHandled: () -> Unit,
+    sharedFiles: SharedReaderFiles?,
+    onSharedFilesHandled: () -> Unit,
     onSignIn: () -> Unit
 ) {
     val context = LocalContext.current
@@ -169,6 +197,9 @@ private fun PrototypeHome(
     var section by rememberSaveable { mutableIntStateOf(PrototypeNavigation.HOME) }
     LaunchedEffect(requestedReaderBookId) {
         if (requestedReaderBookId != null) section = PrototypeNavigation.READER
+    }
+    LaunchedEffect(sharedFiles?.serial) {
+        if (sharedFiles != null) section = PrototypeNavigation.READER
     }
     var mediaIndex by rememberSaveable { mutableIntStateOf(0) }
     var mediaSourceIndex by rememberSaveable { mutableIntStateOf(0) }
@@ -254,6 +285,9 @@ private fun PrototypeHome(
             english = english,
             requestedBookId = requestedReaderBookId,
             onReaderRequestHandled = onReaderRequestHandled,
+            sharedUris = sharedFiles?.uris.orEmpty(),
+            sharedSerial = sharedFiles?.serial ?: 0,
+            onSharedUrisConsumed = onSharedFilesHandled,
             onBack = { section = PrototypeNavigation.HOME }
         )
         return

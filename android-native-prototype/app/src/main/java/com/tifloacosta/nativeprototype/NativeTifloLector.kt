@@ -1,5 +1,6 @@
 package com.tifloacosta.nativeprototype
 
+import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import androidx.activity.compose.BackHandler
@@ -61,6 +62,9 @@ fun NativeTifloLector(
     english: Boolean,
     requestedBookId: String? = null,
     onReaderRequestHandled: () -> Unit = {},
+    sharedUris: List<Uri> = emptyList(),
+    sharedSerial: Int = 0,
+    onSharedUrisConsumed: () -> Unit = {},
     onBack: () -> Unit
 ) {
     val context = LocalContext.current
@@ -89,6 +93,7 @@ fun NativeTifloLector(
     var deleteBook by remember { mutableStateOf<ReaderBook?>(null) }
     var loading by remember { mutableStateOf(true) }
     var importStatus by remember { mutableStateOf("") }
+    var sharedImportNotice by remember { mutableStateOf("") }
     val mainHandler = remember { Handler(Looper.getMainLooper()) }
     val preferences = remember { context.getSharedPreferences("native-reader-preferences", 0) }
     var rate by remember {
@@ -146,6 +151,34 @@ fun NativeTifloLector(
             }
         }
     }
+    LaunchedEffect(sharedSerial) {
+        if (sharedSerial != 0 && sharedUris.isNotEmpty()) {
+            var completed = 0
+            error = ""
+            sharedImportNotice = ""
+            try {
+                sharedUris.forEachIndexed { index, uri ->
+                    importStatus = if (english)
+                        "Importing shared document " + (index + 1) + " of " + sharedUris.size
+                    else "Importando documento compartido " + (index + 1) + " de " + sharedUris.size
+                    try {
+                        withContext(Dispatchers.IO) { store.import(uri) }
+                        completed++
+                    } catch (e: Exception) {
+                        error += (e.message ?: "No se pudo importar el documento compartido.") + "\n"
+                    }
+                }
+                sharedImportNotice = if (english)
+                    "$completed of ${sharedUris.size} shared documents added to the library."
+                else "$completed de ${sharedUris.size} documentos compartidos añadidos a la biblioteca."
+            } finally {
+                importStatus = ""
+                refresh()
+                onSharedUrisConsumed()
+            }
+        }
+    }
+
     fun open(book: ReaderBook, startSpeech: Boolean = false) {
         error = ""
         scope.launch {
@@ -367,6 +400,7 @@ fun NativeTifloLector(
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)) {
         TextButton(onClick = onBack) { Text(if (english) "Back to home" else "Volver al inicio") }
+        if (sharedImportNotice.isNotBlank()) Text(sharedImportNotice)
         Text("TifloLector", style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.semantics { heading() })
         Button(onClick = { screen = "import" }, modifier = Modifier.fillMaxWidth()) {
@@ -819,16 +853,20 @@ private fun NativeReadingScreen(
                 if (active) send(NativeReaderPlaybackService.ACTION_SPEED,
                     (perBookRate * 100f).toInt())
             }
-            val voices = speaker.voices()
-            ReaderAdjustableChoice(
-                if (english) "Voice" else "Voz",
-                listOf(if (english) "System default" else "Predeterminada") +
-                    voices.map { it.name + ", " + it.locale.displayLanguage },
-                voices.indexOfFirst { it.name == voiceName }.let { if (it < 0) 0 else it + 1 }
-            ) { index ->
-                voiceName = voices.getOrNull(index - 1)?.name.orEmpty()
-                prefs.edit().putString("voice." + book.id, voiceName).apply()
-            }
+            NativeReaderVoicePicker(
+                english = english,
+                speaker = speaker,
+                selectedVoice = voiceName,
+                speed = perBookRate,
+                filter = 0,
+                onBeforePreview = {
+                    if (active && playing) send(NativeReaderPlaybackService.ACTION_PAUSE)
+                },
+                onVoiceSelected = { chosen ->
+                    voiceName = chosen
+                    prefs.edit().putString("voice." + book.id, chosen).apply()
+                }
+            )
             ReaderAdjustableChoice(
                 if (english) "Sleep timer" else "Apagado automático",
                 sleepChoices, sleepIndex

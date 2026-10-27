@@ -220,6 +220,19 @@ class NativeReaderStore(private val context: Context) {
         if (books.any { it.id == book.id }) save(books)
     }
 
+    /** Atomically change only selected fields from the latest on-disk book metadata. */
+    @Synchronized fun changeBook(id: String, change: (ReaderBook) -> ReaderBook): ReaderBook? =
+        synchronized(NativeReaderPersistence.lock) {
+            val books = list().toMutableList()
+            val index = books.indexOfFirst { it.id == id }
+            if (index < 0) return@synchronized null
+            val next = change(books[index])
+            require(next.id == id) { "No se puede modificar el identificador del libro." }
+            books[index] = next
+            save(books)
+            next
+        }
+
     /** Update readable OCR content while preserving marks, folders and originals. */
     @Synchronized fun replaceAccessibleText(id: String, text: String, notice: String = "") {
         if (!ids.matches(id)) throw IOException("Identificador de libro incorrecto.")
@@ -314,7 +327,7 @@ class NativeReaderStore(private val context: Context) {
             document.writeText(text, Charsets.UTF_8)
             val book = ReaderBook(id = id, title = title.take(180),
                 length = text.length, format = "pdf")
-            save(list() + book)
+            synchronized(NativeReaderPersistence.lock) { save(list() + book) }
             return book
         } catch (e: Exception) {
             original.delete(); document.delete()
@@ -474,16 +487,21 @@ class NativeReaderStore(private val context: Context) {
         if (clean.isNotEmpty()) update(book.copy(title = clean))
     }
 
-    @Synchronized fun delete(book: ReaderBook) {
-        list().firstOrNull { it.id == book.id }?.let { current ->
-            save(list().filterNot { it.id == book.id })
-            File(folder, book.id + ".txt").delete()
-            // Source files use a generated UUID and are never resolved from
-            // untrusted document titles or ZIP entry paths.
-            folder.listFiles()?.filter { it.name.startsWith(book.id + ".source.") }
-                ?.forEach { it.delete() }
-            current.tracks.forEach { File(folder, it).delete() }
+    @Synchronized fun delete(book: ReaderBook) =
+        synchronized(NativeReaderPersistence.lock) {
+            require(ids.matches(book.id))
+            list().firstOrNull { it.id == book.id }?.let { current ->
+                save(list().filterNot { it.id == book.id })
+                File(folder, book.id + ".txt").delete()
+                folder.listFiles()?.filter { it.name.startsWith(book.id + ".source.") }
+                    ?.forEach { it.delete() }
+                current.tracks.forEach { File(folder, it).delete() }
+                // OCR checkpoints can contain substantial extracted text. Delete
+                // only the fixed sidecars for THIS validated book id.
+                for (kind in listOf("pdf", "images")) {
+                    File(folder, book.id + ".ocr-" + kind).deleteRecursively()
+                }
+            }
         }
-    }
 
 }

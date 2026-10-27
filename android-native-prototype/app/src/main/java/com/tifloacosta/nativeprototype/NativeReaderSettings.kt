@@ -58,7 +58,11 @@ fun ReaderAdjustableChoice(
 
 /** Shared native defaults; book-specific overrides are edited inside each open book. */
 @Composable
-fun NativeReaderGeneralSettings(english: Boolean, onBack: () -> Unit) {
+fun NativeReaderGeneralSettings(
+    english: Boolean,
+    onDataRestored: () -> Unit = {},
+    onBack: () -> Unit
+) {
     val context = LocalContext.current
     val prefs = remember {
         context.getSharedPreferences("native-reader-preferences", 0)
@@ -80,10 +84,15 @@ fun NativeReaderGeneralSettings(english: Boolean, onBack: () -> Unit) {
     var voiceFilter by remember { mutableIntStateOf(0) }
     val groups = if (english)
         listOf("Audio and voices", "Reading mode", "Visual presentation",
-            "Navigation and steps", "Supported formats")
+            "Navigation and steps", "Supported formats", "Backup and restore")
     else listOf("Audio y voces", "Modo de lectura", "Presentación visual",
-        "Navegación y avances", "Formatos compatibles")
+        "Navegación y avances", "Formatos compatibles", "Copias de seguridad")
 
+    if (nested == "backup") {
+        NativeReaderBackupScreen(english, onRestored = onDataRestored,
+            onBack = { nested = "" })
+        return
+    }
     if (nested == "external") {
         NativeExternalVoiceProvidersScreen(english, onBack = { nested = "" })
         return
@@ -196,6 +205,13 @@ fun NativeReaderGeneralSettings(english: Boolean, onBack: () -> Unit) {
                             "Quedan excluidos DRM, compresión Kindle HUFF/CDIC, algunos diseños KF8 " +
                             "e imágenes de Office que necesiten OCR."
                     )
+                }
+                5 -> {
+                    Button(onClick = { nested = "backup" },
+                        modifier = Modifier.fillMaxWidth()) {
+                        Text(if (english) "Open backup and restore tools"
+                            else "Abrir copia y restauración")
+                    }
                 }
             }
         }

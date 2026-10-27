@@ -134,8 +134,8 @@ object NativeDaisyNavigation {
         val path = NativeReaderDaisy.resolve(base, href, available) ?: return null
         val fragment = href.substringAfter('#', "")
             .substringBefore('?').let { java.net.URLDecoder.decode(it.replace("+", "%2B"), "UTF-8") }
-        val match = if (fragment.isBlank()) anchors[path]
-            else anchors["$path#$fragment"] ?: anchors[path]
-        return match
+        // Never send the user to the WRONG page/chapter if its target
+        // identifier is missing; an unqualified SMIL link may use the first clip.
+        return if (fragment.isBlank()) anchors[path] else anchors["$path#$fragment"]
     }
 }

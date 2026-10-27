@@ -141,7 +141,7 @@ fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
         }
     }
     fun back() {
-        if (selectedBook != null) { selectedBook = null; selectedText = ""; playOnOpen = false }
+        if (selectedBook != null) { selectedBook = null; selectedText = ""; playOnOpen = false; refresh() }
         else if (screen == "catalogs") screen = "import"
         else if (screen != "home") screen = "home"
         else onBack()
@@ -156,7 +156,7 @@ fun NativeTifloLector(english: Boolean, onBack: () -> Unit) {
             rate = rate,
             onRateChange = { rate = it; preferences.edit().putFloat("rate", it).apply() },
             onUpdate = ::save,
-            onBack = { selectedBook = null; selectedText = ""; playOnOpen = false }
+            onBack = { selectedBook = null; selectedText = ""; playOnOpen = false; refresh() }
         )
         return
     }

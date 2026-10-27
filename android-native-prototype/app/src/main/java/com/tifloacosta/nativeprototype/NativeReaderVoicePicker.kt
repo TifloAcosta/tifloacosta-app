@@ -44,7 +44,8 @@ fun NativeReaderVoicePicker(
     selectedVoice: String,
     speed: Float,
     filter: Int,
-    onVoiceSelected: (String) -> Unit
+    onVoiceSelected: (String) -> Unit,
+    onBeforePreview: () -> Unit = {}
 ) {
     var showing by remember { mutableStateOf(false) }
     var playingName by remember { mutableStateOf<String?>(null) }
@@ -71,16 +72,15 @@ fun NativeReaderVoicePicker(
         return
     }
     Button(modifier = Modifier.fillMaxWidth(), onClick = { showing = !showing }) {
-        Text(
-            if (showing) (if (english) "Hide voices" else "Ocultar voces")
+        Text(if (showing) (if (english) "Hide voices" else "Ocultar voces")
             else (if (english) "Show available voices (" else "Mostrar voces disponibles (") +
-                voices.size + ")"
-        )
+                voices.size + ")")
     }
     if (!showing) return
 
     fun preview(name: String, language: String) {
         status = ""
+        onBeforePreview()
         playingName = name
         val success = speaker.preview(sampleFor(language), speed, name) {
             if (playingName == name) playingName = null
@@ -93,6 +93,12 @@ fun NativeReaderVoicePicker(
     }
 
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        if (playingName != null) {
+            TextButton(onClick = {
+                speaker.stop()
+                playingName = null
+            }) { Text(if (english) "Stop sample" else "Detener muestra") }
+        }
         Text(if (english) "System default voice" else "Voz predeterminada del sistema")
         OutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = {
             speaker.stop()
@@ -139,12 +145,6 @@ fun NativeReaderVoicePicker(
             Text(if (english) "No installed voices match this language filter."
                 else "No hay voces instaladas para este filtro de idioma.")
         }
-    }
-    if (playingName != null) {
-        TextButton(onClick = {
-            speaker.stop()
-            playingName = null
-        }) { Text(if (english) "Stop sample" else "Detener muestra") }
     }
     if (status.isNotBlank()) {
         Text(status, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })

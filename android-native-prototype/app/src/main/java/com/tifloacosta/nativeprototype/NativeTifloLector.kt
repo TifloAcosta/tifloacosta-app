@@ -159,7 +159,7 @@ fun NativeTifloLector(
     }
     LaunchedEffect(sharedSerial) {
         if (sharedSerial != 0 && sharedUris.isNotEmpty()) {
-            var completed = 0
+            val importedSharedBooks = mutableListOf<ReaderBook>()
             error = ""
             sharedImportNotice = ""
             try {
@@ -168,15 +168,29 @@ fun NativeTifloLector(
                         "Importing shared document " + (index + 1) + " of " + sharedUris.size
                     else "Importando documento compartido " + (index + 1) + " de " + sharedUris.size
                     try {
-                        withContext(Dispatchers.IO) { store.import(uri) }
-                        completed++
+                        val importedBook = withContext(Dispatchers.IO) { store.import(uri) }
+                        importedSharedBooks.add(importedBook)
                     } catch (e: Exception) {
                         error += (e.message ?: "No se pudo importar el documento compartido.") + "\n"
                     }
                 }
                 sharedImportNotice = if (english)
-                    "$completed of ${sharedUris.size} shared documents added to the library."
-                else "$completed de ${sharedUris.size} documentos compartidos añadidos a la biblioteca."
+                    "${importedSharedBooks.size} of ${sharedUris.size} shared documents added to the library."
+                else "${importedSharedBooks.size} de ${sharedUris.size} documentos compartidos añadidos a la biblioteca."
+                // Opening a single shared document immediately avoids making TalkBack
+                // users find the just-imported book again. Multiple documents remain
+                // grouped in the library instead of opening an arbitrary last item.
+                if (sharedUris.size == 1 && importedSharedBooks.size == 1) {
+                    try {
+                        val book = importedSharedBooks.single()
+                        selectedText = withContext(Dispatchers.IO) { store.read(book) }
+                        selectedBook = book
+                        playOnOpen = false
+                        screen = "home"
+                    } catch (e: Exception) {
+                        error += (e.message ?: "No se pudo abrir el documento importado.") + "\\n"
+                    }
+                }
             } finally {
                 importStatus = ""
                 refresh()

@@ -28,14 +28,22 @@ object NativeReaderMobipocket {
         return String(a, p, n, Charsets.US_ASCII)
     }
 
-    /** PalmDOC LZ77, tested with overlapping backward references. */
+    /** PalmDOC LZ77 with bounded, overlap-aware back-references. */
     fun decompressPalmDoc(data: ByteArray, limit: Int = MAX_TEXT_BYTES): ByteArray {
-        val out = ByteArrayOutputStream()
-        var p = 0
-        fun write(b: Int) {
-            if (out.size() >= limit) throw IOException("El texto MOBI supera el límite.")
-            out.write(b and 255)
+        val max = limit.coerceIn(0, MAX_TEXT_BYTES)
+        val output = ByteArray(minOf(max, maxOf(32, data.size * 8)))
+        // Expanding into a bounded buffer avoids quadratic array copies.
+        // Each PalmDOC text record is normally only a few KB.
+        var decoded = output
+        var length = 0
+        fun write(byte: Int) {
+            if (length >= max) throw IOException("El texto PalmDOC supera el límite.")
+            if (length == decoded.size) decoded = decoded.copyOf(
+                minOf(max, maxOf(decoded.size * 2, length + 1))
+            )
+            decoded[length++] = byte.toByte()
         }
+        var p = 0
         while (p < data.size) {
             val token = data[p++].toInt() and 255
             when {
@@ -49,13 +57,9 @@ object NativeReaderMobipocket {
                     val code = ((token and 0x3f) shl 8) or (data[p++].toInt() and 255)
                     val distance = code shr 3
                     val count = (code and 7) + 3
-                    if (distance == 0 || distance > out.size()) throw IOException(
-                        "Referencia PalmDOC fuera del texto."
-                    )
-                    repeat(count) {
-                        val a = out.toByteArray()
-                        write(a[a.size - distance].toInt())
-                    }
+                    if (distance == 0 || distance > length)
+                        throw IOException("Referencia PalmDOC fuera del texto.")
+                    repeat(count) { write(decoded[length - distance].toInt()) }
                 }
                 token in 0xc0..0xff -> {
                     write(32)
@@ -64,7 +68,7 @@ object NativeReaderMobipocket {
                 else -> write(token)
             }
         }
-        return out.toByteArray()
+        return decoded.copyOf(length)
     }
 
     fun extract(format: String, bytes: ByteArray): String {

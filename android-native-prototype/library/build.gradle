@@ -61,6 +61,10 @@ dependencies {
     implementation('org.apache.poi:poi-scratchpad:4.1.2') {
         exclude group: 'log4j', module: 'log4j'
     }
+    // POI's legacy slideshow binding references JAXB annotations that Android
+    // does not provide. Supply the actual API instead of suppressing R8 errors.
+    // This is a build-compatibility experiment, not release approval for POI 4.1.2.
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
     implementation 'org.apache.commons:commons-compress:1.28.0'
     implementation 'org.tukaani:xz:1.10'
     implementation 'com.github.junrar:junrar:8.1.2'

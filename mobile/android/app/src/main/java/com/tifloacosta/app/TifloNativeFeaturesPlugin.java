@@ -78,6 +78,18 @@ public class TifloNativeFeaturesPlugin extends Plugin {
                 result.put("settings", countRows(db, "reading_settings"));
                 result.put("audioTracks", countRows(db, "audio_tracks"));
                 result.put("derived", countRows(db, "reading_derived"));
+                // Verify on-disk references before any planned migration.
+                // An SQLite record alone does not mean its original is recoverable.
+                File root = new File(getContext().getFilesDir(), "reading-library");
+                int[] sources = auditReferences(db, root, "books");
+                int[] tracks = auditReferences(db, root, "audio_tracks");
+                int[] derived = auditReferences(db, root, "reading_derived");
+                result.put("missingBookSources", sources[0]);
+                result.put("missingAudioTracks", tracks[0]);
+                result.put("missingDerivedFiles", derived[0]);
+                result.put("unsafeStoredPaths", sources[1] + tracks[1] + derived[1]);
+                result.put("preflightSafe", sources[0] + tracks[0] + derived[0] +
+                        sources[1] + tracks[1] + derived[1] == 0);
                 call.resolve(result);
             } catch (RuntimeException error) {
                 call.reject("No se pudo comprobar la biblioteca antigua; no se ha modificado ningún dato.", error);
@@ -113,6 +125,44 @@ public class TifloNativeFeaturesPlugin extends Plugin {
             if (!cursor.moveToFirst()) throw new IllegalStateException("No se puede contar " + table);
             return cursor.getInt(0);
         }
+    }
+
+    /**
+     * Check stored references against the existing private file tree.
+     * Never follow a path out of that tree, open a file for writing, or
+     * silently treat a missing source as a successfully migrated book.
+     * Result: [missing/unreadable, path escapes]. Old schema versions may
+     * legitimately lack audio_tracks or reading_derived.
+     */
+    private static int[] auditReferences(SQLiteDatabase db, File root, String table) {
+        if (!tableExists(db, table)) return new int[]{0, 0};
+        if (!"books".equals(table) && !"audio_tracks".equals(table)
+                && !"reading_derived".equals(table))
+            throw new IllegalArgumentException("Tabla de archivos no reconocida");
+        int missing = 0;
+        int unsafe = 0;
+        try (Cursor cursor = db.rawQuery("SELECT relative_path FROM " + table, null)) {
+            while (cursor.moveToNext()) {
+                String reference = cursor.isNull(0) ? "" : cursor.getString(0);
+                try {
+                    if (reference.trim().isEmpty()) {
+                        missing++;
+                        continue;
+                    }
+                    String rootPath = root.getCanonicalPath();
+                    File candidate = new File(root, reference);
+                    String candidatePath = candidate.getCanonicalPath();
+                    if (!candidatePath.startsWith(rootPath + File.separator)) {
+                        unsafe++;
+                    } else if (!candidate.isFile() || !candidate.canRead()) {
+                        missing++;
+                    }
+                } catch (java.io.IOException error) {
+                    unsafe++;
+                }
+            }
+        }
+        return new int[]{missing, unsafe};
     }
 
     @PluginMethod

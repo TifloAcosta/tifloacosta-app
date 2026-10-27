@@ -29,6 +29,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -39,6 +43,7 @@ fun NativeReaderBackupScreen(english: Boolean, onRestored: () -> Unit, onBack: (
     val scope = rememberCoroutineScope()
     val main = remember { Handler(Looper.getMainLooper()) }
     var working by remember { mutableStateOf(false) }
+    var running by remember { mutableStateOf<Job?>(null) }
     var progress by remember { mutableStateOf("") }
     var message by remember { mutableStateOf("") }
     var selectedBackup by remember { mutableStateOf<Uri?>(null) }
@@ -47,13 +52,15 @@ fun NativeReaderBackupScreen(english: Boolean, onRestored: () -> Unit, onBack: (
         working = true
         message = ""
         progress = if (english) "Preparing…" else "Preparando…"
-        scope.launch {
+        running = scope.launch {
+            val task = currentCoroutineContext()
             try {
                 if (isRestore) {
                     val result = withContext(Dispatchers.IO) {
-                        NativeReaderBackup.restore(context, uri) { count, _ ->
-                            main.post { progress = (if (english) "Checking file " else "Comprobando archivo ") + count }
-                        }
+                        NativeReaderBackup.restore(context, uri,
+                            onProgress = { count, _ ->
+                                main.post { progress = (if (english) "Checking file " else "Comprobando archivo ") + count }
+                            }, keepWorking = { task.isActive })
                     }
                     onRestored()
                     message = if (english)
@@ -63,18 +70,26 @@ fun NativeReaderBackupScreen(english: Boolean, onRestored: () -> Unit, onBack: (
                         result.skipped + ". Carpetas: " + result.folders
                 } else {
                     withContext(Dispatchers.IO) {
-                        NativeReaderBackup.export(context, uri) { count, total ->
-                            main.post { progress = (if (english) "Backing up " else "Guardando ") +
-                                count + " / " + total }
-                        }
+                        NativeReaderBackup.export(context, uri,
+                            onProgress = { count, total ->
+                                main.post { progress = (if (english) "Backing up " else "Guardando ") +
+                                    count + " / " + total }
+                            }, keepWorking = { task.isActive })
                     }
                     message = if (english) "Backup created. Keep the ZIP outside this app."
                         else "Copia creada. Conserva el ZIP fuera de esta aplicación."
                 }
             } catch (e: Exception) {
-                message = e.message ?: if (english) "The operation failed."
+                if (!isRestore) {
+                    // Remove an unfinished copy from the user's chosen destination.
+                    try { context.contentResolver.delete(uri, null, null) } catch (_: Exception) {}
+                }
+                message = if (e is CancellationException || e is InterruptedException)
+                    (if (english) "Operation canceled. No existing books were deleted."
+                        else "Operación cancelada. No se ha eliminado ningún libro existente.")
+                else e.message ?: if (english) "The operation failed."
                     else "No se pudo completar la operación."
-            } finally { working = false; progress = "" }
+            } finally { working = false; progress = ""; running = null }
         }
     }
     val save = rememberLauncherForActivityResult(
@@ -107,6 +122,11 @@ fun NativeReaderBackupScreen(english: Boolean, onRestored: () -> Unit, onBack: (
         }
         Text(if (english) "Restore adds missing books without overwriting existing ones. Only use your own backups."
             else "La restauración añade libros sin sobrescribir los existentes. Utiliza únicamente tus propias copias.")
+        if (working) {
+            TextButton(onClick = { running?.cancel() }) {
+                Text(if (english) "Cancel operation" else "Cancelar operación")
+            }
+        }
         if (progress.isNotBlank()) Text(progress)
         if (message.isNotBlank()) Text(message)
     }

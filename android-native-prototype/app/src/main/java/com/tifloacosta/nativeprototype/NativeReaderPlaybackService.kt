@@ -557,7 +557,9 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
             textOffset = textOffset, textLength = text.length, error = error,
             sleepMinutes = if (remainingSleepMs <= 0L) 0
                 else ((remainingSleepMs + 59999L) / 60000L).toInt(),
-            audioMarks = current.audioMarks,
+            audioMarks = current.audioMarks.ifEmpty {
+                current.marks.map { ReaderAudioMark(current.trackIndex, it) }
+            },
             textMarks = current.marks
         )
         session?.setMetadata(android.media.MediaMetadata.Builder()

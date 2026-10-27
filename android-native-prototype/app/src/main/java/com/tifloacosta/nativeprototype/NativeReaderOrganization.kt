@@ -36,19 +36,11 @@ class NativeReaderOrganization(context: Context) {
     private val idFormat = Regex("[a-f0-9-]{36}")
 
     private fun readArray(file: File): List<String> {
-        if (!file.isFile) return emptyList()
-        return try {
-            val json = JSONArray(file.readText(Charsets.UTF_8))
-            (0 until json.length()).mapNotNull { json.optString(it).takeIf(String::isNotBlank) }
-        } catch (_: Exception) { emptyList() }
+        val json = JSONArray(NativeReaderPersistence.read(file) ?: return emptyList())
+        return (0 until json.length()).mapNotNull { json.optString(it).takeIf(String::isNotBlank) }
     }
     private fun writeArray(file: File, values: List<String>) {
-        val temp = File(directory, file.name + ".tmp")
-        temp.writeText(JSONArray(values).toString(), Charsets.UTF_8)
-        if (!temp.renameTo(file)) {
-            file.writeText(JSONArray(values).toString(), Charsets.UTF_8)
-            temp.delete()
-        }
+        NativeReaderPersistence.write(file, JSONArray(values).toString())
     }
     fun cleanedFolderName(value: String): String = ReaderLibraryRules.folderName(value)
     @Synchronized fun folders(existingBooks: List<ReaderBook>): List<String> {

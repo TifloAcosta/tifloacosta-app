@@ -19,7 +19,7 @@
         </activity>
         <service android:name="com.tifloacosta.nativeprototype.NativeReaderPlaybackService"
             android:exported="false" android:foregroundServiceType="mediaPlayback" />
-        <provider android:name="androidx.core.content.FileProvider"
+        <provider android:name="com.tifloacosta.nativeprototype.NativeReaderFileProvider"
             android:authorities="${applicationId}.readerprovider"
             android:exported="false" android:grantUriPermissions="true">
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS"

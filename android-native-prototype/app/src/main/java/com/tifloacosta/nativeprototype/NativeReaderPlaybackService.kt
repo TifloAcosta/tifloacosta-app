@@ -136,7 +136,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                 AudioManager.AUDIOFOCUS_LOSS_TRANSIENT,
                 AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> {
                     resumeAfterFocus = playing
-                    pauseReading()
+                    pauseReading(releaseFocus = false)
                 }
                 AudioManager.AUDIOFOCUS_GAIN -> {
                     if (resumeAfterFocus) {
@@ -433,7 +433,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         publish()
     }
 
-    private fun pauseReading() {
+    private fun pauseReading(releaseFocus: Boolean = true) {
         if (playing) {
             if (kind == "audio") {
                 positionMs = try { player?.currentPosition ?: positionMs }
@@ -449,7 +449,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         persist()
         publish()
         stopForegroundIfIdle()
-        if (focused) {
+        if (releaseFocus && focused) {
             focusRequest?.let { manager?.abandonAudioFocusRequest(it) }
             focused = false
             focusRequest = null

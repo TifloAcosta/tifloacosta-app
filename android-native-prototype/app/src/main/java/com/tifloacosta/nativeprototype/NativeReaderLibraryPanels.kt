@@ -16,7 +16,7 @@ import kotlinx.coroutines.withContext
 
 @Composable
 fun NativeReaderFolderManager(
-    english: Boolean, books: List<ReaderBook>,
+    english: Boolean, books: List<ReaderBook>, folderNames: List<String>,
     organization: NativeReaderOrganization, store: NativeReaderStore,
     onChanged: () -> Unit, onBack: () -> Unit
 ) {
@@ -26,7 +26,7 @@ fun NativeReaderFolderManager(
     var error by remember { mutableStateOf("") }
     var busy by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
-    val folders = organization.folders(books)
+    val folders = folderNames
     fun task(action: () -> Unit) {
         busy = true
         scope.launch {
@@ -105,12 +105,13 @@ fun NativeReaderFolderManager(
 
 @Composable
 fun NativeReaderQueueManager(
-    english: Boolean, books: List<ReaderBook>, organization: NativeReaderOrganization,
+    english: Boolean, books: List<ReaderBook>, queuedIds: List<String>,
+    organization: NativeReaderOrganization,
     onChanged: () -> Unit, onOpen: (ReaderBook) -> Unit, onBack: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
     var error by remember { mutableStateOf("") }
-    val ids = organization.queue(books)
+    val ids = queuedIds
     val mapped = books.associateBy { it.id }
     fun modify(action: () -> Unit) {
         scope.launch {

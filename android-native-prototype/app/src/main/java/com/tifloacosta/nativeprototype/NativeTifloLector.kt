@@ -411,9 +411,20 @@ fun NativeTifloLector(
         AlertDialog(onDismissRequest = { info = null },
             title = { Text(if (english) "Book information" else "Información de la obra") },
             text = { Text(book.title + "\n" + book.format.uppercase() +
-                "\n" + (if (english) "Bookmarks: " else "Marcas: ") + book.marks.size +
-                "\n" + (if (english) "Read: " else "Leído: ") +
-                ReaderUnits.percent(book.offset, book.length) + "%") },
+                "\n" + (if (english) "Bookmarks: " else "Marcas: ") +
+                (if (book.tracks.isNotEmpty()) book.audioMarks.size else book.marks.size) +
+                "\n" + when {
+                    book.finished -> if (english) "Finished" else "Terminado"
+                    book.tracks.isNotEmpty() -> (if (english) "Audio section " else "Sección de audio ") +
+                        (book.trackIndex + 1) + " / " +
+                        (if (book.audioSegments.isNotEmpty()) book.audioSegments.size else book.tracks.size) +
+                        ", " + (book.audioPositionMs / 1000) + " s"
+                    else -> (if (english) "Read: " else "Leído: ") +
+                        ReaderUnits.percent(book.offset, book.length) + "%"
+                } + "\n" + (if (english) "Last read: " else "Última lectura: ") +
+                if (book.lastReadAt > 0L)
+                    java.text.DateFormat.getDateTimeInstance().format(java.util.Date(book.lastReadAt))
+                else (if (english) "Never" else "Nunca")) },
             confirmButton = { TextButton(onClick = { info = null }) { Text("Aceptar") } })
     }
     rename?.let { book ->
@@ -435,6 +446,25 @@ fun NativeTifloLector(
                 folders.forEach { folder ->
                     TextButton(onClick = { proposedFolder = folder }) { Text(folder) }
                 }
+                TextButton(enabled = proposedFolder.isNotBlank(), onClick = {
+                    val proposed = proposedFolder
+                    scope.launch {
+                        try {
+                            withContext(Dispatchers.IO) {
+                                val name = organization.createFolder(proposed, store.list())
+                                store.update(book.copy(folder = name))
+                            }
+                            moveBook = null
+                            folderFilter = 0
+                            refresh()
+                        } catch (e: Exception) {
+                            error = e.message ?: "No se pudo crear la carpeta."
+                        }
+                    }
+                }) {
+                    Text(if (english) "Create new folder and move this book"
+                        else "Crear carpeta nueva y mover este libro")
+                }
             } },
             confirmButton = { TextButton(onClick = {
                 save(book.copy(folder = proposedFolder.trim()))
@@ -452,7 +482,10 @@ fun NativeTifloLector(
                     NativeReaderPlaybackService.send(context, NativeReaderPlaybackService.ACTION_STOP)
                 }
                 scope.launch {
-                    withContext(Dispatchers.IO) { store.delete(book) }
+                    withContext(Dispatchers.IO) {
+                        store.delete(book)
+                        organization.pruneQueue(store.list())
+                    }
                     refresh()
                 }
                 deleteBook = null

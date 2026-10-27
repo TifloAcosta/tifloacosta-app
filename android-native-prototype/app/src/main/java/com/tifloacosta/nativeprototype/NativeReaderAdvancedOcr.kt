@@ -132,7 +132,7 @@ object NativeReaderAdvancedOcr {
                                 stripper.endPage = i
                                 var recognized = stripper.getText(document).trim()
                                 if (recognized.count(Char::isLetterOrDigit) < 40) {
-                                    val extra = renderer.openPage(i - 1).use { page ->
+                                    val extra = try { renderer.openPage(i - 1).use { page ->
                                         val target = NativeReaderOcr.scaledDimensions(
                                             page.width * 2, page.height * 2)
                                         val bitmap = Bitmap.createBitmap(
@@ -143,12 +143,15 @@ object NativeReaderAdvancedOcr {
                                             NativeReaderOcr.recognizeBitmap(bitmap)
                                         } finally { bitmap.recycle() }
                                     }
+                                    } catch (e: Exception) {
+                                        if (recognized.isBlank()) throw e
+                                        "" // Never discard an existing selectable text layer.
+                                    }
                                     if (extra.length > recognized.length) recognized = extra
                                 }
                                 checkpoint(root, i, recognized)
                             }
-                            val status = progress(context, book, "pdf")
-                            onProgress(status)
+                            onProgress(Progress(i, total))
                             // Surface partial reading text and persist all finished pages.
                             if (i % 10 == 0 || i == total) {
                                 store.replaceAccessibleText(book.id, assemble(root, total),
@@ -157,9 +160,11 @@ object NativeReaderAdvancedOcr {
                         }
                     } finally {
                         // Cancelling leaves usable recognized pages in the reader.
-                        store.replaceAccessibleText(book.id, assemble(root, total),
-                            if (progress(context, book, "pdf").complete) ""
-                            else "OCR parcial. Puede reanudarse.")
+                        if (checkpointOrder(root, total).isNotEmpty()) {
+                            store.replaceAccessibleText(book.id, assemble(root, total),
+                                if (progress(context, book, "pdf").complete) ""
+                                else "OCR parcial. Puede reanudarse.")
+                        }
                     }
                 }
             }
@@ -197,7 +202,7 @@ object NativeReaderAdvancedOcr {
                     check(continueWork)
                     val number = n + 1
                     if (!isCheckpointComplete(root, number)) {
-                        if (entry.size !in 0..MAX_SINGLE_IMAGE.toLong())
+                        if (entry.size !in 0L..MAX_SINGLE_IMAGE.toLong())
                             throw IOException("Imagen demasiado grande: " + entry.name.take(100))
                         accumulated += entry.size
                         if (accumulated > MAX_IMAGE_TOTAL) throw IOException(

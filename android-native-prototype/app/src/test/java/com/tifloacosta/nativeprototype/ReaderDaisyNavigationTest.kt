@@ -17,7 +17,7 @@ class ReaderDaisyNavigationTest {
             val files = linkedMapOf<String, File>(
                 "book/ncc.html" to add("""
                     <html><body>
-                      <h1><a href="one.smil#first">Introducción</a></h1>
+                      <h1><a href="one.smil#t1">Introducción</a></h1>
                       <span class="page-normal"><a href="one.smil#second">12</a></span>
                       <h2><a href="two.smil#last">Detalles</a></h2>
                       <div class="footnote"><a href="two.smil#last">Nota al pie</a></div>

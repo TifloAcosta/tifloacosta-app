@@ -26,7 +26,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.CancellationException
@@ -127,8 +129,10 @@ fun NativeReaderBackupScreen(english: Boolean, onRestored: () -> Unit, onBack: (
                 Text(if (english) "Cancel operation" else "Cancelar operación")
             }
         }
-        if (progress.isNotBlank()) Text(progress)
-        if (message.isNotBlank()) Text(message)
+        if (progress.isNotBlank()) Text(progress,
+            modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
+        if (message.isNotBlank()) Text(message,
+            modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
     }
     selectedBackup?.let { uri ->
         AlertDialog(onDismissRequest = { selectedBackup = null },

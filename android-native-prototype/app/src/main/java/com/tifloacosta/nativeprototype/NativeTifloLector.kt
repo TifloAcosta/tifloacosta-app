@@ -443,6 +443,7 @@ fun NativeTifloLector(
             text = { Column {
                 TextField(value = proposedFolder, onValueChange = { proposedFolder = it.take(70) },
                     label = { Text(if (english) "Folder" else "Carpeta") })
+                if (error.isNotBlank()) Text(error)
                 folders.forEach { folder ->
                     TextButton(onClick = { proposedFolder = folder }) { Text(folder) }
                 }
@@ -467,9 +468,22 @@ fun NativeTifloLector(
                 }
             } },
             confirmButton = { TextButton(onClick = {
-                save(book.copy(folder = proposedFolder.trim()))
-                moveBook = null
-                folderFilter = 0
+                val requested = proposedFolder.trim()
+                scope.launch {
+                    try {
+                        withContext(Dispatchers.IO) {
+                            val candidate = if (requested.isBlank()) ""
+                                else organization.folders(store.list())
+                                    .firstOrNull { it.equals(requested, ignoreCase = true) }
+                                    ?: throw java.io.IOException(
+                                        "Esa carpeta no existe. Usa Crear carpeta nueva y mover este libro.")
+                            store.update(book.copy(folder = candidate))
+                        }
+                        moveBook = null
+                        folderFilter = 0
+                        refresh()
+                    } catch (e: Exception) { error = e.message.orEmpty() }
+                }
             }) { Text(if (english) "Move" else "Mover") } },
             dismissButton = { TextButton(onClick = { moveBook = null }) { Text("Cancelar") } })
     }

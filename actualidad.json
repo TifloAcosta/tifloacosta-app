@@ -1,5 +1,201 @@
 [
   {
+    "id": "9to5mac-9a7a5d342e5e3313",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/26/daily-october-26-2026/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-27T00:16:31.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "android",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "9to5Mac Daily: October 26, 2026 – Apple unveils new iPad mini",
+        "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
+        "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-6a72adb47cdefeed",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1019143/openai-eth-kaseya-science-math-physics",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-26T23:34:58.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI announces three big science discoveries and a new way to work with academics",
+        "summary": "Less than a month after its mass release of hundreds of manuscripts that it said contained solutions to long-standing mathematics questions, OpenAI is back with three more \"major\" discoveries in math, computer science, and physics. What's different this time is the choice to have external experts that OpenAI describes as \"shepherds\" guiding the results in […]",
+        "body": "Less than a month after its mass release of hundreds of manuscripts that it said contained solutions to long-standing mathematics questions, OpenAI is back with three more \"major\" discoveries in math, computer science, and physics . What's different this time is the choice to have external experts that OpenAI describes as \"shepherds\" guiding the results in computer science and physics, while for the math problem it says that they advised it to release the AI output for researchers to work through their own explanations.\n\nOpenAI results added to GitHub today:\n\nLocal smoothing for the Euclidean wave equation. The proof uses an auxiliary par …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-f55bf24da10745af",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2297806/halide-releases-its-first-batch-of-updates-for-the-iphone-duo/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-26T22:51:46.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Halide releases its first batch of updates for the iPhone Duo",
+        "summary": "Camera app Halide released a new update for the iPhone Duo that adds three different shooting modes based on what position the foldable is in.",
+        "body": "The camera app can turn your foldable into a waist-level viewfinder.\n\nIn our review of the iPhone Duo , one of the big question marks for Apple's foldable was around app support. While Apple's own stuff might be ready to handle the dual screens and new aspect ratios right away, how long would it take for third-party apps to really embrace this hardware?\n\nIn the case of camera app Halide, the answer is \"not long at all.\" Lux Optics, Halide's developer, has released a new update to its software designed to embrace the iPhone Duo. Halide was reportedly once an acquisition target for Apple, so seeing how the company has approached its design with the Duo is an interesting example of how developers are finding creative ways to adapt to the hardware.\n\nHalide users on the Duo can take advantage of new additions designed for each of the foldable's three different poses. There are some nice UI choices at play, but one of the more intriguing notes is an option for moving where the camera controls are when the app is in its fully open or partially open positions. Using it in the partly-open pose, lets the Duo essentially act like a waist-level viewfinder camera. This update is available today for Halide Mark III users, and Lux Optics suggested that further Duo-focused features are in the works."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-432189d62df1b2a9",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/26/ollama-for-mac-gains-support-for-local-text-to-speech-models/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-26T22:49:25.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "windows",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Ollama for Mac gains support for local text-to-speech models",
+        "summary": "Ollama, the popular app for running AI models locally, announced that its Mac app now supports text-to-speech generation, with Windows and Linux support coming soon. Here are the details. more…",
+        "body": "Ollama, the popular app for running AI models locally, announced that its Mac app now supports text-to-speech generation, with Windows and Linux support coming soon. Here are the details.\n\nIf you’re not familiar with Ollama, it is a platform that lets users download and run open AI models locally on their Macs, or access more powerful models through the cloud. It is also available for Windows and Linux.\n\nOllama itself is open-source and has become one of the most popular AI projects on GitHub, with nearly 185,000 stars and around 18,600 forks. You can learn more about it here .\n\nOn macOS, Ollama uses Apple’s MLX , an open-source machine learning framework that leverages Apple Silicon’s unified memory architecture, enabling supported AI models to run faster and more efficiently.\n\nOnce users get Ollama up and running, they can download compatible open-source AI models from repositories such as Hugging Face and run them directly on their Macs.\n\nThis means they can use AI without an internet connection or sending their data to external servers, although performance and the size of the models they can run depend heavily on their Mac’s hardware.\n\nThat said, Ollama recently announced support for Phonon, a family of text-to-speech models developed by Gradium, marking the first time the platform supports speech generation.\n\nAs Ollama explains, speech is generated in real time, meaning users can listen to AI-generated responses as they’re being produced, rather than waiting for the entire response to finish.\n\nFrom Ollama:\n\nOllama can now turn text into speech. The first speech model is Phonon, a family of small, state-of-the-art text-to-speech models from Gradium. Speech models are now available for macOS, with Windows and Linux support coming soon.\n\nThe platform says that, thanks to Apple’s MLX framework, it achieved 35% faster speech generation than Gradium’s own implementation in tests on a MacBook Pro with M5 Max, while matching the word error rate of the reference implementation in Hugging Face Transformers.\n\nPhonon supports five languages (English, French, German, Spanish, and Portuguese) with separate models for each language, as well as a multilingual model that supports all five.\n\nUsers can also choose from a variety of voices with different accents, including American and British English, depending on the model.\n\nThe new speech models are available now for Apple Silicon Macs running Ollama 0.40.11 or later. Users can get started by downloading Phonon directly through Ollama.\n\nTo listen to audio samples or learn more about Ollama’s new speech generation capabilities, including instructions and code examples for using the models through its API, follow this link ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-cebf3db44bb5b31e",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2290322/leading-causing-ev-battery-damage/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-26T22:30:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "What are the leading causes of EV battery damage?",
+        "summary": "Charging behaviors and heat are the things to pay attention to.",
+        "body": "Charging behaviors and heat are the things to pay attention to.\n\nYour electric vehicle's battery is pretty resilient , but that doesn't mean it's impervious to damage. A study from Geotab , a company that offers fleet tracking and management services, shows that while even the average high-use EV battery hangs on to nearly 82 percent of its original storage capacity after eight years, a handful of factors affect the rate at which it degrades.\n\nAs it stands, Geotab says the average annual degradation rate for EVs is about 2.3%. That decline can impact not only the driving range of your car , but also how it performs , as well as its resale value down the line. As such, the study outlines a few areas to be mindful of if you want to go a little easier on your battery. From how you charge your EV to how hot it is where you live, here's what could be causing damage to your EV battery.\n\nGeotab has been publishing studies dealing with EV battery degradation since 2020. For this iteration from April of 2026, it analyzed more than 22,700 EVs, encompassing 21 different models. The data comes from \"real-world telematics,\" which Geotab describes as data actually pulled from the vehicles. The study also notes that because the data is aggregated and averaged, an individual car might degrade faster or slower than the average depending on the specific battery and how it's used.\n\nThese findings come at a time when more consumers are considering EVs. Data from Kelley Blue Book shows a rise in EV ownership in the last five years, with a few dips along the way. A little more than a year ago, EVs made up about 10 percent of new car sales in the US. When the federal tax credit to incentivize the purchase of these vehicles expired last year, sales fell to roughly 6 percent or lower. However, recent data from Kelley Blue Book reports a rebound, signaling that EVs are still on drivers' minds.\n\nGeotab identifies a handful of factors that could be hurting your EV's battery. One of the main culprits could be DC fast charging, or DCFC. Fast charging can be convenient for EV owners. Ford explains it's a good option for circumstances where you need to get back behind the wheel quickly, like while on a road trip. DCFC can typically get your battery up to about 80 percent in anywhere from 20 minutes to an hour .\n\nHowever, the study found that EVs that used DCFC more often lost battery capacity faster. Those who used fast charging for 12 percent or more of their charging sessions saw an annual degradation rate of 2.5%, compared to 1.5% for those who used it for less than 12 percent of their sessions.\n\nIn addition to the frequency of fast charging, Geotab says charging power also plays a role, describing it as \"the 'punch' the battery receives during those sessions.\" Cars charged more frequently (more than 12 percent of total charging sessions) at a higher power (more than 40 percent of sessions at more than 100 kW) saw an annual degradation rate of about 3 percent, as compared to high-frequency, low power (2.2%) or just low frequency (1.5%). The study notes that any of this matters in part because more people are relying on fast charging.\n\nAside from fast charging, there are other factors that could affect your EV's battery life, like temperature. Heat boosts chemical activity, which translates into more stress inside the cell. This isn't to say EV batteries are purely at the mercy of the climate. They have internal battery management systems that help regulate temperature.\n\nThe study also found that EVs in hotter climates (more than 35 percent of days in 77 degrees Fahrenheit or above) saw .4% faster degradation than those in milder conditions. Geotab calls this a moderate effect and also acknowledges that its dataset doesn't account for climates on the colder end of the spectrum. Though the study says battery degradation is \"inevitable,\" it also underlines that watching out for the circumstances making it worse can help EV owners get more out of their batteries."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-1a6901ac26f89aee",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2294592/mistake-iphone-duo-buyers-can-avoid/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-26T22:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The mistake iPhone Duo buyers can easily avoid",
+        "summary": "An iPhone Duo can become even more expensive if you have to repair it, so it's vital to plan for that ahead of time.",
+        "body": "The iPhone Duo is costly, and fixing it comes at a high price as well.\n\nThe iPhone Duo is finally available, and you might be interested in one after reading our iPhone Duo review . There can be some justification for its mighty $2,000 price tag if you see it as combining an iPhone with an iPad mini . If you want to be a little more productive on the go when you don't have your laptop, here's your answer. It should also be a killer ereader and YouTube player.\n\nWith such a high barrier to entry, it can be tempting to skip iPhone Duo add-ons of the sort you'd normally pick up alongside a new phone. You probably already have enough cables and chargers. Heck, you might even think to skip a case if you're careful about how you hold and stash your new foldable.\n\nOne extra you probably shouldn't dodge, though, is AppleCare+ or AppleCare One . While it adds hundreds of dollars to your phone's lifetime price, the penalty if something goes wrong could be even more severe. It's inherent to the nature of foldable phones, at least as they are in 2026.\n\nWith a foldable phone, there's a whole extra screen to break, and the out-of-warranty repair costs for that can be astronomical. While the outer display is only 5.4 inches, Apple's service pricing page estimates a repair cost of $379 for it. The main attraction — that 7.6-inch, nano-textured inner screen — is listed at $999 for repairs. That's more than a new iPhone 17, or even an iPad mini with max storage.\n\nAs if that weren't enough, there's at least a $199 charge for repairing the back glass, while battery service and fixing the rear cameras are $229 apiece. There's also a blanket $1,499 cost for \"other damage.\" Presumably, that's for the hinge, bending damage or anything involving the guts of the phone, such as its storage and processor. There's little else that could justify spending more than the base price of a MacBook Air.\n\nConversely, AppleCare+ is $20 per month or $200 annually, while AppleCare One is $20 per month for individuals or $50 per month for families. If you already have an AppleCare One family plan, or an individual plan with an older iPhone you're replacing, your new Duo would be covered at no additional cost. Otherwise, you're looking at either $400 or $480 for two years.\n\nBefore Apple's reduced AppleCare service fees, which range from $19 for cover layer fixes to $99 for \"other\" damage, those subscriptions are less than half the cost of repairing the inner display. Remember that AppleCare+ also covers theft and loss (with a $149 fee), not just accidents. That ongoing expense could save you another way if you're a frequent traveler or prone to setting your phone down and walking away.\n\nIf your only major concern is dropping your Duo, then possibly. Many cases, including Apple's, add a raised edge around the displays and the camera bump, allowing them to absorb some impact before the force is transferred to anything vulnerable. It's also worth noting that the front display uses toughened Ceramic Shield 2 glass, developed in tandem with Corning. It's not invincible, but with a case, my iPhone 16 Pro's display has survived multiple drops despite using first-generation Ceramic Shield material. On top of that, the Duo has Ceramic Shield back glass, plus a titanium frame and hinge cover.\n\nThe problem, once again, is that inner display. Because it needs to bend, there's no Ceramic Shield protection whatsoever. You could thus be in serious trouble if you drop your phone when it's completely open. We've also yet to discover how durable its hinge is or how well its nano-texture surface will hold up against fingernails, debris and an Apple Pencil. Scratches are a real threat on other foldables, and it's doubtful that Apple has come up with a perfect antidote.\n\nCompounded with risks like theft and loss, it's hard to ignore the peace of mind extended AppleCare brings, making it a virtual necessity. If the added costs sounds too pricey, you're better off skipping the Duo entirely. Forking out another $2,000 for a replacement Duo likely isn't in the cards for most people."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-ba1179a6151f855c",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1018994/anthropic-ipo-ai-data-center-energy-climate-risk",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-26T21:45:31.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Anthropic is burning gas to feed the AI boom",
+        "summary": "As it prepares to go public, Anthropic's S-1 filing makes generative AI's methane dependency glaringly obvious. \"Competition for access to electrical supply and data center locations with adequate power availability is intense.\" In documents filed with the US Securities and Exchange Commission Monday, Anthropic acknowledges that data centers are becoming increasingly reliant on \"natural gas\" […]",
+        "body": "As it prepares to go public , Anthropic's S-1 filing makes generative AI's methane dependency glaringly obvious.\n\nIn documents filed with the US Securities and Exchange Commission Monday, Anthropic acknowledges that data centers are becoming increasingly reliant on \"natural gas\" - the fossil fuel industry's marketing term for what is primarily methane - leaving the company's AI data center buildout vulnerable to rising fuel costs and existing supply chain constraints. And in a possible catch-22, Anthropic admits that rising gl …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-4be53c2290de9490",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/26/apple-addressed-at-least-329-unique-security-vulnerabilities-across-todays-system-updates/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-26T20:56:15.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple addressed at least 329 unique security vulnerabilities across today’s system updates",
+        "summary": "Apple has updated its security releases page with details of the vulnerabilities addressed in today’s updates to iOS , iPadOS , macOS , watchOS , tvOS , visionOS, and Safari. Here are the details. more…",
+        "body": "Apple has updated its security releases page with details of the vulnerabilities addressed in today’s updates to iOS , iPadOS , macOS , watchOS , tvOS , visionOS, and Safari. Here are the details.\n\nWhenever Apple releases software updates, the company also usually updates its security releases page with details of the vulnerabilities addressed.\n\nToday, the company updated the page with the security content for the following system updates:\n\nIn total, Apple addressed 329 unique security vulnerabilities across today’s software releases. Many of these vulnerabilities affect multiple operating systems, resulting in a whopping combined total of 1,265 CVE listings.\n\nThese numbers may still increase, as Apple regularly adds new entries and updates existing ones in its security advisories after their initial publication.\n\nAmong the most notable security fixes are a CoreMedia issue that could let a malicious app access the camera on an iPhone, iPad, Mac, or Apple Vision Pro without permission (CVE-2026-86990), and an Apple Intelligence vulnerability that could let a remote attacker access sensitive user data on supported iPhones and iPads (CVE-2026-86987).\n\nApple also addressed a Siri vulnerability in macOS Tahoe that could let an app access sensitive user data (CVE-2026-43736), along with multiple WebKit flaws that could allow maliciously crafted web content to execute arbitrary code.\n\nSpecifically, when it comes to WebKit , Apple has been on a security-patching spree in recent months, partly driven by the growing use of AI tools to uncover vulnerabilities . (In today’s updates alone, Apple credited AI tools and research teams for several vulnerabilities across its software.)\n\nEarlier this year, the company also released multiple updates to fix flaws exploited by Coruna and DarkSword on older devices. Both exploit kits used WebKit vulnerabilities as part of attack chains that compromised iPhones running older versions of iOS.\n\nAnd speaking of older versions of iOS, today’s updates also bring a previously released CoreGraphics fix to devices still running iOS 18 and iPadOS 18. The vulnerability could allow a maliciously crafted file to trigger arbitrary code execution (CVE-2026-86950).\n\nApple first addressed the issue in updates released last month, warning that it may have been exploited in an extremely sophisticated attack against specific targeted individuals running versions of iOS before iOS 27.\n\nYou can check out the security fixes included in each update through the links above. For Apple’s complete security releases page, follow ⁠this link ."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "applevis-blog-8ef1f891b102a722",
     "type": "news",
     "sourceId": "applevis-blog",
@@ -26,52 +222,26 @@
     "media": null
   },
   {
-    "id": "engadget-bace7742738442d1",
+    "id": "ars-technica-bd2817b63118cdd5",
     "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2297577/apple-adds-more-siri-ai-tools-in-27-2-system-updates-out-today/",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/apple/2026/10/apple-releases-ios-and-macos-27-2-with-new-siri-ai-features-new-music-logo/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-26T19:47:56.000Z",
+    "publishedAt": "2026-10-26T20:04:16.000Z",
     "categories": [
       "tecnologia-general",
       "apple",
-      "programas-accesibles",
       "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Apple adds more Siri AI tools in its 27.2 system updates, out today",
-        "summary": "Apple has rolled out software updates for all its platforms today.",
-        "body": "Siri now offers conversation recall and support for five more languages.\n\nApple has released new versions of its operating systems that bring additional Siri and AI functions to its hardware. On supported iPhone models, iOS 27.2 introduces the ability for Siri AI to recall past conversations the user has had with the chatbot. Today's iOS 27.2 update also adds more sources of information Siri can draw on. The AI tool can now pull information from more granular places, such as photos sent in Messages, attendees on Calendar invites and voicemails. An iPhone user can also opt to prevent Siri, Search and suggestions from accessing a particular program in the Excluded Apps setting. Users can now select and copy partial elements of responses from Siri AI with the addition of granular text selection. Finally, Apple has added language support for French, Japanese, Korean, Portuguese and Spanish.\n\nThose Siri AI features are available on all iPhone 16 models and later, as well as on the iPhone 15 Pro and the iPhone 15 Pro Max. All iPhones can take advantage of the other updates in iOS 27.2. Some of those new updates include support for editing captions and comments in Shared Albums in the Photos app, Suggestions in the Messages app for taking contextual actions based on texts, and support for Google's SynthID watermarking tool for identifying images created or modified with generative AI in Photos or Image Playground.\n\nThe iPhone Duo has a few dedicated changes in iOS 27.2. The first foldable iPhone now supports the Apple Pencil and use of Edge Light , a macOS feature that creates an on-screen ring light for video calls.\n\nwatchOS 27.2 is also getting the same Siri AI feature lineup as the iPhones, while macOS 27.2 includes the Siri AI updates for past conversation recall and Suggestions in Messages in addition to the usual bug fixes and security updates. Apple has also pushed the 27.2 updates for its iPad, Apple TV, Vision Pro and Homepod products today."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-7930bf6dc5e5386f",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/26/apple-announces-siri-ai-will-expand-to-these-new-languages-soon/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-26T19:30:57.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple announces Siri AI will expand to these new languages soon",
-        "summary": "Today in iOS 27.2, Siri AI added several new features and expanded to five new languages . And alongside the launch, Apple announced four more Siri AI languages coming soon. more…",
-        "body": "Today in iOS 27.2, Siri AI added several new features and expanded to five new languages . And alongside the launch, Apple announced four more Siri AI languages coming soon.\n\nBefore today, Siri AI was available in English only. But Apple expanded its supported languages in iOS 27.2 by adding French, Japanese, Korean, Portuguese, and Spanish.\n\nJoining these six total languages will be four more before the year ends:\n\nApple announced that these languages will be supported by Siri AI “by the end of the year.”\n\nThat probably means they’ll arrive with iOS 27.3, which is expected to ship in December. The first iOS 27.3 beta, however, could debut in the coming week.\n\nEven though Siri AI will support Chinese (Traditional), for the time being the assistant is still unavailable in China.\n\nAccording to Bloomberg ’s reporting , Apple plans to launch some initial Apple Intelligence features in China with iOS 27.3, but Siri AI is not expected to be among them.\n\nHave you tried Siri AI in a non-English language? How has it worked for you? Let us know in the comments."
+        "title": "Apple releases iOS and macOS 27.2 with new Siri AI features, new Music logo",
+        "summary": "Included is the ability to limit which applications Siri can directly access.",
+        "body": "Today, Apple rolled out the 27.2 updates for its operating systems, including iOS, macOS, watchOS, tvOS, visionOS, and so on.\n\nLet's start with iOS 27.2. This update is heavily focused on Siri AI. It adds a memory feature to Siri, so it can \"recall your past conversations\" and reference them when chatting with you. It also expands what data sources Siri can access when giving responses to include voicemails, Messages attachments, and more.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -93,34 +263,9 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Uh oh, it sounds like the iPhone Duo keeps cracking and users aren’t happy about it",
-        "summary": "A small number of early adopters of the much hyped new foldable phone from Apple have complained of screens cracking.",
+        "title": "Uh-oh, it sounds like the iPhone Duo keeps cracking and users aren’t happy about it",
+        "summary": "A small number of early adopters of the much-hyped new foldable phone from Apple have complained of screens cracking.",
         "body": "Posted:\n\nThe launch of the iPhone Duo , Apple’s hotly anticipated foldable phone, is off to a rough start. The phone was announced at this year’s Surprise and Shine event, with Apple promising that it had finally gotten a notoriously tricky form factor right.\n\nNow, however, Bloomberg reports that early Duo users have been complaining that about screens cracking “after just hours or days of use.” Some users have reported hearing a loud crunching noise, followed by appearance a crack. Others have reported display malfunctions.\n\n404 Media has also reported that early adopters are dealing with “big fat creases down the middle of the [$2,000] folding screen.”\n\nTechCrunch reached out to Apple for comment and will update this story if it responds. The company old Bloomberg that it was “aware of an issue impacting the inner display on a small number of iPhone Duo units.”\n\nCreating a functional foldable phone has been long been an ambition in Silicon Valley but many of the models released so far have suffered from similar maladies . Apple promised that it had cracked the code, but these early complaints suggest it may not have solved the problem after all."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-f6bcd2895d78a4b6",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/26/iphone-duo-just-got-two-new-features-in-ios-27-2/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-26T19:18:19.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iPhone Duo just got two new features in iOS 27.2",
-        "summary": "iOS 27.2 is officially here , with additions that include upgraded Siri AI powers and new features for Messages , Apple TV , and more . And if you’re an iPhone Duo owner, iOS 27.2 includes two exclusive features for your new device. more…",
-        "body": "iOS 27.2 is officially here , with additions that include upgraded Siri AI powers and new features for Messages , Apple TV , and more . And if you’re an iPhone Duo owner, iOS 27.2 includes two exclusive features for your new device.\n\nApple Pencil is now officially supported on iPhone Duo, launching just days after the device first got into users’ hands.\n\nYou’ll need an Apple Pencil (USB-C) to use the feature, as it’s the only Pencil model supported by iPhone Duo.\n\nYou can use Apple Pencil on both the outer and inner displays to do things like annotate PDFs and images, sketch and doodle, and save handwritten notes.\n\nAfter Apple first unveiled the iPhone Duo last month, most users expected a longer wait for Pencil support. It’s great to see it arrive so soon.\n\nOne thing that makes iPhone Duo especially great for video calls is the ability to fold it in ‘laptop mode’ (what Apple calls ‘seated’ mode) for hands-free calls.\n\nBut with iOS 27.2, the Duo gets another feature ideal for video calls: Edge Light.\n\nEdge Light is a macOS feature that’s now available in iOS exclusively for iPhone Duo. It adds a ring of light around the edge of the display to illuminate your face during calls.\n\nYou can use Edge Light with FaceTime or with popular third-party video calling apps such as Zoom.\n\nHave you tried either of iOS 27.2’s new iPhone Duo features? Let us know in the comments."
       }
     },
     "media": null
@@ -154,14 +299,14 @@
     "media": null
   },
   {
-    "id": "engadget-5d8c73d3a7997d2a",
+    "id": "ars-technica-543a5171d95739ff",
     "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2297433/apple-responds-to-reports-of-the-iphone-duo-inner-display-cracking/",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/apple/2026/10/apple-reveals-updated-ipad-mini-with-a-bigger-oled-screen-for-700/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-26T18:52:02.000Z",
+    "publishedAt": "2026-10-26T19:04:40.000Z",
     "categories": [
       "tecnologia-general",
       "apple"
@@ -170,9 +315,9 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Apple responds to reports of the iPhone Duo's inner display cracking",
-        "summary": "Impacted users can contact AppleCare for a replacement.",
-        "body": "Impacted users can contact AppleCare for a replacement.\n\nAn unspecified number of iPhone Duo owners have complained that the inner display has already cracked along the hinge, according to reports by ArsTechnica and others. This is fairly troubling, given that the device has only been out three days .\n\nApple has responded to user complaints and provided Engadget with the following statement:\n\n\"The response to iPhone Duo from early users has been incredibly positive, and we are seeing exciting things from developers who are rapidly updating their apps to take advantage of its unique form factor. We are aware of an issue impacting the inner display on a small number of iPhone Duo units. If users experience issues with their iPhone Duo display, they should contact AppleCare for a replacement.\"\n\nFrom what we understand, the issue affects only a small percentage of iPhone Duo units and the defect should show up pretty quickly once a user starts folding up their phone. So if you've made it through the first few days without an issue, you're hopefully in the clear.\n\nI've now seen 7 photos on 𝕏 and multiple videos on TikTok showing this exact issue on the iPhone Duo\n\nThere is a defective part in the hinge causing pressure on the screen causing it to break in this exact way\n\nWhat is going on?? pic.twitter.com/EWSWOADVc7\n\n— Mike Rundle (@flyosity) October 24, 2026\n\nThe issue appears to be a defective inner hinge that can damage easily, leading to a series of bright lines along the midpoint of the display when unfolded. Some units also show dead pixels along the crease. Hinge issues are fairly common with foldables , though they don't typically appear so close to a new product's launch.\n\nWe can confirm that our review unit wasn't impacted. The same goes for a Duo that CNET got its hands on. The company has been testing hinge strength on a particular unit and, as of this writing, it has successfully completed more than 55,000 folds .\n\nUpdate, October 26, 2026, 3:58PM ET: This story has been updated with a full statement from Apple."
+        "title": "Apple reveals updated iPad mini with a bigger OLED screen for $700",
+        "summary": "Apple claims this is the most significant update ever for the iPad mini line.",
+        "body": "The iPhone Duo may be a bit of a risk right now , but there's a new mid-size Apple touchscreen device that might do the job. Starting at $699, the 8th-gen iPad mini price has gone up, but there are some big changes. Apple says the refreshed 8th-gen iPad mini marks the most significant update ever for its petite tablet, featuring an OLED screen and the A20 Pro chip that we first saw in the iPhone 18 Pro and iPhone Duo.\n\nThe new iPad mini has roughly the same footprint as the 2024 release, but the display is slightly larger thanks to a 24 percent reduction in bezel thickness. The device is almost a full millimeter thinner than the last iPad, coming in at just 5.4 mm. The chassis is also IP67 rated for water and dust protection. The 7th-Gen iPad mini didn't have any official IP rating.\n\nThe 8.5-inch Super Retina XDR display (up from 8.3 inches) moves on from the IPS technology of the last-gen device to adopt OLED. That means dapper blacks and a much higher peak brightness—1,200 nits versus just 500 nits for the previous mini. It can also manage 1-nit minimum brightness so as not to sear your retinas in a dark room. There will also be a nano-textured matte display option. The display experience on the new mini should be much more in line with what we've come to expect from Apple's Pro-level devices.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -204,30 +349,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-1a49e9dbe0521e8d",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/26/apple-releases-ios-26-7-2-for-iphone-heres-whats-new/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-26T18:36:56.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple releases iOS 26.7.2 for iPhone, here’s what’s new",
-        "summary": "Today alongside iOS 27.2 , Apple has also released iOS 26.7.2, a security-focused update for iPhones still running iOS 26. more…",
-        "body": "Today alongside iOS 27.2 , Apple has also released iOS 26.7.2, a security-focused update for iPhones still running iOS 26.\n\nApple has released a variety of new software updates today, most of which are part of its 27.2 lineup.\n\niOS 27.2 is the flagship iPhone update with new features in Messages , TV and Podcasts , Apple Music design refreshes , and more.\n\nBut if you’re not yet running iOS 27, Apple has released iOS 26.7.2 as well.\n\nHere are the official release notes for iOS 26.7.2:\n\nThis update provides security fixes for your iPhone.\n\nFor information on the security content of Apple software updates, please visit: https://support.apple.com/100100\n\nThis minor release doesn’t add new features to the iPhone, since Apple has now moved its focus to iOS 27 for all feature updates.\n\nBut users still running iOS 26 are encouraged to update immediately for the latest security fixes.\n\nApple’s webpage linked above has not yet been updated with the specific security improvements, but we’ll keep you posted when those go live.\n\nAre you still running iOS 26? What’s keeping you from upgrading to iOS 27? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-blog-fda9ea230d7ce6c2",
     "type": "news",
     "sourceId": "applevis-blog",
@@ -250,78 +371,6 @@
         "title": "Apple Releases Version 27.2 of macOS, watchOS, tvOS, and HomePod Software",
         "summary": "Apple has today released version 27.2 of macOS, watchOS, tvOS, and HomePod Software to the public. Our experience is that the following accessibility bug has been resolved in macOS Golden Gate 27.2: VoiceOver no longer announces \"System has new window\" when playing media. We are additionally aware of two new bugs in this release: When navigating an expanded conversation in the messages table in Mail with the up and down arrow keys, VoiceOver speaks “label.text.blank” before each message. When Tabbing past the subject field in Mail’s “New Message” window, focus jumps to the “Format” radio button in the toolbar instead of the next focusable element in the window, requiring you to press the Tab key several additional times to get to the message body text field. If you notice any further changes, improvements, or regressions in your use of these releases, please post a comment below with your findings. Release Notes macOS Golden Gate 27.2 This update provides enhancements to Siri AI with the ability to retain useful context from previous Siri interactions as well as draw from a wider range of personal context. It also introduces Suggestions in Messages that help you take quick actions in apps like Calendar and Reminders based on context from your conversation. This release includes additional features, bug fixes, and security updates for your Mac. watchOS 27.2 This update provides enhancements to Siri AI, including the ability to retain useful context from previous Siri interactions, draw from a wider range of personal context, and deliver faster responses on your watch. This update also includes other features, bug fixes, and security updates for your Apple Watch. Siri AI Siri AI can recall your past conversations, so you can ask Siri about something it told you before, like the restaurants it recommended last week. Siri AI can draw from more sources to give you a great answer, including photos attached in Messages, Calendar event attendees, your voicemails, and better results from Safari history and Reading List from your phone. Excluded Apps lets you choose which apps Siri, Search, and suggestions can access, all from one setting on your phone. Siri AI now provides faster responses on Apple Watch. Siri AI is available in more languages, with support for French, Japanese, Korean, Portuguese, and Spanish. Siri AI is not available in the EU or mainland China. For information on the security content of Apple software updates, please visit: https://support.apple.com/100100 Some features may not be available in all regions or on all Apple Watch models. To learn more, please visit: https://www.apple.com/watchos/feature-availability Usage limits may apply for some Apple Intelligence features. To learn more, please visit: https://www.apple.com/apple-intelligence Software updates, like this one, add new features and improvements that may affect performance and/or battery life. To learn more, please visit: https://support.apple.com/125039 tvOS 27.2 This update brings new ways to stay connected with FaceTime, personalize your screen saver, and locate your Siri Remote with Find My, along with bug fixes and security updates for your Apple TV 4K. FaceTime FaceTime links make it easier to join calls directly from your Apple TV. Sign language interpreter and captioning support lets you add third-party services to your calls. Screen Savers Photo personalization lets you use your iPhone to choose specific photos for your screen saver without sharing your full library with Apple TV. Shuffle option lets you enjoy different screen saver categories as your Apple TV cycles through them. Find My Find My support lets you locate your Siri Remote (2nd generation) or later using your iPhone. HomePod Software 27.2 HomePod software version 27.2 brings the new Sound Glow visual experience, home theater surround sound with Apple TV 4K (4th generation), and support for using HomePod speakers with your Mac, along with bug fixes and security updates for your HomePod. Sound Glow on HomePod mini, HomePod mini 2, and HomePod (2nd generation) turns the top of HomePod into a visual display that pulses and glows in sync with your media and shows matching light animations for soundscapes. Home theater surround sound supports connecting four HomePod speakers to Apple TV 4K (4th generation) for an immersive listening experience. Requires matching front and rear pairs of HomePod mini 2 or HomePod (2nd generation). HomePod speakers with your Mac lets you set HomePod as the audio output for everything you do on your Mac, with a responsive and persistent AirPlay connection. Lock controls let you disable the touch controls on top of HomePod to prevent accidental taps from pausing music, skipping songs, or changing the volume. How to Update To install macOS Golden Gate 27.2, choose System Settings from the Apple menu, select General in the table, click Software Update in the scroll area, and click the Update Now button to begin the update process. If other updates are available, you can click the Info button to see details about them and select specific updates to install. watchOS 27.2 is available via Over-the-Air Update (Settings > General > Software Update) or by going to the Watch app on your iPhone and navigating to General > Software Update. To install the update, your Watch must be connected to its charger and have at least 50% battery power. To install tvOS 27.2, on Apple TV 4K or Apple TV HD, go to the Settings channel, then look for the System section near the bottom. From here, look for Software Updates under Maintenance, then select Update Software and Download and Install. Wait for your Apple TV to download the update. Don't disconnect or unplug your Apple TV until the update completes. By default, HomePod and HomePod mini automatically install new software updates, but you can manually check for updates in the Home app on your iPhone, iPad, or Mac.",
         "body": "Apple has today released version 27.2 of macOS, watchOS, tvOS, and HomePod Software to the public.\n\nOur experience is that the following accessibility bug has been resolved in macOS Golden Gate 27.2:\n\nWe are additionally aware of two new bugs in this release:\n\nIf you notice any further changes, improvements, or regressions in your use of these releases, please post a comment below with your findings.\n\nThis update provides enhancements to Siri AI with the ability to retain useful context from previous Siri interactions as well as draw from a wider range of personal context. It also introduces Suggestions in Messages that help you take quick actions in apps like Calendar and Reminders based on context from your conversation. This release includes additional features, bug fixes, and security updates for your Mac.\n\nThis update provides enhancements to Siri AI, including the ability to retain useful context from previous Siri interactions, draw from a wider range of personal context, and deliver faster responses on your watch. This update also includes other features, bug fixes, and security updates for your Apple Watch.\n\nSiri AI\n\nFor information on the security content of Apple software updates, please visit: https://support.apple.com/100100 Some features may not be available in all regions or on all Apple Watch models. To learn more, please visit: https://www.apple.com/watchos/feature-availability Usage limits may apply for some Apple Intelligence features. To learn more, please visit: https://www.apple.com/apple-intelligence Software updates, like this one, add new features and improvements that may affect performance and/or battery life. To learn more, please visit: https://support.apple.com/125039\n\nThis update brings new ways to stay connected with FaceTime, personalize your screen saver, and locate your Siri Remote with Find My, along with bug fixes and security updates for your Apple TV 4K.\n\nFaceTime\n\nScreen Savers\n\nFind My\n\nHomePod software version 27.2 brings the new Sound Glow visual experience, home theater surround sound with Apple TV 4K (4th generation), and support for using HomePod speakers with your Mac, along with bug fixes and security updates for your HomePod.\n\nTo install macOS Golden Gate 27.2, choose System Settings from the Apple menu, select General in the table, click Software Update in the scroll area, and click the Update Now button to begin the update process. If other updates are available, you can click the Info button to see details about them and select specific updates to install.\n\nwatchOS 27.2 is available via Over-the-Air Update (Settings > General > Software Update) or by going to the Watch app on your iPhone and navigating to General > Software Update. To install the update, your Watch must be connected to its charger and have at least 50% battery power.\n\nTo install tvOS 27.2, on Apple TV 4K or Apple TV HD, go to the Settings channel, then look for the System section near the bottom. From here, look for Software Updates under Maintenance, then select Update Software and Download and Install. Wait for your Apple TV to download the update. Don't disconnect or unplug your Apple TV until the update completes.\n\nBy default, HomePod and HomePod mini automatically install new software updates, but you can manually check for updates in the Home app on your iPhone, iPad, or Mac."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-5a1a322f27196e2e",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/news/1018713/meta-muse-agentic-shopping-ai-the-realreal",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-26T17:30:55.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The RealReal won’t let AI agents hog designer clothing",
-        "summary": "The RealReal, a secondhand luxury fashion consignment retailer, said it's updating its bot defense system, effectively making it harder for AI agents to shop on its site. The change comes days after The Verge reported that an AI agent could be used to take advantage of The RealReal's item reserve system. On the retailer's website, […]",
-        "body": "The RealReal, a secondhand luxury fashion consignment retailer, said it's updating its bot defense system, effectively making it harder for AI agents to shop on its site.\n\nThe change comes days after The Verge reported that an AI agent could be used to take advantage of The RealReal's item reserve system. On the retailer's website, an item goes \"on hold\" and is unavailable for other customers to buy for 20 minutes once it's placed in a user's shopping cart. Using Meta's Muse, The Verge was able to instruct the AI agent to continuously re-add The RealReal listings in a shopping cart as soon as the 20-minute hold had expired, effectively block …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-08f86d01d9034adf",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1018760/iphone-duo-crackgate-inside-screen-hinge-crack",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-26T17:28:07.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple acknowledges iPhone Duo display ‘issue’ after reports of cracked screens",
-        "summary": "Following reports of iPhone Duos with cracked and broken inside screens, often showing a bright line running from the center to the right side, Apple says in a statement to Bloomberg and 9to5Mac that it's aware of \"an issue impacting the inner display\" on a \"small number of iPhone Duo units.\" If your iPhone Duo […]",
-        "body": "Following reports of iPhone Duos with cracked and broken inside screens, often showing a bright line running from the center to the right side, Apple says in a statement to Bloomberg and 9to5Mac that it's aware of \"an issue impacting the inner display\" on a \"small number of iPhone Duo units.\" If your iPhone Duo is affected, Apple says to contact AppleCare for a replacement.\n\nHere is the full statement, which Apple's Alex Kirschner shared with The Verge :\n\nThe response to iPhone Duo from early users has been incredibly positive, and we are seeing exciting things from developers who are rapidly updating their apps to take advantage of its uniq …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-f4fb09b19873b46d",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2297180/dutch-government-to-cut-16-percent-of-workforce-as-part-of-ai-efficiency-push/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-26T17:13:20.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Dutch government to cut 16 percent of workforce as part of AI efficiency push",
-        "summary": "The cabinet announced that it wants to get rid of 25,000 full-time jobs by 2035.",
-        "body": "The cabinet announced that it wants to get rid of 25,000 full-time jobs by 2035.\n\nNo job is secure from the advent of artificial intelligence's rapid growth. In a lengthy post detailing how the Dutch government plans to improve efficiency, it announced that it would get rid of 25,000 full time jobs over the span of a few years as part of cost-cutting measures. As part of that effort, the government is also planning to lean on AI to contribute to productivity.\n\nAccording to the Dutch government, the goal is to cut back 900 million euros, or around $1 billion, in costs by 2027, with that estimate rising to 3.5 billion euros, or approximately $3.9 billion, by 2035. The post detailed that not all government agencies will be affected, with police and defense being excluded.\n\nIt's unclear how the government plans to deploy AI to reduce costs, but the post read that the Dutch cabinet will \"come up with goals and savings plans for deploying AI to work more productively,\" in the first quarter of 2027. The country's state secretary, Eric van der Burg wrote in a letter to the Dutch parliament that this overall effort was part of a push to make the government \"simpler, smart and smaller.\"\n\nEarlier reports from Dutch news outlets reported that the government had been planning to incorporate AI in its cost savings efforts since earlier this year. As reported by Bloomberg , van der Burg wants to \"apply AI even more broadly,\" after several AI initiatives have already been established across different government sectors."
       }
     },
     "media": null
@@ -419,52 +468,6 @@
         "title": "Ya disponible la versión final de NVDA 2026.3",
         "summary": "Tras 6 versiones beta y una candidata a liberación, NV Access ha anunciado mediante esta publicación que ya se encuentra disponible para su descarga la versión final de NVDA 2026.3, el lector de pantalla gratuito y de código abierto para Microsoft Windows. Se recomienda a todos los usuarios actualizar a esta nueva versión, cuyo uso … Continuar leyendo \"Ya disponible la versión final de NVDA 2026.3\" La entrada Ya disponible la versión final de NVDA 2026.3 se publicó primero en NVDA en español .",
         "body": "Tras 6 versiones beta y una candidata a liberación, NV Access ha anunciado mediante esta publicación que ya se encuentra disponible para su descarga la versión final de NVDA 2026.3, el lector de pantalla gratuito y de código abierto para Microsoft Windows. Se recomienda a todos los usuarios actualizar a esta nueva versión, cuyo uso se considera apto también en entornos de producción.\n\nEsta versión incluye importantes mejoras de rendimiento, mejoras en los cuadros de diálogo de NVDA y una mayor compatibilidad con la entrada mediante pantalla táctil. Se han introducido varias mejoras de rendimiento para reducir el retraso y mejorar la capacidad de respuesta. NVDA ahora recopila y almacena en caché más información sobre los controles en segundo plano, lo que mejora el rendimiento en controles como los cuadros combinados y el Explorador de archivos. NVDA ya no provoca que el Explorador de archivos u otras aplicaciones se cuelguen al salir de NVDA o al reiniciarlo. Ahora, NVDA se recupera más rápidamente cuando una aplicación deja de responder y ya no se bloquea ni satura el registro con errores de las aplicaciones que no responden. Se han añadido menús de contexto y atajos de teclado a los cuadros de diálogo «Perfiles de configuración», «Gestos de entrada» y «Diccionarios del habla», lo que facilita el uso de estos cuadros de diálogo con el teclado. Ahora también es posible modificar un gesto ya existente directamente en el cuadro de diálogo «Gestos de entrada». Se ha actualizado el cuadro de diálogo que se utiliza para mostrar los mensajes que se pueden consultar y ahora permite cambiar el tamaño, maximizar y minimizar con mayor facilidad. Se han ampliado considerablemente las opciones de introducción de datos mediante pantalla táctil. Los gestos secuenciales de dos flicks combinan ahora dos flicks consecutivos en un único gesto, lo que aumenta considerablemente el número de gestos táctiles a los que se pueden asignar acciones. Ahora también se admiten los gestos desde los bordes, lo que permite asociar gestos que se inician desde cualquier borde de la pantalla de forma independiente de los mismos gestos realizados en el centro de la pantalla. Se ha añadido una nueva orden sin asignar para desplazar el cursor del ratón al centro de la vista ampliada. Ahora es posible utilizar el OCR de Windows mientras están activos la Cortina de pantalla o el magnificador integrado de NVDA. Se ha actualizado Liblouis con nuevas tablas de braille en elfdaliano, sami, maorí, braille unificado neozelandés, criollo haitiano, una tabla noruega para texto en español y variantes adicionales suecas de 6 y 8 puntos. Se ha actualizado eSpeak NG para que sea compatible con el ligur y el abjasio. Consulta todas las novedades aquí Tan pronto como actualices NVDA, no olvides reiniciar el equipo. El reinicio garantiza que se pueden actualizar archivos que antes no se podían modificar porque estaban abiertos para escritura. En la práctica, al reiniciar vuelven a funcionar aplicaciones basadas en Electron, tales como Teams, Dropbox o Google Drive, y dejan de producirse comportamientos extraños con el explorador de archivos, Thunderbird, Office y algunos navegadores. Reiniciar es lo primero que debes hacer antes de informar de cualquier fallo. Hazlo pulsando windows+d para ir al escritorio, alt+f4, e intro sobre la opción Reiniciar. Puedes descargar NVDA 2026.3, así como las últimas versiones compatibles con sistemas antiguos y material útil para desarrolladores, desde nuestra página de descargas . La suma SHA256 de NVDA 2026.3, que se usa para garantizar la integridad de la descarga, es a8a87cb823da0c62cfbae4a444ae5ae238d54dc82ad6d46d3fdb3fef082799b2. Si tienes una versión estable anterior, también puedes actualizar automáticamente desde el menú Ayuda. Y desde la rc1, con el complemento Selector del canal de actualización, se puede hacer del mismo modo configurando previamente el canal estable. Si todavía no conoces NVDA y quieres leer algo más sobre él antes de probarlo, te recomendamos consultar la guía de usuario y la referencia rápida de órdenes . Si te gustan nuestros proyectos y el contenido que ofrecemos, plantéate contribuir mensualmente con una pequeña cantidad. Tan sólo un euro es capaz de marcar la diferencia y ayudarnos a mejorar. Visita la página de donaciones para obtener más información, o la tienda para hacerte con libros de formación traducidos y sintetizadores de voz de alta calidad. ¡Feliz lunes!\n\nLa entrada Ya disponible la versión final de NVDA 2026.3 se publicó primero en NVDA en español ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-ae8f14d1d0e19089",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/gadgets/2026/10/updated-google-privacy-policy-says-your-gmail-might-be-used-for-advertising/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-23T20:19:55.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Updated Google privacy policy says your Gmail might be used for advertising",
-        "summary": "Turning on Personal Intelligence gives the company more data for ad targeting.",
-        "body": "Using Google's products and services has always been fundamentally precarious—doing so gives the world's largest advertising company a lot of juicy personal data. Google has long said it won't use the sensitive data from products like Gmail, Drive, and Photos for ad personalization, but a change to the company's privacy policy appears to dismantle that firewall.\n\nOn October 16, Google issued an update to its privacy policy , spotted by Android Authority . The ad personalization section used to include a clear limit on data from certain apps. \"We don’t show you personalized ads based on your content from Drive, Gmail, or Photos,\" the document said. Now, Google has updated it with the following language.\n\nThis equivocation opens the door to using data from apps like Gmail and Photos in ads when it's shared with other Google services, and it just so happens Google has a mechanism for doing that, with Personal Intelligence. The company released Personal Intelligence in early 2026 , allowing users to hand data from multiple apps to Google AI products. The idea is that the added context from your existing data will lead to better AI answers, but it's also proving to be a privacy minefield.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-88cf48df030950ee",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/10/intel-gets-waiver-after-worries-fuzzy-us-ban-on-foreign-made-robots-may-hit-fabs/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-23T17:18:31.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Intel gets waiver after worries fuzzy US ban on foreign-made robots may hit fabs",
-        "summary": "Company says foreign-made robotic vehicles are crucial to US chip production.",
-        "body": "US chip champion Intel was so confused by the US government ban on foreign-made robots that it requested and received a waiver “out of an abundance of caution.” The tech company wanted to make sure that it could continue using certain robotic vehicles in its US chip fabs.\n\nThe uncertainty surrounding the Federal Communications Commission ban on certain foreign-made robots was revealed in the agency’s decision to grant Intel’s waiver request. On October 22, the FCC published its order allowing Intel to continue using the foreign-made robots in US semiconductor manufacturing facilities for a period of one year.\n\nThe robots in question are automated guided vehicles operating on “tracks or predefined paths” while often requiring operator oversight, according to Intel’s website. They help to move materials and items around within warehouses and factory floors.\n\nRead full article\n\nComments"
       }
     },
     "media": null

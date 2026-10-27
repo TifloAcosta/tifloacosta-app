@@ -63,8 +63,9 @@ fun NativeReaderAudioScreen(
     var speedIndex by remember(book.id) { mutableIntStateOf(2) }
     val speeds = listOf(75, 90, 100, 125, 150)
     val sleepTimes = listOf(0, 5, 10, 15, 30, 45, 60)
-    val marks = remember(book.audioMarks, book.marks) {
-        book.audioMarks.ifEmpty { book.marks.map { ReaderAudioMark(book.trackIndex, it) } }
+    val marks = if (active) state.audioMarks
+    else book.audioMarks.ifEmpty {
+        book.marks.map { ReaderAudioMark(book.trackIndex, it) }
     }
 
     fun command(action: String, value: Int = 0) {

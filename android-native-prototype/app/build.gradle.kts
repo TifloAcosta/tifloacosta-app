@@ -16,6 +16,10 @@ android {
         versionCode = 20
         versionName = "0.20-voces-ajustes"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        // Only the separate test APK may be restricted to Pixel arm64.
+        if (project.findProperty("tifloArm64Only") == "true") {
+            ndk { abiFilters.add("arm64-v8a") }
+        }
     }
 
     buildTypes {

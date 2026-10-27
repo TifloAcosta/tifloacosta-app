@@ -188,7 +188,7 @@ fun NativeTifloLector(
                         playOnOpen = false
                         screen = "home"
                     } catch (e: Exception) {
-                        error += (e.message ?: "No se pudo abrir el documento importado.") + "\\n"
+                        error += (e.message ?: "No se pudo abrir el documento importado.") + "\n"
                     }
                 }
             } finally {

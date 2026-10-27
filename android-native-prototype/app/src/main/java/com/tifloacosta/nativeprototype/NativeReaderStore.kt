@@ -35,7 +35,8 @@ data class ReaderBook(
     val audioSegments: List<ReaderAudioSegment> = emptyList(),
     val audioMarks: List<ReaderAudioMark> = emptyList(),
     val daisyNavigation: List<ReaderDaisyNavPoint> = emptyList(),
-    val lastReadAt: Long = 0L
+    val lastReadAt: Long = 0L,
+    val finished: Boolean = false
 )
 
 data class ReadingUnit(val start: Int, val end: Int, val text: String)
@@ -125,6 +126,7 @@ class NativeReaderStore(private val context: Context) {
                     offset = obj.optInt("offset", 0).coerceAtLeast(0),
                     createdAt = obj.optLong("createdAt", 0),
                     lastReadAt = obj.optLong("lastReadAt", 0).coerceAtLeast(0),
+                    finished = obj.optBoolean("finished", false),
                     marks = (0 until marks.length()).map { marks.optInt(it, 0).coerceAtLeast(0) },
                     format = obj.optString("format", "txt"),
                     favorite = obj.optBoolean("favorite", false),
@@ -181,6 +183,7 @@ class NativeReaderStore(private val context: Context) {
             array.put(JSONObject().put("id", book.id).put("title", book.title)
                 .put("length", book.length).put("offset", book.offset)
                 .put("createdAt", book.createdAt).put("lastReadAt", book.lastReadAt)
+                .put("finished", book.finished)
                 .put("marks", JSONArray(book.marks))
                 .put("format", book.format).put("favorite", book.favorite)
                 .put("folder", book.folder).put("tracks", JSONArray(book.tracks))

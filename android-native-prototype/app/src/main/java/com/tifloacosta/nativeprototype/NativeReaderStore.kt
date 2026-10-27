@@ -33,7 +33,8 @@ data class ReaderBook(
     val trackIndex: Int = 0,
     val audioPositionMs: Int = 0,
     val audioSegments: List<ReaderAudioSegment> = emptyList(),
-    val audioMarks: List<ReaderAudioMark> = emptyList()
+    val audioMarks: List<ReaderAudioMark> = emptyList(),
+    val daisyNavigation: List<ReaderDaisyNavPoint> = emptyList()
 )
 
 data class ReadingUnit(val start: Int, val end: Int, val text: String)
@@ -135,10 +136,24 @@ class NativeReaderStore(private val context: Context) {
                                     part.optInt("fileIndex", 0).coerceAtLeast(0),
                                     part.optInt("startMs", 0).coerceAtLeast(0),
                                     part.optInt("endMs", -1),
-                                    part.optString("label", "").take(150)
+                                    part.optString("label", "").take(150),
+                                    part.optString("textRef", "").take(260),
+                                    part.optString("synchronizedText", "").take(200)
                                 )
                             }
                         }
+                    } ?: emptyList(),
+                    daisyNavigation = obj.optJSONArray("daisyNavigation")?.let { points ->
+                        (0 until points.length()).mapNotNull { j ->
+                            points.optJSONObject(j)?.let { p ->
+                                val kind = p.optString("kind", "")
+                                if (kind !in NativeDaisyNavigation.kinds) null
+                                else ReaderDaisyNavPoint(kind, p.optInt("level", 0).coerceIn(0, 6),
+                                    p.optString("label", "").take(200),
+                                    p.optInt("segmentIndex", 0).coerceAtLeast(0),
+                                    p.optString("target", "").take(250))
+                            }
+                        }.take(10000)
                     } ?: emptyList(),
                     audioMarks = obj.optJSONArray("audioMarks")?.let { entries ->
                         (0 until entries.length()).mapNotNull { j ->
@@ -171,7 +186,15 @@ class NativeReaderStore(private val context: Context) {
                     book.audioSegments.forEach { part ->
                         put(JSONObject().put("fileIndex", part.fileIndex)
                             .put("startMs", part.startMs).put("endMs", part.endMs)
-                            .put("label", part.label))
+                            .put("label", part.label)
+                            .put("textRef", part.textRef)
+                            .put("synchronizedText", part.synchronizedText))
+                    }
+                }).put("daisyNavigation", JSONArray().apply {
+                    book.daisyNavigation.forEach { p ->
+                        put(JSONObject().put("kind", p.kind).put("level", p.level)
+                            .put("label", p.label).put("segmentIndex", p.segmentIndex)
+                            .put("target", p.target))
                     }
                 }).put("audioMarks", JSONArray().apply {
                     book.audioMarks.forEach { mark ->
@@ -347,7 +370,8 @@ class NativeReaderStore(private val context: Context) {
             val book = ReaderBook(
                 id = id, title = title.take(180), length = text.length,
                 format = if (plan.daisy) "daisy" else ext,
-                tracks = copied, audioSegments = plan.segments
+                tracks = copied, audioSegments = plan.segments,
+                daisyNavigation = plan.navigation
             )
             save(list() + book)
             return book
@@ -356,6 +380,7 @@ class NativeReaderStore(private val context: Context) {
             throw if (e is IOException) e
                 else IOException("No se pudo incorporar el libro comprimido.", e)
         } finally {
+            NativeReaderDaisyText.clear()
             stage.deleteRecursively()
         }
     }

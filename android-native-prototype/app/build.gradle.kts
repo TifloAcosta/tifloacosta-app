@@ -13,8 +13,8 @@ android {
         applicationId = "com.tifloacosta.nativeprototype"
         minSdk = 26
         targetSdk = 35
-        versionCode = 12
-        versionName = "0.12-bloque1"
+        versionCode = 13
+        versionName = "0.13-bloque2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -48,6 +48,7 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.activity:activity-compose:1.12.1")
     implementation("com.tom-roush:pdfbox-android:2.0.27.0")
+    implementation("org.jsoup:jsoup:1.18.3")
     implementation("org.apache.commons:commons-compress:1.28.0")
     implementation("org.tukaani:xz:1.10")
     implementation("com.github.junrar:junrar:8.1.2")

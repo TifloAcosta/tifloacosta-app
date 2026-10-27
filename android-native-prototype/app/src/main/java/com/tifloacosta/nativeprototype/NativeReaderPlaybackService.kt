@@ -42,7 +42,8 @@ data class NativePlaybackSnapshot(
     val error: String = "",
     val sleepMinutes: Int = 0,
     val audioMarks: List<ReaderAudioMark> = emptyList(),
-    val textMarks: List<Int> = emptyList()
+    val textMarks: List<Int> = emptyList(),
+    val synchronizedText: String = ""
 )
 
 /** Single audio owner independent of Compose. Keeps DAISY and TTS alive on lock screen. */
@@ -66,18 +67,22 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         const val ACTION_UNIT = "reader.UNIT"
         const val EXTRA_SPEED = "speedPercent"
         const val EXTRA_SLEEP = "sleepMinutes"
+        const val EXTRA_START_SEGMENT = "startSegment"
+        const val EXTRA_START_POSITION = "startPosition"
         const val EXTRA_BOOK = "bookId"
         const val EXTRA_VALUE = "value"
         val snapshot = MutableStateFlow(NativePlaybackSnapshot())
 
         fun start(context: Context, bookId: String, audio: Boolean, speedPercent: Int = 100,
-            sleepMinutes: Int = 0) {
+            sleepMinutes: Int = 0, segmentIndex: Int = -1, positionMs: Int = -1) {
             ContextCompat.startForegroundService(context,
                 Intent(context, NativeReaderPlaybackService::class.java).apply {
                     action = if (audio) ACTION_START_AUDIO else ACTION_START_TEXT
                     putExtra(EXTRA_BOOK, bookId)
                     putExtra(EXTRA_SPEED, speedPercent)
                     putExtra(EXTRA_SLEEP, sleepMinutes)
+                    putExtra(EXTRA_START_SEGMENT, segmentIndex)
+                    putExtra(EXTRA_START_POSITION, positionMs)
                 })
         }
 
@@ -258,6 +263,11 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                 // Begin the foreground service immediately, before large book IO.
                 showNotification(startForegroundNow = true)
                 openBook(id, if (intent.action == ACTION_START_AUDIO) "audio" else "text")
+                val desiredSegment = intent.getIntExtra(EXTRA_START_SEGMENT, -1)
+                if (kind == "audio" && desiredSegment in segments.indices) {
+                    openSegment(desiredSegment,
+                        intent.getIntExtra(EXTRA_START_POSITION, -1).coerceAtLeast(0))
+                }
                 val requestedSpeed = intent.getIntExtra(EXTRA_SPEED, 0)
                 if (requestedSpeed != 0) {
                     speed = (requestedSpeed / 100f).coerceIn(.6f, 2f)
@@ -560,7 +570,10 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
             audioMarks = current.audioMarks.ifEmpty {
                 current.marks.map { ReaderAudioMark(current.trackIndex, it) }
             },
-            textMarks = current.marks
+            textMarks = current.marks,
+            synchronizedText = if (kind == "audio") {
+                segments.getOrNull(segmentIndex)?.synchronizedText.orEmpty()
+            } else ""
         )
         session?.setMetadata(android.media.MediaMetadata.Builder()
             .putString(android.media.MediaMetadata.METADATA_KEY_TITLE, current.title)

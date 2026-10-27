@@ -59,6 +59,8 @@ fun NativeReaderAudioScreen(
     var selectedAction by remember(book.id) { mutableIntStateOf(0) }
     var expandedAudio by remember(book.id) { mutableStateOf(false) }
     var expandedMore by remember(book.id) { mutableStateOf(false) }
+    var showDaisyNavigation by remember(book.id) { mutableStateOf(false) }
+    var beforeDaisyJump by remember(book.id) { mutableStateOf<Pair<Int, Int>?>(null) }
     var sleepIndex by remember(book.id) { mutableIntStateOf(0) }
     var speedIndex by remember(book.id) { mutableIntStateOf(2) }
     val speeds = listOf(75, 90, 100, 125, 150)
@@ -108,6 +110,19 @@ fun NativeReaderAudioScreen(
     LaunchedEffect(book.id) {
         if (startOnOpen && !reading) start()
     }
+    if (showDaisyNavigation) {
+        NativeDaisyNavigationScreen(book, english, current,
+            onGo = { segment ->
+                beforeDaisyJump = current to position
+                if (active) command(NativeReaderPlaybackService.ACTION_SEGMENT, segment)
+                else NativeReaderPlaybackService.start(context, book.id,
+                    audio = true, speedPercent = speeds[speedIndex],
+                    sleepMinutes = sleepTimes[sleepIndex], segmentIndex = segment)
+                showDaisyNavigation = false
+            },
+            onBack = { showDaisyNavigation = false })
+        return
+    }
     BackHandler { onBack() }
 
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
@@ -143,6 +158,35 @@ fun NativeReaderAudioScreen(
         Text((if (english) "Section " else "Sección ") +
             (current + 1) + " / " + segments.size +
             ", " + (position / 1000) + " / " + (duration / 1000) + " s")
+        if (book.format == "daisy" || book.daisyNavigation.isNotEmpty()) {
+            TextButton(onClick = { showDaisyNavigation = true },
+                modifier = Modifier.fillMaxWidth()) {
+                Text(if (english) "DAISY navigation" else "Navegación DAISY")
+            }
+        }
+        beforeDaisyJump?.let { origin ->
+            TextButton(onClick = {
+                if (active) {
+                    command(NativeReaderPlaybackService.ACTION_SEGMENT, origin.first)
+                    command(NativeReaderPlaybackService.ACTION_SEEK, origin.second)
+                } else {
+                    NativeReaderPlaybackService.start(context, book.id, audio = true,
+                        speedPercent = speeds[speedIndex],
+                        sleepMinutes = sleepTimes[sleepIndex],
+                        segmentIndex = origin.first, positionMs = origin.second)
+                }
+                beforeDaisyJump = null
+            }) {
+                Text(if (english) "Return to position before navigation"
+                    else "Volver a la posición anterior al salto")
+            }
+        }
+        if (active && state.synchronizedText.isNotBlank()) {
+            Text(if (english) "Synchronized text" else "Texto sincronizado",
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.semantics { heading() })
+            Text(state.synchronizedText)
+        }
         Row {
             TextButton(onClick = { perform(1) }) {
                 Text(if (english) "Back 30 s" else "Retroceder 30 s")

@@ -65,3 +65,14 @@ test('the trial exposes an accessible library check without triggering migration
   assert.match(settings, /missingAudioTracks/);
   assert.doesNotMatch(settings, /NativeFeatures\.migrateLegacyLibrary\(/);
 });
+
+test('native reader warns about unmigrated legacy books instead of showing a false empty library', async () => {
+  const audit = await source('../../android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativeLegacyLibraryCheck.kt');
+  const reader = await source('../../android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativeTifloLector.kt');
+  assert.match(audit, /SQLiteDatabase\.OPEN_READONLY/);
+  assert.match(audit, /LegacyLibraryState\(null, true\)/);
+  assert.doesNotMatch(audit, /SQLiteOpenHelper|OPEN_READWRITE|deleteDatabase/);
+  assert.match(reader, /NativeLegacyLibraryCheck\.inspect/);
+  assert.match(reader, /Siguen en el TifloLector actual/);
+  assert.match(reader, /No se pudo comprobar la biblioteca anterior/);
+});

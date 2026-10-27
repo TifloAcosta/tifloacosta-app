@@ -1,4 +1,7 @@
 import { addScreenHeader, clearScreen } from './shared.mjs';
+import { registerPlugin } from '@capacitor/core';
+
+const NativeFeatures = registerPlugin('TifloNativeFeatures');
 
 function addSelect(parent, { id, label, value, options, onChange }) {
   const wrapper = document.createElement('div');
@@ -179,6 +182,48 @@ export function renderSettings({
   reset.textContent = t('settings.reset');
   reset.addEventListener('click', () => onPreferencesChange(null, { reset: true }));
   root.append(reset);
+
+  // Diagnostic controls on this integration branch; hidden in the existing Play release.
+  // Do not promote these before confirming migration of pre-existing books and progress.
+  const nativePreview = document.createElement('section');
+  nativePreview.className = 'settings-section';
+  const previewTitle = document.createElement('h2');
+  previewTitle.textContent = preferences.lang === 'en'
+    ? 'Native features: integration validation'
+    : 'Funciones nativas: validación de integración';
+  nativePreview.append(previewTitle);
+  const previewNotice = document.createElement('p');
+  previewNotice.textContent = preferences.lang === 'en'
+    ? 'Preview only. Existing reader books remain in your original library until migration is verified.'
+    : 'Solo pruebas. Los libros existentes permanecen en su biblioteca original hasta comprobar la migración.';
+  nativePreview.append(previewNotice);
+  const previewStatus = document.createElement('p');
+  previewStatus.setAttribute('role', 'status');
+  previewStatus.setAttribute('aria-live', 'polite');
+  nativePreview.append(previewStatus);
+  for (const [method, es, en] of [
+    ['openNativeReader', 'Probar TifloLector nativo', 'Test native TifloLector'],
+    ['openNativeVideos', 'Probar vídeos nativos', 'Test native videos']
+  ]) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = preferences.lang === 'en' ? en : es;
+    button.addEventListener('click', async () => {
+      button.disabled = true;
+      try {
+        await NativeFeatures[method]();
+        previewStatus.textContent = '';
+      } catch {
+        previewStatus.textContent = preferences.lang === 'en'
+          ? 'This native preview is not available in this build.'
+          : 'Esta vista previa nativa no está disponible en esta compilación.';
+      } finally {
+        button.disabled = false;
+      }
+    });
+    nativePreview.append(button);
+  }
+  root.append(nativePreview);
 
   const notificationCleanup = addNotificationSettings(root, notificationService, t, onAppResume);
   addAppInfo(root, appInfo, t);

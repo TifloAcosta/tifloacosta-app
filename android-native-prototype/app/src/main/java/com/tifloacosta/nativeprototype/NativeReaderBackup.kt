@@ -35,8 +35,11 @@ object NativeReaderBackup {
         if (pieces.any { it == "." || it == ".." || it.isEmpty() }) return false
         if (pieces.size == 1) {
             val id = path.substringBefore('.')
+            val extension = path.substringAfterLast('.', "").lowercase()
             return uuid.matches(id) && (path == "$id.txt" ||
-                source.matches(path) || track.matches(path))
+                (source.matches(path) &&
+                    (extension in NativeReaderFormats.supported || extension == "bin")) ||
+                (track.matches(path) && extension in NativeReaderFormats.AUDIO_EXTENSIONS))
         }
         if (pieces.size == 2) {
             val parent = pieces[0]

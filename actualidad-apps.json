@@ -120,6 +120,30 @@
     "publishedAt": null
   },
   {
+    "id": "applevis-apps-1e5dbd6da13bffb0",
+    "title": "Dugout Dice",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/dugout-dice",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "Roll dice. Build your lineup. Make the playoffs. Win a championship. Beat the target score before three outs to advance to the next inning. Win games, make the playoffs and win championships to unlock new players, Superfan boosts, cheat menus and more. Fall short, and your season is over. Every season is a chance to build something different. Recruit players with special abilities, add Superfan boosts, and upgrade your dice. Discover powerful combinations, stack multipliers, and turn modest hits into massive payoffs with one-time consumables and clever bench management. **BUILD YOUR WINNING COMBO** - Draft players with abilities that stay with you during the season. - Combine Superfan Boosts, dice upgrades, and items for powerful combos. - Face pitchers and boss closers who challenge your best strategies. - Unlock new players, Boosts, and ballparks as you progress. - Take on a fresh Daily Diamond challenge to earn an advantage during your season. - Enjoy turn-based gameplay at your own pace. - Play offline and pick up right where you left off. **FREE TO PLAY. NO ADS. EVER.** An optional, one-time in-app purchase unlocks customization and fun extras.",
+    "publishedAt": "2026-10-28T13:40:21.000Z"
+  },
+  {
+    "id": "applevis-apps-644da1fbe8da8b32",
+    "title": "xSearch for Safari",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/productivity/xsearch-safari",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "# Featured in the App Store across 63 countries &amp; regions # Featured on Dailytekk's YouTube channel: \"BEST iPad Browser Extensions (Apps)\" # Featured on Christopher Lawley's YouTube channel: \"Must Have Safari Extension for iOS/iPadOS 15\" # Featured on MacStories's YouTube channel: \"Safari Extensions for iPhone and iPad\" Upgrade your Safari browsing with xSearch, the all-in-one search tool for iOS, iPadOS, and macOS with just one purchase. xSearch lets you instantly switch between multiple search engines and even search directly from Spotlight, making your browsing faster and more efficient. For example, type \"g apple\" to search for \"apple\" using Google, or \"ddg apple\" to search with DuckDuckGo. Privacy is a top priority: xSearch requests only the permissions it needs. On iOS 17, iPadOS 17, macOS 14 and later, it requires permission to view browsing history to function properly within Safari, but it only accesses the current session's URL to identify the search engine. All processing is done locally, and your personal information never leaves your device, ensuring your privacy is fully protected. Some of xSearch's key features include: ■ Quickly switch between search engines using shortcuts. ■ Use URL Scheme to search within other apps, such as X (Twitter). ■ Customize Safari's default search engine with xSearch's variety of engines. ■ Multisearch capability enables simultaneous searching across multiple engines with a single shortcut. ■ Random mode in multisearch allows the system to automatically select an engine for you during searches. ■ Last Search Token remembers your previous query, letting you reuse it instantly without retyping. ■ Integration with Shortcuts provides convenient access to xSearch from anywhere. ■ Use the share extension to search any text in any app with xSearch. ■ Synchronize your search engines across all your devices with iCloud. ■ Backup and share your search engines using the export and import JSON file feature.",
+    "publishedAt": "2026-10-28T10:24:15.000Z"
+  },
+  {
     "id": "applevis-apps-c46353a81548921e",
     "title": "Tanklet: Idle Fish Aquarium",
     "sourceId": "applevis-apps",
@@ -214,29 +238,5 @@
     "platform": "Apple",
     "summary": "THE PUPPY DISTRIBUTION SYSTEM FOUND YOU Rescue stray puppies, breed champion pups, unlock rare colors, and dress your pack in 100+ fun props. Free to play, fully offline, no ads. UNLIMITED PUPPIES • No energy meter, no lives, no waiting to play • Answer as many rescue calls as you like • Breed as many litters as you want RARE COMBINATIONS TO CHASE • 800 looks to discover across six trait axes • Hidden genes resurface generations later, so rare colors run in families • Rarest of all: the prismatic puppy, with a rainbow coat, blue eyes, and a head start on every stat FOUR WAYS TO BREED • Let nature surprise you • Add a guaranteed extra puppy to every litter • Lock the traits you want • Or hand-pick every last one FOR THE SCIENCE MINDED • Two genes per trait, with dominance deciding what you actually see • The real odds, shown before you commit to a litter • A DNA scanner that reveals which dogs are quietly carrying what • Preserve a genome in the DNA Lab, then clone it exactly • Splice: lock individual traits, or choose which parent each stat gene comes from • Weave two or three saved genomes into a single hybrid RAISE, COMPETE, AND DRESS UP • Grow puppies in the nursery, and enter the little ones in Puppy League events • 10+ fun competitions across seven tiers, Backyard to Legends • Fashion Shows judged mostly on the outfit • 100+ props to drag, resize, and rotate BUILD A BLOODLINE • Trace every relationship in the family tree • Fill your Dog-Dex with every look you have discovered • Trade for new bloodlines on the Dog Exchange • A traveling trader visits each weekend, paying well above the going rate EVERY UPGRADE IS EARNABLE • Your dogs earn coins from rescues, competitions, and the Dog Exchange • Spend them on props, kennel space, breeding tools, and DNA Lab upgrades • 100% playable without spending real money PLAYING WITH VOICEOVER • Each dog, event, show and store item is one stop, with its name first • Double-tap the competitor, tier, theme or a breeding parent to choose from a list • Hear pet descriptions, clear action costs and competition results • Coin purchases ask first, and Settings > VoiceOver lets you choose Brief or Detailed screens • Find recent messages and the Accessibility Guide in Settings NO ADS. NO ACCOUNTS. NO LOOT BOXES. • Fully offline, with optional iCloud backup • In-app purchases are optional shortcuts and extras, never requirements • Coin packs, the Quick Compete planner, the Genome Loom, and the Wolf Pack supporter bundle",
     "publishedAt": "2026-10-14T02:44:15.000Z"
-  },
-  {
-    "id": "applevis-apps-93f3a39eda1b82c8",
-    "title": "Tindrift: Merge Roguelike",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/tindrift-merge-roguelike",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "One slide moves your whole army. Tindrift is a tactics roguelike built on slide-merge combat: same-class, same-rank soldiers merge into a higher rank, and every shadow acts by rule — no dice, ever. 100 floors across five acts, plus an Endless Drift, a Daily Seed and 1v1 duels. The campaign plays offline. NO LUCK TO BLAME Shadows telegraph the move they are about to make, gates cycle on a visible clock, and pits sit where you can plan around them. When a run ends you can name the exact slide that ended it — and when you win, you out-thought the board. YOU COMMAND AN ARMY, NOT A HERO Six soldier classes — vanguard, tank, medic, marksman, poisoner, support — merge only with their own kind, so every squad trades coverage against raw power. Set the formation before you climb: tank into the crowd, marksman down the long lane, medic in the middle. WHAT IS IN THE GAME • A 5-act campaign across 100 floors — 20 per act, with 3 mini-boss fights and one signature boss in each • The Sunken Tray, The Rusthold, The Shivering Span, The Frostlight, The Surface: five acts, one climb, ending in daylight • 46 synergy blueprints (15 common, 23 uncommon, 8 rare) — pierce a lane, detonate poison chains, strip terrain for scrap, or take a drawback for reach • 24 shadow archetypes, 5 mini-bosses and 5 act bosses among them, each with a rule you have to read before you can answer it • 8 terrain types — sealed exits, timed gates, pits, fog and mazes: the map fights back • 7 kinds of tactic across 8 placeable tools, plus a TINKER STATION between floors to heal, promote, recruit and re-arm • An 18-node cog tree worth 2,335 cog — side-grades and finishes, never raw stats • 22 achievements and 3 daily quests drawn from 7 types • Endless Drift, and a Daily Seed with streaks and a result you can share • 1v1 duels, same seed and separate boards: three bot difficulties offline, or trade a 6-character code with a friend, send sabotage between floors and replay their round • Four languages: English, Turkish, German and Spanish • VoiceOver reads the board and re-announces it after every slide, and hazards are named instead of signalled by colour alone VARIETY UNLOCKS, POWER DOES NOT Nothing here is pay-to-win. Loadouts, tactics and blueprints stay behind cog for every player, and the limits per run are the same for everyone: one continue, two rerolls, three undos. ADS, PLAINLY Rewarded videos are always your choice — five spots, all opt-in. Full-screen breaks land on floor transitions and after a run, at most one every two minutes, never mid-move and never on the way into a boss or mini-boss floor. Duels carry none. TINDRIFT PREMIUM — one purchase, no subscription • Removes every ad • Lets you HOST duel rooms (joining a room is always free) • Unlocks the 10 cosmetics the workshop sells: 8 soldier finishes and 2 tray themes Slide. Merge. Climb.",
-    "publishedAt": "2026-10-13T16:54:07.000Z"
-  },
-  {
-    "id": "applevis-apps-e1785f27098d9bd0",
-    "title": "Astonischika",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/astonischika",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Astonischika is a turn-based pixel role-playing game with a roguelite loop. Build a party from bold classes, climb a branching map and fight turn by turn against monsters, elites and bosses. Every run is different: you choose your path across battles, rest sites, treasure, merchants and minigames. When your party falls, the city remains your permanent home — your heroes, their gold and their gear grow from run to run. FEATURES • Build your party from a range of classes — warrior, mage, cleric, rogue, archer and more • Turn-based battles with skills, spells, elements and status effects • Branching map: battle, elite, boss, rest, treasure and merchant • Level-ups, attribute points, equipment and learnable spells • Minigames: shell game, dice, memory, coin flip and more • A permanent city hub — your progress stays after every run • Endless scaling for long-term motivation • 22 languages, music and sound effects GREAT FOR Quick battle rounds in between, or long dungeon sessions.",
-    "publishedAt": "2026-10-13T11:30:06.000Z"
   }
 ]

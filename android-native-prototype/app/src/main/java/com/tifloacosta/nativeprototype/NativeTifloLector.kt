@@ -931,7 +931,7 @@ private fun NativeReadingScreen(
                 current = currentChapter,
                 count = chapters.size,
                 english = english
-            ) { chosen -> chapters.getOrNull(chosen)?.let(::setOffset) }
+            ) { chosen -> chapters.getOrNull(chosen)?.let { position -> setOffset(position) } }
             5 -> ReaderCompactOffsetPosition(
                 label = if (english) "Reading position by percentage" else "Posición de lectura por porcentaje",
                 valueLabel = ReaderUnits.percent(displayOffset, fullText.length).toString() + "%",
@@ -947,7 +947,7 @@ private fun NativeReadingScreen(
                 current = currentIndex,
                 count = units.size,
                 english = english
-            ) { chosen -> units.getOrNull(chosen)?.let(::setOffset) }
+            ) { chosen -> units.getOrNull(chosen)?.let { position -> setOffset(position) } }
         }
         // Show and announce the same complete message: never replace the
         // percentage with a content description that hides its value.

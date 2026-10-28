@@ -880,6 +880,25 @@ private fun NativeReadingScreen(
                 contentDescription = if (english) "Reading progress" else "Progreso de lectura"
             }
         )
+        ReaderCompactChoice(
+            if (english) "Speech speed" else "Velocidad de lectura",
+            listOf("0,75", "0,9", if (english) "Normal" else "Normal", "1,25", "1,5"),
+            listOf(.75f, .9f, 1f, 1.25f, 1.5f).indices.minByOrNull { index ->
+                kotlin.math.abs(listOf(.75f, .9f, 1f, 1.25f, 1.5f)[index] - perBookRate)
+            } ?: 2
+        ) { index ->
+            perBookRate = listOf(.75f, .9f, 1f, 1.25f, 1.5f)[index]
+            prefs.edit().putFloat("speed." + book.id, perBookRate).apply()
+            if (active) send(NativeReaderPlaybackService.ACTION_SPEED,
+                (perBookRate * 100f).toInt())
+        }
+        ReaderCompactChoice(
+            if (english) "Sleep timer" else "Apagado automático",
+            sleepChoices, sleepIndex
+        ) { index ->
+            sleepIndex = index
+            if (active) send(NativeReaderPlaybackService.ACTION_SLEEP, sleepMinutes[index])
+        }
         TextButton(
             onClick = { showAudio = !showAudio },
             modifier = Modifier.semantics {
@@ -887,22 +906,8 @@ private fun NativeReadingScreen(
                     (if (english) "Expanded" else "Abierto")
                 else (if (english) "Collapsed" else "Cerrado")
             }
-        ) {
-            Text(if (english) "Audio and voice" else "Audio y voz")
-        }
+        ) { Text(if (english) "Voice and pronunciation" else "Voz y pronunciación") }
         if (showAudio) {
-            ReaderAdjustableChoice(
-                if (english) "Speech speed" else "Velocidad",
-                listOf("0,75", "0,9", "Normal", "1,25", "1,5"),
-                listOf(.75f, .9f, 1f, 1.25f, 1.5f).indices.minByOrNull { index ->
-                    kotlin.math.abs(listOf(.75f, .9f, 1f, 1.25f, 1.5f)[index] - perBookRate)
-                } ?: 2
-            ) { index ->
-                perBookRate = listOf(.75f, .9f, 1f, 1.25f, 1.5f)[index]
-                prefs.edit().putFloat("speed." + book.id, perBookRate).apply()
-                if (active) send(NativeReaderPlaybackService.ACTION_SPEED,
-                    (perBookRate * 100f).toInt())
-            }
             NativeReaderVoicePicker(
                 english = english,
                 speaker = speaker,
@@ -917,13 +922,6 @@ private fun NativeReadingScreen(
                     prefs.edit().putString("voice." + book.id, chosen).apply()
                 }
             )
-            ReaderAdjustableChoice(
-                if (english) "Sleep timer" else "Apagado automático",
-                sleepChoices, sleepIndex
-            ) {
-                sleepIndex = it
-                if (active) send(NativeReaderPlaybackService.ACTION_SLEEP, sleepMinutes[it])
-            }
             TextButton(onClick = {
                 if (active) send(NativeReaderPlaybackService.ACTION_PAUSE)
                 showPronunciation = true
@@ -936,15 +934,15 @@ private fun NativeReadingScreen(
             }
         ) { Text("Visual") }
         if (showVisual) {
-            ReaderAdjustableChoice(
+            ReaderCompactChoice(
                 if (english) "Text size" else "Tamaño de letra",
                 (14..40 step 2).map { it.toString() }, textSize
             ) { textSize = it; prefs.edit().putInt("font." + book.id, it).apply() }
-            ReaderAdjustableChoice(
+            ReaderCompactChoice(
                 if (english) "Line spacing" else "Interlineado",
                 listOf("Normal", "Cómodo", "Amplio"), lineSpacing
             ) { lineSpacing = it; prefs.edit().putInt("spacing." + book.id, it).apply() }
-            ReaderAdjustableChoice(
+            ReaderCompactChoice(
                 if (english) "Bold text" else "Texto reforzado",
                 listOf("No", "Sí"), boldText
             ) { boldText = it; prefs.edit().putInt("bold." + book.id, it).apply() }

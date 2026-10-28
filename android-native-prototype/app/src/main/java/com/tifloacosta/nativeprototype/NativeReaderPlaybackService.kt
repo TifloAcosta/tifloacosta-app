@@ -20,6 +20,8 @@ import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
+import android.os.PowerManager
+import android.os.SystemClock
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import androidx.core.content.ContextCompat
@@ -108,6 +110,8 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
     private var focusRequest: AudioFocusRequest? = null
     private var focused = false
     private var foreground = false
+    private var playbackWakeLock: PowerManager.WakeLock? = null
+    private var lastWakeRefreshMs = 0L
     private var player: MediaPlayer? = null
     private var tts: TextToSpeech? = null
     private var ttsReady = false
@@ -175,6 +179,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                     }
                 }
                 lastTick = now
+                holdPlaybackWakeLock()
                 if (kind == "audio") {
                     val observed = try { player?.currentPosition ?: positionMs }
                         catch (_: Exception) { positionMs }
@@ -198,6 +203,11 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
     override fun onCreate() {
         super.onCreate()
         manager = getSystemService(AUDIO_SERVICE) as AudioManager
+        // Foreground playback needs CPU uptime between short TTS utterances.
+        // This does not keep the display on.
+        playbackWakeLock = (getSystemService(POWER_SERVICE) as PowerManager)
+            .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "TifloAcosta:TifloLectorPlayback")
+            .apply { setReferenceCounted(false) }
         (getSystemService(NOTIFICATION_SERVICE) as NotificationManager).createNotificationChannel(
             NotificationChannel("tiflolector-playback", "TifloLector: reproducción",
                 NotificationManager.IMPORTANCE_LOW)
@@ -393,6 +403,25 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         } else playReading()
     }
 
+    private fun holdPlaybackWakeLock() {
+        val now = SystemClock.elapsedRealtime()
+        if (lastWakeRefreshMs == 0L || now - lastWakeRefreshMs >= 4 * 60_000L ||
+            playbackWakeLock?.isHeld != true) {
+            // Bounded lease renewed during active playback to avoid leaks.
+            try {
+                playbackWakeLock?.acquire(10 * 60_000L)
+                lastWakeRefreshMs = now
+            } catch (_: SecurityException) { }
+        }
+    }
+
+    private fun releasePlaybackWakeLock() {
+        try {
+            if (playbackWakeLock?.isHeld == true) playbackWakeLock?.release()
+        } catch (_: RuntimeException) { }
+        lastWakeRefreshMs = 0L
+    }
+
     private fun playReading() {
         if (book == null || playing) return
         // A foreground service must be active before acquiring focus on API 35+.
@@ -402,6 +431,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
             return
         }
         playing = true
+        holdPlaybackWakeLock()
         lastTick = android.os.SystemClock.elapsedRealtime()
         if (kind == "audio") {
             if (player == null) openSegment(segmentIndex, positionMs)
@@ -471,6 +501,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
             }
         }
         playing = false
+        releasePlaybackWakeLock()
         handler.removeCallbacks(ticker)
         persist()
         publish()
@@ -658,6 +689,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
 
     override fun onDestroy() {
         handler.removeCallbacks(ticker)
+        releasePlaybackWakeLock()
         persist()
         player?.release()
         tts?.stop()

@@ -1,13 +1,162 @@
 [
   {
-    "id": "the-verge-e0ac2a6dd1ff8505",
+    "id": "techcrunch-5a96b4d26aade133",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/28/microsoft-recorded-10-billion-in-revenue-from-openai/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-28T21:34:30.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Microsoft recorded $10 billion in revenue from OpenAI",
+        "summary": "Microsoft said it made $10 billion in revenue from commercial arrangements with OpenAI, including revenue-sharing payments, in the quarter ending September 30. It underscores the still-enormous financial dependency of the partnership.",
+        "body": "Microsoft generated $10 billion in revenue from commercial arrangements with OpenAI, including revenue-sharing payments, in the quarter ended September 30, the company said in regulatory filing on Wednesday. That represents nearly 11% of Microsoft’s total quarterly revenue of $92.3 billion, highlighting the enormous financial ties that remain between the two companies even as they increasingly compete for the same customers .\n\n(Microsoft’s financial year begins in July, making the quarter ended September 30, 2026 the first quarter of its fiscal 2027.)\n\nFor the full 2026 fiscal year, revenue from OpenAI hit $24.1 billion. At its latest quarterly pace, Microsoft would pull in $40 billion annually from OpenAI-related arrangements.\n\nMicrosoft also reported $7.2 billion in outstanding receivables from OpenAI at the end of September, up from $6 billion at the end of June. That money represents amounts OpenAI owes for previous transactions, not additional revenue.\n\nIt’s not clear how much of Microsoft’s revenue from OpenAI came from revenue-sharing payments or Azure cloud computing services. TechCrunch has reached out for more information. In November 2025, TechCrunch reported , citing leaked documents, that Microsoft had received $865.8 million in net revenue-sharing payments from OpenAI during the first nine months of that year.\n\nOpenAI reportedly shares 20% of its revenue with Microsoft as part of a previous deal in which the software giant invested more than $13 billion in the AI startup. (Neither the AI lab nor Microsoft have publicly confirmed this percentage.) As part of an April 2026 agreement, OpenAI is on the hook to conitnue sharing revenue with Microsoft through 2030, subject to a cap, even as OpenAI is allowed to work with competing cloud providers.\n\nThe companies began loosening the ties of their once-exclusive partnership in October 2025, when Microsoft relinquished its hold on OpenAI to give the startup more freedom to partner with other cloud providers. In exchange, OpenAI committed to buying an additional $250 billion in Azure services as part of an October 2025 agreement.\n\nMicrosoft’s ownership stake in OpenAI has also declined slightly from about 25% in June to 24% in September. That continues a gradual decline from roughly 27% following the October 2025 recapitalization. Microsoft did not specify what caused the dilution."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-296cd14e15149103",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/28/microsoft-hits-10-quarters-of-record-breaking-revenue-in-a-row/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-28T21:25:30.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Microsoft hits 10 quarters of record- breaking revenue in a row",
+        "summary": "Whatever the future of AI might be, the current situation is still very good for Microsoft. The tech giant reported yet another record for quarterly revenue on Wednesday: $92.3 billion, a 19% increase over the year-ago quarter.",
+        "body": "Whatever the future of AI might be, the current situation is still very good for Microsoft. The tech giant reported yet another quarterly revenue record on Wednesday: $92.3 billion , a 19% increase over the year-ago quarter.\n\nMicrosoft has now reported record-breaking revenue for 10 quarters in a row .\n\nThis is profitable revenue, too. Microsoft reported that net income reached $36.6 billion, an increase of 32% on a GAAP basis, over the year-ago quarter.\n\nThe record-breaking income was largely driven on the strength of Microsoft Cloud, which reached $63.9 billion in revenue this quarter, an increase of 30% over the year-ago quarter, Microsoft said.\n\nMicrosoft has reorganized its business reporting into two basic segments: 1) Agents and Infra and 2) Devices and Consumer. On the flip side, revenue in Devices and Consumer was $15.5 billion, decreased of 3%, with Windows OEM and devices revenue falling 22% from the year-ago quarter.\n\nTrue, not all of Microsoft’s healthy cloud revenue can be attributed to AI. Microsoft 365 accounted for nearly $28 billion. But Azure brought in the most, at $33.2 billion. And again, not all of that is necessarily AI-related. Enterprises run all sorts of the traditional software and SaaS applications on Azure.\n\nStill, a good chunk of the revenue was from AI, because Microsoft also reported $10 billion in revenue from OpenAI . Despite branching out to AWS, Oracle, and others, OpenAI still runs a lot of its services on Microsoft’s cloud. (Anthropic runs on Azure as well.) Microsoft also said its “commercial remaining performance obligation increased 73% to $677 billion.” That represents future revenue committed under existing contracts of the AI labs.\n\nBut, like all the big cloud providers, Microsoft is also spending big to prepare to deliver on those commitments. Capital expenditures topped $45.2 billion, another all-time quarterly record."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-6298a128c1cb744b",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/28/the-new-macbook-pro-has-everything-i-wanted-minus-one-thing/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-28T20:59:42.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The new MacBook Pro has everything I wanted, minus one thing",
+        "summary": "Apple’s new MacBook Pro with PROLED XDR is an exciting upgrade that delivers nearly every feature I was hoping for, with just one exception. more…",
+        "body": "Apple’s new MacBook Pro with PROLED XDR is an exciting upgrade that delivers nearly every feature I was hoping for, with just one exception.\n\nI’ve been waiting a long time for the MacBook Pro with PROLED XDR. I haven’t used a Mac as my primary computer in years, but rumors about this new model made me think that might finally change.\n\nThe iPad Pro has been my main computer of choice since 2015, but lately I’ve grown increasingly curious about revisiting the Mac full-time.\n\nThis is largely due to Apple making the Mac, to me at least, a lot more exciting than it was in 2015. The Mac’s hardware and software are advancing in compelling new ways, and today’s new MacBook Pro brings an especially big leap.\n\nAs a longtime iPad Pro user, I’ve come to expect features like touch support and OLED in a relatively thin, lightweight device. I also love how iPadOS tends to advance in lockstep with iOS, a trend that has recently started extending to macOS too.\n\nUntil recently, it seemed like Apple’s latest and greatest tech—with the exception of pro-focused chips—has been in the iPad and iPhone.\n\nI don’t need an extremely powerful chip, as my computing needs are pretty basic. But I do value having a great display, touch support, and modern OS features like the Dynamic Island.\n\nThe MacBook Pro with PROLED XDR delivers those things. I’ve ordered one and can’t wait to give it a legitimate shot to be my full-time computer. But my biggest hesitation is the lack of cellular.\n\nI use cellular all the time on my iPad Pro. I tend to work from coffee shops and random outdoor spots for at least a few hours every day. And in my experience, public Wi-Fi options aren’t reliable enough for my needs.\n\nHaving a persistent cellular connection on my iPad is a killer feature. I very much wish Apple provided the option of cellular on the MacBook Pro too.\n\nI’m hoping that personal hotspot has become a lot more reliable since I last tried it. Apple does say its N1 wireless chip makes the feature better.\n\nAdditionally, I wonder if the need for cellular will be mitigated some by having a tablet-sized iPhone Duo in my pocket soon. So if I need to stop in the middle of nowhere and get work done quickly, maybe the Duo will suffice.\n\nIn any case, the MacBook Pro looks like a fantastic product regardless. It’s not for everyone, and the high price hurts, but I’m excited to give it a try.\n\nWhat are your thoughts on the new MacBook Pro? Would you use cellular if it was offered? Let us know in the comments.\n\n* Buy Mac with 15% discount from Apple refurbished"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-blog-d44fae008c0cb8a4",
+    "type": "news",
+    "sourceId": "applevis-blog",
+    "sourceName": "AppleVis Blog",
+    "sourceUrl": "https://www.applevis.com/blog",
+    "originalUrl": "https://www.applevis.com/blog/apple-introduces-updated-imac-macbook-pros-performance-connectivity-improvements-touchscreen",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-28T20:56:09.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-accesibilidad",
+      "windows",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple Introduces Updated iMac and MacBook Pros with Performance and Connectivity Improvements, a Touchscreen for the High-End MacBook Pro, and More",
+        "summary": "On the heels of introducing the 8th generation iPad Mini , Apple this week updated the iMac and MacBook Pro, bringing faster chips, improved connectivity, and, for the first time, a touchscreen to the MacBook Pro. iMac Featuring up to a 12-core CPU, the new iMac with M6, according to Apple's press release , delivers: Up to 2.5x faster performance in apps like Microsoft Excel, compared to iMac with M1, and up to 1.5x faster performance than M4. Up to 3.3x faster graphics performance for tasks including photo editing in Affinity, compared to iMac with M1, and up to 2x faster performance than M4. Up to 12x faster on-device AI performance for prompt processing in LM Studio, compared to iMac with M1, and up to 5x faster performance than M4. Up to 2x higher gaming performance with ray tracing compared to M4. Up to 2x faster SSD read and write performance. With the N1 wireless networking chip, the new iMac supports Wi-Fi 7 and Bluetooth 6, and up to a 2.5 gigabit Ethernet port, included with the power adapter. The iMac with M6 is made with 100 percent recycled aluminum in the stand, 100 percent recycled rare earth elements in all magnets, 100 percent recycled gold plating and tin solder in all Apple-designed circuit boards, and is manufactured with 40 percent renewable electricity. It can be pre-ordered from Apple in green, yellow, orange, pink, purple, blue, and silver starting today for a starting price of US $1499, and will begin shipping to customers on Friday, November 6. MacBook Pro In addition to the iMac, Apple updated the base 14-inch MacBook Pro with the M6 chip, N1 wireless networking chip, and up to 170 GBPS of unified memory bandwidth. The MacBook Pro with M6, according to Apple's press release delivers: Up to 13x faster time to first token performance for LLM prompt processing compared to the 13-inch MacBook Pro with M1, and up to 1.3x faster than the 14-inch MacBook Pro with M5. Up to 11.7x faster render performance with ray tracing in Blender compared to the 13-inch MacBook Pro with M1, and up to 1.3x faster than the 14-inch MacBook Pro with M5. Up to 3.3x faster image-processing performance in Affinity compared to the 13-inch MacBook Pro with M1, and up to 1.2x faster than the 14-inch MacBook Pro with M5. Up to 2.5x faster project build performance when compiling code in Xcode compared to the 13-inch MacBook Pro with M1, and up to 1.3x faster than the 14-inch MacBook Pro with M5. Apple also claims the 12-core GPU paired with the dual 16-core neural engine features up to 30 percent faster graphics performance compared to M5, as well as up to 25 percent faster performance for on-device AI workloads. The new MacBook Pro also features the N1 wireless networking chip, bringing Wi-Fi 7 and Bluetooth 6 support. The MacBook Pro with M6 is made with 45 percent recycled content overall, including 100 percent recycled aluminum in the enclosure, 100 percent recycled cobalt in the battery, and 100 percent recycled tantalum in multiple capacitors, and is manufactured with 60 percent renewable electricity across the supply chain. It can be pre-ordered from Apple starting today for a starting price of US $1999, and will begin shipping to customers on Friday, November 6. Apple has also introduced new high-end 14 and 16-inch MacBook Pros , bringing a thinner and lighter design, a redesigned thermal architecture, a new speaker design, hinge improvements, and, for the first time on a Mac, an OLED touchscreen and Dynamic Island. With the Dynamic Island, users will be able to view Live Activities, answer calls, and use Siri and Spotlight. At the time of publication, we do not know how VoiceOver or any other macOS accessibility tool will work with touch controls. The MacBook Pro with PROOLEDXDR display continues to use the M5 Pro and M5 Max chips, but it now features a redesigned thermal architecture that Apple claims better redirects air away from the display, helping to prevent it from getting warm to the touch while maintaining sustained performance. The MacBook Pro with PROOLEDXDR display is made with 55 percent recycled content overall, including 100 percent recycled aluminum in the enclosure, 100 percent recycled cobalt in the battery, and recycled tantalum in multiple capacitors, and is manufactured with 45 percent renewable electricity across the supply chain. It can be pre-ordered from Apple starting today for a starting price of US $2899, and will begin shipping to customers on Friday, November 6.",
+        "body": "On the heels of introducing the 8th generation iPad Mini , Apple this week updated the iMac and MacBook Pro, bringing faster chips, improved connectivity, and, for the first time, a touchscreen to the MacBook Pro.\n\nFeaturing up to a 12-core CPU, the new iMac with M6, according to Apple's press release , delivers:\n\nWith the N1 wireless networking chip, the new iMac supports Wi-Fi 7 and Bluetooth 6, and up to a 2.5 gigabit Ethernet port, included with the power adapter.\n\nThe iMac with M6 is made with 100 percent recycled aluminum in the stand, 100 percent recycled rare earth elements in all magnets, 100 percent recycled gold plating and tin solder in all Apple-designed circuit boards, and is manufactured with 40 percent renewable electricity. It can be pre-ordered from Apple in green, yellow, orange, pink, purple, blue, and silver starting today for a starting price of US $1499, and will begin shipping to customers on Friday, November 6.\n\nIn addition to the iMac, Apple updated the base 14-inch MacBook Pro with the M6 chip, N1 wireless networking chip, and up to 170 GBPS of unified memory bandwidth. The MacBook Pro with M6, according to Apple's press release delivers:\n\nApple also claims the 12-core GPU paired with the dual 16-core neural engine features up to 30 percent faster graphics performance compared to M5, as well as up to 25 percent faster performance for on-device AI workloads. The new MacBook Pro also features the N1 wireless networking chip, bringing Wi-Fi 7 and Bluetooth 6 support.\n\nThe MacBook Pro with M6 is made with 45 percent recycled content overall, including 100 percent recycled aluminum in the enclosure, 100 percent recycled cobalt in the battery, and 100 percent recycled tantalum in multiple capacitors, and is manufactured with 60 percent renewable electricity across the supply chain. It can be pre-ordered from Apple starting today for a starting price of US $1999, and will begin shipping to customers on Friday, November 6.\n\nApple has also introduced new high-end 14 and 16-inch MacBook Pros , bringing a thinner and lighter design, a redesigned thermal architecture, a new speaker design, hinge improvements, and, for the first time on a Mac, an OLED touchscreen and Dynamic Island. With the Dynamic Island, users will be able to view Live Activities, answer calls, and use Siri and Spotlight. At the time of publication, we do not know how VoiceOver or any other macOS accessibility tool will work with touch controls.\n\nThe MacBook Pro with PROOLEDXDR display continues to use the M5 Pro and M5 Max chips, but it now features a redesigned thermal architecture that Apple claims better redirects air away from the display, helping to prevent it from getting warm to the touch while maintaining sustained performance.\n\nThe MacBook Pro with PROOLEDXDR display is made with 55 percent recycled content overall, including 100 percent recycled aluminum in the enclosure, 100 percent recycled cobalt in the battery, and recycled tantalum in multiple capacitors, and is manufactured with 45 percent renewable electricity across the supply chain. It can be pre-ordered from Apple starting today for a starting price of US $2899, and will begin shipping to customers on Friday, November 6."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-8b1624f0998e55dc",
     "type": "news",
     "sourceId": "the-verge",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1019809/apple-touchscreen-macbook-pro-la-keynote-event-live-blog",
+    "originalUrl": "https://www.theverge.com/tech/1020811/alphabet-google-earnings-q3-2026",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-28T16:33:32.000Z",
+    "publishedAt": "2026-10-28T20:22:26.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google says its investments in AI are driving more searches",
+        "summary": "Google parent company Alphabet says that its AI investments are leading to a big growth in searches year-over-year, as noted in its Q3 2026 earnings today. \"Our AI investments are driving overall Search query growth, including commercial queries,\" CEO Sundar Pichai says in a statement. \"In fact, our year-over-year query growth rate is the highest […]",
+        "body": "Google parent company Alphabet says that its AI investments are leading to a big growth in searches year-over-year, as noted in its Q3 2026 earnings today .\n\n\"Our AI investments are driving overall Search query growth, including commercial queries,\" CEO Sundar Pichai says in a statement. \"In fact, our year-over-year query growth rate is the highest it's been in the last five years.\"\n\nAlphabet's consolidated revenues for the quarter were $127.6 billion, up 25 percent year-over-year, with its \"Google Search & other\" revenues up 12 percent year-over-year. Google Cloud revenue was also up 103 percent year-over-year to $30.7 billion. Alphabet also …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-d66bb061c2034620",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1020785/microsoft-earnings-revenue-q1-2027",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-28T20:20:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows",
+      "programas-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Microsoft reveals strong cloud growth amid financial reporting overhaul",
+        "summary": "Microsoft just posted the first quarter of its 2027 fiscal financial results. The software maker made $92.3 billion in revenue and a net income of $33.6 billion during Q1. Revenue is up 19 percent, and net income has increased by 32 percent. It's a new financial year for Microsoft, so the company is changing up […]",
+        "body": "Microsoft just posted the first quarter of its 2027 fiscal financial results. The software maker made $92.3 billion in revenue and a net income of $33.6 billion during Q1. Revenue is up 19 percent, and net income has increased by 32 percent.\n\nIt's a new financial year for Microsoft, so the company is changing up how it reports its finances by splitting its businesses into two segments for the first time. Gone are the previous segments: Productivity and Business Processes, Intelligent Cloud, and More Personal Computing. It's now just Agents and Infra, and Devices and Consumer.\n\nAgents and Infra, which includes businesses like Azure, Microsoft …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-a735939cb82df997",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1021308/apple-touchscreen-macbook-pro-proled-xdr-fully-specced",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-28T20:12:44.000Z",
     "categories": [
       "tecnologia-general",
       "apple"
@@ -16,9 +165,173 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Touchscreen MacBook live blog: On the ground at Apple’s launch event",
-        "summary": "Apple has already had a busy week. On Monday, it announced a new iPad Mini with an upgraded OLED display, and on Tuesday, we got M6 chip upgrades for the MacBook Pro and iMac. The Macs are the definition of iterative updates - they're quiet refreshes that look just like their direct predecessors. But today […]",
-        "body": "Apple has already had a busy week. On Monday, it announced a new iPad Mini with an upgraded OLED display , and on Tuesday, we got M6 chip upgrades for the MacBook Pro and iMac . The Macs are the definition of iterative updates - they're quiet refreshes that look just like their direct predecessors. But today should be a whole lot more interesting.\n\nAt an event in Los Angeles, Apple is expected to debut a revamped MacBook Pro with a touchscreen display . This would be the first touchscreen on a Mac (not counting the beleaguered Touch Bar ). Touchscreen laptops are something Apple executives have criticized for about as long as the iPad has existe …\n\nRead the full story at The Verge."
+        "title": "Apple charges $14,549 for a fully specced touchscreen MacBook Pro",
+        "summary": "With an OLED display and touchscreen capabilities, it's no surprise that the new MacBook Pro Apple announced today is more expensive than the MBP announced earlier this year. But upgrading the base models that start at $2,899 for the 14-inch, and $3,399 for the 16-inch, with every premium hardware option that Apple offers pushes those […]",
+        "body": "With an OLED display and touchscreen capabilities , it's no surprise that the new MacBook Pro Apple announced today is more expensive than the MBP announced earlier this year . But upgrading the base models that start at $2,899 for the 14-inch, and $3,399 for the 16-inch, with every premium hardware option that Apple offers pushes those prices to an eye-watering $14,249 and $14,549, respectively.\n\nBoth of those premium configurations include the M5 Max chip with an 18-core CPU and 40-core GPU, $150 worth of nano-texture glass, 128GB of memory that adds an extra $2,000, and 16TB of storage which is the real budget breaker here thanks to the ong …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-63b8955a3cd4ee90",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/28/hacker-stole-personnel-data-about-thousands-of-homeland-security-employees-including-cbp-and-ice-agents/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-28T20:01:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Hacker stole personnel data about thousands of Homeland Security employees, including CBP and ICE agents",
+        "summary": "A hacker obtained personally identifiable information about more than 40,000 Homeland Security staffers, which has since been published online.",
+        "body": "Personally identifiable information belonging to thousands of U.S. Department of Homeland Security employees has been published online after a hacker stole reams of data in a previously undisclosed breach at the government department earlier this year.\n\nThe breach includes names, job titles, and work contact information, such as email addresses, cell phone numbers, and office locations, of more than 40,000 people who work for the federal department, including border and immigration agents, cybersecurity staffers, and senior department officials.\n\nA hacker who goes by the handle Department of Peace claimed they obtained the data from an Okta single sign-on system used by Homeland Security to allow employees and contractors across its various agencies to log in to its central network. The Okta system also contains IT and log-in records associated with the employees’ user account, including details about which systems and internal apps they are permitted to access.\n\nMore than half of the dataset — some 21,000 records — relate to employees with U.S. Customs and Border Protection (CBP), who work at airports and other ports of entry.\n\nThe data also contains records associated with another 10,000 employees of Immigration and Customs Enforcement (ICE) and its Homeland Security Investigations (HSI) unit, and just under a 1,000 employees who work at U.S. cybersecurity defense agency CISA.\n\nThousands of additional records relate to staff who work at the department’s headquarters and its other agencies, including U.S. Citizenship and Immigration Services and the Federal Protective Service.\n\n“They have our information, so it’s only fair that we have theirs,” said Department of Peace in a note left with the data, which TechCrunch has seen. The hacker did not respond to TechCrunch’s email requesting comment and with questions about how the breach was carried out.\n\nThis is the latest data breach to hit the U.S. government in recent months, following earlier hacks involving the theft of thousands of FBI agents’ personnel records and the personal information of millions of serving and former military service personnel from the Pentagon’s human resources unit . It’s also the second breach involving Homeland Security this year, after the same hacker claimed to have taken thousands of contracts between the department and the private sector, including defense contractors and surveillance vendors.\n\nThe latest batch of breached data, which appears authentic, offers a rare — albeit incomplete — view into the scale and operations of Homeland Security, whose deportations, arbitrary detentions, and killings of U.S. citizens under its leadership have become a key issue for voters ahead of the upcoming U.S. midterm elections.\n\nThe stolen Homeland Security data was provided to journalist and hacker maia arson crimew, who then shared a copy with DDoSecrets , a nonprofit collective that hosts leaked datasets in the public interest.\n\nTechCrunch verified a portion of the data as authentic by matching the names of several known Homeland Security employees against an offline copy of the database. The thousands of employee directory records appear to have been exfiltrated around mid-August, according to the timestamps on each person’s record. The number of leaked records is equivalent to about one-fifth of Homeland Security’s workforce, which totals around 220,000 staff .\n\nIt’s unclear whether the vulnerability that allowed the breach has been fixed or if Homeland Security is aware of the data theft.\n\nA spokesperson for Homeland Security did not immediately respond to TechCrunch’s request for comment about the breach.\n\nWhen reached, Okta said it was aware of this report. “Okta is secure, and we have no evidence our data or systems were compromised,” a spokesperson said.\n\nWhile the leaked data includes identifiable information about agents and officers, the dataset also reveals more about the surveillance technologies and cybersecurity tools that Homeland Security employees may be able to access. Critics have called for investigations into tech companies that fund or provide their technology to ICE.\n\nThe leaked data contains information about employees’ membership in user groups within the department’s Active Directory, a system that controls access to the department’s internal tools, services, and third-party offerings used for work.\n\nMost of the Homeland Security employees in the dataset were members of the user group that had access to Microsoft 365, the tech giant’s cloud service that hosts the agency’s emails and files, as well as user groups for accessing Adobe Acrobat, Citrix, and other typical desktop software.\n\nThe data also shows that around 4,500 users, including ICE agents and deportation officers, are members of a group called “Headspace_users.” Online therapy provider Headspace previously had an $82,500 federal contract with ICE that ended in 2023 to fund “mental health software required for ERO employees,” a reference to ICE’s deportation unit.\n\nA spokesperson for Headspace said the company has not provided any services to DHS or ICE since 2023.\n\nDozens of other user groups reference Penlink , a web surveillance company that makes technology it claims can track the location data of hundreds of millions of mobile devices. Penlink has had a contract with ICE for years. The user groups vary in size, from a handful of users in local Homeland Security offices around the country to more than 2,000 users across ICE’s HSI unit nationally. One group specifically references Penlink PLX, which the company says is used to capture and analyze “real-time intelligence” from phone calls, texts, web activity, and social media.\n\nA spokesperson for Penlink did not respond to a request for comment.\n\nOne user group also includes more than 200 CBP users associated with Mobile Fortify, a facial-recognition app used by both CBP and ICE agents to identify people and verify their information and immigration status .\n\nThe user groups also include several employees associated with ChatGPT access, including senior DHS officials, as well as other groups associated with investigations into the China-backed hacking groups known as Salt Typhoon and Volt Typhoon.\n\nResearchers and public information advocates say that the exposed data could provide valuable leads for investigations into alleged abuses by the Trump administration, such as identifying email addresses of agents that can be used in public records requests under the Freedom of Information Act.\n\n“Email addresses and phone numbers are indispensable tools for FOIA researchers, often making the difference between a vague records request that gets stonewalled and one that gets results,” said Ryan Shapiro, the executive director of transparency nonprofit Property of the People.\n\n“Given the Trump administration’s contempt for even basic transparency, the need for such tools is urgent,” said Shapiro.\n\nDDoSecrets co-founder and journalist Emma Best said that the exposed Homeland Security data will be a “catalyst for investigations, empowering journalists, Congressional inquiries, legal challenges, community action and Freedom of Information Act requests.”"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-31c8bed7808b1e4d",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/28/apple-introduces-new-power-adapters-for-mac-plus-extension-cable-travel-kit/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-28T19:50:59.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple introduces new power adapters for Mac, plus extension cable, travel kit",
+        "summary": "Today alongside the launch of the MacBook Pro with PROLED XDR, Apple has introduced four new accessories for Mac: two updated power adapters, a power extension cable, and a travel adapter kit. more…",
+        "body": "Today alongside the launch of the MacBook Pro with PROLED XDR, Apple has introduced four new accessories for Mac: two updated power adapters, a power extension cable, and a travel adapter kit.\n\nApple’s touchscreen-equipped MacBook Pro with PROLED XDR is the big focus of today. But alongside its unveiling, Apple has also introduced several power adapter accessories.\n\nNow available on the Apple Store are:\n\nThe 70W and 140W Power Adapters replace the previous models. The main thing that seems to have changed is that they’re compatible with AC Connector 2 accessories. These updated versions are now included with select MacBook Pro models.\n\nApple bringing back the World Travel Adapter Kit is welcome news. The old kit was discontinued after becoming incompatible with newer power adapters. The latest version includes five interchangeable AC plugs:\n\nAll of these accessories are available now and ship immediately.\n\nWill you be picking up any of Apple’s new Mac accessories? Let us know in the comments.\n\n* Buy Mac with 15% discount from Apple refurbished"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-b71a33ed229a1ddf",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2300235/openai-now-lets-you-text-your-dot-agent/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-28T19:15:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI now lets you text your Dot agent",
+        "summary": "The feature works with both iMessage and RCS messaging.",
+        "body": "The feature works with both iMessage and RCS messaging.\n\nWhen OpenAI debuted its Dot agents late last month, it promised users would eventually be able to text them to give them instructions. Now, nearly a month later, the company has begun rolling out a preview among US Pro users that allows you to do just that. With the new feature, OpenAI says you can send your Dot texts, photos and even voice memos. It also gives your Dot another avenue to proactively contact you with updates about tasks you've assigned to it.\n\nBy popular request, you can now text your dot.\n\nGive it a task to take off your plate or something to keep an eye on, using text, photos, or even voice notes. It will text you proactively with relevant updates.\n\nSafe, secure texting via iMessage or RCS. You're the only one who... pic.twitter.com/iuNd3aTCYc\n\n— ChatGPT (@ChatGPT) October 28, 2026\n\nTo set up your Dot for texting, open its profile in ChatGPT and select Texting . Over on your phone, ensure iMessage is enabled if you're on an iPhone, and RCS if your daily driver is an Android device. OpenAI says it partnered with Linq to provide messaging support, and did \"extensive\" penetration testing to ensure the feature is safe. \"You're the only one who can text your dot, and your dot can only text you,\" the company adds on X . Any information your Dot writes to its memory is shared across ChatGPT and text, meaning context carries over between different conversations.\n\nThe personal agent space is suddenly very hot after Anthropic joined last week with Claude Duet . In my testing, OpenAI's Dots are comparatively more polished. The fact that you can now text them is something I'm sure some people will appreciate. Using Claude Duet currently requires joining a waitlist that's only open to people in the US. Anthropic has said it plans to offer the agent to subscribers of its $20 per month Pro plan, which is not something you can say of Dots. They're currently not available to Plus tier users."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-40d7f4b7c5105660",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/28/all-new-macbook-pro-brings-back-beloved-design-feature-from-the-past/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-28T19:06:55.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "All-new MacBook Pro brings back beloved design feature from the past",
+        "summary": "Apple unveiled its MacBook Pro with PROLED XDR today, and the all-new model features the return of a beloved design feature: a glowing Apple logo on the lid. more…",
+        "body": "Apple unveiled its MacBook Pro with PROLED XDR today, and the all-new model features the return of a beloved design feature: a glowing Apple logo on the lid.\n\nOne of the MacBook’s most iconic design features in the past was its glowing Apple logo on the lid.\n\nAmong a sea of other laptops in coffee shops and offices around the world, the glowing Apple logo made the MacBook stand out.\n\nBut Apple started phasing out the illuminated logo in 2015 with its 12-inch MacBook. The non-glowing logo then spread to redesigns of the MacBook Pro and MacBook Air in the years that followed.\n\nToday though, the glowing Apple logo returns with the new MacBook Pro with PROLED XDR Display,\n\nHere’s a hands-on look via 9to5Mac’s Chance Miller:\n\nIt’s just one of the many changes with the all-new MacBook Pro, but it’s a significant one for longtime Apple users.\n\nFor a lot of users, the glowing logo represents a fond, nostalgic period in Mac computing.\n\nCEO John Ternus clearly knew this, as he teased the new feature in a video this morning.\n\nIts reintroduction in the MacBook Pro with PROLED XDR is a good sign that the illuminated logo could start spreading to other models in the future. Though it won’t happen right away, Apple is likely to bring back the glowing logo on redesigns of its other models in the years ahead.\n\nRead more : MacBook Pro with PROLED XDR vs MacBook Pro: Here’s every difference\n\nWhat do you think of the glowing logo returning to the MacBook lid? Let us know in the comments.\n\n* Buy Mac with 15% discount from Apple refurbished"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-f09b2636135490d1",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/10/google-announces-gemini-4-carbon-its-latest-frontier-ai-model-that-you-cant-use/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-28T18:47:27.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google announces Gemini 4 Carbon, its latest frontier AI model that you can't use",
+        "summary": "Gemini 4 Carbon is essentially a slightly better version of Argon.",
+        "body": "It's almost like Google's got something to prove after taking a break from releasing new frontier AI models earlier this year. Just two weeks after rolling out Gemini 4 Argon , Google has announced Gemini 4 Carbon . This isn't the Flash model equivalent we've been waiting for but, rather, is an improvement on Argon, and like that model, Google is working on a staged release that could take a while.\n\nStop me if you've heard this one before: Google says its latest AI model reaches a new threshold in coding, agentic tasks, and scientific analysis. It's so capable, in fact, that Google can't let you use it just yet.\n\nGemini 4 Carbon reportedly makes big gains in cybersecurity applications. Google says the model shows a \"significant leap\" in vulnerability detection, validation, and remediation. Carbon is also apparently twice as likely to generate code that is free of vulnerabilities versus Argon. Meanwhile, the Chrome team claims that Carbon is 10 times better at generating \"high-quality\" patches compared to non-Google models. Google also notes that Carbon has increased its score by 89 points on WebDev Arena , now ranking at number four on the leaderboard.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-889f41041d15d278",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gadgets/2026/10/amazon-adds-a-camera-to-its-best-sounding-smart-speaker-for-30-extra/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-28T18:05:22.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Amazon turns its most capable smart speaker into a smart camera, too",
+        "summary": "The Echo Studio with Home Camera can \"see and understand what's in front of the camera.\"",
+        "body": "Since debuting in 2019, Amazon's Echo Studio targeted users who wanted superior audio quality from their Alexa-based smart speaker. The latest Echo Studio adds another less-expected differentiator: an integrated camera.\n\nThe Echo Studio with Home Camera, released alongside a pile of other Alexa devices today, doesn’t have many audio upgrades over the standard Echo Studio. Each speaker has one 3.75-inch high-excursion woofer and three full-range drivers. They both support Dolby Atmos and Amazon’s proprietary algorithm for adding a surround sound-like effect to stereo audio. Per the devices’ product pages, the speakers have lossless HD audio, Advanced Room Adaptation, and features for fighting noise distortion. Amazon announced the Advanced Room Adaptaion today, saying that the feature “continuously tunes the sound to your space, automatically adapting to the room's acoustics.”\n\nBoth speakers have four-microphone arrays and the same AZ3 Pro processor that Amazon introduced a year ago . The processor has an AI accelerator for using Amazon's Alexa+ generative AI chatbot .\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-aef40fd303accbe5",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/cars/2026/10/cadillac-escalade-iq-review-4-tons-of-electric-american-luxury-on-wheels/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-28T17:55:45.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Cadillac Escalade IQ review: Huge battery, huge range, huge SUV",
+        "summary": "With more than 200 kWh, this luxury three-row can go 460 miles on a charge.",
+        "body": "“Please have at least 125 miles of range left when we pick it up.” That request from the people who look after the Cadillac press cars wasn’t going to be hard to honor. The electric Escalade IQ arrived with an indicated range of 440 miles (708 km), and with a full week of work to squeeze in, getting anywhere close to needing to recharge it seemed unlikely. With more than 200 kWh of lithium-ion battery between its axles, range is one thing the big electric Caddy needn’t worry about.\n\nDesigned and debuted during a time of greater EV optimism, the Escalade is Cadillac’s statement that swapping out a V8 for a pair of powerful electric motors is no compromise to its ambitions, even if the brand’s future will now include a mix of electric and combustion cars beyond 2030 . It shares a battery pack and much else with other full-size GM EVs we’ve tested: the Chevrolet Silverado EV , the GMC Sierra EV , and of course the divisive Hummer EVs . And like those trucks and SUVs, the Escalade is large and heavy—just small enough to fit into a standard parking space, with a curb weight sufficient to push it into the Class 3 truck category.\n\nSo, the side mirrors are flat, and there’s no formal EPA range—Cadillac says it achieves 460 miles (740 km) on the EPA test cycle—but there are plenty of airbags, even though the 9,046 lb (4,103 kg) curb weight does not require them. Yes, you did read that right, it does weigh 4 tons. And yes, the electric Escalade does weigh a third more than the last gas-powered one we tested .\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -48,102 +361,6 @@
     "media": null
   },
   {
-    "id": "the-verge-a5cab8aac77fe7d9",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1018096/apple-pro-and-tell-launch-event-news-announcements",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T16:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "All the news from Apple’s ‘Pro and tell’ event",
-        "summary": "Apple’s “Pro and tell” event kicks off at 1PM ET / 10AM PT on October 28th. The event comes just a couple of weeks after Apple debuted the HomeView, its first smart display, and a little over a month after it announced the iPhone Duo, its first foldable. Its next event could feature yet another […]",
-        "body": "Apple’s “Pro and tell” event kicks off at 1PM ET / 10AM PT on October 28th. The event comes just a couple of weeks after Apple debuted the HomeView , its first smart display, and a little over a month after it announced the iPhone Duo , its first foldable. Its next event could feature yet another first for Apple: a MacBook with a touchscreen.\n\nA few devices received updates in the days leading up to the event. Apple announced an updated iPad Mini with a larger OLED display on Monday. The iMac and entry-level MacBook Pro were refreshed with M6 chips on Tuesday. Both are likely to pop up at Wednesday’s event, but their early announcement clears the way for a touchscreen MacBook to be the star of the show.\n\nThis event will also continue a streak of product launches at Apple since John Ternus took over as its CEO on September 1st. So far, the flurry of new devices has also included the iPhone 18 Pro , new Apple Watches , the AirPods 5 , and the HomePod Mini 2 .\n\nFollow along here for all the latest news and updates."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-2f99ab40612dac26",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1020769/meta-updated-business-terms-delay-indefinitely",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T16:15:30.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta says it’ll probably delay its controversial new business terms again",
-        "summary": "Meta says it may push the implementation of its new business terms past November 20th as it faces backlash from publishers over concerns about AI training. In a post on X, Meta communications head Andy Stone said the company does \"not plan to make policy changes without a full consultation with industry groups and leaders.\" […]",
-        "body": "Meta says it may push the implementation of its new business terms past November 20th as it faces backlash from publishers over concerns about AI training. In a post on X , Meta communications head Andy Stone said the company does \"not plan to make policy changes without a full consultation with industry groups and leaders.\"\n\nThe new business terms, which were supposed to take effect on October 30th, initially appeared to give Meta permission to train its AI models on the news sites that use Facebook and Instagram. Meta later changed its policies to remove language indicating that it could \"train\" its products on content scraped from these si …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-dfa4839392a262ad",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/28/ai-execs-may-be-too-out-of-touch-to-build-for-the-general-public/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T15:53:52.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "AI execs may be too out of touch to build for the general public",
-        "summary": "Tech leaders are flaunting how out of touch they are when they brag about using AI to connect with their families.",
-        "body": "Former Yahoo CEO and early Google engineer Marissa Mayer is catching a lot of flack for how she uses AI. In an interview about her new app Dazzle, an AI assistant that learns from your camera roll, Mayer poses what she believes is an impressive flex for the product: it helped her come up with three bullet points about her ten-year-old daughter for a birthday presentation at school, describing her as “empathetic, creative, and an animal lover.”\n\nIt’s a vague description, like a generic horoscope — it could probably describe a lot of ten-year-olds.\n\nSome onlookers, like progressive activist Leah Greenberg, marveled that “the fact that Marissa Mayer would voluntarily disclose this to a reporter is a pretty good demonstration of how deeply the culture of Silicon Valley has diverged from the rest of humanity.”\n\nPerhaps Mayer drew so much backlash because we have repeatedly observed sheltered billionaires suggest that we outsource childrearing — one of life’s greatest tests of patience, humility, and kindness — to a computer that is incapable of understanding human emotion.\n\nWe’ve been primed for this frustration. Last year, OpenAI CEO Sam Altman told Bored Ape owner and late night host Jimmy Fallon on national television, “I cannot imagine … figuring out how to raise a newborn without ChatGPT.” The public didn’t love that comment, either, but Altman wasn’t phased by the negative feedback. A few months ago, he said on X that a “ cool use case ” of ChatGPT Work would be creating a podcast that talks about your kids’ upcoming birthdays or soccer games and “explain[s] your kids’ interests.” (He was brutally ratioed with comments like, “What if you just talked to your children?”)\n\nAfter publication, Mayer defended herself in a long X post . She claims she was not relying on Dazzle to explain her child to her, but rather, she was testing what her prototype could do — it resurfaced photos of “forgotten kindergarten projects,” like a “snake devenomer” or “sandcat playground,” illustrating her daughter’s creativity and care for animals.\n\nFair enough. But Mayer remarks in the same interview that people could also use her AI to outsource the mental load of “figuring out the theme for your child’s birthday party.” She says she’s used her app to plan a playdate for her daughter, book family activities on vacation, and decide what to be for Halloween. She even proposes that her AI assistant could coordinate plans with her husband’s AI assistant. When the reporter asks her if it’s depressing to imagine this “frictionless future… planned by AI,” Mayer replies, “I haven’t really thought that through.”\n\nThese leaders seem to write off the naysayers as part of a small, angry fringe group. Yet a Pew Research Center study reports that 50% of U.S. adults think that AI will reduce people’s ability to form meaningful relationships. Only 5% of respondents said AI would make it easier to build these connections.\n\nMeta CEO Mark Zuckerberg, however, joins his Silicon Valley kin in envisioning a world where our social needs are met via AI.\n\n“The average American I think has, it’s fewer than three friends, three people they’d consider friends, and the average person has demand for meaningfully more, I think it’s like 15 friends,” Zuckerberg said last year on a podcast . “The average person wants more connectivity, connection than they have.”\n\nZuckerberg predicts that it will become more socially acceptable to outsource our emotional needs to AI therapists or even AI romantic partners. “There are all these things that are better about physical connections when you can have them,” he added. “But the reality is that people […] feel more alone a lot of the time than they would like.”\n\nZuckerberg goes on to explain how virtual reality embodiments of AI avatars are only growing more realistic. Meta seems to be more keen on improving our relationships with these approximations of humans, rather than between the actual billions of humans who use its platforms each day.\n\nMaybe part of this stems from the culture of the tech industry, which prizes efficiency. People try to biohack their own bodies by optimizing their sleep schedules with health trackers or injecting unregulated “ peptide stacks ” to maximize their productivity.\n\nIf you’re building electric vehicles or computer chips, then sure, efficiency is a clear North Star. But our relationships with other people are not a tech product that we’ve been challenged to ship with little capital as possible. Human relationships are inherently messy, but our connections with one another can be what gives our lives meaning. When we delegate those interactions to computers, we surrender the difficult, yet fulfilling experience of being people."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-f44dfb3f7abc86e9",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/28/south-koreas-financial-industry-hit-by-fresh-wave-of-cyberattacks/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T15:41:18.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "South Korea’s financial industry hit by fresh wave of cyberattacks",
-        "summary": "South Korea’s financial institutions have been hit by another wave of cyberattacks, highlighting the growing risk of AI-driven hacking in Asia.",
-        "body": "South Korea’s financial institutions have been hit by another wave of cyberattacks, highlighting the growing risk of AI-driven hacking in Asia. The latest incidents affect brokerages Daishin Securities and Mirae Asset Global Investments, as well as the crypto exchange Bithumb.\n\nThe incident comes roughly a month after a series of cyberattacks targeting South Korean financial institutions, raising concerns about vulnerabilities beyond just the country’s banking systems. Security researchers linked the September wave of attacks on South Korea to a suspected China-based hacker who relied on an AI penetration testing tool called Artex, though officials are still investigating the root cause of the latest breaches.\n\nAccording to a local news, Daishin reported a cyberattack that exposed the personal information of 38,490 customers, including names, email addresses, and mobile phone numbers. The company has notified affected customers, is cooperating with authorities in the investigation, and will compensate for any losses as required by law.\n\nMeanwhile, Mirae and Bithumb reported separate cybersecurity incidents on Wednesday, per local media , though neither has confirmed that customer data was taken.\n\nSouth Korea’s financial regulator has called for stronger cybersecurity measures following a string of attacks on financial firms and government agencies, per officials in Seoul on Wednesday. The country also plans to conduct security checks on dozens of IT systems in the private sector.\n\nYesterday, Japan reported a cybersecurity incident involving GMO Internet, following a series of attacks on its financial institutions. The wave of cyberattacks across Asia underscore growing cybersecurity challenges in the region, often as a result of years of weak cybersecurity; though, investigators have not established a connection between the incidents.\n\nSouth Korea’s Financial Services Commission (FSC), Daishin Securities, Bithumb and Mirae Asset Global Investments did not immediately respond to requests for comment."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "engadget-3ed192509ca1986a",
     "type": "news",
     "sourceId": "engadget",
@@ -162,102 +379,6 @@
         "title": "Audio Technica just released its first set of wireless StreamSet headphones",
         "summary": "This expands the lineup beyond XLR and USB-connected models.",
         "body": "This expands the lineup beyond XLR and USB-connected models.\n\nAudio Technica just released a wireless model in its popular StreamSet category of headphones . The new ATH-M50xSTS-WL is the very first wireless version in the lineup.\n\nThese cans don't connect via Bluetooth, as StreamSet headphones are primarily intended for content creators, streamers and gamers, all of which require ultra-low latency. They connect via 2.4GHz, so there's a USB transceiver that hooks up to PCs and gaming consoles like the PS5 and Switch 2. The battery lasts for around 24 hours and is charged via USB. The headphones can still work while being charged, via a wired connection.\n\nOtherwise, these are extremely similar to the original wired ATH-M50xSTS headphones. They feature microphones based on the company's 20 Series and audio drivers pulled from the ATH-M50x professional monitor headphones.\n\nThe headset includes adaptive noise cancellation with two selectable levels. The company says an algorithm \"continuously monitors audio input to prioritize the user's voice over ambient sounds,\" which includes stuff like PC fans and air conditioners.\n\nThere's a cardioid condenser microphone on a flexible boom arm that instantly mutes audio when flipped up. It uses the same 45mm audio drivers found in the ATH-M50x studio monitor headphones. I've used that particular and iconic model and can attest they do indeed sound great.\n\nThey ship with two types of interchangeable earpads. There's a pair for better sound quality, which is great for listening to music, and another designed with breathable mesh for long streaming and gaming sessions. The ATH-M50xSTS-WL headphones are available right now and cost $299."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-fa5081e18fe97c3f",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/28/voice-ai-in-vogue-nvidia-releases-new-open-transcription-model/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T15:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Voice AI in vogue: Nvidia releases new open transcription model",
-        "summary": "Nvidia just released a free speech-to-text model that can transcribe up to 40 languages, but it only works on recordings, not live audio, so it’s a big step for meeting and medical transcription tools while still leaving real-time use to rivals like ElevenLabs.",
-        "body": "Posted:\n\nNvidia on Wednesday released Nemotron 3.5 Transcribe , a free, open-weight model that transcribes audio in up to 40 languages. It also released version 2 of Granary, its open source speech dataset.\n\nNvidia boasts that Nemotron 3.5 can translate 31 languages to and from English, handle recordings up to an hour long, and tell up to eight speakers apart. It claims to beat rivals on benchmarks, including Hugging Face’s Open ASR Leaderboard .\n\nThese tools target developers building apps for business meetings and medical transcription, two of AI’s most established footholds in the workplace. Nvidia says developers can use the model, the updated Granary dataset, and tools like its NeMo Speech model to customize apps to recognize an industry’s jargon in each language. One drawback: Transcribe works with recorded audio, not livestreams.\n\nStill, the company promises Transcribe, at 30 billion parameters, can run on a single chip, from the Jetson AGX Thor robotics controller and DGX Spark chip powering new laptops , to Blackwell datacenter chips. It joins Nvidia’s open-weight voice models, including the super small yet powerful Parakeet (1.1 billion parameters).\n\nNvidia’s latest voice entry comes during a busy period of AI voice releases: Mistral shipped Voxtral 3 earlier this month; ElevenLabs launched Realtime for instant speech in voice agents; and Salesforce released Launa-Omni, its voice model."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-058307c4aa072aef",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/28/ios-27-2-just-upgraded-apple-photos-in-two-ways-heres-whats-new/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T14:40:17.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27.2 just upgraded Apple Photos in two ways, here’s what’s new",
-        "summary": "Apple Photos got a lot of new features in iOS 27 last month, but this week’s release of iOS 27.2 brought even more improvements. Here’s what’s new. more…",
-        "body": "Apple Photos got a lot of new features in iOS 27 last month, but this week’s release of iOS 27.2 brought even more improvements. Here’s what’s new.\n\nShared Albums are among my favorite features in the Photos app. I don’t post on social media often, but I love using Shared Albums because they provide a social media-style experience in a private way that lives right inside Photos.\n\niOS 27 brought a variety of big improvements to Shared Albums. And now iOS 27.2 has introduced four more.\n\nPer Apple’s release notes , here’s what’s new:\n\nTo get these new features, you’ll need to make sure your Shared Albums have been upgraded for iOS 27.\n\nOne complication introduced by AI is that it can be hard to know if an image is real or AI-generated.\n\nThis challenge extends to AI-edited photos too, which might have key details changed by tools like iOS 27’s Extend, Reframe, and Clean Up features in Photos.\n\nApple is tackling the issue with its new Reference Image feature in iPhone 18 Pro, and also through a software enhancement that rolled out in iOS 27.2.\n\nPer Apple , its latest software update adds the following:\n\nSupport for SynthID watermarking to help identify whether an image was generated or modified with generative tools in Photos and Image Playground\n\nSynthID is a cross-platform standard developed by Google that embeds unnoticeable digital watermarks into AI-modified photos. Users won’t see a visible watermark, but anyone who checks for a SynthID marker will find it.\n\nWhat do you think of the latest Apple Photos changes in iOS 27.2? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-0c67953ebc282cb2",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/28/apple-watch-series-12-ultra-4-adding-two-new-features-soon/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T14:08:34.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple Watch Series 12 and Ultra 4 adding two new features soon",
-        "summary": "Apple Watch Series 12 and Apple Watch Ultra 4 are here, and later this year they’ll get even more powerful with two new features: Siri Recap and Live Rewind. Here are the details. more…",
-        "body": "Apple Watch Series 12 and Apple Watch Ultra 4 are here, and later this year they’ll get even more powerful with two new features: Siri Recap and Live Rewind. Here are the details.\n\nSiri AI is a major tentpole of watchOS 27, and later this year there’s a powerful Siri addition coming to Apple Watch Series 12 and Ultra 4. It’s called Siri Recap.\n\nHere’s what it does, per Apple :\n\nSiri Recap ambiently takes notes on your conversations throughout your day and creates high-level Apple Intelligence–generated summaries that you can use later to jog your memory, so you can stay present in the moment. Your summaries auto-delete after 7 days if you choose not to save them.\n\nSiri Recap seems like the kind of feature that no one was necessarily asking for, but it could add valuable utility if the privacy protections are done right. You can read the finer details around privacy in Apple’s white paper here .\n\nLive Rewind is another ‘Audio Intelligence’ feature coming to the new Apple Watch models later this year. It provides a more direct way to revisit something that was just said.\n\nHere’s how it works per Apple :\n\nLive Rewind recalls what was just said in the last 15 seconds by showing a text snippet on your Apple Watch when you double-press the Digital Crown, so you can catch something you missed or are less familiar with. You can ask Siri about the content of the snippet or simply save it to the Siri app.\n\nLike Siri Recap, Apple has in-depth details on Live Rewind’s privacy protections outlined here . For me personally, the utility of Live Rewind seems less obvious beyond accessibility needs. But I’m interested to see how it works in its finished form.\n\nApple is expected to introduce both new Apple Watch features in watchOS 27.3, which should launch in beta very soon.\n\nWhat do you think of the Siri Recap and Live Rewind features coming to Apple Watch? Let us know in the comments.\n\nYou can buy Apple Watch Series 12 and Apple Watch Ultra 4 discounted from Amazon, or shop older models on Apple’s refurbished store ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-20b5f047da27e629",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/28/shrinking-season-4-just-got-exciting-release-timing-update/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T13:52:54.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Shrinking season 4 just got exciting release timing update",
-        "summary": "Shrinking just aired season 3 earlier this year, but all signs point to a refreshingly quick return, as one of the show’s stars just confirmed season 4 is officially done filming. more…",
-        "body": "Shrinking just aired season 3 earlier this year, but all signs point to a refreshingly quick return, as one of the show’s stars just confirmed season 4 is officially done filming.\n\nTV’s streaming era has brought a lot of advantages over linear TV, but undoubtedly one drawback is that shows tend to have much longer waits between seasons.\n\nTraditional broadcast television usually schedules shows to premiere in the fall and run through the spring, then return after a short summer break for a new season in the fall.\n\nIn streaming, viewers are shocked when a show comes back after only a year.\n\nApple TV has slowly been getting better at this. Slow Horses is the best example, but another recent one is Your Friends & Neighbors . And we’re seeing signs of other series getting quicker turnarounds between seasons, including Shrinking.\n\nShrinking aired its season 3 finale this April, and by May we heard that filming on season 4 was about to start.\n\nNow Jessica Williams, the star who plays Gaby, has confirmed that season 4 has officially wrapped production. This means the series will almost certainly return in early 2027.\n\nOn a show like Shrinking, post-production is a much quicker process than with series that are heavy on CGI and other special effects. So we could see Shrinking season 4 premiere in late January, exactly one year after season 3 debuted.\n\nMore conservatively, the show returning by spring 2027 seems a safe bet.\n\nYou can watch Shrinking seasons 1-3 here on Apple TV .\n\nApple TV is available for $14.99 per month , or you can get it discounted through the Apple One bundle ."
       }
     },
     "media": null
@@ -282,29 +403,6 @@
         "title": "Dugout Dice",
         "summary": "Roll dice. Build your lineup. Make the playoffs. Win a championship. Beat the target score before three outs to advance to the next inning. Win games, make the playoffs and win championships to unlock new players, Superfan boosts, cheat menus and more. Fall short, and your season is over. Every season is a chance to build something different. Recruit players with special abilities, add Superfan boosts, and upgrade your dice. Discover powerful combinations, stack multipliers, and turn modest hits into massive payoffs with one-time consumables and clever bench management. **BUILD YOUR WINNING COMBO** - Draft players with abilities that stay with you during the season. - Combine Superfan Boosts, dice upgrades, and items for powerful combos. - Face pitchers and boss closers who challenge your best strategies. - Unlock new players, Boosts, and ballparks as you progress. - Take on a fresh Daily Diamond challenge to earn an advantage during your season. - Enjoy turn-based gameplay at your own pace. - Play offline and pick up right where you left off. **FREE TO PLAY. NO ADS. EVER.** An optional, one-time in-app purchase unlocks customization and fun extras.",
         "body": "Roll dice. Build your lineup. Make the playoffs. Win a championship. Beat the target score before three outs to advance to the next inning. Win games, make the playoffs and win championships to unlock new players, Superfan boosts, cheat menus and more. Fall short, and your season is over. Every season is a chance to build something different. Recruit players with special abilities, add Superfan boosts, and upgrade your dice. Discover powerful combinations, stack multipliers, and turn modest hits into massive payoffs with one-time consumables and clever bench management. **BUILD YOUR WINNING COMBO** - Draft players with abilities that stay with you during the season. - Combine Superfan Boosts, dice upgrades, and items for powerful combos. - Face pitchers and boss closers who challenge your best strategies. - Unlock new players, Boosts, and ballparks as you progress. - Take on a fresh Daily Diamond challenge to earn an advantage during your season. - Enjoy turn-based gameplay at your own pace. - Play offline and pick up right where you left off. **FREE TO PLAY. NO ADS. EVER.** An optional, one-time in-app purchase unlocks customization and fun extras."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-33b5e5f3990fefac",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2299245/the-amazon-echo-studio-new-camera-tell-you-how-to-play-monopoly/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T12:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The Amazon Echo Studio's new camera can check on your dog or tell you how to play 'Monopoly'",
-        "summary": "Amazon has added a camera to its Echo Studio speaker as part of its big Echo refresh.",
-        "body": "It retains the high-quality sound and Alexa+ features of the original model.\n\nWe may receive a commission on purchases made from links.\n\nAmazon has significantly reworked its Echo Studio speaker as part of its big smart speaker refresh. As its new name suggests, the Echo Studio with Home Camera now has a built-in camera that can see everything in front of it. At the same time, it retains the \"powerful audio architecture\" of the Echo Studio designed to deliver high-quality Dolby Atmos sound and provide Alexa+ capability.\n\nThe addition of a camera adds significant functionality to the Echo Studio. The smart speaker can relay video to Live View in the Alexa app, letting you check on your cat or see if you left the lights on. It can also use Alexa+ to help you out with everyday tasks, like reordering cereal or telling you the rules for a board game.\n\nEcho Studio with Home Camera can also serve as a webcam for personal or business video calls. At a demo event in New York City, Amazon's head of device Panos Panay used the device to call his father, and Engadget's Cherlynn Low confirmed it was working by \"waving aggressively in the background,\" she said. The camera on the Studio captured the event feed (complete with aggressive waving), while a connected Fire TV displayed Panay's parents.\n\nSince Amazon has other (cheaper) Home Camera devices like the Echo Show 5 , the company emphasized that the Home Studio version's main strength was still sound quality. It offers the same high-excursion woofer for \"deep, immersive\" bass, three full-range drivers for rich midrange and highs, plus Dolby Atmos for spatial audio.\n\nA neat new audio trick is Advanced Room Adaptation that continuously tunes the sound to your space by adapting to the room's acoustics. Another called Adaptive Volume adjusts to where you are so music and podcasts maintain the same relative volume as you move around a room.\n\nThe Echo Studio with Camera is now available for $250 , a premium of $30 over the regular Echo Studio. The latter (from 2025) remains available for $220 if you want high-quality audio but have no need for the camera feature."
       }
     },
     "media": null
@@ -354,78 +452,6 @@
         "title": "Real world",
         "summary": "Welcome to Real World, created by NBM Studios! In this game, players are thrust into a 3D world full of danger and excitement. As a…",
         "body": "Published 28 October 2026 by Nr Witta Draco\n\nWelcome to Real World , created by NBM Studios! In this game, players are thrust into a 3D world full of danger and excitement. As a blind player, you must rely on your other senses and quick reflexes to navigate the environment and take down your enemies.\n\nWith a variety of weapons at your disposal, including wands for casting spells, you can hunt other players and animals, as well as dragons. If you are lucky enough to defeat the fearsome dragon, you will be rewarded with valuable items and TL, the in-game currency. But beware: the dragon respawns after 30 minutes, giving other players the chance to challenge it.\n\nIn addition to intense player-vs-player combat, the game also offers a variety of missions and challenges to complete. You can rob banks and palaces, steal valuable items, and earn extra TL. You can also take on mafia missions and defeat gangsters to earn even more rewards. As you progress through the game, you can even purchase your own hotel and use it as a base of operations. With a dynamic and constantly changing world, no two games are ever the same.\n\nThe adventure does not stop there. In Real World, players can also team up with friends and form clans to take on even more challenging missions and quests. For players who want to take their gameplay further, the game also offers a range of paid items and paid accounts that can provide additional advantages in battle.\n\nYou can create tickets to request new features or report bugs, and even marry other players if you choose. Whether you prefer to go it alone or fight alongside your clan, the choice is yours. Join the adventure and see if you have what it takes to survive in this thrilling game for blind players!\n\nFree or paid:\n\nAccessibility and User Comments:\n\nReal world is an audio-based game designed with accessibility in mind. It includes a built-in screen reader, so TalkBack is not required while playing.\n\nYou can explore different maps, purchase weapons and other items from the in-game store using the game’s currency, and discover different areas featuring animals and other elements.\n\nThe app’s user interface is accessible, with no unlabeled buttons reported. The game is easy to use once you learn its touchscreen gestures.\n\nLast Tested App version and Android version:\n\n0.8.5. Android 17\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-c3019e99d6af10b7",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/apple/2026/10/apple-refreshes-the-imac-entry-level-macbook-pro-with-the-m6-chip/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-27T22:37:30.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple refreshes the iMac, entry-level MacBook Pro with the M6 chip",
-        "summary": "Additionally, the N1 chip brings Wi-Fi 7 and Bluetooth 6.",
-        "body": "Apple has announced refreshes for the iMac and the entry-level, 14-inch MacBook Pro . Both machines are getting the M6 chip, which was introduced in the Mac mini several weeks ago.\n\nThe M6 is split into two variants for the iMac. Picking the \"M6 chip with two Thunderbolt ports\" option gets you a 10-core CPU and a 10-core GPU, whereas picking \"M6 chip with four Thunderbolt ports\" gets you 12 cores for each, instead. The two-port variant maxes out at 24 GB of RAM and 1TB of storage, whereas the four-port one maxes out at 32GB of RAM and 2TB of storage.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-92fb77519bc984fc",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/tech-policy/2026/10/no-human-at-the-helm-delaware-plan-would-let-ai-agents-run-entire-businesses/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-27T21:50:04.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "\"No human at the helm\": Delaware plan would let AI agents run entire businesses",
-        "summary": "Owners of AI-run firms would evade liability for \"reckless\" AI, US Rep. Comer says.",
-        "body": "A Delaware proposal to let companies be operated by AI agents would help the firms' human owners evade legal responsibility for reckless and harmful actions taken by the AI, US Rep. James Comer (R-Ky.) told Delaware Governor Matt Meyer in a letter yesterday.\n\nComer, chairman of the House Committee on Oversight and Government Reform, told Meyer that the committee \"seeks assistance obtaining documents related to your state administration’s efforts to establish a new form of corporate entity to be known as an Artificial Intelligence Company (AIC).\"\n\nComer said the proposal is ripe for abuse. \"We are concerned that Delaware’s AIC proposal could be used to protect powerful AI companies and their investors from responsibility for reckless harmful actions, while also protecting non-transparent forces seeking anticompetitive regulatory capture behind state AI initiatives,\" Comer's letter said.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-9aa1384e610371fa",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/10/anthropic-ipo-warns-its-ai-could-blackmail-people-become-sentient-end-humanity/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-27T21:31:14.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Anthropic IPO warns its AI could blackmail people, become sentient, end humanity",
-        "summary": "Seven potential AI nightmares pulled from Anthropic's 93-page \"Risk Factor\" tome.",
-        "body": "The Securities and Exchange Commission 's publication on Monday of Anthropic's S-1 form —ahead of a heavily anticipated initial public offering—has led to plenty of discussion of whether the company's quickly ballooning revenues will be able to overcome its even higher costs. But amid the numbers and forward-looking optimism about AI \"rapidly transform[ing] every sector of the global economy in ways greater than the impact of industrialization, electricity, semiconductors, and the internet,\" Anthropic also spends an inordinate amount of time in its S-1 laying out the myriad risk factors that could bring the company down.\n\nAcross 93 pages and over 70,000 words, Anthropic's S-1 \"Risk Factors\" section discusses literally hundreds of potential problems that could negatively impact its business in the coming years. Many of these potential risks are the kind of standard worries about competition, costs, customer acquisition, and potential regulation that almost any business must worry about. But some risks highlight interesting potential points of failure for Anthropic specifically and the hype-filled AI bubble more generally.\n\nAfter wading through Anthropic's book-length treatise on its greatest risks, we've narrowed the list to the seven most surprising, interesting, or thought-provoking potential problems. Consider this a far-from-comprehensive look at what potential Anthropic investors should keep in mind.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -1908,33 +1934,6 @@
         "title": "LiveComics",
         "summary": "LiveComics is a comic, manga, and manhwa reader that performs the page as audio rather than simply displaying it. Every speech bubble is voiced in…",
         "body": "Published 25 September 2026 by Matt T\n\nLiveComics is a comic, manga, and manhwa reader that performs the page as audio rather than simply displaying it. Every speech bubble is voiced in character, with a separate narrator, while each panel can include its own sound effects and score. The reader advances panel by panel as the scene plays, allowing a whole issue to be followed without seeing the screen.\n\nThe app streams a free shelf of classic public-domain issues. Readers can also import their own CBR and CBZ files on the web and read them on the phone.\n\nA free account covers the core service with no card required. A paid storage tier is available through the website, with no in-app purchases.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nTested with TalkBack. A comic is a purely visual medium, and this app performs the whole issue as audio: every line is voiced in character with a separate narrator, the drawn sound effects actually sound, and a score runs under the scene, so a complete story can be followed with the screen off. On navigation, the library, the store, the menus and the reader controls all work without a mouse and report themselves to the screen reader, and cover tiles are real buttons rather than tappable images. Turning a panel announces your position and nothing else, for example \"page 3, panel 5 of 40\", and that silence is deliberate so the screen reader does not talk over the narration. The panel's own words are available separately, in a hidden region named \"Panel text\" holding the description, the dialogue line by line and the drawn sound lettering; nothing in it is ever announced on its own, so a braille display can read it without fighting the audio. Dialogs take focus when they open and hand it back when they close, Escape closes them, screen changes are announced politely because the app never reloads the page, and segmented controls report which option is selected. Automated checks are clean, with axe reporting 0 serious or critical issues, though that is a floor rather than a claim about real use. For low vision, the reader crops to a single panel, fills the screen with it and then advances on its own as the scene plays, which is magnification you do not have to drive, with no pinching and no hunting for the next balloon. Known issues and limitations, stated plainly: the \"Panel text\" region is easy to miss, because it never announces itself and nothing in the reader tells you it is there; Tab is not trapped inside dialogs; the library's medium filter (All, Comics, Manga, Manhwa) does not report which option is currently selected; there is no audio-first onboarding, so signing up and importing a file still assume you can work an ordinary form; the collision between the screen reader and the narration has never been deliberately tested across a range of devices, so we cannot promise the ducking behaves the same everywhere; and NVDA on Windows and iOS VoiceOver have never been run at all, so with the phone app loading the same code as the website, Windows behaviour in particular is unverified.\n\nLast Tested App version and Android version:\n\nSamsung Galaxy Z Fold 7, Android 16\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-blog-888f90102a766838",
-    "type": "news",
-    "sourceId": "applevis-blog",
-    "sourceName": "AppleVis Blog",
-    "sourceUrl": "https://www.applevis.com/blog",
-    "originalUrl": "https://www.applevis.com/blog/apple-releases-watchos-2701-fix-unexpected-restarts-apple-watch-series-12-apple-watch-ultra-4",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-23T21:28:20.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-accesibilidad",
-      "apps-accesibles",
-      "programas-accesibles",
-      "sordoceguera"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple Releases watchOS 27.0.1 with fix for unexpected restarts on Apple Watch Series 12 and Apple Watch Ultra 4",
-        "summary": "Apple has today released watchOS 27.0.1 for Apple Watch Series 12 and Apple Watch Ultra 4, bringing a fix for an issue that caused the devices to restart unexpectedly. As watchOS 27.0.1 was not distributed to external testers prior to its release, we do not have any information on whether it contains any accessibility fixes for blind, deaf blind, or low vision users at the time of writing. However, as this update appears to have been released to address a specific issue on a small subset of devices, we do not expect it to contain any such fixes. watchOS 27.0.1 Release Notes (via 9to5Mac ) This update provides bug fixes for your Apple Watch including fixing an issue where Apple Watch may restart unexpectedly. How to Update watchOS 27.0.1 is available via Over-the-Air Update (Settings > General > Software Update) or by going to the Watch app on your iPhone and navigating to General > Software Update. To install the update, your Watch must be connected to its charger and have at least 50% battery power.",
-        "body": "Apple has today released watchOS 27.0.1 for Apple Watch Series 12 and Apple Watch Ultra 4, bringing a fix for an issue that caused the devices to restart unexpectedly.\n\nAs watchOS 27.0.1 was not distributed to external testers prior to its release, we do not have any information on whether it contains any accessibility fixes for blind, deaf blind, or low vision users at the time of writing. However, as this update appears to have been released to address a specific issue on a small subset of devices, we do not expect it to contain any such fixes.\n\nThis update provides bug fixes for your Apple Watch including fixing an issue where Apple Watch may restart unexpectedly.\n\nwatchOS 27.0.1 is available via Over-the-Air Update (Settings > General > Software Update) or by going to the Watch app on your iPhone and navigating to General > Software Update. To install the update, your Watch must be connected to its charger and have at least 50% battery power."
       }
     },
     "media": null

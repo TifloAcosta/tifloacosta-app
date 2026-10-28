@@ -11,7 +11,7 @@
         </intent>
     </queries>
     <application
-        android:label="TifloAcosta Nativa Pruebas"
+        android:label="${prototypeLabel}"
         android:theme="@android:style/Theme.Material.Light.NoActionBar"
         android:allowBackup="false"
         android:usesCleartextTraffic="false">

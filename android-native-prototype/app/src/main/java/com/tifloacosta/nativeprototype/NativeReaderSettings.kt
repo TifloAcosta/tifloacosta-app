@@ -32,6 +32,7 @@ import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.unit.dp
 import kotlin.math.roundToInt
 
@@ -78,9 +79,15 @@ fun ReaderCompactChoice(
     val index = selected.coerceIn(0, choices.lastIndex)
     TextButton(
         onClick = { onSelected(NativeReaderGestureSteps.wrapNext(index, choices.size)) },
-        modifier = Modifier.fillMaxWidth().semantics {
+        // Replace the button's merged text/click semantics with one clear
+        // TalkBack stop: accessible name, current value and actions.
+        modifier = Modifier.fillMaxWidth().clearAndSetSemantics {
             contentDescription = label
             stateDescription = choices[index]
+            onClick(label = if (english) "Choose next value" else "Elegir el siguiente valor") {
+                onSelected(NativeReaderGestureSteps.wrapNext(index, choices.size))
+                true
+            }
             if (choices.size > 1) {
                 customActions = listOf(
                     CustomAccessibilityAction(
@@ -131,9 +138,15 @@ fun ReaderCompactPosition(
     TextButton(
         enabled = count > 0,
         onClick = { if (index < last) onSelected(index + 1) },
-        modifier = Modifier.fillMaxWidth().semantics {
+        // One focusable reading-position control, never a separate
+        // unlabeled progress bar plus repeated explanatory text.
+        modifier = Modifier.fillMaxWidth().clearAndSetSemantics {
             contentDescription = label
-            stateDescription = "${index + 1} / ${count.coerceAtLeast(1)}"
+            stateDescription = "${index + 1} ${if (english) "of" else "de"} ${count.coerceAtLeast(1)}"
+            onClick(label = if (english) "Next reading unit" else "Siguiente unidad de lectura") {
+                if (index < last) onSelected(index + 1)
+                true
+            }
             if (count > 1) {
                 customActions = listOf(
                     CustomAccessibilityAction(

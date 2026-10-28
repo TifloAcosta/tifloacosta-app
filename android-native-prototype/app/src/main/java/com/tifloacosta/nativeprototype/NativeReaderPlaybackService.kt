@@ -130,7 +130,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
     private var speed = 1f
     private var voiceId = ""
     private var playing = false
-    private var resumeAfterFocus = false
+    private val focusRecovery = NativeReaderAudioFocusRecovery()
     private var remainingSleepMs = 0L
     private var lastTick = 0L
 
@@ -141,19 +141,18 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         handler.post {
             when (change) {
                 AudioManager.AUDIOFOCUS_LOSS -> {
-                    resumeAfterFocus = false
+                    focusRecovery.cancel()
                     pauseReading()
                 }
                 AudioManager.AUDIOFOCUS_LOSS_TRANSIENT,
                 AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> {
-                    resumeAfterFocus = playing
-                    pauseReading(releaseFocus = false)
+                    // TalkBack speech can cause multiple transient focus losses.
+                    // Do not erase the pending resume when already paused.
+                    focusRecovery.transientLoss(playing)
+                    if (playing) pauseReading(releaseFocus = false)
                 }
                 AudioManager.AUDIOFOCUS_GAIN -> {
-                    if (resumeAfterFocus) {
-                        resumeAfterFocus = false
-                        playReading()
-                    }
+                    if (focusRecovery.gained()) playReading()
                 }
             }
         }
@@ -161,7 +160,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
     private val becomingNoisy = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if (intent?.action == AudioManager.ACTION_AUDIO_BECOMING_NOISY) {
-                resumeAfterFocus = false
+                focusRecovery.cancel()
                 pauseReading()
             }
         }
@@ -382,6 +381,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         val request = AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
             .setAudioAttributes(audioAttributes)
             .setAcceptsDelayedFocusGain(false)
+            .setWillPauseWhenDucked(true)
             .setOnAudioFocusChangeListener(focusListener, handler).build()
         val response = mgr.requestAudioFocus(request)
         if (response == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
@@ -490,6 +490,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
     }
 
     private fun pauseReading(releaseFocus: Boolean = true) {
+        if (releaseFocus) focusRecovery.cancel()
         if (playing) {
             if (kind == "audio") {
                 positionMs = try { player?.currentPosition ?: positionMs }
@@ -514,7 +515,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
     }
 
     private fun stopReading() {
-        resumeAfterFocus = false
+        focusRecovery.cancel()
         pauseReading()
         player?.release()
         player = null
@@ -679,7 +680,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
     }
 
     private fun stopForegroundIfIdle() {
-        if (!playing && foreground) {
+        if (!playing && foreground && !focusRecovery.resumeOnGain) {
             stopForeground(STOP_FOREGROUND_DETACH)
             foreground = false
         }

@@ -10,12 +10,18 @@ android {
 
     defaultConfig {
         // Never use the installed Google Play application's identifier.
-        applicationId = "com.tifloacosta.nativeprototype"
+        applicationId = if (project.findProperty("tifloScreenLockTest") == "true")
+            "com.tifloacosta.nativeprototype.screenlock"
+        else "com.tifloacosta.nativeprototype"
         minSdk = 26
         targetSdk = 35
-        versionCode = 20
-        versionName = "0.20-voces-ajustes"
+        versionCode = 21
+        versionName = "0.21-pantalla-bloqueada"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders["prototypeLabel"] =
+            if (project.findProperty("tifloScreenLockTest") == "true")
+                "TifloAcosta Prueba Bloqueo"
+            else "TifloAcosta Nativa Pruebas"
         // Only the separate test APK may be restricted to Pixel arm64.
         if (project.findProperty("tifloArm64Only") == "true") {
             ndk { abiFilters.add("arm64-v8a") }

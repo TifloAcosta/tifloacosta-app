@@ -212,7 +212,8 @@ fun NativeReaderAudioScreen(
             ReaderCompactPosition(
                 label = if (english) "Skip 30 seconds" else "Saltar 30 segundos",
                 current = (position / 1000).coerceAtLeast(0),
-                count = (duration / 1000) + 1
+                count = (duration / 1000) + 1,
+                english = english
             ) { requestedSecond ->
                 val delta = if (requestedSecond > position / 1000) 30000 else -30000
                 command(NativeReaderPlaybackService.ACTION_SEEK, position + delta)
@@ -221,7 +222,8 @@ fun NativeReaderAudioScreen(
         ReaderCompactPosition(
             label = if (english) "Section" else "Sección",
             current = current,
-            count = segments.size
+            count = segments.size,
+            english = english
         ) { chosen ->
             if (active) command(NativeReaderPlaybackService.ACTION_SEGMENT, chosen)
             else NativeReaderPlaybackService.start(context, book.id,
@@ -231,7 +233,7 @@ fun NativeReaderAudioScreen(
         ReaderCompactChoice(
             if (english) "Playback speed" else "Velocidad de reproducción",
             listOf("0,75", "0,9", "Normal", "1,25", "1,5"),
-            speedIndex
+            speedIndex, english
         ) { chosen ->
             speedIndex = chosen
             prefs.edit().putInt("audio.speed." + book.id, chosen).apply()
@@ -243,7 +245,7 @@ fun NativeReaderAudioScreen(
                 "30 minutes", "45 minutes", "60 minutes")
             else listOf("Desactivado", "5 minutos", "10 minutos", "15 minutos",
                 "30 minutos", "45 minutos", "60 minutos"),
-            sleepIndex
+            sleepIndex, english
         ) { chosen ->
             sleepIndex = chosen
             if (active) command(NativeReaderPlaybackService.ACTION_SLEEP, sleepTimes[chosen])

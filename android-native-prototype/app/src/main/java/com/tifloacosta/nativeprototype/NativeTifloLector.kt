@@ -861,7 +861,7 @@ private fun NativeReadingScreen(
         // Swipe up/down on the position moves exactly one chosen unit.
         ReaderCompactChoice(
             if (english) "Move by" else "Avanzar y retroceder por",
-            steps, unitType
+            steps, unitType, english
         ) { chosen ->
             unitType = chosen
             prefs.edit().putInt("unit." + book.id, chosen).apply()
@@ -870,7 +870,8 @@ private fun NativeReadingScreen(
         ReaderCompactPosition(
             label = steps[unitType],
             current = currentIndex,
-            count = units.size
+            count = units.size,
+            english = english
         ) { chosen ->
             units.getOrNull(chosen)?.let { setOffset(it.start) }
         }
@@ -885,7 +886,8 @@ private fun NativeReadingScreen(
             listOf("0,75", "0,9", if (english) "Normal" else "Normal", "1,25", "1,5"),
             listOf(.75f, .9f, 1f, 1.25f, 1.5f).indices.minByOrNull { index ->
                 kotlin.math.abs(listOf(.75f, .9f, 1f, 1.25f, 1.5f)[index] - perBookRate)
-            } ?: 2
+            } ?: 2,
+            english
         ) { index ->
             perBookRate = listOf(.75f, .9f, 1f, 1.25f, 1.5f)[index]
             prefs.edit().putFloat("speed." + book.id, perBookRate).apply()
@@ -894,7 +896,7 @@ private fun NativeReadingScreen(
         }
         ReaderCompactChoice(
             if (english) "Sleep timer" else "Apagado automático",
-            sleepChoices, sleepIndex
+            sleepChoices, sleepIndex, english
         ) { index ->
             sleepIndex = index
             if (active) send(NativeReaderPlaybackService.ACTION_SLEEP, sleepMinutes[index])
@@ -936,15 +938,15 @@ private fun NativeReadingScreen(
         if (showVisual) {
             ReaderCompactChoice(
                 if (english) "Text size" else "Tamaño de letra",
-                (14..40 step 2).map { it.toString() }, textSize
+                (14..40 step 2).map { it.toString() }, textSize, english
             ) { textSize = it; prefs.edit().putInt("font." + book.id, it).apply() }
             ReaderCompactChoice(
                 if (english) "Line spacing" else "Interlineado",
-                listOf("Normal", "Cómodo", "Amplio"), lineSpacing
+                listOf("Normal", "Cómodo", "Amplio"), lineSpacing, english
             ) { lineSpacing = it; prefs.edit().putInt("spacing." + book.id, it).apply() }
             ReaderCompactChoice(
                 if (english) "Bold text" else "Texto reforzado",
-                listOf("No", "Sí"), boldText
+                listOf("No", "Sí"), boldText, english
             ) { boldText = it; prefs.edit().putInt("bold." + book.id, it).apply() }
         }
         TextButton(

@@ -868,18 +868,20 @@ private fun NativeReadingScreen(
             if (active) send(NativeReaderPlaybackService.ACTION_UNIT, chosen)
         }
         ReaderCompactPosition(
-            label = steps[unitType],
+            label = (if (english) "Reading position by " else "Posición de lectura por ") +
+                steps[unitType].lowercase(),
             current = currentIndex,
             count = units.size,
             english = english
         ) { chosen ->
             units.getOrNull(chosen)?.let { setOffset(it.start) }
         }
+        // Show and announce the same complete message: never replace the
+        // percentage with a content description that hides its value.
         Text(
-            (if (english) "Read: " else "Leído: ") + ReaderUnits.percent(displayOffset, fullText.length) + "%",
-            modifier = Modifier.semantics {
-                contentDescription = if (english) "Reading progress" else "Progreso de lectura"
-            }
+            (if (english) "Reading progress: " else "Progreso de lectura: ") +
+                ReaderUnits.percent(displayOffset, fullText.length) +
+                (if (english) "% read" else "% leído")
         )
         ReaderCompactChoice(
             if (english) "Speech speed" else "Velocidad de lectura",
@@ -932,9 +934,11 @@ private fun NativeReadingScreen(
         TextButton(
             onClick = { showVisual = !showVisual },
             modifier = Modifier.semantics {
-                stateDescription = if (showVisual) "Abierto" else "Cerrado"
+                stateDescription = if (showVisual)
+                    (if (english) "Expanded" else "Abierto")
+                else (if (english) "Collapsed" else "Cerrado")
             }
-        ) { Text("Visual") }
+        ) { Text(if (english) "Visual presentation" else "Presentación visual") }
         if (showVisual) {
             ReaderCompactChoice(
                 if (english) "Text size" else "Tamaño de letra",

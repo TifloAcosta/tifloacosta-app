@@ -35,11 +35,11 @@ jobs:
           ls "$ANDROID_HOME/platforms"
           ls "$ANDROID_HOME/build-tools"
       - name: Unit tests and debug APK only
-        run: gradle --no-daemon -p android-native-prototype :app:testDebugUnitTest :app:assembleDebug -PtifloArm64Only=true -PtifloGestureTest=true
+        run: gradle --no-daemon -p android-native-prototype :app:testDebugUnitTest :app:assembleDebug -PtifloArm64Only=true -PtifloReadingNavigationTest=true
       - name: Upload native prototype APK
         uses: actions/upload-artifact@v4
         with:
-          name: TifloAcosta-Nativa-Pruebas-ARM64
+          name: TifloAcosta-Lectura-Accesible-0.22-ARM64
           path: android-native-prototype/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 14

@@ -11,6 +11,8 @@ android {
     defaultConfig {
         // Never use the installed Google Play application's identifier.
         applicationId = when {
+            project.findProperty("tifloGestureTest") == "true" ->
+                "com.tifloacosta.nativeprototype.gestures"
             project.findProperty("tifloAudioFocusTest") == "true" ->
                 "com.tifloacosta.nativeprototype.audiofocus"
             project.findProperty("tifloScreenLockTest") == "true" ->
@@ -23,6 +25,8 @@ android {
         versionName = "0.21-pantalla-bloqueada"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["prototypeLabel"] = when {
+            project.findProperty("tifloGestureTest") == "true" ->
+                "TifloAcosta Prueba Gestos"
             project.findProperty("tifloAudioFocusTest") == "true" ->
                 "TifloAcosta Prueba Audio"
             project.findProperty("tifloScreenLockTest") == "true" ->

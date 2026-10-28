@@ -4,7 +4,7 @@ package com.tifloacosta.nativeprototype
 internal object ReaderNavigation {
     // These are genuine, recognizable section headings, not guessed "pages".
     private val heading = Regex(
-        "(?im)^[ \\t]*(?:cap[ií]tulo|chapter|secci[oó]n|section|parte|part|libro|book)\\s+" +
+        "(?ium)^[ \\t]*(?:cap[ií]tulo|chapter|secci[oó]n|section|parte|part|libro|book)\\s+" +
             "(?:[0-9]+|[IVXLCDM]+)(?:\\b|[.:])[^\\r\\n]{0,90}"
     )
 

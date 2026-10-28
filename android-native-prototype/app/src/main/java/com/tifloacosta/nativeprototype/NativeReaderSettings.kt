@@ -24,6 +24,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.ProgressBarRangeInfo
+import androidx.compose.ui.semantics.progressBarRangeInfo
+import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.semantics.semantics
@@ -54,6 +57,75 @@ fun ReaderAdjustableChoice(
             }
         )
     }
+}
+
+/**
+ * Single visual and TalkBack stop. Swipe up/down changes a discrete choice;
+ * tapping cycles for users who do not use a screen reader. No popup or pair
+ * of previous/next buttons is needed.
+ */
+@Composable
+fun ReaderCompactChoice(
+    label: String,
+    choices: List<String>,
+    selected: Int,
+    onSelected: (Int) -> Unit
+) {
+    if (choices.isEmpty()) return
+    val index = selected.coerceIn(0, choices.lastIndex)
+    TextButton(
+        onClick = { onSelected(NativeReaderGestureSteps.wrapNext(index, choices.size)) },
+        modifier = Modifier.fillMaxWidth().semantics {
+            contentDescription = label
+            stateDescription = choices[index]
+            if (choices.size > 1) {
+                progressBarRangeInfo = ProgressBarRangeInfo(
+                    index.toFloat(), 0f..choices.lastIndex.toFloat(),
+                    (choices.size - 2).coerceAtLeast(0)
+                )
+                setProgress { requested ->
+                    val next = requested.roundToInt().coerceIn(0, choices.lastIndex)
+                    if (next != index) onSelected(next)
+                    next != index
+                }
+            }
+        }
+    ) { Text("$" + "{label}: $" + "{choices[index]}") }
+}
+
+/**
+ * Reading position is intentionally stepped, not a percentage jump.
+ * TalkBack often sends large setProgress increments for long documents:
+ * each flick must move just one reading unit. Sighted users can tap to
+ * move forward, and use the position slider in More actions for long jumps.
+ */
+@Composable
+fun ReaderCompactPosition(
+    label: String,
+    current: Int,
+    count: Int,
+    onSelected: (Int) -> Unit
+) {
+    val last = (count - 1).coerceAtLeast(0)
+    val index = current.coerceIn(0, last)
+    TextButton(
+        enabled = count > 0,
+        onClick = { if (index < last) onSelected(index + 1) },
+        modifier = Modifier.fillMaxWidth().semantics {
+            contentDescription = label
+            stateDescription = "$" + "{index + 1} de $" + "{count.coerceAtLeast(1)}"
+            if (count > 1) {
+                progressBarRangeInfo = ProgressBarRangeInfo(
+                    index.toFloat(), 0f..last.toFloat()
+                )
+                setProgress { requested ->
+                    val next = NativeReaderGestureSteps.next(index, requested, last)
+                    if (next != index) onSelected(next)
+                    next != index
+                }
+            }
+        }
+    ) { Text("$" + "{label}: $" + "{index + 1} de $" + "{count.coerceAtLeast(1)}") }
 }
 
 /** Shared native defaults; book-specific overrides are edited inside each open book. */

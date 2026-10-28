@@ -320,7 +320,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                 )
             )
             ACTION_UNIT -> if (kind == "text") {
-                textUnit = intent.getIntExtra(EXTRA_VALUE, textUnit).coerceIn(0, 2)
+                textUnit = intent.getIntExtra(EXTRA_VALUE, textUnit).let { if (it in 0..2) it else 1 }
                 units = ReaderUnits.split(text, textUnit)
                 if (playing) speakCurrent()
                 persist()
@@ -361,7 +361,8 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
             }
         } else {
             text = store.read(found)
-            textUnit = prefs.getInt("unit." + id, prefs.getInt("unit", 1)).coerceIn(0, 2)
+            textUnit = prefs.getInt("unit." + id, prefs.getInt("unit", 1))
+                .let { if (it in 0..2) it else 1 }
             units = ReaderUnits.split(text, textUnit)
             textOffset = found.offset.coerceIn(0, text.length)
             speed = prefs.getFloat("speed." + id, prefs.getFloat("rate", 1f))

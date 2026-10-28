@@ -90,7 +90,7 @@ fun ReaderCompactChoice(
                 }
             }
         }
-    ) { Text("$" + "{label}: $" + "{choices[index]}") }
+    ) { Text("${label}: ${choices[index]}") }
 }
 
 /**
@@ -113,7 +113,7 @@ fun ReaderCompactPosition(
         onClick = { if (index < last) onSelected(index + 1) },
         modifier = Modifier.fillMaxWidth().semantics {
             contentDescription = label
-            stateDescription = "$" + "{index + 1} de $" + "{count.coerceAtLeast(1)}"
+            stateDescription = "${index + 1} / ${count.coerceAtLeast(1)}"
             if (count > 1) {
                 progressBarRangeInfo = ProgressBarRangeInfo(
                     index.toFloat(), 0f..last.toFloat()
@@ -125,7 +125,7 @@ fun ReaderCompactPosition(
                 }
             }
         }
-    ) { Text("$" + "{label}: $" + "{index + 1} de $" + "{count.coerceAtLeast(1)}") }
+    ) { Text("${label}: ${index + 1} / ${count.coerceAtLeast(1)}") }
 }
 
 /** Shared native defaults; book-specific overrides are edited inside each open book. */

@@ -35,7 +35,7 @@ jobs:
           ls "$ANDROID_HOME/platforms"
           ls "$ANDROID_HOME/build-tools"
       - name: Unit tests and debug APK only
-        run: gradle --no-daemon -p android-native-prototype :app:testDebugUnitTest :app:assembleDebug -PtifloArm64Only=true -PtifloAudioFocusTest=true
+        run: gradle --no-daemon -p android-native-prototype :app:testDebugUnitTest :app:assembleDebug -PtifloArm64Only=true -PtifloGestureTest=true
       - name: Upload native prototype APK
         uses: actions/upload-artifact@v4
         with:

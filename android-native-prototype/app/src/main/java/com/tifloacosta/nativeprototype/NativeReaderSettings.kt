@@ -177,6 +177,55 @@ fun ReaderCompactPosition(
     ) { Text("${label}: ${index + 1} / ${count.coerceAtLeast(1)}") }
 }
 
+/**
+ * Single TalkBack stop for non-linear positions (word / percentage).
+ * The requested absolute accessibility progress is interpreted as a direction:
+ * each flick triggers exactly one user-defined navigation step.
+ */
+@Composable
+fun ReaderCompactOffsetPosition(
+    label: String,
+    valueLabel: String,
+    current: Int,
+    maximum: Int,
+    english: Boolean = false,
+    onPrevious: () -> Unit,
+    onNext: () -> Unit
+) {
+    TextButton(
+        enabled = maximum > 0,
+        onClick = onNext,
+        modifier = Modifier.fillMaxWidth().clearAndSetSemantics {
+            contentDescription = label
+            stateDescription = valueLabel
+            onClick(label = if (english) "Next position" else "Posición siguiente") {
+                onNext()
+                true
+            }
+            customActions = listOf(
+                CustomAccessibilityAction(if (english) "Previous position" else "Posición anterior") {
+                    onPrevious()
+                    true
+                },
+                CustomAccessibilityAction(if (english) "Next position" else "Posición siguiente") {
+                    onNext()
+                    true
+                }
+            )
+            progressBarRangeInfo = ProgressBarRangeInfo(
+                current.coerceIn(0, maximum).toFloat(), 0f..maximum.coerceAtLeast(1).toFloat()
+            )
+            setProgress { requested ->
+                when {
+                    requested > current.toFloat() -> { onNext(); true }
+                    requested < current.toFloat() -> { onPrevious(); true }
+                    else -> false
+                }
+            }
+        }
+    ) { Text("$label: $valueLabel") }
+}
+
 /** Shared native defaults; book-specific overrides are edited inside each open book. */
 @Composable
 fun NativeReaderGeneralSettings(

@@ -57,7 +57,6 @@ fun NativeReaderAudioScreen(
     val position = if (active) state.positionMs else book.audioPositionMs
     val duration = if (active) state.durationMs else 0
     var selectedAction by remember(book.id) { mutableIntStateOf(0) }
-    var expandedAudio by remember(book.id) { mutableStateOf(false) }
     var expandedMore by remember(book.id) { mutableStateOf(false) }
     var showDaisyNavigation by remember(book.id) { mutableStateOf(false) }
     var showTools by remember(book.id) { mutableStateOf(false) }
@@ -207,64 +206,53 @@ fun NativeReaderAudioScreen(
                 modifier = Modifier.semantics { heading() })
             Text(state.synchronizedText)
         }
-        Row {
-            TextButton(onClick = { perform(1) }) {
-                Text(if (english) "Back 30 s" else "Retroceder 30 s")
-            }
-            TextButton(onClick = { perform(2) }) {
-                Text(if (english) "Forward 30 s" else "Avanzar 30 s")
+        // One adjustable control for each direction-based navigation action.
+        // Flick up/down for an exact +30/-30-second jump, not a percentage seek.
+        if (active && duration > 0) {
+            ReaderCompactPosition(
+                label = if (english) "Skip 30 seconds" else "Saltar 30 segundos",
+                current = (position / 1000).coerceAtLeast(0),
+                count = (duration / 1000) + 1
+            ) { requestedSecond ->
+                val delta = if (requestedSecond > position / 1000) 30000 else -30000
+                command(NativeReaderPlaybackService.ACTION_SEEK, position + delta)
             }
         }
-        TextButton(onClick = { expandedAudio = !expandedAudio },
-            modifier = Modifier.semantics {
-                stateDescription = if (expandedAudio) "Abierto" else "Cerrado"
-            }) { Text(if (english) "Audio" else "Audio") }
-        if (expandedAudio) {
-            ReaderAdjustableChoice(
-                if (english) "Playback speed" else "Velocidad de reproducción",
-                listOf("0,75", "0,9", "Normal", "1,25", "1,5"), speedIndex
-            ) {
-                speedIndex = it
-                prefs.edit().putInt("audio.speed." + book.id, it).apply()
-                if (active) command(NativeReaderPlaybackService.ACTION_SPEED, speeds[it])
-            }
-            ReaderAdjustableChoice(
-                if (english) "Sleep timer" else "Apagado automático",
-                if (english) listOf("Off","5 minutes","10 minutes","15 minutes",
-                    "30 minutes","45 minutes","60 minutes")
-                else listOf("Desactivado","5 minutos","10 minutos","15 minutos",
-                    "30 minutos","45 minutos","60 minutos"),
-                sleepIndex
-            ) {
-                sleepIndex = it
-                if (active) command(NativeReaderPlaybackService.ACTION_SLEEP, sleepTimes[it])
-            }
+        ReaderCompactPosition(
+            label = if (english) "Section" else "Sección",
+            current = current,
+            count = segments.size
+        ) { chosen ->
+            if (active) command(NativeReaderPlaybackService.ACTION_SEGMENT, chosen)
+            else NativeReaderPlaybackService.start(context, book.id,
+                audio = true, speedPercent = speeds[speedIndex],
+                sleepMinutes = sleepTimes[sleepIndex], segmentIndex = chosen)
+        }
+        ReaderCompactChoice(
+            if (english) "Playback speed" else "Velocidad de reproducción",
+            listOf("0,75", "0,9", "Normal", "1,25", "1,5"),
+            speedIndex
+        ) { chosen ->
+            speedIndex = chosen
+            prefs.edit().putInt("audio.speed." + book.id, chosen).apply()
+            if (active) command(NativeReaderPlaybackService.ACTION_SPEED, speeds[chosen])
+        }
+        ReaderCompactChoice(
+            if (english) "Sleep timer" else "Apagado automático",
+            if (english) listOf("Off", "5 minutes", "10 minutes", "15 minutes",
+                "30 minutes", "45 minutes", "60 minutes")
+            else listOf("Desactivado", "5 minutos", "10 minutos", "15 minutos",
+                "30 minutos", "45 minutos", "60 minutos"),
+            sleepIndex
+        ) { chosen ->
+            sleepIndex = chosen
+            if (active) command(NativeReaderPlaybackService.ACTION_SLEEP, sleepTimes[chosen])
         }
         TextButton(onClick = { expandedMore = !expandedMore },
             modifier = Modifier.semantics {
                 stateDescription = if (expandedMore) "Abierto" else "Cerrado"
             }) { Text(if (english) "More actions" else "Más acciones") }
         if (expandedMore) {
-            Row {
-                TextButton(enabled = current > 0, onClick = { previous() }) {
-                    Text(if (english) "Previous section" else "Sección anterior")
-                }
-                TextButton(enabled = current < segments.lastIndex, onClick = { next() }) {
-                    Text(if (english) "Next section" else "Sección siguiente")
-                }
-            }
-            if (segments.size in 2..80) {
-                ReaderAdjustableChoice(
-                    if (english) "Section" else "Sección",
-                    segments.indices.map { (it + 1).toString() }, current
-                ) { chosen ->
-                    if (active) {
-                        // Section selection uses successive commands; fine-grained
-                        // direct selection arrives in the next DAISY navigation block.
-                        command(NativeReaderPlaybackService.ACTION_SEGMENT, chosen)
-                    }
-                }
-            }
             Button(onClick = { bookmark() }, enabled = active) {
                 Text(if (english) "Save bookmark" else "Guardar marca")
             }

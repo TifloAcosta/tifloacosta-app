@@ -947,7 +947,7 @@ private fun NativeReadingScreen(
                 current = currentIndex,
                 count = units.size,
                 english = english
-            ) { chosen -> units.getOrNull(chosen)?.let { position -> setOffset(position) } }
+            ) { chosen -> units.getOrNull(chosen)?.let { unit -> setOffset(unit.start) } }
         }
         // Show and announce the same complete message: never replace the
         // percentage with a content description that hides its value.

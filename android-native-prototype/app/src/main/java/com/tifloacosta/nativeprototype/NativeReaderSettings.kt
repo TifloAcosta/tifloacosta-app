@@ -25,6 +25,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.ProgressBarRangeInfo
+import androidx.compose.ui.semantics.CustomAccessibilityAction
+import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.semantics.progressBarRangeInfo
 import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.semantics.contentDescription
@@ -69,6 +71,7 @@ fun ReaderCompactChoice(
     label: String,
     choices: List<String>,
     selected: Int,
+    english: Boolean = false,
     onSelected: (Int) -> Unit
 ) {
     if (choices.isEmpty()) return
@@ -78,6 +81,22 @@ fun ReaderCompactChoice(
         modifier = Modifier.fillMaxWidth().semantics {
             contentDescription = label
             stateDescription = choices[index]
+            if (choices.size > 1) {
+                customActions = listOf(
+                    CustomAccessibilityAction(
+                        if (english) "Previous option" else "Opción anterior"
+                    ) {
+                        onSelected((index - 1).coerceAtLeast(0))
+                        true
+                    },
+                    CustomAccessibilityAction(
+                        if (english) "Next option" else "Opción siguiente"
+                    ) {
+                        onSelected((index + 1).coerceAtMost(choices.lastIndex))
+                        true
+                    }
+                )
+            }
             if (choices.size > 1) {
                 progressBarRangeInfo = ProgressBarRangeInfo(
                     index.toFloat(), 0f..choices.lastIndex.toFloat(),
@@ -104,6 +123,7 @@ fun ReaderCompactPosition(
     label: String,
     current: Int,
     count: Int,
+    english: Boolean = false,
     onSelected: (Int) -> Unit
 ) {
     val last = (count - 1).coerceAtLeast(0)
@@ -114,6 +134,22 @@ fun ReaderCompactPosition(
         modifier = Modifier.fillMaxWidth().semantics {
             contentDescription = label
             stateDescription = "${index + 1} / ${count.coerceAtLeast(1)}"
+            if (count > 1) {
+                customActions = listOf(
+                    CustomAccessibilityAction(
+                        if (english) "Previous" else "Anterior"
+                    ) {
+                        if (index > 0) onSelected(index - 1)
+                        true
+                    },
+                    CustomAccessibilityAction(
+                        if (english) "Next" else "Siguiente"
+                    ) {
+                        if (index < last) onSelected(index + 1)
+                        true
+                    }
+                )
+            }
             if (count > 1) {
                 progressBarRangeInfo = ProgressBarRangeInfo(
                     index.toFloat(), 0f..last.toFloat()

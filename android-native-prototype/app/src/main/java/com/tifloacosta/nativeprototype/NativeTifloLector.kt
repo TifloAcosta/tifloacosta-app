@@ -713,7 +713,6 @@ private fun NativeReadingScreen(
     else listOf("Desactivado", "5 minutos", "10 minutos", "15 minutos",
         "30 minutos", "45 minutos", "60 minutos")
     var showVisual by rememberSaveable(book.id) { mutableStateOf(false) }
-    var showNavigation by rememberSaveable(book.id) { mutableStateOf(false) }
     var selectedAction by rememberSaveable(book.id) { mutableIntStateOf(0) }
     val prefs = remember { context.getSharedPreferences("native-reader-preferences", 0) }
     var textSize by rememberSaveable(book.id) {
@@ -857,41 +856,23 @@ private fun NativeReadingScreen(
             modifier = Modifier.fillMaxWidth()) {
             Text(if (english) "Book details and tools" else "Detalles y herramientas")
         }
-        TextButton(
-            onClick = { showNavigation = !showNavigation },
-            modifier = Modifier.semantics {
-                stateDescription = if (showNavigation) "Abierto" else "Cerrado"
-            }
-        ) { Text(if (english) "Navigation" else "Navegación") }
-        if (showNavigation) {
-        Text(
-            (if (english) "Move by: " else "Avanzar y retroceder por: ") + steps[unitType],
-            modifier = Modifier.clearAndSetSemantics { }
-        )
-        Slider(
-            value = unitType.toFloat(),
-            onValueChange = {
-                unitType = it.roundToInt().coerceIn(0, 2)
-                prefs.edit().putInt("unit." + book.id, unitType).apply()
-                if (active) send(NativeReaderPlaybackService.ACTION_UNIT, unitType)
-            },
-            valueRange = 0f..2f,
-            steps = 1,
-            modifier = Modifier.semantics {
-                contentDescription = if (english) "Move by" else "Avanzar y retroceder por"
-                stateDescription = steps[unitType]
-            }
-        )
-        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            OutlinedButton(
-                enabled = units.isNotEmpty(),
-                onClick = { setOffset(units[(currentIndex - 1).coerceAtLeast(0)].start) }
-            ) { Text(if (english) "Previous" else "Anterior") }
-            OutlinedButton(
-                enabled = units.isNotEmpty(),
-                onClick = { setOffset(units[(currentIndex + 1).coerceAtMost(units.lastIndex)].start) }
-            ) { Text(if (english) "Next" else "Siguiente") }
+        // Two compact, always-available TalkBack adjustable controls.
+        // Swipe up/down on "Move by" chooses block/paragraph/sentence.
+        // Swipe up/down on the position moves exactly one chosen unit.
+        ReaderCompactChoice(
+            if (english) "Move by" else "Avanzar y retroceder por",
+            steps, unitType
+        ) { chosen ->
+            unitType = chosen
+            prefs.edit().putInt("unit." + book.id, chosen).apply()
+            if (active) send(NativeReaderPlaybackService.ACTION_UNIT, chosen)
         }
+        ReaderCompactPosition(
+            label = steps[unitType],
+            current = currentIndex,
+            count = units.size
+        ) { chosen ->
+            units.getOrNull(chosen)?.let { setOffset(it.start) }
         }
         Text(
             (if (english) "Read: " else "Leído: ") + ReaderUnits.percent(displayOffset, fullText.length) + "%",

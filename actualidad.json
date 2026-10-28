@@ -1,5 +1,79 @@
 [
   {
+    "id": "engadget-910449dd839a53c3",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2299227/meta-tamagotchi-like-ai-digital-pet-app-waddle-world/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-28T08:40:19.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta's Waddle World is a Tamagotchi-like AI pet app",
+        "summary": "Meta describes Waddle World as a 'daily journal disguised as a pet.'",
+        "body": "But it's only available in the Philippines for now.\n\nLooks like a big part of Meta's AI strategy is to rely on \"uwu\" and cuteness as a way to get people to use and train its models and agents. The company has released a new Tamagotchi-like AI-powered pet-rearing game called Waddle World , but it's only available in the Philippines for now. If you've ever played Tamagotchi or any other virtual pet game , Waddle World will feel very familiar. You hatch an egg to get a pet, then you have to play with it and feed it to keep you happy. This virtual pet, however, can chat with you and even create illustrated journal entries to illustrate your conversations.\n\nSocial media consultant Matt Navarra has posted links to its Apple App Store and Google Play store listings on X. Based on those listings, the game first became available in late September. Waddle World is a 16-bit game that Meta describes as a \"daily journal disguised as a pet.\" You'll be able to write or dictate a journal entry, which the game presents as a way to communicate with your pet. Every time you write in your diary, your pet writes back and draws a little doodle to go with the entry. The responses are, of course, powered by Meta's AI. As Navarra noted, this is basically \"Tamagotchi meets ChatGPT.\"\n\nIn addition to the app's journaling features, you can play mini-games to collect points that you can use to buy food and toys for your pet. One mini-game will have you stacking grocery items on top of your pet's head. Another will have you catching falling stars and dodging bombs. The third game will have you spelling words using the jumbled letters on the screen. It's not clear why it has such limited availability at the moment, but it's possible that the company is testing it in the Philippines before giving it a wider release.\n\nMeta already lets you design cute avatars and designate a personality for your Muse agent. It also revealed the \"Muse Charm\" at its Connect event in September. The Muse Charm, designed to be an AI companion, is an egg-shaped physical device like the Tamagotchi that contains your Muse avatar. It's small enough to be a keychain, created so that you'll have constant access to Muse — or for Muse to have constant access to your environments and experiences. Meta is aiming to release the device in time for the holidays this December."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "accessible-android-7f4e2029207f3c8b",
+    "type": "news",
+    "sourceId": "accessible-android",
+    "sourceName": "Accessible Android",
+    "sourceUrl": "https://accessibleandroid.com/",
+    "originalUrl": "https://accessibleandroid.com/app/real-world/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-28T08:02:48.000Z",
+    "categories": [
+      "android",
+      "apps-accesibles",
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Real world",
+        "summary": "Welcome to Real World, created by NBM Studios! In this game, players are thrust into a 3D world full of danger and excitement. As a…",
+        "body": "Published 28 October 2026 by Nr Witta Draco\n\nWelcome to Real World , created by NBM Studios! In this game, players are thrust into a 3D world full of danger and excitement. As a blind player, you must rely on your other senses and quick reflexes to navigate the environment and take down your enemies.\n\nWith a variety of weapons at your disposal, including wands for casting spells, you can hunt other players and animals, as well as dragons. If you are lucky enough to defeat the fearsome dragon, you will be rewarded with valuable items and TL, the in-game currency. But beware: the dragon respawns after 30 minutes, giving other players the chance to challenge it.\n\nIn addition to intense player-vs-player combat, the game also offers a variety of missions and challenges to complete. You can rob banks and palaces, steal valuable items, and earn extra TL. You can also take on mafia missions and defeat gangsters to earn even more rewards. As you progress through the game, you can even purchase your own hotel and use it as a base of operations. With a dynamic and constantly changing world, no two games are ever the same.\n\nThe adventure does not stop there. In Real World, players can also team up with friends and form clans to take on even more challenging missions and quests. For players who want to take their gameplay further, the game also offers a range of paid items and paid accounts that can provide additional advantages in battle.\n\nYou can create tickets to request new features or report bugs, and even marry other players if you choose. Whether you prefer to go it alone or fight alongside your clan, the choice is yours. Join the adventure and see if you have what it takes to survive in this thrilling game for blind players!\n\nFree or paid:\n\nAccessibility and User Comments:\n\nReal world is an audio-based game designed with accessibility in mind. It includes a built-in screen reader, so TalkBack is not required while playing.\n\nYou can explore different maps, purchase weapons and other items from the in-game store using the game’s currency, and discover different areas featuring animals and other elements.\n\nThe app’s user interface is accessible, with no unlabeled buttons reported. The game is easy to use once you learn its touchscreen gestures.\n\nLast Tested App version and Android version:\n\n0.8.5. Android 17\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-2a005dcc54370330",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2299185/ios-27-2-two-new-features-apple-carplay/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-28T03:51:54.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27.2 brings two new features to Apple's CarPlay",
+        "summary": "iOS 27.2 comes with some changes for Apple CarPlay, too.",
+        "body": "Apple has redesigned the Podcasts app and upgraded Siri AI.\n\nApple has officially released iOS 27.2 , bringing more Siri and AI functions to iPhone users. And since CarPlay is powered by iOS running directly from a connected iPhone, the rollout introduces some changes to it, as well. As 9to5Mac reports, you can expect two big changes coming to CarPlay with the new mobile OS.\n\nFirst, the company has updated its Podcasts' app Home tab to add a New Episodes and a Continue Playing section. It removed Up Next altogether and replaced it with those two. So, if you want to find the latest installments for the shows you're watching, you have to go to the New Episodes section. And if you want to pick up watching a show from where you left off, you'll find it in — you guessed it — the Continue Playing section.\n\nIn addition, iOS 27.2 brings a couple of Siri AI upgrades to CarPlay. Like Siri on mobile, the assistant on CarPlay can now recall past conversations, allowing you to ask it to recall previous chats. You can ask it to repeat its previous cafe recommendations, for instance, if you couldn't find your chat from last week. Siri AI on CarPlay can now also draw from more sources for more detailed responses, including your voicemails, your Safari history and Reading List, the attendees in your Calendar events and even photos attached in Messages.\n\nThe update comes with a few minor changes, as well, including a new Music app icon. Apple has transformed its recognizable red color into something monochromatic. The app is now white with a black music note, unless you're on dark mode, in which case it's black with a white note. Users on the CarPlay subreddit are also reporting that their infotainment system doesn't support the APTV, which lets them play videos on their car screen, anymore after updating to iOS 27.2"
+      }
+    },
+    "media": null
+  },
+  {
     "id": "9to5mac-bc34d277a70de3f5",
     "type": "news",
     "sourceId": "9to5mac",
@@ -194,30 +268,6 @@
     "media": null
   },
   {
-    "id": "engadget-3210fca07fcfc8a1",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2296049/best-ways-tell-if-someone-wearing-ai-glasses/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-27T22:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The best ways to tell if someone is using AI glasses",
-        "summary": "While it can be jarring to discover that your companion is using AI glasses, there are some steps you can take to recognize them ASAP.",
-        "body": "Smart glasses are making unwanted surveillance all too easy, but you're far from powerless against this covert tech.\n\nSmart glasses might be the next big trend in consumer tech, as there's certainly real demand for these gadget-intensive pieces of eyewear. However, there are very legitimate concerns about how these glasses can be used for stalking or other shady activity, especially as the prevalence of public recording comes more and more under scrutiny. If you share those concerns, you might want to keep an eye out for some tell-tale signs of AI glasses.\n\nOf course, it could be a little rude to go around asking random people if they're wearing AI glasses when you're going off a gut instinct. Luckily, most (albeit not all) smart glasses brands have built-in signs of use. If you can't rely on those giveaways, there are some solid-enough reasons for you to be suspicious.\n\nSmart glasses are actually pretty easy to recognize at a glance, as their tech-riddled innards often require thick frames, particularly around the temples and the outer sides of the lenses (although this admittedly isn't always the case). That second area is typically where camera lenses are located, while any giveaway ports or grilles might be further back on the design. Most smart glasses also have an indicator light that turns on when they're filming; if you suspect you're being filmed via smart glasses, look for a small LED light.\n\nHowever, there are reports of a variety of low-cost dupe glasses being sold on sites such as TikTok Shop and Temu that don't have a recording light (as well as audio-first glasses that don't have cameras, such as the Ray-Ban Meta Audio Glasses ), so you'll need to look closer at the aforementioned physical traits. You can also check whether someone you suspect is recording is quickly pressing the temples of their glasses, pausing every now and then to zone out (as if to read text on their glasses' display), or whispering quiet voice commands to themselves. These could be signs of someone interacting with their smart glasses, though there is a small chance they are all completely unrelated.\n\nOne of the most recent developments in the arms race against this tech is the arrival of apps that can warn you if smart glasses are nearby . The likes of Nearby Glasses and ZuckOff scan for nearby Bluetooth devices and the identifiers often associated with AI glasses. Admittedly, both of these apps aren't completely reliable. For one thing, there's a chance that anyone wearing smart glasses nearby has turned off their Bluetooth. There's also a risk of false positives. However, both can serve as your first line of defense against nearby smart glasses.\n\nJust because you have a strong suspicion that there are AI glasses nearby, though, doesn't mean you should jump immediately to a confrontation. The best thing to do if someone near you is stirring your suspicions is to move away from the individual and speak to the authorities if you're being followed. If you're hosting a meeting or event that demands a level of confidentiality, it may be worth making a neutral statement about smart glasses not being permitted. In either case, if you need to speak with a stranger about whether they're recording you without your knowledge, do so calmly in a public environment."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-92fb77519bc984fc",
     "type": "news",
     "sourceId": "ars-technica",
@@ -309,30 +359,6 @@
         "title": "Announcing AnonyMouse's App Pick of the Month for October 2026: ReSort: Water Sort Puzzle App",
         "summary": "Welcome to the October 2026 installment of AnonyMouse's App Pick of the Month, where each month I highlight a new or noteworthy app. This month's pick is ReSort: Water Sort Puzzle App, a fun and relaxing water-sorting puzzle game that has quickly become one of my favorites. I know, I know. Another game for my App Pick of the Month! I realize not everyone here is a gamer, and I'm sorry for picking yet another one. But we've had so many fun new games coming our way lately, I just can't help myself! ReSort was simply too much fun to pass up. Maybe next month I'll pick something different. No promises, though! About ReSort ReSort is a puzzle game where you sort different-colored water into separate tubes until each tube contains just one color. Sounds simple enough, right? Well, it starts out that way, but things get trickier as you progress. Before long, you're moving water back and forth, trying to figure out your next move without getting yourself stuck. What I really enjoy is that there's no rush with ReSort. No timers, no move limits, and no pressure. You can take your time and figure things out at your own pace. But don't mistake relaxing for easy! Some puzzles can really get you scratching your head, and finally solving one that's been giving you trouble is incredibly satisfying. There's plenty to keep you busy, too. Along with the regular levels, ReSort offers daily puzzles with different difficulty settings and a larger Sunday challenge. You can also earn stars, work your way through different ranks, and unlock additional sounds as you progress. Accessibility is another reason ReSort stands out. The game was designed with VoiceOver in mind, with announcements for the colors and their positions in each tube. And I have to say, I absolutely love the sounds in this game! From the satisfying sound of pouring water to the little audio cues and gentle music, everything adds to the experience. It's one of those games where the sounds make playing that much more enjoyable. I also love that you can customize them to your liking. Something else I really appreciate is the developer's involvement with the AppleVis community. Since introducing ReSort in the AppleVis forum , the developer has been actively listening to feedback and making improvements. Suggestions from community members have already led to different daily puzzle difficulties, iCloud syncing, more sound options, and adjustable tube sizes for low-vision players. I love seeing developers take our community's suggestions seriously, especially when those suggestions turn into actual features so quickly. It's wonderful to see that kind of engagement. Why I'm Picking ReSort This Month For me, ReSort is just plain fun. It's easy to learn, challenging enough to keep me interested, and relaxing enough to enjoy whenever I have a few minutes to spare. And that's where the trouble starts! I'll tell myself I'm only going to play a couple of levels, and before I know it, I've played several more. There's always another puzzle waiting, and I can't seem to resist finding out whether I can solve it. I also appreciate getting to enjoy this type of game with VoiceOver. Water-sorting games have been around for years, but finding one that's this accessible isn't something I take for granted. Between the enjoyable gameplay, wonderful sounds, thoughtful accessibility, and a developer who's genuinely listening to our community, ReSort has earned its place as my October App Pick of the Month. If you enjoy puzzle games, or just want something relaxing that gives your brain a little workout, I definitely recommend giving ReSort a try. Just don't blame me if you find yourself playing longer than you planned! Download the App ReSort: Water Sort Puzzle App is available on the App Store for iPhone and iPad. The first 10 levels are free, with a one-time purchase to unlock the remaining levels. There are no ads or subscriptions, and all accessibility features are included for free. Now It's Your Turn Have you tried ReSort yet? Are you finding it as addictive as I am? How far have you made it in the game? I'd love to hear what you think and what other apps or games you've been enjoying this month. Let me know in the comments. I always enjoy hearing what everyone else is playing and discovering!",
         "body": "Welcome to the October 2026 installment of AnonyMouse's App Pick of the Month, where each month I highlight a new or noteworthy app. This month's pick is ReSort: Water Sort Puzzle App, a fun and relaxing water-sorting puzzle game that has quickly become one of my favorites.\n\nI know, I know. Another game for my App Pick of the Month! I realize not everyone here is a gamer, and I'm sorry for picking yet another one. But we've had so many fun new games coming our way lately, I just can't help myself! ReSort was simply too much fun to pass up. Maybe next month I'll pick something different. No promises, though!\n\nReSort is a puzzle game where you sort different-colored water into separate tubes until each tube contains just one color. Sounds simple enough, right? Well, it starts out that way, but things get trickier as you progress. Before long, you're moving water back and forth, trying to figure out your next move without getting yourself stuck.\n\nWhat I really enjoy is that there's no rush with ReSort. No timers, no move limits, and no pressure. You can take your time and figure things out at your own pace. But don't mistake relaxing for easy! Some puzzles can really get you scratching your head, and finally solving one that's been giving you trouble is incredibly satisfying.\n\nThere's plenty to keep you busy, too. Along with the regular levels, ReSort offers daily puzzles with different difficulty settings and a larger Sunday challenge. You can also earn stars, work your way through different ranks, and unlock additional sounds as you progress.\n\nAccessibility is another reason ReSort stands out. The game was designed with VoiceOver in mind, with announcements for the colors and their positions in each tube. And I have to say, I absolutely love the sounds in this game! From the satisfying sound of pouring water to the little audio cues and gentle music, everything adds to the experience. It's one of those games where the sounds make playing that much more enjoyable. I also love that you can customize them to your liking.\n\nSomething else I really appreciate is the developer's involvement with the AppleVis community. Since introducing ReSort in the AppleVis forum , the developer has been actively listening to feedback and making improvements. Suggestions from community members have already led to different daily puzzle difficulties, iCloud syncing, more sound options, and adjustable tube sizes for low-vision players.\n\nI love seeing developers take our community's suggestions seriously, especially when those suggestions turn into actual features so quickly. It's wonderful to see that kind of engagement.\n\nFor me, ReSort is just plain fun. It's easy to learn, challenging enough to keep me interested, and relaxing enough to enjoy whenever I have a few minutes to spare.\n\nAnd that's where the trouble starts! I'll tell myself I'm only going to play a couple of levels, and before I know it, I've played several more. There's always another puzzle waiting, and I can't seem to resist finding out whether I can solve it.\n\nI also appreciate getting to enjoy this type of game with VoiceOver. Water-sorting games have been around for years, but finding one that's this accessible isn't something I take for granted.\n\nBetween the enjoyable gameplay, wonderful sounds, thoughtful accessibility, and a developer who's genuinely listening to our community, ReSort has earned its place as my October App Pick of the Month.\n\nIf you enjoy puzzle games, or just want something relaxing that gives your brain a little workout, I definitely recommend giving ReSort a try. Just don't blame me if you find yourself playing longer than you planned!\n\nReSort: Water Sort Puzzle App is available on the App Store for iPhone and iPad. The first 10 levels are free, with a one-time purchase to unlock the remaining levels. There are no ads or subscriptions, and all accessibility features are included for free.\n\nHave you tried ReSort yet? Are you finding it as addictive as I am? How far have you made it in the game? I'd love to hear what you think and what other apps or games you've been enjoying this month."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-a72eeba4cf75a579",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2299026/chatgpt-can-work-with-your-icloud-mail-and-calendar-thanks-to-new-plugin-support/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-27T21:13:59.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "ChatGPT can work with your iCloud Mail and Calendar thanks to new plugin support",
-        "summary": "You can use the AI assistant to update calendar events and search your inbox, among other things.",
-        "body": "You can use the AI assistant to update calendar events and search your inbox, among other things.\n\nOpenAI has added support for Apple's email and calendar services to ChatGPT. Thanks to new plugins for iCloud Mail and iCloud Calendar, the AI chatbot can now work with iCloud in the same way that it can with Gmail and Google Calendar.\n\nThe company says once the plugins are enabled — you'll have to log in with an Apple account and create an app-specific password — ChatGPT will work with either service across desktop, the web and iOS, regardless of whether you have a free account or pay for a ChatGPT subscription. If you pay for OpenAI's Pro plan, your Dot , the company's AI agent, can also use either plugin.\n\nMuch requested, and now yours to connect: iCloud Mail and Calendar plugins are available in ChatGPT.\n\nAsk ChatGPT to find that email, catch up on your inbox, check what's next, or update a calendar event. Phew.\n\nAvailable on all ChatGPT plans on web, desktop, and iOS. pic.twitter.com/g68OWoFVg8\n\n— ChatGPT (@ChatGPT) October 27, 2026\n\nYou can use ChatGPT to read and manage iCloud emails or calendar events with just a prompt. These plugins are different from letting ChatGPT interact with Apple's Mail and Calendar apps on macOS directly, though. Both apps can display inboxes and calendars from third-party services like Outlook or Gmail. The iCloud Mail and iCloud Calendar plugins will only give ChatGPT access to the messages and calendar events associated with Apple's services, so they're useless if you don't use iCloud.\n\nThe fact that OpenAI is offering these at all is an interesting expression of the complicated relationship the company has with Apple. ChatGPT was the first AI assistant to be directly integrated with Siri . Apple's decision to work with Google rather than OpenAI to revamp its AI models was the first suggestion that the relationship had soured. Apple's July lawsuit alleging OpenAI employees stole its trade secrets only furthered that impression. And yet, alongside the new M6 iMac and MacBook Pro , Apple announced Creator Studio updates that include a new chatbot experience, partially powered by OpenAI models , in Pages, Numbers and Keynote. Neither company seems willing or able to fully walk away from the other."
       }
     },
     "media": null
@@ -663,12 +689,12 @@
     "media": null
   },
   {
-    "id": "applevis-apps-0e29c70baf33630c",
+    "id": "applevis-apps-89c5c20a2805b328",
     "type": "news",
     "sourceId": "applevis-apps",
     "sourceName": "AppleVis Apps",
     "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/eid-asche-oath-ash",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/oath-ash",
     "originalLanguage": "en",
     "publishedAt": "2026-10-21T07:00:42.000Z",
     "categories": [
@@ -679,7 +705,7 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Eid & Asche: Oath & Ash",
+        "title": "Oath & Ash",
         "summary": "Oath & Ash (Eid & Asche) is a turn-based fantasy card game with detailed art, animated hero portraits and punchy battle sound. It is fully playable with VoiceOver. Every card, every enemy move and every result is announced, and nothing is ever timed. THREE HEROES, THREE WAYS TO PLAY The Knight holds the line with armor, guard and counterattacks. The Hunter sets traps, spreads poison and outlasts the enemy. The Mage controls the flow of cards with chains and frost. The Hunter unlocks after Act I, the Mage after Act II. Each hero has their own cards, deck and progress. THREE ACTS Walk the Thorn Path, cross the Ashlands and brave the Sand Sea. Each act has ten encounters, its own enemies and boss fights. Enemies show their next move before they make it, so you can plan ahead. Losing costs you no progress. Change your deck and try again. COLLECT AND UPGRADE Win cards in battle or open card boxes with three random cards. The app shows the odds for each rarity before you open a box. Salvage duplicates for Dust and use it to upgrade your favorite cards. Your deck is yours to build. SOMETHING NEW EVERY DAY Check the Daily tab for a new challenge each day, with its own rules and rewards. EXPEDITIONS Set out with a small deck and build it as you go. Three legs, each a map with branching paths to fights, rests, merchants and events, and a boss at the end. Relics give you lasting advantages, and your health carries over from fight to fight. In the weekly Expedition everyone plays the same map, and the top places in the ranking win weekly prizes. THE SEASON PATH Wins, duels and daily battles earn you embers to climb the Season Path: 40 levels of Dust, Diamonds, card boxes, titles, card backs, frames, avatars and victory lines. New looks arrive every month. The Path Letter opens a second track with more rewards. THE ARENA Duel the saved defense decks of real players. You play your turns, the game plays theirs. There is no turn timer, and every deck fights with its real card levels, so deckbuilding and tactics decide. If no player is a good match, a clearly labeled Arena Guardian steps in for half points. Climb from Starter through Bronze, Silver, Gold and Platinum to Diamond. Each season lasts one month, and the ranking shows your display name and avatar. Challenge friends to friendly duels with an invite link, and every profile shows league, heroes and collection. BUILT FOR VOICEOVER • Every value, card text and enemy intent is spoken • No time pressure, in the acts or in the Arena • Battle log with one heading per round for quick navigation • Narrator Helmut guides you in English and German • Every enemy has a voice of its own, and every boss its own music and entrance • You can hear when it's your turn, how hard a hit landed and when your health runs low • Settings, Learn the sounds lets you hear every sound and what it means • Support for larger text, reduced motion and haptic feedback GOOD TO KNOW Your progress is saved to your iCloud account, so you need to be signed in to iCloud on your device. Battles, Expeditions and the Arena need an internet connection. Your collection and the tutorial also work offline. Diamonds and the Path Letter are optional in-app purchases. There are no ads. Questions or problems? Reach us at support.kroegoor.com.",
         "body": "Oath & Ash (Eid & Asche) is a turn-based fantasy card game with detailed art, animated hero portraits and punchy battle sound. It is fully playable with VoiceOver. Every card, every enemy move and every result is announced, and nothing is ever timed.\n\nTHREE HEROES, THREE WAYS TO PLAY The Knight holds the line with armor, guard and counterattacks. The Hunter sets traps, spreads poison and outlasts the enemy. The Mage controls the flow of cards with chains and frost. The Hunter unlocks after Act I, the Mage after Act II. Each hero has their own cards, deck and progress.\n\nTHREE ACTS Walk the Thorn Path, cross the Ashlands and brave the Sand Sea. Each act has ten encounters, its own enemies and boss fights. Enemies show their next move before they make it, so you can plan ahead. Losing costs you no progress. Change your deck and try again.\n\nCOLLECT AND UPGRADE Win cards in battle or open card boxes with three random cards. The app shows the odds for each rarity before you open a box. Salvage duplicates for Dust and use it to upgrade your favorite cards. Your deck is yours to build.\n\nSOMETHING NEW EVERY DAY Check the Daily tab for a new challenge each day, with its own rules and rewards.\n\nEXPEDITIONS Set out with a small deck and build it as you go. Three legs, each a map with branching paths to fights, rests, merchants and events, and a boss at the end. Relics give you lasting advantages, and your health carries over from fight to fight. In the weekly Expedition everyone plays the same map, and the top places in the ranking win weekly prizes.\n\nTHE SEASON PATH Wins, duels and daily battles earn you embers to climb the Season Path: 40 levels of Dust, Diamonds, card boxes, titles, card backs, frames, avatars and victory lines. New looks arrive every month. The Path Letter opens a second track with more rewards.\n\nTHE ARENA Duel the saved defense decks of real players. You play your turns, the game plays theirs. There is no turn timer, and every deck fights with its real card levels, so deckbuilding and tactics decide. If no player is a good match, a clearly labeled Arena Guardian steps in for half points. Climb from Starter through Bronze, Silver, Gold and Platinum to Diamond. Each season lasts one month, and the ranking shows your display name and avatar. Challenge friends to friendly duels with an invite link, and every profile shows league, heroes and collection.\n\nBUILT FOR VOICEOVER • Every value, card text and enemy intent is spoken • No time pressure, in the acts or in the Arena • Battle log with one heading per round for quick navigation • Narrator Helmut guides you in English and German • Every enemy has a voice of its own, and every boss its own music and entrance • You can hear when it's your turn, how hard a hit landed and when your health runs low • Settings, Learn the sounds lets you hear every sound and what it means • Support for larger text, reduced motion and haptic feedback\n\nGOOD TO KNOW Your progress is saved to your iCloud account, so you need to be signed in to iCloud on your device. Battles, Expeditions and the Arena need an internet connection. Your collection and the tutorial also work offline. Diamonds and the Path Letter are optional in-app purchases. There are no ads.\n\nQuestions or problems? Reach us at support.kroegoor.com."
       }

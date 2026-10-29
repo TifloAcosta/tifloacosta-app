@@ -370,7 +370,9 @@ function openReadingBook(bookId, percent = null) {
   const cleanId = String(bookId || '').trim();
   if (!cleanId) return false;
   pendingReadingBookId = cleanId;
-  pendingReadingBookPercent = Number.isFinite(Number(percent))
+  // An absent percentage means resume from SQLite's saved position.
+  // Number(null) is zero, which previously reset existing books to the start.
+  pendingReadingBookPercent = percent != null && Number.isFinite(Number(percent))
     ? Math.max(0, Math.min(100, Number(percent)))
     : null;
   const currentRoute = router.current()?.name;

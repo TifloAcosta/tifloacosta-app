@@ -289,19 +289,7 @@ async function finishSharedFlow() {
   if (Array.isArray(normalRouterSnapshot) && normalRouterSnapshot.length) {
     router.restore(normalRouterSnapshot, { renderCurrent: true, focus: false });
   } else {
-    async function restoreExistingReaderNavigation() {
-  if (shareMode) return;
-  try {
-    const request = await NativeFeatures.consumeExistingReaderNavigation();
-    if (request?.openExistingReader) router.navigate('reading-library');
-  } catch {
-    // Web preview and earlier builds do not include this native bridge.
-  }
-}
-
-router.start('home');
-void restoreExistingReaderNavigation();
-onAppResume(() => { void restoreExistingReaderNavigation(); });
+    router.start('home');
   }
   normalRouterSnapshot = null;
   await nativeActions.finishSharedFlow();
@@ -716,7 +704,27 @@ function onPreferencesChange(changes, { reset = false } = {}) {
   }
 }
 
+/**
+ * Reuse the published reader's SQLite database and content directly.
+ * A title selected in the native list opens the ORIGINAL book by ID, so
+ * progress, bookmarks, folders, audio and existing queue remain untouched.
+ */
+async function restoreExistingReaderNavigation() {
+  if (shareMode) return;
+  try {
+    const request = await NativeFeatures.consumeExistingReaderNavigation();
+    if (!request?.openExistingReader) return;
+    const bookId = String(request.bookId || '').trim();
+    if (bookId) openReadingBook(bookId);
+    else router.navigate('reading-library');
+  } catch {
+    // Browser preview and older builds do not include this native bridge.
+  }
+}
+
 router.start('home');
+void restoreExistingReaderNavigation();
+onAppResume(() => { void restoreExistingReaderNavigation(); });
 void installShareReceiver();
 void installReadingDocumentReceiver();
 void loadAppInfo(App).then(info => {

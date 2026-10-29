@@ -480,12 +480,12 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         // Seeking by word or percent must resume at the requested place,
         // not replay the whole containing paragraph from its beginning.
         val start = textOffset.coerceIn(fragment.start, fragment.end)
-        val speech = if (start > fragment.start) {
+        val speech = ReaderSpeechMarkers.forNarration(if (start > fragment.start) {
             val aligned = if (start < text.length && start > 0 &&
                 !text[start - 1].isWhitespace() && !text[start].isWhitespace()
             ) ReaderNavigation.nextWordStart(text, start) else start
             text.substring(aligned.coerceAtMost(fragment.end), fragment.end).trimStart()
-        } else fragment.text
+        } else fragment.text)
         if (speech.isBlank()) {
             val next = units.getOrNull(currentIndex + 1)?.start ?: text.length
             if (next <= textOffset || next >= text.length) {

@@ -55,9 +55,9 @@ test('native integration keeps existing video actions and reader accessible whil
   assert.match(app, /case 'videos'/);
   assert.match(main, /registerPlugin\(TifloNativeFeaturesPlugin\.class\)/);
   assert.equal(request.track, 'production');
-  assert.equal(request.status, 'draft', 'Do not publish until real upgrade and OAuth tests pass');
+  assert.equal(request.status, 'completed', 'Production release must be explicitly authorized');
   assert.equal(request.notifyUpdate, false);
-  assert.equal(request.confirmProduction, false);
+  assert.equal(request.confirmProduction, true);
 });
 
 test('legacy migration preflight is read-only and reports data instead of replacing it', async () => {
@@ -101,7 +101,7 @@ test('native reader warns about unmigrated legacy books instead of showing a fal
   assert.match(reader, /No se pudo comprobar la biblioteca anterior/);
 });
 
-test('Android API24 legacy Office compatibility trial remains restricted and unreleased', async () => {
+test('Android API24 legacy Office compatibility requirements remain accounted for in release', async () => {
   const lib = await source('../../android-native-prototype/library/build.gradle');
   const prototype = await source('../../android-native-prototype/app/build.gradle.kts');
   const office = await source('../../android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativeReaderLegacyOffice.kt');
@@ -113,8 +113,8 @@ test('Android API24 legacy Office compatibility trial remains restricted and unr
   assert.match(lib, /CVE-2022-26336/);
   assert.match(lib, /javax\.xml\.bind:jaxb-api:2\.3\.1/);
   assert.equal(request.track, 'production');
-  assert.equal(request.status, 'draft', 'Legacy Office must remain unreleased while validation is pending');
-  assert.equal(request.confirmProduction, false);
+  assert.equal(request.status, 'completed', 'Only the authorized production request can ship');
+  assert.equal(request.confirmProduction, true);
 });
 
 

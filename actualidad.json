@@ -1,5 +1,275 @@
 [
   {
+    "id": "the-verge-a7b617b8880519c6",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1022023/microsoft-exit-offer-layoffs-notepad",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T16:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Microsoft’s AI future has fewer jobs",
+        "summary": "To anyone listening closely to what Microsoft CEO Satya Nadella has been saying over the past couple of years, this week felt like the clearest sign yet that AI is about to fundamentally change the size of Microsoft's workforce. Microsoft is now offering voluntary buyouts to around 60,000 employees across the US, UK, Canada, and […]",
+        "body": "To anyone listening closely to what Microsoft CEO Satya Nadella has been saying over the past couple of years, this week felt like the clearest sign yet that AI is about to fundamentally change the size of Microsoft's workforce. Microsoft is now offering voluntary buyouts to around 60,000 employees across the US, UK, Canada, and India.\n\nIt's the first time the company has presented such an offer to so many employees, expanding greatly upon the retirement offer that was limited to around 9,000 employees earlier this year. It's all part of an ongoing effort to avoid reducing investment in AI infrastructure by lowering Microsoft's operating cos …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-5ee757e896dd09a1",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/29/agent-identity-startup-mintive-lands-cowboy-ventures-coatue-angels-jeff-dean-andrej-karpathy/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T15:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Agent identity startup Mintive lands Cowboy Ventures, Coatue, angels Jeff Dean, Andrej Karpathy",
+        "summary": "Mintive was founded by two engineers who have been working on AI for decades through Google Brain and Coursera. It's platform promises to help IT easily control enterprise agents.",
+        "body": "Here’s another early-stage, agent-management startup to watch because of the backgrounds of the founders and the sheer number of big names it has already attracted as investors: Mintive .\n\nMintive has raised $11 million total, including a newly announced $7 million seed led by Cowboy Ventures. Additional investors include Coatue, Operator Collective, and Hustle Fund; angels include Okta co-founder Frederic Kerrest, Discovery Loop co-founder and former Google Chief Scientist Jeff Dean, and OpenAI co-founder Andrej Karpathy, among others.\n\nMintive was founded by Jiquan Ngiam (pictured above, far right) and Vijay Vasudevan (pictured above far left). Ngiam, Mintive’s CEO, was the founding engineer of Coursera (employee No. 1, hired by Andrew Ng). Ngiam later worked on neural networks at Google Brain. Vasudevan, the company’s CTO, is best known as one of the co-creators of TensorFlow while he was at Google Brain. That was the OG AI training platform that predated PyTorch.\n\nMintive is joining a crowded field of products that promise to govern, provision, and offer identity management to enterprise AI agents. Its platform includes an MCP gateway that allows IT professionals to authorize what the cloud services agents may access and what actions they can perform on them. It also offers an LLM gateway that routes to different models and can cap costs; handles agent identities and authorizations that may differ from the employees that they serve; and an agent monitor that tracks all agents across the company. The company also allows enterprises to create agents that proactively perform long-running tasks.\n\nStill, it’s hard to imagine a field with more competition. Agent management systems are offered by Amazon, Microsoft, OpenAI, Anthropic, plus as point products galore (from companies as diverse as LangChain , New Relic , and Rippling , to name a few). Then there are countless startups working on the idea ( 40+ from Y Combinator alone).\n\nSo, what’s Mintive’s secret sauce? Given the founders’ long history in building AI for enterprises, they have designed their system to be especially easy to use, Ngiam says. Set-up amounts to clicking a few buttons, the startup promises.\n\n“I think what our customers look at and they are a bit shocked at, is how quick it is and easy to deploy,” Ngiam tells TechCrunch. “We have really thought through all the ways this can be done, all the access control, permissioning layer, to make it so easy for them to deploy it, that all the complexities are hidden away. You don’t think about sandboxes, you don’t think about harnesses, you don’t think about memory because we manage that for you.”\n\nThat pitch has won over 50 enterprise customers so far, Mintive says, since the startup launched its product in February. These include Ro, Modern Treasury, the University of Michigan, Coursera, Apax, and Stability AI.\n\nBut it was the founders’ industry experience that won over Cowboy Ventures managing partner Aileen Lee.\n\n“AI is going to be able to power incredible things, but we need more infrastructure that’s going to give us governance and visibility and control,” Lee told TechCrunch.\n\nLee also says she particularly respects that Ngiam has been careful by only raising $11 million. This compares to other agentic-building startups raising vast amounts at unicorn valuations. As just one example: Prime Intellect raised $130 million for its Series A at $1 billion valuation .\n\n“I feel really lucky to have won the chance to work with him,” said Lee. “He is a grown-up and so he was not a person chasing a ‘vanity’ round.”\n\nLee added: “I think a lot of companies are being set up for failure by chasing round size, rather than, ‘how much do I need to actually really move the needle for the company?’ And so, yes, in a time when people are raising unprecedented amounts of money, we’re just kind of doing it the brick by brick, old-fashioned way.”"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-84e4e42aaf272145",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1022193/nyt-cooking-app-ai-recipe-modification-tool",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T14:39:37.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The NYT Cooking app is testing AI recipe modifications",
+        "summary": "The New York Times is testing a new AI feature for its Cooking app that helps users to modify recipes, and it has sparked some drama among users. Last Friday, NYT Cooking senior editor Genevieve Ko announced the feature, which can be used to recommend substitutions for ingredients and cooking equipment, scale recipes to any […]",
+        "body": "The New York Times is testing a new AI feature for its Cooking app that helps users to modify recipes, and it has sparked some drama among users. Last Friday, NYT Cooking senior editor Genevieve Ko announced the feature , which can be used to recommend substitutions for ingredients and cooking equipment, scale recipes to any number of servings, and \"generally make our recipes work for what a cook needs at that moment.\"\n\nOne of the examples given in the article shows a user asking to use baby spinach instead of kale, with the Cooking app feature advising that because baby spinach wilts faster, it should be added during a later step of the reci …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-4d4aaf3ffae31c24",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/29/ios-27-2-gives-shortcuts-app-these-new-and-improved-features/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T14:16:33.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27.2 gives Shortcuts app these new and improved features",
+        "summary": "iOS 27.2 launched this week with a variety of new features for Siri AI , FaceTime , Messages , and more, plus a handful of improvements for the Shortcuts app. Here’s everything new in Shortcuts. more…",
+        "body": "iOS 27.2 launched this week with a variety of new features for Siri AI , FaceTime , Messages , and more, plus a handful of improvements for the Shortcuts app. Here’s everything new in Shortcuts.\n\niPhone Duo launched with iOS 27.1 last week, but just days later iOS 27.2 arrived with a pair of compelling new Duo features .\n\nBut it turns out that iOS 27.2 also introduced a key iPhone Duo automation in Shortcuts that’s proven popular .\n\nThe ability to automate actions based on whether your iPhone is opened or closed arrived in iOS 27.2, per Apple’s release notes for the Shortcuts app. And that’s not the only change.\n\nHere are the full release notes detailing every Shortcuts improvement in iOS 27.2:\n\nNew Automations\n\nUpdated Automations\n\nUpdated Actions\n\nShortcut Editor\n\nThe additional languages supported by “Use Model” include French, Japanese, Korean, Portuguese, and Spanish. Previously the feature was limited to English.\n\nWhat’s your take on iOS 27.2’s new and improved Shortcuts features? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-37dd6ef35a1f50c9",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/podcast/1021322/anthropic-ipo-filing-s-1-claude-semianalysis-joey-brookhart-interview",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T14:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Anthropic is asking Wall Street to believe in AGI",
+        "summary": "Today on Decoder, I’m joined by Joey Brookhart, an analyst at the chip and AI research firm SemiAnalysis, to help me dig into the story inside the numbers of the Anthropic IPO filing — a document known as an S-1. Anthropic just filed its S-1 to go public on the Nasdaq, and it could start […]",
+        "body": "Today on Decoder , I’m joined by Joey Brookhart, an analyst at the chip and AI research firm SemiAnalysis, to help me dig into the story inside the numbers of the Anthropic IPO filing — a document known as an S-1.\n\nAnthropic just filed its S-1 to go public on the Nasdaq, and it could start trading as soon as next month at a valuation of anywhere between $1.5 trillion and $2 trillion. That would immediately make it one of the most valuable companies on the planet.\n\nBut the price tag really isn’t the whole story here. The S-1 document published earlier this week is hundreds upon hundreds of pages filled with details that finally paint a picture of the economics of a frontier AI lab. As you might imagine, that picture is both really complicated and built on a series of very, very ambitious assumptions about the future and what AI will do to it .\n\nSo I wanted to have Joey on the show to help break down what this document tells us, both about Anthropic’s finances and the broader AI economy. Joey and his colleagues at SemiAnalysis actually built a model of Anthropic’s finances from the outside back in July, so he’s been waiting for this filing about as eagerly as anyone, and I was excited to hear his take on what we’ve learned and, importantly, what we still don’t know.\n\nOkay: SemiAnalysis’ Joey Brookhart on the Anthropic S-1 and the costs and risks of building frontier AI. Here we go.\n\nThis interview has been lightly edited for length and clarity.\n\nJoey Brookhart, you are an analyst at SemiAnalysis. You’re also co-lead on SemiAnalysis’ Tokenomics model, which is going to come up a lot in this episode. Welcome to Decoder .\n\nYeah, thanks so much, Nilay.\n\nI am very excited to talk to you. We’re talking just a couple days after the big Anthropic S-1 was filed. It’s our first look inside of the finances of one of the leading frontier models. What’s your take? What’s your read into it?\n\nIt was an awesome S-1. It’s been a rough three weeks since the investor day. Some people were somewhat disappointed in the September [annualized recurring revenue] numbers, but what we saw here was a company that has efficiently scaled to an amazing level, with a $1 trillion-plus valuation, $70 billion-plus of ARR in a very short amount of time.\n\nIn gross margins, compute margins, and free cash flow, everything is what you’d want to see. So I don’t think there was much to nitpick in this filing. It’s the reason you’ve seen a lot of the semiconductor complex, and the neoclouds and compute stocks, really rally again in the last two days.\n\nIt’s funny, I don’t think I can nitpick the S-1 itself. I want to get into some of the details because there are a lot of numbers in there that are worth thinking about. I actually just want to start at the really big picture. You run a thing called Tokenomics. I’m going to explain what Tokenomics is to people.\n\nI look at Anthropic and where it could go. I look at Dario Amodei saying that he can see his way to $1 trillion in revenue. Where does that money come from? Because so much of these businesses are about eating every other business and it feels like someone else has to make some money to pay Anthropic to generate these revenues. I haven’t actually seen that laid out very clearly.\n\nVerge subscribers, don’t forget you get exclusive access to ad-free Decoder wherever you get your podcasts. Head here . Not a subscriber? You can sign up here .\n\nIt’s so interesting. Today, because even the scale we’re at is $120 billion of ARR between the two leading labs, it’s still an extremely narrow market. The top 1 percent of customers are the ones that are spending $50,000 to $100,000 per employee. Your broader Fortune 500 or Global 2000, which typically do a lot of IT spend, isn’t spending much.\n\nA lot of the spending, especially at Anthropic, is coding-specific. It’s almost a single vertical company. We look in the future to 2027, you think to this broader adoption and white collar work. This typical enterprise Q4 budgeting season, we actually haven’t gone through with one of these labs yet in any meaningful way because their ARR did really start to accelerate until the beginning of the year. We think of other cases like cyber, which can be similar to coding, where these are eight-figure-plus contracts with leading enterprises that can scale very quickly due to all the cybersecurity incidents we’re seeing. You get to other verticals like bio.\n\nTo get to $1 trillion, we do have to move to some of that white collar work, where it goes from AI augmentation to labor saving or replacement in some areas. You look at things like Microsoft’s buyout offers to employees as an example of this , but there’s no wealth of other verticals that they can get into and really start to move the needle.\n\nThis is the single biggest question I have, not just about the S-1, but the entire industry. I would understand that if there are one or two leading labs. There are two big companies that have a technology that can automate a whole bunch of things. We will see how well that automation goes sector by sector, but there are not just two leading labs. There are quite a few of them. There are open weight models.\n\nI’ve heard from a lot of CEOs who are very nervous about giving all their data to an OpenAI or Anthropic and they would like to run some things on-prem. There are law firms running on-prem AI now, which is the funniest turn in maybe all of history.\n\nHow do you see that playing out? Because so much of the pressure on this S-1 was the numbers themselves, which I want to talk about, but then there’s the external pressure of, “You’ve got to grow and growth is not as short.” So how do you see all of that playing out?\n\nIt’s very interesting because when we look at coding today, for example — and I think we saw this in Q3 with OpenAI kind of catching up — there are areas of coding where there are very low switching costs, and I can just move between that. What we hear from enterprises and maybe, too, on the OpenAI side — obviously I think they somewhat botched the Fable release, and the lack of zero data retention is why we saw some of the slowdown. That’s something they can fix with Fable 5.5 and maybe drive more enterprise adoption there.\n\nThat’s a huge thing for enterprises when we talk with them. We definitely see enterprises now, and more so, too, a lot of the AI natives, doing custom training and post-training on open weight models, and then running either their inference off of that or even their products for internal or external use cases.\n\nObviously, DeepMind at Google and [Meta Superintelligence Labs] are very well-funded labs that have pretty similar training compute capacity, and they’re bringing on a ton of it. Not even to mention SpaceX as well, with what Elon said on [about] 10 net new gigawatts next year and half of that is the long-term internal use case.\n\nIn the first half of the year, Anthropic ran away with it. They were 90 percent of the industry’s net new ARR. We saw in Q3 that OpenAI was probably actually the majority of industry net new ARR. Open-source has grown from probably $1 billion of token inference costs, ARR, in Q1 to $10 billion-plus here in Q3.\n\nSo yes, the industry’s gotten much more competitive, but there are all these new use cases, too, and some of these verticalized use cases are really where we’re going to see the growth going forward. Because it’s obvious coding isn’t going to power us to even triple from here.\n\nIt’s interesting. The concept is called Tokenomics. You run that practice alongside another co-lead at SemiAnalysis. Explain what it is because to me it’s such a smart way of thinking about, “We’re going to put some money in and maybe we’ll get some money out.”\n\nI think of it as the unit economics [of AI], or even just the broader idea — everything from a macro- to microeconomics of running an AI business or even looking at AI demand. So we cover the hyperscalers, now some of the neoclouds as well in a separate product.\n\nBut then just the AI labs, too. For investors, or just people that are interested in the business, Anthropic had negative 94 percent gross margins on inference two years ago. Now they have a positive 85 percent margin, and people don’t understand how they allocate compute. How do we think about the inference business model?\n\nPart of that gross margin conversation is the revenue per megawatt in inference. Why are all companies that are running inference seeing massive gains in inference and compute efficiency? So we try to model out these businesses and obviously when Anthropic was private, we’re dealing with information we can get from the press and things like that.\n\nBut now that we have concrete audited numbers, it’s easy to explain the unit economics of this. And also how the businesses differ. OpenAI is a much different business than Anthropic just in both their consumption versus subscription and then historical weight versus consumer versus enterprise. [We are] trying to understand across the demand level the economics of these businesses.\n\nSeveral years ago when I talked to Google CEO Sundar Pichai about the cost of inference, I said, “How are you ever going to make money?” He was just very clear. He said, “If there’s one thing Google’s good at, it’s bringing this stuff down the cost curve.”\n\nIt was a very blunt answer. I understand how Google can do it. They make their own chips. Anthropic is running on everyone else’s clouds. The core part of the S-1 is how much they’ve committed to spend on other people’s clouds: SpaceXAI, Google, Amazon. Where does their efficiency come from?\n\nThere’s really token throughput. They have a very diverse chip fleet. Between Trainiums, TPUs, and GPUs, across all of those, we see a ton of token efficiencies. Token throughput, for example, on Trainium chips is up 5x to 10x year-over-year right now.\n\nDealing with both the hardware level efficiencies and the software — and how the model interacts with the hardware — there are a lot of token throughput gains where if you’re doing X tokens per second, now you’re doing five or 10 times that just a year later. What they’ll tell you is they see continued compute efficiencies as well going forward.\n\nMax Kan, who co-leads Tokenomics model with me at SemiAnalysis, and I have even published some research on this. Right now, if Anthropic’s at $65 million of revenue per inference megawatt, this was mid-teens last year at this time. What we’ve said on maybe Opus 5.5 on a [Nvidia] Blackwell, you can get to $100 to $120 million of revenue per megawatt.\n\nThe big thing here is they’re paying on average now just a little over $10 million per megawatt in [cost of goods sold], or just in compute costs. What you can do with those margins is then reinvest in training.\n\nPeople don’t realize this, but only about 30 percent of the compute is actually in inference-serving revenue. The rest is for experimentation and research, training models, and post-training models. So there’s a lot of compute that is building the next model and that’s more of the R&D side and where you actually get your returns and defensibility in this business.\n\nActually, what I was expecting to see in the S-1 was that dynamic play out much more strongly — that Anthropic makes a bunch of money selling the models they have now and there are more customers in the future for the models they have now. That’s going to throw off a whole bunch of margin. And then, because it is Anthropic and they think they’re building a digital god, they’re going to train the next models as much as they can.\n\nThat is a very particular Anthropic story. The company is chasing AGI. The people who work there will happily tell you that in the S-1 that Claude might be conscious and this could all go to hell. Anthropic is a very unique company in its conception of itself. But you don’t really see that dynamic playing out in the S-1. They’re managing their training costs against their inference margin pretty well. Do you see that going up or changing in any way?\n\nI agree. Long term, and we’ve even said this internally, they want to actually increase the percentage of training. If you believe you’re building a digital god or going towards AGI, and as long as you have the gross margins of 85 percent-plus on inference to do so, you can.\n\nThey’ve grown a lot faster than they thought, and they didn’t expect to be at 11 percent non-gap EBITA margins. They’d love to be closer to zero, or even below that if they could get that compute and allocate it towards training and continue to see these compute efficiencies.\n\nThey’ve messaged that, too, to investors in the roadshow. You can look at this S-1 and just the curve of profitability over the last few years and how little cash they burned to get to this point and you can say, “This is a good business model, but we’re going towards AGI. Don’t expect the margin leverage we’re seeing to continue to this level, even though long-term margins can be quite a bit higher.”\n\nThere are some real shades of Amazon there. Jeff Bezos famously told investors he wasn’t going to make money until he could make a lot of money. Obviously, Amazon and Anthropic have a lot of back and forth. Maybe there’s some family resemblance there.\n\nBut I’m curious, there’s a point of model capability that would allow you to go into more verticals than just coding, right? We might be at it now. The idea of capability overhang exists, the idea that the models we have today could go and take over bio research. They’re taking over mathematics today. There’s a point at which the smartest business decision is to stop training and to just sell your profitable model into more and more companies. Anthropic as a public company will face that pressure.\n\nDo you think they’re organized or structured to fend it off?\n\nYeah, I think they’re structured well. With some of the voting stock in areas like that, they definitely are. We’ve seen this in tech before and even publicly when Mark Zuckerberg has made these decisions before to invest heavily.\n\nIt didn’t always pay off. I just want to point out, it didn’t always pay off.\n\nYeah, it did not always pay off.\n\nAlthough you and I technically are in the metaverse right now, by some definition.\n\n[Laughs] Right. But I think that’s something, and there’s an interesting number in the S-1 that 80 percent of revenue in the last three months comes from models released in the last six months.\n\nSo then you say, “Okay, 20 percent of the models are like Opus 4.5 in earlier versions.” One thing going forward is that if you’re a frontier model company, you always need to be at the frontier and it’s incredibly competitive.\n\nWait, can I ask a really dumb question about that?\n\nYeah.\n\nWhy? I think the heart of my curiosity about the industry right now is if you enabled some bleeding-edge technology that could revolutionize the entire world, at some point, the most profitable thing to do is to just go play it out in all the different verticals, right? It’s not to go make the next one. It’s actually to run an efficient model in legal services and medicine and wherever else that there hasn’t been diffusion of AI yet.\n\nThis idea that you always have to be at the frontier, that Anthropic always has to be competing with Google and OpenAI and whoever else, I get it from their self-conception. But from a business point of view, an AI-enabled business is going to throw out more money and spend more money with me, the AI provider, and that isn’t necessarily related to being at the frontier.\n\nThere are a few portions of that. For new verticals, and this is very cyber specific, if an adversary is using a frontier model, you need to be defending with a frontier model.\n\nFair enough.\n\nWhen we talk to some enterprises, it’s not like an email summary where I can run that on open source or Sonnet. There are just certain verticals where having… [For example,] if you were in a legal case as a defendant, would you be okay if your lawyer was using a non-frontier model if the prosecution—\n\n[Laughs] I got bad news for you about what’s going on in the legal market right now.\n\nThe competitive dynamics do dictate that. I think from a go-forward perspective, we’ve seen this with open source too catching up in one point, but the demand will be there. [SemiAnalysis CEO] Dylan [Patel] says this a lot. The demand will always be there for frontier intelligence, especially in competitive industries. And there are certain tasks, as you go towards more labor replacement versus labor augmentation, where that also is the case.\n\nAt the same time, they are getting more vertical. If you go look at job postings or what they’re hiring for, they’re putting out more of these SKUs and areas, and there’s a lot of beta testing going on like Claude for financial services, Claude for legal, their cyber program. They’re giving away 25,000 of credits per month for people in their cyber program.\n\nThat’ll be a huge SKU for them in 2027. Those verticalized areas and then ones that are specifically where you need to be… It’s more adversarial, I should say, or competitive, are the main reasons why. But we can both agree there are areas like email summary and work that definitely doesn’t need to happen [at the frontier].\n\nI’ll just make a dumb comparison to the iPhone. It’s iPhone season. I just reviewed the iPhone Duo. Apple kept the iPhone looking the same for several years now. They build all of the tooling for the new iPhone and then they just reuse it for two or three or four models to get all the value out of that investment back before they move on to the next thing. Apple puts out a new iPhone, and it keeps selling the old iPhone for a while to get more value out of that investment and that development program.\n\nThe AI industry does not seem to be doing that. All of their emphasis is on developing the next new thing, deprecating the old thing pretty fast, and moving you onto the new expensive product, while at the same time they’re building the next new expensive product.\n\nAt some point it feels like that will rationalize, that there will be something that is worth just collecting margin from while they go invest in the new thing. I just can’t figure out where Anthropic sits in that cycle.\n\nI mean, we do see this. Open source token volumes are picking up and there’s a lot of areas, yes, where the open source models have become good enough. I think on a go-forward basis, you’re like, “Okay, was that because of distillation?” And then the frontier labs have some defensibility actually going forward. I think when we talk to clients, it’s also about how we actually think about frontier versus open source. So something like a Sonnet type model, if you want to do the iPhone 18 versus the SE type analogy.\n\nWe do see that dynamic, and obviously with open source, it’s a question of how much that can take. Two, because we’re so early in these verticals, we don’t know what’s going to be fully agentic. There’s no human in the loop where the harness actually has, I should say, some value and defensibility to it.\n\nThe big area I’d look at here, especially when we talk to enterprises today, is only the coders are allowed to use the frontier models at a lot of these enterprises. If you’re a non-coder, some of these companies just limit you to Sonnet, if you’re an Anthropic customer. That’s reflective of how management views and wants to budget for this, what frontier intelligence is actually worth to them in certain areas.\n\nIn my financial analyst brain, Claude could not build a good financial model six months ago. It’s getting better if you connect it to the right areas, but we’ve gone from something like, “I needed a junior analyst six months ago,” to, “Maybe I don’t as much anymore,” and then, “Will I have a full junior analyst at my disposal anytime or multiple pretty quickly, if I have unlimited token budget?” We just look at that across every vertical and major job category.\n\nThe time horizon in each of those categories is going to be different. That’s just one of the bigger questions I have: How quickly do they get to where they think they can go?\n\nI want to dig in on some of the numbers here. The one that jumped out in all of the comment sections on all of the forums and all of our articles yesterday was $80 billion. Anthropic lost $80 billion [in the first half of 2026]. That is related to a technical charge. Can you just explain the $80 billion? Because it doesn’t seem particularly relevant to the revenue and profits they’re talking about.\n\nYeah, it’s a non-cash charge because their valuation has gone up so much and they’ve issued warrants or convertible notes. You have to account for that in your balance sheet. It’s just a non-cash charge because their valuation has gone up so much since they issued these warrants and notes.\n\nThat’s something you would always back out. You can argue on stuff like stock-based compensation. Should we really be thinking about that on a non-GAAP cash basis? Because it’s non-cash, if I just hand employees shares, I have to account for that on my income statement, but I’m not actually handing them pure cash out of my bank balance. So it’s not an area like that. It gets the accounting, the high level. If you don’t know accounting, it looks bad, but it’s because they’ve grown so much and their valuation has gone up so much.\n\nSome of the argument here about that charge is that Amazon was the other party there. Obviously Amazon’s very happy because Anthropic is buying a ton of AWS and sure they’re happy the valuation has gone up, but over time Amazon’s going to get diluted this way. That’s part of the dynamic there.\n\nAnthropic is going to obviously IPO. They’re going to put a bunch of shares in the market. It’s very clear that over time they will issue more shares to raise more money. It doesn’t seem like they’re going to stop wanting to raise money anytime soon.\n\nHow are you thinking about that in terms of just investment into a company like Anthropic, that your valuation might be going up, but your actual ownership stake might be getting diluted over time?\n\nThe deals have always been very creatively structured. The number is they’ve actually only burned $10 billion of cash. They have $120 billion-plus of cash and marketable securities in the balance sheet today, and post-IPO, probably another $100 billion.\n\nIt’s a great deal for both parties. They only really rent compute. It’s not like they have these massive capital outlays or even rent-to-own. You can make some arguments about certain accounting and there are these massive compute commitment obligations and that’s technically future debt, or that is sitting somewhat off balance sheet essentially. But from a dilution perspective, all tech companies dilute. Are they going to need to raise another $100 billion of debt or equity at some point? Possibly. Can they continue to creatively structure and finance future compute buildouts? Probably as well.\n\nI know there’s been a lot of angst about the future of compute financing and data center financing in the last few weeks. But if you’re Anthropic, if you’re a major lab, a hyperscaler or Broadcom or Nvidia that are backstopping a lot of these deals, that’s probably not going to change anytime soon. So I’m not particularly worried.\n\nAs an equity investor, would I be worried about getting super diluted? I don’t think so. If you believe in this long-term AGI bull case and that Anthropic is going to be a leader in this, that probably shouldn’t worry you. You’re probably looking at a $10 trillion-plus business. They can outrun dilution at that point.\n\nLet’s talk about the compute commitments. I saw at least one analysis saying over the next 10 years, it’s $800 billion-plus in commitments to the various hyperscalers and neoclouds. That’s a lot. You’re saying that they don’t have that much money. They haven’t even spent that much money yet. Do you see them generating the revenues to pay off those commitments?\n\nYeah. I think when people look at the headline commitments, the $500 to $600 billion number over 7 to 10 years, let’s call it, what they’re paying for compute today actually isn’t that many gigawatts. If you think about their spending right now, on average they’re close to $11 million per megawatt in spend, or $11 billion per gigawatt.\n\nIf you take that back to the annual level and say, “Okay, the $520 billion number is over 70 years, for example, that’s really not that many gigawatts and they’re going to be well beyond…” When they get to something like 20 gigawatts, the future compute commitments that they’re running essentially is going to be well into the trillions.\n\nSo yes, they are going to have the revenue to do so. It’s more about how much revenue they are going to have relative to how much compute. Two, the compute efficiency equation. If they keep getting a lot more revenue out of every inference megawatt, how much do you really want to invest in training and take margins to zero from a rental perspective? Because you can get to something where even 80 percent to 85 percent of their fleet is just on training and research at these kinds of margins.\n\nThe revenue is going to scale pretty well. They’re not in any dire situations there. Unless we realize all this revenue disappears or people churn. It’s not like they have to hit a trillion dollars of revenue extremely, extremely quickly to achieve all this and pay for this.\n\nUnless you’re trying to build digital God and unless it doesn’t diffuse across the economy as fast as everyone wants it to. Those are bets, right?\n\nThey’re huge bets. The numbers you look at, if you’re really bullish on this ramp into the digital economy, is Anthropic saying within their Fortune 500 customers, they have 50 percent of the Fortune 500 and that is just 0.1 percent of their total customers’ operating expenses. When you look at that on a per user basis, it’s like $8 a month if you believe OpEx doesn’t include the cost of goods sold. If you believe they include the cost of goods sold, it’s sub-$50 per month.\n\nThey said the same thing. Of the top 5 percent of Claude Code users, they’re spending $18,000 a year on average, the top 5 percent of users. Their non-Claude Code users spend under $75 a month, well under $75. There’s this huge opportunity, especially when we talk to enterprises and these traditional buyers of IT software.\n\nPenetration is extremely low in traditional white collar work. That’s the big point, too, that there is a large ramp period here of both seats adoption and usage. You can make arguments of who’s going to win in this, but it’s obvious the frontier labs are going to get some portion of this and it’s going to be pretty material to net new ARR next year.\n\nOne of the things that’s really interesting about that is we talk about the frontier labs, we talk about the hyperscalers — Anthropic has a lot of wild risk factors in this S-1, including that Claude might be conscious and kill us all.\n\nBut one of the most direct and maybe easiest to understand is that AWS, Azure, and Google Cloud are both suppliers and competitors in some real way, particularly Google. And they say, “These relationships could turn.” They have a big relationship with SpaceXAI. Elon Musk is going to train Grok. They’re going to compete with SpaceXAI at some point. That relationship might become precarious.\n\nAs you say, they’re only renting their compute. At some point, the market might force them to own more of their compute because their own competitors don’t want to lease their capacity to the leading company. How do you see that playing out?\n\nWe definitely see both OpenAI and Anthropic going more direct and not owning the compute, but more rent-to-own, or going through an SPV as some financial sponsors do and producing the compute more directly versus renting.\n\nThere are two points to this. Google, from one perspective, is also selling its external chips to customers and saying, “We don’t care to monetize this within Google Cloud or even allocate the share… If you think we’re very chip-constrained, we don’t even care that these are going to DeepMind or internal GCP compute for us to monetize. We’re just willing to become a chip seller.”\n\nAnthropic loves TPUs and there are 3.5 to 4 gigawatts-plus, and probably more in the pipeline, in terms of orders there of Anthropic buying these chips directly to then rent. So yes, the market is good.\n\nWait, it’s not buying them directly to rent. So they’re buying them into a neocloud?\n\nYeah, they buy them through an SPV, or the SPV buys them and then they rent it from the SPV.\n\nGot it. Okay.\n\nEven within Google Cloud or AWS or Foundry, Anthropic is massive — 48 percent of their business comes through the Bedrock Foundry and Vertex where people are paying through their existing cloud relationship to access these models. They’re not even talking to Anthropic. You don’t have to interact with the Anthropic sales force.\n\nYou mentioned this earlier. This marketing channel where Anthropic gets a rev share.\n\nRight. If you’re AWS and you’re saying, “I’m running Anthropic compute for, let’s say, $10 million per megawatt, but now I’m getting 16 percent of $65 billion-a-megawatt plus the compute costs as well,” so we’re seeing margins at all the clouds go up right now. Part of it is CPU utilization is going up because of all the coding and then some on the [reinforcement learning] side, but these token-as-a-service businesses as we call them — so AWS Bedrock, Microsoft Foundry, Google Gemini Agent Enterprise platform, which is formerly Vertex — are actually massively increasing the margins on AI at these clouds.\n\nThey’re benefiting as well when shareholders are giving them credit for this recently. In Q2, both Azure and AWS had extremely, extremely strong quarters, AWS specifically, on the back of Anthropic’s growth on Bedrock.\n\nDo you think that will keep Amazon from ever wanting to train its own frontier models? They’re doing a good job of letting AWS be the infrastructure for everybody else, but they’re one of the only big tech companies that hasn’t felt the insecurity of not having their own models.\n\nYeah, it’s interesting. Amazon is very happy to serve a wide variety of customers and they have very little [frontier capability]. When we look at our estimates of training compute, they have the least of any hyperscaler, except maybe Oracle. It doesn’t seem like there’s much strategy there.\n\nI know Microsoft in the last two quarters has been talking about it a little more. AWS on the call has been talking about it a little more, but it’s not huge. They’re not doing it to the same extent that Meta is or trying to be competitive here or even Google with Gemini. Especially someone like Dylan will tell you, if you’re not trying to compete at the frontier, there’s really not a place for you, especially if you’re only dedicating a few hundred megawatts internally. One, internal use case is like serving Amazon retail, but then two, training. There are a lot of commitments to make to be good at this.\n\nIt’s a conversation for a different day, but I look at these Microsoft job cuts and I see it as the glimmer of evidence that they’re going to try to compete in the future. They obviously got burned pretty badly by OpenAI.\n\nYeah. They have, in the new agreement that they signed, the right to monetize OpenAI models for essentially not paying OpenAI anything within that agreement. They’re going to have some interesting things ahead where they monetize the OpenAI models or even through Microsoft 365 Cowork and Copilot applications where they’re not paying OpenAI anything for a frontier model.\n\nThe other dynamic here, and you brought it up earlier, is over the last few weeks, there’s just been a lot of stress about neoclouds — whether they will succeed, whether they will fail. I think Elon Musk said there will be a guppy-like extinction event , which is just a brutal metaphor to use to describe a bunch of data centers.\n\nBut this is a bunch of circular financing and Nvidia stood a bunch of them up and maybe the hyperscalers are just going to run away with it. Maybe Anthropic’s demand, because maybe they will want to own more of their own compute because renting it is precarious in all these ways.\n\nWhat do you make of the neoclouds? Do you think they’re going to survive the market actually shaking itself out as these companies go public?\n\nElon obviously has some incentive to say neoclouds are going to be extinct. ClusterMAX said something else and just does amazing ratings of the neoclouds . There are a lot of neoclouds that are ex-crypto miners that are not good businesses and are not good at operating clusters.\n\nI just want to point out CoreWeave is an ex-crypto mining company, right?\n\nYeah. I don’t mean CoreWeave, but there are others further down the list. CoreWeave, Nebius, and anyone that has backing or backstops from one of the major labs, hyperscalers, Nvidia, or Broadcom is going to be okay.\n\nIt’s that longer tail. Hyperscalers have been 65 percent of CapEx and net new compute brought online. There’s 35 percent of the market that doesn’t have the balance sheets that the hyperscalers have. Both Google and Meta have recently raised or announced they’re going to raise. When we look at the big four hyperscalers, they don’t actually need to raise that money over the next two years, even though CapEx is growing from $1.2 to $2 trillion pretty quickly.\n\nBut for a lot of these other neoclouds, if you don’t have that sort of backing, I think it is very hard, even right now, and becoming extremely difficult if you don’t have the backing or backstops from those players to keep building compute. It’s a very, very tough financing market.\n\nOne of the things I think is really interesting about Elon in particular talking about neoclouds dying and obviously hyping up his own data center business is he’s trying to put them in space and to get away from the backlash in the United States around data centers in particular.\n\nWe have a lot of coverage about data center backlash in the United States, it is slowing down a lot of projects. But at the rate we’re going, if you think the neoclouds are shaky, you might actually end up abandoning a bunch of GPUs and half-built data centers or have them tied up in financing agreements where they can’t be lit up.\n\nWhat do you make of that? Do you think we actually just need to go to space? Or do you think the market is going to rationalize and actually take advantage of all the compute that is currently allocated but not being used?\n\nWe’ll rationalize more so. The market is very good at finding places to put chips here on the ground. Politically, we’ll see what happens next week with midterms and the fallout from that. Obviously, there are some very large sites that still have massive permitting problems. There’s the entire power equation as we look towards next year.\n\nThe data centers will be built. There will be a method to get these built. The biggest thing — and the hyperscale CFOs have said this — from an overbuilt perspective and on a relative basis, it’s pretty cheap to build the data center shell. What they can do if they overbuild is they’re going to say, “We’re just not going to take delivery of the chip. We’re not going to buy chips. We’re not going to fill them up.” They’ll just sit empty and chipless. But the majority of the spend is on the chip side.\n\nSo if we do end up in a place where we’re actually oversupplied from a data center perspective, I know that’s a little bit different. It’s the exact opposite of what the question was. They have said that from an ROI perspective. This comes back to that larger question of whether we are still going to be super supply constrained. A lot of people now, especially in the last three weeks, are talking about, “Are we in this massive glut of compute as we look towards 2028 actually?”\n\nBecause the same thing we talked about from Anthropic going from negative 94 percent margins to positive 85 percent and compute efficiencies mean as you bring on more inference megawatts that are making a lot more revenue per megawatt, all else SQL, you need less compute. So it’s a question of whether we we going to have enough revenue in 2028 to justify the ROI on $2 trillion plus of CapEx.\n\nThis is why I spent so much time asking about capability overhang and how good the models are today, because you can see some competitor that is less idealistic about AGI saying, “Actually, we’re going to do a bunch of forward-deployed engineers in all of these verticals where they haven’t taken advantage of AI and sell them high-margin inference because we’ll automate big chunks of their business and they’ll see the return.” Right now, a bunch of the Fortune 500 has not seen a return on AI spending .\n\nSo if you’re actually just better at customer service and deployment and productizing the model, you might get way ahead of where Anthropic needs to be because they’re still thinking about AGI every single minute of every single day. I look at Dario standing next to Marc Benioff at Dreamforce and that dude does not want to be there right now. He wants to be thinking about the machine god.\n\nThere’s something there where you can just see competitors coming up with an open source model and saying, “We’re actually going to productize this and we will actually take the revenue that everyone else is depending on.”\n\nYeah, it’s extremely, extremely interesting. In the interim, that’s why it is getting more verticalized because you need something to bridge AGI where it just fully does the job, you need something to bridge the actual model today.\n\n[Laughs] Yeah. We’ll just take that for granted.\n\nTo get there, you need some bridges of where it sits with the actual end user at some point. Everything is going to come down to this: Is there going to be some timing or adoption mismatch where we just don’t get the revenue at a certain point of time to justify that chase of “train and compute towards AGI”? That’s a risk.\n\nThe other risk we look at is whether we get more models at the frontier even at the open source that are as competitive in coding, where token pricing across the frontier needs to be taken down, because like I mentioned earlier, there are lower switching costs. Even at SemiAnalysis, we went from 95 percent or 90 percent-plus of our usage at the end of Q2 was on Anthropic’s models down to 70 percent after the release of OpenAI’s ChatGPT 5.6 and Astra. And then with Opus 5.5, it’s gone back to 90 percent-plus roughly.\n\nIt does come back. Even the base of revenue today — and they’ve said that we have net revenue retention of 900 percent, so they’re seeing this massive, massive growth. This isn’t a traditional software business like ServiceNow or Workday, where you have just an incredible logo or gross retention of 95 percent to 98 percent and customers sign these nice three-year contracts, they never churn, they add some seats, and maybe they adopt another product that is being upsold. This is purely consumption.\n\nThe other portion was the 20 percent drop in the last two weeks of the year versus the prior two weeks last year in token spend, because of the holiday season. You’re not going to do work code stuff, you’re not going to be coding for work during the holidays. This is extremely, extremely pure consumption business, even different from how we think about Snowflake or Datadog today in public markets.\n\nObviously, Anthropic is not the only company that’s going to have an IPO. OpenAI is right next to them. They’ve delayed theirs. You mentioned earlier Anthropic is much more enterprise focused. I think OpenAI for a long time thought that Google wouldn’t react to them and they would just take the search business away and everything would be fine. Google obviously reacted for better or worse. Search is now AI Overviews.\n\nLooking at the Anthropic S-1, what are you looking ahead to with OpenAI? Because they are a more consumer facing company.\n\nOpenAI was 60-40 consumer, 60 percent consumer and 40 percent enterprise at the end of Q1. That didn’t flip for the first time until January or August to be enterprise focused. What they’ll tell you is enterprise business — because it was so consumer and subscription focused, this consumption business that’s 80 percent of Anthropic’s revenue — didn’t take off until a release of 5.6 and then with Astra.\n\nThose are really great models. OpenAI took the majority of actual net new ARR in Q3, but it’s going to take some time because what’s been in the Wall Street Journal , like negative 100 percent EBITA margins versus we’re seeing positive 11 percent here.\n\nThere are some differences, some pretty big differences, in the business model where they just don’t monetize at the same rate that Anthropic does. That’s a little bit because the business makeup — the verticals, that consumer-versus-enterprise split — and that’s changing.\n\nWhat they’ll tell you is they see a really good Q4 and they have a much stronger enterprise sales function than Anthropic has. I expect them to come up, but I don’t think the financials are going to look as good as this even when they drop their S-1 maybe in early 2027.\n\nDo you think that’s why they delayed it? To get their financials looking better?\n\nYeah, I think OpenAI had a really strong Q3 . Enterprise grew 100 percent quarter-over-quarter versus the total business which was 77 percent. You get another strong quarter of enterprise here. If Opus 5.5 didn’t take a ton of share, that would put OpenAI in a much better position to tell the story.\n\nThere are some other turns here between now and when Anthropic actually goes public. They’re going to do a roadshow. There’ll be some pricing events. What are you looking for from Anthropic?\n\nThey did an investor day two or three weeks ago where they did give some more color. I think they’ll walk through why Q3 was so weak. Meta was a very, very large customer, probably over 10 percent. What’s been publicly reported is they went from 60,000 Claude Code seats down to 30,000. These token volumes didn’t disappear, they just shifted into Meta’s internal models.\n\nAnthropic started cracking down on anti-distillation, and that was 5 percent of revenue prior. I think they said 5 percent to 7 percent of revenue in the S-1 and stuff against their terms of service. So what’s here on the roadshows is a lot of this October acceleration after Opus 5.5. We believe that they’re back on track.\n\nIf they were doing $10 billion of net new ARR per month in Q2 and that fell down to $4 billion in Q3, that they’re getting back on that $8 billion to $10 billion pace here in Q4. People want to hear about these new verticals, specifically cyber. They’re doing some patching until they have that full cyber SKU rolled out, but they’re definitely monetizing cyber today for vulnerability code scanning. These are not small contracts, I should say, with existing customers.\n\nI think they’ll start to message what the 2027 ARR growth path looks like. The other thing too is expectations management, keeping numbers low enough, not talking about AGI as much.\n\n[Laughs] It’s hard to do expectation management when your risk factors are like, “We could pose an existential risk to all of humanity.”\n\n[Laughs] Right. And so saying you do that — you’re going to achieve AGI at some point, you’re going to replace everyone’s jobs — but then trying to keep numbers low enough for Q4 and to have this massive beat the first quarter you become public and have a decent guide for 2027, it’ll be a nice mix of seesawing between that long-term vision and short-term expectations management.\n\nThere’s a lot going on. Joey, this has been great. We’re going to have to have you back as these companies barrel towards actually being public and their economics become much more visible. Thank you so much for being on Decoder .\n\nThank you so much. I appreciate it.\n\nQuestions or comments? Hit us up at decoder@theverge.com. We really do read every email!"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-d44e99cc80d09c86",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/29/ios-27-3-release-date-heres-when-to-expect-new-iphone-features/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T13:44:21.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27.3 release date: Here’s when to expect new iPhone features",
+        "summary": "Apple released iOS 27.2 this week with new features for Messages , Siri AI , and Photos , plus an Apple Music rebrand and more. But work on iOS 27.3 is already well underway, here’s when to expect the next big iPhone update. more…",
+        "body": "Apple released iOS 27.2 this week with new features for Messages , Siri AI , and Photos , plus an Apple Music rebrand and more. But work on iOS 27.3 is already well underway, here’s when to expect the next big iPhone update.\n\nIf you follow Apple closely, the company’s software release patterns quickly become clear.\n\nFor example, iOS 27.2 launched this week right around the same time as Apple’s previous releases in years past.\n\nThe only difference is that normally we would have expected iOS 27.1 in the last week of October rather than 27.2. But due to Apple making iOS 27.1 exclusive to iPhone Duo , all software releases for the iOS 27 cycle will be off by one number—despite following the same timing as ever.\n\nThat means iOS 27.3 is up next, and its release should align with historic patterns for x.2 updates.\n\niOS 27.3 is expected to arrive in beta within the next few days—Monday, November 2 is likely.\n\nAs for the public launch, here’s what past years have shown for comparable x.2 updates:\n\nBased on this pattern, iOS 27.3 is expected to release in mid-December .\n\nApple always tries to ship its last software update of the year with a little buffer before taking a holiday break. That way if any major issues arise, the company can develop a quick fix and push it out before much of the company takes time off.\n\nAs for new iPhone features in iOS 27.3, we’ll know a lot more after the beta arrives. So far though, at a minimum we’re expecting the additional Siri AI languages Apple announced this week, plus the return of the all-new Health app .\n\nWill you install the iOS 27.3 beta or wait for the release version? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-68f17f1f061ff63d",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/29/deepgram-acquires-pipecat-maker-daily-to-bolster-its-voice-ai-infrastructure/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T13:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Deepgram acquires Pipecat-maker Daily to bolster its voice AI infrastructure",
+        "summary": "Deepgram said that it is committed to keep Pipecat open source.",
+        "body": "The voice AI sector is hot, and top players are trying to consolidate their position as more business models come to the fore through partnerships and acquisitions. Deepgram is the latest to make such moves: The company said on Thursday that it is acquiring Daily, the maker and maintainer of one of the most popular open source voice AI infrastructures, Pipecat.\n\nThe companies didn’t disclose the deal amount but said that they will keep Pipecat open source.\n\nFor the uninitiated, Pipecat is a framework that manages voice and video streams along with other pieces in the pipeline, like speech-to-text (STT), large language models (LLMs), and text-to-speech (TTS) models while reducing latency. Its maker, Daily, provides hosted infrastructure for voice and video calls of any kind.\n\nWith Pipecat, Deepgram will likely gain a deeper understanding of real-time voice and video infrastructure.\n\nDaily has raised over $62 million in funding to date from investors such as Tiger Global, Highfield Capital, Nat Friedman, Lachy Groom, and Kevin Weil, according to PitchBook data. Earlier this year, Deepgram reached unicorn status with a $130 million Series C round . Incidentally, both companies were in the same Y Combinator batch in 2016.\n\nKwindla Kramer, Daily’s co-founder, said around the time when GPT-4 came out, the company started experimenting with AI-to-human communication over voice and text, which eventually resulted in the Pipecat framework. He noted that while there has been a lot of acquisition interest, he favored Deepgram’s CEO Scott Stephenson’s commitment to keeping Pipecat open source forever, and the engineering culture of both organizations matched, giving Daily’s team the freedom to work on different parts of the stack within a bigger organization.\n\n“Scott was super committed to Pipecat being open source and vendor-neutral forever. I think there is both a personal commitment and commercial driver there. If you sit in the middle of an ecosystem that’s growing very fast, and have many parts of that ecosystem that are genuinely the best from your company, then everything being as open as possible is like a commercial advantage,” Kramer told TechCrunch.\n\nStephenson said that Deepgram has been wanting to work in open source for a long time, and the company realized that an orchestration framework for agents was a potential area, which drove the decision to partner with Daily.\n\n“We want to open up the ecosystem so everybody can build voice agents. It’s great if you’re using Deepgram models, but I want you to be using the best models for your use case. And if Deepgram notices that we have some ground to catch up on in a certain area for our own models and products, that’s great. We want you to use partners, and then we’ll also work on becoming better in those areas,” he said.\n\nStephenson said the acquisition lets developers build agents with expressivity and end-to-end speech systems by plugging in different models and a context bus that connects all parts.\n\nFor Deepgram, the deal also lets it explore areas beyond voice through Pipecat, as the framework caters to real-time communication in different formats.\n\n“We never thought about Pipecat as a voice toolkit. We thought about it as the toolkit we needed to build this new kind of AI-native software. Because of where we came from, we just always assumed real-time,” Kramer said.\n\nDeepgram is also launching Real-Time Context Standard (RCS), an open protocol for voice agents that it co-developed with the Pipecat team. The protocol defines metadata like context from the audio, like a whisper, instructions for a language model on how it can use those signals, and guidance on how the response should sound.\n\nVoice AI has seen a lot of investment from both the model and the infrastructure sides. Model makers like ElevenLabs , Gradium , and Fish Audio have raised millions of dollars. On the other hand, infrastructure companies like LiveKit and Vapi have raised multimillion-dollar funding rounds this year."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-712a2517aae6d34b",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/29/amazon-updates-alexa-to-help-you-manage-shopping-lists-subscriptions-and-update-delivery-instructions/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T13:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Amazon updates Alexa to help you manage shopping lists, subscriptions, and update delivery instructions",
+        "summary": "The update allows you to use Alexa to create lists, register them, see what's on them, and add or edit items. You can also manage subscriptions with the AI bot.",
+        "body": "Posted:\n\nAhead of the holiday season, Amazon has added more than 100 new shopping-related capabilities to Alexa, including subscription and list management, updating delivery instructions, solving payment issues, and answering questions about Prime subscriptions.\n\nThe update allows you to use Alexa to create lists, register them, see what’s on them, and add or edit items. You can also manage subscriptions with the AI bot — for example, you could ask it to change deliveries for an item to every three months instead of every month — and edit delivery instructions, such as change an address or add drop-off details.\n\nUsers also can now ask Alexa about their Prime or Audible subscriptions, and ask it questions about billing or payment issues.\n\nAmazon has launched various AI-centric shopping features this year, including a shopping assistant , and a way to notify users about new products and offers .\n\nThe company said that since the start of the year, the number of people using agentic features has grown 8x, and over the last 12 months, over 400 million consumers have used Alexa for shopping."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-f3de956f27c2ad63",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/29/the-education-price-of-the-macbook-neo-just-jumped-again/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T12:14:11.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The education price of the MacBook Neo just jumped again",
+        "summary": "The MacBook Neo was already a bargain by Mac standards when it launched with a starting price of $599, but for students an education price of $499 made it a steal. Sadly, that changed back in June when both retail and education prices rose by $100 . Now, however, the education price has been raised even further … more…",
+        "body": "The MacBook Neo was already a bargain by Mac standards when it launched with a starting price of $599, but for students an education price of $499 made it a steal.\n\nSadly, that changed back in June when both retail and education prices rose by $100 . Now, however, the education price has been raised even further …\n\nAs Macworld noted, Apple has increased the education price of the MacBook Neo to $649, a saving of just $50 over the standard price – and a full $150 more than it cost students when it first launched.\n\nIf you’re looking for a better deal, the site notes that Apple’s refurbished store is currently offering the base model for $599 . Another option is Amazon, where you can buy the M1 MacBook Air for $529, or $579 for the 256GB model. You can also keep an eye on 9to5Toys for upcoming deals."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-32c160c5ade837b9",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2300690/apple-google-fined-south-korea-app-store-violations/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T10:42:26.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple and Google fined in South Korea over app store violations",
+        "summary": "South Korean regulators found that Apple and Google violated the country's Telecommunications Business Act.",
+        "body": "Regulators are also requiring them to change their business practices.\n\nBoth Apple and Google have violated Korea's Telecommunications Business Act, the country's communications regulator has determined . The companies have received penalties from the regulator and have been ordered to change their business practices related to their app stores. Google was slapped with a KRW 42.9 billion ($32 million) fine, while Apple has to pay KRW 20.81 billion ($15.6 million) in penalties.\n\nAccording to the Korea Media and Communications Commission (KMCC), it has conducted fact-finding investigations and on-site inspections on the companies since 2022. The agency found that the two of them violated the country's rules for the app market sector, including forcing people to use their in-app payment methods, imposing a commission of 26 percent for third-party payments and prohibiting external payments.\n\nIt also said that the company delayed app reviews without providing a clear reason for it and didn't responding to individual inquiries about the delays. Finally, the regulator found that Apple computed its commissions differently for South Korean and overseas developers. For Korean developers, it based its cut on the price of purchases including VAT, while it based its cut on pre-VAT prices for developers from outside the country.\n\nAs a result of those findings, the KMCC is requiring the companies to accept external payments and to revise their app review procedures. Apple is also required to prevent \"discrimination between domestic and overseas app developers.\" The companies already allow external payments in the US and in the European Union ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-21a2f0e5ffc2ce52",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2300677/google-gemini-carbon-promises-significant-leap-in-ai-coding-and-cybersecurity/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T09:41:58.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google's Gemini 4 Carbon promises 'significant leap' in AI coding and cybersecurity",
+        "summary": "Google's latest Gemini 4 Carbon AI model boasts top benchmark scores in areas like cybersecurity and coding.",
+        "body": "The company's new frontier model tops Claude Opus 5.5 in several key benchmarks.\n\nOpenAI and Anthropic's frontier models have been trading blows of late, with each claiming bragging rights in different categories. Now, Google has barged in with its latest Gemini 4 Carbon model, boasting of top benchmark scores in key areas like cybersecurity and coding. \"Building on Gemini 4 Argon , which was launched two weeks ago, Carbon illustrates the pace at which we're pushing the frontier forward,\" the company wrote in a blog post .\n\nThe company's benchmarks show Gemini 4 Carbon hitting the highest AA Index v5.0 score (a general AI benchmark) at 59, just ahead of Claude Opus 5.5 and GPT-6 Astra. Google also claims a near sweep across categories including agentic coding, computer use, knowledge work, science and math, and others. Google especially highlighted Carbon's domination in cybersecurity, where it bested other models by fairly wide margins.\n\nIn that category, Google claims that Gemini 4 Carbon excels in finding and prioritizing vulnerabilities, as well as patching them at the root cause. The company said that it also advances frontier model safety and security by reducing shortcuts and loophole exploitation, boosting transparency and honesty (yes, there's a test for \"unsupported claims\"), resisting prompt injection, improving collaboration and \"following through without overstepping.\" It's also twice as likely to generate secure code compared to Argon.\n\nAs we've seen with previous frontier models, Carbon will only be released to select cybersecurity defense companies at first, to allow for pre-release model testing. Google will eventually allow access to additional trusted partners through the company's Fairwind Program, before releasing it widely. That's exactly what Google did with Gemini 4 Argon, which is now available in the Gemini app and AI search mode."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "conticgo-497e0f81c3109276",
     "type": "news",
     "sourceId": "conticgo",
@@ -20,222 +290,6 @@
         "title": "Duke investiga una IA en el móvil para mejorar la asistencia visual",
         "summary": "La inteligencia artificial para personas con discapacidad visual sigue avanzando. Un equipo de investigación vinculado a Duke University, en Estados Unidos, trabaja en un sistema capaz de detectar obstáculos, identificar objetos que se aproximan y describir el entorno mediante indicaciones de audio. El proyecto combina unas gafas con cámara y un teléfono móvil. Su objetivo […] La entrada Duke investiga una IA en el móvil para mejorar la asistencia visual se publicó primero en Conticgo .",
         "body": "La inteligencia artificial para personas con discapacidad visual sigue avanzando. Un equipo de investigación vinculado a Duke University, en Estados Unidos, trabaja en un sistema capaz de detectar obstáculos, identificar objetos que se aproximan y describir el entorno mediante indicaciones de audio.\n\nEl proyecto combina unas gafas con cámara y un teléfono móvil. Su objetivo es facilitar información útil durante los desplazamientos y otras actividades cotidianas.\n\nAdemás, los investigadores quieren ejecutar el modelo de inteligencia artificial directamente en el teléfono, de esta forma, el sistema podría funcionar sin depender de servidores externos para procesar las imágenes.\n\nLa propuesta utiliza gafas inteligentes equipadas con una cámara que captura el entorno de la persona usuaria. Las imágenes se envían al sistema de inteligencia artificial para analizar lo que ocurre alrededor.\n\nA partir de esa información, el sistema busca proporcionar indicaciones de audio sobre posibles peligros y elementos relevantes del entorno.\n\nEntre las funciones que investiga el equipo se encuentran:\n\nEstas funciones pretenden complementar las herramientas de movilidad existentes, como el bastón blanco o el perro guía. No buscan sustituirlas.\n\nUna de las principales líneas de trabajo es conseguir que el sistema procese las imágenes en el propio teléfono, en lugar de enviarlas continuamente a servidores externos.\n\nPara ello, el equipo ha trabajado con un modelo de inteligencia artificial comprimido, denominado modelo de 0,5 mil millones de parámetros. Esta reducción busca que el sistema pueda ejecutarse en un dispositivo móvil con recursos limitados.\n\nLos investigadores han comparado un sistema básico de alertas basado en reglas con este nuevo modelo, diseñado para interpretar mejor el contexto de los posibles peligros.\n\nSin embargo, el equipo todavía debe completar un paso fundamental: exportar el modelo para que funcione directamente en el dispositivo. Por tanto, la asistencia inteligente sin conexión a internet es un objetivo del proyecto, no una función que deba darse por plenamente disponible.\n\nEjecutar la inteligencia artificial en el móvil puede ofrecer varias ventajas para las tecnologías de apoyo a la discapacidad visual.\n\nEn primer lugar, el sistema podría responder con mayor rapidez al no tener que enviar cada imagen a un servidor remoto y esperar su respuesta. En una situación de desplazamiento, reducir ese tiempo puede ser especialmente importante.\n\nAdemás, el procesamiento local permitiría reducir la dependencia de una conexión a internet. Esto facilitaría el uso de determinadas funciones en lugares con poca cobertura.\n\nPor último, mantener las imágenes en el propio dispositivo podría mejorar la privacidad, ya que reduciría la necesidad de transmitir vídeos del entorno a servidores externos. No obstante, la protección de los datos también dependerá del funcionamiento completo de la aplicación y de cómo gestione la información.\n\nEstas ventajas son posibilidades técnicas que deberán comprobarse mediante pruebas del sistema terminado.\n\nAunque la investigación abre nuevas posibilidades, todavía es necesario evaluar el funcionamiento del sistema en condiciones reales.\n\nPor ejemplo, detectar un obstáculo en una imagen no garantiza que se identifique correctamente durante un desplazamiento. Los cambios de iluminación, los espacios concurridos y los objetos difíciles de distinguir pueden afectar a los resultados.\n\nTambién será importante comprobar la rapidez de las alertas, la autonomía de la batería y la facilidad de uso de las gafas. Además, los avisos deberán ser claros y oportunos para no sobrecargar de información sonora a la persona usuaria.\n\nPor ello, las pruebas con personas ciegas y con baja visión serán fundamentales para determinar si esta tecnología aporta beneficios reales en la vida cotidiana.\n\nLa investigación de Duke University refleja una tendencia creciente en tiflotecnología: desarrollar sistemas de inteligencia artificial más pequeños y capaces de funcionar en dispositivos portátiles.\n\nSi se consigue ejecutar el modelo directamente en el móvil, la propuesta podría reducir la dependencia de internet y facilitar respuestas más inmediatas sobre el entorno.\n\nAun así, el proyecto sigue en desarrollo y todavía debe demostrar su eficacia en situaciones reales. Su evolución permitirá conocer hasta qué punto la inteligencia artificial local puede complementar las ayudas de movilidad y contribuir a la autonomía de las personas con discapacidad visual.\n\nFuentes: Duke University, Rhodes Information Initiative — Data+: AI-Powered Hazard Detection for the Visually Impaired (22 de julio de 2026)"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-1760cadf7689aa8e",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/policy/1021554/anduril-bluechip-65-percent-domestic-buy-american",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-29T02:22:46.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Anduril now says its BlueChip laptop will meet Buy American standards at launch",
-        "summary": "On Tuesday, defense contractor Anduril and chipmaker Qualcomm announced a partnership to build laptops entirely in the United States, starting with a single model in 2027. They also announced a \"long-term goal\" of pushing the computer industry to create \"a fully domestic supply chain.\" Even a single Made-in-USA laptop would be a surprise, because no […]",
-        "body": "On Tuesday, defense contractor Anduril and chipmaker Qualcomm announced a partnership to build laptops entirely in the United States , starting with a single model in 2027. They also announced a \"long-term goal\" of pushing the computer industry to create \"a fully domestic supply chain.\"\n\nEven a single Made-in-USA laptop would be a surprise, because no major US computer company builds its laptops here - not Apple, not Dell, not HP, not Microsoft. We're not aware of any company that does.\n\nBut we are aware of companies that have briefly and strategically assembled computers here seemingly to appease President Donald Trump . We're also aware of …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-a7e482c146a6d851",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/28/russia-now-requires-apple-to-store-user-communications-and-hand-them-over-if-requested/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-29T01:24:17.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "windows"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Russia now requires Apple to store user communications and hand them over if requested",
-        "summary": "As Bloomberg reported today, Apple and Microsoft are now subject to Russian regulations requiring companies to store users’ communications and provide them to security agencies if requested. Here are the details. more…",
-        "body": "As Bloomberg reported today, Apple and Microsoft are now subject to Russian regulations requiring companies to store users’ communications and provide them to security agencies if requested. Here are the details.\n\nApple and Microsoft are now in Russia’s state surveillance registry, joining companies and services such as Google Meet, WhatsApp, Telegram, Snapchat, Cloudflare, and Blizzard Entertainment, all of which are required to store users’ messages, audio and video communications, and provide them to Russian security agencies if requested.\n\nAccording to Bloomberg , Apple and Microsoft were added on October 2 to the “organizers of information dissemination” registry, which is maintained by Russia’s communications regulator, Roskomnadzor.\n\nHere’s Bloomberg :\n\nCompanies on the list are required under Russian law to store local users’ correspondence, audio and video messages and turn that data over to security services if asked. They must also store in Russia information about users and the transmission of their communications for three years.\n\nCompanies that fail to comply can face fines and ultimately have access to their services restricted in Russia. Google and its Google Meet video-calling service were added to the same registry in January.\n\nThe move comes as Russia continues to tighten restrictions on foreign messaging services, having already blocked or limited access to platforms such as WhatsApp, Telegram, Signal, and Apple’s FaceTime .\n\nSpecific to Apple, the company’s relationship with Russia has become increasingly complicated since the country invaded Ukraine in 2022, prompting Apple to suspend product sales and exports while limiting services such as Apple Pay.\n\nHowever, Apple continued operating the App Store in Russia, which has led to several disputes with local authorities.\n\nIn April, Russian users lost the ability to make new App Store purchases or renew subscriptions without an existing Apple Account balance, following government-imposed payment restrictions.\n\nIn June, the Kremlin demanded an explanation after Apple removed several apps developed by Russian state-controlled company VK from the App Store. Around the same time, Apple also removed banking apps linked to sanctioned Russian financial institutions.\n\nMore recently, in August, Russia’s antitrust regulator opened formal proceedings against Apple over its failure to preinstall the state-backed MAX messaging app and the RuStore app marketplace on its devices.\n\nAll of that said, neither Apple nor Microsoft has publicly commented on its inclusion in the registry or indicated whether it intends to comply with the requirements.\n\nTo read Bloomberg ’s full report, follow this link ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-a783cf1458563cfe",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1021644/adam-mosseri-instagram-ai-negativity",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T23:05:39.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Adam Mosseri says negativity around AI is ‘going to get worse’",
-        "summary": "Asked about AI and the trend of college students booing tech CEOs at graduation ceremonies, Instagram head Adam Mosseri acknowledged in an interview that a lot of people really don't like AI, and it's not just young people and creatives. Appearing on the Colin and Samir podcast to talk about the launch of widescreen and […]",
-        "body": "Asked about AI and the trend of college students booing tech CEOs at graduation ceremonies, Instagram head Adam Mosseri acknowledged in an interview that a lot of people really don't like AI, and it's not just young people and creatives. Appearing on the Colin and Samir podcast to talk about the launch of widescreen and long-form video for Instagram , Mosseri said he thinks there's a trend of \"more anxiety and more frustration and more anger about AI,\" particularly in creative industries:\n\nIt's not only getting worse, it's going to continue to get worse. I think we're going to see more frustration and anger, some of it founded, some of it un …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-61d819708200930a",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/28/apples-touchscreen-macbook-pro-pushes-laptop-pricing-to-a-new-extreme/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T22:47:50.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple’s touchscreen MacBook Pro pushes laptop pricing to a new extreme",
-        "summary": "Prepare to cough up around $14,549 if you want the new touchscreen MacBook Pro to have every upgrade.",
-        "body": "Posted:\n\nApple has officially entered the touchscreen MacBook Pro era, and apparently, it wants to drain your wallet while it’s at it.\n\nThe new touchscreen MacBook Pro starts at $2,899, which is already a hefty price tag in this economy. But if you want the absolute top-of-the-line model with every possible upgrade, prepare to cough up around $14,549.\n\nAs MacRumors first reported, Apple’s configurator prices the fully loaded 14-inch model at $14,249 and the 16-inch version at $14,549. Both come equipped with Apple’s top-tier M5 Max chip, featuring an 18-core CPU and 40-core GPU.\n\nYou can blame the ongoing memory shortage and AI’s seemingly endless appetite for hardware for some of the pricing pressure. Moving to a 4TB SSD costs an additional $1,000, while upgrading to 8TB adds $3,000. Want the new 16TB option? That’ll set you back another $7,000.\n\nAnother $2,000 gets you 128GB of memory, while nano-texture glass adds $150.\n\nFor some perspective, the previous 16-inch MacBook Pro topped out at $10,149. The new model raises that ceiling by a whopping $4,400.\n\nAbsurd prices aside, the launch marks a significant shift for Apple, nearly a decade after it first experimented with the Touch Bar . The company eventually abandoned that feature, but now it’s ready to embrace a touchscreen MacBook Pro.\n\nPreorders open October 30, with availability beginning November 6."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-0ecb5f66738086a5",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/28/iphone-duo-could-capture-nearly-30-of-foldable-market-in-2027-per-report/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T22:40:45.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iPhone Duo could capture nearly 30% of foldable market in 2027, per report",
-        "summary": "In a report released today, TrendForce says that with strong demand for the iPhone Duo out of the gate, Apple is poised to capture nearly 30% of the global foldable smartphone market by 2027. Here are the details. more…",
-        "body": "In a report released today, TrendForce says that with strong demand for the iPhone Duo out of the gate, Apple is poised to capture nearly 30% of the global foldable smartphone market by 2027. Here are the details.\n\nOne day after Apple announced the iPhone Duo last month, TrendForce published a report predicting that the company would ship 5 million units of its first foldable iPhone by the end of 2026, capturing 24.8% of the segment.\n\nAt the time, TrendForce expected the overall foldable smartphone market to grow by just 0.5% in 2026, with shipments from Android brands alone falling by more than 20% year over year.\n\nBy contrast, TrendForce expected the market to reach 23.5 million shipments in 2027, a 16.3% increase. The firm also suggested that Apple’s entry could help drive future growth through improvements in foldable technology, while new AI use cases could further boost demand.\n\nWith the iPhone Duo now shipping for nearly a week, TrendForce published a new report today reiterating its previous projections and forecasting that Apple will capture 29.8% of the foldable smartphone market in 2027.\n\nFrom the report:\n\nTrendForce notes that Apple’s greatest advantage lies in its ability to integrate chips, operating systems, and its developer ecosystem. As app compatibility and hardware reliability improve, the Duo is expected to further expand the practical value of foldable displays, helping shift competition in the foldable smartphone market from form-factor innovation toward multitasking efficiency.\n\nIf TrendForce’s projections pan out, Apple will hold second place in the foldable smartphone market in 2027, behind Samsung, whose share is expected to fall from 35.1% in 2026 to 31.9% next year, and ahead of Huawei, which is projected to drop from 24.8% to 21.3%.\n\nTo read TrendForce’s full report, follow this link ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-3f5bf4f114ae11f6",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/28/new-macbook-pro-ipad-mini-and-more-now-available-for-pre-order-on-amazon/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T22:12:39.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "New MacBook Pro, iPad mini, and more now available for pre-order on Amazon",
-        "summary": "Apple this week unveiled a range of new products, including a new iPad mini, M6 updates for the iMac and MacBook Pro, and the first-ever MacBook Pro with a touchscreen. Those products are now available to pre-order on Amazon: iPad mini M6 MacBook Pro M6 iMac MacBook Pro with PROLED XDR Display and Touch more…",
-        "body": "Apple this week unveiled a range of new products, including a new iPad mini, M6 updates for the iMac and MacBook Pro, and the first-ever MacBook Pro with a touchscreen.\n\nThose products are now available to pre-order on Amazon:\n\nThe new iPad mini is Apple’s “ biggest update ever ” for its smallest iPad. The refresh brings a new OLED display, the A20 Pro chip, a nano-texture display option, and a revamped speaker system. It’s also Apple’s first-ever iPad that is IP67 rated for water and dust resistance.\n\nThe new M6 MacBook Pro is largely the same as its predecessor, but with the latest-generation silicon inside. You can expect better performance along with faster Wi-Fi 7 and Bluetooth 7 connectivity. It’s available in silver and space black, just like before.\n\nThe M6 iMac is the same story . It brings faster performance along with Wi-Fi 7 and Bluetooth 6. It’s available in the same colors as before: green, yellow, orange, pink, purple, blue, and silver.\n\nFinally, the star of the show this week is the new high-end MacBook with an OLED touchscreen. It’s a trio of firsts for Apple: the first touchscreen Mac, the first OLED Mac, and the first Mac with a Dynamic Island. It’s powered by the same M5 Pro and M5 Max chips as before.\n\nIt also features a glorious glowing Apple logo on the back, the first since nearly a decade ago.\n\nThe new Macs and iPad mini will all start arriving to customers and Apple Stores on November 6. Are you planning to buy any of Apple’s new gear? Let us know down in the comments.\n\nFollow Chance : Threads , X , and Instagram"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-7eebf90357b44c70",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1021528/ice-cbp-data-leak",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T21:57:45.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "A hacker stole more than 40,000 DHS employee records",
-        "summary": "A hacker stole a trove of personal information from the Department of Homeland Security (DHS). The breach exposes the names, job titles, phone numbers, email addresses, and office locations of more than 41,000 employees, including those in US Immigration and Customs Enforcement (ICE) and Customs and Border Protection (CBP), according to TechCrunch and Wired. The […]",
-        "body": "A hacker stole a trove of personal information from the Department of Homeland Security (DHS). The breach exposes the names, job titles, phone numbers, email addresses, and office locations of more than 41,000 employees, including those in US Immigration and Customs Enforcement (ICE) and Customs and Border Protection (CBP), according to TechCrunch and Wired . The data also linked the agencies to specific surveillance tools.\n\nAs reported by TechCrunch , a hacker known as \"Department of Peace\" gained access to the data through Okta, an identity and access management service used by the DHS. Around 21,000 records pertain to CBP employees, and ne …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-5f12c9b66b0b91ad",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/28/google-expands-ai-search-ads-globally-as-core-ad-growth-slows/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T21:48:37.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google expands AI Search ads globally as core ad growth slows",
-        "summary": "The announcement came alongside parent company Alphabet's third-quarter earnings report, which saw revenue grow 25% year over year to $127.6 billion.",
-        "body": "Google is bringing ads in its AI-powered Search experiences to international markets, betting that generative AI can open up new revenue opportunities even as growth in its core search advertising business slows.\n\nThe announcement came Wednesday during Alphabet’s third-quarter earnings call, as the company reported $127.6 billion in revenue, up 25% year over year. But Search advertising growth continued to decelerate, and Alphabet shares fell 8% following the results.\n\nGoogle Search revenue grew 12% year over year in the third quarter, down from 17% growth in the second quarter and 19% in the first quarter. The slowdown puts added pressure on Google to turn its expanding AI features into a meaningful source of advertising revenue.\n\n“We are now scaling high-quality ads within AI overviews in AI mode to more users and queries,” Philipp Schindler, Google’s chief business officer, said during the call with investors. “This includes taking our monetization footprint global for the first time. Today, we’re announcing the expansion of ads in AI mode into international markets alongside multi-turn ads and AI mode in the U.S.”\n\nGoogle says early results suggest the formats are working. Click-through rates for sponsored product listings in AI Mode are already comparable to those for organic listings, according to Schindler. The company’s user research also indicates that people find the ads relevant.\n\nThe move builds on Google’s May announcement of new Gemini-powered ad formats, including conversational discovery ads that respond to users’ questions and sponsored recommendations integrated into AI-generated answers.\n\nGoogle CEO Sundar Pichai also said that Search queries grew at their fastest year-over-year rate in five years, though he did not disclose the exact growth rate. He credited AI features with changing how people use Search, including prompting longer and more complex queries.\n\nQueries in AI Mode are three times longer on average than traditional searches, Pichai said, while one in five AI Mode searches globally involves voice, images, or documents. Google has also surpassed 50 billion visual searches per month.\n\n“[Search] is bringing the benefits of AI to more people than any other product in the world,” Pichai told investors. “People are using our AI features more, searching in entirely new ways. Their queries are longer, personalized, and multimodal.”\n\nAlphabet’s Google Services division, which includes Search, generated $96.3 billion in revenue, up 11% year over year. Google Cloud revenue surged 103% to $30.7 billion.\n\nThe results follow a busy quarter for Google, including the release of Gemini 4 Argon , the growth of the Gemini app to 1 billion monthly users , and the launch of its Pixel 11 lineup ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-5a96b4d26aade133",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/28/microsoft-recorded-10-billion-in-revenue-from-openai/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T21:34:30.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Microsoft recorded $10 billion in revenue from OpenAI",
-        "summary": "Microsoft said it made $10 billion in revenue from commercial arrangements with OpenAI, including revenue-sharing payments, in the quarter ending September 30. It underscores the still-enormous financial dependency of the partnership.",
-        "body": "Microsoft generated $10 billion in revenue from commercial arrangements with OpenAI, including revenue-sharing payments, in the quarter ended September 30, the company said in regulatory filing on Wednesday. That represents nearly 11% of Microsoft’s total quarterly revenue of $92.3 billion, highlighting the enormous financial ties that remain between the two companies even as they increasingly compete for the same customers .\n\n(Microsoft’s financial year begins in July, making the quarter ended September 30, 2026 the first quarter of its fiscal 2027.)\n\nFor the full 2026 fiscal year, revenue from OpenAI hit $24.1 billion. At its latest quarterly pace, Microsoft would pull in $40 billion annually from OpenAI-related arrangements.\n\nMicrosoft also reported $7.2 billion in outstanding receivables from OpenAI at the end of September, up from $6 billion at the end of June. That money represents amounts OpenAI owes for previous transactions, not additional revenue.\n\nIt’s not clear how much of Microsoft’s revenue from OpenAI came from revenue-sharing payments or Azure cloud computing services. TechCrunch has reached out for more information. In November 2025, TechCrunch reported , citing leaked documents, that Microsoft had received $865.8 million in net revenue-sharing payments from OpenAI during the first nine months of that year.\n\nOpenAI reportedly shares 20% of its revenue with Microsoft as part of a previous deal in which the software giant invested more than $13 billion in the AI startup. (Neither the AI lab nor Microsoft have publicly confirmed this percentage.) As part of an April 2026 agreement, OpenAI is on the hook to conitnue sharing revenue with Microsoft through 2030, subject to a cap, even as OpenAI is allowed to work with competing cloud providers.\n\nThe companies began loosening the ties of their once-exclusive partnership in October 2025, when Microsoft relinquished its hold on OpenAI to give the startup more freedom to partner with other cloud providers. In exchange, OpenAI committed to buying an additional $250 billion in Azure services as part of an October 2025 agreement.\n\nMicrosoft’s ownership stake in OpenAI has also declined slightly from about 25% in June to 24% in September. That continues a gradual decline from roughly 27% following the October 2025 recapitalization. Microsoft did not specify what caused the dilution."
       }
     },
     "media": null
@@ -356,53 +410,6 @@
         "title": "Cadillac Escalade IQ review: Huge battery, huge range, huge SUV",
         "summary": "With more than 200 kWh, this luxury three-row can go 460 miles on a charge.",
         "body": "“Please have at least 125 miles of range left when we pick it up.” That request from the people who look after the Cadillac press cars wasn’t going to be hard to honor. The electric Escalade IQ arrived with an indicated range of 440 miles (708 km), and with a full week of work to squeeze in, getting anywhere close to needing to recharge it seemed unlikely. With more than 200 kWh of lithium-ion battery between its axles, range is one thing the big electric Caddy needn’t worry about.\n\nDesigned and debuted during a time of greater EV optimism, the Escalade is Cadillac’s statement that swapping out a V8 for a pair of powerful electric motors is no compromise to its ambitions, even if the brand’s future will now include a mix of electric and combustion cars beyond 2030 . It shares a battery pack and much else with other full-size GM EVs we’ve tested: the Chevrolet Silverado EV , the GMC Sierra EV , and of course the divisive Hummer EVs . And like those trucks and SUVs, the Escalade is large and heavy—just small enough to fit into a standard parking space, with a curb weight sufficient to push it into the Class 3 truck category.\n\nSo, the side mirrors are flat, and there’s no formal EPA range—Cadillac says it achieves 460 miles (740 km) on the EPA test cycle—but there are plenty of airbags, even though the 9,046 lb (4,103 kg) curb weight does not require them. Yes, you did read that right, it does weigh 4 tons. And yes, the electric Escalade does weigh a third more than the last gas-powered one we tested .\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-4a8806b3d9801e4c",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2299823/new-york-governor-signs-ai-chatbot-child-safety-law/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T16:33:01.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "New York governor signs AI chatbot child safety law",
-        "summary": "A separate law aims to shore up security on connected baby monitors.",
-        "body": "A separate law aims to shore up security on connected baby monitors.\n\nNew York Governor Kathy Hochul has signed a law that aims to protect children from AI chatbot harms. The legislation requires AI companies to verify users' ages. They'll need to offer users at least one verification method that doesn't entirely rely on government ID. Companies will have to delete this \"age information\" after use.\n\nIf a user is under 18 or a company has yet to confirm the person is an adult, their chatbot will need to abide by certain restrictions. For instance, it cannot pretend \"to be a real person, to be alive or to have human emotions.\" According to a press release , the legislation also bans chatbots from:\n\nClaiming a personal, romantic, professional or authority-figure relationship with a child\n\nUnprompted emotional questions, and using a child's private health or personal information from earlier conversations\n\nPromoting or helping with suicide, self harm, eating disorders or drug and alcohol use\n\nEncouraging kids to keep secrets, isolate themselves or avoid asking parents, trusted adults or professionals for help\n\nAny sexually explicit content or child sexual abuse material\n\nThere will be a website through which the public can file complaints to New York's attorney general. Companies that break the law may be on the hook for civil penalties of up to $25,000 per violation, as well as damages, restitution and other forms of relief. They may also have to delete any data they collect unlawfully along with models trained on that information. The law will take effect in six months.\n\n\"Under this new law sponsored by Senator Gonzalez and Assemblymember Bores, no longer will minors have access to chatbots that pretend to be their friends and boyfriends and girlfriends,\" Hochul said at a press conference. \"No longer will chatbots be allowed to keep sensitive information about a minor's emotional and physical health. No longer will chatbots discourage kids from seeking help from licensed professionals. And I'm not sure why we have to pass a law against something so obvious, but no longer will minors have access to chatbots that may in any way encourage thoughts of suicide. Now, this law builds on our groundbreaking Safe for Kids Act that sent a message loud and clear to technology companies: We will not allow you to monetize our children's mental health.\"\n\n\"New York just made history by signing into law the strongest kids' AI safety bill in the country,\" Jim Steyer, founder and CEO of Common Sense Media , said in a statement. \"AI companies offer chatbots with features that are dangerous, and even deadly, for kids and teens. That is not innovation; it is reckless endangerment of our children. Now, those harmful features will be outlawed in New York.\"\n\nSteyer added that the legislation is a template for the rest of the US. Earlier this month, eight states filed separate lawsuits against OpenAI , accusing the company of endangering children.\n\nIn September, New York City banned public schools from letting children from 2-K to eighth grade access generative AI tools in class. There are some exceptions, including for those who require assistive technology. During the one-year ban, the city will carry out studies into the impact of the tech on children.\n\nHochul also signed legislation that will require baby monitors with an internet connection that are sold in the state to prevent unauthorized users from seeing or hearing any activity that the devices capture. These baby monitors will also need to have warning labels that remind users why it's important to use security features and highlight the risks of unsecured connections. The law takes effect in 90 days."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-3ed192509ca1986a",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2299600/audio-technica-just-released-its-first-set-of-wireless-streamset-headphones/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T15:34:06.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Audio Technica just released its first set of wireless StreamSet headphones",
-        "summary": "This expands the lineup beyond XLR and USB-connected models.",
-        "body": "This expands the lineup beyond XLR and USB-connected models.\n\nAudio Technica just released a wireless model in its popular StreamSet category of headphones . The new ATH-M50xSTS-WL is the very first wireless version in the lineup.\n\nThese cans don't connect via Bluetooth, as StreamSet headphones are primarily intended for content creators, streamers and gamers, all of which require ultra-low latency. They connect via 2.4GHz, so there's a USB transceiver that hooks up to PCs and gaming consoles like the PS5 and Switch 2. The battery lasts for around 24 hours and is charged via USB. The headphones can still work while being charged, via a wired connection.\n\nOtherwise, these are extremely similar to the original wired ATH-M50xSTS headphones. They feature microphones based on the company's 20 Series and audio drivers pulled from the ATH-M50x professional monitor headphones.\n\nThe headset includes adaptive noise cancellation with two selectable levels. The company says an algorithm \"continuously monitors audio input to prioritize the user's voice over ambient sounds,\" which includes stuff like PC fans and air conditioners.\n\nThere's a cardioid condenser microphone on a flexible boom arm that instantly mutes audio when flipped up. It uses the same 45mm audio drivers found in the ATH-M50x studio monitor headphones. I've used that particular and iconic model and can attest they do indeed sound great.\n\nThey ship with two types of interchangeable earpads. There's a pair for better sound quality, which is great for listening to music, and another designed with breathable mesh for long streaming and gaming sessions. The ATH-M50xSTS-WL headphones are available right now and cost $299."
       }
     },
     "media": null

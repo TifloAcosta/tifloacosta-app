@@ -1,1 +1,1 @@
-publish 1.3.8 internal - authorized by Tony 2026-10-29 - retry after PR 272 validated; internal testing before production, preserve user data
+prepare 1.3.8 production - signed candidate only; do not publish before real upgrade and OAuth validation

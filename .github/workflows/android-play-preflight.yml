@@ -1,0 +1,47 @@
+name: Verify Google Play access without publishing
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/android-play-preflight.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    env:
+      GOOGLE_PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+    steps:
+      - name: Check out current app
+        uses: actions/checkout@v5
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - name: Read Play permissions and existing version codes
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFile } from 'node:fs/promises';
+          import { createGoogleAccessToken, createPlayReleaseClient, collectVersionCodes } from './mobile/scripts/google-play-release.mjs';
+
+          const json = String(process.env.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON || '').trim();
+          if (!json) throw new Error('Play service-account credentials missing from repository secrets');
+          const request = JSON.parse(await readFile('mobile/release/request.json', 'utf8'));
+          const token = await createGoogleAccessToken(JSON.parse(json));
+          const play = createPlayReleaseClient({ packageName: 'com.tifloacosta.app', accessToken: token });
+          console.log('Google OAuth authentication successful; checking Play permissions without uploading a release');
+          const edit = await play.createEdit();
+          if (!edit?.id) throw new Error('Google Play did not return an edit identifier');
+          console.log('Google Play edit permission successful');
+          const [tracks, bundles] = await Promise.all([play.listTracks(edit.id), play.listBundles(edit.id)]);
+          const codes = collectVersionCodes({ tracks: tracks?.tracks || [], bundles: bundles?.bundles || [] });
+          console.log('Highest version code currently registered in Play: ' + Math.max(0, ...codes));
+          console.log('Is version code 16 already used: ' + codes.includes(16));
+          console.log('Requested version: ' + request.versionName + '; current publishing status: ' + request.status);
+          console.log('Preflight passed. NO bundle uploaded and NO release committed.');
+          NODE

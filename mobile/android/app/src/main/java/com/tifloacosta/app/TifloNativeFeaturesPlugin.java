@@ -182,9 +182,17 @@ public class TifloNativeFeaturesPlugin extends Plugin {
         android.content.SharedPreferences preferences = getContext()
                 .getSharedPreferences("tiflo-reader-navigation", android.content.Context.MODE_PRIVATE);
         boolean pending = preferences.getBoolean("open-existing-library", false);
-        if (pending) preferences.edit().remove("open-existing-library").commit();
+        String bookId = pending ? preferences.getString("open-existing-book-id", "") : "";
+        if (pending && !preferences.edit()
+                .remove("open-existing-library")
+                .remove("open-existing-book-id")
+                .commit()) {
+            call.reject("No se pudo confirmar el regreso al lector anterior.");
+            return;
+        }
         JSObject result = new JSObject();
         result.put("openExistingReader", pending);
+        result.put("bookId", bookId == null ? "" : bookId);
         call.resolve(result);
     }
 

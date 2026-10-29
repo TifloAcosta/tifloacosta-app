@@ -96,10 +96,24 @@ object NativeReaderFormats {
     }
 
     private fun asText(source: String): String {
-        val cleaned = source.replace(
-            Regex("<(script|style)\\b[^>]*>[\\s\\S]*?</\\1>", RegexOption.IGNORE_CASE), ""
-        )
-        return Html.fromHtml(cleaned, Html.FROM_HTML_MODE_COMPACT).toString()
+        // Remove only semantic pagebreaks and navigation indexes, not chapters.
+        val document = org.jsoup.Jsoup.parse(source)
+        document.select("script, style, [role=doc-pagebreak], [aria-hidden=true]").remove()
+        document.allElements.filter { element ->
+            val types = element.attr("epub:type").split(Regex("\\s+"))
+            types.any { it.equals("pagebreak", true) || it.equals("page-list", true) } ||
+                element.attr("role").equals("doc-pagebreak", true)
+        }.forEach { it.remove() }
+        document.select("[class], [id]").forEach { node ->
+            val tokens = (node.classNames() + node.id())
+                .flatMap { it.split(Regex("[\\s_-]+")) }
+                .map { it.lowercase(Locale.ROOT) }
+            if (tokens.contains("pagebreak") || tokens.contains("pagenum") ||
+                tokens.contains("pagenumber") || tokens.contains("pagelabel")) {
+                node.remove()
+            }
+        }
+        return Html.fromHtml(document.body().html(), Html.FROM_HTML_MODE_COMPACT).toString()
             .replace(Regex("\\n{4,}"), "\n\n")
     }
 

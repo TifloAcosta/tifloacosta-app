@@ -4,6 +4,26 @@ import { readFile } from 'node:fs/promises';
 
 const source = async path => readFile(new URL(path, import.meta.url), 'utf8');
 
+test('older books are listed read-only and open with original IDs, marks and progress', async () => {
+  const legacy = await source('../../android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativeLegacyLibraryCheck.kt');
+  const native = await source('../../android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativeTifloLector.kt');
+  const bridge = await source('../android/app/src/main/java/com/tifloacosta/app/TifloNativeFeaturesPlugin.java');
+  const app = await source('../src/app.mjs');
+
+  assert.match(legacy, /SQLiteDatabase\.OPEN_READONLY/);
+  assert.match(legacy, /SELECT id, title, format FROM books/);
+  assert.match(legacy, /LIMIT \? OFFSET \?/);
+  assert.doesNotMatch(legacy, /getWritableDatabase\(|deleteDatabase\(/);
+  assert.match(native, /legacyBooks\.forEach/);
+  assert.match(native, /openPreviousBook\(previous\.id\)/);
+  assert.match(native, /putString\("open-existing-book-id", bookId\)/);
+  assert.match(bridge, /getString\("open-existing-book-id"/);
+  assert.match(bridge, /result\.put\("bookId", bookId/);
+  assert.match(app, /if \(bookId\) openReadingBook\(bookId\)/);
+  assert.match(app, /percent != null && Number\.isFinite\(Number\(percent\)\)/);
+  assert.match(app, /router\.start\('home'\);\s*void restoreExistingReaderNavigation\(\)/);
+});
+
 test('native integration retains production package identity and minimum Android API', async () => {
   const gradle = await source('../android/app/build.gradle');
   const variables = await source('../android/variables.gradle');
@@ -73,7 +93,9 @@ test('native reader warns about unmigrated legacy books instead of showing a fal
   assert.match(audit, /LegacyLibraryState\(null, true\)/);
   assert.doesNotMatch(audit, /SQLiteOpenHelper|OPEN_READWRITE|deleteDatabase/);
   assert.match(reader, /NativeLegacyLibraryCheck\.inspect/);
-  assert.match(reader, /Siguen en el TifloLector actual/);
+  assert.match(reader, /Libros que ya tenías/);
+  assert.match(reader, /legacyBooks\.forEach/);
+  assert.match(reader, /openPreviousBook\(previous\.id\)/);
   assert.match(reader, /No se pudo comprobar la biblioteca anterior/);
 });
 

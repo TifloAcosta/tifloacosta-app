@@ -43,11 +43,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.isTraversalGroup
+import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
@@ -74,9 +79,23 @@ fun NativeTifloLector(
     val scope = rememberCoroutineScope()
     var library by remember { mutableStateOf<List<ReaderBook>>(emptyList()) }
     var legacyState by remember { mutableStateOf<LegacyLibraryState?>(null) }
+    var legacyBooks by remember { mutableStateOf<List<LegacyLibraryBook>>(emptyList()) }
+    var legacyReadError by remember { mutableStateOf("") }
     LaunchedEffect(Unit) {
-        legacyState = withContext(Dispatchers.IO) {
-            NativeLegacyLibraryCheck.inspect(context.applicationContext)
+        try {
+            val previous = withContext(Dispatchers.IO) {
+                NativeLegacyLibraryCheck.inspect(context.applicationContext)
+            }
+            legacyState = previous
+            if ((previous.bookCount ?: 0) > 0) {
+                legacyBooks = withContext(Dispatchers.IO) {
+                    NativeLegacyLibraryCheck.listBooks(context.applicationContext)
+                }
+            }
+        } catch (failure: Exception) {
+            legacyReadError = if (english)
+                "Could not list earlier books. Use Open existing library; no files were modified."
+            else "No se pudo enumerar la biblioteca anterior. Usa Abrir biblioteca anterior; no se ha modificado ningún archivo."
         }
     }
     var folderNames by remember { mutableStateOf<List<String>>(emptyList()) }
@@ -418,6 +437,36 @@ fun NativeTifloLector(
         "Cambiar título", "Mover a carpeta", "Eliminar",
         "Añadir o quitar de cola", "Marcar como terminado o pendiente")
 
+    /**
+     * Continue with the existing TifloLector for an older book. No copying,
+     * deletion or position conversion: the original reader retains all marks.
+     */
+    fun openPreviousBook(bookId: String? = null) {
+        val navigation = context.getSharedPreferences(
+            "tiflo-reader-navigation", android.content.Context.MODE_PRIVATE
+        )
+        val change = navigation.edit().putBoolean("open-existing-library", true)
+        if (bookId.isNullOrBlank()) change.remove("open-existing-book-id")
+        else change.putString("open-existing-book-id", bookId)
+        if (!change.commit()) {
+            error = if (english) "Could not open the previous library."
+                else "No se pudo solicitar la apertura de la biblioteca anterior."
+            return
+        }
+        try {
+            val backIntent = Intent().setClassName(
+                context.packageName, "com.tifloacosta.app.MainActivity"
+            ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            context.startActivity(backIntent)
+            (context as? android.app.Activity)?.finish()
+        } catch (failure: Exception) {
+            navigation.edit().remove("open-existing-library")
+                .remove("open-existing-book-id").apply()
+            error = if (english) "Original reader is unavailable in this test build."
+                else "La biblioteca original no está disponible en esta compilación."
+        }
+    }
+
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)) {
         TextButton(onClick = onBack) { Text(if (english) "Back to home" else "Volver al inicio") }
@@ -457,51 +506,61 @@ fun NativeTifloLector(
                 Text(if (english) "Manage reading queue" else "Gestionar cola de lectura")
             }
         }
-        // An empty NEW index must not imply the pre-upgrade library was deleted.
+        // Existing documents appear in the same reader home, not behind an
+        // empty-looking native index; old metadata stays in the published store.
         legacyState?.let { state ->
+            if (legacyReadError.isNotBlank()) Text(legacyReadError)
             if (state.databasePresent && state.bookCount == null) {
-                Text(
-                    if (english)
-                        "The previous library could not be checked. Its files have not been removed. Return to the existing TifloLector until migration is verified."
-                    else
-                        "No se pudo comprobar la biblioteca anterior. Sus archivos no se han borrado. Vuelve al TifloLector actual hasta verificar la migración."
-                )
+                Text(if (english)
+                    "The existing library could not be read. Its files are untouched."
+                else "No se pudo comprobar la biblioteca anterior. Sus archivos siguen intactos.")
             } else if ((state.bookCount ?: 0) > 0) {
                 Text(
                     if (english)
-                        "The previous reader contains ${state.bookCount} books. They are still in the existing TifloLector, not in this native preview. Return to the previous reader to use them; no data was migrated or deleted."
+                        "Existing books (${state.bookCount}). Open any title to continue in the original reader with bookmarks and reading progress preserved."
                     else
-                        "El lector anterior contiene ${state.bookCount} libros. Siguen en el TifloLector actual, no en esta vista previa nativa. Vuelve al lector anterior para utilizarlos; no se han migrado ni borrado datos."
+                        "Libros que ya tenías (${state.bookCount}). Abre cualquier título en el lector original, conservando tus marcas y el progreso.",
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.semantics { heading() }
                 )
-            }
-            if (state.databasePresent) {
-                TextButton(
-                    onClick = {
-                        val nav = context.getSharedPreferences(
-                            "tiflo-reader-navigation", android.content.Context.MODE_PRIVATE
-                        )
-                        if (!nav.edit().putBoolean("open-existing-library", true).commit()) {
-                            error = if (english) "Could not open the previous library."
-                                else "No se pudo solicitar la apertura de la biblioteca anterior."
-                        } else {
-                            try {
-                                val backIntent = Intent().setClassName(
-                                    context.packageName, "com.tifloacosta.app.MainActivity"
-                                ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or
-                                    Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                                context.startActivity(backIntent)
-                                (context as? android.app.Activity)?.finish()
-                            } catch (failure: Exception) {
-                                nav.edit().remove("open-existing-library").apply()
-                                error = if (english) "Original reader is unavailable in this test build."
-                                    else "La biblioteca original no está disponible en esta compilación."
+                legacyBooks.forEach { previous ->
+                    TextButton(
+                        onClick = { openPreviousBook(previous.id) },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(if (english) "Open: " + previous.title
+                            else "Abrir: " + previous.title)
+                    }
+                }
+                if (legacyBooks.size < (state.bookCount ?: 0)) {
+                    TextButton(
+                        onClick = {
+                            scope.launch {
+                                try {
+                                    val next = withContext(Dispatchers.IO) {
+                                        NativeLegacyLibraryCheck.listBooks(
+                                            context.applicationContext,
+                                            offset = legacyBooks.size, limit = 20
+                                        )
+                                    }
+                                    legacyBooks = legacyBooks + next
+                                } catch (failure: Exception) {
+                                    legacyReadError = if (english)
+                                        "Could not load more existing books."
+                                    else "No se pudieron cargar más libros anteriores."
+                                }
                             }
-                        }
-                    },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(if (english) "Open existing reading library"
-                        else "Abrir biblioteca anterior")
+                        }, modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(if (english) "Show 20 more existing books"
+                            else "Mostrar otros 20 libros anteriores")
+                    }
+                }
+            }
+            if (state.databasePresent && state.bookCount != 0) {
+                TextButton(onClick = { openPreviousBook() }, modifier = Modifier.fillMaxWidth()) {
+                    Text(if (english) "Open complete existing library"
+                        else "Abrir biblioteca anterior completa")
                 }
             }
         }
@@ -535,25 +594,37 @@ fun NativeTifloLector(
                     9 -> save(book.copy(finished = !book.finished))
                 }
             }
+            // One TalkBack stop per book: its title, progress and selected action.
+            // Clear the Material button/text semantics before assigning the final
+            // accessible name. Otherwise the title can be announced twice.
+            val readingStatus = when {
+                book.finished -> if (english) "Finished" else "Terminado"
+                book.tracks.isNotEmpty() ->
+                    (if (english) "Audio section " else "Sección de audio ") +
+                    (book.trackIndex + 1) + " / " +
+                    book.audioSegments.ifEmpty { book.tracks.map { ReaderAudioSegment(0) } }.size
+                else -> (if (english) "Read " else "Leído ") +
+                    ReaderUnits.percent(book.offset, book.length) +
+                    (if (english) " percent" else " por ciento")
+            }
             OutlinedButton(onClick = { run(action) },
-                modifier = Modifier.fillMaxWidth().semantics {
+                modifier = Modifier.fillMaxWidth().clearAndSetSemantics {
                     contentDescription = book.title
-                    stateDescription = actions[action] + ". " + when {
-                        book.finished -> if (english) "Finished" else "Terminado"
-                        book.tracks.isNotEmpty() ->
-                            (if (english) "Audio section " else "Sección de audio ") +
-                            (book.trackIndex + 1) + " / " +
-                            book.audioSegments.ifEmpty { book.tracks.map { ReaderAudioSegment(0) } }.size
-                        else -> (if (english) "Read " else "Leído ") +
-                            ReaderUnits.percent(book.offset, book.length) + "%"
-                    } + if (book.id in queuedIds) {
-                        if (english) ". In reading queue" else ". En cola de lectura"
-                    } else ""
+                    stateDescription = readingStatus +
+                        (if (book.id in queuedIds) {
+                            if (english) ". In reading queue" else ". En cola de lectura"
+                        } else "") +
+                        (if (english) ". Action: " else ". Acción: ") + actions[action]
                     progressBarRangeInfo = ProgressBarRangeInfo(
                         action.toFloat(), 0f..actions.lastIndex.toFloat(), actions.size - 2
                     )
                     setProgress { v ->
                         action = v.roundToInt().coerceIn(0, actions.lastIndex)
+                        true
+                    }
+                    onClick(label = if (english) "Perform selected book action"
+                        else "Ejecutar acción del libro") {
+                        run(action)
                         true
                     }
                     customActions = actions.mapIndexed { i, label ->
@@ -694,12 +765,16 @@ private fun NativeReadingScreen(
     val active = playback.bookId == book.id && playback.kind == "text"
     val playing = active && playback.playing
     var offset by remember(book.id) { mutableIntStateOf(book.offset) }
+    // Do not replace the accessible text excerpt at each TTS utterance.
+    var previewOffset by remember(book.id) { mutableIntStateOf(book.offset) }
+    val titleFocusRequester = remember(book.id) { FocusRequester() }
+    var titleFocusedOnOpen by rememberSaveable(book.id) { mutableStateOf(false) }
     val documentPreferences = remember {
         context.getSharedPreferences("native-reader-preferences", 0)
     }
     var unitType by rememberSaveable(book.id) {
         mutableIntStateOf(documentPreferences.getInt("unit." + book.id,
-            documentPreferences.getInt("unit", 1)).coerceIn(0, 2))
+            documentPreferences.getInt("unit", 1)).coerceIn(0, 5))
     }
     var showAudio by rememberSaveable(book.id) { mutableStateOf(false) }
     var showPronunciation by rememberSaveable(book.id) { mutableStateOf(false) }
@@ -747,19 +822,59 @@ private fun NativeReadingScreen(
         else startSpeech()
     }
 
-    val units = remember(fullText, unitType) { ReaderUnits.split(fullText, unitType) }
+    val chapters = remember(fullText) { ReaderNavigation.chapterStarts(fullText) }
+    val availableModes = if (english) {
+        listOf(0 to "Block", 1 to "Paragraph", 2 to "Sentence", 3 to "Word") +
+            (if (chapters.isNotEmpty()) listOf(4 to "Chapter or section") else emptyList()) +
+            listOf(5 to "Percentage (10% steps)")
+    } else {
+        listOf(0 to "Bloque", 1 to "Párrafo", 2 to "Frase", 3 to "Palabra") +
+            (if (chapters.isNotEmpty()) listOf(4 to "Capítulo o sección") else emptyList()) +
+            listOf(5 to "Porcentaje (pasos del 10 %)")
+    }
+    // Audio synthesis keeps natural-length utterances in special navigation modes.
+    val effectiveUnitType = if (unitType == 4 && chapters.isEmpty()) 1 else unitType
+    val ttsUnit = effectiveUnitType.takeIf { it in 0..2 } ?: 1
+    val units = remember(fullText, ttsUnit) { ReaderUnits.split(fullText, ttsUnit) }
     val visibleMarks = if (active) playback.textMarks else book.marks
     val displayOffset = if (active) playback.textOffset else offset
     val currentIndex = ReaderUnits.indexForOffset(units, displayOffset)
     val current = units.getOrNull(currentIndex)
-    val steps = if (english) listOf("Block", "Paragraph", "Sentence")
-        else listOf("Bloque", "Párrafo", "Frase")
+    val preview = units.getOrNull(ReaderUnits.indexForOffset(units, previewOffset))
+    val selectedModeIndex = availableModes.indexOfFirst { it.first == effectiveUnitType }
+        .coerceAtLeast(0)
+    val currentChapter = chapters.indexOfLast { it <= displayOffset }.coerceAtLeast(0)
+    LaunchedEffect(active, playing, book.id) {
+        if (active && !playing) previewOffset = playback.textOffset
+    }
 
     fun setOffset(value: Int) {
         val next = value.coerceIn(0, fullText.length)
         offset = next
+        previewOffset = next
         if (active) send(NativeReaderPlaybackService.ACTION_SEEK, next)
         else onUpdate(book.copy(offset = next))
+    }
+
+    fun moveOneUnit(forward: Boolean) {
+        when (effectiveUnitType) {
+            3 -> setOffset(if (forward) ReaderNavigation.nextWordStart(fullText, displayOffset)
+                else ReaderNavigation.previousWordStart(fullText, displayOffset))
+            4 -> if (chapters.isNotEmpty()) {
+                val target = (currentChapter + if (forward) 1 else -1)
+                    .coerceIn(0, chapters.lastIndex)
+                setOffset(chapters[target])
+            }
+            5 -> setOffset(ReaderNavigation.percentageStep(
+                displayOffset, fullText.length, forward))
+            else -> if (units.isNotEmpty()) {
+                if (active) send(if (forward) NativeReaderPlaybackService.ACTION_NEXT
+                    else NativeReaderPlaybackService.ACTION_PREVIOUS)
+                else setOffset(units[
+                    (currentIndex + if (forward) 1 else -1).coerceIn(0, units.lastIndex)
+                ].start)
+            }
+        }
     }
 
     val actions = if (english)
@@ -770,15 +885,7 @@ private fun NativeReadingScreen(
         when (which) {
             0 -> toggleSpeech()
             1 -> if (active) send(NativeReaderPlaybackService.ACTION_STOP)
-            2, 3 -> if (units.isNotEmpty()) {
-                if (active) send(if (which == 2)
-                    NativeReaderPlaybackService.ACTION_PREVIOUS else NativeReaderPlaybackService.ACTION_NEXT)
-                else {
-                    val index = (currentIndex + if (which == 2) -1 else 1)
-                        .coerceIn(0, units.lastIndex)
-                    setOffset(units[index].start)
-                }
-            }
+            2, 3 -> moveOneUnit(which == 3)
             4 -> {
                 val mark = displayOffset.coerceIn(0, fullText.length)
                 if (active) send(NativeReaderPlaybackService.ACTION_BOOKMARK)
@@ -788,6 +895,13 @@ private fun NativeReadingScreen(
         }
     }
 
+    LaunchedEffect(book.id) {
+        if (!titleFocusedOnOpen) {
+            // Once per opening only; do not steal TalkBack focus on audio updates.
+            withFrameNanos { }
+            titleFocusedOnOpen = titleFocusRequester.requestFocus()
+        }
+    }
     LaunchedEffect(book.id) {
         val choice = prefs.getInt("autoplay." + book.id, -1)
         val enabled = when (choice) {
@@ -814,19 +928,19 @@ private fun NativeReadingScreen(
     }
 
     Column(
-        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
+        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
+            .semantics { isTraversalGroup = true }.padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        TextButton(onClick = onBack) {
-            Text(if (english) "Back to my library" else "Volver a Mi biblioteca")
-        }
         Text(
             book.title,
             style = MaterialTheme.typography.headlineSmall,
-            modifier = Modifier.fillMaxWidth().clickable { execute(selectedAction) }.semantics {
+            modifier = Modifier.fillMaxWidth().focusRequester(titleFocusRequester)
+                .clickable { execute(selectedAction) }.clearAndSetSemantics {
                 heading()
                 contentDescription = book.title
-                stateDescription = actions[selectedAction]
+                stateDescription = (if (english) "Action: " else "Acción: ") +
+                    actions[selectedAction]
                 progressBarRangeInfo = ProgressBarRangeInfo(
                     selectedAction.toFloat(), 0f..actions.lastIndex.toFloat(), actions.size - 2
                 )
@@ -834,11 +948,19 @@ private fun NativeReadingScreen(
                     selectedAction = value.roundToInt().coerceIn(0, actions.lastIndex)
                     true
                 }
+                onClick(label = if (english) "Perform selected reading action"
+                    else "Ejecutar acción de lectura") {
+                    execute(selectedAction)
+                    true
+                }
                 customActions = actions.mapIndexed { i, label ->
                     CustomAccessibilityAction(label) { execute(i); true }
                 }
             }
         )
+        TextButton(onClick = onBack) {
+            Text(if (english) "Back to my library" else "Volver a Mi biblioteca")
+        }
         Button(
             onClick = { toggleSpeech() },
             enabled = units.isNotEmpty(),
@@ -856,30 +978,56 @@ private fun NativeReadingScreen(
             modifier = Modifier.fillMaxWidth()) {
             Text(if (english) "Book details and tools" else "Detalles y herramientas")
         }
-        // Two compact, always-available TalkBack adjustable controls.
-        // Swipe up/down on "Move by" chooses block/paragraph/sentence.
-        // Swipe up/down on the position moves exactly one chosen unit.
         ReaderCompactChoice(
             if (english) "Move by" else "Avanzar y retroceder por",
-            steps, unitType, english
-        ) { chosen ->
+            availableModes.map { it.second }, selectedModeIndex, english
+        ) { choice ->
+            val chosen = availableModes[choice].first
             unitType = chosen
             prefs.edit().putInt("unit." + book.id, chosen).apply()
-            if (active) send(NativeReaderPlaybackService.ACTION_UNIT, chosen)
+            // Changing navigation must not change the saved reading offset.
+            if (active) send(NativeReaderPlaybackService.ACTION_UNIT,
+                chosen.takeIf { it in 0..2 } ?: 1)
         }
-        ReaderCompactPosition(
-            label = steps[unitType],
-            current = currentIndex,
-            count = units.size,
-            english = english
-        ) { chosen ->
-            units.getOrNull(chosen)?.let { setOffset(it.start) }
+        when (effectiveUnitType) {
+            3 -> ReaderCompactOffsetPosition(
+                label = if (english) "Reading position by word" else "Posición de lectura por palabra",
+                valueLabel = ReaderNavigation.wordAt(fullText, displayOffset),
+                current = displayOffset,
+                maximum = fullText.length,
+                english = english,
+                onPrevious = { moveOneUnit(false) },
+                onNext = { moveOneUnit(true) }
+            )
+            4 -> ReaderCompactPosition(
+                label = if (english) "Reading position by chapter" else "Posición de lectura por capítulo",
+                current = currentChapter,
+                count = chapters.size,
+                english = english
+            ) { chosen -> chapters.getOrNull(chosen)?.let { position -> setOffset(position) } }
+            5 -> ReaderCompactOffsetPosition(
+                label = if (english) "Reading position by percentage" else "Posición de lectura por porcentaje",
+                valueLabel = ReaderUnits.percent(displayOffset, fullText.length).toString() + "%",
+                current = ReaderUnits.percent(displayOffset, fullText.length),
+                maximum = 100,
+                english = english,
+                onPrevious = { moveOneUnit(false) },
+                onNext = { moveOneUnit(true) }
+            )
+            else -> ReaderCompactPosition(
+                label = (if (english) "Reading position by " else "Posición de lectura por ") +
+                    availableModes[selectedModeIndex].second.lowercase(),
+                current = currentIndex,
+                count = units.size,
+                english = english
+            ) { chosen -> units.getOrNull(chosen)?.let { unit -> setOffset(unit.start) } }
         }
+        // Show and announce the same complete message: never replace the
+        // percentage with a content description that hides its value.
         Text(
-            (if (english) "Read: " else "Leído: ") + ReaderUnits.percent(displayOffset, fullText.length) + "%",
-            modifier = Modifier.semantics {
-                contentDescription = if (english) "Reading progress" else "Progreso de lectura"
-            }
+            (if (english) "Reading progress: " else "Progreso de lectura: ") +
+                ReaderUnits.percent(displayOffset, fullText.length) +
+                (if (english) "% read" else "% leído")
         )
         ReaderCompactChoice(
             if (english) "Speech speed" else "Velocidad de lectura",
@@ -932,9 +1080,11 @@ private fun NativeReadingScreen(
         TextButton(
             onClick = { showVisual = !showVisual },
             modifier = Modifier.semantics {
-                stateDescription = if (showVisual) "Abierto" else "Cerrado"
+                stateDescription = if (showVisual)
+                    (if (english) "Expanded" else "Abierto")
+                else (if (english) "Collapsed" else "Cerrado")
             }
-        ) { Text("Visual") }
+        ) { Text(if (english) "Visual presentation" else "Presentación visual") }
         if (showVisual) {
             ReaderCompactChoice(
                 if (english) "Text size" else "Tamaño de letra",
@@ -1003,14 +1153,14 @@ private fun NativeReadingScreen(
             }
         }
 
-        if (current != null) {
+        if (preview != null) {
             Text(
                 if (english) "Reading text" else "Texto de lectura",
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.semantics { heading() }
             )
             Text(
-                current.text,
+                preview.text,
                 fontSize = (14 + 2 * textSize).sp,
                 lineHeight = (18 + 2 * textSize + 5 * lineSpacing).sp,
                 fontWeight = if (boldText == 1) FontWeight.Bold else FontWeight.Normal

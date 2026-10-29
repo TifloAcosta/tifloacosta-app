@@ -4,9 +4,9 @@
   "status": "draft",
   "confirmProduction": false,
   "priority": 2,
-  "notifyUpdate": true,
+  "notifyUpdate": false,
   "notes": {
-    "es": "Preparación de actualización integral de TifloAcosta para Android. Mejoras de navegación accesible en Actualidad y Recursos, reproductor y acciones de YouTube con conexión de Google, podcasts y TifloLector nativo: EPUB, PDF y DAISY, OCR, carpetas, marcas, reproducción y voces con muestras y selección accesible. Conservación de datos y compatibilidad con versiones anteriores, sujetas a validación final.",
-    "en": "Preparing a full TifloAcosta Android update. Accessibility improvements in News and Resources, native YouTube playback and account actions, podcasts, and TifloLector: EPUB, PDF and DAISY, OCR, folders, bookmarks, background playback, and accessible voice previews and selection. Data-preserving upgrade and backwards compatibility are subject to final validation."
+    "es": "Mejoras de accesibilidad y lectura en TifloAcosta para Android. Vídeos con acciones TalkBack directamente desde los títulos y controles de YouTube; TifloLector con biblioteca más clara, navegación por unidades y narración sin marcas técnicas de HTML ni paginación. Mejoras en DAISY, OCR, importación y compartición de documentos, voces y ajustes de lectura. Correcciones de estabilidad en las demás secciones.",
+    "en": "Accessibility and reading improvements in TifloAcosta for Android. TalkBack actions directly from video titles and YouTube controls; a clearer TifloLector library, reading navigation and speech without HTML or pagination markers. Improvements to DAISY, OCR, document import and sharing, voices and reading settings, plus stability fixes across other sections."
   }
 }

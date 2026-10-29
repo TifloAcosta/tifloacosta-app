@@ -11,6 +11,8 @@ android {
     defaultConfig {
         // Never use the installed Google Play application's identifier.
         applicationId = when {
+            project.findProperty("tifloReadingNavigationTest") == "true" ->
+                "com.tifloacosta.nativeprototype.readingnavigation"
             project.findProperty("tifloGestureTest") == "true" ->
                 "com.tifloacosta.nativeprototype.gestures"
             project.findProperty("tifloAudioFocusTest") == "true" ->
@@ -21,10 +23,13 @@ android {
         }
         minSdk = 26
         targetSdk = 35
-        versionCode = 21
-        versionName = "0.21-pantalla-bloqueada"
+        versionCode = if (project.findProperty("tifloReadingNavigationTest") == "true") 23 else 21
+        versionName = if (project.findProperty("tifloReadingNavigationTest") == "true")
+            "0.23-lectura-limpia" else "0.21-pantalla-bloqueada"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["prototypeLabel"] = when {
+            project.findProperty("tifloReadingNavigationTest") == "true" ->
+                "TifloAcosta Prueba Lectura"
             project.findProperty("tifloGestureTest") == "true" ->
                 "TifloAcosta Prueba Gestos"
             project.findProperty("tifloAudioFocusTest") == "true" ->

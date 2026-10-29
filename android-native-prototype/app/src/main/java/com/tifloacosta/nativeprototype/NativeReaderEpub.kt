@@ -49,7 +49,9 @@ object NativeReaderEpub {
                 val ref = spine.item(i) as? Element ?: return@mapNotNull null
                 byId[ref.getAttribute("idref")]
             }.filter { it in fallback }.distinct()
-            if (ordered.isEmpty()) fallback else ordered + fallback.filterNot { it in ordered }
+            // Files outside the spine are frequently page lists or auxiliary
+            // XHTML navigation documents; never append them to the spoken book.
+            if (ordered.isEmpty()) fallback else ordered
         } catch (_: Exception) { fallback }
     }
 }

@@ -42,6 +42,27 @@ data class ReaderBook(
 data class ReadingUnit(val start: Int, val end: Int, val text: String)
 
 /** Offset-based navigation, so a change of unit never loses the saved position. */
+/**
+ * Suppress isolated layout/file markers in narration while retaining the
+ * original document on disk and preserving exact character offsets.
+ * Never remove numbers alone, chapter titles or incidental mentions of HTML.
+ */
+internal object ReaderSpeechMarkers {
+    private val fileLine = Regex(
+        """(?i)^(?:[\w .-]+[/\\])*[\w .-]+\.(?:x?html?|htm)(?:#[\w.-]+)?$"""
+    )
+    private val pageLine = Regex(
+        """(?i)^(?:html(?:/xhtml)?\s*[,.:;—-]?\s*)?(?:página|pág\.?|page|pg\.?)\s*[:.#-]?\s*\d+(?:\s*(?:de|of)\s*\d+)?$"""
+    )
+    fun isTechnicalLine(value: String): Boolean {
+        val text = value.trim()
+        return text.length in 1..160 && (fileLine.matches(text) || pageLine.matches(text))
+    }
+
+    fun forNarration(fragment: String): String = fragment.lineSequence()
+        .filterNot(::isTechnicalLine).joinToString("\n").trim()
+}
+
 object ReaderUnits {
     fun percent(offset: Int, length: Int): Int =
         if (length <= 0) 0 else (offset.coerceIn(0, length).toLong() * 100 / length).toInt()
@@ -53,9 +74,14 @@ object ReaderUnits {
 
     fun split(text: String, mode: Int): List<ReadingUnit> {
         if (text.isBlank()) return emptyList()
+        // Skip standalone technical page markers without altering the stored
+        // text or its absolute offsets (bookmarks and saved positions survive).
         val pieces = Regex("[^\\r\\n]+").findAll(text)
             .map { it.range.first to (it.range.last + 1) }
-            .filter { (start, end) -> text.substring(start, end).isNotBlank() }.toList()
+            .filter { (start, end) ->
+                val line = text.substring(start, end)
+                line.isNotBlank() && !ReaderSpeechMarkers.isTechnicalLine(line)
+            }.toList()
         if (pieces.isEmpty()) return emptyList()
         val spans = when (mode) {
             2 -> { // Sentences within each paragraph.
@@ -96,7 +122,8 @@ object ReaderUnits {
                     if (space > cursor + 300) stop = space + 1
                 }
                 val fragment = text.substring(cursor, stop)
-                if (fragment.isNotBlank()) result.add(ReadingUnit(cursor, stop, fragment.trim()))
+                val narrated = ReaderSpeechMarkers.forNarration(fragment)
+                if (narrated.isNotBlank()) result.add(ReadingUnit(cursor, stop, narrated))
                 cursor = stop
             }
         }

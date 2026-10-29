@@ -49,10 +49,10 @@ data class ReadingUnit(val start: Int, val end: Int, val text: String)
  */
 internal object ReaderSpeechMarkers {
     private val fileLine = Regex(
-        """(?i)^(?:[\\w .-]+[/\\\\])*[\\w .-]+\\.(?:x?html?|htm)(?:#[\\w.-]+)?$"""
+        """(?i)^(?:[\w .-]+[/\\])*[\w .-]+\.(?:x?html?|htm)(?:#[\w.-]+)?$"""
     )
     private val pageLine = Regex(
-        """(?i)^(?:html(?:/xhtml)?\\s*[,.:;—-]?\\s*)?(?:página|pág\\.?|page|pg\\.?)\\s*[:.#-]?\\s*\\d+(?:\\s*(?:de|of)\\s*\\d+)?$"""
+        """(?i)^(?:html(?:/xhtml)?\s*[,.:;—-]?\s*)?(?:página|pág\.?|page|pg\.?)\s*[:.#-]?\s*\d+(?:\s*(?:de|of)\s*\d+)?$"""
     )
     fun isTechnicalLine(value: String): Boolean {
         val text = value.trim()

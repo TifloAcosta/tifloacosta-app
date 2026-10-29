@@ -11,7 +11,7 @@ data class LegacyLibraryBook(val id: String, val title: String, val format: Stri
 
 object NativeLegacyLibraryCheck {
     /**
-     * Read the published library directly, without SQLiteOpenHelper or writes.
+     * Read the published library directly with a read-only connection.
      * Titles are paged, so a large library never blocks the native home.
      * The original book IDs are passed back to the published reader intact.
      */

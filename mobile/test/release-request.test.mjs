@@ -42,6 +42,21 @@ test('requires explicit confirmation for production', () => {
   }), /production/i);
 });
 
+test('keeps unapproved production drafts preparable but not publishable', () => {
+  const draft = parseReleaseRequest({
+    versionName: '1.3.8', track: 'production', status: 'draft',
+    confirmProduction: false, priority: 2, notifyUpdate: false,
+    notes: { es: 'Candidata sin publicar.', en: 'Unpublished candidate.' }
+  });
+  assert.equal(draft.status, 'draft');
+  assert.equal(draft.track, 'production');
+  assert.throws(() => parseReleaseRequest({
+    versionName: '1.3.8', track: 'production', status: 'completed',
+    confirmProduction: false, priority: 2, notifyUpdate: false,
+    notes: { es: 'x', en: 'y' }
+  }), /production/i);
+});
+
 test('creates screen-reader-friendly artifact names', () => {
   assert.deepEqual(artifactNames({ versionName: '1.3.2', versionCode: 11 }), {
     aab: 'TifloAcosta-Android-1.3.2-code11.aab',

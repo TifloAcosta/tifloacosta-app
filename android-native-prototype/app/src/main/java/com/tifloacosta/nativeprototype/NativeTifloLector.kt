@@ -79,9 +79,23 @@ fun NativeTifloLector(
     val scope = rememberCoroutineScope()
     var library by remember { mutableStateOf<List<ReaderBook>>(emptyList()) }
     var legacyState by remember { mutableStateOf<LegacyLibraryState?>(null) }
+    var legacyBooks by remember { mutableStateOf<List<LegacyLibraryBook>>(emptyList()) }
+    var legacyReadError by remember { mutableStateOf("") }
     LaunchedEffect(Unit) {
-        legacyState = withContext(Dispatchers.IO) {
-            NativeLegacyLibraryCheck.inspect(context.applicationContext)
+        try {
+            val previous = withContext(Dispatchers.IO) {
+                NativeLegacyLibraryCheck.inspect(context.applicationContext)
+            }
+            legacyState = previous
+            if ((previous.bookCount ?: 0) > 0) {
+                legacyBooks = withContext(Dispatchers.IO) {
+                    NativeLegacyLibraryCheck.listBooks(context.applicationContext)
+                }
+            }
+        } catch (failure: Exception) {
+            legacyReadError = if (english)
+                "Could not list earlier books. Use Open existing library; no files were modified."
+            else "No se pudo enumerar la biblioteca anterior. Usa Abrir biblioteca anterior; no se ha modificado ningún archivo."
         }
     }
     var folderNames by remember { mutableStateOf<List<String>>(emptyList()) }
@@ -423,6 +437,36 @@ fun NativeTifloLector(
         "Cambiar título", "Mover a carpeta", "Eliminar",
         "Añadir o quitar de cola", "Marcar como terminado o pendiente")
 
+    /**
+     * Continue with the existing TifloLector for an older book. No copying,
+     * deletion or position conversion: the original reader retains all marks.
+     */
+    fun openPreviousBook(bookId: String? = null) {
+        val navigation = context.getSharedPreferences(
+            "tiflo-reader-navigation", android.content.Context.MODE_PRIVATE
+        )
+        val change = navigation.edit().putBoolean("open-existing-library", true)
+        if (bookId.isNullOrBlank()) change.remove("open-existing-book-id")
+        else change.putString("open-existing-book-id", bookId)
+        if (!change.commit()) {
+            error = if (english) "Could not open the previous library."
+                else "No se pudo solicitar la apertura de la biblioteca anterior."
+            return
+        }
+        try {
+            val backIntent = Intent().setClassName(
+                context.packageName, "com.tifloacosta.app.MainActivity"
+            ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            context.startActivity(backIntent)
+            (context as? android.app.Activity)?.finish()
+        } catch (failure: Exception) {
+            navigation.edit().remove("open-existing-library")
+                .remove("open-existing-book-id").apply()
+            error = if (english) "Original reader is unavailable in this test build."
+                else "La biblioteca original no está disponible en esta compilación."
+        }
+    }
+
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)) {
         TextButton(onClick = onBack) { Text(if (english) "Back to home" else "Volver al inicio") }
@@ -462,51 +506,61 @@ fun NativeTifloLector(
                 Text(if (english) "Manage reading queue" else "Gestionar cola de lectura")
             }
         }
-        // An empty NEW index must not imply the pre-upgrade library was deleted.
+        // Existing documents appear in the same reader home, not behind an
+        // empty-looking native index; old metadata stays in the published store.
         legacyState?.let { state ->
+            if (legacyReadError.isNotBlank()) Text(legacyReadError)
             if (state.databasePresent && state.bookCount == null) {
-                Text(
-                    if (english)
-                        "The previous library could not be checked. Its files have not been removed. Return to the existing TifloLector until migration is verified."
-                    else
-                        "No se pudo comprobar la biblioteca anterior. Sus archivos no se han borrado. Vuelve al TifloLector actual hasta verificar la migración."
-                )
+                Text(if (english)
+                    "The existing library could not be read. Its files are untouched."
+                else "No se pudo comprobar la biblioteca anterior. Sus archivos siguen intactos.")
             } else if ((state.bookCount ?: 0) > 0) {
                 Text(
                     if (english)
-                        "The previous reader contains ${state.bookCount} books. They are still in the existing TifloLector, not in this native preview. Return to the previous reader to use them; no data was migrated or deleted."
+                        "Existing books (${state.bookCount}). Open any title to continue in the original reader with bookmarks and reading progress preserved."
                     else
-                        "El lector anterior contiene ${state.bookCount} libros. Siguen en el TifloLector actual, no en esta vista previa nativa. Vuelve al lector anterior para utilizarlos; no se han migrado ni borrado datos."
+                        "Libros que ya tenías (${state.bookCount}). Abre cualquier título en el lector original, conservando tus marcas y el progreso.",
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.semantics { heading() }
                 )
-            }
-            if (state.databasePresent) {
-                TextButton(
-                    onClick = {
-                        val nav = context.getSharedPreferences(
-                            "tiflo-reader-navigation", android.content.Context.MODE_PRIVATE
-                        )
-                        if (!nav.edit().putBoolean("open-existing-library", true).commit()) {
-                            error = if (english) "Could not open the previous library."
-                                else "No se pudo solicitar la apertura de la biblioteca anterior."
-                        } else {
-                            try {
-                                val backIntent = Intent().setClassName(
-                                    context.packageName, "com.tifloacosta.app.MainActivity"
-                                ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or
-                                    Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                                context.startActivity(backIntent)
-                                (context as? android.app.Activity)?.finish()
-                            } catch (failure: Exception) {
-                                nav.edit().remove("open-existing-library").apply()
-                                error = if (english) "Original reader is unavailable in this test build."
-                                    else "La biblioteca original no está disponible en esta compilación."
+                legacyBooks.forEach { previous ->
+                    TextButton(
+                        onClick = { openPreviousBook(previous.id) },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(if (english) "Open: " + previous.title
+                            else "Abrir: " + previous.title)
+                    }
+                }
+                if (legacyBooks.size < (state.bookCount ?: 0)) {
+                    TextButton(
+                        onClick = {
+                            scope.launch {
+                                try {
+                                    val next = withContext(Dispatchers.IO) {
+                                        NativeLegacyLibraryCheck.listBooks(
+                                            context.applicationContext,
+                                            offset = legacyBooks.size, limit = 20
+                                        )
+                                    }
+                                    legacyBooks = legacyBooks + next
+                                } catch (failure: Exception) {
+                                    legacyReadError = if (english)
+                                        "Could not load more existing books."
+                                    else "No se pudieron cargar más libros anteriores."
+                                }
                             }
-                        }
-                    },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(if (english) "Open existing reading library"
-                        else "Abrir biblioteca anterior")
+                        }, modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(if (english) "Show 20 more existing books"
+                            else "Mostrar otros 20 libros anteriores")
+                    }
+                }
+            }
+            if (state.databasePresent && state.bookCount != 0) {
+                TextButton(onClick = { openPreviousBook() }, modifier = Modifier.fillMaxWidth()) {
+                    Text(if (english) "Open complete existing library"
+                        else "Abrir biblioteca anterior completa")
                 }
             }
         }

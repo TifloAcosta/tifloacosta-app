@@ -39,7 +39,7 @@ jobs:
       - name: Upload native prototype APK
         uses: actions/upload-artifact@v4
         with:
-          name: TifloAcosta-Lectura-Accesible-0.22-ARM64
+          name: TifloAcosta-Lectura-Accesible-0.23-ARM64
           path: android-native-prototype/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 14

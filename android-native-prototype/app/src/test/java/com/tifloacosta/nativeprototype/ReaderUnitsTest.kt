@@ -51,4 +51,22 @@ class ReaderUnitsTest {
             assertTrue(list.all { it.start >= 0 && it.end <= text.length })
         }
     }
+    @Test fun speechSkipsOnlyIsolatedTechnicalPageMarkers() {
+        val body = "Primera frase.\\ntext/chapter01.xhtml\\nPágina 12\\nSegunda frase.\\nEn este curso aprendemos HTML."
+        for (mode in 0..2) {
+            val units = ReaderUnits.split(body, mode)
+            assertTrue(units.any { it.text.contains("Primera frase") })
+            assertTrue(units.any { it.text.contains("Segunda frase") })
+            assertTrue(units.any { it.text.contains("aprendemos HTML") })
+            assertTrue(units.none { it.text.contains("chapter01.xhtml") })
+            assertTrue(units.none { it.text.contains("Página 12") })
+            assertTrue(units.all { it.end <= body.length })
+        }
+        assertTrue(!ReaderSpeechMarkers.isTechnicalLine("Capítulo 12"))
+        assertTrue(!ReaderSpeechMarkers.isTechnicalLine("12"))
+        assertTrue(!ReaderSpeechMarkers.isTechnicalLine("Aprendemos HTML en español"))
+        assertTrue(ReaderSpeechMarkers.isTechnicalLine("Page 4"))
+        assertTrue(ReaderSpeechMarkers.isTechnicalLine("HTML, página 9"))
+    }
+
 }

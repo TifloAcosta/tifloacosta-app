@@ -96,10 +96,14 @@ object NativeReaderFormats {
     }
 
     private fun asText(source: String): String {
-        // EPUB/DAISY pagebreak nodes and page-navigation indexes are metadata,
-        // not book prose. Strip only explicit semantic markers, not headings.
+        // Remove only semantic pagebreaks and navigation indexes, not chapters.
         val document = org.jsoup.Jsoup.parse(source)
-        document.select("script, style, nav[epub\\:type~=page-list], [role=doc-pagebreak], [epub\\:type~=pagebreak], [epub\\:type~=page-list], [aria-hidden=true]").remove()
+        document.select("script, style, [role=doc-pagebreak], [aria-hidden=true]").remove()
+        document.allElements.filter { element ->
+            val types = element.attr("epub:type").split(Regex("\\s+"))
+            types.any { it.equals("pagebreak", true) || it.equals("page-list", true) } ||
+                element.attr("role").equals("doc-pagebreak", true)
+        }.forEach { it.remove() }
         document.select("[class], [id]").forEach { node ->
             val tokens = (node.classNames() + node.id())
                 .flatMap { it.split(Regex("[\\s_-]+")) }

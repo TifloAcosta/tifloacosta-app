@@ -52,6 +52,7 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.isTraversalGroup
+import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
@@ -539,25 +540,37 @@ fun NativeTifloLector(
                     9 -> save(book.copy(finished = !book.finished))
                 }
             }
+            // One TalkBack stop per book: its title, progress and selected action.
+            // Clear the Material button/text semantics before assigning the final
+            // accessible name. Otherwise the title can be announced twice.
+            val readingStatus = when {
+                book.finished -> if (english) "Finished" else "Terminado"
+                book.tracks.isNotEmpty() ->
+                    (if (english) "Audio section " else "Sección de audio ") +
+                    (book.trackIndex + 1) + " / " +
+                    book.audioSegments.ifEmpty { book.tracks.map { ReaderAudioSegment(0) } }.size
+                else -> (if (english) "Read " else "Leído ") +
+                    ReaderUnits.percent(book.offset, book.length) +
+                    (if (english) " percent" else " por ciento")
+            }
             OutlinedButton(onClick = { run(action) },
-                modifier = Modifier.fillMaxWidth().semantics {
+                modifier = Modifier.fillMaxWidth().clearAndSetSemantics {
                     contentDescription = book.title
-                    stateDescription = actions[action] + ". " + when {
-                        book.finished -> if (english) "Finished" else "Terminado"
-                        book.tracks.isNotEmpty() ->
-                            (if (english) "Audio section " else "Sección de audio ") +
-                            (book.trackIndex + 1) + " / " +
-                            book.audioSegments.ifEmpty { book.tracks.map { ReaderAudioSegment(0) } }.size
-                        else -> (if (english) "Read " else "Leído ") +
-                            ReaderUnits.percent(book.offset, book.length) + "%"
-                    } + if (book.id in queuedIds) {
-                        if (english) ". In reading queue" else ". En cola de lectura"
-                    } else ""
+                    stateDescription = readingStatus +
+                        (if (book.id in queuedIds) {
+                            if (english) ". In reading queue" else ". En cola de lectura"
+                        } else "") +
+                        (if (english) ". Action: " else ". Acción: ") + actions[action]
                     progressBarRangeInfo = ProgressBarRangeInfo(
                         action.toFloat(), 0f..actions.lastIndex.toFloat(), actions.size - 2
                     )
                     setProgress { v ->
                         action = v.roundToInt().coerceIn(0, actions.lastIndex)
+                        true
+                    }
+                    onClick(label = if (english) "Perform selected book action"
+                        else "Ejecutar acción del libro") {
+                        run(action)
                         true
                     }
                     customActions = actions.mapIndexed { i, label ->
@@ -869,15 +882,21 @@ private fun NativeReadingScreen(
             book.title,
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.fillMaxWidth().focusRequester(titleFocusRequester)
-                .clickable { execute(selectedAction) }.semantics {
+                .clickable { execute(selectedAction) }.clearAndSetSemantics {
                 heading()
                 contentDescription = book.title
-                stateDescription = actions[selectedAction]
+                stateDescription = (if (english) "Action: " else "Acción: ") +
+                    actions[selectedAction]
                 progressBarRangeInfo = ProgressBarRangeInfo(
                     selectedAction.toFloat(), 0f..actions.lastIndex.toFloat(), actions.size - 2
                 )
                 setProgress { value ->
                     selectedAction = value.roundToInt().coerceIn(0, actions.lastIndex)
+                    true
+                }
+                onClick(label = if (english) "Perform selected reading action"
+                    else "Ejecutar acción de lectura") {
+                    execute(selectedAction)
                     true
                 }
                 customActions = actions.mapIndexed { i, label ->

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-29T08:32:39.122Z",
+  "generatedAt": "2026-10-29T08:34:15.350Z",
   "resources": [
     {
       "kind": "resource",
@@ -5525,6 +5525,38 @@
   "news": [
     {
       "kind": "news",
+      "id": "conticgo-497e0f81c3109276:es",
+      "sourceId": "conticgo-497e0f81c3109276",
+      "lang": "es",
+      "title": "Duke investiga una IA en el móvil para mejorar la asistencia visual",
+      "summary": "La inteligencia artificial para personas con discapacidad visual sigue avanzando. Un equipo de investigación vinculado a Duke University, en Estados Unidos, trabaja en un sistema capaz de detectar obstáculos, identificar objetos que se aproximan y describir el entorno mediante indicaciones de audio. El proyecto combina unas gafas con cámara y un teléfono móvil. Su objetivo […] La entrada Duke investiga una IA en el móvil para mejorar la asistencia visual se publicó primero en Conticgo .",
+      "body": "La inteligencia artificial para personas con discapacidad visual sigue avanzando. Un equipo de investigación vinculado a Duke University, en Estados Unidos, trabaja en un sistema capaz de detectar obstáculos, identificar objetos que se aproximan y describir el entorno mediante indicaciones de audio.\n\nEl proyecto combina unas gafas con cámara y un teléfono móvil. Su objetivo es facilitar información útil durante los desplazamientos y otras actividades cotidianas.\n\nAdemás, los investigadores quieren ejecutar el modelo de inteligencia artificial directamente en el teléfono, de esta forma, el sistema podría funcionar sin depender de servidores externos para procesar las imágenes.\n\nLa propuesta utiliza gafas inteligentes equipadas con una cámara que captura el entorno de la persona usuaria. Las imágenes se envían al sistema de inteligencia artificial para analizar lo que ocurre alrededor.\n\nA partir de esa información, el sistema busca proporcionar indicaciones de audio sobre posibles peligros y elementos relevantes del entorno.\n\nEntre las funciones que investiga el equipo se encuentran:\n\nEstas funciones pretenden complementar las herramientas de movilidad existentes, como el bastón blanco o el perro guía. No buscan sustituirlas.\n\nUna de las principales líneas de trabajo es conseguir que el sistema procese las imágenes en el propio teléfono, en lugar de enviarlas continuamente a servidores externos.\n\nPara ello, el equipo ha trabajado con un modelo de inteligencia artificial comprimido, denominado modelo de 0,5 mil millones de parámetros. Esta reducción busca que el sistema pueda ejecutarse en un dispositivo móvil con recursos limitados.\n\nLos investigadores han comparado un sistema básico de alertas basado en reglas con este nuevo modelo, diseñado para interpretar mejor el contexto de los posibles peligros.\n\nSin embargo, el equipo todavía debe completar un paso fundamental: exportar el modelo para que funcione directamente en el dispositivo. Por tanto, la asistencia inteligente sin conexión a internet es un objetivo del proyecto, no una función que deba darse por plenamente disponible.\n\nEjecutar la inteligencia artificial en el móvil puede ofrecer varias ventajas para las tecnologías de apoyo a la discapacidad visual.\n\nEn primer lugar, el sistema podría responder con mayor rapidez al no tener que enviar cada imagen a un servidor remoto y esperar su respuesta. En una situación de desplazamiento, reducir ese tiempo puede ser especialmente importante.\n\nAdemás, el procesamiento local permitiría reducir la dependencia de una conexión a internet. Esto facilitaría el uso de determinadas funciones en lugares con poca cobertura.\n\nPor último, mantener las imágenes en el propio dispositivo podría mejorar la privacidad, ya que reduciría la necesidad de transmitir vídeos del entorno a servidores externos. No obstante, la protección de los datos también dependerá del funcionamiento completo de la aplicación y de cómo gestione la información.\n\nEstas ventajas son posibilidades técnicas que deberán comprobarse mediante pruebas del sistema terminado.\n\nAunque la investigación abre nuevas posibilidades, todavía es necesario evaluar el funcionamiento del sistema en condiciones reales.\n\nPor ejemplo, detectar un obstáculo en una imagen no garantiza que se identifique correctamente durante un desplazamiento. Los cambios de iluminación, los espacios concurridos y los objetos difíciles de distinguir pueden afectar a los resultados.\n\nTambién será importante comprobar la rapidez de las alertas, la autonomía de la batería y la facilidad de uso de las gafas. Además, los avisos deberán ser claros y oportunos para no sobrecargar de información sonora a la persona usuaria.\n\nPor ello, las pruebas con personas ciegas y con baja visión serán fundamentales para determinar si esta tecnología aporta beneficios reales en la vida cotidiana.\n\nLa investigación de Duke University refleja una tendencia creciente en tiflotecnología: desarrollar sistemas de inteligencia artificial más pequeños y capaces de funcionar en dispositivos portátiles.\n\nSi se consigue ejecutar el modelo directamente en el móvil, la propuesta podría reducir la dependencia de internet y facilitar respuestas más inmediatas sobre el entorno.\n\nAun así, el proyecto sigue en desarrollo y todavía debe demostrar su eficacia en situaciones reales. Su evolución permitirá conocer hasta qué punto la inteligencia artificial local puede complementar las ayudas de movilidad y contribuir a la autonomía de las personas con discapacidad visual.\n\nFuentes: Duke University, Rhodes Information Initiative — Data+: AI-Powered Hazard Detection for the Visually Impaired (22 de julio de 2026)",
+      "sourceName": "Conticgo",
+      "originalUrl": "https://conticgo.net/duke-investiga-una-ia-en-el-movil-para-mejorar-la-asistencia-visual/",
+      "publishedAt": "2026-10-29T07:05:00.000Z",
+      "categories": [
+        "tecnologia-accesibilidad",
+        "proyectos-prototipos",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-1760cadf7689aa8e:en",
+      "sourceId": "the-verge-1760cadf7689aa8e",
+      "lang": "en",
+      "title": "Anduril now says its BlueChip laptop will meet Buy American standards at launch",
+      "summary": "On Tuesday, defense contractor Anduril and chipmaker Qualcomm announced a partnership to build laptops entirely in the United States, starting with a single model in 2027. They also announced a \"long-term goal\" of pushing the computer industry to create \"a fully domestic supply chain.\" Even a single Made-in-USA laptop would be a surprise, because no […]",
+      "body": "On Tuesday, defense contractor Anduril and chipmaker Qualcomm announced a partnership to build laptops entirely in the United States , starting with a single model in 2027. They also announced a \"long-term goal\" of pushing the computer industry to create \"a fully domestic supply chain.\"\n\nEven a single Made-in-USA laptop would be a surprise, because no major US computer company builds its laptops here - not Apple, not Dell, not HP, not Microsoft. We're not aware of any company that does.\n\nBut we are aware of companies that have briefly and strategically assembled computers here seemingly to appease President Donald Trump . We're also aware of …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/policy/1021554/anduril-bluechip-65-percent-domestic-buy-american",
+      "publishedAt": "2026-10-29T02:22:46.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "9to5mac-a7e482c146a6d851:en",
       "sourceId": "9to5mac-a7e482c146a6d851",
       "lang": "en",
@@ -5668,22 +5700,6 @@
         "tecnologia-accesibilidad",
         "windows",
         "apps-accesibles",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-8b1624f0998e55dc:en",
-      "sourceId": "the-verge-8b1624f0998e55dc",
-      "lang": "en",
-      "title": "Google says its investments in AI are driving more searches",
-      "summary": "Google parent company Alphabet says that its AI investments are leading to a big growth in searches year-over-year, as noted in its Q3 2026 earnings today. \"Our AI investments are driving overall Search query growth, including commercial queries,\" CEO Sundar Pichai says in a statement. \"In fact, our year-over-year query growth rate is the highest […]",
-      "body": "Google parent company Alphabet says that its AI investments are leading to a big growth in searches year-over-year, as noted in its Q3 2026 earnings today .\n\n\"Our AI investments are driving overall Search query growth, including commercial queries,\" CEO Sundar Pichai says in a statement. \"In fact, our year-over-year query growth rate is the highest it's been in the last five years.\"\n\nAlphabet's consolidated revenues for the quarter were $127.6 billion, up 25 percent year-over-year, with its \"Google Search & other\" revenues up 12 percent year-over-year. Google Cloud revenue was also up 103 percent year-over-year to $30.7 billion. Alphabet also …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1020811/alphabet-google-earnings-q3-2026",
-      "publishedAt": "2026-10-28T20:22:26.000Z",
-      "categories": [
-        "tecnologia-general",
         "ia-accesibilidad"
       ]
     },

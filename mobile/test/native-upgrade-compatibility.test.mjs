@@ -54,7 +54,9 @@ test('native integration keeps existing video actions and reader accessible whil
   const request = JSON.parse(await source('../release/request.json'));
   assert.match(app, /case 'videos'/);
   assert.match(main, /registerPlugin\(TifloNativeFeaturesPlugin\.class\)/);
-  assert.equal(request.status, 'draft', 'Do not publish until real upgrade and OAuth tests pass');
+  assert.equal(request.track, 'internal', 'Do not publish to production until real upgrade and OAuth tests pass');
+  assert.equal(request.status, 'completed');
+  assert.equal(request.notifyUpdate, false);
   assert.equal(request.confirmProduction, false);
 });
 
@@ -110,7 +112,8 @@ test('Android API24 legacy Office compatibility trial remains restricted and unr
   assert.match(office, /setOf\("doc", "xls", "ppt", "pps"\)/);
   assert.match(lib, /CVE-2022-26336/);
   assert.match(lib, /javax\.xml\.bind:jaxb-api:2\.3\.1/);
-  assert.equal(request.status, 'draft');
+  assert.equal(request.track, 'internal', 'Legacy Office must remain restricted to internal testing');
+  assert.equal(request.status, 'completed');
   assert.equal(request.confirmProduction, false);
 });
 

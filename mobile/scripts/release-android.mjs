@@ -129,14 +129,20 @@ async function cli() {
       });
     },
     build: async ({ versionName, versionCode }) => {
-      run('./gradlew', ['--no-daemon', 'assembleDebug', 'bundleRelease'], {
-        cwd: androidDir,
-        env: {
-          ...process.env,
-          TIFLO_ANDROID_VERSION_NAME: versionName,
-          TIFLO_ANDROID_VERSION_CODE: String(versionCode)
-        }
-      });
+      const androidBuildEnv = {
+        ...process.env,
+        TIFLO_ANDROID_VERSION_NAME: versionName,
+        TIFLO_ANDROID_VERSION_CODE: String(versionCode)
+      };
+      // Build the debug APK and signed release AAB in separate Gradle invocations.
+      // Packaging both variants together has failed intermittently on CI runners,
+      // while the validation workflow builds both sequentially successfully.
+      for (const task of ['assembleDebug', 'bundleRelease']) {
+        run('./gradlew', ['--no-daemon', task, '--stacktrace'], {
+          cwd: androidDir,
+          env: androidBuildEnv
+        });
+      }
       releaseAab = `${androidDir}/app/build/outputs/bundle/release/app-release.aab`;
       run('jarsigner', ['-verify', releaseAab]);
       run('bash', ['-lc', "merged=$(find app/build/intermediates/merged_manifests -type f -name AndroidManifest.xml -print -quit); test -n \"$merged\" && grep -Fq 'android.permission.POST_NOTIFICATIONS' \"$merged\" && grep -Fq 'com.onesignal' \"$merged\""], { cwd: androidDir });

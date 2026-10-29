@@ -1,7 +1,7 @@
 {
   "versionName": "1.3.8",
-  "track": "production",
-  "status": "draft",
+  "track": "internal",
+  "status": "completed",
   "confirmProduction": false,
   "priority": 2,
   "notifyUpdate": false,

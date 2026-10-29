@@ -58,6 +58,9 @@ internal object ReaderSpeechMarkers {
         val text = value.trim()
         return text.length in 1..160 && (fileLine.matches(text) || pageLine.matches(text))
     }
+
+    fun forNarration(fragment: String): String = fragment.lineSequence()
+        .filterNot(::isTechnicalLine).joinToString("\n").trim()
 }
 
 object ReaderUnits {
@@ -119,7 +122,8 @@ object ReaderUnits {
                     if (space > cursor + 300) stop = space + 1
                 }
                 val fragment = text.substring(cursor, stop)
-                if (fragment.isNotBlank()) result.add(ReadingUnit(cursor, stop, fragment.trim()))
+                val narrated = ReaderSpeechMarkers.forNarration(fragment)
+                if (narrated.isNotBlank()) result.add(ReadingUnit(cursor, stop, narrated))
                 cursor = stop
             }
         }

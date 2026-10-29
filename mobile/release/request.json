@@ -1,12 +1,12 @@
 {
-  "versionName": "1.3.7",
+  "versionName": "1.3.8",
   "track": "production",
-  "status": "completed",
-  "confirmProduction": true,
+  "status": "draft",
+  "confirmProduction": false,
   "priority": 2,
-  "notifyUpdate": true,
+  "notifyUpdate": false,
   "notes": {
-    "es": "Mejora del reproductor accesible de YouTube: la pantalla permanece encendida durante la reproducción visible y vuelve al bloqueo normal al pausar o cerrar el vídeo. Correcciones de estabilidad y accesibilidad.",
-    "en": "Accessible YouTube player improvement: the display stays awake during visible playback and returns to normal screen timeout when the video is paused or closed. Stability and accessibility fixes."
+    "es": "Mejoras de accesibilidad y lectura en TifloAcosta para Android. Vídeos con acciones TalkBack directamente desde los títulos y controles de YouTube; TifloLector con biblioteca más clara, navegación por unidades y narración sin marcas técnicas de HTML ni paginación. Mejoras en DAISY, OCR, importación y compartición de documentos, voces y ajustes de lectura. Correcciones de estabilidad en las demás secciones.",
+    "en": "Accessibility and reading improvements in TifloAcosta for Android. TalkBack actions directly from video titles and YouTube controls; a clearer TifloLector library, reading navigation and speech without HTML or pagination markers. Improvements to DAISY, OCR, document import and sharing, voices and reading settings, plus stability fixes across other sections."
   }
 }

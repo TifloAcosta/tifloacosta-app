@@ -43,7 +43,7 @@ import { renderBook } from './screens/book.mjs';
 import { renderPodcast } from './screens/podcast.mjs';
 import { renderContact } from './screens/contact.mjs';
 import { renderPrivacy } from './screens/privacy.mjs';
-import { renderSettings } from './screens/settings.mjs';
+import { renderSettings, NativeFeatures } from './screens/settings.mjs';
 import { renderShare } from './screens/share.mjs';
 import { renderReader } from './screens/reader.mjs';
 import { createAccessibleVideoPlayer, createSharedVideoItem } from './screens/video-player.mjs';
@@ -370,7 +370,9 @@ function openReadingBook(bookId, percent = null) {
   const cleanId = String(bookId || '').trim();
   if (!cleanId) return false;
   pendingReadingBookId = cleanId;
-  pendingReadingBookPercent = Number.isFinite(Number(percent))
+  // An absent percentage means resume from SQLite's saved position.
+  // Number(null) is zero, which previously reset existing books to the start.
+  pendingReadingBookPercent = percent != null && Number.isFinite(Number(percent))
     ? Math.max(0, Math.min(100, Number(percent)))
     : null;
   const currentRoute = router.current()?.name;
@@ -704,7 +706,27 @@ function onPreferencesChange(changes, { reset = false } = {}) {
   }
 }
 
+/**
+ * Reuse the published reader's SQLite database and content directly.
+ * A title selected in the native list opens the ORIGINAL book by ID, so
+ * progress, bookmarks, folders, audio and existing queue remain untouched.
+ */
+async function restoreExistingReaderNavigation() {
+  if (shareMode) return;
+  try {
+    const request = await NativeFeatures.consumeExistingReaderNavigation();
+    if (!request?.openExistingReader) return;
+    const bookId = String(request.bookId || '').trim();
+    if (bookId) openReadingBook(bookId);
+    else router.navigate('reading-library');
+  } catch {
+    // Browser preview and older builds do not include this native bridge.
+  }
+}
+
 router.start('home');
+void restoreExistingReaderNavigation();
+onAppResume(() => { void restoreExistingReaderNavigation(); });
 void installShareReceiver();
 void installReadingDocumentReceiver();
 void loadAppInfo(App).then(info => {

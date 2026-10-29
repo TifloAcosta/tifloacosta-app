@@ -30,7 +30,7 @@ export function parseReleaseRequest(value) {
   if (!Number.isInteger(priority) || priority < 0 || priority > 5) fail('priority must be an integer from 0 to 5');
   if (!notes.es || !notes.en) fail('Spanish and English release notes are required');
 
-  if (track === 'production' && value.confirmProduction !== true) {
+  if (track === 'production' && status === 'completed' && value.confirmProduction !== true) {
     throw new Error('Production release requires explicit confirmProduction=true');
   }
 

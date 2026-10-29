@@ -411,9 +411,12 @@ private fun PrototypeHome(
                         videoCatalog.take(visibleCount),
                         key = { i, item -> "video-$i-${item.id}" }
                     ) { _, item ->
-                        OutlinedButton(
-                            modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-                            onClick = {
+                        NativeYouTubeListRow(
+                            item = item,
+                            english = english,
+                            account = account,
+                            onAuthorize = onSignIn,
+                            onPlay = {
                                 val original = if (item.url.isNotBlank()) item.url
                                     else if (item.id.matches(Regex("[A-Za-z0-9_-]{11}")))
                                         "https://www.youtube.com/watch?v=" + item.id else ""
@@ -424,7 +427,7 @@ private fun PrototypeHome(
                                     language = item.language, publishedAt = "", summary = item.summary
                                 )
                             }
-                        ) { Text(item.title) }
+                        )
                     }
                     if (videoCatalog.size > visibleCount) {
                         item {

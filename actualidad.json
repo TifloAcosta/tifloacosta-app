@@ -1,137 +1,13 @@
 [
   {
-    "id": "the-verge-a7b617b8880519c6",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1022023/microsoft-exit-offer-layoffs-notepad",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-29T16:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Microsoft’s AI future has fewer jobs",
-        "summary": "To anyone listening closely to what Microsoft CEO Satya Nadella has been saying over the past couple of years, this week felt like the clearest sign yet that AI is about to fundamentally change the size of Microsoft's workforce. Microsoft is now offering voluntary buyouts to around 60,000 employees across the US, UK, Canada, and […]",
-        "body": "To anyone listening closely to what Microsoft CEO Satya Nadella has been saying over the past couple of years, this week felt like the clearest sign yet that AI is about to fundamentally change the size of Microsoft's workforce. Microsoft is now offering voluntary buyouts to around 60,000 employees across the US, UK, Canada, and India.\n\nIt's the first time the company has presented such an offer to so many employees, expanding greatly upon the retirement offer that was limited to around 9,000 employees earlier this year. It's all part of an ongoing effort to avoid reducing investment in AI infrastructure by lowering Microsoft's operating cos …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-5ee757e896dd09a1",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/29/agent-identity-startup-mintive-lands-cowboy-ventures-coatue-angels-jeff-dean-andrej-karpathy/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-29T15:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Agent identity startup Mintive lands Cowboy Ventures, Coatue, angels Jeff Dean, Andrej Karpathy",
-        "summary": "Mintive was founded by two engineers who have been working on AI for decades through Google Brain and Coursera. It's platform promises to help IT easily control enterprise agents.",
-        "body": "Here’s another early-stage, agent-management startup to watch because of the backgrounds of the founders and the sheer number of big names it has already attracted as investors: Mintive .\n\nMintive has raised $11 million total, including a newly announced $7 million seed led by Cowboy Ventures. Additional investors include Coatue, Operator Collective, and Hustle Fund; angels include Okta co-founder Frederic Kerrest, Discovery Loop co-founder and former Google Chief Scientist Jeff Dean, and OpenAI co-founder Andrej Karpathy, among others.\n\nMintive was founded by Jiquan Ngiam (pictured above, far right) and Vijay Vasudevan (pictured above far left). Ngiam, Mintive’s CEO, was the founding engineer of Coursera (employee No. 1, hired by Andrew Ng). Ngiam later worked on neural networks at Google Brain. Vasudevan, the company’s CTO, is best known as one of the co-creators of TensorFlow while he was at Google Brain. That was the OG AI training platform that predated PyTorch.\n\nMintive is joining a crowded field of products that promise to govern, provision, and offer identity management to enterprise AI agents. Its platform includes an MCP gateway that allows IT professionals to authorize what the cloud services agents may access and what actions they can perform on them. It also offers an LLM gateway that routes to different models and can cap costs; handles agent identities and authorizations that may differ from the employees that they serve; and an agent monitor that tracks all agents across the company. The company also allows enterprises to create agents that proactively perform long-running tasks.\n\nStill, it’s hard to imagine a field with more competition. Agent management systems are offered by Amazon, Microsoft, OpenAI, Anthropic, plus as point products galore (from companies as diverse as LangChain , New Relic , and Rippling , to name a few). Then there are countless startups working on the idea ( 40+ from Y Combinator alone).\n\nSo, what’s Mintive’s secret sauce? Given the founders’ long history in building AI for enterprises, they have designed their system to be especially easy to use, Ngiam says. Set-up amounts to clicking a few buttons, the startup promises.\n\n“I think what our customers look at and they are a bit shocked at, is how quick it is and easy to deploy,” Ngiam tells TechCrunch. “We have really thought through all the ways this can be done, all the access control, permissioning layer, to make it so easy for them to deploy it, that all the complexities are hidden away. You don’t think about sandboxes, you don’t think about harnesses, you don’t think about memory because we manage that for you.”\n\nThat pitch has won over 50 enterprise customers so far, Mintive says, since the startup launched its product in February. These include Ro, Modern Treasury, the University of Michigan, Coursera, Apax, and Stability AI.\n\nBut it was the founders’ industry experience that won over Cowboy Ventures managing partner Aileen Lee.\n\n“AI is going to be able to power incredible things, but we need more infrastructure that’s going to give us governance and visibility and control,” Lee told TechCrunch.\n\nLee also says she particularly respects that Ngiam has been careful by only raising $11 million. This compares to other agentic-building startups raising vast amounts at unicorn valuations. As just one example: Prime Intellect raised $130 million for its Series A at $1 billion valuation .\n\n“I feel really lucky to have won the chance to work with him,” said Lee. “He is a grown-up and so he was not a person chasing a ‘vanity’ round.”\n\nLee added: “I think a lot of companies are being set up for failure by chasing round size, rather than, ‘how much do I need to actually really move the needle for the company?’ And so, yes, in a time when people are raising unprecedented amounts of money, we’re just kind of doing it the brick by brick, old-fashioned way.”"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-84e4e42aaf272145",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1022193/nyt-cooking-app-ai-recipe-modification-tool",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-29T14:39:37.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The NYT Cooking app is testing AI recipe modifications",
-        "summary": "The New York Times is testing a new AI feature for its Cooking app that helps users to modify recipes, and it has sparked some drama among users. Last Friday, NYT Cooking senior editor Genevieve Ko announced the feature, which can be used to recommend substitutions for ingredients and cooking equipment, scale recipes to any […]",
-        "body": "The New York Times is testing a new AI feature for its Cooking app that helps users to modify recipes, and it has sparked some drama among users. Last Friday, NYT Cooking senior editor Genevieve Ko announced the feature , which can be used to recommend substitutions for ingredients and cooking equipment, scale recipes to any number of servings, and \"generally make our recipes work for what a cook needs at that moment.\"\n\nOne of the examples given in the article shows a user asking to use baby spinach instead of kale, with the Cooking app feature advising that because baby spinach wilts faster, it should be added during a later step of the reci …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-4d4aaf3ffae31c24",
+    "id": "9to5mac-02771d4873cbc4b5",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/29/ios-27-2-gives-shortcuts-app-these-new-and-improved-features/",
+    "originalUrl": "https://9to5mac.com/2026/10/29/strava-adds-google-gemini-integration-with-personalized-workout-insights/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-29T14:16:33.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27.2 gives Shortcuts app these new and improved features",
-        "summary": "iOS 27.2 launched this week with a variety of new features for Siri AI , FaceTime , Messages , and more, plus a handful of improvements for the Shortcuts app. Here’s everything new in Shortcuts. more…",
-        "body": "iOS 27.2 launched this week with a variety of new features for Siri AI , FaceTime , Messages , and more, plus a handful of improvements for the Shortcuts app. Here’s everything new in Shortcuts.\n\niPhone Duo launched with iOS 27.1 last week, but just days later iOS 27.2 arrived with a pair of compelling new Duo features .\n\nBut it turns out that iOS 27.2 also introduced a key iPhone Duo automation in Shortcuts that’s proven popular .\n\nThe ability to automate actions based on whether your iPhone is opened or closed arrived in iOS 27.2, per Apple’s release notes for the Shortcuts app. And that’s not the only change.\n\nHere are the full release notes detailing every Shortcuts improvement in iOS 27.2:\n\nNew Automations\n\nUpdated Automations\n\nUpdated Actions\n\nShortcut Editor\n\nThe additional languages supported by “Use Model” include French, Japanese, Korean, Portuguese, and Spanish. Previously the feature was limited to English.\n\nWhat’s your take on iOS 27.2’s new and improved Shortcuts features? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-37dd6ef35a1f50c9",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/podcast/1021322/anthropic-ipo-filing-s-1-claude-semianalysis-joey-brookhart-interview",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-29T14:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Anthropic is asking Wall Street to believe in AGI",
-        "summary": "Today on Decoder, I’m joined by Joey Brookhart, an analyst at the chip and AI research firm SemiAnalysis, to help me dig into the story inside the numbers of the Anthropic IPO filing — a document known as an S-1. Anthropic just filed its S-1 to go public on the Nasdaq, and it could start […]",
-        "body": "Today on Decoder , I’m joined by Joey Brookhart, an analyst at the chip and AI research firm SemiAnalysis, to help me dig into the story inside the numbers of the Anthropic IPO filing — a document known as an S-1.\n\nAnthropic just filed its S-1 to go public on the Nasdaq, and it could start trading as soon as next month at a valuation of anywhere between $1.5 trillion and $2 trillion. That would immediately make it one of the most valuable companies on the planet.\n\nBut the price tag really isn’t the whole story here. The S-1 document published earlier this week is hundreds upon hundreds of pages filled with details that finally paint a picture of the economics of a frontier AI lab. As you might imagine, that picture is both really complicated and built on a series of very, very ambitious assumptions about the future and what AI will do to it .\n\nSo I wanted to have Joey on the show to help break down what this document tells us, both about Anthropic’s finances and the broader AI economy. Joey and his colleagues at SemiAnalysis actually built a model of Anthropic’s finances from the outside back in July, so he’s been waiting for this filing about as eagerly as anyone, and I was excited to hear his take on what we’ve learned and, importantly, what we still don’t know.\n\nOkay: SemiAnalysis’ Joey Brookhart on the Anthropic S-1 and the costs and risks of building frontier AI. Here we go.\n\nThis interview has been lightly edited for length and clarity.\n\nJoey Brookhart, you are an analyst at SemiAnalysis. You’re also co-lead on SemiAnalysis’ Tokenomics model, which is going to come up a lot in this episode. Welcome to Decoder .\n\nYeah, thanks so much, Nilay.\n\nI am very excited to talk to you. We’re talking just a couple days after the big Anthropic S-1 was filed. It’s our first look inside of the finances of one of the leading frontier models. What’s your take? What’s your read into it?\n\nIt was an awesome S-1. It’s been a rough three weeks since the investor day. Some people were somewhat disappointed in the September [annualized recurring revenue] numbers, but what we saw here was a company that has efficiently scaled to an amazing level, with a $1 trillion-plus valuation, $70 billion-plus of ARR in a very short amount of time.\n\nIn gross margins, compute margins, and free cash flow, everything is what you’d want to see. So I don’t think there was much to nitpick in this filing. It’s the reason you’ve seen a lot of the semiconductor complex, and the neoclouds and compute stocks, really rally again in the last two days.\n\nIt’s funny, I don’t think I can nitpick the S-1 itself. I want to get into some of the details because there are a lot of numbers in there that are worth thinking about. I actually just want to start at the really big picture. You run a thing called Tokenomics. I’m going to explain what Tokenomics is to people.\n\nI look at Anthropic and where it could go. I look at Dario Amodei saying that he can see his way to $1 trillion in revenue. Where does that money come from? Because so much of these businesses are about eating every other business and it feels like someone else has to make some money to pay Anthropic to generate these revenues. I haven’t actually seen that laid out very clearly.\n\nVerge subscribers, don’t forget you get exclusive access to ad-free Decoder wherever you get your podcasts. Head here . Not a subscriber? You can sign up here .\n\nIt’s so interesting. Today, because even the scale we’re at is $120 billion of ARR between the two leading labs, it’s still an extremely narrow market. The top 1 percent of customers are the ones that are spending $50,000 to $100,000 per employee. Your broader Fortune 500 or Global 2000, which typically do a lot of IT spend, isn’t spending much.\n\nA lot of the spending, especially at Anthropic, is coding-specific. It’s almost a single vertical company. We look in the future to 2027, you think to this broader adoption and white collar work. This typical enterprise Q4 budgeting season, we actually haven’t gone through with one of these labs yet in any meaningful way because their ARR did really start to accelerate until the beginning of the year. We think of other cases like cyber, which can be similar to coding, where these are eight-figure-plus contracts with leading enterprises that can scale very quickly due to all the cybersecurity incidents we’re seeing. You get to other verticals like bio.\n\nTo get to $1 trillion, we do have to move to some of that white collar work, where it goes from AI augmentation to labor saving or replacement in some areas. You look at things like Microsoft’s buyout offers to employees as an example of this , but there’s no wealth of other verticals that they can get into and really start to move the needle.\n\nThis is the single biggest question I have, not just about the S-1, but the entire industry. I would understand that if there are one or two leading labs. There are two big companies that have a technology that can automate a whole bunch of things. We will see how well that automation goes sector by sector, but there are not just two leading labs. There are quite a few of them. There are open weight models.\n\nI’ve heard from a lot of CEOs who are very nervous about giving all their data to an OpenAI or Anthropic and they would like to run some things on-prem. There are law firms running on-prem AI now, which is the funniest turn in maybe all of history.\n\nHow do you see that playing out? Because so much of the pressure on this S-1 was the numbers themselves, which I want to talk about, but then there’s the external pressure of, “You’ve got to grow and growth is not as short.” So how do you see all of that playing out?\n\nIt’s very interesting because when we look at coding today, for example — and I think we saw this in Q3 with OpenAI kind of catching up — there are areas of coding where there are very low switching costs, and I can just move between that. What we hear from enterprises and maybe, too, on the OpenAI side — obviously I think they somewhat botched the Fable release, and the lack of zero data retention is why we saw some of the slowdown. That’s something they can fix with Fable 5.5 and maybe drive more enterprise adoption there.\n\nThat’s a huge thing for enterprises when we talk with them. We definitely see enterprises now, and more so, too, a lot of the AI natives, doing custom training and post-training on open weight models, and then running either their inference off of that or even their products for internal or external use cases.\n\nObviously, DeepMind at Google and [Meta Superintelligence Labs] are very well-funded labs that have pretty similar training compute capacity, and they’re bringing on a ton of it. Not even to mention SpaceX as well, with what Elon said on [about] 10 net new gigawatts next year and half of that is the long-term internal use case.\n\nIn the first half of the year, Anthropic ran away with it. They were 90 percent of the industry’s net new ARR. We saw in Q3 that OpenAI was probably actually the majority of industry net new ARR. Open-source has grown from probably $1 billion of token inference costs, ARR, in Q1 to $10 billion-plus here in Q3.\n\nSo yes, the industry’s gotten much more competitive, but there are all these new use cases, too, and some of these verticalized use cases are really where we’re going to see the growth going forward. Because it’s obvious coding isn’t going to power us to even triple from here.\n\nIt’s interesting. The concept is called Tokenomics. You run that practice alongside another co-lead at SemiAnalysis. Explain what it is because to me it’s such a smart way of thinking about, “We’re going to put some money in and maybe we’ll get some money out.”\n\nI think of it as the unit economics [of AI], or even just the broader idea — everything from a macro- to microeconomics of running an AI business or even looking at AI demand. So we cover the hyperscalers, now some of the neoclouds as well in a separate product.\n\nBut then just the AI labs, too. For investors, or just people that are interested in the business, Anthropic had negative 94 percent gross margins on inference two years ago. Now they have a positive 85 percent margin, and people don’t understand how they allocate compute. How do we think about the inference business model?\n\nPart of that gross margin conversation is the revenue per megawatt in inference. Why are all companies that are running inference seeing massive gains in inference and compute efficiency? So we try to model out these businesses and obviously when Anthropic was private, we’re dealing with information we can get from the press and things like that.\n\nBut now that we have concrete audited numbers, it’s easy to explain the unit economics of this. And also how the businesses differ. OpenAI is a much different business than Anthropic just in both their consumption versus subscription and then historical weight versus consumer versus enterprise. [We are] trying to understand across the demand level the economics of these businesses.\n\nSeveral years ago when I talked to Google CEO Sundar Pichai about the cost of inference, I said, “How are you ever going to make money?” He was just very clear. He said, “If there’s one thing Google’s good at, it’s bringing this stuff down the cost curve.”\n\nIt was a very blunt answer. I understand how Google can do it. They make their own chips. Anthropic is running on everyone else’s clouds. The core part of the S-1 is how much they’ve committed to spend on other people’s clouds: SpaceXAI, Google, Amazon. Where does their efficiency come from?\n\nThere’s really token throughput. They have a very diverse chip fleet. Between Trainiums, TPUs, and GPUs, across all of those, we see a ton of token efficiencies. Token throughput, for example, on Trainium chips is up 5x to 10x year-over-year right now.\n\nDealing with both the hardware level efficiencies and the software — and how the model interacts with the hardware — there are a lot of token throughput gains where if you’re doing X tokens per second, now you’re doing five or 10 times that just a year later. What they’ll tell you is they see continued compute efficiencies as well going forward.\n\nMax Kan, who co-leads Tokenomics model with me at SemiAnalysis, and I have even published some research on this. Right now, if Anthropic’s at $65 million of revenue per inference megawatt, this was mid-teens last year at this time. What we’ve said on maybe Opus 5.5 on a [Nvidia] Blackwell, you can get to $100 to $120 million of revenue per megawatt.\n\nThe big thing here is they’re paying on average now just a little over $10 million per megawatt in [cost of goods sold], or just in compute costs. What you can do with those margins is then reinvest in training.\n\nPeople don’t realize this, but only about 30 percent of the compute is actually in inference-serving revenue. The rest is for experimentation and research, training models, and post-training models. So there’s a lot of compute that is building the next model and that’s more of the R&D side and where you actually get your returns and defensibility in this business.\n\nActually, what I was expecting to see in the S-1 was that dynamic play out much more strongly — that Anthropic makes a bunch of money selling the models they have now and there are more customers in the future for the models they have now. That’s going to throw off a whole bunch of margin. And then, because it is Anthropic and they think they’re building a digital god, they’re going to train the next models as much as they can.\n\nThat is a very particular Anthropic story. The company is chasing AGI. The people who work there will happily tell you that in the S-1 that Claude might be conscious and this could all go to hell. Anthropic is a very unique company in its conception of itself. But you don’t really see that dynamic playing out in the S-1. They’re managing their training costs against their inference margin pretty well. Do you see that going up or changing in any way?\n\nI agree. Long term, and we’ve even said this internally, they want to actually increase the percentage of training. If you believe you’re building a digital god or going towards AGI, and as long as you have the gross margins of 85 percent-plus on inference to do so, you can.\n\nThey’ve grown a lot faster than they thought, and they didn’t expect to be at 11 percent non-gap EBITA margins. They’d love to be closer to zero, or even below that if they could get that compute and allocate it towards training and continue to see these compute efficiencies.\n\nThey’ve messaged that, too, to investors in the roadshow. You can look at this S-1 and just the curve of profitability over the last few years and how little cash they burned to get to this point and you can say, “This is a good business model, but we’re going towards AGI. Don’t expect the margin leverage we’re seeing to continue to this level, even though long-term margins can be quite a bit higher.”\n\nThere are some real shades of Amazon there. Jeff Bezos famously told investors he wasn’t going to make money until he could make a lot of money. Obviously, Amazon and Anthropic have a lot of back and forth. Maybe there’s some family resemblance there.\n\nBut I’m curious, there’s a point of model capability that would allow you to go into more verticals than just coding, right? We might be at it now. The idea of capability overhang exists, the idea that the models we have today could go and take over bio research. They’re taking over mathematics today. There’s a point at which the smartest business decision is to stop training and to just sell your profitable model into more and more companies. Anthropic as a public company will face that pressure.\n\nDo you think they’re organized or structured to fend it off?\n\nYeah, I think they’re structured well. With some of the voting stock in areas like that, they definitely are. We’ve seen this in tech before and even publicly when Mark Zuckerberg has made these decisions before to invest heavily.\n\nIt didn’t always pay off. I just want to point out, it didn’t always pay off.\n\nYeah, it did not always pay off.\n\nAlthough you and I technically are in the metaverse right now, by some definition.\n\n[Laughs] Right. But I think that’s something, and there’s an interesting number in the S-1 that 80 percent of revenue in the last three months comes from models released in the last six months.\n\nSo then you say, “Okay, 20 percent of the models are like Opus 4.5 in earlier versions.” One thing going forward is that if you’re a frontier model company, you always need to be at the frontier and it’s incredibly competitive.\n\nWait, can I ask a really dumb question about that?\n\nYeah.\n\nWhy? I think the heart of my curiosity about the industry right now is if you enabled some bleeding-edge technology that could revolutionize the entire world, at some point, the most profitable thing to do is to just go play it out in all the different verticals, right? It’s not to go make the next one. It’s actually to run an efficient model in legal services and medicine and wherever else that there hasn’t been diffusion of AI yet.\n\nThis idea that you always have to be at the frontier, that Anthropic always has to be competing with Google and OpenAI and whoever else, I get it from their self-conception. But from a business point of view, an AI-enabled business is going to throw out more money and spend more money with me, the AI provider, and that isn’t necessarily related to being at the frontier.\n\nThere are a few portions of that. For new verticals, and this is very cyber specific, if an adversary is using a frontier model, you need to be defending with a frontier model.\n\nFair enough.\n\nWhen we talk to some enterprises, it’s not like an email summary where I can run that on open source or Sonnet. There are just certain verticals where having… [For example,] if you were in a legal case as a defendant, would you be okay if your lawyer was using a non-frontier model if the prosecution—\n\n[Laughs] I got bad news for you about what’s going on in the legal market right now.\n\nThe competitive dynamics do dictate that. I think from a go-forward perspective, we’ve seen this with open source too catching up in one point, but the demand will be there. [SemiAnalysis CEO] Dylan [Patel] says this a lot. The demand will always be there for frontier intelligence, especially in competitive industries. And there are certain tasks, as you go towards more labor replacement versus labor augmentation, where that also is the case.\n\nAt the same time, they are getting more vertical. If you go look at job postings or what they’re hiring for, they’re putting out more of these SKUs and areas, and there’s a lot of beta testing going on like Claude for financial services, Claude for legal, their cyber program. They’re giving away 25,000 of credits per month for people in their cyber program.\n\nThat’ll be a huge SKU for them in 2027. Those verticalized areas and then ones that are specifically where you need to be… It’s more adversarial, I should say, or competitive, are the main reasons why. But we can both agree there are areas like email summary and work that definitely doesn’t need to happen [at the frontier].\n\nI’ll just make a dumb comparison to the iPhone. It’s iPhone season. I just reviewed the iPhone Duo. Apple kept the iPhone looking the same for several years now. They build all of the tooling for the new iPhone and then they just reuse it for two or three or four models to get all the value out of that investment back before they move on to the next thing. Apple puts out a new iPhone, and it keeps selling the old iPhone for a while to get more value out of that investment and that development program.\n\nThe AI industry does not seem to be doing that. All of their emphasis is on developing the next new thing, deprecating the old thing pretty fast, and moving you onto the new expensive product, while at the same time they’re building the next new expensive product.\n\nAt some point it feels like that will rationalize, that there will be something that is worth just collecting margin from while they go invest in the new thing. I just can’t figure out where Anthropic sits in that cycle.\n\nI mean, we do see this. Open source token volumes are picking up and there’s a lot of areas, yes, where the open source models have become good enough. I think on a go-forward basis, you’re like, “Okay, was that because of distillation?” And then the frontier labs have some defensibility actually going forward. I think when we talk to clients, it’s also about how we actually think about frontier versus open source. So something like a Sonnet type model, if you want to do the iPhone 18 versus the SE type analogy.\n\nWe do see that dynamic, and obviously with open source, it’s a question of how much that can take. Two, because we’re so early in these verticals, we don’t know what’s going to be fully agentic. There’s no human in the loop where the harness actually has, I should say, some value and defensibility to it.\n\nThe big area I’d look at here, especially when we talk to enterprises today, is only the coders are allowed to use the frontier models at a lot of these enterprises. If you’re a non-coder, some of these companies just limit you to Sonnet, if you’re an Anthropic customer. That’s reflective of how management views and wants to budget for this, what frontier intelligence is actually worth to them in certain areas.\n\nIn my financial analyst brain, Claude could not build a good financial model six months ago. It’s getting better if you connect it to the right areas, but we’ve gone from something like, “I needed a junior analyst six months ago,” to, “Maybe I don’t as much anymore,” and then, “Will I have a full junior analyst at my disposal anytime or multiple pretty quickly, if I have unlimited token budget?” We just look at that across every vertical and major job category.\n\nThe time horizon in each of those categories is going to be different. That’s just one of the bigger questions I have: How quickly do they get to where they think they can go?\n\nI want to dig in on some of the numbers here. The one that jumped out in all of the comment sections on all of the forums and all of our articles yesterday was $80 billion. Anthropic lost $80 billion [in the first half of 2026]. That is related to a technical charge. Can you just explain the $80 billion? Because it doesn’t seem particularly relevant to the revenue and profits they’re talking about.\n\nYeah, it’s a non-cash charge because their valuation has gone up so much and they’ve issued warrants or convertible notes. You have to account for that in your balance sheet. It’s just a non-cash charge because their valuation has gone up so much since they issued these warrants and notes.\n\nThat’s something you would always back out. You can argue on stuff like stock-based compensation. Should we really be thinking about that on a non-GAAP cash basis? Because it’s non-cash, if I just hand employees shares, I have to account for that on my income statement, but I’m not actually handing them pure cash out of my bank balance. So it’s not an area like that. It gets the accounting, the high level. If you don’t know accounting, it looks bad, but it’s because they’ve grown so much and their valuation has gone up so much.\n\nSome of the argument here about that charge is that Amazon was the other party there. Obviously Amazon’s very happy because Anthropic is buying a ton of AWS and sure they’re happy the valuation has gone up, but over time Amazon’s going to get diluted this way. That’s part of the dynamic there.\n\nAnthropic is going to obviously IPO. They’re going to put a bunch of shares in the market. It’s very clear that over time they will issue more shares to raise more money. It doesn’t seem like they’re going to stop wanting to raise money anytime soon.\n\nHow are you thinking about that in terms of just investment into a company like Anthropic, that your valuation might be going up, but your actual ownership stake might be getting diluted over time?\n\nThe deals have always been very creatively structured. The number is they’ve actually only burned $10 billion of cash. They have $120 billion-plus of cash and marketable securities in the balance sheet today, and post-IPO, probably another $100 billion.\n\nIt’s a great deal for both parties. They only really rent compute. It’s not like they have these massive capital outlays or even rent-to-own. You can make some arguments about certain accounting and there are these massive compute commitment obligations and that’s technically future debt, or that is sitting somewhat off balance sheet essentially. But from a dilution perspective, all tech companies dilute. Are they going to need to raise another $100 billion of debt or equity at some point? Possibly. Can they continue to creatively structure and finance future compute buildouts? Probably as well.\n\nI know there’s been a lot of angst about the future of compute financing and data center financing in the last few weeks. But if you’re Anthropic, if you’re a major lab, a hyperscaler or Broadcom or Nvidia that are backstopping a lot of these deals, that’s probably not going to change anytime soon. So I’m not particularly worried.\n\nAs an equity investor, would I be worried about getting super diluted? I don’t think so. If you believe in this long-term AGI bull case and that Anthropic is going to be a leader in this, that probably shouldn’t worry you. You’re probably looking at a $10 trillion-plus business. They can outrun dilution at that point.\n\nLet’s talk about the compute commitments. I saw at least one analysis saying over the next 10 years, it’s $800 billion-plus in commitments to the various hyperscalers and neoclouds. That’s a lot. You’re saying that they don’t have that much money. They haven’t even spent that much money yet. Do you see them generating the revenues to pay off those commitments?\n\nYeah. I think when people look at the headline commitments, the $500 to $600 billion number over 7 to 10 years, let’s call it, what they’re paying for compute today actually isn’t that many gigawatts. If you think about their spending right now, on average they’re close to $11 million per megawatt in spend, or $11 billion per gigawatt.\n\nIf you take that back to the annual level and say, “Okay, the $520 billion number is over 70 years, for example, that’s really not that many gigawatts and they’re going to be well beyond…” When they get to something like 20 gigawatts, the future compute commitments that they’re running essentially is going to be well into the trillions.\n\nSo yes, they are going to have the revenue to do so. It’s more about how much revenue they are going to have relative to how much compute. Two, the compute efficiency equation. If they keep getting a lot more revenue out of every inference megawatt, how much do you really want to invest in training and take margins to zero from a rental perspective? Because you can get to something where even 80 percent to 85 percent of their fleet is just on training and research at these kinds of margins.\n\nThe revenue is going to scale pretty well. They’re not in any dire situations there. Unless we realize all this revenue disappears or people churn. It’s not like they have to hit a trillion dollars of revenue extremely, extremely quickly to achieve all this and pay for this.\n\nUnless you’re trying to build digital God and unless it doesn’t diffuse across the economy as fast as everyone wants it to. Those are bets, right?\n\nThey’re huge bets. The numbers you look at, if you’re really bullish on this ramp into the digital economy, is Anthropic saying within their Fortune 500 customers, they have 50 percent of the Fortune 500 and that is just 0.1 percent of their total customers’ operating expenses. When you look at that on a per user basis, it’s like $8 a month if you believe OpEx doesn’t include the cost of goods sold. If you believe they include the cost of goods sold, it’s sub-$50 per month.\n\nThey said the same thing. Of the top 5 percent of Claude Code users, they’re spending $18,000 a year on average, the top 5 percent of users. Their non-Claude Code users spend under $75 a month, well under $75. There’s this huge opportunity, especially when we talk to enterprises and these traditional buyers of IT software.\n\nPenetration is extremely low in traditional white collar work. That’s the big point, too, that there is a large ramp period here of both seats adoption and usage. You can make arguments of who’s going to win in this, but it’s obvious the frontier labs are going to get some portion of this and it’s going to be pretty material to net new ARR next year.\n\nOne of the things that’s really interesting about that is we talk about the frontier labs, we talk about the hyperscalers — Anthropic has a lot of wild risk factors in this S-1, including that Claude might be conscious and kill us all.\n\nBut one of the most direct and maybe easiest to understand is that AWS, Azure, and Google Cloud are both suppliers and competitors in some real way, particularly Google. And they say, “These relationships could turn.” They have a big relationship with SpaceXAI. Elon Musk is going to train Grok. They’re going to compete with SpaceXAI at some point. That relationship might become precarious.\n\nAs you say, they’re only renting their compute. At some point, the market might force them to own more of their compute because their own competitors don’t want to lease their capacity to the leading company. How do you see that playing out?\n\nWe definitely see both OpenAI and Anthropic going more direct and not owning the compute, but more rent-to-own, or going through an SPV as some financial sponsors do and producing the compute more directly versus renting.\n\nThere are two points to this. Google, from one perspective, is also selling its external chips to customers and saying, “We don’t care to monetize this within Google Cloud or even allocate the share… If you think we’re very chip-constrained, we don’t even care that these are going to DeepMind or internal GCP compute for us to monetize. We’re just willing to become a chip seller.”\n\nAnthropic loves TPUs and there are 3.5 to 4 gigawatts-plus, and probably more in the pipeline, in terms of orders there of Anthropic buying these chips directly to then rent. So yes, the market is good.\n\nWait, it’s not buying them directly to rent. So they’re buying them into a neocloud?\n\nYeah, they buy them through an SPV, or the SPV buys them and then they rent it from the SPV.\n\nGot it. Okay.\n\nEven within Google Cloud or AWS or Foundry, Anthropic is massive — 48 percent of their business comes through the Bedrock Foundry and Vertex where people are paying through their existing cloud relationship to access these models. They’re not even talking to Anthropic. You don’t have to interact with the Anthropic sales force.\n\nYou mentioned this earlier. This marketing channel where Anthropic gets a rev share.\n\nRight. If you’re AWS and you’re saying, “I’m running Anthropic compute for, let’s say, $10 million per megawatt, but now I’m getting 16 percent of $65 billion-a-megawatt plus the compute costs as well,” so we’re seeing margins at all the clouds go up right now. Part of it is CPU utilization is going up because of all the coding and then some on the [reinforcement learning] side, but these token-as-a-service businesses as we call them — so AWS Bedrock, Microsoft Foundry, Google Gemini Agent Enterprise platform, which is formerly Vertex — are actually massively increasing the margins on AI at these clouds.\n\nThey’re benefiting as well when shareholders are giving them credit for this recently. In Q2, both Azure and AWS had extremely, extremely strong quarters, AWS specifically, on the back of Anthropic’s growth on Bedrock.\n\nDo you think that will keep Amazon from ever wanting to train its own frontier models? They’re doing a good job of letting AWS be the infrastructure for everybody else, but they’re one of the only big tech companies that hasn’t felt the insecurity of not having their own models.\n\nYeah, it’s interesting. Amazon is very happy to serve a wide variety of customers and they have very little [frontier capability]. When we look at our estimates of training compute, they have the least of any hyperscaler, except maybe Oracle. It doesn’t seem like there’s much strategy there.\n\nI know Microsoft in the last two quarters has been talking about it a little more. AWS on the call has been talking about it a little more, but it’s not huge. They’re not doing it to the same extent that Meta is or trying to be competitive here or even Google with Gemini. Especially someone like Dylan will tell you, if you’re not trying to compete at the frontier, there’s really not a place for you, especially if you’re only dedicating a few hundred megawatts internally. One, internal use case is like serving Amazon retail, but then two, training. There are a lot of commitments to make to be good at this.\n\nIt’s a conversation for a different day, but I look at these Microsoft job cuts and I see it as the glimmer of evidence that they’re going to try to compete in the future. They obviously got burned pretty badly by OpenAI.\n\nYeah. They have, in the new agreement that they signed, the right to monetize OpenAI models for essentially not paying OpenAI anything within that agreement. They’re going to have some interesting things ahead where they monetize the OpenAI models or even through Microsoft 365 Cowork and Copilot applications where they’re not paying OpenAI anything for a frontier model.\n\nThe other dynamic here, and you brought it up earlier, is over the last few weeks, there’s just been a lot of stress about neoclouds — whether they will succeed, whether they will fail. I think Elon Musk said there will be a guppy-like extinction event , which is just a brutal metaphor to use to describe a bunch of data centers.\n\nBut this is a bunch of circular financing and Nvidia stood a bunch of them up and maybe the hyperscalers are just going to run away with it. Maybe Anthropic’s demand, because maybe they will want to own more of their own compute because renting it is precarious in all these ways.\n\nWhat do you make of the neoclouds? Do you think they’re going to survive the market actually shaking itself out as these companies go public?\n\nElon obviously has some incentive to say neoclouds are going to be extinct. ClusterMAX said something else and just does amazing ratings of the neoclouds . There are a lot of neoclouds that are ex-crypto miners that are not good businesses and are not good at operating clusters.\n\nI just want to point out CoreWeave is an ex-crypto mining company, right?\n\nYeah. I don’t mean CoreWeave, but there are others further down the list. CoreWeave, Nebius, and anyone that has backing or backstops from one of the major labs, hyperscalers, Nvidia, or Broadcom is going to be okay.\n\nIt’s that longer tail. Hyperscalers have been 65 percent of CapEx and net new compute brought online. There’s 35 percent of the market that doesn’t have the balance sheets that the hyperscalers have. Both Google and Meta have recently raised or announced they’re going to raise. When we look at the big four hyperscalers, they don’t actually need to raise that money over the next two years, even though CapEx is growing from $1.2 to $2 trillion pretty quickly.\n\nBut for a lot of these other neoclouds, if you don’t have that sort of backing, I think it is very hard, even right now, and becoming extremely difficult if you don’t have the backing or backstops from those players to keep building compute. It’s a very, very tough financing market.\n\nOne of the things I think is really interesting about Elon in particular talking about neoclouds dying and obviously hyping up his own data center business is he’s trying to put them in space and to get away from the backlash in the United States around data centers in particular.\n\nWe have a lot of coverage about data center backlash in the United States, it is slowing down a lot of projects. But at the rate we’re going, if you think the neoclouds are shaky, you might actually end up abandoning a bunch of GPUs and half-built data centers or have them tied up in financing agreements where they can’t be lit up.\n\nWhat do you make of that? Do you think we actually just need to go to space? Or do you think the market is going to rationalize and actually take advantage of all the compute that is currently allocated but not being used?\n\nWe’ll rationalize more so. The market is very good at finding places to put chips here on the ground. Politically, we’ll see what happens next week with midterms and the fallout from that. Obviously, there are some very large sites that still have massive permitting problems. There’s the entire power equation as we look towards next year.\n\nThe data centers will be built. There will be a method to get these built. The biggest thing — and the hyperscale CFOs have said this — from an overbuilt perspective and on a relative basis, it’s pretty cheap to build the data center shell. What they can do if they overbuild is they’re going to say, “We’re just not going to take delivery of the chip. We’re not going to buy chips. We’re not going to fill them up.” They’ll just sit empty and chipless. But the majority of the spend is on the chip side.\n\nSo if we do end up in a place where we’re actually oversupplied from a data center perspective, I know that’s a little bit different. It’s the exact opposite of what the question was. They have said that from an ROI perspective. This comes back to that larger question of whether we are still going to be super supply constrained. A lot of people now, especially in the last three weeks, are talking about, “Are we in this massive glut of compute as we look towards 2028 actually?”\n\nBecause the same thing we talked about from Anthropic going from negative 94 percent margins to positive 85 percent and compute efficiencies mean as you bring on more inference megawatts that are making a lot more revenue per megawatt, all else SQL, you need less compute. So it’s a question of whether we we going to have enough revenue in 2028 to justify the ROI on $2 trillion plus of CapEx.\n\nThis is why I spent so much time asking about capability overhang and how good the models are today, because you can see some competitor that is less idealistic about AGI saying, “Actually, we’re going to do a bunch of forward-deployed engineers in all of these verticals where they haven’t taken advantage of AI and sell them high-margin inference because we’ll automate big chunks of their business and they’ll see the return.” Right now, a bunch of the Fortune 500 has not seen a return on AI spending .\n\nSo if you’re actually just better at customer service and deployment and productizing the model, you might get way ahead of where Anthropic needs to be because they’re still thinking about AGI every single minute of every single day. I look at Dario standing next to Marc Benioff at Dreamforce and that dude does not want to be there right now. He wants to be thinking about the machine god.\n\nThere’s something there where you can just see competitors coming up with an open source model and saying, “We’re actually going to productize this and we will actually take the revenue that everyone else is depending on.”\n\nYeah, it’s extremely, extremely interesting. In the interim, that’s why it is getting more verticalized because you need something to bridge AGI where it just fully does the job, you need something to bridge the actual model today.\n\n[Laughs] Yeah. We’ll just take that for granted.\n\nTo get there, you need some bridges of where it sits with the actual end user at some point. Everything is going to come down to this: Is there going to be some timing or adoption mismatch where we just don’t get the revenue at a certain point of time to justify that chase of “train and compute towards AGI”? That’s a risk.\n\nThe other risk we look at is whether we get more models at the frontier even at the open source that are as competitive in coding, where token pricing across the frontier needs to be taken down, because like I mentioned earlier, there are lower switching costs. Even at SemiAnalysis, we went from 95 percent or 90 percent-plus of our usage at the end of Q2 was on Anthropic’s models down to 70 percent after the release of OpenAI’s ChatGPT 5.6 and Astra. And then with Opus 5.5, it’s gone back to 90 percent-plus roughly.\n\nIt does come back. Even the base of revenue today — and they’ve said that we have net revenue retention of 900 percent, so they’re seeing this massive, massive growth. This isn’t a traditional software business like ServiceNow or Workday, where you have just an incredible logo or gross retention of 95 percent to 98 percent and customers sign these nice three-year contracts, they never churn, they add some seats, and maybe they adopt another product that is being upsold. This is purely consumption.\n\nThe other portion was the 20 percent drop in the last two weeks of the year versus the prior two weeks last year in token spend, because of the holiday season. You’re not going to do work code stuff, you’re not going to be coding for work during the holidays. This is extremely, extremely pure consumption business, even different from how we think about Snowflake or Datadog today in public markets.\n\nObviously, Anthropic is not the only company that’s going to have an IPO. OpenAI is right next to them. They’ve delayed theirs. You mentioned earlier Anthropic is much more enterprise focused. I think OpenAI for a long time thought that Google wouldn’t react to them and they would just take the search business away and everything would be fine. Google obviously reacted for better or worse. Search is now AI Overviews.\n\nLooking at the Anthropic S-1, what are you looking ahead to with OpenAI? Because they are a more consumer facing company.\n\nOpenAI was 60-40 consumer, 60 percent consumer and 40 percent enterprise at the end of Q1. That didn’t flip for the first time until January or August to be enterprise focused. What they’ll tell you is enterprise business — because it was so consumer and subscription focused, this consumption business that’s 80 percent of Anthropic’s revenue — didn’t take off until a release of 5.6 and then with Astra.\n\nThose are really great models. OpenAI took the majority of actual net new ARR in Q3, but it’s going to take some time because what’s been in the Wall Street Journal , like negative 100 percent EBITA margins versus we’re seeing positive 11 percent here.\n\nThere are some differences, some pretty big differences, in the business model where they just don’t monetize at the same rate that Anthropic does. That’s a little bit because the business makeup — the verticals, that consumer-versus-enterprise split — and that’s changing.\n\nWhat they’ll tell you is they see a really good Q4 and they have a much stronger enterprise sales function than Anthropic has. I expect them to come up, but I don’t think the financials are going to look as good as this even when they drop their S-1 maybe in early 2027.\n\nDo you think that’s why they delayed it? To get their financials looking better?\n\nYeah, I think OpenAI had a really strong Q3 . Enterprise grew 100 percent quarter-over-quarter versus the total business which was 77 percent. You get another strong quarter of enterprise here. If Opus 5.5 didn’t take a ton of share, that would put OpenAI in a much better position to tell the story.\n\nThere are some other turns here between now and when Anthropic actually goes public. They’re going to do a roadshow. There’ll be some pricing events. What are you looking for from Anthropic?\n\nThey did an investor day two or three weeks ago where they did give some more color. I think they’ll walk through why Q3 was so weak. Meta was a very, very large customer, probably over 10 percent. What’s been publicly reported is they went from 60,000 Claude Code seats down to 30,000. These token volumes didn’t disappear, they just shifted into Meta’s internal models.\n\nAnthropic started cracking down on anti-distillation, and that was 5 percent of revenue prior. I think they said 5 percent to 7 percent of revenue in the S-1 and stuff against their terms of service. So what’s here on the roadshows is a lot of this October acceleration after Opus 5.5. We believe that they’re back on track.\n\nIf they were doing $10 billion of net new ARR per month in Q2 and that fell down to $4 billion in Q3, that they’re getting back on that $8 billion to $10 billion pace here in Q4. People want to hear about these new verticals, specifically cyber. They’re doing some patching until they have that full cyber SKU rolled out, but they’re definitely monetizing cyber today for vulnerability code scanning. These are not small contracts, I should say, with existing customers.\n\nI think they’ll start to message what the 2027 ARR growth path looks like. The other thing too is expectations management, keeping numbers low enough, not talking about AGI as much.\n\n[Laughs] It’s hard to do expectation management when your risk factors are like, “We could pose an existential risk to all of humanity.”\n\n[Laughs] Right. And so saying you do that — you’re going to achieve AGI at some point, you’re going to replace everyone’s jobs — but then trying to keep numbers low enough for Q4 and to have this massive beat the first quarter you become public and have a decent guide for 2027, it’ll be a nice mix of seesawing between that long-term vision and short-term expectations management.\n\nThere’s a lot going on. Joey, this has been great. We’re going to have to have you back as these companies barrel towards actually being public and their economics become much more visible. Thank you so much for being on Decoder .\n\nThank you so much. I appreciate it.\n\nQuestions or comments? Hit us up at decoder@theverge.com. We really do read every email!"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-d44e99cc80d09c86",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/29/ios-27-3-release-date-heres-when-to-expect-new-iphone-features/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-29T13:44:21.000Z",
+    "publishedAt": "2026-10-29T21:06:35.000Z",
     "categories": [
       "apple",
       "tecnologia-general",
@@ -141,22 +17,22 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "iOS 27.3 release date: Here’s when to expect new iPhone features",
-        "summary": "Apple released iOS 27.2 this week with new features for Messages , Siri AI , and Photos , plus an Apple Music rebrand and more. But work on iOS 27.3 is already well underway, here’s when to expect the next big iPhone update. more…",
-        "body": "Apple released iOS 27.2 this week with new features for Messages , Siri AI , and Photos , plus an Apple Music rebrand and more. But work on iOS 27.3 is already well underway, here’s when to expect the next big iPhone update.\n\nIf you follow Apple closely, the company’s software release patterns quickly become clear.\n\nFor example, iOS 27.2 launched this week right around the same time as Apple’s previous releases in years past.\n\nThe only difference is that normally we would have expected iOS 27.1 in the last week of October rather than 27.2. But due to Apple making iOS 27.1 exclusive to iPhone Duo , all software releases for the iOS 27 cycle will be off by one number—despite following the same timing as ever.\n\nThat means iOS 27.3 is up next, and its release should align with historic patterns for x.2 updates.\n\niOS 27.3 is expected to arrive in beta within the next few days—Monday, November 2 is likely.\n\nAs for the public launch, here’s what past years have shown for comparable x.2 updates:\n\nBased on this pattern, iOS 27.3 is expected to release in mid-December .\n\nApple always tries to ship its last software update of the year with a little buffer before taking a holiday break. That way if any major issues arise, the company can develop a quick fix and push it out before much of the company takes time off.\n\nAs for new iPhone features in iOS 27.3, we’ll know a lot more after the beta arrives. So far though, at a minimum we’re expecting the additional Siri AI languages Apple announced this week, plus the return of the all-new Health app .\n\nWill you install the iOS 27.3 beta or wait for the release version? Let us know in the comments."
+        "title": "Strava adds Google Gemini integration with personalized workout insights",
+        "summary": "Strava expanded its AI integrations with Google Gemini this week, allowing subscribers to get personalized insights based on their workout history. Here are the details. more…",
+        "body": "Strava expanded its AI integrations with Google Gemini this week, allowing subscribers to get personalized insights based on their workout history. Here are the details.\n\nA few months ago, fitness tracking platform Strava launched an integration with Claude using the Model Context Protocol (MCP), allowing users to analyze their workout history and training performance through natural-language conversations with Anthropic’s AI assistant.\n\nMCP is an open standard (created by Anthropic and later donated to the Linux Foundation’s Agentic AI Foundation) that allows AI assistants to connect to external apps and services to access information and perform tasks on behalf of users.\n\nThis week, Strava announced an expansion of its AI integrations, bringing similar capabilities to Google Gemini.\n\nAs the company explained, Strava subscribers “who connect Strava directly to Gemini will get more contextual and personalized answers grounded in their activity history.” The company added that the integration is entirely optional and read-only\n\nFrom the announcement:\n\nOnce connected, users can ask Gemini things such as:\n\nAnd with our most recent update, users can also ask:\n\nThe rollout will be limited to the US at first, with the integration available to Strava subscribers regardless of their Gemini plan. Strava has not announced when it might expand to other countries.\n\nTo read the full announcement, follow this link ."
       }
     },
     "media": null
   },
   {
-    "id": "techcrunch-68f17f1f061ff63d",
+    "id": "engadget-71c0c024e664c357",
     "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/29/deepgram-acquires-pipecat-maker-daily-to-bolster-its-voice-ai-infrastructure/",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2301687/reddit-will-move-to-logged-in-only-as-ai-eats-search-traffic/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-29T13:00:00.000Z",
+    "publishedAt": "2026-10-29T20:32:49.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -165,46 +41,166 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Deepgram acquires Pipecat-maker Daily to bolster its voice AI infrastructure",
-        "summary": "Deepgram said that it is committed to keep Pipecat open source.",
-        "body": "The voice AI sector is hot, and top players are trying to consolidate their position as more business models come to the fore through partnerships and acquisitions. Deepgram is the latest to make such moves: The company said on Thursday that it is acquiring Daily, the maker and maintainer of one of the most popular open source voice AI infrastructures, Pipecat.\n\nThe companies didn’t disclose the deal amount but said that they will keep Pipecat open source.\n\nFor the uninitiated, Pipecat is a framework that manages voice and video streams along with other pieces in the pipeline, like speech-to-text (STT), large language models (LLMs), and text-to-speech (TTS) models while reducing latency. Its maker, Daily, provides hosted infrastructure for voice and video calls of any kind.\n\nWith Pipecat, Deepgram will likely gain a deeper understanding of real-time voice and video infrastructure.\n\nDaily has raised over $62 million in funding to date from investors such as Tiger Global, Highfield Capital, Nat Friedman, Lachy Groom, and Kevin Weil, according to PitchBook data. Earlier this year, Deepgram reached unicorn status with a $130 million Series C round . Incidentally, both companies were in the same Y Combinator batch in 2016.\n\nKwindla Kramer, Daily’s co-founder, said around the time when GPT-4 came out, the company started experimenting with AI-to-human communication over voice and text, which eventually resulted in the Pipecat framework. He noted that while there has been a lot of acquisition interest, he favored Deepgram’s CEO Scott Stephenson’s commitment to keeping Pipecat open source forever, and the engineering culture of both organizations matched, giving Daily’s team the freedom to work on different parts of the stack within a bigger organization.\n\n“Scott was super committed to Pipecat being open source and vendor-neutral forever. I think there is both a personal commitment and commercial driver there. If you sit in the middle of an ecosystem that’s growing very fast, and have many parts of that ecosystem that are genuinely the best from your company, then everything being as open as possible is like a commercial advantage,” Kramer told TechCrunch.\n\nStephenson said that Deepgram has been wanting to work in open source for a long time, and the company realized that an orchestration framework for agents was a potential area, which drove the decision to partner with Daily.\n\n“We want to open up the ecosystem so everybody can build voice agents. It’s great if you’re using Deepgram models, but I want you to be using the best models for your use case. And if Deepgram notices that we have some ground to catch up on in a certain area for our own models and products, that’s great. We want you to use partners, and then we’ll also work on becoming better in those areas,” he said.\n\nStephenson said the acquisition lets developers build agents with expressivity and end-to-end speech systems by plugging in different models and a context bus that connects all parts.\n\nFor Deepgram, the deal also lets it explore areas beyond voice through Pipecat, as the framework caters to real-time communication in different formats.\n\n“We never thought about Pipecat as a voice toolkit. We thought about it as the toolkit we needed to build this new kind of AI-native software. Because of where we came from, we just always assumed real-time,” Kramer said.\n\nDeepgram is also launching Real-Time Context Standard (RCS), an open protocol for voice agents that it co-developed with the Pipecat team. The protocol defines metadata like context from the audio, like a whisper, instructions for a language model on how it can use those signals, and guidance on how the response should sound.\n\nVoice AI has seen a lot of investment from both the model and the infrastructure sides. Model makers like ElevenLabs , Gradium , and Fish Audio have raised millions of dollars. On the other hand, infrastructure companies like LiveKit and Vapi have raised multimillion-dollar funding rounds this year."
+        "title": "Reddit will force users to log in as AI is killing search traffic",
+        "summary": "The company is starting with tests outside of the US.",
+        "body": "The company is starting with tests outside of the US.\n\nReddit will no longer allow logged out users or those without an account to view content on its platform, CEO Steve Huffman shared in an update . The change, which the company said will initially be tested in \"select markets\" outside the US, comes as the company says that search traffic has declined significantly.\n\n\"A key piece of work to retain new audiences is shifting Reddit to a logged-in-only experience,\" Huffman wrote in a shareholder letter. \"Moving to primarily logged-in will ensure our users have the best Reddit experience possible, and can find the content and communities most relevant to them.\"\n\nThe change is the most dramatic shift the company has made as it battles AI scraping and changes to internet search. It will also likely rattle users, some of whom are already frustrated with recent moves like restrictions on Old Reddit . Huffman said that it was a \"big change\" but necessary for the company.\n\n\"It is better for our business because we will have more signals for ads targeting, and being logged-in leads to higher engagement generally,\" he wrote. \"It also allows us to protect access to Reddit's extremely valuable corpus of data, and helps us better adapt to emerging regulations around the world.\"\n\nDeveloping..."
       }
     },
     "media": null
   },
   {
-    "id": "techcrunch-712a2517aae6d34b",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/29/amazon-updates-alexa-to-help-you-manage-shopping-lists-subscriptions-and-update-delivery-instructions/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-29T13:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Amazon updates Alexa to help you manage shopping lists, subscriptions, and update delivery instructions",
-        "summary": "The update allows you to use Alexa to create lists, register them, see what's on them, and add or edit items. You can also manage subscriptions with the AI bot.",
-        "body": "Posted:\n\nAhead of the holiday season, Amazon has added more than 100 new shopping-related capabilities to Alexa, including subscription and list management, updating delivery instructions, solving payment issues, and answering questions about Prime subscriptions.\n\nThe update allows you to use Alexa to create lists, register them, see what’s on them, and add or edit items. You can also manage subscriptions with the AI bot — for example, you could ask it to change deliveries for an item to every three months instead of every month — and edit delivery instructions, such as change an address or add drop-off details.\n\nUsers also can now ask Alexa about their Prime or Audible subscriptions, and ask it questions about billing or payment issues.\n\nAmazon has launched various AI-centric shopping features this year, including a shopping assistant , and a way to notify users about new products and offers .\n\nThe company said that since the start of the year, the number of people using agentic features has grown 8x, and over the last 12 months, over 400 million consumers have used Alexa for shopping."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-f3de956f27c2ad63",
+    "id": "9to5mac-68939f349bd7ee8f",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/29/the-education-price-of-the-macbook-neo-just-jumped-again/",
+    "originalUrl": "https://9to5mac.com/2026/10/29/apple-cuts-app-store-commission-in-taiwan-following-regulatory-discussions/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-29T12:14:11.000Z",
+    "publishedAt": "2026-10-29T20:24:17.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple cuts App Store commission in Taiwan following regulatory discussions [U]",
+        "summary": "Apple today announced that it is lowering its standard App Store commission in Taiwan, following discussions with the country’s Fair Trade Commission. Here are the details. more…",
+        "body": "Apple today announced that it is lowering its standard App Store commission in Taiwan, following discussions with the country’s Fair Trade Commission. Here are the details.\n\nOver the past year or so, Apple has faced mounting regulatory pressure on several of its App Store practices and rules worldwide, particularly those related to app distribution, payment processing, commission fees, and alternative options for developers.\n\nIn Japan and Brazil , in response to local competition rules and investigations, the company introduced alternative app marketplaces, third-party payment options, and revised commission structures.\n\nIn the European Union, Apple recently overhauled its App Store fees and business terms to address concerns raised by the European Commission following a lengthy back-and-forth over its compliance with the Digital Markets Act.\n\nJust last week, an Australian federal judge ordered Apple to allow alternative app distribution and payment methods following its years-long legal battle with Epic Games. Apple plans to appeal.\n\nAnd yesterday, South Korean regulators fined Apple approximately $15.5 million and ordered changes to its App Store policies over payment restrictions, app review practices, and discriminatory commissions.\n\nNow, Taiwan is joining that list, though the changes announced today are considerably narrower. Apple today informed developers that, starting this Saturday, October 31, its standard commission on paid apps and in-app purchases will drop from 30% to 26% in the Taiwanese iOS and iPadOS App Store.\n\nApple said the change follows discussions with the Taiwan Fair Trade Commission, and added that “signing the updated terms by October 31 is not required to receive the benefit of these commission rate changes starting that date.”\n\nThe company also updated its Apple Developer Program License Agreement to reflect the new terms, with translated versions expected to be available within the next month.\n\nTo read Apple’s full announcement, follow this link .\n\nUpdate: In a statement to 9to5Mac, Apple said:\n\n“We’re making updates to the Taiwan storefront of the App Store following constructive discussions with the Taiwan Fair Trade Commission. These changes reflect our ongoing commitment to providing developers with a thriving marketplace and ensuring the App Store remains the safest, most trusted platform for users. We will continue to equip developers with the tools, resources, and support they need to build, grow, and scale successful businesses on the App Store.”"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-6dffddcca40287af",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gadgets/2026/10/windows-11-gets-right-click-menu-improvements-as-pc-revenue-slides/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T20:18:49.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Windows 11 gets right-click menu improvements as PC revenue slides",
+        "summary": "The latest update also brings a cloud recovery option for PCs that won't boot.",
+        "body": "Microsoft is beginning the rollout of a Windows 11 preview update that finally addresses a persistent power user complaint with the operating system: the right-click menu that obliterated years of muscle memory on command locations, and hid others behind an additional click. The timing for the release is notable, as the announcement comes alongside Microsoft's quarterly financial report that saw a continued decline in the business of selling Windows licenses for new PCs.\n\nThe preview update, KB5127936 , is cumulative for Windows 11 versions 26H2 and 25H2. The update will be a gradual rollout before eventually moving on to a normal rollout for all Windows 11 devices once it reaches general availability. The highlight of the new update should calm annoyed users who have spent years with custom scripts and services in an attempt to shape Windows the way they'd prefer it. Users will get a \"customize menu\" button that controls what commands appear when they right-click their mouse. Users can toggle built-in commands such as Send To or Create Shortcut on or off, rearrange what appears on the main menu, and control which third-party extensions show up in either the main or submenus. The gripe with the right-click menu had been that Microsoft hid familiar command locations behind a top row of icons while moving other familiar commands under the \"Show more options\" submenu. Now, Windows users will have the ability to customize the whole thing around their habits.\n\nThe new preview also highlights a new Windows feature called Cloud Rebuild, a recovery option that can reinstall Windows 11 directly from the cloud, even when an existing Windows 11 fails to boot. Cloud Rebuild will pull the Windows 11 image and needed system drivers directly from Windows Update. Users will not need a custom recovery image or external media to reinstall Windows. There is an important distinction to note however. Microsoft classified Cloud Rebuild as a recovery option, but it behaves more like a fresh Windows install than a repair, as existing applications and files will not be included. Those worried about data security have the option to sanitize entire system drives prior to reinstalling. For a full list of improvements coming to Windows 11, including changes to Xbox mode and settings, you can view the official Microsoft release announcement .\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-5fb7aeb8e7324c82",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2301660/google-brings-ai-mode-advertisements-to-more-countries/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T20:18:24.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google brings AI Mode advertisements to more countries",
+        "summary": "Adding sponsored content in more markets could make the feature profitable.",
+        "body": "Adding sponsored content in more markets could make the feature profitable.\n\nGoogle announced that its AI Mode will start showing advertisements in more markets. This feature of the company's search tool will display ads for users in Australia, Canada, India, Kenya, Malaysia, New Zealand, Nigeria, Pakistan, the Philippines, and Singapore. Later this year, people in Brazil, Mexico, and the United Kingdom will start seeing ads, too. In addition, the US will be getting \"multiturn\" ads, meaning that the sponsored content would also appear in follow-up queries.\n\nThis development follows a mention in parent company Alphabet's recent earnings call for the third quarter of the year. According to the discussion for investors, execs noted that AI Mode was seeing lower monetization, not generating as much as the company is spending on it during the latest period. But the ads are apparently showing \"promising results\" thus far, so the addition of more markets could swing AI Mode to profitability.\n\nAfter AI Mode became available across the US in May 2025, it didn't take long for Google to begin testing the sponsored content ads in November."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-de6b00012c13b30d",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/29/as-search-traffic-dries-up-reddit-announces-its-shifting-to-a-logged-in-experience/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T20:08:31.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "As search traffic dries up, Reddit announces it’s shifting to a logged-in experience",
+        "summary": "As AI transforms how people find information online, Reddit is rethinking its open-web roots to protect its audience and business.",
+        "body": "Reddit has long attracted millions of users to its site through Google, with many even appending the word “Reddit” to their search queries for better answers. But as search traffic dries up amid the shift to AI-powered search, Reddit is rethinking its relationship with the open internet. In its third-quarter earnings call on Thursday, the company announced it’s transitioning to a primarily “logged-in experience.”\n\nThe move is designed to protect its data from AI scraping, allowing the company to instead forge lucrative licensing deals with model providers. But just as important, such a shift could help Reddit to increase its revenue even as it faces daily active user declines in its largest market, the U.S.\n\nOverall, Reddit’s global daily active users were flat quarter-over-quarter in Q3, reaching 130.3 million, while U.S. daily active users dropped from 53.2 million in Q2 to 50.7 million in Q3 and were down 2% year-over-year.\n\nThe company is not alone in seeing such declines; the shift to an AI-centered web has impacted most websites and publishers by now, leading to fewer click-throughs, as AI summaries provide answers that don’t require website visits and Google’s traditional “ten blue links” have reduced relevance. (The change is now even impacting Google’s bottom line , its earnings revealed.)\n\nBut at Reddit’s scale, the numbers associated with such a decline are enormous. The comapny said search traffic referrals dropped by more than 1 million referrals on average per week in October. It warned that if the trend continues, daily active users could decline to a low-double-digit percentage by next quarter. (To play that out: a hypothetical 10%–12% decline could bring Reddit to roughly 115 million–117 million daily actives, down from 130.3 million in Q3. That’s a huge drop!)\n\nAt the same time, Reddit has gotten significantly better at monetizing its audience even as its growth weakens. Revenue increased 53% year-over-year to $895 million, ahead of Wall Street’s expectations of about $875 million. Net income rose 74% to $283 million. Advertising revenue grew 54% to $847 million while non-advertising revenue, which includes its AI data-licensing business, grew 35% year-over-year to $48 million.\n\nAnd despite a 2% year-over-year decline in U.S. daily users, Reddit’s average revenue per daily active user in the U.S. rose 53% to $13.82. Globally, average revenue per daily active user increased 36% year-over-year to $6.87.\n\nShifting to a logged-in experience could boost those numbers even higher because logged-in users are typically worth more to advertisers.\n\nUnlike the logged-out users who often find their way to the site via search, logged-in users provide more signals about their interests and behaviors, which helps to better target and personalize ads.\n\nThose same signals would also help Reddit provide a more personalized experience to its users, which includes personalized feeds, recommendations of new communities to subscribe to, pushes to vote, comment, participate, and more. (This also includes pushing recommendations to its new algorithmic “For You” feed, announced yesterday , which will combine posts from communities users belong to alongside other recommendations based on their interests.)\n\nStill, a change of this magnitude could be the canary in the coalmine for the open web.\n\n“I don’t know about you, but as someone whose life has been defined by the open internet, it’s a big change for me,” wrote Reddit co-founder and CEO Steve Huffman, in a post published on Reddit’s site . “But I’ve come to the conclusion that this is the right decision for our platform and the right decision for our business,” he said.\n\nThe company notes that the shift to the logged-in experience will not be an overnight change; it will first run tests in select markets outside the U.S. in the fourth quarter. It doesn’t yet have a timeline for when the change will be rolled out to all its users worldwide. It also acknowledged that access to a logged-out front page is important.\n\nPlus, Reddit pointed out that being logged in doesn’t mean having to give up anonymity, nor will it remove its option to browse anonymously through its “incognito mode” experience, which is being rebuilt.\n\nThere are still plenty of questions that are unanswered, particularly around where the boundaries should be between logged-in and logged-out experiences,” Hoffman wrote. “This is a big evolution for Reddit, and not one we’re taking lightly. But I believe it’s the right next step for the platform and for our future.”"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-0f9c847c2b4c1a5f",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/29/rivian-expands-joint-venture-with-vw-to-include-ai-assistant/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T20:05:47.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Rivian expands joint venture with VW to include AI assistant",
+        "summary": "Rivian doesn't disclose if the value of its $5.8 billion joint venture will expand as a result.",
+        "body": "The $5.8 billion joint venture between Rivian and Volkswagen Group is expanding to include AI assistants.\n\nRivian is now licensing elements of its AI voice assistant technology to Volkswagen Group as part of the broader joint venture, according to the company’s third-quarter investor presentation released Thursday.\n\nRivian didn’t disclose the licensing fees, payment terms, or which Volkswagen vehicles will use the technology. However, the AI assistant, which recently rolled out to Riv i an vehicles , could make its Volkswagen debut in the automaker’s low-cost EV called the ID EVERY1 . The small four-door hatchback is slated to be the first VW vehicle to use Rivian’s software and electrical architecture under the joint venture established in 2024.\n\nThe joint venture between Rivian and VW Group has already expanded once before, at least financially. The companies initially announced a joint venture valued up to $5 billion , but within months VW upped its commitment to invest up to $5.8 billion in Rivian by 2027. The initial tie-up, formalized through an independent company that kicked off in November 2024, focused on bringing Rivian’s electrical architecture and software to Volkswagen’s next generation of vehicles.\n\nRivian described the expansion to include elements of its AI assistant technology as “a proof point for the extensibility of the platform we’ve built in-house.”\n\nRivian spent two years developing its AI assistant before showing it off last year. That development work continued longer than expected, with the assistant finally rolling out in May 2026 to its flagship R1S SUV, R1T pickup truck, and in October to its new midsize R2 SUV.\n\nRivian has big aspirations for its AI assistant, which allows drivers and passengers to interact with the vehicle and control certain functions. Rivian founder and CEO RJ Scaringe told TechCrunch onstage at Disrupt 2026 that the company has created its own in-house agentic framework that understands what action a person wants to take when they talk to the vehicle, and routes it to the right part of the car’s software. That capability could eventually allow Rivian vehicles to run AI agents created by other companies, including Anthropic.\n\nThe in-house AI assistant program also fits into Rivian’s push to become more vertically integrated — a strategy the company emphasized in its third-quarter earnings report.\n\n“Our relentless focus on vertical integration remains a core competitive differentiator, allowing Rivian to seamlessly unify our hardware and software architecture to deliver significant value to our customers,” the company noted in its investor presentation.\n\nThat strategy led to Rivian overhauling its flagship R1T truck and R1S SUV , changing everything from the battery pack and suspension system to the electrical architecture, sensor stack, and software user interface. Its new electric architecture system and compute platform slashed the amount of wiring used and reduced the total number of electronic control units, or computers, used to control the vehicle from 17 different ECUs to seven. That foundation, Rivian argued, would allow it to build vehicles that can handle the computing demands required for advanced software and automated driving.\n\nThat technology caught the attention (and money) of VW, which has struggled to offer customers a modern software-centric vehicle found in competitors like Tesla.\n\nRivian made that vertical-integration case repeatedly in its investor presentation, noting that because it controls the entire technology stack, including compute, sensors, displays, lighting, and sound, “it can roll out rapid, vehicle-wide OTA updates that go well beyond the basics.”\n\nThis article was updated to provide the two separate rollout dates for the AI assistant."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-22225b24399ab6d1",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/transportation/1022420/rivian-q3-earnings-r2-sales-volkswagen-software",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T20:02:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Rivian’s R2 is officially its best-selling vehicle",
+        "summary": "Rivian reported its third quarter earnings of 2026, providing us a closer look at the company's financial health as it ramps up production of its all-important R2 electric vehicle - which is now, for the first time, outselling all of Rivian's other EVs. Rivian said it brought in $2.155 billion in revenue, a 38 percent […]",
+        "body": "Rivian reported its third quarter earnings of 2026, providing us a closer look at the company's financial health as it ramps up production of its all-important R2 electric vehicle - which is now, for the first time, outselling all of Rivian's other EVs.\n\nRivian said it brought in $2.155 billion in revenue, a 38 percent increase compared to the $1.558 billion in Q3 2025. Of that amount, $1.55 billion came from automotive revenue, which is up 36 percent year over year. Comparatively, the company reported $605 million from software and subscription services, a 45 percent increase year over year. As EV sales slow down, the company is seeking to …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-670309ee414130aa",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/29/apple-vp-talks-new-ipad-mini-oled-without-promotion-acoustic-display-more/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T19:49:38.000Z",
     "categories": [
       "apple",
       "tecnologia-general"
@@ -213,24 +209,48 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "The education price of the MacBook Neo just jumped again",
-        "summary": "The MacBook Neo was already a bargain by Mac standards when it launched with a starting price of $599, but for students an education price of $499 made it a steal. Sadly, that changed back in June when both retail and education prices rose by $100 . Now, however, the education price has been raised even further … more…",
-        "body": "The MacBook Neo was already a bargain by Mac standards when it launched with a starting price of $599, but for students an education price of $499 made it a steal.\n\nSadly, that changed back in June when both retail and education prices rose by $100 . Now, however, the education price has been raised even further …\n\nAs Macworld noted, Apple has increased the education price of the MacBook Neo to $649, a saving of just $50 over the standard price – and a full $150 more than it cost students when it first launched.\n\nIf you’re looking for a better deal, the site notes that Apple’s refurbished store is currently offering the base model for $599 . Another option is Amazon, where you can buy the M1 MacBook Air for $529, or $579 for the 256GB model. You can also keep an eye on 9to5Toys for upcoming deals."
+        "title": "Apple VP talks new iPad mini: OLED without ProMotion, Acoustic Display, more",
+        "summary": "Apple unveiled its “biggest update ever” for the iPad mini this week, introducing a thinner, lighter design and an OLED display. In a pair of interviews, Dave Pakula, Apple’s vice president of Hardware Engineering, discussed the new iPad mini’s design, display, and more. more…",
+        "body": "Apple unveiled its “biggest update ever” for the iPad mini this week, introducing a thinner, lighter design and an OLED display.\n\nIn a pair of interviews, Dave Pakula, Apple’s vice president of Hardware Engineering, discussed the new iPad mini’s design, display, and more.\n\nWhile the new iPad mini features an OLED display, it doesn’t support ProMotion. Instead, it’s limited to a 60Hz refresh rate. Here’s what Pakula had to say about that decision in an interview with Chris Lawley :\n\nDisplay experience is about more than just a single spec. One of the things that’s really cool about OLED is it actually has this really fast pixel response time. So it’s more than an order of magnitude faster than the pixel response time for an LCD display.\n\nWhat that does is it makes everything really smooth. Motion blur is significantly reduced compared to LCD. When you pair that with the other things, the contrast, the brightness, and the color, this is just a killer display.\n\nIn addition to being lighter and thinner, the new iPad mini is also IP67-rated for water and dust resistance, a first for an iPad. One key enabler is a new Acoustic Display. Pakula explains how that technology works:\n\nOne of the cool things we realized as we started experimenting was that the unique size and form factor of this display actually had a resonant frequency that’s in the audible range.\n\nI think more importantly, it’s in the range of like a traditional woofer that you’d have in a speaker. What we did was we built these custom drivers that actually energize the display and emit sound directly through the enclosure, but that only really works for the mid and low frequencies.\n\nFor the higher frequencies, we actually designed these little custom tweeters. There’s one on each end of the product, and they’re actually ported out through these hidden ports between the glass and the aluminum. The result is we have this product that’s water and dust resistant. I think the sound that comes from it is so surprising for a form factor of this size.\n\nPakula also sat down with Katarina Mogus for an interview , where he discussed how the iPad mini fits into a world where iPhone Duo also exists:\n\nWhat we love about the iPad mini is it’s really the full iPad experience in the palm of your hand. That gives you access to a million+ apps in the App Store. It’s got incredibly powerful creative accessories like the Apple Pencil Pro. And it’s got the advanced multitasking of iPadOS 27.\n\nIt is really incredibly universal. And honestly, with all these updates, all of those experiences just got so much better.\n\nYou can watch both interviews below. The new iPad mini is available to pre-order now , with the first orders arriving on November 6."
       }
     },
     "media": null
   },
   {
-    "id": "engadget-32c160c5ade837b9",
+    "id": "techcrunch-229a03630d90f01a",
     "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2300690/apple-google-fined-south-korea-app-store-violations/",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/29/meta-quietly-launches-an-ai-fashion-app-called-style-sketch/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-29T10:42:26.000Z",
+    "publishedAt": "2026-10-29T19:14:36.000Z",
     "categories": [
       "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta quietly launches an AI fashion app called Style Sketch",
+        "summary": "The app connects to Instagram to build a virtual closet from photos you’ve already shared, or lets you add items manually by snapping a photo, recording a quick video, or uploading images from your camera roll.",
+        "body": "Meta has quietly launched Style Sketch , an AI fashion app that helps users put together outfit ideas using clothes they already own. The app connects to Instagram to build a virtual closet from photos you’ve posted, or lets you add items manually by snapping a photo, recording a quick video, or uploading images from your camera roll.\n\nStyle Sketch then suggests outfit combinations built from your wardrobe matched to your style. Users can then try on the outfits on a “realistic model matched to your body shape and skin tone,” the app description reads.\n\nThe app, which was first spotted by social media consultant Matt Navarra , is available in Indonesia, Singapore, and Thailand on iOS and Android .\n\nMeta did not respond to TechCrunch’s request for comment. It’s unknown whether Meta plans to launch Style Sketch more widely.\n\nSeveral apps already use AI to help users digitize their wardrobes and visualize new outfits, including startups like Alta . Even Google Photos offers tools that let users turn photos of their clothes into digital closets where they can create new outfit ideas.\n\nTo compete with what’s already on the market, Meta will likely rely less on the novelty of the idea and more on the app’s integration with Instagram, where users already have a visual record of their personal style.\n\nRather than relying on random suggestions, users can also select a specific item from their wardrobe and get fresh outfit ideas built around it, according to the app description.\n\nThe app can also help users plan outfits for trips. If they enter their destination, trip length, and planned activities, users can get a day-by-day outfit plan that takes the weather forecast and itinerary into account.\n\nStyle Sketch is one of many AI apps from Meta in recent months. Most recently, the company launched an app called Waddle World , which essentially looks like a Tamagotchi clone, but with AI. Meta has also launched Pocket , a tool for vibe-coding games, and Vibes , which lets users quickly generate AI-powered videos.\n\nThe wave of new apps is part of a broader effort at Meta to release more apps. The Wall Street Journal reported earlier this year that CEO Mark Zuckerberg told employees the company plans to release far more apps than it has historically, as AI-driven efficiencies have made it faster and easier to ship new apps."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-apps-4d3d0113a716d93b",
+    "type": "news",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/gemgame-cozy-match-3-puzzle",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T19:14:26.000Z",
+    "categories": [
       "apple",
       "apps-accesibles"
     ],
@@ -238,22 +258,45 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Apple and Google fined in South Korea over app store violations",
-        "summary": "South Korean regulators found that Apple and Google violated the country's Telecommunications Business Act.",
-        "body": "Regulators are also requiring them to change their business practices.\n\nBoth Apple and Google have violated Korea's Telecommunications Business Act, the country's communications regulator has determined . The companies have received penalties from the regulator and have been ordered to change their business practices related to their app stores. Google was slapped with a KRW 42.9 billion ($32 million) fine, while Apple has to pay KRW 20.81 billion ($15.6 million) in penalties.\n\nAccording to the Korea Media and Communications Commission (KMCC), it has conducted fact-finding investigations and on-site inspections on the companies since 2022. The agency found that the two of them violated the country's rules for the app market sector, including forcing people to use their in-app payment methods, imposing a commission of 26 percent for third-party payments and prohibiting external payments.\n\nIt also said that the company delayed app reviews without providing a clear reason for it and didn't responding to individual inquiries about the delays. Finally, the regulator found that Apple computed its commissions differently for South Korean and overseas developers. For Korean developers, it based its cut on the price of purchases including VAT, while it based its cut on pre-VAT prices for developers from outside the country.\n\nAs a result of those findings, the KMCC is requiring the companies to accept external payments and to revise their app review procedures. Apple is also required to prevent \"discrimination between domestic and overseas app developers.\" The companies already allow external payments in the US and in the European Union ."
+        "title": "GemGame: Cozy Match 3 Puzzle",
+        "summary": "A cozy match 3 puzzle with no ads and offline play, now in a rich new Velvet design. Swap jewels, chain sparkling cascades and restore a magical garden, one clever move at a time. Discover five connected worlds, from the Living Conservatory to the Heart of the Void. Make clever matches, face each guardian and bring its world back to life. PLAYABLE WITH VOICEOVER GemGame plays with VoiceOver. Every gem and obstacle on the board has a clear spoken label, a Board status element counts obstacles and ingredients, and a Special gems element counts specials. Each move is summarised after it settles, including the chain multiplier. Purchased hints name the exact pair to swap, and rejected moves explain why without spending a move. AWAKEN THE FIVE WORLDS Restore the Conservatory's light, reconnect the Nebula Waterways, unfold the Aurora Observatory, illuminate the Plasma Forge and awaken the Heart of the Void. Your campaign progress makes each transformation permanent. Return to choose free lighting, replay the awakening and pursue optional mastery. LEARN A SPECTACULAR NEXT MOVE Try five world encounters in the free Jewel Lab. Experiment with real puzzle rules and unlimited practice retries, without spending lives or earning campaign rewards. Combine striped, wrapped, rainbow and comet specials, clear obstacles and take on cosmic guardians. A GARDEN WORTH COMING BACK TO Restore fountains, flowering corners and peaceful places to sit. Choose decorative finishes, discover new districts and welcome butterflies, songbirds and other woodland visitors as you play. A LITTLE ADVENTURE, YOUR WAY • Daily Star: a fresh free puzzle each day, with no life cost. Keep your streak going. • Relic Run: draft relics and climb five boards in a single free run. • Weekend Gauntlet: a Friday-to-Sunday sudden-death ladder. How far can you climb? • The Atelier: discover cosmetic themes for your board. MAKE ROOM FOR A COZY MOMENT No ads interrupt your game. Core puzzles work offline, and levels are move-based, so there is no countdown rushing your next swap. Campaign lives refill over time; Daily Star gives you a free daily board without spending a life. GemGame is free to download. The optional Complete Collection is one permanent purchase: all five premium chapter reward tracks plus 50 Hard Mode puzzles. Rewards are earned as you play; the base campaign and garden remain free. Existing chapter-pass or Hard Mode owners receive the collection through Restore Purchases at no extra cost. Coin packs remain optional. Some decorative finishes require premium access. Purchases and Game Center features require an internet connection. Your next little escape is waiting.",
+        "body": "A cozy match 3 puzzle with no ads and offline play, now in a rich new Velvet design. Swap jewels, chain sparkling cascades and restore a magical garden, one clever move at a time.\n\nDiscover five connected worlds, from the Living Conservatory to the Heart of the Void. Make clever matches, face each guardian and bring its world back to life.\n\nPLAYABLE WITH VOICEOVER GemGame plays with VoiceOver. Every gem and obstacle on the board has a clear spoken label, a Board status element counts obstacles and ingredients, and a Special gems element counts specials. Each move is summarised after it settles, including the chain multiplier. Purchased hints name the exact pair to swap, and rejected moves explain why without spending a move.\n\nAWAKEN THE FIVE WORLDS Restore the Conservatory's light, reconnect the Nebula Waterways, unfold the Aurora Observatory, illuminate the Plasma Forge and awaken the Heart of the Void. Your campaign progress makes each transformation permanent. Return to choose free lighting, replay the awakening and pursue optional mastery.\n\nLEARN A SPECTACULAR NEXT MOVE Try five world encounters in the free Jewel Lab. Experiment with real puzzle rules and unlimited practice retries, without spending lives or earning campaign rewards. Combine striped, wrapped, rainbow and comet specials, clear obstacles and take on cosmic guardians.\n\nA GARDEN WORTH COMING BACK TO Restore fountains, flowering corners and peaceful places to sit. Choose decorative finishes, discover new districts and welcome butterflies, songbirds and other woodland visitors as you play.\n\nA LITTLE ADVENTURE, YOUR WAY • Daily Star: a fresh free puzzle each day, with no life cost. Keep your streak going. • Relic Run: draft relics and climb five boards in a single free run. • Weekend Gauntlet: a Friday-to-Sunday sudden-death ladder. How far can you climb? • The Atelier: discover cosmetic themes for your board.\n\nMAKE ROOM FOR A COZY MOMENT No ads interrupt your game. Core puzzles work offline, and levels are move-based, so there is no countdown rushing your next swap. Campaign lives refill over time; Daily Star gives you a free daily board without spending a life.\n\nGemGame is free to download. The optional Complete Collection is one permanent purchase: all five premium chapter reward tracks plus 50 Hard Mode puzzles. Rewards are earned as you play; the base campaign and garden remain free. Existing chapter-pass or Hard Mode owners receive the collection through Restore Purchases at no extra cost. Coin packs remain optional. Some decorative finishes require premium access. Purchases and Game Center features require an internet connection.\n\nYour next little escape is waiting."
       }
     },
     "media": null
   },
   {
-    "id": "engadget-21a2f0e5ffc2ce52",
+    "id": "ars-technica-54f311c40955d0a8",
     "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2300677/google-gemini-carbon-promises-significant-leap-in-ai-coding-and-cybersecurity/",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gadgets/2026/10/trump-declares-robot-imports-a-national-security-threat/",
     "originalLanguage": "en",
-    "publishedAt": "2026-10-29T09:41:58.000Z",
+    "publishedAt": "2026-10-29T19:07:53.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Trump declares robot imports a national security threat",
+        "summary": "President orders trade talks on foreign-made factory robots, threatens tariffs.",
+        "body": "President Donald Trump has declared the imports of foreign-made factory robots to be a national security threat—ordering new US negotiations with trading partners while holding out the possibility of imposing new tariffs on such robot imports in the future.\n\nIssued on October 28, Trump’s presidential proclamation represents heightened government scrutiny of foreign-made industrial robots that could complicate the manufacturing operations of major US corporations that rely on such robots. Those companies include Detroit automakers General Motors and Ford, electric vehicle manufacturer Tesla , and aerospace and defense giants like Boeing and Lockheed Martin.\n\nTrump’s proclamation describes industrial robots and machinery as being crucial for producing US military weapon systems along with representing a “driving force” behind all critical infrastructure sectors within the US economy. The proclamation cites an investigation under US Secretary of Commerce Howard Lutnick as having found that US imports of such robots “pose[] risks to the United States industrial base and threatens the long-term competitiveness of the United States in a sector that is increasingly vital to national security.”\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-805e1f125ac9e6d4",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1022519/google-gemini-file-editing-documents-pdfs",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T18:45:31.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -262,9 +305,155 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Google's Gemini 4 Carbon promises 'significant leap' in AI coding and cybersecurity",
-        "summary": "Google's latest Gemini 4 Carbon AI model boasts top benchmark scores in areas like cybersecurity and coding.",
-        "body": "The company's new frontier model tops Claude Opus 5.5 in several key benchmarks.\n\nOpenAI and Anthropic's frontier models have been trading blows of late, with each claiming bragging rights in different categories. Now, Google has barged in with its latest Gemini 4 Carbon model, boasting of top benchmark scores in key areas like cybersecurity and coding. \"Building on Gemini 4 Argon , which was launched two weeks ago, Carbon illustrates the pace at which we're pushing the frontier forward,\" the company wrote in a blog post .\n\nThe company's benchmarks show Gemini 4 Carbon hitting the highest AA Index v5.0 score (a general AI benchmark) at 59, just ahead of Claude Opus 5.5 and GPT-6 Astra. Google also claims a near sweep across categories including agentic coding, computer use, knowledge work, science and math, and others. Google especially highlighted Carbon's domination in cybersecurity, where it bested other models by fairly wide margins.\n\nIn that category, Google claims that Gemini 4 Carbon excels in finding and prioritizing vulnerabilities, as well as patching them at the root cause. The company said that it also advances frontier model safety and security by reducing shortcuts and loophole exploitation, boosting transparency and honesty (yes, there's a test for \"unsupported claims\"), resisting prompt injection, improving collaboration and \"following through without overstepping.\" It's also twice as likely to generate secure code compared to Argon.\n\nAs we've seen with previous frontier models, Carbon will only be released to select cybersecurity defense companies at first, to allow for pre-release model testing. Google will eventually allow access to additional trusted partners through the company's Fairwind Program, before releasing it widely. That's exactly what Google did with Gemini 4 Argon, which is now available in the Gemini app and AI search mode."
+        "title": "You can generate and edit Google Docs files directly in Gemini chats now",
+        "summary": "Now you can generate, preview, and edit PDFs, Google Docs, Google Sheets, slide decks, Markdown files, TXT files, and code directly within Google Gemini. The new file editing capabilities are available starting today for all Gemini users, and while PDF previews/editing works on both the web and mobile, all other file formats are only in […]",
+        "body": "Now you can generate, preview, and edit PDFs, Google Docs, Google Sheets, slide decks, Markdown files, TXT files, and code directly within Google Gemini . The new file editing capabilities are available starting today for all Gemini users, and while PDF previews/editing works on both the web and mobile, all other file formats are only in the web version for now.\n\nGoogle added support for generating and downloading files in Gemini earlier this year, but now you can tweak those files without leaving the Gemini app. Google says you can expand documents to edit them in full-screen mode and highlight text in files to ask Gemini questions or prompt …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-apps-c867f6f38ee15768",
+    "type": "news",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/motif-word-challenge",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T18:32:32.000Z",
+    "categories": [
+      "apple",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Motif: Word Challenge",
+        "summary": "Swap letters and find ten words a day to take on the world. Jump into the adventure of the new Ascension mode! Free, with no ads or account required. Find ten hidden words every day and aim for the highest score on the daily grid! Motif is a strategic word game that combines clever wordplay with match-3-inspired mechanics. Free, ad-free, and no account required. THE WORD GAME WHERE WORDS HIDE! Swap letters, spot words, and plan your next move. Swipe across words to clear them from the grid. Every move shapes what comes next, so choose wisely! Everyone starts with the same grid. Submit your score if you’d like, and see where you rank on the daily leaderboard. NEW ASCENSION MODE! Motif becomes a full-blown adventure! Climb ten increasingly tough levels packed with bosses, special tiles, and bonuses galore. Motif has never played like this—and it’s free! ZEN MODES Want to play without the pressure? Zen Mode gives you fresh grids and the same rules, but with no word limit and no leaderboard. Take your time and play at your own pace. + “À LA CARTE” MODE! You set your own rules: swipe words bottom to top, right to left, in an L shape, use unlimited letter swaps… You call the shots. + M0T1F MODE! This time, numbers take the stage: swipe tiles to add them up and hit the target number. Careful, this one’s dangerously addictive! MAKE IT YOURS Customize Motif to suit your style: fonts, colors, tile shapes, score display, backgrounds… even the app icon. NO ADS. NO TRACKING. NO ACCOUNT. Just open Motif and start playing. No internet connection is required to play. The leaderboard is entirely optional. If you choose to participate, only your score, the date, and the grid language are submitted. No account, no advertising ID, and no player profile. Individual scores are deleted after 30 days.",
+        "body": "Swap letters and find ten words a day to take on the world. Jump into the adventure of the new Ascension mode! Free, with no ads or account required.\n\nFind ten hidden words every day and aim for the highest score on the daily grid! Motif is a strategic word game that combines clever wordplay with match-3-inspired mechanics. Free, ad-free, and no account required.\n\nTHE WORD GAME WHERE WORDS HIDE!\n\nSwap letters, spot words, and plan your next move. Swipe across words to clear them from the grid. Every move shapes what comes next, so choose wisely!\n\nEveryone starts with the same grid. Submit your score if you’d like, and see where you rank on the daily leaderboard.\n\nNEW ASCENSION MODE! Motif becomes a full-blown adventure! Climb ten increasingly tough levels packed with bosses, special tiles, and bonuses galore. Motif has never played like this—and it’s free!\n\nZEN MODES\n\nWant to play without the pressure? Zen Mode gives you fresh grids and the same rules, but with no word limit and no leaderboard. Take your time and play at your own pace.\n\n+ “À LA CARTE” MODE! You set your own rules: swipe words bottom to top, right to left, in an L shape, use unlimited letter swaps… You call the shots.\n\n+ M0T1F MODE! This time, numbers take the stage: swipe tiles to add them up and hit the target number. Careful, this one’s dangerously addictive!\n\nMAKE IT YOURS\n\nCustomize Motif to suit your style: fonts, colors, tile shapes, score display, backgrounds… even the app icon.\n\nNO ADS. NO TRACKING. NO ACCOUNT.\n\nJust open Motif and start playing. No internet connection is required to play.\n\nThe leaderboard is entirely optional. If you choose to participate, only your score, the date, and the grid language are submitted. No account, no advertising ID, and no player profile.\n\nIndividual scores are deleted after 30 days."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-70d95b9ef6867d41",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2301410/meta-will-now-alert-parents-if-teens-repeatedly-search-for-self-harm-content-on-facebook/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T18:20:21.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta will now alert parents if teens 'repeatedly' search for self-harm content on Facebook",
+        "summary": "The company will also notify parents about conversations with Meta AI.",
+        "body": "The company will also notify parents about conversations with Meta AI.\n\nMeta is now expanding its parental notifications that appear when teens search for content related to suicide and self-harm. After adding the alerts to Instagram earlier this year, the company is now rolling out similar capabilities to parents who supervise teens with Facebook accounts, as well as chats with its AI assistant.\n\nWith the update , Meta will notify parents if their teen \"repeatedly\" searches for self-harm content \"within a short period of time.\" Likewise, if a teen chats with Meta AI in a way that \"suggests they may be at risk of suicide or self-harm,\" parents will also be notified.\n\nThe company is intentionally vague about what the exact criteria are for triggering these notifications. It previously said it \"chose a threshold that requires a few searches within a short period of time, while still erring on the side of caution\" and that it hoped to \"avoid sending these notifications unnecessarily.\" Should a teen meet that threshold, parents receive an alert via text, email or WhatsApp, and a push notification in their own app. The alerts don't detail the specific search terms or contents of Meta AI chats, but recommend that parents speak with their teens. It also provides resources for helplines.\n\nThe feature is part of Meta's push to enroll teens into parent-supervised \" teen accounts \" that give caregivers more control over teens' privacy settings. The accounts are also meant to limit teens' ability to see sensitive content, including self-harm-related posts, and interact with adults.\n\nIf you or someone you know is struggling or in crisis, help is available. Call or text 988 or chat 988lifeline.org"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "freedom-scientific-blog-e25f6f96a873fc34",
+    "type": "news",
+    "sourceId": "freedom-scientific-blog",
+    "sourceName": "Freedom Scientific",
+    "sourceUrl": "https://blog.freedomscientific.com/",
+    "originalUrl": "https://training.vispero.com/set-up-zoomtext-and-fusion-to-work-the-way-you-do/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T18:19:59.000Z",
+    "categories": [
+      "windows",
+      "tecnologia-accesibilidad",
+      "jaws"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Set Up ZoomText and Fusion to Work the Way You Do",
+        "summary": "ZoomText and Fusion are powerful accessibility tools designed for people with low vision. ZoomText is a screen magnifier and reader, while Fusion combines all of ZoomText’s features with the full JAWS screen reader, offering both magnification and speech. In honor of National Disability Employment Awareness Month, our Workplace Ready blog series has run throughout October, …",
+        "body": "ZoomText and Fusion are powerful accessibility tools designed for people with low vision. ZoomText is a screen magnifier and reader, while Fusion combines all of ZoomText’s features with the full JAWS screen reader, offering both magnification and speech.\n\nIn honor of National Disability Employment Awareness Month, our Workplace Ready blog series has run throughout October, with a new post every Thursday spotlighting ZoomText and Fusion features that help you be more productive at work. This is the final post in the series. Last week, we shared practical tips for tackling online tasks. This week, we’ll show you how to set up ZoomText and Fusion to work the way you do.\n\nThe features we’ve covered this month are most helpful when they’re tuned to the way you work. Taking a few minutes to customize ZoomText and Fusion is one of the most important steps you can take for workplace productivity. The right magnification level, colors, and view for each task mean less time adjusting settings and more time getting things done.\n\nPersonalized settings remove the small points of friction that add up over a busy day. When your tools are ready the moment you open an application, you can move between tasks smoothly and work more efficiently and independently. This week, we’ll look at how to save settings for each application, set up your preferred colors and display options, and use touch screen support on compatible devices.\n\nThe settings that work well in one program may not be the best choice for another. With Application Settings, you can save unique magnification and enhancement settings for each application you use. Once saved, ZoomText and Fusion automatically load the right settings as you switch between programs, so you don’t have to stop and adjust your view every time you change tasks.\n\nTo create Application Settings, open the application and adjust magnification, cursor, or mouse settings to meet your needs, then open the ZoomText menu, choose Application Settings , and save the current settings for that application. To keep your general preferences for every other program, choose Configurations > Save As Default from the ZoomText menu.\n\nHere’s how this might look across a typical workday:\n\nWhen you move from writing a report in Word to answering email in Outlook, ZoomText and Fusion switch to your Outlook settings automatically. When you come back, your Word settings are right where you left them.\n\nThe right colors can make text easier to read and reduce eye strain over a long workday. Color Enhancements let you choose from a variety of preset color schemes, such as inverted brightness or high-contrast combinations, or create your own custom colors. To pick a scheme, select the arrow next to the Color button on the Magnifier toolbar tab. Press CAPS LOCK+C to toggle color enhancements on and off. When you find a combination you like, save it as part of your default configuration or your Application Settings so it’s ready when you need it.\n\nDifferent tasks also call for different views. ZoomText and Fusion offer several zoom window types for a single monitor: Full , Overlay , Lens , Line , and Docked (Top, Bottom, Left, or Right). Full magnifies the entire screen, which works well for reading documents. Docked keeps part of the screen at normal size, which can be helpful when you want to see the whole layout of an application while magnifying the area you’re working in. Press CAPS LOCK+Z to cycle through the zoom window types, or select the Window button on the Magnifier toolbar tab to choose one.\n\nIf you use more than one monitor, ZoomText and Fusion can extend your workspace across two displays. When your monitors are set to extend your desktop, you can choose from these zoom window types:\n\nIn the MultiView modes, press CAPS LOCK+V to switch the active view. For more options, such as keeping both views at the same magnification level, select Window > Settings on the Magnifier toolbar tab and choose Multiple Monitor Options .\n\nIf you work on a touch screen laptop or tablet, you can control ZoomText and Fusion with gestures. Touch Screen Support works on Windows devices that support at least five simultaneous touch points.\n\nTo get started, open the ZoomText menu and choose Preferences > Touch Screen Support > Enable Touch Icon . The Touch Icon lets you switch between two modes:\n\nDouble-tap the Touch Icon with one finger to switch modes. To switch for just a moment, hold one finger on the icon, then lift it to return to the previous mode.\n\nIn ZoomText Touch Mode, try these gestures:\n\nA few tips can make touch more comfortable at work. Choose a Touch Icon size and color that are easy for you to see from Preferences > Touch Screen Support on the ZoomText menu. Move the icon out of the way by holding one finger on it and dragging it along the edge of the screen. If you share time between a keyboard and touch, keep the icon in Windows Touch Mode when you’re tapping through applications and switch to ZoomText Touch Mode when you want to zoom or pan.\n\nThat brings our Workplace Ready series to a close. Throughout October, we’ve explored how ZoomText and Fusion can help you work more productively and independently. Here’s a look back at what we covered:\n\nThere’s always more to discover. Take some time to explore additional features and try new settings as your work changes. For tutorials, webinars, and other learning materials, visit our training page. Thank you for following along this month, and keep thriving in your workplace!\n\nHave questions? Email training@vispero.com ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-08bc928ea4cca718",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/1022347/apple-macbook-supports-new-cmf",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T17:48:09.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple’s new laptop supports one of the coolest features for color pros",
+        "summary": "The new MacBook Pro brings with it a bunch of firsts for Apple laptops, the two flashiest being an OLED display and touchscreen functionality. But as an image-accuracy enthusiast, trained calibrator, and resident display expert, what excites me most about the MacBook Pro with PROLED XDR Display is the technology it uses to display an […]",
+        "body": "The new MacBook Pro brings with it a bunch of firsts for Apple laptops, the two flashiest being an OLED display and touchscreen functionality. But as an image-accuracy enthusiast, trained calibrator, and resident display expert, what excites me most about the MacBook Pro with PROLED XDR Display is the technology it uses to display an accurate picture. It's the first laptop, and only the second product overall, to support Apple CMF 2026 color modes. It could be the future for displays.\n\nCMFs, or color-matching functions, mathematically represent how we perceive color, and there are a few different variations. The specification that's been the …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-97739203a83b423a",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gadgets/2026/10/google-admits-ai-search-makes-less-money-but-its-fixing-that-with-more-ads/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T16:24:55.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google admits AI search makes less money, but it's fixing that with more ads",
+        "summary": "Google's negative cash flow balloons to -$9.06 billion, and stock price tumbles following Q3 earnings.",
+        "body": "Google parent Alphabet reported its Q3 financial results on Wednesday afternoon, showing a healthy rise in revenue for the months of July to September. But the company's stock price has taken a beating, marking one of the largest post-earnings drops in its history. It comes down to several troubling aspects of the new report, including an admission by the company that AI search isn't earning as much as organic search, and despite that, Google expects to spend even more on AI next year.\n\nThe company took in almost $128 billion in Q3 2026, earning more than $26 billion in net income. These may sound like good numbers, but financial markets are not impressed. While revenue is up 25 percent versus last year, net income is almost $9 billion lower. As of this story's publication, the stock price is down almost 12 percent, and it was down about 13 percent earlier in the day.\n\nWhile revenue was up 25 percent year over year, analysts expected more. Google reported earnings per share of $2.12, but the consensus projection ahead of Wednesday was $3.02. Google's Cloud products actually beat expectations, crossing $30 billion in revenue. That's about a billion more than analyst guesses.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "freedom-scientific-blog-ba72aecbe494dde8",
+    "type": "news",
+    "sourceId": "freedom-scientific-blog",
+    "sourceName": "Freedom Scientific",
+    "sourceUrl": "https://blog.freedomscientific.com/",
+    "originalUrl": "https://training.vispero.com/vispero-connect-october-2026-whats-new-in-jaws-2027-and-a-follow-up-with-sid-gaitonde/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T16:18:03.000Z",
+    "categories": [
+      "windows",
+      "tecnologia-accesibilidad",
+      "jaws"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Vispero Connect: October 2026 – What’s New In JAWS 2027, And a Follow-Up With Sid Gaitonde",
+        "summary": "This month, we introduce some exciting features in JAWS 2027, including the new Vispero Companion, which can help you adjust JAWS settings, understand what’s on screen, and work through everyday accessibility challenges. And, as promised, we catch up with Sid Gaitonde after his first 90 days as Vispero’s CEO. Activate to listen, right-click to download. …",
+        "body": "This month, we introduce some exciting features in JAWS 2027, including the new Vispero Companion, which can help you adjust JAWS settings, understand what’s on screen, and work through everyday accessibility challenges. And, as promised, we catch up with Sid Gaitonde after his first 90 days as Vispero’s CEO. Activate to listen, right-click to download. Read the transcript."
       }
     },
     "media": null
@@ -317,99 +506,6 @@
         "title": "Apple Introduces Updated iMac and MacBook Pros with Performance and Connectivity Improvements, a Touchscreen for the High-End MacBook Pro, and More",
         "summary": "On the heels of introducing the 8th generation iPad Mini , Apple this week updated the iMac and MacBook Pro, bringing faster chips, improved connectivity, and, for the first time, a touchscreen to the MacBook Pro. iMac Featuring up to a 12-core CPU, the new iMac with M6, according to Apple's press release , delivers: Up to 2.5x faster performance in apps like Microsoft Excel, compared to iMac with M1, and up to 1.5x faster performance than M4. Up to 3.3x faster graphics performance for tasks including photo editing in Affinity, compared to iMac with M1, and up to 2x faster performance than M4. Up to 12x faster on-device AI performance for prompt processing in LM Studio, compared to iMac with M1, and up to 5x faster performance than M4. Up to 2x higher gaming performance with ray tracing compared to M4. Up to 2x faster SSD read and write performance. With the N1 wireless networking chip, the new iMac supports Wi-Fi 7 and Bluetooth 6, and up to a 2.5 gigabit Ethernet port, included with the power adapter. The iMac with M6 is made with 100 percent recycled aluminum in the stand, 100 percent recycled rare earth elements in all magnets, 100 percent recycled gold plating and tin solder in all Apple-designed circuit boards, and is manufactured with 40 percent renewable electricity. It can be pre-ordered from Apple in green, yellow, orange, pink, purple, blue, and silver starting today for a starting price of US $1499, and will begin shipping to customers on Friday, November 6. MacBook Pro In addition to the iMac, Apple updated the base 14-inch MacBook Pro with the M6 chip, N1 wireless networking chip, and up to 170 GBPS of unified memory bandwidth. The MacBook Pro with M6, according to Apple's press release delivers: Up to 13x faster time to first token performance for LLM prompt processing compared to the 13-inch MacBook Pro with M1, and up to 1.3x faster than the 14-inch MacBook Pro with M5. Up to 11.7x faster render performance with ray tracing in Blender compared to the 13-inch MacBook Pro with M1, and up to 1.3x faster than the 14-inch MacBook Pro with M5. Up to 3.3x faster image-processing performance in Affinity compared to the 13-inch MacBook Pro with M1, and up to 1.2x faster than the 14-inch MacBook Pro with M5. Up to 2.5x faster project build performance when compiling code in Xcode compared to the 13-inch MacBook Pro with M1, and up to 1.3x faster than the 14-inch MacBook Pro with M5. Apple also claims the 12-core GPU paired with the dual 16-core neural engine features up to 30 percent faster graphics performance compared to M5, as well as up to 25 percent faster performance for on-device AI workloads. The new MacBook Pro also features the N1 wireless networking chip, bringing Wi-Fi 7 and Bluetooth 6 support. The MacBook Pro with M6 is made with 45 percent recycled content overall, including 100 percent recycled aluminum in the enclosure, 100 percent recycled cobalt in the battery, and 100 percent recycled tantalum in multiple capacitors, and is manufactured with 60 percent renewable electricity across the supply chain. It can be pre-ordered from Apple starting today for a starting price of US $1999, and will begin shipping to customers on Friday, November 6. Apple has also introduced new high-end 14 and 16-inch MacBook Pros , bringing a thinner and lighter design, a redesigned thermal architecture, a new speaker design, hinge improvements, and, for the first time on a Mac, an OLED touchscreen and Dynamic Island. With the Dynamic Island, users will be able to view Live Activities, answer calls, and use Siri and Spotlight. At the time of publication, we do not know how VoiceOver or any other macOS accessibility tool will work with touch controls. The MacBook Pro with PROOLEDXDR display continues to use the M5 Pro and M5 Max chips, but it now features a redesigned thermal architecture that Apple claims better redirects air away from the display, helping to prevent it from getting warm to the touch while maintaining sustained performance. The MacBook Pro with PROOLEDXDR display is made with 55 percent recycled content overall, including 100 percent recycled aluminum in the enclosure, 100 percent recycled cobalt in the battery, and recycled tantalum in multiple capacitors, and is manufactured with 45 percent renewable electricity across the supply chain. It can be pre-ordered from Apple starting today for a starting price of US $2899, and will begin shipping to customers on Friday, November 6.",
         "body": "On the heels of introducing the 8th generation iPad Mini , Apple this week updated the iMac and MacBook Pro, bringing faster chips, improved connectivity, and, for the first time, a touchscreen to the MacBook Pro.\n\nFeaturing up to a 12-core CPU, the new iMac with M6, according to Apple's press release , delivers:\n\nWith the N1 wireless networking chip, the new iMac supports Wi-Fi 7 and Bluetooth 6, and up to a 2.5 gigabit Ethernet port, included with the power adapter.\n\nThe iMac with M6 is made with 100 percent recycled aluminum in the stand, 100 percent recycled rare earth elements in all magnets, 100 percent recycled gold plating and tin solder in all Apple-designed circuit boards, and is manufactured with 40 percent renewable electricity. It can be pre-ordered from Apple in green, yellow, orange, pink, purple, blue, and silver starting today for a starting price of US $1499, and will begin shipping to customers on Friday, November 6.\n\nIn addition to the iMac, Apple updated the base 14-inch MacBook Pro with the M6 chip, N1 wireless networking chip, and up to 170 GBPS of unified memory bandwidth. The MacBook Pro with M6, according to Apple's press release delivers:\n\nApple also claims the 12-core GPU paired with the dual 16-core neural engine features up to 30 percent faster graphics performance compared to M5, as well as up to 25 percent faster performance for on-device AI workloads. The new MacBook Pro also features the N1 wireless networking chip, bringing Wi-Fi 7 and Bluetooth 6 support.\n\nThe MacBook Pro with M6 is made with 45 percent recycled content overall, including 100 percent recycled aluminum in the enclosure, 100 percent recycled cobalt in the battery, and 100 percent recycled tantalum in multiple capacitors, and is manufactured with 60 percent renewable electricity across the supply chain. It can be pre-ordered from Apple starting today for a starting price of US $1999, and will begin shipping to customers on Friday, November 6.\n\nApple has also introduced new high-end 14 and 16-inch MacBook Pros , bringing a thinner and lighter design, a redesigned thermal architecture, a new speaker design, hinge improvements, and, for the first time on a Mac, an OLED touchscreen and Dynamic Island. With the Dynamic Island, users will be able to view Live Activities, answer calls, and use Siri and Spotlight. At the time of publication, we do not know how VoiceOver or any other macOS accessibility tool will work with touch controls.\n\nThe MacBook Pro with PROOLEDXDR display continues to use the M5 Pro and M5 Max chips, but it now features a redesigned thermal architecture that Apple claims better redirects air away from the display, helping to prevent it from getting warm to the touch while maintaining sustained performance.\n\nThe MacBook Pro with PROOLEDXDR display is made with 55 percent recycled content overall, including 100 percent recycled aluminum in the enclosure, 100 percent recycled cobalt in the battery, and recycled tantalum in multiple capacitors, and is manufactured with 45 percent renewable electricity across the supply chain. It can be pre-ordered from Apple starting today for a starting price of US $2899, and will begin shipping to customers on Friday, November 6."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-b71a33ed229a1ddf",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2300235/openai-now-lets-you-text-your-dot-agent/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T19:15:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "OpenAI now lets you text your Dot agent",
-        "summary": "The feature works with both iMessage and RCS messaging.",
-        "body": "The feature works with both iMessage and RCS messaging.\n\nWhen OpenAI debuted its Dot agents late last month, it promised users would eventually be able to text them to give them instructions. Now, nearly a month later, the company has begun rolling out a preview among US Pro users that allows you to do just that. With the new feature, OpenAI says you can send your Dot texts, photos and even voice memos. It also gives your Dot another avenue to proactively contact you with updates about tasks you've assigned to it.\n\nBy popular request, you can now text your dot.\n\nGive it a task to take off your plate or something to keep an eye on, using text, photos, or even voice notes. It will text you proactively with relevant updates.\n\nSafe, secure texting via iMessage or RCS. You're the only one who... pic.twitter.com/iuNd3aTCYc\n\n— ChatGPT (@ChatGPT) October 28, 2026\n\nTo set up your Dot for texting, open its profile in ChatGPT and select Texting . Over on your phone, ensure iMessage is enabled if you're on an iPhone, and RCS if your daily driver is an Android device. OpenAI says it partnered with Linq to provide messaging support, and did \"extensive\" penetration testing to ensure the feature is safe. \"You're the only one who can text your dot, and your dot can only text you,\" the company adds on X . Any information your Dot writes to its memory is shared across ChatGPT and text, meaning context carries over between different conversations.\n\nThe personal agent space is suddenly very hot after Anthropic joined last week with Claude Duet . In my testing, OpenAI's Dots are comparatively more polished. The fact that you can now text them is something I'm sure some people will appreciate. Using Claude Duet currently requires joining a waitlist that's only open to people in the US. Anthropic has said it plans to offer the agent to subscribers of its $20 per month Pro plan, which is not something you can say of Dots. They're currently not available to Plus tier users."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-f09b2636135490d1",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/10/google-announces-gemini-4-carbon-its-latest-frontier-ai-model-that-you-cant-use/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T18:47:27.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google announces Gemini 4 Carbon, its latest frontier AI model that you can't use",
-        "summary": "Gemini 4 Carbon is essentially a slightly better version of Argon.",
-        "body": "It's almost like Google's got something to prove after taking a break from releasing new frontier AI models earlier this year. Just two weeks after rolling out Gemini 4 Argon , Google has announced Gemini 4 Carbon . This isn't the Flash model equivalent we've been waiting for but, rather, is an improvement on Argon, and like that model, Google is working on a staged release that could take a while.\n\nStop me if you've heard this one before: Google says its latest AI model reaches a new threshold in coding, agentic tasks, and scientific analysis. It's so capable, in fact, that Google can't let you use it just yet.\n\nGemini 4 Carbon reportedly makes big gains in cybersecurity applications. Google says the model shows a \"significant leap\" in vulnerability detection, validation, and remediation. Carbon is also apparently twice as likely to generate code that is free of vulnerabilities versus Argon. Meanwhile, the Chrome team claims that Carbon is 10 times better at generating \"high-quality\" patches compared to non-Google models. Google also notes that Carbon has increased its score by 89 points on WebDev Arena , now ranking at number four on the leaderboard.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-889f41041d15d278",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/gadgets/2026/10/amazon-adds-a-camera-to-its-best-sounding-smart-speaker-for-30-extra/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T18:05:22.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Amazon turns its most capable smart speaker into a smart camera, too",
-        "summary": "The Echo Studio with Home Camera can \"see and understand what's in front of the camera.\"",
-        "body": "Since debuting in 2019, Amazon's Echo Studio targeted users who wanted superior audio quality from their Alexa-based smart speaker. The latest Echo Studio adds another less-expected differentiator: an integrated camera.\n\nThe Echo Studio with Home Camera, released alongside a pile of other Alexa devices today, doesn’t have many audio upgrades over the standard Echo Studio. Each speaker has one 3.75-inch high-excursion woofer and three full-range drivers. They both support Dolby Atmos and Amazon’s proprietary algorithm for adding a surround sound-like effect to stereo audio. Per the devices’ product pages, the speakers have lossless HD audio, Advanced Room Adaptation, and features for fighting noise distortion. Amazon announced the Advanced Room Adaptaion today, saying that the feature “continuously tunes the sound to your space, automatically adapting to the room's acoustics.”\n\nBoth speakers have four-microphone arrays and the same AZ3 Pro processor that Amazon introduced a year ago . The processor has an AI accelerator for using Amazon's Alexa+ generative AI chatbot .\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-aef40fd303accbe5",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/cars/2026/10/cadillac-escalade-iq-review-4-tons-of-electric-american-luxury-on-wheels/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T17:55:45.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Cadillac Escalade IQ review: Huge battery, huge range, huge SUV",
-        "summary": "With more than 200 kWh, this luxury three-row can go 460 miles on a charge.",
-        "body": "“Please have at least 125 miles of range left when we pick it up.” That request from the people who look after the Cadillac press cars wasn’t going to be hard to honor. The electric Escalade IQ arrived with an indicated range of 440 miles (708 km), and with a full week of work to squeeze in, getting anywhere close to needing to recharge it seemed unlikely. With more than 200 kWh of lithium-ion battery between its axles, range is one thing the big electric Caddy needn’t worry about.\n\nDesigned and debuted during a time of greater EV optimism, the Escalade is Cadillac’s statement that swapping out a V8 for a pair of powerful electric motors is no compromise to its ambitions, even if the brand’s future will now include a mix of electric and combustion cars beyond 2030 . It shares a battery pack and much else with other full-size GM EVs we’ve tested: the Chevrolet Silverado EV , the GMC Sierra EV , and of course the divisive Hummer EVs . And like those trucks and SUVs, the Escalade is large and heavy—just small enough to fit into a standard parking space, with a curb weight sufficient to push it into the Class 3 truck category.\n\nSo, the side mirrors are flat, and there’s no formal EPA range—Cadillac says it achieves 460 miles (740 km) on the EPA test cycle—but there are plenty of airbags, even though the 9,046 lb (4,103 kg) curb weight does not require them. Yes, you did read that right, it does weigh 4 tons. And yes, the electric Escalade does weigh a third more than the last gas-powered one we tested .\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -1160,30 +1256,6 @@
     "media": null
   },
   {
-    "id": "applevis-apps-0df250325234a67c",
-    "type": "news",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/cat-genome",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-14T16:13:37.000Z",
-    "categories": [
-      "apple",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Cat Genome",
-        "summary": "THE KITTEN DISTRIBUTION SYSTEM FOUND YOU Rescue stray kittens, breed champion cats, unlock rare coats, and dress your cattery in 100+ fun props. Free to play, fully offline, no ads. UNLIMITED KITTENS • No energy meter, no lives, no waiting to play • Answer as many rescue calls as you like • Breed as many litters as you want RARE COMBINATIONS TO CHASE • 312 looks to discover across four trait axes • Hidden genes resurface generations later, so rare coats run in families • Chase calico, tortoiseshell, colorpoint, and the fully recessive long coat • Rarest of all: the prismatic kitten, with a rainbow coat, blue eyes, and a head start on every stat FOUR WAYS TO BREED • Let nature surprise you • Add a guaranteed extra kitten to every litter • Lock the traits you want • Or hand-pick every last one FOR THE SCIENCE MINDED • Real cat genetics: white masks every pattern, and tri-color coats need the right base • Two genes per trait, with dominance deciding what you actually see • A DNA scanner that reveals which cats are quietly carrying what • Preserve a favorite's genome in the DNA Lab, then clone it exactly • Splice: lock individual traits, or choose which parent each stat gene comes from • Weave two or three saved genomes into a single hybrid RAISE, COMPETE, AND DRESS UP • Grow kittens in the nursery, and enter the little ones in Kitten League events • 10+ fun competitions across seven tiers, Backyard to Legends • Fashion Shows judged mostly on the outfit • 100+ props to drag, resize, and rotate BUILD A BLOODLINE • Trace every relationship in the family tree • Fill your Cat-Dex with every look you have discovered • Trade for new bloodlines on the Cat Exchange • A traveling trader visits each weekend, paying well above the going rate EVERY UPGRADE IS EARNABLE • Your cats earn coins from rescues, competitions, and the Cat Exchange • Spend them on props, cattery space, breeding tools, and DNA Lab upgrades • 100% playable without spending real money PLAYING WITH VOICEOVER • Each cat, event, show and store item is one stop, with its name first • Double-tap the competitor, tier, theme or a breeding parent to choose from a list • Hear pet descriptions, clear action costs and competition results • Coin purchases ask first, and Settings > VoiceOver lets you choose Brief or Detailed screens • Find recent messages and the Accessibility Guide in Settings NO ADS. NO ACCOUNTS. NO LOOT BOXES. • Fully offline, with optional iCloud backup • In-app purchases are optional shortcuts and extras, never requirements • Coin packs, the Quick Compete planner, the Genome Loom, and the Wild Cat Pack",
-        "body": "THE KITTEN DISTRIBUTION SYSTEM FOUND YOU Rescue stray kittens, breed champion cats, unlock rare coats, and dress your cattery in 100+ fun props. Free to play, fully offline, no ads.\n\nUNLIMITED KITTENS • No energy meter, no lives, no waiting to play • Answer as many rescue calls as you like • Breed as many litters as you want\n\nRARE COMBINATIONS TO CHASE • 312 looks to discover across four trait axes • Hidden genes resurface generations later, so rare coats run in families • Chase calico, tortoiseshell, colorpoint, and the fully recessive long coat • Rarest of all: the prismatic kitten, with a rainbow coat, blue eyes, and a head start on every stat\n\nFOUR WAYS TO BREED • Let nature surprise you • Add a guaranteed extra kitten to every litter • Lock the traits you want • Or hand-pick every last one\n\nFOR THE SCIENCE MINDED • Real cat genetics: white masks every pattern, and tri-color coats need the right base • Two genes per trait, with dominance deciding what you actually see • A DNA scanner that reveals which cats are quietly carrying what • Preserve a favorite's genome in the DNA Lab, then clone it exactly • Splice: lock individual traits, or choose which parent each stat gene comes from • Weave two or three saved genomes into a single hybrid\n\nRAISE, COMPETE, AND DRESS UP • Grow kittens in the nursery, and enter the little ones in Kitten League events • 10+ fun competitions across seven tiers, Backyard to Legends • Fashion Shows judged mostly on the outfit • 100+ props to drag, resize, and rotate\n\nBUILD A BLOODLINE • Trace every relationship in the family tree • Fill your Cat-Dex with every look you have discovered • Trade for new bloodlines on the Cat Exchange • A traveling trader visits each weekend, paying well above the going rate\n\nEVERY UPGRADE IS EARNABLE • Your cats earn coins from rescues, competitions, and the Cat Exchange • Spend them on props, cattery space, breeding tools, and DNA Lab upgrades • 100% playable without spending real money\n\nPLAYING WITH VOICEOVER • Each cat, event, show and store item is one stop, with its name first • Double-tap the competitor, tier, theme or a breeding parent to choose from a list • Hear pet descriptions, clear action costs and competition results • Coin purchases ask first, and Settings > VoiceOver lets you choose Brief or Detailed screens • Find recent messages and the Accessibility Guide in Settings\n\nNO ADS. NO ACCOUNTS. NO LOOT BOXES. • Fully offline, with optional iCloud backup • In-app purchases are optional shortcuts and extras, never requirements • Coin packs, the Quick Compete planner, the Genome Loom, and the Wild Cat Pack"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "cti-once-c10668e67914dda3",
     "type": "news",
     "sourceId": "cti-once",
@@ -1228,30 +1300,6 @@
         "title": "Ya disponible la quinta beta de NVDA 2026.3",
         "summary": "Tal y como ha anunciado NV Access mediante esta publicación, la beta 5 de NVDA 2026.3 ya se encuentra disponible para descarga y pruebas. Si quieres saber qué ofrece la próxima versión de NVDA antes de que se libere oficialmente, no dudes en descargar esta beta y proporcionar comentarios por los canales de la comunidad, … Continuar leyendo \"Ya disponible la quinta beta de NVDA 2026.3\" La entrada Ya disponible la quinta beta de NVDA 2026.3 se publicó primero en NVDA en español .",
         "body": "Tal y como ha anunciado NV Access mediante esta publicación , la beta 5 de NVDA 2026.3 ya se encuentra disponible para descarga y pruebas. Si quieres saber qué ofrece la próxima versión de NVDA antes de que se libere oficialmente, no dudes en descargar esta beta y proporcionar comentarios por los canales de la comunidad, o por el sistema de informe de fallos de NV Access . Esta versión no es apta para entornos de producción. Al instalar esta beta te unirás al canal beta, y sólo recibirás avisos de actualización de compilaciones beta y candidatas a liberación (rc). El canal beta/rc siempre te mantendrá al día con la versión más reciente de NVDA. La última rc de un ciclo de liberación es idéntica a la última versión estable. Para regresar al canal de versiones estables, instala a mano la última versión estable.\n\nEsta versión incorpora importantes mejoras de rendimiento, mejoras en los diálogos de NVDA, y entrada expandida por la pantalla táctil. Se han hecho varias mejoras para reducir los retrasos y aumentar el rendimiento. Ahora NVDA recupera y captura más información sobre los controles en segundo plano, mejorando el rendimiento en controles como cuadros combinados y el explorador de archivos. NVDA ya no hace que se rompan el explorador de archivos u otras aplicaciones al cerrarlo o reiniciarlo. NVDA se recupera ahora más rápido cuando una aplicación deja de responder, y ya no se colgará ni inundará el registro con errores en aplicaciones que no responden. En regiones vivas de texto, como las terminales, NVDA ya no se cuelga cuando se vuelcan en pantalla importantes cantidades de texto. Se han añadido menús de contexto y atajos de teclado a los diálogos de perfiles de configuración, gestos de entrada y diccionarios del habla, haciendo que estos diálogos sean más fáciles de usar con el teclado. Ahora también es posible cambiar directamente un gesto existente en el diálogo Gestos de entrada. Se ha modernizado el diálogo que presenta mensajes explorables y ahora soporta mejor cambiar su tamaño, maximizarlo y minimizarlo. Se ha expandido significativamente la entrada por pantalla táctil. Los gestos de dos deslizamientos secuenciales ahora combinan dos deslizamientos en rápida sucesión en un solo gesto, incrementando enormemente la cantidad de gestos asociables. También se soportan ahora los gestos de borde, permitiendo que los gestos que comiencen a 15 mm de cualquier borde de la pantalla se asocien independientemente de los mismos gestos realizados en el centro de la pantalla. Se ha añadido una nueva orden sin asignar para mover el cursor del ratón al centro de la vista ampliada. Se puede usar el OCR de Windows con la lupa o la cortina de pantalla activadas. Se ha actualizado Liblouis con nuevas tablas braille en Elfdaliano, sami, maorí, braille unificado inglés de Nueva Zelanda, y aitiano criollo, una tabla noruega para texto en español, y variantes adicionales de sueco de 6 y 8 puntos. Se ha actualizado Espeak NG añadiendo soporte para liguriano y abkhaz. Para instalar esta beta, puedes configurar el canal «rc y beta» en el complemento Selector del canal de actualización y buscar actualizaciones desde el menú Ayuda de NVDA, o actualizar desde una beta anterior. Y como siempre, también puedes descargar manualmente el instalador de NVDA 2026.3 beta 5 . Su suma de comprobación SHA256, que te permitirá garantizar la integridad del archivo descargado, es c1d2cc7bc21126a224fdc0733fef5f20adf212d6098fd31863c89f7d05195544. ¡Feliz miércoles!\n\nLa entrada Ya disponible la quinta beta de NVDA 2026.3 se publicó primero en NVDA en español ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-apps-b89919a58b5b2a6b",
-    "type": "news",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/dog-genome",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-14T02:44:15.000Z",
-    "categories": [
-      "apple",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Dog Genome",
-        "summary": "THE PUPPY DISTRIBUTION SYSTEM FOUND YOU Rescue stray puppies, breed champion pups, unlock rare colors, and dress your pack in 100+ fun props. Free to play, fully offline, no ads. UNLIMITED PUPPIES • No energy meter, no lives, no waiting to play • Answer as many rescue calls as you like • Breed as many litters as you want RARE COMBINATIONS TO CHASE • 800 looks to discover across six trait axes • Hidden genes resurface generations later, so rare colors run in families • Rarest of all: the prismatic puppy, with a rainbow coat, blue eyes, and a head start on every stat FOUR WAYS TO BREED • Let nature surprise you • Add a guaranteed extra puppy to every litter • Lock the traits you want • Or hand-pick every last one FOR THE SCIENCE MINDED • Two genes per trait, with dominance deciding what you actually see • The real odds, shown before you commit to a litter • A DNA scanner that reveals which dogs are quietly carrying what • Preserve a genome in the DNA Lab, then clone it exactly • Splice: lock individual traits, or choose which parent each stat gene comes from • Weave two or three saved genomes into a single hybrid RAISE, COMPETE, AND DRESS UP • Grow puppies in the nursery, and enter the little ones in Puppy League events • 10+ fun competitions across seven tiers, Backyard to Legends • Fashion Shows judged mostly on the outfit • 100+ props to drag, resize, and rotate BUILD A BLOODLINE • Trace every relationship in the family tree • Fill your Dog-Dex with every look you have discovered • Trade for new bloodlines on the Dog Exchange • A traveling trader visits each weekend, paying well above the going rate EVERY UPGRADE IS EARNABLE • Your dogs earn coins from rescues, competitions, and the Dog Exchange • Spend them on props, kennel space, breeding tools, and DNA Lab upgrades • 100% playable without spending real money PLAYING WITH VOICEOVER • Each dog, event, show and store item is one stop, with its name first • Double-tap the competitor, tier, theme or a breeding parent to choose from a list • Hear pet descriptions, clear action costs and competition results • Coin purchases ask first, and Settings > VoiceOver lets you choose Brief or Detailed screens • Find recent messages and the Accessibility Guide in Settings NO ADS. NO ACCOUNTS. NO LOOT BOXES. • Fully offline, with optional iCloud backup • In-app purchases are optional shortcuts and extras, never requirements • Coin packs, the Quick Compete planner, the Genome Loom, and the Wolf Pack supporter bundle",
-        "body": "THE PUPPY DISTRIBUTION SYSTEM FOUND YOU Rescue stray puppies, breed champion pups, unlock rare colors, and dress your pack in 100+ fun props. Free to play, fully offline, no ads.\n\nUNLIMITED PUPPIES • No energy meter, no lives, no waiting to play • Answer as many rescue calls as you like • Breed as many litters as you want\n\nRARE COMBINATIONS TO CHASE • 800 looks to discover across six trait axes • Hidden genes resurface generations later, so rare colors run in families • Rarest of all: the prismatic puppy, with a rainbow coat, blue eyes, and a head start on every stat\n\nFOUR WAYS TO BREED • Let nature surprise you • Add a guaranteed extra puppy to every litter • Lock the traits you want • Or hand-pick every last one\n\nFOR THE SCIENCE MINDED • Two genes per trait, with dominance deciding what you actually see • The real odds, shown before you commit to a litter • A DNA scanner that reveals which dogs are quietly carrying what • Preserve a genome in the DNA Lab, then clone it exactly • Splice: lock individual traits, or choose which parent each stat gene comes from • Weave two or three saved genomes into a single hybrid\n\nRAISE, COMPETE, AND DRESS UP • Grow puppies in the nursery, and enter the little ones in Puppy League events • 10+ fun competitions across seven tiers, Backyard to Legends • Fashion Shows judged mostly on the outfit • 100+ props to drag, resize, and rotate\n\nBUILD A BLOODLINE • Trace every relationship in the family tree • Fill your Dog-Dex with every look you have discovered • Trade for new bloodlines on the Dog Exchange • A traveling trader visits each weekend, paying well above the going rate\n\nEVERY UPGRADE IS EARNABLE • Your dogs earn coins from rescues, competitions, and the Dog Exchange • Spend them on props, kennel space, breeding tools, and DNA Lab upgrades • 100% playable without spending real money\n\nPLAYING WITH VOICEOVER • Each dog, event, show and store item is one stop, with its name first • Double-tap the competitor, tier, theme or a breeding parent to choose from a list • Hear pet descriptions, clear action costs and competition results • Coin purchases ask first, and Settings > VoiceOver lets you choose Brief or Detailed screens • Find recent messages and the Accessibility Guide in Settings\n\nNO ADS. NO ACCOUNTS. NO LOOT BOXES. • Fully offline, with optional iCloud backup • In-app purchases are optional shortcuts and extras, never requirements • Coin packs, the Quick Compete planner, the Genome Loom, and the Wolf Pack supporter bundle"
       }
     },
     "media": null
@@ -2020,31 +2068,6 @@
     "media": null
   },
   {
-    "id": "freedom-scientific-blog-d8254ae4300e75d6",
-    "type": "news",
-    "sourceId": "freedom-scientific-blog",
-    "sourceName": "Freedom Scientific",
-    "sourceUrl": "https://blog.freedomscientific.com/",
-    "originalUrl": "https://training.vispero.com/learn-how-to-work-more-effectively-with-pdfs-and-jaws/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-16T21:36:48.000Z",
-    "categories": [
-      "windows",
-      "tecnologia-accesibilidad",
-      "jaws"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Learn How to Work More Effectively with PDFs and JAWS",
-        "summary": "PDF documents are everywhere, from reports and forms to manuals and online resources. These documents can be accessed via a web browser or application like Adobe Acrobat Reader. When PDFs are formatted correctly, they can be read using standard navigation commands and JAWS Quick Navigation Keys; however, challenges arise when the PDF is not structured …",
-        "body": "PDF documents are everywhere, from reports and forms to manuals and online resources. These documents can be accessed via a web browser or application like Adobe Acrobat Reader.\n\nWhen PDFs are formatted correctly, they can be read using standard navigation commands and JAWS Quick Navigation Keys; however, challenges arise when the PDF is not structured correctly. Details like headings, reading order, table structure, and labeled form fields — tell JAWS what to say and in what order. Whether that structure exists at all, and whether it matches what a sighted reader sees, is what separates an accessible PDF from an inaccessible one.\n\nJoin us Thursday, September 17 at noon ET for a live webinar, “Beyond the Basics: Working More Effectively with PDF Documents and JAWS.” We’ll delve deeper into these challenges and provide tips for navigating PDFs more efficiently.\n\nIn this webinar, we’ll provide an overview of PDFs, plus show you how to:\n\nRegister for this webinar to improve proficiency and productivity when working with PDFs, and learn some troubleshooting tips along the way. ACVREP credits will be available for those who attend the live webinar.\n\nCan’t attend? We archive all webinars on our Webinars on Demand page. Have questions? Send an email to training@vispero.com ."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "accessible-android-dd64e81e0c3fde69",
     "type": "news",
     "sourceId": "accessible-android",
@@ -2237,31 +2260,6 @@
         "title": "Accesibilidad y Tecnología Vive el fútbol accesible con Movistar Touch en el estadio Riyadh Air Metropolitano.",
         "summary": "Gracias a la colaboración entre la ONCE, Movistar y el Atlético de Madrid, las personas afiliadas podrán disfrutar de una experiencia más accesible e inmersiva durante los partidos de fútbol que se celebren en el estadio Riyadh Air Metropolitano.",
         "body": "Gracias a la colaboración entre la ONCE, Movistar y el Atlético de Madrid, las personas afiliadas podrán disfrutar de una experiencia más accesible e inmersiva durante los partidos de fútbol que se celebren en el estadio Riyadh Air Metropolitano.\n\nSe trata de Movistar Touch , un servicio gratuito dirigido a aficionados con entrada para el encuentro, que permite seguir el desarrollo del partido mediante audiodescripción y una tableta háptica capaz de reproducir en tiempo real la posición del balón sobre el terreno de juego. Esta tecnología ofrece una nueva forma de vivir la emoción del fútbol y constituye un excelente ejemplo de cómo la innovación puede contribuir a derribar barreras y favorecer la participación de todas las personas.\n\nActualmente, el Riyadh Air Metropolitano es el único estadio de España que ofrece este sistema. Las personas afiliadas interesadas en utilizarlo deberán solicitarlo previamente enviando un correo electrónico a inclusion@atleticodemadrid.com , indicando el partido de LALIGA para el que desean adquirir entradas y hacer uso del servicio.\n\nEs importante tener en cuenta que Movistar Touch dispone de un número limitado de unidades, por lo que se recomienda realizar la solicitud con la mayor antelación posible.\n\nEsta iniciativa se enmarca en la colaboración que el Atlético de Madrid mantiene desde hace años con la ONCE y Fundación ONCE para seguir mejorando la accesibilidad de sus instalaciones y servicios, reforzando así su compromiso con un deporte más inclusivo y accesible para todos."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "freedom-scientific-blog-22a87afabb8e5970",
-    "type": "news",
-    "sourceId": "freedom-scientific-blog",
-    "sourceName": "Freedom Scientific",
-    "sourceUrl": "https://blog.freedomscientific.com/",
-    "originalUrl": "https://training.vispero.com/vispero-connect-now-also-on-youtube/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-09T10:37:12.000Z",
-    "categories": [
-      "windows",
-      "tecnologia-accesibilidad",
-      "jaws"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Vispero Connect: Now Also On YouTube",
-        "summary": "You asked, we listened. Vispero Connect, our official monthly podcast, is now available on YouTube. Each episode features product news and tips, interviews with members of our Vispero team, user stories, as well as previews of our upcoming training events. View Vispero Connect playlist on our YouTube channel Of course, you can still find us …",
-        "body": "You asked, we listened.\n\nVispero Connect, our official monthly podcast, is now available on YouTube. Each episode features product news and tips, interviews with members of our Vispero team, user stories, as well as previews of our upcoming training events.\n\nOf course, you can still find us on all major podcast platforms.\n\nHappy listening! And let’s keep connected!"
       }
     },
     "media": null

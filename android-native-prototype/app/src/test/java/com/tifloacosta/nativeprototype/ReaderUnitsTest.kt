@@ -52,7 +52,7 @@ class ReaderUnitsTest {
         }
     }
     @Test fun speechSkipsOnlyIsolatedTechnicalPageMarkers() {
-        val body = "Primera frase.\\ntext/chapter01.xhtml\\nPágina 12\\nSegunda frase.\\nEn este curso aprendemos HTML."
+        val body = "Primera frase.\ntext/chapter01.xhtml\nPágina 12\nSegunda frase.\nEn este curso aprendemos HTML."
         for (mode in 0..2) {
             val units = ReaderUnits.split(body, mode)
             assertTrue(units.any { it.text.contains("Primera frase") })

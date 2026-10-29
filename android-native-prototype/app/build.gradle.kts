@@ -23,9 +23,9 @@ android {
         }
         minSdk = 26
         targetSdk = 35
-        versionCode = if (project.findProperty("tifloReadingNavigationTest") == "true") 22 else 21
+        versionCode = if (project.findProperty("tifloReadingNavigationTest") == "true") 23 else 21
         versionName = if (project.findProperty("tifloReadingNavigationTest") == "true")
-            "0.22-lectura-accesible" else "0.21-pantalla-bloqueada"
+            "0.23-lectura-limpia" else "0.21-pantalla-bloqueada"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["prototypeLabel"] = when {
             project.findProperty("tifloReadingNavigationTest") == "true" ->

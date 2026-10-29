@@ -394,37 +394,7 @@ fun NativeTifloLector(
         return
     }
     if (screen == "import") {
-        /**
-     * Continue with the existing TifloLector for an older book. No copying,
-     * deletion or position conversion: the original reader retains all marks.
-     */
-    fun openPreviousBook(bookId: String? = null) {
-        val navigation = context.getSharedPreferences(
-            "tiflo-reader-navigation", android.content.Context.MODE_PRIVATE
-        )
-        val change = navigation.edit().putBoolean("open-existing-library", true)
-        if (bookId.isNullOrBlank()) change.remove("open-existing-book-id")
-        else change.putString("open-existing-book-id", bookId)
-        if (!change.commit()) {
-            error = if (english) "Could not open the previous library."
-                else "No se pudo solicitar la apertura de la biblioteca anterior."
-            return
-        }
-        try {
-            val backIntent = Intent().setClassName(
-                context.packageName, "com.tifloacosta.app.MainActivity"
-            ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            context.startActivity(backIntent)
-            (context as? android.app.Activity)?.finish()
-        } catch (failure: Exception) {
-            navigation.edit().remove("open-existing-library")
-                .remove("open-existing-book-id").apply()
-            error = if (english) "Original reader is unavailable in this test build."
-                else "La biblioteca original no está disponible en esta compilación."
-        }
-    }
-
-    Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
+        Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)) {
             TextButton(onClick = { screen = "home" }) {
                 Text(if (english) "Back to TifloLector" else "Volver a TifloLector")
@@ -466,6 +436,36 @@ fun NativeTifloLector(
     else listOf("Abrir", "Reproducir", "Marcas", "Favorito", "Información",
         "Cambiar título", "Mover a carpeta", "Eliminar",
         "Añadir o quitar de cola", "Marcar como terminado o pendiente")
+
+    /**
+     * Continue with the existing TifloLector for an older book. No copying,
+     * deletion or position conversion: the original reader retains all marks.
+     */
+    fun openPreviousBook(bookId: String? = null) {
+        val navigation = context.getSharedPreferences(
+            "tiflo-reader-navigation", android.content.Context.MODE_PRIVATE
+        )
+        val change = navigation.edit().putBoolean("open-existing-library", true)
+        if (bookId.isNullOrBlank()) change.remove("open-existing-book-id")
+        else change.putString("open-existing-book-id", bookId)
+        if (!change.commit()) {
+            error = if (english) "Could not open the previous library."
+                else "No se pudo solicitar la apertura de la biblioteca anterior."
+            return
+        }
+        try {
+            val backIntent = Intent().setClassName(
+                context.packageName, "com.tifloacosta.app.MainActivity"
+            ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            context.startActivity(backIntent)
+            (context as? android.app.Activity)?.finish()
+        } catch (failure: Exception) {
+            navigation.edit().remove("open-existing-library")
+                .remove("open-existing-book-id").apply()
+            error = if (english) "Original reader is unavailable in this test build."
+                else "La biblioteca original no está disponible en esta compilación."
+        }
+    }
 
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)) {

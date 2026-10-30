@@ -204,7 +204,7 @@
         resources: 'resources-view',
         reading: 'reading-section',
         news: 'news-view',
-        book: 'book-section',
+        book: 'contact-section',
         contact: 'contact-section',
         privacy: 'privacy-section',
         config: 'config-section'
@@ -377,7 +377,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     const hero = document.getElementById('home-hero');
     const homeBlocks = document.getElementById('home-blocks');
     const home = state.view === 'home';
-    const viewIds = ['resources-view', 'reading-section', 'news-view', 'book-section', 'contact-section', 'privacy-section', 'config-section'];
+    const viewIds = ['resources-view', 'reading-section', 'news-view', 'contact-section', 'privacy-section', 'config-section'];
 
     setPageChromeVisible(state.chromeVisible);
     setHidden(hero, !home);
@@ -407,7 +407,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       }
     }
     const target = home ? hero : document.getElementById(state.view);
-    const heading = target?.querySelector('h1, h2, h3') || target;
+    const heading = window.location.hash === '#book' ? document.getElementById('book-heading') : (target?.querySelector('h1, h2, h3') || target);
     focusElement(heading);
   }
 

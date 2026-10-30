@@ -50,7 +50,8 @@ test('web book percentage weighs actual words and never counts a first block as 
 test('service worker refreshes the same MP3-capable runtime as HTML', () => {
   const html = read('index.html');
   const worker = read('sw.js');
-  assert.match(html, /web-reading\.js\?v=3\.15/);
-  assert.match(worker, /web-reading\.js\?v=3\.15/);
-  assert.doesNotMatch(worker, /web-reading\.js\?v=3\.14/);
+  const htmlVersion = html.match(/web-reading\.js\?v=(\d+\.\d+)/)?.[1];
+  const workerVersion = worker.match(/web-reading\.js\?v=(\d+\.\d+)/)?.[1];
+  assert.ok(htmlVersion, 'HTML must identify the reader runtime version');
+  assert.equal(workerVersion, htmlVersion, 'Service worker must refresh the HTML reader runtime version');
 });

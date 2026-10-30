@@ -37,7 +37,7 @@
       <img class="brand-mark" src="tifloacosta-simbolo-blanco.svg" alt="" aria-hidden="true" width="48" height="48">
       <span class="brand-name">TifloAcosta</span>
     </a>
-    <div class="language-switch">
+    <div class="language-switch" id="language-switch" role="group" aria-label="Idioma de la web">
       <button type="button" id="lang-es" aria-pressed="true">Español</button>
       <button type="button" id="lang-en" aria-pressed="false">English</button>
     </div>
@@ -63,7 +63,7 @@
 
   <section id="home-blocks" aria-labelledby="home-blocks-heading">
     <h2 id="home-blocks-heading">Secciones</h2>
-    <nav class="resource-actions" aria-label="Secciones de la web de TifloAcosta">
+    <nav class="resource-actions" id="home-sections-nav" aria-label="Secciones de la web de TifloAcosta">
       <a class="button-link" id="home-open-actualidad" href="actualidad.html">Actualidad</a>
       <a class="button-link" id="home-open-resources" href="#resources">Recursos</a>
       <a class="button-link" id="home-open-reading" href="#reading">TifloLector</a>
@@ -521,7 +521,7 @@
 <script src="data.js?v=0.21"></script>
 <script src="medical-studies.js?v=1.0"></script>
 <script src="app-core.js?v=1.7"></script>
-<script src="actualidad-core.js?v=1.7"></script>
+<script src="actualidad-core.js?v=1.8"></script>
 <script>
 (() => {
   'use strict';
@@ -593,35 +593,17 @@
 (() => {
   'use strict';
 
-  const views = {
-    resources: document.getElementById('resources-view'),
-    reading: document.getElementById('reading-section'),
-    news: document.getElementById('news-view'),
-    book: document.getElementById('contact-section'),
-    contact: document.getElementById('contact-section'),
-    privacy: document.getElementById('privacy-section'),
-    config: document.getElementById('config-section')
-  };
-  const hero = document.getElementById('home-hero');
-  const menu = document.getElementById('home-blocks');
-  document.getElementById('home-blocks-heading')?.setAttribute('tabindex', '-1');
-  const main = document.getElementById('main');
-  const footer = document.getElementById('site-footer');
-  // Global sections expose one Back to home control, not one at each end.
-  for (const view of Object.values(views)) {
-    const links = [...view.querySelectorAll('a[data-home-back]')];
-    links.slice(1).forEach(link => link.closest('p')?.remove());
-  }
-
   const labels = {
-    es: { sections:'Secciones', actualidad:'Actualidad', resources:'Recursos', reading:'TifloLector', news:'Novedades', videos:'Vídeos', podcast:'Podcast', book:'Mi libro', contact:'Contacto y redes', privacy:'Privacidad y accesibilidad', privacyPolicy:'Política de privacidad', fullPrivacy:'Leer la política de privacidad completa', config:'Configuración', back:'Volver al inicio' },
-    en: { sections:'Sections', actualidad:'News', resources:'Resources', reading:'TifloReader', news:'What’s new', videos:'Videos', podcast:'Podcast', book:'My book', contact:'Contact and social', privacy:'Privacy and accessibility', privacyPolicy:'Privacy policy', fullPrivacy:'Read the full privacy policy', config:'Settings', back:'Back to home' }
+    es: { sections:'Secciones', navigation:'Secciones de la web de TifloAcosta', languageSwitch:'Idioma de la web', actualidad:'Actualidad', resources:'Recursos', reading:'TifloLector', news:'Novedades', videos:'Vídeos', podcast:'Podcast', contact:'Contacto y redes', privacy:'Privacidad y accesibilidad', privacyPolicy:'Política de privacidad', fullPrivacy:'Leer la política de privacidad completa', config:'Configuración', back:'Volver al inicio' },
+    en: { sections:'Sections', navigation:'TifloAcosta website sections', languageSwitch:'Website language', actualidad:'News', resources:'Resources', reading:'TifloReader', news:'What’s new', videos:'Videos', podcast:'Podcast', contact:'Contact and social', privacy:'Privacy and accessibility', privacyPolicy:'Privacy policy', fullPrivacy:'Read the full privacy policy', config:'Settings', back:'Back to home' }
   };
 
   function localizeHomeNavigation() {
     const language = document.documentElement.lang === 'en' ? 'en' : 'es';
     const text = labels[language];
     document.getElementById('home-blocks-heading').textContent = text.sections;
+    document.getElementById('home-sections-nav').setAttribute('aria-label', text.navigation);
+    document.getElementById('language-switch').setAttribute('aria-label', text.languageSwitch);
     document.getElementById('home-open-actualidad').textContent = text.actualidad;
     document.getElementById('home-open-resources').textContent = text.resources;
     document.getElementById('home-open-reading').textContent = text.reading;
@@ -637,41 +619,10 @@
     document.querySelectorAll('[data-home-back]').forEach(link => { link.textContent = text.back; });
   }
 
-  let returnFocusId = '';
-  document.addEventListener('click', event => {
-    const link = event.target.closest?.('a[href^="#"]');
-    const destination = link?.getAttribute('href')?.slice(1);
-    if (destination && views[destination] && link?.id) returnFocusId = link.id;
-  });
-
-  function showHomeView({ focus = false } = {}) {
-    const key = location.hash.replace(/^#/, '');
-    const target = views[key] || null;
-    const onHome = !target;
-    hero.hidden = !onHome;
-    menu.hidden = !onHome;
-    if (footer) footer.hidden = !onHome;
-    Object.values(views).forEach(section => { section.hidden = section !== target; });
-    if (!focus) return;
-    queueMicrotask(() => {
-      if (onHome) {
-        const opener = returnFocusId && document.getElementById(returnFocusId);
-        if (opener && !opener.hidden) opener.focus();
-        else document.getElementById('home-blocks-heading')?.focus();
-      } else {
-        const headingId = key === 'book' ? 'book-heading' : target?.getAttribute('aria-labelledby');
-        const heading = headingId ? document.getElementById(headingId) : target?.querySelector('h2');
-        heading?.setAttribute('tabindex', '-1');
-        heading?.focus?.();
-      }
-    });
-  }
-
-  window.addEventListener('hashchange', () => showHomeView({ focus: true }));
+  // La navegación de secciones y el foco tienen un único controlador: actualidad-core.js.
   document.getElementById('lang-es').addEventListener('click', () => setTimeout(localizeHomeNavigation, 0));
   document.getElementById('lang-en').addEventListener('click', () => setTimeout(localizeHomeNavigation, 0));
   localizeHomeNavigation();
-  showHomeView();
 })();
 </script>
 <script>

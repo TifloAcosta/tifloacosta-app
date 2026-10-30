@@ -9,7 +9,8 @@ test('web home exposes Leer con TifloAcosta as an accessible routed section', as
   assert.ok(html.includes('id="home-open-reading" href="#reading"'));
   assert.ok(html.includes('id="reading-section"'));
   assert.ok(html.includes('aria-labelledby="reading-heading"'));
-  assert.ok(html.includes("reading: document.getElementById('reading-section')"));
+  const core = await read('actualidad-core.js');
+  assert.ok(core.includes("reading: 'reading-section'"));
   assert.ok(html.includes('id="reading-heading"'));
   assert.ok(html.includes('data-home-back'));
 });

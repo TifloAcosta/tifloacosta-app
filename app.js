@@ -1,9 +1,10 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '2.2';
+  const APP_VERSION = '2.3';
   const core = window.TIFLO_APP_CORE;
   const coreActualidad = window.TIFLO_ACTUALIDAD_CORE;
+  const resourceBrowser = window.TIFLO_RESOURCE_BROWSER;
   const shared = window.TIFLO_SHARED || null;
   const data = Array.isArray(window.TIFLO_RESOURCES) ? window.TIFLO_RESOURCES : [];
   const $ = (selector) => document.querySelector(selector);
@@ -14,8 +15,10 @@
     actualidadHomeIntro: $('#actualidad-home-intro'), actualidadHomeList: $('#actualidad-home-list'), actualidadHomeOpen: $('#actualidad-home-open'),
     searchHeading: $('#search-heading'), searchLabel: $('label[for="search"]'),
     searchForm: $('#search-form'), search: $('#search'), searchButton: $('#search-button'), newsHeading: $('#news-heading'),
-    newsCount: $('#news-count'), newsList: $('#news-list'), categoryToggle: $('#category-toggle'), categoryMenu: $('#category-menu'),
-    categoryButtons: $('#category-buttons'), resultStatus: $('#result-status'), results: $('#resource-results'),
+    newsCount: $('#news-count'), newsList: $('#news-list'), newsIntro: $('#news-intro'), newsLoadMore: $('#news-load-more'), categoryToggle: $('#category-toggle'), categoryMenu: $('#category-menu'),
+    categoryButtons: $('#category-buttons'), resourceControls: $('#resource-controls'), resourceSelectedCategory: $('#resource-selected-category'),
+    resourceFilterLabel: $('#resource-filter-label'), resourceFilter: $('#resource-filter'), resourceSortLabel: $('#resource-sort-label'),
+    resourceSort: $('#resource-sort'), resourceChangeCategory: $('#resource-change-category'), resultStatus: $('#result-status'), results: $('#resource-results'),
     videosHomeHeading: $('#videos-home-heading'), videosHomeIntro: $('#videos-home-intro'), videosHomeOpen: $('#videos-home-open'), youtubeHomeChannel: $('#youtube-home-channel'),
     bookHeading: $('#book-heading'), bookCover: $('#book-cover'), bookTitle: $('#book-title'), bookSubtitle: $('#book-subtitle'),
     bookDescription: $('#book-description'), bookDescription2: $('#book-description-2'), bookBuyPrint: $('#book-buy-print'),
@@ -48,6 +51,8 @@
       searchHeading: 'Buscar en TifloAcosta', searchLabel: 'Busca aquí lo que quieras en TifloAcosta.', placeholder: '', searchButton: 'Buscar',
       news: 'Novedades', newsCount: n => `${n} novedad${n === 1 ? '' : 'es'} reciente${n === 1 ? '' : 's'}.`,
       explore: 'Explorar recursos', categoryToggle: 'Buscar un apartado', categoryButtonsLabel: 'Categorías de recursos', favorites: 'Ver favoritos', clear: 'Limpiar resultados',
+      resourceBrowser: { selected: category => `Apartado seleccionado: ${category}.`, filter: 'Filtrar documentos de este apartado por título o tema', sort: 'Ordenar documentos', title: 'Por título', recent: 'Más recientes primero', change: 'Elegir otro apartado' },
+      ownNewsIntro: 'Publicaciones propias de TifloAcosta. Las noticias externas están en Actualidad.', loadMoreNews: 'Mostrar diez publicaciones más', newsDate: 'Publicado', newsCountShown: (shown,total) => `${shown} de ${total} publicaciones mostradas.`,
       configuration: 'Configuración', accessibility: 'Accesibilidad visual',
       videosHome: { heading:'Canal TifloAcosta en YouTube', intro:'Accede al catálogo completo de vídeos de TifloAcosta desde una pantalla pensada para buscar, ordenar y recorrer el canal con comodidad.', open:'Explorar todos los vídeos', channel:'Abrir Canal TifloAcosta en YouTube' },
       book: {
@@ -88,6 +93,8 @@
       searchHeading: 'Search TifloAcosta', searchLabel: 'Search for anything in TifloAcosta.', placeholder: '', searchButton: 'Search',
       news: 'What’s new', newsCount: n => `${n} recent item${n === 1 ? '' : 's'}.`,
       explore: 'Explore resources', categoryToggle: 'Find a section', categoryButtonsLabel: 'Resource categories', favorites: 'View favorites', clear: 'Clear results',
+      resourceBrowser: { selected: category => `Selected section: ${category}.`, filter: 'Filter documents in this section by title or topic', sort: 'Sort documents', title: 'By title', recent: 'Most recent first', change: 'Choose another section' },
+      ownNewsIntro: 'TifloAcosta’s own publications. External news can be found under News.', loadMoreNews: 'Show ten more publications', newsDate: 'Published', newsCountShown: (shown,total) => `${shown} of ${total} publications shown.`,
       configuration: 'Settings', accessibility: 'Visual accessibility',
       videosHome: { heading:'TifloAcosta YouTube Channel', intro:'Open the complete TifloAcosta video catalog in a screen designed for comfortable searching, sorting, and browsing.', open:'Explore all videos', channel:'Open TifloAcosta Channel on YouTube' },
       book: {
@@ -354,35 +361,90 @@
       .catch(()=>{actualidadItems=[];actualidadLoaded=true;renderActualidadHome();});
   }
 
+
+  let shownPublications = 10;
   function makeNewsItem(item) {
-    const article=document.createElement('div'); article.className='news-item';
-    const h3=document.createElement('h3'); const a=document.createElement('a'); a.href=item.url; a.textContent=item.title; a.setAttribute('aria-haspopup','dialog'); a.addEventListener('click',event=>{event.preventDefault();openResourceMenu(item,a);}); h3.append(a);
-    const meta=document.createElement('p'); meta.textContent=item.category;
+    const article=document.createElement('article'); article.className='news-item';
+    const h3=document.createElement('h3'); const a=document.createElement('a');
+    a.href=item.url; a.textContent=item.title; a.setAttribute('aria-haspopup','dialog');
+    a.addEventListener('click',event=>{event.preventDefault();openResourceMenu(item,a);}); h3.append(a);
+    const meta=document.createElement('p');
+    const published=Date.parse(item.newsDate||'');
+    const date=Number.isFinite(published) ? new Intl.DateTimeFormat(lang,{dateStyle:'medium'}).format(new Date(published)) : '';
+    meta.textContent=[item.category,date?copy[lang].newsDate+': '+date:''].filter(Boolean).join(' · ');
     article.append(h3,meta); return article;
   }
 
   function renderNews(){
     const c=copy[lang];
-    const items=(shared?.newestResources ? shared.newestResources(data,{lang,limit:3}) : resourcesForLanguage().filter(item=>item.new))
-      .sort((a,b)=>(Date.parse(b.newsDate||'')||0)-(Date.parse(a.newsDate||'')||0))
-      .slice(0,3);
+    // Solo se incluyen documentos del catálogo TifloAcosta; nunca las noticias externas.
+    const all=resourceBrowser.latestPublications(data,lang);
+    const items=all.slice(0,shownPublications);
     els.newsList.innerHTML='';
     items.forEach(item=>els.newsList.append(makeNewsItem(item)));
-    const latestDate=items.map(item=>Date.parse(item.newsDate||'')).find(Number.isFinite);
-    const published=Number.isFinite(latestDate)
-      ? new Intl.DateTimeFormat(lang,{dateStyle:'long'}).format(new Date(latestDate))
-      : '';
-    els.newsCount.textContent=published
-      ? `${c.newsCount(items.length)} ${lang==='en'?'Latest publication':'Última publicación'}: ${published}.`
-      : c.newsCount(items.length);
+    els.newsIntro.textContent=c.ownNewsIntro;
+    els.newsLoadMore.textContent=c.loadMoreNews;
+    els.newsLoadMore.hidden=items.length>=all.length;
+    els.newsCount.textContent=c.newsCountShown(items.length,all.length);
   }
-  function setCategoryMenuExpanded(expanded){ const open=Boolean(expanded); els.categoryToggle.setAttribute('aria-expanded',String(open)); els.categoryMenu.hidden=!open; }
+
+  function setCategoryMenuExpanded(expanded){
+    const open=Boolean(expanded);
+    els.categoryToggle.setAttribute('aria-expanded',String(open));
+    els.categoryMenu.hidden=!open;
+  }
   let activeCategoryKey = '';
   function setActiveCategory(cat=''){ activeCategoryKey = String(cat||''); return activeCategoryKey; }
-  function renderCategories(){ const c=copy[lang]; els.categoryToggle.textContent=c.categoryToggle; setCategoryMenuExpanded(false); if(els.categoryButtons){ els.categoryButtons.innerHTML=''; els.categoryButtons.setAttribute('aria-label',c.categoryButtonsLabel); } categories().forEach(cat=>{ if(els.categoryButtons){ const button=document.createElement('button'); button.type='button'; button.dataset.resourceCategory=cat; button.textContent=cat; button.addEventListener('click',()=>{ setActiveCategory(cat); setCategoryMenuExpanded(false); showCategory(cat); queueMicrotask(()=>els.resultStatus.focus()); }); els.categoryButtons.append(button); }}); }
-  function showResults(items,message,emptyMessage){ els.results.innerHTML='';els.results.hidden=false;els.resultStatus.textContent=message;if(!items.length){const p=document.createElement('p');p.className='no-results';p.textContent=emptyMessage;els.results.append(p);return;}items.forEach(item=>els.results.append(makeCard(item))); }
-  function clearResourceResults(){els.results.innerHTML='';els.results.hidden=true;els.resultStatus.textContent='';setActiveCategory('');}
-  function resourceYear(item){const explicit=Number(item?.year);if(Number.isInteger(explicit)&&explicit>1900)return explicit;const match=String(item?.title||'').match(/\b(20\d{2})\b/);return match?Number(match[1]):null;}
+  function renderCategories(){
+    const c=copy[lang];
+    els.categoryToggle.textContent=c.categoryToggle;
+    setCategoryMenuExpanded(false);
+    els.categoryButtons.innerHTML='';
+    els.categoryButtons.setAttribute('aria-label',c.categoryButtonsLabel);
+    categories().forEach(cat=>{
+      const button=document.createElement('button');
+      button.type='button'; button.dataset.resourceCategory=cat; button.textContent=cat;
+      button.addEventListener('click',()=>{
+        setActiveCategory(cat);
+        els.resourceFilter.value='';
+        els.resourceSort.value='title';
+        setCategoryMenuExpanded(false);
+        showCategory(cat);
+        queueMicrotask(()=>els.resultStatus.focus());
+      });
+      els.categoryButtons.append(button);
+    });
+    const labels=c.resourceBrowser;
+    els.resourceFilterLabel.textContent=labels.filter;
+    els.resourceSortLabel.textContent=labels.sort;
+    els.resourceSort.options[0].textContent=labels.title;
+    els.resourceSort.options[1].textContent=labels.recent;
+    els.resourceChangeCategory.textContent=labels.change;
+  }
+  function showResults(items,message,emptyMessage){
+    els.results.innerHTML='';
+    els.results.hidden=false;
+    els.resultStatus.textContent=message;
+    if(!items.length){
+      const p=document.createElement('p');p.className='no-results';p.textContent=emptyMessage;
+      els.results.append(p);return;
+    }
+    items.forEach(item=>els.results.append(makeCard(item)));
+  }
+  function clearResourceResults(){
+    els.results.innerHTML='';
+    els.results.hidden=true;
+    els.resultStatus.textContent='';
+    els.resourceControls.hidden=true;
+    els.resourceFilter.value='';
+    els.resourceSort.value='title';
+    setActiveCategory('');
+  }
+  function resourceYear(item){
+    const explicit=Number(item?.year);if(Number.isInteger(explicit)&&explicit>1900)return explicit;
+    const match=String(item?.title||'').match(/\b(20\d{2})\b/);
+    return match?Number(match[1]):null;
+  }
   function showPillsYears(items){
     els.results.innerHTML='';
     els.results.hidden=false;
@@ -394,8 +456,7 @@
     actions.className='resource-actions';
     years.forEach(year=>{
       const button=document.createElement('button');
-      button.type='button';
-      button.textContent=String(year);
+      button.type='button';button.textContent=String(year);
       button.addEventListener('click',()=>{
         const yearItems=items.filter(item=>resourceYear(item)===year);
         const message=lang==='en'
@@ -473,16 +534,22 @@
     }
   }
 
+
   function showCategory(cat){
     const c=copy[lang];
     if(!cat){clearResourceResults();return;}
     setActiveCategory(cat);
-    const items=shared?.selectResources
+    els.resourceControls.hidden=false;
+    els.resourceSelectedCategory.textContent=c.resourceBrowser.selected(cat);
+    const selected=shared?.selectResources
       ? shared.selectResources(data,{lang,category:cat})
       : resourcesForLanguage().filter(item=>item.category===cat);
+    const items=resourceBrowser.filterAndSort(selected,els.resourceFilter.value,els.resourceSort.value,lang);
     if((lang==='es'&&cat==='Píldoras')||(lang==='en'&&cat==='Pills')){showPillsYears(items);return;}
     showResults(items,c.categoryFound(cat,items.length),c.noResults);
-    if (/^apps?$/i.test(cat)) void showAccessibleAppsCatalog(cat);
+    if (/^apps?$/i.test(cat)) {
+      if (!els.resourceFilter.value.trim()) void showAccessibleAppsCatalog(cat);
+    }
   }
 
   function option(select,value,label){const o=document.createElement('option');o.value=value;o.textContent=label;select.append(o);}
@@ -651,8 +718,25 @@
     }, 100);
   }
 
-  function applyLanguage(){const c=copy[lang];document.documentElement.lang=lang;document.title=c.documentTitle;core.writeStoredValue(storage,'tifloLang',lang);els.langEs.setAttribute('aria-pressed',String(lang==='es'));els.langEn.setAttribute('aria-pressed',String(lang==='en'));els.skip.textContent=c.skip;els.brand.setAttribute('aria-label',c.brandLabel);els.appHeading.textContent=c.appHeading;els.intro.textContent=c.intro;els.searchHeading.textContent=c.searchHeading;els.searchLabel.textContent=c.searchLabel;els.search.placeholder=c.placeholder;els.searchButton.textContent=c.searchButton;els.newsHeading.textContent=c.news;els.videosHomeHeading.textContent=c.videosHome.heading;els.videosHomeIntro.textContent=c.videosHome.intro;els.videosHomeOpen.textContent=c.videosHome.open;els.youtubeHomeChannel.textContent=c.videosHome.channel;els.aboutHeading.textContent=c.about.heading;els.aboutText.textContent=c.about.text;els.externalLinksNote.textContent=c.externalLinks;els.privacyHeading.textContent=c.privacy.heading;els.privacySubheading.textContent=c.privacy.privacyHeading;els.privacyText.textContent=c.privacy.text;els.accessibilityInfoHeading.textContent=c.privacy.accessibilityHeading;els.accessibilityInfoText.textContent=c.privacy.accessibilityText;els.configHeading.textContent=c.configuration;els.accessibilityHeading.textContent=c.accessibility;els.footer.textContent=c.footer;renderActualidadHome();renderCategories();renderNews();localizeBook();localizeContact();localizeSettings();localizeInstall();localizeUpdate();clearResourceResults();}
+  function applyLanguage(){const c=copy[lang];document.documentElement.lang=lang;document.title=c.documentTitle;core.writeStoredValue(storage,'tifloLang',lang);els.langEs.setAttribute('aria-pressed',String(lang==='es'));els.langEn.setAttribute('aria-pressed',String(lang==='en'));els.skip.textContent=c.skip;els.brand.setAttribute('aria-label',c.brandLabel);els.appHeading.textContent=c.appHeading;els.intro.textContent=c.intro;els.searchHeading.textContent=c.searchHeading;els.searchLabel.textContent=c.searchLabel;els.search.placeholder=c.placeholder;els.searchButton.textContent=c.searchButton;els.newsHeading.textContent=c.news;els.videosHomeHeading.textContent=c.videosHome.heading;els.videosHomeIntro.textContent=c.videosHome.intro;els.videosHomeOpen.textContent=c.videosHome.open;els.youtubeHomeChannel.textContent=c.videosHome.channel;els.aboutHeading.textContent=c.about.heading;els.aboutText.textContent=c.about.text;els.externalLinksNote.textContent=c.externalLinks;els.privacyHeading.textContent=c.privacy.heading;els.privacySubheading.textContent=c.privacy.privacyHeading;els.privacyText.textContent=c.privacy.text;els.accessibilityInfoHeading.textContent=c.privacy.accessibilityHeading;els.accessibilityInfoText.textContent=c.privacy.accessibilityText;els.configHeading.textContent=c.configuration;els.accessibilityHeading.textContent=c.accessibility;els.footer.textContent=c.footer;renderActualidadHome();renderCategories();shownPublications=10;renderNews();localizeBook();localizeContact();localizeSettings();localizeInstall();localizeUpdate();clearResourceResults();}
 
+  els.newsLoadMore.addEventListener('click',()=>{
+    shownPublications+=10;
+    renderNews();
+    // Evitar perder el foco cuando se oculta el botón al agotar los resultados.
+    if(els.newsLoadMore.hidden) queueMicrotask(()=>els.newsCount.focus());
+  });
+  els.newsCount.tabIndex=-1;
+  els.resourceFilter.addEventListener('input',()=>{if(activeCategoryKey)showCategory(activeCategoryKey);});
+  els.resourceSort.addEventListener('change',()=>{if(activeCategoryKey)showCategory(activeCategoryKey);});
+  els.resourceChangeCategory.addEventListener('click',()=>{
+    els.resourceControls.hidden=true;
+    els.results.hidden=true;
+    els.resultStatus.textContent='';
+    setActiveCategory('');
+    setCategoryMenuExpanded(true);
+    queueMicrotask(()=>els.categoryButtons.querySelector('button')?.focus());
+  });
   els.langEs.addEventListener('click',()=>{const changed=lang!=='es';lang='es';applyLanguage();if(changed)trackLanguageUse();});els.langEn.addEventListener('click',()=>{const changed=lang!=='en';lang='en';applyLanguage();if(changed)trackLanguageUse();});els.categoryToggle.addEventListener('click',()=>setCategoryMenuExpanded(els.categoryToggle.getAttribute('aria-expanded')!=='true'));
   els.settingsToggle.addEventListener('click',toggleSettings);
   els.settingsForm.addEventListener('submit',e=>e.preventDefault());

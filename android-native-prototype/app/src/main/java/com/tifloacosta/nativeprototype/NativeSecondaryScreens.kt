@@ -319,6 +319,15 @@ private fun NativeSettingsScreen(english: Boolean) {
             "Settings are saved on this device. Reader voice settings are inside TifloLector."
             else "Los ajustes se guardan en este dispositivo. Las voces se configuran dentro de TifloLector.")
         Button(onClick = {
+            prefs.edit().putBoolean("push-consent", true).apply()
+            val consent = Intent("com.tifloacosta.app.ENABLE_NOTIFICATIONS").apply {
+                setClassName(context.packageName, "com.tifloacosta.app.NativePushConsentReceiver")
+            }
+            runCatching { context.sendBroadcast(consent) }
+        }) {
+            Text(if (english) "Enable notifications" else "Activar notificaciones")
+        }
+        Button(onClick = {
             val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                 Uri.parse("package:" + context.packageName))
             runCatching { context.startActivity(intent) }

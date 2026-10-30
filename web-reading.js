@@ -1300,6 +1300,21 @@
       const audio = activeAudio;
       let index = 0;
       const label = language() === 'en' ? 'DAISY audio chapter' : 'Capítulo DAISY de audio';
+      // Keep the spoken text visible when a DAISY book supplies SMIL timing.
+      const snippets = new Map();
+      for (const section of book.sections || []) snippets.set(section.path, section.text);
+      const cues = (book.timeline || []).filter(cue => tracks.some(track => track.path === cue.audioPath));
+      const updateSynchronizedText = () => {
+        const path = tracks[index]?.path;
+        const current = Number(audio.currentTime) || 0;
+        const matches = cues.filter(cue => cue.audioPath === path && (cue.clipBegin === null || cue.clipBegin <= current) && (cue.clipEnd === null || cue.clipEnd > current));
+        const cue = matches.at(-1);
+        if (!cue || !cue.textPath) return;
+        const displayed = snippets.get(cue.textPath);
+        if (displayed && els.block.textContent !== displayed) els.block.textContent = displayed;
+      };
+      audio.addEventListener('timeupdate', updateSynchronizedText);
+      audio.addEventListener('seeked', updateSynchronizedText);
       const controller = document.createElement('div');
       controller.className = 'reading-daisy-tracks';
       const prev = document.createElement('button');
@@ -1315,6 +1330,7 @@
         index = nextIndex;
         audio.src = tracks[index].url;
         audio.load();
+        updateSynchronizedText();
         caption.textContent = `${label} ${index+1} / ${tracks.length}: ${tracks[index].path.split('/').pop()}`;
         prev.disabled = index === 0;
         next.disabled = index === tracks.length-1;
@@ -1343,10 +1359,10 @@
           controller.remove();
         }
       });
-      els.block.textContent = language()==='en' ? 'DAISY audiobook ready.' : 'Audiolibro DAISY preparado.';
+      els.block.textContent = book.hasText ? book.text : (language()==='en' ? 'DAISY audiobook ready.' : 'Audiolibro DAISY preparado.');
       els.status.textContent = language()==='en'
-        ? 'DAISY audio is available by track. Text/audio synchronization is not yet available.'
-        : 'Audio DAISY disponible por pistas. La sincronización de texto y audio todavía no está disponible.';
+        ? 'DAISY audio ready. Text follows SMIL time cues when supplied by the book.'
+        : 'Audio DAISY preparado. El texto sigue las marcas de tiempo SMIL cuando el libro las incluye.';
     } catch(error) {
       for (const track of tracks) URL.revokeObjectURL(track.url);
       throw error;
@@ -1847,7 +1863,7 @@
         }
         throw error;
       }
-      if (!book.hasText && book.hasAudio) {
+      if (book.hasAudio) {
         return { source:'',format:'daisy-audio',model:null,book,zip };
       }
       return { source:book.text, format:'txt',

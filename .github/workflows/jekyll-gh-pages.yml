@@ -52,7 +52,7 @@ jobs:
       - name: Auditar TifloLector web completo
         run: node --test test/web-reading*.test.mjs test/tiflolector-web-navigation-settings.test.mjs test/web-daisy.test.mjs
       - name: Auditar las pruebas web de regresión
-        run: node --test test/web-*.test.mjs test/reader-migration.test.mjs test/youtube-actions.test.mjs
+        run: node --test test/web-*.test.mjs test/reader-migration.test.mjs test/youtube-actions-core.test.mjs test/youtube-actions-integration.test.mjs
       - name: Install shared web build dependencies
         working-directory: mobile
         run: npm ci

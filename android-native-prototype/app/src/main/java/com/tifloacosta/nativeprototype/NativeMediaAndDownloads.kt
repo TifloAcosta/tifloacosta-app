@@ -169,7 +169,28 @@ fun NativeSoundSearchScreen(english: Boolean) {
     var status by remember { mutableStateOf("") }
     var results by remember { mutableStateOf<List<NativeSound>>(emptyList()) }
     var busy by remember { mutableStateOf(false) }
+    var category by remember { mutableStateOf(0) }
+    val categories = listOf(
+        "" to (if (english) "All sounds" else "Todos los sonidos"),
+        "ringtones" to (if (english) "Ringtones" else "Tonos de llamada"),
+        "notifications" to (if (english) "Notifications" else "Notificaciones"),
+        "alarms" to (if (english) "Alarms" else "Alarmas"),
+        "phones" to (if (english) "Phone sounds" else "Teléfonos"),
+        "technology" to (if (english) "Technology" else "Tecnología"),
+        "nature" to (if (english) "Nature" else "Naturaleza"),
+        "animals" to (if (english) "Animals" else "Animales"),
+        "ambience" to (if (english) "Ambience" else "Ambiente"),
+        "funny" to (if (english) "Fun" else "Divertidos"),
+        "games" to (if (english) "Games" else "Juegos")
+    )
+    var preview by remember { mutableStateOf<MediaPlayer?>(null) }
+    DisposableEffect(Unit) {
+        onDispose { preview?.let { runCatching { it.stop(); it.release() } } }
+    }
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        ReaderAdjustableChoice(if (english) "Sound category" else "Categoría de sonidos",
+            categories.map { it.second }, category) { category = it }
+
         OutlinedTextField(term, { term = it.take(120) }, modifier = Modifier.fillMaxWidth(),
             label = { Text(if (english) "Sound to find" else "Sonido que buscas") })
         Button(enabled = !busy && term.trim().length >= 2, onClick = {
@@ -177,7 +198,9 @@ fun NativeSoundSearchScreen(english: Boolean) {
             scope.launch {
                 try {
                     val found = withContext(Dispatchers.IO) {
-                        val body = JSONObject().put("query", term.trim()).put("category", "").put("page", 1)
+                        val id = categories[category].first
+                        val body = JSONObject().put("query", term.trim())
+                            .put("category", id).put("page", 1)
                         val response = JSONObject(limitedResponse(
                             "https://download.tifloacosta.com/sounds/search", body))
                         if (response.optString("status") != "ok") throw IllegalStateException()
@@ -205,6 +228,19 @@ fun NativeSoundSearchScreen(english: Boolean) {
         }
         LazyColumn(modifier = Modifier.heightIn(max = 360.dp)) {
             items(results) { sound ->
+                if (MediaLogic.validWebUrl(sound.preview)) {
+                    Button(modifier = Modifier.fillMaxWidth(), onClick = {
+                        preview?.let { runCatching { it.stop(); it.release() } }
+                        val player = MediaPlayer()
+                        preview = player
+                        runCatching {
+                            player.setDataSource(sound.preview)
+                            player.setOnPreparedListener { it.start() }
+                            player.setOnErrorListener { _, _, _ -> true }
+                            player.prepareAsync()
+                        }.onFailure { runCatching { player.release() }; preview = null }
+                    }) { Text((if (english) "Listen: " else "Escuchar: ") + sound.name) }
+                }
                 if (MediaLogic.validWebUrl(sound.page)) {
                     OutlinedButton(modifier = Modifier.fillMaxWidth(),
                         onClick = { nativeExternal(context, sound.page) }) {

@@ -1762,6 +1762,25 @@
         model: shared.parsePdfDocument(payload)
       };
     }
+    if (lower.endsWith('.zip') || type === 'application/zip' || type === 'application/x-zip-compressed') {
+      const JSZip = await loadZipBundle();
+      const zip = await JSZip.loadAsync(await file.arrayBuffer());
+      const { parseDaisyArchive } = await import('./shared/web-daisy-archive.mjs');
+      let book;
+      try {
+        book = await parseDaisyArchive(zip, { title:name, language:language() });
+      } catch (error) {
+        if (error?.message === 'daisy-signature-missing') {
+          throw Object.assign(new Error('unsupported'), { code:'unsupported' });
+        }
+        throw error;
+      }
+      if (!book.hasText) {
+        throw Object.assign(new Error('DAISY audio requires a playlist player'), { code:'daisy-audio-pending' });
+      }
+      return { source:book.text, format:'txt',
+        model:shared.parseTextDocument(book.text, { title:name, language:language() }) };
+    }
     if (lower.endsWith('.doc')) {
       throw Object.assign(new Error('legacy-doc'), { code:'legacy-doc' });
     }
@@ -1831,7 +1850,8 @@
       return true;
     } catch (error) {
       els.ocr.hidden = true;
-      if (error?.code === 'unsupported') els.status.textContent = t().unsupported;
+      if (error?.code === 'daisy-audio-pending') els.status.textContent = language() === 'en' ? 'This DAISY contains audio only. DAISY audio playback is not available yet.' : 'Este DAISY contiene solo audio. La reproducción DAISY de audio todavía no está disponible.';
+      else if (error?.code === 'unsupported') els.status.textContent = t().unsupported;
       else if (error?.code === 'legacy-doc') els.status.textContent = t().legacyDoc;
       else if (error?.code === 'image-needs-ocr') {
         els.status.textContent = `${t().imageNeedsOcr} ${t().ocrPrivacy}`;

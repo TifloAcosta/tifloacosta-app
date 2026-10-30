@@ -58,6 +58,13 @@ jobs:
         run: npm ci
       - name: Build shared web bridge
         run: node mobile/scripts/build-shared-web.mjs
+      - name: Verificar los componentes generados para lectura PDF y síntesis
+        run: |
+          test -s shared-web.js
+          test -s web-pdf.js
+          test -s pdf.worker.min.mjs
+          node --check shared-web.js
+          node --check web-pdf.js
       - name: Synchronize Actualidad
         run: node scripts/sync-actualidad.mjs
       - name: Synchronize Accessible apps

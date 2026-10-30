@@ -21,7 +21,9 @@ test('older books are listed read-only and open with original IDs, marks and pro
   assert.match(bridge, /result\.put\("bookId", bookId/);
   assert.match(app, /if \(bookId\) openReadingBook\(bookId\)/);
   assert.match(app, /percent != null && Number\.isFinite\(Number\(percent\)\)/);
-  assert.match(app, /router\.start\('home'\);\s*void restoreExistingReaderNavigation\(\)/);
+  assert.match(app, /router\.start\('home'\)/);
+  assert.match(app, /void restoreExistingReaderNavigation\(\)/);
+  assert.match(app, /consumeNativeHomeDestination\(\)/);
 });
 
 test('native integration retains production package identity and minimum Android API', async () => {

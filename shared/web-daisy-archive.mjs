@@ -57,7 +57,7 @@ export async function parseDaisyArchive(zip, {title='DAISY', language='es'}={}) 
     const body=markup.match(/<body\b[^>]*>([\s\S]*?)<\/body>/i)?.[1] || markup;
     const text=strip(body);
     if(text) sections.push({path,text});
-    for (const match of markup.matchAll(/<([a-z][a-z0-9:-]*)\\b([^>]*\\bid=["']([^"']+)["'][^>]*)>([\\s\\S]*?)<\\/\\1>/gi)) {
+    for (const match of markup.matchAll(/<([a-z][a-z0-9:-]*)\b([^>]*\bid=["']([^"']+)["'][^>]*)>([\s\S]*?)<\/\1>/gi)) {
       const fragment = strip(match[4]);
       if (fragment) fragments[path + '#' + match[3]] = fragment;
     }

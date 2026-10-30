@@ -41,7 +41,7 @@ jobs:
             git push origin HEAD:main
           fi
       - name: Comprobar navegación básica y enlaces de la web
-        run: node --test test/web-site-maintenance.test.mjs test/web-contact-identity.test.mjs test/clean-home.test.mjs test/regression.test.mjs test/pwa-startup.test.mjs
+        run: node --test test/web-site-maintenance.test.mjs test/web-contact-identity.test.mjs test/clean-home.test.mjs test/regression.test.mjs test/pwa-startup.test.mjs test/actualidad-button-audit.test.mjs
       - name: Install shared web build dependencies
         working-directory: mobile
         run: npm ci

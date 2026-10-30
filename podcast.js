@@ -2,6 +2,7 @@
   'use strict';
 
   const FEED_URL = 'https://anchor.fm/s/5b48ca28/podcast/rss';
+  const LOCAL_FEED_URL = './podcast-episodes.json';
   const SEEK_SECONDS = 30;
   const MAX_EPISODES = 30;
   const $ = selector => document.querySelector(selector);
@@ -26,6 +27,7 @@
     positionLabel: $('#podcast-position-label'),
     position: $('#podcast-position'),
     time: $('#podcast-time'),
+    playbackStatus: $('#podcast-playback-status'), backEpisodes: $('#podcast-back-episodes'),
     episodesHeading: $('#podcast-episodes-heading'),
     episodes: $('#podcast-episodes'),
     servicesHeading: $('#podcast-services-heading'),
@@ -53,6 +55,8 @@
       time: (current, duration) => `${current} de ${duration}`,
       ready: title => `Episodio preparado: ${title}`,
       ended: 'El episodio ha terminado.',
+      playbackError: 'No se pudo reproducir este episodio. Puedes escucharlo desde los servicios externos.',
+      backEpisodes: 'Volver a la lista de episodios',
       footer: 'TifloAcosta · Web 2.2.'
     },
     en: {
@@ -75,6 +79,8 @@
       time: (current, duration) => `${current} of ${duration}`,
       ready: title => `Episode ready: ${title}`,
       ended: 'The episode has ended.',
+      playbackError: 'This episode could not be played. You can listen through the external services.',
+      backEpisodes: 'Back to episode list',
       footer: 'TifloAcosta · Web 2.2.'
     }
   };
@@ -152,9 +158,7 @@
     const currentLabel = secondsLabel(current);
     const durationLabel = secondsLabel(duration);
     els.position.setAttribute('aria-valuetext', `${currentLabel} / ${durationLabel}`);
-    if (announce || !els.time.textContent) {
-      els.time.textContent = copy[lang].time(currentLabel, durationLabel);
-    }
+    els.time.textContent = copy[lang].time(currentLabel, durationLabel);
   }
 
   function updateMediaSession(episode) {
@@ -194,6 +198,7 @@
 
   function loadEpisode(episode, button) {
     els.audio.pause();
+    els.playbackStatus.textContent = '';
     activeEpisode = episode;
     activeButton = button || null;
     clearCurrentEpisodeMarker();
@@ -214,6 +219,7 @@
 
   function renderEpisodes() {
     els.episodes.replaceChildren();
+    activeButton = null;
     for (const episode of episodes) {
       const article = document.createElement('article');
       article.className = 'podcast-episode-card';
@@ -239,7 +245,10 @@
       const listen = document.createElement('button');
       listen.type = 'button';
       listen.textContent = copy[lang].listen(episode.title);
-      if (activeEpisode?.id === episode.id) listen.setAttribute('aria-current', 'true');
+      if (activeEpisode?.id === episode.id) {
+        listen.setAttribute('aria-current', 'true');
+        activeButton = listen;
+      }
       listen.addEventListener('click', () => loadEpisode(episode, listen));
       article.append(listen);
       els.episodes.append(article);
@@ -266,6 +275,7 @@
     els.positionLabel.textContent = c.position;
     els.episodesHeading.textContent = c.episodes;
     els.servicesHeading.textContent = c.services;
+    els.backEpisodes.textContent = c.backEpisodes;
     els.footer.textContent = c.footer;
     updateToggle();
     updateTime();
@@ -276,15 +286,26 @@
   async function loadFeed() {
     els.status.textContent = copy[lang].loading;
     try {
-      const response = await fetch(FEED_URL, { cache: 'no-store' });
-      if (!response.ok) throw new Error(`Feed request failed: ${response.status}`);
-      episodes = parseEpisodes(await response.text());
-      if (!episodes.length) throw new Error('empty');
-      els.status.textContent = '';
-      renderEpisodes();
+      // El catálogo se genera en el servidor web; así no depende de CORS en el navegador.
+      const response = await fetch(LOCAL_FEED_URL, { cache: 'no-store' });
+      if (!response.ok) throw new Error('Local podcast catalog unavailable');
+      const entries = await response.json();
+      episodes = (Array.isArray(entries) ? entries : []).filter(episode =>
+        episode && episode.title && /^https:\/\//i.test(String(episode.audioUrl || ''))
+      ).slice(0, MAX_EPISODES);
+      if (!episodes.length) throw new Error('Empty local podcast catalog');
     } catch {
-      els.status.textContent = copy[lang].error;
+      // Conservamos el comportamiento antiguo como respaldo si falla la copia local.
+      try {
+        const response = await fetch(FEED_URL, { cache: 'no-store' });
+        if (!response.ok) throw new Error('RSS unavailable');
+        episodes = parseEpisodes(await response.text());
+      } catch {
+        episodes = [];
+      }
     }
+    els.status.textContent = episodes.length ? '' : copy[lang].error;
+    renderEpisodes();
   }
 
   els.langEs.addEventListener('click', () => { lang = 'es'; applyLanguage(); });
@@ -301,10 +322,25 @@
     updateTime({ announce: true });
   });
 
+  async function tryPlay() {
+    try {
+      await els.audio.play();
+      els.playbackStatus.textContent = '';
+    } catch {
+      els.playbackStatus.textContent = copy[lang].playbackError;
+    }
+  }
+
   els.toggle.addEventListener('click', () => {
     if (!activeEpisode) return;
-    if (els.audio.paused) void els.audio.play();
+    if (els.audio.paused) void tryPlay();
     else els.audio.pause();
+  });
+
+  els.backEpisodes.addEventListener('click', () => {
+    const target = activeButton?.isConnected ? activeButton : els.episodesHeading;
+    if (!target.hasAttribute('tabindex') && target === els.episodesHeading) target.setAttribute('tabindex','-1');
+    target.focus();
   });
 
   els.position.addEventListener('input', () => {
@@ -317,6 +353,10 @@
   els.audio.addEventListener('timeupdate', () => updateTime());
   els.audio.addEventListener('play', updateToggle);
   els.audio.addEventListener('pause', updateToggle);
+  els.audio.addEventListener('error', () => {
+    els.playbackStatus.textContent = copy[lang].playbackError;
+    updateToggle();
+  });
   els.audio.addEventListener('ended', () => {
     updateToggle();
     updateTime({ announce: true });

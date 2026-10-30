@@ -1310,7 +1310,7 @@
         const matches = cues.filter(cue => cue.audioPath === path && (cue.clipBegin === null || cue.clipBegin <= current) && (cue.clipEnd === null || cue.clipEnd > current));
         const cue = matches.at(-1);
         if (!cue || !cue.textPath) return;
-        const displayed = snippets.get(cue.textPath);
+        const displayed = (cue.textId && book.fragments?.[cue.textPath + '#' + cue.textId]) || snippets.get(cue.textPath);
         if (displayed && els.block.textContent !== displayed) els.block.textContent = displayed;
       };
       audio.addEventListener('timeupdate', updateSynchronizedText);

@@ -1,4 +1,13 @@
+# Solo se despliegan los recursos web. Los proyectos nativos y las herramientas
+# de compilación permanecen en el repositorio, pero no se publican en Pages.
 exclude:
+  - android-native-prototype
+  - ios-app-native
+  - mobile
+  - download-worker
+  - youtube-worker
+  - scripts
+  - tmp
   - mobile/node_modules
   - docs/superpowers
   - test

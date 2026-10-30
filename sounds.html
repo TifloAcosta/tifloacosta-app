@@ -20,6 +20,7 @@
 </script>
 </head>
 <body>
+<a class="skip-link" id="sounds-skip-link" href="#main">Saltar al contenido principal</a>
 <header class="wrap">
   <h1>TifloAcosta App</h1>
   <div class="language-switch" aria-label="Idioma">
@@ -38,6 +39,7 @@
   function apply(lang) {
     document.documentElement.lang = lang;
     document.title = lang === 'en' ? 'Search sounds — TifloAcosta App' : 'Buscar sonidos — TifloAcosta App';
+    document.getElementById('sounds-skip-link').textContent = lang === 'en' ? 'Skip to main content' : 'Saltar al contenido principal';
     es.setAttribute('aria-pressed', String(lang === 'es'));
     en.setAttribute('aria-pressed', String(lang === 'en'));
     try { localStorage.setItem('tifloLang', lang); } catch (error) {}

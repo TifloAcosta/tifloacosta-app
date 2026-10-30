@@ -33,6 +33,9 @@ test('Título de la web e idioma no se confunden con la app nativa', () => {
 
 test('Los enlaces anteriores al libro permanecen funcionales', () => {
   const html = read('index.html');
+  const controller = read('actualidad-core.js');
+  assert.match(controller, /book: 'contact-section'/);
+  assert.doesNotMatch(controller, /'book-section', 'contact-section'/);
   assert.match(html, /book: document\.getElementById\('contact-section'\)/);
   assert.match(html, /const headingId = key === 'book' \? 'book-heading'/);
   assert.match(html, /id="book-buy-print"/);

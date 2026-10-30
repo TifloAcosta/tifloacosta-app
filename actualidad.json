@@ -1,5 +1,29 @@
 [
   {
+    "id": "9to5mac-16be50c3f743d848",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/30/ios-27-2-adds-two-facetime-features-including-a-personal-favorite/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-30T19:22:05.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27.2 adds two FaceTime features, including a personal favorite",
+        "summary": "iOS 27.2 adds new features to Messages , Podcasts , Photos , and more—including some easy-to-miss upgrades to FaceTime. Here’s what’s new. more…",
+        "body": "iOS 27.2 adds new features to Messages , Podcasts , Photos , and more—including some easy-to-miss upgrades to FaceTime. Here’s what’s new.\n\nDual Capture was added to FaceTime in iOS 27 and quickly became one of my favorite features. Rather than having to choose between showing your face or the rear camera view, Dual Capture lets you show both at once.\n\niOS 27.2 expands Dual Capture to work on all video calls, even with groups. Previously the feature was limited to one-on-one calls.\n\nIf you have an iPhone 17 or newer, all you have to do on a video call is hit the ‘Flip’ button, and by default both the front and back camera will be activated.\n\nIt’s a huge upgrade to the FaceTime experience, and especially great if, like in my case, you have young kids running around and want to let grandparents see them and you at the same time.\n\nThe only drawback: everyone in the call needs to have iOS 27, iPadOS 27, or macOS 27 installed.\n\niOS 27.2 makes FaceTime more accessible by adding support for third-party sign language interpreters and live captioning.\n\nInside the three-dot icon, you’ll find a ‘Sign Language’ button that lets you pick an installed VRS (Video Relay Service) app for direct access to an interpreter. The app will appear as a participant tile in the call with a “Waiting for Interpreter” status, then your interpreter’s name will display after they join.\n\nFor third-party live captioning, Apple has a step-by-step support document here that outlines the process. You can also optionally stick with the existing built-in Live Captions feature to have your iPhone add automatic captions. It’s available from Settings ⇾ Apps ⇾ FaceTime ⇾ Live Captions.\n\nIf you have an iPhone Duo, iOS 27.2 also introduced a new Edge Light feature that works across multiple video calling apps, including FaceTime.\n\nEdge Light works just like on the Mac , adding a ring of light around the iPhone Duo display to better illuminate your face on calls. It’s a built-in alternative to using a physical ring light.\n\nTo enable the feature, open Control Center while on a FaceTime call then hit ‘FaceTime Controls’ and tap ‘Edge Light.’ Once enabled, you can adjust settings like the intensity and color temperature.\n\nHave you tried any of iOS 27.2’s new FaceTime features? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "9to5mac-72b3015cfbb52611",
     "type": "news",
     "sourceId": "9to5mac",
@@ -284,31 +308,6 @@
         "title": "The Wikimedia Foundation weighs in on the NYT's case against OpenAI",
         "summary": "The folks behind Wikipedia say that an extreme decision in either direction could threaten the open web.",
         "body": "The folks behind Wikipedia say that an extreme decision in either direction could threaten the open web.\n\nWe may receive a commission on purchases made from links.\n\nThe Wikimedia Foundation has weighed in on the copyright lawsuit launched by The New York Times against OpenAI and Microsoft . The people behind Wikipedia have filed an amicus brief urging nuance in the case, which seeks to decide whether or not OpenAI and Microsoft's use of content published in The New York Times for any purpose, including AI model training, is a violation of copyright law.\n\nThe New York Times says that companies like OpenAI shouldn't be given free reign over any of their published content. OpenAI and Microsoft say that training and deploying AI models based on published data is necessary for technological development and would therefore fall within the definition of fair use.\n\nThe Wikimedia Foundation, however, is seeking a third way. The amicus brief agrees with Microsoft and OpenAI and suggests that a much more restrictive version of fair use could inhibit tech innovation. However, it also says that a ruling in favor of blanket fair use could lead to a closed web where knowledge is weakened due to a \"lack of available secondary source materials.\"\n\nThe platform's alternative position applies fair use to two specific use cases for AI companies. This includes certain model training scenarios and something called retrieval-augmented generation (RAG). This is a technique that optimizes the output of large language models (LLMs) by referencing authoritative knowledge bases outside of its training data. However, the organization does not support RAG if an LLM is regurgitating pre-existing articles without attribution.\n\nAs for the specifics of model training, the Wikimedia Foundation argues that scraping copyrighted content should be considered fair use if it's being used when \"training LLMs that are something new and different from the original sources.\" It is worth noting that Wikipedia itself is considered one of the highest-quality datasets used to train LLMs.\n\n\"A ruling that does not apply fair use principles carefully could threaten the sustainability of free knowledge, and stifle the development of open source technologies, ultimately impacting access to information for everyone in both cases,\" the Wikimedia Foundation's General Counsel Stephen LaPorte wrote. \"The court needs to understand that Wikipedia is created through a collaborative process that requires a strong foundation of open and accessible human knowledge to thrive.\"\n\nA summary judgment in the lawsuit is expected in the near future . This is just one of over a dozen similar cases working their way through the courts, but it could set an important precedent."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-4c6990f2345e69ea",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/30/iphone-duo-here-are-two-tips-for-improving-safari-web-browsing/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-30T14:56:04.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "programas-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iPhone Duo: Here are two tips for improving Safari web browsing",
-        "summary": "iPhone Duo has a lot of software features that are widely praised, but one area commonly seen as an issue is Safari web browsing. Here are two tips for improving the Safari experience on your iPhone Duo. more…",
-        "body": "iPhone Duo has a lot of software features that are widely praised, but one area commonly seen as an issue is Safari web browsing. Here are two tips for improving the Safari experience on your iPhone Duo.\n\nIf you want to make the most of your iPhone Duo screen size when browsing, and your eyesight isn’t a problem, Dylan McDonald recently posted a couple tips he’s found helpful.\n\nHe adds in a follow-up that setting your default website zoom to 85%, in his opinion, makes the size of sites look more natural. And of course, the chief benefit is enabling a wide/desktop-class layout in many cases on the folding display.\n\nYou can change these settings via the following:\n\nI don’t have my iPhone Duo yet, but getting a wider layout for websites has definitely been on my wishlist for the Duo, so I look forward to trying these settings out.\n\nThe outer display Safari layout has been an especially big issue for some iPhone Duo users. That’s because the right-aligned controls take up a lot of space, making websites feel cramped.\n\nApple has even publicly acknowledged it’s investigating ways to improve the outer display Safari experience.\n\nIndie developer Jordi Bruin created his own solution: a Safari extension called ‘Wider.’\n\nWider launched as a free download, but it’s now a $2.99 one-time purchase .\n\nAs the replies to Bruin’s announcement post show, the extension is still a work-in-progress due to some unique edge cases with certain sites.\n\nBut if you’re okay with that, and don’t mind the privacy permissions needed to enable Wider, it could be a solid interim solution until Apple offers a first-party fix.\n\nHow do you feel about the Safari experience on iPhone Duo? Do you have your own tips and tricks? Let us know in the comments."
       }
     },
     "media": null

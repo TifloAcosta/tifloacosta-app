@@ -71,40 +71,91 @@ private fun limitedResponse(url: String, post: JSONObject? = null): String {
     } finally { connection.disconnect() }
 }
 
+data class NativeDownloadItem(val name: String, val url: String, val source: String)
+
 @Composable
 fun NativeDownloadScreen(english: Boolean, initialUrl: String = "") {
     val context = LocalContext.current
+    val scope = rememberCoroutineScope()
     var url by remember(initialUrl) { mutableStateOf(initialUrl) }
     var status by remember { mutableStateOf("") }
+    var analyzing by remember { mutableStateOf(false) }
+    var items by remember { mutableStateOf<List<NativeDownloadItem>>(emptyList()) }
+    var external by remember { mutableStateOf("") }
+
+    fun download(item: NativeDownloadItem) {
+        try {
+            val parsed = Uri.parse(item.url)
+            require(parsed.scheme == "https" && !parsed.host.isNullOrBlank())
+            val safe = item.name.replace(Regex("[^\\p{L}\\p{N} ._()-]"), "_")
+                .take(100).trim('.', ' ').takeIf { it.isNotBlank() && it != ".." }
+                ?: "archivo-descargado"
+            val request = DownloadManager.Request(parsed)
+                .setTitle(safe)
+                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, safe)
+            (context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager).enqueue(request)
+            status = if (english) "Queued in Android Downloads" else
+                "Descarga añadida al gestor de descargas de Android"
+        } catch (_: Exception) {
+            status = if (english) "Could not start download" else "No se pudo iniciar la descarga"
+        }
+    }
+
     Column(verticalArrangement = Arrangement.spacedBy(9.dp)) {
-        Text(if (english) "Direct file download" else "Descargar archivo por enlace",
+        Text(if (english) "Download a file from a link" else "Descargar un archivo desde un enlace",
             style = MaterialTheme.typography.titleMedium)
         OutlinedTextField(url, { url = it.take(2048) }, modifier = Modifier.fillMaxWidth(),
-            label = { Text(if (english) "HTTPS file address" else "Dirección HTTPS del archivo") })
-        Button(modifier = Modifier.fillMaxWidth(), onClick = {
-            try {
-                val parsed = Uri.parse(url.trim())
-                require(parsed.scheme == "https" && !parsed.host.isNullOrBlank())
-                val file = parsed.lastPathSegment?.substringBefore('?')
-                    ?.takeIf { it.length in 2..100 && !it.contains('/') && !it.contains('\\') }
-                    ?: "archivo-descargado"
-                val request = DownloadManager.Request(parsed)
-                    .setTitle(file)
-                    .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                    .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, file)
-                val dm = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-                dm.enqueue(request)
-                status = if (english) "Download added to Android Downloads" else
-                    "Descarga enviada al gestor de descargas de Android"
-            } catch (_: Exception) {
-                status = if (english) "Enter a valid direct HTTPS download link" else
-                    "Introduce un enlace HTTPS directo válido"
+            label = { Text(if (english) "HTTPS file or cloud link" else "Enlace HTTPS de archivo o nube") })
+        Button(enabled = !analyzing, modifier = Modifier.fillMaxWidth(), onClick = {
+            val parsed = Uri.parse(url.trim())
+            if (parsed.scheme != "https" || parsed.host.isNullOrBlank()) {
+                status = if (english) "Enter a valid HTTPS address" else "Introduce una dirección HTTPS válida"
+            } else {
+                analyzing = true
+                items = emptyList()
+                external = ""
+                status = if (english) "Analyzing link" else "Analizando enlace"
+                scope.launch {
+                    try {
+                        val payload = withContext(Dispatchers.IO) {
+                            JSONObject(limitedResponse("https://download.tifloacosta.com/analyze",
+                                JSONObject().put("url", url.trim())))
+                        }
+                        val list = payload.optJSONArray("items")
+                        val found = (0 until (list?.length() ?: 0)).mapNotNull { i ->
+                            val o = list?.optJSONObject(i) ?: return@mapNotNull null
+                            val address = o.optString("url")
+                            if (!MediaLogic.validWebUrl(address)) return@mapNotNull null
+                            NativeDownloadItem(o.optString("name", "Archivo"), address, o.optString("source"))
+                        }
+                        items = found
+                        external = payload.optString("url", url.trim())
+                        status = if (found.isEmpty())
+                            (if (english) "No direct files found; open the source if needed"
+                             else "No se encontraron archivos directos; puedes abrir la fuente")
+                        else if (english) "${found.size} files" else "${found.size} archivos"
+                    } catch (_: Exception) {
+                        status = if (english) "Analyzer unavailable; the original link is preserved"
+                            else "Analizador no disponible; se conserva el enlace original"
+                        external = url.trim()
+                    } finally { analyzing = false }
+                }
             }
-        }) { Text(if (english) "Download" else "Descargar") }
-        Text(if (english)
-            "Cloud links that require authentication should be opened in the provider's application."
-            else "Los enlaces de nubes que requieren autenticación deben abrirse con la aplicación del proveedor.")
-        if (status.isNotEmpty()) Text(status)
+        }) { Text(if (english) "Analyze link" else "Analizar enlace") }
+        Text(status)
+        LazyColumn(modifier = Modifier.heightIn(max = 340.dp)) {
+            items(items, key = { it.url }) { file ->
+                Button(modifier = Modifier.fillMaxWidth(), onClick = { download(file) }) {
+                    Text((if (english) "Download: " else "Descargar: ") + file.name)
+                }
+                if (file.source.isNotBlank()) Text(file.source)
+            }
+        }
+        if (items.isEmpty() && MediaLogic.validWebUrl(external))
+            TextButton(onClick = { nativeExternal(context, external) }) {
+                Text(if (english) "Open original link" else "Abrir enlace original")
+            }
     }
 }
 

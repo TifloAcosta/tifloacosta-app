@@ -18,3 +18,15 @@ const result = (data.generatedApks || []).map((x, i) => ({
 }));
 console.log('PLAY 1.3.9 CODE 21 OUTPUTS: '+JSON.stringify(result));
 if (!result.length) throw new Error('Play generated no APK files for code 21');
+
+for (const key of data.generatedApks || []) {
+  const groups = new Map();
+  for (const entry of key.unprotectedGeneratedSplitApks || []) {
+    const v = String(entry.variantId);
+    if (!groups.has(v)) groups.set(v, []);
+    groups.get(v).push(entry.splitId || entry.moduleName || 'base');
+  }
+  for (const [variant, names] of groups) {
+    console.log('VARIANT '+variant+' COUNT '+names.length+' SPLITS '+names.join(','));
+  }
+}

@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-50-web-identity-contact';
+const CACHE = 'tifloacosta-app-v2-51-web-navigation';
 const NAVIGATION_TIMEOUT_MS = 5000;
 // Resource catalog is refreshed from the network.
 const SHELL = [
@@ -13,7 +13,7 @@ const SHELL = [
   './download-config.js?v=1.1',
   './downloads.js?v=1.4',
   './downloads.css?v=1.1',
-  './actualidad-core.js?v=1.7',
+  './actualidad-core.js?v=1.8',
   './actualidad.js?v=1.4',
   './actualidad-media.js?v=1.1',
   './web-reading.js?v=3.15',

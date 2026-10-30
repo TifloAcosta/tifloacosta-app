@@ -14,6 +14,8 @@ on:
       - 'sounds.html'
       - 'offline.html'
       - 'test/web-contact-identity.test.mjs'
+      - 'test/web-navigation-block3.test.mjs'
+      - 'actualidad-core.js'
       - 'test/web-site-maintenance.test.mjs'
       - 'test/clean-home.test.mjs'
       - 'test/regression.test.mjs'

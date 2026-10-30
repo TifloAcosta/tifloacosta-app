@@ -297,6 +297,14 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     document.querySelectorAll(selector).forEach(upgradeInternalLink);
   });
 
+  // Los controles ya son botones después de la conversión; conservar solo
+  // el primer regreso visible de cada sección de la portada.
+  for (const id of ['resources-view', 'reading-section', 'news-view', 'contact-section', 'privacy-section', 'config-section']) {
+    const section = document.getElementById(id);
+    const controls = [...(section?.querySelectorAll('[data-home-back]') || [])];
+    controls.slice(1).forEach(control => control.closest('p')?.remove());
+  }
+
   const navigationCore = globalThis.TIFLO_ACTUALIDAD_CORE;
 
   function setPageChromeVisible(visible) {
@@ -376,12 +384,14 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     const state = navigationCore.resolveIsolatedView('home', window.location.hash);
     const hero = document.getElementById('home-hero');
     const homeBlocks = document.getElementById('home-blocks');
+    const searchShell = document.getElementById('global-search-shell');
     const home = state.view === 'home';
     const viewIds = ['resources-view', 'reading-section', 'news-view', 'contact-section', 'privacy-section', 'config-section'];
 
     setPageChromeVisible(state.chromeVisible);
     setHidden(hero, !home);
     setHidden(homeBlocks, !home);
+    setHidden(searchShell, !home);
     viewIds.forEach(id => setHidden(document.getElementById(id), state.view !== id));
 
     const leavingHash = previousHomeHash;
@@ -392,7 +402,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         resources: 'home-open-resources',
         reading: 'home-open-reading',
         news: 'home-open-news',
-        book: 'home-open-book',
+        book: 'home-open-contact',
         contact: 'home-open-contact',
         privacy: 'home-open-privacy',
         config: 'home-open-config',

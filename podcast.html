@@ -72,7 +72,9 @@
       <label id="podcast-position-label" for="podcast-position">Posición del episodio</label>
       <input id="podcast-position" type="range" min="0" max="0" step="1" value="0" aria-valuetext="0:00 / 0:00">
     </div>
-    <p id="podcast-time" class="muted" aria-live="polite" aria-atomic="true"></p>
+    <p id="podcast-time" class="muted" aria-live="off"></p>
+    <p id="podcast-playback-status" class="muted" role="status" aria-live="polite"></p>
+    <button id="podcast-back-episodes" type="button">Volver a la lista de episodios</button>
   </section>
 
   <section aria-labelledby="podcast-episodes-heading">
@@ -101,6 +103,6 @@
   </div>
 </div>
 
-<script src="podcast.js?v=1.0"></script>
+<script src="podcast.js?v=1.1"></script>
 </body>
 </html>

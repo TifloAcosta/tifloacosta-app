@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-52-resources-novelties';
+const CACHE = 'tifloacosta-app-v2-53-news-podcast';
 const NAVIGATION_TIMEOUT_MS = 5000;
 // Resource catalog is refreshed from the network.
 const SHELL = [

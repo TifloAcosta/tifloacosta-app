@@ -1281,6 +1281,78 @@
     return audioTools;
   }
 
+  async function useDaisyAudio(file, book, zip) {
+    const tracks = [];
+    for (const path of book.audioFiles) {
+      const entry = zip.file(path);
+      if (!entry) continue;
+      const bytes = await entry.async('blob');
+      const mime = /\\.mp3$/i.test(path) ? 'audio/mpeg' : /\\.m4a$/i.test(path) ? 'audio/mp4' : /\\.wav$/i.test(path) ? 'audio/wav' : 'audio/ogg';
+      tracks.push({ path, url:URL.createObjectURL(new Blob([bytes], { type:mime })) });
+    }
+    if (!tracks.length) throw new Error('daisy-no-supported-audio');
+    try {
+      await useMp3File(new File([new Blob([])], file.name, {type:'audio/mpeg'}));
+      // The MP3 reader supplies accessible playback, seeking, speed and focus.
+      // Replace its temporary empty recording with the DAISY playlist.
+      if (audioObjectUrl) URL.revokeObjectURL(audioObjectUrl);
+      audioObjectUrl = '';
+      const audio = activeAudio;
+      let index = 0;
+      const label = language() === 'en' ? 'DAISY audio chapter' : 'Capítulo DAISY de audio';
+      const controller = document.createElement('div');
+      controller.className = 'reading-daisy-tracks';
+      const prev = document.createElement('button');
+      prev.type = 'button';
+      prev.textContent = language() === 'en' ? 'Previous DAISY track' : 'Pista DAISY anterior';
+      const next = document.createElement('button');
+      next.type = 'button';
+      next.textContent = language() === 'en' ? 'Next DAISY track' : 'Pista DAISY siguiente';
+      const caption = document.createElement('p');
+      caption.setAttribute('aria-live','polite');
+      function choose(nextIndex, autoplay=false) {
+        if (activeAudio !== audio || nextIndex < 0 || nextIndex >= tracks.length) return;
+        index = nextIndex;
+        audio.src = tracks[index].url;
+        audio.load();
+        caption.textContent = `${label} ${index+1} / ${tracks.length}: ${tracks[index].path.split('/').pop()}`;
+        prev.disabled = index === 0;
+        next.disabled = index === tracks.length-1;
+        if (autoplay) void audio.play().catch(() => { els.status.textContent = language()==='en' ? 'Unable to play this DAISY track.' : 'No se puede reproducir esta pista DAISY.'; });
+      }
+      prev.addEventListener('click',()=>choose(index-1,!audio.paused));
+      next.addEventListener('click',()=>choose(index+1,!audio.paused));
+      audio.addEventListener('ended',()=>choose(index+1,true));
+      const oldController = document.querySelector('.reading-daisy-tracks');
+      oldController?.remove();
+      controller.append(prev,next,caption);
+      ensureAudioTools().append(controller);
+      choose(0);
+      const observer = new MutationObserver(()=>{
+        if (activeAudio !== audio) {
+          for (const track of tracks) URL.revokeObjectURL(track.url);
+          observer.disconnect();
+          controller.remove();
+        }
+      });
+      observer.observe(els.reader,{childList:true,subtree:true});
+      audio.addEventListener('emptied',()=>{
+        if (activeAudio !== audio) {
+          for (const track of tracks) URL.revokeObjectURL(track.url);
+          observer.disconnect();
+          controller.remove();
+        }
+      });
+      els.block.textContent = language()==='en' ? 'DAISY audiobook ready.' : 'Audiolibro DAISY preparado.';
+      els.status.textContent = language()==='en'
+        ? 'DAISY audio is available by track. Text/audio synchronization is not yet available.'
+        : 'Audio DAISY disponible por pistas. La sincronización de texto y audio todavía no está disponible.';
+    } catch(error) {
+      for (const track of tracks) URL.revokeObjectURL(track.url);
+      throw error;
+    }
+  }
+
   async function useMp3File(file) {
     await pause();
     setAccessiblePlaybackMode(false);
@@ -1775,8 +1847,8 @@
         }
         throw error;
       }
-      if (!book.hasText) {
-        throw Object.assign(new Error('DAISY audio requires a playlist player'), { code:'daisy-audio-pending' });
+      if (!book.hasText && book.hasAudio) {
+        return { source:'',format:'daisy-audio',model:null,book,zip };
       }
       return { source:book.text, format:'txt',
         model:shared.parseTextDocument(book.text, { title:name, language:language() }) };
@@ -1842,6 +1914,10 @@
         return true;
       }
       const prepared = await documentFromFile(file);
+      if (prepared.format === 'daisy-audio') {
+        await useDaisyAudio(file, prepared.book, prepared.zip);
+        return true;
+      }
       await useDocument(prepared.model, file.name, {
         source: prepared.source,
         format: prepared.format,

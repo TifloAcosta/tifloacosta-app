@@ -41,3 +41,28 @@ test('Mi libro is accessible under Contacto but absent from the start menu', asy
   assert.doesNotMatch(home, /^\s*'book',/m);
   assert.ok(contact.includes("router.navigate('book'"));
 });
+
+test('all main menu destinations are Compose screens and never enter legacy WebView', async () => {
+  const activity = await read('android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativePrototypeActivity.kt');
+  const screens = await read('android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativeSecondaryScreens.kt');
+  assert.doesNotMatch(activity, /onOpenLegacy/);
+  for (const destination of [
+    'SEARCH', 'NEW_CONTENT', 'DOWNLOADS', 'FAVORITES',
+    'PODCAST', 'CONTACT', 'PRIVACY', 'SETTINGS'
+  ]) {
+    assert.match(activity, new RegExp('section = NativeDestinations\\.' + destination));
+  }
+  assert.match(activity, /NativeSecondaryScreen\(/);
+  assert.match(screens, /NativeDownloadScreen\(/);
+  assert.match(screens, /NativePodcastScreen\(/);
+  assert.match(screens, /NativeContactScreen\(/);
+  assert.match(screens, /NativeSettingsScreen\(/);
+});
+
+test('native migration keeps the original web preferences and favorites untouched', async () => {
+  const migration = await read('mobile/android/app/src/main/java/com/tifloacosta/app/NativeWebStateMigration.java');
+  assert.match(migration, /tiflo-mobile-favorites-v1/);
+  assert.match(migration, /tiflo-mobile-preferences-v1/);
+  assert.match(migration, /tiflo-mobile-notifications-opt-in-v1/);
+  assert.doesNotMatch(migration, /localStorage\.clear\(|localStorage\.removeItem\(/);
+});

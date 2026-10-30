@@ -4,6 +4,10 @@ import { readFile } from 'node:fs/promises';
 
 const source = async path => readFile(new URL(path, import.meta.url), 'utf8');
 
+const readShareManifests = async () =>
+  (await source('../android/app/src/main/AndroidManifest.xml')) +
+  (await source('../../android-native-prototype/library/src/main/AndroidManifest.xml'));
+
 test('older books are listed read-only and open with original IDs, marks and progress', async () => {
   const legacy = await source('../../android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativeLegacyLibraryCheck.kt');
   const native = await source('../../android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativeTifloLector.kt');
@@ -166,7 +170,7 @@ test('public video section exposes native YouTube account actions without requir
 });
 
 test('share manifest advertises OCR images, legacy Office and DAISY archives', async () => {
-  const manifest = await source('../android/app/src/main/AndroidManifest.xml');
+  const manifest = await readShareManifests();
   for (const mime of [
     'image/jpeg', 'image/png', 'image/webp', 'image/heic',
     'application/pdf', 'application/epub+zip', 'application/msword',

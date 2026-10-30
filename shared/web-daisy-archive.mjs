@@ -69,15 +69,15 @@ export async function parseDaisyArchive(zip, {title='DAISY', language='es'}={}) 
   };
   for(const smil of ordered){
     const markup=await zip.file(smil).async('string');
-    for(const match of markup.matchAll(/<par\\b[^>]*>([\\s\\S]*?)<\\/par>/gi)){
+    for(const match of markup.matchAll(/<par\b[^>]*>([\s\S]*?)<\/par>/gi)){
       const block=match[1];
-      const textMatch=block.match(/<text\\b[^>]*\\bsrc=["']([^"']+)["']/i);
-      const audioMatch=block.match(/<audio\\b([^>]*)>/i);
+      const textMatch=block.match(/<text\b[^>]*\bsrc=["']([^"']+)["']/i);
+      const audioMatch=block.match(/<audio\b([^>]*)>/i);
       if(!audioMatch) continue;
       const attrs=audioMatch[1];
-      const attr=name=>attrs.match(new RegExp('\\\\b'+name+'\\\\s*=\\\\s*["\\']([^"\\']+)["\\']','i'))?.[1]||'';
+      const attr=name=>attrs.match(new RegExp("\\b"+name+"\\s*=\\s*[\\\"']([^\\\"']+)[\\\"']","i"))?.[1]||'';
       const audioPath=find(resolve(smil,attr('src')));
-      if(!audioPath || !/\\.(?:mp3|m4a|wav|ogg)$/i.test(audioPath))continue;
+      if(!audioPath || !/\.(?:mp3|m4a|wav|ogg)$/i.test(audioPath))continue;
       const source=textMatch?.[1]||'';
       const textPath=source?find(resolve(smil,source)):null;
       const textId=source.includes('#')?decodeURIComponent(source.split('#').slice(1).join('#')):'';

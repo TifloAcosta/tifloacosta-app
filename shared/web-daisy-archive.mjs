@@ -57,7 +57,34 @@ export async function parseDaisyArchive(zip, {title='DAISY', language='es'}={}) 
     const text=strip(body);
     if(text) sections.push({path,text});
   }
+  // Capture the SMIL text/audio associations in playback order.
+  // Clip bounds are retained for timed synchronization without guessing.
+  const timeline=[];
+  const clock=value=>{
+    const input=String(value||'').replace(/^npt=/i,'').replace(/s$/i,'');
+    if (!input) return null;
+    const parts=input.split(':').map(Number);
+    if (!parts.length || parts.some(value=>!Number.isFinite(value)||value<0)) return null;
+    return parts.reduce((seconds,part)=>seconds*60+part,0);
+  };
+  for(const smil of ordered){
+    const markup=await zip.file(smil).async('string');
+    for(const match of markup.matchAll(/<par\\b[^>]*>([\\s\\S]*?)<\\/par>/gi)){
+      const block=match[1];
+      const textMatch=block.match(/<text\\b[^>]*\\bsrc=["']([^"']+)["']/i);
+      const audioMatch=block.match(/<audio\\b([^>]*)>/i);
+      if(!audioMatch) continue;
+      const attrs=audioMatch[1];
+      const attr=name=>attrs.match(new RegExp('\\\\b'+name+'\\\\s*=\\\\s*["\\']([^"\\']+)["\\']','i'))?.[1]||'';
+      const audioPath=find(resolve(smil,attr('src')));
+      if(!audioPath || !/\\.(?:mp3|m4a|wav|ogg)$/i.test(audioPath))continue;
+      const source=textMatch?.[1]||'';
+      const textPath=source?find(resolve(smil,source)):null;
+      const textId=source.includes('#')?decodeURIComponent(source.split('#').slice(1).join('#')):'';
+      timeline.push({audioPath,textPath,textId,clipBegin:clock(attr('clipBegin')),clipEnd:clock(attr('clipEnd'))});
+    }
+  }
   const supportedAudio=audioFiles.filter(name=>/\.(?:mp3|m4a|wav|ogg)$/i.test(name));
   if (!sections.length && !supportedAudio.length) throw new Error('daisy-empty');
-  return {title,language,sections,audioFiles:supportedAudio,hasText:sections.length>0,hasAudio:supportedAudio.length>0,text:sections.map(section=>section.text).join('\n\n')};
+  return {title,language,sections,audioFiles:supportedAudio,timeline,hasText:sections.length>0,hasAudio:supportedAudio.length>0,text:sections.map(section=>section.text).join('\n\n')};
 }

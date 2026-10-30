@@ -65,6 +65,7 @@ private data class SharedReaderFiles(val serial: Int, val uris: List<Uri>)
 class NativePrototypeActivity : ComponentActivity() {
     private var serial = 0
     private var pendingSharedFiles by mutableStateOf<SharedReaderFiles?>(null)
+    private var pendingSharedText by mutableStateOf<String?>(null)
 
     @Suppress("DEPRECATION")
     private fun acceptSharedFiles(incoming: Intent?) {
@@ -80,6 +81,10 @@ class NativePrototypeActivity : ComponentActivity() {
         incoming.data?.let(collected::add)
         val files = collected.distinct().filter { it.scheme == "content" || it.scheme == "file" }.take(40)
         if (files.isNotEmpty()) pendingSharedFiles = SharedReaderFiles(++serial, files)
+        if (files.isEmpty() && incoming.action == Intent.ACTION_SEND) {
+            pendingSharedText = incoming.getStringExtra(Intent.EXTRA_TEXT)
+                ?.trim()?.take(2048)?.takeIf { it.isNotEmpty() }
+        }
     }
     val youTubeAccount by lazy { NativeYouTubeAccount(applicationContext) }
     private var oauthCallback by mutableStateOf<Uri?>(null)
@@ -121,6 +126,8 @@ class NativePrototypeActivity : ComponentActivity() {
                     onRequestedSectionHandled = { requestedSection = null },
                     sharedFiles = pendingSharedFiles,
                     onSharedFilesHandled = { pendingSharedFiles = null },
+                    sharedText = pendingSharedText,
+                    onSharedTextHandled = { pendingSharedText = null },
                     onSignIn = {
                         val url = youTubeAccount.startAuthorization()
                         startActivity(Intent(Intent.ACTION_VIEW, url))
@@ -206,6 +213,8 @@ private fun PrototypeHome(
     onRequestedSectionHandled: () -> Unit,
     sharedFiles: SharedReaderFiles?,
     onSharedFilesHandled: () -> Unit,
+    sharedText: String?,
+    onSharedTextHandled: () -> Unit,
     onSignIn: () -> Unit
 ) {
     val context = LocalContext.current
@@ -239,6 +248,15 @@ private fun PrototypeHome(
     }
     LaunchedEffect(sharedFiles?.serial) {
         if (sharedFiles != null) section = PrototypeNavigation.READER
+    }
+    var initialSharedText by remember { mutableStateOf("") }
+    LaunchedEffect(sharedText) {
+        if (!sharedText.isNullOrBlank()) {
+            initialSharedText = sharedText
+            section = if (sharedText.startsWith("https://")) NativeDestinations.DOWNLOADS
+                else NativeDestinations.SEARCH
+            onSharedTextHandled()
+        }
     }
     var mediaIndex by rememberSaveable { mutableIntStateOf(0) }
     var mediaSourceIndex by rememberSaveable { mutableIntStateOf(0) }
@@ -337,6 +355,7 @@ private fun PrototypeHome(
         NativeSecondaryScreen(
             destination = section, english = english,
             catalog = loaded.catalog, media = mediaLoad.items,
+            initialText = initialSharedText,
             onBack = { section = PrototypeNavigation.HOME },
             onOpenVideo = { item ->
                 val url = item.url.ifBlank { "https://www.youtube.com/watch?v=" + item.id }

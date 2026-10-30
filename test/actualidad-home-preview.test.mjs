@@ -44,7 +44,7 @@ test('Actualidad home labels are bilingual', async () => {
 
 test('service worker keeps Actualidad scripts cached and its catalogs live', async () => {
   const worker = await read('sw.js');
-  assert.match(worker, /'\.\/actualidad-core\.js\?v=1\.7'/);
+  assert.match(worker, /'\.\/actualidad-core\.js\?v=1\.8'/);
   assert.match(worker, /'\.\/actualidad\.js\?v=1\.4'/);
   assert.match(worker, /'\.\/actualidad-media\.js\?v=1\.1'/);
   assert.match(worker, /'\/actualidad\.json'/);

@@ -6,10 +6,14 @@
     <application>
         <activity
             android:name="com.tifloacosta.nativeprototype.NativePrototypeActivity"
-            android:label="TifloAcosta Nativa"
+            android:label="TifloAcosta"
             android:exported="true"
             android:theme="@android:style/Theme.Material.Light.NoActionBar"
             android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />

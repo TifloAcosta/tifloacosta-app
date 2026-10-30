@@ -12,7 +12,7 @@ const read = async path => {
 
 test('Android registers text sharing and multi-file TXT reading targets separately', async () => {
   const [manifest, mainActivity] = await Promise.all([
-    read('android/app/src/main/AndroidManifest.xml'),
+    (async () => (await read('android/app/src/main/AndroidManifest.xml')) + (await read('../android-native-prototype/library/src/main/AndroidManifest.xml')))(),
     read('android/app/src/main/java/com/tifloacosta/app/MainActivity.java')
   ]);
   assert.match(manifest, /android\.intent\.action\.SEND/);

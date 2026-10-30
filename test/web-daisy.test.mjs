@@ -60,4 +60,5 @@ test('SMIL parallel cues retain text fragments and audio time ranges',async()=>{
  assert.equal(book.timeline[0].clipEnd,8);
  assert.equal(book.timeline[0].textId,'para1');
  assert.equal(book.timeline[0].textPath,'page.html');
+ assert.equal(book.fragments['page.html#para1'],'Read with audio.');
 });

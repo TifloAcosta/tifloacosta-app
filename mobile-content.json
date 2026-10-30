@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-30T07:10:34.399Z",
+  "generatedAt": "2026-10-30T13:37:55.204Z",
   "resources": [
     {
       "kind": "resource",
@@ -6153,23 +6153,6 @@
       "categories": [
         "nvda",
         "windows",
-        "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "accessible-android-b624ee148531b299:en",
-      "sourceId": "accessible-android-b624ee148531b299",
-      "lang": "en",
-      "title": "What’s New In TalkBack 17.1",
-      "summary": "Google is rolling out version 17.1 of the TalkBack screen reader. Here’s what the new version brings. Selection Mode That Works Only With Chrome It…",
-      "body": "Published 20 October 2026 by Kareen Kiwan\n\nGoogle is rolling out version 17.1 of the TalkBack screen reader . Here’s what the new version brings.\n\nTable of Contents\n\nIt is now possible to select text outside edit boxes, but the feature is quite limited. Although Google states in the feature overview that it works on webpages, the feature is only supported in the Google Chrome browser. I tested it with Vivaldi, which is a Chromium-based browser like Google Chrome, but text selection didn’t work there.\n\nIn Chrome, you should be able to select all the text on a page or start selection mode using the assigned gesture, (by default, double-tapping and holding with two fingers). Once selection mode is active, you can select text using reading controls, as you would in edit boxes. Select all and Start selection mode are available as screen reader actions, so you can also invoke them using actions.\n\nWhen I tested the feature on a webpage in Chrome, I was far from impressed. The implementation is still unreliable. Moving the focus to the next item while selecting text is not reflected in the text I cycle through using reading controls. Although the focus moves automatically when the end of the current focus is reached while selecting, the movement is not smooth and could result in having to perform the gesture several times without any text being spoken or selected. Additionally, I couldn’t find a way to pause selection without losing what has already been selected. This means you cannot select different parts of a page and append them to a single selection.\n\nMoreover, I noticed that occasionally, I may start selection mode and hear the announcement that I am selecting by character, only to find that after I swipe down to select the next character, a larger portion of the text is selected instead.\n\nOne additional thing worth mentioning regarding selection is that it is now possible to assign gestures and keyboard shortcuts to read the selected text or to move the cursor to the start and end of the selection.\n\nTalkBack 17.1 adds a new section to Sound and Feedback settings that allows you to select a different voice from the one you are currently using. You can also assign a gesture to open this section directly.\n\nAs is customary with Google , the feature only works with Google’s own TTS engine. When testing it with other engines, numbered voices are shown, but pressing Preview on any of them results in the TTS engine reading the text using the voice you are currently using, as if the text were simply passed to the engine. Voice selection has no effect. With Google TTS, however, voices can be changed without any issues, although I noticed that voice previews did not work during my testing.\n\nThe settings section includes an option to install more languages, which allows you to open other engines on your device. However, selecting Acapela, for example, opened the Acapela app without having any practical effect on voice selection.\n\nFor people who have been hoping to change TTS engines on the fly when a TTS engine crashes, you will be disappointed.\n\nDuring the new features tour, TalkBack tells you that you can toggle Guided Vision through a button or later using the Guided Vision shortcut in the TalkBack menu. Using either of these methods does nothing. Trying the Guided Vision shortcut in the TalkBack menu several times returned me to the window I was in without toggling anything.\n\nIt is now possible to assign any TalkBack action to a braille display command. The list now extends beyond the actions included in TalkBack 17.0 to include all assignable TalkBack actions. To customize braille commands, go to Braille display settings, then Braille display commands. There, you can find all the actions that can be assigned to braille display commands, including those that are already assigned.\n\nYou can change a command if it is already assigned or assign a new command if none is assigned. You can also reset a command to its default setting or remove the assigned command.\n\nIn TalkBack 17.1, there are more fields and controls in which browse mode is turned off when using Smart Browse mode. It is also easier to take advantage of a website’s built-in keyboard shortcuts, such as using the arrow keys to expand an item in a tree view. I haven’t tested how Smart Browse mode works in the new version compared to the previous version.\n\nIt is now possible to assign a gesture to spell the current focus using Phonetic spelling, so you hear the phonetic example after hearing the letter, such as T, Tango. It is also possible to trigger Phonetic spelling by default through the Action + R + C keyboard shortcut.\n\nMore information will now be provided to help distinguish between characters on Chinese, Japanese, and Korean keyboards when using a physical keyboard.\n\nThe bug that prevented the Find Voice command from finding matching items has been fixed in the new release.\n\nPublished in General",
-      "sourceName": "Accessible Android",
-      "originalUrl": "https://accessibleandroid.com/whats-new-in-talkback-17-1/",
-      "publishedAt": "2026-10-20T12:46:07.000Z",
-      "categories": [
-        "android",
-        "apps-accesibles",
         "tecnologia-accesibilidad"
       ]
     }

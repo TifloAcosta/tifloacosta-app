@@ -5,6 +5,10 @@ on:
     paths:
       - 'index.html'
       - 'app.js'
+      - 'shared/content-parity.mjs'
+      - 'scripts/validate-content-parity.mjs'
+      - 'scripts/build-mobile-content.mjs'
+      - 'test/content-parity-block7.test.mjs'
       - 'manifest.webmanifest'
       - 'sw.js'
       - 'videos.html'

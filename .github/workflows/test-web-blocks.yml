@@ -40,4 +40,4 @@ jobs:
         with:
           node-version: '22'
       - name: Comprobar navegación, identidad y regresiones de la web
-        run: node --test test/web-site-maintenance.test.mjs test/web-contact-identity.test.mjs test/clean-home.test.mjs test/regression.test.mjs test/pwa-startup.test.mjs
+        run: npm test

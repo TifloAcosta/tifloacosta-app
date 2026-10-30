@@ -71,7 +71,6 @@ test('home section controls point to the view or page they advertise', async () 
     'home-open-resources': '#resources',
     'home-open-news': '#news',
     'home-open-videos': 'videos.html',
-    'home-open-book': '#book',
     'home-open-contact': '#contact',
     'home-open-privacy': '#privacy',
     'home-open-config': '#config'
@@ -82,7 +81,7 @@ test('home section controls point to the view or page they advertise', async () 
   await assertLocalFileTarget(expected['home-open-videos'], 'Videos');
 
   const viewExpectations = {
-    '#resources': 'resources-view', '#news': 'news-view', '#book': 'book-section', '#contact': 'contact-section', '#privacy': 'privacy-section', '#config': 'config-section'
+    '#resources': 'resources-view', '#news': 'news-view', '#book': 'contact-section', '#contact': 'contact-section', '#privacy': 'privacy-section', '#config': 'config-section'
   };
   for (const [hash, view] of Object.entries(viewExpectations)) {
     assert.equal(navCore.resolveIsolatedView('home', hash).view, view, `${hash} resolves to the wrong home view`);

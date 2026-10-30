@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-30T13:37:55.204Z",
+  "generatedAt": "2026-10-30T14:13:21.588Z",
   "resources": [
     {
       "kind": "resource",
@@ -5525,6 +5525,182 @@
   "news": [
     {
       "kind": "news",
+      "id": "techcrunch-7b89926856867df0:en",
+      "sourceId": "techcrunch-7b89926856867df0",
+      "lang": "en",
+      "title": "North Korean hackers blamed for stealing record $6.3B in Binance breach",
+      "summary": "Hackers working for North Korea are suspected of hacking a Binance employee's laptop, which allowed the theft of billions in crypto.",
+      "body": "Hackers working for the North Korean regime have been blamed for a record cryptocurrency heist following a cyberattack at crypto exchange Binance . The hackers stole at least $6.3 billion in crypto from the company’s wallets, though about half of that amount was frozen as the stolen crypto traveled across various blockchains, according to security researchers.\n\nThe breach is by far the largest known theft of crypto in history, though the incident has not been confirmed yet to be resolved, and the amount of crypto stolen may change.\n\nIn a post on X , Binance said its initial investigation showed that the hackers broke into the company’s network after targeting a “compromised” Binance engineer’s laptop, which “allowed an attacker to gain access to a service container and submit unauthorized withdrawal transactions.”\n\nBinance said it has seen no evidence of a leak of its private keys, which would grant the hacker near-unfettered control over the company’s stores of crypto.\n\nThe crypto exchange — the world’s largest — said it has now suspended all deposits and withdrawals while its investigation into the breach continues. TechCrunch reported on Thursday that the exchange had paused withdrawals across some of its blockchains.\n\nBinance said “user funds are safe,” but did not immediately provide proof of this claim. The company said it will “publish an updated proof of reserves once the remediation is complete.”\n\nIt’s unclear how the hack went down or under what circumstances the employee’s laptop was compromised, but it’s not uncommon for security incidents to stem from the use of compromised software on employee devices.\n\nSoftware is generally built from many components, including open-source projects, which hackers regularly target , compromise and modify in order to steal data from devices that the affected software is installed on. Other times, malware bundled with regular-looking apps and games can allow hackers to steal usernames, passwords and session tokens from infected computers, which may let them log in as if they were a legitimate employee.\n\nBinance will face questions about why the company’s security allowed a single employee’s laptop to access systems capable of controlling billions of dollars in funds.\n\nSpokespeople for Binance did not respond to a request for comment about the hack. TechCrunch has also asked the company who, if anyone, performed a security audit of Binance’s network and systems prior to the hack. Companies regularly ask third-party companies to stress-test their security to identify weaknesses that could be exploited by attackers, but it’s unclear if Binance sought such a review.\n\nSecurity researchers at TRM Labs, a blockchain intelligence and forensic company, attributed the breach to North Korean hackers, and called it the “largest hack in history.”\n\nResearchers describe the network of hackers, known in the cybersecurity industry as TraderTraitor, as a North Korean cell focused almost exclusively on stealing crypto from large companies and exchanges. This group was also blamed for the now-second-largest heist on record, a $1.4 billion theft from crypto exchange Bybit in 2025 .\n\nAccording to TRM, the theft of Binance’s billions in crypto took about 20 minutes.\n\nBlockchain security firm Elliptic also attributed the Binance theft to North Korean hackers. Elliptic said some of the stolen funds ended up in the same wallet that was used in a previous cyberattack on crypto exchange Bitget earlier this year, in which hackers stole $351 million .\n\nThe U.S. government and its allies have long warned about the threat from North Korea, which remains cut off from the U.S. and the global financial system for its ongoing development of its nuclear weapons program. Researchers say the breakaway country’s sole motivations are to steal as much crypto as possible in order to continue developing its sanctioned weapons of mass destruction.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/30/north-korean-hackers-blamed-for-stealing-record-6-3b-in-binance-breach/",
+      "publishedAt": "2026-10-30T14:00:25.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-a2629d2d0bffd067:en",
+      "sourceId": "techcrunch-a2629d2d0bffd067",
+      "lang": "en",
+      "title": "DoorDash said it’s only received ‘several hundred’ orders from AI agents",
+      "summary": "DoorDash said that it is open to working with third-party agent makers",
+      "body": "There’s a big uproar about AI agents taking over commerce and orders, but that might not be the case just yet. Delivery company DoorDash revealed during its third-quarter earnings call that it has only seen “several hundred” orders from third-party agents like Muse, Instinct, Fo, and others. For comparison, the company said in its 2025 report it completes an average of 3 million deliveries daily.\n\n“I would say that this [using agents to order] is something that is still a very dynamic area. And my take on all things technology is you never want to fight gravity. But at the same time, you don’t want to be delusional,” DoorDash CEO Tony Xu said in an answer to an analyst’s questions about the topic. “What I mean by that is if you look at where AI agents are today, we’re seeing maybe several hundred orders in total from some of these third-party agents,” he said.\n\nXu mentioned that users are still predominantly placing orders through DoorDash’s app. However, the company wants to learn more about agentic use cases and develop a healthy relationship with third-party agent makers. He added that, in the future, there could be an opportunity for it to advertise within these agents.\n\nDoorDash has its own agents, including a text-to-order agent it launched in September , a CLI agent introduced in July , and a chatbot called Ask DoorDash it launched it June, which allows users to place orders through prompts and photos . The company also released an MCP to enable ordering from other chatbots for corporate ordering.\n\nThe space of agent-based ordering is evolving, as websites are still deciding whether to allow them to access their content or not. Amazon has been blocking such personal agents, but Walmart has laid out a red carpet for them in order to snag some business from its competitors .",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/30/doordash-said-its-only-received-several-hundred-orders-from-ai-agents/",
+      "publishedAt": "2026-10-30T13:54:25.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-2b8c49d05247b94a:en",
+      "sourceId": "9to5mac-2b8c49d05247b94a",
+      "lang": "en",
+      "title": "iPadOS 27.2: Two new features just upgraded your iPad",
+      "summary": "iPadOS 27.2 arrived this week as the latest noteworthy iPad software update, here are two new features it includes. more…",
+      "body": "iPadOS 27.2 arrived this week as the latest noteworthy iPad software update, here are two new features it includes.\n\nSiri AI is a major improvement over the old Siri, and I’m using it all the time on my iPad—often with a CMD + Space keyboard shortcut since Siri and Spotlight are now integrated.\n\nIn iPadOS 27.2, Apple added another convenient way to interact with Siri that first debuted on the Mac in macOS Golden Gate.\n\nWhen you select text in iPadOS 27.2 via a trackpad or mouse, there’s a new Siri contextual popup that appears to the left of your selection. If you hover over the Siri icon with your cursor, it instantly expands to offer an ‘Ask Siri’ text field.\n\nThis makes it quick and easy to ask Siri about whatever you’ve highlighted. And if you’re in the writing process, the Siri popup even has suggestions like ‘Proofread,’ ‘Rewrite,’ and ‘How does this sound?’ so you can get help with just a click.\n\nSiri AI also includes several new upgrades that make it more capable. Per Apple’s release notes :\n\niPads make great video devices whether you’re an adult or a kid. And if you share an iPad with a partner or child, the Apple TV app has a welcome new addition: user profiles.\n\niPadOS 27.2 brings over the same profiles feature that tvOS already offered on Apple TV 4K.\n\nWhen you open the Apple TV app on iPad, you’ll see a new profile selection screen at startup. From here, you can choose who’s watching and the TV app will automatically update its queue, playback history, and content recommendations based on your selection.\n\nIf you’re a parent, profiles will take content restrictions into account. So when your child’s profile is active, they’ll only see films and TV shows that match the age settings you’ve previously set.\n\nAnd if you don’t want to use profiles, it’s easy to disable them from showing on startup with a quick tap.\n\nFor more new features available in iPadOS 27.2, see our coverage here .\n\n* Buy iPad with 15% discount from Apple refurbished",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/30/ipados-27-2-two-new-features-just-upgraded-your-ipad/",
+      "publishedAt": "2026-10-30T13:21:36.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "programas-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-ee9980393262498d:en",
+      "sourceId": "the-verge-ee9980393262498d",
+      "lang": "en",
+      "title": "Sam Altman sympathizes with mathematicians, but says OpenAI’s math onslaught won’t stop",
+      "summary": "After months of bombarding mathematicians with a relentless stream of AI-generated results, OpenAI CEO Sam Altman says he sympathizes with researchers struggling to make sense of it all. But he has no intention of stopping - and hints there could be much more to come from the company's stockpile of discoveries. \"I think, on net, […]",
+      "body": "After months of bombarding mathematicians with a relentless stream of AI-generated results, OpenAI CEO Sam Altman says he sympathizes with researchers struggling to make sense of it all. But he has no intention of stopping - and hints there could be much more to come from the company's stockpile of discoveries.\n\n\"I think, on net, the world deserves to understand how the universe works,\" Altman said during an episode of the Cheeky Pint podcast released Thursday. \"But I do have empathy for the method.\"\n\nHis comments mark one of the first times the OpenAI chief has directly acknowledged the company's impact on mathematicians, following a strin …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1023054/altman-cheeky-pint-ai-math-interview",
+      "publishedAt": "2026-10-30T13:01:14.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-7e4d187c5e859d4e:en",
+      "sourceId": "techcrunch-7e4d187c5e859d4e",
+      "lang": "en",
+      "title": "Can AI data centers be mass-produced like cars? This startup aims to find out",
+      "summary": "Runware is building a factory to turn out prefabricated AI data centers on an assembly line. The real test will be whether it can deliver at that scale.",
+      "body": "AI infrastructure company Runware is making news again, just months after unveiling the Sonic Inference Pod, a modular data center built in a factory and shipped to customers ready to install. Now the company has bigger plans. It told TechCrunch it wants to build a factory that assembles these pods on a production line, as if they were cars.\n\nThe idea isn’t entirely new. Companies like Crusoe and Schneider Electric also sell prefabricated pods, but Runware says it can ship its pods faster.\n\nFlaviu Radulescu, co-founder and CEO of Runware, told TechCrunch that the company plans to scale production at its Romania-based factory to 30 megawatts of data center capacity per day by 2028, or nearly 1 gigawatt per month. That’s a whole lot of capacity: at that pace, Runware would produce roughly as much in a year as the entire U.S. was expected to add in data center power this year, about 10 gigawatts . But it also reflects an industry-wide push to deploy data centers faster more efficiently.\n\nNvidia announced, for example, the Vera Rubin AI factories and the DSX POD earlier this year. Both are also meant to make it faster and easier for companies to build their own AI data centers. The difference with Runware, though, is that it says it has actually built a factory rather than just designed the infrastructure that would let others build one.\n\nRadulescu said Runware will gradually increase production starting next year and that it already has two factories — one it has used for a few years to build the pods, and a second it started building earlier this year. The second is expected to be finished within months and go online early next year.\n\nRunware will manufacture the modular data centers on an assembly line. Customers can provide their own site to assemble them, or Runware can find one for them. Radulescu said Runware aims to bring the pods online within 48 hours. That time covers installation and set-up time, not build time. A pod once took three weeks to build but it will soon take one day as it ramps up production, says the company. Runware will provide spare parts if components fail. Customers can also rent compute from Runware or supply their own GPUs and pay a monthly fee for the pods and operations. Power and internet are charged separately, he said.\n\nThe pods can also be customized to customer preferences, he said. The pods have a standard design, but can be configured to meet customer requirements and the latest GPU chips. Chips can take a long time to arrive after they’re ordered, which works in Runware’s favor. “Our pod delivery times are also shorter than current GPU lead times, giving us time to adapt the infrastructure to the hardware being ordered,” he said. “For new GPU generations, our in-house hardware team can design, build, and test components itself, allowing us to adapt quickly.”\n\nRight now, these are all plans — execution is the test. The factory will need a lot of people, inventory, supply chain logistics, and money. There are cautionary tales about reinventing manufacturing, notably the electric vehicle startup Arrival, once valued at over $13 billion , which struggled to mass-produce electric vehicles cost-effectively compared with traditional plants. Runware, which has raised more than $60 million to date, said it plans to raise a Series B, but for now it is finishing and launching the factory with the $50 million Series A it raised last December.\n\n“Our cost structure is very different,” Radulescu said, explaining how Runware seeks to avoid Arrival’s fate. “We do have headcount and materials cost,” he continued. “But our factory staff is cost-effective relative to the value of deploying compute for AI.” He also said that designing its own systems and buying widely available, affordable parts helps keep costs low. “We’ve brought in a highly experienced plant manager from the automotive industry to work alongside our chief of hardware and help us get that execution right.”\n\nSourcing components could also be a challenge. Though Runware says it designs and builds its own cooling and other pod systems with standard components, some parts, such as pumps and fans, come from Germany, and it still depends on Nvidia for networking. Still, Runware claims it has received $1 billion in committed interest for its Sonic pods since it began offering them to outside customers a month ago, “representing over 20 megawatts, which we’re now working to deliver,” Radulescu said.\n\nData centers in the U.S. and abroad have come under fire for how much energy they consume and how that affects the grid and other resources. When pressed, Radulescu said his company’s pods only need power and an internet connection. They’ll use a closed-loop liquid cooling system with air-cooled radiators to release heat, so they don’t really need a water connection. “We’re working with power providers on a site pipeline covering 397 megawatts, with potential to expand to 1.2 gigawatts,” he said, referring to its list of planned sites and adding that the company is deploying its modular data centers on sites that are much smaller than those used by hyperscalers like Amazon, Microsoft, and Google.\n\nThe sites, he continued, typically already have power, so they shouldn’t further strain the grid or disrupt the community. The pods also run “completely silent up to temperatures of 86 degrees Fahrenheit. We use energy from renewable sources whenever possible,” he continued. “We are actively working on expanding our network of energy providers and sites. We’re aiming to have renewables as our main energy source.”\n\nNext, Runware will bring its new factory online early next year, then expand to the U.S. and other regions worldwide. Modular systems are the future and will soon become “the standard for large AI deployment,” Radulescu said.\n\n“Customers should be able to plan a hyperscale data center around factory-built pods from the beginning and have it working in months instead of years,” he added.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/30/can-ai-data-centers-be-mass-produced-like-cars-and-online-in-48-hours-this-startup-aims-to-find-out/",
+      "publishedAt": "2026-10-30T13:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-3f928d9612d5143a:en",
+      "sourceId": "engadget-3f928d9612d5143a",
+      "lang": "en",
+      "title": "Meta quietly launches an AI fashion app for virtually trying on clothes",
+      "summary": "Meta has launched an AI fashion app called Style Sketch in Indonesia, Singapore and Thailand.",
+      "body": "For now, it's a limited launch in parts of Asia.\n\nMeta has released yet another AI app with very limited availability. A few weeks ago, it launched Waddle World , a Tamagotchi-like game that the company describes as a \"daily journal disguised as a pet,\" in the Philippines. Now, it has introduced an AI fashion app called Style Sketch in Indonesia, Singapore and Thailand on Android and iOS .\n\nThe app's existence was first reported by social media consultant Matt Navarra on X. Style Sketch can connect to your Facebook and Instagram accounts to build a virtual closet from photos you've shared on social media. Or you can upload existing photos from your camera roll or snap new pictures of your clothes if you don't want to link your accounts.\n\nFrom there, you can get outfit combination suggestions from your wardrobe. You can also try on different combinations on the virtual model that matches your body type and skin tone. To get suggestions, you can pick any clothing item in your closet to build outfits around it, tell the app the weather for the day, or ask it to create outfit plans for your trip.\n\nAs TechCrunch notes, Meta chief Mark Zuckerberg said earlier this year that the company is releasing many more apps, since AI has made them much easier to develop. These apps will also help the company get more people to use and train their AI systems. Meta isn't the first one to release an AI-powered fashion app or feature, however. Google's AI Search has had a virtual clothes try-on feature since 2025, and it added a \" Wardrobe \" feature to Photos earlier this year that creates a catalog of your items by scanning your library. More recently, OpenAI also introduced a ChatGPT feature that lets you upload your photos and the clothes you want to try on to see how they look on you.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2302003/meta-quietly-launches-an-ai-fashion-app-for-virtually-trying-on-clothes/",
+      "publishedAt": "2026-10-30T12:05:36.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apps-accesibles",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-1a6c35b18eff3eda:en",
+      "sourceId": "ars-technica-1a6c35b18eff3eda",
+      "lang": "en",
+      "title": "2027 Nissan Rogue Hybrid: Drives like an EV, but there's no plug involved",
+      "summary": "Nissan’s series hybrid e-Power system has been retuned for American roads.",
+      "body": "Nissan has a new version of its best-selling Rogue SUV, and it’s launching the model here with the latest version of its e-Power hybrid system, which Ars tested back in February. Most of the hybrid cars you can buy today are parallel hybrids, which means that they have an internal combustion engine and an electric motor, both of which drive some or all of the wheels—everything works in parallel. But there’s another approach. Instead of connecting the engine to the wheels via a transmission, it can act as a generator and charge the traction battery, which in turn powers the electric motor. Since the engine and motor work in series, this is known as a series hybrid.\n\nThat’s mostly how the Chevrolet Volt worked. As does Honda’s hybrid CR-V . Well, mostly; engineers worked out it was more efficient for those cars' gasoline engines to directly drive the wheels at highway speeds, something that to this day makes a certain subset of hybrid car enthusiast irrationally angry. If you know anyone like that in your life, send them to wherever the nearest Nissan dealership is, because the 2027 Rogue Hybrid is exactly what they’ve been asking for.\n\nUnder the hood, with its crisp shut line and slim horizontal lights that give me something of a Range Rover vibe, there’s a 1.5 L, three-cylinder turbocharged direct-injection engine that generates 148 hp (110 kW). It only revs to 5,200 rpm because it’s optimized to charge the battery, not cope with the various loads of an engine connected to a gearbox and the wheels. That also allows the engine to operate at a rather impressive 42 percent thermal efficiency—we would need to look at Formula 1 engines to find higher.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/cars/2026/10/2027-nissan-rogue-hybrid-drives-like-an-ev-but-theres-no-plug-involved/",
+      "publishedAt": "2026-10-30T12:00:18.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-1a8e6a676d663ae2:en",
+      "sourceId": "engadget-1a8e6a676d663ae2",
+      "lang": "en",
+      "title": "Lenovo Googlebook 15 review: Your Android phone's new best friend",
+      "summary": "Despite Lenovo providing excellent hardware for Google's new laptop platform, Googlebook OS will only impress Android die-hards.",
+      "body": "Lenovo’s hardware is great, but Googlebook OS still needs some polishing.\n\nThe launch of a new operating system presents a lot of challenges, but also the opportunity to install significant upgrades to the status quo. With its new family of notebooks , Google is trying to combine the best features of Android and Chrome OS on a line of PCs that are smarter, easier to use and more mobile-friendly than anything that's come before. However, while Lenovo has done an excellent job of providing premium hardware for the Googlebook 15 , Google's latest laptop platform suffers from a number of growing pains you often get from first-gen software.\n\nFor die-hard Android fans, some of these issues might be worth overlooking for the increased synergy you'll get between your phone and laptop. But for other users, it's probably worth waiting for a more mature version of Googlebook OS before making the switch.\n\nThe design and hardware on this Googlebook is so good I'm actually a little bit annoyed that Lenovo hasn't made a Windows equivalent. It features a 15.3-inch OLED display with 120Hz refresh rate, a typical brightness of 500 nits and HDR True Black 1000 certification. It's bright, it's colorful and delivers pretty much everything you could ask for on a laptop in this price range.\n\nThat said, I'd argue the rest of the Googlebook 15's design is even better. Lenovo's chassis is made from a mix of plastic and carbon fiber, with bits of magnesium-aluminum alloy used in certain areas, like its lid, for increased strength and lightness. Then Lenovo covered the entire system in a \"silk-touch\" finish that makes the whole laptop feel like a piece of unglazed porcelain. It's surprisingly luxurious and comes with the added benefit of reducing the appearance of fingerprints. And despite having a larger screen, the Lenovo Googlebook 15 actually weighs less than a 14-inch MacBook Pro (2.85 pounds vs. 3 pounds).\n\nElsewhere, Lenovo's Googlebook has punchy up-firing quad speakers with Dolby Atmos flanking the keyboard, a decent selection of ports (2x USB-C, 1 USB-A, HDMI and 3.5mm audio) and a massive haptic touchpad. The keyboard has just enough bounce to make typing quite pleasant, while tweaks like the Google key make performing OS-related shortcuts just a bit easier. There's even a built-in camera with a physical shutter (plus a separate fingerprint sensor) that supports facial recognition, so signing in is friction-free.\n\nThe final distinguishing characteristic of all Googlebooks is the lightbar on their lids, which changes color depending on a handful of factors. In normal use, the LEDs are white, but when charging, the light reflects how much charge the laptop has (red means under 20 percent, yellow means 20 to 59 percent, etc.). Alternatively, during startup or when talking to Gemini, you'll get special animations across an assortment of colors. The one issue is that when compared to the Pixel 11 Pro's HiLight indicator , you generally don't interact with a Googlebook when its lid is closed. This makes the Gemini LEDs more useful to someone sitting opposite the laptop than whoever is actually using it.\n\nOne of the nice things about the Googlebook platform is that Google stipulates that all participating systems come with at least 16GB of RAM, so you won't have to worry about running out of memory while doing basic productivity tasks like you do on some budget machines . And when combined with an Intel Core Ultra 5 325 chip and 256GB of base storage, the result is a totally proficient system for handling all of your core computing needs.\n\nThe bigger issue for the Googlebook 15 is that because you're encouraged to install the same kind of mobile apps you'd use on a phone, you'll often have more performance than you can really use. It's either that or you'll be faced with apps that haven't been properly optimized to take advantage of the hardware. A good example of this is Photoshop, because the version you download from Google's Play Store is the mobile edition instead of the full desktop app you'd normally install on Windows or Mac PCs. Furthermore a lot of today's Android apps are designed to be run on ARM-based chips instead of silicon with x86 architecture, like the one in Lenovo's machine, which can result in more bugs or stuttery performance. However, at least on tests like Geekbench 7, the Googlebook 15's multi-core CPU score of 9,011 is just as good if not better than what you'd get on a similarly priced PC — like a midrange Dell XPS 13 (7,124 with an Intel Core 5 320 chip).\n\nThe nice thing about being a mix between an Android phone and Chromebook is that Googlebook OS feels immediately familiar and is very easy to use. You get notifications and quick settings in the top right, a row of icons in a taskbar along the bottom and drawer for all your apps. From there, it's super simple to do stuff like side-by-side multitasking — all you need to do is open an app and drag it to the left or the right and let the OS automatically snap the window in place. For general productivity, web browsing or checking social feeds, there's plenty of stuff to like about Googlebook OS' streamlined approach to basic computing.\n\nWhere things get even more interesting is with some of Google's special features, the most important of which is cross-device sharing. I'm kind of glad I waited a little bit to do this review because right at launch, a lot of Google's \" Better Together \" features weren't available with Samsung phones. That changed shortly after release and this collection of tools is the closest thing Googlebooks have to a secret weapon.\n\nPairing your Googlebook to your Android handset works a lot like the Windows Phone Link app, except that it's better in almost every way. Setup is as easy as scanning a QR using your phone. From there, you can do stuff like transfer things between devices simply by dragging and dropping (via the Files app), seamlessly cast apps from your phone to the Googlebook, sync notifications between devices or pick up where you were last browsing on your phone. In a lot of ways, Google has created the kind of cohesive ecosystem that Mac and iPhone users often say is one of the best things about Apple's family of products, but centered around Android instead of iOS.\n\nThat said, there are a number of quirks and limitations that still need work. Transferring files, for example, is currently limited to things under 200MB. For anything bigger, you'll need to rely on the Quick Share tool. And while it works, casting things from your phone to the Googlebook is a bit stuttery and less responsive than I'd like. It's fine for checking messages or apps with a relatively static UI, but if you try to cast a game, there's a noticeable drop in framerate and smoothness.\n\nSome of Googlebook OS' other more unique tools include the Magic Pointer, which makes it easy to select objects so you can ask Gemini about them or transform highlighted pictures into AI-generated drawings. Now, I'll be honest, creating cute stickers or using Gemini to whip up things like party invites isn't something I do regularly, so I sort of had to go out of my way to test these features. But your mileage may vary. Meanwhile, Rambler might be the best voice transcription tool out now, so it's nice to see Google port that over from the Pixel 11 family. And it's so good, there's a dedicated button for it on the laptop's keyboard. You can also use Gemini (and Gemini Notebook) to find, organize and summarize all sorts of different files and docs, but that's sort of par for the course these days.\n\nYou can even use AI to create your own custom widgets, but like a lot of machine learning-based tools, the results are hit or miss. At first, I asked the Googlebook to make a basic dashboard showing the live score for all the NBA games, but that didn't work. So then I paired the list down to just a handful of teams and it was able to display the correct scores for various matchups, but the UI remained rather barebones and a bit confusing to look at.\n\nUnfortunately, it feels Googlebook OS still needs a bit of polishing and extra developer support to make it really shine. In addition to often being limited to the mobile version for many apps, the various tiers of app compatibility can get pretty confusing. If you try to install an app from the Play Store, you'll notice that there are five different levels of optimization ranging from \"Made for desktop\" to \"Compatible for desktop\" or simply \"Better on the website.\" And if a certain app hasn't been tested, it may be labeled as \"Built for mobile.\"\n\nI do appreciate that all of these tags show up front and center on the listing for each app, but it still results in a lot more trial and error that most people probably want to deal with. Some apps work great, some apps suffer from display glitches and some apps are saddled with smaller issues like awkwardly placed UI elements or not being able to maximise a window to fullscreen. So even though you have a big, beautiful display, you'll still have bits of your desktop wallpaper peeking out from both sides of an app.\n\nIn a vacuum, the 70Whr battery inside the Googlebook 15 is decently sized. However, because this system has the largest display out of any of the first batch of machines powered by Google's new OS, overall longevity is just okay.\n\nSince there still aren't a ton of desktop-level benchmarks available for Googlebooks at the moment, I decided to perform our usual smartphone battery test on it instead. This involves local video playback to drain the battery from 100 percent to zero, where Lenovo's machine lasted eight and a half hours. That might seem okay until you compare it to something like an XPS 13, which hit 15:56 while running PCMark 10's more demanding Modern Office rundown test. Thankfully, the Googlebook 15 fared a bit better during everyday use, where it survived a full eight-hour workday (including a number of tests and benchmarks) and still had 20 percent left in the tank.\n\nThe Googlebook 15 is a tale of two technologies. On one hand, the hardware Lenovo built is great. It features a vivid 15-inch display with a 120Hz refresh rate, an Intel Core 5 CPU with plenty of performance, surprisingly good speakers, plenty of ports and a huge haptic touchpad. Meanwhile, its design is the icing on the cake, offering a streamlined chassis with a super smooth eggshell finish that begs to be touched. And while its battery life could be a touch better, the rest of the machine is so nice, its merely average longevity is easy to gloss over.\n\nHowever, the same can't be said for Googlebook OS. The sheer number of different app compatibility levels can be hard to keep track of and, at least right now, a lot of software simply doesn't run as smoothly as I'd really like. So even though the Googlebook 15 is more than capable of serving as a general productivity machine, being limited mostly to mobile versions of apps means the laptop doesn't feel as powerful or versatile as a similarly-priced Windows or Mac alternative. For people wary of first-gen gadgets, that mantra seems to hold doubly true for first-gen OSes.\n\nIf you're a hardcore Android user though, there's a lot to like about how well Googlebooks and Google-based phones work together. Handing off tasks and files from your phone to the laptop is a breeze, and the continuity you get between apps and notifications makes bouncing between two devices surprisingly seamless. And while I personally don't get a ton of value out of every Gemini feature, they can come in handy in a pinch. I adore Lenovo's chassis and I think Googlebook OS has a lot of potential, but right now I feel like it's best to revisit this platform once more of its initial kinks have been ironed out.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2301498/lenovo-googlebook-15-review/",
+      "publishedAt": "2026-10-30T12:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "android"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-fedc145c974ddbe3:en",
+      "sourceId": "the-verge-fedc145c974ddbe3",
+      "lang": "en",
+      "title": "The touchscreen MacBook Pro is just a MacBook Pro with a touchscreen",
+      "summary": "Apple's long-awaited touchscreen MacBook Pro is finally here. I got to try this MacBook that, according to the last two Apple CEOs, shouldn't exist. The most surprising thing is how normal it is. The MacBook Pro with PROLED XDR Display (what a name) has one of the nicest screens I've seen on a laptop. The […]",
+      "body": "Apple's long-awaited touchscreen MacBook Pro is finally here. I got to try this MacBook that, according to the last two Apple CEOs , shouldn't exist. The most surprising thing is how normal it is.\n\nThe MacBook Pro with PROLED XDR Display (what a name) has one of the nicest screens I've seen on a laptop. The current Mini LED MacBook Pros are great, but the OLED has those even inkier blacks. It also gets super bright, with incredibly rich colors and infinite contrast. Apple calls it a \"reference-caliber display,\" which is a very Apple-y marketing term, but it walks the walk by being the first laptop display with support for Apple CMF 2026 color …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1022628/apple-macbook-pro-proled-xdr-touchscreen-oled-impressions-totally-normal",
+      "publishedAt": "2026-10-30T12:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-99cb3c2ece0870b3:en",
+      "sourceId": "the-verge-99cb3c2ece0870b3",
+      "lang": "en",
+      "title": "Maine’s data center revolt will decide who controls the Senate",
+      "summary": "Maine Sen. Susan Collins, a Republican, was midway through defending her record during the final debate of the midterms when an audience member cut her short. \"I'm terrified,\" a man shouted. \"AI data centers are destroying our climate. They are poisoning our water.\" Collins brushed off the outburst, tying the man to her Democratic challenger, […]",
+      "body": "Maine Sen. Susan Collins, a Republican, was midway through defending her record during the final debate of the midterms when an audience member cut her short.\n\n\"I'm terrified,\" a man shouted. \"AI data centers are destroying our climate. They are poisoning our water.\" Collins brushed off the outburst, tying the man to her Democratic challenger, Troy Jackson. But the fear echoing through the auditorium wasn't so easily dismissed. Just days before voters head to the polls, the rapid expansion of resource-hungry data centers has exploded into one of Maine's most volatile campaign issues.\n\nMaine drew national headlines in April when the state Le …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1021080/maine-senate-race-susan-collins-ai-data-centers",
+      "publishedAt": "2026-10-30T11:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-a11493a80a470152:en",
+      "sourceId": "engadget-a11493a80a470152",
+      "lang": "en",
+      "title": "Senators are looking into 'serious privacy risks' with Meta's AI glasses",
+      "summary": "US senators have asked Meta to explain how it's mitigating 'serious' privacy risks with its AI glasses.",
+      "body": "'Meta's smart glasses have increasingly been implicated in disturbing invasions of privacy.'\n\nUS Senators Ron Wyden (D-Or) and and Edward Markey (D-Ma) are investigating \"serious privacy and safety risks\" around Meta's AI smart glasses. \"Meta's smart glasses have increasingly been implicated in disturbing invasions of users' and bystanders' privacy,\" the pair wrote in a letter to Mark Zuckerberg , adding that Meta launched the product even after identifying risks to bystander privacy.\n\nThe senators highlighted multiple incidents of Meta's glasses being used in \"disturbing\" invasions of privacy. It cited both 404 Media and BBC articles about men secretly filming women with Meta's \"pervert glasses\" while harassing them, then posting the recordings to social media. It also noted that according to other reports and a lawsuit, Meta's AI contractors said they reviewed footage captured by the eyewear showing people undressing and engaging in sexual activity.\n\nThe senators requested that Meta respond to specific questions about accidental camera activation and recording-indicator tampering. They also want to know if the glasses blur faces and license plates for certain AI interactions, like Meta does on Facebook and Instagram. It asked Meta to explain the circumstances that imagery is made accessible to employees or contracts, or when it's used to train AI models. Finally, citing Meta's own documents, it asked the company whether it conducted detailed human rights due diligence and safety testing on its glasses before releasing them. It requested those responses by Thanksgiving (November 26, 2026).\n\nThe list of complaints about Meta's glasses is long. On top of the ones cited by Wyden and Markey, users have said that the glasses were recording their conversations without consent following a firmware update. They've also been spotted on ICE agents during raids, and the New York City Police's counterterrorism unit reportedly raised surveillance concerns about the devices in January this year . Earlier in October, California Governor Gavin Newsom vetoed a bill that would have banned people from using wearables to secretly record others in private areas of business.\n\nHowever, Wyden and Markey seem more determined to hold the social media giant's feet to the fire. \"Meta's professed commitment to privacy and preventing intimate image abuse rings hollow if the company cannot demonstrate meaningful steps to prevent its own products and practices from facilitating those harms,\" the senators told Zuckerberg.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2301968/senators-looking-into-serious-privacy-risks-with-meta-ai-glasses/",
+      "publishedAt": "2026-10-30T10:08:13.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "conticgo-fcd30c75c926dffe:es",
       "sourceId": "conticgo-fcd30c75c926dffe",
       "lang": "es",
@@ -5558,22 +5734,6 @@
     },
     {
       "kind": "news",
-      "id": "techcrunch-61e7672d1d7303dc:en",
-      "sourceId": "techcrunch-61e7672d1d7303dc",
-      "lang": "en",
-      "title": "You don’t need to believe in a god to get a religious exemption from using AI at work",
-      "summary": "David Durman, a University of Kentucky administrator, recently earned a religious exemption from using AI in the workplace.",
-      "body": "Pope Leo XIV has decried AI as a threat to human dignity , but it’s not just the devoutly faithful who might worry about how AI squares with their beliefs. David Durman, a nontheistic humanist, recently secured a religious exemption from using AI in the workplace.\n\n“Humanism is a collection of beliefs about the human experience and how humans interact with the world,” Durman, a University of Kentucky administrator, told TechCrunch. It centers on “human well-being and flourishing, both individually and collectively … and implores a person to try to improve both their well-being and their flourishing as well as the others around them.”\n\nAs he watched AI grow more popular in daily life, Durman sought out the American Humanist Association (AHA) — a nonprofit advancing secular humanism — to investigate how he could gain legal protections against having to use AI at work. He believes that using the technology runs counter to his beliefs.\n\n“The way we become moral actors for ourselves and for others is through the active application of our minds, and the diminishing of that [through AI use] is going to necessarily have a negative impact on our ability to do so,” he said, reflecting on how overreliance on AI might affect critical thinking.\n\nIn a statement published by the AHA earlier this week, Durman wrote, “AI is interfering with people’s ability to earn a living, the environmental costs spell disaster for humanity and our planet, and its supplanting and theft of human creativity threaten elements of our culture like art and literature that make society flourish.”\n\nHumanism is not anti-religious, but it tends to appeal to people who are skeptical of a god or other supernatural power yet still seek a scientific and moral framework to ground themselves in.\n\n“Concern about AI and human dignity can run through several different faiths and traditions, whether that’s Catholic teachings, or Universalism, or Humanism, and we want Humanists or nontheists to know that they fall into these categories — that they are also protected by the law at work,” Alexandria Huiskens, staff attorney at the AHA, told TechCrunch.\n\nDurman is the first humanist to secure workplace accommodations that allow him to abstain from AI use, and one of the first people to publicly discuss their pursuit of these protections. He was inspired to seek them when he read that Erin Maus , a Unitarian Universalist and software engineer, was able to secure similar protections for herself.\n\n“For me, this was about me and my convictions,” Durman said. “I’m obviously not trying to tell people how to think or feel … But I do hope that it encourages people who have similar concerns to pursue not necessarily religious exemption, but pursue their concerns to the best of their ability where they feel is the most appropriate.”\n\nUniversity of Kentucky spokesperson Jay Blanton told TechCrunch that the institution reviews requests for religious accommodations on an individual basis, considering the employee’s job responsibilities and the circumstances of the request.\n\n“In this case, the university determined that an accommodation could be provided while allowing the employee to continue performing the essential functions of their position,” Blanton said in a statement. “As technology and job responsibilities evolve, accommodations may be reviewed to ensure they remain reasonable and workable.”\n\nMaus’ situation is especially unusual, since it has become rare for software engineers to write code without any AI assistance. But in Durman’s administrative role, in which he supports researchers applying for grants, he has not been required to use AI at work. Like many workers across fields, some of his colleagues and leadership have recommended that employees try out these tools, so he sought to secure his exemption now, in case the suggestion becomes a mandate in the future.\n\n“I hope that if [others] have similar feelings, that they feel encouraged to pursue some kind of resolution,” Durman said.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/29/you-dont-need-to-believe-in-a-god-to-get-a-religious-exemption-from-using-ai-at-work/",
-      "publishedAt": "2026-10-30T01:20:48.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "9to5mac-12815643be8fe230:en",
       "sourceId": "9to5mac-12815643be8fe230",
       "lang": "en",
@@ -5588,69 +5748,6 @@
         "tecnologia-general",
         "android",
         "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-b49fac5a2672a568:en",
-      "sourceId": "techcrunch-b49fac5a2672a568",
-      "lang": "en",
-      "title": "AWS will be a $1T business, Jassy says — but first, it will spend big",
-      "summary": "Amazon wants to be the king of AI cloud computing and become the first $1 trillion revenue business. But to do that it will have to continue on its capex spending spree, its CEO said Thursday.",
-      "body": "Andy Jassy has made it known that he believes AWS can be a trillion-dollar revenue business. During Amazon’s quarterly earnings call on Thursday, he repeated this ambition.\n\n“What we’re building at Amazon is unlike anything that’s ever been seen before. There has never been a business with a trillion dollars of annual revenue,” he said.\n\nHowever, before the cloud business gets there, Amazon is going to have ramp up its capital expenditures to build out the infrastructure necessary to support that blossoming business.\n\n“We still expect 2026 cash capex of approximately $220 billion — the majority for AWS — and expect to spend meaningfully more in 2027, with a clear line of sight to attract its financial returns,” Jassy revealed on Thursday.\n\nAmazon’s big spending on its AI infrastructure buildout has been an ongoing source of concern for investors this year. Indeed, during Thursday’s call, Wall Street analysts repeatedly asked Jassy to explain the spending, the signals that the growth really will come, and the profit margins expected.\n\nJassy told them it was all money well spent because the e-commerce giant planned to capitalize on a historic moment in global cloud demand driven by AI. AWS revenue increased 39 percent from the year-ago quarter, a trend of steady growth for the sixth straight quarter .\n\nAnd the CEO forecast on the call that it would increase by 40% not just next year, but in 2028, too.\n\n“AWS is a $184 billion annualized revenue run-rate business, and yet the opportunity remains extraordinary,” the CEO enthused. “With our continued pace of innovation, new core and AI functionality, enterprises wanting to run their core and AI workloads in AWS, and the amount of capacity that we’re adding each year, we believe that AWS can grow north of 40 percent in each 2027 and in 2028, and be a trillion-dollar revenue business in the next five to 10 years.”\n\nJassy added that the company was “in the very early days” of AI adoption by the enterprise and said that, so far, the “strategy is working.”\n\nLater, when questioned why the investment needed to grow AWS was so substantial, Jassy characterized the AI boom as a “once in a lifetime opportunity” that required, and was worth, such a big financial commitment now.\n\n“We’re going to invest to continue being the leader,” he said. “We can fund this plan, and I think it will forever change the size of Amazon. It will forever change our revenue.”\n\nInvestors, however, remained concerned. Shares were down about 6% on Thursday in after-market trading.\n\nThe AI boom has been a mixed blessing for the cloud industry, since the AI services that undergird the boom are supported by cloud infrastructure. Like Amazon, other cloud providers are spending big but also earning big. Microsoft, for instance, just posted yet more record-breaking revenue growth, driven largely by its cloud business. It, too, has spent a bundle .",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/29/aws-will-be-a-1t-business-jassy-says-but-first-it-will-spend-big/",
-      "publishedAt": "2026-10-29T23:42:22.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-ebdf99e5a1c68ff5:en",
-      "sourceId": "the-verge-ebdf99e5a1c68ff5",
-      "lang": "en",
-      "title": "Intel says it’s selling every affordable laptop chip it can make",
-      "summary": "During Intel's latest earnings call, CEO Lip-Bu Tan said that demand for its budget-focused Wildcat Lake chips \"is outstripping supply.\" According to CFO David Zinsner, the chips are now sold out. Zinsner said Intel has \"seen significant growth in Wildcat Lake. It's coming exactly at the right time because it's cost-optimized and we're seeing a […]",
-      "body": "During Intel's latest earnings call , CEO Lip-Bu Tan said that demand for its budget-focused Wildcat Lake chips \"is outstripping supply.\" According to CFO David Zinsner, the chips are now sold out. Zinsner said Intel has \"seen significant growth in Wildcat Lake. It's coming exactly at the right time because it's cost-optimized and we're seeing a lot of focus in that regard.\"\n\nAs shortages of RAM and other components have driven up PC prices over recent months, Intel's Wildcat Lake chips have been appearing in new lower-cost Windows laptops on par with the MacBook Neo, like the new Dell XPS 13 or the HP Omnibook 5 14 . Wildcat Lake laptops like …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1022911/intel-wildcat-lake-sold-out-ram-shortage",
-      "publishedAt": "2026-10-29T23:42:21.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-96311dc83290ed6e:en",
-      "sourceId": "9to5mac-96311dc83290ed6e",
-      "lang": "en",
-      "title": "Report: Apple expected to ship up to 1.5 million OLED touchscreen MacBook Pros in 2027",
-      "summary": "A new report from TrendForce explores Apple’s impact on the OLED notebook market following the launch of its first touchscreen MacBook Pro, and the company’s own shipment prospects for 2027. Here are the details. more…",
-      "body": "A new report from TrendForce explores Apple’s impact on the OLED notebook market following the launch of its first touchscreen MacBook Pro, and the company’s own shipment prospects for 2027. Here are the details.\n\nApple yesterday announced the new touchscreen MacBook Pro, which features the same tandem OLED technology it first introduced with the M4 iPad Pro in 2024.\n\nWith two OLED layers stacked on top of each other, the technology delivers higher brightness than conventional single-layer OLED displays, while maintaining the deep blacks, high contrast ratios, and power efficiency that OLED is known for.\n\nAnd while yesterday’s announcement made it official, Apple’s first touchscreen Mac has long been rumored through leaks, reports, and supply chain analyses.\n\nIn September 2025, for instance, The Elec reported that Samsung Display was preparing to begin mass production of 14-inch and 16-inch OLED panels for Apple’s MacBook Pro in the second quarter of 2026, with an estimated annual output of 2–3 million units.\n\nTwo months later, TrendForce predicted that OLED notebook market share would reach up to 12% between 2027 and 2028, partly driven by Apple’s expected adoption of the technology.\n\nThen, earlier this year, TrendForce published an OLED roadmap predicting that Apple would introduce OLED displays to the MacBook Pro lineup in 2026, followed by the MacBook Air in 2029 ( pushed back from 2027 ).\n\nNow, TrendForce has published a new report with new shipment forecasts for Apple’s OLED MacBook Pro and the broader OLED notebook market.\n\nAccording to the firm, Apple is expected to ship between 1.2 million and 1.5 million units of the new MacBook Pro in 2027. Meanwhile, global OLED notebook shipments are projected to “grow nearly 40% YoY in 2026, followed by another increase of more than 40% in 2027.”\n\nFrom the report:\n\nUntil now, the OLED notebook market has been driven primarily by Windows-based brands such as Lenovo, HP, and ASUS, which have gradually expanded their OLED offerings across different price segments. Apple’s arrival is expected to give the market additional momentum, encouraging brands to prioritize OLED models in their product roadmaps while strengthening consumer acceptance of the technology. This, in turn, could pave the way for broader OLED adoption in notebook displays.\n\nTrendForce also notes that the “new MacBook Pro’s premium starting price of US$2,899 for the 14-inch model, coupled with its initial availability alongside existing Mini-LED models, could temper near-term replacement demand.”\n\nAs for Apple’s first OLED MacBook Air, now expected to debut in 2029, TrendForce says LG Display, BOE, and TCL CSOT are currently competing to become display suppliers for the upcoming model, as the companies continue developing their OLED manufacturing capabilities.\n\nFinally, TrendForce projects that global OLED notebook shipments will reach 46.6 million units by 2030, though year-over-year growth will slow to 30.8%, following a peak of 42.8% in 2028.\n\nTo read TrendForce’s full report, follow this link .",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/29/report-apple-expected-to-ship-up-to-1-5-million-oled-touchscreen-macbook-pros-in-2027/",
-      "publishedAt": "2026-10-29T22:37:53.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-15e6e2a236b1b468:en",
-      "sourceId": "the-verge-15e6e2a236b1b468",
-      "lang": "en",
-      "title": "Reddit’s CEO says Google’s AI Mode ‘does not drive traffic’",
-      "summary": "Reddit CEO Steve Huffman said in an earnings call today that Google's AI-powered search modes do not help with traffic to the platform, echoing problems facing other websites and publishers. As part of its Q3 2026 earnings, Reddit revealed that search traffic in October has \"dropped by more than 1 million referrals on average per […]",
-      "body": "Reddit CEO Steve Huffman said in an earnings call today that Google's AI-powered search modes do not help with traffic to the platform, echoing problems facing other websites and publishers . As part of its Q3 2026 earnings, Reddit revealed that search traffic in October has \"dropped by more than 1 million referrals on average per week,\" and he attributes part of the company's struggles with Google traffic to how AI Mode and AI Overviews change the search experience.\n\n\"The reality is, AI Mode does not drive traffic,\" Huffman says. \"Not for us, and not to anybody, as far as I know. That's just a fundamental shift in how Google works. It used t …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1022848/reddit-ceo-google-ai-mode-traffic",
-      "publishedAt": "2026-10-29T22:19:32.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
       ]
     },
     {
@@ -5672,21 +5769,6 @@
     },
     {
       "kind": "news",
-      "id": "techcrunch-31842dfe035a2154:en",
-      "sourceId": "techcrunch-31842dfe035a2154",
-      "lang": "en",
-      "title": "Fan-fiction site Archive of Our Own (AO3) could be offline for up to 4 weeks after security incident",
-      "summary": "The site has such a passionate user base that, within two hours of the announcement, its status page's posts had garnered millions of views (and much panicked commentary) across social media.",
-      "body": "Posted:\n\nArchive of our Own (AO3), the popular site where fans publish and read stories about their favorite characters and worlds, has bad news for its community. After going offline for what was supposed to be routine overnight maintenance, the site says it could stay online for almost a whole month.\n\nAO3 did not initially share details about what caused the outage, but published a longer statement hours after announcing that the site would likely be down for two to four weeks.\n\n“Earlier today, we detected evidence of a security incident on AO3,” the statement reads . “We are still in the early stages of response to this security incident and determining its scope. AO3 will remain down while we continue investigating and addressing what has been found so far.”\n\nAO3 is a project of the nonprofit Organization for Transformative Works (OTW), which relies on volunteers and donations to keep the site afloat. The site has such a passionate user base that, within two hours of the announcement that it would go offline, its status page’s posts had garnered millions of views (and much panicked commentary) across social media.\n\n“While we currently don’t believe that the user database was stolen, we are also unable to rule it out. The AO3 database contains account information that may include your username, email address, IP address, and a hashed version of your password,” the OTW added.\n\nThough AO3 stores user passwords by using an industry-standard hashing technique, the site recommended that as a precaution, users should change their passwords on any other sites where they may have used the same password.\n\nSome fans may suspect this issue is related to last week’s “ PHP Armageddon ,” when tools from OpenAI and Google Wiz uncovered two critical flaws in PHP, the programming language that runs the behind-the-scenes software of about 70% of the internet . But AO3 is not among that majority. Instead, the site is built on a different framework (a toolkit for running websites), Ruby on Rails, so the outage is unlikely to be related.\n\nOTW and AO3 did not reply to requests for comment.\n\nUpdated, 10/29/26, 9:45 PM ET, after OTW published a statement about the nature of the outage.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/29/fan-fiction-site-archive-of-our-own-could-be-offline-for-up-to-4-weeks/",
-      "publishedAt": "2026-10-29T20:43:56.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "ars-technica-6dffddcca40287af:en",
       "sourceId": "ars-technica-6dffddcca40287af",
       "lang": "en",
@@ -5699,21 +5781,6 @@
       "categories": [
         "tecnologia-general",
         "windows"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-22225b24399ab6d1:en",
-      "sourceId": "the-verge-22225b24399ab6d1",
-      "lang": "en",
-      "title": "Rivian’s R2 is officially its best-selling vehicle",
-      "summary": "Rivian reported its third quarter earnings of 2026, providing us a closer look at the company's financial health as it ramps up production of its all-important R2 electric vehicle - which is now, for the first time, outselling all of Rivian's other EVs. Rivian said it brought in $2.155 billion in revenue, a 38 percent […]",
-      "body": "Rivian reported its third quarter earnings of 2026, providing us a closer look at the company's financial health as it ramps up production of its all-important R2 electric vehicle - which is now, for the first time, outselling all of Rivian's other EVs.\n\nRivian said it brought in $2.155 billion in revenue, a 38 percent increase compared to the $1.558 billion in Q3 2025. Of that amount, $1.55 billion came from automotive revenue, which is up 36 percent year over year. Comparatively, the company reported $605 million from software and subscription services, a 45 percent increase year over year. As EV sales slow down, the company is seeking to …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/transportation/1022420/rivian-q3-earnings-r2-sales-volkswagen-software",
-      "publishedAt": "2026-10-29T20:02:00.000Z",
-      "categories": [
-        "tecnologia-general"
       ]
     },
     {
@@ -5778,22 +5845,6 @@
         "windows",
         "tecnologia-accesibilidad",
         "jaws"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-97739203a83b423a:en",
-      "sourceId": "ars-technica-97739203a83b423a",
-      "lang": "en",
-      "title": "Google admits AI search makes less money, but it's fixing that with more ads",
-      "summary": "Google's negative cash flow balloons to -$9.06 billion, and stock price tumbles following Q3 earnings.",
-      "body": "Google parent Alphabet reported its Q3 financial results on Wednesday afternoon, showing a healthy rise in revenue for the months of July to September. But the company's stock price has taken a beating, marking one of the largest post-earnings drops in its history. It comes down to several troubling aspects of the new report, including an admission by the company that AI search isn't earning as much as organic search, and despite that, Google expects to spend even more on AI next year.\n\nThe company took in almost $128 billion in Q3 2026, earning more than $26 billion in net income. These may sound like good numbers, but financial markets are not impressed. While revenue is up 25 percent versus last year, net income is almost $9 billion lower. As of this story's publication, the stock price is down almost 12 percent, and it was down about 13 percent earlier in the day.\n\nWhile revenue was up 25 percent year over year, analysts expected more. Google reported earnings per share of $2.12, but the consensus projection ahead of Wednesday was $3.02. Google's Cloud products actually beat expectations, crossing $30 billion in revenue. That's about a billion more than analyst guesses.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/gadgets/2026/10/google-admits-ai-search-makes-less-money-but-its-fixing-that-with-more-ads/",
-      "publishedAt": "2026-10-29T16:24:55.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
       ]
     },
     {

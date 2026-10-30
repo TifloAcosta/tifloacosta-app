@@ -24,6 +24,8 @@
 
         </activity>
 
+        <receiver android:name=".NativePushConsentReceiver" android:exported="false" />
+
         <service
             android:name=".reading.ReadingAudioService"
             android:exported="true"

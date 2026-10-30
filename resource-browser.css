@@ -1,0 +1,7 @@
+/* Navegación de Recursos: filtros de la categoría seleccionada. */
+.resource-controls { margin-top:1rem; }
+.resource-filter-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr)); gap:1rem; margin:.75rem 0 1rem; }
+.resource-filter-row > div { min-width:0; }
+#resource-selected-category { font-weight:700; margin:0 0 .7rem; }
+#resource-change-category { width:auto; }
+#news-load-more { margin-top:.8rem; }

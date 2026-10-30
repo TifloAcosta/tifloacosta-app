@@ -28,3 +28,22 @@ test('DAISY rejects unrelated ZIP archives and unsafe external references',async
  assert.equal(book.sections.length,1);
  assert.equal(book.text,'Local content');
 });
+
+test('DAISY audio-only archive exposes ordered audio tracks',async()=>{
+ const book=await parseDaisyArchive(fakeZip({
+  'ncc.html':'<a href="first.smil">One</a><a href="second.smil">Two</a>',
+  'first.smil':'<smil><audio src="audio/1.mp3"/></smil>',
+  'second.smil':'<smil><audio src="audio/2.mp3"/></smil>',
+  'audio/1.mp3':'one','audio/2.mp3':'two'
+ }));
+ assert.equal(book.hasText,false);
+ assert.equal(book.hasAudio,true);
+ assert.deepEqual(book.audioFiles,['audio/1.mp3','audio/2.mp3']);
+});
+test('web reader provides audio playlist and preserves existing playback controls',async()=>{
+ const source=await readFile(new URL('../web-reading.js',import.meta.url),'utf8');
+ assert.match(source,/async function useDaisyAudio/);
+ assert.match(source,/audio\.addEventListener\('ended'/);
+ assert.match(source,/prepared\.format === 'daisy-audio'/);
+ assert.match(source,/ensureAudioTools\(\)\.append\(controller\)/);
+});

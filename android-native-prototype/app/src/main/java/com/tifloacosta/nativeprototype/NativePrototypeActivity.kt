@@ -85,17 +85,33 @@ class NativePrototypeActivity : ComponentActivity() {
     private var oauthCallback by mutableStateOf<Uri?>(null)
     private var requestedReaderBookId by mutableStateOf<String?>(null)
     private var requestedSection by mutableStateOf<String?>(null)
+    private var selectedLanguage by mutableStateOf("")
+    private var selectedTheme by mutableStateOf("system")
+    private val settings by lazy { getSharedPreferences("native-app-settings-v1", MODE_PRIVATE) }
+    private val settingsListener = android.content.SharedPreferences.OnSharedPreferenceChangeListener { prefs, key ->
+        if (key == "language") selectedLanguage = prefs.getString("language", "").orEmpty()
+        if (key == "theme") selectedTheme = prefs.getString("theme", "system").orEmpty()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        selectedLanguage = settings.getString("language", "").orEmpty()
+        selectedTheme = settings.getString("theme", "system").orEmpty()
+        settings.registerOnSharedPreferenceChangeListener(settingsListener)
         if (intent?.action == Intent.ACTION_VIEW) oauthCallback = intent?.data
         requestedReaderBookId = intent?.getStringExtra("tiflolector-open-book")
             ?.takeIf { it.isNotBlank() }
         if (savedInstanceState == null) acceptSharedFiles(intent)
         requestedSection = intent?.getStringExtra("tifloacosta-open-section")
         setContent {
-            MaterialTheme(colorScheme = if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme()) {
+            val dark = when (selectedTheme) {
+                "dark" -> true
+                "light" -> false
+                else -> isSystemInDarkTheme()
+            }
+            MaterialTheme(colorScheme = if (dark) darkColorScheme() else lightColorScheme()) {
                 PrototypeHome(
+                    languageOverride = selectedLanguage,
                     account = youTubeAccount,
                     callback = oauthCallback,
                     onCallbackHandled = { oauthCallback = null },
@@ -112,6 +128,11 @@ class NativePrototypeActivity : ComponentActivity() {
                 )
             }
         }
+    }
+
+    override fun onDestroy() {
+        settings.unregisterOnSharedPreferenceChangeListener(settingsListener)
+        super.onDestroy()
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -175,6 +196,7 @@ private fun AdjustableSelector(
 
 @Composable
 private fun PrototypeHome(
+    languageOverride: String,
     account: NativeYouTubeAccount,
     callback: Uri?,
     onCallbackHandled: () -> Unit,
@@ -195,7 +217,8 @@ private fun PrototypeHome(
         }
     }
     LaunchedEffect(Unit) { account.checkSession() }
-    val language = if (Locale.getDefault().language == "en") "en" else "es"
+    val language = if (languageOverride in listOf("es", "en")) languageOverride
+        else if (Locale.getDefault().language == "en") "en" else "es"
     val english = language == "en"
     var loaded by remember { mutableStateOf(CatalogLoad(Catalog())) }
     var loading by remember { mutableStateOf(true) }

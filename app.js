@@ -547,7 +547,9 @@
     const items=resourceBrowser.filterAndSort(selected,els.resourceFilter.value,els.resourceSort.value,lang);
     if((lang==='es'&&cat==='Píldoras')||(lang==='en'&&cat==='Pills')){showPillsYears(items);return;}
     showResults(items,c.categoryFound(cat,items.length),c.noResults);
-    if (/^apps?$/i.test(cat) && !els.resourceFilter.value.trim()) void showAccessibleAppsCatalog(cat);
+    if (/^apps?$/i.test(cat)) {
+      if (!els.resourceFilter.value.trim()) void showAccessibleAppsCatalog(cat);
+    }
   }
 
   function option(select,value,label){const o=document.createElement('option');o.value=value;o.textContent=label;select.append(o);}

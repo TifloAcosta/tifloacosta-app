@@ -1,12 +1,12 @@
 {
   "versionName": "1.3.9",
   "track": "production",
-  "status": "draft",
-  "confirmProduction": false,
+  "status": "completed",
+  "confirmProduction": true,
   "priority": 5,
   "notifyUpdate": false,
   "notes": {
-    "es": "Preparación de una nueva versión de TifloAcosta para Android. Interfaz nativa y mejoras de accesibilidad en Actualidad, Recursos, Vídeos y TifloLector. Esta solicitud permanece en borrador hasta verificar las funciones y los datos de los usuarios.",
-    "en": "Preparation of a new TifloAcosta Android version. Native interface and accessibility improvements in News, Resources, Videos and TifloLector. This release request remains a draft until functionality and user data have been verified."
+    "es": "Nueva interfaz nativa de TifloAcosta para Android. Mejoras de navegación y accesibilidad con TalkBack en Actualidad, Recursos y Vídeos. TifloLector incorpora biblioteca y controles nativos y acceso a los libros de la biblioteca anterior. Mejoras en Compartir, Descargas, Ajustes y otras secciones.",
+    "en": "New native TifloAcosta interface for Android. Navigation and TalkBack accessibility improvements in News, Resources and Videos. TifloLector adds a native library and controls, with access to books in the previous library. Improvements to sharing, downloads, settings and other sections."
   }
 }

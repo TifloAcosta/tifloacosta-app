@@ -1,0 +1,43 @@
+name: Test web identity and navigation
+
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'app.js'
+      - 'manifest.webmanifest'
+      - 'sw.js'
+      - 'videos.html'
+      - 'videos.js'
+      - 'podcast.html'
+      - 'podcast.js'
+      - 'sounds.html'
+      - 'offline.html'
+      - 'test/web-contact-identity.test.mjs'
+      - 'test/web-site-maintenance.test.mjs'
+      - 'test/clean-home.test.mjs'
+      - 'test/regression.test.mjs'
+      - '.github/workflows/test-web-blocks.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'app.js'
+      - 'manifest.webmanifest'
+      - 'sw.js'
+      - 'test/web-contact-identity.test.mjs'
+      - '.github/workflows/test-web-blocks.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprobar navegación, identidad y regresiones de la web
+        run: node --test test/web-site-maintenance.test.mjs test/web-contact-identity.test.mjs test/clean-home.test.mjs test/regression.test.mjs test/pwa-startup.test.mjs

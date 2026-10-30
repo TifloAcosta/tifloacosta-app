@@ -11,7 +11,9 @@ test('home exposes a closed launcher instead of block contents', async () => {
   assert.match(html, /id="home-open-resources"/);
   assert.match(html, /id="home-open-news"/);
   assert.match(html, /id="home-open-videos"[^>]*href="videos\.html"/);
-  assert.match(html, /id="home-open-book"/);
+  assert.doesNotMatch(html, /id="home-open-book"/);
+  assert.match(html, /id="contact-apps-section"/);
+  assert.match(html, /id="contact-app-android"/);
   assert.match(html, /id="home-open-contact"/);
   assert.match(html, /id="home-open-privacy"/);
   assert.match(html, /id="home-open-config"/);

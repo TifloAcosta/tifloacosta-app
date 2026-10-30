@@ -65,7 +65,7 @@ test('homepage loads shared app logic and reserves the lazy book-cover dimension
   assert.match(html, /<img id="book-cover"[^>]*loading="lazy"[^>]*width="1600"[^>]*height="2560">/);
   assert.match(worker, /'\.\/app-core\.js\?v=1\.7'/);
   assert.match(worker, /'\.\/web-reading\.js\?v=[^']+'/);
-  assert.match(worker, /'\.\/app\.js\?v=2\.5'/);
+  assert.match(worker, /'\.\/app\.js\?v=2\.6'/);
 });
 
 test('homepage localization uses explicit search label and accessible resource menu copy', async () => {
@@ -82,8 +82,8 @@ test('homepage chrome is localized in Spanish and English', async () => {
   const source = await read('app.js');
 
   for (const expected of [
-    "documentTitle: 'TifloAcosta App — Recursos de accesibilidad'",
-    "documentTitle: 'TifloAcosta App — Accessibility resources'",
+    "documentTitle: 'TifloAcosta — Recursos de accesibilidad'",
+    "documentTitle: 'TifloAcosta — Accessibility resources'",
     "skip: 'Saltar al contenido principal'",
     "skip: 'Skip to main content'",
     "brandLabel: 'TifloAcosta, inicio'",

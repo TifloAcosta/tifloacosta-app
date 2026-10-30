@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '2.1';
+  const APP_VERSION = '2.2';
   const core = window.TIFLO_APP_CORE;
   const coreActualidad = window.TIFLO_ACTUALIDAD_CORE;
   const shared = window.TIFLO_SHARED || null;
@@ -21,6 +21,8 @@
     bookDescription: $('#book-description'), bookDescription2: $('#book-description-2'), bookBuyPrint: $('#book-buy-print'),
     bookBuyKindle: $('#book-buy-kindle'), bookKindleNote: $('#book-kindle-note'),
     contactHeading: $('#contact-heading'), contactDirectHeading: $('#contact-direct-heading'), contactFollowHeading: $('#contact-follow-heading'),
+    contactAppsHeading: $('#contact-apps-heading'), contactAppsIntro: $('#contact-apps-intro'),
+    contactAppAndroid: $('#contact-app-android'), contactAppIosStatus: $('#contact-app-ios-status'),
     contactPodcastHeading: $('#contact-podcast-heading'), contactWhatsapp: $('#contact-whatsapp'), contactEmail: $('#contact-email'),
     contactInstagram: $('#contact-instagram'), contactFacebookChannel: $('#contact-facebook-channel'), contactFacebookPersonal: $('#contact-facebook-personal'),
     contactSpotify: $('#contact-spotify'), contactApplePodcasts: $('#contact-apple-podcasts'),
@@ -40,7 +42,7 @@
 
   const copy = {
     es: {
-      documentTitle: 'TifloAcosta App — Recursos de accesibilidad', skip: 'Saltar al contenido principal', brandLabel: 'TifloAcosta, inicio', appHeading: 'TifloAcosta App',
+      documentTitle: 'TifloAcosta — Recursos de accesibilidad', skip: 'Saltar al contenido principal', brandLabel: 'TifloAcosta, inicio', appHeading: 'TifloAcosta',
       intro: 'Recursos de accesibilidad y tecnología, organizados para llegar a ellos sin perderse por el camino.',
       actualidadHome: { heading:'Actualidad', intro:'Noticias y novedades de accesibilidad y tecnología seleccionadas para llegar a lo importante sin tener que apartar ruido por el camino.', open:'Ver toda la actualidad', source:'Fuente', count:n => `${n} noticia${n === 1 ? '' : 's'} reciente${n === 1 ? '' : 's'}.` },
       searchHeading: 'Buscar en TifloAcosta', searchLabel: 'Busca aquí lo que quieras en TifloAcosta.', placeholder: '', searchButton: 'Buscar',
@@ -57,29 +59,30 @@
         printUrl: 'https://www.amazon.es/s?k=9798185909218&i=stripbooks', kindleUrl: 'https://www.amazon.es/s?k=La+vida+vista+desde+donde+estoy+Tony+Acosta&i=digital-text'
       },
       contact: 'Contacto y redes', contactDirect: 'Contacto', contactFollow: 'Sígueme', contactPodcast: 'Escucha el podcast',
-      about: { heading: 'Sobre Tony', text: 'Tony Acosta es el autor del libro y la persona que presenta los contenidos y vías de contacto de TifloAcosta reunidos en esta aplicación.' },
+      contactApps: { heading: 'Aplicaciones oficiales', intro: 'Accede a las aplicaciones nativas de TifloAcosta para móviles.', android: 'Descargar TifloAcosta para Android en Google Play', ios: 'TifloAcosta para iPhone: pendiente de publicación en App Store. Añadiremos el enlace oficial cuando Apple la apruebe.' },
+      about: { heading: 'Sobre Tony', text: 'Tony Acosta es el autor del libro y la persona que presenta los contenidos y vías de contacto de TifloAcosta reunidos en este portal web.' },
       externalLinks: 'Los enlaces de esta sección, del catálogo, de Amazon y de YouTube abren servicios externos, sujetos a sus propias condiciones y prácticas de privacidad.',
-      privacy: { heading: 'Privacidad y accesibilidad', privacyHeading: 'Privacidad', text: 'La app guarda en este navegador el idioma, los favoritos, los ajustes visuales y, si utilizas la biblioteca de TifloLector, los documentos que decidas guardar junto con su progreso de lectura. La traducción compatible se realiza con el motor interno del navegador y el OCR de PDF se procesa localmente; los componentes necesarios se descargan sólo al activar cada función. No necesitas crear una cuenta. Al visitar la app se carga GoatCounter para medir el uso del sitio y OneSignal para ofrecer las notificaciones; si activas estas últimas, el navegador solicita tu permiso. Los enlaces externos pueden recibir información técnica habitual de la navegación.', accessibilityHeading: 'Accesibilidad', accessibilityText: 'La app usa encabezados, etiquetas y controles nativos, incluye un enlace para saltar al contenido y avisos para lector de pantalla. Respeta preferencias del sistema y permite ajustar tamaño, contraste, espaciado y grosor del texto. Si encuentras una barrera, puedes comunicarla mediante las opciones de contacto anteriores.' },
+      privacy: { heading: 'Privacidad y accesibilidad', privacyHeading: 'Privacidad', text: 'Este sitio web guarda en tu navegador el idioma, los favoritos, los ajustes visuales y, si utilizas la biblioteca de TifloLector, los documentos que decidas guardar junto con su progreso de lectura. La traducción compatible se realiza con el motor interno del navegador y el OCR de PDF se procesa localmente; los componentes necesarios se descargan sólo al activar cada función. No necesitas crear una cuenta. Al visitar la app se carga GoatCounter para medir el uso del sitio y OneSignal para ofrecer las notificaciones; si activas estas últimas, el navegador solicita tu permiso. Los enlaces externos pueden recibir información técnica habitual de la navegación.', accessibilityHeading: 'Accesibilidad', accessibilityText: 'La web usa encabezados, etiquetas y controles nativos, incluye un enlace para saltar al contenido y avisos para lector de pantalla. Respeta preferencias del sistema y permite ajustar tamaño, contraste, espaciado y grosor del texto. Si encuentras una barrera, puedes comunicarla mediante las opciones de contacto anteriores.' },
       contactLabels: { whatsapp: 'Contactar por WhatsApp', email: 'Enviar correo electrónico', instagram: 'Instagram', facebookChannel: 'Facebook — Canal TifloAcosta', facebookPersonal: 'Facebook — Tony Acosta', spotify: 'Spotify', applePodcasts: 'Apple Podcasts', ivoox: 'iVoox', podimo: 'Podimo', radio: 'radio.es' },
       found: n => `${n} recurso${n === 1 ? '' : 's'} encontrado${n === 1 ? '' : 's'}.`, categoryFound: (cat,n) => `Categoría ${cat}. ${n} recurso${n === 1 ? '' : 's'} encontrado${n === 1 ? '' : 's'}.`, favFound: n => `${n} favorito${n === 1 ? '' : 's'}.`,
       noResults: 'No hay recursos que coincidan.', noFavorites: 'Todavía no hay favoritos guardados.', newBadge: 'Nuevo', open: 'Abrir recurso', addFav: 'Añadir a favoritos', removeFav: 'Quitar de favoritos',
       settings: {
-        title: 'Ajustes de visualización y accesibilidad', toggle: 'Opciones de configuración visual', intro: 'La app respeta el tamaño y el modo de color del sistema. Además, puedes guardar aquí preferencias propias para TifloAcosta.',
+        title: 'Ajustes de visualización y accesibilidad', toggle: 'Opciones de configuración visual', intro: 'La web respeta el tamaño y el modo de color del sistema. Además, puedes guardar aquí preferencias propias para TifloAcosta.',
         textLegend: 'Tamaño del texto', textLabel: 'Tamaño', textOptions: { normal:'Predeterminado', large:'Grande', xlarge:'Muy grande', max:'Máximo' },
         themeLegend: 'Color y contraste', themeLabel: 'Perfil de contraste', themeOptions: { auto:'Seguir el sistema', light:'Alto contraste claro', dark:'Alto contraste oscuro' },
         spacingLegend: 'Espaciado', spacingLabel: 'Separación entre líneas', spacingOptions: { normal:'Normal', comfortable:'Cómoda', wide:'Amplia' },
         boldLegend: 'Legibilidad', boldLabel: 'Usar texto reforzado', reset: 'Restablecer ajustes', saved: 'Preferencias guardadas.', resetDone: 'Ajustes restablecidos.'
       },
       update: {
-        heading: 'Actualización', version: `Versión actual: ${APP_VERSION}`, button: 'Actualizar aplicación',
+        heading: 'Actualización', version: `Versión web: ${APP_VERSION}`, button: 'Actualizar la web',
         checking: 'Comprobando la versión disponible…', reloading: 'Actualización preparada. Recargando TifloAcosta…',
-        done: `Aplicación actualizada. Versión ${APP_VERSION}.`, error: 'No se pudo actualizar. Comprueba la conexión a Internet e inténtalo de nuevo.'
+        done: `Página web actualizada. Versión ${APP_VERSION}.`, error: 'No se pudo actualizar. Comprueba la conexión a Internet e inténtalo de nuevo.'
       },
-      install: { heading:'Instalar la app', intro:'En iPhone o iPad, abre TifloAcosta App en Safari y utiliza Compartir > Añadir a pantalla de inicio. En navegadores compatibles de otros sistemas puede aparecer una opción equivalente de instalación.' },
-      footer: `TifloAcosta App · Versión ${APP_VERSION}.`
+      install: { heading:'Añadir la web a la pantalla de inicio', intro:'En iPhone o iPad, abre esta web de TifloAcosta en Safari y utiliza Compartir > Añadir a pantalla de inicio. Es un acceso directo a la página, no la aplicación nativa de iOS. En otros sistemas puede aparecer una opción equivalente.' },
+      footer: `TifloAcosta · Web ${APP_VERSION}.`
     },
     en: {
-      documentTitle: 'TifloAcosta App — Accessibility resources', skip: 'Skip to main content', brandLabel: 'TifloAcosta, home', appHeading: 'TifloAcosta App',
+      documentTitle: 'TifloAcosta — Accessibility resources', skip: 'Skip to main content', brandLabel: 'TifloAcosta, home', appHeading: 'TifloAcosta',
       intro: 'Accessibility and technology resources, organized so you can reach what you need without getting lost along the way.',
       actualidadHome: { heading:'News', intro:'Accessibility and technology news selected to help you reach what matters without having to clear away the noise first.', open:'View all news', source:'Source', count:n => `${n} recent news item${n === 1 ? '' : 's'}.` },
       searchHeading: 'Search TifloAcosta', searchLabel: 'Search for anything in TifloAcosta.', placeholder: '', searchButton: 'Search',
@@ -96,26 +99,27 @@
         printUrl: 'https://www.amazon.com/s?k=9798185909218&i=stripbooks', kindleUrl: 'https://www.amazon.com/s?k=La+vida+vista+desde+donde+estoy+Tony+Acosta&i=digital-text'
       },
       contact: 'Contact and social', contactDirect: 'Contact', contactFollow: 'Follow TifloAcosta', contactPodcast: 'Listen to the podcast',
-      about: { heading: 'About Tony', text: 'Tony Acosta is the author of the book and the person presenting the TifloAcosta content and contact options collected in this application.' },
+      contactApps: { heading: 'Official apps', intro: 'Get the native TifloAcosta mobile apps.', android: 'Get TifloAcosta for Android on Google Play', ios: 'TifloAcosta for iPhone: not yet published on the App Store. We will add the official link after Apple approves it.' },
+      about: { heading: 'About Tony', text: 'Tony Acosta is the author of the book and the person presenting the TifloAcosta content and contact options collected in this website.' },
       externalLinks: 'Links in this section, the catalog, Amazon and YouTube open external services governed by their own terms and privacy practices.',
-      privacy: { heading: 'Privacy and accessibility', privacyHeading: 'Privacy', text: 'The app stores your language, favorites and display settings in this browser. If you use the TifloReader library, it also stores the documents you choose to save and their reading progress locally. Supported translation uses the browser’s internal engine and PDF OCR is processed locally; required components are downloaded only when you activate each feature. You do not need to create an account. GoatCounter loads when you visit to measure site use, and OneSignal loads to provide notifications; if you activate them, the browser asks for permission. External links may receive the usual technical browsing information.', accessibilityHeading: 'Accessibility', accessibilityText: 'The app uses headings, labels and native controls, and provides a skip link and screen-reader announcements. It respects system preferences and lets you adjust text size, contrast, spacing and weight. If you encounter a barrier, you can report it through the contact options above.' },
+      privacy: { heading: 'Privacy and accessibility', privacyHeading: 'Privacy', text: 'This website stores your language, favorites and display settings in this browser. If you use the TifloReader library, it also stores the documents you choose to save and their reading progress locally. Supported translation uses the browser’s internal engine and PDF OCR is processed locally; required components are downloaded only when you activate each feature. You do not need to create an account. GoatCounter loads when you visit to measure site use, and OneSignal loads to provide notifications; if you activate them, the browser asks for permission. External links may receive the usual technical browsing information.', accessibilityHeading: 'Accessibility', accessibilityText: 'This website uses headings, labels and native controls, and provides a skip link and screen-reader announcements. It respects system preferences and lets you adjust text size, contrast, spacing and weight. If you encounter a barrier, you can report it through the contact options above.' },
       contactLabels: { whatsapp: 'Contact on WhatsApp', email: 'Send email', instagram: 'Instagram', facebookChannel: 'Facebook — Canal TifloAcosta', facebookPersonal: 'Facebook — Tony Acosta', spotify: 'Spotify', applePodcasts: 'Apple Podcasts', ivoox: 'iVoox', podimo: 'Podimo', radio: 'radio.es' },
       found: n => `${n} resource${n === 1 ? '' : 's'} found.`, categoryFound: (cat,n) => `${cat} category. ${n} resource${n === 1 ? '' : 's'} found.`, favFound: n => `${n} favorite${n === 1 ? '' : 's'}.`,
       noResults: 'No matching resources were found.', noFavorites: 'No favorites have been saved yet.', newBadge: 'New', open: 'Open resource', addFav: 'Add to favorites', removeFav: 'Remove from favorites',
       settings: {
-        title: 'Display and accessibility settings', toggle: 'Visual settings options', intro: 'The app respects your system text size and color mode. You can also save TifloAcosta-specific preferences here.',
+        title: 'Display and accessibility settings', toggle: 'Visual settings options', intro: 'This website respects your system text size and color mode. You can also save TifloAcosta-specific preferences here.',
         textLegend: 'Text size', textLabel: 'Size', textOptions: { normal:'Default', large:'Large', xlarge:'Extra large', max:'Maximum' },
         themeLegend: 'Color and contrast', themeLabel: 'Contrast profile', themeOptions: { auto:'Follow system', light:'High contrast light', dark:'High contrast dark' },
         spacingLegend: 'Spacing', spacingLabel: 'Line spacing', spacingOptions: { normal:'Normal', comfortable:'Comfortable', wide:'Wide' },
         boldLegend: 'Readability', boldLabel: 'Use stronger text', reset: 'Reset settings', saved: 'Preferences saved.', resetDone: 'Settings reset.'
       },
       update: {
-        heading: 'Update', version: `Current version: ${APP_VERSION}`, button: 'Update application',
+        heading: 'Update', version: `Website version: ${APP_VERSION}`, button: 'Update website',
         checking: 'Checking the available version…', reloading: 'Update prepared. Reloading TifloAcosta…',
-        done: `Application updated. Version ${APP_VERSION}.`, error: 'The app could not be updated. Check your internet connection and try again.'
+        done: `Website updated. Version ${APP_VERSION}.`, error: 'The app could not be updated. Check your internet connection and try again.'
       },
-      install: { heading:'Install the app', intro:'On iPhone or iPad, open TifloAcosta App in Safari and use Share > Add to Home Screen. Compatible browsers on other systems may offer an equivalent installation option.' },
-      footer: `TifloAcosta App · Version ${APP_VERSION}.`
+      install: { heading:'Add this website to your Home Screen', intro:'On iPhone or iPad, open this TifloAcosta website in Safari and choose Share > Add to Home Screen. This is a website shortcut, not the native iOS app. Other browsers may offer an equivalent option.' },
+      footer: `TifloAcosta · Web ${APP_VERSION}.`
     }
   };
 
@@ -551,6 +555,10 @@
     els.contactDirectHeading.textContent=c.contactDirect;
     els.contactFollowHeading.textContent=c.contactFollow;
     els.contactPodcastHeading.textContent=c.contactPodcast;
+    els.contactAppsHeading.textContent=c.contactApps.heading;
+    els.contactAppsIntro.textContent=c.contactApps.intro;
+    els.contactAppAndroid.textContent=c.contactApps.android;
+    els.contactAppIosStatus.textContent=c.contactApps.ios;
     els.contactWhatsapp.textContent=l.whatsapp;
     els.contactEmail.textContent=l.email;
     els.contactInstagram.textContent=l.instagram;

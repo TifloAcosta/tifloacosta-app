@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const APP_VERSION = '2.1';
+  const APP_VERSION = '2.2';
   const PAGE_SIZE = 10;
   const SEEK_SECONDS = 30;
   const POSITION_REFRESH_MS = 1000;
@@ -98,7 +98,7 @@
       next: 'Siguiente',
       page: (page, pages) => `Página ${page} de ${pages}`,
       error: 'No se pudo cargar el catálogo de vídeos. Comprueba la conexión e inténtalo de nuevo.',
-      footer: `TifloAcosta App · Versión ${APP_VERSION}.`
+      footer: `TifloAcosta · Web ${APP_VERSION}.`
     },
     en: {
       skip: 'Skip to main content',
@@ -142,7 +142,7 @@
       next: 'Next',
       page: (page, pages) => `Page ${page} of ${pages}`,
       error: 'The video catalog could not be loaded. Check your connection and try again.',
-      footer: `TifloAcosta App · Version ${APP_VERSION}.`
+      footer: `TifloAcosta · Web ${APP_VERSION}.`
     }
   };
 
@@ -320,8 +320,8 @@
     els.skip.textContent = c.skip;
     els.back.textContent = c.back;
     els.backBottom.textContent = c.back;
-    els.back.setAttribute('aria-label', lang === 'es' ? 'Volver a la pantalla principal de TifloAcosta App' : 'Back to the TifloAcosta App main screen');
-    els.backBottom.setAttribute('aria-label', lang === 'es' ? 'Volver a la pantalla principal de TifloAcosta App' : 'Back to the TifloAcosta App main screen');
+    els.back.setAttribute('aria-label', lang === 'es' ? 'Volver a la pantalla principal de TifloAcosta' : 'Back to the TifloAcosta main screen');
+    els.backBottom.setAttribute('aria-label', lang === 'es' ? 'Volver a la pantalla principal de TifloAcosta' : 'Back to the TifloAcosta main screen');
     els.heading.textContent = c.heading;
     els.intro.textContent = c.intro;
     els.channel.textContent = c.channel;

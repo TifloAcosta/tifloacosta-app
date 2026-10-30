@@ -81,6 +81,9 @@ fun NativeTifloLector(
     var legacyState by remember { mutableStateOf<LegacyLibraryState?>(null) }
     var legacyBooks by remember { mutableStateOf<List<LegacyLibraryBook>>(emptyList()) }
     var legacyReadError by remember { mutableStateOf("") }
+    // La biblioteca nueva es la predeterminada. El historial anterior permanece
+    // recuperable solo si el usuario solicita expresamente verlo.
+    var showPreviousLibrary by rememberSaveable { mutableStateOf(false) }
     LaunchedEffect(Unit) {
         try {
             val previous = withContext(Dispatchers.IO) {
@@ -506,9 +509,22 @@ fun NativeTifloLector(
                 Text(if (english) "Manage reading queue" else "Gestionar cola de lectura")
             }
         }
-        // Existing documents appear in the same reader home, not behind an
-        // empty-looking native index; old metadata stays in the published store.
-        legacyState?.let { state ->
+        // La biblioteca de la versión antigua NO forma parte de la biblioteca
+        // predeterminada. Los archivos originales no se borran ni se modifican.
+        if (legacyState?.databasePresent == true && legacyState?.bookCount != 0) {
+            TextButton(
+                onClick = { showPreviousLibrary = !showPreviousLibrary },
+                modifier = Modifier.fillMaxWidth().semantics {
+                    stateDescription = if (showPreviousLibrary)
+                        (if (english) "Expanded" else "Abierto")
+                    else (if (english) "Collapsed" else "Cerrado")
+                }
+            ) {
+                Text(if (english) "Recover previous library (optional)"
+                    else "Recuperar biblioteca anterior (opcional)")
+            }
+        }
+        if (showPreviousLibrary) legacyState?.let { state ->
             if (legacyReadError.isNotBlank()) Text(legacyReadError)
             if (state.databasePresent && state.bookCount == null) {
                 Text(if (english)

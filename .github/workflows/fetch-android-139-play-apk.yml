@@ -1,0 +1,65 @@
+name: Fetch signed APK from Play draft without compiling or publishing
+on:
+  push:
+    branches:
+      - fix/android-139-production-native-entry-20261030
+    paths:
+      - mobile/release/fetch-play-apk.once
+permissions:
+  contents: write
+concurrency:
+  group: tifloacosta-play-apk-fetch-139
+  cancel-in-progress: false
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    env:
+      GOOGLE_PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: TifloAcosta/tifloacosta-app
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Validate download-only order
+        run: |
+          set -euo pipefail
+          grep -Fxq 'fetch already staged 1.3.9 Google Play draft APK - NO PUBLISH NO REBUILD' mobile/release/fetch-play-apk.once
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - name: Download already Play-signed 1.3.9 APK
+        working-directory: mobile
+        run: node scripts/download-play-staged-139.mjs
+      - name: Verify APK identity, signature and recorded draft
+        shell: bash
+        run: |
+          set -euo pipefail
+          apk="$(find mobile/release/out -maxdepth 1 -name 'TifloAcosta-Android-1.3.9-code*-GooglePlay.apk' -print -quit)"
+          test -n "$apk"
+          unzip -t "$apk" > /dev/null
+          tools="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -1)"
+          "$tools/apksigner" verify --print-certs "$apk"
+          "$tools/aapt" dump badging "$apk" | grep -F "package: name='com.tifloacosta.app' versionCode="
+          python3 -c 'import json,sys,hashlib,pathlib; p=pathlib.Path(sys.argv[1]); d=json.load(open("mobile/release/out/Google-Play-draft-info.json")); assert d["published"] is False and d["status"]=="draft" and d["versionName"]=="1.3.9" and d["stagedSourceCommit"]=="41905966ea4fc53e9dcaf51e36a4c712a2a5d545"; assert d["apkFileName"]==p.name; assert hashlib.sha256(p.read_bytes()).hexdigest()==d["apkSha256"]' "$apk"
+          echo "APK_PATH=$apk" >> "$GITHUB_ENV"
+      - name: Publish private GitHub DRAFT release with direct APK (not a Play rollout)
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag='tifloacosta-android-1.3.9-googleplay-preview'
+          if ! gh release view "$tag" >/dev/null 2>&1; then
+            gh release create "$tag" --draft --target 41905966ea4fc53e9dcaf51e36a4c712a2a5d545 \
+              --title 'TifloAcosta 1.3.9 - APK firmada por Google Play (comprobación privada)' \
+              --notes 'Archivo de comprobación firmado por Google. La actualización aún NO se ha publicado. Instalar sobre 1.3.8 sin borrar datos; comprobar TalkBack antes de publicar.'
+          fi
+          gh release upload "$tag" "$APK_PATH" --clobber
+          echo 'Direct-access draft release: https://github.com/TifloAcosta/tifloacosta-app/releases/tag/tifloacosta-android-1.3.9-googleplay-preview'
+      - name: Keep artifact with Play APK and provenance
+        uses: actions/upload-artifact@v4
+        with:
+          name: TifloAcosta-1.3.9-Play-apk-directa
+          path: |
+            mobile/release/out/TifloAcosta-Android-1.3.9-code*-GooglePlay.apk
+            mobile/release/out/Google-Play-draft-info.json
+          retention-days: 30

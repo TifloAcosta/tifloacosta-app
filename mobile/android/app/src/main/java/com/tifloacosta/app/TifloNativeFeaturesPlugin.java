@@ -201,4 +201,41 @@ public class TifloNativeFeaturesPlugin extends Plugin {
 
     @PluginMethod
     public void openNativeVideos(PluginCall call) { open(call, "videos"); }
+
+    /** Deep-link to the existing Capacitor section without losing the native home. */
+    @PluginMethod
+    public void consumeLegacySection(PluginCall call) {
+        Intent incoming = getActivity().getIntent();
+        String section = incoming == null ? null :
+            incoming.getStringExtra("tifloacosta-open-legacy-section");
+        if (incoming != null) incoming.removeExtra("tifloacosta-open-legacy-section");
+        String allowed = "";
+        if (section != null) {
+            switch (section) {
+                case "search":
+                case "new-content":
+                case "downloads":
+                case "favorites":
+                case "podcast":
+                case "contact":
+                case "privacy":
+                case "settings":
+                    allowed = section;
+                    break;
+                default:
+                    break;
+            }
+        }
+        JSObject result = new JSObject();
+        result.put("section", allowed);
+        call.resolve(result);
+    }
+
+    @PluginMethod
+    public void returnToNativeHome(PluginCall call) {
+        getActivity().runOnUiThread(() -> {
+            getActivity().finish();
+            call.resolve();
+        });
+    }
 }

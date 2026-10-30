@@ -15,7 +15,9 @@ data class CatalogItem(
     val category: String,
     val categories: List<String>,
     val summary: String,
-    val url: String
+    val url: String,
+    val isNew: Boolean = false,
+    val newsDate: String = ""
 )
 
 data class Catalog(val news: List<CatalogItem> = emptyList(), val resources: List<CatalogItem> = emptyList(), val videos: List<CatalogItem> = emptyList())
@@ -85,7 +87,9 @@ object CatalogRepository {
                     summary = listOf("summary", "excerpt", "description", "body")
                         .firstNotNullOfOrNull { field -> o.optString(field).takeIf { it.isNotBlank() } }.orEmpty(),
                     url = listOf("originalUrl", "openUrl", "url")
-                        .firstNotNullOfOrNull { field -> o.optString(field).takeIf { it.isNotBlank() } }.orEmpty()
+                        .firstNotNullOfOrNull { field -> o.optString(field).takeIf { it.isNotBlank() } }.orEmpty(),
+                    isNew = o.optBoolean("isNew", false),
+                    newsDate = o.optString("newsDate", "")
                 )
             }
         }

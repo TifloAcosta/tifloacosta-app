@@ -20,7 +20,6 @@ test('home uses the approved compact order', () => {
     'downloads',
     'favorites',
     'videos',
-    'book',
     'podcast',
     'contact',
     'privacy',

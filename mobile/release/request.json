@@ -1,12 +1,12 @@
 {
-  "versionName": "1.3.8",
+  "versionName": "1.3.9",
   "track": "production",
   "status": "completed",
   "confirmProduction": true,
-  "priority": 2,
+  "priority": 5,
   "notifyUpdate": false,
   "notes": {
-    "es": "Mejoras de accesibilidad y lectura en TifloAcosta para Android. Vídeos con acciones TalkBack directamente desde los títulos y controles de YouTube; TifloLector con biblioteca más clara, navegación por unidades y narración sin marcas técnicas de HTML ni paginación. Mejoras en DAISY, OCR, importación y compartición de documentos, voces y ajustes de lectura. Correcciones de estabilidad en las demás secciones.",
-    "en": "Accessibility and reading improvements in TifloAcosta for Android. TalkBack actions directly from video titles and YouTube controls; a clearer TifloLector library, reading navigation and speech without HTML or pagination markers. Improvements to DAISY, OCR, document import and sharing, voices and reading settings, plus stability fixes across other sections."
+    "es": "Nueva interfaz nativa de TifloAcosta para Android. Mejoras de navegación y accesibilidad con TalkBack en Actualidad, Recursos y Vídeos. TifloLector incorpora biblioteca y controles nativos y acceso a los libros de la biblioteca anterior. Mejoras en Compartir, Descargas, Ajustes y otras secciones.",
+    "en": "New native TifloAcosta interface for Android. Navigation and TalkBack accessibility improvements in News, Resources and Videos. TifloLector adds a native library and controls, with access to books in the previous library. Improvements to sharing, downloads, settings and other sections."
   }
 }

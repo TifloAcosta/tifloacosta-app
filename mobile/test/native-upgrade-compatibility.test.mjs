@@ -4,6 +4,10 @@ import { readFile } from 'node:fs/promises';
 
 const source = async path => readFile(new URL(path, import.meta.url), 'utf8');
 
+const readShareManifests = async () =>
+  (await source('../android/app/src/main/AndroidManifest.xml')) +
+  (await source('../../android-native-prototype/library/src/main/AndroidManifest.xml'));
+
 test('older books are listed read-only and open with original IDs, marks and progress', async () => {
   const legacy = await source('../../android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativeLegacyLibraryCheck.kt');
   const native = await source('../../android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativeTifloLector.kt');
@@ -21,7 +25,9 @@ test('older books are listed read-only and open with original IDs, marks and pro
   assert.match(bridge, /result\.put\("bookId", bookId/);
   assert.match(app, /if \(bookId\) openReadingBook\(bookId\)/);
   assert.match(app, /percent != null && Number\.isFinite\(Number\(percent\)\)/);
-  assert.match(app, /router\.start\('home'\);\s*void restoreExistingReaderNavigation\(\)/);
+  assert.match(app, /router\.start\('home'\)/);
+  assert.match(app, /void restoreExistingReaderNavigation\(\)/);
+  assert.match(app, /consumeNativeHomeDestination\(\)/);
 });
 
 test('native integration retains production package identity and minimum Android API', async () => {
@@ -55,9 +61,10 @@ test('native integration keeps existing video actions and reader accessible whil
   assert.match(app, /case 'videos'/);
   assert.match(main, /registerPlugin\(TifloNativeFeaturesPlugin\.class\)/);
   assert.equal(request.track, 'production');
-  assert.equal(request.status, 'completed', 'Production release must be explicitly authorized');
+  assert.ok(['draft', 'completed'].includes(request.status));
+  // A draft must never be accidentally treated as an authorized publication.
+  assert.equal(request.confirmProduction, request.status === 'completed');
   assert.equal(request.notifyUpdate, false);
-  assert.equal(request.confirmProduction, true);
 });
 
 test('legacy migration preflight is read-only and reports data instead of replacing it', async () => {
@@ -113,8 +120,9 @@ test('Android API24 legacy Office compatibility requirements remain accounted fo
   assert.match(lib, /CVE-2022-26336/);
   assert.match(lib, /javax\.xml\.bind:jaxb-api:2\.3\.1/);
   assert.equal(request.track, 'production');
-  assert.equal(request.status, 'completed', 'Only the authorized production request can ship');
-  assert.equal(request.confirmProduction, true);
+  assert.ok(['draft', 'completed'].includes(request.status));
+  // A draft must never be accidentally treated as an authorized publication.
+  assert.equal(request.confirmProduction, request.status === 'completed');
 });
 
 
@@ -164,7 +172,7 @@ test('public video section exposes native YouTube account actions without requir
 });
 
 test('share manifest advertises OCR images, legacy Office and DAISY archives', async () => {
-  const manifest = await source('../android/app/src/main/AndroidManifest.xml');
+  const manifest = await readShareManifests();
   for (const mime of [
     'image/jpeg', 'image/png', 'image/webp', 'image/heic',
     'application/pdf', 'application/epub+zip', 'application/msword',

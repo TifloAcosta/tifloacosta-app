@@ -117,6 +117,10 @@ export function createPlayReleaseClient({ packageName, accessToken, fetchImpl = 
         }
       }
     ),
+    updateTrackReleases: (editId, track, releases) => request(
+      `${base}/${encodeURIComponent(editId)}/tracks/${encodeURIComponent(track)}`,
+      { method: 'PUT', body: { track, releases } }
+    ),
     validateEdit: editId => request(`${base}/${encodeURIComponent(editId)}:validate`, { method: 'POST', body: {} }),
     commitEdit: editId => request(`${base}/${encodeURIComponent(editId)}:commit`, { method: 'POST', body: {} })
   };

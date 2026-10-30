@@ -29,6 +29,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -39,6 +40,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -65,6 +68,7 @@ private data class SharedReaderFiles(val serial: Int, val uris: List<Uri>)
 class NativePrototypeActivity : ComponentActivity() {
     private var serial = 0
     private var pendingSharedFiles by mutableStateOf<SharedReaderFiles?>(null)
+    private var pendingSharedText by mutableStateOf<String?>(null)
 
     @Suppress("DEPRECATION")
     private fun acceptSharedFiles(incoming: Intent?) {
@@ -80,22 +84,50 @@ class NativePrototypeActivity : ComponentActivity() {
         incoming.data?.let(collected::add)
         val files = collected.distinct().filter { it.scheme == "content" || it.scheme == "file" }.take(40)
         if (files.isNotEmpty()) pendingSharedFiles = SharedReaderFiles(++serial, files)
+        if (files.isEmpty() && incoming.action == Intent.ACTION_SEND) {
+            pendingSharedText = incoming.getStringExtra(Intent.EXTRA_TEXT)
+                ?.trim()?.take(2048)?.takeIf { it.isNotEmpty() }
+        }
     }
     val youTubeAccount by lazy { NativeYouTubeAccount(applicationContext) }
     private var oauthCallback by mutableStateOf<Uri?>(null)
     private var requestedReaderBookId by mutableStateOf<String?>(null)
     private var requestedSection by mutableStateOf<String?>(null)
+    private var selectedLanguage by mutableStateOf("")
+    private var selectedTheme by mutableStateOf("system")
+    private var selectedEnlarged by mutableStateOf(false)
+    private val settings by lazy { getSharedPreferences("native-app-settings-v1", MODE_PRIVATE) }
+    private val settingsListener = android.content.SharedPreferences.OnSharedPreferenceChangeListener { prefs, key ->
+        if (key == "language") selectedLanguage = prefs.getString("language", "").orEmpty()
+        if (key == "theme") selectedTheme = prefs.getString("theme", "system").orEmpty()
+        if (key == "enlarged") selectedEnlarged = prefs.getBoolean("enlarged", false)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        selectedLanguage = settings.getString("language", "").orEmpty()
+        selectedTheme = settings.getString("theme", "system").orEmpty()
+        selectedEnlarged = settings.getBoolean("enlarged", false)
+        settings.registerOnSharedPreferenceChangeListener(settingsListener)
         if (intent?.action == Intent.ACTION_VIEW) oauthCallback = intent?.data
         requestedReaderBookId = intent?.getStringExtra("tiflolector-open-book")
             ?.takeIf { it.isNotBlank() }
         if (savedInstanceState == null) acceptSharedFiles(intent)
         requestedSection = intent?.getStringExtra("tifloacosta-open-section")
         setContent {
-            MaterialTheme(colorScheme = if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme()) {
+            val dark = when (selectedTheme) {
+                "dark" -> true
+                "light" -> false
+                else -> isSystemInDarkTheme()
+            }
+            val density = LocalDensity.current
+            CompositionLocalProvider(LocalDensity provides Density(
+                density.density,
+                (density.fontScale * if (selectedEnlarged) 1.25f else 1f).coerceAtMost(3.5f)
+            )) {
+            MaterialTheme(colorScheme = if (dark) darkColorScheme() else lightColorScheme()) {
                 PrototypeHome(
+                    languageOverride = selectedLanguage,
                     account = youTubeAccount,
                     callback = oauthCallback,
                     onCallbackHandled = { oauthCallback = null },
@@ -105,13 +137,21 @@ class NativePrototypeActivity : ComponentActivity() {
                     onRequestedSectionHandled = { requestedSection = null },
                     sharedFiles = pendingSharedFiles,
                     onSharedFilesHandled = { pendingSharedFiles = null },
+                    sharedText = pendingSharedText,
+                    onSharedTextHandled = { pendingSharedText = null },
                     onSignIn = {
                         val url = youTubeAccount.startAuthorization()
                         startActivity(Intent(Intent.ACTION_VIEW, url))
                     }
                 )
             }
+            }
         }
+    }
+
+    override fun onDestroy() {
+        settings.unregisterOnSharedPreferenceChangeListener(settingsListener)
+        super.onDestroy()
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -175,6 +215,7 @@ private fun AdjustableSelector(
 
 @Composable
 private fun PrototypeHome(
+    languageOverride: String,
     account: NativeYouTubeAccount,
     callback: Uri?,
     onCallbackHandled: () -> Unit,
@@ -184,6 +225,8 @@ private fun PrototypeHome(
     onRequestedSectionHandled: () -> Unit,
     sharedFiles: SharedReaderFiles?,
     onSharedFilesHandled: () -> Unit,
+    sharedText: String?,
+    onSharedTextHandled: () -> Unit,
     onSignIn: () -> Unit
 ) {
     val context = LocalContext.current
@@ -195,7 +238,8 @@ private fun PrototypeHome(
         }
     }
     LaunchedEffect(Unit) { account.checkSession() }
-    val language = if (Locale.getDefault().language == "en") "en" else "es"
+    val language = if (languageOverride in listOf("es", "en")) languageOverride
+        else if (Locale.getDefault().language == "en") "en" else "es"
     val english = language == "en"
     var loaded by remember { mutableStateOf(CatalogLoad(Catalog())) }
     var loading by remember { mutableStateOf(true) }
@@ -209,11 +253,22 @@ private fun PrototypeHome(
         when (requestedSection) {
             "reader" -> section = PrototypeNavigation.READER
             "videos" -> section = PrototypeNavigation.VIDEOS
+            "search" -> section = NativeDestinations.SEARCH
+            "contact" -> section = NativeDestinations.CONTACT
         }
         if (requestedSection != null) onRequestedSectionHandled()
     }
     LaunchedEffect(sharedFiles?.serial) {
         if (sharedFiles != null) section = PrototypeNavigation.READER
+    }
+    var initialSharedText by remember { mutableStateOf("") }
+    LaunchedEffect(sharedText) {
+        if (!sharedText.isNullOrBlank()) {
+            initialSharedText = sharedText
+            section = if (sharedText.startsWith("https://")) NativeDestinations.DOWNLOADS
+                else NativeDestinations.SEARCH
+            onSharedTextHandled()
+        }
     }
     var mediaIndex by rememberSaveable { mutableIntStateOf(0) }
     var mediaSourceIndex by rememberSaveable { mutableIntStateOf(0) }
@@ -267,7 +322,8 @@ private fun PrototypeHome(
         CatalogLogic.resourcesForCategory(resources, resourceCategories, resourceCategory)
     } else emptyList()
 
-    val title = if (english) "TifloAcosta Native Trial" else "TifloAcosta Nativa Pruebas"
+    val title = if (context.packageName == "com.tifloacosta.app") "TifloAcosta"
+        else if (english) "TifloAcosta Native Trial" else "TifloAcosta Nativa Pruebas"
     val first = if (english) "News" else "Actualidad"
     val second = if (english) "Resources" else "Recursos"
     val third = if (english) "Videos" else "Vídeos"
@@ -307,6 +363,22 @@ private fun PrototypeHome(
         return
     }
 
+    if (section in NativeDestinations.SEARCH..NativeDestinations.SOUND_SEARCH) {
+        NativeSecondaryScreen(
+            destination = section, english = english,
+            catalog = loaded.catalog, media = mediaLoad.items,
+            initialText = initialSharedText,
+            onBack = { section = PrototypeNavigation.HOME },
+            onOpenVideo = { item ->
+                val url = item.url.ifBlank { "https://www.youtube.com/watch?v=" + item.id }
+                playingMediaItem = MediaItem(item.id, "video", item.title,
+                    "YouTube", "https://www.youtube.com/", url, "", item.language, "", item.summary)
+            },
+            onSearchYouTube = { section = PrototypeNavigation.VIDEOS }
+        )
+        return
+    }
+
     Scaffold(modifier = Modifier.fillMaxSize()) { inner ->
         Column(modifier = Modifier.fillMaxSize().padding(inner).padding(horizontal = 16.dp)) {
             if (section == PrototypeNavigation.HOME) {
@@ -316,22 +388,26 @@ private fun PrototypeHome(
                     modifier = Modifier.padding(vertical = 14.dp).semantics { heading() }
                 )
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Button(
-                        onClick = { section = PrototypeNavigation.NEWS; visibleCount = 10 },
-                        modifier = Modifier.fillMaxWidth()
-                    ) { Text(first) }
-                    Button(
-                        onClick = { section = PrototypeNavigation.RESOURCES; visibleCount = 10 },
-                        modifier = Modifier.fillMaxWidth()
-                    ) { Text(second) }
-                    Button(
-                        onClick = { section = PrototypeNavigation.READER },
-                        modifier = Modifier.fillMaxWidth()
-                    ) { Text(readerLabel) }
-                    Button(
-                        onClick = { section = PrototypeNavigation.VIDEOS; visibleCount = 10 },
-                        modifier = Modifier.fillMaxWidth()
-                    ) { Text(third) }
+                    Button(onClick = { section = NativeDestinations.SEARCH }, modifier = Modifier.fillMaxWidth()) {
+                        Text(if (english) "Search" else "Buscar")
+                    }
+                    Button(onClick = { section = NativeDestinations.NEW_CONTENT }, modifier = Modifier.fillMaxWidth()) {
+                        Text(if (english) "New content" else "Novedades")
+                    }
+                    Button(onClick = { section = PrototypeNavigation.NEWS; visibleCount = 10 }, modifier = Modifier.fillMaxWidth()) { Text(first) }
+                    Button(onClick = { section = PrototypeNavigation.RESOURCES; visibleCount = 10 }, modifier = Modifier.fillMaxWidth()) { Text(second) }
+                    Button(onClick = { section = PrototypeNavigation.READER }, modifier = Modifier.fillMaxWidth()) { Text(readerLabel) }
+                    Button(onClick = { section = NativeDestinations.DOWNLOADS }, modifier = Modifier.fillMaxWidth()) {
+                        Text(if (english) "Downloads" else "Descargas")
+                    }
+                    Button(onClick = { section = NativeDestinations.FAVORITES }, modifier = Modifier.fillMaxWidth()) {
+                        Text(if (english) "Favorites" else "Favoritos")
+                    }
+                    Button(onClick = { section = PrototypeNavigation.VIDEOS; visibleCount = 10 }, modifier = Modifier.fillMaxWidth()) { Text(third) }
+                    Button(onClick = { section = NativeDestinations.PODCAST }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Podcasts" else "Podcasts") }
+                    Button(onClick = { section = NativeDestinations.CONTACT }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Contact" else "Contacto") }
+                    Button(onClick = { section = NativeDestinations.PRIVACY }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Privacy" else "Privacidad") }
+                    Button(onClick = { section = NativeDestinations.SETTINGS }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Settings" else "Configuración") }
                 }
             } else {
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -386,6 +462,11 @@ private fun PrototypeHome(
             }
 
             if (section == PrototypeNavigation.VIDEOS) {
+                NativeYouTubeSearch(english, account, onSignIn) { item ->
+                    playingMediaItem = MediaItem(item.id, "video", item.title,
+                        "YouTube", "https://www.youtube.com/", item.url,
+                        "", item.language, "", item.summary)
+                }
                 if (!account.authenticated) {
                     Button(onClick = onSignIn) {
                         Text(if (english) "Sign in with Google" else "Iniciar sesión con Google")

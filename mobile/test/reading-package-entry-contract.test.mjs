@@ -34,6 +34,8 @@ function assertMime(source, mime, label) {
   assert.match(source, new RegExp(mime.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace('/', '\\/')), `${label} missing ${mime}`);
 }
 
+const readShareManifests = async () => (await read('android/app/src/main/AndroidManifest.xml')) + (await read('../android-native-prototype/library/src/main/AndroidManifest.xml'));
+
 test('reading picker exposes every approved v1 document/container family and audio family', async () => {
   const [groupPlugin, wrapper] = await Promise.all([
     read('android/app/src/main/java/com/tifloacosta/app/TifloReadingAudioGroupPlugin.java'),
@@ -49,7 +51,7 @@ test('reading picker exposes every approved v1 document/container family and aud
 });
 
 test('reading share target advertises every approved v1 document/container family and audio family without broad storage permissions', async () => {
-  const manifest = await read('android/app/src/main/AndroidManifest.xml');
+  const manifest = await readShareManifests();
 
   assert.match(manifest, /android\.intent\.action\.SEND/);
   assert.match(manifest, /android\.intent\.action\.SEND_MULTIPLE/);

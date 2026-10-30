@@ -48,4 +48,19 @@ export function renderContact({ root, router, nativeActions, t }) {
     nativeActions,
     t
   });
+
+  // El libro es información de contacto del autor, no una entrada de portada.
+  const bookSection = document.createElement('section');
+  bookSection.className = 'content-card section-stack';
+  const heading = document.createElement('h2');
+  heading.textContent = t('screen.book');
+  const bookButton = document.createElement('button');
+  bookButton.type = 'button';
+  bookButton.id = 'contact-book';
+  bookButton.textContent = t('book.title');
+  bookButton.addEventListener('click', () => {
+    router.navigate('book', { originId: bookButton.id });
+  });
+  bookSection.append(heading, bookButton);
+  root.append(bookSection);
 }

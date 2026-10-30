@@ -1,0 +1,67 @@
+name: Fetch unprotected Play-signed Pixel 10 app split package
+on:
+  push:
+    branches:
+      - fix/android-139-production-native-entry-20261030
+    paths:
+      - mobile/release/fetch-pixel10-unprotected.once
+permissions:
+  contents: read
+concurrency:
+  group: tifloacosta-download-unprotected-139-pixel10
+  cancel-in-progress: false
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    env:
+      GOOGLE_PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - name: Refuse to run without explicit download-only marker
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -Fxq 'Download unprotected Google-signed Play APK splits for Pixel10 code21, no publish' mobile/release/fetch-pixel10-unprotected.once
+      - name: Download already generated unprotected Play-signed split APKs
+        working-directory: mobile
+        run: node scripts/download-play-unprotected-pixel10.mjs
+      - name: Verify signing identity, provenance and absence of Play installer check
+        shell: bash
+        run: |
+          set -euo pipefail
+          tools="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -1)"
+          test -n "$tools"
+          for apk in mobile/release/out/pixel10-139/*.apk; do
+            "$tools/apksigner" verify --print-certs "$apk" > "$apk.verify.txt"
+            grep -qi 'a7aafa700db6f9a325b111ff7e8fccdf3797a2e336e4fe33a9ff31f840e3dda0' "$apk.verify.txt"
+          done
+          "$tools/aapt" dump badging mobile/release/out/pixel10-139/base.apk | grep -F "package: name='com.tifloacosta.app' versionCode='21'"
+          python3 - <<'PY'
+          import glob,zipfile
+          base='mobile/release/out/pixel10-139/base.apk'
+          with zipfile.ZipFile(base) as z:
+            matches=[n for n in z.namelist() if n.startswith('classes') and n.endswith('.dex')]
+            assert matches, 'Missing DEX'
+            for n in matches:
+              d=z.read(n)
+              assert b'com/pairip/licensecheck/LicenseActivity' not in d, 'Protected Play installer-check code still present'
+          files=glob.glob('mobile/release/out/pixel10-139/*.apk')
+          assert len(files)==5
+          archive=glob.glob('mobile/release/out/*.apks')
+          assert len(archive)==1
+          with zipfile.ZipFile(archive[0]) as z:
+            assert len([n for n in z.namelist() if n.endswith('.apk')])==5
+            assert z.testzip() is None
+          print('PASS: Five Play-signed split APKs without installer check; NOT published')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: TifloAcosta-1.3.9-Pixel10-Play-sin-proteccion
+          path: |
+            mobile/release/out/*.apks
+            mobile/release/out/pixel10-provenance.json
+          retention-days: 30
+          if-no-files-found: error

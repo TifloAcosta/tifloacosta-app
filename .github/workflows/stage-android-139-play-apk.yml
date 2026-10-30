@@ -1,0 +1,98 @@
+name: Prepare Google Play signed APK without publishing
+on:
+  push:
+    branches:
+      - fix/android-139-production-native-entry-20261030
+    paths:
+      - mobile/release/stage-play-draft.once
+permissions:
+  contents: read
+concurrency:
+  group: tifloacosta-stage-draft-production-139
+  cancel-in-progress: false
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    env:
+      ONESIGNAL_DISABLE_LOCATION: "true"
+      GOOGLE_PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+    steps:
+      - name: Check out exact candidate commit
+        uses: actions/checkout@v5
+      - name: Refuse release if draft marker is invalid
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -Fxq 'stage 1.3.9 production draft only - DO NOT PUBLISH' mobile/release/stage-play-draft.once
+          node -e "const x=require('./mobile/release/request.json'); if(x.versionName!=='1.3.9'||x.status!=='draft'||x.track!=='production'||x.confirmProduction!==false||x.notifyUpdate!==false) process.exit(1)"
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: gradle
+      - name: Install root dependencies
+        run: npm install
+      - name: Run repository tests
+        run: npm test
+      - name: Install mobile dependencies
+        working-directory: mobile
+        run: npm ci
+      - name: Test mobile code
+        working-directory: mobile
+        run: npm test
+      - name: Build and sync Android
+        working-directory: mobile
+        run: npm run sync:android
+      - name: Recover the protected Android upload signing key
+        shell: bash
+        env:
+          KEY_BASE64: ${{ secrets.TIFLOACOSTA_KEYSTORE_BASE64 }}
+          KEY_PASSWORD: ${{ secrets.TIFLOACOSTA_KEYSTORE_PASSWORD }}
+        run: |
+          set -euo pipefail
+          test -n "$KEY_BASE64"
+          test -n "$KEY_PASSWORD"
+          path="$RUNNER_TEMP/tifloacosta-upload.p12"
+          printf '%s' "$KEY_BASE64" | base64 --decode > "$path"
+          chmod 600 "$path"
+          mapfile -t aliases < <(keytool -list -v -J-Duser.language=en -J-Duser.country=US \
+            -storetype PKCS12 -keystore "$path" -storepass "$KEY_PASSWORD" 2>/dev/null |
+            awk -F': ' '/^Alias name: / { a=$2 } /^Entry type: PrivateKeyEntry/ { print a }')
+          test "${#aliases[@]}" -eq 1
+          {
+            echo "ANDROID_KEYSTORE_PATH=$path"
+            echo "ANDROID_KEYSTORE_PASSWORD=$KEY_PASSWORD"
+            echo "ANDROID_KEY_ALIAS=${aliases[0]}"
+            echo "ANDROID_KEY_PASSWORD=$KEY_PASSWORD"
+          } >> "$GITHUB_ENV"
+      - name: Build signed AAB, commit draft to Google Play and download Google-signed APK
+        working-directory: mobile
+        run: node scripts/stage-play-draft.mjs
+      - name: Check installable APK, package ID, and version against recorded draft
+        shell: bash
+        run: |
+          set -euo pipefail
+          apk="$(find mobile/release/out -maxdepth 1 -type f -name 'TifloAcosta-Android-1.3.9-code*-GooglePlay.apk' -print -quit)"
+          test -n "$apk"
+          unzip -t "$apk" > /dev/null
+          build_tools="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -1)"
+          "$build_tools/apksigner" verify --verbose --print-certs "$apk"
+          "$build_tools/aapt" dump badging "$apk" | grep -F "package: name='com.tifloacosta.app' versionCode="
+          grep -Fq '"published": false' mobile/release/out/Google-Play-draft-info.json
+          grep -Fq '"status": "draft"' mobile/release/out/Google-Play-draft-info.json
+      - name: Retain only Google Play signed APK and provenance (not debug APK)
+        uses: actions/upload-artifact@v4
+        with:
+          name: TifloAcosta-1.3.9-GooglePlay-firmada-sin-publicar
+          if-no-files-found: error
+          retention-days: 15
+          path: |
+            mobile/release/out/TifloAcosta-Android-1.3.9-code*-GooglePlay.apk
+            mobile/release/out/Google-Play-draft-info.json

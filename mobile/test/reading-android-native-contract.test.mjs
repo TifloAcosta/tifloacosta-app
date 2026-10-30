@@ -10,6 +10,8 @@ const read = async path => {
   }
 };
 
+const readShareManifests = async () => (await read('android/app/src/main/AndroidManifest.xml')) + (await read('../android-native-prototype/library/src/main/AndroidManifest.xml'));
+
 test('reading android native contract registers the reading and tts Capacitor bridges', async () => {
   const plugin = await read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java');
   const ttsPlugin = await read('android/app/src/main/java/com/tifloacosta/app/TifloReadingTtsPlugin.java');
@@ -87,7 +89,7 @@ test('reading android native contract uses the document picker for multiple TXT 
 test('reading android native contract accepts TXT HTML and PDF shared file streams without broad storage permissions', async () => {
   const plugin = await read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java');
   const share = await read('android/app/src/main/java/com/tifloacosta/app/TifloSharePlugin.java');
-  const manifest = await read('android/app/src/main/AndroidManifest.xml');
+  const manifest = await readShareManifests();
 
   assert.match(plugin, /Intent\.ACTION_SEND/);
   assert.match(plugin, /Intent\.ACTION_SEND_MULTIPLE/);
@@ -134,7 +136,7 @@ test('reading android native contract opens PDFs through the extractor with a ca
 test('reading android native contract excludes the private reading library from backup and cleans stale temps off the UI thread', async () => {
   const [plugin, manifest, backupRules, extractionRules] = await Promise.all([
     read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java'),
-    read('android/app/src/main/AndroidManifest.xml'),
+    readShareManifests(),
     read('android/app/src/main/res/xml/backup_rules.xml'),
     read('android/app/src/main/res/xml/data_extraction_rules.xml')
   ]);
@@ -180,7 +182,7 @@ test('reading audio native contract requires Media3 background playback without 
     read('android/app/src/main/java/com/tifloacosta/app/reading/ReadingAudioService.java'),
     read('android/app/src/main/java/com/tifloacosta/app/TifloReadingAudioPlugin.java'),
     read('android/app/src/main/java/com/tifloacosta/app/MainActivity.java'),
-    read('android/app/src/main/AndroidManifest.xml')
+    readShareManifests()
   ]);
 
   assert.match(gradle, /androidx\.media3:media3-exoplayer/);

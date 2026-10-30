@@ -1,3 +1,4 @@
+import { Capacitor } from '@capacitor/core';
 import { App } from '@capacitor/app';
 import { Browser } from '@capacitor/browser';
 import { Share } from '@capacitor/share';
@@ -69,6 +70,7 @@ let pendingSearchQuery = '';
 let pendingReadingImportBatch = null;
 let pendingReadingBookId = '';
 let pendingReadingBookPercent = null;
+let launchedFromNativeHome = false;
 let notificationService;
 
 function safeStorage() {
@@ -476,7 +478,17 @@ function render(route) {
   document.title = t('app.title');
   const context = {
     root,
-    router,
+    router: launchedFromNativeHome ? {
+      ...router,
+      back() {
+        // The legacy section was opened from the real native home.
+        if (router.snapshot().length <= 2) {
+          void NativeFeatures.returnToNativeHome();
+          return true;
+        }
+        return router.back();
+      }
+    } : router,
     route: route.name,
     content: currentContent,
     preferences,
@@ -569,6 +581,27 @@ function render(route) {
     case 'videos': {
       const initialVideoId = pendingVideoId;
       pendingVideoId = '';
+      // Android must open the tested Compose/TalkBack list, not its HTML duplicate.
+      if (Capacitor.getPlatform() === 'android' && !initialVideoId) {
+        root.replaceChildren();
+        void NativeFeatures.openNativeVideos().then(() => {
+          if (launchedFromNativeHome) {
+            void NativeFeatures.returnToNativeHome();
+          } else if (router.current()?.name === 'videos') {
+            router.back();
+          }
+        }).catch(() => {
+          if (router.current()?.name === 'videos') {
+            renderVideos({
+              ...context,
+              onBackStateChange: handler => {
+                screenBackHandler = typeof handler === 'function' ? handler : null;
+              }
+            });
+          }
+        });
+        break;
+      }
       renderVideos({
         ...context,
         initialVideoId,
@@ -686,6 +719,10 @@ notificationService = createNotificationService(notificationClient.adapter);
 void notificationClient.start();
 
 function handleScreenBack() {
+  if (launchedFromNativeHome && router.snapshot().length <= 2) {
+    void NativeFeatures.returnToNativeHome();
+    return true;
+  }
   if (shareMode) return handleShareBack();
   if (typeof screenBackHandler === 'function' && screenBackHandler()) return true;
   if (router.current()?.name === 'reader' && readerController?.back) return readerController.back();
@@ -725,8 +762,24 @@ async function restoreExistingReaderNavigation() {
 }
 
 router.start('home');
+async function consumeNativeHomeDestination() {
+  try {
+    const response = await NativeFeatures.consumeLegacySection();
+    const destination = String(response?.section || '');
+    if (!destination || shareMode) return;
+    launchedFromNativeHome = true;
+    router.start('home');
+    router.navigate(destination);
+  } catch {
+    // Browser previews and older Android packages have no native section bridge.
+  }
+}
+void consumeNativeHomeDestination();
 void restoreExistingReaderNavigation();
-onAppResume(() => { void restoreExistingReaderNavigation(); });
+onAppResume(() => {
+  void consumeNativeHomeDestination();
+  void restoreExistingReaderNavigation();
+});
 void installShareReceiver();
 void installReadingDocumentReceiver();
 void loadAppInfo(App).then(info => {

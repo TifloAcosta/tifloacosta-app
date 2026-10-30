@@ -56,7 +56,7 @@ test('reading audio import validates the private temp file before inserting a li
 test('Android picker and share targets expose audio without broad storage permissions', async () => {
   const [plugin, manifest] = await Promise.all([
     read('android/app/src/main/java/com/tifloacosta/app/TifloReadingPlugin.java'),
-    read('android/app/src/main/AndroidManifest.xml')
+    (async () => (await read('android/app/src/main/AndroidManifest.xml')) + (await read('../android-native-prototype/library/src/main/AndroidManifest.xml')))()
   ]);
 
   for (const mime of ['audio/mpeg', 'audio/mp4', 'audio/aac', 'audio/ogg', 'audio/opus', 'audio/flac', 'audio/wav']) {

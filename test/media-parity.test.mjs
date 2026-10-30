@@ -53,6 +53,6 @@ test('home navigation and PWA shell expose the web podcast player', async () => 
   const [home, worker] = await Promise.all([read('index.html'), read('sw.js')]);
   assert.ok(home.includes('id="home-open-podcast" href="podcast.html"'));
   assert.ok(worker.includes("'./podcast.html'"));
-  assert.ok(worker.includes("'./podcast.js?v=1.0'"));
+  assert.ok(worker.includes("'./podcast.js?v=1.1'"));
   assert.ok(worker.includes("url.pathname.endsWith('/podcast.js')"));
 });

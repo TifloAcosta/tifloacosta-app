@@ -34,7 +34,7 @@ function assertMime(source, mime, label) {
   assert.match(source, new RegExp(mime.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace('/', '\\/')), `${label} missing ${mime}`);
 }
 
-const readShareManifests = async () => (await read('android/app/src/main/AndroidManifest.xml')) + (await read('../../android-native-prototype/library/src/main/AndroidManifest.xml'));
+const readShareManifests = async () => (await read('android/app/src/main/AndroidManifest.xml')) + (await read('../android-native-prototype/library/src/main/AndroidManifest.xml'));
 
 test('reading picker exposes every approved v1 document/container family and audio family', async () => {
   const [groupPlugin, wrapper] = await Promise.all([

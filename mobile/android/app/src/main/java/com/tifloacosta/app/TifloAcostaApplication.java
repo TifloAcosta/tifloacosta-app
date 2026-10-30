@@ -1,6 +1,8 @@
 package com.tifloacosta.app;
 
 import android.app.Application;
+import android.app.Activity;
+import android.os.Bundle;
 import com.onesignal.OneSignal;
 
 /**
@@ -15,5 +17,19 @@ public final class TifloAcostaApplication extends Application {
         super.onCreate();
         OneSignal.setConsentRequired(true);
         OneSignal.initWithContext(this, ONESIGNAL_APP_ID);
+        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+            @Override public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+                if ("com.tifloacosta.nativeprototype.NativePrototypeActivity"
+                        .equals(activity.getClass().getName())) {
+                    NativeWebStateMigration.importIfNecessary(activity);
+                }
+            }
+            @Override public void onActivityStarted(Activity activity) {}
+            @Override public void onActivityResumed(Activity activity) {}
+            @Override public void onActivityPaused(Activity activity) {}
+            @Override public void onActivityStopped(Activity activity) {}
+            @Override public void onActivitySaveInstanceState(Activity activity, Bundle outState) {}
+            @Override public void onActivityDestroyed(Activity activity) {}
+        });
     }
 }

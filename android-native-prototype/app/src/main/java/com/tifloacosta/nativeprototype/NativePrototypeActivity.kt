@@ -108,16 +108,6 @@ class NativePrototypeActivity : ComponentActivity() {
                     onSignIn = {
                         val url = youTubeAccount.startAuthorization()
                         startActivity(Intent(Intent.ACTION_VIEW, url))
-                    },
-                    onOpenLegacy = { destination ->
-                        // Solo para secciones que aún conservan su flujo oficial previo.
-                        // El paquete principal permanece sin cambios y conserva sus datos.
-                        runCatching {
-                            startActivity(Intent().apply {
-                                setClassName(packageName, "com.tifloacosta.app.MainActivity")
-                                putExtra("tifloacosta-open-legacy-section", destination)
-                            })
-                        }
                     }
                 )
             }
@@ -194,8 +184,7 @@ private fun PrototypeHome(
     onRequestedSectionHandled: () -> Unit,
     sharedFiles: SharedReaderFiles?,
     onSharedFilesHandled: () -> Unit,
-    onSignIn: () -> Unit,
-    onOpenLegacy: (String) -> Unit
+    onSignIn: () -> Unit
 ) {
     val context = LocalContext.current
 
@@ -220,6 +209,8 @@ private fun PrototypeHome(
         when (requestedSection) {
             "reader" -> section = PrototypeNavigation.READER
             "videos" -> section = PrototypeNavigation.VIDEOS
+            "search" -> section = NativeDestinations.SEARCH
+            "contact" -> section = NativeDestinations.CONTACT
         }
         if (requestedSection != null) onRequestedSectionHandled()
     }
@@ -319,6 +310,21 @@ private fun PrototypeHome(
         return
     }
 
+    if (section in NativeDestinations.SEARCH..NativeDestinations.SOUND_SEARCH) {
+        NativeSecondaryScreen(
+            destination = section, english = english,
+            catalog = loaded.catalog, media = mediaLoad.items,
+            onBack = { section = PrototypeNavigation.HOME },
+            onOpenVideo = { item ->
+                val url = item.url.ifBlank { "https://www.youtube.com/watch?v=" + item.id }
+                playingMediaItem = MediaItem(item.id, "video", item.title,
+                    "YouTube", "https://www.youtube.com/", url, "", item.language, "", item.summary)
+            },
+            onSearchYouTube = { section = PrototypeNavigation.VIDEOS }
+        )
+        return
+    }
+
     Scaffold(modifier = Modifier.fillMaxSize()) { inner ->
         Column(modifier = Modifier.fillMaxSize().padding(inner).padding(horizontal = 16.dp)) {
             if (section == PrototypeNavigation.HOME) {
@@ -328,26 +334,26 @@ private fun PrototypeHome(
                     modifier = Modifier.padding(vertical = 14.dp).semantics { heading() }
                 )
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Button(onClick = { onOpenLegacy("search") }, modifier = Modifier.fillMaxWidth()) {
+                    Button(onClick = { section = NativeDestinations.SEARCH }, modifier = Modifier.fillMaxWidth()) {
                         Text(if (english) "Search" else "Buscar")
                     }
-                    Button(onClick = { onOpenLegacy("new-content") }, modifier = Modifier.fillMaxWidth()) {
+                    Button(onClick = { section = NativeDestinations.NEW_CONTENT }, modifier = Modifier.fillMaxWidth()) {
                         Text(if (english) "New content" else "Novedades")
                     }
                     Button(onClick = { section = PrototypeNavigation.NEWS; visibleCount = 10 }, modifier = Modifier.fillMaxWidth()) { Text(first) }
                     Button(onClick = { section = PrototypeNavigation.RESOURCES; visibleCount = 10 }, modifier = Modifier.fillMaxWidth()) { Text(second) }
                     Button(onClick = { section = PrototypeNavigation.READER }, modifier = Modifier.fillMaxWidth()) { Text(readerLabel) }
-                    Button(onClick = { onOpenLegacy("downloads") }, modifier = Modifier.fillMaxWidth()) {
+                    Button(onClick = { section = NativeDestinations.DOWNLOADS }, modifier = Modifier.fillMaxWidth()) {
                         Text(if (english) "Downloads" else "Descargas")
                     }
-                    Button(onClick = { onOpenLegacy("favorites") }, modifier = Modifier.fillMaxWidth()) {
+                    Button(onClick = { section = NativeDestinations.FAVORITES }, modifier = Modifier.fillMaxWidth()) {
                         Text(if (english) "Favorites" else "Favoritos")
                     }
                     Button(onClick = { section = PrototypeNavigation.VIDEOS; visibleCount = 10 }, modifier = Modifier.fillMaxWidth()) { Text(third) }
-                    Button(onClick = { onOpenLegacy("podcast") }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Podcasts" else "Podcasts") }
-                    Button(onClick = { onOpenLegacy("contact") }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Contact" else "Contacto") }
-                    Button(onClick = { onOpenLegacy("privacy") }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Privacy" else "Privacidad") }
-                    Button(onClick = { onOpenLegacy("settings") }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Settings" else "Configuración") }
+                    Button(onClick = { section = NativeDestinations.PODCAST }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Podcasts" else "Podcasts") }
+                    Button(onClick = { section = NativeDestinations.CONTACT }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Contact" else "Contacto") }
+                    Button(onClick = { section = NativeDestinations.PRIVACY }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Privacy" else "Privacidad") }
+                    Button(onClick = { section = NativeDestinations.SETTINGS }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Settings" else "Configuración") }
                 }
             } else {
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -402,6 +408,11 @@ private fun PrototypeHome(
             }
 
             if (section == PrototypeNavigation.VIDEOS) {
+                NativeYouTubeSearch(english, account, onSignIn) { item ->
+                    playingMediaItem = MediaItem(item.id, "video", item.title,
+                        "YouTube", "https://www.youtube.com/", item.url,
+                        "", item.language, "", item.summary)
+                }
                 if (!account.authenticated) {
                     Button(onClick = onSignIn) {
                         Text(if (english) "Sign in with Google" else "Iniciar sesión con Google")

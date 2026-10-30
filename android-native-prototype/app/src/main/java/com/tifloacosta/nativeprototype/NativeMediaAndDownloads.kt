@@ -72,9 +72,9 @@ private fun limitedResponse(url: String, post: JSONObject? = null): String {
 }
 
 @Composable
-fun NativeDownloadScreen(english: Boolean) {
+fun NativeDownloadScreen(english: Boolean, initialUrl: String = "") {
     val context = LocalContext.current
-    var url by remember { mutableStateOf("") }
+    var url by remember(initialUrl) { mutableStateOf(initialUrl) }
     var status by remember { mutableStateOf("") }
     Column(verticalArrangement = Arrangement.spacedBy(9.dp)) {
         Text(if (english) "Direct file download" else "Descargar archivo por enlace",

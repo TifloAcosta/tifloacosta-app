@@ -47,3 +47,17 @@ test('web reader provides audio playlist and preserves existing playback control
  assert.match(source,/prepared\.format === 'daisy-audio'/);
  assert.match(source,/ensureAudioTools\(\)\.append\(controller\)/);
 });
+
+test('SMIL parallel cues retain text fragments and audio time ranges',async()=>{
+ const book=await parseDaisyArchive(fakeZip({
+  'ncc.html':'<a href="one.smil">Start</a>',
+  'one.smil':'<smil><par><text src="page.html#para1"/><audio src="one.mp3" clipBegin="00:00:03.500" clipEnd="00:00:08"/></par></smil>',
+  'page.html':'<body><p id="para1">Read with audio.</p></body>',
+  'one.mp3':'sound'
+ }));
+ assert.equal(book.timeline.length,1);
+ assert.equal(book.timeline[0].clipBegin,3.5);
+ assert.equal(book.timeline[0].clipEnd,8);
+ assert.equal(book.timeline[0].textId,'para1');
+ assert.equal(book.timeline[0].textPath,'page.html');
+});

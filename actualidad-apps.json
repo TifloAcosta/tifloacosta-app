@@ -120,6 +120,18 @@
     "publishedAt": null
   },
   {
+    "id": "applevis-apps-ff393973c3915870",
+    "title": "Voice-enabled Makeup Assistant",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/lifestyle/voice-enabled-makeup-assistant",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "This innovative app offers audio feedback on the user’s foundation, eyeshadow and lipstick application, creating a more accessible beauty experience for the Blind and visually impaired. How It Works: The AI-powered Voice-enabled Makeup Assistant leverages machine learning and voice instruction technologies to learn your preferences and provide audio feedback when you ask. After you apply your foundation, eyeshadow or lipstick, the app will access your phone’s front camera to scan your face. Using artificial intelligence, it identifies the makeup applied to your face, eyes and lips and assesses the uniformity and boundaries of application and coverage. If there are suggested areas to touch up, the virtual assistant identifies them and makes audible recommendations so you can adjust your look. After your touch up, the app scans your face again and provides feedback on the accuracy of application.",
+    "publishedAt": "2026-10-29T22:04:09.000Z"
+  },
+  {
     "id": "applevis-apps-4d3d0113a716d93b",
     "title": "GemGame: Cozy Match 3 Puzzle",
     "sourceId": "applevis-apps",
@@ -140,7 +152,7 @@
     "originalUrl": "https://www.applevis.com/apps/ios/games/motif-word-challenge",
     "lang": "en",
     "platform": "Apple",
-    "summary": "Swap letters and find ten words a day to take on the world. Jump into the adventure of the new Ascension mode! Free, with no ads or account required. Find ten hidden words every day and aim for the highest score on the daily grid! Motif is a strategic word game that combines clever wordplay with match-3-inspired mechanics. Free, ad-free, and no account required. THE WORD GAME WHERE WORDS HIDE! Swap letters, spot words, and plan your next move. Swipe across words to clear them from the grid. Every move shapes what comes next, so choose wisely! Everyone starts with the same grid. Submit your score if you’d like, and see where you rank on the daily leaderboard. NEW ASCENSION MODE! Motif becomes a full-blown adventure! Climb ten increasingly tough levels packed with bosses, special tiles, and bonuses galore. Motif has never played like this—and it’s free! ZEN MODES Want to play without the pressure? Zen Mode gives you fresh grids and the same rules, but with no word limit and no leaderboard. Take your time and play at your own pace. + “À LA CARTE” MODE! You set your own rules: swipe words bottom to top, right to left, in an L shape, use unlimited letter swaps… You call the shots. + M0T1F MODE! This time, numbers take the stage: swipe tiles to add them up and hit the target number. Careful, this one’s dangerously addictive! MAKE IT YOURS Customize Motif to suit your style: fonts, colors, tile shapes, score display, backgrounds… even the app icon. NO ADS. NO TRACKING. NO ACCOUNT. Just open Motif and start playing. No internet connection is required to play. The leaderboard is entirely optional. If you choose to participate, only your score, the date, and the grid language are submitted. No account, no advertising ID, and no player profile. Individual scores are deleted after 30 days.",
+    "summary": "Find ten hidden words every day and aim for the highest score on the daily grid! Motif is a strategic word game that combines clever wordplay with match-3-inspired mechanics. Free, ad-free, and no account required. THE WORD GAME WHERE WORDS HIDE! Swap letters, spot words, and plan your next move. Swipe across words to clear them from the grid. Every move shapes what comes next, so choose wisely! Everyone starts with the same grid. Submit your score if you’d like, and see where you rank on the daily leaderboard. NEW ASCENSION MODE! Motif becomes a full-blown adventure! Climb ten increasingly tough levels packed with bosses, special tiles, and bonuses galore. Motif has never played like this—and it’s free! ZEN MODES Want to play without the pressure? Zen Mode gives you fresh grids and the same rules, but with no word limit and no leaderboard. Take your time and play at your own pace. + “À LA CARTE” MODE! You set your own rules: swipe words bottom to top, right to left, in an L shape, use unlimited letter swaps… You call the shots. + M0T1F MODE! This time, numbers take the stage: swipe tiles to add them up and hit the target number. Careful, this one’s dangerously addictive! MAKE IT YOURS Customize Motif to suit your style: fonts, colors, tile shapes, score display, backgrounds… even the app icon. NO ADS. NO TRACKING. NO ACCOUNT. Just open Motif and start playing. No internet connection is required to play. The leaderboard is entirely optional. If you choose to participate, only your score, the date, and the grid language are submitted. No account, no advertising ID, and no player profile. Individual scores are deleted after 30 days.",
     "publishedAt": "2026-10-29T18:32:32.000Z"
   },
   {
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "Sortalis is a dice-building roguelike inspired by Farkle. Roll, score, and decide how far you’re willing to push your luck—then spend your winnings on Charms and upgrades that transform your dice, strengthen your strategy, and rewrite the rules. Every run becomes a new engine to build, exploit, and inevitably push a little too far. **What’s in the game?** • Endless challenges that grow tougher and demand new strategies • Over 150 upgrades to discover and combine into powerful builds • Rewards, unlocks, achievements, Dice Bags, and challenges to master • Multiplayer draft mode! **Roll, Set, or Bank** Roll and select scoring combos carefully. Roll again to make it bigger—or Farkle and lose the lot. Bank before your luck runs out. **Spend It in The Shop** Between Bouts, spend your winnings on Charms, Packs, Action Cards, and other upgrades. Don’t like what’s on the shelf? Redraw it and hunt for the piece your build needs. **Face The House** Every night ends with a boss that changes the rules. THE MISER, for example, won’t let you Bank until your Pot reaches 500. **Then Do It All Again** Every Bank and Farkle adds to your final score. Unlock 14 Dice Bags, tabletops, discover new combinations, and see how far you can push your next run.",
     "publishedAt": "2026-10-16T10:36:52.000Z"
-  },
-  {
-    "id": "applevis-apps-aef93ab730feefe4",
-    "title": "Decant: Color Sort Puzzle",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/decant-color-sort-puzzle",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Pour a little color. Make a little order. Decant is a color-sort puzzle with luminous glass vessels and a simple goal: leave each filled vessel with just one color. Tap a vessel, choose a matching color or an empty space, and pour the top group. Two spare vessels give you room to think—not a shortcut to buy. NO ADS. ROOM TO PLAY. - 180 puzzles across four difficulty levels, each checked for a solution. - A fresh, always-free Daily, with the same ranked board and rules for everyone. - Practice puzzles generated and checked before you play. - Satisfying glass pours—or instant pours when you prefer to skip the animation. - Liquid symbols, a high-contrast palette, and sound, haptic, handedness, and motion controls. - Free restarts. No lives, energy, timers, or extra vessels for sale. Find a solution, then try to make it cleaner. A Perfect clear uses the fewest possible pours. Older archived Daily puzzles may show a Target instead; that is a reference solution, not a promise of the minimum. START FREE. UNLOCK MORE IF YOU LIKE. The first 30 puzzles, today's Daily, and three practice puzzles per day are free, with three undos per board. The Daily does not count against your practice allowance. A one-time Decant Full Game Unlock opens all 180 puzzles, unlimited practice and undos outside the ranked Daily, the full Daily archive for unranked practice, and advanced records. Or choose the StackForge Play Pass for Pro access across StackForge games and One Good Thing. Prices are shown before purchase. Play Pass subscriptions renew automatically unless canceled. Today's ranked Daily gives every player the same three undos, whether free or Pro. No ads in either tier. Optional account sync keeps your progress and Play Pass connected. Terms: https://stackforgestudios.com/terms Privacy: https://stackforgestudios.com/privacy Terms of Use (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
-    "publishedAt": "2026-10-15T17:06:19.000Z"
   }
 ]

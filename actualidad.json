@@ -1,5 +1,175 @@
 [
   {
+    "id": "9to5mac-12815643be8fe230",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/29/daily-october-29-2026/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-30T00:58:40.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "android",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "9to5Mac Daily: October 29, 2026 – New MacBook Pro with PROLED XDR Display",
+        "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
+        "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-b49fac5a2672a568",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/10/29/aws-will-be-a-1t-business-jassy-says-but-first-it-will-spend-big/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T23:42:22.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "AWS will be a $1T business, Jassy says. But first, it will spend big.",
+        "summary": "Amazon wants to be the king of AI cloud computing and become the first $1 trillion revenue business. But to do that it will have to continue on its capex spending spree, its CEO said Thursday.",
+        "body": "Andy Jassy has made it known that he believes AWS can be a trillion-dollar revenue business. During Amazon’s quarterly earnings call on Thursday, he repeated this ambition.\n\n“What we’re building at Amazon is unlike anything that’s ever been seen before. There has never been a business with a trillion dollars of annual revenue,” he said.\n\nHowever, before the cloud business gets there, Amazon is going to have ramp up its capital expenditures to build out the infrastructure necessary to support that blossoming business.\n\n“We still expect 2026 cash capex of approximately $220 billion — the majority for AWS — and expect to spend meaningfully more in 2027, with a clear line of sight to attract its financial returns,” Jassy revealed on Thursday.\n\nAmazon’s big spending on its AI infrastructure buildout has been an ongoing source of concern for investors this year. Indeed, during Thursday’s call, Wall Street analysts repeatedly asked Jassy to explain the spending, the signals that the growth really will come, and the profit margins expected.\n\nJassy told them it was all money well spent because the e-commerce giant planned to capitalize on a historic moment in global cloud demand driven by AI. AWS revenue increased 39 percent from the year-ago quarter, a trend of steady growth for the sixth straight quarter .\n\nAnd the CEO forecast on the call that it would increase by 40% not just next year, but in 2028, too.\n\n“AWS is a $184 billion annualized revenue run-rate business, and yet the opportunity remains extraordinary,” the CEO enthused. “With our continued pace of innovation, new core and AI functionality, enterprises wanting to run their core and AI workloads in AWS, and the amount of capacity that we’re adding each year, we believe that AWS can grow north of 40 percent in each 2027 and in 2028, and be a trillion-dollar revenue business in the next five to 10 years.”\n\nJassy added that the company was “in the very early days” of AI adoption by the enterprise and said that, so far, the “strategy is working.”\n\nLater, when questioned why the investment needed to grow AWS was so substantial, Jassy characterized the AI boom as a “once in a lifetime opportunity” that required, and was worth, such a big financial commitment now.\n\n“We’re going to invest to continue being the leader,” he said. “We can fund this plan, and I think it will forever change the size of Amazon. It will forever change our revenue.”\n\nInvestors, however, remained concerned. Shares were down about 6% on Thursday in after-market trading.\n\nThe AI boom has been a mixed blessing for the cloud industry, since the AI services that undergird the boom are supported by cloud infrastructure. Like Amazon, other cloud providers are spending big but also earning big. Microsoft, for instance, just posted yet more record-breaking revenue growth, driven largely by its cloud business. It, too, has spent a bundle ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-ebdf99e5a1c68ff5",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1022911/intel-wildcat-lake-sold-out-ram-shortage",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T23:42:21.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Intel says it’s selling every affordable laptop chip it can make",
+        "summary": "During Intel's latest earnings call, CEO Lip-Bu Tan said that demand for its budget-focused Wildcat Lake chips \"is outstripping supply.\" According to CFO David Zinsner, the chips are now sold out. Zinsner said Intel has \"seen significant growth in Wildcat Lake. It's coming exactly at the right time because it's cost-optimized and we're seeing a […]",
+        "body": "During Intel's latest earnings call , CEO Lip-Bu Tan said that demand for its budget-focused Wildcat Lake chips \"is outstripping supply.\" According to CFO David Zinsner, the chips are now sold out. Zinsner said Intel has \"seen significant growth in Wildcat Lake. It's coming exactly at the right time because it's cost-optimized and we're seeing a lot of focus in that regard.\"\n\nAs shortages of RAM and other components have driven up PC prices over recent months, Intel's Wildcat Lake chips have been appearing in new lower-cost Windows laptops on par with the MacBook Neo, like the new Dell XPS 13 or the HP Omnibook 5 14 . Wildcat Lake laptops like …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-96311dc83290ed6e",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/10/29/report-apple-expected-to-ship-up-to-1-5-million-oled-touchscreen-macbook-pros-in-2027/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T22:37:53.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Report: Apple expected to ship up to 1.5 million OLED touchscreen MacBook Pros in 2027",
+        "summary": "A new report from TrendForce explores Apple’s impact on the OLED notebook market following the launch of its first touchscreen MacBook Pro, and the company’s own shipment prospects for 2027. Here are the details. more…",
+        "body": "A new report from TrendForce explores Apple’s impact on the OLED notebook market following the launch of its first touchscreen MacBook Pro, and the company’s own shipment prospects for 2027. Here are the details.\n\nApple yesterday announced the new touchscreen MacBook Pro, which features the same tandem OLED technology it first introduced with the M4 iPad Pro in 2024.\n\nWith two OLED layers stacked on top of each other, the technology delivers higher brightness than conventional single-layer OLED displays, while maintaining the deep blacks, high contrast ratios, and power efficiency that OLED is known for.\n\nAnd while yesterday’s announcement made it official, Apple’s first touchscreen Mac has long been rumored through leaks, reports, and supply chain analyses.\n\nIn September 2025, for instance, The Elec reported that Samsung Display was preparing to begin mass production of 14-inch and 16-inch OLED panels for Apple’s MacBook Pro in the second quarter of 2026, with an estimated annual output of 2–3 million units.\n\nTwo months later, TrendForce predicted that OLED notebook market share would reach up to 12% between 2027 and 2028, partly driven by Apple’s expected adoption of the technology.\n\nThen, earlier this year, TrendForce published an OLED roadmap predicting that Apple would introduce OLED displays to the MacBook Pro lineup in 2026, followed by the MacBook Air in 2029 ( pushed back from 2027 ).\n\nNow, TrendForce has published a new report with new shipment forecasts for Apple’s OLED MacBook Pro and the broader OLED notebook market.\n\nAccording to the firm, Apple is expected to ship between 1.2 million and 1.5 million units of the new MacBook Pro in 2027. Meanwhile, global OLED notebook shipments are projected to “grow nearly 40% YoY in 2026, followed by another increase of more than 40% in 2027.”\n\nFrom the report:\n\nUntil now, the OLED notebook market has been driven primarily by Windows-based brands such as Lenovo, HP, and ASUS, which have gradually expanded their OLED offerings across different price segments. Apple’s arrival is expected to give the market additional momentum, encouraging brands to prioritize OLED models in their product roadmaps while strengthening consumer acceptance of the technology. This, in turn, could pave the way for broader OLED adoption in notebook displays.\n\nTrendForce also notes that the “new MacBook Pro’s premium starting price of US$2,899 for the 14-inch model, coupled with its initial availability alongside existing Mini-LED models, could temper near-term replacement demand.”\n\nAs for Apple’s first OLED MacBook Air, now expected to debut in 2029, TrendForce says LG Display, BOE, and TCL CSOT are currently competing to become display suppliers for the upcoming model, as the companies continue developing their OLED manufacturing capabilities.\n\nFinally, TrendForce projects that global OLED notebook shipments will reach 46.6 million units by 2030, though year-over-year growth will slow to 30.8%, following a peak of 42.8% in 2028.\n\nTo read TrendForce’s full report, follow this link ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-15e6e2a236b1b468",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1022848/reddit-ceo-google-ai-mode-traffic",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T22:19:32.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Reddit’s CEO says Google’s AI Mode ‘does not drive traffic’",
+        "summary": "Reddit CEO Steve Huffman said in an earnings call today that Google's AI-powered search modes do not help with traffic to the platform, echoing problems facing other websites and publishers. As part of its Q3 2026 earnings, Reddit revealed that search traffic in October has \"dropped by more than 1 million referrals on average per […]",
+        "body": "Reddit CEO Steve Huffman said in an earnings call today that Google's AI-powered search modes do not help with traffic to the platform, echoing problems facing other websites and publishers . As part of its Q3 2026 earnings, Reddit revealed that search traffic in October has \"dropped by more than 1 million referrals on average per week,\" and he attributes part of the company's struggles with Google traffic to how AI Mode and AI Overviews change the search experience.\n\n\"The reality is, AI Mode does not drive traffic,\" Huffman says. \"Not for us, and not to anybody, as far as I know. That's just a fundamental shift in how Google works. It used t …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-apps-ff393973c3915870",
+    "type": "news",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/lifestyle/voice-enabled-makeup-assistant",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T22:04:09.000Z",
+    "categories": [
+      "apple",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Voice-enabled Makeup Assistant",
+        "summary": "This innovative app offers audio feedback on the user’s foundation, eyeshadow and lipstick application, creating a more accessible beauty experience for the Blind and visually impaired. How It Works: The AI-powered Voice-enabled Makeup Assistant leverages machine learning and voice instruction technologies to learn your preferences and provide audio feedback when you ask. After you apply your foundation, eyeshadow or lipstick, the app will access your phone’s front camera to scan your face. Using artificial intelligence, it identifies the makeup applied to your face, eyes and lips and assesses the uniformity and boundaries of application and coverage. If there are suggested areas to touch up, the virtual assistant identifies them and makes audible recommendations so you can adjust your look. After your touch up, the app scans your face again and provides feedback on the accuracy of application.",
+        "body": "This innovative app offers audio feedback on the user’s foundation, eyeshadow and lipstick application, creating a more accessible beauty experience for the Blind and visually impaired.\n\nHow It Works:\n\nThe AI-powered Voice-enabled Makeup Assistant leverages machine learning and voice instruction technologies to learn your preferences and provide audio feedback when you ask.\n\nAfter you apply your foundation, eyeshadow or lipstick, the app will access your phone’s front camera to scan your face. Using artificial intelligence, it identifies the makeup applied to your face, eyes and lips and assesses the uniformity and boundaries of application and coverage. If there are suggested areas to touch up, the virtual assistant identifies them and makes audible recommendations so you can adjust your look. After your touch up, the app scans your face again and provides feedback on the accuracy of application."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-94be8a803c36b306",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2301786/vrchat-says-its-not-adding-ai-labels-despite-user-survey-showing-people-want-that/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-10-29T21:48:05.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "VRChat says it's not adding AI labels despite user survey showing people want that",
+        "summary": "Trying to make everyone happy could make no one happy.",
+        "body": "Trying to make everyone happy could make no one happy.\n\nVRChat has published a support post explaining the results from a survey of users regarding artificial intelligence on the platform. Despite 95 percent of its respondents stating that they want some form of label to designate AI usage, the company said that at this time, it will not be implementing any tags in that vein. VRChat is an app for creating and sharing virtual worlds for hosting social interactions.\n\nThe post says that VRChat will continue weighing the addition of a label for \"Human-authored\" content as well as a \"Tools used\" field, but it has not adopted a definitive stance yet. Similarly, it will not add a tag for labeling AI-generated content or for filtering it out of search results.\n\n\"While we think some creators would honestly label their content, we think others would try to pass off generative or assisted work as completely authored by hand,\" the game's creators said. \"Likewise, we could see this creating 'sleuthing' behavior, where folks would attempt to sniff out 'AI' content or might harass other creators, even if they are genuinely not using any AI tools in their workflow.\"\n\nThe language in the post seems to want to make people with many different attitudes toward AI all happy, rather than accepting that it might adopt a policy that could be unpopular with any particular group. Instead, the platform said it would adopt some changes that had \"alignment across the community,\" which included accurate thumbnails, better discovery tools and \"quality as a core metric.\"\n\nVRChat has displayed the potential for creating some genuinely cool things. It's being used in filmmaking and to create safe communities for transgender people. On the flip side, the platform has also been accused of hosting toxic and predatory behavior."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "9to5mac-02771d4873cbc4b5",
     "type": "news",
     "sourceId": "9to5mac",
@@ -49,31 +219,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-68939f349bd7ee8f",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/29/apple-cuts-app-store-commission-in-taiwan-following-regulatory-discussions/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-29T20:24:17.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple cuts App Store commission in Taiwan following regulatory discussions [U]",
-        "summary": "Apple today announced that it is lowering its standard App Store commission in Taiwan, following discussions with the country’s Fair Trade Commission. Here are the details. more…",
-        "body": "Apple today announced that it is lowering its standard App Store commission in Taiwan, following discussions with the country’s Fair Trade Commission. Here are the details.\n\nOver the past year or so, Apple has faced mounting regulatory pressure on several of its App Store practices and rules worldwide, particularly those related to app distribution, payment processing, commission fees, and alternative options for developers.\n\nIn Japan and Brazil , in response to local competition rules and investigations, the company introduced alternative app marketplaces, third-party payment options, and revised commission structures.\n\nIn the European Union, Apple recently overhauled its App Store fees and business terms to address concerns raised by the European Commission following a lengthy back-and-forth over its compliance with the Digital Markets Act.\n\nJust last week, an Australian federal judge ordered Apple to allow alternative app distribution and payment methods following its years-long legal battle with Epic Games. Apple plans to appeal.\n\nAnd yesterday, South Korean regulators fined Apple approximately $15.5 million and ordered changes to its App Store policies over payment restrictions, app review practices, and discriminatory commissions.\n\nNow, Taiwan is joining that list, though the changes announced today are considerably narrower. Apple today informed developers that, starting this Saturday, October 31, its standard commission on paid apps and in-app purchases will drop from 30% to 26% in the Taiwanese iOS and iPadOS App Store.\n\nApple said the change follows discussions with the Taiwan Fair Trade Commission, and added that “signing the updated terms by October 31 is not required to receive the benefit of these commission rate changes starting that date.”\n\nThe company also updated its Apple Developer Program License Agreement to reflect the new terms, with translated versions expected to be available within the next month.\n\nTo read Apple’s full announcement, follow this link .\n\nUpdate: In a statement to 9to5Mac, Apple said:\n\n“We’re making updates to the Taiwan storefront of the App Store following constructive discussions with the Taiwan Fair Trade Commission. These changes reflect our ongoing commitment to providing developers with a thriving marketplace and ensuring the App Store remains the safest, most trusted platform for users. We will continue to equip developers with the tools, resources, and support they need to build, grow, and scale successful businesses on the App Store.”"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-6dffddcca40287af",
     "type": "news",
     "sourceId": "ars-technica",
@@ -90,9 +235,9 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Windows 11 gets right-click menu improvements as PC revenue slides",
+        "title": "Microsoft fixes a Windows 11 annoyance as PC revenue declines",
         "summary": "The latest update also brings a cloud recovery option for PCs that won't boot.",
-        "body": "Microsoft is beginning the rollout of a Windows 11 preview update that finally addresses a persistent power user complaint with the operating system: the right-click menu that obliterated years of muscle memory on command locations, and hid others behind an additional click. The timing for the release is notable, as the announcement comes alongside Microsoft's quarterly financial report that saw a continued decline in the business of selling Windows licenses for new PCs.\n\nThe preview update, KB5127936 , is cumulative for Windows 11 versions 26H2 and 25H2. The update will be a gradual rollout before eventually moving on to a normal rollout for all Windows 11 devices once it reaches general availability. The highlight of the new update should calm annoyed users who have spent years with custom scripts and services in an attempt to shape Windows the way they'd prefer it. Users will get a \"customize menu\" button that controls what commands appear when they right-click their mouse. Users can toggle built-in commands such as Send To or Create Shortcut on or off, rearrange what appears on the main menu, and control which third-party extensions show up in either the main or submenus. The gripe with the right-click menu had been that Microsoft hid familiar command locations behind a top row of icons while moving other familiar commands under the \"Show more options\" submenu. Now, Windows users will have the ability to customize the whole thing around their habits.\n\nThe new preview also highlights a new Windows feature called Cloud Rebuild, a recovery option that can reinstall Windows 11 directly from the cloud, even when an existing Windows 11 fails to boot. Cloud Rebuild will pull the Windows 11 image and needed system drivers directly from Windows Update. Users will not need a custom recovery image or external media to reinstall Windows. There is an important distinction to note however. Microsoft classified Cloud Rebuild as a recovery option, but it behaves more like a fresh Windows install than a repair, as existing applications and files will not be included. Those worried about data security have the option to sanitize entire system drives prior to reinstalling. For a full list of improvements coming to Windows 11, including changes to Xbox mode and settings, you can view the official Microsoft release announcement .\n\nRead full article\n\nComments"
+        "body": "Microsoft is beginning the rollout of a Windows 11 preview update that finally addresses a persistent power user complaint with the operating system: the right-click menu that obliterated years of muscle memory on command locations and hid others behind an additional click. The timing is notable, as the announcement comes alongside Microsoft's quarterly financial report, which showed a continued decline in the business of selling Windows licenses for new PCs.\n\nThe preview update, KB5127936 , is cumulative for Windows 11 versions 26H2 and 25H2. The update will be a gradual rollout before eventually moving on to a normal rollout for all Windows 11 devices once it reaches general availability. The highlight of the new update should calm annoyed users who have spent years with custom scripts and services in an attempt to shape Windows the way they would prefer it. Users will get a \"customize menu\" button that controls what commands appear when they right-click their mouse. Users can toggle built-in commands such as Send To or Create Shortcut on or off, rearrange what appears on the main menu, and control which third-party extensions show up in either the main or submenus. The gripe with the right-click menu had been that Microsoft hid familiar command locations behind a top row of icons while moving other familiar commands under the \"Show more options\" submenu. Now, Windows users can customize the whole thing around their habits.\n\nThe new preview also highlights a new Windows feature called Cloud Rebuild, a recovery option that can reinstall Windows 11 directly from the cloud, even when an existing Windows 11 fails to boot. Cloud Rebuild will pull the Windows 11 image and needed system drivers directly from Windows Update. Users will not need a custom recovery image or external media to reinstall Windows. There is an important distinction to note, however. Microsoft classifies Cloud Rebuild as a recovery option, but it behaves more like a fresh Windows install than a repair, as existing applications and files will not be included. Those worried about data security can sanitize entire system drives prior to reinstalling. For a full list of improvements coming to Windows 11, including changes to Xbox mode and settings, you can view the official Microsoft release announcement .\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -193,55 +338,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-670309ee414130aa",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/10/29/apple-vp-talks-new-ipad-mini-oled-without-promotion-acoustic-display-more/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-29T19:49:38.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple VP talks new iPad mini: OLED without ProMotion, Acoustic Display, more",
-        "summary": "Apple unveiled its “biggest update ever” for the iPad mini this week, introducing a thinner, lighter design and an OLED display. In a pair of interviews, Dave Pakula, Apple’s vice president of Hardware Engineering, discussed the new iPad mini’s design, display, and more. more…",
-        "body": "Apple unveiled its “biggest update ever” for the iPad mini this week, introducing a thinner, lighter design and an OLED display.\n\nIn a pair of interviews, Dave Pakula, Apple’s vice president of Hardware Engineering, discussed the new iPad mini’s design, display, and more.\n\nWhile the new iPad mini features an OLED display, it doesn’t support ProMotion. Instead, it’s limited to a 60Hz refresh rate. Here’s what Pakula had to say about that decision in an interview with Chris Lawley :\n\nDisplay experience is about more than just a single spec. One of the things that’s really cool about OLED is it actually has this really fast pixel response time. So it’s more than an order of magnitude faster than the pixel response time for an LCD display.\n\nWhat that does is it makes everything really smooth. Motion blur is significantly reduced compared to LCD. When you pair that with the other things, the contrast, the brightness, and the color, this is just a killer display.\n\nIn addition to being lighter and thinner, the new iPad mini is also IP67-rated for water and dust resistance, a first for an iPad. One key enabler is a new Acoustic Display. Pakula explains how that technology works:\n\nOne of the cool things we realized as we started experimenting was that the unique size and form factor of this display actually had a resonant frequency that’s in the audible range.\n\nI think more importantly, it’s in the range of like a traditional woofer that you’d have in a speaker. What we did was we built these custom drivers that actually energize the display and emit sound directly through the enclosure, but that only really works for the mid and low frequencies.\n\nFor the higher frequencies, we actually designed these little custom tweeters. There’s one on each end of the product, and they’re actually ported out through these hidden ports between the glass and the aluminum. The result is we have this product that’s water and dust resistant. I think the sound that comes from it is so surprising for a form factor of this size.\n\nPakula also sat down with Katarina Mogus for an interview , where he discussed how the iPad mini fits into a world where iPhone Duo also exists:\n\nWhat we love about the iPad mini is it’s really the full iPad experience in the palm of your hand. That gives you access to a million+ apps in the App Store. It’s got incredibly powerful creative accessories like the Apple Pencil Pro. And it’s got the advanced multitasking of iPadOS 27.\n\nIt is really incredibly universal. And honestly, with all these updates, all of those experiences just got so much better.\n\nYou can watch both interviews below. The new iPad mini is available to pre-order now , with the first orders arriving on November 6."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-229a03630d90f01a",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/10/29/meta-quietly-launches-an-ai-fashion-app-called-style-sketch/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-29T19:14:36.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta quietly launches an AI fashion app called Style Sketch",
-        "summary": "The app connects to Instagram to build a virtual closet from photos you’ve already shared, or lets you add items manually by snapping a photo, recording a quick video, or uploading images from your camera roll.",
-        "body": "Meta has quietly launched Style Sketch , an AI fashion app that helps users put together outfit ideas using clothes they already own. The app connects to Instagram to build a virtual closet from photos you’ve posted, or lets you add items manually by snapping a photo, recording a quick video, or uploading images from your camera roll.\n\nStyle Sketch then suggests outfit combinations built from your wardrobe matched to your style. Users can then try on the outfits on a “realistic model matched to your body shape and skin tone,” the app description reads.\n\nThe app, which was first spotted by social media consultant Matt Navarra , is available in Indonesia, Singapore, and Thailand on iOS and Android .\n\nMeta did not respond to TechCrunch’s request for comment. It’s unknown whether Meta plans to launch Style Sketch more widely.\n\nSeveral apps already use AI to help users digitize their wardrobes and visualize new outfits, including startups like Alta . Even Google Photos offers tools that let users turn photos of their clothes into digital closets where they can create new outfit ideas.\n\nTo compete with what’s already on the market, Meta will likely rely less on the novelty of the idea and more on the app’s integration with Instagram, where users already have a visual record of their personal style.\n\nRather than relying on random suggestions, users can also select a specific item from their wardrobe and get fresh outfit ideas built around it, according to the app description.\n\nThe app can also help users plan outfits for trips. If they enter their destination, trip length, and planned activities, users can get a day-by-day outfit plan that takes the weather forecast and itinerary into account.\n\nStyle Sketch is one of many AI apps from Meta in recent months. Most recently, the company launched an app called Waddle World , which essentially looks like a Tamagotchi clone, but with AI. Meta has also launched Pocket , a tool for vibe-coding games, and Vibes , which lets users quickly generate AI-powered videos.\n\nThe wave of new apps is part of a broader effort at Meta to release more apps. The Wall Street Journal reported earlier this year that CEO Mark Zuckerberg told employees the company plans to release far more apps than it has historically, as AI-driven efficiencies have made it faster and easier to ship new apps."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-apps-4d3d0113a716d93b",
     "type": "news",
     "sourceId": "applevis-apps",
@@ -289,30 +385,6 @@
     "media": null
   },
   {
-    "id": "the-verge-805e1f125ac9e6d4",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1022519/google-gemini-file-editing-documents-pdfs",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-29T18:45:31.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "You can generate and edit Google Docs files directly in Gemini chats now",
-        "summary": "Now you can generate, preview, and edit PDFs, Google Docs, Google Sheets, slide decks, Markdown files, TXT files, and code directly within Google Gemini. The new file editing capabilities are available starting today for all Gemini users, and while PDF previews/editing works on both the web and mobile, all other file formats are only in […]",
-        "body": "Now you can generate, preview, and edit PDFs, Google Docs, Google Sheets, slide decks, Markdown files, TXT files, and code directly within Google Gemini . The new file editing capabilities are available starting today for all Gemini users, and while PDF previews/editing works on both the web and mobile, all other file formats are only in the web version for now.\n\nGoogle added support for generating and downloading files in Gemini earlier this year, but now you can tweak those files without leaving the Gemini app. Google says you can expand documents to edit them in full-screen mode and highlight text in files to ask Gemini questions or prompt …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-apps-c867f6f38ee15768",
     "type": "news",
     "sourceId": "applevis-apps",
@@ -330,32 +402,8 @@
     "locales": {
       "en": {
         "title": "Motif: Word Challenge",
-        "summary": "Swap letters and find ten words a day to take on the world. Jump into the adventure of the new Ascension mode! Free, with no ads or account required. Find ten hidden words every day and aim for the highest score on the daily grid! Motif is a strategic word game that combines clever wordplay with match-3-inspired mechanics. Free, ad-free, and no account required. THE WORD GAME WHERE WORDS HIDE! Swap letters, spot words, and plan your next move. Swipe across words to clear them from the grid. Every move shapes what comes next, so choose wisely! Everyone starts with the same grid. Submit your score if you’d like, and see where you rank on the daily leaderboard. NEW ASCENSION MODE! Motif becomes a full-blown adventure! Climb ten increasingly tough levels packed with bosses, special tiles, and bonuses galore. Motif has never played like this—and it’s free! ZEN MODES Want to play without the pressure? Zen Mode gives you fresh grids and the same rules, but with no word limit and no leaderboard. Take your time and play at your own pace. + “À LA CARTE” MODE! You set your own rules: swipe words bottom to top, right to left, in an L shape, use unlimited letter swaps… You call the shots. + M0T1F MODE! This time, numbers take the stage: swipe tiles to add them up and hit the target number. Careful, this one’s dangerously addictive! MAKE IT YOURS Customize Motif to suit your style: fonts, colors, tile shapes, score display, backgrounds… even the app icon. NO ADS. NO TRACKING. NO ACCOUNT. Just open Motif and start playing. No internet connection is required to play. The leaderboard is entirely optional. If you choose to participate, only your score, the date, and the grid language are submitted. No account, no advertising ID, and no player profile. Individual scores are deleted after 30 days.",
+        "summary": "Find ten hidden words every day and aim for the highest score on the daily grid! Motif is a strategic word game that combines clever wordplay with match-3-inspired mechanics. Free, ad-free, and no account required. THE WORD GAME WHERE WORDS HIDE! Swap letters, spot words, and plan your next move. Swipe across words to clear them from the grid. Every move shapes what comes next, so choose wisely! Everyone starts with the same grid. Submit your score if you’d like, and see where you rank on the daily leaderboard. NEW ASCENSION MODE! Motif becomes a full-blown adventure! Climb ten increasingly tough levels packed with bosses, special tiles, and bonuses galore. Motif has never played like this—and it’s free! ZEN MODES Want to play without the pressure? Zen Mode gives you fresh grids and the same rules, but with no word limit and no leaderboard. Take your time and play at your own pace. + “À LA CARTE” MODE! You set your own rules: swipe words bottom to top, right to left, in an L shape, use unlimited letter swaps… You call the shots. + M0T1F MODE! This time, numbers take the stage: swipe tiles to add them up and hit the target number. Careful, this one’s dangerously addictive! MAKE IT YOURS Customize Motif to suit your style: fonts, colors, tile shapes, score display, backgrounds… even the app icon. NO ADS. NO TRACKING. NO ACCOUNT. Just open Motif and start playing. No internet connection is required to play. The leaderboard is entirely optional. If you choose to participate, only your score, the date, and the grid language are submitted. No account, no advertising ID, and no player profile. Individual scores are deleted after 30 days.",
         "body": "Swap letters and find ten words a day to take on the world. Jump into the adventure of the new Ascension mode! Free, with no ads or account required.\n\nFind ten hidden words every day and aim for the highest score on the daily grid! Motif is a strategic word game that combines clever wordplay with match-3-inspired mechanics. Free, ad-free, and no account required.\n\nTHE WORD GAME WHERE WORDS HIDE!\n\nSwap letters, spot words, and plan your next move. Swipe across words to clear them from the grid. Every move shapes what comes next, so choose wisely!\n\nEveryone starts with the same grid. Submit your score if you’d like, and see where you rank on the daily leaderboard.\n\nNEW ASCENSION MODE! Motif becomes a full-blown adventure! Climb ten increasingly tough levels packed with bosses, special tiles, and bonuses galore. Motif has never played like this—and it’s free!\n\nZEN MODES\n\nWant to play without the pressure? Zen Mode gives you fresh grids and the same rules, but with no word limit and no leaderboard. Take your time and play at your own pace.\n\n+ “À LA CARTE” MODE! You set your own rules: swipe words bottom to top, right to left, in an L shape, use unlimited letter swaps… You call the shots.\n\n+ M0T1F MODE! This time, numbers take the stage: swipe tiles to add them up and hit the target number. Careful, this one’s dangerously addictive!\n\nMAKE IT YOURS\n\nCustomize Motif to suit your style: fonts, colors, tile shapes, score display, backgrounds… even the app icon.\n\nNO ADS. NO TRACKING. NO ACCOUNT.\n\nJust open Motif and start playing. No internet connection is required to play.\n\nThe leaderboard is entirely optional. If you choose to participate, only your score, the date, and the grid language are submitted. No account, no advertising ID, and no player profile.\n\nIndividual scores are deleted after 30 days."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-70d95b9ef6867d41",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2301410/meta-will-now-alert-parents-if-teens-repeatedly-search-for-self-harm-content-on-facebook/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-29T18:20:21.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta will now alert parents if teens 'repeatedly' search for self-harm content on Facebook",
-        "summary": "The company will also notify parents about conversations with Meta AI.",
-        "body": "The company will also notify parents about conversations with Meta AI.\n\nMeta is now expanding its parental notifications that appear when teens search for content related to suicide and self-harm. After adding the alerts to Instagram earlier this year, the company is now rolling out similar capabilities to parents who supervise teens with Facebook accounts, as well as chats with its AI assistant.\n\nWith the update , Meta will notify parents if their teen \"repeatedly\" searches for self-harm content \"within a short period of time.\" Likewise, if a teen chats with Meta AI in a way that \"suggests they may be at risk of suicide or self-harm,\" parents will also be notified.\n\nThe company is intentionally vague about what the exact criteria are for triggering these notifications. It previously said it \"chose a threshold that requires a few searches within a short period of time, while still erring on the side of caution\" and that it hoped to \"avoid sending these notifications unnecessarily.\" Should a teen meet that threshold, parents receive an alert via text, email or WhatsApp, and a push notification in their own app. The alerts don't detail the specific search terms or contents of Meta AI chats, but recommend that parents speak with their teens. It also provides resources for helplines.\n\nThe feature is part of Meta's push to enroll teens into parent-supervised \" teen accounts \" that give caregivers more control over teens' privacy settings. The accounts are also meant to limit teens' ability to see sensitive content, including self-harm-related posts, and interact with adults.\n\nIf you or someone you know is struggling or in crisis, help is available. Call or text 988 or chat 988lifeline.org"
       }
     },
     "media": null
@@ -381,30 +429,6 @@
         "title": "Set Up ZoomText and Fusion to Work the Way You Do",
         "summary": "ZoomText and Fusion are powerful accessibility tools designed for people with low vision. ZoomText is a screen magnifier and reader, while Fusion combines all of ZoomText’s features with the full JAWS screen reader, offering both magnification and speech. In honor of National Disability Employment Awareness Month, our Workplace Ready blog series has run throughout October, …",
         "body": "ZoomText and Fusion are powerful accessibility tools designed for people with low vision. ZoomText is a screen magnifier and reader, while Fusion combines all of ZoomText’s features with the full JAWS screen reader, offering both magnification and speech.\n\nIn honor of National Disability Employment Awareness Month, our Workplace Ready blog series has run throughout October, with a new post every Thursday spotlighting ZoomText and Fusion features that help you be more productive at work. This is the final post in the series. Last week, we shared practical tips for tackling online tasks. This week, we’ll show you how to set up ZoomText and Fusion to work the way you do.\n\nThe features we’ve covered this month are most helpful when they’re tuned to the way you work. Taking a few minutes to customize ZoomText and Fusion is one of the most important steps you can take for workplace productivity. The right magnification level, colors, and view for each task mean less time adjusting settings and more time getting things done.\n\nPersonalized settings remove the small points of friction that add up over a busy day. When your tools are ready the moment you open an application, you can move between tasks smoothly and work more efficiently and independently. This week, we’ll look at how to save settings for each application, set up your preferred colors and display options, and use touch screen support on compatible devices.\n\nThe settings that work well in one program may not be the best choice for another. With Application Settings, you can save unique magnification and enhancement settings for each application you use. Once saved, ZoomText and Fusion automatically load the right settings as you switch between programs, so you don’t have to stop and adjust your view every time you change tasks.\n\nTo create Application Settings, open the application and adjust magnification, cursor, or mouse settings to meet your needs, then open the ZoomText menu, choose Application Settings , and save the current settings for that application. To keep your general preferences for every other program, choose Configurations > Save As Default from the ZoomText menu.\n\nHere’s how this might look across a typical workday:\n\nWhen you move from writing a report in Word to answering email in Outlook, ZoomText and Fusion switch to your Outlook settings automatically. When you come back, your Word settings are right where you left them.\n\nThe right colors can make text easier to read and reduce eye strain over a long workday. Color Enhancements let you choose from a variety of preset color schemes, such as inverted brightness or high-contrast combinations, or create your own custom colors. To pick a scheme, select the arrow next to the Color button on the Magnifier toolbar tab. Press CAPS LOCK+C to toggle color enhancements on and off. When you find a combination you like, save it as part of your default configuration or your Application Settings so it’s ready when you need it.\n\nDifferent tasks also call for different views. ZoomText and Fusion offer several zoom window types for a single monitor: Full , Overlay , Lens , Line , and Docked (Top, Bottom, Left, or Right). Full magnifies the entire screen, which works well for reading documents. Docked keeps part of the screen at normal size, which can be helpful when you want to see the whole layout of an application while magnifying the area you’re working in. Press CAPS LOCK+Z to cycle through the zoom window types, or select the Window button on the Magnifier toolbar tab to choose one.\n\nIf you use more than one monitor, ZoomText and Fusion can extend your workspace across two displays. When your monitors are set to extend your desktop, you can choose from these zoom window types:\n\nIn the MultiView modes, press CAPS LOCK+V to switch the active view. For more options, such as keeping both views at the same magnification level, select Window > Settings on the Magnifier toolbar tab and choose Multiple Monitor Options .\n\nIf you work on a touch screen laptop or tablet, you can control ZoomText and Fusion with gestures. Touch Screen Support works on Windows devices that support at least five simultaneous touch points.\n\nTo get started, open the ZoomText menu and choose Preferences > Touch Screen Support > Enable Touch Icon . The Touch Icon lets you switch between two modes:\n\nDouble-tap the Touch Icon with one finger to switch modes. To switch for just a moment, hold one finger on the icon, then lift it to return to the previous mode.\n\nIn ZoomText Touch Mode, try these gestures:\n\nA few tips can make touch more comfortable at work. Choose a Touch Icon size and color that are easy for you to see from Preferences > Touch Screen Support on the ZoomText menu. Move the icon out of the way by holding one finger on it and dragging it along the edge of the screen. If you share time between a keyboard and touch, keep the icon in Windows Touch Mode when you’re tapping through applications and switch to ZoomText Touch Mode when you want to zoom or pan.\n\nThat brings our Workplace Ready series to a close. Throughout October, we’ve explored how ZoomText and Fusion can help you work more productively and independently. Here’s a look back at what we covered:\n\nThere’s always more to discover. Take some time to explore additional features and try new settings as your work changes. For tutorials, webinars, and other learning materials, visit our training page. Thank you for following along this month, and keep thriving in your workplace!\n\nHave questions? Email training@vispero.com ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-08bc928ea4cca718",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/1022347/apple-macbook-supports-new-cmf",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-29T17:48:09.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple’s new laptop supports one of the coolest features for color pros",
-        "summary": "The new MacBook Pro brings with it a bunch of firsts for Apple laptops, the two flashiest being an OLED display and touchscreen functionality. But as an image-accuracy enthusiast, trained calibrator, and resident display expert, what excites me most about the MacBook Pro with PROLED XDR Display is the technology it uses to display an […]",
-        "body": "The new MacBook Pro brings with it a bunch of firsts for Apple laptops, the two flashiest being an OLED display and touchscreen functionality. But as an image-accuracy enthusiast, trained calibrator, and resident display expert, what excites me most about the MacBook Pro with PROLED XDR Display is the technology it uses to display an accurate picture. It's the first laptop, and only the second product overall, to support Apple CMF 2026 color modes. It could be the future for displays.\n\nCMFs, or color-matching functions, mathematically represent how we perceive color, and there are a few different variations. The specification that's been the …\n\nRead the full story at The Verge."
       }
     },
     "media": null
@@ -1227,30 +1251,6 @@
         "title": "From Word to Teams: Using ZoomText and Fusion Across Your Workday",
         "summary": "ZoomText and Fusion are powerful accessibility tools designed for people with low vision. ZoomText is a screen magnifier and reader, while Fusion combines all of ZoomText’s features with the full JAWS screen reader, offering both magnification and speech. Since October is National Disability Employment Awareness Month, we want to take this opportunity to spotlight powerful …",
         "body": "ZoomText and Fusion are powerful accessibility tools designed for people with low vision. ZoomText is a screen magnifier and reader, while Fusion combines all of ZoomText’s features with the full JAWS screen reader, offering both magnification and speech.\n\nSince October is National Disability Employment Awareness Month, we want to take this opportunity to spotlight powerful features of ZoomText and Fusion that will help you be more productive in the workplace. This blog series will run throughout October, with a new post every Thursday featuring helpful information and practical tips to make the most of ZoomText and Fusion as you work.\n\nFor many professionals, the workday is a journey through Microsoft Office and a variety of collaboration tools. Whether you’re writing, analyzing data, managing emails, or joining virtual meetings, having ZoomText or Fusion set up to support your workflow can make all the difference. This week, we’ll look at how these tools can help you work more efficiently and comfortably, from your first document to your last video call.\n\nDrafting reports or editing proposals is easier when you can see exactly what you need. With ZoomText, you can quickly adjust your magnification level or switch between different zoom window types—like Lens or Line view—to focus on the text that matters most. For longer documents, AppReader is a helpful feature: just press CAPS LOCK+ALT+A to have the text read aloud, letting you follow along visually or simply listen and rest your eyes.\n\nFusion users can also take advantage of JAWS navigation commands, such as jumping between headings or moving by paragraph, to quickly scan and organize content. To jump by heading, first turn on Quick Navigation keys by pressing CAPS LOCK+Z , then press H to navigate forward through headings or SHIFT+H to navigate backward. Press P to navigate forward by paragraph and SHIFT+P to navigate backward. Press CAPS LOCK+Z to toggle Quick Navigation keys off again so you can continue editing your document.\n\nKeyboard Echo is another useful feature, giving you spoken feedback as you type, so you can be sure your edits are accurate.\n\nTo cycle through the different Keyboard Echo settings, press CAPS LOCK+ALT+K . The setting No Echo disables all keyboard echo. Keys will echo your keystrokes as you type. Words will echo individual words as you type them. And Keys and Words will echo both keystrokes and words as you type.\n\nSpreadsheets can be intimidating, but ZoomText’s magnification tools help you zero in on the data you need. Adjust your zoom to see more or less of your sheet and use Reading Zones to mark important areas—like totals or headers—so you can return to them instantly.\n\nA reading zone is a defined area of an application window that ZoomText can display, speak, or both, at the press of a hotkey. To create a reading zone, press CAPS LOCK+ALT+C , then drag a rectangle over the area of the application window you want the zone to cover. To trigger a reading zone, press CAPS LOCK+ALT+ the zone’s number (1 through 9, or 0 for zone 10).\n\nFusion users can rely on JAWS table navigation to move efficiently through rows and columns, with commands like CAPS LOCK+C to read the current cell, helping you keep your place in complex data.\n\nStaying on top of emails and appointments is simple with the right tools. AppReader lets you listen to long emails, while Focus Enhancements in ZoomText highlight your current selection, making it easier to track where you are.\n\nAppReader reads documents, web pages, and email aloud while you follow along or rest your eyes. It can read from beginning to end, skim forward and backward, or read just the text you select with the mouse. AppReader reads text aloud in three modes: App View reads directly in the source application without changing your view, Text View reformats the text with your choice of fonts, colors, and magnification for easier reading, and the SpeakIt Tool reads any text on the screen that you select by clicking and dragging. Press CAPS LOCK+ALT+A to launch App View. Press CAPS LOCK+ALT+T to launch Text View. Press CAPS LOCK+ALT+S to launch the SpeakIt Tool.\n\nFocus enhancements highlight the item you are on as you navigate using the Tab and arrow keys through menus, dialogs, and toolbars, making it easy to keep your place. Press CAPS LOCK+F to toggle focus enhancements on and off.\n\nFusion users can use commands like CTRL+N to create a new message, CTRL+R to reply to a message, or CTRL+F to forward a message. You can also switch to different areas in Outlook with quick shortcuts like CTRL+1 to go to your current mail folder, CTRL+2 to navigate to the calendar, and CTRL+3 to go to Contacts.\n\nWhether you’re building slides or presenting to your team, ZoomText’s flexible magnification ensures you can see every detail. AppReader can read slide content aloud, making it easier to review your work or follow along during a presentation. Fusion users can use the arrow keys with JAWS to navigate slides and read speaker notes, so you’re always prepared and in control. Press F6 in PowerPoint to navigate the different areas of your presentation.\n\nToday’s workplace relies on video conferencing apps like Microsoft Teams, Zoom, and Google Meet. With ZoomText and Fusion, you can adjust your magnification to follow chat messages, participant panels, and shared screens during meetings. AppReader and JAWS speech help you keep up with notifications and chat without missing a beat.\n\nA standout feature for video calls is Face-in-View . Before joining a meeting, open the Face-in-View tool in Fusion by pressing INSERT+SPACE, F , then O . This feature uses your webcam to show you a live preview and provides feedback to help you center your face and check your lighting—so you can join every call looking your best and feeling confident.\n\nJoin us next week as we explore how ZoomText and Fusion can help you access more online, making web browsing and digital resources easier and more accessible. Stay tuned for more tips to help you thrive in your workplace!\n\nHave questions? Email training@vispero.com .\n\nWith the right setup and a few helpful features, ZoomText and Fusion can empower you to work smarter and more comfortably, every step of the way."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-apps-aef93ab730feefe4",
-    "type": "news",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/decant-color-sort-puzzle",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-15T17:06:19.000Z",
-    "categories": [
-      "apple",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Decant: Color Sort Puzzle",
-        "summary": "Pour a little color. Make a little order. Decant is a color-sort puzzle with luminous glass vessels and a simple goal: leave each filled vessel with just one color. Tap a vessel, choose a matching color or an empty space, and pour the top group. Two spare vessels give you room to think—not a shortcut to buy. NO ADS. ROOM TO PLAY. - 180 puzzles across four difficulty levels, each checked for a solution. - A fresh, always-free Daily, with the same ranked board and rules for everyone. - Practice puzzles generated and checked before you play. - Satisfying glass pours—or instant pours when you prefer to skip the animation. - Liquid symbols, a high-contrast palette, and sound, haptic, handedness, and motion controls. - Free restarts. No lives, energy, timers, or extra vessels for sale. Find a solution, then try to make it cleaner. A Perfect clear uses the fewest possible pours. Older archived Daily puzzles may show a Target instead; that is a reference solution, not a promise of the minimum. START FREE. UNLOCK MORE IF YOU LIKE. The first 30 puzzles, today's Daily, and three practice puzzles per day are free, with three undos per board. The Daily does not count against your practice allowance. A one-time Decant Full Game Unlock opens all 180 puzzles, unlimited practice and undos outside the ranked Daily, the full Daily archive for unranked practice, and advanced records. Or choose the StackForge Play Pass for Pro access across StackForge games and One Good Thing. Prices are shown before purchase. Play Pass subscriptions renew automatically unless canceled. Today's ranked Daily gives every player the same three undos, whether free or Pro. No ads in either tier. Optional account sync keeps your progress and Play Pass connected. Terms: https://stackforgestudios.com/terms Privacy: https://stackforgestudios.com/privacy Terms of Use (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
-        "body": "Pour a little color. Make a little order.\n\nDecant is a color-sort puzzle with luminous glass vessels and a simple goal: leave each filled vessel with just one color. Tap a vessel, choose a matching color or an empty space, and pour the top group. Two spare vessels give you room to think—not a shortcut to buy.\n\nNO ADS. ROOM TO PLAY.\n\n- 180 puzzles across four difficulty levels, each checked for a solution. - A fresh, always-free Daily, with the same ranked board and rules for everyone. - Practice puzzles generated and checked before you play. - Satisfying glass pours—or instant pours when you prefer to skip the animation. - Liquid symbols, a high-contrast palette, and sound, haptic, handedness, and motion controls. - Free restarts. No lives, energy, timers, or extra vessels for sale.\n\nFind a solution, then try to make it cleaner. A Perfect clear uses the fewest possible pours. Older archived Daily puzzles may show a Target instead; that is a reference solution, not a promise of the minimum.\n\nSTART FREE. UNLOCK MORE IF YOU LIKE.\n\nThe first 30 puzzles, today's Daily, and three practice puzzles per day are free, with three undos per board. The Daily does not count against your practice allowance.\n\nA one-time Decant Full Game Unlock opens all 180 puzzles, unlimited practice and undos outside the ranked Daily, the full Daily archive for unranked practice, and advanced records. Or choose the StackForge Play Pass for Pro access across StackForge games and One Good Thing. Prices are shown before purchase. Play Pass subscriptions renew automatically unless canceled.\n\nToday's ranked Daily gives every player the same three undos, whether free or Pro. No ads in either tier.\n\nOptional account sync keeps your progress and Play Pass connected.\n\nTerms: https://stackforgestudios.com/terms\n\nPrivacy: https://stackforgestudios.com/privacy\n\nTerms of Use (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
       }
     },
     "media": null

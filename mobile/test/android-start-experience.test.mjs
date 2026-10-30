@@ -24,8 +24,8 @@ test('Android start screen begins with Search and keeps Leer con TifloAcosta vis
 test('Mi libro is available only inside Contacto, not on the home screen', async () => {
   assert.equal(HOME_ITEMS.includes('book'), false);
   const contact = await read('src/screens/contact.mjs');
-  assert.match(contact, /router\\.navigate\\('book'/);
-  assert.match(contact, /t\\('screen\\.book'\\)/);
+  assert.ok(contact.includes("router.navigate('book'"));
+  assert.ok(contact.includes("t('screen.book')"));
 });
 
 test('home exposes Novedades as a closed destination near the start instead of expanding its items', async () => {

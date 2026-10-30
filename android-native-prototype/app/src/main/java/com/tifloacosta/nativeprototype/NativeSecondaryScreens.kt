@@ -154,6 +154,7 @@ fun NativeSecondaryScreen(
         mutableStateOf(if (destination == NativeDestinations.SEARCH) initialText else "")
     }
     var status by remember(destination) { mutableStateOf("") }
+    var showSounds by rememberSaveable(destination) { mutableStateOf(false) }
     val all = catalog.news.map { "news" to it } +
         catalog.resources.map { "resource" to it } +
         catalog.videos.map { "video" to it }
@@ -209,7 +210,19 @@ fun NativeSecondaryScreen(
                 }
             }
         } else when (destination) {
-            NativeDestinations.DOWNLOADS -> NativeDownloadScreen(english, initialText)
+            NativeDestinations.DOWNLOADS -> {
+                if (showSounds) {
+                    TextButton(onClick = { showSounds = false }) {
+                        Text(if (english) "Back to Downloads" else "Volver a Descargas")
+                    }
+                    NativeSoundSearchScreen(english)
+                } else {
+                    TextButton(onClick = { showSounds = true }) {
+                        Text(if (english) "Search sound effects" else "Buscar efectos de sonido")
+                    }
+                    NativeDownloadScreen(english, initialText)
+                }
+            }
             NativeDestinations.PODCAST -> NativePodcastScreen(english, media)
             NativeDestinations.CONTACT -> NativeContactScreen(english)
             NativeDestinations.PRIVACY -> NativePrivacyScreen(english)

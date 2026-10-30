@@ -29,6 +29,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -39,6 +40,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -92,16 +95,19 @@ class NativePrototypeActivity : ComponentActivity() {
     private var requestedSection by mutableStateOf<String?>(null)
     private var selectedLanguage by mutableStateOf("")
     private var selectedTheme by mutableStateOf("system")
+    private var selectedEnlarged by mutableStateOf(false)
     private val settings by lazy { getSharedPreferences("native-app-settings-v1", MODE_PRIVATE) }
     private val settingsListener = android.content.SharedPreferences.OnSharedPreferenceChangeListener { prefs, key ->
         if (key == "language") selectedLanguage = prefs.getString("language", "").orEmpty()
         if (key == "theme") selectedTheme = prefs.getString("theme", "system").orEmpty()
+        if (key == "enlarged") selectedEnlarged = prefs.getBoolean("enlarged", false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         selectedLanguage = settings.getString("language", "").orEmpty()
         selectedTheme = settings.getString("theme", "system").orEmpty()
+        selectedEnlarged = settings.getBoolean("enlarged", false)
         settings.registerOnSharedPreferenceChangeListener(settingsListener)
         if (intent?.action == Intent.ACTION_VIEW) oauthCallback = intent?.data
         requestedReaderBookId = intent?.getStringExtra("tiflolector-open-book")
@@ -114,6 +120,11 @@ class NativePrototypeActivity : ComponentActivity() {
                 "light" -> false
                 else -> isSystemInDarkTheme()
             }
+            val density = LocalDensity.current
+            CompositionLocalProvider(LocalDensity provides Density(
+                density.density,
+                (density.fontScale * if (selectedEnlarged) 1.25f else 1f).coerceAtMost(3.5f)
+            )) {
             MaterialTheme(colorScheme = if (dark) darkColorScheme() else lightColorScheme()) {
                 PrototypeHome(
                     languageOverride = selectedLanguage,
@@ -133,6 +144,7 @@ class NativePrototypeActivity : ComponentActivity() {
                         startActivity(Intent(Intent.ACTION_VIEW, url))
                     }
                 )
+            }
             }
         }
     }

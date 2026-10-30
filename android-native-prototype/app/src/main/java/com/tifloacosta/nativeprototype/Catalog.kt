@@ -35,7 +35,8 @@ object CatalogLogic {
         if (selected == 0) return emptyList()
         val filtered = if (selected == 1) items
             else categories.getOrNull(selected - 2)?.let { key -> items.filter { key in it.categories } }.orEmpty()
-        return filtered.sortedByDescending { it.id }
+        // ISO 8601 UTC: ordenar por fecha real, no por el identificador de la noticia.
+        return filtered.sortedWith(compareByDescending<CatalogItem> { it.newsDate }.thenBy { it.id })
     }
 
     // Resources index 0 = choose; 1+ = a chosen category.
@@ -89,7 +90,7 @@ object CatalogRepository {
                     url = listOf("originalUrl", "openUrl", "url")
                         .firstNotNullOfOrNull { field -> o.optString(field).takeIf { it.isNotBlank() } }.orEmpty(),
                     isNew = o.optBoolean("isNew", false),
-                    newsDate = o.optString("newsDate", "")
+                    newsDate = o.optString("newsDate").ifBlank { o.optString("publishedAt", "") }
                 )
             }
         }

@@ -42,6 +42,17 @@ jobs:
           fi
       - name: Comprobar navegación básica y enlaces de la web
         run: node --test test/web-daisy.test.mjs test/content-parity-block7.test.mjs test/video-web-accessibility-block6.test.mjs test/actualidad-podcast-block5.test.mjs test/resource-browser-web.test.mjs test/web-site-maintenance.test.mjs test/web-navigation-block3.test.mjs test/web-contact-identity.test.mjs test/clean-home.test.mjs test/regression.test.mjs test/pwa-startup.test.mjs test/actualidad-button-audit.test.mjs
+      - name: Auditar sintaxis de los módulos principales
+        run: |
+          node --check web-reading.js
+          node --check shared/web-daisy-archive.mjs
+          node --check actualidad.js
+          node --check videos.js
+          node --check resource-browser-core.js
+      - name: Auditar TifloLector web completo
+        run: node --test test/web-reading*.test.mjs test/tiflolector-web-navigation-settings.test.mjs test/web-daisy.test.mjs
+      - name: Auditar las pruebas web de regresión
+        run: node --test test/web-*.test.mjs test/reader-migration.test.mjs test/youtube-actions.test.mjs
       - name: Install shared web build dependencies
         working-directory: mobile
         run: npm ci

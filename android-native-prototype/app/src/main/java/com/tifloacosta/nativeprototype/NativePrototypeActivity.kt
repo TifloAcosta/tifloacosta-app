@@ -108,6 +108,16 @@ class NativePrototypeActivity : ComponentActivity() {
                     onSignIn = {
                         val url = youTubeAccount.startAuthorization()
                         startActivity(Intent(Intent.ACTION_VIEW, url))
+                    },
+                    onOpenLegacy = { destination ->
+                        // Solo para secciones que aún conservan su flujo oficial previo.
+                        // El paquete principal permanece sin cambios y conserva sus datos.
+                        runCatching {
+                            startActivity(Intent().apply {
+                                setClassName(packageName, "com.tifloacosta.app.MainActivity")
+                                putExtra("tifloacosta-open-legacy-section", destination)
+                            })
+                        }
                     }
                 )
             }
@@ -184,7 +194,8 @@ private fun PrototypeHome(
     onRequestedSectionHandled: () -> Unit,
     sharedFiles: SharedReaderFiles?,
     onSharedFilesHandled: () -> Unit,
-    onSignIn: () -> Unit
+    onSignIn: () -> Unit,
+    onOpenLegacy: (String) -> Unit
 ) {
     val context = LocalContext.current
 
@@ -267,7 +278,8 @@ private fun PrototypeHome(
         CatalogLogic.resourcesForCategory(resources, resourceCategories, resourceCategory)
     } else emptyList()
 
-    val title = if (english) "TifloAcosta Native Trial" else "TifloAcosta Nativa Pruebas"
+    val title = if (context.packageName == "com.tifloacosta.app") "TifloAcosta"
+        else if (english) "TifloAcosta Native Trial" else "TifloAcosta Nativa Pruebas"
     val first = if (english) "News" else "Actualidad"
     val second = if (english) "Resources" else "Recursos"
     val third = if (english) "Videos" else "Vídeos"
@@ -316,22 +328,26 @@ private fun PrototypeHome(
                     modifier = Modifier.padding(vertical = 14.dp).semantics { heading() }
                 )
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Button(
-                        onClick = { section = PrototypeNavigation.NEWS; visibleCount = 10 },
-                        modifier = Modifier.fillMaxWidth()
-                    ) { Text(first) }
-                    Button(
-                        onClick = { section = PrototypeNavigation.RESOURCES; visibleCount = 10 },
-                        modifier = Modifier.fillMaxWidth()
-                    ) { Text(second) }
-                    Button(
-                        onClick = { section = PrototypeNavigation.READER },
-                        modifier = Modifier.fillMaxWidth()
-                    ) { Text(readerLabel) }
-                    Button(
-                        onClick = { section = PrototypeNavigation.VIDEOS; visibleCount = 10 },
-                        modifier = Modifier.fillMaxWidth()
-                    ) { Text(third) }
+                    Button(onClick = { onOpenLegacy("search") }, modifier = Modifier.fillMaxWidth()) {
+                        Text(if (english) "Search" else "Buscar")
+                    }
+                    Button(onClick = { onOpenLegacy("new-content") }, modifier = Modifier.fillMaxWidth()) {
+                        Text(if (english) "New content" else "Novedades")
+                    }
+                    Button(onClick = { section = PrototypeNavigation.NEWS; visibleCount = 10 }, modifier = Modifier.fillMaxWidth()) { Text(first) }
+                    Button(onClick = { section = PrototypeNavigation.RESOURCES; visibleCount = 10 }, modifier = Modifier.fillMaxWidth()) { Text(second) }
+                    Button(onClick = { section = PrototypeNavigation.READER }, modifier = Modifier.fillMaxWidth()) { Text(readerLabel) }
+                    Button(onClick = { onOpenLegacy("downloads") }, modifier = Modifier.fillMaxWidth()) {
+                        Text(if (english) "Downloads" else "Descargas")
+                    }
+                    Button(onClick = { onOpenLegacy("favorites") }, modifier = Modifier.fillMaxWidth()) {
+                        Text(if (english) "Favorites" else "Favoritos")
+                    }
+                    Button(onClick = { section = PrototypeNavigation.VIDEOS; visibleCount = 10 }, modifier = Modifier.fillMaxWidth()) { Text(third) }
+                    Button(onClick = { onOpenLegacy("podcast") }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Podcasts" else "Podcasts") }
+                    Button(onClick = { onOpenLegacy("contact") }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Contact" else "Contacto") }
+                    Button(onClick = { onOpenLegacy("privacy") }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Privacy" else "Privacidad") }
+                    Button(onClick = { onOpenLegacy("settings") }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Settings" else "Configuración") }
                 }
             } else {
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {

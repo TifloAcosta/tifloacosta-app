@@ -49,6 +49,7 @@ export async function parseDaisyArchive(zip, {title='DAISY', language='es'}={}) 
     }
   }
   if (!textFiles.length) files.filter(name=>/\.(?:html?|xhtml|xml)$/i.test(name)&&!/(?:ncc\.html?|\.smil)$/i.test(name)).forEach(name=>add(name,textFiles));
+  const fragments = {};
   const sections=[];
   for (const path of textFiles) {
     if (!/\.(?:html?|xml)$/i.test(path)) continue;
@@ -56,6 +57,10 @@ export async function parseDaisyArchive(zip, {title='DAISY', language='es'}={}) 
     const body=markup.match(/<body\b[^>]*>([\s\S]*?)<\/body>/i)?.[1] || markup;
     const text=strip(body);
     if(text) sections.push({path,text});
+    for (const match of markup.matchAll(/<([a-z][a-z0-9:-]*)\\b([^>]*\\bid=["']([^"']+)["'][^>]*)>([\\s\\S]*?)<\\/\\1>/gi)) {
+      const fragment = strip(match[4]);
+      if (fragment) fragments[path + '#' + match[3]] = fragment;
+    }
   }
   // Capture the SMIL text/audio associations in playback order.
   // Clip bounds are retained for timed synchronization without guessing.
@@ -86,5 +91,5 @@ export async function parseDaisyArchive(zip, {title='DAISY', language='es'}={}) 
   }
   const supportedAudio=audioFiles.filter(name=>/\.(?:mp3|m4a|wav|ogg)$/i.test(name));
   if (!sections.length && !supportedAudio.length) throw new Error('daisy-empty');
-  return {title,language,sections,audioFiles:supportedAudio,timeline,hasText:sections.length>0,hasAudio:supportedAudio.length>0,text:sections.map(section=>section.text).join('\n\n')};
+  return {title,language,sections,fragments,audioFiles:supportedAudio,timeline,hasText:sections.length>0,hasAudio:supportedAudio.length>0,text:sections.map(section=>section.text).join('\n\n')};
 }

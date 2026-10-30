@@ -4,7 +4,7 @@ import test from 'node:test';
 
 const read = path => readFile(new URL('../../' + path, import.meta.url), 'utf8');
 
-test('Google Play candidate is a production draft and cannot be published by staging', async () => {
+test('Google Play staging stays draft-only even when the separately authorized production release is completed', async () => {
   const [requestRaw, staging, workflow] = await Promise.all([
     read('mobile/release/request.json'),
     read('mobile/scripts/stage-play-draft.mjs'),
@@ -12,8 +12,8 @@ test('Google Play candidate is a production draft and cannot be published by sta
   ]);
   const request = JSON.parse(requestRaw);
   assert.equal(request.track, 'production');
-  assert.equal(request.status, 'draft');
-  assert.equal(request.confirmProduction, false);
+  assert.equal(request.status, 'completed');
+  assert.equal(request.confirmProduction, true);
   assert.equal(request.notifyUpdate, false);
   assert.match(staging, /status:\s*'draft'/);
   assert.match(staging, /updateTrackReleases\(editId,\s*'production',\s*\[\.\.\.active,\s*draft\]\)/);

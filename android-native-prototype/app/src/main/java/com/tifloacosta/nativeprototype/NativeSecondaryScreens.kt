@@ -142,6 +142,7 @@ fun NativeSecondaryScreen(
     english: Boolean,
     catalog: Catalog,
     media: List<MediaItem>,
+    initialText: String = "",
     onBack: () -> Unit,
     onOpenVideo: (CatalogItem) -> Unit,
     onSearchYouTube: () -> Unit
@@ -149,7 +150,9 @@ fun NativeSecondaryScreen(
     val context = LocalContext.current
     val favorites = remember(context) { NativeContentFavorites(context.applicationContext) }
     var favoriteGeneration by remember { mutableIntStateOf(0) }
-    var query by rememberSaveable(destination) { mutableStateOf("") }
+    var query by rememberSaveable(destination, initialText) {
+        mutableStateOf(if (destination == NativeDestinations.SEARCH) initialText else "")
+    }
     var status by remember(destination) { mutableStateOf("") }
     val all = catalog.news.map { "news" to it } +
         catalog.resources.map { "resource" to it } +
@@ -206,7 +209,7 @@ fun NativeSecondaryScreen(
                 }
             }
         } else when (destination) {
-            NativeDestinations.DOWNLOADS -> NativeDownloadScreen(english)
+            NativeDestinations.DOWNLOADS -> NativeDownloadScreen(english, initialText)
             NativeDestinations.PODCAST -> NativePodcastScreen(english, media)
             NativeDestinations.CONTACT -> NativeContactScreen(english)
             NativeDestinations.PRIVACY -> NativePrivacyScreen(english)

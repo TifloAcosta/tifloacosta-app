@@ -130,6 +130,7 @@ body:has(#video-player-section:not([hidden])) > .site-footer {
 
   <section id="video-results-section">
     <h2 id="video-results-heading" tabindex="-1">Resultados</h2>
+    <p id="video-results-help" class="muted">En cada vídeo puedes abrir el reproductor o desplegar sus opciones para compartir el enlace y abrirlo en YouTube.</p>
     <p id="video-status" class="muted" aria-live="polite" aria-atomic="true">Cargando catálogo de vídeos…</p>
     <div id="video-list" class="video-list"></div>
     <div id="video-pagination" class="pagination" hidden>
@@ -151,7 +152,7 @@ body:has(#video-player-section:not([hidden])) > .site-footer {
     </form>
     <p id="youtube-accessible-status" class="muted" role="status" aria-live="polite" aria-atomic="true" tabindex="-1"></p>
     <div id="youtube-accessible-results" class="youtube-accessible-results"></div>
-    <button id="youtube-accessible-more" class="youtube-load-more" type="button" hidden>Mostrar 10 resultados más</button>
+    <button id="youtube-accessible-more" class="youtube-load-more" type="button" aria-controls="youtube-accessible-results" hidden>Mostrar 10 resultados más</button>
   </section>
 
   <p><a id="back-home-bottom" class="button-link back-link" href="index.html" role="button" aria-label="Volver a la pantalla principal de TifloAcosta">Volver a la pantalla principal</a></p>
@@ -170,8 +171,8 @@ body:has(#video-player-section:not([hidden])) > .site-footer {
 <script src="youtube-actions-config.js?v=1.0"></script>
 <script src="youtube-actions-core.js?v=1.1"></script>
 <script src="youtube-actions.js?v=1.1"></script>
-<script src="videos.js?v=2.5"></script>
-<script src="youtube-accessible.js?v=1.0"></script>
+<script src="videos.js?v=2.6"></script>
+<script src="youtube-accessible.js?v=1.1"></script>
 <script src="youtube-actions-bridge.js?v=1.0"></script>
 <script data-goatcounter="https://tifloacosta.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>

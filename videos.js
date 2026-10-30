@@ -45,7 +45,7 @@
     playerYouTube: $('#video-player-youtube'),
     resultsSection: $('#video-results-section'),
     youtubeAccessibleSection: $('#youtube-accessible-section'),
-    resultsHeading: $('#video-results-heading'),
+    resultsHeading: $('#video-results-heading'), resultsHelp: $('#video-results-help'),
     status: $('#video-status'),
     list: $('#video-list'),
     pagination: $('#video-pagination'),
@@ -71,6 +71,12 @@
       newest: 'Más recientes primero',
       oldest: 'Más antiguos primero',
       resultsHeading: 'Resultados',
+      resultsHelp: 'En cada vídeo puedes abrir el reproductor o desplegar sus opciones para compartir el enlace y abrirlo en YouTube.',
+      options: 'Opciones del vídeo', optionsFor: title => `Opciones del vídeo: ${title}`,
+      optionsGroup: title => `Acciones disponibles para: ${title}`,
+      share: 'Compartir o copiar enlace', shared: 'Enlace copiado. Puedes pegarlo donde quieras.',
+      shareFailed: 'No se pudo compartir ni copiar. Puedes abrir el vídeo en YouTube y copiar su dirección.',
+      external: 'Abrir este vídeo en YouTube',
       loading: 'Cargando catálogo de vídeos…',
       empty: 'El catálogo de vídeos está vacío en este momento.',
       status: (start, end, n, page, pages) => `Mostrando ${start} a ${end} de ${n} vídeo${n === 1 ? '' : 's'}. Página ${page} de ${pages}.`,
@@ -115,6 +121,12 @@
       newest: 'Newest first',
       oldest: 'Oldest first',
       resultsHeading: 'Results',
+      resultsHelp: 'For each video, open the player or expand its options to share the link and open it on YouTube.',
+      options: 'Video options', optionsFor: title => `Video options: ${title}`,
+      optionsGroup: title => `Available actions for: ${title}`,
+      share: 'Share or copy link', shared: 'Link copied. You can paste it anywhere.',
+      shareFailed: 'Unable to share or copy the link. Open the video on YouTube to copy its address.',
+      external: 'Open this video on YouTube',
       loading: 'Loading video catalog…',
       empty: 'The video catalog is currently empty.',
       status: (start, end, n, page, pages) => `Showing ${start} to ${end} of ${n} video${n === 1 ? '' : 's'}. Page ${page} of ${pages}.`,
@@ -348,6 +360,7 @@
       currentPlayerFrame().title = c.iframeTitle(activeVideo.title || '');
     }
     els.resultsHeading.textContent = c.resultsHeading;
+    els.resultsHelp.textContent = c.resultsHelp;
     els.prev.textContent = c.previous;
     els.next.textContent = c.next;
     els.footer.textContent = c.footer;
@@ -647,8 +660,69 @@
     const id = videoId(video);
     if (id) playButton.dataset.videoId = id;
     playButton.addEventListener('click', () => openPlayer(video));
-    article.append(playButton);
 
+    const actions = document.createElement('div');
+    actions.className = 'resource-actions video-card-actions';
+    actions.append(playButton);
+
+    const videoLink = youtubeUrl(video);
+    const options = document.createElement('button');
+    options.type = 'button';
+    options.textContent = c.options;
+    options.setAttribute('aria-label', c.optionsFor(video.title || ''));
+    options.setAttribute('aria-expanded', 'false');
+
+    const moreId = 'video-options-' + (id || String(video.id || '').replace(/[^a-zA-Z0-9_-]/g, '').slice(0,40));
+    options.setAttribute('aria-controls', moreId);
+
+    const more = document.createElement('div');
+    more.id = moreId;
+    more.hidden = true;
+    more.className = 'resource-actions video-card-extra';
+    more.setAttribute('role', 'group');
+    more.setAttribute('aria-label', c.optionsGroup(video.title || ''));
+
+    const external = document.createElement('a');
+    external.className = 'button-link';
+    external.href = videoLink;
+    external.target = '_blank';
+    external.rel = 'noopener noreferrer';
+    external.textContent = c.external;
+
+    const share = document.createElement('button');
+    share.type = 'button';
+    share.textContent = c.share;
+
+    const feedback = document.createElement('p');
+    feedback.className = 'muted';
+    feedback.setAttribute('role', 'status');
+    feedback.setAttribute('aria-live', 'polite');
+
+    options.addEventListener('click', () => {
+      const opening = more.hidden;
+      more.hidden = !opening;
+      options.setAttribute('aria-expanded', String(opening));
+      if (!opening && more.contains(document.activeElement)) options.focus();
+    });
+    share.addEventListener('click', async () => {
+      try {
+        if (typeof navigator.share === 'function') {
+          await navigator.share({ title: video.title || '', url: videoLink });
+          feedback.textContent = '';
+        } else if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(videoLink);
+          feedback.textContent = copy[lang].shared;
+        } else {
+          feedback.textContent = copy[lang].shareFailed;
+        }
+      } catch (error) {
+        if (error?.name !== 'AbortError') feedback.textContent = copy[lang].shareFailed;
+      }
+    });
+
+    more.append(external, share, feedback);
+    actions.append(options);
+    article.append(actions, more);
     return article;
   }
 
@@ -714,6 +788,7 @@
     query = els.search.value.trim();
     currentPage = 1;
     render();
+    els.resultsHeading.focus();
   });
   els.clearButton.addEventListener('click', () => {
     els.search.value = '';
@@ -740,10 +815,12 @@
   els.prev.addEventListener('click', () => {
     currentPage -= 1;
     render();
+    els.resultsHeading.focus();
   });
   els.next.addEventListener('click', () => {
     currentPage += 1;
     render();
+    els.resultsHeading.focus();
   });
 
   if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {

@@ -5,6 +5,10 @@ import test from 'node:test';
 const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 const repoRead = path => readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
 
+const readShareManifests = async () =>
+  (await read('android/app/src/main/AndroidManifest.xml')) +
+  (await repoRead('android-native-prototype/library/src/main/AndroidManifest.xml'));
+
 test('Android keeps 1.3.1 code 10 as the development fallback while releases can override it', async () => {
   const gradle = await read('android/app/build.gradle');
   assert.match(gradle, /TIFLO_ANDROID_VERSION_NAME/);
@@ -18,7 +22,7 @@ test('Android keeps 1.3.1 code 10 as the development fallback while releases can
 });
 
 test('Android 1.3.1 keeps native Share, Reading and bounded web fetch plugins', async () => {
-  const manifest = await read('android/app/src/main/AndroidManifest.xml');
+  const manifest = await readShareManifests();
   const mainActivity = await read('android/app/src/main/java/com/tifloacosta/app/MainActivity.java');
   assert.match(manifest, /android\.intent\.action\.SEND/);
   assert.match(manifest, /android\.intent\.action\.SEND_MULTIPLE/);

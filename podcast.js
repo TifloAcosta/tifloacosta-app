@@ -53,7 +53,7 @@
       time: (current, duration) => `${current} de ${duration}`,
       ready: title => `Episodio preparado: ${title}`,
       ended: 'El episodio ha terminado.',
-      footer: 'TifloAcosta App · Versión 2.1.'
+      footer: 'TifloAcosta · Web 2.2.'
     },
     en: {
       skip: 'Skip to main content',
@@ -75,7 +75,7 @@
       time: (current, duration) => `${current} of ${duration}`,
       ready: title => `Episode ready: ${title}`,
       ended: 'The episode has ended.',
-      footer: 'TifloAcosta App · Version 2.1.'
+      footer: 'TifloAcosta · Web 2.2.'
     }
   };
 

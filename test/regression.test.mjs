@@ -82,8 +82,8 @@ test('homepage chrome is localized in Spanish and English', async () => {
   const source = await read('app.js');
 
   for (const expected of [
-    "documentTitle: 'TifloAcosta App — Recursos de accesibilidad'",
-    "documentTitle: 'TifloAcosta App — Accessibility resources'",
+    "documentTitle: 'TifloAcosta — Recursos de accesibilidad'",
+    "documentTitle: 'TifloAcosta — Accessibility resources'",
     "skip: 'Saltar al contenido principal'",
     "skip: 'Skip to main content'",
     "brandLabel: 'TifloAcosta, inicio'",

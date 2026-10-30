@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "TifloAcosta App",
+  "name": "TifloAcosta web",
   "short_name": "TifloAcosta",
-  "description": "Accessible bilingual TifloAcosta hub for resources, videos, community and more.",
+  "description": "Portal accesible y bilingüe de TifloAcosta con recursos, vídeos, noticias y contacto. Las aplicaciones nativas se descargan por separado.",
   "lang": "es",
   "start_url": "./",
   "scope": "./",

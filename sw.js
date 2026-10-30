@@ -16,11 +16,11 @@ const SHELL = [
   './downloads.js?v=1.4',
   './downloads.css?v=1.1',
   './actualidad-core.js?v=1.8',
-  './actualidad.js?v=1.4',
+  './actualidad.js?v=1.5',
   './actualidad-media.js?v=1.1',
   './web-reading.js?v=3.15',
   './podcast.html',
-  './podcast.js?v=1.0',
+  './podcast.js?v=1.1',
   './app.js?v=2.7',
   './tifloacosta-favicon.ico',
   './tifloacosta-icon-192.png',
@@ -140,7 +140,7 @@ self.addEventListener('fetch', event => {
 
   if (isAppOrigin && url.pathname.endsWith('/podcast.js')) {
     url.searchParams.set('v', '1.0');
-    event.respondWith(freshScript(url, './podcast.js?v=1.0', request));
+    event.respondWith(freshScript(url, './podcast.js?v=1.1', request));
     return;
   }
 

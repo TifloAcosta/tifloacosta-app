@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-30T22:59:43.355Z",
+  "generatedAt": "2026-10-30T23:50:34.555Z",
   "resources": [
     {
       "kind": "resource",
@@ -5525,6 +5525,166 @@
   "news": [
     {
       "kind": "news",
+      "id": "techcrunch-d747de703740231e:en",
+      "sourceId": "techcrunch-d747de703740231e",
+      "lang": "en",
+      "title": "Ollie, a privacy-focused AI assistant, is shutting down",
+      "summary": "As an increasing number of AI assistants flood the market, the founder of Ollie, an assistant that respected its users' privacy, says it will be shutting down in a week.",
+      "body": "Ollie, a startup whose mission was to deliver an AI assistant that respected its users’ privacy, says that it will be shutting down in a week. Bill Lennon, the company’s co-founder and CEO, took to X on Friday to deliver the news, noting that the app will officially shut down on November 6.\n\n“I’m really proud of what we accomplished,” Lennon said. “We built an incredible personal assistant with a small team, and learned a ton. I’m grateful to our amazing team, our users, our investors, and everyone who supported us on this journey.”\n\nThe text-based AI assistant market has exploded over the past year, as the increasingly powerful models that undergird such applications have made them significantly more useful for daily tasks.\n\nOllie, which discussed its $7.5 million seed round led by Khosla Ventures with TechCrunch in September, offered a subscription-based model. The assistant was focused on helping families stay connected and organized. The app connected to a user’s email and calendar, while also providing integrated functions to help with appointment bookings, meal planning, and bill payments. The company had also planned to eventually move into household budgeting.\n\nCrucially, Ollie was one of the first mainstream apps that managed to achieve SOC 2, a privacy compliance standard that companies can attain via an independent audit. Unfortunately, user privacy has never been a hugely profitable aspect of the tech industry. If anything, many new digital assistants present unique privacy challenges for their users — as companies like Instinct have shown .\n\nUltimately, the pressures of the burgeoning AI industry took a toll on the company, Lennon said. “We got close, but ultimately couldn’t keep up,” he added. “With Muse, Instinct, and others entering the space, it became harder to stand out, grow, and raise the capital we needed to succeed.”\n\nOllie’s customers will receive instructions on how to export data and receive refunds in the coming days, Lennon added.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/30/ollie-a-privacy-focused-ai-assistant-is-shutting-down/",
+      "publishedAt": "2026-10-30T22:56:13.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-23201bbc5c0abbdd:en",
+      "sourceId": "9to5mac-23201bbc5c0abbdd",
+      "lang": "en",
+      "title": "Apple confirms iOS 27.3 beta is coming next week with Apple Intelligence in China",
+      "summary": "Apple today took the unusual step of confirming when its next iOS developer beta is expected to arrive, as part of an announcement detailing the upcoming launch of Apple Intelligence in China. Here are the details. more…",
+      "body": "Apple today took the unusual step of confirming when its next iOS developer beta is expected to arrive, as part of an announcement detailing the upcoming launch of Apple Intelligence in China. Here are the details.\n\nIn mid-July, Reuters reported that, following a lengthy back-and-forth with Chinese regulators and multiple delays, Apple Intelligence had finally cleared a major regulatory hurdle ahead of its long-awaited launch in the country.\n\nThen, a couple of weeks ago, Bloomberg reported that Apple was planning to launch Apple Intelligence in China in December as part of iOS 27.3, although without Siri AI and other newer features.\n\nThe following day, China’s state-backed media outlet The Paper reported that Tim Cook had confirmed regulatory approval for the platform, with a test version expected before the end of October.\n\nThen, just last Monday, Apple released iOS 27.2 and its counterparts, expanding Siri AI support to French, Japanese, Korean, Portuguese, and Spanish. On the same day, the company announced that four more languages, including Traditional Chinese, would be supported by the end of the year.\n\nHowever, while that announcement confirmed additional language support for Siri AI, it offered no updates on the rollout of Apple Intelligence in China, where Siri AI itself will remain unavailable for the time being.\n\nWhile Apple typically releases the first beta of its next software update shortly after the previous version becomes available, iOS 27.3 has yet to materialize.\n\nNow, as spotted by MacRumors , a press release published on Apple’s Chinese Newsroom website confirms that testing of Apple Intelligence in China will begin on November 4, as part of the next iOS developer beta.\n\nImportantly, Apple has only confirmed November 4 as the start of Apple Intelligence testing in China, not necessarily the release date of iOS 27.3 beta 1 itself.\n\nIn the press release , Apple confirms that users in China will get an improved Siri experience, including Type to Siri and the ability to access Alibaba’s Qwen for certain requests, but not Siri AI itself.\n\nThe Qwen integration will also extend to Writing Tools and Visual Intelligence. According to Apple, users will be able to ask questions about photos and documents, including PDFs and presentations, as well as generate original content from scratch through Writing Tools. Users will be able to access Qwen by signing into their accounts or using Sign in with Apple.\n\nOther features included in the initial rollout are Live Translation in Messages, FaceTime, and Phone, Writing Tools, Genmoji, Clean Up in Photos, natural-language photo searches, priority notifications, notification summaries, and Smart Reply, among others.\n\nApple also noted that the initial rollout will be exclusive to the iPhone, with support for other platforms coming only after the necessary regulatory approvals have been obtained.\n\nThe features will be available on the iPhone 15 Pro and Pro Max, iPhone 16 and later, iPhone Air, and iPhone Duo, with both Siri and the device language required to be set to either English or Simplified Chinese.\n\nThe company also confirmed that the features will become publicly available in December, with the official release of iOS 27.3.\n\nTo check out Apple’s press release, follow this link .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/10/30/apple-confirms-ios-27-3-beta-is-coming-next-week-with-apple-intelligence-in-china/",
+      "publishedAt": "2026-10-30T22:37:36.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-7934cfb36c3150c3:en",
+      "sourceId": "the-verge-7934cfb36c3150c3",
+      "lang": "en",
+      "title": "Apple Intelligence is finally coming to China with iOS 27.3",
+      "summary": "Apple will launch Apple Intelligence in China with iOS 27.3, the company announced on its Chinese newsroom website, as reported by MacRumors. The Apple Intelligence features will be available first in an iOS 27.3 beta that's set to launch on November 4th, with a full iOS 27.3 release scheduled for December. This launch doesn't bring […]",
+      "body": "Apple will launch Apple Intelligence in China with iOS 27.3, the company announced on its Chinese newsroom website , as reported by MacRumors . The Apple Intelligence features will be available first in an iOS 27.3 beta that's set to launch on November 4th, with a full iOS 27.3 release scheduled for December.\n\nThis launch doesn't bring the new Siri AI to China. Instead, Apple is launching several of its earlier Apple Intelligence features like notification summaries, real-time translation, rewriting and proofreading tools, visual intelligence, and removing objects from photos. Apple also says it has worked with Ailbaba to add support for its Q …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1023974/apple-intelligence-china-ios-27-3",
+      "publishedAt": "2026-10-30T22:32:53.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-3520d26faeae5d99:en",
+      "sourceId": "techcrunch-3520d26faeae5d99",
+      "lang": "en",
+      "title": "Applebee’s exposed customers’ personal data after leaving database password in app",
+      "summary": "EXCLUSIVE: A security researcher discovered the hardcoded credential in Applebee's app, allowing unrestricted access to customers' personal data.",
+      "body": "Applebee’s has fixed a security flaw that allowed anyone to access the personal information of its registered customers, after a researcher found a password for an internal database inside Applebee’s mobile app, TechCrunch has learned.\n\nThe popular restaurant chain confirmed on Thursday that it had taken action to address the security issue to prevent any unauthorized access to its customer database.\n\nTechCrunch withheld publication of this story until the bug was confirmed to be fixed.\n\nRobert Wiggins , a U.K.-based cybersecurity researcher at What Security , discovered the security lapse earlier this month. Wiggins is no stranger to discovering security issues , including exposed or sensitive information that should not be publicly accessible.\n\nFor this latest discovery, Wiggins used AI to help find the credential buried inside thousands of lines of source code in Applebee’s Android app, which has more than a million downloads on Google Play. The credential allowed access to the company’s customer database.\n\nStoring a password or private key in software, known as hardcoding credentials, is one of the most severe types of security vulnerabilities because anyone with the app can extract the key and use it to log in to a remote system as if they were an authorized user.\n\nWiggins said that the hardcoded credential could have also allowed a malicious attacker to modify customer data in the database.\n\nTechCrunch verified Wiggins’ findings by downloading and decompiling Applebee’s Android app to examine its source code and confirm that it contained the exposed credential. We also created an Applebee’s account with dummy account data, which allowed Wiggins to retrieve our information from the company’s database.\n\nThe exposed database contained customer names, email addresses (including whether or not the customer verified their email), dates of birth, phone numbers, and ZIP codes. The data also included veteran status, the number of times customers had logged in, when their accounts were created, and the IP addresses of their most recent log-ins, which can be used to reveal the person’s approximate location.\n\nWiggins was unable to alert Applebee’s or its parent company, Dine Brands, as neither have ways to report security issues. Wiggins asked TechCrunch for help in disclosing the security issue to the company.\n\nA spokesperson for Dine Brands, who did not provide their name, said in an emailed statement on Friday: “We appreciate TechCrunch and the security researcher for bringing this matter to our attention. Our security team promptly launched an investigation and has not currently found any evidence of unauthorized access.”\n\nWhen asked by TechCrunch, the spokesperson would not say if the company has server logs that it can review to determine whether anyone accessed the database, or if it has any logs at all.\n\n“Our investigation is ongoing, and we will take appropriate steps based on our findings,” the company added.\n\nIt’s unclear how many customers were affected by the data exposure. Wiggins said that figuring out the number of customers in the database would have required the AI model to unnecessarily access potentially every customer record.\n\nApplebee’s had at least 8.5 million customers enrolled in its rewards program as of last year, though the company would not provide a number of how many customers had their personal information exposed by this security flaw.\n\nTechCrunch asked the company if it would alert customers or U.S. regulators about the incident, including whether it would file a disclosure with the U.S. Securities and Exchange Commission, as publicly traded companies are required to do for material cybersecurity incidents. We also asked the company how long the exposed credential had been in the Applebee’s app, but we did not get a response.\n\nWe’ll update this article if the company responds.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/30/applebees-exposed-customers-personal-data-after-leaving-database-password-in-app/",
+      "publishedAt": "2026-10-30T21:48:53.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-a25b9cf0a93832c0:en",
+      "sourceId": "ars-technica-a25b9cf0a93832c0",
+      "lang": "en",
+      "title": "Supersonic airliner in doubt as company shifts to powering AI data centers",
+      "summary": "Boom’s airliner may be delayed, and its data center power business lost a customer.",
+      "body": "Boom Supersonic CEO Blake Scholl recently declared “it’s time for a renaissance in energy and in supersonic flight” as the supersonic airliner company unveiled a Colorado factory dedicated to making gas turbines for AI data centers. But Boom may be facing turbulence after early backers for both ventures have questioned the company’s delivery timeline or backed out entirely.\n\nOne of the company’s first customers, United Airlines CEO Scott Kirby, has expressed doubts about Boom’s original plan to deliver the first Overture supersonic airliner in 2029. Kirby’s latest frank assessment came during an interview with the Office Hours: Business Edition podcast that appeared on October 28, 2026.\n\n“‘29 is their official timeline,” Kirby told podcast host Monica Langley. “It’s not going to happen in ‘29—it’s going to take longer.”\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/gadgets/2026/10/united-airlines-ceo-doubts-supersonic-airliner-from-boom-will-be-ready-by-2029/",
+      "publishedAt": "2026-10-30T21:41:54.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-e503ec89c6d59300:en",
+      "sourceId": "techcrunch-e503ec89c6d59300",
+      "lang": "en",
+      "title": "Last-minute Halloween costumes for tech nerds",
+      "summary": "No Halloween costume? Just be a deceptively cute AI agent icon, a PHP vulnerability, or sleepy time Bryan Johnson.",
+      "body": "It happens to the best of us — you’ve completely dropped the ball on figuring out a Halloween costume. Naturally, you’ve decided to solve this problem by turning to… TechCrunch? Yeah, sure, why not. I’ve got some ideas.\n\nHere are some last-minute techy Halloween costumes. Effort levels vary.\n\nAI leaders like Dario Amodei and Sam Altman have expressed their fears that AI is developing too quickly , but if AI models become capable of “recursive self-improvement,” they’ll be able to advance on their own without human intervention, rendering any efforts to “pace the frontier” futile.\n\nI’m not sure how to visually represent the idea of an AI building itself, but you could really lean into the “self-improvement” part and forget the “recursive” aspect — it’s a last-minute Halloween costume. You don’t need to try that hard.\n\nDress as the version of yourself you imagine becoming every year when you make New Year’s resolutions. Carry around a self-help or productivity book like “Atomic Habits” or anything by Malcolm Gladwell, a yoga mat, and a huge bottle of water. Leave in the middle of the party to “go to therapy” when you actually just want to go home. Brag to people about how good your Oura Ring’s sleep score is.\n\nYou are the embodiment of someone trying to better themselves. You are recursive self-improvement.\n\nMeta and OpenAI both recently launched AI assistants with creepily cute avatars. It’s almost Elizabeth Holmes-esque — they look innocent, so you underestimate their potential to cause disaster. (While we’re talking about her, you’re only allowed to do the black turtleneck Holmes costume if you’re a natural blonde, or if you have a blonde wig.)\n\nWhat you’re going to do is make yourself look big and fluffy. Maybe you have a poofy puffer jacket, or maybe you can find some colorful feather boas to wrap yourself in. Add a distinctive hat, glasses, or other accessory to make yourself look more like a ChatGPT dot. If you have a colorful shirt and matching bottoms, that also works.\n\nThroughout the night, ask people if you can obtain read/write access to their Gmail.\n\nWhether you call them “pervert glasses” or not, we should all be able to agree that it would be really spooky if someone just started recording you without your consent — perfectly in keeping with the Halloween spirit.\n\nJust grab a pair of glasses — or buy a cheap pair somewhere convenient — and attach a big red or white circle to one lens, mimicking the red recording light. If you want to make the costume extra creepy (or, if you can’t make a big circle sticker), you can just wear normal glasses and say that you’re “guy recording with the light covered up.” Please, just don’t actually record people without their consent while you wear this costume.\n\nWhile we’re at it, Mark Zuckerberg’s fashion has been pretty recognizable lately. He’s been wearing a lot of slightly oversized, boxy black T-shirts.\n\nIt may be hard to replicate the black-text-on-black-shirt style he gravitates toward, but you could attach a piece of paper to yourself that says “Building is my love language.”\n\nIf you feel confident in your Latin pronunciation, you could go for something actually scary, like the time he wore a shirt that said “Aut Zuck aut nihil,” which means “Either Zuck or nothing.” It’s a little ominous.\n\nFor some people, there’s nothing scarier than running out of Claude tokens.\n\nGrab a piece of cardboard, print out screenshots of notifications telling you that you’ve reached your usage limit, and go spook some vibe-coders. I’ve illustrated this idea using an edited stock photo. You don’t have to dress like you work at Hot Topic — that’s just the model in the image.\n\nThe scary PHP-ocalypse is fresh in our memory — it was only last week that AI unearthed critical PHP flaws that could’ve been catastrophic for the internet. The fear that web developers felt is still palpable, making it a good Halloween costume: You are a PHP vulnerability.\n\nHere’s what you’re going to do. Buy a T-shirt and a sharpie, and write PHP on it. Keep it simple.\n\nWhat about the vulnerability part? You’re going to have to commit to the bit. All night, you’re going to talk to your friends about your feelings. Actually bare your emotions. Talk about how your recent loss of a loved one made you remember how fragile life can be. If making yourself vulnerable kills the vibe, just pretend it was part of the Halloween costume and that you’re really cool and fun and never feel sad ever.\n\nThe costume explains itself.\n\nCouples costume alert!\n\nMaybe you have more than one Halloween party to go to this weekend, but you want your various costumes to stick to a specific theme. Once you’ve got your sleepy time getup sorted, it’s time to prep your second costume portraying the controversial biohacker : GLP-Bryan.\n\nJohnson wrote on X earlier this year: “I frequently lay on top of Kate with all of my bodyweight. The deep pressure calms her nervous system, quiets racing thoughts, and releases oxytocin which lowers cortisol. We call it GLP-Bryan.”\n\nNaturally, people were confused, so he shared an image to demonstrate.\n\nYes, this will be hard to reproduce as a Halloween costume, but if you’ve run out of time to buy anything, this one will do. Just wear a T-shirt and jeans, which you probably already own. It will be weird to lie on top of your partner in the middle of a party. Really weird. But that’s what you get for waiting until now to figure out a costume.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/30/last-minute-halloween-costumes-for-tech-nerds/",
+      "publishedAt": "2026-10-30T21:26:59.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-a56e2317383a2187:en",
+      "sourceId": "the-verge-a56e2317383a2187",
+      "lang": "en",
+      "title": "Exclusive details about Akai’s MPC Sample Key",
+      "summary": "Akai teased its new MPC Sample Key on Instagram earlier this week, and said it plans to open-source its software so the modding community can hack it to their hearts' delight. While there's no word yet on when the device will launch or how much it will cost, The Verge has received exclusive images of […]",
+      "body": "Akai teased its new MPC Sample Key on Instagram earlier this week, and said it plans to open-source its software so the modding community can hack it to their hearts' delight. While there's no word yet on when the device will launch or how much it will cost, The Verge has received exclusive images of the upcoming instrument that offer some details about its feature set.\n\nWhile the Sample Key shares many of the same controls as the MPC Sample - including the three context-sensitive encoders, a large main encoder - it seems designed for pitched sample playback, rather than chopping up drums. In fact, the \"chop\" button from the MPC Sample is m …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/gadgets/1023649/akai-mpc-sample-key-exclusive",
+      "publishedAt": "2026-10-30T21:01:32.000Z",
+      "categories": [
+        "tecnologia-general",
+        "programas-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-2793013727ca87b1:en",
+      "sourceId": "the-verge-2793013727ca87b1",
+      "lang": "en",
+      "title": "Sam Altman says it’s better for RAM to be in a data center than on your desk",
+      "summary": "Asked about supply chain shortages, like the ongoing RAM shortage, OpenAI CEO Sam Altman said in an interview that it's \"terrible\" to have RAM in personal PCs instead of data centers. During his appearance on the Cheeky Pint podcast, where he also commented on AI's impact on math, Altman said: \"A lot of people want […]",
+      "body": "Asked about supply chain shortages, like the ongoing RAM shortage , OpenAI CEO Sam Altman said in an interview that it's \"terrible\" to have RAM in personal PCs instead of data centers. During his appearance on the Cheeky Pint podcast, where he also commented on AI's impact on math , Altman said:\n\n\"A lot of people want local inference. And somehow, they assume that the problem is solved now because we are going to have open-source models, we're going to be able to run them on our computers, and so we're not going to need all the stuff in the data center.\n\nBut from a global allocation perspective, actually, it's quite terrible to have everybo …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1023820/sam-altman-ram-shortage-cloud-servers",
+      "publishedAt": "2026-10-30T20:48:43.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-06033c9c59a8707c:en",
+      "sourceId": "ars-technica-06033c9c59a8707c",
+      "lang": "en",
+      "title": "Dartmouth's provost warned us about AI cheating—but his own AI use cost him his job",
+      "summary": "People who love AI don't always love telling others they used it.",
+      "body": "On August 9, 2026, Dartmouth College provost Santiago Schnell wrote a Washington Post op-ed called \"Universities are fighting AI cheating. But there’s a deeper problem.\" This week, Schnell discovered the depths of the problem himself as he resigned from the university after an advisory committee found that he failed to disclose significant AI use in an academic paper and in the Washington Post op-ed, even though publishers required such disclosure.\n\nSchnell didn't make it especially easy for the committee to investigate his AI use; the report uses the term \"insufficient cooperation.\" He did turn over his Dartmouth laptop, but he did not turn over logs from his personal LLM accounts related to the writings in question. Nor did he agree to meet with the committee.\n\nThe committee did get access to the Claude enterprise account Schnell had used through Dartmouth, though. This shows him using the LLM as a tool for revising his papers, finding and fixing bugs in code, and editing or generating figures. For instance, Schnell would run his papers through Claude and ask things like:\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/tech-policy/2026/10/dartmouths-provost-warned-us-about-ai-cheating-but-his-own-ai-use-cost-him-his-job/",
+      "publishedAt": "2026-10-30T20:40:13.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-1552938c6ca3cc59:en",
+      "sourceId": "ars-technica-1552938c6ca3cc59",
+      "lang": "en",
+      "title": "Basically no one is using AI agents for their DoorDash orders",
+      "summary": "But it's still early days for the relatively new e-commerce use case.",
+      "body": "As AI tools and agents have continued their march across all aspects of digital life, many companies are trying to use LLMs to improve the experience of purchasing goods and services on the Internet. Thus far, though, a vanishingly small number of people seem to be taking advantage of those capabilities, at least when it comes to using the popular food delivery app DoorDash with an outside AI agent.\n\nIn a third-quarter earnings call Thursday , DoorDash co-founder and CEO Tony Xu responded to an analyst question by noting that \"AI agents are generating several hundred orders [on DoorDash] across the time that they've been up and running.\" In a marked understatement, Xu called this a \"very low use case\" for a company that handled just shy of 1 billion orders total in the third quarter of 2026 alone.\n\nSpeaking generally, Xu said he sees the potential for AI agents to be genuinely helpful for \"long consideration purchases\" and major decisions where agents would be \"doing work on your behalf proactively in the background.\" However, Xu added, \"when it comes to a task that's as simple as ordering food, we tend to see that come directly to DoorDash.\"\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/ai/2026/10/doordash-says-outside-ai-agents-have-only-led-to-hundreds-of-orders-so-far/",
+      "publishedAt": "2026-10-30T19:30:52.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "9to5mac-16be50c3f743d848:en",
       "sourceId": "9to5mac-16be50c3f743d848",
       "lang": "en",
@@ -5574,103 +5734,6 @@
     },
     {
       "kind": "news",
-      "id": "the-verge-0390f265a30e1952:en",
-      "sourceId": "the-verge-0390f265a30e1952",
-      "lang": "en",
-      "title": "Google’s satellite AI server transmits its first response to Earth",
-      "summary": "Google's AI chip-equipped satellite has generated its first response from space. In a blog post on Friday, Google says it successfully booted up the satellite's Tensor Processing Units (TPUs), allowing the on-board Gemma 4 model to follow through on a prompt to create a haiku about being in space: Blue marble below Data streams in […]",
-      "body": "Google's AI chip-equipped satellite has generated its first response from space. In a blog post on Friday, Google says it successfully booted up the satellite's Tensor Processing Units (TPUs), allowing the on-board Gemma 4 model to follow through on a prompt to create a haiku about being in space:\n\nBlue marble below\n\nData streams in silent grace\n\nStarlight feeds my core. ✨\n\nGoogle says it tried out other space-themed limericks and telemetry prompts as well. The test is part of Google's Project Suncatcher, an experimental initiative that could eventually put AI data centers in space. Google launched the satellite into orbit earlier this …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1023528/google-project-suncatcher-ai-satellite-transmission",
-      "publishedAt": "2026-10-30T18:21:38.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-4bbdda0825db257f:en",
-      "sourceId": "techcrunch-4bbdda0825db257f",
-      "lang": "en",
-      "title": "Zest’s new AI agent finds restaurants and books reservations over text",
-      "summary": "Can't agree on where to eat? Zest's AI concierge can combine everyone's tastes, put restaurant options to a vote, and make the reservation.",
-      "body": "Zest , the restaurant discovery app that launched earlier this year, is already thinking about a future where mobile apps are no longer the primary interface. On Thursday, the startup introduced a new feature: a personal AI-powered “restaurant concierge” that lives in your text messages, similar to other popular AI agents like Instinct or Poke.\n\nThe launch reflects a broader shift in how startups are thinking about AI, as conversational AI agents take on tasks that had previously required users to launch standalone mobile apps. For Zest, that means bringing its restaurant recommendations into texts, then allowing users to immediately take the next step of booking a table.\n\n“The agent is the product now,” explains Zest founder and CEO Mario Gomez-Hall. “You text it, and it answers from your own history and your friends’. It doesn’t need weeks of conversation to learn you because it starts from where you’ve actually been,” he said.\n\nOriginally founded in November 2024, with $1.8 million in pre-seed backing from Alexis Ohanian at 776 and Steve Jang at Kindred Ventures, the app’s unique feature is that it links up with users’ credit cards to track where they’re actually eating out to get a sense of their tastes and interests. With this data on hand, Zest can make tailored suggestions of what places you might like to try next, whether that’s in your own city or suggestions of places to try when you’re traveling.\n\nThe credit card data used by Zest’s app is imported via the financial services company Plaid , which is used by banks and other fintech and budgeting apps. Zest says it focuses only on those transactions in the food and drink categories when making its personalized map and lists.\n\nThe startup’s latest idea is to tackle the same problem — where should I go to eat? — from a new angle. It will now make its suggestions from inside a text message thread and can turn to AI to do things like check availability and make the reservation for you through connected services like OpenTable, Resy, and SevenRooms.\n\nTo work, users will text the Zest concierge at (212) 470-6067. What’s even better is that Zest can be dropped into a group chat, where it can blend everyone’s tastes to find places the whole group will love. Here, it can also settle indecision with an in-thread voting feature and then can book a table for the group without leaving the conversation.\n\nUsers can ask Zest for recommendations based on a number of factors, like cuisine, craving, occasion, dietary restrictions, or neighborhood, and can ask questions about the restaurants, like how busy the place may be, or whether it offers Wi-Fi, and more. Plus, you can ask Zest to send you the menu to help you make a decision.\n\nIn TechCrunch’s tests, the AI worked fairly well, offering a list of suggestions for new places matched to our tastes that also fit particular conditions, like time of day, party size, location, and other factors. While finding an open table is something other apps have offered for years, there’s a convenience factor in being able to just text back and forth about the various options and have it tell you the available booking times.\n\nThe company began testing the concierge last month, but decided to hold the launch until it could add the booking capabilities; over time, the startup is considering moving Zest beyond restaurants to offer recommendations for businesses, shopping, and more.\n\nBy shifting to texts, Zest hopes the company can scale beyond its initial thousands of users and generate revenue.\n\n“Booking and ordering are the first revenue lines. Zest books your table through OpenTable or Resy today, with food ordering coming, and there are transactions there to participate in,” said Gomez-Hall. “The reason that gets interesting is that Zest learns your taste faster than a general assistant does, because it starts from where you’ve actually been instead of asking you questions. That’s worth something well beyond dinner,” he added.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/30/zests-new-ai-agent-finds-restaurants-and-books-reservations-over-text/",
-      "publishedAt": "2026-10-30T17:47:12.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-d63b7284dd9c2b05:en",
-      "sourceId": "ars-technica-d63b7284dd9c2b05",
-      "lang": "en",
-      "title": "Fujifilm to boost tape production 5x as AI fuels archiving demand",
-      "summary": "Low costs and offline security mean magnetic tape still has a job.",
-      "body": "In an announcement released Thursday, Fujifilm said it will invest roughly 10 billion yen (about $63 million) to increase its production capacity fivefold for an unlikely beneficiary of the AI era: magnetic tape.\n\nFujifilm attributes the surge in archiving demand to the spread of generative AI, which the company remarked is producing \"exponential growth\" in data needs worldwide. The 5x increase in production capacity will be measured against fiscal year 2025 production levels.\n\nThe investment in Fujifilm's Kanagawa Factory, Odawara site will make it \"the largest investment Fujifilm has made to date in dedicated LTO tape facilities.\" The project will run from fiscal years 2026 through 2028 to fund manufacturing expansion and additional personnel, primarily to produce the latest-generation \"FUJIFILM LTO Ultrium10\" tape.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/gadgets/2026/10/fujifilm-to-boost-tape-production-5x-as-ai-fuels-archiving-demand/",
-      "publishedAt": "2026-10-30T17:38:19.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-0c86ab55696dd950:en",
-      "sourceId": "the-verge-0c86ab55696dd950",
-      "lang": "en",
-      "title": "Starbucks wants to use AI to show you a ‘personalized digital menu’ at the drive-thru",
-      "summary": "Starbucks could eventually show you a personalized digital menu when you pull up to the drive-thru. During an earnings call on Thursday, Starbucks CEO Brian Niccol said the company is going to explore \"experiences that recognize participating customers as they arrive, present personalized digital menus, and make payment more effortless,\" as spotted earlier by More […]",
-      "body": "Starbucks could eventually show you a personalized digital menu when you pull up to the drive-thru. During an earnings call on Thursday , Starbucks CEO Brian Niccol said the company is going to explore \"experiences that recognize participating customers as they arrive, present personalized digital menus, and make payment more effortless,\" as spotted earlier by More Perfect Union .\n\nIt sounds similar to the technology that Taco Bell is experimenting with , which could change the layout, content, and visuals on a digital menu board \"on a car-by-car basis.\" McDonald's also r ecently showed off an AI-powered feature it's piloting at a handful of dri …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1023440/starbucks-ai-personalized-menu-drive-thru",
-      "publishedAt": "2026-10-30T17:38:04.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-0d01c417fb7d2a8a:en",
-      "sourceId": "the-verge-0d01c417fb7d2a8a",
-      "lang": "en",
-      "title": "The delightfully messy state of Apple gadgets",
-      "summary": "The iPhone has more screens! The MacBook has a touchscreen! The HomeView does CarPlay apps! For the first time in a long time, Apple is in a period of unabashed gadget experimentation, and while the final results aren't always perfect, it's fun to watch the most successful product maker try some new things again. Even […]",
-      "body": "The iPhone has more screens ! The MacBook has a touchscreen ! The HomeView does CarPlay apps ! For the first time in a long time, Apple is in a period of unabashed gadget experimentation, and while the final results aren't always perfect, it's fun to watch the most successful product maker try some new things again. Even when, in this case, \"trying\" amounts to just slapping a touch panel on a lovely new MacBook Pro - just to see if you might use it.\n\nOn this episode of The Vergecast , David and Nilay debate the merits of a touchscreen laptop, Nilay explains why he is absolutely positively going to buy the new MacBook Pro with PROLED XDR Display, …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/podcast/1023194/the-delightfully-messy-state-of-apple-gadgets",
-      "publishedAt": "2026-10-30T17:25:20.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-d2b26b2d137440bd:en",
-      "sourceId": "ars-technica-d2b26b2d137440bd",
-      "lang": "en",
-      "title": "Thousands of “ghost students” use AI to steal millions in student loans, DOJ says",
-      "summary": "Applying for FAFSA may get messy as DOJ “ghost student” crackdown ramps up.",
-      "body": "The US has charged five individuals as part of the first broad federal crackdown on “ghost students”—fraudsters who steal the identities of hundreds of Americans to pose as fake college students and steal student loans.\n\nIn a press release Thursday, the Department of Justice said it had uncovered a large-scale scheme relying partly on AI. The DOJ seized more than $750,000 in cryptocurrency from “a network associated with Kenyan nationals\" after data analysis helped flag likely fraudsters. Assistant Attorney General Colin M. McDonald of the DOJ’s National Fraud Enforcement Division credited new fraud-detection measures implemented by the Trump administration for the arrests. He said that “this is the first international seizure of its kind in Kenya,” while warning fraudsters that the crackdown has only just begun.\n\n“If you steal American identities, if you steal taxpayer dollars, if you exploit programs meant to help students build a future—we will find you,” McDonald said. “Whether you are in Nebraska, New Jersey, Virginia, or Nairobi, we will pursue you.”\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/tech-policy/2026/10/doj-exposes-ghost-students-using-ai-to-complete-courses-steal-student-loans/",
-      "publishedAt": "2026-10-30T16:53:49.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "engadget-ac5f9870f9d1e180:en",
       "sourceId": "engadget-ac5f9870f9d1e180",
       "lang": "en",
@@ -5687,38 +5750,6 @@
     },
     {
       "kind": "news",
-      "id": "techcrunch-4cfe7717d3130772:en",
-      "sourceId": "techcrunch-4cfe7717d3130772",
-      "lang": "en",
-      "title": "Theranos whistleblower Tyler Shultz warns that the AI boom is ‘a great opportunity to go deceive people’",
-      "summary": "The cautionary Theranos tale takes on a new significance in the AI era, when companies that have never turned a profit are raising capital at trillion-dollar valuations.",
-      "body": "“ You Can See Everything ,” the documentary capturing disgraced Theranos founder Elizabeth Holmes’ final weeks before prison, is sparking national conversation as it becomes one of the highest-grossing documentaries of all time. The film, directed by Nathan Fielder and Lance Oppenheim, intentionally refuses to characterize Holmes as a master manipulator or victim, instead highlighting her uncanny, almost hypnotic knack for making people pity her, even when they’re well aware of her crimes .\n\nTyler Shultz didn’t need to see “You Can See Everything” to make up his mind about Holmes. Shultz, whose first job out of college was at Theranos, was a key whistleblower who exposed the company’s dangerously inaccurate blood testing devices, which made their way into Walgreens stores and delivered faulty results to real patients. (Theranos reached a peak valuation of around $10 billion despite its technology never actually working — the company only used its own machines for a fraction of tests , instead outsourcing others to third-party equipment.)\n\nThere is little reason to keep talking about Holmes — her case is closed, and she’s in federal prison — but her con-artistry has fascinated the media ( myself included ) for the last decade.\n\nIn fact, as Shultz says in an interview with The San Francisco Standard, “the only reason we’re talking about Elizabeth Holmes right now is because she wants us to be talking about Elizabeth Holmes right now.”\n\nBut the cautionary tale of Theranos takes on a new significance as we enter the peak of the AI era, when companies that have never turned a profit are raising capital at trillion-dollar valuations.\n\n“I think the days of having a thirty-minute coffee with someone and sending them $100,000 should be over. Elizabeth took that model and scaled it to $100 million,” Shultz told SF Standard .\n\nHis grandfather, former U.S. Secretary of State and Secretary of the Treasury George Shultz, was a notable investor and board member himself.\n\n“I believe that what [Holmes] did was raise the biggest angel round of funding of all time, but even at the smaller levels, I think investors need to recognize that when they put that type of money in someone’s hands, they are giving them tremendous power,” he added.\n\nTheranos’ funding often came from individual investors like the DeVos and Walton families, rather than venture firms. Theranos did not share scientific information or evidence that its machines worked with potential investors, citing concerns about revealing trade secrets, which warded off many top venture capitalists in Silicon Valley.\n\nAt the time Theranos’ fraud was uncovered, it was seen as a shrill wake-up call for investors that they need to prioritize due diligence. But in the AI era, Shultz worries that investors may forget these lessons.\n\n“A huge danger with AI is that I think it is really hard to do due diligence on it,” he said. “It’s really hard to tell the difference between what is something truly unique and new versus like, a ChatGPT wrapper… If you want to deceive people, I think this is a great opportunity to go deceive people.”\n\nThe first question posed by “You Can See Everything” lies in the premise of the movie itself. Why would a mother of two young children choose to invite a film crew to follow her final days with her family before surrendering to serve a prison sentence of over 11 years? The film poses questions that seem inscrutable, but this one seems pretty clear. She wants people to pity her, because this pity could be more useful for her future endeavors than hate or mockery.\n\nIn the film, we see Holmes and her partner, hotel heir Billy Evans, working on Haemanthus , a diagnostics company that they call “Theranos 2.0,” which has reportedly raised about $20 million in funding.\n\n“You Can See Everything” doesn’t make Holmes look good, but it also glosses over the more heinous crimes of Theranos, like giving dangerously faulty medical information to real patients, or even its targeted harassment of Shultz himself when he was attempting to sound the alarm about his former employer. In the cultural zeitgeist, Holmes remains more of a joke than a persona non grata.\n\n“I have this feeling of unease about what might come next,” Shultz said. “She’s certainly preparing and beginning her second act, and I don’t know exactly where it’s going to go.”",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/30/theranos-whistleblower-tyler-shultz-warns-that-the-ai-boom-is-a-great-opportunity-to-go-deceive-people/",
-      "publishedAt": "2026-10-30T16:03:45.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-1e1ac2d0daed2d96:en",
-      "sourceId": "9to5mac-1e1ac2d0daed2d96",
-      "lang": "en",
-      "title": "Hands-on time with the iPhone Duo still leaves me wowed",
-      "summary": "There are devices you need in your life, others for which you can put together a convincing justification – and then there are gadgets you quite simply want . I said last month that I was wowed by the launch video for the iPhone Duo , despite it falling very clearly into the latter category for me – and playing with one hasn’t changed that in the slightest … more…",
-      "body": "There are devices you need in your life, others for which you can put together a convincing justification – and then there are gadgets you quite simply want .\n\nI said last month that I was wowed by the launch video for the iPhone Duo , despite it falling very clearly into the latter category for me – and playing with one hasn’t changed that in the slightest …\n\nI had a very un-British reaction to the video for the new device.\n\nI had extremely high expectations for this device yet was still blown away by just how good it appears to be. I’m British; the only time we ever use the word “wow” is sarcastically – but I still had to open this piece with it, without a trace of sarcasm.\n\nThis device isn’t the best match for me. To me, an iPhone is about 50% ultra-slim camera, 49% pocket computer, and 1% phone. The iPhone 18 Pro is a better device for my needs. However, I was experiencing extreme levels of technolust for the iPhone Duo. I’m not the target market for the iPhone Duo, but I do, absolutely, unquestionably want one.\n\nI this week got a chance to visit an Apple store to spend about half an hour playing with the new device, and that did absolutely nothing to reduce my technolust.\n\nThe first thing to say is that the nanotexture surface of the inner display is gorgeous , and my quick snapshots don’t remotely do justice to it. Although intended primarily to disguise the crease, I found it a really beautiful screen. When looking at content with a white background, it’s really paper-like.\n\nIndeed, once I’d been looking at it for a while, it was actually quite jarring to fold the Duo and see the glossy screen on the outside – all the more so when it showed reflections which were not at all visible on the inner display.\n\nI honestly think Apple should have used nano-texture on the outer screen too, and even offer it as an option on other iPhones.\n\nThe iPhone Duo of course offers a split-screen view, with a new gesture to invoke it. Even in the very short time I was using the device, I found this almost immediately became second nature. From the home screen you simply drag an app up a little and then either left or right and it snaps into place.\n\nBoth apps feel very usable in this configuration, although in my view it would only make sense to use it when you are interacting with both, for example dragging content from one to another, like adding a photo to a note. I’m not much of a multi-tasker and, honestly, most people who claim to be aren’t either. For me the whole point of a phone display this size is greater immersion.\n\nMost of the time, then, I’d want to take advantage of the iPad mini-like size of the display to give more space to a single app. For some content, like photos, it does rely on a matching aspect ratio to take full advantage of the display.\n\nOther photo ratios get windowed, and look far less impressive.\n\nFor web browsing and similar applications, I would personally use it primarily in portrait mode.\n\nApple’s own apps seem well adapted to this mode. For example, the overlapping message pane in the Messages app, which can of course be dismissed.\n\nFor me, the least-convincing use case is watching video, where the aspect ratio simply doesn’t match most of today’s content. For example, this is how Foundation looks in the Apple TV app:\n\nIncidentally, the camera punch hole looks very obvious above, but it really isn’t most of the time. With many backgrounds, it’s barely visible and not remotely intrusive. I had to angle the screen very carefully to be able to really maximise its visibility for this close-up:\n\nI’d say it’s more visible in my other photos than it is in real-life.\n\nThen there are the more whimsical orientations …\n\nI mostly dictate text on an iPhone rather than type it, and can’t imagine anyone would really use the Duo in laptop mode very often, but honestly there’s nothing wrong with a bit of whimsy with the device. It’s in large part a fun thing – even if it is rather pricey as a toy.\n\nThe iPhone Duo is a beautiful device, and Apple has clearly put a huge amount of thought into both the hardware and the software.\n\nIt’s a very pocketable device, and I really love the idea of having a screen size close to that of the iPad mini on me at all times. I mentioned that I’d been using an iPad mini to preview the iPhone Duo experience earlier this month, and the Duo actually feels even better thanks to smaller bezels and that beautiful paper-like display.\n\nYes, it’s exceedingly expensive, and yes, having the priciest iPhone lack the best cameras would be a huge compromise for me. But while I still don’t think it would be the best iPhone for my needs, I do absolutely, undeniably want one.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/10/30/hands-on-time-with-the-iphone-duo-still-leaves-me-wowed/",
-      "publishedAt": "2026-10-30T16:00:00.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "engadget-b6cc018b3978c462:en",
       "sourceId": "engadget-b6cc018b3978c462",
       "lang": "en",
@@ -5728,36 +5759,6 @@
       "sourceName": "Engadget",
       "originalUrl": "https://www.engadget.com/2302374/the-wikimedia-foundation-weighs-in-on-the-nyts-case-against-openai/",
       "publishedAt": "2026-10-30T15:47:12.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-7b89926856867df0:en",
-      "sourceId": "techcrunch-7b89926856867df0",
-      "lang": "en",
-      "title": "North Korean hackers blamed for stealing record $6.3B in Binance breach",
-      "summary": "Hackers working for North Korea are suspected of hacking a Binance employee's laptop, which allowed the theft of billions in crypto.",
-      "body": "Hackers working for the North Korean regime have been blamed for a record cryptocurrency heist following a cyberattack at crypto exchange Binance . The hackers stole at least $6.3 billion in crypto from the company’s wallets, though about half of that amount was frozen as the stolen crypto traveled across various blockchains, according to security researchers.\n\nThe breach is by far the largest known theft of crypto in history, though the incident has not been confirmed yet to be resolved, and the amount of crypto stolen may change.\n\nIn a post on X , Binance said its initial investigation showed that the hackers broke into the company’s network after targeting a “compromised” Binance engineer’s laptop, which “allowed an attacker to gain access to a service container and submit unauthorized withdrawal transactions.”\n\nBinance said it has seen no evidence of a leak of its private keys, which would grant the hacker near-unfettered control over the company’s stores of crypto.\n\nThe crypto exchange — the world’s largest — said it has now suspended all deposits and withdrawals while its investigation into the breach continues. TechCrunch reported on Thursday that the exchange had paused withdrawals across some of its blockchains.\n\nBinance said “user funds are safe,” but did not immediately provide proof of this claim. The company said it will “publish an updated proof of reserves once the remediation is complete.”\n\nIt’s unclear how the hack went down or under what circumstances the employee’s laptop was compromised, but it’s not uncommon for security incidents to stem from the use of compromised software on employee devices.\n\nSoftware is generally built from many components, including open-source projects, which hackers regularly target , compromise and modify in order to steal data from devices that the affected software is installed on. Other times, malware bundled with regular-looking apps and games can allow hackers to steal usernames, passwords and session tokens from infected computers, which may let them log in as if they were a legitimate employee.\n\nBinance will face questions about why the company’s security allowed a single employee’s laptop to access systems capable of controlling billions of dollars in funds.\n\nSpokespeople for Binance did not respond to a request for comment about the hack. TechCrunch has also asked the company who, if anyone, performed a security audit of Binance’s network and systems prior to the hack. Companies regularly ask third-party companies to stress-test their security to identify weaknesses that could be exploited by attackers, but it’s unclear if Binance sought such a review.\n\nSecurity researchers at TRM Labs, a blockchain intelligence and forensic company, attributed the breach to North Korean hackers, and called it the “largest hack in history.”\n\nResearchers describe the network of hackers, known in the cybersecurity industry as TraderTraitor, as a North Korean cell focused almost exclusively on stealing crypto from large companies and exchanges. This group was also blamed for the now-second-largest heist on record, a $1.4 billion theft from crypto exchange Bybit in 2025 .\n\nAccording to TRM, the theft of Binance’s billions in crypto took about 20 minutes.\n\nBlockchain security firm Elliptic also attributed the Binance theft to North Korean hackers. Elliptic said some of the stolen funds ended up in the same wallet that was used in a previous cyberattack on crypto exchange Bitget earlier this year, in which hackers stole $351 million .\n\nThe U.S. government and its allies have long warned about the threat from North Korea, which remains cut off from the U.S. and the global financial system for its ongoing development of its nuclear weapons program. Researchers say the breakaway country’s sole motivations are to steal as much crypto as possible in order to continue developing its sanctioned weapons of mass destruction.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/30/north-korean-hackers-blamed-for-stealing-record-6-3b-in-binance-breach/",
-      "publishedAt": "2026-10-30T14:00:25.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-1a6c35b18eff3eda:en",
-      "sourceId": "ars-technica-1a6c35b18eff3eda",
-      "lang": "en",
-      "title": "2027 Nissan Rogue Hybrid: Drives like an EV, but there's no plug involved",
-      "summary": "Nissan’s series hybrid e-Power system has been retuned for American roads.",
-      "body": "Nissan has a new version of its bestselling Rogue SUV, and it’s launching the model here with the latest version of its e-Power hybrid system, which Ars tested in February. Most hybrid cars you can buy today are parallel hybrids, which means that they have an internal combustion engine and an electric motor, both of which drive some or all of the wheels—everything works in parallel. But there’s another approach. Instead of connecting the engine to the wheels via a transmission, it can act as a generator and charge the traction battery, which in turn powers the electric motor. Since the engine and motor work in series, this is known as a series hybrid.\n\nThat’s mostly how the Chevrolet Volt worked. As does Honda’s hybrid CR-V . Well, mostly; engineers worked out it was more efficient for those cars' gasoline engines to directly drive the wheels at highway speeds, something that to this day makes a certain subset of hybrid car enthusiasts irrationally angry. If you know anyone like that in your life, send them to wherever the nearest Nissan dealership is, because the 2027 Rogue Hybrid is exactly what they’ve been asking for.\n\nUnder the hood, with its crisp shut line and slim horizontal lights that give me something of a Range Rover vibe, there’s a 1.5 L, three-cylinder turbocharged direct-injection engine that generates 148 hp (110 kW). It only revs to 5,200 rpm because it’s optimized to charge the battery, not cope with the various loads of an engine connected to a gearbox and the wheels. That also allows the engine to operate at a rather impressive 42 percent thermal efficiency—we would need to look at Formula 1 engines to find higher.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/cars/2026/10/2027-nissan-rogue-hybrid-drives-like-an-ev-but-theres-no-plug-involved/",
-      "publishedAt": "2026-10-30T12:00:18.000Z",
       "categories": [
         "tecnologia-general"
       ]

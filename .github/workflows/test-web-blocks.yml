@@ -9,6 +9,8 @@ on:
       - 'sw.js'
       - 'videos.html'
       - 'videos.js'
+      - 'youtube-accessible.js'
+      - 'test/video-web-accessibility-block6.test.mjs'
       - 'podcast.html'
       - 'podcast.js'
       - 'actualidad.html'

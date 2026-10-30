@@ -126,6 +126,7 @@
     }
 
     const title = document.createElement('h3');
+    title.tabIndex = -1;
     title.textContent = video.title || '';
     article.append(title);
 
@@ -241,13 +242,19 @@
       }
 
       const items = Array.isArray(data.items) ? data.items : [];
-      items.forEach(video => els.results.append(createCard(video)));
+      let firstAdded = null;
+      items.forEach(video => {
+        const card = createCard(video);
+        if (!firstAdded) firstAdded = card.querySelector('h3');
+        els.results.append(card);
+      });
       nextPageToken = String(data.nextPageToken || '');
       els.more.hidden = !nextPageToken;
       els.status.textContent = items.length
         ? (append ? c.moreAdded(items.length) : c.found(items.length))
         : c.noResults;
-      els.status.focus();
+      if (append && firstAdded) firstAdded.focus();
+      else els.status.focus();
     } catch (error) {
       if (error?.code === 'QUOTA_EXCEEDED') els.status.textContent = c.quota;
       else if (error?.code === 'SEARCH_UNAVAILABLE') els.status.textContent = c.unavailable;

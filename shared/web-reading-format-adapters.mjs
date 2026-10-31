@@ -8,7 +8,15 @@ function htmlToBlocks(html, { language='', prefix='doc' }={}) {
   const blocks = [];
   let index = 0;
   const selector = 'h1,h2,h3,h4,h5,h6,p,li,blockquote,td,th';
-  for (const node of doc.querySelectorAll(selector)) {
+  const semantic = [...doc.querySelectorAll(selector)];
+  const extra = [...doc.querySelectorAll('div,section,article')].filter(node =>
+    !node.querySelector(selector) && !node.querySelector('div,section,article')
+  );
+  // Keep chapters in their original reading order, including div-based prose.
+  const nodes = [...semantic, ...extra].sort((a,b) =>
+    a === b ? 0 : (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1)
+  );
+  for (const node of nodes) {
     const text = cleanText(node.textContent);
     if (!text) continue;
     let type = 'paragraph';
@@ -22,14 +30,6 @@ function htmlToBlocks(html, { language='', prefix='doc' }={}) {
     const block = { id: `${prefix}-${++index}`, type, text };
     if (level) block.level = level;
     blocks.push(block);
-  }
-  // EPUB chapter prose can be inside div elements without <p>. Add those
-  // leaf containers in document order without duplicating semantic paragraphs.
-  for (const node of doc.querySelectorAll('div,section,article')) {
-    if (node.querySelector(selector) || node.querySelector('div,section,article')) continue;
-    const text = cleanText(node.textContent);
-    if (!text || blocks.some(block => block.text === text)) continue;
-    blocks.push({ id:`${prefix}-${++index}`, type:'paragraph', text });
   }
   if (!blocks.length) {
     const bodyText = cleanText(doc.body?.textContent || '');

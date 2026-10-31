@@ -16,7 +16,7 @@ window.TIFLO_RESOURCES = [
     "lang": "en",
     "category": "Pills",
     "year": 2026,
-    "title": "Tech Pills 24",
+    "title": "Technology Pills 24",
     "searchText": "Technology briefs 24 2026 companion air travel Neuralink PRIMA screen reader survey WebAIM",
     "url": "https://tifloacosta.com/docs/en/pildoras/2026/tech-pills-24-2026.html",
     "openUrl": "https://tifloacosta.com/docs/en/pildoras/2026/tech-pills-24-2026.html",

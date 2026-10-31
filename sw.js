@@ -1,11 +1,11 @@
-const CACHE = 'tifloacosta-app-v2-58-daisy-paragraphs';
+const CACHE = 'tifloacosta-app-v2-59-pills24';
 const NAVIGATION_TIMEOUT_MS = 5000;
 // Resource catalog is refreshed from the network.
 const SHELL = [
   './',
   './index.html',
   './styles.css?v=1.3',
-  './data.js?v=0.21',
+  './data.js?v=0.22',
   './app-core.js?v=1.7',
   './resource-browser-core.js?v=1.0',
   './resource-browser.css?v=1.0',

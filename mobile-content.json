@@ -1,7 +1,29 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-31T08:55:02.872Z",
+  "generatedAt": "2026-10-31T12:37:34.814Z",
   "resources": [
+    {
+      "kind": "resource",
+      "id": "es-pildoras-2026-24",
+      "lang": "es",
+      "category": "Píldoras",
+      "title": "Píldoras 24",
+      "url": "https://tifloacosta.com/docs/es/pildoras/2026/pildoras-24-2026.html",
+      "openUrl": "https://tifloacosta.com/docs/es/pildoras/2026/pildoras-24-2026.html",
+      "isNew": true,
+      "newsDate": "2026-10-31T10:00:00Z"
+    },
+    {
+      "kind": "resource",
+      "id": "en-pildoras-2026-24",
+      "lang": "en",
+      "category": "Pills",
+      "title": "Technology Pills 24",
+      "url": "https://tifloacosta.com/docs/en/pildoras/2026/tech-pills-24-2026.html",
+      "openUrl": "https://tifloacosta.com/docs/en/pildoras/2026/tech-pills-24-2026.html",
+      "isNew": true,
+      "newsDate": "2026-10-31T10:00:00Z"
+    },
     {
       "kind": "resource",
       "id": "es-estudio-medico-preferencias-clima-2026",
@@ -5525,6 +5547,23 @@
   "news": [
     {
       "kind": "news",
+      "id": "engadget-fbfe893d9da07beb:en",
+      "sourceId": "engadget-fbfe893d9da07beb",
+      "lang": "en",
+      "title": "Google joins OpenAI and Anthropic in promising new scraping controls",
+      "summary": "Google, OpenAI, Anthropic and Microsoft pledge to support a new common signal for robots.txt that blocks scraping for AI training.",
+      "body": "The new robots.txt directive will prevent the companies from scraping content for generative AI training.\n\nGoogle , Anthropic, OpenAI and Microsoft have committed to honoring a new robots.txt directive, which will allow publishers to specify their preferences when it comes to the scraping of their content for generative AI training. The companies have decided to adopt a proposal under consideration at IETF, the open standards organization for the internet, written by Anthropic technical lead for standards Kevin Kelley.\n\nAs OpenAI and Google explained in their announcements, website owners currently have to identify individual crawlers and add separate rules for each provider. Kelley's proposal will change that by getting multiple AI companies to recognize and honor a single common signal. Publishers have to set up a new user agent in the robots.txt file that's specifically for AI training, which will look like this:\n\nUser-Agent: __usage_ai-training Disallow: / Allow: /press-kit/\n\nThat will block crawlers specifically meant to gather data for AI training. The \"Allow\" section gives website operators the option to allow scraping for AI training for specific parts of the page, such as if there's a press kit on it. But this new user-agent section doesn't prevent crawling altogether or prevent content from showing up on Google search. For instance, Google will specifically interpret it as a stop sign specifically for the \"Google-Extended\" user agent, which crawls websites for materials used to train Gemini models.\n\nAnother thing to note is that this directive cannot undo any past scraping the companies have already done. If they'd crawled a page previously, they already have its content. This will just prevent them from scraping websites or specific pages in the future. Anthropic has already started supporting the new directive, while Microsoft said it will start supporting it on February 1, 2027. Google said it will support it in early 2027, as well, while OpenAI pledged to implement the new signal in the coming months.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2303225/google-openai-anthropic-ai-crawling-controls/",
+      "publishedAt": "2026-10-31T10:34:31.000Z",
+      "categories": [
+        "tecnologia-general",
+        "windows",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "techcrunch-9b3db3aaf7fabe30:en",
       "sourceId": "techcrunch-9b3db3aaf7fabe30",
       "lang": "en",
@@ -5744,21 +5783,6 @@
       "categories": [
         "tecnologia-general",
         "apple"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-b6cc018b3978c462:en",
-      "sourceId": "engadget-b6cc018b3978c462",
-      "lang": "en",
-      "title": "The Wikimedia Foundation weighs in on the NYT's case against OpenAI",
-      "summary": "The folks behind Wikipedia say that an extreme decision in either direction could threaten the open web.",
-      "body": "The folks behind Wikipedia say that an extreme decision in either direction could threaten the open web.\n\nWe may receive a commission on purchases made from links.\n\nThe Wikimedia Foundation has weighed in on the copyright lawsuit launched by The New York Times against OpenAI and Microsoft . The people behind Wikipedia have filed an amicus brief urging nuance in the case, which seeks to decide whether or not OpenAI and Microsoft's use of content published in The New York Times for any purpose, including AI model training, is a violation of copyright law.\n\nThe New York Times says that companies like OpenAI shouldn't be given free reign over any of their published content. OpenAI and Microsoft say that training and deploying AI models based on published data is necessary for technological development and would therefore fall within the definition of fair use.\n\nThe Wikimedia Foundation, however, is seeking a third way. The amicus brief agrees with Microsoft and OpenAI and suggests that a much more restrictive version of fair use could inhibit tech innovation. However, it also says that a ruling in favor of blanket fair use could lead to a closed web where knowledge is weakened due to a \"lack of available secondary source materials.\"\n\nThe platform's alternative position applies fair use to two specific use cases for AI companies. This includes certain model training scenarios and something called retrieval-augmented generation (RAG). This is a technique that optimizes the output of large language models (LLMs) by referencing authoritative knowledge bases outside of its training data. However, the organization does not support RAG if an LLM is regurgitating pre-existing articles without attribution.\n\nAs for the specifics of model training, the Wikimedia Foundation argues that scraping copyrighted content should be considered fair use if it's being used when \"training LLMs that are something new and different from the original sources.\" It is worth noting that Wikipedia itself is considered one of the highest-quality datasets used to train LLMs.\n\n\"A ruling that does not apply fair use principles carefully could threaten the sustainability of free knowledge, and stifle the development of open source technologies, ultimately impacting access to information for everyone in both cases,\" the Wikimedia Foundation's General Counsel Stephen LaPorte wrote. \"The court needs to understand that Wikipedia is created through a collaborative process that requires a strong foundation of open and accessible human knowledge to thrive.\"\n\nA summary judgment in the lawsuit is expected in the near future . This is just one of over a dozen similar cases working their way through the courts, but it could set an important precedent.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2302374/the-wikimedia-foundation-weighs-in-on-the-nyts-case-against-openai/",
-      "publishedAt": "2026-10-30T15:47:12.000Z",
-      "categories": [
-        "tecnologia-general"
       ]
     },
     {

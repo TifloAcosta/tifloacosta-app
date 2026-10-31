@@ -2598,15 +2598,20 @@
       els.markStatus.textContent = t().bookmarkFailed;
       return;
     }
+    const speechPosition = speechController?.snapshot?.()?.position;
     const snapshot = readingSession.snapshot();
-    const block = readingSession.current();
+    const blockIndex = Math.max(0, Math.min(documentModel.blocks.length - 1,
+      Number.isFinite(Number(speechPosition?.blockIndex)) ? Number(speechPosition.blockIndex) : snapshot.blockIndex));
+    const unitIndex = Math.max(0, Number.isFinite(Number(speechPosition?.unitIndex))
+      ? Number(speechPosition.unitIndex) : currentUnitIndex);
+    const block = documentModel.blocks[blockIndex];
     const mark = await libraryClient.addMark({
       bookId: currentBookId,
       type: 'bookmark',
-      blockIndex: snapshot.blockIndex,
-      unitIndex: 0,
+      blockIndex,
+      unitIndex,
       excerpt: String(block?.text || '').slice(0, 220),
-      reference: t().position(snapshot.blockIndex + 1, documentModel?.blocks?.length || 0)
+      reference: t().position(blockIndex + 1, documentModel?.blocks?.length || 0)
     });
     els.markStatus.textContent = mark ? t().bookmarked : t().bookmarkFailed;
     if (mark) await renderMarks();
@@ -2639,6 +2644,7 @@
           blocks: documentModel.blocks,
           initialIndex: mark.blockIndex
         });
+        currentUnitIndex = Number(mark.unitIndex) || 0;
         renderBlock();
         void persistProgress({ unitIndex: mark.unitIndex });
         void rebuildSpeech({ blockIndex: mark.blockIndex, unitIndex: mark.unitIndex });

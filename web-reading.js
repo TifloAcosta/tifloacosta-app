@@ -1547,6 +1547,19 @@
     const pauseButton = els.play;
     const title = els.title;
 
+    // On iPhone Safari, VoiceOver must retain access to the book text
+    // and navigation while speech is playing. ARIA-hiding the reader
+    // leaves only the title and Pause exposed to the accessibility tree.
+    const iphoneSafari = /iPhone|iPod/i.test(navigator.userAgent || '')
+      && /Safari/i.test(navigator.userAgent || '')
+      && !/CriOS|FxiOS|EdgiOS|OPiOS/i.test(navigator.userAgent || '');
+    if (iphoneSafari && !playbackAccessibilityState) {
+      if (active) els.reader.dataset.ttsPlaying = 'true';
+      else delete els.reader.dataset.ttsPlaying;
+      els.reader.removeAttribute('aria-busy');
+      return;
+    }
+
     if (active) {
       if (playbackAccessibilityState) return;
 

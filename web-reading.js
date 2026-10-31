@@ -1049,6 +1049,17 @@
     els.next.textContent = c.next;
     updatePlaybackLabel(activeAudio ? !activeAudio.paused : speechController?.snapshot?.().playing === true);
     els.voiceLabel.textContent = c.voice;
+    const screenReaderLabel = document.querySelector('label[for="reading-screen-reader-mode"]');
+    if (screenReaderLabel) screenReaderLabel.textContent = language() === 'en'
+      ? 'Screen reader mode: do not start speech automatically when a document opens'
+      : 'Modo lector de pantalla: no iniciar la lectura automáticamente al abrir un documento';
+    const autoPlayLabel = document.querySelector('label[for="reading-auto-play"]');
+    if (autoPlayLabel) autoPlayLabel.textContent = language() === 'en'
+      ? 'Start TTS automatically when a document opens'
+      : 'Iniciar automáticamente la lectura TTS al abrir un documento';
+    const voiceRefresh = document.getElementById('reading-refresh-voices');
+    if (voiceRefresh) voiceRefresh.textContent = language() === 'en'
+      ? 'Refresh available voices' : 'Actualizar voces disponibles';
     if (els.voiceLanguageLabel) els.voiceLanguageLabel.textContent = language() === 'en' ? 'Voice language' : 'Idioma de la voz';
     if (els.externalVoiceLanguageLabel) els.externalVoiceLanguageLabel.textContent = language() === 'en' ? 'Language for more voices' : 'Idioma para buscar más voces';
     if (els.documentVoiceLanguageLabel) els.documentVoiceLanguageLabel.textContent = language() === 'en' ? 'Voice language for this document' : 'Idioma de la voz para este documento';
@@ -1100,7 +1111,7 @@
       els.voiceStatus.focus?.();
     });
     els.voiceStatus.setAttribute('tabindex', '-1');
-    els.voiceStatus.after(button);
+    els.voice.after(button);
   }
 
   function populateVoices() {

@@ -1101,17 +1101,20 @@
   }
 
   function ensureVoiceRefreshControl() {
-    if (!els.voiceStatus || document.getElementById('reading-refresh-voices')) return;
-    const button = document.createElement('button');
-    button.id = 'reading-refresh-voices';
-    button.type = 'button';
-    button.textContent = language() === 'en' ? 'Refresh available voices' : 'Actualizar voces disponibles';
+    if (!els.voiceStatus) return;
+    let button = document.getElementById('reading-refresh-voices');
+    if (!button) {
+      button = document.createElement('button');
+      button.id = 'reading-refresh-voices';
+      button.type = 'button';
+      els.voice.after(button);
+    }
+    if (button.dataset.voiceRefreshReady === 'true') return;
+    button.dataset.voiceRefreshReady = 'true';
     button.addEventListener('click', () => {
       populateVoices();
       els.voiceStatus.focus?.();
     });
-    els.voiceStatus.setAttribute('tabindex', '-1');
-    els.voice.after(button);
   }
 
   function populateVoices() {

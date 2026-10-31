@@ -23,8 +23,14 @@ function htmlToBlocks(html, { language='', prefix='doc' }={}) {
     if (level) block.level = level;
     blocks.push(block);
   }
-  // Some valid EPUB chapters use div/section/span elements without
-  // paragraphs or headings. Do not silently discard all their prose.
+  // EPUB chapter prose can be inside div elements without <p>. Add those
+  // leaf containers in document order without duplicating semantic paragraphs.
+  for (const node of doc.querySelectorAll('div,section,article')) {
+    if (node.querySelector(selector) || node.querySelector('div,section,article')) continue;
+    const text = cleanText(node.textContent);
+    if (!text || blocks.some(block => block.text === text)) continue;
+    blocks.push({ id:`${prefix}-${++index}`, type:'paragraph', text });
+  }
   if (!blocks.length) {
     const bodyText = cleanText(doc.body?.textContent || '');
     if (bodyText) blocks.push({ id: `${prefix}-1`, type:'paragraph', text:bodyText });

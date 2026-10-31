@@ -137,7 +137,7 @@
       searchNone: 'No se encontraron resultados.',
       searchCount: n => `${n} resultado${n === 1 ? '' : 's'}.`,
       result: n => `Ir al resultado ${n}`,
-      position: (current,total) => `Bloque ${current} de ${total}.`,
+      position: (current,total) => `Bloque de texto ${current} de ${total}.`,
       voicesUnavailable: 'El navegador no ha proporcionado ninguna voz adicional todavía.',
       save: 'Guardar en mi biblioteca',
       saved: 'Documento guardado en este navegador.',
@@ -245,7 +245,7 @@
       searchNone: 'No results found.',
       searchCount: n => `${n} result${n === 1 ? '' : 's'}.`,
       result: n => `Go to result ${n}`,
-      position: (current,total) => `Block ${current} of ${total}.`,
+      position: (current,total) => `Text block ${current} of ${total}.`,
       voicesUnavailable: 'The browser has not provided any additional voices yet.',
       save: 'Save to my library',
       saved: 'Document saved in this browser.',
@@ -546,7 +546,7 @@
     const unit = document.createElement('select');
     unit.id = 'reading-navigation-unit';
     for (const [value, es, en] of [
-      ['block','Bloque','Block'],
+      ['block','Bloque de texto','Text block'],
       ['paragraph','Párrafo','Paragraph'],
       ['sentence','Frase','Sentence']
     ]) {
@@ -563,7 +563,7 @@
 
     function updateUnitButtons() {
       const labels = {
-        block: language() === 'en' ? 'block' : 'bloque',
+        block: language() === 'en' ? 'text block' : 'bloque de texto',
         paragraph: language() === 'en' ? 'paragraph' : 'párrafo',
         sentence: language() === 'en' ? 'sentence' : 'frase'
       };
@@ -1158,8 +1158,8 @@
 
     els.externalVoicesStatus.textContent = selectedLanguage
       ? (language() === 'en'
-          ? `Showing providers with voices for ${languageName(selectedLanguage)}.`
-          : `Mostrando proveedores con voces para ${languageName(selectedLanguage)}.`)
+          ? `External providers supporting ${languageName(selectedLanguage)}. Availability in Safari is not guaranteed.`
+          : `Proveedores externos compatibles con ${languageName(selectedLanguage)}. No se garantiza que Safari pueda utilizar esas voces.`)
       : '';
 
     for (const provider of filteredProviders) {

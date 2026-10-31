@@ -223,7 +223,8 @@
           <select id="reading-voice">
             <option value="">Voz predeterminada del navegador</option>
           </select>
-          <p id="reading-voice-status" class="muted" role="status" aria-live="polite"></p>
+          <button id="reading-refresh-voices" type="button">Actualizar voces disponibles</button>
+          <p id="reading-voice-status" class="muted" tabindex="-1" aria-live="off"></p>
 
           <label id="reading-rate-label" for="reading-rate">Velocidad</label>
           <input id="reading-rate" type="range" min="0.5" max="2" step="0.1" value="1">
@@ -608,7 +609,7 @@
 <script type="module">
   import * as shared from './shared/web-entry.mjs?v=1.7';
   window.TIFLO_SHARED = shared;
-  await import('./web-reading.js?v=3.22');
+  await import('./web-reading.js?v=3.23');
 </script>
 <script src="app.js?v=2.7"></script>
 <script>

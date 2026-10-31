@@ -2601,8 +2601,8 @@
     const speechPosition = speechController?.snapshot?.()?.position;
     const snapshot = readingSession.snapshot();
     const blockIndex = Math.max(0, Math.min(documentModel.blocks.length - 1,
-      Number.isFinite(Number(speechPosition?.blockIndex)) ? Number(speechPosition.blockIndex) : snapshot.blockIndex));
-    const unitIndex = Math.max(0, Number.isFinite(Number(speechPosition?.unitIndex))
+      speechPosition?.blockIndex != null && Number.isFinite(Number(speechPosition.blockIndex)) ? Number(speechPosition.blockIndex) : snapshot.blockIndex));
+    const unitIndex = Math.max(0, speechPosition?.unitIndex != null && Number.isFinite(Number(speechPosition.unitIndex))
       ? Number(speechPosition.unitIndex) : currentUnitIndex);
     const block = documentModel.blocks[blockIndex];
     const mark = await libraryClient.addMark({

@@ -23,6 +23,12 @@ function htmlToBlocks(html, { language='', prefix='doc' }={}) {
     if (level) block.level = level;
     blocks.push(block);
   }
+  // Some valid EPUB chapters use div/section/span elements without
+  // paragraphs or headings. Do not silently discard all their prose.
+  if (!blocks.length) {
+    const bodyText = cleanText(doc.body?.textContent || '');
+    if (bodyText) blocks.push({ id: `${prefix}-1`, type:'paragraph', text:bodyText });
+  }
   return { language, blocks };
 }
 

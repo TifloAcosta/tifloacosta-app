@@ -1089,7 +1089,22 @@
     void Promise.all([renderLibrary(), renderQueue(), renderMarks()]);
   }
 
+  function ensureVoiceRefreshControl() {
+    if (!els.voiceStatus || document.getElementById('reading-refresh-voices')) return;
+    const button = document.createElement('button');
+    button.id = 'reading-refresh-voices';
+    button.type = 'button';
+    button.textContent = language() === 'en' ? 'Refresh available voices' : 'Actualizar voces disponibles';
+    button.addEventListener('click', () => {
+      populateVoices();
+      els.voiceStatus.focus?.();
+    });
+    els.voiceStatus.setAttribute('tabindex', '-1');
+    els.voiceStatus.after(button);
+  }
+
   function populateVoices() {
+    ensureVoiceRefreshControl();
     const stored = readWebSettings();
     const selected = els.voice?.value || stored.voice || '';
     const voices = typeof shared.listWebTtsVoices === 'function' ? shared.listWebTtsVoices() : [];
@@ -1125,7 +1140,7 @@
         const filterName = els.voiceLanguage?.value ? languageName(els.voiceLanguage.value) : (language() === 'en' ? 'all languages' : 'todos los idiomas');
         els.voiceStatus.textContent = language() === 'en'
           ? `${filtered.length} voices shown for ${filterName}.`
-          : `${filtered.length} voces mostradas para ${filterName}.`;
+          : `${filtered.length} voces mostradas para ${filterName}, de ${voices.length} comunicadas por el navegador. Si faltan voces instaladas en el iPhone, Safari puede no ofrecerlas a las páginas web.`;
       }
     }
 

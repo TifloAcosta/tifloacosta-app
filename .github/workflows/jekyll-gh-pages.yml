@@ -40,6 +40,8 @@ jobs:
             git commit -m 'chore: fecha de incorporacion de nuevos recursos'
             git push origin HEAD:main
           fi
+      - name: Regenerar catálogo móvil antes de las pruebas de coherencia
+        run: node scripts/build-mobile-content.mjs
       - name: Comprobar navegación básica y enlaces de la web
         run: node --test test/web-daisy.test.mjs test/content-parity-block7.test.mjs test/video-web-accessibility-block6.test.mjs test/actualidad-podcast-block5.test.mjs test/resource-browser-web.test.mjs test/web-site-maintenance.test.mjs test/web-navigation-block3.test.mjs test/web-contact-identity.test.mjs test/clean-home.test.mjs test/regression.test.mjs test/pwa-startup.test.mjs test/actualidad-button-audit.test.mjs
       - name: Auditar sintaxis de los módulos principales

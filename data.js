@@ -1,5 +1,29 @@
 window.TIFLO_RESOURCES = [
   {
+    "id": "es-pildoras-2026-24",
+    "lang": "es",
+    "category": "Píldoras",
+    "year": 2026,
+    "title": "Píldoras 24",
+    "searchText": "Píldoras tecnológicas 24 de 2026 acompañante avión Neuralink PRIMA lectores de pantalla WebAIM",
+    "url": "https://tifloacosta.com/docs/es/pildoras/2026/pildoras-24-2026.html",
+    "openUrl": "https://tifloacosta.com/docs/es/pildoras/2026/pildoras-24-2026.html",
+    "new": true,
+    "newsDate": "2026-10-31T10:00:00Z"
+  },
+  {
+    "id": "en-pildoras-2026-24",
+    "lang": "en",
+    "category": "Pills",
+    "year": 2026,
+    "title": "Tech Pills 24",
+    "searchText": "Technology briefs 24 2026 companion air travel Neuralink PRIMA screen reader survey WebAIM",
+    "url": "https://tifloacosta.com/docs/en/pildoras/2026/tech-pills-24-2026.html",
+    "openUrl": "https://tifloacosta.com/docs/en/pildoras/2026/tech-pills-24-2026.html",
+    "new": true,
+    "newsDate": "2026-10-31T10:00:00Z"
+  },
+  {
     "id": "es-estudio-medico-preferencias-clima-2026",
     "lang": "es",
     "category": "Estudios médicos",

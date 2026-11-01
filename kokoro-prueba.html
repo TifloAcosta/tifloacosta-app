@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prueba de voces locales Kokoro — TifloAcosta</title>
+<style>
+body{font:1.1rem/1.6 system-ui,sans-serif;max-width:48rem;margin:auto;padding:1rem;background:#fff;color:#111}
+label,select,textarea,button,audio{display:block;width:100%;box-sizing:border-box;margin:.5rem 0 1rem}
+button,select,textarea{font:inherit;padding:.65rem}button{cursor:pointer}
+:focus-visible{outline:3px solid #1659ae;outline-offset:3px}
+#status{padding:.6rem;border-left:4px solid #1659ae;background:#eee}
+small{display:block}
+</style>
+</head>
+<body>
+<main>
+<h1>Prueba de voces naturales Kokoro</h1>
+<p>Experimento de TifloLector web. La voz se genera en este dispositivo: el texto no se envía a un servicio de síntesis. La primera descarga del modelo puede superar los 100 MB y consumir memoria o batería. No se descarga nada hasta que actives «Generar audio».</p>
+<p>De momento se prepara un fragmento corto de texto. Tus libros guardados en TifloLector no se modifican.</p>
+<label for="voice">Voz española</label>
+<select id="voice"><option value="ef_dora">Dora (femenina)</option><option value="em_alex">Alex (masculina)</option><option value="em_santa">Santa (masculina)</option></select>
+<label for="sample">Texto de prueba, máximo 500 caracteres</label>
+<textarea id="sample" maxlength="500" rows="5">Hola, hola, gente guapa. Esta es una prueba de lectura con voces naturales que se generan en el propio dispositivo. Queremos escuchar el resultado y comprobar si la reproducción continúa al bloquear la pantalla.</textarea>
+<button id="generate" type="button">Generar audio en este dispositivo</button>
+<p id="status" role="status" aria-live="polite">Preparado. Todavía no se ha descargado el modelo.</p>
+<audio id="player" controls preload="none" aria-label="Audio generado con Kokoro"></audio>
+<a id="download" hidden download="kokoro-prueba.wav">Guardar audio generado</a>
+<p><a href="./">Volver a TifloAcosta</a></p>
+</main>
+<script type="module">
+const button=document.getElementById('generate');
+const status=document.getElementById('status');
+const audio=document.getElementById('player');
+const download=document.getElementById('download');
+let enginePromise=null;
+let objectUrl='';
+function announce(message){status.textContent=message;}
+async function getEngine(){
+  if(!enginePromise) enginePromise=(async()=>{
+    const {KokoroTTS}=await import('https://esm.sh/kokoro-js@1.2.1');
+    return KokoroTTS.from_pretrained('onnx-community/Kokoro-82M-v1.0-ONNX',{dtype:'q8',device:'wasm'});
+  })().catch(error=>{enginePromise=null;throw error;});
+  return enginePromise;
+}
+button.addEventListener('click',async()=>{
+ const text=document.getElementById('sample').value.trim();
+ if(!text){announce('Introduce un texto de prueba.');return;}
+ button.disabled=true;download.hidden=true;
+ try{
+   announce('Descargando o cargando Kokoro. La primera vez puede tardar y consumir bastante memoria. Mantén esta página abierta.');
+   const engine=await getEngine();
+   const voice=document.getElementById('voice').value;
+   announce('Generando audio local con la voz '+document.getElementById('voice').selectedOptions[0].textContent+'.');
+   const result=await engine.generate(text,{voice,speed:1});
+   const wav=await result.toWav();
+   const blob=new Blob([wav],{type:'audio/wav'});
+   if(objectUrl)URL.revokeObjectURL(objectUrl);
+   objectUrl=URL.createObjectURL(blob);
+   audio.src=objectUrl;
+   download.href=objectUrl;download.hidden=false;
+   announce('Audio preparado. Pulsa Reproducir. Puedes bloquear el iPhone para comprobar si continúa sonando.');
+ }catch(error){
+   announce('No se ha podido generar el audio en este navegador: '+(error?.message||'error desconocido')+'. La voz habitual de TifloLector no se ha modificado.');
+ }finally{button.disabled=false;}
+});
+window.addEventListener('pagehide',()=>{if(objectUrl)URL.revokeObjectURL(objectUrl);});
+</script>
+</body>
+</html>

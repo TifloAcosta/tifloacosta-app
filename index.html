@@ -323,15 +323,16 @@
 
     <section id="reading-library-web" class="panel" aria-labelledby="reading-library-heading">
       <h3 id="reading-library-heading" tabindex="-1">Mi biblioteca</h3>
-      <div class="resource-actions" role="group" aria-label="Filtros de biblioteca">
-        <button id="reading-filter-all" type="button" aria-pressed="true">Todos</button>
-        <button id="reading-filter-queue" type="button" aria-pressed="false">Cola de lectura</button>
-      </div>
+      <label for="reading-library-filter">Filtrar biblioteca</label>
+      <select id="reading-library-filter">
+        <option id="reading-filter-all" value="all">Todos los documentos</option>
+        <option id="reading-filter-queue" value="queue">Cola de lectura</option>
+      </select>
       <p id="reading-library-intro" class="visually-hidden">Los documentos se guardan en este navegador y no se sincronizan automáticamente con otros dispositivos.</p>
       <p id="reading-library-status" class="muted" role="status" aria-live="polite"></p>
       <div id="reading-library-list" class="resource-list"></div>
       <section id="reading-queue-web" hidden aria-labelledby="reading-queue-heading">
-        <h4 id="reading-queue-heading">Cola de lectura</h4>
+        <h4 id="reading-queue-heading" hidden>Documentos en cola</h4>
         <p id="reading-queue-intro" class="visually-hidden">Documentos seleccionados para leer más tarde.</p>
         <p id="reading-queue-status" class="muted" role="status" aria-live="polite"></p>
         <div id="reading-queue-list" class="resource-list"></div>
@@ -566,23 +567,18 @@
     queueMicrotask(() => target?.focus());
   }
 
-  const libraryAll = document.getElementById('reading-filter-all');
-  const libraryQueue = document.getElementById('reading-filter-queue');
+  const libraryFilter = document.getElementById('reading-library-filter');
   const libraryList = document.getElementById('reading-library-list');
   const libraryQueueSection = document.getElementById('reading-queue-web');
   const libraryStatus = document.getElementById('reading-library-status');
-  const libraryRefresh = document.getElementById('reading-library-refresh');
   function showLibraryFilter(queue) {
-    if (!libraryAll || !libraryQueue || !libraryList || !libraryQueueSection) return;
-    libraryAll.setAttribute('aria-pressed', String(!queue));
-    libraryQueue.setAttribute('aria-pressed', String(queue));
+    if (!libraryFilter || !libraryList || !libraryQueueSection) return;
+    libraryFilter.value = queue ? 'queue' : 'all';
     libraryList.hidden = queue;
     libraryQueueSection.hidden = !queue;
     if (libraryStatus) libraryStatus.hidden = queue;
-    if (libraryRefresh) libraryRefresh.hidden = queue;
   }
-  libraryAll?.addEventListener('click', () => showLibraryFilter(false));
-  libraryQueue?.addEventListener('click', () => showLibraryFilter(true));
+  libraryFilter?.addEventListener('change', () => showLibraryFilter(libraryFilter.value === 'queue'));
   showLibraryFilter(false);
 
   document.addEventListener('click', event => {

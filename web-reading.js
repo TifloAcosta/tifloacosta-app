@@ -2062,10 +2062,23 @@
         await useMp3File(file);
         return true;
       }
+      const isZip = /\\.zip$/iu.test(file.name) || /application\\/(?:zip|x-zip-compressed)/i.test(file.type || '');
+      if (isZip && feedback) {
+        feedback.textContent = language() === 'en'
+          ? 'Analyzing the compressed DAISY file. This may take a while.'
+          : 'Analizando el archivo DAISY comprimido. Esta operación puede tardar.';
+      }
       const prepared = await documentFromFile(file);
       if (prepared.format === 'daisy-audio') {
+        if (feedback) feedback.textContent = language() === 'en'
+          ? 'Saving the DAISY file to My library.'
+          : 'Guardando el DAISY en Mi biblioteca.';
         const saved = await storeImportedAudio(file, 'daisy-audio');
         if (!saved) return false;
+        // The file is safely stored at this point; audio preparation is distinct.
+        if (feedback) feedback.textContent = language() === 'en'
+          ? 'DAISY saved. Preparing audio tracks.'
+          : 'DAISY guardado. Preparando las pistas de audio.';
         await useDaisyAudio(file, prepared.book, prepared.zip);
         return true;
       }

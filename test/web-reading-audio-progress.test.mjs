@@ -55,3 +55,19 @@ test('service worker refreshes the same MP3-capable runtime as HTML', () => {
   assert.ok(htmlVersion, 'HTML must identify the reader runtime version');
   assert.equal(workerVersion, htmlVersion, 'Service worker must refresh the HTML reader runtime version');
 });
+
+test('DAISY track extraction is lazy and does not preload the full audiolibro', () => {
+  const source = read('web-reading.js');
+  assert.match(source, /const tracks = book\.audioFiles\.filter/);
+  assert.match(source, /const blob = await entry\.async\('blob'\)/);
+  assert.match(source, /async function choose\(nextIndex, autoplay=false\)/);
+  assert.match(source, /URL\.revokeObjectURL\(oldUrl\)/);
+  assert.doesNotMatch(source, /tracks\.push\(\{ path, url:URL\.createObjectURL/);
+});
+
+test('DAISY import communicates analysis, saving and track preparation', () => {
+  const source = read('web-reading.js');
+  assert.match(source, /Analizando el archivo DAISY comprimido/);
+  assert.match(source, /Guardando el DAISY en Mi biblioteca/);
+  assert.match(source, /DAISY guardado\. Preparando las pistas de audio/);
+});

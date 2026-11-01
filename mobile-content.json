@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-31T22:51:04.890Z",
+  "generatedAt": "2026-11-01T01:13:56.273Z",
   "resources": [
     {
       "kind": "resource",
@@ -5547,6 +5547,39 @@
   "news": [
     {
       "kind": "news",
+      "id": "engadget-4c8fed143c99676f:en",
+      "sourceId": "engadget-4c8fed143c99676f",
+      "lang": "en",
+      "title": "Why your Apple AirPods' battery drains so fast and how to make it last longer",
+      "summary": "It's annoying when your Apple AirPods run out of juice, but the culprit might not be what you think. Here's what's going on and what you can do about it.",
+      "body": "Short listening sessions don't mean your AirPods need to be replaced.\n\nOne of the biggest challenges manufacturers face with wireless earbuds is battery longevity, and Apple is no exception. Lithium-ion batteries like the ones in AirPods typically get roughly 300 to 500 charge cycles before significant battery degradation kicks in — that's about two to three years. If your AirPods haven't hit that lifecycle stage yet, you need to check Apple's battery-life rating for your specific model. For instance, Apple rates AirPods 4 with active noise cancellation (ANC) at four hours of listening time with ANC on and five hours with it off.\n\nIf you have a habit of leaving the earbuds out of their case, that explains a lot. Each bud continues consuming power so long as it's connected to a device or searching for one. Get into the habit of putting them back in the case when you're done. Over time, the case's battery will wear out as well, losing a bit more capacity with every charge cycle, though your AirPods may still charge to 100 percent. The more features you have enabled, the more strain on the battery. Spatial Audio is a great listening experience, but it isn't energy-free.\n\nBefore you dive headlong into Settings and start tapping toggles on and off, make sure the buds are charging. All it takes is a little bit of dust or earwax to block the tiny contact points inside the case. Then, even when your AirPods slide into place, the circuit won't close, and the earbuds won't charge. But junk doesn't build up in your case equally, at least not most of the time. With your earbuds in the case and charging, check each AirPod's charge level on your iPhone. If the contacts are blocked, the charge levels will likely be uneven (for example, one at 22 percent and the other at 65 percent).\n\nAlso, remember to keep your AirPods clean . You don't have to scrub them down every day, but the occasional lint-free cloth works wonders. Don't jam hard objects in there and attempt to scrape the contacts clean. The contacts are pretty delicate, and you can damage them easily. Apple says it's fine to wipe the case with a cloth slightly dampened with isopropyl alcohol. If you do, go very, very light with it, keep it out of the charging ports and make sure it's all dried out before attempting a charge. The company also advises AirPods owners to use a soft-bristled toothbrush dipped in micellar water, especially on the meshes, followed by a distilled-water rinse.\n\nAs with most electronics, there's always the reset option. The instructions for doing so depend on the model, but it's a fairly basic process regardless. Put your AirPods in their case, then navigate to Settings > Bluetooth > More Info > Forget This Device . From here, follow Apple 's instructions specific to your AirPods model. Once you're done, reconnect them as if they just came out of the box. When they're up and running, reassess the charge time and how long they last on a charge.\n\nA full battery is not necessarily a happy and healthy battery. The percentage indicates how full the battery is, sure, but 100 percent after 368 charge cycles isn't the same as 100 percent on the first charge cycle. Rechargeable batteries age and lose capacity, so an older pair will naturally deliver less listening time.\n\nYou can stretch things out a little by considering which features you need. If you listen to music or audiobooks in a quiet environment, ANC is unnecessary and turning it off saves power. Disabling Spatial Audio will do the same. The benefits depend on your AirPods and the current settings, and dropping a few features will only buy you a sliver of time. Turning off Spatial Audio may tack on an extra 30 minutes if you're rocking dinosaur-era AirPods.\n\nWith experience comes wisdom, and there's an important lesson here. Next time you purchase brand-new AirPods , check Optimized Battery Charging. Open your AirPods near your iPhone and go to Settings > Your AirPods > Battery . Then, if it's been switched off, toggle on Optimized Battery Charging (and, on newer models, Charging Notifications for low-battery alerts). Now, your AirPods will learn your charging routine and reduce the time spent fully charged. Last but not least, contact Apple if all of the above fails. With AppleCare+ coverage, Apple offers battery service at no extra charge when the battery holds less than 80 percent of its original capacity.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2300231/why-airpods-battery-drains-fast-how-to-fix/",
+      "publishedAt": "2026-10-31T23:30:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-0b4b547ea73d619f:en",
+      "sourceId": "techcrunch-0b4b547ea73d619f",
+      "lang": "en",
+      "title": "Apple CEO says the company doesn’t ‘want to ship AI for AI’s sake’",
+      "summary": "Apple's new CEO defended the company's current position in the AI landscape.",
+      "body": "Posted:\n\nDuring a recent interview with Wired’s Steven Levy , Apple CEO John Ternus defended the company’s current position in the AI landscape.\n\nOver the past couple years, Apple has often been described as behind on AI, especially as it delayed the release of a more powerful version of Siri, which finally launched this summer . But while Ternus — a longtime Apple executive who officially became CEO at the beginning of September — acknowledged that “everyone has an opinion,” he insisted, “I really like where we’re at.”\n\nTernus added that Apple is “absolutely going to leverage AI” in its new products, but he said, “We don’t want to ship AI for AI’s sake. When we’re doing it right, people won’t have to think about whether it was AI that made this happen or more traditional software. What matters is, did we build something that they really love?”\n\nAnd when Levy pressed him on whether AI might affect Apple and its ecosystem more dramatically, with agents potentially making things like apps unnecessary, Ternus replied,”That could make life really easy, I suppose, but the creation of products is a deeply human and personal thing, something that we love to do.”",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/10/31/apple-ceo-says-the-company-doesnt-want-to-ship-ai-for-ais-sake/",
+      "publishedAt": "2026-10-31T21:41:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "engadget-5c22338067ad4c95:en",
       "sourceId": "engadget-5c22338067ad4c95",
       "lang": "en",
@@ -5621,22 +5654,6 @@
       "categories": [
         "tecnologia-general",
         "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-788a1a6a244db367:en",
-      "sourceId": "engadget-788a1a6a244db367",
-      "lang": "en",
-      "title": "These Samsung Galaxy Watches won't be getting the new One UI update",
-      "summary": "Samsung has released the latest version of its wearable OS, One UI 9 Watch, and most of its watch lineup will get the update - except these.",
-      "body": "The list of Galaxy Watches not getting One UI 9 Watch is mercifully small.\n\nIn August, Samsung released the Galaxy Watch 9 and Galaxy Watch Ultra 2 , which came with its latest One UI 9 Watch operating system. The company has also been releasing beta versions of the OS for the Galaxy Watch 7 and 8 lineups, with the sixth One UI 9 Watch beta update launching in late October for Galaxy Watch 8 and Galaxy Watch 8 Classic Owners in South Korea. Most previous devices will also eventually get the update, but some are now too old to get the latest OS.\n\nWhile Samsung has bumped up the Galaxy Watch 9 and Galaxy Watch Ultra 2's software support to five major OS upgrades, their predecessors in the Watch lineup only get four. That might mean it's time for an upgrade if you're rocking an especially old Samsung watch. While the lack of One UI 9 Watch won't affect performance, it does mean your watch won't get bug fixes, new features or security updates. Future app compatibility is another question mark. Thankfully, only a couple of products won't get One UI 9 Watch.\n\nThe Samsung Galaxy Watch devices that won't receive the One UI 9 Watch update are the Galaxy Watch 4 and the Galaxy Watch 4 Classic. Released in 2021, Samsung's Galaxy Watch 4 lineup has already received four major OS upgrades: One UI Watch 4.5, One UI 5 Watch, One UI 6 Watch and finally One UI 8 Watch. Naturally, this includes limited editions like the Galaxy Watch 4 Golf Edition and the pricey Galaxy Watch 4 Classic Thom Browne Edition. The lineup losing support also marks the end of an era, as the Galaxy Watch 4 heralded the transition from Tizen OS to a custom-skinned Wear OS, Google's smartwatch operating system.\n\nSamsung's Galaxy Watch 5, Galaxy Watch 5 Pro and up will receive One UI 9 Watch by the end of 2026. New features include a refined visual interface, the ability to raise your wrist to activate an AI assistant and health metrics like Daily Cardio Load and a Heart Health Score.\n\nIf you're still rocking a Galaxy Watch 4 or a Galaxy Watch 4 Classic, it's worth upgrading to a newer device to get the latest OS upgrades. The Galaxy Watch 9 debuted in August and, alongside improved hardware and enhanced features like sleep apnea detection and skin temperature tracking, also promises five years of upgrades . This makes it a good long-term proposition, especially compared to the Pixel Watch 5, which only gets three years of guaranteed updates. And if you absolutely need the physical rotating bezel of the Watch 4 Classic, give the Watch 8 Classic a long, hard look.\n\nSelling, recycling or trading in your legacy Galaxy Watch isn't your only option. You can also repurpose it into a dedicated sleep tracker, smart home dashboard, media remote or just hand it down to someone else. Overall, the One UI 9 Watch update isn't exactly life-changing, but it's a good time to think about that device on your wrist and replace it if it's starting to get long in the tooth.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2301961/samsung-galaxy-watches-not-getting-one-ui-update/",
-      "publishedAt": "2026-10-31T17:15:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "android"
       ]
     },
     {
@@ -5732,22 +5749,6 @@
       "sourceName": "TechCrunch",
       "originalUrl": "https://techcrunch.com/2026/10/30/nvidia-weighs-playing-the-cosigner-for-nscales-ai-data-center-in-west-virginia/",
       "publishedAt": "2026-10-31T01:20:05.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-d747de703740231e:en",
-      "sourceId": "techcrunch-d747de703740231e",
-      "lang": "en",
-      "title": "Ollie, a privacy-focused AI assistant, is shutting down",
-      "summary": "As an increasing number of AI assistants flood the market, the founder of Ollie, an assistant that respected its users' privacy, says it will be shutting down in a week.",
-      "body": "Ollie, a startup whose mission was to deliver an AI assistant that respected its users’ privacy, says that it will be shutting down in a week. Bill Lennon, the company’s co-founder and CEO, took to X on Friday to deliver the news, noting that the app will officially shut down on November 6.\n\n“I’m really proud of what we accomplished,” Lennon said. “We built an incredible personal assistant with a small team, and learned a ton. I’m grateful to our amazing team, our users, our investors, and everyone who supported us on this journey.”\n\nThe text-based AI assistant market has exploded over the past year, as the increasingly powerful models that undergird such applications have made them significantly more useful for daily tasks.\n\nOllie, which discussed its $7.5 million seed round led by Khosla Ventures with TechCrunch in September, offered a subscription-based model. The assistant was focused on helping families stay connected and organized. The app connected to a user’s email and calendar, while also providing integrated functions to help with appointment bookings, meal planning, and bill payments. The company had also planned to eventually move into household budgeting.\n\nCrucially, Ollie was one of the first mainstream apps that managed to achieve SOC 2, a privacy compliance standard that companies can attain via an independent audit. Unfortunately, user privacy has never been a hugely profitable aspect of the tech industry. If anything, many new digital assistants present unique privacy challenges for their users — as companies like Instinct have shown .\n\nUltimately, the pressures of the burgeoning AI industry took a toll on the company, Lennon said. “We got close, but ultimately couldn’t keep up,” he added. “With Muse, Instinct, and others entering the space, it became harder to stand out, grow, and raise the capital we needed to succeed.”\n\nOllie’s customers will receive instructions on how to export data and receive refunds in the coming days, Lennon added.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/10/30/ollie-a-privacy-focused-ai-assistant-is-shutting-down/",
-      "publishedAt": "2026-10-30T22:56:13.000Z",
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"

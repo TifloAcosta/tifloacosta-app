@@ -124,7 +124,10 @@ test('web TifloLector library keeps only title buttons as the direct reading ent
 test('opening a saved web book exits the library subview before showing the reader', async () => {
   const source = await read('web-reading.js');
   assert.ok(source.includes('returnToReadingMainFromSubview'));
-  assert.match(source, /returnToReadingMainFromSubview\(\)[\s\S]{0,1200}useDocument\(/);
+  assert.match(source, /returnToReadingMainFromSubview\(\)[\s\S]*?useDocument\(/);
+  assert.match(source, /format === 'mp3' \|\| format === 'daisy-audio'/);
+  assert.match(source, /await useMp3File\(file\)/);
+  assert.match(source, /await useDaisyAudio\(file, prepared\.book, prepared\.zip\)/);
 });
 
 test('web reader exposes one visible navigation set controlled by the unit selector', async () => {

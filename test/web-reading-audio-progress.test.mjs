@@ -79,3 +79,12 @@ test('media imported before a playback error remains reported as saved', () => {
   assert.match(source, /Archivo guardado en Mi biblioteca, pero no se pudo preparar el audio/);
   assert.match(source, /announceAudioImportResult\(false/);
 });
+
+test('successful media storage is acknowledged even when library UI refresh fails', () => {
+  const source = read('web-reading.js');
+  const start = source.indexOf('  async function storeImportedAudio(');
+  const end = source.indexOf('  async function importSelectedFile(', start);
+  const method = source.slice(start, end);
+  assert.ok(method.indexOf('announceAudioImportResult(true, format)') < method.indexOf('await renderLibrary()'));
+  assert.match(method, /try \{ await renderLibrary\(\); \}/);
+});

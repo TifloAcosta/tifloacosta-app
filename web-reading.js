@@ -2083,7 +2083,7 @@
         await useMp3File(file);
         return true;
       }
-      const isZip = /\\.zip$/iu.test(file.name) || /application\\/(?:zip|x-zip-compressed)/i.test(file.type || '');
+      const isZip = /\.zip$/iu.test(file.name) || /application\/(?:zip|x-zip-compressed)/i.test(file.type || '');
       if (isZip && feedback) {
         feedback.textContent = language() === 'en'
           ? 'Analyzing the compressed DAISY file. This may take a while.'

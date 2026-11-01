@@ -2022,12 +2022,9 @@
       return false;
     }
     try {
-      const content = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(String(reader.result || ''));
-        reader.onerror = () => reject(reader.error || new Error('Error leyendo archivo'));
-        reader.readAsDataURL(file);
-      });
+      // IndexedDB supports Blob/File directly. Base64 duplicated the complete file
+      // in JavaScript memory and increased its size by roughly one third.
+      const content = file;
       const saved = await libraryAdapter.importDocument({
         title: file.name, language: language(), format, content, sizeBytes: file.size
       });
@@ -2661,9 +2658,16 @@
     returnToReadingMainFromSubview();
     if (format === 'mp3' || format === 'daisy-audio') {
       try {
-        const response = await fetch(source);
-        if (!response.ok) throw new Error('audio-storage-invalid');
-        const blob = await response.blob();
+        // New media is stored as a binary Blob. Older library entries remain
+        // readable as data URLs; no migration or deletion of existing books.
+        let blob;
+        if (typeof Blob !== 'undefined' && opened.content instanceof Blob) {
+          blob = opened.content;
+        } else {
+          const response = await fetch(source);
+          if (!response.ok) throw new Error('audio-storage-invalid');
+          blob = await response.blob();
+        }
         const file = new File([blob], opened.book.title || (format === 'mp3' ? 'audio.mp3' : 'audiolibro.zip'), {
           type: format === 'mp3' ? 'audio/mpeg' : 'application/zip'
         });

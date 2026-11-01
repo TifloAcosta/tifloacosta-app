@@ -70,7 +70,7 @@ test('TifloLector exposes per-document voice, rate, bookmark and semantic naviga
     'reading-document-voice',
     'reading-document-rate',
     'Añadir marca',
-    "['block','Bloque de texto','Block']",
+    "['block','Bloque de texto','Text block']",
     "['paragraph','Párrafo','Paragraph']",
     "['sentence','Frase','Sentence']",
     'speechController?.moveTo?.'

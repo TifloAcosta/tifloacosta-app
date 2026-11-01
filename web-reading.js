@@ -1369,7 +1369,7 @@
         try {
           const blob = await entry.async('blob');
           if (serial !== loadSerial || activeAudio !== audio) return;
-          const mime = /\\.mp3$/i.test(track.path) ? 'audio/mpeg' : /\\.m4a$/i.test(track.path) ? 'audio/mp4' : /\\.wav$/i.test(track.path) ? 'audio/wav' : 'audio/ogg';
+          const mime = /\.mp3$/i.test(track.path) ? 'audio/mpeg' : /\.m4a$/i.test(track.path) ? 'audio/mp4' : /\.wav$/i.test(track.path) ? 'audio/wav' : 'audio/ogg';
           const nextUrl = URL.createObjectURL(new Blob([blob], { type:mime }));
           const oldUrl = trackObjectUrl;
           trackObjectUrl = nextUrl;

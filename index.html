@@ -322,41 +322,28 @@
       <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
     </section>
 
-    <section id="reading-management-web" class="panel" aria-labelledby="reading-management-heading">
-      <h3 id="reading-management-heading">Biblioteca y lectura</h3>
-      <div class="resource-actions" aria-label="Biblioteca y lectura">
-        <button type="button" data-reading-view="reading-library-web">Mi biblioteca</button>
-        <button type="button" data-reading-view="reading-queue-web">Cola de lectura</button>
-        <button type="button" data-reading-view="reading-marks-web">Marcadores</button>
-      </div>
-    </section>
-
-    <section id="reading-library-web" class="panel reading-subview" hidden aria-labelledby="reading-library-heading">
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+    <section id="reading-library-web" class="panel" aria-labelledby="reading-library-heading">
       <h3 id="reading-library-heading" tabindex="-1">Mi biblioteca</h3>
-      <p id="reading-library-intro">Los documentos se guardan localmente en esta instalación de TifloLector. No se sincronizan automáticamente con otros dispositivos.</p>
+      <div class="resource-actions" role="group" aria-label="Filtros de biblioteca">
+        <button id="reading-filter-all" type="button" aria-pressed="true">Todos</button>
+        <button id="reading-filter-queue" type="button" aria-pressed="false">Cola de lectura</button>
+      </div>
+      <p id="reading-library-intro" class="visually-hidden">Los documentos se guardan en este navegador y no se sincronizan automáticamente con otros dispositivos.</p>
       <button id="reading-library-refresh" type="button">Actualizar biblioteca</button>
       <p id="reading-library-status" class="muted" role="status" aria-live="polite"></p>
       <div id="reading-library-list" class="resource-list"></div>
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
-    </section>
-
-    <section id="reading-queue-web" class="panel reading-subview" hidden aria-labelledby="reading-queue-heading">
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
-      <h3 id="reading-queue-heading" tabindex="-1">Cola de lectura</h3>
-      <p id="reading-queue-intro">Ordena los documentos que quieres leer después. Nada se abrirá automáticamente.</p>
-      <p id="reading-queue-status" class="muted" role="status" aria-live="polite"></p>
-      <div id="reading-queue-list" class="resource-list"></div>
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
-    </section>
-
-    <section id="reading-marks-web" class="panel reading-subview" hidden aria-labelledby="reading-marks-heading">
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
-      <h3 id="reading-marks-heading" tabindex="-1">Marcadores</h3>
-      <p id="reading-marks-intro">Guarda puntos de lectura del documento abierto para volver a ellos más tarde.</p>
-      <p id="reading-marks-status" class="muted" role="status" aria-live="polite"></p>
-      <div id="reading-marks-list" class="resource-list"></div>
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+      <section id="reading-queue-web" hidden aria-labelledby="reading-queue-heading">
+        <h4 id="reading-queue-heading">Cola de lectura</h4>
+        <p id="reading-queue-intro" class="visually-hidden">Documentos seleccionados para leer más tarde.</p>
+        <p id="reading-queue-status" class="muted" role="status" aria-live="polite"></p>
+        <div id="reading-queue-list" class="resource-list"></div>
+      </section>
+      <section id="reading-marks-web" aria-labelledby="reading-marks-heading">
+        <h4 id="reading-marks-heading">Marcadores</h4>
+        <p id="reading-marks-intro" class="visually-hidden">Marcadores del documento abierto.</p>
+        <p id="reading-marks-status" class="muted" role="status" aria-live="polite"></p>
+        <div id="reading-marks-list" class="resource-list"></div>
+      </section>
     </section>
 
     <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
@@ -587,6 +574,25 @@
     queueMicrotask(() => target?.focus());
   }
 
+  const libraryAll = document.getElementById('reading-filter-all');
+  const libraryQueue = document.getElementById('reading-filter-queue');
+  const libraryList = document.getElementById('reading-library-list');
+  const libraryQueueSection = document.getElementById('reading-queue-web');
+  const libraryStatus = document.getElementById('reading-library-status');
+  const libraryRefresh = document.getElementById('reading-library-refresh');
+  function showLibraryFilter(queue) {
+    if (!libraryAll || !libraryQueue || !libraryList || !libraryQueueSection) return;
+    libraryAll.setAttribute('aria-pressed', String(!queue));
+    libraryQueue.setAttribute('aria-pressed', String(queue));
+    libraryList.hidden = queue;
+    libraryQueueSection.hidden = !queue;
+    if (libraryStatus) libraryStatus.hidden = queue;
+    if (libraryRefresh) libraryRefresh.hidden = queue;
+  }
+  libraryAll?.addEventListener('click', () => showLibraryFilter(false));
+  libraryQueue?.addEventListener('click', () => showLibraryFilter(true));
+  showLibraryFilter(false);
+
   document.addEventListener('click', event => {
     const open = event.target.closest?.('[data-reading-view]');
     if (open) {
@@ -608,7 +614,7 @@
 <script type="module">
   import * as shared from './shared/web-entry.mjs?v=1.7';
   window.TIFLO_SHARED = shared;
-  await import('./web-reading.js?v=3.24');
+  await import('./web-reading.js?v=3.25');
 </script>
 <script src="app.js?v=2.8"></script>
 <script>

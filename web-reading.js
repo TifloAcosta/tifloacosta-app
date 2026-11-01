@@ -1996,47 +1996,48 @@
     };
   }
 
-  function announceAudioImportResult(saved, format) {
+  function announceAudioImportResult(saved, format, error = null) {
     const label = format === 'mp3' ? 'MP3' : 'DAISY';
+    const reason = error?.name === 'QuotaExceededError'
+      ? (language() === 'en' ? 'Storage quota exceeded.' : 'Se ha agotado el espacio de almacenamiento del navegador.')
+      : error?.name === 'NotAllowedError' || error?.name === 'SecurityError'
+        ? (language() === 'en' ? 'Browser storage access was denied.' : 'Safari ha denegado el acceso al almacenamiento.')
+        : error?.message ? String(error.message).slice(0, 180) : '';
     const message = language() === 'en'
-      ? (saved ? `${label} saved to My library. Return to TifloReader to find it.`
-               : `${label} was opened but could not be saved. Check Safari storage space and try a smaller file.`)
-      : (saved ? `${label} guardado en Mi biblioteca. Vuelve a TifloLector para encontrarlo.`
-               : `${label} abierto, pero no se pudo guardar. Comprueba el espacio disponible de Safari o prueba con un archivo más pequeño.`);
-    els.status.textContent = message;
-    let notice = document.getElementById('reading-audio-import-result');
-    if (!notice) {
-      notice = document.createElement('p');
-      notice.id = 'reading-audio-import-result';
-      notice.setAttribute('role', 'status');
-      notice.setAttribute('aria-live', 'polite');
-      els.title.after(notice);
+      ? (saved ? `${label} saved to My library.` : `${label} could not be saved to My library. ${reason}`)
+      : (saved ? `${label} guardado en Mi biblioteca.` : `${label} no se pudo guardar en Mi biblioteca. ${reason}`);
+    const persistent = document.getElementById('reading-import-feedback');
+    if (persistent) {
+      persistent.hidden = false;
+      persistent.textContent = message;
+      persistent.setAttribute('tabindex', '-1');
+      queueMicrotask(() => persistent.focus());
     }
-    notice.textContent = message;
+    els.status.textContent = message;
   }
 
   async function storeImportedAudio(file, format) {
-    if (!libraryAdapter || !file) return false;
+    if (!libraryAdapter || !file) {
+      announceAudioImportResult(false, format, new Error('Biblioteca no disponible'));
+      return false;
+    }
     try {
-      // IndexedDB stores this encoded recording locally; it is not uploaded.
       const content = await new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = () => resolve(String(reader.result || ''));
-        reader.onerror = () => reject(reader.error);
+        reader.onerror = () => reject(reader.error || new Error('Error leyendo archivo'));
         reader.readAsDataURL(file);
       });
       const saved = await libraryAdapter.importDocument({
-        title: file.name,
-        language: language(),
-        format,
-        content,
-        sizeBytes: file.size
+        title: file.name, language: language(), format, content, sizeBytes: file.size
       });
-      if (!saved?.id) return false;
+      if (!saved?.id) throw new Error('Formato rechazado por la biblioteca');
       currentBookId = saved.id;
       await renderLibrary();
+      announceAudioImportResult(true, format);
       return true;
-    } catch {
+    } catch (error) {
+      announceAudioImportResult(false, format, error);
       return false;
     }
   }
@@ -2053,16 +2054,16 @@
 
     try {
       if (/\.mp3$/iu.test(file.name) || String(file.type || '').toLowerCase() === 'audio/mpeg') {
-        await useMp3File(file);
         const saved = await storeImportedAudio(file, 'mp3');
-        announceAudioImportResult(saved, 'mp3');
+        if (!saved) return false;
+        await useMp3File(file);
         return true;
       }
       const prepared = await documentFromFile(file);
       if (prepared.format === 'daisy-audio') {
-        await useDaisyAudio(file, prepared.book, prepared.zip);
         const saved = await storeImportedAudio(file, 'daisy-audio');
-        announceAudioImportResult(saved, 'daisy-audio');
+        if (!saved) return false;
+        await useDaisyAudio(file, prepared.book, prepared.zip);
         return true;
       }
       await useDocument(prepared.model, file.name, {
@@ -2086,7 +2087,7 @@
         els.ocr.hidden = false;
       } else els.status.textContent = t().failed;
       // The importer is hidden when a media reader has opened; report errors there too.
-      if (els.reader && !els.reader.hidden) announceAudioImportResult(false, /\\.mp3$/i.test(file.name) ? 'mp3' : 'daisy-audio');
+      if (/\\.(mp3|zip)$/i.test(file.name)) announceAudioImportResult(false, /\\.mp3$/i.test(file.name) ? 'mp3' : 'daisy-audio', error);
       return false;
     } finally {
       fileImportInProgress = false;
@@ -2567,7 +2568,7 @@
     if (!readerViewState) {
       readerViewState = new Map();
       for (const node of [...readingSection.children]) {
-        if (node === els.reader) continue;
+        if (node === els.reader || node.id === 'reading-import-feedback') continue;
         readerViewState.set(node, node.hidden);
         node.hidden = true;
       }

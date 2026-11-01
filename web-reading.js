@@ -2810,7 +2810,10 @@
         title.type = 'button';
         title.className = 'reading-library-title';
         title.textContent = book.title || t().document;
-        title.setAttribute('aria-label', book.title || t().document);
+        const percentRead = Math.max(0, Math.min(100, Math.round(Number(book.percent) || 0)));
+        title.setAttribute('aria-label', language() === 'en'
+          ? `${book.title || t().document}, ${percentRead} percent read`
+          : `${book.title || t().document}, ${percentRead} por ciento leído`);
 
         const detailsToggle = document.createElement('button');
         detailsToggle.type = 'button';
@@ -3071,23 +3074,8 @@
           void openSavedBook(book.id);
         });
 
-        const duration = document.createElement('p');
-        duration.className = 'resource-meta';
-        duration.textContent = language() === 'en' ? 'Reading time: calculating…' : 'Tiempo de lectura: calculando…';
-        card.append(title, duration);
+        card.append(title);
         els.libraryList.append(card);
-        void estimateBookTimes(book).then(times => {
-          if (!duration.isConnected) return;
-          if (!times) {
-            duration.textContent = language() === 'en'
-              ? 'Reading time not available' : 'Tiempo de lectura no disponible';
-            return;
-          }
-          const total = times.elapsedSeconds + times.remainingSeconds;
-          duration.textContent = language() === 'en'
-            ? `Estimated reading time: ${readableDuration(total)}. Completed: ${readableDuration(times.elapsedSeconds)}. Remaining: ${readableDuration(times.remainingSeconds)}.`
-            : `Tiempo estimado de lectura: ${readableDuration(total)}. Leído: ${readableDuration(times.elapsedSeconds)}. Restante: ${readableDuration(times.remainingSeconds)}.`;
-        });
       }
     } catch {
       els.libraryStatus.textContent = t().libraryUnavailable;

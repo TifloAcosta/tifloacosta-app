@@ -2051,8 +2051,13 @@
       });
       if (!saved?.id) throw new Error('Formato rechazado por la biblioteca');
       currentBookId = saved.id;
-      await renderLibrary();
+      // A failed UI refresh must not turn a completed IndexedDB write into
+      // a false import failure or encourage users to import a duplicate.
       announceAudioImportResult(true, format);
+      try { await renderLibrary(); }
+      catch (refreshError) {
+        console.warn('Library refresh failed after successful media save', refreshError);
+      }
       return true;
     } catch (error) {
       announceAudioImportResult(false, format, error);

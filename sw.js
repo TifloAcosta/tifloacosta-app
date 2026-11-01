@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-66-audio-lock';
+const CACHE = 'tifloacosta-app-v2-67-daisy-lock';
 const NAVIGATION_TIMEOUT_MS = 5000;
 // Resource catalog is refreshed from the network.
 const SHELL = [
@@ -18,7 +18,7 @@ const SHELL = [
   './actualidad-core.js?v=1.8',
   './actualidad.js?v=1.5',
   './actualidad-media.js?v=1.1',
-  './web-reading.js?v=3.30',
+  './web-reading.js?v=3.31',
   './podcast.html',
   './videos.html',
   './videos.js?v=2.6',
@@ -137,7 +137,7 @@ self.addEventListener('fetch', event => {
 
   if (isAppOrigin && url.pathname.endsWith('/web-reading.js')) {
     url.searchParams.set('v', '3.15');
-    event.respondWith(freshScript(url, './web-reading.js?v=3.30', request));
+    event.respondWith(freshScript(url, './web-reading.js?v=3.31', request));
     return;
   }
 

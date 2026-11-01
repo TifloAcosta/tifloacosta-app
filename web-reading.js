@@ -2917,6 +2917,9 @@
       for (const book of page.items) {
         const card = document.createElement('section');
         card.className = 'resource-card reading-library-title-card';
+        card.dataset.readingLibraryBook = 'true';
+        card.dataset.queued = String(book.queued === true);
+        card.dataset.previouslyRead = String(Number(book.lastReadAt) > 0 || Number(book.percent) > 0);
 
         const title = document.createElement('button');
         title.type = 'button';
@@ -3189,6 +3192,7 @@
         card.append(title);
         els.libraryList.append(card);
       }
+      window.refreshTifloLibraryFilter?.();
     } catch {
       els.libraryStatus.textContent = t().libraryUnavailable;
     }

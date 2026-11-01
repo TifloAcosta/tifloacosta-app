@@ -116,7 +116,7 @@ test('web TifloLector library keeps only title buttons as the direct reading ent
   assert.ok(source.includes('reading-library-title-card'));
   assert.ok(source.includes("title.addEventListener('click', () =>"));
   assert.ok(source.includes('void openSavedBook(book.id);'));
-  assert.ok(source.includes('card.append(title, duration);'));
+  assert.ok(source.includes('card.append(title);'));
   assert.ok(!source.includes('card.append(title, detailsToggle, details);'));
 });
 

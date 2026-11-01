@@ -2099,6 +2099,13 @@
       // Save large ZIP files before parsing. ZIP analysis can consume substantial
       // memory on iPhone; a parsing failure must not discard the original file.
       if (isZip) {
+        // Reject obviously invalid ZIP files without loading the entire package.
+        const signature = new Uint8Array(await file.slice(0, 4).arrayBuffer());
+        const zipHeader = signature.length === 4 && signature[0] === 0x50 && signature[1] === 0x4b &&
+          ((signature[2] === 3 && signature[3] === 4) ||
+           (signature[2] === 5 && signature[3] === 6) ||
+           (signature[2] === 7 && signature[3] === 8));
+        if (!zipHeader) throw Object.assign(new Error('invalid-zip'), { code:'unsupported' });
         const saved = await storeImportedAudio(file, 'daisy-audio');
         if (!saved) return false;
         mediaSaved = true;

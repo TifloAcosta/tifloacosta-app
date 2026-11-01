@@ -2048,9 +2048,15 @@
 
     fileImportInProgress = true;
     els.prepare.disabled = true;
-    els.status.textContent = language() === 'en'
-      ? 'Importing and preparing the document…'
-      : 'Importando y preparando el documento…';
+    const feedback = document.getElementById('reading-import-feedback');
+    const startingMessage = language() === 'en'
+      ? `Importing ${file.name} (${Math.ceil(file.size / 1048576)} MB)…`
+      : `Importando ${file.name} (${Math.ceil(file.size / 1048576)} MB)…`;
+    els.status.textContent = startingMessage;
+    if (feedback) {
+      feedback.hidden = false;
+      feedback.textContent = startingMessage;
+    }
 
     try {
       if (/\.mp3$/iu.test(file.name) || String(file.type || '').toLowerCase() === 'audio/mpeg') {
@@ -2088,10 +2094,16 @@
       } else els.status.textContent = t().failed;
       // The importer is hidden when a media reader has opened; report errors there too.
       if (/\\.(mp3|zip)$/i.test(file.name)) announceAudioImportResult(false, /\\.mp3$/i.test(file.name) ? 'mp3' : 'daisy-audio', error);
+      else if (feedback) {
+        feedback.hidden = false;
+        feedback.textContent = els.status.textContent;
+      }
       return false;
     } finally {
       fileImportInProgress = false;
       els.prepare.disabled = false;
+      // iOS Safari may not fire change when the same file is selected twice.
+      els.file.value = '';
     }
   }
 

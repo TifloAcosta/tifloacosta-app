@@ -325,7 +325,9 @@
       <h3 id="reading-library-heading" tabindex="-1">Mi biblioteca</h3>
       <label for="reading-library-filter">Filtrar biblioteca</label>
       <select id="reading-library-filter">
-        <option id="reading-filter-all" value="all">Todos los documentos</option>
+        <option id="reading-filter-all" value="all">Todos</option>
+        <option value="library">Biblioteca</option>
+        <option value="recent">Recientes</option>
         <option id="reading-filter-queue" value="queue">Cola de lectura</option>
       </select>
       <p id="reading-library-intro" class="visually-hidden">Los documentos se guardan en este navegador y no se sincronizan automáticamente con otros dispositivos.</p>
@@ -572,15 +574,23 @@
   const libraryList = document.getElementById('reading-library-list');
   const libraryQueueSection = document.getElementById('reading-queue-web');
   const libraryStatus = document.getElementById('reading-library-status');
-  function showLibraryFilter(queue) {
+  function showLibraryFilter(value = 'all') {
     if (!libraryFilter || !libraryList || !libraryQueueSection) return;
-    libraryFilter.value = queue ? 'queue' : 'all';
+    const selection = ['all', 'library', 'recent', 'queue'].includes(value) ? value : 'all';
+    libraryFilter.value = selection;
+    const queue = selection === 'queue';
     libraryList.hidden = queue;
     libraryQueueSection.hidden = !queue;
     if (libraryStatus) libraryStatus.hidden = queue;
+    for (const card of libraryList.querySelectorAll('[data-reading-library-book]')) {
+      const queued = card.dataset.queued === 'true';
+      const previouslyRead = card.dataset.previouslyRead === 'true';
+      card.hidden = selection === 'library' ? queued : selection === 'recent' ? !previouslyRead : false;
+    }
   }
-  libraryFilter?.addEventListener('change', () => showLibraryFilter(libraryFilter.value === 'queue'));
-  showLibraryFilter(false);
+  libraryFilter?.addEventListener('change', () => showLibraryFilter(libraryFilter.value));
+  window.refreshTifloLibraryFilter = () => showLibraryFilter(libraryFilter?.value || 'all');
+  showLibraryFilter('all');
 
   const marksOpen = document.getElementById('reading-marks-open');
   const marksPanel = document.getElementById('reading-marks-web');

@@ -2076,10 +2076,12 @@
       feedback.textContent = startingMessage;
     }
 
+    let mediaSaved = false;
     try {
       if (/\.mp3$/iu.test(file.name) || String(file.type || '').toLowerCase() === 'audio/mpeg') {
         const saved = await storeImportedAudio(file, 'mp3');
         if (!saved) return false;
+        mediaSaved = true;
         await useMp3File(file);
         return true;
       }
@@ -2096,6 +2098,7 @@
           : 'Guardando el DAISY en Mi biblioteca.';
         const saved = await storeImportedAudio(file, 'daisy-audio');
         if (!saved) return false;
+        mediaSaved = true;
         // The file is safely stored at this point; audio preparation is distinct.
         if (feedback) feedback.textContent = language() === 'en'
           ? 'DAISY saved. Preparing audio tracks.'
@@ -2124,7 +2127,15 @@
         els.ocr.hidden = false;
       } else els.status.textContent = t().failed;
       // The importer is hidden when a media reader has opened; report errors there too.
-      if (/\\.(mp3|zip)$/i.test(file.name)) announceAudioImportResult(false, /\\.mp3$/i.test(file.name) ? 'mp3' : 'daisy-audio', error);
+      if (/\.(mp3|zip)$/i.test(file.name)) {
+        if (mediaSaved) {
+          const message = language() === 'en'
+            ? 'File saved in My library, but its audio could not be prepared: ' + (error?.message || 'unknown error')
+            : 'Archivo guardado en Mi biblioteca, pero no se pudo preparar el audio: ' + (error?.message || 'error desconocido');
+          if (feedback) { feedback.hidden = false; feedback.textContent = message; }
+          els.status.textContent = message;
+        } else announceAudioImportResult(false, /\.mp3$/i.test(file.name) ? 'mp3' : 'daisy-audio', error);
+      }
       else if (feedback) {
         feedback.hidden = false;
         feedback.textContent = els.status.textContent;

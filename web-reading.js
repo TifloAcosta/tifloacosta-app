@@ -1955,7 +1955,7 @@
     }
     if (lower.endsWith('.zip') || type === 'application/zip' || type === 'application/x-zip-compressed') {
       const JSZip = await loadZipBundle();
-      const zip = await JSZip.loadAsync(await file.arrayBuffer());
+      const zip = await JSZip.loadAsync(file);
       const { parseDaisyArchive } = await import('./shared/web-daisy-archive.mjs');
       let book;
       try {

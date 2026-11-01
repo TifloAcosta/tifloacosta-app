@@ -42,5 +42,5 @@ test('Recursos dispone de controles nativos y Novedades puede mostrar más de tr
   assert.match(a,/els\.resourceFilter\.addEventListener\('input'/);
   assert.match(a,/els\.resourceSort\.addEventListener\('change'/);
   assert.match(sw,/'\.\/resource-browser-core\.js\?v=1\.0'/);
-  assert.match(sw,/'\.\/app\.js\?v=2\.8'/);
+  assert.match(sw,/'\.\/app\.js\?v=2\.9'/);
 });

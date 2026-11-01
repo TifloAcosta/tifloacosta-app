@@ -110,7 +110,7 @@ test('TifloLector library presents titles as direct reading entry points without
   const source = await read('web-reading.js');
   assert.ok(source.includes("title.addEventListener('click', () =>"));
   assert.ok(source.includes('void openSavedBook(book.id);'));
-  assert.ok(source.includes('card.append(title);'));
+  assert.ok(source.includes('card.append(title, duration);'));
   assert.ok(!source.includes('card.append(title, detailsToggle, details);'));
 });
 

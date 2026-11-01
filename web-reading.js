@@ -1416,6 +1416,24 @@
     audioObjectUrl = URL.createObjectURL(file);
     const audio = new Audio(audioObjectUrl);
     activeAudio = audio;
+    // Expose recorded audio to the operating system's lock-screen media controls.
+    // This does not override iOS restrictions on browser text-to-speech.
+    if ('mediaSession' in navigator) {
+      try {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: file.name,
+          artist: 'TifloLector'
+        });
+        navigator.mediaSession.setActionHandler('play', () => { void audio.play(); });
+        navigator.mediaSession.setActionHandler('pause', () => { audio.pause(); });
+        navigator.mediaSession.setActionHandler('seekbackward', details => {
+          audio.currentTime = Math.max(0, audio.currentTime - (details.seekOffset || 10));
+        });
+        navigator.mediaSession.setActionHandler('seekforward', details => {
+          audio.currentTime = Math.min(Number.isFinite(audio.duration) ? audio.duration : Number.MAX_SAFE_INTEGER, audio.currentTime + (details.seekOffset || 10));
+        });
+      } catch { /* Media Session controls are optional on this platform. */ }
+    }
     documentModel = null;
     readingSession = null;
     searchIndex = null;

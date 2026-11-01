@@ -1996,6 +1996,25 @@
     };
   }
 
+  function announceAudioImportResult(saved, format) {
+    const label = format === 'mp3' ? 'MP3' : 'DAISY';
+    const message = language() === 'en'
+      ? (saved ? `${label} saved to My library. Return to TifloReader to find it.`
+               : `${label} was opened but could not be saved. Check Safari storage space and try a smaller file.`)
+      : (saved ? `${label} guardado en Mi biblioteca. Vuelve a TifloLector para encontrarlo.`
+               : `${label} abierto, pero no se pudo guardar. Comprueba el espacio disponible de Safari o prueba con un archivo más pequeño.`);
+    els.status.textContent = message;
+    let notice = document.getElementById('reading-audio-import-result');
+    if (!notice) {
+      notice = document.createElement('p');
+      notice.id = 'reading-audio-import-result';
+      notice.setAttribute('role', 'status');
+      notice.setAttribute('aria-live', 'polite');
+      els.title.after(notice);
+    }
+    notice.textContent = message;
+  }
+
   async function storeImportedAudio(file, format) {
     if (!libraryAdapter || !file) return false;
     try {
@@ -2036,18 +2055,14 @@
       if (/\.mp3$/iu.test(file.name) || String(file.type || '').toLowerCase() === 'audio/mpeg') {
         await useMp3File(file);
         const saved = await storeImportedAudio(file, 'mp3');
-        els.status.textContent = saved
-          ? (language() === 'en' ? 'MP3 added to My library.' : 'MP3 guardado en Mi biblioteca.')
-          : (language() === 'en' ? 'MP3 opened, but could not be saved to My library. Check available device storage.' : 'MP3 abierto, pero no se pudo guardar en Mi biblioteca. Comprueba el espacio disponible.');
+        announceAudioImportResult(saved, 'mp3');
         return true;
       }
       const prepared = await documentFromFile(file);
       if (prepared.format === 'daisy-audio') {
         await useDaisyAudio(file, prepared.book, prepared.zip);
         const saved = await storeImportedAudio(file, 'daisy-audio');
-        els.status.textContent = saved
-          ? (language() === 'en' ? 'DAISY audiobook added to My library.' : 'Audiolibro DAISY guardado en Mi biblioteca.')
-          : (language() === 'en' ? 'DAISY opened, but could not be saved to My library. Check available device storage.' : 'DAISY abierto, pero no se pudo guardar en Mi biblioteca. Comprueba el espacio disponible.');
+        announceAudioImportResult(saved, 'daisy-audio');
         return true;
       }
       await useDocument(prepared.model, file.name, {
@@ -2070,6 +2085,8 @@
         els.status.textContent = `${t().pdfNoText} ${t().ocrPrivacy}`;
         els.ocr.hidden = false;
       } else els.status.textContent = t().failed;
+      // The importer is hidden when a media reader has opened; report errors there too.
+      if (els.reader && !els.reader.hidden) announceAudioImportResult(false, /\\.mp3$/i.test(file.name) ? 'mp3' : 'daisy-audio');
       return false;
     } finally {
       fileImportInProgress = false;

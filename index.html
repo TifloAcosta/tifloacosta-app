@@ -125,10 +125,11 @@
     <script>
     // Independent of the reader bundle: verify iOS file-picker delivery accessibly.
     (() => {
-      const picker = document.getElementById('reading-file');
-      const result = document.getElementById('reading-import-feedback');
-      if (!picker || !result) return;
-      picker.addEventListener('change', () => {
+      document.addEventListener('change', event => {
+        if (event.target?.id !== 'reading-file') return;
+        const picker = event.target;
+        const result = document.getElementById('reading-import-feedback');
+        if (!result) return;
         const file = picker.files && picker.files[0];
         result.hidden = false;
         result.textContent = file

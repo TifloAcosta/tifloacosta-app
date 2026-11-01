@@ -1368,12 +1368,27 @@
         audio.load();
         updateSynchronizedText();
         caption.textContent = `${label} ${index+1} / ${tracks.length}: ${tracks[index].path.split('/').pop()}`;
+        if ('mediaSession' in navigator && typeof MediaMetadata !== 'undefined') {
+          try {
+            navigator.mediaSession.metadata = new MediaMetadata({
+              title: tracks[index].path.split('/').pop() || file.name,
+              artist: file.name,
+              album: 'TifloLector DAISY'
+            });
+          } catch { /* Lock-screen metadata is optional. */ }
+        }
         prev.disabled = index === 0;
         next.disabled = index === tracks.length-1;
         if (autoplay) void audio.play().catch(() => { els.status.textContent = language()==='en' ? 'Unable to play this DAISY track.' : 'No se puede reproducir esta pista DAISY.'; });
       }
       prev.addEventListener('click',()=>choose(index-1,!audio.paused));
       next.addEventListener('click',()=>choose(index+1,!audio.paused));
+      if ('mediaSession' in navigator) {
+        try {
+          navigator.mediaSession.setActionHandler('previoustrack', () => choose(index-1, true));
+          navigator.mediaSession.setActionHandler('nexttrack', () => choose(index+1, true));
+        } catch { /* Some browsers do not expose chapter controls. */ }
+      }
       audio.addEventListener('ended',()=>choose(index+1,true));
       const oldController = document.querySelector('.reading-daisy-tracks');
       oldController?.remove();

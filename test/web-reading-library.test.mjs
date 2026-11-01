@@ -116,7 +116,7 @@ test('web TifloLector library keeps only title buttons as the direct reading ent
   assert.ok(source.includes('reading-library-title-card'));
   assert.ok(source.includes("title.addEventListener('click', () =>"));
   assert.ok(source.includes('void openSavedBook(book.id);'));
-  assert.ok(source.includes('card.append(title);'));
+  assert.ok(source.includes('card.append(title, duration);'));
   assert.ok(!source.includes('card.append(title, detailsToggle, details);'));
 });
 
@@ -168,7 +168,7 @@ test('document reader prioritizes playback then keeps navigation unit visible', 
 
 test('percentage jump is kept inside More actions instead of the primary reading flow', async () => {
   const source = await read('web-reading.js');
-  assert.ok(source.includes('morePanel.append(moreHeading, progressLabel, progressSelect, timerLabel, timerSelect)'));
+  assert.ok(source.includes('morePanel.append(moreHeading, progressLabel, progressSelect)') && source.includes('els.title.after(timerLabel, timerSelect)'));
   assert.match(source, /section\.append\([\s\S]{0,400}progressStatus,[\s\S]{0,300}primaryActions/);
   assert.ok(!source.includes('progressStatus, progressLabel, progressSelect'));
 });

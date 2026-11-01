@@ -759,7 +759,9 @@
     const closeMore = document.createElement('button');
     closeMore.type = 'button';
     closeMore.textContent = language() === 'en' ? 'Back to reading' : 'Volver a la lectura';
-    morePanel.append(moreHeading, progressLabel, progressSelect, timerLabel, timerSelect);
+    morePanel.append(moreHeading, progressLabel, progressSelect);
+    // Keep sleep timer immediately after the document heading, always available.
+    els.title.after(timerLabel, timerSelect);
 
     const movable = [
       els.searchForm,
@@ -2808,9 +2810,7 @@
         title.type = 'button';
         title.className = 'reading-library-title';
         title.textContent = book.title || t().document;
-        title.setAttribute('aria-label', language() === 'en'
-          ? `Open for reading: ${book.title || t().document}`
-          : `Abrir para leer: ${book.title || t().document}`);
+        title.setAttribute('aria-label', book.title || t().document);
 
         const detailsToggle = document.createElement('button');
         detailsToggle.type = 'button';
@@ -3071,8 +3071,23 @@
           void openSavedBook(book.id);
         });
 
-        card.append(title);
+        const duration = document.createElement('p');
+        duration.className = 'resource-meta';
+        duration.textContent = language() === 'en' ? 'Reading time: calculating…' : 'Tiempo de lectura: calculando…';
+        card.append(title, duration);
         els.libraryList.append(card);
+        void estimateBookTimes(book).then(times => {
+          if (!duration.isConnected) return;
+          if (!times) {
+            duration.textContent = language() === 'en'
+              ? 'Reading time not available' : 'Tiempo de lectura no disponible';
+            return;
+          }
+          const total = times.elapsedSeconds + times.remainingSeconds;
+          duration.textContent = language() === 'en'
+            ? `Estimated reading time: ${readableDuration(total)}. Completed: ${readableDuration(times.elapsedSeconds)}. Remaining: ${readableDuration(times.remainingSeconds)}.`
+            : `Tiempo estimado de lectura: ${readableDuration(total)}. Leído: ${readableDuration(times.elapsedSeconds)}. Restante: ${readableDuration(times.remainingSeconds)}.`;
+        });
       }
     } catch {
       els.libraryStatus.textContent = t().libraryUnavailable;

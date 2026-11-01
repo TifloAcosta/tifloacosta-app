@@ -42,10 +42,10 @@ test('web reading settings are collapsible and translation output is reachable',
     readRepo('index.html'),
     readRepo('web-reading.js')
   ]);
-  assert.match(html, /<details id="reading-settings-disclosure"/);
+  assert.match(html, /id="reading-settings-summary"/);
   assert.match(html, /id="reading-default-navigation"/);
   assert.match(html, /id="reading-translation-read"/);
-  assert.match(source, /primaryActions\.append\(mark, readingSettingsMenu, moreButton\)/);
+  assert.match(source, /primaryActions\.append\(readingSettingsMenu, moreButton\)/);
   assert.match(source, /await switchTranslationView\(true\)/);
 });
 

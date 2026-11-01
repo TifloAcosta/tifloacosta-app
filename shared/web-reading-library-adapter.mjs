@@ -75,7 +75,7 @@ function normalizeBook(value={}) {
     importedAt: Math.max(0, number(value.importedAt)),
     lastReadAt: Math.max(0, number(value.lastReadAt)),
     sizeBytes: Math.max(0, number(value.sizeBytes)),
-    content: String(value.content ?? '')
+    content: (typeof Blob !== 'undefined' && value.content instanceof Blob) ? value.content : String(value.content ?? '')
   };
 }
 
@@ -134,9 +134,9 @@ export function createWebReadingLibraryAdapter({
     content = '',
     sizeBytes = 0
   } = {}) {
-    const source = String(content ?? '');
+    const source = (typeof Blob !== 'undefined' && content instanceof Blob) ? content : String(content ?? '');
     const cleanFormat = clean(format).toLowerCase();
-    if (!source || !['txt','html','htm','pdf','docx','pptx','xlsx','epub','odt','rtf','md','markdown','fb2','png','jpg','jpeg','webp','mp3','daisy-audio'].includes(cleanFormat)) return null;
+    if ((typeof source === 'string' ? !source : source.size === 0) || !['txt','html','htm','pdf','docx','pptx','xlsx','epub','odt','rtf','md','markdown','fb2','png','jpg','jpeg','webp','mp3','daisy-audio'].includes(cleanFormat)) return null;
     const timestamp = now();
     const book = normalizeBook({
       id: createId('web-book'),

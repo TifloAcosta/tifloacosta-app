@@ -1318,14 +1318,11 @@
   }
 
   async function useDaisyAudio(file, book, zip) {
-    const tracks = [];
-    for (const path of book.audioFiles) {
-      const entry = zip.file(path);
-      if (!entry) continue;
-      const bytes = await entry.async('blob');
-      const mime = /\\.mp3$/i.test(path) ? 'audio/mpeg' : /\\.m4a$/i.test(path) ? 'audio/mp4' : /\\.wav$/i.test(path) ? 'audio/wav' : 'audio/ogg';
-      tracks.push({ path, url:URL.createObjectURL(new Blob([bytes], { type:mime })) });
-    }
+    // Extract only the selected track. Expanding every track at once can exhaust
+    // memory on iPhone when a DAISY ZIP contains hundreds of audio chapters.
+    const tracks = book.audioFiles.filter(path => Boolean(zip.file(path))).map(path => ({ path }));
+    let trackObjectUrl = '';
+    let loadSerial = 0;
     if (!tracks.length) throw new Error('daisy-no-supported-audio');
     try {
       await useMp3File(new File([new Blob([])], file.name, {type:'audio/mpeg'}));
@@ -1361,11 +1358,30 @@
       next.textContent = language() === 'en' ? 'Next DAISY track' : 'Pista DAISY siguiente';
       const caption = document.createElement('p');
       caption.setAttribute('aria-live','polite');
-      function choose(nextIndex, autoplay=false) {
+      async function choose(nextIndex, autoplay=false) {
         if (activeAudio !== audio || nextIndex < 0 || nextIndex >= tracks.length) return;
+        const serial = ++loadSerial;
         index = nextIndex;
-        audio.src = tracks[index].url;
-        audio.load();
+        const track = tracks[index];
+        const entry = zip.file(track.path);
+        if (!entry) return;
+        caption.textContent = language() === 'en' ? 'Preparing DAISY track…' : 'Preparando pista DAISY…';
+        try {
+          const blob = await entry.async('blob');
+          if (serial !== loadSerial || activeAudio !== audio) return;
+          const mime = /\.mp3$/i.test(track.path) ? 'audio/mpeg' : /\.m4a$/i.test(track.path) ? 'audio/mp4' : /\.wav$/i.test(track.path) ? 'audio/wav' : 'audio/ogg';
+          const nextUrl = URL.createObjectURL(new Blob([blob], { type:mime }));
+          const oldUrl = trackObjectUrl;
+          trackObjectUrl = nextUrl;
+          audio.src = nextUrl;
+          audio.load();
+          if (oldUrl) URL.revokeObjectURL(oldUrl);
+        } catch (error) {
+          if (serial === loadSerial) els.status.textContent = language() === 'en'
+            ? 'Could not prepare the DAISY audio track.'
+            : 'No se pudo preparar la pista de audio DAISY.';
+          return;
+        }
         updateSynchronizedText();
         caption.textContent = `${label} ${index+1} / ${tracks.length}: ${tracks[index].path.split('/').pop()}`;
         if ('mediaSession' in navigator && typeof MediaMetadata !== 'undefined') {
@@ -1394,10 +1410,12 @@
       oldController?.remove();
       controller.append(prev,next,caption);
       ensureAudioTools().append(controller);
-      choose(0);
+      await choose(0);
       const observer = new MutationObserver(()=>{
         if (activeAudio !== audio) {
-          for (const track of tracks) URL.revokeObjectURL(track.url);
+          loadSerial += 1;
+          if (trackObjectUrl) URL.revokeObjectURL(trackObjectUrl);
+          trackObjectUrl = '';
           observer.disconnect();
           controller.remove();
         }
@@ -1405,7 +1423,9 @@
       observer.observe(els.reader,{childList:true,subtree:true});
       audio.addEventListener('emptied',()=>{
         if (activeAudio !== audio) {
-          for (const track of tracks) URL.revokeObjectURL(track.url);
+          loadSerial += 1;
+          if (trackObjectUrl) URL.revokeObjectURL(trackObjectUrl);
+          trackObjectUrl = '';
           observer.disconnect();
           controller.remove();
         }
@@ -1415,7 +1435,8 @@
         ? 'DAISY audio ready. Text follows SMIL time cues when supplied by the book.'
         : 'Audio DAISY preparado. El texto sigue las marcas de tiempo SMIL cuando el libro las incluye.';
     } catch(error) {
-      for (const track of tracks) URL.revokeObjectURL(track.url);
+      loadSerial += 1;
+      if (trackObjectUrl) URL.revokeObjectURL(trackObjectUrl);
       throw error;
     }
   }
@@ -1865,7 +1886,7 @@
   async function structuredFromArchive(file, kind) {
     els.status.textContent = t().zipLoading;
     const JSZip = await loadZipBundle();
-    const zip = await JSZip.loadAsync(await file.arrayBuffer());
+    const zip = await JSZip.loadAsync(file);
     let raw;
     if (kind === 'docx') raw = await shared.parseDocxArchive(zip, { title:file.name, language:language() });
     else if (kind === 'pptx') raw = await shared.parsePptxArchive(zip, { title:file.name, language:language() });
@@ -1934,7 +1955,7 @@
     }
     if (lower.endsWith('.zip') || type === 'application/zip' || type === 'application/x-zip-compressed') {
       const JSZip = await loadZipBundle();
-      const zip = await JSZip.loadAsync(await file.arrayBuffer());
+      const zip = await JSZip.loadAsync(file);
       const { parseDaisyArchive } = await import('./shared/web-daisy-archive.mjs');
       let book;
       try {
@@ -2022,19 +2043,21 @@
       return false;
     }
     try {
-      const content = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(String(reader.result || ''));
-        reader.onerror = () => reject(reader.error || new Error('Error leyendo archivo'));
-        reader.readAsDataURL(file);
-      });
+      // IndexedDB supports Blob/File directly. Base64 duplicated the complete file
+      // in JavaScript memory and increased its size by roughly one third.
+      const content = file;
       const saved = await libraryAdapter.importDocument({
         title: file.name, language: language(), format, content, sizeBytes: file.size
       });
       if (!saved?.id) throw new Error('Formato rechazado por la biblioteca');
       currentBookId = saved.id;
-      await renderLibrary();
+      // A failed UI refresh must not turn a completed IndexedDB write into
+      // a false import failure or encourage users to import a duplicate.
       announceAudioImportResult(true, format);
+      try { await renderLibrary(); }
+      catch (refreshError) {
+        console.warn('Library refresh failed after successful media save', refreshError);
+      }
       return true;
     } catch (error) {
       announceAudioImportResult(false, format, error);
@@ -2058,17 +2081,47 @@
       feedback.textContent = startingMessage;
     }
 
+    let mediaSaved = false;
     try {
       if (/\.mp3$/iu.test(file.name) || String(file.type || '').toLowerCase() === 'audio/mpeg') {
         const saved = await storeImportedAudio(file, 'mp3');
         if (!saved) return false;
+        mediaSaved = true;
         await useMp3File(file);
         return true;
       }
-      const prepared = await documentFromFile(file);
-      if (prepared.format === 'daisy-audio') {
+      const isZip = /\.zip$/iu.test(file.name) || /application\/(?:zip|x-zip-compressed)/i.test(file.type || '');
+      if (isZip && feedback) {
+        feedback.textContent = language() === 'en'
+          ? 'Analyzing the compressed DAISY file. This may take a while.'
+          : 'Analizando el archivo DAISY comprimido. Esta operación puede tardar.';
+      }
+      // Save large ZIP files before parsing. ZIP analysis can consume substantial
+      // memory on iPhone; a parsing failure must not discard the original file.
+      if (isZip) {
+        // Reject obviously invalid ZIP files without loading the entire package.
+        const signature = new Uint8Array(await file.slice(0, 4).arrayBuffer());
+        const zipHeader = signature.length === 4 && signature[0] === 0x50 && signature[1] === 0x4b &&
+          ((signature[2] === 3 && signature[3] === 4) ||
+           (signature[2] === 5 && signature[3] === 6) ||
+           (signature[2] === 7 && signature[3] === 8));
+        if (!zipHeader) throw Object.assign(new Error('invalid-zip'), { code:'unsupported' });
         const saved = await storeImportedAudio(file, 'daisy-audio');
         if (!saved) return false;
+        mediaSaved = true;
+        if (feedback) feedback.textContent = language() === 'en'
+          ? 'File saved. Analyzing DAISY audio.'
+          : 'Archivo guardado. Analizando audio DAISY.';
+      }
+      const prepared = await documentFromFile(file);
+      if (prepared.format === 'daisy-audio') {
+        if (feedback) feedback.textContent = language() === 'en'
+          ? 'Saving the DAISY file to My library.'
+          : 'Guardando el DAISY en Mi biblioteca.';
+        // The file is already stored. Audio preparation is separate.
+        if (feedback) feedback.textContent = language() === 'en'
+          ? 'DAISY saved. Preparing audio tracks.'
+          : 'DAISY guardado. Preparando las pistas de audio.';
         await useDaisyAudio(file, prepared.book, prepared.zip);
         return true;
       }
@@ -2093,7 +2146,15 @@
         els.ocr.hidden = false;
       } else els.status.textContent = t().failed;
       // The importer is hidden when a media reader has opened; report errors there too.
-      if (/\\.(mp3|zip)$/i.test(file.name)) announceAudioImportResult(false, /\\.mp3$/i.test(file.name) ? 'mp3' : 'daisy-audio', error);
+      if (/\.(mp3|zip)$/i.test(file.name)) {
+        if (mediaSaved) {
+          const message = language() === 'en'
+            ? 'File saved in My library, but its audio could not be prepared: ' + (error?.message || 'unknown error')
+            : 'Archivo guardado en Mi biblioteca, pero no se pudo preparar el audio: ' + (error?.message || 'error desconocido');
+          if (feedback) { feedback.hidden = false; feedback.textContent = message; }
+          els.status.textContent = message;
+        } else announceAudioImportResult(false, /\.mp3$/i.test(file.name) ? 'mp3' : 'daisy-audio', error);
+      }
       else if (feedback) {
         feedback.hidden = false;
         feedback.textContent = els.status.textContent;
@@ -2661,9 +2722,16 @@
     returnToReadingMainFromSubview();
     if (format === 'mp3' || format === 'daisy-audio') {
       try {
-        const response = await fetch(source);
-        if (!response.ok) throw new Error('audio-storage-invalid');
-        const blob = await response.blob();
+        // New media is stored as a binary Blob. Older library entries remain
+        // readable as data URLs; no migration or deletion of existing books.
+        let blob;
+        if (typeof Blob !== 'undefined' && opened.content instanceof Blob) {
+          blob = opened.content;
+        } else {
+          const response = await fetch(source);
+          if (!response.ok) throw new Error('audio-storage-invalid');
+          blob = await response.blob();
+        }
         const file = new File([blob], opened.book.title || (format === 'mp3' ? 'audio.mp3' : 'audiolibro.zip'), {
           type: format === 'mp3' ? 'audio/mpeg' : 'application/zip'
         });

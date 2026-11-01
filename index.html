@@ -337,9 +337,10 @@
         <p id="reading-queue-status" class="muted" role="status" aria-live="polite"></p>
         <div id="reading-queue-list" class="resource-list"></div>
       </section>
-      <section id="reading-marks-web" aria-labelledby="reading-marks-heading">
-        <h4 id="reading-marks-heading">Marcadores</h4>
-        <p id="reading-marks-intro" class="visually-hidden">Marcadores del documento abierto.</p>
+      <button id="reading-marks-open" type="button" aria-expanded="false" aria-controls="reading-marks-web">Marcas</button>
+      <section id="reading-marks-web" hidden aria-labelledby="reading-marks-heading">
+        <h4 id="reading-marks-heading">Marcas</h4>
+        <p id="reading-marks-intro" hidden>Marcadores del documento abierto.</p>
         <p id="reading-marks-status" class="muted" role="status" aria-live="polite"></p>
         <div id="reading-marks-list" class="resource-list"></div>
       </section>
@@ -580,6 +581,17 @@
   }
   libraryFilter?.addEventListener('change', () => showLibraryFilter(libraryFilter.value === 'queue'));
   showLibraryFilter(false);
+
+  const marksOpen = document.getElementById('reading-marks-open');
+  const marksPanel = document.getElementById('reading-marks-web');
+  marksOpen?.addEventListener('click', () => {
+    if (!marksPanel) return;
+    const expanded = marksOpen.getAttribute('aria-expanded') === 'true';
+    marksOpen.setAttribute('aria-expanded', String(!expanded));
+    marksPanel.hidden = expanded;
+    if (!expanded) document.getElementById('reading-marks-heading')?.setAttribute('tabindex', '-1');
+    if (!expanded) document.getElementById('reading-marks-heading')?.focus();
+  });
 
   document.addEventListener('click', event => {
     const open = event.target.closest?.('[data-reading-view]');

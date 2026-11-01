@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-72-import-diagnostic';
+const CACHE = 'tifloacosta-app-v2-73-picker-diagnostic';
 const NAVIGATION_TIMEOUT_MS = 5000;
 // Resource catalog is refreshed from the network.
 const SHELL = [

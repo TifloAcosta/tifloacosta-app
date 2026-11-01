@@ -93,8 +93,8 @@
   const copy = {
     es: {
       heading: 'TifloLector',
-      intro: 'Importa un archivo o pega un texto para leerlo y escucharlo de forma accesible en TifloAcosta.',
-      file: 'Abrir documento o imagen',
+      intro: '',
+      file: 'Importar',
       paste: 'O pega aquí el texto',
       prepare: 'Leer texto pegado',
       empty: 'Selecciona un archivo o pega algún texto antes de preparar la lectura.',
@@ -201,8 +201,8 @@
     },
     en: {
       heading: 'TifloReader',
-      intro: 'Import a file or paste text to read and listen to it accessibly in TifloAcosta.',
-      file: 'Open document or image',
+      intro: '',
+      file: 'Import',
       paste: 'Or paste text here',
       prepare: 'Read pasted text',
       empty: 'Select a file or paste some text before preparing the reading.',
@@ -1035,7 +1035,8 @@
   function localize() {
     const c = t();
     els.heading.textContent = c.heading;
-    els.intro.textContent = c.intro;
+    els.intro.textContent = '';
+    els.intro.hidden = true;
     if (els.formatsToggle) els.formatsToggle.textContent = language() === 'en' ? 'Show supported file types' : 'Consultar formatos admitidos';
     if (els.formatsList) els.formatsList.textContent = language() === 'en'
       ? 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2, MP3 audio and PNG, JPG or WebP images using OCR.'
@@ -1754,8 +1755,8 @@
     els.queueToggle.disabled = !currentBookId;
     updateQueueToggle();
     els.status.textContent = autoSaveImported
-      ? (autoSaved ? t().importedReady : t().importedNotSaved)
-      : t().ready;
+      ? (autoSaved ? '' : t().importedNotSaved)
+      : '';
     els.searchResults.replaceChildren();
     els.searchStatus.textContent = '';
     ensurePerDocumentControls();
@@ -1773,7 +1774,7 @@
     const shouldAutoPlay = playbackPrefs.autoPlay === true && playbackPrefs.screenReaderMode === false;
     if (shouldAutoPlay) {
       await play();
-      if (autoSaveImported && autoSaved) els.status.textContent = t().importedPlaying;
+      if (autoSaveImported && autoSaved) els.status.textContent = '';
     }
 
     if (autoSaveImported && autoSaved) {

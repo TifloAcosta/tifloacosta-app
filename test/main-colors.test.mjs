@@ -44,5 +44,5 @@ test('el enlace de privacidad del pie mantiene contraste suficiente sobre el roj
 test('la hoja de estilos se refresca desde red al actualizar la app', () => {
   assert.match(serviceWorker, /tifloacosta-app-v2-\d+-[a-z0-9-]+/);
   assert.match(serviceWorker, /url\.pathname\.endsWith\('\/styles\.css'\)/);
-  assert.match(serviceWorker, /freshScript\(url, '\.\/styles\.css\?v=1\.3', request\)/);
+  assert.match(serviceWorker, /freshScript\(url, '\.\/styles\.css\?v=1\.4', request\)/);
 });

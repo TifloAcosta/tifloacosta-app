@@ -618,7 +618,9 @@
     generalSettingsSummary.textContent = 'General';
     generalSettings.append(generalSettingsSummary, unitLabel, unit);
     readingSettingsMenu.append(readingSettingsSummary, audioButton, visualButton, generalSettings);
-    primaryActions.append(mark, readingSettingsMenu, moreButton);
+    // Bookmark action belongs to the visible reading toolbar, not settings.
+    mainControls.prepend(mark);
+    primaryActions.append(readingSettingsMenu, moreButton);
 
     const audioPanel = document.createElement('section');
     audioPanel.id = 'reading-document-audio';
@@ -772,6 +774,8 @@
       els.markStatus
     ].filter(Boolean);
     movable.forEach(node => morePanel.append(node));
+    // The legacy bookmark action is already provided by the main reading toolbar.
+    els.bookmark.hidden = true;
     morePanel.append(closeMore);
 
     section.append(

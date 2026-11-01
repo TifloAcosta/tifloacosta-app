@@ -88,3 +88,11 @@ test('successful media storage is acknowledged even when library UI refresh fail
   assert.ok(method.indexOf('announceAudioImportResult(true, format)') < method.indexOf('await renderLibrary()'));
   assert.match(method, /try \{ await renderLibrary\(\); \}/);
 });
+
+test('large DAISY ZIP is persisted before archive extraction and uses Blob input', () => {
+  const source = read('web-reading.js');
+  assert.match(source, /JSZip\.loadAsync\(file\)/);
+  assert.doesNotMatch(source, /JSZip\.loadAsync\(await file\.arrayBuffer\(\)\)/);
+  const importer = source.slice(source.indexOf('  async function importSelectedFile('), source.indexOf('  async function importSelectedFile(') + 4600);
+  assert.ok(importer.indexOf("storeImportedAudio(file, 'daisy-audio')") < importer.indexOf('const prepared = await documentFromFile(file)'));
+});

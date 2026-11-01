@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-60-reader-library';
+const CACHE = 'tifloacosta-app-v2-61-search-a11y';
 const NAVIGATION_TIMEOUT_MS = 5000;
 // Resource catalog is refreshed from the network.
 const SHELL = [
@@ -24,7 +24,7 @@ const SHELL = [
   './videos.js?v=2.6',
   './youtube-accessible.js?v=1.1',
   './podcast.js?v=1.1',
-  './app.js?v=2.8',
+  './app.js?v=2.9',
   './tifloacosta-favicon.ico',
   './tifloacosta-icon-192.png',
   './tifloacosta-icon-512.png',
@@ -149,7 +149,7 @@ self.addEventListener('fetch', event => {
 
   if (isAppOrigin && url.pathname.endsWith('/app.js')) {
     url.searchParams.set('v', '2.7');
-    event.respondWith(freshScript(url, './app.js?v=2.8', request));
+    event.respondWith(freshScript(url, './app.js?v=2.9', request));
     return;
   }
 

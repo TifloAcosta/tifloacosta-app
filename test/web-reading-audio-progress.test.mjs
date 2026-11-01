@@ -71,3 +71,11 @@ test('DAISY import communicates analysis, saving and track preparation', () => {
   assert.match(source, /Guardando el DAISY en Mi biblioteca/);
   assert.match(source, /DAISY guardado\. Preparando las pistas de audio/);
 });
+
+test('media imported before a playback error remains reported as saved', () => {
+  const source = read('web-reading.js');
+  assert.match(source, /let mediaSaved = false/);
+  assert.match(source, /if \(mediaSaved\)/);
+  assert.match(source, /Archivo guardado en Mi biblioteca, pero no se pudo preparar el audio/);
+  assert.match(source, /announceAudioImportResult\(false/);
+});

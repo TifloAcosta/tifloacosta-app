@@ -122,6 +122,21 @@
     <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
     <h2 id="reading-heading">TifloLector</h2>
     <p id="reading-import-feedback" role="status" aria-live="assertive" aria-atomic="true" tabindex="-1" hidden></p>
+    <script>
+    // Independent of the reader bundle: verify iOS file-picker delivery accessibly.
+    (() => {
+      const picker = document.getElementById('reading-file');
+      const result = document.getElementById('reading-import-feedback');
+      if (!picker || !result) return;
+      picker.addEventListener('change', () => {
+        const file = picker.files && picker.files[0];
+        result.hidden = false;
+        result.textContent = file
+          ? 'Archivo seleccionado: ' + file.name + '. Iniciando importación.'
+          : 'No se ha seleccionado ningún archivo.';
+      }, true);
+    })();
+    </script>
     <p id="reading-intro" hidden></p>
 
     <div class="panel" aria-label="Importación de documentos">

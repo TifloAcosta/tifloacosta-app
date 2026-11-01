@@ -1886,7 +1886,7 @@
   async function structuredFromArchive(file, kind) {
     els.status.textContent = t().zipLoading;
     const JSZip = await loadZipBundle();
-    const zip = await JSZip.loadAsync(await file.arrayBuffer());
+    const zip = await JSZip.loadAsync(file);
     let raw;
     if (kind === 'docx') raw = await shared.parseDocxArchive(zip, { title:file.name, language:language() });
     else if (kind === 'pptx') raw = await shared.parsePptxArchive(zip, { title:file.name, language:language() });
@@ -2096,15 +2096,22 @@
           ? 'Analyzing the compressed DAISY file. This may take a while.'
           : 'Analizando el archivo DAISY comprimido. Esta operación puede tardar.';
       }
+      // Save large ZIP files before parsing. ZIP analysis can consume substantial
+      // memory on iPhone; a parsing failure must not discard the original file.
+      if (isZip) {
+        const saved = await storeImportedAudio(file, 'daisy-audio');
+        if (!saved) return false;
+        mediaSaved = true;
+        if (feedback) feedback.textContent = language() === 'en'
+          ? 'File saved. Analyzing DAISY audio.'
+          : 'Archivo guardado. Analizando audio DAISY.';
+      }
       const prepared = await documentFromFile(file);
       if (prepared.format === 'daisy-audio') {
         if (feedback) feedback.textContent = language() === 'en'
           ? 'Saving the DAISY file to My library.'
           : 'Guardando el DAISY en Mi biblioteca.';
-        const saved = await storeImportedAudio(file, 'daisy-audio');
-        if (!saved) return false;
-        mediaSaved = true;
-        // The file is safely stored at this point; audio preparation is distinct.
+        // The file is already stored. Audio preparation is separate.
         if (feedback) feedback.textContent = language() === 'en'
           ? 'DAISY saved. Preparing audio tracks.'
           : 'DAISY guardado. Preparando las pistas de audio.';

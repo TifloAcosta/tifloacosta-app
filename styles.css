@@ -175,3 +175,9 @@ body:has(#reading-section:not([hidden])) .language-switch { display:none !import
   color:#fff !important;
   border-color:#fff !important;
 }
+
+/* Single-line accessible search: keep labels available to screen readers. */
+.visually-hidden { position:absolute !important; width:1px !important; height:1px !important; padding:0 !important; margin:-1px !important; overflow:hidden !important; clip:rect(0,0,0,0) !important; white-space:nowrap !important; border:0 !important; }
+#global-search-shell .search-row { display:flex; flex-wrap:nowrap; align-items:center; }
+#global-search-shell .search-row input { min-width:0; flex:1 1 auto; }
+#global-search-shell .search-row button { flex:0 0 auto; }

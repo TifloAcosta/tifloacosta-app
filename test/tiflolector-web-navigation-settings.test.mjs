@@ -6,19 +6,17 @@ const read = path => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
 test('TifloLector exposes clear top-level menus with isolated focusable subviews', async () => {
   const html = await read('index.html');
-  for (const target of [
-    'reading-audio-view',
-    'reading-visual-view',
-    'reading-library-web',
-    'reading-queue-web',
-    'reading-marks-web'
-  ]) assert.ok(html.includes(`data-reading-view="${target}"`), `Missing launcher for ${target}`);
-  for (const id of [
-    'reading-settings-heading',
-    'reading-library-heading',
-    'reading-queue-heading',
-    'reading-marks-heading'
-  ]) assert.match(html, new RegExp(`id="${id}"[^>]*tabindex="-1"`));
+  for (const target of ['reading-audio-view', 'reading-visual-view']) {
+    assert.ok(html.includes(`data-reading-view="${target}"`), `Missing launcher for ${target}`);
+  }
+  for (const id of ['reading-settings-heading', 'reading-library-heading']) {
+    assert.match(html, new RegExp(`id="${id}"[^>]*tabindex="-1"`));
+  }
+  for (const id of ['reading-queue-web', 'reading-marks-web', 'reading-library-list', 'reading-filter-all', 'reading-filter-queue']) {
+    assert.ok(html.includes(`id="${id}"`), `Missing unified library element ${id}`);
+  }
+  assert.ok(!html.includes('data-reading-view="reading-queue-web"'), 'Queue must be a library filter, not a launcher');
+  assert.ok(!html.includes('data-reading-view="reading-marks-web"'), 'Bookmarks must appear within the library');
   assert.ok(html.includes('>TifloLector</'));
   assert.ok(html.includes('class="panel reading-subview"'));
   assert.ok(html.includes('data-reading-back'));
@@ -72,7 +70,7 @@ test('TifloLector exposes per-document voice, rate, bookmark and semantic naviga
     'reading-document-voice',
     'reading-document-rate',
     'Añadir marca',
-    "['block','Bloque','Block']",
+    "['block','Bloque de texto','Block']",
     "['paragraph','Párrafo','Paragraph']",
     "['sentence','Frase','Sentence']",
     'speechController?.moveTo?.'

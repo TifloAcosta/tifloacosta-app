@@ -2531,8 +2531,8 @@
     clearActiveAudio();
 
     if (readerReturnView === 'library') {
-      const openLibrary = document.querySelector('[data-reading-view="reading-library-web"]');
-      openLibrary?.click?.();
+      const libraryHeading = document.getElementById('reading-library-heading');
+      queueMicrotask(() => libraryHeading?.focus());
     } else {
       const heading = document.getElementById('reading-heading');
       queueMicrotask(() => heading?.focus());

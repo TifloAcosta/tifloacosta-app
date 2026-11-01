@@ -121,11 +121,10 @@
   <section id="reading-section" hidden tabindex="-1" aria-labelledby="reading-heading">
     <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
     <h2 id="reading-heading">TifloLector</h2>
-    <p id="reading-intro">Abre un libro o documento para escucharlo, continuar la lectura y gestionar tus marcadores.</p>
+    <p id="reading-intro" hidden></p>
 
-    <div class="panel" aria-labelledby="reading-start-heading">
-      <h3 id="reading-start-heading">Abrir documento</h3>
-      <label id="reading-file-label" for="reading-file">Seleccionar un libro o documento</label>
+    <div class="panel" aria-label="Importación de documentos">
+      <label id="reading-file-label" for="reading-file">Importar</label>
       <input id="reading-file" type="file" accept=".zip,application/zip,.mp3,audio/mpeg,.txt,.html,.htm,.pdf,.docx,.pptx,.xlsx,.epub,.odt,.rtf,.md,.markdown,.fb2,.png,.jpg,.jpeg,.webp,text/plain,text/html,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/epub+zip,application/vnd.oasis.opendocument.text,application/rtf,text/markdown,image/png,image/jpeg,image/webp">
       <div hidden aria-hidden="true">
         <label id="reading-paste-label" for="reading-paste">Pegar texto</label>
@@ -609,7 +608,7 @@
 <script type="module">
   import * as shared from './shared/web-entry.mjs?v=1.7';
   window.TIFLO_SHARED = shared;
-  await import('./web-reading.js?v=3.23');
+  await import('./web-reading.js?v=3.24');
 </script>
 <script src="app.js?v=2.7"></script>
 <script>

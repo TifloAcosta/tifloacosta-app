@@ -1996,6 +1996,32 @@
     };
   }
 
+  async function storeImportedAudio(file, format) {
+    if (!libraryAdapter || !file) return false;
+    try {
+      // IndexedDB stores this encoded recording locally; it is not uploaded.
+      const content = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result || ''));
+        reader.onerror = () => reject(reader.error);
+        reader.readAsDataURL(file);
+      });
+      const saved = await libraryAdapter.importDocument({
+        title: file.name,
+        language: language(),
+        format,
+        content,
+        sizeBytes: file.size
+      });
+      if (!saved?.id) return false;
+      currentBookId = saved.id;
+      await renderLibrary();
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
   async function importSelectedFile() {
     const file = els.file.files?.[0] || null;
     if (!file || fileImportInProgress) return false;
@@ -2009,11 +2035,19 @@
     try {
       if (/\.mp3$/iu.test(file.name) || String(file.type || '').toLowerCase() === 'audio/mpeg') {
         await useMp3File(file);
+        const saved = await storeImportedAudio(file, 'mp3');
+        els.status.textContent = saved
+          ? (language() === 'en' ? 'MP3 added to My library.' : 'MP3 guardado en Mi biblioteca.')
+          : (language() === 'en' ? 'MP3 opened, but could not be saved to My library. Check available device storage.' : 'MP3 abierto, pero no se pudo guardar en Mi biblioteca. Comprueba el espacio disponible.');
         return true;
       }
       const prepared = await documentFromFile(file);
       if (prepared.format === 'daisy-audio') {
         await useDaisyAudio(file, prepared.book, prepared.zip);
+        const saved = await storeImportedAudio(file, 'daisy-audio');
+        els.status.textContent = saved
+          ? (language() === 'en' ? 'DAISY audiobook added to My library.' : 'Audiolibro DAISY guardado en Mi biblioteca.')
+          : (language() === 'en' ? 'DAISY opened, but could not be saved to My library. Check available device storage.' : 'DAISY abierto, pero no se pudo guardar en Mi biblioteca. Comprueba el espacio disponible.');
         return true;
       }
       await useDocument(prepared.model, file.name, {
@@ -2595,6 +2629,30 @@
     const source = String(opened.content || '');
     const format = String(opened.book.format || 'txt').toLowerCase();
     returnToReadingMainFromSubview();
+    if (format === 'mp3' || format === 'daisy-audio') {
+      try {
+        const response = await fetch(source);
+        if (!response.ok) throw new Error('audio-storage-invalid');
+        const blob = await response.blob();
+        const file = new File([blob], opened.book.title || (format === 'mp3' ? 'audio.mp3' : 'audiolibro.zip'), {
+          type: format === 'mp3' ? 'audio/mpeg' : 'application/zip'
+        });
+        readerReturnView = 'library';
+        if (format === 'mp3') await useMp3File(file);
+        else {
+          const prepared = await documentFromFile(file);
+          if (prepared.format !== 'daisy-audio') throw new Error('invalid-daisy-audio');
+          await useDaisyAudio(file, prepared.book, prepared.zip);
+        }
+        currentBookId = opened.book.id;
+        els.status.textContent = language() === 'en' ? 'Audiobook opened from My library.' : 'Audiolibro abierto desde Mi biblioteca.';
+      } catch {
+        els.libraryStatus.textContent = language() === 'en'
+          ? 'The saved audiobook could not be opened.'
+          : 'No se pudo abrir el audiolibro guardado.';
+      }
+      return;
+    }
     const model = await modelForSavedBook(opened);
     readerReturnView = 'library';
     const hasRequestedPercent = requestedPercent !== null && requestedPercent !== undefined && Number.isFinite(Number(requestedPercent));

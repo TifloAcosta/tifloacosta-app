@@ -2597,7 +2597,7 @@
 
   function updateQueueToggle() {
     els.queueToggle.textContent = currentQueued ? t().queueRemove : t().queueAdd;
-    els.queueToggle.setAttribute('aria-pressed', String(currentQueued));
+    els.queueToggle.removeAttribute('aria-pressed');
   }
 
   async function refreshCurrentQueueState() {

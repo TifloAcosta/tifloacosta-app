@@ -1318,14 +1318,11 @@
   }
 
   async function useDaisyAudio(file, book, zip) {
-    const tracks = [];
-    for (const path of book.audioFiles) {
-      const entry = zip.file(path);
-      if (!entry) continue;
-      const bytes = await entry.async('blob');
-      const mime = /\\.mp3$/i.test(path) ? 'audio/mpeg' : /\\.m4a$/i.test(path) ? 'audio/mp4' : /\\.wav$/i.test(path) ? 'audio/wav' : 'audio/ogg';
-      tracks.push({ path, url:URL.createObjectURL(new Blob([bytes], { type:mime })) });
-    }
+    // Extract only the selected track. Expanding every track at once can exhaust
+    // memory on iPhone when a DAISY ZIP contains hundreds of audio chapters.
+    const tracks = book.audioFiles.filter(path => Boolean(zip.file(path))).map(path => ({ path }));
+    let trackObjectUrl = '';
+    let loadSerial = 0;
     if (!tracks.length) throw new Error('daisy-no-supported-audio');
     try {
       await useMp3File(new File([new Blob([])], file.name, {type:'audio/mpeg'}));
@@ -1361,11 +1358,30 @@
       next.textContent = language() === 'en' ? 'Next DAISY track' : 'Pista DAISY siguiente';
       const caption = document.createElement('p');
       caption.setAttribute('aria-live','polite');
-      function choose(nextIndex, autoplay=false) {
+      async function choose(nextIndex, autoplay=false) {
         if (activeAudio !== audio || nextIndex < 0 || nextIndex >= tracks.length) return;
+        const serial = ++loadSerial;
         index = nextIndex;
-        audio.src = tracks[index].url;
-        audio.load();
+        const track = tracks[index];
+        const entry = zip.file(track.path);
+        if (!entry) return;
+        caption.textContent = language() === 'en' ? 'Preparing DAISY track…' : 'Preparando pista DAISY…';
+        try {
+          const blob = await entry.async('blob');
+          if (serial !== loadSerial || activeAudio !== audio) return;
+          const mime = /\\.mp3$/i.test(track.path) ? 'audio/mpeg' : /\\.m4a$/i.test(track.path) ? 'audio/mp4' : /\\.wav$/i.test(track.path) ? 'audio/wav' : 'audio/ogg';
+          const nextUrl = URL.createObjectURL(new Blob([blob], { type:mime }));
+          const oldUrl = trackObjectUrl;
+          trackObjectUrl = nextUrl;
+          audio.src = nextUrl;
+          audio.load();
+          if (oldUrl) URL.revokeObjectURL(oldUrl);
+        } catch (error) {
+          if (serial === loadSerial) els.status.textContent = language() === 'en'
+            ? 'Could not prepare the DAISY audio track.'
+            : 'No se pudo preparar la pista de audio DAISY.';
+          return;
+        }
         updateSynchronizedText();
         caption.textContent = `${label} ${index+1} / ${tracks.length}: ${tracks[index].path.split('/').pop()}`;
         if ('mediaSession' in navigator && typeof MediaMetadata !== 'undefined') {
@@ -1394,10 +1410,12 @@
       oldController?.remove();
       controller.append(prev,next,caption);
       ensureAudioTools().append(controller);
-      choose(0);
+      await choose(0);
       const observer = new MutationObserver(()=>{
         if (activeAudio !== audio) {
-          for (const track of tracks) URL.revokeObjectURL(track.url);
+          loadSerial += 1;
+          if (trackObjectUrl) URL.revokeObjectURL(trackObjectUrl);
+          trackObjectUrl = '';
           observer.disconnect();
           controller.remove();
         }
@@ -1405,7 +1423,9 @@
       observer.observe(els.reader,{childList:true,subtree:true});
       audio.addEventListener('emptied',()=>{
         if (activeAudio !== audio) {
-          for (const track of tracks) URL.revokeObjectURL(track.url);
+          loadSerial += 1;
+          if (trackObjectUrl) URL.revokeObjectURL(trackObjectUrl);
+          trackObjectUrl = '';
           observer.disconnect();
           controller.remove();
         }
@@ -1415,7 +1435,8 @@
         ? 'DAISY audio ready. Text follows SMIL time cues when supplied by the book.'
         : 'Audio DAISY preparado. El texto sigue las marcas de tiempo SMIL cuando el libro las incluye.';
     } catch(error) {
-      for (const track of tracks) URL.revokeObjectURL(track.url);
+      loadSerial += 1;
+      if (trackObjectUrl) URL.revokeObjectURL(trackObjectUrl);
       throw error;
     }
   }

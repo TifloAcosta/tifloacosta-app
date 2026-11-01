@@ -175,3 +175,16 @@ test('percentage jump is kept inside More actions instead of the primary reading
   assert.match(source, /section\.append\([\s\S]{0,400}progressStatus,[\s\S]{0,300}primaryActions/);
   assert.ok(!source.includes('progressStatus, progressLabel, progressSelect'));
 });
+
+test('large MP3 and DAISY imports preserve binary Blob without base64 conversion', async () => {
+  const [adapter, reader] = await Promise.all([
+    read('shared/web-reading-library-adapter.mjs'),
+    read('web-reading.js')
+  ]);
+  assert.match(adapter, /value\.content instanceof Blob/);
+  assert.match(adapter, /content instanceof Blob/);
+  assert.match(reader, /const content = file;/);
+  assert.doesNotMatch(reader, /reader\.readAsDataURL\(file\)/);
+  assert.match(reader, /opened\.content instanceof Blob/);
+  assert.match(reader, /announceAudioImportResult\(true, format\)/);
+});

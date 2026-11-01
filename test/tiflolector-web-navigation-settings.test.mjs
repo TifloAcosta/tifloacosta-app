@@ -98,7 +98,8 @@ test('TifloLector document view prioritizes playback and keeps compact progress 
     'Posición en el libro completo:',
     'for (let value = 0; value <= 100; value += 10)',
     'mainControls.after(section)',
-    'morePanel.append(moreHeading, progressLabel, progressSelect, timerLabel, timerSelect)'
+    'els.title.after(timerLabel, timerSelect)',
+    'morePanel.append(moreHeading, progressLabel, progressSelect)'
   ]) assert.ok(source.includes(token), `Missing final document control: ${token}`);
   assert.ok(source.includes("movable.forEach(node => morePanel.append(node));"));
   assert.ok(source.includes("resetVisual.addEventListener('click', restoreDocumentVisualFromGeneral)"));

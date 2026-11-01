@@ -1,9 +1,19 @@
 {
-  "generatedAt": "2026-10-31T19:34:02.206Z",
+  "generatedAt": "2026-11-01T16:26:11.589Z",
   "channelHandle": "@tifloacosta",
   "channelUrl": "https://www.youtube.com/@tifloacosta",
-  "count": 289,
+  "count": 290,
   "videos": [
+    {
+      "id": "qs8eV_jl7eU",
+      "title": "¿Una galería de fotos pensada para personas ciegas? Así funciona Memora",
+      "publishedAt": "2026-11-01T11:00:15Z",
+      "description": "Memora: ¿para qué quiere una persona ciega una galería de fotos?\n¿Quién dijo que las fotografías son solamente para quienes pueden verlas?\nHoy les presento Memora, una aplicación para iPhone desarrollada por un programador ciego que propone una forma accesible de explorar y organizar nuestras fotografías.\nEn este tutorial recorreremos sus principales funciones, comprobaremos cómo se maneja con VoiceOver y veremos qué posibilidades ofrece en la práctica.\nUna nueva oportunidad para demostrar que la accesibilidad también tiene mucho que decir en el mundo de la fotografía.\nTifloAcosta. Tecnología al alcance de todos.",
+      "fullDescription": "Memora: ¿para qué quiere una persona ciega una galería de fotos?\n\n¿Quién dijo que las fotografías son solamente para quienes pueden verlas?\n\nHoy les presento Memora, una aplicación para iPhone desarrollada por un programador ciego que propone una forma accesible de explorar y organizar nuestras fotografías.\n\nEn este tutorial recorreremos sus principales funciones, comprobaremos cómo se maneja con VoiceOver y veremos qué posibilidades ofrece en la práctica.\n\nUna nueva oportunidad para demostrar que la accesibilidad también tiene mucho que decir en el mundo de la fotografía.\n\nTifloAcosta. Tecnología al alcance de todos.\n\n#Memora #Accesibilidad #VoiceOver #iPhone #TifloAcosta",
+      "excerpt": "Memora: ¿para qué quiere una persona ciega una galería de fotos?",
+      "thumbnail": "https://i.ytimg.com/vi/qs8eV_jl7eU/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=qs8eV_jl7eU"
+    },
     {
       "id": "SHkTb-36jWw",
       "title": "Apple te quiere… proteger. ¡Pero tienes que activarlo! iOS 27",

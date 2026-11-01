@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-01T09:22:36.528Z",
+  "generatedAt": "2026-11-01T16:26:11.631Z",
   "resources": [
     {
       "kind": "resource",
@@ -2364,6 +2364,17 @@
     }
   ],
   "videos": [
+    {
+      "kind": "video",
+      "id": "qs8eV_jl7eU",
+      "title": "¿Una galería de fotos pensada para personas ciegas? Así funciona Memora",
+      "publishedAt": "2026-11-01T11:00:15Z",
+      "description": "Memora: ¿para qué quiere una persona ciega una galería de fotos?\n¿Quién dijo que las fotografías son solamente para quienes pueden verlas?\nHoy les presento Memora, una aplicación para iPhone desarrollada por un programador ciego que propone una forma accesible de explorar y organizar nuestras fotografías.\nEn este tutorial recorreremos sus principales funciones, comprobaremos cómo se maneja con VoiceOver y veremos qué posibilidades ofrece en la práctica.\nUna nueva oportunidad para demostrar que la accesibilidad también tiene mucho que decir en el mundo de la fotografía.\nTifloAcosta. Tecnología al alcance de todos.",
+      "fullDescription": "Memora: ¿para qué quiere una persona ciega una galería de fotos?\n\n¿Quién dijo que las fotografías son solamente para quienes pueden verlas?\n\nHoy les presento Memora, una aplicación para iPhone desarrollada por un programador ciego que propone una forma accesible de explorar y organizar nuestras fotografías.\n\nEn este tutorial recorreremos sus principales funciones, comprobaremos cómo se maneja con VoiceOver y veremos qué posibilidades ofrece en la práctica.\n\nUna nueva oportunidad para demostrar que la accesibilidad también tiene mucho que decir en el mundo de la fotografía.\n\nTifloAcosta. Tecnología al alcance de todos.\n\n#Memora #Accesibilidad #VoiceOver #iPhone #TifloAcosta",
+      "excerpt": "Memora: ¿para qué quiere una persona ciega una galería de fotos?",
+      "thumbnail": "https://i.ytimg.com/vi/qs8eV_jl7eU/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=qs8eV_jl7eU"
+    },
     {
       "kind": "video",
       "id": "SHkTb-36jWw",
@@ -6159,39 +6170,6 @@
         "windows",
         "tecnologia-accesibilidad",
         "jaws"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "cti-once-f841f3b33b600d5e:es",
-      "sourceId": "cti-once-f841f3b33b600d5e",
-      "lang": "es",
-      "title": "Modos-ON ¡Ya disponible el informe de accesibilidad del videojuego Despertar de Endor: Roguelite tanto para iOS como para Android!",
-      "summary": "Desde el Centro de Tiflotecnología e Innovación de la ONCE (CTI) se ha realizado un análisis detallado evaluando sus distintos apartados y su impacto en la experiencia de juego.",
-      "body": "Desde el Centro de Tiflotecnología e Innovación de la ONCE (CTI) se ha realizado un análisis detallado evaluando sus distintos apartados y su impacto en la experiencia de juego.\n\nEn los siguientes enlaces enlace encontrarás todo lo relacionado con la accesibilidad de este videojuego en los diferentes sistemas operativos:",
-      "sourceName": "CTI de la ONCE",
-      "originalUrl": "https://cti.once.es/noticias/ya-disponible-el-informe-de-accesibilidad-del-videojuego-despertar-de-endor-roguelite-tanto-para-ios-como-para-android",
-      "publishedAt": "2026-10-22T12:00:00.000Z",
-      "categories": [
-        "tecnologia-accesibilidad",
-        "apple",
-        "android"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "conticgo-deb892166b082831:es",
-      "sourceId": "conticgo-deb892166b082831",
-      "lang": "es",
-      "title": "Jornada de actualización en desarrollos y avances tecnológicos",
-      "summary": "La inteligencia artificial puede ayudarnos a crear documentos PDF de forma más sencilla y adaptada a nuestras necesidades. En la próxima Jornada de Actualización de Desarrollos y Avances Tecnológicos, aprenderemos cómo utilizar estas herramientas y qué instrucciones debemos darles para obtener los resultados que buscamos. La sesión tendrá lugar el martes 27 de octubre, a […] La entrada Jornada de actualización en desarrollos y avances tecnológicos se publicó primero en Conticgo .",
-      "body": "La inteligencia artificial puede ayudarnos a crear documentos PDF de forma más sencilla y adaptada a nuestras necesidades. En la próxima Jornada de Actualización de Desarrollos y Avances Tecnológicos , aprenderemos cómo utilizar estas herramientas y qué instrucciones debemos darles para obtener los resultados que buscamos.\n\nLa sesión tendrá lugar el martes 27 de octubre, a partir de las 11:00 horas , y será impartida por Iván García. La actividad se desarrollará en línea, a través de Jitsi Meeten: https://meet.jit.si/Saladegrupo\n\nDurante la sesión, conoceremos cómo generar documentos PDF utilizando herramientas de inteligencia artificial. También veremos qué pautas debemos seguir para orientar correctamente el proceso y conseguir documentos que respondan a una tarea específica.\n\nUno de los aspectos principales será el uso de prompts , es decir, las instrucciones que proporcionamos a la inteligencia artificial para indicarle qué necesitamos. Aprenderemos cómo redactarlos y qué información debemos incluir para obtener resultados más precisos y útiles.\n\nEsta jornada será una oportunidad para descubrir nuevas posibilidades de la inteligencia artificial y conocer recursos que pueden facilitarnos las tareas cotidianas.\n\n¡Os animamos a participar y a seguir descubriendo las posibilidades que nos ofrecen los avances tecnológicos!",
-      "sourceName": "Conticgo",
-      "originalUrl": "https://conticgo.net/jornada-de-actualizacion-en-desarrollos-y-avances-tecnologicos/",
-      "publishedAt": "2026-10-22T10:58:30.000Z",
-      "categories": [
-        "tecnologia-accesibilidad",
-        "ia-accesibilidad"
       ]
     }
   ]

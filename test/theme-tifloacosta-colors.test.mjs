@@ -51,7 +51,7 @@ test('el cambio de color conserva el marco fluido y los ajustes de lectura', () 
 
 test('la PWA fuerza una generación nueva del tema y usa el rojo de identidad', () => {
   assert.match(worker, /tifloacosta-app-v2-\d+-[a-z0-9-]+/);
-  assert.match(worker, /\.\/styles\.css\?v=1\.3/);
+  assert.match(worker, /\.\/styles\.css\?v=1\.4/);
   assert.equal(manifest.theme_color, '#A61B1B');
   assert.equal(manifest.background_color, '#FFFFFF');
 });

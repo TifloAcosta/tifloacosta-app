@@ -273,15 +273,15 @@
       <button type="button" class="reading-subview-back" data-reading-back>Volver a Ajustes de TifloLector</button>
       <h3 id="reading-provider-heading" tabindex="-1">Motores y servicios de voz</h3>
       <p>Los servicios son opcionales. Las voces actuales continúan disponibles. Cada usuario gestiona su cuenta, sus cuotas y sus posibles gastos. TifloAcosta no proporciona claves compartidas.</p>
-      <p>El catálogo está en preparación: no se solicitan ni almacenan claves API y todavía no se pueden generar audios desde estos proveedores.</p>
+      <p>Phonon inglés (31m) está disponible en el selector de voces de TifloLector como opción local gratuita. Su modelo se descarga la primera vez. Kokoro, Phonon español y los servicios con claves API siguen en evaluación; no introduzcas aquí ninguna clave.</p>
       <div id="reading-provider-list" aria-label="Proveedores de voz">
         <details><summary>Kokoro — voces locales gratuitas, en evaluación</summary><p>Voces españolas Dora, Alex y Santa. La generación local en Safari todavía no está validada. No requiere cuenta ni clave API.</p><a href="https://hangry-labs.github.io/kokoroTTS/examples/?lang=es" target="_blank" rel="noopener noreferrer">Escuchar muestras de Kokoro</a></details>
-        <details><summary>Phonon — voces locales gratuitas, en evaluación</summary>
-          <p>Motor de síntesis local con voces españolas, sin clave API ni consumo por caracteres. Sus modelos multilingües usan licencia CC BY-NC 4.0: antes de integrarlos en TifloLector debemos comprobar las condiciones de distribución y uso.</p>
+        <details><summary>Phonon — inglés integrado; español en evaluación</summary>
+          <p>El modelo inglés Phonon 31m se puede escoger en Ajustes de audio y voces del lector, sin clave API. Los modelos españoles Phonon 40m requieren una descarga y distribución autorizadas bajo licencia CC BY-NC 4.0; todavía no se han incorporado. El motor se ejecuta en el dispositivo cuando el navegador es compatible.</p>
           <p>En Windows existen versiones para SAPI y NVDA. Instalarlas no garantiza que las voces aparezcan en el selector de Chrome: es necesario probar su integración o utilizar el motor local directamente.</p>
           <a href="https://github.com/OnjLouis/phononSAPI/releases/latest" target="_blank" rel="noopener noreferrer">Phonon para Windows: versión SAPI (otra pestaña)</a>
           <a href="https://github.com/OnjLouis/phononNVDA/releases/latest" target="_blank" rel="noopener noreferrer">Phonon para NVDA (otra pestaña)</a>
-          <p>Prueba gratuita en el navegador: abre la demostración de Phonon, selecciona el modelo de 40 millones de parámetros y el idioma español, elige una voz y activa «Speak». La primera vez es necesario descargar el modelo. Esta demostración es externa: todavía no permite leer directamente los libros de TifloLector.</p>
+          <p>Prueba gratuita en el navegador: abre la demostración de Phonon, selecciona el modelo de 40 millones de parámetros y el idioma español, elige una voz y activa «Speak». La primera vez es necesario descargar el modelo. La demostración española es externa; la lectura integrada disponible ahora es la de Phonon inglés.</p>
           <a href="https://gradium-phonon.static.hf.space/index.html" target="_blank" rel="noopener noreferrer">Probar Phonon en español en el navegador (otra pestaña)</a>
           <a href="https://huggingface.co/gradium/phonon-40m-es" target="_blank" rel="noopener noreferrer">Consultar condiciones de uso del modelo español (otra pestaña)</a>
           <a href="https://gradium.ai/phonon" target="_blank" rel="noopener noreferrer">Información oficial de Phonon (otra pestaña)</a>
@@ -730,7 +730,7 @@
 <script type="module">
   import * as shared from './shared/web-entry.mjs?v=1.7';
   window.TIFLO_SHARED = shared;
-  await import('./web-reading.js?v=3.37');
+  await import('./web-reading.js?v=3.38');
 </script>
 <script src="app.js?v=2.9"></script>
 <script>

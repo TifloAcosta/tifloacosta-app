@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Prueba local Phonon — TifloAcosta</title></head>
+<body>
+<main>
+<h1>Prueba técnica de Phonon en el navegador</h1>
+<p>Esta prueba independiente del lector usa temporalmente el modelo gratuito de Phonon en inglés, que no pide claves. No se utiliza el modelo español: este exige descargar archivos autorizados antes de incorporarlos. No se envía el texto a un servicio de voz.</p>
+<p>La primera descarga puede requerir más de 60 MB. Solo comenzará al pulsar «Cargar motor».</p>
+<button id="load" type="button">Cargar motor de prueba (inglés)</button>
+<p id="status" role="status" aria-live="polite">Motor no cargado.</p>
+<label for="sample">Texto para probar</label>
+<textarea id="sample" rows="3" cols="55">Hello. This is an offline voice test for TifloAcosta.</textarea>
+<button id="play" type="button" disabled>Generar y reproducir muestra</button>
+<button id="stop" type="button" disabled>Detener</button>
+<audio id="audio" controls aria-label="Muestra de voz generada"></audio>
+<p>Esta prueba no instala Python ni modifica las voces actuales de TifloLector.</p>
+</main>
+<script type="module" src="./main.js"></script>
+</body></html>

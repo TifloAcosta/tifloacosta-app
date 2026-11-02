@@ -935,7 +935,7 @@
     const voices = typeof shared.listWebTtsVoices === 'function' ? shared.listWebTtsVoices() : [];
     const selectedVoice = voices.find(item => item.id === selected);
     const preferredLanguage = els.documentVoiceLanguage?.value
-      || primaryLanguage(selectedVoice?.locale)
+      || (phononSelected ? 'en' : primaryLanguage(selectedVoice?.locale))
       || els.voiceLanguage?.value
       || readWebSettings().voiceLanguage
       || language();
@@ -1130,6 +1130,7 @@
     const selected = els.voice?.value || stored.voice || '';
     const voices = typeof shared.listWebTtsVoices === 'function' ? shared.listWebTtsVoices() : [];
     const selectedVoice = voices.find(voice => voice.id === selected);
+    const phononSelected = selected === 'phonon-31m-en';
     const preferredLanguage = els.voiceLanguage?.value
       || stored.voiceLanguage
       || primaryLanguage(selectedVoice?.locale)
@@ -1144,6 +1145,18 @@
     base.value = '';
     base.textContent = t().defaultVoice;
     els.voice.append(base);
+
+    // Phonon 31m can be used for English text without an API key.
+    // The Spanish 40m checkpoint is gated and is not included.
+    if ((els.voiceLanguage?.value || preferredLanguage) === 'en' ||
+        !els.voiceLanguage?.value) {
+      const phononOption = document.createElement('option');
+      phononOption.value = 'phonon-31m-en';
+      phononOption.textContent = language() === 'en'
+        ? 'Phonon English — free local voice (downloads model on first use)'
+        : 'Phonon inglés — voz local gratuita (primera vez descarga el modelo)';
+      els.voice.append(phononOption);
+    }
 
     for (const voice of filtered) {
       const option = document.createElement('option');

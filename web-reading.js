@@ -1743,6 +1743,12 @@
         'speech.rate': documentRateOverride || Number(els.rate.value) || 1
       },
       onPositionChange(value) {
+        if (value?.error) {
+          const detail = String(value.error);
+          els.status.textContent = language() === 'en'
+            ? 'Voice playback failed: ' + detail + '. Choose a browser voice to continue.'
+            : 'No se pudo reproducir la voz: ' + detail + '. Puedes elegir una voz del navegador para continuar.';
+        }
         const blockIndex = Number(value?.blockIndex);
         if (!Number.isFinite(blockIndex) || !documentModel?.blocks?.length) return;
 

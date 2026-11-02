@@ -295,12 +295,22 @@
           <section aria-labelledby="reading-google-step-key">
             <h4 id="reading-google-step-key" tabindex="-1">Paso 2. Crear o copiar una clave</h4>
             <p>En la página de claves de Google AI Studio, busca el control para crear una clave API. Si tienes una, utiliza la existente cuando sea apropiado. Sigue los pasos que aparezcan en tu cuenta y copia la clave con el botón de Google. No la envíes por correo ni la compartas.</p>
-            <p>Si Google pide seleccionar un proyecto o habilitar servicios, sigue las instrucciones de su portal. No es necesario realizar compras para explorar el catálogo de TifloLector; revisa siempre las condiciones del modelo antes de consumirlo.</p>
+            <p>Google AI Studio puede preparar automáticamente un proyecto y una clave para cuentas nuevas. Si ya administras proyectos de Google Cloud, puede ser necesario importarlos antes de crear una clave. No necesitas entender esos conceptos para usar las voces habituales de TifloLector.</p>
+            <details><summary>Ayuda detallada para crear la clave con un lector de pantalla</summary>
+              <ol>
+                <li>Abre Google AI Studio desde el enlace anterior. Si te pide identificarte, inicia sesión con tu cuenta de Google.</li>
+                <li>Accede al apartado de claves API. Si ya aparece una clave que puedes utilizar, no es obligatorio crear otra.</li>
+                <li>Si necesitas una nueva, busca el botón de creación de claves de Google y sigue las indicaciones. Google puede solicitar la selección de un proyecto.</li>
+                <li>Una vez creada, utiliza el control de Google para copiarla. Guárdala únicamente mediante los mecanismos de seguridad de tu cuenta; no la envíes a terceros.</li>
+                <li>Regresa a esta pestaña y consulta el paso 3. La conexión desde TifloLector aún no está habilitada: conserva la clave sin introducirla aquí.</li>
+              </ol>
+            </details>
+            <p>Google puede cambiar los nombres o el orden de sus controles. Si no encuentras una opción, consulta sus instrucciones oficiales. Revisa siempre las condiciones del modelo antes de utilizar cuotas o servicios de pago.</p>
             <a href="https://ai.google.dev/gemini-api/docs/api-key" target="_blank" rel="noopener noreferrer">Instrucciones oficiales de Google para las claves API (otra pestaña)</a>
           </section>
           <section aria-labelledby="reading-google-step-connect">
             <h4 id="reading-google-step-connect" tabindex="-1">Paso 3. Conectar con TifloLector</h4>
-            <p>La conexión segura todavía está en desarrollo. Por ahora no pegues la clave en esta web: no hay ningún campo para recibirla y no almacenamos credenciales. Cuando la integración esté disponible, este apartado permitirá conectar tu cuenta, comprobar el acceso y elegir voces.</p>
+            <p>La conexión segura todavía está en desarrollo. Google advierte que las claves privadas no deben exponerse en aplicaciones web públicas. Por ahora no pegues la clave en esta web: no hay ningún campo para recibirla y no almacenamos credenciales. Cuando la integración esté disponible, este apartado permitirá conectar tu cuenta, comprobar el acceso y elegir voces.</p>
             <p>Antes de convertir un libro, TifloLector mostrará una estimación del consumo. Puedes probar el recuento local con un fragmento de texto: este ensayo no envía contenido a ningún servidor ni calcula precios.</p>
             <label for="reading-google-text-estimate">Texto para estimar caracteres (opcional)</label>
             <textarea id="reading-google-text-estimate" rows="3" maxlength="50000" autocomplete="off" spellcheck="false"></textarea>

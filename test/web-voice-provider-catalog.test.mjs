@@ -28,3 +28,10 @@ test('local consumption preview is accessible and never sends text to a provider
  assert.match(html,/googleEstimateInput\?\.addEventListener\('input', updateGoogleEstimate\)/);
  assert.match(html,/No se ha enviado ningún texto/);
 });
+
+test('Google beginner instructions do not pretend to create or store keys',()=>{
+ assert.match(html,/Ayuda detallada para crear la clave con un lector de pantalla/);
+ assert.match(html,/Google AI Studio puede preparar automáticamente un proyecto/);
+ assert.match(html,/Google advierte que las claves privadas no deben exponerse/);
+ assert.match(html,/no pegues la clave en esta web/);
+});

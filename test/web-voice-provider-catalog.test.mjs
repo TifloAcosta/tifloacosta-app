@@ -20,3 +20,11 @@ test('Google assistant gives direct official links and never requests a secret b
  assert.match(html,/no pegues la clave en esta web/);
  assert.doesNotMatch(html,/id="reading-google-api-key-input"/);
 });
+
+test('local consumption preview is accessible and never sends text to a provider',()=>{
+ assert.match(html,/id="reading-google-text-estimate"/);
+ assert.match(html,/id="reading-google-text-estimate-result" role="status" aria-live="polite"/);
+ assert.match(html,/id="reading-google-text-estimate-clear"/);
+ assert.match(html,/googleEstimateInput\?\.addEventListener\('input', updateGoogleEstimate\)/);
+ assert.match(html,/No se ha enviado ningún texto/);
+});

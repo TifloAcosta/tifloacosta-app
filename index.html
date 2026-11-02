@@ -273,7 +273,7 @@
       <button type="button" class="reading-subview-back" data-reading-back>Volver a Ajustes de TifloLector</button>
       <h3 id="reading-provider-heading" tabindex="-1">Motores y servicios de voz</h3>
       <p>Los servicios son opcionales. Las voces actuales continúan disponibles. Cada usuario gestiona su cuenta, sus cuotas y sus posibles gastos. TifloAcosta no proporciona claves compartidas.</p>
-      <p>El catálogo está en preparación: no se solicitan ni almacenan claves API y todavía no se pueden generar audios desde estos proveedores.</p>
+      <p>El catálogo está en preparación: no se solicitan ni almacenan claves API y todavía no se pueden generar audios desde estos proveedores dentro de TifloLector. Puedes probar Phonon por separado desde su demostración oficial, sin cambiar tus voces actuales.</p>
       <div id="reading-provider-list" aria-label="Proveedores de voz">
         <details><summary>Kokoro — voces locales gratuitas, en evaluación</summary><p>Voces españolas Dora, Alex y Santa. La generación local en Safari todavía no está validada. No requiere cuenta ni clave API.</p><a href="https://hangry-labs.github.io/kokoroTTS/examples/?lang=es" target="_blank" rel="noopener noreferrer">Escuchar muestras de Kokoro</a></details>
         <details><summary>Phonon — voces locales gratuitas, en evaluación</summary>
@@ -281,7 +281,10 @@
           <p>En Windows existen versiones para SAPI y NVDA. Instalarlas no garantiza que las voces aparezcan en el selector de Chrome: es necesario probar su integración o utilizar el motor local directamente.</p>
           <a href="https://github.com/OnjLouis/phononSAPI/releases/latest" target="_blank" rel="noopener noreferrer">Phonon para Windows: versión SAPI (otra pestaña)</a>
           <a href="https://github.com/OnjLouis/phononNVDA/releases/latest" target="_blank" rel="noopener noreferrer">Phonon para NVDA (otra pestaña)</a>
-          <a href="https://gradium.ai/phonon" target="_blank" rel="noopener noreferrer">Información y demostración oficial de Phonon (otra pestaña)</a>
+          <a href="https://gradium.ai/phonon" target="_blank" rel="noopener noreferrer">Información oficial de Phonon (otra pestaña)</a>
+          <p>Prueba accesible de Phonon en el navegador: abre la demostración, selecciona el modelo de 40 millones de parámetros y el idioma español, introduce una frase breve y pulsa «Speak». La primera descarga puede tardar. No es todavía la integración con TifloLector.</p>
+          <a href="https://gradium-phonon.static.hf.space/index.html" target="_blank" rel="noopener noreferrer">Probar ahora Phonon en español, en otra pestaña</a>
+          <p>Importante: las voces españolas de Phonon tienen licencia CC BY-NC 4.0 y el acceso a sus modelos puede requerir aceptar condiciones. Su integración pública está pendiente de autorización y pruebas de accesibilidad.</p>
         </details>
         <button type="button" id="reading-google-open" aria-controls="reading-google-guide" aria-expanded="false">Google: configurar voces</button>
       </div>

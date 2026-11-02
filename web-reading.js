@@ -1154,6 +1154,8 @@
         if (!consent.checked) throw new Error('Es necesario aceptar las condiciones.');
         await pause();
         speechAdapter.configureSpanishPhonon(files.files);
+        status.textContent = 'Preparando el modelo español. La primera carga puede tardar.';
+        await speechAdapter.prepareSpanishPhonon();
         const option = document.createElement('option');
         option.value = 'phonon-40m-es-local';
         option.textContent = 'Phonon español — modelo local autorizado';
@@ -1161,7 +1163,7 @@
         els.voice.value = option.value;
         saveWebSettings();
         await rebuildSpeech();
-        status.textContent = 'Modelo configurado. Ya puedes reproducir el documento con Phonon español.';
+        status.textContent = 'Modelo cargado y preparado. Ya puedes reproducir el documento con Phonon español.';
       } catch (error) { status.textContent = 'No se pudo configurar: ' + String(error?.message || error); }
     });
   }
@@ -1173,9 +1175,10 @@
     const voices = typeof shared.listWebTtsVoices === 'function' ? shared.listWebTtsVoices() : [];
     const selectedVoice = voices.find(voice => voice.id === selected);
     const phononSelected = selected === 'phonon-31m-en';
+    const spanishSelected = selected === 'phonon-40m-es-local';
     const preferredLanguage = els.voiceLanguage?.value
       || stored.voiceLanguage
-      || primaryLanguage(selectedVoice?.locale)
+      || (spanishSelected ? 'es' : phononSelected ? 'en' : primaryLanguage(selectedVoice?.locale))
       || language();
     if (els.voiceLanguage) {
       populateLanguageFilter(els.voiceLanguage, voices.map(voice => voice.locale), preferredLanguage);
@@ -1198,6 +1201,13 @@
         ? 'Phonon English — free local voice (downloads model on first use)'
         : 'Phonon inglés — voz local gratuita (primera vez descarga el modelo)';
       els.voice.append(phononOption);
+    }
+
+    if (speechAdapter?.hasSpanishPhonon?.() && (!els.voiceLanguage?.value || primaryLanguage(els.voiceLanguage.value) === 'es')) {
+      const spanishOption = document.createElement('option');
+      spanishOption.value = 'phonon-40m-es-local';
+      spanishOption.textContent = 'Phonon español — modelo local cargado';
+      els.voice.append(spanishOption);
     }
 
     for (const voice of filtered) {

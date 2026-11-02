@@ -5,6 +5,8 @@ on import. The CLI requires explicit confirmation before each request.
 """
 import base64
 import json
+import io
+import wave
 from pathlib import Path
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
@@ -27,7 +29,7 @@ def _body(text, voice):
         "contents": [{"role": "user", "parts": [{"text": text}]}],
         "generationConfig": {
             "responseModalities": ["AUDIO"],
-            "speechConfig": {"voiceConfig": {"voice": voice}}
+            "speechConfig": {"voiceConfig": {"prebuiltVoiceConfig": {"voiceName": voice}}}
         }
     }
 
@@ -60,6 +62,16 @@ def synthesize(text, voice="Kore", vault=None, opener=urlopen):
             if not data.startswith(b"RIFF"):
                 raise ValueError("Invalid WAV")
             return data
+        if mime.startswith("audio/l16") or mime.startswith("audio/pcm"):
+            if not data or len(data) % 2:
+                raise SynthesisError("Google ha devuelto datos PCM incompletos.")
+            with io.BytesIO() as stream:
+                with wave.open(stream, "wb") as wav:
+                    wav.setnchannels(1)
+                    wav.setsampwidth(2)
+                    wav.setframerate(24000)
+                    wav.writeframes(data)
+                return stream.getvalue()
         raise SynthesisError("Google ha devuelto un formato de audio no admitido por esta prueba.")
     except SynthesisError:
         raise

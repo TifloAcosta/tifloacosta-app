@@ -45,3 +45,8 @@ La prueba real del cifrado DPAPI requiere Windows; no se ha ejecutado con una cu
 
 ## Autorización local (prototipo aislado)
 La biblioteca `consent_gate.py` crea permisos aleatorios de un solo uso, limitados a un proveedor, una operación y un plazo breve. Incluye revocación y pruebas. **No está conectada al servidor HTTP**. La web no puede solicitar ni concederse permisos y todavía no hay interfaz local de confirmación. Antes de exponer operaciones reales será imprescindible añadir consentimiento accesible en una interfaz local confiable, emparejamiento entre la web y el componente, protección contra solicitudes cruzadas, control de coste y pruebas en Windows. Los permisos temporales de este prototipo no constituyen por sí solos un sistema seguro de autenticación.
+
+## Consola local de configuración (solo desarrolladores)
+`credential_console.py` ofrece una interfaz textual sencilla para Windows: guardar una clave con entrada oculta, comprobar si existe y eliminarla después de confirmación. Utiliza el almacén DPAPI local, sin transmitir claves a GitHub Pages ni exponer operaciones HTTP.
+
+Para probarla en Windows con Python instalado, desde la carpeta del componente ejecutar `python credential_console.py`. **No usar claves reales hasta validar el prototipo y los permisos del equipo**. Esta consola es una herramienta de desarrollo, no un asistente distribuido, no se ha probado aún con JAWS y no conecta con Google ni genera voz. El código de permisos temporales sigue aislado: no debe interpretarse esta consola como un emparejamiento de seguridad entre navegador y aplicación.

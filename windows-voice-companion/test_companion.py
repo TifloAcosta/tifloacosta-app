@@ -17,9 +17,11 @@ class CompanionTests(unittest.TestCase):
         cls.server.server_close()
         cls.thread.join()
 
-    def request(self, method, path="/health", origin=None):
+    def request(self, method, path="/health", origin=None, host=None):
         connection = http.client.HTTPConnection("127.0.0.1", self.server.server_port, timeout=3)
         headers = {"Origin": origin} if origin else {}
+        if host is not None:
+            headers["Host"] = host
         connection.request(method, path, headers=headers)
         response = connection.getresponse()
         status, headers, body = response.status, dict(response.getheaders()), response.read()
@@ -40,6 +42,11 @@ class CompanionTests(unittest.TestCase):
     def test_no_origin_denied(self):
         status, _, _ = self.request("GET")
         self.assertEqual(status, 403)
+
+    def test_rejects_dns_rebinding_host(self):
+        status, _, body = self.request("GET", origin="https://tifloacosta.com", host="attacker.example")
+        self.assertEqual(status, 403)
+        self.assertIn(b"host_not_allowed", body)
 
     def test_mutation_never_enabled(self):
         status, _, body = self.request("POST", origin="https://tifloacosta.com")

@@ -26,3 +26,10 @@ test('Google guide requires no API key while secure connection is absent',()=>{
  assert.match(html,/Activa el botón de Google para crear la clave/);
  assert.match(html,/Activa el botón de Google para copiarla/);
 });
+
+test('Windows JAWS external-tab return is documented and focus recovery is available',()=>{
+ assert.match(html,/Windows con JAWS/);
+ assert.match(html,/Control \+ Mayús \+ Tabulador/);
+ assert.match(html,/window.addEventListener\('focus', returnToGoogleStepThree\)/);
+ assert.match(html,/document.addEventListener\('visibilitychange', returnToGoogleStepThree\)/);
+});

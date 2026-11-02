@@ -213,6 +213,7 @@
       <div class="resource-actions" aria-label="Ajustes de TifloLector">
         <button type="button" data-reading-view="reading-audio-view" aria-controls="reading-audio-view">Audio y voz</button>
         <button type="button" data-reading-view="reading-visual-view" aria-controls="reading-visual-view">Presentación visual</button>
+        <button type="button" data-reading-view="reading-provider-view" aria-controls="reading-provider-view">Motores y servicios de voz</button>
       </div>
       <details id="reading-general-settings">
         <summary id="reading-general-settings-summary">General</summary>
@@ -266,6 +267,21 @@
         </section>
       </section>
       <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+    </section>
+
+    <section id="reading-provider-view" class="panel reading-subview" hidden aria-labelledby="reading-provider-heading">
+      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+      <h3 id="reading-provider-heading" tabindex="-1">Motores y servicios de voz</h3>
+      <p>Los servicios son opcionales. Las voces actuales continúan disponibles. Cada usuario gestiona su cuenta, sus cuotas y sus posibles gastos. TifloAcosta no proporciona claves compartidas.</p>
+      <p>El catálogo está en preparación: no se solicitan ni almacenan claves API y todavía no se pueden generar audios desde estos proveedores.</p>
+      <div aria-label="Proveedores de voz">
+        <details><summary>Kokoro — voces locales gratuitas, en evaluación</summary><p>Voces españolas Dora, Alex y Santa. La generación local en Safari todavía no está validada. No requiere cuenta ni clave API.</p><a href="https://hangry-labs.github.io/kokoroTTS/examples/?lang=es" target="_blank" rel="noopener noreferrer">Escuchar muestras de Kokoro</a></details>
+        <details><summary>Google — servicio externo, en evaluación</summary><p>Cuenta personal. El acceso gratuito depende del modelo y sus límites. Algunas modalidades requieren facturación. La integración aún no está activada.</p><a href="https://aistudio.google.com/api-keys" target="_blank" rel="noopener noreferrer">Obtener y administrar claves en Google AI Studio</a></details>
+        <details><summary>ElevenLabs — servicio externo, en evaluación</summary><p>Planes personales gratuitos limitados y opciones de pago. La configuración de claves y la reproducción todavía no están integradas.</p><a href="https://elevenlabs.io/app/settings/api-keys" target="_blank" rel="noopener noreferrer">Gestionar claves de ElevenLabs</a></details>
+        <details><summary>Microsoft Azure Speech — servicio externo, en evaluación</summary><p>Requiere cuenta y configuración de recursos; las condiciones gratuitas y comerciales dependen del servicio contratado.</p><a href="https://portal.azure.com/" target="_blank" rel="noopener noreferrer">Abrir portal de Azure</a></details>
+        <details><summary>Amazon Polly — servicio externo, en evaluación</summary><p>Requiere cuenta AWS y credenciales personales. La cuota gratuita tiene condiciones y el consumo adicional puede generar costes.</p><a href="https://aws.amazon.com/polly/" target="_blank" rel="noopener noreferrer">Información oficial de Amazon Polly</a></details>
+      </div>
+      <p role="status" aria-live="polite" id="reading-provider-status">Ningún proveedor externo está conectado.</p>
     </section>
 
     <section id="reading-visual-view" class="panel reading-subview" hidden aria-labelledby="reading-visual-view-heading">

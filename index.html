@@ -213,6 +213,7 @@
       <div class="resource-actions" aria-label="Ajustes de TifloLector">
         <button type="button" data-reading-view="reading-audio-view" aria-controls="reading-audio-view">Audio y voz</button>
         <button type="button" data-reading-view="reading-visual-view" aria-controls="reading-visual-view">Presentación visual</button>
+        <button type="button" data-reading-view="reading-provider-view" aria-controls="reading-provider-view">Motores y servicios de voz</button>
       </div>
       <details id="reading-general-settings">
         <summary id="reading-general-settings-summary">General</summary>
@@ -266,6 +267,53 @@
         </section>
       </section>
       <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+    </section>
+
+    <section id="reading-provider-view" class="panel reading-subview" hidden aria-labelledby="reading-provider-heading">
+      <button type="button" class="reading-subview-back" data-reading-back>Volver a Ajustes de TifloLector</button>
+      <h3 id="reading-provider-heading" tabindex="-1">Motores y servicios de voz</h3>
+      <p>Los servicios son opcionales. Las voces actuales continúan disponibles. Cada usuario gestiona su cuenta, sus cuotas y sus posibles gastos. TifloAcosta no proporciona claves compartidas.</p>
+      <p>El catálogo está en preparación: no se solicitan ni almacenan claves API y todavía no se pueden generar audios desde estos proveedores.</p>
+      <div aria-label="Proveedores de voz">
+        <details><summary>Kokoro — voces locales gratuitas, en evaluación</summary><p>Voces españolas Dora, Alex y Santa. La generación local en Safari todavía no está validada. No requiere cuenta ni clave API.</p><a href="https://hangry-labs.github.io/kokoroTTS/examples/?lang=es" target="_blank" rel="noopener noreferrer">Escuchar muestras de Kokoro</a></details>
+        <details id="reading-google-provider">
+          <summary>Google — configurar voces, en evaluación</summary>
+          <p>Google ofrece distintos servicios de voz. Esta guía se refiere a Gemini API mediante Google AI Studio; no es lo mismo que Google Cloud Text-to-Speech. La disponibilidad gratuita varía según el modelo y la cuenta.</p>
+          <p>Si ya tienes una clave, no necesitas generar otra. Por seguridad, no la pegues en TifloAcosta hasta que exista una conexión protegida.</p>
+          <nav aria-label="Pasos para preparar Google AI Studio">
+            <ol>
+              <li><a href="#reading-google-step-account">Acceder a tu cuenta de Google</a></li>
+              <li><a href="#reading-google-step-key">Crear o copiar una clave API</a></li>
+              <li><a href="#reading-google-step-connect">Conectar Google con TifloLector</a></li>
+            </ol>
+          </nav>
+          <section aria-labelledby="reading-google-step-account">
+            <h4 id="reading-google-step-account" tabindex="-1">Paso 1. Acceder a Google</h4>
+            <p>Si ya has iniciado sesión en tu cuenta de Google, continúa con el paso 2. Si no, Google te pedirá iniciar sesión en su propia página.</p>
+            <a href="https://aistudio.google.com/api-keys" target="_blank" rel="noopener noreferrer">Abrir Google AI Studio para iniciar sesión y gestionar claves (otra pestaña)</a>
+          </section>
+          <section aria-labelledby="reading-google-step-key">
+            <h4 id="reading-google-step-key" tabindex="-1">Paso 2. Crear o copiar una clave</h4>
+            <p>En la página de claves de Google AI Studio, busca el control para crear una clave API. Si tienes una, utiliza la existente cuando sea apropiado. Sigue los pasos que aparezcan en tu cuenta y copia la clave con el botón de Google. No la envíes por correo ni la compartas.</p>
+            <p>Si Google pide seleccionar un proyecto o habilitar servicios, sigue las instrucciones de su portal. No es necesario realizar compras para explorar el catálogo de TifloLector; revisa siempre las condiciones del modelo antes de consumirlo.</p>
+            <a href="https://ai.google.dev/gemini-api/docs/api-key" target="_blank" rel="noopener noreferrer">Instrucciones oficiales de Google para las claves API (otra pestaña)</a>
+          </section>
+          <section aria-labelledby="reading-google-step-connect">
+            <h4 id="reading-google-step-connect" tabindex="-1">Paso 3. Conectar con TifloLector</h4>
+            <p>La conexión segura todavía está en desarrollo. Por ahora no pegues la clave en esta web: no hay ningún campo para recibirla y no almacenamos credenciales. Cuando la integración esté disponible, este apartado permitirá conectar tu cuenta, comprobar el acceso y elegir voces.</p>
+            <p>Antes de convertir un libro, TifloLector mostrará una estimación del consumo. Puedes probar el recuento local con un fragmento de texto: este ensayo no envía contenido a ningún servidor ni calcula precios.</p>
+            <label for="reading-google-text-estimate">Texto para estimar caracteres (opcional)</label>
+            <textarea id="reading-google-text-estimate" rows="3" maxlength="50000" autocomplete="off" spellcheck="false"></textarea>
+            <p id="reading-google-text-estimate-result" role="status" aria-live="polite">0 caracteres. No se ha enviado ningún texto.</p>
+            <button id="reading-google-text-estimate-clear" type="button">Borrar texto de la estimación</button>
+            <p>Mientras tanto puedes seguir utilizando las voces del dispositivo sin cambiar ningún ajuste.</p>
+          </section>
+        </details>
+        <details><summary>ElevenLabs — servicio externo, en evaluación</summary><p>Planes personales gratuitos limitados y opciones de pago. La configuración de claves y la reproducción todavía no están integradas.</p><a href="https://elevenlabs.io/app/settings/api-keys" target="_blank" rel="noopener noreferrer">Gestionar claves de ElevenLabs</a></details>
+        <details><summary>Microsoft Azure Speech — servicio externo, en evaluación</summary><p>Requiere cuenta y configuración de recursos; las condiciones gratuitas y comerciales dependen del servicio contratado.</p><a href="https://portal.azure.com/" target="_blank" rel="noopener noreferrer">Abrir portal de Azure</a></details>
+        <details><summary>Amazon Polly — servicio externo, en evaluación</summary><p>Requiere cuenta AWS y credenciales personales. La cuota gratuita tiene condiciones y el consumo adicional puede generar costes.</p><a href="https://aws.amazon.com/polly/" target="_blank" rel="noopener noreferrer">Información oficial de Amazon Polly</a></details>
+      </div>
+      <p role="status" aria-live="polite" id="reading-provider-status">Catálogo informativo: todavía no hay conexiones externas activas.</p>
     </section>
 
     <section id="reading-visual-view" class="panel reading-subview" hidden aria-labelledby="reading-visual-view-heading">
@@ -618,6 +666,22 @@
     marksPanel.hidden = expanded;
     if (!expanded) document.getElementById('reading-marks-heading')?.setAttribute('tabindex', '-1');
     if (!expanded) document.getElementById('reading-marks-heading')?.focus();
+  });
+
+  const googleEstimateInput = document.getElementById('reading-google-text-estimate');
+  const googleEstimateStatus = document.getElementById('reading-google-text-estimate-result');
+  const googleEstimateClear = document.getElementById('reading-google-text-estimate-clear');
+  function updateGoogleEstimate() {
+    if (!googleEstimateInput || !googleEstimateStatus) return;
+    const count = Array.from(googleEstimateInput.value).length;
+    googleEstimateStatus.textContent = count + (count === 1 ? ' carácter' : ' caracteres') + '. No se ha enviado ningún texto.';
+  }
+  googleEstimateInput?.addEventListener('input', updateGoogleEstimate);
+  googleEstimateClear?.addEventListener('click', () => {
+    if (!googleEstimateInput) return;
+    googleEstimateInput.value = '';
+    updateGoogleEstimate();
+    googleEstimateInput.focus();
   });
 
   document.addEventListener('click', event => {

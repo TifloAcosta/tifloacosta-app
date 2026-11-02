@@ -548,7 +548,9 @@
     for (const [value, es, en] of [
       ['block','Bloque de texto','Text block'],
       ['paragraph','Párrafo','Paragraph'],
-      ['sentence','Frase','Sentence']
+      ['sentence','Frase','Sentence'],
+      ['minute','Un minuto (aproximado en texto)','One minute (estimated for text)'],
+      ['bookmark','Marca','Bookmark']
     ]) {
       const option = document.createElement('option');
       option.value = value;
@@ -2838,8 +2840,13 @@
       excerpt: String(block?.text || '').slice(0, 220),
       reference: t().position(blockIndex + 1, documentModel?.blocks?.length || 0)
     });
-    els.markStatus.textContent = mark ? t().bookmarked : t().bookmarkFailed;
-    if (mark) await renderMarks();
+    els.markStatus.textContent = mark
+      ? (language() === 'en' ? 'Bookmark created and saved.' : 'Marca creada y guardada correctamente.')
+      : t().bookmarkFailed;
+    if (mark) {
+      await renderMarks();
+      els.markStatus.textContent = language() === 'en' ? 'Bookmark created and saved.' : 'Marca creada y guardada correctamente.';
+    }
   }
 
   async function renderMarks() {
@@ -3281,6 +3288,55 @@
 
   function move(direction) {
     if (!readingSession || !documentModel?.blocks?.length) return;
+    if (navigationUnit === 'bookmark') {
+      void (async () => {
+        if (!libraryClient || !currentBookId) {
+          els.markStatus.textContent = language() === 'en' ? 'No saved bookmarks for this document.' : 'No hay marcas disponibles para este documento.';
+          return;
+        }
+        const marks = (await libraryClient.listMarks(currentBookId, 'bookmark'))
+          .filter(item => Number.isFinite(Number(item.blockIndex)))
+          .sort((a,b) => Number(a.blockIndex)-Number(b.blockIndex) || Number(a.unitIndex)-Number(b.unitIndex));
+        const currentBlock = Number(readingSession.snapshot().blockIndex) || 0;
+        const target = direction > 0
+          ? marks.find(item => Number(item.blockIndex) > currentBlock || (Number(item.blockIndex) === currentBlock && Number(item.unitIndex) > currentUnitIndex))
+          : [...marks].reverse().find(item => Number(item.blockIndex) < currentBlock || (Number(item.blockIndex) === currentBlock && Number(item.unitIndex) < currentUnitIndex));
+        if (!target) {
+          els.markStatus.textContent = language() === 'en' ? 'No more bookmarks in this direction.' : 'No hay más marcas en esa dirección.';
+          return;
+        }
+        readingSession = shared.createReadingSession({blocks:documentModel.blocks,initialIndex:Number(target.blockIndex)});
+        currentUnitIndex = Number(target.unitIndex) || 0;
+        renderBlock();
+        await persistProgress({unitIndex:currentUnitIndex});
+        await rebuildSpeech({blockIndex:Number(target.blockIndex),unitIndex:currentUnitIndex});
+        els.markStatus.textContent = language() === 'en' ? 'Moved to saved bookmark.' : 'Situado en la marca guardada.';
+        queueMicrotask(() => els.block.focus());
+      })().catch(() => { els.markStatus.textContent = language() === 'en' ? 'Could not open bookmark.' : 'No se pudo abrir la marca.'; });
+      return;
+    }
+    if (navigationUnit === 'minute') {
+      if (activeAudio) {
+        activeAudio.currentTime = Math.max(0, Math.min(Number.isFinite(activeAudio.duration) ? activeAudio.duration : Number.MAX_SAFE_INTEGER, activeAudio.currentTime + direction * 60));
+        return;
+      }
+      const blocks = documentModel.blocks;
+      let index = Number(readingSession.snapshot().blockIndex) || 0;
+      let words = 0;
+      const targetWords = 150 * (Number(els.rate?.value) || 1);
+      while (words < targetWords && index + (direction < 0 ? -1 : 1) >= 0 && index + (direction < 0 ? -1 : 1) < blocks.length) {
+        index += direction < 0 ? -1 : 1;
+        words += String(blocks[index]?.text || '').trim().split(/\s+/u).filter(Boolean).length;
+      }
+      readingSession = shared.createReadingSession({blocks, initialIndex:index});
+      currentUnitIndex = 0;
+      renderBlock();
+      void persistProgress({unitIndex:0});
+      void speechController?.moveTo?.({blockIndex:index,unitIndex:0});
+      els.markStatus.textContent = language() === 'en' ? 'Moved approximately one minute of reading.' : 'Desplazamiento aproximado de un minuto de lectura.';
+      queueMicrotask(() => els.block.focus());
+      return;
+    }
     if (navigationUnit === 'sentence') {
       buildSentenceUnits();
       const currentBlock = Number(readingSession.snapshot().blockIndex) || 0;

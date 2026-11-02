@@ -287,7 +287,7 @@
           <a id="reading-google-external-link" href="https://aistudio.google.com/api-keys" target="_blank" rel="noopener noreferrer">Abrir Google AI Studio para crear la clave (nueva pestaña)</a>
           <h5>Paso 2. Crear y copiar la clave</h5>
           <ol><li>Escribe un nombre para identificar tu clave, si Google lo solicita.</li><li>Activa el botón de Google para crear la clave.</li><li>Activa el botón de Google para copiarla.</li></ol>
-          <p>Después de copiarla, vuelve a la pestaña de TifloAcosta. Google no cerrará automáticamente su página. Al regresar, el foco irá al paso 3. Si estás en iPhone, utiliza el selector de pestañas de Safari para volver a TifloAcosta.</p>
+          <p>Después de copiarla, vuelve a la pestaña de TifloAcosta. Google no cerrará automáticamente su página. Al regresar, el foco irá al paso 3. En Windows con JAWS, vuelve a la pestaña anterior con Control + Mayús + Tabulador. En iPhone, utiliza el selector de pestañas de Safari.</p>
           <details><summary>Necesito ayuda adicional para obtener la clave</summary>
             <p>Si Google solicita crear o seleccionar un proyecto, sigue los controles oficiales. No es necesario crear una segunda clave si ya tienes una utilizable.</p>
             <a href="https://ai.google.dev/gemini-api/docs/api-key" target="_blank" rel="noopener noreferrer">Consultar las instrucciones oficiales de Google</a>
@@ -677,11 +677,13 @@
   googleExternalLink?.addEventListener('click', () => {
     returningFromGoogle = true;
   });
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden || !returningFromGoogle || providerGuide?.hidden) return;
+  function returnToGoogleStepThree() {
+    if (!returningFromGoogle || providerGuide?.hidden || document.hidden) return;
     returningFromGoogle = false;
     queueMicrotask(() => googleConnectHeading?.focus());
-  });
+  }
+  document.addEventListener('visibilitychange', returnToGoogleStepThree);
+  window.addEventListener('focus', returnToGoogleStepThree);
   providerClose?.addEventListener('click', () => {
     providerGuide.hidden = true;
     if (providerList) providerList.hidden = false;

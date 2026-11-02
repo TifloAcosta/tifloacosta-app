@@ -34,3 +34,11 @@ No ejecutar este prototipo con privilegios de administrador.
 4. Permisos mínimos, límites de consumo, cancelación de trabajos, control de costos y registro sin datos sensibles.
 5. Empaquetado, firma de instalador y accesibilidad con JAWS y NVDA.
 6. Probar una muestra de audio con Google Gemini TTS en una cuenta personal de prueba, sin comprometer datos.
+
+## Almacenamiento DPAPI preparado en esta fase
+La biblioteca `credential_vault.py` cifra y descifra una clave por proveedor utilizando Windows DPAPI, asociada al usuario del sistema. Incluye guardar, leer internamente, comprobar si existe y borrar. **No hay endpoint HTTP para estas operaciones**: ninguna página web puede pedir, guardar ni recuperar claves mediante el prototipo.
+
+Prueba para desarrolladores en Windows:
+`python -m unittest discover -s windows-voice-companion -p "test_*.py"`
+
+La prueba real del cifrado DPAPI requiere Windows; no se ha ejecutado con una cuenta personal de usuario. Todavía se requieren emparejamiento autenticado, autorización explícita, defensa contra CSRF y DNS rebinding, permisos de archivos, empaquetado y pruebas con JAWS antes de habilitar claves reales.

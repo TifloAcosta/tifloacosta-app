@@ -567,7 +567,9 @@
       const labels = {
         block: language() === 'en' ? 'text block' : 'bloque de texto',
         paragraph: language() === 'en' ? 'paragraph' : 'párrafo',
-        sentence: language() === 'en' ? 'sentence' : 'frase'
+        sentence: language() === 'en' ? 'sentence' : 'frase',
+        minute: language() === 'en' ? 'minute' : 'minuto',
+        bookmark: language() === 'en' ? 'bookmark' : 'marca'
       };
       const label = labels[unit.value] || labels.block;
       previousUnit.textContent = language() === 'en' ? `Previous ${label}` : `Anterior: ${label}`;

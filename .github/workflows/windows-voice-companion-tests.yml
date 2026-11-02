@@ -1,0 +1,27 @@
+name: Windows voice companion tests
+on:
+  push:
+    branches:
+      - feat/windows-voice-companion-prototype
+    paths:
+      - 'windows-voice-companion/**'
+      - '.github/workflows/windows-voice-companion-tests.yml'
+  pull_request:
+    paths:
+      - 'windows-voice-companion/**'
+permissions:
+  contents: read
+jobs:
+  unittest:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run tests
+        run: python -m unittest discover -s windows-voice-companion -p "test_*.py" -v

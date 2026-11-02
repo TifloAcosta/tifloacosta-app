@@ -301,6 +301,11 @@
           <section aria-labelledby="reading-google-step-connect">
             <h4 id="reading-google-step-connect" tabindex="-1">Paso 3. Conectar con TifloLector</h4>
             <p>La conexión segura todavía está en desarrollo. Por ahora no pegues la clave en esta web: no hay ningún campo para recibirla y no almacenamos credenciales. Cuando la integración esté disponible, este apartado permitirá conectar tu cuenta, comprobar el acceso y elegir voces.</p>
+            <p>Antes de convertir un libro, TifloLector mostrará una estimación del consumo. Puedes probar el recuento local con un fragmento de texto: este ensayo no envía contenido a ningún servidor ni calcula precios.</p>
+            <label for="reading-google-text-estimate">Texto para estimar caracteres (opcional)</label>
+            <textarea id="reading-google-text-estimate" rows="3" maxlength="50000" autocomplete="off" spellcheck="false"></textarea>
+            <p id="reading-google-text-estimate-result" role="status" aria-live="polite">0 caracteres. No se ha enviado ningún texto.</p>
+            <button id="reading-google-text-estimate-clear" type="button">Borrar texto de la estimación</button>
             <p>Mientras tanto puedes seguir utilizando las voces del dispositivo sin cambiar ningún ajuste.</p>
           </section>
         </details>
@@ -661,6 +666,22 @@
     marksPanel.hidden = expanded;
     if (!expanded) document.getElementById('reading-marks-heading')?.setAttribute('tabindex', '-1');
     if (!expanded) document.getElementById('reading-marks-heading')?.focus();
+  });
+
+  const googleEstimateInput = document.getElementById('reading-google-text-estimate');
+  const googleEstimateStatus = document.getElementById('reading-google-text-estimate-result');
+  const googleEstimateClear = document.getElementById('reading-google-text-estimate-clear');
+  function updateGoogleEstimate() {
+    if (!googleEstimateInput || !googleEstimateStatus) return;
+    const count = Array.from(googleEstimateInput.value).length;
+    googleEstimateStatus.textContent = count + (count === 1 ? ' carácter' : ' caracteres') + '. No se ha enviado ningún texto.';
+  }
+  googleEstimateInput?.addEventListener('input', updateGoogleEstimate);
+  googleEstimateClear?.addEventListener('click', () => {
+    if (!googleEstimateInput) return;
+    googleEstimateInput.value = '';
+    updateGoogleEstimate();
+    googleEstimateInput.focus();
   });
 
   document.addEventListener('click', event => {

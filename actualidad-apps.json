@@ -120,6 +120,18 @@
     "publishedAt": null
   },
   {
+    "id": "applevis-apps-203d36f6ea0f2fa9",
+    "title": "AudioGameAccess",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/audiogameaccess",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "AudioGameAccess is a platform of games played entirely by ear, made for blind and visually impaired people. Sounds guide you, and VoiceOver tells you everything else. The games: - archery, in three levels, and bowling; - Feather Flight, a skill game; - card games: Ninety-nine, Crazy Eights, Golf, President, a colour card game, and a car race played with cards; - dice games: a five-dice game, with its combinations to fill, and Farkle; - board games: Parcheesi and Camembert Culture, a general knowledge quiz; - Four in a Row, a puzzle game: be the first to line up four tokens in an upright grid; - hangman, Sea Battle and a word game on a grid of letters; - One Word, a cooperative word game online, for 3 to 8 players: each one helps a player guess a mystery word, with a single word; - Métropole, a city-building game where you are the mayor. Every game has its own manual, in English, French, Spanish, Italian and Portuguese. On iPhone, two ways to play: - with VoiceOver, the whole screen becomes the game: you play with gestures, without looking for buttons; - without VoiceOver, real buttons, cards and dice to touch, in large text and high-contrast colours for visually impaired players. Play with others: online, open a table, invite your friends or play against bots. Chat in writing and by voice, send private messages, keep a friends list and follow the leaderboards. A game can be saved and resumed later. Offline, every game but One Word can be played alone or against bots, with no account. To play online, create a free account with your email address. Other players never see it. You can block or report a player, and delete your account from the app. 3D sound on headphones places every sound around you.",
+    "publishedAt": "2026-11-02T02:49:43.000Z"
+  },
+  {
     "id": "applevis-apps-ff393973c3915870",
     "title": "Voice-enabled Makeup Assistant",
     "sourceId": "applevis-apps",
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "#1 Free News App in Ireland The Journal is Ireland’s most popular online news source. Our multi-award winning team delivers breaking news, hard-hitting investigations and smart commentary on the issues that matter to you. We explain, we factcheck, we listen through interactive and multimedia storytelling, all in a user-friendly format. You can choose to use The Journal for free or you can support our independent journalism with a subscription. As a subscriber you also get The Journal ad-free. Check out our Terms of Use for all details on using The Journal ( https://www.thejournal.ie/terms/ ). ********************************************************* Awards for our journalism: Daphne Caruana Galizia Prize 2024 The Mary Raftery Prize for outstanding social affairs journalism 2019, 2020, 2021, 2022, 2023 Media Literacy Ireland, Media Champion 2023 The Irish Red Cross Humanitarian Journalism Award 2022, 2021, 2020 New York Festival of Radio, Gold medallist, Best Documentary Podcast 2020 Celtic Media Festival, Best Radio Documentary 2020 Justice Media Awards, multiple, 2016-2025 *********** “Really impressed by The Journal …and its focus on citizen storytelling” - Mark Little, founder of Storyful, Kinzen \"Best Addition to Irish Media\" - Ian Dempsey “A valuable public service” - John FitzGerald, ESRI ********** > Download now for Free FEATURES: - Trustworthy breaking news and opinion from Ireland and beyond - Get only the most important news alerts straight to your phone - Clear-sighted analysis and explainers to guide you through hot topics - Submit photos, video and tips directly to our journalists from your device - Listen to award-winning podcasts such as The Explainer, Stardust and The Candidate in-app - Vote in our daily topical polls - Send a question to Ireland’s only verified FactCheck team - Submit story ideas to The Journal Investigates - Hear the diverse stories of a modern Ireland in our Voices opinion section - Contribute to and read our popular Money Diaries, Sitdown Sunday and other weekly features - Test out our fun and informative news quizzes - Join our comments community - Share articles directly from the app to your social networks, to email and your messaging apps - Sign up for our behind-the-scenes newsletters on the climate crisis, public health, misinformation and more - Find brilliant sports storytelling from our sister publication The42 Follow us on instagram.com/thejournal_ie, facebook.com/thejournal.ie, tiktok.com/@thejournal_ie, X.com/thejournal_ie, for latest updates",
     "publishedAt": "2026-10-17T13:33:00.000Z"
-  },
-  {
-    "id": "applevis-apps-542bc1657eb1c8c3",
-    "title": "Sortalis",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/sortalis",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Sortalis is a dice-building roguelike inspired by Farkle. Roll, score, and decide how far you’re willing to push your luck—then spend your winnings on Charms and upgrades that transform your dice, strengthen your strategy, and rewrite the rules. Every run becomes a new engine to build, exploit, and inevitably push a little too far. **What’s in the game?** • Endless challenges that grow tougher and demand new strategies • Over 150 upgrades to discover and combine into powerful builds • Rewards, unlocks, achievements, Dice Bags, and challenges to master • Multiplayer draft mode! **Roll, Set, or Bank** Roll and select scoring combos carefully. Roll again to make it bigger—or Farkle and lose the lot. Bank before your luck runs out. **Spend It in The Shop** Between Bouts, spend your winnings on Charms, Packs, Action Cards, and other upgrades. Don’t like what’s on the shelf? Redraw it and hunt for the piece your build needs. **Face The House** Every night ends with a boss that changes the rules. THE MISER, for example, won’t let you Bank until your Pot reaches 500. **Then Do It All Again** Every Bank and Farkle adds to your final score. Unlock 14 Dice Bags, tabletops, discover new combinations, and see how far you can push your next run.",
-    "publishedAt": "2026-10-16T10:36:52.000Z"
   }
 ]

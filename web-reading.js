@@ -1124,6 +1124,48 @@
     });
   }
 
+  function setupSpanishPhonon() {
+    const host = document.getElementById('reading-provider-list');
+    if (!host || document.getElementById('phonon-es-setup')) return;
+    const section = document.createElement('section');
+    section.id = 'phonon-es-setup';
+    section.innerHTML = `
+      <h4>Phonon español: modelo local del usuario</h4>
+      <p>Uso no comercial (CC BY-NC 4.0). Para acceder a los archivos debes aceptar las condiciones oficiales en Hugging Face. TifloAcosta no solicita ni almacena tu contraseña ni tu token.</p>
+      <p><a href="https://huggingface.co/gradium/phonon-40m-es" target="_blank" rel="noopener noreferrer">Abrir condiciones y archivos oficiales de Phonon español (nueva pestaña)</a></p>
+      <label><input id="phonon-es-consent" type="checkbox"> He leído y aceptado las condiciones oficiales de acceso y la licencia CC BY-NC 4.0 para uso no comercial.</label>
+      <label for="phonon-es-files">Elegir archivos del modelo descargados de Hugging Face (selección múltiple)</label>
+      <input id="phonon-es-files" type="file" multiple accept=".json,.gguf,.safetensors" disabled>
+      <button id="phonon-es-load" type="button" disabled>Activar Phonon español</button>
+      <p role="status" aria-live="polite" id="phonon-es-status">Modelo español sin cargar.</p>
+      <p>Selecciona conjuntamente model.q8.gguf, config.json, tokenizer.json y default-voice.safetensors (u otra voz compatible). Los archivos permanecen en tu navegador y deberás volver a seleccionarlos al recargar la página.</p>`;
+    host.append(section);
+    const consent = section.querySelector('#phonon-es-consent');
+    const files = section.querySelector('#phonon-es-files');
+    const button = section.querySelector('#phonon-es-load');
+    const status = section.querySelector('#phonon-es-status');
+    consent.addEventListener('change', () => {
+      files.disabled = !consent.checked;
+      button.disabled = !consent.checked || !files.files.length;
+    });
+    files.addEventListener('change', () => { button.disabled = !consent.checked || !files.files.length; });
+    button.addEventListener('click', async () => {
+      try {
+        if (!consent.checked) throw new Error('Es necesario aceptar las condiciones.');
+        await pause();
+        speechAdapter.configureSpanishPhonon(files.files);
+        const option = document.createElement('option');
+        option.value = 'phonon-40m-es-local';
+        option.textContent = 'Phonon español — modelo local autorizado';
+        if (![...els.voice.options].some(item => item.value === option.value)) els.voice.append(option);
+        els.voice.value = option.value;
+        saveWebSettings();
+        await rebuildSpeech();
+        status.textContent = 'Modelo configurado. Ya puedes reproducir el documento con Phonon español.';
+      } catch (error) { status.textContent = 'No se pudo configurar: ' + String(error?.message || error); }
+    });
+  }
+
   function populateVoices() {
     ensureVoiceRefreshControl();
     const stored = readWebSettings();
@@ -3493,6 +3535,7 @@
 
   document.getElementById('lang-es')?.addEventListener('click', () => setTimeout(localize, 0));
   document.getElementById('lang-en')?.addEventListener('click', () => setTimeout(localize, 0));
+  setupSpanishPhonon();
   globalThis.speechSynthesis?.addEventListener?.('voiceschanged', populateVoices);
   [150, 500, 1200, 2500].forEach(delay => {
     globalThis.setTimeout?.(populateVoices, delay);

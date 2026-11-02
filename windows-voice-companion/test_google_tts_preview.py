@@ -9,7 +9,8 @@ from google_tts_preview import _body, SynthesisError, synthesize
 class GoogleTests(unittest.TestCase):
     def test_request_voice_schema(self):
         config = _body("Hola", "Kore")["generationConfig"]
-        self.assertEqual(config["speechConfig"]["voiceConfig"]["prebuiltVoiceConfig"]["voiceName"], "Kore")
+        self.assertEqual(config["speechConfig"]["voiceConfig"]["voice"], "Kore")
+        self.assertEqual(config["responseFormat"]["audio"], {"mimeType": "AUDIO_L16", "sampleRate": 24000})
 
     def test_pcm_audio_returns_wav(self):
         pcm = struct.pack("<hhhh", 0, 120, -120, 0)

@@ -14,6 +14,13 @@ ALLOWED_ORIGINS = frozenset({
 })
 
 class Handler(BaseHTTPRequestHandler):
+    def _host_allowed(self):
+        # Prevent unexpected Host headers (including DNS rebinding).
+        port = self.server.server_port
+        return self.headers.get("Host", "") in {
+            f"127.0.0.1:{port}", f"localhost:{port}"
+        }
+
     def _origin_allowed(self):
         return self.headers.get("Origin", "") in ALLOWED_ORIGINS
 
@@ -28,6 +35,10 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
+        if not self._host_allowed():
+            self._headers(403)
+            self.wfile.write(b'{"error":"host_not_allowed"}')
+            return
         if self.path != "/health":
             self._headers(404)
             self.wfile.write(b'{"error":"not_found"}')

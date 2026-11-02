@@ -298,6 +298,12 @@
           <p>Conserva la clave en un lugar seguro. La conexión con TifloLector no está activada todavía. No introduzcas aquí claves ni textos secretos; no existe un formulario de envío.</p>
           <p>Cuando el servicio esté disponible, esta pantalla permitirá conectar la cuenta, comprobarla y seleccionar las voces, sin volver al catálogo de otros proveedores.</p>
           <p id="reading-google-status" role="status" aria-live="polite">Google todavía no está conectado.</p>
+          <div id="reading-local-companion-test">
+            <h5>Prueba del componente de Windows</h5>
+            <p>Prueba técnica opcional. Solo comprueba si está iniciado el servicio local en este ordenador. No conecta Google ni solicita claves o documentos.</p>
+            <button type="button" id="reading-local-companion-check">Comprobar componente local de Windows</button>
+            <p id="reading-local-companion-result" role="status" aria-live="polite">Comprobación no iniciada.</p>
+          </div>
           <button type="button" id="reading-google-close">Volver al listado de motores de voz</button>
         </section>
       <div id="reading-provider-rest" aria-label="Otros proveedores">
@@ -819,5 +825,40 @@
 </script>
 <script data-goatcounter="https://tifloacosta.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
+
+<script>
+(() => {
+  'use strict';
+  const button = document.getElementById('reading-local-companion-check');
+  const status = document.getElementById('reading-local-companion-result');
+  if (!button || !status) return;
+  button.addEventListener('click', async () => {
+    button.disabled = true;
+    status.textContent = 'Comprobando el servicio local de Windows…';
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 3500);
+      try {
+        const response = await fetch('http://127.0.0.1:38761/health', {
+          method: 'GET', mode: 'cors', credentials: 'omit',
+          cache: 'no-store', signal: controller.signal
+        });
+        if (!response.ok) throw new Error('unavailable');
+        const result = await response.json();
+        if (result.app !== 'TifloAcosta Voice Companion' || result.stage !== 'discovery_only') {
+          throw new Error('unexpected');
+        }
+        status.textContent = 'Servicio local detectado. Esta versión solo permite comprobar la conexión; las voces de Google todavía no están disponibles.';
+      } finally {
+        clearTimeout(timeout);
+      }
+    } catch (_) {
+      status.textContent = 'No ha sido posible detectar el servicio. Comprueba que esté iniciado en Windows. El navegador también podría bloquear el acceso local. No se ha enviado ninguna clave.';
+    } finally {
+      button.disabled = false;
+    }
+  });
+})();
+</script>
 </body>
 </html>

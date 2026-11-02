@@ -11,3 +11,12 @@ test('voice provider catalog is an optional accessible TifloLector settings subv
  assert.match(html,/no se solicitan ni almacenan claves API/);
  assert.match(html,/id="reading-provider-status"/);
 });
+
+test('Google assistant gives direct official links and never requests a secret before secure integration',()=>{
+ assert.match(html,/id="reading-google-provider"/);
+ for(const id of ['reading-google-step-account','reading-google-step-key','reading-google-step-connect']) assert.ok(html.includes('id="'+id+'"'));
+ assert.match(html,/https:\/\/aistudio\.google\.com\/api-keys/);
+ assert.match(html,/https:\/\/ai\.google\.dev\/gemini-api\/docs\/api-key/);
+ assert.match(html,/no pegues la clave en esta web/);
+ assert.doesNotMatch(html,/id="reading-google-api-key-input"/);
+});

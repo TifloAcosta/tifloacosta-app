@@ -92,6 +92,7 @@ export function createWebReadingSpeechAdapter({
     const text = clean(units[index]?.text);
     if (!text) return false;
     emitState('ttsState');
+    emitState('ttsPosition');
     try {
       const engine = await loadPhonon();
       if (token !== serial || !playing) return false;
@@ -345,7 +346,9 @@ export function createWebReadingSpeechAdapter({
     }
     if (playing) return true;
     playing = true;
-    return speakCurrent();
+    const started = speakCurrent();
+    if (!started) { playing = false; emitState('ttsState'); }
+    return started;
   }
 
   async function pauseTts() {

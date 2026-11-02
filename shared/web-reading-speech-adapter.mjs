@@ -440,6 +440,8 @@ export function createWebReadingSpeechAdapter({
     getTtsState,
     stopTts,
     configureSpanishPhonon,
+    prepareSpanishPhonon: () => loadPhonon(true),
+    hasSpanishPhonon: () => Boolean(spanishModel),
     addListener: emitter.addListener
   };
 }

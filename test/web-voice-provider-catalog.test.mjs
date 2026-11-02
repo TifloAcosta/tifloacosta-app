@@ -33,3 +33,10 @@ test('Windows JAWS external-tab return is documented and focus recovery is avail
  assert.match(html,/window.addEventListener\('focus', returnToGoogleStepThree\)/);
  assert.match(html,/document.addEventListener\('visibilitychange', returnToGoogleStepThree\)/);
 });
+
+test('Google setup offers an explicit screen-reader accessible continue action after copying',()=>{
+ assert.match(html,/id="reading-google-copied"/);
+ assert.match(html,/Ya he copiado la clave\. Ir al paso 3/);
+ assert.match(html,/googleConnectHeading\?\.focus\(\)/);
+ assert.match(html,/No es posible añadir botones dentro de la página privada de Google/);
+});

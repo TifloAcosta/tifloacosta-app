@@ -270,7 +270,7 @@
     </section>
 
     <section id="reading-provider-view" class="panel reading-subview" hidden aria-labelledby="reading-provider-heading">
-      <button type="button" class="reading-subview-back" data-reading-back>Volver a TifloLector</button>
+      <button type="button" class="reading-subview-back" data-reading-back>Volver a Ajustes de TifloLector</button>
       <h3 id="reading-provider-heading" tabindex="-1">Motores y servicios de voz</h3>
       <p>Los servicios son opcionales. Las voces actuales continúan disponibles. Cada usuario gestiona su cuenta, sus cuotas y sus posibles gastos. TifloAcosta no proporciona claves compartidas.</p>
       <p>El catálogo está en preparación: no se solicitan ni almacenan claves API y todavía no se pueden generar audios desde estos proveedores.</p>
@@ -279,7 +279,7 @@
         <details id="reading-google-provider">
           <summary>Google — configurar voces, en evaluación</summary>
           <p>Google ofrece distintos servicios de voz. Esta guía se refiere a Gemini API mediante Google AI Studio; no es lo mismo que Google Cloud Text-to-Speech. La disponibilidad gratuita varía según el modelo y la cuenta.</p>
-          <p>Si ya tienes una clave, puedes ir directamente al paso 3. No necesitas obtener otra.</p>
+          <p>Si ya tienes una clave, no necesitas generar otra. Por seguridad, no la pegues en TifloAcosta hasta que exista una conexión protegida.</p>
           <nav aria-label="Pasos para preparar Google AI Studio">
             <ol>
               <li><a href="#reading-google-step-account">Acceder a tu cuenta de Google</a></li>
@@ -308,7 +308,7 @@
         <details><summary>Microsoft Azure Speech — servicio externo, en evaluación</summary><p>Requiere cuenta y configuración de recursos; las condiciones gratuitas y comerciales dependen del servicio contratado.</p><a href="https://portal.azure.com/" target="_blank" rel="noopener noreferrer">Abrir portal de Azure</a></details>
         <details><summary>Amazon Polly — servicio externo, en evaluación</summary><p>Requiere cuenta AWS y credenciales personales. La cuota gratuita tiene condiciones y el consumo adicional puede generar costes.</p><a href="https://aws.amazon.com/polly/" target="_blank" rel="noopener noreferrer">Información oficial de Amazon Polly</a></details>
       </div>
-      <p role="status" aria-live="polite" id="reading-provider-status">Ningún proveedor externo está conectado.</p>
+      <p role="status" aria-live="polite" id="reading-provider-status">Catálogo informativo: todavía no hay conexiones externas activas.</p>
     </section>
 
     <section id="reading-visual-view" class="panel reading-subview" hidden aria-labelledby="reading-visual-view-heading">

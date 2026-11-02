@@ -42,3 +42,6 @@ Prueba para desarrolladores en Windows:
 `python -m unittest discover -s windows-voice-companion -p "test_*.py"`
 
 La prueba real del cifrado DPAPI requiere Windows; no se ha ejecutado con una cuenta personal de usuario. Todavía se requieren emparejamiento autenticado, autorización explícita, defensa contra CSRF y DNS rebinding, permisos de archivos, empaquetado y pruebas con JAWS antes de habilitar claves reales.
+
+## Autorización local (prototipo aislado)
+La biblioteca `consent_gate.py` crea permisos aleatorios de un solo uso, limitados a un proveedor, una operación y un plazo breve. Incluye revocación y pruebas. **No está conectada al servidor HTTP**. La web no puede solicitar ni concederse permisos y todavía no hay interfaz local de confirmación. Antes de exponer operaciones reales será imprescindible añadir consentimiento accesible en una interfaz local confiable, emparejamiento entre la web y el componente, protección contra solicitudes cruzadas, control de coste y pruebas en Windows. Los permisos temporales de este prototipo no constituyen por sí solos un sistema seguro de autenticación.

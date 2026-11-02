@@ -55,19 +55,36 @@ export function createWebReadingSpeechAdapter({
   const PHONON_ID = 'phonon-31m-en';
   let phonon = null;
   let phononLoading = null;
+  let spanishModel = null;
+  let spanishUrls = [];
+  const PHONON_ES = 'phonon-40m-es-local';
+  function configureSpanishPhonon(files) {
+    if (playing || phononAudio) throw new Error('Detén la lectura antes de cambiar el modelo.');
+    const entries = Array.from(files || []);
+    const find = (name) => entries.find(file => file.name === name);
+    const weights = find('model.q8.gguf');
+    const config = find('config.json');
+    const tokenizer = find('tokenizer.json');
+    const voice = find('default-voice.safetensors') || entries.find(file => /\.safetensors$/i.test(file.name));
+    if (!weights || !config || !tokenizer || !voice) throw new Error('Selecciona model.q8.gguf, config.json, tokenizer.json y un archivo de voz .safetensors.');
+    spanishUrls.forEach(url => URL.revokeObjectURL(url));
+    spanishUrls = [];
+    const url = file => { const value = URL.createObjectURL(file); spanishUrls.push(value); return value; };
+    spanishModel = { weights: { q8: url(weights) }, config: url(config), tokenizer: url(tokenizer), voices: { default: url(voice) }, defaultVoice: 'default' };
+    phononLoading = null;
+    return true;
+  }
   let phononAudio = null;
   let phononUrl = null;
 
-  async function loadPhonon() {
-    if (phonon) return phonon;
-    if (!phononLoading) {
-      phononLoading = import('https://esm.sh/phonon-tts?bundle').then(
-        module => module.PhononTTS.load({ lang: 'en' })
-      ).then(instance => { phonon = instance; return instance; }).catch(error => {
-        phononLoading = null;
-        throw error;
-      });
-    }
+  async function loadPhonon(spanish = false) {
+    if (spanish && !spanishModel) throw new Error('Primero carga los archivos autorizados del modelo español.');
+    if (!spanish && phonon) return phonon;
+    const module = await import('https://esm.sh/phonon-tts?bundle');
+    if (spanish) return module.PhononTTS.load({ lang: 'es', model: spanishModel });
+    if (!phononLoading) phononLoading = module.PhononTTS.load({ lang: 'en' })
+      .then(instance => { phonon = instance; return instance; })
+      .catch(error => { phononLoading = null; throw error; });
     return phononLoading;
   }
 
@@ -94,7 +111,7 @@ export function createWebReadingSpeechAdapter({
     emitState('ttsState');
     emitState('ttsPosition');
     try {
-      const engine = await loadPhonon();
+      const engine = await loadPhonon(session.voiceId === PHONON_ES);
       if (token !== serial || !playing) return false;
       const wav = await engine.synthWav(text);
       if (token !== serial || !playing) return false;
@@ -328,7 +345,7 @@ export function createWebReadingSpeechAdapter({
 
   async function playTts() {
     if (!session || !prepared || ended) return false;
-    if (session.voiceId === PHONON_ID) {
+    if ((session.voiceId === PHONON_ID || session.voiceId === PHONON_ES)) {
       if (paused && phononAudio) {
         try { await phononAudio.play(); } catch { return false; }
         paused = false; playing = true; emitState('ttsState'); return true;
@@ -413,6 +430,7 @@ export function createWebReadingSpeechAdapter({
     seekTts,
     getTtsState,
     stopTts,
+    configureSpanishPhonon,
     addListener: emitter.addListener
   };
 }

@@ -50,6 +50,91 @@ export function createWebReadingSpeechAdapter({
   let ended = false;
   let currentUtterance = null;
   let serial = 0;
+  // Phonon 31m English is public (Apache 2.0). The Spanish 40m model
+  // is gated and MUST NOT be loaded from a public browser token.
+  const PHONON_ID = 'phonon-31m-en';
+  let phonon = null;
+  let phononLoading = null;
+  let phononAudio = null;
+  let phononUrl = null;
+
+  async function loadPhonon() {
+    if (phonon) return phonon;
+    if (!phononLoading) {
+      phononLoading = import('https://esm.sh/phonon-tts?bundle').then(
+        module => module.PhononTTS.load({ lang: 'en' })
+      ).then(instance => { phonon = instance; return instance; }).catch(error => {
+        phononLoading = null;
+        throw error;
+      });
+    }
+    return phononLoading;
+  }
+
+  function stopPhononAudio() {
+    const audio = phononAudio;
+    phononAudio = null;
+    if (audio) {
+      audio.onended = null;
+      audio.onerror = null;
+      audio.pause();
+      audio.removeAttribute('src');
+      audio.load();
+    }
+    if (phononUrl) URL.revokeObjectURL(phononUrl);
+    phononUrl = null;
+  }
+
+  async function speakPhonon() {
+    if (!session || !prepared || ended || cursor >= units.length) return false;
+    const token = ++serial;
+    const index = cursor;
+    const text = clean(units[index]?.text);
+    if (!text) return false;
+    emitState('ttsState');
+    try {
+      const engine = await loadPhonon();
+      if (token !== serial || !playing) return false;
+      const wav = await engine.synthWav(text);
+      if (token !== serial || !playing) return false;
+      stopPhononAudio();
+      phononUrl = URL.createObjectURL(wav);
+      const audio = new Audio(phononUrl);
+      phononAudio = audio;
+      audio.playbackRate = Number(session.rate) || 1;
+      audio.onended = () => {
+        if (token !== serial) return;
+        stopPhononAudio();
+        if (cursor + 1 < units.length && playing) {
+          cursor += 1;
+          emitState('ttsPosition');
+          void speakPhonon();
+        } else {
+          playing = false;
+          paused = false;
+          ended = true;
+          emitState('ttsPosition');
+          emitState('ttsEnded');
+          emitState('ttsState');
+        }
+      };
+      audio.onerror = () => {
+        if (token !== serial) return;
+        playing = false;
+        emitter.emit('ttsError', state({ message: 'phonon-audio-error' }));
+      };
+      await audio.play();
+      emitState('ttsPosition');
+      return true;
+    } catch (error) {
+      if (token === serial) {
+        playing = false;
+        paused = false;
+        emitter.emit('ttsError', state({ message: 'Phonon no pudo iniciarse: ' + clean(error?.message || error) }));
+      }
+      return false;
+    }
+  }
 
   const state = extra => ({
     sessionId: clean(session?.sessionId),
@@ -89,6 +174,7 @@ export function createWebReadingSpeechAdapter({
     serial += 1;
     try { speechSynthesis?.cancel?.(); } catch {}
     currentUtterance = null;
+    stopPhononAudio();
   }
 
   const MAX_UTTERANCE_CHARS = 1800;
@@ -241,6 +327,15 @@ export function createWebReadingSpeechAdapter({
 
   async function playTts() {
     if (!session || !prepared || ended) return false;
+    if (session.voiceId === PHONON_ID) {
+      if (paused && phononAudio) {
+        try { await phononAudio.play(); } catch { return false; }
+        paused = false; playing = true; emitState('ttsState'); return true;
+      }
+      if (playing) return true;
+      playing = true;
+      return speakPhonon();
+    }
     if (paused && typeof speechSynthesis?.resume === 'function') {
       try { speechSynthesis.resume(); } catch {}
       paused = false;
@@ -255,7 +350,9 @@ export function createWebReadingSpeechAdapter({
 
   async function pauseTts() {
     if (!session || !prepared) return false;
-    try { speechSynthesis?.pause?.(); } catch {}
+    if (session.voiceId === PHONON_ID && phononAudio) phononAudio.pause();
+    else if (session.voiceId === PHONON_ID) serial += 1;
+    else try { speechSynthesis?.pause?.(); } catch {}
     playing = false;
     paused = true;
     emitState('ttsState');
@@ -273,7 +370,7 @@ export function createWebReadingSpeechAdapter({
     emitState('ttsPosition');
     if (resume) {
       playing = true;
-      return speakCurrent();
+      return session.voiceId === PHONON_ID ? speakPhonon() : speakCurrent();
     }
     return true;
   }

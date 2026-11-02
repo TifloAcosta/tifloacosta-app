@@ -29,7 +29,8 @@ def _body(text, voice):
         "contents": [{"role": "user", "parts": [{"text": text}]}],
         "generationConfig": {
             "responseModalities": ["AUDIO"],
-            "speechConfig": {"voiceConfig": {"prebuiltVoiceConfig": {"voiceName": voice}}}
+            "responseFormat": {"audio": {"mimeType": "AUDIO_L16", "sampleRate": 24000}},
+            "speechConfig": {"voiceConfig": {"voice": voice}}
         }
     }
 

@@ -276,7 +276,34 @@
       <p>El catálogo está en preparación: no se solicitan ni almacenan claves API y todavía no se pueden generar audios desde estos proveedores.</p>
       <div aria-label="Proveedores de voz">
         <details><summary>Kokoro — voces locales gratuitas, en evaluación</summary><p>Voces españolas Dora, Alex y Santa. La generación local en Safari todavía no está validada. No requiere cuenta ni clave API.</p><a href="https://hangry-labs.github.io/kokoroTTS/examples/?lang=es" target="_blank" rel="noopener noreferrer">Escuchar muestras de Kokoro</a></details>
-        <details><summary>Google — servicio externo, en evaluación</summary><p>Cuenta personal. El acceso gratuito depende del modelo y sus límites. Algunas modalidades requieren facturación. La integración aún no está activada.</p><a href="https://aistudio.google.com/api-keys" target="_blank" rel="noopener noreferrer">Obtener y administrar claves en Google AI Studio</a></details>
+        <details id="reading-google-provider">
+          <summary>Google — configurar voces, en evaluación</summary>
+          <p>Google ofrece distintos servicios de voz. Esta guía se refiere a Gemini API mediante Google AI Studio; no es lo mismo que Google Cloud Text-to-Speech. La disponibilidad gratuita varía según el modelo y la cuenta.</p>
+          <p>Si ya tienes una clave, puedes ir directamente al paso 3. No necesitas obtener otra.</p>
+          <nav aria-label="Pasos para preparar Google AI Studio">
+            <ol>
+              <li><a href="#reading-google-step-account">Acceder a tu cuenta de Google</a></li>
+              <li><a href="#reading-google-step-key">Crear o copiar una clave API</a></li>
+              <li><a href="#reading-google-step-connect">Conectar Google con TifloLector</a></li>
+            </ol>
+          </nav>
+          <section aria-labelledby="reading-google-step-account">
+            <h4 id="reading-google-step-account" tabindex="-1">Paso 1. Acceder a Google</h4>
+            <p>Si ya has iniciado sesión en tu cuenta de Google, continúa con el paso 2. Si no, Google te pedirá iniciar sesión en su propia página.</p>
+            <a href="https://aistudio.google.com/api-keys" target="_blank" rel="noopener noreferrer">Abrir Google AI Studio para iniciar sesión y gestionar claves (otra pestaña)</a>
+          </section>
+          <section aria-labelledby="reading-google-step-key">
+            <h4 id="reading-google-step-key" tabindex="-1">Paso 2. Crear o copiar una clave</h4>
+            <p>En la página de claves de Google AI Studio, busca el control para crear una clave API. Si tienes una, utiliza la existente cuando sea apropiado. Sigue los pasos que aparezcan en tu cuenta y copia la clave con el botón de Google. No la envíes por correo ni la compartas.</p>
+            <p>Si Google pide seleccionar un proyecto o habilitar servicios, sigue las instrucciones de su portal. No es necesario realizar compras para explorar el catálogo de TifloLector; revisa siempre las condiciones del modelo antes de consumirlo.</p>
+            <a href="https://ai.google.dev/gemini-api/docs/api-key" target="_blank" rel="noopener noreferrer">Instrucciones oficiales de Google para las claves API (otra pestaña)</a>
+          </section>
+          <section aria-labelledby="reading-google-step-connect">
+            <h4 id="reading-google-step-connect" tabindex="-1">Paso 3. Conectar con TifloLector</h4>
+            <p>La conexión segura todavía está en desarrollo. Por ahora no pegues la clave en esta web: no hay ningún campo para recibirla y no almacenamos credenciales. Cuando la integración esté disponible, este apartado permitirá conectar tu cuenta, comprobar el acceso y elegir voces.</p>
+            <p>Mientras tanto puedes seguir utilizando las voces del dispositivo sin cambiar ningún ajuste.</p>
+          </section>
+        </details>
         <details><summary>ElevenLabs — servicio externo, en evaluación</summary><p>Planes personales gratuitos limitados y opciones de pago. La configuración de claves y la reproducción todavía no están integradas.</p><a href="https://elevenlabs.io/app/settings/api-keys" target="_blank" rel="noopener noreferrer">Gestionar claves de ElevenLabs</a></details>
         <details><summary>Microsoft Azure Speech — servicio externo, en evaluación</summary><p>Requiere cuenta y configuración de recursos; las condiciones gratuitas y comerciales dependen del servicio contratado.</p><a href="https://portal.azure.com/" target="_blank" rel="noopener noreferrer">Abrir portal de Azure</a></details>
         <details><summary>Amazon Polly — servicio externo, en evaluación</summary><p>Requiere cuenta AWS y credenciales personales. La cuota gratuita tiene condiciones y el consumo adicional puede generar costes.</p><a href="https://aws.amazon.com/polly/" target="_blank" rel="noopener noreferrer">Información oficial de Amazon Polly</a></details>

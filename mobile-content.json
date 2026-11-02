@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-02T17:06:36.625Z",
+  "generatedAt": "2026-11-02T23:34:17.553Z",
   "resources": [
     {
       "kind": "resource",
@@ -5558,49 +5558,210 @@
   "news": [
     {
       "kind": "news",
-      "id": "engadget-b0c655b9a6218026:en",
-      "sourceId": "engadget-b0c655b9a6218026",
+      "id": "techcrunch-c57671f342b50bb9:en",
+      "sourceId": "techcrunch-c57671f342b50bb9",
       "lang": "en",
-      "title": "The Fitbit Edge lacks a useful contactless feature",
-      "summary": "It's handy, but most people likely won't miss it.",
-      "body": "It's handy, but most people likely won't miss it.\n\nThe Fitbit Edge is the brand's latest fitness tracker, combining a slim and sleek band design with a small screen reminiscent of earlier models like the Fitbit Charge 6. In fact, this model is essentially an upgrade of the Charge 6. It's not as feature-rich as a Google Pixel Watch 5 (see our Pixel Watch 5 review ) but unlike the screenless Fitbit Air, another new fitness band, it has a 1.34-inch AMOLED screen. You can start and stop workouts from the screen, check your stats and vitals, see notifications and even access Google apps like Google Maps. But there's one contactless feature missing from this device.\n\nThe Fitbit Edge does not have a Near-Field Communications (NFC) chip, the short-range technology that facilitates a \"tap\" connection between two devices. It's what allows you to pay for items at a coffee shop or even the subway using your phone and certain wearables. With devices that have NFC, you can open the virtual wallet and hold the screen up to a contactless terminal to scan and complete payment. It's a convenient feature that's omitted from the Fitbit Edge. But while some people might miss it, there's a reason Google left it out.\n\nNFC for tap-to-pay is useful when incorporated into a smartwatch or fitness tracker. But Google has addressed why it didn't include this chip in the Fitbit Edge. The company says that when analyzing user data for the Fitbit Charge 6, fewer than a single percent of owners said they used NFC. So, rather than focus energy on adding NFC to the Edge, Google shifted its attention to including other \"highly requested features\" for the tracker instead.\n\nThis includes features like Health Guardian, part of the updated Google Health app , with blood pressure and insulin resistance trends, intelligent automatic activity tracking, improved GPS tracking for walks, runs, cycles and other outdoor activities, and even a replaceable battery. Outside of health-related features, you can access things like media controls and message notifications using the Fitbit Edge's screen. It is, however, also missing some safety features like fall and crash detection, which are available on the Pixel Watch 5.\n\nIt's worth noting that when comparing the Fitbit Edge to Fitbit Air , the Fitbit Air also lacks NFC, which makes sense since it doesn't have a screen to access the app anyway. Both are missing this nice-to-have but not need-to-have feature.\n\nIf you are looking for a Fitbit that has NFC, there are older models that fit the bill. The Fitbit Charge 6, introduced back in 2023, does have NFC as does the previous generation Fitbit Charge 5 and its now out of circulation predecessor, the Fitbit Charge 4. Even special editions of the Charge 3, introduced way back in 2018 and phased out in 2020, have NFC. The Fitbit Sense, Sense 2, Versa 2 and Versa 4 as well as later editions of the original Versa are all smartwatch designs and include NFC, too. Note that the early devices previously worked with Fitbit Pay, but Google shut down that service in 2024 and replaced it with Google Wallet. Of course, all Pixel Watches come with NFC as well.\n\nGoogle Wallet is the only tap-to-pay service you can use with Fitbit. Even though these devices can connect to the Google Health app downloaded to an Apple iPhone (Pixel Watches excepted), you cannot access Apple Wallet from any of them.\n\nSince fitness trackers are typically purchased by those who want to focus on health and wellness versus apps and notifications, it makes sense that Fitbit has decided to omit the NFC chip from the Fitbit Edge. Most people use their phones for tap-to-pay anyway. It's convenient to hold out your wrist to pay, especially in places like at a gym where your phone might be tucked away in a locker. But based on usage stats from those who owned the Fitbit Charge 6, the lack of NFC chip in the Fitbit Edge is unfortunate, but it won't be hugely missed.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2300348/why-fitbit-edge-lacks-nfc-contactless-payment-feature/",
-      "publishedAt": "2026-11-02T15:45:00.000Z",
+      "title": "Apple says it’s ‘hard to predict’ when iPhone Duo constraints will improve",
+      "summary": "Apple says iPhone Duo production is ramping up, but it still can't say when supply will catch up with demand as shipping delays stretch into next year.",
+      "body": "Apple Chief Operating Officer Sabih Khan acknowledged the shipping delays plaguing the new iPhone Duo during the company’s fiscal fourth-quarter earnings call on Monday, but offered little clarity on when customers can expect relief.\n\nThe delays were just one point of concern during an earnings call filled with questions about the rising costs memory chip costs, driven by soaring demand from the AI industry.\n\n“iPhone Duo is constrained as of today. The ramp is going well, and we’re working hard to get this revolutionary new product into the hands of our customers as quickly as possible. But at this time, it’s really hard to predict when supply and demand will be in balance,” Khan said.\n\nCustomers who didn’t wait in line at an Apple Store or immediately jump on preorders are now seeing ship times stretch into next year . Meanwhile, Verizon has been apologizing to its customers for the delays by offering gift cards.\n\nIn an October report from the Financial Times , Apple described demand for the Duo as “nothing short of extraordinary,” after the device sold out on the company’s website within hours of going on sale, pushing delivery dates into next year.\n\nThe prolonged shipping delays are notable given Apple’s reputation for its highly efficient supply chain. But the company is hardly alone in facing suply pressures. Soaring demand for memory chips from the AI industry has driven up component costs for hardware makers across the board, dthreatening to push device prices even higher.\n\nApple, too, has raised prices on a number of products, Khan noted on the call, adding that those decisions were made “reluctantly.”\n\nIn another sign of the company’s efforts to meet demand for the Duo, Apple said it’s “deepening” its partnership with Perryman, a titanium producer for supplying materials for the new foldable device.\n\n“We’ve been thrilled with the early response from reviewers and customers, and we are working hard to get iPhone Duo into customers’ hands as quickly as we can,” Apple CEO John Ternus said during his opening remarks.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/11/02/apple-says-its-hard-to-predict-when-iphone-duo-constraints-will-improve/",
+      "publishedAt": "2026-11-02T23:25:32.000Z",
       "categories": [
         "tecnologia-general",
-        "windows"
+        "apple"
       ]
     },
     {
       "kind": "news",
-      "id": "the-verge-24347107f4fd05ea:en",
-      "sourceId": "the-verge-24347107f4fd05ea",
+      "id": "techcrunch-87aa8c763a2c8ec2:en",
+      "sourceId": "techcrunch-87aa8c763a2c8ec2",
       "lang": "en",
-      "title": "Vivo’s first Pro Max phone proves its Ultra is still in a league of its own",
-      "summary": "When I declared this spring that Vivo's X300 Ultra had the best cameras in any phone, two things made it stand out in my mind: its excellent main camera with a narrow 35mm focal length and what remains the most capable ultrawide in any phone worldwide. You won't find either in the new X500 Pro […]",
-      "body": "When I declared this spring that Vivo's X300 Ultra had the best cameras in any phone, two things made it stand out in my mind: its excellent main camera with a narrow 35mm focal length and what remains the most capable ultrawide in any phone worldwide.\n\nYou won't find either in the new X500 Pro Max. It has an impressive camera system with world-leading dynamic range and the same great telephoto lens found in the Ultra. But it's lost a little something of what made its predecessor quite so special.\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1023131/vivo-x500-pro-max-review-cameras-specs-price",
-      "publishedAt": "2026-11-02T15:15:00.000Z",
+      "title": "Trajectory raises $45M to make AI model training accessible to nontechnical experts",
+      "summary": "The one-year-old startup is now valued at $300 million.",
+      "body": "Whether developed by OpenAI, Anthropic, or built on open-source alternatives, current AI models share a critical limitation: they don’t learn from their mistakes without further training.\n\nBusinesses adapting these models for specialized fields, such as law and finance, typically get around this by fine-tuning general models. However, that often requires hiring internal research teams or relying on expensive consultants, commonly known as forward-deployed engineers (FDEs).\n\nTrajectory , a startup founded about a year ago by three Stanford classmates with experience at Google DeepMind and Apple, wants to automate that process, allowing AI models to learn from feedback and continuously improve at specialized tasks.\n\nThe 18-person company just announced that it raised $45 million in a Series A round at a $300 million valuation, led by Sequoia, with participation from Nvidia, Bessemer Venture Partners, and Bain Capital Ventures.\n\nTrajectory co-founder Ronak Malde compared foundational models to a very smart PhD student who’s always starting a new job. “But what the economy values is someone who worked on the job for 30 years,” he told TechCrunch.\n\nThe startup aims to solve this problem through an approach known as continual learning. Businesses using Trajectory can start with an open-source AI model and connect the platform to their applications, allowing it to collect feedback on how the model performs. Trajectory then uses that information to retrain the model, helping it improve at specialized tasks over time.\n\nWith Trajectory, lawyers, doctors, and other specialists can improve the models near automatically themselves, Malde said. That capability could make deploying specialized AI faster and cheaper.\n\nCompanies like Harvey and Rogo are already using Trajectory’s platform to post-train open-source models, helping them perform more like experienced lawyers or financial analysts by learning from previous tasks, such as reviewing a particular type of legal contract or valuing a company using a specific methodology. Trajectory’s other customers include Decagon, Mercor, and Nvidia. The startup is now making its post-training platform publicly available.\n\nThe people using Trajectory decide “what good looks like for their organization and can turn that into improvements for their model,” Malde said.\n\nTrajectory’s approach to continual learning shares some similarities with recursive self-improvement (RSI), the idea that AI systems can improve their own capabilities. But co-founder Michael Elabd argues that keeping humans involved in the training process makes Trajectory’s approach safer, since autonomous self-improvement could lead to unintended or even dangerous outcomes.\n\nTrajectory isn’t the only startup trying to automate post-training. It considers Thinking Machines Lab, founded by former OpenAI CTO Mira Murati and the company behind the fine-tuning platform Tinker, a direct competitor, along with Applied Compute, which was valued at $3.25 billion last month, and Prime Intellect , which helps companies build and train their own AI agents.\n\nMalde believes the startup’s biggest advantage is its team . He was among the handful of researchers Google DeepMind acqui-hired from Windsurf. Elabd also worked at DeepMind, while Trajectory’s third co-founder, Arjun Karanam, previously worked on generative foundation models at Apple. The startup has also recruited researchers and product designers from OpenAI, Stripe, and Netflix.\n\nWhy does design matter so much to a company focused on AI training? Karanam says the startup has developed an interface that makes post-training more accessible to its non-technical customers.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/11/02/trajectory-raises-45m-to-make-ai-model-training-accessible-to-nontechnical-experts/",
+      "publishedAt": "2026-11-02T23:13:53.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-21e0f501e744343a:en",
+      "sourceId": "9to5mac-21e0f501e744343a",
+      "lang": "en",
+      "title": "Apple says memory costs and Siri AI will weigh on holiday quarter profit margins",
+      "summary": "Following today’s earnings report, Apple held its quarterly earnings call, during which the company discussed the impact of rising memory costs on its profit margins and warned of additional pressure from Siri AI expenses during the holiday quarter. Here are the details. more…",
+      "body": "Following today’s earnings report, Apple held its quarterly earnings call, during which the company discussed the impact of rising memory costs on its profit margins and warned of additional pressure from Siri AI expenses during the holiday quarter. Here are the details.\n\nOver the past few quarters, Apple has repeatedly warned that rising component costs would put pressure on its profit margins. Last quarter, gross margin was 50.1%, up from 49.3% in Q2. However, that included a roughly two-percentage-point benefit from tariff refunds.\n\nToday, Apple reported that its gross margin fell to 47.9% in Q4 2026, with product gross margin dropping to 37.2%, down from 40.1% in the previous quarter. That represented a 2.2-percentage-point decline in company-wide gross margin and a 2.9-percentage-point drop in product gross margin.\n\nAgainst the backdrop of record September quarter revenue of $114.5 billion, Apple CFO Kevan Parekh explained that tariff refunds once again provided some relief, though not enough to offset the impact of rising memory costs. He also noted that, excluding the impact of tariff refunds, the sequential decline in gross margins would have been roughly one percentage point, primarily due to higher memory costs:\n\n“We saw strong performance in many services categories with all-time records in video, cloud services, payment services, and advertising, and a September quarter record in music. Company gross margin was 47.9%, and products gross margin was 37.2%. These both included a benefit from tariff refunds, which had a favorable impact of approximately 1 percentage point in the September quarter. When you remove the tariff refunds from both the June and September quarters, both company and product gross margin would be down about one point sequentially, primarily driven by higher memory costs.”\n\nParekh added that the pressure on Apple’s margins isn’t expected to ease anytime soon, with the company forecasting gross margins of between 45% and 46% for Q1 2027.\n\nHe attributed the expected decline primarily to higher memory costs, alongside the impact of the ongoing Siri AI rollout.\n\nWhen asked to elaborate, Parekh explained that Siri AI will affect Apple’s margins in two ways. First, running the service will increase cloud costs. Second, Apple will have to spread out the recognition of some revenue from devices that include Siri AI over their lifetimes, rather than counting it all at the time of sale.\n\nThis, he added, is an accounting practice Apple already follows for other services bundled with its devices, such as Maps, Siri, and iCloud:\n\n“Consistent with how we’ve always accounted for Maps, Siri, and iCloud, for the devices we sell that include these bundled services, we defer a portion of the revenue and recognize it over the life of the device.”\n\nMeanwhile, CEO John Ternus described the current memory pricing situation as “unprecedented,” adding that Apple expects the cost of purchasing memory components to continue rising beyond the December quarter.\n\nTernus said recent price increases across the Mac, iPad, and iPhone lineups would help offset some of those costs, alongside existing inventory purchased at lower prices and savings on certain non-memory components. He also warned that the benefits of carrying lower-cost memory inventory would diminish over time. Apple did not say whether it expects to raise product prices yet again to compensate.\n\nFor the full breakdown of Apple’s Q4 2026 results, follow this link .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/02/apple-says-memory-costs-and-siri-ai-will-weigh-on-holiday-quarter-profit-margins/",
+      "publishedAt": "2026-11-02T23:08:58.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-a9ee1ea218cb2d55:en",
+      "sourceId": "techcrunch-a9ee1ea218cb2d55",
+      "lang": "en",
+      "title": "Apple’s inventory surges 154% as memory chip costs climb",
+      "summary": "Apple says unprecedented memory chip costs will continue to rise, raising questions about future device prices as its inventory climbs to $14.5 billion.",
+      "body": "Apple’s stockpiling of inventory, particularly computer memory, continued in its fiscal fourth quarter, according to earnings reported Monday. The company reported that its inventory increased significantly in the quarter, growing from $11.09 billion in Q3 to $14.54 billion in Q4, a jump of 31.1%. Year-over-year, inventory grew 154.3% from $5.72 billion in the fourth quarter of 2025.\n\nApple’s forecast of a 45% to 46% gross margin in the December quarter was largely attributed to the impact of higher memory costs. The company reported a gross margin of 47.9% for the September quarter.\n\n“What we’re seeing with memory pricing right now is unprecedented,” said Apple CEO John Ternus, speaking to analysts on the call. “As we said earlier in the September quarter, we did see higher memory costs as compared to the June quarter, which were partly offset by the benefit of carrying inventory and lower costs on certain non-memory components.”\n\nHe said that the company expected “even higher memory costs” in the December quarter, which would be partially offset by price increases implemented earlier this year on some devices, including Mac and iPad at the end of June and iPhones in September.\n\nTernus also said that beyond December, Apple expects memory costs “continuing to increase.”\n\n“As we said before, we do believe we’ll see a decreasing benefit from the carry-in inventory on memory over time,” he noted, adding that the company was increasing its purchases of this key component. “As we work to improve supply, our manufacturing purchase obligations have increased by 33 billion dollars from June to the September quarter, which you’ll see in our annual filing when it comes out tomorrow.”\n\nApple also brought COO Sabih Khan, who oversees the company’s supply chain and manufacturing, onto the call to address questions about memory. He reiterated the increased purchase obligations but did not rule out future price increases on Apple devices.\n\nThe company also blamed supply constraints for weak iPad sales in the quarter. The iPad was one of the only product segments that didn’t grow, even as iPhone and Mac sales beat estimates. iPad revenue was $6.2 billion, below analysts’ expectations of $6.7 billion. The figure was also down 10% from the prior year.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/11/02/apples-inventory-surges-154-as-memory-chip-costs-climb/",
+      "publishedAt": "2026-11-02T23:04:57.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-351a9eb73c00e1fc:en",
+      "sourceId": "engadget-351a9eb73c00e1fc",
+      "lang": "en",
+      "title": "How to use your phone's camera to translate anything",
+      "summary": "With the aid of a quick picture, you can use your phone's camera to translate pretty much any text while you're traveling across the globe.",
+      "body": "Our phones have the ability to make sense of other languages (and it requires minimal effort on our part).\n\nIf you're a frequent traveler, you may frequently encounter signage or other text in foreign languages. That's all well and good if you have enough knowledge to piece together a translation, but if you can't even understand the alphabet in question, you're faced with a much bigger challenge.\n\nThe good news is that your phone's camera can recognize and translate just about any text in seconds, even if the language uses an entirely different script. While a translation app may seem like the obvious choice for this task, it's actually not always your best bet. Depending on the languages involved and the context, you may sometimes need more than one tool. Luckily, your phone's camera is all you need to translate pretty much anything in the real world.\n\nFor over a decade now, the Google Translate app has offered a dedicated camera mode. Simply install the app from the Google Play Store on Android or the App Store on iOS, open it, and tap the Camera icon located at the bottom of your screen. This will open up a viewfinder, allowing you to point your phone's camera at anything in the real world.\n\nYou can select any two of Google Translate's hundreds of languages for the translation. The default \"Detect language\" option in the source field is handy if you've come across a language you cannot identify. The app translates text in real time, so you don't even need to capture an image. You may also want to download frequently-used languages within Google Translate. This allows you to translate text offline — handy if you're preparing for an upcoming trip.\n\nYou can also use Google Lens on Android, which many phones include out of the box these days. This eliminates the need for a dedicated translation app. On Google Pixel phones, Lens is available as a shortcut within the search bar on the home screen. Otherwise, you can find it as an icon in the app drawer. Recent iOS versions also have a translation feature baked into the camera app through the Live Text feature . To access it, open the Camera app on your iPhone and point the device at any text you come across. You should see a yellow frame appear around the text and a grid icon towards the bottom of the viewfinder. Tap this icon and select Translate.\n\nWhile Google Translate has served me well, it can fall short of expectations. While traveling in Vietnam, for instance, I found that the app struggled to identify diacritics in printed text through my phone's camera. This was a major problem because a word can have two completely different meanings depending on whether the letters have the correct diacritics. In my experience, another area where Google Translate stumbles is restaurant menus. Menus often use informal shorthand or a single word, meaning the app may lack enough context for an accurate translation.\n\nThe solution I've found is to translate via an AI app. These apps often cannot translate in real time and require an internet connection, but I've found that the output quality is far and away better than Google Translate. Modern AI models understand context, so sending a picture of a menu will typically yield food-related translations. Even if your image is blurry or difficult to read, the AI model often understands the intended meaning based on the surrounding text instead of replying with gibberish.\n\nYou can use any AI app such as ChatGPT, Gemini, and Claude. You'll need to upload a picture of the text you need translated and type a short instruction, such as \"Translate to English,\" before sending the message. The AI will reply with the translated text, but cannot overlay the translation over your image as Google Translate does. The other downside to this method is that it's much more expensive — ChatGPT's free tier limits you to a few image uploads every day, and even then, processing can take a few seconds. Still, I often use it as a last resort whenever traditional translation methods fail me.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2300368/how-to-use-phone-camera-built-in-translation-feature-google/",
+      "publishedAt": "2026-11-02T23:00:00.000Z",
       "categories": [
         "tecnologia-general"
       ]
     },
     {
       "kind": "news",
-      "id": "9to5mac-d92f4c1a66c3016b:en",
-      "sourceId": "9to5mac-d92f4c1a66c3016b",
+      "id": "the-verge-3e3cd4a1081299c7:en",
+      "sourceId": "the-verge-3e3cd4a1081299c7",
       "lang": "en",
-      "title": "iPadOS 27.2 adds convenient new multitasking option on iPad",
-      "summary": "iPadOS 27.2 launched last week with a variety of new features for iPad, including a convenient change for multitasking. more…",
-      "body": "iPadOS 27.2 launched last week with a variety of new features for iPad, including a convenient change for multitasking.\n\nWhen iPhone Duo first got into users’ hands, several reviews mentioned how the new Split View system felt more intuitive than iPadOS multitasking ever has.\n\nAnd in iPadOS 27.2, there’s a convenient new multitasking change that’s likely inspired by iPhone Duo.\n\nApple hasn’t brought over the entire iOS system to the iPad. But it has made one common multitasking feature easier to set up: Split View.\n\nFrom the official iPadOS 27.2 release notes:\n\nSide-by-side multitasking is easier to set up with the option to choose a second app whenever you tile apps to the left or right with the window controls or menu bar\n\nStarting with iPadOS 26 last year, setting up two apps side-by-side could fairly cumbersome.\n\nYou needed to open the first app, resize it, then swipe up from the bottom of the screen to see your other apps, select one, and in many cases manually resize the second app too.\n\nBut in iPadOS 27.2, any time you use Apple’s window resizing controls to tile an app left or right, you’ll immediately see the Home Screen and be able to tile a second app with a single tap.\n\nIt’s not identical to the iPhone Duo experience, but it’s a lot closer to it than the old system was.\n\nOnce you master the built-in keyboard shortcuts for app tiling, it becomes even quicker and easier to set up your apps side-by-side.\n\nWhat do you think of this multitasking change in iPadOS 27.2? Do you think Apple should apply its iPhone Duo learnings to the iPad? Let us know in the comments.\n\n* Buy iPad with 15% discount from Apple refurbished",
+      "title": "Apple is ‘not able to predict’ when it’ll have enough iPhone Duos to go around",
+      "summary": "Apple CEO John Ternus doesn't have a timeline for when iPhone Duo supply constraints could lift. During an interview with Reuters, Ternus said the company is \"working hard to get it to as many customers as quickly as possible, but at this ​point, we're not able to predict when supply and demand will be in […]",
+      "body": "Apple CEO John Ternus doesn't have a timeline for when iPhone Duo supply constraints could lift. During an interview with Reuters , Ternus said the company is \"working hard to get it to as many customers as quickly as possible, but at this ​point, we're not able to predict when supply and demand will be in balance.\"\n\nApple launched its first foldable last month for $1,999, featuring a 5.4 outer display and 7.6-inch inner screen. Preorders for the iPhone Duo quickly sold out, with some shipments expected to arrive in 2027. Apple also made a limited number of iPhone Duo models available in-store at launch.\n\nIn his interview with Reuters , Ternu …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1024915/apple-iphone-duo-supply-chain-constraints",
+      "publishedAt": "2026-11-02T22:56:11.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-1f935a7d2d60e3fd:en",
+      "sourceId": "9to5mac-1f935a7d2d60e3fd",
+      "lang": "en",
+      "title": "9to5Mac Daily: November 2, 2026 – What’s next for the Mac and iPad",
+      "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
+      "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show.",
       "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/02/ipados-27-2-adds-convenient-new-multitasking-option-on-ipad/",
-      "publishedAt": "2026-11-02T15:11:19.000Z",
+      "originalUrl": "https://9to5mac.com/2026/11/02/daily-november-2-2026/",
+      "publishedAt": "2026-11-02T22:40:40.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "android",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-1ebcf0ea11897aa8:en",
+      "sourceId": "9to5mac-1ebcf0ea11897aa8",
+      "lang": "en",
+      "title": "John Ternus addresses iPhone Duo supply constraints, display issue",
+      "summary": "Today Apple reported record Q4 earnings , which beat Wall Street expectations overall. And in an interview with Reuters , CEO John Ternus addressed current iPhone Duo supply constraints and also referenced units that have been returned for display issues. more…",
+      "body": "Today Apple reported record Q4 earnings , which beat Wall Street expectations overall. And in an interview with Reuters , CEO John Ternus addressed current iPhone Duo supply constraints and also referenced units that have been returned for display issues.\n\nApple’s latest quarterly earnings did not include any sales for the iPhone Duo. That’s because it covered a period running July-September, and the Duo didn’t go on sale until October.\n\nBut Wall Street is understandably still very curious about how sales for the foldable are going. Especially as relates to revenue forecasts for the current quarter.\n\nIn an interview with Reuters , Ternus addressed two aspects of the iPhone Duo: supply constraints and units that have had display issues.\n\nRegarding supply, it sounds like Apple doesn’t know when it might reach supply-demand balance:\n\n“Duo is constrained as of today,” Ternus said. “The ramp is going well, and we’re working hard to get it to as many customers as quickly as possible, but at this point, we’re not ‌able to ⁠predict when supply and demand will be in balance.”\n\nCurrently, shipping estimates from the Apple Store are still set for late January. That’s where they’ve stayed since the first pre-orders immediately sold out on October 16.\n\nOn the matter of iPhone Duo screens cracking, Ternus was brief and essentially repeated what Apple had previously confirmed : that the issue is real, but limited to a very small number of units.\n\nTernus told Reuters that “a very small percentage” of iPhone Duo units had been returned with display issues. Apple is replacing those units with new models.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/02/john-ternus-addresses-iphone-duo-supply-constraints-display-issue/",
+      "publishedAt": "2026-11-02T21:47:30.000Z",
       "categories": [
         "apple",
         "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-6dafe827d921cc41:en",
+      "sourceId": "the-verge-6dafe827d921cc41",
+      "lang": "en",
+      "title": "Meta will end Quest 2 OS updates in 2027",
+      "summary": "Meta is planning to release the last OS update for its Quest 2 and Quest Pro VR headsets by March 2027, the company announced today. The last OS update for those devices is planned to be v213, and after that, Meta will continue to ship security patches and critical bug fixes through the end of […]",
+      "body": "Meta is planning to release the last OS update for its Quest 2 and Quest Pro VR headsets by March 2027, the company announced today . The last OS update for those devices is planned to be v213, and after that, Meta will continue to ship security patches and critical bug fixes through the end of 2027. Apps that support the Quest 2 or Quest Pro can also be submitted through December 2027, Meta says.\n\nMeta is calling the Quest 3 and 3S \"now the baseline for Meta VR gamers.\" The company is announcing this shift ahead of the planned release of its new VR Glasses , which are set to launch sometime in spring 2027.\n\n\"Quest 2 and Quest Pro laid the fou …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1024835/meta-vr-quest-2-pro-os-end-updates",
+      "publishedAt": "2026-11-02T21:04:20.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-17a5a6449a588ffe:en",
+      "sourceId": "engadget-17a5a6449a588ffe",
+      "lang": "en",
+      "title": "How long could HDDs and SSDs remain expensive?",
+      "summary": "Thanks to shortages of microchips and other computer components, we've been experiencing high prices for years.",
+      "body": "There might be relief in sight.\n\nIf you've spent a considerable amount of time building and maintaining custom PCs, you've likely seen it all. You've seen fads come and go, and you've seen emerging technology become permanent fixtures. Recently, however, we've all seen the disastrous end results of what is now being referred to as RAMageddon .\n\nThe chip shortage that we're dealing with today often feels reminiscent of the one from 2020, when both video game consoles and prebuilt PCs became frustratingly difficult to obtain, though they each have different root causes. While RAM, processors and even video cards are experiencing some astonishingly high prices , two PC components that have found themselves slightly shielded from the massive price hikes are hard drives and solid-state drives.\n\nThough they are still being heavily impacted, the industry appears to be heading toward some form of relief. It may just take a bit of time to get to the finish line.\n\nThe current market for HDDs and SSDs is an interesting one. Regardless of whether you're buying an enthusiast drive with upwards of 20 terabytes of storage or something on the lower end, you're going to be paying significantly higher prices due to the chip shortage .\n\nIn the long run, however, deciding on the actual purchase of any kind of storage is a complicated one. Traditional mechanical hard drives have been pushed aside for years in favor of SSDs, but they do still have their uses in today's market. Though they are not ideal for gaming and often seem to move at a snail's pace compared to even baseline-level SSDs, they do function quite well for mass storage of photos, videos and documents.\n\nThey also tend to be exceptionally well built, as companies have been making them for decades. Standard HDDs have a tendency to last for quite a long time, and to that end, the comparative price between them and more advanced SSDs is nothing but a good thing. Since SSDs use flash memory, which is undergoing its own shortage, a lot of NVMe and SATA SSDs are being hit somewhat harder.\n\nThe year 2027 has been earmarked as the first wave of relief from the higher prices. Though it's often described as just a slight decrease, any bit of money saved is worth it in the long run. Ultimately, the full weight of RAMageddon's first crushing blow looks like it will start winding down, and the far-reaching effects are something that we've dealt with for a while.\n\nHeading into 2027, industry analysts have been quite clear that things will see a trend toward lower prices, but the global lows of pre-COVID times are likely a permanent thing of the past. Indeed, it's possible that many of us may not even notice the slight dip in prices, as something that is expensive being just slightly less expensive may not feel as warm and fuzzy as one may hope.\n\nThe general consensus about when HDD and SSD prices may drop isn't a very reassuring one. 2027 may see some subtle drops, but if you're looking to build a PC, or even upgrade a drive in your current setup, it's probably wise to wait until at least the end of 2027 or beyond. Most reports have indicated that 2029 or 2030 will be when prices start to see a sharper, more noticeable drop.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2302215/how-long-hdd-ssd-stay-expensive/",
+      "publishedAt": "2026-11-02T21:00:00.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-7753c3eae97a40f2:en",
+      "sourceId": "the-verge-7753c3eae97a40f2",
+      "lang": "en",
+      "title": "One of Google’s Android partners turned 1.3 million set-top boxes into a botnet",
+      "summary": "Google says one of its Android manufacturing partners secretly built a backdoor in 1.3 million devices and turned them into a botnet. The company says it has now dismantled the backdoor and \"cut ties\" with the manufacturer, the Shenzhen, China-based Videostrong Technology Co., which has been banned from building or selling certified Android devices or […]",
+      "body": "Google says one of its Android manufacturing partners secretly built a backdoor in 1.3 million devices and turned them into a botnet. The company says it has now dismantled the backdoor and \"cut ties\" with the manufacturer, the Shenzhen, China-based Videostrong Technology Co., which has been banned from building or selling certified Android devices or supplying software for them.\n\nThe infected devices were used without owners' knowledge for \"malicious activity,\" like ad fraud, data exfiltration, and routing unauthorized network traffic. Google claims the \"backdoor and botnet were intentionally developed, deployed, and operated for financial …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/1024807/google-botnet-android-tv-shut-down",
+      "publishedAt": "2026-11-02T20:37:49.000Z",
+      "categories": [
+        "tecnologia-general",
+        "android"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-71fbe65e31f405cb:en",
+      "sourceId": "engadget-71fbe65e31f405cb",
+      "lang": "en",
+      "title": "Your Apple AirPods' chirping noise doesn't just mean low battery",
+      "summary": "Learn why your Apple AirPods are making a noise - and how to turn the sound off.",
+      "body": "It could indicate other things, but you can turn it off if you want to.\n\nHave you ever heard your AirPods chirp randomly even though you weren't doing anything? The most common reason why your AirPods are trying to get your attention is that they're low in battery. You can easily check if that's what's going on by flipping their case open and looking at the phone they're paired with. However, your AirPods could be emitting sounds due to other reasons, and those sounds could range from cute little chirps to ear-piercing screeches.\n\nSometimes, your AirPods will keep on chirping even after being plugged in due to power fluctuations, interruptions to the electricity flowing into the device and other battery issues. Another possible reason for your AirPods chirping is connectivity issues with their paired device. If you've switched off Bluetooth on your iPhone, for instance, you'll most likely hear your AirPods make some noise. If you have your AirPods out and accidentally rub them together, you may hear them make a sound, as well.\n\nOr, it could be for no reason at all. Apple's AirPods Pro 2 and AirPods Pro 3 support a clinical-grade Hearing Aid feature. The company says on its website that they may \"periodically play a quiet chime when they're in their charging case\" in order to ensure that their microphones and speakers are \"operating at their best\" and can provide high-quality hearing test results.\n\nSometimes, the sounds they emit could be harsher and more intense. They make louder, more persistent sounds if their Find My feature is triggered. That way, it'll be easier to find them, in case you've misplaced them. However, they could also produce piercing feedback noises if they've had water damage or if they get clogged with gunk and dirt. If the earbud tips of your AirPods Pro don't fit your ears well, they could also emit high-pitched noises. The AirPods Pro ship with multiple in-ear silicone tips, and you could probably get a perfect fit with one of the sizes. But if none of them fit you well enough so that the AirPods can create a seal when you wear them, you may have to buy third-party ear tips. You could also take your device to the Apple Store to get looked at.\n\nYou might not be able to stop them from making high-pitched noises in certain cases, like when there's water damage, but you can prevent your AirPods from making chirping sounds. To do so, open the AirPods case and then go to Settings on their connected device, like your iPhone. From there, tap on the device's name — typically [your name]'s AirPods — and then go to the Audio & Routing section. You'll find an option there that says Enable Charging Case Sounds . Simply toggle that setting off, and you're done.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2300367/what-apple-airpods-chirping-noise-means-battery/",
+      "publishedAt": "2026-11-02T19:30:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-bd2349f08ff9560a:en",
+      "sourceId": "ars-technica-bd2349f08ff9560a",
+      "lang": "en",
+      "title": "Coming in 2027: Apple’s $1,000 home robot for FaceTime and switching on lights",
+      "summary": "Apple robot backed by CEO John Ternus may have hefty price tag and limited uses.",
+      "body": "Apple’s new CEO, John Ternus, is apparently pushing the tech company’s development of household robots—and the first to debut may be a home robot designed to autonomously roam around while supporting FaceTime calls and switching lights on whenever a person enters the room.\n\nPeople who worked on Apple’s robotic projects told The Information that the AI-driven home robot, code-named J595, could be named HomeView Ultra in line with Apple’s new HomeView stationary smart display . The company is reportedly aiming to launch the robotic product with a possible price tag of $1,000 or more by 2027, although development delays may push that back to 2028.\n\nThe earliest prototypes of the home robot first came out in 2018 and received approval from former Apple CEO Tim Cook to continue the project. The Information describes Apple’s engineers as trying to give the robot more capabilities beyond being a “fancy way to make FaceTime calls” in order to justify a high price tag, even as the team has spent years refining the software and incorporating more AI technologies.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/apple/2026/11/apples-roaming-home-robot-may-do-facetime-switch-lights-on-and-yell-at-your-cat/",
+      "publishedAt": "2026-11-02T18:32:21.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
       ]
     },
     {
@@ -5635,119 +5796,6 @@
       "categories": [
         "apple",
         "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-29a5f63ea586c4b2:en",
-      "sourceId": "9to5mac-29a5f63ea586c4b2",
-      "lang": "en",
-      "title": "Here’s what’s coming for the MacBook Pro next year, per report",
-      "summary": "Apple just unveiled a huge update to the Mac lineup last week, introducing the MacBook Pro with PROLED XDR Display . In a new report, Bloomberg has details on what’s next for the MacBook Pro, with multiple new models expected to come next year. more…",
-      "body": "Apple just unveiled a huge update to the Mac lineup last week, introducing the MacBook Pro with PROLED XDR Display .\n\nIn a new report, Bloomberg has details on what’s next for the MacBook Pro, with multiple new models expected to come next year.\n\nApple’s current MacBook Pro lineup features multiple different tiers:\n\nIn the latest edition of his Power On newsletter , Mark Gurman says Apple will introduce a new version of the base MacBook Pro powered by the M7 chip next year. This machine will adopt the same design as the new high-end MacBook Pros introduced last week, which are thinner, lighter, and have slimmer bezels.\n\nThe report also says Apple will introduce a second-generation touchscreen MacBook Pro next year, powered by M7 Pro and M7 Max chips.\n\nGurman previously reported on Apple’s plans to skip the M6 Pro and M6 Max chips, instead jumping all the way to the M7 family “as early as the first half of next year.” At the time, Gurman said the M7 line “is designed primarily around major advancements to on-device AI processing.”\n\nLooking further into the future, Gurman eventually expects Apple to converge the MacBook Pro lineup:\n\nWith the first version, Apple is charging a $400 premium to add touch, OLED and the Dynamic Island interface. The M5 Pro and M5 Max MacBook Pros without touch are sticking around, but I’d be surprised if Apple continued developing non-touch versions of its high-end laptop models. There’s an added burden on its engineering, marketing and manufacturing teams to manage two sets of high-end MacBook Pros, and the prices are close enough for convergence to not be that far off.\n\nWhat do you think of the current MacBook Pro lineup? Should Apple prioritize converging the touchscreen and non-touchscreen models? Let us know down in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/02/heres-whats-coming-for-the-macbook-pro-next-year-per-report/",
-      "publishedAt": "2026-11-02T14:30:40.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-c239bca52afc1ba9:en",
-      "sourceId": "engadget-c239bca52afc1ba9",
-      "lang": "en",
-      "title": "Why software updates may have an unexpected effect on your phone",
-      "summary": "Installing an update can make your phone run worse for a while, but this should be temporary in most cases.",
-      "body": "Understanding the side effects of installing updates on your phone and how to deal with them.\n\nYou may have noticed that, after installing a software update on your phone, it started behaving unexpectedly. Animations may seem sluggish, the device gets slightly warm and the battery drains faster. Since software updates usually bring many improvements, it seems ironic to have these negative side effects — and they can happen on both the iPhone and Android phones.\n\nThe good news is that these issues are usually temporary; here's what's happening and what you can do about it.\n\nWhen you install an iOS or Android update, the system runs a lot of background processes to get everything in order. On the iPhone, Apple says that Spotlight reindexes all your data after an update. Depending on how much data you have, this can take hours or even days. Android also takes time to reindex everything — it's an important process that lets your phone know everything is in place and nothing was lost during the update.\n\nThis indexing process causes spikes in CPU and GPU usage on your phone, meaning there are fewer hardware resources available to handle your apps and system animations. Once the indexing is complete, your phone should go back to normal. Older phones may be more affected by updates and all these processes running in the background. Newer devices have more powerful and efficient chips, so you might not notice a huge difference after installing an update.\n\nThis brings us to a second reason for these side effects after an update: major software updates are generally built around the latest hardware. Even with all the optimization, older hardware may not be powerful enough to handle the new apps, features and more complex animations added with a new version of iOS or Android. This can also slow down your phone after installing an update.\n\nUnfortunately, in that case, there isn't much you can do. That doesn't mean every update will break your phone, but it can happen with some major updates — you might remember how poorly iOS 7 used to run on the iPhone 4, for example. When your phone needs to dedicate more of its resources to running the OS, performance elsewhere may have to give.\n\nThe best strategy is to wait and see if everything goes back to normal. Keeping your phone connected to a charger and Wi-Fi after an update helps the process finish faster, as Apple says that part of the indexing process only completes when the iPhone is plugged in and not in use. The same applies to Android phones — Sony says that the indexing process after an update usually takes no more than two days.\n\nIf your phone is still running slowly after a while, rebooting might fix it . Then, make sure your apps are updated — older versions may not be optimized to run on the latest software, so go to the App Store or Google Play and update everything that has a pending download. Freeing up storage space helps , too. One of the most common reasons why phones run slowly is because they don't have enough free space to handle basic system tasks.\n\nAlso, try checking your phone's battery health in its settings. Some smartphones slow down the processor speed to prevent unexpected shutdowns when the battery is in poor condition. In that case, replacing the battery can breathe new life into your phone. As a last resort, you can try a factory reset — or even downgrade the software, though this is more complicated and not all phones let you do it.\n\nIf it's still slow after that, the hardware may simply be struggling with the software, and the update itself is the cause. You could try contacting the company for advice in case this is a known issue, but chances are your device is near the end of its life if this is happening.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2300344/phone-software-updates-unexpected-slow-down-effect/",
-      "publishedAt": "2026-11-02T14:15:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "programas-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-41b2128e297a99cd:en",
-      "sourceId": "9to5mac-41b2128e297a99cd",
-      "lang": "en",
-      "title": "Affinity for iPad all-in-one design app now available, free for individuals",
-      "summary": "Design app Affinity has long been popular with Mac users, and a long-awaited iPad version has launched today. Canva promises that Affinity for iPad offers “the same pro-level power” as the Mac app. It’s been a year since the company’s vector, photo, and layout tools were unified into a single app on Mac , and the same is now true on iPad … more…",
-      "body": "Design app Affinity has long been popular with Mac users, and a long-awaited iPad version has launched today. Canva promises that Affinity for iPad offers “the same pro-level power” as the Mac app.\n\nIt’s been a year since the company’s vector, photo, and layout tools were unified into a single app on Mac , and the same is now true on iPad …\n\nThe company made the announcement today.\n\nCreated specifically for the touch-first interface and unique capabilities of iPad and Apple Pencil, the app brings professional sketch, vector, photo and layout editing together with the same pro-level power of Affinity on the desktop […]\n\nWith Affinity for iPad, creatives can take a project from first sketch with Apple Pencil to print-ready file on iPad alone. And it’s free for individuals, just like Affinity on desktop, which has recorded more than seven million sign-ups since launching a year ago.\n\n“Creative work doesn’t stay in one discipline, so your tools shouldn’t either,” said Duncan Clark, CEO of Pro Design at Canva. “Since we brought Affinity together on desktop, our biggest user request has been the desire to bring it to iPad. Today we’re delivering it: a fully-fledged, professional app built for touch.”\n\nBeing able to carry out all of the work within a single app on a single file is a key attraction of Affinity. The integrated app replaces the separate Affinity Photo, Affinity Publisher, and Affinity Designer apps.\n\nSketch : Rough out concepts the moment they land, with the unique capabilities of Apple Pencil like pressure and tilt in every mark, thick where you press and soft where you tilt. A full brush library comes with controls to shape each brush into the exact tool you need. Sketches stay live in the file to build on, rather than trace again.\n\nVector : Responsive, smooth and under control. Build a full logo or icon system with real curves and precise nodes, or bring a rough drawing through from Sketch. Sketch to Shapes turns hand-drawn forms into clean vector shapes.\n\nPhoto : Fine-tune RAW files, make intelligent selections, retouch in real time and build full composites at the shoot or on the go. Users can even sketch over a photo first to plan where a subject or prop should sit. The Mask Tool finds the boundary as the Apple Pencil pixel precision runs along a challenging edge, so hair, fur and foliage take a stroke rather than an afternoon. Every mask, grade and retouch stays live and undoable, even thousands of layers deep.\n\nLayout : Create multi-page documents such as ‘zines, lookbooks and photo books, with text and images flowing across pages; master pages and grids keep everything consistent, and typography exactly right. Projects go all the way to a print-ready file with proper colour handling.\n\nCanva says the app supports all of the advanced capabilities of Apple Pencil Pro: pressure, tilt, barrel roll, squeeze, and hover. AI features include generative expand, upscaling resolution, and adding attributes like motion blur. A Decompose Layer feature even splits a flat image into editable layers.\n\nAffinity for iPad is a free download from the App Store .",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/02/affinity-for-ipad-all-in-one-design-app-now-available-free-for-individuals/",
-      "publishedAt": "2026-11-02T14:00:00.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-1708f5d36492a66c:en",
-      "sourceId": "the-verge-1708f5d36492a66c",
-      "lang": "en",
-      "title": "Affinity’s creative studio is now available on iPad for free",
-      "summary": "Canva is giving digital creatives a new way to design, illustrate, and edit photos on their iPads, and it doesn't have to cost them a thing. After relaunching the Affinity creative suite as an all-in-one desktop app last year, Canva has now introduced Affinity for iPad, which provides the same pro-grade tools for vector graphics, […]",
-      "body": "Canva is giving digital creatives a new way to design, illustrate, and edit photos on their iPads, and it doesn't have to cost them a thing. After relaunching the Affinity creative suite as an all-in-one desktop app last year, Canva has now introduced Affinity for iPad , which provides the same pro-grade tools for vector graphics, photo editing, illustration, and page layouts in a format optimized for Apple Pencil and touchscreens.\n\nAffinity for iPad has a new Sketch Studio that's designed for freehand drawing and simplifying sketch-to-vector workflows, including optimized tools for masking and automatically converting rough sketches into cle …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/1024283/canva-affinity-for-ipad-design-app-availability",
-      "publishedAt": "2026-11-02T14:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple",
-        "apps-accesibles",
-        "programas-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-b53fee7a2a60f206:en",
-      "sourceId": "techcrunch-b53fee7a2a60f206",
-      "lang": "en",
-      "title": "OpenAI is finally merging ChatGPT’s chat and Work tabs",
-      "summary": "OpenAI said that ChatGPT and Codex will draw usage from the same allocation pool after this change.",
-      "body": "Posted:\n\nThe ChatGPT desktop app can be a confusing piece of software, given that there are ChatGPT and Codex sections, and within the former, there are Chat and Work tabs. With so many options, it’s sometimes easy to forget where you are working and where exactly your project is.\n\nIn an apparent effort to address this, OpenAI is now gearing up to merge the Chat and Work tabs within the ChatGPT experience, according to an email sent to users. OpenAI said that initially, this experience will be available to select users for feedback before it is rolled out widely.\n\n“This will enable you to move from exploring an idea to having ChatGPT carry it through, all in one place. You can bring in your files and plugins and ask ChatGPT to build a website, create a presentation, or do things for you on the web, while reviewing and guiding its work. Codex will remain a separate experience in the ChatGPT desktop app,” the email said.\n\nOpenAI also said with this transition, both ChatGPT and Codex will draw tokens from the same allowance pool. It said this change won’t impact most users, but based on usage and model, some folks might need to wait for resets more frequently.\n\nRival Anthropic merged Claude’s chat and Cowork functions into one screen in September.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/11/02/openai-is-finally-merging-chatgpts-chat-and-work-tabs/",
-      "publishedAt": "2026-11-02T13:57:53.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-9f562b8fbad5cff3:en",
-      "sourceId": "engadget-9f562b8fbad5cff3",
-      "lang": "en",
-      "title": "Dell XPS Googlebook review: Beautiful hardware for a useless platform",
-      "summary": "Googlebook OS still needs a ton of work.",
-      "body": "Googlebook OS still needs a ton of work.\n\nI can think of a few reasons to buy a Googlebook , but they're all pretty dystopian. Maybe every other computing platform has succumbed to a super AI-powered virus, leaving a Googlebook as your only option. Or perhaps Google has taken over the world and has started hunting down people who use Windows, Linux or macOS. In a world where a Googlebook is your only option, then the $1,000 Dell XPS Googlebook is probably the one to get. But in the real world, where you can get the exact same XPS hardware running on more flexible platforms with better developer support, the XPS Googlebook seems practically pointless.\n\nBut let's back up a bit and talk about Googlebook OS, Google's new laptop platform that's a combination of both Android and ChromeOS. It supports Android apps natively, it can synchronize and mirror apps from your Android phone, and it has Google's Gemini AI integrated throughout its interface. Technically, Googlebook OS should be an upgrade from ChromeOS, a platform built entirely around Google's web browser. But, after testing this laptop for the last week, I'd go so far as to say the entire Googlebook concept is a failure.\n\nWho really wants a laptop running unoptimized Android apps? Why buy into an untested Google platform just to synchronize your Android phone, especially when you can mirror and sync Android device texts on Windows and Linux? And why would you pay the same exact price as a Windows PC for a computer that does so much less? While Apple, Microsoft and PC makers are sweating to push the computing industry forward this year, most notably with the launch of NVIDIA's RTX Spark and Apple's redesigned touchscreen MacBook Pro , Google has given us a new platform that is in many ways less useful than its aging Chromebooks.\n\nFor its first (and I'm hoping only) Googlebook, Dell took its recent XPS 13 design and refashioned it for Google's new OS. It still has a slim 2.2-pound metal case, making it one of the lightest systems in this size range, and it sports a 13.4-inch InfinityEdge screen. It's powered by a Qualcomm Snapdragon X Elite chip with 16GB of RAM — the same hardware on the $1,000 Windows 11 XPS 13. There are only two USB-C ports on either side of the XPS 13 Googlebook, and, unfortunately, there's no headphone jack.\n\nA multi-colored \"Glowbar\" occasionally lights up on the rear of the XPS 13 — something that Google highlights as one of the defining features of Googlebook OS — but it's ultimately superfluous. It can show your charging status and battery level, but it's not exactly solving any major problems for laptop users.\n\nIt's not unusual to see PC makers reusing their designs — many companies are also recycling their existing work for NVIDIA's RTX Spark chip. But at least that platform has a few halo products designed specifically for it, like the Surface Laptop Ultra. There's nothing highlighting what's truly special about Googlebook OS — arguably because there's not exactly much to show off.\n\nI could tell you that the XPS Googlebook has a very nice screen, a comfortable keyboard and a very accurate touchpad. I could tell you that its slim design and light weight makes it easy to tote around without weighing down your bag. But really, you could have learned all of that from my review of the standard XPS 13 with Windows 11. Everything good about this system comes from Dell's excellent design work.\n\nOnce I started using Googlebook OS, though, it became instantly clear that Googlebook OS is simply a hot mess. It's fine for web browsing with Chrome and accessing Google apps like Gmail and Calendar, but support for Android apps via the Google Play store is mostly disappointing. Slack only works as a mobile Android app, allowing you to see a single channel or direct message, but there's no wider desktop view like you'd see on Windows or macOS. You also can't easily react to messages and images in Slack — instead, you have to perform a long click, as you would on a normal Android phone. Evernote, meanwhile, doesn't appear at all on the Googlebook Play Store. (And yes, I still use Evernote a ton. There are dozens of us!)\n\n\"Desktop optimized\" Android apps function more like you'd expect on other laptop platforms. Notability, CapCut Pad and Luminar all offer more fully-featured apps for taking AI notes and editing media, but they're only useful if those apps are already part of your workflow. I can't imagine too many people will change their editing process just to find something compatible with Googlebook OS.\n\nUsing the XPS Googlebook for my typical workflow often felt like pulling teeth. While Chrome worked fine for web browsing, resizing a photo required an odyssey through several different apps until I stumbled into Pixlr, a desktop-optimized editing app that only lets you resize an image when exporting it. Adobe Lightroom only seemed to let me resize a picture by cropping it (and it also kept bugging me to subscribe to Lightroom Premium to unlock more editing features). I eventually discovered that the standalone Viewer app has an easy way to resize images, something that isn't present in the default Photos app.\n\nWith no support for Audacity, I had to use Lexis Audio Editor to make some tweaks to a podcast file, but its basic interface seemed unsuited to more complicated edits. I might as well have just used an online editor like Audiomass (which, by the way, works just fine on Chromebooks). I also had to rely on Evernote's website to write this review, which required logging in every single time I turned on the XPS Googlebook, because the Evernote Android app was unavailable. I also eventually gave up on the Slack Android app and started using its web interface, which at least let me see all of my channels and direct messages.\n\nI'm used to computers being gateways to sophisticated software and healthy developer support. Using the XPS Googlebook felt like being trapped in a computing stripmall: It's hobbled together by a variety of small apps of varying quality. Thank goodness for web apps, at least.\n\nIt's worth noting that Chromebooks also supported Android apps, so I don't believe there was actually a huge demand for a new Android-based computing platform.\n\nI also wasn't impressed by any of the other Googlebook features: Syncing your Android phone to a Googlebook sounds nice in theory, but in reality it leads to redundant notifications if you have the same apps installed on both systems. You can also mirror an Android app from your phone — but again, why would you do that when you can run the app directly on the Googlebook? Given that you can already mirror Android phones and synchronize texts on Windows computers, I'm not sure why anyone would jump into a whole new platform just for these features.\n\nGoogle being Google, of course, the company also crammed in as many Gemini AI features as it could into this platform. You can ask questions or edit media on the Gemini app, or wiggle the mouse pointer to ask the AI about things you encounter on the web or inside of apps. Gemini did a decent job of answering questions about products that we've featured on Engadget, but unless you absolutely want to lean on Google's AI, there really is no reason to buy a whole laptop just to have Gemini baked into everything.\n\nGoogle's Rambler AI dictation feature, which lets you dictate text by speaking naturally, is also built into Googlebook OS, and from my testing it seemed to work pretty well. But it doesn't show you the text as you're speaking — it just shows a moving purple waveform, and that sometimes makes it hard to gather your thoughts or see what you were previously thinking. This is a big downside compared to just typing or using old-school dictation that used to be available on Android, but at least Rambler did a good job of cutting out natural \"ums\" and \"uhhs,\" and it also formatted the text pretty well.\n\nBattery life is another sign that the Googlebook OS platform is very unrefined. In the PCMark Android app benchmark, it lasted for 15 hours and 15 minutes, which is what we'd expect for a Snapdragon laptop. But during normal usage, I found that some apps ate up a lot of battery power without much reason. CapCut Pad managed to drain my battery by 50% in just one hour, even though it was simply sitting in the background, not doing anything. I simply couldn't trust the XPS Googlebook to last for a full day of work.\n\nWhile the XPS Googlebook looks like a premium laptop, the fact that it's running an undercooked OS makes it something I can't recommend. Just get the $999 XPS 13 with Windows 11 instead — at least that gets you a mature OS that runs tons of apps and games. None of this is Dell's fault, as its XPS hardware is once again among the best in the PC world. But that doesn't matter if it's paired with yet another flimsy Google platform.\n\nSure, Googlebook OS will get more compatible Android apps down the line, and it may eventually turn into something more useful with upcoming AI features. But you shouldn't rush out to pay $999 with the hopes that it will get better. Why pay to be a beta tester? Google also hasn't been the best steward of its troubled platforms in the past, so I wouldn't be too surprised if Googlebook OS simply fades away due to lack of interest. This is the same company that couldn't optimize Android for tablets over the last decade.\n\nThe Googlebook launch may go down as one of the more baffling moments in computing history. Instead of delivering a true successor to Chromebooks – something that was similarly inexpensive, efficient and school-ready, but also ready for useful AI features – Google delivered a half-baked platform that's in many ways a step back. Not even Dell's excellent design can save the XPS Googlebook from the mess of Googlebook OS.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2302835/dell-xps-googlebook-review/",
-      "publishedAt": "2026-11-02T12:30:00.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-70422b96269140d7:en",
-      "sourceId": "techcrunch-70422b96269140d7",
-      "lang": "en",
-      "title": "Ford launches a ‘privacy promise’ and explains how and why it uses customer data",
-      "summary": "Ford said it's making an \"explicit commitment\" to its customers that \"their vehicle data is safe\" with the company.",
-      "body": "As Ford prepares to launch a new generation of connected cars, the automaker is making a public promise about how it will handle that information.\n\nThe company unveiled on Monday what it calls a “privacy promise” — an “explicit commitment” to keep customers’ vehicle data safe and give them control over what they share. Ford also launched a website designed to educate customers about how, where, and why the automakers uses their data, and to show them how to change those settings.\n\nWhile those controls have existed for years now, Ford wants to communicate more clearly with its customers about them, especially ahead of the launch of new, more connected vehicles like the ones being built on its upcoming “universal electric vehicle” platform.\n\n“I personally think that it’s super important for us to be making it very clear to our customers what our data practices are, and not only that, but making a commitment to them about it,” Ford’s chief privacy officer Kristin Jones said in an interview with TechCrunch. “I also see this as a great opportunity to educate our customers about how they share data.”\n\nThis new privacy push comes as automakers are making their cars increasingly connected. While some polling shows U.S. customers want the kinds of features enabled by this connectivity , such as remote start, navigation, and driver-assistance software, only 14% said they fully understand what data their vehicle collects.\n\nThat has left room for some companies to quietly sell that data to third parties — a practice that got General Motors in trouble with the Federal Trade Commission, and also resulted in a $220 million settlement with 36 states last week .\n\nThis lack of consumer awareness around data collection and sharing has also opened the door for other companies to market themselves as better stewards of customer data. Slate Auto, the EV startup backed by Jeff Bezos, has made that pitch ahead of the expected launch of its minimalist pickup truck later this year.\n\n“We did a survey of 1,000 consumers, and 91% of them said that data privacy was a key consideration for them. Realistically, it’s not something they engage with every day, but they want to know that they’re, again, in control, and that they have access to the information they need there,” Jones said. “I wouldn’t comment on what our competitors are doing, or anything that’s sort of been in the news there, but certainly it’s something that people don’t trust companies to take care with their data, and we really want to make sure we’re building that trust relationship with them.”\n\nJones, who joined Ford in 2024 after nearly two decades of working on privacy in the legal, financial, and healthcare fields, said the effort to improve how the automaker communicates with customers about data sharing has been in the works for a while.\n\n“It’s been a journey for, frankly, most of the time I’ve been at Ford,” she said.\n\nFord’s new website will feature a mix of content that explains what data the company collects, how it uses that information, and how customers can opt in or out.\n\nOpting out of sharing some data will naturally make some modern features inaccessible, Jones said. For example, turning off “connected services” in a Ford vehicle will disable features like real-time navigation and the built-in access to roadside assistance.\n\nBut one of the goals of this “privacy promise” push is to better justify why Ford is asking for access to this data and make it clear that the information won’t be used for purposes such as targeted advertising.\n\nGiving Ford access to data about a vehicle’s health, for instance, will provide an owner with better real-time information about whether their car needs maintenance. But it will also “support research and development for future technologies,” Jones said.\n\n“We also do not share information about how our customers are driving their vehicles to data brokers,” Jones said. “I just want to kind of reiterate that we’re not in it to try and monetize data in some way. We’re trying to offer products and services that customers derive value from.”",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/11/02/ford-launches-a-privacy-promise-and-explains-how-and-why-it-uses-a-customers-data/",
-      "publishedAt": "2026-11-02T11:00:00.000Z",
-      "categories": [
-        "tecnologia-general"
       ]
     },
     {
@@ -5816,22 +5864,6 @@
     },
     {
       "kind": "news",
-      "id": "techcrunch-aaec7966252bf5b9:en",
-      "sourceId": "techcrunch-aaec7966252bf5b9",
-      "lang": "en",
-      "title": "OpenAI might rebrand its data centers as ‘AI compute campuses’",
-      "summary": "Data centers are deeply unpopular. But what if we called them something else?",
-      "body": "Posted:\n\nData centers are deeply unpopular . But what if we called them something else?\n\nAxios reports that OpenAI is preparing a “PR blitz” for after the midterm elections on Tuesday, as Democrats seem likely to win back the House of Representatives, and possibly the Senate, too .\n\nThe company’s chief global affairs officer Chris Lehane told Axios that the midterms will be “a bit of a movie trailer for what you’re going to see in 2028,” when he expects AI to be “ the issue” in the presidential election.\n\nSo OpenAI is to influence the AI debate moving forward, with Lehane discussing several proposals, including the development of AI “speed limits” ; finding ways to help people see AI as empowering them in their daily lives; pushing the U.S. to take a role in developing global standards — and yes, rebranding data centers as “AI compute campuses.”\n\nLehane also described the conversation around data centers (a debate that has pushed Amazon and Microsoft to say they will no longer use NDAs in their negotiations with local governments ) as “good and healthy.”\n\n“Communities should hold companies responsible and accountable so they really and truly get a transformative benefit from these projects,” he said.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/11/01/openai-might-rebrand-its-data-centers-as-ai-compute-campuses/",
-      "publishedAt": "2026-11-01T21:55:23.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "freedom-scientific-blog-6b388ebc74e9689f:en",
       "sourceId": "freedom-scientific-blog-6b388ebc74e9689f",
       "lang": "en",
@@ -5874,22 +5906,6 @@
       "sourceName": "Ars Technica",
       "originalUrl": "https://arstechnica.com/tech-policy/2026/10/dartmouths-provost-warned-us-about-ai-cheating-but-his-own-ai-use-cost-him-his-job/",
       "publishedAt": "2026-10-30T20:40:13.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-1552938c6ca3cc59:en",
-      "sourceId": "ars-technica-1552938c6ca3cc59",
-      "lang": "en",
-      "title": "Basically no one is using AI agents for their DoorDash orders",
-      "summary": "But it's still early days for the relatively new e-commerce use case.",
-      "body": "As AI tools and agents have continued their march across all aspects of digital life, many companies are trying to use LLMs to improve the experience of purchasing goods and services on the Internet. Thus far, though, a vanishingly small number of people seem to be taking advantage of those capabilities, at least when it comes to using the popular food delivery app DoorDash with an outside AI agent.\n\nIn a third-quarter earnings call Thursday , DoorDash co-founder and CEO Tony Xu responded to an analyst question by noting that \"AI agents are generating several hundred orders [on DoorDash] across the time that they've been up and running.\" In a marked understatement, Xu called this a \"very low use case\" for a company that handled just shy of 1 billion orders total in the third quarter of 2026 alone.\n\nSpeaking generally, Xu said he sees the potential for AI agents to be genuinely helpful for \"long consideration purchases\" and major decisions where agents would be \"doing work on your behalf proactively in the background.\" However, Xu added, \"when it comes to a task that's as simple as ordering food, we tend to see that come directly to DoorDash.\"\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/ai/2026/10/doordash-says-outside-ai-agents-have-only-led-to-hundreds-of-orders-so-far/",
-      "publishedAt": "2026-10-30T19:30:52.000Z",
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"

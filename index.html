@@ -284,15 +284,15 @@
           <p>Google reconoce tu sesión al abrir AI Studio. Por seguridad, TifloAcosta no puede conocer si has iniciado sesión en Google.</p>
           <h5>Paso 1. Acceder a Google</h5>
           <p>Si ya has iniciado sesión, Google mostrará directamente tu cuenta. Si no, te pedirá que te identifiques.</p>
-          <a href="https://aistudio.google.com/api-keys" target="_blank" rel="noopener noreferrer">Abrir Google AI Studio para crear la clave (nueva pestaña)</a>
+          <a id="reading-google-external-link" href="https://aistudio.google.com/api-keys" target="_blank" rel="noopener noreferrer">Abrir Google AI Studio para crear la clave (nueva pestaña)</a>
           <h5>Paso 2. Crear y copiar la clave</h5>
           <ol><li>Escribe un nombre para identificar tu clave, si Google lo solicita.</li><li>Activa el botón de Google para crear la clave.</li><li>Activa el botón de Google para copiarla.</li></ol>
-          <p>Después de copiarla, vuelve a la pestaña de TifloAcosta. Google no cerrará automáticamente su página. Regresarás a este mismo apartado.</p>
+          <p>Después de copiarla, vuelve a la pestaña de TifloAcosta. Google no cerrará automáticamente su página. Al regresar, el foco irá al paso 3. Si estás en iPhone, utiliza el selector de pestañas de Safari para volver a TifloAcosta.</p>
           <details><summary>Necesito ayuda adicional para obtener la clave</summary>
             <p>Si Google solicita crear o seleccionar un proyecto, sigue los controles oficiales. No es necesario crear una segunda clave si ya tienes una utilizable.</p>
             <a href="https://ai.google.dev/gemini-api/docs/api-key" target="_blank" rel="noopener noreferrer">Consultar las instrucciones oficiales de Google</a>
           </details>
-          <h5 id="reading-google-connect-heading">Paso 3. Conectar la voz</h5>
+          <h5 id="reading-google-connect-heading" tabindex="-1">Paso 3. Conectar la voz</h5>
           <p>Conserva la clave en un lugar seguro. La conexión con TifloLector no está activada todavía. No introduzcas aquí claves ni textos secretos; no existe un formulario de envío.</p>
           <p>Cuando el servicio esté disponible, esta pantalla permitirá conectar la cuenta, comprobarla y seleccionar las voces, sin volver al catálogo de otros proveedores.</p>
           <p id="reading-google-status" role="status" aria-live="polite">Google todavía no está conectado.</p>
@@ -670,6 +670,17 @@
     if (providerRest) providerRest.hidden = true;
     providerOpen.setAttribute('aria-expanded', 'true');
     queueMicrotask(() => providerHeading?.focus());
+  });
+  const googleExternalLink = document.getElementById('reading-google-external-link');
+  const googleConnectHeading = document.getElementById('reading-google-connect-heading');
+  let returningFromGoogle = false;
+  googleExternalLink?.addEventListener('click', () => {
+    returningFromGoogle = true;
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden || !returningFromGoogle || providerGuide?.hidden) return;
+    returningFromGoogle = false;
+    queueMicrotask(() => googleConnectHeading?.focus());
   });
   providerClose?.addEventListener('click', () => {
     providerGuide.hidden = true;

@@ -1,9 +1,19 @@
 {
-  "generatedAt": "2026-11-01T16:26:11.589Z",
+  "generatedAt": "2026-11-03T15:12:14.528Z",
   "channelHandle": "@tifloacosta",
   "channelUrl": "https://www.youtube.com/@tifloacosta",
-  "count": 290,
+  "count": 291,
   "videos": [
+    {
+      "id": "UkKwpg4g5ZM",
+      "title": "VoiceOver sigue abriendo puertas. Phonon trae nuevas voces a la conversación",
+      "publishedAt": "2026-11-03T11:18:27Z",
+      "description": "VoiceOver continúa ampliando sus posibilidades, y hoy le toca el turno a Phonon, una aplicación que permite incorporar nuevas voces al lector de pantalla de Apple.\nEn este tutorial conoceremos cómo funciona Phonon, cómo explorar las voces disponibles, seleccionar las que nos interesan, descargarlas y utilizarlas con VoiceOver.\nTodo explicado paso a paso, con demostraciones prácticas para que puedan escuchar las voces y valorar cuáles se ajustan mejor a sus preferencias.\nPorque cuando hablamos de accesibilidad, tener más opciones para elegir siempre es una buena noticia.",
+      "fullDescription": "VoiceOver continúa ampliando sus posibilidades, y hoy le toca el turno a Phonon, una aplicación que permite incorporar nuevas voces al lector de pantalla de Apple.\n\nEn este tutorial conoceremos cómo funciona Phonon, cómo explorar las voces disponibles, seleccionar las que nos interesan, descargarlas y utilizarlas con VoiceOver.\n\nTodo explicado paso a paso, con demostraciones prácticas para que puedan escuchar las voces y valorar cuáles se ajustan mejor a sus preferencias.\n\nPorque cuando hablamos de accesibilidad, tener más opciones para elegir siempre es una buena noticia.\n\n#Phonon #VoiceOver #Accesibilidad #iPhone #TifloAcosta",
+      "excerpt": "VoiceOver continúa ampliando sus posibilidades, y hoy le toca el turno a Phonon, una aplicación que permite incorporar nuevas voces al lector de pantalla de Apple.",
+      "thumbnail": "https://i.ytimg.com/vi/UkKwpg4g5ZM/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=UkKwpg4g5ZM"
+    },
     {
       "id": "qs8eV_jl7eU",
       "title": "¿Una galería de fotos pensada para personas ciegas? Así funciona Memora",

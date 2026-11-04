@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-04T08:04:10.158Z",
+  "generatedAt": "2026-11-04T09:19:03.562Z",
   "resources": [
     {
       "kind": "resource",
@@ -5569,6 +5569,39 @@
   "news": [
     {
       "kind": "news",
+      "id": "nvda-es-d4e8e6cd34198fb4:es",
+      "sourceId": "nvda-es-d4e8e6cd34198fb4",
+      "lang": "es",
+      "title": "Ya disponible la primera candidata a liberación de NVDA 2026.3.1 con correcciones de seguridad",
+      "summary": "Tal y como ha anunciado NV Access mediante esta publicación, la rc 1 de NVDA 2026.3.1 ya se encuentra disponible para descarga y pruebas. Se recomienda a todos los usuarios descargar esta versión y proporcionar comentarios por los canales de la comunidad, o por el sistema de informe de fallos de NV Access. A menos … Continuar leyendo \"Ya disponible la primera candidata a liberación de NVDA 2026.3.1 con correcciones de seguridad\" La entrada Ya disponible la primera candidata a liberación de NVDA 2026.3.1 con correcciones de seguridad se publicó primero en NVDA en español .",
+      "body": "Tal y como ha anunciado NV Access mediante esta publicación , la rc 1 de NVDA 2026.3.1 ya se encuentra disponible para descarga y pruebas. Se recomienda a todos los usuarios descargar esta versión y proporcionar comentarios por los canales de la comunidad, o por el sistema de informe de fallos de NV Access . A menos que se detecten fallos críticos de última hora, esta versión será idéntica a la versión final de NVDA 2026.3. Esta versión no es apta para entornos de producción. Al instalar esta rc te unirás al canal beta, y sólo recibirás avisos de actualización de compilaciones beta y candidatas a liberación (rc). El canal beta/rc siempre te mantendrá al día con la versión más reciente de NVDA. La última rc de un ciclo de liberación es idéntica a la última versión estable. Para regresar al canal de versiones estables, instala a mano la última versión estable.\n\nEsta versión contiene un parche que resuelve incidencias de seguridad. También corrige un fallo introducido en NVDA 2026.3 con el conmutador de tareas de Windows 10. Se ha restaurado la voz de Espeak NG en portugués de Brasil al comportamiento que tenía en NVDA 2026.2. Para instalar esta rc, puedes configurar el canal «rc y beta» en el complemento Selector del canal de actualización y buscar actualizaciones desde el menú Ayuda de NVDA, o actualizar desde una beta anterior. Y como siempre, también puedes descargar manualmente el instalador de NVDA 2026.3.1 rc 1 . Su suma de comprobación SHA256, que te permitirá garantizar la integridad del archivo descargado, es 25761ace59812a5d60cc7282cca253c78d9293ce3e710eafb2b29783b5a1257c. ¡Feliz miércoles!\n\nLa entrada Ya disponible la primera candidata a liberación de NVDA 2026.3.1 con correcciones de seguridad se publicó primero en NVDA en español .",
+      "sourceName": "NVDA en español",
+      "originalUrl": "https://nvda.es/2026/11/04/ya-disponible-la-primera-candidata-a-liberacion-de-nvda-2026-3-1-con-correcciones-de-seguridad/",
+      "publishedAt": "2026-11-04T06:39:45.000Z",
+      "categories": [
+        "nvda",
+        "windows",
+        "tecnologia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-cb061381ea215dd8:en",
+      "sourceId": "9to5mac-cb061381ea215dd8",
+      "lang": "en",
+      "title": "macOS 27.3 includes cool-looking ‘Pro’ screensaver from new touchscreen MacBook Pro",
+      "summary": "Included in today’s macOS 27.3 beta 1 is a great-looking screensaver featuring an animated version of the new MacBook Pro with PROLED XDR Display wallpaper. Watch it below. more…",
+      "body": "Included in today’s macOS 27.3 beta 1 is a great-looking screensaver featuring an animated version of the new MacBook Pro with PROLED XDR Display wallpaper. Watch it below.\n\nAs it does for most new Macs, Apple designed a striking-looking wallpaper to mark the launch of the new MacBook Pro .\n\nContinuing its tradition of incorporating product names into its wallpapers, the new design features a series of flowing, metallic-looking lines that spell out the word “PRO.”\n\nUnsurprisingly, the design also proved divisive, with some users saying it reminds them of a glitchy, broken screen. Granted, the timing is particularly unfortunate, given the recent reports of display issues affecting the iPhone Duo.\n\nThat said, today’s release of macOS 27.3 beta includes a screensaver version of the wallpaper, called Pro Light, where light slowly moves along the metallic-looking lines, illuminating different parts of the “PRO” lettering as others fade into darkness.\n\nYou can watch it below:\n\nIf you liked the artwork, you may have already downloaded Basic Apple Guy’s recreation . Below, you can download a frame taken straight from the video, featuring Apple’s official artwork:",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/03/macos-27-3-includes-cool-looking-pro-screensaver-from-new-touchscreen-macbook-pro/",
+      "publishedAt": "2026-11-04T02:43:07.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "engadget-cb321aaa5ff6a704:en",
       "sourceId": "engadget-cb321aaa5ff6a704",
       "lang": "en",
@@ -5744,22 +5777,6 @@
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-14d7069e617a8072:en",
-      "sourceId": "9to5mac-14d7069e617a8072",
-      "lang": "en",
-      "title": "iOS 27.3 brings the iPhone Duo’s revamped StandBy to other iPhones",
-      "summary": "Apple released iOS 27.3 beta 1 today, with a surprisingly extensive set of new features and improvements across the system. One of them is the expansion of the iPhone Duo’s redesigned StandBy experience to other iPhone models. Here are the details. more…",
-      "body": "Apple released iOS 27.3 beta 1 today, with a surprisingly extensive set of new features and improvements across the system. One of them is the expansion of the iPhone Duo’s redesigned StandBy experience to other iPhone models. Here are the details.\n\nWhen Apple announced the iPhone Duo, one of its exclusive new features was a redesigned StandBy experience with new clock faces and expanded customization options.\n\nStandBy mode was introduced with iOS 17, and it essentially turns the iPhone into a smart display when placed horizontally while charging.\n\nUntil now, users of other iPhone models were limited to the original StandBy experience, which offered clock, widget, and photo views, but lacked the additional faces and more extensive customization options introduced with the iPhone Duo.\n\nWith iOS 27.3, however, Apple is extending the redesigned Analog and Digital Clock faces to other iPhones, with additional options for customizing their colors and complications. In addition to the new Calendar and Weather faces, the update adds support for Shared Albums to the Photos face, letting users choose which shared photos appear in StandBy.\n\nUsers with an iPhone 11 or later can now also create multiple versions of the same StandBy face, each with its own customization options, and swipe between them.\n\niOS 27.3 is expected to launch in December. To learn more about StandBy and how to customize its different faces, follow this link .",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/03/ios-27-3-brings-the-iphone-duos-revamped-standby-to-other-iphones/",
-      "publishedAt": "2026-11-03T20:14:38.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
       ]
     },
     {

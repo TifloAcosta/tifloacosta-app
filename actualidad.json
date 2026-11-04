@@ -1,13 +1,210 @@
 [
   {
-    "id": "9to5mac-80771f4f4791c987",
+    "id": "9to5mac-6e7dedcdab9408f8",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/04/security-bite-the-record-6-3b-binance-heist-started-with-a-fake-homebrew-install-on-mac/",
+    "originalUrl": "https://9to5mac.com/2026/11/04/daily-november-4-2026/",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-04T17:18:56.000Z",
+    "publishedAt": "2026-11-04T23:25:26.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "android",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "9to5Mac Daily: November 4, 2026 – iOS 27.3 beta 1 now available",
+        "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
+        "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-090c55039c7c25da",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2307356/snap-has-more-than-30-million-paid-subscribers-across-snapchat-and-other-plans/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-04T22:55:57.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Snap has more than 30 million paid subscribers across Snapchat+ and other plans",
+        "summary": "Power users seem more than willing to pay for AI-powered effects.",
+        "body": "Power users seem more than willing to pay for AI-powered effects.\n\nMore than 30 million power users are paying for one of Snap's subscription plans, including Snapchat+ and its ad-free \"platinum\" tier. The company announced the milestone as part of its third-quarter earnings, saying that its non-advertising \"other\" revenue grew 84 percent compared with last year.\n\nSnap introduced Snapchat+, which offers users bonus features like the ability to see which friends re-watched your Story, in 2022 . Since then, the company has added Lens+ , a subscription for AI-powered AR effects; Platinum, which eliminates advertising; and paid storage for the app's Memory feature.\n\nThe company didn't share a breakdown of subscribers across all the plans, but noted that Lens+ \"has grown nearly 600% since January 2026.\" That growth suggests at least some of Snapchat's users are particularly enthusiastic about the app's AI-powered features, like its AI photo editing feature called AI Photoshoot. \"AI-powered features have helped Lens+ exceed our expectations, demonstrating how new creative experiences can drive demand for our paid products,\" CEO Evan Spiegel said during the company's earnings call.\n\nWhile Snap isn't as associated with AI as some of its social media peers, it's notable that AI has helped it drive paid subscribers. X revealed earlier this year that it had about 6.3 million paid subscribers across X Premium and Grok.\n\nSubscriptions were a bright spot for Snap. Spiegel said that advertising revenue was growing \"below our ambitions\" and the company only added 2 million new daily users since last quarter. Snap said that it would focus on reporting monthly active users rather than daily users, beginning in 2027. Snapchat currently has 977 million monthly users.\n\nThe company also warned that its legal challenges and \"increased regulatory scrutiny on youth-related issues\" could affect its prospects. The company is dealing with numerous lawsuits over alleged safety issues and state attorneys general have pushed for Snap to adopt additional safety features following Meta's high-profile settlement."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-c0b50f8ae0c8ddca",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/04/ai-pacs-spent-millions-trying-to-shape-congress-heres-how-they-fared/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-04T22:45:09.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "AI PACs spent millions trying to shape Congress — here’s how they fared",
+        "summary": "AI industry PACs spent millions influencing the 2026 midterms, with mixed results. Political groups are already looking toward the next election cycle.",
+        "body": "Political groups both supporting and opposing the AI industry spent millions of dollars trying to influence Tuesday’s midterm elections and shape the future of AI regulation. That spending produced mixed results, with some of the most heavily backed candidates losing their races.\n\nOn the industry side, two AI-focused political action committees (PACs) that raised and spent money to influence the elections — American Mission and Building the Future — collectively spent $4.8 million to back South Carolina Senate candidate Darline Graham, who lost. American Mission is the Republican spending arm of Leading the Future (LTF), a broader political group backed by OpenAI president Greg Brockman and the VC firm Andreessen Horowitz.\n\nAmerican Mission also spent more than $500,000 apiece supporting Republican House candidates Aaron Flint in Montana and Laurie Buckhout in North Carolina, both of whom lost. LTF’s Democratic spending arm, Think Big, had better luck backing Florida Rep. Jared Moskowitz, who won reelection.\n\nGroups advocating for stronger AI safeguards also saw mixed results. Public First, which is backed by Anthropic, supported several Republicans who lost through its affiliated PAC but had more success backing Democratic candidates. It also contributed $3 million to a PAC supporting California state Sen. Scott Wiener, who was leading his race at the time of publication.\n\nMeanwhile, Guardrails Alliance , a group that has sought to make taking money from AI companies a political liability, spent more than $1 million apiece opposing two candidates who lost: California Rep. Jimmy Gomez and Montana’s Aaron Flint. It also spent $300,000 supporting Angela Gonzales-Torres, who defeated Gomez.\n\nIt’s difficult to separate the impact of AI-related spending from the broader Democratic wave that swept Tuesday’s elections. Elon Musk, who reportedly poured half a billion dollars into supporting Republicans in the midterms, also saw many of his candidates lose . Indeed, LTF also backed some candidates it believed were likely to win, only to see them lose to the Dems.\n\nFor LTF, though, the general election wasn’t the main focus. The group told TechCrunch ahead of Election Day that it thinks primaries (the contests that choose each party’s nominee) are a more effective use of its money, because spending there can build name recognition and help candidates set up AI policy agendas.\n\nLTF spent $27.38 million in the primaries, including $8 million alone on opposing New York Assembly member Alex Bores , who lost his bid for Congress back in June. When deciding whether it’s worth jumping into a general election race, LTF assesses how competitive the race is, whether it thinks spending could make a difference, and whether it should keep its powder dry for future elections.\n\nCharlie Blaettler, political director of Guardrails Alliance, had a different theory for why LTF spent comparatively little in the general election.\n\n“They don’t want their money to become an issue in these elections,” he said. He pointed to the Michigan Senate primary election, in which a pro-Israel lobbying group called AIPAC spent close to $30 million backing Democratic candidate Haley Stevens against Abdul El-Sayed. Stevens conceded the primary to El-Sayed, who went on to win the Senate seat.\n\n“AIPAC became the story in that race,” Blaettler said. “We know people hate AI billionaires. They hate the people running these companies. They’re very distrustful and disgusted by the political spending and lobbying that the tech industry does. If they spend in a competitive race, they would just become an enormous liability for their candidates.”\n\nThe main fight among AIPACs, whether they are pro-industry or pro-regulation, is whether Congress should establish a national AI framework that overrides state laws , or whether states will maintain their own ability to impose safeguards.\n\nNeither side seems poised to back down. LTF, which favors a single national AI framework, told TechCrunch it plans to keep spending in the 2028 elections, while Guardrails Alliance says it wants to keep opposing candidates backed by the AI industry.\n\nBlaettler said that while LTF’s ads rarely touch on AI, instead focusing on popular issues for each candidate, Guardrail Alliance’s ads are specifically about who is taking money from the AI industry.\n\n“Our goal is to make AI money politically toxic,” Blaettler said."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-fdb6b34110b2592f",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/04/nothing-ceo-says-companys-mysterious-ai-first-device-is-dropping-next-month/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-04T22:13:16.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Nothing CEO says company’s mysterious AI-first device is dropping next month",
+        "summary": "While it's not yet clear what kind of product the smartphone startup is cooking up, Nothing's CEO said the product is designed to leverage AI for productivity gains.",
+        "body": "Posted:\n\nNothing, the smartphone startup behind the distinctive Nothing Phone , is working on an AI product, but what it is remains unclear.\n\nOn Wednesday, CEO Carl Pei posted on X that the company’s first “AI-native product” ships in December. “It’s a tool, but one built with the personality and care that have come to define a Nothing product. It has no new screen, and it couldn’t have been an app,” Pei wrote.\n\nPei has teased an AI-first device for some time and the company has also said that it plans to release a pair of AI-linked smart glasses, as well as earbuds with AI integrations.\n\nPei’s description adds up to a screenless non-app that uses AI? He also calls it a “productivity tool.” Adding further mystique to the announcement, Pei seems to downplay any link to AI wearables.\n\n“The whole industry is hunting for its iPhone moment: the pendant, the pin, the glasses, the companion, some magical consumer device that makes AI part of everyone’s life,” Pei wrote. “I admire the boldness, but I read this moment differently.”\n\nNo firm release date has been announced, but Nothing fans should know soon enough what the company has in store for them."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-a786f132a5a54d10",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/04/almost-no-one-uses-ai-agents-to-book-their-uber-company-says/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-04T21:56:01.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Almost no one uses AI agents to book their Uber, company says",
+        "summary": "During its busiest week last quarter, Uber said only four people booked a ride using an AI agent.",
+        "body": "Very few people are using personal AI agents to order Ubers, apparently. On the transportation giant’s third-quarter earnings call on Wednesday, the company said that only four rides were ordered through an AI agent during its busiest week in October: the week of Halloween.\n\nWhile more people used an AI agent to order food through its delivery service, Uber Eats, the volume was still fairly small compared to the overall number of trips.\n\nUber’s chief financial officer, Balaji Krishnamurthy, told Wall Street analysts on the call that the company handled around 320 million trips and orders across Uber and Uber Eats during the week of Halloween, but only 500 Uber Eats orders were placed by an AI agent.\n\n“It is very, very early and very limited traction that we are seeing so far,” said CEO Dara Khosrowshahi, referring to the low number of orders placed by AI agents. “Listen, we hope that there will be more traction.”\n\nThe surprisingly low numbers of AI-initiated transactions come amid growing hype for a new wave of AI agents that don’t just answer questions but also handle tasks on users’ behalf. There’s been an explosion of personal AI startups, including one of the buzziest, Instinct, which was founded last year and raised its most recent round of funding at a $10 billion valuation. Meta’s Muse also became the No. 1 app in Apple’s U.S. App Store last month, topping 10 million users, per Meta’s own reporting . The company said many were using it to shop and transact with businesses.\n\nOpenAI, Anthropic, Google, and SpaceXAI (Grok) are also now offering their own AI agents, as are numerous smaller startups.\n\nStill, early numbers from public companies indicate the agentic web still has a long way to go. DoorDash, for instance, said last week on its earnings call that it has only received a few hundred orders from AI agents so far, as most customers are still placing orders through the DoorDash app.\n\nUber is seeing the same behavior, it seems. Khosrowshahi pointed out that the average time to book a ride is only 50 seconds in the company’s app, and re-ordering a favorite food only takes 90 seconds. That suggests an AI agent isn’t necessarily saving anyone time.\n\nDespite the low number of AI-driven transactions, Khosrowshahi seemed bullish on the idea of agents in general. “We think that is another opportunity to reach our platform. We think it will be a net positive in terms of demand on the ecosystem,” he said.\n\nRight now, there are around eight major AI assistants on the market, Khosrowshahi noted, and he expects that number to grow to more than 10 in time.\n\n“Every single AI system company is talking to us,” he added."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-9c29b24076a4fa16",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/tech-policy/2026/11/big-tech-claims-voters-ai-backlash-is-anti-trump-not-anti-tech/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-04T20:55:50.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Big Tech claims voters’ AI backlash is “anti-Trump” not “anti-tech”",
+        "summary": "Tech industry in denial as US overwhelmingly votes to restrict AI, data centers.",
+        "body": "Donald Trump’s big, rapid American AI buildout now faces a major slowdown as voters in yesterday’s elections overwhelmingly supported candidates and measures that favored increasing restrictions on AI and data centers nationwide.\n\nOne resource from a polling firm, called Redbud Consulting, tracked data center initiatives on the ballot and reported that out of 44 measures across 10 states seeking to restrict data centers, 38 passed so far. Those measures included dozens of moratoriums and bans. Analysts suggested those won’t impact data centers already under construction or approved through 2027, instead largely impacting future projects planned for 2028. Only one measure passed allowing a data center to proceed. But even that small win represented pushback on the AI industry—requiring data center developers in a North Dakota city to pay for independent reviews and hold public hearings when expanding or proposing projects.\n\nIn addition to increasing regulations on data centers, voters also backed anti-AI candidates, electing officials vowing crackdowns in key states building out the most data center capacity in the US.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-b8af1f87c5586db1",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/04/heres-everything-new-for-apple-photos-in-ios-27/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-04T20:47:18.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple Photos keeps getting better, here’s what’s new in iOS 27",
+        "summary": "iOS 27’s biggest highlight is Siri AI, but the update also packs new features for apps like Messages , Notes , Wallet , and more . Here’s everything new for Apple’s Photos app in iOS 27. more…",
+        "body": "iOS 27’s biggest highlight is Siri AI, but the update also packs new features for apps like Messages , Notes , Wallet , and more . Here’s everything new for Apple’s Photos app in iOS 27.\n\nApple Intelligence powers a trio of editing tools in iOS 27’s Photos app: Extend, Reframe, and a much-improved Clean Up feature.\n\nExtend lets users “give their subjects more breathing room,” per Apple . For example, “they can straighten a crooked horizon without cropping out anything important, or adjust the aspect ratio, and Extend will fill in the missing pieces.”\n\nReframe lets you adjust the framing of your image spatially. Here’s how Apple describes it:\n\nWith Spatial Reframing, users can improve the composition of a photo after it’s been taken. Spatial Reframing builds on Apple’s deep understanding of spatial models thanks to Apple Vision Pro, so users can touch and drag a photo and preview in real time how the perspective shifts — as if they’d repositioned the camera in the original scene. Using powerful image models, Spatial Reframing will only generate new content where the perspective has been shifted, ensuring the reframed photo stays consistent with the original scene.\n\nAnd the Clean Up feature that debuted in iOS 18 “gets a major upgrade,” Apple says, “so users can remove distractions with better quality and more realistic infill, even when the scene is complex.”\n\niCloud Shared Albums get their first major upgrades in years with iOS 27. The timing is likely no coincidence, with the feature perfect for Apple’s new HomeView product.\n\nHere’s an overview of what’s new, per Apple :\n\niOS 27 adds two new collections to the Photos app, available under Utilities.\n\nCaptured by Me exclusively contains photos taken by you. So it will filter out screenshots, photos you’ve saved from others, and so on.\n\nIdentity Documents scans through your Photos library and surfaces images that contain important reference documents, like your driver’s license or passport.\n\nApple says iOS 27 also adds “Album organization improvements,” but it doesn’t mention specifics.\n\nAnother new organization tool in iOS 27 is that you can add keywords to photos. Captions are still available too, but if you scroll up on a photo, near the bottom you’ll find a new ‘Add Keywords’ option.\n\nAnother upgrade perfect for HomeView involves slideshow improvements.\n\nApple Photos has supported quick, easy slideshow creation for years. But if you wanted to customize the automatically generated slideshows, you were out of luck.\n\nNow in iOS 27, slideshows offer new tools for customization. You can change the transition type, set a custom length for the full slideshow and for each photo, and more.\n\nAnother welcome addition is that Apple now lets you save any slideshow as a video with one tap.\n\niOS 27 doesn’t contain any big changes to the design of the Photos app, so if you were hoping to go back to the pre-iOS 18 era, you’ll be disappointed. But the update does offer a variety of exciting new features that make iOS 27 a big release for Apple Photos.\n\nWhich of iOS 27’s new Apple Photos features are your favorites? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-apps-81462762a08111da",
+    "type": "news",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/music/treblo-ai-music",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-04T20:45:02.000Z",
+    "categories": [
+      "apple",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Treblo - AI Music",
+        "summary": "Make songs with the world's best AI music model. For free. No limits. Turn any idea into a real song—a meme for the group chat, a love song for your person, or a track the whole world vibes to. Whatever you hear in your head, Treblo helps you make it. CREATE IN SECONDS Describe your song. Pick a style. Hit generate. That's it. Want more control? Tweak lyrics, tags, and settings whenever you want. MAKE IT YOURS Extend tracks. Swap sections. Upload audio to cover. Craft until it's perfect. SHARE & DISCOVER Post your music. Follow other artists. Join groups. Remix what inspires you. Build your audience. Hyperpop. Drift phonk. Sea shanties. If you can imagine it, you can create it. Privacy Policy: https://treblo.com/privacy Terms of Service: https://treblo.com/tos",
+        "body": "Make songs with the world's best AI music model. For free. No limits. Turn any idea into a real song—a meme for the group chat, a love song for your person, or a track the whole world vibes to. Whatever you hear in your head, Treblo helps you make it. CREATE IN SECONDS Describe your song. Pick a style. Hit generate. That's it. Want more control? Tweak lyrics, tags, and settings whenever you want. MAKE IT YOURS Extend tracks. Swap sections. Upload audio to cover. Craft until it's perfect. SHARE & DISCOVER Post your music. Follow other artists. Join groups. Remix what inspires you. Build your audience. Hyperpop. Drift phonk. Sea shanties. If you can imagine it, you can create it. Privacy Policy: https://treblo.com/privacy Terms of Service: https://treblo.com/tos"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-dbf0d83ae3d9bdcc",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/04/apple-disables-siri-ai-waitlist-in-ios-27-with-one-exception/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-04T20:28:23.000Z",
     "categories": [
       "apple",
       "tecnologia-general",
@@ -17,9 +214,130 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Security Bite: The record $6.3B Binance heist started with a fake Homebrew install on Mac",
-        "summary": "9to5Mac Security Bite is exclusively brought to you by Mosyle, the only Apple Unified Platform . Making Apple devices work-ready and enterprise-safe is all we do. Our unique integrated approach to management and security combines state-of-the-art Apple-specific security solutions for fully automated Hardening & Compliance, Next Generation EDR, AI-powered Zero Trust, and exclusive Privilege Management with the most powerful and modern Apple MDM on the market. The result is a totally automated Apple Unified Platform currently trusted by over 45,000 organizations to make millions of Apple devices work-ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple . Last week, news broke that hackers had stolen $6.3 billion from wallets on Binance, the most popular cryptocurrency exchange in the world. The company was able to freeze about nearly $3 billion of it, but the attack quickly made headlines, and rightfully so, as the largest financial heist in human history. At the time, I suspected, along with security researcher Christopher Lopez and plenty of others, that this could have very well started on a Mac. As Lopez pointed out , the $1.5 billion Bybit heist last year also began on a developer’s Mac. On top of that, Macs are hugely popular among DevOps engineers and crypto folks, and they’ve been on the receiving end of a steady stream of malware and social engineering campaigns over the past few years. more…",
-        "body": "9to5Mac Security Bite is exclusively brought to you by Mosyle, the only Apple Unified Platform . Making Apple devices work-ready and enterprise-safe is all we do. Our unique integrated approach to management and security combines state-of-the-art Apple-specific security solutions for fully automated Hardening & Compliance, Next Generation EDR, AI-powered Zero Trust, and exclusive Privilege Management with the most powerful and modern Apple MDM on the market. The result is a totally automated Apple Unified Platform currently trusted by over 45,000 organizations to make millions of Apple devices work-ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple .\n\nLast week, news broke that hackers had stolen $6.3 billion from wallets on Binance, the most popular cryptocurrency exchange in the world. The company was able to freeze about nearly $3 billion of it, but the attack quickly made headlines, and rightfully so, as the largest financial heist in human history.\n\nAt the time, I suspected, along with security researcher Christopher Lopez and plenty of others, that this could have very well started on a Mac. As Lopez pointed out , the $1.5 billion Bybit heist last year also began on a developer’s Mac. On top of that, Macs are hugely popular among DevOps engineers and crypto folks, and they’ve been on the receiving end of a steady stream of malware and social engineering campaigns over the past few years.\n\nI can now say any suspicions that this heist originated on Mac were right. I’m still in a state of shock. Dazed not by the amount stolen, but how the said hackers did so using the same ol’ social engineering tricks they’ve been using for years. No sophisticated multi-milllion dollar underground zero-day here.\n\nYesterday, Binance published a more detailed breakdown of the attack. The company never actually says “Mac,” but the malware it published targeted /opt/homebrew, which is where Homebrew lives on Apple silicon Macs. In other words, this was almost certainly an M-series MacBook.\n\nThe attack basically transpired in two steps.\n\nAccording to Binance , in June this year, a DevOps engineer working on Wallet searched for an AI coding tool and downloaded a malicious clone of the Homebrew installer in Google Search. Binance claims it caught it early and stopped any damage. However, what it didn’t know was that it allowed the attackers to learn which employees worked on its wallets. This was phase 1.\n\nFast forward a few months to September, a different engineer who, you guessed it, worked on wallets for Binance, was lured into a fake job interview. As these sort of social engineering attacks normally go, they told to run a coding “assignment” on their work computer. This was not caught by Binance security, and on October 29, the world learned that hackers (now widely speculated as North Korean hackers) walked off with billions.\n\nOf course, most of what we know so far comes directly from Binance, so if you’re looking for more details on exactly how this happened, you’ll likely be left empty-handed.\n\nIt’s important to note here though, none of these two attack vectors are new. Back in early 2025, I wrote about fake Homebrew ads at the top of Google Search pushing Atomic Stealer to Mac users. Binance only says the engineer found his installer through “a search engine.” Of course, I can’t confirm it was a sponsored ad, but if history tells us anything…\n\nThis is a rather uncomfortable situation for Apple to be in. The largest financial heist in history happen on Mac last week, though to be fair, there’s no security feature that can stop a developer from running a script he wants to run.\n\nSure, the Terminal paste warnings introduced in macOS 26.4 could have helped here. But realistically, if someone’s convinced they’re doing a coding test for a job they really want, a warning pop-up probably isn’t going to stop them.\n\nHere’s what that warning looks like:\n\nI’m having Christopher Lopez ( @L0Psec ) a professional macOS reverse engineer back on the Security Bite Podcast this week to talk about the Binance situation with me. Follow the show so you don’t miss that.\n\nSecurity Bite is 9to5Mac’s weekly deep dive into the world of Apple security. Each week, Arin Waichulis unpacks new threats, privacy concerns, vulnerabilities, and more, shaping an ecosystem of over 2 billion devices. Every other week on the Security Bite Podcast , he sits down with experts in the field to break down the most pressing topics ."
+        "title": "Apple disables Siri AI waitlist in iOS 27, with one exception",
+        "summary": "When Siri AI launched in iOS 27 earlier this fall, Apple used a waitlist to gate access. But a newly updated support document says the waitlist is no longer being used, except in “high demand” times. more…",
+        "body": "When Siri AI launched in iOS 27 earlier this fall, Apple used a waitlist to gate access. But a newly updated support document says the waitlist is no longer being used, except in “high demand” times.\n\nIf you haven’t yet enabled Siri AI on your iPhone, Apple recently made it quicker and easier to gain access.\n\nThat’s because, per updates to this support document , the company is now only using a waitlist for Siri AI in “high demand” times.\n\nAfter giving instructions on how to enable Siri AI by tapping “Try Siri AI (Beta)” inside Settings, here’s what the document used to say compared to what it says now.\n\nOld:\n\nThis will add you to a waitlist, and wait times can vary. Siri AI will begin to download automatically when your wait is complete.\n\nNew:\n\nSiri AI will begin to download automatically. During time of high demand, you might be added to a waitlist first, and wait times can vary.\n\nIt’s understandable that a waitlist was used initially upon iOS 27’s release. Apple needed to slowly grant access while gauging server performance. But now that we’re nearly two months into the iOS 27 rollout, it’s great that Apple is only deploying the waitlist occasionally as needed.\n\nHave you enabled Siri AI on your iPhone? If not, what’s holding you back? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-47b51b463d6d7d81",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2307116/pangram-expands-its-ai-detection-tools-to-video-and-images/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-04T20:28:18.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Pangram expands its AI detection tools to video and images",
+        "summary": "The company behind the widely used tool for AI text is moving into more kinds of AI slop.",
+        "body": "The company is moving into more kinds of AI slop.\n\nPangram, maker of a widely used tool for detecting AI-generated text, released new tools for flagging AI-generated image and video slop.\n\nWith the update, Pangram subscribers can upload videos and get an assessment of whether AI was used to create or edit the clip. The company says the tool is able to distinguish between clips that are \"partially AI\" and those that are entirely AI-generated. The tool also comes with a \"heatmap\" that can flag which aspects of the video are likely to be AI.\n\nThe company says that the underlying model behind its video detection capabilities \"particularly excels at frontier AI video detection\" and that in testing it was significantly better at picking out AI videos than other detection tools. The video model was able to flag AI content with more than 98 percent accuracy, according to one internal test detailed by the company.\n\nPangram has also upgraded its AI image detection abilities. The company previously released a research preview of its image model, Pangram Image 1.0. That model is now available via the company's Chrome extension, which can automatically scan images as you browse and flag ones that are likely to be AI.\n\nAccording to the company, its image model was able to flag more than 99 percent of AI images with a false positive rate of .27 percent in its testing. Of course, as with other AI image detection tools, there are some caveats. The company says that at resolutions below 512 x 512, \"results will come with a reduced confidence disclaimer.\" That could account for why an image shared by Pangram CEO Max Spero of the Chrome extension in action on Pinterest's website indicated an \"unsure\" result on two images that are obviously not genuine photos.\n\nSpero noted that there were other challenges to developing its image detection model. \"Most phone cameras, including iPhones, do some level of AI postprocessing to add detail to real photos,\" he explained in a post on X . \"We had to build a model that's robust to this postprocessing while understanding the difference between AI edits and fully AI-generated visuals.\" And he told Pirate Wires that the company delayed the release of its image model so it could test it on several iPhone 18 Pros because its model initially flagged images from the phones' cameras as AI.\n\nPangram's new AI image and video detection abilities are available now to those with a Pangram subscription. The company allows users with a free account to check a handful of images without signing up for a paid plan."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-b41e003ad1cec525",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1026787/att-gemini-for-home-connected-life-security-system",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-04T20:23:24.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Gemini for Home now plugs into AT&T’s smart security system",
+        "summary": "AT&T's smart home security system now integrates with Gemini for Home. The company says its Connected Life system is the \"first\" home security product to integrate with Google Home Premium, enabling a bunch of Gemini-powered features that can summarize home events, search your video history, and more. With the update, Gemini for Home can provide […]",
+        "body": "AT&T's smart home security system now integrates with Gemini for Home. The company says its Connected Life system is the \"first\" home security product to integrate with Google Home Premium, enabling a bunch of Gemini-powered features that can summarize home events, search your video history, and more.\n\nWith the update, Gemini for Home can provide detailed descriptions about events captured by your security cameras, such as who delivered a package and how many items they dropped off. You can also search recorded video footage using natural language questions, like \"What dug up the yard last night?\" or \"Who let the dogs out?\", as well as revie …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "freedom-scientific-blog-6193999b115770a4",
+    "type": "news",
+    "sourceId": "freedom-scientific-blog",
+    "sourceName": "Freedom Scientific",
+    "sourceUrl": "https://blog.freedomscientific.com/",
+    "originalUrl": "https://training.vispero.com/learn-how-to-create-repeatable-ai-workflows/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-04T20:06:48.000Z",
+    "categories": [
+      "windows",
+      "tecnologia-accesibilidad",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Learn How to Create Repeatable AI Workflows",
+        "summary": "Artificial Intelligence (AI) is changing how we work, helping us automate routine tasks, analyze and summarize data, and generate content. Learn AI with our AI live webinar series and comprehensive online guide, designed to empower you with the knowledge and skills to increase productivity and independence in the workplace. The 16th webinar in this series, …",
+        "body": "Artificial Intelligence (AI) is changing how we work, helping us automate routine tasks, analyze and summarize data, and generate content. Learn AI with our AI live webinar series and comprehensive online guide, designed to empower you with the knowledge and skills to increase productivity and independence in the workplace.\n\nThe 16 th webinar in this series, “Create Repeatable AI Workflows,” will take place Thursday, November 5, 2026, at 12:00 pm Eastern time (U.S. and Canada).\n\nDo you find yourself doing the same tasks week after week? Repeatable AI workflows turn recurring responsibilities into organized processes that can be used again and again. By developing reusable prompts, instructions, templates, and review steps, you can save time and produce more consistent results.\n\nIn this webinar, we’ll show you how to:\n\nRegister for this webinar to learn how to build AI workflows that save you time and deliver consistent results. ACVREP credits will be available for those who attend the live webinar.\n\nThis webinar is part of a series designed for all skill levels. It starts with the basics and builds each month, offering a deeper understanding of AI concepts and practical applications. Webinars are held on the first Thursday of every month at noon ET and are archived on our Webinars On Demand page, so you can stream or download sessions anytime. No prior AI experience is needed!\n\nAccess additional details on our page dedicated to helping you learn AI .\n\nHave questions? Send an email to training@vispero.com ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-0b7f4cf7ef565606",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/gadgets/1025370/google-pixel-11-pro-phone-deal-sale",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-04T19:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google’s Pixel 11 phones are up to 27 percent off",
+        "summary": "You can save a heck of lot of money on Google’s Pixel 11 phones through November 8th, whether you want the best-for-the-least Pixel 11, or the slightly pricier Pixel 11 Pro that takes better photos. Even the big Pixel 11 Pro XL with a longer-lasting battery is hundreds off its original price. The Pixel 11 […]",
+        "body": "You can save a heck of lot of money on Google’s Pixel 11 phones through November 8th, whether you want the best-for-the-least Pixel 11 , or the slightly pricier Pixel 11 Pro that takes better photos. Even the big Pixel 11 Pro XL with a longer-lasting battery is hundreds off its original price.\n\nThe Pixel 11 Pro deal is the most attractive of the bunch, as the $1,099.99 phone with 256GB storage and 12GB of RAM is down to just $799.99 at Amazon , Best Buy , and at the Google Store , beating its October Prime Day price by $50. It’s $100 less than the base Pixel 11 model sold for at launch, and it’s the phone to get if you want great camera performance, plus extra features like HiLight that, while cool, weren’t really worth paying a premium to access. I’d be very surprised if the price dropped more for Black Friday.\n\nThere’s absolutely nothing wrong with opting for the Pixel 11 instead, especially at its attractive $699.99 ($200 off) price that now matches the cost of the iPhone 17E, following Apple’s September price bump . The Pixel 11 is the most affordable phone that supports Google’s software features that are exclusive to this year’s phones, including Magic Capture, Camera Looks, and Proactive Assistance. It has fast 25W wireless charging (up from 15W with the Pixel 10), and has 12GB of RAM, like the Pixel 11 Pro.\n\nI’m still happily rocking my Pixel 9 Pro, but if I were going to upgrade right now, I’d get the Pixel 11 Pro. Yes, I want the better cameras and HiLight. But really, the main reason I’m lured to the Pro is because the trade-in offers are really generous right now. It’s just $10 more to opt for the Pro over the base Pixel 11. My base Pixel 9 Pro with 128GB of storage can fetch $530 in trade-in credit at the Google Store and $525 at Best Buy, which seems great."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-4711c2db8b9f68bd",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1026586/nothing-screen-free-ai-device-carl-pei",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-04T18:26:07.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Nothing teases a screen-free AI device ahead of launch next month",
+        "summary": "Nothing CEO Carl Pei said in a post on X that the company's launching its first AI device in December. That's just a little over a year after Pei announced plans for \"AI-native\" devices and an AI operating system. He didn't give away much about what exactly the new device is, only that one feature […]",
+        "body": "Nothing CEO Carl Pei said in a post on X that the company's launching its first AI device in December. That's just a little over a year after Pei announced plans for \"AI-native\" devices and an AI operating system. He didn't give away much about what exactly the new device is, only that one feature it won't have is a screen:\n\n\"Our first AI-native product ships next month. It's a tool, but one built with the personality and care that have come to define a Nothing product. It has no new screen, and it couldn't have been an app.\"\n\nPei shared an image with the post that says \"NOTHING(R)\" in the top left corner, above an ambiguous black rounded …\n\nRead the full story at The Verge."
       }
     },
     "media": null
@@ -48,127 +366,6 @@
     "media": null
   },
   {
-    "id": "techcrunch-7e6729e468978052",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/04/i-tried-apples-siri-recaps-theyre-surprisingly-useful-and-a-little-unsettling/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-04T16:51:35.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "I tried Apple’s Siri Recaps. They’re surprisingly useful — and a little unsettling",
-        "summary": "Apple's AI-powered Siri Recaps won me over in just one day, despite my privacy reservations. But there's still room for improvement.",
-        "body": "On Tuesday, Apple rolled out a potentially controversial set of Audio Intelligence features into testing with the first developer beta versions of iOS 27.3 and watchOS 27.3. The betas bring four new AI features that allow Apple Watch Series 12 wearers to detect important sounds, identify songs, catch up on conversations, and take notes.\n\nAfter just a day with Apple’s Siri Recaps feature on my Apple Watch, I can already see how its value may ultimately outweigh any creepiness factor that comes from the AI-powered audio recording and summarization it provides. However, I also see areas where AI-assisted note-taking can go too far, capturing things that aren’t worth remembering, and where there’s room for improvement.\n\nThe first two, sound and song detection, don’t represent potential privacy concerns; they are designed to detect either important sounds — like an alarm or doorbell — or identify a song using Shazam’s technology. The former helps deaf and hard-of-hearing users navigate the world, and the latter is something we’ve already done with our iPhone for nearly two decades now.\n\nIt’s the two other features, Live Rewind and Siri Recaps, that have raised concerns. The features record and then transcribe or summarize the conversations happening with and around the Apple Watch’s owner. Live Rewind lets you go back to see what was said in the past 15 seconds, while Siri Recaps summarize audio throughout your day, saving notes of the important things that were said.\n\nApple has taken care to ensure the privacy of these AI features by processing the audio and running AI models on-device, when possible, and by not identifying speakers, storing raw audio files, and redacting private information, like government ID numbers or personal account information.\n\nStill, some are put off by the idea that we’re now normalizing the idea that technology is always listening .\n\nI find myself sympathizing with both camps. I often lament that we’ve allowed technology to become so pervasive in our daily lives, but I still see the value in what Apple has built.\n\nI haven’t yet had an appropriate time to test Live Rewind, nor do I think this will be a feature I use as often. I’m more likely to say “sorry, what?” or “can you repeat that?” if I missed something that was said, before turning to my Apple Watch for help.\n\nBut with Siri Recaps, I immediately saw how this could become a feature I rely on regularly to save important notes for later.\n\nI was able to test the feature in a real-world scenario yesterday, when we were dropping off my teen’s car for repairs and picking up a rental. At both places, employees shared a lot of information about time frames, prices, and policies that were delivered verbally. The information came too fast to stop and write anything down. Yet when I returned to Siri Recaps later in the day, it had captured key details that I may need to refer back to.\n\nFor instance, it noted the deductible, the repair time frame, the amount of gas we had in the rental at the start, and other things I wanted to remember.\n\nOne complaint is that Siri Recaps had mixed this information with other topics that were later discussed in the home, like an errand we needed to run and what time babysitting was this week, something we were discussing in order to create an appointment on the family calendar with an appropriate alert time frame.\n\nI think these items should have been saved in a separate note titled “family schedule and errands,” rather than in the same note with the car repairs, but under a separate heading.\n\nBecause I configured Siri Recaps to run at all times, it also captured non-essential things, like our “plan” to watch the midterms coverage on TV, which is not the kind of thing you’d normally jot down a note about. It also was a stark reminder that the feature was listening in on our everyday conversations. That’s something that could feel invasive in different scenarios, if the subject being discussed was more personal in nature.\n\nThis had me considering turning off the Recap feature while at home in the evening, so family dinner table chatter doesn’t become note fodder.\n\nWhile I appreciated that the Recap picked up a reminder about an errand I needed to run from one of the family conversations, other tidbits it saved — like what we were watching on TV — would only be valuable if you were exporting a Siri Recap note to Apple’s Journal app, because it was something you wanted to record for personal reasons.\n\nI’d like to see these sorts of extraneous details saved as separate notes — or at least as dedicated sections that could be exported or deleted on their own at the end of the day.\n\nI’d also love to be able to swipe left on an individual bullet point to remove it from the Siri Recap entirely, rather than having to enter edit mode, place the cursor, and then start deleting the text I don’t need.\n\nAnother option I’d like to have would be a setting that would allow you to automatically export any saved Siri Recap (the ones you click the bookmark icon to save) to Apple’s Notes app, instead of that being an extra step.\n\nThese Recaps could go into their own folder in the Notes app for easy reference. I can understand why this option is not the default, given how many different ways people use a general-purpose app like Notes. However, it would be useful for those of us who want to keep Notes as the central starting point for all our jotted-down reminders and to-dos.\n\nThough I wasn’t immediately warmed up to the idea that my Watch was always listening, so to speak, I see the value of this sort of automated note-taking in daily life."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-fb2860811c3ad5a8",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1026360/anker-eufy-window-camera-e10-indoors-security-ai-color-night-vision",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-04T16:36:21.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Anker’s new window-mounted camera monitors the outside of your home from within it",
-        "summary": "Anker announced a new indoor security camera that's designed to watch your yard, driveway, or front porch through a window, instead of monitoring what's inside your home. The new Anker Eufy Window Camera E10 takes a similar approach to the Wyze Window Cam that launched nearly a year ago. It installs right against a window […]",
-        "body": "Anker announced a new indoor security camera that's designed to watch your yard, driveway, or front porch through a window, instead of monitoring what's inside your home. The new Anker Eufy Window Camera E10 takes a similar approach to the Wyze Window Cam that launched nearly a year ago . It installs right against a window using an including mounting sticker to reduce glare and reflections, but the camera doesn't require any weatherproofing since it's not enduring the elements outdoors.\n\nThe Eufy Window Camera E10 is available now for $79.99 through Anker's online store and Amazon , making it more than twice expensive as the $34.98 Wyze Window …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-f516e8132d9ed2bd",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/04/macbook-neo-2-is-coming-and-apple-reportedly-expects-a-massive-hit/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-04T16:33:02.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "MacBook Neo 2 is coming, and Apple reportedly expects a massive hit",
-        "summary": "Apple has a MacBook Neo 2 planned for early 2027, per Mark Gurman , and a new report from Digitimes indicates the company is expecting it to be a massive hit. more…",
-        "body": "Apple has a MacBook Neo 2 planned for early 2027, per Mark Gurman , and a new report from Digitimes indicates the company is expecting it to be a massive hit.\n\nWhen the MacBook Neo debuted earlier this year, it became an instant hit.\n\nDriven primarily by MacBook Neo, Apple set a new record for its best ever sales week among first-time Mac buyers.\n\nBut as popular as the first MacBook Neo has proven, it sounds like Apple is planning for its successor to be an even bigger hit.\n\nAaron Lee writes at Digitimes :\n\nApple has given suppliers a shipment forecast of 16 million MacBook Neo units for 2027, about double the nearly 8 million units expected in 2026, according to supply-chain sources.\n\n16 million units for 2027 is a huge increase from MacBook Neo’s 2026 numbers.\n\nA small portion of that increase can be attributed to the MacBook Neo being on sale for longer in 2027. The original Neo arrived in March 2026, so 2027 will have the advantage of January and February sales.\n\nBut those two extra months can’t come anywhere close to accounting for the doubling of units. Especially since they’re slower periods for consumer electronics sales.\n\nWith reporting pointing to a MacBook Neo 2 launching in early 2027, it sounds like Apple is confident the Neo will prove even more popular in the year ahead.\n\nRead more : MacBook Neo 2 will get the big upgrade it needs most, per rumors\n\nWhat’s your take on Apple’s MacBook Neo plans for 2027? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-0dbd43170ce8bdb8",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/04/google-faces-backlash-for-plan-that-would-turn-off-search-for-schools-that-restrict-ai/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-04T16:17:22.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google faces backlash for plan that would turn off Search for schools that restrict AI",
-        "summary": "Politicians on the left, like NYC mayor Zohran Mamdani and former FTC chair Lina Khan, accused Google of acting as an unregulated monopoly.",
-        "body": "Google was met with swift backlash on Tuesday after it announced that schools using Google’s K-12 software will not be able to use Search unless they opt in to using AI tools.\n\nChris Phillips, vice president for education at Google, told The New York Times that “Search and AI are deeply integrated,” so if a student’s school doesn’t opt in to using AI tools like Gemini, then students “will not have access to search, and they’ll see a message from their school that indicates it’s not available.”\n\nEven as Google made this announcement on a busy Election Day, several left-leaning politicians took time to speak up about their concerns.\n\nSenator Bernie Sanders (I-VT) accused Google in an X post of “extortion,” writing that “Google is threatening schools: if you stop your students from using AI, we will cut off your access to Google Search.” Senator Richard Blumenthal (D-CT) said on X that Google is “more concerned with forcing Gemini into schools than enabling students to succeed.”\n\nLina Khan, the former Federal Trade Commission chair and staunch advocate against monopolies, also condemned Google’s decision as anticompetitive.\n\n“This highlights the danger of allowing an unregulated monopolist to control an essential service,” she wrote . “Multiple courts have found Google liable for violating antitrust laws, and this latest move shows it remains unchastened.”\n\nNew York City mayor Zohran Mamdani accused Google of being a monopoly, commenting , “No corporation should have the power to dictate how we teach our children.”\n\nWhile Search is a necessary tool for information gathering, educators worry that its built-in AI overviews could dissuade students from finding answers themselves. For millions of students required to use Chromebooks and Google education tools, using a different search engine isn’t a simple fix.\n\nGoogle says that it’s working on a “Guided Learning” tool for student accounts in Search, which is supposed to walk students through the process of solving a problem or finding information, rather than just handing them the answer. If a student is struggling with a math problem, for example, the feature may prompt them to refresh their memory about the rules for dividing exponents, instead of spitting out a number.\n\nIn response to the backlash, Google pointed out in a post on X that it had listened to educators by turning off access to AI products by default and noted that schools could turn on Gemini, Gemini Notebook, and Search individually.\n\n“We know there’s concern about students using AI to shortcut schoolwork, and schools have told us they want control,” Google wrote in its statement. “That’s exactly why we are making these changes today to address the feedback we’ve heard from educators in recent months. And we’ll continue to engage deeply with educators to ensure we are giving schools more choice, more controls, and improved Search for learning.”"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-d339b888e817ac57",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1025659/rian-johnson-chromagraph-camera-interview",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-04T16:10:05.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Rian Johnson explains why he had to build his own iPhone camera app",
-        "summary": "Rian Johnson is an analog photography devotee. The director of Knives Out and The Last Jedi can often be spotted on set with a Leica M6 at his side, documenting production on film. But sometimes, it's still easier to reach for a phone. So Johnson started wondering if the photos from his iPhone could be […]",
-        "body": "Rian Johnson is an analog photography devotee. The director of Knives Out and The Last Jedi can often be spotted on set with a Leica M6 at his side, documenting production on film. But sometimes, it's still easier to reach for a phone. So Johnson started wondering if the photos from his iPhone could be made to look more like the grade he applies to his movies.\n\nThe result is Chromagraph Camera , a $13 iOS app that bypasses elements of Apple's image processing pipeline and applies the same look used on Johnson's movies. The app, made by Johnson and his longtime cinematographer, Steve Yedlin, is shockingly simple, with just a few primary settin …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-1c9008e463d1d98e",
     "type": "news",
     "sourceId": "ars-technica",
@@ -192,54 +389,6 @@
     "media": null
   },
   {
-    "id": "the-verge-fd4dd1e314cd5d73",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/policy/1026365/data-centers-midterms-results",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-04T16:05:39.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Data centers lost the midterms",
-        "summary": "Data center developers are poised to face a more restrictive building environment after voters across the country voted in candidates who favor moratoriums and ballot measures that put more obstacles on their expansion, delivering a stinging blow to a central pillar of the AI industry. Of voters polled by NBC News on Election Day, 76 […]",
-        "body": "Data center developers are poised to face a more restrictive building environment after voters across the country voted in candidates who favor moratoriums and ballot measures that put more obstacles on their expansion, delivering a stinging blow to a central pillar of the AI industry.\n\nOf voters polled by NBC News on Election Day, 76 percent said they opposed data centers in their communities. Dozens of local communities voted directly to restrict development through ballot measures . And upset winners like Texas Democratic Governor-elect Gina Hinojosa and Michigan's Democratic Senator-elect Abdul El-Sayed support moratoriums on development.\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-a021c1ffffc32096",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/04/with-ios-27-3-apple-will-start-checking-icloud-public-links-for-harmful-content/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-04T15:55:23.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "With iOS 27.3, Apple will start checking iCloud public links for ‘harmful content’",
-        "summary": "iOS 27.3 adds lots of new iPhone features , and it also makes a change to how public iCloud links work with the aim of preventing harmful content from being shared. Here are the details. more…",
-        "body": "iOS 27.3 adds lots of new iPhone features , and it also makes a change to how public iCloud links work with the aim of preventing harmful content from being shared. Here are the details.\n\nThis week Apple released the first iOS 27.3 beta, which adds Siri AI improvements , new Safari features , the all-new Apple Health app , and more.\n\nPer a newly published support document on Apple’s website, iOS 27.3, macOS 27.3, and more also include a key change to how iCloud public links work.\n\nApple currently provides two main options when sharing photos, files, and more via iCloud. You can share with ‘People you choose’ or create a public link that works for ‘Anyone with the link.’\n\nStarting with iOS 27.3 and companion updates, the ‘Anyone with the link’ option will start being checked by Apple for harmful content.\n\nPer the support document :\n\nWhen you share content that’s stored in iCloud, such as a photo in iCloud Photos or a file in iCloud Drive, you can choose to Share a Link or Send a Copy of the item. If you choose Share a Link, you can either share the item with “People you choose” — only people you invite or approve — or with “Anyone with the link,” which makes it accessible to anyone who has the link, including Apple. Starting in version 27.3 or later of iOS, iPadOS, macOS, and visionOS, items shared using Anyone with the Link will be checked by Apple for harmful content.\n\nIf Apple flags the content you’re sharing as harmful, the support doc says it “reserves the right to move, refuse, modify, remove, or delete the content at any time.”\n\nFor anyone trying to upload harmful content, the company may “take action against your Apple Account, including blocking or disabling your Apple Account, blocking the ability to create a new Apple Account with the associated email address or phone number, or if necessary, involving law enforcement.”\n\nAs outlined above, choosing the ‘Anyone with the link’ option has always made it accessible to “anyone who has the link, including Apple.” That’s because it’s a public link.\n\nWhat’s changing now, though, is that Apple says it will begin checking those public links for harmful content.\n\nDo you use iCloud public links? What’s your take on this change? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-aea012de85187f16",
     "type": "news",
     "sourceId": "ars-technica",
@@ -258,30 +407,6 @@
         "title": "What I learned driving the Slate electric truck prototype",
         "summary": "After 45 minutes behind the wheel, I am more optimistic about the $25,000 EV.",
         "body": "If my 45-minute drive yesterday morning is anything to go by, I think Slate Auto will have quite the hit on its hands. The startup had one of its prototype trucks in town and asked if I wanted to check it out—no jumping on a plane or having to spend yet another night in an interchangeable hotel room, just a drive from southwest DC to Rockville, Maryland. Easy-peasy.\n\nThe prototype truck had been well-used, with almost 6,000 miles (9,656 km) showing on the small and minimalist but very legible digital display that also shows your speed and, if you engage reverse, the backup camera. And while the cabin layout was representative of the production version, the surfaces most certainly weren’t—the prototype instead uses a lot of hard and shiny black plastic, with strips of Velcro here and there left over from when the interior had to be camouflaged when the vehicle was out in public.\n\nGetting acquainted with the Slate was refreshingly easy. The Morris Marina-like door handles open with a pleasing mechanical action. The seat and steering column adjust manually but with plenty of reach, something many budget models used to leave out to save on cost.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-0a4f6a20e1d79987",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2306269/apple-music-selfie-sing-karaoke-video/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-04T11:02:04.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple Music's upcoming feature will let you record yourself doing karaoke",
-        "summary": "Apple Music will launch 'Selfie Sing' with iOS 27.3.",
-        "body": "Selfie Sing will roll out with iOS 27.3.\n\nApple Music will introduce a new feature that will give you a way to record yourself singing karaoke without having to use another app. It first introduced a karaoke functionality called \"Sing\" that lets you take over the vocals of songs back in 2022. As MacRumors reports, this is sort of an upgraded version of that called \"Selfie Sing,\" and it will launch with iOS 27.3, which is now available in beta. It will let you record videos of yourself singing to music while the lyrics to the songs scrolls up on the screen in real time. The feature comes with its own playlist, however, and isn't supported by the service's whole catalog.\n\n\"There are some songs everyone knows by heart, the ones that come on and suddenly the whole room's singing along,\" the company wrote in its description of Selfie Sing. \"This playlist is loaded with them, each one ready to become your next Selfie Sing.\" The playlist, so far, includes Since U Been Gone by Kelly Clarkson, What Makes You Beautiful by One Direction, Like a Virgin by Madonna, Baby One More Time by Britney Spears and 9 to 5 by Dolly Parton.\n\nJust choose a song and then enable the camera to start recording. You can add effects to your voice or change its volume — your options include Megaphone, Echo, Concert Hall and Studio — if you wish before saving or sharing the video with your friends. Apple has just rolled out iOS 27.3 beta for download, and it will bring more Siri AI features and a redesigned Health app to your iPhones, as well. The new mobile OS expected to be widely available sometime this December.\n\nHere is your first look at Selfie Sing, new in iOS 27.3, inside of Apple Music\n\nRecord a video selfie, adjusting vocals to make it yours, and share your performance with friends\n\n(Animoji is not available for this feature, I used it so I don't have to post a video of me singing) pic.twitter.com/fLQ3B5DV4N\n\n— Aaron (@aaronp613) November 4, 2026"
       }
     },
     "media": null
@@ -312,54 +437,6 @@
     "media": null
   },
   {
-    "id": "engadget-cb321aaa5ff6a704",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2303546/ipad-mini-oled-vs-ipad-mini-comparison/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-04T01:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iPad mini OLED vs. iPad mini: What's new?",
-        "summary": "Apple's newest iPad mini is a significant upgrade over its predecessor, with hardware updates that extend far beyond the fancy new OLED display.",
-        "body": "Apple's new iPad mini gets a bunch of upgrades, but they come at a cost.\n\nApple doesn't update its iPad mini every year, which is why each new generation usually gets a huge performance boost. The new iPad mini is powered by the 5-core, 2nm A20 Pro SoC, which Apple says is up to 2.7 times faster in graphics performance and up to 4.5 times faster in AI workloads than the A17 Pro in its predecessor. It comes in the same three storage configurations as last time, and the 512GB model features an extra CPU core and a dual 16-core Neural Engine.\n\nWhile both models support Apple Intelligence and Siri AI , the A20 Pro should be more suited to demanding on-device AI tasks. The outgoing iPad mini offered 8GB of RAM, and while Apple doesn't officially list how much memory its phones and tablets have, the new iPad mini likely has 12GB of RAM. Battery life claims haven't changed, but the new iPad mini charges faster (capable of hitting 50 percent in 30 minutes) with a compatible adapter.\n\nUnfortunately, color options have been reduced to just Midnight and Starlight. The price has also increased: the new iPad mini costs $200 more, starting at $699 for the 128GB model. If spec'd with cellular connectivity and a nano-texture glass finish, the 512GB iPad mini will set you back a whopping $1,249 — that's iPad Pro money. We'll let you decide if it's worth it; for now, let's look at the changes Apple has made to its compact tablet offering this year.\n\nThe big iPad mini upgrade this time is the OLED panel. That makes it the only other iPad in Apple's lineup with an OLED display aside from the iPad Pro. It's roughly the same resolution as last time, but can get much brighter at up to 1,200 nits of peak HDR brightness. OLED also brings other benefits: the new iPad mini is the same height and nearly the same width, but is thinner at 5.4mm and lighter at 255 grams — likely thanks to the thinner OLED panel. In comparison, the A17 Pro iPad mini maxes out at 500 nits of SDR brightness, weighs 293 grams and is almost an entire millimeter thicker at 6.3mm.\n\nThe new iPad mini also features a slightly larger 8.5-inch display, owing to the bezels that are now 24 percent thinner. The only major letdown is the lack of ProMotion. Plenty of users on X have understandably expressed disappointment about Apple sticking with a 60Hz display on a $700 product in 2026. However, in an interview with Christopher Lawley , Apple's vice president of Hardware Engineering, Dave Pakula, said that the \"display experience is about more than just a single spec\" and that OLED's faster pixel response time \"makes everything really smooth.\"\n\nIf you're coming from an older iPad mini, the display on the new one will be a huge upgrade, especially for creative workflows involving HDR content. Apple Pencil Pro support is still present, too, making the new iPad mini a compact, color-accurate canvas for artists and designers.\n\nDespite its nearly identical design, the new iPad mini is Apple's first water-resistant iPad. One of the ways it has achieved an IP67 rating is by replacing the speaker grilles with its new Acoustic Display system. This involves tweeters placed between the glass and aluminum body, with woofers firing through the display. The result, apparently, is punchier bass, clearer treble and more volume. It's similar to the Huawei P30 Pro's acoustic display, though that particular setup was largely designed to replace the earpiece speaker for phone calls rather than deliver a full stereo speaker experience like the iPad mini.\n\nConnectivity upgrades are also present, including Wi-Fi 7, Bluetooth 6 and Apple's new C2 cellular modem system, which it claims should deliver up to 50 percent faster cellular data speeds. Authentication is still handled by the Touch ID-enabled power button, and while the iPad mini's optics seem largely unchanged, the front-facing camera is now positioned along the tablet's longer edge, making it better suited for video calls in landscape orientation.\n\nThe new iPad mini runs iPadOS 27 and supports Apple's most powerful on-device AI model with improved dictation and the option to adjust Siri's pace and expressiveness. While only the 512GB variant gets the extra CPU and Neural Engine cores, the 5-core A20 Pro SoC in the lower-end storage variants still delivers a substantial performance boost over the A17 Pro. With so many good AAA titles like Control and Death Stranding now available natively on the App Store, the new iPad mini is shaping up to be a portable powerhouse for gamers."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-fc3ee81f93a671b1",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/03/anthropic-is-working-on-a-system-to-prove-ai-models-identity/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-03T22:41:03.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Anthropic is working on a system to prove AI models’ identity",
-        "summary": "Called FlashProve, the system would let anyone check that an AI response really came from the model it claims to be from.",
-        "body": "Anthropic is working on an open source system to verify which AI model produced a given output, according to a blog post published Tuesday. The system, called FlashProve , is built to provide what researchers call “provable inference” — a cryptographic proof, essentially a mathematical guarantee, that a given output came from a specific model. It’s meant to let users confirm that the answer they received really came from the model they think they’re using.\n\nSimilar to cryptographic email signatures that let recipients confirm a message really came from its claimed sender, FlashProve would be robust against impostors attempting to disguise one model as another, even when the impostor is the lab that built and runs the model. In particular, the researchers note that the system could be used to prevent an AI company from secretly swapping in a cheaper model to cut costs, or a more expensive model to inflate its performance results.\n\nFlashProve could also be used to verify claims by third parties that a specific task was done by an advanced model. “A developer might claim that their software library was scanned for vulnerabilities by a frontier cybersecurity model, or a company might claim that its business plan was given the go-ahead by an appropriate model,” the researchers write. “How can a user verify these claims?”\n\nTo work, the system requires AI labs to publish a “fingerprint” of each model they release that can later be matched to specific outputs and verified cryptographically. Crucially, the fingerprints don’t reveal a model’s weights, the internal numbers that define how it behaves and which closed-model makers like Anthropic and OpenAI keep private. That means labs could publish the fingerprints without giving up their most valuable asset, enabling the system to work with commercial models, too. The system is also designed to be lightweight, so verification could be performed on a local device.\n\nAs part of the announcement, researchers released a detailed technical specification and working code for various elements of the system, which is publicly available under an open source license on GitHub . Research in the system is ongoing, and there are no plans to deploy it at Anthropic or any other lab.\n\n“This research post is meant to share intermediate progress, and not a completed research agenda,” researchers explain in the announcement post. “We are sharing this explicitly with the goal that others look at what we have done, take it, and improve it.”"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "freedom-scientific-blog-08c0c9af3489b3e8",
     "type": "news",
     "sourceId": "freedom-scientific-blog",
@@ -381,30 +458,6 @@
         "title": "Download JAWS, ZoomText, and Fusion 2027",
         "summary": "JAWS, ZoomText, and Fusion 2027 are now available, offering new and exciting features that increase efficiency and productivity. Here’s a look at several highlights. Work More Productively with the New Vispero Companion in JAWS Vispero Companion now brings all your AI help together in one place. Whether you want to learn how a feature works, …",
         "body": "JAWS, ZoomText, and Fusion 2027 are now available, offering new and exciting features that increase efficiency and productivity. Here’s a look at several highlights.\n\nVispero Companion now brings all your AI help together in one place. Whether you want to learn how a feature works, get a description of a photo, explore a busy web page, change a setting, or have a task performed for you, just ask Vispero Companion. Because everything lives in a single conversation, you can keep asking follow-up questions without starting over.\n\nNote: The Vispero Companion website is still available for users who need to access product guidance from devices not running JAWS.\n\nA Vispero Account is required to use the new features in the Vispero Companion update.\n\nThis feature is part of the Early Adopter Program, which provides access to new functionality that is still under active development. It is intended for users who want to try out upcoming features and provide feedback before they are fully released.\n\nTo enable this option:\n\nIn response to frequent requests from our community, JAWS now supports MuseScore, a popular free program for writing, editing, and playing back sheet music. Composers, music students, teachers, and hobbyists all use MuseScore to create everything from simple melodies to full orchestral scores, and JAWS users can now join them.\n\nThe Smoothing tab in the Preferences dialog box is now the Smoothing and Performance tab, with a new Performance group. The default, Best text quality, uses xFont and geometric smoothing to deliver the sharpest, clearest text ZoomText and Fusion offer, along with support for legacy reading. If ZoomText or Fusion feels slow on your system, you can choose Best performance, which uses geometric smoothing only for faster response, and then return to Best text quality at any time. You can also choose this option in the Startup Wizard.\n\nZoomText can now magnify apps that use screen-capture protection, so you can still read content that is already shown to you on screen. This is becoming increasingly important, as:\n\nPhoto Tracking identifies people, animals, food, and other objects in an image and moves the magnified view directly from one object to the next. You no longer need to zoom and pan across the whole picture to find what you want.\n\nAll recognition happens locally on your computer, so Photo Tracking works offline and is suitable for secure environments. It is available in ZoomText Magnifier/Reader, ZoomText Magnifier, and Fusion.\n\nTo learn more about all the new features and enhancements in this release, visit the What’s New pages for JAWS , ZoomText , and Fusion 2027.\n\nTo download and install JAWS, ZoomText, or Fusion 2027, follow these steps on a computer connected to the internet:\n\nNote: If you are running the latest version of JAWS, ZoomText, or Fusion and automatic updates are enabled, you can start the download and installation process from the notification.\n\nOur User Education and Outreach team offers outstanding resources for learning your Freedom Scientific software in our Training Center , which includes videos, FAQs, and instructions for getting started. Keep up with this blog and check out the Freedom Scientific Training schedule page for news of upcoming live training webinars and other events. For questions, email us at training@vispero.com ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-e32b984e50f82a38",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/11/google-will-let-schools-skip-ai-tools-but-they-have-to-give-up-search-too/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-03T17:54:43.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google will let schools skip AI tools, but they have to give up search, too",
-        "summary": "Google will offer schools AI tools that purportedly don't give away the answers.",
-        "body": "While Google is trying to move beyond Chromebooks , the ubiquity of these devices has made the company's education products huge in schools. Now, Google says it will let educators choose whether to allow its AI tools in the classroom. However, blocking AI tools also means giving up search, leaving schools with a difficult decision.\n\nGoogle's new overarching approach to AI in K-12 classrooms sounds good on the surface. After consulting educators, researchers, and lawmakers, Google has decided that schools using its education products will be opted out of AI tools by default. It will be up to administrators to manually enable them when these changes roll out in the coming months.\n\nWhen you look at what Google considers to be an AI tool, the nature of the Faustian bargain becomes clear. The affected products are Gemini, Gemini Notebook, Gemini in Classroom, and Google Search . There's no picking and choosing—you either allow all the AI or none of it.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -854,30 +907,6 @@
         "title": "Apple Introduces Updated iMac and MacBook Pros with Performance and Connectivity Improvements, a Touchscreen for the High-End MacBook Pro, and More",
         "summary": "On the heels of introducing the 8th generation iPad Mini , Apple this week updated the iMac and MacBook Pro, bringing faster chips, improved connectivity, and, for the first time, a touchscreen to the MacBook Pro. iMac Featuring up to a 12-core CPU, the new iMac with M6, according to Apple's press release , delivers: Up to 2.5x faster performance in apps like Microsoft Excel, compared to iMac with M1, and up to 1.5x faster performance than M4. Up to 3.3x faster graphics performance for tasks including photo editing in Affinity, compared to iMac with M1, and up to 2x faster performance than M4. Up to 12x faster on-device AI performance for prompt processing in LM Studio, compared to iMac with M1, and up to 5x faster performance than M4. Up to 2x higher gaming performance with ray tracing compared to M4. Up to 2x faster SSD read and write performance. With the N1 wireless networking chip, the new iMac supports Wi-Fi 7 and Bluetooth 6, and up to a 2.5 gigabit Ethernet port, included with the power adapter. The iMac with M6 is made with 100 percent recycled aluminum in the stand, 100 percent recycled rare earth elements in all magnets, 100 percent recycled gold plating and tin solder in all Apple-designed circuit boards, and is manufactured with 40 percent renewable electricity. It can be pre-ordered from Apple in green, yellow, orange, pink, purple, blue, and silver starting today for a starting price of US $1499, and will begin shipping to customers on Friday, November 6. MacBook Pro In addition to the iMac, Apple updated the base 14-inch MacBook Pro with the M6 chip, N1 wireless networking chip, and up to 170 GBPS of unified memory bandwidth. The MacBook Pro with M6, according to Apple's press release delivers: Up to 13x faster time to first token performance for LLM prompt processing compared to the 13-inch MacBook Pro with M1, and up to 1.3x faster than the 14-inch MacBook Pro with M5. Up to 11.7x faster render performance with ray tracing in Blender compared to the 13-inch MacBook Pro with M1, and up to 1.3x faster than the 14-inch MacBook Pro with M5. Up to 3.3x faster image-processing performance in Affinity compared to the 13-inch MacBook Pro with M1, and up to 1.2x faster than the 14-inch MacBook Pro with M5. Up to 2.5x faster project build performance when compiling code in Xcode compared to the 13-inch MacBook Pro with M1, and up to 1.3x faster than the 14-inch MacBook Pro with M5. Apple also claims the 12-core GPU paired with the dual 16-core neural engine features up to 30 percent faster graphics performance compared to M5, as well as up to 25 percent faster performance for on-device AI workloads. The new MacBook Pro also features the N1 wireless networking chip, bringing Wi-Fi 7 and Bluetooth 6 support. The MacBook Pro with M6 is made with 45 percent recycled content overall, including 100 percent recycled aluminum in the enclosure, 100 percent recycled cobalt in the battery, and 100 percent recycled tantalum in multiple capacitors, and is manufactured with 60 percent renewable electricity across the supply chain. It can be pre-ordered from Apple starting today for a starting price of US $1999, and will begin shipping to customers on Friday, November 6. Apple has also introduced new high-end 14 and 16-inch MacBook Pros , bringing a thinner and lighter design, a redesigned thermal architecture, a new speaker design, hinge improvements, and, for the first time on a Mac, an OLED touchscreen and Dynamic Island. With the Dynamic Island, users will be able to view Live Activities, answer calls, and use Siri and Spotlight. At the time of publication, we do not know how VoiceOver or any other macOS accessibility tool will work with touch controls. The MacBook Pro with PROOLEDXDR display continues to use the M5 Pro and M5 Max chips, but it now features a redesigned thermal architecture that Apple claims better redirects air away from the display, helping to prevent it from getting warm to the touch while maintaining sustained performance. The MacBook Pro with PROOLEDXDR display is made with 55 percent recycled content overall, including 100 percent recycled aluminum in the enclosure, 100 percent recycled cobalt in the battery, and recycled tantalum in multiple capacitors, and is manufactured with 45 percent renewable electricity across the supply chain. It can be pre-ordered from Apple starting today for a starting price of US $2899, and will begin shipping to customers on Friday, November 6.",
         "body": "On the heels of introducing the 8th generation iPad Mini , Apple this week updated the iMac and MacBook Pro, bringing faster chips, improved connectivity, and, for the first time, a touchscreen to the MacBook Pro.\n\nFeaturing up to a 12-core CPU, the new iMac with M6, according to Apple's press release , delivers:\n\nWith the N1 wireless networking chip, the new iMac supports Wi-Fi 7 and Bluetooth 6, and up to a 2.5 gigabit Ethernet port, included with the power adapter.\n\nThe iMac with M6 is made with 100 percent recycled aluminum in the stand, 100 percent recycled rare earth elements in all magnets, 100 percent recycled gold plating and tin solder in all Apple-designed circuit boards, and is manufactured with 40 percent renewable electricity. It can be pre-ordered from Apple in green, yellow, orange, pink, purple, blue, and silver starting today for a starting price of US $1499, and will begin shipping to customers on Friday, November 6.\n\nIn addition to the iMac, Apple updated the base 14-inch MacBook Pro with the M6 chip, N1 wireless networking chip, and up to 170 GBPS of unified memory bandwidth. The MacBook Pro with M6, according to Apple's press release delivers:\n\nApple also claims the 12-core GPU paired with the dual 16-core neural engine features up to 30 percent faster graphics performance compared to M5, as well as up to 25 percent faster performance for on-device AI workloads. The new MacBook Pro also features the N1 wireless networking chip, bringing Wi-Fi 7 and Bluetooth 6 support.\n\nThe MacBook Pro with M6 is made with 45 percent recycled content overall, including 100 percent recycled aluminum in the enclosure, 100 percent recycled cobalt in the battery, and 100 percent recycled tantalum in multiple capacitors, and is manufactured with 60 percent renewable electricity across the supply chain. It can be pre-ordered from Apple starting today for a starting price of US $1999, and will begin shipping to customers on Friday, November 6.\n\nApple has also introduced new high-end 14 and 16-inch MacBook Pros , bringing a thinner and lighter design, a redesigned thermal architecture, a new speaker design, hinge improvements, and, for the first time on a Mac, an OLED touchscreen and Dynamic Island. With the Dynamic Island, users will be able to view Live Activities, answer calls, and use Siri and Spotlight. At the time of publication, we do not know how VoiceOver or any other macOS accessibility tool will work with touch controls.\n\nThe MacBook Pro with PROOLEDXDR display continues to use the M5 Pro and M5 Max chips, but it now features a redesigned thermal architecture that Apple claims better redirects air away from the display, helping to prevent it from getting warm to the touch while maintaining sustained performance.\n\nThe MacBook Pro with PROOLEDXDR display is made with 55 percent recycled content overall, including 100 percent recycled aluminum in the enclosure, 100 percent recycled cobalt in the battery, and recycled tantalum in multiple capacitors, and is manufactured with 45 percent renewable electricity across the supply chain. It can be pre-ordered from Apple starting today for a starting price of US $2899, and will begin shipping to customers on Friday, November 6."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-apps-1e5dbd6da13bffb0",
-    "type": "news",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/dugout-dice",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-28T13:40:21.000Z",
-    "categories": [
-      "apple",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Dugout Dice",
-        "summary": "Roll dice. Build your lineup. Make the playoffs. Win a championship. Beat the target score before three outs to advance to the next inning. Win games, make the playoffs and win championships to unlock new players, Superfan boosts, cheat menus and more. Fall short, and your season is over. Every season is a chance to build something different. Recruit players with special abilities, add Superfan boosts, and upgrade your dice. Discover powerful combinations, stack multipliers, and turn modest hits into massive payoffs with one-time consumables and clever bench management. **BUILD YOUR WINNING COMBO** - Draft players with abilities that stay with you during the season. - Combine Superfan Boosts, dice upgrades, and items for powerful combos. - Face pitchers and boss closers who challenge your best strategies. - Unlock new players, Boosts, and ballparks as you progress. - Take on a fresh Daily Diamond challenge to earn an advantage during your season. - Enjoy turn-based gameplay at your own pace. - Play offline and pick up right where you left off. **FREE TO PLAY. NO ADS. EVER.** An optional, one-time in-app purchase unlocks customization and fun extras.",
-        "body": "Roll dice. Build your lineup. Make the playoffs. Win a championship. Beat the target score before three outs to advance to the next inning. Win games, make the playoffs and win championships to unlock new players, Superfan boosts, cheat menus and more. Fall short, and your season is over. Every season is a chance to build something different. Recruit players with special abilities, add Superfan boosts, and upgrade your dice. Discover powerful combinations, stack multipliers, and turn modest hits into massive payoffs with one-time consumables and clever bench management. **BUILD YOUR WINNING COMBO** - Draft players with abilities that stay with you during the season. - Combine Superfan Boosts, dice upgrades, and items for powerful combos. - Face pitchers and boss closers who challenge your best strategies. - Unlock new players, Boosts, and ballparks as you progress. - Take on a fresh Daily Diamond challenge to earn an advantage during your season. - Enjoy turn-based gameplay at your own pace. - Play offline and pick up right where you left off. **FREE TO PLAY. NO ADS. EVER.** An optional, one-time in-app purchase unlocks customization and fun extras."
       }
     },
     "media": null
@@ -1739,31 +1768,6 @@
         "title": "Beyond the Basics: Navigate, Review, and Present More Effectively in PowerPoint Using JAWS",
         "summary": "Advanced PowerPoint skills can help you navigate complex slides, examine visual elements, and deliver presentations with confidence. This webinar will demonstrate practical strategies for working more efficiently with PowerPoint using JAWS. Oct 15, 2026 12:00 PM in Eastern Time (US and Canada) In this webinar, we’ll show you how to: Join us to strengthen your PowerPoint skills …",
         "body": "Advanced PowerPoint skills can help you navigate complex slides, examine visual elements, and deliver presentations with confidence. This webinar will demonstrate practical strategies for working more efficiently with PowerPoint using JAWS.\n\nOct 15, 2026 12:00 PM in Eastern Time (US and Canada)\n\nIn this webinar, we’ll show you how to:\n\nJoin us to strengthen your PowerPoint skills and take greater control of reviewing, improving, and delivering presentations with JAWS.\n\nVispero Presenters: Elizabeth Whitaker and Rachel Buchanan\n\nACVREP Credits: ACVREP credits will be available for those who attend the live webinar."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "freedom-scientific-blog-6fd732650b57c4b4",
-    "type": "news",
-    "sourceId": "freedom-scientific-blog",
-    "sourceName": "Freedom Scientific",
-    "sourceUrl": "https://blog.freedomscientific.com/",
-    "originalUrl": "https://training.vispero.com/download-the-september-update-of-jaws-zoomtext-and-fusion-2026/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-02T19:44:09.000Z",
-    "categories": [
-      "windows",
-      "tecnologia-accesibilidad",
-      "jaws"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Download the September Update of JAWS, ZoomText, and Fusion 2026",
-        "summary": "The September update of JAWS, ZoomText, and Fusion 2026 is now available, offering new functionality and enhancements that increase efficiency and productivity. Here’s a look at several enhancements. Improved JAWS Support for Facebook and Reddit This release includes enhancements that significantly improve navigation on the Facebook and Reddit social media platforms. These include: These enhancements …",
-        "body": "The September update of JAWS, ZoomText, and Fusion 2026 is now available, offering new functionality and enhancements that increase efficiency and productivity. Here’s a look at several enhancements.\n\nThis release includes enhancements that significantly improve navigation on the Facebook and Reddit social media platforms. These include:\n\nThese enhancements improve the user experience by making content easier to locate and improving overall navigation consistency.\n\nThis release includes several notable enhancements to our Cloud Settings feature, which allows users who are logged into a Vispero account to migrate settings across multiple devices. These include:\n\nThis feature is part of the Early Adopter Program, which provides access to new functionality that is still under active development. It is intended for users who want to try out upcoming features and provide feedback before they are fully released.\n\nTo enable this option:\n\nAfter JAWS restarts, choose Enable Sync when prompted to begin syncing your settings.\n\nFusion now starts more reliably, so it is ready to use when you need it. This update resolves an issue where Fusion could stop responding during startup. It occurred most often the first time Fusion was started after installing and restarting your computer.\n\nWhen a line of text under the mouse pointer or cursor exceeds the width of the Live Text View window, scroll arrows appear at the start or end of the displayed text. Previously, CAPS LOCK+RIGHT ARROW and CAPS LOCK+LEFT ARROW moved through the line one character at a time. You can now press and hold either hotkey to scroll continuously, making it faster to read through long lines of text.\n\nIn many enterprise environments, applications are hosted centrally on a server rather than installed directly on each user’s computer. These remotely hosted applications, often called Published Applications, can appear to the user as though they are running locally.\n\nTo provide speech, visual tracking, and magnification when users interact with Published Applications, ZoomText needs access to information from both the server and the local computer. In these environments, ZoomText is installed on both systems so the server and local components can work together. In this release:\n\nTo download and install the September update of JAWS, ZoomText, or Fusion 2026, follow these steps on a computer connected to the internet:\n\nNote: If you are running the latest version of JAWS, ZoomText, or Fusion 2026 and automatic updates are enabled, you can start the download and installation process from the notification.\n\nOur User Education and Outreach team offers outstanding resources for learning your Freedom Scientific software in our Training Center , which includes videos, FAQs, and instructions for getting started. Keep up with this blog and check out the Freedom Scientific Training schedule page for news of upcoming live training webinars and other events. For questions, email us at training@vispero.com ."
       }
     },
     "media": null

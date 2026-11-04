@@ -120,6 +120,18 @@
     "publishedAt": null
   },
   {
+    "id": "applevis-apps-81462762a08111da",
+    "title": "Treblo - AI Music",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/music/treblo-ai-music",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "Make songs with the world's best AI music model. For free. No limits. Turn any idea into a real song—a meme for the group chat, a love song for your person, or a track the whole world vibes to. Whatever you hear in your head, Treblo helps you make it. CREATE IN SECONDS Describe your song. Pick a style. Hit generate. That's it. Want more control? Tweak lyrics, tags, and settings whenever you want. MAKE IT YOURS Extend tracks. Swap sections. Upload audio to cover. Craft until it's perfect. SHARE &amp; DISCOVER Post your music. Follow other artists. Join groups. Remix what inspires you. Build your audience. Hyperpop. Drift phonk. Sea shanties. If you can imagine it, you can create it. Privacy Policy: https://treblo.com/privacy Terms of Service: https://treblo.com/tos",
+    "publishedAt": "2026-11-04T20:45:02.000Z"
+  },
+  {
     "id": "applevis-apps-3d256cecbfa301a5",
     "title": "Text Dungeon: Roguelite",
     "sourceId": "applevis-apps",
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "Find ten hidden words every day and aim for the highest score on the daily grid! Motif is a strategic word game that combines clever wordplay with match-3-inspired mechanics. Free, ad-free, and no account required. THE WORD GAME WHERE WORDS HIDE! Swap letters, spot words, and plan your next move. Swipe across words to clear them from the grid. Every move shapes what comes next, so choose wisely! Everyone starts with the same grid. Submit your score if you’d like, and see where you rank on the daily leaderboard. NEW ASCENSION MODE! Motif becomes a full-blown adventure! Climb ten increasingly tough levels packed with bosses, special tiles, and bonuses galore. Motif has never played like this—and it’s free! ZEN MODES Want to play without the pressure? Zen Mode gives you fresh grids and the same rules, but with no word limit and no leaderboard. Take your time and play at your own pace. + “À LA CARTE” MODE! You set your own rules: swipe words bottom to top, right to left, in an L shape, use unlimited letter swaps… You call the shots. + M0T1F MODE! This time, numbers take the stage: swipe tiles to add them up and hit the target number. Careful, this one’s dangerously addictive! MAKE IT YOURS Customize Motif to suit your style: fonts, colors, tile shapes, score display, backgrounds… even the app icon. NO ADS. NO TRACKING. NO ACCOUNT. Just open Motif and start playing. No internet connection is required to play. The leaderboard is entirely optional. If you choose to participate, only your score, the date, and the grid language are submitted. No account, no advertising ID, and no player profile. Individual scores are deleted after 30 days.",
     "publishedAt": "2026-10-29T18:32:32.000Z"
-  },
-  {
-    "id": "applevis-apps-1e5dbd6da13bffb0",
-    "title": "Dugout Dice",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/dugout-dice",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Roll dice. Build your lineup. Make the playoffs. Win a championship. Beat the target score before three outs to advance to the next inning. Win games, make the playoffs and win championships to unlock new players, Superfan boosts, cheat menus and more. Fall short, and your season is over. Every season is a chance to build something different. Recruit players with special abilities, add Superfan boosts, and upgrade your dice. Discover powerful combinations, stack multipliers, and turn modest hits into massive payoffs with one-time consumables and clever bench management. **BUILD YOUR WINNING COMBO** - Draft players with abilities that stay with you during the season. - Combine Superfan Boosts, dice upgrades, and items for powerful combos. - Face pitchers and boss closers who challenge your best strategies. - Unlock new players, Boosts, and ballparks as you progress. - Take on a fresh Daily Diamond challenge to earn an advantage during your season. - Enjoy turn-based gameplay at your own pace. - Play offline and pick up right where you left off. **FREE TO PLAY. NO ADS. EVER.** An optional, one-time in-app purchase unlocks customization and fun extras.",
-    "publishedAt": "2026-10-28T13:40:21.000Z"
   }
 ]

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-05T02:32:59.024Z",
+  "generatedAt": "2026-11-05T06:51:50.510Z",
   "resources": [
     {
       "kind": "resource",
@@ -5569,6 +5569,39 @@
   "news": [
     {
       "kind": "news",
+      "id": "9to5mac-ae040ecfbe251b9b:en",
+      "sourceId": "9to5mac-ae040ecfbe251b9b",
+      "lang": "en",
+      "title": "Livestream: Watch Labrinth create a song from scratch tonight using Apple’s new MacBook Pro",
+      "summary": "To promote the new MacBook Pro with PROLED XDR Display , Apple is hosting a livestream in which singer-songwriter Labrinth will create a song from scratch overnight at the company’s Tower Theatre store in Downtown Los Angeles. Watch the livestream below. more…",
+      "body": "To promote the new MacBook Pro with PROLED XDR Display , Apple is hosting a livestream in which singer-songwriter Labrinth will create a song from scratch overnight at the company’s Tower Theatre store in Downtown Los Angeles. Watch the livestream below.\n\nLast week, Apple announced the new MacBook Pro with PROLED XDR Display at a special event in Los Angeles, where it invited members of the press and content creators to get an early look at the redesigned laptop.\n\nNow, Apple is continuing its Los Angeles-centered promotional campaign with another event, this time involving singer-songwriter Labrinth.\n\nStarting at 8 p.m. PT / 11 p.m. ET tonight, Labrinth will spend the night at Apple’s Tower Theatre store in Downtown LA, creating an entire song from scratch using the new MacBook Pro and Logic Pro.\n\nThe entire process will be livestreamed on his YouTube channel, allowing viewers to follow along in real time and ask questions as he works. Apple says the finished song will be released next week.\n\nTonight’s livestream comes ahead of the new MacBook Pro’s launch this Friday, November 6.\n\nDuring last week’s demos, Apple showcased the laptop’s music production capabilities, including the ability to play virtual instruments directly on its touchscreen using Logic Pro.\n\nTune in below starting at 8 p.m. PT / 11 p.m. ET to watch Labrinth create his new song live from Apple’s Tower Theatre store.\n\nListen to Labirinth on Apple Music\n\nApple Music requires an active subscription. You can sign up for $11.99 per month, with 1 month free, or as part of the Apple One bundle .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/04/livestream-watch-labrinth-create-a-song-from-scratch-tonight-using-apples-new-macbook-pro/",
+      "publishedAt": "2026-11-05T02:00:00.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-c9ca6edc42c650e4:en",
+      "sourceId": "techcrunch-c9ca6edc42c650e4",
+      "lang": "en",
+      "title": "Apple is reportedly cutting budgets for its internal AI usage",
+      "summary": "The company is said to be significantly dropping the amount it's spending on AI for its engineering teams.",
+      "body": "Posted:\n\nApple is cutting the daily amount its engineering teams can spend on AI, Bloomberg reported Wednesday. It’s a big change for a company that has worked to integrate the technology into its engineering processes.\n\nIn October, Apple lowered the daily AI spending cap for its engineering teams, decreasing it from $300 to $200, the outlet reported. And more cuts are in the works, with some allowances falling to $100 a day, sources tell Bloomberg. Outside engineering, Apple is reportedly weighing a daily limit as low as $25 a day.\n\nTechCrunch has reached out to Apple for comment.\n\nEarlier this year, a tsunami of tokenmaxxing took hold, with companies pushing staff to use AI as much as possible in the name of vaguely defined efficiency gains. The frenzy was short-lived, however, as bills for said tokens came due, and companies decided that token rationing might be a more fiscally sensible approach.\n\nConcerns persist about an apparent gap between what AI costs to build and run and the (often unclear) productivity gains the technology is suppose to generate.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/11/04/apple-is-reportedly-cutting-budgets-for-its-internal-ai-usage/",
+      "publishedAt": "2026-11-05T01:26:22.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "9to5mac-6e7dedcdab9408f8:en",
       "sourceId": "9to5mac-6e7dedcdab9408f8",
       "lang": "en",
@@ -5619,6 +5652,23 @@
     },
     {
       "kind": "news",
+      "id": "ars-technica-426064a465b9ca73:en",
+      "sourceId": "ars-technica-426064a465b9ca73",
+      "lang": "en",
+      "title": "Hackers exploited iOS and Android flaws to infect phones",
+      "summary": "Researchers say group may have been Kremlin-sponsored in search of diplomatic targets.",
+      "body": "Hackers possibly linked to the Kremlin exploited previously patched iOS and Android flaws in an attempt to hack visitors of multiple websites, including one celebrating the 250th anniversary of American independence, researchers said Wednesday.\n\nThe attackers, which the researchers assessed with “moderate to high confidence” were part of Russia’s Foreign Intelligence Service, targeted other sites, many with links to that country’s ongoing war against Ukraine. The attacks began when iPhone or Android users visited one of potentially hundreds of different sites. JavaScript injected into the traffic then profiled the device. The final payloads, tailored to the type of platform visiting, attempted to steal browser cookies and, in some cases, Wi-Fi passwords and full mobile device data.\n\nOne of the impersonated sites was america250.org, belonging to a non-partisan group of lawmakers, business executives, and at least one former member of the Trump administration. The attackers registered america250[.]holiday and used it as a reverse proxy to america250.org. The imposter website delivered content from the real one that added malicious JavaScript into it.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/security/2026/11/hackers-exploited-ios-and-android-flaws-to-infect-phones/",
+      "publishedAt": "2026-11-04T22:26:49.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple",
+        "android"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "techcrunch-fdb6b34110b2592f:en",
       "sourceId": "techcrunch-fdb6b34110b2592f",
       "lang": "en",
@@ -5628,22 +5678,6 @@
       "sourceName": "TechCrunch",
       "originalUrl": "https://techcrunch.com/2026/11/04/nothing-ceo-says-companys-mysterious-ai-first-device-is-dropping-next-month/",
       "publishedAt": "2026-11-04T22:13:16.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-a786f132a5a54d10:en",
-      "sourceId": "techcrunch-a786f132a5a54d10",
-      "lang": "en",
-      "title": "Almost no one uses AI agents to book their Uber, company says",
-      "summary": "During its busiest week last quarter, Uber said only four people booked a ride using an AI agent.",
-      "body": "Very few people are using personal AI agents to order Ubers, apparently. On the transportation giant’s third-quarter earnings call on Wednesday, the company said that only four rides were ordered through an AI agent during its busiest week in October: the week of Halloween.\n\nWhile more people used an AI agent to order food through its delivery service, Uber Eats, the volume was still fairly small compared to the overall number of trips.\n\nUber’s chief financial officer, Balaji Krishnamurthy, told Wall Street analysts on the call that the company handled around 320 million trips and orders across Uber and Uber Eats during the week of Halloween, but only 500 Uber Eats orders were placed by an AI agent.\n\n“It is very, very early and very limited traction that we are seeing so far,” said CEO Dara Khosrowshahi, referring to the low number of orders placed by AI agents. “Listen, we hope that there will be more traction.”\n\nThe surprisingly low numbers of AI-initiated transactions come amid growing hype for a new wave of AI agents that don’t just answer questions but also handle tasks on users’ behalf. There’s been an explosion of personal AI startups, including one of the buzziest, Instinct, which was founded last year and raised its most recent round of funding at a $10 billion valuation. Meta’s Muse also became the No. 1 app in Apple’s U.S. App Store last month, topping 10 million users, per Meta’s own reporting . The company said many were using it to shop and transact with businesses.\n\nOpenAI, Anthropic, Google, and SpaceXAI (Grok) are also now offering their own AI agents, as are numerous smaller startups.\n\nStill, early numbers from public companies indicate the agentic web still has a long way to go. DoorDash, for instance, said last week on its earnings call that it has only received a few hundred orders from AI agents so far, as most customers are still placing orders through the DoorDash app.\n\nUber is seeing the same behavior, it seems. Khosrowshahi pointed out that the average time to book a ride is only 50 seconds in the company’s app, and re-ordering a favorite food only takes 90 seconds. That suggests an AI agent isn’t necessarily saving anyone time.\n\nDespite the low number of AI-driven transactions, Khosrowshahi seemed bullish on the idea of agents in general. “We think that is another opportunity to reach our platform. We think it will be a net positive in terms of demand on the ecosystem,” he said.\n\nRight now, there are around eight major AI assistants on the market, Khosrowshahi noted, and he expects that number to grow to more than 10 in time.\n\n“Every single AI system company is talking to us,” he added.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/11/04/almost-no-one-uses-ai-agents-to-book-their-uber-company-says/",
-      "publishedAt": "2026-11-04T21:56:01.000Z",
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
@@ -5697,23 +5731,6 @@
       "categories": [
         "apple",
         "apps-accesibles",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-dbf0d83ae3d9bdcc:en",
-      "sourceId": "9to5mac-dbf0d83ae3d9bdcc",
-      "lang": "en",
-      "title": "Apple disables Siri AI waitlist in iOS 27, with one exception",
-      "summary": "When Siri AI launched in iOS 27 earlier this fall, Apple used a waitlist to gate access. But a newly updated support document says the waitlist is no longer being used, except in “high demand” times. more…",
-      "body": "When Siri AI launched in iOS 27 earlier this fall, Apple used a waitlist to gate access. But a newly updated support document says the waitlist is no longer being used, except in “high demand” times.\n\nIf you haven’t yet enabled Siri AI on your iPhone, Apple recently made it quicker and easier to gain access.\n\nThat’s because, per updates to this support document , the company is now only using a waitlist for Siri AI in “high demand” times.\n\nAfter giving instructions on how to enable Siri AI by tapping “Try Siri AI (Beta)” inside Settings, here’s what the document used to say compared to what it says now.\n\nOld:\n\nThis will add you to a waitlist, and wait times can vary. Siri AI will begin to download automatically when your wait is complete.\n\nNew:\n\nSiri AI will begin to download automatically. During time of high demand, you might be added to a waitlist first, and wait times can vary.\n\nIt’s understandable that a waitlist was used initially upon iOS 27’s release. Apple needed to slowly grant access while gauging server performance. But now that we’re nearly two months into the iOS 27 rollout, it’s great that Apple is only deploying the waitlist occasionally as needed.\n\nHave you enabled Siri AI on your iPhone? If not, what’s holding you back? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/04/apple-disables-siri-ai-waitlist-in-ios-27-with-one-exception/",
-      "publishedAt": "2026-11-04T20:28:23.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
         "ia-accesibilidad"
       ]
     },
@@ -5824,21 +5841,6 @@
       "sourceName": "Ars Technica",
       "originalUrl": "https://arstechnica.com/information-technology/2026/11/binance-says-hackers-who-stole-billions-in-crypto-spent-months-planning-heist/",
       "publishedAt": "2026-11-04T16:06:03.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-aea012de85187f16:en",
-      "sourceId": "ars-technica-aea012de85187f16",
-      "lang": "en",
-      "title": "What I learned driving the Slate electric truck prototype",
-      "summary": "After 45 minutes behind the wheel, I am more optimistic about the $25,000 EV.",
-      "body": "If my 45-minute drive yesterday morning is anything to go by, I think Slate Auto will have quite the hit on its hands. The startup had one of its prototype trucks in town and asked if I wanted to check it out—no jumping on a plane or having to spend yet another night in an interchangeable hotel room, just a drive from southwest DC to Rockville, Maryland. Easy-peasy.\n\nThe prototype truck had been well-used, with almost 6,000 miles (9,656 km) showing on the small and minimalist but very legible digital display that also shows your speed and, if you engage reverse, the backup camera. And while the cabin layout was representative of the production version, the surfaces most certainly weren’t—the prototype instead uses a lot of hard and shiny black plastic, with strips of Velcro here and there left over from when the interior had to be camouflaged when the vehicle was out in public.\n\nGetting acquainted with the Slate was refreshingly easy. The Morris Marina-like door handles open with a pleasing mechanical action. The seat and steering column adjust manually but with plenty of reach, something many budget models used to leave out to save on cost.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/cars/2026/11/what-i-learned-driving-the-slate-electric-truck-prototype/",
-      "publishedAt": "2026-11-04T15:42:18.000Z",
       "categories": [
         "tecnologia-general"
       ]
@@ -6322,23 +6324,6 @@
         "apps-accesibles",
         "programas-accesibles",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "nvda-es-8bdeb50af249f3b9:es",
-      "sourceId": "nvda-es-8bdeb50af249f3b9",
-      "lang": "es",
-      "title": "Ya disponible la versión final de NVDA 2026.3",
-      "summary": "Tras 6 versiones beta y una candidata a liberación, NV Access ha anunciado mediante esta publicación que ya se encuentra disponible para su descarga la versión final de NVDA 2026.3, el lector de pantalla gratuito y de código abierto para Microsoft Windows. Se recomienda a todos los usuarios actualizar a esta nueva versión, cuyo uso … Continuar leyendo \"Ya disponible la versión final de NVDA 2026.3\" La entrada Ya disponible la versión final de NVDA 2026.3 se publicó primero en NVDA en español .",
-      "body": "Tras 6 versiones beta y una candidata a liberación, NV Access ha anunciado mediante esta publicación que ya se encuentra disponible para su descarga la versión final de NVDA 2026.3, el lector de pantalla gratuito y de código abierto para Microsoft Windows. Se recomienda a todos los usuarios actualizar a esta nueva versión, cuyo uso se considera apto también en entornos de producción.\n\nEsta versión incluye importantes mejoras de rendimiento, mejoras en los cuadros de diálogo de NVDA y una mayor compatibilidad con la entrada mediante pantalla táctil. Se han introducido varias mejoras de rendimiento para reducir el retraso y mejorar la capacidad de respuesta. NVDA ahora recopila y almacena en caché más información sobre los controles en segundo plano, lo que mejora el rendimiento en controles como los cuadros combinados y el Explorador de archivos. NVDA ya no provoca que el Explorador de archivos u otras aplicaciones se cuelguen al salir de NVDA o al reiniciarlo. Ahora, NVDA se recupera más rápidamente cuando una aplicación deja de responder y ya no se bloquea ni satura el registro con errores de las aplicaciones que no responden. Se han añadido menús de contexto y atajos de teclado a los cuadros de diálogo «Perfiles de configuración», «Gestos de entrada» y «Diccionarios del habla», lo que facilita el uso de estos cuadros de diálogo con el teclado. Ahora también es posible modificar un gesto ya existente directamente en el cuadro de diálogo «Gestos de entrada». Se ha actualizado el cuadro de diálogo que se utiliza para mostrar los mensajes que se pueden consultar y ahora permite cambiar el tamaño, maximizar y minimizar con mayor facilidad. Se han ampliado considerablemente las opciones de introducción de datos mediante pantalla táctil. Los gestos secuenciales de dos flicks combinan ahora dos flicks consecutivos en un único gesto, lo que aumenta considerablemente el número de gestos táctiles a los que se pueden asignar acciones. Ahora también se admiten los gestos desde los bordes, lo que permite asociar gestos que se inician desde cualquier borde de la pantalla de forma independiente de los mismos gestos realizados en el centro de la pantalla. Se ha añadido una nueva orden sin asignar para desplazar el cursor del ratón al centro de la vista ampliada. Ahora es posible utilizar el OCR de Windows mientras están activos la Cortina de pantalla o el magnificador integrado de NVDA. Se ha actualizado Liblouis con nuevas tablas de braille en elfdaliano, sami, maorí, braille unificado neozelandés, criollo haitiano, una tabla noruega para texto en español y variantes adicionales suecas de 6 y 8 puntos. Se ha actualizado eSpeak NG para que sea compatible con el ligur y el abjasio. Consulta todas las novedades aquí Tan pronto como actualices NVDA, no olvides reiniciar el equipo. El reinicio garantiza que se pueden actualizar archivos que antes no se podían modificar porque estaban abiertos para escritura. En la práctica, al reiniciar vuelven a funcionar aplicaciones basadas en Electron, tales como Teams, Dropbox o Google Drive, y dejan de producirse comportamientos extraños con el explorador de archivos, Thunderbird, Office y algunos navegadores. Reiniciar es lo primero que debes hacer antes de informar de cualquier fallo. Hazlo pulsando windows+d para ir al escritorio, alt+f4, e intro sobre la opción Reiniciar. Puedes descargar NVDA 2026.3, así como las últimas versiones compatibles con sistemas antiguos y material útil para desarrolladores, desde nuestra página de descargas . La suma SHA256 de NVDA 2026.3, que se usa para garantizar la integridad de la descarga, es a8a87cb823da0c62cfbae4a444ae5ae238d54dc82ad6d46d3fdb3fef082799b2. Si tienes una versión estable anterior, también puedes actualizar automáticamente desde el menú Ayuda. Y desde la rc1, con el complemento Selector del canal de actualización, se puede hacer del mismo modo configurando previamente el canal estable. Si todavía no conoces NVDA y quieres leer algo más sobre él antes de probarlo, te recomendamos consultar la guía de usuario y la referencia rápida de órdenes . Si te gustan nuestros proyectos y el contenido que ofrecemos, plantéate contribuir mensualmente con una pequeña cantidad. Tan sólo un euro es capaz de marcar la diferencia y ayudarnos a mejorar. Visita la página de donaciones para obtener más información, o la tienda para hacerte con libros de formación traducidos y sintetizadores de voz de alta calidad. ¡Feliz lunes!\n\nLa entrada Ya disponible la versión final de NVDA 2026.3 se publicó primero en NVDA en español .",
-      "sourceName": "NVDA en español",
-      "originalUrl": "https://nvda.es/2026/10/26/ya-disponible-la-version-final-de-nvda-2026-3/",
-      "publishedAt": "2026-10-26T06:37:28.000Z",
-      "categories": [
-        "nvda",
-        "windows",
-        "tecnologia-accesibilidad"
       ]
     }
   ]

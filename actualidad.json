@@ -1,5 +1,54 @@
 [
   {
+    "id": "9to5mac-ae040ecfbe251b9b",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/04/livestream-watch-labrinth-create-a-song-from-scratch-tonight-using-apples-new-macbook-pro/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-05T02:00:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Livestream: Watch Labrinth create a song from scratch tonight using Apple’s new MacBook Pro",
+        "summary": "To promote the new MacBook Pro with PROLED XDR Display , Apple is hosting a livestream in which singer-songwriter Labrinth will create a song from scratch overnight at the company’s Tower Theatre store in Downtown Los Angeles. Watch the livestream below. more…",
+        "body": "To promote the new MacBook Pro with PROLED XDR Display , Apple is hosting a livestream in which singer-songwriter Labrinth will create a song from scratch overnight at the company’s Tower Theatre store in Downtown Los Angeles. Watch the livestream below.\n\nLast week, Apple announced the new MacBook Pro with PROLED XDR Display at a special event in Los Angeles, where it invited members of the press and content creators to get an early look at the redesigned laptop.\n\nNow, Apple is continuing its Los Angeles-centered promotional campaign with another event, this time involving singer-songwriter Labrinth.\n\nStarting at 8 p.m. PT / 11 p.m. ET tonight, Labrinth will spend the night at Apple’s Tower Theatre store in Downtown LA, creating an entire song from scratch using the new MacBook Pro and Logic Pro.\n\nThe entire process will be livestreamed on his YouTube channel, allowing viewers to follow along in real time and ask questions as he works. Apple says the finished song will be released next week.\n\nTonight’s livestream comes ahead of the new MacBook Pro’s launch this Friday, November 6.\n\nDuring last week’s demos, Apple showcased the laptop’s music production capabilities, including the ability to play virtual instruments directly on its touchscreen using Logic Pro.\n\nTune in below starting at 8 p.m. PT / 11 p.m. ET to watch Labrinth create his new song live from Apple’s Tower Theatre store.\n\nListen to Labirinth on Apple Music\n\nApple Music requires an active subscription. You can sign up for $11.99 per month, with 1 month free, or as part of the Apple One bundle ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-c9ca6edc42c650e4",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/04/apple-is-reportedly-cutting-budgets-for-its-internal-ai-usage/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-05T01:26:22.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple is reportedly cutting budgets for its internal AI usage",
+        "summary": "The company is said to be significantly dropping the amount it's spending on AI for its engineering teams.",
+        "body": "Posted:\n\nApple is cutting the daily amount its engineering teams can spend on AI, Bloomberg reported Wednesday. It’s a big change for a company that has worked to integrate the technology into its engineering processes.\n\nIn October, Apple lowered the daily AI spending cap for its engineering teams, decreasing it from $300 to $200, the outlet reported. And more cuts are in the works, with some allowances falling to $100 a day, sources tell Bloomberg. Outside engineering, Apple is reportedly weighing a daily limit as low as $25 a day.\n\nTechCrunch has reached out to Apple for comment.\n\nEarlier this year, a tsunami of tokenmaxxing took hold, with companies pushing staff to use AI as much as possible in the name of vaguely defined efficiency gains. The frenzy was short-lived, however, as bills for said tokens came due, and companies decided that token rationing might be a more fiscally sensible approach.\n\nConcerns persist about an apparent gap between what AI costs to build and run and the (often unclear) productivity gains the technology is suppose to generate."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "9to5mac-6e7dedcdab9408f8",
     "type": "news",
     "sourceId": "9to5mac",
@@ -74,6 +123,31 @@
     "media": null
   },
   {
+    "id": "ars-technica-426064a465b9ca73",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/security/2026/11/hackers-exploited-ios-and-android-flaws-to-infect-phones/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-04T22:26:49.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "android"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Hackers exploited iOS and Android flaws to infect phones",
+        "summary": "Researchers say group may have been Kremlin-sponsored in search of diplomatic targets.",
+        "body": "Hackers possibly linked to the Kremlin exploited previously patched iOS and Android flaws in an attempt to hack visitors of multiple websites, including one celebrating the 250th anniversary of American independence, researchers said Wednesday.\n\nThe attackers, which the researchers assessed with “moderate to high confidence” were part of Russia’s Foreign Intelligence Service, targeted other sites, many with links to that country’s ongoing war against Ukraine. The attacks began when iPhone or Android users visited one of potentially hundreds of different sites. JavaScript injected into the traffic then profiled the device. The final payloads, tailored to the type of platform visiting, attempted to steal browser cookies and, in some cases, Wi-Fi passwords and full mobile device data.\n\nOne of the impersonated sites was america250.org, belonging to a non-partisan group of lawmakers, business executives, and at least one former member of the Trump administration. The attackers registered america250[.]holiday and used it as a reverse proxy to america250.org. The imposter website delivered content from the real one that added malicious JavaScript into it.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
     "id": "techcrunch-fdb6b34110b2592f",
     "type": "news",
     "sourceId": "techcrunch",
@@ -93,30 +167,6 @@
         "title": "Nothing CEO says company’s mysterious AI-first device is dropping next month",
         "summary": "While it's not yet clear what kind of product the smartphone startup is cooking up, Nothing's CEO said the product is designed to leverage AI for productivity gains.",
         "body": "Posted:\n\nNothing, the smartphone startup behind the distinctive Nothing Phone , is working on an AI product, but what it is remains unclear.\n\nOn Wednesday, CEO Carl Pei posted on X that the company’s first “AI-native product” ships in December. “It’s a tool, but one built with the personality and care that have come to define a Nothing product. It has no new screen, and it couldn’t have been an app,” Pei wrote.\n\nPei has teased an AI-first device for some time and the company has also said that it plans to release a pair of AI-linked smart glasses, as well as earbuds with AI integrations.\n\nPei’s description adds up to a screenless non-app that uses AI? He also calls it a “productivity tool.” Adding further mystique to the announcement, Pei seems to downplay any link to AI wearables.\n\n“The whole industry is hunting for its iPhone moment: the pendant, the pin, the glasses, the companion, some magical consumer device that makes AI part of everyone’s life,” Pei wrote. “I admire the boldness, but I read this moment differently.”\n\nNo firm release date has been announced, but Nothing fans should know soon enough what the company has in store for them."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-a786f132a5a54d10",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/04/almost-no-one-uses-ai-agents-to-book-their-uber-company-says/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-04T21:56:01.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Almost no one uses AI agents to book their Uber, company says",
-        "summary": "During its busiest week last quarter, Uber said only four people booked a ride using an AI agent.",
-        "body": "Very few people are using personal AI agents to order Ubers, apparently. On the transportation giant’s third-quarter earnings call on Wednesday, the company said that only four rides were ordered through an AI agent during its busiest week in October: the week of Halloween.\n\nWhile more people used an AI agent to order food through its delivery service, Uber Eats, the volume was still fairly small compared to the overall number of trips.\n\nUber’s chief financial officer, Balaji Krishnamurthy, told Wall Street analysts on the call that the company handled around 320 million trips and orders across Uber and Uber Eats during the week of Halloween, but only 500 Uber Eats orders were placed by an AI agent.\n\n“It is very, very early and very limited traction that we are seeing so far,” said CEO Dara Khosrowshahi, referring to the low number of orders placed by AI agents. “Listen, we hope that there will be more traction.”\n\nThe surprisingly low numbers of AI-initiated transactions come amid growing hype for a new wave of AI agents that don’t just answer questions but also handle tasks on users’ behalf. There’s been an explosion of personal AI startups, including one of the buzziest, Instinct, which was founded last year and raised its most recent round of funding at a $10 billion valuation. Meta’s Muse also became the No. 1 app in Apple’s U.S. App Store last month, topping 10 million users, per Meta’s own reporting . The company said many were using it to shop and transact with businesses.\n\nOpenAI, Anthropic, Google, and SpaceXAI (Grok) are also now offering their own AI agents, as are numerous smaller startups.\n\nStill, early numbers from public companies indicate the agentic web still has a long way to go. DoorDash, for instance, said last week on its earnings call that it has only received a few hundred orders from AI agents so far, as most customers are still placing orders through the DoorDash app.\n\nUber is seeing the same behavior, it seems. Khosrowshahi pointed out that the average time to book a ride is only 50 seconds in the company’s app, and re-ordering a favorite food only takes 90 seconds. That suggests an AI agent isn’t necessarily saving anyone time.\n\nDespite the low number of AI-driven transactions, Khosrowshahi seemed bullish on the idea of agents in general. “We think that is another opportunity to reach our platform. We think it will be a net positive in terms of demand on the ecosystem,” he said.\n\nRight now, there are around eight major AI assistants on the market, Khosrowshahi noted, and he expects that number to grow to more than 10 in time.\n\n“Every single AI system company is talking to us,” he added."
       }
     },
     "media": null
@@ -192,31 +242,6 @@
         "title": "Treblo - AI Music",
         "summary": "Make songs with the world's best AI music model. For free. No limits. Turn any idea into a real song—a meme for the group chat, a love song for your person, or a track the whole world vibes to. Whatever you hear in your head, Treblo helps you make it. CREATE IN SECONDS Describe your song. Pick a style. Hit generate. That's it. Want more control? Tweak lyrics, tags, and settings whenever you want. MAKE IT YOURS Extend tracks. Swap sections. Upload audio to cover. Craft until it's perfect. SHARE & DISCOVER Post your music. Follow other artists. Join groups. Remix what inspires you. Build your audience. Hyperpop. Drift phonk. Sea shanties. If you can imagine it, you can create it. Privacy Policy: https://treblo.com/privacy Terms of Service: https://treblo.com/tos",
         "body": "Make songs with the world's best AI music model. For free. No limits. Turn any idea into a real song—a meme for the group chat, a love song for your person, or a track the whole world vibes to. Whatever you hear in your head, Treblo helps you make it. CREATE IN SECONDS Describe your song. Pick a style. Hit generate. That's it. Want more control? Tweak lyrics, tags, and settings whenever you want. MAKE IT YOURS Extend tracks. Swap sections. Upload audio to cover. Craft until it's perfect. SHARE & DISCOVER Post your music. Follow other artists. Join groups. Remix what inspires you. Build your audience. Hyperpop. Drift phonk. Sea shanties. If you can imagine it, you can create it. Privacy Policy: https://treblo.com/privacy Terms of Service: https://treblo.com/tos"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-dbf0d83ae3d9bdcc",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/04/apple-disables-siri-ai-waitlist-in-ios-27-with-one-exception/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-04T20:28:23.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple disables Siri AI waitlist in iOS 27, with one exception",
-        "summary": "When Siri AI launched in iOS 27 earlier this fall, Apple used a waitlist to gate access. But a newly updated support document says the waitlist is no longer being used, except in “high demand” times. more…",
-        "body": "When Siri AI launched in iOS 27 earlier this fall, Apple used a waitlist to gate access. But a newly updated support document says the waitlist is no longer being used, except in “high demand” times.\n\nIf you haven’t yet enabled Siri AI on your iPhone, Apple recently made it quicker and easier to gain access.\n\nThat’s because, per updates to this support document , the company is now only using a waitlist for Siri AI in “high demand” times.\n\nAfter giving instructions on how to enable Siri AI by tapping “Try Siri AI (Beta)” inside Settings, here’s what the document used to say compared to what it says now.\n\nOld:\n\nThis will add you to a waitlist, and wait times can vary. Siri AI will begin to download automatically when your wait is complete.\n\nNew:\n\nSiri AI will begin to download automatically. During time of high demand, you might be added to a waitlist first, and wait times can vary.\n\nIt’s understandable that a waitlist was used initially upon iOS 27’s release. Apple needed to slowly grant access while gauging server performance. But now that we’re nearly two months into the iOS 27 rollout, it’s great that Apple is only deploying the waitlist occasionally as needed.\n\nHave you enabled Siri AI on your iPhone? If not, what’s holding you back? Let us know in the comments."
       }
     },
     "media": null
@@ -384,29 +409,6 @@
         "title": "Binance says hackers who stole billions in crypto spent months planning heist",
         "summary": "Techniques included laptop infections, compromised internal tooling, and fake job interviews.",
         "body": "The hackers who stole billions of dollars in cryptocurrency from the Binance exchange spent months working on the theft and used both social engineering and novel malware in the process, the company said Tuesday.\n\nThe heist, which both the FBI and the TRM Security firm attributed to North Korean actors, initially targeted $6.34 billion in cryptocurrency from Binance wallets. The exchange has since frozen or intercepted $2.85 billion of that sum. Binance said it has set aside funds required to cover the loss and provided this link to a Proof of Reserves page. The $6.34 billion represents the biggest sum ever targeted in a cryptocurrency theft.\n\nBinance said the people behind the heist began no later than June and continued until last Thursday, when they successfully compromised an engineer's laptop and withdrew assets from several wallets. Like just about every organization that suffers a public, high-consequence hack, Binance said the threat actor was sophisticated and resourceful.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-aea012de85187f16",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/cars/2026/11/what-i-learned-driving-the-slate-electric-truck-prototype/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-04T15:42:18.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "What I learned driving the Slate electric truck prototype",
-        "summary": "After 45 minutes behind the wheel, I am more optimistic about the $25,000 EV.",
-        "body": "If my 45-minute drive yesterday morning is anything to go by, I think Slate Auto will have quite the hit on its hands. The startup had one of its prototype trucks in town and asked if I wanted to check it out—no jumping on a plane or having to spend yet another night in an interchangeable hotel room, just a drive from southwest DC to Rockville, Maryland. Easy-peasy.\n\nThe prototype truck had been well-used, with almost 6,000 miles (9,656 km) showing on the small and minimalist but very legible digital display that also shows your speed and, if you engage reverse, the backup camera. And while the cabin layout was representative of the production version, the surfaces most certainly weren’t—the prototype instead uses a lot of hard and shiny black plastic, with strips of Velcro here and there left over from when the interior had to be camouflaged when the vehicle was out in public.\n\nGetting acquainted with the Slate was refreshingly easy. The Morris Marina-like door handles open with a pleasing mechanical action. The seat and steering column adjust manually but with plenty of reach, something many budget models used to leave out to save on cost.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -2639,30 +2641,6 @@
         "title": "Unboxr",
         "summary": "Unboxr is the ultimate lightweight and secure tool for extracting archives on your Android device. Designed with a beautiful, modern dark theme using Jetpack Compose,…",
         "body": "Published 9 August 2026 by Warren Carr\n\nUnboxr is the ultimate lightweight and secure tool for extracting archives on your Android device. Designed with a beautiful, modern dark theme using Jetpack Compose, Unboxr makes managing compressed files fast and intuitive.\n\nKey Features:\n\nFree or paid:\n\nAccessibility and User Comments:\n\n“Unboxr” is a simplistic app intended for extracting compressed files, with support for several formats, including password-protected archives.\n\nThe UI is straightforward, with an “Open Folder” button that, when tapped, takes you to your phone’s internal storage, where you can choose the location containing the file you want to extract. The app also appears among the apps that can handle these file types, so you can select supported files from a file manager without using the dedicated button in the app.\n\nIn the top-right corner, there is a “Settings” button where you can customize the app. The customization options are quite limited, though. The Settings section also includes a donation option at the very bottom of the screen labeled “Buy me a coffee”\n\nThe app is completely free and contains no ads.\n\nThe app is very minimalistic. I noticed that it is not possible to make the app ask you where you want the contents to be saved every time you extract a file, despite the presence of an “Always ask” option in Settings, which, based on its explanation, should enable this behavior. Instead, to select the output directory, you have to specify it through the “Default destination folder” option.\n\nWhen it comes to accessibility, I didn’t encounter any issues with the app.\n\nLast Tested App version and Android version:\n\nv1.0. Android 16\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "nvaccess-in-process-61c805765b69b0bb",
-    "type": "news",
-    "sourceId": "nvaccess-in-process",
-    "sourceName": "NV Access",
-    "sourceUrl": "https://www.nvaccess.org/category/in-process/",
-    "originalUrl": "https://www.nvaccess.org/post/in-process-7th-august-2026/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-08-07T05:16:04.000Z",
-    "categories": [
-      "windows",
-      "nvda"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "In-Process 7th August 2026",
-        "summary": "We’re getting ever closer to NVDA 2026.2 and we hit a new milestone towards that this week. Let’s have a look at what’s in this week’s blog and then dive in: NVDA 2026.2 Beta 10 Getting Help WebAIM Screen Reader User Survey Thanks Acapela Moving by Sentence NVDA 2026.2 Beta 10 NVDA 2026.2 is nearly… Read More",
-        "body": "We’re getting ever closer to NVDA 2026.2 and we hit a new milestone towards that this week. Let’s have a look at what’s in this week’s blog and then dive in:\n\nNVDA 2026.2 is nearly here! This week we’re up to NVDA 2026.2 Beta 10 . We are now in the “String freeze” – that is, we don’t make any changes for a couple of weeks to give the translators time to update their work before the stable release. So, the next step should be a release candidate in a couple of weeks. Then, all going to plan, the final release a week or so after that. Let’s have a look at the updates from the betas since the last In-Process:\n\nChanges introduced in NVDA 2026.2 Beta 10 : Updates to translations Fixed touchscreen, touchpad and mouse input for magnifier Added gestures for braille automatic scroll commands Removed True Center Mode and Border Mode from the magnifier due to design bugs Remove non-functional “Custom” option from the math decimal separator setting\n\nChanges introduced in Beta 9: Updates to translations Update Braille Reading and Automatic Scroll Rate in User Guide Moving by sentence in Word (alt+downArrow/alt+upArrow) at the start/end of a document now stops there instead of wrapping around to the opposite end Changed quick access keys for magnifier settings to ensure they are unique Changes introduced in Beta 8: Updates to translations Improve magnifier behaviour when using higher DPI scaling Fix magnifier from interfering with opening dictionary dialogs Improve the handling of failing to activate the magnifier Block touch screen input when using the magnifier where possible, as it is not supported yet\n\nWe try to ensure there are plenty of ways for NVDA users to get help. Since you’re reading this blog post, I HOPE you would consider our blog one of the ways you learn more about NVDA. We have training material and telephone support in our shop, and they are both very popular options (particularly combined in the NVDA Productivity Bundle ). But what about in NVDA itself? There are a couple of ways you can get help while you are using NVDA: The User Guide. (And particularly the quick start guide for new users). The user guide contains information on all of the features of NVDA. It is an excellent resource to refer back to after completing “ Basic Training for NVDA ” and learning about all the features. Press NVDA+n to open the NVDA menu, then h for the help submenu, which starts on the User Guide The other items in the “Help” menu for information including what is new , links to the NV Access website , help and training , and the “ Commands quick reference ” (the tables of keystrokes and gestures extracted from the user guide). Context sensitive help. From within any dialog in NVDA, press f1 to open the user guide to the topic on the current control. Input Help. Press NVDA+1 (the 1 in the number row, above Q). In this mode, NVDA will report any key that you press. If you press an NVDA command (such as NVDA+tab), it will report that. Keys pressed and commands are not executed. This can be a great way of exploring a new keyboard layout. Press NVDA+1 again to turn input help off. Report keystroke: While we’re on help for individual keys, the Report Keystroke command tells you the keystroke to access the currently focussed control. Press shift+numpad 2 (laptop: NVDA+control+shift+dot ) to report the keystroke for the current control .\n\nThe WebAIM screen reader user’s survey is on again. This is the 11th edition of the survey, which is the largest survey we are aware of which collects data on screen reader usage and trends. We encourage everyone to complete it in order to give the community as accurate a picture of how you use a screen reader as possible!\n\nThe one question I’d like to highlight is “ Screen reader satisfaction ”. Please do answer all the questions honestly, including that one – but if there is anything which makes you think “I’m not 100% satisfied with NVDA” – please let us know! You can create an issue on GitHub (and we’ve previously included GitHub instructions here in In-Process , you can email us , reach us in the official NVDA mailing list , or on social media .\n\nWe are very grateful to all our donors . They are one of the main reasons we are able to continue to provide NVDA for free to anyone who can use it anywhere in the world.\n\nThis week, we’d like to give a shoutout to Acapela who make the popular Acapela TTS for NVDA . If you are interested in trying Acapela out, they offer an evaluation version which is fully functional and provides access to all voices and all functionalities for 15 days.\n\nAcapela, along with many other options, are listed on our Extra Voices page .\n\nAnd, if you would like to donate and help keep NVDA free for everyone, we would welcome your support. Please visit our donation page for PayPal or bank donation options. You can also become a GitHub Sponsor .\n\nOne of the fixes in the recent NVDA 2026.2 betas is a fix to moving by sentences in Microsoft Word. In many places in Microsoft Office, you can press alt+down arrow to move to the next sentence and alt+up arrow to move to the previous sentence. While this is a feature of Office, if you appreciate moving by sentence and would like to be able to use it everywhere, try out the “ Sentence Nav ” add-on in the add-on store.\n\nWant more ways of getting around? How about: Word ( control+left arrow and control+right arrow ) Paragraph ( control+up arrow and control+down arrow OR shift+p and p ) And as an added bonus for paragraph navigation, here’s a related feature: Paragraph style , which lets you change how NVDA moves when moving by paragraph Single letter navigation What other ways do you prefer to navigate documents? Continue the conversation on social media .\n\nThat’s all for this week. Next time around we’ll be close to the final 2026.2 release, so for now, do try out the latest beta and be sure to report any issues. Also don’t forget to do the WebAIM Screen Reader User Survey ."
       }
     },
     "media": null

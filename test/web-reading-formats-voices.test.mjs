@@ -89,8 +89,8 @@ test('web reader filters browser and external voices by language', async () => {
   ]) assert.ok(source.includes(token), `Missing language filter feature ${token}`);
   assert.ok(source.includes('reading-document-voice-language'));
   assert.ok(catalog.includes('languages:'));
-  assert.match(html, /web-reading\.js\?v=3\.44/);
-  assert.match(worker, /web-reading\.js\?v=3\.44/);
+  assert.match(html, /web-reading\.js\?v=3\.45/);
+  assert.match(worker, /web-reading\.js\?v=3\.45/);
   assert.match(worker, /tifloacosta-app-v2-\d+-[a-z0-9-]+/);
 });
 
@@ -118,4 +118,14 @@ test('saved web MP3 and DAISY preserve binary Blob through the shared library cl
   assert.match(source, /content: result\.content/);
   const reader = await read('web-reading.js');
   assert.match(reader, /opened\.content instanceof Blob/);
+});
+
+
+test('expandable web controls use action-specific accessible labels', async () => {
+  const [html, app, reader, worker] = await Promise.all([read('index.html'),read('app.js'),read('web-reading.js'),read('sw.js')]);
+  for (const label of ['Mostrar apartados','Mostrar ajustes visuales','Mostrar formatos admitidos']) assert.ok(html.includes(label));
+  for (const label of ['Ocultar apartados','Ocultar ajustes visuales']) assert.ok(app.includes(label));
+  for (const label of ['Mostrar marcas del libro','Ocultar marcas del libro','Ocultar formatos admitidos']) assert.ok(reader.includes(label));
+  assert.match(html, /app\.js\?v=2\.10/);
+  assert.match(worker, /app\.js\?v=2\.10/);
 });

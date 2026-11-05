@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-77-accessible-actions';
+const CACHE = 'tifloacosta-app-v2-78-accessible-video-actions';
 const NAVIGATION_TIMEOUT_MS = 5000;
 // Resource catalog is refreshed from the network.
 const SHELL = [
@@ -21,7 +21,7 @@ const SHELL = [
   './web-reading.js?v=3.45',
   './podcast.html',
   './videos.html',
-  './videos.js?v=2.6',
+  './videos.js?v=2.7',
   './youtube-accessible.js?v=1.1',
   './podcast.js?v=1.1',
   './app.js?v=2.10',

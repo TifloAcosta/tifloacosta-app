@@ -397,7 +397,15 @@
         <option value="recent">Recientes</option>
         <option id="reading-filter-queue" value="queue">Cola de lectura</option>
       </select>
-      <p id="reading-library-intro" class="visually-hidden">Los documentos se guardan en este navegador y no se sincronizan automáticamente con otros dispositivos.</p>
+      <button id="reading-library-select" type="button">Seleccionar documentos</button>
+       <div id="reading-library-bulk" hidden>
+         <button id="reading-library-select-all" type="button">Seleccionar todos los visibles</button>
+         <button id="reading-library-bulk-add" type="button">Añadir a la cola</button>
+         <button id="reading-library-bulk-remove" type="button">Quitar de la cola</button>
+         <button id="reading-library-bulk-delete" type="button">Eliminar seleccionados</button>
+         <p id="reading-library-bulk-status" role="status" aria-live="polite"></p>
+       </div>
+       <p id="reading-library-intro" class="visually-hidden">Los documentos se guardan en este navegador y no se sincronizan automáticamente con otros dispositivos.</p>
       <p id="reading-library-status" class="muted" role="status" aria-live="polite"></p>
       <div id="reading-library-list" class="resource-list"></div>
       <section id="reading-queue-web" hidden aria-labelledby="reading-queue-heading">
@@ -406,7 +414,6 @@
         <p id="reading-queue-status" class="muted" role="status" aria-live="polite"></p>
         <div id="reading-queue-list" class="resource-list"></div>
       </section>
-      <button id="reading-marks-open" type="button" aria-expanded="false" aria-controls="reading-marks-web">Marcas</button>
       <section id="reading-marks-web" hidden aria-labelledby="reading-marks-heading">
         <h4 id="reading-marks-heading">Marcas</h4>
         <p id="reading-marks-intro" hidden>Marcadores del documento abierto.</p>
@@ -658,17 +665,6 @@
   libraryFilter?.addEventListener('change', () => showLibraryFilter(libraryFilter.value));
   window.refreshTifloLibraryFilter = () => showLibraryFilter(libraryFilter?.value || 'all');
   showLibraryFilter('all');
-
-  const marksOpen = document.getElementById('reading-marks-open');
-  const marksPanel = document.getElementById('reading-marks-web');
-  marksOpen?.addEventListener('click', () => {
-    if (!marksPanel) return;
-    const expanded = marksOpen.getAttribute('aria-expanded') === 'true';
-    marksOpen.setAttribute('aria-expanded', String(!expanded));
-    marksPanel.hidden = expanded;
-    if (!expanded) document.getElementById('reading-marks-heading')?.setAttribute('tabindex', '-1');
-    if (!expanded) document.getElementById('reading-marks-heading')?.focus();
-  });
 
   const providerOpen = document.getElementById('reading-google-open');
   const providerGuide = document.getElementById('reading-google-guide');

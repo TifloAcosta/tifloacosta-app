@@ -72,7 +72,7 @@
       oldest: 'Más antiguos primero',
       resultsHeading: 'Resultados',
       resultsHelp: 'En cada vídeo puedes abrir el reproductor o desplegar sus opciones para compartir el enlace y abrirlo en YouTube.',
-      options: 'Opciones del vídeo', optionsFor: title => `Opciones del vídeo: ${title}`,
+      options: 'Mostrar opciones del vídeo', optionsFor: title => `Mostrar opciones del vídeo: ${title}`, optionsHideFor: title => `Ocultar opciones del vídeo: ${title}`,
       optionsGroup: title => `Acciones disponibles para: ${title}`,
       share: 'Compartir o copiar enlace', shared: 'Enlace copiado. Puedes pegarlo donde quieras.',
       shareFailed: 'No se pudo compartir ni copiar. Puedes abrir el vídeo en YouTube y copiar su dirección.',
@@ -122,7 +122,7 @@
       oldest: 'Oldest first',
       resultsHeading: 'Results',
       resultsHelp: 'For each video, open the player or expand its options to share the link and open it on YouTube.',
-      options: 'Video options', optionsFor: title => `Video options: ${title}`,
+      options: 'Show video options', optionsFor: title => `Show video options: ${title}`, optionsHideFor: title => `Hide video options: ${title}`,
       optionsGroup: title => `Available actions for: ${title}`,
       share: 'Share or copy link', shared: 'Link copied. You can paste it anywhere.',
       shareFailed: 'Unable to share or copy the link. Open the video on YouTube to copy its address.',
@@ -702,6 +702,8 @@
       const opening = more.hidden;
       more.hidden = !opening;
       options.setAttribute('aria-expanded', String(opening));
+      options.textContent = opening ? (lang === 'en' ? 'Hide video options' : 'Ocultar opciones del vídeo') : c.options;
+      options.setAttribute('aria-label', opening ? c.optionsHideFor(video.title || '') : c.optionsFor(video.title || ''));
       if (!opening && more.contains(document.activeElement)) options.focus();
     });
     share.addEventListener('click', async () => {

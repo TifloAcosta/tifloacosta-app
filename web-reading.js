@@ -638,7 +638,7 @@
     const marksPanel = document.getElementById('reading-marks-web');
     const marksButton = document.createElement('button');
     marksButton.type = 'button';
-    marksButton.textContent = language() === 'en' ? 'Book bookmarks' : 'Marcas del libro';
+    marksButton.textContent = language() === 'en' ? 'Show book bookmarks' : 'Mostrar marcas del libro';
     marksButton.hidden = true;
     marksButton.setAttribute('aria-expanded','false');
     marksPanel.hidden = true;
@@ -646,6 +646,9 @@
     marksButton.addEventListener('click',()=>{
       marksPanel.hidden = !marksPanel.hidden;
       marksButton.setAttribute('aria-expanded',String(!marksPanel.hidden));
+      marksButton.textContent = marksPanel.hidden
+        ? (language() === 'en' ? 'Show book bookmarks' : 'Mostrar marcas del libro')
+        : (language() === 'en' ? 'Hide book bookmarks' : 'Ocultar marcas del libro');
       if (!marksPanel.hidden) { els.marksHeading.tabIndex = -1; els.marksHeading.focus(); }
     });
     els.documentMarksOption = marksOption;
@@ -1085,7 +1088,9 @@
     els.heading.textContent = c.heading;
     els.intro.textContent = '';
     els.intro.hidden = true;
-    if (els.formatsToggle) els.formatsToggle.textContent = language() === 'en' ? 'Show supported file types' : 'Consultar formatos admitidos';
+    if (els.formatsToggle) els.formatsToggle.textContent = els.formatsToggle.getAttribute('aria-expanded') === 'true'
+      ? (language() === 'en' ? 'Hide supported file types' : 'Ocultar formatos admitidos')
+      : (language() === 'en' ? 'Show supported file types' : 'Mostrar formatos admitidos');
     if (els.formatsList) els.formatsList.textContent = language() === 'en'
       ? 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2, MP3 audio and PNG, JPG or WebP images using OCR.'
       : 'TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2, audio MP3 e imágenes PNG, JPG y WebP mediante OCR.';
@@ -3648,6 +3653,9 @@
   els.formatsToggle?.addEventListener('click', () => {
     const open = els.formatsToggle.getAttribute('aria-expanded') !== 'true';
     els.formatsToggle.setAttribute('aria-expanded', String(open));
+    els.formatsToggle.textContent = open
+      ? (language() === 'en' ? 'Hide supported file types' : 'Ocultar formatos admitidos')
+      : (language() === 'en' ? 'Show supported file types' : 'Mostrar formatos admitidos');
     els.formatsList.hidden = !open;
   });
   els.prepare.addEventListener('click', () => { void prepareReading(); });

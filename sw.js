@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-75-daisy-diagnostics';
+const CACHE = 'tifloacosta-app-v2-76-media-blob-reopen';
 const NAVIGATION_TIMEOUT_MS = 5000;
 // Resource catalog is refreshed from the network.
 const SHELL = [
@@ -18,7 +18,7 @@ const SHELL = [
   './actualidad-core.js?v=1.8',
   './actualidad.js?v=1.5',
   './actualidad-media.js?v=1.1',
-  './web-reading.js?v=3.43',
+  './web-reading.js?v=3.44',
   './podcast.html',
   './videos.html',
   './videos.js?v=2.6',

@@ -548,7 +548,9 @@
     for (const [value, es, en] of [
       ['block','Bloque de texto','Text block'],
       ['paragraph','Párrafo','Paragraph'],
-      ['sentence','Frase','Sentence']
+      ['sentence','Frase','Sentence'],
+      ['minute','Un minuto','One minute'],
+      ['bookmark','Marcas','Bookmarks']
     ]) {
       const option = document.createElement('option');
       option.value = value;
@@ -556,6 +558,9 @@
       unit.append(option);
     }
 
+    const marksOption = unit.querySelector('[value="bookmark"]');
+    marksOption.hidden = true;
+    marksOption.disabled = true;
     const previousUnit = document.createElement('button');
     previousUnit.type = 'button';
     const nextUnit = document.createElement('button');
@@ -565,7 +570,9 @@
       const labels = {
         block: language() === 'en' ? 'text block' : 'bloque de texto',
         paragraph: language() === 'en' ? 'paragraph' : 'párrafo',
-        sentence: language() === 'en' ? 'sentence' : 'frase'
+        sentence: language() === 'en' ? 'sentence' : 'frase',
+        minute: language() === 'en' ? 'minute' : 'minuto',
+        bookmark: language() === 'en' ? 'bookmark' : 'marca'
       };
       const label = labels[unit.value] || labels.block;
       previousUnit.textContent = language() === 'en' ? `Previous ${label}` : `Anterior: ${label}`;
@@ -621,6 +628,29 @@
     // Bookmark action belongs to the visible reading toolbar, not settings.
     mainControls.prepend(mark);
     primaryActions.append(readingSettingsMenu, moreButton);
+    const marksPanel = document.getElementById('reading-marks-web');
+    const marksButton = document.createElement('button');
+    marksButton.type = 'button';
+    marksButton.textContent = language() === 'en' ? 'Book bookmarks' : 'Marcas del libro';
+    marksButton.hidden = true;
+    marksButton.setAttribute('aria-expanded','false');
+    marksPanel.hidden = true;
+    generalSettings.append(marksButton,marksPanel);
+    marksButton.addEventListener('click',()=>{
+      marksPanel.hidden = !marksPanel.hidden;
+      marksButton.setAttribute('aria-expanded',String(!marksPanel.hidden));
+      if (!marksPanel.hidden) { els.marksHeading.tabIndex = -1; els.marksHeading.focus(); }
+    });
+    els.documentMarksOption = marksOption;
+    els.documentMarksButton = marksButton;
+    els.documentMarksPanel = marksPanel;
+    const deleteOpen = document.createElement('button');
+    deleteOpen.type = 'button';
+    deleteOpen.id = 'reading-document-delete';
+    deleteOpen.textContent = language() === 'en' ? 'Delete document' : 'Eliminar documento';
+    deleteOpen.hidden = true;
+    deleteOpen.addEventListener('click',()=>{ void deleteOpenedBook(); });
+    els.documentDelete = deleteOpen;
 
     const audioPanel = document.createElement('section');
     audioPanel.id = 'reading-document-audio';
@@ -776,7 +806,7 @@
     movable.forEach(node => morePanel.append(node));
     // The legacy bookmark action is already provided by the main reading toolbar.
     els.bookmark.hidden = true;
-    morePanel.append(closeMore);
+    morePanel.append(deleteOpen,closeMore);
 
     section.append(
       previousUnit, nextUnit,
@@ -787,6 +817,7 @@
     mainControls.after(section);
 
     els.navigationUnit = unit;
+    els.updateNavigationButtons = updateUnitButtons;
     els.documentVoiceLanguageLabel = voiceLanguageLabel;
     els.documentVoiceLanguage = voiceLanguage;
     els.documentVoice = voice;
@@ -844,6 +875,10 @@
 
     unit.addEventListener('change', () => {
       navigationUnit = unit.value || 'block';
+      if (navigationUnit === 'minute' && !activeAudio) {
+        unit.value = navigationUnit = 'block';
+        els.status.textContent = language() === 'en' ? 'Minute navigation requires recorded audio.' : 'La navegación por minutos requiere audio grabado.';
+      }
       buildSentenceUnits();
       updateUnitButtons();
     });
@@ -1086,7 +1121,9 @@
     els.bookmark.textContent = c.bookmark;
     els.queueHeading.textContent = c.queueHeading;
     els.queueIntro.textContent = c.queueIntro;
-    els.marksHeading.textContent = c.marksHeading;
+    els.marksHeading.textContent = language() === 'en' ? 'Bookmarks in this book' : 'Marcas de este libro';
+    if (els.documentDelete) els.documentDelete.textContent = language() === 'en' ? 'Delete document' : 'Eliminar documento';
+    if (els.documentMarksButton) els.documentMarksButton.textContent = language() === 'en' ? 'Book bookmarks' : 'Marcas del libro';
     els.marksIntro.textContent = c.marksIntro;
     els.translationHeading.textContent = c.translationHeading;
     els.translationIntro.textContent = c.translationIntro;
@@ -1832,6 +1869,7 @@
       });
       if (!saved?.id) return false;
       currentBookId = saved.id;
+      if (els.documentDelete) els.documentDelete.hidden = false;
       currentQueued = false;
       return true;
     } catch {
@@ -2814,6 +2852,7 @@
           await useDaisyAudio(file, prepared.book, prepared.zip);
         }
         currentBookId = opened.book.id;
+        if (els.documentDelete) els.documentDelete.hidden = false;
         els.status.textContent = language() === 'en' ? 'Audiobook opened from My library.' : 'Audiolibro abierto desde Mi biblioteca.';
       } catch {
         els.libraryStatus.textContent = language() === 'en'
@@ -2846,8 +2885,25 @@
       initialIndex: requestedIndex
     });
     if (percent != null) await persistProgress({ unitIndex: 0 });
+    if (els.documentDelete) els.documentDelete.hidden = false;
     currentQueued = opened.book.queued === true;
     updateQueueToggle();
+  }
+
+  async function deleteOpenedBook() {
+    const id = currentBookId;
+    if (!libraryClient || !id) return;
+    const name = els.title.textContent || (language() === 'en' ? 'this book' : 'este libro');
+    const question = language() === 'en' ? `Delete "${name}" and its bookmarks?` : `¿Eliminar "${name}" y sus marcas?`;
+    if (!window.confirm(question)) return;
+    let deleted = false;
+    try { deleted = await libraryClient.deleteBook(id); } catch {}
+    if (!deleted) { els.status.textContent = t().deleteFailed; return; }
+    await exitReaderOnlyView();
+    currentBookId = '';
+    currentQueued = false;
+    await Promise.all([renderLibrary(),renderQueue(),renderMarks()]);
+    els.libraryStatus.textContent = t().deleted;
   }
 
   async function deleteSavedBook(id) {
@@ -2913,13 +2969,27 @@
     if (mark) await renderMarks();
   }
 
+  let activeMarks = [];
   async function renderMarks() {
     els.marksList.replaceChildren();
+    activeMarks = [];
+    const availability = available => {
+      if (els.documentMarksOption) { els.documentMarksOption.hidden = !available; els.documentMarksOption.disabled = !available; }
+      if (els.documentMarksButton) els.documentMarksButton.hidden = !available;
+      if (!available && els.documentMarksPanel) els.documentMarksPanel.hidden = true;
+      if (!available && els.navigationUnit?.value === 'bookmark') {
+        els.navigationUnit.value = navigationUnit = 'block';
+        els.updateNavigationButtons?.();
+      }
+    };
+    availability(false);
     if (!libraryClient || !currentBookId) {
       els.marksStatus.textContent = t().marksEmpty;
       return;
     }
     const marks = await libraryClient.listMarks(currentBookId, 'bookmark');
+    activeMarks = marks.slice().sort((a,b)=>Number(a.blockIndex)-Number(b.blockIndex));
+    availability(activeMarks.length > 0);
     if (!marks.length) {
       els.marksStatus.textContent = t().marksEmpty;
       return;
@@ -3351,6 +3421,25 @@
   }
 
   function move(direction) {
+    if (navigationUnit === 'minute' && activeAudio) {
+      activeAudio.currentTime = Math.max(0,Math.min(Number.isFinite(activeAudio.duration) ? activeAudio.duration : Number.MAX_SAFE_INTEGER,activeAudio.currentTime+(direction<0?-60:60)));
+      return;
+    }
+    if (navigationUnit === 'bookmark' && activeMarks.length && readingSession && documentModel?.blocks?.length) {
+      const position = readingSession.snapshot().blockIndex;
+      const mark = direction < 0
+        ? activeMarks.slice().reverse().find(item=>Number(item.blockIndex)<position)
+        : activeMarks.find(item=>Number(item.blockIndex)>position);
+      if (!mark) { els.status.textContent = language() === 'en' ? 'No more bookmarks.' : 'No hay más marcas.'; return; }
+      currentUnitIndex = Number(mark.unitIndex)||0;
+      const target = Math.max(0,Math.min(documentModel.blocks.length-1,Number(mark.blockIndex)||0));
+      readingSession = shared.createReadingSession({blocks:documentModel.blocks,initialIndex:target});
+      renderBlock();
+      void persistProgress({unitIndex:currentUnitIndex});
+      void speechController?.moveTo?.({blockIndex:target,unitIndex:currentUnitIndex});
+      queueMicrotask(()=>els.block.focus());
+      return;
+    }
     if (!readingSession || !documentModel?.blocks?.length) return;
     if (navigationUnit === 'sentence') {
       buildSentenceUnits();

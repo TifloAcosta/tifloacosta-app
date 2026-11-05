@@ -89,8 +89,8 @@ test('web reader filters browser and external voices by language', async () => {
   ]) assert.ok(source.includes(token), `Missing language filter feature ${token}`);
   assert.ok(source.includes('reading-document-voice-language'));
   assert.ok(catalog.includes('languages:'));
-  assert.match(html, /web-reading\.js\?v=3\.43/);
-  assert.match(worker, /web-reading\.js\?v=3\.43/);
+  assert.match(html, /web-reading\.js\?v=3\.44/);
+  assert.match(worker, /web-reading\.js\?v=3\.44/);
   assert.match(worker, /tifloacosta-app-v2-\d+-[a-z0-9-]+/);
 });
 
@@ -108,4 +108,14 @@ test('web reader exposes explicit previous and next controls for the selected na
   for (const token of ['Previous ${label}', 'Next ${label}', 'Anterior: ${label}', 'Siguiente: ${label}', "previousUnit.addEventListener('click'", "nextUnit.addEventListener('click'"]) {
     assert.ok(source.includes(token), `Missing navigation control ${token}`);
   }
+});
+
+
+test('saved web MP3 and DAISY preserve binary Blob through the shared library client', async () => {
+  const source = await read('shared/reading-library-client.mjs');
+  assert.match(source, /\['mp3', 'daisy-audio'\]\.includes\(book\.format\)/);
+  assert.match(source, /result\.content instanceof Blob/);
+  assert.match(source, /content: result\.content/);
+  const reader = await read('web-reading.js');
+  assert.match(reader, /opened\.content instanceof Blob/);
 });

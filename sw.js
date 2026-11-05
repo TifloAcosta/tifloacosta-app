@@ -1,4 +1,4 @@
-const CACHE = 'tifloacosta-app-v2-76-media-blob-reopen';
+const CACHE = 'tifloacosta-app-v2-77-accessible-actions';
 const NAVIGATION_TIMEOUT_MS = 5000;
 // Resource catalog is refreshed from the network.
 const SHELL = [
@@ -18,13 +18,13 @@ const SHELL = [
   './actualidad-core.js?v=1.8',
   './actualidad.js?v=1.5',
   './actualidad-media.js?v=1.1',
-  './web-reading.js?v=3.44',
+  './web-reading.js?v=3.45',
   './podcast.html',
   './videos.html',
   './videos.js?v=2.6',
   './youtube-accessible.js?v=1.1',
   './podcast.js?v=1.1',
-  './app.js?v=2.9',
+  './app.js?v=2.10',
   './tifloacosta-favicon.ico',
   './tifloacosta-icon-192.png',
   './tifloacosta-icon-512.png',

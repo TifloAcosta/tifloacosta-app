@@ -359,6 +359,12 @@ export function createReadingLibraryClient(plugin = {}, derivedPlugin = plugin) 
           audioTracks: result.daisyHasAudio ? await listAudioTracks(book.id) : []
         };
       }
+      // Web media is stored as a Blob in IndexedDB. Preserve it when opening
+      // saved MP3 and DAISY books; String(Blob) becomes "[object Blob]" and
+      // causes the reader to attempt a failing fetch instead of playback.
+      if (['mp3', 'daisy-audio'].includes(book.format) && typeof Blob !== 'undefined' && result.content instanceof Blob) {
+        return { book, content: result.content };
+      }
       return { book, content: String(result.content ?? '') };
     } catch { return null; }
   }

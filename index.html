@@ -90,7 +90,7 @@
   <section id="resources-view" hidden tabindex="-1" aria-labelledby="resources-view-heading">
     <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
     <h2 id="resources-view-heading">Recursos</h2>
-    <button type="button" id="category-toggle" aria-expanded="false" aria-controls="category-menu">Buscar un apartado</button>
+    <button type="button" id="category-toggle" aria-expanded="false" aria-controls="category-menu">Mostrar apartados</button>
     <div id="category-menu" hidden>
       <div id="category-buttons" class="resource-actions" aria-label="Categorías de recursos"></div>
     </div>
@@ -223,7 +223,7 @@
           <option value="paragraph">Párrafo</option>
           <option value="sentence">Frase</option>
         </select>
-        <button id="reading-formats-toggle" type="button" aria-expanded="false" aria-controls="reading-formats-list">Consultar formatos admitidos</button>
+        <button id="reading-formats-toggle" type="button" aria-expanded="false" aria-controls="reading-formats-list">Mostrar formatos admitidos</button>
     <p id="reading-formats-list" hidden>TXT, HTML, PDF, DOCX, PPTX, XLSX, EPUB, ODT, RTF, Markdown, FB2 e imágenes PNG, JPG y WebP mediante OCR.</p>
       </details>
       <p id="reading-settings-status" class="muted" role="status" aria-live="polite"></p>
@@ -525,7 +525,7 @@
   <section id="config-section" hidden tabindex="-1" aria-labelledby="config-heading">
     <p><a class="button-link back-link" href="#home" data-home-back>Volver al inicio</a></p>
     <h2 id="config-heading">Configuración</h2>
-    <button id="settings-toggle" type="button" aria-expanded="false" aria-controls="settings-panel">Opciones de configuración visual</button>
+    <button id="settings-toggle" type="button" aria-expanded="false" aria-controls="settings-panel">Mostrar ajustes visuales</button>
     <div id="settings-panel" class="panel settings-panel" hidden>
       <h3 id="accessibility-heading">Accesibilidad visual</h3>
       <p id="settings-intro">La app respeta el tamaño y el modo de color del sistema. Además, puedes guardar aquí preferencias propias para TifloAcosta.</p>
@@ -726,9 +726,9 @@
 <script type="module">
   import * as shared from './shared/web-entry.mjs?v=1.12';
   window.TIFLO_SHARED = shared;
-  await import('./web-reading.js?v=3.44');
+  await import('./web-reading.js?v=3.45');
 </script>
-<script src="app.js?v=2.9"></script>
+<script src="app.js?v=2.10"></script>
 <script>
 (() => {
   'use strict';

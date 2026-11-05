@@ -129,3 +129,11 @@ test('expandable web controls use action-specific accessible labels', async () =
   assert.match(html, /app\.js\?v=2\.10/);
   assert.match(worker, /app\.js\?v=2\.10/);
 });
+
+
+test('video options name the available action', async () => {
+  const source = await read('videos.js');
+  assert.ok(source.includes('Mostrar opciones del vídeo'));
+  assert.ok(source.includes('Ocultar opciones del vídeo'));
+  assert.match(await read('videos.html'), /videos\.js\?v=2\.7/);
+});

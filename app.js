@@ -50,7 +50,7 @@
       actualidadHome: { heading:'Actualidad', intro:'Noticias y novedades de accesibilidad y tecnología seleccionadas para llegar a lo importante sin tener que apartar ruido por el camino.', open:'Ver toda la actualidad', source:'Fuente', count:n => `${n} noticia${n === 1 ? '' : 's'} reciente${n === 1 ? '' : 's'}.` },
       searchHeading: 'Buscar en TifloAcosta', searchLabel: 'Buscar en TifloAcosta', placeholder: '', searchButton: 'Buscar',
       news: 'Novedades', newsCount: n => `${n} novedad${n === 1 ? '' : 'es'} reciente${n === 1 ? '' : 's'}.`,
-      explore: 'Explorar recursos', categoryToggle: 'Buscar un apartado', categoryButtonsLabel: 'Categorías de recursos', favorites: 'Ver favoritos', clear: 'Limpiar resultados',
+      explore: 'Explorar recursos', categoryToggle: 'Mostrar apartados', categoryHide: 'Ocultar apartados', categoryButtonsLabel: 'Categorías de recursos', favorites: 'Ver favoritos', clear: 'Limpiar resultados',
       resourceBrowser: { selected: category => `Apartado seleccionado: ${category}.`, filter: 'Filtrar documentos de este apartado por título o tema', sort: 'Ordenar documentos', title: 'Por título', recent: 'Más recientes primero', change: 'Elegir otro apartado' },
       ownNewsIntro: 'Publicaciones propias de TifloAcosta. Las noticias externas están en Actualidad.', loadMoreNews: 'Mostrar diez publicaciones más', newsDate: 'Publicado', newsCountShown: (shown,total) => `${shown} de ${total} publicaciones mostradas.`,
       configuration: 'Configuración', accessibility: 'Accesibilidad visual',
@@ -72,7 +72,7 @@
       found: n => `${n} recurso${n === 1 ? '' : 's'} encontrado${n === 1 ? '' : 's'}.`, categoryFound: (cat,n) => `Categoría ${cat}. ${n} recurso${n === 1 ? '' : 's'} encontrado${n === 1 ? '' : 's'}.`, favFound: n => `${n} favorito${n === 1 ? '' : 's'}.`,
       noResults: 'No hay recursos que coincidan.', noFavorites: 'Todavía no hay favoritos guardados.', newBadge: 'Nuevo', open: 'Abrir recurso', addFav: 'Añadir a favoritos', removeFav: 'Quitar de favoritos',
       settings: {
-        title: 'Ajustes de visualización y accesibilidad', toggle: 'Opciones de configuración visual', intro: 'La web respeta el tamaño y el modo de color del sistema. Además, puedes guardar aquí preferencias propias para TifloAcosta.',
+        title: 'Ajustes de visualización y accesibilidad', toggle: 'Mostrar ajustes visuales', hide: 'Ocultar ajustes visuales', intro: 'La web respeta el tamaño y el modo de color del sistema. Además, puedes guardar aquí preferencias propias para TifloAcosta.',
         textLegend: 'Tamaño del texto', textLabel: 'Tamaño', textOptions: { normal:'Predeterminado', large:'Grande', xlarge:'Muy grande', max:'Máximo' },
         themeLegend: 'Color y contraste', themeLabel: 'Perfil de contraste', themeOptions: { auto:'Seguir el sistema', light:'Alto contraste claro', dark:'Alto contraste oscuro' },
         spacingLegend: 'Espaciado', spacingLabel: 'Separación entre líneas', spacingOptions: { normal:'Normal', comfortable:'Cómoda', wide:'Amplia' },
@@ -92,7 +92,7 @@
       actualidadHome: { heading:'News', intro:'Accessibility and technology news selected to help you reach what matters without having to clear away the noise first.', open:'View all news', source:'Source', count:n => `${n} recent news item${n === 1 ? '' : 's'}.` },
       searchHeading: 'Search TifloAcosta', searchLabel: 'Search TifloAcosta', placeholder: '', searchButton: 'Search',
       news: 'What’s new', newsCount: n => `${n} recent item${n === 1 ? '' : 's'}.`,
-      explore: 'Explore resources', categoryToggle: 'Find a section', categoryButtonsLabel: 'Resource categories', favorites: 'View favorites', clear: 'Clear results',
+      explore: 'Explore resources', categoryToggle: 'Show sections', categoryHide: 'Hide sections', categoryButtonsLabel: 'Resource categories', favorites: 'View favorites', clear: 'Clear results',
       resourceBrowser: { selected: category => `Selected section: ${category}.`, filter: 'Filter documents in this section by title or topic', sort: 'Sort documents', title: 'By title', recent: 'Most recent first', change: 'Choose another section' },
       ownNewsIntro: 'TifloAcosta’s own publications. External news can be found under News.', loadMoreNews: 'Show ten more publications', newsDate: 'Published', newsCountShown: (shown,total) => `${shown} of ${total} publications shown.`,
       configuration: 'Settings', accessibility: 'Visual accessibility',
@@ -114,7 +114,7 @@
       found: n => `${n} resource${n === 1 ? '' : 's'} found.`, categoryFound: (cat,n) => `${cat} category. ${n} resource${n === 1 ? '' : 's'} found.`, favFound: n => `${n} favorite${n === 1 ? '' : 's'}.`,
       noResults: 'No matching resources were found.', noFavorites: 'No favorites have been saved yet.', newBadge: 'New', open: 'Open resource', addFav: 'Add to favorites', removeFav: 'Remove from favorites',
       settings: {
-        title: 'Display and accessibility settings', toggle: 'Visual settings options', intro: 'This website respects your system text size and color mode. You can also save TifloAcosta-specific preferences here.',
+        title: 'Display and accessibility settings', toggle: 'Show visual settings', hide: 'Hide visual settings', intro: 'This website respects your system text size and color mode. You can also save TifloAcosta-specific preferences here.',
         textLegend: 'Text size', textLabel: 'Size', textOptions: { normal:'Default', large:'Large', xlarge:'Extra large', max:'Maximum' },
         themeLegend: 'Color and contrast', themeLabel: 'Contrast profile', themeOptions: { auto:'Follow system', light:'High contrast light', dark:'High contrast dark' },
         spacingLegend: 'Spacing', spacingLabel: 'Line spacing', spacingOptions: { normal:'Normal', comfortable:'Comfortable', wide:'Wide' },
@@ -391,6 +391,7 @@
   function setCategoryMenuExpanded(expanded){
     const open=Boolean(expanded);
     els.categoryToggle.setAttribute('aria-expanded',String(open));
+    els.categoryToggle.textContent = open ? copy[lang].categoryHide : copy[lang].categoryToggle;
     els.categoryMenu.hidden=!open;
   }
   let activeCategoryKey = '';
@@ -562,7 +563,7 @@
 
   function localizeSettings() {
     const s=copy[lang].settings;
-    els.settingsToggle.textContent=s.toggle;
+    els.settingsToggle.textContent=els.settingsToggle.getAttribute('aria-expanded') === 'true' ? s.hide : s.toggle;
     els.settingsIntro.textContent=s.intro;
     els.textLegend.textContent=s.textLegend;
     els.textLabel.textContent=s.textLabel;
@@ -583,6 +584,7 @@
   function toggleSettings() {
     const willExpand = els.settingsToggle.getAttribute('aria-expanded') !== 'true';
     els.settingsToggle.setAttribute('aria-expanded', String(willExpand));
+    els.settingsToggle.textContent = willExpand ? copy[lang].settings.hide : copy[lang].settings.toggle;
     els.settingsPanel.hidden = !willExpand;
   }
 

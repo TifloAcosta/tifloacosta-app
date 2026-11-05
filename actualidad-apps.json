@@ -120,6 +120,18 @@
     "publishedAt": null
   },
   {
+    "id": "applevis-apps-7e5a05a96328b998",
+    "title": "My Little Window",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/my-little-window",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "Grow a tiny garden on a sunlit windowsill. Plant a seed, watch it sprout in real time, and come back to a bloom. No ads, ever. My Little Window is a gentle idle garden that grows even while the app is closed. There is no failure here. Nothing withers, nothing rushes you, and every plant is happy to wait. GROW IN REAL TIME Seeds mature on their own schedule, from a one minute pothos to a full day jade. Water them, mist them, give them sun. Well tended plants sell for more. COLLECT THEM ALL Every home has twenty species for your Plant Book, 240 in all, and every one hides a rare variant with its own look. Open seed packs, chase rares, and cross-breed two seeds for a chance at something special. A JOURNEY OF LITTLE HOMES Complete a home to travel down the path to the next: twelve homes across four chapters, each with its own window, its own plants and its own rooms. • The Meadow: a woodland cabin, a suburban flower garden and a farmhouse kitchen garden. • Warm Shores: a beach cottage, a harbor and a lighthouse, where messages in bottles wash up on your sill. • Country Lanes: an English cottage garden, a prairie homestead and a hillside burrow, where bees visit your blooms and leave new seeds. • Sun &amp; Stone: a Tuscan vineyard house, a Moroccan riad and a desert adobe, where every bloom you sell becomes a tile for a mosaic wall. More homes are on the way. MAKE IT YOURS Coins from your blooms furnish five cozy rooms in every home. Every armchair, shelf, and lamp gives your garden a lasting boost, from faster growth to luckier packs. A LIVING WINDOW Morning light, golden hour, starry nights, and quiet rain move across your window through the day. Animal friends wander by. A daily gift waits each morning, and streaks make it sweeter. KIND BY DESIGN No ads. No energy bars. No pressure. Gems can speed things up, but everything in the game can be earned for free. Pull up a chair by the window. Your garden is already growing.",
+    "publishedAt": "2026-11-05T18:54:24.000Z"
+  },
+  {
     "id": "applevis-apps-81462762a08111da",
     "title": "Treblo - AI Music",
     "sourceId": "applevis-apps",
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "A cozy match 3 puzzle with no ads and offline play, now in a rich new Velvet design. Swap jewels, chain sparkling cascades and restore a magical garden, one clever move at a time. Discover five connected worlds, from the Living Conservatory to the Heart of the Void. Make clever matches, face each guardian and bring its world back to life. PLAYABLE WITH VOICEOVER GemGame plays with VoiceOver. Every gem and obstacle on the board has a clear spoken label, a Board status element counts obstacles and ingredients, and a Special gems element counts specials. Each move is summarised after it settles, including the chain multiplier. Purchased hints name the exact pair to swap, and rejected moves explain why without spending a move. AWAKEN THE FIVE WORLDS Restore the Conservatory's light, reconnect the Nebula Waterways, unfold the Aurora Observatory, illuminate the Plasma Forge and awaken the Heart of the Void. Your campaign progress makes each transformation permanent. Return to choose free lighting, replay the awakening and pursue optional mastery. LEARN A SPECTACULAR NEXT MOVE Try five world encounters in the free Jewel Lab. Experiment with real puzzle rules and unlimited practice retries, without spending lives or earning campaign rewards. Combine striped, wrapped, rainbow and comet specials, clear obstacles and take on cosmic guardians. A GARDEN WORTH COMING BACK TO Restore fountains, flowering corners and peaceful places to sit. Choose decorative finishes, discover new districts and welcome butterflies, songbirds and other woodland visitors as you play. A LITTLE ADVENTURE, YOUR WAY • Daily Star: a fresh free puzzle each day, with no life cost. Keep your streak going. • Relic Run: draft relics and climb five boards in a single free run. • Weekend Gauntlet: a Friday-to-Sunday sudden-death ladder. How far can you climb? • The Atelier: discover cosmetic themes for your board. MAKE ROOM FOR A COZY MOMENT No ads interrupt your game. Core puzzles work offline, and levels are move-based, so there is no countdown rushing your next swap. Campaign lives refill over time; Daily Star gives you a free daily board without spending a life. GemGame is free to download. The optional Complete Collection is one permanent purchase: all five premium chapter reward tracks plus 50 Hard Mode puzzles. Rewards are earned as you play; the base campaign and garden remain free. Existing chapter-pass or Hard Mode owners receive the collection through Restore Purchases at no extra cost. Coin packs remain optional. Some decorative finishes require premium access. Purchases and Game Center features require an internet connection. Your next little escape is waiting.",
     "publishedAt": "2026-10-29T19:14:26.000Z"
-  },
-  {
-    "id": "applevis-apps-c867f6f38ee15768",
-    "title": "Motif: Word Challenge",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/motif-word-challenge",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Find ten hidden words every day and aim for the highest score on the daily grid! Motif is a strategic word game that combines clever wordplay with match-3-inspired mechanics. Free, ad-free, and no account required. THE WORD GAME WHERE WORDS HIDE! Swap letters, spot words, and plan your next move. Swipe across words to clear them from the grid. Every move shapes what comes next, so choose wisely! Everyone starts with the same grid. Submit your score if you’d like, and see where you rank on the daily leaderboard. NEW ASCENSION MODE! Motif becomes a full-blown adventure! Climb ten increasingly tough levels packed with bosses, special tiles, and bonuses galore. Motif has never played like this—and it’s free! ZEN MODES Want to play without the pressure? Zen Mode gives you fresh grids and the same rules, but with no word limit and no leaderboard. Take your time and play at your own pace. + “À LA CARTE” MODE! You set your own rules: swipe words bottom to top, right to left, in an L shape, use unlimited letter swaps… You call the shots. + M0T1F MODE! This time, numbers take the stage: swipe tiles to add them up and hit the target number. Careful, this one’s dangerously addictive! MAKE IT YOURS Customize Motif to suit your style: fonts, colors, tile shapes, score display, backgrounds… even the app icon. NO ADS. NO TRACKING. NO ACCOUNT. Just open Motif and start playing. No internet connection is required to play. The leaderboard is entirely optional. If you choose to participate, only your score, the date, and the grid language are submitted. No account, no advertising ID, and no player profile. Individual scores are deleted after 30 days.",
-    "publishedAt": "2026-10-29T18:32:32.000Z"
   }
 ]

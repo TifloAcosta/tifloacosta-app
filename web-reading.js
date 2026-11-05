@@ -86,7 +86,14 @@
     marksHeading: $('#reading-marks-heading'),
     marksIntro: $('#reading-marks-intro'),
     marksStatus: $('#reading-marks-status'),
-    marksList: $('#reading-marks-list')
+    marksList: $('#reading-marks-list'),
+    bulkToggle: $('#reading-library-select'),
+    bulkPanel: $('#reading-library-bulk'),
+    bulkStatus: $('#reading-library-bulk-status'),
+    bulkSelectAll: $('#reading-library-select-all'),
+    bulkAdd: $('#reading-library-bulk-add'),
+    bulkRemove: $('#reading-library-bulk-remove'),
+    bulkDelete: $('#reading-library-bulk-delete')
   };
   if (!els.section) return;
 
@@ -1122,6 +1129,11 @@
     els.queueHeading.textContent = c.queueHeading;
     els.queueIntro.textContent = c.queueIntro;
     els.marksHeading.textContent = language() === 'en' ? 'Bookmarks in this book' : 'Marcas de este libro';
+    if (els.bulkToggle && els.bulkToggle.dataset.mode !== 'active') els.bulkToggle.textContent = language() === 'en' ? 'Select documents' : 'Seleccionar documentos';
+    if (els.bulkSelectAll) els.bulkSelectAll.textContent = language() === 'en' ? 'Select all visible' : 'Seleccionar todos los visibles';
+    if (els.bulkAdd) els.bulkAdd.textContent = language() === 'en' ? 'Add to queue' : 'Añadir a la cola';
+    if (els.bulkRemove) els.bulkRemove.textContent = language() === 'en' ? 'Remove from queue' : 'Quitar de la cola';
+    if (els.bulkDelete) els.bulkDelete.textContent = language() === 'en' ? 'Delete selected' : 'Eliminar seleccionados';
     if (els.documentDelete) els.documentDelete.textContent = language() === 'en' ? 'Delete document' : 'Eliminar documento';
     if (els.documentMarksButton) els.documentMarksButton.textContent = language() === 'en' ? 'Book bookmarks' : 'Marcas del libro';
     els.marksIntro.textContent = c.marksIntro;
@@ -3094,8 +3106,62 @@
     });
   }
 
+  let librarySelectionMode = false;
+  const librarySelected = new Set();
+  function updateLibrarySelection() {
+    if (!els.bulkPanel) return;
+    els.bulkPanel.hidden = !librarySelectionMode;
+    els.bulkStatus.textContent = language() === 'en'
+      ? `${librarySelected.size} documents selected.`
+      : `${librarySelected.size} documentos seleccionados.`;
+    for (const button of [els.bulkAdd,els.bulkRemove,els.bulkDelete]) button.disabled = librarySelected.size === 0;
+  }
+  async function libraryBulkAction(action) {
+    const ids = [...librarySelected];
+    if (!ids.length) return;
+    if (action === 'delete' && !window.confirm(language() === 'en'
+      ? `Delete ${ids.length} selected documents?` : `¿Eliminar ${ids.length} documentos seleccionados?`)) return;
+    let completed = 0;
+    for (const id of ids) {
+      try {
+        const result = action === 'delete' ? await libraryClient.deleteBook(id)
+          : action === 'add' ? await libraryClient.addToQueue(id)
+          : await libraryClient.removeFromQueue(id);
+        if (result) completed++;
+      } catch {}
+    }
+    librarySelected.clear();
+    await Promise.all([renderLibrary(),renderQueue(),renderMarks()]);
+    els.bulkStatus.textContent = language() === 'en'
+      ? `${completed} of ${ids.length} documents processed.`
+      : `${completed} de ${ids.length} documentos procesados.`;
+  }
+  els.bulkToggle?.addEventListener('click',()=>{
+    librarySelectionMode = !librarySelectionMode;
+    librarySelected.clear();
+    els.bulkToggle.dataset.mode = librarySelectionMode ? 'active' : '';
+    els.bulkToggle.textContent = librarySelectionMode
+      ? (language() === 'en' ? 'Cancel selection' : 'Cancelar selección')
+      : (language() === 'en' ? 'Select documents' : 'Seleccionar documentos');
+    updateLibrarySelection();
+    void renderLibrary();
+  });
+  els.bulkSelectAll?.addEventListener('click',()=>{
+    const inputs = [...els.libraryList.querySelectorAll('input[data-library-book-selection]')]
+      .filter(input=>!input.closest('[data-reading-library-book]')?.hidden);
+    const check = !inputs.every(input=>input.checked);
+    for (const input of inputs) {
+      input.checked = check;
+      if (check) librarySelected.add(input.value); else librarySelected.delete(input.value);
+    }
+    updateLibrarySelection();
+  });
+  els.bulkAdd?.addEventListener('click',()=>{ void libraryBulkAction('add'); });
+  els.bulkRemove?.addEventListener('click',()=>{ void libraryBulkAction('remove'); });
+  els.bulkDelete?.addEventListener('click',()=>{ void libraryBulkAction('delete'); });
   async function renderLibrary() {
     els.libraryList.replaceChildren();
+    updateLibrarySelection();
     if (!libraryClient) {
       els.libraryStatus.textContent = t().libraryUnavailable;
       return;
@@ -3143,6 +3209,21 @@
         card.dataset.queued = String(book.queued === true);
         card.dataset.previouslyRead = String(Number(book.lastReadAt) > 0 || Number(book.percent) > 0);
 
+        if (librarySelectionMode) {
+          const label = document.createElement('label');
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.dataset.libraryBookSelection = 'true';
+          checkbox.value = String(book.id);
+          checkbox.checked = librarySelected.has(checkbox.value);
+          checkbox.addEventListener('change',()=>{
+            if (checkbox.checked) librarySelected.add(checkbox.value);
+            else librarySelected.delete(checkbox.value);
+            updateLibrarySelection();
+          });
+          label.append(checkbox,document.createTextNode(' '+(book.title || t().document)));
+          card.append(label);
+        }
         const title = document.createElement('button');
         title.type = 'button';
         title.className = 'reading-library-title';
@@ -3411,7 +3492,7 @@
           void openSavedBook(book.id);
         });
 
-        card.append(title);
+        if (!librarySelectionMode) card.append(title);
         els.libraryList.append(card);
       }
       window.refreshTifloLibraryFilter?.();

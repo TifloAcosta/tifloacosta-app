@@ -1494,6 +1494,7 @@
           if (serial === loadSerial) els.status.textContent = language() === 'en'
             ? 'Could not prepare the DAISY audio track.'
             : 'No se pudo preparar la pista de audio DAISY.';
+          if (nextIndex === 0) throw error;
           return;
         }
         updateSynchronizedText();
@@ -2872,10 +2873,17 @@
         currentBookId = opened.book.id;
         if (els.documentDelete) els.documentDelete.hidden = false;
         els.status.textContent = language() === 'en' ? 'Audiobook opened from My library.' : 'Audiolibro abierto desde Mi biblioteca.';
-      } catch {
-        els.libraryStatus.textContent = language() === 'en'
-          ? 'The saved audiobook could not be opened.'
-          : 'No se pudo abrir el audiolibro guardado.';
+      } catch (error) {
+        const reason = error?.name === 'QuotaExceededError' ? (language() === 'en' ? 'Insufficient storage space.' : 'Espacio de almacenamiento insuficiente.')
+          : error?.name === 'RangeError' ? (language() === 'en' ? 'The file is too large for available memory.' : 'No hay memoria suficiente para procesar este archivo.')
+          : error?.message === 'daisy-no-supported-audio' ? (language() === 'en' ? 'No compatible audio tracks were found.' : 'No se encontraron pistas de audio compatibles.')
+          : (error?.message || (language() === 'en' ? 'Unknown error.' : 'Error desconocido.'));
+        const message = language() === 'en'
+          ? `The saved audiobook could not be opened. ${reason} The file remains in your library.`
+          : `No se pudo abrir el audiolibro guardado. ${reason} El archivo sigue en tu biblioteca.`;
+        els.libraryStatus.textContent = message;
+        els.status.textContent = message;
+        console.error('[TifloLector] Failed to open stored audiobook', { format, reason: error?.message, name: error?.name });
       }
       return;
     }

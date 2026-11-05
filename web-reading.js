@@ -1563,6 +1563,12 @@
       speechController = null;
     }
     clearActiveAudio();
+    ensurePerDocumentControls();
+    if (els.navigationUnit) {
+      els.navigationUnit.value = navigationUnit = 'minute';
+      els.updateNavigationButtons?.();
+    }
+    if (els.documentDelete) els.documentDelete.hidden = true;
     audioObjectUrl = URL.createObjectURL(file);
     const audio = new Audio(audioObjectUrl);
     activeAudio = audio;

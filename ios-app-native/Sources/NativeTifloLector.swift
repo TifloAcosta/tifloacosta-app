@@ -1203,7 +1203,7 @@ struct NativeReadingScreen: View {
         let value = max(0, min(100, percent))
         currentPercent = value
         readingOffset = Int(Double(textLayout.totalCharacters) * Double(value) / 100)
-        if speech.hasAudio {
+        if speech.hasAudio && !speech.isGemini {
             speech.seek(to: value)
         } else if speech.isPlaying || speech.isPaused {
             let wasPaused = speech.isPaused

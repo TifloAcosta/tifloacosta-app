@@ -790,7 +790,7 @@ private fun NativeReadingScreen(
     }
     var unitType by rememberSaveable(book.id) {
         mutableIntStateOf(documentPreferences.getInt("unit." + book.id,
-            documentPreferences.getInt("unit", 1)).coerceIn(0, 5))
+            documentPreferences.getInt("unit", 1)).coerceIn(0, 7))
     }
     var showAudio by rememberSaveable(book.id) { mutableStateOf(false) }
     var showPronunciation by rememberSaveable(book.id) { mutableStateOf(false) }
@@ -842,11 +842,13 @@ private fun NativeReadingScreen(
     val availableModes = if (english) {
         listOf(0 to "Block", 1 to "Paragraph", 2 to "Sentence", 3 to "Word") +
             (if (chapters.isNotEmpty()) listOf(4 to "Chapter or section") else emptyList()) +
-            listOf(5 to "Percentage (10% steps)")
+            listOf(5 to "Percentage (10% steps)", 6 to "Bookmarks",
+                7 to "Estimated time (1 minute)")
     } else {
         listOf(0 to "Bloque", 1 to "Párrafo", 2 to "Frase", 3 to "Palabra") +
             (if (chapters.isNotEmpty()) listOf(4 to "Capítulo o sección") else emptyList()) +
-            listOf(5 to "Porcentaje (pasos del 10 %)")
+            listOf(5 to "Porcentaje (pasos del 10 %)", 6 to "Marcas",
+                7 to "Tiempo estimado (1 minuto)")
     }
     // Audio synthesis keeps natural-length utterances in special navigation modes.
     val effectiveUnitType = if (unitType == 4 && chapters.isEmpty()) 1 else unitType
@@ -883,6 +885,10 @@ private fun NativeReadingScreen(
             }
             5 -> setOffset(ReaderNavigation.percentageStep(
                 displayOffset, fullText.length, forward))
+            6 -> ReaderNavigation.adjacentMark(visibleMarks, displayOffset, forward)
+                ?.let { setOffset(it) }
+            7 -> setOffset(ReaderNavigation.estimatedMinuteStep(
+                fullText, displayOffset, forward, perBookRate))
             else -> if (units.isNotEmpty()) {
                 if (active) send(if (forward) NativeReaderPlaybackService.ACTION_NEXT
                     else NativeReaderPlaybackService.ACTION_PREVIOUS)
@@ -1023,6 +1029,15 @@ private fun NativeReadingScreen(
             ) { chosen -> chapters.getOrNull(chosen)?.let { position -> setOffset(position) } }
             5 -> ReaderCompactOffsetPosition(
                 label = if (english) "Reading position by percentage" else "Posición de lectura por porcentaje",
+                valueLabel = ReaderUnits.percent(displayOffset, fullText.length).toString() + "%",
+                current = ReaderUnits.percent(displayOffset, fullText.length),
+                maximum = 100,
+                english = english,
+                onPrevious = { moveOneUnit(false) },
+                onNext = { moveOneUnit(true) }
+            )
+            6, 7 -> ReaderCompactOffsetPosition(
+                label = if (english) "Reading position" else "Posición de lectura",
                 valueLabel = ReaderUnits.percent(displayOffset, fullText.length).toString() + "%",
                 current = ReaderUnits.percent(displayOffset, fullText.length),
                 maximum = 100,

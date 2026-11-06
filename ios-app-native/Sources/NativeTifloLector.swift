@@ -1140,12 +1140,104 @@ struct NativeReadingScreen: View {
         }
     }
 
+    // The reader offers the same navigation selector for text and audio,
+    // but the minute option only applies to real audio timelines.
+    private var navigationChoices: [String] {
+        var choices = ["Bloque", "Párrafo", "Frase", "Página", "Encabezado", "Marcas"]
+        if !tracks.isEmpty { choices.append("Tiempo, un minuto") }
+        return choices
+    }
+
+    private var navigationBinding: Binding<Int> {
+        Binding(
+            get: { navigationUnit < navigationChoices.count ? navigationUnit : 0 },
+            set: { navigationUnit = $0 }
+        )
+    }
+
+    private var sortedTextMarkOffsets: [Int] {
+        let oldMarks = latest.bookmarks.map {
+            Int(Double(textLayout.totalCharacters) * Double($0) / 100)
+        }
+        return Array(Set(latest.savedTextBookmarks.map(\.offset) + oldMarks)).sorted()
+    }
+
+    private func seekAudio(to targetTrack: Int, percent: Int) {
+        guard tracks.indices.contains(targetTrack) else { return }
+        let wasActive = speech.hasAudio
+        let wasPlaying = speech.isPlaying
+        let changedTrack = targetTrack != trackIndex
+        trackIndex = targetTrack
+        currentPercent = max(0, min(100, percent))
+        if changedTrack && wasActive {
+            playTrack()
+            if !wasPlaying { speech.pause() }
+        } else if wasActive {
+            speech.seek(to: currentPercent)
+        }
+        persistPosition()
+    }
+
+    private func moveToAudioBookmark(_ direction: Int) {
+        let marks = latest.savedAudioBookmarks.sorted {
+            $0.track == $1.track ? $0.percent < $1.percent : $0.track < $1.track
+        }
+        let current = (trackIndex, currentPercent)
+        let candidate = direction > 0
+            ? marks.first { ($0.track, $0.percent) > current }
+            : marks.last { ($0.track, $0.percent) < current }
+        guard let candidate else {
+            actionMessage = direction > 0 ? "No hay otra marca posterior." : "No hay otra marca anterior."
+            return
+        }
+        seekAudio(to: candidate.track, percent: candidate.percent)
+        actionMessage = "Pista \(candidate.track + 1), marca en \(candidate.percent) por ciento."
+    }
+
+    private func moveByMinute(_ direction: Int) {
+        guard tracks.indices.contains(trackIndex),
+              let url = NativeReaderFormats.storedURL(for: tracks[trackIndex]) else { return }
+        let duration: TimeInterval
+        if speech.hasAudio {
+            duration = speech.audioDuration
+        } else {
+            duration = (try? AVAudioPlayer(contentsOf: url))?.duration ?? 0
+        }
+        guard duration > 0 else {
+            actionMessage = "No se puede determinar la duración de la pista."
+            return
+        }
+        let currentSeconds = speech.hasAudio ? speech.audioElapsed
+            : duration * Double(currentPercent) / 100
+        let destination = max(0, min(duration, currentSeconds + Double(direction) * 60))
+        seekAudio(to: trackIndex, percent: Int((destination / duration * 100).rounded()))
+        if speech.hasAudio { speech.seek(to: Int((destination / duration * 100).rounded())) }
+        actionMessage = "Posición de audio: \(Int(destination)) segundos."
+    }
+
     private func moveUnit(_ direction: Int) {
-        guard !document.body.isEmpty,
-              let next = textLayout.nearbyOffset(readingOffset,
-                                                  direction: direction, unit: navigationUnit)
-        else { return }
-        jump(to: next)
+        switch navigationBinding.wrappedValue {
+        case 5:
+            if !tracks.isEmpty {
+                moveToAudioBookmark(direction)
+            } else {
+                let target = direction > 0
+                    ? sortedTextMarkOffsets.first(where: { $0 > readingOffset })
+                    : sortedTextMarkOffsets.last(where: { $0 < readingOffset })
+                guard let target else {
+                    actionMessage = direction > 0 ? "No hay otra marca posterior." : "No hay otra marca anterior."
+                    return
+                }
+                jump(to: target)
+            }
+        case 6:
+            moveByMinute(direction)
+        default:
+            guard !document.body.isEmpty,
+                  let next = textLayout.nearbyOffset(readingOffset,
+                      direction: direction, unit: navigationBinding.wrappedValue) else { return }
+            jump(to: next)
+        }
     }
 
     private func addBookmark() {
@@ -1254,14 +1346,18 @@ struct NativeReadingScreen: View {
     private var quickControls: some View {
         VStack(alignment: .leading, spacing: 6) {
             playbackRow
-            if !latest.body.isEmpty {
-                NativeAdjustableChoice(
-                    title: "Modo de navegación",
-                    choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
-                    selectedIndex: $navigationUnit
-                )
-                .accessibilityHint("Cambia cómo avanzan las acciones Unidad anterior y Unidad siguiente.")
+            NativeAdjustableChoice(
+                title: "Modo de navegación",
+                choices: navigationChoices,
+                selectedIndex: navigationBinding
+            )
+            .accessibilityHint("Selecciona el tipo de avance y retroceso.")
+            HStack {
+                Button("Anterior") { moveUnit(-1) }
+                Button("Siguiente") { moveUnit(1) }
             }
+            .buttonStyle(.bordered)
+            .controlSize(.small)
             trackButtons
             Text(progressDescription)
                 .font(.footnote)

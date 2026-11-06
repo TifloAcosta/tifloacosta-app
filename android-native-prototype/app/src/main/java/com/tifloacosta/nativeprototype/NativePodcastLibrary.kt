@@ -17,6 +17,27 @@ internal class NativePodcastLibrary(context: Context) {
     fun favorites(): Set<String> = prefs.getStringSet("favorites", emptySet()).orEmpty().toSet()
     fun isFavorite(url: String): Boolean = url in favorites()
 
+    fun savedEpisodes(): List<NativeFollowedPodcast> {
+        val entries = JSONArray(prefs.getString("favorite-episodes", "[]"))
+        return (0 until entries.length()).mapNotNull { index ->
+            val item = entries.optJSONObject(index) ?: return@mapNotNull null
+            val url = item.optString("url")
+            if (url !in favorites()) null else NativeFollowedPodcast(item.optString("title"), url)
+        }
+    }
+
+    fun toggleFavoriteEpisode(title: String, url: String): Boolean {
+        val added = toggleFavorite(url)
+        val existing = savedEpisodes().filterNot { it.url == url }.toMutableList()
+        if (added) existing.add(0, NativeFollowedPodcast(title, url))
+        val payload = JSONArray()
+        existing.forEach { payload.put(JSONObject().put("title", it.title).put("url", it.url)) }
+        check(prefs.edit().putString("favorite-episodes", payload.toString()).commit()) {
+            "No se pudieron guardar los episodios favoritos."
+        }
+        return added
+    }
+
     fun toggleFavorite(url: String): Boolean {
         val next = favorites().toMutableSet()
         if (!next.add(url)) next.remove(url)

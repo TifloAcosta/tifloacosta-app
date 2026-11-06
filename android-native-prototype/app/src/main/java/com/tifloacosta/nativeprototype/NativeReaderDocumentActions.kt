@@ -68,6 +68,29 @@ fun NativeReaderDocumentActions(
     var translating by remember(book.id) { mutableStateOf(false) }
     var actionJob by remember(book.id) { mutableStateOf<Job?>(null) }
     var exportContent by remember(book.id) { mutableStateOf("") }
+    var audioExport by remember(book.id) { mutableStateOf<ByteArray?>(null) }
+    var audioFormatIndex by remember(book.id) { mutableIntStateOf(0) }
+    var completedAudioFormat by remember(book.id) {
+        mutableStateOf(NativeGeminiAudioExport.Format.MP3)
+    }
+    var audioDaisyReady by remember(book.id) { mutableStateOf(false) }
+    var audioExportBusy by remember(book.id) { mutableStateOf(false) }
+    var audioVoice by remember(book.id) {
+        mutableIntStateOf(NativeGeminiSpeech.voices.indexOf(
+            prefs.getString("gemini.voice", "Kore")).coerceAtLeast(0))
+    }
+    val phononReady = remember(book.id) {
+        NativePhononReader.isAvailable(context.applicationContext)
+    }
+    val phononVoices = remember(book.id, phononReady) {
+        if (phononReady) NativePhononModelStore.voices(context) else emptyList()
+    }
+    var audioEngineIndex by remember(book.id) { mutableIntStateOf(0) }
+    var phononVoiceIndex by remember(book.id) {
+        mutableIntStateOf(
+            phononVoices.indexOf(prefs.getString("phonon.voice", "default")).coerceAtLeast(0)
+        )
+    }
     var unit by remember(book.id) {
         mutableIntStateOf(prefs.getInt("unit." + book.id, prefs.getInt("unit", 1))
             .coerceIn(0, 2))
@@ -105,6 +128,36 @@ fun NativeReaderDocumentActions(
             }
         }
     }
+    fun saveGeneratedAudio(uri: Uri?) {
+        val bytes = audioExport
+        if (uri != null && bytes != null) {
+            actionJob = scope.launch {
+                try {
+                    withContext(Dispatchers.IO) {
+                        val stream = context.contentResolver.openOutputStream(uri, "w")
+                            ?: throw IOException("No se pudo abrir el archivo de destino.")
+                        stream.use { it.write(bytes) }
+                    }
+                    status = if (english) "Audio saved." else "Audio guardado."
+                    error = ""
+                } catch (e: Exception) {
+                    alert(e.message ?: "No se pudo guardar el audio.")
+                }
+            }
+        }
+    }
+    val exportAudioMP3 = rememberLauncherForActivityResult(
+        ActivityResultContracts.CreateDocument("audio/mpeg")
+    ) { uri -> saveGeneratedAudio(uri) }
+    val exportAudioM4A = rememberLauncherForActivityResult(
+        ActivityResultContracts.CreateDocument("audio/mp4")
+    ) { uri -> saveGeneratedAudio(uri) }
+    val exportAudioWAV = rememberLauncherForActivityResult(
+        ActivityResultContracts.CreateDocument("audio/wav")
+    ) { uri -> saveGeneratedAudio(uri) }
+    val exportAudioDAISY = rememberLauncherForActivityResult(
+        ActivityResultContracts.CreateDocument("application/zip")
+    ) { uri -> saveGeneratedAudio(uri) }
     val exportOriginal = rememberLauncherForActivityResult(
         ActivityResultContracts.CreateDocument("application/octet-stream")
     ) { uri -> if (uri != null) startExport(uri, original = true) }
@@ -217,6 +270,122 @@ fun NativeReaderDocumentActions(
             exportText.launch(labelFile("txt"))
         }, modifier = Modifier.fillMaxWidth()) {
             Text(if (english) "Export accessible TXT…" else "Exportar TXT accesible…")
+        }
+
+        Text(if (english) "Audio export" else "Exportar audio",
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.semantics { heading() })
+        ReaderAdjustableChoice(
+            if (english) "Engine" else "Motor",
+            if (phononReady && phononVoices.isNotEmpty()) listOf("Gemini", "Phonon")
+            else listOf("Gemini"), audioEngineIndex
+        ) { index -> audioEngineIndex = index; audioExport = null }
+        if (audioEngineIndex == 1 && phononReady && phononVoices.isNotEmpty()) {
+            ReaderAdjustableChoice(
+                if (english) "Voice" else "Voz",
+                phononVoices, phononVoiceIndex
+            ) { index ->
+                phononVoiceIndex = index
+                prefs.edit().putString("phonon.voice", phononVoices[index]).apply()
+            }
+        } else {
+            ReaderAdjustableChoice(
+                if (english) "Voice" else "Voz",
+                NativeGeminiSpeech.voices, audioVoice
+            ) { index ->
+                audioVoice = index
+                prefs.edit().putString("gemini.voice", NativeGeminiSpeech.voices[index]).apply()
+            }
+        }
+        ReaderAdjustableChoice(
+            if (english) "Format" else "Formato",
+            listOf("MP3", "M4A", "WAV", "DAISY"), audioFormatIndex
+        ) { audioFormatIndex = it; audioExport = null }
+        if (audioFormatIndex == 3) {
+            Text(if (english) "DAISY includes full text, synchronized clips and navigation. External-player compatibility is not yet validated."
+                else "DAISY incluye texto, audio sincronizado e índice. La compatibilidad externa aún no está validada.")
+        }
+        Text(if (audioEngineIndex == 1 && phononReady) {
+            if (english) "Phonon generates audio on your device. Maximum 60,000 characters."
+            else "Phonon genera el audio dentro del dispositivo. Máximo 60.000 caracteres."
+        } else {
+            if (english) "Gemini may consume your quota. Maximum 60,000 characters."
+            else "Gemini puede consumir cuota. Máximo 60.000 caracteres."
+        })
+        Button(enabled = !audioExportBusy, onClick = {
+            audioExportBusy = true
+            audioExport = null
+            error = ""
+            status = if (english) "Generating audio." else "Generando audio."
+            actionJob = scope.launch {
+                try {
+                    val text = withContext(Dispatchers.IO) { store.read(book) }
+                    val localPhonon = audioEngineIndex == 1 && phononReady
+                    val voice = if (localPhonon) phononVoices[phononVoiceIndex]
+                        else NativeGeminiSpeech.voices[audioVoice]
+                    val format = when (audioFormatIndex) {
+                        0 -> NativeGeminiAudioExport.Format.MP3
+                        1 -> NativeGeminiAudioExport.Format.M4A
+                        else -> NativeGeminiAudioExport.Format.WAV
+                    }
+                    val wantsDaisy = audioFormatIndex == 3
+                    audioExport = withContext(Dispatchers.IO) {
+                        val notifyProgress: suspend (Int, Int) -> Unit = { n, total ->
+                            withContext(Dispatchers.Main) {
+                                status = (if (english) "Generating " else "Generando ") +
+                                    n + " / " + total
+                            }
+                        }
+                        if (localPhonon) {
+                            NativePhononAudioSynth(context,
+                                prefs.getString("phonon.language", "en") ?: "en").use { synth ->
+                                val render: suspend (String, String) -> ByteArray = {
+                                        fragment, selected -> synth.render(fragment, selected)
+                                }
+                                if (wantsDaisy) NativeGeminiDaisyExport.generateWithSynthesizer(
+                                    text, book.title, voice, notifyProgress, render
+                                ) else NativeGeminiAudioExport.generateWithSynthesizer(
+                                    context, text, voice, format, notifyProgress, render
+                                )
+                            }
+                        } else if (wantsDaisy) NativeGeminiDaisyExport.generate(
+                            context, text, book.title, voice, notifyProgress
+                        ) else NativeGeminiAudioExport.generate(
+                            context, text, voice, format, notifyProgress
+                        )
+                    }
+                    audioDaisyReady = wantsDaisy
+                    completedAudioFormat = format
+                    status = if (english) "Audio ready. Press Save."
+                        else "Audio preparado. Pulsa Guardar."
+                } catch (e: kotlinx.coroutines.CancellationException) {
+                    status = if (english) "Cancelled." else "Cancelado."
+                } catch (e: Exception) {
+                    alert(e.message ?: "No se pudo generar el audio.")
+                } finally {
+                    audioExportBusy = false
+                }
+            }
+        }, modifier = Modifier.fillMaxWidth()) {
+            Text(if (english) "Generate" else "Generar")
+        }
+        if (audioExportBusy) {
+            TextButton(onClick = { actionJob?.cancel() }) {
+                Text(if (english) "Cancel" else "Cancelar")
+            }
+        }
+        if (audioExport != null) {
+            Button(onClick = {
+                if (audioDaisyReady) exportAudioDAISY.launch(labelFile("zip"))
+                else if (completedAudioFormat == NativeGeminiAudioExport.Format.MP3)
+                    exportAudioMP3.launch(labelFile("mp3"))
+                else if (completedAudioFormat == NativeGeminiAudioExport.Format.M4A)
+                    exportAudioM4A.launch(labelFile("m4a"))
+                else exportAudioWAV.launch(labelFile("wav"))
+            },
+                modifier = Modifier.fillMaxWidth()) {
+                Text(if (english) "Save" else "Guardar")
+            }
         }
 
         Text(if (english) "Translation" else "Traducción",

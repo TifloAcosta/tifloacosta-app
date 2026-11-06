@@ -44,6 +44,7 @@ fun NativeReaderAudioScreen(
     english: Boolean,
     startOnOpen: Boolean,
     onUpdate: (ReaderBook) -> Unit,
+    onDeleteRequest: () -> Unit,
     onBack: () -> Unit
 ) {
     val context = LocalContext.current
@@ -62,6 +63,7 @@ fun NativeReaderAudioScreen(
     var showTools by remember(book.id) { mutableStateOf(false) }
     var beforeDaisyJump by remember(book.id) { mutableStateOf<Pair<Int, Int>?>(null) }
     var sleepIndex by remember(book.id) { mutableIntStateOf(0) }
+    var navigationMode by remember(book.id) { mutableIntStateOf(0) }
     val prefs = remember { context.getSharedPreferences("native-reader-preferences", 0) }
     var speedIndex by remember(book.id) {
         mutableIntStateOf(prefs.getInt("audio.speed." + book.id, 2).coerceIn(0, 4))
@@ -86,6 +88,34 @@ fun NativeReaderAudioScreen(
         else start()
     }
     fun bookmark() { if (active) command(NativeReaderPlaybackService.ACTION_BOOKMARK) }
+    fun seekAudio(segment: Int, milliseconds: Int) {
+        if (active) {
+            if (segment != current) command(NativeReaderPlaybackService.ACTION_SEGMENT, segment)
+            command(NativeReaderPlaybackService.ACTION_SEEK, milliseconds)
+        } else {
+            onUpdate(book.copy(trackIndex = segment, audioPositionMs = milliseconds))
+        }
+    }
+    fun navigate(forward: Boolean) {
+        if (navigationMode == 0) {
+            val here = current to position
+            val ordered = marks.distinct().sortedWith(
+                compareBy<ReaderAudioMark> { it.segmentIndex }.thenBy { it.positionMs })
+            val target = if (forward) ordered.firstOrNull {
+                it.segmentIndex > here.first ||
+                    (it.segmentIndex == here.first && it.positionMs > here.second)
+            } else ordered.lastOrNull {
+                it.segmentIndex < here.first ||
+                    (it.segmentIndex == here.first && it.positionMs < here.second)
+            }
+            if (target != null) seekAudio(target.segmentIndex, target.positionMs)
+        } else {
+            // Seek by an exact minute on the current audio timeline.
+            val proposed = (position.toLong() + if (forward) 60_000L else -60_000L)
+                .coerceIn(0, Int.MAX_VALUE.toLong()).toInt()
+            seekAudio(current, proposed)
+        }
+    }
     fun previous() {
         if (!active) start()
         else command(NativeReaderPlaybackService.ACTION_PREVIOUS)
@@ -144,6 +174,9 @@ fun NativeReaderAudioScreen(
         verticalArrangement = Arrangement.spacedBy(10.dp)) {
         TextButton(onClick = onBack) {
             Text(if (english) "Back to My library" else "Volver a Mi biblioteca")
+        }
+        TextButton(onClick = onDeleteRequest) {
+            Text(if (english) "Delete this audiobook" else "Eliminar este audiolibro")
         }
         Text(book.title, style = MaterialTheme.typography.titleLarge,
             modifier = Modifier.fillMaxWidth().clickable { perform(selectedAction) }.semantics {
@@ -205,6 +238,20 @@ fun NativeReaderAudioScreen(
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.semantics { heading() })
             Text(state.synchronizedText)
+        }
+        ReaderCompactChoice(
+            if (english) "Navigation mode" else "Modo de navegación",
+            if (english) listOf("Bookmarks", "Time (1 minute)")
+            else listOf("Marcas", "Tiempo (1 minuto)"),
+            navigationMode, english
+        ) { navigationMode = it }
+        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+            Button(onClick = { navigate(false) }) {
+                Text(if (english) "Previous" else "Anterior")
+            }
+            Button(onClick = { navigate(true) }) {
+                Text(if (english) "Next" else "Siguiente")
+            }
         }
         // One adjustable control for each direction-based navigation action.
         // Flick up/down for an exact +30/-30-second jump, not a percentage seek.

@@ -56,7 +56,19 @@ internal object NativeGeminiDaisyExport {
     private fun String.matchesHeading(pattern: Regex) = pattern.containsMatchIn(this)
 
     suspend fun generate(context: Context, text: String, title: String, voice: String,
-                         progress: suspend (Int, Int) -> Unit): ByteArray {
+                         progress: suspend (Int, Int) -> Unit): ByteArray =
+        generateWithSynthesizer(text, title, voice, progress) { segment, chosen ->
+            NativeGeminiSpeech.generate(context, segment, chosen)
+        }
+
+    /** Deterministic path shared by production and structural tests.
+     * Supplying synthetic WAV clips to tests never accesses Gemini or a real API key.
+     */
+    internal suspend fun generateWithSynthesizer(
+        text: String, title: String, voice: String,
+        progress: suspend (Int, Int) -> Unit,
+        synthesize: suspend (String, String) -> ByteArray
+    ): ByteArray {
         val parts = units(text)
         val identifier = "urn:uuid:" + UUID.randomUUID().toString()
         val escapedTitle = xml(title)
@@ -74,7 +86,7 @@ internal object NativeGeminiDaisyExport {
             if (spoken.isNotEmpty()) {
                 val number = index + 1
                 val filename = "audio%04d.wav".format(java.util.Locale.ROOT, number)
-                val wav = NativeGeminiSpeech.generate(context, spoken, voice)
+                val wav = synthesize(spoken, voice)
                 val pcm = NativeGeminiAudioExport.pcm(wav)
                 val seconds = pcm.size.toDouble() / 48000.0
                 require(seconds > 0) { "El fragmento de audio está vacío." }

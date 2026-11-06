@@ -267,6 +267,18 @@ struct NativePodcastScreen: View {
             }
             Section("Seguir pódcast y favoritos") {
                 Text("Favoritos guardados: \(library.favorites.count)")
+                ForEach(library.savedEpisodes) { saved in
+                    if let url = URL(string: saved.audioURL) {
+                        Button("Reproducir favorito: \(saved.title)") {
+                            player.select(NativePodcastEpisode(id: saved.id, title: saved.title,
+                                                              audioURL: url, publicationDate: ""))
+                        }
+                        Button("Quitar favorito: \(saved.title)") {
+                            library.toggleFavorite(NativePodcastEpisode(id: saved.id, title: saved.title,
+                                                                       audioURL: url, publicationDate: ""))
+                        }
+                    }
+                }
                 Text(library.notice).accessibilityAddTraits(.updatesFrequently)
                 Button("Seguir el pódcast TifloAcosta") {
                     library.follow(title: "Canal TifloAcosta", url: "https://anchor.fm/s/5b48ca28/podcast/rss")

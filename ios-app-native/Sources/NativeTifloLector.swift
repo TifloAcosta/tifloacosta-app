@@ -1052,6 +1052,12 @@ struct NativeReadingScreen: View {
     @State private var showSavedMarks = false
     @State private var confirmDocumentDeletion = false
     @State private var deletionError: String?
+    @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
+    @State private var audioExportTask: Task<Void, Never>?
+    @State private var audioExportStatus = ""
+    @State private var showAudioExport = false
+    @State private var audioExportBusy = false
+    @State private var audioExportResult: URL?
     @State private var programmaticFocusRequest = false
     @State private var actionMessage: String?
     @AccessibilityFocusState private var focusedFragment: Int?
@@ -1360,6 +1366,33 @@ struct NativeReadingScreen: View {
         }
     }
 
+    private func exportAudio() {
+        guard !audioExportBusy else { return }
+        audioExportBusy = true
+        audioExportStatus = "Generando audio."
+        audioExportResult = nil
+        let title = latest.title
+        let text = latest.body
+        let voice = geminiVoice
+        audioExportTask = Task {
+            do {
+                let url = try await NativeGeminiAudioExport.export(
+                    text: text, title: title, voice: voice,
+                    progress: { done, total in
+                        audioExportStatus = "Generando \(done) de \(total)."
+                    })
+                audioExportResult = url
+                audioExportStatus = "Audio preparado. Pulsa Compartir para guardarlo."
+            } catch is CancellationError {
+                audioExportStatus = "Exportación cancelada."
+            } catch {
+                audioExportStatus = error.localizedDescription
+            }
+            audioExportBusy = false
+            audioExportTask = nil
+        }
+    }
+
     private func exportText() {
         guard !latest.body.isEmpty else { return }
         let name = latest.title.replacingOccurrences(
@@ -1583,6 +1616,10 @@ struct NativeReadingScreen: View {
         }
         if !latest.body.isEmpty {
             Button("Exportar texto") { exportText() }
+            Button("Exportar audio") {
+                showAudioExport = true
+                showDocumentActions = false
+            }
             Button("Diccionario y pronunciación") {
                 if speech.isPlaying { pausePlayback() }
                 showWordTools = true
@@ -1732,6 +1769,41 @@ struct NativeReadingScreen: View {
         }
         .sheet(isPresented: $showWordTools) {
             NativeReaderWordToolsScreen(voiceIdentifier: effectiveVoiceID, pitch: pitch)
+        }
+        .sheet(isPresented: $showAudioExport) {
+            NavigationStack {
+                List {
+                    Section("Gemini") {
+                        Text("Se utilizará tu clave personal y puede consumirse cuota.")
+                        Picker("Voz", selection: $geminiVoice) {
+                            ForEach(NativeGeminiSpeech.voices, id: \.self) { name in
+                                Text(name).tag(name)
+                            }
+                        }
+                        Button("Generar") { exportAudio() }
+                            .disabled(audioExportBusy || latest.body.isEmpty)
+                        if audioExportBusy {
+                            Button("Cancelar", role: .cancel) {
+                                audioExportTask?.cancel()
+                            }
+                        }
+                        if !audioExportStatus.isEmpty {
+                            Text(audioExportStatus).accessibilityAddTraits(.updatesFrequently)
+                        }
+                        if let result = audioExportResult {
+                            Button("Compartir") { NativeShare.present(url: result) }
+                        }
+                        Text("WAV. Límite por documento: 60.000 caracteres.")
+                    }
+                }
+                .tifloScreenSurface()
+                .navigationTitle("Exportar audio")
+                .toolbar {
+                    Button("Cerrar") {
+                        showAudioExport = false
+                    }
+                }
+            }
         }
         .sheet(isPresented: $showAudioSettings) {
             NativeReaderDocumentAudioSettingsScreen(document: document)

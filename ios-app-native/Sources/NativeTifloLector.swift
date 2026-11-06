@@ -30,6 +30,8 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
     var markedPositions: [Int]? = nil
     var isFavorite: Bool? = nil
     var lastPercent: Int? = nil
+    // Exact text cursor, retaining lastPercent for older stored libraries.
+    var lastTextOffset: Int? = nil
     var lastTrackIndex: Int? = nil
     var audioBookmarks: [NativeAudioBookmark]? = nil
     var folderName: String? = nil
@@ -214,11 +216,13 @@ final class NativeReaderLibrary: ObservableObject {
         try? save()
     }
 
-    func savePosition(_ document: NativeReadingDocument, percent: Int) {
+    func savePosition(_ document: NativeReadingDocument, percent: Int, textOffset: Int) {
         guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
         let value = max(0, min(100, percent))
-        if documents[i].lastPercent != value {
+        let offset = max(0, min(document.body.count, textOffset))
+        if documents[i].lastPercent != value || documents[i].lastTextOffset != offset {
             documents[i].lastPercent = value
+            documents[i].lastTextOffset = offset
             try? save()
         }
     }
@@ -967,7 +971,7 @@ struct NativeReadingScreen: View {
 
     private func persistPosition() {
         if tracks.isEmpty {
-            library.savePosition(document, percent: currentPercent)
+            library.savePosition(document, percent: currentPercent, textOffset: readingOffset)
         } else {
             library.saveAudioPosition(document, track: trackIndex, percent: currentPercent)
         }
@@ -1043,7 +1047,7 @@ struct NativeReadingScreen: View {
                     trackIndex = next
                     currentPercent = 0
                     persistPosition()
-                    applySleepTimer()
+                    // A playlist transition must not restart the countdown.
                 },
                 onError: { error in actionMessage = "No se pudo reproducir: " + error })
             actionMessage = nil
@@ -1265,6 +1269,12 @@ struct NativeReadingScreen: View {
                 }
                 .padding()
             }
+            .onAppear {
+                // Restore the visible page as well as the stored speech cursor.
+                guard !textLayout.fragments.isEmpty else { return }
+                let index = textLayout.fragmentIndex(for: readingOffset)
+                proxy.scrollTo(index, anchor: .center)
+            }
             .onChange(of: focusedFragment) { _, index in
                 guard let index, textLayout.fragmentStarts.indices.contains(index) else { return }
                 if programmaticFocusRequest {
@@ -1277,7 +1287,7 @@ struct NativeReadingScreen: View {
                     readingOffset = textLayout.fragmentStarts[index]
                     currentPercent = min(100, Int(Double(readingOffset) * 100 /
                         Double(max(1, textLayout.totalCharacters))))
-                    if abs(currentPercent - lastSavedPercent) >= 5 { persistPosition() }
+                    persistPosition()
                 }
             }
         }
@@ -1435,7 +1445,9 @@ struct NativeReadingScreen: View {
             trackIndex = min(max(0, startTrack ?? latest.lastTrackIndex ?? 0),
                              max(0, tracks.count - 1))
             currentPercent = initial
-            readingOffset = Int(Double(textLayout.totalCharacters) * Double(initial) / 100)
+            readingOffset = max(0, min(textLayout.totalCharacters,
+                startPercent == nil ? (latest.lastTextOffset ?? Int(Double(textLayout.totalCharacters) * Double(initial) / 100))
+                                    : Int(Double(textLayout.totalCharacters) * Double(initial) / 100)))
             lastSavedPercent = initial
             if !didApplyOpeningMode {
                 didApplyOpeningMode = true
@@ -1453,7 +1465,7 @@ struct NativeReadingScreen: View {
                 currentPercent = percentage
                 readingOffset = Int(Double(textLayout.totalCharacters) *
                                     Double(percentage) / 100)
-                if abs(percentage - lastSavedPercent) >= 5 { persistPosition() }
+                if abs(percentage - lastSavedPercent) >= 1 { persistPosition() }
             }
         }
         .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
@@ -1465,7 +1477,7 @@ struct NativeReadingScreen: View {
             if speech.hasAudio {
                 let updated = speech.audioPercent
                 if updated != currentPercent { currentPercent = updated }
-                if abs(updated - lastSavedPercent) >= 5 { persistPosition() }
+                if abs(updated - lastSavedPercent) >= 1 { persistPosition() }
             }
         }
         .onDisappear {

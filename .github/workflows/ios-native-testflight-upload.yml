@@ -1,7 +1,7 @@
 name: TifloAcosta iOS nativa - enviar a TestFlight
 on:
   push:
-    branches: [main]
+    branches: [main, release/ios-candidate-phases1-6-20261106]
     paths:
       - 'ios-app-native/Sources/**'
       - 'ios-app-native/tests/**'
@@ -9,6 +9,7 @@ on:
       - 'ios-app-native/scripts/**'
       - 'ios-app-native/project.yml'
       - '.github/workflows/ios-native-testflight-upload.yml'
+      - 'ios-app-native/CANDIDATA-TESTFLIGHT-FASES-1-6.md'
   workflow_dispatch:
 permissions:
   contents: read

@@ -670,45 +670,7 @@ struct NativeReaderLibraryScreen: View {
                     }
                 }
             }
-            Section("Marcas") {
-                let marked = library.documents.filter { $0.hasBookmarks }
-                if marked.isEmpty { Text("Todavía no hay marcas guardadas.") }
-                ForEach(marked) { document in
-                    ForEach(document.bookmarks, id: \.self) { percent in
-                        NavigationLink {
-                            NativeReadingScreen(document: document, speech: speech,
-                                                startPercent: percent)
-                        } label: {
-                            Text("\(document.title), \(percent) por ciento")
-                        }
-                        .accessibilityAction(named: Text("Eliminar marca")) {
-                            library.removeBookmark(document, at: percent)
-                        }
-                    }
-                    ForEach(document.savedTextBookmarks, id: \.self) { mark in
-                        NavigationLink {
-                            NativeReadingScreen(document: document, speech: speech,
-                                                startTextOffset: mark.offset)
-                        } label: {
-                            Text("\(document.title), posición \(mark.offset)")
-                        }
-                        .accessibilityAction(named: Text("Eliminar marca")) {
-                            library.removeTextBookmark(document, mark: mark)
-                        }
-                    }
-                    ForEach(document.savedAudioBookmarks, id: \.self) { mark in
-                        NavigationLink {
-                            NativeReadingScreen(document: document, speech: speech,
-                                                startPercent: mark.percent, startTrack: mark.track)
-                        } label: {
-                            Text("\(document.title), pista \(mark.track + 1), \(mark.percent) por ciento")
-                        }
-                        .accessibilityAction(named: Text("Eliminar marca")) {
-                            library.removeAudioBookmark(document, mark: mark)
-                        }
-                    }
-                }
-            }
+
         }
         .tifloScreenSurface()
         .navigationTitle("TifloLector")

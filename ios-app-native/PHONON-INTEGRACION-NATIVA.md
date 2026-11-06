@@ -1,6 +1,6 @@
 # Phonon — integración nativa de TifloLector (requisitos comprobados)
 
-Estado: integración de ejecución local **pendiente**. Este documento no habilita un motor que todavía no está instalado. No mostrar una opción Phonon operativa hasta reproducir audio real sin red y completar las pruebas con lectores de pantalla.
+Estado de la rama de desarrollo: el adaptador del motor Phonon Core ML ya está integrado de forma opcional y la interfaz incluye instalación verificada, selección de voz, escucha de muestra, reproducción de documentos y exportación MP3/M4A/WAV/DAISY. El proyecto habitual mantiene iOS 17; hay una compilación especial de desarrollo iOS 18+ en `project-phonon-development.yml` que enlaza el producto SPM `ptts`. **No está en la aplicación publicada**. La compilación enlazada, generación real con un modelo y pruebas VoiceOver siguen siendo una validación final; no se debe afirmar funcionamiento verificado en un dispositivo.
 
 ## Proveedor y licencias
 

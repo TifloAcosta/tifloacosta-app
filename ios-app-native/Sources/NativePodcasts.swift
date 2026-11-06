@@ -169,6 +169,7 @@ struct NativePodcastScreen: View {
     @State private var visible = 10
     @StateObject private var library = NativePodcastLibrary()
     @State private var choosingOPML = false
+    @State private var importingOPML = false
     @State private var followedEpisodes: [NativePodcastEpisode] = []
     @State private var followedFeedTitle = ""
     @State private var followedFeedStatus = ""
@@ -271,6 +272,8 @@ struct NativePodcastScreen: View {
                     library.follow(title: "Canal TifloAcosta", url: "https://anchor.fm/s/5b48ca28/podcast/rss")
                 }
                 Button("Importar suscripciones OPML") { choosingOPML = true }
+                    .disabled(importingOPML)
+                if importingOPML { ProgressView("Importando suscripciones") }
                 ForEach(library.followed) { feed in
                     Text(feed.title)
                     Button("Consultar episodios: \(feed.title)") {
@@ -310,12 +313,18 @@ struct NativePodcastScreen: View {
             if player.episode != nil { player.updatePosition() }
         }
         .onDisappear { player.stop() }
-        .fileImporter(isPresented: $choosingOPML, allowedContentTypes: [.xml], allowsMultipleSelection: false) { result in
-            do {
-                guard let url = try result.get().first else { return }
-                _ = try library.importOPML(url)
-            } catch {
-                library.notice = "No se pudo importar el OPML: \(error.localizedDescription)"
+        .fileImporter(isPresented: $choosingOPML,
+                      allowedContentTypes: [.xml, UTType(filenameExtension: "opml") ?? .xml],
+                      allowsMultipleSelection: false) { result in
+            Task { @MainActor in
+                importingOPML = true
+                defer { importingOPML = false }
+                do {
+                    guard let url = try result.get().first else { return }
+                    _ = try await library.importOPML(url)
+                } catch {
+                    library.notice = "No se pudo importar el OPML: \(error.localizedDescription)"
+                }
             }
         }
     }

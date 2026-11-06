@@ -337,6 +337,13 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                 }
                 voiceId = prefs.getString("voice." + book?.id,
                     prefs.getString("voice", "")).orEmpty()
+                // Changing a Phonon voice while a segment plays must stop the
+                // former synthesis before a new request begins at the same cursor.
+                if (phononEnabled) {
+                    phononGeneration++
+                    phononReader?.stop()
+                    phononPlayingSegment = false
+                }
                 // An active voice change takes effect at the current text offset.
                 if (playing) speakCurrent()
                 publish()

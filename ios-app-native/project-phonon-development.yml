@@ -60,7 +60,7 @@ targets:
           - group.com.tifloacosta.app
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.tifloacosta.app.ShareExtension
+        PRODUCT_BUNDLE_IDENTIFIER: com.tifloacosta.app.phonon.development.ShareExtension
         INFOPLIST_FILE: ShareExtension/Info.plist
         GENERATE_INFOPLIST_FILE: NO
         CODE_SIGNING_ALLOWED: NO

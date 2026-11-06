@@ -75,6 +75,8 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.12.1")
     implementation("com.tom-roush:pdfbox-android:2.0.27.0")
     implementation("org.jsoup:jsoup:1.18.3")
+    // Pure Java LAME MP3 encoder (LGPL). License obligations must be reviewed before distribution.
+    implementation("co.ntbl:lame:1.0.0")
     implementation("androidx.core:core:1.16.0")
     implementation("com.google.mlkit:translate:17.0.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.10.2")

@@ -367,6 +367,17 @@ fun NativePodcastScreen(english: Boolean, media: List<MediaItem>) {
             Text(if (english) "Import OPML subscriptions" else "Importar suscripciones OPML")
         }
         Text(if (english) "Favorite episodes: ${favorites.size}" else "Episodios favoritos: ${favorites.size}")
+        library.savedEpisodes().forEach { saved ->
+            TextButton(onClick = { playEpisode(NativeEpisode(saved.title, saved.url)) }) {
+                Text((if (english) "Play favorite: " else "Reproducir favorito: ") + saved.title)
+            }
+            TextButton(onClick = {
+                library.toggleFavoriteEpisode(saved.title, saved.url)
+                favorites = library.favorites()
+            }) {
+                Text((if (english) "Remove favorite: " else "Quitar favorito: ") + saved.title)
+            }
+        }
         if (libraryNotice.isNotBlank()) Text(libraryNotice)
         followed.forEach { podcast ->
             Text(podcast.title)
@@ -406,7 +417,7 @@ fun NativePodcastScreen(english: Boolean, media: List<MediaItem>) {
                     Text((if (english) "Play: " else "Reproducir: ") + episode.title)
                 }
                 TextButton(onClick = {
-                    library.toggleFavorite(episode.url)
+                    library.toggleFavoriteEpisode(episode.title, episode.url)
                     favorites = library.favorites()
                 }) { Text((if (episode.url in favorites)
                     (if (english) "Remove favorite: " else "Quitar de favoritos: ")
@@ -451,7 +462,7 @@ fun NativePodcastScreen(english: Boolean, media: List<MediaItem>) {
                     playEpisode(episode)
                 }) { Text(episode.title) }
                 TextButton(onClick = {
-                    val added = library.toggleFavorite(episode.url)
+                    val added = library.toggleFavoriteEpisode(episode.title, episode.url)
                     favorites = library.favorites()
                     libraryNotice = if (english) (if (added) "Added to favorites." else "Removed from favorites.")
                         else (if (added) "Añadido a favoritos." else "Retirado de favoritos.")

@@ -317,6 +317,7 @@ final class NativeReadingSpeech: ObservableObject {
     private var baseUTF16 = 0
     private var totalUTF16 = 0
     @Published private(set) var textPercent = 0
+    @Published private(set) var textUTF16Offset = 0
 
     init() {
         progressDelegate.onWord = { [weak self] range in
@@ -324,6 +325,7 @@ final class NativeReadingSpeech: ObservableObject {
                 guard let self, self.isPlaying, self.player == nil,
                       self.totalUTF16 > 0 else { return }
                 let count = self.baseUTF16 + range.location + range.length
+                self.textUTF16Offset = min(self.totalUTF16, max(0, count))
                 self.textPercent = max(0, min(100,
                     Int(Double(count) * 100 / Double(self.totalUTF16))))
             }
@@ -331,6 +333,7 @@ final class NativeReadingSpeech: ObservableObject {
         progressDelegate.onFinish = { [weak self] in
             Task { @MainActor [weak self] in
                 guard let self, self.player == nil else { return }
+                self.textUTF16Offset = self.totalUTF16
                 self.textPercent = 100
                 self.isPlaying = false
                 self.isPaused = false
@@ -377,6 +380,7 @@ final class NativeReadingSpeech: ObservableObject {
         guard !text.isEmpty else { return }
         self.baseUTF16 = baseUTF16
         self.totalUTF16 = max(1, totalUTF16 ?? text.utf16.count)
+        textUTF16Offset = baseUTF16
         textPercent = max(0, min(100,
             Int(Double(baseUTF16) * 100 / Double(self.totalUTF16))))
         // La voz sigue sonando con la pantalla bloqueada y otras apps abiertas.
@@ -1518,15 +1522,17 @@ struct NativeReadingScreen: View {
         .onChange(of: sleepIndex) { _, _ in
             applySleepTimer()
         }
-        .onReceive(speech.$textPercent) { percentage in
-            // AVSpeechSynthesizer reports each spoken word; no artificial timer
-            // advances the text cursor while paused or reading visually.
-            guard !speech.hasAudio, speech.isPlaying else { return }
-            if percentage != currentPercent {
-                currentPercent = percentage
-                readingOffset = Int(Double(textLayout.totalCharacters) *
-                                    Double(percentage) / 100)
-                if abs(percentage - lastSavedPercent) >= 1 { persistPosition() }
+        .onReceive(speech.$textUTF16Offset) { utf16Offset in
+            // Keep the actual spoken word position instead of reversing a rounded percentage.
+            guard tracks.isEmpty, speech.isPlaying, !document.body.isEmpty else { return }
+            let safeOffset = max(0, min(document.body.utf16.count, utf16Offset))
+            let index = String.Index(utf16Offset: safeOffset, in: document.body)
+            let exactOffset = document.body.distance(from: document.body.startIndex, to: index)
+            if exactOffset != readingOffset {
+                readingOffset = exactOffset
+                currentPercent = Int(Double(exactOffset) * 100 /
+                                     Double(max(1, textLayout.totalCharacters)))
+                persistPosition()
             }
         }
         .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in

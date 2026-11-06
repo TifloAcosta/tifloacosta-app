@@ -30,6 +30,7 @@ final class NativePodcastLibrary: ObservableObject {
     @Published var notice = ""
     private let followedKey = "native-podcast-followed-v1"
     private let favoriteKey = "native-podcast-favorites-v1"
+    private let lastSeenKey = "native-podcast-last-seen-v1"
 
     init() {
         if let saved = UserDefaults.standard.data(forKey: followedKey),
@@ -37,6 +38,23 @@ final class NativePodcastLibrary: ObservableObject {
             followed = values
         }
         favorites = Set(UserDefaults.standard.stringArray(forKey: favoriteKey) ?? [])
+    }
+
+    /// Only reports episodes after the previously encountered newest item.
+    /// The first check establishes a baseline rather than announcing old episodes.
+    func recordFeedCheck(_ feed: NativeFollowedPodcast, episodes: [NativePodcastEpisode]) -> Int {
+        guard let newest = episodes.first?.id else { return 0 }
+        var snapshots = UserDefaults.standard.dictionary(forKey: lastSeenKey) as? [String: String] ?? [:]
+        let previous = snapshots[feed.url]
+        let count: Int
+        if let previous, let index = episodes.firstIndex(where: { $0.id == previous }) {
+            count = index
+        } else {
+            count = 0
+        }
+        snapshots[feed.url] = newest
+        UserDefaults.standard.set(snapshots, forKey: lastSeenKey)
+        return count
     }
 
     func isFavorite(_ episode: NativePodcastEpisode) -> Bool {

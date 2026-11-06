@@ -1220,6 +1220,7 @@ struct NativeReadingScreen: View {
     @State private var audioExportTask: Task<Void, Never>?
     @State private var audioExportStatus = ""
     @State private var audioExportFormat: NativeGeminiAudioExport.Format = .mp3
+    @State private var audioExportEngine: NativeGeminiAudioExport.Engine = .gemini
     @State private var showAudioExport = false
     @State private var audioExportBusy = false
     @State private var audioExportResult: URL?
@@ -1567,11 +1568,13 @@ struct NativeReadingScreen: View {
         audioExportResult = nil
         let title = latest.title
         let text = latest.body
-        let voice = geminiVoice
+        let engine = audioExportEngine
+        let voice = engine == .phonon ? phononVoice : geminiVoice
         audioExportTask = Task {
             do {
                 let url = try await NativeGeminiAudioExport.export(
                     text: text, title: title, voice: voice, format: audioExportFormat,
+                    engine: engine,
                     progress: { done, total in
                         audioExportStatus = "Generando \(done) de \(total)."
                     })
@@ -1889,6 +1892,7 @@ struct NativeReadingScreen: View {
         if !latest.body.isEmpty {
             Button("Exportar texto") { exportText() }
             Button("Exportar audio") {
+                if phononReady && phononVoices.isEmpty { loadPhononVoices() }
                 showAudioExport = true
                 showDocumentActions = false
             }
@@ -1912,12 +1916,32 @@ struct NativeReadingScreen: View {
     private var exportAudioSheet: some View {
             NavigationStack {
                 List {
-                    Section("Gemini") {
-                        Text("Se utilizará tu clave personal y puede consumirse cuota.")
-                        Picker("Voz", selection: $geminiVoice) {
-                            ForEach(NativeGeminiSpeech.voices, id: \.self) { name in
-                                Text(name).tag(name)
+                    Section("Motor y voz") {
+                        Picker("Motor", selection: $audioExportEngine) {
+                            Text("Gemini").tag(NativeGeminiAudioExport.Engine.gemini)
+                            if phononReady {
+                                Text("Phonon").tag(NativeGeminiAudioExport.Engine.phonon)
                             }
+                        }
+                        .disabled(audioExportBusy)
+                        if audioExportEngine == .gemini {
+                            Text("Se utilizará tu clave personal y puede consumirse cuota.")
+                            Picker("Voz", selection: $geminiVoice) {
+                                ForEach(NativeGeminiSpeech.voices, id: \.self) { name in
+                                    Text(name).tag(name)
+                                }
+                            }
+                        } else if audioExportEngine == .phonon {
+                            if phononVoices.isEmpty {
+                                Text("Cargando voces Phonon.")
+                            } else {
+                                Picker("Voz", selection: $phononVoice) {
+                                    ForEach(phononVoices, id: \.self) { name in
+                                        Text(name).tag(name)
+                                    }
+                                }
+                            }
+                            Text("Phonon genera el audio dentro del iPhone sin enviar el libro a Internet.")
                         }
                         Picker("Formato", selection: $audioExportFormat) {
                             Text("MP3").tag(NativeGeminiAudioExport.Format.mp3)
@@ -1928,7 +1952,8 @@ struct NativeReadingScreen: View {
                         .disabled(audioExportBusy)
                         Text("DAISY incluye texto, audio y navegación. La compatibilidad externa está pendiente de validación.")
                         Button("Generar") { exportAudio() }
-                            .disabled(audioExportBusy || latest.body.isEmpty)
+                            .disabled(audioExportBusy || latest.body.isEmpty ||
+                                (audioExportEngine == .phonon && phononVoices.isEmpty))
                         if audioExportBusy {
                             Button("Cancelar", role: .cancel) {
                                 audioExportTask?.cancel()

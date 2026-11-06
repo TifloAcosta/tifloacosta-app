@@ -372,9 +372,12 @@ fun NativePodcastScreen(english: Boolean, media: List<MediaItem>) {
                         followedEpisodes = withContext(Dispatchers.IO) {
                             episodesFromRss(limitedResponse(podcast.url))
                         }
+                        val newCount = library.recordFeedCheck(
+                            podcast.url, followedEpisodes.map { it.url })
                         libraryNotice = if (followedEpisodes.isEmpty()) {
                             if (english) "No playable episodes" else "Sin episodios compatibles"
-                        } else ""
+                        } else if (english) "$newCount new episodes since the previous check."
+                        else "$newCount episodios nuevos desde la consulta anterior."
                     } catch (_: Exception) {
                         followedEpisodes = emptyList()
                         libraryNotice = if (english) "Could not load podcast feed"

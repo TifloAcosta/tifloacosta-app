@@ -85,7 +85,7 @@ internal object NativeGeminiDaisyExport {
             val spoken = fragment.text.trim()
             if (spoken.isNotEmpty()) {
                 val number = index + 1
-                val filename = "audio%04d.wav".format(java.util.Locale.ROOT, number)
+                val filename = "audio%04d.mp3".format(java.util.Locale.ROOT, number)
                 val wav = synthesize(spoken, voice)
                 val pcm = NativeGeminiAudioExport.pcm(wav)
                 val seconds = pcm.size.toDouble() / 48000.0
@@ -107,8 +107,8 @@ internal object NativeGeminiDaisyExport {
                 parallel += "<par id=\"$par\"><text src=\"book.xml#$id\"/>" +
                     "<audio src=\"$filename\" clipBegin=\"00:00:00\" " +
                     "clipEnd=\"" + clock(seconds) + "\"/></par>"
-                manifest += "<item id=\"audio$number\" href=\"$filename\" media-type=\"audio/x-wav\"/>"
-                soundFiles += filename to wav
+                manifest += "<item id=\"audio$number\" href=\"$filename\" media-type=\"audio/mpeg\"/>"
+                soundFiles += filename to NativeGeminiAudioExport.encodeMP3(pcm)
             } else {
                 // Full-text DTBook also retains silent whitespace.
                 written += "<p>" + xml(fragment.text) + "</p>"

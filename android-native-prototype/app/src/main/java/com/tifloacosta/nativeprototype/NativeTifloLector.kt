@@ -120,6 +120,9 @@ fun NativeTifloLector(
     var moveBook by remember { mutableStateOf<ReaderBook?>(null) }
     var proposedFolder by remember { mutableStateOf("") }
     var deleteBook by remember { mutableStateOf<ReaderBook?>(null) }
+    var selectionMode by remember { mutableStateOf(false) }
+    var selectedBookIds by remember { mutableStateOf<Set<String>>(emptySet()) }
+    var confirmMultipleDeletion by remember { mutableStateOf(false) }
     var loading by remember { mutableStateOf(true) }
     var importStatus by remember { mutableStateOf("") }
     var sharedImportNotice by remember { mutableStateOf("") }
@@ -352,6 +355,7 @@ fun NativeTifloLector(
                     }
                 }
             },
+            onDeleteRequest = { deleteBook = book },
             onBack = { selectedBook = null; selectedText = ""; playOnOpen = false; refresh() }
         )
         return
@@ -583,6 +587,20 @@ fun NativeTifloLector(
         Text(if (english) "My library" else "Mi biblioteca",
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.semantics { heading() })
+        TextButton(onClick = {
+            selectionMode = !selectionMode
+            if (!selectionMode) selectedBookIds = emptySet()
+        }) {
+            Text(if (selectionMode) (if (english) "Finish selection" else "Terminar selección")
+                else (if (english) "Select multiple books" else "Seleccionar varios libros"))
+        }
+        if (selectionMode) {
+            Text((if (english) "Selected: " else "Seleccionados: ") + selectedBookIds.size)
+            Button(onClick = { confirmMultipleDeletion = true },
+                enabled = selectedBookIds.isNotEmpty()) {
+                Text(if (english) "Delete selected" else "Eliminar seleccionados")
+            }
+        }
         if (loading) Text(if (english) "Loading library" else "Cargando biblioteca")
         else if (shown.isEmpty()) Text(
             if (english) "No books match this selection." else "No hay obras con estos filtros."
@@ -623,6 +641,20 @@ fun NativeTifloLector(
                     ReaderUnits.percent(book.offset, book.length) +
                     (if (english) " percent" else " por ciento")
             }
+            if (selectionMode) {
+                OutlinedButton(onClick = {
+                    selectedBookIds = if (book.id in selectedBookIds) selectedBookIds - book.id
+                        else selectedBookIds + book.id
+                }, modifier = Modifier.fillMaxWidth().semantics {
+                    stateDescription = if (book.id in selectedBookIds)
+                        (if (english) "Selected" else "Seleccionado")
+                    else (if (english) "Not selected" else "No seleccionado")
+                }) {
+                    Text(book.title + if (book.id in selectedBookIds)
+                        (if (english) ", selected" else ", seleccionado")
+                    else (if (english) ", not selected" else ", no seleccionado"))
+                }
+            } else {
             OutlinedButton(onClick = { run(action) },
                 modifier = Modifier.fillMaxWidth().clearAndSetSemantics {
                     contentDescription = book.title
@@ -647,6 +679,7 @@ fun NativeTifloLector(
                         CustomAccessibilityAction(label) { run(i); true }
                     }
                 }) { Text(book.title) }
+            }
         }
         if (shown.size > visibleCount) {
             TextButton(onClick = { visibleCount += 10 }) {
@@ -736,6 +769,44 @@ fun NativeTifloLector(
             }) { Text(if (english) "Move" else "Mover") } },
             dismissButton = { TextButton(onClick = { moveBook = null }) { Text("Cancelar") } })
     }
+    if (confirmMultipleDeletion) {
+        AlertDialog(
+            onDismissRequest = { confirmMultipleDeletion = false },
+            title = { Text(if (english) "Delete selected books?"
+                else "¿Eliminar los libros seleccionados?") },
+            text = { Text((if (english) "Permanently delete " else "Eliminar definitivamente ") +
+                selectedBookIds.size + (if (english) " books and their files."
+                    else " libros y sus archivos.")) },
+            confirmButton = { TextButton(onClick = {
+                val targetIDs = selectedBookIds
+                confirmMultipleDeletion = false
+                scope.launch {
+                    var failed = 0
+                    withContext(Dispatchers.IO) {
+                        val snapshot = store.list()
+                        for (book in snapshot.filter { it.id in targetIDs }) {
+                            try {
+                                if (NativeReaderPlaybackService.snapshot.value.bookId == book.id) {
+                                    NativeReaderPlaybackService.send(
+                                        context, NativeReaderPlaybackService.ACTION_STOP)
+                                }
+                                store.delete(book)
+                            } catch (_: Exception) { failed++ }
+                        }
+                        organization.pruneQueue(store.list())
+                    }
+                    selectedBookIds = emptySet()
+                    selectionMode = false
+                    refresh()
+                    if (failed > 0) error = if (english) "$failed books could not be deleted."
+                        else "No se pudieron eliminar $failed libros."
+                }
+            }) { Text(if (english) "Delete" else "Eliminar") } },
+            dismissButton = { TextButton(onClick = {
+                confirmMultipleDeletion = false
+            }) { Text(if (english) "Cancel" else "Cancelar") } }
+        )
+    }
     deleteBook?.let { book ->
         AlertDialog(onDismissRequest = { deleteBook = null },
             title = { Text(if (english) "Delete book permanently?" else "¿Eliminar esta obra definitivamente?") },
@@ -745,11 +816,19 @@ fun NativeTifloLector(
                     NativeReaderPlaybackService.send(context, NativeReaderPlaybackService.ACTION_STOP)
                 }
                 scope.launch {
-                    withContext(Dispatchers.IO) {
-                        store.delete(book)
-                        organization.pruneQueue(store.list())
+                    try {
+                        withContext(Dispatchers.IO) {
+                            store.delete(book)
+                            organization.pruneQueue(store.list())
+                        }
+                        if (selectedBook?.id == book.id) {
+                            selectedBook = null
+                            selectedText = ""
+                        }
+                        refresh()
+                    } catch (e: Exception) {
+                        error = e.message ?: "No se pudo eliminar la obra."
                     }
-                    refresh()
                 }
                 deleteBook = null
             }) { Text(if (english) "Delete" else "Eliminar") } },
@@ -767,12 +846,14 @@ private fun NativeReadingScreen(
     onRateChange: (Float) -> Unit,
     onUpdate: (ReaderBook) -> Unit,
     onOcrCompleted: () -> Unit,
+    onDeleteRequest: () -> Unit,
     onBack: () -> Unit
 ) {
     val context = LocalContext.current
     if (book.tracks.isNotEmpty()) {
         val store = remember { NativeReaderStore(context.applicationContext) }
-        NativeReaderAudioScreen(book, store, english, startOnOpen, onUpdate, onBack)
+        NativeReaderAudioScreen(book, store, english, startOnOpen, onUpdate,
+            onDeleteRequest, onBack)
         return
     }
     val speaker = remember(book.id) { NativeReaderSpeaker(context.applicationContext) }
@@ -982,6 +1063,9 @@ private fun NativeReadingScreen(
         )
         TextButton(onClick = onBack) {
             Text(if (english) "Back to my library" else "Volver a Mi biblioteca")
+        }
+        TextButton(onClick = onDeleteRequest) {
+            Text(if (english) "Delete this book" else "Eliminar esta obra")
         }
         Button(
             onClick = { toggleSpeech() },

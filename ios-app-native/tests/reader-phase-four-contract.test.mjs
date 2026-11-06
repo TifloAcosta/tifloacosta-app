@@ -9,8 +9,8 @@ const reader = source('NativeTifloLector.swift');
 test('una única entrada Importar conserva Archivos e incorpora bibliotecas en línea', () => {
     assert.match(reader, /Button\("Importar", systemImage:/);
     assert.match(reader, /confirmationDialog\("Importar"/);
-    assert.match(reader, /Button\("Desde Archivos"\)/);
-    assert.match(reader, /Button\("Bibliotecas en línea"\)/);
+    assert.match(reader, /Button\("Archivos"\)/);
+    assert.match(reader, /Button\("Bibliotecas"\)/);
     assert.match(reader, /NativeReaderCatalogsScreen\(\)/);
 });
 

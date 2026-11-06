@@ -117,8 +117,8 @@ internal object NativeGeminiAudioExport {
         flags.inSampleRate = 24000
         flags.mode = MPEGMode.MONO
         flags.bitRate = 64
-        flags.writeId3tagAutomatic = false
-        flags.findReplayGain = false
+        flags.setWriteId3tagAutomatic(false)
+        flags.setFindReplayGain(false)
         require(lame.initParams() >= 0) { "No se pudo iniciar el codificador MP3." }
         try {
             val output = ByteArrayOutputStream()

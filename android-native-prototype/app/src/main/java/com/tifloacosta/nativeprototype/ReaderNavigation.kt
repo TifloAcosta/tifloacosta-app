@@ -71,7 +71,7 @@ internal object ReaderNavigation {
         repeat(words) {
             val next = if (forward) nextWordStart(text, current)
                 else previousWordStart(text, current)
-            if (next == current) return current
+            if (next == current) return if (forward) text.length else current
             current = next
         }
         return current

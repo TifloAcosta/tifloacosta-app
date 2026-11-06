@@ -360,6 +360,27 @@ final class NativeReadingSpeech: ObservableObject {
         audioDelegate.onFinish = { [weak self] completed, success in
             Task { @MainActor [weak self] in
                 guard let self, self.player === completed else { return }
+                if self.isGemini {
+                    guard success else {
+                        self.geminiOnError?("No se pudo completar la pista Gemini.")
+                        self.stop()
+                        return
+                    }
+                    self.geminiCursorUTF16 += self.geminiSegments[self.geminiSegmentIndex].utf16.count
+                    self.textUTF16Offset = self.geminiCursorUTF16
+                    self.textPercent = min(100, Int(Double(self.textUTF16Offset) * 100 /
+                        Double(max(1, self.totalUTF16))))
+                    self.geminiSegmentIndex += 1
+                    self.player = nil
+                    if self.geminiSegmentIndex < self.geminiSegments.count {
+                        if !self.isPaused { self.playNextGeminiSegment() }
+                    } else {
+                        self.isPlaying = false
+                        self.isPaused = false
+                        self.isGemini = false
+                    }
+                    return
+                }
                 self.isPlaying = false
                 self.isPaused = false
                 guard success, self.playlistURLs.indices.contains(self.playlistIndex + 1) else {
@@ -378,6 +399,14 @@ final class NativeReadingSpeech: ObservableObject {
         }
     }
     private var player: AVAudioPlayer?
+    private var geminiTask: Task<Void, Never>?
+    private var geminiSegments: [String] = []
+    private var geminiSegmentIndex = 0
+    private var geminiVoice = "Kore"
+    private var geminiCursorUTF16 = 0
+    private var geminiGeneration = 0
+    private var geminiOnError: ((String) -> Void)?
+    private(set) var isGemini = false
     private var sleepTask: Task<Void, Never>?
     @Published private(set) var isPlaying = false
     @Published private(set) var isPaused = false
@@ -413,6 +442,53 @@ final class NativeReadingSpeech: ObservableObject {
         synthesizer.speak(utterance)
         isPlaying = true
         isPaused = false
+    }
+
+    func playGemini(_ text: String, voice: String,
+                    baseUTF16: Int, totalUTF16: Int,
+                    onError: @escaping (String) -> Void) throws {
+        stop()
+        // Nothing is sent until the user explicitly selects Gemini and presses Play.
+        geminiSegments = try NativeGeminiAudioExport.chunks(text)
+        geminiVoice = voice
+        geminiSegmentIndex = 0
+        geminiCursorUTF16 = baseUTF16
+        self.totalUTF16 = max(1, totalUTF16)
+        self.textUTF16Offset = baseUTF16
+        self.textPercent = Int(Double(baseUTF16) * 100 / Double(self.totalUTF16))
+        self.geminiOnError = onError
+        isGemini = true
+        isPlaying = true
+        isPaused = false
+        playNextGeminiSegment()
+    }
+
+    private func playNextGeminiSegment() {
+        guard isGemini, !isPaused, geminiSegments.indices.contains(geminiSegmentIndex) else { return }
+        let generation = geminiGeneration
+        let segment = geminiSegments[geminiSegmentIndex]
+        geminiTask = Task { [weak self] in
+            guard let self else { return }
+            do {
+                let data = try await NativeGeminiSpeech.generate(segment, voice: self.geminiVoice)
+                try Task.checkCancellation()
+                guard generation == self.geminiGeneration, self.isGemini, !self.isPaused else { return }
+                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
+                try AVAudioSession.sharedInstance().setActive(true)
+                let audio = try AVAudioPlayer(data: data)
+                audio.delegate = self.audioDelegate
+                audio.prepareToPlay()
+                guard audio.play() else { throw NativeGeminiSpeech.Error.unavailable }
+                self.player = audio
+                self.isPlaying = true
+            } catch is CancellationError {
+                // Stop and seek cancel in-flight HTTP work without reporting an error.
+            } catch {
+                guard generation == self.geminiGeneration else { return }
+                self.geminiOnError?(error.localizedDescription)
+                self.stop()
+            }
+        }
     }
 
     private func startAudio(_ url: URL, speed: Double, at percent: Int) throws {
@@ -473,21 +549,26 @@ final class NativeReadingSpeech: ObservableObject {
     }
 
     func pause() {
-        if let player { player.pause() } else { synthesizer.pauseSpeaking(at: .word) }
+        if let player { player.pause() }
+        else if !isGemini { synthesizer.pauseSpeaking(at: .word) }
         sleep(after: 0) // Al pausar no sigue corriendo la cuenta del apagado.
         isPlaying = false
         isPaused = true
     }
 
     func resume() {
-        if let player { player.play() } else { synthesizer.continueSpeaking() }
+        if isGemini {
+            if let player { player.play() } else { playNextGeminiSegment() }
+        } else if let player { player.play() } else { synthesizer.continueSpeaking() }
         isPlaying = true
         isPaused = false
     }
 
     func refresh() {
         if let player, !player.isPlaying && !isPaused { isPlaying = false }
-        if player == nil && !synthesizer.isSpeaking && !isPaused { isPlaying = false }
+        if player == nil && !synthesizer.isSpeaking && !isPaused && !isGemini {
+            isPlaying = false
+        }
     }
 
     func sleep(after minutes: Int) {
@@ -503,6 +584,13 @@ final class NativeReadingSpeech: ObservableObject {
     func stop() {
         sleepTask?.cancel()
         sleepTask = nil
+        geminiGeneration += 1
+        geminiTask?.cancel()
+        geminiTask = nil
+        geminiSegments = []
+        geminiSegmentIndex = 0
+        geminiOnError = nil
+        isGemini = false
         player?.stop()
         player = nil
         playlistURLs = []

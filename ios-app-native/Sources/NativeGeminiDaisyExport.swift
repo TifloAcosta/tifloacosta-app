@@ -19,9 +19,48 @@ enum NativeGeminiDaisyExport {
         return String(format: "%02d:%02d:%06.3f", hours, minutes, remaining)
     }
 
+
+    struct TextUnit {
+        let text: String
+        let heading: String?
+    }
+
+    /// Only explicit heading lines qualify. Preserve every original character.
+    /// Split headings into separate spoken units so NCX points to an exact SMIL par.
+    static func units(_ text: String) throws -> [TextUnit] {
+        _ = try NativeGeminiAudioExport.chunks(text) // Global length/empty checks
+        let pattern = #"^(?:#{1,6}[ \t]+|(?i:capítulo|capitulo|sección|seccion)[ \t]+[0-9IVXLCDM]+(?:[.: -]|$))"#
+        var result: [TextUnit] = []
+        let lines = text.components(separatedBy: "\n")
+        for (index, line) in lines.enumerated() {
+            let suffix = index == lines.count - 1 ? "" : "\n"
+            let unit = line + suffix
+            let recognized = line.trimmingCharacters(in: .whitespaces)
+                .range(of: pattern, options: .regularExpression) != nil
+            if recognized && !line.trimmingCharacters(in: .whitespaces).isEmpty {
+                result.append(TextUnit(text: unit,
+                           heading: line.trimmingCharacters(in: .whitespaces)))
+            } else if !unit.isEmpty {
+                // Group ordinary lines into <=1,200-character text units.
+                if !result.isEmpty && result[result.count - 1].heading == nil &&
+                    result[result.count - 1].text.count + unit.count <= NativeGeminiAudioExport.chunkSize {
+                    let previous = result.removeLast()
+                    result.append(TextUnit(text: previous.text + unit, heading: nil))
+                } else if unit.count <= NativeGeminiAudioExport.chunkSize {
+                    result.append(TextUnit(text: unit, heading: nil))
+                } else {
+                    for chunk in try NativeGeminiAudioExport.chunks(unit) {
+                        result.append(TextUnit(text: chunk, heading: nil))
+                    }
+                }
+            }
+        }
+        return result
+    }
+
     static func generate(text: String, title: String, voice: String,
                          progress: @escaping @MainActor (Int, Int) -> Void) async throws -> URL {
-        let segments = try NativeGeminiAudioExport.chunks(text)
+        let segments = try units(text)
         let uuid = UUID().uuidString
         let working = FileManager.default.temporaryDirectory
             .appendingPathComponent("TifloDaisy-" + uuid, isDirectory: true)
@@ -32,6 +71,8 @@ enum NativeGeminiDaisyExport {
         var pars: [String] = []
         var manifest: [String] = []
         var totalSeconds = 0.0
+        var headingPoints: [(title: String, par: String)] = []
+        var firstPar = ""
 
         for (index, segment) in segments.enumerated() {
             try Task.checkCancellation()
@@ -39,15 +80,17 @@ enum NativeGeminiDaisyExport {
             let id = "t\(number)"
             let par = "par\(number)"
             let file = "audio\(String(format: "%04d", number)).wav"
-            let spoken = segment.trimmingCharacters(in: .whitespacesAndNewlines)
+            let spoken = segment.text.trimmingCharacters(in: .whitespacesAndNewlines)
             // Every text unit must have its own corresponding spoken clip.
-            guard !spoken.isEmpty else { continue }
+            if spoken.isEmpty { await progress(number, segments.count); continue }
+            if firstPar.isEmpty { firstPar = par }
+            if let heading = segment.heading { headingPoints.append((heading, par)) }
             let bytes = try await NativeGeminiSpeech.generate(spoken, voice: voice)
             let pcm = try NativeGeminiAudioExport.pcm(bytes)
             let duration = Double(pcm.count) / 48000.0 // mono 16-bit PCM at 24 kHz
             guard duration > 0 else { throw NativeGeminiAudioExport.ExportError.empty }
             try bytes.write(to: working.appendingPathComponent(file), options: .atomic)
-            paragraphs.append("<p id=\"\(id)\" smilref=\"sync.smil#\(par)\">\(escape(segment))</p>")
+            paragraphs.append("<p id=\"\(id)\" smilref=\"sync.smil#\(par)\">\(escape(segment.text))</p>")
             pars.append("<par id=\"\(par)\"><text src=\"book.xml#\(id)\"/><audio src=\"\(file)\" clipBegin=\"00:00:00\" clipEnd=\"\(clock(duration))\"/></par>")
             manifest.append("<item id=\"audio\(number)\" href=\"\(file)\" media-type=\"audio/x-wav\"/>")
             totalSeconds += duration
@@ -76,19 +119,28 @@ enum NativeGeminiDaisyExport {
           <body><seq id="seq1">\(pars.joined(separator: "\n"))</seq></body>
         </smil>
         """
+        let headingNav = headingPoints.enumerated().map { index, point in
+            """
+            <navPoint id="chapter\(index + 1)" class="h2" playOrder="\(index + 2)">
+              <navLabel><text>\(escape(point.title))</text></navLabel>
+              <content src="sync.smil#\(point.par)"/>
+            </navPoint>
+            """
+        }.joined(separator: "\n")
         let ncx = """
         <?xml version="1.0" encoding="utf-8"?>
         <!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
         <ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="es">
         <head><meta name="dtb:uid" content="\(identifier)"/>
-        <meta name="dtb:depth" content="1"/>
+        <meta name="dtb:depth" content="\(headingPoints.isEmpty ? 1 : 2)"/>
         <meta name="dtb:totalPageCount" content="0"/>
         <meta name="dtb:maxPageNumber" content="0"/>
         <meta name="dtb:totalTime" content="\(clock(totalSeconds))"/></head>
         <docTitle><text>\(safeTitle)</text></docTitle>
         <navMap><navPoint id="nav1" class="h1" playOrder="1">
         <navLabel><text>\(safeTitle)</text></navLabel>
-        <content src="sync.smil#\(pars.isEmpty ? "seq1" : "par1")"/>
+        <content src="sync.smil#\(firstPar)"/>
+        \(headingNav)
         </navPoint></navMap></ncx>
         """
         let opf = """

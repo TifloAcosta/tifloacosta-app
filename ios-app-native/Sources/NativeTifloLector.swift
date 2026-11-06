@@ -35,6 +35,8 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
     var textBookmarks: [NativeTextBookmark]? = nil
     var isFavorite: Bool? = nil
     var lastPercent: Int? = nil
+    // Optional to keep older libraries compatible; only set on actual opening or playback.
+    var lastOpenedAt: Date? = nil
     // Exact text cursor, retaining lastPercent for older stored libraries.
     var lastTextOffset: Int? = nil
     var lastTrackIndex: Int? = nil
@@ -281,6 +283,12 @@ final class NativeReaderLibrary: ObservableObject {
             documents[i].lastPercent = value
             try? save()
         }
+    }
+
+    func markOpened(_ document: NativeReadingDocument) {
+        guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
+        documents[i].lastOpenedAt = .now
+        try? save()
     }
 
     func latest(_ document: NativeReadingDocument) -> NativeReadingDocument {
@@ -739,6 +747,9 @@ struct NativeReaderLibraryScreen: View {
             case 8: return calendar.isDateInToday(doc.importedAt)
             case 9: return doc.importedAt >= (calendar.date(byAdding: .day, value: -7, to: .now) ?? .now)
             case 10: return doc.importedAt >= (calendar.date(byAdding: .month, value: -1, to: .now) ?? .now)
+            case 11:
+                guard let mostRecent = library.documents.compactMap(\.lastOpenedAt).max() else { return false }
+                return doc.lastOpenedAt == mostRecent
             default: return true
             }
         }
@@ -747,12 +758,14 @@ struct NativeReaderLibraryScreen: View {
         case 2: items.sort { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
         case 3: items.sort { $0.title.localizedStandardCompare($1.title) == .orderedDescending }
         case 4: items.sort { $0.formatLabel < $1.formatLabel }
+        case 5: items.sort { ($0.lastOpenedAt ?? .distantPast) > ($1.lastOpenedAt ?? .distantPast) }
         default: items.sort { $0.importedAt > $1.importedAt }
         }
         return items
     }
 
     private func play(_ document: NativeReadingDocument) {
+        library.markOpened(document)
         let latest = library.latest(document)
         let chosenSpeed = latest.readerPreferences?.speedIndex ?? speedIndex
         let speed = speeds[max(0, min(speeds.count - 1, chosenSpeed))]
@@ -795,31 +808,32 @@ struct NativeReaderLibraryScreen: View {
                     title: "Filtros",
                     choices: ["Todos", "Textos", "PDF", "EPUB", "Office", "Audio y DAISY",
                               "Con marcas", "Favoritos", "Importados hoy",
-                              "Últimos siete días", "Último mes"],
+                              "Últimos siete días", "Último mes", "Último abierto"],
                     selectedIndex: $filterIndex
                 )
                 NativeAdjustableChoice(
                     title: "Ordenar",
-                    choices: ["Más recientes", "Más antiguos", "Título A a Z",
-                              "Título Z a A", "Formato"],
+                    choices: ["Importados más recientes", "Importados más antiguos",
+                              "Título de a a zeta", "Título de zeta a a",
+                              "Formato", "Abiertos recientemente"],
                     selectedIndex: $sortIndex
                 )
             }
             Section("Carpetas") {
-                NativeAdjustableChoice(
-                    title: "Carpeta",
-                    choices: ["Todas", "Sin carpeta"] + library.folders,
-                    selectedIndex: folderFilterIndex
-                )
-                Button("Nueva carpeta") { newFolderName = ""; showCreateFolder = true }
+                Button("Todas las carpetas") { selectedFolder = "" }
+                    .accessibilityValue(selectedFolder == "" ? "Seleccionada" : "")
+                Button("Sin carpeta") { selectedFolder = "__unfiled__" }
+                    .accessibilityValue(selectedFolder == "__unfiled__" ? "Seleccionada" : "")
                 ForEach(library.folders, id: \.self) { folder in
                     Button(folder) { selectedFolder = folder }
                         .accessibilityLabel("Carpeta \(folder)")
+                        .accessibilityValue(selectedFolder == folder ? "Seleccionada" : "")
                         .accessibilityHint("Filtra la biblioteca por esta carpeta.")
                         .accessibilityAction(named: Text("Eliminar carpeta")) {
                             folderToDelete = folder
                         }
                 }
+                Button("Crear nueva carpeta") { newFolderName = ""; showCreateFolder = true }
             }
             Section("Mi biblioteca") {
                 Button(selectingDocuments ? "Terminar" : "Selección") {
@@ -845,13 +859,16 @@ struct NativeReaderLibraryScreen: View {
                             Label(document.title, systemImage: selectedDocumentIDs.contains(document.id)
                                 ? "checkmark.circle.fill" : "circle")
                         }
-                        .accessibilityLabel("\(document.title), \(selectedDocumentIDs.contains(document.id) ? "seleccionado" : "no seleccionado")")
+                        .accessibilityLabel("\(document.title), \(max(0, min(100, library.latest(document).lastPercent ?? 0))) por ciento leído, \(selectedDocumentIDs.contains(document.id) ? "seleccionado" : "no seleccionado")")
                         .accessibilityHint("Doble toque para cambiar la selección")
                     } else {
                     NavigationLink {
                         NativeReadingScreen(document: document, speech: speech)
-                    } label: { Text(document.title) }
-                    .accessibilityLabel("\(document.title), \(document.formatLabel)")
+                            .onAppear { library.markOpened(document) }
+                    } label: {
+                        Text("\(document.title), \(max(0, min(100, library.latest(document).lastPercent ?? 0))) por ciento leído")
+                    }
+                    .accessibilityLabel("\(document.title), \(max(0, min(100, library.latest(document).lastPercent ?? 0))) por ciento leído, \(document.formatLabel)")
                     .accessibilityHint("Doble toque para abrir. Hay acciones de accesibilidad.")
                     .accessibilityAction(named: Text("Reproducir")) { play(document) }
                     .accessibilityAction(named: Text("Información")) { information = document }

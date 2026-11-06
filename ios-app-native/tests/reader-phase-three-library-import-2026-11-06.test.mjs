@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 const reader = readFileSync(new URL('../Sources/NativeTifloLector.swift', import.meta.url), 'utf8');
 
 test('Multi-select deletion is confirmed and protects stored document metadata', () => {
-  assert.match(reader, /Seleccionar varios documentos/);
+  assert.match(reader, /Selección/);
   assert.match(reader, /selectedDocumentIDs: Set<UUID>/);
   assert.match(reader, /confirmBatchDeletion/);
   assert.match(reader, /func deleteDocuments\(withIDs ids: Set<UUID>\) -> Bool/);

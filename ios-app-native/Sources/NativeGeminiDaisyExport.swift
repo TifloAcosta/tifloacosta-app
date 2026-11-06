@@ -37,7 +37,8 @@ enum NativeGeminiDaisyExport {
             let unit = line + suffix
             let recognized = line.trimmingCharacters(in: .whitespaces)
                 .range(of: pattern, options: .regularExpression) != nil
-            if recognized && !line.trimmingCharacters(in: .whitespaces).isEmpty {
+            if recognized && !line.trimmingCharacters(in: .whitespaces).isEmpty &&
+                unit.count <= NativeGeminiAudioExport.chunkSize {
                 result.append(TextUnit(text: unit,
                            heading: line.trimmingCharacters(in: .whitespaces)))
             } else if !unit.isEmpty {
@@ -73,6 +74,7 @@ enum NativeGeminiDaisyExport {
         var totalSeconds = 0.0
         var headingPoints: [(title: String, par: String)] = []
         var firstPar = ""
+        var sectionOpen = false
 
         for (index, segment) in segments.enumerated() {
             try Task.checkCancellation()
@@ -82,7 +84,12 @@ enum NativeGeminiDaisyExport {
             let file = "audio\(String(format: "%04d", number)).wav"
             let spoken = segment.text.trimmingCharacters(in: .whitespacesAndNewlines)
             // Every text unit must have its own corresponding spoken clip.
-            if spoken.isEmpty { await progress(number, segments.count); continue }
+            if spoken.isEmpty {
+                // Preserve non-spoken whitespace in the full-text DTBook.
+                paragraphs.append("<p>\(escape(segment.text))</p>")
+                await progress(number, segments.count)
+                continue
+            }
             if firstPar.isEmpty { firstPar = par }
             if let heading = segment.heading { headingPoints.append((heading, par)) }
             let bytes = try await NativeGeminiSpeech.generate(spoken, voice: voice)
@@ -90,12 +97,19 @@ enum NativeGeminiDaisyExport {
             let duration = Double(pcm.count) / 48000.0 // mono 16-bit PCM at 24 kHz
             guard duration > 0 else { throw NativeGeminiAudioExport.ExportError.empty }
             try bytes.write(to: working.appendingPathComponent(file), options: .atomic)
-            paragraphs.append("<p id=\"\(id)\" smilref=\"sync.smil#\(par)\">\(escape(segment.text))</p>")
+            if segment.heading != nil {
+                if sectionOpen { paragraphs.append("</level2>") }
+                paragraphs.append("<level2><h2 id=\"\(id)\" smilref=\"sync.smil#\(par)\">\(escape(segment.text))</h2>")
+                sectionOpen = true
+            } else {
+                paragraphs.append("<p id=\"\(id)\" smilref=\"sync.smil#\(par)\">\(escape(segment.text))</p>")
+            }
             pars.append("<par id=\"\(par)\"><text src=\"book.xml#\(id)\"/><audio src=\"\(file)\" clipBegin=\"00:00:00\" clipEnd=\"\(clock(duration))\"/></par>")
             manifest.append("<item id=\"audio\(number)\" href=\"\(file)\" media-type=\"audio/x-wav\"/>")
             totalSeconds += duration
             await progress(number, segments.count)
         }
+        if sectionOpen { paragraphs.append("</level2>") }
         try Task.checkCancellation()
         guard !pars.isEmpty else { throw NativeGeminiAudioExport.ExportError.empty }
 

@@ -12,14 +12,14 @@ class ReaderGeminiDaisyExportContractTest {
         val daisy = source("NativeGeminiDaisyExport.kt")
         listOf("book.opf", "book.xml", "book.ncx", "sync.smil",
             "smilref", "clipBegin", "clipEnd", "ZipOutputStream",
-            "NativeGeminiSpeech.generate", "PLACEHOLDER_UNITS",
+            "synthesize(spoken, voice)", "PLACEHOLDER_UNITS",
             "written.joinToString", "parallel.joinToString"
         ).forEach { part -> assertTrue("Missing $part", daisy.contains(part)) }
     }
 
     @Test fun outputIsOfferedWithARealZipMimeAndSavedAsZip() {
         val actions = source("NativeReaderDocumentActions.kt")
-        assertTrue(actions.contains("listOf(\"M4A\", \"WAV\", \"DAISY\")"))
+        assertTrue(actions.contains("listOf(\"MP3\", \"M4A\", \"WAV\", \"DAISY\")"))
         assertTrue(actions.contains("NativeGeminiDaisyExport.generate"))
         assertTrue(actions.contains("CreateDocument(\"application/zip\")"))
         assertTrue(actions.contains("exportAudioDAISY.launch(labelFile(\"zip\"))"))

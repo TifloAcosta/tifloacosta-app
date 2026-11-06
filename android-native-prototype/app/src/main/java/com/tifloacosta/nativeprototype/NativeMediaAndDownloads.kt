@@ -6,6 +6,8 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Environment
 import android.util.Xml
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -280,6 +282,23 @@ private fun episodesFromRss(xml: String): List<NativeEpisode> {
 @Composable
 fun NativePodcastScreen(english: Boolean, media: List<MediaItem>) {
     val context = LocalContext.current
+    val library = remember { NativePodcastLibrary(context) }
+    var favorites by remember { mutableStateOf(library.favorites()) }
+    var followed by remember { mutableStateOf(library.subscriptions()) }
+    var libraryNotice by remember { mutableStateOf("") }
+    val importOPML = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri != null) {
+            runCatching { library.importOPML(uri) }
+                .onSuccess { count ->
+                    followed = library.subscriptions()
+                    libraryNotice = if (english) "Imported $count podcast subscriptions."
+                        else "Suscripciones importadas: $count."
+                }.onFailure {
+                    libraryNotice = if (english) "Could not import OPML."
+                        else "No se pudo importar el archivo OPML."
+                }
+        }
+    }
     val scope = rememberCoroutineScope()
     var episodes by remember { mutableStateOf<List<NativeEpisode>>(emptyList()) }
     var status by remember { mutableStateOf("") }
@@ -305,6 +324,25 @@ fun NativePodcastScreen(english: Boolean, media: List<MediaItem>) {
     }
     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
         if (status.isNotBlank()) Text(status)
+        Text(if (english) "Podcast library" else "Biblioteca de pódcast",
+            style = MaterialTheme.typography.titleMedium, modifier = Modifier.semantics { heading() })
+        Button(onClick = {
+            library.follow("Canal TifloAcosta", "https://anchor.fm/s/5b48ca28/podcast/rss")
+            followed = library.subscriptions()
+            libraryNotice = if (english) "Subscription saved." else "Suscripción guardada."
+        }) { Text(if (english) "Follow TifloAcosta podcast" else "Seguir el pódcast TifloAcosta") }
+        Button(onClick = { importOPML.launch(arrayOf("text/xml", "application/xml", "text/x-opml", "*/*")) }) {
+            Text(if (english) "Import OPML subscriptions" else "Importar suscripciones OPML")
+        }
+        Text(if (english) "Favorite episodes: ${favorites.size}" else "Episodios favoritos: ${favorites.size}")
+        if (libraryNotice.isNotBlank()) Text(libraryNotice)
+        followed.forEach { podcast ->
+            Text(podcast.title)
+            TextButton(onClick = {
+                library.unfollow(podcast.url)
+                followed = library.subscriptions()
+            }) { Text((if (english) "Unfollow: " else "Dejar de seguir: ") + podcast.title) }
+        }
         chosen?.let { current ->
             Text(current.title, style = MaterialTheme.typography.titleMedium)
             androidx.compose.foundation.layout.Row {
@@ -361,6 +399,14 @@ fun NativePodcastScreen(english: Boolean, media: List<MediaItem>) {
                         player.prepareAsync()
                     }.onFailure { status = if (english) "Audio error" else "Error de audio" }
                 }) { Text(episode.title) }
+                TextButton(onClick = {
+                    val added = library.toggleFavorite(episode.url)
+                    favorites = library.favorites()
+                    libraryNotice = if (english) (if (added) "Added to favorites." else "Removed from favorites.")
+                        else (if (added) "Añadido a favoritos." else "Retirado de favoritos.")
+                }) { Text((if (episode.url in favorites)
+                    (if (english) "Remove favorite: " else "Quitar de favoritos: ")
+                    else (if (english) "Add favorite: " else "Añadir a favoritos: ")) + episode.title) }
             }
         }
     }

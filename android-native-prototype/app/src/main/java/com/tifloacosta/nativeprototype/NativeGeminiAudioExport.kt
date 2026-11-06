@@ -59,18 +59,18 @@ internal object NativeGeminiAudioExport {
     suspend fun generate(context: Context, text: String, voice: String,
                          progress: suspend (Int, Int) -> Unit): ByteArray {
         val fragments = chunks(text)
-        val pcm = ByteArrayOutputStream()
+        val combined = ByteArrayOutputStream()
         fragments.forEachIndexed { index, part ->
             currentCoroutineContext().ensureActive()
             if (part.isNotBlank()) {
                 val audio = NativeGeminiSpeech.generate(context, part, voice)
-                pcm.write(pcm(audio))
+                combined.write(pcm(audio))
             }
             progress(index + 1, fragments.size)
         }
         currentCoroutineContext().ensureActive()
-        require(pcm.size() > 0) { "No se recibió audio." }
-        return wav(pcm.toByteArray())
+        require(combined.size() > 0) { "No se recibió audio." }
+        return wav(combined.toByteArray())
     }
 
     private fun wav(data: ByteArray, rate: Int = 24000): ByteArray {

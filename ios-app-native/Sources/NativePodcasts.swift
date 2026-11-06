@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 import AVFoundation
 import Combine
+import UniformTypeIdentifiers
 
 struct NativePodcastEpisode: Identifiable {
     let id: String
@@ -166,6 +167,44 @@ struct NativePodcastScreen: View {
     @EnvironmentObject private var store: NativePodcastStore
     @StateObject private var player = NativePodcastPlayer()
     @State private var visible = 10
+    @StateObject private var library = NativePodcastLibrary()
+    @State private var choosingOPML = false
+    @State private var importingOPML = false
+    @State private var followedEpisodes: [NativePodcastEpisode] = []
+    @State private var followedFeedTitle = ""
+    @State private var followedFeedStatus = ""
+    @State private var followedFeedBusy = false
+
+    @MainActor
+    private func loadFollowed(_ feed: NativeFollowedPodcast) async {
+        guard !followedFeedBusy, let url = URL(string: feed.url),
+              ["http", "https"].contains(url.scheme?.lowercased() ?? "") else { return }
+        followedFeedBusy = true
+        followedFeedTitle = feed.title
+        followedFeedStatus = "Consultando episodios."
+        defer { followedFeedBusy = false }
+        do {
+            var request = URLRequest(url: url)
+            request.timeoutInterval = 20
+            let (data, response) = try await URLSession.shared.data(for: request)
+            guard data.count <= 2_000_000, (response as? HTTPURLResponse)?.statusCode == 200
+            else { throw URLError(.badServerResponse) }
+            let parser = XMLParser(data: data)
+            let delegate = NativeRSSParser()
+            parser.shouldResolveExternalEntities = false
+            parser.delegate = delegate
+            guard parser.parse() else { throw URLError(.cannotParseResponse) }
+            followedEpisodes = Array(delegate.episodes.prefix(100))
+            let newCount = library.recordFeedCheck(feed, episodes: followedEpisodes)
+            followedFeedStatus = followedEpisodes.isEmpty
+                ? "Este canal no tiene episodios de audio compatibles."
+                : newCount == 0 ? "Sin episodios nuevos desde la consulta anterior."
+                : "Episodios nuevos desde la consulta anterior: \(newCount)."
+        } catch {
+            followedEpisodes = []
+            followedFeedStatus = "No se pudieron consultar los episodios de este canal."
+        }
+    }
 
     private func clock(_ value: Double) -> String {
         let seconds = Int(max(0, value))
@@ -209,8 +248,14 @@ struct NativePodcastScreen: View {
                     }
                     .accessibilityHint("Doble toque para reproducir dentro de TifloAcosta.")
                     .accessibilityAction(named: Text("Reproducir")) { player.select(episode) }
+                    .accessibilityAction(named: Text(library.isFavorite(episode) ? "Quitar de favoritos" : "Añadir a favoritos")) {
+                        library.toggleFavorite(episode)
+                    }
                     .accessibilityAction(named: Text("Compartir")) {
                         NativeShare.present(url: episode.audioURL)
+                    }
+                    Button(library.isFavorite(episode) ? "Quitar de favoritos: \(episode.title)" : "Añadir a favoritos: \(episode.title)") {
+                        library.toggleFavorite(episode)
                     }
                 }
                 if visible < store.episodes.count {
@@ -218,6 +263,47 @@ struct NativePodcastScreen: View {
                 }
                 Button("Actualizar episodios") {
                     Task { await store.refresh() }
+                }
+            }
+            Section("Seguir pódcast y favoritos") {
+                Text("Favoritos guardados: \(library.favorites.count)")
+                ForEach(library.savedEpisodes) { saved in
+                    if let url = URL(string: saved.audioURL) {
+                        Button("Reproducir favorito: \(saved.title)") {
+                            player.select(NativePodcastEpisode(id: saved.id, title: saved.title,
+                                                              audioURL: url, publicationDate: ""))
+                        }
+                        Button("Quitar favorito: \(saved.title)") {
+                            library.toggleFavorite(NativePodcastEpisode(id: saved.id, title: saved.title,
+                                                                       audioURL: url, publicationDate: ""))
+                        }
+                    }
+                }
+                Text(library.notice).accessibilityAddTraits(.updatesFrequently)
+                Button("Seguir el pódcast TifloAcosta") {
+                    library.follow(title: "Canal TifloAcosta", url: "https://anchor.fm/s/5b48ca28/podcast/rss")
+                }
+                Button("Importar suscripciones OPML") { choosingOPML = true }
+                    .disabled(importingOPML)
+                if importingOPML { ProgressView("Importando suscripciones") }
+                ForEach(library.followed) { feed in
+                    Text(feed.title)
+                    Button("Consultar episodios: \(feed.title)") {
+                        Task { await loadFollowed(feed) }
+                    }
+                    Button("Dejar de seguir: \(feed.title)") { library.unfollow(feed) }
+                }
+                if followedFeedBusy { ProgressView("Cargando episodios seguidos") }
+                if !followedFeedStatus.isEmpty { Text(followedFeedStatus) }
+                if !followedEpisodes.isEmpty {
+                    Text("Episodios de \(followedFeedTitle)").font(.headline)
+                    ForEach(followedEpisodes) { episode in
+                        Button("Reproducir: \(episode.title)") { player.select(episode) }
+                        Button(library.isFavorite(episode) ? "Quitar de favoritos: \(episode.title)" :
+                               "Añadir a favoritos: \(episode.title)") {
+                            library.toggleFavorite(episode)
+                        }
+                    }
                 }
             }
             Section("Escuchar en otras plataformas") {
@@ -239,5 +325,19 @@ struct NativePodcastScreen: View {
             if player.episode != nil { player.updatePosition() }
         }
         .onDisappear { player.stop() }
+        .fileImporter(isPresented: $choosingOPML,
+                      allowedContentTypes: [.xml, UTType(filenameExtension: "opml") ?? .xml],
+                      allowsMultipleSelection: false) { result in
+            Task { @MainActor in
+                importingOPML = true
+                defer { importingOPML = false }
+                do {
+                    guard let url = try result.get().first else { return }
+                    _ = try await library.importOPML(url)
+                } catch {
+                    library.notice = "No se pudo importar el OPML: \(error.localizedDescription)"
+                }
+            }
+        }
     }
 }

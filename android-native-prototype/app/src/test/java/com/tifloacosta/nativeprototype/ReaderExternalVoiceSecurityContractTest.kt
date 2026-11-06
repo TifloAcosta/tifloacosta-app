@@ -23,6 +23,6 @@ class ReaderExternalVoiceSecurityContractTest {
         assertTrue(settings.contains("NativeReaderExternalVoiceKeysScreen"))
         val keys = source("NativeReaderExternalVoiceKeys.kt")
         assertTrue(keys.contains("Phonon"))
-        assertTrue(keys.contains("La voz Gemini se activará cuando la integración esté verificada"))
+        assertTrue(keys.contains("La muestra genera audio real y puede consumir cuota"))
     }
 }

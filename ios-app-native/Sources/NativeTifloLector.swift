@@ -1254,6 +1254,14 @@ struct NativeReadingScreen: View {
     private var quickControls: some View {
         VStack(alignment: .leading, spacing: 6) {
             playbackRow
+            if !latest.body.isEmpty {
+                NativeAdjustableChoice(
+                    title: "Modo de navegación",
+                    choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
+                    selectedIndex: $navigationUnit
+                )
+                .accessibilityHint("Cambia cómo avanzan las acciones Unidad anterior y Unidad siguiente.")
+            }
             trackButtons
             Text(progressDescription)
                 .font(.footnote)

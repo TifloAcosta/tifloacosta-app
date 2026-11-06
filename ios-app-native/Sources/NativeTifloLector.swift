@@ -1683,7 +1683,7 @@ struct NativeReadingScreen: View {
 
     }
 
-    var body: some View {
+    private var readerBase: some View {
         VStack(spacing: 0) {
             quickControls
             Divider().accessibilityHidden(true)
@@ -1725,6 +1725,10 @@ struct NativeReadingScreen: View {
         } message: {
             Text(deletionError ?? "")
         }
+    }
+
+    private var readerSheets: some View {
+        readerBase
         .sheet(isPresented: $showDocumentInformation) {
             NavigationStack {
                 List {
@@ -1823,6 +1827,10 @@ struct NativeReadingScreen: View {
         .sheet(isPresented: $showVisualSettings) {
             NativeReaderDocumentVisualSettingsScreen(document: document)
         }
+    }
+
+    var body: some View {
+        readerSheets
         .onAppear {
             let initial = max(0, min(100, startPercent ?? latest.lastPercent ?? 0))
             trackIndex = min(max(0, startTrack ?? latest.lastTrackIndex ?? 0),

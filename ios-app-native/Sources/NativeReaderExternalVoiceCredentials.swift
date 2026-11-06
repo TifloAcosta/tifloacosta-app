@@ -129,7 +129,7 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
             }
             switch http.statusCode {
             case 200..<300:
-                message = "Conexión correcta. La generación de audio todavía no está activada."
+                message = "Conexión correcta. Puedes utilizar Gemini para leer documentos y exportar audio."
             case 401, 403:
                 message = "Clave rechazada o sin permisos. Revisa Google AI Studio."
             case 429:
@@ -255,7 +255,7 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
                 Button("Eliminar", role: .destructive) { confirmDeletion = true }
                     .disabled(!hasGeminiKey)
                 Text("La clave se guarda solamente en este iPhone. Cada usuario gestiona sus cuotas y posibles costes con Google.")
-                Text("La prueba genera audio real con Gemini y puede consumir cuota. La lectura completa de documentos continúa en desarrollo.")
+                Text("La prueba y la lectura de documentos con Gemini generan audio real y pueden consumir cuota. Elige Gemini en Motor para leer o exportar.")
             }
             if !message.isEmpty {
                 Section("Estado") {

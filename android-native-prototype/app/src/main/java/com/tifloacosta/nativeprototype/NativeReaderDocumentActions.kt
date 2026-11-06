@@ -250,7 +250,7 @@ fun NativeReaderDocumentActions(
             modifier = Modifier.semantics { heading() })
         ReaderAdjustableChoice(
             if (english) "Voice" else "Voz",
-            NativeGeminiSpeech.voices, audioVoice, english
+            NativeGeminiSpeech.voices, audioVoice
         ) { index ->
             audioVoice = index
             prefs.edit().putString("gemini.voice", NativeGeminiSpeech.voices[index]).apply()

@@ -1,5 +1,6 @@
 import Foundation
 import AVFoundation
+import SwiftMP3
 
 /// Export text to a single PCM WAV audiobook using a personal Gemini key.
 /// Each segment is generated explicitly by user action; no silent truncation.
@@ -8,6 +9,7 @@ enum NativeGeminiAudioExport {
     static let chunkSize = 1_200
 
     enum Format: String, CaseIterable, Identifiable {
+        case mp3 = "MP3"
         case m4a = "M4A"
         case wav = "WAV"
         case daisy = "DAISY"
@@ -77,6 +79,46 @@ enum NativeGeminiAudioExport {
         throw ExportError.unsupportedFormat
     }
 
+    /// SwiftMP3 encodes MPEG-1 Layer III at 48 kHz; interpolate Gemini's 24 kHz
+    /// mono PCM without using a network encoder or mislabelling the file.
+    static func mp3(pcm: Data) throws -> Data {
+        guard pcm.count % 2 == 0 else { throw ExportError.unsupportedFormat }
+        let encoder = MP3Encoder(options: MP3EncoderOptions(
+            sampleRate: 48_000, bitrateKbps: 64, mode: .mono
+        ))
+        var session = encoder.newSession()
+        var encoded = Data()
+        var position = 0
+        while position < pcm.count {
+            let end = min(pcm.count, position + 4096)
+            var samples: [Float] = []
+            samples.reserveCapacity((end - position) * 1)
+            while position < end {
+                let low = UInt16(pcm[position])
+                let high = UInt16(pcm[position + 1]) << 8
+                let raw = Int16(bitPattern: low | high)
+                let current = Float(raw) / 32768
+                let nextRaw: Int16
+                if position + 3 < pcm.count {
+                    let a = UInt16(pcm[position + 2])
+                    let b = UInt16(pcm[position + 3]) << 8
+                    nextRaw = Int16(bitPattern: a | b)
+                } else {
+                    nextRaw = raw
+                }
+                samples.append(current)
+                samples.append((current + Float(nextRaw) / 32768) * 0.5)
+                position += 2
+            }
+            encoded.append(session.encode(samples: samples))
+        }
+        encoded.append(session.flush())
+        var result = session.generateID3Tag()
+        result.append(session.generateXingHeader())
+        result.append(encoded)
+        return result
+    }
+
     static func export(text: String, title: String, voice: String, format: Format,
                        progress: @escaping @MainActor (Int, Int) -> Void) async throws -> URL {
         if format == .daisy {
@@ -107,6 +149,13 @@ enum NativeGeminiAudioExport {
             "\(safe.isEmpty ? "Documento" : String(safe))-\(UUID().uuidString).wav")
         try NativeGeminiSpeech.wav(pcm: pcmData).write(to: file, options: .atomic)
         if format == .wav { return file }
+        if format == .mp3 {
+            try Task.checkCancellation()
+            let destination = file.deletingPathExtension().appendingPathExtension("mp3")
+            try mp3(pcm: pcmData).write(to: destination, options: .atomic)
+            try FileManager.default.removeItem(at: file)
+            return destination
+        }
 
         // Convert the actual audio, never just its filename extension.
         let destination = file.deletingPathExtension().appendingPathExtension("m4a")

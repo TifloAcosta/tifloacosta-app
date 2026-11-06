@@ -16,9 +16,10 @@ class ReaderGeminiAudioFormatContractTest {
         assertTrue(export.contains("MIMETYPE_AUDIO_AAC"))
         assertTrue(export.contains("M4A(\"m4a\", \"audio/mp4\")"))
         assertTrue(export.contains("WAV(\"wav\", \"audio/wav\")"))
-        assertTrue(actions.contains("listOf(\"M4A\", \"WAV\", \"DAISY\")"))
+        assertTrue(actions.contains("listOf(\"MP3\", \"M4A\", \"WAV\", \"DAISY\")"))
         assertTrue(actions.contains("CreateDocument(\"audio/mp4\")"))
         assertTrue(actions.contains("CreateDocument(\"audio/wav\")"))
-        assertTrue(actions.contains("MP3 necesita un codificador adicional"))
+        assertTrue(export.contains("Format.MP3 -> encodeMP3(raw)"))
+        assertTrue(actions.contains("CreateDocument(\"audio/mpeg\")"))
     }
 }

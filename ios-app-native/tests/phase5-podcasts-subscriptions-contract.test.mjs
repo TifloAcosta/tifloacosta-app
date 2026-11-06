@@ -19,6 +19,9 @@ test('OPML is bounded and never resolves XML external entities', () => {
     assert.match(library, /parser\.shouldResolveExternalEntities = false/);
     assert.match(library, /func importOPML/);
     assert.match(screen, /\.fileImporter\(/);
+    assert.match(screen, /filenameExtension: "opml"/);
+    assert.match(screen, /try await library\.importOPML\(url\)/);
+    assert.match(library, /Task\.detached\(priority: \.userInitiated\)/);
 });
 
 test('followed podcasts offer feed browsing and new episode counts', () => {

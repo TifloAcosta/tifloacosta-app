@@ -183,25 +183,41 @@ final class NativeReaderLibrary: ObservableObject {
         try? save()
     }
 
-    func addBookmark(_ document: NativeReadingDocument, at percent: Int) {
-        guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
-        var bookmarks = documents[i].markedPositions ?? []
+    @discardableResult
+    func addBookmark(_ document: NativeReadingDocument, at percent: Int) -> Bool {
+        guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return false }
+        let previous = documents[i].markedPositions
+        var bookmarks = previous ?? []
         let location = max(0, min(100, percent))
         if !bookmarks.contains(location) { bookmarks.append(location) }
         documents[i].markedPositions = bookmarks.sorted()
-        try? save()
+        do {
+            try save()
+            return true
+        } catch {
+            documents[i].markedPositions = previous
+            return false
+        }
     }
 
-    func addAudioBookmark(_ document: NativeReadingDocument, track: Int, percent: Int) {
-        guard let i = documents.firstIndex(where: { $0.id == document.id }), track >= 0 else { return }
+    @discardableResult
+    func addAudioBookmark(_ document: NativeReadingDocument, track: Int, percent: Int) -> Bool {
+        guard let i = documents.firstIndex(where: { $0.id == document.id }), track >= 0 else { return false }
         let mark = NativeAudioBookmark(track: track, percent: max(0, min(100, percent)))
-        var saved = documents[i].audioBookmarks ?? []
-        guard !saved.contains(mark) else { return }
+        let previous = documents[i].audioBookmarks
+        var saved = previous ?? []
+        if saved.contains(mark) { return true }
         saved.append(mark)
         documents[i].audioBookmarks = saved.sorted {
             $0.track == $1.track ? $0.percent < $1.percent : $0.track < $1.track
         }
-        try? save()
+        do {
+            try save()
+            return true
+        } catch {
+            documents[i].audioBookmarks = previous
+            return false
+        }
     }
 
     func removeAudioBookmark(_ document: NativeReadingDocument, mark: NativeAudioBookmark) {
@@ -1103,11 +1119,13 @@ struct NativeReadingScreen: View {
 
     private func addBookmark() {
         if tracks.isEmpty {
-            library.addBookmark(document, at: currentPercent)
-            actionMessage = "Marca guardada en \(currentPercent) por ciento."
+            actionMessage = library.addBookmark(document, at: currentPercent)
+                ? "Marca guardada en \(currentPercent) por ciento."
+                : "No se pudo guardar la marca. Inténtalo de nuevo."
         } else {
-            library.addAudioBookmark(document, track: trackIndex, percent: currentPercent)
-            actionMessage = "Marca guardada en la pista \(trackIndex + 1), \(currentPercent) por ciento."
+            actionMessage = library.addAudioBookmark(document, track: trackIndex, percent: currentPercent)
+                ? "Marca guardada en la pista \(trackIndex + 1), \(currentPercent) por ciento."
+                : "No se pudo guardar la marca. Inténtalo de nuevo."
         }
     }
 
@@ -1272,8 +1290,11 @@ struct NativeReadingScreen: View {
             .onAppear {
                 // Restore the visible page as well as the stored speech cursor.
                 guard !textLayout.fragments.isEmpty else { return }
-                let index = textLayout.fragmentIndex(for: readingOffset)
-                proxy.scrollTo(index, anchor: .center)
+                Task { @MainActor in
+                    await Task.yield()
+                    let index = textLayout.fragmentIndex(for: readingOffset)
+                    proxy.scrollTo(index, anchor: .center)
+                }
             }
             .onChange(of: focusedFragment) { _, index in
                 guard let index, textLayout.fragmentStarts.indices.contains(index) else { return }

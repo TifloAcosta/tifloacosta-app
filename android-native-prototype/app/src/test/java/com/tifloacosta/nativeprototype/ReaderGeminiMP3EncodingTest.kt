@@ -13,7 +13,7 @@ class ReaderGeminiMP3EncodingTest {
         val mp3 = NativeGeminiAudioExport.encodeMP3(pcm)
         assertTrue("MP3 has no audio data", mp3.size > 100)
         // ID3 may precede frames. Look for a valid MPEG sync marker.
-        assertTrue("Missing MPEG frame header", mp3.indices.dropLast(1).any { i ->
+        assertTrue("Missing MPEG frame header", (0 until mp3.size - 1).any { i ->
             (mp3[i].toInt() and 255) == 255 &&
                 (mp3[i + 1].toInt() and 0xE0) == 0xE0
         })

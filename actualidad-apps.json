@@ -120,6 +120,18 @@
     "publishedAt": null
   },
   {
+    "id": "applevis-apps-97426edd893ada85",
+    "title": "Sonnounce",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/utilities/sonnounce",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "Send announcements to the Sonos speakers in your house – in your own voice. Pick the speakers you want, hold the button down while you talk, and let go. The announcement plays right away. While the announcement plays, the music is turned down, and afterwards it comes back up. The announcement itself plays at the volume the speaker is already set to. NO ACCOUNT. NO CLOUD. NO SUBSCRIPTION. The app talks directly to the speakers on your own network. The sound is recorded on the phone, and the speaker fetches it from there. Your voice never leaves the house. An announcement can be up to five minutes long. FROM YOUR WRIST With Apple Watch you can record an announcement straight from your wrist. The watch passes it on through your iPhone. SHORTCUTS Type a text in Shortcuts, and the phone reads it aloud on your speakers. It is read aloud in the language the app is set to. Use it in automations, for example when dinner is ready or when someone rings the doorbell. You can also have the most recent announcement repeated. AWAY FROM HOME With a Homey Pro you can send announcements home even when you are out. This requires the Sonnounce app to be installed on your Homey as well. If you have a VPN to your home, you can also send announcements that way. SAVE THE ANNOUNCEMENTS With a Homey you can save every announcement sent in the house. They are kept on your own Homey at home – not in the cloud – and you can download them to your iPhone. Requires Sonos speakers on the same Wi-Fi as the phone.",
+    "publishedAt": "2026-11-06T10:48:27.000Z"
+  },
+  {
     "id": "applevis-apps-7e5a05a96328b998",
     "title": "My Little Window",
     "sourceId": "applevis-apps",
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "This innovative app offers audio feedback on the user’s foundation, eyeshadow and lipstick application, creating a more accessible beauty experience for the Blind and visually impaired. How It Works: The AI-powered Voice-enabled Makeup Assistant leverages machine learning and voice instruction technologies to learn your preferences and provide audio feedback when you ask. After you apply your foundation, eyeshadow or lipstick, the app will access your phone’s front camera to scan your face. Using artificial intelligence, it identifies the makeup applied to your face, eyes and lips and assesses the uniformity and boundaries of application and coverage. If there are suggested areas to touch up, the virtual assistant identifies them and makes audible recommendations so you can adjust your look. After your touch up, the app scans your face again and provides feedback on the accuracy of application.",
     "publishedAt": "2026-10-29T22:04:09.000Z"
-  },
-  {
-    "id": "applevis-apps-4d3d0113a716d93b",
-    "title": "GemGame: Cozy Match 3 Puzzle",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/gemgame-cozy-match-3-puzzle",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "A cozy match 3 puzzle with no ads and offline play, now in a rich new Velvet design. Swap jewels, chain sparkling cascades and restore a magical garden, one clever move at a time. Discover five connected worlds, from the Living Conservatory to the Heart of the Void. Make clever matches, face each guardian and bring its world back to life. PLAYABLE WITH VOICEOVER GemGame plays with VoiceOver. Every gem and obstacle on the board has a clear spoken label, a Board status element counts obstacles and ingredients, and a Special gems element counts specials. Each move is summarised after it settles, including the chain multiplier. Purchased hints name the exact pair to swap, and rejected moves explain why without spending a move. AWAKEN THE FIVE WORLDS Restore the Conservatory's light, reconnect the Nebula Waterways, unfold the Aurora Observatory, illuminate the Plasma Forge and awaken the Heart of the Void. Your campaign progress makes each transformation permanent. Return to choose free lighting, replay the awakening and pursue optional mastery. LEARN A SPECTACULAR NEXT MOVE Try five world encounters in the free Jewel Lab. Experiment with real puzzle rules and unlimited practice retries, without spending lives or earning campaign rewards. Combine striped, wrapped, rainbow and comet specials, clear obstacles and take on cosmic guardians. A GARDEN WORTH COMING BACK TO Restore fountains, flowering corners and peaceful places to sit. Choose decorative finishes, discover new districts and welcome butterflies, songbirds and other woodland visitors as you play. A LITTLE ADVENTURE, YOUR WAY • Daily Star: a fresh free puzzle each day, with no life cost. Keep your streak going. • Relic Run: draft relics and climb five boards in a single free run. • Weekend Gauntlet: a Friday-to-Sunday sudden-death ladder. How far can you climb? • The Atelier: discover cosmetic themes for your board. MAKE ROOM FOR A COZY MOMENT No ads interrupt your game. Core puzzles work offline, and levels are move-based, so there is no countdown rushing your next swap. Campaign lives refill over time; Daily Star gives you a free daily board without spending a life. GemGame is free to download. The optional Complete Collection is one permanent purchase: all five premium chapter reward tracks plus 50 Hard Mode puzzles. Rewards are earned as you play; the base campaign and garden remain free. Existing chapter-pass or Hard Mode owners receive the collection through Restore Purchases at no extra cost. Coin packs remain optional. Some decorative finishes require premium access. Purchases and Game Center features require an internet connection. Your next little escape is waiting.",
-    "publishedAt": "2026-10-29T19:14:26.000Z"
   }
 ]

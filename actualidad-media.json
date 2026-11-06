@@ -1,5 +1,22 @@
 [
   {
+    "id": "cnet:https://www.youtube.com/watch?v=tGNsrekqdyk",
+    "type": "video",
+    "section": "technology",
+    "sourceId": "cnet",
+    "sourceName": "CNET",
+    "sourceUrl": "https://www.youtube.com/@CNET",
+    "originalUrl": "https://www.youtube.com/watch?v=tGNsrekqdyk",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-06T03:52:35.000Z",
+    "title": "Bill Trinen on 40th Anniversary of The Legend of Zelda: Ocarina of Time",
+    "summary": "CNET social producer Faith Chihil had a chat with Nintendo legend Bill Trinen on Legend of Zelda: Ocarina of Time Switch 2 remake launch day at the SF Nintendo store. #legendofzelda #ocarinaoftime #switch2 #nintendo #nintendoswitch #allaccess",
+    "mediaUrl": null,
+    "embedUrl": "https://www.youtube.com/embed/tGNsrekqdyk",
+    "platform": "youtube",
+    "categories": []
+  },
+  {
     "id": "imanu-mx:https://www.youtube.com/watch?v=hN_sUcfqme8",
     "type": "video",
     "section": "technology",
@@ -387,23 +404,6 @@
     "summary": "¿Te imaginas tener un agente de IA que siga trabajando aunque cierres tu ordenador? 🤯\n📌 Se llama Dots y es una propuesta de OpenAI para delegar tareas, conectar aplicaciones como Gmail o Slack y gestionar varios proyectos en paralelo. 🤖\n•\nTambién puedes personalizarlo y configurar cuándo debe pedirte autorización antes de realizar determinadas acciones. 💻\n⚠️ Su disponibilidad depende del país y del acceso habilitado para cada cuenta.\n•\n👉🏻 Si quieres saber más, ingresa al link https://claude.ai/artifact/AmdkQT2q9A83PA2yNPUh6E#c9353f9a-7289\n🔗 Visita el enlace de mi bio para unirte a mi comunidad exclusiva y descubrir más herramientas de IA.\n•\n#OpenAI #Dots #InteligenciaArtificial #AgentesIA #Automatizacion #ChatGPT #Productividad #AITools",
     "mediaUrl": null,
     "embedUrl": "https://www.youtube.com/embed/p0brY6LAGFc",
-    "platform": "youtube",
-    "categories": []
-  },
-  {
-    "id": "cnet:https://www.youtube.com/watch?v=6HX_GU5BdNc",
-    "type": "video",
-    "section": "technology",
-    "sourceId": "cnet",
-    "sourceName": "CNET",
-    "sourceUrl": "https://www.youtube.com/@CNET",
-    "originalUrl": "https://www.youtube.com/watch?v=6HX_GU5BdNc",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-05T14:00:32.000Z",
-    "title": "Unboxing the $1,999 14\" M6 MacBook Pro",
-    "summary": "Apple’s M6 chip has come to its MacBook Pro line, and honestly the design and pricing stays the same.\n\nBut, the M6 chip in the ‌MacBook Pro‌ features a 12-core CPU and a 12-core GPU. The previous M5 model had a 10-core CPU and a 10-core GPU.\n\nUnbox the 14-inch M6 MacBook Pro in silver with us. #unboxing #macbookpro #labreport #m6chip #apple\n\nYou can find the products mentioned in this video linked below\n*CNET may get a commission on these offers\n\nRead more about it on CNET.com\n\n\nVideo Credits:\nHost: Tara Brown\nVideo Editor: Wesley Ott\n\nAdd CNET as a trusted news source https://www.google.com/preferences/source?q=cnet.com\nNever miss a deal again! See CNET’s browser extension 👉 https://bit.ly/3lO7sOU\nCheck out CNET’s Amazon Storefront: https://www.amazon.com/shop/cnet\nSubscribe to CNET on YouTube: https://www.youtube.com/cnet\nFollow us on TikTok: https://www.tiktok.com/@cnetdotcom\nFollow us on Instagram: https://www.instagram.com/cnet\nFollow us on Bluesky: https://bsky.app/profile/cnet.com\nLike us on Facebook: https://www.facebook.com/cnet\nCNET's AI Atlas: https://www.cnet.com/ai-atlas\nFollow us on X: https://www.x.com/cnet\nVisit CNET.com:  https://www.cnet.com",
-    "mediaUrl": null,
-    "embedUrl": "https://www.youtube.com/embed/6HX_GU5BdNc",
     "platform": "youtube",
     "categories": []
   },

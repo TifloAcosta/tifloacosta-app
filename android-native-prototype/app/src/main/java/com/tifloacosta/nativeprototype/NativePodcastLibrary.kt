@@ -38,6 +38,19 @@ internal class NativePodcastLibrary(context: Context) {
         return uri.scheme in setOf("https", "http") && !uri.host.isNullOrBlank()
     }
 
+    /** The first check establishes a baseline; only subsequent feed updates count as new. */
+    fun recordFeedCheck(feedUrl: String, episodeUrls: List<String>): Int {
+        val newest = episodeUrls.firstOrNull() ?: return 0
+        val key = "latest:" + feedUrl
+        val previous = prefs.getString(key, null)
+        val count = if (previous == null) 0 else
+            episodeUrls.indexOf(previous).takeIf { it >= 0 } ?: 0
+        check(prefs.edit().putString(key, newest).commit()) {
+            "No se pudo guardar el seguimiento del pódcast."
+        }
+        return count
+    }
+
     fun follow(title: String, url: String): Boolean {
         if (!validFeed(url)) return false
         val previous = subscriptions()

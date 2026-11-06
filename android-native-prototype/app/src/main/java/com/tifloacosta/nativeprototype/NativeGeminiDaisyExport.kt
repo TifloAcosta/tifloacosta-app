@@ -106,7 +106,7 @@ internal object NativeGeminiDaisyExport {
         if (sectionOpen) written += "</level2>"
         currentCoroutineContext().ensureActive()
         require(parallel.isNotEmpty()) { "No se ha generado audio." }
-        val first = "par" + (parts.indexOfFirst { it.isNotBlank() } + 1)
+        val first = firstPar
         val total = clock(duration)
         val dtbook = """
             <?xml version="1.0" encoding="utf-8"?>

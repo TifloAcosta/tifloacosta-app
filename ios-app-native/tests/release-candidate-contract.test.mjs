@@ -23,7 +23,7 @@ test('candidate retains public bundle identifier and shared container', () => {
 test('candidate CI compiles without a TestFlight upload', () => {
   assert.match(reviewWorkflow, /release\/ios-candidate-phases1-6-20261106/);
   assert.match(reviewWorkflow, /CODE_SIGNING_ALLOWED=NO build/);
-  assert.match(uploadWorkflow, /branches: \[main\]/);
+  assert.match(uploadWorkflow, /branches: \[main, release\/ios-candidate-phases1-6-20261106\]/);
   assert.doesNotMatch(reviewWorkflow, /altool --upload-app/);
 });
 

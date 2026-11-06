@@ -6,7 +6,7 @@ Estado de la rama de desarrollo: el motor de Phonon ya cuenta con bibliotecas re
 
 - Código y bibliotecas oficiales: https://github.com/gradium-ai/xn-ptts
 - Phonon 31m (solo inglés): Apache 2.0. Modelo de aproximadamente 64 MB; compatible con desarrollo de aplicaciones y casos comerciales conforme a la licencia.
-- Phonon 40m (español y otros idiomas), incluido el multilingüe: CC BY-NC 4.0. Se requiere respetar la restricción no comercial, atribución, consentimiento del usuario para las condiciones aplicables y, ante cualquier explotación comercial, autorización separada de Gradium. Que la aplicación sea gratuita no resuelve por sí solo todas las dudas sobre el uso comercial.
+- Phonon 40m (español y otros idiomas), incluido el multilingüe: CC BY-NC 4.0, y acceso sujeto a aceptación de condiciones en Hugging Face. Exigir aceptación de las condiciones aplicables y respetar atribución y restricción no comercial; ante uso comercial, obtener autorización del titular. Que la aplicación sea gratuita no constituye por sí solo una autorización para todos los usos.
 - Las voces y los modelos pueden tener atribuciones y términos propios; revisar antes de redistribuir.
 - Phonon local no requiere claves API; no solicitar ni guardar una clave Phonon.
 
@@ -34,4 +34,4 @@ Guía oficial https://github.com/gradium-ai/xn-ptts/blob/main/android/README.md 
 5. Exportar MP3/M4A/DAISY desde los mismos fragmentos, con archivo real y verificación externa.
 6. Probar VoiceOver y TalkBack en dispositivos físicos. No publicar antes de superar estas pruebas.
 
-En esta fase las interfaces nativas ya permiten gestionar voces de los motores de voz del sistema y Gemini; Phonon embebido sigue **sin implementarse**.
+En esta rama de desarrollo ya hay un motor Phonon local implementado mediante bibliotecas nativas y conexión Kotlin, además de las opciones del sistema y Gemini. Las compilaciones automáticas de Android han resultado satisfactorias, pero esto no acredita la generación de voz con modelos reales, el uso accesible con TalkBack ni una distribución autorizada. Las muestras de voz se adaptan al idioma seleccionado: español, inglés, francés, alemán o portugués. El modelo instalado debe soportar realmente ese idioma. No se ha fusionado ni publicado.

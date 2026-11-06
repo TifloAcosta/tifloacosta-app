@@ -8,7 +8,7 @@ const settings = readFileSync(new URL('../Sources/NativeReaderSettings.swift', i
 test('Navigation options expose bookmarks and time only when supported', () => {
   assert.match(reader, /\(5, "Marcas"\), \(6, "Tiempo, un minuto"\)/);
   assert.match(reader, /"Tiempo estimado, un minuto"/);
-  assert.match(reader, /title: "Modo de navegación"/);
+  assert.match(reader, /title: "Navegación"/);
   assert.match(settings, /"Marcas", "Tiempo, un minuto \(real en audio, estimado en TTS\)"/);
 });
 

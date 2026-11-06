@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-06T10:57:42.648Z",
+  "generatedAt": "2026-11-06T11:33:15.244Z",
   "resources": [
     {
       "kind": "resource",
@@ -6275,22 +6275,6 @@
       "publishedAt": "2026-10-27T21:28:52.000Z",
       "categories": [
         "apple",
-        "tecnologia-accesibilidad",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "usable-y-accesible-abf5b9e71d503d9d:es",
-      "sourceId": "usable-y-accesible-abf5b9e71d503d9d",
-      "lang": "es",
-      "title": "Asistente para identificar los requisitos de accesibilidad aplicables a las TIC - EN 301 549 V4.1.1 (2026)",
-      "summary": "En este artículo os recomiendo la herramienta del Gobierno de Canadá ICT accessibility requirements wizard - EN 301 549 V4.1.1 (2026), que ayuda a identificar los requisitos de la norma que aplican a un producto o servicio TIC. La nueva versión de la EN 301 549 v4.1.1 tiene más de 300 requisitos. Esta herramienta permite filtrarlos en función de sus condiciones de aplicación para obtener el",
-      "body": "Nota 1: como todos los artículos de este blog, este artículo NO está promocionado.\n\nNota 2: como todos los artículos de este blog, este artículo se ha ideado y elaborado sin el uso de herramientas IA, solo se han usado para la revisión final de la ortografía.\n\nAutor: Olga Carreras Montoto\n\nEtiquetas: EN 301 549 , herramientas\n\nCompártelo en:\n\nHistórico de artículos:\n\nSubir al comienzo de la página",
-      "sourceName": "Usable y accesible",
-      "originalUrl": "https://olgacarreras.blogspot.com/2026/10/asistente-para-identificar-los.html",
-      "publishedAt": "2026-10-27T11:13:42.674Z",
-      "categories": [
         "tecnologia-accesibilidad",
         "apps-accesibles"
       ]

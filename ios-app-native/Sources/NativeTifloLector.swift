@@ -1638,6 +1638,51 @@ struct NativeReadingScreen: View {
         Button("Cancelar", role: .cancel) {}
     }
 
+    private var exportAudioSheet: some View {
+            NavigationStack {
+                List {
+                    Section("Gemini") {
+                        Text("Se utilizará tu clave personal y puede consumirse cuota.")
+                        Picker("Voz", selection: $geminiVoice) {
+                            ForEach(NativeGeminiSpeech.voices, id: \.self) { name in
+                                Text(name).tag(name)
+                            }
+                        }
+                        Picker("Formato", selection: $audioExportFormat) {
+                            Text("M4A").tag(NativeGeminiAudioExport.Format.m4a)
+                            Text("WAV").tag(NativeGeminiAudioExport.Format.wav)
+                            Text("DAISY").tag(NativeGeminiAudioExport.Format.daisy)
+                        }
+                        .disabled(audioExportBusy)
+                        Text("DAISY incluye texto, audio y navegación. La compatibilidad externa está pendiente de validación.")
+                        Text("MP3 estará disponible cuando se incorpore el codificador.")
+                        Button("Generar") { exportAudio() }
+                            .disabled(audioExportBusy || latest.body.isEmpty)
+                        if audioExportBusy {
+                            Button("Cancelar", role: .cancel) {
+                                audioExportTask?.cancel()
+                            }
+                        }
+                        if !audioExportStatus.isEmpty {
+                            Text(audioExportStatus).accessibilityAddTraits(.updatesFrequently)
+                        }
+                        if let result = audioExportResult {
+                            Button("Compartir") { NativeShare.present(url: result) }
+                        }
+                        Text("Límite por documento: 60.000 caracteres.")
+                    }
+                }
+                .tifloScreenSurface()
+                .navigationTitle("Exportar audio")
+                .toolbar {
+                    Button("Cerrar") {
+                        showAudioExport = false
+                    }
+                }
+            }
+
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             quickControls
@@ -1771,49 +1816,7 @@ struct NativeReadingScreen: View {
         .sheet(isPresented: $showWordTools) {
             NativeReaderWordToolsScreen(voiceIdentifier: effectiveVoiceID, pitch: pitch)
         }
-        .sheet(isPresented: $showAudioExport) {
-            NavigationStack {
-                List {
-                    Section("Gemini") {
-                        Text("Se utilizará tu clave personal y puede consumirse cuota.")
-                        Picker("Voz", selection: $geminiVoice) {
-                            ForEach(NativeGeminiSpeech.voices, id: \.self) { name in
-                                Text(name).tag(name)
-                            }
-                        }
-                        Picker("Formato", selection: $audioExportFormat) {
-                            Text("M4A").tag(NativeGeminiAudioExport.Format.m4a)
-                            Text("WAV").tag(NativeGeminiAudioExport.Format.wav)
-                            Text("DAISY").tag(NativeGeminiAudioExport.Format.daisy)
-                        }
-                        .disabled(audioExportBusy)
-                        Text("DAISY incluye texto, audio y navegación. La compatibilidad externa está pendiente de validación.")
-                        Text("MP3 estará disponible cuando se incorpore el codificador.")
-                        Button("Generar") { exportAudio() }
-                            .disabled(audioExportBusy || latest.body.isEmpty)
-                        if audioExportBusy {
-                            Button("Cancelar", role: .cancel) {
-                                audioExportTask?.cancel()
-                            }
-                        }
-                        if !audioExportStatus.isEmpty {
-                            Text(audioExportStatus).accessibilityAddTraits(.updatesFrequently)
-                        }
-                        if let result = audioExportResult {
-                            Button("Compartir") { NativeShare.present(url: result) }
-                        }
-                        Text("Límite por documento: 60.000 caracteres.")
-                    }
-                }
-                .tifloScreenSurface()
-                .navigationTitle("Exportar audio")
-                .toolbar {
-                    Button("Cerrar") {
-                        showAudioExport = false
-                    }
-                }
-            }
-        }
+        .sheet(isPresented: $showAudioExport) { exportAudioSheet }
         .sheet(isPresented: $showAudioSettings) {
             NativeReaderDocumentAudioSettingsScreen(document: document)
         }

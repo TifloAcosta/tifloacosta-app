@@ -1155,6 +1155,17 @@ struct NativeReadingScreen: View {
         speech.sleep(after: speech.isPlaying ? sleepMinutes[index] : 0)
     }
 
+    private func refreshTextVoice() {
+        // Update the current TTS voice without losing the saved reading cursor
+        // or starting playback when the reader was stopped.
+        guard tracks.isEmpty, speech.isPlaying || speech.isPaused else { return }
+        let paused = speech.isPaused
+        persistPosition()
+        startTextSpeech()
+        if paused { speech.pause() }
+        else { applySleepTimer() }
+    }
+
     private func playTrack() {
         guard tracks.indices.contains(trackIndex),
               NativeReaderFormats.storedURL(for: tracks[trackIndex]) != nil else {
@@ -1748,6 +1759,15 @@ struct NativeReadingScreen: View {
         }
         .onChange(of: sleepIndex) { _, _ in
             applySleepTimer()
+        }
+        .onChange(of: effectiveVoiceID) { _, _ in
+            refreshTextVoice()
+        }
+        .onChange(of: effectiveSpeedIndex) { _, _ in
+            refreshTextVoice()
+        }
+        .onChange(of: effectivePitchIndex) { _, _ in
+            refreshTextVoice()
         }
         .onReceive(speech.$textUTF16Offset) { utf16Offset in
             // Keep the actual spoken word position instead of reversing a rounded percentage.

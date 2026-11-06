@@ -270,7 +270,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                     }
                 })
                 tts?.language = Locale.getDefault()
-                if (playing && kind == "text" && !geminiEnabled) speakCurrent()
+                if (playing && kind == "text" && !geminiEnabled && !phononEnabled) speakCurrent()
             } else if (kind == "text") {
                 publish("No se pudo inicializar el motor de voz de Android.")
                 pauseReading()

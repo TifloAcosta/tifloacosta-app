@@ -135,6 +135,7 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
                     withContext(Dispatchers.IO) {
                         NativePhononModelStore.importZip(context, uri)
                     }
+                    phononPreview.refreshModel()
                     phononModelInstalled = true
                     if (english) "Phonon model installed locally."
                     else "Modelo Phonon instalado en el dispositivo."
@@ -294,6 +295,7 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
             if (phononDeleteConfirm) {
                 Text(if (english) "Delete installed Phonon model?" else "¿Eliminar el modelo Phonon?")
                 Button(onClick = {
+                    phononPreview.refreshModel()
                     phononModelInstalled = !NativePhononModelStore.remove(context)
                     phononDeleteConfirm = false
                     message = if (phononModelInstalled) "No se pudo eliminar el modelo."

@@ -261,9 +261,13 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
                     message = if (english) "Playing Phonon sample."
                         else "Reproduciendo muestra Phonon."
                     phononPreview.speak(
-                        if (phononLanguage == "es")
-                            "Hola. Esta es una prueba de la voz Phonon."
-                        else "Hello. This is a sample of the Phonon voice.",
+                        when (phononLanguage) {
+                            "es" -> "Hola. Esta es una prueba de la voz Phonon."
+                            "fr" -> "Bonjour. Voici un exemple de la voix Phonon."
+                            "de" -> "Hallo. Dies ist eine Hörprobe der Phonon-Stimme."
+                            "pt" -> "Olá. Esta é uma amostra da voz Phonon."
+                            else -> "Hello. This is a sample of the Phonon voice."
+                        },
                         phononVoice.ifBlank { names.first() }, phononLanguage,
                         completed = {
                             mainHandler.post { phononSamplePlaying = false }

@@ -187,6 +187,15 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
         Button(onClick = { open("https://gradium.ai/phonon") }) {
             Text(if (english) "Phonon" else "Phonon")
         }
+        Button(onClick = { open("https://huggingface.co/gradium/phonon-31m-en") }) {
+            Text(if (english) "English model" else "Modelo inglés")
+        }
+        Button(onClick = { open("https://huggingface.co/gradium/phonon-40m-multilingual") }) {
+            Text(if (english) "Multilingual model and license" else "Modelo multilingüe y licencia")
+        }
+        Text(if (english)
+            "Import a CPU checkpoint ZIP containing config.json, tokenizer.json, model weights and voice files. iPhone Core ML ZIPs are not supported on Android."
+            else "Importa un ZIP de modelo CPU con config.json, tokenizer.json, pesos del modelo y archivos de voz. Los ZIP Core ML de iPhone no sirven para Android.")
         Text(
             if (phononModelInstalled) {
                 if (english) "CPU model installed." else "Modelo CPU instalado."

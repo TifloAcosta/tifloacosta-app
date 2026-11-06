@@ -11,7 +11,7 @@ const plist = swift('Info.plist');
 test('la voz informa el progreso real por palabra sin avanzar al pausar', () => {
   assert.match(reader, /willSpeakRangeOfSpeechString/);
   assert.match(reader, /guard let self, self.isPlaying/);
-  assert.match(reader, /onReceive\(speech\.\$textPercent\)/);
+  assert.match(reader, /onReceive\(speech\.\$textUTF16Offset\)/);
   assert.match(reader, /baseUTF16:/);
   assert.match(reader, /startTextSpeech\(\)/);
 });

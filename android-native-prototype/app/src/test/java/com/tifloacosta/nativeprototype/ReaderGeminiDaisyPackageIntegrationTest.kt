@@ -82,7 +82,13 @@ class ReaderGeminiDaisyPackageIntegrationTest {
         for (i in 0 until smilAudioRefs.length) {
             val ref = smilAudioRefs.item(i).attributes.getNamedItem("src").nodeValue
             assertTrue(ref in files)
-            assertTrue(files.getValue(ref).take(4).toByteArray().contentEquals("RIFF".toByteArray()))
+            assertTrue(ref.endsWith(".mp3"))
+            val actualAudio = files.getValue(ref)
+            assertTrue(actualAudio.size > 100)
+            assertTrue(actualAudio.indices.dropLast(1).any { offset ->
+                (actualAudio[offset].toInt() and 255) == 255 &&
+                    (actualAudio[offset + 1].toInt() and 0xE0) == 0xE0
+            })
             val clock = smilAudioRefs.item(i).attributes.getNamedItem("clipEnd").nodeValue
             assertTrue(clock.startsWith("00:00:00.100"))
         }

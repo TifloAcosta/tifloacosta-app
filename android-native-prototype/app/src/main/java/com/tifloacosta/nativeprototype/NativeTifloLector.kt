@@ -916,6 +916,15 @@ private fun NativeReadingScreen(
     var perBookRate by rememberSaveable(book.id) {
         mutableFloatStateOf(prefs.getFloat("speed." + book.id, rate))
     }
+    val phononReady = remember(book.id) {
+        NativePhononReader.isAvailable(context.applicationContext)
+    }
+    val phononVoices = remember(book.id, phononReady) {
+        if (phononReady) NativePhononModelStore.voices(context) else emptyList()
+    }
+    var phononVoice by rememberSaveable(book.id) {
+        mutableStateOf(prefs.getString("phonon.voice", "").orEmpty())
+    }
     var readingEngine by rememberSaveable(book.id) {
         mutableIntStateOf(prefs.getInt("engine." + book.id, 0))
     }
@@ -932,6 +941,11 @@ private fun NativeReadingScreen(
         NativeReaderPlaybackService.send(context, action, book.id, value)
     }
     fun startSpeech() {
+        if (readingEngine == 2 && !phononReady) {
+            engineMessage = if (english) "Phonon native engine or model is missing."
+                else "Falta el motor nativo Phonon o su modelo."
+            return
+        }
         if (readingEngine == 1 && !NativeVoiceCredentials(context).hasKey("gemini")) {
             engineMessage = if (english) "Set your Gemini key under External engines."
                 else "Configura tu clave Gemini en Motores externos."
@@ -1108,12 +1122,35 @@ private fun NativeReadingScreen(
         }
         ReaderCompactChoice(
             if (english) "Engine" else "Motor",
-            if (english) listOf("System", "Gemini") else listOf("Sistema", "Gemini"),
-            readingEngine, english
+            if (phononReady) {
+                if (english) listOf("System", "Gemini", "Phonon")
+                else listOf("Sistema", "Gemini", "Phonon")
+            } else {
+                if (english) listOf("System", "Gemini")
+                else listOf("Sistema", "Gemini")
+            },
+            readingEngine.coerceIn(0, if (phononReady) 2 else 1), english
         ) { chosen ->
             readingEngine = chosen
             prefs.edit().putInt("engine." + book.id, chosen).apply()
             if (active) send(NativeReaderPlaybackService.ACTION_VOICE)
+        }
+        if (readingEngine == 2 && phononReady) {
+            if (phononVoices.isNotEmpty()) {
+                ReaderCompactChoice(
+                    if (english) "Phonon voice" else "Voz Phonon",
+                    phononVoices,
+                    phononVoices.indexOf(phononVoice).coerceAtLeast(0),
+                    english
+                ) { index ->
+                    val chosenVoice = phononVoices[index]
+                    phononVoice = chosenVoice
+                    prefs.edit().putString("phonon.voice", chosenVoice).apply()
+                    if (active) send(NativeReaderPlaybackService.ACTION_VOICE)
+                }
+            }
+            Text(if (english) "Phonon reads offline using your installed checkpoint."
+                else "Phonon lee sin Internet utilizando el modelo instalado.")
         }
         if (readingEngine == 1) {
             ReaderCompactChoice(

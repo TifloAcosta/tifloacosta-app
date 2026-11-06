@@ -208,7 +208,28 @@ enum NativeReaderFormats {
             guard let data = try? Data(contentsOf: file) else { return "" }
             // Normalize XML namespaced paragraph/line tags before HTML text extraction.
             let raw = String(data: data, encoding: .utf8) ?? ""
-            let normalized = raw.replacingOccurrences(
+            // DOCX styles identify real chapters even when their visible text
+            // does not begin with a word such as “Capítulo”.
+            var source = raw
+            if path == "word/document.xml",
+               let matcher = try? NSRegularExpression(
+                   pattern: #"(?is)<w:p\b[^>]*>.*?</w:p>"#) {
+                let matches = matcher.matches(
+                    in: source, range: NSRange(source.startIndex..., in: source))
+                for match in matches.reversed() {
+                    guard let range = Range(match.range, in: source) else { continue }
+                    let paragraph = String(source[range])
+                    guard let style = try? NSRegularExpression(
+                        pattern: #"(?i)<w:pStyle\b[^>]*w:val=["'](?:Heading|Titulo|Título|Encabezado)([1-6])["']"#),
+                          let found = style.firstMatch(
+                            in: paragraph, range: NSRange(paragraph.startIndex..., in: paragraph)),
+                          let levelRange = Range(found.range(at: 1), in: paragraph),
+                          let level = Int(paragraph[levelRange]) else { continue }
+                    let marked = "<h\(level)>" + paragraph + "</h\(level)>"
+                    source.replaceSubrange(range, with: marked)
+                }
+            }
+            let normalized = source.replacingOccurrences(
                 of: "(?i)</(?:a:p|w:p|text:p|text:h|row|c|p)>", with: "\n",
                 options: .regularExpression
             ).replacingOccurrences(

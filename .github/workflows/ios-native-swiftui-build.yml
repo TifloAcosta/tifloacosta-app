@@ -4,6 +4,7 @@ on:
     branches:
       - main
       - feat/ios-phase5-videos-podcasts-20261106
+      - audit/ios-phase6-integral-20261106
     paths:
       - 'ios-app-native/**'
       - '.github/workflows/ios-native-swiftui-build.yml'

@@ -1784,8 +1784,10 @@ struct NativeReadingScreen: View {
                         Picker("Formato", selection: $audioExportFormat) {
                             Text("M4A").tag(NativeGeminiAudioExport.Format.m4a)
                             Text("WAV").tag(NativeGeminiAudioExport.Format.wav)
+                            Text("DAISY").tag(NativeGeminiAudioExport.Format.daisy)
                         }
                         .disabled(audioExportBusy)
+                        Text("DAISY incluye texto, audio y navegación. La compatibilidad externa está pendiente de validación.")
                         Text("MP3 estará disponible cuando se incorpore el codificador.")
                         Button("Generar") { exportAudio() }
                             .disabled(audioExportBusy || latest.body.isEmpty)

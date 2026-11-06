@@ -505,7 +505,7 @@ fun NativeTifloLector(
             }) { Text(if (english) "Filters" else "Filtros") }
         if (filtersExpanded) {
             ReaderAdjustableChoice(
-                if (english) "Filter documents" else "Filtrar documentos",
+                if (english) "Filter" else "Filtros",
                 if (english) NativeReaderBookFilters.formatFiltersEn
                 else NativeReaderBookFilters.formatFiltersEs, filter
             ) { filter = it; visibleCount = 10 }
@@ -518,11 +518,11 @@ fun NativeTifloLector(
                 folderChoices, folderFilter.coerceIn(0, folderChoices.lastIndex)
             ) { folderFilter = it; visibleCount = 10 }
             TextButton(onClick = { screen = "folders" }, modifier = Modifier.fillMaxWidth()) {
-                Text(if (english) "Manage folders and create new folder"
-                    else "Gestionar carpetas y crear nueva carpeta")
+                Text(if (english) "Folders"
+                    else "Carpetas")
             }
             TextButton(onClick = { screen = "queue" }, modifier = Modifier.fillMaxWidth()) {
-                Text(if (english) "Manage reading queue" else "Gestionar cola de lectura")
+                Text(if (english) "Reading queue" else "Cola de lectura")
             }
         }
         // La biblioteca de la versión antigua NO forma parte de la biblioteca
@@ -1096,7 +1096,7 @@ private fun NativeReadingScreen(
         }
         TextButton(onClick = { showTools = true },
             modifier = Modifier.fillMaxWidth()) {
-            Text(if (english) "Book details and tools" else "Detalles y herramientas")
+            Text(if (english) "Actions" else "Acciones")
         }
         ReaderCompactChoice(
             if (english) "Move by" else "Avanzar y retroceder por",
@@ -1111,7 +1111,7 @@ private fun NativeReadingScreen(
         }
         when (effectiveUnitType) {
             3 -> ReaderCompactOffsetPosition(
-                label = if (english) "Reading position by word" else "Posición de lectura por palabra",
+                label = if (english) "Word" else "Palabra",
                 valueLabel = ReaderNavigation.wordAt(fullText, displayOffset),
                 current = displayOffset,
                 maximum = fullText.length,
@@ -1120,13 +1120,13 @@ private fun NativeReadingScreen(
                 onNext = { moveOneUnit(true) }
             )
             4 -> ReaderCompactPosition(
-                label = if (english) "Reading position by chapter" else "Posición de lectura por capítulo",
+                label = if (english) "Chapter" else "Capítulo",
                 current = currentChapter,
                 count = chapters.size,
                 english = english
             ) { chosen -> chapters.getOrNull(chosen)?.let { position -> setOffset(position) } }
             5 -> ReaderCompactOffsetPosition(
-                label = if (english) "Reading position by percentage" else "Posición de lectura por porcentaje",
+                label = if (english) "Percentage" else "Porcentaje",
                 valueLabel = ReaderUnits.percent(displayOffset, fullText.length).toString() + "%",
                 current = ReaderUnits.percent(displayOffset, fullText.length),
                 maximum = 100,
@@ -1135,7 +1135,7 @@ private fun NativeReadingScreen(
                 onNext = { moveOneUnit(true) }
             )
             6, 7 -> ReaderCompactOffsetPosition(
-                label = if (english) "Reading position" else "Posición de lectura",
+                label = if (english) "Position" else "Posición",
                 valueLabel = ReaderUnits.percent(displayOffset, fullText.length).toString() + "%",
                 current = ReaderUnits.percent(displayOffset, fullText.length),
                 maximum = 100,

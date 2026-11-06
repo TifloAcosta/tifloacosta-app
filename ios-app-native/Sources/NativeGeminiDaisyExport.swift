@@ -81,7 +81,7 @@ enum NativeGeminiDaisyExport {
             let number = index + 1
             let id = "t\(number)"
             let par = "par\(number)"
-            let file = "audio\(String(format: "%04d", number)).wav"
+            let file = "audio\(String(format: "%04d", number)).mp3"
             let spoken = segment.text.trimmingCharacters(in: .whitespacesAndNewlines)
             // Every text unit must have its own corresponding spoken clip.
             if spoken.isEmpty {
@@ -96,7 +96,8 @@ enum NativeGeminiDaisyExport {
             let pcm = try NativeGeminiAudioExport.pcm(bytes)
             let duration = Double(pcm.count) / 48000.0 // mono 16-bit PCM at 24 kHz
             guard duration > 0 else { throw NativeGeminiAudioExport.ExportError.empty }
-            try bytes.write(to: working.appendingPathComponent(file), options: .atomic)
+            try NativeGeminiAudioExport.mp3(pcm: pcm)
+                .write(to: working.appendingPathComponent(file), options: .atomic)
             if segment.heading != nil {
                 if sectionOpen { paragraphs.append("</level2>") }
                 paragraphs.append("<level2><h2 id=\"\(id)\" smilref=\"sync.smil#\(par)\">\(escape(segment.text))</h2>")
@@ -105,7 +106,7 @@ enum NativeGeminiDaisyExport {
                 paragraphs.append("<p id=\"\(id)\" smilref=\"sync.smil#\(par)\">\(escape(segment.text))</p>")
             }
             pars.append("<par id=\"\(par)\"><text src=\"book.xml#\(id)\"/><audio src=\"\(file)\" clipBegin=\"00:00:00\" clipEnd=\"\(clock(duration))\"/></par>")
-            manifest.append("<item id=\"audio\(number)\" href=\"\(file)\" media-type=\"audio/x-wav\"/>")
+            manifest.append("<item id=\"audio\(number)\" href=\"\(file)\" media-type=\"audio/mpeg\"/>")
             totalSeconds += duration
             await progress(number, segments.count)
         }
@@ -192,7 +193,7 @@ enum NativeGeminiDaisyExport {
             try archive.addEntry(with: filename, relativeTo: working, compressionMethod: .deflate)
         }
         for index in 1...segments.count {
-            let filename = "audio\(String(format: "%04d", index)).wav"
+            let filename = "audio\(String(format: "%04d", index)).mp3"
             let source = working.appendingPathComponent(filename)
             if FileManager.default.fileExists(atPath: source.path) {
                 try archive.addEntry(with: filename, relativeTo: working, compressionMethod: .deflate)

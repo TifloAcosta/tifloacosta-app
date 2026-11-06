@@ -633,7 +633,7 @@ struct NativeReaderLibraryScreen: View {
             }
             Section("Filtrar y ordenar") {
                 NativeAdjustableChoice(
-                    title: "Filtrar documentos",
+                    title: "Filtros",
                     choices: ["Todos", "Textos", "PDF", "EPUB", "Office", "Audio y DAISY",
                               "Con marcas", "Favoritos", "Importados hoy",
                               "Últimos siete días", "Último mes"],
@@ -648,11 +648,11 @@ struct NativeReaderLibraryScreen: View {
             }
             Section("Carpetas") {
                 NativeAdjustableChoice(
-                    title: "Mostrar carpeta",
+                    title: "Carpeta",
                     choices: ["Todas", "Sin carpeta"] + library.folders,
                     selectedIndex: folderFilterIndex
                 )
-                Button("Crear carpeta") { newFolderName = ""; showCreateFolder = true }
+                Button("Nueva carpeta") { newFolderName = ""; showCreateFolder = true }
                 ForEach(library.folders, id: \.self) { folder in
                     Button(folder) { selectedFolder = folder }
                         .accessibilityLabel("Carpeta \(folder)")
@@ -723,8 +723,8 @@ struct NativeReaderLibraryScreen: View {
         .onDisappear { speech.stop() }
         .confirmationDialog("Importar", isPresented: $importSourcesPresented,
                             titleVisibility: .visible) {
-            Button("Desde Archivos") { importPresented = true }
-            Button("Bibliotecas en línea") { externalCatalogPresented = true }
+            Button("Archivos") { importPresented = true }
+            Button("Bibliotecas" { externalCatalogPresented = true }
             Button("Cancelar", role: .cancel) {}
         }
         .sheet(isPresented: $externalCatalogPresented) {
@@ -1563,9 +1563,9 @@ struct NativeReadingScreen: View {
             showDocumentActions = false
             confirmDocumentDeletion = true
         }
-        Button("Información de la obra") { showDocumentInformation = true }
-        Button("Marcas guardadas") { showSavedMarks = true }
-        if !latest.body.isEmpty { Button("Índice y navegación estructurada") { showStructure = true } }
+        Button("Información") { showDocumentInformation = true }
+        Button("Marcas") { showSavedMarks = true }
+        if !latest.body.isEmpty { Button("Índice") { showStructure = true } }
         Button("Añadir marca") { addBookmark() }
         Button(latest.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos") {
             library.toggleFavorite(document)
@@ -1577,14 +1577,14 @@ struct NativeReadingScreen: View {
                 showWordTools = true
             }
             if #available(iOS 18.0, *) {
-                Button("Traducir fragmento actual") { showTranslation = true }
+                Button("Traducir") { showTranslation = true }
             }
             Button("Unidad anterior") { moveUnit(-1) }
             Button("Unidad siguiente") { moveUnit(1) }
         }
         if let track = tracks.first,
            let url = NativeReaderFormats.storedURL(for: track) {
-            Button("Compartir archivo de audio") { NativeShare.present(url: url) }
+            Button("Compartir audio") { NativeShare.present(url: url) }
         }
         Button("Cancelar", role: .cancel) {}
     }

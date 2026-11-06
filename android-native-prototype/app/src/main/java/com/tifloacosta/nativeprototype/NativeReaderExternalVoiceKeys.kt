@@ -3,6 +3,8 @@ package com.tifloacosta.nativeprototype
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Handler
+import android.os.Looper
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
 import android.util.Base64
@@ -114,6 +116,14 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
     var phononImportBusy by remember { mutableStateOf(false) }
     var phononTermsAccepted by remember { mutableStateOf(false) }
     var phononDeleteConfirm by remember { mutableStateOf(false) }
+    val phononPreview = remember { NativePhononReader(context.applicationContext) }
+    val mainHandler = remember { Handler(Looper.getMainLooper()) }
+    var phononSamplePlaying by remember { mutableStateOf(false) }
+    var phononVoiceExpanded by remember { mutableStateOf(false) }
+    var phononVoice by remember {
+        mutableStateOf(context.getSharedPreferences("native-reader-preferences", Context.MODE_PRIVATE)
+            .getString("phonon.voice", "").orEmpty())
+    }
     val importPhonon = rememberLauncherForActivityResult(
         ActivityResultContracts.OpenDocument()
     ) { uri ->
@@ -151,7 +161,12 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
     var voicesExpanded by remember { mutableStateOf(false) }
     var generating by remember { mutableStateOf(false) }
     var samplePlaying by remember { mutableStateOf(false) }
-    DisposableEffect(Unit) { onDispose { preview.stop() } }
+    DisposableEffect(Unit) {
+        onDispose {
+            preview.stop()
+            phononPreview.close()
+        }
+    }
 
     fun open(url: String) {
         try {
@@ -213,6 +228,55 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
         Text(if (english)
             "Import only a complete CPU checkpoint with its own license. Phonon 31m speaks English; the Spanish 40m model has non-commercial restrictions. A model alone does not install the native engine."
             else "Importa un modelo CPU completo y respeta su licencia. Phonon 31m habla inglés; el modelo español 40m tiene restricciones de uso no comercial. Importar el modelo no instala por sí solo el motor nativo.")
+        if (phononModelInstalled &&
+            NativePhononReader.isAvailable(context.applicationContext)) {
+            val names = NativePhononModelStore.voices(context)
+            if (names.isNotEmpty()) {
+                Button(onClick = { phononVoiceExpanded = true }) {
+                    Text((if (english) "Phonon voice: " else "Voz Phonon: ") +
+                        phononVoice.ifBlank { names.first() })
+                }
+                DropdownMenu(expanded = phononVoiceExpanded,
+                    onDismissRequest = { phononVoiceExpanded = false }) {
+                    names.forEach { name ->
+                        DropdownMenuItem(text = { Text(name) }, onClick = {
+                            phononVoice = name
+                            prefs.edit().putString("phonon.voice", name).apply()
+                            phononVoiceExpanded = false
+                        })
+                    }
+                }
+                Button(onClick = {
+                    phononPreview.stop()
+                    phononSamplePlaying = true
+                    message = if (english) "Playing Phonon sample."
+                        else "Reproduciendo muestra Phonon."
+                    phononPreview.speak(
+                        if (phononLanguage == "es")
+                            "Hola. Esta es una prueba de la voz Phonon."
+                        else "Hello. This is a sample of the Phonon voice.",
+                        phononVoice.ifBlank { names.first() }, phononLanguage,
+                        completed = {
+                            mainHandler.post { phononSamplePlaying = false }
+                        },
+                        error = { reason ->
+                            mainHandler.post {
+                                phononSamplePlaying = false
+                                message = "Phonon: " + reason
+                            }
+                        }
+                    )
+                }) {
+                    Text(if (english) "Listen to Phonon" else "Escuchar Phonon")
+                }
+                if (phononSamplePlaying) {
+                    Button(onClick = {
+                        phononPreview.stop()
+                        phononSamplePlaying = false
+                    }) { Text(if (english) "Stop sample" else "Detener muestra") }
+                }
+            }
+        }
         if (phononModelInstalled) {
             if (phononDeleteConfirm) {
                 Text(if (english) "Delete installed Phonon model?" else "¿Eliminar el modelo Phonon?")

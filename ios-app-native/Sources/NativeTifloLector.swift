@@ -703,6 +703,7 @@ struct NativeReaderLibraryScreen: View {
     @State private var folderToDelete: String?
     @State private var folderForDocument: NativeReadingDocument?
     @State private var documentToConfigure: NativeReadingDocument?
+    @State private var documentToExport: NativeReadingDocument?
     @AppStorage("native-reading-folder-filter") private var selectedFolder = ""
     @AppStorage("native-reading-filter") private var filterIndex = 0
     @AppStorage("native-reading-sort") private var sortIndex = 0
@@ -872,6 +873,7 @@ struct NativeReaderLibraryScreen: View {
                     .accessibilityHint("Doble toque para abrir. Hay acciones de accesibilidad.")
                     .accessibilityAction(named: Text("Reproducir")) { play(document) }
                     .accessibilityAction(named: Text("Información")) { information = document }
+                    .accessibilityAction(named: Text("Exportar audio")) { documentToExport = document }
                     .accessibilityAction(named: Text("Ajustes del documento")) {
                         documentToConfigure = document
                     }
@@ -896,6 +898,9 @@ struct NativeReaderLibraryScreen: View {
         }
         .tifloScreenSurface()
         .navigationTitle("TifloLector")
+        .navigationDestination(item: $documentToExport) { selected in
+            NativeReadingScreen(document: selected, speech: speech, startWithAudioExport: true)
+        }
         .onDisappear { speech.stop() }
         .confirmationDialog("Importar", isPresented: $importSourcesPresented,
                             titleVisibility: .visible) {
@@ -1198,6 +1203,7 @@ struct NativeReadingScreen: View {
     var startPercent: Int? = nil
     var startTextOffset: Int? = nil
     var startTrack: Int? = nil
+    var startWithAudioExport = false
 
     @EnvironmentObject private var library: NativeReaderLibrary
     @Environment(\.dismiss) private var dismiss
@@ -2188,6 +2194,7 @@ struct NativeReadingScreen: View {
     var body: some View {
         readerSheets
         .onAppear {
+            if startWithAudioExport { showAudioExport = true }
             phononReady = NativePhononRuntime.isUsable
             if readingEngine == 2 {
                 if phononReady { loadPhononVoices() }

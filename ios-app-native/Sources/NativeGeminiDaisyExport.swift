@@ -110,15 +110,17 @@ enum NativeGeminiDaisyExport {
         }
         let output = FileManager.default.temporaryDirectory
             .appendingPathComponent("TifloLector-\(uuid).zip")
-        let archive = try Archive(url: output, accessMode: .create)
+        guard let archive = Archive(url: output, accessMode: .create) else {
+            throw NativeGeminiAudioExport.ExportError.unsupportedFormat
+        }
         for filename in contents.keys.sorted() {
-            try archive.addEntry(filename, relativeTo: working, compressionMethod: .deflate)
+            try archive.addEntry(with: filename, relativeTo: working, compressionMethod: .deflate)
         }
         for index in 1...segments.count {
             let filename = "audio\(String(format: "%04d", index)).wav"
             let source = working.appendingPathComponent(filename)
             if FileManager.default.fileExists(atPath: source.path) {
-                try archive.addEntry(filename, relativeTo: working, compressionMethod: .deflate)
+                try archive.addEntry(with: filename, relativeTo: working, compressionMethod: .deflate)
             }
         }
         return output

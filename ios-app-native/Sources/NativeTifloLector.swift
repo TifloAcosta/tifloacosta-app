@@ -30,6 +30,8 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
     let importedAt: Date
     // Optional properties allow older beta library JSON to remain decodable.
     var fileExtension: String? = nil
+    // Original import bytes; nil for documents imported by older versions.
+    var originalFilePath: String? = nil
     var trackPaths: [String]? = nil
     var markedPositions: [Int]? = nil
     var textBookmarks: [NativeTextBookmark]? = nil
@@ -95,6 +97,8 @@ final class NativeReaderLibrary: ObservableObject {
             if documents.contains(where: { $0.id == identifier }) { continue }
             do {
                 let payload = try NativeReaderFormats.read(url, documentID: identifier)
+                let originalFilePath = try NativeReaderFormats.storeOriginal(
+                    url, documentID: identifier)
                 documents.insert(
                     NativeReadingDocument(
                         id: identifier,
@@ -103,6 +107,7 @@ final class NativeReaderLibrary: ObservableObject {
                         body: payload.body,
                         importedAt: .now,
                         fileExtension: payload.fileExtension,
+                        originalFilePath: originalFilePath,
                         trackPaths: payload.trackPaths
                     ), at: 0
                 )
@@ -1625,6 +1630,14 @@ struct NativeReadingScreen: View {
         }
     }
 
+    private func shareOriginal() {
+        guard let url = NativeReaderFormats.originalURL(for: latest) else {
+            actionMessage = "El archivo original no está conservado en la biblioteca. Este documento puede haberse importado antes de incorporar esta función. Vuelve a importarlo para poder compartirlo."
+            return
+        }
+        NativeShare.present(url: url)
+    }
+
     private func exportText() {
         guard !latest.body.isEmpty else { return }
         let name = latest.title.replacingOccurrences(
@@ -1929,6 +1942,11 @@ struct NativeReadingScreen: View {
         Button(latest.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos") {
             library.toggleFavorite(document)
         }
+        Button("Compartir documento original") { shareOriginal() }
+            .disabled(NativeReaderFormats.originalURL(for: latest) == nil)
+            .accessibilityHint(NativeReaderFormats.originalURL(for: latest) == nil
+                ? "No se conserva el original de esta importación. Importa de nuevo el archivo para activar esta opción."
+                : "Comparte el mismo archivo que importaste, sin convertirlo.")
         if !latest.body.isEmpty {
             Button("Exportar texto extraído (TXT)") { exportText() }
             Button("Exportar audio") {

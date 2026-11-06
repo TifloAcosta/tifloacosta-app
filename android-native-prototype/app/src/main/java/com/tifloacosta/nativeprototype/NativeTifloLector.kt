@@ -355,7 +355,7 @@ fun NativeTifloLector(
                     }
                 }
             },
-            onDeleteRequest = { deleteBook = book },
+            onDeleteRequest = { deleteBook = book; selectedBook = null; selectedText = "" },
             onBack = { selectedBook = null; selectedText = ""; playOnOpen = false; refresh() }
         )
         return

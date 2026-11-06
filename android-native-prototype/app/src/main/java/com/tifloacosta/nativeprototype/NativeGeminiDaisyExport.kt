@@ -56,7 +56,7 @@ internal object NativeGeminiDaisyExport {
               <head><meta name="dc:Identifier" content="$identifier"/><meta name="dc:Title" content="$escapedTitle"/></head>
               <book><frontmatter><doctitle>$escapedTitle</doctitle></frontmatter>
               <bodymatter><level1><h1>$escapedTitle</h1>
-              
+              PLACEHOLDER_UNITS
               </level1></bodymatter></book>
             </dtbook>
         """.trimIndent().replace("PLACEHOLDER_UNITS", written.joinToString("\n"))

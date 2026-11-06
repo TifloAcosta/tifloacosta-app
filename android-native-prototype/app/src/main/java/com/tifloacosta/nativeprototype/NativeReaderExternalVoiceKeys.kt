@@ -17,6 +17,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -110,6 +112,7 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
         mutableStateOf(NativePhononModelStore.installed(context))
     }
     var phononImportBusy by remember { mutableStateOf(false) }
+    var phononTermsAccepted by remember { mutableStateOf(false) }
     var phononDeleteConfirm by remember { mutableStateOf(false) }
     val importPhonon = rememberLauncherForActivityResult(
         ActivityResultContracts.OpenDocument()
@@ -137,6 +140,14 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
         context.getSharedPreferences("native-reader-preferences", Context.MODE_PRIVATE)
     }
     var voice by remember { mutableStateOf(prefs.getString("gemini.voice", "Kore") ?: "Kore") }
+    var phononLanguage by remember {
+        mutableStateOf(prefs.getString("phonon.language", "en") ?: "en")
+    }
+    var phononLanguagesExpanded by remember { mutableStateOf(false) }
+    val phononLanguageOptions = listOf(
+        "en" to "English", "es" to "Español", "fr" to "Français",
+        "de" to "Deutsch", "pt" to "Português"
+    )
     var voicesExpanded by remember { mutableStateOf(false) }
     var generating by remember { mutableStateOf(false) }
     var samplePlaying by remember { mutableStateOf(false) }
@@ -168,10 +179,37 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
                 if (english) "No CPU model installed." else "Sin modelo CPU instalado."
             }
         )
+        Row {
+            Checkbox(
+                checked = phononTermsAccepted,
+                onCheckedChange = { phononTermsAccepted = it }
+            )
+            Text(if (english)
+                "I will respect the model and voice licenses, including non-commercial restrictions."
+                else "Respetaré las licencias del modelo y de las voces, incluidas sus restricciones no comerciales.")
+        }
         Button(
-            enabled = !phononImportBusy,
+            enabled = !phononImportBusy && phononTermsAccepted,
             onClick = { importPhonon.launch(arrayOf("application/zip", "application/octet-stream")) }
         ) { Text(if (english) "Import model ZIP" else "Importar modelo ZIP") }
+        Button(onClick = { phononLanguagesExpanded = true }) {
+            Text((if (english) "Model language: " else "Idioma del modelo: ") +
+                (phononLanguageOptions.firstOrNull { it.first == phononLanguage }?.second ?: phononLanguage))
+        }
+        DropdownMenu(
+            expanded = phononLanguagesExpanded,
+            onDismissRequest = { phononLanguagesExpanded = false }
+        ) {
+            phononLanguageOptions.forEach { (language, label) ->
+                DropdownMenuItem(text = { Text(label) }, onClick = {
+                    phononLanguage = language
+                    prefs.edit().putString("phonon.language", language).apply()
+                    phononLanguagesExpanded = false
+                })
+            }
+        }
+        Text(if (english) "Choose the actual language of your installed checkpoint."
+            else "Selecciona el idioma real del modelo que hayas instalado.")
         Text(if (english)
             "Import only a complete CPU checkpoint with its own license. Phonon 31m speaks English; the Spanish 40m model has non-commercial restrictions. A model alone does not install the native engine."
             else "Importa un modelo CPU completo y respeta su licencia. Phonon 31m habla inglés; el modelo español 40m tiene restricciones de uso no comercial. Importar el modelo no instala por sí solo el motor nativo.")

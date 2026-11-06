@@ -125,6 +125,7 @@ fun NativeTifloLector(
     var confirmMultipleDeletion by remember { mutableStateOf(false) }
     var loading by remember { mutableStateOf(true) }
     var importStatus by remember { mutableStateOf("") }
+    var importResult by remember { mutableStateOf("") }
     var sharedImportNotice by remember { mutableStateOf("") }
     val mainHandler = remember { Handler(Looper.getMainLooper()) }
     val preferences = remember { context.getSharedPreferences("native-reader-preferences", 0) }
@@ -276,6 +277,9 @@ fun NativeTifloLector(
     val importer = rememberLauncherForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) { uris ->
         if (uris.isNotEmpty()) scope.launch {
             error = ""
+            importResult = ""
+            var imported = 0
+            val failures = mutableListOf<String>()
             try {
                 uris.forEachIndexed { index, uri ->
                     importStatus = if (english)
@@ -294,13 +298,19 @@ fun NativeTifloLector(
                                 }
                             }
                         }
+                        imported++
                     } catch (e: Exception) {
-                        error += (e.message ?: "No se pudo importar.") + "\n"
+                        failures.add(e.message ?: "No se pudo importar.")
                     }
                 }
             } finally {
                 importStatus = ""
                 refresh()
+                importResult = (if (english) "$imported documents imported."
+                    else "$imported documentos importados.") +
+                    (if (failures.isEmpty()) ""
+                    else (if (english) " Failed: " else " Fallos: ") +
+                        failures.size + ". " + failures.joinToString(" "))
                 screen = "home"
             }
         }
@@ -686,6 +696,9 @@ fun NativeTifloLector(
                 Text(if (english) "Show ten more" else "Mostrar diez más")
             }
         }
+        if (importResult.isNotBlank()) Text(importResult,
+            modifier = Modifier.semantics { androidx.compose.ui.semantics.liveRegion =
+                androidx.compose.ui.semantics.LiveRegionMode.Polite })
         if (error.isNotBlank()) Text(error)
     }
 

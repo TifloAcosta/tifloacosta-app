@@ -19,7 +19,7 @@ test('the most recently opened book is recorded persistently and filterable', ()
 });
 test('folder controls are all in one section, with creation after the folders', () => {
   const start = reader.indexOf('Section("Carpetas") {');
-  const end = reader.indexOf('Section("Mi biblioteca") {', start);
+  const end = reader.indexOf('libraryBooksSection', start);
   assert.ok(start > 0 && end > start);
   const section = reader.slice(start, end);
   assert.doesNotMatch(section, /NativeAdjustableChoice/);

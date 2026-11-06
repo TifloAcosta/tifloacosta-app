@@ -1662,6 +1662,18 @@ struct NativeReadingScreen: View {
         return "\(position) Voz reproducida \(formatDuration(elapsedSpeakingSeconds)). Tiempo restante estimado \(formatDuration(remaining))."
     }
 
+    private var pageProgressDescription: String {
+        let boundaries = textLayout.pageStarts
+        let pageCount = max(1, boundaries.count - 1)
+        let pageIndex = min(pageCount,
+            max(1, boundaries.prefix(while: { $0 <= readingOffset }).count))
+        let remaining = max(0, pageCount - pageIndex)
+        if textLayout.hasRealPages {
+            return "Página \(pageIndex) de \(pageCount). Quedan \(remaining) páginas."
+        }
+        return "Bloque aproximado \(pageIndex) de \(pageCount). Quedan \(remaining) bloques."
+    }
+
     private var playbackRow: some View {
         AnyLayout(
             dynamicTypeSize.isAccessibilitySize
@@ -1671,11 +1683,10 @@ struct NativeReadingScreen: View {
             Button(speech.isPlaying ? "Pausar" : "Reproducir") {
                 speech.isPlaying ? pausePlayback() : play()
             }
-            Button("Detener") { stopPlayback() }
-            Button("Audio") { showAudioSettings = true }
-                .accessibilityHint("Abre velocidad, voz e idioma de lectura.")
-            Button("Visual") { showVisualSettings = true }
-                .accessibilityHint("Abre tamaño de letra y presentación visual.")
+            Button("Retroceder") { moveUnit(-1) }
+                .accessibilityHint("Retrocede según el modo de navegación seleccionado.")
+            Button("Avanzar") { moveUnit(1) }
+                .accessibilityHint("Avanza según el modo de navegación seleccionado.")
         }
         .buttonStyle(.bordered)
         .controlSize(.small)
@@ -1729,7 +1740,30 @@ struct NativeReadingScreen: View {
 
     private var quickControls: some View {
         VStack(alignment: .leading, spacing: 6) {
+            // Frequent reading actions first, in VoiceOver traversal order.
             playbackRow
+            NativeAdjustableChoice(
+                title: "Navegación",
+                choices: navigationChoices,
+                selectedIndex: navigationBinding
+            )
+            .accessibilityHint("Define cómo actúan Retroceder y Avanzar.")
+            HStack {
+                Button("Añadir marca") { addBookmark() }
+                Button("Marcas guardadas") { showSavedMarks = true }
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.small)
+            NativeAdjustableChoice(
+                title: "Apagado automático",
+                choices: Self.sleepChoices,
+                selectedIndex: $sleepIndex
+            )
+            Button("Información") { showDocumentInformation = true }
+                .accessibilityHint("Consulta el porcentaje leído y restante, páginas o bloques, tiempo de lectura y datos de la obra.")
+            trackButtons
+            // Advanced controls remain available without interrupting the
+            // primary playback/navigation/bookmark workflow.
             if tracks.isEmpty {
                 NativeAdjustableChoice(
                     title: "Motor",
@@ -1794,47 +1828,18 @@ struct NativeReadingScreen: View {
                 }
             }
             NativeAdjustableChoice(
-                title: "Navegación",
-                choices: navigationChoices,
-                selectedIndex: navigationBinding
-            )
-            .accessibilityHint("Selecciona el tipo de avance y retroceso.")
-            HStack {
-                Button("Anterior") { moveUnit(-1) }
-                Button("Siguiente") { moveUnit(1) }
-            }
-            .buttonStyle(.bordered)
-            .controlSize(.small)
-            trackButtons
-            Text(progressDescription)
-                .font(.footnote)
-                .accessibilityLabel(progressDescription)
-            if speech.hasAudio && !speech.isGeneratedSpeech {
-                HStack(spacing: 12) {
-                    Button("Retroceder 30 segundos") {
-                        speech.skip(seconds: -30)
-                        currentPercent = speech.audioPercent
-                        persistPosition()
-                    }
-                    Button("Avanzar 30 segundos") {
-                        speech.skip(seconds: 30)
-                        currentPercent = speech.audioPercent
-                        persistPosition()
-                    }
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.small)
-            }
-            NativeAdjustableChoice(
-                title: "Apagado automático",
-                choices: Self.sleepChoices,
-                selectedIndex: $sleepIndex
-            )
-            NativeAdjustableChoice(
                 title: "Posición",
                 choices: Self.percentages,
                 selectedIndex: positionBinding
             )
+            HStack {
+                Button("Audio") { showAudioSettings = true }
+                    .accessibilityHint("Abre velocidad, voz e idioma de lectura.")
+                Button("Visual") { showVisualSettings = true }
+                    .accessibilityHint("Abre tamaño de letra y presentación visual.")
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.small)
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 8)
@@ -2101,6 +2106,9 @@ struct NativeReadingScreen: View {
                     LabeledContent("Carpeta", value: latest.folderName ?? "Sin carpeta")
                     LabeledContent("Marcas", value: "\(latest.bookmarks.count + latest.savedTextBookmarks.count + latest.savedAudioBookmarks.count)")
                     Text(progressDescription)
+                    if !latest.body.isEmpty {
+                        Text(pageProgressDescription)
+                    }
                     if !tracks.isEmpty {
                         LabeledContent("Pistas de audio", value: "\(tracks.count)")
                     }

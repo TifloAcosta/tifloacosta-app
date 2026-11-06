@@ -186,10 +186,11 @@ enum NativeGeminiDaisyExport {
         }
         let output = FileManager.default.temporaryDirectory
             .appendingPathComponent("TifloLector-\(uuid).zip")
-        guard let archive = Archive(url: output, accessMode: .create) else {
-            throw NativeGeminiAudioExport.ExportError.unsupportedFormat
-        }
-        for filename in contents.keys.sorted() {
+        do {
+            guard let archive = Archive(url: output, accessMode: .create) else {
+                throw NativeGeminiAudioExport.ExportError.unsupportedFormat
+            }
+            for filename in contents.keys.sorted() {
             try archive.addEntry(with: filename, relativeTo: working, compressionMethod: .deflate)
         }
         for index in 1...segments.count {
@@ -199,6 +200,8 @@ enum NativeGeminiDaisyExport {
                 try archive.addEntry(with: filename, relativeTo: working, compressionMethod: .deflate)
             }
         }
+        }
+        try NativeDaisyPackageVerifier.validate(output)
         return output
     }
 }

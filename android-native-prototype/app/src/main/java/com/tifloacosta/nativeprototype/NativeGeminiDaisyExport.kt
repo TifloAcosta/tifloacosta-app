@@ -35,7 +35,8 @@ internal object NativeGeminiDaisyExport {
         lines.forEachIndexed { index, line ->
             val full = line + if (index == lines.lastIndex) "" else "\n"
             val recognized = line.trim().matchesHeading(headingPattern)
-            if (recognized && line.isNotBlank()) {
+            if (recognized && line.isNotBlank() &&
+                full.length <= NativeGeminiAudioExport.CHUNK_SIZE) {
                 result += TextUnit(full, line.trim())
             } else if (full.isNotEmpty()) {
                 if (result.isNotEmpty() && result.last().heading == null &&
@@ -66,6 +67,7 @@ internal object NativeGeminiDaisyExport {
         var duration = 0.0
         val chapterPoints = mutableListOf<Pair<String, String>>()
         var firstPar = ""
+        var sectionOpen = false
         parts.forEachIndexed { index, fragment ->
             currentCoroutineContext().ensureActive()
             val spoken = fragment.text.trim()
@@ -81,15 +83,27 @@ internal object NativeGeminiDaisyExport {
                 val par = "par$number"
                 if (firstPar.isEmpty()) firstPar = par
                 fragment.heading?.let { chapterPoints += it to par }
-                written += "<p id=\"$id\" smilref=\"sync.smil#$par\">" + xml(fragment.text) + "</p>"
+                if (fragment.heading != null) {
+                    if (sectionOpen) written += "</level2>"
+                    written += "<level2><h2 id=\"$id\" smilref=\"sync.smil#$par\">" +
+                        xml(fragment.text) + "</h2>"
+                    sectionOpen = true
+                } else {
+                    written += "<p id=\"$id\" smilref=\"sync.smil#$par\">" +
+                        xml(fragment.text) + "</p>"
+                }
                 parallel += "<par id=\"$par\"><text src=\"book.xml#$id\"/>" +
                     "<audio src=\"$filename\" clipBegin=\"00:00:00\" " +
                     "clipEnd=\"" + clock(seconds) + "\"/></par>"
                 manifest += "<item id=\"audio$number\" href=\"$filename\" media-type=\"audio/x-wav\"/>"
                 soundFiles += filename to wav
+            } else {
+                // Full-text DTBook also retains silent whitespace.
+                written += "<p>" + xml(fragment.text) + "</p>"
             }
             progress(index + 1, parts.size)
         }
+        if (sectionOpen) written += "</level2>"
         currentCoroutineContext().ensureActive()
         require(parallel.isNotEmpty()) { "No se ha generado audio." }
         val first = "par" + (parts.indexOfFirst { it.isNotBlank() } + 1)

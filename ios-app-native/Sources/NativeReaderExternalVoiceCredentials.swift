@@ -81,6 +81,40 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
     @State private var hasGeminiKey = NativeVoiceCredentialStore.hasKey("gemini")
     @State private var message = ""
     @State private var confirmDeletion = false
+    @State private var checking = false
+
+    private func checkGeminiConnection() async {
+        guard !checking else { return }
+        checking = true
+        defer { checking = false }
+        do {
+            guard let key = try NativeVoiceCredentialStore.get("gemini") else {
+                message = "No hay ninguna clave guardada."
+                return
+            }
+            var request = URLRequest(url: URL(string:
+                "https://generativelanguage.googleapis.com/v1beta/models")!)
+            request.setValue(key, forHTTPHeaderField: "x-goog-api-key")
+            request.timeoutInterval = 15
+            let (_, response) = try await URLSession.shared.data(for: request)
+            guard let http = response as? HTTPURLResponse else {
+                message = "No se recibió respuesta del proveedor."
+                return
+            }
+            switch http.statusCode {
+            case 200..<300:
+                message = "Conexión correcta. La generación de audio todavía no está activada."
+            case 401, 403:
+                message = "Clave rechazada o sin permisos. Revisa Google AI Studio."
+            case 429:
+                message = "Límite de solicitudes alcanzado. Revisa tu cuota."
+            default:
+                message = "Google respondió con error \(http.statusCode)."
+            }
+        } catch {
+            message = "No se pudo comprobar la conexión. Revisa Internet e inténtalo de nuevo."
+        }
+    }
 
     var body: some View {
         List {
@@ -109,6 +143,10 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
                     }
                 }
                 .disabled(keyInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                Button("Comprobar") {
+                    Task { await checkGeminiConnection() }
+                }
+                .disabled(!hasGeminiKey || checking)
                 Button("Eliminar", role: .destructive) { confirmDeletion = true }
                     .disabled(!hasGeminiKey)
                 Text("La clave se guarda solamente en este iPhone. Cada usuario gestiona sus cuotas y posibles costes con Google.")

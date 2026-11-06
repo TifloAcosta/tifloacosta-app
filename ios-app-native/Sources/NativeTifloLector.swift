@@ -1930,7 +1930,7 @@ struct NativeReadingScreen: View {
             library.toggleFavorite(document)
         }
         if !latest.body.isEmpty {
-            Button("Exportar texto") { exportText() }
+            Button("Exportar texto extraído (TXT)") { exportText() }
             Button("Exportar audio") {
                 if phononReady && phononVoices.isEmpty { loadPhononVoices() }
                 showAudioExport = true

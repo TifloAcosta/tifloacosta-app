@@ -82,6 +82,11 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
     @State private var message = ""
     @State private var confirmDeletion = false
     @State private var checking = false
+    @State private var phononInstalled = NativePhononModelStore.isInstalled
+    @State private var phononBusy = false
+    @State private var phononMessage = ""
+    @State private var phononTask: Task<Void, Never>?
+    @State private var showPhononRemoval = false
     @StateObject private var geminiPreview = NativeGeminiPreview()
     @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
 
@@ -125,6 +130,46 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
                 Text("La aplicación Phonon para VoiceOver no supone automáticamente compatibilidad con el reproductor de TifloLector.")
                 Link("Phonon para iPhone", destination: URL(string: "https://apps.apple.com/app/id6828988617")!)
                 Link("Motor Phonon", destination: URL(string: "https://gradium.ai/phonon")!)
+                if #available(iOS 18, *) {
+                    Text(phononInstalled ? "Modelo inglés instalado" : "Modelo inglés sin instalar")
+                    Button("Descargar modelo Phonon inglés") {
+                        guard !phononBusy else { return }
+                        phononBusy = true
+                        phononMessage = "Descargando y comprobando el modelo de voz."
+                        phononTask = Task {
+                            do {
+                                try await NativePhononModelStore.downloadAndInstall()
+                                guard !Task.isCancelled else { return }
+                                phononInstalled = NativePhononModelStore.isInstalled
+                                phononMessage = "Modelo inglés instalado correctamente."
+                            } catch is CancellationError {
+                                phononMessage = "Descarga cancelada."
+                            } catch {
+                                phononMessage = error.localizedDescription
+                            }
+                            phononBusy = false
+                        }
+                    }
+                    .disabled(phononBusy)
+                    if phononBusy {
+                        Button("Cancelar descarga") {
+                            phononTask?.cancel()
+                            phononBusy = false
+                        }
+                    }
+                    if phononInstalled {
+                        Button("Eliminar modelo", role: .destructive) {
+                            showPhononRemoval = true
+                        }
+                    }
+                    if !phononMessage.isEmpty {
+                        Text(phononMessage)
+                            .accessibilityAddTraits(.updatesFrequently)
+                    }
+                    Text("Phonon 31m es gratuito, funciona sin Internet después de instalarse y habla inglés. Descargar el modelo no habilita por sí solo el motor de lectura.")
+                } else {
+                    Text("Phonon nativo requiere iOS 18 o posterior.")
+                }
             }
             Section("Gemini") {
                 Text(hasGeminiKey ? "Clave guardada" : "Sin clave")
@@ -181,6 +226,19 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
         .tifloScreenSurface()
         .navigationTitle("Motores externos")
         .onDisappear { geminiPreview.stop() }
+        .confirmationDialog("Eliminar modelo Phonon", isPresented: $showPhononRemoval,
+                            titleVisibility: .visible) {
+            Button("Eliminar modelo", role: .destructive) {
+                do {
+                    try NativePhononModelStore.remove()
+                    phononInstalled = false
+                    phononMessage = "Modelo Phonon eliminado."
+                } catch {
+                    phononMessage = error.localizedDescription
+                }
+            }
+            Button("Cancelar", role: .cancel) {}
+        }
         .confirmationDialog("Eliminar clave", isPresented: $confirmDeletion,
                             titleVisibility: .visible) {
             Button("Eliminar", role: .destructive) {

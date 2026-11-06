@@ -10,7 +10,7 @@ test('DAISY contains its complete standard structure and true audio-linked text'
   for (const required of ['book.opf','book.xml','book.ncx','sync.smil','<dtbook','<ncx','<smil','<package','smilref','clipBegin','clipEnd']) {
     assert.ok(daisy.includes(required), required);
   }
-  assert.match(daisy, /NativeGeminiSpeech\.generate\(spoken, voice: voice\)/);
+  assert.match(daisy, /NativeGeminiAudioExport\.synthesize\(/);
   assert.match(daisy, /Double\(pcm.count\) \/ 48000\.0/);
   assert.match(daisy, /Archive\(url: output, accessMode: \.create\)/);
   assert.match(daisy, /archive\.addEntry/);

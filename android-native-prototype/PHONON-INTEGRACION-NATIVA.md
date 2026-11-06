@@ -1,6 +1,6 @@
 # Phonon — integración nativa de TifloLector (requisitos comprobados)
 
-Estado: integración de ejecución local **pendiente**. Este documento no habilita un motor que todavía no está instalado. No mostrar una opción Phonon operativa hasta reproducir audio real sin red y completar las pruebas con lectores de pantalla.
+Estado de la rama de desarrollo: el motor de Phonon ya cuenta con bibliotecas reales `libptts_ffi.so` para arm64-v8a y x86_64 compiladas de la fuente v0.4.1 fija mediante GitHub Actions. El código incorpora importación local de modelos CPU, selección/escucha de voces, reproducción continua en el servicio multimedia y exportación MP3/M4A/WAV/DAISY sin enviar texto a Internet. **No está en la aplicación publicada**. Aún falta comprobar la reproducción y la calidad reales con modelos y TalkBack, y las obligaciones de licencias antes de una distribución.
 
 ## Proveedor y licencias
 

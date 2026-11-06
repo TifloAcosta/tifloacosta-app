@@ -82,6 +82,8 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
     @State private var message = ""
     @State private var confirmDeletion = false
     @State private var checking = false
+    @StateObject private var geminiPreview = NativeGeminiPreview()
+    @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
 
     private func checkGeminiConnection() async {
         guard !checking else { return }
@@ -147,10 +149,28 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
                     Task { await checkGeminiConnection() }
                 }
                 .disabled(!hasGeminiKey || checking)
+                Picker("Voz Gemini", selection: $geminiVoice) {
+                    ForEach(NativeGeminiSpeech.voices, id: \.self) { name in
+                        Text(name).tag(name)
+                    }
+                }
+                Button("Escuchar muestra") {
+                    geminiPreview.listen(
+                        "Hola. Esta es una prueba de voz Gemini en TifloLector.",
+                        voice: geminiVoice)
+                }
+                .disabled(!hasGeminiKey || geminiPreview.busy)
+                if geminiPreview.playing {
+                    Button("Detener") { geminiPreview.stop() }
+                }
+                if !geminiPreview.message.isEmpty {
+                    Text(geminiPreview.message)
+                        .accessibilityAddTraits(.updatesFrequently)
+                }
                 Button("Eliminar", role: .destructive) { confirmDeletion = true }
                     .disabled(!hasGeminiKey)
                 Text("La clave se guarda solamente en este iPhone. Cada usuario gestiona sus cuotas y posibles costes con Google.")
-                Text("La conexión y la reproducción de Gemini se habilitarán cuando su integración esté verificada.")
+                Text("La prueba genera audio real con Gemini y puede consumir cuota. La lectura completa de documentos continúa en desarrollo.")
             }
             if !message.isEmpty {
                 Section("Estado") {
@@ -160,6 +180,7 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
         }
         .tifloScreenSurface()
         .navigationTitle("Motores externos")
+        .onDisappear { geminiPreview.stop() }
         .confirmationDialog("Eliminar clave", isPresented: $confirmDeletion,
                             titleVisibility: .visible) {
             Button("Eliminar", role: .destructive) {

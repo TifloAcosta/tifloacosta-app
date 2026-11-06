@@ -7,9 +7,9 @@ const settings = readFileSync(new URL('../Sources/NativeReaderSettings.swift', i
 
 test('Navigation options expose bookmarks and time only when supported', () => {
   assert.match(reader, /\(5, "Marcas"\), \(6, "Tiempo, un minuto"\)/);
-  assert.match(reader, /tracks\.isEmpty \? \[\] : \[\(6, "Tiempo, un minuto"\)\]/);
+  assert.match(reader, /"Tiempo estimado, un minuto"/);
   assert.match(reader, /title: "Modo de navegación"/);
-  assert.match(settings, /"Marcas", "Tiempo, un minuto \(solo audio\)"/);
+  assert.match(settings, /"Marcas", "Tiempo, un minuto \(real en audio, estimado en TTS\)"/);
 });
 
 test('Navigation actions include previous and next bookmarks and exact minute jumps', () => {
@@ -21,4 +21,12 @@ test('Navigation actions include previous and next bookmarks and exact minute ju
   assert.match(reader, /speech\.seek\(seconds: destination\)/);
   assert.match(reader, /Button\("Retroceder 30 segundos"\)/);
   assert.match(reader, /Button\("Avanzar 30 segundos"\)/);
+});
+
+test('Time navigation for synthesized text uses reading speed and word boundaries', () => {
+  assert.match(reader, /let wordStarts: \[Int\]/);
+  assert.match(reader, /func offset\(movingWords count: Int, from offset: Int\)/);
+  assert.match(reader, /180 \* speed/);
+  assert.match(reader, /jump\(to: destination\)/);
+  assert.match(reader, /Tiempo estimado, un minuto/);
 });

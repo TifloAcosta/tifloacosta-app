@@ -450,6 +450,11 @@ final class NativeReadingSpeech: ObservableObject {
         player.currentTime = max(0, min(player.duration, player.currentTime + seconds))
     }
 
+    func seek(seconds: TimeInterval) {
+        guard let player else { return }
+        player.currentTime = max(0, min(player.duration, seconds))
+    }
+
     func pause() {
         if let player { player.pause() } else { synthesizer.pauseSpeaking(at: .word) }
         sleep(after: 0) // Al pausar no sigue corriendo la cuenta del apagado.
@@ -1211,7 +1216,8 @@ struct NativeReadingScreen: View {
             : duration * Double(currentPercent) / 100
         let destination = max(0, min(duration, currentSeconds + Double(direction) * 60))
         seekAudio(to: trackIndex, percent: Int((destination / duration * 100).rounded()))
-        if speech.hasAudio { speech.seek(to: Int((destination / duration * 100).rounded())) }
+        // Seek to the actual second, not to a rounded percent of the track.
+        if speech.hasAudio { speech.seek(seconds: destination) }
         actionMessage = "Posición de audio: \(Int(destination)) segundos."
     }
 

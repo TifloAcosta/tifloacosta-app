@@ -920,6 +920,11 @@ private fun NativeReadingScreen(
         mutableIntStateOf(prefs.getInt("engine." + book.id, 0))
     }
     var engineMessage by remember(book.id) { mutableStateOf("") }
+    var geminiVoiceIndex by rememberSaveable(book.id) {
+        mutableIntStateOf(
+            NativeGeminiSpeech.voices.indexOf(prefs.getString("gemini.voice", "Kore"))
+                .coerceAtLeast(0))
+    }
     var showMarks by rememberSaveable(book.id) { mutableStateOf(false) }
     var jumping by rememberSaveable(book.id) { mutableStateOf(false) }
     var jumpTo by rememberSaveable(book.id) { mutableFloatStateOf(0f) }
@@ -1111,6 +1116,14 @@ private fun NativeReadingScreen(
             if (active) send(NativeReaderPlaybackService.ACTION_VOICE)
         }
         if (readingEngine == 1) {
+            ReaderCompactChoice(
+                if (english) "Voice" else "Voz",
+                NativeGeminiSpeech.voices, geminiVoiceIndex, english
+            ) { selected ->
+                geminiVoiceIndex = selected
+                prefs.edit().putString("gemini.voice", NativeGeminiSpeech.voices[selected]).apply()
+                if (active) send(NativeReaderPlaybackService.ACTION_VOICE)
+            }
             Text(if (english)
                 "Gemini sends text segments to Google and may use your quota. Choose System for local reading."
                 else "Gemini envía fragmentos del documento a Google y puede consumir cuota. Selecciona Sistema para lectura local.")

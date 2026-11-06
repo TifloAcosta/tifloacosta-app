@@ -169,6 +169,38 @@ struct NativePodcastScreen: View {
     @State private var visible = 10
     @StateObject private var library = NativePodcastLibrary()
     @State private var choosingOPML = false
+    @State private var followedEpisodes: [NativePodcastEpisode] = []
+    @State private var followedFeedTitle = ""
+    @State private var followedFeedStatus = ""
+    @State private var followedFeedBusy = false
+
+    @MainActor
+    private func loadFollowed(_ feed: NativeFollowedPodcast) async {
+        guard !followedFeedBusy, let url = URL(string: feed.url),
+              ["http", "https"].contains(url.scheme?.lowercased() ?? "") else { return }
+        followedFeedBusy = true
+        followedFeedTitle = feed.title
+        followedFeedStatus = "Consultando episodios."
+        defer { followedFeedBusy = false }
+        do {
+            var request = URLRequest(url: url)
+            request.timeoutInterval = 20
+            let (data, response) = try await URLSession.shared.data(for: request)
+            guard data.count <= 2_000_000, (response as? HTTPURLResponse)?.statusCode == 200
+            else { throw URLError(.badServerResponse) }
+            let parser = XMLParser(data: data)
+            let delegate = NativeRSSParser()
+            parser.shouldResolveExternalEntities = false
+            parser.delegate = delegate
+            guard parser.parse() else { throw URLError(.cannotParseResponse) }
+            followedEpisodes = Array(delegate.episodes.prefix(100))
+            followedFeedStatus = followedEpisodes.isEmpty
+                ? "Este canal no tiene episodios de audio compatibles." : ""
+        } catch {
+            followedEpisodes = []
+            followedFeedStatus = "No se pudieron consultar los episodios de este canal."
+        }
+    }
 
     private func clock(_ value: Double) -> String {
         let seconds = Int(max(0, value))
@@ -238,7 +270,22 @@ struct NativePodcastScreen: View {
                 Button("Importar suscripciones OPML") { choosingOPML = true }
                 ForEach(library.followed) { feed in
                     Text(feed.title)
+                    Button("Consultar episodios: \(feed.title)") {
+                        Task { await loadFollowed(feed) }
+                    }
                     Button("Dejar de seguir: \(feed.title)") { library.unfollow(feed) }
+                }
+                if followedFeedBusy { ProgressView("Cargando episodios seguidos") }
+                if !followedFeedStatus.isEmpty { Text(followedFeedStatus) }
+                if !followedEpisodes.isEmpty {
+                    Text("Episodios de \(followedFeedTitle)").font(.headline)
+                    ForEach(followedEpisodes) { episode in
+                        Button("Reproducir: \(episode.title)") { player.select(episode) }
+                        Button(library.isFavorite(episode) ? "Quitar de favoritos: \(episode.title)" :
+                               "Añadir a favoritos: \(episode.title)") {
+                            library.toggleFavorite(episode)
+                        }
+                    }
                 }
             }
             Section("Escuchar en otras plataformas") {

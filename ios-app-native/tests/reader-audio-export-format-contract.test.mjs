@@ -9,7 +9,11 @@ test('format selector offers only actual supported native codecs', () => {
   assert.match(reader, /Picker\("Formato", selection: \$audioExportFormat\)/);
   assert.match(reader, /Text\("M4A"\)/);
   assert.match(reader, /Text\("WAV"\)/);
-  assert.match(reader, /MP3 estará disponible cuando se incorpore el codificador/);
+  assert.match(reader, /Text\("MP3"\)/);
+  assert.match(reader, /audioExportFormat: NativeGeminiAudioExport.Format = \.mp3/);
+  assert.match(exportCode, /case mp3 = "MP3"/);
+  assert.match(exportCode, /MP3Encoder\(options: MP3EncoderOptions/);
+  assert.match(exportCode, /session\.generateXingHeader\(\)/);
   assert.match(exportCode, /case m4a = "M4A"/);
   assert.match(exportCode, /case wav = "WAV"/);
 });

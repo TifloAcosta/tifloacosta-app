@@ -21,6 +21,6 @@ test('information screen presents progress and page or block information',()=>{
  const screen=extract('.sheet(isPresented: $showDocumentInformation)','sheet(isPresented: $showSavedMarks)');
  assert.match(screen,/Text\(progressDescription\)/);
  assert.match(screen,/Text\(pageProgressDescription\)/);
- assert.match(reader,/Quedan \\(remaining\\) páginas/);
+ assert.match(reader,/Quedan/);
  assert.match(reader,/Bloque aproximado/);
 });

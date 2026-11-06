@@ -23,6 +23,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -101,6 +104,15 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
     var confirmingDelete by remember { mutableStateOf(false) }
     var checking by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
+    val preview = remember { NativeGeminiAudioPreview(context.applicationContext) }
+    val prefs = remember {
+        context.getSharedPreferences("native-reader-preferences", Context.MODE_PRIVATE)
+    }
+    var voice by remember { mutableStateOf(prefs.getString("gemini.voice", "Kore") ?: "Kore") }
+    var voicesExpanded by remember { mutableStateOf(false) }
+    var generating by remember { mutableStateOf(false) }
+    var samplePlaying by remember { mutableStateOf(false) }
+    DisposableEffect(Unit) { onDispose { preview.stop() } }
 
     fun open(url: String) {
         try {
@@ -147,6 +159,49 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
             }
         }) { Text(if (english) "Save" else "Guardar") }
         if (present) {
+            Button(onClick = { voicesExpanded = true }) {
+                Text((if (english) "Voice: " else "Voz: ") + voice)
+            }
+            DropdownMenu(expanded = voicesExpanded, onDismissRequest = { voicesExpanded = false }) {
+                NativeGeminiSpeech.voices.forEach { option ->
+                    DropdownMenuItem(text = { Text(option) }, onClick = {
+                        voice = option
+                        prefs.edit().putString("gemini.voice", option).apply()
+                        voicesExpanded = false
+                    })
+                }
+            }
+            Button(enabled = !generating, onClick = {
+                generating = true
+                preview.stop()
+                samplePlaying = false
+                message = if (english) "Generating audio; your account quota may be used."
+                    else "Generando audio; puede consumir cuota de tu cuenta."
+                scope.launch {
+                    try {
+                        val wav = withContext(Dispatchers.IO) {
+                            NativeGeminiSpeech.generate(context,
+                                if (english) "Hello. This is a Gemini voice sample in TifloLector."
+                                else "Hola. Esta es una prueba de voz Gemini en TifloLector.",
+                                voice)
+                        }
+                        preview.play(wav)
+                        samplePlaying = true
+                        message = if (english) "Playing Gemini sample."
+                            else "Reproduciendo muestra Gemini."
+                    } catch (_: Exception) {
+                        message = if (english) "Could not generate or play Gemini audio."
+                            else "No se pudo generar o reproducir audio Gemini."
+                    }
+                    generating = false
+                }
+            }) { Text(if (english) "Listen" else "Escuchar") }
+            if (samplePlaying) {
+                Button(onClick = {
+                    preview.stop()
+                    samplePlaying = false
+                }) { Text(if (english) "Stop" else "Detener") }
+            }
             Button(enabled = !checking, onClick = {
                 checking = true
                 scope.launch {
@@ -205,8 +260,8 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
                 }
             }
         }
-        Text(if (english) "Your API key and quota belong to you. The app does not provide a shared key. Gemini voice generation will be enabled only after provider integration is verified."
-            else "Cada usuario gestiona su clave, cuota y posibles costes. TifloAcosta no proporciona una clave compartida. La voz Gemini se activará cuando la integración esté verificada.")
+        Text(if (english) "Your API key and quota belong to you. The app does not provide a shared key. Gemini sample generates real audio and may use quota. Full document playback is not yet integrated."
+            else "Cada usuario gestiona su clave, cuota y posibles costes. TifloAcosta no proporciona una clave compartida. La muestra genera audio real y puede consumir cuota. La lectura completa de documentos todavía no está integrada.")
         if (message.isNotBlank()) {
             Text(message, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
         }

@@ -153,6 +153,8 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
                 Text("La aplicación Phonon para VoiceOver no supone automáticamente compatibilidad con el reproductor de TifloLector.")
                 Link("Phonon para iPhone", destination: URL(string: "https://apps.apple.com/app/id6828988617")!)
                 Link("Motor Phonon", destination: URL(string: "https://gradium.ai/phonon")!)
+                Link("Modelos Phonon", destination: URL(string: "https://huggingface.co/gradium")!)
+                Text("El modelo Core ML debe estar exportado para iPhone y contener bundle.json. Un checkpoint Android o un ZIP de voz aislada no sirve para iOS.")
                 if #available(iOS 18, *) {
                     Text(phononInstalled ? "Modelo inglés instalado" : "Modelo inglés sin instalar")
                     Button("Descargar modelo Phonon inglés") {

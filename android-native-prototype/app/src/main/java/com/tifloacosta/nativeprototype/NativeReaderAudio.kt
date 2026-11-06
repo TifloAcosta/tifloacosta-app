@@ -44,6 +44,7 @@ fun NativeReaderAudioScreen(
     english: Boolean,
     startOnOpen: Boolean,
     onUpdate: (ReaderBook) -> Unit,
+    onDeleteRequest: () -> Unit,
     onBack: () -> Unit
 ) {
     val context = LocalContext.current
@@ -173,6 +174,9 @@ fun NativeReaderAudioScreen(
         verticalArrangement = Arrangement.spacedBy(10.dp)) {
         TextButton(onClick = onBack) {
             Text(if (english) "Back to My library" else "Volver a Mi biblioteca")
+        }
+        TextButton(onClick = onDeleteRequest) {
+            Text(if (english) "Delete this audiobook" else "Eliminar este audiolibro")
         }
         Text(book.title, style = MaterialTheme.typography.titleLarge,
             modifier = Modifier.fillMaxWidth().clickable { perform(selectedAction) }.semantics {

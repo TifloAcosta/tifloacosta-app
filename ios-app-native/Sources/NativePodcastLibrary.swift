@@ -88,18 +88,24 @@ final class NativePodcastLibrary: ObservableObject {
         }
     }
 
-    func importOPML(_ url: URL) throws -> Int {
-        let access = url.startAccessingSecurityScopedResource()
-        defer { if access { url.stopAccessingSecurityScopedResource() } }
-        let data = try Data(contentsOf: url, options: .mappedIfSafe)
-        guard data.count <= 2_000_000 else { throw URLError(.dataLengthExceedsMaximum) }
-        let delegate = NativeOPMLReader()
-        let parser = XMLParser(data: data)
-        parser.shouldResolveExternalEntities = false
-        parser.delegate = delegate
-        guard parser.parse() else { throw URLError(.cannotParseResponse) }
+    func importOPML(_ url: URL) async throws -> Int {
+        // Import on a worker rather than blocking VoiceOver navigation while parsing.
+        let items = try await Task.detached(priority: .userInitiated) { () throws -> [NativeFollowedPodcast] in
+            let access = url.startAccessingSecurityScopedResource()
+            defer { if access { url.stopAccessingSecurityScopedResource() } }
+            let handle = try FileHandle(forReadingFrom: url)
+            defer { try? handle.close() }
+            let data = try handle.read(upToCount: 2_000_001) ?? Data()
+            guard data.count <= 2_000_000 else { throw URLError(.dataLengthExceedsMaximum) }
+            let delegate = NativeOPMLReader()
+            let parser = XMLParser(data: data)
+            parser.shouldResolveExternalEntities = false
+            parser.delegate = delegate
+            guard parser.parse() else { throw URLError(.cannotParseResponse) }
+            return delegate.results
+        }.value
         let before = followed.count
-        for item in delegate.results { follow(title: item.title, url: item.url) }
+        for item in items { follow(title: item.title, url: item.url) }
         let added = followed.count - before
         notice = "OPML importado. Nuevas suscripciones: \(added)."
         return added

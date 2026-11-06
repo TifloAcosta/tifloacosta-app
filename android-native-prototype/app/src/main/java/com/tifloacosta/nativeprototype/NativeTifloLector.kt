@@ -423,7 +423,7 @@ fun NativeTifloLector(
             Button(onClick = { importer.launch(arrayOf("*/*")) },
                 enabled = importStatus.isBlank(),
                 modifier = Modifier.fillMaxWidth()) {
-                Text(if (english) "Device and cloud files" else "Archivos del dispositivo y nubes")
+                Text(if (english) "Files" else "Archivos")
             }
             Button(onClick = { screen = "catalogs" }, modifier = Modifier.fillMaxWidth()) {
                 Text(if (english) "External libraries (OPDS)" else "Bibliotecas externas (OPDS)")
@@ -603,14 +603,14 @@ fun NativeTifloLector(
             selectionMode = !selectionMode
             if (!selectionMode) selectedBookIds = emptySet()
         }) {
-            Text(if (selectionMode) (if (english) "Finish selection" else "Terminar selección")
-                else (if (english) "Select multiple books" else "Seleccionar varios libros"))
+            Text(if (selectionMode) (if (english) "Done" else "Terminar")
+                else (if (english) "Select" else "Selección"))
         }
         if (selectionMode) {
             Text((if (english) "Selected: " else "Seleccionados: ") + selectedBookIds.size)
             Button(onClick = { confirmMultipleDeletion = true },
                 enabled = selectedBookIds.isNotEmpty()) {
-                Text(if (english) "Delete selected" else "Eliminar seleccionados")
+                Text(if (english) "Delete" else "Eliminar")
             }
         }
         if (loading) Text(if (english) "Loading library" else "Cargando biblioteca")

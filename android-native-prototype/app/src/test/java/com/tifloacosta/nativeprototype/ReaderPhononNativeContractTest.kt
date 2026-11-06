@@ -15,7 +15,7 @@ class ReaderPhononNativeContractTest {
         assertTrue(runtime.contains("System.loadLibrary(\"ptts_ffi\")"))
         assertTrue(runtime.contains("PhononTTS("))
         assertTrue(runtime.contains("AudioTrack(") || runtime.contains("AudioTrack.Builder()"))
-        assertTrue(runtime.contains("phononReader"))
+        assertTrue(runtime.contains("fun pause()"))
     }
 
     @Test fun phononReadingAndVoiceSelectionRemainExplicit() {

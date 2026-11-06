@@ -7,6 +7,8 @@ import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
 import android.util.Base64
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -104,6 +106,32 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
     var confirmingDelete by remember { mutableStateOf(false) }
     var checking by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
+    var phononModelInstalled by remember {
+        mutableStateOf(NativePhononModelStore.installed(context))
+    }
+    var phononImportBusy by remember { mutableStateOf(false) }
+    var phononDeleteConfirm by remember { mutableStateOf(false) }
+    val importPhonon = rememberLauncherForActivityResult(
+        ActivityResultContracts.OpenDocument()
+    ) { uri ->
+        if (uri != null && !phononImportBusy) {
+            phononImportBusy = true
+            message = if (english) "Installing Phonon model…" else "Instalando modelo Phonon…"
+            scope.launch {
+                message = try {
+                    withContext(Dispatchers.IO) {
+                        NativePhononModelStore.importZip(context, uri)
+                    }
+                    phononModelInstalled = true
+                    if (english) "Phonon model installed locally."
+                    else "Modelo Phonon instalado en el dispositivo."
+                } catch (error: Exception) {
+                    error.localizedMessage ?: "No se pudo importar el modelo Phonon."
+                }
+                phononImportBusy = false
+            }
+        }
+    }
     val preview = remember { NativeGeminiAudioPreview(context.applicationContext) }
     val prefs = remember {
         context.getSharedPreferences("native-reader-preferences", Context.MODE_PRIVATE)
@@ -133,6 +161,39 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
         Button(onClick = { open("https://gradium.ai/phonon") }) {
             Text(if (english) "Phonon" else "Phonon")
         }
+        Text(
+            if (phononModelInstalled) {
+                if (english) "CPU model installed." else "Modelo CPU instalado."
+            } else {
+                if (english) "No CPU model installed." else "Sin modelo CPU instalado."
+            }
+        )
+        Button(
+            enabled = !phononImportBusy,
+            onClick = { importPhonon.launch(arrayOf("application/zip", "application/octet-stream")) }
+        ) { Text(if (english) "Import model ZIP" else "Importar modelo ZIP") }
+        Text(if (english)
+            "Import only a complete CPU checkpoint with its own license. Phonon 31m speaks English; the Spanish 40m model has non-commercial restrictions. A model alone does not install the native engine."
+            else "Importa un modelo CPU completo y respeta su licencia. Phonon 31m habla inglés; el modelo español 40m tiene restricciones de uso no comercial. Importar el modelo no instala por sí solo el motor nativo.")
+        if (phononModelInstalled) {
+            if (phononDeleteConfirm) {
+                Text(if (english) "Delete installed Phonon model?" else "¿Eliminar el modelo Phonon?")
+                Button(onClick = {
+                    phononModelInstalled = !NativePhononModelStore.remove(context)
+                    phononDeleteConfirm = false
+                    message = if (phononModelInstalled) "No se pudo eliminar el modelo."
+                        else "Modelo Phonon eliminado."
+                }) { Text(if (english) "Confirm" else "Confirmar") }
+                TextButton(onClick = { phononDeleteConfirm = false }) {
+                    Text(if (english) "Cancel" else "Cancelar")
+                }
+            } else {
+                TextButton(onClick = { phononDeleteConfirm = true }) {
+                    Text(if (english) "Delete model" else "Eliminar modelo")
+                }
+            }
+        }
+
         Text("Gemini")
         Text(if (present) (if (english) "Key saved" else "Clave guardada")
             else (if (english) "No key" else "Sin clave"))

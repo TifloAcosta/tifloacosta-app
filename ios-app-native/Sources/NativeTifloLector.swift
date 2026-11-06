@@ -14,6 +14,10 @@ struct NativeReaderPreferences: Codable, Hashable {
     var strongText: Bool? = nil
 }
 
+struct NativeTextBookmark: Codable, Hashable {
+    let offset: Int
+}
+
 struct NativeAudioBookmark: Codable, Hashable {
     let track: Int
     let percent: Int
@@ -28,6 +32,7 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
     var fileExtension: String? = nil
     var trackPaths: [String]? = nil
     var markedPositions: [Int]? = nil
+    var textBookmarks: [NativeTextBookmark]? = nil
     var isFavorite: Bool? = nil
     var lastPercent: Int? = nil
     // Exact text cursor, retaining lastPercent for older stored libraries.
@@ -40,7 +45,8 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
     var hasAudio: Bool { !(trackPaths ?? []).isEmpty }
     var bookmarks: [Int] { markedPositions ?? [] }
     var savedAudioBookmarks: [NativeAudioBookmark] { audioBookmarks ?? [] }
-    var hasBookmarks: Bool { !bookmarks.isEmpty || !savedAudioBookmarks.isEmpty }
+    var savedTextBookmarks: [NativeTextBookmark] { textBookmarks ?? [] }
+    var hasBookmarks: Bool { !bookmarks.isEmpty || !savedTextBookmarks.isEmpty || !savedAudioBookmarks.isEmpty }
     var formatLabel: String { (fileExtension ?? "txt").uppercased() }
 }
 
@@ -184,18 +190,19 @@ final class NativeReaderLibrary: ObservableObject {
     }
 
     @discardableResult
-    func addBookmark(_ document: NativeReadingDocument, at percent: Int) -> Bool {
+    func addBookmark(_ document: NativeReadingDocument, at offset: Int) -> Bool {
         guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return false }
-        let previous = documents[i].markedPositions
-        var bookmarks = previous ?? []
-        let location = max(0, min(100, percent))
-        if !bookmarks.contains(location) { bookmarks.append(location) }
-        documents[i].markedPositions = bookmarks.sorted()
+        let previous = documents[i].textBookmarks
+        let mark = NativeTextBookmark(offset: max(0, min(document.body.count, offset)))
+        var saved = previous ?? []
+        if saved.contains(mark) { return true }
+        saved.append(mark)
+        documents[i].textBookmarks = saved.sorted { $0.offset < $1.offset }
         do {
             try save()
             return true
         } catch {
-            documents[i].markedPositions = previous
+            documents[i].textBookmarks = previous
             return false
         }
     }
@@ -218,6 +225,12 @@ final class NativeReaderLibrary: ObservableObject {
             documents[i].audioBookmarks = previous
             return false
         }
+    }
+
+    func removeTextBookmark(_ document: NativeReadingDocument, mark: NativeTextBookmark) {
+        guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
+        documents[i].textBookmarks?.removeAll { $0 == mark }
+        try? save()
     }
 
     func removeAudioBookmark(_ document: NativeReadingDocument, mark: NativeAudioBookmark) {
@@ -663,6 +676,17 @@ struct NativeReaderLibraryScreen: View {
                             library.removeBookmark(document, at: percent)
                         }
                     }
+                    ForEach(document.savedTextBookmarks, id: \.self) { mark in
+                        NavigationLink {
+                            NativeReadingScreen(document: document, speech: speech,
+                                                startTextOffset: mark.offset)
+                        } label: {
+                            Text("\(document.title), posición \(mark.offset)")
+                        }
+                        .accessibilityAction(named: Text("Eliminar marca")) {
+                            library.removeTextBookmark(document, mark: mark)
+                        }
+                    }
                     ForEach(document.savedAudioBookmarks, id: \.self) { mark in
                         NavigationLink {
                             NativeReadingScreen(document: document, speech: speech,
@@ -787,7 +811,7 @@ struct NativeReaderLibraryScreen: View {
                     LabeledContent("Formato", value: document.formatLabel)
                     LabeledContent("Importado", value:
                         document.importedAt.formatted(date: .abbreviated, time: .shortened))
-                    LabeledContent("Marcas", value: "\(library.latest(document).bookmarks.count)")
+                    LabeledContent("Marcas", value: "\(library.latest(document).bookmarks.count + library.latest(document).savedTextBookmarks.count + library.latest(document).savedAudioBookmarks.count)")
                     LabeledContent("Carpeta", value: library.latest(document).folderName ?? "Sin carpeta")
                     LabeledContent("Leído", value: "\(library.latest(document).lastPercent ?? 0) por ciento")
                     LabeledContent("Pendiente", value: "\(100 - (library.latest(document).lastPercent ?? 0)) por ciento")
@@ -917,6 +941,7 @@ struct NativeReadingScreen: View {
     let document: NativeReadingDocument
     @ObservedObject var speech: NativeReadingSpeech
     var startPercent: Int? = nil
+    var startTextOffset: Int? = nil
     var startTrack: Int? = nil
 
     @EnvironmentObject private var library: NativeReaderLibrary
@@ -960,11 +985,13 @@ struct NativeReadingScreen: View {
     private let sleepMinutes: [Int] = [0, 5, 10, 15, 30, 45, 60]
 
     init(document: NativeReadingDocument, speech: NativeReadingSpeech,
-         startPercent: Int? = nil, startTrack: Int? = nil) {
+         startPercent: Int? = nil, startTrack: Int? = nil,
+         startTextOffset: Int? = nil) {
         self.document = document
         self.speech = speech
         self.startPercent = startPercent
         self.startTrack = startTrack
+        self.startTextOffset = startTextOffset
         self.textLayout = NativeReaderTextLayout(document.body)
         self.wordCount = document.body.split(whereSeparator: \.isWhitespace).count
     }
@@ -1119,7 +1146,7 @@ struct NativeReadingScreen: View {
 
     private func addBookmark() {
         if tracks.isEmpty {
-            actionMessage = library.addBookmark(document, at: currentPercent)
+            actionMessage = library.addBookmark(document, at: readingOffset)
                 ? "Marca guardada en \(currentPercent) por ciento."
                 : "No se pudo guardar la marca. Inténtalo de nuevo."
         } else {
@@ -1381,7 +1408,7 @@ struct NativeReadingScreen: View {
                     LabeledContent("Importado", value:
                         latest.importedAt.formatted(date: .abbreviated, time: .shortened))
                     LabeledContent("Carpeta", value: latest.folderName ?? "Sin carpeta")
-                    LabeledContent("Marcas", value: "\(latest.bookmarks.count + latest.savedAudioBookmarks.count)")
+                    LabeledContent("Marcas", value: "\(latest.bookmarks.count + latest.savedTextBookmarks.count + latest.savedAudioBookmarks.count)")
                     Text(progressDescription)
                     if !tracks.isEmpty {
                         LabeledContent("Pistas de audio", value: "\(tracks.count)")
@@ -1405,6 +1432,15 @@ struct NativeReadingScreen: View {
                         }
                         .accessibilityAction(named: Text("Eliminar esta marca")) {
                             library.removeBookmark(document, at: percent)
+                        }
+                    }
+                    ForEach(latest.savedTextBookmarks, id: \.self) { mark in
+                        Button("Ir a posición \(mark.offset)") {
+                            jump(to: mark.offset)
+                            showSavedMarks = false
+                        }
+                        .accessibilityAction(named: Text("Eliminar esta marca")) {
+                            library.removeTextBookmark(document, mark: mark)
                         }
                     }
                     ForEach(latest.savedAudioBookmarks, id: \.self) { mark in
@@ -1467,9 +1503,13 @@ struct NativeReadingScreen: View {
                              max(0, tracks.count - 1))
             currentPercent = initial
             readingOffset = max(0, min(textLayout.totalCharacters,
-                startPercent == nil ? (latest.lastTextOffset ?? Int(Double(textLayout.totalCharacters) * Double(initial) / 100))
-                                    : Int(Double(textLayout.totalCharacters) * Double(initial) / 100)))
-            lastSavedPercent = initial
+                startTextOffset ?? (startPercent == nil
+                    ? (latest.lastTextOffset ?? Int(Double(textLayout.totalCharacters) * Double(initial) / 100))
+                    : Int(Double(textLayout.totalCharacters) * Double(initial) / 100))))
+            if startTextOffset != nil {
+                currentPercent = Int(Double(readingOffset) * 100 / Double(max(1, textLayout.totalCharacters)))
+            }
+            lastSavedPercent = currentPercent
             if !didApplyOpeningMode {
                 didApplyOpeningMode = true
                 if readingMode == 1 { play() }

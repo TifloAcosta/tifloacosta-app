@@ -29,3 +29,14 @@ test('Model installer is user-triggered, verified and rollback-safe', () => {
   assert.match(models, /isExcludedFromBackup = true/);
   assert.match(models, /try fm\.moveItem\(at: root, to: directory\)/);
 });
+
+test('Custom multilingual Core ML ZIP import uses file integrity checks and clear user permission', () => {
+  const settings = source('NativeReaderExternalVoiceCredentials.swift');
+  assert.match(models, /static func installUserBundle\(zipURL: URL\)/);
+  assert.match(models, /verifyBundle\(root\)/);
+  assert.match(settings, /fileImporter\(/);
+  assert.match(settings, /phononLicenseAcknowledged/);
+  assert.match(settings, /Idioma Phonon/);
+  assert.match(runtime, /unsupportedLanguage/);
+  assert.match(runtime, /selectedLanguage/);
+});

@@ -289,20 +289,27 @@ fun NativePodcastScreen(english: Boolean, media: List<MediaItem>) {
     var followedEpisodes by remember { mutableStateOf<List<NativeEpisode>>(emptyList()) }
     var followedTitle by remember { mutableStateOf("") }
     var followedBusy by remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
+    var opmlImportBusy by remember { mutableStateOf(false) }
     val importOPML = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
-        if (uri != null) {
-            runCatching { library.importOPML(uri) }
-                .onSuccess { count ->
+        if (uri != null && !opmlImportBusy) {
+            opmlImportBusy = true
+            libraryNotice = if (english) "Importing subscriptions…" else "Importando suscripciones…"
+            scope.launch {
+                try {
+                    val count = withContext(Dispatchers.IO) { library.importOPML(uri) }
                     followed = library.subscriptions()
                     libraryNotice = if (english) "Imported $count podcast subscriptions."
                         else "Suscripciones importadas: $count."
-                }.onFailure {
+                } catch (_: Exception) {
                     libraryNotice = if (english) "Could not import OPML."
                         else "No se pudo importar el archivo OPML."
+                } finally {
+                    opmlImportBusy = false
                 }
+            }
         }
     }
-    val scope = rememberCoroutineScope()
     var episodes by remember { mutableStateOf<List<NativeEpisode>>(emptyList()) }
     var status by remember { mutableStateOf("") }
     var chosen by remember { mutableStateOf<NativeEpisode?>(null) }
@@ -356,7 +363,7 @@ fun NativePodcastScreen(english: Boolean, media: List<MediaItem>) {
             followed = library.subscriptions()
             libraryNotice = if (english) "Subscription saved." else "Suscripción guardada."
         }) { Text(if (english) "Follow TifloAcosta podcast" else "Seguir el pódcast TifloAcosta") }
-        Button(onClick = { importOPML.launch(arrayOf("text/xml", "application/xml", "text/x-opml", "*/*")) }) {
+        Button(enabled = !opmlImportBusy, onClick = { importOPML.launch(arrayOf("text/xml", "application/xml", "text/x-opml", "*/*")) }) {
             Text(if (english) "Import OPML subscriptions" else "Importar suscripciones OPML")
         }
         Text(if (english) "Favorite episodes: ${favorites.size}" else "Episodios favoritos: ${favorites.size}")
@@ -372,8 +379,9 @@ fun NativePodcastScreen(english: Boolean, media: List<MediaItem>) {
                         followedEpisodes = withContext(Dispatchers.IO) {
                             episodesFromRss(limitedResponse(podcast.url))
                         }
-                        val newCount = library.recordFeedCheck(
-                            podcast.url, followedEpisodes.map { it.url })
+                        val newCount = withContext(Dispatchers.IO) {
+                            library.recordFeedCheck(podcast.url, followedEpisodes.map { it.url })
+                        }
                         libraryNotice = if (followedEpisodes.isEmpty()) {
                             if (english) "No playable episodes" else "Sin episodios compatibles"
                         } else if (english) "$newCount new episodes since the previous check."

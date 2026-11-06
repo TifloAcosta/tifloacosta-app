@@ -12,19 +12,24 @@ import PhononTTS
 final class NativePhononDriver {
     static let shared = NativePhononDriver()
     private var model: Phonon?
+    private var loadedLanguage: String?
 
     private func load() async throws -> Phonon {
         guard NativePhononModelStore.isInstalled else {
             throw NativePhononRuntime.RuntimeError.modelMissing
         }
-        if let model { return model }
         let language = NativePhononRuntime.selectedLanguage
+        if let model, loadedLanguage == language.rawValue { return model }
+        // A language change must not silently keep the previously loaded normalizer.
+        model = nil
+        loadedLanguage = nil
         let loaded = try await Phonon.load(
             models: NativePhononModelStore.directory, language: language)
         guard loaded.languages.contains(language.rawValue) else {
             throw NativePhononRuntime.RuntimeError.unsupportedLanguage
         }
         model = loaded
+        loadedLanguage = language.rawValue
         return loaded
     }
 
@@ -54,7 +59,10 @@ final class NativePhononDriver {
         return NativeGeminiSpeech.wav(pcm: pcm)
     }
 
-    func unload() { model = nil }
+    func unload() {
+        model = nil
+        loadedLanguage = nil
+    }
 }
 #endif
 
@@ -87,6 +95,16 @@ enum NativePhononRuntime {
         }
     }
     #endif
+
+    static var previewText: String {
+        switch UserDefaults.standard.string(forKey: "native-reader-phonon-language") ?? "en" {
+        case "es": return "Hola. Esta es una muestra de la voz Phonon."
+        case "fr": return "Bonjour. Voici un exemple de la voix Phonon."
+        case "de": return "Hallo. Dies ist eine Hörprobe der Phonon-Stimme."
+        case "pt": return "Olá. Esta é uma amostra da voz Phonon."
+        default: return "Hello. This is a sample of the Phonon voice."
+        }
+    }
 
     static var isUsable: Bool {
         #if canImport(PhononTTS)
@@ -138,7 +156,7 @@ final class NativePhononPreview: ObservableObject {
         task = Task {
             do {
                 let sound = try await NativePhononRuntime.generate(
-                    text: "Hello. This is a sample of the Phonon voice.",
+                    text: NativePhononRuntime.previewText,
                     voice: voice)
                 try Task.checkCancellation()
                 guard token == generation else { return }

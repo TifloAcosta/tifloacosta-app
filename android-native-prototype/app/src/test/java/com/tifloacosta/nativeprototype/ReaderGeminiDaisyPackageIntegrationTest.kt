@@ -85,7 +85,7 @@ class ReaderGeminiDaisyPackageIntegrationTest {
             assertTrue(ref.endsWith(".mp3"))
             val actualAudio = files.getValue(ref)
             assertTrue(actualAudio.size > 100)
-            assertTrue(actualAudio.indices.dropLast(1).any { offset ->
+            assertTrue((0 until actualAudio.size - 1).any { offset ->
                 (actualAudio[offset].toInt() and 255) == 255 &&
                     (actualAudio[offset + 1].toInt() and 0xE0) == 0xE0
             })

@@ -852,9 +852,34 @@ private struct NativeReaderTextLayout {
     let namedPages: [NativeReaderNavigationPoint]
     let hasRealPages: Bool
     let totalCharacters: Int
+    let wordStarts: [Int]
+
+    // Swift Character offsets (not UTF-16) keep these positions aligned with
+    // the cursor used throughout the native reader.
+    func offset(movingWords count: Int, from offset: Int) -> Int {
+        guard !wordStarts.isEmpty else { return 0 }
+        var low = 0
+        var high = wordStarts.count
+        while low < high {
+            let mid = (low + high) / 2
+            if wordStarts[mid] <= offset { low = mid + 1 } else { high = mid }
+        }
+        let current = max(0, low - 1)
+        let target = current + count
+        if target >= wordStarts.count { return totalCharacters }
+        return wordStarts[max(0, target)]
+    }
 
     init(_ body: String) {
         totalCharacters = body.count
+        var starts: [Int] = []
+        var inWord = false
+        for (index, character) in body.enumerated() {
+            let isWord = !character.isWhitespace
+            if isWord && !inWord { starts.append(index) }
+            inWord = isWord
+        }
+        wordStarts = starts
         var sections: [String] = []
         var offsets: [Int] = []
         var paragraphs: [Int] = [0]
@@ -1145,15 +1170,15 @@ struct NativeReadingScreen: View {
         }
     }
 
-    // The reader offers the same navigation selector for text and audio,
-    // but the minute option only applies to real audio timelines.
+    // The reader offers a minute option for audio (real time)
+    // and for TTS text (estimated by reading speed).
     private var navigationOptions: [(id: Int, label: String)] {
         if isAudioOnly {
             return [(5, "Marcas"), (6, "Tiempo, un minuto")]
         }
         return [(0, "Bloque"), (1, "Párrafo"), (2, "Frase"),
-                (3, "Página"), (4, "Encabezado"), (5, "Marcas")]
-            + (tracks.isEmpty ? [] : [(6, "Tiempo, un minuto")])
+                (3, "Página"), (4, "Encabezado"), (5, "Marcas"),
+                (6, tracks.isEmpty ? "Tiempo estimado, un minuto" : "Tiempo, un minuto")]
     }
 
     private var navigationChoices: [String] { navigationOptions.map(\.label) }
@@ -1208,6 +1233,16 @@ struct NativeReadingScreen: View {
     }
 
     private func moveByMinute(_ direction: Int) {
+        if tracks.isEmpty {
+            // Baseline estimate: 180 words/minute at normal TTS rate.
+            // The selected rate scales the step; actual pronunciation is variable.
+            let wordsPerMinute = max(1, Int((180 * speed).rounded()))
+            let destination = textLayout.offset(
+                movingWords: direction * wordsPerMinute, from: readingOffset)
+            jump(to: destination)
+            actionMessage = "Desplazamiento aproximado de un minuto de lectura."
+            return
+        }
         guard tracks.indices.contains(trackIndex),
               let url = NativeReaderFormats.storedURL(for: tracks[trackIndex]) else { return }
         let duration: TimeInterval

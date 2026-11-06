@@ -9,7 +9,7 @@ test('Library has no global bookmarks section', () => {
 });
 
 test('Bookmarks remain accessible in each opened document', () => {
-  assert.match(reader, /Button\("Marcas guardadas"\)/);
+  assert.match(reader, /Button\("Marcas"\)/);
   assert.match(reader, /\.sheet\(isPresented: \$showSavedMarks\)/);
   assert.match(reader, /ForEach\(latest\.bookmarks/);
   assert.match(reader, /ForEach\(latest\.savedTextBookmarks/);

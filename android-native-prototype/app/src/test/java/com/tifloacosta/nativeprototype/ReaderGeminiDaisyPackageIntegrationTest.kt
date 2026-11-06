@@ -99,4 +99,16 @@ class ReaderGeminiDaisyPackageIntegrationTest {
             assertTrue(src.substringAfter("#") in smilIDs)
         }
     }
+    @Test fun verificationRejectsBrokenAndIncompletePackages() {
+        for (invalid in listOf(byteArrayOf(), byteArrayOf(1, 2, 3))) {
+            try {
+                NativeDaisyPackageVerifier.validate(invalid)
+                throw AssertionError("An invalid DAISY ZIP was accepted")
+            } catch (expected: java.io.IOException) {
+                assertTrue(expected.message.orEmpty().contains("DAISY"))
+            }
+        }
+    }
+
+
 }

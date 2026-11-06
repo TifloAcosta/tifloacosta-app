@@ -1055,6 +1055,7 @@ struct NativeReadingScreen: View {
     @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
     @State private var audioExportTask: Task<Void, Never>?
     @State private var audioExportStatus = ""
+    @State private var audioExportFormat: NativeGeminiAudioExport.Format = .m4a
     @State private var showAudioExport = false
     @State private var audioExportBusy = false
     @State private var audioExportResult: URL?
@@ -1377,7 +1378,7 @@ struct NativeReadingScreen: View {
         audioExportTask = Task {
             do {
                 let url = try await NativeGeminiAudioExport.export(
-                    text: text, title: title, voice: voice,
+                    text: text, title: title, voice: voice, format: audioExportFormat,
                     progress: { done, total in
                         audioExportStatus = "Generando \(done) de \(total)."
                     })
@@ -1780,6 +1781,12 @@ struct NativeReadingScreen: View {
                                 Text(name).tag(name)
                             }
                         }
+                        Picker("Formato", selection: $audioExportFormat) {
+                            Text("M4A").tag(NativeGeminiAudioExport.Format.m4a)
+                            Text("WAV").tag(NativeGeminiAudioExport.Format.wav)
+                        }
+                        .disabled(audioExportBusy)
+                        Text("MP3 estará disponible cuando se incorpore el codificador.")
                         Button("Generar") { exportAudio() }
                             .disabled(audioExportBusy || latest.body.isEmpty)
                         if audioExportBusy {
@@ -1793,7 +1800,7 @@ struct NativeReadingScreen: View {
                         if let result = audioExportResult {
                             Button("Compartir") { NativeShare.present(url: result) }
                         }
-                        Text("WAV. Límite por documento: 60.000 caracteres.")
+                        Text("Límite por documento: 60.000 caracteres.")
                     }
                 }
                 .tifloScreenSurface()

@@ -267,6 +267,10 @@ fun NativeReaderGeneralSettings(
         NativeExternalVoiceProvidersScreen(english, onBack = { nested = "" })
         return
     }
+    if (nested == "keys") {
+        NativeReaderExternalVoiceKeysScreen(english, onBack = { nested = "" })
+        return
+    }
     if (nested == "pronunciation") {
         NativePronunciationSettings(english, onBack = { nested = "" })
         return
@@ -312,6 +316,9 @@ fun NativeReaderGeneralSettings(
                             prefs.edit().putString("voice", chosen).apply()
                         }
                     )
+                    Button(onClick = { nested = "keys" }) {
+                        Text(if (english) "External engines" else "Motores externos")
+                    }
                     Button(onClick = { nested = "external" }) {
                         Text(if (english) "Find voices from other providers"
                             else "Buscar voces de otros proveedores")

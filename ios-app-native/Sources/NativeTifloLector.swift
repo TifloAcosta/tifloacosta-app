@@ -1187,7 +1187,7 @@ struct NativeReadingScreen: View {
     @AppStorage("native-reader-reading-engine") private var readingEngine = 0
     @State private var audioExportTask: Task<Void, Never>?
     @State private var audioExportStatus = ""
-    @State private var audioExportFormat: NativeGeminiAudioExport.Format = .m4a
+    @State private var audioExportFormat: NativeGeminiAudioExport.Format = .mp3
     @State private var showAudioExport = false
     @State private var audioExportBusy = false
     @State private var audioExportResult: URL?
@@ -1837,13 +1837,13 @@ struct NativeReadingScreen: View {
                             }
                         }
                         Picker("Formato", selection: $audioExportFormat) {
+                            Text("MP3").tag(NativeGeminiAudioExport.Format.mp3)
                             Text("M4A").tag(NativeGeminiAudioExport.Format.m4a)
                             Text("WAV").tag(NativeGeminiAudioExport.Format.wav)
                             Text("DAISY").tag(NativeGeminiAudioExport.Format.daisy)
                         }
                         .disabled(audioExportBusy)
                         Text("DAISY incluye texto, audio y navegación. La compatibilidad externa está pendiente de validación.")
-                        Text("MP3 estará disponible cuando se incorpore el codificador.")
                         Button("Generar") { exportAudio() }
                             .disabled(audioExportBusy || latest.body.isEmpty)
                         if audioExportBusy {

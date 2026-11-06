@@ -8,6 +8,22 @@ enum NativeGeminiAudioExport {
     static let maximumCharacters = 60_000
     static let chunkSize = 1_200
 
+    enum Engine: String, CaseIterable, Identifiable {
+        case gemini = "Gemini"
+        case phonon = "Phonon"
+        var id: String { rawValue }
+    }
+
+    static func synthesize(_ text: String, voice: String, engine: Engine) async throws -> Data {
+        try Task.checkCancellation()
+        switch engine {
+        case .gemini:
+            return try await NativeGeminiSpeech.generate(text, voice: voice)
+        case .phonon:
+            return try await NativePhononRuntime.generate(text: text, voice: voice)
+        }
+    }
+
     enum Format: String, CaseIterable, Identifiable {
         case mp3 = "MP3"
         case m4a = "M4A"
@@ -120,10 +136,11 @@ enum NativeGeminiAudioExport {
     }
 
     static func export(text: String, title: String, voice: String, format: Format,
+                       engine: Engine = .gemini,
                        progress: @escaping @MainActor (Int, Int) -> Void) async throws -> URL {
         if format == .daisy {
             return try await NativeGeminiDaisyExport.generate(
-                text: text, title: title, voice: voice, progress: progress)
+                text: text, title: title, voice: voice, engine: engine, progress: progress)
         }
         let segments = try chunks(text)
         var pcmData = Data()
@@ -132,7 +149,7 @@ enum NativeGeminiAudioExport {
             // Very short/whitespace-only fragments still retain their place in
             // the written document; do not ask the provider for silent audio.
             if !segment.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                let wav = try await NativeGeminiSpeech.generate(segment, voice: voice)
+                let wav = try await synthesize(segment, voice: voice, engine: engine)
                 pcmData.append(try pcm(wav))
             }
             await progress(index + 1, segments.count)

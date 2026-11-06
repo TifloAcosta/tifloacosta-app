@@ -113,7 +113,7 @@ internal object NativeGeminiDaisyExport {
             <body><seq id="seq1">PLACEHOLDER_PARS</seq></body></smil>
         """.trimIndent().replace("PLACEHOLDER_PARS", parallel.joinToString("\n"))
         val chapterNav = chapterPoints.mapIndexed { index, (name, target) ->
-            "<navPoint id=\"chapter\${index + 1}\" class=\"h2\" playOrder=\"\${index + 2}\">" +
+            "<navPoint id=\"chapter${index + 1}\" class=\"h2\" playOrder=\"${index + 2}\">" +
                 "<navLabel><text>" + xml(name) + "</text></navLabel>" +
                 "<content src=\"sync.smil#" + target + "\"/></navPoint>"
         }.joinToString("\n")

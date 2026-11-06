@@ -26,6 +26,15 @@ class Phase5MediaContractTest {
         assertTrue(library.contains("putStringSet("))
     }
 
+    @Test fun favoritesCanBeReplayedAfterAppRestart() {
+        val library = source("NativePodcastLibrary.kt")
+        val screen = source("NativeMediaAndDownloads.kt")
+        assertTrue(library.contains("fun savedEpisodes()"))
+        assertTrue(library.contains("fun toggleFavoriteEpisode("))
+        assertTrue(screen.contains("library.savedEpisodes()"))
+        assertTrue(screen.contains("Reproducir favorito: "))
+    }
+
     @Test fun youtubeSubscriptionsUseExistingProtectedSessionAndPagination() {
         val account = source("NativeYouTubeAccount.kt")
         val discovery = source("NativeYouTubeSearch.kt")

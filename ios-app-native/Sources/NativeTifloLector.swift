@@ -1147,16 +1147,24 @@ struct NativeReadingScreen: View {
 
     // The reader offers the same navigation selector for text and audio,
     // but the minute option only applies to real audio timelines.
-    private var navigationChoices: [String] {
-        var choices = ["Bloque", "Párrafo", "Frase", "Página", "Encabezado", "Marcas"]
-        if !tracks.isEmpty { choices.append("Tiempo, un minuto") }
-        return choices
+    private var navigationOptions: [(id: Int, label: String)] {
+        if isAudioOnly {
+            return [(5, "Marcas"), (6, "Tiempo, un minuto")]
+        }
+        return [(0, "Bloque"), (1, "Párrafo"), (2, "Frase"),
+                (3, "Página"), (4, "Encabezado"), (5, "Marcas")]
+            + (tracks.isEmpty ? [] : [(6, "Tiempo, un minuto")])
     }
+
+    private var navigationChoices: [String] { navigationOptions.map(\.label) }
 
     private var navigationBinding: Binding<Int> {
         Binding(
-            get: { navigationUnit < navigationChoices.count ? navigationUnit : 0 },
-            set: { navigationUnit = $0 }
+            get: { navigationOptions.firstIndex(where: { $0.id == navigationUnit }) ?? 0 },
+            set: { index in
+                guard navigationOptions.indices.contains(index) else { return }
+                navigationUnit = navigationOptions[index].id
+            }
         )
     }
 
@@ -1222,7 +1230,7 @@ struct NativeReadingScreen: View {
     }
 
     private func moveUnit(_ direction: Int) {
-        switch navigationBinding.wrappedValue {
+        switch navigationOptions[navigationBinding.wrappedValue].id {
         case 5:
             if !tracks.isEmpty {
                 moveToAudioBookmark(direction)
@@ -1241,7 +1249,7 @@ struct NativeReadingScreen: View {
         default:
             guard !document.body.isEmpty,
                   let next = textLayout.nearbyOffset(readingOffset,
-                      direction: direction, unit: navigationBinding.wrappedValue) else { return }
+                      direction: direction, unit: navigationOptions[navigationBinding.wrappedValue].id) else { return }
             jump(to: next)
         }
     }

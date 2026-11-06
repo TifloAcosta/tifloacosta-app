@@ -77,7 +77,31 @@ enum NativeVoiceCredentialStore {
     }
 }
 
+/// The overview exposes exactly one accessible navigation element per motor.
 struct NativeReaderExternalVoiceSettingsScreen: View {
+    var body: some View {
+        List {
+            NavigationLink("Phonon") {
+                NativeReaderExternalVoiceDetailScreen(provider: .phonon)
+            }
+            NavigationLink("Gemini") {
+                NativeReaderExternalVoiceDetailScreen(provider: .gemini)
+            }
+        }
+        .tifloScreenSurface()
+        .navigationTitle("Motores externos")
+    }
+}
+
+/// Settings, previews, download controls and credential management only load
+/// after explicitly opening the selected motor.
+struct NativeReaderExternalVoiceDetailScreen: View {
+    enum Provider {
+        case phonon
+        case gemini
+    }
+    let provider: Provider
+
     @State private var keyInput = ""
     @State private var hasGeminiKey = NativeVoiceCredentialStore.hasKey("gemini")
     @State private var message = ""
@@ -148,7 +172,8 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
 
     var body: some View {
         List {
-            Section("Phonon") {
+            if provider == .phonon {
+                Section("Phonon") {
                 Text("Voces locales. No necesitan clave API.")
                 Text("La aplicación Phonon para VoiceOver no supone automáticamente compatibilidad con el reproductor de TifloLector.")
                 Link("Phonon para iPhone", destination: URL(string: "https://apps.apple.com/app/id6828988617")!)
@@ -238,7 +263,9 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
                     Text("Phonon nativo requiere iOS 18 o posterior.")
                 }
             }
-            Section("Gemini") {
+            }
+            if provider == .gemini {
+                Section("Gemini") {
                 Text(hasGeminiKey ? "Clave guardada" : "Sin clave")
                     .accessibilityAddTraits(.updatesFrequently)
                 Link("Crear clave", destination: URL(string: "https://aistudio.google.com/api-keys")!)
@@ -284,14 +311,15 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
                 Text("La clave se guarda solamente en este iPhone. Cada usuario gestiona sus cuotas y posibles costes con Google.")
                 Text("La prueba y la lectura de documentos con Gemini generan audio real y pueden consumir cuota. Elige Gemini en Motor para leer o exportar.")
             }
-            if !message.isEmpty {
+            }
+            if provider == .gemini && !message.isEmpty {
                 Section("Estado") {
                     Text(message).accessibilityAddTraits(.updatesFrequently)
                 }
             }
         }
         .tifloScreenSurface()
-        .navigationTitle("Motores externos")
+        .navigationTitle(provider == .phonon ? "Phonon" : "Gemini")
         .fileImporter(
             isPresented: $showPhononImporter,
             allowedContentTypes: [.zip],
@@ -326,7 +354,7 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
             }
         }
         .onAppear {
-            if NativePhononRuntime.isUsable && phononVoices.isEmpty {
+            if provider == .phonon && NativePhononRuntime.isUsable && phononVoices.isEmpty {
                 Task { await loadPhononVoices() }
             }
         }

@@ -70,13 +70,22 @@ internal object NativeGeminiAudioExport {
 
     suspend fun generate(context: Context, text: String, voice: String,
                          format: Format,
-                         progress: suspend (Int, Int) -> Unit): ByteArray {
+                         progress: suspend (Int, Int) -> Unit): ByteArray =
+        generateWithSynthesizer(context, text, voice, format, progress) { fragment, chosen ->
+            NativeGeminiSpeech.generate(context, fragment, chosen)
+        }
+
+    internal suspend fun generateWithSynthesizer(
+        context: Context, text: String, voice: String, format: Format,
+        progress: suspend (Int, Int) -> Unit,
+        synthesize: suspend (String, String) -> ByteArray
+    ): ByteArray {
         val fragments = chunks(text)
         val combined = ByteArrayOutputStream()
         fragments.forEachIndexed { index, part ->
             currentCoroutineContext().ensureActive()
             if (part.isNotBlank()) {
-                val audio = NativeGeminiSpeech.generate(context, part, voice)
+                val audio = synthesize(part, voice)
                 combined.write(pcm(audio))
             }
             progress(index + 1, fragments.size)
@@ -91,7 +100,7 @@ internal object NativeGeminiAudioExport {
         }
     }
 
-    private fun wav(data: ByteArray, rate: Int = 24000): ByteArray {
+    internal fun wav(data: ByteArray, rate: Int = 24000): ByteArray {
         val out = ByteArrayOutputStream()
         fun word(value: Int) { for (i in 0..3) out.write((value ushr (8 * i)) and 255) }
         fun half(value: Int) { out.write(value and 255); out.write((value ushr 8) and 255) }

@@ -13,13 +13,13 @@ test('Gemini credential is stored in Keychain and not UserDefaults', () => {
   assert.doesNotMatch(voices, /UserDefaults/);
 });
 
-test('API setup is accessible and does not claim synthesis is working', () => {
+test('API setup is accessible and accurately describes supported synthesis', () => {
   assert.match(settings, /NavigationLink\("Motores externos"\)/);
   assert.match(voices, /SecureField\("Pegar clave"/);
   assert.match(voices, /Button\("Guardar"\)/);
   assert.match(voices, /Button\("Eliminar", role: \.destructive\)/);
   assert.match(voices, /Button\("Comprobar"\)/);
-  assert.match(voices, /Conexión correcta\. La generación de audio todavía no está activada/);
+  assert.match(voices, /Conexión correcta\. Puedes utilizar Gemini para leer documentos y exportar audio/);
   assert.match(voices, /Phonon/);
   assert.match(voices, /No necesitan clave API/);
 });

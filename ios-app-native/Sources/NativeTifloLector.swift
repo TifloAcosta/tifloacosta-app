@@ -360,9 +360,9 @@ final class NativeReadingSpeech: ObservableObject {
         audioDelegate.onFinish = { [weak self] completed, success in
             Task { @MainActor [weak self] in
                 guard let self, self.player === completed else { return }
-                if self.isGemini {
+                if self.isGeneratedSpeech {
                     guard success else {
-                        self.geminiOnError?("No se pudo completar la pista Gemini.")
+                        self.geminiOnError?("No se pudo completar la pista de voz.")
                         self.stop()
                         return
                     }
@@ -378,6 +378,7 @@ final class NativeReadingSpeech: ObservableObject {
                         self.isPlaying = false
                         self.isPaused = false
                         self.isGemini = false
+                        self.isPhonon = false
                     }
                     return
                 }
@@ -407,6 +408,8 @@ final class NativeReadingSpeech: ObservableObject {
     private var geminiGeneration = 0
     private var geminiOnError: ((String) -> Void)?
     private(set) var isGemini = false
+    private(set) var isPhonon = false
+    var isGeneratedSpeech: Bool { isGemini || isPhonon }
     private var sleepTask: Task<Void, Never>?
     @Published private(set) var isPlaying = false
     @Published private(set) var isPaused = false
@@ -473,8 +476,25 @@ final class NativeReadingSpeech: ObservableObject {
     func playGemini(_ text: String, voice: String,
                     baseUTF16: Int, totalUTF16: Int,
                     onError: @escaping (String) -> Void) throws {
+        try playGenerated(text, engine: 1, voice: voice,
+                          baseUTF16: baseUTF16, totalUTF16: totalUTF16, onError: onError)
+    }
+
+    func playPhonon(_ text: String, voice: String,
+                    baseUTF16: Int, totalUTF16: Int,
+                    onError: @escaping (String) -> Void) throws {
+        guard NativePhononRuntime.isUsable else {
+            throw NativePhononRuntime.RuntimeError.engineUnavailable
+        }
+        try playGenerated(text, engine: 2, voice: voice,
+                          baseUTF16: baseUTF16, totalUTF16: totalUTF16, onError: onError)
+    }
+
+    private func playGenerated(_ text: String, engine: Int, voice: String,
+                    baseUTF16: Int, totalUTF16: Int,
+                    onError: @escaping (String) -> Void) throws {
         stop()
-        // Nothing is sent until the user explicitly selects Gemini and presses Play.
+        // The selected external engine only starts when the user presses Play.
         guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
         geminiSegments = geminiChunks(text)
         geminiVoice = voice
@@ -484,14 +504,15 @@ final class NativeReadingSpeech: ObservableObject {
         self.textUTF16Offset = baseUTF16
         self.textPercent = Int(Double(baseUTF16) * 100 / Double(self.totalUTF16))
         self.geminiOnError = onError
-        isGemini = true
+        isGemini = engine == 1
+        isPhonon = engine == 2
         isPlaying = true
         isPaused = false
         playNextGeminiSegment()
     }
 
     private func playNextGeminiSegment() {
-        guard isGemini, !isPaused, geminiSegments.indices.contains(geminiSegmentIndex) else { return }
+        guard isGeneratedSpeech, !isPaused, geminiSegments.indices.contains(geminiSegmentIndex) else { return }
         while geminiSegments.indices.contains(geminiSegmentIndex),
               geminiSegments[geminiSegmentIndex]
                 .trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
@@ -502,6 +523,7 @@ final class NativeReadingSpeech: ObservableObject {
             textUTF16Offset = min(totalUTF16, geminiCursorUTF16)
             textPercent = 100
             isGemini = false
+            isPhonon = false
             isPlaying = false
             return
         }
@@ -510,9 +532,14 @@ final class NativeReadingSpeech: ObservableObject {
         geminiTask = Task { [weak self] in
             guard let self else { return }
             do {
-                let data = try await NativeGeminiSpeech.generate(segment, voice: self.geminiVoice)
+                let data: Data
+                if self.isPhonon {
+                    data = try await NativePhononRuntime.generate(text: segment, voice: self.geminiVoice)
+                } else {
+                    data = try await NativeGeminiSpeech.generate(segment, voice: self.geminiVoice)
+                }
                 try Task.checkCancellation()
-                guard generation == self.geminiGeneration, self.isGemini, !self.isPaused else { return }
+                guard generation == self.geminiGeneration, self.isGeneratedSpeech, !self.isPaused else { return }
                 try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
                 try AVAudioSession.sharedInstance().setActive(true)
                 let audio = try AVAudioPlayer(data: data)
@@ -590,7 +617,7 @@ final class NativeReadingSpeech: ObservableObject {
 
     func pause() {
         if let player { player.pause() }
-        else if isGemini {
+        else if isGeneratedSpeech {
             geminiGeneration += 1
             geminiTask?.cancel()
         } else { synthesizer.pauseSpeaking(at: .word) }
@@ -600,16 +627,16 @@ final class NativeReadingSpeech: ObservableObject {
     }
 
     func resume() {
-        if isGemini {
+        isPaused = false
+        isPlaying = true
+        if isGeneratedSpeech {
             if let player { player.play() } else { playNextGeminiSegment() }
         } else if let player { player.play() } else { synthesizer.continueSpeaking() }
-        isPlaying = true
-        isPaused = false
     }
 
     func refresh() {
         if let player, !player.isPlaying && !isPaused { isPlaying = false }
-        if player == nil && !synthesizer.isSpeaking && !isPaused && !isGemini {
+        if player == nil && !synthesizer.isSpeaking && !isPaused && !isGeneratedSpeech {
             isPlaying = false
         }
     }
@@ -634,6 +661,7 @@ final class NativeReadingSpeech: ObservableObject {
         geminiSegmentIndex = 0
         geminiOnError = nil
         isGemini = false
+        isPhonon = false
         player?.stop()
         player = nil
         playlistURLs = []
@@ -1246,7 +1274,7 @@ struct NativeReadingScreen: View {
         let value = max(0, min(100, percent))
         currentPercent = value
         readingOffset = Int(Double(textLayout.totalCharacters) * Double(value) / 100)
-        if speech.hasAudio && !speech.isGemini {
+        if speech.hasAudio && !speech.isGeneratedSpeech {
             speech.seek(to: value)
         } else if speech.isPlaying || speech.isPaused {
             let wasPaused = speech.isPaused
@@ -1272,7 +1300,20 @@ struct NativeReadingScreen: View {
         let remainder = String(document.body.dropFirst(readingOffset))
         guard !remainder.isEmpty else { return }
         let utf16Offset = String(document.body.prefix(readingOffset)).utf16.count
-        if readingEngine == 1 {
+        if readingEngine == 2 {
+            guard NativePhononRuntime.isUsable else {
+                actionMessage = "Instala el motor y modelo Phonon en Motores externos."
+                return
+            }
+            do {
+                try speech.playPhonon(remainder, voice: phononVoice,
+                    baseUTF16: utf16Offset, totalUTF16: document.body.utf16.count,
+                    onError: { message in actionMessage = message })
+                actionMessage = nil
+            } catch {
+                actionMessage = error.localizedDescription
+            }
+        } else if readingEngine == 1 {
             guard NativeVoiceCredentialStore.hasKey("gemini") else {
                 actionMessage = "Configura la clave Gemini en Motores externos."
                 return
@@ -1573,7 +1614,7 @@ struct NativeReadingScreen: View {
         if !tracks.isEmpty && !speech.hasAudio {
             return "\(position) La duración de audio se mostrará al iniciar la pista."
         }
-        if speech.hasAudio && !speech.isGemini {
+        if speech.hasAudio && !speech.isGeneratedSpeech {
             let elapsed = Int(speech.audioElapsed)
             let remaining = max(0, Int(speech.audioDuration) - elapsed)
             return "\(position) Tiempo realizado \(formatDuration(elapsed)). Tiempo restante \(formatDuration(remaining))."
@@ -1692,7 +1733,7 @@ struct NativeReadingScreen: View {
             Text(progressDescription)
                 .font(.footnote)
                 .accessibilityLabel(progressDescription)
-            if speech.hasAudio && !speech.isGemini {
+            if speech.hasAudio && !speech.isGeneratedSpeech {
                 HStack(spacing: 12) {
                     Button("Retroceder 30 segundos") {
                         speech.skip(seconds: -30)
@@ -2070,7 +2111,7 @@ struct NativeReadingScreen: View {
                 playbackTick += 1
                 if !speech.hasAudio { elapsedSpeakingSeconds += 1 }
             }
-            if speech.hasAudio && !speech.isGemini {
+            if speech.hasAudio && !speech.isGeneratedSpeech {
                 let updated = speech.audioPercent
                 if updated != currentPercent { currentPercent = updated }
                 if abs(updated - lastSavedPercent) >= 1 { persistPosition() }

@@ -218,7 +218,7 @@ struct NativePodcastScreen: View {
                     .accessibilityAction(named: Text("Compartir")) {
                         NativeShare.present(url: episode.audioURL)
                     }
-                    Button(library.isFavorite(episode) ? "Quitar de favoritos: \\(episode.title)" : "Añadir a favoritos: \\(episode.title)") {
+                    Button(library.isFavorite(episode) ? "Quitar de favoritos: \(episode.title)" : "Añadir a favoritos: \(episode.title)") {
                         library.toggleFavorite(episode)
                     }
                 }
@@ -230,7 +230,7 @@ struct NativePodcastScreen: View {
                 }
             }
             Section("Seguir pódcast y favoritos") {
-                Text("Favoritos guardados: \\(library.favorites.count)")
+                Text("Favoritos guardados: \(library.favorites.count)")
                 Text(library.notice).accessibilityAddTraits(.updatesFrequently)
                 Button("Seguir el pódcast TifloAcosta") {
                     library.follow(title: "Canal TifloAcosta", url: "https://anchor.fm/s/5b48ca28/podcast/rss")
@@ -238,7 +238,7 @@ struct NativePodcastScreen: View {
                 Button("Importar suscripciones OPML") { choosingOPML = true }
                 ForEach(library.followed) { feed in
                     Text(feed.title)
-                    Button("Dejar de seguir: \\(feed.title)") { library.unfollow(feed) }
+                    Button("Dejar de seguir: \(feed.title)") { library.unfollow(feed) }
                 }
             }
             Section("Escuchar en otras plataformas") {
@@ -265,7 +265,7 @@ struct NativePodcastScreen: View {
                 guard let url = try result.get().first else { return }
                 _ = try library.importOPML(url)
             } catch {
-                library.notice = "No se pudo importar el OPML: \\(error.localizedDescription)"
+                library.notice = "No se pudo importar el OPML: \(error.localizedDescription)"
             }
         }
     }

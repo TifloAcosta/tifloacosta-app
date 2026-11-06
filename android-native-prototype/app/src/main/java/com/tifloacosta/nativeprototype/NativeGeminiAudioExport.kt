@@ -1,6 +1,11 @@
 package com.tifloacosta.nativeprototype
 
 import android.content.Context
+import android.media.MediaCodec
+import android.media.MediaCodecInfo
+import android.media.MediaFormat
+import android.media.MediaMuxer
+import java.io.File
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.currentCoroutineContext
 import java.io.ByteArrayOutputStream
@@ -12,6 +17,10 @@ import java.io.IOException
 internal object NativeGeminiAudioExport {
     const val MAX_CHARACTERS = 60_000
     const val CHUNK_SIZE = 1_200
+    enum class Format(val extension: String, val mime: String) {
+        M4A("m4a", "audio/mp4"),
+        WAV("wav", "audio/wav")
+    }
 
     fun chunks(text: String): List<String> {
         require(text.isNotBlank()) { "El documento está vacío." }
@@ -57,6 +66,7 @@ internal object NativeGeminiAudioExport {
     }
 
     suspend fun generate(context: Context, text: String, voice: String,
+                         format: Format,
                          progress: suspend (Int, Int) -> Unit): ByteArray {
         val fragments = chunks(text)
         val combined = ByteArrayOutputStream()
@@ -70,7 +80,8 @@ internal object NativeGeminiAudioExport {
         }
         currentCoroutineContext().ensureActive()
         require(combined.size() > 0) { "No se recibió audio." }
-        return wav(combined.toByteArray())
+        val raw = combined.toByteArray()
+        return if (format == Format.WAV) wav(raw) else encodeAAC(context, raw)
     }
 
     private fun wav(data: ByteArray, rate: Int = 24000): ByteArray {
@@ -88,4 +99,80 @@ internal object NativeGeminiAudioExport {
         out.write(data)
         return out.toByteArray()
     }
+    private fun encodeAAC(context: Context, pcm: ByteArray): ByteArray {
+        val audioFormat = MediaFormat.createAudioFormat(MediaFormat.MIMETYPE_AUDIO_AAC, 24000, 1)
+        audioFormat.setInteger(MediaFormat.KEY_AAC_PROFILE,
+            MediaCodecInfo.CodecProfileLevel.AACObjectLC)
+        audioFormat.setInteger(MediaFormat.KEY_BIT_RATE, 64000)
+        audioFormat.setInteger(MediaFormat.KEY_MAX_INPUT_SIZE, 32768)
+        val file = File.createTempFile("tiflo-audio-", ".m4a", context.cacheDir)
+        val codec = MediaCodec.createEncoderByType(MediaFormat.MIMETYPE_AUDIO_AAC)
+        var muxer: MediaMuxer? = null
+        var started = false
+        try {
+            codec.configure(audioFormat, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE)
+            codec.start()
+            val metadata = MediaCodec.BufferInfo()
+            var offset = 0
+            var inputFinished = false
+            var outputFinished = false
+            var track = -1
+            while (!outputFinished) {
+                if (!inputFinished) {
+                    val slot = codec.dequeueInputBuffer(10000)
+                    if (slot >= 0) {
+                        val buffer = codec.getInputBuffer(slot)
+                            ?: throw IOException("No se pudo acceder al codificador.")
+                        buffer.clear()
+                        val size = minOf(buffer.remaining(), pcm.size - offset)
+                        val presentationTime = (offset.toLong() / 2L) * 1000000L / 24000L
+                        if (size > 0) {
+                            buffer.put(pcm, offset, size)
+                            codec.queueInputBuffer(slot, 0, size, presentationTime, 0)
+                            offset += size
+                        } else {
+                            codec.queueInputBuffer(slot, 0, 0, presentationTime,
+                                MediaCodec.BUFFER_FLAG_END_OF_STREAM)
+                            inputFinished = true
+                        }
+                    }
+                }
+                when (val slot = codec.dequeueOutputBuffer(metadata, 10000)) {
+                    MediaCodec.INFO_OUTPUT_FORMAT_CHANGED -> {
+                        if (started) throw IOException("Formato de audio inesperado.")
+                        muxer = MediaMuxer(file.absolutePath,
+                            MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4)
+                        track = muxer!!.addTrack(codec.outputFormat)
+                        muxer!!.start()
+                        started = true
+                    }
+                    else -> if (slot >= 0) {
+                        val data = codec.getOutputBuffer(slot)
+                            ?: throw IOException("No se recibió audio codificado.")
+                        if (metadata.size > 0 &&
+                            metadata.flags and MediaCodec.BUFFER_FLAG_CODEC_CONFIG == 0) {
+                            if (!started) throw IOException("El archivo M4A no está preparado.")
+                            data.position(metadata.offset)
+                            data.limit(metadata.offset + metadata.size)
+                            muxer!!.writeSampleData(track, data, metadata)
+                        }
+                        outputFinished = metadata.flags and
+                            MediaCodec.BUFFER_FLAG_END_OF_STREAM != 0
+                        codec.releaseOutputBuffer(slot, false)
+                    }
+                }
+            }
+            if (!started) throw IOException("No se pudo codificar el audio.")
+            muxer!!.stop()
+            started = false
+            return file.readBytes()
+        } finally {
+            try { if (started) muxer?.stop() } catch (_: Exception) {}
+            try { muxer?.release() } catch (_: Exception) {}
+            try { codec.stop() } catch (_: Exception) {}
+            codec.release()
+            file.delete()
+        }
+    }
+
 }

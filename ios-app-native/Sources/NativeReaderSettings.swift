@@ -355,7 +355,8 @@ struct NativeReaderSettingsScreen: View {
                     Section("Desplazamiento") {
                         NativeAdjustableChoice(
                             title: "Unidad de avance",
-                            choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
+                            choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado",
+                                       "Marcas", "Tiempo, un minuto (solo audio)"],
                             selectedIndex: $navigationUnit
                         )
                     }

@@ -35,6 +35,5 @@ jobs:
             -scheme TifloAcostaNative \
             -configuration Debug \
             -destination 'generic/platform=iOS Simulator' \
-            -arch arm64 \
             CODE_SIGNING_ALLOWED=NO \
             build 2>&1 | tee /tmp/tiflo-ios-phonon-build.log

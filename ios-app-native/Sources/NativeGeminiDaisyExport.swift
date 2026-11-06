@@ -12,6 +12,13 @@ enum NativeGeminiDaisyExport {
             .replacingOccurrences(of: "'", with: "&apos;")
     }
 
+    static func clock(_ seconds: Double) -> String {
+        let hours = Int(seconds) / 3600
+        let minutes = (Int(seconds) / 60) % 60
+        let remaining = seconds - Double(hours * 3600 + minutes * 60)
+        return String(format: "%02d:%02d:%06.3f", hours, minutes, remaining)
+    }
+
     static func generate(text: String, title: String, voice: String,
                          progress: @escaping @MainActor (Int, Int) -> Void) async throws -> URL {
         let segments = try NativeGeminiAudioExport.chunks(text)
@@ -41,7 +48,7 @@ enum NativeGeminiDaisyExport {
             guard duration > 0 else { throw NativeGeminiAudioExport.ExportError.empty }
             try bytes.write(to: working.appendingPathComponent(file), options: .atomic)
             paragraphs.append("<p id=\"\(id)\" smilref=\"sync.smil#\(par)\">\(escape(segment))</p>")
-            pars.append("<par id=\"\(par)\"><text src=\"book.xml#\(id)\"/><audio src=\"\(file)\" clipBegin=\"0s\" clipEnd=\"\(String(format: "%.4f", duration))s\"/></par>")
+            pars.append("<par id=\"\(par)\"><text src=\"book.xml#\(id)\"/><audio src=\"\(file)\" clipBegin=\"00:00:00\" clipEnd=\"\(clock(duration))\"/></par>")
             manifest.append("<item id=\"audio\(number)\" href=\"\(file)\" media-type=\"audio/x-wav\"/>")
             totalSeconds += duration
             await progress(number, segments.count)
@@ -77,7 +84,7 @@ enum NativeGeminiDaisyExport {
         <meta name="dtb:depth" content="1"/>
         <meta name="dtb:totalPageCount" content="0"/>
         <meta name="dtb:maxPageNumber" content="0"/>
-        <meta name="dtb:totalTime" content="\(String(format: "%.3f", totalSeconds))s"/></head>
+        <meta name="dtb:totalTime" content="\(clock(totalSeconds))"/></head>
         <docTitle><text>\(safeTitle)</text></docTitle>
         <navMap><navPoint id="nav1" class="h1" playOrder="1">
         <navLabel><text>\(safeTitle)</text></navLabel>
@@ -93,8 +100,10 @@ enum NativeGeminiDaisyExport {
           <dc:Title>\(safeTitle)</dc:Title><dc:Language>es</dc:Language>
           <dc:Format>ANSI/NISO Z39.86-2005</dc:Format></dc-metadata>
           <x-metadata><meta name="dtb:multimediaType" content="audioFullText"/>
-          <meta name="dtb:totalTime" content="\(String(format: "%.3f", totalSeconds))s"/></x-metadata></metadata>
+          <meta name="dtb:multimediaContent" content="audio,text"/>
+          <meta name="dtb:totalTime" content="\(clock(totalSeconds))"/></x-metadata></metadata>
           <manifest>
+          <item id="opf" href="book.opf" media-type="text/xml"/>
           <item id="ncx" href="book.ncx" media-type="application/x-dtbncx+xml"/>
           <item id="text" href="book.xml" media-type="application/x-dtbook+xml"/>
           <item id="sync" href="sync.smil" media-type="application/smil"/>

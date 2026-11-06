@@ -1237,7 +1237,10 @@ struct NativeReadingScreen: View {
     @State private var audioExportTask: Task<Void, Never>?
     @State private var audioExportStatus = ""
     @State private var audioExportFormat: NativeGeminiAudioExport.Format = .mp3
-    @State private var audioExportEngine: NativeGeminiAudioExport.Engine = .gemini
+    @State private var audioExportEngine: NativeGeminiAudioExport.Engine = .system
+    @State private var systemExportVoiceID = ""
+    @State private var systemExportVoices: [AVSpeechSynthesisVoice] = []
+    @State private var systemExportVoicePreview = AVSpeechSynthesizer()
     @State private var showAudioExport = false
     @State private var audioExportBusy = false
     @State private var audioExportResult: URL?
@@ -1586,7 +1589,12 @@ struct NativeReadingScreen: View {
         let title = latest.title
         let text = latest.body
         let engine = audioExportEngine
-        let voice = engine == .phonon ? phononVoice : geminiVoice
+        let voice: String
+        switch engine {
+        case .system: voice = systemExportVoiceID
+        case .gemini: voice = geminiVoice
+        case .phonon: voice = phononVoice
+        }
         audioExportTask = Task {
             do {
                 let url = try await NativeGeminiAudioExport.export(
@@ -1930,18 +1938,43 @@ struct NativeReadingScreen: View {
         Button("Cancelar", role: .cancel) {}
     }
 
+    private func previewSystemExportVoice() {
+        systemExportVoicePreview.stopSpeaking(at: .immediate)
+        let selected = AVSpeechSynthesisVoice(identifier: systemExportVoiceID)
+            ?? AVSpeechSynthesisVoice(language: "es-ES")
+        let sample = selected?.language.lowercased().hasPrefix("es") == true
+            ? "Esta es una muestra de la voz con la que se exportará el documento."
+            : "This is a sample of the voice for exporting this document."
+        let utterance = AVSpeechUtterance(string: sample)
+        utterance.voice = selected
+        systemExportVoicePreview.speak(utterance)
+    }
+
     private var exportAudioSheet: some View {
             NavigationStack {
                 List {
                     Section("Motor y voz") {
                         Picker("Motor", selection: $audioExportEngine) {
+                            Text("Sistema iOS, sin clave y sin conexión").tag(NativeGeminiAudioExport.Engine.system)
                             Text("Gemini").tag(NativeGeminiAudioExport.Engine.gemini)
                             if phononReady {
                                 Text("Phonon").tag(NativeGeminiAudioExport.Engine.phonon)
                             }
                         }
                         .disabled(audioExportBusy)
-                        if audioExportEngine == .gemini {
+                        if audioExportEngine == .system {
+                            Text("Exportación local con las voces del iPhone. No necesitas cuenta ni clave API.")
+                            Picker("Voz del sistema", selection: $systemExportVoiceID) {
+                                Text("Predeterminada de iOS").tag("")
+                                ForEach(systemExportVoices, id: \.identifier) { voice in
+                                    Text("\(voice.name), \(voice.language)").tag(voice.identifier)
+                                }
+                            }
+                            .disabled(audioExportBusy)
+                            Button("Escuchar muestra de voz") { previewSystemExportVoice() }
+                                .disabled(audioExportBusy)
+                            Text("La disponibilidad de cada voz para exportación depende de iOS. La Voz personal puede tener restricciones.")
+                        } else if audioExportEngine == .gemini {
                             Text("Se utilizará tu clave personal y puede consumirse cuota.")
                             Picker("Voz", selection: $geminiVoice) {
                                 ForEach(NativeGeminiSpeech.voices, id: \.self) { name in
@@ -1987,6 +2020,16 @@ struct NativeReadingScreen: View {
                 }
                 .tifloScreenSurface()
                 .navigationTitle("Exportar audio")
+                .onAppear {
+                    systemExportVoices = AVSpeechSynthesisVoice.speechVoices()
+                        .sorted { a, b in
+                            a.language == b.language
+                                ? a.name.localizedStandardCompare(b.name) == .orderedAscending
+                                : a.language < b.language
+                        }
+                    if systemExportVoiceID.isEmpty { systemExportVoiceID = effectiveVoiceID }
+                }
+                .onDisappear { systemExportVoicePreview.stopSpeaking(at: .immediate) }
                 .toolbar {
                     Button("Cerrar") {
                         showAudioExport = false

@@ -52,6 +52,8 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.isTraversalGroup
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
@@ -697,8 +699,7 @@ fun NativeTifloLector(
             }
         }
         if (importResult.isNotBlank()) Text(importResult,
-            modifier = Modifier.semantics { androidx.compose.ui.semantics.liveRegion =
-                androidx.compose.ui.semantics.LiveRegionMode.Polite })
+            modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
         if (error.isNotBlank()) Text(error)
     }
 

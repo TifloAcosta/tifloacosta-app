@@ -13,7 +13,7 @@ import java.util.zip.ZipInputStream
  * The archive must contain config.json, tokenizer.json, model weights, and a voice.
  */
 internal object NativePhononModelStore {
-    fun directory(context: Context) = File(context.filesDir, "phonon/cpu-model")
+    fun directory(context: Context) = File(context.noBackupFilesDir, "phonon/cpu-model")
     fun installed(context: Context): Boolean = valid(directory(context))
 
     private fun valid(dir: File): Boolean {
@@ -36,7 +36,7 @@ internal object NativePhononModelStore {
      * kept until a complete new checkpoint has been extracted and inspected.
      */
     fun importZip(context: Context, source: Uri): File {
-        val parent = File(context.filesDir, "phonon")
+        val parent = File(context.noBackupFilesDir, "phonon")
         check(parent.exists() || parent.mkdirs()) { "No se pudo crear la carpeta de Phonon." }
         val staging = File(parent, "model-partial-" + UUID.randomUUID())
         val incoming = File(staging, "unpacked")
@@ -102,8 +102,6 @@ internal object NativePhononModelStore {
                 throw IOException("No se pudo instalar el modelo Phonon.")
             }
             backup.deleteRecursively()
-            // Generated model weights should not enter cloud backups.
-            android.app.backup.BackupManager(context).dataChanged()
             return old
         } finally {
             staging.deleteRecursively()

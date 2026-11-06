@@ -42,6 +42,16 @@ enum NativeDocumentText {
                 of: pattern, with: " ", options: .regularExpression
             )
         }
+        // Keep explicit HTML/XHTML headings visible in plain-text library records.
+        // A Markdown heading marker is recognized by both reader navigation
+        // and DAISY export; no title is inferred from visual styling.
+        for level in 1...6 {
+            content = content.replacingOccurrences(
+                of: "(?i)<h\(level)\\b[^>]*>",
+                with: "\n\n\(String(repeating: "#", count: level)) ",
+                options: .regularExpression
+            )
+        }
         content = content.replacingOccurrences(
             of: "(?i)<br\\s*/?>", with: "\n", options: .regularExpression
         )

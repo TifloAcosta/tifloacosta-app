@@ -21,9 +21,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: true
-      - name: Install Android SDK and NDK 29
-        uses: android-actions/setup-android@v3
-      - run: sdkmanager --install "ndk;29.0.14206865"
+      - name: Install Android NDK 29 using runner SDK
+        shell: bash
+        run: |
+          set -euxo pipefail
+          export ANDROID_HOME="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          export ANDROID_SDK_ROOT="$ANDROID_HOME"
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "ndk;29.0.14206865"
       - name: Install Rust targets and cargo-ndk
         uses: dtolnay/rust-toolchain@stable
         with:

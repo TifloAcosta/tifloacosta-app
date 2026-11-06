@@ -194,8 +194,11 @@ struct NativePodcastScreen: View {
             parser.delegate = delegate
             guard parser.parse() else { throw URLError(.cannotParseResponse) }
             followedEpisodes = Array(delegate.episodes.prefix(100))
+            let newCount = library.recordFeedCheck(feed, episodes: followedEpisodes)
             followedFeedStatus = followedEpisodes.isEmpty
-                ? "Este canal no tiene episodios de audio compatibles." : ""
+                ? "Este canal no tiene episodios de audio compatibles."
+                : newCount == 0 ? "Sin episodios nuevos desde la consulta anterior."
+                : "Episodios nuevos desde la consulta anterior: \(newCount)."
         } catch {
             followedEpisodes = []
             followedFeedStatus = "No se pudieron consultar los episodios de este canal."

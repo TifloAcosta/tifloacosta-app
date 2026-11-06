@@ -83,7 +83,7 @@ enum NativeGeminiAudioExport {
     /// mono PCM without using a network encoder or mislabelling the file.
     static func mp3(pcm: Data) throws -> Data {
         guard pcm.count % 2 == 0 else { throw ExportError.unsupportedFormat }
-        let encoder = MP3Encoder(options: MP3EncoderOptions(
+        let encoder = try MP3Encoder(options: MP3EncoderOptions(
             sampleRate: 48_000, bitrateKbps: 64, mode: .mono
         ))
         var session = encoder.newSession()

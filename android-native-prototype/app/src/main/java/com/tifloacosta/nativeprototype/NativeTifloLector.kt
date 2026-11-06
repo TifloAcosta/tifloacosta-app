@@ -1199,6 +1199,7 @@ private fun NativeReadingScreen(
                 onVoiceSelected = { chosen ->
                     voiceName = chosen
                     prefs.edit().putString("voice." + book.id, chosen).apply()
+                    if (active) send(NativeReaderPlaybackService.ACTION_VOICE)
                 }
             )
             TextButton(onClick = {

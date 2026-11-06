@@ -444,12 +444,39 @@ final class NativeReadingSpeech: ObservableObject {
         isPaused = false
     }
 
+    private func geminiChunks(_ text: String) -> [String] {
+        var result: [String] = []
+        var remaining = text[...]
+        while !remaining.isEmpty {
+            let end = remaining.index(remaining.startIndex,
+                offsetBy: min(1200, remaining.count))
+            var split = end
+            if end < remaining.endIndex {
+                let minOffset = remaining.index(remaining.startIndex,
+                    offsetBy: min(600, remaining.count))
+                var at = end
+                while at > minOffset {
+                    let preceding = remaining[remaining.index(before: at)]
+                    if preceding.isWhitespace || preceding == "." || preceding == "," {
+                        split = at
+                        break
+                    }
+                    at = remaining.index(before: at)
+                }
+            }
+            result.append(String(remaining[..<split]))
+            remaining = remaining[split...]
+        }
+        return result
+    }
+
     func playGemini(_ text: String, voice: String,
                     baseUTF16: Int, totalUTF16: Int,
                     onError: @escaping (String) -> Void) throws {
         stop()
         // Nothing is sent until the user explicitly selects Gemini and presses Play.
-        geminiSegments = try NativeGeminiAudioExport.chunks(text)
+        guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+        geminiSegments = geminiChunks(text)
         geminiVoice = voice
         geminiSegmentIndex = 0
         geminiCursorUTF16 = baseUTF16
@@ -550,7 +577,10 @@ final class NativeReadingSpeech: ObservableObject {
 
     func pause() {
         if let player { player.pause() }
-        else if !isGemini { synthesizer.pauseSpeaking(at: .word) }
+        else if isGemini {
+            geminiGeneration += 1
+            geminiTask?.cancel()
+        } else { synthesizer.pauseSpeaking(at: .word) }
         sleep(after: 0) // Al pausar no sigue corriendo la cuenta del apagado.
         isPlaying = false
         isPaused = true
@@ -1994,7 +2024,9 @@ struct NativeReadingScreen: View {
         }
         .onReceive(speech.$textUTF16Offset) { utf16Offset in
             // Keep the actual spoken word position instead of reversing a rounded percentage.
-            guard tracks.isEmpty, speech.isPlaying, !document.body.isEmpty else { return }
+            guard tracks.isEmpty,
+                  speech.isPlaying || utf16Offset == document.body.utf16.count,
+                  !document.body.isEmpty else { return }
             let safeOffset = max(0, min(document.body.utf16.count, utf16Offset))
             let index = String.Index(utf16Offset: safeOffset, in: document.body)
             let exactOffset = document.body.distance(from: document.body.startIndex, to: index)

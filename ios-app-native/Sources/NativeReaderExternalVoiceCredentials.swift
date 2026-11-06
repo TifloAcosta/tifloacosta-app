@@ -1,6 +1,8 @@
 import SwiftUI
 import Security
 import UniformTypeIdentifiers
+import SafariServices
+import UIKit
 
 /// API credentials are device-local and never included in exported reader libraries.
 /// Each provider gets its own Keychain item, accessible only when the device is unlocked.
@@ -77,6 +79,63 @@ enum NativeVoiceCredentialStore {
     }
 }
 
+/// Google controls its own API-key website. Opening it inside a Safari sheet
+/// keeps the user in TifloLector and provides an accessible Done control.
+private struct NativeGeminiKeyBrowser: UIViewControllerRepresentable {
+    let url = URL(string: "https://aistudio.google.com/api-keys")!
+
+    func makeUIViewController(context: Context) -> SFSafariViewController {
+        let controller = SFSafariViewController(url: url)
+        controller.dismissButtonStyle = .done
+        return controller
+    }
+
+    func updateUIViewController(_ controller: SFSafariViewController, context: Context) {}
+}
+
+/// A short, native VoiceOver-friendly guide without duplicating Google's site.
+private struct NativeGeminiKeyGuide: View {
+    @Environment(\.dismiss) private var dismiss
+    @State private var showGoogle = false
+    let pasteCopiedKey: () -> Bool
+    @State private var status = ""
+
+    var body: some View {
+        NavigationStack {
+            List {
+                Section("Tres pasos") {
+                    Text("1. Entra con tu cuenta de Google si te lo pide.")
+                    Text("2. En Google AI Studio, busca Crear clave API, créala y cópiala.")
+                    Text("3. Vuelve aquí con Listo y pulsa Pegar la clave copiada.")
+                }
+                Section("Crear la clave") {
+                    Button("Abrir Google AI Studio") { showGoogle = true }
+                        .accessibilityHint("Abre la página oficial de claves sin salir de TifloLector.")
+                    Button("Pegar la clave copiada") {
+                        if pasteCopiedKey() { dismiss() }
+                        else { status = "No se encontró una clave de texto en el portapapeles. Cópiala en Google AI Studio y vuelve a intentarlo." }
+                    }
+                    .accessibilityHint("Recupera la clave copiada y vuelve al campo de Gemini para guardarla.")
+                    if !status.isEmpty {
+                        Text(status).accessibilityAddTraits(.updatesFrequently)
+                    }
+                }
+                Section("Privacidad") {
+                    Text("La clave queda en tu iPhone. Solo se guarda cuando pulses Guardar en Gemini. No compartas la clave ni la envíes por correo.")
+                    Text("Google administra su página; su contenido puede variar. TifloLector no puede ocultar controles de Google ni detectar cuándo has copiado una clave.")
+                }
+            }
+            .tifloScreenSurface()
+            .navigationTitle("Crear clave Gemini")
+            .toolbar { Button("Cerrar") { dismiss() } }
+            .sheet(isPresented: $showGoogle) {
+                NativeGeminiKeyBrowser()
+                    .ignoresSafeArea()
+            }
+        }
+    }
+}
+
 /// The overview exposes exactly one accessible navigation element per motor.
 struct NativeReaderExternalVoiceSettingsScreen: View {
     var body: some View {
@@ -103,6 +162,7 @@ struct NativeReaderExternalVoiceDetailScreen: View {
     let provider: Provider
 
     @State private var keyInput = ""
+    @State private var showGeminiGuide = false
     @State private var hasGeminiKey = NativeVoiceCredentialStore.hasKey("gemini")
     @State private var message = ""
     @State private var confirmDeletion = false
@@ -135,6 +195,18 @@ struct NativeReaderExternalVoiceDetailScreen: View {
         } catch {
             phononMessage = error.localizedDescription
         }
+    }
+
+    /// Clipboard reading happens only after the user explicitly chooses to paste.
+    /// No clipboard value is logged, sent or persisted until Guardar is selected.
+    private func pasteGeminiKeyFromClipboard() -> Bool {
+        guard let copied = UIPasteboard.general.string?
+            .trimmingCharacters(in: .whitespacesAndNewlines), !copied.isEmpty else {
+            return false
+        }
+        keyInput = copied
+        message = "Clave copiada en el campo. Pulsa Guardar para almacenarla de forma segura."
+        return true
     }
 
     private func checkGeminiConnection() async {
@@ -268,11 +340,18 @@ struct NativeReaderExternalVoiceDetailScreen: View {
                 Section("Gemini") {
                 Text(hasGeminiKey ? "Clave guardada" : "Sin clave")
                     .accessibilityAddTraits(.updatesFrequently)
-                Link("Crear clave", destination: URL(string: "https://aistudio.google.com/api-keys")!)
-                SecureField("Pegar clave", text: $keyInput)
+                Button("Crear clave API con guía") { showGeminiGuide = true }
+                    .accessibilityHint("Te explica los pasos y permite regresar directamente a Gemini.")
+                SecureField("Clave API Gemini", text: $keyInput)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
                     .privacySensitive()
+                Button("Pegar clave copiada") {
+                    if !pasteGeminiKeyFromClipboard() {
+                        message = "No hay una clave de texto copiada. Abre Crear clave API con guía e inténtalo de nuevo."
+                    }
+                }
+                .accessibilityHint("Pega en el campo de Gemini el texto copiado desde Google AI Studio.")
                 Button("Guardar") {
                     do {
                         try NativeVoiceCredentialStore.save(keyInput, provider: "gemini")
@@ -320,6 +399,9 @@ struct NativeReaderExternalVoiceDetailScreen: View {
         }
         .tifloScreenSurface()
         .navigationTitle(provider == .phonon ? "Phonon" : "Gemini")
+        .sheet(isPresented: $showGeminiGuide) {
+            NativeGeminiKeyGuide(pasteCopiedKey: pasteGeminiKeyFromClipboard)
+        }
         .fileImporter(
             isPresented: $showPhononImporter,
             allowedContentTypes: [.zip],

@@ -106,6 +106,7 @@ final class NativeReaderLibrary: ObservableObject {
                 )
                 try save()
             } catch {
+                documents.removeAll { $0.id == identifier }
                 NativeReaderFormats.deleteStoredFiles(for: identifier)
                 throw error
             }
@@ -132,10 +133,26 @@ final class NativeReaderLibrary: ObservableObject {
         try? save()
     }
 
-    func delete(_ document: NativeReadingDocument) {
-        documents.removeAll { $0.id == document.id }
-        NativeReaderFormats.deleteStoredFiles(for: document.id)
-        try? save()
+    @discardableResult
+    func delete(_ document: NativeReadingDocument) -> Bool {
+        deleteDocuments(withIDs: [document.id])
+    }
+
+    @discardableResult
+    func deleteDocuments(withIDs ids: Set<UUID>) -> Bool {
+        guard !ids.isEmpty else { return true }
+        let previous = documents
+        let deleted = documents.filter { ids.contains($0.id) }
+        documents.removeAll { ids.contains($0.id) }
+        do {
+            try save()
+        } catch {
+            documents = previous
+            return false
+        }
+        // Only delete the stored files once the library metadata is safely saved.
+        deleted.forEach { NativeReaderFormats.deleteStoredFiles(for: $0.id) }
+        return true
     }
 
     func toggleFavorite(_ document: NativeReadingDocument) {
@@ -508,6 +525,10 @@ struct NativeReaderLibraryScreen: View {
     @State private var documentToDelete: NativeReadingDocument?
     @State private var confirmDeletion = false
     @State private var importError: String?
+    @State private var importMessage: String?
+    @State private var selectedDocumentIDs: Set<UUID> = []
+    @State private var selectingDocuments = false
+    @State private var confirmBatchDeletion = false
     @State private var documentToRename: NativeReadingDocument?
     @State private var proposedTitle = ""
     @State private var newFolderName = ""
@@ -642,8 +663,32 @@ struct NativeReaderLibraryScreen: View {
                 }
             }
             Section("Mi biblioteca") {
+                Button(selectingDocuments ? "Terminar selección" : "Seleccionar varios documentos") {
+                    selectingDocuments.toggle()
+                    if !selectingDocuments { selectedDocumentIDs.removeAll() }
+                }
+                if selectingDocuments {
+                    Text("\(selectedDocumentIDs.count) documentos seleccionados")
+                        .accessibilityAddTraits(.updatesFrequently)
+                    Button("Eliminar seleccionados") { confirmBatchDeletion = true }
+                        .disabled(selectedDocumentIDs.isEmpty)
+                }
                 if shownDocuments.isEmpty { Text("No hay documentos con el filtro actual.") }
                 ForEach(shownDocuments) { document in
+                    if selectingDocuments {
+                        Button {
+                            if selectedDocumentIDs.contains(document.id) {
+                                selectedDocumentIDs.remove(document.id)
+                            } else {
+                                selectedDocumentIDs.insert(document.id)
+                            }
+                        } label: {
+                            Label(document.title, systemImage: selectedDocumentIDs.contains(document.id)
+                                ? "checkmark.circle.fill" : "circle")
+                        }
+                        .accessibilityLabel("\(document.title), \(selectedDocumentIDs.contains(document.id) ? "seleccionado" : "no seleccionado")")
+                        .accessibilityHint("Doble toque para cambiar la selección")
+                    } else {
                     NavigationLink {
                         NativeReadingScreen(document: document, speech: speech)
                     } label: { Text(document.title) }
@@ -667,6 +712,7 @@ struct NativeReaderLibraryScreen: View {
                     .accessibilityAction(named: Text("Eliminar")) {
                         documentToDelete = document
                         confirmDeletion = true
+                    }
                     }
                 }
             }
@@ -695,8 +741,20 @@ struct NativeReaderLibraryScreen: View {
         ) { result in
             switch result {
             case .success(let urls):
-                do { try library.importDocuments(from: urls) }
-                catch { importError = error.localizedDescription }
+                var added = 0
+                var failures: [String] = []
+                for url in urls {
+                    do {
+                        try library.importDocuments(from: [url])
+                        added += 1
+                    } catch {
+                        failures.append("\(url.lastPathComponent): \(error.localizedDescription)")
+                    }
+                }
+                importMessage = "\(added) documentos importados correctamente." +
+                    (failures.isEmpty ? "" : " No se pudieron importar \(failures.count): " +
+                        failures.joined(separator: " "))
+                UIAccessibility.post(notification: .announcement, argument: importMessage)
             case .failure(let error):
                 importError = error.localizedDescription
             }
@@ -759,13 +817,38 @@ struct NativeReaderLibraryScreen: View {
         } message: {
             Text("Escribe el nuevo título del documento.")
         }
+        .confirmationDialog("Eliminar documentos seleccionados",
+                            isPresented: $confirmBatchDeletion, titleVisibility: .visible) {
+            Button("Eliminar \(selectedDocumentIDs.count) documentos", role: .destructive) {
+                if library.deleteDocuments(withIDs: selectedDocumentIDs) {
+                    importMessage = "\(selectedDocumentIDs.count) documentos eliminados."
+                    selectedDocumentIDs.removeAll()
+                    selectingDocuments = false
+                } else {
+                    importError = "No se pudieron eliminar los documentos. La biblioteca se conserva."
+                }
+            }
+            Button("Cancelar", role: .cancel) {}
+        } message: {
+            Text("Se eliminarán los documentos seleccionados y sus archivos. Esta acción no se puede deshacer.")
+        }
         .confirmationDialog("Eliminar documento", isPresented: $confirmDeletion,
                             titleVisibility: .visible) {
             Button("Eliminar definitivamente", role: .destructive) {
-                if let doc = documentToDelete { library.delete(doc) }
+                if let doc = documentToDelete, !library.delete(doc) {
+                    importError = "No se pudo eliminar el documento. Se ha conservado."
+                }
                 documentToDelete = nil
             }
             Button("Cancelar", role: .cancel) { documentToDelete = nil }
+        }
+        .alert("Resultado de la importación o gestión", isPresented: Binding(
+            get: { importMessage != nil },
+            set: { if !$0 { importMessage = nil } }
+        )) {
+            Button("Aceptar", role: .cancel) { importMessage = nil }
+        } message: {
+            Text(importMessage ?? "")
         }
         .alert("No se pudo realizar la operación", isPresented: Binding(
             get: { importError != nil },

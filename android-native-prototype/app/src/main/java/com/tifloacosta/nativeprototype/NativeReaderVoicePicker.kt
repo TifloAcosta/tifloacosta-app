@@ -72,21 +72,20 @@ fun NativeReaderVoicePicker(
         (if (english) "System default" else "Predeterminada del sistema")
     else selected.locale.getDisplayName(locale) + ", " + selected.name
 
-    Text((if (english) "Current reading voice: " else "Voz de lectura actual: ") + selectedDescription)
-    Text((if (english) "Speech engine: " else "Motor de voz: ") + speaker.engineLabel())
-    Text(
-        if (english) "Some engines do not provide male/female labels. Use the listening sample to recognize each voice."
-        else "Android no informa de forma fiable si una voz es masculina o femenina. Escucha la muestra para identificarla."
-    )
-    if (!speaker.ready.value) {
+    Text((if (english) "Voice: " else "Voz: ") + selectedDescription)
+    Text((if (english) "Engine: " else "Motor: ") + speaker.engineLabel())
+     if (!speaker.ready.value) {
         Text(if (english) "Loading installed voices…" else "Cargando voces instaladas…")
         return
     }
     Button(modifier = Modifier.fillMaxWidth().focusRequester(voiceListToggleFocus),
         onClick = { showing = !showing }) {
-        Text(if (showing) (if (english) "Hide voices" else "Ocultar voces")
-            else (if (english) "Show available voices (" else "Mostrar voces disponibles (") +
+        Text(if (showing) (if (english) "Close" else "Cerrar")
+            else (if (english) "Voices (" else "Voces (") +
                 voices.size + ")")
+    }
+    if (status.isNotBlank()) {
+        Text(status, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
     }
     if (!showing) return
 
@@ -120,12 +119,12 @@ fun NativeReaderVoicePicker(
             restoreSettingsFocus = true
             status = if (english) "System voice selected" else "Voz del sistema seleccionada"
         }) {
-            Text(if (english) "Use system voice" else "Utilizar voz del sistema")
+            Text(if (english) "Select" else "Elegir")
         }
         OutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = {
             preview("", locale.language)
         }) {
-            Text(if (english) "Listen to system voice" else "Escuchar voz del sistema")
+            Text(if (english) "Listen" else "Escuchar")
         }
         voices.forEachIndexed { index, v ->
             val number = index + 1
@@ -142,7 +141,7 @@ fun NativeReaderVoicePicker(
             OutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = {
                 preview(v.name, v.locale.language)
             }) {
-                Text((if (english) "Listen to voice " else "Escuchar muestra de voz ") + number)
+                Text(if (english) "Listen" else "Escuchar")
             }
             Button(modifier = Modifier.fillMaxWidth(), onClick = {
                 speaker.stop()
@@ -153,16 +152,12 @@ fun NativeReaderVoicePicker(
                 status = if (english) "Voice $number selected for reading"
                     else "Voz $number seleccionada para leer"
             }) {
-                Text((if (english) "Use voice " else "Utilizar voz ") + number +
-                    (if (selectedVoice == v.name) (if (english) ", selected" else ", seleccionada") else ""))
+                Text(if (english) "Select" else "Elegir")
             }
         }
         if (voices.isEmpty()) {
             Text(if (english) "No installed voices match this language filter."
                 else "No hay voces instaladas para este filtro de idioma.")
         }
-    }
-    if (status.isNotBlank()) {
-        Text(status, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
     }
 }

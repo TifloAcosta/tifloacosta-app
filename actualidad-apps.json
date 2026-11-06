@@ -120,6 +120,18 @@
     "publishedAt": null
   },
   {
+    "id": "applevis-apps-5607d31a1bc19b36",
+    "title": "FruitPot Adventures",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/fruitpot-adventures",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "A luxury hotel, a missing necklace, and a resourceful detective. Enjoy hours of fun in a free mystery adventure you can play offline, with VoiceOver support. Join James F. Pot as he investigates the Golden Lion Hotel. Talk to its quirky guests, uncover clues, try on disguises, and combine items to solve situations that are as puzzling as they are hilarious. HOURS OF FUN AND CLEVER PUZZLES Explore the hotel and tackle logic, memory, and sound puzzles. Every conversation and every item could help you move forward. Sometimes you’ll need a tool. Sometimes, a disguise. And almost always, a little ingenuity. PLAY OFFLINE, AT YOUR OWN PACE Play without an internet connection and take your investigation wherever you go. Automatic saving keeps your progress safe, and three save slots let you organize your adventures. ACCESSIBILITY THAT LETS YOU EXPLORE YOUR WAY • VoiceOver support. • Descriptions of scenes, objects, and characters. • Guided controls to browse, select, and describe elements around you. • Customizable voice narration. • Separate volume controls for music, ambient sounds, voices, and sound effects. • Options for larger buttons and more vivid colors. • Map zoom to explore the details. • Reduced animation and outlines for interactive areas. FOR IPHONE AND IPAD Enjoy retro-style scenery, music, and memorable characters, with text in English, Spanish, French, German and Italian. THE COMPLETE GAME IS FREE No ads and no payments required to continue the story. You can finish the entire adventure for free. If you’d like to support future adventures, you’ll find four optional contribution levels under the star on the main menu. Each level unlocks a supporter emblem, without gameplay advantages or content needed to finish the adventure. Contributions require an internet connection to the App Store. There’s a mystery waiting at the Golden Lion. James F. Pot has just arrived.",
+    "publishedAt": "2026-11-06T22:12:22.000Z"
+  },
+  {
     "id": "applevis-apps-97426edd893ada85",
     "title": "Sonnounce",
     "sourceId": "applevis-apps",
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "AudioGameAccess is a platform of games played entirely by ear, made for blind and visually impaired people. Sounds guide you, and VoiceOver tells you everything else. The games: - archery, in three levels, and bowling; - Feather Flight, a skill game; - card games: Ninety-nine, Crazy Eights, Golf, President, a colour card game, and a car race played with cards; - dice games: a five-dice game, with its combinations to fill, and Farkle; - board games: Parcheesi and Camembert Culture, a general knowledge quiz; - Four in a Row, a puzzle game: be the first to line up four tokens in an upright grid; - hangman, Sea Battle and a word game on a grid of letters; - One Word, a cooperative word game online, for 3 to 8 players: each one helps a player guess a mystery word, with a single word; - Métropole, a city-building game where you are the mayor. Every game has its own manual, in English, French, Spanish, Italian and Portuguese. On iPhone, two ways to play: - with VoiceOver, the whole screen becomes the game: you play with gestures, without looking for buttons; - without VoiceOver, real buttons, cards and dice to touch, in large text and high-contrast colours for visually impaired players. Play with others: online, open a table, invite your friends or play against bots. Chat in writing and by voice, send private messages, keep a friends list and follow the leaderboards. A game can be saved and resumed later. Offline, every game but One Word can be played alone or against bots, with no account. To play online, create a free account with your email address. Other players never see it. You can block or report a player, and delete your account from the app. 3D sound on headphones places every sound around you.",
     "publishedAt": "2026-11-02T02:49:43.000Z"
-  },
-  {
-    "id": "applevis-apps-ff393973c3915870",
-    "title": "Voice-enabled Makeup Assistant",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/lifestyle/voice-enabled-makeup-assistant",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "This innovative app offers audio feedback on the user’s foundation, eyeshadow and lipstick application, creating a more accessible beauty experience for the Blind and visually impaired. How It Works: The AI-powered Voice-enabled Makeup Assistant leverages machine learning and voice instruction technologies to learn your preferences and provide audio feedback when you ask. After you apply your foundation, eyeshadow or lipstick, the app will access your phone’s front camera to scan your face. Using artificial intelligence, it identifies the makeup applied to your face, eyes and lips and assesses the uniformity and boundaries of application and coverage. If there are suggested areas to touch up, the virtual assistant identifies them and makes audible recommendations so you can adjust your look. After your touch up, the app scans your face again and provides feedback on the accuracy of application.",
-    "publishedAt": "2026-10-29T22:04:09.000Z"
   }
 ]

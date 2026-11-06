@@ -1,5 +1,270 @@
 [
   {
+    "id": "9to5mac-05511d5db2397735",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/06/raycast-combines-voice-dictation-and-screen-awareness-in-new-ai-feature/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-06T22:28:13.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Raycast combines voice dictation and screen awareness in new AI feature",
+        "summary": "Following the recent release of Screen Awareness, Raycast got an interesting update this week that lets users talk to AI about whatever is on their screen without having to explain the context. Here are the details. more…",
+        "body": "Following the recent release of Screen Awareness, Raycast got an interesting update this week that lets users talk to AI about whatever is on their screen without having to explain the context. Here are the details.\n\nLast August, Raycast announced Screen Awareness , which lets users bring context from their active app or window directly into AI Chat, “so you don’t have to copy text, attach screenshots, or explain what you’re looking at,” said Raycast.\n\nThis week, Raycast took that functionality a step further with Dictate to AI, a new command that lets users speak their requests while automatically providing AI with context from the active app.\n\nHere is Raycast’s Pedro Duarte showing how Dictate to AI works:\n\nRaycast notes that the release also includes:\n\nRaycast also noted other recent updates and additions, including that Raycast Notes now supports images and unlimited notes for free users, while the Mac app received several performance improvements, including faster search and lower memory usage.\n\nMeanwhile, Raycast for iOS got a new keyboard with AI-powered writing tools, along with improved Cloud Sync capabilities.\n\nWindows users also got some love, with Screen Awareness gaining new commands to send individual elements or entire windows to AI Chat.\n\nTo learn more about Raycast v2.11, follow this link ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-apps-5607d31a1bc19b36",
+    "type": "news",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/fruitpot-adventures",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-06T22:12:22.000Z",
+    "categories": [
+      "apple",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "FruitPot Adventures",
+        "summary": "A luxury hotel, a missing necklace, and a resourceful detective. Enjoy hours of fun in a free mystery adventure you can play offline, with VoiceOver support. Join James F. Pot as he investigates the Golden Lion Hotel. Talk to its quirky guests, uncover clues, try on disguises, and combine items to solve situations that are as puzzling as they are hilarious. HOURS OF FUN AND CLEVER PUZZLES Explore the hotel and tackle logic, memory, and sound puzzles. Every conversation and every item could help you move forward. Sometimes you’ll need a tool. Sometimes, a disguise. And almost always, a little ingenuity. PLAY OFFLINE, AT YOUR OWN PACE Play without an internet connection and take your investigation wherever you go. Automatic saving keeps your progress safe, and three save slots let you organize your adventures. ACCESSIBILITY THAT LETS YOU EXPLORE YOUR WAY • VoiceOver support. • Descriptions of scenes, objects, and characters. • Guided controls to browse, select, and describe elements around you. • Customizable voice narration. • Separate volume controls for music, ambient sounds, voices, and sound effects. • Options for larger buttons and more vivid colors. • Map zoom to explore the details. • Reduced animation and outlines for interactive areas. FOR IPHONE AND IPAD Enjoy retro-style scenery, music, and memorable characters, with text in English, Spanish, French, German and Italian. THE COMPLETE GAME IS FREE No ads and no payments required to continue the story. You can finish the entire adventure for free. If you’d like to support future adventures, you’ll find four optional contribution levels under the star on the main menu. Each level unlocks a supporter emblem, without gameplay advantages or content needed to finish the adventure. Contributions require an internet connection to the App Store. There’s a mystery waiting at the Golden Lion. James F. Pot has just arrived.",
+        "body": "A luxury hotel, a missing necklace, and a resourceful detective. Enjoy hours of fun in a free mystery adventure you can play offline, with VoiceOver support.\n\nJoin James F. Pot as he investigates the Golden Lion Hotel. Talk to its quirky guests, uncover clues, try on disguises, and combine items to solve situations that are as puzzling as they are hilarious.\n\nHOURS OF FUN AND CLEVER PUZZLES\n\nExplore the hotel and tackle logic, memory, and sound puzzles. Every conversation and every item could help you move forward. Sometimes you’ll need a tool. Sometimes, a disguise. And almost always, a little ingenuity.\n\nPLAY OFFLINE, AT YOUR OWN PACE\n\nPlay without an internet connection and take your investigation wherever you go. Automatic saving keeps your progress safe, and three save slots let you organize your adventures.\n\nACCESSIBILITY THAT LETS YOU EXPLORE YOUR WAY\n\n• VoiceOver support. • Descriptions of scenes, objects, and characters. • Guided controls to browse, select, and describe elements around you. • Customizable voice narration. • Separate volume controls for music, ambient sounds, voices, and sound effects. • Options for larger buttons and more vivid colors. • Map zoom to explore the details. • Reduced animation and outlines for interactive areas.\n\nFOR IPHONE AND IPAD\n\nEnjoy retro-style scenery, music, and memorable characters, with text in English, Spanish, French, German and Italian.\n\nTHE COMPLETE GAME IS FREE\n\nNo ads and no payments required to continue the story. You can finish the entire adventure for free.\n\nIf you’d like to support future adventures, you’ll find four optional contribution levels under the star on the main menu. Each level unlocks a supporter emblem, without gameplay advantages or content needed to finish the adventure. Contributions require an internet connection to the App Store.\n\nThere’s a mystery waiting at the Golden Lion. James F. Pot has just arrived."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-105080cce6acdf62",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/06/ios-27-3-new-features-release-date-more/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-06T21:58:30.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27.3: New features, release date, more",
+        "summary": "This week, Apple released the first iOS 27.3 beta. The update includes multiple new features for iPhone users, including the redesigned Health app, iPhone Duo updates, and much more. Here’s everything you need to know about what’s new in iOS 27.3 … more…",
+        "body": "This week, Apple released the first iOS 27.3 beta. The update includes multiple new features for iPhone users, including the redesigned Health app, iPhone Duo updates, and much more. Here’s everything you need to know about what’s new in iOS 27.3 …\n\nAs my colleague Ryan explained, Apple will likely release iOS 27.3 to all iPhone users sometime in December. Typically, Apple would release its x.2 software updates in December, but this year is different because iOS 27.1 was exclusive to iPhone Duo . That means that, in terms of the timeline, iOS 27.3 is essentially the equivalent of iOS 27.2.\n\nHere’s when Apple has released its December updates in recent years:\n\nSo with that in mind, we expect iOS 27.3 to be released sometime during the first half of December.\n\nThe redesigned Health app is back in iOS 27.3. This was first available during testing of iOS 27.2, but did not ship as part of that final update.\n\nThe redesigned Health app is split into three tabs: Insights, Longevity, and Browse. The app features an all-new design that dynamically adapts based on your data, including Apple Intelligence. The Longevity tab includes a new Health age feature that uses Apple Watch data to show how your metrics track relative to your actual age.\n\nFor Apple Watch Series 12 and Apple Watch Ultra 4 users, it also offers easy access to view your Readiness score every morning.\n\nFor Apple Fitness+, iOS 27.3 adds a new Gym Strength feature. This creates progressive, four-week plans based on your strength goals, experience, schedule, and available equipment.\n\nAs you complete each week of workouts, the following week adapts based on the reps and weights you logged.\n\nFor iPhone Duo users, iOS 27.3 adds Reachability support . This setting shifts the interface on the outer display to the right or left to make it easier to reach the far corners. It’s designed to make iPhone Duo easier to use with one hand, despite the wider outer display. You activate it by swiping right on the right edge of the screen or left on the left edge.\n\nReachability for iPhone Duo is on by default. You can turn it off in Settings > Accessibility > Touch > Reachability.\n\niOS 27.3 also tweaks the iPhone Duo’s software keyboard by making the keys slightly narrower and the font slightly smaller.\n\nWhen it debuted, the iPhone Duo included a more robust version of StandBy with new clock faces and expanded customization options. iOS 27.3 brings the iPhone Duo’s StandBy experience to all iPhone models.\n\nThis includes the redesigned Analog and Digital Clock faces, as well as additional customization options for colors and complications. The update also adds support for Shared Albums to the Photos face.\n\niOS 27.3 brings several key Siri AI updates. First, the update expands Siri AI with many new capabilities across Apple apps. Apple explains :\n\nWe started rolling out these new capabilities across many Apple apps, including Calendar, Files, Finder, Journal, Mail, Maps, Messages, Music, Notes, Photos, Preview, Reminders, Safari, Shortcuts, and Weather, so users can do things like find a coffee shop they visited last week or archive files that haven’t been opened in over a year.\n\nThere are many more actions available now as examples for you to reference. To see what you can do in each app, just ask Siri AI.\n\nWith iOS 27.3, Apple is also starting to test new ways for developers to create Siri AI integrations for the first time. This is described as an “early Developer Preview.” Apple explains:\n\nToday’s preview allows any app to bring its content and actions directly into Siri AI by using App Intents, making it easier for all apps to tap into Siri AI’s newest capabilities, including personal context understanding, onscreen awareness, natural language, and more. So people can just ask for help in their own words, and Siri AI carries out any custom action you’ve built, from checking a delivery to booking a reservation to placing an order.\n\nWhile this is being tested as part of iOS 27.3, Apple says it will start shipping to customers in a few months.\n\niOS 27.3 also expands Siri AI to new languages, including French, Japanese, Korean, Portuguese, and Spanish.\n\niOS 27.3 brings the original set of Apple Intelligence features to China for the first time. This does not include Siri AI or other iOS 27 updates, but it does include the following features:\n\niOS 27.3 is a major update to Safari . First, the update adds support for a new vertical tabs design layout on iPhone Duo’s inner display. If you choose this option, your Safari tabs will be arranged vertically along the left-hand side of Safari, rather than along the top. Vertical tabs are also available on Mac and iPad with macOS 27.3 and iPadOS 27.3.\n\niOS 27.3 also adds a new Adaptive Dark Mode feature. This feature can automatically apply Dark Mode to websites that don’t natively support it. You can choose to have Adaptive Dark Mode automatically kick in or use it on a site-by-site basis.\n\nFor Apple Music users, iOS 27.3 adds a new “Selfie Sing” feature that lets users record a video of themselves while singing karaoke. To use this feature, start playing a song and go to the lyrics view. Then tap the new camera button that appears on the right-hand side of the lyrics.\n\nThe update also refines the design of viewing lyrics while your iPhone is in landscape mode.\n\nRead more : – iOS 27.3 upgrades Apple Music in two ways, here’s what’s new\n\nHere are a few other changes in iOS 27.3:\n\nWhat are your favorite new features in iOS 27.3? Have you spotted any other changes in the update? Let us know down in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-6767ca0d9202ef08",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/06/watchos-27-3-adds-new-apple-watch-feature-that-i-absolutely-love/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-06T21:05:28.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "watchOS 27.3 adds new Apple Watch feature that I absolutely love",
+        "summary": "watchOS 27.3 arrived this week in beta alongside iOS 27.3, with a major new feature for the latest Apple Watch models: Siri Recap, which I’m already really loving. more…",
+        "body": "watchOS 27.3 arrived this week in beta alongside iOS 27.3, with a major new feature for the latest Apple Watch models: Siri Recap, which I’m already really loving.\n\nIf you bought an Apple Watch Series 12 or Apple Watch Ultra 4 this fall, there are two exclusive new features coming in watchOS 27.3: Siri Recap and Live Rewind.\n\nBoth ‘Audio Intelligence’ features were announced at Apple’s September keynote, but just debuted in beta this week.\n\nSiri Recap in particular has stirred some controversy. Here’s what the feature does, per Apple:\n\nSiri Recap ambiently takes notes on your conversations throughout your day and creates high-level Apple Intelligence–generated summaries that you can use later to jog your memory, so you can stay present in the moment. Siri Recaps can be set to automatically delete after a period of up to 7 days unless you choose to explicitly save them.\n\nIt’s understandable why users would be concerned. Once enabled, Siri Recap can turn your Apple Watch into a device that’s always listening and often takes notes on what it hears.\n\nThis article isn’t about making the privacy case for the feature. You can read Apple’s privacy protections here . Briefly though, key details include: there’s no speaker attribution or logging of sensitive information like financial data, authentication data, or personal identifiers; no audio is stored or recorded; the feature is opt-in; and you can set times or places where it stays disabled.\n\nSpeaking strictly of the functionality of Siri Recap itself, however, I’ve been very impressed.\n\nI enabled Siri Recap after installing the iOS and watchOS 27.3 betas on Tuesday. When I checked the first recaps on Wednesday inside the Siri app, I was blown away.\n\nSiri had created a record of the things I’d done Tuesday afternoon and evening with remarkable accuracy and detail, as seen above.\n\nOne example that especially shocked me: after shopping for Christmas decorations with my family, Siri documented the size of a table runner we looked at. The thing is, I had no memory of anyone even mentioning its size. My wife must have, but despite me missing it, Siri wrote it down.\n\nAnother fun one: Thursday morning during breakfast, my son wanted to listen some music on our HomePod. Later that day, I found that the songs we’d listened to were saved at the bottom of my latest recap.\n\nIt’s still very early days with Siri Recap, which is only in beta right now, but what I’ve seen this week has been really exciting. And so far at least, I’ve seen zero information in a recap that I’d consider too sensitive to be included.\n\nWhat’s your take on Siri Recap? Have you given it a try? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-c15dbe3bc47a00cc",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/security/2026/11/chainalysis-says-hackers-stole-credentials-and-tokens-for-all-of-its-customers/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-06T20:56:41.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Chainalysis says hackers stole credentials and tokens for all of its customers",
+        "summary": "Company said a \"multifront cyberattack\" included AI agents and an on-path data snatch.",
+        "body": "Blockchain analysis firm Chainalysis said that hackers have obtained sensitive personal information—including names, usernames, password hashes, and live tokens—for all of its users following a breach of its network security.\n\nThe accomplishment could be a major coup for the attackers. Both Chainalysis and public sources have revealed a long list of high-profile customers, including government agencies such as the FBI, US Immigration and Customs Enforcement agency, and the US Air Force, as well as private companies such as Microsoft, Coinbase, and Barclays. It's unclear if the data theft exposed customers to additional threats.\n\nLast Friday, Chainalysis said it had been the target of a cybersecurity incident in October that was similar to the hacks of other platforms during the same month. The external actor used AI agent-assisted offensive techniques to gain unauthorized access to Chainalysis systems and internal tools. An email the company sent to affected customers said some “non-sensitive customer data, such as user IDs, full names, email addresses, and organization role labels for users provisioned on our platform were accessed.” It's not clear why the company considered such information \"non-sensitive.\"\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-60d8257036feb5c6",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gadgets/2026/11/nvidia-hardware-worth-11-4m-vanished-between-oakland-and-texas/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-06T20:05:30.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Nvidia hardware worth $11.4M vanished between Oakland and Texas",
+        "summary": "6 pallets of hardware vanished en route to Texas, with no arrests 2 months later.",
+        "body": "A shipment of Nvidia hardware valued at $11.4 million vanished in transport between Oakland and Texas over the summer, and more than two months later, police have announced no arrests or recovery of the cargo.\n\nAs reported by The Mercury News , six pallets of unknown Nvidia equipment left Oakland on August 29 on a truck bound for Fort Worth, Texas. The hardware was reportedly picked up as scheduled by a truck bearing the logo of a food transportation company before vanishing off the grid. The theft wasn't noticed until early September, when the buyers realized that the shipment had never been received. Police attempting to trace the truck's route found it had made several multi-hour stops after picking up the hardware before losing the truck somewhere in San Bernardino County, California.\n\nOakland police confirmed that there was a grand theft report filed on September 13 and that the investigation remains ongoing. Authorities have not said what Nvidia hardware was stolen or exactly how the theft was carried out.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-4247c999eed2bd91",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/902546/data-centers-ai-energy-power-grids-controversy",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-06T20:02:22.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "All the latest updates on AI data centers",
+        "summary": "Massive new data centers are the physical foundation for tech companies’ hopes and dreams for AI. But the rush to expand warehouses full of energy-hungry servers has also kicked up fights across the world over their impact on power grids, utility bills, nearby communities, and the environment. Data centers were a major bipartisan issue ahead […]",
+        "body": "Massive new data centers are the physical foundation for tech companies’ hopes and dreams for AI. But the rush to expand warehouses full of energy-hungry servers has also kicked up fights across the world over their impact on power grids, utility bills, nearby communities, and the environment.\n\nData centers were a major bipartisan issue ahead of the 2026 midterms , and voters largely opposed data center expansion at the polls. Tech giants like OpenAI and Amazon are promising to work more closely with local communities and cover their data center energy costs. But following the election, Democratic leaders are calling for further data center restrictions and slowdowns that the AI companies will have to grapple with.\n\nFrom audacious plans about data centers into space , heated local battles over buildouts , and potential environmental impacts , here’s The Verge ’s news, coverage, and reporting surrounding data centers and the companies that are building them."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-2f08da92368c0052",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2309631/googles-eyewear-partners-cant-keep-a-lid-on-its-smart-glasses-plans/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-06T19:45:23.000Z",
+    "categories": [
+      "tecnologia-general",
+      "gafas-inteligentes"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google's eyewear partners can't keep a lid on its smart glasses plans",
+        "summary": "Gentle Monster shared that its \"Intelligent Eyewear\" will be available to pre-order on November 12.",
+        "body": "Gentle Monster shared that its “Intelligent Eyewear” will be available to pre-order on November 12.\n\nGentle Monster has announced its version of Google's Android XR smart glasses will launch in December, and its website says pre-orders open on November 12, the same date Warby Parker appeared to accidentally share on Thursday. Both eyewear brands, along with Samsung, are Google's partners on the project, which is set up to be both a competitor to Meta's smart glasses and a revival (of a sort) of Google Glass . Google itself has yet to confirm either date.\n\nThe Korean brand paired its announcement with a teaser of a short film directed by Jonathan Glazer, best known for Under the Skin and The Zone of Interest , and starring Joaquin Phoenix, who famously played a man who falls in love with an AI in Her . Gentle Monster says a full version of the short will be available in mid-November. The teaser suggests it'll skew much more toward experimental film than a straightforward commercial.\n\nGentle Monster's first Intelligent Eyewear collection ⠀ Joaquin Phoenix stars in a short film directed by Jonathan Glazer—a cinematic journey between reality and dream. Full film releasing mid-November. ⠀ The collection launches this December. ⠀ Register for the collection... pic.twitter.com/UBv6pdHWSW\n\n— GENTLE MONSTER (@_GentleMonster_) November 6, 2026\n\nGoogle's Android XR platform is designed to power everything from the mixed reality experience on the Samsung Galaxy XR to the augmented reality one offered on the Xreal Aura . Gentle Monster and Warby Parker's glasses will provide a display-free, audio-first version of the operating system, but should offer similar access to Gemini.\n\nIt's not clear how this \"Intelligent Eyewear,\" as Google and its partners call it, will go over, but Google seems to be hoping Meta's strategy of packaging tech in a desirable brand will help counter any backlash. With both Warby Parker and Gentle Monster's launches on the calendar, we won't have long to wait to see if it works."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-a9052557511b1093",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/06/hundreds-of-artex-ai-hacking-tools-found-publicly-exposed-to-the-web/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-06T18:44:38.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Hundreds of Artex AI hacking tools found publicly exposed to the web",
+        "summary": "Security researchers found hundreds of servers hosting the penetration testing tool Artex exposed to the internet, allowing anyone access to the hacking tool.",
+        "body": "Security researchers have discovered hundreds of copies of a Chinese-made AI hacking tool publicly exposed to the internet for anyone to access, potentially allowing outsiders to launch cyberattacks against unsuspecting targets.\n\nThe hacking software, called Artex, is an open source autonomous penetration testing tool, meaning software that automatically probes computer systems for weaknesses, and it’s been linked to several cyberattacks since its public release in July. As open source software, it’s free for anyone to download and run on their own servers, making it a popular tool for those who cannot access Anthropic or OpenAI’s most advanced cybersecurity AI models for discovering security vulnerabilities. Microsoft has previously described Artex as a system of AI agents that can conduct cyberattacks “from reconnaissance through data exfiltration with little needed human interaction.”\n\nIn a blog post , cybersecurity firm Censys, which scans the internet for exposed or vulnerable systems, said that it identified more than 800 distinct deployments of Artex that were accessible from the web without needing a password to log in.\n\nSilas Cutler, principal security researcher at Censys who wrote the blog post, said that not every instance of Artex is operated maliciously and many are used for authorized testers. But it’s unclear why hundreds of these Artex systems are exposed to the web, as the software does not require them to be accessible from the internet.\n\nThe findings underscore how even powerful hacking tools can be misconfigured to be publicly accessible by anyone, increasing the chance that someone will find and misuse them. The publicly accessible systems also expose attack tools, such as implants (hidden malicious software) used to compromise and maintain persistent access to a victim’s network.\n\nSecurity companies have linked the use of Artex to several broad-scale cyberattacks, including against the Korean finance industry in September . Cybersecurity giant CrowdStrike attributed the attacks to a Chinese-speaking hacker who used an Artex instance in the attacks, in part because the hacker had left an “open directory” hosting the system. Censys said that its data showed the Artex instance in question had been publicly exposed for months, and appeared to contain more attack data that extended “well beyond South Korean banks,” including payment and gaming companies.\n\nArtex was also used in an attack on IT support giant ConnectWise earlier in October , which allowed Chinese-linked hackers to spy on thousands of organizations whose data and files are hosted in Microsoft’s cloud. Microsoft, which has visibility into the attack, said in a blog post that the hackers used Artex to break into customers’ cloud environments and steal their data at such speed that defenders had “little time to detect and respond.”\n\nMany of the attacks linked to Artex involved exploiting simple vulnerabilities, such as guessing weak or known passwords, and a lack of multi-factor authentication.\n\nThe findings show that simple vulnerabilities, including misconfigurations, can expose both the attacker and their targets.\n\nArtex has since announced it would go closed-source, effectively limiting further releases for paid customers. There are still dozens of copies of Artex’s code available on code-sharing sites that can still be used in active attacks."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-99604d8bb805be66",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/06/meta-introduces-spaces-a-new-way-to-collaborate-with-your-muse-agent/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-06T18:44:20.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta introduces Spaces, a new way to collaborate with your Muse agent",
+        "summary": "Meta's Muse agents continue to get new features and integrations. Spaces promises to be a new way to interact with the AI helpers.",
+        "body": "Meta recently launched its Muse agents — a new generation of cuddly agentic helpers. Now, the company has launched Spaces, a new way to communicate and collaborate with them.\n\nAs far as I can tell, Spaces are basically breakout conversations that revolve around a particular topic — although Meta refers to them as “custom experiences.” They live in the sidebar of the interface where you interact with your Muse agent. Clicking on the Space brings up the conversation, where Muse works toward a particular goal on your behalf.\n\nFor instance, if you wanted to plan a vacation, you could open a new Space focused on that particular project, and whenever you want to work on it with Muse, you would click to open that particular tab. Or, if you’re focused on collecting recipes for an upcoming family event, you’d open a new Space for that particular project. Other examples Meta gives are a holiday gift tracker, a wedding planner, or a space for DIY projects.\n\n“Describe an idea in chat, and Muse builds a space for you, whether that’s a tracker, a planner or a project board,” Meta says.\n\nSpaces can also be easily integrated with third-party apps and information, Meta says.\n\n“Connect the apps you use, and your spaces keep themselves up to date in the background, so new concert dates, price changes, or savings progress show up without you having to ask,” the company says.\n\nOn Friday, Mark Zuckerberg, Meta’s founder and CEO, posted about the new feature on X: “Playing around with spaces in Muse lately — tell Muse what you need and it builds it. I’ve made a BBQ game, an event tracker, and a home control dashboard. Excited to see what you build.”\n\nMuse agents — and the cuddly avatars that enclose them — have been greeted with a relatively warm reception over the past few months. During its earnings call in October, Zuckerberg said that its agents had 10 million users in the U.S. and Canada — less than two months after the agents debuted.\n\nThe company is obviously busy building out the user experience around the agents. Spaces is actually the second new Muse feature that Meta has debuted over the last week. On Thursday, the company also announced Muse Voice , which allows users to video chat with their agent and give it commands verbally.\n\nThe company is in competition with other cute and cuddly AI agents — including OpenAI’s dots and SpaceXAI’s Grokbot , which were debuted with similarly cartoonish personas."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-a4d4e6bb1223a6ca",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/tech-policy/2026/11/does-meta-think-we-cant-read-meta-abandons-sketchy-commercial-terms-update/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-06T17:43:02.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "“Does Meta think we can’t read?” Meta abandons sketchy commercial terms update.",
+        "summary": "Meta won't force Facebook page owners to allow AI training on linked content.",
+        "body": "After weeks of backlash —and a failed attempt to quell it —Meta has indefinitely delayed plans to update its commercial terms and require Meta Business account users to allow extensive AI training on external websites linked on Facebook.\n\n\"We're pausing the ‌changes ⁠as we continue to engage with stakeholders and ​take ​our ⁠time to get this right. ​In the ​meantime, ⁠our existing terms remain in ⁠effect,\" a Meta spokesperson told Reuters.\n\nSoon after Meta notified business account holders of the upcoming changes, legal experts warned Nieman Lab that the vague language could allow the company to ignore scraping preferences specified in robots.txt files and exhaustively crawl vast amounts of off-Facebook content for AI training. Since virtually every news publisher has a Facebook page, Nieman Lab sounded the alarm that Meta could potentially avoid millions in licensing fees if the TOS update happened as planned.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
     "id": "the-verge-9ccd36881a671bf2",
     "type": "news",
     "sourceId": "the-verge",
@@ -98,77 +363,6 @@
     "media": null
   },
   {
-    "id": "techcrunch-d8c4bcf5aec3e7eb",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/06/pentagon-offers-battery-startup-6k-250m-loan-to-build-u-s-factory/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-06T16:50:01.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Pentagon offers battery startup 6K $250M loan to build U.S. factory",
-        "summary": "The Pentagon has conditionally approved a $250 million loan to help 6K scale up its microwave-plasma battery material manufacturing process.",
-        "body": "Posted:\n\nBatteries are everywhere, even on the battlefield, which helps explain the Pentagon’s recent interest in building more domestic manufacturing capacity.\n\nThe 12-year-old, North Andover, Mass.-based startup 6K announced Thursday that it won conditional approval for a $250 million loan from the Department of Defense to build a factory in Tennessee. The plant will use a unique microwave-powered process to produce battery materials that don’t rely on Chinese suppliers.\n\nThe company previously received a $50 million grant from the Department of Energy under the Bipartisan Infrastructure Law, though that 2023 grant was canceled by the Trump administration in a chaotic sweep of Biden-era awards, forcing 6K to reapply.\n\nInitially, the factory was originally slated to open in 2024, but the grant cancelation and uncertainties in the EV market forced the company to rejigger its plans .\n\n6K’s manufacturing process uses microwaves to heat metals into a plasma and then deposit them onto a surface, reducing the number of steps required to make cathode material, a key battery component. The company says the process can work on a number of different battery types, including lithium iron phosphate (LFP)."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-ee3b21be1c8d547d",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/podcast/1028731/2026-midterms-tech-ai-vergecast",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-06T16:38:02.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Big Tech lost big in the 2026 election",
-        "summary": "On Tuesday, millions of American voters went to the polls and voted overwhelmingly for Democrats and against AI. The fight against Big Tech is about to come roaring back, and the fight over data centers is looking even harder for the folks trying to build them. On this episode of The Vergecast, Nilay and David […]",
-        "body": "On Tuesday, millions of American voters went to the polls and voted overwhelmingly for Democrats and against AI. The fight against Big Tech is about to come roaring back , and the fight over data centers is looking even harder for the folks trying to build them.\n\nOn this episode of The Vergecast , Nilay and David discuss what the 2026 midterms mean for the tech industry going forward. They dig into the self-quarantining echo chamber that is X , the congressional energy likely to be pointed at tech CEOs and AI regulation, and whether anything is actually likely to get done in the next two years.\n\nAfter that, the hosts turn to AI. Specifically, …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-1105911cda3ee0ef",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/gaming/2026/11/could-potential-ai-clones-of-gta-vi-force-a-quicker-official-port/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-06T16:19:12.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Could potential AI clones of GTA VI force a quicker official port?",
-        "summary": "A former Rockstar tech director thinks the developer is facing new time pressures.",
-        "body": "Yesterday, when reporting on emerging efforts to pipe the console version of GTA VI through a PC's DLSS-powered Nvidia GPU , we mentioned in passing that PC players could instead just wait for the AI-assisted decompilation port that will no doubt be coming in short order. Now, a former Rockstar tech director says he thinks that exact threat could cause the developer to work faster on the official PC version of its soon-to-release crime/lifestyle simulator.\n\nObbe Vermeij hasn't worked at Rockstar since 2009 , but in a new interview with Rock Paper Shotgun , he recalled how artists for the PC version of the original top-down Grand Theft Auto were incensed when the console version squashed the game's 256-color textures down to 16 colors for the PS1 release.\n\n\"So it always has been that sort of awkward relationship between PC and the console,\" Vermeij said. \"So in those days, it was like PC first and then console second, even though that didn't really make much sense for the sales, because the PlayStation versions sold way better.\"\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "engadget-0c2c8f5bd041c75a",
     "type": "news",
     "sourceId": "engadget",
@@ -192,79 +386,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-4bd3a7cac22b34e0",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/06/ios-27-2-adds-apple-photos-invisible-watermark-feature-heres-how-it-works/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-06T15:39:08.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27.2 adds Apple Photos invisible watermark feature, here’s how it works",
-        "summary": "iOS 27.2 arrived last week, and among its changes for Apple Photos , the update adds an invisible watermarking feature when you use certain editing tools. Here’s how it works. more…",
-        "body": "iOS 27.2 arrived last week, and among its changes for Apple Photos , the update adds an invisible watermarking feature when you use certain editing tools. Here’s how it works.\n\nIn the age of AI, what looks like a genuine photo might actually be a fake—or partly fake. That’s why tools like SynthID have been used to apply invisible watermarks to AI-generated content.\n\nStarting with iOS 27.2, Apple now uses SynthID watermarks when you make AI-generated edits to photos in Apple Photos, or create all-new images with Image Playground.\n\nPer a new support document :\n\nStarting with iOS 27.2, iPadOS 27.2, macOS 27.2, and visionOS 27.2, some Apple Intelligence tools will add an invisible SynthID watermark to images that you create or edit:\n\nImage Playground generates entirely new images, so it’s more what the average person would consider an “AI image.”\n\nHowever, as Apple notes, the SynthID invisible watermark is also applied to genuine photos in your Apple Photos library if you use the AI-powered Clean Up, Extend, or Spatial Reframing tools to edit them.\n\nIt’s worth emphasizing the word “invisible” here. You won’t see evidence of a watermark anywhere on your photos, nor will others unless they explicitly check the image with a SynthID detector.\n\nIf you do want to check for the watermark, Apple recommends going to synthid.com , where you can upload an image and see its result.\n\nHow do you feel about Apple Photos adding SynthID watermarks in iOS 27.2? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-c55cd547ef8a9c98",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/apple/2026/11/its-a-weird-time-to-buy-a-laptop-but-the-new-macbook-pro-doesnt-skimp-on-quality/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-06T15:28:07.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "It's a weird time to buy a laptop, but the new MacBook Pro doesn't skimp on quality",
-        "summary": "It has the best laptop screen we've used, but there may be reasons to wait.",
-        "body": "Apple's new MacBook Pro is expensive as hell.\n\nLet's get that out there right away, because for a lot of people, it will be the only thing that matters. As with so many things in life, though, you get what you pay for. There's no questioning the quality of the laptop's display or most of its other hardware components.\n\nBut should you buy it? Well, that's a complicated question in 2026.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-80684ad9c6f54b1c",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/06/apple-says-there-are-already-over-100000-apps-built-for-iphone-duo/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-06T15:23:49.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple says there are already over 100,000 apps built for iPhone Duo",
-        "summary": "Apple released the iPhone Duo two weeks ago, and the app story is quickly taking shape. In a new statement to 9to5Mac , Apple has revealed that there are already “well over 100,000 apps” on the App Store designed for iPhone Duo, and thousands are being added each day. more…",
-        "body": "Apple released the iPhone Duo two weeks ago, and the app story is quickly taking shape. In a new statement to 9to5Mac , Apple has revealed that there are already “well over 100,000 apps” on the App Store designed for iPhone Duo, and thousands are being added each day.\n\nHere’s Susan Prescott, Apple’s vice president of Worldwide Developer Relations:\n\n“It’s been wonderful to see how quickly developers have embraced iPhone Duo, and we’re grateful for their creativity and innovation. Today there are well over 100,000 apps built for iPhone Duo already live on the App Store, and thousands of optimized apps are being added to the store each day.\n\n“In the last month alone, thousands of developers have joined us for workshops in 19 cities around the world to experience iPhone Duo firsthand and bring updated apps to their users. The enthusiasm has been incredible, and we’re excited to see the pace of updates continue to accelerate as more and more apps optimize for iPhone Duo.”\n\nIn total, Apple says that over 2,000 developers have attended more than 50 in-person workshops around the world.\n\nApple is continuing to spotlight apps for iPhone Duo on the App Store, including editorial curations like “Popular Apps on iPhone Duo” and “Great Games on iPhone Duo.” There’s also a “Made for iPhone Duo” badge that appears on product pages for apps optimized for Apple’s foldable.\n\nRecent apps optimized for iPhone Duo include Microsoft Word , Microsoft Outlook , Zoom , Etsy , Halide Mark III , and more.\n\nI detailed the iPhone Duo app experience in my full review last month . At the time, I emphasized the big difference between using an app updated for iPhone Duo and one that isn’t. I’m thrilled to see how quickly the apps I use every day are being updated for iPhone Duo.\n\nAnother trend I’m noticing is that apps that were quick to support iPhone Duo at launch have since received subsequent updates with better optimization for the inner and outer displays.\n\nFollow Chance : Threads , X , and Instagram"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "engadget-b5f5f4e7621ef772",
     "type": "news",
     "sourceId": "engadget",
@@ -280,57 +401,9 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Anker Soundcore Space 2 Pro review: Big bang for less bucks",
+        "title": "Anker Soundcore Space 2 Pro review: Big bang for fewer bucks",
         "summary": "The Space 2 Pro is a set of slightly above average headphones with exceptional voice clarity.",
         "body": "The company’s latest headphones rival Apple, Bose and Sony at a much lower price.\n\nWe may receive a commission on purchases made from links.\n\nIf you don't like the idea of paying $350 to $500 for a set of flagship headphones, Anker's Soundcore line offers a lot of performance at much lower prices. Over the years, the company has refined its formula by balancing sound and features in various packages so as to compete with the likes of Apple, Bose, Sony and Sennheiser. With the Space 2 Pro , Anker put its new Thus audio chip in headphones for the first time , making lofty claims about the upgraded voice clarity as a result. At $200, these aren't just an affordable alternative to the big names in headphones, they're a worthy contender in their own right.\n\nThe first thing that stood out to me about the Space 2 Pro is the design. These do not look like they cost $200, especially not the grey version that I tested. Anker refined the look of the Space line here for a premium aesthetic and a build that's lightweight, but not overly plastic. The sliders for fit adjustments are metal and both the headband and ear pads are wrapped in soft leather. There are also subtle metallic accents to complete the premium design, like the circles on the outside of the ear cups and subtly placed product name.\n\nEven though the Space 2 Pro is the flagship Soundcore headphones, the price tag pits them up against decidedly midrange competition. Design-wise, the Space 2 Pro is vastly superior in that category, and that advantage continues into audio performance. These headphones have more bass and overall clarity than you'll typically find in the $200 range. The 35mm drivers are made with two different materials in order to maximize both high-end clarity and deep bass.\n\nWhen I listened to Mastodon's Marrow Deep, Brann Dailor's drums boom throughout and Troy Sanders' bass provides the backbone for the guitar riffs. Thanks to Anker's \"crystalline highs\" here, guitars and synths cut through the mix clearly, so you never miss a note of Bill Kelliher's handiwork. The overall clarity and detail on the Space 2 Pro is really on display with more acoustic-driven genres, like Zach Bryan's Young Manhood and Other Donatable Organs . The piano, acoustic guitar and string section seem to float behind the interwoven vocals of Bryan and Lana Del Rey on \"Lies,\" for example.\n\nAnker is very proud that the Space 2 Pro currently holds the Guiness World Record for the \"clearest over-ear headphones for calls.\" I was immediately skeptical that this would hold any weight in real-world use, but boy was I wrong.\n\nPlenty of headphones manage to nullify background noise, but they do so at great expense to voice clarity. But thanks to that Thus chip and a six-microphone array, the Space 2 Pro offers extremely clear voice performance while effectively blocking background noise. Not only do they combat would-be distractions exceptionally well, they do so without making you sound even the slightest bit robotic. I thought I sounded pretty close to how I did in a quiet room when the processing kicked in, maybe only the slightest bit muffled, but never like a digitized version of myself.\n\nThe company promises battery life of up to 30 hours when you have active noise cancellation (ANC) on, or up to 60 hours with it off. During my testing, which I conducted almost entirely with noise cancellation enabled, I got 31 hours before the Space 2 Pro shut off. I did take a call or two a day where I needed to switch to transparency mode so I didn't feel the need to shout to hear myself speaking, but I'd say 95 percent of the time, I was using ANC.\n\nThe most disappointing aspect of the Space 2 Pro to me are a number of subpar audio features. The Thus chip powers what Anker calls Hear ID 5.0, a feature that uses a hearing test to customize the sound of the headphones to your preferences. I didn't think the resulting tailored audio profile offered any meaningful improvement over the stock tuning, neither did spatial audio settings or the collection of curated presets. I tested all of them, of course, but every time I used one, I found myself longing for the out-of-the-box sound after just a few minutes of use.\n\nAnker boasts Adaptive ANC 3.0 on the Space 2 Pro, a noise-canceling setup that relies on the Thus chip and eight microphones to combat background noise. The company specifically lists \"blocking office chatter and keyboard clicks for instant silence\" among the headphones' strengths. While I do think the Space 2 Pro does an above average job of lowering the volume on human voices, and it definitely blocks keyboard clicks, its general noise canceling abilities are just okay. The headphones struggled with constant noise sources, like white noise machines and particularly raucous fans.\n\nOn Anker's flagship earbuds, the Liberty 5 Pro Max, the company built an AI note taking assistant into the charging case (which has a touchscreen). Even though the Space 2 Pro doesn't have a case, it does have plenty of microphones, and \"AI Note-Taker\" is currently listed as \"TBD\" on the spec sheet. If that feature does eventually arrive, there are two potential issues with it.\n\nFirst, it will be a lot more awkward to wear over-ear headphones in a meeting than it would be to slide a small earbuds case to the middle of the table. Second, if you plan to regularly use Anker's transcription service and cloud storage, you'll have to pay for a subscription. You only get two hours of transcriptions and 10,000 minutes of audio storage monthly for free, and only for two years. Plans are then either $8.33 or $20 per month (billed annually) depending on your needs. Since it's unclear if this feature will ever arrive, its absence doesn't impact my overall assessment.\n\nIt's easy to dismiss Soundcore as merely a budget brand, but that would be a mistake. With products like the Space 2 Pro, Anker proves it can hang with the best, offering comparable performance for significantly less money. In fact, I'd argue if voice clarity is your primary factor in choosing a new set of headphones, this model should be your first choice. For many, though, that's further down the list of priorities.\n\nWhile there are caveats when it comes to ANC performance, audio features and a (potentially) unnecessary note taker, the Space 2 Pro has a lot of premium traits. The overall sound quality is good, the design is refined, the fit is comfortable and battery life claims hold true. At a time when the best overall headphones you can buy are $460 at full price, Anker's ability to produce a $200 alternative that won't disappoint you is no small feat."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-754af6706439cb5d",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/06/twelve-south-retractable-usb-c-charger/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-06T13:10:14.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Twelve South’s new Cablesnap charger has a built-in retractable USB-C cable",
-        "summary": "Popular Apple accessory maker Twelve South is launching a new retractable Cablesnap 65W travel charger this week. It has a built-in USB-C cable, alongside an additional USB-C port and USB-A port. You can order the new Cablesnap 65W on Amazon today for $49.99 . more…",
-        "body": "Popular Apple accessory maker Twelve South is launching a new retractable Cablesnap 65W travel charger this week. It has a built-in USB-C cable, alongside an additional USB-C port and USB-A port.\n\nYou can order the new Cablesnap 65W on Amazon today for $49.99 .\n\nWe’ve seen travel chargers with retractable cables before, and Twelve South’s is similar. It has a 29-inch (75cm) spring-loaded USB-C cable built right in, so you can pull out exactly as much as you need. Then, when you’re ready to pack up, just give it a little pull, and it snaps back into the charging brick.\n\nIn addition to the retractable USB-C cable, there’s a separate USB-C port and a USB-A port for charging other accessories. It can charge at up to 65W speeds, shared across each connected device.\n\nSome more Cablesnap features:\n\nYou can order the new Cablesnap 65W on Amazon today . This is just the latest in what’s been a busy few weeks for Twelve South. Last month, the accessory maker introduced the popular AirFly Drive adapter that converts wired CarPlay into wireless. A few weeks later it unveiled the AirFly View , an evolution of its wireless audio dongle that’s perfect for planes .\n\nFollow Chance : Threads , X , and Instagram"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-48622407dbe5e73d",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2306413/samsung-galaxy-watch-ultra-2-review-2026/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-06T13:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "android"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Samsung Galaxy Watch Ultra 2 review: The new standard for smartwatch battery life",
-        "summary": "With its bright display and battery life, the Galaxy Watch Ultra 2 hits the sweet spot for smartwatch hardware.",
-        "body": "Coupled with a bright display, it hits the sweet spot for smartwatch hardware.\n\nWe may receive a commission on purchases made from links.\n\nSamsung's latest Ultra smartwatch hits all the notes of an 'ultra' wearable: a solidly designed timepiece with chunky detailing that puts activity tracking front and center. For the Galaxy Watch Ultra 2 ($700) , the company has made major improvements to battery longevity and performance, while still forging its own health-tracking path with a bunch of unique metrics (of varying utility). With 13 years of wearable launches behind it, can Samsung pry me away from my Apple Watch Ultra?\n\nIt's refreshing to see some major hardware upgrades on this second Galaxy Watch Ultra — perhaps a benefit from taking a year off from offering an upgrade. Starting with the (slightly bigger) 1.52-inch display, it now reaches up to 5,000 nits of brightness, a big leap from the original Watch Ultra's 3,500-nit max — and better than pretty much every other smartwatch out there. It's the same squircle design that most folks either love or loathe. I like it: It looks different from the circular smartwatches and won't be confused for an Apple Watch either.\n\nSpeaking of which, Samsung's newest flagship watch is lighter and slimmer than both its predecessor and Apple's latest Watch Ultra 4, but it's still a substantial timepiece, at 10.7mm thick and weighing just shy of 2.2 ounces (61.5 grams). It comes in only one size, 47mm, and it looks chunky and outdoorsy on most folks' wrists. If you're looking for a more subtle, smaller Samsung smartwatch, the company's Watch 9 series might be a better fit, literally. The company has stuck with its proprietary Dynamic Lug System for its watch bands, so you'll be limited to Samsung-made options and a few niche third-party options. on't expect the same range you get with Apple's wearables.\n\nThere's still no rotating bezel, which was a mainstay on Samsung's older flagship wearables , and the buttons along the right edge protrude much less, which is one of several small hardware refinements you may not notice at first. Sadly, Samsung also reduced the orange detailing on the main button, which I liked. I'll take anything that adds a splash of color to monochromatic tech.\n\nThe lack of a physical dial doesn't ruin the wearable, but it can be frustrating at times. Using picker wheels, which you scroll to choose a number, seem overly sensitive across multiple apps. For example, when adjusting the weight numbers on Hevy, a weight training app that works on the Watch Ultra 2, I found it hard to lock on to the right number.\n\nThe hardware seems as durable as it looks, with a shock-resistant titanium casing and IP69K dust and water protection, making it completely dust-proof and able to handle high-pressure, high-temperature water jets. This is arguably the most diving-friendly mainstream wearable, or at least it will be. It has a water resistance rating of 10 ATM, so that you can take the Galaxy Watch Ultra 2 as deep as 100 meters (or 328 feet). However, we're still waiting, months after it was announced, for a dedicated diving app that was promised at launch.\n\nBattery capacity is up substantially, from the original Watch Ultra's 590mAh cell to 800mAh. That's over a third more battery. Combined with the latest Snapdragon Wear Elite chipset, it delivers the battery life I want from a smartwatch.\n\nWe all use wearables differently: some want constant heart rate tracking and some want fine-grained fitness tracking during daily workouts. Some might want their wearable to track their entire ultramarathon, and the Galaxy Watch Ultra 2 will oblige. I am not an ultramarathon runner — yet. With mid-to-light use and the always-on display on, I got three days out of the device before the battery dipped below 20 percent. This included plenty of notifications, tracking an hour-long gym workout most days and using the Watch Ultra 2 controls to play podcasts and music. I also used it to track my sleep each night which I'll dive into more later.\n\nAlready, that's impressive battery performance. Over a week, I'd typically charge the device only twice. When I headed out for a weekend break, my fully charged Watch Ultra 2 handily lasted the trip. Skipping tracked workouts or turning off the always-on display, I got closer to four or five days of use. I want this to be the new standard in smartwatch battery life, though I understand that, at least for now, bigger batteries demand the thicker design of these 'ultra' smartwatches.\n\nComing from over a decade of Apple Watch ownership , interspersed with various Samsung wearables (running different operating systems), I still find it hard to navigate to the apps and status screens I want. However, it's still leagues ahead of the dark Tizen years.\n\nIt feels like too many inputs. Alongside the three hardware buttons on the right side, navigation centers on swiping from the top edge, while swiping from the bottom edge and side edges takes you elsewhere. Swipe down opens the Watch Ultra 2's Control Center (brightness, settings and volume), while swiping up opens the app drawer. Swipe right to get to your notifications, though it's a bit odd that they aren't in the swipe-down menu, given everyone's muscle memory. Meanwhile, swiping left drops you into a mix of tracked fitness metrics and weather.\n\nSpeaking of the app drawer, I think the Watch Ultra 2's app icons are often too plain and similar-looking, making it hard to find what I need at a glance. Having to depend on the alphabetical list (and scrolling and scrolling and scrolling) is rough. I rarely use Samsung's home-built Android apps, preferring either Google or third-party options, so I haven't built up a memory of most of the app icons. Samsung offers an app panel with your six most recently used Watch apps, which can even include the settings menu or Google Play Store, helping reduce my struggles with the wearable's app list.\n\nSamsung split some of its health features between two apps: Health and Health Monitor. The company did so to keep medical-grade features like ECG (electrocardiogram) and sleep apnoea detection separate, and to obey regulatory compliance and medical device approvals in different regions. Samsung can then roll out (or limit) clinical features by location based on that criteria. Still, finding the health tracking features I wanted was often laborious, with half the features (like sleep metrics) requiring me to open my smartphone to see them.\n\nThere are highlights too. Samsung has built a playful range of watch faces and wallpapers, mixing chronograph-style, information-heavy options with customizable, photo-centric portraits and brightly colored numeric options. Uploading your own photos to the watch remains oddly sluggish, however.\n\nSamsung goes to town on tracking biometrics, yet again. Antioxidant levels, hydration tracking and body composition scanning are here, on top of deeper sleep and workout tracking. Loud noise detection is new for Samsung's wearables, too, a feature that's been on Apple's Watch series for a few years.\n\nSome new features are hidden away inside the Watch Ultra 2 (or more often than not, your companion Samsung smartphone), but they're aimed at better synthesizing all this data into a more palatable, understandable form. For example, a new feature called Heart Health Score attempts to distill multiple tracked metrics into a single number, combining sleep, stress and activity and connecting it to body composition data.\n\nIt's a clear example of how many wearable features and settings get buried, and how easy they are to miss. To see your score, you have to open the Heart health tile on your watch, scroll down and tap \"Show on phone\" to launch its own Health app on your paired device. I wish this (like many other metrics) could just be displayed on the Watch Ultra 2 itself.\n\nWe've already tested out the new hydration tracking during exercise , which seems aimed at more intensive, lengthier workouts than I usually do. It could be a useful addition for hardcore athletes, but for the rest of us who work out in the gym or train for a half-marathon at most, hydration isn't a major issue. One quick aside: The Galaxy Watch Ultra 2 automatically detects workouts and walks well, flagging sessions more consistently than my Apple Watch Ultra 3.\n\nOnce again, we tested the antioxidant tracking, which requires you to take off the Watch Ultra 2 and press your thumb firmly against the sensors on the rear of the device. For a week, I tried to lean into the healthy eating habits Samsung says will increase my antioxidant levels. It's a lot of common-sense suggestions: Eliminate added sugars, avoid ultra-processed snacks and meals, increase raw veggies and fruits. Interestingly, Samsung's app suggests leaning into moist-heat cooking — like steaming, instead of grilling or roasting.\n\nWhile we saw antioxidant testing in last year's Samsung wearables , the Watch Ultra 2 adds two features: trend charts and daily history logs. My antioxidant levels increased towards the upper limit of low, but never quite graduated to the middle rating. I'm not sure it's a particularly notable way to track healthier eating, but it kept me honest in my food choices for a few weeks.\n\nSleep tracking has been upgraded, although the new software finally landed months after the Watch Ultra 2 initially went on sale. There are some genuine improvements here, including a faster setup. The watch now requires only three days of sleep data from the past two weeks, instead of the seven days previous Galaxy Watches needed.\n\nDespite its stellar battery life, the Galaxy Watch suffers from the fact that most of us recharge our smartwatches overnight — or prefer not to sleep with a slab of tech attached to our wrist. Folks who charge their watch overnight can't gather sleep data, so needing fewer days of data makes it easier to get on board with sleep tracking.\n\nThere's also a sleep coaching 'pet', based on an initial setup survey and your first few nights of sleep pattern data. This offers sleep advice and habit suggestions, setting up a 4- to 8-week coaching program that adjusts dynamically based on the sleep you eventually get.\n\nSamsung has offered snore detection on its wearables for years, which still requires your phone nearby to record audio and it's still harrowing to listen back to. With the Watch Ultra 2, Samsung upgraded sleep apnea detection and folded it into its Health Monitor app. It requires two nights' sleep, with the watch worn tightly and higher up the wrist. It'll then let you know if you show signs of sleep apnea, which can be a genuine health threat.\n\nThe watch monitors biometric readings throughout the night, including blood oxygen levels, heart rate variability and your physical movement. It tracks signs of moderate-to-severe obstructive sleep apnea (OSA) and analyzes breathing disruptions per hour. It's not a clinical diagnosis, but it could be worth getting an expert opinion if the watch detects high levels of sleep interruption. If you're not using a Galaxy phone with this watch, unfortunately, you won't be able to use several features, including this sleep apnoea test. Other features unavailable include the ECG, which checks for signs of atrial fibrillation, and the blood pressure monitor.\n\nSamsung's refinements to its Galaxy Watch Ultra series prove it can match Apple's equivalent Watch Ultra. The hardware is solid and premium, with its own unique style, while the Galaxy Watch Ultra 2's battery life blows away most of its smartwatch competition — a crucial, if not the most important, tech spec in a wearable. The display is also incredibly bright, too, making it easy to use on sunny days, and the always-on mode doesn't demolish the battery life like the feature often does on older wearables.\n\nSamsung continues to test multiple health metrics and lifestyle tracking options with mixed results. Sleep tracking has improved and needs less data, so I didn't feel forced to wear the watch every night. But other features, like antioxidant and hydration tracking, can be inconsistent or even irrelevant.\n\nAt a time of rocketing tech prices, Samsung's top-tier smartwatch is $100 cheaper than the Apple Watch Ultra 4. Still, because they're on separate platforms, that decision hinges less on which watch is better and more on whether you use an iPhone or a Galaxy device. The bigger competition may be Samsung's Galaxy Watch 9 ($380), which packs the same array of deep health monitoring features and AI shortcuts for several hundred dollars less. The Galaxy Watch 9 lacks the Watch Ultra 2's standout battery life and bright display, though, both of which make this Samsung's most capable wearable yet."
       }
     },
     "media": null
@@ -355,29 +428,6 @@
         "title": "Sonnounce",
         "summary": "Send announcements to the Sonos speakers in your house – in your own voice. Pick the speakers you want, hold the button down while you talk, and let go. The announcement plays right away. While the announcement plays, the music is turned down, and afterwards it comes back up. The announcement itself plays at the volume the speaker is already set to. NO ACCOUNT. NO CLOUD. NO SUBSCRIPTION. The app talks directly to the speakers on your own network. The sound is recorded on the phone, and the speaker fetches it from there. Your voice never leaves the house. An announcement can be up to five minutes long. FROM YOUR WRIST With Apple Watch you can record an announcement straight from your wrist. The watch passes it on through your iPhone. SHORTCUTS Type a text in Shortcuts, and the phone reads it aloud on your speakers. It is read aloud in the language the app is set to. Use it in automations, for example when dinner is ready or when someone rings the doorbell. You can also have the most recent announcement repeated. AWAY FROM HOME With a Homey Pro you can send announcements home even when you are out. This requires the Sonnounce app to be installed on your Homey as well. If you have a VPN to your home, you can also send announcements that way. SAVE THE ANNOUNCEMENTS With a Homey you can save every announcement sent in the house. They are kept on your own Homey at home – not in the cloud – and you can download them to your iPhone. Requires Sonos speakers on the same Wi-Fi as the phone.",
         "body": "Send announcements to the Sonos speakers in your house – in your own voice. Pick the speakers you want, hold the button down while you talk, and let go. The announcement plays right away. While the announcement plays, the music is turned down, and afterwards it comes back up. The announcement itself plays at the volume the speaker is already set to. NO ACCOUNT. NO CLOUD. NO SUBSCRIPTION. The app talks directly to the speakers on your own network. The sound is recorded on the phone, and the speaker fetches it from there. Your voice never leaves the house. An announcement can be up to five minutes long. FROM YOUR WRIST With Apple Watch you can record an announcement straight from your wrist. The watch passes it on through your iPhone. SHORTCUTS Type a text in Shortcuts, and the phone reads it aloud on your speakers. It is read aloud in the language the app is set to. Use it in automations, for example when dinner is ready or when someone rings the doorbell. You can also have the most recent announcement repeated. AWAY FROM HOME With a Homey Pro you can send announcements home even when you are out. This requires the Sonnounce app to be installed on your Homey as well. If you have a VPN to your home, you can also send announcements that way. SAVE THE ANNOUNCEMENTS With a Homey you can save every announcement sent in the house. They are kept on your own Homey at home – not in the cloud – and you can download them to your iPhone. Requires Sonos speakers on the same Wi-Fi as the phone."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-ba99ef56b719512e",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/05/at-least-10-local-governments-have-moved-to-drop-flocks-surveillance-cameras-since-summer/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-06T07:18:44.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "At least 10 local governments have moved to drop Flock’s surveillance cameras since summer",
-        "summary": "The concerns range from privacy to how data is shared (and with whom) to procurement concerns.",
-        "body": "At least 10 local governments and police departments have moved since this summer to curb, restrict, or end their use of Flock Safety technology as concerns about mass surveillance and data privacy continue to grow . The backlash is part of a broader pushback against the rapid adoption of advanced AI technology, including the data center buildout, facial recognition, and other uses of AI.\n\nFlock, founded in 2017, sells surveillance software — like license plate readers, drones, and microphone-based edge-computing devices to pick up gunshots and other sounds — that can help solve crimes, such as finding missing people or stolen cars. More than 100,000 Flock cameras are in use nationwide.\n\nBut in the past three months, Monroe , Ohio; Newburgh , New York; Richmond , Virginia; Hopkinton, Massachusetts; New Bedford , Massachusetts; and Lansing , Michigan, have all moved to end their contracts with Flock. Meanwhile, police in East Bridgewater and Grafton, Massachusetts, also announced plans to stop using Flock cameras. Just this week, residents of League City, Texas, voted against their police department’s continued use of Flock’s license plate readers, and the cameras are now set to be removed.\n\nThe concerns range from privacy to how data is shared (and with whom) to procurement concerns.\n\nIn Asheville, North Carolina, police lost access to Flock after the city voted to terminate its contract in August, and the El Paso County Sheriff’s Office in Colorado announced in September that it would stop using Flock cameras. When asked for comment, the El Paso County Sheriff’s Office redirected TechCrunch to its press release, where Sheriff Joseph Roybal said that discontinuing the use of Flock was the right decision for the county.\n\n“We have the tools, training, and experience to locate and apprehend criminals without relying on Flock cameras,” he said in the press release.\n\nTatiana Rice, a senior director for U.S. legislation at The Future of Privacy Forum, told TechCrunch that the backlash to Flock isn’t surprising and only further represents the “growing public skepticism toward technology.” Flock is a target because people can see the sensors and cameras as they drive along roads; data centers have also become physical embodiments of the resentment growing against emerging technology. “A camera at the end of your street is tangible in a way that everyday sharing and selling of personal data online is not,” Rice said.\n\nAt the state level this summer, for example, Florida barred license plate readers from state highways, while Texas paused state funding for Flock. The issues again range from data privacy concerns to misuse of the technology.\n\nMisuse has been a real problem. In August, for example, an officer in Brentwood, Missouri was accused of using Flock cameras to stalk his ex-wife during their divorce. In September, an officer from East Texas was sentenced to prison for using Flock to stalk his ex-girlfriend and her family.\n\nAnother growing concern is how immigration officials have been able to access the technology. One case that captures the issue came in March, when Ithaca, New York, passed a resolution to terminate its contract with the Flock Group.\n\nIn the resolution, the city said there were “proven instances of Flock Safety infrastructure being used by federal agents for information purposes even without specific authorizations from the contracting locality,” and that the city had reviewed reports that “either intentionally or through its negligence,” Flock had allowed U.S. Immigration and Customs Enforcement (ICE) and the Bureau of Alcohol, Tobacco, Firearms and Explosives (ATF) to “use query results from its database of state and local ALPR [automatic license plate reader] data to investigate and persecute immigrants throughout the United States.”\n\n“Every day, police departments across the country are using Flock technology to solve serious crimes, locate suspects, find missing people, and make a measurable impact on public safety,” Flock told TechCrunch in a statement. “While we respect every community’s decision, removing a tool that is actively helping solve violent crimes and protect communities moves public safety backward. Every Flock customer owns its data and controls who it is shared with and how it can be used. Flock does not sell data and does not have a contract with ICE.”\n\nThis August, Flock announced it would shorten the default period it stores data for new customers, from 30 days to seven. It also said agencies now need a case code before they can search the database.\n\nThe conversation around Flock echoes, in many ways, the fight over data centers. Many of these cities adopted Flock just a few years ago, and residents likely had no idea it was being installed, Adam Schwartz of the Electronic Frontier Foundation, a digital privacy nonprofit that has investigated Flock before, told TechCrunch.\n\nThat lack of awareness is similar to how data centers are popping up across the country, often before residents understand what is happening. Schwartz said police departments often decide to use Flock on their own, with little oversight from city councils. In South Windsor , Connecticut, according to local reports, Flock cameras went live last year without public warning or a vote. In October, the town voted to remove its Flock cameras.\n\n“Grassroots activists across the country have been demanding that city councils exercise their procurement power to refuse to pay for ALPRs,” Schwartz said, referring to councils’ power to decide what the city buys. He added that activists have been fighting for years and that “many city councils are listening.”\n\nThe main argument for technology like Flock is that it helps combat crime and keep neighborhoods safe. And many local governments are not dropping Flock or similar technology; instead, they are adding restrictions on its use or looking for alternatives.\n\nCleveland, Ohio, for example, voted this summer to extend its contract with Flock, but has started restricting searches related to immigration. It has also limited access to the database to the Cleveland Police alone, cutting off the Northeast Ohio Regional Fusion Center, essentially a federal intelligence agency, which had initially been given access.\n\n“They are used and needed for investigative purposes,” the city said when reached for comment. “The Department of Public Safety is currently reviewing responses to an RFP [request for proposals] that was sent out to other vendors that provide the same technology as Flock.”\n\nBut as with data centers, communities want more say in the trade-offs. “These tools can offer real public safety benefits, but communities are clearly interested in ensuring that those benefits are not at the cost of their civil liberties,” Rice said. Surveillance technology will likely remain a political hot topic, especially since Democrats now control Congress.\n\nIn September, President Donald Trump said he liked Flock’s technology “because of law enforcement,” even though a Reuters poll that same month found that more Americans dislike the technology than like it.\n\nAlso that month, Rep. Thomas Massie, a Republican from Kentucky, introduced a bill called the Flock-Off Act to bar the use of federal money to buy “ Flock-style surveillance ” and put other safeguards in place. In October, Sen. Bernie Sanders (I-Vt.), Rep. Alexandria Ocasio-Cortez (D-N.Y.), and Sen. Jeff Merkley (D-Ore.) introduced the Ban Flock Act to end “the rise of AI-powered surveillance cameras.”"
       }
     },
     "media": null
@@ -429,29 +479,6 @@
         "title": "Getting the Most Out of Vispero Companion: Tips and Best Practices",
         "summary": "Vispero Companion has grown from a helpful question-and-answer assistant into your one conversational home for all the AI features in JAWS. Whether you want to know how a feature works, get a description of a photo, explore a busy web page, or have a task done for you, it all happens in one familiar, accessible …",
         "body": "Vispero Companion has grown from a helpful question-and-answer assistant into your one conversational home for all the AI features in JAWS. Whether you want to know how a feature works, get a description of a photo, explore a busy web page, or have a task done for you, it all happens in one familiar, accessible window. And because everything lives in a single conversation, you can keep asking follow-up questions without starting over. Here are some tips and best practices for getting the most out of Vispero Companion.\n\nWith Vispero Companion Actions, Companion does more than answer questions. Just ask, and it can help you:\n\nYou’re always in control. Companion only works when you ask, asks for your approval before executing important steps, and stops immediately when you press ESC.\n\nThe new Vispero Companion is available through the Early Adopter Program to users in the United States who are signed in to a Vispero account. To turn it on:\n\nOnce it’s on, press JAWS KEY+SPACEBAR followed by F1 to open Companion. The JAWS key is INSERT when using Desktop Keyboard layout, and CAPS LOCK when using Laptop layout.\n\nCompanion looks at what is on your screen to understand what you’re asking about. If the application window isn’t maximized, content can be cut off at the edges, and Companion may even pick up parts of other windows, such as the taskbar. Before you ask for help, place focus in the application you are working in and press WINDOWS+UP ARROW to maximize it.\n\nWhen Companion carries out a task for you, it moves to your application and works there, much as you would. If you type, click, switch windows, or open another program while it’s working, you can change what Companion sees and pull it away from the task. It’s best to leave the keyboard and mouse alone until the task is complete, and Companion will let you know what it did once it’s finished. If you need to stop it, press ESC .\n\nOnce Companion takes its first action in an application, it stays in that app for the rest of the conversation. Outlook and Word, for example, are treated as separate applications. If you want help with something in a different program such as a web browser, close Companion and relaunch it from that application.\n\nCompanion opens in its own window, just like any other application on your computer. When you’re finished with it, press ALT+F4 to close it, the same way you would close any other window.\n\nYou don’t need to know which feature or setting does the job. Just tell Companion what you need, for example:\n\nThe more detail you give, the fewer attempts Companion needs to get it right. “For example, if you are asking Companion to help you book a flight, “Set the departure date to November 14” will work better than “Select November 14,” because Companion will know which type of date you want to set.\n\nCompanion keeps track of your current conversation while it is open so you can ask a follow-up question or for the next step without starting over. When you’re ready to change topics, select New Request for a fresh start or close and then relaunch Companion from a different application.\n\nAlready have the Picture Smart and Page Explorer commands in muscle memory? Keep using them. They now bring their results right into Companion, where you can ask follow-up questions.\n\nCompanion asks before doing anything that can’t easily be undone, such as submitting a form. Take a moment to read what it’s about to do before you confirm, and check its report when the task is finished so you know exactly where things stand.\n\nYour feedback shapes what comes next for Companion. Select Give Feedback beside New Request to rate an answer or leave a comment. This button requires the Submit Anonymous Usage Data (telemetry) option to be turned on. If you’d prefer to leave it off, email your comments to SoftwareSuggestions@vispero.com . You can also select the Send Feedback button in the JAWS Early Adopter Program dialog.\n\nFor more information and a live demo, join us for our webinar on new features of JAWS, ZoomText, and Fusion 2027 at noon ET on Thursday, November 12. Have questions? Send an email to training@vispero.com ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-8d2f3e84f0865f8f",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/security/2026/11/vulnerability-allows-attackers-to-log-into-some-linux-devices-sans-password/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-05T23:09:36.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meet *sshole, the vulnerability that lets hackers SSH into Linux devices",
-        "summary": "Certain configurations of Alpine are affected. Other distros may be as well.",
-        "body": "Devices running some configurations of Alpine Linux, and possibly other distributions, are affected by a decade-old vulnerability that allows attackers to log into devices with no password.\n\nThe vulnerability exists in the interaction between OpenSSH, the code library implementing SSH connections, and musl, a lightweight alternative to the libc library that, unlike most other Linux distributions, is used in Alpine. Further, OpenSSH using musl (pronounced muscle) must not use PAM (pluggable authentication modules), a framework that handles user authentication and account-access checks. Alpine is a lightweight, widely used Linux distribution. Other platforms may be affected if they use the same configurations.\n\nThere are two other conditions necessary for successful exploitation. First, a system must have at least one user account that’s accessible using a password that is hashed using the SHA256 or SHA512 functions. Second, the target system account must be configured to be passwordless, by way of specifying a \"*\" in the password field in /etc/shadow, the Linux file where password hashes are stored. Passwordless accounts are commonly used for accounts that use certificate-based authentication. This setting is common for certain types of accounts.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -899,31 +926,6 @@
         "title": "Join Us for Our November 2026 Training Events",
         "summary": "The Freedom Scientific training team offers ongoing opportunities for you to join us in live training sessions and advance your skills. We’re excited to announce our jam-packed November training schedule, where you’re sure to find something that will help you at work, school, or play. If you have questions or need assistance with registration, email …",
         "body": "The Freedom Scientific training team offers ongoing opportunities for you to join us in live training sessions and advance your skills. We’re excited to announce our jam-packed November training schedule, where you’re sure to find something that will help you at work, school, or play.\n\nIf you have questions or need assistance with registration, email training@vispero.com . We also welcome your suggestions for future training events. Check the Freedom Scientific Training schedule for additional events we may post throughout the month."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-apps-ff393973c3915870",
-    "type": "news",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/lifestyle/voice-enabled-makeup-assistant",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-29T22:04:09.000Z",
-    "categories": [
-      "apple",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Voice-enabled Makeup Assistant",
-        "summary": "This innovative app offers audio feedback on the user’s foundation, eyeshadow and lipstick application, creating a more accessible beauty experience for the Blind and visually impaired. How It Works: The AI-powered Voice-enabled Makeup Assistant leverages machine learning and voice instruction technologies to learn your preferences and provide audio feedback when you ask. After you apply your foundation, eyeshadow or lipstick, the app will access your phone’s front camera to scan your face. Using artificial intelligence, it identifies the makeup applied to your face, eyes and lips and assesses the uniformity and boundaries of application and coverage. If there are suggested areas to touch up, the virtual assistant identifies them and makes audible recommendations so you can adjust your look. After your touch up, the app scans your face again and provides feedback on the accuracy of application.",
-        "body": "This innovative app offers audio feedback on the user’s foundation, eyeshadow and lipstick application, creating a more accessible beauty experience for the Blind and visually impaired.\n\nHow It Works:\n\nThe AI-powered Voice-enabled Makeup Assistant leverages machine learning and voice instruction technologies to learn your preferences and provide audio feedback when you ask.\n\nAfter you apply your foundation, eyeshadow or lipstick, the app will access your phone’s front camera to scan your face. Using artificial intelligence, it identifies the makeup applied to your face, eyes and lips and assesses the uniformity and boundaries of application and coverage. If there are suggested areas to touch up, the virtual assistant identifies them and makes audible recommendations so you can adjust your look. After your touch up, the app scans your face again and provides feedback on the accuracy of application."
       }
     },
     "media": null

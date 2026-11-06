@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 import AVFoundation
 import Combine
+import UniformTypeIdentifiers
 
 struct NativePodcastEpisode: Identifiable {
     let id: String
@@ -166,6 +167,8 @@ struct NativePodcastScreen: View {
     @EnvironmentObject private var store: NativePodcastStore
     @StateObject private var player = NativePodcastPlayer()
     @State private var visible = 10
+    @StateObject private var library = NativePodcastLibrary()
+    @State private var choosingOPML = false
 
     private func clock(_ value: Double) -> String {
         let seconds = Int(max(0, value))
@@ -209,8 +212,14 @@ struct NativePodcastScreen: View {
                     }
                     .accessibilityHint("Doble toque para reproducir dentro de TifloAcosta.")
                     .accessibilityAction(named: Text("Reproducir")) { player.select(episode) }
+                    .accessibilityAction(named: Text(library.isFavorite(episode) ? "Quitar de favoritos" : "Añadir a favoritos")) {
+                        library.toggleFavorite(episode)
+                    }
                     .accessibilityAction(named: Text("Compartir")) {
                         NativeShare.present(url: episode.audioURL)
+                    }
+                    Button(library.isFavorite(episode) ? "Quitar de favoritos: \\(episode.title)" : "Añadir a favoritos: \\(episode.title)") {
+                        library.toggleFavorite(episode)
                     }
                 }
                 if visible < store.episodes.count {
@@ -218,6 +227,18 @@ struct NativePodcastScreen: View {
                 }
                 Button("Actualizar episodios") {
                     Task { await store.refresh() }
+                }
+            }
+            Section("Seguir pódcast y favoritos") {
+                Text("Favoritos guardados: \\(library.favorites.count)")
+                Text(library.notice).accessibilityAddTraits(.updatesFrequently)
+                Button("Seguir el pódcast TifloAcosta") {
+                    library.follow(title: "Canal TifloAcosta", url: "https://anchor.fm/s/5b48ca28/podcast/rss")
+                }
+                Button("Importar suscripciones OPML") { choosingOPML = true }
+                ForEach(library.followed) { feed in
+                    Text(feed.title)
+                    Button("Dejar de seguir: \\(feed.title)") { library.unfollow(feed) }
                 }
             }
             Section("Escuchar en otras plataformas") {
@@ -239,5 +260,13 @@ struct NativePodcastScreen: View {
             if player.episode != nil { player.updatePosition() }
         }
         .onDisappear { player.stop() }
+        .fileImporter(isPresented: $choosingOPML, allowedContentTypes: [.xml], allowsMultipleSelection: false) { result in
+            do {
+                guard let url = try result.get().first else { return }
+                _ = try library.importOPML(url)
+            } catch {
+                library.notice = "No se pudo importar el OPML: \\(error.localizedDescription)"
+            }
+        }
     }
 }

@@ -15,6 +15,18 @@ import java.util.zip.ZipInputStream
 internal object NativePhononModelStore {
     fun directory(context: Context) = File(context.noBackupFilesDir, "phonon/cpu-model")
     fun installed(context: Context): Boolean = valid(directory(context))
+    fun voices(context: Context): List<String> {
+        val dir = directory(context)
+        if (!valid(dir)) return emptyList()
+        val found = mutableSetOf<String>()
+        if (File(dir, "default-voice.safetensors").isFile) found += "default"
+        for (folder in listOf("voices", "embeddings")) {
+            File(dir, folder).listFiles()?.filter {
+                it.isFile && it.extension == "safetensors"
+            }?.forEach { found += it.nameWithoutExtension }
+        }
+        return found.sorted()
+    }
 
     private fun valid(dir: File): Boolean {
         if (!dir.isDirectory) return false

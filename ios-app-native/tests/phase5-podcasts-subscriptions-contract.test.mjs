@@ -37,3 +37,10 @@ test('YouTube subscription list uses existing authorized session and pagination'
     assert.match(youtube, /"subscriptions"/);
     assert.match(youtube, /guard authenticated/);
 });
+
+test('favorite episodes retain replay details and have accessible controls', () => {
+    assert.match(library, /NativePodcastSavedEpisode/);
+    assert.match(library, /savedEpisodes\.insert/);
+    assert.match(screen, /Reproducir favorito/);
+    assert.match(screen, /Quitar favorito/);
+});

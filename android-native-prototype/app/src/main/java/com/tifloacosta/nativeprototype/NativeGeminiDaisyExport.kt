@@ -195,7 +195,7 @@ internal object NativeGeminiDaisyExport {
                     add(name, audio)
                 }
             }
-            bytes.toByteArray()
+            bytes.toByteArray().also { NativeDaisyPackageVerifier.validate(it) }
         }
     }
 }

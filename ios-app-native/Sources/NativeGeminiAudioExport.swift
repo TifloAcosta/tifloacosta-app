@@ -1,10 +1,17 @@
 import Foundation
+import AVFoundation
 
 /// Export text to a single PCM WAV audiobook using a personal Gemini key.
 /// Each segment is generated explicitly by user action; no silent truncation.
 enum NativeGeminiAudioExport {
     static let maximumCharacters = 60_000
     static let chunkSize = 1_200
+
+    enum Format: String, CaseIterable, Identifiable {
+        case m4a = "M4A"
+        case wav = "WAV"
+        var id: String { rawValue }
+    }
 
     enum ExportError: LocalizedError {
         case tooLong, empty, unsupportedFormat
@@ -69,7 +76,7 @@ enum NativeGeminiAudioExport {
         throw ExportError.unsupportedFormat
     }
 
-    static func export(text: String, title: String, voice: String,
+    static func export(text: String, title: String, voice: String, format: Format,
                        progress: @escaping @MainActor (Int, Int) -> Void) async throws -> URL {
         let segments = try chunks(text)
         var pcmData = Data()
@@ -94,6 +101,24 @@ enum NativeGeminiAudioExport {
         let file = folder.appendingPathComponent(
             "\(safe.isEmpty ? "Documento" : String(safe))-\(UUID().uuidString).wav")
         try NativeGeminiSpeech.wav(pcm: pcmData).write(to: file, options: .atomic)
-        return file
+        if format == .wav { return file }
+
+        // Convert the actual audio, never just its filename extension.
+        let destination = file.deletingPathExtension().appendingPathExtension("m4a")
+        let asset = AVURLAsset(url: file)
+        guard let session = AVAssetExportSession(asset: asset,
+                         presetName: AVAssetExportPresetAppleM4A) else {
+            throw ExportError.unsupportedFormat
+        }
+        session.outputURL = destination
+        session.outputFileType = .m4a
+        await session.export()
+        try Task.checkCancellation()
+        guard session.status == .completed else {
+            try? FileManager.default.removeItem(at: destination)
+            throw session.error ?? ExportError.unsupportedFormat
+        }
+        try? FileManager.default.removeItem(at: file)
+        return destination
     }
 }

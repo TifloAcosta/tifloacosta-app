@@ -119,6 +119,20 @@ internal class NativePhononReader(private val context: Context) : AutoCloseable 
         }
     }
 
+    /**
+     * Discard a cached native checkpoint after importing or removing a model.
+     * All model operations stay serialized on the dedicated Phonon worker.
+     */
+    fun refreshModel() {
+        if (closed) return
+        stop()
+        worker.execute {
+            try { synthesizer?.close() } catch (_: Exception) {}
+            synthesizer = null
+            loadedLanguage = ""
+        }
+    }
+
     fun pause() {
         paused = true
         try { track?.pause() } catch (_: Exception) {}

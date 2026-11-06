@@ -46,7 +46,7 @@ internal object NativeGeminiDaisyExport {
                 written += "<p id=\"$id\" smilref=\"sync.smil#$par\">" + xml(fragment) + "</p>"
                 parallel += "<par id=\"$par\"><text src=\"book.xml#$id\"/>" +
                     "<audio src=\"$filename\" clipBegin=\"00:00:00\" " +
-                    "clipEnd=\"$TIME\"/></par>".replace("$TIME", clock(seconds))
+                    "clipEnd=\"" + clock(seconds) + "\"/></par>"
                 manifest += "<item id=\"audio$number\" href=\"$filename\" media-type=\"audio/x-wav\"/>"
                 soundFiles += filename to wav
             }

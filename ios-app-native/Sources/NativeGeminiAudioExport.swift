@@ -10,6 +10,7 @@ enum NativeGeminiAudioExport {
     enum Format: String, CaseIterable, Identifiable {
         case m4a = "M4A"
         case wav = "WAV"
+        case daisy = "DAISY"
         var id: String { rawValue }
     }
 
@@ -78,6 +79,10 @@ enum NativeGeminiAudioExport {
 
     static func export(text: String, title: String, voice: String, format: Format,
                        progress: @escaping @MainActor (Int, Int) -> Void) async throws -> URL {
+        if format == .daisy {
+            return try await NativeGeminiDaisyExport.generate(
+                text: text, title: title, voice: voice, progress: progress)
+        }
         let segments = try chunks(text)
         var pcmData = Data()
         for (index, segment) in segments.enumerated() {

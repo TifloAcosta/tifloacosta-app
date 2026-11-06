@@ -14,6 +14,8 @@ struct NativeReaderAudioControls: View {
     @State private var filterIndex = 0
     @State private var systemVoices: [AVSpeechSynthesisVoice] = []
     @State private var showVoiceHelp = false
+    @State private var showVoicePicker = false
+    @State private var previewSynthesizer = AVSpeechSynthesizer()
     @State private var personalVoiceStatus = AVSpeechSynthesizer.personalVoiceAuthorizationStatus
 
     init(speedSelection: Binding<Int>? = nil, pitchSelection: Binding<Int>? = nil,
@@ -61,6 +63,24 @@ struct NativeReaderAudioControls: View {
         )
     }
 
+    private func selectVoice(_ identifier: String) {
+        previewSynthesizer.stopSpeaking(at: .immediate)
+        if let voiceSelection { voiceSelection.wrappedValue = identifier }
+        else { generalVoiceID = identifier }
+        showVoicePicker = false
+    }
+
+    private func preview(_ voice: AVSpeechSynthesisVoice?) {
+        previewSynthesizer.stopSpeaking(at: .immediate)
+        let spanish = voice?.language.lowercased().hasPrefix("es") ?? true
+        let sample = spanish ? "Esta es una muestra de voz para leer tus documentos."
+                             : "This is a sample voice for reading your documents."
+        let utterance = AVSpeechUtterance(string: sample)
+        utterance.voice = voice ?? AVSpeechSynthesisVoice(language: "es-ES")
+        utterance.rate = AVSpeechUtteranceDefaultSpeechRate
+        previewSynthesizer.speak(utterance)
+    }
+
     private func refreshVoices() {
         systemVoices = AVSpeechSynthesisVoice.speechVoices().sorted {
             if $0.language != $1.language { return $0.language < $1.language }
@@ -84,11 +104,40 @@ struct NativeReaderAudioControls: View {
             choices: ["Todos los idiomas", "Español", "Inglés"],
             selectedIndex: $filterIndex
         )
-        NativeAdjustableChoice(
-            title: "Voz del sistema",
-            choices: voiceChoices,
-            selectedIndex: selectedVoiceIndex
+        Button("Voz") { showVoicePicker = true }
+        .accessibilityValue(
+            systemVoices.first(where: { $0.identifier == selectedVoiceID })?.name ?? "Predeterminada"
         )
+        .sheet(isPresented: $showVoicePicker) {
+            NavigationStack {
+                List {
+                    Section("Voces") {
+                        HStack {
+                            Button("Predeterminada") { selectVoice("") }
+                            Spacer()
+                            Button("Escuchar") { preview(nil) }
+                        }
+                        ForEach(voices, id: \.identifier) { voice in
+                            HStack {
+                                Button {
+                                    selectVoice(voice.identifier)
+                                } label: {
+                                    Text(voiceChoices.first(where: { $0.hasPrefix(voice.name + ",") })
+                                         ?? voice.name)
+                                }
+                                Spacer()
+                                Button("Escuchar") { preview(voice) }
+                                    .accessibilityLabel("Escuchar \(voice.name)")
+                            }
+                        }
+                    }
+                }
+                .tifloScreenSurface()
+                .navigationTitle("Voz")
+                .toolbar { Button("Cerrar") { showVoicePicker = false } }
+                .onDisappear { previewSynthesizer.stopSpeaking(at: .immediate) }
+            }
+        }
         .onAppear {
             personalVoiceStatus = AVSpeechSynthesizer.personalVoiceAuthorizationStatus
             refreshVoices()
@@ -332,6 +381,7 @@ struct NativeReaderSettingsScreen: View {
     var body: some View {
         List {
             NavigationLink("Audio y voces") { NativeReaderAudioSettingsScreen() }
+            NavigationLink("Motores externos") { NativeReaderExternalVoiceSettingsScreen() }
             NavigationLink("Modo de lectura") {
                 List {
                     Section("Al abrir un documento") {
@@ -355,7 +405,8 @@ struct NativeReaderSettingsScreen: View {
                     Section("Desplazamiento") {
                         NativeAdjustableChoice(
                             title: "Unidad de avance",
-                            choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
+                            choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado",
+                                       "Marcas", "Tiempo, un minuto (real en audio, estimado en TTS)"],
                             selectedIndex: $navigationUnit
                         )
                     }

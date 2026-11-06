@@ -14,6 +14,10 @@ struct NativeReaderPreferences: Codable, Hashable {
     var strongText: Bool? = nil
 }
 
+struct NativeTextBookmark: Codable, Hashable {
+    let offset: Int
+}
+
 struct NativeAudioBookmark: Codable, Hashable {
     let track: Int
     let percent: Int
@@ -28,8 +32,11 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
     var fileExtension: String? = nil
     var trackPaths: [String]? = nil
     var markedPositions: [Int]? = nil
+    var textBookmarks: [NativeTextBookmark]? = nil
     var isFavorite: Bool? = nil
     var lastPercent: Int? = nil
+    // Exact text cursor, retaining lastPercent for older stored libraries.
+    var lastTextOffset: Int? = nil
     var lastTrackIndex: Int? = nil
     var audioBookmarks: [NativeAudioBookmark]? = nil
     var folderName: String? = nil
@@ -38,7 +45,8 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
     var hasAudio: Bool { !(trackPaths ?? []).isEmpty }
     var bookmarks: [Int] { markedPositions ?? [] }
     var savedAudioBookmarks: [NativeAudioBookmark] { audioBookmarks ?? [] }
-    var hasBookmarks: Bool { !bookmarks.isEmpty || !savedAudioBookmarks.isEmpty }
+    var savedTextBookmarks: [NativeTextBookmark] { textBookmarks ?? [] }
+    var hasBookmarks: Bool { !bookmarks.isEmpty || !savedTextBookmarks.isEmpty || !savedAudioBookmarks.isEmpty }
     var formatLabel: String { (fileExtension ?? "txt").uppercased() }
 }
 
@@ -98,6 +106,7 @@ final class NativeReaderLibrary: ObservableObject {
                 )
                 try save()
             } catch {
+                documents.removeAll { $0.id == identifier }
                 NativeReaderFormats.deleteStoredFiles(for: identifier)
                 throw error
             }
@@ -124,10 +133,26 @@ final class NativeReaderLibrary: ObservableObject {
         try? save()
     }
 
-    func delete(_ document: NativeReadingDocument) {
-        documents.removeAll { $0.id == document.id }
-        NativeReaderFormats.deleteStoredFiles(for: document.id)
-        try? save()
+    @discardableResult
+    func delete(_ document: NativeReadingDocument) -> Bool {
+        deleteDocuments(withIDs: [document.id])
+    }
+
+    @discardableResult
+    func deleteDocuments(withIDs ids: Set<UUID>) -> Bool {
+        guard !ids.isEmpty else { return true }
+        let previous = documents
+        let deleted = documents.filter { ids.contains($0.id) }
+        documents.removeAll { ids.contains($0.id) }
+        do {
+            try save()
+        } catch {
+            documents = previous
+            return false
+        }
+        // Only delete the stored files once the library metadata is safely saved.
+        deleted.forEach { NativeReaderFormats.deleteStoredFiles(for: $0.id) }
+        return true
     }
 
     func toggleFavorite(_ document: NativeReadingDocument) {
@@ -181,24 +206,47 @@ final class NativeReaderLibrary: ObservableObject {
         try? save()
     }
 
-    func addBookmark(_ document: NativeReadingDocument, at percent: Int) {
-        guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
-        var bookmarks = documents[i].markedPositions ?? []
-        let location = max(0, min(100, percent))
-        if !bookmarks.contains(location) { bookmarks.append(location) }
-        documents[i].markedPositions = bookmarks.sorted()
-        try? save()
+    @discardableResult
+    func addBookmark(_ document: NativeReadingDocument, at offset: Int) -> Bool {
+        guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return false }
+        let previous = documents[i].textBookmarks
+        let mark = NativeTextBookmark(offset: max(0, min(document.body.count, offset)))
+        var saved = previous ?? []
+        if saved.contains(mark) { return true }
+        saved.append(mark)
+        documents[i].textBookmarks = saved.sorted { $0.offset < $1.offset }
+        do {
+            try save()
+            return true
+        } catch {
+            documents[i].textBookmarks = previous
+            return false
+        }
     }
 
-    func addAudioBookmark(_ document: NativeReadingDocument, track: Int, percent: Int) {
-        guard let i = documents.firstIndex(where: { $0.id == document.id }), track >= 0 else { return }
+    @discardableResult
+    func addAudioBookmark(_ document: NativeReadingDocument, track: Int, percent: Int) -> Bool {
+        guard let i = documents.firstIndex(where: { $0.id == document.id }), track >= 0 else { return false }
         let mark = NativeAudioBookmark(track: track, percent: max(0, min(100, percent)))
-        var saved = documents[i].audioBookmarks ?? []
-        guard !saved.contains(mark) else { return }
+        let previous = documents[i].audioBookmarks
+        var saved = previous ?? []
+        if saved.contains(mark) { return true }
         saved.append(mark)
         documents[i].audioBookmarks = saved.sorted {
             $0.track == $1.track ? $0.percent < $1.percent : $0.track < $1.track
         }
+        do {
+            try save()
+            return true
+        } catch {
+            documents[i].audioBookmarks = previous
+            return false
+        }
+    }
+
+    func removeTextBookmark(_ document: NativeReadingDocument, mark: NativeTextBookmark) {
+        guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
+        documents[i].textBookmarks?.removeAll { $0 == mark }
         try? save()
     }
 
@@ -214,11 +262,13 @@ final class NativeReaderLibrary: ObservableObject {
         try? save()
     }
 
-    func savePosition(_ document: NativeReadingDocument, percent: Int) {
+    func savePosition(_ document: NativeReadingDocument, percent: Int, textOffset: Int) {
         guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
         let value = max(0, min(100, percent))
-        if documents[i].lastPercent != value {
+        let offset = max(0, min(document.body.count, textOffset))
+        if documents[i].lastPercent != value || documents[i].lastTextOffset != offset {
             documents[i].lastPercent = value
+            documents[i].lastTextOffset = offset
             try? save()
         }
     }
@@ -284,6 +334,7 @@ final class NativeReadingSpeech: ObservableObject {
     private var baseUTF16 = 0
     private var totalUTF16 = 0
     @Published private(set) var textPercent = 0
+    @Published private(set) var textUTF16Offset = 0
 
     init() {
         progressDelegate.onWord = { [weak self] range in
@@ -291,6 +342,7 @@ final class NativeReadingSpeech: ObservableObject {
                 guard let self, self.isPlaying, self.player == nil,
                       self.totalUTF16 > 0 else { return }
                 let count = self.baseUTF16 + range.location + range.length
+                self.textUTF16Offset = min(self.totalUTF16, max(0, count))
                 self.textPercent = max(0, min(100,
                     Int(Double(count) * 100 / Double(self.totalUTF16))))
             }
@@ -298,6 +350,7 @@ final class NativeReadingSpeech: ObservableObject {
         progressDelegate.onFinish = { [weak self] in
             Task { @MainActor [weak self] in
                 guard let self, self.player == nil else { return }
+                self.textUTF16Offset = self.totalUTF16
                 self.textPercent = 100
                 self.isPlaying = false
                 self.isPaused = false
@@ -307,6 +360,28 @@ final class NativeReadingSpeech: ObservableObject {
         audioDelegate.onFinish = { [weak self] completed, success in
             Task { @MainActor [weak self] in
                 guard let self, self.player === completed else { return }
+                if self.isGeneratedSpeech {
+                    guard success else {
+                        self.geminiOnError?("No se pudo completar la pista de voz.")
+                        self.stop()
+                        return
+                    }
+                    self.geminiCursorUTF16 += self.geminiSegments[self.geminiSegmentIndex].utf16.count
+                    self.textUTF16Offset = self.geminiCursorUTF16
+                    self.textPercent = min(100, Int(Double(self.textUTF16Offset) * 100 /
+                        Double(max(1, self.totalUTF16))))
+                    self.geminiSegmentIndex += 1
+                    self.player = nil
+                    if self.geminiSegmentIndex < self.geminiSegments.count {
+                        if !self.isPaused { self.playNextGeminiSegment() }
+                    } else {
+                        self.isPlaying = false
+                        self.isPaused = false
+                        self.isGemini = false
+                        self.isPhonon = false
+                    }
+                    return
+                }
                 self.isPlaying = false
                 self.isPaused = false
                 guard success, self.playlistURLs.indices.contains(self.playlistIndex + 1) else {
@@ -325,6 +400,16 @@ final class NativeReadingSpeech: ObservableObject {
         }
     }
     private var player: AVAudioPlayer?
+    private var geminiTask: Task<Void, Never>?
+    private var geminiSegments: [String] = []
+    private var geminiSegmentIndex = 0
+    private var geminiVoice = "Kore"
+    private var geminiCursorUTF16 = 0
+    private var geminiGeneration = 0
+    private var geminiOnError: ((String) -> Void)?
+    private(set) var isGemini = false
+    private(set) var isPhonon = false
+    var isGeneratedSpeech: Bool { isGemini || isPhonon }
     private var sleepTask: Task<Void, Never>?
     @Published private(set) var isPlaying = false
     @Published private(set) var isPaused = false
@@ -344,6 +429,7 @@ final class NativeReadingSpeech: ObservableObject {
         guard !text.isEmpty else { return }
         self.baseUTF16 = baseUTF16
         self.totalUTF16 = max(1, totalUTF16 ?? text.utf16.count)
+        textUTF16Offset = baseUTF16
         textPercent = max(0, min(100,
             Int(Double(baseUTF16) * 100 / Double(self.totalUTF16))))
         // La voz sigue sonando con la pantalla bloqueada y otras apps abiertas.
@@ -359,6 +445,117 @@ final class NativeReadingSpeech: ObservableObject {
         synthesizer.speak(utterance)
         isPlaying = true
         isPaused = false
+    }
+
+    private func geminiChunks(_ text: String) -> [String] {
+        var result: [String] = []
+        var remaining = text[...]
+        while !remaining.isEmpty {
+            let end = remaining.index(remaining.startIndex,
+                offsetBy: min(1200, remaining.count))
+            var split = end
+            if end < remaining.endIndex {
+                let minOffset = remaining.index(remaining.startIndex,
+                    offsetBy: min(600, remaining.count))
+                var at = end
+                while at > minOffset {
+                    let preceding = remaining[remaining.index(before: at)]
+                    if preceding.isWhitespace || preceding == "." || preceding == "," {
+                        split = at
+                        break
+                    }
+                    at = remaining.index(before: at)
+                }
+            }
+            result.append(String(remaining[..<split]))
+            remaining = remaining[split...]
+        }
+        return result
+    }
+
+    func playGemini(_ text: String, voice: String,
+                    baseUTF16: Int, totalUTF16: Int,
+                    onError: @escaping (String) -> Void) throws {
+        try playGenerated(text, engine: 1, voice: voice,
+                          baseUTF16: baseUTF16, totalUTF16: totalUTF16, onError: onError)
+    }
+
+    func playPhonon(_ text: String, voice: String,
+                    baseUTF16: Int, totalUTF16: Int,
+                    onError: @escaping (String) -> Void) throws {
+        guard NativePhononRuntime.isUsable else {
+            throw NativePhononRuntime.RuntimeError.engineUnavailable
+        }
+        try playGenerated(text, engine: 2, voice: voice,
+                          baseUTF16: baseUTF16, totalUTF16: totalUTF16, onError: onError)
+    }
+
+    private func playGenerated(_ text: String, engine: Int, voice: String,
+                    baseUTF16: Int, totalUTF16: Int,
+                    onError: @escaping (String) -> Void) throws {
+        stop()
+        // The selected external engine only starts when the user presses Play.
+        guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+        geminiSegments = geminiChunks(text)
+        geminiVoice = voice
+        geminiSegmentIndex = 0
+        geminiCursorUTF16 = baseUTF16
+        self.totalUTF16 = max(1, totalUTF16)
+        self.textUTF16Offset = baseUTF16
+        self.textPercent = Int(Double(baseUTF16) * 100 / Double(self.totalUTF16))
+        self.geminiOnError = onError
+        isGemini = engine == 1
+        isPhonon = engine == 2
+        isPlaying = true
+        isPaused = false
+        playNextGeminiSegment()
+    }
+
+    private func playNextGeminiSegment() {
+        guard isGeneratedSpeech, !isPaused, geminiSegments.indices.contains(geminiSegmentIndex) else { return }
+        while geminiSegments.indices.contains(geminiSegmentIndex),
+              geminiSegments[geminiSegmentIndex]
+                .trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            geminiCursorUTF16 += geminiSegments[geminiSegmentIndex].utf16.count
+            geminiSegmentIndex += 1
+        }
+        if !geminiSegments.indices.contains(geminiSegmentIndex) {
+            textUTF16Offset = min(totalUTF16, geminiCursorUTF16)
+            textPercent = 100
+            isGemini = false
+            isPhonon = false
+            isPlaying = false
+            return
+        }
+        let generation = geminiGeneration
+        let segment = geminiSegments[geminiSegmentIndex]
+        geminiTask = Task { [weak self] in
+            guard let self else { return }
+            do {
+                let data: Data
+                if self.isPhonon {
+                    data = try await NativePhononRuntime.generate(text: segment, voice: self.geminiVoice)
+                } else {
+                    data = try await NativeGeminiSpeech.generate(segment, voice: self.geminiVoice)
+                }
+                try Task.checkCancellation()
+                guard generation == self.geminiGeneration, self.isGeneratedSpeech, !self.isPaused else { return }
+                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
+                try AVAudioSession.sharedInstance().setActive(true)
+                let audio = try AVAudioPlayer(data: data)
+                audio.delegate = self.audioDelegate
+                audio.prepareToPlay()
+                guard audio.play() else { throw NativeGeminiSpeech.Error.unavailable }
+                self.player = audio
+                self.isPlaying = true
+            } catch is CancellationError {
+                // Stop and seek cancel in-flight HTTP work without reporting an error.
+            } catch {
+                guard generation == self.geminiGeneration else { return }
+                self.geminiOnError?(error.localizedDescription)
+                self.stop()
+            }
+        }
     }
 
     private func startAudio(_ url: URL, speed: Double, at percent: Int) throws {
@@ -413,22 +610,35 @@ final class NativeReadingSpeech: ObservableObject {
         player.currentTime = max(0, min(player.duration, player.currentTime + seconds))
     }
 
+    func seek(seconds: TimeInterval) {
+        guard let player else { return }
+        player.currentTime = max(0, min(player.duration, seconds))
+    }
+
     func pause() {
-        if let player { player.pause() } else { synthesizer.pauseSpeaking(at: .word) }
+        if let player { player.pause() }
+        else if isGeneratedSpeech {
+            geminiGeneration += 1
+            geminiTask?.cancel()
+        } else { synthesizer.pauseSpeaking(at: .word) }
         sleep(after: 0) // Al pausar no sigue corriendo la cuenta del apagado.
         isPlaying = false
         isPaused = true
     }
 
     func resume() {
-        if let player { player.play() } else { synthesizer.continueSpeaking() }
-        isPlaying = true
         isPaused = false
+        isPlaying = true
+        if isGeneratedSpeech {
+            if let player { player.play() } else { playNextGeminiSegment() }
+        } else if let player { player.play() } else { synthesizer.continueSpeaking() }
     }
 
     func refresh() {
         if let player, !player.isPlaying && !isPaused { isPlaying = false }
-        if player == nil && !synthesizer.isSpeaking && !isPaused { isPlaying = false }
+        if player == nil && !synthesizer.isSpeaking && !isPaused && !isGeneratedSpeech {
+            isPlaying = false
+        }
     }
 
     func sleep(after minutes: Int) {
@@ -444,6 +654,14 @@ final class NativeReadingSpeech: ObservableObject {
     func stop() {
         sleepTask?.cancel()
         sleepTask = nil
+        geminiGeneration += 1
+        geminiTask?.cancel()
+        geminiTask = nil
+        geminiSegments = []
+        geminiSegmentIndex = 0
+        geminiOnError = nil
+        isGemini = false
+        isPhonon = false
         player?.stop()
         player = nil
         playlistURLs = []
@@ -466,6 +684,10 @@ struct NativeReaderLibraryScreen: View {
     @State private var documentToDelete: NativeReadingDocument?
     @State private var confirmDeletion = false
     @State private var importError: String?
+    @State private var importMessage: String?
+    @State private var selectedDocumentIDs: Set<UUID> = []
+    @State private var selectingDocuments = false
+    @State private var confirmBatchDeletion = false
     @State private var documentToRename: NativeReadingDocument?
     @State private var proposedTitle = ""
     @State private var newFolderName = ""
@@ -570,7 +792,7 @@ struct NativeReaderLibraryScreen: View {
             }
             Section("Filtrar y ordenar") {
                 NativeAdjustableChoice(
-                    title: "Filtrar documentos",
+                    title: "Filtros",
                     choices: ["Todos", "Textos", "PDF", "EPUB", "Office", "Audio y DAISY",
                               "Con marcas", "Favoritos", "Importados hoy",
                               "Últimos siete días", "Último mes"],
@@ -585,11 +807,11 @@ struct NativeReaderLibraryScreen: View {
             }
             Section("Carpetas") {
                 NativeAdjustableChoice(
-                    title: "Mostrar carpeta",
+                    title: "Carpeta",
                     choices: ["Todas", "Sin carpeta"] + library.folders,
                     selectedIndex: folderFilterIndex
                 )
-                Button("Crear carpeta") { newFolderName = ""; showCreateFolder = true }
+                Button("Nueva carpeta") { newFolderName = ""; showCreateFolder = true }
                 ForEach(library.folders, id: \.self) { folder in
                     Button(folder) { selectedFolder = folder }
                         .accessibilityLabel("Carpeta \(folder)")
@@ -600,8 +822,32 @@ struct NativeReaderLibraryScreen: View {
                 }
             }
             Section("Mi biblioteca") {
+                Button(selectingDocuments ? "Terminar" : "Selección") {
+                    selectingDocuments.toggle()
+                    if !selectingDocuments { selectedDocumentIDs.removeAll() }
+                }
+                if selectingDocuments {
+                    Text("Seleccionados: \(selectedDocumentIDs.count)")
+                        .accessibilityAddTraits(.updatesFrequently)
+                    Button("Eliminar") { confirmBatchDeletion = true }
+                        .disabled(selectedDocumentIDs.isEmpty)
+                }
                 if shownDocuments.isEmpty { Text("No hay documentos con el filtro actual.") }
                 ForEach(shownDocuments) { document in
+                    if selectingDocuments {
+                        Button {
+                            if selectedDocumentIDs.contains(document.id) {
+                                selectedDocumentIDs.remove(document.id)
+                            } else {
+                                selectedDocumentIDs.insert(document.id)
+                            }
+                        } label: {
+                            Label(document.title, systemImage: selectedDocumentIDs.contains(document.id)
+                                ? "checkmark.circle.fill" : "circle")
+                        }
+                        .accessibilityLabel("\(document.title), \(selectedDocumentIDs.contains(document.id) ? "seleccionado" : "no seleccionado")")
+                        .accessibilityHint("Doble toque para cambiar la selección")
+                    } else {
                     NavigationLink {
                         NativeReadingScreen(document: document, speech: speech)
                     } label: { Text(document.title) }
@@ -626,44 +872,18 @@ struct NativeReaderLibraryScreen: View {
                         documentToDelete = document
                         confirmDeletion = true
                     }
-                }
-            }
-            Section("Marcas") {
-                let marked = library.documents.filter { $0.hasBookmarks }
-                if marked.isEmpty { Text("Todavía no hay marcas guardadas.") }
-                ForEach(marked) { document in
-                    ForEach(document.bookmarks, id: \.self) { percent in
-                        NavigationLink {
-                            NativeReadingScreen(document: document, speech: speech,
-                                                startPercent: percent)
-                        } label: {
-                            Text("\(document.title), \(percent) por ciento")
-                        }
-                        .accessibilityAction(named: Text("Eliminar marca")) {
-                            library.removeBookmark(document, at: percent)
-                        }
-                    }
-                    ForEach(document.savedAudioBookmarks, id: \.self) { mark in
-                        NavigationLink {
-                            NativeReadingScreen(document: document, speech: speech,
-                                                startPercent: mark.percent, startTrack: mark.track)
-                        } label: {
-                            Text("\(document.title), pista \(mark.track + 1), \(mark.percent) por ciento")
-                        }
-                        .accessibilityAction(named: Text("Eliminar marca")) {
-                            library.removeAudioBookmark(document, mark: mark)
-                        }
                     }
                 }
             }
+
         }
         .tifloScreenSurface()
         .navigationTitle("TifloLector")
         .onDisappear { speech.stop() }
         .confirmationDialog("Importar", isPresented: $importSourcesPresented,
                             titleVisibility: .visible) {
-            Button("Desde Archivos") { importPresented = true }
-            Button("Bibliotecas en línea") { externalCatalogPresented = true }
+            Button("Archivos") { importPresented = true }
+            Button("Bibliotecas") { externalCatalogPresented = true }
             Button("Cancelar", role: .cancel) {}
         }
         .sheet(isPresented: $externalCatalogPresented) {
@@ -680,8 +900,20 @@ struct NativeReaderLibraryScreen: View {
         ) { result in
             switch result {
             case .success(let urls):
-                do { try library.importDocuments(from: urls) }
-                catch { importError = error.localizedDescription }
+                var added = 0
+                var failures: [String] = []
+                for url in urls {
+                    do {
+                        try library.importDocuments(from: [url])
+                        added += 1
+                    } catch {
+                        failures.append("\(url.lastPathComponent): \(error.localizedDescription)")
+                    }
+                }
+                importMessage = "\(added) documentos importados correctamente." +
+                    (failures.isEmpty ? "" : " No se pudieron importar \(failures.count): " +
+                        failures.joined(separator: " "))
+                UIAccessibility.post(notification: .announcement, argument: importMessage)
             case .failure(let error):
                 importError = error.localizedDescription
             }
@@ -744,13 +976,38 @@ struct NativeReaderLibraryScreen: View {
         } message: {
             Text("Escribe el nuevo título del documento.")
         }
+        .confirmationDialog("Eliminar documentos seleccionados",
+                            isPresented: $confirmBatchDeletion, titleVisibility: .visible) {
+            Button("Eliminar \(selectedDocumentIDs.count) documentos", role: .destructive) {
+                if library.deleteDocuments(withIDs: selectedDocumentIDs) {
+                    importMessage = "\(selectedDocumentIDs.count) documentos eliminados."
+                    selectedDocumentIDs.removeAll()
+                    selectingDocuments = false
+                } else {
+                    importError = "No se pudieron eliminar los documentos. La biblioteca se conserva."
+                }
+            }
+            Button("Cancelar", role: .cancel) {}
+        } message: {
+            Text("Se eliminarán los documentos seleccionados y sus archivos. Esta acción no se puede deshacer.")
+        }
         .confirmationDialog("Eliminar documento", isPresented: $confirmDeletion,
                             titleVisibility: .visible) {
             Button("Eliminar definitivamente", role: .destructive) {
-                if let doc = documentToDelete { library.delete(doc) }
+                if let doc = documentToDelete, !library.delete(doc) {
+                    importError = "No se pudo eliminar el documento. Se ha conservado."
+                }
                 documentToDelete = nil
             }
             Button("Cancelar", role: .cancel) { documentToDelete = nil }
+        }
+        .alert("Resultado de la importación o gestión", isPresented: Binding(
+            get: { importMessage != nil },
+            set: { if !$0 { importMessage = nil } }
+        )) {
+            Button("Aceptar", role: .cancel) { importMessage = nil }
+        } message: {
+            Text(importMessage ?? "")
         }
         .alert("No se pudo realizar la operación", isPresented: Binding(
             get: { importError != nil },
@@ -767,7 +1024,7 @@ struct NativeReaderLibraryScreen: View {
                     LabeledContent("Formato", value: document.formatLabel)
                     LabeledContent("Importado", value:
                         document.importedAt.formatted(date: .abbreviated, time: .shortened))
-                    LabeledContent("Marcas", value: "\(library.latest(document).bookmarks.count)")
+                    LabeledContent("Marcas", value: "\(library.latest(document).bookmarks.count + library.latest(document).savedTextBookmarks.count + library.latest(document).savedAudioBookmarks.count)")
                     LabeledContent("Carpeta", value: library.latest(document).folderName ?? "Sin carpeta")
                     LabeledContent("Leído", value: "\(library.latest(document).lastPercent ?? 0) por ciento")
                     LabeledContent("Pendiente", value: "\(100 - (library.latest(document).lastPercent ?? 0)) por ciento")
@@ -799,9 +1056,34 @@ private struct NativeReaderTextLayout {
     let namedPages: [NativeReaderNavigationPoint]
     let hasRealPages: Bool
     let totalCharacters: Int
+    let wordStarts: [Int]
+
+    // Swift Character offsets (not UTF-16) keep these positions aligned with
+    // the cursor used throughout the native reader.
+    func offset(movingWords count: Int, from offset: Int) -> Int {
+        guard !wordStarts.isEmpty else { return 0 }
+        var low = 0
+        var high = wordStarts.count
+        while low < high {
+            let mid = (low + high) / 2
+            if wordStarts[mid] <= offset { low = mid + 1 } else { high = mid }
+        }
+        let current = max(0, low - 1)
+        let target = current + count
+        if target >= wordStarts.count { return totalCharacters }
+        return wordStarts[max(0, target)]
+    }
 
     init(_ body: String) {
         totalCharacters = body.count
+        var starts: [Int] = []
+        var inWord = false
+        for (index, character) in body.enumerated() {
+            let isWord = !character.isWhitespace
+            if isWord && !inWord { starts.append(index) }
+            inWord = isWord
+        }
+        wordStarts = starts
         var sections: [String] = []
         var offsets: [Int] = []
         var paragraphs: [Int] = [0]
@@ -897,9 +1179,11 @@ struct NativeReadingScreen: View {
     let document: NativeReadingDocument
     @ObservedObject var speech: NativeReadingSpeech
     var startPercent: Int? = nil
+    var startTextOffset: Int? = nil
     var startTrack: Int? = nil
 
     @EnvironmentObject private var library: NativeReaderLibrary
+    @Environment(\.dismiss) private var dismiss
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @AppStorage("native-reading-text-size") private var textSize = 20.0
     @AppStorage("native-reading-speed-index") private var speedIndex = 2
@@ -925,6 +1209,21 @@ struct NativeReadingScreen: View {
     @State private var showDocumentActions = false
     @State private var showDocumentInformation = false
     @State private var showSavedMarks = false
+    @State private var confirmDocumentDeletion = false
+    @State private var deletionError: String?
+    @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
+    @AppStorage("native-reader-reading-engine") private var readingEngine = 0
+    @AppStorage("native-reader-phonon-voice") private var phononVoice = ""
+    @State private var phononVoices: [String] = []
+    @State private var phononLoadMessage = ""
+    @State private var phononReady = NativePhononRuntime.isUsable
+    @State private var audioExportTask: Task<Void, Never>?
+    @State private var audioExportStatus = ""
+    @State private var audioExportFormat: NativeGeminiAudioExport.Format = .mp3
+    @State private var audioExportEngine: NativeGeminiAudioExport.Engine = .gemini
+    @State private var showAudioExport = false
+    @State private var audioExportBusy = false
+    @State private var audioExportResult: URL?
     @State private var programmaticFocusRequest = false
     @State private var actionMessage: String?
     @AccessibilityFocusState private var focusedFragment: Int?
@@ -940,11 +1239,13 @@ struct NativeReadingScreen: View {
     private let sleepMinutes: [Int] = [0, 5, 10, 15, 30, 45, 60]
 
     init(document: NativeReadingDocument, speech: NativeReadingSpeech,
-         startPercent: Int? = nil, startTrack: Int? = nil) {
+         startPercent: Int? = nil, startTrack: Int? = nil,
+         startTextOffset: Int? = nil) {
         self.document = document
         self.speech = speech
         self.startPercent = startPercent
         self.startTrack = startTrack
+        self.startTextOffset = startTextOffset
         self.textLayout = NativeReaderTextLayout(document.body)
         self.wordCount = document.body.split(whereSeparator: \.isWhitespace).count
     }
@@ -967,7 +1268,7 @@ struct NativeReadingScreen: View {
 
     private func persistPosition() {
         if tracks.isEmpty {
-            library.savePosition(document, percent: currentPercent)
+            library.savePosition(document, percent: currentPercent, textOffset: readingOffset)
         } else {
             library.saveAudioPosition(document, track: trackIndex, percent: currentPercent)
         }
@@ -978,7 +1279,7 @@ struct NativeReadingScreen: View {
         let value = max(0, min(100, percent))
         currentPercent = value
         readingOffset = Int(Double(textLayout.totalCharacters) * Double(value) / 100)
-        if speech.hasAudio {
+        if speech.hasAudio && !speech.isGeneratedSpeech {
             speech.seek(to: value)
         } else if speech.isPlaying || speech.isPaused {
             let wasPaused = speech.isPaused
@@ -1003,11 +1304,40 @@ struct NativeReadingScreen: View {
         }
         let remainder = String(document.body.dropFirst(readingOffset))
         guard !remainder.isEmpty else { return }
-        speech.play(remainder, speed: speed, pitch: pitch,
-                    language: AVSpeechSynthesisVoice(identifier: effectiveVoiceID)?.language ?? "es-ES",
-                    voiceIdentifier: effectiveVoiceID,
-                    baseUTF16: String(document.body.prefix(readingOffset)).utf16.count,
-                    totalUTF16: document.body.utf16.count)
+        let utf16Offset = String(document.body.prefix(readingOffset)).utf16.count
+        if readingEngine == 2 {
+            guard NativePhononRuntime.isUsable else {
+                actionMessage = "Instala el motor y modelo Phonon en Motores externos."
+                return
+            }
+            do {
+                try speech.playPhonon(remainder, voice: phononVoice,
+                    baseUTF16: utf16Offset, totalUTF16: document.body.utf16.count,
+                    onError: { message in actionMessage = message })
+                actionMessage = nil
+            } catch {
+                actionMessage = error.localizedDescription
+            }
+        } else if readingEngine == 1 {
+            guard NativeVoiceCredentialStore.hasKey("gemini") else {
+                actionMessage = "Configura la clave Gemini en Motores externos."
+                return
+            }
+            do {
+                try speech.playGemini(remainder, voice: geminiVoice,
+                    baseUTF16: utf16Offset, totalUTF16: document.body.utf16.count,
+                    onError: { message in actionMessage = message })
+                actionMessage = nil
+            } catch {
+                actionMessage = error.localizedDescription
+            }
+        } else {
+            speech.play(remainder, speed: speed, pitch: pitch,
+                        language: AVSpeechSynthesisVoice(identifier: effectiveVoiceID)?.language ?? "es-ES",
+                        voiceIdentifier: effectiveVoiceID,
+                        baseUTF16: utf16Offset,
+                        totalUTF16: document.body.utf16.count)
+        }
     }
 
     private func play() {
@@ -1024,6 +1354,17 @@ struct NativeReadingScreen: View {
     private func applySleepTimer() {
         let index = max(0, min(sleepMinutes.count - 1, sleepIndex))
         speech.sleep(after: speech.isPlaying ? sleepMinutes[index] : 0)
+    }
+
+    private func refreshTextVoice() {
+        // Update the current TTS voice without losing the saved reading cursor
+        // or starting playback when the reader was stopped.
+        guard tracks.isEmpty, speech.isPlaying || speech.isPaused else { return }
+        let paused = speech.isPaused
+        persistPosition()
+        startTextSpeech()
+        if paused { speech.pause() }
+        else { applySleepTimer() }
     }
 
     private func playTrack() {
@@ -1043,7 +1384,7 @@ struct NativeReadingScreen: View {
                     trackIndex = next
                     currentPercent = 0
                     persistPosition()
-                    applySleepTimer()
+                    // A playlist transition must not restart the countdown.
                 },
                 onError: { error in actionMessage = "No se pudo reproducir: " + error })
             actionMessage = nil
@@ -1089,21 +1430,163 @@ struct NativeReadingScreen: View {
         }
     }
 
+    // The reader offers a minute option for audio (real time)
+    // and for TTS text (estimated by reading speed).
+    private var navigationOptions: [(id: Int, label: String)] {
+        if isAudioOnly {
+            return [(5, "Marcas"), (6, "Tiempo, un minuto")]
+        }
+        return [(0, "Bloque"), (1, "Párrafo"), (2, "Frase"),
+                (3, "Página"), (4, "Encabezado"), (5, "Marcas"),
+                (6, tracks.isEmpty ? "Tiempo estimado, un minuto" : "Tiempo, un minuto")]
+    }
+
+    private var navigationChoices: [String] { navigationOptions.map(\.label) }
+
+    private var navigationBinding: Binding<Int> {
+        Binding(
+            get: { navigationOptions.firstIndex(where: { $0.id == navigationUnit }) ?? 0 },
+            set: { index in
+                guard navigationOptions.indices.contains(index) else { return }
+                navigationUnit = navigationOptions[index].id
+            }
+        )
+    }
+
+    private var sortedTextMarkOffsets: [Int] {
+        let oldMarks = latest.bookmarks.map {
+            Int(Double(textLayout.totalCharacters) * Double($0) / 100)
+        }
+        return Array(Set(latest.savedTextBookmarks.map(\.offset) + oldMarks)).sorted()
+    }
+
+    private func seekAudio(to targetTrack: Int, percent: Int) {
+        guard tracks.indices.contains(targetTrack) else { return }
+        let wasActive = speech.hasAudio
+        let wasPlaying = speech.isPlaying
+        let changedTrack = targetTrack != trackIndex
+        trackIndex = targetTrack
+        currentPercent = max(0, min(100, percent))
+        if changedTrack && wasActive {
+            playTrack()
+            if !wasPlaying { speech.pause() }
+        } else if wasActive {
+            speech.seek(to: currentPercent)
+        }
+        persistPosition()
+    }
+
+    private func moveToAudioBookmark(_ direction: Int) {
+        let marks = latest.savedAudioBookmarks.sorted {
+            $0.track == $1.track ? $0.percent < $1.percent : $0.track < $1.track
+        }
+        let current = (trackIndex, currentPercent)
+        let candidate = direction > 0
+            ? marks.first { ($0.track, $0.percent) > current }
+            : marks.last { ($0.track, $0.percent) < current }
+        guard let candidate else {
+            actionMessage = direction > 0 ? "No hay otra marca posterior." : "No hay otra marca anterior."
+            return
+        }
+        seekAudio(to: candidate.track, percent: candidate.percent)
+        actionMessage = "Pista \(candidate.track + 1), marca en \(candidate.percent) por ciento."
+    }
+
+    private func moveByMinute(_ direction: Int) {
+        if tracks.isEmpty {
+            // Baseline estimate: 180 words/minute at normal TTS rate.
+            // The selected rate scales the step; actual pronunciation is variable.
+            let wordsPerMinute = max(1, Int((180 * speed).rounded()))
+            let destination = textLayout.offset(
+                movingWords: direction * wordsPerMinute, from: readingOffset)
+            jump(to: destination)
+            actionMessage = "Desplazamiento aproximado de un minuto de lectura."
+            return
+        }
+        guard tracks.indices.contains(trackIndex),
+              let url = NativeReaderFormats.storedURL(for: tracks[trackIndex]) else { return }
+        let duration: TimeInterval
+        if speech.hasAudio {
+            duration = speech.audioDuration
+        } else {
+            duration = (try? AVAudioPlayer(contentsOf: url))?.duration ?? 0
+        }
+        guard duration > 0 else {
+            actionMessage = "No se puede determinar la duración de la pista."
+            return
+        }
+        let currentSeconds = speech.hasAudio ? speech.audioElapsed
+            : duration * Double(currentPercent) / 100
+        let destination = max(0, min(duration, currentSeconds + Double(direction) * 60))
+        seekAudio(to: trackIndex, percent: Int((destination / duration * 100).rounded()))
+        // Seek to the actual second, not to a rounded percent of the track.
+        if speech.hasAudio { speech.seek(seconds: destination) }
+        actionMessage = "Posición de audio: \(Int(destination)) segundos."
+    }
+
     private func moveUnit(_ direction: Int) {
-        guard !document.body.isEmpty,
-              let next = textLayout.nearbyOffset(readingOffset,
-                                                  direction: direction, unit: navigationUnit)
-        else { return }
-        jump(to: next)
+        switch navigationOptions[navigationBinding.wrappedValue].id {
+        case 5:
+            if !tracks.isEmpty {
+                moveToAudioBookmark(direction)
+            } else {
+                let target = direction > 0
+                    ? sortedTextMarkOffsets.first(where: { $0 > readingOffset })
+                    : sortedTextMarkOffsets.last(where: { $0 < readingOffset })
+                guard let target else {
+                    actionMessage = direction > 0 ? "No hay otra marca posterior." : "No hay otra marca anterior."
+                    return
+                }
+                jump(to: target)
+            }
+        case 6:
+            moveByMinute(direction)
+        default:
+            guard !document.body.isEmpty,
+                  let next = textLayout.nearbyOffset(readingOffset,
+                      direction: direction, unit: navigationOptions[navigationBinding.wrappedValue].id) else { return }
+            jump(to: next)
+        }
     }
 
     private func addBookmark() {
         if tracks.isEmpty {
-            library.addBookmark(document, at: currentPercent)
-            actionMessage = "Marca guardada en \(currentPercent) por ciento."
+            actionMessage = library.addBookmark(document, at: readingOffset)
+                ? "Marca guardada en \(currentPercent) por ciento."
+                : "No se pudo guardar la marca. Inténtalo de nuevo."
         } else {
-            library.addAudioBookmark(document, track: trackIndex, percent: currentPercent)
-            actionMessage = "Marca guardada en la pista \(trackIndex + 1), \(currentPercent) por ciento."
+            actionMessage = library.addAudioBookmark(document, track: trackIndex, percent: currentPercent)
+                ? "Marca guardada en la pista \(trackIndex + 1), \(currentPercent) por ciento."
+                : "No se pudo guardar la marca. Inténtalo de nuevo."
+        }
+    }
+
+    private func exportAudio() {
+        guard !audioExportBusy else { return }
+        audioExportBusy = true
+        audioExportStatus = "Generando audio."
+        audioExportResult = nil
+        let title = latest.title
+        let text = latest.body
+        let engine = audioExportEngine
+        let voice = engine == .phonon ? phononVoice : geminiVoice
+        audioExportTask = Task {
+            do {
+                let url = try await NativeGeminiAudioExport.export(
+                    text: text, title: title, voice: voice, format: audioExportFormat,
+                    engine: engine,
+                    progress: { done, total in
+                        audioExportStatus = "Generando \(done) de \(total)."
+                    })
+                audioExportResult = url
+                audioExportStatus = "Audio preparado. Pulsa Compartir para guardarlo."
+            } catch is CancellationError {
+                audioExportStatus = "Exportación cancelada."
+            } catch {
+                audioExportStatus = error.localizedDescription
+            }
+            audioExportBusy = false
+            audioExportTask = nil
         }
     }
 
@@ -1138,7 +1621,7 @@ struct NativeReadingScreen: View {
         if !tracks.isEmpty && !speech.hasAudio {
             return "\(position) La duración de audio se mostrará al iniciar la pista."
         }
-        if speech.hasAudio {
+        if speech.hasAudio && !speech.isGeneratedSpeech {
             let elapsed = Int(speech.audioElapsed)
             let remaining = max(0, Int(speech.audioDuration) - elapsed)
             return "\(position) Tiempo realizado \(formatDuration(elapsed)). Tiempo restante \(formatDuration(remaining))."
@@ -1172,7 +1655,7 @@ struct NativeReadingScreen: View {
         if tracks.count > 1 {
             VStack(alignment: .leading, spacing: 4) {
                 NativeAdjustableChoice(
-                    title: "Seleccionar pista",
+                    title: "Pista",
                     choices: tracks.indices.map { "Pista \($0 + 1) de \(tracks.count)" },
                     selectedIndex: Binding(
                         get: { trackIndex },
@@ -1198,14 +1681,104 @@ struct NativeReadingScreen: View {
         }
     }
 
+    private func loadPhononVoices() {
+        guard NativePhononRuntime.isUsable else { return }
+        phononLoadMessage = "Cargando las voces instaladas de Phonon."
+        Task {
+            do {
+                let all = try await NativePhononRuntime.voices()
+                phononVoices = all
+                if phononVoice.isEmpty, let first = all.first { phononVoice = first }
+                phononLoadMessage = all.isEmpty ? "Este modelo no contiene voces disponibles." : ""
+            } catch {
+                phononLoadMessage = error.localizedDescription
+            }
+        }
+    }
+
     private var quickControls: some View {
         VStack(alignment: .leading, spacing: 6) {
             playbackRow
+            if tracks.isEmpty {
+                NativeAdjustableChoice(
+                    title: "Motor",
+                    choices: phononReady ? ["Sistema", "Gemini", "Phonon"] : ["Sistema", "Gemini"],
+                    selectedIndex: Binding(
+                        get: { readingEngine },
+                        set: { selected in
+                            if selected != readingEngine {
+                                let wasPlaying = speech.isPlaying || speech.isPaused
+                                let wasPaused = speech.isPaused
+                                speech.stop()
+                                readingEngine = selected
+                                if selected == 2 { loadPhononVoices() }
+                                if wasPlaying {
+                                    startTextSpeech()
+                                    if wasPaused && speech.isPlaying { speech.pause() }
+                                    else { applySleepTimer() }
+                                }
+                            }
+                        }
+                    )
+                )
+                if readingEngine == 1 {
+                    NativeAdjustableChoice(
+                        title: "Voz",
+                        choices: NativeGeminiSpeech.voices,
+                        selectedIndex: Binding(
+                            get: {
+                                NativeGeminiSpeech.voices.firstIndex(of: geminiVoice) ?? 0
+                            },
+                            set: { index in
+                                guard NativeGeminiSpeech.voices.indices.contains(index) else { return }
+                                geminiVoice = NativeGeminiSpeech.voices[index]
+                                refreshTextVoice()
+                            }
+                        )
+                    )
+                    Text("Gemini envía fragmentos del documento a Google. Puede consumir cuota. Selecciona Sistema para lectura local.")
+                        .font(.footnote)
+                } else if readingEngine == 2 {
+                    if !phononVoices.isEmpty {
+                        NativeAdjustableChoice(
+                            title: "Voz",
+                            choices: phononVoices,
+                            selectedIndex: Binding(
+                                get: { phononVoices.firstIndex(of: phononVoice) ?? 0 },
+                                set: { index in
+                                    guard phononVoices.indices.contains(index) else { return }
+                                    phononVoice = phononVoices[index]
+                                    refreshTextVoice()
+                                }
+                            )
+                        )
+                    }
+                    if !phononLoadMessage.isEmpty {
+                        Text(phononLoadMessage)
+                            .font(.footnote)
+                            .accessibilityAddTraits(.updatesFrequently)
+                    }
+                    Text("Phonon reproduce directamente en el iPhone, sin enviar el documento a Internet.")
+                        .font(.footnote)
+                }
+            }
+            NativeAdjustableChoice(
+                title: "Navegación",
+                choices: navigationChoices,
+                selectedIndex: navigationBinding
+            )
+            .accessibilityHint("Selecciona el tipo de avance y retroceso.")
+            HStack {
+                Button("Anterior") { moveUnit(-1) }
+                Button("Siguiente") { moveUnit(1) }
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.small)
             trackButtons
             Text(progressDescription)
                 .font(.footnote)
                 .accessibilityLabel(progressDescription)
-            if speech.hasAudio {
+            if speech.hasAudio && !speech.isGeneratedSpeech {
                 HStack(spacing: 12) {
                     Button("Retroceder 30 segundos") {
                         speech.skip(seconds: -30)
@@ -1227,7 +1800,7 @@ struct NativeReadingScreen: View {
                 selectedIndex: $sleepIndex
             )
             NativeAdjustableChoice(
-                title: "Ir a posición",
+                title: "Posición",
                 choices: Self.percentages,
                 selectedIndex: positionBinding
             )
@@ -1265,6 +1838,15 @@ struct NativeReadingScreen: View {
                 }
                 .padding()
             }
+            .onAppear {
+                // Restore the visible page as well as the stored speech cursor.
+                guard !textLayout.fragments.isEmpty else { return }
+                Task { @MainActor in
+                    await Task.yield()
+                    let index = textLayout.fragmentIndex(for: readingOffset)
+                    proxy.scrollTo(index, anchor: .center)
+                }
+            }
             .onChange(of: focusedFragment) { _, index in
                 guard let index, textLayout.fragmentStarts.indices.contains(index) else { return }
                 if programmaticFocusRequest {
@@ -1277,7 +1859,7 @@ struct NativeReadingScreen: View {
                     readingOffset = textLayout.fragmentStarts[index]
                     currentPercent = min(100, Int(Double(readingOffset) * 100 /
                         Double(max(1, textLayout.totalCharacters))))
-                    if abs(currentPercent - lastSavedPercent) >= 5 { persistPosition() }
+                    persistPosition()
                 }
             }
         }
@@ -1296,33 +1878,108 @@ struct NativeReadingScreen: View {
 
     @ViewBuilder
     private var documentActions: some View {
-        Button("Información de la obra") { showDocumentInformation = true }
-        Button("Marcas guardadas") { showSavedMarks = true }
-        if !latest.body.isEmpty { Button("Índice y navegación estructurada") { showStructure = true } }
+        Button("Eliminar esta obra", role: .destructive) {
+            showDocumentActions = false
+            confirmDocumentDeletion = true
+        }
+        Button("Información") { showDocumentInformation = true }
+        Button("Marcas") { showSavedMarks = true }
+        if !latest.body.isEmpty { Button("Índice") { showStructure = true } }
         Button("Añadir marca") { addBookmark() }
         Button(latest.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos") {
             library.toggleFavorite(document)
         }
         if !latest.body.isEmpty {
             Button("Exportar texto") { exportText() }
+            Button("Exportar audio") {
+                if phononReady && phononVoices.isEmpty { loadPhononVoices() }
+                showAudioExport = true
+                showDocumentActions = false
+            }
             Button("Diccionario y pronunciación") {
                 if speech.isPlaying { pausePlayback() }
                 showWordTools = true
             }
             if #available(iOS 18.0, *) {
-                Button("Traducir fragmento actual") { showTranslation = true }
+                Button("Traducir") { showTranslation = true }
             }
             Button("Unidad anterior") { moveUnit(-1) }
             Button("Unidad siguiente") { moveUnit(1) }
         }
         if let track = tracks.first,
            let url = NativeReaderFormats.storedURL(for: track) {
-            Button("Compartir archivo de audio") { NativeShare.present(url: url) }
+            Button("Compartir audio") { NativeShare.present(url: url) }
         }
         Button("Cancelar", role: .cancel) {}
     }
 
-    var body: some View {
+    private var exportAudioSheet: some View {
+            NavigationStack {
+                List {
+                    Section("Motor y voz") {
+                        Picker("Motor", selection: $audioExportEngine) {
+                            Text("Gemini").tag(NativeGeminiAudioExport.Engine.gemini)
+                            if phononReady {
+                                Text("Phonon").tag(NativeGeminiAudioExport.Engine.phonon)
+                            }
+                        }
+                        .disabled(audioExportBusy)
+                        if audioExportEngine == .gemini {
+                            Text("Se utilizará tu clave personal y puede consumirse cuota.")
+                            Picker("Voz", selection: $geminiVoice) {
+                                ForEach(NativeGeminiSpeech.voices, id: \.self) { name in
+                                    Text(name).tag(name)
+                                }
+                            }
+                        } else if audioExportEngine == .phonon {
+                            if phononVoices.isEmpty {
+                                Text("Cargando voces Phonon.")
+                            } else {
+                                Picker("Voz", selection: $phononVoice) {
+                                    ForEach(phononVoices, id: \.self) { name in
+                                        Text(name).tag(name)
+                                    }
+                                }
+                            }
+                            Text("Phonon genera el audio dentro del iPhone sin enviar el libro a Internet.")
+                        }
+                        Picker("Formato", selection: $audioExportFormat) {
+                            Text("MP3").tag(NativeGeminiAudioExport.Format.mp3)
+                            Text("M4A").tag(NativeGeminiAudioExport.Format.m4a)
+                            Text("WAV").tag(NativeGeminiAudioExport.Format.wav)
+                            Text("DAISY").tag(NativeGeminiAudioExport.Format.daisy)
+                        }
+                        .disabled(audioExportBusy)
+                        Text("DAISY incluye texto, audio y navegación. La compatibilidad externa está pendiente de validación.")
+                        Button("Generar") { exportAudio() }
+                            .disabled(audioExportBusy || latest.body.isEmpty ||
+                                (audioExportEngine == .phonon && phononVoices.isEmpty))
+                        if audioExportBusy {
+                            Button("Cancelar", role: .cancel) {
+                                audioExportTask?.cancel()
+                            }
+                        }
+                        if !audioExportStatus.isEmpty {
+                            Text(audioExportStatus).accessibilityAddTraits(.updatesFrequently)
+                        }
+                        if let result = audioExportResult {
+                            Button("Compartir") { NativeShare.present(url: result) }
+                        }
+                        Text("Límite por documento: 60.000 caracteres.")
+                    }
+                }
+                .tifloScreenSurface()
+                .navigationTitle("Exportar audio")
+                .toolbar {
+                    Button("Cerrar") {
+                        showAudioExport = false
+                    }
+                }
+            }
+
+    }
+
+    private var readerBase: some View {
         VStack(spacing: 0) {
             quickControls
             Divider().accessibilityHidden(true)
@@ -1342,6 +1999,32 @@ struct NativeReadingScreen: View {
                             titleVisibility: .visible) {
             documentActions
         }
+        .confirmationDialog("Eliminar esta obra", isPresented: $confirmDocumentDeletion,
+                            titleVisibility: .visible) {
+            Button("Eliminar definitivamente", role: .destructive) {
+                guard library.delete(document) else {
+                    deletionError = "No se pudo eliminar la obra. Se ha conservado en la biblioteca."
+                    return
+                }
+                speech.stop()
+                dismiss()
+            }
+            Button("Cancelar", role: .cancel) {}
+        } message: {
+            Text("Esta acción también eliminará las marcas y los archivos asociados a la obra.")
+        }
+        .alert("No se pudo eliminar", isPresented: Binding(
+            get: { deletionError != nil },
+            set: { if !$0 { deletionError = nil } }
+        )) {
+            Button("Aceptar", role: .cancel) { deletionError = nil }
+        } message: {
+            Text(deletionError ?? "")
+        }
+    }
+
+    private var readerSheets: some View {
+        readerBase
         .sheet(isPresented: $showDocumentInformation) {
             NavigationStack {
                 List {
@@ -1350,7 +2033,7 @@ struct NativeReadingScreen: View {
                     LabeledContent("Importado", value:
                         latest.importedAt.formatted(date: .abbreviated, time: .shortened))
                     LabeledContent("Carpeta", value: latest.folderName ?? "Sin carpeta")
-                    LabeledContent("Marcas", value: "\(latest.bookmarks.count + latest.savedAudioBookmarks.count)")
+                    LabeledContent("Marcas", value: "\(latest.bookmarks.count + latest.savedTextBookmarks.count + latest.savedAudioBookmarks.count)")
                     Text(progressDescription)
                     if !tracks.isEmpty {
                         LabeledContent("Pistas de audio", value: "\(tracks.count)")
@@ -1374,6 +2057,15 @@ struct NativeReadingScreen: View {
                         }
                         .accessibilityAction(named: Text("Eliminar esta marca")) {
                             library.removeBookmark(document, at: percent)
+                        }
+                    }
+                    ForEach(latest.savedTextBookmarks, id: \.self) { mark in
+                        Button("Ir a posición \(mark.offset)") {
+                            jump(to: mark.offset)
+                            showSavedMarks = false
+                        }
+                        .accessibilityAction(named: Text("Eliminar esta marca")) {
+                            library.removeTextBookmark(document, mark: mark)
                         }
                     }
                     ForEach(latest.savedAudioBookmarks, id: \.self) { mark in
@@ -1424,19 +2116,38 @@ struct NativeReadingScreen: View {
         .sheet(isPresented: $showWordTools) {
             NativeReaderWordToolsScreen(voiceIdentifier: effectiveVoiceID, pitch: pitch)
         }
+        .sheet(isPresented: $showAudioExport) { exportAudioSheet }
         .sheet(isPresented: $showAudioSettings) {
             NativeReaderDocumentAudioSettingsScreen(document: document)
         }
         .sheet(isPresented: $showVisualSettings) {
             NativeReaderDocumentVisualSettingsScreen(document: document)
         }
+    }
+
+    var body: some View {
+        readerSheets
         .onAppear {
+            phononReady = NativePhononRuntime.isUsable
+            if readingEngine == 2 {
+                if phononReady { loadPhononVoices() }
+                else {
+                    readingEngine = 0
+                    actionMessage = "El motor Phonon no está disponible en esta compilación."
+                }
+            }
             let initial = max(0, min(100, startPercent ?? latest.lastPercent ?? 0))
             trackIndex = min(max(0, startTrack ?? latest.lastTrackIndex ?? 0),
                              max(0, tracks.count - 1))
             currentPercent = initial
-            readingOffset = Int(Double(textLayout.totalCharacters) * Double(initial) / 100)
-            lastSavedPercent = initial
+            readingOffset = max(0, min(textLayout.totalCharacters,
+                startTextOffset ?? (startPercent == nil
+                    ? (latest.lastTextOffset ?? Int(Double(textLayout.totalCharacters) * Double(initial) / 100))
+                    : Int(Double(textLayout.totalCharacters) * Double(initial) / 100))))
+            if startTextOffset != nil {
+                currentPercent = Int(Double(readingOffset) * 100 / Double(max(1, textLayout.totalCharacters)))
+            }
+            lastSavedPercent = currentPercent
             if !didApplyOpeningMode {
                 didApplyOpeningMode = true
                 if readingMode == 1 { play() }
@@ -1445,15 +2156,28 @@ struct NativeReadingScreen: View {
         .onChange(of: sleepIndex) { _, _ in
             applySleepTimer()
         }
-        .onReceive(speech.$textPercent) { percentage in
-            // AVSpeechSynthesizer reports each spoken word; no artificial timer
-            // advances the text cursor while paused or reading visually.
-            guard !speech.hasAudio, speech.isPlaying else { return }
-            if percentage != currentPercent {
-                currentPercent = percentage
-                readingOffset = Int(Double(textLayout.totalCharacters) *
-                                    Double(percentage) / 100)
-                if abs(percentage - lastSavedPercent) >= 5 { persistPosition() }
+        .onChange(of: effectiveVoiceID) { _, _ in
+            refreshTextVoice()
+        }
+        .onChange(of: effectiveSpeedIndex) { _, _ in
+            refreshTextVoice()
+        }
+        .onChange(of: effectivePitchIndex) { _, _ in
+            refreshTextVoice()
+        }
+        .onReceive(speech.$textUTF16Offset) { utf16Offset in
+            // Keep the actual spoken word position instead of reversing a rounded percentage.
+            guard tracks.isEmpty,
+                  speech.isPlaying || utf16Offset == document.body.utf16.count,
+                  !document.body.isEmpty else { return }
+            let safeOffset = max(0, min(document.body.utf16.count, utf16Offset))
+            let index = String.Index(utf16Offset: safeOffset, in: document.body)
+            let exactOffset = document.body.distance(from: document.body.startIndex, to: index)
+            if exactOffset != readingOffset {
+                readingOffset = exactOffset
+                currentPercent = Int(Double(exactOffset) * 100 /
+                                     Double(max(1, textLayout.totalCharacters)))
+                persistPosition()
             }
         }
         .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
@@ -1462,10 +2186,10 @@ struct NativeReadingScreen: View {
                 playbackTick += 1
                 if !speech.hasAudio { elapsedSpeakingSeconds += 1 }
             }
-            if speech.hasAudio {
+            if speech.hasAudio && !speech.isGeneratedSpeech {
                 let updated = speech.audioPercent
                 if updated != currentPercent { currentPercent = updated }
-                if abs(updated - lastSavedPercent) >= 5 { persistPosition() }
+                if abs(updated - lastSavedPercent) >= 1 { persistPosition() }
             }
         }
         .onDisappear {

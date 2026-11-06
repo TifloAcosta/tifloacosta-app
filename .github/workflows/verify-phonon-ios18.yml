@@ -1,0 +1,39 @@
+name: Verify optional Phonon iOS18 native build
+
+on:
+  push:
+    branches: [fix/ios-reader-phase1-persistence-timer-20261106]
+    paths:
+      - ios-app-native/project-phonon-development.yml
+      - ios-app-native/Sources/NativePhononRuntime.swift
+      - ios-app-native/Sources/NativePhononModelStore.swift
+      - .github/workflows/verify-phonon-ios18.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  phonon-ios18:
+    runs-on: macos-15
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install project generator
+        run: brew install xcodegen
+      - name: Generate Phonon opt-in project
+        run: |
+          cd ios-app-native
+          xcodegen generate --spec project-phonon-development.yml
+      - name: Compile native Phonon development build for iOS 18
+        shell: bash
+        run: |
+          set -o pipefail
+          cd ios-app-native
+          xcodebuild \
+            -project TifloAcostaPhononDevelopment.xcodeproj \
+            -scheme TifloAcostaNative \
+            -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO \
+            build 2>&1 | tee /tmp/tiflo-ios-phonon-build.log

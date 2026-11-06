@@ -44,7 +44,7 @@ test('progreso conserva pista y porcentaje; marcas de audio distinguen capítulo
   assert.match(reader, /func removeAudioBookmark/);
   assert.match(reader, /trackIndex/);
   assert.match(reader, /trackIndex/);
-  assert.match(reader, /title: "Seleccionar pista"/);
+  assert.match(reader, /title: "Pista"/);
   assert.match(reader, /trackIndex/);
 });
 

@@ -39,14 +39,14 @@ test('Long text is lazily segmented and VoiceOver is not force-recentered', () =
 
 test('Audio polling never rewinds on each 2-percent progress increment', () => {
   assert.match(reader, /private var positionBinding: Binding<Int>/);
-  assert.match(reader, /if speech\.hasAudio \{\s*speech\.seek\(to: value\)/);
-  assert.match(reader, /if abs\(updated - lastSavedPercent\) >= 5/);
+  assert.match(reader, /if speech\.hasAudio && !speech\.isGeneratedSpeech \{\s*speech\.seek\(to: value\)/);
+  assert.match(reader, /if abs\(updated - lastSavedPercent\) >= 1/);
   assert.doesNotMatch(reader, /\.onChange\(of: currentPercent\)/);
 });
 
 test('Reader document actions remain real and VoiceOver-usable', () => {
   for (const action of [
-    'Añadir marca', 'Exportar texto', 'Traducir fragmento actual',
+    'Añadir marca', 'Exportar texto', 'Traducir',
     'Unidad anterior', 'Unidad siguiente', 'Avanzar diez por ciento'
   ]) assert.ok(reader.includes(action), 'Missing action ' + action);
 });

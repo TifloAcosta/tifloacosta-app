@@ -663,14 +663,14 @@ struct NativeReaderLibraryScreen: View {
                 }
             }
             Section("Mi biblioteca") {
-                Button(selectingDocuments ? "Terminar selección" : "Seleccionar varios documentos") {
+                Button(selectingDocuments ? "Terminar" : "Selección") {
                     selectingDocuments.toggle()
                     if !selectingDocuments { selectedDocumentIDs.removeAll() }
                 }
                 if selectingDocuments {
-                    Text("\(selectedDocumentIDs.count) documentos seleccionados")
+                    Text("Seleccionados: \(selectedDocumentIDs.count)")
                         .accessibilityAddTraits(.updatesFrequently)
-                    Button("Eliminar seleccionados") { confirmBatchDeletion = true }
+                    Button("Eliminar") { confirmBatchDeletion = true }
                         .disabled(selectedDocumentIDs.isEmpty)
                 }
                 if shownDocuments.isEmpty { Text("No hay documentos con el filtro actual.") }
@@ -1414,7 +1414,7 @@ struct NativeReadingScreen: View {
         if tracks.count > 1 {
             VStack(alignment: .leading, spacing: 4) {
                 NativeAdjustableChoice(
-                    title: "Seleccionar pista",
+                    title: "Pista",
                     choices: tracks.indices.map { "Pista \($0 + 1) de \(tracks.count)" },
                     selectedIndex: Binding(
                         get: { trackIndex },
@@ -1444,7 +1444,7 @@ struct NativeReadingScreen: View {
         VStack(alignment: .leading, spacing: 6) {
             playbackRow
             NativeAdjustableChoice(
-                title: "Modo de navegación",
+                title: "Navegación",
                 choices: navigationChoices,
                 selectedIndex: navigationBinding
             )
@@ -1481,7 +1481,7 @@ struct NativeReadingScreen: View {
                 selectedIndex: $sleepIndex
             )
             NativeAdjustableChoice(
-                title: "Ir a posición",
+                title: "Posición",
                 choices: Self.percentages,
                 selectedIndex: positionBinding
             )

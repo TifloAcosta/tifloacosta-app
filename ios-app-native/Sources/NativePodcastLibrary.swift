@@ -101,7 +101,7 @@ final class NativePodcastLibrary: ObservableObject {
         let before = followed.count
         for item in delegate.results { follow(title: item.title, url: item.url) }
         let added = followed.count - before
-        notice = "OPML importado. Nuevas suscripciones: \\(added)."
+        notice = "OPML importado. Nuevas suscripciones: \(added)."
         return added
     }
 }

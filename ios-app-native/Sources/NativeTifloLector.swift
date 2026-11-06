@@ -724,7 +724,7 @@ struct NativeReaderLibraryScreen: View {
         .confirmationDialog("Importar", isPresented: $importSourcesPresented,
                             titleVisibility: .visible) {
             Button("Archivos") { importPresented = true }
-            Button("Bibliotecas" { externalCatalogPresented = true }
+            Button("Bibliotecas") { externalCatalogPresented = true }
             Button("Cancelar", role: .cancel) {}
         }
         .sheet(isPresented: $externalCatalogPresented) {

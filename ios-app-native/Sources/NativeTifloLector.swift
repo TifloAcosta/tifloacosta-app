@@ -1141,6 +1141,7 @@ struct NativeReadingScreen: View {
     @State private var confirmDocumentDeletion = false
     @State private var deletionError: String?
     @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
+    @AppStorage("native-reader-reading-engine") private var readingEngine = 0
     @State private var audioExportTask: Task<Void, Never>?
     @State private var audioExportStatus = ""
     @State private var audioExportFormat: NativeGeminiAudioExport.Format = .m4a
@@ -1227,11 +1228,27 @@ struct NativeReadingScreen: View {
         }
         let remainder = String(document.body.dropFirst(readingOffset))
         guard !remainder.isEmpty else { return }
-        speech.play(remainder, speed: speed, pitch: pitch,
-                    language: AVSpeechSynthesisVoice(identifier: effectiveVoiceID)?.language ?? "es-ES",
-                    voiceIdentifier: effectiveVoiceID,
-                    baseUTF16: String(document.body.prefix(readingOffset)).utf16.count,
-                    totalUTF16: document.body.utf16.count)
+        let utf16Offset = String(document.body.prefix(readingOffset)).utf16.count
+        if readingEngine == 1 {
+            guard NativeVoiceCredentialStore.hasKey("gemini") else {
+                actionMessage = "Configura la clave Gemini en Motores externos."
+                return
+            }
+            do {
+                try speech.playGemini(remainder, voice: geminiVoice,
+                    baseUTF16: utf16Offset, totalUTF16: document.body.utf16.count,
+                    onError: { message in actionMessage = message })
+                actionMessage = nil
+            } catch {
+                actionMessage = error.localizedDescription
+            }
+        } else {
+            speech.play(remainder, speed: speed, pitch: pitch,
+                        language: AVSpeechSynthesisVoice(identifier: effectiveVoiceID)?.language ?? "es-ES",
+                        voiceIdentifier: effectiveVoiceID,
+                        baseUTF16: utf16Offset,
+                        totalUTF16: document.body.utf16.count)
+        }
     }
 
     private func play() {
@@ -1513,7 +1530,7 @@ struct NativeReadingScreen: View {
         if !tracks.isEmpty && !speech.hasAudio {
             return "\(position) La duración de audio se mostrará al iniciar la pista."
         }
-        if speech.hasAudio {
+        if speech.hasAudio && !speech.isGemini {
             let elapsed = Int(speech.audioElapsed)
             let remaining = max(0, Int(speech.audioDuration) - elapsed)
             return "\(position) Tiempo realizado \(formatDuration(elapsed)). Tiempo restante \(formatDuration(remaining))."
@@ -1576,6 +1593,32 @@ struct NativeReadingScreen: View {
     private var quickControls: some View {
         VStack(alignment: .leading, spacing: 6) {
             playbackRow
+            if tracks.isEmpty {
+                NativeAdjustableChoice(
+                    title: "Motor",
+                    choices: ["Sistema", "Gemini"],
+                    selectedIndex: Binding(
+                        get: { readingEngine },
+                        set: { selected in
+                            if selected != readingEngine {
+                                let wasPlaying = speech.isPlaying || speech.isPaused
+                                let wasPaused = speech.isPaused
+                                speech.stop()
+                                readingEngine = selected
+                                if wasPlaying {
+                                    startTextSpeech()
+                                    if wasPaused && speech.isPlaying { speech.pause() }
+                                    else { applySleepTimer() }
+                                }
+                            }
+                        }
+                    )
+                )
+                if readingEngine == 1 {
+                    Text("Gemini envía fragmentos del documento a Google. Puede consumir cuota. Selecciona Sistema para lectura local.")
+                        .font(.footnote)
+                }
+            }
             NativeAdjustableChoice(
                 title: "Navegación",
                 choices: navigationChoices,
@@ -1592,7 +1635,7 @@ struct NativeReadingScreen: View {
             Text(progressDescription)
                 .font(.footnote)
                 .accessibilityLabel(progressDescription)
-            if speech.hasAudio {
+            if speech.hasAudio && !speech.isGemini {
                 HStack(spacing: 12) {
                     Button("Retroceder 30 segundos") {
                         speech.skip(seconds: -30)
@@ -1968,7 +2011,7 @@ struct NativeReadingScreen: View {
                 playbackTick += 1
                 if !speech.hasAudio { elapsedSpeakingSeconds += 1 }
             }
-            if speech.hasAudio {
+            if speech.hasAudio && !speech.isGemini {
                 let updated = speech.audioPercent
                 if updated != currentPercent { currentPercent = updated }
                 if abs(updated - lastSavedPercent) >= 1 { persistPosition() }

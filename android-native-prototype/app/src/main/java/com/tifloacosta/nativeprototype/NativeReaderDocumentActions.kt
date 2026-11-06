@@ -69,6 +69,10 @@ fun NativeReaderDocumentActions(
     var actionJob by remember(book.id) { mutableStateOf<Job?>(null) }
     var exportContent by remember(book.id) { mutableStateOf("") }
     var audioExport by remember(book.id) { mutableStateOf<ByteArray?>(null) }
+    var audioFormatIndex by remember(book.id) { mutableIntStateOf(0) }
+    var completedAudioFormat by remember(book.id) {
+        mutableStateOf(NativeGeminiAudioExport.Format.M4A)
+    }
     var audioExportBusy by remember(book.id) { mutableStateOf(false) }
     var audioVoice by remember(book.id) {
         mutableIntStateOf(NativeGeminiSpeech.voices.indexOf(
@@ -111,9 +115,7 @@ fun NativeReaderDocumentActions(
             }
         }
     }
-    val exportAudio = rememberLauncherForActivityResult(
-        ActivityResultContracts.CreateDocument("audio/wav")
-    ) { uri ->
+    fun saveGeneratedAudio(uri: Uri?) {
         val bytes = audioExport
         if (uri != null && bytes != null) {
             actionJob = scope.launch {
@@ -131,6 +133,12 @@ fun NativeReaderDocumentActions(
             }
         }
     }
+    val exportAudioM4A = rememberLauncherForActivityResult(
+        ActivityResultContracts.CreateDocument("audio/mp4")
+    ) { uri -> saveGeneratedAudio(uri) }
+    val exportAudioWAV = rememberLauncherForActivityResult(
+        ActivityResultContracts.CreateDocument("audio/wav")
+    ) { uri -> saveGeneratedAudio(uri) }
     val exportOriginal = rememberLauncherForActivityResult(
         ActivityResultContracts.CreateDocument("application/octet-stream")
     ) { uri -> if (uri != null) startExport(uri, original = true) }
@@ -255,9 +263,13 @@ fun NativeReaderDocumentActions(
             audioVoice = index
             prefs.edit().putString("gemini.voice", NativeGeminiSpeech.voices[index]).apply()
         }
+        ReaderAdjustableChoice(
+            if (english) "Format" else "Formato",
+            listOf("M4A", "WAV"), audioFormatIndex
+        ) { audioFormatIndex = it; audioExport = null }
         Text(if (english)
-            "Gemini uses your API key and may consume your quota. WAV, up to 60,000 characters."
-            else "Gemini usa tu clave y puede consumir cuota. WAV, hasta 60.000 caracteres.")
+            "MP3 requires an additional encoder. Gemini may consume your quota. Maximum 60,000 characters."
+            else "MP3 necesita un codificador adicional. Gemini puede consumir cuota. Máximo 60.000 caracteres.")
         Button(enabled = !audioExportBusy, onClick = {
             audioExportBusy = true
             audioExport = null
@@ -267,14 +279,18 @@ fun NativeReaderDocumentActions(
                 try {
                     val text = withContext(Dispatchers.IO) { store.read(book) }
                     val voice = NativeGeminiSpeech.voices[audioVoice]
+                    val format = if (audioFormatIndex == 0)
+                        NativeGeminiAudioExport.Format.M4A
+                        else NativeGeminiAudioExport.Format.WAV
                     audioExport = withContext(Dispatchers.IO) {
-                        NativeGeminiAudioExport.generate(context, text, voice) { n, total ->
+                        NativeGeminiAudioExport.generate(context, text, voice, format) { n, total ->
                             withContext(Dispatchers.Main) {
                                 status = (if (english) "Generating " else "Generando ") +
                                     n + " / " + total
                             }
                         }
                     }
+                    completedAudioFormat = format
                     status = if (english) "Audio ready. Press Save."
                         else "Audio preparado. Pulsa Guardar."
                 } catch (e: kotlinx.coroutines.CancellationException) {
@@ -294,7 +310,11 @@ fun NativeReaderDocumentActions(
             }
         }
         if (audioExport != null) {
-            Button(onClick = { exportAudio.launch(labelFile("wav")) },
+            Button(onClick = {
+                if (completedAudioFormat == NativeGeminiAudioExport.Format.M4A)
+                    exportAudioM4A.launch(labelFile("m4a"))
+                else exportAudioWAV.launch(labelFile("wav"))
+            },
                 modifier = Modifier.fillMaxWidth()) {
                 Text(if (english) "Save" else "Guardar")
             }

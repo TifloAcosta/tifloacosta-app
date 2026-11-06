@@ -1024,6 +1024,7 @@ struct NativeReadingScreen: View {
     var startTrack: Int? = nil
 
     @EnvironmentObject private var library: NativeReaderLibrary
+    @Environment(\.dismiss) private var dismiss
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @AppStorage("native-reading-text-size") private var textSize = 20.0
     @AppStorage("native-reading-speed-index") private var speedIndex = 2
@@ -1049,6 +1050,8 @@ struct NativeReadingScreen: View {
     @State private var showDocumentActions = false
     @State private var showDocumentInformation = false
     @State private var showSavedMarks = false
+    @State private var confirmDocumentDeletion = false
+    @State private var deletionError: String?
     @State private var programmaticFocusRequest = false
     @State private var actionMessage: String?
     @AccessibilityFocusState private var focusedFragment: Int?
@@ -1556,6 +1559,10 @@ struct NativeReadingScreen: View {
 
     @ViewBuilder
     private var documentActions: some View {
+        Button("Eliminar esta obra", role: .destructive) {
+            showDocumentActions = false
+            confirmDocumentDeletion = true
+        }
         Button("Información de la obra") { showDocumentInformation = true }
         Button("Marcas guardadas") { showSavedMarks = true }
         if !latest.body.isEmpty { Button("Índice y navegación estructurada") { showStructure = true } }
@@ -1601,6 +1608,28 @@ struct NativeReadingScreen: View {
                             isPresented: $showDocumentActions,
                             titleVisibility: .visible) {
             documentActions
+        }
+        .confirmationDialog("Eliminar esta obra", isPresented: $confirmDocumentDeletion,
+                            titleVisibility: .visible) {
+            Button("Eliminar definitivamente", role: .destructive) {
+                guard library.delete(document) else {
+                    deletionError = "No se pudo eliminar la obra. Se ha conservado en la biblioteca."
+                    return
+                }
+                speech.stop()
+                dismiss()
+            }
+            Button("Cancelar", role: .cancel) {}
+        } message: {
+            Text("Esta acción también eliminará las marcas y los archivos asociados a la obra.")
+        }
+        .alert("No se pudo eliminar", isPresented: Binding(
+            get: { deletionError != nil },
+            set: { if !$0 { deletionError = nil } }
+        )) {
+            Button("Aceptar", role: .cancel) { deletionError = nil }
+        } message: {
+            Text(deletionError ?? "")
         }
         .sheet(isPresented: $showDocumentInformation) {
             NavigationStack {

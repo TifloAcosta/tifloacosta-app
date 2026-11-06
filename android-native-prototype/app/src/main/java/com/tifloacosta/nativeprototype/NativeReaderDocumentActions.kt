@@ -79,6 +79,18 @@ fun NativeReaderDocumentActions(
         mutableIntStateOf(NativeGeminiSpeech.voices.indexOf(
             prefs.getString("gemini.voice", "Kore")).coerceAtLeast(0))
     }
+    val phononReady = remember(book.id) {
+        NativePhononReader.isAvailable(context.applicationContext)
+    }
+    val phononVoices = remember(book.id, phononReady) {
+        if (phononReady) NativePhononModelStore.voices(context) else emptyList()
+    }
+    var audioEngineIndex by remember(book.id) { mutableIntStateOf(0) }
+    var phononVoiceIndex by remember(book.id) {
+        mutableIntStateOf(
+            phononVoices.indexOf(prefs.getString("phonon.voice", "default")).coerceAtLeast(0)
+        )
+    }
     var unit by remember(book.id) {
         mutableIntStateOf(prefs.getInt("unit." + book.id, prefs.getInt("unit", 1))
             .coerceIn(0, 2))
@@ -264,11 +276,26 @@ fun NativeReaderDocumentActions(
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.semantics { heading() })
         ReaderAdjustableChoice(
-            if (english) "Voice" else "Voz",
-            NativeGeminiSpeech.voices, audioVoice
-        ) { index ->
-            audioVoice = index
-            prefs.edit().putString("gemini.voice", NativeGeminiSpeech.voices[index]).apply()
+            if (english) "Engine" else "Motor",
+            if (phononReady && phononVoices.isNotEmpty()) listOf("Gemini", "Phonon")
+            else listOf("Gemini"), audioEngineIndex
+        ) { index -> audioEngineIndex = index; audioExport = null }
+        if (audioEngineIndex == 1 && phononReady && phononVoices.isNotEmpty()) {
+            ReaderAdjustableChoice(
+                if (english) "Voice" else "Voz",
+                phononVoices, phononVoiceIndex
+            ) { index ->
+                phononVoiceIndex = index
+                prefs.edit().putString("phonon.voice", phononVoices[index]).apply()
+            }
+        } else {
+            ReaderAdjustableChoice(
+                if (english) "Voice" else "Voz",
+                NativeGeminiSpeech.voices, audioVoice
+            ) { index ->
+                audioVoice = index
+                prefs.edit().putString("gemini.voice", NativeGeminiSpeech.voices[index]).apply()
+            }
         }
         ReaderAdjustableChoice(
             if (english) "Format" else "Formato",
@@ -278,9 +305,13 @@ fun NativeReaderDocumentActions(
             Text(if (english) "DAISY includes full text, synchronized clips and navigation. External-player compatibility is not yet validated."
                 else "DAISY incluye texto, audio sincronizado e índice. La compatibilidad externa aún no está validada.")
         }
-        Text(if (english)
-            "Gemini may consume your quota. Maximum 60,000 characters."
-            else "Gemini puede consumir cuota. Máximo 60.000 caracteres.")
+        Text(if (audioEngineIndex == 1 && phononReady) {
+            if (english) "Phonon generates audio on your device. Maximum 60,000 characters."
+            else "Phonon genera el audio dentro del dispositivo. Máximo 60.000 caracteres."
+        } else {
+            if (english) "Gemini may consume your quota. Maximum 60,000 characters."
+            else "Gemini puede consumir cuota. Máximo 60.000 caracteres."
+        })
         Button(enabled = !audioExportBusy, onClick = {
             audioExportBusy = true
             audioExport = null
@@ -289,7 +320,9 @@ fun NativeReaderDocumentActions(
             actionJob = scope.launch {
                 try {
                     val text = withContext(Dispatchers.IO) { store.read(book) }
-                    val voice = NativeGeminiSpeech.voices[audioVoice]
+                    val localPhonon = audioEngineIndex == 1 && phononReady
+                    val voice = if (localPhonon) phononVoices[phononVoiceIndex]
+                        else NativeGeminiSpeech.voices[audioVoice]
                     val format = when (audioFormatIndex) {
                         0 -> NativeGeminiAudioExport.Format.MP3
                         1 -> NativeGeminiAudioExport.Format.M4A
@@ -303,7 +336,19 @@ fun NativeReaderDocumentActions(
                                     n + " / " + total
                             }
                         }
-                        if (wantsDaisy) NativeGeminiDaisyExport.generate(
+                        if (localPhonon) {
+                            NativePhononAudioSynth(context,
+                                prefs.getString("phonon.language", "en") ?: "en").use { synth ->
+                                val render: suspend (String, String) -> ByteArray = {
+                                        fragment, selected -> synth.render(fragment, selected)
+                                }
+                                if (wantsDaisy) NativeGeminiDaisyExport.generateWithSynthesizer(
+                                    text, book.title, voice, notifyProgress, render
+                                ) else NativeGeminiAudioExport.generateWithSynthesizer(
+                                    context, text, voice, format, notifyProgress, render
+                                )
+                            }
+                        } else if (wantsDaisy) NativeGeminiDaisyExport.generate(
                             context, text, book.title, voice, notifyProgress
                         ) else NativeGeminiAudioExport.generate(
                             context, text, voice, format, notifyProgress

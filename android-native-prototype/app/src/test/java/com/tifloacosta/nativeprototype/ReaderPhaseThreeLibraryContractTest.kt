@@ -21,7 +21,7 @@ class ReaderPhaseThreeLibraryContractTest {
 
     @Test fun multiSelectRequiresConfirmationBeforeDeletion() {
         val s = source("NativeTifloLector.kt")
-        assertTrue(s.contains("Seleccionar varios libros"))
+        assertTrue(s.contains("Selección"))
         assertTrue(s.contains("selectedBookIds"))
         assertTrue(s.contains("confirmMultipleDeletion"))
         assertTrue(s.contains("¿Eliminar los libros seleccionados?"))

@@ -60,6 +60,7 @@ enum NativeGeminiDaisyExport {
     }
 
     static func generate(text: String, title: String, voice: String,
+                         engine: NativeGeminiAudioExport.Engine = .gemini,
                          progress: @escaping @MainActor (Int, Int) -> Void) async throws -> URL {
         let segments = try units(text)
         let uuid = UUID().uuidString
@@ -92,7 +93,8 @@ enum NativeGeminiDaisyExport {
             }
             if firstPar.isEmpty { firstPar = par }
             if let heading = segment.heading { headingPoints.append((heading, par)) }
-            let bytes = try await NativeGeminiSpeech.generate(spoken, voice: voice)
+            let bytes = try await NativeGeminiAudioExport.synthesize(
+                spoken, voice: voice, engine: engine)
             let pcm = try NativeGeminiAudioExport.pcm(bytes)
             let duration = Double(pcm.count) / 48000.0 // mono 16-bit PCM at 24 kHz
             guard duration > 0 else { throw NativeGeminiAudioExport.ExportError.empty }

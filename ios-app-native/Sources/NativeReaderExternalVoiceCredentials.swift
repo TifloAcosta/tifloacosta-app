@@ -1,5 +1,6 @@
 import SwiftUI
 import Security
+import UniformTypeIdentifiers
 
 /// API credentials are device-local and never included in exported reader libraries.
 /// Each provider gets its own Keychain item, accessible only when the device is unlocked.
@@ -91,6 +92,9 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
     @AppStorage("native-reader-phonon-voice") private var phononVoice = ""
     @State private var phononVoices: [String] = []
     @State private var phononLoadingVoices = false
+    @State private var showPhononImporter = false
+    @State private var phononLicenseAcknowledged = false
+    @AppStorage("native-reader-phonon-language") private var phononLanguage = "en"
     @StateObject private var geminiPreview = NativeGeminiPreview()
     @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
 
@@ -187,6 +191,27 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
                             .accessibilityAddTraits(.updatesFrequently)
                     }
                     Text("Phonon 31m es gratuito, funciona sin Internet después de instalarse y habla inglés. La biblioteca nativa debe estar incluida en la compilación.")
+                    Toggle("Respeto las licencias del modelo y sus voces", isOn: $phononLicenseAcknowledged)
+                    Button("Importar modelo Core ML ZIP") {
+                        showPhononImporter = true
+                    }
+                    .disabled(!phononLicenseAcknowledged || phononBusy)
+                    Picker("Idioma Phonon", selection: $phononLanguage) {
+                        Text("English").tag("en")
+                        Text("Español").tag("es")
+                        Text("Français").tag("fr")
+                        Text("Deutsch").tag("de")
+                        Text("Português").tag("pt")
+                    }
+                    .onChange(of: phononLanguage) { _, _ in
+                        NativePhononRuntime.unload()
+                        phononVoices = []
+                        if NativePhononRuntime.isUsable {
+                            Task { await loadPhononVoices() }
+                        }
+                    }
+                    Text("Para otros idiomas, importa un modelo Core ML compatible y comprueba sus condiciones de uso. Los modelos Phonon 40m y multilingües tienen licencia CC BY-NC.")
+
                     if NativePhononRuntime.isUsable {
                         if !phononVoices.isEmpty {
                             Picker("Voz Phonon", selection: $phononVoice) {
@@ -265,6 +290,39 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
         }
         .tifloScreenSurface()
         .navigationTitle("Motores externos")
+        .fileImporter(
+            isPresented: $showPhononImporter,
+            allowedContentTypes: [.zip],
+            allowsMultipleSelection: false
+        ) { result in
+            switch result {
+            case .success(let urls):
+                guard let url = urls.first, !phononBusy else { return }
+                phononBusy = true
+                phononMessage = "Verificando el modelo Core ML."
+                let granted = url.startAccessingSecurityScopedResource()
+                phononTask = Task {
+                    defer {
+                        if granted { url.stopAccessingSecurityScopedResource() }
+                        phononBusy = false
+                    }
+                    do {
+                        try await Task.detached(priority: .userInitiated) {
+                            try NativePhononModelStore.installUserBundle(zipURL: url)
+                        }.value
+                        NativePhononRuntime.unload()
+                        phononInstalled = NativePhononModelStore.isInstalled
+                        phononVoices = []
+                        phononMessage = "Modelo Phonon importado."
+                        await loadPhononVoices()
+                    } catch {
+                        phononMessage = error.localizedDescription
+                    }
+                }
+            case .failure(let error):
+                phononMessage = error.localizedDescription
+            }
+        }
         .onAppear {
             if NativePhononRuntime.isUsable && phononVoices.isEmpty {
                 Task { await loadPhononVoices() }

@@ -7,6 +7,12 @@ struct NativeFollowedPodcast: Codable, Identifiable, Equatable {
     let url: String
 }
 
+struct NativePodcastSavedEpisode: Codable, Identifiable {
+    let id: String
+    let title: String
+    let audioURL: String
+}
+
 private final class NativeOPMLReader: NSObject, XMLParserDelegate {
     var results: [NativeFollowedPodcast] = []
     func parser(_ parser: XMLParser, didStartElement elementName: String,
@@ -27,9 +33,11 @@ private final class NativeOPMLReader: NSObject, XMLParserDelegate {
 final class NativePodcastLibrary: ObservableObject {
     @Published private(set) var followed: [NativeFollowedPodcast] = []
     @Published private(set) var favorites: Set<String> = []
+    @Published private(set) var savedEpisodes: [NativePodcastSavedEpisode] = []
     @Published var notice = ""
     private let followedKey = "native-podcast-followed-v1"
     private let favoriteKey = "native-podcast-favorites-v1"
+    private let savedKey = "native-podcast-favorite-episodes-v1"
     private let lastSeenKey = "native-podcast-last-seen-v1"
 
     init() {
@@ -38,6 +46,10 @@ final class NativePodcastLibrary: ObservableObject {
             followed = values
         }
         favorites = Set(UserDefaults.standard.stringArray(forKey: favoriteKey) ?? [])
+        if let data = UserDefaults.standard.data(forKey: savedKey),
+           let episodes = try? JSONDecoder().decode([NativePodcastSavedEpisode].self, from: data) {
+            savedEpisodes = episodes.filter { favorites.contains($0.id) }
+        }
     }
 
     /// Only reports episodes after the previously encountered newest item.
@@ -62,8 +74,18 @@ final class NativePodcastLibrary: ObservableObject {
     }
 
     func toggleFavorite(_ episode: NativePodcastEpisode) {
-        if !favorites.insert(episode.id).inserted { favorites.remove(episode.id) }
+        if !favorites.insert(episode.id).inserted {
+            favorites.remove(episode.id)
+            savedEpisodes.removeAll { $0.id == episode.id }
+        } else {
+            savedEpisodes.removeAll { $0.id == episode.id }
+            savedEpisodes.insert(.init(id: episode.id, title: episode.title,
+                                      audioURL: episode.audioURL.absoluteString), at: 0)
+        }
         UserDefaults.standard.set(favorites.sorted(), forKey: favoriteKey)
+        if let data = try? JSONEncoder().encode(savedEpisodes) {
+            UserDefaults.standard.set(data, forKey: savedKey)
+        }
         notice = favorites.contains(episode.id) ? "Episodio añadido a favoritos." : "Episodio retirado de favoritos."
     }
 

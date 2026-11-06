@@ -85,6 +85,7 @@ fun NativeYouTubeSearch(
     onPlay: (CatalogItem) -> Unit
 ) {
     val scope = rememberCoroutineScope()
+    val accountContext = androidx.compose.ui.platform.LocalContext.current
     var input by remember { mutableStateOf("") }
     var lastQuery by remember { mutableStateOf("") }
     var page by remember { mutableStateOf(YouTubeNativeSearchPage()) }
@@ -111,6 +112,40 @@ fun NativeYouTubeSearch(
     }
 
     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        Text(if (english) "My YouTube subscriptions" else "Mis suscripciones de YouTube",
+            style = MaterialTheme.typography.titleMedium)
+        if (account.authenticated) {
+            Button(enabled = !account.subscriptionsBusy,
+                onClick = { scope.launch { account.loadSubscriptions() } }) {
+                Text(if (english) "Load subscribed channels" else "Consultar canales suscritos")
+            }
+            account.subscribedChannels.forEach { (id, title) ->
+                TextButton(onClick = {
+                    val channel = "https://www.youtube.com/channel/" + id
+                    // Only open an actual subscribed channel after explicit activation.
+                    try { android.content.Intent(android.content.Intent.ACTION_VIEW,
+                        android.net.Uri.parse(channel)).also {
+                        // Channel pages remain on YouTube; no playback is started automatically.
+                        accountContext.startActivity(it)
+                    } } catch (_: Exception) {}
+                }) { Text(title) }
+            }
+            if (account.subscriptionsNextPageToken.isNotBlank()) {
+                TextButton(enabled = !account.subscriptionsBusy,
+                    onClick = { scope.launch { account.loadSubscriptions(more = true) } }) {
+                    Text(if (english) "Show ten more channels" else "Mostrar diez canales más")
+                }
+            }
+            if (account.subscriptionsBusy) {
+                Text(if (english) "Loading subscriptions" else "Cargando suscripciones")
+            }
+            if (account.subscriptionMessage.isNotBlank()) Text(account.subscriptionMessage)
+        } else {
+            Button(onClick = onAuthorize) {
+                Text(if (english) "Sign in to Google to see subscriptions"
+                    else "Iniciar sesión con Google para ver suscripciones")
+            }
+        }
         Text(if (english) "Search public YouTube videos" else "Buscar vídeos públicos de YouTube",
             style = MaterialTheme.typography.titleMedium)
         OutlinedTextField(input, { input = it.take(150) }, modifier = Modifier.fillMaxWidth(),

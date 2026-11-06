@@ -6,6 +6,8 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Environment
 import android.util.Xml
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -280,7 +282,34 @@ private fun episodesFromRss(xml: String): List<NativeEpisode> {
 @Composable
 fun NativePodcastScreen(english: Boolean, media: List<MediaItem>) {
     val context = LocalContext.current
+    val library = remember { NativePodcastLibrary(context) }
+    var favorites by remember { mutableStateOf(library.favorites()) }
+    var followed by remember { mutableStateOf(library.subscriptions()) }
+    var libraryNotice by remember { mutableStateOf("") }
+    var followedEpisodes by remember { mutableStateOf<List<NativeEpisode>>(emptyList()) }
+    var followedTitle by remember { mutableStateOf("") }
+    var followedBusy by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
+    var opmlImportBusy by remember { mutableStateOf(false) }
+    val importOPML = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri != null && !opmlImportBusy) {
+            opmlImportBusy = true
+            libraryNotice = if (english) "Importing subscriptions…" else "Importando suscripciones…"
+            scope.launch {
+                try {
+                    val count = withContext(Dispatchers.IO) { library.importOPML(uri) }
+                    followed = library.subscriptions()
+                    libraryNotice = if (english) "Imported $count podcast subscriptions."
+                        else "Suscripciones importadas: $count."
+                } catch (_: Exception) {
+                    libraryNotice = if (english) "Could not import OPML."
+                        else "No se pudo importar el archivo OPML."
+                } finally {
+                    opmlImportBusy = false
+                }
+            }
+        }
+    }
     var episodes by remember { mutableStateOf<List<NativeEpisode>>(emptyList()) }
     var status by remember { mutableStateOf("") }
     var chosen by remember { mutableStateOf<NativeEpisode?>(null) }
@@ -303,8 +332,98 @@ fun NativePodcastScreen(english: Boolean, media: List<MediaItem>) {
             status = if (english) "Using the saved podcast list" else "Utilizando la lista de podcasts guardada"
         }
     }
+    fun playEpisode(episode: NativeEpisode) {
+        chosen = episode
+        playing = false
+        status = if (english) "Preparing audio" else "Preparando audio"
+        runCatching {
+            player.reset()
+            player.setDataSource(episode.url)
+            player.setOnPreparedListener {
+                duration = it.duration.coerceAtLeast(0).toFloat()
+                position = 0f
+                status = ""
+                it.start()
+                playing = true
+            }
+            player.setOnErrorListener { _, _, _ ->
+                status = if (english) "Cannot play episode" else "No se puede reproducir"
+                playing = false
+                true
+            }
+            player.prepareAsync()
+        }.onFailure { status = if (english) "Audio error" else "Error de audio" }
+    }
     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
         if (status.isNotBlank()) Text(status)
+        Text(if (english) "Podcast library" else "Biblioteca de pódcast",
+            style = MaterialTheme.typography.titleMedium, modifier = Modifier.semantics { heading() })
+        Button(onClick = {
+            library.follow("Canal TifloAcosta", "https://anchor.fm/s/5b48ca28/podcast/rss")
+            followed = library.subscriptions()
+            libraryNotice = if (english) "Subscription saved." else "Suscripción guardada."
+        }) { Text(if (english) "Follow TifloAcosta podcast" else "Seguir el pódcast TifloAcosta") }
+        Button(enabled = !opmlImportBusy, onClick = { importOPML.launch(arrayOf("text/xml", "application/xml", "text/x-opml", "*/*")) }) {
+            Text(if (english) "Import OPML subscriptions" else "Importar suscripciones OPML")
+        }
+        Text(if (english) "Favorite episodes: ${favorites.size}" else "Episodios favoritos: ${favorites.size}")
+        library.savedEpisodes().forEach { saved ->
+            TextButton(onClick = { playEpisode(NativeEpisode(saved.title, saved.url)) }) {
+                Text((if (english) "Play favorite: " else "Reproducir favorito: ") + saved.title)
+            }
+            TextButton(onClick = {
+                library.toggleFavoriteEpisode(saved.title, saved.url)
+                favorites = library.favorites()
+            }) {
+                Text((if (english) "Remove favorite: " else "Quitar favorito: ") + saved.title)
+            }
+        }
+        if (libraryNotice.isNotBlank()) Text(libraryNotice)
+        followed.forEach { podcast ->
+            Text(podcast.title)
+            TextButton(enabled = !followedBusy, onClick = {
+                followedTitle = podcast.title
+                followedBusy = true
+                libraryNotice = if (english) "Loading followed episodes" else "Consultando episodios seguidos"
+                scope.launch {
+                    try {
+                        followedEpisodes = withContext(Dispatchers.IO) {
+                            episodesFromRss(limitedResponse(podcast.url))
+                        }
+                        val newCount = withContext(Dispatchers.IO) {
+                            library.recordFeedCheck(podcast.url, followedEpisodes.map { it.url })
+                        }
+                        libraryNotice = if (followedEpisodes.isEmpty()) {
+                            if (english) "No playable episodes" else "Sin episodios compatibles"
+                        } else if (english) "$newCount new episodes since the previous check."
+                        else "$newCount episodios nuevos desde la consulta anterior."
+                    } catch (_: Exception) {
+                        followedEpisodes = emptyList()
+                        libraryNotice = if (english) "Could not load podcast feed"
+                            else "No se pudo consultar el canal."
+                    } finally { followedBusy = false }
+                }
+            }) { Text((if (english) "Browse episodes: " else "Consultar episodios: ") + podcast.title) }
+            TextButton(onClick = {
+                library.unfollow(podcast.url)
+                followed = library.subscriptions()
+            }) { Text((if (english) "Unfollow: " else "Dejar de seguir: ") + podcast.title) }
+        }
+        if (followedBusy) Text(if (english) "Loading episodes" else "Cargando episodios")
+        if (followedEpisodes.isNotEmpty()) {
+            Text(followedTitle, style = MaterialTheme.typography.titleMedium)
+            followedEpisodes.take(100).forEach { episode ->
+                TextButton(onClick = { playEpisode(episode) }) {
+                    Text((if (english) "Play: " else "Reproducir: ") + episode.title)
+                }
+                TextButton(onClick = {
+                    library.toggleFavoriteEpisode(episode.title, episode.url)
+                    favorites = library.favorites()
+                }) { Text((if (episode.url in favorites)
+                    (if (english) "Remove favorite: " else "Quitar de favoritos: ")
+                    else (if (english) "Add favorite: " else "Añadir a favoritos: ")) + episode.title) }
+            }
+        }
         chosen?.let { current ->
             Text(current.title, style = MaterialTheme.typography.titleMedium)
             androidx.compose.foundation.layout.Row {
@@ -340,27 +459,16 @@ fun NativePodcastScreen(english: Boolean, media: List<MediaItem>) {
         LazyColumn {
             items(episodes.take(100), key = { it.url }) { episode ->
                 OutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = {
-                    chosen = episode
-                    playing = false
-                    status = if (english) "Preparing audio" else "Preparando audio"
-                    runCatching {
-                        player.reset()
-                        player.setDataSource(episode.url)
-                        player.setOnPreparedListener {
-                            duration = it.duration.coerceAtLeast(0).toFloat()
-                            position = 0f
-                            status = ""
-                            it.start()
-                            playing = true
-                        }
-                        player.setOnErrorListener { _, _, _ ->
-                            status = if (english) "Cannot play episode" else "No se puede reproducir"
-                            playing = false
-                            true
-                        }
-                        player.prepareAsync()
-                    }.onFailure { status = if (english) "Audio error" else "Error de audio" }
+                    playEpisode(episode)
                 }) { Text(episode.title) }
+                TextButton(onClick = {
+                    val added = library.toggleFavoriteEpisode(episode.title, episode.url)
+                    favorites = library.favorites()
+                    libraryNotice = if (english) (if (added) "Added to favorites." else "Removed from favorites.")
+                        else (if (added) "Añadido a favoritos." else "Retirado de favoritos.")
+                }) { Text((if (episode.url in favorites)
+                    (if (english) "Remove favorite: " else "Quitar de favoritos: ")
+                    else (if (english) "Add favorite: " else "Añadir a favoritos: ")) + episode.title) }
             }
         }
     }

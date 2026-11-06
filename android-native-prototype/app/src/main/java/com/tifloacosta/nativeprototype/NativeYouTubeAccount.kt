@@ -53,6 +53,14 @@ class NativeYouTubeAccount(private val context: Context) {
         private set
     var videoState by mutableStateOf(AccountVideoState())
         private set
+    var subscribedChannels by mutableStateOf<List<Pair<String, String>>>(emptyList())
+        private set
+    var subscriptionsNextPageToken by mutableStateOf("")
+        private set
+    var subscriptionMessage by mutableStateOf("")
+        private set
+    var subscriptionsBusy by mutableStateOf(false)
+        private set
 
     private fun aesKey(): SecretKey {
         val keystore = KeyStore.getInstance("AndroidKeyStore").apply { load(null) }
@@ -116,6 +124,9 @@ class NativeYouTubeAccount(private val context: Context) {
         expiry = 0
         authenticated = false
         videoState = AccountVideoState()
+        subscribedChannels = emptyList()
+        subscriptionsNextPageToken = ""
+        subscriptionMessage = ""
     }
 
     fun signOut() {
@@ -201,6 +212,35 @@ class NativeYouTubeAccount(private val context: Context) {
             val data = api("session")
             if (!data.optBoolean("authenticated")) expire()
         } catch (_: Exception) { /* A network failure should not discard the user's authorization. */ }
+    }
+
+    suspend fun loadSubscriptions(more: Boolean = false) {
+        if (!authenticated || subscriptionsBusy ||
+            (more && subscriptionsNextPageToken.isBlank())) return
+        subscriptionsBusy = true
+        subscriptionMessage = ""
+        try {
+            val route = "subscriptions" + if (more)
+                "?pageToken=" + Uri.encode(subscriptionsNextPageToken) else ""
+            val response = api(route)
+            val items = response.optJSONArray("items")
+            val fresh = (0 until (items?.length() ?: 0)).mapNotNull { i ->
+                val item = items?.optJSONObject(i) ?: return@mapNotNull null
+                val id = item.optString("id")
+                if (!id.matches(Regex("UC[A-Za-z0-9_-]{22}"))) return@mapNotNull null
+                id to item.optString("title").ifBlank { id }
+            }
+            subscribedChannels = if (more) (subscribedChannels + fresh).distinctBy { it.first }
+                else fresh.distinctBy { it.first }
+            subscriptionsNextPageToken = response.optString("nextPageToken")
+            if (subscribedChannels.isEmpty())
+                subscriptionMessage = "No hay canales suscritos."
+        } catch (error: Exception) {
+            if (error.message == "SESSION_EXPIRED") expire()
+            subscriptionMessage = errorText(error.message.orEmpty())
+        } finally {
+            subscriptionsBusy = false
+        }
     }
 
     suspend fun loadVideoState(videoId: String) {

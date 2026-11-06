@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "feature/android-native-compose-prototype-*"
+      - "feat/android-phase5-videos-podcasts-20261106"
     paths:
       - "android-native-prototype/**"
       - ".github/workflows/android-native-prototype.yml"

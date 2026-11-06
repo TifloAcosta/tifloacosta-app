@@ -1,5 +1,270 @@
 [
   {
+    "id": "9to5mac-0f9a5245a6dfcf63",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/05/apple-explains-how-to-turn-off-the-new-macbook-pros-glowing-logo/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-06T01:48:42.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple explains how to turn off the new MacBook Pro’s glowing logo",
+        "summary": "While the illuminated Apple logo on the new MacBook Pro drew one of the biggest cheers during last week’s announcement, Apple knows that not everyone will want to keep it on. Here’s the company’s official guide to turning it off. more…",
+        "body": "While the illuminated Apple logo on the new MacBook Pro drew one of the biggest cheers during last week’s announcement, Apple knows that not everyone will want to keep it on. Here’s the company’s official guide to turning it off.\n\nThe new MacBook Pro with PROLED XDR Display marks the return of the illuminated Apple logo on its lid after a decade.\n\nAs Chance Miller explained in his review of the new MacBook Pro, “unlike older MacBooks, which used light from the display’s backlight to illuminate the logo, the new OLED MacBook Pro has no backlight to draw from, requiring a different approach.”\n\nHe added that, as with the old Macs, the logo’s brightness is tied to the screen brightness, though it also accounts for overall ambient brightness. He also noted that “when the MacBook Pro is closed, the logo looks like polished metal, just like it has since the 2016 redesign.”\n\nThe review echoed some of the findings developer Gui Rambo shared on X a few days ago:\n\nNow, Apple has published an official support document that also explains how the illuminated logo works and how to turn it off completely.\n\nHere’s Apple:\n\nThe Apple logo behind the built-in display is illuminated whenever the Mac is awake. It automatically dims or brightens based on the brightness level of the built-in screen and the lighting conditions detected by the computer’s ambient light sensor. For all screen-brightness levels, the Apple logo will be dimmer in a dim room and brighter in a bright room.\n\nFor users who’d rather keep the logo turned off at all times, Apple explains that they can run the following command in Terminal, provided they have the administrator password:\n\nsudo defaults write com.apple.CoreBrightness LEBacklightMode -int 0\n\nTo revert the command and have the logo be illuminated again, users will need to run the following command:\n\nsudo defaults delete com.apple.CoreBrightness LEBacklightMode\n\nApple notes that reinstalling macOS will also turn the logo illumination back on.\n\nTo read Apple’s full support article, follow this link . And make sure to also catch 9to5Mac’s review of the new MacBook Pro ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-6d6e650ef124b44b",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/05/whatsapps-ai-powered-photo-expansion-tool-starts-rolling-out-on-ios/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-06T01:24:45.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "WhatsApp’s AI-powered photo expansion tool starts rolling out on iOS",
+        "summary": "Select WhatsApp users on TestFlight and in the main app are now seeing the option to expand an image in the app’s photo editor. Here are the details. more…",
+        "body": "Select WhatsApp users on TestFlight and in the main app are now seeing the option to expand an image in the app’s photo editor. Here are the details.\n\niPhone users with access to Apple Intelligence have a native AI-powered photo expansion tool called Extend , which lets users pinch or drag to expand an image beyond its original borders.\n\nThis feature, which is also present on AI chatbots such as ChatGPT and image-editing platforms like Photoshop , is now also making its way into WhatsApp.\n\nAccording to WABetaInfo , the platform is rolling out a Meta AI-powered image expansion tool, though it is currently limited to select users, primarily those in WhatsApp’s beta program via TestFlight.\n\nFrom WABetaInfo :\n\nWhen users select a photo in their chats, WhatsApp opens the drawing editor. Here, they can choose to apply some AI effect to improve it. Among these, users can find a new option to expand their photos. Once users select this option, Meta AI takes a few seconds to analyze the photo and generate the expanded version. Once the process is complete, WhatsApp shows the expanded photo in the drawing editor, and users can choose to send it. Note that this feature is also compatible with status updates.\n\nThe site notes that if the user isn’t happy with the result, they can tap an undo button to revert to the original and then try using the tool again to generate a different result.\n\nAs is usually the case with beta features on WhatsApp, there is no telling when it might become widely available.\n\nThat said, given that it has also rolled out to users in the Android beta and some users on the public iOS version already have access, a broader rollout might not be too far off.\n\nTo check out WABetaInfo ’s full report, follow this link ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-df9f5681538d943b",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/05/report-ipad-shipments-drop-27-5-as-global-tablet-market-plunges-in-q3/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-06T00:56:11.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Report: iPad shipments drop 27.5% as global tablet market plunges in Q3",
+        "summary": "Despite global iPad shipments dropping 27.5% year-over-year in the third calendar quarter, Apple maintained its lead in the tablet market, according to a new report released today. Here are the details. more…",
+        "body": "Despite global iPad shipments dropping 27.5% year-over-year in the third calendar quarter, Apple maintained its lead in the tablet market, according to a new report released today. Here are the details.\n\nAccording to a new report published by Omdia (via MacMagazine ), Apple shipped 11,5 million iPads during Q3 2026, accounting for 36% of all shipments.\n\nCompared to Q3 2025, that was a 27.5% drop in shipments, and a 2.2 percentage-point decline in market share.\n\nFor context, the global tablet market saw a 23% year-over-year drop, with total shipments going from 41.8 million to 32.2 million units. Omdia noted this was the lowest level in nearly three years.\n\nAs for Apple’s competitors, Samsung remained in second place with 16.9% market share, followed by Lenovo with 12.7%, Xiaomi with 7.3%, and Huawei with 5.7%.\n\nWhen it comes to shipment growth, Lenovo was the only company among the top five to post a positive result, up 11.9% year over year. Huawei saw the steepest decline at 43%, followed by Apple at 27.5%, Samsung at 21.7%, and Xiaomi at 10.6%.\n\nCommenting on the results, Omdia Research Manager Himani Mukka said supply constraints are “limiting vendors’ ability to deliver meaningful specification upgrades, leaving fewer compelling differences between new models and their predecessors.”\n\n“As a result,” she added, “consumers are increasingly expected to delay purchases until more substantial improvements become available.”\n\nTo read the full report, follow this link ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "freedom-scientific-blog-b31bcd974583543b",
+    "type": "news",
+    "sourceId": "freedom-scientific-blog",
+    "sourceName": "Freedom Scientific",
+    "sourceUrl": "https://blog.freedomscientific.com/",
+    "originalUrl": "https://training.vispero.com/getting-the-most-out-of-vispero-companion-tips-and-best-practices/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-06T00:52:11.000Z",
+    "categories": [
+      "windows",
+      "tecnologia-accesibilidad",
+      "jaws",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Getting the Most Out of Vispero Companion: Tips and Best Practices",
+        "summary": "Vispero Companion has grown from a helpful question-and-answer assistant into your one conversational home for all the AI features in JAWS. Whether you want to know how a feature works, get a description of a photo, explore a busy web page, or have a task done for you, it all happens in one familiar, accessible …",
+        "body": "Vispero Companion has grown from a helpful question-and-answer assistant into your one conversational home for all the AI features in JAWS. Whether you want to know how a feature works, get a description of a photo, explore a busy web page, or have a task done for you, it all happens in one familiar, accessible window. And because everything lives in a single conversation, you can keep asking follow-up questions without starting over. Here are some tips and best practices for getting the most out of Vispero Companion.\n\nWith Vispero Companion Actions, Companion does more than answer questions. Just ask, and it can help you:\n\nYou’re always in control. Companion only works when you ask, asks for your approval before executing important steps, and stops immediately when you press ESC.\n\nThe new Vispero Companion is available through the Early Adopter Program to users in the United States who are signed in to a Vispero account. To turn it on:\n\nOnce it’s on, press JAWS KEY+SPACEBAR followed by F1 to open Companion. The JAWS key is INSERT when using Desktop Keyboard layout, and CAPS LOCK when using Laptop layout.\n\nCompanion looks at what is on your screen to understand what you’re asking about. If the application window isn’t maximized, content can be cut off at the edges, and Companion may even pick up parts of other windows, such as the taskbar. Before you ask for help, place focus in the application you are working in and press WINDOWS+UP ARROW to maximize it.\n\nWhen Companion carries out a task for you, it moves to your application and works there, much as you would. If you type, click, switch windows, or open another program while it’s working, you can change what Companion sees and pull it away from the task. It’s best to leave the keyboard and mouse alone until the task is complete, and Companion will let you know what it did once it’s finished. If you need to stop it, press ESC .\n\nOnce Companion takes its first action in an application, it stays in that app for the rest of the conversation. Outlook and Word, for example, are treated as separate applications. If you want help with something in a different program such as a web browser, close Companion and relaunch it from that application.\n\nCompanion opens in its own window, just like any other application on your computer. When you’re finished with it, press ALT+F4 to close it, the same way you would close any other window.\n\nYou don’t need to know which feature or setting does the job. Just tell Companion what you need, for example:\n\nThe more detail you give, the fewer attempts Companion needs to get it right. “For example, if you are asking Companion to help you book a flight, “Set the departure date to November 14” will work better than “Select November 14,” because Companion will know which type of date you want to set.\n\nCompanion keeps track of your current conversation while it is open so you can ask a follow-up question or for the next step without starting over. When you’re ready to change topics, select New Request for a fresh start or close and then relaunch Companion from a different application.\n\nAlready have the Picture Smart and Page Explorer commands in muscle memory? Keep using them. They now bring their results right into Companion, where you can ask follow-up questions.\n\nCompanion asks before doing anything that can’t easily be undone, such as submitting a form. Take a moment to read what it’s about to do before you confirm, and check its report when the task is finished so you know exactly where things stand.\n\nYour feedback shapes what comes next for Companion. Select Give Feedback beside New Request to rate an answer or leave a comment. This button requires the Submit Anonymous Usage Data (telemetry) option to be turned on. If you’d prefer to leave it off, email your comments to SoftwareSuggestions@vispero.com . You can also select the Send Feedback button in the JAWS Early Adopter Program dialog.\n\nFor more information and a live demo, join us for our webinar on new features of JAWS, ZoomText, and Fusion 2027 at noon ET on Thursday, November 12. Have questions? Send an email to training@vispero.com ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-938024318e2141c1",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1028454/openai-data-center-nda",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-06T00:37:56.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI is stepping back from NDAs for data center projects",
+        "summary": "Following this week's midterms where voters resoundingly voiced their opposition to data center expansion, OpenAI today announced new commitments to communities where it is working on data center projects, including that it won't use non-disclosure agreements (NDAs) with public officials. Many data center projects have come under scrutiny for relying on NDAs to hide discussions […]",
+        "body": "Following this week's midterms where voters resoundingly voiced their opposition to data center expansion , OpenAI today announced new commitments to communities where it is working on data center projects, including that it won't use non-disclosure agreements (NDAs) with public officials.\n\nMany data center projects have come under scrutiny for relying on NDAs to hide discussions between developers and local officials. However, OpenAI says it is now allowing \"only narrow protections covering legitimate security information, trade secrets, or proprietary or competitively sensitive information.\" In October, Amazon announced it would no longer u …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-66e532cf6c35e50a",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1028412/airbnb-ai-travel-agent-q3-2026-earnings",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-06T00:06:12.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Airbnb is working on an AI travel agent",
+        "summary": "Airbnb plans to roll out an AI agent in the first half of 2027 that will help users plan and book travel, the company said in its Q3 2026 earnings shareholder letter released today. \"Today's AI agents are good at simple, routine tasks, like making a restaurant reservation or scheduling an appointment,\" Airbnb said. \"But […]",
+        "body": "Airbnb plans to roll out an AI agent in the first half of 2027 that will help users plan and book travel, the company said in its Q3 2026 earnings shareholder letter released today .\n\n\"Today's AI agents are good at simple, routine tasks, like making a restaurant reservation or scheduling an appointment,\" Airbnb said. \"But planning a trip on Airbnb is different.\" The company argued that its experience matching hosts and guests, its current role in being part of reservations already, and a \"new interface\" built \"specifically for travel\" gives it an edge.\n\nHere's how Airbnb says that new interface will work:\n\nWe don't think a traditional chatbo …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-8d2f3e84f0865f8f",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/security/2026/11/vulnerability-allows-attackers-to-log-into-some-linux-devices-sans-password/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-05T23:09:36.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meet *sshole, the vulnerability that lets hackers SSH into Linux devices",
+        "summary": "Certain configurations of Alpine are affected. Other distros may be as well.",
+        "body": "Devices running some configurations of Alpine Linux, and possibly other distributions, are affected by a decade-old vulnerability that allows attackers to log into devices with no password.\n\nThe vulnerability exists in the interaction between OpenSSH, the code library implementing SSH connections, and musl, a lightweight alternative to the libc library that, unlike most other Linux distributions, is used in Alpine. Further, OpenSSH using musl (pronounced muscle) must not use PAM (pluggable authentication modules), a framework that handles user authentication and account-access checks. Alpine is a lightweight, widely used Linux distribution. Other platforms may be affected if they use the same configurations.\n\nThere are two other conditions necessary for successful exploitation. First, a system must have at least one user account that’s accessible using a password that is hashed using the SHA256 or SHA512 functions. Second, the target system account must be configured to be passwordless, by way of specifying a \"*\" in the password field in /etc/shadow, the Linux file where password hashes are stored. Passwordless accounts are commonly used for accounts that use certificate-based authentication. This setting is common for certain types of accounts.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-484bd5f369f5edf6",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gadgets/2026/11/nasas-experimental-x-70-aircraft-is-a-big-question-mark/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-05T22:49:03.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "NASA unveils mysterious X-70 experimental aircraft using AI-generated image",
+        "summary": "NASA’s X-70 Fractal announcement comes as agency aims to grow X-plane fleet.",
+        "body": "NASA has announced a new experimental aircraft, the X-70 Fractal, that will supposedly feature reconfigurable flight-control technology and a modular design for swapping in different payloads. But much remains unknown about the aircraft’s design and development timeline, even as NASA administrator Jared Isaacman said the X-plane could take flight within two years.\n\nThe mystery surrounding NASA’s newest X-plane was exemplified by the agency’s press release, including an apparently AI-generated image of the X-70, showing a dark silhouette vaguely resembling a military fighter jet obscured by smoke. The news was announced by Isaacman during the UP.Summit held at the agency’s Kennedy Space Center in Florida on November 4.\n\n“The X-70 Fractal gives NASA a crewed, high-performance platform to test advanced flight-control, maneuverability, and other cutting-edge technologies in real flight,” Isaacman said. “Its modular design and ability to rapidly swap internal and external payloads will keep our teams flying, learning, and moving quickly from one experiment to the next.”\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-ac2204c8414dafa0",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/05/airbnb-says-its-launching-an-ai-travel-agent-in-the-first-half-of-2027/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-05T22:40:55.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Airbnb says it’s launching an AI travel agent in the first half of 2027",
+        "summary": "Airbnb says its upcoming AI agent will help travelers plan trips, compare options, manage bookings, and get assistance throughout their stay.",
+        "body": "Airbnb has teased its plans to build its own AI travel agent before, but on Thursday the company announced that the new AI feature will launch in the first half of 2027. In the company’s Q3 shareholder letter on Thursday , Airbnb also provided more detail about how the agent will work, what it will actually do, and how it’s different from a typical AI chatbot.\n\nIn prior interviews, CEO Brian Chesky sketched out the travel company’s approach to AI, describing a plan to build an AI agent that has a richer interface than a conventional chatbot. He also expressed his opinions about how chatbots aren’t the right interface for travel, noting that people take pleasure in the planning process and in anticipating a trip. Any agent that it built, then, shouldn’t take away from the inspiration and the browsing, he told TechCrunch in an interview last month.\n\nChesky today reiterated that belief, telling analysts on the earnings call that people won’t use one AI agent for everything.\n\n“Today’s AI agents like Muse and Instinct are good at simple routine tasks like making a restaurant reservation or scheduling an appointment. But planning a trip is different,” he said. “Travel is aspirational. Discovering where to go and where to stay is part of the experience. In fact, 80% of travelers say they enjoy spending time researching trips. People want to look at photos. They want to compare homes. They want to make decisions with people they’re traveling with,” he continued. “And I don’t think the general-purpose agents are the best to do that. So that is why we are building our own AI agent,” Chesky said.\n\nAirbnb described its agent as having a personalized interface that’s designed specifically for travel, where it will “build an interface” around a user’s question instead of simply responding as a chatbot would.\n\n“What we are doing is developing a custom-designed AI-native experience that responds to what guests are looking for,” Chesky said. “So instead of relying on traditional chat alone, which is very text-heavy — which, again, is definitely not the way you should plan travel, our agent draws from a library of hundreds of travel-specific interface components — maps, photos, comparisons, calendars, itineraries — and composes them in real time to match what they’re looking for.”\n\nThe exec said the agent will feel “a little bit like generative UI” as it’s designed to offer up “the right interface at the right time” for someone’s specific travel needs.\n\nIn its shareholder letter, the company touted that its nearly 20 years of experience in bringing hosts and guests together is informing how the agent is built, as it incorporates insights about how people both book and host on its platform. The agent will also be able to help travelers beyond the booking itself.\n\n“Our agent will be able to help guests throughout their trip — from changing a reservation or resolving a payment issue to getting help with refunds, rebooking, or 24-hour safety support. These are things an outside agent can’t easily do on its own,” the company wrote.\n\nOver time, Airbnb expects the agent will be able to help travelers with other aspects of their trip, including not only homes and hotels, but also services and experiences. Services and experiences are two areas that have become a bigger focus for the company following its redesign last year.\n\nWhile the company previously said to expect its AI agent sometime in the next year, it’s now more specifically committing to roll out the new technology to consumers in the first half of 2027.\n\nThe news of the agent’s release was delivered alongside strong third-quarter earnings, with revenue growing 19% to $4.87 billion, topping Wall Street estimates. It also raised its 2026 revenue growth forecast, which it now predicts will be in the high teens, instead of the mid-teens.\n\n“Airbnb is back in growth mode,” Chesky told analysts on the Q3 earnings call on Thursday. “It’s rare for a marketplace of our size to reaccelerate growth, but that’s exactly what we’re doing. Q3 was our fastest revenue growth in more than three years,” he added."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-a3430f4bff6ff0f5",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1028302/perplexity-teammates-ai-agents-work",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-05T22:26:50.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Perplexity launches its own take on AI agents for work",
+        "summary": "Perplexity is taking on OpenAI and Anthropic with its own work-focused AI agents. The startup's new always-on \"Teammates\" can take on multiple roles within a workspace, while pulling existing projects, skills, and memory from the Perplexity tools you already use. Teammates integrate with Perplexity Computer, an AI system that can deploy agents on your device […]",
+        "body": "Perplexity is taking on OpenAI and Anthropic with its own work-focused AI agents. The startup's new always-on \"Teammates\" can take on multiple roles within a workspace, while pulling existing projects, skills, and memory from the Perplexity tools you already use.\n\nTeammates integrate with Perplexity Computer , an AI system that can deploy agents on your device to complete tasks. But Perplexity says Teammates \"build on top\" of Computer by offering the ability to collaborate and complete \"ongoing, large-scale work.\" You can assign each Teammate different jobs that they can perform simultaneously - much like OpenAI's Dots and Claude Duet . Perple …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-d6f1c37f8eff3dfd",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gadgets/2026/11/sony-adds-usb-c-to-its-70s-era-mdr-3-walkman-headphones/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-05T21:56:36.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Sony revives the original Walkman headphones, adds USB-C",
+        "summary": "Orange ear cushions included.",
+        "body": "Color us nostalgic.\n\nSony has brought back the MDR-3-series headphones that debuted in 1979 alongside the Walkman TPS-L2 cassette player.\n\nOriginally called the \"MDR-3L2,\" the first Walkman headphones were known for their sleek, adjustable gray plastic headband, which extended via metal sliders and ended in signature orange, circular ear cushions. The lightweight, on-ear headphones are a contrast to the bulky headsets that are popular these days, which use wide, cushioned headbands for long-term comfort and large earcups that can support big drivers and are often heavily padded for noise isolation.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
     "id": "engadget-186ad199b5012814",
     "type": "news",
     "sourceId": "engadget",
@@ -18,32 +283,6 @@
         "title": "Bose recalls S1 Pro battery packs due to fire and overheating risks",
         "summary": "Over 670,000 units are being recalled in the US and Canada.",
         "body": "Over 670,000 units are being recalled in the US and Canada.\n\nIf you own a Bose S1 Pro or S1 Pro+, we have some good news and some bad news. The good news: the speaker itself is fine. The bad news: the battery pack inside may be less than fine. Bose and the US Consumer Product Safety Commission (CPSC) announced a recall on Thursday, covering nearly 635,000 lithium-ion battery packs in the US, as well as about 35,400 in Canada.\n\nThe affected packs can overheat and ignite, risking fire and burn injuries, so stop using yours right away if it's affected. Bose has received seven reports of batteries melting, smoking or catching fire. Among those were six cases of property damage. Fortunately, no injuries have been reported.\n\nThe S1 Pro and S1 Pro+ are Bose's portable PA speakers, designed for parties, gigs and the like. The speakers have a built-in mixer, support Bluetooth streaming and can go mobile using the removable battery pack. The S1 Pro+ supports a wireless mic and instrument transmitter, a separate $159 purchase.\n\nThe affected packs were sold from December 2017 to July 2026 at Bose, Best Buy, Amazon, Walmart and other retailers. The battery packs came in the box with many of the speaker units, which cost about $700, and were available separately for between $100 and $160.\n\nNot every battery pack is being recalled. To find out if yours is, you'll need to remove the battery, find its 17-digit serial number, and check it against the recalled batches. If the battery's serial starts with 083723 , 078352 , 084105 , 078591 , 078592 , 084106 or 086409 , you'll want to sign up to get a free replacement on Bose's recall page . The company also provides more detailed instructions . While you wait for the replacement, you can still use the speaker on AC power.\n\nYou don't want to just toss the recalled lithium-ion batteries in the trash. Check with your local household hazardous waste center to find out how to dispose of them safely."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-de282d1da1583e0a",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/05/daily-november-5-2026/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-05T21:31:08.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "android",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "9to5Mac Daily: November 5, 2026 – MacBook Neo 2 rumors, watchOS 27.3",
-        "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
-        "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show."
       }
     },
     "media": null
@@ -92,55 +331,6 @@
         "title": "Google is ditching Firebase Studio soon, and it wants you to use its newer AI tools instead",
         "summary": "The company is going all-in on Antigravity and Google AI Studio and hopes developers will do the same.",
         "body": "The company is going all-in on Antigravity and Google AI Studio.\n\nIn March, Google announced it was \"sunsetting\" Firebase Studio , its online integrated development environment (IDE), in favor of coding tools that put AI at the center. The company's preference for Antigravity and Google AI Studio serves its broader push around Gemini, but it also leaves anyone who liked Firebase Studio's approach in the lurch.\n\nThe ability to create new workspaces and sign up to use Firebase Studio ended on June 22, and developers have until March 22, 2027 to export their work to another IDE before it's shut down completely and all remaining data is deleted. Until then, Firebase Studio is in limbo, and deciding on an alternative largely comes down to how developers want AI to be incorporated into their development process.\n\nGoogle conceived of Firebase Studio as a coding tool that could connect directly to Firebase, backend services it provides to developers that cover everything from databases to web hosting. From the launch of the IDE in 2025 , Google has imagined that AI agents would play a role in development. What's changed since then is how central AI has become. Firebase Studio offers an AI chatbot experience that can prototype and tweak apps and handle other development tasks, but the bulk of Firebase Studio is still devoted to editing code. In 2026, a growing number of coding projects start with a prompt, and thanks to the popularity of vibe coding , some users never even deal with the raw code.\n\nBoth of Google's newer coding tools, Antigravity and Google AI Studio, are designed for that reality, and since Firebase itself is sticking around and either tool can connect to it, a separate Firebase-focused IDE isn't essential. Google more or less framed its decision that way when it announced it was retiring the tool. \"To streamline your workflow and make it clearer where you should start building, we're beginning the process of sunsetting Firebase Studio,\" the company wrote in March.\n\nIf you'd prefer to stay in Google's ecosystem, you can either switch to Google AI Studio or Antigravity. Google AI Studio is \"the fastest path from prompt to full-stack production app,\" according to Google, which means its interface prioritizes prompts and chatting with AI. Like Firebase Studio, it's also web-based, so you can access it from any browser. In comparison, Antigravity is a desktop app that's meant to run locally on your computer. Its interface is designed for users to directly interact with their code, while also directing multiple AI agents that can work on their own. Notably, it also supports AI models other than Google's own.\n\nMost other coding tools tend to follow a similar logic, where the coder is a team leader for agents that handle the first pass. Cursor , now owned by SpaceX, is a popular option. Both Anthropic and OpenAI also have their own AI-focused coding tools in Claude Code and Codex , respectively. Using AI in projects can come with associated costs, either in the form of subscriptions, paying for tokens, or both. Which tools developers migrate to after Firebase Studio shuts down will likely be determined as much by price as by the interface and each tool's future."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-c4fa6e2faeae89bb",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/science/2026/11/getting-software-to-help-block-out-a-star-so-we-can-see-exoplanets/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-05T19:59:22.000Z",
-    "categories": [
-      "tecnologia-general",
-      "programas-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Software squeezes more data out of Webb Telescope for imaging exoplanets",
-        "summary": "Software optimizes a physical model of the telescope to reduce noise.",
-        "body": "With a huge and still-growing catalog of exoplanets, researchers are anxious to take the next steps: trying to infer what conditions are like on them, either by imaging them directly or by capturing the light that has passed through their atmosphere. Both are substantial challenges, given the presence of stars that are far, far brighter than light that has come to us via the planet.\n\nWhile telescopes can be fitted with devices called coronagraphs that block out much of a star's light, there are limits to their effectiveness, caused by noise from subtle variations in the telescope's configuration and pointing between observations. Now, researchers have developed a new software package that optimizes a physical model of the telescope in a way that allows us to better model these differences, producing low-noise imaging of exoplanets.\n\nCentral to this work is the concept of a point spread function. If you use a telescope to image a single point of light, it will not appear that way in the actual image. Instead, it will be slightly blurry and spread out, due to imperfections in the telescope hardware and the limits of our ability to keep it pointed accurately through the time it takes to image something. The mathematical description of how a telescope distorts a point of light is called its point spread function.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-58181849c68a314b",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/05/ios-27-3-changes-the-iphone-duo-keyboard-heres-how/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-05T19:52:53.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "programas-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27.3 changes the iPhone Duo keyboard, here’s how",
-        "summary": "iPhone Duo has only been available for a couple weeks, but Apple keeps improving the product with software enhancements. The latest arrives in the iOS 27.3 beta via a convenient keyboard update. more…",
-        "body": "iPhone Duo has only been available for a couple weeks, but Apple keeps improving the product with software enhancements. The latest arrives in the iOS 27.3 beta via a convenient keyboard update.\n\nIf you’re one of the fortunate early adopters who managed to get an iPhone Duo on or near launch day, you may have noticed that changes keep arriving via software updates.\n\niPhone Duo shipped with iOS 27.1, but just a few days later iOS 27.2 arrived and added Apple Pencil support and Edge Light for video calls.\n\nNow just about one week later, the iOS 27.3 beta has introduced even more changes.\n\nReachability lets you slide outer display content to the left or right to make it more reachable. And as highlighted by Beta Profiles on X , the keyboard has gotten an improvement too.\n\nThe keyboard refresh with narrower keys and smaller font makes it easier than before to type on the iPhone Duo’s outer screen, especially one-handed.\n\nIt’s a subtle difference, but one that early testers have found a clear upgrade.\n\nBy combining keyboard changes with Reachability, iOS 27.3 offers a noteworthy improvement to the one-handed iPhone Duo experience.\n\nHave you tried the new iPhone Duo keyboard in iOS 27.3? How is it working for you? Let us know in the comments."
       }
     },
     "media": null
@@ -195,82 +385,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-08dcd01c3abc0dbf",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/05/happy-hour-615/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-05T19:24:26.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "MacBook Pro with PROLED review, new iPad mini hands-on, and iOS 27.3 features",
-        "summary": "It’s another bumper week, with Chance’s hands-on reviews of both the new iPad mini and the new MacBook Pro to discuss, especially around just how good the OLED display looks, and how touchscreens fit into the Mac ecosystem. Also, iOS 27.3 is packed with a bunch of new features, including updates to Safari, Siri AI, StandBy and more, and the new audio recap features are now testable on Apple Watch. And in Happy Hour Plus, we talk about John Ternus’s first time hosting Apple’s quarterly earnings call. Subscribe at 9to5mac.com/join . Sponsored by Proton VPN : Keep your online activity private and secure. Get 75% off a two-year plan at protonvpn.com/happyhour . Sponsored by Square : Get up to $200 off Square hardware when you sign up at square.com/go/happyhour . #squarepod Sponsored by Gusto : Payroll, benefits, and HR all in one place. Get three months free when you run your first payroll at gusto.com/happyhour . Sponsored by Cash App : Download Cash App today. Click here to get started: https://click.cash.app/ui6m/i4d1b1x2 #CashAppPartner. Bitcoin services by Block, Inc. See the Bitcoin disclosures at cash.app/legal/podcast . more…",
-        "body": "It’s another bumper week, with Chance’s hands-on reviews of both the new iPad mini and the new MacBook Pro to discuss, especially around just how good the OLED display looks, and how touchscreens fit into the Mac ecosystem. Also, iOS 27.3 is packed with a bunch of new features, including updates to Safari, Siri AI, StandBy and more, and the new audio recap features are now testable on Apple Watch.\n\nAnd in Happy Hour Plus, we talk about John Ternus’s first time hosting Apple’s quarterly earnings call. Subscribe at 9to5mac.com/join .\n\nChance Miller\n\nBenjamin Mayo\n\nSubscribe to 9to5Mac Happy Hour Plus ! Support Benjamin and Chance directly with Happy Hour Plus! 9to5Mac Happy Hour Plus includes:\n\nJoin for $5 per month or $50 a year at 9to5mac.com/join ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-4d2a15f049f2cb22",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/05/metas-warns-that-election-backlash-against-data-centers-could-make-ai-expansion-harder/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-05T19:12:39.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta warns that election backlash against data centers could make AI expansion harder",
-        "summary": "Meta warns that growing political opposition to data centers could threaten future AI investments, as communities push back against massive infrastructure projects.",
-        "body": "Meta president Dina Powell McCormick said that the Democratic wins in the midterm elections are going to make it a lot harder for companies to build data centers, adding that the industry has “not done as good a job as we needed to explain the benefits of these investments.”\n\nSpeaking at the WSJ Tech conference on Wednesday, the Meta exec pointed out that the backlash against data centers — which was very much on the ballot during this election season — was also tied to people’s feelings about AI technology overall.\n\n“The visible sort of manifestation of AI is a data center, and it’s something that people can say, ‘I don’t want this in my community,’” she explained. “I think there’s an underlying bigger issue, which is how people feel about AI in general.”\n\nMeta believes it could turn around the negative consumer sentiment around AI if it’s able to demonstrate the value, not only of the data centers coming to local communities, but also in the technology itself.\n\n“The stakes of who builds the technology that cures cancer, that gives access to education, that is also a very fundamental difference … Mark [Zuckerberg, Meta CEO] is very ‘long human,’ and he’s betting on humans more than machines,” Powell McCormick explained. “And that’s what we mean when we say the future is for everyone. That people should not be left behind. But the way to ensure that is that this technology is democratized, that people have access to it in a very fair and transparent way,” she said.\n\nThe exec also touted Meta’s experience in building data centers, saying that the company has been doing so for 20 years, as it takes a lot of compute power to offer the products it does in the social networking space. Today, the company has data centers in 23 states, she said, and five of them, including one in Texas, are planned as projects of 1 gigawatt or more.\n\nBut Meta is now worried that it could lose some of its investments after politicians ran on anti-data-center platforms during the midterms.\n\n“I think it’s going to be harder,” Powell McCormick said, describing what the future of building data centers looks like. “It has been hard, I should say, but I also think that it’s becoming clear what models work, and the states want those models that work.”\n\nSpecifically, communities only want data centers when it benefits them in some way, she explained, laying out the approach that Meta today uses to close its data center deals in local communities.\n\nSuccessful projects see Meta paying for its own electricity, directing any tax surpluses as a result of the data centers toward teachers and first responders, keeping the labor force local, and getting bipartisan support for the project, among other things.\n\nGoing forward, she expects data center projects to come under more review and be weighed against whether the constituents actually want them.\n\nMeta has pinned its hopes on its AI investments, particularly its consumer AI agent Muse scaling far beyond the 10 million users it has today, to become a business that one day serves billions. But even if that’s not the case, it believes that its investments in data centers will not be for nothing, as the compute itself will be valuable.\n\n“We’re getting calls every day to lease that compute [we’ve built], and so one way or another, we’re seeing a path to monetization,” Powell McCormick said."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-cf542ceef966e9e8",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1028015/meta-muse-ai-voice-mode-expressive-avatar",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-05T19:03:04.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Muse has a voice mode now",
-        "summary": "Meta now lets you have voice conversations with your Muse AI agent in real time, CEO Mark Zuckerberg announced today. The feature has been rolled out to me, and I gave it a spin on the iOS app while writing this article. As you chat with your Muse agent, the avatar at the top of […]",
-        "body": "Meta now lets you have voice conversations with your Muse AI agent in real time, CEO Mark Zuckerberg announced today .\n\nThe feature has been rolled out to me, and I gave it a spin on the iOS app while writing this article. As you chat with your Muse agent, the avatar at the top of your conversation animates in time with the words that it's saying. You can also change the tone of the voice by just asking your agent about what you want and letting it decide or by browsing through a bunch of options in the avatar settings.\n\nIn my brief tests, my Muse agent responds quickly over voice, though it occasionally pauses while it's looking up infor …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-apps-7e5a05a96328b998",
     "type": "news",
     "sourceId": "applevis-apps",
@@ -290,101 +404,6 @@
         "title": "My Little Window",
         "summary": "Grow a tiny garden on a sunlit windowsill. Plant a seed, watch it sprout in real time, and come back to a bloom. No ads, ever. My Little Window is a gentle idle garden that grows even while the app is closed. There is no failure here. Nothing withers, nothing rushes you, and every plant is happy to wait. GROW IN REAL TIME Seeds mature on their own schedule, from a one minute pothos to a full day jade. Water them, mist them, give them sun. Well tended plants sell for more. COLLECT THEM ALL Every home has twenty species for your Plant Book, 240 in all, and every one hides a rare variant with its own look. Open seed packs, chase rares, and cross-breed two seeds for a chance at something special. A JOURNEY OF LITTLE HOMES Complete a home to travel down the path to the next: twelve homes across four chapters, each with its own window, its own plants and its own rooms. • The Meadow: a woodland cabin, a suburban flower garden and a farmhouse kitchen garden. • Warm Shores: a beach cottage, a harbor and a lighthouse, where messages in bottles wash up on your sill. • Country Lanes: an English cottage garden, a prairie homestead and a hillside burrow, where bees visit your blooms and leave new seeds. • Sun & Stone: a Tuscan vineyard house, a Moroccan riad and a desert adobe, where every bloom you sell becomes a tile for a mosaic wall. More homes are on the way. MAKE IT YOURS Coins from your blooms furnish five cozy rooms in every home. Every armchair, shelf, and lamp gives your garden a lasting boost, from faster growth to luckier packs. A LIVING WINDOW Morning light, golden hour, starry nights, and quiet rain move across your window through the day. Animal friends wander by. A daily gift waits each morning, and streaks make it sweeter. KIND BY DESIGN No ads. No energy bars. No pressure. Gems can speed things up, but everything in the game can be earned for free. Pull up a chair by the window. Your garden is already growing.",
         "body": "Grow a tiny garden on a sunlit windowsill. Plant a seed, watch it sprout in real time, and come back to a bloom. No ads, ever.\n\nMy Little Window is a gentle idle garden that grows even while the app is closed. There is no failure here. Nothing withers, nothing rushes you, and every plant is happy to wait.\n\nGROW IN REAL TIME Seeds mature on their own schedule, from a one minute pothos to a full day jade. Water them, mist them, give them sun. Well tended plants sell for more.\n\nCOLLECT THEM ALL Every home has twenty species for your Plant Book, 240 in all, and every one hides a rare variant with its own look. Open seed packs, chase rares, and cross-breed two seeds for a chance at something special.\n\nA JOURNEY OF LITTLE HOMES Complete a home to travel down the path to the next: twelve homes across four chapters, each with its own window, its own plants and its own rooms. • The Meadow: a woodland cabin, a suburban flower garden and a farmhouse kitchen garden. • Warm Shores: a beach cottage, a harbor and a lighthouse, where messages in bottles wash up on your sill. • Country Lanes: an English cottage garden, a prairie homestead and a hillside burrow, where bees visit your blooms and leave new seeds. • Sun & Stone: a Tuscan vineyard house, a Moroccan riad and a desert adobe, where every bloom you sell becomes a tile for a mosaic wall. More homes are on the way.\n\nMAKE IT YOURS Coins from your blooms furnish five cozy rooms in every home. Every armchair, shelf, and lamp gives your garden a lasting boost, from faster growth to luckier packs.\n\nA LIVING WINDOW Morning light, golden hour, starry nights, and quiet rain move across your window through the day. Animal friends wander by. A daily gift waits each morning, and streaks make it sweeter.\n\nKIND BY DESIGN No ads. No energy bars. No pressure. Gems can speed things up, but everything in the game can be earned for free.\n\nPull up a chair by the window. Your garden is already growing."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-79d7f5046f862d91",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1027652/anthropic-claude-plaid-personal-finance",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-05T18:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Claude AI can plug directly into your bank account",
-        "summary": "Anthropic has a new pitch for managing your personal finances: let Claude do it instead, with a new Personal Finance feature that connects it to your bank and card accounts via the Plaid bank bridging platform. You can ask the chatbot \"where did my money go this month,\" for example, and it'll create an overview […]",
-        "body": "Anthropic has a new pitch for managing your personal finances: let Claude do it instead, with a new Personal Finance feature that connects it to your bank and card accounts via the Plaid bank bridging platform. You can ask the chatbot \"where did my money go this month,\" for example, and it'll create an overview with a breakdown of spending by category, including rent and utilities, shopping, and food. Claude can also answer broader questions around what bills are left before your next payday, if you can afford big purchases like holiday trips, and how much money you could be saving each month.\n\nIts access is read-only, and with Plaid facilit …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-c42086635c4622a8",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1026927/total-repudiation-the-blue-wave-is-about-to-hit-ai",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-05T17:51:52.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "‘Total repudiation’: The blue wave is about to hit AI",
-        "summary": "On Tuesday night, Democrats made history as they took control of the House and the Senate, and a blue wave swept through traditionally red and swing states - with the nation's first Black woman governor elected in Georgia, the country's first Native American woman governor elected in New Mexico, and a Maine Senator ceding to […]",
-        "body": "On Tuesday night, Democrats made history as they took control of the House and the Senate, and a blue wave swept through traditionally red and swing states - with the nation's first Black woman governor elected in Georgia, the country's first Native American woman governor elected in New Mexico, and a Maine Senator ceding to a Democrat after 30 years in office. In these and other campaigns, one theme kept coming up : holding AI companies accountable to the American people. Now, the AI industry is left considering the prospect of regulation, data center construction slowdowns, and more.\n\nPublicly, most major AI company CEOs have remained silen …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-2662e15ee000b319",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/gaming/2026/11/gamers-go-to-ridiculous-lengths-to-improve-gta-vi-with-nvidias-dlss-5/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-05T17:40:27.000Z",
-    "categories": [
-      "tecnologia-general",
-      "programas-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Gamers go to ridiculous lengths to \"improve\" GTA VI with Nvidia's DLSS 5",
-        "summary": "Using a capture card and open source software to run PS5 video through a PC GPU.",
-        "body": "While the upcoming Grand Theft Auto VI won't be available on PC this month, some gamers are making ridiculous preparations to use their PC graphics cards to apply Nvidia's DLSS 5 technology to the console exclusive.\n\nOn an explicitly unmoderated GTAVI subreddit, user RevolutionaryBus8208 lays out a proposed setup, which runs a PlayStation 5 through a 4K capture card to a PC. From there, the video signal is run through Veyra , an open source tool that can apply DLSS 5's AI-powered \"neural rendering\" to video content. The result—which also uses DLSS frame generation to increase the 30 fps source to a 90 fps output—is then piped back to a 4K TV, theoretically adding some of the benefits of a beefy PC graphics card to a console-exclusive game.\n\nTo demonstrate the potential of this setup, RevolutionaryBus8208 used Veyra to upscale the Grand Theft Auto VI Extended Look trailer posted in August. The resulting DLSS-ified version looks a bit better in places, with sharper background elements, subtler shadows, and more believable light scattering on some surfaces. But it also seems a bit washed out compared to the original video's deeper blacks and arguably suffers from an unnaturally smooth \"soap opera effect\" in some scenes.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-59097f7c8abf2c94",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/11/agility-robotics-nasdaq-debut-invites-scrutiny-of-humanoid-robot-market/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-05T12:00:41.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Agility Robotics' Nasdaq debut invites scrutiny of humanoid robot market",
-        "summary": "US leader in deploying humanoid robots goes public on the Nasdaq stock exchange.",
-        "body": "Humanoid robots remain unproven at scale and have not yet achieved widespread commercialization, compared with industrial robots that have decades of proven track records in warehouses and factories. That frank acknowledgment is among the risks outlined in a securities filing by Agility Robotics—the first dedicated developer of humanoid robots to become a publicly traded company in the United States.\n\nThe robotics company, headquartered in Salem, Oregon, previously became the first to achieve full-time commercial deployment of humanoid robots at a customer warehouse in 2024. Now, Agility’s public listing on the Nasdaq stock exchange as of November 5 has come with financial disclosures detailing how the company plans to build a business around renting out or selling humanoid robots to perform manual labor.\n\n“When we are doing robots as a service, it is much lower risk for customers to use it because they are getting a return on investment on day one,” Jonathan Hurst , co-founder and chief robot officer at Agility Robotics, told Ars. \"Because they're paying a rate that is comparable to the human labor rate, and that makes the economics pretty straightforward.”\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -1771,31 +1790,6 @@
         "title": "Shortcut Menu",
         "summary": "Shortcut Menu lets the Android accessibility shortcut, such as holding both volume keys, turn your choice of screen reader or other accessibility service on or…",
         "body": "Published 3 October 2026 by Kareen Kiwan\n\nShortcut Menu lets the Android accessibility shortcut, such as holding both volume keys, turn your choice of screen reader or other accessibility service on or off. It works like the accessibility shortcut menu on iPhone:\n\nTurning a screen reader on turns any other screen reader off, so two never talk at once. Services with the same name, such as Google’s and Samsung’s TalkBack, are told apart by their maker, such as “TalkBack (Samsung)”. Pressing the shortcut again while the menu is open closes it.\n\nWithout Shortcut Menu, a shortcut with more than one feature on it asks which one to use, and that question is not spoken when no screen reader is on.\n\nWith Shizuku, run the same command without adb shell. In Settings, Accessibility, open Shortcut Menu and turn on its shortcut, such as the volume keys. Make Shortcut Menu the only feature on that shortcut. Open the Shortcut Menu app and choose which services the menu offers. Until you choose, it offers your screen readers. The app also shows whether the permission is granted and what each shortcut is assigned to, and has a button to try the menu. How it works The shortcut turns Shortcut Menu’s accessibility service on, and the service opens the menu. When the menu closes, the service turns itself off, so the next press turns it on again. A press while the menu is open turns the service off, which closes the menu.\n\nChoosing a service changes Android’s list of enabled accessibility services directly, so Android does not ask “Allow full control?” each time. The menu speaks with the phone’s text-to-speech engine, at the accessibility volume.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nSamsung UI is the only Android UI that offers 3 accessibility shortcuts: pressing and holding the volume keys, short pressing the power and volume up keys, and the accessibility onscreen button or gesture, based on the navigation mode being used. Other OEMs offer only the first and third shortcuts. Honor even excludes the accessibility button and gesture, leaving the user with only 1 shortcut, and that shortcut can only be assigned to 1 accessibility service. On UIs that allow more than 1 accessibility service to be assigned to the shortcut, Android asks the user to choose which one to activate every time the shortcut is used. However, this dialog is not accessible if no screen reader is running.\n\nShortcut Menu aims to address these shortcomings by allowing the user to choose the accessibility services they want to launch from the shortcut. The user can then launch any of the selected services in an accessible way. When no screen reader is active, the service speaks the items as the user moves their finger over them, and lifting the finger activates the selected service. If a screen reader is already active, the service makes sure to turn it off before launching another screen reader to avoid potential conflicts.\n\nSetting up the app requires an ADB command, which can be run either using ADB on a computer or directly on the phone through an ADB app that uses wireless debugging. Working with ADB is not covered here, but I personally used the ADB AppControl mobile app to enter the command that grants the app the required permission.\n\nThe app's UI is straightforward. It shows whether the permission has been granted and which shortcut is assigned to the service. It also includes a menu where you can turn services on or off without using the shortcut. The user can select which services should be included, although screen readers are checked by default. For me, Jieshuo Main, Jieshuo Helper Service, TalkBack, and AI Subtitles were all included.\n\nWhen using the shortcut, the app currently speaks through Google TTS. When a screen reader is active, it behaves like a regular screen that the screen reader can interact with.\n\nFor Samsung users who keep both Samsung TalkBack and Google's TalkBack on their devices and wish to switch between them, both can be added to the services list. I haven't tested this on a Samsung device to see if there are any issues. Anyway, starting with One UI 9, Samsung TalkBack is replaced with Google TalkBack, so there are no longer two TalkBack versions.\n\nLast Tested App version and Android version:\n\nApp version: 0.2, Android 16\n\n★★★★★ 5.0 / 5 based on 1 rating\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "freedom-scientific-blog-ebf1af5d85f12f9a",
-    "type": "news",
-    "sourceId": "freedom-scientific-blog",
-    "sourceName": "Freedom Scientific",
-    "sourceUrl": "https://blog.freedomscientific.com/",
-    "originalUrl": "https://training.vispero.com/beyond-the-basics-navigate-review-and-present-more-effectively-in-powerpoint-using-jaws/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-03T00:03:00.000Z",
-    "categories": [
-      "windows",
-      "tecnologia-accesibilidad",
-      "jaws"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Beyond the Basics: Navigate, Review, and Present More Effectively in PowerPoint Using JAWS",
-        "summary": "Advanced PowerPoint skills can help you navigate complex slides, examine visual elements, and deliver presentations with confidence. This webinar will demonstrate practical strategies for working more efficiently with PowerPoint using JAWS. Oct 15, 2026 12:00 PM in Eastern Time (US and Canada) In this webinar, we’ll show you how to: Join us to strengthen your PowerPoint skills …",
-        "body": "Advanced PowerPoint skills can help you navigate complex slides, examine visual elements, and deliver presentations with confidence. This webinar will demonstrate practical strategies for working more efficiently with PowerPoint using JAWS.\n\nOct 15, 2026 12:00 PM in Eastern Time (US and Canada)\n\nIn this webinar, we’ll show you how to:\n\nJoin us to strengthen your PowerPoint skills and take greater control of reviewing, improving, and delivering presentations with JAWS.\n\nVispero Presenters: Elizabeth Whitaker and Rachel Buchanan\n\nACVREP Credits: ACVREP credits will be available for those who attend the live webinar."
       }
     },
     "media": null

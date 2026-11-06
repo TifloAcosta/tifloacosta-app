@@ -2103,6 +2103,14 @@ struct NativeReadingScreen: View {
     var body: some View {
         readerSheets
         .onAppear {
+            phononReady = NativePhononRuntime.isUsable
+            if readingEngine == 2 {
+                if phononReady { loadPhononVoices() }
+                else {
+                    readingEngine = 0
+                    actionMessage = "El motor Phonon no está disponible en esta compilación."
+                }
+            }
             let initial = max(0, min(100, startPercent ?? latest.lastPercent ?? 0))
             trackIndex = min(max(0, startTrack ?? latest.lastTrackIndex ?? 0),
                              max(0, tracks.count - 1))

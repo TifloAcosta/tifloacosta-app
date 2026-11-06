@@ -916,6 +916,10 @@ private fun NativeReadingScreen(
     var perBookRate by rememberSaveable(book.id) {
         mutableFloatStateOf(prefs.getFloat("speed." + book.id, rate))
     }
+    var readingEngine by rememberSaveable(book.id) {
+        mutableIntStateOf(prefs.getInt("engine." + book.id, 0))
+    }
+    var engineMessage by remember(book.id) { mutableStateOf("") }
     var showMarks by rememberSaveable(book.id) { mutableStateOf(false) }
     var jumping by rememberSaveable(book.id) { mutableStateOf(false) }
     var jumpTo by rememberSaveable(book.id) { mutableFloatStateOf(0f) }
@@ -923,6 +927,12 @@ private fun NativeReadingScreen(
         NativeReaderPlaybackService.send(context, action, book.id, value)
     }
     fun startSpeech() {
+        if (readingEngine == 1 && !NativeVoiceCredentials(context).hasKey("gemini")) {
+            engineMessage = if (english) "Set your Gemini key under External engines."
+                else "Configura tu clave Gemini en Motores externos."
+            return
+        }
+        engineMessage = ""
         NativeReaderPlaybackService.start(context, book.id, audio = false,
             speedPercent = (perBookRate * 100f).toInt(),
             sleepMinutes = sleepMinutes[sleepIndex])
@@ -1091,7 +1101,22 @@ private fun NativeReadingScreen(
                 else (if (english) "Play" else "Reproducir")
             )
         }
-        if (!speaker.ready.value) {
+        ReaderCompactChoice(
+            if (english) "Engine" else "Motor",
+            if (english) listOf("System", "Gemini") else listOf("Sistema", "Gemini"),
+            readingEngine, english
+        ) { chosen ->
+            readingEngine = chosen
+            prefs.edit().putInt("engine." + book.id, chosen).apply()
+            if (active) send(NativeReaderPlaybackService.ACTION_VOICE)
+        }
+        if (readingEngine == 1) {
+            Text(if (english)
+                "Gemini sends text segments to Google and may use your quota. Choose System for local reading."
+                else "Gemini envía fragmentos del documento a Google y puede consumir cuota. Selecciona Sistema para lectura local.")
+        }
+        if (engineMessage.isNotEmpty()) Text(engineMessage)
+        if (!speaker.ready.value && readingEngine == 0) {
             Text(if (english) "Initializing Android speech…" else "Preparando la voz de Android…")
         }
         TextButton(onClick = { showTools = true },

@@ -20,9 +20,43 @@ internal object NativeGeminiDaisyExport {
         return "%02d:%02d:%06.3f".format(java.util.Locale.ROOT, hours, minutes, remainder)
     }
 
+
+    internal data class TextUnit(val text: String, val heading: String? = null)
+
+    /** Detect only headings explicitly preserved in extracted text, without guessing. */
+    internal fun units(text: String): List<TextUnit> {
+        NativeGeminiAudioExport.chunks(text) // Reject empty/oversized documents.
+        val headingPattern = Regex(
+            "^(?:#{1,6}[ \t]+|(?:capítulo|capitulo|sección|seccion)[ \t]+[0-9IVXLCDM]+(?:[.: -]|$))",
+            RegexOption.IGNORE_CASE
+        )
+        val result = mutableListOf<TextUnit>()
+        val lines = text.split("\n")
+        lines.forEachIndexed { index, line ->
+            val full = line + if (index == lines.lastIndex) "" else "\n"
+            val recognized = line.trim().matchesHeading(headingPattern)
+            if (recognized && line.isNotBlank()) {
+                result += TextUnit(full, line.trim())
+            } else if (full.isNotEmpty()) {
+                if (result.isNotEmpty() && result.last().heading == null &&
+                    result.last().text.length + full.length <= NativeGeminiAudioExport.CHUNK_SIZE) {
+                    val previous = result.removeAt(result.lastIndex)
+                    result += TextUnit(previous.text + full)
+                } else if (full.length <= NativeGeminiAudioExport.CHUNK_SIZE) {
+                    result += TextUnit(full)
+                } else {
+                    NativeGeminiAudioExport.chunks(full).forEach { result += TextUnit(it) }
+                }
+            }
+        }
+        return result
+    }
+
+    private fun String.matchesHeading(pattern: Regex) = pattern.containsMatchIn(this)
+
     suspend fun generate(context: Context, text: String, title: String, voice: String,
                          progress: suspend (Int, Int) -> Unit): ByteArray {
-        val parts = NativeGeminiAudioExport.chunks(text)
+        val parts = units(text)
         val identifier = "urn:uuid:" + UUID.randomUUID().toString()
         val escapedTitle = xml(title)
         val written = mutableListOf<String>()
@@ -30,9 +64,11 @@ internal object NativeGeminiDaisyExport {
         val manifest = mutableListOf<String>()
         val soundFiles = mutableListOf<Pair<String, ByteArray>>()
         var duration = 0.0
+        val chapterPoints = mutableListOf<Pair<String, String>>()
+        var firstPar = ""
         parts.forEachIndexed { index, fragment ->
             currentCoroutineContext().ensureActive()
-            val spoken = fragment.trim()
+            val spoken = fragment.text.trim()
             if (spoken.isNotEmpty()) {
                 val number = index + 1
                 val filename = "audio%04d.wav".format(java.util.Locale.ROOT, number)
@@ -43,7 +79,9 @@ internal object NativeGeminiDaisyExport {
                 duration += seconds
                 val id = "t$number"
                 val par = "par$number"
-                written += "<p id=\"$id\" smilref=\"sync.smil#$par\">" + xml(fragment) + "</p>"
+                if (firstPar.isEmpty()) firstPar = par
+                fragment.heading?.let { chapterPoints += it to par }
+                written += "<p id=\"$id\" smilref=\"sync.smil#$par\">" + xml(fragment.text) + "</p>"
                 parallel += "<par id=\"$par\"><text src=\"book.xml#$id\"/>" +
                     "<audio src=\"$filename\" clipBegin=\"00:00:00\" " +
                     "clipEnd=\"" + clock(seconds) + "\"/></par>"
@@ -74,18 +112,27 @@ internal object NativeGeminiDaisyExport {
             <head><meta name="dc:format" content="ANSI/NISO Z39.86-2005"/></head>
             <body><seq id="seq1">PLACEHOLDER_PARS</seq></body></smil>
         """.trimIndent().replace("PLACEHOLDER_PARS", parallel.joinToString("\n"))
+        val chapterNav = chapterPoints.mapIndexed { index, (name, target) ->
+            "<navPoint id=\"chapter\${index + 1}\" class=\"h2\" playOrder=\"\${index + 2}\">" +
+                "<navLabel><text>" + xml(name) + "</text></navLabel>" +
+                "<content src=\"sync.smil#" + target + "\"/></navPoint>"
+        }.joinToString("\n")
         val ncx = """
             <?xml version="1.0" encoding="utf-8"?>
             <!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
             <ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="es">
             <head><meta name="dtb:uid" content="$identifier"/>
-            <meta name="dtb:depth" content="1"/><meta name="dtb:totalPageCount" content="0"/>
+            <meta name="dtb:depth" content="DEPTH"/><meta name="dtb:totalPageCount" content="0"/>
             <meta name="dtb:maxPageNumber" content="0"/><meta name="dtb:totalTime" content="TOTALTIME"/></head>
             <docTitle><text>$escapedTitle</text></docTitle>
             <navMap><navPoint id="nav1" class="h1" playOrder="1">
-            <navLabel><text>$escapedTitle</text></navLabel><content src="sync.smil#$first"/>
+            <navLabel><text>$escapedTitle</text></navLabel><content src="sync.smil#FIRST_PAR"/>
+            CHAPTER_NAV
             </navPoint></navMap></ncx>
         """.trimIndent().replace("TOTALTIME", total)
+            .replace("DEPTH", if (chapterPoints.isEmpty()) "1" else "2")
+            .replace("FIRST_PAR", firstPar)
+            .replace("CHAPTER_NAV", chapterNav)
         val opf = """
             <?xml version="1.0" encoding="utf-8"?>
             <!DOCTYPE package PUBLIC "+//ISBN 0-9673008-1-9//DTD OEB 1.2 Package//EN" "http://openebook.org/dtds/oeb-1.2/oebpkg12.dtd">

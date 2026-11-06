@@ -18,8 +18,12 @@ final class NativePhononDriver {
             throw NativePhononRuntime.RuntimeError.modelMissing
         }
         if let model { return model }
+        let language = NativePhononRuntime.selectedLanguage
         let loaded = try await Phonon.load(
-            models: NativePhononModelStore.directory, language: .english)
+            models: NativePhononModelStore.directory, language: language)
+        guard loaded.languages.contains(language.rawValue) else {
+            throw NativePhononRuntime.RuntimeError.unsupportedLanguage
+        }
         model = loaded
         return loaded
     }
@@ -56,18 +60,33 @@ final class NativePhononDriver {
 
 enum NativePhononRuntime {
     enum RuntimeError: LocalizedError {
-        case engineUnavailable, modelMissing, empty
+        case engineUnavailable, modelMissing, unsupportedLanguage, empty
         var errorDescription: String? {
             switch self {
             case .engineUnavailable:
                 return "El motor Phonon nativo no está incluido en esta compilación."
             case .modelMissing:
                 return "Instala primero el modelo Phonon desde Motores externos."
+            case .unsupportedLanguage:
+                return "El modelo Phonon instalado no admite ese idioma."
             case .empty:
                 return "Phonon no ha generado sonido."
             }
         }
     }
+
+    #if canImport(PhononTTS)
+    @available(iOS 18.0, *)
+    static var selectedLanguage: Language {
+        switch UserDefaults.standard.string(forKey: "native-reader-phonon-language") ?? "en" {
+        case "es": return .spanish
+        case "fr": return .french
+        case "de": return .german
+        case "pt": return .portuguese
+        default: return .english
+        }
+    }
+    #endif
 
     static var isUsable: Bool {
         #if canImport(PhononTTS)
@@ -82,6 +101,13 @@ enum NativePhononRuntime {
         if #available(iOS 18, *) { return try await NativePhononDriver.shared.voiceNames() }
         #endif
         throw RuntimeError.engineUnavailable
+    }
+
+    @MainActor
+    static func unload() {
+        #if canImport(PhononTTS)
+        if #available(iOS 18, *) { NativePhononDriver.shared.unload() }
+        #endif
     }
 
     @MainActor

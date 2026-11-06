@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -31,6 +32,11 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import java.security.KeyStore
+import java.net.HttpURLConnection
+import java.net.URL
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.crypto.Cipher
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
@@ -93,6 +99,8 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
     var present by remember { mutableStateOf(credentials.hasKey("gemini")) }
     var message by remember { mutableStateOf("") }
     var confirmingDelete by remember { mutableStateOf(false) }
+    var checking by remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
 
     fun open(url: String) {
         try {
@@ -139,6 +147,43 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
             }
         }) { Text(if (english) "Save" else "Guardar") }
         if (present) {
+            Button(enabled = !checking, onClick = {
+                checking = true
+                scope.launch {
+                    message = try {
+                        val responseCode = withContext(Dispatchers.IO) {
+                            val token = credentials.read("gemini")
+                                ?: error("Missing key")
+                            val connection = URL(
+                                "https://generativelanguage.googleapis.com/v1beta/models"
+                            ).openConnection() as HttpURLConnection
+                            try {
+                                connection.requestMethod = "GET"
+                                connection.connectTimeout = 15000
+                                connection.readTimeout = 15000
+                                connection.setRequestProperty("x-goog-api-key", token)
+                                connection.responseCode
+                            } finally {
+                                connection.disconnect()
+                            }
+                        }
+                        when (responseCode) {
+                            in 200..299 -> if (english)
+                                "Connection OK. Audio generation is not active yet."
+                                else "Conexión correcta. La generación de audio aún no está activa."
+                            401, 403 -> if (english) "Key rejected or insufficient permissions."
+                                else "Clave rechazada o sin permisos."
+                            429 -> if (english) "Quota exceeded." else "Cuota agotada."
+                            else -> if (english) "Provider error: $responseCode"
+                                else "Error del proveedor: $responseCode"
+                        }
+                    } catch (_: Exception) {
+                        if (english) "Could not check connection."
+                        else "No se pudo comprobar la conexión."
+                    }
+                    checking = false
+                }
+            }) { Text(if (english) "Check" else "Comprobar") }
             if (confirmingDelete) {
                 Text(if (english) "Delete the saved key?" else "¿Eliminar la clave guardada?")
                 Button(onClick = {

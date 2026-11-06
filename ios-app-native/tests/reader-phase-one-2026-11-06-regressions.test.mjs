@@ -12,10 +12,10 @@ test('iOS saves an exact text offset while decoding legacy percentage-only docum
 });
 
 test('iOS reports bookmark save errors instead of announcing unconfirmed success', () => {
-  assert.match(reader, /func addBookmark\(_ document: NativeReadingDocument, at percent: Int\) -> Bool/);
+  assert.match(reader, /func addBookmark\(_ document: NativeReadingDocument, at offset: Int\) -> Bool/);
   assert.match(reader, /func addAudioBookmark\(_ document: NativeReadingDocument, track: Int, percent: Int\) -> Bool/);
   assert.match(reader, /No se pudo guardar la marca/);
-  assert.match(reader, /documents\[i\]\.markedPositions = previous/);
+  assert.match(reader, /documents\[i\]\.textBookmarks = previous/);
   assert.match(reader, /documents\[i\]\.audioBookmarks = previous/);
 });
 
@@ -25,4 +25,13 @@ test('iOS timer is not reset when an audio playlist automatically advances', () 
   assert.doesNotMatch(changedTrack[1], /applySleepTimer\(/);
   assert.match(reader, /onChange\(of: sleepIndex\)/);
   assert.match(reader, /self\?\.stop\(\)/);
+});
+
+test('iOS bookmarks and spoken word cursor use exact text offsets', () => {
+  assert.match(reader, /struct NativeTextBookmark: Codable, Hashable/);
+  assert.match(reader, /var textBookmarks: \[NativeTextBookmark\]\? = nil/);
+  assert.match(reader, /startTextOffset: Int\? = nil/);
+  assert.match(reader, /@Published private\(set\) var textUTF16Offset = 0/);
+  assert.match(reader, /onReceive\(speech\.\$textUTF16Offset\)/);
+  assert.match(reader, /library\.removeTextBookmark\(document, mark: mark\)/);
 });

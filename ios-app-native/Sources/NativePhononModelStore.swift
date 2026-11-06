@@ -97,8 +97,23 @@ enum NativePhononModelStore {
     }
 
     static func install(zipURL: URL) throws {
+        try installVerified(zipURL: zipURL, requireOfficialArchive: true)
+    }
+
+    /// User-provided Core ML exports (for instance Spanish 40m).
+    /// Each file must match bundle.json's SHA256; model licenses are accepted
+    /// by the user before import, not by TifloAcosta on their behalf.
+    static func installUserBundle(zipURL: URL) throws {
+        try installVerified(zipURL: zipURL, requireOfficialArchive: false)
+    }
+
+    private static func installVerified(zipURL: URL, requireOfficialArchive: Bool) throws {
         let fm = FileManager.default
-        guard try digest(zipURL) == archiveSHA256 else { throw InstallationError.checksum }
+        if requireOfficialArchive {
+            guard try digest(zipURL) == archiveSHA256 else {
+                throw InstallationError.checksum
+            }
+        }
         guard let archive = Archive(url: zipURL, accessMode: .read) else {
             throw InstallationError.invalidZIP
         }

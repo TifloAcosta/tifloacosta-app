@@ -2271,6 +2271,18 @@ struct NativeReadingScreen: View {
             persistPosition()
             speech.stop()
         }
+        .accessibilityAction(named: Text("Retroceder 30 segundos")) {
+            guard speech.hasAudio && !speech.isGeneratedSpeech else { return }
+            speech.skip(seconds: -30)
+            currentPercent = speech.audioPercent
+            persistPosition()
+        }
+        .accessibilityAction(named: Text("Avanzar 30 segundos")) {
+            guard speech.hasAudio && !speech.isGeneratedSpeech else { return }
+            speech.skip(seconds: 30)
+            currentPercent = speech.audioPercent
+            persistPosition()
+        }
         .accessibilityAction(named: Text("Añadir marca")) { addBookmark() }
         .accessibilityAction(named: Text("Avanzar diez por ciento")) {
             move(to: min(100, currentPercent + 10))

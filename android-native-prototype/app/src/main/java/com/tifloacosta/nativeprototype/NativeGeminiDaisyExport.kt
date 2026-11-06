@@ -13,6 +13,13 @@ internal object NativeGeminiDaisyExport {
     private fun xml(text: String) = text.replace("&", "&amp;").replace("<", "&lt;")
         .replace(">", "&gt;").replace("\"", "&quot;").replace("'", "&apos;")
 
+    private fun clock(seconds: Double): String {
+        val hours = seconds.toInt() / 3600
+        val minutes = (seconds.toInt() / 60) % 60
+        val remainder = seconds - (hours * 3600 + minutes * 60)
+        return "%02d:%02d:%06.3f".format(java.util.Locale.ROOT, hours, minutes, remainder)
+    }
+
     suspend fun generate(context: Context, text: String, title: String, voice: String,
                          progress: suspend (Int, Int) -> Unit): ByteArray {
         val parts = NativeGeminiAudioExport.chunks(text)
@@ -38,8 +45,8 @@ internal object NativeGeminiDaisyExport {
                 val par = "par$number"
                 written += "<p id=\"$id\" smilref=\"sync.smil#$par\">" + xml(fragment) + "</p>"
                 parallel += "<par id=\"$par\"><text src=\"book.xml#$id\"/>" +
-                    "<audio src=\"$filename\" clipBegin=\"0s\" " +
-                    "clipEnd=\"%.4fs\"/></par>".format(java.util.Locale.ROOT, seconds)
+                    "<audio src=\"$filename\" clipBegin=\"00:00:00\" " +
+                    "clipEnd=\"$TIME\"/></par>".replace("$TIME", clock(seconds))
                 manifest += "<item id=\"audio$number\" href=\"$filename\" media-type=\"audio/x-wav\"/>"
                 soundFiles += filename to wav
             }
@@ -48,7 +55,7 @@ internal object NativeGeminiDaisyExport {
         currentCoroutineContext().ensureActive()
         require(parallel.isNotEmpty()) { "No se ha generado audio." }
         val first = "par" + (parts.indexOfFirst { it.isNotBlank() } + 1)
-        val total = "%.3f".format(java.util.Locale.ROOT, duration)
+        val total = clock(duration)
         val dtbook = """
             <?xml version="1.0" encoding="utf-8"?>
             <!DOCTYPE dtbook PUBLIC "-//NISO//DTD dtbook 2005-1//EN" "http://www.daisy.org/z3986/2005/dtbook-2005-1.dtd">
@@ -78,7 +85,7 @@ internal object NativeGeminiDaisyExport {
             <navMap><navPoint id="nav1" class="h1" playOrder="1">
             <navLabel><text>$escapedTitle</text></navLabel><content src="sync.smil#$first"/>
             </navPoint></navMap></ncx>
-        """.trimIndent().replace("TOTALTIME", total + "s")
+        """.trimIndent().replace("TOTALTIME", total)
         val opf = """
             <?xml version="1.0" encoding="utf-8"?>
             <!DOCTYPE package PUBLIC "+//ISBN 0-9673008-1-9//DTD OEB 1.2 Package//EN" "http://openebook.org/dtds/oeb-1.2/oebpkg12.dtd">
@@ -88,14 +95,16 @@ internal object NativeGeminiDaisyExport {
             <dc:Title>$escapedTitle</dc:Title><dc:Language>es</dc:Language>
             <dc:Format>ANSI/NISO Z39.86-2005</dc:Format></dc-metadata>
             <x-metadata><meta name="dtb:multimediaType" content="audioFullText"/>
+            <meta name="dtb:multimediaContent" content="audio,text"/>
             <meta name="dtb:totalTime" content="TOTALTIME"/></x-metadata></metadata>
             <manifest>
+            <item id="opf" href="book.opf" media-type="text/xml"/>
             <item id="ncx" href="book.ncx" media-type="application/x-dtbncx+xml"/>
             <item id="text" href="book.xml" media-type="application/x-dtbook+xml"/>
             <item id="sync" href="sync.smil" media-type="application/smil"/>
             PLACEHOLDER_MANIFEST
             </manifest><spine toc="ncx"><itemref idref="sync"/></spine></package>
-        """.trimIndent().replace("TOTALTIME", total + "s")
+        """.trimIndent().replace("TOTALTIME", total)
             .replace("PLACEHOLDER_MANIFEST", manifest.joinToString("\n"))
         return ByteArrayOutputStream().use { bytes ->
             ZipOutputStream(bytes).use { zip ->

@@ -1213,6 +1213,10 @@ struct NativeReadingScreen: View {
     @State private var deletionError: String?
     @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
     @AppStorage("native-reader-reading-engine") private var readingEngine = 0
+    @AppStorage("native-reader-phonon-voice") private var phononVoice = ""
+    @State private var phononVoices: [String] = []
+    @State private var phononLoadMessage = ""
+    @State private var phononReady = NativePhononRuntime.isUsable
     @State private var audioExportTask: Task<Void, Never>?
     @State private var audioExportStatus = ""
     @State private var audioExportFormat: NativeGeminiAudioExport.Format = .mp3
@@ -1674,13 +1678,28 @@ struct NativeReadingScreen: View {
         }
     }
 
+    private func loadPhononVoices() {
+        guard NativePhononRuntime.isUsable else { return }
+        phononLoadMessage = "Cargando las voces instaladas de Phonon."
+        Task {
+            do {
+                let all = try await NativePhononRuntime.voices()
+                phononVoices = all
+                if phononVoice.isEmpty, let first = all.first { phononVoice = first }
+                phononLoadMessage = all.isEmpty ? "Este modelo no contiene voces disponibles." : ""
+            } catch {
+                phononLoadMessage = error.localizedDescription
+            }
+        }
+    }
+
     private var quickControls: some View {
         VStack(alignment: .leading, spacing: 6) {
             playbackRow
             if tracks.isEmpty {
                 NativeAdjustableChoice(
                     title: "Motor",
-                    choices: ["Sistema", "Gemini"],
+                    choices: phononReady ? ["Sistema", "Gemini", "Phonon"] : ["Sistema", "Gemini"],
                     selectedIndex: Binding(
                         get: { readingEngine },
                         set: { selected in
@@ -1689,6 +1708,7 @@ struct NativeReadingScreen: View {
                                 let wasPaused = speech.isPaused
                                 speech.stop()
                                 readingEngine = selected
+                                if selected == 2 { loadPhononVoices() }
                                 if wasPlaying {
                                     startTextSpeech()
                                     if wasPaused && speech.isPlaying { speech.pause() }
@@ -1714,6 +1734,28 @@ struct NativeReadingScreen: View {
                         )
                     )
                     Text("Gemini envía fragmentos del documento a Google. Puede consumir cuota. Selecciona Sistema para lectura local.")
+                        .font(.footnote)
+                } else if readingEngine == 2 {
+                    if !phononVoices.isEmpty {
+                        NativeAdjustableChoice(
+                            title: "Voz",
+                            choices: phononVoices,
+                            selectedIndex: Binding(
+                                get: { phononVoices.firstIndex(of: phononVoice) ?? 0 },
+                                set: { index in
+                                    guard phononVoices.indices.contains(index) else { return }
+                                    phononVoice = phononVoices[index]
+                                    refreshTextVoice()
+                                }
+                            )
+                        )
+                    }
+                    if !phononLoadMessage.isEmpty {
+                        Text(phononLoadMessage)
+                            .font(.footnote)
+                            .accessibilityAddTraits(.updatesFrequently)
+                    }
+                    Text("Phonon reproduce directamente en el iPhone, sin enviar el documento a Internet.")
                         .font(.footnote)
                 }
             }

@@ -116,6 +116,10 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
     private var player: MediaPlayer? = null
     private val geminiWorker = java.util.concurrent.Executors.newSingleThreadExecutor()
     private var geminiEnabled = false
+    private var phononEnabled = false
+    private var phononReader: NativePhononReader? = null
+    private var phononPlayingSegment = false
+    private var phononGeneration = 0
     private var geminiGeneration = 0
     private var geminiAudioFile: File? = null
     private var geminiNextOffset = 0
@@ -315,9 +319,15 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
             }
             ACTION_VOICE -> if (kind == "text") {
                 val prefs = getSharedPreferences("native-reader-preferences", MODE_PRIVATE)
-                val oldEngine = geminiEnabled
-                geminiEnabled = prefs.getInt("engine." + book?.id, 0) == 1
-                if (oldEngine != geminiEnabled) {
+                val oldEngine = if (phononEnabled) 2 else if (geminiEnabled) 1 else 0
+                val selectedEngine = prefs.getInt("engine." + book?.id, 0)
+                geminiEnabled = selectedEngine == 1
+                phononEnabled = selectedEngine == 2 &&
+                    NativePhononReader.isAvailable(applicationContext)
+                if (oldEngine != selectedEngine) {
+                    phononGeneration++
+                    phononReader?.stop()
+                    phononPlayingSegment = false
                     geminiGeneration++
                     player?.release()
                     player = null
@@ -363,6 +373,9 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         if (book?.id == id && kind == target) { playReading(); return }
         pauseReading()
         geminiGeneration++
+        phononGeneration++
+        phononReader?.stop()
+        phononPlayingSegment = false
         player?.release()
         player = null
         geminiAudioFile?.delete()
@@ -374,7 +387,10 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         speed = 1f
         remainingSleepMs = 0L
         val prefs = getSharedPreferences("native-reader-preferences", 0)
-        geminiEnabled = target == "text" && prefs.getInt("engine." + id, 0) == 1
+        val chosenEngine = if (target == "text") prefs.getInt("engine." + id, 0) else 0
+        geminiEnabled = chosenEngine == 1
+        phononEnabled = chosenEngine == 2 &&
+            NativePhononReader.isAvailable(applicationContext)
         if (target == "audio") {
             audioPaths = store.audioFiles(found)
             segments = found.audioSegments.ifEmpty {
@@ -465,6 +481,8 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         if (kind == "audio") {
             if (player == null) openSegment(segmentIndex, positionMs)
             else try { player?.start() } catch (_: Exception) { openSegment(segmentIndex, positionMs) }
+        } else if (phononEnabled) {
+            if (phononPlayingSegment) phononReader?.resume() else speakCurrent()
         } else if (geminiEnabled) {
             if (player != null) try { player?.start() } catch (_: Exception) { speakCurrent() }
             else speakCurrent()
@@ -505,7 +523,11 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
     }
 
     private fun speakCurrent() {
-        if (!playing || (!ttsReady && !geminiEnabled)) return
+        if (!playing || (!ttsReady && !geminiEnabled && !phononEnabled)) return
+        if (phononEnabled) {
+            speakPhonon()
+            return
+        }
         if (geminiEnabled) {
             speakGemini()
             return
@@ -543,6 +565,58 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
             pauseReading()
         }
         publish()
+    }
+
+    private fun speakPhonon() {
+        if (!playing || !phononEnabled || kind != "text") return
+        if (textOffset >= text.length) { pauseReading(); return }
+        val maximum = (textOffset + 1200).coerceAtMost(text.length)
+        val boundary = if (maximum < text.length) {
+            (maximum downTo (textOffset + 600).coerceAtMost(maximum))
+                .firstOrNull { pos -> pos > textOffset && text[pos - 1].isWhitespace() }
+                ?: maximum
+        } else maximum
+        val segment = text.substring(textOffset, boundary)
+        if (segment.isBlank()) {
+            textOffset = boundary
+            persist()
+            if (textOffset >= text.length) pauseReading() else speakPhonon()
+            return
+        }
+        if (!NativePhononReader.isAvailable(applicationContext)) {
+            publish("No está instalado el motor nativo Phonon o su modelo.")
+            pauseReading()
+            return
+        }
+        val prefs = getSharedPreferences("native-reader-preferences", MODE_PRIVATE)
+        val language = prefs.getString("phonon.language", "en").orEmpty()
+        val voice = prefs.getString("phonon.voice", "").orEmpty()
+        val generation = ++phononGeneration
+        phononPlayingSegment = true
+        val reader = phononReader ?: NativePhononReader(applicationContext).also {
+            phononReader = it
+        }
+        reader.speak(segment, voice, language,
+            completed = {
+                handler.post {
+                    if (generation != phononGeneration || !phononEnabled) return@post
+                    phononPlayingSegment = false
+                    if (playing) {
+                        textOffset = boundary
+                        persist()
+                        if (textOffset >= text.length) pauseReading()
+                        else speakPhonon()
+                    }
+                }
+            },
+            error = { reason ->
+                handler.post {
+                    if (generation != phononGeneration || !phononEnabled) return@post
+                    phononPlayingSegment = false
+                    publish("No se pudo reproducir Phonon: " + reason)
+                    pauseReading()
+                }
+            })
     }
 
     private fun speakGemini() {
@@ -616,6 +690,8 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                 positionMs = try { player?.currentPosition ?: positionMs }
                     catch (_: Exception) { positionMs }
                 try { player?.pause() } catch (_: Exception) {}
+            } else if (phononEnabled) {
+                phononReader?.pause()
             } else if (geminiEnabled) {
                 if (player == null) geminiGeneration++ // Cancel network work.
                 else try { player?.pause() } catch (_: Exception) {}
@@ -641,6 +717,9 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         focusRecovery.cancel()
         pauseReading()
         geminiGeneration++
+        phononGeneration++
+        phononReader?.stop()
+        phononPlayingSegment = false
         player?.release()
         player = null
         geminiAudioFile?.delete()
@@ -666,6 +745,11 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         } else if (kind == "text") {
             val max = text.length
             textOffset = requested.coerceIn(0, max)
+            if (phononEnabled) {
+                phononGeneration++
+                phononReader?.stop()
+                phononPlayingSegment = false
+            }
             if (playing) speakCurrent()
         }
         persist()
@@ -678,6 +762,11 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         } else if (kind == "text") {
             val index = ReaderUnits.indexForOffset(units, textOffset)
             textOffset = units.getOrNull(index + 1)?.start ?: text.length
+            if (phononEnabled) {
+                phononGeneration++
+                phononReader?.stop()
+                phononPlayingSegment = false
+            }
             if (playing) speakCurrent()
             persist()
         } else pauseReading()
@@ -689,6 +778,11 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         } else if (kind == "text") {
             val index = ReaderUnits.indexForOffset(units, textOffset)
             textOffset = units.getOrNull(index - 1)?.start ?: 0
+            if (phononEnabled) {
+                phononGeneration++
+                phononReader?.stop()
+                phononPlayingSegment = false
+            }
             if (playing) speakCurrent()
             persist()
         }
@@ -822,6 +916,8 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         player?.release()
         geminiAudioFile?.delete()
         geminiWorker.shutdownNow()
+        phononReader?.close()
+        phononReader = null
         tts?.stop()
         tts?.shutdown()
         if (focused) focusRequest?.let { manager?.abandonAudioFocusRequest(it) }

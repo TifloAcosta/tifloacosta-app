@@ -1,6 +1,6 @@
 # Phonon — integración nativa de TifloLector (requisitos comprobados)
 
-Estado de la rama de desarrollo: el adaptador del motor Phonon Core ML ya está integrado de forma opcional y la interfaz incluye instalación verificada, selección de voz, escucha de muestra, reproducción de documentos y exportación MP3/M4A/WAV/DAISY. El proyecto habitual mantiene iOS 17; hay una compilación especial de desarrollo iOS 18+ en `project-phonon-development.yml` que enlaza el producto SPM `ptts`. **No está en la aplicación publicada**. La compilación enlazada, generación real con un modelo y pruebas VoiceOver siguen siendo una validación final; no se debe afirmar funcionamiento verificado en un dispositivo.
+Estado de la rama de desarrollo: el adaptador del motor Phonon Core ML ya está integrado de forma opcional y la interfaz incluye instalación verificada, selección de voz, escucha de muestra, reproducción de documentos y exportación MP3/M4A/WAV/DAISY. El proyecto habitual mantiene iOS 17; hay una compilación especial de desarrollo iOS 18+ en `project-phonon-development.yml` que enlaza el producto SPM `ptts`. **No está en la aplicación publicada**. La compilación enlazada especial iOS 18+ y la compilación habitual iOS 17 han superado GitHub Actions (6 de noviembre de 2026, tras corregir el identificador de la extensión Compartir). Sigue pendiente generar audio con un modelo instalado en un dispositivo físico y comprobar VoiceOver; una compilación correcta no acredita el funcionamiento real.
 
 ## Proveedor y licencias
 
@@ -34,4 +34,4 @@ Guía oficial https://github.com/gradium-ai/xn-ptts/blob/main/android/README.md 
 5. Exportar MP3/M4A/DAISY desde los mismos fragmentos, con archivo real y verificación externa.
 6. Probar VoiceOver y TalkBack en dispositivos físicos. No publicar antes de superar estas pruebas.
 
-En esta fase las interfaces nativas ya permiten gestionar voces de los motores de voz del sistema y Gemini; Phonon embebido sigue **sin implementarse**.
+En esta rama de desarrollo se ha implementado el adaptador opcional de Phonon, además de la gestión de voces del sistema y Gemini. La opción Phonon exige una compilación iOS 18+ separada y un modelo compatible instalado; no se incluye en la compilación habitual iOS 17 ni está publicada. La carga del modelo se renueva al cambiar de idioma y las muestras de voz usan el idioma seleccionado. Antes de distribuir hay que validar funcionamiento real, accesibilidad y licencias de los modelos.

@@ -492,6 +492,19 @@ final class NativeReadingSpeech: ObservableObject {
 
     private func playNextGeminiSegment() {
         guard isGemini, !isPaused, geminiSegments.indices.contains(geminiSegmentIndex) else { return }
+        while geminiSegments.indices.contains(geminiSegmentIndex),
+              geminiSegments[geminiSegmentIndex]
+                .trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            geminiCursorUTF16 += geminiSegments[geminiSegmentIndex].utf16.count
+            geminiSegmentIndex += 1
+        }
+        if !geminiSegments.indices.contains(geminiSegmentIndex) {
+            textUTF16Offset = min(totalUTF16, geminiCursorUTF16)
+            textPercent = 100
+            isGemini = false
+            isPlaying = false
+            return
+        }
         let generation = geminiGeneration
         let segment = geminiSegments[geminiSegmentIndex]
         geminiTask = Task { [weak self] in

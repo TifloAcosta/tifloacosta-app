@@ -10,6 +10,8 @@ import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.currentCoroutineContext
 import java.io.ByteArrayOutputStream
 import java.io.IOException
+import co.ntbl.lame.mp3.Lame
+import co.ntbl.lame.mp3.MPEGMode
 
 /** Full-document audio export via user-owned Gemini quota.
  * Guard against silent truncation and preserve the original library book.
@@ -18,6 +20,7 @@ internal object NativeGeminiAudioExport {
     const val MAX_CHARACTERS = 60_000
     const val CHUNK_SIZE = 1_200
     enum class Format(val extension: String, val mime: String) {
+        MP3("mp3", "audio/mpeg"),
         M4A("m4a", "audio/mp4"),
         WAV("wav", "audio/wav")
     }
@@ -81,7 +84,11 @@ internal object NativeGeminiAudioExport {
         currentCoroutineContext().ensureActive()
         require(combined.size() > 0) { "No se recibió audio." }
         val raw = combined.toByteArray()
-        return if (format == Format.WAV) wav(raw) else encodeAAC(context, raw)
+        return when (format) {
+            Format.WAV -> wav(raw)
+            Format.M4A -> encodeAAC(context, raw)
+            Format.MP3 -> encodeMP3(raw)
+        }
     }
 
     private fun wav(data: ByteArray, rate: Int = 24000): ByteArray {
@@ -99,6 +106,50 @@ internal object NativeGeminiAudioExport {
         out.write(data)
         return out.toByteArray()
     }
+    /** Encode PCM as real MPEG Layer III, not a renamed WAV.
+     * The 24 kHz mono samples are supported by LAME as MPEG-2 Layer III.
+     */
+    internal fun encodeMP3(pcm: ByteArray): ByteArray {
+        require(pcm.size % 2 == 0) { "El audio PCM está incompleto." }
+        val lame = Lame()
+        val flags = lame.flags
+        flags.inNumChannels = 1
+        flags.inSampleRate = 24000
+        flags.mode = MPEGMode.MONO
+        flags.bitRate = 64
+        flags.writeId3tagAutomatic = false
+        flags.findReplayGain = false
+        require(lame.initParams() >= 0) { "No se pudo iniciar el codificador MP3." }
+        try {
+            val output = ByteArrayOutputStream()
+            val left = FloatArray(1152)
+            val right = FloatArray(1152)
+            var cursor = 0
+            while (cursor < pcm.size) {
+                val count = minOf(left.size, (pcm.size - cursor) / 2)
+                for (i in 0 until count) {
+                    val low = pcm[cursor + i * 2].toInt() and 255
+                    val high = pcm[cursor + i * 2 + 1].toInt() shl 8
+                    left[i] = ((high or low).toShort()).toFloat()
+                }
+                val buffer = ByteArray(16384)
+                val encoded = lame.encodeBuffer(left, right, count, buffer)
+                require(encoded >= 0) { "Error al codificar el MP3." }
+                output.write(buffer, 0, encoded)
+                cursor += count * 2
+            }
+            val last = ByteArray(16384)
+            val finalSize = lame.encodeFlush(last)
+            require(finalSize >= 0) { "No se pudo completar el MP3." }
+            output.write(last, 0, finalSize)
+            return output.toByteArray().also {
+                require(it.size > 0) { "El MP3 generado está vacío." }
+            }
+        } finally {
+            lame.close()
+        }
+    }
+
     private fun encodeAAC(context: Context, pcm: ByteArray): ByteArray {
         val audioFormat = MediaFormat.createAudioFormat(MediaFormat.MIMETYPE_AUDIO_AAC, 24000, 1)
         audioFormat.setInteger(MediaFormat.KEY_AAC_PROFILE,

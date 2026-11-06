@@ -387,8 +387,8 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
                         }
                         when (responseCode) {
                             in 200..299 -> if (english)
-                                "Connection OK. Audio generation is not active yet."
-                                else "Conexión correcta. La generación de audio aún no está activa."
+                                "Connection OK. Gemini can read documents and export audio."
+                                else "Conexión correcta. Gemini permite leer documentos y exportar audio."
                             401, 403 -> if (english) "Key rejected or insufficient permissions."
                                 else "Clave rechazada o sin permisos."
                             429 -> if (english) "Quota exceeded." else "Cuota agotada."
@@ -423,8 +423,8 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
                 }
             }
         }
-        Text(if (english) "Your API key and quota belong to you. The app does not provide a shared key. Gemini sample generates real audio and may use quota. Full document playback is not yet integrated."
-            else "Cada usuario gestiona su clave, cuota y posibles costes. TifloAcosta no proporciona una clave compartida. La muestra genera audio real y puede consumir cuota. La lectura completa de documentos todavía no está integrada.")
+        Text(if (english) "Your API key and quota belong to you. The app does not provide a shared key. Gemini sample generates real audio and may use quota. Choose Gemini as the engine to read or export documents."
+            else "Cada usuario gestiona su clave, cuota y posibles costes. TifloAcosta no proporciona una clave compartida. La muestra genera audio real y puede consumir cuota. Elige Gemini como motor para leer documentos o exportar audio.")
         if (message.isNotBlank()) {
             Text(message, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
         }

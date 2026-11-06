@@ -796,46 +796,7 @@ struct NativeReaderLibraryScreen: View {
         }
     }
 
-    var body: some View {
-        List {
-            Section {
-                Button("Importar", systemImage: "square.and.arrow.down") {
-                    importSourcesPresented = true
-                }
-                NavigationLink("Ajustes") { NativeReaderSettingsScreen() }
-            }
-            Section("Filtrar y ordenar") {
-                NativeAdjustableChoice(
-                    title: "Filtros",
-                    choices: ["Todos", "Textos", "PDF", "EPUB", "Office", "Audio y DAISY",
-                              "Con marcas", "Favoritos", "Importados hoy",
-                              "Últimos siete días", "Último mes", "Último abierto"],
-                    selectedIndex: $filterIndex
-                )
-                NativeAdjustableChoice(
-                    title: "Ordenar",
-                    choices: ["Importados más recientes", "Importados más antiguos",
-                              "Título de a a zeta", "Título de zeta a a",
-                              "Formato", "Abiertos recientemente"],
-                    selectedIndex: $sortIndex
-                )
-            }
-            Section("Carpetas") {
-                Button("Todas las carpetas") { selectedFolder = "" }
-                    .accessibilityValue(selectedFolder == "" ? "Seleccionada" : "")
-                Button("Sin carpeta") { selectedFolder = "__unfiled__" }
-                    .accessibilityValue(selectedFolder == "__unfiled__" ? "Seleccionada" : "")
-                ForEach(library.folders, id: \.self) { folder in
-                    Button(folder) { selectedFolder = folder }
-                        .accessibilityLabel("Carpeta \(folder)")
-                        .accessibilityValue(selectedFolder == folder ? "Seleccionada" : "")
-                        .accessibilityHint("Filtra la biblioteca por esta carpeta.")
-                        .accessibilityAction(named: Text("Eliminar carpeta")) {
-                            folderToDelete = folder
-                        }
-                }
-                Button("Crear nueva carpeta") { newFolderName = ""; showCreateFolder = true }
-            }
+    private var libraryBooksSection: some View {
             Section("Mi biblioteca") {
                 Button(selectingDocuments ? "Terminar" : "Selección") {
                     selectingDocuments.toggle()
@@ -894,6 +855,49 @@ struct NativeReaderLibraryScreen: View {
                     }
                 }
             }
+    }
+
+    var body: some View {
+        List {
+            Section {
+                Button("Importar", systemImage: "square.and.arrow.down") {
+                    importSourcesPresented = true
+                }
+                NavigationLink("Ajustes") { NativeReaderSettingsScreen() }
+            }
+            Section("Filtrar y ordenar") {
+                NativeAdjustableChoice(
+                    title: "Filtros",
+                    choices: ["Todos", "Textos", "PDF", "EPUB", "Office", "Audio y DAISY",
+                              "Con marcas", "Favoritos", "Importados hoy",
+                              "Últimos siete días", "Último mes", "Último abierto"],
+                    selectedIndex: $filterIndex
+                )
+                NativeAdjustableChoice(
+                    title: "Ordenar",
+                    choices: ["Importados más recientes", "Importados más antiguos",
+                              "Título de a a zeta", "Título de zeta a a",
+                              "Formato", "Abiertos recientemente"],
+                    selectedIndex: $sortIndex
+                )
+            }
+            Section("Carpetas") {
+                Button("Todas las carpetas") { selectedFolder = "" }
+                    .accessibilityValue(selectedFolder == "" ? "Seleccionada" : "")
+                Button("Sin carpeta") { selectedFolder = "__unfiled__" }
+                    .accessibilityValue(selectedFolder == "__unfiled__" ? "Seleccionada" : "")
+                ForEach(library.folders, id: \.self) { folder in
+                    Button(folder) { selectedFolder = folder }
+                        .accessibilityLabel("Carpeta \(folder)")
+                        .accessibilityValue(selectedFolder == folder ? "Seleccionada" : "")
+                        .accessibilityHint("Filtra la biblioteca por esta carpeta.")
+                        .accessibilityAction(named: Text("Eliminar carpeta")) {
+                            folderToDelete = folder
+                        }
+                }
+                Button("Crear nueva carpeta") { newFolderName = ""; showCreateFolder = true }
+            }
+            libraryBooksSection
 
         }
         .tifloScreenSurface()

@@ -342,7 +342,7 @@ struct NativeReaderExternalVoiceDetailScreen: View {
                     .accessibilityAddTraits(.updatesFrequently)
                 Button("Crear clave API con guía") { showGeminiGuide = true }
                     .accessibilityHint("Te explica los pasos y permite regresar directamente a Gemini.")
-                SecureField("Clave API Gemini", text: $keyInput)
+                SecureField("Pegar clave", text: $keyInput)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
                     .privacySensitive()

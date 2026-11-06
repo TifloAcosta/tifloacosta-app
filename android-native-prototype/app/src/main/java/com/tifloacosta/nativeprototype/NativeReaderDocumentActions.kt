@@ -71,7 +71,7 @@ fun NativeReaderDocumentActions(
     var audioExport by remember(book.id) { mutableStateOf<ByteArray?>(null) }
     var audioFormatIndex by remember(book.id) { mutableIntStateOf(0) }
     var completedAudioFormat by remember(book.id) {
-        mutableStateOf(NativeGeminiAudioExport.Format.M4A)
+        mutableStateOf(NativeGeminiAudioExport.Format.MP3)
     }
     var audioDaisyReady by remember(book.id) { mutableStateOf(false) }
     var audioExportBusy by remember(book.id) { mutableStateOf(false) }
@@ -134,6 +134,9 @@ fun NativeReaderDocumentActions(
             }
         }
     }
+    val exportAudioMP3 = rememberLauncherForActivityResult(
+        ActivityResultContracts.CreateDocument("audio/mpeg")
+    ) { uri -> saveGeneratedAudio(uri) }
     val exportAudioM4A = rememberLauncherForActivityResult(
         ActivityResultContracts.CreateDocument("audio/mp4")
     ) { uri -> saveGeneratedAudio(uri) }
@@ -269,15 +272,15 @@ fun NativeReaderDocumentActions(
         }
         ReaderAdjustableChoice(
             if (english) "Format" else "Formato",
-            listOf("M4A", "WAV", "DAISY"), audioFormatIndex
+            listOf("MP3", "M4A", "WAV", "DAISY"), audioFormatIndex
         ) { audioFormatIndex = it; audioExport = null }
-        if (audioFormatIndex == 2) {
+        if (audioFormatIndex == 3) {
             Text(if (english) "DAISY includes full text, synchronized clips and navigation. External-player compatibility is not yet validated."
                 else "DAISY incluye texto, audio sincronizado e índice. La compatibilidad externa aún no está validada.")
         }
         Text(if (english)
-            "MP3 requires an additional encoder. Gemini may consume your quota. Maximum 60,000 characters."
-            else "MP3 necesita un codificador adicional. Gemini puede consumir cuota. Máximo 60.000 caracteres.")
+            "Gemini may consume your quota. Maximum 60,000 characters."
+            else "Gemini puede consumir cuota. Máximo 60.000 caracteres.")
         Button(enabled = !audioExportBusy, onClick = {
             audioExportBusy = true
             audioExport = null
@@ -287,10 +290,12 @@ fun NativeReaderDocumentActions(
                 try {
                     val text = withContext(Dispatchers.IO) { store.read(book) }
                     val voice = NativeGeminiSpeech.voices[audioVoice]
-                    val format = if (audioFormatIndex == 0)
-                        NativeGeminiAudioExport.Format.M4A
-                        else NativeGeminiAudioExport.Format.WAV
-                    val wantsDaisy = audioFormatIndex == 2
+                    val format = when (audioFormatIndex) {
+                        0 -> NativeGeminiAudioExport.Format.MP3
+                        1 -> NativeGeminiAudioExport.Format.M4A
+                        else -> NativeGeminiAudioExport.Format.WAV
+                    }
+                    val wantsDaisy = audioFormatIndex == 3
                     audioExport = withContext(Dispatchers.IO) {
                         val notifyProgress: suspend (Int, Int) -> Unit = { n, total ->
                             withContext(Dispatchers.Main) {
@@ -327,6 +332,8 @@ fun NativeReaderDocumentActions(
         if (audioExport != null) {
             Button(onClick = {
                 if (audioDaisyReady) exportAudioDAISY.launch(labelFile("zip"))
+                else if (completedAudioFormat == NativeGeminiAudioExport.Format.MP3)
+                    exportAudioMP3.launch(labelFile("mp3"))
                 else if (completedAudioFormat == NativeGeminiAudioExport.Format.M4A)
                     exportAudioM4A.launch(labelFile("m4a"))
                 else exportAudioWAV.launch(labelFile("wav"))

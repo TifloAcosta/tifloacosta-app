@@ -1,4 +1,6 @@
 import Foundation
+import AVFoundation
+import Combine
 
 #if canImport(PhononTTS)
 import PhononTTS
@@ -90,5 +92,54 @@ enum NativePhononRuntime {
         }
         #endif
         throw RuntimeError.engineUnavailable
+    }
+}
+
+@MainActor
+final class NativePhononPreview: ObservableObject {
+    @Published private(set) var busy = false
+    @Published private(set) var playing = false
+    @Published var message = ""
+    private var task: Task<Void, Never>?
+    private var player: AVAudioPlayer?
+    private var generation = 0
+
+    func listen(voice: String) {
+        stop()
+        busy = true
+        message = "Preparando muestra Phonon."
+        let token = generation
+        task = Task {
+            do {
+                let sound = try await NativePhononRuntime.generate(
+                    text: "Hello. This is a sample of the Phonon voice.",
+                    voice: voice)
+                try Task.checkCancellation()
+                guard token == generation else { return }
+                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
+                try AVAudioSession.sharedInstance().setActive(true)
+                player = try AVAudioPlayer(data: sound)
+                player?.prepareToPlay()
+                playing = player?.play() ?? false
+                message = playing ? "Reproduciendo muestra Phonon." :
+                    "No se ha podido reproducir la muestra."
+            } catch is CancellationError {
+                // Stop invalidates outstanding synthesis and playback.
+            } catch {
+                guard token == generation else { return }
+                message = error.localizedDescription
+            }
+            if token == generation { busy = false }
+        }
+    }
+
+    func stop() {
+        generation += 1
+        task?.cancel()
+        task = nil
+        player?.stop()
+        player = nil
+        playing = false
+        busy = false
     }
 }

@@ -556,6 +556,12 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                 ?: maximum
         } else maximum
         val fragment = text.substring(textOffset, boundary)
+        if (fragment.isBlank()) {
+            textOffset = boundary
+            persist()
+            if (textOffset >= text.length) pauseReading() else speakGemini()
+            return
+        }
         val generation = ++geminiGeneration
         geminiNextOffset = boundary
         player?.release()

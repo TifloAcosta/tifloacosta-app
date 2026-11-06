@@ -87,8 +87,27 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
     @State private var phononMessage = ""
     @State private var phononTask: Task<Void, Never>?
     @State private var showPhononRemoval = false
+    @StateObject private var phononPreview = NativePhononPreview()
+    @AppStorage("native-reader-phonon-voice") private var phononVoice = ""
+    @State private var phononVoices: [String] = []
+    @State private var phononLoadingVoices = false
     @StateObject private var geminiPreview = NativeGeminiPreview()
     @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
+
+    private func loadPhononVoices() async {
+        guard NativePhononRuntime.isUsable else { return }
+        phononLoadingVoices = true
+        defer { phononLoadingVoices = false }
+        do {
+            let options = try await NativePhononRuntime.voices()
+            phononVoices = options
+            if !options.contains(phononVoice), let first = options.first {
+                phononVoice = first
+            }
+        } catch {
+            phononMessage = error.localizedDescription
+        }
+    }
 
     private func checkGeminiConnection() async {
         guard !checking else { return }
@@ -142,6 +161,7 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
                                 guard !Task.isCancelled else { return }
                                 phononInstalled = NativePhononModelStore.isInstalled
                                 phononMessage = "Modelo inglés instalado correctamente."
+                                await loadPhononVoices()
                             } catch is CancellationError {
                                 phononMessage = "Descarga cancelada."
                             } catch {
@@ -166,7 +186,27 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
                         Text(phononMessage)
                             .accessibilityAddTraits(.updatesFrequently)
                     }
-                    Text("Phonon 31m es gratuito, funciona sin Internet después de instalarse y habla inglés. Descargar el modelo no habilita por sí solo el motor de lectura.")
+                    Text("Phonon 31m es gratuito, funciona sin Internet después de instalarse y habla inglés. La biblioteca nativa debe estar incluida en la compilación.")
+                    if NativePhononRuntime.isUsable {
+                        if !phononVoices.isEmpty {
+                            Picker("Voz Phonon", selection: $phononVoice) {
+                                ForEach(phononVoices, id: \.self) { name in
+                                    Text(name).tag(name)
+                                }
+                            }
+                            Button("Escuchar Phonon") { phononPreview.listen(voice: phononVoice) }
+                                .disabled(phononPreview.busy)
+                            if phononPreview.busy || phononPreview.playing {
+                                Button("Detener muestra") { phononPreview.stop() }
+                            }
+                        } else if phononLoadingVoices {
+                            Text("Cargando voces Phonon.")
+                        }
+                        if !phononPreview.message.isEmpty {
+                            Text(phononPreview.message)
+                                .accessibilityAddTraits(.updatesFrequently)
+                        }
+                    }
                 } else {
                     Text("Phonon nativo requiere iOS 18 o posterior.")
                 }
@@ -225,7 +265,16 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
         }
         .tifloScreenSurface()
         .navigationTitle("Motores externos")
-        .onDisappear { geminiPreview.stop() }
+        .onAppear {
+            if NativePhononRuntime.isUsable && phononVoices.isEmpty {
+                Task { await loadPhononVoices() }
+            }
+        }
+        .onDisappear {
+            geminiPreview.stop()
+            phononPreview.stop()
+            phononTask?.cancel()
+        }
         .confirmationDialog("Eliminar modelo Phonon", isPresented: $showPhononRemoval,
                             titleVisibility: .visible) {
             Button("Eliminar modelo", role: .destructive) {

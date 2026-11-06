@@ -68,6 +68,12 @@ fun NativeReaderDocumentActions(
     var translating by remember(book.id) { mutableStateOf(false) }
     var actionJob by remember(book.id) { mutableStateOf<Job?>(null) }
     var exportContent by remember(book.id) { mutableStateOf("") }
+    var audioExport by remember(book.id) { mutableStateOf<ByteArray?>(null) }
+    var audioExportBusy by remember(book.id) { mutableStateOf(false) }
+    var audioVoice by remember(book.id) {
+        mutableIntStateOf(NativeGeminiSpeech.voices.indexOf(
+            prefs.getString("gemini.voice", "Kore")).coerceAtLeast(0))
+    }
     var unit by remember(book.id) {
         mutableIntStateOf(prefs.getInt("unit." + book.id, prefs.getInt("unit", 1))
             .coerceIn(0, 2))
@@ -102,6 +108,26 @@ fun NativeReaderDocumentActions(
                 error = ""
             } catch (e: Exception) {
                 alert(e.message ?: "No se pudo exportar el archivo.")
+            }
+        }
+    }
+    val exportAudio = rememberLauncherForActivityResult(
+        ActivityResultContracts.CreateDocument("audio/wav")
+    ) { uri ->
+        val bytes = audioExport
+        if (uri != null && bytes != null) {
+            actionJob = scope.launch {
+                try {
+                    withContext(Dispatchers.IO) {
+                        val stream = context.contentResolver.openOutputStream(uri, "w")
+                            ?: throw IOException("No se pudo abrir el archivo de destino.")
+                        stream.use { it.write(bytes) }
+                    }
+                    status = if (english) "Audio saved." else "Audio guardado."
+                    error = ""
+                } catch (e: Exception) {
+                    alert(e.message ?: "No se pudo guardar el audio.")
+                }
             }
         }
     }
@@ -217,6 +243,61 @@ fun NativeReaderDocumentActions(
             exportText.launch(labelFile("txt"))
         }, modifier = Modifier.fillMaxWidth()) {
             Text(if (english) "Export accessible TXT…" else "Exportar TXT accesible…")
+        }
+
+        Text(if (english) "Audio export" else "Exportar audio",
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.semantics { heading() })
+        ReaderAdjustableChoice(
+            if (english) "Voice" else "Voz",
+            NativeGeminiSpeech.voices, audioVoice, english
+        ) { index ->
+            audioVoice = index
+            prefs.edit().putString("gemini.voice", NativeGeminiSpeech.voices[index]).apply()
+        }
+        Text(if (english)
+            "Gemini uses your API key and may consume your quota. WAV, up to 60,000 characters."
+            else "Gemini usa tu clave y puede consumir cuota. WAV, hasta 60.000 caracteres.")
+        Button(enabled = !audioExportBusy, onClick = {
+            audioExportBusy = true
+            audioExport = null
+            error = ""
+            status = if (english) "Generating audio." else "Generando audio."
+            actionJob = scope.launch {
+                try {
+                    val text = withContext(Dispatchers.IO) { store.read(book) }
+                    val voice = NativeGeminiSpeech.voices[audioVoice]
+                    audioExport = withContext(Dispatchers.IO) {
+                        NativeGeminiAudioExport.generate(context, text, voice) { n, total ->
+                            withContext(Dispatchers.Main) {
+                                status = (if (english) "Generating " else "Generando ") +
+                                    n + " / " + total
+                            }
+                        }
+                    }
+                    status = if (english) "Audio ready. Press Save."
+                        else "Audio preparado. Pulsa Guardar."
+                } catch (e: kotlinx.coroutines.CancellationException) {
+                    status = if (english) "Cancelled." else "Cancelado."
+                } catch (e: Exception) {
+                    alert(e.message ?: "No se pudo generar el audio.")
+                } finally {
+                    audioExportBusy = false
+                }
+            }
+        }, modifier = Modifier.fillMaxWidth()) {
+            Text(if (english) "Generate" else "Generar")
+        }
+        if (audioExportBusy) {
+            TextButton(onClick = { actionJob?.cancel() }) {
+                Text(if (english) "Cancel" else "Cancelar")
+            }
+        }
+        if (audioExport != null) {
+            Button(onClick = { exportAudio.launch(labelFile("wav")) },
+                modifier = Modifier.fillMaxWidth()) {
+                Text(if (english) "Save" else "Guardar")
+            }
         }
 
         Text(if (english) "Translation" else "Traducción",

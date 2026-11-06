@@ -1658,6 +1658,20 @@ struct NativeReadingScreen: View {
                     )
                 )
                 if readingEngine == 1 {
+                    NativeAdjustableChoice(
+                        title: "Voz",
+                        choices: NativeGeminiSpeech.voices,
+                        selectedIndex: Binding(
+                            get: {
+                                NativeGeminiSpeech.voices.firstIndex(of: geminiVoice) ?? 0
+                            },
+                            set: { index in
+                                guard NativeGeminiSpeech.voices.indices.contains(index) else { return }
+                                geminiVoice = NativeGeminiSpeech.voices[index]
+                                refreshTextVoice()
+                            }
+                        )
+                    )
                     Text("Gemini envía fragmentos del documento a Google. Puede consumir cuota. Selecciona Sistema para lectura local.")
                         .font(.footnote)
                 }

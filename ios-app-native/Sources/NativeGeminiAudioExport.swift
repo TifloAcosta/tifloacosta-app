@@ -9,6 +9,7 @@ enum NativeGeminiAudioExport {
     static let chunkSize = 1_200
 
     enum Engine: String, CaseIterable, Identifiable {
+        case system = "Sistema iOS"
         case gemini = "Gemini"
         case phonon = "Phonon"
         var id: String { rawValue }
@@ -17,6 +18,8 @@ enum NativeGeminiAudioExport {
     static func synthesize(_ text: String, voice: String, engine: Engine) async throws -> Data {
         try Task.checkCancellation()
         switch engine {
+        case .system:
+            return try await NativeSystemSpeechExport.generate(text, voice: voice)
         case .gemini:
             return try await NativeGeminiSpeech.generate(text, voice: voice)
         case .phonon:
@@ -38,7 +41,7 @@ enum NativeGeminiAudioExport {
             switch self {
             case .tooLong: return "El documento supera el límite de esta exportación (60.000 caracteres)."
             case .empty: return "El documento no contiene texto."
-            case .unsupportedFormat: return "Gemini ha devuelto audio con un formato incompatible."
+            case .unsupportedFormat: return "El motor de voz ha devuelto audio con un formato incompatible."
             }
         }
     }
@@ -136,7 +139,7 @@ enum NativeGeminiAudioExport {
     }
 
     static func export(text: String, title: String, voice: String, format: Format,
-                       engine: Engine = .gemini,
+                       engine: Engine = .system,
                        progress: @escaping @MainActor (Int, Int) -> Void) async throws -> URL {
         if format == .daisy {
             return try await NativeGeminiDaisyExport.generate(

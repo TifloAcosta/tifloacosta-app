@@ -51,4 +51,29 @@ internal object ReaderNavigation {
         else if (!forward && targetOffset >= here && here > 0) here - 1
         else targetOffset
     }
+
+    /** Move to the closest saved mark, never changing playback state. */
+    fun adjacentMark(marks: List<Int>, offset: Int, forward: Boolean): Int? {
+        val ordered = marks.distinct().sorted()
+        return if (forward) ordered.firstOrNull { it > offset }
+        else ordered.lastOrNull { it < offset }
+    }
+
+    /**
+     * Estimated TTS minute: baseline 180 words/minute at normal speed.
+     * Scan from the current word boundary without retaining huge word lists.
+     * Android string offsets remain UTF-16 offsets as used by the reader.
+     */
+    fun estimatedMinuteStep(text: String, offset: Int, forward: Boolean, rate: Float): Int {
+        if (text.isBlank()) return 0
+        val words = (180f * rate.coerceIn(0.5f, 3f)).toInt().coerceAtLeast(1)
+        var current = offset.coerceIn(0, text.length)
+        repeat(words) {
+            val next = if (forward) nextWordStart(text, current)
+                else previousWordStart(text, current)
+            if (next == current) return current
+            current = next
+        }
+        return current
+    }
 }

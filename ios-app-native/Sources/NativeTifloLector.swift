@@ -862,14 +862,7 @@ struct NativeReaderLibraryScreen: View {
             }
     }
 
-    var body: some View {
-        List {
-            Section {
-                Button("Importar", systemImage: "square.and.arrow.down") {
-                    importSourcesPresented = true
-                }
-                NavigationLink("Ajustes") { NativeReaderSettingsScreen() }
-            }
+    private var libraryFiltersSection: some View {
             Section("Filtrar y ordenar") {
                 NativeAdjustableChoice(
                     title: "Filtros",
@@ -886,6 +879,9 @@ struct NativeReaderLibraryScreen: View {
                     selectedIndex: $sortIndex
                 )
             }
+    }
+
+    private var libraryFoldersSection: some View {
             Section("Carpetas") {
                 Button("Todas las carpetas") { selectedFolder = "" }
                     .accessibilityValue(selectedFolder == "" ? "Seleccionada" : "")
@@ -902,6 +898,18 @@ struct NativeReaderLibraryScreen: View {
                 }
                 Button("Crear nueva carpeta") { newFolderName = ""; showCreateFolder = true }
             }
+    }
+
+    var body: some View {
+        List {
+            Section {
+                Button("Importar", systemImage: "square.and.arrow.down") {
+                    importSourcesPresented = true
+                }
+                NavigationLink("Ajustes") { NativeReaderSettingsScreen() }
+            }
+            libraryFiltersSection
+            libraryFoldersSection
             libraryBooksSection
 
         }

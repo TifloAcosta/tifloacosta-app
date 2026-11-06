@@ -63,6 +63,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         const val ACTION_SKIP_FORWARD = "reader.SKIP_FORWARD"
         const val ACTION_SEEK = "reader.SEEK"
         const val ACTION_SPEED = "reader.SPEED"
+        const val ACTION_VOICE = "reader.VOICE"
         const val ACTION_SLEEP = "reader.SLEEP"
         const val ACTION_BOOKMARK = "reader.BOOKMARK"
         const val ACTION_SEGMENT = "reader.SEGMENT"
@@ -305,6 +306,14 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                 try { player?.playbackParams = player!!.playbackParams.setSpeed(speed) }
                 catch (_: Exception) {}
                 if (kind == "text" && playing) speakCurrent()
+                publish()
+            }
+            ACTION_VOICE -> if (kind == "text") {
+                val prefs = getSharedPreferences("native-reader-preferences", MODE_PRIVATE)
+                voiceId = prefs.getString("voice." + book?.id,
+                    prefs.getString("voice", "")).orEmpty()
+                // An active voice change takes effect at the current text offset.
+                if (playing) speakCurrent()
                 publish()
             }
             ACTION_SLEEP -> {

@@ -315,7 +315,16 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
             }
             ACTION_VOICE -> if (kind == "text") {
                 val prefs = getSharedPreferences("native-reader-preferences", MODE_PRIVATE)
+                val oldEngine = geminiEnabled
                 geminiEnabled = prefs.getInt("engine." + book?.id, 0) == 1
+                if (oldEngine != geminiEnabled) {
+                    geminiGeneration++
+                    player?.release()
+                    player = null
+                    geminiAudioFile?.delete()
+                    geminiAudioFile = null
+                    tts?.stop()
+                }
                 voiceId = prefs.getString("voice." + book?.id,
                     prefs.getString("voice", "")).orEmpty()
                 // An active voice change takes effect at the current text offset.
@@ -602,8 +611,8 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                     catch (_: Exception) { positionMs }
                 try { player?.pause() } catch (_: Exception) {}
             } else if (geminiEnabled) {
-                geminiGeneration++
-                try { player?.pause() } catch (_: Exception) {}
+                if (player == null) geminiGeneration++ // Cancel network work.
+                else try { player?.pause() } catch (_: Exception) {}
             } else {
                 pendingUtterance = ""
                 tts?.stop()

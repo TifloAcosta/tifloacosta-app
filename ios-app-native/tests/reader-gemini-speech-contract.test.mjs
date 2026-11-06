@@ -25,5 +25,5 @@ test('Preview is an explicit user action with stop, voice picker and quota warni
   assert.match(ui, /Button\("Escuchar muestra"\)/);
   assert.match(ui, /geminiPreview\.listen/);
   assert.match(ui, /Button\("Detener"\)/);
-  assert.match(ui, /puede consumir cuota/);
+  assert.match(ui, /pueden consumir cuota/);
 });

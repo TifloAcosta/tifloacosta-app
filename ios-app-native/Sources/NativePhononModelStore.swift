@@ -38,7 +38,18 @@ enum NativePhononModelStore {
         var files: [Entry]
     }
 
-    static var isInstalled: Bool { verifyBundle(directory) }
+    // Full cryptographic verification takes place on installation, not on every
+    // SwiftUI redraw (the Core ML checkpoint can be hundreds of megabytes).
+    static var isInstalled: Bool {
+        guard let data = try? Data(contentsOf: directory.appendingPathComponent("bundle.json")),
+              let manifest = try? JSONDecoder().decode(Manifest.self, from: data),
+              !manifest.files.isEmpty else { return false }
+        return manifest.files.allSatisfy { entry in
+            !entry.path.contains("..") &&
+                FileManager.default.fileExists(
+                    atPath: directory.appendingPathComponent(entry.path).path)
+        }
+    }
 
     private static func digest(_ url: URL) throws -> String {
         let handle = try FileHandle(forReadingFrom: url)
@@ -75,9 +86,14 @@ enum NativePhononModelStore {
         guard (response as? HTTPURLResponse)?.statusCode == 200 else {
             throw InstallationError.invalidZIP
         }
-        try await Task.detached(priority: .userInitiated) {
+        let installation = Task.detached(priority: .userInitiated) {
             try install(zipURL: archive)
-        }.value
+        }
+        try await withTaskCancellationHandler {
+            try await installation.value
+        } onCancel: {
+            installation.cancel()
+        }
     }
 
     static func install(zipURL: URL) throws {

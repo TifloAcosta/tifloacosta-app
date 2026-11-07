@@ -6,7 +6,7 @@ const exportCode = source('NativeGeminiAudioExport.swift');
 const reader = source('NativeTifloLector.swift');
 
 test('format selector offers only actual supported native codecs', () => {
-  assert.match(reader, /NativeReaderExportFormatScreen\(selection: \$audioExportFormat\)/);
+  assert.match(reader, /NativeReaderExportFormatControls\(/);
   assert.match(exportCode, /case m4a = "M4A"/);
   assert.match(exportCode, /case wav = "WAV"/);
   assert.match(exportCode, /case mp3 = "MP3"/);

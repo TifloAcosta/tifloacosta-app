@@ -155,7 +155,7 @@ self.addEventListener('fetch', event => {
 
   if (isAppOrigin && url.pathname.endsWith('/videos.js')) {
     url.searchParams.set('v', '2.6');
-    event.respondWith(freshScript(url, './videos.js?v=2.6', request));
+    event.respondWith(freshScript(url, './videos.js?v=2.7', request));
     return;
   }
 

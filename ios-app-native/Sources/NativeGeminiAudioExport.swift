@@ -15,11 +15,12 @@ enum NativeGeminiAudioExport {
         var id: String { rawValue }
     }
 
-    static func synthesize(_ text: String, voice: String, engine: Engine) async throws -> Data {
+    static func synthesize(_ text: String, voice: String, engine: Engine,
+                           speed: Double = 1.0, pitch: Float = 1.0) async throws -> Data {
         try Task.checkCancellation()
         switch engine {
         case .system:
-            return try await NativeSystemSpeechExport.generate(text, voice: voice)
+            return try await NativeSystemSpeechExport.generate(text, voice: voice, speed: speed, pitch: pitch)
         case .gemini:
             return try await NativeGeminiSpeech.generate(text, voice: voice)
         case .phonon:
@@ -250,11 +251,12 @@ enum NativeGeminiAudioExport {
     }
 
     static func export(text: String, title: String, voice: String, format: Format,
-                       engine: Engine = .system,
+                       engine: Engine = .system, speed: Double = 1.0, pitch: Float = 1.0,
                        progress: @escaping @MainActor (Int, Int) -> Void) async throws -> URL {
         if format == .daisy {
             return try await NativeGeminiDaisyExport.generate(
-                text: text, title: title, voice: voice, engine: engine, progress: progress)
+                text: text, title: title, voice: voice, engine: engine,
+                speed: speed, pitch: pitch, progress: progress)
         }
         let segments = try chunks(text, engine: engine)
         let file = try destination(title: title, fileExtension: "wav")
@@ -270,7 +272,8 @@ enum NativeGeminiAudioExport {
         for (index, segment) in segments.enumerated() {
             try Task.checkCancellation()
             if !segment.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                let wav = try await synthesize(segment, voice: voice, engine: engine)
+                let wav = try await synthesize(segment, voice: voice, engine: engine,
+                                               speed: speed, pitch: pitch)
                 let bytes = try pcm(wav)
                 totalBytes += UInt64(bytes.count)
                 try output.write(contentsOf: bytes)

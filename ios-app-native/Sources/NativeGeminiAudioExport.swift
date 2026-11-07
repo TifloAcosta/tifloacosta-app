@@ -2,10 +2,10 @@ import Foundation
 import AVFoundation
 import SwiftMP3
 
-/// Export text to a single PCM WAV audiobook using a personal Gemini key.
-/// Each segment is generated explicitly by user action; no silent truncation.
+/// Export audio without truncating documents. Remote providers have quota limits;
+/// offline synthesis streams large output to temporary files instead of memory.
 enum NativeGeminiAudioExport {
-    static let maximumCharacters = 60_000
+    static let maximumCharacters = 60_000 // Applies only to Gemini API exports
     static let chunkSize = 1_200
 
     enum Engine: String, CaseIterable, Identifiable {
@@ -36,22 +36,23 @@ enum NativeGeminiAudioExport {
     }
 
     enum ExportError: LocalizedError {
-        case tooLong, empty, unsupportedFormat
+        case tooLong, empty, unsupportedFormat, insufficientStorage
         var errorDescription: String? {
             switch self {
-            case .tooLong: return "El documento supera el límite de esta exportación (60.000 caracteres)."
+            case .tooLong: return "Con Gemini, esta exportación admite hasta 60.000 caracteres. Usa una voz local para libros más largos."
             case .empty: return "El documento no contiene texto."
+            case .insufficientStorage: return "No hay espacio suficiente para crear el audio. Libera almacenamiento en el iPhone y vuelve a intentarlo."
             case .unsupportedFormat: return "El motor de voz ha devuelto audio con un formato incompatible."
             }
         }
     }
 
     /// Split at sentence/pause boundaries, retaining all text and whitespace.
-    static func chunks(_ text: String) throws -> [String] {
+    static func chunks(_ text: String, engine: Engine = .gemini) throws -> [String] {
         guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             throw ExportError.empty
         }
-        guard text.count <= maximumCharacters else { throw ExportError.tooLong }
+        if engine == .gemini && text.count > maximumCharacters { throw ExportError.tooLong }
         var result: [String] = []
         var rest = text[...]
         while !rest.isEmpty {
@@ -138,6 +139,94 @@ enum NativeGeminiAudioExport {
         return result
     }
 
+
+    /// Convert 24 kHz 16-bit mono PCM without buffering the whole audiobook.
+    /// The header is updated after the last audio chunk has been written.
+    private static func writeWAVHeader(_ output: FileHandle, pcmBytes: UInt64) throws {
+        guard pcmBytes <= UInt64(UInt32.max - 36) else { throw ExportError.unsupportedFormat }
+        let header = NativeGeminiSpeech.wav(pcm: Data())
+        var data = header
+        func overwrite(_ value: UInt32, at offset: Int) {
+            var littleEndian = value.littleEndian
+            withUnsafeBytes(of: &littleEndian) { bytes in
+                data.replaceSubrange(offset..<(offset + 4), with: bytes)
+            }
+        }
+        overwrite(UInt32(pcmBytes) + 36, at: 4)
+        overwrite(UInt32(pcmBytes), at: 40)
+        try output.seek(toOffset: 0)
+        try output.write(contentsOf: data)
+    }
+
+    /// Stream an MP3 encoding from a PCM WAV file, keeping bounded buffers.
+    private static func encodeMP3(wavFile: URL, destination: URL) throws {
+        let input = try FileHandle(forReadingFrom: wavFile)
+        defer { try? input.close() }
+        try input.seek(toOffset: 44) // PCM WAV, fixed header written above.
+        let temp = destination.deletingLastPathComponent()
+            .appendingPathComponent(UUID().uuidString + ".mp3chunks")
+        FileManager.default.createFile(atPath: temp.path, contents: nil)
+        let stream = try FileHandle(forWritingTo: temp)
+        defer {
+            try? stream.close()
+            try? FileManager.default.removeItem(at: temp)
+        }
+        let encoder = try MP3Encoder(options: MP3EncoderOptions(
+            sampleRate: 48_000, bitrateKbps: 64, mode: .mono
+        ))
+        var session = encoder.newSession()
+        var carry: UInt8?
+        while true {
+            let block = try input.read(upToCount: 65_536) ?? Data()
+            if block.isEmpty { break }
+            var samples: [Float] = []
+            samples.reserveCapacity(block.count)
+            var position = 0
+            if let previous = carry {
+                if !block.isEmpty {
+                    let raw = Int16(bitPattern: UInt16(previous) | (UInt16(block[0]) << 8))
+                    let current = Float(raw) / 32768
+                    let next = block.count >= 3
+                        ? Float(Int16(bitPattern: UInt16(block[1]) | (UInt16(block[2]) << 8))) / 32768
+                        : current
+                    samples.append(current)
+                    samples.append((current + next) * 0.5)
+                    position = 1
+                }
+                carry = nil
+            }
+            while position + 1 < block.count {
+                let raw = Int16(bitPattern: UInt16(block[position]) | (UInt16(block[position + 1]) << 8))
+                let current = Float(raw) / 32768
+                let next: Float
+                if position + 3 < block.count {
+                    let nextRaw = Int16(bitPattern: UInt16(block[position + 2]) | (UInt16(block[position + 3]) << 8))
+                    next = Float(nextRaw) / 32768
+                } else { next = current }
+                samples.append(current)
+                samples.append((current + next) * 0.5)
+                position += 2
+            }
+            if position < block.count { carry = block[position] }
+            try stream.write(contentsOf: session.encode(samples: samples))
+        }
+        guard carry == nil else { throw ExportError.unsupportedFormat }
+        try stream.write(contentsOf: session.flush())
+        try stream.close()
+        FileManager.default.createFile(atPath: destination.path, contents: nil)
+        let output = try FileHandle(forWritingTo: destination)
+        defer { try? output.close() }
+        try output.write(contentsOf: session.generateID3Tag())
+        try output.write(contentsOf: session.generateXingHeader())
+        let encoded = try FileHandle(forReadingFrom: temp)
+        defer { try? encoded.close() }
+        while true {
+            let block = try encoded.read(upToCount: 65_536) ?? Data()
+            if block.isEmpty { break }
+            try output.write(contentsOf: block)
+        }
+    }
+
     static func export(text: String, title: String, voice: String, format: Format,
                        engine: Engine = .system,
                        progress: @escaping @MainActor (Int, Int) -> Void) async throws -> URL {
@@ -145,20 +234,7 @@ enum NativeGeminiAudioExport {
             return try await NativeGeminiDaisyExport.generate(
                 text: text, title: title, voice: voice, engine: engine, progress: progress)
         }
-        let segments = try chunks(text)
-        var pcmData = Data()
-        for (index, segment) in segments.enumerated() {
-            try Task.checkCancellation()
-            // Very short/whitespace-only fragments still retain their place in
-            // the written document; do not ask the provider for silent audio.
-            if !segment.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                let wav = try await synthesize(segment, voice: voice, engine: engine)
-                pcmData.append(try pcm(wav))
-            }
-            await progress(index + 1, segments.count)
-        }
-        try Task.checkCancellation()
-        guard !pcmData.isEmpty else { throw ExportError.empty }
+        let segments = try chunks(text, engine: engine)
         let safe = title.replacingOccurrences(
             of: #"[^A-Za-z0-9 _.-]"#, with: "_", options: .regularExpression)
             .prefix(65)
@@ -167,18 +243,38 @@ enum NativeGeminiAudioExport {
         try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
         let file = folder.appendingPathComponent(
             "\(safe.isEmpty ? "Documento" : String(safe))-\(UUID().uuidString).wav")
-        try NativeGeminiSpeech.wav(pcm: pcmData).write(to: file, options: .atomic)
-        if format == .wav { return file }
-        if format == .mp3 {
+        FileManager.default.createFile(atPath: file.path, contents: nil)
+        let output = try FileHandle(forWritingTo: file)
+        var completed = false
+        defer {
+            try? output.close()
+            if !completed { try? FileManager.default.removeItem(at: file) }
+        }
+        try output.write(contentsOf: NativeGeminiSpeech.wav(pcm: Data()))
+        var totalBytes: UInt64 = 0
+        for (index, segment) in segments.enumerated() {
             try Task.checkCancellation()
-            let destination = file.deletingPathExtension().appendingPathExtension("mp3")
-            try mp3(pcm: pcmData).write(to: destination, options: .atomic)
-            try FileManager.default.removeItem(at: file)
+            if !segment.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                let wav = try await synthesize(segment, voice: voice, engine: engine)
+                let bytes = try pcm(wav)
+                totalBytes += UInt64(bytes.count)
+                try output.write(contentsOf: bytes)
+            }
+            await progress(index + 1, segments.count)
+        }
+        try Task.checkCancellation()
+        guard totalBytes > 0 else { throw ExportError.empty }
+        try writeWAVHeader(output, pcmBytes: totalBytes)
+        try output.close()
+        completed = true
+        if format == .wav { return file }
+        let destination = file.deletingPathExtension()
+            .appendingPathExtension(format == .mp3 ? "mp3" : "m4a")
+        defer { try? FileManager.default.removeItem(at: file) }
+        if format == .mp3 {
+            try encodeMP3(wavFile: file, destination: destination)
             return destination
         }
-
-        // Convert the actual audio, never just its filename extension.
-        let destination = file.deletingPathExtension().appendingPathExtension("m4a")
         let asset = AVURLAsset(url: file)
         guard let session = AVAssetExportSession(asset: asset,
                          presetName: AVAssetExportPresetAppleM4A) else {
@@ -192,7 +288,7 @@ enum NativeGeminiAudioExport {
             try? FileManager.default.removeItem(at: destination)
             throw session.error ?? ExportError.unsupportedFormat
         }
-        try? FileManager.default.removeItem(at: file)
         return destination
     }
+
 }

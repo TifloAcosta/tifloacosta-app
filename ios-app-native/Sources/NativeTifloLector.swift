@@ -1302,12 +1302,13 @@ struct NativeReadingScreen: View {
 
     init(document: NativeReadingDocument, speech: NativeReadingSpeech,
          startPercent: Int? = nil, startTrack: Int? = nil,
-         startTextOffset: Int? = nil) {
+         startTextOffset: Int? = nil, startWithAudioExport: Bool = false) {
         self.document = document
         self.speech = speech
         self.startPercent = startPercent
         self.startTrack = startTrack
         self.startTextOffset = startTextOffset
+        self.startWithAudioExport = startWithAudioExport
         self.textLayout = NativeReaderTextLayout(document.body)
         self.wordCount = document.body.split(whereSeparator: \.isWhitespace).count
     }

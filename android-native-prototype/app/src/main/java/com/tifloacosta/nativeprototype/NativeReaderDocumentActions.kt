@@ -89,7 +89,13 @@ fun NativeReaderDocumentActions(
     val phononVoices = remember(book.id, phononReady) {
         if (phononReady) NativePhononModelStore.voices(context) else emptyList()
     }
-    var audioEngineIndex by remember(book.id) { mutableIntStateOf(0) }
+    val availableExportEngines = if (phononReady && phononVoices.isNotEmpty()) {
+        listOf("Sistema", "Gemini", "Phonon")
+    } else listOf("Sistema", "Gemini")
+    var audioEngineIndex by remember(book.id) {
+        mutableIntStateOf(prefs.getInt("engine." + book.id, 0)
+            .coerceIn(0, availableExportEngines.lastIndex))
+    }
     var phononVoiceIndex by remember(book.id) {
         mutableIntStateOf(
             phononVoices.indexOf(prefs.getString("phonon.voice", "default")).coerceAtLeast(0)
@@ -245,10 +251,10 @@ fun NativeReaderDocumentActions(
             modifier = Modifier.semantics { heading() })
         ReaderAdjustableChoice(
             if (english) "Engine" else "Motor",
-            if (phononReady && phononVoices.isNotEmpty()) listOf("Gemini", "Phonon")
-            else listOf("Gemini"), audioEngineIndex
+            if (english) availableExportEngines.map { if (it == "Sistema") "System" else it }
+            else availableExportEngines, audioEngineIndex
         ) { index -> audioEngineIndex = index; audioExport = null }
-        if (audioEngineIndex == 1 && phononReady && phononVoices.isNotEmpty()) {
+        if (audioEngineIndex == 2 && phononReady && phononVoices.isNotEmpty()) {
             ReaderAdjustableChoice(
                 if (english) "Voice" else "Voz",
                 phononVoices, phononVoiceIndex
@@ -256,7 +262,7 @@ fun NativeReaderDocumentActions(
                 phononVoiceIndex = index
                 prefs.edit().putString("phonon.voice", phononVoices[index]).apply()
             }
-        } else {
+        } else if (audioEngineIndex == 1) {
             ReaderAdjustableChoice(
                 if (english) "Voice" else "Voz",
                 NativeGeminiSpeech.voices, audioVoice
@@ -264,6 +270,9 @@ fun NativeReaderDocumentActions(
                 audioVoice = index
                 prefs.edit().putString("gemini.voice", NativeGeminiSpeech.voices[index]).apply()
             }
+        } else {
+            Text(if (english) "Uses the installed Android system voice. No Gemini key needed."
+                else "Utiliza la voz instalada del sistema Android. No necesita clave Gemini.")
         }
         ReaderAdjustableChoice(
             if (english) "Format" else "Formato",
@@ -273,12 +282,13 @@ fun NativeReaderDocumentActions(
             Text(if (english) "DAISY includes full text, synchronized clips and navigation. External-player compatibility is not yet validated."
                 else "DAISY incluye texto, audio sincronizado e índice. La compatibilidad externa aún no está validada.")
         }
-        Text(if (audioEngineIndex == 1 && phononReady) {
-            if (english) "Phonon generates audio on your device. Maximum 60,000 characters."
-            else "Phonon genera el audio dentro del dispositivo. Máximo 60.000 caracteres."
-        } else {
-            if (english) "Gemini may consume your quota. Maximum 60,000 characters."
-            else "Gemini puede consumir cuota. Máximo 60.000 caracteres."
+        Text(when (audioEngineIndex) {
+            0 -> if (english) "Android system TTS exports locally if supported by the installed voice. Maximum 60,000 characters."
+                else "La voz del sistema genera audio localmente si permite exportarlo. Máximo 60.000 caracteres."
+            2 -> if (english) "Phonon generates audio on your device. Maximum 60,000 characters."
+                else "Phonon genera el audio en el dispositivo. Máximo 60.000 caracteres."
+            else -> if (english) "Gemini may use your personal quota. Maximum 60,000 characters."
+                else "Gemini puede consumir tu cuota personal. Máximo 60.000 caracteres."
         })
         Button(enabled = !audioExportBusy, onClick = {
             audioExportBusy = true
@@ -288,9 +298,13 @@ fun NativeReaderDocumentActions(
             actionJob = scope.launch {
                 try {
                     val text = withContext(Dispatchers.IO) { store.read(book) }
-                    val localPhonon = audioEngineIndex == 1 && phononReady
-                    val voice = if (localPhonon) phononVoices[phononVoiceIndex]
-                        else NativeGeminiSpeech.voices[audioVoice]
+                    val localPhonon = audioEngineIndex == 2 && phononReady
+                    val systemTts = audioEngineIndex == 0
+                    val voice = when {
+                        localPhonon -> phononVoices[phononVoiceIndex]
+                        systemTts -> prefs.getString("voice", "").orEmpty()
+                        else -> NativeGeminiSpeech.voices[audioVoice]
+                    }
                     val format = when (audioFormatIndex) {
                         0 -> NativeGeminiAudioExport.Format.MP3
                         1 -> NativeGeminiAudioExport.Format.M4A
@@ -304,7 +318,18 @@ fun NativeReaderDocumentActions(
                                     n + " / " + total
                             }
                         }
-                        if (localPhonon) {
+                        if (systemTts) {
+                            NativeSystemAudioSynth(context).use { synth ->
+                                val render: suspend (String, String) -> ByteArray = {
+                                    fragment, selected -> synth.render(fragment, selected)
+                                }
+                                if (wantsDaisy) NativeGeminiDaisyExport.generateWithSynthesizer(
+                                    text, book.title, voice, notifyProgress, render
+                                ) else NativeGeminiAudioExport.generateWithSynthesizer(
+                                    context, text, voice, format, notifyProgress, render
+                                )
+                            }
+                        } else if (localPhonon) {
                             NativePhononAudioSynth(context,
                                 prefs.getString("phonon.language", "en") ?: "en").use { synth ->
                                 val render: suspend (String, String) -> ByteArray = {

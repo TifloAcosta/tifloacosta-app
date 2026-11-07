@@ -687,6 +687,70 @@ final class NativeReadingSpeech: ObservableObject {
     }
 }
 
+/// The library presents one navigation control; all folder actions live inside.
+private struct NativeReaderFoldersScreen: View {
+    @EnvironmentObject private var library: NativeReaderLibrary
+    @Binding var selectedFolder: String
+    @Environment(\.dismiss) private var dismiss
+    @State private var newFolderName = ""
+    @State private var showCreateFolder = false
+    @State private var folderToDelete: String?
+    @State private var folderError: String?
+
+    var body: some View {
+        List {
+            Button("Crear nueva carpeta") {
+                newFolderName = ""
+                showCreateFolder = true
+            }
+            Button("Todas las carpetas") { selectedFolder = ""; dismiss() }
+                .accessibilityValue(selectedFolder.isEmpty ? "Seleccionada" : "")
+            Button("Sin carpeta") { selectedFolder = "__unfiled__"; dismiss() }
+                .accessibilityValue(selectedFolder == "__unfiled__" ? "Seleccionada" : "")
+            ForEach(library.folders, id: \.self) { folder in
+                Button(folder) {
+                    selectedFolder = folder
+                    dismiss()
+                }
+                .accessibilityLabel("Carpeta \(folder)")
+                .accessibilityValue(selectedFolder == folder ? "Seleccionada" : "")
+                .accessibilityAction(named: Text("Eliminar carpeta")) { folderToDelete = folder }
+            }
+        }
+        .tifloScreenSurface()
+        .navigationTitle("Carpetas")
+        .alert("Crear carpeta", isPresented: $showCreateFolder) {
+            TextField("Nombre de la carpeta", text: $newFolderName)
+            Button("Crear") {
+                if !library.createFolder(named: newFolderName) {
+                    folderError = "El nombre está vacío, repetido o es demasiado largo."
+                }
+            }
+            Button("Cancelar", role: .cancel) {}
+        } message: {
+            Text("Crea una carpeta sin borrar ni mover los archivos originales.")
+        }
+        .confirmationDialog("Eliminar carpeta", isPresented: Binding(
+            get: { folderToDelete != nil },
+            set: { if !$0 { folderToDelete = nil } }),
+            titleVisibility: .visible) {
+            Button("Eliminar carpeta y conservar las obras", role: .destructive) {
+                if let folder = folderToDelete {
+                    library.deleteFolder(folder)
+                    if selectedFolder == folder { selectedFolder = "" }
+                }
+                folderToDelete = nil
+            }
+            Button("Cancelar", role: .cancel) { folderToDelete = nil }
+        }
+        .alert("No se pudo crear la carpeta", isPresented: Binding(
+            get: { folderError != nil },
+            set: { if !$0 { folderError = nil } })) {
+            Button("Aceptar", role: .cancel) { folderError = nil }
+        } message: { Text(folderError ?? "") }
+    }
+}
+
 struct NativeReaderLibraryScreen: View {
     @EnvironmentObject private var library: NativeReaderLibrary
     @StateObject private var speech = NativeReadingSpeech()
@@ -882,22 +946,14 @@ struct NativeReaderLibraryScreen: View {
     }
 
     private var libraryFoldersSection: some View {
-            Section("Carpetas") {
-                Button("Todas las carpetas") { selectedFolder = "" }
-                    .accessibilityValue(selectedFolder == "" ? "Seleccionada" : "")
-                Button("Sin carpeta") { selectedFolder = "__unfiled__" }
-                    .accessibilityValue(selectedFolder == "__unfiled__" ? "Seleccionada" : "")
-                ForEach(library.folders, id: \.self) { folder in
-                    Button(folder) { selectedFolder = folder }
-                        .accessibilityLabel("Carpeta \(folder)")
-                        .accessibilityValue(selectedFolder == folder ? "Seleccionada" : "")
-                        .accessibilityHint("Filtra la biblioteca por esta carpeta.")
-                        .accessibilityAction(named: Text("Eliminar carpeta")) {
-                            folderToDelete = folder
-                        }
-                }
-                Button("Crear nueva carpeta") { newFolderName = ""; showCreateFolder = true }
+        Section {
+            NavigationLink {
+                NativeReaderFoldersScreen(selectedFolder: $selectedFolder)
+            } label: {
+                Text("Carpetas")
             }
+            .accessibilityHint("Abre las carpetas de la biblioteca y permite crear una nueva.")
+        }
     }
 
     private var libraryBase: some View {

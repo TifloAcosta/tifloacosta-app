@@ -107,6 +107,8 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
     var key by remember { mutableStateOf("") }
     var present by remember { mutableStateOf(credentials.hasKey("gemini")) }
     var message by remember { mutableStateOf("") }
+    // Only the selected provider belongs to the accessible tree.
+    var selectedProvider by remember { mutableStateOf<String?>(null) }
     var confirmingDelete by remember { mutableStateOf(false) }
     var checking by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
@@ -177,11 +179,39 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
         }
     }
 
-    BackHandler { onBack() }
+    fun backFromProvider() {
+        preview.stop()
+        phononPreview.stop()
+        samplePlaying = false
+        phononSamplePlaying = false
+        key = ""
+        message = ""
+        selectedProvider = null
+    }
+    BackHandler {
+        if (selectedProvider != null) backFromProvider() else onBack()
+    }
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        TextButton(onClick = onBack) { Text(if (english) "Back" else "Volver") }
+        TextButton(onClick = {
+            if (selectedProvider != null) backFromProvider() else onBack()
+        }) {
+            Text(if (selectedProvider != null)
+                (if (english) "Back to engines" else "Volver a motores")
+                else (if (english) "Back" else "Volver"))
+        }
         Text(if (english) "External engines" else "Motores externos")
+        if (selectedProvider == null) {
+            Button(onClick = { selectedProvider = "phonon" },
+                modifier = Modifier.fillMaxWidth()) {
+                Text("Phonon")
+            }
+            Button(onClick = { selectedProvider = "gemini" },
+                modifier = Modifier.fillMaxWidth()) {
+                Text("Gemini")
+            }
+        }
+        if (selectedProvider == "phonon") {
         Text("Phonon")
         Text(if (english) "On-device voices. No API key needed. VoiceOver integration does not automatically make the engine available inside TifloLector."
             else "Voces locales, sin clave API. La integración con VoiceOver no implica que el motor esté disponible directamente en TifloLector.")
@@ -311,6 +341,8 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
             }
         }
 
+        }
+        if (selectedProvider == "gemini") {
         Text("Gemini")
         Text(if (present) (if (english) "Key saved" else "Clave guardada")
             else (if (english) "No key" else "Sin clave"))
@@ -440,7 +472,8 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
         }
         Text(if (english) "Your API key and quota belong to you. The app does not provide a shared key. Gemini sample generates real audio and may use quota. Choose Gemini as the engine to read or export documents."
             else "Cada usuario gestiona su clave, cuota y posibles costes. TifloAcosta no proporciona una clave compartida. La muestra genera audio real y puede consumir cuota. Elige Gemini como motor para leer documentos o exportar audio.")
-        if (message.isNotBlank()) {
+        }
+        if (selectedProvider != null && message.isNotBlank()) {
             Text(message, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
         }
     }

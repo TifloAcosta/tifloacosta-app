@@ -1,0 +1,24 @@
+name: TifloAcosta iOS - enviar versión 1.1 a revisión pública
+on:
+  push:
+    branches: [release/ios-candidate-phases1-6-20261106]
+    paths:
+      - '.github/workflows/ios-public-review-500123.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: tifloacosta-ios-public-review-500123
+  cancel-in-progress: false
+jobs:
+  submit-to-apple:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+      API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+      API_PRIVATE: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Enviar compilación 500123 a revisión pública de Apple
+        run: node .github/scripts/submit-public-ios.mjs

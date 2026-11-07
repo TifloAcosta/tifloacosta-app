@@ -1377,6 +1377,41 @@ private struct NativeReaderTextLayout {
 
 /// Each format remains in the same accessible List; selecting it never
 /// dismisses the screen or changes VoiceOver's navigation hierarchy.
+/// Audio exports survive leaving the reader and can always be shared from Files.
+private enum NativeReaderSavedExports {
+    static var folder: URL {
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("Exportaciones de TifloLector", isDirectory: true)
+    }
+
+    static func list() -> [URL] {
+        guard let files = try? FileManager.default.contentsOfDirectory(
+            at: folder, includingPropertiesForKeys: [.contentModificationDateKey],
+            options: [.skipsHiddenFiles]) else { return [] }
+        return files.filter { ["zip", "mp3", "m4a", "wav"].contains($0.pathExtension.lowercased()) }
+            .sorted { (a, b) in
+                let aDate = (try? a.resourceValues(forKeys: [.contentModificationDateKey]))?.contentModificationDate ?? .distantPast
+                let bDate = (try? b.resourceValues(forKeys: [.contentModificationDateKey]))?.contentModificationDate ?? .distantPast
+                return aDate > bDate
+            }
+    }
+
+    static func save(_ source: URL) throws -> URL {
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        let ext = source.pathExtension
+        let stem = source.deletingPathExtension().lastPathComponent
+        var target = folder.appendingPathComponent(stem).appendingPathExtension(ext)
+        var number = 2
+        while FileManager.default.fileExists(atPath: target.path) {
+            target = folder.appendingPathComponent("\(stem) (\(number))")
+                .appendingPathExtension(ext)
+            number += 1
+        }
+        try FileManager.default.copyItem(at: source, to: target)
+        return target
+    }
+}
+
 private struct NativeReaderExportFormatControls: View {
     @Binding var selection: NativeGeminiAudioExport.Format
     let disabled: Bool
@@ -1463,6 +1498,7 @@ struct NativeReadingScreen: View {
     @State private var showAudioExport = false
     @State private var audioExportBusy = false
     @State private var audioExportResult: URL?
+    @State private var savedAudioExports: [URL] = []
     @State private var programmaticFocusRequest = false
     @State private var actionMessage: String?
     @AccessibilityFocusState private var focusedFragment: Int?
@@ -1827,8 +1863,10 @@ struct NativeReadingScreen: View {
                     progress: { done, total in
                         audioExportStatus = "Generando \(done) de \(total)."
                     })
-                audioExportResult = url
-                audioExportStatus = "Audio preparado. Pulsa Compartir para guardarlo."
+                let saved = try NativeReaderSavedExports.save(url)
+                audioExportResult = saved
+                savedAudioExports = NativeReaderSavedExports.list()
+                audioExportStatus = "Audio guardado en Exportaciones de TifloLector. Pulsa Compartir archivo para enviarlo o guardarlo en Archivos."
             } catch is CancellationError {
                 audioExportStatus = "Exportación cancelada."
             } catch {
@@ -2253,7 +2291,10 @@ struct NativeReadingScreen: View {
                             Text(audioExportStatus).accessibilityAddTraits(.updatesFrequently)
                         }
                         if let result = audioExportResult {
-                            Button("Compartir") { NativeShare.present(url: result) }
+                            ShareLink(item: result) {
+                                Label("Compartir archivo generado", systemImage: "square.and.arrow.up")
+                            }
+                            .accessibilityHint("Abre la hoja de compartir de iOS para enviar el archivo fuera de TifloAcosta o guardarlo en Archivos.")
                         }
                         if audioExportEngine == .gemini {
                             Text("Gemini: máximo 60.000 caracteres por exportación; utiliza tu cuota de API.")
@@ -2261,10 +2302,22 @@ struct NativeReadingScreen: View {
                             Text("Las voces locales no tienen límite fijo de caracteres. Los libros largos necesitan espacio libre y pueden tardar más en convertirse.")
                         }
                     }
+                    Section("Archivos exportados") {
+                        if savedAudioExports.isEmpty {
+                            Text("Todavía no hay exportaciones guardadas.")
+                        }
+                        ForEach(savedAudioExports, id: \.self) { file in
+                            ShareLink(item: file) {
+                                Label("Compartir \(file.lastPathComponent)", systemImage: "square.and.arrow.up")
+                            }
+                            .accessibilityHint("Abre las opciones para compartir o guardar este archivo fuera de TifloAcosta.")
+                        }
+                    }
                 }
                 .tifloScreenSurface()
                 .navigationTitle("Exportar audio")
                 .onAppear {
+                    savedAudioExports = NativeReaderSavedExports.list()
                     systemExportVoices = AVSpeechSynthesisVoice.speechVoices()
                         .sorted { a, b in
                             a.language == b.language

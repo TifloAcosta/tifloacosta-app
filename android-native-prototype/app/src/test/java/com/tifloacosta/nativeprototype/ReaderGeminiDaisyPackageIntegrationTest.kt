@@ -118,7 +118,7 @@ class ReaderGeminiDaisyPackageIntegrationTest {
 
     @Test fun rejectDuplicateIdsAndZeroLengthClips() = runBlocking {
         val valid = NativeGeminiDaisyExport.generateWithSynthesizer(
-            "Capítulo 1: Primero\\nUna frase de prueba.\\nCapítulo 2: Segundo\\nOtra frase.",
+            "Capítulo 1: Primero\nUna frase de prueba.\nCapítulo 2: Segundo\nOtra frase.",
             "Prueba", "Kore", { _, _ -> Unit }, { _, _ -> wav() }
         )
         val invalid = listOf(

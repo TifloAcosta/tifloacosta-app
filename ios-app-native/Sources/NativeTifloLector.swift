@@ -1375,6 +1375,39 @@ private struct NativeReaderTextLayout {
     }
 }
 
+/// A real SwiftUI navigation destination: VoiceOver traverses every format
+/// in order, and confirmation occurs before returning to export settings.
+private struct NativeReaderExportFormatScreen: View {
+    @Binding var selection: NativeGeminiAudioExport.Format
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        List {
+            ForEach(NativeGeminiAudioExport.Format.allCases) { format in
+                Button {
+                    selection = format
+                    UIAccessibility.post(notification: .announcement,
+                        argument: "Formato \(format.rawValue) seleccionado")
+                    dismiss()
+                } label: {
+                    HStack {
+                        Text(format.rawValue)
+                        Spacer()
+                        if selection == format {
+                            Image(systemName: "checkmark")
+                                .accessibilityHidden(true)
+                        }
+                    }
+                }
+                .accessibilityValue(selection == format ? "Seleccionado" : "No seleccionado")
+                .accessibilityHint("Doble toque para elegir \(format.rawValue) y volver a Exportar audio.")
+            }
+        }
+        .tifloScreenSurface()
+        .navigationTitle("Formato de exportación")
+    }
+}
+
 struct NativeReadingScreen: View {
     let document: NativeReadingDocument
     @ObservedObject var speech: NativeReadingSpeech
@@ -2200,21 +2233,9 @@ struct NativeReadingScreen: View {
                             Text("Phonon genera el audio dentro del iPhone sin enviar el libro a Internet.")
                         }
                         NavigationLink {
-                            List {
-                                Button("MP3") { audioExportFormat = .mp3 }
-                                    .accessibilityValue(audioExportFormat == .mp3 ? "Seleccionado" : "")
-                                Button("M4A") { audioExportFormat = .m4a }
-                                    .accessibilityValue(audioExportFormat == .m4a ? "Seleccionado" : "")
-                                Button("WAV") { audioExportFormat = .wav }
-                                    .accessibilityValue(audioExportFormat == .wav ? "Seleccionado" : "")
-                                Button("DAISY") { audioExportFormat = .daisy }
-                                    .accessibilityValue(audioExportFormat == .daisy ? "Seleccionado" : "")
-                            }
-                            .tifloScreenSurface()
-                            .navigationTitle("Formato de exportación")
-                            .accessibilityHint("Selecciona un formato y vuelve a Exportar audio con el botón Atrás.")
+                            NativeReaderExportFormatScreen(selection: $audioExportFormat)
                         } label: {
-                            LabeledContent("Formato", value: audioExportFormat.rawValue.uppercased())
+                            LabeledContent("Formato", value: audioExportFormat.rawValue)
                         }
                         .disabled(audioExportBusy)
                         .accessibilityHint("Abre una lista accesible de formatos MP3, M4A, WAV y DAISY.")

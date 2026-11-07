@@ -248,6 +248,24 @@ fun NativeReaderGeneralSettings(
     var speed by remember { mutableIntStateOf(
         SPEEDS.indices.minByOrNull { kotlin.math.abs(SPEEDS[it] - prefs.getFloat("rate", 1f)) } ?: 2
     ) }
+    val pitchValues = listOf(.7f, .85f, 1f, 1.15f, 1.3f)
+    var pitchIndex by remember {
+        mutableIntStateOf(pitchValues.indices.minByOrNull {
+            kotlin.math.abs(pitchValues[it] - prefs.getFloat("pitch", 1f))
+        } ?: 2)
+    }
+    val pauseCommaValues = listOf(0, 100, 200, 350, 500, 750)
+    var commaIndex by remember {
+        mutableIntStateOf(pauseCommaValues.indices.minByOrNull {
+            kotlin.math.abs(pauseCommaValues[it] - prefs.getInt("pause.comma", 200))
+        } ?: 2)
+    }
+    val pausePeriodValues = listOf(0, 200, 400, 600, 900, 1200)
+    var periodIndex by remember {
+        mutableIntStateOf(pausePeriodValues.indices.minByOrNull {
+            kotlin.math.abs(pausePeriodValues[it] - prefs.getInt("pause.period", 400))
+        } ?: 2)
+    }
     var mode by remember { mutableIntStateOf(prefs.getInt("mode", 0).coerceIn(0, 1)) }
     var unit by remember { mutableIntStateOf(prefs.getInt("unit", 1).coerceIn(0, 2)) }
     var font by remember { mutableIntStateOf(prefs.getInt("font", 3).coerceIn(0, 13)) }
@@ -303,6 +321,31 @@ fun NativeReaderGeneralSettings(
                         speed = it
                         prefs.edit().putFloat("rate", SPEEDS[it]).apply()
                     }
+                    ReaderAdjustableChoice(
+                        if (english) "System TTS pitch" else "Tono de la voz del sistema",
+                        listOf("0,7", "0,85", "Normal", "1,15", "1,3"),
+                        pitchIndex
+                    ) {
+                        pitchIndex = it
+                        prefs.edit().putFloat("pitch", pitchValues[it]).apply()
+                    }
+                    ReaderAdjustableChoice(
+                        if (english) "Pause after commas and semicolons" else "Pausa tras comas y punto y coma",
+                        pauseCommaValues.map { "$" + "{it} ms" }, commaIndex
+                    ) {
+                        commaIndex = it
+                        prefs.edit().putInt("pause.comma", pauseCommaValues[it]).apply()
+                    }
+                    ReaderAdjustableChoice(
+                        if (english) "Pause at sentence endings" else "Pausa al final de frase",
+                        pausePeriodValues.map { "$" + "{it} ms" }, periodIndex
+                    ) {
+                        periodIndex = it
+                        prefs.edit().putInt("pause.period", pausePeriodValues[it]).apply()
+                    }
+                    Text(if (english)
+                        "Pitch and punctuation pauses apply to the Android system speech engine. External engines manage their own prosody."
+                        else "El tono y las pausas por puntuación se aplican a la voz del sistema Android. Los motores externos controlan su propia prosodia.")
                     ReaderAdjustableChoice(
                         if (english) "Show voices" else "Mostrar voces",
                         if (english) listOf("All", "Spanish", "English")

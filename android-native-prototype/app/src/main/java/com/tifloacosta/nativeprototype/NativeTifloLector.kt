@@ -498,6 +498,10 @@ fun NativeTifloLector(
         TextButton(onClick = { screen = "settings" }, modifier = Modifier.fillMaxWidth()) {
             Text(if (english) "Settings" else "Ajustes")
         }
+        // Folders are an everyday library operation, not a hidden filter.
+        TextButton(onClick = { screen = "folders" }, modifier = Modifier.fillMaxWidth()) {
+            Text(if (english) "Folders" else "Carpetas")
+        }
         TextButton(onClick = { filtersExpanded = !filtersExpanded },
             modifier = Modifier.fillMaxWidth().semantics {
                 stateDescription = if (filtersExpanded) (if (english) "Expanded" else "Abierto")
@@ -517,10 +521,6 @@ fun NativeTifloLector(
                 if (english) "Folder" else "Carpeta",
                 folderChoices, folderFilter.coerceIn(0, folderChoices.lastIndex)
             ) { folderFilter = it; visibleCount = 10 }
-            TextButton(onClick = { screen = "folders" }, modifier = Modifier.fillMaxWidth()) {
-                Text(if (english) "Folders"
-                    else "Carpetas")
-            }
             TextButton(onClick = { screen = "queue" }, modifier = Modifier.fillMaxWidth()) {
                 Text(if (english) "Reading queue" else "Cola de lectura")
             }
@@ -640,7 +640,7 @@ fun NativeTifloLector(
                     9 -> save(book.copy(finished = !book.finished))
                 }
             }
-            // One TalkBack stop per book: its title, progress and selected action.
+            // One TalkBack stop per book: title, selected action, then progress.
             // Clear the Material button/text semantics before assigning the final
             // accessible name. Otherwise the title can be announced twice.
             val readingStatus = when {
@@ -670,11 +670,10 @@ fun NativeTifloLector(
             OutlinedButton(onClick = { run(action) },
                 modifier = Modifier.fillMaxWidth().clearAndSetSemantics {
                     contentDescription = book.title
-                    stateDescription = readingStatus +
+                    stateDescription = actions[action] + ". " + readingStatus +
                         (if (book.id in queuedIds) {
                             if (english) ". In reading queue" else ". En cola de lectura"
-                        } else "") +
-                        (if (english) ". Action: " else ". Acción: ") + actions[action]
+                        } else "")
                     progressBarRangeInfo = ProgressBarRangeInfo(
                         action.toFloat(), 0f..actions.lastIndex.toFloat(), actions.size - 2
                     )
@@ -1056,14 +1055,10 @@ private fun NativeReadingScreen(
             titleFocusedOnOpen = titleFocusRequester.requestFocus()
         }
     }
-    LaunchedEffect(book.id) {
-        val choice = prefs.getInt("autoplay." + book.id, -1)
-        val enabled = when (choice) {
-            1 -> true
-            0 -> false
-            else -> prefs.getInt("mode", 0) == 1
-        }
-        if ((startOnOpen || enabled) && !playing) startSpeech()
+    // Never start speaking from a stored setting merely because a document opened.
+    // Explicit "Play" in the library remains the only automatic-start request.
+    LaunchedEffect(book.id, startOnOpen) {
+        if (startOnOpen && !playing) startSpeech()
     }
 
     if (showPronunciation) {
@@ -1112,11 +1107,11 @@ private fun NativeReadingScreen(
                 }
             }
         )
-        TextButton(onClick = onBack) {
+        TextButton(onClick = {
+            if (active) send(NativeReaderPlaybackService.ACTION_STOP)
+            onBack()
+        }) {
             Text(if (english) "Back to my library" else "Volver a Mi biblioteca")
-        }
-        TextButton(onClick = onDeleteRequest) {
-            Text(if (english) "Delete this book" else "Eliminar esta obra")
         }
         Button(
             onClick = { toggleSpeech() },
@@ -1138,6 +1133,13 @@ private fun NativeReadingScreen(
             // Changing navigation must not change the saved reading offset.
             if (active) send(NativeReaderPlaybackService.ACTION_UNIT,
                 chosen.takeIf { it in 0..2 } ?: 1)
+        }
+        Button(onClick = { if (active) send(NativeReaderPlaybackService.ACTION_STOP) },
+            modifier = Modifier.fillMaxWidth()) {
+            Text(if (english) "Stop reading" else "Detener lectura")
+        }
+        TextButton(onClick = { showTools = true }, modifier = Modifier.fillMaxWidth()) {
+            Text(if (english) "Convert to audio or DAISY" else "Convertir a audio o DAISY")
         }
         ReaderCompactChoice(
             if (english) "Engine" else "Motor",
@@ -1190,10 +1192,7 @@ private fun NativeReadingScreen(
         if (!speaker.ready.value && readingEngine == 0) {
             Text(if (english) "Initializing Android speech…" else "Preparando la voz de Android…")
         }
-        TextButton(onClick = { showTools = true },
-            modifier = Modifier.fillMaxWidth()) {
-            Text(if (english) "Actions" else "Acciones")
-        }
+
         when (effectiveUnitType) {
             3 -> ReaderCompactOffsetPosition(
                 label = if (english) "Word" else "Palabra",
@@ -1313,6 +1312,9 @@ private fun NativeReadingScreen(
                 if (english) "Bold text" else "Texto reforzado",
                 listOf("No", "Sí"), boldText, english
             ) { boldText = it; prefs.edit().putInt("bold." + book.id, it).apply() }
+        }
+        TextButton(onClick = onDeleteRequest) {
+            Text(if (english) "Delete this book" else "Eliminar esta obra")
         }
         TextButton(
             onClick = { jumping = !jumping },

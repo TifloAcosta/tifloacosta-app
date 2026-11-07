@@ -27,5 +27,5 @@ test('Open document offers accessible export flow with progress, cancel, share',
     assert.match(reader, /Button\("Exportar audio"\)/);
     assert.match(reader, /Button\("Generar"\)/);
     assert.match(reader, /Button\("Cancelar", role: \.cancel\)/);
-    assert.match(reader, /Button\("Compartir"\) \{ NativeShare\.present\(url: result\) \}/);
+    assert.match(reader, /ShareLink\(item: result\)/);
 });

@@ -17,15 +17,18 @@ test('the most recently opened book is recorded persistently and filterable', ()
   assert.match(reader, /Último abierto/);
   assert.match(reader, /\.onAppear \{ library\.markOpened\(document\) \}/);
 });
-test('folder controls are all in one section, with creation after the folders', () => {
-  const start = reader.indexOf('Section("Carpetas") {');
-  const end = reader.indexOf('libraryBooksSection', start);
+test('library has a single Carpeta entry, opening a screen with create first', () => {
+  const start = reader.indexOf('private var libraryFoldersSection');
+  const end = reader.indexOf('private var libraryBase', start);
   assert.ok(start > 0 && end > start);
   const section = reader.slice(start, end);
-  assert.doesNotMatch(section, /NativeAdjustableChoice/);
-  assert.match(section, /ForEach\(library\.folders/);
-  assert.match(section, /Crear nueva carpeta/);
-  assert.ok(section.indexOf('ForEach(library.folders') < section.indexOf('Crear nueva carpeta'));
+  assert.match(section, /NavigationLink/);
+  assert.match(section, /Text\("Carpetas"\)/);
+  assert.doesNotMatch(section, /ForEach\(library\.folders|Todas las carpetas|Sin carpeta/);
+  const folderScreen = reader.slice(reader.indexOf('private struct NativeReaderFoldersScreen'),
+    reader.indexOf('struct NativeReaderLibraryScreen'));
+  assert.ok(folderScreen.indexOf('Button("Crear nueva carpeta")') <
+    folderScreen.indexOf('ForEach(library.folders'));
 });
 test('each library book exposes persisted reading percentage to VoiceOver', () => {
   assert.match(reader, /library\.latest\(document\)\.lastPercent \?\? 0/);

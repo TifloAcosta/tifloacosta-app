@@ -118,10 +118,37 @@ enum NativeReaderFormats {
         return supportDirectory.appendingPathComponent(relativePath)
     }
 
+    /// Preserve the source bytes, including formatting and embedded media.
+    /// Stored separately from extracted text so exporting the original is exact.
+    static func storeOriginal(_ source: URL, documentID: UUID) throws -> String {
+        let directory = supportDirectory
+            .appendingPathComponent("ReaderOriginals", isDirectory: true)
+            .appendingPathComponent(documentID.uuidString, isDirectory: true)
+        try FileManager.default.createDirectory(
+            at: directory, withIntermediateDirectories: true)
+        let name = source.lastPathComponent
+        guard !name.isEmpty, name != ".", name != ".." else {
+            throw NativeReaderFormatError.empty("archivo original")
+        }
+        let destination = directory.appendingPathComponent(name)
+        try FileManager.default.copyItem(at: source, to: destination)
+        return "ReaderOriginals/\(documentID.uuidString)/\(name)"
+    }
+
+    static func originalURL(for document: NativeReadingDocument) -> URL? {
+        guard let path = document.originalFilePath,
+              path.hasPrefix("ReaderOriginals/\(document.id.uuidString)/"),
+              let url = storedURL(for: path),
+              FileManager.default.fileExists(atPath: url.path) else { return nil }
+        return url
+    }
+
     static func deleteStoredFiles(for id: UUID) {
-        try? FileManager.default.removeItem(at: supportDirectory
-            .appendingPathComponent("ReaderMedia", isDirectory: true)
-            .appendingPathComponent(id.uuidString, isDirectory: true))
+        for directory in ["ReaderMedia", "ReaderOriginals"] {
+            try? FileManager.default.removeItem(at: supportDirectory
+                .appendingPathComponent(directory, isDirectory: true)
+                .appendingPathComponent(id.uuidString, isDirectory: true))
+        }
     }
 
     private static var supportDirectory: URL {

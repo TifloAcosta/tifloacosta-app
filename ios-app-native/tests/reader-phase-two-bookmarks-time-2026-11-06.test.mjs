@@ -13,14 +13,14 @@ test('Navigation options expose bookmarks and time only when supported', () => {
 });
 
 test('Navigation actions include previous and next bookmarks and exact minute jumps', () => {
-  assert.match(reader, /Button\("Anterior"\) \{ moveUnit\(-1\) \}/);
-  assert.match(reader, /Button\("Siguiente"\) \{ moveUnit\(1\) \}/);
+  assert.match(reader, /Button\("Retroceder"\) \{ moveUnit\(-1\) \}/);
+  assert.match(reader, /Button\("Avanzar"\) \{ moveUnit\(1\) \}/);
   assert.match(reader, /private func moveToAudioBookmark\(_ direction: Int\)/);
   assert.match(reader, /private var sortedTextMarkOffsets: \[Int\]/);
   assert.match(reader, /Double\(direction\) \* 60/);
   assert.match(reader, /speech\.seek\(seconds: destination\)/);
-  assert.match(reader, /Button\("Retroceder 30 segundos"\)/);
-  assert.match(reader, /Button\("Avanzar 30 segundos"\)/);
+  assert.match(reader, /accessibilityAction\(named: Text\("Retroceder 30 segundos"\)\)/);
+  assert.match(reader, /accessibilityAction\(named: Text\("Avanzar 30 segundos"\)\)/);
 });
 
 test('Time navigation for synthesized text uses reading speed and word boundaries', () => {

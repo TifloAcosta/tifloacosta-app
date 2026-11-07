@@ -27,8 +27,8 @@ enum NativeGeminiDaisyExport {
 
     /// Only explicit heading lines qualify. Preserve every original character.
     /// Split headings into separate spoken units so NCX points to an exact SMIL par.
-    static func units(_ text: String) throws -> [TextUnit] {
-        _ = try NativeGeminiAudioExport.chunks(text) // Global length/empty checks
+    static func units(_ text: String, engine: NativeGeminiAudioExport.Engine = .gemini) throws -> [TextUnit] {
+        _ = try NativeGeminiAudioExport.chunks(text, engine: engine) // Empty check; quota applies only to Gemini
         let pattern = #"^(?:#{1,6}[ \t]+|(?i:capítulo|capitulo|sección|seccion)[ \t]+[0-9IVXLCDM]+(?:[.: -]|$))"#
         var result: [TextUnit] = []
         let lines = text.components(separatedBy: "\n")
@@ -50,7 +50,7 @@ enum NativeGeminiDaisyExport {
                 } else if unit.count <= NativeGeminiAudioExport.chunkSize {
                     result.append(TextUnit(text: unit, heading: nil))
                 } else {
-                    for chunk in try NativeGeminiAudioExport.chunks(unit) {
+                    for chunk in try NativeGeminiAudioExport.chunks(unit, engine: engine) {
                         result.append(TextUnit(text: chunk, heading: nil))
                     }
                 }
@@ -61,8 +61,9 @@ enum NativeGeminiDaisyExport {
 
     static func generate(text: String, title: String, voice: String,
                          engine: NativeGeminiAudioExport.Engine = .gemini,
+                         speed: Double = 1.0, pitch: Float = 1.0,
                          progress: @escaping @MainActor (Int, Int) -> Void) async throws -> URL {
-        let segments = try units(text)
+        let segments = try units(text, engine: engine)
         let uuid = UUID().uuidString
         let working = FileManager.default.temporaryDirectory
             .appendingPathComponent("TifloDaisy-" + uuid, isDirectory: true)
@@ -94,7 +95,7 @@ enum NativeGeminiDaisyExport {
             if firstPar.isEmpty { firstPar = par }
             if let heading = segment.heading { headingPoints.append((heading, par)) }
             let bytes = try await NativeGeminiAudioExport.synthesize(
-                spoken, voice: voice, engine: engine)
+                spoken, voice: voice, engine: engine, speed: speed, pitch: pitch)
             let pcm = try NativeGeminiAudioExport.pcm(bytes)
             let duration = Double(pcm.count) / 48000.0 // mono 16-bit PCM at 24 kHz
             guard duration > 0 else { throw NativeGeminiAudioExport.ExportError.empty }
@@ -186,8 +187,8 @@ enum NativeGeminiDaisyExport {
             try body.write(to: working.appendingPathComponent(name),
                            atomically: true, encoding: .utf8)
         }
-        let output = FileManager.default.temporaryDirectory
-            .appendingPathComponent("TifloLector-\(uuid).zip")
+        let output = try NativeGeminiAudioExport.destination(
+            title: title, fileExtension: "zip")
         do {
             guard let archive = Archive(url: output, accessMode: .create) else {
                 throw NativeGeminiAudioExport.ExportError.unsupportedFormat

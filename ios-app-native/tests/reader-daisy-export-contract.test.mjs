@@ -18,5 +18,5 @@ test('DAISY contains its complete standard structure and true audio-linked text'
 test('DAISY is offered only through the actual export handler', () => {
   assert.match(audio, /case daisy = "DAISY"/);
   assert.match(audio, /NativeGeminiDaisyExport\.generate/);
-  assert.match(reader, /Text\("DAISY"\)\.tag\(NativeGeminiAudioExport\.Format\.daisy\)/);
+  assert.match(reader, /ForEach\(NativeGeminiAudioExport\.Format\.allCases\)/);
 });

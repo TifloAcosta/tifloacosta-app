@@ -4,10 +4,15 @@ import android.content.Context
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.ensureActive
 import java.io.File
 import java.io.IOException
 import java.util.Locale
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
 import java.util.UUID
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -20,19 +25,22 @@ internal class NativeSystemAudioSynth(private val context: Context) : AutoClosea
     private var tts: TextToSpeech? = null
 
     suspend fun render(text: String, voice: String): ByteArray {
-        val engine = tts ?: suspendCancellableCoroutine<TextToSpeech> { continuation ->
-            var initialized: TextToSpeech? = null
+        val engine = tts ?: run {
+            val initialized = CompletableDeferred<Int>()
             val created = TextToSpeech(context.applicationContext) { status ->
-                if (!continuation.isActive) return@TextToSpeech
-                if (status == TextToSpeech.SUCCESS) {
-                    val ready = initialized
-                    if (ready != null) continuation.resume(ready)
-                    else continuation.resumeWithException(IOException("Android TTS no se inicializó correctamente."))
-                } else continuation.resumeWithException(IOException("No se pudo inicializar la voz del sistema."))
+                initialized.complete(status)
             }
-            initialized = created
-            continuation.invokeOnCancellation { created.shutdown() }
-        }.also { tts = it }
+            try {
+                if (initialized.await() != TextToSpeech.SUCCESS)
+                    throw IOException("No se pudo inicializar la voz del sistema.")
+                currentCoroutineContext().ensureActive()
+                tts = created
+                created
+            } catch (error: Exception) {
+                created.shutdown()
+                throw error
+            }
+        }
 
         val preferredName = voice.takeIf { it.isNotBlank() }
         preferredName?.let { name ->
@@ -65,10 +73,65 @@ internal class NativeSystemAudioSynth(private val context: Context) : AutoClosea
                 result.copyOfRange(8, 12).toString(Charsets.US_ASCII) == "WAVE") {
                 "El motor Android no devolvió un archivo WAV válido."
             }
-            return result
+            return normalizeWav(result)
         } finally {
             temp.delete()
         }
+    }
+
+    /**
+     * DAISY and MP3 encoders expect 24 kHz mono PCM16. System engines commonly
+     * output 16, 22.05 or 48 kHz WAV; convert rather than mislabel their audio.
+     */
+    private fun normalizeWav(wav: ByteArray): ByteArray {
+        val buffer = ByteBuffer.wrap(wav).order(ByteOrder.LITTLE_ENDIAN)
+        var cursor = 12
+        var sampleRate = 0
+        var channels = 0
+        var bits = 0
+        var format = 0
+        var pcmOffset = -1
+        var pcmLength = 0
+        while (cursor + 8 <= wav.size) {
+            val chunk = String(wav, cursor, 4, Charsets.US_ASCII)
+            val length = buffer.getInt(cursor + 4)
+            if (length < 0 || cursor + 8L + length > wav.size) break
+            if (chunk == "fmt " && length >= 16) {
+                format = buffer.getShort(cursor + 8).toInt() and 65535
+                channels = buffer.getShort(cursor + 10).toInt() and 65535
+                sampleRate = buffer.getInt(cursor + 12)
+                bits = buffer.getShort(cursor + 22).toInt() and 65535
+            } else if (chunk == "data") {
+                pcmOffset = cursor + 8
+                pcmLength = length
+            }
+            cursor += 8 + length + (length and 1)
+        }
+        if (format != 1 || channels !in 1..2 || bits != 16 ||
+            sampleRate !in 8000..96000 || pcmOffset < 0) {
+            throw IOException("La voz del sistema no generó audio PCM16 compatible.")
+        }
+        val frames = pcmLength / (channels * 2)
+        if (frames == 0) throw IOException("El archivo TTS no contiene muestras.")
+        fun read(frame: Int): Int {
+            val f = frame.coerceIn(0, frames - 1)
+            var sum = 0
+            repeat(channels) { channel ->
+                sum += buffer.getShort(pcmOffset + (f * channels + channel) * 2).toInt()
+            }
+            return sum / channels
+        }
+        val target = ((frames.toLong() * 24000) / sampleRate).toInt()
+        val output = ByteBuffer.allocate(target * 2).order(ByteOrder.LITTLE_ENDIAN)
+        repeat(target) { i ->
+            val source = i.toDouble() * sampleRate / 24000
+            val left = source.toInt().coerceIn(0, frames - 1)
+            val weight = source - left
+            val value = (read(left) * (1.0 - weight) + read(left + 1) * weight)
+                .toInt().coerceIn(-32768, 32767)
+            output.putShort(value.toShort())
+        }
+        return NativeGeminiAudioExport.wav(output.array())
     }
 
     override fun close() {

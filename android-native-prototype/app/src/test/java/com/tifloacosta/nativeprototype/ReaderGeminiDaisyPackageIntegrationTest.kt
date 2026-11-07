@@ -123,13 +123,13 @@ class ReaderGeminiDaisyPackageIntegrationTest {
         )
         val invalid = listOf(
             changeXml(valid, "sync.smil") {
-                it.replace("id=\\"par2\\"", "id=\\"par1\\"")
+                it.replace("id=\"par2\"", "id=\"par1\"")
             },
             changeXml(valid, "sync.smil") {
-                it.replace("clipEnd=\\"00:00:00.100\\"", "clipEnd=\\"00:00:00.000\\"")
+                it.replace("clipEnd=\"00:00:00.100\"", "clipEnd=\"00:00:00.000\"")
             },
             changeXml(valid, "book.ncx") {
-                it.replace("playOrder=\\"2\\"", "playOrder=\\"1\\"")
+                it.replace("playOrder=\"2\"", "playOrder=\"1\"")
             }
         )
         invalid.forEach { bytes ->

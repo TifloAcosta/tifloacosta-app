@@ -1384,7 +1384,32 @@ private enum NativeReaderSavedExports {
             .appendingPathComponent("Exportaciones de TifloLector", isDirectory: true)
     }
 
+    /// Recover older DAISY files left in the temporary directory by previous builds.
+    /// Do not regenerate them: preserve the original bytes for sharing and analysis.
+    private static func recoverLegacyExports() {
+        let manager = FileManager.default
+        let temporary = manager.temporaryDirectory
+        let locations = [temporary,
+                         temporary.appendingPathComponent("TifloLectorExport", isDirectory: true)]
+        for directory in locations {
+            guard let files = try? manager.contentsOfDirectory(
+                at: directory, includingPropertiesForKeys: nil,
+                options: [.skipsHiddenFiles]) else { continue }
+            for file in files {
+                let validFormat = ["zip", "mp3", "m4a", "wav"]
+                    .contains(file.pathExtension.lowercased())
+                let legacyDAISY = directory == temporary &&
+                    file.lastPathComponent.hasPrefix("TifloLector-") &&
+                    file.pathExtension.lowercased() == "zip"
+                let oldAudio = directory != temporary && validFormat
+                guard legacyDAISY || oldAudio else { continue }
+                _ = try? save(file)
+            }
+        }
+    }
+
     static func list() -> [URL] {
+        recoverLegacyExports()
         guard let files = try? FileManager.default.contentsOfDirectory(
             at: folder, includingPropertiesForKeys: [.contentModificationDateKey],
             options: [.skipsHiddenFiles]) else { return [] }
@@ -1407,7 +1432,7 @@ private enum NativeReaderSavedExports {
                 .appendingPathExtension(ext)
             number += 1
         }
-        try FileManager.default.copyItem(at: source, to: target)
+        try FileManager.default.moveItem(at: source, to: target)
         return target
     }
 }

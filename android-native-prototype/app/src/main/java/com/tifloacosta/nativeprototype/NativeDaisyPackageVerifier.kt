@@ -101,7 +101,7 @@ internal object NativeDaisyPackageVerifier {
             val bytes = files[file] ?: throw IOException("DAISY: falta una pista.")
             if (!file.endsWith(".mp3", ignoreCase = true) ||
                 !isMP3(bytes)) throw IOException("DAISY: MP3 no válido.")
-            val timeFormat = Regex("""\d{2}:\d{2}:\d{2}\.\d{3}""")
+            val timeFormat = Regex("""\d{2}:\d{2}:\d{2}(?:\.\d{3})?""")
             fun milliseconds(value: String): Long {
                 if (!timeFormat.matches(value))
                     throw IOException("DAISY: marca temporal incorrecta.")

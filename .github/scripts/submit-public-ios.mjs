@@ -79,6 +79,19 @@ if(version.attributes.releaseType!=='AFTER_APPROVAL'){
   console.log('No se pudo actualizar política de publicación: '+error.message);
  }
 }
+// Apple requires release notes for each localized update before review.
+const localizations=await api('appStoreVersions/'+version.id+'/appStoreVersionLocalizations?limit=200');
+for(const item of localizations.data){
+ if(item.attributes.whatsNew?.trim())continue;
+ const language=String(item.attributes.locale||'es').toLowerCase();
+ const notes=language.startsWith('es')
+  ? 'TifloLector mejora la lectura accesible y la exportación de libros y audio. Nuevas opciones de pausa y navegación, mejor compatibilidad con VoiceOver y controles de carpetas. Exportación DAISY y audio mejorada, con voces locales, nombres de archivo claros y opciones para compartir documentos completos. Correcciones de estabilidad y accesibilidad.'
+  : 'TifloLector improves accessible reading, document navigation and audio export. New reading pauses, VoiceOver improvements and easier folder controls. Better DAISY and audio export with on-device voices, readable file names and options to share complete documents. Accessibility and stability fixes.';
+ await api('appStoreVersionLocalizations/'+item.id,'PATCH',{data:{
+  type:'appStoreVersionLocalizations',id:item.id,attributes:{whatsNew:notes}
+ }});
+ console.log('Notas de versión guardadas para '+language+'.');
+}
 const submissions=await api('apps/'+app.id+'/reviewSubmissions?limit=100');
 let submission=submissions.data.find(x=>x.attributes.state==='READY_FOR_REVIEW');
 if(!submission){

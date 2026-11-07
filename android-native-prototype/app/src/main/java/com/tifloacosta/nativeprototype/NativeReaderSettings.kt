@@ -56,7 +56,7 @@ fun ReaderAdjustableChoice(
             valueRange = 0f..choices.lastIndex.toFloat(),
             steps = (choices.size - 2).coerceAtLeast(0),
             modifier = Modifier.fillMaxWidth().semantics {
-                contentDescription = "$" + "{label}: $" + "{choices[index]}"
+                contentDescription = label + ": " + choices[index]
                 stateDescription = choices[index]
             }
         )

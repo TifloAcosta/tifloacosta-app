@@ -77,9 +77,14 @@ internal object NativeDaisyPackageVerifier {
         val textIDs = elements(dtbook, "p").map { it.getAttribute("id") } +
             elements(dtbook, "h2").map { it.getAttribute("id") }
         val textTargets = textIDs.filter { it.isNotEmpty() }.toSet()
+        if (textTargets.size != textIDs.count { it.isNotEmpty() })
+            throw IOException("DAISY: identificadores de texto duplicados.")
         val parallels = elements(smil, "par")
         if (parallels.isEmpty()) throw IOException("DAISY: no hay audio sincronizado.")
         val parallelIDs = parallels.map { it.getAttribute("id") }.toSet()
+        if (parallelIDs.size != parallels.size || "" in parallelIDs)
+            throw IOException("DAISY: identificadores SMIL duplicados o vacíos.")
+        val audioReferences = mutableSetOf<String>()
         for (par in parallels) {
             val texts = par.getElementsByTagNameNS("*", "text")
             val sounds = par.getElementsByTagNameNS("*", "audio")
@@ -91,13 +96,32 @@ internal object NativeDaisyPackageVerifier {
                 text.getAttribute("src").substringAfter("#") !in textTargets)
                 throw IOException("DAISY: falta una referencia de texto.")
             val file = sound.getAttribute("src")
+            if (!audioReferences.add(file))
+                throw IOException("DAISY: varias referencias a la misma pista de audio.")
             val bytes = files[file] ?: throw IOException("DAISY: falta una pista.")
             if (!file.endsWith(".mp3", ignoreCase = true) ||
                 !isMP3(bytes)) throw IOException("DAISY: MP3 no válido.")
-            if (!Regex("""\d{2}:\d{2}:\d{2}\.\d{3}""")
-                    .matches(sound.getAttribute("clipEnd")))
-                throw IOException("DAISY: duración del audio incorrecta.")
+            val timeFormat = Regex("""\d{2}:\d{2}:\d{2}\.\d{3}""")
+            fun milliseconds(value: String): Long {
+                if (!timeFormat.matches(value))
+                    throw IOException("DAISY: marca temporal incorrecta.")
+                val components = value.split(':')
+                val seconds = components[2].toDouble()
+                if (components[1].toInt() >= 60 || seconds >= 60.0)
+                    throw IOException("DAISY: tiempo fuera de rango.")
+                return (components[0].toLong() * 3600 + components[1].toLong() * 60) * 1000 +
+                    (seconds * 1000).toLong()
+            }
+            val begin = milliseconds(sound.getAttribute("clipBegin"))
+            val end = milliseconds(sound.getAttribute("clipEnd"))
+            if (end <= begin)
+                throw IOException("DAISY: el intervalo de audio no tiene duración.")
         }
+        val navPoints = elements(ncx, "navPoint")
+        val orders = navPoints.map { it.getAttribute("playOrder") }
+        if (orders.isEmpty() || orders.any { it.toIntOrNull() == null } ||
+            orders.distinct().size != orders.size)
+            throw IOException("DAISY: orden de navegación duplicado o inválido.")
         val nav = elements(ncx, "content")
         if (nav.isEmpty() || nav.any {
             !it.getAttribute("src").startsWith("sync.smil#") ||

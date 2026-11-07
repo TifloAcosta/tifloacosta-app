@@ -349,6 +349,13 @@ final class NativeReadingSpeech: ObservableObject {
     private var totalUTF16 = 0
     private var utteranceOffsets: [ObjectIdentifier: Int] = [:]
     private var finalUtteranceID: ObjectIdentifier?
+    private var speechSourceText = ""
+    private var speechSourceBaseUTF16 = 0
+    private var speechRate = 1.0
+    private var speechPitch: Float = 1.0
+    private var speechLanguage = "es-ES"
+    private var speechVoiceIdentifier = ""
+    private var speechReadingStyle = 0
     @Published private(set) var textPercent = 0
     @Published private(set) var textUTF16Offset = 0
 
@@ -478,6 +485,13 @@ final class NativeReadingSpeech: ObservableObject {
               totalUTF16: Int? = nil, readingStyle: Int = 0) {
         stop()
         guard !text.isEmpty else { return }
+        speechSourceText = text
+        speechSourceBaseUTF16 = baseUTF16
+        speechRate = speed
+        speechPitch = pitch
+        speechLanguage = language
+        speechVoiceIdentifier = voiceIdentifier
+        speechReadingStyle = readingStyle
         self.baseUTF16 = baseUTF16
         self.totalUTF16 = max(1, totalUTF16 ?? text.utf16.count)
         textUTF16Offset = baseUTF16
@@ -679,7 +693,13 @@ final class NativeReadingSpeech: ObservableObject {
         else if isGeneratedSpeech {
             geminiGeneration += 1
             geminiTask?.cancel()
-        } else { synthesizer.pauseSpeaking(at: .word) }
+        } else {
+            // AVSpeechSynthesizer.pauseSpeaking may leave queued utterances audible,
+            // especially with phrase-by-phrase pauses. Stop them immediately and
+            // resume from the last reported spoken position instead.
+            finalUtteranceID = nil
+            synthesizer.stopSpeaking(at: .immediate)
+        }
         sleep(after: 0) // Al pausar no sigue corriendo la cuenta del apagado.
         isPlaying = false
         isPaused = true
@@ -690,7 +710,24 @@ final class NativeReadingSpeech: ObservableObject {
         isPlaying = true
         if isGeneratedSpeech {
             if let player { player.play() } else { playNextGeminiSegment() }
-        } else if let player { player.play() } else { synthesizer.continueSpeaking() }
+        } else if let player { player.play() }
+        else {
+            let sourceUTF16 = speechSourceText.utf16.count
+            let consumed = max(0, min(sourceUTF16,
+                textUTF16Offset - speechSourceBaseUTF16))
+            let source = speechSourceText as NSString
+            let remaining = source.substring(from: consumed)
+            guard !remaining.isEmpty else {
+                isPlaying = false
+                isPaused = false
+                return
+            }
+            let total = totalUTF16
+            play(remaining, speed: speechRate, pitch: speechPitch,
+                 language: speechLanguage, voiceIdentifier: speechVoiceIdentifier,
+                 baseUTF16: speechSourceBaseUTF16 + consumed,
+                 totalUTF16: total, readingStyle: speechReadingStyle)
+        }
     }
 
     func refresh() {
@@ -730,6 +767,7 @@ final class NativeReadingSpeech: ObservableObject {
         synthesizer.stopSpeaking(at: .immediate)
         utteranceOffsets.removeAll()
         finalUtteranceID = nil
+        speechSourceText = ""
         isPlaying = false
         isPaused = false
     }

@@ -331,14 +331,14 @@ fun NativeReaderGeneralSettings(
                     }
                     ReaderAdjustableChoice(
                         if (english) "Pause after commas and semicolons" else "Pausa tras comas y punto y coma",
-                        pauseCommaValues.map { "$" + "{it} ms" }, commaIndex
+                        pauseCommaValues.map { it.toString() + " ms" }, commaIndex
                     ) {
                         commaIndex = it
                         prefs.edit().putInt("pause.comma", pauseCommaValues[it]).apply()
                     }
                     ReaderAdjustableChoice(
                         if (english) "Pause at sentence endings" else "Pausa al final de frase",
-                        pausePeriodValues.map { "$" + "{it} ms" }, periodIndex
+                        pausePeriodValues.map { it.toString() + " ms" }, periodIndex
                     ) {
                         periodIndex = it
                         prefs.edit().putInt("pause.period", pausePeriodValues[it]).apply()

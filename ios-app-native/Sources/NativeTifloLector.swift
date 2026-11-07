@@ -1811,6 +1811,8 @@ struct NativeReadingScreen: View {
         let title = latest.title
         let text = latest.body
         let engine = audioExportEngine
+        let speed = self.speed
+        let pitch = self.pitch
         let voice: String
         switch engine {
         case .system: voice = systemExportVoiceID
@@ -1821,7 +1823,7 @@ struct NativeReadingScreen: View {
             do {
                 let url = try await NativeGeminiAudioExport.export(
                     text: text, title: title, voice: voice, format: audioExportFormat,
-                    engine: engine,
+                    engine: engine, speed: speed, pitch: pitch,
                     progress: { done, total in
                         audioExportStatus = "Generando \(done) de \(total)."
                     })

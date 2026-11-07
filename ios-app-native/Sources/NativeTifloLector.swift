@@ -1088,7 +1088,8 @@ struct NativeReaderLibraryScreen: View {
                 .navigationTitle("Información")
                 .toolbar { Button("Cerrar") { information = nil } }
             }
-        }    }
+        }
+    }
 
     var body: some View { libraryInformationControls }
 

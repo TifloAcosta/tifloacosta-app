@@ -18,13 +18,13 @@ test('resume system TTS from spoken cursor while retaining style and voice', () 
   assert.match(resume, /totalUTF16: total, readingStyle: speechReadingStyle/);
   assert.match(reader, /finalUtteranceID = nil/);
 });
-test('export format uses a dedicated VoiceOver list, not Picker or nested popover', () => {
+test('export formats stay inline, accessible and do not navigate away', () => {
   const sheet = reader.slice(reader.indexOf('    private var exportAudioSheet:'),reader.indexOf('    private var readerBase:'));
-  assert.match(sheet, /NativeReaderExportFormatScreen\(selection: \$audioExportFormat\)/);
+  assert.match(sheet, /NativeReaderExportFormatControls\(/);
   assert.doesNotMatch(sheet, /Picker\("Formato"/);
-  const selection = reader.slice(reader.indexOf('private struct NativeReaderExportFormatScreen'),reader.indexOf('struct NativeReadingScreen'));
+  const selection = reader.slice(reader.indexOf('private struct NativeReaderExportFormatControls'),reader.indexOf('struct NativeReadingScreen'));
   assert.match(selection, /ForEach\(NativeGeminiAudioExport\.Format\.allCases\)/);
   assert.match(selection, /selection = format/);
-  assert.match(selection, /dismiss\(\)/);
+  assert.doesNotMatch(selection, /dismiss\(\)/);
   assert.match(selection, /\.accessibilityValue\(selection == format \? "Seleccionado" : "No seleccionado"\)/);
 });

@@ -35,6 +35,15 @@ class Phase6IntegralRegressionTest {
         assertTrue(reader.contains("liveRegion = LiveRegionMode.Polite"))
     }
 
+    @Test fun navigationSelectorStaysNextToPlaybackControl() {
+        val reader = source("NativeTifloLector.kt")
+        val play = reader.indexOf("Text(if (english) \"Play\" else \"Reproducir\")")
+        val navigation = reader.indexOf("if (english) \"Move by\" else \"Avanzar y retroceder por\"")
+        val engine = reader.indexOf("if (english) \"Engine\" else \"Motor\"")
+        assertTrue("Playback button must precede the navigation selector", play >= 0 && navigation > play)
+        assertTrue("Navigation must precede voice configuration", engine > navigation)
+    }
+
     @Test fun podcastLibraryKeepsFavoritesOpmlAndNewEpisodes() {
         val library = source("NativePodcastLibrary.kt")
         val screen = source("NativeMediaAndDownloads.kt")

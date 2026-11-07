@@ -27,6 +27,14 @@ class Phase6IntegralRegressionTest {
         assertTrue(!service.contains("remainingSleepMs -= "))
     }
 
+    @Test fun bookmarkActionsHaveAccessibleFeedback() {
+        val reader = source("NativeTifloLector.kt")
+        assertTrue(reader.contains("bookmarkMessage"))
+        assertTrue(reader.contains("Marca solicitada en la posición actual."))
+        assertTrue(reader.contains("Ya existe una marca en esta posición."))
+        assertTrue(reader.contains("liveRegion = LiveRegionMode.Polite"))
+    }
+
     @Test fun podcastLibraryKeepsFavoritesOpmlAndNewEpisodes() {
         val library = source("NativePodcastLibrary.kt")
         val screen = source("NativeMediaAndDownloads.kt")

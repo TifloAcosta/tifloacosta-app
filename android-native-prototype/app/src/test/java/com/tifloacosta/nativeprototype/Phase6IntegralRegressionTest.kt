@@ -55,6 +55,40 @@ class Phase6IntegralRegressionTest {
         assertTrue(screen.contains("if (selectedProvider != null) backFromProvider() else onBack()"))
     }
 
+    @Test fun userCanStopReadingAndNoSilentAutoStart() {
+        val reader = source("NativeTifloLector.kt")
+        val service = source("NativeReaderPlaybackService.kt")
+        assertTrue(reader.contains("if (startOnOpen && !playing) startSpeech()"))
+        assertTrue(reader.contains("Detener lectura"))
+        assertTrue(reader.contains("ACTION_STOP"))
+        assertTrue(service.contains("handler.removeCallbacks(resumeAfterPunctuation)"))
+        assertTrue(service.contains("phononGeneration++"))
+        assertTrue(service.contains("geminiGeneration++"))
+    }
+
+    @Test fun libraryShowsFoldersAndDirectAudioExportAction() {
+        val reader = source("NativeTifloLector.kt")
+        val tools = source("NativeReaderDocumentActions.kt")
+        assertTrue(reader.contains("Convertir a audio o DAISY"))
+        assertTrue(reader.contains("open(book, openExport = true)"))
+        assertTrue(reader.contains("Carpetas"))
+        assertTrue(tools.contains("initialAudioExport"))
+        assertTrue(tools.contains("if (showAudioExport)"))
+        assertTrue(tools.contains("if (showOtherActions)"))
+    }
+
+    @Test fun accessibleSpeedPitchAndPunctuationControls() {
+        val settings = source("NativeReaderSettings.kt")
+        val service = source("NativeReaderPlaybackService.kt")
+        assertTrue(settings.contains("contentDescription = label + \": \" + choices[index]"))
+        assertTrue(settings.contains("Tono de la voz del sistema"))
+        assertTrue(settings.contains("Pausa tras comas y punto y coma"))
+        assertTrue(settings.contains("Pausa al final de frase"))
+        assertTrue(service.contains("setPitch("))
+        assertTrue(service.contains("pause.comma"))
+        assertTrue(service.contains("pause.period"))
+    }
+
     @Test fun podcastLibraryKeepsFavoritesOpmlAndNewEpisodes() {
         val library = source("NativePodcastLibrary.kt")
         val screen = source("NativeMediaAndDownloads.kt")

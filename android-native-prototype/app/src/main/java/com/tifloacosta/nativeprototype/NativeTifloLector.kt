@@ -929,6 +929,7 @@ private fun NativeReadingScreen(
         mutableIntStateOf(prefs.getInt("engine." + book.id, 0))
     }
     var engineMessage by remember(book.id) { mutableStateOf("") }
+    var bookmarkMessage by remember(book.id) { mutableStateOf("") }
     var geminiVoiceIndex by rememberSaveable(book.id) {
         mutableIntStateOf(
             NativeGeminiSpeech.voices.indexOf(prefs.getString("gemini.voice", "Kore"))
@@ -1034,8 +1035,15 @@ private fun NativeReadingScreen(
             2, 3 -> moveOneUnit(which == 3)
             4 -> {
                 val mark = displayOffset.coerceIn(0, fullText.length)
-                if (active) send(NativeReaderPlaybackService.ACTION_BOOKMARK)
-                else if (mark !in book.marks) onUpdate(book.copy(marks = book.marks + mark, offset = mark))
+                if (mark in visibleMarks) {
+                    bookmarkMessage = if (english) "Bookmark already exists at this position."
+                        else "Ya existe una marca en esta posición."
+                } else {
+                    if (active) send(NativeReaderPlaybackService.ACTION_BOOKMARK)
+                    else onUpdate(book.copy(marks = book.marks + mark, offset = mark))
+                    bookmarkMessage = if (english) "Bookmark requested at the current position."
+                        else "Marca solicitada en la posición actual."
+                }
             }
             5 -> jumping = true
         }
@@ -1166,6 +1174,8 @@ private fun NativeReadingScreen(
                 else "Gemini envía fragmentos del documento a Google y puede consumir cuota. Selecciona Sistema para lectura local.")
         }
         if (engineMessage.isNotEmpty()) Text(engineMessage)
+        if (bookmarkMessage.isNotEmpty()) Text(bookmarkMessage,
+            modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
         if (!speaker.ready.value && readingEngine == 0) {
             Text(if (english) "Initializing Android speech…" else "Preparando la voz de Android…")
         }
@@ -1333,7 +1343,15 @@ private fun NativeReadingScreen(
             }
             Button(onClick = {
                 val mark = offset.coerceIn(0, fullText.length)
-                if (mark !in book.marks) onUpdate(book.copy(marks = book.marks + mark, offset = offset))
+                if (mark in visibleMarks) {
+                    bookmarkMessage = if (english) "Bookmark already exists at this position."
+                        else "Ya existe una marca en esta posición."
+                } else {
+                    if (active) send(NativeReaderPlaybackService.ACTION_BOOKMARK)
+                    else onUpdate(book.copy(marks = book.marks + mark, offset = mark))
+                    bookmarkMessage = if (english) "Bookmark requested at the current position."
+                        else "Marca solicitada en la posición actual."
+                }
             }) {
                 Text(if (english) "Add bookmark" else "Añadir marca")
             }

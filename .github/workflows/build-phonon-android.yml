@@ -1,0 +1,77 @@
+name: Build and attach Phonon native Android CPU libraries
+
+# Runs ONLY when this workflow itself is changed on the draft Android branch.
+# Never merges or publishes to Google Play. The upstream source is pinned by SHA.
+on:
+  push:
+    branches: [feat/android-reader-phase2-navigation-20261106]
+    paths:
+      - .github/workflows/build-phonon-android.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-native:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - name: Check out TifloAcosta development branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Install Android NDK 29 using runner SDK
+        shell: bash
+        run: |
+          set -euxo pipefail
+          export ANDROID_HOME="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          export ANDROID_SDK_ROOT="$ANDROID_HOME"
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "ndk;29.0.14206865"
+      - name: Install Rust targets and cargo-ndk
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-linux-android,x86_64-linux-android
+      - run: cargo install cargo-ndk --locked
+      - name: Build pinned upstream Phonon runtime
+        shell: bash
+        run: |
+          set -euxo pipefail
+          git clone --filter=blob:none https://github.com/gradium-ai/xn-ptts.git phonon-source
+          cd phonon-source
+          git checkout --detach 49b9033e44ab0fbb935973eca3213757644d1bbb
+          export ANDROID_NDK_HOME="$ANDROID_HOME/ndk/29.0.14206865"
+          # Conservative binaries: avoid ARMv8.2-only instructions on older phones.
+          ARM64_FEATURES= ./android/build.sh
+          mkdir -p "$GITHUB_WORKSPACE/android-native-prototype/app/src/main/jniLibs"
+          cp -R android/jniLibs/. "$GITHUB_WORKSPACE/android-native-prototype/app/src/main/jniLibs/"
+      - name: Verify ELF binaries and record upstream revision
+        shell: bash
+        run: |
+          set -euxo pipefail
+          dir=android-native-prototype/app/src/main/jniLibs
+          test -s "$dir/arm64-v8a/libptts_ffi.so"
+          test -s "$dir/x86_64/libptts_ffi.so"
+          file "$dir"/*/libptts_ffi.so
+          file "$dir"/*/libptts_ffi.so | grep -c ELF
+          sha256sum "$dir"/*/libptts_ffi.so > "$dir/SHA256SUMS"
+          cat > "$dir/SOURCE.md" <<'EOF'
+          Phonon native CPU binaries: gradium-ai/xn-ptts
+          Upstream release: v0.4.1
+          Commit: 49b9033e44ab0fbb935973eca3213757644d1bbb
+          Runtime: ptts-ffi / xn, MIT OR Apache-2.0
+          Built from source by GitHub Actions with Android NDK 29.
+          ARM64_FEATURES= (portable ARMv8, slower than optimized ARMv8.2)
+          Model weights are not included; their licenses are separate.
+          EOF
+      - name: Commit verified binaries to Android draft branch only
+        shell: bash
+        run: |
+          set -euxo pipefail
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add android-native-prototype/app/src/main/jniLibs
+          if ! git diff --cached --quiet; then
+            git commit -m "build(android): attach pinned Phonon 0.4.1 CPU libraries (arm64/x86_64)"
+            git push origin HEAD:feat/android-reader-phase2-navigation-20261106
+          fi

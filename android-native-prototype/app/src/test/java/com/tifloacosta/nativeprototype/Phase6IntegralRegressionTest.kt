@@ -1,0 +1,126 @@
+package com.tifloacosta.nativeprototype
+
+import org.junit.Assert.assertTrue
+import org.junit.Test
+import java.io.File
+
+class Phase6IntegralRegressionTest {
+    private fun source(name: String) =
+        File("src/main/java/com/tifloacosta/nativeprototype/$name").readText()
+
+    @Test fun readerKeepsNavigationAndSpeechEngines() {
+        val reader = source("NativeTifloLector.kt")
+        assertTrue(reader.contains("ReaderNavigation"))
+        assertTrue(reader.contains("NativePhonon"))
+        assertTrue(reader.contains("NativeGemini"))
+        assertTrue(reader.contains("bookmark"))
+    }
+
+    @Test fun sleepTimerUsesMonotonicDeadlineAndCanBeCancelled() {
+        val service = source("NativeReaderPlaybackService.kt")
+        assertTrue(service.contains("SystemClock.elapsedRealtime() + minutes.coerceIn(0, 120) * 60_000L"))
+        assertTrue(service.contains("handler.postDelayed(sleepExpiration"))
+        assertTrue(service.contains("handler.removeCallbacks(sleepExpiration)"))
+        assertTrue(service.contains("sleepDeadlineMs = 0L"))
+        assertTrue(service.contains("pauseReading()"))
+        // Regression: countdown must not depend exclusively on playing ticks.
+        assertTrue(!service.contains("remainingSleepMs -= "))
+    }
+
+    @Test fun bookmarkActionsHaveAccessibleFeedback() {
+        val reader = source("NativeTifloLector.kt")
+        assertTrue(reader.contains("bookmarkMessage"))
+        assertTrue(reader.contains("Marca solicitada en la posición actual."))
+        assertTrue(reader.contains("Ya existe una marca en esta posición."))
+        assertTrue(reader.contains("liveRegion = LiveRegionMode.Polite"))
+    }
+
+    @Test fun navigationSelectorStaysNextToPlaybackControl() {
+        val reader = source("NativeTifloLector.kt")
+        val play = reader.indexOf("else (if (english) \"Play\" else \"Reproducir\")")
+        val navigation = reader.indexOf("if (english) \"Move by\" else \"Avanzar y retroceder por\"")
+        val engine = reader.indexOf("if (english) \"Engine\" else \"Motor\"")
+        assertTrue("Playback button must precede the navigation selector", play >= 0 && navigation > play)
+        assertTrue("Navigation must precede voice configuration", engine > navigation)
+    }
+
+    @Test fun externalVoiceProvidersAreIsolatedForTalkBack() {
+        val screen = source("NativeReaderExternalVoiceKeys.kt")
+        assertTrue(screen.contains("selectedProvider == null"))
+        assertTrue(screen.contains("selectedProvider = \"phonon\""))
+        assertTrue(screen.contains("selectedProvider = \"gemini\""))
+        assertTrue(screen.contains("selectedProvider == \"phonon\""))
+        assertTrue(screen.contains("selectedProvider == \"gemini\""))
+        assertTrue(screen.contains("Volver a motores"))
+        assertTrue(screen.contains("if (selectedProvider != null) backFromProvider() else onBack()"))
+    }
+
+    @Test fun userCanStopReadingAndNoSilentAutoStart() {
+        val reader = source("NativeTifloLector.kt")
+        val service = source("NativeReaderPlaybackService.kt")
+        assertTrue(reader.contains("if (startOnOpen && !playing) startSpeech()"))
+        assertTrue(reader.contains("Detener lectura"))
+        assertTrue(reader.contains("ACTION_STOP"))
+        assertTrue(service.contains("handler.removeCallbacks(resumeAfterPunctuation)"))
+        assertTrue(service.contains("phononGeneration++"))
+        assertTrue(service.contains("geminiGeneration++"))
+    }
+
+    @Test fun libraryShowsFoldersAndDirectAudioExportAction() {
+        val reader = source("NativeTifloLector.kt")
+        val tools = source("NativeReaderDocumentActions.kt")
+        assertTrue(reader.contains("Convertir a audio o DAISY"))
+        assertTrue(reader.contains("open(book, openExport = true)"))
+        assertTrue(reader.contains("Carpetas"))
+        assertTrue(tools.contains("initialAudioExport"))
+        assertTrue(tools.contains("if (showAudioExport)"))
+        assertTrue(tools.contains("if (showOtherActions)"))
+    }
+
+    @Test fun accessibleSpeedPitchAndPunctuationControls() {
+        val settings = source("NativeReaderSettings.kt")
+        val service = source("NativeReaderPlaybackService.kt")
+        assertTrue(settings.contains("contentDescription = label + \": \" + choices[index]"))
+        assertTrue(settings.contains("Tono de la voz del sistema"))
+        assertTrue(settings.contains("Pausa tras comas y punto y coma"))
+        assertTrue(settings.contains("Pausa al final de frase"))
+        assertTrue(service.contains("setPitch("))
+        assertTrue(service.contains("pause.comma"))
+        assertTrue(service.contains("pause.period"))
+    }
+
+    @Test fun libraryTitleAndProgressShareOneTalkBackStop() {
+        val library = source("NativeTifloLector.kt")
+        assertTrue(library.contains("contentDescription = book.title + \". \" + readingStatus"))
+        assertTrue(library.contains("Text(book.title + \". \" + readingStatus)"))
+        assertTrue(!library.contains("Text(readingStatus + if (book.id in queuedIds)"))
+    }
+
+    @Test fun daisyAndAudioExportOfferSystemVoiceWithoutGeminiKey() {
+        val actions = source("NativeReaderDocumentActions.kt")
+        val system = source("NativeSystemAudioSynth.kt")
+        assertTrue(actions.contains("listOf(\"Sistema\", \"Gemini\", \"Phonon\")"))
+        assertTrue(actions.contains("NativeSystemAudioSynth(context)"))
+        assertTrue(actions.contains("if (wantsDaisy) NativeGeminiDaisyExport.generateWithSynthesizer"))
+        assertTrue(system.contains("synthesizeToFile("))
+        assertTrue(system.contains("normalizeWav(result)"))
+    }
+
+    @Test fun podcastLibraryKeepsFavoritesOpmlAndNewEpisodes() {
+        val library = source("NativePodcastLibrary.kt")
+        val screen = source("NativeMediaAndDownloads.kt")
+        assertTrue(library.contains("fun savedEpisodes()"))
+        assertTrue(library.contains("fun importOPML("))
+        assertTrue(library.contains("fun recordFeedCheck("))
+        assertTrue(screen.contains("Reproducir favorito"))
+        assertTrue(screen.contains("Consultar episodios"))
+    }
+
+    @Test fun youtubeAccountKeepsOptionalSignInAndSubscriptionPages() {
+        val account = source("NativeYouTubeAccount.kt")
+        assertTrue(account.contains("fun signOut()"))
+        assertTrue(account.contains("suspend fun loadSubscriptions("))
+        assertTrue(account.contains("subscriptionsNextPageToken"))
+        assertTrue(account.contains("AndroidKeyStore"))
+    }
+}

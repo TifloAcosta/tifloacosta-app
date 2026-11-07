@@ -1,0 +1,41 @@
+AVISOS LEGALES DE TIFLOLECTOR ANDROID / THIRD-PARTY NOTICES
+
+LAME / java-lame (co.ntbl:lame:1.0.0)
+MP3 encoding uses an independently developed Java port of the LAME encoder.
+Library publisher: Daniel Berkowitz, https://github.com/daberkow/java-lame
+Original LAME project: https://lame.sourceforge.io/
+Library copyright and exact LGPL license text: https://github.com/daberkow/java-lame/blob/main/LICENSE
+Published Maven artifact: https://central.sonatype.com/artifact/co.ntbl/lame/1.0.0
+The library is licensed under the GNU Lesser General Public License (LGPL).
+The LAME library is not proprietary to TifloAcosta; no claim of ownership is made.
+You may modify/replace this LGPL library and reverse engineer the application as
+needed to debug such modifications, subject to the library license.
+Library source is available at the upstream URL above.
+The TifloAcosta Android source and build configuration for rebuilding/relinking
+are at https://github.com/TifloAcosta/tifloacosta-app
+Android native reader Gradle dependency: android-native-prototype/library/build.gradle
+To replace the library for private testing, replace Gradle's dependency on
+co.ntbl:lame:1.0.0 with your modified jar/project, rebuild the app using Gradle
+and install the rebuilt version on your own device. This is distinct from the
+Google Play signed release; only Google controls app signing and updates.
+
+Phonon runtime / ptts-ffi
+Source: https://github.com/gradium-ai/xn-ptts
+Native build provenance and hashes:
+android-native-prototype/app/src/main/jniLibs/SOURCE.md
+The native runtime license is MIT OR Apache-2.0; model weights have separate
+licenses. No pretrained Phonon weights are included in the distribution.
+Model users must review and accept the model's own terms. In particular,
+some multilingual/40m models prohibit commercial use. TifloAcosta does not
+provide or finance API keys or external accounts.
+
+Apache POI
+Source: https://poi.apache.org/
+Used only for supported legacy DOC, XLS, PPT and PPS text extraction.
+The vulnerable HMEF/TNEF package of POI 4.1.2 must be removed from shipped
+optimized release by R8; a build-time -checkdiscard rule blocks releases
+where HMEF survives. Unsupported TNEF and HMEF files are never accepted.
+
+These notices do not replace any obligations imposed by the actual upstream
+license files. The official distribution must ship all required license texts
+and corresponding sources in accordance with upstream license terms.

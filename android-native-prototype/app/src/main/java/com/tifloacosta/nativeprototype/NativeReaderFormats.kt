@@ -113,6 +113,13 @@ object NativeReaderFormats {
                 node.remove()
             }
         }
+        // Preserve chapter headings from EPUB/XHTML before Android removes
+        // structure when converting HTML into a plain-text library entry.
+        for (level in 1..6) {
+            document.select("h$level").forEach { heading ->
+                heading.prependText("#".repeat(level) + " ")
+            }
+        }
         return Html.fromHtml(document.body().html(), Html.FROM_HTML_MODE_COMPACT).toString()
             .replace(Regex("\\n{4,}"), "\n\n")
     }
@@ -176,6 +183,27 @@ object NativeReaderFormats {
         }
     }
 
+    private fun docxWithHeadings(bytes: ByteArray): String {
+        val doc = try { parseXml(bytes) } catch (_: Exception) {
+            throw IOException("El DOCX no contiene texto XML legible.")
+        }
+        val paragraphs = doc.getElementsByTagName("w:p")
+        return (0 until paragraphs.length).mapNotNull { index ->
+            val paragraph = paragraphs.item(index) as? Element ?: return@mapNotNull null
+            val textNodes = paragraph.getElementsByTagName("w:t")
+            val text = (0 until textNodes.length).joinToString("") {
+                textNodes.item(it)?.textContent.orEmpty()
+            }
+            if (text.isBlank()) return@mapNotNull null
+            val styles = paragraph.getElementsByTagName("w:pStyle")
+            val style = (styles.item(0) as? Element)
+                ?.getAttribute("w:val").orEmpty().lowercase(Locale.ROOT)
+            val level = Regex("^(?:heading|titulo|título|encabezado)([1-6])$")
+                .matchEntire(style)?.groupValues?.getOrNull(1)?.toIntOrNull()
+            if (level == null) text else "#".repeat(level) + " " + text
+        }.joinToString("\n\n")
+    }
+
     private fun excelText(files: Map<String, ByteArray>): String {
         val shared = files["xl/sharedStrings.xml"]?.let { data ->
             val doc = parseXml(data)
@@ -224,7 +252,7 @@ object NativeReaderFormats {
                 DecodedReaderFile(NativeReaderOpenDocument.extract(ext, files), ext)
             }
             "docx" -> {
-                val body = files["word/document.xml"]?.let { tagText(it, "w:p", "w:t") }.orEmpty()
+                val body = files["word/document.xml"]?.let { docxWithHeadings(it) }.orEmpty()
                 if (body.isBlank()) throw IOException("El DOCX no contiene texto extraíble.")
                 DecodedReaderFile(body.take(MAX_TEXT), ext)
             }

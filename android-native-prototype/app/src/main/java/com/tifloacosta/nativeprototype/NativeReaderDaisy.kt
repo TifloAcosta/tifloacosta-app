@@ -73,9 +73,9 @@ object NativeReaderDaisy {
         factory.isXIncludeAware = false
         factory.isExpandEntityReferences = false
         // Real DAISY 2.02 books normally declare an external SMIL 1.0 DTD.
-        // Strip that declaration WITHOUT fetching external entities.
+        // Strip supported DAISY external DTD declarations WITHOUT fetching entities.
         val xml = data.toString(Charsets.UTF_8).replace(
-            Regex("<!DOCTYPE\\s+smil\\b[^>]*>", RegexOption.IGNORE_CASE), ""
+            Regex("<!DOCTYPE\\s+(?:smil|package|dtbook|ncx)\\b[^>]*>", RegexOption.IGNORE_CASE), ""
         )
         return factory.newDocumentBuilder().parse(xml.byteInputStream(Charsets.UTF_8))
     }

@@ -14,6 +14,7 @@ jobs:
   submit-to-apple:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    # Reintento seguro: Apple solo aceptará una versión apta para revisión.
     env:
       API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
       API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}

@@ -186,8 +186,8 @@ enum NativeGeminiDaisyExport {
             try body.write(to: working.appendingPathComponent(name),
                            atomically: true, encoding: .utf8)
         }
-        let output = FileManager.default.temporaryDirectory
-            .appendingPathComponent("TifloLector-\(uuid).zip")
+        let output = try NativeGeminiAudioExport.destination(
+            title: title, fileExtension: "zip")
         do {
             guard let archive = Archive(url: output, accessMode: .create) else {
                 throw NativeGeminiAudioExport.ExportError.unsupportedFormat

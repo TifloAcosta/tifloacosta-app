@@ -1375,20 +1375,19 @@ private struct NativeReaderTextLayout {
     }
 }
 
-/// A real SwiftUI navigation destination: VoiceOver traverses every format
-/// in order, and confirmation occurs before returning to export settings.
-private struct NativeReaderExportFormatScreen: View {
+/// Each format remains in the same accessible List; selecting it never
+/// dismisses the screen or changes VoiceOver's navigation hierarchy.
+private struct NativeReaderExportFormatControls: View {
     @Binding var selection: NativeGeminiAudioExport.Format
-    @Environment(\.dismiss) private var dismiss
+    let disabled: Bool
 
     var body: some View {
-        List {
+        Section("Formato de exportación") {
             ForEach(NativeGeminiAudioExport.Format.allCases) { format in
                 Button {
                     selection = format
                     UIAccessibility.post(notification: .announcement,
                         argument: "Formato \(format.rawValue) seleccionado")
-                    dismiss()
                 } label: {
                     HStack {
                         Text(format.rawValue)
@@ -1399,12 +1398,14 @@ private struct NativeReaderExportFormatScreen: View {
                         }
                     }
                 }
+                .disabled(disabled)
+                .accessibilityLabel(format.rawValue)
                 .accessibilityValue(selection == format ? "Seleccionado" : "No seleccionado")
-                .accessibilityHint("Doble toque para elegir \(format.rawValue) y volver a Exportar audio.")
+                .accessibilityHint("Doble toque para elegir este formato sin salir de la pantalla.")
             }
+            Text("Formato elegido: \(selection.rawValue)")
+                .accessibilityAddTraits(.updatesFrequently)
         }
-        .tifloScreenSurface()
-        .navigationTitle("Formato de exportación")
     }
 }
 
@@ -2232,13 +2233,11 @@ struct NativeReadingScreen: View {
                             }
                             Text("Phonon genera el audio dentro del iPhone sin enviar el libro a Internet.")
                         }
-                        NavigationLink {
-                            NativeReaderExportFormatScreen(selection: $audioExportFormat)
-                        } label: {
-                            LabeledContent("Formato", value: audioExportFormat.rawValue)
-                        }
-                        .disabled(audioExportBusy)
-                        .accessibilityHint("Abre una lista accesible de formatos MP3, M4A, WAV y DAISY.")
+                    }
+                    NativeReaderExportFormatControls(
+                        selection: $audioExportFormat, disabled: audioExportBusy
+                    )
+                    Section("Generación de audio") {
                         Text("DAISY incluye texto, audio y navegación. La compatibilidad externa está pendiente de validación.")
                         Button("Generar") { exportAudio() }
                             .disabled(audioExportBusy || latest.body.isEmpty ||

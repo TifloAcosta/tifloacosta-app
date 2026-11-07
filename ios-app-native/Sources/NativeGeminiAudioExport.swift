@@ -35,6 +35,28 @@ enum NativeGeminiAudioExport {
         var id: String { rawValue }
     }
 
+    /// Human-readable export names, with a small numeric suffix only when a file exists.
+    /// UUIDs stay inside the work directory, never in the shared file name.
+    static func destination(title: String, fileExtension: String) throws -> URL {
+        let cleaned = title.replacingOccurrences(of: #"[\\/:*?"<>|\\p{Cc}]"#,
+            with: " ", options: .regularExpression)
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        let base = String((cleaned.isEmpty ? "Documento" : cleaned).prefix(120))
+            .trimmingCharacters(in: CharacterSet(charactersIn: ". "))
+        let name = base.isEmpty ? "Documento" : base
+        let folder = FileManager.default.temporaryDirectory
+            .appendingPathComponent("TifloLectorExport", isDirectory: true)
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        var candidate = folder.appendingPathComponent(name).appendingPathExtension(fileExtension)
+        var suffix = 2
+        while FileManager.default.fileExists(atPath: candidate.path) {
+            candidate = folder.appendingPathComponent("\(name) (\(suffix))")
+                .appendingPathExtension(fileExtension)
+            suffix += 1
+        }
+        return candidate
+    }
+
     enum ExportError: LocalizedError {
         case tooLong, empty, unsupportedFormat, insufficientStorage
         var errorDescription: String? {
@@ -104,7 +126,7 @@ enum NativeGeminiAudioExport {
     static func mp3(pcm: Data) throws -> Data {
         guard pcm.count % 2 == 0 else { throw ExportError.unsupportedFormat }
         let encoder = try MP3Encoder(options: MP3EncoderOptions(
-            sampleRate: 48_000, bitrateKbps: 64, mode: .mono
+            sampleRate: 48_000, bitrateKbps: 128, mode: .mono
         ))
         var session = encoder.newSession()
         var encoded = Data()
@@ -235,14 +257,7 @@ enum NativeGeminiAudioExport {
                 text: text, title: title, voice: voice, engine: engine, progress: progress)
         }
         let segments = try chunks(text, engine: engine)
-        let safe = title.replacingOccurrences(
-            of: #"[^A-Za-z0-9 _.-]"#, with: "_", options: .regularExpression)
-            .prefix(65)
-        let folder = FileManager.default.temporaryDirectory
-            .appendingPathComponent("TifloLectorExport", isDirectory: true)
-        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
-        let file = folder.appendingPathComponent(
-            "\(safe.isEmpty ? "Documento" : String(safe))-\(UUID().uuidString).wav")
+        let file = try destination(title: title, fileExtension: "wav")
         FileManager.default.createFile(atPath: file.path, contents: nil)
         let output = try FileHandle(forWritingTo: file)
         var completed = false

@@ -22,7 +22,8 @@ enum NativeSystemSpeechExport {
         }
     }
 
-    static func generate(_ text: String, voice: String) async throws -> Data {
+    static func generate(_ text: String, voice: String, speed: Double = 1.0,
+                         pitch: Float = 1.0) async throws -> Data {
         try Task.checkCancellation()
         let content = text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !content.isEmpty else { throw ExportError.noAudio }
@@ -35,7 +36,10 @@ enum NativeSystemSpeechExport {
         } else {
             utterance.voice = AVSpeechSynthesisVoice(language: "es-ES")
         }
-        utterance.rate = AVSpeechUtteranceDefaultSpeechRate
+        utterance.rate = min(AVSpeechUtteranceMaximumSpeechRate,
+            max(AVSpeechUtteranceMinimumSpeechRate,
+                AVSpeechUtteranceDefaultSpeechRate * Float(speed)))
+        utterance.pitchMultiplier = max(0.5, min(2, pitch))
         let synthesizer = AVSpeechSynthesizer()
         var pcm = Data()
         var callbackError: Error?

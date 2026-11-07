@@ -37,7 +37,7 @@ class Phase6IntegralRegressionTest {
 
     @Test fun navigationSelectorStaysNextToPlaybackControl() {
         val reader = source("NativeTifloLector.kt")
-        val play = reader.indexOf("Text(if (english) \"Play\" else \"Reproducir\")")
+        val play = reader.indexOf("else (if (english) \"Play\" else \"Reproducir\")")
         val navigation = reader.indexOf("if (english) \"Move by\" else \"Avanzar y retroceder por\"")
         val engine = reader.indexOf("if (english) \"Engine\" else \"Motor\"")
         assertTrue("Playback button must precede the navigation selector", play >= 0 && navigation > play)

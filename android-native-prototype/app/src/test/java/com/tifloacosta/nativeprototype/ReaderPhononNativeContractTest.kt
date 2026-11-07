@@ -24,7 +24,9 @@ class ReaderPhononNativeContractTest {
         assertTrue(ui.contains("NativePhononReader.isAvailable"))
         assertTrue(ui.contains("listOf(\"Sistema\", \"Gemini\", \"Phonon\")"))
         assertTrue(service.contains("phononEnabled = chosenEngine == 2"))
-        assertTrue(service.contains("phononReader?.pause()"))
+        // A paused synthesis must be stopped to prevent late native audio after Pause.
+        assertTrue(service.contains("phononGeneration++"))
+        assertTrue(service.contains("phononReader?.stop()"))
         assertTrue(service.contains("phononReader?.stop()"))
         assertTrue(service.contains("if (playing && kind == \"text\" && !geminiEnabled && !phononEnabled)"))
     }

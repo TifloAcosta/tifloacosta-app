@@ -1,4 +1,5 @@
 name: Verify Google Play access without publishing
+# Safe credential and Play-version preflight, no release uploaded or committed.
 
 on:
   workflow_dispatch:

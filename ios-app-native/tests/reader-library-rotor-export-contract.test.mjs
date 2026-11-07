@@ -12,5 +12,5 @@ test('rotor shortcut selects the book and opens the same audio and DAISY setting
   assert.match(code, /var startWithAudioExport = false/);
   assert.match(code, /if startWithAudioExport \{ showAudioExport = true \}/);
   assert.match(code, /\.sheet\(isPresented: \$showAudioExport\) \{ exportAudioSheet \}/);
-  assert.match(code, /Text\("DAISY"\)\.tag\(NativeGeminiAudioExport\.Format\.daisy\)/);
+  assert.match(code, /NativeReaderExportFormatScreen\(selection: \$audioExportFormat\)/);
 });

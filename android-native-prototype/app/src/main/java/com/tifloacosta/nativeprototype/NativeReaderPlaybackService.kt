@@ -738,8 +738,11 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                 phononReader?.stop()
                 phononPlayingSegment = false
             } else if (geminiEnabled) {
-                geminiGeneration++ // Invalidate even already-completed async callbacks.
-                try { player?.pause() } catch (_: Exception) {
+                // Cancel unfinished network generation, but keep the current
+                // generation when a prepared MediaPlayer must resume later.
+                if (player == null) geminiGeneration++
+                else try { player?.pause() } catch (_: Exception) {
+                    geminiGeneration++
                     player?.release()
                     player = null
                 }

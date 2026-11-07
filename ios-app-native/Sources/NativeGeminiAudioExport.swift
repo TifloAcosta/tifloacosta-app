@@ -38,7 +38,7 @@ enum NativeGeminiAudioExport {
     /// Human-readable export names, with a small numeric suffix only when a file exists.
     /// UUIDs stay inside the work directory, never in the shared file name.
     static func destination(title: String, fileExtension: String) throws -> URL {
-        let cleaned = title.replacingOccurrences(of: #"[\\/:*?"<>|\\p{Cc}]"#,
+        let cleaned = title.replacingOccurrences(of: #"[^\p{L}\p{N}\p{M} ._()-]"#,
             with: " ", options: .regularExpression)
             .trimmingCharacters(in: .whitespacesAndNewlines)
         let base = String((cleaned.isEmpty ? "Documento" : cleaned).prefix(120))
@@ -283,8 +283,8 @@ enum NativeGeminiAudioExport {
         try output.close()
         completed = true
         if format == .wav { return file }
-        let destination = file.deletingPathExtension()
-            .appendingPathExtension(format == .mp3 ? "mp3" : "m4a")
+        let destination = try destination(title: title,
+            fileExtension: format == .mp3 ? "mp3" : "m4a")
         defer { try? FileManager.default.removeItem(at: file) }
         if format == .mp3 {
             try encodeMP3(wavFile: file, destination: destination)

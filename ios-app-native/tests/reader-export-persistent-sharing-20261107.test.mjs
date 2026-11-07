@@ -6,7 +6,7 @@ test('audio and DAISY exports persist in app Documents rather than being lost wi
   assert.match(source, /private enum NativeReaderSavedExports/);
   assert.match(source, /\.documentDirectory/);
   assert.match(source, /Exportaciones de TifloLector/);
-  assert.match(source, /FileManager\.default\.copyItem\(at: source, to: target\)/);
+  assert.match(source, /FileManager\.default\.moveItem\(at: source, to: target\)/);
   assert.match(source, /let saved = try NativeReaderSavedExports\.save\(url\)/);
   assert.match(source, /audioExportResult = saved/);
 });
@@ -17,4 +17,10 @@ test('the export page has a real iOS ShareLink and history accessible after clos
   assert.match(source, /ForEach\(savedAudioExports, id: \\.self\)/);
   assert.match(source, /ShareLink\(item: file\)/);
   assert.match(source, /savedAudioExports = NativeReaderSavedExports\.list\(\)/);
+});
+
+test('legacy temporary DAISY files are recovered without reconversion', () => {
+  assert.match(source, /private static func recoverLegacyExports/);
+  assert.match(source, /file\.lastPathComponent\.hasPrefix/);
+  assert.match(source, /recoverLegacyExports\(\)/);
 });

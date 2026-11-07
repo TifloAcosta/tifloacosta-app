@@ -109,6 +109,7 @@ fun NativeTifloLector(
     var selectedBook by remember { mutableStateOf<ReaderBook?>(null) }
     var selectedText by remember { mutableStateOf("") }
     var playOnOpen by remember { mutableStateOf(false) }
+    var exportBookId by remember { mutableStateOf<String?>(null) }
     var screen by rememberSaveable { mutableStateOf("home") }
     var filtersExpanded by rememberSaveable { mutableStateOf(false) }
     var filter by rememberSaveable { mutableIntStateOf(0) }
@@ -228,7 +229,8 @@ fun NativeTifloLector(
         }
     }
 
-    fun open(book: ReaderBook, startSpeech: Boolean = false) {
+    fun open(book: ReaderBook, startSpeech: Boolean = false, openExport: Boolean = false) {
+        exportBookId = if (openExport) book.id else null
         error = ""
         scope.launch {
             try {
@@ -318,7 +320,7 @@ fun NativeTifloLector(
         }
     }
     fun back() {
-        if (selectedBook != null) { selectedBook = null; selectedText = ""; playOnOpen = false; refresh() }
+        if (selectedBook != null) { selectedBook = null; selectedText = ""; playOnOpen = false; exportBookId = null; refresh() }
         else if (screen == "catalogs") screen = "import"
         else if (screen == "folders" || screen == "queue") screen = "home"
         else if (screen != "home") screen = "home"
@@ -351,6 +353,7 @@ fun NativeTifloLector(
             fullText = selectedText,
             english = english,
             startOnOpen = playOnOpen,
+            openExportOnStart = exportBookId == book.id,
             rate = rate,
             onRateChange = { rate = it; preferences.edit().putFloat("rate", it).apply() },
             onUpdate = ::save,
@@ -451,10 +454,12 @@ fun NativeTifloLector(
         queueIds = queuedIds)
     val actions = if (english)
         listOf("Open", "Play", "Bookmarks", "Favorite", "Information", "Rename",
-            "Move to folder", "Delete", "Add or remove from queue", "Mark read or unread")
+            "Move to folder", "Delete", "Add or remove from queue", "Mark read or unread",
+            "Convert to audio or DAISY")
     else listOf("Abrir", "Reproducir", "Marcas", "Favorito", "Información",
         "Cambiar título", "Mover a carpeta", "Eliminar",
-        "Añadir o quitar de cola", "Marcar como terminado o pendiente")
+        "Añadir o quitar de cola", "Marcar como terminado o pendiente",
+        "Convertir a audio o DAISY")
 
     /**
      * Continue with the existing TifloLector for an older book. No copying,
@@ -638,6 +643,7 @@ fun NativeTifloLector(
                         refresh()
                     }
                     9 -> save(book.copy(finished = !book.finished))
+                    10 -> open(book, openExport = true)
                 }
             }
             // One TalkBack stop per book: title, selected action, then progress.
@@ -669,8 +675,8 @@ fun NativeTifloLector(
             } else {
             OutlinedButton(onClick = { run(action) },
                 modifier = Modifier.fillMaxWidth().clearAndSetSemantics {
-                    contentDescription = book.title
-                    stateDescription = actions[action] + ". " + readingStatus +
+                    contentDescription = book.title + ". " + readingStatus
+                    stateDescription = actions[action] +
                         (if (book.id in queuedIds) {
                             if (english) ". In reading queue" else ". En cola de lectura"
                         } else "")
@@ -855,6 +861,7 @@ private fun NativeReadingScreen(
     fullText: String,
     english: Boolean,
     startOnOpen: Boolean,
+    openExportOnStart: Boolean,
     rate: Float,
     onRateChange: (Float) -> Unit,
     onUpdate: (ReaderBook) -> Unit,
@@ -888,7 +895,7 @@ private fun NativeReadingScreen(
     }
     var showAudio by rememberSaveable(book.id) { mutableStateOf(false) }
     var showPronunciation by rememberSaveable(book.id) { mutableStateOf(false) }
-    var showTools by rememberSaveable(book.id) { mutableStateOf(false) }
+    var showTools by rememberSaveable(book.id) { mutableStateOf(openExportOnStart) }
     val dictionary = remember { NativePronunciationStore(context.applicationContext) }
     var sleepIndex by remember(book.id) { mutableIntStateOf(0) }
     val sleepMinutes = listOf(0, 5, 10, 15, 30, 45, 60)
@@ -1067,6 +1074,7 @@ private fun NativeReadingScreen(
     }
     if (showTools) {
         NativeReaderDocumentActions(book, english, current?.text.orEmpty(),
+            initialAudioExport = openExportOnStart,
             onUnitChange = { next ->
                 unitType = next
                 if (active) send(NativeReaderPlaybackService.ACTION_UNIT, next)

@@ -1149,52 +1149,6 @@ private fun NativeReadingScreen(
         TextButton(onClick = { showTools = true }, modifier = Modifier.fillMaxWidth()) {
             Text(if (english) "Convert to audio or DAISY" else "Convertir a audio o DAISY")
         }
-        ReaderCompactChoice(
-            if (english) "Engine" else "Motor",
-            if (phononReady) {
-                if (english) listOf("System", "Gemini", "Phonon")
-                else listOf("Sistema", "Gemini", "Phonon")
-            } else {
-                if (english) listOf("System", "Gemini")
-                else listOf("Sistema", "Gemini")
-            },
-            readingEngine.coerceIn(0, if (phononReady) 2 else 1), english
-        ) { chosen ->
-            readingEngine = chosen
-            prefs.edit().putInt("engine." + book.id, chosen).apply()
-            if (active) send(NativeReaderPlaybackService.ACTION_VOICE)
-        }
-        if (readingEngine == 2 && phononReady) {
-            if (phononVoices.isNotEmpty()) {
-                ReaderCompactChoice(
-                    if (english) "Phonon voice" else "Voz Phonon",
-                    phononVoices,
-                    phononVoices.indexOf(phononVoice).coerceAtLeast(0),
-                    english
-                ) { index ->
-                    val chosenVoice = phononVoices[index]
-                    phononVoice = chosenVoice
-                    prefs.edit().putString("phonon.voice", chosenVoice).apply()
-                    if (active) send(NativeReaderPlaybackService.ACTION_VOICE)
-                }
-            }
-            Text(if (english) "Phonon reads offline using your installed checkpoint."
-                else "Phonon lee sin Internet utilizando el modelo instalado.")
-        }
-        if (readingEngine == 1) {
-            ReaderCompactChoice(
-                if (english) "Voice" else "Voz",
-                NativeGeminiSpeech.voices, geminiVoiceIndex, english
-            ) { selected ->
-                geminiVoiceIndex = selected
-                prefs.edit().putString("gemini.voice", NativeGeminiSpeech.voices[selected]).apply()
-                if (active) send(NativeReaderPlaybackService.ACTION_VOICE)
-            }
-            Text(if (english)
-                "Gemini sends text segments to Google and may use your quota. Choose System for local reading."
-                else "Gemini envía fragmentos del documento a Google y puede consumir cuota. Selecciona Sistema para lectura local.")
-        }
-        if (engineMessage.isNotEmpty()) Text(engineMessage)
         if (bookmarkMessage.isNotEmpty()) Text(bookmarkMessage,
             modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
         if (!speaker.ready.value && readingEngine == 0) {
@@ -1279,6 +1233,52 @@ private fun NativeReadingScreen(
             }
         ) { Text(if (english) "Voice and pronunciation" else "Voz y pronunciación") }
         if (showAudio) {
+        ReaderCompactChoice(
+            if (english) "Engine" else "Motor",
+            if (phononReady) {
+                if (english) listOf("System", "Gemini", "Phonon")
+                else listOf("Sistema", "Gemini", "Phonon")
+            } else {
+                if (english) listOf("System", "Gemini")
+                else listOf("Sistema", "Gemini")
+            },
+            readingEngine.coerceIn(0, if (phononReady) 2 else 1), english
+        ) { chosen ->
+            readingEngine = chosen
+            prefs.edit().putInt("engine." + book.id, chosen).apply()
+            if (active) send(NativeReaderPlaybackService.ACTION_VOICE)
+        }
+        if (readingEngine == 2 && phononReady) {
+            if (phononVoices.isNotEmpty()) {
+                ReaderCompactChoice(
+                    if (english) "Phonon voice" else "Voz Phonon",
+                    phononVoices,
+                    phononVoices.indexOf(phononVoice).coerceAtLeast(0),
+                    english
+                ) { index ->
+                    val chosenVoice = phononVoices[index]
+                    phononVoice = chosenVoice
+                    prefs.edit().putString("phonon.voice", chosenVoice).apply()
+                    if (active) send(NativeReaderPlaybackService.ACTION_VOICE)
+                }
+            }
+            Text(if (english) "Phonon reads offline using your installed checkpoint."
+                else "Phonon lee sin Internet utilizando el modelo instalado.")
+        }
+        if (readingEngine == 1) {
+            ReaderCompactChoice(
+                if (english) "Voice" else "Voz",
+                NativeGeminiSpeech.voices, geminiVoiceIndex, english
+            ) { selected ->
+                geminiVoiceIndex = selected
+                prefs.edit().putString("gemini.voice", NativeGeminiSpeech.voices[selected]).apply()
+                if (active) send(NativeReaderPlaybackService.ACTION_VOICE)
+            }
+            Text(if (english)
+                "Gemini sends text segments to Google and may use your quota. Choose System for local reading."
+                else "Gemini envía fragmentos del documento a Google y puede consumir cuota. Selecciona Sistema para lectura local.")
+        }
+        if (engineMessage.isNotEmpty()) Text(engineMessage)
             NativeReaderVoicePicker(
                 english = english,
                 speaker = speaker,

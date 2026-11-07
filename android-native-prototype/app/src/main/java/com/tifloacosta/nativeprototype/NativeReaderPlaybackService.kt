@@ -126,6 +126,11 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
     private var tts: TextToSpeech? = null
     private var ttsReady = false
     private var pendingUtterance = ""
+    private var pendingSpeechEnd = 0
+    private var pendingPauseMs = 0L
+    private val resumeAfterPunctuation = Runnable {
+        if (playing && kind == "text" && !geminiEnabled && !phononEnabled) speakCurrent()
+    }
     private var book: ReaderBook? = null
     private var kind = ""
     private var segments = emptyList<ReaderAudioSegment>()
@@ -141,8 +146,28 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
     private var voiceId = ""
     private var playing = false
     private val focusRecovery = NativeReaderAudioFocusRecovery()
-    private var remainingSleepMs = 0L
-    private var lastTick = 0L
+    private var sleepDeadlineMs = 0L
+    private val sleepExpiration = Runnable {
+        if (sleepDeadlineMs > 0L && SystemClock.elapsedRealtime() >= sleepDeadlineMs) {
+            sleepDeadlineMs = 0L
+            pauseReading()
+        }
+    }
+
+    /** A monotonic deadline survives pauses and does not depend on ticker cadence. */
+    private fun setSleepTimer(minutes: Int) {
+        handler.removeCallbacks(sleepExpiration)
+        sleepDeadlineMs = if (minutes <= 0) 0L
+            else SystemClock.elapsedRealtime() + minutes.coerceIn(0, 120) * 60_000L
+        if (sleepDeadlineMs > 0L) {
+            handler.postDelayed(sleepExpiration, minutes.coerceIn(0, 120) * 60_000L)
+        }
+        publish()
+    }
+
+    private fun remainingSleepMs(): Long =
+        if (sleepDeadlineMs == 0L) 0L
+        else (sleepDeadlineMs - SystemClock.elapsedRealtime()).coerceAtLeast(0L)
 
     private val audioAttributes = AudioAttributes.Builder()
         .setUsage(AudioAttributes.USAGE_MEDIA)
@@ -179,15 +204,13 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
     private val ticker = object : Runnable {
         override fun run() {
             if (playing) {
-                val now = android.os.SystemClock.elapsedRealtime()
-                if (remainingSleepMs > 0 && lastTick > 0) {
-                    remainingSleepMs -= (now - lastTick).coerceAtLeast(0)
-                    if (remainingSleepMs <= 0) {
-                        pauseReading()
-                        return
-                    }
+                val now = SystemClock.elapsedRealtime()
+                if (sleepDeadlineMs > 0L && now >= sleepDeadlineMs) {
+                    handler.removeCallbacks(sleepExpiration)
+                    sleepDeadlineMs = 0L
+                    pauseReading()
+                    return
                 }
-                lastTick = now
                 holdPlaybackWakeLock()
                 if (kind == "audio") {
                     val observed = try { player?.currentPosition ?: positionMs }
@@ -250,13 +273,14 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                     override fun onDone(utteranceId: String?) {
                         handler.post {
                             if (utteranceId == pendingUtterance && playing && kind == "text") {
-                                val unitsNow = units
-                                val currentIndex = ReaderUnits.indexForOffset(unitsNow, textOffset)
-                                val next = unitsNow.getOrNull(currentIndex + 1)?.start ?: text.length
+                                val next = pendingSpeechEnd.coerceIn(0, text.length)
                                 textOffset = next
                                 persist()
                                 if (next >= text.length) pauseReading()
-                                else speakCurrent()
+                                else {
+                                    handler.removeCallbacks(resumeAfterPunctuation)
+                                    handler.postDelayed(resumeAfterPunctuation, pendingPauseMs)
+                                }
                             }
                         }
                     }
@@ -296,9 +320,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                     try { player?.playbackParams = player!!.playbackParams.setSpeed(speed) }
                     catch (_: Exception) {}
                 }
-                remainingSleepMs = intent.getIntExtra(EXTRA_SLEEP, 0).coerceIn(0, 120) * 60_000L
-                lastTick = android.os.SystemClock.elapsedRealtime()
-                publish()
+                setSleepTimer(intent.getIntExtra(EXTRA_SLEEP, 0))
             }
             ACTION_PLAY -> resumeReading()
             ACTION_PAUSE -> pauseReading()
@@ -349,10 +371,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                 publish()
             }
             ACTION_SLEEP -> {
-                val minutes = intent.getIntExtra(EXTRA_VALUE, 0).coerceIn(0, 120)
-                remainingSleepMs = minutes * 60_000L
-                lastTick = android.os.SystemClock.elapsedRealtime()
-                publish()
+                setSleepTimer(intent.getIntExtra(EXTRA_VALUE, 0))
             }
             ACTION_BOOKMARK -> bookmark()
             ACTION_SEGMENT -> if (kind == "audio") openSegment(
@@ -392,7 +411,8 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         book = found
         kind = target
         speed = 1f
-        remainingSleepMs = 0L
+        handler.removeCallbacks(sleepExpiration)
+        sleepDeadlineMs = 0L
         val prefs = getSharedPreferences("native-reader-preferences", 0)
         val chosenEngine = if (target == "text") prefs.getInt("engine." + id, 0) else 0
         geminiEnabled = chosenEngine == 1
@@ -484,7 +504,6 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         }
         playing = true
         holdPlaybackWakeLock()
-        lastTick = android.os.SystemClock.elapsedRealtime()
         if (kind == "audio") {
             if (player == null) openSegment(segmentIndex, positionMs)
             else try { player?.start() } catch (_: Exception) { openSegment(segmentIndex, positionMs) }
@@ -544,12 +563,25 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         // Seeking by word or percent must resume at the requested place,
         // not replay the whole containing paragraph from its beginning.
         val start = textOffset.coerceIn(fragment.start, fragment.end)
-        val speech = ReaderSpeechMarkers.forNarration(if (start > fragment.start) {
-            val aligned = if (start < text.length && start > 0 &&
-                !text[start - 1].isWhitespace() && !text[start].isWhitespace()
-            ) ReaderNavigation.nextWordStart(text, start) else start
-            text.substring(aligned.coerceAtMost(fragment.end), fragment.end).trimStart()
-        } else fragment.text)
+        val aligned = if (start < text.length && start > 0 &&
+            !text[start - 1].isWhitespace() && !text[start].isWhitespace()
+        ) ReaderNavigation.nextWordStart(text, start) else start
+        val from = aligned.coerceAtMost(fragment.end)
+        // Segment at punctuation to allow genuine, adjustable pauses.
+        // Offsets always track the original document (never synthesized text).
+        val punctuation = (from until fragment.end).firstOrNull { index ->
+            text[index] in ",;:.!?" &&
+                (index + 1 == text.length || text[index + 1].isWhitespace())
+        }
+        val speechEnd = if (punctuation == null) fragment.end else punctuation + 1
+        val speech = ReaderSpeechMarkers.forNarration(text.substring(from, speechEnd).trimStart())
+        pendingSpeechEnd = speechEnd
+        val prefs = getSharedPreferences("native-reader-preferences", MODE_PRIVATE)
+        pendingPauseMs = when (punctuation?.let { text[it] }) {
+            ',', ';', ':' -> prefs.getInt("pause.comma", 200).coerceIn(0, 2000).toLong()
+            '.', '!', '?' -> prefs.getInt("pause.period", 400).coerceIn(0, 3000).toLong()
+            else -> 0L
+        }
         if (speech.isBlank()) {
             val next = units.getOrNull(currentIndex + 1)?.start ?: text.length
             if (next <= textOffset || next >= text.length) {
@@ -566,6 +598,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         val utteranceId = UUID.randomUUID().toString()
         pendingUtterance = utteranceId
         tts?.setSpeechRate(speed)
+        tts?.setPitch(prefs.getFloat("pitch", 1f).coerceIn(.6f, 1.6f))
         tts?.voices?.firstOrNull { it.name == voiceId }?.let { tts?.voice = it }
         if (tts?.speak(output, TextToSpeech.QUEUE_FLUSH, null, utteranceId) != TextToSpeech.SUCCESS) {
             publish("La síntesis de voz no pudo comenzar.")
@@ -692,21 +725,32 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
 
     private fun pauseReading(releaseFocus: Boolean = true) {
         if (releaseFocus) focusRecovery.cancel()
+        handler.removeCallbacks(resumeAfterPunctuation)
+        pendingUtterance = ""
         if (playing) {
             if (kind == "audio") {
                 positionMs = try { player?.currentPosition ?: positionMs }
                     catch (_: Exception) { positionMs }
                 try { player?.pause() } catch (_: Exception) {}
             } else if (phononEnabled) {
-                phononReader?.pause()
+                // A late native-synthesis callback must not restart a paused book.
+                phononGeneration++
+                phononReader?.stop()
+                phononPlayingSegment = false
             } else if (geminiEnabled) {
-                if (player == null) geminiGeneration++ // Cancel network work.
-                else try { player?.pause() } catch (_: Exception) {}
+                // Cancel unfinished network generation, but keep the current
+                // generation when a prepared MediaPlayer must resume later.
+                if (player == null) geminiGeneration++
+                else try { player?.pause() } catch (_: Exception) {
+                    geminiGeneration++
+                    player?.release()
+                    player = null
+                }
             } else {
-                pendingUtterance = ""
                 tts?.stop()
             }
         }
+        // A late TTS callback must never start another segment after pause/stop.
         playing = false
         releasePlaybackWakeLock()
         handler.removeCallbacks(ticker)
@@ -722,6 +766,8 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
 
     private fun stopReading() {
         focusRecovery.cancel()
+        handler.removeCallbacks(sleepExpiration)
+        sleepDeadlineMs = 0L
         pauseReading()
         geminiGeneration++
         phononGeneration++
@@ -838,8 +884,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
             segment = segmentIndex, segmentCount = segments.size,
             positionMs = positionMs, durationMs = durationMs,
             textOffset = textOffset, textLength = text.length, error = error,
-            sleepMinutes = if (remainingSleepMs <= 0L) 0
-                else ((remainingSleepMs + 59999L) / 60000L).toInt(),
+            sleepMinutes = ((remainingSleepMs() + 59999L) / 60000L).toInt(),
             audioMarks = current.audioMarks.ifEmpty {
                 current.marks.map { ReaderAudioMark(current.trackIndex, it) }
             },
@@ -917,6 +962,8 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
 
     override fun onDestroy() {
         handler.removeCallbacks(ticker)
+        handler.removeCallbacks(sleepExpiration)
+        handler.removeCallbacks(resumeAfterPunctuation)
         releasePlaybackWakeLock()
         persist()
         geminiGeneration++

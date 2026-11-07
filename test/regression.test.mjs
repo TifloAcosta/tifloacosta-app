@@ -167,8 +167,8 @@ test('resources use a collapsed accessible category menu instead of exposing all
 
   assert.match(html, /id="category-toggle"[^>]*aria-expanded="false"[^>]*aria-controls="category-menu"/);
   assert.match(html, /id="category-menu" hidden/);
-  assert.match(source, /categoryToggle: 'Buscar un apartado'/);
-  assert.match(source, /categoryToggle: 'Find a section'/);
+  assert.match(source, /categoryToggle: 'Mostrar apartados'/);
+  assert.match(source, /categoryToggle: 'Show sections'/);
   assert.match(source, /function setCategoryMenuExpanded\(expanded\)/);
   assert.doesNotMatch(source, /button\.setAttribute\('aria-pressed'/);
   assert.match(source, /button\.addEventListener\('click',[\s\S]*setCategoryMenuExpanded\(false\)[\s\S]*showCategory\(cat\)[\s\S]*els\.resultStatus\.focus\(\)/);

@@ -140,14 +140,9 @@ fun NativeReaderAudioScreen(
             6 -> expandedMore = !expandedMore
         }
     }
-    LaunchedEffect(book.id) {
-        val perBook = prefs.getInt("autoplay." + book.id, -1)
-        val automatically = when (perBook) {
-            1 -> true
-            0 -> false
-            else -> prefs.getInt("mode", 0) == 1
-        }
-        if ((startOnOpen || automatically) && !reading) start()
+    // Never auto-start a DAISY/MP3 simply by opening its document.
+    LaunchedEffect(book.id, startOnOpen) {
+        if (startOnOpen && !reading) start()
     }
     if (showTools) {
         NativeReaderDocumentActions(book, english,

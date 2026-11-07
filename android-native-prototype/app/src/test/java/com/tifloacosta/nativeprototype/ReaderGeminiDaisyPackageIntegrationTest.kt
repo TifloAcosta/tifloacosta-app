@@ -8,6 +8,9 @@ import java.io.ByteArrayInputStream
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.util.zip.ZipInputStream
+import java.util.zip.ZipOutputStream
+import java.util.zip.ZipEntry
+import org.junit.Assert.fail
 import javax.xml.parsers.DocumentBuilderFactory
 import org.w3c.dom.Document
 
@@ -99,6 +102,46 @@ class ReaderGeminiDaisyPackageIntegrationTest {
             assertTrue(src.substringAfter("#") in smilIDs)
         }
     }
+    private fun changeXml(bytes: ByteArray, name: String, change: (String) -> String): ByteArray {
+        val source = entries(bytes)
+        val output = java.io.ByteArrayOutputStream()
+        ZipOutputStream(output).use { zip ->
+            source.forEach { (path, contents) ->
+                zip.putNextEntry(ZipEntry(path))
+                zip.write(if (path == name) change(contents.toString(Charsets.UTF_8))
+                    .toByteArray(Charsets.UTF_8) else contents)
+                zip.closeEntry()
+            }
+        }
+        return output.toByteArray()
+    }
+
+    @Test fun rejectDuplicateIdsAndZeroLengthClips() = runBlocking {
+        val valid = NativeGeminiDaisyExport.generateWithSynthesizer(
+            "Capítulo 1: Primero\nUna frase de prueba.\nCapítulo 2: Segundo\nOtra frase.",
+            "Prueba", "Kore", { _, _ -> Unit }, { _, _ -> wav() }
+        )
+        val invalid = listOf(
+            changeXml(valid, "sync.smil") {
+                it.replace("id=\"par2\"", "id=\"par1\"")
+            },
+            changeXml(valid, "sync.smil") {
+                it.replace("clipEnd=\"00:00:00.100\"", "clipEnd=\"00:00:00.000\"")
+            },
+            changeXml(valid, "book.ncx") {
+                it.replace("playOrder=\"2\"", "playOrder=\"1\"")
+            }
+        )
+        invalid.forEach { bytes ->
+            try {
+                NativeDaisyPackageVerifier.validate(bytes)
+                fail("DAISY corrupto aceptado por el verificador")
+            } catch (expected: java.io.IOException) {
+                assertTrue(expected.message.orEmpty().contains("DAISY"))
+            }
+        }
+    }
+
     @Test fun verificationRejectsBrokenAndIncompletePackages() {
         for (invalid in listOf(byteArrayOf(), byteArrayOf(1, 2, 3))) {
             try {

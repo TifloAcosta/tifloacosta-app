@@ -109,6 +109,7 @@ fun NativeTifloLector(
     var selectedBook by remember { mutableStateOf<ReaderBook?>(null) }
     var selectedText by remember { mutableStateOf("") }
     var playOnOpen by remember { mutableStateOf(false) }
+    var exportBookId by remember { mutableStateOf<String?>(null) }
     var screen by rememberSaveable { mutableStateOf("home") }
     var filtersExpanded by rememberSaveable { mutableStateOf(false) }
     var filter by rememberSaveable { mutableIntStateOf(0) }
@@ -228,7 +229,8 @@ fun NativeTifloLector(
         }
     }
 
-    fun open(book: ReaderBook, startSpeech: Boolean = false) {
+    fun open(book: ReaderBook, startSpeech: Boolean = false, openExport: Boolean = false) {
+        exportBookId = if (openExport) book.id else null
         error = ""
         scope.launch {
             try {
@@ -318,7 +320,7 @@ fun NativeTifloLector(
         }
     }
     fun back() {
-        if (selectedBook != null) { selectedBook = null; selectedText = ""; playOnOpen = false; refresh() }
+        if (selectedBook != null) { selectedBook = null; selectedText = ""; playOnOpen = false; exportBookId = null; refresh() }
         else if (screen == "catalogs") screen = "import"
         else if (screen == "folders" || screen == "queue") screen = "home"
         else if (screen != "home") screen = "home"
@@ -351,6 +353,7 @@ fun NativeTifloLector(
             fullText = selectedText,
             english = english,
             startOnOpen = playOnOpen,
+            openExportOnStart = exportBookId == book.id,
             rate = rate,
             onRateChange = { rate = it; preferences.edit().putFloat("rate", it).apply() },
             onUpdate = ::save,
@@ -451,10 +454,12 @@ fun NativeTifloLector(
         queueIds = queuedIds)
     val actions = if (english)
         listOf("Open", "Play", "Bookmarks", "Favorite", "Information", "Rename",
-            "Move to folder", "Delete", "Add or remove from queue", "Mark read or unread")
+            "Move to folder", "Delete", "Add or remove from queue", "Mark read or unread",
+            "Convert to audio or DAISY")
     else listOf("Abrir", "Reproducir", "Marcas", "Favorito", "Información",
         "Cambiar título", "Mover a carpeta", "Eliminar",
-        "Añadir o quitar de cola", "Marcar como terminado o pendiente")
+        "Añadir o quitar de cola", "Marcar como terminado o pendiente",
+        "Convertir a audio o DAISY")
 
     /**
      * Continue with the existing TifloLector for an older book. No copying,
@@ -498,6 +503,10 @@ fun NativeTifloLector(
         TextButton(onClick = { screen = "settings" }, modifier = Modifier.fillMaxWidth()) {
             Text(if (english) "Settings" else "Ajustes")
         }
+        // Folders are an everyday library operation, not a hidden filter.
+        TextButton(onClick = { screen = "folders" }, modifier = Modifier.fillMaxWidth()) {
+            Text(if (english) "Folders" else "Carpetas")
+        }
         TextButton(onClick = { filtersExpanded = !filtersExpanded },
             modifier = Modifier.fillMaxWidth().semantics {
                 stateDescription = if (filtersExpanded) (if (english) "Expanded" else "Abierto")
@@ -517,10 +526,6 @@ fun NativeTifloLector(
                 if (english) "Folder" else "Carpeta",
                 folderChoices, folderFilter.coerceIn(0, folderChoices.lastIndex)
             ) { folderFilter = it; visibleCount = 10 }
-            TextButton(onClick = { screen = "folders" }, modifier = Modifier.fillMaxWidth()) {
-                Text(if (english) "Folders"
-                    else "Carpetas")
-            }
             TextButton(onClick = { screen = "queue" }, modifier = Modifier.fillMaxWidth()) {
                 Text(if (english) "Reading queue" else "Cola de lectura")
             }
@@ -638,9 +643,10 @@ fun NativeTifloLector(
                         refresh()
                     }
                     9 -> save(book.copy(finished = !book.finished))
+                    10 -> open(book, openExport = true)
                 }
             }
-            // One TalkBack stop per book: its title, progress and selected action.
+            // One TalkBack stop per book: title, selected action, then progress.
             // Clear the Material button/text semantics before assigning the final
             // accessible name. Otherwise the title can be announced twice.
             val readingStatus = when {
@@ -669,12 +675,13 @@ fun NativeTifloLector(
             } else {
             OutlinedButton(onClick = { run(action) },
                 modifier = Modifier.fillMaxWidth().clearAndSetSemantics {
-                    contentDescription = book.title
-                    stateDescription = readingStatus +
+                    // One TalkBack stop: title followed by reading progress.
+                    // Only the currently selected gesture action appears as state.
+                    contentDescription = book.title + ". " + readingStatus +
                         (if (book.id in queuedIds) {
                             if (english) ". In reading queue" else ". En cola de lectura"
-                        } else "") +
-                        (if (english) ". Action: " else ". Acción: ") + actions[action]
+                        } else "")
+                    stateDescription = actions[action]
                     progressBarRangeInfo = ProgressBarRangeInfo(
                         action.toFloat(), 0f..actions.lastIndex.toFloat(), actions.size - 2
                     )
@@ -690,7 +697,7 @@ fun NativeTifloLector(
                     customActions = actions.mapIndexed { i, label ->
                         CustomAccessibilityAction(label) { run(i); true }
                     }
-                }) { Text(book.title) }
+                }) { Text(book.title + ". " + readingStatus) }
             }
         }
         if (shown.size > visibleCount) {
@@ -856,6 +863,7 @@ private fun NativeReadingScreen(
     fullText: String,
     english: Boolean,
     startOnOpen: Boolean,
+    openExportOnStart: Boolean,
     rate: Float,
     onRateChange: (Float) -> Unit,
     onUpdate: (ReaderBook) -> Unit,
@@ -889,7 +897,7 @@ private fun NativeReadingScreen(
     }
     var showAudio by rememberSaveable(book.id) { mutableStateOf(false) }
     var showPronunciation by rememberSaveable(book.id) { mutableStateOf(false) }
-    var showTools by rememberSaveable(book.id) { mutableStateOf(false) }
+    var showTools by rememberSaveable(book.id) { mutableStateOf(openExportOnStart) }
     val dictionary = remember { NativePronunciationStore(context.applicationContext) }
     var sleepIndex by remember(book.id) { mutableIntStateOf(0) }
     val sleepMinutes = listOf(0, 5, 10, 15, 30, 45, 60)
@@ -929,6 +937,7 @@ private fun NativeReadingScreen(
         mutableIntStateOf(prefs.getInt("engine." + book.id, 0))
     }
     var engineMessage by remember(book.id) { mutableStateOf("") }
+    var bookmarkMessage by remember(book.id) { mutableStateOf("") }
     var geminiVoiceIndex by rememberSaveable(book.id) {
         mutableIntStateOf(
             NativeGeminiSpeech.voices.indexOf(prefs.getString("gemini.voice", "Kore"))
@@ -1034,8 +1043,15 @@ private fun NativeReadingScreen(
             2, 3 -> moveOneUnit(which == 3)
             4 -> {
                 val mark = displayOffset.coerceIn(0, fullText.length)
-                if (active) send(NativeReaderPlaybackService.ACTION_BOOKMARK)
-                else if (mark !in book.marks) onUpdate(book.copy(marks = book.marks + mark, offset = mark))
+                if (mark in visibleMarks) {
+                    bookmarkMessage = if (english) "Bookmark already exists at this position."
+                        else "Ya existe una marca en esta posición."
+                } else {
+                    if (active) send(NativeReaderPlaybackService.ACTION_BOOKMARK)
+                    else onUpdate(book.copy(marks = book.marks + mark, offset = mark))
+                    bookmarkMessage = if (english) "Bookmark requested at the current position."
+                        else "Marca solicitada en la posición actual."
+                }
             }
             5 -> jumping = true
         }
@@ -1048,14 +1064,10 @@ private fun NativeReadingScreen(
             titleFocusedOnOpen = titleFocusRequester.requestFocus()
         }
     }
-    LaunchedEffect(book.id) {
-        val choice = prefs.getInt("autoplay." + book.id, -1)
-        val enabled = when (choice) {
-            1 -> true
-            0 -> false
-            else -> prefs.getInt("mode", 0) == 1
-        }
-        if ((startOnOpen || enabled) && !playing) startSpeech()
+    // Never start speaking from a stored setting merely because a document opened.
+    // Explicit "Play" in the library remains the only automatic-start request.
+    LaunchedEffect(book.id, startOnOpen) {
+        if (startOnOpen && !playing) startSpeech()
     }
 
     if (showPronunciation) {
@@ -1064,6 +1076,7 @@ private fun NativeReadingScreen(
     }
     if (showTools) {
         NativeReaderDocumentActions(book, english, current?.text.orEmpty(),
+            initialAudioExport = openExportOnStart,
             onUnitChange = { next ->
                 unitType = next
                 if (active) send(NativeReaderPlaybackService.ACTION_UNIT, next)
@@ -1104,11 +1117,11 @@ private fun NativeReadingScreen(
                 }
             }
         )
-        TextButton(onClick = onBack) {
+        TextButton(onClick = {
+            if (active) send(NativeReaderPlaybackService.ACTION_STOP)
+            onBack()
+        }) {
             Text(if (english) "Back to my library" else "Volver a Mi biblioteca")
-        }
-        TextButton(onClick = onDeleteRequest) {
-            Text(if (english) "Delete this book" else "Eliminar esta obra")
         }
         Button(
             onClick = { toggleSpeech() },
@@ -1121,59 +1134,6 @@ private fun NativeReadingScreen(
             )
         }
         ReaderCompactChoice(
-            if (english) "Engine" else "Motor",
-            if (phononReady) {
-                if (english) listOf("System", "Gemini", "Phonon")
-                else listOf("Sistema", "Gemini", "Phonon")
-            } else {
-                if (english) listOf("System", "Gemini")
-                else listOf("Sistema", "Gemini")
-            },
-            readingEngine.coerceIn(0, if (phononReady) 2 else 1), english
-        ) { chosen ->
-            readingEngine = chosen
-            prefs.edit().putInt("engine." + book.id, chosen).apply()
-            if (active) send(NativeReaderPlaybackService.ACTION_VOICE)
-        }
-        if (readingEngine == 2 && phononReady) {
-            if (phononVoices.isNotEmpty()) {
-                ReaderCompactChoice(
-                    if (english) "Phonon voice" else "Voz Phonon",
-                    phononVoices,
-                    phononVoices.indexOf(phononVoice).coerceAtLeast(0),
-                    english
-                ) { index ->
-                    val chosenVoice = phononVoices[index]
-                    phononVoice = chosenVoice
-                    prefs.edit().putString("phonon.voice", chosenVoice).apply()
-                    if (active) send(NativeReaderPlaybackService.ACTION_VOICE)
-                }
-            }
-            Text(if (english) "Phonon reads offline using your installed checkpoint."
-                else "Phonon lee sin Internet utilizando el modelo instalado.")
-        }
-        if (readingEngine == 1) {
-            ReaderCompactChoice(
-                if (english) "Voice" else "Voz",
-                NativeGeminiSpeech.voices, geminiVoiceIndex, english
-            ) { selected ->
-                geminiVoiceIndex = selected
-                prefs.edit().putString("gemini.voice", NativeGeminiSpeech.voices[selected]).apply()
-                if (active) send(NativeReaderPlaybackService.ACTION_VOICE)
-            }
-            Text(if (english)
-                "Gemini sends text segments to Google and may use your quota. Choose System for local reading."
-                else "Gemini envía fragmentos del documento a Google y puede consumir cuota. Selecciona Sistema para lectura local.")
-        }
-        if (engineMessage.isNotEmpty()) Text(engineMessage)
-        if (!speaker.ready.value && readingEngine == 0) {
-            Text(if (english) "Initializing Android speech…" else "Preparando la voz de Android…")
-        }
-        TextButton(onClick = { showTools = true },
-            modifier = Modifier.fillMaxWidth()) {
-            Text(if (english) "Actions" else "Acciones")
-        }
-        ReaderCompactChoice(
             if (english) "Move by" else "Avanzar y retroceder por",
             availableModes.map { it.second }, selectedModeIndex, english
         ) { choice ->
@@ -1184,6 +1144,19 @@ private fun NativeReadingScreen(
             if (active) send(NativeReaderPlaybackService.ACTION_UNIT,
                 chosen.takeIf { it in 0..2 } ?: 1)
         }
+        Button(onClick = { if (active) send(NativeReaderPlaybackService.ACTION_STOP) },
+            modifier = Modifier.fillMaxWidth()) {
+            Text(if (english) "Stop reading" else "Detener lectura")
+        }
+        TextButton(onClick = { showTools = true }, modifier = Modifier.fillMaxWidth()) {
+            Text(if (english) "Convert to audio or DAISY" else "Convertir a audio o DAISY")
+        }
+        if (bookmarkMessage.isNotEmpty()) Text(bookmarkMessage,
+            modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
+        if (!speaker.ready.value && readingEngine == 0) {
+            Text(if (english) "Initializing Android speech…" else "Preparando la voz de Android…")
+        }
+
         when (effectiveUnitType) {
             3 -> ReaderCompactOffsetPosition(
                 label = if (english) "Word" else "Palabra",
@@ -1262,6 +1235,52 @@ private fun NativeReadingScreen(
             }
         ) { Text(if (english) "Voice and pronunciation" else "Voz y pronunciación") }
         if (showAudio) {
+        ReaderCompactChoice(
+            if (english) "Engine" else "Motor",
+            if (phononReady) {
+                if (english) listOf("System", "Gemini", "Phonon")
+                else listOf("Sistema", "Gemini", "Phonon")
+            } else {
+                if (english) listOf("System", "Gemini")
+                else listOf("Sistema", "Gemini")
+            },
+            readingEngine.coerceIn(0, if (phononReady) 2 else 1), english
+        ) { chosen ->
+            readingEngine = chosen
+            prefs.edit().putInt("engine." + book.id, chosen).apply()
+            if (active) send(NativeReaderPlaybackService.ACTION_VOICE)
+        }
+        if (readingEngine == 2 && phononReady) {
+            if (phononVoices.isNotEmpty()) {
+                ReaderCompactChoice(
+                    if (english) "Phonon voice" else "Voz Phonon",
+                    phononVoices,
+                    phononVoices.indexOf(phononVoice).coerceAtLeast(0),
+                    english
+                ) { index ->
+                    val chosenVoice = phononVoices[index]
+                    phononVoice = chosenVoice
+                    prefs.edit().putString("phonon.voice", chosenVoice).apply()
+                    if (active) send(NativeReaderPlaybackService.ACTION_VOICE)
+                }
+            }
+            Text(if (english) "Phonon reads offline using your installed checkpoint."
+                else "Phonon lee sin Internet utilizando el modelo instalado.")
+        }
+        if (readingEngine == 1) {
+            ReaderCompactChoice(
+                if (english) "Voice" else "Voz",
+                NativeGeminiSpeech.voices, geminiVoiceIndex, english
+            ) { selected ->
+                geminiVoiceIndex = selected
+                prefs.edit().putString("gemini.voice", NativeGeminiSpeech.voices[selected]).apply()
+                if (active) send(NativeReaderPlaybackService.ACTION_VOICE)
+            }
+            Text(if (english)
+                "Gemini sends text segments to Google and may use your quota. Choose System for local reading."
+                else "Gemini envía fragmentos del documento a Google y puede consumir cuota. Selecciona Sistema para lectura local.")
+        }
+        if (engineMessage.isNotEmpty()) Text(engineMessage)
             NativeReaderVoicePicker(
                 english = english,
                 speaker = speaker,
@@ -1304,6 +1323,9 @@ private fun NativeReadingScreen(
                 listOf("No", "Sí"), boldText, english
             ) { boldText = it; prefs.edit().putInt("bold." + book.id, it).apply() }
         }
+        TextButton(onClick = onDeleteRequest) {
+            Text(if (english) "Delete this book" else "Eliminar esta obra")
+        }
         TextButton(
             onClick = { jumping = !jumping },
             modifier = Modifier.semantics {
@@ -1333,7 +1355,15 @@ private fun NativeReadingScreen(
             }
             Button(onClick = {
                 val mark = offset.coerceIn(0, fullText.length)
-                if (mark !in book.marks) onUpdate(book.copy(marks = book.marks + mark, offset = offset))
+                if (mark in visibleMarks) {
+                    bookmarkMessage = if (english) "Bookmark already exists at this position."
+                        else "Ya existe una marca en esta posición."
+                } else {
+                    if (active) send(NativeReaderPlaybackService.ACTION_BOOKMARK)
+                    else onUpdate(book.copy(marks = book.marks + mark, offset = mark))
+                    bookmarkMessage = if (english) "Bookmark requested at the current position."
+                        else "Marca solicitada en la posición actual."
+                }
             }) {
                 Text(if (english) "Add bookmark" else "Añadir marca")
             }

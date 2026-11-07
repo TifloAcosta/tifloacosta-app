@@ -1,0 +1,68 @@
+name: Validate actual Play app with native reader candidate
+
+on:
+  push:
+    branches:
+      - audit/android-phase6-integral-20261106
+    paths:
+      - 'android-native-prototype/**'
+      - 'mobile/**'
+      - '.github/workflows/android-production-preflight-candidate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  production-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      ONESIGNAL_DISABLE_LOCATION: "true"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Repository regression tests (record errors, continue to build)
+        id: root_tests
+        continue-on-error: true
+        run: npm test
+      - name: Install mobile dependencies
+        working-directory: mobile
+        run: npm ci
+      - name: Mobile regression tests (record errors, continue to build)
+        id: mobile_tests
+        continue-on-error: true
+        working-directory: mobile
+        run: npm test
+      - name: Build and synchronize mobile assets
+        working-directory: mobile
+        run: |
+          npm run build
+          npx cap sync android
+      - name: Build REAL Google Play package without publishing
+        working-directory: mobile/android
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon :app:bundleRelease
+      - name: Upload unsigned candidate for inspection (NOT for Play)
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-app-unsigned-preflight-only
+          if-no-files-found: error
+          path: mobile/android/app/build/outputs/bundle/release/*.aab
+      - name: Ensure complete regression suite passed
+        if: always()
+        run: |
+          if [ "${{ steps.root_tests.outcome }}" != "success" ] || [ "${{ steps.mobile_tests.outcome }}" != "success" ]; then
+            echo "Regression suites failed; package must not be published."
+            exit 1
+          fi

@@ -16,6 +16,17 @@ class Phase6IntegralRegressionTest {
         assertTrue(reader.contains("bookmark"))
     }
 
+    @Test fun sleepTimerUsesMonotonicDeadlineAndCanBeCancelled() {
+        val service = source("NativeReaderPlaybackService.kt")
+        assertTrue(service.contains("SystemClock.elapsedRealtime() + minutes.coerceIn(0, 120) * 60_000L"))
+        assertTrue(service.contains("handler.postDelayed(sleepExpiration"))
+        assertTrue(service.contains("handler.removeCallbacks(sleepExpiration)"))
+        assertTrue(service.contains("sleepDeadlineMs = 0L"))
+        assertTrue(service.contains("pauseReading()"))
+        // Regression: countdown must not depend exclusively on playing ticks.
+        assertTrue(!service.contains("remainingSleepMs -= "))
+    }
+
     @Test fun podcastLibraryKeepsFavoritesOpmlAndNewEpisodes() {
         val library = source("NativePodcastLibrary.kt")
         val screen = source("NativeMediaAndDownloads.kt")

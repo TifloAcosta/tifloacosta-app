@@ -296,6 +296,25 @@ fun NativeReaderGeneralSettings(
         NativePronunciationSettings(english, onBack = { nested = "" })
         return
     }
+    if (nested == "licenses") {
+        val notices = remember {
+            runCatching {
+                context.assets.open("THIRD_PARTY_NOTICES.txt").bufferedReader().use { it.readText() }
+            }.getOrDefault("Avisos de licencias: https://github.com/TifloAcosta/tifloacosta-app")
+        }
+        Column(
+            modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            TextButton(onClick = { nested = "" }) {
+                Text(if (english) "Back to settings" else "Volver a ajustes")
+            }
+            Text(if (english) "Open-source notices" else "Licencias y código fuente",
+                style = MaterialTheme.typography.headlineSmall)
+            Text(notices)
+        }
+        return
+    }
 
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
@@ -304,6 +323,10 @@ fun NativeReaderGeneralSettings(
         TextButton(onClick = onBack) { Text(if (english) "Back to reader" else "Volver a TifloLector") }
         Text(if (english) "TifloLector settings" else "Ajustes de TifloLector",
             style = MaterialTheme.typography.headlineSmall)
+        TextButton(
+            onClick = { nested = "licenses" },
+            modifier = Modifier.fillMaxWidth()
+        ) { Text(if (english) "Licenses and source code" else "Licencias y código fuente") }
         groups.forEachIndexed { i, title ->
             TextButton(
                 modifier = Modifier.fillMaxWidth().semantics {

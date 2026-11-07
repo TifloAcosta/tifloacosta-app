@@ -92,6 +92,14 @@ for(const item of localizations.data){
  }});
  console.log('Notas de versión guardadas para '+language+'.');
 }
+// Verify Apple's persisted metadata before attempting a review submission.
+const checkedLocalizations=await api('appStoreVersions/'+version.id+'/appStoreVersionLocalizations?limit=200');
+if(!checkedLocalizations.data.length) throw Error('No hay localizaciones configuradas para la versión 1.1');
+const missingNotes=checkedLocalizations.data
+ .filter(x=>!x.attributes.whatsNew?.trim())
+ .map(x=>x.attributes.locale||x.id);
+if(missingNotes.length) throw Error('Novedades obligatorias aún ausentes en Apple: '+missingNotes.join(', '));
+console.log('Apple confirma novedades en '+checkedLocalizations.data.length+' localizaciones.');
 const submissions=await api('apps/'+app.id+'/reviewSubmissions?limit=100');
 let submission=submissions.data.find(x=>x.attributes.state==='READY_FOR_REVIEW');
 if(!submission){

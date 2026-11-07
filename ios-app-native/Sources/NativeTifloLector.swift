@@ -9,6 +9,7 @@ struct NativeReaderPreferences: Codable, Hashable {
     var speedIndex: Int? = nil
     var pitchIndex: Int? = nil
     var voiceID: String? = nil
+    var readingStyle: Int? = nil
     var textSize: Double? = nil
     var lineSpacingIndex: Int? = nil
     var strongText: Bool? = nil
@@ -312,18 +313,18 @@ final class NativeReaderLibrary: ObservableObject {
 
 /// Informacion de avance de voz sin depender del ritmo de refresco de SwiftUI.
 private final class NativeSpeechProgressDelegate: NSObject, AVSpeechSynthesizerDelegate {
-    var onWord: ((NSRange) -> Void)?
-    var onFinish: (() -> Void)?
+    var onWord: ((NSRange, AVSpeechUtterance) -> Void)?
+    var onFinish: ((AVSpeechUtterance) -> Void)?
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
                            willSpeakRangeOfSpeechString characterRange: NSRange,
                            utterance: AVSpeechUtterance) {
-        onWord?(characterRange)
+        onWord?(characterRange, utterance)
     }
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
                            didFinish utterance: AVSpeechUtterance) {
-        onFinish?()
+        onFinish?(utterance)
     }
 }
 
@@ -346,23 +347,27 @@ final class NativeReadingSpeech: ObservableObject {
     private var onAudioError: ((String) -> Void)?
     private var baseUTF16 = 0
     private var totalUTF16 = 0
+    private var utteranceOffsets: [ObjectIdentifier: Int] = [:]
+    private var finalUtteranceID: ObjectIdentifier?
     @Published private(set) var textPercent = 0
     @Published private(set) var textUTF16Offset = 0
 
     init() {
-        progressDelegate.onWord = { [weak self] range in
+        progressDelegate.onWord = { [weak self] range, utterance in
             Task { @MainActor [weak self] in
                 guard let self, self.isPlaying, self.player == nil,
-                      self.totalUTF16 > 0 else { return }
-                let count = self.baseUTF16 + range.location + range.length
+                      self.totalUTF16 > 0,
+                      let base = self.utteranceOffsets[ObjectIdentifier(utterance)] else { return }
+                let count = base + range.location + range.length
                 self.textUTF16Offset = min(self.totalUTF16, max(0, count))
                 self.textPercent = max(0, min(100,
                     Int(Double(count) * 100 / Double(self.totalUTF16))))
             }
         }
-        progressDelegate.onFinish = { [weak self] in
+        progressDelegate.onFinish = { [weak self] utterance in
             Task { @MainActor [weak self] in
-                guard let self, self.player == nil else { return }
+                guard let self, self.player == nil,
+                      self.finalUtteranceID == ObjectIdentifier(utterance) else { return }
                 self.textUTF16Offset = self.totalUTF16
                 self.textPercent = 100
                 self.isPlaying = false
@@ -435,9 +440,42 @@ final class NativeReadingSpeech: ObservableObject {
         return max(0, min(100, Int(audioElapsed / audioDuration * 100)))
     }
 
+    /// Each utterance retains its UTF-16 offset so bookmarks and resume remain exact.
+    /// The original text is never rewritten or supplemented with spoken punctuation.
+    private func speechChunks(_ text: String, style: Int) -> [(String, Int, TimeInterval)] {
+        guard style > 0 else { return [(text, 0, 0)] }
+        var result: [(String, Int, TimeInterval)] = []
+        var fragment = ""
+        var startUTF16 = 0
+        var cursorUTF16 = 0
+        func appendChunk(_ pause: TimeInterval) {
+            guard !fragment.isEmpty else { return }
+            result.append((fragment, startUTF16, pause))
+            fragment = ""
+            startUTF16 = cursorUTF16
+        }
+        for character in text {
+            fragment.append(character)
+            cursorUTF16 += String(character).utf16.count
+            let pause: TimeInterval
+            switch character {
+            case ",": pause = style == 2 ? 0.20 : 0.25
+            case ";", ":": pause = style == 2 ? 0.35 : 0.40
+            case ".", "!", "?": pause = style == 2 ? 0.45 : 0.55
+            case "\n": pause = style == 2 ? 0.75 : 0.85
+            default: pause = 0
+            }
+            // A maximum chunk length prevents paragraphs without punctuation
+            // from becoming huge uninterruptible synthesis units.
+            if pause > 0 || fragment.utf16.count >= 400 { appendChunk(pause) }
+        }
+        appendChunk(0)
+        return result
+    }
+
     func play(_ text: String, speed: Double = 1.0, pitch: Float = 1.0,
               language: String = "es-ES", voiceIdentifier: String = "", baseUTF16: Int = 0,
-              totalUTF16: Int? = nil) {
+              totalUTF16: Int? = nil, readingStyle: Int = 0) {
         stop()
         guard !text.isEmpty else { return }
         self.baseUTF16 = baseUTF16
@@ -445,17 +483,25 @@ final class NativeReadingSpeech: ObservableObject {
         textUTF16Offset = baseUTF16
         textPercent = max(0, min(100,
             Int(Double(baseUTF16) * 100 / Double(self.totalUTF16))))
-        // La voz sigue sonando con la pantalla bloqueada y otras apps abiertas.
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
         try? AVAudioSession.sharedInstance().setActive(true)
-        let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = (voiceIdentifier.isEmpty ? nil : AVSpeechSynthesisVoice(identifier: voiceIdentifier))
+        let voice = (voiceIdentifier.isEmpty ? nil : AVSpeechSynthesisVoice(identifier: voiceIdentifier))
             ?? AVSpeechSynthesisVoice(language: language)
-        utterance.rate = min(AVSpeechUtteranceMaximumSpeechRate,
-            max(AVSpeechUtteranceMinimumSpeechRate,
-                AVSpeechUtteranceDefaultSpeechRate * Float(speed)))
-        utterance.pitchMultiplier = max(0.5, min(2, pitch))
-        synthesizer.speak(utterance)
+        let chunks = speechChunks(text, style: max(0, min(2, readingStyle)))
+        guard !chunks.isEmpty else { return }
+        for (index, chunk) in chunks.enumerated() {
+            let utterance = AVSpeechUtterance(string: chunk.0)
+            utterance.voice = voice
+            utterance.rate = min(AVSpeechUtteranceMaximumSpeechRate,
+                max(AVSpeechUtteranceMinimumSpeechRate,
+                    AVSpeechUtteranceDefaultSpeechRate * Float(speed)))
+            utterance.pitchMultiplier = max(0.5, min(2, pitch))
+            utterance.postUtteranceDelay = chunk.2
+            let identifier = ObjectIdentifier(utterance)
+            utteranceOffsets[identifier] = baseUTF16 + chunk.1
+            if index == chunks.count - 1 { finalUtteranceID = identifier }
+            synthesizer.speak(utterance)
+        }
         isPlaying = true
         isPaused = false
     }
@@ -682,6 +728,8 @@ final class NativeReadingSpeech: ObservableObject {
         onTrackChanged = nil
         onAudioError = nil
         synthesizer.stopSpeaking(at: .immediate)
+        utteranceOffsets.removeAll()
+        finalUtteranceID = nil
         isPlaying = false
         isPaused = false
     }
@@ -1308,6 +1356,7 @@ struct NativeReadingScreen: View {
     @AppStorage("native-reading-strong-text") private var strongText = false
     @AppStorage("native-reader-navigation-unit") private var navigationUnit = 0
     @AppStorage("native-reader-reading-mode") private var readingMode = 0
+    @AppStorage("native-reader-reading-style") private var readingStyle = 0
     @State private var didApplyOpeningMode = false
     @State private var sleepIndex = 0 // Each open document starts with timer disabled.
     @State private var currentPercent = 0
@@ -1375,6 +1424,7 @@ struct NativeReadingScreen: View {
     private var effectivePitchIndex: Int { latest.readerPreferences?.pitchIndex ?? pitchIndex }
     private var pitch: Float { [0.8, 0.9, 1.0, 1.1, 1.2][max(0, min(4, effectivePitchIndex))] }
     private var effectiveVoiceID: String { latest.readerPreferences?.voiceID ?? voiceID }
+    private var effectiveReadingStyle: Int { latest.readerPreferences?.readingStyle ?? readingStyle }
     private var effectiveTextSize: Double { latest.readerPreferences?.textSize ?? textSize }
     private var effectiveLineSpacing: Int { latest.readerPreferences?.lineSpacingIndex ?? lineSpacingIndex }
     private var effectiveStrongText: Bool { latest.readerPreferences?.strongText ?? strongText }
@@ -1455,7 +1505,8 @@ struct NativeReadingScreen: View {
                         language: AVSpeechSynthesisVoice(identifier: effectiveVoiceID)?.language ?? "es-ES",
                         voiceIdentifier: effectiveVoiceID,
                         baseUTF16: utf16Offset,
-                        totalUTF16: document.body.utf16.count)
+                        totalUTF16: document.body.utf16.count,
+                        readingStyle: effectiveReadingStyle)
         }
     }
 
@@ -2338,6 +2389,9 @@ struct NativeReadingScreen: View {
             applySleepTimer()
         }
         .onChange(of: effectiveVoiceID) { _, _ in
+            refreshTextVoice()
+        }
+        .onChange(of: effectiveReadingStyle) { _, _ in
             refreshTextVoice()
         }
         .onChange(of: effectiveSpeedIndex) { _, _ in

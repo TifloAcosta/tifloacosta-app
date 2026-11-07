@@ -900,7 +900,7 @@ struct NativeReaderLibraryScreen: View {
             }
     }
 
-    var body: some View {
+    private var libraryBase: some View {
         List {
             Section {
                 Button("Importar", systemImage: "square.and.arrow.down") {
@@ -919,6 +919,10 @@ struct NativeReaderLibraryScreen: View {
             NativeReadingScreen(document: selected, speech: speech, startWithAudioExport: true)
         }
         .onDisappear { speech.stop() }
+    }
+
+    private var libraryImportControls: some View {
+        libraryBase
         .confirmationDialog("Importar", isPresented: $importSourcesPresented,
                             titleVisibility: .visible) {
             Button("Archivos") { importPresented = true }
@@ -968,6 +972,10 @@ struct NativeReaderLibraryScreen: View {
         } message: {
             Text("Crea una carpeta para organizar las obras sin mover ni borrar archivos del sistema.")
         }
+    }
+
+    private var libraryManagementControls: some View {
+        libraryImportControls
         .confirmationDialog("Mover a carpeta",
                             isPresented: Binding(
                                 get: { folderForDocument != nil },
@@ -1015,6 +1023,10 @@ struct NativeReaderLibraryScreen: View {
         } message: {
             Text("Escribe el nuevo título del documento.")
         }
+    }
+
+    private var libraryConfirmationControls: some View {
+        libraryManagementControls
         .confirmationDialog("Eliminar documentos seleccionados",
                             isPresented: $confirmBatchDeletion, titleVisibility: .visible) {
             Button("Eliminar \(selectedDocumentIDs.count) documentos", role: .destructive) {
@@ -1056,6 +1068,10 @@ struct NativeReaderLibraryScreen: View {
         } message: {
             Text(importError ?? "")
         }
+    }
+
+    private var libraryInformationControls: some View {
+        libraryConfirmationControls
         .sheet(item: $information) { document in
             NavigationStack {
                 Form {
@@ -1072,8 +1088,10 @@ struct NativeReaderLibraryScreen: View {
                 .navigationTitle("Información")
                 .toolbar { Button("Cerrar") { information = nil } }
             }
-        }
-    }
+        }    }
+
+    var body: some View { libraryInformationControls }
+
 }
 
 /// Split long documents once at import-display time. Avoid putting a complete

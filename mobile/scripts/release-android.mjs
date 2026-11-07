@@ -149,7 +149,7 @@ async function cli() {
       // between the standalone reader and the real Play AAB.
       const listed = spawnSync('unzip', ['-Z1', releaseAab], { encoding: 'utf8' });
       if (listed.status !== 0) throw new Error('Cannot inspect signed Android release bundle');
-      const entries = new Set(listed.stdout.split(/\\r?\\n/));
+      const entries = new Set(listed.stdout.split(/\r?\n/));
       for (const required of [
         'base/assets/THIRD_PARTY_NOTICES.txt',
         'base/assets/LICENSE-LGPL-3.0.txt',

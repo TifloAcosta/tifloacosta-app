@@ -1,0 +1,66 @@
+name: Consultar estado de TifloAcosta en App Store Connect
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/check-ios-appstore-status.yml'
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+      API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+      API_PRIVATE: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+    steps:
+      - name: Consultar estado de versión pública sin realizar cambios
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import crypto from 'node:crypto';
+          const missing=['API_ID','API_ISSUER','API_PRIVATE'].filter(k=>!process.env[k]);
+          if (missing.length) throw Error('Faltan credenciales protegidas App Store Connect');
+          let key=process.env.API_PRIVATE.trim().replace(/^["']|["']$/g,'')
+            .replace(/\\r\\n/g,'\n').replace(/\\n/g,'\n');
+          if (!key.includes('-----BEGIN')) {
+            const decoded=Buffer.from(key,'base64').toString('utf8');
+            if (decoded.includes('-----BEGIN')) key=decoded;
+          }
+          const enc=x=>Buffer.from(JSON.stringify(x)).toString('base64url');
+          const now=Math.floor(Date.now()/1000);
+          const base=enc({alg:'ES256',kid:process.env.API_ID,typ:'JWT'})+'.'+
+            enc({iss:process.env.API_ISSUER,iat:now,exp:now+600,aud:'appstoreconnect-v1'});
+          const token=base+'.'+crypto.sign('sha256',Buffer.from(base),
+            {key,dsaEncoding:'ieee-p1363'}).toString('base64url');
+          async function get(path) {
+            const res=await fetch('https://api.appstoreconnect.apple.com/v1/'+path,
+              {headers:{Authorization:'Bearer '+token}});
+            const result=await res.json();
+            if(!res.ok)throw Error('Apple API HTTP '+res.status+': '+JSON.stringify(result.errors||[]).slice(0,450));
+            return result;
+          }
+          const apps=await get('apps?filter%5BbundleId%5D=com.tifloacosta.app&limit=20');
+          const app=apps.data.find(x=>x.attributes?.bundleId==='com.tifloacosta.app');
+          if(!app)throw Error('No se ha encontrado TifloAcosta en App Store Connect');
+          const versions=await get('apps/'+app.id+'/appStoreVersions?filter%5Bplatform%5D=IOS&limit=100&include=build');
+          const builds=new Map((versions.included||[]).filter(x=>x.type==='builds')
+            .map(x=>[x.id,x.attributes]));
+          const entries=versions.data.map(v=>({
+            version:v.attributes?.versionString,
+            status:v.attributes?.appVersionState||v.attributes?.appStoreState,
+            releaseType:v.attributes?.releaseType,
+            build:builds.get(v.relationships?.build?.data?.id)?.version||'not included'
+          }));
+          console.log('TifloAcosta iOS - estado oficial de versiones:',JSON.stringify(entries));
+          const requested=entries.find(v=>v.version==='1.1' && v.build==='500123')
+            ||entries.find(v=>v.version==='1.1');
+          console.log('Version iOS 1.1 solicitada:',JSON.stringify(requested||'no encontrada'));
+          if(process.env.GITHUB_STEP_SUMMARY){
+            const fs=await import('node:fs');
+            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,
+              'TifloAcosta App Store: '+JSON.stringify(entries)+'\n');
+          }
+          NODE

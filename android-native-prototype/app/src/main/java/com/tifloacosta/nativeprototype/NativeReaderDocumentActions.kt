@@ -44,6 +44,7 @@ fun NativeReaderDocumentActions(
     book: ReaderBook,
     english: Boolean,
     fragment: String,
+    initialAudioExport: Boolean = false,
     onUnitChange: (Int) -> Unit = {},
     onOcrCompleted: () -> Unit = {},
     onBack: () -> Unit
@@ -75,7 +76,7 @@ fun NativeReaderDocumentActions(
     }
     var audioDaisyReady by remember(book.id) { mutableStateOf(false) }
     var audioExportBusy by remember(book.id) { mutableStateOf(false) }
-    var showAudioExport by remember(book.id) { mutableStateOf(false) }
+    var showAudioExport by remember(book.id) { mutableStateOf(initialAudioExport) }
     var showOtherActions by remember(book.id) { mutableStateOf(false) }
     var audioVoice by remember(book.id) {
         mutableIntStateOf(NativeGeminiSpeech.voices.indexOf(

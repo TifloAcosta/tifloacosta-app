@@ -39,6 +39,7 @@ enum NativeSystemSpeechExport {
         let synthesizer = AVSpeechSynthesizer()
         var pcm = Data()
         var callbackError: Error?
+        let conversion = PCMConversionState()
         // write provides synthesized PCM buffers (rather than speaker audio).
         // An empty buffer is the framework's end-of-utterance signal.
         try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
@@ -57,7 +58,7 @@ enum NativeSystemSpeechExport {
                     return
                 }
                 do {
-                    pcm.append(try convertTo24kPCM(input))
+                    pcm.append(try conversion.convertTo24kPCM(input))
                 } catch {
                     callbackError = error
                     completed = true
@@ -71,44 +72,51 @@ enum NativeSystemSpeechExport {
         return NativeGeminiSpeech.wav(pcm: pcm)
     }
 
-    /// Convert every block into the single output format expected by DAISY.
-    /// AVAudioConverter handles arbitrary voice sample rates and channel counts.
-    private static func convertTo24kPCM(_ input: AVAudioPCMBuffer) throws -> Data {
-        guard let outputFormat = AVAudioFormat(
-            commonFormat: .pcmFormatFloat32, sampleRate: 24_000,
-            channels: 1, interleaved: false),
-              let converter = AVAudioConverter(from: input.format, to: outputFormat) else {
-            throw ExportError.conversion
-        }
-        let estimate = Int((Double(input.frameLength) * 24_000 /
-                            input.format.sampleRate).rounded(.up)) + 256
-        guard let converted = AVAudioPCMBuffer(
-            pcmFormat: outputFormat, frameCapacity: AVAudioFrameCount(max(256, estimate))) else {
-            throw ExportError.conversion
-        }
-        var didSupplyInput = false
-        var error: NSError?
-        let status = converter.convert(to: converted, error: &error) {
-            _, inputStatus in
-            if !didSupplyInput {
-                didSupplyInput = true
-                inputStatus.pointee = .haveData
-                return input
+    /// Keep the sample-rate converter's state across consecutive speech buffers.
+    /// Reinitializing it for every block can produce abrupt boundaries.
+    private final class PCMConversionState {
+        private var converter: AVAudioConverter?
+        private let headroom: Float = 0.88
+
+        func convertTo24kPCM(_ input: AVAudioPCMBuffer) throws -> Data {
+            guard let outputFormat = AVAudioFormat(
+                commonFormat: .pcmFormatFloat32, sampleRate: 24_000,
+                channels: 1, interleaved: false) else {
+                throw ExportError.conversion
             }
-            inputStatus.pointee = .noDataNow
-            return nil
+            if converter?.inputFormat != input.format {
+                converter = AVAudioConverter(from: input.format, to: outputFormat)
+            }
+            guard let converter else { throw ExportError.conversion }
+            let estimate = Int((Double(input.frameLength) * 24_000 /
+                                input.format.sampleRate).rounded(.up)) + 512
+            guard let converted = AVAudioPCMBuffer(
+                pcmFormat: outputFormat, frameCapacity: AVAudioFrameCount(max(512, estimate))) else {
+                throw ExportError.conversion
+            }
+            var supplied = false
+            var error: NSError?
+            let status = converter.convert(to: converted, error: &error) { _, inputStatus in
+                if !supplied {
+                    supplied = true
+                    inputStatus.pointee = .haveData
+                    return input
+                }
+                inputStatus.pointee = .noDataNow
+                return nil
+            }
+            guard status != .error, error == nil,
+                  let channel = converted.floatChannelData?[0] else {
+                throw error ?? ExportError.conversion
+            }
+            var data = Data(capacity: Int(converted.frameLength) * 2)
+            for index in 0..<Int(converted.frameLength) {
+                let sample = max(-1, min(1, channel[index] * headroom))
+                let bits = UInt16(bitPattern: Int16((sample * 32767).rounded())).littleEndian
+                data.append(UInt8(bits & 0xff))
+                data.append(UInt8((bits >> 8) & 0xff))
+            }
+            return data
         }
-        guard status != .error, error == nil,
-              let channel = converted.floatChannelData?[0] else {
-            throw error ?? ExportError.conversion
-        }
-        var data = Data(capacity: Int(converted.frameLength) * 2)
-        for index in 0..<Int(converted.frameLength) {
-            let sample = max(-1, min(1, channel[index]))
-            let bits = UInt16(bitPattern: Int16((sample * 32767).rounded())).littleEndian
-            data.append(UInt8(bits & 0xff))
-            data.append(UInt8((bits >> 8) & 0xff))
-        }
-        return data
     }
 }

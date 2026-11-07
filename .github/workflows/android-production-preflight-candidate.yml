@@ -31,12 +31,21 @@ jobs:
           distribution: temurin
           java-version: '21'
       - uses: gradle/actions/setup-gradle@v4
-      - name: Install dependencies and run tests
+      - name: Repository regression tests (record errors, continue to build)
+        id: root_tests
+        continue-on-error: true
+        run: npm test
+      - name: Install mobile dependencies
+        working-directory: mobile
+        run: npm ci
+      - name: Mobile regression tests (record errors, continue to build)
+        id: mobile_tests
+        continue-on-error: true
+        working-directory: mobile
+        run: npm test
+      - name: Build and synchronize mobile assets
+        working-directory: mobile
         run: |
-          npm test
-          cd mobile
-          npm ci
-          npm test
           npm run build
           npx cap sync android
       - name: Build REAL Google Play package without publishing
@@ -50,3 +59,10 @@ jobs:
           name: production-app-unsigned-preflight-only
           if-no-files-found: error
           path: mobile/android/app/build/outputs/bundle/release/*.aab
+      - name: Ensure complete regression suite passed
+        if: always()
+        run: |
+          if [ "${{ steps.root_tests.outcome }}" != "success" ] || [ "${{ steps.mobile_tests.outcome }}" != "success" ]; then
+            echo "Regression suites failed; package must not be published."
+            exit 1
+          fi

@@ -487,14 +487,9 @@ fun NativeReaderDocumentActions(
         Text(if (english) "Settings for this book" else "Ajustes de esta obra",
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.semantics { heading() })
-        ReaderAdjustableChoice(
-            if (english) "Read automatically on opening" else "Lectura automática al abrir",
-            if (english) listOf("Use general setting", "Never", "Always")
-            else listOf("Usar ajuste general", "Nunca", "Siempre"), autoPlay
-        ) {
-            autoPlay = it
-            prefs.edit().putInt("autoplay." + book.id, it - 1).apply()
-        }
+        Text(if (english)
+            "Opening a document never starts speech. Use Play when you want to listen."
+            else "Abrir un documento no inicia la voz. Utiliza Reproducir cuando quieras escuchar.")
         if (book.tracks.isEmpty()) {
             ReaderAdjustableChoice(
                 if (english) "Navigation unit" else "Unidad de navegación",

@@ -75,6 +75,8 @@ fun NativeReaderDocumentActions(
     }
     var audioDaisyReady by remember(book.id) { mutableStateOf(false) }
     var audioExportBusy by remember(book.id) { mutableStateOf(false) }
+    var showAudioExport by remember(book.id) { mutableStateOf(false) }
+    var showOtherActions by remember(book.id) { mutableStateOf(false) }
     var audioVoice by remember(book.id) {
         mutableIntStateOf(NativeGeminiSpeech.voices.indexOf(
             prefs.getString("gemini.voice", "Kore")).coerceAtLeast(0))
@@ -227,51 +229,15 @@ fun NativeReaderDocumentActions(
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.semantics { heading() })
         Text(book.title)
-        Text((if (english) "Original format: " else "Formato original: ") +
-            book.format.uppercase())
-        Text((if (english) "Text length: " else "Extensión de texto: ") +
-            book.length + (if (english) " characters" else " caracteres"))
-        if (book.tracks.isNotEmpty()) {
-            Text((if (english) "Audio tracks: " else "Pistas de audio: ") +
-                book.tracks.size)
+        Button(onClick = { showAudioExport = !showAudioExport },
+            modifier = Modifier.fillMaxWidth().semantics {
+                stateDescription = if (showAudioExport)
+                    (if (english) "Expanded" else "Abierto")
+                else (if (english) "Collapsed" else "Cerrado")
+            }) {
+            Text(if (english) "Convert to audio or DAISY" else "Convertir a audio o DAISY")
         }
-        Text((if (english) "Bookmarks: " else "Marcas: ") +
-            (book.marks.size + book.audioMarks.size))
-
-        NativeReaderAdvancedOcrPanel(book, store, english,
-            onTextRefreshed = onOcrCompleted)
-
-        Text(if (english) "Share and export" else "Compartir y exportar",
-            style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.semantics { heading() })
-        Button(onClick = { shareOriginal() }, modifier = Modifier.fillMaxWidth()) {
-            Text(if (english) "Share original file" else "Compartir archivo original")
-        }
-        Button(onClick = {
-            error = ""
-            val suffix = store.originalFile(book)?.extension?.ifBlank { book.format }
-                ?: book.format
-            exportOriginal.launch(labelFile(suffix))
-        }, modifier = Modifier.fillMaxWidth()) {
-            Text(if (english) "Save original file to…" else "Guardar original en…")
-        }
-        Button(onClick = {
-            actionJob = scope.launch {
-                try {
-                    val text = withContext(Dispatchers.IO) { store.read(book) }
-                    shareText(text)
-                } catch (e: Exception) { alert(e.message.orEmpty()) }
-            }
-        }, modifier = Modifier.fillMaxWidth()) {
-            Text(if (english) "Share extracted text" else "Compartir texto extraído")
-        }
-        Button(onClick = {
-            exportContent = ""
-            exportText.launch(labelFile("txt"))
-        }, modifier = Modifier.fillMaxWidth()) {
-            Text(if (english) "Export accessible TXT…" else "Exportar TXT accesible…")
-        }
-
+        if (showAudioExport) {
         Text(if (english) "Audio export" else "Exportar audio",
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.semantics { heading() })
@@ -388,6 +354,61 @@ fun NativeReaderDocumentActions(
             }
         }
 
+        }
+        TextButton(onClick = { showOtherActions = !showOtherActions },
+            modifier = Modifier.fillMaxWidth().semantics {
+                stateDescription = if (showOtherActions)
+                    (if (english) "Expanded" else "Abierto")
+                else (if (english) "Collapsed" else "Cerrado")
+            }) {
+            Text(if (english) "Other document tools" else "Otras herramientas del documento")
+        }
+        if (showOtherActions) {
+        Text((if (english) "Original format: " else "Formato original: ") +
+            book.format.uppercase())
+        Text((if (english) "Text length: " else "Extensión de texto: ") +
+            book.length + (if (english) " characters" else " caracteres"))
+        if (book.tracks.isNotEmpty()) {
+            Text((if (english) "Audio tracks: " else "Pistas de audio: ") +
+                book.tracks.size)
+        }
+        Text((if (english) "Bookmarks: " else "Marcas: ") +
+            (book.marks.size + book.audioMarks.size))
+
+        NativeReaderAdvancedOcrPanel(book, store, english,
+            onTextRefreshed = onOcrCompleted)
+
+        Text(if (english) "Share and export" else "Compartir y exportar",
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.semantics { heading() })
+        Button(onClick = { shareOriginal() }, modifier = Modifier.fillMaxWidth()) {
+            Text(if (english) "Share original file" else "Compartir archivo original")
+        }
+        Button(onClick = {
+            error = ""
+            val suffix = store.originalFile(book)?.extension?.ifBlank { book.format }
+                ?: book.format
+            exportOriginal.launch(labelFile(suffix))
+        }, modifier = Modifier.fillMaxWidth()) {
+            Text(if (english) "Save original file to…" else "Guardar original en…")
+        }
+        Button(onClick = {
+            actionJob = scope.launch {
+                try {
+                    val text = withContext(Dispatchers.IO) { store.read(book) }
+                    shareText(text)
+                } catch (e: Exception) { alert(e.message.orEmpty()) }
+            }
+        }, modifier = Modifier.fillMaxWidth()) {
+            Text(if (english) "Share extracted text" else "Compartir texto extraído")
+        }
+        Button(onClick = {
+            exportContent = ""
+            exportText.launch(labelFile("txt"))
+        }, modifier = Modifier.fillMaxWidth()) {
+            Text(if (english) "Export accessible TXT…" else "Exportar TXT accesible…")
+        }
+
         Text(if (english) "Translation" else "Traducción",
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.semantics { heading() })
@@ -486,6 +507,7 @@ fun NativeReaderDocumentActions(
         Text(if (english)
             "Voice, speed and presentation settings are available in the Audio and Visual sections of the reader and are kept separately for this book."
             else "La voz, la velocidad y la presentación están en los apartados Audio y Visual del lector y se conservan por separado para esta obra.")
+        }
         if (status.isNotBlank()) Text(status)
         if (error.isNotBlank()) Text(error)
     }

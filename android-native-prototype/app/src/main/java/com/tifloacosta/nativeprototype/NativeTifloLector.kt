@@ -1129,6 +1129,17 @@ private fun NativeReadingScreen(
             )
         }
         ReaderCompactChoice(
+            if (english) "Move by" else "Avanzar y retroceder por",
+            availableModes.map { it.second }, selectedModeIndex, english
+        ) { choice ->
+            val chosen = availableModes[choice].first
+            unitType = chosen
+            prefs.edit().putInt("unit." + book.id, chosen).apply()
+            // Changing navigation must not change the saved reading offset.
+            if (active) send(NativeReaderPlaybackService.ACTION_UNIT,
+                chosen.takeIf { it in 0..2 } ?: 1)
+        }
+        ReaderCompactChoice(
             if (english) "Engine" else "Motor",
             if (phononReady) {
                 if (english) listOf("System", "Gemini", "Phonon")
@@ -1182,17 +1193,6 @@ private fun NativeReadingScreen(
         TextButton(onClick = { showTools = true },
             modifier = Modifier.fillMaxWidth()) {
             Text(if (english) "Actions" else "Acciones")
-        }
-        ReaderCompactChoice(
-            if (english) "Move by" else "Avanzar y retroceder por",
-            availableModes.map { it.second }, selectedModeIndex, english
-        ) { choice ->
-            val chosen = availableModes[choice].first
-            unitType = chosen
-            prefs.edit().putInt("unit." + book.id, chosen).apply()
-            // Changing navigation must not change the saved reading offset.
-            if (active) send(NativeReaderPlaybackService.ACTION_UNIT,
-                chosen.takeIf { it in 0..2 } ?: 1)
         }
         when (effectiveUnitType) {
             3 -> ReaderCompactOffsetPosition(

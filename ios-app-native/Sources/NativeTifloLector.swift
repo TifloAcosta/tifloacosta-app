@@ -1523,6 +1523,7 @@ struct NativeReadingScreen: View {
     @State private var showAudioExport = false
     @State private var audioExportBusy = false
     @State private var audioExportResult: URL?
+    @State private var sharePackageURL: URL?
     @State private var savedAudioExports: [URL] = []
     @State private var programmaticFocusRequest = false
     @State private var actionMessage: String?
@@ -2236,9 +2237,21 @@ struct NativeReadingScreen: View {
             Button("Unidad anterior") { moveUnit(-1) }
             Button("Unidad siguiente") { moveUnit(1) }
         }
+        if ["zip", "daisy"].contains(latest.fileExtension?.lowercased() ?? ""),
+           let complete = NativeReaderFormats.originalURL(for: latest) {
+            Button("Compartir DAISY completo") {
+                showDocumentActions = false
+                sharePackageURL = complete
+            }
+            .accessibilityHint("Comparte el archivo original completo, con todas las pistas, texto, índice y sincronización.")
+        }
         if let track = tracks.first,
            let url = NativeReaderFormats.storedURL(for: track) {
-            Button("Compartir audio") { NativeShare.present(url: url) }
+            Button("Compartir primera pista de audio, MP3") {
+                showDocumentActions = false
+                sharePackageURL = url
+            }
+            .accessibilityHint("Comparte una pista de audio, no el paquete DAISY completo.")
         }
         Button("Cancelar", role: .cancel) {}
     }
@@ -2502,6 +2515,25 @@ struct NativeReadingScreen: View {
             NativeReaderWordToolsScreen(voiceIdentifier: effectiveVoiceID, pitch: pitch)
         }
         .sheet(isPresented: $showAudioExport) { exportAudioSheet }
+        .sheet(isPresented: Binding(
+            get: { sharePackageURL != nil },
+            set: { if !$0 { sharePackageURL = nil } })) {
+            if let file = sharePackageURL {
+                NavigationStack {
+                    List {
+                        LabeledContent("Archivo", value: file.lastPathComponent)
+                        ShareLink(item: file) {
+                            Label("Compartir archivo fuera de TifloAcosta",
+                                  systemImage: "square.and.arrow.up")
+                        }
+                        .accessibilityHint("Abre el menú de iOS para enviar el archivo completo a Archivos, Drive u otra aplicación.")
+                    }
+                    .tifloScreenSurface()
+                    .navigationTitle("Compartir archivo")
+                    .toolbar { Button("Cerrar") { sharePackageURL = nil } }
+                }
+            }
+        }
         .sheet(isPresented: $showAudioSettings) {
             NativeReaderDocumentAudioSettingsScreen(document: document)
         }

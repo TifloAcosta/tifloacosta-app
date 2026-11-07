@@ -28,7 +28,7 @@ async function api(route,method='GET',body){
  try{data=raw?JSON.parse(raw):{};}catch{data={};}
  if(!res.ok){
   const errors=(data.errors||[]).map(e=>e.detail||e.title||e.code).join(' | ');
-  throw Error('Apple HTTP '+res.status+' '+method+' '+route+': '+errors.slice(0,1000));
+  throw Error('Apple HTTP '+res.status+' '+method+' '+route+': '+JSON.stringify(data.errors||data).slice(0,8000));
  }
  return data;
 }

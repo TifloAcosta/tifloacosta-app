@@ -32,8 +32,8 @@ test('el reproductor conserva sus controles existentes y la caché publica la ve
   for (const id of ['video-player-rewind','video-player-forward','video-player-toggle','video-player-position','video-player-close']) assert.ok(html.includes('id="'+id+'"'));
   assert.match(js, /const SEEK_SECONDS = 30/);
   assert.match(js, /if \(trigger\) trigger\.focus\(\)/);
-  assert.match(html, /videos\.js\?v=2\.6/);
+  assert.match(html, /videos\.js\?v=2\.7/);
   assert.match(html, /youtube-accessible\.js\?v=1\.1/);
-  assert.match(sw, /'\.\/videos\.js\?v=2\.6'/);
+  assert.match(sw, /'\.\/videos\.js\?v=2\.7'/);
   assert.match(sw, /'\.\/youtube-accessible\.js\?v=1\.1'/);
 });

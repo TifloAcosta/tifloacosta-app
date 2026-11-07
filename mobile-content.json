@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-06T23:31:53.753Z",
+  "generatedAt": "2026-11-07T02:51:06.000Z",
   "resources": [
     {
       "kind": "resource",
@@ -5569,6 +5569,72 @@
   "news": [
     {
       "kind": "news",
+      "id": "9to5mac-60a1e700033c13c5:en",
+      "sourceId": "9to5mac-60a1e700033c13c5",
+      "lang": "en",
+      "title": "Apple Music Classical gets new black-and-white icon in latest update",
+      "summary": "Following the redesign of the Apple Music app icon, which replaced the familiar white music note on a red background with a black-and-white look, Apple today updated Apple Music Classical to match the new design. more…",
+      "body": "Following the redesign of the Apple Music app icon, which replaced the familiar white music note on a red background with a black-and-white look, Apple today updated Apple Music Classical to match the new design.\n\nToday, Apple updated the Apple Music Classical app icon and interface to bring them in line with Apple Music’s new visual identity.\n\nThe new icon retains the familiar G-clef musical symbol, but now features a black symbol against a white background.\n\nInterestingly, unlike the regular flat Apple Music icon, the Apple Music Classical icon kept its three-dimensional look, with subtle lighting, shading, and transparency that give it a sense of depth.\n\nInside the app, the red accents for buttons have also been replaced with a shade of blue that’s closer to the default color Apple uses across its other apps.\n\nToday’s update came just weeks after Apple unveiled a much more colorful branding campaign for Apple Music, in addition to its new monochrome app icon, with visuals created by using sound waves to move water.\n\nWhile many assumed Apple would eventually adopt the more colorful design as Apple Music’s new app icon, today’s Apple Music Classical update suggests that the company is sticking with the black-and-white look for its apps.\n\nApple Music Classical requires an active Apple Music subscription. You can sign up for $11.99 per month, with 1 month free, or as part of the Apple One bundle .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/06/apple-music-classical-gets-new-black-and-white-icon-in-latest-update/",
+      "publishedAt": "2026-11-07T02:11:48.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-7cd92ef44ba5cd12:en",
+      "sourceId": "9to5mac-7cd92ef44ba5cd12",
+      "lang": "en",
+      "title": "9to5Mac Daily: November 6, 2026 – App Store changes, new MacBook Pro launch",
+      "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
+      "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/06/daily-november-6-2026/",
+      "publishedAt": "2026-11-06T23:47:18.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "android",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-57483975d76f0fea:en",
+      "sourceId": "the-verge-57483975d76f0fea",
+      "lang": "en",
+      "title": "OpenAI valued at $1.25 trillion, as rival Anthropic nears its IPO",
+      "summary": "OpenAI is now valued at $1.25 trillion in a new round of funding that has raised another $11 billion, according to Bloomberg. That would make it one of the world's most valuable companies, not long after raising $122 billion from investors in March at a valuation of $852 billion. Echoing FT and Wall Street Journal […]",
+      "body": "OpenAI is now valued at $1.25 trillion in a new round of funding that has raised another $11 billion, according to Bloomberg . That would make it one of the world's most valuable companies, not long after raising $122 billion from investors in March at a valuation of $852 billion.\n\nEchoing FT and Wall Street Journal reports from last week, Bloomberg says OpenAI is still pursuing additional investments that could increase the amount to $20 billion, and that it had initially hoped to raise as much as $30 billion at a higher valuation of $1.4 trillion. That was before tech stocks dropped, and the results of the midterms showed how much public o …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1029380/openai-1-25-trillion-investment-valuation",
+      "publishedAt": "2026-11-06T23:46:18.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-8b5dac3a9004dab1:en",
+      "sourceId": "the-verge-8b5dac3a9004dab1",
+      "lang": "en",
+      "title": "China reportedly recruited AI exec to spy on Jensen Huang",
+      "summary": "China's intelligence agency recruited Megaspeed executive Alice Huang to spy on Nvidia CEO Jensen Huang, according to The New York Times. The Ministry of State Security (MSS) enlisted her to glean information about American AI chips and \"potentially influence the company to push for its most advanced chips to be made available to China.\" Megaspeed […]",
+      "body": "China's intelligence agency recruited Megaspeed executive Alice Huang to spy on Nvidia CEO Jensen Huang, according to The New York Times . The Ministry of State Security (MSS) enlisted her to glean information about American AI chips and \"potentially influence the company to push for its most advanced chips to be made available to China.\" Megaspeed is a customer of Nvidia's, and Alice Huang also has \"relationships with executives at the highest levels of the A.I. chip industry,\" including leaders at Gigabyte, the NYT says.\n\nLast week, the NYT reported that Jensen Huang was seen as the target of a \"Chinese spy plot\" and shared details about Al …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1029338/nvidia-ceo-jensen-huang-china-spy",
+      "publishedAt": "2026-11-06T23:00:44.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "9to5mac-05511d5db2397735:en",
       "sourceId": "9to5mac-05511d5db2397735",
       "lang": "en",
@@ -5598,39 +5664,6 @@
       "categories": [
         "apple",
         "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-105080cce6acdf62:en",
-      "sourceId": "9to5mac-105080cce6acdf62",
-      "lang": "en",
-      "title": "iOS 27.3: New features, release date, more",
-      "summary": "This week, Apple released the first iOS 27.3 beta. The update includes multiple new features for iPhone users, including the redesigned Health app, iPhone Duo updates, and much more. Here’s everything you need to know about what’s new in iOS 27.3 … more…",
-      "body": "This week, Apple released the first iOS 27.3 beta. The update includes multiple new features for iPhone users, including the redesigned Health app, iPhone Duo updates, and much more. Here’s everything you need to know about what’s new in iOS 27.3 …\n\nAs my colleague Ryan explained, Apple will likely release iOS 27.3 to all iPhone users sometime in December. Typically, Apple would release its x.2 software updates in December, but this year is different because iOS 27.1 was exclusive to iPhone Duo . That means that, in terms of the timeline, iOS 27.3 is essentially the equivalent of iOS 27.2.\n\nHere’s when Apple has released its December updates in recent years:\n\nSo with that in mind, we expect iOS 27.3 to be released sometime during the first half of December.\n\nThe redesigned Health app is back in iOS 27.3. This was first available during testing of iOS 27.2, but did not ship as part of that final update.\n\nThe redesigned Health app is split into three tabs: Insights, Longevity, and Browse. The app features an all-new design that dynamically adapts based on your data, including Apple Intelligence. The Longevity tab includes a new Health age feature that uses Apple Watch data to show how your metrics track relative to your actual age.\n\nFor Apple Watch Series 12 and Apple Watch Ultra 4 users, it also offers easy access to view your Readiness score every morning.\n\nFor Apple Fitness+, iOS 27.3 adds a new Gym Strength feature. This creates progressive, four-week plans based on your strength goals, experience, schedule, and available equipment.\n\nAs you complete each week of workouts, the following week adapts based on the reps and weights you logged.\n\nFor iPhone Duo users, iOS 27.3 adds Reachability support . This setting shifts the interface on the outer display to the right or left to make it easier to reach the far corners. It’s designed to make iPhone Duo easier to use with one hand, despite the wider outer display. You activate it by swiping right on the right edge of the screen or left on the left edge.\n\nReachability for iPhone Duo is on by default. You can turn it off in Settings > Accessibility > Touch > Reachability.\n\niOS 27.3 also tweaks the iPhone Duo’s software keyboard by making the keys slightly narrower and the font slightly smaller.\n\nWhen it debuted, the iPhone Duo included a more robust version of StandBy with new clock faces and expanded customization options. iOS 27.3 brings the iPhone Duo’s StandBy experience to all iPhone models.\n\nThis includes the redesigned Analog and Digital Clock faces, as well as additional customization options for colors and complications. The update also adds support for Shared Albums to the Photos face.\n\niOS 27.3 brings several key Siri AI updates. First, the update expands Siri AI with many new capabilities across Apple apps. Apple explains :\n\nWe started rolling out these new capabilities across many Apple apps, including Calendar, Files, Finder, Journal, Mail, Maps, Messages, Music, Notes, Photos, Preview, Reminders, Safari, Shortcuts, and Weather, so users can do things like find a coffee shop they visited last week or archive files that haven’t been opened in over a year.\n\nThere are many more actions available now as examples for you to reference. To see what you can do in each app, just ask Siri AI.\n\nWith iOS 27.3, Apple is also starting to test new ways for developers to create Siri AI integrations for the first time. This is described as an “early Developer Preview.” Apple explains:\n\nToday’s preview allows any app to bring its content and actions directly into Siri AI by using App Intents, making it easier for all apps to tap into Siri AI’s newest capabilities, including personal context understanding, onscreen awareness, natural language, and more. So people can just ask for help in their own words, and Siri AI carries out any custom action you’ve built, from checking a delivery to booking a reservation to placing an order.\n\nWhile this is being tested as part of iOS 27.3, Apple says it will start shipping to customers in a few months.\n\niOS 27.3 also expands Siri AI to new languages, including French, Japanese, Korean, Portuguese, and Spanish.\n\niOS 27.3 brings the original set of Apple Intelligence features to China for the first time. This does not include Siri AI or other iOS 27 updates, but it does include the following features:\n\niOS 27.3 is a major update to Safari . First, the update adds support for a new vertical tabs design layout on iPhone Duo’s inner display. If you choose this option, your Safari tabs will be arranged vertically along the left-hand side of Safari, rather than along the top. Vertical tabs are also available on Mac and iPad with macOS 27.3 and iPadOS 27.3.\n\niOS 27.3 also adds a new Adaptive Dark Mode feature. This feature can automatically apply Dark Mode to websites that don’t natively support it. You can choose to have Adaptive Dark Mode automatically kick in or use it on a site-by-site basis.\n\nFor Apple Music users, iOS 27.3 adds a new “Selfie Sing” feature that lets users record a video of themselves while singing karaoke. To use this feature, start playing a song and go to the lyrics view. Then tap the new camera button that appears on the right-hand side of the lyrics.\n\nThe update also refines the design of viewing lyrics while your iPhone is in landscape mode.\n\nRead more : – iOS 27.3 upgrades Apple Music in two ways, here’s what’s new\n\nHere are a few other changes in iOS 27.3:\n\nWhat are your favorite new features in iOS 27.3? Have you spotted any other changes in the update? Let us know down in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/06/ios-27-3-new-features-release-date-more/",
-      "publishedAt": "2026-11-06T21:58:30.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-6767ca0d9202ef08:en",
-      "sourceId": "9to5mac-6767ca0d9202ef08",
-      "lang": "en",
-      "title": "watchOS 27.3 adds new Apple Watch feature that I absolutely love",
-      "summary": "watchOS 27.3 arrived this week in beta alongside iOS 27.3, with a major new feature for the latest Apple Watch models: Siri Recap, which I’m already really loving. more…",
-      "body": "watchOS 27.3 arrived this week in beta alongside iOS 27.3, with a major new feature for the latest Apple Watch models: Siri Recap, which I’m already really loving.\n\nIf you bought an Apple Watch Series 12 or Apple Watch Ultra 4 this fall, there are two exclusive new features coming in watchOS 27.3: Siri Recap and Live Rewind.\n\nBoth ‘Audio Intelligence’ features were announced at Apple’s September keynote, but just debuted in beta this week.\n\nSiri Recap in particular has stirred some controversy. Here’s what the feature does, per Apple:\n\nSiri Recap ambiently takes notes on your conversations throughout your day and creates high-level Apple Intelligence–generated summaries that you can use later to jog your memory, so you can stay present in the moment. Siri Recaps can be set to automatically delete after a period of up to 7 days unless you choose to explicitly save them.\n\nIt’s understandable why users would be concerned. Once enabled, Siri Recap can turn your Apple Watch into a device that’s always listening and often takes notes on what it hears.\n\nThis article isn’t about making the privacy case for the feature. You can read Apple’s privacy protections here . Briefly though, key details include: there’s no speaker attribution or logging of sensitive information like financial data, authentication data, or personal identifiers; no audio is stored or recorded; the feature is opt-in; and you can set times or places where it stays disabled.\n\nSpeaking strictly of the functionality of Siri Recap itself, however, I’ve been very impressed.\n\nI enabled Siri Recap after installing the iOS and watchOS 27.3 betas on Tuesday. When I checked the first recaps on Wednesday inside the Siri app, I was blown away.\n\nSiri had created a record of the things I’d done Tuesday afternoon and evening with remarkable accuracy and detail, as seen above.\n\nOne example that especially shocked me: after shopping for Christmas decorations with my family, Siri documented the size of a table runner we looked at. The thing is, I had no memory of anyone even mentioning its size. My wife must have, but despite me missing it, Siri wrote it down.\n\nAnother fun one: Thursday morning during breakfast, my son wanted to listen some music on our HomePod. Later that day, I found that the songs we’d listened to were saved at the bottom of my latest recap.\n\nIt’s still very early days with Siri Recap, which is only in beta right now, but what I’ve seen this week has been really exciting. And so far at least, I’ve seen zero information in a recap that I’d consider too sensitive to be included.\n\nWhat’s your take on Siri Recap? Have you given it a try? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/06/watchos-27-3-adds-new-apple-watch-feature-that-i-absolutely-love/",
-      "publishedAt": "2026-11-06T21:05:28.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
       ]
     },
     {
@@ -5746,22 +5779,6 @@
     },
     {
       "kind": "news",
-      "id": "the-verge-9ccd36881a671bf2:en",
-      "sourceId": "the-verge-9ccd36881a671bf2",
-      "lang": "en",
-      "title": "Just about anyone can rent access to White House IP addresses",
-      "summary": "Someone at the White House appears to be running software that could enable outsiders to rent access on the presidential network for just \"a few dollars,\" as reported by Krebs on Security and The Register. That's according to findings from the security firms Layer3 Intel and Synthient, which discovered residential proxy activity on the White […]",
-      "body": "Someone at the White House appears to be running software that could enable outsiders to rent access on the presidential network for just \"a few dollars,\" as reported by Krebs on Security and The Register . That's according to findings from the security firms Layer3 Intel and Synthient , which discovered residential proxy activity on the White House network.\n\nA residential proxy opens up a way for people to rent access to a home IP address and route their internet traffic through it, allowing them to conceal where their activity is actually coming from. Some apps and browser extensions include third-party software development kits (SDKs) that …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1028835/white-house-residential-proxy",
-      "publishedAt": "2026-11-06T17:40:06.000Z",
-      "categories": [
-        "tecnologia-general",
-        "programas-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "nvda-es-79fb7dbcfcc0ec0b:es",
       "sourceId": "nvda-es-79fb7dbcfcc0ec0b",
       "lang": "es",
@@ -5790,23 +5807,6 @@
       "publishedAt": "2026-11-06T17:23:52.000Z",
       "categories": [
         "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-53b98e6219c1c1cd:en",
-      "sourceId": "the-verge-53b98e6219c1c1cd",
-      "lang": "en",
-      "title": "AI is the new dating dealbreaker",
-      "summary": "When Irene moved to San Francisco last year, she started using dating apps as a way to meet new people, get to know her new city, and connect with others who care about the things she does. After the 25-year-old analyst downloaded Hinge and started swiping, she noticed a trend. \"Hinge has a prompt where […]",
-      "body": "When Irene moved to San Francisco last year, she started using dating apps as a way to meet new people, get to know her new city, and connect with others who care about the things she does. After the 25-year-old analyst downloaded Hinge and started swiping, she noticed a trend.\n\n\"Hinge has a prompt where you can say, 'We'll get along if'',\" she recalls. \"Sometimes people will be like, 'Fuck AI.'\"\n\nUsually, the people who include this kind of value statement on their profile work in the arts, nursing, maybe graphic design. Within the span of a few minutes of sitting down and swiping, Irene shows me a second profile where this happened once mo …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1028609/ai-dating-feelings-doomers-singularity",
-      "publishedAt": "2026-11-06T17:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apps-accesibles",
         "ia-accesibilidad"
       ]
     },

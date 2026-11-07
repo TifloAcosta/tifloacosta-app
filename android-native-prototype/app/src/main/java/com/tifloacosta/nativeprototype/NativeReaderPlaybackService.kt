@@ -141,8 +141,28 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
     private var voiceId = ""
     private var playing = false
     private val focusRecovery = NativeReaderAudioFocusRecovery()
-    private var remainingSleepMs = 0L
-    private var lastTick = 0L
+    private var sleepDeadlineMs = 0L
+    private val sleepExpiration = Runnable {
+        if (sleepDeadlineMs > 0L && SystemClock.elapsedRealtime() >= sleepDeadlineMs) {
+            sleepDeadlineMs = 0L
+            pauseReading()
+        }
+    }
+
+    /** A monotonic deadline survives pauses and does not depend on ticker cadence. */
+    private fun setSleepTimer(minutes: Int) {
+        handler.removeCallbacks(sleepExpiration)
+        sleepDeadlineMs = if (minutes <= 0) 0L
+            else SystemClock.elapsedRealtime() + minutes.coerceIn(0, 120) * 60_000L
+        if (sleepDeadlineMs > 0L) {
+            handler.postDelayed(sleepExpiration, minutes.coerceIn(0, 120) * 60_000L)
+        }
+        publish()
+    }
+
+    private fun remainingSleepMs(): Long =
+        if (sleepDeadlineMs == 0L) 0L
+        else (sleepDeadlineMs - SystemClock.elapsedRealtime()).coerceAtLeast(0L)
 
     private val audioAttributes = AudioAttributes.Builder()
         .setUsage(AudioAttributes.USAGE_MEDIA)
@@ -179,15 +199,13 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
     private val ticker = object : Runnable {
         override fun run() {
             if (playing) {
-                val now = android.os.SystemClock.elapsedRealtime()
-                if (remainingSleepMs > 0 && lastTick > 0) {
-                    remainingSleepMs -= (now - lastTick).coerceAtLeast(0)
-                    if (remainingSleepMs <= 0) {
-                        pauseReading()
-                        return
-                    }
+                val now = SystemClock.elapsedRealtime()
+                if (sleepDeadlineMs > 0L && now >= sleepDeadlineMs) {
+                    handler.removeCallbacks(sleepExpiration)
+                    sleepDeadlineMs = 0L
+                    pauseReading()
+                    return
                 }
-                lastTick = now
                 holdPlaybackWakeLock()
                 if (kind == "audio") {
                     val observed = try { player?.currentPosition ?: positionMs }
@@ -296,9 +314,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                     try { player?.playbackParams = player!!.playbackParams.setSpeed(speed) }
                     catch (_: Exception) {}
                 }
-                remainingSleepMs = intent.getIntExtra(EXTRA_SLEEP, 0).coerceIn(0, 120) * 60_000L
-                lastTick = android.os.SystemClock.elapsedRealtime()
-                publish()
+                setSleepTimer(intent.getIntExtra(EXTRA_SLEEP, 0))
             }
             ACTION_PLAY -> resumeReading()
             ACTION_PAUSE -> pauseReading()
@@ -349,10 +365,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                 publish()
             }
             ACTION_SLEEP -> {
-                val minutes = intent.getIntExtra(EXTRA_VALUE, 0).coerceIn(0, 120)
-                remainingSleepMs = minutes * 60_000L
-                lastTick = android.os.SystemClock.elapsedRealtime()
-                publish()
+                setSleepTimer(intent.getIntExtra(EXTRA_VALUE, 0))
             }
             ACTION_BOOKMARK -> bookmark()
             ACTION_SEGMENT -> if (kind == "audio") openSegment(
@@ -392,7 +405,8 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         book = found
         kind = target
         speed = 1f
-        remainingSleepMs = 0L
+        handler.removeCallbacks(sleepExpiration)
+        sleepDeadlineMs = 0L
         val prefs = getSharedPreferences("native-reader-preferences", 0)
         val chosenEngine = if (target == "text") prefs.getInt("engine." + id, 0) else 0
         geminiEnabled = chosenEngine == 1
@@ -484,7 +498,6 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
         }
         playing = true
         holdPlaybackWakeLock()
-        lastTick = android.os.SystemClock.elapsedRealtime()
         if (kind == "audio") {
             if (player == null) openSegment(segmentIndex, positionMs)
             else try { player?.start() } catch (_: Exception) { openSegment(segmentIndex, positionMs) }
@@ -722,6 +735,8 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
 
     private fun stopReading() {
         focusRecovery.cancel()
+        handler.removeCallbacks(sleepExpiration)
+        sleepDeadlineMs = 0L
         pauseReading()
         geminiGeneration++
         phononGeneration++
@@ -838,8 +853,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
             segment = segmentIndex, segmentCount = segments.size,
             positionMs = positionMs, durationMs = durationMs,
             textOffset = textOffset, textLength = text.length, error = error,
-            sleepMinutes = if (remainingSleepMs <= 0L) 0
-                else ((remainingSleepMs + 59999L) / 60000L).toInt(),
+            sleepMinutes = ((remainingSleepMs() + 59999L) / 60000L).toInt(),
             audioMarks = current.audioMarks.ifEmpty {
                 current.marks.map { ReaderAudioMark(current.trackIndex, it) }
             },
@@ -917,6 +931,7 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
 
     override fun onDestroy() {
         handler.removeCallbacks(ticker)
+        handler.removeCallbacks(sleepExpiration)
         releasePlaybackWakeLock()
         persist()
         geminiGeneration++

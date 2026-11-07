@@ -89,6 +89,23 @@ class Phase6IntegralRegressionTest {
         assertTrue(service.contains("pause.period"))
     }
 
+    @Test fun libraryTitleAndProgressShareOneTalkBackStop() {
+        val library = source("NativeTifloLector.kt")
+        assertTrue(library.contains("contentDescription = book.title + \". \" + readingStatus"))
+        assertTrue(library.contains("Text(book.title + \". \" + readingStatus)"))
+        assertTrue(!library.contains("Text(readingStatus + if (book.id in queuedIds)"))
+    }
+
+    @Test fun daisyAndAudioExportOfferSystemVoiceWithoutGeminiKey() {
+        val actions = source("NativeReaderDocumentActions.kt")
+        val system = source("NativeSystemAudioSynth.kt")
+        assertTrue(actions.contains("listOf(\"Sistema\", \"Gemini\", \"Phonon\")"))
+        assertTrue(actions.contains("NativeSystemAudioSynth(context)"))
+        assertTrue(actions.contains("if (wantsDaisy) NativeGeminiDaisyExport.generateWithSynthesizer"))
+        assertTrue(system.contains("synthesizeToFile("))
+        assertTrue(system.contains("normalizeWav(result)"))
+    }
+
     @Test fun podcastLibraryKeepsFavoritesOpmlAndNewEpisodes() {
         val library = source("NativePodcastLibrary.kt")
         val screen = source("NativeMediaAndDownloads.kt")

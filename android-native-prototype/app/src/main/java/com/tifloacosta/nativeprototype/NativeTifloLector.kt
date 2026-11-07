@@ -675,11 +675,10 @@ fun NativeTifloLector(
             } else {
             OutlinedButton(onClick = { run(action) },
                 modifier = Modifier.fillMaxWidth().clearAndSetSemantics {
-                    contentDescription = book.title + ". " + readingStatus
-                    stateDescription = actions[action] +
-                        (if (book.id in queuedIds) {
-                            if (english) ". In reading queue" else ". En cola de lectura"
-                        } else "")
+                    contentDescription = book.title
+                    // Flick changes only the selected action. Progress is a separate
+                    // item afterwards, never repeated on each accessibility gesture.
+                    stateDescription = actions[action]
                     progressBarRangeInfo = ProgressBarRangeInfo(
                         action.toFloat(), 0f..actions.lastIndex.toFloat(), actions.size - 2
                     )
@@ -696,6 +695,9 @@ fun NativeTifloLector(
                         CustomAccessibilityAction(label) { run(i); true }
                     }
                 }) { Text(book.title) }
+                Text(readingStatus + if (book.id in queuedIds) {
+                    if (english) ". In reading queue" else ". En cola de lectura"
+                } else "")
             }
         }
         if (shown.size > visibleCount) {

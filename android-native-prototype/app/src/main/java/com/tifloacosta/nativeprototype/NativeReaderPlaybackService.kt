@@ -733,10 +733,16 @@ class NativeReaderPlaybackService : Service(), TextToSpeech.OnInitListener {
                     catch (_: Exception) { positionMs }
                 try { player?.pause() } catch (_: Exception) {}
             } else if (phononEnabled) {
-                phononReader?.pause()
+                // A late native-synthesis callback must not restart a paused book.
+                phononGeneration++
+                phononReader?.stop()
+                phononPlayingSegment = false
             } else if (geminiEnabled) {
-                if (player == null) geminiGeneration++ // Cancel network work.
-                else try { player?.pause() } catch (_: Exception) {}
+                geminiGeneration++ // Invalidate even already-completed async callbacks.
+                try { player?.pause() } catch (_: Exception) {
+                    player?.release()
+                    player = null
+                }
             } else {
                 tts?.stop()
             }

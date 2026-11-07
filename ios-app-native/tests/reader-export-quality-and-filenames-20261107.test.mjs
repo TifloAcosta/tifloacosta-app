@@ -20,3 +20,17 @@ test('DAISY MP3 speech encoding uses 128 kbps and preserves document title', () 
   assert.match(daisy, /title: title, fileExtension: "zip"/);
   assert.doesNotMatch(daisy, /appendingPathComponent\("TifloLector-\\\(uuid\)\.zip"\)/);
 });
+
+test('DAISY exports use the same reading speed and pitch as the open document', () => {
+  const reader = src('NativeTifloLector.swift');
+  assert.match(reader, /engine: engine, speed: speed, pitch: pitch/);
+  assert.match(audio, /NativeSystemSpeechExport\.generate\(text, voice: voice, speed: speed, pitch: pitch\)/);
+  assert.match(daisy, /speed: speed, pitch: pitch\)/);
+  assert.match(wav, /utterance\.pitchMultiplier = max\(0\.5, min\(2, pitch\)\)/);
+});
+test('export names retain titles and avoid UUIDs for visible files', () => {
+  assert.match(audio, /let cleaned = title\.replacingOccurrences/);
+  assert.match(audio, /while FileManager\.default\.fileExists\(atPath: candidate\.path\)/);
+  assert.match(audio, /fileExtension: format == \.mp3 \? "mp3" : "m4a"/);
+  assert.match(daisy, /title: title, fileExtension: "zip"/);
+});

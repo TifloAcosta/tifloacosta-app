@@ -2199,13 +2199,25 @@ struct NativeReadingScreen: View {
                             }
                             Text("Phonon genera el audio dentro del iPhone sin enviar el libro a Internet.")
                         }
-                        Picker("Formato", selection: $audioExportFormat) {
-                            Text("MP3").tag(NativeGeminiAudioExport.Format.mp3)
-                            Text("M4A").tag(NativeGeminiAudioExport.Format.m4a)
-                            Text("WAV").tag(NativeGeminiAudioExport.Format.wav)
-                            Text("DAISY").tag(NativeGeminiAudioExport.Format.daisy)
+                        NavigationLink {
+                            List {
+                                Button("MP3") { audioExportFormat = .mp3 }
+                                    .accessibilityValue(audioExportFormat == .mp3 ? "Seleccionado" : "")
+                                Button("M4A") { audioExportFormat = .m4a }
+                                    .accessibilityValue(audioExportFormat == .m4a ? "Seleccionado" : "")
+                                Button("WAV") { audioExportFormat = .wav }
+                                    .accessibilityValue(audioExportFormat == .wav ? "Seleccionado" : "")
+                                Button("DAISY") { audioExportFormat = .daisy }
+                                    .accessibilityValue(audioExportFormat == .daisy ? "Seleccionado" : "")
+                            }
+                            .tifloScreenSurface()
+                            .navigationTitle("Formato de exportación")
+                            .accessibilityHint("Selecciona un formato y vuelve a Exportar audio con el botón Atrás.")
+                        } label: {
+                            LabeledContent("Formato", value: audioExportFormat.rawValue.uppercased())
                         }
                         .disabled(audioExportBusy)
+                        .accessibilityHint("Abre una lista accesible de formatos MP3, M4A, WAV y DAISY.")
                         Text("DAISY incluye texto, audio y navegación. La compatibilidad externa está pendiente de validación.")
                         Button("Generar") { exportAudio() }
                             .disabled(audioExportBusy || latest.body.isEmpty ||

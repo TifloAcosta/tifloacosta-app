@@ -41,6 +41,17 @@ jobs:
           console.log('Google Play edit permission successful');
           const [tracks, bundles] = await Promise.all([play.listTracks(edit.id), play.listBundles(edit.id)]);
           const codes = collectVersionCodes({ tracks: tracks?.tracks || [], bundles: bundles?.bundles || [] });
+          const production = (tracks?.tracks || []).find(t => t.track === 'production');
+          console.log('PRODUCTION_TRACK_CURRENT: ' + JSON.stringify({
+            track: production?.track || 'not-found',
+            releases: (production?.releases || []).map(release => ({
+              name: release.name,
+              status: release.status,
+              versionCodes: release.versionCodes,
+              userFraction: release.userFraction ?? null
+            }))
+          }));
+          console.log('BUNDLE_23_REGISTERED: ' + Boolean((bundles?.bundles || []).some(b => String(b.versionCode) === '23')));
           console.log('Highest version code currently registered in Play: ' + Math.max(0, ...codes));
           console.log('Is version code 16 already used: ' + codes.includes(16));
           console.log('Requested version: ' + request.versionName + '; current publishing status: ' + request.status);

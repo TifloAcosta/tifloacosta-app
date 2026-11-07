@@ -13,6 +13,7 @@ on:
     paths:
       - 'mobile/**'
       - 'shared/**'
+      - 'android-native-prototype/**'
       - '.github/workflows/bootstrap-mobile-android.yml'
   workflow_dispatch:
 

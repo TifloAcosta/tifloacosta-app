@@ -384,11 +384,9 @@ fun NativeReaderGeneralSettings(
                         } else context.startActivity(Intent(Settings.ACTION_SETTINGS))
                     }) { Text(if (english) "Find more voices in Android" else "Buscar más voces en Android") }
                 }
-                1 -> ReaderAdjustableChoice(
-                    if (english) "When opening a document" else "Al abrir un documento",
-                    if (english) listOf("Manual", "Automatic speech on opening")
-                    else listOf("Manual", "Leer automáticamente al abrir"), mode
-                ) { mode = it; prefs.edit().putInt("mode", it).apply() }
+                1 -> Text(if (english)
+                    "Reading starts only when you press Play. Opening a book never starts speech."
+                    else "La lectura comienza cuando pulsas Reproducir. Abrir un libro no activa la voz.")
                 2 -> {
                     ReaderAdjustableChoice(if (english) "Text size" else "Tamaño de letra",
                         (14..40 step 2).map { "$it" }, font

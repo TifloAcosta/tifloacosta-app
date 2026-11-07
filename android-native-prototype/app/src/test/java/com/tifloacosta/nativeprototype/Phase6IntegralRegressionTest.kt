@@ -44,6 +44,17 @@ class Phase6IntegralRegressionTest {
         assertTrue("Navigation must precede voice configuration", engine > navigation)
     }
 
+    @Test fun externalVoiceProvidersAreIsolatedForTalkBack() {
+        val screen = source("NativeReaderExternalVoiceKeys.kt")
+        assertTrue(screen.contains("selectedProvider == null"))
+        assertTrue(screen.contains("selectedProvider = \"phonon\""))
+        assertTrue(screen.contains("selectedProvider = \"gemini\""))
+        assertTrue(screen.contains("selectedProvider == \"phonon\""))
+        assertTrue(screen.contains("selectedProvider == \"gemini\""))
+        assertTrue(screen.contains("Volver a motores"))
+        assertTrue(screen.contains("if (selectedProvider != null) backFromProvider() else onBack()"))
+    }
+
     @Test fun podcastLibraryKeepsFavoritesOpmlAndNewEpisodes() {
         val library = source("NativePodcastLibrary.kt")
         val screen = source("NativeMediaAndDownloads.kt")

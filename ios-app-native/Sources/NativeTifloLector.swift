@@ -2253,7 +2253,11 @@ struct NativeReadingScreen: View {
                         if let result = audioExportResult {
                             Button("Compartir") { NativeShare.present(url: result) }
                         }
-                        Text("Límite por documento: 60.000 caracteres.")
+                        if audioExportEngine == .gemini {
+                            Text("Gemini: máximo 60.000 caracteres por exportación; utiliza tu cuota de API.")
+                        } else {
+                            Text("Las voces locales no tienen límite fijo de caracteres. Los libros largos necesitan espacio libre y pueden tardar más en convertirse.")
+                        }
                     }
                 }
                 .tifloScreenSurface()

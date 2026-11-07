@@ -120,6 +120,18 @@
     "publishedAt": null
   },
   {
+    "id": "applevis-apps-23b4c205c993a93a",
+    "title": "koedesk",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/productivity/koedesk",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "koedesk turns your iPhone keyboard into a voice-powered text input. Tap the mic, speak, tap again — your words appear instantly in any app — Claude, ChatGPT, Gemini, Slack, Mail, Notes, anywhere you can type. KEY FEATURES • Universal keyboard Replace the system keyboard. Works in every iOS app — chat with AI agents, draft emails, jot ideas, search the web. No copy-paste needed. • World-class accuracy Powered by ElevenLabs Scribe v2 — ranked #2 of all models on the third-party AA-WER English benchmark (2.2% WER). Accuracy measured and published across 12 languages at koedesk.app/en/benchmark/. • 36 languages, auto-detected Japanese, English, Spanish, French, German, Italian, Portuguese, Vietnamese, and more. The keyboard reads your locale settings — no language switching needed. • Built for AI agents Optimized for natural conversation with Claude, ChatGPT, and Gemini. Keyterms support lets you feed product names, codebases, and proper nouns for even higher accuracy. Filler words (um, uh) are auto-cleaned. • Custom dictionary Add specialized terms, project names, jargon — koedesk learns and adapts. PRICING • Free — 5 minutes per day, full Scribe v2 quality, no credit card required. • Pro — Unlimited transcription, cancel anytime. PRIVACY FIRST Your audio is processed transiently. We never store voice recordings. Account deletion is one tap away — Settings → Account → Delete Account. WHO IS IT FOR • Developers using AI agents in their workflow • Writers drafting on iPhone • Anyone tired of pecking at the on-screen keyboard • Bilingual users tired of switching between language keyboards Get started free — no credit card, no commitment. Terms of Use — https://koedesk.app/terms/ Privacy Policy — https://koedesk.app/privacy/",
+    "publishedAt": "2026-11-07T20:08:01.000Z"
+  },
+  {
     "id": "applevis-apps-a62557a2754ec002",
     "title": "Everlife 2 - Life Simulator",
     "sourceId": "applevis-apps",
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "Roguelite × Turn-Based Command RPG Over 600 skills. Countless combinations. A different challenge every run. Build your own strategy from randomly presented skills and equipment. Chain skills together, combine them with equipment, and decide how to spend your limited resources. What you get may be random—but how you use it is up to you. A roguelite turn-based command RPG packed with countless choices and immense freedom. ■ Build Your Deck with Over 600 Skills There are over 600 skills to discover. Defeat enemies and choose one skill from a random selection to add to your deck. The skills you find will differ every run. Make the most of what you find, or strengthen the strategy you've already built. Shape your deck through every choice and fight your way to the deepest reaches of the Rift. ■ Weapon × Will × Potion In addition to improving your base stats by leveling up, you can equip three types of equipment: Weapons, Wills, and Potions. Combining skills and equipment can create a wide variety of powerful synergies. Each type of equipment can be upgraded at its own dedicated Facility. But you won't always have enough resources to upgrade everything to its fullest potential. Decide where to invest your limited resources and shape a build that complements your current deck. ■ Conquer the Ever-Changing Rift The Rift is the dungeon at the heart of the game, where a variety of elements change with every run. Skills obtained from enemies. Equipment found in treasure chests. NPCs encountered along the way. Facilities available during your journey. You never know exactly what you'll find, and every choice can lead your build in a new direction. Conquering Rifts rewards you with special items, unlocking new features and new stages to challenge. ■ Build Freely at the Preparation Base Before entering the Rift, the Preparation Base lets you freely customize various elements, including your starting deck and equipment. Do you build around a specific strategy from the beginning? Or create a versatile foundation and adapt to whatever you find along the way? Combine careful preparation with the unpredictable choices of each run to forge your path forward. ■ Random Encounters and Companions A variety of NPC encounters await you within the Rift. Battles, trades, events—and sometimes, the opportunity to recruit an NPC as a Companion. The abilities of your Companions are also randomized. Every encounter has the potential to change the course of your run. ■ Design Your Own Custom Skills Progress even further to unlock Custom Skills, allowing you to freely design the performance of a skill itself. Customize basic properties such as power and number of attacks, then add special effects that trigger when the skill is activated. The activation cost is calculated in detail based on the effects and values you choose, meaning more powerful effects require a greater cost. Create a single devastating strike. Combine multiple effects. Don't just choose from existing skills—create the skill you need yourself. The further you progress, the more possibilities open up for building your own unique playstyle.",
     "publishedAt": "2026-11-03T05:12:48.000Z"
-  },
-  {
-    "id": "applevis-apps-05db12f92735877c",
-    "title": "AGNow,",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/mac/games/agnow",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Audiogames usually have to be downloaded, installed and kept up to date, and most of them only run on Windows. AGNow runs them for you instead: the game runs on the server, and you hear it and play it from wherever you are, without installing anything. • Nothing to install. Games play in the browser. There are also apps for Windows, Mac and iPhone if you would rather have one. • Your own screen reader does the talking. What a game would say to NVDA is passed to the screen reader you already use, in your voice and at your speed. • Your progress is kept. Saved games stay on the server, so you can start on one device and carry on from another. • Short breaks are fine. Leave a game running and it will still be there when you get back, rather than having to be started again. It is for stepping away rather than for tomorrow, though — a game nobody comes back to is closed after a while. • Nobody has to play alone. Add friends, send messages, and let people listen in on what you are playing — or hand them a turn. • Free to play, within reason. A free account gets 12 hours of play time a month, a new one plays without a limit for its first 30 days, and there is a paid tier if you want no limit at all.",
-    "publishedAt": "2026-11-02T14:58:49.000Z"
   }
 ]

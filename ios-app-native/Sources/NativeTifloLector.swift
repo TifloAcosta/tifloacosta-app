@@ -9,6 +9,7 @@ struct NativeReaderPreferences: Codable, Hashable {
     var speedIndex: Int? = nil
     var pitchIndex: Int? = nil
     var voiceID: String? = nil
+    var readingStyle: Int? = nil
     var textSize: Double? = nil
     var lineSpacingIndex: Int? = nil
     var strongText: Bool? = nil
@@ -30,11 +31,15 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
     let importedAt: Date
     // Optional properties allow older beta library JSON to remain decodable.
     var fileExtension: String? = nil
+    // Original import bytes; nil for documents imported by older versions.
+    var originalFilePath: String? = nil
     var trackPaths: [String]? = nil
     var markedPositions: [Int]? = nil
     var textBookmarks: [NativeTextBookmark]? = nil
     var isFavorite: Bool? = nil
     var lastPercent: Int? = nil
+    // Optional to keep older libraries compatible; only set on actual opening or playback.
+    var lastOpenedAt: Date? = nil
     // Exact text cursor, retaining lastPercent for older stored libraries.
     var lastTextOffset: Int? = nil
     var lastTrackIndex: Int? = nil
@@ -93,6 +98,8 @@ final class NativeReaderLibrary: ObservableObject {
             if documents.contains(where: { $0.id == identifier }) { continue }
             do {
                 let payload = try NativeReaderFormats.read(url, documentID: identifier)
+                let originalFilePath = try NativeReaderFormats.storeOriginal(
+                    url, documentID: identifier)
                 documents.insert(
                     NativeReadingDocument(
                         id: identifier,
@@ -101,6 +108,7 @@ final class NativeReaderLibrary: ObservableObject {
                         body: payload.body,
                         importedAt: .now,
                         fileExtension: payload.fileExtension,
+                        originalFilePath: originalFilePath,
                         trackPaths: payload.trackPaths
                     ), at: 0
                 )
@@ -283,6 +291,12 @@ final class NativeReaderLibrary: ObservableObject {
         }
     }
 
+    func markOpened(_ document: NativeReadingDocument) {
+        guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
+        documents[i].lastOpenedAt = .now
+        try? save()
+    }
+
     func latest(_ document: NativeReadingDocument) -> NativeReadingDocument {
         documents.first(where: { $0.id == document.id }) ?? document
     }
@@ -299,18 +313,18 @@ final class NativeReaderLibrary: ObservableObject {
 
 /// Informacion de avance de voz sin depender del ritmo de refresco de SwiftUI.
 private final class NativeSpeechProgressDelegate: NSObject, AVSpeechSynthesizerDelegate {
-    var onWord: ((NSRange) -> Void)?
-    var onFinish: (() -> Void)?
+    var onWord: ((NSRange, AVSpeechUtterance) -> Void)?
+    var onFinish: ((AVSpeechUtterance) -> Void)?
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
                            willSpeakRangeOfSpeechString characterRange: NSRange,
                            utterance: AVSpeechUtterance) {
-        onWord?(characterRange)
+        onWord?(characterRange, utterance)
     }
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
                            didFinish utterance: AVSpeechUtterance) {
-        onFinish?()
+        onFinish?(utterance)
     }
 }
 
@@ -333,23 +347,34 @@ final class NativeReadingSpeech: ObservableObject {
     private var onAudioError: ((String) -> Void)?
     private var baseUTF16 = 0
     private var totalUTF16 = 0
+    private var utteranceOffsets: [ObjectIdentifier: Int] = [:]
+    private var finalUtteranceID: ObjectIdentifier?
+    private var speechSourceText = ""
+    private var speechSourceBaseUTF16 = 0
+    private var speechRate = 1.0
+    private var speechPitch: Float = 1.0
+    private var speechLanguage = "es-ES"
+    private var speechVoiceIdentifier = ""
+    private var speechReadingStyle = 0
     @Published private(set) var textPercent = 0
     @Published private(set) var textUTF16Offset = 0
 
     init() {
-        progressDelegate.onWord = { [weak self] range in
+        progressDelegate.onWord = { [weak self] range, utterance in
             Task { @MainActor [weak self] in
                 guard let self, self.isPlaying, self.player == nil,
-                      self.totalUTF16 > 0 else { return }
-                let count = self.baseUTF16 + range.location + range.length
+                      self.totalUTF16 > 0,
+                      let base = self.utteranceOffsets[ObjectIdentifier(utterance)] else { return }
+                let count = base + range.location + range.length
                 self.textUTF16Offset = min(self.totalUTF16, max(0, count))
                 self.textPercent = max(0, min(100,
                     Int(Double(count) * 100 / Double(self.totalUTF16))))
             }
         }
-        progressDelegate.onFinish = { [weak self] in
+        progressDelegate.onFinish = { [weak self] utterance in
             Task { @MainActor [weak self] in
-                guard let self, self.player == nil else { return }
+                guard let self, self.player == nil,
+                      self.finalUtteranceID == ObjectIdentifier(utterance) else { return }
                 self.textUTF16Offset = self.totalUTF16
                 self.textPercent = 100
                 self.isPlaying = false
@@ -422,27 +447,75 @@ final class NativeReadingSpeech: ObservableObject {
         return max(0, min(100, Int(audioElapsed / audioDuration * 100)))
     }
 
+    /// Each utterance retains its UTF-16 offset so bookmarks and resume remain exact.
+    /// The original text is never rewritten or supplemented with spoken punctuation.
+    private func speechChunks(_ text: String, style: Int) -> [(String, Int, TimeInterval)] {
+        guard style > 0 else { return [(text, 0, 0)] }
+        var result: [(String, Int, TimeInterval)] = []
+        var fragment = ""
+        var startUTF16 = 0
+        var cursorUTF16 = 0
+        func appendChunk(_ pause: TimeInterval) {
+            guard !fragment.isEmpty else { return }
+            result.append((fragment, startUTF16, pause))
+            fragment = ""
+            startUTF16 = cursorUTF16
+        }
+        for character in text {
+            fragment.append(character)
+            cursorUTF16 += String(character).utf16.count
+            let pause: TimeInterval
+            switch character {
+            case ",": pause = style == 2 ? 0.20 : 0.25
+            case ";", ":": pause = style == 2 ? 0.35 : 0.40
+            case ".", "!", "?": pause = style == 2 ? 0.45 : 0.55
+            case "\n": pause = style == 2 ? 0.75 : 0.85
+            default: pause = 0
+            }
+            // A maximum chunk length prevents paragraphs without punctuation
+            // from becoming huge uninterruptible synthesis units.
+            if pause > 0 || fragment.utf16.count >= 400 { appendChunk(pause) }
+        }
+        appendChunk(0)
+        return result
+    }
+
     func play(_ text: String, speed: Double = 1.0, pitch: Float = 1.0,
               language: String = "es-ES", voiceIdentifier: String = "", baseUTF16: Int = 0,
-              totalUTF16: Int? = nil) {
+              totalUTF16: Int? = nil, readingStyle: Int = 0) {
         stop()
         guard !text.isEmpty else { return }
+        speechSourceText = text
+        speechSourceBaseUTF16 = baseUTF16
+        speechRate = speed
+        speechPitch = pitch
+        speechLanguage = language
+        speechVoiceIdentifier = voiceIdentifier
+        speechReadingStyle = readingStyle
         self.baseUTF16 = baseUTF16
         self.totalUTF16 = max(1, totalUTF16 ?? text.utf16.count)
         textUTF16Offset = baseUTF16
         textPercent = max(0, min(100,
             Int(Double(baseUTF16) * 100 / Double(self.totalUTF16))))
-        // La voz sigue sonando con la pantalla bloqueada y otras apps abiertas.
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
         try? AVAudioSession.sharedInstance().setActive(true)
-        let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = (voiceIdentifier.isEmpty ? nil : AVSpeechSynthesisVoice(identifier: voiceIdentifier))
+        let voice = (voiceIdentifier.isEmpty ? nil : AVSpeechSynthesisVoice(identifier: voiceIdentifier))
             ?? AVSpeechSynthesisVoice(language: language)
-        utterance.rate = min(AVSpeechUtteranceMaximumSpeechRate,
-            max(AVSpeechUtteranceMinimumSpeechRate,
-                AVSpeechUtteranceDefaultSpeechRate * Float(speed)))
-        utterance.pitchMultiplier = max(0.5, min(2, pitch))
-        synthesizer.speak(utterance)
+        let chunks = speechChunks(text, style: max(0, min(2, readingStyle)))
+        guard !chunks.isEmpty else { return }
+        for (index, chunk) in chunks.enumerated() {
+            let utterance = AVSpeechUtterance(string: chunk.0)
+            utterance.voice = voice
+            utterance.rate = min(AVSpeechUtteranceMaximumSpeechRate,
+                max(AVSpeechUtteranceMinimumSpeechRate,
+                    AVSpeechUtteranceDefaultSpeechRate * Float(speed)))
+            utterance.pitchMultiplier = max(0.5, min(2, pitch))
+            utterance.postUtteranceDelay = chunk.2
+            let identifier = ObjectIdentifier(utterance)
+            utteranceOffsets[identifier] = baseUTF16 + chunk.1
+            if index == chunks.count - 1 { finalUtteranceID = identifier }
+            synthesizer.speak(utterance)
+        }
         isPlaying = true
         isPaused = false
     }
@@ -620,7 +693,13 @@ final class NativeReadingSpeech: ObservableObject {
         else if isGeneratedSpeech {
             geminiGeneration += 1
             geminiTask?.cancel()
-        } else { synthesizer.pauseSpeaking(at: .word) }
+        } else {
+            // AVSpeechSynthesizer.pauseSpeaking may leave queued utterances audible,
+            // especially with phrase-by-phrase pauses. Stop them immediately and
+            // resume from the last reported spoken position instead.
+            finalUtteranceID = nil
+            synthesizer.stopSpeaking(at: .immediate)
+        }
         sleep(after: 0) // Al pausar no sigue corriendo la cuenta del apagado.
         isPlaying = false
         isPaused = true
@@ -631,7 +710,24 @@ final class NativeReadingSpeech: ObservableObject {
         isPlaying = true
         if isGeneratedSpeech {
             if let player { player.play() } else { playNextGeminiSegment() }
-        } else if let player { player.play() } else { synthesizer.continueSpeaking() }
+        } else if let player { player.play() }
+        else {
+            let sourceUTF16 = speechSourceText.utf16.count
+            let consumed = max(0, min(sourceUTF16,
+                textUTF16Offset - speechSourceBaseUTF16))
+            let source = speechSourceText as NSString
+            let remaining = source.substring(from: consumed)
+            guard !remaining.isEmpty else {
+                isPlaying = false
+                isPaused = false
+                return
+            }
+            let total = totalUTF16
+            play(remaining, speed: speechRate, pitch: speechPitch,
+                 language: speechLanguage, voiceIdentifier: speechVoiceIdentifier,
+                 baseUTF16: speechSourceBaseUTF16 + consumed,
+                 totalUTF16: total, readingStyle: speechReadingStyle)
+        }
     }
 
     func refresh() {
@@ -669,8 +765,75 @@ final class NativeReadingSpeech: ObservableObject {
         onTrackChanged = nil
         onAudioError = nil
         synthesizer.stopSpeaking(at: .immediate)
+        utteranceOffsets.removeAll()
+        finalUtteranceID = nil
+        speechSourceText = ""
         isPlaying = false
         isPaused = false
+    }
+}
+
+/// The library presents one navigation control; all folder actions live inside.
+private struct NativeReaderFoldersScreen: View {
+    @EnvironmentObject private var library: NativeReaderLibrary
+    @Binding var selectedFolder: String
+    @Environment(\.dismiss) private var dismiss
+    @State private var newFolderName = ""
+    @State private var showCreateFolder = false
+    @State private var folderToDelete: String?
+    @State private var folderError: String?
+
+    var body: some View {
+        List {
+            Button("Crear nueva carpeta") {
+                newFolderName = ""
+                showCreateFolder = true
+            }
+            Button("Todas las carpetas") { selectedFolder = ""; dismiss() }
+                .accessibilityValue(selectedFolder.isEmpty ? "Seleccionada" : "")
+            Button("Sin carpeta") { selectedFolder = "__unfiled__"; dismiss() }
+                .accessibilityValue(selectedFolder == "__unfiled__" ? "Seleccionada" : "")
+            ForEach(library.folders, id: \.self) { folder in
+                Button(folder) {
+                    selectedFolder = folder
+                    dismiss()
+                }
+                .accessibilityLabel("Carpeta \(folder)")
+                .accessibilityValue(selectedFolder == folder ? "Seleccionada" : "")
+                .accessibilityAction(named: Text("Eliminar carpeta")) { folderToDelete = folder }
+            }
+        }
+        .tifloScreenSurface()
+        .navigationTitle("Carpetas")
+        .alert("Crear carpeta", isPresented: $showCreateFolder) {
+            TextField("Nombre de la carpeta", text: $newFolderName)
+            Button("Crear") {
+                if !library.createFolder(named: newFolderName) {
+                    folderError = "El nombre está vacío, repetido o es demasiado largo."
+                }
+            }
+            Button("Cancelar", role: .cancel) {}
+        } message: {
+            Text("Crea una carpeta sin borrar ni mover los archivos originales.")
+        }
+        .confirmationDialog("Eliminar carpeta", isPresented: Binding(
+            get: { folderToDelete != nil },
+            set: { if !$0 { folderToDelete = nil } }),
+            titleVisibility: .visible) {
+            Button("Eliminar carpeta y conservar las obras", role: .destructive) {
+                if let folder = folderToDelete {
+                    library.deleteFolder(folder)
+                    if selectedFolder == folder { selectedFolder = "" }
+                }
+                folderToDelete = nil
+            }
+            Button("Cancelar", role: .cancel) { folderToDelete = nil }
+        }
+        .alert("No se pudo crear la carpeta", isPresented: Binding(
+            get: { folderError != nil },
+            set: { if !$0 { folderError = nil } })) {
+            Button("Aceptar", role: .cancel) { folderError = nil }
+        } message: { Text(folderError ?? "") }
     }
 }
 
@@ -695,6 +858,7 @@ struct NativeReaderLibraryScreen: View {
     @State private var folderToDelete: String?
     @State private var folderForDocument: NativeReadingDocument?
     @State private var documentToConfigure: NativeReadingDocument?
+    @State private var documentToExport: NativeReadingDocument?
     @AppStorage("native-reading-folder-filter") private var selectedFolder = ""
     @AppStorage("native-reading-filter") private var filterIndex = 0
     @AppStorage("native-reading-sort") private var sortIndex = 0
@@ -739,6 +903,9 @@ struct NativeReaderLibraryScreen: View {
             case 8: return calendar.isDateInToday(doc.importedAt)
             case 9: return doc.importedAt >= (calendar.date(byAdding: .day, value: -7, to: .now) ?? .now)
             case 10: return doc.importedAt >= (calendar.date(byAdding: .month, value: -1, to: .now) ?? .now)
+            case 11:
+                guard let mostRecent = library.documents.compactMap(\.lastOpenedAt).max() else { return false }
+                return doc.lastOpenedAt == mostRecent
             default: return true
             }
         }
@@ -747,12 +914,14 @@ struct NativeReaderLibraryScreen: View {
         case 2: items.sort { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
         case 3: items.sort { $0.title.localizedStandardCompare($1.title) == .orderedDescending }
         case 4: items.sort { $0.formatLabel < $1.formatLabel }
+        case 5: items.sort { ($0.lastOpenedAt ?? .distantPast) > ($1.lastOpenedAt ?? .distantPast) }
         default: items.sort { $0.importedAt > $1.importedAt }
         }
         return items
     }
 
     private func play(_ document: NativeReadingDocument) {
+        library.markOpened(document)
         let latest = library.latest(document)
         let chosenSpeed = latest.readerPreferences?.speedIndex ?? speedIndex
         let speed = speeds[max(0, min(speeds.count - 1, chosenSpeed))]
@@ -782,45 +951,7 @@ struct NativeReaderLibraryScreen: View {
         }
     }
 
-    var body: some View {
-        List {
-            Section {
-                Button("Importar", systemImage: "square.and.arrow.down") {
-                    importSourcesPresented = true
-                }
-                NavigationLink("Ajustes") { NativeReaderSettingsScreen() }
-            }
-            Section("Filtrar y ordenar") {
-                NativeAdjustableChoice(
-                    title: "Filtros",
-                    choices: ["Todos", "Textos", "PDF", "EPUB", "Office", "Audio y DAISY",
-                              "Con marcas", "Favoritos", "Importados hoy",
-                              "Últimos siete días", "Último mes"],
-                    selectedIndex: $filterIndex
-                )
-                NativeAdjustableChoice(
-                    title: "Ordenar",
-                    choices: ["Más recientes", "Más antiguos", "Título A a Z",
-                              "Título Z a A", "Formato"],
-                    selectedIndex: $sortIndex
-                )
-            }
-            Section("Carpetas") {
-                NativeAdjustableChoice(
-                    title: "Carpeta",
-                    choices: ["Todas", "Sin carpeta"] + library.folders,
-                    selectedIndex: folderFilterIndex
-                )
-                Button("Nueva carpeta") { newFolderName = ""; showCreateFolder = true }
-                ForEach(library.folders, id: \.self) { folder in
-                    Button(folder) { selectedFolder = folder }
-                        .accessibilityLabel("Carpeta \(folder)")
-                        .accessibilityHint("Filtra la biblioteca por esta carpeta.")
-                        .accessibilityAction(named: Text("Eliminar carpeta")) {
-                            folderToDelete = folder
-                        }
-                }
-            }
+    private var libraryBooksSection: some View {
             Section("Mi biblioteca") {
                 Button(selectingDocuments ? "Terminar" : "Selección") {
                     selectingDocuments.toggle()
@@ -845,16 +976,20 @@ struct NativeReaderLibraryScreen: View {
                             Label(document.title, systemImage: selectedDocumentIDs.contains(document.id)
                                 ? "checkmark.circle.fill" : "circle")
                         }
-                        .accessibilityLabel("\(document.title), \(selectedDocumentIDs.contains(document.id) ? "seleccionado" : "no seleccionado")")
+                        .accessibilityLabel("\(document.title), \(max(0, min(100, library.latest(document).lastPercent ?? 0))) por ciento leído, \(selectedDocumentIDs.contains(document.id) ? "seleccionado" : "no seleccionado")")
                         .accessibilityHint("Doble toque para cambiar la selección")
                     } else {
                     NavigationLink {
                         NativeReadingScreen(document: document, speech: speech)
-                    } label: { Text(document.title) }
-                    .accessibilityLabel("\(document.title), \(document.formatLabel)")
+                            .onAppear { library.markOpened(document) }
+                    } label: {
+                        Text("\(document.title), \(max(0, min(100, library.latest(document).lastPercent ?? 0))) por ciento leído")
+                    }
+                    .accessibilityLabel("\(document.title), \(max(0, min(100, library.latest(document).lastPercent ?? 0))) por ciento leído, \(document.formatLabel)")
                     .accessibilityHint("Doble toque para abrir. Hay acciones de accesibilidad.")
                     .accessibilityAction(named: Text("Reproducir")) { play(document) }
                     .accessibilityAction(named: Text("Información")) { information = document }
+                    .accessibilityAction(named: Text("Exportar audio")) { documentToExport = document }
                     .accessibilityAction(named: Text("Ajustes del documento")) {
                         documentToConfigure = document
                     }
@@ -875,11 +1010,61 @@ struct NativeReaderLibraryScreen: View {
                     }
                 }
             }
+    }
+
+    private var libraryFiltersSection: some View {
+            Section("Filtrar y ordenar") {
+                NativeAdjustableChoice(
+                    title: "Filtros",
+                    choices: ["Todos", "Textos", "PDF", "EPUB", "Office", "Audio y DAISY",
+                              "Con marcas", "Favoritos", "Importados hoy",
+                              "Últimos siete días", "Último mes", "Último abierto"],
+                    selectedIndex: $filterIndex
+                )
+                NativeAdjustableChoice(
+                    title: "Ordenar",
+                    choices: ["Importados más recientes", "Importados más antiguos",
+                              "Título de a a zeta", "Título de zeta a a",
+                              "Formato", "Abiertos recientemente"],
+                    selectedIndex: $sortIndex
+                )
+            }
+    }
+
+    private var libraryFoldersSection: some View {
+        Section {
+            NavigationLink {
+                NativeReaderFoldersScreen(selectedFolder: $selectedFolder)
+            } label: {
+                Text("Carpetas")
+            }
+            .accessibilityHint("Abre las carpetas de la biblioteca y permite crear una nueva.")
+        }
+    }
+
+    private var libraryBase: some View {
+        List {
+            Section {
+                Button("Importar", systemImage: "square.and.arrow.down") {
+                    importSourcesPresented = true
+                }
+                NavigationLink("Ajustes") { NativeReaderSettingsScreen() }
+            }
+            libraryFiltersSection
+            libraryFoldersSection
+            libraryBooksSection
 
         }
         .tifloScreenSurface()
         .navigationTitle("TifloLector")
+        .navigationDestination(item: $documentToExport) { selected in
+            NativeReadingScreen(document: selected, speech: speech, startWithAudioExport: true)
+        }
         .onDisappear { speech.stop() }
+    }
+
+    private var libraryImportControls: some View {
+        libraryBase
         .confirmationDialog("Importar", isPresented: $importSourcesPresented,
                             titleVisibility: .visible) {
             Button("Archivos") { importPresented = true }
@@ -929,6 +1114,10 @@ struct NativeReaderLibraryScreen: View {
         } message: {
             Text("Crea una carpeta para organizar las obras sin mover ni borrar archivos del sistema.")
         }
+    }
+
+    private var libraryManagementControls: some View {
+        libraryImportControls
         .confirmationDialog("Mover a carpeta",
                             isPresented: Binding(
                                 get: { folderForDocument != nil },
@@ -976,6 +1165,10 @@ struct NativeReaderLibraryScreen: View {
         } message: {
             Text("Escribe el nuevo título del documento.")
         }
+    }
+
+    private var libraryConfirmationControls: some View {
+        libraryManagementControls
         .confirmationDialog("Eliminar documentos seleccionados",
                             isPresented: $confirmBatchDeletion, titleVisibility: .visible) {
             Button("Eliminar \(selectedDocumentIDs.count) documentos", role: .destructive) {
@@ -1017,6 +1210,10 @@ struct NativeReaderLibraryScreen: View {
         } message: {
             Text(importError ?? "")
         }
+    }
+
+    private var libraryInformationControls: some View {
+        libraryConfirmationControls
         .sheet(item: $information) { document in
             NavigationStack {
                 Form {
@@ -1035,6 +1232,9 @@ struct NativeReaderLibraryScreen: View {
             }
         }
     }
+
+    var body: some View { libraryInformationControls }
+
 }
 
 /// Split long documents once at import-display time. Avoid putting a complete
@@ -1175,12 +1375,107 @@ private struct NativeReaderTextLayout {
     }
 }
 
+/// Each format remains in the same accessible List; selecting it never
+/// dismisses the screen or changes VoiceOver's navigation hierarchy.
+/// Audio exports survive leaving the reader and can always be shared from Files.
+private enum NativeReaderSavedExports {
+    static var folder: URL {
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("Exportaciones de TifloLector", isDirectory: true)
+    }
+
+    /// Recover older DAISY files left in the temporary directory by previous builds.
+    /// Do not regenerate them: preserve the original bytes for sharing and analysis.
+    private static func recoverLegacyExports() {
+        let manager = FileManager.default
+        let temporary = manager.temporaryDirectory
+        let locations = [temporary,
+                         temporary.appendingPathComponent("TifloLectorExport", isDirectory: true)]
+        for directory in locations {
+            guard let files = try? manager.contentsOfDirectory(
+                at: directory, includingPropertiesForKeys: nil,
+                options: [.skipsHiddenFiles]) else { continue }
+            for file in files {
+                let validFormat = ["zip", "mp3", "m4a", "wav"]
+                    .contains(file.pathExtension.lowercased())
+                let legacyDAISY = directory == temporary &&
+                    file.lastPathComponent.hasPrefix("TifloLector-") &&
+                    file.pathExtension.lowercased() == "zip"
+                let oldAudio = directory != temporary && validFormat
+                guard legacyDAISY || oldAudio else { continue }
+                _ = try? save(file)
+            }
+        }
+    }
+
+    static func list() -> [URL] {
+        recoverLegacyExports()
+        guard let files = try? FileManager.default.contentsOfDirectory(
+            at: folder, includingPropertiesForKeys: [.contentModificationDateKey],
+            options: [.skipsHiddenFiles]) else { return [] }
+        return files.filter { ["zip", "mp3", "m4a", "wav"].contains($0.pathExtension.lowercased()) }
+            .sorted { (a, b) in
+                let aDate = (try? a.resourceValues(forKeys: [.contentModificationDateKey]))?.contentModificationDate ?? .distantPast
+                let bDate = (try? b.resourceValues(forKeys: [.contentModificationDateKey]))?.contentModificationDate ?? .distantPast
+                return aDate > bDate
+            }
+    }
+
+    static func save(_ source: URL) throws -> URL {
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        let ext = source.pathExtension
+        let stem = source.deletingPathExtension().lastPathComponent
+        var target = folder.appendingPathComponent(stem).appendingPathExtension(ext)
+        var number = 2
+        while FileManager.default.fileExists(atPath: target.path) {
+            target = folder.appendingPathComponent("\(stem) (\(number))")
+                .appendingPathExtension(ext)
+            number += 1
+        }
+        try FileManager.default.moveItem(at: source, to: target)
+        return target
+    }
+}
+
+private struct NativeReaderExportFormatControls: View {
+    @Binding var selection: NativeGeminiAudioExport.Format
+    let disabled: Bool
+
+    var body: some View {
+        Section("Formato de exportación") {
+            ForEach(NativeGeminiAudioExport.Format.allCases) { format in
+                Button {
+                    selection = format
+                    UIAccessibility.post(notification: .announcement,
+                        argument: "Formato \(format.rawValue) seleccionado")
+                } label: {
+                    HStack {
+                        Text(format.rawValue)
+                        Spacer()
+                        if selection == format {
+                            Image(systemName: "checkmark")
+                                .accessibilityHidden(true)
+                        }
+                    }
+                }
+                .disabled(disabled)
+                .accessibilityLabel(format.rawValue)
+                .accessibilityValue(selection == format ? "Seleccionado" : "No seleccionado")
+                .accessibilityHint("Doble toque para elegir este formato sin salir de la pantalla.")
+            }
+            Text("Formato elegido: \(selection.rawValue)")
+                .accessibilityAddTraits(.updatesFrequently)
+        }
+    }
+}
+
 struct NativeReadingScreen: View {
     let document: NativeReadingDocument
     @ObservedObject var speech: NativeReadingSpeech
     var startPercent: Int? = nil
     var startTextOffset: Int? = nil
     var startTrack: Int? = nil
+    var startWithAudioExport = false
 
     @EnvironmentObject private var library: NativeReaderLibrary
     @Environment(\.dismiss) private var dismiss
@@ -1193,6 +1488,7 @@ struct NativeReadingScreen: View {
     @AppStorage("native-reading-strong-text") private var strongText = false
     @AppStorage("native-reader-navigation-unit") private var navigationUnit = 0
     @AppStorage("native-reader-reading-mode") private var readingMode = 0
+    @AppStorage("native-reader-reading-style") private var readingStyle = 0
     @State private var didApplyOpeningMode = false
     @State private var sleepIndex = 0 // Each open document starts with timer disabled.
     @State private var currentPercent = 0
@@ -1220,10 +1516,15 @@ struct NativeReadingScreen: View {
     @State private var audioExportTask: Task<Void, Never>?
     @State private var audioExportStatus = ""
     @State private var audioExportFormat: NativeGeminiAudioExport.Format = .mp3
-    @State private var audioExportEngine: NativeGeminiAudioExport.Engine = .gemini
+    @State private var audioExportEngine: NativeGeminiAudioExport.Engine = .system
+    @State private var systemExportVoiceID = ""
+    @State private var systemExportVoices: [AVSpeechSynthesisVoice] = []
+    @State private var systemExportVoicePreview = AVSpeechSynthesizer()
     @State private var showAudioExport = false
     @State private var audioExportBusy = false
     @State private var audioExportResult: URL?
+    @State private var sharePackageURL: URL?
+    @State private var savedAudioExports: [URL] = []
     @State private var programmaticFocusRequest = false
     @State private var actionMessage: String?
     @AccessibilityFocusState private var focusedFragment: Int?
@@ -1240,12 +1541,13 @@ struct NativeReadingScreen: View {
 
     init(document: NativeReadingDocument, speech: NativeReadingSpeech,
          startPercent: Int? = nil, startTrack: Int? = nil,
-         startTextOffset: Int? = nil) {
+         startTextOffset: Int? = nil, startWithAudioExport: Bool = false) {
         self.document = document
         self.speech = speech
         self.startPercent = startPercent
         self.startTrack = startTrack
         self.startTextOffset = startTextOffset
+        self.startWithAudioExport = startWithAudioExport
         self.textLayout = NativeReaderTextLayout(document.body)
         self.wordCount = document.body.split(whereSeparator: \.isWhitespace).count
     }
@@ -1256,6 +1558,7 @@ struct NativeReadingScreen: View {
     private var effectivePitchIndex: Int { latest.readerPreferences?.pitchIndex ?? pitchIndex }
     private var pitch: Float { [0.8, 0.9, 1.0, 1.1, 1.2][max(0, min(4, effectivePitchIndex))] }
     private var effectiveVoiceID: String { latest.readerPreferences?.voiceID ?? voiceID }
+    private var effectiveReadingStyle: Int { latest.readerPreferences?.readingStyle ?? readingStyle }
     private var effectiveTextSize: Double { latest.readerPreferences?.textSize ?? textSize }
     private var effectiveLineSpacing: Int { latest.readerPreferences?.lineSpacingIndex ?? lineSpacingIndex }
     private var effectiveStrongText: Bool { latest.readerPreferences?.strongText ?? strongText }
@@ -1336,7 +1639,8 @@ struct NativeReadingScreen: View {
                         language: AVSpeechSynthesisVoice(identifier: effectiveVoiceID)?.language ?? "es-ES",
                         voiceIdentifier: effectiveVoiceID,
                         baseUTF16: utf16Offset,
-                        totalUTF16: document.body.utf16.count)
+                        totalUTF16: document.body.utf16.count,
+                        readingStyle: effectiveReadingStyle)
         }
     }
 
@@ -1569,17 +1873,26 @@ struct NativeReadingScreen: View {
         let title = latest.title
         let text = latest.body
         let engine = audioExportEngine
-        let voice = engine == .phonon ? phononVoice : geminiVoice
+        let speed = self.speed
+        let pitch = self.pitch
+        let voice: String
+        switch engine {
+        case .system: voice = systemExportVoiceID
+        case .gemini: voice = geminiVoice
+        case .phonon: voice = phononVoice
+        }
         audioExportTask = Task {
             do {
                 let url = try await NativeGeminiAudioExport.export(
                     text: text, title: title, voice: voice, format: audioExportFormat,
-                    engine: engine,
+                    engine: engine, speed: speed, pitch: pitch,
                     progress: { done, total in
                         audioExportStatus = "Generando \(done) de \(total)."
                     })
-                audioExportResult = url
-                audioExportStatus = "Audio preparado. Pulsa Compartir para guardarlo."
+                let saved = try NativeReaderSavedExports.save(url)
+                audioExportResult = saved
+                savedAudioExports = NativeReaderSavedExports.list()
+                audioExportStatus = "Audio guardado en Exportaciones de TifloLector. Pulsa Compartir archivo para enviarlo o guardarlo en Archivos."
             } catch is CancellationError {
                 audioExportStatus = "Exportación cancelada."
             } catch {
@@ -1588,6 +1901,14 @@ struct NativeReadingScreen: View {
             audioExportBusy = false
             audioExportTask = nil
         }
+    }
+
+    private func shareOriginal() {
+        guard let url = NativeReaderFormats.originalURL(for: latest) else {
+            actionMessage = "El archivo original no está conservado en la biblioteca. Este documento puede haberse importado antes de incorporar esta función. Vuelve a importarlo para poder compartirlo."
+            return
+        }
+        NativeShare.present(url: url)
     }
 
     private func exportText() {
@@ -1631,6 +1952,18 @@ struct NativeReadingScreen: View {
         return "\(position) Voz reproducida \(formatDuration(elapsedSpeakingSeconds)). Tiempo restante estimado \(formatDuration(remaining))."
     }
 
+    private var pageProgressDescription: String {
+        let boundaries = textLayout.pageStarts
+        let pageCount = max(1, boundaries.count - 1)
+        let pageIndex = min(pageCount,
+            max(1, boundaries.prefix(while: { $0 <= readingOffset }).count))
+        let remaining = max(0, pageCount - pageIndex)
+        if textLayout.hasRealPages {
+            return "Página \(pageIndex) de \(pageCount). Quedan \(remaining) páginas."
+        }
+        return "Bloque aproximado \(pageIndex) de \(pageCount). Quedan \(remaining) bloques."
+    }
+
     private var playbackRow: some View {
         AnyLayout(
             dynamicTypeSize.isAccessibilitySize
@@ -1640,11 +1973,10 @@ struct NativeReadingScreen: View {
             Button(speech.isPlaying ? "Pausar" : "Reproducir") {
                 speech.isPlaying ? pausePlayback() : play()
             }
-            Button("Detener") { stopPlayback() }
-            Button("Audio") { showAudioSettings = true }
-                .accessibilityHint("Abre velocidad, voz e idioma de lectura.")
-            Button("Visual") { showVisualSettings = true }
-                .accessibilityHint("Abre tamaño de letra y presentación visual.")
+            Button("Retroceder") { moveUnit(-1) }
+                .accessibilityHint("Retrocede según el modo de navegación seleccionado.")
+            Button("Avanzar") { moveUnit(1) }
+                .accessibilityHint("Avanza según el modo de navegación seleccionado.")
         }
         .buttonStyle(.bordered)
         .controlSize(.small)
@@ -1698,7 +2030,30 @@ struct NativeReadingScreen: View {
 
     private var quickControls: some View {
         VStack(alignment: .leading, spacing: 6) {
+            // Frequent reading actions first, in VoiceOver traversal order.
             playbackRow
+            NativeAdjustableChoice(
+                title: "Navegación",
+                choices: navigationChoices,
+                selectedIndex: navigationBinding
+            )
+            .accessibilityHint("Define cómo actúan Retroceder y Avanzar.")
+            HStack {
+                Button("Añadir marca") { addBookmark() }
+                Button("Marcas guardadas") { showSavedMarks = true }
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.small)
+            NativeAdjustableChoice(
+                title: "Apagado automático",
+                choices: Self.sleepChoices,
+                selectedIndex: $sleepIndex
+            )
+            Button("Información") { showDocumentInformation = true }
+                .accessibilityHint("Consulta el porcentaje leído y restante, páginas o bloques, tiempo de lectura y datos de la obra.")
+            trackButtons
+            // Advanced controls remain available without interrupting the
+            // primary playback/navigation/bookmark workflow.
             if tracks.isEmpty {
                 NativeAdjustableChoice(
                     title: "Motor",
@@ -1763,47 +2118,18 @@ struct NativeReadingScreen: View {
                 }
             }
             NativeAdjustableChoice(
-                title: "Navegación",
-                choices: navigationChoices,
-                selectedIndex: navigationBinding
-            )
-            .accessibilityHint("Selecciona el tipo de avance y retroceso.")
-            HStack {
-                Button("Anterior") { moveUnit(-1) }
-                Button("Siguiente") { moveUnit(1) }
-            }
-            .buttonStyle(.bordered)
-            .controlSize(.small)
-            trackButtons
-            Text(progressDescription)
-                .font(.footnote)
-                .accessibilityLabel(progressDescription)
-            if speech.hasAudio && !speech.isGeneratedSpeech {
-                HStack(spacing: 12) {
-                    Button("Retroceder 30 segundos") {
-                        speech.skip(seconds: -30)
-                        currentPercent = speech.audioPercent
-                        persistPosition()
-                    }
-                    Button("Avanzar 30 segundos") {
-                        speech.skip(seconds: 30)
-                        currentPercent = speech.audioPercent
-                        persistPosition()
-                    }
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.small)
-            }
-            NativeAdjustableChoice(
-                title: "Apagado automático",
-                choices: Self.sleepChoices,
-                selectedIndex: $sleepIndex
-            )
-            NativeAdjustableChoice(
                 title: "Posición",
                 choices: Self.percentages,
                 selectedIndex: positionBinding
             )
+            HStack {
+                Button("Audio") { showAudioSettings = true }
+                    .accessibilityHint("Abre velocidad, voz e idioma de lectura.")
+                Button("Visual") { showVisualSettings = true }
+                    .accessibilityHint("Abre tamaño de letra y presentación visual.")
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.small)
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 8)
@@ -1889,8 +2215,13 @@ struct NativeReadingScreen: View {
         Button(latest.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos") {
             library.toggleFavorite(document)
         }
+        Button("Compartir documento original") { shareOriginal() }
+            .disabled(NativeReaderFormats.originalURL(for: latest) == nil)
+            .accessibilityHint(NativeReaderFormats.originalURL(for: latest) == nil
+                ? "No se conserva el original de esta importación. Importa de nuevo el archivo para activar esta opción."
+                : "Comparte el mismo archivo que importaste, sin convertirlo.")
         if !latest.body.isEmpty {
-            Button("Exportar texto") { exportText() }
+            Button("Exportar texto extraído (TXT)") { exportText() }
             Button("Exportar audio") {
                 if phononReady && phononVoices.isEmpty { loadPhononVoices() }
                 showAudioExport = true
@@ -1906,11 +2237,35 @@ struct NativeReadingScreen: View {
             Button("Unidad anterior") { moveUnit(-1) }
             Button("Unidad siguiente") { moveUnit(1) }
         }
+        if ["zip", "daisy"].contains(latest.fileExtension?.lowercased() ?? ""),
+           let complete = NativeReaderFormats.originalURL(for: latest) {
+            Button("Compartir DAISY completo") {
+                showDocumentActions = false
+                sharePackageURL = complete
+            }
+            .accessibilityHint("Comparte el archivo original completo, con todas las pistas, texto, índice y sincronización.")
+        }
         if let track = tracks.first,
            let url = NativeReaderFormats.storedURL(for: track) {
-            Button("Compartir audio") { NativeShare.present(url: url) }
+            Button("Compartir primera pista de audio, MP3") {
+                showDocumentActions = false
+                sharePackageURL = url
+            }
+            .accessibilityHint("Comparte una pista de audio, no el paquete DAISY completo.")
         }
         Button("Cancelar", role: .cancel) {}
+    }
+
+    private func previewSystemExportVoice() {
+        systemExportVoicePreview.stopSpeaking(at: .immediate)
+        let selected = AVSpeechSynthesisVoice(identifier: systemExportVoiceID)
+            ?? AVSpeechSynthesisVoice(language: "es-ES")
+        let sample = selected?.language.lowercased().hasPrefix("es") == true
+            ? "Esta es una muestra de la voz con la que se exportará el documento."
+            : "This is a sample of the voice for exporting this document."
+        let utterance = AVSpeechUtterance(string: sample)
+        utterance.voice = selected
+        systemExportVoicePreview.speak(utterance)
     }
 
     private var exportAudioSheet: some View {
@@ -1918,13 +2273,26 @@ struct NativeReadingScreen: View {
                 List {
                     Section("Motor y voz") {
                         Picker("Motor", selection: $audioExportEngine) {
+                            Text("Sistema iOS, sin clave y sin conexión").tag(NativeGeminiAudioExport.Engine.system)
                             Text("Gemini").tag(NativeGeminiAudioExport.Engine.gemini)
                             if phononReady {
                                 Text("Phonon").tag(NativeGeminiAudioExport.Engine.phonon)
                             }
                         }
                         .disabled(audioExportBusy)
-                        if audioExportEngine == .gemini {
+                        if audioExportEngine == .system {
+                            Text("Exportación local con las voces del iPhone. No necesitas cuenta ni clave API.")
+                            Picker("Voz del sistema", selection: $systemExportVoiceID) {
+                                Text("Predeterminada de iOS").tag("")
+                                ForEach(systemExportVoices, id: \.identifier) { voice in
+                                    Text("\(voice.name), \(voice.language)").tag(voice.identifier)
+                                }
+                            }
+                            .disabled(audioExportBusy)
+                            Button("Escuchar muestra de voz") { previewSystemExportVoice() }
+                                .disabled(audioExportBusy)
+                            Text("La disponibilidad de cada voz para exportación depende de iOS. La Voz personal puede tener restricciones.")
+                        } else if audioExportEngine == .gemini {
                             Text("Se utilizará tu clave personal y puede consumirse cuota.")
                             Picker("Voz", selection: $geminiVoice) {
                                 ForEach(NativeGeminiSpeech.voices, id: \.self) { name in
@@ -1943,13 +2311,11 @@ struct NativeReadingScreen: View {
                             }
                             Text("Phonon genera el audio dentro del iPhone sin enviar el libro a Internet.")
                         }
-                        Picker("Formato", selection: $audioExportFormat) {
-                            Text("MP3").tag(NativeGeminiAudioExport.Format.mp3)
-                            Text("M4A").tag(NativeGeminiAudioExport.Format.m4a)
-                            Text("WAV").tag(NativeGeminiAudioExport.Format.wav)
-                            Text("DAISY").tag(NativeGeminiAudioExport.Format.daisy)
-                        }
-                        .disabled(audioExportBusy)
+                    }
+                    NativeReaderExportFormatControls(
+                        selection: $audioExportFormat, disabled: audioExportBusy
+                    )
+                    Section("Generación de audio") {
                         Text("DAISY incluye texto, audio y navegación. La compatibilidad externa está pendiente de validación.")
                         Button("Generar") { exportAudio() }
                             .disabled(audioExportBusy || latest.body.isEmpty ||
@@ -1963,13 +2329,42 @@ struct NativeReadingScreen: View {
                             Text(audioExportStatus).accessibilityAddTraits(.updatesFrequently)
                         }
                         if let result = audioExportResult {
-                            Button("Compartir") { NativeShare.present(url: result) }
+                            ShareLink(item: result) {
+                                Label("Compartir archivo generado", systemImage: "square.and.arrow.up")
+                            }
+                            .accessibilityHint("Abre la hoja de compartir de iOS para enviar el archivo fuera de TifloAcosta o guardarlo en Archivos.")
                         }
-                        Text("Límite por documento: 60.000 caracteres.")
+                        if audioExportEngine == .gemini {
+                            Text("Gemini: máximo 60.000 caracteres por exportación; utiliza tu cuota de API.")
+                        } else {
+                            Text("Las voces locales no tienen límite fijo de caracteres. Los libros largos necesitan espacio libre y pueden tardar más en convertirse.")
+                        }
+                    }
+                    Section("Archivos exportados") {
+                        if savedAudioExports.isEmpty {
+                            Text("Todavía no hay exportaciones guardadas.")
+                        }
+                        ForEach(savedAudioExports, id: \.self) { file in
+                            ShareLink(item: file) {
+                                Label("Compartir \(file.lastPathComponent)", systemImage: "square.and.arrow.up")
+                            }
+                            .accessibilityHint("Abre las opciones para compartir o guardar este archivo fuera de TifloAcosta.")
+                        }
                     }
                 }
                 .tifloScreenSurface()
                 .navigationTitle("Exportar audio")
+                .onAppear {
+                    savedAudioExports = NativeReaderSavedExports.list()
+                    systemExportVoices = AVSpeechSynthesisVoice.speechVoices()
+                        .sorted { a, b in
+                            a.language == b.language
+                                ? a.name.localizedStandardCompare(b.name) == .orderedAscending
+                                : a.language < b.language
+                        }
+                    if systemExportVoiceID.isEmpty { systemExportVoiceID = effectiveVoiceID }
+                }
+                .onDisappear { systemExportVoicePreview.stopSpeaking(at: .immediate) }
                 .toolbar {
                     Button("Cerrar") {
                         showAudioExport = false
@@ -2035,6 +2430,9 @@ struct NativeReadingScreen: View {
                     LabeledContent("Carpeta", value: latest.folderName ?? "Sin carpeta")
                     LabeledContent("Marcas", value: "\(latest.bookmarks.count + latest.savedTextBookmarks.count + latest.savedAudioBookmarks.count)")
                     Text(progressDescription)
+                    if !latest.body.isEmpty {
+                        Text(pageProgressDescription)
+                    }
                     if !tracks.isEmpty {
                         LabeledContent("Pistas de audio", value: "\(tracks.count)")
                     }
@@ -2117,6 +2515,25 @@ struct NativeReadingScreen: View {
             NativeReaderWordToolsScreen(voiceIdentifier: effectiveVoiceID, pitch: pitch)
         }
         .sheet(isPresented: $showAudioExport) { exportAudioSheet }
+        .sheet(isPresented: Binding(
+            get: { sharePackageURL != nil },
+            set: { if !$0 { sharePackageURL = nil } })) {
+            if let file = sharePackageURL {
+                NavigationStack {
+                    List {
+                        LabeledContent("Archivo", value: file.lastPathComponent)
+                        ShareLink(item: file) {
+                            Label("Compartir archivo fuera de TifloAcosta",
+                                  systemImage: "square.and.arrow.up")
+                        }
+                        .accessibilityHint("Abre el menú de iOS para enviar el archivo completo a Archivos, Drive u otra aplicación.")
+                    }
+                    .tifloScreenSurface()
+                    .navigationTitle("Compartir archivo")
+                    .toolbar { Button("Cerrar") { sharePackageURL = nil } }
+                }
+            }
+        }
         .sheet(isPresented: $showAudioSettings) {
             NativeReaderDocumentAudioSettingsScreen(document: document)
         }
@@ -2128,6 +2545,7 @@ struct NativeReadingScreen: View {
     var body: some View {
         readerSheets
         .onAppear {
+            if startWithAudioExport { showAudioExport = true }
             phononReady = NativePhononRuntime.isUsable
             if readingEngine == 2 {
                 if phononReady { loadPhononVoices() }
@@ -2157,6 +2575,9 @@ struct NativeReadingScreen: View {
             applySleepTimer()
         }
         .onChange(of: effectiveVoiceID) { _, _ in
+            refreshTextVoice()
+        }
+        .onChange(of: effectiveReadingStyle) { _, _ in
             refreshTextVoice()
         }
         .onChange(of: effectiveSpeedIndex) { _, _ in
@@ -2195,6 +2616,18 @@ struct NativeReadingScreen: View {
         .onDisappear {
             persistPosition()
             speech.stop()
+        }
+        .accessibilityAction(named: Text("Retroceder 30 segundos")) {
+            guard speech.hasAudio && !speech.isGeneratedSpeech else { return }
+            speech.skip(seconds: -30)
+            currentPercent = speech.audioPercent
+            persistPosition()
+        }
+        .accessibilityAction(named: Text("Avanzar 30 segundos")) {
+            guard speech.hasAudio && !speech.isGeneratedSpeech else { return }
+            speech.skip(seconds: 30)
+            currentPercent = speech.audioPercent
+            persistPosition()
         }
         .accessibilityAction(named: Text("Añadir marca")) { addBookmark() }
         .accessibilityAction(named: Text("Avanzar diez por ciento")) {

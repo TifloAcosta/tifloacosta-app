@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 const src = readFileSync(new URL('../Sources/NativeGeminiDaisyExport.swift', import.meta.url), 'utf8');
 
 test('DAISY outline uses only explicit chapter lines with bounded audio units', () => {
-  assert.match(src, /static func units\(_ text: String\) throws -> \[TextUnit\]/);
+  assert.match(src, /static func units\(_ text: String, engine: NativeGeminiAudioExport.Engine = \.gemini\) throws -> \[TextUnit\]/);
   assert.match(src, /let pattern =/);
   assert.match(src, /capítulo\|capitulo\|sección\|seccion/);
   assert.match(src, /unit\.count <= NativeGeminiAudioExport\.chunkSize/);

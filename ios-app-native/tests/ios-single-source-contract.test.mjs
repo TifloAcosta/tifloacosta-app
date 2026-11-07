@@ -25,7 +25,7 @@ test('El mismo proyecto main compila y se envía a TestFlight', () => {
  const build=get('.github/workflows/ios-native-swiftui-build.yml');
  const release=get('.github/workflows/ios-native-testflight-upload.yml');
  assert.match(build,/branches: \[main\]/);
- assert.match(release,/branches: \[main\]/);
+ assert.match(release,/branches: \[main, release\/ios-candidate-phases1-6-20261106\]/);
  assert.match(build,/ios-app-native\/tests\/\*\.test\.mjs/);
  assert.match(release,/ios-app-native\/tests\/\*\.test\.mjs/);
  assert.match(release,/verify-native-testflight\.mjs/);

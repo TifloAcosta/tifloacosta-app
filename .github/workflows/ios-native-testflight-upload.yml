@@ -1,7 +1,7 @@
 name: TifloAcosta iOS nativa - enviar a TestFlight
 on:
   push:
-    branches: [main]
+    branches: [main, release/ios-candidate-phases1-6-20261106]
     paths:
       - 'ios-app-native/Sources/**'
       - 'ios-app-native/tests/**'
@@ -9,6 +9,7 @@ on:
       - 'ios-app-native/scripts/**'
       - 'ios-app-native/project.yml'
       - '.github/workflows/ios-native-testflight-upload.yml'
+      - 'ios-app-native/CANDIDATA-TESTFLIGHT-FASES-1-6.md'
   workflow_dispatch:
 permissions:
   contents: read
@@ -27,6 +28,7 @@ jobs:
       P12_PASSWORD: ${{ secrets.IOS_SIGNING_KEY_PASSPHRASE }}
       GITHUB_TOKEN: ${{ github.token }}
       GITHUB_RUN_NUMBER: ${{ github.run_number }}
+      TIFLO_IOS_MARKETING_VERSION: '1.1'
     steps:
       - uses: actions/checkout@v4
       - name: Validar Actualidad, Recursos y diseño sin HTML
@@ -116,8 +118,13 @@ jobs:
           set -euo pipefail
           IPA="$(find "$RUNNER_TEMP/native-export" -maxdepth 1 -name '*.ipa' -print -quit)"
           test -f "$IPA"
-          xcrun altool --upload-app --type ios --file "$IPA" --apiKey "$API_ID" --apiIssuer "$API_ISSUER"
-          echo "Compilación enviada. Apple debe completar su procesamiento antes de verla en TestFlight."
+          # altool can exit zero even when Transporter reports Apple validation error 409.
+          xcrun altool --upload-app --type ios --file "$IPA" --apiKey "$API_ID" --apiIssuer "$API_ISSUER" 2>&1 | tee "$RUNNER_TEMP/apple-upload.log"
+          if grep -Eiq 'Validation failed|Invalid Pre-Release Train|ERROR:|UPLOAD FAILED|The train version .* is closed' "$RUNNER_TEMP/apple-upload.log"; then
+            echo "::error::Apple rechazó la subida; consultar apple-upload.log en esta ejecución."
+            exit 1
+          fi
+          echo "Apple no ha comunicado errores de subida; verificando disponibilidad real en App Store Connect."
       - name: Confirmar beta disponible para probadores internos con Apple
         timeout-minutes: 18
         env:

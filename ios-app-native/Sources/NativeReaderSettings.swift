@@ -7,9 +7,11 @@ struct NativeReaderAudioControls: View {
     @AppStorage("native-reading-speed-index") private var generalSpeed = 2
     @AppStorage("native-reading-pitch-index") private var generalPitch = 2
     @AppStorage("native-reading-voice-id") private var generalVoiceID = ""
+    @AppStorage("native-reader-reading-style") private var generalReadingStyle = 0
     let speedSelection: Binding<Int>?
     let pitchSelection: Binding<Int>?
     let voiceSelection: Binding<String>?
+    let readingStyleSelection: Binding<Int>?
     let allowVoiceDownloads: Bool
     @State private var filterIndex = 0
     @State private var systemVoices: [AVSpeechSynthesisVoice] = []
@@ -19,10 +21,13 @@ struct NativeReaderAudioControls: View {
     @State private var personalVoiceStatus = AVSpeechSynthesizer.personalVoiceAuthorizationStatus
 
     init(speedSelection: Binding<Int>? = nil, pitchSelection: Binding<Int>? = nil,
-         voiceSelection: Binding<String>? = nil, allowVoiceDownloads: Bool = true) {
+         voiceSelection: Binding<String>? = nil,
+         readingStyleSelection: Binding<Int>? = nil,
+         allowVoiceDownloads: Bool = true) {
         self.speedSelection = speedSelection
         self.pitchSelection = pitchSelection
         self.voiceSelection = voiceSelection
+        self.readingStyleSelection = readingStyleSelection
         self.allowVoiceDownloads = allowVoiceDownloads
     }
 
@@ -89,6 +94,12 @@ struct NativeReaderAudioControls: View {
     }
 
     var body: some View {
+        NativeAdjustableChoice(
+            title: "Estilo de lectura",
+            choices: ["Normal", "Mayor", "Expresiva"],
+            selectedIndex: readingStyleSelection ?? $generalReadingStyle
+        )
+        .accessibilityHint("Normal utiliza la puntuación habitual. Mayor refuerza pausas en comas, puntos y párrafos. Expresiva distingue diálogos, preguntas, exclamaciones y secciones en las voces del sistema.")
         NativeAdjustableChoice(
             title: "Velocidad de voz",
             choices: ["0,75 veces", "0,9 veces", "Normal", "1,25 veces", "1,5 veces"],
@@ -262,6 +273,7 @@ struct NativeReaderDocumentAudioControls: View {
     @AppStorage("native-reading-speed-index") private var defaultSpeed = 2
     @AppStorage("native-reading-pitch-index") private var defaultPitch = 2
     @AppStorage("native-reading-voice-id") private var defaultVoiceID = ""
+    @AppStorage("native-reader-reading-style") private var defaultReadingStyle = 0
 
     var body: some View {
         NativeReaderAudioControls(
@@ -276,6 +288,10 @@ struct NativeReaderDocumentAudioControls: View {
             voiceSelection: Binding(
                 get: { library.latest(document).readerPreferences?.voiceID ?? defaultVoiceID },
                 set: { value in library.updatePreferences(document) { $0.voiceID = value } }
+            ),
+            readingStyleSelection: Binding(
+                get: { library.latest(document).readerPreferences?.readingStyle ?? defaultReadingStyle },
+                set: { value in library.updatePreferences(document) { $0.readingStyle = value } }
             ),
             allowVoiceDownloads: false
         )

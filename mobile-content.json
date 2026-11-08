@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-08T15:15:35.970Z",
+  "generatedAt": "2026-11-08T18:31:15.513Z",
   "resources": [
     {
       "kind": "resource",
@@ -6208,40 +6208,6 @@
       "sourceName": "Freedom Scientific",
       "originalUrl": "https://training.vispero.com/join-us-for-our-november-2026-training-events/",
       "publishedAt": "2026-10-31T13:00:04.000Z",
-      "categories": [
-        "windows",
-        "tecnologia-accesibilidad",
-        "jaws"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "freedom-scientific-blog-e25f6f96a873fc34:en",
-      "sourceId": "freedom-scientific-blog-e25f6f96a873fc34",
-      "lang": "en",
-      "title": "Set Up ZoomText and Fusion to Work the Way You Do",
-      "summary": "ZoomText and Fusion are powerful accessibility tools designed for people with low vision. ZoomText is a screen magnifier and reader, while Fusion combines all of ZoomText’s features with the full JAWS screen reader, offering both magnification and speech. In honor of National Disability Employment Awareness Month, our Workplace Ready blog series has run throughout October, …",
-      "body": "ZoomText and Fusion are powerful accessibility tools designed for people with low vision. ZoomText is a screen magnifier and reader, while Fusion combines all of ZoomText’s features with the full JAWS screen reader, offering both magnification and speech.\n\nIn honor of National Disability Employment Awareness Month, our Workplace Ready blog series has run throughout October, with a new post every Thursday spotlighting ZoomText and Fusion features that help you be more productive at work. This is the final post in the series. Last week, we shared practical tips for tackling online tasks. This week, we’ll show you how to set up ZoomText and Fusion to work the way you do.\n\nThe features we’ve covered this month are most helpful when they’re tuned to the way you work. Taking a few minutes to customize ZoomText and Fusion is one of the most important steps you can take for workplace productivity. The right magnification level, colors, and view for each task mean less time adjusting settings and more time getting things done.\n\nPersonalized settings remove the small points of friction that add up over a busy day. When your tools are ready the moment you open an application, you can move between tasks smoothly and work more efficiently and independently. This week, we’ll look at how to save settings for each application, set up your preferred colors and display options, and use touch screen support on compatible devices.\n\nThe settings that work well in one program may not be the best choice for another. With Application Settings, you can save unique magnification and enhancement settings for each application you use. Once saved, ZoomText and Fusion automatically load the right settings as you switch between programs, so you don’t have to stop and adjust your view every time you change tasks.\n\nTo create Application Settings, open the application and adjust magnification, cursor, or mouse settings to meet your needs, then open the ZoomText menu, choose Application Settings , and save the current settings for that application. To keep your general preferences for every other program, choose Configurations > Save As Default from the ZoomText menu.\n\nHere’s how this might look across a typical workday:\n\nWhen you move from writing a report in Word to answering email in Outlook, ZoomText and Fusion switch to your Outlook settings automatically. When you come back, your Word settings are right where you left them.\n\nThe right colors can make text easier to read and reduce eye strain over a long workday. Color Enhancements let you choose from a variety of preset color schemes, such as inverted brightness or high-contrast combinations, or create your own custom colors. To pick a scheme, select the arrow next to the Color button on the Magnifier toolbar tab. Press CAPS LOCK+C to toggle color enhancements on and off. When you find a combination you like, save it as part of your default configuration or your Application Settings so it’s ready when you need it.\n\nDifferent tasks also call for different views. ZoomText and Fusion offer several zoom window types for a single monitor: Full , Overlay , Lens , Line , and Docked (Top, Bottom, Left, or Right). Full magnifies the entire screen, which works well for reading documents. Docked keeps part of the screen at normal size, which can be helpful when you want to see the whole layout of an application while magnifying the area you’re working in. Press CAPS LOCK+Z to cycle through the zoom window types, or select the Window button on the Magnifier toolbar tab to choose one.\n\nIf you use more than one monitor, ZoomText and Fusion can extend your workspace across two displays. When your monitors are set to extend your desktop, you can choose from these zoom window types:\n\nIn the MultiView modes, press CAPS LOCK+V to switch the active view. For more options, such as keeping both views at the same magnification level, select Window > Settings on the Magnifier toolbar tab and choose Multiple Monitor Options .\n\nIf you work on a touch screen laptop or tablet, you can control ZoomText and Fusion with gestures. Touch Screen Support works on Windows devices that support at least five simultaneous touch points.\n\nTo get started, open the ZoomText menu and choose Preferences > Touch Screen Support > Enable Touch Icon . The Touch Icon lets you switch between two modes:\n\nDouble-tap the Touch Icon with one finger to switch modes. To switch for just a moment, hold one finger on the icon, then lift it to return to the previous mode.\n\nIn ZoomText Touch Mode, try these gestures:\n\nA few tips can make touch more comfortable at work. Choose a Touch Icon size and color that are easy for you to see from Preferences > Touch Screen Support on the ZoomText menu. Move the icon out of the way by holding one finger on it and dragging it along the edge of the screen. If you share time between a keyboard and touch, keep the icon in Windows Touch Mode when you’re tapping through applications and switch to ZoomText Touch Mode when you want to zoom or pan.\n\nThat brings our Workplace Ready series to a close. Throughout October, we’ve explored how ZoomText and Fusion can help you work more productively and independently. Here’s a look back at what we covered:\n\nThere’s always more to discover. Take some time to explore additional features and try new settings as your work changes. For tutorials, webinars, and other learning materials, visit our training page. Thank you for following along this month, and keep thriving in your workplace!\n\nHave questions? Email training@vispero.com .",
-      "sourceName": "Freedom Scientific",
-      "originalUrl": "https://training.vispero.com/set-up-zoomtext-and-fusion-to-work-the-way-you-do/",
-      "publishedAt": "2026-10-29T18:19:59.000Z",
-      "categories": [
-        "windows",
-        "tecnologia-accesibilidad",
-        "jaws"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "freedom-scientific-blog-ba72aecbe494dde8:en",
-      "sourceId": "freedom-scientific-blog-ba72aecbe494dde8",
-      "lang": "en",
-      "title": "Vispero Connect: October 2026 – What’s New In JAWS 2027, And a Follow-Up With Sid Gaitonde",
-      "summary": "This month, we introduce some exciting features in JAWS 2027, including the new Vispero Companion, which can help you adjust JAWS settings, understand what’s on screen, and work through everyday accessibility challenges. And, as promised, we catch up with Sid Gaitonde after his first 90 days as Vispero’s CEO. Activate to listen, right-click to download. …",
-      "body": "This month, we introduce some exciting features in JAWS 2027, including the new Vispero Companion, which can help you adjust JAWS settings, understand what’s on screen, and work through everyday accessibility challenges. And, as promised, we catch up with Sid Gaitonde after his first 90 days as Vispero’s CEO. Activate to listen, right-click to download. Read the transcript.",
-      "sourceName": "Freedom Scientific",
-      "originalUrl": "https://training.vispero.com/vispero-connect-october-2026-whats-new-in-jaws-2027-and-a-follow-up-with-sid-gaitonde/",
-      "publishedAt": "2026-10-29T16:18:03.000Z",
       "categories": [
         "windows",
         "tecnologia-accesibilidad",

@@ -1,5 +1,174 @@
 [
   {
+    "id": "engadget-f38ee77432b79b39",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2309302/switch-to-google-pixel-from-samsung-galaxy/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-08T23:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Should you make the switch to Google Pixel from Samsung Galaxy?",
+        "summary": "While Samsung Galaxy phones deliver flagship power, Google Pixel phones have lots of benefits, including faster updates and minimal bloatware.",
+        "body": "It depends what you're after: minimal bloatware or flagship power.\n\nGoogle revealed the Pixel 11 and Pixel 11 Pro in August 2026, flagships with new AI features and camera improvements that helped them go toe-to-toe with the Samsung Galaxy S26 lineup. While they may never hit Samsung's sales numbers, the Pixel line has often led the Android pack on the features front, and this year is no different. Samsung might deliver flagship power, but some users will find greater utility with the Pixel 11's camera upgrades including the new Camera Looks filters and built-in scrolling teleprompter.\n\nThere's more to a smartphone than a spec sheet, and if you want the latest Android features first, a Google Pixel phone is the way to go. Samsung's One UI updates are fairly frequent but still play second fiddle to Google's phones. Other factors like performance and camera prowess demand a more nuanced comparison. If you're considering switching to a Pixel from Samsung territory, here's what you need to know.\n\nPixels lead the industry when it comes to packing minimal bloatware and essential features. While they may not have stock Android, there's no Bixby assistant to disable or duplicate Samsung apps to uninstall here. Seven years of Android updates and quarterly Pixel Drops beat similar offerings from other manufacturers since Google's phones get them first. Look past high-end phones, and you'll notice that Samsung's Galaxy A phones only have six years of OS updates compared to the Pixel A-series' seven years.\n\nWhile earlier Pixel phones leaned on software tricks against Samsung's industry-leading hardware, that gap is shrinking. The Pixel 11 Pro XL has cameras that rival those on the Samsung Galaxy S26 Ultra. Quicker shots, near-zero shutter lag and natural color processing compared to Samsung's vivid colors mean that some say Google's phones are better at everyday photography. However, the Galaxy S26 Ultra beats the Pixel 11 Pro XL in battery life, with quicker charging and better endurance.\n\nIf you've already invested in one of the ecosystems with a device like the Samsung Galaxy Watch 9, optimal compatibility is another factor to consider. The Samsung Health Monitor app, for instance, is exclusive to Samsung devices and lets the Galaxy Watch 9 monitor blood pressure levels and ECG signals.\n\nDespite these strengths, a new Google Pixel is only worth considering if you have an old Galaxy phone that you want to upgrade. Newer phones like the Samsung Galaxy S26 compete favorably with Google's best. The Pixel 11 Fold's form factor isn't quite as exciting as the passport-style Galaxy Z Fold 8 . And if you're in the market for a Galaxy Z Flip or a phone with stylus support, there's no Google equivalent.\n\nWhile the Pixel 11 lineup's Tensor G6 processor is efficient at day-to-day tasks, it suffers in high-demand games and raw benchmarks compared to the S26's speedy Qualcomm Snapdragon 8 Elite Gen 5. This processor also lets the Galaxy S26 Ultra capture video at up to 8K at 30 fps and 4K at 120 fps compared to the Pixel 11 Pro's 4K at 60 fps. The latter can only process videos in 8K by using a Video Boost feature that relies on cloud computing.\n\nPixel owners also miss out on DeX, Samsung's desktop experience that runs circles around Android's fledgling desktop mode . Samsung has also been building One UI's customization options, with features like Modes and Routines that let users set up \"If This Then That\" routines for driving, bedtime or simple home automation. Google's AI features are no slouch though, from Gemini taking over tasks like phone calls or hailing an Uber to the Magic Capture feature that shoots videos and picks the best pictures from them.\n\nPicking between the two depends on your priorities. While power users will find Samsung's approach more appealing, the Pixels are great everyday phones with faster updates."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-ec47b972f915a898",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1029595/full-text-jensen-huang-affair-memo-nvidia",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-08T22:54:50.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Here’s the full text of Jensen Huang’s memo to Nvidia",
+        "summary": "On Sunday, Nvidia announced it was launching an investigation into CEO Jensen Huang's relationship with Alice Huang, an AI executive and agent of the Chinese government. In addition to the Board of Directors announcing the investigation, Huang sent a memo to Nvidia employees acknowledging the affair. You can read the full text below. To my […]",
+        "body": "On Sunday, Nvidia announced it was launching an investigation into CEO Jensen Huang's relationship with Alice Huang, an AI executive and agent of the Chinese government. In addition to the Board of Directors announcing the investigation, Huang sent a memo to Nvidia employees acknowledging the affair. You can read the full text below.\n\nTo my colleagues at NVIDIA,\n\nI owe my family and all of you an apology.\n\nI was unfaithful to my wife. My actions hurt her and our children. There is no excuse for what I did. I am deeply sorry.\n\nThroughout my life, my family has given me love and support. They deserve my honesty and loyalty. Instead, I …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-88ec2f6258e5b7fa",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2309293/starlink-perk-edge-over-traditional-internet-adaptibility/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-08T22:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The one Starlink perk that gives it an edge over traditional internet",
+        "summary": "Cable and fiber often win on performance, yet Starlink offers a distinct benefit that could matter more depending on how and why you connect.",
+        "body": "Why satellite internet has a unique advantage over terrestrial providers.\n\nIt's debatable as to whether Starlink markets its services properly. Anyone who's seen some of the company's ads probably understands the basics, namely that, regardless of which Starlink setup you think best suits you , you're getting the internet via a satellite dish instead of a cable or phone line. Also, if you choose the right plan, like one of the wildly different $55 plans , you can get internet access virtually anywhere in the world. However, until you dig a little deeper, many details remain mysterious, such as important specs like expected speed.\n\nOne of those gaps is why you might want satellite internet when you're not roaming or otherwise isolated. In a country like the US, UK or Canada, it's rare to find a community that doesn't have at least some basic landline option. Given that Starlink can get quite expensive with its equipment costs, there has to be serious incentive to sign up.\n\nFor some consumers, there is, and it's an adaptability that traditional internet lacks. It's baked into the nature of Starlink, and it could save your bacon if you value resiliency over raw speed. There are some important exceptions, which we'll get into.\n\nStarlink's network is based around clusters of small satellites inserted into low Earth orbit (LEO). As of October 2026, there were over 11,000 working satellites, flying at altitudes ranging from about 205 to 311 miles (330 to nearly 500 kilometers). SpaceX continues to launch more, whether to expand the network or replace malfunctioning units. Essentially, there should always be a cluster overhead at any given time.\n\nThe most obvious advantage of this is that whereas traditional internet connections can be knocked offline for hours by a single cable or server going down, it's rare for Starlink to suffer a similar fate. If one satellite fails, another in the same cluster should be able to pick up the slack. Even sightline obstacles aren't necessarily an issue, since the cluster approach means there's almost always a satellite with a viable angle as long as your dish is positioned properly.\n\nAs mentioned, this coverage is only slated to get better. SpaceX recently filed an application with the US Federal Communications Commission to operate up to 100,000 of its Gen3 satellites, following up on a recent approval to expand Gen2 numbers as high as 15,000 . If you can afford to install and maintain a dish, your internet access could hypothetically become bulletproof, short of power outages or other rare disruptions.\n\nOn paper, Starlink dishes should be extremely resilient. Current-generation models can melt snow and endure temperatures from -40 to 110 degrees Fahrenheit (-40 to 43 degrees Celsius). Properly mounted, they can supposedly withstand heavy rain and winds in excess of 99 miles per hour (about 160 kilometers per hour).\n\nIn practice, things don't always work perfectly. Snow takes time to melt, and there are regular, brief disruptions while your dish switches from one satellite to another. The possibility of prolonged outages remains, whether because of extreme weather, some systemic problem on Starlink's end or issues with the rest of the internet. It hardly matters how many satellites are in the sky if a particular trunk of the internet is having trouble with its local ground-based infrastructure.\n\nSome prospective users may want to actively avoid Starlink altogether. Apart from the many controversies involving founder Elon Musk , those momentary signal blips can be terrible for real-time activities like online gaming. In a shooter like Fortnite or Counter-Strike , a split second can mean the difference between landing a headshot or taking one."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-b4eb3eae574d7fa8",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2309626/dont-like-google-health-ai-coach-how-turn-off/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-08T21:15:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Don't like Google Health's AI Coach? Here's how to turn it off",
+        "summary": "If this Premium feature is bugging you, there's good news: you aren't stuck with it.",
+        "body": "It's pretty easy to opt out of this feature.\n\nIf you don't like Google Health's AI Coach or need a break from its constant advice, the easiest way to get rid of it is to cancel your Google Health Premium subscription, since AI Coach does not come with the free Google Health tier. But what if you just want to hide it for a bit and continue to enjoy the other benefits of Google Health Premium? These include personalized sleep summaries, advanced sleep tracking algorithms, Sleep Score, Health Guardian that tracks noticeable changes in health and wellness , cycle predictions, nutrition tracking and more.\n\nDon't worry, because there is a way to keep Google Health Premium but temporarily (or permanently) set aside the Gemini-powered AI Coach in the app settings thanks to an update released in August 2026. It's a simple matter of going to your privacy controls and toggling the feature off. And you can turn it back on again any time you want.\n\nIn the Google Health app while subscribed to Google Health Premium, tap your profile photo in the top right corner. Select Your data in Google Health then scroll down to Feature privacy controls and select Manage feature privacy controls . Select Google Health Coach and the Turn off button. That's it! You can also go to your profile photo > Google Health settings > Coaching , and turn off Health Coach from there. Another option is to change Coach messages on Today from Standard to No Coach insights , which will only show basic updates and no messages.\n\nWithout this feature, you won't get personalized guidance, recommendations, or summaries, which is one of the key features of Premium when used alongside a tracker like the new Fitbit Edge (see our Fitbit Edge review ). You also won't be able to tap the Ask Coach button to ask questions and chat with the coach about your health and wellness. This also means you won't be able to use this function to log your meals, though you can do that through manual logging.\n\nNone of your previous data will be deleted, and as mentioned, you can turn AI Coach back on at any time. However, to do so, you can't return to the same menu. You need to tap the still visible Ask Coach button on the bottom, right and select Unlock Coach to begin the restoration process.\n\nIf you find that notifications are the issue, go to your profile photo, Google Health settings , Push notifications , and turn Coaching off so you aren't pinged whenever there's coaching advice. You might prefer starting with this step before turning it off altogether.\n\nWhether it's for privacy reasons, you find it too intrusive or repetitive, or you want to take a break from personalized insights because you're dealing with illness, injury or just in a personal funk, there are many reasons to put a pause on AI Coach. But for some people's needs, it's one of the most valuable aspects of Google Health Premium. So, if you plan to turn it off for any significant length of time, you might be better off cancelling Premium and sticking with the base-level free Google Health app if you can live without the other upgrades, too.\n\nGoogle Health AI Coach can be useful if you adjust settings to ensure it notifies you only when and how you want. I have used it, for example, to log the exact weights I lifted during a strength training session and to walk me through adjusting my workouts around a shoulder injury. (AI Coach does not provide medical advice.) I also use it as a simple way to snap a photo of my meals to log protein, carbs and fat intake. The more you interact, the more it learns about unique aspects of your lifestyle.\n\nAdmittedly, though, it can be annoying with repetitive advice to do the same thing every day that I'm already doing, like a 30-minute strength session and a light walk. You may eventually realize you ignore the insights more than you read them. If you do need a breather, it's easy to quiet the noise."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "accessible-android-8044eab84ef76f4b",
+    "type": "news",
+    "sourceId": "accessible-android",
+    "sourceName": "Accessible Android",
+    "sourceUrl": "https://accessibleandroid.com/",
+    "originalUrl": "https://accessibleandroid.com/how-to-route-screen-reader-audio-to-different-devices-with-sandfly-screen-reader/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-08T20:30:41.000Z",
+    "categories": [
+      "android",
+      "apps-accesibles",
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "How To Route Screen Reader Audio To Different Devices With Sandfly Screen Reader",
+        "summary": "There is no need to explain why a screen reader user might sometimes want to have the screen reader’s audio routed to a different audio…",
+        "body": "Published 8 November 2026 by Kareen Kiwan\n\nThere is no need to explain why a screen reader user might sometimes want to have the screen reader’s audio routed to a different audio device than the default one.\n\nOn Android, this is not natively possible. Samsung’s One UI offers a workaround through the Separate App Sound feature, which gets the job done, even if it is not perfect. However, to my knowledge, other OEMs do not offer a comparable feature.\n\nTalkBack, Android’s default built-in screen reader, does not offer a similar capability either. Sandfly , an open-source screen reader, allows users to change the device used to output the screen reader’s speech and audio. It also provides an option to route the audio to the phone’s speaker when specific audio devices are connected.\n\nSandfly is not the only screen reader that provides this feature. Another screen reader that offers similar functionality is Backtalk , and other screen readers might have something similar. However, this post only covers how to use the audio output feature found in Sandfly. Note that setting up Sandfly is outside the scope of this post.\n\nOpen Sandfly settings. You can access them from the Sandfly menu or by selecting Sandfly from the list of installed accessibility services. You can also access the settings by selecting the app from the apps list.\n\nFind “Audio output” and activate it.\n\nThen, press “Audio output device” to see a list of currently available audio devices, including System Default, Phone Speaker, and connected wired and wireless audio devices.\n\nSelect any device to route Sandfly’s audio through it.\n\nTo have the audio come out of the phone’s speaker when a certain device is connected, choose “Phone speaker with these devices” and check all the devices you want. Whenever one of the selected devices is connected, Sandfly’s audio will come out of the phone’s speaker instead of the connected device.\n\nUse the “Keep speech on the phone while casting” option to determine whether you want the screen reader’s audio to come out of the phone’s speaker when you cast your screen.\n\nAlthough Sandfly is not my primary screen reader at the moment, I tested Audio Output and was impressed by the reliability of the audio routing. I was able to switch between Bluetooth headphones, wired USB-C earbuds, and the phone’s speakers without any issues or interference with media playback. This is consistent with tests conducted by other team members, including full-time Sandfly users.\n\nPublished in Tips and Tricks Tutorials"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-3a0bc6e70bc16e65",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1029562/nvidia-investigating-jensen-huang-relationship-chinese-spy",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-08T20:22:39.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Nvidia is investigating Jensen Huang’s relationship with a Chinese spy",
+        "summary": "Nvidia has announced that it is opening an investigation into CEO Jensen Huang and his relationship with Megaspeed executive Alice Huang, who was reportedly recruited by China's Ministry of State Security to spy on the company. A statement posted by the board of directors reads: The NVIDIA Board is initiating an independent investigation in light […]",
+        "body": "Nvidia has announced that it is opening an investigation into CEO Jensen Huang and his relationship with Megaspeed executive Alice Huang, who was reportedly recruited by China's Ministry of State Security to spy on the company . A statement posted by the board of directors reads:\n\nThe NVIDIA Board is initiating an independent investigation in light of recent reporting that founder and CEO Jensen Huang has been the target of a foreign intelligence effort. A committee of independent directors, assisted by outside independent counsel, will oversee the investigation.\n\nThe Board prioritizes U.S. national and economic security, which is paramou …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-be4e3f6944b37447",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/08/macos-changes-for-full-disk-access-ai-agents-imessage/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-08T19:52:41.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "macOS 27.3 could change how you grant AI agents Full Disk Access, here’s how",
+        "summary": "Last month, Apple announced it’d be tightening privacy controls in a future macOS update, in response to AI agents requesting Full Disk Access then going rogue with users data without them being fully aware. Now, we have an idea of how the changes might look. more…",
+        "body": "Last month, Apple announced it’d be tightening privacy controls in a future macOS update, in response to AI agents requesting Full Disk Access then going rogue with users data without them being fully aware. Now, we have an idea of how the changes might look.\n\nIn its blog post , Apple announced that apps will require “very explicit user action” to have Full Disk Access on your Mac. At the time of the announcement, Apple didn’t make it super clear what that would actually mean. Now, we have an idea of what’s to come.\n\nCode sifter pdfu posted on X that Apple will be getting rid of a clever loophole that developers could use to make it easier for users to enable Full Disk Access. In current versions of macOS, if an app requests a file that would require Full Disk Access, the system denies the request and logs the app as an option in the Settings app for enabling Full Disk Access.\n\nAt that point, developers often prompt users to open that section of the Settings app and flip the toggle.\n\nStarting as soon as macOS 27.3, apps that request files outside of the permission scope will no longer get logged, and as a result, won’t show up as an option for quickly toggling Full Disk Access, per leaker pdfu.\n\nAt the moment, developers can still request users to drag an app icon to the Settings panel to enable Full Disk Access, even once the feature flag for the aforementioned change is enabled. To me, it still doesn’t quite feel like you’ll need “very explicit user action” to enable Full Disk Access, but it’s possible this will change in the future. This is all still in development.\n\nAll in all, I’m not fully convinced that this solves the core problem. Developers are requesting Full Disk Access because they’d like to tap into things like iMessage, and there hasn’t been a better way of doing so. As long as that demand is there, users will likely still have to enable Full Disk Access and risk all sorts of other data, just so they can share their texts with an agent.\n\nGranted, pdfu also mentions the idea of Private Folders, which could potentially allow users to grant scoped access to just the iMessage database folder. It’s unclear if that’ll be possible since there’s little detail on how Private Folders will work. If that’s the case, then hopefully Full Disk Access can stop being the default permission you have to provide for any personal data.\n\nMy favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram"
+      }
+    },
+    "media": null
+  },
+  {
     "id": "the-verge-feb68bda70e88012",
     "type": "news",
     "sourceId": "the-verge",
@@ -20,77 +189,6 @@
         "title": "Apple is racing to make Siri more agentic",
         "summary": "Bloomberg's Mark Gurman says CEO John Ternus is pressuring AI czar Craig Federighi to accelerate the Siri roadmap and deliver a powerful AI agent that can compete with OpenAI's Dots or Meta's Muse. While Federighi has delivered a functional version of Siri AI on an incredibly short timeline, the company has no illusions that it's […]",
         "body": "Bloomberg's Mark Gurman says CEO John Ternus is pressuring AI czar Craig Federighi to accelerate the Siri roadmap and deliver a powerful AI agent that can compete with OpenAI's Dots or Meta's Muse. While Federighi has delivered a functional version of Siri AI on an incredibly short timeline, the company has no illusions that it's keeping pace with its rivals.\n\nTwo significant improvements are expected to be made to Siri in the coming months. One will give the assistant fine-grained control over Apple's first-party apps, allowing it to do things like rotate and crop images in Photos and organize Safari tabs. Those capabilities are expected to …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-2cb0a69b332fa8fd",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2309033/biggest-disadvantages-using-ai-glasses/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-08T18:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The biggest disadvantages of using AI glasses",
-        "summary": "AI glasses can do a lot of cool things, there's no debate about that. But there are also serious downsides to the tech.",
-        "body": "There are a few reasons to hesitate before buying a pair.\n\nThe world of AI glasses, or smart glasses as they're perhaps more commonly known, has been a truly fascinating one to watch develop. What once felt like something out of a classic science fiction film — that of a pair of glasses with technology and cutting-edge hardware built directly into them — has become one of a very plausible, and altogether expensive, reality.\n\nOn the one hand, it's always fun to see how technology evolves and improves over time. On the other, it's a piece of technology that has some rather alarming history attached to it, as well as some incredibly valid concerns about its future .\n\nThe rise of smart glasses was a swift one, and it's a market that is quite healthy. A 2026 survey conducted by Security.org found that 25 percent of respondents reported that they were likely to buy a pair of smart glasses in the coming year. Like every other piece of technology that came before it, smart glasses are only as good as the people who use them, and their place in our increasingly surveyed society is one that is worth having a conversation about.\n\nIf you've spent any amount of time scrolling YouTube or a social media platform that has shorts or reels of some kind, you've likely seen a content creator using smart glasses. They're incredibly popular amongst tech content creators and repair shops, mostly being used as a way to showcase their day-to-day business. In that sense, the technology is quite endearing, as it gives you a gateway into something that's actually beneficial.\n\nIndeed, smart glasses do feel almost like they were made for that space. Technology content seems like the context where the technology naturally thrives, but smart glasses also have their hooks into a couple of distinct demographics.\n\nSome seniors have shown a strong interest in them, adopting the technology for their accessibility features and showing interest in how well they can help one keep track of doctor visits or medication reminders. They are also incredibly popular among those with disabilities, and in that case, the actual need for these devices feels far more justifiable. Not every piece of technology has to help every single person in the world, and if there's anything that can be done to make life easier for certain populations, then we're all better off for it.\n\nThe wisdom of buying smart glasses in 2026 depends almost entirely on what their use would be to you on a daily basis . They've been quite kind to people in certain workplaces, but in the constant chase for efficiency and quotas, the actual physical act of wearing them has had its ups and downs. Smart glasses have developed something of a reputation for causing eye strain and irritation.\n\nIt's not entirely dissimilar to how VR glasses have done the same, but the real concerns about smart glasses tend to come from the actual technology that is housed inside them. Many smart glasses come equipped with a camera that can capture video, and no matter how cool the rest of the hardware is, that is something that has rightfully spooked quite a few people over the years.\n\nConsent and privacy laws are something that smart glasses have tangled with regularly. The thought of someone recording you without your knowledge is already frightening enough, but when someone can do so in such a clandestine way, it raises a red flag. Technology like this is something that you should be wary of, both as a consumer and as someone sharing spaces with smart tech, but it also potentially has some great things to accomplish in the future. Sadly, it's a technology tale as old as time."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-912dac1abe1d5da3",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2310304/uk-has-no-plans-to-slow-down-ai-data-center-construction/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-08T18:10:01.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "UK has no plans to slow down AI data center construction",
-        "summary": "The country's growth minister said the data centers will continue as \"essential infrastructure\" projects.",
-        "body": "The country’s growth minister said the data centers will continue as “essential infrastructure” projects.\n\nAs the US deals with the fallout associated with the ongoing demand for data centers, the UK is looking to capitalize on it instead, according to one of the country's ministers. Dan Tomlinson, the UK's minister for growth, told the The Financial Times that data center construction will continue as \"essential infrastructure.\"\n\nTomlinson told FT that AI is becoming more widely used throughout the UK's economy, meaning the country will need more data centers to support that growth. However, the minister added that data center construction in the UK will have to invest in local communities and create jobs to receive government support. Tomlinson also told FT that the UK government has taken away some lessons from the \"free-for-all in parts of the US\" with data center construction and that the country would take a more nuanced approach with better oversight.\n\nAccording to the UK Compute Roadmap , a policy paper detailing how the country can meet AI's growing power demands, the UK needs to have at least a computing capacity of 6GW from data centers by 2030. The UK previously made it easier for data centers to earn approvals, thanks to the \" AI Growth Zones \" initiative introduced by former prime minister Keir Starmer in 2025. However, UK residents have taken to protesting on sites of planned data center construction. Across the Atlantic, a majority of American voters said they're in favor of restricting the rapid pace of data center construction in local ballot results ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-1c51eb3785c9ab31",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2308391/using-laptop-lid-closed-pros-and-cons/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-08T17:45:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The pros and cons of using your laptop with the lid closed",
-        "summary": "Connecting your laptop to an external display and running it with the lid closed has some benefits and drawbacks.",
-        "body": "Will it damage your laptop over time?\n\nLaptops have come a long way since they became popular in the mid-to-late 2000s. Back then, they were bulky and heavy, with very short battery life. They were also seen as a lesser version of the desktop, with weaker hardware and limited capabilities. Today's laptops are much thinner and lighter, their battery life is far better, and their hardware can go toe to toe with most standard tower PCs.\n\nFor that reason, many people now buy a laptop as their main computer and connect it to a regular monitor, keyboard and mouse. Some like to keep the laptop open and use its screen as a second display. Many others prefer to leave the lid closed.\n\nSo which approach is better? What are the pros and cons of using your laptop with the lid closed?\n\nLet's start with the bottom line: There's no huge advantage or disadvantage to keeping your laptop open or closed. There are a few small differences, but at the end of the day it's mostly an aesthetic choice. Some people just like the clean look of a desk with nothing on it but the essentials: keyboard, mouse, cup of coffee. The laptop is tucked away and doesn't add to the clutter.\n\nA few small advantages come with that, and they can help your laptop last longer and stay looking new. There's the regular wear and tear of opening and closing the lid, for one. The keyboard stays clean and protected inside the closed lid and, above all, dust doesn't pile up on the screen, the laptop's surface and between the keys.\n\nWith the screen off, the laptop also draws much less power, and you don't have a second panel lighting up the room when you're working late.\n\nOther people prefer the look of a workstation with two, sometimes three, screens. Keeping the laptop open next to a bigger monitor gives you extra screen space for things you want in view, like a second browser window, a music player or, these days, an always-on AI assistant working away in the background while you keep one eye on it.\n\nOpen also usually means better heat management. Many laptops push heat out through the keyboard area, and an open lid lets it escape. It matters most on gaming laptops, which run hot. PCWorld notes that some, like the Razer Blade 16, vent air out of the top of the keyboard. Some laptops are also designed to lift up off the desk when the screen opens, which gets a lot more air moving across the parts that heat up.\n\nWhich one should you pick? It depends on the laptop and on what you ask of it. A fanless MacBook Air or any thin, low-power machine is fine closed all day, and you can even buy stands made for exactly that. If you're running a gaming laptop or any workstation that gets properly hot, leave it open. And if you're unsure, check the manufacturer's site to see whether it's happy running under load with the lid shut.\n\nIf you go closed, there are a few things worth doing. Keep the power adapter plugged in, since the laptop draws more power with an external monitor attached, and you don't want the battery draining quietly in the background. In Windows, open Control Panel and look for Choose what closing the lid does , then set both lid options to Do nothing , or the laptop will go to sleep the second you shut it. Put it on a stand so air can get under it, and don't count on a cooling pad to do much; those only lower temperatures a little and don't cool the gap between the screen and the body.\n\nThere's also a middle road. Close the lid just far enough to switch the screen off, but not all the way, and as long as hot air isn't blowing straight onto the display, it should be fine indefinitely. It won't keep the dust out, though, so plan on cleaning the laptop every so often.\n\nOvernight jobs are the easy case. A render, a big download or an old laptop acting as a home server can all run with the lid shut, as long as the vents are clear and the work is light to medium. Heavy loads are another story.\n\nIf you keep it open, the tips are simpler. Give the laptop some space so the air can move, keep the vents clear and, if it's a gaming laptop, tilt it up on a stand.\n\nOne tip works for both approaches: Get a docking station . A good one takes the keyboard, mouse, network cable, HDMI and audio out, so the laptop only needs one cable to connect to all of it. When you want to take the laptop somewhere, you unplug that one cable and go, instead of pulling five. Most also hold the laptop tilted, so there's room for air to get around it."
       }
     },
     "media": null
@@ -138,30 +236,6 @@
         "title": "He arrested a hacker, then spent 18 months clearing his own name. Now he’s a cybersecurity VC.",
         "summary": "Stephen Ward, a former Secret Service agent and Home Depot CISO, is preparing a second fund of roughly $250 million for Brightmind Partners.",
         "body": "Every time venture capitalists write a check, they’re secretly running numbers in their heads about different exit scenarios. It’s their job as fiduciaries. But nearly all will tell you (publicly, anyway) that every portfolio company is headed for an IPO.\n\nStephen Ward, the co-founder of Brightmind Partners , a two-year-old cybersecurity fund in New York, says otherwise outright. “You have to sell on the way up,” he says.\n\nWard’s unvarnished pragmatism is one reason he stands out. Another is the size of his firm’s debut fund late last year: a whopping $250 million fund, which he closed with co-founder Gur Talpaz. A third reason is his résumé, which includes a stint with the Coast Guard, nine years in the Secret Service, and CISO jobs at TIAA and Home Depot before he ever thought about investing.\n\nOne proof point that suggests the combination is working is SGNL, the identity security startup CrowdStrike agreed in January to buy for $740 million, 11 months after Brightmind led its Series A .\n\nNow Ward is raising a second fund, targeting roughly the same size as the first one. This time, though, he’ll be doing it without Talpaz, who left in April along with another early colleague, leaving Ward as the firm’s sole general partner. He’s betting on himself at a moment when early-stage cybersecurity startups are raising more money than later-stage rivals for the first time in more than a decade.\n\nHis unemotional approach to exits traces back to an unlikely career. Ward says he grew up in northwest New Jersey between two farms, in a family that couldn’t afford college for his older brothers. After high school, he joined the Coast Guard, inspired by a commercial of a man jumping out of a helicopter, though he says he barely knew how to swim at the time. He spent four years in search and rescue.\n\nAfterward, he studied criminal justice at Seton Hall in New Jersey and thought half-heartedly about law school. “I didn’t know what I wanted to do,” Ward told me last week over Zoom, wearing a pale hooded sweatshirt and looking more like a basketball coach than a venture capitalist. “I was kind of lost. I missed the military and the camaraderie and all of that.”\n\nAfter graduating in 1998, he says, he mailed out some 300 résumés but no one responded. A Seton Hall professor who was also a chaplain to Secret Service personnel, as well as to members of the FBI and CIA, began introducing him around, and the Secret Service called first.\n\nThe Secret Service has two primary missions: protecting people and investigating financial crimes. Ward gravitated to investigations, then to “cyber” after the September 11 attacks in 2001. That year, he married a former college classmate, an American-born Syrian Muslim. Colleagues warned him the background check would be “miserable.” (They’re still happily married.)\n\nWhat came next took Ward’s life down an unexpected path. Stationed in New York, he arrested a hacker who’d pulled off the largest credit card data theft of that era. Instead of charging him, however, Ward flipped him, turning him into an informant and running him for about three years. But the hacker kept hacking behind Ward’s back, and after he was caught again, he told the agency, as a diversionary tactic, that Ward was in on it.\n\nBy that time, Ward had left for the private sector, and he ultimately spent roughly 18 months clearing his name. “It was hard to get out of bed,” he said of that period, describing the investigation as “almost like a spouse cheating on you,” given his love of the agency. The hacker ultimately received a 20-year sentence, and Audible bought the rights to the story, turning it into an eight-episode podcast called “ Operation Firewall .”\n\nWard’s corporate career has been a success by most measures, though he describes it as a series of jumps he really wasn’t qualified to make. His first private-sector job at J.P. Morgan, where he was recruited in 2007 to build a cybersecurity unit, was the hardest transition of his career, he says. He felt like “the dumbest person in the room,” missed his Secret Service crew, and twice thought about going back, unaware he was still under investigation. He stuck it out and now calls the investment bank the “best management school.”\n\nSix years as CISO at the financial services company TIAA followed, and then two years at Home Depot starting in 2019. But in 2021, feeling burned out, he quit without anything lined up for the first time since age 16.\n\nThat chapter didn’t last long. The founders of Wiz, whose security software Ward had used at Home Depot, put him on a short list for a job at their company. Jeff Horing, a venture capitalist at Insight Partners, which had co-led Wiz’s $100 million Series A round in late 2020, interviewed Ward for the role, then offered him one at Insight instead.\n\nIt’s a good-news, bad-news story, given that Wiz was acquired last year by Google for $32 billion. When I asked him about it last week, Ward observed that the friend who took the Wiz job “made life-changing money,” but said it doesn’t bother him.\n\nRegardless, he spent just three years at Insight, where he says he worked on Wiz, Abnormal Security, and Elisity, which IonQ agreed in October to buy for up to $1.3 billion. Then, at age 49, he thought about striking out on his own for the first time.\n\nHe says people told him it was a young man’s game. He left anyway and began cold-emailing limited partners. Ultimately, fewer than 20 LPs filled the fund, including Horing.\n\nWard started Brightmind in 2024 with Talpaz, a CrowdStrike corporate development executive whose deals overlapped with Ward’s during his time at Insight. Tayler Sipperly, another CrowdStrike corporate development alum, was the firm’s third employee.\n\nThe partnership ended this past spring. Asked what happened, Ward, using carefully worded legalese, cited “differences in opinions regarding operations and the future of Brightmind.” In August, Talpaz and Sipperly co-founded a new venture firm with Elia Zaitsev, CrowdStrike’s global CTO for the past three years. Called Cognition, it’s now reportedly targeting a $170 million first fund to back cybersecurity startups.\n\nSipperly says that he and Talpaz “continue to support the existing Brightmind portfolio companies as well as its limited partners” and that they “remain on the board of a number of the Brightmind portfolio companies.”\n\nBrightmind’s first fund has made 14 investments to date, with one exit: that SNGL sale.\n\nSome investors asked why Brightmind didn’t ride out that bet even longer. But Ward says he’s seen enough across his career that he feels confident in warning founders when they’re “going to race past the turn.”\n\nIn cybersecurity, he says, the best sales come between a startup’s third and seventh years. Indeed, he says his team tracks every security acquisition and what buyers are building versus buying. If Palo Alto Networks is likely to buy something, he says, CrowdStrike will experience “FOMO, then Zscaler is going to look over and go, ‘What did they just do? I should probably do the same thing.’”\n\nUnderstanding how the pieces fit together is the trick, Ward explained, offering some hypotheticals. If CrowdStrike is building a product, he said, it’s unlikely to buy a portfolio company that makes something similar. Palo Alto Networks might love a company, but not if buying it would force its customers to switch away from something it bought five years ago.\n\n“It’s very easy to go, ‘Good match,’ ‘terrible match,’” he said. “And that’s really what we spend a ton of time figuring out.”\n\nHe has timing on his side, at least. Early-stage cybersecurity startups are outraising their later-stage rivals for the first time in more than a decade, according to PitchBook, which counts $4.7 billion worth of seed-through-Series B deals through September.\n\nThat total is already ahead of the entirety of 2025, even though the number of deals fell to 248 from 358 last year. Seed rounds in particular are ballooning, per PitchBook. The average cybersecurity seed round jumped to $8.4 million in the first nine months of this year, from $5.54 million a year earlier.\n\nWard questions how much of that money is really going to AI security. By PitchBook’s count, 278 deals in the first half of 2026 were bucketed as such, but his team’s manual review found only 30 true ones. He doesn’t think Anthropic or OpenAI will “take over the security world,” but instead will do “just enough.”\n\nFor real-time protection, which he terms “zero second,” he favors cyber-specific models that run locally on a customer’s own systems, like that of Empirical Security . He also looks for startups that could trounce established companies that he considers vulnerable, name-checking 27-year-old Qualys and 24-year-old Tenable.\n\nWard says Brightmind’s second fund won’t be entirely cybersecurity, focusing about 20% on AI infrastructure deals. He expects a meaningful number of teams to come from Israel, too. (Roughly 40% of the debut fund’s startups are based in Tel Aviv.)\n\nAsked about the founders he’s most comfortable backing, the response is immediate: second-time founders who stick together.\n\nBrightmind is comprised of five people right now: COO Iva Messy, also a Seton Hall graduate, came from venture firms Felicis and Andreessen Horowitz (a16z) on the recommendation of Ward’s cousin, Carl Eschenbach, a former Workday CEO who is now back at Sequoia . Sven Wollschlaeger, a Midwesterner whom Ward calls one of the hardest-working people he’s known, spent three years alongside Ward at Insight and is a principal at Brightmind.\n\nCTO Jamie Mneimneh, whom Ward first hired at Home Depot as a distinguished engineer, is the most technical person of the team. He built the cloud computing environment on AWS where the firm tests startups’ products. Mneimneh also built the AI agents that now source most of Brightmind’s deal flow, which is how the firm avoids hiring a bench of analysts and keeps management fees down, says Ward.\n\nTaylor Cleveland, Ward’s chief of staff at Home Depot, joined the firm a few months ago.\n\nFor all the career changes, Ward says the real force driving him hasn’t changed. He grew up without money and still worries it could happen again, saying he’s being paid to produce a “3x net fund,” and he’s “not going to celebrate until we get that.”\n\nSaid Ward: “I don’t know what’s wrong with me. I have a level of being very naive to like, not being qualified to do something. I’ve just always looked at people and been like, ‘Okay, you know more than me today, but tomorrow, it’s going to be a little less, and the day after that, it’s going to be less, and eventually, I’m going to catch you and surpass you, and I’m going to know more than you.’ That’s how competitive I am.”\n\nUpdate: Comments from Sipperly were added after publication."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-108d42c1b033f319",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1029533/elvis-eminem-suno-ai-music-clone-lawsuit",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-08T17:23:19.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Elvis and Eminem rights holders are suing Suno",
-        "summary": "Suno is facing yet another pair of lawsuits. A group of rights holders of Elvis Presley's music and the publisher of some of Eminem's biggest records are suing the AI music company, claiming it illegally generates music and lyrics that mimic those artists. The lawyers in the Presley suit claim that Suno has violated Tennessee's […]",
-        "body": "Suno is facing yet another pair of lawsuits . A group of rights holders of Elvis Presley's music and the publisher of some of Eminem's biggest records are suing the AI music company, claiming it illegally generates music and lyrics that mimic those artists. The lawyers in the Presley suit claim that Suno has violated Tennessee's Ensuring Likeness Voice and Image Security (ELVIS) Act, which makes it illegal for an AI company to clone a singer's voice.\n\nIn the suit, lawyers representing Presley's rights holders argue that \"Suno has mechanically encoded itself with artists' identities, hard-work, creativity, and time, and harnessed them all for …\n\nRead the full story at The Verge."
       }
     },
     "media": null
@@ -292,32 +366,6 @@
     "media": null
   },
   {
-    "id": "the-verge-c7d92445b83a70c3",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1029526/chatbots-might-be-coming-to-apples-homeview",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-08T15:00:30.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Chatbots might be coming to Apple’s HomeView",
-        "summary": "Code in the iOS 27.3 beta suggests that Apple could add support for chatbots to its smart home hub. There's a flag listed for a \"Conversational Apps\" category. While there are no details about what apps would fall under that heading, it seems reasonable that AI chatbots like ChatGPT and Claude could be added to […]",
-        "body": "Code in the iOS 27.3 beta suggests that Apple could add support for chatbots to its smart home hub. There's a flag listed for a \"Conversational Apps\" category. While there are no details about what apps would fall under that heading, it seems reasonable that AI chatbots like ChatGPT and Claude could be added to HomeView. According to pdfu on X, that new beta also adds support for bidirectional audio routing and session management, but says it's \"still not fully wired up.\"\n\nApple has also added anti-spoofing protection that will require a user to authenticate themselves with an iPhone after three failed attempts. It will also have a lockout s …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-blog-4053938be253e346",
     "type": "news",
     "sourceId": "applevis-blog",
@@ -388,30 +436,6 @@
         "title": "koedesk",
         "summary": "koedesk turns your iPhone keyboard into a voice-powered text input. Tap the mic, speak, tap again — your words appear instantly in any app — Claude, ChatGPT, Gemini, Slack, Mail, Notes, anywhere you can type. KEY FEATURES • Universal keyboard Replace the system keyboard. Works in every iOS app — chat with AI agents, draft emails, jot ideas, search the web. No copy-paste needed. • World-class accuracy Powered by ElevenLabs Scribe v2 — ranked #2 of all models on the third-party AA-WER English benchmark (2.2% WER). Accuracy measured and published across 12 languages at koedesk.app/en/benchmark/. • 36 languages, auto-detected Japanese, English, Spanish, French, German, Italian, Portuguese, Vietnamese, and more. The keyboard reads your locale settings — no language switching needed. • Built for AI agents Optimized for natural conversation with Claude, ChatGPT, and Gemini. Keyterms support lets you feed product names, codebases, and proper nouns for even higher accuracy. Filler words (um, uh) are auto-cleaned. • Custom dictionary Add specialized terms, project names, jargon — koedesk learns and adapts. PRICING • Free — 5 minutes per day, full Scribe v2 quality, no credit card required. • Pro — Unlimited transcription, cancel anytime. PRIVACY FIRST Your audio is processed transiently. We never store voice recordings. Account deletion is one tap away — Settings → Account → Delete Account. WHO IS IT FOR • Developers using AI agents in their workflow • Writers drafting on iPhone • Anyone tired of pecking at the on-screen keyboard • Bilingual users tired of switching between language keyboards Get started free — no credit card, no commitment. Terms of Use — https://koedesk.app/terms/ Privacy Policy — https://koedesk.app/privacy/",
         "body": "koedesk turns your iPhone keyboard into a voice-powered text input. Tap the mic, speak, tap again — your words appear instantly in any app — Claude, ChatGPT, Gemini, Slack, Mail, Notes, anywhere you can type. KEY FEATURES • Universal keyboard Replace the system keyboard. Works in every iOS app — chat with AI agents, draft emails, jot ideas, search the web. No copy-paste needed. • World-class accuracy Powered by ElevenLabs Scribe v2 — ranked #2 of all models on the third-party AA-WER English benchmark (2.2% WER). Accuracy measured and published across 12 languages at koedesk.app/en/benchmark/. • 36 languages, auto-detected Japanese, English, Spanish, French, German, Italian, Portuguese, Vietnamese, and more. The keyboard reads your locale settings — no language switching needed. • Built for AI agents Optimized for natural conversation with Claude, ChatGPT, and Gemini. Keyterms support lets you feed product names, codebases, and proper nouns for even higher accuracy. Filler words (um, uh) are auto-cleaned. • Custom dictionary Add specialized terms, project names, jargon — koedesk learns and adapts. PRICING • Free — 5 minutes per day, full Scribe v2 quality, no credit card required. • Pro — Unlimited transcription, cancel anytime. PRIVACY FIRST Your audio is processed transiently. We never store voice recordings. Account deletion is one tap away — Settings → Account → Delete Account. WHO IS IT FOR • Developers using AI agents in their workflow • Writers drafting on iPhone • Anyone tired of pecking at the on-screen keyboard • Bilingual users tired of switching between language keyboards Get started free — no credit card, no commitment. Terms of Use — https://koedesk.app/terms/ Privacy Policy — https://koedesk.app/privacy/"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-f297de638278ddbd",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/07/hands-on-i-tested-a-bunch-of-iphone-duo-cases-these-are-my-favorites-video/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-07T18:02:09.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Hands-on: I tested a bunch of iPhone Duo cases, these are my favorites [Video]",
-        "summary": "For the first time in a long time, I can say that iPhone cases are fun again! The introduction of the iPhone Duo has brought us a new era of cases in all shapes, sizes, functions, and form factors. We are still in the infancy of this new ecosystem of iPhone Duo-compatible cases, so manufacturers are experimenting with different designs, materials, and features to figure out what works best for Apple’s first foldable. From ultra-thin cases and hinge protection to built-in wallets, kickstands, and origami-style folios. I have tested several new iPhone Duo cases, and these have been my favorite so far. more…",
-        "body": "For the first time in a long time, I can say that iPhone cases are fun again! The introduction of the iPhone Duo has brought us a new era of cases in all shapes, sizes, functions, and form factors. We are still in the infancy of this new ecosystem of iPhone Duo-compatible cases, so manufacturers are experimenting with different designs, materials, and features to figure out what works best for Apple’s first foldable. From ultra-thin cases and hinge protection to built-in wallets, kickstands, and origami-style folios. I have tested several new iPhone Duo cases, and these have been my favorite so far.\n\nBe sure to check out our hands-on with all of these cases and more in the video below!\n\nThis was actually the very first case that I tried on when I got the iPhone Duo. I thought it looked great, was well-priced at just $29, and had a way to ensure the hinge was covered. Its standout feature is the rotating magnetic kickstand, which allows you to prop up your iPhone Duo in a ton of different orientations. You get:\n\nOne thing to note here is that there is zero protection for the outer display. Personally, I was not a fan of the front display being covered by a flap, so I liked that there was nothing on the front of the iPhone Duo. Lastly, this is one of the few cases that does not rely on adhesive strips to stay on the Duo.\n\nYou can get the Baseus iPhone Duo case on Amazon for $29.\n\nThis one has been my go-to since the dust has settled. I’m someone who has always enjoyed having the thinnest cases possible that still offer some rigidity and protection. That’s exactly what this Aulumu case offers for the iPhone Duo. You get:\n\nAs I said, this has been my favorite because of its thin, lightweight nature. It also uses adhesive on the front of the iPhone Duo to ensure it doesn’t fall off. The good news is that it leaves no residue. But it does not have any additional features, such as a built-in stand or wallet, nor does it have any hinge protection. So that is something to consider.\n\nThe Aulumu ADOU is available in two colors: Black and Blue. You can get it from Aulumu’s website for $89.\n\nThe Smartish Wallet case takes a completely different approach by combining a protective case with a built-in wallet. If you have noticed, while the iPhone Duo does have MagSafe, many current MagSafe accessories do not fit it. They also have a portion of it sticking out of the bottom; this includes MagSafe wallets. So Smartish built the wallet directly into the case, and it’s genius. You get:\n\nSo this case covers every aspect of the iPhone Duo while remaining relatively thin and allowing you to carry up to 4 cards. But because there is a built-in wallet, you lose access to the MagSafe portion of the iPhone, so you cannot wirelessly charge the iPhone Duo when the case is on. If you are ok with that trade-off, then you will love this case.\n\nThe Smartish Wallet Slayer case comes in five different colors and designs. You can get these cases on Amazon starting at $39.\n\nIf you are looking for something a little more rugged, the UAG Mouve case is worth looking into. UAG has always focused on protective cases, and this one brings the same philosophy and design language while adding an adjustable built-in kickstand. You get:\n\nWhat impressed me the most was the stability of the kickstand, especially compared to some other cases I’ve tested. Since the kickstand has a hexagonal design, it has flat sides. This is what gives it the additional stability. Combine that with protective corners, raised camera and screen edges, and a premium feel, and you have a great option for people who want that extra protection.\n\nYou can get the UAG Mouve case from Amazon for $84 . It comes in two colors: White and Ash(grey).\n\nMOFT is one of my favorite and most used brands. They are known for creating clever, origami-inspired accessories, so they decided to bring that to the iPhone Duo. They created a magnetic folding cover that doubles as a folding, versatile stand with multiple viewing angles. This is the most different of the bunch; you get:\n\nI really like the simplicty and creativity behind this one. It is just one panel that slaps onto the iPhone via magnets. One thing to note about this is that there is no rail protection. This is very similar to Apple’s own folio case for iPhone. With the MOFT case, while the rails are exposed, there is also a raised lip to it, so if you do place it on a surface rail side down, it technically will not touch because of the raised lip of the MOFT folio. So if you are ok with that slight compromise and you like the simplicity of this case, then I recommend checking it out.\n\nYou can pre order this case on Amazon for $69 and deliveries start November 27th . It comes in two color matching variats: white and Navy blue.\n\nAs we all know, cases are a subjective thing. There is no right or wrong choice when it comes to getting a case for your iPhone. That is even more true with iPhone Duo cases. These cases are all so new that manufacturers can have fun again seeing what works with the iPhone Duo form factor. Consumers can also see what they like, what they dont like, what can be improved. This is just the beginning and I am so excited to see where these cases end up evolving. But for now, these have been the best ones that I have tested and in my video I even try a few more, so I highly recommend see that in action.\n\nWhat cases have you tried? Are there any I should try out? I will 100% do a round 2 of this a few months down the road, once ore cases become available!"
       }
     },
     "media": null

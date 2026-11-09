@@ -29,7 +29,7 @@ test("fase 3: la copia ZIP incluye datos de biblioteca y archivos asociados", ()
   assert.match(reader, /documentos\.json/);
   assert.match(reader, /carpetas\.json/);
   assert.match(reader, /"ReaderMedia", "ReaderOriginals"/);
-  assert.match(reader, /zipItem\(at: staging, to: destination\)/);
+  assert.match(reader, /zipItem\(at: staging, to: destination, shouldKeepParent: false\)/);
   assert.match(reader, /Button\("Exportar copia de seguridad"\)/);
 });
 

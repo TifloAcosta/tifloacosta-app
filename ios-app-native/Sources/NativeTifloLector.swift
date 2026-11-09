@@ -1626,11 +1626,67 @@ struct NativeReadingScreen: View {
     }
 
     private func moveUnit(_ direction: Int) {
+        if navigationUnit == 5 {
+            skipReading(direction)
+            return
+        }
+        if navigationUnit == 6 {
+            moveBetweenMarks(direction)
+            return
+        }
         guard !document.body.isEmpty,
               let next = textLayout.nearbyOffset(readingOffset,
                                                   direction: direction, unit: navigationUnit)
         else { return }
         jump(to: next)
+    }
+
+    private func moveBetweenMarks(_ direction: Int) {
+        if !tracks.isEmpty {
+            let marks = latest.savedAudioBookmarks.sorted {
+                $0.track == $1.track
+                    ? ($0.seconds ?? Double($0.percent)) < ($1.seconds ?? Double($1.percent))
+                    : $0.track < $1.track
+            }
+            let candidates = marks.filter { mark in
+                if mark.track != trackIndex {
+                    return direction > 0 ? mark.track > trackIndex : mark.track < trackIndex
+                }
+                if let seconds = mark.seconds, speech.hasAudio {
+                    return direction > 0 ? seconds > speech.audioElapsed + 0.5
+                        : seconds < speech.audioElapsed - 0.5
+                }
+                return direction > 0 ? mark.percent > currentPercent
+                    : mark.percent < currentPercent
+            }
+            guard let mark = direction > 0 ? candidates.first : candidates.last else {
+                actionMessage = "No hay más marcas en esa dirección."
+                return
+            }
+            trackIndex = mark.track
+            currentPercent = mark.percent
+            didRestoreAudioPosition = true
+            playTrack()
+            if speech.hasAudio, let seconds = mark.seconds {
+                speech.seek(toSeconds: seconds)
+                currentPercent = speech.audioPercent
+            }
+            persistPosition()
+            applySleepTimer()
+        } else {
+            let offsets = Set(latest.savedTextBookmarks.map(\.offset)
+                + latest.bookmarks.map {
+                    Int(Double(textLayout.totalCharacters) * Double($0) / 100.0)
+                }).sorted()
+            let next = direction > 0
+                ? offsets.first(where: { $0 > readingOffset })
+                : offsets.last(where: { $0 < readingOffset })
+            guard let next else {
+                actionMessage = "No hay más marcas en esa dirección."
+                return
+            }
+            jump(to: next)
+        }
     }
 
     private func bookmarkDescription(atOffset offset: Int) -> String {
@@ -1868,10 +1924,6 @@ struct NativeReadingScreen: View {
                 @unknown default: break
                 }
             }
-            Button("Retroceder un minuto") { skipReading(-1) }
-                .accessibilityHint("Retrocede un minuto en audio o aproximadamente un minuto en texto.")
-            Button("Avanzar un minuto") { skipReading(1) }
-                .accessibilityHint("Avanza un minuto en audio o aproximadamente un minuto en texto.")
             Button("Detener") { stopPlayback() }
             Button("Audio") { showAudioSettings = true }
                 .accessibilityHint("Abre velocidad, voz e idioma de lectura.")
@@ -1917,19 +1969,19 @@ struct NativeReadingScreen: View {
         VStack(alignment: .leading, spacing: 6) {
             playbackRow
             trackButtons
-            if !document.body.isEmpty {
-                NativeAdjustableChoice(
-                    title: "Modo de navegación",
-                    choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
-                    selectedIndex: $navigationUnit
-                )
-                HStack {
-                    Button("Unidad anterior") { moveUnit(-1) }
-                    Button("Unidad siguiente") { moveUnit(1) }
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.small)
+            NativeAdjustableChoice(
+                title: "Modo de navegación",
+                choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado", "Tiempo", "Marcas"],
+                selectedIndex: $navigationUnit
+            )
+            HStack {
+                Button("Unidad anterior") { moveUnit(-1) }
+                    .accessibilityHint("Retrocede según el modo de navegación seleccionado.")
+                Button("Unidad siguiente") { moveUnit(1) }
+                    .accessibilityHint("Avanza según el modo de navegación seleccionado.")
             }
+            .buttonStyle(.bordered)
+            .controlSize(.small)
             Button("Marcas guardadas") { showSavedMarks = true }
             Button("Añadir marca") { addBookmark() }
             Text(progressDescription)
@@ -2266,8 +2318,6 @@ struct NativeReadingScreen: View {
             if speech.isPlaying { pausePlayback() }
             else if speech.isPaused { play() }
         }
-        .accessibilityAction(named: Text("Retroceder un minuto")) { skipReading(-1) }
-        .accessibilityAction(named: Text("Avanzar un minuto")) { skipReading(1) }
         .accessibilityAction(named: Text("Añadir marca")) { addBookmark() }
         .accessibilityAction(named: Text("Avanzar cinco por ciento")) {
             move(to: min(100, currentPercent + 5))

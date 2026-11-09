@@ -40,6 +40,7 @@ struct NativeReaderTextLink: Codable, Hashable {
     let offset: Int
     let title: String
     let url: String
+    var targetOffset: Int? = nil
 }
 
 struct NativeReadingDocument: Codable, Identifiable, Hashable {
@@ -1694,6 +1695,27 @@ struct NativeReadingScreen: View {
         }
     }
 
+    private func activateCurrentLink() {
+        guard navigationUnit == 8 else {
+            actionMessage = "Selecciona Enlaces en Modo de navegación."
+            return
+        }
+        guard let link = latest.textLinks?.first(where: { $0.offset == readingOffset }) else {
+            actionMessage = "No hay un enlace estructurado en esta posición."
+            return
+        }
+        if let target = link.targetOffset {
+            jump(to: target)
+            actionMessage = "Destino: \(link.title)"
+        } else if let url = URL(string: link.url),
+                  ["https", "http"].contains(url.scheme?.lowercased() ?? ""),
+                  url.host != nil {
+            UIApplication.shared.open(url)
+        } else {
+            actionMessage = "Este enlace no tiene un destino disponible."
+        }
+    }
+
     private func moveUnit(_ direction: Int) {
         if navigationUnit == 9 || navigationUnit == 10 {
             moveDaisyPoint(direction, kind: navigationUnit == 9 ? "Página" : "Referencia")
@@ -2040,6 +2062,9 @@ struct NativeReadingScreen: View {
                 case .decrement: moveUnit(-1)
                 @unknown default: break
                 }
+            }
+            .accessibilityAction(named: Text("Abrir enlace actual")) {
+                activateCurrentLink()
             }
             Button("Detener") { stopPlayback() }
             Button("Audio") { showAudioSettings = true }

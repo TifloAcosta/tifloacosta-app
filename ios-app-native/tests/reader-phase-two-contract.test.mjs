@@ -55,3 +55,11 @@ test('PDF muestra identificadores de página, sin afirmar soporte para binarios 
 test('se declara reproducción de audio en segundo plano', () => {
   assert.match(plist, /<key>UIBackgroundModes<\/key><array><string>audio<\/string><\/array>/);
 });
+
+test('la navegación accesible del lector salta de cinco en cinco por ciento', () => {
+  assert.match(reader, /Avanzar cinco por ciento/);
+  assert.match(reader, /Retroceder cinco por ciento/);
+  assert.match(reader, /currentPercent \+ 5/);
+  assert.match(reader, /currentPercent - 5/);
+  assert.doesNotMatch(reader, /Avanzar diez por ciento|Retroceder diez por ciento/);
+});

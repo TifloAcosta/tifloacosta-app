@@ -81,3 +81,11 @@ test('Marcas incluyen contexto y borrado anuncia el título exacto', () => {
   assert.match(reader, /Button\(bookmarkDescription\(at: percent\)\)/);
   assert.match(reader, /Vas a eliminar «\\\(doc\.title\)»/);
 });
+
+test('Navegación y marcas son accesibles junto a los controles principales', () => {
+  assert.match(reader, /title: "Modo de navegación"/);
+  assert.match(reader, /choices: \["Bloque", "Párrafo", "Frase", "Página", "Encabezado"\]/);
+  assert.match(reader, /Button\("Unidad anterior"\) \{ moveUnit\(-1\) \}/);
+  assert.match(reader, /Button\("Unidad siguiente"\) \{ moveUnit\(1\) \}/);
+  assert.match(reader, /Button\("Marcas guardadas"\) \{ showSavedMarks = true \}/);
+});

@@ -552,18 +552,18 @@ final class NativeReaderLibrary: ObservableObject {
 
 /// Informacion de avance de voz sin depender del ritmo de refresco de SwiftUI.
 private final class NativeSpeechProgressDelegate: NSObject, AVSpeechSynthesizerDelegate {
-    var onWord: ((NSRange) -> Void)?
-    var onFinish: (() -> Void)?
+    var onWord: ((NSRange, AVSpeechUtterance) -> Void)?
+    var onFinish: ((AVSpeechUtterance) -> Void)?
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
                            willSpeakRangeOfSpeechString characterRange: NSRange,
                            utterance: AVSpeechUtterance) {
-        onWord?(characterRange)
+        onWord?(characterRange, utterance)
     }
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
                            didFinish utterance: AVSpeechUtterance) {
-        onFinish?()
+        onFinish?(utterance)
     }
 }
 
@@ -592,14 +592,17 @@ final class NativeReadingSpeech: ObservableObject {
     private var baseCharacters = 0
     private var previousUTF16 = 0
     private var previousCharacterCount = 0
+    private var utteranceOffsets: [ObjectIdentifier: Int] = [:]
+    private var lastSpeechUtterance: ObjectIdentifier?
 
     init() {
-        progressDelegate.onWord = { [weak self] range in
+        progressDelegate.onWord = { [weak self] range, utterance in
             Task { @MainActor [weak self] in
                 guard let self, self.isPlaying, self.player == nil,
                       self.totalUTF16 > 0 else { return }
+                let segmentBase = self.utteranceOffsets[ObjectIdentifier(utterance)] ?? 0
                 let utf16End = max(0, min(self.spokenText.utf16.count,
-                                         range.location + range.length))
+                                         segmentBase + range.location + range.length))
                 if utf16End >= self.previousUTF16 {
                     let lower = String.Index(utf16Offset: self.previousUTF16, in: self.spokenText)
                     let upper = String.Index(utf16Offset: utf16End, in: self.spokenText)
@@ -607,14 +610,15 @@ final class NativeReadingSpeech: ObservableObject {
                     self.previousUTF16 = utf16End
                     self.textCharacterOffset = self.baseCharacters + self.previousCharacterCount
                 }
-                let count = self.baseUTF16 + range.location + range.length
+                let count = self.baseUTF16 + utf16End
                 self.textPercent = max(0, min(100,
                     Int(Double(count) * 100 / Double(self.totalUTF16))))
             }
         }
-        progressDelegate.onFinish = { [weak self] in
+        progressDelegate.onFinish = { [weak self] utterance in
             Task { @MainActor [weak self] in
-                guard let self, self.player == nil else { return }
+                guard let self, self.player == nil,
+                      self.lastSpeechUtterance == ObjectIdentifier(utterance) else { return }
                 self.textCharacterOffset = self.baseCharacters + self.spokenText.count
                 self.textPercent = 100
                 self.isPlaying = false
@@ -673,14 +677,26 @@ final class NativeReadingSpeech: ObservableObject {
         // La voz sigue sonando con la pantalla bloqueada y otras apps abiertas.
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
         try? AVAudioSession.sharedInstance().setActive(true)
-        let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = (voiceIdentifier.isEmpty ? nil : AVSpeechSynthesisVoice(identifier: voiceIdentifier))
-            ?? AVSpeechSynthesisVoice(language: language)
-        utterance.rate = min(AVSpeechUtteranceMaximumSpeechRate,
-            max(AVSpeechUtteranceMinimumSpeechRate,
-                AVSpeechUtteranceDefaultSpeechRate * Float(speed)))
-        utterance.pitchMultiplier = max(0.5, min(2, pitch))
-        synthesizer.speak(utterance)
+        utteranceOffsets.removeAll()
+        lastSpeechUtterance = nil
+        let segments = NativeReaderPauseProfile.segments(text)
+        var utf16Offset = 0
+        for (index, segment) in segments.enumerated() {
+            let utterance = AVSpeechUtterance(string: segment.text)
+            utterance.voice = (voiceIdentifier.isEmpty ? nil :
+                AVSpeechSynthesisVoice(identifier: voiceIdentifier))
+                ?? AVSpeechSynthesisVoice(language: language)
+            utterance.rate = min(AVSpeechUtteranceMaximumSpeechRate,
+                max(AVSpeechUtteranceMinimumSpeechRate,
+                    AVSpeechUtteranceDefaultSpeechRate * Float(speed)))
+            utterance.pitchMultiplier = max(0.5, min(2, pitch))
+            utterance.postUtteranceDelay = index == segments.count - 1 ? 0 : segment.delay
+            let identifier = ObjectIdentifier(utterance)
+            utteranceOffsets[identifier] = utf16Offset
+            lastSpeechUtterance = identifier
+            utf16Offset += segment.text.utf16.count
+            synthesizer.speak(utterance)
+        }
         isPlaying = true
         isPaused = false
     }

@@ -106,3 +106,11 @@ test("fase 3: una exportación DAISY fallida no deja ZIP incompletos", () => {
   assert.match(daisy, /try NativeDaisyPackageVerifier\.validate\(output\)/);
   assert.match(daisy, /verified = true/);
 });
+
+test("fase 3: el verificador DAISY no almacena todas las pistas en memoria", () => {
+  const verifier = readFileSync(new URL("../Sources/NativeDaisyPackageVerifier.swift", import.meta.url), "utf8");
+  assert.match(verifier, /let remaining = max\(0, 65_536 - bytes\.count\)/);
+  assert.match(verifier, /audioHeaders\[name\] = bytes/);
+  assert.match(verifier, /audioSizes\[name\] = UInt64\(entry\.uncompressedSize\)/);
+  assert.match(verifier, /manifest\.allSatisfy\(\{ entries\.contains\(\$0\) \}\)/);
+});

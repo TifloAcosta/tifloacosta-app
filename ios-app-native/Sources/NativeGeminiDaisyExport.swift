@@ -62,6 +62,7 @@ enum NativeGeminiDaisyExport {
     static func generate(text: String, title: String, voice: String,
                          engine: NativeGeminiAudioExport.Engine = .gemini,
                          speed: Double = 1.0, pitch: Float = 1.0,
+                         language: String = "es",
                          progress: @escaping @MainActor (Int, Int) -> Void) async throws -> URL {
         let segments = try units(text, engine: engine)
         let uuid = UUID().uuidString
@@ -117,11 +118,13 @@ enum NativeGeminiDaisyExport {
         try Task.checkCancellation()
         guard !pars.isEmpty else { throw NativeGeminiAudioExport.ExportError.empty }
 
+        let supportedLanguages: Set<String> = ["es", "en", "pt", "fr", "de", "it"]
+        let lang = supportedLanguages.contains(language) ? language : "es"
         let safeTitle = escape(title)
         let dtbook = """
         <?xml version="1.0" encoding="utf-8"?>
         <!DOCTYPE dtbook PUBLIC "-//NISO//DTD dtbook 2005-1//EN" "http://www.daisy.org/z3986/2005/dtbook-2005-1.dtd">
-        <dtbook xmlns="http://www.daisy.org/z3986/2005/dtbook/" version="2005-1" xml:lang="es">
+        <dtbook xmlns="http://www.daisy.org/z3986/2005/dtbook/" version="2005-1" xml:lang="\(lang)">
           <head><meta name="dc:Identifier" content="\(identifier)"/><meta name="dc:Title" content="\(safeTitle)"/></head>
           <book><frontmatter><doctitle>\(safeTitle)</doctitle></frontmatter>
           <bodymatter><level1><h1>\(safeTitle)</h1>
@@ -148,7 +151,7 @@ enum NativeGeminiDaisyExport {
         let ncx = """
         <?xml version="1.0" encoding="utf-8"?>
         <!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
-        <ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="es">
+        <ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="\(lang)">
         <head><meta name="dtb:uid" content="\(identifier)"/>
         <meta name="dtb:depth" content="\(headingPoints.isEmpty ? 1 : 2)"/>
         <meta name="dtb:totalPageCount" content="0"/>
@@ -167,7 +170,7 @@ enum NativeGeminiDaisyExport {
         <package xmlns="http://openebook.org/namespaces/oeb-package/1.0/" unique-identifier="bookid">
           <metadata><dc-metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
           <dc:Identifier id="bookid">\(identifier)</dc:Identifier>
-          <dc:Title>\(safeTitle)</dc:Title><dc:Language>es</dc:Language>
+          <dc:Title>\(safeTitle)</dc:Title><dc:Language>\(lang)</dc:Language>
           <dc:Format>ANSI/NISO Z39.86-2005</dc:Format></dc-metadata>
           <x-metadata><meta name="dtb:multimediaType" content="audioFullText"/>
           <meta name="dtb:multimediaContent" content="audio,text"/>

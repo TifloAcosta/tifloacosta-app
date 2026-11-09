@@ -99,3 +99,12 @@ test('el temporizador no se reinicia al pasar a otra pista y se cancela al pausa
   assert.match(reader, /applySleepTimer\(reset: true\)/);
   assert.match(reader, /sleepDeadline = nil/);
 });
+
+test('La posición exacta del texto se guarda y recupera sin romper bibliotecas anteriores', () => {
+  assert.match(reader, /var lastTextOffset: Int\? = nil/);
+  assert.match(reader, /func saveTextPosition\(_ document: NativeReadingDocument, offset: Int\)/);
+  assert.match(reader, /library\.saveTextPosition\(document, offset: readingOffset\)/);
+  assert.match(reader, /latest\.lastTextOffset \?\?/);
+  assert.match(reader, /startPercent == nil \? \(latest\.lastTextOffset/);
+  assert.match(reader, /try JSONEncoder\(\)\.encode\(documents\)\.write\(to: Self\.storageURL, options: \.atomic\)/);
+});

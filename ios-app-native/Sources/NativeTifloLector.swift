@@ -167,6 +167,33 @@ final class NativeReaderLibrary: ObservableObject {
         return url
     }
 
+    /// Exportación íntegra: registros, carpetas, archivos originales y medios de DAISY.
+    /// No modifica el almacenamiento actual y no restaura datos automáticamente.
+    func exportBackup() throws -> URL {
+        let manager = FileManager.default
+        let temp = manager.temporaryDirectory
+        let staging = temp.appendingPathComponent("TifloLector-backup-\(UUID().uuidString)", isDirectory: true)
+        try manager.createDirectory(at: staging, withIntermediateDirectories: true)
+        defer { try? manager.removeItem(at: staging) }
+
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        try encoder.encode(documents).write(to: staging.appendingPathComponent("documentos.json"), options: .atomic)
+        try encoder.encode(folders).write(to: staging.appendingPathComponent("carpetas.json"), options: .atomic)
+
+        let support = Self.storageURL.deletingLastPathComponent()
+        for folder in ["ReaderMedia", "ReaderOriginals"] {
+            let source = support.appendingPathComponent(folder, isDirectory: true)
+            if manager.fileExists(atPath: source.path) {
+                try manager.copyItem(at: source, to: staging.appendingPathComponent(folder, isDirectory: true))
+            }
+        }
+
+        let destination = temp.appendingPathComponent("Copia-TifloLector-\(UUID().uuidString).zip")
+        try manager.zipItem(at: staging, to: destination)
+        return destination
+    }
+
     func toggleFavorite(_ document: NativeReadingDocument) {
         guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
         documents[i].isFavorite = !(documents[i].isFavorite ?? false)
@@ -688,6 +715,15 @@ struct NativeReaderLibraryScreen: View {
                     importSourcesPresented = true
                 }
                 NavigationLink("Ajustes") { NativeReaderSettingsScreen() }
+                Button("Exportar copia de seguridad") {
+                    do {
+                        let url = try library.exportBackup()
+                        NativeShare.present(url: url)
+                    } catch {
+                        importError = "No se pudo crear la copia de seguridad: \(error.localizedDescription)"
+                    }
+                }
+                .accessibilityHint("Incluye documentos, posiciones, marcas, carpetas y archivos guardados. No restaura datos automáticamente.")
             }
             Section("Filtrar y ordenar") {
                 NativeAdjustableChoice(

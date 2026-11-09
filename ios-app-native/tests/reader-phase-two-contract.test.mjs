@@ -177,3 +177,9 @@ test('Las marcas de audio guardan segundos exactos con compatibilidad anterior',
   assert.match(reader, /if speech\.hasAudio, let seconds = mark\.seconds/);
   assert.match(reader, /speech\.seek\(toSeconds: seconds\)/);
 });
+
+test('Detener conserva la posición de audio antes de liberar el reproductor', () => {
+  assert.match(reader, /private func stopPlayback\(\) \{\s*\/\/ Save the exact audio time before stop\(\)/);
+  const stop = reader.match(/private func stopPlayback\(\) \{([\s\S]*?)\n    \}/)?.[1] ?? '';
+  assert.ok(stop.indexOf('persistPosition()') < stop.indexOf('speech.stop()'));
+});

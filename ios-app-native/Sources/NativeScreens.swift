@@ -433,6 +433,13 @@ struct NativeResourcesScreen: View {
         return spanishResources.filter { $0.category == chosenCategory }
     }
 
+    private func updateResources() {
+        Task {
+            await catalog.refresh()
+            announce(catalog.updateMessage ?? "La actualización está en curso.")
+        }
+    }
+
     private func announce(_ message: String) {
         actionStatus = message
         UIAccessibility.post(notification: .announcement, argument: message)
@@ -467,6 +474,28 @@ struct NativeResourcesScreen: View {
 
     var body: some View {
         List {
+            Section("Contenido de Recursos") {
+                Button("Actualizar recursos") { updateResources() }
+                    .disabled(catalog.loading)
+                if catalog.loading {
+                    ProgressView("Actualizando recursos")
+                }
+                if let lastUpdated = catalog.lastUpdated {
+                    Text("Última actualización correcta: \(lastUpdated.formatted(date: .abbreviated, time: .shortened))")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                } else {
+                    Text("Todavía no se ha confirmado una actualización correcta.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+                if let error = catalog.error {
+                    Text(error).font(.footnote).foregroundStyle(.secondary)
+                }
+                if let status = catalog.updateMessage, catalog.error == nil {
+                    Text(status).font(.footnote).foregroundStyle(.secondary)
+                }
+            }
             Section {
                 NativeAdjustableChoice(
                     title: "Categoría",

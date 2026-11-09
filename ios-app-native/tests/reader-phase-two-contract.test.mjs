@@ -7,6 +7,7 @@ const formats = swift('NativeReaderFormats.swift');
 const office = swift('NativeOfficeText.swift');
 const settings = swift('NativeReaderSettings.swift');
 const plist = swift('Info.plist');
+const ncx = swift('NativeDaisyNCX.swift');
 
 test('la voz informa el progreso real por palabra sin avanzar al pausar', () => {
   assert.match(reader, /willSpeakRangeOfSpeechString/);
@@ -137,4 +138,15 @@ test('El índice DAISY respeta fragmentos SMIL y tiempos dentro de las pistas', 
   assert.match(reader, /func seek\(toSeconds seconds: TimeInterval\)/);
   assert.match(reader, /speech\.seek\(toSeconds: seconds\)/);
   assert.match(reader, /jumpToDaisy\(point\)/);
+});
+
+test('DAISY 3 admite un índice NCX con jerarquía y fragmentos de audio', () => {
+  assert.match(ncx, /class NativeDaisyNCXDelegate: NSObject, XMLParserDelegate/);
+  assert.match(ncx, /stack\.append\(Item\(level: stack\.count \+ 1\)\)/);
+  assert.match(ncx, /case "navpoint":/);
+  assert.match(ncx, /case "content":/);
+  assert.match(ncx, /XMLParser\(data: data\)/);
+  assert.match(formats, /NativeDaisyNCX\.parse\(ncxData\)/);
+  assert.match(formats, /if isDaisy, daisyNavigation\.isEmpty/);
+  assert.match(formats, /daisyAudio\(in: xml, fragment: parts\.count > 1/);
 });

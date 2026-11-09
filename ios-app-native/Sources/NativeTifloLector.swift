@@ -24,6 +24,7 @@ struct NativeDaisyNavigationPoint: Codable, Hashable, Identifiable {
     let level: Int
     let track: Int
     var seconds: TimeInterval? = nil
+    var kind: String? = nil
     var id: String { "\(track)-\(level)-\(title)-\(seconds ?? 0)" }
 }
 
@@ -1520,9 +1521,11 @@ struct NativeReadingScreen: View {
             NavigationStack {
                 List {
                     if !tracks.isEmpty, let points = latest.daisyNavigation, !points.isEmpty {
-                        Section("Navegación DAISY por encabezados") {
+                        Section("Navegación DAISY") {
                             ForEach(points) { point in
-                                Button("Nivel \(point.level). \(point.title)") {
+                                Button(point.kind == "Página" ? "Página. \(point.title)" :
+                                       point.kind == "Referencia" ? "Referencia. \(point.title)" :
+                                       "Nivel \(point.level). \(point.title)") {
                                     jumpToDaisy(point)
                                 }
                             }

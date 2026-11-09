@@ -256,3 +256,13 @@ test('Enlaces con etiquetas repetidas se guardan solo con correspondencia inequÃ
   assert.match(formats, /consumed\[title, default: 0\]/);
   assert.match(formats, /cursor = range\.upperBound/);
 });
+
+test('EPUB resuelve destinos internos seguros y permite abrirlos con VoiceOver', () => {
+  assert.match(formats, /private static func targetOffset\(fragment: String, html: String, text: String\)/);
+  assert.match(formats, /pageOffsets\[targetPath\]/);
+  assert.match(formats, /targetOffset: targetBase \+ target/);
+  assert.match(reader, /var targetOffset: Int\? = nil/);
+  assert.match(reader, /private func activateCurrentLink\(\)/);
+  assert.match(reader, /if let target = link\.targetOffset/);
+  assert.match(reader, /\.accessibilityAction\(named: Text\("Abrir enlace actual"\)\)/);
+});

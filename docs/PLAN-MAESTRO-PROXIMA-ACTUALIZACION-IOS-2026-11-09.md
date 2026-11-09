@@ -192,3 +192,13 @@ Cambios implementados en código (pendientes de validar conjuntamente en TestFli
 - Se han añadido pruebas automatizadas de regresión para estos contratos.
 
 **Aún no cerrado:** comprobar las compilaciones automáticas de los cambios actuales; persistencia de marcas/posición en todos los formatos; ampliar la estructura de navegación de DAISY según sus metadatos reales; ensayo funcional global con VoiceOver al finalizar las fases. No dar por finalizada la fase 2 por esta anotación.
+
+## L. Fase 2: precisión de posición y navegación DAISY — 9 de noviembre de 2026
+
+- Verificada compilación exitosa de controles, marcas y temporizador de fase 2 (ejecución 42665625680).
+- Añadido a la biblioteca un campo opcional `lastTextOffset` con desplazamiento del texto en caracteres, conservando `lastPercent` para compatibilidad con libros anteriores. Las posiciones modificadas por navegación se guardan con precisión en este campo.
+- La pantalla de lectura y el botón Reproducir desde la biblioteca consultan primero ese desplazamiento, con recuperación por porcentaje en bibliotecas antiguas. Advertencia: la devolución de posición por eventos del sintetizador todavía depende del porcentaje, por lo que no se acredita precisión por palabra en toda la lectura TTS hasta revisarla específicamente.
+- DAISY: añadida extracción inicial de encabezados del índice NCC y asociación con archivos SMIL y pistas de audio cuando están presentes, manteniendo nivel y título. Se exponen como «Navegación DAISY por encabezados»; esta versión salta al inicio de la pista asociada.
+- **Alcance limitado:** aún no se implementan destinos a un tiempo interno de pista mediante clipBegin/clipEnd, navegación completa SMIL/NCX, páginas o estructuras especiales de DAISY. No afirmar compatibilidad completa.
+- Se añadieron pruebas de contrato para recuperación de posición y navegación NCC. La compilación de los últimos cambios requiere verificación antes de dar el bloque por terminado.
+

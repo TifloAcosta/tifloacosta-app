@@ -1,7 +1,29 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-09T09:51:10.321Z",
+  "generatedAt": "2026-11-09T15:20:00.000Z",
   "resources": [
+    {
+      "kind": "resource",
+      "id": "es-pildoras-2026-25",
+      "lang": "es",
+      "category": "Píldoras",
+      "title": "Píldoras 25",
+      "url": "https://tifloacosta.com/docs/es/pildoras/2026/pildoras-25-2026.html",
+      "openUrl": "https://tifloacosta.com/docs/es/pildoras/2026/pildoras-25-2026.html",
+      "isNew": true,
+      "newsDate": "2026-11-09T12:00:00Z"
+    },
+    {
+      "kind": "resource",
+      "id": "en-pildoras-2026-25",
+      "lang": "en",
+      "category": "Pills",
+      "title": "Technology Pills 25",
+      "url": "https://tifloacosta.com/docs/en/pildoras/2026/tech-pills-25-2026.html",
+      "openUrl": "https://tifloacosta.com/docs/en/pildoras/2026/tech-pills-25-2026.html",
+      "isNew": true,
+      "newsDate": "2026-11-09T12:00:00Z"
+    },
     {
       "kind": "resource",
       "id": "es-pildoras-2026-24",

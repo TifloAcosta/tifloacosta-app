@@ -61,3 +61,13 @@ test("fase 3: el nombre de exportación conserva Unicode y evita colisiones temp
   assert.match(reader, /let cleanName = latest\.title\.replacingOccurrences/);
   assert.match(reader, /appendingPathComponent\(UUID\(\)\.uuidString, isDirectory: true\)/);
 });
+
+test("fase 3: exportadores de audio conectados con controles accesibles", () => {
+  assert.match(reader, /Button\("Exportar audio MP3 o DAISY"\)/);
+  assert.match(reader, /Picker\("Formato", selection: \$audioExportFormat\)/);
+  assert.match(reader, /Picker\("Motor", selection: \$audioExportEngine\)/);
+  assert.match(reader, /Picker\("Voz", selection: \$audioExportSystemVoice\)/);
+  assert.match(reader, /NativeGeminiAudioExport\.export\(/);
+  assert.match(reader, /audioExportTask\?\.cancel\(\)/);
+  assert.match(reader, /NativeShare\.present\(url: url\)/);
+});

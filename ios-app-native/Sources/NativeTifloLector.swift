@@ -1246,6 +1246,7 @@ struct NativeReadingScreen: View {
     @State private var audioExportProgress = ""
     @State private var audioExportTask: Task<Void, Never>?
     @State private var audioExportFormat: NativeGeminiAudioExport.Format = .mp3
+    @State private var audioExportLanguage = "es"
     @State private var audioExportEngine: NativeGeminiAudioExport.Engine = .system
     @State private var audioExportSystemVoice = ""
     @State private var audioExportGeminiVoice = "Kore"
@@ -1561,7 +1562,7 @@ struct NativeReadingScreen: View {
                     text: body, title: title, voice: voice,
                     format: audioExportFormat, engine: engine,
                     speed: [0.75, 0.9, 1.0, 1.25, 1.5][max(0, min(4, effectiveSpeedIndex))],
-                    pitch: pitch,
+                    pitch: pitch, language: audioExportLanguage,
                     progress: { finished, total in
                         audioExportProgress = "Generados \(finished) de \(total) fragmentos"
                     })
@@ -1585,6 +1586,19 @@ struct NativeReadingScreen: View {
                         ForEach(NativeGeminiAudioExport.Format.allCases) { item in
                             Text(item.rawValue).tag(item)
                         }
+                    }
+                }
+                if audioExportFormat == .daisy {
+                    Section("Idioma del libro DAISY") {
+                        Picker("Idioma del contenido", selection: $audioExportLanguage) {
+                            Text("Español").tag("es")
+                            Text("Inglés").tag("en")
+                            Text("Portugués").tag("pt")
+                            Text("Francés").tag("fr")
+                            Text("Alemán").tag("de")
+                            Text("Italiano").tag("it")
+                        }
+                        Text("Selecciona el idioma del texto original, aunque utilices otro motor de voz.")
                     }
                 }
                 Section("Motor de voz") {

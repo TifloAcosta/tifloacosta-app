@@ -191,7 +191,7 @@ final class NativeReaderLibrary: ObservableObject {
         }
 
         let destination = temp.appendingPathComponent("Copia-TifloLector-\(UUID().uuidString).zip")
-        try manager.zipItem(at: staging, to: destination)
+        try manager.zipItem(at: staging, to: destination, shouldKeepParent: false)
         return destination
     }
 
@@ -213,11 +213,15 @@ final class NativeReaderLibrary: ObservableObject {
         var count = 0
         for entry in archive {
             let path = entry.path
-            let components = path.split(separator: "/", omittingEmptySubsequences: false)
+            guard entry.type == .file || entry.type == .directory else {
+                throw NativeReaderFormatError.invalidArchive
+            }
+            let cleanPath = entry.type == .directory && path.hasSuffix("/")
+                ? String(path.dropLast()) : path
+            let components = cleanPath.split(separator: "/", omittingEmptySubsequences: false)
             guard !path.hasPrefix("/"), !path.contains("\\"),
                   !path.contains(":"), !components.contains(where: { $0 == ".." || $0 == "." }),
-                  !components.contains(where: { $0.isEmpty }),
-                  entry.type == .file else {
+                  !components.contains(where: { $0.isEmpty }) else {
                 throw NativeReaderFormatError.invalidArchive
             }
             let root = String(components[0])
@@ -226,6 +230,7 @@ final class NativeReaderLibrary: ObservableObject {
                     && UUID(uuidString: String(components[1])) != nil) else {
                 throw NativeReaderFormatError.invalidArchive
             }
+            if entry.type == .directory { continue }
             count += 1
             total += Int64(entry.uncompressedSize)
             guard count <= 10000, total <= 1_500_000_000 else {

@@ -86,7 +86,7 @@ test('Marcas incluyen contexto y borrado anuncia el título exacto', () => {
 
 test('Navegación y marcas son accesibles junto a los controles principales', () => {
   assert.match(reader, /title: "Modo de navegación"/);
-  assert.match(reader, /choices: navigationOptions\.map\(\\\.label\)/);
+  assert.match(reader, /choices: navigationOptions\.map\s*\{ \$0\.label \}/);
   assert.match(reader, /selectedIndex: navigationSelection/);
   assert.match(reader, /chapterStarts/);
   assert.match(reader, /"Capítulo"/);

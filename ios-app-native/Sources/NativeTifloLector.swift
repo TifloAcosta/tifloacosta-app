@@ -1526,9 +1526,14 @@ struct NativeReadingScreen: View {
         return options
     }
 
+    private var effectiveNavigationUnit: Int {
+        navigationOptions.contains(where: { $0.unit == navigationUnit })
+            ? navigationUnit : (navigationOptions.first?.unit ?? 0)
+    }
+
     private var navigationSelection: Binding<Int> {
         Binding(
-            get: { navigationOptions.firstIndex(where: { $0.unit == navigationUnit }) ?? 0 },
+            get: { navigationOptions.firstIndex(where: { $0.unit == effectiveNavigationUnit }) ?? 0 },
             set: { index in
                 guard navigationOptions.indices.contains(index) else { return }
                 navigationUnit = navigationOptions[index].unit
@@ -1740,11 +1745,12 @@ struct NativeReadingScreen: View {
     }
 
     private func moveUnit(_ direction: Int) {
-        if navigationUnit == 9 || navigationUnit == 10 {
-            moveDaisyPoint(direction, kind: navigationUnit == 9 ? "Página" : "Referencia")
+        let unit = effectiveNavigationUnit
+        if unit == 9 || unit == 10 {
+            moveDaisyPoint(direction, kind: unit == 9 ? "Página" : "Referencia")
             return
         }
-        if navigationUnit == 8 {
+        if unit == 8 {
             let offsets = Array(Set(textLayout.linkStarts +
                                     (latest.textLinks ?? []).map { $0.offset })).sorted()
             let next = direction > 0
@@ -1760,21 +1766,21 @@ struct NativeReadingScreen: View {
             }
             return
         }
-        if navigationUnit == 7 && !tracks.isEmpty {
+        if unit == 7 && !tracks.isEmpty {
             moveDaisyPoint(direction, kind: nil)
             return
         }
-        if navigationUnit == 5 {
+        if unit == 5 {
             skipReading(direction)
             return
         }
-        if navigationUnit == 6 {
+        if unit == 6 {
             moveBetweenMarks(direction)
             return
         }
         guard !document.body.isEmpty,
               let next = textLayout.nearbyOffset(readingOffset,
-                                                  direction: direction, unit: navigationUnit)
+                                                  direction: direction, unit: unit)
         else { return }
         jump(to: next)
     }
@@ -2089,11 +2095,7 @@ struct NativeReadingScreen: View {
             .accessibilityAction(named: Text("Abrir enlace actual")) {
                 activateCurrentLink()
             }
-            Button("Detener") { stopPlayback() }
-            Button("Audio") { showAudioSettings = true }
-                .accessibilityHint("Abre velocidad, voz e idioma de lectura.")
-            Button("Visual") { showVisualSettings = true }
-                .accessibilityHint("Abre tamaño de letra y presentación visual.")
+
         }
         .buttonStyle(.bordered)
         .controlSize(.small)
@@ -2131,7 +2133,7 @@ struct NativeReadingScreen: View {
                 choices: navigationOptions.map { $0.label },
                 selectedIndex: navigationSelection
             )
-            if navigationUnit == 5 {
+            if effectiveNavigationUnit == 5 {
                 NativeAdjustableChoice(
                     title: "Intervalo de tiempo",
                     choices: Self.timeStepChoices,
@@ -2140,6 +2142,8 @@ struct NativeReadingScreen: View {
             }
             Button("Marcas guardadas") { showSavedMarks = true }
             Button("Añadir marca") { addBookmark() }
+            Button("Información") { showDocumentInformation = true }
+                .accessibilityHint("Abre los porcentajes, tiempos, páginas y datos de la obra.")
             Text(progressDescription)
                 .font(.footnote)
                 .accessibilityLabel(progressDescription)
@@ -2153,6 +2157,10 @@ struct NativeReadingScreen: View {
                 choices: Self.percentages,
                 selectedIndex: positionBinding
             )
+            Button("Audio") { showAudioSettings = true }
+                .accessibilityHint("Abre velocidad, voz y pausas por puntuación.")
+            Button("Visual") { showVisualSettings = true }
+                .accessibilityHint("Abre tamaño de letra y presentación visual.")
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 8)
@@ -2352,6 +2360,16 @@ struct NativeReadingScreen: View {
         .tifloScreenSurface()
         .navigationTitle(document.title)
         .navigationBarTitleDisplayMode(.inline)
+        .accessibilityAction(.magicTap) {
+            // Nunca arranca una nueva reproducción: solo controla la
+            // lectura del documento que ya está activa o pausada.
+            if speech.isPlaying {
+                pausePlayback()
+            } else if speech.isPaused {
+                speech.resume()
+                applySleepTimer()
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Acciones") { showDocumentActions = true }

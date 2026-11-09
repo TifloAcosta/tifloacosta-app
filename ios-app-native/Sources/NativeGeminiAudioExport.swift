@@ -252,11 +252,12 @@ enum NativeGeminiAudioExport {
 
     static func export(text: String, title: String, voice: String, format: Format,
                        engine: Engine = .system, speed: Double = 1.0, pitch: Float = 1.0,
+                       language: String = "es",
                        progress: @escaping @MainActor (Int, Int) -> Void) async throws -> URL {
         if format == .daisy {
             return try await NativeGeminiDaisyExport.generate(
                 text: text, title: title, voice: voice, engine: engine,
-                speed: speed, pitch: pitch, progress: progress)
+                speed: speed, pitch: pitch, language: language, progress: progress)
         }
         let segments = try chunks(text, engine: engine)
         let file = try destination(title: title, fileExtension: "wav")

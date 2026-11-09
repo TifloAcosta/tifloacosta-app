@@ -42,6 +42,8 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
     // Exact character position for text; optional for older libraries.
     var lastTextOffset: Int? = nil
     var lastTrackIndex: Int? = nil
+    // Exact elapsed audio seconds; optional for legacy library records.
+    var lastAudioSeconds: TimeInterval? = nil
     var audioBookmarks: [NativeAudioBookmark]? = nil
     var daisyNavigation: [NativeDaisyNavigationPoint]? = nil
     var folderName: String? = nil
@@ -248,12 +250,16 @@ final class NativeReaderLibrary: ObservableObject {
         }
     }
 
-    func saveAudioPosition(_ document: NativeReadingDocument, track: Int, percent: Int) {
+    func saveAudioPosition(_ document: NativeReadingDocument, track: Int, percent: Int,
+                           seconds: TimeInterval? = nil) {
         guard let i = documents.firstIndex(where: { $0.id == document.id }), track >= 0 else { return }
         let value = max(0, min(100, percent))
-        if documents[i].lastTrackIndex != track || documents[i].lastPercent != value {
+        let position = seconds.flatMap { $0.isFinite ? max(0, $0) : nil }
+        if documents[i].lastTrackIndex != track || documents[i].lastPercent != value ||
+           documents[i].lastAudioSeconds != position {
             documents[i].lastTrackIndex = track
             documents[i].lastPercent = value
+            documents[i].lastAudioSeconds = position
             try? save()
         }
     }
@@ -610,6 +616,9 @@ struct NativeReaderLibraryScreen: View {
                         targetLibrary?.saveAudioPosition(document, track: index, percent: 0)
                     },
                     onError: { error in importError = "No se pudo reproducir: " + error })
+                if let seconds = latest.lastAudioSeconds {
+                    speech.seek(toSeconds: seconds)
+                }
             } catch { importError = error.localizedDescription }
         } else {
             let offset = max(0, min(latest.body.count,
@@ -982,6 +991,7 @@ struct NativeReadingScreen: View {
     @State private var readingOffset = 0
     @State private var lastSavedPercent = -1
     @State private var trackIndex = 0
+    @State private var didRestoreAudioPosition = false
     @State private var elapsedSpeakingSeconds = 0
     @State private var playbackTick = 0
     @State private var showTranslation = false
@@ -1036,7 +1046,8 @@ struct NativeReadingScreen: View {
         if tracks.isEmpty {
             library.saveTextPosition(document, offset: readingOffset)
         } else {
-            library.saveAudioPosition(document, track: trackIndex, percent: currentPercent)
+            library.saveAudioPosition(document, track: trackIndex, percent: currentPercent,
+                                      seconds: speech.hasAudio ? speech.audioElapsed : nil)
         }
         lastSavedPercent = currentPercent
     }
@@ -1083,6 +1094,10 @@ struct NativeReadingScreen: View {
             speech.resume()
         } else if !tracks.isEmpty {
             playTrack()
+            if !didRestoreAudioPosition {
+                restoreAudioPosition()
+                didRestoreAudioPosition = true
+            }
         } else {
             startTextSpeech()
         }
@@ -1135,6 +1150,14 @@ struct NativeReadingScreen: View {
         }
     }
 
+    private func restoreAudioPosition() {
+        guard speech.hasAudio, trackIndex == (latest.lastTrackIndex ?? 0),
+              let seconds = latest.lastAudioSeconds else { return }
+        speech.seek(toSeconds: seconds)
+        currentPercent = speech.audioPercent
+        persistPosition()
+    }
+
     private func jumpToDaisy(_ point: NativeDaisyNavigationPoint) {
         guard tracks.indices.contains(point.track) else {
             actionMessage = "La pista indicada no está disponible."
@@ -1142,6 +1165,7 @@ struct NativeReadingScreen: View {
         }
         trackIndex = point.track
         currentPercent = 0
+        didRestoreAudioPosition = true
         playTrack()
         if speech.hasAudio, let seconds = point.seconds {
             speech.seek(toSeconds: seconds)
@@ -1167,6 +1191,7 @@ struct NativeReadingScreen: View {
     private func changeTrack(_ delta: Int) {
         guard tracks.indices.contains(trackIndex + delta) else { return }
         trackIndex += delta
+        didRestoreAudioPosition = true
         move(to: 0)
         playTrack()
         applySleepTimer()

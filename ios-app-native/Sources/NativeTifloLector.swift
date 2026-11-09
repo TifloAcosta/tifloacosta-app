@@ -4,6 +4,7 @@ import UIKit
 import AVFoundation
 import Translation
 import UniformTypeIdentifiers
+import ZIPFoundation
 
 struct NativeReaderPreferences: Codable, Hashable {
     var speedIndex: Int? = nil
@@ -192,6 +193,114 @@ final class NativeReaderLibrary: ObservableObject {
         let destination = temp.appendingPathComponent("Copia-TifloLector-\(UUID().uuidString).zip")
         try manager.zipItem(at: staging, to: destination)
         return destination
+    }
+
+    /// Restaura únicamente libros que aún no existen, sin modificar los actuales.
+    /// Valida primero toda la copia. Ante un error, revierte los archivos nuevos.
+    func restoreBackup(from source: URL) throws -> Int {
+        let accessed = source.startAccessingSecurityScopedResource()
+        defer { if accessed { source.stopAccessingSecurityScopedResource() } }
+        guard let archive = Archive(url: source, accessMode: .read) else {
+            throw NativeReaderFormatError.invalidArchive
+        }
+        let manager = FileManager.default
+        let staging = manager.temporaryDirectory
+            .appendingPathComponent("restore-\(UUID().uuidString)", isDirectory: true)
+        try manager.createDirectory(at: staging, withIntermediateDirectories: true)
+        defer { try? manager.removeItem(at: staging) }
+
+        var total: Int64 = 0
+        var count = 0
+        for entry in archive {
+            let path = entry.path
+            let components = path.split(separator: "/", omittingEmptySubsequences: false)
+            guard !path.hasPrefix("/"), !path.contains("\\"),
+                  !path.contains(":"), !components.contains(where: { $0 == ".." || $0 == "." }),
+                  !components.contains(where: { $0.isEmpty }),
+                  entry.type == .file else {
+                throw NativeReaderFormatError.invalidArchive
+            }
+            let root = String(components[0])
+            guard (components.count == 1 && ["documentos.json", "carpetas.json"].contains(root))
+                || (components.count >= 3 && ["ReaderMedia", "ReaderOriginals"].contains(root)
+                    && UUID(uuidString: String(components[1])) != nil) else {
+                throw NativeReaderFormatError.invalidArchive
+            }
+            count += 1
+            total += Int64(entry.uncompressedSize)
+            guard count <= 10000, total <= 1_500_000_000 else {
+                throw NativeReaderFormatError.oversizedArchive
+            }
+            let destination = staging.appendingPathComponent(path)
+            guard !manager.fileExists(atPath: destination.path) else {
+                throw NativeReaderFormatError.invalidArchive
+            }
+            try manager.createDirectory(at: destination.deletingLastPathComponent(),
+                                        withIntermediateDirectories: true)
+            _ = try archive.extract(entry, to: destination)
+        }
+        let backedUpDocuments = try JSONDecoder().decode([NativeReadingDocument].self,
+            from: Data(contentsOf: staging.appendingPathComponent("documentos.json")))
+        let backedUpFolders = try JSONDecoder().decode([String].self,
+            from: Data(contentsOf: staging.appendingPathComponent("carpetas.json")))
+        guard Set(backedUpDocuments.map(\.id)).count == backedUpDocuments.count,
+              backedUpFolders.allSatisfy({ !$0.isEmpty && $0.count <= 80 && $0 != "__unfiled__" }),
+              Set(backedUpFolders.map { $0.lowercased() }).count == backedUpFolders.count else {
+            throw NativeReaderFormatError.invalidArchive
+        }
+        let currentIDs = Set(documents.map(\.id))
+        let additions = backedUpDocuments.filter { !currentIDs.contains($0.id) }
+        let support = Self.storageURL.deletingLastPathComponent()
+        // Comprobar que no faltan pistas ni originales para ninguno de los nuevos libros.
+        for document in additions {
+            for path in (document.trackPaths ?? []) + [document.originalRelativePath].compactMap({ $0 }) {
+                let pieces = path.split(separator: "/")
+                guard pieces.count >= 3,
+                      ["ReaderMedia", "ReaderOriginals"].contains(String(pieces[0])),
+                      String(pieces[1]) == document.id.uuidString,
+                      !pieces.contains(where: { $0 == ".." || $0 == "." }),
+                      manager.fileExists(atPath: staging.appendingPathComponent(path).path) else {
+                    throw NativeReaderFormatError.invalidArchive
+                }
+            }
+        }
+        var copied: [URL] = []
+        do {
+            for document in additions {
+                for root in ["ReaderMedia", "ReaderOriginals"] {
+                    let relative = root + "/" + document.id.uuidString
+                    let sourceDirectory = staging.appendingPathComponent(relative, isDirectory: true)
+                    guard manager.fileExists(atPath: sourceDirectory.path) else { continue }
+                    let target = support.appendingPathComponent(relative, isDirectory: true)
+                    guard !manager.fileExists(atPath: target.path) else {
+                        throw NativeReaderFormatError.invalidArchive
+                    }
+                    try manager.createDirectory(at: target.deletingLastPathComponent(),
+                                                withIntermediateDirectories: true)
+                    try manager.copyItem(at: sourceDirectory, to: target)
+                    copied.append(target)
+                }
+            }
+            let oldDocuments = documents
+            let oldFolders = folders
+            documents.append(contentsOf: additions)
+            for name in backedUpFolders where !folders.contains(where: {
+                $0.localizedCaseInsensitiveCompare(name) == .orderedSame
+            }) { folders.append(name) }
+            folders.sort { $0.localizedStandardCompare($1) == .orderedAscending }
+            do {
+                try save()
+                UserDefaults.standard.set(folders, forKey: folderStorageKey)
+            } catch {
+                documents = oldDocuments
+                folders = oldFolders
+                throw error
+            }
+        } catch {
+            copied.forEach { try? manager.removeItem(at: $0) }
+            throw error
+        }
+        return additions.count
     }
 
     func toggleFavorite(_ document: NativeReadingDocument) {

@@ -255,3 +255,12 @@ Cambios implementados en código (pendientes de validar conjuntamente en TestFli
 - Añadidas pruebas de contrato para estos comportamientos.
 - Las ejecuciones recientes de GitHub Actions 42672038883, 42672161133 y 42672194430 finalizaron con fallo pero **cero trabajos registrados** por la API. Las ejecuciones 42672541865 y 42672568956 todavía aparecían en cola sin trabajos al consultar. No hay evidencia suficiente para atribuirlo al código ni para confirmar compilación de los cambios más recientes.
 - **Estado:** funcionalidad implementada a nivel de fuente y pruebas añadidas; compilación actual pendiente, validación real diferida. No declarar la fase 2 cerrada mientras no se superen estas comprobaciones.
+
+## S. Recuperación de compilación iOS — 9 de noviembre de 2026
+
+- Se inspeccionaron las ejecuciones anteriores de GitHub Actions marcadas como fallidas sin trabajos registrados: la API devolvía lista de trabajos vacía. No eran registros de fallos de compilación Swift. Posteriormente GitHub volvió a asignar ejecutores y a iniciar los trabajos normales.
+- La ejecución `42672568956` y después la ejecución más reciente `42673082854` consiguieron avanzar hasta la compilación nativa y la captura visual del simulador.
+- En `42673082854`, las pruebas automáticas de contrato y **Compile for iPhone simulator (no signing)** finalizaron ambas correctamente. La captura posterior del simulador seguía en curso al consultar el estado; el resultado final del workflow debe comprobarse por separado.
+- Se corrigió un defecto real en el lector: al pulsar Detener, ahora se persiste la posición exacta antes de destruir el reproductor de audio. Asimismo se guarda la posición de la pista anterior antes de cambiar de pista.
+- Añadida prueba de regresión de orden de guardado para evitar que Detener pierda los segundos de reproducción.
+- El resultado técnico de estas pruebas no sustituye las pruebas integrales de los formatos DAISY y VoiceOver que corresponden a la validación final conjunta.

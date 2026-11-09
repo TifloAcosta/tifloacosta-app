@@ -968,34 +968,6 @@ struct NativeReaderLibraryScreen: View {
                 }
             }
             Section("Mi biblioteca") {
-                Button(selectionMode ? "Terminar selección" : "Selección") {
-                    if selectionMode {
-                        finishSelection()
-                    } else {
-                        selectedDocumentIDs.removeAll()
-                        selectionMode = true
-                    }
-                }
-                if selectionMode {
-                    Text("\(visibleSelection.count) documentos seleccionados")
-                        .accessibilityAddTraits(.updatesFrequently)
-                    Button("Seleccionar todos los visibles") {
-                        selectedDocumentIDs.formUnion(shownDocuments.map(\.id))
-                    }
-                    Button("Deseleccionar todos") { selectedDocumentIDs.removeAll() }
-                    Button("Mover seleccionados a carpeta") { showBulkMove = true }
-                        .disabled(visibleSelection.isEmpty)
-                    Button("Añadir seleccionados a favoritos") {
-                        let count = library.markFavorites(withIDs: visibleSelection, favorite: true)
-                        finishSelection("\(count) documentos añadidos a favoritos.")
-                    }
-                    .disabled(visibleSelection.isEmpty)
-                    Button("Quitar seleccionados de favoritos") {
-                        let count = library.markFavorites(withIDs: visibleSelection, favorite: false)
-                        finishSelection("\(count) documentos retirados de favoritos.")
-                    }
-                    .disabled(visibleSelection.isEmpty)
-                }
                 if shownDocuments.isEmpty { Text("No hay documentos con el filtro actual.") }
                 ForEach(shownDocuments) { document in
                     if selectionMode {
@@ -1041,6 +1013,34 @@ struct NativeReaderLibraryScreen: View {
                         confirmDeletion = true
                     }
                     }
+                }
+                Button(selectionMode ? "Terminar selección" : "Selección") {
+                    if selectionMode {
+                        finishSelection()
+                    } else {
+                        selectedDocumentIDs.removeAll()
+                        selectionMode = true
+                    }
+                }
+                if selectionMode {
+                    Text("\(visibleSelection.count) documentos seleccionados")
+                        .accessibilityAddTraits(.updatesFrequently)
+                    Button("Seleccionar todos los visibles") {
+                        selectedDocumentIDs.formUnion(shownDocuments.map(\.id))
+                    }
+                    Button("Deseleccionar todos") { selectedDocumentIDs.removeAll() }
+                    Button("Mover seleccionados a carpeta") { showBulkMove = true }
+                        .disabled(visibleSelection.isEmpty)
+                    Button("Añadir seleccionados a favoritos") {
+                        let count = library.markFavorites(withIDs: visibleSelection, favorite: true)
+                        finishSelection("\(count) documentos añadidos a favoritos.")
+                    }
+                    .disabled(visibleSelection.isEmpty)
+                    Button("Quitar seleccionados de favoritos") {
+                        let count = library.markFavorites(withIDs: visibleSelection, favorite: false)
+                        finishSelection("\(count) documentos retirados de favoritos.")
+                    }
+                    .disabled(visibleSelection.isEmpty)
                 }
             }
             // Los controles de gestión quedan después del último libro.

@@ -225,3 +225,13 @@ Cambios implementados en código (pendientes de validar conjuntamente en TestFli
 - El destino DAISY conserva `seconds` de manera opcional para seguir leyendo bibliotecas importadas anteriormente. Al abrir el encabezado se accede a la pista y, si se dispone de un inicio temporal válido, se salta a ese punto.
 - Se incorporaron pruebas de contrato; el resultado definitivo de compilación del último código queda sujeto al flujo `42669987256`.
 - No significa que esté completa toda la navegación DAISY: todavía deben tratarse con precisión estructuras NCX, referencias de páginas, notas, saltos internos especiales y libros que distribuyen contenido en varios archivos SMIL.
+
+## P. Fase 2: ampliación de navegación estructurada DAISY — 9 de noviembre de 2026
+
+- Se amplió el modelo de destinos DAISY para incluir un tiempo de inicio opcional dentro de la pista. La función `seek(toSeconds:)` coloca la reproducción en ese segundo cuando se dispone de un `clipBegin` válido.
+- Se interpreta el fragmento `archivo.smil#identificador` y se busca su audio correspondiente en SMIL, en lugar de asociar indiscriminadamente el primer audio del archivo.
+- Se interpretan tiempos de inicio expresados en segundos, segundos con decimales y formato de horas, minutos y segundos, incluidos prefijos `npt=`.
+- Se añadió un lector estructurado NCX que preserva niveles de encabezados y reconoce asimismo elementos de página y referencias especiales; se utiliza cuando no se extrajeron entradas del índice NCC.
+- Las entradas NCX conservan su tipo y su título para una presentación accesible. El campo `kind` y la posición temporal son opcionales para mantener la decodificación de bibliotecas anteriores.
+- Se ampliaron las pruebas automáticas para proteger interpretación de índices, enlaces a fragmentos, tipos de entrada y saltos temporales.
+- Estado: **implementado en código, compilación y pruebas completas de la última revisión todavía pendientes de verificación**. No se afirma navegación DAISY universal: quedan formatos concretos y estructuras SMIL/NCX que necesitarán pruebas con libros representativos durante la validación integral.

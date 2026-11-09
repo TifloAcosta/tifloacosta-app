@@ -98,3 +98,11 @@ test("fase 3: todos los segmentos DAISY tienen pista declarada y tiempo positivo
   assert.match(verifier, /clipBegins\.count/);
   assert.match(verifier, /finish > beginning/);
 });
+
+test("fase 3: una exportación DAISY fallida no deja ZIP incompletos", () => {
+  const daisy = readFileSync(new URL("../Sources/NativeGeminiDaisyExport.swift", import.meta.url), "utf8");
+  assert.match(daisy, /var verified = false/);
+  assert.match(daisy, /if !verified \{ try\? FileManager\.default\.removeItem\(at: output\) \}/);
+  assert.match(daisy, /try NativeDaisyPackageVerifier\.validate\(output\)/);
+  assert.match(daisy, /verified = true/);
+});

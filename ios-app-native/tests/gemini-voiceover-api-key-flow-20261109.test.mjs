@@ -8,7 +8,9 @@ test('La guía Gemini devuelve el foco al pegado al cerrar Google AI Studio', ()
   assert.match(source, /\.sheet\(isPresented: \$showGoogle, onDismiss:/);
   assert.match(source, /focusPasteButton = true/);
   assert.match(source, /\.accessibilityFocused\(\$focusPasteButton\)/);
-  assert.match(source, /NativeGeminiKeyBrowser\(\)/);
+  assert.match(source, /NativeGeminiKeyBrowser\(isPresented: \$showGoogle\)/);
+  assert.match(source, /func safariViewControllerDidFinish\(_ controller: SFSafariViewController\)/);
+  assert.match(source, /parent\.isPresented = false/);
 });
 
 test('Después de copiar la clave, Guardar recibe el foco VoiceOver', () => {

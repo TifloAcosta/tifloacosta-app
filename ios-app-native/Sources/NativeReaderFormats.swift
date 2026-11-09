@@ -119,6 +119,28 @@ enum NativeReaderFormats {
         return supportDirectory.appendingPathComponent(relativePath)
     }
 
+    /// Guarda el archivo importado sin modificar su nombre ni su formato.
+    /// La copia permanece dentro del contenedor de la aplicación para compartirla después.
+    static func storeOriginal(_ source: URL, documentID: UUID) throws -> String {
+        let directory = supportDirectory
+            .appendingPathComponent("ReaderOriginals", isDirectory: true)
+            .appendingPathComponent(documentID.uuidString, isDirectory: true)
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        let filename = source.lastPathComponent
+        guard !filename.isEmpty, filename != ".", filename != ".." else {
+            throw NativeReaderFormatError.invalidArchive
+        }
+        let destination = directory.appendingPathComponent(filename, isDirectory: false)
+        try FileManager.default.copyItem(at: source, to: destination)
+        return "ReaderOriginals/\(documentID.uuidString)/\(filename)"
+    }
+
+    static func deleteOriginal(for id: UUID) {
+        try? FileManager.default.removeItem(at: supportDirectory
+            .appendingPathComponent("ReaderOriginals", isDirectory: true)
+            .appendingPathComponent(id.uuidString, isDirectory: true))
+    }
+
     static func deleteStoredFiles(for id: UUID) {
         try? FileManager.default.removeItem(at: supportDirectory
             .appendingPathComponent("ReaderMedia", isDirectory: true)

@@ -30,7 +30,7 @@ test('La sincronización conserva copia local y comunica fecha, origen y errores
   assert.match(catalog, /parsePublicationDate\(snapshot\.generatedAt\)/);
   assert.match(catalog, /persistTimestamp\(now\)/);
   assert.match(catalog, /lastSource = candidate\.host/);
-  assert.match(catalog, /updateMessage = "Contenido actualizado:/);
+  assert.match(catalog, /updateMessage = "Contenido actualizado desde /);
   assert.match(catalog, /failures\.append/);
   assert.match(catalog, /Se muestran los contenidos guardados/);
   assert.doesNotMatch(catalog, /"HTTP \\\\ \(/);

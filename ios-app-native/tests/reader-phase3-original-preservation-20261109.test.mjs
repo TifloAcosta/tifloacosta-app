@@ -90,3 +90,11 @@ test("fase 3: metadatos DAISY respetan el idioma seleccionado", () => {
   assert.match(daisy, /xml:lang="\\\(lang\)"/);
   assert.match(daisy, /<dc:Language>\\\(lang\)<\/dc:Language>/);
 });
+
+test("fase 3: todos los segmentos DAISY tienen pista declarada y tiempo positivo", () => {
+  const verifier = readFileSync(new URL("../Sources/NativeDaisyPackageVerifier.swift", import.meta.url), "utf8");
+  assert.match(verifier, /audioRefs\.allSatisfy\(\{ manifest\.contains\(\$0\) \}\)/);
+  assert.match(verifier, /Set\(audioRefs\)\.count == audioRefs\.count/);
+  assert.match(verifier, /clipBegins\.count/);
+  assert.match(verifier, /finish > beginning/);
+});

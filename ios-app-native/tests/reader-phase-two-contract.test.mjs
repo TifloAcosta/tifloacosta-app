@@ -63,3 +63,21 @@ test('la navegación accesible del lector salta de cinco en cinco por ciento', (
   assert.match(reader, /currentPercent - 5/);
   assert.doesNotMatch(reader, /Avanzar diez por ciento|Retroceder diez por ciento/);
 });
+
+test('Botón Reproducir ofrece gestos de un minuto y mantiene doble toque', () => {
+  assert.match(reader, /\.accessibilityAdjustableAction \{ direction in/);
+  assert.match(reader, /case \.increment: skipReading\(1\)/);
+  assert.match(reader, /case \.decrement: skipReading\(-1\)/);
+  assert.match(reader, /speech\.skip\(seconds: TimeInterval\(direction \* 60\)\)/);
+  assert.match(reader, /speech\.isPlaying \? pausePlayback\(\) : play\(\)/);
+});
+test('Toque mágico solo controla la reproducción actual', () => {
+  assert.match(reader, /\.accessibilityAction\(\.magicTap\)/);
+  assert.match(reader, /if speech\.isPlaying \{ pausePlayback\(\) \}/);
+  assert.match(reader, /else if speech\.isPaused \{ play\(\) \}/);
+});
+test('Marcas incluyen contexto y borrado anuncia el título exacto', () => {
+  assert.match(reader, /private func bookmarkDescription\(at percent: Int\)/);
+  assert.match(reader, /Button\(bookmarkDescription\(at: percent\)\)/);
+  assert.match(reader, /Vas a eliminar «\\\(doc\.title\)»/);
+});

@@ -32,3 +32,9 @@ test('Pausas Normal Mayor Expresiva y Personalizadas ofrecen ajustes reales por 
   assert.match(reader, /utteranceOffsets\[identifier\] = utf16Offset/);
   assert.match(reader, /self\.lastSpeechUtterance == ObjectIdentifier\(utterance\)/);
 });
+
+test('Lectura por fragmentos ignora eventos de una reproducción ya cancelada', () => {
+  assert.match(reader, /guard let segmentBase = self\.utteranceOffsets\[ObjectIdentifier\(utterance\)\] else/);
+  assert.match(reader, /utteranceOffsets\.removeAll\(\)/);
+  assert.match(reader, /lastSpeechUtterance = identifier/);
+});

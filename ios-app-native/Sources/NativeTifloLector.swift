@@ -14,6 +14,12 @@ struct NativeReaderPreferences: Codable, Hashable {
     var strongText: Bool? = nil
 }
 
+struct NativeTextBookmark: Codable, Hashable, Identifiable {
+    let offset: Int
+    let percent: Int
+    var id: Int { offset }
+}
+
 struct NativeAudioBookmark: Codable, Hashable {
     let track: Int
     let percent: Int
@@ -38,6 +44,7 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
     var fileExtension: String? = nil
     var trackPaths: [String]? = nil
     var markedPositions: [Int]? = nil
+    var textBookmarks: [NativeTextBookmark]? = nil
     var isFavorite: Bool? = nil
     var lastPercent: Int? = nil
     // Exact character position for text; optional for older libraries.
@@ -52,8 +59,9 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
 
     var hasAudio: Bool { !(trackPaths ?? []).isEmpty }
     var bookmarks: [Int] { markedPositions ?? [] }
+    var savedTextBookmarks: [NativeTextBookmark] { textBookmarks ?? [] }
     var savedAudioBookmarks: [NativeAudioBookmark] { audioBookmarks ?? [] }
-    var hasBookmarks: Bool { !bookmarks.isEmpty || !savedAudioBookmarks.isEmpty }
+    var hasBookmarks: Bool { !bookmarks.isEmpty || !savedTextBookmarks.isEmpty || !savedAudioBookmarks.isEmpty }
     var formatLabel: String { (fileExtension ?? "txt").uppercased() }
 }
 
@@ -203,6 +211,24 @@ final class NativeReaderLibrary: ObservableObject {
         let location = max(0, min(100, percent))
         if !bookmarks.contains(location) { bookmarks.append(location) }
         documents[i].markedPositions = bookmarks.sorted()
+        try? save()
+    }
+
+    func addTextBookmark(_ document: NativeReadingDocument, offset: Int) {
+        guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
+        let count = documents[i].body.count
+        let value = max(0, min(count, offset))
+        let percent = count > 0 ? Int((Double(value) * 100 / Double(count)).rounded()) : 0
+        var bookmarks = documents[i].textBookmarks ?? []
+        guard !bookmarks.contains(where: { $0.offset == value }) else { return }
+        bookmarks.append(NativeTextBookmark(offset: value, percent: percent))
+        documents[i].textBookmarks = bookmarks.sorted { $0.offset < $1.offset }
+        try? save()
+    }
+
+    func removeTextBookmark(_ document: NativeReadingDocument, offset: Int) {
+        guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
+        documents[i].textBookmarks?.removeAll { $0.offset == offset }
         try? save()
     }
 
@@ -708,34 +734,6 @@ struct NativeReaderLibraryScreen: View {
                     }
                 }
             }
-            Section("Marcas") {
-                let marked = library.documents.filter { $0.hasBookmarks }
-                if marked.isEmpty { Text("Todavía no hay marcas guardadas.") }
-                ForEach(marked) { document in
-                    ForEach(document.bookmarks, id: \.self) { percent in
-                        NavigationLink {
-                            NativeReadingScreen(document: document, speech: speech,
-                                                startPercent: percent)
-                        } label: {
-                            Text("\(document.title), \(percent) por ciento")
-                        }
-                        .accessibilityAction(named: Text("Eliminar marca")) {
-                            library.removeBookmark(document, at: percent)
-                        }
-                    }
-                    ForEach(document.savedAudioBookmarks, id: \.self) { mark in
-                        NavigationLink {
-                            NativeReadingScreen(document: document, speech: speech,
-                                                startPercent: mark.percent, startTrack: mark.track)
-                        } label: {
-                            Text("\(document.title), pista \(mark.track + 1), \(mark.percent) por ciento")
-                        }
-                        .accessibilityAction(named: Text("Eliminar marca")) {
-                            library.removeAudioBookmark(document, mark: mark)
-                        }
-                    }
-                }
-            }
         }
         .tifloScreenSurface()
         .navigationTitle("TifloLector")
@@ -1235,6 +1233,21 @@ struct NativeReadingScreen: View {
         jump(to: next)
     }
 
+    private func bookmarkDescription(atOffset offset: Int) -> String {
+        let text = latest.body
+        guard !text.isEmpty else { return "Comienzo del documento" }
+        let characters = Array(text)
+        let index = min(characters.count - 1, max(0, offset))
+        let sentenceStart = (0..<index).reversed().first {
+            ".!?\n".contains(characters[$0])
+        }.map { $0 + 1 } ?? 0
+        var start = sentenceStart
+        while start < characters.count && characters[start].isWhitespace { start += 1 }
+        let excerpt = String(characters[start..<min(characters.count, start + 140)])
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        return excerpt.isEmpty ? "Posición \(index)" : excerpt
+    }
+
     private func bookmarkDescription(at percent: Int) -> String {
         let text = latest.body
         guard !text.isEmpty else { return "\(percent) por ciento" }
@@ -1268,7 +1281,7 @@ struct NativeReadingScreen: View {
 
     private func addBookmark() {
         if tracks.isEmpty {
-            library.addBookmark(document, at: currentPercent)
+            library.addTextBookmark(document, offset: readingOffset)
             actionMessage = "Marca guardada en \(currentPercent) por ciento."
         } else {
             library.addAudioBookmark(document, track: trackIndex, percent: currentPercent,
@@ -1524,6 +1537,15 @@ struct NativeReadingScreen: View {
                     if !latest.hasBookmarks {
                         Text("Esta obra todavía no tiene marcas.")
                     }
+                    ForEach(latest.savedTextBookmarks) { mark in
+                        Button(bookmarkDescription(atOffset: mark.offset)) {
+                            jump(to: mark.offset)
+                            showSavedMarks = false
+                        }
+                        .accessibilityAction(named: Text("Eliminar esta marca")) {
+                            library.removeTextBookmark(document, offset: mark.offset)
+                        }
+                    }
                     ForEach(latest.bookmarks, id: \.self) { percent in
                         Button(bookmarkDescription(at: percent)) {
                             move(to: percent)
@@ -1628,7 +1650,7 @@ struct NativeReadingScreen: View {
                     LabeledContent("Importado", value:
                         latest.importedAt.formatted(date: .abbreviated, time: .shortened))
                     LabeledContent("Carpeta", value: latest.folderName ?? "Sin carpeta")
-                    LabeledContent("Marcas", value: "\(latest.bookmarks.count + latest.savedAudioBookmarks.count)")
+                    LabeledContent("Marcas", value: "\(latest.bookmarks.count + latest.savedTextBookmarks.count + latest.savedAudioBookmarks.count)")
                     Text(progressDescription)
                     if !tracks.isEmpty {
                         LabeledContent("Pistas de audio", value: "\(tracks.count)")

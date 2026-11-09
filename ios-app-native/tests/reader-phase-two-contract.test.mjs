@@ -21,7 +21,7 @@ test('salto al porcentaje retoma voz por la nueva posición y conserva pausa', (
   assert.match(reader, /else if speech\.isPlaying \|\| speech\.isPaused/);
   assert.match(reader, /if wasPaused \{ speech\.pause\(\) \}/);
   assert.match(reader, /speech\.seek\(to: value\)/);
-  assert.match(reader, /Avanzar 30 segundos/);
+  assert.match(reader, /speech\.seek\(to: value\)/);
 });
 
 test('progreso y temporizador accesibles por documento', () => {
@@ -65,11 +65,12 @@ test('la navegación accesible del lector salta de cinco en cinco por ciento', (
   assert.doesNotMatch(reader, /Avanzar diez por ciento|Retroceder diez por ciento/);
 });
 
-test('Botón Reproducir ofrece gestos de un minuto y mantiene doble toque', () => {
+test('Botón Reproducir usa el modo elegido para los gestos y mantiene doble toque', () => {
   assert.match(reader, /\.accessibilityAdjustableAction \{ direction in/);
-  assert.match(reader, /case \.increment: skipReading\(1\)/);
-  assert.match(reader, /case \.decrement: skipReading\(-1\)/);
-  assert.match(reader, /speech\.skip\(seconds: TimeInterval\(direction \* 60\)\)/);
+  assert.match(reader, /case \.increment: moveUnit\(1\)/);
+  assert.match(reader, /case \.decrement: moveUnit\(-1\)/);
+  assert.match(reader, /if navigationUnit == 5 \{/);
+  assert.match(reader, /if navigationUnit == 6 \{/);
   assert.match(reader, /speech\.isPlaying \? pausePlayback\(\) : play\(\)/);
 });
 test('Toque mágico solo controla la reproducción actual', () => {
@@ -85,9 +86,12 @@ test('Marcas incluyen contexto y borrado anuncia el título exacto', () => {
 
 test('Navegación y marcas son accesibles junto a los controles principales', () => {
   assert.match(reader, /title: "Modo de navegación"/);
-  assert.match(reader, /choices: \["Bloque", "Párrafo", "Frase", "Página", "Encabezado"\]/);
-  assert.match(reader, /Button\("Unidad anterior"\) \{ moveUnit\(-1\) \}/);
-  assert.match(reader, /Button\("Unidad siguiente"\) \{ moveUnit\(1\) \}/);
+  assert.match(reader, /choices: navigationOptions\.map\(\\\.label\)/);
+  assert.match(reader, /selectedIndex: navigationSelection/);
+  assert.match(reader, /chapterStarts/);
+  assert.match(reader, /"Capítulo"/);
+  assert.doesNotMatch(reader, /Button\("Unidad anterior"\)/);
+  assert.doesNotMatch(reader, /Button\("Unidad siguiente"\)/);
   assert.match(reader, /Button\("Marcas guardadas"\) \{ showSavedMarks = true \}/);
 });
 

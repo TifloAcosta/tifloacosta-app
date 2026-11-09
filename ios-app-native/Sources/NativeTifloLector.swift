@@ -19,6 +19,13 @@ struct NativeAudioBookmark: Codable, Hashable {
     let percent: Int
 }
 
+struct NativeDaisyNavigationPoint: Codable, Hashable, Identifiable {
+    let title: String
+    let level: Int
+    let track: Int
+    var id: String { "\(track)-\(level)-\(title)" }
+}
+
 struct NativeReadingDocument: Codable, Identifiable, Hashable {
     let id: UUID
     var title: String
@@ -34,6 +41,7 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
     var lastTextOffset: Int? = nil
     var lastTrackIndex: Int? = nil
     var audioBookmarks: [NativeAudioBookmark]? = nil
+    var daisyNavigation: [NativeDaisyNavigationPoint]? = nil
     var folderName: String? = nil
     var readerPreferences: NativeReaderPreferences? = nil
 
@@ -95,7 +103,8 @@ final class NativeReaderLibrary: ObservableObject {
                         body: payload.body,
                         importedAt: .now,
                         fileExtension: payload.fileExtension,
-                        trackPaths: payload.trackPaths
+                        trackPaths: payload.trackPaths,
+                        daisyNavigation: payload.daisyNavigation
                     ), at: 0
                 )
                 try save()
@@ -1399,7 +1408,9 @@ struct NativeReadingScreen: View {
     private var documentActions: some View {
         Button("Información de la obra") { showDocumentInformation = true }
         Button("Marcas guardadas") { showSavedMarks = true }
-        if !latest.body.isEmpty { Button("Índice y navegación estructurada") { showStructure = true } }
+        if !latest.body.isEmpty || !(latest.daisyNavigation ?? []).isEmpty {
+            Button("Índice y navegación estructurada") { showStructure = true }
+        }
         Button("Añadir marca") { addBookmark() }
         Button(latest.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos") {
             library.toggleFavorite(document)
@@ -1500,6 +1511,20 @@ struct NativeReadingScreen: View {
         .sheet(isPresented: $showStructure) {
             NavigationStack {
                 List {
+                    if !tracks.isEmpty, let points = latest.daisyNavigation, !points.isEmpty {
+                        Section("Navegación DAISY por encabezados") {
+                            ForEach(points) { point in
+                                Button("Nivel \(point.level). \(point.title)") {
+                                    trackIndex = point.track
+                                    currentPercent = 0
+                                    playTrack()
+                                    persistPosition()
+                                    applySleepTimer()
+                                    showStructure = false
+                                }
+                            }
+                        }
+                    }
                     Section("Encabezados") {
                         if textLayout.namedHeadings.isEmpty {
                             Text("No se han identificado encabezados en este documento.")

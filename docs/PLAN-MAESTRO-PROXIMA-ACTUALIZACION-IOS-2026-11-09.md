@@ -147,3 +147,15 @@ No distribuir una versión pública basándose únicamente en estas comprobacion
 4. **Publicación final:** distribuir a los usuarios de App Store únicamente la versión definitiva de iOS que haya superado la validación conjunta.
 5. **Bloqueo de Android:** no realizar cambios ni iniciar su siguiente actualización hasta que la versión definitiva de iOS, con todas las mejoras, esté efectivamente instalada o disponible para la totalidad de usuarios de la App Store. La confirmación se hará con el estado de distribución pública, sin asumir que las actualizaciones automáticas se hayan instalado de inmediato en cada dispositivo.
 6. **Automatización de publicación:** las compilaciones técnicas pueden ejecutarse durante el desarrollo, pero ningún envío automático a TestFlight ni a App Store debe tratarse como autorización para una prueba parcial o publicación. Cualquier envío pendiente anterior deberá verificarse por separado, sin usarlo como candidata de esta actualización.
+
+## H. Continuación técnica de la fase 1 — 9 de noviembre de 2026
+
+- Se comprobó que el proceso de compilación iOS del primer bloque de fase 1 terminó correctamente en el simulador (ejecución 42657456217).
+- El flujo de TestFlight se cambió a ejecución manual para respetar la decisión del usuario de probar **una sola versión integrada al terminar todas las fases**. Esto no garantiza la cancelación de ejecuciones que ya estaban en marcha antes de cambiar el flujo.
+- El catálogo iOS ahora consulta los dos orígenes públicos, compara `generatedAt` y selecciona el contenido más reciente. Una respuesta HTTP 200 que entregue un JSON antiguo no debe ocultar un catálogo más nuevo de la otra fuente.
+- Protege la copia local: un servidor más atrasado no sustituye silenciosamente los datos más recientes que ya posea el dispositivo.
+- Corregido el análisis de las fechas ISO 8601, tanto con milisegundos como sin ellos, porque `mobile-content.json` utiliza fechas con fracción de segundo.
+- Actualizados los contratos de pruebas del catálogo y de la política de TestFlight. El primer ciclo de pruebas detectó expectativas antiguas y se corrigieron, sin reactivar el envío automático a TestFlight.
+- Se mantienen los botones accesibles de actualización manual, el resultado anunciado y la fecha de sincronización persistida.
+- **Pendiente:** confirmar que la compilación del último commit es satisfactoria; verificar acceso real al catálogo público desde un iPhone; probar con VoiceOver y comprobar Recursos y Novedades en la ronda integrada final. No anunciar esta fase como completada antes de dichas verificaciones.
+

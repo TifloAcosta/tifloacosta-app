@@ -26,6 +26,8 @@ test('La sincronización conserva copia local y comunica fecha, origen y errores
   assert.match(catalog, /data\.write\(to: cacheURL/);
   assert.match(catalog, /lastUpdated = now/);
   assert.match(catalog, /snapshot\.generatedAt/);
+  assert.match(catalog, /\.withFractionalSeconds/);
+  assert.match(catalog, /parsePublicationDate\(snapshot\.generatedAt\)/);
   assert.match(catalog, /persistTimestamp\(now\)/);
   assert.match(catalog, /lastSource = candidate\.host/);
   assert.match(catalog, /updateMessage = "Contenido actualizado:/);

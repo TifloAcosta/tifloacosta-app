@@ -114,3 +114,15 @@ test("fase 3: el verificador DAISY no almacena todas las pistas en memoria", () 
   assert.match(verifier, /audioSizes\[name\] = UInt64\(entry\.uncompressedSize\)/);
   assert.match(verifier, /manifest\.allSatisfy\(\{ entries\.contains\(\$0\) \}\)/);
 });
+
+test("fase 3: selección múltiple VoiceOver con estados y acciones en lote", () => {
+  assert.match(reader, /Button\(selectionMode \? "Terminar selección" : "Selección"\)/);
+  assert.match(reader, /"seleccionado" : "no seleccionado"/);
+  assert.match(reader, /Button\("Seleccionar todos los visibles"\)/);
+  assert.match(reader, /Button\("Deseleccionar todos"\)/);
+  assert.match(reader, /Button\("Mover seleccionados a carpeta"\)/);
+  assert.match(reader, /Button\("Añadir seleccionados a favoritos"\)/);
+  assert.match(reader, /Button\("Quitar seleccionados de favoritos"\)/);
+  assert.match(reader, /func moveDocuments\(withIDs ids: Set<UUID>, to folder: String\?\)/);
+  assert.match(reader, /func markFavorites\(withIDs ids: Set<UUID>, favorite: Bool\)/);
+});

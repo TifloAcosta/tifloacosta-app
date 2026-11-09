@@ -1192,13 +1192,15 @@ struct NativeReadingScreen: View {
     }
 
     private func stopPlayback() {
+        // Save the exact audio time before stop() discards the AVAudioPlayer.
+        persistPosition()
         speech.stop()
         sleepDeadline = nil
-        persistPosition()
     }
 
     private func changeTrack(_ delta: Int) {
         guard tracks.indices.contains(trackIndex + delta) else { return }
+        persistPosition()
         trackIndex += delta
         didRestoreAudioPosition = true
         move(to: 0)

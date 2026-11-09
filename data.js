@@ -1,5 +1,29 @@
 window.TIFLO_RESOURCES = [
   {
+    "id": "es-pildoras-2026-25",
+    "lang": "es",
+    "category": "Píldoras",
+    "year": 2026,
+    "title": "Píldoras 25",
+    "searchText": "Píldoras tecnológicas 25 de 2026 Tratado de Marrakech libros accesibles teclado iPhone VoiceOver dictado lectores de pantalla Siri IA seguridad noticias",
+    "url": "https://tifloacosta.com/docs/es/pildoras/2026/pildoras-25-2026.html",
+    "openUrl": "https://tifloacosta.com/docs/es/pildoras/2026/pildoras-25-2026.html",
+    "new": true,
+    "newsDate": "2026-11-09T12:00:00Z"
+  },
+  {
+    "id": "en-pildoras-2026-25",
+    "lang": "en",
+    "category": "Pills",
+    "year": 2026,
+    "title": "Technology Pills 25",
+    "searchText": "Technology Pills 25 of 2026 Marrakesh Treaty accessible books iPhone keyboard VoiceOver dictation screen readers Siri AI security news",
+    "url": "https://tifloacosta.com/docs/en/pildoras/2026/tech-pills-25-2026.html",
+    "openUrl": "https://tifloacosta.com/docs/en/pildoras/2026/tech-pills-25-2026.html",
+    "new": true,
+    "newsDate": "2026-11-09T12:00:00Z"
+  },
+  {
     "id": "es-pildoras-2026-24",
     "lang": "es",
     "category": "Píldoras",

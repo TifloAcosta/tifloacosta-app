@@ -236,3 +236,16 @@ test('HTML y EPUB retienen enlaces estructurados sin desplazar los marcadores', 
   assert.match(reader, /if navigationUnit == 8/);
   assert.match(reader, /\(latest\.textLinks \?\? \[\]\)\.map/);
 });
+
+test('Un solo control de reproducción navega por tiempo configurable y estructura DAISY', () => {
+  assert.match(reader, /native-reader-time-step-index/);
+  assert.match(reader, /title: "Intervalo de tiempo"/);
+  assert.match(reader, /timeStepSeconds = \[30, 60, 120, 300\]/);
+  assert.match(reader, /TimeInterval\(direction \* timeStep\)/);
+  assert.match(reader, /navigationUnit == 9 \|\| navigationUnit == 10/);
+  assert.match(reader, /moveDaisyPoint\(direction, kind:/);
+  assert.match(reader, /"Página DAISY"/);
+  assert.match(reader, /"Referencia DAISY"/);
+  assert.doesNotMatch(reader, /Button\("Pista anterior"\)/);
+  assert.doesNotMatch(reader, /Button\("Pista siguiente"\)/);
+});

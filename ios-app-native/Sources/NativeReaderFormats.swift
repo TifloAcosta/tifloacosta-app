@@ -370,7 +370,7 @@ enum NativeReaderFormats {
             }
             // DAISY 3 books can provide their navigation only through NCX.
             // Preserve hierarchy and resolve SMIL targets, if present.
-            if isDaisy, daisyNavigation.isEmpty,
+            if isDaisy,
                let ncx = all.first(where: { $0.lowercased().hasSuffix(".ncx") }),
                let ncxData = try? Data(contentsOf: directory.appendingPathComponent(ncx)) {
                 for link in NativeDaisyNCX.parse(ncxData) {
@@ -388,9 +388,16 @@ enum NativeReaderFormats {
                               URL(fileURLWithPath: $0).lastPathComponent.lowercased() == target.file
                           })
                     else { continue }
-                    daisyNavigation.append(NativeDaisyNavigationPoint(
+                    let point = NativeDaisyNavigationPoint(
                         title: link.title, level: link.level, track: track, seconds: target.seconds,
-                        kind: link.kind))
+                        kind: link.kind)
+                    // Retain NCX pages/references even when NCC supplies chapters.
+                    if !daisyNavigation.contains(where: {
+                        $0.title == point.title && $0.track == point.track &&
+                        $0.seconds == point.seconds
+                    }) {
+                        daisyNavigation.append(point)
+                    }
                 }
             }
             for path in audioFiles {

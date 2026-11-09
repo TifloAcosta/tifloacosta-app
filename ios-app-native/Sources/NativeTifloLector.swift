@@ -168,6 +168,42 @@ final class NativeReaderLibrary: ObservableObject {
         return url
     }
 
+    /// Exporta todas las pistas de una obra sin confundir un ZIP de audio con DAISY.
+    func exportAudioTracks(_ document: NativeReadingDocument) throws -> URL {
+        let current = latest(document)
+        guard let paths = current.trackPaths, !paths.isEmpty else {
+            throw NativeReaderFormatError.invalidArchive
+        }
+        let manager = FileManager.default
+        let temp = manager.temporaryDirectory
+        let staging = temp.appendingPathComponent("pistas-\(UUID().uuidString)", isDirectory: true)
+        try manager.createDirectory(at: staging, withIntermediateDirectories: true)
+        defer { try? manager.removeItem(at: staging) }
+
+        for (index, path) in paths.enumerated() {
+            guard let source = NativeReaderFormats.storedURL(for: path),
+                  manager.fileExists(atPath: source.path) else {
+                throw NativeReaderFormatError.invalidArchive
+            }
+            let ext = source.pathExtension.lowercased()
+            guard ["mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff", "caf"].contains(ext) else {
+                throw NativeReaderFormatError.invalidArchive
+            }
+            let filename = String(format: "Pista-%04d", index + 1) + "." + ext
+            try manager.copyItem(at: source, to: staging.appendingPathComponent(filename))
+        }
+
+        let title = current.title.replacingOccurrences(
+            of: #"[\\/:*?"<>|\x00-\x1F]"#, with: "_", options: .regularExpression
+        ).trimmingCharacters(in: .whitespacesAndNewlines)
+        let safeTitle = title.isEmpty ? "Audio" : title
+        let outputDirectory = temp.appendingPathComponent(UUID().uuidString, isDirectory: true)
+        try manager.createDirectory(at: outputDirectory, withIntermediateDirectories: true)
+        let output = outputDirectory.appendingPathComponent(safeTitle + "-pistas.zip")
+        try manager.zipItem(at: staging, to: output, shouldKeepParent: false)
+        return output
+    }
+
     /// Exportación íntegra: registros, carpetas, archivos originales y medios de DAISY.
     /// No modifica el almacenamiento actual y no restaura datos automáticamente.
     func exportBackup() throws -> URL {
@@ -1492,12 +1528,15 @@ struct NativeReadingScreen: View {
 
     private func exportText() {
         guard !latest.body.isEmpty else { return }
-        let name = latest.title.replacingOccurrences(
-            of: #"[^A-Za-z0-9 _.-]"#, with: "_", options: .regularExpression
-        )
-        let url = FileManager.default.temporaryDirectory
-            .appendingPathComponent(name + ".txt")
+        let cleanName = latest.title.replacingOccurrences(
+            of: #"[\\/:*?"<>|\x00-\x1F]"#, with: "_", options: .regularExpression
+        ).trimmingCharacters(in: .whitespacesAndNewlines)
+        let name = cleanName.isEmpty ? "Documento" : cleanName
+        let directory = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString, isDirectory: true)
+        let url = directory.appendingPathComponent(name + ".txt")
         do {
+            try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
             try latest.body.write(to: url, atomically: true, encoding: .utf8)
             NativeShare.present(url: url)
         } catch {
@@ -1727,9 +1766,17 @@ struct NativeReadingScreen: View {
             Button("Unidad anterior") { moveUnit(-1) }
             Button("Unidad siguiente") { moveUnit(1) }
         }
-        if let track = tracks.first,
+        if tracks.count == 1, let track = tracks.first,
            let url = NativeReaderFormats.storedURL(for: track) {
             Button("Compartir archivo de audio") { NativeShare.present(url: url) }
+        } else if tracks.count > 1 {
+            Button("Compartir todas las pistas de audio (ZIP)") {
+                do {
+                    NativeShare.present(url: try library.exportAudioTracks(document))
+                } catch {
+                    actionMessage = "No se pudieron compartir todas las pistas: \(error.localizedDescription)"
+                }
+            }
         }
         Button("Cancelar", role: .cancel) {}
     }

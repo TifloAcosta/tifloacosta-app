@@ -711,6 +711,8 @@ struct NativeReaderLibraryScreen: View {
     @EnvironmentObject private var library: NativeReaderLibrary
     @StateObject private var speech = NativeReadingSpeech()
     @State private var importPresented = false
+    @State private var restorePresented = false
+    @State private var restoreResult: String?
     @State private var importSourcesPresented = false
     @State private var externalCatalogPresented = false
     @State private var information: NativeReadingDocument?
@@ -832,7 +834,9 @@ struct NativeReaderLibraryScreen: View {
                         importError = "No se pudo crear la copia de seguridad: \(error.localizedDescription)"
                     }
                 }
-                .accessibilityHint("Incluye documentos, posiciones, marcas, carpetas y archivos guardados. No restaura datos automáticamente.")
+                .accessibilityHint("Incluye documentos, posiciones, marcas, carpetas y archivos guardados.")
+                Button("Restaurar copia de seguridad") { restorePresented = true }
+                    .accessibilityHint("Importa los libros que faltan sin sustituir los que ya están en la biblioteca.")
             }
             Section("Filtrar y ordenar") {
                 NativeAdjustableChoice(
@@ -930,6 +934,26 @@ struct NativeReaderLibraryScreen: View {
             case .failure(let error):
                 importError = error.localizedDescription
             }
+        }
+        .fileImporter(isPresented: $restorePresented, allowedContentTypes: [.zip],
+                      allowsMultipleSelection: false) { result in
+            switch result {
+            case .success(let urls):
+                guard let url = urls.first else { return }
+                do {
+                    let restored = try library.restoreBackup(from: url)
+                    restoreResult = "Se han recuperado \(restored) documentos nuevos. Los libros existentes no se han modificado."
+                } catch {
+                    importError = "No se pudo restaurar la copia: \(error.localizedDescription)"
+                }
+            case .failure(let error): importError = error.localizedDescription
+            }
+        }
+        .alert("Restauración de biblioteca", isPresented: Binding(
+            get: { restoreResult != nil },
+            set: { if !$0 { restoreResult = nil } }
+        )) { Button("Aceptar") { restoreResult = nil } } message: {
+            Text(restoreResult ?? "")
         }
         .alert("Crear carpeta", isPresented: $showCreateFolder) {
             TextField("Nombre de la carpeta", text: $newFolderName)

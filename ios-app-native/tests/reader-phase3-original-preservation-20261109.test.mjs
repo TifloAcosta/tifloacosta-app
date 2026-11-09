@@ -23,3 +23,12 @@ test("fase 3: no confundir texto extraído con archivo de origen", () => {
   assert.match(reader, /Button\("Exportar texto"\)/);
   assert.match(reader, /El documento original no está disponible/);
 });
+
+test("fase 3: la copia ZIP incluye datos de biblioteca y archivos asociados", () => {
+  assert.match(reader, /func exportBackup\(\) throws -> URL/);
+  assert.match(reader, /documentos\.json/);
+  assert.match(reader, /carpetas\.json/);
+  assert.match(reader, /"ReaderMedia", "ReaderOriginals"/);
+  assert.match(reader, /zipItem\(at: staging, to: destination\)/);
+  assert.match(reader, /Button\("Exportar copia de seguridad"\)/);
+});

@@ -232,6 +232,9 @@ final class NativeReaderLibrary: ObservableObject {
                 throw NativeReaderFormatError.invalidArchive
             }
             count += 1
+            guard entry.uncompressedSize <= 1_500_000_000 else {
+                throw NativeReaderFormatError.oversizedArchive
+            }
             total += Int64(entry.uncompressedSize)
             guard count <= 10000, total <= 1_500_000_000 else {
                 throw NativeReaderFormatError.oversizedArchive

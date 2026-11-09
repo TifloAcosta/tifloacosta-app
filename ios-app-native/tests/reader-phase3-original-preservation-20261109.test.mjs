@@ -71,3 +71,12 @@ test("fase 3: exportadores de audio conectados con controles accesibles", () => 
   assert.match(reader, /audioExportTask\?\.cancel\(\)/);
   assert.match(reader, /NativeShare\.present\(url: url\)/);
 });
+
+test("fase 3: exportación DAISY incluye verificación del paquete antes de compartirlo", () => {
+  const daisy = readFileSync(new URL("../Sources/NativeGeminiDaisyExport.swift", import.meta.url), "utf8");
+  const verifier = readFileSync(new URL("../Sources/NativeDaisyPackageVerifier.swift", import.meta.url), "utf8");
+  assert.match(daisy, /NativeDaisyPackageVerifier\.validate\(/);
+  assert.match(verifier, /"book\.opf", "book\.xml", "book\.ncx", "sync\.smil"/);
+  assert.match(verifier, /textRefs\.count == audioRefs\.count/);
+  assert.match(verifier, /Reject WAV renamed to MP3/);
+});

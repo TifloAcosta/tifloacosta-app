@@ -32,3 +32,19 @@ test("fase 3: la copia ZIP incluye datos de biblioteca y archivos asociados", ()
   assert.match(reader, /zipItem\(at: staging, to: destination\)/);
   assert.match(reader, /Button\("Exportar copia de seguridad"\)/);
 });
+
+test("fase 3: restaurar ZIP sin sobrescribir libros que ya existen", () => {
+  assert.match(reader, /func restoreBackup\(from source: URL\) throws -> Int/);
+  assert.match(reader, /let currentIDs = Set\(documents\.map\(\\.id\)\)/);
+  assert.match(reader, /filter \{ !currentIDs\.contains\(\$0\.id\) \}/);
+  assert.match(reader, /guard !manager\.fileExists\(atPath: target\.path\)/);
+  assert.match(reader, /copied\.forEach \{ try\? manager\.removeItem\(at: \$0\) \}/);
+});
+test("fase 3: lectura del respaldo y verificación de rutas antes de importar", () => {
+  assert.match(reader, /entry\.type == \.file \|\| entry\.type == \.directory/);
+  assert.match(reader, /NativeReaderFormatError\.oversizedArchive/);
+  assert.match(reader, /UUID\(uuidString: String\(components\[1\]\)\) != nil/);
+  assert.match(reader, /Se han recuperado/);
+  assert.match(reader, /Button\("Restaurar copia de seguridad"\)/);
+  assert.match(reader, /shouldKeepParent: false/);
+});

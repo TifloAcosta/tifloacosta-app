@@ -192,6 +192,12 @@ enum NativeGeminiDaisyExport {
         }
         let output = try NativeGeminiAudioExport.destination(
             title: title, fileExtension: "zip")
+        var verified = false
+        defer {
+            // No dejar archivos parciales después de errores o cancelaciones.
+            if !verified { try? FileManager.default.removeItem(at: output) }
+        }
+        try Task.checkCancellation()
         do {
             guard let archive = Archive(url: output, accessMode: .create) else {
                 throw NativeGeminiAudioExport.ExportError.unsupportedFormat
@@ -207,7 +213,10 @@ enum NativeGeminiDaisyExport {
             }
         }
         }
+        try Task.checkCancellation()
         try NativeDaisyPackageVerifier.validate(output)
+        try Task.checkCancellation()
+        verified = true
         return output
     }
 }

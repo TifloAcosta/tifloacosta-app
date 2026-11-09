@@ -183,3 +183,20 @@ test('Detener conserva la posición de audio antes de liberar el reproductor', (
   const stop = reader.match(/private func stopPlayback\(\) \{([\s\S]*?)\n    \}/)?.[1] ?? '';
   assert.ok(stop.indexOf('persistPosition()') < stop.indexOf('speech.stop()'));
 });
+
+test('Las marcas de texto son precisas, persisten y permanecen dentro de cada libro', () => {
+  assert.match(reader, /struct NativeTextBookmark: Codable, Hashable, Identifiable/);
+  assert.match(reader, /var textBookmarks: \[NativeTextBookmark\]\? = nil/);
+  assert.match(reader, /func addTextBookmark\(_ document: NativeReadingDocument, offset: Int\)/);
+  assert.match(reader, /documents\[i\]\.textBookmarks = bookmarks\.sorted/);
+  assert.match(reader, /library\.addTextBookmark\(document, offset: readingOffset\)/);
+  assert.match(reader, /ForEach\(latest\.savedTextBookmarks\)/);
+  assert.match(reader, /jump\(to: mark\.offset\)/);
+  assert.doesNotMatch(reader, /Section\("Marcas"\)\s*\{/);
+});
+
+test('NCX mantiene orden de lectura padre-hijo y profundidad de encabezados', () => {
+  assert.match(ncx, /sortedLinks\.sorted/);
+  assert.match(ncx, /order: nextOrder/);
+  assert.match(ncx, /stack\.filter \{ \$0\.kind == "Encabezado" \}\.count \+ 1/);
+});

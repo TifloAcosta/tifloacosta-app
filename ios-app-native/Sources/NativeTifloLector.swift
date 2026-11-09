@@ -42,6 +42,8 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
     let importedAt: Date
     // Optional properties allow older beta library JSON to remain decodable.
     var fileExtension: String? = nil
+    // Ruta persistente relativa al archivo importado, si existía un archivo fuente.
+    var originalRelativePath: String? = nil
     var trackPaths: [String]? = nil
     var markedPositions: [Int]? = nil
     var textBookmarks: [NativeTextBookmark]? = nil
@@ -108,6 +110,7 @@ final class NativeReaderLibrary: ObservableObject {
             if documents.contains(where: { $0.id == identifier }) { continue }
             do {
                 let payload = try NativeReaderFormats.read(url, documentID: identifier)
+                let originalPath = try NativeReaderFormats.storeOriginal(url, documentID: identifier)
                 documents.insert(
                     NativeReadingDocument(
                         id: identifier,
@@ -116,6 +119,7 @@ final class NativeReaderLibrary: ObservableObject {
                         body: payload.body,
                         importedAt: .now,
                         fileExtension: payload.fileExtension,
+                        originalRelativePath: originalPath,
                         trackPaths: payload.trackPaths,
                         daisyNavigation: payload.daisyNavigation
                     ), at: 0
@@ -123,6 +127,7 @@ final class NativeReaderLibrary: ObservableObject {
                 try save()
             } catch {
                 NativeReaderFormats.deleteStoredFiles(for: identifier)
+                NativeReaderFormats.deleteOriginal(for: identifier)
                 throw error
             }
         }
@@ -151,7 +156,15 @@ final class NativeReaderLibrary: ObservableObject {
     func delete(_ document: NativeReadingDocument) {
         documents.removeAll { $0.id == document.id }
         NativeReaderFormats.deleteStoredFiles(for: document.id)
+        NativeReaderFormats.deleteOriginal(for: document.id)
         try? save()
+    }
+
+    func originalURL(for document: NativeReadingDocument) -> URL? {
+        guard let path = latest(document).originalRelativePath,
+              let url = NativeReaderFormats.storedURL(for: path),
+              FileManager.default.fileExists(atPath: url.path) else { return nil }
+        return url
     }
 
     func toggleFavorite(_ document: NativeReadingDocument) {
@@ -716,6 +729,13 @@ struct NativeReaderLibraryScreen: View {
                     .accessibilityLabel("\(document.title), \(document.formatLabel)")
                     .accessibilityHint("Doble toque para abrir. Hay acciones de accesibilidad.")
                     .accessibilityAction(named: Text("Reproducir")) { play(document) }
+                    .accessibilityAction(named: Text("Compartir documento original")) {
+                        if let url = library.originalURL(for: document) {
+                            NativeShare.present(url: url)
+                        } else {
+                            importError = "El documento original no está disponible. Puedes exportar el texto desde el lector si existe."
+                        }
+                    }
                     .accessibilityAction(named: Text("Información")) { information = document }
                     .accessibilityAction(named: Text("Ajustes del documento")) {
                         documentToConfigure = document
@@ -1514,6 +1534,9 @@ struct NativeReadingScreen: View {
         Button("Añadir marca") { addBookmark() }
         Button(latest.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos") {
             library.toggleFavorite(document)
+        }
+        if let original = library.originalURL(for: document) {
+            Button("Compartir documento original") { NativeShare.present(url: original) }
         }
         if !latest.body.isEmpty {
             Button("Exportar texto") { exportText() }

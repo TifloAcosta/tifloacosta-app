@@ -184,8 +184,8 @@ enum NativeReaderFormats {
         let segment: String
         if let fragment, !fragment.isEmpty {
             let escaped = NSRegularExpression.escapedPattern(for: fragment)
-            let pattern = "(?is)<(?:par|seq)\\b[^>]*\\bid\\s*=\\s*[\\"']" +
-                escaped + "[\\"'][^>]*>.*?</(?:par|seq)>"
+            let pattern = #"(?is)<(?:par|seq)\b[^>]*\bid\s*=\s*["']"# +
+                escaped + #"["'][^>]*>.*?</(?:par|seq)>"#
             guard let range = xml.range(of: pattern, options: .regularExpression) else {
                 return nil
             }
@@ -204,8 +204,8 @@ enum NativeReaderFormats {
     }
 
     private static func attribute(_ name: String, in tag: String) -> String? {
-        let pattern = "(?i)\\b" + NSRegularExpression.escapedPattern(for: name) +
-            "\\s*=\\s*[\\"']([^\\"']*)[\\"']"
+        let pattern = #"(?i)\b"# + NSRegularExpression.escapedPattern(for: name) +
+            #"\s*=\s*["']([^"']*)["']"#
         guard let expression = try? NSRegularExpression(pattern: pattern) else { return nil }
         let text = tag as NSString
         guard let match = expression.firstMatch(in: tag,

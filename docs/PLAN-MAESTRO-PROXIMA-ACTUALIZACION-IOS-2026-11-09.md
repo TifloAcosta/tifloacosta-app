@@ -159,3 +159,16 @@ No distribuir una versión pública basándose únicamente en estas comprobacion
 - Se mantienen los botones accesibles de actualización manual, el resultado anunciado y la fecha de sincronización persistida.
 - **Pendiente:** confirmar que la compilación del último commit es satisfactoria; verificar acceso real al catálogo público desde un iPhone; probar con VoiceOver y comprobar Recursos y Novedades en la ronda integrada final. No anunciar esta fase como completada antes de dichas verificaciones.
 
+
+## I. Cierre técnico de la fase 1 y transición a la fase 2 — 9 de noviembre de 2026
+
+**Estado de fase 1:** implementación técnica concluida; validación funcional real aplazada a la prueba integral acordada. No equivale a confirmación de funcionamiento en los dispositivos de todos los usuarios.
+
+- Se corrigió el catálogo móvil para incluir Píldoras 25 y se desplegó correctamente en GitHub Pages; las entradas están presentes en el archivo del repositorio.
+- La app iOS incorpora descarga con origen alternativo, comprobación de versión temporal y elección del catálogo más reciente, protección contra retroceso a versiones antiguas y conservación de la copia local si fallan ambos orígenes.
+- Se corrigió específicamente la interpretación de fechas ISO 8601 con y sin milisegundos.
+- Recursos y Novedades incorporan actualización manual accesible, fecha de última descarga correcta, mensajes de error y anuncios de resultado mediante VoiceOver.
+- Se actualizaron las pruebas de contrato frente a los nuevos mensajes de descarga y la distribución manual de TestFlight. El último trabajo de compilación verificado superó los pasos de tests de código y de compilación del simulador; la ejecución completa y la captura de pantalla no se considerarán cerradas hasta estado final del workflow.
+- El dominio público `https://tifloacosta.com/mobile-content.json` no ha podido verificarse desde las herramientas de acceso exterior de esta sesión. La actualización real y lectura con VoiceOver en dispositivo quedan incluidas expresamente en la futura prueba integral. No se afirma que la incidencia de la versión pública anterior esté solucionada en iPhone.
+
+**Siguiente fase:** fase 2, controles y fiabilidad de TifloLector (B01, B02, B04, B08, B09, B11, persistencia, navegación y temporizador). Avanzar en implementación sin esperar pruebas parciales del usuario.

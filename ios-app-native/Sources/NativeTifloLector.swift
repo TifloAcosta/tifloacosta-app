@@ -600,7 +600,11 @@ final class NativeReadingSpeech: ObservableObject {
             Task { @MainActor [weak self] in
                 guard let self, self.isPlaying, self.player == nil,
                       self.totalUTF16 > 0 else { return }
-                let segmentBase = self.utteranceOffsets[ObjectIdentifier(utterance)] ?? 0
+                // Los callbacks de una reproducción cancelada nunca deben
+                // modificar la posición de la siguiente reproducción.
+                guard let segmentBase = self.utteranceOffsets[ObjectIdentifier(utterance)] else {
+                    return
+                }
                 let utf16End = max(0, min(self.spokenText.utf16.count,
                                          segmentBase + range.location + range.length))
                 if utf16End >= self.previousUTF16 {

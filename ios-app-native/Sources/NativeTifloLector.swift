@@ -2021,7 +2021,7 @@ struct NativeReadingScreen: View {
             trackButtons
             NativeAdjustableChoice(
                 title: "Modo de navegación",
-                choices: navigationOptions.map(\.label),
+                choices: navigationOptions.map { $0.label },
                 selectedIndex: navigationSelection
             )
             Button("Marcas guardadas") { showSavedMarks = true }

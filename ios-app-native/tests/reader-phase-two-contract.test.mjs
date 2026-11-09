@@ -116,8 +116,8 @@ test('DAISY conserva encabezados NCC vinculados a SMIL en los metadatos del libr
   assert.match(formats, /daisyNavigation: daisyNavigation/);
   assert.match(reader, /var daisyNavigation: \[NativeDaisyNavigationPoint\]\? = nil/);
   assert.match(reader, /daisyNavigation: payload\.daisyNavigation/);
-  assert.match(reader, /Section\("Navegación DAISY por encabezados"\)/);
-  assert.match(reader, /Button\("Nivel/);
+  assert.match(reader, /Section\("Navegación DAISY"\)/);
+  assert.match(reader, /Button\(point\.kind == "Página"/);
 });
 
 test('TTS mantiene progreso exacto en caracteres con aviso por palabra', () => {
@@ -149,4 +149,12 @@ test('DAISY 3 admite un índice NCX con jerarquía y fragmentos de audio', () =>
   assert.match(formats, /NativeDaisyNCX\.parse\(ncxData\)/);
   assert.match(formats, /if isDaisy, daisyNavigation\.isEmpty/);
   assert.match(formats, /daisyAudio\(in: xml, fragment: parts\.count > 1/);
+});
+
+test('NCX conserva páginas y puntos especiales además de encabezados', () => {
+  assert.match(ncx, /case "navpoint", "pagetarget", "navtarget":/);
+  assert.match(ncx, /kind == "pagetarget" \? "Página"/);
+  assert.match(reader, /var kind: String\? = nil/);
+  assert.match(reader, /point\.kind == "Referencia"/);
+  assert.match(formats, /kind: link\.kind/);
 });

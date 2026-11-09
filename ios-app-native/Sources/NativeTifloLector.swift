@@ -432,10 +432,19 @@ final class NativeReadingSpeech: ObservableObject {
     }
 
     func sleep(after minutes: Int) {
+        sleep(afterSeconds: TimeInterval(minutes * 60))
+    }
+
+    func sleep(afterSeconds seconds: TimeInterval) {
         sleepTask?.cancel()
-        guard minutes > 0 else { return }
+        sleepTask = nil
+        guard seconds > 0 else { return }
         sleepTask = Task { [weak self] in
-            try? await Task.sleep(for: .seconds(minutes * 60))
+            do {
+                try await Task.sleep(for: .seconds(seconds))
+            } catch {
+                return
+            }
             guard !Task.isCancelled else { return }
             self?.stop()
         }
@@ -915,6 +924,7 @@ struct NativeReadingScreen: View {
     @AppStorage("native-reader-reading-mode") private var readingMode = 0
     @State private var didApplyOpeningMode = false
     @State private var sleepIndex = 0 // Each open document starts with timer disabled.
+    @State private var sleepDeadline: Date?
     @State private var currentPercent = 0
     @State private var readingOffset = 0
     @State private var lastSavedPercent = -1
@@ -1025,9 +1035,24 @@ struct NativeReadingScreen: View {
         applySleepTimer()
     }
 
-    private func applySleepTimer() {
+    private func applySleepTimer(reset: Bool = false) {
         let index = max(0, min(sleepMinutes.count - 1, sleepIndex))
-        speech.sleep(after: speech.isPlaying ? sleepMinutes[index] : 0)
+        let minutes = sleepMinutes[index]
+        guard speech.isPlaying, minutes > 0 else {
+            sleepDeadline = nil
+            speech.sleep(after: 0)
+            return
+        }
+        if reset || sleepDeadline == nil {
+            sleepDeadline = Date().addingTimeInterval(TimeInterval(minutes * 60))
+        }
+        let seconds = max(0, sleepDeadline!.timeIntervalSinceNow)
+        if seconds == 0 {
+            stopPlayback()
+            actionMessage = "Apagado automático completado."
+        } else {
+            speech.sleep(afterSeconds: seconds)
+        }
     }
 
     private func playTrack() {
@@ -1058,11 +1083,13 @@ struct NativeReadingScreen: View {
 
     private func pausePlayback() {
         speech.pause()
+        sleepDeadline = nil
         persistPosition()
     }
 
     private func stopPlayback() {
         speech.stop()
+        sleepDeadline = nil
         persistPosition()
     }
 
@@ -1502,7 +1529,7 @@ struct NativeReadingScreen: View {
             }
         }
         .onChange(of: sleepIndex) { _, _ in
-            applySleepTimer()
+            applySleepTimer(reset: true)
         }
         .onReceive(speech.$textPercent) { percentage in
             // AVSpeechSynthesizer reports each spoken word; no artificial timer

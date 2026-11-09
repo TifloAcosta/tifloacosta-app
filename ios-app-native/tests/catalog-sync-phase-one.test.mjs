@@ -15,12 +15,17 @@ test('iOS puede descargar el catálogo desde el dominio oficial y un origen alte
   assert.match(catalog, /snapshot\.schemaVersion == 1/);
   assert.match(catalog, /!snapshot\.resources\.isEmpty/);
   assert.match(catalog, /guard !loading else \{ return \}/);
+  assert.match(catalog, /var candidate: \(snapshot: NativeCatalogSnapshot/);
+  assert.match(catalog, /current\.date >= publicationDate/);
+  assert.match(catalog, /existingDate > candidate\.date/);
+  assert.match(catalog, /catalogGeneratedAt = candidate\.date/);
 });
 
 test('La sincronización conserva copia local y comunica fecha, origen y errores reales', () => {
   assert.match(catalog, /Data\(contentsOf: cacheURL\)/);
   assert.match(catalog, /data\.write\(to: cacheURL/);
   assert.match(catalog, /lastUpdated = now/);
+  assert.match(catalog, /snapshot\.generatedAt/);
   assert.match(catalog, /persistTimestamp\(now\)/);
   assert.match(catalog, /lastSource = endpoint\.host/);
   assert.match(catalog, /updateMessage = "Contenido actualizado:/);

@@ -82,11 +82,23 @@ enum NativeVoiceCredentialStore {
 /// Google controls its own API-key website. Opening it inside a Safari sheet
 /// keeps the user in TifloLector and provides an accessible Done control.
 private struct NativeGeminiKeyBrowser: UIViewControllerRepresentable {
+    @Binding var isPresented: Bool
     let url = URL(string: "https://aistudio.google.com/api-keys")!
+
+    final class Coordinator: NSObject, SFSafariViewControllerDelegate {
+        var parent: NativeGeminiKeyBrowser
+        init(_ parent: NativeGeminiKeyBrowser) { self.parent = parent }
+        func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+            parent.isPresented = false
+        }
+    }
+
+    func makeCoordinator() -> Coordinator { Coordinator(self) }
 
     func makeUIViewController(context: Context) -> SFSafariViewController {
         let controller = SFSafariViewController(url: url)
         controller.dismissButtonStyle = .done
+        controller.delegate = context.coordinator
         return controller
     }
 
@@ -136,7 +148,7 @@ private struct NativeGeminiKeyGuide: View {
                 // Return VoiceOver to the next action, not to the top of the guide.
                 focusPasteButton = true
             }) {
-                NativeGeminiKeyBrowser()
+                NativeGeminiKeyBrowser(isPresented: $showGoogle)
                     .ignoresSafeArea()
             }
         }

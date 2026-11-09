@@ -89,3 +89,13 @@ test('Navegación y marcas son accesibles junto a los controles principales', ()
   assert.match(reader, /Button\("Unidad siguiente"\) \{ moveUnit\(1\) \}/);
   assert.match(reader, /Button\("Marcas guardadas"\) \{ showSavedMarks = true \}/);
 });
+
+test('el temporizador no se reinicia al pasar a otra pista y se cancela al pausar', () => {
+  assert.match(reader, /@State private var sleepDeadline: Date\?/);
+  assert.match(reader, /func sleep\(afterSeconds seconds: TimeInterval\)/);
+  assert.match(reader, /try await Task\.sleep\(for: \.seconds\(seconds\)\)/);
+  assert.match(reader, /sleepDeadline = Date\(\)\.addingTimeInterval/);
+  assert.match(reader, /speech\.sleep\(afterSeconds: seconds\)/);
+  assert.match(reader, /applySleepTimer\(reset: true\)/);
+  assert.match(reader, /sleepDeadline = nil/);
+});

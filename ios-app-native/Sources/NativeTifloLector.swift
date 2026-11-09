@@ -1241,6 +1241,15 @@ struct NativeReadingScreen: View {
     @State private var showWordTools = false
     @State private var showAudioSettings = false
     @State private var showVisualSettings = false
+    @State private var showAudioExport = false
+    @State private var audioExportBusy = false
+    @State private var audioExportProgress = ""
+    @State private var audioExportTask: Task<Void, Never>?
+    @State private var audioExportFormat: NativeGeminiAudioExport.Format = .mp3
+    @State private var audioExportEngine: NativeGeminiAudioExport.Engine = .system
+    @State private var audioExportSystemVoice = ""
+    @State private var audioExportGeminiVoice = "Kore"
+    @State private var audioExportPhononVoice = ""
     @State private var showDocumentActions = false
     @State private var showDocumentInformation = false
     @State private var showSavedMarks = false
@@ -1526,6 +1535,109 @@ struct NativeReadingScreen: View {
         }
     }
 
+    private func exportGeneratedAudio() {
+        guard !audioExportBusy, !latest.body.isEmpty else { return }
+        let engine = audioExportEngine
+        let voice: String
+        switch engine {
+        case .system:
+            voice = audioExportSystemVoice.isEmpty ? effectiveVoiceID : audioExportSystemVoice
+        case .gemini:
+            voice = audioExportGeminiVoice
+        case .phonon:
+            voice = audioExportPhononVoice
+        }
+        audioExportBusy = true
+        audioExportProgress = "Preparando exportación…"
+        let body = latest.body
+        let title = latest.title
+        audioExportTask = Task {
+            defer {
+                audioExportBusy = false
+                audioExportTask = nil
+            }
+            do {
+                let url = try await NativeGeminiAudioExport.export(
+                    text: body, title: title, voice: voice,
+                    format: audioExportFormat, engine: engine,
+                    speed: [0.75, 0.9, 1.0, 1.25, 1.5][max(0, min(4, effectiveSpeedIndex))],
+                    pitch: pitch,
+                    progress: { finished, total in
+                        audioExportProgress = "Generados \(finished) de \(total) fragmentos"
+                    })
+                try Task.checkCancellation()
+                showAudioExport = false
+                audioExportProgress = "Exportación completada."
+                NativeShare.present(url: url)
+            } catch is CancellationError {
+                audioExportProgress = "Exportación cancelada."
+            } catch {
+                audioExportProgress = "Error al exportar: \(error.localizedDescription)"
+            }
+        }
+    }
+
+    private var audioExportSheet: some View {
+        NavigationStack {
+            Form {
+                Section("Formato de salida") {
+                    Picker("Formato", selection: $audioExportFormat) {
+                        ForEach(NativeGeminiAudioExport.Format.allCases) { item in
+                            Text(item.rawValue).tag(item)
+                        }
+                    }
+                }
+                Section("Motor de voz") {
+                    Picker("Motor", selection: $audioExportEngine) {
+                        Text("Voces del sistema").tag(NativeGeminiAudioExport.Engine.system)
+                        Text("Gemini").tag(NativeGeminiAudioExport.Engine.gemini)
+                        if NativePhononRuntime.isUsable {
+                            Text("Phonon").tag(NativeGeminiAudioExport.Engine.phonon)
+                        }
+                    }
+                    if audioExportEngine == .system {
+                        Picker("Voz", selection: $audioExportSystemVoice) {
+                            Text("Voz del documento").tag("")
+                            ForEach(AVSpeechSynthesisVoice.speechVoices(), id: \.identifier) { voice in
+                                Text("\(voice.name), \(voice.language)").tag(voice.identifier)
+                            }
+                        }
+                    } else if audioExportEngine == .gemini {
+                        Picker("Voz", selection: $audioExportGeminiVoice) {
+                            ForEach(NativeGeminiSpeech.voices, id: \.self) { voice in
+                                Text(voice).tag(voice)
+                            }
+                        }
+                        Text("Gemini requiere una clave personal configurada en Motores externos.")
+                    } else {
+                        Text("Phonon requiere el motor y sus modelos instalados.")
+                        TextField("Nombre de la voz Phonon", text: $audioExportPhononVoice)
+                    }
+                }
+                Section("Estado") {
+                    Text(audioExportProgress.isEmpty ? "Selecciona el formato y el motor." : audioExportProgress)
+                        .accessibilityAddTraits(.updatesFrequently)
+                    Button(audioExportBusy ? "Generando…" : "Generar y compartir") {
+                        exportGeneratedAudio()
+                    }
+                    .disabled(audioExportBusy)
+                    if audioExportBusy {
+                        Button("Cancelar generación", role: .cancel) {
+                            audioExportTask?.cancel()
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Exportar audio")
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Cerrar") { showAudioExport = false }
+                        .disabled(audioExportBusy)
+                }
+            }
+        }
+    }
+
     private func exportText() {
         guard !latest.body.isEmpty else { return }
         let cleanName = latest.title.replacingOccurrences(
@@ -1756,6 +1868,7 @@ struct NativeReadingScreen: View {
         }
         if !latest.body.isEmpty {
             Button("Exportar texto") { exportText() }
+            Button("Exportar audio MP3 o DAISY") { showAudioExport = true }
             Button("Diccionario y pronunciación") {
                 if speech.isPlaying { pausePlayback() }
                 showWordTools = true
@@ -1883,6 +1996,7 @@ struct NativeReadingScreen: View {
                     .accessibilityHint("Marcas, favoritos, traducción, exportación y navegación.")
             }
         }
+        .sheet(isPresented: $showAudioExport) { audioExportSheet }
         .confirmationDialog("Acciones del documento",
                             isPresented: $showDocumentActions,
                             titleVisibility: .visible) {

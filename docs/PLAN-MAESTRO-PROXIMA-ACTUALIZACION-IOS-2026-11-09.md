@@ -178,3 +178,17 @@ No distribuir una versión pública basándose únicamente en estas comprobacion
 - Requisito **B02**: cambio del salto porcentual del rotor de VoiceOver de diez a **cinco por ciento** en ambos sentidos, respetando el límite 0–100. Implementación en `ios-app-native/Sources/NativeTifloLector.swift`.
 - Se añadió una prueba de regresión a `ios-app-native/tests/reader-phase-two-contract.test.mjs` para impedir que vuelvan las acciones de salto del 10 %.
 - Estado B02: **implementado en código, pendiente de su validación conjunta**. Los demás requisitos de fase 2 siguen pendientes.
+
+## K. Avances de la fase 2 — controles, marcas y temporizador
+
+Cambios implementados en código (pendientes de validar conjuntamente en TestFlight):
+
+- B01: el botón Reproducir/Pausar incluye acciones ajustables con VoiceOver: deslizar hacia arriba avanza un minuto, deslizar hacia abajo retrocede un minuto. En audio salta 60 segundos; en texto estima el desplazamiento según la longitud del documento y la velocidad de voz. Se mantienen los controles de avance existentes para quien no utilice VoiceOver.
+- B04: acción de toque mágico en la pantalla de lectura, restringida a pausar o reanudar la sesión actual cuando corresponda; no se da orden de iniciar otra reproducción.
+- B08: el diálogo para eliminar un documento indica su título y advierte que la operación no se puede deshacer.
+- B09: las marcas de texto dentro del libro muestran un fragmento contextual además del porcentaje, en lugar de limitarse a un número.
+- Selector de modo de navegación (bloque, párrafo, frase, página y encabezado), botones Unidad anterior/siguiente y acceso a marcas junto a los controles principales.
+- Temporizador: cuenta con plazo absoluto mientras se reproduce, de modo que el cambio de pista no reinicia automáticamente el tiempo restante; al pausar o detener se cancela la cuenta, y los cambios expresos del intervalo inician una nueva.
+- Se han añadido pruebas automatizadas de regresión para estos contratos.
+
+**Aún no cerrado:** comprobar las compilaciones automáticas de los cambios actuales; persistencia de marcas/posición en todos los formatos; ampliar la estructura de navegación de DAISY según sus metadatos reales; ensayo funcional global con VoiceOver al finalizar las fases. No dar por finalizada la fase 2 por esta anotación.

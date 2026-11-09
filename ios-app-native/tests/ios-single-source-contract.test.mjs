@@ -21,11 +21,13 @@ test('No hay rutas de construcción iOS híbridas ni proyectos SwiftUI paralelos
  assert.ok(mobile.scripts['sync:android']);
  assert.ok(mobile.dependencies['@tifloacosta/ios-native']); // plugin legacy, no segundo app
 });
-test('El mismo proyecto main compila y se envía a TestFlight', () => {
+test('El proyecto main compila automáticamente; TestFlight se ejecuta solo a petición expresa', () => {
  const build=get('.github/workflows/ios-native-swiftui-build.yml');
  const release=get('.github/workflows/ios-native-testflight-upload.yml');
  assert.match(build,/branches: \[main\]/);
- assert.match(release,/branches: \[main\]/);
+ assert.match(release,/workflow_dispatch:/);
+ assert.doesNotMatch(release,/^\s+push:/m);
+ assert.doesNotMatch(release,/branches: \[main\]/);
  assert.match(build,/ios-app-native\/tests\/\*\.test\.mjs/);
  assert.match(release,/ios-app-native\/tests\/\*\.test\.mjs/);
  assert.match(release,/verify-native-testflight\.mjs/);

@@ -69,14 +69,14 @@ test('Botón Reproducir usa el modo elegido para los gestos y mantiene doble toq
   assert.match(reader, /\.accessibilityAdjustableAction \{ direction in/);
   assert.match(reader, /case \.increment: moveUnit\(1\)/);
   assert.match(reader, /case \.decrement: moveUnit\(-1\)/);
-  assert.match(reader, /if navigationUnit == 5 \{/);
-  assert.match(reader, /if navigationUnit == 6 \{/);
+  assert.match(reader, /if unit == 5 \{/);
+  assert.match(reader, /if unit == 6 \{/);
   assert.match(reader, /speech\.isPlaying \? pausePlayback\(\) : play\(\)/);
 });
 test('Toque mágico solo controla la reproducción actual', () => {
   assert.match(reader, /\.accessibilityAction\(\.magicTap\)/);
-  assert.match(reader, /if speech\.isPlaying \{ pausePlayback\(\) \}/);
-  assert.match(reader, /else if speech\.isPaused \{ play\(\) \}/);
+  assert.match(reader, /if speech\.isPlaying\s*\{\s*pausePlayback\(\)/);
+  assert.match(reader, /else if speech\.isPaused\s*\{\s*speech\.resume\(\)/);
 });
 test('Marcas incluyen contexto y borrado anuncia el título exacto', () => {
   assert.match(reader, /private func bookmarkDescription\(at percent: Int\)/);
@@ -233,7 +233,7 @@ test('HTML y EPUB retienen enlaces estructurados sin desplazar los marcadores', 
   assert.match(formats, /offset: baseOffset \+ link\.offset/);
   assert.match(reader, /var textLinks: \[NativeReaderTextLink\]\? = nil/);
   assert.match(reader, /textLinks: payload\.textLinks/);
-  assert.match(reader, /if navigationUnit == 8/);
+  assert.match(reader, /if unit == 8/);
   assert.match(reader, /\(latest\.textLinks \?\? \[\]\)\.map/);
 });
 
@@ -242,7 +242,7 @@ test('Un solo control de reproducción navega por tiempo configurable y estructu
   assert.match(reader, /title: "Intervalo de tiempo"/);
   assert.match(reader, /timeStepSeconds = \[30, 60, 120, 300\]/);
   assert.match(reader, /TimeInterval\(direction \* timeStep\)/);
-  assert.match(reader, /navigationUnit == 9 \|\| navigationUnit == 10/);
+  assert.match(reader, /unit == 9 \|\| unit == 10/);
   assert.match(reader, /moveDaisyPoint\(direction, kind:/);
   assert.match(reader, /"Página DAISY"/);
   assert.match(reader, /"Referencia DAISY"/);

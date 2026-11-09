@@ -245,3 +245,13 @@ Cambios implementados en código (pendientes de validar conjuntamente en TestFli
 - Se añadió prueba automatizada de contrato para persistencia y reanudación en segundos.
 - **Limitación de verificación:** las ejecuciones de GitHub Actions 42672038883, 42672161133 y 42672194430 aparecen como «failure», pero la API devuelve **cero trabajos** en sus registros, por lo que no ofrecen mensajes de compilador ni pruebas ejecutadas. No se consideran pruebas de código fallidas ni tampoco compilaciones aprobadas. Se requiere una ejecución de CI que efectivamente inicie sus trabajos.
 - **Estado:** fase 2 continúa técnicamente abierta. No se debe afirmar que el último conjunto de cambios compila hasta disponer de un resultado positivo de CI. La validación manual de audio, marcas, navegación y VoiceOver permanece reservada a la prueba final conjunta.
+
+## R. Continuación fase 2: posiciones y marcas de audio — 9 de noviembre de 2026
+
+- Se corrigieron las pruebas NCX que todavía comprobaban el modelo anterior, después de añadir entradas de página y referencias especiales.
+- Se incorporó la persistencia opcional de `lastAudioSeconds` para conservar el segundo real de escucha, además de la pista y el porcentaje. Se mantiene la lectura de bibliotecas con datos anteriores.
+- Se añadió recuperación de segundos al reproducir desde la biblioteca y al reabrir un documento, evitando que esa restauración se repita después de un salto manual de capítulo.
+- Las marcas de audio ahora conservan `seconds` como dato opcional; una marca nueva puede llevar al segundo exacto de la pista, mientras las marcas antiguas continúan utilizando su porcentaje.
+- Añadidas pruebas de contrato para estos comportamientos.
+- Las ejecuciones recientes de GitHub Actions 42672038883, 42672161133 y 42672194430 finalizaron con fallo pero **cero trabajos registrados** por la API. Las ejecuciones 42672541865 y 42672568956 todavía aparecían en cola sin trabajos al consultar. No hay evidencia suficiente para atribuirlo al código ni para confirmar compilación de los cambios más recientes.
+- **Estado:** funcionalidad implementada a nivel de fuente y pruebas añadidas; compilación actual pendiente, validación real diferida. No declarar la fase 2 cerrada mientras no se superen estas comprobaciones.

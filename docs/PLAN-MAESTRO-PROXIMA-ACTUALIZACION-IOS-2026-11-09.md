@@ -3,7 +3,7 @@
 Estado: documento de recuperación y consolidación de acuerdos.
 Fecha de consolidación: 9 de noviembre de 2026.
 Propietario de las decisiones funcionales: Tony Acosta — TifloAcosta.
-Alcance de desarrollo vigente: primero iOS; Android queda expresamente para después de cerrar iOS.
+Alcance de desarrollo vigente: exclusivamente iOS. Android no se tocará hasta que la versión definitiva que incorpore TODAS las mejoras de iOS esté publicada en App Store y disponible para todos los usuarios, no solamente enviada a revisión, aprobada o instalada por testers.
 No sustituir este documento por resúmenes de fases. Toda reducción, sustitución o retirada de requisitos requiere decisión explícita del usuario.
 
 ## A. Veintiuna propuestas aceptadas el 8 de noviembre de 2026
@@ -108,14 +108,16 @@ Fase 5. Búsqueda y ayudas de lectura: búsqueda contextual, diccionario, estad�
 Fase 6. Vídeos: continuar viendo, ver después, canales seguidos, búsquedas dentro de un canal, novedades, OAuth opcional.
 Fase 7. Pódcast, Actualidad y Recursos: continuar escuchando, descargas, reproducción continua, favoritos, lectura posterior, filtros, historial y enlaces.
 Fase 8. Idiomas, traducción bajo demanda, Siri/Atajos, notificaciones y preferencias de verbosidad.
-Fase 9. Diagnóstico de accesibilidad, envío de incidencias, número de versión, regresiones y prueba integral con VoiceOver; preparar candidata iOS para TestFlight y posteriormente App Store.
+Fase 9. Diagnóstico de accesibilidad, envío de incidencias, número de versión y regresiones técnicas automatizadas. Cuando TODAS las fases de iOS estén implementadas, preparar UNA versión candidata integrada para realizar las pruebas funcionales conjuntas en TestFlight, corregir las incidencias detectadas y después publicar la versión definitiva en App Store.
 
-No iniciar Android hasta el cierre de iOS. Los cambios específicos de Android se planificarán entonces, respetando el funcionamiento que ya sea correcto en esa plataforma.
+No iniciar trabajos en Android hasta que la versión final de iOS con TODAS las mejoras esté publicada en la App Store y disponible para todos los usuarios. No basta con completar el desarrollo, aprobar las pruebas, subir a TestFlight o conseguir la aprobación de Apple.
 
 ## E. Reglas de preservación y seguimiento
 
 - Marcar cada requisito con: pendiente, en desarrollo, implementado técnicamente, validado por usuario y publicado.
 - No considerar «implementado» igual que «probado en iPhone» ni «publicado en App Store».
+- No pedir pruebas manuales parciales ni pruebas de usuario fase por fase en TestFlight. Se realizarán las pruebas técnicas de integración y compilación durante el desarrollo; la prueba práctica en TestFlight tendrá lugar al terminar TODAS las fases de iOS.
+- No iniciar Android ni modificar su código, canal de pruebas o versión publicada hasta confirmar que la actualización definitiva y completa de iOS está disponible para todos los usuarios de App Store.
 - Conservar este documento bajo control de versiones en GitHub y actualizarlo al aceptar nuevas decisiones.
 - Antes de cerrar cada fase, contrastar todos los puntos B01–B11, A01–A21 y C correspondientes; no abandonar requisitos al reagrupar fases.
 - Mantener intactas las bibliotecas de usuarios y respetar la configuración existente al actualizar la aplicación.
@@ -131,8 +133,17 @@ Estado: **en desarrollo, pendiente de compilación definitiva y verificación en
 - Se registra localmente la fecha de la última descarga correcta, además del número de recursos, vídeos y noticias recibidos.
 - Añadidos botones «Actualizar recursos» y «Actualizar novedades» visibles siempre, con estados de carga, mensajes y anuncio para VoiceOver.
 - Añadidas pruebas de contrato `ios-app-native/tests/catalog-sync-phase-one.test.mjs` para mantener estas garantías y la presencia de Píldoras 25 en los dos idiomas.
-- Pendiente: revisar resultado de la compilación nativa en el simulador, probar físicamente en iPhone con VoiceOver y verificar la respuesta efectiva del dominio público.
+- Pendiente: revisar resultado de la compilación nativa en el simulador y verificar la respuesta efectiva del dominio público. La prueba funcional en iPhone con VoiceOver se hará conjuntamente con el resto de las fases en una versión integrada de TestFlight.
 - Pendiente: revisar la coherencia lingüística de todos los mensajes y las acciones de actualización, y comprobar que los errores se expliquen de manera fácil de comprender.
 - Android no ha sido modificado.
 
-No distribuir una versión pública basándose únicamente en estas comprobaciones de código. Se precisa validación de usuario antes de cerrar la fase.
+No distribuir una versión pública basándose únicamente en estas comprobaciones de código. Registrar por separado las pruebas técnicas por fase; la validación manual del usuario y de VoiceOver se realizará de forma conjunta en TestFlight cuando terminen todas las fases de iOS.
+
+## G. Decisiones de publicación y pruebas, ratificadas por el usuario el 9 de noviembre de 2026
+
+1. **Único sistema en desarrollo:** iOS, hasta terminar la actualización importante completa.
+2. **Sin pruebas manuales fase por fase:** se avanzará por todas las fases realizando internamente comprobaciones de código, integración y compilación; el usuario no probará cada función individualmente en TestFlight durante el desarrollo.
+3. **TestFlight solo después de todas las fases:** preparar entonces una versión candidata integrada para probar todas las mejoras juntas; corregir las incidencias detectadas y repetir las pruebas integrales necesarias.
+4. **Publicación final:** distribuir a los usuarios de App Store únicamente la versión definitiva de iOS que haya superado la validación conjunta.
+5. **Bloqueo de Android:** no realizar cambios ni iniciar su siguiente actualización hasta que la versión definitiva de iOS, con todas las mejoras, esté efectivamente instalada o disponible para la totalidad de usuarios de la App Store. La confirmación se hará con el estado de distribución pública, sin asumir que las actualizaciones automáticas se hayan instalado de inmediato en cada dispositivo.
+6. **Automatización de publicación:** las compilaciones técnicas pueden ejecutarse durante el desarrollo, pero ningún envío automático a TestFlight ni a App Store debe tratarse como autorización para una prueba parcial o publicación. Cualquier envío pendiente anterior deberá verificarse por separado, sin usarlo como candidata de esta actualización.

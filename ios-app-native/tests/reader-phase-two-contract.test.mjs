@@ -147,7 +147,8 @@ test('DAISY 3 admite un índice NCX con jerarquía y fragmentos de audio', () =>
   assert.match(ncx, /case "content":/);
   assert.match(ncx, /XMLParser\(data: data\)/);
   assert.match(formats, /NativeDaisyNCX\.parse\(ncxData\)/);
-  assert.match(formats, /if isDaisy, daisyNavigation\.isEmpty/);
+  assert.match(formats, /if isDaisy,\s*let ncx/);
+  assert.match(formats, /if !daisyNavigation\.contains\(where:/);
   assert.match(formats, /daisyAudio\(in: xml, fragment: parts\.count > 1/);
 });
 

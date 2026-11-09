@@ -1473,11 +1473,11 @@ struct NativeReadingScreen: View {
             speech.stop()
         }
         .accessibilityAction(named: Text("Añadir marca")) { addBookmark() }
-        .accessibilityAction(named: Text("Avanzar diez por ciento")) {
-            move(to: min(100, currentPercent + 10))
+        .accessibilityAction(named: Text("Avanzar cinco por ciento")) {
+            move(to: min(100, currentPercent + 5))
         }
-        .accessibilityAction(named: Text("Retroceder diez por ciento")) {
-            move(to: max(0, currentPercent - 10))
+        .accessibilityAction(named: Text("Retroceder cinco por ciento")) {
+            move(to: max(0, currentPercent - 5))
         }
     }
 }

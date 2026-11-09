@@ -1267,6 +1267,7 @@ private struct NativeReaderTextLayout {
     let pageStarts: [Int]
     let headingStarts: [Int]
     let chapterStarts: [Int]
+    let linkStarts: [Int]
     let namedHeadings: [NativeReaderNavigationPoint]
     let namedPages: [NativeReaderNavigationPoint]
     let hasRealPages: Bool
@@ -1337,6 +1338,15 @@ private struct NativeReaderTextLayout {
         pageStarts = Array(Set((pages.count > 1 ? pages : offsets) + [0, totalCharacters])).sorted()
         headingStarts = headings.count > 1 ? Array(Set(headings)).sorted() : []
         chapterStarts = Array(Set(chapters)).sorted()
+        // Detect only URLs that remain visible in the extracted text. These
+        // offsets share the same Character coordinate system as readingOffset.
+        let urlPattern = #"https?://[^\s<>\\"']+"#
+        let urlRegex = try? NSRegularExpression(pattern: urlPattern, options: [.caseInsensitive])
+        let fullRange = NSRange(body.startIndex..<body.endIndex, in: body)
+        linkStarts = (urlRegex?.matches(in: body, range: fullRange) ?? []).compactMap { match in
+            guard let range = Range(match.range, in: body) else { return nil }
+            return body.distance(from: body.startIndex, to: range.lowerBound)
+        }
         namedHeadings = headingEntries
         hasRealPages = !pageEntries.isEmpty
         namedPages = pageEntries.isEmpty
@@ -1347,6 +1357,7 @@ private struct NativeReaderTextLayout {
     func nearbyOffset(_ offset: Int, direction: Int, unit: Int) -> Int? {
         let boundaries: [Int]
         switch unit {
+        case 8: boundaries = linkStarts
         case 7: boundaries = chapterStarts
         case 4: boundaries = headingStarts
         case 3: boundaries = pageStarts
@@ -1459,6 +1470,7 @@ struct NativeReadingScreen: View {
         }
         options.append((5, "Tiempo"))
         if latest.hasBookmarks { options.append((6, "Marcas")) }
+        if !textLayout.linkStarts.isEmpty { options.append((8, "Enlaces")) }
         if !textLayout.chapterStarts.isEmpty ||
             (latest.daisyNavigation ?? []).contains(where: { $0.kind != "Página" && $0.kind != "Referencia" }) {
             options.append((7, "Capítulo"))

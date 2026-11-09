@@ -75,12 +75,21 @@ final class NativeCatalogStore: ObservableObject {
            let snapshot = try? JSONDecoder().decode(NativeCatalogSnapshot.self, from: data),
            snapshot.schemaVersion == 1 {
             apply(snapshot)
-            catalogGeneratedAt = snapshot.generatedAt.flatMap { ISO8601DateFormatter().date(from: $0) }
+            catalogGeneratedAt = Self.parsePublicationDate(snapshot.generatedAt)
             if let text = try? String(contentsOf: updateDateURL, encoding: .utf8),
                let timestamp = TimeInterval(text) {
                 lastUpdated = Date(timeIntervalSince1970: timestamp)
             }
         }
+    }
+
+    private static func parsePublicationDate(_ value: String?) -> Date? {
+        guard let value else { return nil }
+        let fractional = ISO8601DateFormatter()
+        fractional.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let standard = ISO8601DateFormatter()
+        standard.formatOptions = [.withInternetDateTime]
+        return fractional.date(from: value) ?? standard.date(from: value)
     }
 
     private func apply(_ snapshot: NativeCatalogSnapshot) {
@@ -132,7 +141,7 @@ final class NativeCatalogStore: ObservableObject {
                                   userInfo: [NSLocalizedDescriptionKey: "El catálogo no contiene recursos"])
                 }
                 guard let rawDate = snapshot.generatedAt,
-                      let publicationDate = ISO8601DateFormatter().date(from: rawDate) else {
+                      let publicationDate = Self.parsePublicationDate(rawDate) else {
                     throw NSError(domain: "TifloAcosta.Catalog", code: 3,
                                   userInfo: [NSLocalizedDescriptionKey: "El catálogo no indica fecha de publicación válida"])
                 }

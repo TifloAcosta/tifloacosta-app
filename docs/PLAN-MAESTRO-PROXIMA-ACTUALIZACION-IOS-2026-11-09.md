@@ -172,3 +172,9 @@ No distribuir una versión pública basándose únicamente en estas comprobacion
 - El dominio público `https://tifloacosta.com/mobile-content.json` no ha podido verificarse desde las herramientas de acceso exterior de esta sesión. La actualización real y lectura con VoiceOver en dispositivo quedan incluidas expresamente en la futura prueba integral. No se afirma que la incidencia de la versión pública anterior esté solucionada en iPhone.
 
 **Siguiente fase:** fase 2, controles y fiabilidad de TifloLector (B01, B02, B04, B08, B09, B11, persistencia, navegación y temporizador). Avanzar en implementación sin esperar pruebas parciales del usuario.
+
+## J. Inicio de fase 2 — controles y navegación de TifloLector
+
+- Requisito **B02**: cambio del salto porcentual del rotor de VoiceOver de diez a **cinco por ciento** en ambos sentidos, respetando el límite 0–100. Implementación en `ios-app-native/Sources/NativeTifloLector.swift`.
+- Se añadió una prueba de regresión a `ios-app-native/tests/reader-phase-two-contract.test.mjs` para impedir que vuelvan las acciones de salto del 10 %.
+- Estado B02: **implementado en código, pendiente de su validación conjunta**. Los demás requisitos de fase 2 siguen pendientes.

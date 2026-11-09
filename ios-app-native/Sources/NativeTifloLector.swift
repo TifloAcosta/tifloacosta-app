@@ -17,6 +17,7 @@ struct NativeReaderPreferences: Codable, Hashable {
 struct NativeAudioBookmark: Codable, Hashable {
     let track: Int
     let percent: Int
+    var seconds: TimeInterval? = nil
 }
 
 struct NativeDaisyNavigationPoint: Codable, Hashable, Identifiable {
@@ -205,11 +206,19 @@ final class NativeReaderLibrary: ObservableObject {
         try? save()
     }
 
-    func addAudioBookmark(_ document: NativeReadingDocument, track: Int, percent: Int) {
+    func addAudioBookmark(_ document: NativeReadingDocument, track: Int, percent: Int,
+                          seconds: TimeInterval? = nil) {
         guard let i = documents.firstIndex(where: { $0.id == document.id }), track >= 0 else { return }
-        let mark = NativeAudioBookmark(track: track, percent: max(0, min(100, percent)))
+        let validSeconds = seconds.flatMap { $0.isFinite ? max(0, $0) : nil }
+        let mark = NativeAudioBookmark(track: track, percent: max(0, min(100, percent)),
+                                       seconds: validSeconds)
         var saved = documents[i].audioBookmarks ?? []
-        guard !saved.contains(mark) else { return }
+        guard !saved.contains(where: {
+            $0.track == track &&
+            (validSeconds != nil && $0.seconds != nil
+                ? abs($0.seconds! - validSeconds!) < 0.5
+                : $0.percent == mark.percent)
+        }) else { return }
         saved.append(mark)
         documents[i].audioBookmarks = saved.sorted {
             $0.track == $1.track ? $0.percent < $1.percent : $0.track < $1.track
@@ -1260,7 +1269,8 @@ struct NativeReadingScreen: View {
             library.addBookmark(document, at: currentPercent)
             actionMessage = "Marca guardada en \(currentPercent) por ciento."
         } else {
-            library.addAudioBookmark(document, track: trackIndex, percent: currentPercent)
+            library.addAudioBookmark(document, track: trackIndex, percent: currentPercent,
+                                     seconds: speech.hasAudio ? speech.audioElapsed : nil)
             actionMessage = "Marca guardada en la pista \(trackIndex + 1), \(currentPercent) por ciento."
         }
     }
@@ -1525,8 +1535,13 @@ struct NativeReadingScreen: View {
                         Button("Ir a pista \(mark.track + 1), \(mark.percent) por ciento") {
                             trackIndex = mark.track
                             currentPercent = mark.percent
+                            didRestoreAudioPosition = true
                             readingOffset = 0
                             playTrack()
+                            if speech.hasAudio, let seconds = mark.seconds {
+                                speech.seek(toSeconds: seconds)
+                                currentPercent = speech.audioPercent
+                            }
                             persistPosition()
                             applySleepTimer()
                             showSavedMarks = false

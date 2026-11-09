@@ -751,6 +751,10 @@ struct NativeReaderLibraryScreen: View {
                 documentToDelete = nil
             }
             Button("Cancelar", role: .cancel) { documentToDelete = nil }
+        } message: {
+            if let doc = documentToDelete {
+                Text("Vas a eliminar «\(doc.title)». Esta operación no se puede deshacer.")
+            }
         }
         .alert("No se pudo realizar la operación", isPresented: Binding(
             get: { importError != nil },
@@ -1097,6 +1101,37 @@ struct NativeReadingScreen: View {
         jump(to: next)
     }
 
+    private func bookmarkDescription(at percent: Int) -> String {
+        let text = latest.body
+        guard !text.isEmpty else { return "\(percent) por ciento" }
+        let characters = Array(text)
+        let offset = min(characters.count - 1, max(0, Int(Double(characters.count) * Double(percent) / 100.0)))
+        let fragmentStart = (0..<offset).reversed().first {
+            ".!?\n".contains(characters[$0])
+        }.map { $0 + 1 } ?? 0
+        var start = fragmentStart
+        while start < characters.count && characters[start].isWhitespace { start += 1 }
+        let excerpt = String(characters[start..<min(characters.count, start + 140)])
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        return excerpt.isEmpty ? "\(percent) por ciento" : "\(excerpt), \(percent) por ciento"
+    }
+
+    private func skipReading(_ direction: Int) {
+        if speech.hasAudio {
+            speech.skip(seconds: TimeInterval(direction * 60))
+            currentPercent = speech.audioPercent
+            persistPosition()
+            actionMessage = "Posición: \(currentPercent) por ciento."
+        } else {
+            guard !document.body.isEmpty else { return }
+            let charactersPerMinute = Double(textLayout.totalCharacters) /
+                Double(max(1, wordCount)) * 165.0 * speed
+            let offset = readingOffset + direction * max(1, Int(charactersPerMinute))
+            jump(to: offset)
+            actionMessage = "Posición: \(currentPercent) por ciento."
+        }
+    }
+
     private func addBookmark() {
         if tracks.isEmpty {
             library.addBookmark(document, at: currentPercent)
@@ -1156,6 +1191,15 @@ struct NativeReadingScreen: View {
         ) {
             Button(speech.isPlaying ? "Pausar" : "Reproducir") {
                 speech.isPlaying ? pausePlayback() : play()
+            }
+            .accessibilityHint("Doble toque para reproducir o pausar. Desliza arriba para avanzar un minuto y abajo para retroceder un minuto.")
+            .accessibilityValue("\(currentPercent) por ciento")
+            .accessibilityAdjustableAction { direction in
+                switch direction {
+                case .increment: skipReading(1)
+                case .decrement: skipReading(-1)
+                @unknown default: break
+                }
             }
             Button("Detener") { stopPlayback() }
             Button("Audio") { showAudioSettings = true }
@@ -1368,7 +1412,7 @@ struct NativeReadingScreen: View {
                         Text("Esta obra todavía no tiene marcas.")
                     }
                     ForEach(latest.bookmarks, id: \.self) { percent in
-                        Button("Ir a \(percent) por ciento") {
+                        Button(bookmarkDescription(at: percent)) {
                             move(to: percent)
                             showSavedMarks = false
                         }
@@ -1471,6 +1515,10 @@ struct NativeReadingScreen: View {
         .onDisappear {
             persistPosition()
             speech.stop()
+        }
+        .accessibilityAction(.magicTap) {
+            if speech.isPlaying { pausePlayback() }
+            else if speech.isPaused { play() }
         }
         .accessibilityAction(named: Text("Añadir marca")) { addBookmark() }
         .accessibilityAction(named: Text("Avanzar cinco por ciento")) {

@@ -381,6 +381,34 @@ final class NativeReaderLibrary: ObservableObject {
         try? save()
     }
 
+    /// Acciones en lote: una única escritura de la biblioteca por operación.
+    @discardableResult
+    func moveDocuments(withIDs ids: Set<UUID>, to folder: String?) -> Int {
+        if let folder, !folders.contains(folder) { return 0 }
+        var changed = 0
+        for index in documents.indices where ids.contains(documents[index].id) {
+            if documents[index].folderName != folder {
+                documents[index].folderName = folder
+                changed += 1
+            }
+        }
+        if changed > 0 { try? save() }
+        return changed
+    }
+
+    @discardableResult
+    func markFavorites(withIDs ids: Set<UUID>, favorite: Bool) -> Int {
+        var changed = 0
+        for index in documents.indices where ids.contains(documents[index].id) {
+            if (documents[index].isFavorite ?? false) != favorite {
+                documents[index].isFavorite = favorite
+                changed += 1
+            }
+        }
+        if changed > 0 { try? save() }
+        return changed
+    }
+
     func deleteFolder(_ folder: String) {
         guard folders.contains(folder) else { return }
         // Removing a folder never deletes the books inside it.
@@ -770,6 +798,11 @@ struct NativeReaderLibraryScreen: View {
     @State private var folderToDelete: String?
     @State private var folderForDocument: NativeReadingDocument?
     @State private var documentToConfigure: NativeReadingDocument?
+    @State private var selectionMode = false
+    @State private var selectedDocumentIDs: Set<UUID> = []
+    @State private var showBulkMove = false
+    @State private var selectionFeedback: String?
+
     @AppStorage("native-reading-folder-filter") private var selectedFolder = ""
     @AppStorage("native-reading-filter") private var filterIndex = 0
     @AppStorage("native-reading-sort") private var sortIndex = 0
@@ -825,6 +858,24 @@ struct NativeReaderLibraryScreen: View {
         default: items.sort { $0.importedAt > $1.importedAt }
         }
         return items
+    }
+
+    private var visibleSelection: Set<UUID> {
+        selectedDocumentIDs.intersection(Set(shownDocuments.map(\.id)))
+    }
+
+    private func toggleSelection(_ id: UUID) {
+        if selectedDocumentIDs.contains(id) {
+            selectedDocumentIDs.remove(id)
+        } else {
+            selectedDocumentIDs.insert(id)
+        }
+    }
+
+    private func finishSelection(_ message: String? = nil) {
+        selectedDocumentIDs.removeAll()
+        selectionMode = false
+        selectionFeedback = message
     }
 
     private func play(_ document: NativeReadingDocument) {
@@ -914,8 +965,46 @@ struct NativeReaderLibraryScreen: View {
                 }
             }
             Section("Mi biblioteca") {
+                Button(selectionMode ? "Terminar selección" : "Selección") {
+                    if selectionMode {
+                        finishSelection()
+                    } else {
+                        selectedDocumentIDs.removeAll()
+                        selectionMode = true
+                    }
+                }
+                if selectionMode {
+                    Text("\(visibleSelection.count) documentos seleccionados")
+                        .accessibilityAddTraits(.updatesFrequently)
+                    Button("Seleccionar todos los visibles") {
+                        selectedDocumentIDs.formUnion(shownDocuments.map(\.id))
+                    }
+                    Button("Deseleccionar todos") { selectedDocumentIDs.removeAll() }
+                    Button("Mover seleccionados a carpeta") { showBulkMove = true }
+                        .disabled(visibleSelection.isEmpty)
+                    Button("Añadir seleccionados a favoritos") {
+                        let count = library.markFavorites(withIDs: visibleSelection, favorite: true)
+                        finishSelection("\(count) documentos añadidos a favoritos.")
+                    }
+                    .disabled(visibleSelection.isEmpty)
+                    Button("Quitar seleccionados de favoritos") {
+                        let count = library.markFavorites(withIDs: visibleSelection, favorite: false)
+                        finishSelection("\(count) documentos retirados de favoritos.")
+                    }
+                    .disabled(visibleSelection.isEmpty)
+                }
                 if shownDocuments.isEmpty { Text("No hay documentos con el filtro actual.") }
                 ForEach(shownDocuments) { document in
+                    if selectionMode {
+                        Button {
+                            toggleSelection(document.id)
+                        } label: {
+                            Label(document.title, systemImage: selectedDocumentIDs.contains(document.id)
+                                  ? "checkmark.circle.fill" : "circle")
+                        }
+                        .accessibilityLabel("\(document.title), \(selectedDocumentIDs.contains(document.id) ? "seleccionado" : "no seleccionado")")
+                        .accessibilityHint("Doble toque para cambiar la selección de este documento.")
+                    } else {
                     NavigationLink {
                         NativeReadingScreen(document: document, speech: speech)
                     } label: { Text(document.title) }
@@ -946,6 +1035,7 @@ struct NativeReaderLibraryScreen: View {
                     .accessibilityAction(named: Text("Eliminar")) {
                         documentToDelete = document
                         confirmDeletion = true
+                    }
                     }
                 }
             }
@@ -1009,6 +1099,26 @@ struct NativeReaderLibraryScreen: View {
             Button("Cancelar", role: .cancel) {}
         } message: {
             Text("Crea una carpeta para organizar las obras sin mover ni borrar archivos del sistema.")
+        }
+        .confirmationDialog("Mover documentos seleccionados",
+                            isPresented: $showBulkMove, titleVisibility: .visible) {
+            Button("Sin carpeta") {
+                let count = library.moveDocuments(withIDs: visibleSelection, to: nil)
+                finishSelection("\(count) documentos movidos fuera de las carpetas.")
+            }
+            ForEach(library.folders, id: \.self) { folder in
+                Button(folder) {
+                    let count = library.moveDocuments(withIDs: visibleSelection, to: folder)
+                    finishSelection("\(count) documentos movidos a \(folder).")
+                }
+            }
+            Button("Cancelar", role: .cancel) {}
+        }
+        .alert("Selección de documentos", isPresented: Binding(
+            get: { selectionFeedback != nil },
+            set: { if !$0 { selectionFeedback = nil } }
+        )) { Button("Aceptar") { selectionFeedback = nil } } message: {
+            Text(selectionFeedback ?? "")
         }
         .confirmationDialog("Mover a carpeta",
                             isPresented: Binding(

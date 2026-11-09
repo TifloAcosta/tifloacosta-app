@@ -150,7 +150,8 @@ final class NativeCatalogStore: ObservableObject {
                 }
                 candidate = (snapshot, data, endpoint.host ?? "servidor", publicationDate)
             } catch {
-                failures.append("\(endpoint.host ?? "servidor"): \(error.localizedDescription)")
+                let host = endpoint.host ?? "servidor"
+                failures.append(host + ": " + error.localizedDescription)
             }
         }
 

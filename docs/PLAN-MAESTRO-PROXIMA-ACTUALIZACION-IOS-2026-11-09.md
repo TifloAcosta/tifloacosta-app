@@ -264,3 +264,23 @@ Cambios implementados en código (pendientes de validar conjuntamente en TestFli
 - Se corrigió un defecto real en el lector: al pulsar Detener, ahora se persiste la posición exacta antes de destruir el reproductor de audio. Asimismo se guarda la posición de la pista anterior antes de cambiar de pista.
 - Añadida prueba de regresión de orden de guardado para evitar que Detener pierda los segundos de reproducción.
 - El resultado técnico de estas pruebas no sustituye las pruebas integrales de los formatos DAISY y VoiceOver que corresponden a la validación final conjunta.
+
+## T. Cierre de implementación de fase 2 — 9 de noviembre de 2026
+
+**Implementación funcional de la fase 2 completada en fuente.** El cierre técnico definitivo queda subordinado a que el último workflow de compilación y sus pruebas terminen correctamente. La prueba práctica de VoiceOver se mantiene en la validación integrada de todas las fases.
+
+Resumen de requisitos integrados:
+- B01: reproducir/pausar con doble toque y navegación ajustable desde el mismo control, avance y retroceso estimados de un minuto; alternativa accesible en pantalla.
+- B02: saltos porcentuales del cinco por ciento.
+- B04: toque mágico reservado a la sesión de lectura activa, sin iniciar audio externo desde la acción del lector.
+- B08: confirmación de eliminación que menciona expresamente el título.
+- B09: marcas con fragmento contextual. Las nuevas marcas de texto se guardan mediante su desplazamiento exacto en caracteres, no únicamente mediante porcentajes; las marcas anteriores siguen siendo compatibles y visibles.
+- B11: índice DAISY 2 NCC, navegación DAISY 3 NCX con niveles, páginas y referencias; vínculos SMIL con posición interna en segundos cuando está disponible. Se conserva el orden de capítulos padre-hijo. Cuando hay NCC y NCX, se combinan las entradas no duplicadas para no perder páginas y referencias. Los casos no representados por metadatos reconocibles se considerarán límites de formato, no se inventarán destinos.
+- Posiciones de lectura de texto persistidas en caracteres; posiciones de audio persistidas en segundos, por pista. Marcas de audio en segundos y compatibilidad con marcas antiguas.
+- Temporizador: se conserva el plazo al cambiar de pista, se cancela al pausar o detener, y se guarda posición antes de apagar automáticamente la reproducción.
+- Selector de navegación y marcas junto a controles principales; eliminación de la antigua sección global de marcas para tratarlas dentro de cada libro.
+- Pruebas de regresión ampliadas: controles accesibles, persistencia, temporizador, DAISY y orden NCX.
+
+**Verificación:** las pruebas de contrato realizadas durante la fase detectaron expectativas antiguas y se actualizaron. La ejecución 42673082854 superó las pruebas automáticas y finalizó correctamente con compilación para simulador. Tras los últimos cambios de marcas, NCX y apagado, la ejecución de CI 42677632211 debe confirmarse satisfactoria para dar por cerrado el bloque técnico. Las validaciones con archivos DAISY diversos y el manejo con VoiceOver se harán en la prueba integral convenida.
+
+**Siguiente etapa, tras confirmar CI:** fase 3 — biblioteca, Guardar, exportaciones, DAISY generado, nombres originales y copias de seguridad.

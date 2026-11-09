@@ -950,37 +950,6 @@ struct NativeReaderLibraryScreen: View {
                 Button("Importar", systemImage: "square.and.arrow.down") {
                     importSourcesPresented = true
                 }
-                NavigationLink("Ajustes") { NativeReaderSettingsScreen() }
-                Button("Exportar copia de seguridad") {
-                    do {
-                        let url = try library.exportBackup()
-                        NativeShare.present(url: url)
-                    } catch {
-                        importError = "No se pudo crear la copia de seguridad: \(error.localizedDescription)"
-                    }
-                }
-                .accessibilityHint("Incluye documentos, posiciones, marcas, carpetas y archivos guardados.")
-                Button("Restaurar copia de seguridad") { restorePresented = true }
-                    .accessibilityHint("Importa los libros que faltan sin sustituir los que ya están en la biblioteca.")
-            }
-            Section("Filtrar y ordenar") {
-                NativeAdjustableChoice(
-                    title: "Filtrar documentos",
-                    choices: ["Todos", "Textos", "PDF", "EPUB", "Office", "Audio y DAISY",
-                              "Con marcas", "Favoritos", "Importados hoy",
-                              "Últimos siete días", "Último mes"],
-                    selectedIndex: $filterIndex
-                )
-                NativeAdjustableChoice(
-                    title: "Ordenar",
-                    choices: ["Más recientes", "Más antiguos", "Título A a Z",
-                              "Título Z a A", "Formato", "Último abierto"],
-                    selectedIndex: $sortIndex
-                )
-            }
-            Section("Carpetas") {
-                Button("Carpeta: \(selectedFolderLabel)") { showFolderPicker = true }
-                    .accessibilityHint("Abre el listado de carpetas y permite crear o eliminar carpetas.")
             }
             Section("Mi biblioteca") {
                 Button(selectionMode ? "Terminar selección" : "Selección") {
@@ -1057,6 +1026,40 @@ struct NativeReaderLibraryScreen: View {
                     }
                     }
                 }
+            }
+            // Los controles de gestión quedan después del último libro.
+            Section("Filtrar y ordenar") {
+                NativeAdjustableChoice(
+                    title: "Filtrar documentos",
+                    choices: ["Todos", "Textos", "PDF", "EPUB", "Office", "Audio y DAISY",
+                              "Con marcas", "Favoritos", "Importados hoy",
+                              "Últimos siete días", "Último mes"],
+                    selectedIndex: $filterIndex
+                )
+                NativeAdjustableChoice(
+                    title: "Ordenar",
+                    choices: ["Más recientes", "Más antiguos", "Título A a Z",
+                              "Título Z a A", "Formato", "Último abierto"],
+                    selectedIndex: $sortIndex
+                )
+            }
+            Section("Carpetas") {
+                Button("Carpeta: \(selectedFolderLabel)") { showFolderPicker = true }
+                    .accessibilityHint("Abre el listado de carpetas y permite crear o eliminar carpetas.")
+            }
+            Section("Más opciones") {
+                NavigationLink("Ajustes") { NativeReaderSettingsScreen() }
+                Button("Exportar copia de seguridad") {
+                    do {
+                        let url = try library.exportBackup()
+                        NativeShare.present(url: url)
+                    } catch {
+                        importError = "No se pudo crear la copia de seguridad: \(error.localizedDescription)"
+                    }
+                }
+                .accessibilityHint("Incluye documentos, posiciones, marcas, carpetas y archivos guardados.")
+                Button("Restaurar copia de seguridad") { restorePresented = true }
+                    .accessibilityHint("Importa los libros que faltan sin sustituir los que ya están en la biblioteca.")
             }
         }
         .tifloScreenSurface()

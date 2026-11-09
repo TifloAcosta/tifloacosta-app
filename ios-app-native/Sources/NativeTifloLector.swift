@@ -1915,12 +1915,12 @@ struct NativeReadingScreen: View {
             Button(speech.isPlaying ? "Pausar" : "Reproducir") {
                 speech.isPlaying ? pausePlayback() : play()
             }
-            .accessibilityHint("Doble toque para reproducir o pausar. Desliza arriba para avanzar un minuto y abajo para retroceder un minuto.")
+            .accessibilityHint("Doble toque para reproducir o pausar. Desliza arriba o abajo para moverte según el modo de navegación seleccionado.")
             .accessibilityValue("\(currentPercent) por ciento")
             .accessibilityAdjustableAction { direction in
                 switch direction {
-                case .increment: skipReading(1)
-                case .decrement: skipReading(-1)
+                case .increment: moveUnit(1)
+                case .decrement: moveUnit(-1)
                 @unknown default: break
                 }
             }
@@ -1974,35 +1974,11 @@ struct NativeReadingScreen: View {
                 choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado", "Tiempo", "Marcas"],
                 selectedIndex: $navigationUnit
             )
-            HStack {
-                Button("Unidad anterior") { moveUnit(-1) }
-                    .accessibilityHint("Retrocede según el modo de navegación seleccionado.")
-                Button("Unidad siguiente") { moveUnit(1) }
-                    .accessibilityHint("Avanza según el modo de navegación seleccionado.")
-            }
-            .buttonStyle(.bordered)
-            .controlSize(.small)
             Button("Marcas guardadas") { showSavedMarks = true }
             Button("Añadir marca") { addBookmark() }
             Text(progressDescription)
                 .font(.footnote)
                 .accessibilityLabel(progressDescription)
-            if speech.hasAudio {
-                HStack(spacing: 12) {
-                    Button("Retroceder 30 segundos") {
-                        speech.skip(seconds: -30)
-                        currentPercent = speech.audioPercent
-                        persistPosition()
-                    }
-                    Button("Avanzar 30 segundos") {
-                        speech.skip(seconds: 30)
-                        currentPercent = speech.audioPercent
-                        persistPosition()
-                    }
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.small)
-            }
             NativeAdjustableChoice(
                 title: "Apagado automático",
                 choices: Self.sleepChoices,
@@ -2100,8 +2076,6 @@ struct NativeReadingScreen: View {
             if #available(iOS 18.0, *) {
                 Button("Traducir fragmento actual") { showTranslation = true }
             }
-            Button("Unidad anterior") { moveUnit(-1) }
-            Button("Unidad siguiente") { moveUnit(1) }
         }
         if tracks.count == 1, let track = tracks.first,
            let url = NativeReaderFormats.storedURL(for: track) {

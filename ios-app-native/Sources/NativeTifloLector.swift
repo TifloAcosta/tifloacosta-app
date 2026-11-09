@@ -1266,6 +1266,7 @@ private struct NativeReaderTextLayout {
     let sentenceStarts: [Int]
     let pageStarts: [Int]
     let headingStarts: [Int]
+    let chapterStarts: [Int]
     let namedHeadings: [NativeReaderNavigationPoint]
     let namedPages: [NativeReaderNavigationPoint]
     let hasRealPages: Bool
@@ -1308,6 +1309,7 @@ private struct NativeReaderTextLayout {
 
         var pages: [Int] = [0]
         var headings: [Int] = [0]
+        var chapters: [Int] = []
         var pageEntries: [NativeReaderNavigationPoint] = []
         var headingEntries: [NativeReaderNavigationPoint] = []
         var lineOffset = 0
@@ -1324,12 +1326,17 @@ private struct NativeReaderTextLayout {
                 headings.append(lineOffset)
                 headingEntries.append(.init(offset: lineOffset,
                     title: line.trimmingCharacters(in: .whitespaces)))
+                if normalized.range(of: #"^(capítulo\s+|capitulo\s+|#{1,2}\s+)"#,
+                                    options: .regularExpression) != nil {
+                    chapters.append(lineOffset)
+                }
             }
             lineOffset += line.count + 1
         }
         // Sin marcas de página explícitas, los fragmentos hacen de páginas virtuales.
         pageStarts = Array(Set((pages.count > 1 ? pages : offsets) + [0, totalCharacters])).sorted()
         headingStarts = headings.count > 1 ? Array(Set(headings)).sorted() : []
+        chapterStarts = Array(Set(chapters)).sorted()
         namedHeadings = headingEntries
         hasRealPages = !pageEntries.isEmpty
         namedPages = pageEntries.isEmpty
@@ -1340,6 +1347,7 @@ private struct NativeReaderTextLayout {
     func nearbyOffset(_ offset: Int, direction: Int, unit: Int) -> Int? {
         let boundaries: [Int]
         switch unit {
+        case 7: boundaries = chapterStarts
         case 4: boundaries = headingStarts
         case 3: boundaries = pageStarts
         case 2: boundaries = sentenceStarts
@@ -1443,6 +1451,31 @@ struct NativeReadingScreen: View {
     private var effectiveStrongText: Bool { latest.readerPreferences?.strongText ?? strongText }
     private var speed: Double { speeds[max(0, min(4, effectiveSpeedIndex))] }
     private var isAudioOnly: Bool { latest.body.isEmpty && !tracks.isEmpty }
+    private var navigationOptions: [(unit: Int, label: String)] {
+        var options: [(unit: Int, label: String)] = []
+        if !latest.body.isEmpty {
+            options += [(0, "Bloque"), (1, "Párrafo"), (2, "Frase"), (3, "Página")]
+            if !textLayout.headingStarts.isEmpty { options.append((4, "Encabezado")) }
+        }
+        options.append((5, "Tiempo"))
+        if latest.hasBookmarks { options.append((6, "Marcas")) }
+        if !textLayout.chapterStarts.isEmpty ||
+            (latest.daisyNavigation ?? []).contains(where: { $0.kind != "Página" && $0.kind != "Referencia" }) {
+            options.append((7, "Capítulo"))
+        }
+        return options
+    }
+
+    private var navigationSelection: Binding<Int> {
+        Binding(
+            get: { navigationOptions.firstIndex(where: { $0.unit == navigationUnit }) ?? 0 },
+            set: { index in
+                guard navigationOptions.indices.contains(index) else { return }
+                navigationUnit = navigationOptions[index].unit
+            }
+        )
+    }
+
     private var excerpt: String {
         guard !textLayout.fragments.isEmpty else { return "" }
         return textLayout.fragments[textLayout.fragmentIndex(for: readingOffset)]
@@ -1626,6 +1659,23 @@ struct NativeReadingScreen: View {
     }
 
     private func moveUnit(_ direction: Int) {
+        if navigationUnit == 7 && !tracks.isEmpty {
+            let points = (latest.daisyNavigation ?? []).filter { $0.kind != "Página" && $0.kind != "Referencia" }
+            let currentTime = speech.hasAudio ? speech.audioElapsed : 0
+            let candidates = points.filter { point in
+                if point.track != trackIndex {
+                    return direction > 0 ? point.track > trackIndex : point.track < trackIndex
+                }
+                guard let seconds = point.seconds else { return false }
+                return direction > 0 ? seconds > currentTime + 0.5 : seconds < currentTime - 0.5
+            }
+            guard let point = direction > 0 ? candidates.first : candidates.last else {
+                actionMessage = "No hay más capítulos en esa dirección."
+                return
+            }
+            jumpToDaisy(point)
+            return
+        }
         if navigationUnit == 5 {
             skipReading(direction)
             return
@@ -1971,8 +2021,8 @@ struct NativeReadingScreen: View {
             trackButtons
             NativeAdjustableChoice(
                 title: "Modo de navegación",
-                choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado", "Tiempo", "Marcas"],
-                selectedIndex: $navigationUnit
+                choices: navigationOptions.map(\.label),
+                selectedIndex: navigationSelection
             )
             Button("Marcas guardadas") { showSavedMarks = true }
             Button("Añadir marca") { addBookmark() }

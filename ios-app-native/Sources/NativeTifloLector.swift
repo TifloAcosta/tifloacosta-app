@@ -224,13 +224,13 @@ final class NativeReaderLibrary: ObservableObject {
                   !components.contains(where: { $0.isEmpty }) else {
                 throw NativeReaderFormatError.invalidArchive
             }
+            if entry.type == .directory { continue }
             let root = String(components[0])
             guard (components.count == 1 && ["documentos.json", "carpetas.json"].contains(root))
                 || (components.count >= 3 && ["ReaderMedia", "ReaderOriginals"].contains(root)
                     && UUID(uuidString: String(components[1])) != nil) else {
                 throw NativeReaderFormatError.invalidArchive
             }
-            if entry.type == .directory { continue }
             count += 1
             total += Int64(entry.uncompressedSize)
             guard count <= 10000, total <= 1_500_000_000 else {

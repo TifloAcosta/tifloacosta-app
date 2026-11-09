@@ -225,3 +225,14 @@ test('Enlaces visibles se recorren con el selector sin alterar el texto ni las p
   assert.match(reader, /case \.increment: moveUnit\(1\)/);
   assert.match(reader, /case \.decrement: moveUnit\(-1\)/);
 });
+
+test('HTML y EPUB retienen enlaces estructurados sin desplazar los marcadores', () => {
+  assert.match(formats, /private static func textLinks\(in html: String, extracted text: String\)/);
+  assert.match(formats, /textLinks = Self\.textLinks\(in: html, extracted: text\)/);
+  assert.match(formats, /textLinks \+= Self\.textLinks\(in: html, extracted: pageText\)/);
+  assert.match(formats, /offset: \$0\.offset \+ offset/);
+  assert.match(reader, /var textLinks: \[NativeReaderTextLink\]\? = nil/);
+  assert.match(reader, /textLinks: payload\.textLinks/);
+  assert.match(reader, /if navigationUnit == 8/);
+  assert.match(reader, /\(latest\.textLinks \?\? \[\]\)\.map/);
+});

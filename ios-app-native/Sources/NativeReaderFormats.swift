@@ -49,8 +49,9 @@ enum NativeReaderFormats {
 
     /// Conserva solo vínculos HTTPS/HTTP cuyo texto visible pueda ubicarse
     /// inequívocamente en el texto extraído. No reconstruye HTML ni altera offsets.
-    private static func textLinks(in html: String, extracted text: String) -> [NativeReaderTextLink] {
-        let pattern = #"<a\b[^>]*href\s*=\s*['\"](https?://[^'\"]+)['\"][^>]*>(.*?)</a>"#
+    private static func textLinks(in html: String, extracted text: String,
+                                  includeInternal: Bool = false) -> [NativeReaderTextLink] {
+        let pattern = #"<a\b[^>]*href\s*=\s*['\"]([^'\"]+)['\"][^>]*>(.*?)</a>"#
         guard let regex = try? NSRegularExpression(pattern: pattern,
                                                     options: [.caseInsensitive, .dotMatchesLineSeparators])
         else { return [] }
@@ -65,9 +66,13 @@ enum NativeReaderFormats {
                   match.range(at: 2).location != NSNotFound else { continue }
             let destination = ns.substring(with: match.range(at: 1))
                 .replacingOccurrences(of: "&amp;", with: "&")
-            guard let url = URL(string: destination),
-                  ["http", "https"].contains(url.scheme?.lowercased() ?? ""),
-                  url.host != nil else { continue }
+            let external = URL(string: destination).map {
+                ["http", "https"].contains($0.scheme?.lowercased() ?? "") && $0.host != nil
+            } ?? false
+            let internalReference = includeInternal && !destination.isEmpty
+                && !destination.hasPrefix("//") && !destination.hasPrefix("/")
+                && !destination.contains(":")
+            guard external || internalReference else { continue }
             let markup = ns.substring(with: match.range(at: 2))
             let title = NativeDocumentText.extract(Data(markup.utf8),
                 from: URL(fileURLWithPath: "link.html"))
@@ -100,6 +105,31 @@ enum NativeReaderFormats {
             consumed[title] = occurrence + 1
         }
         return results
+    }
+
+    /// Resolve EPUB fragment anchors only if their target text has a unique
+    /// location in the actual extracted page. Never guess an offset.
+    private static func targetOffset(fragment: String, html: String, text: String) -> Int? {
+        let decoded = fragment.removingPercentEncoding ?? fragment
+        guard !decoded.isEmpty else { return 0 }
+        let escaped = NSRegularExpression.escapedPattern(for: decoded)
+        let pattern = "<([a-zA-Z][a-zA-Z0-9]*)\\b[^>]*\\bid\\s*=\\s*['\\\"]"
+            + escaped + "['\\\"][^>]*>(.*?)</\\1>"
+        guard let regex = try? NSRegularExpression(pattern: pattern,
+                                                    options: [.caseInsensitive, .dotMatchesLineSeparators])
+        else { return nil }
+        let ns = html as NSString
+        guard let match = regex.firstMatch(in: html,
+                    range: NSRange(location: 0, length: ns.length)),
+              match.range(at: 2).location != NSNotFound else { return nil }
+        let markup = ns.substring(with: match.range(at: 2))
+        let label = NativeDocumentText.extract(Data(markup.utf8),
+                    from: URL(fileURLWithPath: "target.html"))
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !label.isEmpty, let first = text.range(of: label),
+              text.range(of: label, range: first.upperBound..<text.endIndex) == nil
+        else { return nil }
+        return text.distance(from: text.startIndex, to: first.lowerBound)
     }
 
     private static let audioExtensions: Set<String> = [
@@ -386,18 +416,51 @@ enum NativeReaderFormats {
                     && !$0.contains("toc.")
             }
             var segments: [String] = []
+            var pageOffsets: [String: Int] = [:]
+            var pageTexts: [String: String] = [:]
+            var pageHTML: [String: String] = [:]
             var offset = 0
             for page in pages {
                 let pageText = extractedText(page)
                 guard !pageText.isEmpty else { continue }
+                pageOffsets[page] = offset
+                pageTexts[page] = pageText
                 if let html = try? String(contentsOf: directory.appendingPathComponent(page),
                                           encoding: .utf8) {
-                    textLinks += Self.textLinks(in: html, extracted: pageText).map {
-                        .init(offset: $0.offset + offset, title: $0.title, url: $0.url)
-                    }
+                    pageHTML[page] = html
                 }
                 segments.append(pageText)
                 offset += pageText.count + 2
+            }
+            for page in pages {
+                guard let pageText = pageTexts[page], let html = pageHTML[page],
+                      let baseOffset = pageOffsets[page] else { continue }
+                for link in Self.textLinks(in: html, extracted: pageText, includeInternal: true) {
+                    if let url = URL(string: link.url), ["http", "https"].contains(url.scheme?.lowercased() ?? ""),
+                       url.host != nil {
+                        textLinks.append(.init(offset: baseOffset + link.offset,
+                                               title: link.title, url: link.url))
+                        continue
+                    }
+                    let parts = link.url.split(separator: "#", maxSplits: 1,
+                                               omittingEmptySubsequences: false)
+                    let relative = String(parts[0]).removingPercentEncoding ?? String(parts[0])
+                    let targetPath = relative.isEmpty ? page : String(
+                        URL(fileURLWithPath: "/" + page).deletingLastPathComponent()
+                            .appendingPathComponent(relative).standardizedFileURL.path.dropFirst())
+                    guard let targetBase = pageOffsets[targetPath],
+                          let targetText = pageTexts[targetPath] else { continue }
+                    let target: Int?
+                    if parts.count == 1 || parts[1].isEmpty {
+                        target = 0
+                    } else if let targetHTML = pageHTML[targetPath] {
+                        target = Self.targetOffset(fragment: String(parts[1]),
+                                                   html: targetHTML, text: targetText)
+                    } else { target = nil }
+                    guard let target else { continue }
+                    textLinks.append(.init(offset: baseOffset + link.offset, title: link.title,
+                                           url: link.url, targetOffset: targetBase + target))
+                }
             }
             body = segments.joined(separator: "\n\n")
             format = "epub"

@@ -1,14 +1,7 @@
 name: TifloAcosta iOS nativa - enviar a TestFlight
+# Publicación a TestFlight únicamente cuando se solicite expresamente,
+# después de integrar y revisar las fases de desarrollo.
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'ios-app-native/Sources/**'
-      - 'ios-app-native/tests/**'
-      - 'ios-app-native/ShareExtension/**'
-      - 'ios-app-native/scripts/**'
-      - 'ios-app-native/project.yml'
-      - '.github/workflows/ios-native-testflight-upload.yml'
   workflow_dispatch:
 permissions:
   contents: read

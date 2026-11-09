@@ -1246,6 +1246,21 @@ struct NativeReadingScreen: View {
         VStack(alignment: .leading, spacing: 6) {
             playbackRow
             trackButtons
+            if !document.body.isEmpty {
+                NativeAdjustableChoice(
+                    title: "Modo de navegación",
+                    choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
+                    selectedIndex: $navigationUnit
+                )
+                HStack {
+                    Button("Unidad anterior") { moveUnit(-1) }
+                    Button("Unidad siguiente") { moveUnit(1) }
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.small)
+            }
+            Button("Marcas guardadas") { showSavedMarks = true }
+            Button("Añadir marca") { addBookmark() }
             Text(progressDescription)
                 .font(.footnote)
                 .accessibilityLabel(progressDescription)

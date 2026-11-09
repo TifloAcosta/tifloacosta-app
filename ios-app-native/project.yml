@@ -10,6 +10,9 @@ packages:
   ZIPFoundation:
     url: https://github.com/weichsel/ZIPFoundation.git
     from: 0.9.0
+  SwiftMP3:
+    url: https://github.com/mierau/swift-mp3.git
+    from: 1.0.0
 targets:
   TifloAcostaNative:
     type: application
@@ -34,6 +37,7 @@ targets:
     dependencies:
       - target: TifloAcostaShare
       - package: ZIPFoundation
+      - package: SwiftMP3
   TifloAcostaShare:
     type: app-extension
     platform: iOS

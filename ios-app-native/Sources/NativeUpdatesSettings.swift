@@ -185,10 +185,28 @@ struct NativeUpdatesScreen: View {
                     .foregroundStyle(TifloVisual.secondaryText)
                     .listRowBackground(TifloVisual.surfaceRaised)
             }
-            if let error = catalog.error {
-                Text(error).foregroundStyle(TifloVisual.secondaryText)
+            Section("Actualizar contenidos") {
                 Button("Actualizar novedades") {
-                    Task { await catalog.refresh() }
+                    Task {
+                        await catalog.refresh()
+                        let message = catalog.updateMessage ?? "La actualización está en curso."
+                        actionStatus = message
+                        UIAccessibility.post(notification: .announcement, argument: message)
+                    }
+                }
+                .disabled(catalog.loading)
+                if catalog.loading {
+                    ProgressView("Actualizando novedades")
+                }
+                if let lastUpdated = catalog.lastUpdated {
+                    Text("Última actualización correcta: \(lastUpdated.formatted(date: .abbreviated, time: .shortened))")
+                        .font(.footnote)
+                } else {
+                    Text("Todavía no se ha confirmado una actualización correcta.")
+                        .font(.footnote)
+                }
+                if let error = catalog.error {
+                    Text(error).foregroundStyle(TifloVisual.secondaryText)
                 }
             }
         }

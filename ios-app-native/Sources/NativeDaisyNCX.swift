@@ -5,6 +5,7 @@ struct NativeDaisyNCXLink {
     let title: String
     let level: Int
     let href: String
+    let kind: String
 }
 
 private final class NativeDaisyNCXDelegate: NSObject, XMLParserDelegate {
@@ -12,6 +13,7 @@ private final class NativeDaisyNCXDelegate: NSObject, XMLParserDelegate {
         var title = ""
         var href = ""
         var level: Int
+        var kind: String
     }
 
     private var stack: [Item] = []
@@ -24,8 +26,9 @@ private final class NativeDaisyNCXDelegate: NSObject, XMLParserDelegate {
                 attributes attributeDict: [String: String] = [:]) {
         let tag = elementName.split(separator: ":").last?.lowercased() ?? elementName.lowercased()
         switch tag {
-        case "navpoint":
-            stack.append(Item(level: stack.count + 1))
+        case "navpoint", "pagetarget", "navtarget":
+            let kind = tag == "pagetarget" ? "Página" : tag == "navtarget" ? "Referencia" : "Encabezado"
+            stack.append(Item(level: stack.count + 1, kind: kind))
         case "navlabel":
             insideLabel = !stack.isEmpty
         case "text":
@@ -51,11 +54,11 @@ private final class NativeDaisyNCXDelegate: NSObject, XMLParserDelegate {
             insideText = false
         case "navlabel":
             insideLabel = false
-        case "navpoint":
+        case "navpoint", "pagetarget", "navtarget":
             guard let item = stack.popLast() else { return }
             let title = item.title.trimmingCharacters(in: .whitespacesAndNewlines)
             if !title.isEmpty, !item.href.isEmpty {
-                links.append(.init(title: title, level: item.level, href: item.href))
+                links.append(.init(title: title, level: item.level, href: item.href, kind: item.kind))
             }
         default:
             break

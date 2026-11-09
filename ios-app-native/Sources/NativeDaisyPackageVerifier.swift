@@ -62,8 +62,14 @@ enum NativeDaisyPackageVerifier {
         let textRefs = attributes("sync.smil", element: "text", attribute: "src")
         let audioRefs = attributes("sync.smil", element: "audio", attribute: "src")
         let clipEnds = attributes("sync.smil", element: "audio", attribute: "clipEnd")
+        let clipBegins = attributes("sync.smil", element: "audio", attribute: "clipBegin")
         guard !ncxLinks.isEmpty, !textRefs.isEmpty,
-              textRefs.count == audioRefs.count, audioRefs.count == clipEnds.count else {
+              textRefs.count == audioRefs.count,
+              audioRefs.count == clipEnds.count,
+              audioRefs.count == clipBegins.count,
+              Set(audioRefs).count == audioRefs.count,
+              Set(textRefs).count == textRefs.count,
+              audioRefs.allSatisfy({ manifest.contains($0) }) else {
             throw Failure.invalid
         }
         for link in ncxLinks {
@@ -86,10 +92,25 @@ enum NativeDaisyPackageVerifier {
                       $0.0 == 0xff && ($0.1 & 0xe0) == 0xe0
                   }) else { throw Failure.invalid }
         }
+        // Tiempos por pista: inicio en cero y final estrictamente positivo.
+        // Evita elementos sincronizados sin duración o con marcas inválidas.
         let clockPattern = try NSRegularExpression(pattern: #"^\d{2}:\d{2}:\d{2}\.\d{3}$"#)
-        guard clipEnds.allSatisfy({ value in
+        func seconds(_ value: String) -> Double? {
             let range = NSRange(value.startIndex..., in: value)
-            return clockPattern.firstMatch(in: value, range: range) != nil
-        }) else { throw Failure.invalid }
+            guard clockPattern.firstMatch(in: value, range: range) != nil else { return nil }
+            let parts = value.split(separator: ":")
+            guard parts.count == 3,
+                  let hours = Double(parts[0]),
+                  let minutes = Double(parts[1]),
+                  let remainder = Double(parts[2]),
+                  minutes < 60, remainder < 60 else { return nil }
+            return hours * 3600 + minutes * 60 + remainder
+        }
+        for (start, end) in zip(clipBegins, clipEnds) {
+            guard let beginning = seconds(start), let finish = seconds(end),
+                  beginning >= 0, finish > beginning else {
+                throw Failure.invalid
+            }
+        }
     }
 }

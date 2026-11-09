@@ -249,3 +249,10 @@ test('Un solo control de reproducción navega por tiempo configurable y estructu
   assert.doesNotMatch(reader, /Button\("Pista anterior"\)/);
   assert.doesNotMatch(reader, /Button\("Pista siguiente"\)/);
 });
+
+test('Enlaces con etiquetas repetidas se guardan solo con correspondencia inequívoca', () => {
+  assert.match(formats, /let linkCounts = Dictionary\(candidates\.map/);
+  assert.match(formats, /offsets\.count == linkCounts\[title\]/);
+  assert.match(formats, /consumed\[title, default: 0\]/);
+  assert.match(formats, /cursor = range\.upperBound/);
+});

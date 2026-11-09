@@ -158,3 +158,13 @@ test('NCX conserva páginas y puntos especiales además de encabezados', () => {
   assert.match(reader, /point\.kind == "Referencia"/);
   assert.match(formats, /kind: link\.kind/);
 });
+
+test('DAISY guarda la posición exacta en segundos, conservando libros anteriores', () => {
+  assert.match(reader, /var lastAudioSeconds: TimeInterval\? = nil/);
+  assert.match(reader, /func saveAudioPosition\(_ document: NativeReadingDocument, track: Int, percent: Int,/);
+  assert.match(reader, /documents\[i\]\.lastAudioSeconds = position/);
+  assert.match(reader, /seconds: speech\.hasAudio \? speech\.audioElapsed : nil/);
+  assert.match(reader, /speech\.seek\(toSeconds: seconds\)/);
+  assert.match(reader, /restoreAudioPosition\(\)/);
+  assert.match(reader, /didRestoreAudioPosition = true/);
+});

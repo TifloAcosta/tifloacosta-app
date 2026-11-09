@@ -50,6 +50,7 @@ final class NativeCatalogStore: ObservableObject {
     @Published private(set) var error: String?
     @Published private(set) var lastUpdated: Date?
     @Published private(set) var lastSource: String?
+    @Published private(set) var catalogGeneratedAt: Date?
     @Published private(set) var updateMessage: String?
 
     // Alternate public copy of the same published catalog. Never rely on the
@@ -74,6 +75,7 @@ final class NativeCatalogStore: ObservableObject {
            let snapshot = try? JSONDecoder().decode(NativeCatalogSnapshot.self, from: data),
            snapshot.schemaVersion == 1 {
             apply(snapshot)
+            catalogGeneratedAt = snapshot.generatedAt.flatMap { ISO8601DateFormatter().date(from: $0) }
             if let text = try? String(contentsOf: updateDateURL, encoding: .utf8),
                let timestamp = TimeInterval(text) {
                 lastUpdated = Date(timeIntervalSince1970: timestamp)
@@ -99,7 +101,10 @@ final class NativeCatalogStore: ObservableObject {
         updateMessage = nil
         defer { loading = false }
         var failures: [String] = []
+        var candidate: (snapshot: NativeCatalogSnapshot, data: Data, host: String, date: Date)?
 
+        // A valid HTTP 200 may still contain an older catalog.
+        // Select the most recent published feed from both public origins.
         for endpoint in endpoints {
             var components = URLComponents(url: endpoint, resolvingAgainstBaseURL: false)
             components?.queryItems = [URLQueryItem(name: "v", value: String(Int(Date().timeIntervalSince1970)))]
@@ -126,18 +131,37 @@ final class NativeCatalogStore: ObservableObject {
                     throw NSError(domain: "TifloAcosta.Catalog", code: 2,
                                   userInfo: [NSLocalizedDescriptionKey: "El catálogo no contiene recursos"])
                 }
-                apply(snapshot)
-                try? data.write(to: cacheURL, options: .atomic)
-                let now = Date()
-                lastUpdated = now
-                lastSource = endpoint.host
-                persistTimestamp(now)
-                error = nil
-                updateMessage = "Contenido actualizado: \(snapshot.resources.count) recursos, \(snapshot.videos.count) vídeos y \(snapshot.news.count) noticias."
-                return
+                guard let rawDate = snapshot.generatedAt,
+                      let publicationDate = ISO8601DateFormatter().date(from: rawDate) else {
+                    throw NSError(domain: "TifloAcosta.Catalog", code: 3,
+                                  userInfo: [NSLocalizedDescriptionKey: "El catálogo no indica fecha de publicación válida"])
+                }
+                if let current = candidate, current.date >= publicationDate {
+                    continue
+                }
+                candidate = (snapshot, data, endpoint.host ?? "servidor", publicationDate)
             } catch {
                 failures.append("\(endpoint.host ?? "servidor"): \(error.localizedDescription)")
             }
+        }
+
+        if let candidate {
+            // Do not replace a newer offline snapshot with an older server copy.
+            if let existingDate = catalogGeneratedAt, existingDate > candidate.date {
+                error = "Los servidores ofrecen un catálogo anterior al guardado. Se conserva la versión más reciente de este dispositivo."
+                updateMessage = error
+                return
+            }
+            apply(candidate.snapshot)
+            try? candidate.data.write(to: cacheURL, options: .atomic)
+            let now = Date()
+            lastUpdated = now
+            lastSource = candidate.host
+            catalogGeneratedAt = candidate.date
+            persistTimestamp(now)
+            error = nil
+            updateMessage = "Contenido actualizado desde \(candidate.host): \(candidate.snapshot.resources.count) recursos, \(candidate.snapshot.videos.count) vídeos y \(candidate.snapshot.news.count) noticias."
+            return
         }
 
         let detail = failures.joined(separator: ". ")

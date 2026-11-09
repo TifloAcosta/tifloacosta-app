@@ -201,3 +201,13 @@ test('NCX mantiene orden de lectura padre-hijo y profundidad de encabezados', ()
   assert.match(ncx, /order: nextOrder/);
   assert.match(ncx, /stack\.filter \{ \$0\.kind == "Encabezado" \}\.count \+ 1/);
 });
+
+test('El temporizador guarda la posición antes de apagar el audio', () => {
+  assert.match(reader, /var onSleepExpired: \(\(\) -> Void\)\?/);
+  assert.match(reader, /self\?\.onSleepExpired\?\(\)/);
+  assert.match(reader, /speech\.onSleepExpired = \{ persistPosition\(\) \}/);
+  assert.match(reader, /speech\.onSleepExpired = nil/);
+  const expired = reader.indexOf('self?.onSleepExpired?()');
+  const stopped = reader.indexOf('self?.stop()', expired);
+  assert.ok(expired >= 0 && stopped > expired);
+});

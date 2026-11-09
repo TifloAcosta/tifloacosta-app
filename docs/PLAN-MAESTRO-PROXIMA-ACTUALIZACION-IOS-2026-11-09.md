@@ -210,3 +210,10 @@ Cambios implementados en código (pendientes de validar conjuntamente en TestFli
 - El índice de DAISY en la pantalla del lector muestra estas entradas y permite situar la reproducción en la pista indicada. Esta navegación todavía no alcanza los destinos de tiempo internos ni todas las estructuras DAISY.
 - La vista SwiftUI del lector se dividió en componentes menores (cabecera, hojas de marcas y de índice) después de que el compilador superase el tiempo de análisis de la expresión original. La compilación del commit `ad182ce913e3ddc3329811417e4219ca5f91ddb0` superó los pasos de tests de código y compilación del simulador en la ejecución 42668354449; la finalización completa de esa ejecución se verifica por separado.
 - El estado de la fase 2 sigue **en desarrollo**: pendiente evaluar posición por palabra durante TTS, navegación DAISY de precisión y formatos especiales, y conservar todos los requisitos en la prueba conjunta.
+
+## N. Progreso TTS por palabra — continuación fase 2
+
+- El mecanismo de voz nativa usa las posiciones de cada palabra comunicadas por `AVSpeechSynthesizerDelegate` para mantener `textCharacterOffset` y desplazar la posición de texto sin convertirla nuevamente a porcentajes enteros.
+- La pantalla de lectura conserva por separado el porcentaje para anuncios y el desplazamiento de caracteres para reanudación exacta; se evita que la actualización porcentual reemplace el desplazamiento más preciso.
+- La lectura iniciada desde la biblioteca también suministra al sintetizador el desplazamiento inicial y la longitud total del texto para que los porcentajes no vuelvan a empezar en cero.
+- Se incorporó una prueba de contrato específica; queda pendiente confirmar la compilación de este cambio y la validación práctica final con VoiceOver.

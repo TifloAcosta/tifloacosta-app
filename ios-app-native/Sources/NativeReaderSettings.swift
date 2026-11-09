@@ -32,7 +32,16 @@ enum NativeReaderPauseProfile {
         ]
         if style == 1 { return major[key] ?? 0 }
         if style == 2 { return expressive[key] ?? 0 }
-        return min(1.5, max(0, settings.double(forKey: "native-reading-pause-" + key)))
+        let storageKey = "native-reading-pause-" + key
+        // @AppStorage defaults are not necessarily present in UserDefaults
+        // before the user first opens the controls.
+        let defaultValues: [String: Double] = [
+            "comma": 0.15, "semicolon": 0.25, "colon": 0.25,
+            "sentence": 0.40, "paragraph": 0.60
+        ]
+        let configured = settings.object(forKey: storageKey) == nil
+            ? (defaultValues[key] ?? 0) : settings.double(forKey: storageKey)
+        return min(1.5, max(0, configured))
     }
 
     static func segments(_ text: String, settings: UserDefaults = .standard) -> [Segment] {

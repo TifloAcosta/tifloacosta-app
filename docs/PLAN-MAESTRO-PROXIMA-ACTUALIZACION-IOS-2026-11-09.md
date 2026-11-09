@@ -217,3 +217,11 @@ Cambios implementados en código (pendientes de validar conjuntamente en TestFli
 - La pantalla de lectura conserva por separado el porcentaje para anuncios y el desplazamiento de caracteres para reanudación exacta; se evita que la actualización porcentual reemplace el desplazamiento más preciso.
 - La lectura iniciada desde la biblioteca también suministra al sintetizador el desplazamiento inicial y la longitud total del texto para que los porcentajes no vuelvan a empezar en cero.
 - Se incorporó una prueba de contrato específica; queda pendiente confirmar la compilación de este cambio y la validación práctica final con VoiceOver.
+
+## O. Fase 2: navegación DAISY dentro de pistas (continuación)
+
+- Los enlaces de encabezados NCC hacia `archivo.smil#identificador` se resuelven buscando el fragmento correspondiente del SMIL, en vez de tomar siempre su primer audio.
+- Cuando el segmento de audio indica `clipBegin` o `clip-begin`, el lector interpreta tiempos con segundos decimales, formato horas:minutos:segundos o prefijo `npt=`.
+- El destino DAISY conserva `seconds` de manera opcional para seguir leyendo bibliotecas importadas anteriormente. Al abrir el encabezado se accede a la pista y, si se dispone de un inicio temporal válido, se salta a ese punto.
+- Se incorporaron pruebas de contrato; el resultado definitivo de compilación del último código queda sujeto al flujo `42669987256`.
+- No significa que esté completa toda la navegación DAISY: todavía deben tratarse con precisión estructuras NCX, referencias de páginas, notas, saltos internos especiales y libros que distribuyen contenido en varios archivos SMIL.

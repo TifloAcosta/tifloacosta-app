@@ -80,3 +80,13 @@ test("fase 3: exportación DAISY incluye verificación del paquete antes de comp
   assert.match(verifier, /textRefs\.count == audioRefs\.count/);
   assert.match(verifier, /Reject WAV renamed to MP3/);
 });
+
+test("fase 3: metadatos DAISY respetan el idioma seleccionado", () => {
+  const daisy = readFileSync(new URL("../Sources/NativeGeminiDaisyExport.swift", import.meta.url), "utf8");
+  const audio = readFileSync(new URL("../Sources/NativeGeminiAudioExport.swift", import.meta.url), "utf8");
+  assert.match(reader, /Picker\("Idioma del contenido", selection: \$audioExportLanguage\)/);
+  assert.match(reader, /language: audioExportLanguage/);
+  assert.match(audio, /language: language, progress: progress/);
+  assert.match(daisy, /xml:lang="\\\(lang\)"/);
+  assert.match(daisy, /<dc:Language>\\\(lang\)<\/dc:Language>/);
+});

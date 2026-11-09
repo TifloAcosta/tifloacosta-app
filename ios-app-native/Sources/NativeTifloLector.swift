@@ -1434,6 +1434,82 @@ struct NativeReadingScreen: View {
         Button("Cancelar", role: .cancel) {}
     }
 
+    private var bookmarksSheetContent: some View {
+            NavigationStack {
+                List {
+                    if !latest.hasBookmarks {
+                        Text("Esta obra todavía no tiene marcas.")
+                    }
+                    ForEach(latest.bookmarks, id: \.self) { percent in
+                        Button(bookmarkDescription(at: percent)) {
+                            move(to: percent)
+                            showSavedMarks = false
+                        }
+                        .accessibilityAction(named: Text("Eliminar esta marca")) {
+                            library.removeBookmark(document, at: percent)
+                        }
+                    }
+                    ForEach(latest.savedAudioBookmarks, id: \.self) { mark in
+                        Button("Ir a pista \(mark.track + 1), \(mark.percent) por ciento") {
+                            trackIndex = mark.track
+                            currentPercent = mark.percent
+                            readingOffset = 0
+                            playTrack()
+                            persistPosition()
+                            applySleepTimer()
+                            showSavedMarks = false
+                        }
+                        .accessibilityAction(named: Text("Eliminar esta marca")) {
+                            library.removeAudioBookmark(document, mark: mark)
+                        }
+                    }
+                }
+                .tifloScreenSurface()
+                .navigationTitle("Marcas guardadas")
+                .toolbar { Button("Cerrar") { showSavedMarks = false } }
+            }
+    }
+
+    private var structureSheetContent: some View {
+            NavigationStack {
+                List {
+                    if !tracks.isEmpty, let points = latest.daisyNavigation, !points.isEmpty {
+                        Section("Navegación DAISY por encabezados") {
+                            ForEach(points) { point in
+                                Button("Nivel \(point.level). \(point.title)") {
+                                    trackIndex = point.track
+                                    currentPercent = 0
+                                    playTrack()
+                                    persistPosition()
+                                    applySleepTimer()
+                                    showStructure = false
+                                }
+                            }
+                        }
+                    }
+                    Section("Encabezados") {
+                        if textLayout.namedHeadings.isEmpty {
+                            Text("No se han identificado encabezados en este documento.")
+                        }
+                        ForEach(textLayout.namedHeadings) { point in
+                            Button(point.title) { jump(to: point.offset); showStructure = false }
+                        }
+                    }
+                    Section(textLayout.hasRealPages ? "Páginas, diapositivas y hojas" : "Bloques de lectura") {
+                        if textLayout.namedPages.isEmpty {
+                            Text("No hay divisiones reconocibles en este documento.")
+                        }
+                        ForEach(textLayout.namedPages) { point in
+                            Button(point.title) { jump(to: point.offset); showStructure = false }
+                        }
+                    }
+                }
+                .tifloScreenSurface()
+                .navigationTitle("Índice de la obra")
+                .toolbar { Button("Cerrar") { showStructure = false } }
+            }
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             quickControls
@@ -1473,80 +1549,8 @@ struct NativeReadingScreen: View {
                 .toolbar { Button("Cerrar") { showDocumentInformation = false } }
             }
         }
-        .sheet(isPresented: $showSavedMarks) {
-            NavigationStack {
-                List {
-                    if !latest.hasBookmarks {
-                        Text("Esta obra todavía no tiene marcas.")
-                    }
-                    ForEach(latest.bookmarks, id: \.self) { percent in
-                        Button(bookmarkDescription(at: percent)) {
-                            move(to: percent)
-                            showSavedMarks = false
-                        }
-                        .accessibilityAction(named: Text("Eliminar esta marca")) {
-                            library.removeBookmark(document, at: percent)
-                        }
-                    }
-                    ForEach(latest.savedAudioBookmarks, id: \.self) { mark in
-                        Button("Ir a pista \(mark.track + 1), \(mark.percent) por ciento") {
-                            trackIndex = mark.track
-                            currentPercent = mark.percent
-                            readingOffset = 0
-                            playTrack()
-                            persistPosition()
-                            applySleepTimer()
-                            showSavedMarks = false
-                        }
-                        .accessibilityAction(named: Text("Eliminar esta marca")) {
-                            library.removeAudioBookmark(document, mark: mark)
-                        }
-                    }
-                }
-                .tifloScreenSurface()
-                .navigationTitle("Marcas guardadas")
-                .toolbar { Button("Cerrar") { showSavedMarks = false } }
-            }
-        }
-        .sheet(isPresented: $showStructure) {
-            NavigationStack {
-                List {
-                    if !tracks.isEmpty, let points = latest.daisyNavigation, !points.isEmpty {
-                        Section("Navegación DAISY por encabezados") {
-                            ForEach(points) { point in
-                                Button("Nivel \(point.level). \(point.title)") {
-                                    trackIndex = point.track
-                                    currentPercent = 0
-                                    playTrack()
-                                    persistPosition()
-                                    applySleepTimer()
-                                    showStructure = false
-                                }
-                            }
-                        }
-                    }
-                    Section("Encabezados") {
-                        if textLayout.namedHeadings.isEmpty {
-                            Text("No se han identificado encabezados en este documento.")
-                        }
-                        ForEach(textLayout.namedHeadings) { point in
-                            Button(point.title) { jump(to: point.offset); showStructure = false }
-                        }
-                    }
-                    Section(textLayout.hasRealPages ? "Páginas, diapositivas y hojas" : "Bloques de lectura") {
-                        if textLayout.namedPages.isEmpty {
-                            Text("No hay divisiones reconocibles en este documento.")
-                        }
-                        ForEach(textLayout.namedPages) { point in
-                            Button(point.title) { jump(to: point.offset); showStructure = false }
-                        }
-                    }
-                }
-                .tifloScreenSurface()
-                .navigationTitle("Índice de la obra")
-                .toolbar { Button("Cerrar") { showStructure = false } }
-            }
-        }
+        .sheet(isPresented: $showSavedMarks) { bookmarksSheetContent }
+        .sheet(isPresented: $showStructure) { structureSheetContent }
         .sheet(isPresented: $showWordTools) {
             NativeReaderWordToolsScreen(voiceIdentifier: effectiveVoiceID, pitch: pitch)
         }

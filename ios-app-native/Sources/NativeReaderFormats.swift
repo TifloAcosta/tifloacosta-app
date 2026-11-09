@@ -115,7 +115,8 @@ enum NativeReaderFormats {
 
     static func storedURL(for relativePath: String) -> URL? {
         // Stored paths must remain underneath our application support directory.
-        guard !relativePath.contains(".."), !relativePath.hasPrefix("/") else { return nil }
+        guard !relativePath.hasPrefix("/"),
+              !relativePath.split(separator: "/").contains(where: { $0 == ".." || $0 == "." }) else { return nil }
         return supportDirectory.appendingPathComponent(relativePath)
     }
 

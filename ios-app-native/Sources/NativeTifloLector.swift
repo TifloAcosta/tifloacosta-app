@@ -1510,7 +1510,7 @@ struct NativeReadingScreen: View {
             }
     }
 
-    var body: some View {
+    private var readerChrome: some View {
         VStack(spacing: 0) {
             quickControls
             Divider().accessibilityHidden(true)
@@ -1530,6 +1530,10 @@ struct NativeReadingScreen: View {
                             titleVisibility: .visible) {
             documentActions
         }
+    }
+
+    private var readerWithSheets: some View {
+        readerChrome
         .sheet(isPresented: $showDocumentInformation) {
             NavigationStack {
                 List {
@@ -1560,6 +1564,10 @@ struct NativeReadingScreen: View {
         .sheet(isPresented: $showVisualSettings) {
             NativeReaderDocumentVisualSettingsScreen(document: document)
         }
+    }
+
+    var body: some View {
+        readerWithSheets
         .onAppear {
             let initial = max(0, min(100, startPercent ?? latest.lastPercent ?? 0))
             trackIndex = min(max(0, startTrack ?? latest.lastTrackIndex ?? 0),

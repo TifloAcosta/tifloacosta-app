@@ -14,17 +14,40 @@ enum NativeDaisyPackageVerifier {
             throw Failure.invalid
         }
         var files: [String: Data] = [:]
-        var totalSize: Int64 = 0
+        var entries: Set<String> = []
+        var audioHeaders: [String: Data] = [:]
+        var audioSizes: [String: UInt64] = [:]
+        var totalSize: UInt64 = 0
         for entry in archive {
-            guard !entry.path.contains(".."), !entry.path.hasPrefix("/"),
-                  !files.keys.contains(entry.path), files.count < 2048 else {
+            let name = entry.path
+            guard entry.type == .file,
+                  !name.contains(".."), !name.hasPrefix("/"),
+                  !entries.contains(name), entries.count < 2048,
+                  entry.uncompressedSize < 512 * 1024 * 1024 else {
                 throw Failure.invalid
             }
-            totalSize += Int64(entry.uncompressedSize)
+            totalSize += UInt64(entry.uncompressedSize)
             guard totalSize < 512 * 1024 * 1024 else { throw Failure.invalid }
+            entries.insert(name)
+            let isAudio = name.lowercased().hasSuffix(".mp3")
+            // Las pistas se comprueban por cabecera; no se cargan enteras en RAM.
             var bytes = Data()
-            _ = try archive.extract(entry) { part in bytes.append(part) }
-            files[entry.path] = bytes
+            _ = try archive.extract(entry) { part in
+                if isAudio {
+                    let remaining = max(0, 65_536 - bytes.count)
+                    if remaining > 0 { bytes.append(part.prefix(remaining)) }
+                } else {
+                    bytes.append(part)
+                }
+            }
+            if isAudio {
+                audioHeaders[name] = bytes
+                audioSizes[name] = UInt64(entry.uncompressedSize)
+            } else {
+                // Los archivos de metadatos nunca deberían ser enormes.
+                guard bytes.count <= 8 * 1024 * 1024 else { throw Failure.invalid }
+                files[name] = bytes
+            }
         }
 
         let names = ["book.opf", "book.xml", "book.ncx", "sync.smil"]
@@ -53,7 +76,7 @@ enum NativeDaisyPackageVerifier {
         }
 
         let manifest = attributes("book.opf", element: "item", attribute: "href")
-        guard !manifest.isEmpty && manifest.allSatisfy({ files[$0] != nil }) else {
+        guard !manifest.isEmpty && manifest.allSatisfy({ entries.contains($0) }) else {
             throw Failure.invalid
         }
         let smil = String(decoding: files["sync.smil"]!, as: UTF8.self)
@@ -83,10 +106,11 @@ enum NativeDaisyPackageVerifier {
                   book.contains("id=\"\(parts[1])\"") else { throw Failure.invalid }
         }
         for file in audioRefs {
-            guard file.lowercased().hasSuffix(".mp3"), let bytes = files[file],
-                  bytes.count > 100 else { throw Failure.invalid }
+            guard file.lowercased().hasSuffix(".mp3"),
+                  let bytes = audioHeaders[file], let size = audioSizes[file],
+                  size > 100 else { throw Failure.invalid }
             // Reject WAV renamed to MP3; look for actual MPEG frame sync.
-            let header = Array(bytes.prefix(65536))
+            let header = Array(bytes)
             guard !header.starts(with: Array("RIFF".utf8)),
                   zip(header, header.dropFirst()).contains(where: {
                       $0.0 == 0xff && ($0.1 & 0xe0) == 0xe0

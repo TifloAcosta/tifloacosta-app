@@ -99,6 +99,7 @@ private struct NativeGeminiKeyGuide: View {
     @State private var showGoogle = false
     let pasteCopiedKey: () -> Bool
     @State private var status = ""
+    @AccessibilityFocusState private var focusPasteButton: Bool
 
     var body: some View {
         NavigationStack {
@@ -113,9 +114,12 @@ private struct NativeGeminiKeyGuide: View {
                         .accessibilityHint("Abre la página oficial de claves sin salir de TifloLector.")
                     Button("Pegar la clave copiada") {
                         if pasteCopiedKey() { dismiss() }
-                        else { status = "No se encontró una clave de texto en el portapapeles. Cópiala en Google AI Studio y vuelve a intentarlo." }
+                        else {
+                            status = "No se encontró una clave de texto en el portapapeles. Cópiala en Google AI Studio y vuelve a intentarlo."
+                        }
                     }
-                    .accessibilityHint("Recupera la clave copiada y vuelve al campo de Gemini para guardarla.")
+                    .accessibilityFocused($focusPasteButton)
+                    .accessibilityHint("Pega la clave de Google AI Studio. Regresarás a Gemini para guardarla.")
                     if !status.isEmpty {
                         Text(status).accessibilityAddTraits(.updatesFrequently)
                     }
@@ -128,7 +132,10 @@ private struct NativeGeminiKeyGuide: View {
             .tifloScreenSurface()
             .navigationTitle("Crear clave Gemini")
             .toolbar { Button("Cerrar") { dismiss() } }
-            .sheet(isPresented: $showGoogle) {
+            .sheet(isPresented: $showGoogle, onDismiss: {
+                // Return VoiceOver to the next action, not to the top of the guide.
+                focusPasteButton = true
+            }) {
                 NativeGeminiKeyBrowser()
                     .ignoresSafeArea()
             }
@@ -163,6 +170,9 @@ struct NativeReaderExternalVoiceDetailScreen: View {
 
     @State private var keyInput = ""
     @State private var showGeminiGuide = false
+    @AccessibilityFocusState private var focusGeminiSave: Bool
+    @AccessibilityFocusState private var focusGeminiPaste: Bool
+    @State private var returnedFromGeminiGuide = false
     @State private var hasGeminiKey = NativeVoiceCredentialStore.hasKey("gemini")
     @State private var message = ""
     @State private var confirmDeletion = false
@@ -205,6 +215,7 @@ struct NativeReaderExternalVoiceDetailScreen: View {
             return false
         }
         keyInput = copied
+        returnedFromGeminiGuide = true
         message = "Clave copiada en el campo. Pulsa Guardar para almacenarla de forma segura."
         return true
     }
@@ -341,16 +352,19 @@ struct NativeReaderExternalVoiceDetailScreen: View {
                 Text(hasGeminiKey ? "Clave guardada" : "Sin clave")
                     .accessibilityAddTraits(.updatesFrequently)
                 Button("Crear clave API con guía") { showGeminiGuide = true }
-                    .accessibilityHint("Te explica los pasos y permite regresar directamente a Gemini.")
+                    .accessibilityHint("Abre instrucciones accesibles, Google AI Studio y permite volver a pegar la clave.")
                 SecureField("Pegar clave", text: $keyInput)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
                     .privacySensitive()
                 Button("Pegar clave copiada") {
-                    if !pasteGeminiKeyFromClipboard() {
+                    if pasteGeminiKeyFromClipboard() {
+                        focusGeminiSave = true
+                    } else {
                         message = "No hay una clave de texto copiada. Abre Crear clave API con guía e inténtalo de nuevo."
                     }
                 }
+                .accessibilityFocused($focusGeminiPaste)
                 .accessibilityHint("Pega en el campo de Gemini el texto copiado desde Google AI Studio.")
                 Button("Guardar") {
                     do {
@@ -363,6 +377,8 @@ struct NativeReaderExternalVoiceDetailScreen: View {
                     }
                 }
                 .disabled(keyInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                .accessibilityFocused($focusGeminiSave)
+                .accessibilityHint("Guarda de forma segura la clave pegada en el iPhone.")
                 Button("Comprobar") {
                     Task { await checkGeminiConnection() }
                 }
@@ -399,7 +415,14 @@ struct NativeReaderExternalVoiceDetailScreen: View {
         }
         .tifloScreenSurface()
         .navigationTitle(provider == .phonon ? "Phonon" : "Gemini")
-        .sheet(isPresented: $showGeminiGuide) {
+        .sheet(isPresented: $showGeminiGuide, onDismiss: {
+            if returnedFromGeminiGuide && !keyInput.isEmpty {
+                focusGeminiSave = true
+            } else {
+                focusGeminiPaste = true
+            }
+            returnedFromGeminiGuide = false
+        }) {
             NativeGeminiKeyGuide(pasteCopiedKey: pasteGeminiKeyFromClipboard)
         }
         .fileImporter(

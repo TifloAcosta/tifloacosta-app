@@ -108,3 +108,13 @@ test('La posición exacta del texto se guarda y recupera sin romper bibliotecas 
   assert.match(reader, /startPercent == nil \? \(latest\.lastTextOffset/);
   assert.match(reader, /try JSONEncoder\(\)\.encode\(documents\)\.write\(to: Self\.storageURL, options: \.atomic\)/);
 });
+
+test('DAISY conserva encabezados NCC vinculados a SMIL en los metadatos del libro', () => {
+  assert.match(formats, /ncc\.html/);
+  assert.match(formats, /NativeDaisyNavigationPoint\(title: title, level: level, track: track\)/);
+  assert.match(formats, /daisyNavigation: daisyNavigation/);
+  assert.match(reader, /var daisyNavigation: \[NativeDaisyNavigationPoint\]\? = nil/);
+  assert.match(reader, /daisyNavigation: payload\.daisyNavigation/);
+  assert.match(reader, /Section\("Navegación DAISY por encabezados"\)/);
+  assert.match(reader, /Button\("Nivel/);
+});

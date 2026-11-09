@@ -29,3 +29,18 @@ test('Gemini solo lee portapapeles por iniciativa del usuario y guarda en Keycha
   assert.match(source, /kSecAttrAccessibleWhenUnlockedThisDeviceOnly/);
   assert.doesNotMatch(source, /\.onAppear\s*\{[^}]*UIPasteboard/s);
 });
+
+test('La guía expone un único paso principal y evita controles innecesarios', () => {
+  assert.match(source, /hasVisitedGoogle \? "Paso 2 de 2\. Pegar" : "Paso 1 de 2\. Crear y copiar"/);
+  assert.match(source, /if \(!hasVisitedGoogle\) \{/);
+  assert.match(source, /Button\("Abrir creación de clave en Google"\)/);
+  assert.match(source, /Button\("Volver a Google AI Studio"\)/);
+  assert.match(source, /hasVisitedGoogle = true/);
+});
+
+test('Después de Guardar, VoiceOver se dirige a Comprobar conexión', () => {
+  assert.match(source, /@AccessibilityFocusState private var focusGeminiCheck: Bool/);
+  assert.match(source, /focusGeminiCheck = true/);
+  assert.match(source, /Button\("Comprobar conexión"\)/);
+  assert.match(source, /\.accessibilityFocused\(\$focusGeminiCheck\)/);
+});

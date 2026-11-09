@@ -401,6 +401,7 @@ struct NativeReaderExternalVoiceDetailScreen: View {
                 .disabled(keyInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 .accessibilityFocused($focusGeminiSave)
                 .accessibilityHint("Guarda de forma segura la clave pegada en el iPhone.")
+                if hasGeminiKey {
                 Button("Comprobar conexión") {
                     Task { await checkGeminiConnection() }
                 }
@@ -426,7 +427,7 @@ struct NativeReaderExternalVoiceDetailScreen: View {
                         .accessibilityAddTraits(.updatesFrequently)
                 }
                 Button("Eliminar", role: .destructive) { confirmDeletion = true }
-                    .disabled(!hasGeminiKey)
+                }
                 Text("La clave se guarda solamente en este iPhone. Cada usuario gestiona sus cuotas y posibles costes con Google.")
                 Text("La prueba y la lectura de documentos con Gemini generan audio real y pueden consumir cuota. Elige Gemini en Motor para leer o exportar.")
             }

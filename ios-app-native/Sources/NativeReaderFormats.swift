@@ -55,8 +55,12 @@ enum NativeReaderFormats {
                                                     options: [.caseInsensitive, .dotMatchesLineSeparators])
         else { return [] }
         let ns = html as NSString
-        var results: [NativeReaderTextLink] = []
-        for match in regex.matches(in: html, range: NSRange(location: 0, length: ns.length)) {
+        let anchors = regex.matches(in: html, range: NSRange(location: 0, length: ns.length))
+        // Repeated labels are safe only when every occurrence in the extracted
+        // text corresponds to an anchor in the same order. Otherwise a phrase
+        // in ordinary prose could be mistaken for a link.
+        var candidates: [(title: String, url: String)] = []
+        for match in anchors {
             guard match.range(at: 1).location != NSNotFound,
                   match.range(at: 2).location != NSNotFound else { continue }
             let destination = ns.substring(with: match.range(at: 1))
@@ -68,11 +72,32 @@ enum NativeReaderFormats {
             let title = NativeDocumentText.extract(Data(markup.utf8),
                 from: URL(fileURLWithPath: "link.html"))
                 .trimmingCharacters(in: .whitespacesAndNewlines)
-            guard !title.isEmpty, let first = text.range(of: title),
-                  text.range(of: title, range: first.upperBound..<text.endIndex) == nil
-            else { continue }
-            let offset = text.distance(from: text.startIndex, to: first.lowerBound)
-            results.append(.init(offset: offset, title: title, url: destination))
+            if !title.isEmpty { candidates.append((title: title, url: destination)) }
+        }
+        var positions: [String: [Int]] = [:]
+        for title in Set(candidates.map { $0.title }) {
+            var occurrences: [Int] = []
+            var cursor = text.startIndex
+            while cursor < text.endIndex,
+                  let range = text.range(of: title, range: cursor..<text.endIndex) {
+                occurrences.append(text.distance(from: text.startIndex, to: range.lowerBound))
+                cursor = range.upperBound
+            }
+            positions[title] = occurrences
+        }
+        let linkCounts = Dictionary(candidates.map { ($0.title, 1) },
+                                    uniquingKeysWith: +)
+        var consumed: [String: Int] = [:]
+        var results: [NativeReaderTextLink] = []
+        for candidate in candidates {
+            let title = candidate.title
+            guard let offsets = positions[title],
+                  offsets.count == linkCounts[title] else { continue }
+            let occurrence = consumed[title, default: 0]
+            guard offsets.indices.contains(occurrence) else { continue }
+            results.append(.init(offset: offsets[occurrence],
+                                 title: title, url: candidate.url))
+            consumed[title] = occurrence + 1
         }
         return results
     }

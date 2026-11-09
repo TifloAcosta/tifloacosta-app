@@ -35,7 +35,7 @@ enum NativeDaisyPackageVerifier {
             _ = try archive.extract(entry) { part in
                 if isAudio {
                     let remaining = max(0, 65_536 - bytes.count)
-                    if remaining > 0 { bytes.append(part.prefix(remaining)) }
+                    if remaining > 0 { bytes.append(contentsOf: part.prefix(remaining)) }
                 } else {
                     bytes.append(part)
                 }

@@ -35,6 +35,7 @@ struct NativeCatalogItem: Decodable, Identifiable {
 
 struct NativeCatalogSnapshot: Decodable {
     let schemaVersion: Int
+    let generatedAt: String?
     let resources: [NativeCatalogItem]
     let videos: [NativeCatalogItem]
     let news: [NativeCatalogItem]
@@ -47,6 +48,9 @@ final class NativeCatalogStore: ObservableObject {
     @Published private(set) var news: [NativeCatalogItem] = []
     @Published private(set) var loading = false
     @Published private(set) var error: String?
+    @Published private(set) var lastUpdated: Date?
+    @Published private(set) var lastSource: String?
+    @Published private(set) var updateMessage: String?
 
     // Alternate public copy of the same published catalog. Never rely on the
     // website's domain being reachable to refresh the native resource list.
@@ -54,6 +58,11 @@ final class NativeCatalogStore: ObservableObject {
         URL(string: "https://tifloacosta.com/mobile-content.json")!,
         URL(string: "https://raw.githubusercontent.com/TifloAcosta/tifloacosta-app/main/mobile-content.json")!
     ]
+
+    private var updateDateURL: URL {
+        FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("tifloacosta-catalog-last-success.txt")
+    }
 
     private var cacheURL: URL {
         FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
@@ -65,6 +74,10 @@ final class NativeCatalogStore: ObservableObject {
            let snapshot = try? JSONDecoder().decode(NativeCatalogSnapshot.self, from: data),
            snapshot.schemaVersion == 1 {
             apply(snapshot)
+            if let text = try? String(contentsOf: updateDateURL, encoding: .utf8),
+               let timestamp = TimeInterval(text) {
+                lastUpdated = Date(timeIntervalSince1970: timestamp)
+            }
         }
     }
 
@@ -74,8 +87,16 @@ final class NativeCatalogStore: ObservableObject {
         news = snapshot.news
     }
 
+    private func persistTimestamp(_ date: Date) {
+        let directory = updateDateURL.deletingLastPathComponent()
+        try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        try? String(date.timeIntervalSince1970).write(to: updateDateURL, atomically: true, encoding: .utf8)
+    }
+
     func refresh() async {
+        guard !loading else { return }
         loading = true
+        updateMessage = nil
         defer { loading = false }
         var failures: [String] = []
 
@@ -94,27 +115,37 @@ final class NativeCatalogStore: ObservableObject {
                 }
                 guard http.statusCode == 200 else {
                     throw NSError(domain: "TifloAcosta.Catalog", code: http.statusCode,
-                                  userInfo: [NSLocalizedDescriptionKey: "HTTP \\(http.statusCode)"])
+                                  userInfo: [NSLocalizedDescriptionKey: "HTTP \(http.statusCode)"])
                 }
                 let snapshot = try JSONDecoder().decode(NativeCatalogSnapshot.self, from: data)
                 guard snapshot.schemaVersion == 1 else {
                     throw NSError(domain: "TifloAcosta.Catalog", code: 1,
                                   userInfo: [NSLocalizedDescriptionKey: "Versión de catálogo no compatible"])
                 }
+                guard !snapshot.resources.isEmpty else {
+                    throw NSError(domain: "TifloAcosta.Catalog", code: 2,
+                                  userInfo: [NSLocalizedDescriptionKey: "El catálogo no contiene recursos"])
+                }
                 apply(snapshot)
                 try? data.write(to: cacheURL, options: .atomic)
+                let now = Date()
+                lastUpdated = now
+                lastSource = endpoint.host
+                persistTimestamp(now)
                 error = nil
+                updateMessage = "Contenido actualizado: \(snapshot.resources.count) recursos, \(snapshot.videos.count) vídeos y \(snapshot.news.count) noticias."
                 return
             } catch {
-                failures.append("\\(endpoint.host ?? "servidor"): \\(error.localizedDescription)")
+                failures.append("\(endpoint.host ?? "servidor"): \(error.localizedDescription)")
             }
         }
 
         let detail = failures.joined(separator: ". ")
         if resources.isEmpty && videos.isEmpty && news.isEmpty {
-            error = "No se pudo descargar el catálogo. \\(detail)"
+            error = "No se pudo descargar el catálogo. \(detail)"
         } else {
-            error = "No se pudo actualizar el catálogo. Se muestran los contenidos guardados. \\(detail)"
+            error = "No se pudo actualizar el catálogo. Se muestran los contenidos guardados. \(detail)"
         }
+        updateMessage = error
     }
 }

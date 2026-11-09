@@ -1868,6 +1868,10 @@ struct NativeReadingScreen: View {
                 @unknown default: break
                 }
             }
+            Button("Retroceder un minuto") { skipReading(-1) }
+                .accessibilityHint("Retrocede un minuto en audio o aproximadamente un minuto en texto.")
+            Button("Avanzar un minuto") { skipReading(1) }
+                .accessibilityHint("Avanza un minuto en audio o aproximadamente un minuto en texto.")
             Button("Detener") { stopPlayback() }
             Button("Audio") { showAudioSettings = true }
                 .accessibilityHint("Abre velocidad, voz e idioma de lectura.")
@@ -2262,6 +2266,8 @@ struct NativeReadingScreen: View {
             if speech.isPlaying { pausePlayback() }
             else if speech.isPaused { play() }
         }
+        .accessibilityAction(named: Text("Retroceder un minuto")) { skipReading(-1) }
+        .accessibilityAction(named: Text("Avanzar un minuto")) { skipReading(1) }
         .accessibilityAction(named: Text("Añadir marca")) { addBookmark() }
         .accessibilityAction(named: Text("Avanzar cinco por ciento")) {
             move(to: min(100, currentPercent + 5))

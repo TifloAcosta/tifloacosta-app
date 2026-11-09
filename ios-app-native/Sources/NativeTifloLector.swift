@@ -50,6 +50,7 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
     var textBookmarks: [NativeTextBookmark]? = nil
     var isFavorite: Bool? = nil
     var lastPercent: Int? = nil
+    var lastOpenedAt: Date? = nil
     // Exact character position for text; optional for older libraries.
     var lastTextOffset: Int? = nil
     var lastTrackIndex: Int? = nil
@@ -345,6 +346,12 @@ final class NativeReaderLibrary: ObservableObject {
             throw error
         }
         return additions.count
+    }
+
+    func markOpened(_ document: NativeReadingDocument) {
+        guard let index = documents.firstIndex(where: { $0.id == document.id }) else { return }
+        documents[index].lastOpenedAt = .now
+        try? save()
     }
 
     func toggleFavorite(_ document: NativeReadingDocument) {
@@ -795,6 +802,7 @@ struct NativeReaderLibraryScreen: View {
     @State private var proposedTitle = ""
     @State private var newFolderName = ""
     @State private var showCreateFolder = false
+    @State private var showFolderPicker = false
     @State private var folderToDelete: String?
     @State private var folderForDocument: NativeReadingDocument?
     @State private var documentToConfigure: NativeReadingDocument?
@@ -828,6 +836,18 @@ struct NativeReaderLibraryScreen: View {
         )
     }
 
+    private var selectedFolderLabel: String {
+        if selectedFolder == "__unfiled__" { return "Sin carpeta" }
+        if selectedFolder.isEmpty { return "Todas" }
+        return library.folders.contains(selectedFolder) ? selectedFolder : "Todas"
+    }
+
+    /// Título y progreso forman una única unidad de navegación para VoiceOver.
+    private func documentRowLabel(_ doc: NativeReadingDocument) -> String {
+        let progress = max(0, min(100, library.latest(doc).lastPercent ?? 0))
+        return "\(doc.title), \(progress) por ciento leído"
+    }
+
     private var shownDocuments: [NativeReadingDocument] {
         let calendar = Calendar.current
         var items = library.documents.filter { doc in
@@ -855,6 +875,7 @@ struct NativeReaderLibraryScreen: View {
         case 2: items.sort { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
         case 3: items.sort { $0.title.localizedStandardCompare($1.title) == .orderedDescending }
         case 4: items.sort { $0.formatLabel < $1.formatLabel }
+        case 5: items.sort { ($0.lastOpenedAt ?? .distantPast) > ($1.lastOpenedAt ?? .distantPast) }
         default: items.sort { $0.importedAt > $1.importedAt }
         }
         return items
@@ -944,25 +965,13 @@ struct NativeReaderLibraryScreen: View {
                 NativeAdjustableChoice(
                     title: "Ordenar",
                     choices: ["Más recientes", "Más antiguos", "Título A a Z",
-                              "Título Z a A", "Formato"],
+                              "Título Z a A", "Formato", "Último abierto"],
                     selectedIndex: $sortIndex
                 )
             }
             Section("Carpetas") {
-                NativeAdjustableChoice(
-                    title: "Mostrar carpeta",
-                    choices: ["Todas", "Sin carpeta"] + library.folders,
-                    selectedIndex: folderFilterIndex
-                )
-                Button("Crear carpeta") { newFolderName = ""; showCreateFolder = true }
-                ForEach(library.folders, id: \.self) { folder in
-                    Button(folder) { selectedFolder = folder }
-                        .accessibilityLabel("Carpeta \(folder)")
-                        .accessibilityHint("Filtra la biblioteca por esta carpeta.")
-                        .accessibilityAction(named: Text("Eliminar carpeta")) {
-                            folderToDelete = folder
-                        }
-                }
+                Button("Carpeta: \(selectedFolderLabel)") { showFolderPicker = true }
+                    .accessibilityHint("Abre el listado de carpetas y permite crear o eliminar carpetas.")
             }
             Section("Mi biblioteca") {
                 Button(selectionMode ? "Terminar selección" : "Selección") {
@@ -999,16 +1008,17 @@ struct NativeReaderLibraryScreen: View {
                         Button {
                             toggleSelection(document.id)
                         } label: {
-                            Label(document.title, systemImage: selectedDocumentIDs.contains(document.id)
+                            Label(documentRowLabel(document), systemImage: selectedDocumentIDs.contains(document.id)
                                   ? "checkmark.circle.fill" : "circle")
                         }
-                        .accessibilityLabel("\(document.title), \(selectedDocumentIDs.contains(document.id) ? "seleccionado" : "no seleccionado")")
+                        .accessibilityLabel("\(documentRowLabel(document)), \(selectedDocumentIDs.contains(document.id) ? "seleccionado" : "no seleccionado")")
                         .accessibilityHint("Doble toque para cambiar la selección de este documento.")
                     } else {
                     NavigationLink {
                         NativeReadingScreen(document: document, speech: speech)
-                    } label: { Text(document.title) }
-                    .accessibilityLabel("\(document.title), \(document.formatLabel)")
+                            .onAppear { library.markOpened(document) }
+                    } label: { Text(documentRowLabel(document)) }
+                    .accessibilityLabel(documentRowLabel(document))
                     .accessibilityHint("Doble toque para abrir. Hay acciones de accesibilidad.")
                     .accessibilityAction(named: Text("Reproducir")) { play(document) }
                     .accessibilityAction(named: Text("Compartir documento original")) {
@@ -1048,6 +1058,40 @@ struct NativeReaderLibraryScreen: View {
             Button("Desde Archivos") { importPresented = true }
             Button("Bibliotecas en línea") { externalCatalogPresented = true }
             Button("Cancelar", role: .cancel) {}
+        }
+        .sheet(isPresented: $showFolderPicker) {
+            NavigationStack {
+                List {
+                    Section {
+                        Button("Crear carpeta") {
+                            showFolderPicker = false
+                            newFolderName = ""
+                            showCreateFolder = true
+                        }
+                    }
+                    Section("Elegir carpeta") {
+                        Button("Todas") { selectedFolder = ""; showFolderPicker = false }
+                        Button("Sin carpeta") { selectedFolder = "__unfiled__"; showFolderPicker = false }
+                        ForEach(library.folders, id: \.self) { folder in
+                            Button(folder) {
+                                selectedFolder = folder
+                                showFolderPicker = false
+                            }
+                            .accessibilityHint("Filtra la biblioteca por esta carpeta.")
+                            .accessibilityAction(named: Text("Eliminar carpeta")) {
+                                showFolderPicker = false
+                                folderToDelete = folder
+                            }
+                        }
+                    }
+                }
+                .navigationTitle("Carpetas")
+                .toolbar {
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button("Cerrar") { showFolderPicker = false }
+                    }
+                }
+            }
         }
         .sheet(isPresented: $externalCatalogPresented) {
             NavigationStack {

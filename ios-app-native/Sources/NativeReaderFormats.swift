@@ -9,6 +9,7 @@ struct NativeReaderImportedPayload {
     let body: String
     let fileExtension: String
     let trackPaths: [String]
+    var daisyNavigation: [NativeDaisyNavigationPoint] = []
 }
 
 enum NativeReaderFormatError: LocalizedError {
@@ -226,6 +227,7 @@ enum NativeReaderFormats {
         let body: String
         let format: String
         var media: [String] = []
+        var daisyNavigation: [NativeDaisyNavigationPoint] = []
         switch ext {
         case "docx":
             body = joined(all.filter { $0 == "word/document.xml" })
@@ -277,6 +279,46 @@ enum NativeReaderFormats {
             }
             body = isDaisy ? joined(pages) : ""
             format = isDaisy ? "daisy" : "zip"
+            if isDaisy, let ncc = all.first(where: { $0.lowercased().hasSuffix("ncc.html") }) {
+                let raw = (try? String(contentsOf: directory.appendingPathComponent(ncc), encoding: .utf8)) ?? ""
+                let expression = try? NSRegularExpression(
+                    pattern: #"(?is)<h([1-6])\b[^>]*>(.*?)</h[1-6]>"#)
+                let ns = raw as NSString
+                for match in expression?.matches(in: raw, range: NSRange(location: 0, length: ns.length)) ?? [] {
+                    let level = Int(ns.substring(with: match.range(at: 1))) ?? 1
+                    let headingHTML = ns.substring(with: match.range(at: 2))
+                    let title = NativeDocumentText.extract(Data(headingHTML.utf8),
+                        from: URL(fileURLWithPath: "heading.html"))
+                        .trimmingCharacters(in: .whitespacesAndNewlines)
+                    guard !title.isEmpty,
+                          let hrefMatch = headingHTML.range(
+                            of: #"(?i)href\s*=\s*["']([^"']+\.smil)(?:#[^"']*)?["']"#,
+                            options: .regularExpression) else { continue }
+                    let href = String(headingHTML[hrefMatch])
+                    let path = href.replacingOccurrences(
+                        of: #"(?is)^.*?["']([^"']+\.smil)(?:#[^"']*)?["'].*$"#,
+                        with: "$1", options: .regularExpression)
+                    let smilName = URL(fileURLWithPath: path).lastPathComponent.lowercased()
+                    guard let smil = all.first(where: {
+                        $0.lowercased().hasSuffix("/" + smilName) ||
+                        $0.lowercased() == smilName
+                    }), let xml = try? String(contentsOf: directory.appendingPathComponent(smil),
+                                              encoding: .utf8),
+                          let source = xml.range(of: #"(?i)<audio\b[^>]*\bsrc\s*=\s*["'][^"']+["']"#,
+                                                  options: .regularExpression)
+                    else { continue }
+                    let snippet = String(xml[source])
+                    let audioFile = snippet.replacingOccurrences(
+                        of: #"(?is)^.*?\bsrc\s*=\s*["']([^"'#]+)(?:#[^"']*)?["'].*$"#,
+                        with: "$1", options: .regularExpression)
+                    let file = URL(fileURLWithPath: audioFile).lastPathComponent.lowercased()
+                    guard let track = audioFiles.firstIndex(where: {
+                        URL(fileURLWithPath: $0).lastPathComponent.lowercased() == file
+                    }) else { continue }
+                    let point = NativeDaisyNavigationPoint(title: title, level: level, track: track)
+                    if !daisyNavigation.contains(point) { daisyNavigation.append(point) }
+                }
+            }
             for path in audioFiles {
                 let copy = try storeMedia(directory.appendingPathComponent(path), documentID: documentID)
                 media.append(copy)
@@ -285,6 +327,7 @@ enum NativeReaderFormats {
         guard !body.isEmpty || !media.isEmpty else {
             throw NativeReaderFormatError.empty(url.lastPathComponent)
         }
-        return .init(body: body, fileExtension: format, trackPaths: media)
+        return .init(body: body, fileExtension: format, trackPaths: media,
+                     daisyNavigation: daisyNavigation)
     }
 }

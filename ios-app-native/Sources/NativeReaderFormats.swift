@@ -176,6 +176,57 @@ enum NativeReaderFormats {
         }.joined(separator: "\n")
     }
 
+
+    // SMIL fragment links refer to a <par> or <seq> in a particular file.
+    // Keep the audio lookup inside that fragment instead of using the first
+    // audio element of the entire chapter.
+    private static func daisyAudio(in xml: String, fragment: String?) -> (file: String, seconds: TimeInterval?)? {
+        let segment: String
+        if let fragment, !fragment.isEmpty {
+            let escaped = NSRegularExpression.escapedPattern(for: fragment)
+            let pattern = "(?is)<(?:par|seq)\\b[^>]*\\bid\\s*=\\s*[\\"']" +
+                escaped + "[\\"'][^>]*>.*?</(?:par|seq)>"
+            guard let range = xml.range(of: pattern, options: .regularExpression) else {
+                return nil
+            }
+            segment = String(xml[range])
+        } else {
+            segment = xml
+        }
+        guard let audio = segment.range(of: #"(?is)<audio\b[^>]*>"#, options: .regularExpression)
+        else { return nil }
+        let tag = String(segment[audio])
+        guard let src = attribute("src", in: tag) else { return nil }
+        let file = URL(fileURLWithPath: src.components(separatedBy: "#")[0])
+            .lastPathComponent.lowercased()
+        let start = attribute("clipBegin", in: tag) ?? attribute("clip-begin", in: tag)
+        return (file, start.flatMap(smilSeconds))
+    }
+
+    private static func attribute(_ name: String, in tag: String) -> String? {
+        let pattern = "(?i)\\b" + NSRegularExpression.escapedPattern(for: name) +
+            "\\s*=\\s*[\\"']([^\\"']*)[\\"']"
+        guard let expression = try? NSRegularExpression(pattern: pattern) else { return nil }
+        let text = tag as NSString
+        guard let match = expression.firstMatch(in: tag,
+            range: NSRange(location: 0, length: text.length)) else { return nil }
+        return text.substring(with: match.range(at: 1))
+    }
+
+    private static func smilSeconds(_ clock: String) -> TimeInterval? {
+        let clean = clock.trimmingCharacters(in: .whitespacesAndNewlines)
+            .replacingOccurrences(of: "npt=", with: "", options: .caseInsensitive)
+        let normalized = clean.hasSuffix("s") ? String(clean.dropLast()) : clean
+        let parts = normalized.split(separator: ":")
+        guard !parts.isEmpty, parts.count <= 3 else { return nil }
+        var total: Double = 0
+        for part in parts {
+            guard let amount = Double(part), amount >= 0, amount.isFinite else { return nil }
+            total = total * 60 + amount
+        }
+        return total
+    }
+
     private static func readPackage(_ url: URL, documentID: UUID, ext: String) throws -> NativeReaderImportedPayload {
         guard let archive = Archive(url: url, accessMode: .read) else {
             throw NativeReaderFormatError.invalidArchive
@@ -298,24 +349,22 @@ enum NativeReaderFormats {
                     let path = href.replacingOccurrences(
                         of: #"(?is)^.*?["']([^"']+\.smil)(?:#[^"']*)?["'].*$"#,
                         with: "$1", options: .regularExpression)
+                    let fragment = href.components(separatedBy: "#").dropFirst().first?
+                        .replacingOccurrences(of: #"["'].*$"#, with: "", options: .regularExpression)
                     let smilName = URL(fileURLWithPath: path).lastPathComponent.lowercased()
                     guard let smil = all.first(where: {
                         $0.lowercased().hasSuffix("/" + smilName) ||
                         $0.lowercased() == smilName
                     }), let xml = try? String(contentsOf: directory.appendingPathComponent(smil),
                                               encoding: .utf8),
-                          let source = xml.range(of: #"(?i)<audio\b[^>]*\bsrc\s*=\s*["'][^"']+["']"#,
-                                                  options: .regularExpression)
+                          let target = daisyAudio(in: xml, fragment: fragment)
                     else { continue }
-                    let snippet = String(xml[source])
-                    let audioFile = snippet.replacingOccurrences(
-                        of: #"(?is)^.*?\bsrc\s*=\s*["']([^"'#]+)(?:#[^"']*)?["'].*$"#,
-                        with: "$1", options: .regularExpression)
-                    let file = URL(fileURLWithPath: audioFile).lastPathComponent.lowercased()
+                    let file = target.file
                     guard let track = audioFiles.firstIndex(where: {
                         URL(fileURLWithPath: $0).lastPathComponent.lowercased() == file
                     }) else { continue }
-                    let point = NativeDaisyNavigationPoint(title: title, level: level, track: track)
+                    let point = NativeDaisyNavigationPoint(title: title, level: level, track: track,
+                                                          seconds: target.seconds)
                     if !daisyNavigation.contains(point) { daisyNavigation.append(point) }
                 }
             }

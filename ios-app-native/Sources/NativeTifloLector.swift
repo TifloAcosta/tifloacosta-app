@@ -4,6 +4,7 @@ import UIKit
 import AVFoundation
 import Translation
 import UniformTypeIdentifiers
+import ZIPFoundation
 
 struct NativeReaderPreferences: Codable, Hashable {
     var speedIndex: Int? = nil
@@ -35,6 +36,13 @@ struct NativeDaisyNavigationPoint: Codable, Hashable, Identifiable {
     var id: String { "\(track)-\(level)-\(title)-\(seconds ?? 0)" }
 }
 
+struct NativeReaderTextLink: Codable, Hashable {
+    let offset: Int
+    let title: String
+    let url: String
+    var targetOffset: Int? = nil
+}
+
 struct NativeReadingDocument: Codable, Identifiable, Hashable {
     let id: UUID
     var title: String
@@ -42,11 +50,14 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
     let importedAt: Date
     // Optional properties allow older beta library JSON to remain decodable.
     var fileExtension: String? = nil
+    // Ruta persistente relativa al archivo importado, si existía un archivo fuente.
+    var originalRelativePath: String? = nil
     var trackPaths: [String]? = nil
     var markedPositions: [Int]? = nil
     var textBookmarks: [NativeTextBookmark]? = nil
     var isFavorite: Bool? = nil
     var lastPercent: Int? = nil
+    var lastOpenedAt: Date? = nil
     // Exact character position for text; optional for older libraries.
     var lastTextOffset: Int? = nil
     var lastTrackIndex: Int? = nil
@@ -54,6 +65,7 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
     var lastAudioSeconds: TimeInterval? = nil
     var audioBookmarks: [NativeAudioBookmark]? = nil
     var daisyNavigation: [NativeDaisyNavigationPoint]? = nil
+    var textLinks: [NativeReaderTextLink]? = nil
     var folderName: String? = nil
     var readerPreferences: NativeReaderPreferences? = nil
 
@@ -108,6 +120,7 @@ final class NativeReaderLibrary: ObservableObject {
             if documents.contains(where: { $0.id == identifier }) { continue }
             do {
                 let payload = try NativeReaderFormats.read(url, documentID: identifier)
+                let originalPath = try NativeReaderFormats.storeOriginal(url, documentID: identifier)
                 documents.insert(
                     NativeReadingDocument(
                         id: identifier,
@@ -116,13 +129,16 @@ final class NativeReaderLibrary: ObservableObject {
                         body: payload.body,
                         importedAt: .now,
                         fileExtension: payload.fileExtension,
+                        originalRelativePath: originalPath,
                         trackPaths: payload.trackPaths,
-                        daisyNavigation: payload.daisyNavigation
+                        daisyNavigation: payload.daisyNavigation,
+                        textLinks: payload.textLinks
                     ), at: 0
                 )
                 try save()
             } catch {
                 NativeReaderFormats.deleteStoredFiles(for: identifier)
+                NativeReaderFormats.deleteOriginal(for: identifier)
                 throw error
             }
         }
@@ -151,6 +167,199 @@ final class NativeReaderLibrary: ObservableObject {
     func delete(_ document: NativeReadingDocument) {
         documents.removeAll { $0.id == document.id }
         NativeReaderFormats.deleteStoredFiles(for: document.id)
+        NativeReaderFormats.deleteOriginal(for: document.id)
+        try? save()
+    }
+
+    func originalURL(for document: NativeReadingDocument) -> URL? {
+        guard let path = latest(document).originalRelativePath,
+              let url = NativeReaderFormats.storedURL(for: path),
+              FileManager.default.fileExists(atPath: url.path) else { return nil }
+        return url
+    }
+
+    /// Exporta todas las pistas de una obra sin confundir un ZIP de audio con DAISY.
+    func exportAudioTracks(_ document: NativeReadingDocument) throws -> URL {
+        let current = latest(document)
+        guard let paths = current.trackPaths, !paths.isEmpty else {
+            throw NativeReaderFormatError.invalidArchive
+        }
+        let manager = FileManager.default
+        let temp = manager.temporaryDirectory
+        let staging = temp.appendingPathComponent("pistas-\(UUID().uuidString)", isDirectory: true)
+        try manager.createDirectory(at: staging, withIntermediateDirectories: true)
+        defer { try? manager.removeItem(at: staging) }
+
+        for (index, path) in paths.enumerated() {
+            guard let source = NativeReaderFormats.storedURL(for: path),
+                  manager.fileExists(atPath: source.path) else {
+                throw NativeReaderFormatError.invalidArchive
+            }
+            let ext = source.pathExtension.lowercased()
+            guard ["mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff", "caf"].contains(ext) else {
+                throw NativeReaderFormatError.invalidArchive
+            }
+            let filename = String(format: "Pista-%04d", index + 1) + "." + ext
+            try manager.copyItem(at: source, to: staging.appendingPathComponent(filename))
+        }
+
+        let title = current.title.replacingOccurrences(
+            of: #"[\\/:*?"<>|\x00-\x1F]"#, with: "_", options: .regularExpression
+        ).trimmingCharacters(in: .whitespacesAndNewlines)
+        let safeTitle = title.isEmpty ? "Audio" : title
+        let outputDirectory = temp.appendingPathComponent(UUID().uuidString, isDirectory: true)
+        try manager.createDirectory(at: outputDirectory, withIntermediateDirectories: true)
+        let output = outputDirectory.appendingPathComponent(safeTitle + "-pistas.zip")
+        try manager.zipItem(at: staging, to: output, shouldKeepParent: false)
+        return output
+    }
+
+    /// Exportación íntegra: registros, carpetas, archivos originales y medios de DAISY.
+    /// No modifica el almacenamiento actual y no restaura datos automáticamente.
+    func exportBackup() throws -> URL {
+        let manager = FileManager.default
+        let temp = manager.temporaryDirectory
+        let staging = temp.appendingPathComponent("TifloLector-backup-\(UUID().uuidString)", isDirectory: true)
+        try manager.createDirectory(at: staging, withIntermediateDirectories: true)
+        defer { try? manager.removeItem(at: staging) }
+
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        try encoder.encode(documents).write(to: staging.appendingPathComponent("documentos.json"), options: .atomic)
+        try encoder.encode(folders).write(to: staging.appendingPathComponent("carpetas.json"), options: .atomic)
+
+        let support = Self.storageURL.deletingLastPathComponent()
+        for folder in ["ReaderMedia", "ReaderOriginals"] {
+            let source = support.appendingPathComponent(folder, isDirectory: true)
+            if manager.fileExists(atPath: source.path) {
+                try manager.copyItem(at: source, to: staging.appendingPathComponent(folder, isDirectory: true))
+            }
+        }
+
+        let destination = temp.appendingPathComponent("Copia-TifloLector-\(UUID().uuidString).zip")
+        try manager.zipItem(at: staging, to: destination, shouldKeepParent: false)
+        return destination
+    }
+
+    /// Restaura únicamente libros que aún no existen, sin modificar los actuales.
+    /// Valida primero toda la copia. Ante un error, revierte los archivos nuevos.
+    func restoreBackup(from source: URL) throws -> Int {
+        let accessed = source.startAccessingSecurityScopedResource()
+        defer { if accessed { source.stopAccessingSecurityScopedResource() } }
+        guard let archive = Archive(url: source, accessMode: .read) else {
+            throw NativeReaderFormatError.invalidArchive
+        }
+        let manager = FileManager.default
+        let staging = manager.temporaryDirectory
+            .appendingPathComponent("restore-\(UUID().uuidString)", isDirectory: true)
+        try manager.createDirectory(at: staging, withIntermediateDirectories: true)
+        defer { try? manager.removeItem(at: staging) }
+
+        var total: Int64 = 0
+        var count = 0
+        for entry in archive {
+            let path = entry.path
+            guard entry.type == .file || entry.type == .directory else {
+                throw NativeReaderFormatError.invalidArchive
+            }
+            let cleanPath = entry.type == .directory && path.hasSuffix("/")
+                ? String(path.dropLast()) : path
+            let components = cleanPath.split(separator: "/", omittingEmptySubsequences: false)
+            guard !path.hasPrefix("/"), !path.contains("\\"),
+                  !path.contains(":"), !components.contains(where: { $0 == ".." || $0 == "." }),
+                  !components.contains(where: { $0.isEmpty }) else {
+                throw NativeReaderFormatError.invalidArchive
+            }
+            if entry.type == .directory { continue }
+            let root = String(components[0])
+            guard (components.count == 1 && ["documentos.json", "carpetas.json"].contains(root))
+                || (components.count >= 3 && ["ReaderMedia", "ReaderOriginals"].contains(root)
+                    && UUID(uuidString: String(components[1])) != nil) else {
+                throw NativeReaderFormatError.invalidArchive
+            }
+            count += 1
+            guard entry.uncompressedSize <= 1_500_000_000 else {
+                throw NativeReaderFormatError.oversizedArchive
+            }
+            total += Int64(entry.uncompressedSize)
+            guard count <= 10000, total <= 1_500_000_000 else {
+                throw NativeReaderFormatError.oversizedArchive
+            }
+            let destination = staging.appendingPathComponent(path)
+            guard !manager.fileExists(atPath: destination.path) else {
+                throw NativeReaderFormatError.invalidArchive
+            }
+            try manager.createDirectory(at: destination.deletingLastPathComponent(),
+                                        withIntermediateDirectories: true)
+            _ = try archive.extract(entry, to: destination)
+        }
+        let backedUpDocuments = try JSONDecoder().decode([NativeReadingDocument].self,
+            from: Data(contentsOf: staging.appendingPathComponent("documentos.json")))
+        let backedUpFolders = try JSONDecoder().decode([String].self,
+            from: Data(contentsOf: staging.appendingPathComponent("carpetas.json")))
+        guard Set(backedUpDocuments.map(\.id)).count == backedUpDocuments.count,
+              backedUpFolders.allSatisfy({ !$0.isEmpty && $0.count <= 80 && $0 != "__unfiled__" }),
+              Set(backedUpFolders.map { $0.lowercased() }).count == backedUpFolders.count else {
+            throw NativeReaderFormatError.invalidArchive
+        }
+        let currentIDs = Set(documents.map(\.id))
+        let additions = backedUpDocuments.filter { !currentIDs.contains($0.id) }
+        let support = Self.storageURL.deletingLastPathComponent()
+        // Comprobar que no faltan pistas ni originales para ninguno de los nuevos libros.
+        for document in additions {
+            for path in (document.trackPaths ?? []) + [document.originalRelativePath].compactMap({ $0 }) {
+                let pieces = path.split(separator: "/")
+                guard pieces.count >= 3,
+                      ["ReaderMedia", "ReaderOriginals"].contains(String(pieces[0])),
+                      String(pieces[1]) == document.id.uuidString,
+                      !pieces.contains(where: { $0 == ".." || $0 == "." }),
+                      manager.fileExists(atPath: staging.appendingPathComponent(path).path) else {
+                    throw NativeReaderFormatError.invalidArchive
+                }
+            }
+        }
+        var copied: [URL] = []
+        do {
+            for document in additions {
+                for root in ["ReaderMedia", "ReaderOriginals"] {
+                    let relative = root + "/" + document.id.uuidString
+                    let sourceDirectory = staging.appendingPathComponent(relative, isDirectory: true)
+                    guard manager.fileExists(atPath: sourceDirectory.path) else { continue }
+                    let target = support.appendingPathComponent(relative, isDirectory: true)
+                    guard !manager.fileExists(atPath: target.path) else {
+                        throw NativeReaderFormatError.invalidArchive
+                    }
+                    try manager.createDirectory(at: target.deletingLastPathComponent(),
+                                                withIntermediateDirectories: true)
+                    try manager.copyItem(at: sourceDirectory, to: target)
+                    copied.append(target)
+                }
+            }
+            let oldDocuments = documents
+            let oldFolders = folders
+            documents.append(contentsOf: additions)
+            for name in backedUpFolders where !folders.contains(where: {
+                $0.localizedCaseInsensitiveCompare(name) == .orderedSame
+            }) { folders.append(name) }
+            folders.sort { $0.localizedStandardCompare($1) == .orderedAscending }
+            do {
+                try save()
+                UserDefaults.standard.set(folders, forKey: folderStorageKey)
+            } catch {
+                documents = oldDocuments
+                folders = oldFolders
+                throw error
+            }
+        } catch {
+            copied.forEach { try? manager.removeItem(at: $0) }
+            throw error
+        }
+        return additions.count
+    }
+
+    func markOpened(_ document: NativeReadingDocument) {
+        guard let index = documents.firstIndex(where: { $0.id == document.id }) else { return }
+        documents[index].lastOpenedAt = .now
         try? save()
     }
 
@@ -186,6 +395,34 @@ final class NativeReaderLibrary: ObservableObject {
         guard let index = documents.firstIndex(where: { $0.id == document.id }) else { return }
         documents[index].folderName = folder
         try? save()
+    }
+
+    /// Acciones en lote: una única escritura de la biblioteca por operación.
+    @discardableResult
+    func moveDocuments(withIDs ids: Set<UUID>, to folder: String?) -> Int {
+        if let folder, !folders.contains(folder) { return 0 }
+        var changed = 0
+        for index in documents.indices where ids.contains(documents[index].id) {
+            if documents[index].folderName != folder {
+                documents[index].folderName = folder
+                changed += 1
+            }
+        }
+        if changed > 0 { try? save() }
+        return changed
+    }
+
+    @discardableResult
+    func markFavorites(withIDs ids: Set<UUID>, favorite: Bool) -> Int {
+        var changed = 0
+        for index in documents.indices where ids.contains(documents[index].id) {
+            if (documents[index].isFavorite ?? false) != favorite {
+                documents[index].isFavorite = favorite
+                changed += 1
+            }
+        }
+        if changed > 0 { try? save() }
+        return changed
     }
 
     func deleteFolder(_ folder: String) {
@@ -315,18 +552,18 @@ final class NativeReaderLibrary: ObservableObject {
 
 /// Informacion de avance de voz sin depender del ritmo de refresco de SwiftUI.
 private final class NativeSpeechProgressDelegate: NSObject, AVSpeechSynthesizerDelegate {
-    var onWord: ((NSRange) -> Void)?
-    var onFinish: (() -> Void)?
+    var onWord: ((NSRange, AVSpeechUtterance) -> Void)?
+    var onFinish: ((AVSpeechUtterance) -> Void)?
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
                            willSpeakRangeOfSpeechString characterRange: NSRange,
                            utterance: AVSpeechUtterance) {
-        onWord?(characterRange)
+        onWord?(characterRange, utterance)
     }
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
                            didFinish utterance: AVSpeechUtterance) {
-        onFinish?()
+        onFinish?(utterance)
     }
 }
 
@@ -355,14 +592,21 @@ final class NativeReadingSpeech: ObservableObject {
     private var baseCharacters = 0
     private var previousUTF16 = 0
     private var previousCharacterCount = 0
+    private var utteranceOffsets: [ObjectIdentifier: Int] = [:]
+    private var lastSpeechUtterance: ObjectIdentifier?
 
     init() {
-        progressDelegate.onWord = { [weak self] range in
+        progressDelegate.onWord = { [weak self] range, utterance in
             Task { @MainActor [weak self] in
                 guard let self, self.isPlaying, self.player == nil,
                       self.totalUTF16 > 0 else { return }
+                // Los callbacks de una reproducción cancelada nunca deben
+                // modificar la posición de la siguiente reproducción.
+                guard let segmentBase = self.utteranceOffsets[ObjectIdentifier(utterance)] else {
+                    return
+                }
                 let utf16End = max(0, min(self.spokenText.utf16.count,
-                                         range.location + range.length))
+                                         segmentBase + range.location + range.length))
                 if utf16End >= self.previousUTF16 {
                     let lower = String.Index(utf16Offset: self.previousUTF16, in: self.spokenText)
                     let upper = String.Index(utf16Offset: utf16End, in: self.spokenText)
@@ -370,14 +614,15 @@ final class NativeReadingSpeech: ObservableObject {
                     self.previousUTF16 = utf16End
                     self.textCharacterOffset = self.baseCharacters + self.previousCharacterCount
                 }
-                let count = self.baseUTF16 + range.location + range.length
+                let count = self.baseUTF16 + utf16End
                 self.textPercent = max(0, min(100,
                     Int(Double(count) * 100 / Double(self.totalUTF16))))
             }
         }
-        progressDelegate.onFinish = { [weak self] in
+        progressDelegate.onFinish = { [weak self] utterance in
             Task { @MainActor [weak self] in
-                guard let self, self.player == nil else { return }
+                guard let self, self.player == nil,
+                      self.lastSpeechUtterance == ObjectIdentifier(utterance) else { return }
                 self.textCharacterOffset = self.baseCharacters + self.spokenText.count
                 self.textPercent = 100
                 self.isPlaying = false
@@ -436,14 +681,26 @@ final class NativeReadingSpeech: ObservableObject {
         // La voz sigue sonando con la pantalla bloqueada y otras apps abiertas.
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
         try? AVAudioSession.sharedInstance().setActive(true)
-        let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = (voiceIdentifier.isEmpty ? nil : AVSpeechSynthesisVoice(identifier: voiceIdentifier))
-            ?? AVSpeechSynthesisVoice(language: language)
-        utterance.rate = min(AVSpeechUtteranceMaximumSpeechRate,
-            max(AVSpeechUtteranceMinimumSpeechRate,
-                AVSpeechUtteranceDefaultSpeechRate * Float(speed)))
-        utterance.pitchMultiplier = max(0.5, min(2, pitch))
-        synthesizer.speak(utterance)
+        utteranceOffsets.removeAll()
+        lastSpeechUtterance = nil
+        let segments = NativeReaderPauseProfile.segments(text)
+        var utf16Offset = 0
+        for (index, segment) in segments.enumerated() {
+            let utterance = AVSpeechUtterance(string: segment.text)
+            utterance.voice = (voiceIdentifier.isEmpty ? nil :
+                AVSpeechSynthesisVoice(identifier: voiceIdentifier))
+                ?? AVSpeechSynthesisVoice(language: language)
+            utterance.rate = min(AVSpeechUtteranceMaximumSpeechRate,
+                max(AVSpeechUtteranceMinimumSpeechRate,
+                    AVSpeechUtteranceDefaultSpeechRate * Float(speed)))
+            utterance.pitchMultiplier = max(0.5, min(2, pitch))
+            utterance.postUtteranceDelay = index == segments.count - 1 ? 0 : segment.delay
+            let identifier = ObjectIdentifier(utterance)
+            utteranceOffsets[identifier] = utf16Offset
+            lastSpeechUtterance = identifier
+            utf16Offset += segment.text.utf16.count
+            synthesizer.speak(utterance)
+        }
         isPlaying = true
         isPaused = false
     }
@@ -562,6 +819,8 @@ struct NativeReaderLibraryScreen: View {
     @EnvironmentObject private var library: NativeReaderLibrary
     @StateObject private var speech = NativeReadingSpeech()
     @State private var importPresented = false
+    @State private var restorePresented = false
+    @State private var restoreResult: String?
     @State private var importSourcesPresented = false
     @State private var externalCatalogPresented = false
     @State private var information: NativeReadingDocument?
@@ -572,9 +831,15 @@ struct NativeReaderLibraryScreen: View {
     @State private var proposedTitle = ""
     @State private var newFolderName = ""
     @State private var showCreateFolder = false
+    @State private var showFolderPicker = false
     @State private var folderToDelete: String?
     @State private var folderForDocument: NativeReadingDocument?
     @State private var documentToConfigure: NativeReadingDocument?
+    @State private var selectionMode = false
+    @State private var selectedDocumentIDs: Set<UUID> = []
+    @State private var showBulkMove = false
+    @State private var selectionFeedback: String?
+
     @AppStorage("native-reading-folder-filter") private var selectedFolder = ""
     @AppStorage("native-reading-filter") private var filterIndex = 0
     @AppStorage("native-reading-sort") private var sortIndex = 0
@@ -598,6 +863,18 @@ struct NativeReaderLibraryScreen: View {
                 else if names.indices.contains(value - 2) { selectedFolder = names[value - 2] }
             }
         )
+    }
+
+    private var selectedFolderLabel: String {
+        if selectedFolder == "__unfiled__" { return "Sin carpeta" }
+        if selectedFolder.isEmpty { return "Todas" }
+        return library.folders.contains(selectedFolder) ? selectedFolder : "Todas"
+    }
+
+    /// Título y progreso forman una única unidad de navegación para VoiceOver.
+    private func documentRowLabel(_ doc: NativeReadingDocument) -> String {
+        let progress = max(0, min(100, library.latest(doc).lastPercent ?? 0))
+        return "\(doc.title), \(progress) por ciento leído"
     }
 
     private var shownDocuments: [NativeReadingDocument] {
@@ -627,9 +904,28 @@ struct NativeReaderLibraryScreen: View {
         case 2: items.sort { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
         case 3: items.sort { $0.title.localizedStandardCompare($1.title) == .orderedDescending }
         case 4: items.sort { $0.formatLabel < $1.formatLabel }
+        case 5: items.sort { ($0.lastOpenedAt ?? .distantPast) > ($1.lastOpenedAt ?? .distantPast) }
         default: items.sort { $0.importedAt > $1.importedAt }
         }
         return items
+    }
+
+    private var visibleSelection: Set<UUID> {
+        selectedDocumentIDs.intersection(Set(shownDocuments.map(\.id)))
+    }
+
+    private func toggleSelection(_ id: UUID) {
+        if selectedDocumentIDs.contains(id) {
+            selectedDocumentIDs.remove(id)
+        } else {
+            selectedDocumentIDs.insert(id)
+        }
+    }
+
+    private func finishSelection(_ message: String? = nil) {
+        selectedDocumentIDs.removeAll()
+        selectionMode = false
+        selectionFeedback = message
     }
 
     private func play(_ document: NativeReadingDocument) {
@@ -674,48 +970,34 @@ struct NativeReaderLibraryScreen: View {
                 Button("Importar", systemImage: "square.and.arrow.down") {
                     importSourcesPresented = true
                 }
-                NavigationLink("Ajustes") { NativeReaderSettingsScreen() }
-            }
-            Section("Filtrar y ordenar") {
-                NativeAdjustableChoice(
-                    title: "Filtrar documentos",
-                    choices: ["Todos", "Textos", "PDF", "EPUB", "Office", "Audio y DAISY",
-                              "Con marcas", "Favoritos", "Importados hoy",
-                              "Últimos siete días", "Último mes"],
-                    selectedIndex: $filterIndex
-                )
-                NativeAdjustableChoice(
-                    title: "Ordenar",
-                    choices: ["Más recientes", "Más antiguos", "Título A a Z",
-                              "Título Z a A", "Formato"],
-                    selectedIndex: $sortIndex
-                )
-            }
-            Section("Carpetas") {
-                NativeAdjustableChoice(
-                    title: "Mostrar carpeta",
-                    choices: ["Todas", "Sin carpeta"] + library.folders,
-                    selectedIndex: folderFilterIndex
-                )
-                Button("Crear carpeta") { newFolderName = ""; showCreateFolder = true }
-                ForEach(library.folders, id: \.self) { folder in
-                    Button(folder) { selectedFolder = folder }
-                        .accessibilityLabel("Carpeta \(folder)")
-                        .accessibilityHint("Filtra la biblioteca por esta carpeta.")
-                        .accessibilityAction(named: Text("Eliminar carpeta")) {
-                            folderToDelete = folder
-                        }
-                }
             }
             Section("Mi biblioteca") {
                 if shownDocuments.isEmpty { Text("No hay documentos con el filtro actual.") }
                 ForEach(shownDocuments) { document in
+                    if selectionMode {
+                        Button {
+                            toggleSelection(document.id)
+                        } label: {
+                            Label(documentRowLabel(document), systemImage: selectedDocumentIDs.contains(document.id)
+                                  ? "checkmark.circle.fill" : "circle")
+                        }
+                        .accessibilityLabel("\(documentRowLabel(document)), \(selectedDocumentIDs.contains(document.id) ? "seleccionado" : "no seleccionado")")
+                        .accessibilityHint("Doble toque para cambiar la selección de este documento.")
+                    } else {
                     NavigationLink {
                         NativeReadingScreen(document: document, speech: speech)
-                    } label: { Text(document.title) }
-                    .accessibilityLabel("\(document.title), \(document.formatLabel)")
+                            .onAppear { library.markOpened(document) }
+                    } label: { Text(documentRowLabel(document)) }
+                    .accessibilityLabel(documentRowLabel(document))
                     .accessibilityHint("Doble toque para abrir. Hay acciones de accesibilidad.")
                     .accessibilityAction(named: Text("Reproducir")) { play(document) }
+                    .accessibilityAction(named: Text("Compartir documento original")) {
+                        if let url = library.originalURL(for: document) {
+                            NativeShare.present(url: url)
+                        } else {
+                            importError = "El documento original no está disponible. Puedes exportar el texto desde el lector si existe."
+                        }
+                    }
                     .accessibilityAction(named: Text("Información")) { information = document }
                     .accessibilityAction(named: Text("Ajustes del documento")) {
                         documentToConfigure = document
@@ -734,7 +1016,70 @@ struct NativeReaderLibraryScreen: View {
                         documentToDelete = document
                         confirmDeletion = true
                     }
+                    }
                 }
+                Button(selectionMode ? "Terminar selección" : "Selección") {
+                    if selectionMode {
+                        finishSelection()
+                    } else {
+                        selectedDocumentIDs.removeAll()
+                        selectionMode = true
+                    }
+                }
+                if selectionMode {
+                    Text("\(visibleSelection.count) documentos seleccionados")
+                        .accessibilityAddTraits(.updatesFrequently)
+                    Button("Seleccionar todos los visibles") {
+                        selectedDocumentIDs.formUnion(shownDocuments.map(\.id))
+                    }
+                    Button("Deseleccionar todos") { selectedDocumentIDs.removeAll() }
+                    Button("Mover seleccionados a carpeta") { showBulkMove = true }
+                        .disabled(visibleSelection.isEmpty)
+                    Button("Añadir seleccionados a favoritos") {
+                        let count = library.markFavorites(withIDs: visibleSelection, favorite: true)
+                        finishSelection("\(count) documentos añadidos a favoritos.")
+                    }
+                    .disabled(visibleSelection.isEmpty)
+                    Button("Quitar seleccionados de favoritos") {
+                        let count = library.markFavorites(withIDs: visibleSelection, favorite: false)
+                        finishSelection("\(count) documentos retirados de favoritos.")
+                    }
+                    .disabled(visibleSelection.isEmpty)
+                }
+            }
+            // Los controles de gestión quedan después del último libro.
+            Section("Filtrar y ordenar") {
+                NativeAdjustableChoice(
+                    title: "Filtrar documentos",
+                    choices: ["Todos", "Textos", "PDF", "EPUB", "Office", "Audio y DAISY",
+                              "Con marcas", "Favoritos", "Importados hoy",
+                              "Últimos siete días", "Último mes"],
+                    selectedIndex: $filterIndex
+                )
+                NativeAdjustableChoice(
+                    title: "Ordenar",
+                    choices: ["Más recientes", "Más antiguos", "Título A a Z",
+                              "Título Z a A", "Formato", "Último abierto"],
+                    selectedIndex: $sortIndex
+                )
+            }
+            Section("Carpetas") {
+                Button("Carpeta: \(selectedFolderLabel)") { showFolderPicker = true }
+                    .accessibilityHint("Abre el listado de carpetas y permite crear o eliminar carpetas.")
+            }
+            Section("Más opciones") {
+                NavigationLink("Ajustes") { NativeReaderSettingsScreen() }
+                Button("Exportar copia de seguridad") {
+                    do {
+                        let url = try library.exportBackup()
+                        NativeShare.present(url: url)
+                    } catch {
+                        importError = "No se pudo crear la copia de seguridad: \(error.localizedDescription)"
+                    }
+                }
+                .accessibilityHint("Incluye documentos, posiciones, marcas, carpetas y archivos guardados.")
+                Button("Restaurar copia de seguridad") { restorePresented = true }
+                    .accessibilityHint("Importa los libros que faltan sin sustituir los que ya están en la biblioteca.")
             }
         }
         .tifloScreenSurface()
@@ -745,6 +1090,40 @@ struct NativeReaderLibraryScreen: View {
             Button("Desde Archivos") { importPresented = true }
             Button("Bibliotecas en línea") { externalCatalogPresented = true }
             Button("Cancelar", role: .cancel) {}
+        }
+        .sheet(isPresented: $showFolderPicker) {
+            NavigationStack {
+                List {
+                    Section {
+                        Button("Crear carpeta") {
+                            showFolderPicker = false
+                            newFolderName = ""
+                            showCreateFolder = true
+                        }
+                    }
+                    Section("Elegir carpeta") {
+                        Button("Todas") { selectedFolder = ""; showFolderPicker = false }
+                        Button("Sin carpeta") { selectedFolder = "__unfiled__"; showFolderPicker = false }
+                        ForEach(library.folders, id: \.self) { folder in
+                            Button(folder) {
+                                selectedFolder = folder
+                                showFolderPicker = false
+                            }
+                            .accessibilityHint("Filtra la biblioteca por esta carpeta.")
+                            .accessibilityAction(named: Text("Eliminar carpeta")) {
+                                showFolderPicker = false
+                                folderToDelete = folder
+                            }
+                        }
+                    }
+                }
+                .navigationTitle("Carpetas")
+                .toolbar {
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button("Cerrar") { showFolderPicker = false }
+                    }
+                }
+            }
         }
         .sheet(isPresented: $externalCatalogPresented) {
             NavigationStack {
@@ -766,6 +1145,26 @@ struct NativeReaderLibraryScreen: View {
                 importError = error.localizedDescription
             }
         }
+        .fileImporter(isPresented: $restorePresented, allowedContentTypes: [.zip],
+                      allowsMultipleSelection: false) { result in
+            switch result {
+            case .success(let urls):
+                guard let url = urls.first else { return }
+                do {
+                    let restored = try library.restoreBackup(from: url)
+                    restoreResult = "Se han recuperado \(restored) documentos nuevos. Los libros existentes no se han modificado."
+                } catch {
+                    importError = "No se pudo restaurar la copia: \(error.localizedDescription)"
+                }
+            case .failure(let error): importError = error.localizedDescription
+            }
+        }
+        .alert("Restauración de biblioteca", isPresented: Binding(
+            get: { restoreResult != nil },
+            set: { if !$0 { restoreResult = nil } }
+        )) { Button("Aceptar") { restoreResult = nil } } message: {
+            Text(restoreResult ?? "")
+        }
         .alert("Crear carpeta", isPresented: $showCreateFolder) {
             TextField("Nombre de la carpeta", text: $newFolderName)
             Button("Crear") {
@@ -776,6 +1175,26 @@ struct NativeReaderLibraryScreen: View {
             Button("Cancelar", role: .cancel) {}
         } message: {
             Text("Crea una carpeta para organizar las obras sin mover ni borrar archivos del sistema.")
+        }
+        .confirmationDialog("Mover documentos seleccionados",
+                            isPresented: $showBulkMove, titleVisibility: .visible) {
+            Button("Sin carpeta") {
+                let count = library.moveDocuments(withIDs: visibleSelection, to: nil)
+                finishSelection("\(count) documentos movidos fuera de las carpetas.")
+            }
+            ForEach(library.folders, id: \.self) { folder in
+                Button(folder) {
+                    let count = library.moveDocuments(withIDs: visibleSelection, to: folder)
+                    finishSelection("\(count) documentos movidos a \(folder).")
+                }
+            }
+            Button("Cancelar", role: .cancel) {}
+        }
+        .alert("Selección de documentos", isPresented: Binding(
+            get: { selectionFeedback != nil },
+            set: { if !$0 { selectionFeedback = nil } }
+        )) { Button("Aceptar") { selectionFeedback = nil } } message: {
+            Text(selectionFeedback ?? "")
         }
         .confirmationDialog("Mover a carpeta",
                             isPresented: Binding(
@@ -879,6 +1298,8 @@ private struct NativeReaderTextLayout {
     let sentenceStarts: [Int]
     let pageStarts: [Int]
     let headingStarts: [Int]
+    let chapterStarts: [Int]
+    let linkStarts: [Int]
     let namedHeadings: [NativeReaderNavigationPoint]
     let namedPages: [NativeReaderNavigationPoint]
     let hasRealPages: Bool
@@ -921,6 +1342,7 @@ private struct NativeReaderTextLayout {
 
         var pages: [Int] = [0]
         var headings: [Int] = [0]
+        var chapters: [Int] = []
         var pageEntries: [NativeReaderNavigationPoint] = []
         var headingEntries: [NativeReaderNavigationPoint] = []
         var lineOffset = 0
@@ -937,12 +1359,26 @@ private struct NativeReaderTextLayout {
                 headings.append(lineOffset)
                 headingEntries.append(.init(offset: lineOffset,
                     title: line.trimmingCharacters(in: .whitespaces)))
+                if normalized.range(of: #"^(capítulo\s+|capitulo\s+|#{1,2}\s+)"#,
+                                    options: .regularExpression) != nil {
+                    chapters.append(lineOffset)
+                }
             }
             lineOffset += line.count + 1
         }
         // Sin marcas de página explícitas, los fragmentos hacen de páginas virtuales.
         pageStarts = Array(Set((pages.count > 1 ? pages : offsets) + [0, totalCharacters])).sorted()
         headingStarts = headings.count > 1 ? Array(Set(headings)).sorted() : []
+        chapterStarts = Array(Set(chapters)).sorted()
+        // Detect only URLs that remain visible in the extracted text. These
+        // offsets share the same Character coordinate system as readingOffset.
+        let urlPattern = #"https?://[^\s<>\\"']+"#
+        let urlRegex = try? NSRegularExpression(pattern: urlPattern, options: [.caseInsensitive])
+        let fullRange = NSRange(body.startIndex..<body.endIndex, in: body)
+        linkStarts = (urlRegex?.matches(in: body, range: fullRange) ?? []).compactMap { match in
+            guard let range = Range(match.range, in: body) else { return nil }
+            return body.distance(from: body.startIndex, to: range.lowerBound)
+        }
         namedHeadings = headingEntries
         hasRealPages = !pageEntries.isEmpty
         namedPages = pageEntries.isEmpty
@@ -953,6 +1389,8 @@ private struct NativeReaderTextLayout {
     func nearbyOffset(_ offset: Int, direction: Int, unit: Int) -> Int? {
         let boundaries: [Int]
         switch unit {
+        case 8: boundaries = linkStarts
+        case 7: boundaries = chapterStarts
         case 4: boundaries = headingStarts
         case 3: boundaries = pageStarts
         case 2: boundaries = sentenceStarts
@@ -992,6 +1430,7 @@ struct NativeReadingScreen: View {
     @AppStorage("native-reading-line-spacing-index") private var lineSpacingIndex = 0
     @AppStorage("native-reading-strong-text") private var strongText = false
     @AppStorage("native-reader-navigation-unit") private var navigationUnit = 0
+    @AppStorage("native-reader-time-step-index") private var timeStepIndex = 1
     @AppStorage("native-reader-reading-mode") private var readingMode = 0
     @State private var didApplyOpeningMode = false
     @State private var sleepIndex = 0 // Each open document starts with timer disabled.
@@ -1008,6 +1447,16 @@ struct NativeReadingScreen: View {
     @State private var showWordTools = false
     @State private var showAudioSettings = false
     @State private var showVisualSettings = false
+    @State private var showAudioExport = false
+    @State private var audioExportBusy = false
+    @State private var audioExportProgress = ""
+    @State private var audioExportTask: Task<Void, Never>?
+    @State private var audioExportFormat: NativeGeminiAudioExport.Format = .mp3
+    @State private var audioExportLanguage = "es"
+    @State private var audioExportEngine: NativeGeminiAudioExport.Engine = .system
+    @State private var audioExportSystemVoice = ""
+    @State private var audioExportGeminiVoice = "Kore"
+    @State private var audioExportPhononVoice = ""
     @State private var showDocumentActions = false
     @State private var showDocumentInformation = false
     @State private var showSavedMarks = false
@@ -1018,6 +1467,11 @@ struct NativeReadingScreen: View {
     private let textLayout: NativeReaderTextLayout
     private let wordCount: Int
     private static let percentages = (0...100).map { "\($0) por ciento" }
+    private static let timeStepChoices = ["30 segundos", "1 minuto", "2 minutos", "5 minutos"]
+    private static let timeStepSeconds = [30, 60, 120, 300]
+    private var timeStep: Int {
+        Self.timeStepSeconds[max(0, min(Self.timeStepSeconds.count - 1, timeStepIndex))]
+    }
     private static let sleepChoices = [
         "Desactivado", "5 minutos", "10 minutos", "15 minutos",
         "30 minutos", "45 minutos", "60 minutos"
@@ -1046,6 +1500,47 @@ struct NativeReadingScreen: View {
     private var effectiveStrongText: Bool { latest.readerPreferences?.strongText ?? strongText }
     private var speed: Double { speeds[max(0, min(4, effectiveSpeedIndex))] }
     private var isAudioOnly: Bool { latest.body.isEmpty && !tracks.isEmpty }
+    private var navigationOptions: [(unit: Int, label: String)] {
+        var options: [(unit: Int, label: String)] = []
+        if !latest.body.isEmpty {
+            options += [(0, "Bloque"), (1, "Párrafo"), (2, "Frase"), (3, "Página")]
+            if !textLayout.headingStarts.isEmpty { options.append((4, "Encabezado")) }
+        }
+        if !tracks.isEmpty {
+            if (latest.daisyNavigation ?? []).contains(where: { $0.kind == "Página" }) {
+                options.append((9, "Página DAISY"))
+            }
+            if (latest.daisyNavigation ?? []).contains(where: { $0.kind == "Referencia" }) {
+                options.append((10, "Referencia DAISY"))
+            }
+        }
+        if !tracks.isEmpty || !latest.body.isEmpty { options.append((5, "Tiempo")) }
+        if latest.hasBookmarks { options.append((6, "Marcas")) }
+        if !textLayout.linkStarts.isEmpty || !(latest.textLinks ?? []).isEmpty {
+            options.append((8, "Enlaces"))
+        }
+        if !textLayout.chapterStarts.isEmpty ||
+            (latest.daisyNavigation ?? []).contains(where: { $0.kind != "Página" && $0.kind != "Referencia" }) {
+            options.append((7, "Capítulo"))
+        }
+        return options
+    }
+
+    private var effectiveNavigationUnit: Int {
+        navigationOptions.contains(where: { $0.unit == navigationUnit })
+            ? navigationUnit : (navigationOptions.first?.unit ?? 0)
+    }
+
+    private var navigationSelection: Binding<Int> {
+        Binding(
+            get: { navigationOptions.firstIndex(where: { $0.unit == effectiveNavigationUnit }) ?? 0 },
+            set: { index in
+                guard navigationOptions.indices.contains(index) else { return }
+                navigationUnit = navigationOptions[index].unit
+            }
+        )
+    }
+
     private var excerpt: String {
         guard !textLayout.fragments.isEmpty else { return "" }
         return textLayout.fragments[textLayout.fragmentIndex(for: readingOffset)]
@@ -1228,12 +1723,137 @@ struct NativeReadingScreen: View {
         }
     }
 
+    private func activateCurrentLink() {
+        guard navigationUnit == 8 else {
+            actionMessage = "Selecciona Enlaces en Modo de navegación."
+            return
+        }
+        guard let link = latest.textLinks?.first(where: { $0.offset == readingOffset }) else {
+            actionMessage = "No hay un enlace estructurado en esta posición."
+            return
+        }
+        if let target = link.targetOffset {
+            jump(to: target)
+            actionMessage = "Destino: \(link.title)"
+        } else if let url = URL(string: link.url),
+                  ["https", "http"].contains(url.scheme?.lowercased() ?? ""),
+                  url.host != nil {
+            UIApplication.shared.open(url)
+        } else {
+            actionMessage = "Este enlace no tiene un destino disponible."
+        }
+    }
+
     private func moveUnit(_ direction: Int) {
+        let unit = effectiveNavigationUnit
+        if unit == 9 || unit == 10 {
+            moveDaisyPoint(direction, kind: unit == 9 ? "Página" : "Referencia")
+            return
+        }
+        if unit == 8 {
+            let offsets = Array(Set(textLayout.linkStarts +
+                                    (latest.textLinks ?? []).map { $0.offset })).sorted()
+            let next = direction > 0
+                ? offsets.first(where: { $0 > readingOffset })
+                : offsets.last(where: { $0 < readingOffset })
+            guard let next else {
+                actionMessage = "No hay más enlaces en esa dirección."
+                return
+            }
+            jump(to: next)
+            if let link = latest.textLinks?.first(where: { $0.offset == next }) {
+                actionMessage = "Enlace: \(link.title)"
+            }
+            return
+        }
+        if unit == 7 && !tracks.isEmpty {
+            moveDaisyPoint(direction, kind: nil)
+            return
+        }
+        if unit == 5 {
+            skipReading(direction)
+            return
+        }
+        if unit == 6 {
+            moveBetweenMarks(direction)
+            return
+        }
         guard !document.body.isEmpty,
               let next = textLayout.nearbyOffset(readingOffset,
-                                                  direction: direction, unit: navigationUnit)
+                                                  direction: direction, unit: unit)
         else { return }
         jump(to: next)
+    }
+
+    private func moveDaisyPoint(_ direction: Int, kind: String?) {
+        let points = (latest.daisyNavigation ?? []).filter { point in
+            if let kind { return point.kind == kind }
+            return point.kind != "Página" && point.kind != "Referencia"
+        }.sorted {
+            $0.track == $1.track ? ($0.seconds ?? 0) < ($1.seconds ?? 0) : $0.track < $1.track
+        }
+        let currentTime = speech.hasAudio ? speech.audioElapsed : (latest.lastAudioSeconds ?? 0)
+        let candidates = points.filter { point in
+            if point.track != trackIndex {
+                return direction > 0 ? point.track > trackIndex : point.track < trackIndex
+            }
+            let seconds = point.seconds ?? 0
+            return direction > 0 ? seconds > currentTime + 0.5 : seconds < currentTime - 0.5
+        }
+        guard let point = direction > 0 ? candidates.first : candidates.last else {
+            actionMessage = "No hay más elementos de ese tipo en esa dirección."
+            return
+        }
+        jumpToDaisy(point)
+        actionMessage = point.title
+    }
+
+    private func moveBetweenMarks(_ direction: Int) {
+        if !tracks.isEmpty {
+            let marks = latest.savedAudioBookmarks.sorted {
+                $0.track == $1.track
+                    ? ($0.seconds ?? Double($0.percent)) < ($1.seconds ?? Double($1.percent))
+                    : $0.track < $1.track
+            }
+            let candidates = marks.filter { mark in
+                if mark.track != trackIndex {
+                    return direction > 0 ? mark.track > trackIndex : mark.track < trackIndex
+                }
+                if let seconds = mark.seconds, speech.hasAudio {
+                    return direction > 0 ? seconds > speech.audioElapsed + 0.5
+                        : seconds < speech.audioElapsed - 0.5
+                }
+                return direction > 0 ? mark.percent > currentPercent
+                    : mark.percent < currentPercent
+            }
+            guard let mark = direction > 0 ? candidates.first : candidates.last else {
+                actionMessage = "No hay más marcas en esa dirección."
+                return
+            }
+            trackIndex = mark.track
+            currentPercent = mark.percent
+            didRestoreAudioPosition = true
+            playTrack()
+            if speech.hasAudio, let seconds = mark.seconds {
+                speech.seek(toSeconds: seconds)
+                currentPercent = speech.audioPercent
+            }
+            persistPosition()
+            applySleepTimer()
+        } else {
+            let offsets = Set(latest.savedTextBookmarks.map(\.offset)
+                + latest.bookmarks.map {
+                    Int(Double(textLayout.totalCharacters) * Double($0) / 100.0)
+                }).sorted()
+            let next = direction > 0
+                ? offsets.first(where: { $0 > readingOffset })
+                : offsets.last(where: { $0 < readingOffset })
+            guard let next else {
+                actionMessage = "No hay más marcas en esa dirección."
+                return
+            }
+            jump(to: next)
+        }
     }
 
     private func bookmarkDescription(atOffset offset: Int) -> String {
@@ -1268,7 +1888,7 @@ struct NativeReadingScreen: View {
 
     private func skipReading(_ direction: Int) {
         if speech.hasAudio {
-            speech.skip(seconds: TimeInterval(direction * 60))
+            speech.skip(seconds: TimeInterval(direction * timeStep))
             currentPercent = speech.audioPercent
             persistPosition()
             actionMessage = "Posición: \(currentPercent) por ciento."
@@ -1276,7 +1896,8 @@ struct NativeReadingScreen: View {
             guard !document.body.isEmpty else { return }
             let charactersPerMinute = Double(textLayout.totalCharacters) /
                 Double(max(1, wordCount)) * 165.0 * speed
-            let offset = readingOffset + direction * max(1, Int(charactersPerMinute))
+            let offset = readingOffset + direction * max(1,
+                Int(charactersPerMinute * Double(timeStep) / 60.0))
             jump(to: offset)
             actionMessage = "Posición: \(currentPercent) por ciento."
         }
@@ -1293,14 +1914,133 @@ struct NativeReadingScreen: View {
         }
     }
 
+    private func exportGeneratedAudio() {
+        guard !audioExportBusy, !latest.body.isEmpty else { return }
+        let engine = audioExportEngine
+        let voice: String
+        switch engine {
+        case .system:
+            voice = audioExportSystemVoice.isEmpty ? effectiveVoiceID : audioExportSystemVoice
+        case .gemini:
+            voice = audioExportGeminiVoice
+        case .phonon:
+            voice = audioExportPhononVoice
+        }
+        audioExportBusy = true
+        audioExportProgress = "Preparando exportación…"
+        let body = latest.body
+        let title = latest.title
+        audioExportTask = Task {
+            defer {
+                audioExportBusy = false
+                audioExportTask = nil
+            }
+            do {
+                let url = try await NativeGeminiAudioExport.export(
+                    text: body, title: title, voice: voice,
+                    format: audioExportFormat, engine: engine,
+                    speed: [0.75, 0.9, 1.0, 1.25, 1.5][max(0, min(4, effectiveSpeedIndex))],
+                    pitch: pitch, language: audioExportLanguage,
+                    progress: { finished, total in
+                        audioExportProgress = "Generados \(finished) de \(total) fragmentos"
+                    })
+                try Task.checkCancellation()
+                showAudioExport = false
+                audioExportProgress = "Exportación completada."
+                NativeShare.present(url: url)
+            } catch is CancellationError {
+                audioExportProgress = "Exportación cancelada."
+            } catch {
+                audioExportProgress = "Error al exportar: \(error.localizedDescription)"
+            }
+        }
+    }
+
+    private var audioExportSheet: some View {
+        NavigationStack {
+            Form {
+                Section("Formato de salida") {
+                    Picker("Formato", selection: $audioExportFormat) {
+                        ForEach(NativeGeminiAudioExport.Format.allCases) { item in
+                            Text(item.rawValue).tag(item)
+                        }
+                    }
+                }
+                if audioExportFormat == .daisy {
+                    Section("Idioma del libro DAISY") {
+                        Picker("Idioma del contenido", selection: $audioExportLanguage) {
+                            Text("Español").tag("es")
+                            Text("Inglés").tag("en")
+                            Text("Portugués").tag("pt")
+                            Text("Francés").tag("fr")
+                            Text("Alemán").tag("de")
+                            Text("Italiano").tag("it")
+                        }
+                        Text("Selecciona el idioma del texto original, aunque utilices otro motor de voz.")
+                    }
+                }
+                Section("Motor de voz") {
+                    Picker("Motor", selection: $audioExportEngine) {
+                        Text("Voces del sistema").tag(NativeGeminiAudioExport.Engine.system)
+                        Text("Gemini").tag(NativeGeminiAudioExport.Engine.gemini)
+                        if NativePhononRuntime.isUsable {
+                            Text("Phonon").tag(NativeGeminiAudioExport.Engine.phonon)
+                        }
+                    }
+                    if audioExportEngine == .system {
+                        Picker("Voz", selection: $audioExportSystemVoice) {
+                            Text("Voz del documento").tag("")
+                            ForEach(AVSpeechSynthesisVoice.speechVoices(), id: \.identifier) { voice in
+                                Text("\(voice.name), \(voice.language)").tag(voice.identifier)
+                            }
+                        }
+                    } else if audioExportEngine == .gemini {
+                        Picker("Voz", selection: $audioExportGeminiVoice) {
+                            ForEach(NativeGeminiSpeech.voices, id: \.self) { voice in
+                                Text(voice).tag(voice)
+                            }
+                        }
+                        Text("Gemini requiere una clave personal configurada en Motores externos.")
+                    } else {
+                        Text("Phonon requiere el motor y sus modelos instalados.")
+                        TextField("Nombre de la voz Phonon", text: $audioExportPhononVoice)
+                    }
+                }
+                Section("Estado") {
+                    Text(audioExportProgress.isEmpty ? "Selecciona el formato y el motor." : audioExportProgress)
+                        .accessibilityAddTraits(.updatesFrequently)
+                    Button(audioExportBusy ? "Generando…" : "Generar y compartir") {
+                        exportGeneratedAudio()
+                    }
+                    .disabled(audioExportBusy)
+                    if audioExportBusy {
+                        Button("Cancelar generación", role: .cancel) {
+                            audioExportTask?.cancel()
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Exportar audio")
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Cerrar") { showAudioExport = false }
+                        .disabled(audioExportBusy)
+                }
+            }
+        }
+    }
+
     private func exportText() {
         guard !latest.body.isEmpty else { return }
-        let name = latest.title.replacingOccurrences(
-            of: #"[^A-Za-z0-9 _.-]"#, with: "_", options: .regularExpression
-        )
-        let url = FileManager.default.temporaryDirectory
-            .appendingPathComponent(name + ".txt")
+        let cleanName = latest.title.replacingOccurrences(
+            of: #"[\\/:*?"<>|\x00-\x1F]"#, with: "_", options: .regularExpression
+        ).trimmingCharacters(in: .whitespacesAndNewlines)
+        let name = cleanName.isEmpty ? "Documento" : cleanName
+        let directory = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString, isDirectory: true)
+        let url = directory.appendingPathComponent(name + ".txt")
         do {
+            try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
             try latest.body.write(to: url, atomically: true, encoding: .utf8)
             NativeShare.present(url: url)
         } catch {
@@ -1343,20 +2083,19 @@ struct NativeReadingScreen: View {
             Button(speech.isPlaying ? "Pausar" : "Reproducir") {
                 speech.isPlaying ? pausePlayback() : play()
             }
-            .accessibilityHint("Doble toque para reproducir o pausar. Desliza arriba para avanzar un minuto y abajo para retroceder un minuto.")
+            .accessibilityHint("Doble toque para reproducir o pausar. Desliza arriba o abajo para moverte según el modo de navegación seleccionado.")
             .accessibilityValue("\(currentPercent) por ciento")
             .accessibilityAdjustableAction { direction in
                 switch direction {
-                case .increment: skipReading(1)
-                case .decrement: skipReading(-1)
+                case .increment: moveUnit(1)
+                case .decrement: moveUnit(-1)
                 @unknown default: break
                 }
             }
-            Button("Detener") { stopPlayback() }
-            Button("Audio") { showAudioSettings = true }
-                .accessibilityHint("Abre velocidad, voz e idioma de lectura.")
-            Button("Visual") { showVisualSettings = true }
-                .accessibilityHint("Abre tamaño de letra y presentación visual.")
+            .accessibilityAction(named: Text("Abrir enlace actual")) {
+                activateCurrentLink()
+            }
+
         }
         .buttonStyle(.bordered)
         .controlSize(.small)
@@ -1381,14 +2120,6 @@ struct NativeReadingScreen: View {
                         }
                     )
                 )
-                HStack {
-                    Button("Pista anterior") { changeTrack(-1) }
-                        .disabled(trackIndex == 0)
-                    Button("Pista siguiente") { changeTrack(1) }
-                        .disabled(trackIndex == tracks.count - 1)
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.small)
             }
         }
     }
@@ -1397,40 +2128,25 @@ struct NativeReadingScreen: View {
         VStack(alignment: .leading, spacing: 6) {
             playbackRow
             trackButtons
-            if !document.body.isEmpty {
+            NativeAdjustableChoice(
+                title: "Modo de navegación",
+                choices: navigationOptions.map { $0.label },
+                selectedIndex: navigationSelection
+            )
+            if effectiveNavigationUnit == 5 {
                 NativeAdjustableChoice(
-                    title: "Modo de navegación",
-                    choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
-                    selectedIndex: $navigationUnit
+                    title: "Intervalo de tiempo",
+                    choices: Self.timeStepChoices,
+                    selectedIndex: $timeStepIndex
                 )
-                HStack {
-                    Button("Unidad anterior") { moveUnit(-1) }
-                    Button("Unidad siguiente") { moveUnit(1) }
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.small)
             }
             Button("Marcas guardadas") { showSavedMarks = true }
             Button("Añadir marca") { addBookmark() }
+            Button("Información") { showDocumentInformation = true }
+                .accessibilityHint("Abre los porcentajes, tiempos, páginas y datos de la obra.")
             Text(progressDescription)
                 .font(.footnote)
                 .accessibilityLabel(progressDescription)
-            if speech.hasAudio {
-                HStack(spacing: 12) {
-                    Button("Retroceder 30 segundos") {
-                        speech.skip(seconds: -30)
-                        currentPercent = speech.audioPercent
-                        persistPosition()
-                    }
-                    Button("Avanzar 30 segundos") {
-                        speech.skip(seconds: 30)
-                        currentPercent = speech.audioPercent
-                        persistPosition()
-                    }
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.small)
-            }
             NativeAdjustableChoice(
                 title: "Apagado automático",
                 choices: Self.sleepChoices,
@@ -1441,6 +2157,10 @@ struct NativeReadingScreen: View {
                 choices: Self.percentages,
                 selectedIndex: positionBinding
             )
+            Button("Audio") { showAudioSettings = true }
+                .accessibilityHint("Abre velocidad, voz y pausas por puntuación.")
+            Button("Visual") { showVisualSettings = true }
+                .accessibilityHint("Abre tamaño de letra y presentación visual.")
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 8)
@@ -1515,8 +2235,12 @@ struct NativeReadingScreen: View {
         Button(latest.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos") {
             library.toggleFavorite(document)
         }
+        if let original = library.originalURL(for: document) {
+            Button("Compartir documento original") { NativeShare.present(url: original) }
+        }
         if !latest.body.isEmpty {
             Button("Exportar texto") { exportText() }
+            Button("Exportar audio MP3 o DAISY") { showAudioExport = true }
             Button("Diccionario y pronunciación") {
                 if speech.isPlaying { pausePlayback() }
                 showWordTools = true
@@ -1524,12 +2248,18 @@ struct NativeReadingScreen: View {
             if #available(iOS 18.0, *) {
                 Button("Traducir fragmento actual") { showTranslation = true }
             }
-            Button("Unidad anterior") { moveUnit(-1) }
-            Button("Unidad siguiente") { moveUnit(1) }
         }
-        if let track = tracks.first,
+        if tracks.count == 1, let track = tracks.first,
            let url = NativeReaderFormats.storedURL(for: track) {
             Button("Compartir archivo de audio") { NativeShare.present(url: url) }
+        } else if tracks.count > 1 {
+            Button("Compartir todas las pistas de audio (ZIP)") {
+                do {
+                    NativeShare.present(url: try library.exportAudioTracks(document))
+                } catch {
+                    actionMessage = "No se pudieron compartir todas las pistas: \(error.localizedDescription)"
+                }
+            }
         }
         Button("Cancelar", role: .cancel) {}
     }
@@ -1630,12 +2360,23 @@ struct NativeReadingScreen: View {
         .tifloScreenSurface()
         .navigationTitle(document.title)
         .navigationBarTitleDisplayMode(.inline)
+        .accessibilityAction(.magicTap) {
+            // Nunca arranca una nueva reproducción: solo controla la
+            // lectura del documento que ya está activa o pausada.
+            if speech.isPlaying {
+                pausePlayback()
+            } else if speech.isPaused {
+                speech.resume()
+                applySleepTimer()
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Acciones") { showDocumentActions = true }
                     .accessibilityHint("Marcas, favoritos, traducción, exportación y navegación.")
             }
         }
+        .sheet(isPresented: $showAudioExport) { audioExportSheet }
         .confirmationDialog("Acciones del documento",
                             isPresented: $showDocumentActions,
                             titleVisibility: .visible) {
@@ -1654,6 +2395,12 @@ struct NativeReadingScreen: View {
                         latest.importedAt.formatted(date: .abbreviated, time: .shortened))
                     LabeledContent("Carpeta", value: latest.folderName ?? "Sin carpeta")
                     LabeledContent("Marcas", value: "\(latest.bookmarks.count + latest.savedTextBookmarks.count + latest.savedAudioBookmarks.count)")
+                    if !latest.body.isEmpty {
+                        LabeledContent("Palabras", value: "\(wordCount)")
+                        if textLayout.hasRealPages {
+                            LabeledContent("Páginas identificadas", value: "\(textLayout.namedPages.count)")
+                        }
+                    }
                     Text(progressDescription)
                     if !tracks.isEmpty {
                         LabeledContent("Pistas de audio", value: "\(tracks.count)")

@@ -1,6 +1,113 @@
 import SwiftUI
 import AVFoundation
 
+
+/// Pausas añadidas entre fragmentos del sintetizador del sistema, en segundos.
+/// El perfil Normal conserva la puntuación natural propia de cada voz.
+enum NativeReaderPauseProfile {
+    struct Segment {
+        let text: String
+        let delay: TimeInterval
+    }
+
+    static func duration(for sign: Character, settings: UserDefaults = .standard) -> TimeInterval {
+        let style = settings.integer(forKey: "native-reading-pause-style")
+        guard style != 0 else { return 0 }
+        let key: String
+        switch sign {
+        case ",": key = "comma"
+        case ";": key = "semicolon"
+        case ":": key = "colon"
+        case ".", "!", "?": key = "sentence"
+        case "\n": key = "paragraph"
+        default: return 0
+        }
+        let major: [String: Double] = [
+            "comma": 0.18, "semicolon": 0.28, "colon": 0.28,
+            "sentence": 0.48, "paragraph": 0.65
+        ]
+        let expressive: [String: Double] = [
+            "comma": 0.32, "semicolon": 0.48, "colon": 0.48,
+            "sentence": 0.80, "paragraph": 1.10
+        ]
+        if style == 1 { return major[key] ?? 0 }
+        if style == 2 { return expressive[key] ?? 0 }
+        let storageKey = "native-reading-pause-" + key
+        // @AppStorage defaults are not necessarily present in UserDefaults
+        // before the user first opens the controls.
+        let defaultValues: [String: Double] = [
+            "comma": 0.15, "semicolon": 0.25, "colon": 0.25,
+            "sentence": 0.40, "paragraph": 0.60
+        ]
+        let configured = settings.object(forKey: storageKey) == nil
+            ? (defaultValues[key] ?? 0) : settings.double(forKey: storageKey)
+        return min(1.5, max(0, configured))
+    }
+
+    static func segments(_ text: String, settings: UserDefaults = .standard) -> [Segment] {
+        guard settings.integer(forKey: "native-reading-pause-style") != 0 else {
+            return [Segment(text: text, delay: 0)]
+        }
+        var parts: [Segment] = []
+        var buffer = ""
+        for character in text {
+            buffer.append(character)
+            let delay = duration(for: character, settings: settings)
+            if delay > 0 {
+                parts.append(Segment(text: buffer, delay: delay))
+                buffer = ""
+            }
+        }
+        if !buffer.isEmpty { parts.append(Segment(text: buffer, delay: 0)) }
+        if parts.isEmpty { parts.append(Segment(text: text, delay: 0)) }
+        return parts
+    }
+}
+
+/// Controles ajustables con VoiceOver, sin introducir números mediante teclado.
+struct NativeReaderPunctuationControls: View {
+    @AppStorage("native-reading-pause-style") private var style = 0
+    @AppStorage("native-reading-pause-comma") private var comma = 0.15
+    @AppStorage("native-reading-pause-semicolon") private var semicolon = 0.25
+    @AppStorage("native-reading-pause-colon") private var colon = 0.25
+    @AppStorage("native-reading-pause-sentence") private var sentence = 0.4
+    @AppStorage("native-reading-pause-paragraph") private var paragraph = 0.6
+
+    private let choices = (0...30).map {
+        String(format: "%.2f segundos", Double($0) * 0.05)
+    }
+
+    private func selection(_ value: Binding<Double>) -> Binding<Int> {
+        Binding(
+            get: { max(0, min(30, Int((value.wrappedValue / 0.05).rounded()))) },
+            set: { value.wrappedValue = Double($0) * 0.05 }
+        )
+    }
+
+    var body: some View {
+        NativeAdjustableChoice(
+            title: "Pausas por puntuación",
+            choices: ["Normal", "Mayor", "Expresiva", "Personalizadas"],
+            selectedIndex: $style
+        )
+        if style == 3 {
+            Text("Ajusta cada signo con deslizamientos arriba o abajo. Intervalos de 0 a 1,50 segundos, en pasos de 0,05.")
+            NativeAdjustableChoice(title: "Pausa después de coma",
+                                   choices: choices, selectedIndex: selection($comma))
+            NativeAdjustableChoice(title: "Pausa después de punto y coma",
+                                   choices: choices, selectedIndex: selection($semicolon))
+            NativeAdjustableChoice(title: "Pausa después de dos puntos",
+                                   choices: choices, selectedIndex: selection($colon))
+            NativeAdjustableChoice(title: "Pausa después de punto, interrogación o exclamación",
+                                   choices: choices, selectedIndex: selection($sentence))
+            NativeAdjustableChoice(title: "Pausa después de salto de párrafo",
+                                   choices: choices, selectedIndex: selection($paragraph))
+        }
+        Text("Las pausas se aplican a la lectura con voces del sistema. La duración natural depende de la voz. No modifican los audiolibros grabados ni garantizan los mismos tiempos en Gemini o Phonon.")
+            .font(.footnote)
+    }
+}
+
 /// Reusable VoiceOver-adjustable controls. A document can supply independent
 /// bindings; the general settings keep using the existing AppStorage keys.
 struct NativeReaderAudioControls: View {
@@ -79,6 +186,7 @@ struct NativeReaderAudioControls: View {
             choices: ["Más grave", "Grave", "Normal", "Agudo", "Más agudo"],
             selectedIndex: pitchSelection ?? $generalPitch
         )
+        NativeReaderPunctuationControls()
         NativeAdjustableChoice(
             title: "Mostrar voces",
             choices: ["Todos los idiomas", "Español", "Inglés"],

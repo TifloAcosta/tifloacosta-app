@@ -21,7 +21,7 @@ test('salto al porcentaje retoma voz por la nueva posición y conserva pausa', (
   assert.match(reader, /else if speech\.isPlaying \|\| speech\.isPaused/);
   assert.match(reader, /if wasPaused \{ speech\.pause\(\) \}/);
   assert.match(reader, /speech\.seek\(to: value\)/);
-  assert.match(reader, /Avanzar 30 segundos/);
+  assert.match(reader, /speech\.seek\(to: value\)/);
 });
 
 test('progreso y temporizador accesibles por documento', () => {
@@ -65,17 +65,18 @@ test('la navegación accesible del lector salta de cinco en cinco por ciento', (
   assert.doesNotMatch(reader, /Avanzar diez por ciento|Retroceder diez por ciento/);
 });
 
-test('Botón Reproducir ofrece gestos de un minuto y mantiene doble toque', () => {
+test('Botón Reproducir usa el modo elegido para los gestos y mantiene doble toque', () => {
   assert.match(reader, /\.accessibilityAdjustableAction \{ direction in/);
-  assert.match(reader, /case \.increment: skipReading\(1\)/);
-  assert.match(reader, /case \.decrement: skipReading\(-1\)/);
-  assert.match(reader, /speech\.skip\(seconds: TimeInterval\(direction \* 60\)\)/);
+  assert.match(reader, /case \.increment: moveUnit\(1\)/);
+  assert.match(reader, /case \.decrement: moveUnit\(-1\)/);
+  assert.match(reader, /if unit == 5 \{/);
+  assert.match(reader, /if unit == 6 \{/);
   assert.match(reader, /speech\.isPlaying \? pausePlayback\(\) : play\(\)/);
 });
 test('Toque mágico solo controla la reproducción actual', () => {
   assert.match(reader, /\.accessibilityAction\(\.magicTap\)/);
-  assert.match(reader, /if speech\.isPlaying \{ pausePlayback\(\) \}/);
-  assert.match(reader, /else if speech\.isPaused \{ play\(\) \}/);
+  assert.match(reader, /if speech\.isPlaying\s*\{\s*pausePlayback\(\)/);
+  assert.match(reader, /else if speech\.isPaused\s*\{\s*speech\.resume\(\)/);
 });
 test('Marcas incluyen contexto y borrado anuncia el título exacto', () => {
   assert.match(reader, /private func bookmarkDescription\(at percent: Int\)/);
@@ -85,9 +86,12 @@ test('Marcas incluyen contexto y borrado anuncia el título exacto', () => {
 
 test('Navegación y marcas son accesibles junto a los controles principales', () => {
   assert.match(reader, /title: "Modo de navegación"/);
-  assert.match(reader, /choices: \["Bloque", "Párrafo", "Frase", "Página", "Encabezado"\]/);
-  assert.match(reader, /Button\("Unidad anterior"\) \{ moveUnit\(-1\) \}/);
-  assert.match(reader, /Button\("Unidad siguiente"\) \{ moveUnit\(1\) \}/);
+  assert.match(reader, /choices: navigationOptions\.map\s*\{ \$0\.label \}/);
+  assert.match(reader, /selectedIndex: navigationSelection/);
+  assert.match(reader, /chapterStarts/);
+  assert.match(reader, /"Capítulo"/);
+  assert.doesNotMatch(reader, /Button\("Unidad anterior"\)/);
+  assert.doesNotMatch(reader, /Button\("Unidad siguiente"\)/);
   assert.match(reader, /Button\("Marcas guardadas"\) \{ showSavedMarks = true \}/);
 });
 
@@ -210,4 +214,55 @@ test('El temporizador guarda la posición antes de apagar el audio', () => {
   const expired = reader.indexOf('self?.onSleepExpired?()');
   const stopped = reader.indexOf('self?.stop()', expired);
   assert.ok(expired >= 0 && stopped > expired);
+});
+
+test('Enlaces visibles se recorren con el selector sin alterar el texto ni las posiciones', () => {
+  assert.match(reader, /let linkStarts: \[Int\]/);
+  assert.match(reader, /NSRegularExpression\(pattern: urlPattern/);
+  assert.match(reader, /body\.distance\(from: body\.startIndex, to: range\.lowerBound\)/);
+  assert.match(reader, /case 8: boundaries = linkStarts/);
+  assert.match(reader, /options\.append\(\(8, "Enlaces"\)\)/);
+  assert.match(reader, /case \.increment: moveUnit\(1\)/);
+  assert.match(reader, /case \.decrement: moveUnit\(-1\)/);
+});
+
+test('HTML y EPUB retienen enlaces estructurados sin desplazar los marcadores', () => {
+  assert.match(formats, /private static func textLinks\(in html: String, extracted text: String,/);
+  assert.match(formats, /textLinks = Self\.textLinks\(in: html, extracted: text\)/);
+  assert.match(formats, /Self\.textLinks\(in: html, extracted: pageText, includeInternal: true\)/);
+  assert.match(formats, /offset: baseOffset \+ link\.offset/);
+  assert.match(reader, /var textLinks: \[NativeReaderTextLink\]\? = nil/);
+  assert.match(reader, /textLinks: payload\.textLinks/);
+  assert.match(reader, /if unit == 8/);
+  assert.match(reader, /\(latest\.textLinks \?\? \[\]\)\.map/);
+});
+
+test('Un solo control de reproducción navega por tiempo configurable y estructura DAISY', () => {
+  assert.match(reader, /native-reader-time-step-index/);
+  assert.match(reader, /title: "Intervalo de tiempo"/);
+  assert.match(reader, /timeStepSeconds = \[30, 60, 120, 300\]/);
+  assert.match(reader, /TimeInterval\(direction \* timeStep\)/);
+  assert.match(reader, /unit == 9 \|\| unit == 10/);
+  assert.match(reader, /moveDaisyPoint\(direction, kind:/);
+  assert.match(reader, /"Página DAISY"/);
+  assert.match(reader, /"Referencia DAISY"/);
+  assert.doesNotMatch(reader, /Button\("Pista anterior"\)/);
+  assert.doesNotMatch(reader, /Button\("Pista siguiente"\)/);
+});
+
+test('Enlaces con etiquetas repetidas se guardan solo con correspondencia inequívoca', () => {
+  assert.match(formats, /let linkCounts = Dictionary\(candidates\.map/);
+  assert.match(formats, /offsets\.count == linkCounts\[title\]/);
+  assert.match(formats, /consumed\[title, default: 0\]/);
+  assert.match(formats, /cursor = range\.upperBound/);
+});
+
+test('EPUB resuelve destinos internos seguros y permite abrirlos con VoiceOver', () => {
+  assert.match(formats, /private static func targetOffset\(fragment: String, html: String, text: String\)/);
+  assert.match(formats, /pageOffsets\[targetPath\]/);
+  assert.match(formats, /targetOffset: targetBase \+ target/);
+  assert.match(reader, /var targetOffset: Int\? = nil/);
+  assert.match(reader, /private func activateCurrentLink\(\)/);
+  assert.match(reader, /if let target = link\.targetOffset/);
+  assert.match(reader, /\.accessibilityAction\(named: Text\("Abrir enlace actual"\)\)/);
 });

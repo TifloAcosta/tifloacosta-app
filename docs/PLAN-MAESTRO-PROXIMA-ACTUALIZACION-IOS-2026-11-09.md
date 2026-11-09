@@ -202,3 +202,11 @@ Cambios implementados en código (pendientes de validar conjuntamente en TestFli
 - **Alcance limitado:** aún no se implementan destinos a un tiempo interno de pista mediante clipBegin/clipEnd, navegación completa SMIL/NCX, páginas o estructuras especiales de DAISY. No afirmar compatibilidad completa.
 - Se añadieron pruebas de contrato para recuperación de posición y navegación NCC. La compilación de los últimos cambios requiere verificación antes de dar el bloque por terminado.
 
+
+## M. Verificación técnica del bloque de persistencia y DAISY
+
+- Los cambios incluyen guardado opcional del desplazamiento exacto en caracteres, recuperado desde la biblioteca y desde la pantalla del documento; los libros preexistentes siguen usando su porcentaje anterior hasta disponer de una posición más precisa.
+- Se almacena, para nuevas importaciones DAISY que aporten `ncc.html` y referencias `SMIL` compatibles, la lista inicial de encabezados con nivel, título y pista correspondiente.
+- El índice de DAISY en la pantalla del lector muestra estas entradas y permite situar la reproducción en la pista indicada. Esta navegación todavía no alcanza los destinos de tiempo internos ni todas las estructuras DAISY.
+- La vista SwiftUI del lector se dividió en componentes menores (cabecera, hojas de marcas y de índice) después de que el compilador superase el tiempo de análisis de la expresión original. La compilación del commit `ad182ce913e3ddc3329811417e4219ca5f91ddb0` superó los pasos de tests de código y compilación del simulador en la ejecución 42668354449; la finalización completa de esa ejecución se verifica por separado.
+- El estado de la fase 2 sigue **en desarrollo**: pendiente evaluar posición por palabra durante TTS, navegación DAISY de precisión y formatos especiales, y conservar todos los requisitos en la prueba conjunta.

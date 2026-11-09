@@ -44,3 +44,9 @@ test('Después de Guardar, VoiceOver se dirige a Comprobar conexión', () => {
   assert.match(source, /Button\("Comprobar conexión"\)/);
   assert.match(source, /\.accessibilityFocused\(\$focusGeminiCheck\)/);
 });
+
+test('Opciones avanzadas de Gemini se muestran solo con clave guardada', () => {
+  assert.match(source, /if hasGeminiKey \{\s*Button\("Comprobar conexión"\)/);
+  assert.match(source, /Button\("Escuchar muestra"\)/);
+  assert.match(source, /Button\("Eliminar", role: \.destructive\)/);
+});

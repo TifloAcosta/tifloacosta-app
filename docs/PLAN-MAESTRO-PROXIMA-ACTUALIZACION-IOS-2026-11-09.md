@@ -119,3 +119,20 @@ No iniciar Android hasta el cierre de iOS. Los cambios específicos de Android s
 - Conservar este documento bajo control de versiones en GitHub y actualizarlo al aceptar nuevas decisiones.
 - Antes de cerrar cada fase, contrastar todos los puntos B01–B11, A01–A21 y C correspondientes; no abandonar requisitos al reagrupar fases.
 - Mantener intactas las bibliotecas de usuarios y respetar la configuración existente al actualizar la aplicación.
+
+## F. Registro de ejecución — fase 1, 9 de noviembre de 2026
+
+Estado: **en desarrollo, pendiente de compilación definitiva y verificación en iPhone**. Esta anotación no equivale a una fase terminada.
+
+- Corregida la interpolación de los mensajes de error de descarga en el código Swift.
+- Descarga principal desde tifloacosta.com y alternativa desde el catálogo público de GitHub. Se fuerza la consulta sin caché HTTP para la actualización.
+- Se conserva la copia local existente si fallan ambos orígenes. No se vacían Recursos ni Novedades al producirse un error.
+- Se impide solapar llamadas simultáneas a la actualización y se rechaza un catálogo sin recursos.
+- Se registra localmente la fecha de la última descarga correcta, además del número de recursos, vídeos y noticias recibidos.
+- Añadidos botones «Actualizar recursos» y «Actualizar novedades» visibles siempre, con estados de carga, mensajes y anuncio para VoiceOver.
+- Añadidas pruebas de contrato `ios-app-native/tests/catalog-sync-phase-one.test.mjs` para mantener estas garantías y la presencia de Píldoras 25 en los dos idiomas.
+- Pendiente: revisar resultado de la compilación nativa en el simulador, probar físicamente en iPhone con VoiceOver y verificar la respuesta efectiva del dominio público.
+- Pendiente: revisar la coherencia lingüística de todos los mensajes y las acciones de actualización, y comprobar que los errores se expliquen de manera fácil de comprender.
+- Android no ha sido modificado.
+
+No distribuir una versión pública basándose únicamente en estas comprobaciones de código. Se precisa validación de usuario antes de cerrar la fase.

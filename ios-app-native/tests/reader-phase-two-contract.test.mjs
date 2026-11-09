@@ -142,7 +142,7 @@ test('El índice DAISY respeta fragmentos SMIL y tiempos dentro de las pistas', 
 
 test('DAISY 3 admite un índice NCX con jerarquía y fragmentos de audio', () => {
   assert.match(ncx, /class NativeDaisyNCXDelegate: NSObject, XMLParserDelegate/);
-  assert.match(ncx, /stack\.append\(Item\(level: stack\.count \+ 1, kind: kind\)\)/);
+  assert.match(ncx, /stack\.append\(Item\(level: level, kind: kind, order: nextOrder\)\)/);
   assert.match(ncx, /case "navpoint", "pagetarget", "navtarget":/);
   assert.match(ncx, /case "content":/);
   assert.match(ncx, /XMLParser\(data: data\)/);

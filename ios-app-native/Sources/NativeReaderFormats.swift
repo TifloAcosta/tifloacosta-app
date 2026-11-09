@@ -389,7 +389,8 @@ enum NativeReaderFormats {
                           })
                     else { continue }
                     daisyNavigation.append(NativeDaisyNavigationPoint(
-                        title: link.title, level: link.level, track: track, seconds: target.seconds))
+                        title: link.title, level: link.level, track: track, seconds: target.seconds,
+                        kind: link.kind))
                 }
             }
             for path in audioFiles {

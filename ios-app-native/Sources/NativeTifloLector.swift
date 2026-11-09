@@ -23,7 +23,8 @@ struct NativeDaisyNavigationPoint: Codable, Hashable, Identifiable {
     let title: String
     let level: Int
     let track: Int
-    var id: String { "\(track)-\(level)-\(title)" }
+    var seconds: TimeInterval? = nil
+    var id: String { "\(track)-\(level)-\(title)-\(seconds ?? 0)" }
 }
 
 struct NativeReadingDocument: Codable, Identifiable, Hashable {
@@ -449,6 +450,11 @@ final class NativeReadingSpeech: ObservableObject {
     func seek(to percent: Int) {
         guard let player else { return }
         player.currentTime = player.duration * Double(max(0, min(100, percent))) / 100
+    }
+
+    func seek(toSeconds seconds: TimeInterval) {
+        guard let player, seconds.isFinite else { return }
+        player.currentTime = max(0, min(player.duration, seconds))
     }
 
     func skip(seconds: TimeInterval) {
@@ -1128,6 +1134,23 @@ struct NativeReadingScreen: View {
         }
     }
 
+    private func jumpToDaisy(_ point: NativeDaisyNavigationPoint) {
+        guard tracks.indices.contains(point.track) else {
+            actionMessage = "La pista indicada no está disponible."
+            return
+        }
+        trackIndex = point.track
+        currentPercent = 0
+        playTrack()
+        if speech.hasAudio, let seconds = point.seconds {
+            speech.seek(toSeconds: seconds)
+            currentPercent = speech.audioPercent
+        }
+        persistPosition()
+        applySleepTimer()
+        showStructure = false
+    }
+
     private func pausePlayback() {
         speech.pause()
         sleepDeadline = nil
@@ -1500,12 +1523,7 @@ struct NativeReadingScreen: View {
                         Section("Navegación DAISY por encabezados") {
                             ForEach(points) { point in
                                 Button("Nivel \(point.level). \(point.title)") {
-                                    trackIndex = point.track
-                                    currentPercent = 0
-                                    playTrack()
-                                    persistPosition()
-                                    applySleepTimer()
-                                    showStructure = false
+                                    jumpToDaisy(point)
                                 }
                             }
                         }

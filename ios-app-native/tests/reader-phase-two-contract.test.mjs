@@ -215,3 +215,13 @@ test('El temporizador guarda la posición antes de apagar el audio', () => {
   const stopped = reader.indexOf('self?.stop()', expired);
   assert.ok(expired >= 0 && stopped > expired);
 });
+
+test('Enlaces visibles se recorren con el selector sin alterar el texto ni las posiciones', () => {
+  assert.match(reader, /let linkStarts: \[Int\]/);
+  assert.match(reader, /NSRegularExpression\(pattern: urlPattern/);
+  assert.match(reader, /body\.distance\(from: body\.startIndex, to: range\.lowerBound\)/);
+  assert.match(reader, /case 8: boundaries = linkStarts/);
+  assert.match(reader, /options\.append\(\(8, "Enlaces"\)\)/);
+  assert.match(reader, /case \.increment: moveUnit\(1\)/);
+  assert.match(reader, /case \.decrement: moveUnit\(-1\)/);
+});

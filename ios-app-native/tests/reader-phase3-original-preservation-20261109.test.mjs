@@ -48,3 +48,16 @@ test("fase 3: lectura del respaldo y verificación de rutas antes de importar", 
   assert.match(reader, /Button\("Restaurar copia de seguridad"\)/);
   assert.match(reader, /shouldKeepParent: false/);
 });
+
+test("fase 3: exportación de audio multipista empaquetada sin perder pistas", () => {
+  assert.match(reader, /func exportAudioTracks\(_ document: NativeReadingDocument\) throws -> URL/);
+  assert.match(reader, /for \(index, path\) in paths\.enumerated\(\)/);
+  assert.match(reader, /Button\("Compartir todas las pistas de audio \(ZIP\)"\)/);
+  assert.match(reader, /NativeShare\.present\(url: try library\.exportAudioTracks\(document\)\)/);
+  assert.match(reader, /safeTitle \+ "-pistas\.zip"/);
+});
+test("fase 3: el nombre de exportación conserva Unicode y evita colisiones temporales", () => {
+  assert.doesNotMatch(reader, /\[\^A-Za-z0-9 _\.\-\]/);
+  assert.match(reader, /let cleanName = latest\.title\.replacingOccurrences/);
+  assert.match(reader, /appendingPathComponent\(UUID\(\)\.uuidString, isDirectory: true\)/);
+});

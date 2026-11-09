@@ -10,6 +10,7 @@ struct NativeReaderImportedPayload {
     let fileExtension: String
     let trackPaths: [String]
     var daisyNavigation: [NativeDaisyNavigationPoint] = []
+    var textLinks: [NativeReaderTextLink] = []
 }
 
 enum NativeReaderFormatError: LocalizedError {
@@ -46,6 +47,36 @@ enum NativeReaderFormats {
         .init(title: "Archivos comprimidos", details: "ZIP con pistas de audio o libros DAISY. No se admiten ZIP arbitrarios, RAR, 7Z ni CBR/CBZ.")
     ]
 
+    /// Conserva solo vínculos HTTPS/HTTP cuyo texto visible pueda ubicarse
+    /// inequívocamente en el texto extraído. No reconstruye HTML ni altera offsets.
+    private static func textLinks(in html: String, extracted text: String) -> [NativeReaderTextLink] {
+        let pattern = #"<a\b[^>]*href\s*=\s*['\"](https?://[^'\"]+)['\"][^>]*>(.*?)</a>"#
+        guard let regex = try? NSRegularExpression(pattern: pattern,
+                                                    options: [.caseInsensitive, .dotMatchesLineSeparators])
+        else { return [] }
+        let ns = html as NSString
+        var results: [NativeReaderTextLink] = []
+        for match in regex.matches(in: html, range: NSRange(location: 0, length: ns.length)) {
+            guard match.range(at: 1).location != NSNotFound,
+                  match.range(at: 2).location != NSNotFound else { continue }
+            let destination = ns.substring(with: match.range(at: 1))
+                .replacingOccurrences(of: "&amp;", with: "&")
+            guard let url = URL(string: destination),
+                  ["http", "https"].contains(url.scheme?.lowercased() ?? ""),
+                  url.host != nil else { continue }
+            let markup = ns.substring(with: match.range(at: 2))
+            let title = NativeDocumentText.extract(Data(markup.utf8),
+                from: URL(fileURLWithPath: "link.html"))
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+            guard !title.isEmpty, let first = text.range(of: title),
+                  text.range(of: title, range: first.upperBound..<text.endIndex) == nil
+            else { continue }
+            let offset = text.distance(from: text.startIndex, to: first.lowerBound)
+            results.append(.init(offset: offset, title: title, url: destination))
+        }
+        return results
+    }
+
     private static let audioExtensions: Set<String> = [
         "mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff", "caf"
     ]
@@ -65,6 +96,7 @@ enum NativeReaderFormats {
 
         let data = try Data(contentsOf: url)
         let text: String
+        var textLinks: [NativeReaderTextLink] = []
         switch ext {
         case "pdf":
             guard let pdf = PDFDocument(data: data) else {
@@ -89,6 +121,9 @@ enum NativeReaderFormats {
             text = try recognizeText(in: data)
         case "html", "htm", "rtf":
             text = NativeDocumentText.extract(data, from: url)
+            if ext != "rtf", let html = String(data: data, encoding: .utf8) {
+                textLinks = Self.textLinks(in: html, extracted: text)
+            }
         case "fb2":
             let source = String(data: data, encoding: .utf8)
                 ?? String(data: data, encoding: .utf16) ?? ""
@@ -110,7 +145,8 @@ enum NativeReaderFormats {
         guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             throw NativeReaderFormatError.empty(url.lastPathComponent)
         }
-        return .init(body: text, fileExtension: ext, trackPaths: [])
+        return .init(body: text, fileExtension: ext, trackPaths: [],
+                     textLinks: textLinks)
     }
 
     static func storedURL(for relativePath: String) -> URL? {
@@ -302,6 +338,7 @@ enum NativeReaderFormats {
         let format: String
         var media: [String] = []
         var daisyNavigation: [NativeDaisyNavigationPoint] = []
+        var textLinks: [NativeReaderTextLink] = []
         switch ext {
         case "docx":
             body = joined(all.filter { $0 == "word/document.xml" })
@@ -323,7 +360,21 @@ enum NativeReaderFormats {
                     && !$0.contains("nav.")
                     && !$0.contains("toc.")
             }
-            body = joined(pages)
+            var segments: [String] = []
+            var offset = 0
+            for page in pages {
+                let pageText = extractedText(page)
+                guard !pageText.isEmpty else { continue }
+                if let html = try? String(contentsOf: directory.appendingPathComponent(page),
+                                          encoding: .utf8) {
+                    textLinks += Self.textLinks(in: html, extracted: pageText).map {
+                        .init(offset: $0.offset + offset, title: $0.title, url: $0.url)
+                    }
+                }
+                segments.append(pageText)
+                offset += pageText.count + 2
+            }
+            body = segments.joined(separator: "\n\n")
             format = "epub"
         default:
             let isDaisy = all.contains {
@@ -432,6 +483,6 @@ enum NativeReaderFormats {
             throw NativeReaderFormatError.empty(url.lastPathComponent)
         }
         return .init(body: body, fileExtension: format, trackPaths: media,
-                     daisyNavigation: daisyNavigation)
+                     daisyNavigation: daisyNavigation, textLinks: textLinks)
     }
 }

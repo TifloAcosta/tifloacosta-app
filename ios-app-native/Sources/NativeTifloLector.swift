@@ -30,6 +30,8 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
     var markedPositions: [Int]? = nil
     var isFavorite: Bool? = nil
     var lastPercent: Int? = nil
+    // Exact character position for text; optional for older libraries.
+    var lastTextOffset: Int? = nil
     var lastTrackIndex: Int? = nil
     var audioBookmarks: [NativeAudioBookmark]? = nil
     var folderName: String? = nil
@@ -219,6 +221,18 @@ final class NativeReaderLibrary: ObservableObject {
         let value = max(0, min(100, percent))
         if documents[i].lastPercent != value {
             documents[i].lastPercent = value
+            try? save()
+        }
+    }
+
+    func saveTextPosition(_ document: NativeReadingDocument, offset: Int) {
+        guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
+        let textLength = documents[i].body.count
+        let value = max(0, min(textLength, offset))
+        let percent = textLength > 0 ? Int((Double(value) * 100 / Double(textLength)).rounded()) : 0
+        if documents[i].lastTextOffset != value || documents[i].lastPercent != percent {
+            documents[i].lastTextOffset = value
+            documents[i].lastPercent = percent
             try? save()
         }
     }
@@ -981,7 +995,7 @@ struct NativeReadingScreen: View {
 
     private func persistPosition() {
         if tracks.isEmpty {
-            library.savePosition(document, percent: currentPercent)
+            library.saveTextPosition(document, offset: readingOffset)
         } else {
             library.saveAudioPosition(document, track: trackIndex, percent: currentPercent)
         }
@@ -1521,7 +1535,12 @@ struct NativeReadingScreen: View {
             trackIndex = min(max(0, startTrack ?? latest.lastTrackIndex ?? 0),
                              max(0, tracks.count - 1))
             currentPercent = initial
-            readingOffset = Int(Double(textLayout.totalCharacters) * Double(initial) / 100)
+            readingOffset = tracks.isEmpty
+                ? max(0, min(textLayout.totalCharacters,
+                    startPercent == nil ? (latest.lastTextOffset
+                        ?? Int(Double(textLayout.totalCharacters) * Double(initial) / 100)) :
+                    Int(Double(textLayout.totalCharacters) * Double(initial) / 100)))
+                : Int(Double(textLayout.totalCharacters) * Double(initial) / 100)
             lastSavedPercent = initial
             if !didApplyOpeningMode {
                 didApplyOpeningMode = true

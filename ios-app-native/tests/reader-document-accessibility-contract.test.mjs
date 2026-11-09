@@ -21,7 +21,7 @@ test('Sleep timer is first-level and scoped to the open document', () => {
   assert.match(reader, /@State private var sleepIndex = 0/);
   assert.match(reader, /title: "Apagado automático"/);
   assert.match(reader, /onChange\(of: sleepIndex\)/);
-  assert.match(reader, /speech\.sleep\(after: speech\.isPlaying/);
+  assert.match(reader, /speech\.sleep\(afterSeconds: seconds\)/);
   assert.doesNotMatch(settings, /title: "Apagado automático"/);
   assert.doesNotMatch(reader, /@AppStorage\("native-reader-sleep-index"\)/);
 });

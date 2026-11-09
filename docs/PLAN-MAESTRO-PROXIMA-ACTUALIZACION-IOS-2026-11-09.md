@@ -235,3 +235,13 @@ Cambios implementados en código (pendientes de validar conjuntamente en TestFli
 - Las entradas NCX conservan su tipo y su título para una presentación accesible. El campo `kind` y la posición temporal son opcionales para mantener la decodificación de bibliotecas anteriores.
 - Se ampliaron las pruebas automáticas para proteger interpretación de índices, enlaces a fragmentos, tipos de entrada y saltos temporales.
 - Estado: **implementado en código, compilación y pruebas completas de la última revisión todavía pendientes de verificación**. No se afirma navegación DAISY universal: quedan formatos concretos y estructuras SMIL/NCX que necesitarán pruebas con libros representativos durante la validación integral.
+
+## Q. Fase 2: correcciones de pruebas y persistencia DAISY — 9 de noviembre de 2026
+
+- Se corrigieron dos pruebas de contrato de NCX que seguían buscando el modelo antiguo, anterior a la incorporación de tipos «Página» y «Referencia».
+- Se añadió `lastAudioSeconds`, campo opcional que permite conservar el tiempo real de escucha de un libro DAISY o audiolibro sin depender exclusivamente del porcentaje entero de la pista. Los registros anteriores conservan sus datos compatibles.
+- La lectura de audio abierta desde la biblioteca intenta recuperar esa posición exacta si existe. La pantalla del documento también recupera los segundos al iniciar la pista guardada; se evita aplicar esa restauración después de un salto manual a otro capítulo.
+- Los guardados de posición incluyen ahora los segundos reales siempre que el reproductor de audio esté activo.
+- Se añadió prueba automatizada de contrato para persistencia y reanudación en segundos.
+- **Limitación de verificación:** las ejecuciones de GitHub Actions 42672038883, 42672161133 y 42672194430 aparecen como «failure», pero la API devuelve **cero trabajos** en sus registros, por lo que no ofrecen mensajes de compilador ni pruebas ejecutadas. No se consideran pruebas de código fallidas ni tampoco compilaciones aprobadas. Se requiere una ejecución de CI que efectivamente inicie sus trabajos.
+- **Estado:** fase 2 continúa técnicamente abierta. No se debe afirmar que el último conjunto de cambios compila hasta disponer de un resultado positivo de CI. La validación manual de audio, marcas, navegación y VoiceOver permanece reservada a la prueba final conjunta.

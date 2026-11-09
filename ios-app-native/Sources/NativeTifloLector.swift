@@ -36,6 +36,12 @@ struct NativeDaisyNavigationPoint: Codable, Hashable, Identifiable {
     var id: String { "\(track)-\(level)-\(title)-\(seconds ?? 0)" }
 }
 
+struct NativeReaderTextLink: Codable, Hashable {
+    let offset: Int
+    let title: String
+    let url: String
+}
+
 struct NativeReadingDocument: Codable, Identifiable, Hashable {
     let id: UUID
     var title: String
@@ -58,6 +64,7 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
     var lastAudioSeconds: TimeInterval? = nil
     var audioBookmarks: [NativeAudioBookmark]? = nil
     var daisyNavigation: [NativeDaisyNavigationPoint]? = nil
+    var textLinks: [NativeReaderTextLink]? = nil
     var folderName: String? = nil
     var readerPreferences: NativeReaderPreferences? = nil
 
@@ -123,7 +130,8 @@ final class NativeReaderLibrary: ObservableObject {
                         fileExtension: payload.fileExtension,
                         originalRelativePath: originalPath,
                         trackPaths: payload.trackPaths,
-                        daisyNavigation: payload.daisyNavigation
+                        daisyNavigation: payload.daisyNavigation,
+                        textLinks: payload.textLinks
                     ), at: 0
                 )
                 try save()
@@ -1470,7 +1478,9 @@ struct NativeReadingScreen: View {
         }
         options.append((5, "Tiempo"))
         if latest.hasBookmarks { options.append((6, "Marcas")) }
-        if !textLayout.linkStarts.isEmpty { options.append((8, "Enlaces")) }
+        if !textLayout.linkStarts.isEmpty || !(latest.textLinks ?? []).isEmpty {
+            options.append((8, "Enlaces"))
+        }
         if !textLayout.chapterStarts.isEmpty ||
             (latest.daisyNavigation ?? []).contains(where: { $0.kind != "Página" && $0.kind != "Referencia" }) {
             options.append((7, "Capítulo"))
@@ -1671,6 +1681,22 @@ struct NativeReadingScreen: View {
     }
 
     private func moveUnit(_ direction: Int) {
+        if navigationUnit == 8 {
+            let offsets = Array(Set(textLayout.linkStarts +
+                                    (latest.textLinks ?? []).map { $0.offset })).sorted()
+            let next = direction > 0
+                ? offsets.first(where: { $0 > readingOffset })
+                : offsets.last(where: { $0 < readingOffset })
+            guard let next else {
+                actionMessage = "No hay más enlaces en esa dirección."
+                return
+            }
+            jump(to: next)
+            if let link = latest.textLinks?.first(where: { $0.offset == next }) {
+                actionMessage = "Enlace: \(link.title)"
+            }
+            return
+        }
         if navigationUnit == 7 && !tracks.isEmpty {
             let points = (latest.daisyNavigation ?? []).filter { $0.kind != "Página" && $0.kind != "Referencia" }
             let currentTime = speech.hasAudio ? speech.audioElapsed : 0

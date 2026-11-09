@@ -307,12 +307,26 @@ final class NativeReadingSpeech: ObservableObject {
     private var baseUTF16 = 0
     private var totalUTF16 = 0
     @Published private(set) var textPercent = 0
+    @Published private(set) var textCharacterOffset = 0
+    private var spokenText = ""
+    private var baseCharacters = 0
+    private var previousUTF16 = 0
+    private var previousCharacterCount = 0
 
     init() {
         progressDelegate.onWord = { [weak self] range in
             Task { @MainActor [weak self] in
                 guard let self, self.isPlaying, self.player == nil,
                       self.totalUTF16 > 0 else { return }
+                let utf16End = max(0, min(self.spokenText.utf16.count,
+                                         range.location + range.length))
+                if utf16End >= self.previousUTF16 {
+                    let lower = String.Index(utf16Offset: self.previousUTF16, in: self.spokenText)
+                    let upper = String.Index(utf16Offset: utf16End, in: self.spokenText)
+                    self.previousCharacterCount += self.spokenText.distance(from: lower, to: upper)
+                    self.previousUTF16 = utf16End
+                    self.textCharacterOffset = self.baseCharacters + self.previousCharacterCount
+                }
                 let count = self.baseUTF16 + range.location + range.length
                 self.textPercent = max(0, min(100,
                     Int(Double(count) * 100 / Double(self.totalUTF16))))
@@ -321,6 +335,7 @@ final class NativeReadingSpeech: ObservableObject {
         progressDelegate.onFinish = { [weak self] in
             Task { @MainActor [weak self] in
                 guard let self, self.player == nil else { return }
+                self.textCharacterOffset = self.baseCharacters + self.spokenText.count
                 self.textPercent = 100
                 self.isPlaying = false
                 self.isPaused = false
@@ -362,9 +377,14 @@ final class NativeReadingSpeech: ObservableObject {
 
     func play(_ text: String, speed: Double = 1.0, pitch: Float = 1.0,
               language: String = "es-ES", voiceIdentifier: String = "", baseUTF16: Int = 0,
-              totalUTF16: Int? = nil) {
+              totalUTF16: Int? = nil, baseCharacters: Int = 0) {
         stop()
         guard !text.isEmpty else { return }
+        self.spokenText = text
+        self.baseCharacters = baseCharacters
+        self.previousUTF16 = 0
+        self.previousCharacterCount = 0
+        self.textCharacterOffset = baseCharacters
         self.baseUTF16 = baseUTF16
         self.totalUTF16 = max(1, totalUTF16 ?? text.utf16.count)
         textPercent = max(0, min(100,
@@ -589,7 +609,9 @@ struct NativeReaderLibraryScreen: View {
                 latest.lastTextOffset ?? Int(Double(latest.body.count) * Double(latest.lastPercent ?? 0) / 100)))
             speech.play(String(latest.body.dropFirst(offset)), speed: speed, pitch: pitch,
                 language: AVSpeechSynthesisVoice(identifier: latest.readerPreferences?.voiceID ?? voiceID)?.language ?? "es-ES",
-                voiceIdentifier: latest.readerPreferences?.voiceID ?? voiceID)
+                voiceIdentifier: latest.readerPreferences?.voiceID ?? voiceID,
+                baseUTF16: String(latest.body.prefix(offset)).utf16.count,
+                totalUTF16: latest.body.utf16.count, baseCharacters: offset)
         }
     }
 
@@ -1045,7 +1067,8 @@ struct NativeReadingScreen: View {
                     language: AVSpeechSynthesisVoice(identifier: effectiveVoiceID)?.language ?? "es-ES",
                     voiceIdentifier: effectiveVoiceID,
                     baseUTF16: String(document.body.prefix(readingOffset)).utf16.count,
-                    totalUTF16: document.body.utf16.count)
+                    totalUTF16: document.body.utf16.count,
+                    baseCharacters: readingOffset)
     }
 
     private func play() {
@@ -1594,10 +1617,12 @@ struct NativeReadingScreen: View {
             guard !speech.hasAudio, speech.isPlaying else { return }
             if percentage != currentPercent {
                 currentPercent = percentage
-                readingOffset = Int(Double(textLayout.totalCharacters) *
-                                    Double(percentage) / 100)
                 if abs(percentage - lastSavedPercent) >= 5 { persistPosition() }
             }
+        }
+        .onReceive(speech.$textCharacterOffset) { offset in
+            guard !speech.hasAudio, speech.isPlaying else { return }
+            readingOffset = max(0, min(textLayout.totalCharacters, offset))
         }
         .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
             speech.refresh()

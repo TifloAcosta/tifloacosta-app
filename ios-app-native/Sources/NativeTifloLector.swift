@@ -576,7 +576,8 @@ struct NativeReaderLibraryScreen: View {
                     onError: { error in importError = "No se pudo reproducir: " + error })
             } catch { importError = error.localizedDescription }
         } else {
-            let offset = Int(Double(latest.body.count) * Double(latest.lastPercent ?? 0) / 100)
+            let offset = max(0, min(latest.body.count,
+                latest.lastTextOffset ?? Int(Double(latest.body.count) * Double(latest.lastPercent ?? 0) / 100)))
             speech.play(String(latest.body.dropFirst(offset)), speed: speed, pitch: pitch,
                 language: AVSpeechSynthesisVoice(identifier: latest.readerPreferences?.voiceID ?? voiceID)?.language ?? "es-ES",
                 voiceIdentifier: latest.readerPreferences?.voiceID ?? voiceID)

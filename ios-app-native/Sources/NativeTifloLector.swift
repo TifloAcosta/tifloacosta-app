@@ -1406,6 +1406,7 @@ struct NativeReadingScreen: View {
     @AppStorage("native-reading-line-spacing-index") private var lineSpacingIndex = 0
     @AppStorage("native-reading-strong-text") private var strongText = false
     @AppStorage("native-reader-navigation-unit") private var navigationUnit = 0
+    @AppStorage("native-reader-time-step-index") private var timeStepIndex = 1
     @AppStorage("native-reader-reading-mode") private var readingMode = 0
     @State private var didApplyOpeningMode = false
     @State private var sleepIndex = 0 // Each open document starts with timer disabled.
@@ -1442,6 +1443,11 @@ struct NativeReadingScreen: View {
     private let textLayout: NativeReaderTextLayout
     private let wordCount: Int
     private static let percentages = (0...100).map { "\($0) por ciento" }
+    private static let timeStepChoices = ["30 segundos", "1 minuto", "2 minutos", "5 minutos"]
+    private static let timeStepSeconds = [30, 60, 120, 300]
+    private var timeStep: Int {
+        Self.timeStepSeconds[max(0, min(Self.timeStepSeconds.count - 1, timeStepIndex))]
+    }
     private static let sleepChoices = [
         "Desactivado", "5 minutos", "10 minutos", "15 minutos",
         "30 minutos", "45 minutos", "60 minutos"
@@ -1476,7 +1482,15 @@ struct NativeReadingScreen: View {
             options += [(0, "Bloque"), (1, "Párrafo"), (2, "Frase"), (3, "Página")]
             if !textLayout.headingStarts.isEmpty { options.append((4, "Encabezado")) }
         }
-        options.append((5, "Tiempo"))
+        if !tracks.isEmpty {
+            if (latest.daisyNavigation ?? []).contains(where: { $0.kind == "Página" }) {
+                options.append((9, "Página DAISY"))
+            }
+            if (latest.daisyNavigation ?? []).contains(where: { $0.kind == "Referencia" }) {
+                options.append((10, "Referencia DAISY"))
+            }
+        }
+        if !tracks.isEmpty || !latest.body.isEmpty { options.append((5, "Tiempo")) }
         if latest.hasBookmarks { options.append((6, "Marcas")) }
         if !textLayout.linkStarts.isEmpty || !(latest.textLinks ?? []).isEmpty {
             options.append((8, "Enlaces"))
@@ -1681,6 +1695,10 @@ struct NativeReadingScreen: View {
     }
 
     private func moveUnit(_ direction: Int) {
+        if navigationUnit == 9 || navigationUnit == 10 {
+            moveDaisyPoint(direction, kind: navigationUnit == 9 ? "Página" : "Referencia")
+            return
+        }
         if navigationUnit == 8 {
             let offsets = Array(Set(textLayout.linkStarts +
                                     (latest.textLinks ?? []).map { $0.offset })).sorted()
@@ -1698,20 +1716,7 @@ struct NativeReadingScreen: View {
             return
         }
         if navigationUnit == 7 && !tracks.isEmpty {
-            let points = (latest.daisyNavigation ?? []).filter { $0.kind != "Página" && $0.kind != "Referencia" }
-            let currentTime = speech.hasAudio ? speech.audioElapsed : 0
-            let candidates = points.filter { point in
-                if point.track != trackIndex {
-                    return direction > 0 ? point.track > trackIndex : point.track < trackIndex
-                }
-                guard let seconds = point.seconds else { return false }
-                return direction > 0 ? seconds > currentTime + 0.5 : seconds < currentTime - 0.5
-            }
-            guard let point = direction > 0 ? candidates.first : candidates.last else {
-                actionMessage = "No hay más capítulos en esa dirección."
-                return
-            }
-            jumpToDaisy(point)
+            moveDaisyPoint(direction, kind: nil)
             return
         }
         if navigationUnit == 5 {
@@ -1727,6 +1732,29 @@ struct NativeReadingScreen: View {
                                                   direction: direction, unit: navigationUnit)
         else { return }
         jump(to: next)
+    }
+
+    private func moveDaisyPoint(_ direction: Int, kind: String?) {
+        let points = (latest.daisyNavigation ?? []).filter { point in
+            if let kind { return point.kind == kind }
+            return point.kind != "Página" && point.kind != "Referencia"
+        }.sorted {
+            $0.track == $1.track ? ($0.seconds ?? 0) < ($1.seconds ?? 0) : $0.track < $1.track
+        }
+        let currentTime = speech.hasAudio ? speech.audioElapsed : (latest.lastAudioSeconds ?? 0)
+        let candidates = points.filter { point in
+            if point.track != trackIndex {
+                return direction > 0 ? point.track > trackIndex : point.track < trackIndex
+            }
+            let seconds = point.seconds ?? 0
+            return direction > 0 ? seconds > currentTime + 0.5 : seconds < currentTime - 0.5
+        }
+        guard let point = direction > 0 ? candidates.first : candidates.last else {
+            actionMessage = "No hay más elementos de ese tipo en esa dirección."
+            return
+        }
+        jumpToDaisy(point)
+        actionMessage = point.title
     }
 
     private func moveBetweenMarks(_ direction: Int) {
@@ -1809,7 +1837,7 @@ struct NativeReadingScreen: View {
 
     private func skipReading(_ direction: Int) {
         if speech.hasAudio {
-            speech.skip(seconds: TimeInterval(direction * 60))
+            speech.skip(seconds: TimeInterval(direction * timeStep))
             currentPercent = speech.audioPercent
             persistPosition()
             actionMessage = "Posición: \(currentPercent) por ciento."
@@ -1817,7 +1845,8 @@ struct NativeReadingScreen: View {
             guard !document.body.isEmpty else { return }
             let charactersPerMinute = Double(textLayout.totalCharacters) /
                 Double(max(1, wordCount)) * 165.0 * speed
-            let offset = readingOffset + direction * max(1, Int(charactersPerMinute))
+            let offset = readingOffset + direction * max(1,
+                Int(charactersPerMinute * Double(timeStep) / 60.0))
             jump(to: offset)
             actionMessage = "Posición: \(currentPercent) por ciento."
         }
@@ -2041,14 +2070,6 @@ struct NativeReadingScreen: View {
                         }
                     )
                 )
-                HStack {
-                    Button("Pista anterior") { changeTrack(-1) }
-                        .disabled(trackIndex == 0)
-                    Button("Pista siguiente") { changeTrack(1) }
-                        .disabled(trackIndex == tracks.count - 1)
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.small)
             }
         }
     }
@@ -2062,6 +2083,13 @@ struct NativeReadingScreen: View {
                 choices: navigationOptions.map { $0.label },
                 selectedIndex: navigationSelection
             )
+            if navigationUnit == 5 {
+                NativeAdjustableChoice(
+                    title: "Intervalo de tiempo",
+                    choices: Self.timeStepChoices,
+                    selectedIndex: $timeStepIndex
+                )
+            }
             Button("Marcas guardadas") { showSavedMarks = true }
             Button("Añadir marca") { addBookmark() }
             Text(progressDescription)

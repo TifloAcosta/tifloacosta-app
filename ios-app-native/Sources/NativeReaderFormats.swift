@@ -368,6 +368,30 @@ enum NativeReaderFormats {
                     if !daisyNavigation.contains(point) { daisyNavigation.append(point) }
                 }
             }
+            // DAISY 3 books can provide their navigation only through NCX.
+            // Preserve hierarchy and resolve SMIL targets, if present.
+            if isDaisy, daisyNavigation.isEmpty,
+               let ncx = all.first(where: { $0.lowercased().hasSuffix(".ncx") }),
+               let ncxData = try? Data(contentsOf: directory.appendingPathComponent(ncx)) {
+                for link in NativeDaisyNCX.parse(ncxData) {
+                    let parts = link.href.components(separatedBy: "#")
+                    let smilFile = URL(fileURLWithPath: parts[0]).lastPathComponent.lowercased()
+                    guard smilFile.hasSuffix(".smil"),
+                          let smil = all.first(where: {
+                              $0.lowercased().hasSuffix("/" + smilFile) ||
+                              $0.lowercased() == smilFile
+                          }),
+                          let xml = try? String(contentsOf: directory.appendingPathComponent(smil),
+                                                encoding: .utf8),
+                          let target = daisyAudio(in: xml, fragment: parts.count > 1 ? parts[1] : nil),
+                          let track = audioFiles.firstIndex(where: {
+                              URL(fileURLWithPath: $0).lastPathComponent.lowercased() == target.file
+                          })
+                    else { continue }
+                    daisyNavigation.append(NativeDaisyNavigationPoint(
+                        title: link.title, level: link.level, track: track, seconds: target.seconds))
+                }
+            }
             for path in audioFiles {
                 let copy = try storeMedia(directory.appendingPathComponent(path), documentID: documentID)
                 media.append(copy)

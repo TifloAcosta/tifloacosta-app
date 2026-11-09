@@ -14,12 +14,17 @@ private final class NativeDaisyNCXDelegate: NSObject, XMLParserDelegate {
         var href = ""
         var level: Int
         var kind: String
+        var order: Int
     }
 
     private var stack: [Item] = []
+    private var nextOrder = 0
+    private var sortedLinks: [(Int, NativeDaisyNCXLink)] = []
     private var insideLabel = false
     private var insideText = false
-    private(set) var links: [NativeDaisyNCXLink] = []
+    var links: [NativeDaisyNCXLink] {
+        sortedLinks.sorted { $0.0 < $1.0 }.map { $0.1 }
+    }
 
     func parser(_ parser: XMLParser, didStartElement elementName: String,
                 namespaceURI: String?, qualifiedName qName: String?,
@@ -28,7 +33,9 @@ private final class NativeDaisyNCXDelegate: NSObject, XMLParserDelegate {
         switch tag {
         case "navpoint", "pagetarget", "navtarget":
             let kind = tag == "pagetarget" ? "Página" : tag == "navtarget" ? "Referencia" : "Encabezado"
-            stack.append(Item(level: stack.count + 1, kind: kind))
+            let level = tag == "navpoint" ? stack.filter { $0.kind == "Encabezado" }.count + 1 : 1
+            stack.append(Item(level: level, kind: kind, order: nextOrder))
+            nextOrder += 1
         case "navlabel":
             insideLabel = !stack.isEmpty
         case "text":
@@ -58,7 +65,8 @@ private final class NativeDaisyNCXDelegate: NSObject, XMLParserDelegate {
             guard let item = stack.popLast() else { return }
             let title = item.title.trimmingCharacters(in: .whitespacesAndNewlines)
             if !title.isEmpty, !item.href.isEmpty {
-                links.append(.init(title: title, level: item.level, href: item.href, kind: item.kind))
+                sortedLinks.append((item.order, .init(title: title, level: item.level,
+                                                     href: item.href, kind: item.kind)))
             }
         default:
             break

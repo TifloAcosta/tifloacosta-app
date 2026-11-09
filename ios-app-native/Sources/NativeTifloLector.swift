@@ -2395,6 +2395,12 @@ struct NativeReadingScreen: View {
                         latest.importedAt.formatted(date: .abbreviated, time: .shortened))
                     LabeledContent("Carpeta", value: latest.folderName ?? "Sin carpeta")
                     LabeledContent("Marcas", value: "\(latest.bookmarks.count + latest.savedTextBookmarks.count + latest.savedAudioBookmarks.count)")
+                    if !latest.body.isEmpty {
+                        LabeledContent("Palabras", value: "\(wordCount)")
+                        if textLayout.hasRealPages {
+                            LabeledContent("Páginas identificadas", value: "\(textLayout.namedPages.count)")
+                        }
+                    }
                     Text(progressDescription)
                     if !tracks.isEmpty {
                         LabeledContent("Pistas de audio", value: "\(tracks.count)")

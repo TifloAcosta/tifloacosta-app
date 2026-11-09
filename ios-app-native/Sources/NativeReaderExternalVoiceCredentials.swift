@@ -109,6 +109,7 @@ private struct NativeGeminiKeyBrowser: UIViewControllerRepresentable {
 private struct NativeGeminiKeyGuide: View {
     @Environment(\.dismiss) private var dismiss
     @State private var showGoogle = false
+    @State private var hasVisitedGoogle = false
     let pasteCopiedKey: () -> Bool
     @State private var status = ""
     @AccessibilityFocusState private var focusPasteButton: Bool
@@ -116,36 +117,43 @@ private struct NativeGeminiKeyGuide: View {
     var body: some View {
         NavigationStack {
             List {
-                Section("Tres pasos") {
-                    Text("1. Entra con tu cuenta de Google si te lo pide.")
-                    Text("2. En Google AI Studio, busca Crear clave API, créala y cópiala.")
-                    Text("3. Vuelve aquí con Listo y pulsa Pegar la clave copiada.")
-                }
-                Section("Crear la clave") {
-                    Button("Abrir Google AI Studio") { showGoogle = true }
-                        .accessibilityHint("Abre la página oficial de claves sin salir de TifloLector.")
-                    Button("Pegar la clave copiada") {
-                        if pasteCopiedKey() { dismiss() }
-                        else {
-                            status = "No se encontró una clave de texto en el portapapeles. Cópiala en Google AI Studio y vuelve a intentarlo."
+                Section(hasVisitedGoogle ? "Paso 2 de 2. Pegar" : "Paso 1 de 2. Crear y copiar") {
+                    if !hasVisitedGoogle {
+                        Text("En Google, inicia sesión si es necesario. Busca Crear clave API, cópiala y pulsa Listo para regresar.")
+                        Button("Abrir creación de clave en Google") {
+                            showGoogle = true
                         }
+                        .accessibilityHint("Abre directamente la página de claves de Google AI Studio.")
+                    } else {
+                        Text("Si ya has copiado la clave, pulsa Pegar. Después volverás a Gemini para guardarla.")
+                        Button("Pegar la clave copiada") {
+                            if pasteCopiedKey() { dismiss() }
+                            else {
+                                status = "No hay texto copiado. Vuelve a Google, copia la clave y regresa."
+                            }
+                        }
+                        .accessibilityFocused($focusPasteButton)
+                        .accessibilityHint("Recupera el texto copiado y te lleva directamente a Guardar en Gemini.")
+                        Button("Volver a Google AI Studio") {
+                            showGoogle = true
+                        }
+                        .accessibilityHint("Utilízalo si aún no has podido copiar la clave.")
                     }
-                    .accessibilityFocused($focusPasteButton)
-                    .accessibilityHint("Pega la clave de Google AI Studio. Regresarás a Gemini para guardarla.")
                     if !status.isEmpty {
                         Text(status).accessibilityAddTraits(.updatesFrequently)
                     }
                 }
-                Section("Privacidad") {
-                    Text("La clave queda en tu iPhone. Solo se guarda cuando pulses Guardar en Gemini. No compartas la clave ni la envíes por correo.")
-                    Text("Google administra su página; su contenido puede variar. TifloLector no puede ocultar controles de Google ni detectar cuándo has copiado una clave.")
+                Section {
+                    Text("La clave se guarda en el iPhone cuando pulses Guardar. No la compartas. Los controles de Google pueden cambiar.")
                 }
             }
             .tifloScreenSurface()
             .navigationTitle("Crear clave Gemini")
             .toolbar { Button("Cerrar") { dismiss() } }
             .sheet(isPresented: $showGoogle, onDismiss: {
-                // Return VoiceOver to the next action, not to the top of the guide.
+                hasVisitedGoogle = true
+                status = ""
+                // Return VoiceOver to the only next action, not the guide start.
                 focusPasteButton = true
             }) {
                 NativeGeminiKeyBrowser(isPresented: $showGoogle)
@@ -184,6 +192,7 @@ struct NativeReaderExternalVoiceDetailScreen: View {
     @State private var showGeminiGuide = false
     @AccessibilityFocusState private var focusGeminiSave: Bool
     @AccessibilityFocusState private var focusGeminiPaste: Bool
+    @AccessibilityFocusState private var focusGeminiCheck: Bool
     @State private var returnedFromGeminiGuide = false
     @State private var hasGeminiKey = NativeVoiceCredentialStore.hasKey("gemini")
     @State private var message = ""
@@ -383,7 +392,8 @@ struct NativeReaderExternalVoiceDetailScreen: View {
                         try NativeVoiceCredentialStore.save(keyInput, provider: "gemini")
                         keyInput = ""
                         hasGeminiKey = true
-                        message = "Clave guardada en el dispositivo."
+                        message = "Clave guardada en el dispositivo. Pulsa Comprobar conexión."
+                        focusGeminiCheck = true
                     } catch {
                         message = error.localizedDescription
                     }
@@ -391,9 +401,11 @@ struct NativeReaderExternalVoiceDetailScreen: View {
                 .disabled(keyInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 .accessibilityFocused($focusGeminiSave)
                 .accessibilityHint("Guarda de forma segura la clave pegada en el iPhone.")
-                Button("Comprobar") {
+                Button("Comprobar conexión") {
                     Task { await checkGeminiConnection() }
                 }
+                .accessibilityFocused($focusGeminiCheck)
+                .accessibilityHint("Verifica que la clave guardada funciona con Google.")
                 .disabled(!hasGeminiKey || checking)
                 Picker("Voz Gemini", selection: $geminiVoice) {
                     ForEach(NativeGeminiSpeech.voices, id: \.self) { name in

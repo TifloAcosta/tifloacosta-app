@@ -407,6 +407,7 @@ final class NativeReadingSpeech: ObservableObject {
     }
     private var player: AVAudioPlayer?
     private var sleepTask: Task<Void, Never>?
+    var onSleepExpired: (() -> Void)?
     @Published private(set) var isPlaying = false
     @Published private(set) var isPaused = false
 
@@ -537,6 +538,7 @@ final class NativeReadingSpeech: ObservableObject {
                 return
             }
             guard !Task.isCancelled else { return }
+            self?.onSleepExpired?()
             self?.stop()
         }
     }
@@ -1119,6 +1121,7 @@ struct NativeReadingScreen: View {
             speech.sleep(after: 0)
             return
         }
+        speech.onSleepExpired = { persistPosition() }
         if reset || sleepDeadline == nil {
             sleepDeadline = Date().addingTimeInterval(TimeInterval(minutes * 60))
         }
@@ -1723,6 +1726,7 @@ struct NativeReadingScreen: View {
         }
         .onDisappear {
             persistPosition()
+            speech.onSleepExpired = nil
             speech.stop()
         }
         .accessibilityAction(.magicTap) {

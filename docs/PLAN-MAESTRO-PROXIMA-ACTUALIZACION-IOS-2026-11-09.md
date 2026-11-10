@@ -386,3 +386,7 @@ Estado: implementado en código y con contratos de regresión actualizados. Falt
 - El usuario decide si adjunta diagnósticos básicos (versión de aplicación y compilación, versión iOS, tipo genérico de dispositivo y estado de VoiceOver). No se leen datos de cuentas, bibliotecas, rutas, documentos ni credenciales.
 - El informe se puede copiar al portapapeles o compartir mediante el menú estándar de iOS. No hay subida a servidor ni envío automático; todo requiere acción del usuario. Se conserva el acceso a las vías de contacto habituales.
 - Añadidas pruebas de privacidad y de contrato, además de localización básica al inglés de la nueva pantalla. Pendiente revisión de accesibilidad real y pruebas de flujo en TestFlight al cerrar todas las fases.
+
+- La pantalla de informe incluye ahora un enlace de correo a `tifloacosta@gmail.com` con asunto y cuerpo precargados mediante `mailto:`, siempre sujeto a la revisión y confirmación del usuario en el cliente de correo. Se mantiene como alternativa «Compartir» y «Copiar informe».
+- El diagnóstico optativo muestra estado de VoiceOver, «Reducir movimiento», texto en negrita del sistema y métricas generales del catálogo: número de recursos, noticias y vídeos, fecha de última actualización y existencia o no de error. No recoge el texto ni los archivos del catálogo, ni contenido de la biblioteca personal.
+- Pendiente de fase 9: auditoría integral de regresiones, verificaciones en dispositivo real con VoiceOver y preparación de la candidata única de TestFlight cuando el conjunto de fases quede implementado.

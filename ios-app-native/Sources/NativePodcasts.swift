@@ -194,6 +194,8 @@ struct NativePodcastScreen: View {
     @EnvironmentObject private var store: NativePodcastStore
     @StateObject private var player = NativePodcastPlayer()
     @State private var visible = 10
+    @AppStorage("native-podcast-continuous-playback") private var continuousPlayback = false
+    @State private var lastProgressSaved = 0.0
     @StateObject private var library = NativePodcastLibrary()
     @State private var choosingOPML = false
     @State private var importingOPML = false
@@ -233,6 +235,25 @@ struct NativePodcastScreen: View {
         }
     }
 
+    private func saveCurrentPosition() {
+        guard let episode = player.episode else { return }
+        library.remember(episode, seconds: player.seconds, duration: player.duration)
+        lastProgressSaved = player.seconds
+    }
+
+    private func playEpisode(_ episode: NativePodcastEpisode,
+                             collection: [NativePodcastEpisode] = []) {
+        saveCurrentPosition()
+        let upcoming: [NativePodcastEpisode]
+        if continuousPlayback, let index = collection.firstIndex(where: { $0.id == episode.id }) {
+            upcoming = Array(collection.dropFirst(index + 1))
+        } else {
+            upcoming = []
+        }
+        player.select(episode, at: library.progress(for: episode), followedBy: upcoming)
+        lastProgressSaved = 0
+    }
+
     private func clock(_ value: Double) -> String {
         let seconds = Int(max(0, value))
         return String(format: "%02d:%02d", seconds / 60, seconds % 60)
@@ -260,21 +281,51 @@ struct NativePodcastScreen: View {
                     .accessibilityValue("\(clock(player.seconds)) de \(clock(player.duration))")
                     Text("\(clock(player.seconds)) de \(clock(player.duration))")
                         .font(.footnote).foregroundStyle(.secondary)
-                    Button("Cerrar reproductor") { player.stop() }
+                    Button("Cerrar reproductor") {
+                        saveCurrentPosition()
+                        player.stop()
+                    }
                 }
             }
 
+            Section("Continuar escuchando") {
+                if library.playbackProgress.isEmpty {
+                    Text("No hay episodios pendientes de terminar.")
+                }
+                ForEach(library.playbackProgress) { saved in
+                    if let url = URL(string: saved.audioURL) {
+                        let episode = NativePodcastEpisode(
+                            id: saved.id, title: saved.title,
+                            audioURL: url, publicationDate: ""
+                        )
+                        Button("Continuar: \(saved.title), desde \(clock(saved.seconds))") {
+                            playEpisode(episode)
+                        }
+                        .accessibilityHint("Doble toque para reanudar el episodio.")
+                        Button("Olvidar posición: \(saved.title)") {
+                            library.clearProgress(for: episode)
+                        }
+                    }
+                }
+            }
+            Section("Reproducción continua") {
+                Toggle("Reproducir el siguiente episodio automáticamente",
+                       isOn: $continuousPlayback)
+                    .accessibilityHint("Cuando termine un episodio, reproduce el siguiente de la misma lista.")
+            }
             Section("Episodios recientes") {
                 if store.loading && store.episodes.isEmpty { ProgressView("Cargando podcasts") }
                 if let error = store.error { Text(error) }
                 ForEach(Array(store.episodes.prefix(visible))) { episode in
                     Button {
-                        player.select(episode)
+                        playEpisode(episode, collection: store.episodes)
                     } label: {
                         Text(episode.title)
                     }
                     .accessibilityHint("Doble toque para reproducir dentro de TifloAcosta.")
-                    .accessibilityAction(named: Text("Reproducir")) { player.select(episode) }
+                    .accessibilityAction(named: Text("Reproducir")) {
+                        playEpisode(episode, collection: store.episodes)
+                    }
                     .accessibilityAction(named: Text(library.isFavorite(episode) ? "Quitar de favoritos" : "Añadir a favoritos")) {
                         library.toggleFavorite(episode)
                     }
@@ -297,7 +348,7 @@ struct NativePodcastScreen: View {
                 ForEach(library.savedEpisodes) { saved in
                     if let url = URL(string: saved.audioURL) {
                         Button("Reproducir favorito: \(saved.title)") {
-                            player.select(NativePodcastEpisode(id: saved.id, title: saved.title,
+                            playEpisode(NativePodcastEpisode(id: saved.id, title: saved.title,
                                                               audioURL: url, publicationDate: ""))
                         }
                         Button("Quitar favorito: \(saved.title)") {
@@ -325,7 +376,9 @@ struct NativePodcastScreen: View {
                 if !followedEpisodes.isEmpty {
                     Text("Episodios de \(followedFeedTitle)").font(.headline)
                     ForEach(followedEpisodes) { episode in
-                        Button("Reproducir: \(episode.title)") { player.select(episode) }
+                        Button("Reproducir: \(episode.title)") {
+                            playEpisode(episode, collection: followedEpisodes)
+                        }
                         Button(library.isFavorite(episode) ? "Quitar de favoritos: \(episode.title)" :
                                "Añadir a favoritos: \(episode.title)") {
                             library.toggleFavorite(episode)
@@ -348,10 +401,25 @@ struct NativePodcastScreen: View {
         }
         .tifloScreenSurface()
         .navigationTitle("Podcasts")
-        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
-            if player.episode != nil { player.updatePosition() }
+        .onAppear {
+            player.onEpisodeFinished = { completed in
+                library.clearProgress(for: completed)
+                lastProgressSaved = 0
+            }
         }
-        .onDisappear { player.stop() }
+        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
+            if player.episode != nil {
+                player.updatePosition()
+                if player.isPlaying && player.duration > 0 &&
+                   abs(player.seconds - lastProgressSaved) >= 10 {
+                    saveCurrentPosition()
+                }
+            }
+        }
+        .onDisappear {
+            saveCurrentPosition()
+            player.stop()
+        }
         .fileImporter(isPresented: $choosingOPML,
                       allowedContentTypes: [.xml, UTType(filenameExtension: "opml") ?? .xml],
                       allowsMultipleSelection: false) { result in

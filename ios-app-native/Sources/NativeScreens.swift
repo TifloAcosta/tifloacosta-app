@@ -559,6 +559,7 @@ struct NativeVideosScreen: View {
     @EnvironmentObject private var favorites: NativeFavoritesStore
     @EnvironmentObject private var account: NativeYouTubeAccountStore
     @StateObject private var youtubeSearch = NativeYouTubeSearchStore()
+    @ObservedObject private var personalVideos = NativeYouTubePersonalLibrary.shared
     @State private var searchText = ""
     @State private var filterIndex = 0
     @State private var sortIndex = 0
@@ -643,6 +644,35 @@ struct NativeVideosScreen: View {
                 .listRowBackground(TifloVisual.surfaceRaised)
             }
 
+            Section("Ver después") {
+                if personalVideos.watchLater.isEmpty {
+                    Text("No has guardado vídeos para ver después.")
+                }
+                ForEach(personalVideos.watchLater) { saved in
+                    if let video = NativeYouTubeVideo(saved: saved) {
+                        NativeYouTubeVideoRow(
+                            video: video, onPlay: { selectedVideo = $0 },
+                            onComment: { commentingOnVideo = $0 }
+                        )
+                    }
+                }
+            }
+
+            Section("Continuar viendo") {
+                if personalVideos.continueWatching.isEmpty {
+                    Text("No hay vídeos con una reproducción pendiente.")
+                }
+                ForEach(personalVideos.continueWatching) { saved in
+                    if let video = NativeYouTubeVideo(saved: saved) {
+                        NativeYouTubeVideoRow(
+                            video: video, onPlay: { selectedVideo = $0 },
+                            onComment: { commentingOnVideo = $0 }
+                        )
+                        .accessibilityHint("Retoma el vídeo desde el segundo \(Int(saved.resumeSeconds)).")
+                    }
+                }
+            }
+
             Section("Cuenta de YouTube") {
                 NavigationLink("Mis suscripciones de YouTube") {
                     NativeYouTubeSubscriptionsScreen()
@@ -705,6 +735,7 @@ struct NativeVideosScreen: View {
 // Una sola definición de gestos para títulos en búsquedas, canal y suscripciones.
 private struct NativeYouTubeTitleActions: ViewModifier {
     @EnvironmentObject private var account: NativeYouTubeAccountStore
+    @ObservedObject private var personalVideos = NativeYouTubePersonalLibrary.shared
     @Environment(\.openURL) private var openURL
     let video: NativeYouTubeVideo
     let onPlay: (NativeYouTubeVideo) -> Void
@@ -716,6 +747,10 @@ private struct NativeYouTubeTitleActions: ViewModifier {
             .accessibilityAction(named: Text("Abrir en YouTube")) { openURL(video.url) }
             .accessibilityAction(named: Text("Compartir")) {
                 NativeShare.present(url: video.url)
+            }
+            .accessibilityAction(named: Text(personalVideos.isWatchLater(video.id)
+                ? "Quitar de Ver después" : "Guardar para ver después")) {
+                personalVideos.toggleWatchLater(video)
             }
         if account.authenticated {
             basic
@@ -821,7 +856,7 @@ private struct NativeYouTubeVideoRow: View {
         .buttonStyle(.plain)
         // Conservar el botón real: un elemento artificial pierde la acción de doble toque.
         .accessibilityLabel("\(video.title). Canal: \(video.channelTitle)")
-        .accessibilityHint("Doble toque para reproducir. Desliza arriba o abajo para más acciones.")
+        .accessibilityHint("Doble toque para reproducir. Desliza arriba o abajo para más acciones, incluida Ver después.")
         .modifier(NativeYouTubeTitleActions(
             video: video, onPlay: onPlay, onComment: onComment
         ))

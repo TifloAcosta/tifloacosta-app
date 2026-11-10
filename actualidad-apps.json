@@ -1,5 +1,29 @@
 [
   {
+    "id": "buscaapps-05a73434a44f0671",
+    "title": "Parchis accesible",
+    "sourceId": "buscaapps",
+    "sourceName": "BuscaApps",
+    "sourceUrl": "https://www.buscaapps.com/",
+    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1253",
+    "lang": "es",
+    "platform": "iOS",
+    "summary": "Juega al parchís con la IA o con amigos",
+    "publishedAt": null
+  },
+  {
+    "id": "buscaapps-f84d7c802a02a642",
+    "title": "KEEFORGE",
+    "sourceId": "buscaapps",
+    "sourceName": "BuscaApps",
+    "sourceUrl": "https://www.buscaapps.com/",
+    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1252",
+    "lang": "es",
+    "platform": "iOS",
+    "summary": "Si quieres gestionar tus contraseñas en Iphone o Mac, y quieres que éstas no las tenga nadie en su nube, esta es tu APP.",
+    "publishedAt": null
+  },
+  {
     "id": "buscaapps-55e2d4169e03c286",
     "title": "SPG BW",
     "sourceId": "buscaapps",
@@ -93,30 +117,6 @@
     "lang": "es",
     "platform": "iOS",
     "summary": "Una app del tiempo precisa, privada y accesible.",
-    "publishedAt": null
-  },
-  {
-    "id": "buscaapps-ee92cae77de6709d",
-    "title": "SonicRoom",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1242",
-    "lang": "es",
-    "platform": "Web",
-    "summary": "Una plataforma de comunicación audiovisual accesible y de baja latencia",
-    "publishedAt": null
-  },
-  {
-    "id": "buscaapps-d01041ec11d31697",
-    "title": "El Panel de Hoy",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1241",
-    "lang": "es",
-    "platform": "Web",
-    "summary": "Web app de juegos de palabras",
     "publishedAt": null
   },
   {

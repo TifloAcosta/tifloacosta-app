@@ -1,13 +1,13 @@
 [
   {
-    "id": "9to5mac-4c3606f073285334",
+    "id": "9to5mac-6498bca439f4e382",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/10/new-apple-tv-4k-remotes-best-feature-requires-a-newer-iphone-model/",
+    "originalUrl": "https://9to5mac.com/2026/11/10/ifixit-tears-down-touchscreen-macbook-pro-reveals-light-up-apple-logo-details/",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-10T17:47:32.000Z",
+    "publishedAt": "2026-11-10T23:14:49.000Z",
     "categories": [
       "apple",
       "tecnologia-general"
@@ -16,22 +16,22 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "New Apple TV 4K remote’s best feature requires a newer iPhone model",
-        "summary": "A new Apple TV 4K releases this Friday ( pre-order here ), with an upgraded Siri Remote. But the new remote’s best feature might not work on your iPhone. more…",
-        "body": "A new Apple TV 4K releases this Friday ( pre-order here ), with an upgraded Siri Remote. But the new remote’s best feature might not work on your iPhone.\n\nIf you’re interested in the new Apple TV 4K launching this week, or perhaps you just want to buy the upgraded Siri Remote separately ( available here ), there’s a key limitation you should know.\n\nPrecision Finding on the new Siri Remote requires an iPhone 17 or newer.\n\nThe most common problem with the current Siri Remote is that it’s easy to lose. And once you lose it, Apple doesn’t offer many options for finding it. But that’s changing with the 4th gen Siri Remote.\n\nYou can use the new Siri Remote with any previous Apple TV 4K or Apple TV HD model. And if you do, you’ll benefit from the remote’s new built-in speaker that can be triggered from the Find My app.\n\nJoining the new speaker, the other main change with this latest Siri Remote is Precision Finding. If you’ve ever used the Find My app to track down a lost AirTag, you’ll probably be familiar with the feature.\n\nPrecision Finding lets you get step-by-step, guided directions that take you directly to the lost Siri Remote. It’s a huge upgrade from the old tool for finding the remote—which mostly just told you that it’s in your house somewhere.\n\nBut Precision Finding relies on the second-gen Ultra Wideband chip found in iPhone 17 and 17 Pro models (excluding iPhone 17e), iPhone Air, iPhone Duo, and iPhone 18 Pro models.\n\nSo if you don’t have one of those iPhones, you’ll still benefit from the built-in speaker that lets you play a sound to find the lost remote, but Precision Finding won’t be available.\n\nYou can buy the new Siri Remote for $59 on Amazon .\n\nWill this limitation impact your Siri Remote purchase decision? Let us know in the comments."
+        "title": "iFixit tears down touchscreen MacBook Pro, reveals light-up Apple logo details",
+        "summary": "iFixit published its teardown of the new MacBook Pro with PROLED XDR Display today, revealing interesting details about how Apple brought back its illuminated logo on the lid. Watch it below. more…",
+        "body": "iFixit published its teardown of the new MacBook Pro with PROLED XDR Display today, revealing interesting details about how Apple brought back its illuminated logo on the lid. Watch it below.\n\niFixit’s teardown of the new MacBook Pro with PROLED XDR Display is now live, and it explores not only how the new illuminated Apple logo works, but also its tandem OLED and how Apple managed to trim its weight down to 3 pounds (1.38 kg) from 3.4 pounds (1.55 kg) on the standard 14-inch model.\n\nThe teardown opens with a close look at the tandem OLED, which stacks two light-emitting layers to deliver higher brightness than conventional single-layer OLED displays.\n\nUnder a microscope, iFixit found that the blue subpixels are larger than the red and green ones, which they say should help reduce strain on the materials and potentially extend the display’s lifespan.\n\nMost of the teardown process is quite familiar from past models, though iFixit noted that replacing the USB-C ports or fans still requires removing the entire logic board, despite both components being independently replaceable.\n\niFixit noted that the headphone jack also requires logic board removal, while the HDMI port, SDXC port, RAM, and storage remain soldered to the board.\n\nAs with past teardowns, iFixit also tested what happens when swapping logic boards between two MacBooks.\n\nWhile last year’s M5 MacBook Pro failed to complete Touch ID calibration through Apple’s Repair Assistant, iFixit noted that the new model successfully recognized the battery, display, and Touch ID sensor after a logic board swap, with True Tone, brightness controls, and the touchscreen all working as expected.\n\niFixit was also able to enroll a fingerprint with the donor board installed from another MacBook Pro with PROLED XDR Display.\n\nAs for the illuminated Apple logo, iFixit had a bit of a rough time getting to it, destroying the OLED panel in the process and even asking whether anyone had managed to remove it intact.\n\nOnce inside, iFixit found that the Apple logo is illuminated by a strip of four LEDs, which work in conjunction with a reflective layer and a diffuser to distribute the light evenly.\n\nThe Apple logo itself, in turn, has a two-way mirror coating that gives it a shiny, reflective appearance when the LEDs are off, while allowing light to pass through when they’re on.\n\nWhen it comes to weight, Apple shaved 92 grams off the chassis and 101 grams off the display assembly, despite adding touch and an illuminated logo. The battery is just 2 grams lighter, while the slightly smaller trackpad saves another 8 grams.\n\nFinally, iFixit gave the new MacBook Pro with PROLED XDR Display a repairability score of 5 out of 10. That was one point higher than last year’s M5 MacBook Pro, but one point below the cheaper MacBook Neo.\n\nYou can watch iFixit’s full teardown below:\n\nBe sure to catch 9to5Mac’s review of the new MacBook Pro with PROLED XDR Display."
       }
     },
     "media": null
   },
   {
-    "id": "the-verge-a17ffddf9bb172da",
+    "id": "engadget-487b3fec0f3bd901",
     "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1030846/ableton-live-13-announced-step-sequencer-looplet-daw",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2307810/xiaomi-phones-no-longer-supported-hyper-os-4-update/",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-10T17:43:49.000Z",
+    "publishedAt": "2026-11-10T23:00:00.000Z",
     "categories": [
       "tecnologia-general"
     ],
@@ -39,22 +39,22 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Ableton Live 13 announced with a step sequencer, new drum synth, and more",
-        "summary": "Today, Ableton announced Live 13, which is expected to arrive in early 2027 with a slew of new features. Most of the changes are seemingly minor on paper, but when combined, they make for the biggest update to the digital audio workstation (DAW) in years. The feature most likely to draw attention is the addition […]",
-        "body": "Today, Ableton announced Live 13 , which is expected to arrive in early 2027 with a slew of new features. Most of the changes are seemingly minor on paper, but when combined, they make for the biggest update to the digital audio workstation (DAW) in years.\n\nThe feature most likely to draw attention is the addition of a proper step sequencer. While Ableton's Push controller had a dedicated step sequencer, and you could effectively use the piano roll as one, the desktop app never included one. Ableton didn't phone this feature in either - it's a powerful sequencer. You can change velocity, timing, chance, length, and repeats for each step in th …\n\nRead the full story at The Verge."
+        "title": "These Xiaomi phones are no longer getting support with the latest HyperOS 4 update",
+        "summary": "Xiaomi's HyperOS 4 update includes intriguing new features like Soft Light Glass, memory improvements and more, but the not everyone will get the perks.",
+        "body": "Xiaomi's new software has started rolling out in China, but older phones are being left behind.\n\nOwners of a Xiaomi 17 in China are now receiving the latest HyperOS 4 update, which gives Xiaomi's software a new see-through look that's drawn plenty of comparisons to Apple's Liquid Glass. It began rolling out to the company's newest phones and tablets on October 15, 2026, but owners of the Xiaomi 12T and Redmi Note 12 are missing out. The update isn't coming to those models, which are already at, or are about to reach, the end of software support.\n\nAccording to Xiaomi's official rollout schedule, the first batch of HyperOS 4 updates covers the Xiaomi 17 series, Redmi K100 and K90 series and the Xiaomi Pad 8, with more models following in waves through January 2027. Unfortunately, phones that are reaching the end of support this year, including the Xiaomi 12 and 12T, aren't on that schedule. Firmware trackers have also spotted a handful of cheaper models that, while still within their support windows, haven't been tested with HyperOS 4 at all. Xiaomi hasn't confirmed whether they'll miss out, though, and the rollout is only in China for now.\n\nXiaomi's schedule for its China firmware rollout lists 57 phones and 15 tablets in total. Following the first batch in mid-October 2026, the Xiaomi 17 Max, 17T and 17T Pro, Redmi K90 Max and Redmi Turbo 5 series were due by October 31, followed by the Xiaomi 15 series, MIX Flip 2, Civi 5 Pro and Redmi K80 series by November 15. The Redmi Note 17 and Note 15 lines come next, by November 30. December's batch is the biggest, taking in the Xiaomi 14 and 13 series, MIX Fold 3 and 4, Redmi K70 series and Redmi Note 14 Pro and 14 5G, while January 2027 is reserved for TVs and wearables.\n\nA global beta opened in September 2026 for the Xiaomi 17, 17 Ultra and the Leica Leitzphone, followed by the 17T, 17T Pro, 15 and 15 Ultra, but Xiaomi hasn't yet provided a date for the global release. Beebom reported on October 11 that Xiaomi still hasn't confirmed a timeline for India or any other market, and Poco phones, which aren't sold in China, don't appear on the schedule at all.\n\nXiaomi publishes end-of-support dates on its security center site. Gizmochina has counted 19 devices due to drop off in 2026. The Xiaomi 12 and 12 Pro, Redmi Note 12 5G, Redmi 12C and Redmi A2 and A2+ lost support in March, and the Poco F5 and F5 Pro in May. The Xiaomi 12T and 12T Pro reached the end of the line in October, followed by the Redmi 13C and Poco C65 in November. Once a model winds up on that list, it stops receiving OS upgrades and security patches entirely, so it's worth knowing how to check if your Android phone is still getting security updates . Xiaomi's promises have gotten longer since, with the Xiaomi 15 getting four OS updates and six years of security patches, but that's still short of the seven years Samsung and Google now offer on their flagships.\n\nXimitime , which tracks Xiaomi's firmware, said there were no signs of HyperOS 4 test builds for any phone capped at Android 16. It named six models that hadn't entered testing: the Redmi Note 13 Pro 4G, Redmi Note 14S, Redmi A5 4G, Poco C71, Poco M6 Pro 4G and Poco X6 5G. Xiaomi hasn't confirmed that these phones are excluded, and some still have years of security updates left. If they are included, they'll stay on HyperOS 3.\n\nInterestingly, the Xiaomi 13 series is on December's list, even though Xiaomi promised it three major Android updates, ending at Android 16, back in 2023. However, Xiaomi hasn't said whether its 13 series is getting Android 17 or a version of HyperOS 4 built on Android 16. With four years of security patches promised from its early 2023 global launch, the Xiaomi 13 is also now one of many popular smartphones in their last year of software support .\n\nXiaomi calls the new design Soft Light Glass, a translucent material that it says adjusts its transparency based on the colors and content behind it. The lock screen's clock can now be resized, moved and restyled, much like the iPhones running iOS 26. Per Xiaomi, the full effect will only run on phones sporting a Snapdragon 8 Elite, Dimensity 9500 or Xiaomi's own XRING O1 chip or newer; older phones on the list get a simplified version.\n\nXiaomi also claims that HyperOS 4 leaves 27.2 percent more memory free after eight hours of use and opens apps 17.5 percent faster after long sessions. Meanwhile, its voice assistant, Super XiaoAI 2.0, now runs on Xiaomi's own MiMo AI model and adds an Expert Mode that can carry out multi-step tasks across apps, though most of the AI features are limited to China for now. HyperOS 4 is reportedly based on Android 17, but Xiaomi's newest phones already got Android 17 in July 2026 through an interim release called HyperOS 3.3."
       }
     },
     "media": null
   },
   {
-    "id": "engadget-eb758f032fcd7207",
+    "id": "ars-technica-ac3e69c19f0f3446",
     "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2312279/google-turns-gemini-towards-medical-paperwork/",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/11/ring-cameras-go-mobile-as-amazon-debuts-ai-powered-security-drone-and-robot/",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-10T17:35:46.000Z",
+    "publishedAt": "2026-11-10T22:35:01.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -63,195 +63,49 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Google turns Gemini towards medical paperwork",
-        "summary": "Gemini for healthcare is in preview now, with some big-name partners already on board.",
-        "body": "Gemini for healthcare is in preview now, with some big-name partners already on board.\n\nGoogle Cloud has officially announced Gemini for healthcare, bringing agentic AI to the sector.\n\nIn a press release , Google said that the new initiative aims to \"unify the disparate clinical, operational, and administrative systems central to healthcare delivery and health plan operations.\" So rather than scraping the web to diagnose or advise treatments to medical professionals at the point of care, it sounds like Gemini will be used primarily to improve workflow efficiency.\n\nThe healthcare-focused assistant is built on top of the universal Gemini agent, and connects to third-party systems to gather information from health records, billing platforms and official guidelines. The AI can also access Medicare and Medicaid data to suggest next steps and generate multi-step workflows that Google says will be overseen by humans where appropriate, and adhere to \"defined guardrails.\"\n\nGemini for healthcare is intended to relieve the strain on human administrative teams, reducing burnout and in turn allowing more time for patient care. It launches in preview first, with Blue Cross Blue Shield of Massachusetts, Hartford HealthCare, HCA Healthcare, Highmark Health, Northwell Health, Optum and Stanford School of Medicine among the launch customers.\n\nAs for the obvious privacy concerns, Google says that the new platform will be compliant with the Health Insurance Portability and Accountability Act (HIPAA), the federal law that protects patients from having sensitive information disclosed without their permission. The company also insists that \"consequential decisions remain in qualified hands.\"\n\n\"The fundamental challenge in healthcare isn't a lack of information—it's the immense friction of making that data actionable across a highly regulated ecosystem,\" said Thomas Kurian, CEO, Google Cloud. \"By working directly alongside our healthcare customers, we've built a platform that resolves chronic bottlenecks so that the industry can put its focus entirely back on human health.\"\n\nGemini for healthcare connects workflows across Google Workspace and Microsoft 365, as well as ServiceNow and industry-specific platforms like the Salesforce's agentic Health Cloud. It will be available for Gemini Enterprise Standard and Gemini Enterprise Plus customers."
+        "title": "Ring cameras go mobile as Amazon debuts AI-powered security drone and robot",
+        "summary": "Amazon's roaming Ring Robotics devices will debut in late 2026 and early 2027.",
+        "body": "Amazon is betting that many Ring customers will also want an AI-powered security drone and robot patrolling their homes or offices. But the company’s upcoming Ring Robotic products are also certain to intensify privacy concerns previously raised around a prior Amazon attempt to popularize a flying security camera.\n\nThe Ring Rover Cam and Ring Drone Cam are expected to reach customers starting at the end of 2026 and in early 2027, respectively, according to an Amazon announcement posted on November 10. Amazon describes the devices as relying on an AI Pilot system that uses each device’s cameras along with “specialized vision models, on-device sensors and cloud processing” to plan patrol routes while autonomously navigating around obstacles such as furniture.\n\nBoth devices also use that AI Pilot system to digitally map the floor plan of the customer’s home or business. This setup process occurs after the customer carries the Ring drone through their indoor spaces or allows the Ring Rover to do some autonomous exploration.\n\nRead full article\n\nComments"
       }
     },
     "media": null
   },
   {
-    "id": "the-verge-f640d85f6ed8c4e8",
+    "id": "engadget-f1fbafac6d740271",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2312864/meta-warns-some-of-its-ai-glasses-may-get-too-warm-if-they-get-wet/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-10T22:05:37.000Z",
+    "categories": [
+      "tecnologia-general",
+      "programas-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta warns some of its AI glasses may get 'too warm' if they get wet",
+        "summary": "A software update will tell users if they're affected and direct them to Meta's customer support for a full replacement.",
+        "body": "The company is offering free replacements to affected devices.\n\nMeta is rolling out a software update for its AI glasses to fix an issue that causes some devices to become \"too warm\" when they get wet. The company describes it as a \"rare issue\" affecting only a \"small number\" of its glasses, but is nonetheless urging everyone with a pair of Meta Glasses to update their software and offering free replacements to those affected.\n\nThe company has begun notifying users about the forthcoming update which will roll out to everyone with a pair of Meta-branded frames , which includes Adventurer, Fury, Starfire, Nova and Capri models. Oakley and Ray-Ban glasses are not impacted, according to Meta.\n\nWhile Meta doesn't use the word \"overheating,\" the company compares its glasses fix to how smartphones automatically shut down when they get too hot. \"We've implemented a software update to fix a rare issue that caused a small number of Meta Glasses to get too warm when moisture entered the device,\" a Meta spokesperson said in a statement. \"It works similarly to a phone shutting off automatically when it needs to cool down. If people experience this, they can contact Meta Customer Service for a replacement.\"\n\nIn an email to users reported by 9to5Google , Meta says that the heat-related issue can be triggered by \"excessive moisture or sweat\" entering the glasses. That suggests that at least some of the company's own AI glasses may not be as water resistant as they're supposed to be. According to Meta , all of its AI glasses come with IPX4 water resistance which \"means your glasses are safe if you get caught in light rain while you wear them.\"\n\nThe company hasn't indicated how many pairs of glasses might be affected, but says that those who experience the moisture-related shutdowns will be able to get a free replacement pair of glasses. Affected glasses will show a push notification if they do turn off unexpectedly, and the alert will direct them to Meta's customer support.\n\nIn the meantime, the company is urging everyone with a pair of Meta Glasses to update to the latest software, version 130, to ensure \"the best performance.\" You can update your glasses from the Meta AI app by heading to Settings > Glasses > Updates . The version 130 update is still rolling out so it may take a day or so to hit everyone.\n\nHave you experienced a pair of Meta Glasses getting too hot or unexpectedly shutting down? Contact the author at karissa [at] engadget.com or karissabe.50 on Signal."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-a9c566c20e573f29",
     "type": "news",
     "sourceId": "the-verge",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1030979/google-fi-automatic-network-switching-pixel",
+    "originalUrl": "https://www.theverge.com/gadgets/1031284/oura-counsel-health-acquisition",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-10T17:32:39.000Z",
+    "publishedAt": "2026-11-10T21:40:31.000Z",
     "categories": [
       "tecnologia-general",
-      "android"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google Fi is bringing back multiple cell network support for better coverage",
-        "summary": "Google Fi is launching a new \"super network\" that can automatically switch users between two different 5G networks depending on which one has better connectivity. The feature is rolling out starting today on Pixel 9 and newer phones that have Google Fi active on eSIM and have any non-Fi SIMs disabled. When Google Fi first […]",
-        "body": "Google Fi is launching a new \"super network\" that can automatically switch users between two different 5G networks depending on which one has better connectivity. The feature is rolling out starting today on Pixel 9 and newer phones that have Google Fi active on eSIM and have any non-Fi SIMs disabled.\n\nWhen Google Fi first launched in 2015, users were originally able to switch between T-Mobile and Sprint's networks. But those two networks eventually became one when T-Mobile acquired Sprint in 2020, and so the network switching stopped there. Jane Harnett, Google Fi Wireless senior product manager, told The Verge that Fi stopped offering the …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-a2f045ebaebc710b",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2312177/anthropic-takes-on-google-and-microsoft-with-claude-sheets/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-10T17:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Anthropic takes on Google and Microsoft with Claude Sheets",
-        "summary": "The company also has a new whiteboard app.",
-        "body": "The company also has a new whiteboard app.\n\nAnthropic is significantly expanding Claude's suite of productivity tools . At an event in San Francisco today, the company announced Claude Sheets. As you can probably guess, Sheets allows Claude to generate and edit spreadsheets for you. Each file can include its own set of tabs and formulas. You'll also find the usual assortment of formatting options.\n\nAnthropic is billing Sheets as collaborative tool you can use alongside both Claude and your coworkers. Everyone with editing access can make changes to the file, and any tweaks Claude makes will be noted for you and your coworkers to track. You can export any files Claude generates to Excel , and there's even support for Anthropic's Google Workspace plugin. Sheets is currently available in beta to Claude subscribers across the web, desktop and mobile.\n\nAlongside Claude Sheets, Anthropic announced two other new products: Claude Meetings and Claude Whiteboards. The first of those is Anthropic's take on a meeting agent like the kind offered by Otter.ai and other companies. Available in Google Meet to start (which, incidentally, offers its own meeting agent through Gemini), Claude can join your video calls and start taking notes as you and your colleagues talk. You can later chat with Claude about any plans or action items that came up during your call. \"Claude marks itself as a participant and posts a notice in the meeting's chat,\" says Anthropic. \"It won't join a call with outside guests unless an admin allows it, and it leaves if one joins anyway.\" At the moment, Claude Meetings is only available to Team and Enterprise customers.\n\nMoving to Claude Whiteboards, it's a pretty cutesy take on a collaborative brainstorming app. As your team works together, Claude will group everyone's ideas together by theme and draft action items for each individual. In a nifty bit of integration, you can use Claude Meetings and Whiteboards at the same time. Anthropic is billing the tool as a natural extension of how people already use Claude. \"Many people already brainstorm with Claude, but sharing the results with coworkers has meant copy-pasting them somewhere else,\" the company says. Claude Whiteboards is available in beta to all paid users across the web, desktop and mobile.\n\nSeparately from those announcements, Anthropic is renaming Claude Dashboards to Claude Data and starting to roll out the tool to all paid users. Anthropic says it decided to rename the app because \"companies use their data for more than dashboards.\" In any case, you can connect Claude Data to your company's CRM so that the chatbot can then answer specific questions you might have about what's inside.\n\nLastly, Anthropic is upgrading Claude's plugin functionality, which allows you to connect apps like Canva and Notion to the chatbot so it can pull information from those services. As Anthropic notes, there are already more than 9,000 connectors offered through the Claude Marketplace, but now you can open full apps inside of Claude, allowing the chatbot to act on what it sees in the window. Anthropic is rolling out this update starting with a small group of partners that includes Adobe, Atlassian and HubSpot."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-b2dec410c195b20d",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2312022/google-fi-super-network-automatic-carrier-switching/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-10T17:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "android"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google Fi announces super network automatic carrier switching for improved speed and reception",
-        "summary": "It's rolling out first on Pixel phones before wider availability arrives in 2027.",
-        "body": "It’s rolling out first on Pixel phones before wider availability arrives in 2027.\n\nGetting the fastest mobile data speeds can be tricky because a single carrier may not have optimal coverage in your area. So to address this, Google Fi is introducing its new super network feature which allows your phone to automatically switch between two different carriers to deliver the best connection possible.\n\nThe super network feature begins rolling out today to customers with Pixel phones (Pixel 9 and above with eSIMs). In the event that your phone detects that your connection is sluggish, it will automatically switch from one carrier to another. Unfortunately, Google Fi is not officially disclosing the names of the carriers it's using for its super network, though based on previous partnerships one of them is probably T-Mobile. Regardless, the effect is that if you hit a dead zone or congestion, your phone can connect to a different cell signal without any manual input.\n\nHowever, that's not all, because alongside the super network, Google Fi is also introducing a new Wi-Fi Auto-Connect+ feature designed to improve data speeds indoors in places like malls, airports and more. That means even if you're in a building that interferes with traditional cellular reception, your phone can switch over to Wi-Fi where available, while automatic encryption ensures that your data stays secure. Wi-Fi Auto-Connect+ will initially be available on Pixel phones (Pixel 5a and newer) and some Motorola and Samsung phones (running OneUI 9 and above) across select locations throughout the US, Europe, Asia and Brazil.\n\nBut perhaps the best part is that both Google Fi's super network and Wi-Fi Auto Connect+ will be available to customers with Unlimited Premium and Flexible plans at no extra cost. Furthermore, for international travelers, both features will work in over 200 destinations across the globe.\n\nAlternatively, for customers who need a little extra help or technical support, the company is rolling out its new AI-powered Ask Fi agent inside the app. It's designed to answer questions, straighten out billing concerns or help troubleshoot things like connectivity issues in real time. Thankfully, Google Fi says there will still be actual humans you can reach out to if that's what you prefer.\n\nFinally, to help promote the launch of its super network, Google Fi is offering a free Pixel 11 Pro to new subscribers (via a $500 instant rebate and $599 in credits over 24 months) along with a $10 per month service credit to anyone who signs up for an Unlimited Premium plan (offers lasts until 11/18/26). And if you already own a Pixel phone, new subscribers can get 50 percent off select unlimited plans for 12 months (offers ends 12/1/26)."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-6c1b741b59ce6d05",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/10/anthropic-launches-claude-meetings-to-turn-workplace-discussions-into-plans-and-tasks/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-10T17:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Anthropic launches Claude Meetings to turn workplace discussions into plans and tasks",
-        "summary": "As participants talk, Claude can draft the plan being discussed, map out a timeline on a whiteboard, answer questions in the meeting chat, and access connected work apps to retrieve information, such as last year's figures.",
-        "body": "Anthropic announced new workplace features on Tuesday, including Claude Meetings, which brings Claude into video calls to begin working on tasks while participants are still talking. The company also unveiled Claude Whiteboards and Claude Sheets.\n\nThe launch of Anthropic’s new productivity-focused features comes just a few weeks after OpenAI unveiled a series of workplace tools that allow users to collaborate with ChatGPT to do things like visualize company information and create presentations, as both companies compete to turn their products into office suites of sorts to take on Microsoft and Google. Meta is also joining the competition with its Muse AI agent, which can build mini-apps on the fly to help users complete specific tasks.\n\nWith Claude Meetings, teams can add Claude to a video call as a visible participant. Claude then follows the conversation and gets to work on tasks in real time. As participants talk, it can draft the plan being discussed, map out a timeline on a whiteboard, answer questions in the meeting chat, and access connected work apps to retrieve information, such as last year’s figures. After the call, the meeting notes, action items, and other materials Claude created are available in claude.ai.\n\nThe work that comes out of a meeting usually starts after everyone hangs up, but with this new feature, teams can turn discussions into actions in real time, Anthropic says.\n\nClaude identifies itself as a meeting participant and posts a notice in the meeting chat. It won’t join calls with external guests unless authorized by an admin, and will automatically leave if an external guest joins.\n\nClaude Meetings is launching in beta on Team and Enterprise plans. At launch, it works with Google Meet, with support for additional plans expected to follow.\n\nAs for Claude Whiteboards, Anthropic describes the feature as a collaborative board where teams can talk through a plan and have Claude turn it into an organized visual workspace with timelines and deadlines.\n\nThe company notes that many people already brainstorm with Claude, but that in order to share their results with others, they would have to copy-paste them somewhere else. Now, a team can work directly with Claude on the same board in real time.\n\nWhen the brainstorm is done, Claude can turn the board into a doc or a slide deck. Additionally, Whiteboards also work inside Claude Meetings, so the board builds while people talk, Anthropic says.\n\nClaude Whiteboards is available in beta on paid plans, on web, desktop, and mobile.\n\nThe company also launched Claude Sheets, which lets teams create and collaboratively edit spreadsheets with Claude. A team can ask it to build a campaign tracker or hiring budget, and Claude will then generate a working spreadsheet.\n\nAnthropic says Claude handles the initial setup of trackers and budgets, while allowing teams to continue refining and updating the same spreadsheet. Each spreadsheet can include multiple tabs, formulas, formatting, and dropdown menus. Claude also makes edits directly in cells alongside the team, and outlines each change so users can see what it did.\n\nClaude Sheets is available in beta on paid plans, on web, desktop and mobile.\n\nAnthropic also announced that Claude Data, formerly known as Claude Dashboards, is now generally available. The feature connects Claude to systems that companies use to keep their numbers, like a data warehouse or CRM. Users can ask questions, and Claude responds with dashboards, written data stories, or narrated videos.\n\nAdditionally, the company announced interactive connectors that open the full version of apps like Adobe, Atlassian, and HubSpot inside Claude. Anthropic notes that teams can now open these apps directly alongside their Claude conversations and ask the assistant to work within them, essentially bringing existing workflows into the same workspace."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-e98bd359d76f99b0",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1030709/anthropic-has-its-own-ai-powered-office-suite-now",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-10T17:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Anthropic has its own AI-powered office suite now",
-        "summary": "For years, Anthropic has been known for its focus on enterprise and coding tools that attract high-flying corporate clients, inspiring competing frontier labs - like OpenAI, SpaceXSI, and Meta - to copy its strategies. Earlier this year, Claude Code went through its own particular hype cycle. And now, Anthropic is trying to expand its footprint […]",
-        "body": "For years, Anthropic has been known for its focus on enterprise and coding tools that attract high-flying corporate clients, inspiring competing frontier labs - like OpenAI, SpaceXSI, and Meta - to copy its strategies . Earlier this year, Claude Code went through its own particular hype cycle . And now, Anthropic is trying to expand its footprint to other knowledge workers with an AI-powered suite of office tools.\n\nAt an event in San Francisco on Tuesday, Anthropic unveiled new tools for non-technical workers who spend a lot of time attending meetings, brainstorming new ideas, and analyzing metrics: Claude Meetings, Claude Sheets, and Claude W …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-9ae0e7155e624eaa",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/10/nvidia-ceo-jensen-huangs-affair-with-alleged-chinese-spy-a-timeline/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-10T17:04:19.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Nvidia CEO Jensen Huang’s affair with alleged Chinese spy: a timeline",
-        "summary": "The affair could have ramifications for national security as the U.S. and China race to develop the most advanced AI infrastructure.",
-        "body": "Nvidia co-founder CEO Jensen Huang has never been as flashy or controversy-prone as AI leaders like OpenAI’s Sam Altman or SpaceXAI’s Elon Musk. Now, the 63-year-old industry kingpin has admitted that he cheated on his wife of 40 years in an affair that could have ramifications beyond Huang’s personal life and potentially impact national security.\n\nUnited States officials believe that Huang’s likely romantic interest, Megaspeed executive Alice Huang, is a Chinese spy who has been feeding information back to Beijing. (Alice Huang, a Chinese citizen, is of no relation to Jensen Huang.)\n\nMegaspeed, a Singapore-based AI infrastructure company, had reportedly purchased $4.8 billion in Nvidia chips over the last two years. The U.S. and Singapore have both previously investigated Megaspeed over suspicions that the firm was illegally sharing chips with China.\n\nThe U.S. and China are embroiled in a fierce technological arms race to build the most advanced AI infrastructure, which could shape each country’s economic future, military prowess, and capacity for innovation. Nvidia is valuable in this competition as one of the world’s largest makers of AI chips, which are essential for accelerating AI development. But as an American company, Nvidia faces government restrictions on the sale of its most powerful chips to Chinese entities.\n\nAs the controversy unfolds, we are organizing the most relevant events into a reverse-chronological timeline to keep you up to date.\n\nThe Nvidia CEO pulled out of upcoming speaking engagements at the ElevenLabs Summit and Anthropic CEO Forum.\n\nAlice Huang and her family reportedly built a network of companies in China and Singapore to acquire Nvidia chips, including founding a Chinese company called Shanghai Century Litong. Founded in 2023, it became a Nvidia preferred cloud partner giving it priority access to chips, the Information reported . The Info reported that Shanghai Century Litong. facilitated buying $7.5 billion worth of Nvidia’s chips, including banned chips.\n\nNvidia’s head lawyer, Tim Teter, intervened in a 2025 US government probe surrounding the suspected smuggling of AI chips by Megaspeed International, Bloomberg reported . Teter contacted Commerce Under Secretary Jeffrey Kessler asking questions about whether the Trump administration played a role in detaining Alice Huang.\n\nIn early 2025, Alice Huang and a business partner sought China-based investors for an Asian data center, promising they had no problem in securing GPUs, the Financial Times reported.\n\nOn Sunday night, President Trump weighed in on Huang’s controversy and showed support for the Nvidia CEO.\n\n“I have not spoken to him about it. I just know he’s a fine person, but you never know what’s going on,” Trump said.\n\nWhen asked if Huang should remain chief of Nvidia , Trump said, “I think so. Oh yeah, sure.”\n\nJensen Huang wrote in a letter to Nvidia employees — which was also published as a press release — that he cheated on his wife.\n\n“I owe my family and all of you an apology,” Huang told his company. “I was unfaithful to my wife. My actions hurt her and our children. There is no excuse for what I did. I am deeply sorry.”\n\nHuang did not mention Alice Huang by name in the message, but linked his infidelity to “the national security concerns raised in news reports.”\n\n“Nvidia’s Board of Directors has initiated an independent investigation. I support the investigation and will cooperate fully. I love our country and our company. I am committed to protecting Nvidia and supporting America’s national security. I am proud and grateful to be an American,” Huang wrote.\n\nNvidia shares slid over 5% the following day.\n\nThree Republican congressmen — Chairman John Moolenaar of the House Select Committee on China, Chairman Brian Mast of the House Foreign Affairs Committee, and Chairman Rick Crawford of the House Permanent Select Committee on Intelligence — sent a request to Huang for a closed-door joint briefing with their three committees.\n\n“Recent reports raise significant national security concerns regarding the [People’s Republic of China]’s access to sensitive U.S. technology and information,” the chairmen wrote . “The issue of PRC infiltration and access to cutting-edge U.S. technology is core to the investigative work of our three committees this Congress. It is vital that Congress determines the extent to which U.S. national security has been placed at risk.”\n\nU.S. officials had been investigating Alice Huang and Megaspeed for more than a year when the New York Times broke the story in late October that the two executives also had a close relationship.\n\nA Nvidia spokesperson denied that this relationship was something out of the ordinary.\n\n“Jensen’s interactions with Ms. Huang are not unusual or unexpected. Meetings with customers are part of a CEO’s job; Jensen talks with thousands of customer executives every year,” Nvidia spokesperson John Rizzo said. He added that “if the U.S. government believes that any person is a threat to American industry, it would let us know.”\n\nU.S. officials circulated a secret memo among policymakers which warned that Megaspeed’s Alice Huang, who had a relationship with Jensen Huang, was a spy for China’s Ministry of State Security. This memo was not public knowledge until it was later reported by the New York Times.\n\nSecretary of State Marco Rubio supervised the drafting of the memo.\n\nAround the same time, per the New York Times’ report , U.S. President Donald Trump was briefed about intelligence findings that possible Chinese spy Alice Huang had formed a close relationship to Jensen Huang. Trump did not act on this information.\n\nThe Nvidia CEO, an ally of Trump , has repeatedly advocated for the U.S. government to let Nvidia expand its business in China.\n\nMegaspeed was confirmed to be under investigation by both the U.S. and Singaporean governments in October 2025. As a customer of Nvidia, Megaspeed was suspected of helping Chinese companies get around American embargoes on chip exports.\n\nMegaspeed, a neocloud that used Nvidia chips, had been renting computing power to Chinese internet giant Alibaba and other Chinese companies, the Times reported. A Commerce Department official who had visited Megaspeed’s data center in Malaysia in 2024 had found a hoard of Nvidia equipment that was still packed in boxes and the concern was that this equipment was was being directly shipped somewhere else, like China, rather than installed and sold as a cloud service.\n\nJensen Huang had been spotted socializing with Megaspeed executive Alice Huang as early as 2024 in Taiwan, where the Nvidia CEO was born.\n\nThese investigations into Megaspeed highlighted concerns about the degree to which Nvidia is able to track its chip exports. At the time, a Nvidia spokesperson told press that the company did not have “any reason to believe products had been diverted.”\n\n“NVIDIA visited multiple Megaspeed sites yet again earlier this week and confirmed what we previously observed — Megaspeed is running a small commercial cloud, like many other companies throughout the world, as allowed by U.S. export control rules,” the Nvidia spokesperson said at the time."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-bb1f50e4f0006f96",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/10/satechi-new-macbook-neo-accessories/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-10T17:00:00.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Satechi expands lineup of color-matched accessories for MacBook Neo",
-        "summary": "Earlier this year, Satechi launched a line of Mac accessories in colors inspired by the MacBook Neo . Now, the company is back with a new expansion of that line with four new accessories: MacBook Neo OntheGo 45W GaN Charger with 60W Max $30 MacBook Neo Core USB-C to 4K HDMI Adapter $30 MacBook Neo Slim EX1 Wireless Keyboard $50 MacBook Neo Form Desk Mat $40 more…",
-        "body": "Earlier this year, Satechi launched a line of Mac accessories in colors inspired by the MacBook Neo . Now, the company is back with a new expansion of that line with four new accessories:\n\nThe new 45W charger uses a dynamic power system that delivers up to 60W at plug-in and 45W sustained. It can charge a MacBook Neo at full speed and fast-charge an iPad.\n\nHere’s what else Satechi is launching today:\n\nThe new gear is available to order starting today on Amazon . It’s all available in the same silver, indigo, blush, and citrus options as the MacBook Neo. As we approach the holiday shopping season, this could be a great gift for anyone in your life with a MacBook Neo.\n\nFollow Chance : Threads , X , and Instagram"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-92fa148b1b691f1a",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/10/sundrop-turns-your-endless-baby-photos-into-recaps-time-lapses-and-more-without-ai/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-10T16:50:38.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
       "apps-accesibles",
       "ia-accesibilidad"
     ],
@@ -259,34 +113,249 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Sundrop turns your endless baby photos into recaps, time-lapses and more — without AI",
-        "summary": "Sundrop is a new iPhone app that uses Apple's on-device AI to help parents rediscover their favorite photos and create keepsakes without uploading images to the cloud.",
-        "body": "New parents take a lot of pictures of their children, but those photos often end up languishing in photo galleries, never to be seen again after the initial snap and share.\n\nA new app, Sundrop , aims to make those pictures more useful by turning them into weekly recaps, highlights, time-lapses of the child growing up, and other cute scenes, like putting the child’s photo on a magazine cover or a rookie card.\n\nWhile Google Photos and Apple Photos already provide extensive tools to organize and manage photos, Sundrop is taking aim at a particular niche: Parents with a new baby (usually their first!) who take an overwhelming number of photos and want to do more with those pictures.\n\nThe app was developed over the past few months by the same team behind the read-it-later app, Matter: Ben Springwater, Sky Lan, and Rob Mackenzie (all dads themselves).\n\nNotably, Sundrop claims it is designed to be private, and processes all photos locally on the device it is installed on. To make this possible, Sundrop taps into Apple’s Vision framework and on-device Core ML (machine learning) models instead of uploading photos to a cloud server or some other hosted AI service.\n\nBoth of the child’s parents can use Sundrop together by linking their accounts, which allows the app to sync their shared photos via Apple’s iCloud service. This feature, the company says, means the pictures aren’t sent to any external servers it runs.\n\nIn addition, the team notes that no generative AI is used in the creation of its scenes or highlights.\n\nThis differentiates it from many photo editing apps on the market, including Google’s, which are increasingly tapping generative AI to create new versions of your photos.\n\nTo find highlights and recaps, Sundrop scans pictures in the parents’ respective Camera Rolls on their iPhones, skipping things like screenshots or duplicates. It then creates highlights or fun scenes, which it calls “drops.”\n\nOne of these is a recap of the week every Sunday, announced as a Lock Screen notification. Others can put two siblings side-by-side at the same age, generate a time-lapse series of photos or a video of a kid growing up, or cut out a photo of the child and place it into a layered template.\n\nParents can also manually edit the photos Sundrop uses to make its creations, or use the app to automatically organize the best photos into galleries with other similar shots.\n\nThe app costs $39.99 per year, and offers a week-long free trial. The annual plan also includes Family Sharing, so only one parent needs to purchase it."
+        "title": "Oura is acquiring medical AI chatbot startup Counsel Health",
+        "summary": "Oura announced its quarterly earnings today and said it agreed to acquire Counsel Health for $625 million, after adding the company's AI chatbot to its app earlier this year. Counsel Health calls itself an \"AI-native primary care company,\" using the app to deliver AI-generated responses and insights based on users' health data reported from their […]",
+        "body": "Oura announced its quarterly earnings today and said it agreed to acquire Counsel Health for $625 million, after adding the company's AI chatbot to its app earlier this year . Counsel Health calls itself an \"AI-native primary care company,\" using the app to deliver AI-generated responses and insights based on users' health data reported from their wearables that can then proceed to a conversation with one of its in-house physicians.\n\nOura says it expects the deal to close before the end of the year.\n\nOura CEO Tom Hale said in an interview with Bloomberg that the acquisition is part of a plan to connect wearables, clinical AI, and access to do …\n\nRead the full story at The Verge."
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-d55f171718f15ca2",
+    "id": "9to5mac-c8ef5e95b1363c81",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/10/ipados-27-3-adds-new-ipad-setting-i-instantly-turned-on/",
+    "originalUrl": "https://9to5mac.com/2026/11/10/apple-to-investigate-accident-that-killed-three-workers-at-iphone-parts-factory-in-india/",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-10T16:14:54.000Z",
+    "publishedAt": "2026-11-10T21:34:43.000Z",
     "categories": [
       "apple",
-      "tecnologia-general",
-      "apps-accesibles"
+      "tecnologia-general"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "iPadOS 27.3 adds new iPad setting I instantly turned on",
-        "summary": "iPadOS 27.3 is currently available in beta , and it introduces a new iPad setting for app windowing that I instantly turned on. Here are the details. more…",
-        "body": "iPadOS 27.3 is currently available in beta , and it introduces a new iPad setting for app windowing that I instantly turned on. Here are the details.\n\nI use the iPad Pro as my primary computer, and for the most part have found Apple’s software changes in iPadOS 26 and 27 to be great upgrades.\n\nBut with the powerful new windowing capabilities, there have definitely been some quirks that need refining. One of them involves resizing windows with the traffic light controls in the top-left corner.\n\nFor example, in iPadOS 27 the controls move locations and even disappear depending on the size of the window. It can be pretty frustrating.\n\nI need to just get better about learning keyboard shortcuts for window controls. But in the meantime, iPadOS 27.3 adds a new optional setting that I instantly turned on and have been loving.\n\nInside Settings ⇾ Multitasking & Gestures, if you have ‘Windowed Apps’ enabled you’ll see a new option below it: ‘Double-tap Top of Window to Zoom’\n\nIf you use your iPad mostly with touch input, or simply haven’t used keyboard shortcuts enough to remember them, this new setting is a great way to quickly resize windows.\n\nWhen the setting is enabled, two taps (or a double-click with the trackpad) will zoom the window to take up the full screen. Then you can double-tap again to revert it to its previous size.\n\nI generally keep my app windows in specific size setups, but regularly find myself wanting to go fullscreen temporarily. The new setting provides a convenient way to do that quickly without needing the traffic light controls or my keyboard, and is a welcome refinement to iPadOS windowing.\n\nWill you enable this new iPadOS 27.3 setting? Why or why not? Let us know in the comments.\n\n* Buy iPad with 15% discount from Apple refurbished"
+        "title": "Apple to investigate accident that killed three workers at iPhone parts factory in India",
+        "summary": "Reuters reports that three contract workers died after inhaling gas during an inspection at a Tata Electronics factory that produces iPhone components in India. Here are the details. more…",
+        "body": "Reuters reports that three contract workers died after inhaling gas during an inspection at a Tata Electronics factory that produces iPhone components in India. Here are the details.\n\nAs frequent 9to5Mac readers probably know, Apple’s supply chain in India relies heavily on Tata, which manufactures iPhone components and accounts for a significant share of the country’s iPhone assembly operations.\n\nSince Apple began diversifying its manufacturing operations away from China, India has emerged as a major production hub, with roughly a quarter of the world’s iPhones now manufactured in the country.\n\nEarlier this year, Apple found itself linked to an environmental controversy in India, after the Tamil Nadu Pollution Control Board investigated allegations that wastewater from a Tata facility had contaminated nearby farmland water.\n\nA few weeks later, however, Tata said the regulator had dropped further action against the facility after the company addressed the concerns raised.\n\nAt the time, Tata said it had ordered separate testing related to the facility and that the results supported its position that the plant was operating within the rules.\n\nHowever, the matter was apparently not fully resolved, as just three days later, Reuters reported that local health officials were still investigating complaints from nearby farmers.\n\nAnd while there had been no major developments reported about the wastewater investigation since then, Reuters reported today that three contract workers died in an accident at the same Tata facility.\n\nFrom Reuters :\n\nThe three contract workers died during maintenance work on an effluent treatment ​plant operated by Nalco Water at the Tata facility, which is located in Hosur in Tamil Nadu, ​district official Dinesh Kumar said, adding that the deaths occurred when the workers inhaled gas while inspecting an external nano-filtration tank.\n\nReuters added that “Apple’s team is visiting ​the plant to assist in ​the ongoing investigation,” though the company did not respond when reached for comment.\n\nThe report added that Tata and Tamil Nadu authorities are also investigating the fatal accident, and noted that “production was not affected as the facility was closed for the Hindu festival of Deepavali this week.”\n\nTo read Reuters ’ full report, follow this link ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-80c15fed53ca8480",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/10/openai-acquires-odessia-travel-startup-created-by-sonder-founder/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-10T21:08:52.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI acquires Odessia, travel startup created by Sonder founder",
+        "summary": "OpenAI has not yet said what its plans are for the future of travel. But Sonder founder Francis Davidson is a well-known figure in the travel industry.",
+        "body": "OpenAI has acquired an AI travel agent called Odessia, according to Odessia’s founder, Francis Davidson. Davidson says in a post announcing the deal that he’s now working for OpenAI, helping the AI lab with the future of travel.\n\nTerms of the deal were not disclosed, but this looks like an acqui-hire. Davidson’s announcement focused largely on how he built his AI travel agent Odessia by directing teams of AI agents. The year-old Odessia raised a $6 million pre-seed round led by Sequoia and launched its AI travel agent around five months ago. Davidson says that it had helped early adopters plan millions of dollars’ worth of travel, but the tool has already been shut down.\n\nAn OpenAI spokesperson confirmed the hire to TechCrunch. “We’re thrilled to welcome Francis to OpenAI. Francis is a proven founder who has built multiple businesses to help people travel, and we’re excited he’s chosen to build with us.”\n\nHowever the AI lab has not announced new travel-specific products or plans. It does, however, count such companies as Bookings.com, Expedia, and KAYAK as customers or partners. Travel is also one of the main areas that people are using personal AI assistants to help with. And, back in July 2025, when OpenAI launched its ChatGPT agent , it mentioned travel as one of its potential uses.\n\nOpenAI’s spokesperson didn’t have more to share on its plans for travel-related products, except to say that travel is one of the areas that chatbot users frequently ask about. “1.2 billion people turn to ChatGPT each week for help with everyday tasks — from understanding their health, figuring out what to make for dinner, building a budget, and even planning a trip. We see a real opportunity to make these experiences even more useful,” the spokesperson said.\n\nAcquiring Odessia is interesting for another reason. Davidson is well known in the travel industry after he founded a travel startup called Sonder as a college student in 2014. It was sort of like Airbnb, but it focused on short-term leasing of upscale apartments in major cities worldwide. The pandemic badly hurt it, and as it climbed out of that rut, it went public via a SPAC but didn’t raise as much money as it needed, Davidson later said in a post announcing his resignation as CEO in June 2025.\n\nWhen a key partnership with Marriott fell through , the company went into bankruptcy and wound down. The bankruptcy trustee sold Sonder’s name, trademarks, and website domain in 2026 to TravelAI, and that website operates as a curated guide to the kind of travel rental properties that Sonder was once known for. Prior to its downfall, Davidson had built Sonder into a unicorn with $143 million in revenues. While Sonder was not, ultimately, a success story, Davidson is the kind of battle-scarred founder that Silicon Valley often values.\n\nSo we’ll have to wait and see what OpenAI has in store now with travel, now that he’s joined the company.\n\nNote: This story was updated with OpenAI’s comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-ab4e2e078d5bef97",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2307790/what-is-dead-internet-theory/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-10T21:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "What is the 'Dead Internet Theory' and should humanity be worried?",
+        "summary": "As AI-generated content takes over the internet, will human beings still be able to connect online with other humans in a meaningful way?",
+        "body": "When spending time online today, do you ever get the feeling that digital life has become eerily less human? Perhaps social media posts seem a bit off , or you get the sneaking suspicion the customer service representative you are chatting with is actually a bot. If this sounds familiar, you aren't alone: a paradigm called the \"dead internet theory\" has been gaining momentum in the last several years, positing that the internet is increasingly dominated by non-human activity, including bots and AI-generated content.\n\nSince the theory first started making the rounds on internet forums in the 2010s, AI has only gotten more powerful. In September 2026, OpenAI reported that it had found a solution to a famously difficult mathematics puzzle, the Navier-Stokes problem. Meanwhile, a 2026 report from cybersecurity group Thales found that automated traffic continues to overtake human activity online, with bots accounting for 53 percent of all web traffic, up from 51 percent the year before. And bots are now talking to each other without humans in the loop at all: In March, Meta acquired Moltbook — a social network on which AI chatbots communicate with one another, often discussing humans . So as the internet landscape potentially gets less human every day, what exactly is dead internet theory, where does it come from, and should we be worried?\n\nDead Internet Theory — the idea that the majority of the internet is propelled by bots and other non-human agents – has been floating around for quite some time. It first emerged as a conspiracy theory on internet forums in the late 2010s, but gained a more concrete framework following a post in 2021 on online community Agora Road titled, \"Dead Internet Theory: Most of the Internet Is Fake,\" which argued \"the Internet feels empty and devoid of people.\" Followers of the theory argued that the internet \"died\" around 2016 when search engines and social media feeds started surfacing more AI-generated content.\n\nThe popularity of chatbots and AI-generated content has only further expanded since then. In 2024, only 33 percent of Americans said they had used chatbots like ChatGPT, Gemini or Copilot, a study from Pew Research found. By 2026, that number had increased to nearly half of Americans at 49 percent. That same report found that 25 percent of Americans use chatbots every day. In many realms of society we are now facing chatbot loops: in schools, students are writing essays using AI, which teachers then grade with AI. In the job search, employees use chatbots to spit out optimized resumes and cover letters which are then analyzed by AI systems. Increasingly, humans are cut out of the conversation entirely, our voices replaced with bots.\n\nOn a personal level, this chatbot loop can feel uncanny. Those script-like posts we see on LinkedIn or a soulless AI-generated poster at your local cafe can induce a feeling of existential dread, but the consequences go beyond personal discomfort. Bots can spread disinformation that causes real harm. AI chatbots are increasingly a source of election disinformation , and little is being done legislatively to regulate this new frontier, though government agencies have issued warnings on deepfakes and other AI-powered risks to free elections.\n\nAs AI use grows, so has the backlash: 40 percent of Americans say they think AI will have a negative impact on society in the next 20 years, according to a Pew Research study . AI detection is becoming increasingly popular, with company Pangram receiving $9 million in backing in July 2026 for its AI detection system. Following the passage of the EU AI Act, OpenAI has started watermarking AI-generated content. With measures like these, people opposed to AI will hopefully be able to more easily spot and avoid the artificial slop in favor of the human-centric connection they initially came to the internet to find."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-80a42d034d027098",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/10/openai-anthropic-face-new-oversight-as-new-yorks-ai-safety-law-takes-effect/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-10T20:52:13.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI, Anthropic face new oversight as New York’s AI safety law takes effect",
+        "summary": "New York is preparing to enforce its sweeping AI safety law, requiring major developers like OpenAI and Anthropic to register, disclose safety practices, and report critical incidents or face fines.",
+        "body": "New York is gearing up to enforce one of the country’s most significant AI safety laws. The state opened a registration portal Tuesday, with which large frontier AI developers like Anthropic and OpenAI will be required to register by January 1, 2027.\n\nThe RAISE Act , New York’s safety and transparency bill, kicks in at the start of the year. It mandates that large frontier developers — companies with more than $500 million in annual revenue — have to publish safety frameworks on their websites, report critical safety incidents within 72 hours, and issue public model transparency reports.\n\nThe newly formed Office of Digital Innovation, Governance, Integrity, and Trust (DIGIT) will implement the RAISE Act and oversee large frontier AI labs. Penalties can be as high as $1 million for one violation and $3 million for subsequent violations.\n\nThe state also can bring enforcement actions against companies that fail to register with the new portal, though a spokesperson declined to provide specifics.\n\n“Tech moguls tell us that their vision for AI is inevitable,” Governor Kathy Hochul said Tuesday during a press briefing. “They tell us get on board or get left behind… That any collateral damage is worth it as long as we win the race to the AI cliff.”\n\nOn Tuesday, Hochul also launched the New York Center for AI Responsibility and Research based at State University of New York’s Binghamton University. The center will independently evaluate the safety, security, and operation of advanced AI systems and work with DIGIT to review companies’ safety frameworks. Hochul first announced the center in January with $55 million in donations and capital.\n\n“We’re building a national model for smart, sensible AI regulation, a model that puts communities above corporations and people above powerful technology,” Hochul said.\n\nThe RAISE Act isn’t the only safety law New York has passed. Last year, the state began enforcing a law that requires AI companion operators to regularly let users know they’re talking to a bot, and to make reasonable efforts to detect suicidal ideation and self-harm.\n\nIn October, Hochul signed a separate chatbot safety law for minors, restricting behaviors like deceptive human-like interactions, emotionally manipulative or sycophantic responses, and encouragement of behaviors like suicide or disordered eating. That law takes effect June 1, 2027.\n\nOther states have also passed similar AI safety and transparency bills to the RAISE Act. California’s SB 53, which took effect in January, mandates that frontier AI labs have in place and publish safety frameworks, enact whistleblower protections, and report critical safety incidents within 15 days. Illinois’ SB 315, which will go into effect at the start of 2027, has similar requirements, plus includes independent safety compliance audits."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-9d15d775513cbd4c",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/10/spotifys-ai-dj-adds-nine-voices-and-a-setting-to-reduce-interruptions/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-10T20:48:41.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Spotify’s AI DJ adds nine voices and a setting to reduce interruptions",
+        "summary": "Spotify today expanded customization options for its AI DJ, allowing users to choose between different voices and personalities, as well as control how much the DJ talks between songs. Here are the details. more…",
+        "body": "Spotify today expanded customization options for its AI DJ, allowing users to choose between different voices and personalities, as well as control how much the DJ talks between songs. Here are the details.\n\nIf you’re not familiar with Spotify’s AI DJ feature, the company describes it as “a personalized mix of music and commentary to help you discover new favorites and connect more deeply with the artists you love,” adding that it takes your listening history into account to “[bring] together your favorite tracks, songs you haven’t heard in years, and new releases to keep things feeling fresh.”\n\nSpotify first introduced the interactive version of DJ in May 2025, and soon expanded its capabilities to Spanish-speaking users. Then, last May, Spotify expanded availability to more than 75 countries, alongside support for French, German, Italian, and Brazilian Portuguese.\n\nNow, as spotted by TechCrunch , Spotify is introducing more customization options, including new voices and personalities, as well as the ability to reduce commentary between songs.\n\nIn a new post published on Spotify’s For the Record blog, the company announced today that “Spotify Premium listeners in markets where DJ is available can choose from an expanded selection of DJ voices in English and Spanish,” with seven new English options spanning British, American, Irish, Australian, and Indian accents, along with two new Spanish voices.\n\nAdditionally, Spotify now lets users choose whether they want commentary between sets of songs through a toggle that reduces the DJ’s interruptions to brief acknowledgments when starting a session or requesting different music.\n\nHere’s Spotify’s description of each of the nine new DJ voices and their personalities:\n\nSpotify also shared a carousel on Instagram with short audio previews of each new DJ voice, giving users a chance to hear how they sound:\n\nA post shared by This Is Spotify (@thisisspotify)\n\nTo read Spotify’s full announcement, follow this link ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-54c8dfb5413a68f4",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/10/proximal-ventures-raises-debut-fund-to-back-startups-bringing-ai-to-drug-development/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-10T20:47:05.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Proximal Ventures raises debut fund to back startups bringing AI to drug development",
+        "summary": "Former SignalFire investor Sahir Raoof raises $27.5 million for new fund targeting AI in pharma.",
+        "body": "While established venture firms continue to attract capital, first-time fund managers are facing one of the toughest fundraising environments in years. But that didn’t stop Sahir Raoof, a former SignalFire investor and executive at two healthcare startups, from raising $27.5 million for his first solo VC fund.\n\nRaoof’s firm, Proximal Ventures , is betting that AI can transform the tools, infrastructure, and services that support drug development.\n\nPharmaceutical companies have historically outsourced various stages of drug development to specialized service providers, from synthesizing thousands of molecular compounds and figuring out how to manufacture drugs at scale to analyzing clinical trial data.\n\n“For a long time, the assumption was that pharma is not a great buyer of software, but a really good buyer of services,” Raoof told TechCrunch.\n\nRaoof believes AI could automate much of that work, creating an opportunity for startups to capture billions of dollars in pharmaceutical industry spending. By using AI, these companies could deliver the same services at a lower cost and in significantly less time, he said.\n\nSome of the most valuable applications of AI so far have been in service-oriented industries like law and finance, Raoof said. He sees similar opportunities in pharmaceutical services.\n\nProximal plans to invest in pre-seed and seed-stage startups, writing checks from $500,000 to $1.5 million. The firm has already backed seven startups, including ChronicleBio, co-founded by former OpenAI executive Fidji Simo, which uses AI to analyze biological and medical data to better understand chronic diseases and identify potential treatments.\n\nBefore spending two years as a principal at SignalFire, Raoof led business development at clinical trial recruitment startup Iterative Health and previously oversaw partnerships at Flatiron Health, an oncology data company acquired by Roche for $1.9 billion in 2018.\n\n“If you’re building a company that’s selling into the life sciences, one of the hardest things to do is starting that initial commercial flywheel,” Raoof said.\n\nHis sales chops, deep understanding of the healthcare ecosystem, and extensive industry relationships gave limited partners, the investors in VC funds, the confidence that he could spot strong startups and help them land customers. Proximal’s backers include VC firms SignalFire and Kleiner Perkins, Bertelsmann Healthcare Investments, and individual investors such as Dimension Capital co-founders Nan Li and Zavain Dar.\n\nAmy Abernethy, co-founder of Highlander Health and former principal deputy commissioner of the FDA, is also an investor. She first met Raoof when they worked together at Flatiron Health, where she served as chief medical officer. She told TechCrunch that his ability to build relationships and spot industry bottlenecks made a lasting impression. Abernethy is convinced that his abilities, along with the understanding of what the healthcare market needs, will make him a successful investor.\n\nIt is these qualities that have helped Proximal invest in startups alongside some of the better-known, much larger funds, she added."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-399474de8d10d741",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/science/2026/11/what-happens-to-mathematics-when-ai-becames-an-oracle/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-10T20:30:01.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "What happens to mathematics when AI becomes an oracle?",
+        "summary": "Mathematician Steven Strogatz discusses his new book, Big Math: The Hidden Codes That Run Our World .",
+        "body": "Our modern world runs on math, from social media algorithms, package delivery, and weather prediction to medical imaging and machine learning. The rise of computers helped fuel its dominance, enabling us to work with increasingly large numbers that would otherwise be beyond the capacity of our finite human brains. But with the rise of large language models, AI chatbots, and, soon, quantum computing, so-called \"big math\" is beginning to outstrip its creators entirely. What that means , and how we might adapt, is the focus of a new book, Big Math: The Hidden Codes That Run Our World , by applied mathematicians Steven Strogatz and Alex Townsend.\n\nStrogatz is perhaps best known in his field for his co-authorship of a seminal 1998 paper with Duncan Watts on the collective dynamics of small-world networks. He has also studied chaos theory as applied to physics, the geometry of supercoiled DNA, and the biological collective oscillators, such as swarms of synchronously flashing fireflies and crickets that chirp in unison. In 2005, Strogatz extended his study of synchronicity to the crowds that caused the wobbling of London's Millennium Bridge .\n\nAn award-winning communicator, Strogatz wrote three series of columns on mathematics for The New York Times in 2010, 2012, and 2025 and hosted a podcast for Quanta magazine from 2020–2021. He has written four popular books: Sync (2003), The Calculus of Friendship (2009), The Joy of X (2012), and the New York Times bestseller Infinite Powers (2019).\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-86266b86773033af",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1031028/spacex-starlink-mini-2-satellite-internet-terminal-hot-swap-battery",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-10T19:19:12.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Starlink Mini 2 adds a swappable battery",
+        "summary": "SpaceX announced a new version of its all-in-one satellite internet terminal that integrates a dish, Wi-Fi router, and now a battery into a single device about the size of a laptop. According to some users on X who shared screenshots of invitations to order Starlink Mini 2, the dish is priced at $999, which includes […]",
+        "body": "SpaceX announced a new version of its all-in-one satellite internet terminal that integrates a dish, Wi-Fi router, and now a battery into a single device about the size of a laptop. According to some users on X who shared screenshots of invitations to order Starlink Mini 2, the dish is priced at $999, which includes a full year of Roam Unlimited service that SpaceX values at $2,100.\n\nThe Starlink Mini 2 will run for up to 4.5 hours on a full charge, SpaceX claims, but that can be expanded by hot-swapping in additional batteries that will be sold separately, or by connecting the dish to a 60W power source over USB-C.\n\nDespite the addition of …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-b4bef37a417df671",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1031063/jensen-huang-ai-race-us-china-spy",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-10T19:04:05.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The US is winning the AI race. Jensen Huang could have blown it",
+        "summary": "As espionage targets go, Jensen Huang is perhaps one of the least surprising on Earth. The Nvidia CEO runs one of the world's most valuable companies, controls the in-demand technology fueling the AI boom, and is cozy with presidents, CEOs, and all manner of important people. He also wears a cool leather jacket. Which makes […]",
+        "body": "As espionage targets go, Jensen Huang is perhaps one of the least surprising on Earth. The Nvidia CEO runs one of the world's most valuable companies, controls the in-demand technology fueling the AI boom, and is cozy with presidents, CEOs, and all manner of important people. He also wears a cool leather jacket.\n\nWhich makes Huang's admission that he had an affair with a woman suspected of being a Chinese spy - reportedly while her spying was known to US intelligence and even President Donald Trump - all the more shocking. The fallout goes well beyond his marriage, his reputation, or Nvidia itself. Experts tell The Verge the incident threate …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-78963f87dea2f348",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gadgets/2026/11/november-pixel-drop-brings-gemini-intelligence-to-pixel-10-family/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-10T19:00:26.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Pixel phones getting new icon styles, Create My Widget, and more in November Pixel Drop",
+        "summary": "Spruce up your home screen with expanded custom icons and AI-generated widgets.",
+        "body": "Google's Pixel phones get an update every month, but most are just security patches and bug fixes. The bigger changes are bundled into quarterly Pixel Drops, and one is rolling out today . The update brings a few new things, and many of the Gemini features previously exclusive to the latest Pixel phones will also expand to Google's Pixel 10 lineup.\n\nThe Pixel 11 was Google's first foray into \"Gemini Intelligence\" branding, something we'll see a lot more of going forward. Some of the features under that heading were limited to Google's newest phones (and in some cases, Samsung's phones). The November Pixel Drop will expand these AI features to the Pixel 10 lineup, but importantly, that doesn't include the budget-oriented Pixel 10a .\n\nFor starters, the Pixel 10 series will get the improved personalized suggestions (previously known as Magic Cue) that debuted on the Pixel 11 . This enables things like sending grocery lists to Google Keep from other apps and generating summaries from the context menu. Rambler, Google's AI-assisted voice input system, is also coming to the 2025 phones. Likewise, Gemini app automation will roll out on Pixel 10 with this update. This feature is still limited to select apps in rideshare, food delivery, travel, and a few other categories.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -317,30 +386,6 @@
     "media": null
   },
   {
-    "id": "ars-technica-30fe41f5cad87066",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/google/2026/11/deepmind-reveals-gemini-robotics-2-5-and-open-safety-benchmark-asimov-jailbreak/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-10T15:00:39.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "DeepMind reveals Gemini Robotics 2.5 and open safety benchmark \"ASIMOV-jailbreak\"",
-        "summary": "The new model is up to twice as successful at some tasks.",
-        "body": "Google DeepMind has revealed a new generation of the AI-powered Gemini Robotics platform. In the 2.5 release, Google says its robotic AI is getting tantalizingly close to completing real-world tasks as well as humans do. In fact, some Gemini robots were able to get actual work done in Mercedes-Benz factories, and the team is preparing for a day when robots operate alongside humans with an open source safety benchmark.\n\nDeepMind's physical AI platform has several computational layers between user input and robotic action. There's the vision-language model piece, which is Gemini Embodied Reasoning. Essentially, it takes your instructions and uses live video to plan how the robot can accomplish the task. The other main component is the vision-language-action (VLA) that actually generates robot actions, like moving an actuator—that's Gemini Robotics, which has been bumped to version 2.5.\n\nDeepMind says that Gemini Robotics 2.5 is much better at tasks that require a high degree of dexterity. The model was evaluated across more than 200 activities, including serving food with tongs and using a pipette, as you would see in a laboratory. Google also showed that Apptronik’s Apollo 2 humanoid robot with Gemini Robotics 2.5 can now tie a bow with its five-fingered hands, a notable feat, because deformable objects (like ribbon) are notoriously difficult for robots to manipulate.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-apps-3d58fc3d05523736",
     "type": "news",
     "sourceId": "applevis-apps",
@@ -360,30 +405,6 @@
         "title": "Fields Of Fortune",
         "summary": "Fields of Fortune is a cozy farming game made to be played fully with VoiceOver, and just as fun to play by sight. Every screen is laid out for swiping, every picture is described in words, and every action tells you exactly what happened. GROW YOUR FARM Plant dozens of crops, watch them grow in real time and harvest them in normal, good and excellent quality. Buy more land as you level up, all the way to level 200. RAISE AND BREED ANIMALS Keep chickens, cows, sheep, horses, alpacas, unicorns and many more. Feed them the foods they love, collect their products, help them level up from Standard to Elite, and breed pairs to discover rare new breeds. Dress your animals in clothes you make in the Tailor Shop. MAKE GOODS Turn your harvest into bread, cheese, jam, wine, pizza, sweaters and over a hundred other goods in your own bakery, dairy, kitchen, winery and more. Hire workers to keep production running. FISH FROM THE PIER Cast your line, hear the distance read with every click as you pull back, wait for a bite and reel in fish, shells and rare sea treasures. Upgrade your poles and bait as you go. FARM WITH FRIENDS Add friends, visit their farms, water their crops, feed their animals, send gifts and trade items. Chat with everyone in public chat or privately with friends. Sell your goods to other players on the marketplace. DAILY GOALS AND CHALLENGES Collect a daily reward, complete daily quests, earn bronze, silver and gold medals, climb the leaderboards and compete in weekly challenges for surprise rewards. MADE FOR VOICEOVER - No headings to hunt for: swipe through each screen from the top. - Long lists are grouped into lists that open and close, each with its numbers. - Sounds, music and haptics for every action, with full volume controls. - Reduce Motion is respected everywhere. OPTIONAL PURCHASES The whole game is free to play. The Store sells Fortune Gem packs, for time in the forest and forest tools, three animals you cannot get anywhere else, and Farm Pass, a monthly subscription with extra gifts, free twin breeding on friends' farms and time with your animals. Farm Pass renews monthly until you cancel. Privacy Policy: https://ttqoudbyaxndaahyjmsf.supabase.co/functions/v1/privacy Terms of Use: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
         "body": "Fields of Fortune is a cozy farming game made to be played fully with VoiceOver, and just as fun to play by sight. Every screen is laid out for swiping, every picture is described in words, and every action tells you exactly what happened.\n\nGROW YOUR FARM Plant dozens of crops, watch them grow in real time and harvest them in normal, good and excellent quality. Buy more land as you level up, all the way to level 200.\n\nRAISE AND BREED ANIMALS Keep chickens, cows, sheep, horses, alpacas, unicorns and many more. Feed them the foods they love, collect their products, help them level up from Standard to Elite, and breed pairs to discover rare new breeds. Dress your animals in clothes you make in the Tailor Shop.\n\nMAKE GOODS Turn your harvest into bread, cheese, jam, wine, pizza, sweaters and over a hundred other goods in your own bakery, dairy, kitchen, winery and more. Hire workers to keep production running.\n\nFISH FROM THE PIER Cast your line, hear the distance read with every click as you pull back, wait for a bite and reel in fish, shells and rare sea treasures. Upgrade your poles and bait as you go.\n\nFARM WITH FRIENDS Add friends, visit their farms, water their crops, feed their animals, send gifts and trade items. Chat with everyone in public chat or privately with friends. Sell your goods to other players on the marketplace.\n\nDAILY GOALS AND CHALLENGES Collect a daily reward, complete daily quests, earn bronze, silver and gold medals, climb the leaderboards and compete in weekly challenges for surprise rewards.\n\nMADE FOR VOICEOVER - No headings to hunt for: swipe through each screen from the top. - Long lists are grouped into lists that open and close, each with its numbers. - Sounds, music and haptics for every action, with full volume controls. - Reduce Motion is respected everywhere.\n\nOPTIONAL PURCHASES The whole game is free to play. The Store sells Fortune Gem packs, for time in the forest and forest tools, three animals you cannot get anywhere else, and Farm Pass, a monthly subscription with extra gifts, free twin breeding on friends' farms and time with your animals. Farm Pass renews monthly until you cancel.\n\nPrivacy Policy: https://ttqoudbyaxndaahyjmsf.supabase.co/functions/v1/privacy Terms of Use: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-681ef2755ebe9117",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/gadgets/2026/11/ukraines-fiber-optic-drones-get-squeezed-by-ai-data-center-demand/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-10T12:15:32.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Ukraine’s fiber-optic drones get squeezed by AI data center demand",
-        "summary": "Ukraine competes with Russia and data centers for China’s optical fiber supply.",
-        "body": "Impervious to battlefield jamming, drones physically connected to human operators by miles of fiber-optic cables have become such a common weapon of war in Ukraine that trees and fields are strewn with tangled cables thinner than fishing lines. But importing such fiber-optic material from China has become more costly as drone warfare’s needs compete with global demand from AI data centers for the same limited supply—and so Ukrainian drone makers have been adapting.\n\nSince the full-scale Russian invasion of Ukraine began in February 2022, the Ukrainians have been forced out of necessity to continually develop battlefield innovations involving first-person view (FPV) quadcopter drones and other heavier types of drones. But it was the Russian military that first deployed unjammable fiber-optic drones to repel Ukrainian forces’ cross-border incursion into the Kursk Oblast in 2024. The Ukrainians quickly followed suit in developing their own fiber-optic drones, given the drones’ capability to shrug off electronic warfare jamming that could neutralize radio-controlled drones.\n\nRussia and Ukraine have relied on Chinese suppliers for some off-the-shelf drones and a wide array of drone components, including bulk orders of fiber wound around very large spools or sometimes small finished spools ready for installation on drones. The finished spools can hold enough fiber-optic cable for drones to regularly operate at ranges of dozens of miles, and sometimes up to 62 miles (100 kilometers) in extreme cases, as reported by the independent Russian publication The Insider .\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -434,29 +455,6 @@
         "title": "NoteTell Money Reader",
         "summary": "NoteTell Money Reader is designed to help people who are blind or have low vision identify bills in real time. Simply point the iPhone camera at the bill you want to identify, then hear, feel, or see its value. If you’re blind, have low vision, or are deafblind, NoteTell Money Reader lets you identify bills without any assistance. While shopping, use NoteTell to check your money at the checkout and make sure you get the right change back. You can also use NoteTell to quickly sort your money at home. NoteTell doesn’t require an internet connection, so it identifies bills anywhere, at any time. NoteTell can identify bills at any angle. It is designed to work with bills that are folded, creased, worn, or partly in view. NoteTell is designed to work indoors, outdoors, and even in total darkness. When your environment is too dark to identify bills, NoteTell turns the flashlight on automatically. Vibration Mode tells you the value of each bill as vibrations in your hand—without anyone else hearing it. Each bill has its own vibration pattern. The lowest bill has one pulse, and each higher bill has one more. Pulses come in pairs, so they’re easier to count. Vibration Mode is also useful in noisy places and for people who are deafblind. When VoiceOver is on, double-tap with two fingers to switch between Speech Mode and Vibration Mode. For users with low vision, NoteTell shows the value of each bill in large, high-contrast numbers on the screen. You can complete every task in NoteTell Money Reader using only VoiceOver, without sighted assistance. If you use a braille display with VoiceOver, you can use NoteTell to get the value of each bill in real time. Ask Siri, “Identify currency with NoteTell,” to use NoteTell hands-free. You can also add NoteTell to Control Center or the Lock Screen, assign it to the Action button, or set it up as a Vocal Shortcut. With the full version, you can use Currency Conversion to hear each bill’s value in your home currency when you travel. NoteTell uses on-device processing to identify bills, which means your data never leaves your iPhone. Camera images are never stored on the device or on any servers. You can try the full version free for 14 days. You won’t be charged when the trial ends. You can continue using NoteTell for free to identify the lowest notes of each currency. The full version is also available as a one-time purchase. And with Family Sharing, up to five other people can enjoy your purchase too.",
         "body": "NoteTell Money Reader is designed to help people who are blind or have low vision identify bills in real time. Simply point the iPhone camera at the bill you want to identify, then hear, feel, or see its value.\n\nIf you’re blind, have low vision, or are deafblind, NoteTell Money Reader lets you identify bills without any assistance. While shopping, use NoteTell to check your money at the checkout and make sure you get the right change back. You can also use NoteTell to quickly sort your money at home.\n\nNoteTell doesn’t require an internet connection, so it identifies bills anywhere, at any time.\n\nNoteTell can identify bills at any angle. It is designed to work with bills that are folded, creased, worn, or partly in view.\n\nNoteTell is designed to work indoors, outdoors, and even in total darkness. When your environment is too dark to identify bills, NoteTell turns the flashlight on automatically.\n\nVibration Mode tells you the value of each bill as vibrations in your hand—without anyone else hearing it. Each bill has its own vibration pattern. The lowest bill has one pulse, and each higher bill has one more. Pulses come in pairs, so they’re easier to count. Vibration Mode is also useful in noisy places and for people who are deafblind. When VoiceOver is on, double-tap with two fingers to switch between Speech Mode and Vibration Mode.\n\nFor users with low vision, NoteTell shows the value of each bill in large, high-contrast numbers on the screen.\n\nYou can complete every task in NoteTell Money Reader using only VoiceOver, without sighted assistance. If you use a braille display with VoiceOver, you can use NoteTell to get the value of each bill in real time.\n\nAsk Siri, “Identify currency with NoteTell,” to use NoteTell hands-free. You can also add NoteTell to Control Center or the Lock Screen, assign it to the Action button, or set it up as a Vocal Shortcut.\n\nWith the full version, you can use Currency Conversion to hear each bill’s value in your home currency when you travel.\n\nNoteTell uses on-device processing to identify bills, which means your data never leaves your iPhone. Camera images are never stored on the device or on any servers.\n\nYou can try the full version free for 14 days. You won’t be charged when the trial ends. You can continue using NoteTell for free to identify the lowest notes of each currency. The full version is also available as a one-time purchase. And with Family Sharing, up to five other people can enjoy your purchase too."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-724ba7e1232dd084",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/gadgets/2026/11/a-sam-altman-parody-offers-an-amusing-lesson-in-memory-management/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-09T20:49:09.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "A Sam Altman parody offers an amusing lesson in memory management",
-        "summary": "We verified the RAM numbers are real without sending any emails to OpenAI.",
-        "body": "Sam Altman's recent comments on the Cheeky Pint podcast inspired developer Iain Kay to create a satirical script that allows users to email the OpenAI CEO once per day if more than 10 percent of their system RAM is reported as available. Ram-Altman is described by its creator as a \"parody project\" launched in response to Altman's viral remarks about RAM in your personal PC.\n\nAs reported by The Verge , on the October 29 episode recorded with Stripe President John Collison, Altman said, \"A lot of people want local inference. And somehow, they assume that the problem is solved now because we are going to have open source models, we’re going to be able to run them on our computers, and so we’re not going to need all the stuff in the data center. But from a global allocation perspective, actually, it’s quite terrible to have everybody have a bunch of the world’s limited supply of DRAM sitting in their own computer and being used 5 percent of the time.\"\n\nAltman has since explained that his comments were taken out of context and briefly changed his display name to \"RAM Altman\" on X, which Kay calls on the project GitHub, \"objectively excellent and where the project gets its name.\"\n\nRead full article\n\nComments"
       }
     },
     "media": null

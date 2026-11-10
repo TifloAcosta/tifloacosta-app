@@ -924,12 +924,14 @@ final class NativeReadingSpeech: ObservableObject {
     }
 
     func resume() {
+        // Remove the paused state before requesting the next generated segment:
+        // the segment generator deliberately refuses to run while paused.
+        isPaused = false
         if isGeneratedSpeech {
             if let player { player.play() } else { playNextGeminiSegment() }
         } else if let player { player.play() }
         else { synthesizer.continueSpeaking() }
         isPlaying = true
-        isPaused = false
     }
 
     func refresh() {

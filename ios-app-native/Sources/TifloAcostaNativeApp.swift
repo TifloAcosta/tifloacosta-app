@@ -1,4 +1,5 @@
 import SwiftUI
+import UserNotifications
 
 /// Entrada única y oficial de TifloAcosta para iOS; SwiftUI sin WebView ni Capacitor.
 /// Se publica con com.tifloacosta.app en TestFlight y posteriormente App Store.
@@ -15,6 +16,10 @@ struct TifloAcostaNativeApp: App {
     @StateObject private var youtubeAccount = NativeYouTubeAccountStore()
     @AppStorage("native-ios-color-scheme") private var schemeIndex = 0
     @AppStorage("native-ios-language") private var languageIndex = 0
+
+    init() {
+        UNUserNotificationCenter.current().delegate = NativeLocalNotificationDelegate.shared
+    }
 
     var body: some Scene {
         WindowGroup {

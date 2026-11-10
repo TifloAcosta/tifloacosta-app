@@ -294,10 +294,11 @@ struct NativeSettingsScreen: View {
                 NativeAdjustableChoice(
                     title: "Información al recorrer la biblioteca",
                     choices: ["Breve: título y porcentaje leído",
+                              "Intermedia: título, porcentaje y formato",
                               "Completa: título, porcentaje, formato y carpeta"],
                     selectedIndex: $voiceOverDetailIndex
                 )
-                Text("La opción breve evita repeticiones. En ambos modos, cada libro se anuncia como un único elemento de VoiceOver.")
+                Text("La opción breve evita repeticiones. En los tres modos, cada libro se anuncia como un único elemento de VoiceOver.")
                     .font(.footnote)
                     .foregroundStyle(TifloVisual.secondaryText)
             }

@@ -26,13 +26,7 @@ test('El proyecto main compila automáticamente; TestFlight se ejecuta solo a pe
  const release=get('.github/workflows/ios-native-testflight-upload.yml');
  assert.match(build,/branches: \[main\]/);
  assert.match(release,/workflow_dispatch:/);
- // Una única candidata de iOS puede iniciarse mediante un cambio explícito
- // del propio workflow en la rama integrada; ningún push general lo ejecuta.
- if (/^\s+push:/m.test(release)) {
-   assert.match(release,/integration\/ios-phases1-6-consolidated-20261110/);
-   assert.match(release,/paths:\s*\n\s+- '\.github\/workflows\/ios-native-testflight-upload\.yml'/);
-   assert.doesNotMatch(release,/^\s+push:\s*\n\s+branches:\s*\n\s+- main/m);
- }
+ assert.doesNotMatch(release,/^\s+push:/m);
  assert.doesNotMatch(release,/branches: \[main\]/);
  assert.match(build,/ios-app-native\/tests\/\*\.test\.mjs/);
  assert.match(release,/ios-app-native\/tests\/\*\.test\.mjs/);

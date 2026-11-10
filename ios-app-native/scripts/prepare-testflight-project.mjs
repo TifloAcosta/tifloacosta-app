@@ -9,9 +9,9 @@ for (const name of ['IOS_PROFILE_APP_NAME','IOS_PROFILE_EXTENSION_NAME','GITHUB_
   if(!process.env[name]) throw Error('Falta variable: '+name);
 }
 const version=String(Math.max(500003,500000+Number(process.env.GITHUB_RUN_NUMBER)));
-// The 1.0 TestFlight pre-release train is closed. Use the next version train.
-const marketingVersion=process.env.TIFLO_IOS_MARKETING_VERSION || '1.1';
-if(!/^[1-9]\d*\.\d+(?:\.\d+)?$/.test(marketingVersion) || marketingVersion === '1.0')
+// Apple has closed the 1.1 train after approving 1.1. New builds must use a higher version.
+const marketingVersion=process.env.TIFLO_IOS_MARKETING_VERSION || '1.2';
+if(!/^[1-9]\d*\.\d+(?:\.\d+)?$/.test(marketingVersion) || ['1.0','1.1'].includes(marketingVersion))
   throw Error('Versión de TestFlight inválida o cerrada: '+marketingVersion);
 if(!/^\d+$/.test(version))throw Error('Número de compilación inválido');
 function replaceUnique(oldValue,newValue){

@@ -629,6 +629,10 @@ struct NativeVideosScreen: View {
                         .accessibilityAction(named: Text("Compartir canal")) {
                             NativeShare.present(url: channel.url)
                         }
+                        .accessibilityAction(named: Text(personalVideos.isFollowing(channel.id)
+                            ? "Dejar de seguir canal" : "Seguir canal sin cuenta Google")) {
+                            personalVideos.toggleFollowed(channel)
+                        }
                     }
                     ForEach(youtubeSearch.videos) { video in
                         NativeYouTubeVideoRow(
@@ -669,6 +673,22 @@ struct NativeVideosScreen: View {
                             onComment: { commentingOnVideo = $0 }
                         )
                         .accessibilityHint("Retoma el vídeo desde el segundo \(Int(saved.resumeSeconds)).")
+                    }
+                }
+            }
+
+            Section("Canales seguidos sin cuenta Google") {
+                if personalVideos.followedChannels.isEmpty {
+                    Text("No hay canales seguidos. Busca un canal y elige Seguir canal en sus acciones.")
+                }
+                ForEach(personalVideos.followedChannels) { saved in
+                    if let channel = NativeYouTubeChannel(saved: saved) {
+                        NavigationLink(channel.title) {
+                            NativeYouTubeChannelVideosScreen(channel: channel)
+                        }
+                        .accessibilityAction(named: Text("Dejar de seguir canal")) {
+                            personalVideos.toggleFollowed(channel)
+                        }
                     }
                 }
             }
@@ -960,12 +980,19 @@ private struct NativeYouTubeSubscriptionsScreen: View {
 
 private struct NativeYouTubeChannelVideosScreen: View {
     let channel: NativeYouTubeChannel
+    @ObservedObject private var personalVideos = NativeYouTubePersonalLibrary.shared
     @StateObject private var youtubeSearch = NativeYouTubeSearchStore()
     @State private var selectedVideo: NativeYouTubeVideo?
     @State private var commentingOnVideo: NativeYouTubeVideo?
 
     var body: some View {
         List {
+            Section("Canal") {
+                Button(personalVideos.isFollowing(channel.id)
+                    ? "Dejar de seguir canal" : "Seguir canal sin cuenta Google") {
+                    personalVideos.toggleFollowed(channel)
+                }
+            }
             Section("Vídeos del canal") {
                 if youtubeSearch.isLoading {
                     ProgressView("Cargando vídeos")

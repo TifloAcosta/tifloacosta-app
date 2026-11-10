@@ -33,3 +33,15 @@ test('Correo de asistencia usa mailto y nunca envía por cuenta propia', () => {
   assert.match(report, /Link\(destination: supportMailURL\)/);
   assert.doesNotMatch(report, /MFMailComposeViewController|URLSession\.shared\.upload|sendMail/);
 });
+
+test('Diagnóstico opcional incluye estado accesible y sincronización sin texto privado', () => {
+  assert.match(report, /UIAccessibility\.isReduceMotionEnabled/);
+  assert.match(report, /UIAccessibility\.isBoldTextEnabled/);
+  assert.match(report, /@EnvironmentObject private var catalog: NativeCatalogStore/);
+  assert.match(report, /catalog\.lastUpdated\?\.formatted/);
+  assert.match(report, /catalog\.resources\.count/);
+  assert.match(report, /catalog\.videos\.count/);
+  assert.match(report, /catalog\.news\.count/);
+  assert.match(report, /if includeDiagnostics/);
+  assert.match(report, /catalogSummary: catalogSummary/);
+});

@@ -1018,6 +1018,7 @@ struct NativeReaderLibraryScreen: View {
     @AppStorage("native-reading-speed-index") private var speedIndex = 2
     @AppStorage("native-reading-pitch-index") private var pitchIndex = 2
     @AppStorage("native-reading-voice-id") private var voiceID = ""
+    @AppStorage("native-voiceover-library-detail-index") private var voiceOverDetailIndex = 0
     private let pitches: [Float] = [0.8, 0.9, 1.0, 1.1, 1.2]
     private let speeds: [Double] = [0.75, 0.9, 1.0, 1.25, 1.5]
 
@@ -1046,7 +1047,11 @@ struct NativeReaderLibraryScreen: View {
     /// Título y progreso forman una única unidad de navegación para VoiceOver.
     private func documentRowLabel(_ doc: NativeReadingDocument) -> String {
         let progress = max(0, min(100, library.latest(doc).lastPercent ?? 0))
-        return "\(doc.title), \(progress) por ciento leído"
+        let shortLabel = "\(doc.title), \(progress) por ciento leído"
+        guard voiceOverDetailIndex == 1 else { return shortLabel }
+        let folder = doc.folderName ?? "Sin carpeta"
+        return "\(shortLabel), formato \(doc.formatLabel), carpeta \(folder)"
+
     }
 
     private var shownDocuments: [NativeReadingDocument] {

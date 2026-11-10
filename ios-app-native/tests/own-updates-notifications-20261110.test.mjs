@@ -31,3 +31,9 @@ test('Comprobación solo tras refresco válido de catálogo', () => {
   assert.match(catalog, /resources: candidate\.snapshot\.resources/);
   assert.match(catalog, /videos: candidate\.snapshot\.videos/);
 });
+
+test('Centro de notificaciones recibe avisos discretos sin banner intrusivo en primer plano', () => {
+  assert.match(notifier, /NativeLocalNotificationDelegate: NSObject, UNUserNotificationCenterDelegate/);
+  assert.match(notifier, /completionHandler\(\[\.list\]\)/);
+  assert.match(source('TifloAcostaNativeApp.swift'), /UNUserNotificationCenter\.current\(\)\.delegate = NativeLocalNotificationDelegate\.shared/);
+});

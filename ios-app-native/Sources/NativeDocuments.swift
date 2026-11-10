@@ -123,6 +123,7 @@ struct NativeRemoteResourceScreen: View {
     @EnvironmentObject private var library: NativeReaderLibrary
     @EnvironmentObject private var resourceService: NativeResourceService
     @EnvironmentObject private var readingActivity: NativeReadingActivity
+    @AppStorage("native-ios-language") private var languageIndex = 0
     @StateObject private var speech = NativeReadingSpeech()
     @State private var documentText = ""
     @State private var paragraphs: [String] = []
@@ -221,6 +222,14 @@ struct NativeRemoteResourceScreen: View {
                             let saved = readingActivity.toggleReadLater(.resource, item: item)
                             announce(saved ? "Recurso guardado para leer después." :
                                 "Recurso retirado de Leer después.")
+                        }
+                        NavigationLink("Traducir recurso al idioma de la aplicación") {
+                            NativeOnDemandTranslationScreen(
+                                title: item.title,
+                                originalText: documentText,
+                                sourceLanguage: item.lang,
+                                targetLanguage: languageIndex == 1 ? "en" : "es"
+                            )
                         }
                         Button("Leer en voz alta") { readAloud() }
                         Button("Detener lectura") { speech.stop() }

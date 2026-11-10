@@ -43,7 +43,7 @@ struct NativeAccessibilityReportScreen: View {
     @State private var categoryIndex = 0
     @State private var description = ""
     @State private var steps = ""
-    @State private var includeDiagnostics = true
+    @State private var includeDiagnostics = false
     @State private var status: String?
     @FocusState private var activeField: Field?
 

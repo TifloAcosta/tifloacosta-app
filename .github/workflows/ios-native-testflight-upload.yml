@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
   # Envío solicitado por el propietario de TifloAcosta.
 # Enviar beta correctiva TTS: pausa real, reanudación por cursor y toque mágico; prueba de puntuación satisfactoria. 2026-11-10.
+# Solicitud de TestFlight 2026-11-10: búsqueda dentro del documento, marcas accesibles, ajustes de Gemini y correcciones iOS.
   # Únicamente un cambio de este archivo en esta rama dispara la beta.
   push:
     branches:

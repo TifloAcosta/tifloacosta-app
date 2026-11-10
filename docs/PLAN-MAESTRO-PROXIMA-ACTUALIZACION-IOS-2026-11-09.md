@@ -390,3 +390,11 @@ Estado: implementado en código y con contratos de regresión actualizados. Falt
 - La pantalla de informe incluye ahora un enlace de correo a `tifloacosta@gmail.com` con asunto y cuerpo precargados mediante `mailto:`, siempre sujeto a la revisión y confirmación del usuario en el cliente de correo. Se mantiene como alternativa «Compartir» y «Copiar informe».
 - El diagnóstico optativo muestra estado de VoiceOver, «Reducir movimiento», texto en negrita del sistema y métricas generales del catálogo: número de recursos, noticias y vídeos, fecha de última actualización y existencia o no de error. No recoge el texto ni los archivos del catálogo, ni contenido de la biblioteca personal.
 - Pendiente de fase 9: auditoría integral de regresiones, verificaciones en dispositivo real con VoiceOver y preparación de la candidata única de TestFlight cuando el conjunto de fases quede implementado.
+
+
+## Auditoría de regresiones fase 9 — continuación
+
+- Revisado el comportamiento de avisos de novedades propias ante fallos de permiso o entrega: no se marca un contenido nuevo como visto hasta que se consigue programar el aviso; al desactivar avisos, el catálogo actualiza la referencia sin provocar alertas antiguas al reactivarlos. Primer refresco sin avisos retroactivos. Los avisos locales se mantienen sin sonido y se eliminan los ID duplicados antes de generar un resumen.
+- En el atajo de Siri «Continuar libro», se evita seleccionar libros que solo fueron importados pero nunca abiertos. Se limpia el error anterior antes de solicitar reproducción, para que el resultado no se confunda con una incidencia pasada.
+- En «Comunicar incidencia», los diagnósticos técnicos ahora están **desmarcados por defecto**. Se envían únicamente si el usuario los activa y confirma posteriormente el uso del correo o menú Compartir.
+- Añadidas y actualizadas pruebas de contrato para cada uno de estos escenarios. Seguimos pendientes de la validación conjunta de los flujos reales en VoiceOver y del resultado de CI de la última revisión.

@@ -977,6 +977,8 @@ final class NativeReadingSpeech: ObservableObject {
         onTrackChanged = nil
         onAudioError = nil
         synthesizer.stopSpeaking(at: .immediate)
+        utteranceOffsets.removeAll()
+        lastSpeechUtterance = nil
         isPlaying = false
         isPaused = false
     }

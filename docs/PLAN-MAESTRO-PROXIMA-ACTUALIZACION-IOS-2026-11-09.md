@@ -284,3 +284,16 @@ Resumen de requisitos integrados:
 **Verificación:** las pruebas de contrato realizadas durante la fase detectaron expectativas antiguas y se actualizaron. La ejecución 42673082854 superó las pruebas automáticas y finalizó correctamente con compilación para simulador. Tras los últimos cambios de marcas, NCX y apagado, la ejecución de CI 42677632211 debe confirmarse satisfactoria para dar por cerrado el bloque técnico. Las validaciones con archivos DAISY diversos y el manejo con VoiceOver se harán en la prueba integral convenida.
 
 **Siguiente etapa, tras confirmar CI:** fase 3 — biblioteca, Guardar, exportaciones, DAISY generado, nombres originales y copias de seguridad.
+
+
+## Registro de avance — 10 de noviembre de 2026: alcance completo y fase 6 general
+
+Se ratifica que las fases específicas de TifloLector desarrolladas en la PR #303 no representan el cierre de las nueve fases de la actualización completa de TifloAcosta iOS. TestFlight se reserva para una única candidata cuando estén implementadas todas las novedades de este inventario, seguida de la validación integral con VoiceOver. Android permanece fuera del alcance actual.
+
+- **Fases generales 1–4:** existen avances técnicos importantes de catálogo, lectura, biblioteca, motores y exportación. No se considerarán validadas hasta contrastar íntegramente los requisitos A/B/C y la prueba final.
+- **Fase general 5:** búsqueda contextual, ayudas de lectura, estadísticas y continuidad de actividad tienen requisitos aún pendientes de auditoría/implementación.
+- **Fase general 6, Vídeos:** implementados técnicamente el guardado «Ver después» sin Google, su acción en el rotor de títulos y «Continuar viendo» con posición local en el reproductor oficial. Progreso guardado sin contraseñas ni acceso a la cuenta. Pendientes el seguimiento local de canales, agregación cronológica de novedades, búsqueda avanzada por canal y demás requisitos de la fase.
+- **Fases generales 7–9:** pendientes de auditoría y de completar todo lo que falte en Pódcast, Actualidad, Recursos, idiomas, traducción bajo demanda, Siri/Atajos, notificaciones, preferencias de verbosidad, diagnósticos y envío accesible de sugerencias.
+- **Validación:** las pruebas automatizadas comprueban contratos; la validación de VoiceOver con la candidata final no se adelanta por subsistema.
+
+Este registro no elimina ni simplifica ninguno de los acuerdos anteriores.

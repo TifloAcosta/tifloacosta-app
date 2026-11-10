@@ -403,6 +403,8 @@ struct NativeYouTubePlayerScreen: View {
 
                 NativeYouTubeOfficialPlayer(videoID: video.id, engine: engine)
                     .frame(height: 225)
+                    // El reproductor oficial queda fuera del foco de VoiceOver.
+                    .accessibilityHidden(true)
                     .onChange(of: engine.ready) { _, ready in
                         guard ready, !resumeApplied else { return }
                         resumeApplied = true
@@ -412,8 +414,6 @@ struct NativeYouTubePlayerScreen: View {
                             speak("Continuar viendo desde el segundo \(Int(seconds)).")
                         }
                     }
-                    // Evitar que el iframe capture el foco de VoiceOver durante la reproducción.
-                    .accessibilityHidden(true)
 
                 if let error = engine.error {
                     Text(error).foregroundStyle(TifloVisual.secondaryText)

@@ -28,3 +28,17 @@ test('Inicio consume la ruta de Siri una sola vez y evita pantallas web', () => 
   assert.match(home, /defaults\.removeObject\(forKey: NativeShortcutRoute\.key\)/);
   assert.match(home, /\.onReceive\(NotificationCenter\.default\.publisher\(for: \.nativeShortcutRouteRequested\)\)/);
 });
+
+test('Siri continúa el último libro abierto desde posición guardada', () => {
+  const reader = source('NativeTifloLector.swift');
+  assert.match(intents, /struct NativeResumeReaderIntent: AppIntent/);
+  assert.match(intents, /NativeShortcutRoute\.request\("resumeReader"\)/);
+  assert.match(home, /case "resumeReader":/);
+  assert.match(home, /native-ios-resume-last-book-shortcut-v1/);
+  assert.match(reader, /private func resumeRequestedBook\(\)/);
+  assert.match(reader, /library\.documents\.max\(by:/);
+  assert.match(reader, /lastOpenedAt \?\? \.distantPast/);
+  assert.match(reader, /play\(document\)/);
+  assert.match(reader, /defaults\.removeObject\(forKey: key\)/);
+  assert.match(reader, /\.onAppear \{ resumeRequestedBook\(\) \}/);
+});

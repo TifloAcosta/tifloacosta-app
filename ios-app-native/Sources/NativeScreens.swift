@@ -573,7 +573,7 @@ struct NativeVideosScreen: View {
                     NativeYouTubeLocalChannelsScreen()
                 }
                 NavigationLink("Novedades de mis canales") {
-                    NativeYouTubeFollowedUpdatesScreen()
+                    NativeYouTubeFollowedUpdatesScreen(useYouTubeSubscriptions: false)
                 }
             }
             Section("Mi actividad") {
@@ -834,6 +834,8 @@ private struct NativeYouTubeLocalChannelsScreen: View {
 /// de 10 elementos por cada pulsación de Cargar 10 más, y la lista se ordena
 /// conjuntamente por fecha, no agrupada por canal.
 private struct NativeYouTubeFollowedUpdatesScreen: View {
+    let useYouTubeSubscriptions: Bool
+    @EnvironmentObject private var account: NativeYouTubeAccountStore
     @ObservedObject private var personalVideos = NativeYouTubePersonalLibrary.shared
     @State private var searches: [String: NativeYouTubeSearchStore] = [:]
     @State private var collected: [NativeYouTubeVideo] = []
@@ -843,8 +845,13 @@ private struct NativeYouTubeFollowedUpdatesScreen: View {
     @State private var selectedVideo: NativeYouTubeVideo?
     @State private var commentingOnVideo: NativeYouTubeVideo?
 
+    private var channels: [NativeYouTubeChannel] {
+        if useYouTubeSubscriptions { return account.subscriptions }
+        return personalVideos.followedChannels.compactMap(NativeYouTubeChannel.init(saved:))
+    }
+
     private var channelSignature: String {
-        personalVideos.followedChannels.map(\.id).joined(separator: ",")
+        channels.map(\.id).joined(separator: ",")
     }
 
     private var hasMore: Bool {
@@ -874,7 +881,7 @@ private struct NativeYouTubeFollowedUpdatesScreen: View {
             visibleCount = 10
         }
         var failures: [String] = []
-        for channel in personalVideos.followedChannels {
+        for channel in channels {
             let store = searches[channel.id] ?? NativeYouTubeSearchStore()
             if loadMore {
                 if !store.nextPageToken.isEmpty {
@@ -897,20 +904,22 @@ private struct NativeYouTubeFollowedUpdatesScreen: View {
 
     var body: some View {
         List {
-            Section("Novedades de mis canales") {
+            Section(useYouTubeSubscriptions ? "Novedades de mis suscripciones" : "Novedades de mis canales") {
                 Button("Actualizar novedades") { Task { await load() } }
                     .disabled(loading)
                 if loading { ProgressView("Consultando canales seguidos") }
                 if let message { Text(message).accessibilityAddTraits(.updatesFrequently) }
-                if personalVideos.followedChannels.isEmpty {
-                    Text("Sigue un canal desde los resultados de YouTube para ver aquí sus novedades.")
+                if channels.isEmpty {
+                    Text(useYouTubeSubscriptions
+                        ? "No hay suscripciones disponibles. Comprueba tu sesión y actualiza las suscripciones."
+                        : "Sigue un canal desde los resultados de YouTube para ver aquí sus novedades.")
                 }
                 ForEach(Array(collected.prefix(visibleCount))) { video in
                     NativeYouTubeVideoRow(video: video,
                         onPlay: { selectedVideo = $0 },
                         onComment: { commentingOnVideo = $0 })
                 }
-                if !loading && collected.isEmpty && !personalVideos.followedChannels.isEmpty {
+                if !loading && collected.isEmpty && !channels.isEmpty {
                     Text("Todavía no se han recibido vídeos de los canales seguidos.")
                 }
                 if !loading && (collected.count > visibleCount || hasMore) {
@@ -922,14 +931,20 @@ private struct NativeYouTubeFollowedUpdatesScreen: View {
             }
         }
         .tifloScreenSurface()
-        .navigationTitle("Novedades de canales")
+        .navigationTitle(useYouTubeSubscriptions
+            ? "Novedades de suscripciones" : "Novedades de canales")
         .sheet(item: $selectedVideo) { video in
             NavigationStack { NativeYouTubePlayerScreen(video: video) }
         }
         .sheet(item: $commentingOnVideo) { video in
             NavigationStack { NativeYouTubeCommentScreen(video: video) }
         }
-        .task(id: channelSignature) { await load() }
+        .task(id: channelSignature) {
+            if useYouTubeSubscriptions, account.authenticated, account.subscriptions.isEmpty {
+                await account.loadSubscriptions()
+            }
+            await load()
+        }
     }
 }
 
@@ -1118,6 +1133,12 @@ private struct NativeYouTubeSubscriptionsScreen: View {
                 }
                 .listRowBackground(TifloVisual.surfaceRaised)
             } else {
+                Section("Novedades de mis suscripciones") {
+                    NavigationLink("Ver novedades de mis suscripciones") {
+                        NativeYouTubeFollowedUpdatesScreen(useYouTubeSubscriptions: true)
+                    }
+                    .accessibilityHint("Vídeos de los canales de tu cuenta de YouTube ordenados por fecha.")
+                }
                 Section("Canales a los que estás suscrito") {
                     ForEach(account.subscriptions) { channel in
                         NavigationLink {

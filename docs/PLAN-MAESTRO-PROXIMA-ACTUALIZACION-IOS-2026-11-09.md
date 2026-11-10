@@ -360,3 +360,12 @@ Estado: implementado en código y con contratos de regresión actualizados. Falt
 - Se añaden `AppIntent` y `AppShortcutsProvider` para abrir Actualidad, la biblioteca TifloLector y Vídeos con Siri/Atajos. `NativeHomeScreen` consume una ruta persistente una sola vez y navega mediante SwiftUI NavigationStack. Todavía **no** se anuncia «continúa el libro» porque requiere reanudación y control de reproducción de TifloLector, no solo navegación.
 - Se han incorporado pruebas de contrato para traducción explícita, preservación del original y apertura de secciones por Siri. Pendiente confirmación de compilación y validación de VoiceOver de forma integral junto con las restantes fases.
 - Pendientes de fase 8: traducciones de otros idiomas y localización PT/FR, atajos de control de audio, notificaciones limitadas a incorporaciones propias, avisos manuales y preferencias de verbosidad.
+
+
+## Fase general 8 — Primeros avisos de Novedades, 10 de noviembre de 2026
+
+- Implementados avisos **locales** con permiso explícito, activación y desactivación accesibles en Configuración. La autorización no se solicita al entrar en la aplicación.
+- Únicas fuentes permitidas: recursos propios con `isNew == true` y vídeos del catálogo del canal TifloAcosta. No se incluyen `catalog.news`, canales externos, pódcast ni RSS.
+- El primer refresco válido genera una referencia sin avisar de noticias antiguas. Los ID ya vistos se guardan para evitar duplicados, y si hay varias novedades se entrega un único resumen.
+- Los avisos solo se comprueban al refrescar el catálogo mientras la app se ejecuta; **no son push remotas ni garantizan recibir novedades con la app cerrada**. Esta limitación se explica explícitamente en Configuración. No confundir con el canal de avisos manuales que sigue pendiente de diseño y backend.
+- Añadidas pruebas de contrato de ámbito, consentimiento, ausencia de alertas antiguas e integración tras refresco del catálogo.

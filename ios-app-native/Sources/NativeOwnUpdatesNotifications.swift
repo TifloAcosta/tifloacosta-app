@@ -61,7 +61,11 @@ final class NativeOwnUpdatesNotifications: ObservableObject {
         }.map { ("document:" + $0.id + ":" + ($0.lang ?? ""), $0.title) }
         let ownVideos = videos.filter { $0.videoURL != nil }
             .map { ("video:" + $0.id, $0.title) }
-        let candidates = ownDocuments + ownVideos
+        // A multilingual entry or a duplicated video ID should count once.
+        var uniqueIDs = Set<String>()
+        let candidates = (ownDocuments + ownVideos).filter {
+            uniqueIDs.insert($0.0).inserted
+        }
         let defaults = UserDefaults.standard
         let existing = defaults.stringArray(forKey: seenKey)
         var seen = Set(existing ?? [])

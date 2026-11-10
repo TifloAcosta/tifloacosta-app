@@ -1,9 +1,19 @@
 {
-  "generatedAt": "2026-11-03T15:12:14.528Z",
+  "generatedAt": "2026-11-10T11:16:15.732Z",
   "channelHandle": "@tifloacosta",
   "channelUrl": "https://www.youtube.com/@tifloacosta",
-  "count": 291,
+  "count": 292,
   "videos": [
+    {
+      "id": "vA1q0cMfDsU",
+      "title": "WhatsApp, trucos para que VoiceOver no pierda el norte",
+      "publishedAt": "2026-11-10T10:08:34Z",
+      "description": "No te prometo milagros, pero sí unos cuantos trucos que vale la pena probar.\nSi los pruebas, cuéntame si notas alguna mejoría. ¡Entre todos podemos ir descubriendo qué funciona y qué no!",
+      "fullDescription": "¿El foco de VoiceOver se vuelve loco cuando utilizas WhatsApp? Pues vamos a ver si conseguimos que se esté un poquito más quieto.\nEn este vídeo te enseño algunos ajustes de WhatsApp y del iPhone que quizá hayas pasado por alto. Animaciones, estilos de chat y otras opciones que merece la pena revisar para intentar mejorar la estabilidad del foco.\nNo te prometo milagros, pero sí unos cuantos trucos que vale la pena probar.\nSi los pruebas, cuéntame si notas alguna mejoría. ¡Entre todos podemos ir descubriendo qué funciona y qué no!",
+      "excerpt": "No te prometo milagros, pero sí unos cuantos trucos que vale la pena probar.",
+      "thumbnail": "https://i.ytimg.com/vi/vA1q0cMfDsU/mqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=vA1q0cMfDsU"
+    },
     {
       "id": "UkKwpg4g5ZM",
       "title": "VoiceOver sigue abriendo puertas. Phonon trae nuevas voces a la conversación",

@@ -1184,6 +1184,7 @@ private struct NativeYouTubeChannelVideosScreen: View {
     let channel: NativeYouTubeChannel
     @ObservedObject private var personalVideos = NativeYouTubePersonalLibrary.shared
     @StateObject private var youtubeSearch = NativeYouTubeSearchStore()
+    @State private var channelQuery = ""
     @State private var selectedVideo: NativeYouTubeVideo?
     @State private var commentingOnVideo: NativeYouTubeVideo?
 
@@ -1194,6 +1195,25 @@ private struct NativeYouTubeChannelVideosScreen: View {
                     ? "Dejar de seguir canal" : "Seguir canal sin cuenta Google") {
                     personalVideos.toggleFollowed(channel)
                 }
+            }
+            Section("Buscar en este canal") {
+                TextField("Buscar vídeos de este canal", text: $channelQuery)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .submitLabel(.search)
+                    .onSubmit {
+                        Task { await youtubeSearch.search(channelQuery, channelID: channel.id) }
+                    }
+                Button("Buscar en este canal") {
+                    Task { await youtubeSearch.search(channelQuery, channelID: channel.id) }
+                }
+                .disabled(youtubeSearch.isLoading ||
+                    channelQuery.trimmingCharacters(in: .whitespacesAndNewlines).count < 2)
+                Button("Mostrar todos los vídeos de este canal") {
+                    channelQuery = ""
+                    Task { await youtubeSearch.search("", channelID: channel.id) }
+                }
+                .disabled(youtubeSearch.isLoading)
             }
             Section("Vídeos del canal") {
                 if youtubeSearch.isLoading {
@@ -1213,7 +1233,7 @@ private struct NativeYouTubeChannelVideosScreen: View {
                 if !youtubeSearch.nextPageToken.isEmpty {
                     Button("Mostrar diez vídeos más") {
                         Task { await youtubeSearch.search(
-                            "", channelID: channel.id, loadMore: true
+                            channelQuery, channelID: channel.id, loadMore: true
                         ) }
                     }
                     .disabled(youtubeSearch.isLoading)

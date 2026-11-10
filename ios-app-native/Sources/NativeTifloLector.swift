@@ -598,6 +598,8 @@ final class NativeReadingSpeech: ObservableObject {
     private var speechQueue: [(utterance: AVSpeechUtterance, delay: TimeInterval)] = []
     private var speechQueueIndex = 0
     private var speechDelayTask: Task<Void, Never>?
+    // Al pausar texto se corta el sintetizador y se conserva el cursor para reanudar.
+    private var systemSpeechNeedsRestart = false
 
     private func speakNextSystemSegment(after delay: TimeInterval = 0) {
         speechDelayTask?.cancel()
@@ -750,6 +752,7 @@ final class NativeReadingSpeech: ObservableObject {
         try? AVAudioSession.sharedInstance().setActive(true)
         utteranceOffsets.removeAll()
         lastSpeechUtterance = nil
+        systemSpeechNeedsRestart = false
         speechQueueIndex = 0
         speechQueue.removeAll()
         let segments = NativeReaderPauseProfile.segments(text)
@@ -953,11 +956,12 @@ final class NativeReadingSpeech: ObservableObject {
             geminiGeneration += 1
             geminiTask?.cancel()
         } else {
-            // .immediate evita que una voz de terceros siga leyendo hasta la palabra siguiente.
-            // Si estamos entre dos frases, el temporizador se suspende igualmente.
-            if synthesizer.isSpeaking { _ = synthesizer.pauseSpeaking(at: .immediate) }
+            // Detener la salida real evita depender de que pauseSpeaking sea respetado
+            // por todas las voces instaladas. El cursor queda disponible para reanudar.
             speechDelayTask?.cancel()
             speechDelayTask = nil
+            systemSpeechNeedsRestart = !speechQueue.isEmpty
+            _ = synthesizer.stopSpeaking(at: .immediate)
         }
         sleep(after: 0) // Al pausar no sigue corriendo la cuenta del apagado.
         isPlaying = false
@@ -965,6 +969,31 @@ final class NativeReadingSpeech: ObservableObject {
     }
 
     func resume() {
+        if systemSpeechNeedsRestart && !isGeneratedSpeech && player == nil {
+            let resumeUTF16 = max(0, min(previousUTF16, spokenText.utf16.count))
+            let resumeCharacters = max(0, min(previousCharacterCount, spokenText.count))
+            let remainder = String(spokenText.dropFirst(resumeCharacters))
+            let resumedVoice = speechQueue.indices.contains(speechQueueIndex)
+                ? speechQueue[speechQueueIndex].utterance.voice?.identifier ?? "" : ""
+            let resumedLanguage = speechQueue.indices.contains(speechQueueIndex)
+                ? speechQueue[speechQueueIndex].utterance.voice?.language ?? "es-ES" : "es-ES"
+            let currentUtterance = speechQueue.indices.contains(speechQueueIndex)
+                ? speechQueue[speechQueueIndex].utterance : nil
+            let resumedSpeed = currentUtterance.map {
+                Double($0.rate / AVSpeechUtteranceDefaultSpeechRate)
+            } ?? 1.0
+            let resumedPitch = currentUtterance?.pitchMultiplier ?? 1.0
+            let total = totalUTF16
+            let base = baseUTF16 + resumeUTF16
+            let characterBase = baseCharacters + resumeCharacters
+            systemSpeechNeedsRestart = false
+            if !remainder.isEmpty {
+                play(remainder, speed: resumedSpeed, pitch: resumedPitch,
+                     language: resumedLanguage, voiceIdentifier: resumedVoice,
+                     baseUTF16: base, totalUTF16: total, baseCharacters: characterBase)
+            } else { stop() }
+            return
+        }
         // Remove the paused state before requesting the next generated segment:
         // the segment generator deliberately refuses to run while paused.
         isPaused = false
@@ -978,7 +1007,8 @@ final class NativeReadingSpeech: ObservableObject {
 
     func refresh() {
         if let player, !player.isPlaying && !isPaused { isPlaying = false }
-        if player == nil && !synthesizer.isSpeaking && !isPaused && !isGeneratedSpeech {
+        if player == nil && !synthesizer.isSpeaking && !isPaused && !isGeneratedSpeech
+            && speechQueue.isEmpty {
             isPlaying = false
         }
     }
@@ -1021,6 +1051,7 @@ final class NativeReadingSpeech: ObservableObject {
         onTrackChanged = nil
         onAudioError = nil
         synthesizer.stopSpeaking(at: .immediate)
+        systemSpeechNeedsRestart = false
         speechDelayTask?.cancel()
         speechDelayTask = nil
         speechQueue.removeAll()

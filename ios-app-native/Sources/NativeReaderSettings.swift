@@ -114,6 +114,9 @@ struct NativeReaderAudioControls: View {
     @AppStorage("native-reading-speed-index") private var generalSpeed = 2
     @AppStorage("native-reading-pitch-index") private var generalPitch = 2
     @AppStorage("native-reading-voice-id") private var generalVoiceID = ""
+    @AppStorage("native-reader-reading-engine") private var readingEngine = 0
+    @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
+    @AppStorage("native-reader-phonon-voice") private var phononVoice = ""
     let speedSelection: Binding<Int>?
     let pitchSelection: Binding<Int>?
     let voiceSelection: Binding<String>?
@@ -176,6 +179,31 @@ struct NativeReaderAudioControls: View {
     }
 
     var body: some View {
+        NativeAdjustableChoice(
+            title: "Motor de lectura predeterminado",
+            choices: ["Voces del sistema", "Gemini", "Phonon"],
+            selectedIndex: $readingEngine
+        )
+        if readingEngine == 1 {
+            if NativeVoiceCredentialStore.hasKey("gemini") {
+                NativeAdjustableChoice(
+                    title: "Voz Gemini predeterminada",
+                    choices: NativeGeminiSpeech.voices,
+                    selectedIndex: Binding(
+                        get: { NativeGeminiSpeech.voices.firstIndex(of: geminiVoice) ?? 0 },
+                        set: { geminiVoice = NativeGeminiSpeech.voices[$0] }
+                    )
+                )
+                Text("La voz seleccionada se usará al reproducir documentos con Gemini. También se puede comprobar en Motores externos, Gemini.")
+                    .font(.footnote)
+            } else {
+                Text("Gemini necesita una clave API guardada en Motores externos antes de reproducir.")
+                    .font(.footnote)
+            }
+        } else if readingEngine == 2 {
+            Text("La disponibilidad de Phonon depende de tener instalado un motor compatible dentro de TifloLector.")
+                .font(.footnote)
+        }
         NativeAdjustableChoice(
             title: "Velocidad de voz",
             choices: ["0,75 veces", "0,9 veces", "Normal", "1,25 veces", "1,5 veces"],

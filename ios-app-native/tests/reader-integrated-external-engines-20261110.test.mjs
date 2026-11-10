@@ -30,3 +30,15 @@ test('Audio generado conserva cursor textual y navegación por tiempo estimado',
 test('El toque mágico no ejecuta dos veces la orden', () => {
   assert.equal((reader.match(/\.accessibilityAction\(\.magicTap\)/g) || []).length, 1);
 });
+
+test('Reanudar un motor externo quita primero la pausa y luego genera el fragmento', () => {
+  const start = reader.indexOf('    func resume() {');
+  const end = reader.indexOf('    func refresh() {', start);
+  assert.ok(start >= 0 && end > start);
+  const resume = reader.slice(start, end);
+  const clearPause = resume.indexOf('isPaused = false');
+  const continueGenerated = resume.indexOf('playNextGeminiSegment()');
+  assert.ok(clearPause >= 0 && continueGenerated > clearPause,
+    'Gemini y Phonon no deben intentar generar un segmento mientras siguen en pausa');
+  assert.match(reader, /guard isGeneratedSpeech, !isPaused, geminiSegments\.indices/);
+});

@@ -3,8 +3,9 @@ name: TifloAcosta iOS nativa - enviar a TestFlight
 # después de integrar y revisar las fases de desarrollo.
 on:
   workflow_dispatch:
-  # Lanzamiento solicitado para la candidata integrada PR #303.
-  # Solo un cambio explícito en ESTE flujo dentro de la PR puede activarlo.
+  # Reintento solicitado para la candidata integrada PR #303, versión 1.2.
+  # Apple rechazó el envío anterior: la versión 1.1 estaba cerrada.
+  # Solo los cambios explícitos de este flujo disparan el envío desde la PR.
   pull_request:
     types:
       - synchronize

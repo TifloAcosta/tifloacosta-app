@@ -1048,9 +1048,11 @@ struct NativeReaderLibraryScreen: View {
     private func documentRowLabel(_ doc: NativeReadingDocument) -> String {
         let progress = max(0, min(100, library.latest(doc).lastPercent ?? 0))
         let shortLabel = "\(doc.title), \(progress) por ciento leído"
-        guard voiceOverDetailIndex == 1 else { return shortLabel }
+        if voiceOverDetailIndex == 0 { return shortLabel }
+        let formatLabel = "\(shortLabel), formato \(doc.formatLabel)"
+        if voiceOverDetailIndex == 1 { return formatLabel }
         let folder = doc.folderName ?? "Sin carpeta"
-        return "\(shortLabel), formato \(doc.formatLabel), carpeta \(folder)"
+        return "\(formatLabel), carpeta \(folder)"
 
     }
 
@@ -1253,6 +1255,12 @@ struct NativeReaderLibraryScreen: View {
             }
             // Los controles de gestión quedan después del último libro.
             Section("Filtrar y ordenar") {
+                NativeAdjustableChoice(
+                    title: "Información de cada documento con VoiceOver",
+                    choices: ["Título y porcentaje", "Título, porcentaje y formato",
+                              "Título, porcentaje, formato y carpeta"],
+                    selectedIndex: $voiceOverDetailIndex
+                )
                 NativeAdjustableChoice(
                     title: "Filtrar documentos",
                     choices: ["Todos", "Textos", "PDF", "EPUB", "Office", "Audio y DAISY",

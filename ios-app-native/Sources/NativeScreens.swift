@@ -84,6 +84,10 @@ struct NativeHomeScreen: View {
         switch route {
         case "actualidad": destination = .actualidad
         case "tifloLector": destination = .tifloLector
+        case "resumeReader":
+            // The library consumes this request after it has opened.
+            defaults.set(true, forKey: "native-ios-resume-last-book-shortcut-v1")
+            destination = .tifloLector
         case "videos": destination = .videos
         default: destination = nil
         }

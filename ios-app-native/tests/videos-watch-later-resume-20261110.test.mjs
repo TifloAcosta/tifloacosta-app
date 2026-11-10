@@ -41,3 +41,13 @@ test('Canales seguidos locales accesibles sin exigir Google', () => {
   assert.match(screens, /Seguir canal sin cuenta Google/);
   assert.match(screens, /personalVideos\.toggleFollowed\(channel\)/);
 });
+
+test('Novedades reúne los vídeos de canales seguidos por fecha, en grupos de diez', () => {
+  assert.match(screens, /private struct NativeYouTubeFollowedUpdatesScreen: View/);
+  assert.match(screens, /NavigationLink\("Ver últimos vídeos de mis canales"\)/);
+  assert.match(screens, /searches\.values\.flatMap\(\\?\.videos\)/);
+  assert.match(screens, /left > right/);
+  assert.match(screens, /visibleCount = 10/);
+  assert.match(screens, /Button\("Cargar 10 más"\)/);
+  assert.match(screens, /loadMore: true/);
+});

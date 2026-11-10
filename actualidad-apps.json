@@ -120,6 +120,18 @@
     "publishedAt": null
   },
   {
+    "id": "applevis-apps-daf46bd7f721efa8",
+    "title": "NoteTell Money Reader",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/utilities/notetell-money-reader",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "NoteTell Money Reader is designed to help people who are blind or have low vision identify bills in real time. Simply point the iPhone camera at the bill you want to identify, then hear, feel, or see its value. If you’re blind, have low vision, or are deafblind, NoteTell Money Reader lets you identify bills without any assistance. While shopping, use NoteTell to check your money at the checkout and make sure you get the right change back. You can also use NoteTell to quickly sort your money at home. NoteTell doesn’t require an internet connection, so it identifies bills anywhere, at any time. NoteTell can identify bills at any angle. It is designed to work with bills that are folded, creased, worn, or partly in view. NoteTell is designed to work indoors, outdoors, and even in total darkness. When your environment is too dark to identify bills, NoteTell turns the flashlight on automatically. Vibration Mode tells you the value of each bill as vibrations in your hand—without anyone else hearing it. Each bill has its own vibration pattern. The lowest bill has one pulse, and each higher bill has one more. Pulses come in pairs, so they’re easier to count. Vibration Mode is also useful in noisy places and for people who are deafblind. When VoiceOver is on, double-tap with two fingers to switch between Speech Mode and Vibration Mode. For users with low vision, NoteTell shows the value of each bill in large, high-contrast numbers on the screen. You can complete every task in NoteTell Money Reader using only VoiceOver, without sighted assistance. If you use a braille display with VoiceOver, you can use NoteTell to get the value of each bill in real time. Ask Siri, “Identify currency with NoteTell,” to use NoteTell hands-free. You can also add NoteTell to Control Center or the Lock Screen, assign it to the Action button, or set it up as a Vocal Shortcut. With the full version, you can use Currency Conversion to hear each bill’s value in your home currency when you travel. NoteTell uses on-device processing to identify bills, which means your data never leaves your iPhone. Camera images are never stored on the device or on any servers. You can try the full version free for 14 days. You won’t be charged when the trial ends. You can continue using NoteTell for free to identify the lowest notes of each currency. The full version is also available as a one-time purchase. And with Family Sharing, up to five other people can enjoy your purchase too.",
+    "publishedAt": "2026-11-10T05:08:40.000Z"
+  },
+  {
     "id": "applevis-apps-1da4fdc2bfb19886",
     "title": "Evermyth - God Life Simulator",
     "sourceId": "applevis-apps",
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "Grow a tiny garden on a sunlit windowsill. Plant a seed, watch it sprout in real time, and come back to a bloom. No ads, ever. My Little Window is a gentle idle garden that grows even while the app is closed. There is no failure here. Nothing withers, nothing rushes you, and every plant is happy to wait. GROW IN REAL TIME Seeds mature on their own schedule, from a one minute pothos to a full day jade. Water them, mist them, give them sun. Well tended plants sell for more. COLLECT THEM ALL Every home has twenty species for your Plant Book, 240 in all, and every one hides a rare variant with its own look. Open seed packs, chase rares, and cross-breed two seeds for a chance at something special. A JOURNEY OF LITTLE HOMES Complete a home to travel down the path to the next: twelve homes across four chapters, each with its own window, its own plants and its own rooms. • The Meadow: a woodland cabin, a suburban flower garden and a farmhouse kitchen garden. • Warm Shores: a beach cottage, a harbor and a lighthouse, where messages in bottles wash up on your sill. • Country Lanes: an English cottage garden, a prairie homestead and a hillside burrow, where bees visit your blooms and leave new seeds. • Sun &amp; Stone: a Tuscan vineyard house, a Moroccan riad and a desert adobe, where every bloom you sell becomes a tile for a mosaic wall. More homes are on the way. MAKE IT YOURS Coins from your blooms furnish five cozy rooms in every home. Every armchair, shelf, and lamp gives your garden a lasting boost, from faster growth to luckier packs. A LIVING WINDOW Morning light, golden hour, starry nights, and quiet rain move across your window through the day. Animal friends wander by. A daily gift waits each morning, and streaks make it sweeter. KIND BY DESIGN No ads. No energy bars. No pressure. Gems can speed things up, but everything in the game can be earned for free. Pull up a chair by the window. Your garden is already growing.",
     "publishedAt": "2026-11-05T18:54:24.000Z"
-  },
-  {
-    "id": "applevis-apps-81462762a08111da",
-    "title": "Treblo - AI Music",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/music/treblo-ai-music",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Make songs with the world's best AI music model. For free. No limits. Turn any idea into a real song—a meme for the group chat, a love song for your person, or a track the whole world vibes to. Whatever you hear in your head, Treblo helps you make it. CREATE IN SECONDS Describe your song. Pick a style. Hit generate. That's it. Want more control? Tweak lyrics, tags, and settings whenever you want. MAKE IT YOURS Extend tracks. Swap sections. Upload audio to cover. Craft until it's perfect. SHARE &amp; DISCOVER Post your music. Follow other artists. Join groups. Remix what inspires you. Build your audience. Hyperpop. Drift phonk. Sea shanties. If you can imagine it, you can create it. Privacy Policy: https://treblo.com/privacy Terms of Service: https://treblo.com/tos",
-    "publishedAt": "2026-11-04T20:45:02.000Z"
   }
 ]

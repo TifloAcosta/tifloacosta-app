@@ -16,11 +16,13 @@ enum NativeSupportDiagnostics {
         "Aplicación: TifloAcosta para iOS, versión \(version)\n" +
         "Sistema: iOS \(UIDevice.current.systemVersion)\n" +
         "Dispositivo: \(UIDevice.current.model)\n" +
-        "VoiceOver: \(UIAccessibility.isVoiceOverRunning ? "activado" : "desactivado")"
+        "VoiceOver: \(UIAccessibility.isVoiceOverRunning ? "activado" : "desactivado")\n" +
+        "Reducir movimiento: \(UIAccessibility.isReduceMotionEnabled ? "activado" : "desactivado")\n" +
+        "Texto en negrita del sistema: \(UIAccessibility.isBoldTextEnabled ? "activado" : "desactivado")"
     }
 
     static func report(category: String, detail: String, steps: String,
-                       includeDiagnostics: Bool) -> String {
+                       includeDiagnostics: Bool, catalogSummary: String = "") -> String {
         var result = "Incidencia de TifloAcosta\n" +
             "Sección: \(category)\n\n" +
             "Descripción:\n\(detail.trimmingCharacters(in: .whitespacesAndNewlines))"
@@ -28,12 +30,16 @@ enum NativeSupportDiagnostics {
             result += "\n\nPasos para reproducir:\n" +
                 steps.trimmingCharacters(in: .whitespacesAndNewlines)
         }
-        if includeDiagnostics { result += "\n\nDiagnóstico básico:\n" + systemDetails }
+        if includeDiagnostics {
+            result += "\n\nDiagnóstico básico:\n" + systemDetails
+            if !catalogSummary.isEmpty { result += "\n" + catalogSummary }
+        }
         return result
     }
 }
 
 struct NativeAccessibilityReportScreen: View {
+    @EnvironmentObject private var catalog: NativeCatalogStore
     @State private var categoryIndex = 0
     @State private var description = ""
     @State private var steps = ""
@@ -47,12 +53,21 @@ struct NativeAccessibilityReportScreen: View {
         "Actualidad", "Vídeos", "Pódcast", "Notificaciones", "Otro"
     ]
 
+    private var catalogSummary: String {
+        let updated = catalog.lastUpdated?.formatted(date: .abbreviated, time: .shortened)
+            ?? "Sin actualización confirmada"
+        return "Catálogo: \(catalog.resources.count) recursos, \(catalog.videos.count) vídeos, " +
+            "\(catalog.news.count) noticias. Última actualización: \(updated). " +
+            "Estado: \(catalog.error == nil ? "sin error declarado" : "actualización con incidencia")."
+    }
+
     private var reportText: String {
         NativeSupportDiagnostics.report(
             category: categories[categoryIndex],
             detail: description,
             steps: steps,
-            includeDiagnostics: includeDiagnostics
+            includeDiagnostics: includeDiagnostics,
+            catalogSummary: catalogSummary
         )
     }
 
@@ -96,12 +111,12 @@ struct NativeAccessibilityReportScreen: View {
 
             Section("Información técnica") {
                 Toggle("Incluir diagnóstico básico", isOn: $includeDiagnostics)
-                Text("Solo se incluirán versión de TifloAcosta, versión de iOS, tipo genérico de dispositivo y estado de VoiceOver.")
+                Text("Se incluirán versión de la app y de iOS, tipo genérico de dispositivo, estado de VoiceOver, ajustes de movimiento y texto en negrita y resumen del catálogo. Todo permanece en el dispositivo hasta que decidas compartirlo.")
                     .font(.footnote).foregroundStyle(.secondary)
                 Text("No se adjuntan documentos, historiales, contraseñas, claves de API ni datos de cuentas. Revisa tu texto antes de compartirlo.")
                     .font(.footnote).foregroundStyle(.secondary)
                 if includeDiagnostics {
-                    Text(NativeSupportDiagnostics.systemDetails)
+                    Text(NativeSupportDiagnostics.systemDetails + "\n" + catalogSummary)
                         .font(.footnote)
                         .textSelection(.enabled)
                 }

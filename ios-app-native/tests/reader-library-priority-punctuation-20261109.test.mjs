@@ -45,9 +45,9 @@ test('La reproducción del sistema respeta cada pausa sin encolar todo el docume
   assert.match(reader, /Task\.sleep\(for: \.seconds\(delay\)\)/);
   assert.match(reader, /speechQueue\.append\(\(utterance: utterance, delay: segment\.delay\)\)/);
   assert.match(reader, /speakNextSystemSegment\(after: completedDelay\)/);
-  assert.match(reader, /pauseSpeaking\(at: \.immediate\)/);
+  assert.match(reader, /synthesizer\.stopSpeaking\(at: \.immediate\)/);
   assert.match(reader, /speechDelayTask\?\.cancel\(\)/);
-  assert.match(reader, /else if synthesizer\.isPaused \{ _ = synthesizer\.continueSpeaking\(\) \}/);
+  assert.match(reader, /if systemSpeechNeedsRestart && !isGeneratedSpeech && player == nil/);
 });
 
 test('El gesto mágico funciona tanto en el botón principal como en el lector', () => {
@@ -61,4 +61,13 @@ test('El detalle de biblioteca se puede seleccionar en tres niveles', () => {
   assert.match(reader, /Título, porcentaje y formato/);
   assert.match(reader, /Título, porcentaje, formato y carpeta/);
   assert.match(reader, /if voiceOverDetailIndex == 1 \{ return formatLabel \}/);
+});
+
+test('Pausar TTS corta el motor y reanuda desde el cursor almacenado', () => {
+  assert.match(reader, /systemSpeechNeedsRestart = !speechQueue\.isEmpty/);
+  assert.match(reader, /let resumeUTF16 = max\(0, min\(previousUTF16/);
+  assert.match(reader, /let resumeCharacters = max\(0, min\(previousCharacterCount/);
+  assert.match(reader, /play\(remainder, speed: resumedSpeed, pitch: resumedPitch/);
+  assert.match(reader, /&& speechQueue\.isEmpty \{/);
+  assert.match(reader, /\.accessibilityAction\(\.magicTap\) \{\s*if speech\.isPlaying \{ pausePlayback\(\) \}/);
 });

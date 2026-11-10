@@ -3,6 +3,15 @@ name: TifloAcosta iOS nativa - enviar a TestFlight
 # después de integrar y revisar las fases de desarrollo.
 on:
   workflow_dispatch:
+  # Lanzamiento solicitado para la candidata integrada PR #303.
+  # Solo un cambio explícito en ESTE flujo dentro de la PR puede activarlo.
+  pull_request:
+    types:
+      - synchronize
+    branches:
+      - main
+    paths:
+      - '.github/workflows/ios-native-testflight-upload.yml'
 permissions:
   contents: read
   actions: read
@@ -11,6 +20,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   build-upload:
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.number == 303 && github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: macos-15
     timeout-minutes: 80
     env:

@@ -2219,6 +2219,7 @@ struct NativeReadingScreen: View {
         let query = documentSearchText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !query.isEmpty, !latest.body.isEmpty else { return [] }
         let body = latest.body
+        let chars = Array(body)
         var cursor = body.startIndex
         var hits: [DocumentSearchHit] = []
         while cursor < body.endIndex, hits.count < 150,
@@ -2228,7 +2229,6 @@ struct NativeReadingScreen: View {
                 range: cursor..<body.endIndex
               ) {
             let offset = body.distance(from: body.startIndex, to: match.lowerBound)
-            let chars = Array(body)
             let left = max(0, offset - 55)
             let right = min(chars.count, offset + max(1, query.count) + 85)
             let context = String(chars[left..<right])

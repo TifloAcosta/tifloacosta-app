@@ -2381,10 +2381,6 @@ struct NativeReadingScreen: View {
                 @unknown default: break
                 }
             }
-            .accessibilityAction(.magicTap) {
-                if speech.isPlaying { pausePlayback() }
-                else if speech.isPaused { play() }
-            }
             .accessibilityAction(named: Text("Abrir enlace actual")) {
                 activateCurrentLink()
             }
@@ -2769,7 +2765,10 @@ struct NativeReadingScreen: View {
         }
         .accessibilityAction(.magicTap) {
             if speech.isPlaying { pausePlayback() }
-            else if speech.isPaused { play() }
+            else if speech.isPaused {
+                speech.resume()
+                applySleepTimer()
+            }
         }
         .accessibilityAction(named: Text("Añadir marca")) { addBookmark() }
         .accessibilityAction(named: Text("Avanzar cinco por ciento")) {

@@ -555,15 +555,47 @@ struct NativeResourcesScreen: View {
 }
 
 struct NativeVideosScreen: View {
-    @EnvironmentObject private var catalog: NativeCatalogStore
-    @EnvironmentObject private var favorites: NativeFavoritesStore
-    @EnvironmentObject private var account: NativeYouTubeAccountStore
+    var body: some View {
+        List {
+            Section("Explorar vídeos") {
+                NavigationLink("Buscar en YouTube") {
+                    NativeYouTubeSearchScreen()
+                }
+                NavigationLink("Vídeos del canal TifloAcosta") {
+                    NativeTifloAcostaChannelVideosScreen()
+                }
+            }
+            Section("Mis canales") {
+                NavigationLink("Mis suscripciones de YouTube") {
+                    NativeYouTubeSubscriptionsScreen()
+                }
+                NavigationLink("Canales seguidos sin cuenta Google") {
+                    NativeYouTubeLocalChannelsScreen()
+                }
+                NavigationLink("Novedades de mis canales") {
+                    NativeYouTubeFollowedUpdatesScreen()
+                }
+            }
+            Section("Mi actividad") {
+                NavigationLink("Continuar viendo") {
+                    NativeYouTubePersonalVideosScreen(showWatchLater: false)
+                }
+                NavigationLink("Ver después") {
+                    NativeYouTubePersonalVideosScreen(showWatchLater: true)
+                }
+            }
+        }
+        .tifloScreenSurface()
+        .navigationTitle("Vídeos")
+    }
+}
+
+/// La búsqueda y sus resultados se recorren solamente al activar Buscar en YouTube.
+private struct NativeYouTubeSearchScreen: View {
     @StateObject private var youtubeSearch = NativeYouTubeSearchStore()
     @ObservedObject private var personalVideos = NativeYouTubePersonalLibrary.shared
     @State private var searchText = ""
     @State private var filterIndex = 0
-    @State private var sortIndex = 0
-    @State private var visibleCount = 10
     @State private var selectedVideo: NativeYouTubeVideo?
     @State private var commentingOnVideo: NativeYouTubeVideo?
 
@@ -572,10 +604,6 @@ struct NativeVideosScreen: View {
         "En directo", "Con subtítulos"
     ]
     private let filterValues = ["all", "video", "channel", "short", "live", "captions"]
-
-    private var ordered: [NativeCatalogItem] {
-        sortIndex == 0 ? catalog.videos : Array(catalog.videos.reversed())
-    }
 
     private func search(loadMore: Bool = false) {
         let filter = filterValues[filterIndex]
@@ -648,70 +676,33 @@ struct NativeVideosScreen: View {
                 .listRowBackground(TifloVisual.surfaceRaised)
             }
 
-            Section("Ver después") {
-                if personalVideos.watchLater.isEmpty {
-                    Text("No has guardado vídeos para ver después.")
-                }
-                ForEach(personalVideos.watchLater) { saved in
-                    if let video = NativeYouTubeVideo(saved: saved) {
-                        NativeYouTubeVideoRow(
-                            video: video, onPlay: { selectedVideo = $0 },
-                            onComment: { commentingOnVideo = $0 }
-                        )
-                    }
-                }
-            }
+        }
+        .tifloScreenSurface()
+        .navigationTitle("Buscar en YouTube")
+        .sheet(item: $selectedVideo) { video in
+            NavigationStack { NativeYouTubePlayerScreen(video: video) }
+        }
+        .sheet(item: $commentingOnVideo) { video in
+            NavigationStack { NativeYouTubeCommentScreen(video: video) }
+        }
+    }
+}
 
-            Section("Continuar viendo") {
-                if personalVideos.continueWatching.isEmpty {
-                    Text("No hay vídeos con una reproducción pendiente.")
-                }
-                ForEach(personalVideos.continueWatching) { saved in
-                    if let video = NativeYouTubeVideo(saved: saved) {
-                        NativeYouTubeVideoRow(
-                            video: video, onPlay: { selectedVideo = $0 },
-                            onComment: { commentingOnVideo = $0 }
-                        )
-                        .accessibilityHint("Retoma el vídeo desde el segundo \(Int(saved.resumeSeconds)).")
-                    }
-                }
-            }
+/// Los vídeos del canal editorial mantienen ordenación y carga de diez en diez.
+private struct NativeTifloAcostaChannelVideosScreen: View {
+    @EnvironmentObject private var catalog: NativeCatalogStore
+    @EnvironmentObject private var favorites: NativeFavoritesStore
+    @State private var sortIndex = 0
+    @State private var visibleCount = 10
+    @State private var selectedVideo: NativeYouTubeVideo?
+    @State private var commentingOnVideo: NativeYouTubeVideo?
 
-            Section("Novedades de canales seguidos") {
-                NavigationLink("Ver últimos vídeos de mis canales") {
-                    NativeYouTubeFollowedUpdatesScreen()
-                }
-                .accessibilityHint("Lista cronológica de vídeos de canales seguidos, diez resultados por página.")
-            }
+    private var ordered: [NativeCatalogItem] {
+        sortIndex == 0 ? catalog.videos : Array(catalog.videos.reversed())
+    }
 
-            Section("Canales seguidos sin cuenta Google") {
-                if personalVideos.followedChannels.isEmpty {
-                    Text("No hay canales seguidos. Busca un canal y elige Seguir canal en sus acciones.")
-                }
-                ForEach(personalVideos.followedChannels) { saved in
-                    if let channel = NativeYouTubeChannel(saved: saved) {
-                        NavigationLink(channel.title) {
-                            NativeYouTubeChannelVideosScreen(channel: channel)
-                        }
-                        .accessibilityAction(named: Text("Dejar de seguir canal")) {
-                            personalVideos.toggleFollowed(channel)
-                        }
-                    }
-                }
-            }
-
-            Section("Cuenta de YouTube") {
-                NavigationLink("Mis suscripciones de YouTube") {
-                    NativeYouTubeSubscriptionsScreen()
-                }
-                if !account.authenticated {
-                    Text("Puedes buscar y reproducir sin iniciar sesión. Las suscripciones requieren acceso con Google.")
-                        .font(.subheadline)
-                        .foregroundStyle(TifloVisual.secondaryText)
-                }
-            }
-            .listRowBackground(TifloVisual.surfaceRaised)
-
+    var body: some View {
+        List {
             Section {
                 NativeAdjustableChoice(
                     title: "Orden",
@@ -748,7 +739,7 @@ struct NativeVideosScreen: View {
             .listRowBackground(TifloVisual.surfaceRaised)
         }
         .tifloScreenSurface()
-        .navigationTitle("Vídeos")
+        .navigationTitle("Vídeos de TifloAcosta")
         .sheet(item: $selectedVideo) { video in
             NavigationStack { NativeYouTubePlayerScreen(video: video) }
         }
@@ -756,6 +747,86 @@ struct NativeVideosScreen: View {
             NavigationStack { NativeYouTubeCommentScreen(video: video) }
         }
         .onChange(of: sortIndex) { _, _ in visibleCount = 10 }
+    }
+}
+
+/// Los contenidos personales se consultan por separado, con controles de VoiceOver.
+private struct NativeYouTubePersonalVideosScreen: View {
+    let showWatchLater: Bool
+    @ObservedObject private var personalVideos = NativeYouTubePersonalLibrary.shared
+    @State private var selectedVideo: NativeYouTubeVideo?
+    @State private var commentingOnVideo: NativeYouTubeVideo?
+
+    var body: some View {
+        List {
+            if showWatchLater {
+            Section("Ver después") {
+                if personalVideos.watchLater.isEmpty {
+                    Text("No has guardado vídeos para ver después.")
+                }
+                ForEach(personalVideos.watchLater) { saved in
+                    if let video = NativeYouTubeVideo(saved: saved) {
+                        NativeYouTubeVideoRow(
+                            video: video, onPlay: { selectedVideo = $0 },
+                            onComment: { commentingOnVideo = $0 }
+                        )
+                    }
+                }
+            }
+
+            } else {
+            Section("Continuar viendo") {
+                if personalVideos.continueWatching.isEmpty {
+                    Text("No hay vídeos con una reproducción pendiente.")
+                }
+                ForEach(personalVideos.continueWatching) { saved in
+                    if let video = NativeYouTubeVideo(saved: saved) {
+                        NativeYouTubeVideoRow(
+                            video: video, onPlay: { selectedVideo = $0 },
+                            onComment: { commentingOnVideo = $0 }
+                        )
+                        .accessibilityHint("Retoma el vídeo desde el segundo \(Int(saved.resumeSeconds)).")
+                    }
+                }
+            }
+
+            }
+        }
+        .tifloScreenSurface()
+        .navigationTitle(showWatchLater ? "Ver después" : "Continuar viendo")
+        .sheet(item: $selectedVideo) { video in
+            NavigationStack { NativeYouTubePlayerScreen(video: video) }
+        }
+        .sheet(item: $commentingOnVideo) { video in
+            NavigationStack { NativeYouTubeCommentScreen(video: video) }
+        }
+    }
+}
+
+private struct NativeYouTubeLocalChannelsScreen: View {
+    @ObservedObject private var personalVideos = NativeYouTubePersonalLibrary.shared
+
+    var body: some View {
+        List {
+            Section("Canales seguidos sin cuenta Google") {
+                if personalVideos.followedChannels.isEmpty {
+                    Text("No hay canales seguidos. Busca un canal y elige Seguir canal en sus acciones.")
+                }
+                ForEach(personalVideos.followedChannels) { saved in
+                    if let channel = NativeYouTubeChannel(saved: saved) {
+                        NavigationLink(channel.title) {
+                            NativeYouTubeChannelVideosScreen(channel: channel)
+                        }
+                        .accessibilityAction(named: Text("Dejar de seguir canal")) {
+                            personalVideos.toggleFollowed(channel)
+                        }
+                    }
+                }
+            }
+
+        }
+        .tifloScreenSurface()
+        .navigationTitle("Canales seguidos")
     }
 }
 

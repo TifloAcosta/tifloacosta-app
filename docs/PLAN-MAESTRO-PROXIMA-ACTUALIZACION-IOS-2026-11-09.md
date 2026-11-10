@@ -350,3 +350,13 @@ Estado: implementado en código y con contratos de regresión actualizados. Falt
 - Los lectores nativos registran la apertura en el historial y ofrecen un control visible para guardar o quitar el contenido de «Leer después». La actividad comparte el mismo objeto de entorno SwiftUI.
 - Añadidas pruebas de contrato y actualizado el test preexistente del listado de Recursos para su nueva capacidad de búsqueda.
 - **Pendiente:** verificar compilación y regresiones, completar las restantes funciones comprometidas en Actualidad y Recursos y ejecutar posteriormente una única validación integral de VoiceOver en TestFlight.
+
+
+## Avance fase general 8 — traducción bajo petición y Siri, 10 de noviembre de 2026
+
+- Se añade `NativeOnDemandTranslationScreen`: traducción con el framework nativo de Apple, iniciada únicamente tras pulsar «Traducir ahora». El contenido de Actualidad/Recursos permanece en su idioma original, sin modificación del catálogo ni traducción automática en segundo plano.
+- Los textos extensos se dividen en fragmentos para realizar solicitudes sucesivas sin recortar el documento; se anuncia el progreso y se permite alternar entre traducción completada y original. Las descargas de modelos y disponibilidad de idiomas dependen de la plataforma; los errores se presentan con texto accesible.
+- Compatibilidad: `TranslationSession.Configuration` requiere iOS 18. Se mantiene el despliegue mínimo de la app en iOS 17; las acciones de traducción integrada aparecen mediante comprobación de disponibilidad del sistema. Queda pendiente valorar alternativa del sistema para iOS 17.4.
+- Se añaden `AppIntent` y `AppShortcutsProvider` para abrir Actualidad, la biblioteca TifloLector y Vídeos con Siri/Atajos. `NativeHomeScreen` consume una ruta persistente una sola vez y navega mediante SwiftUI NavigationStack. Todavía **no** se anuncia «continúa el libro» porque requiere reanudación y control de reproducción de TifloLector, no solo navegación.
+- Se han incorporado pruebas de contrato para traducción explícita, preservación del original y apertura de secciones por Siri. Pendiente confirmación de compilación y validación de VoiceOver de forma integral junto con las restantes fases.
+- Pendientes de fase 8: traducciones de otros idiomas y localización PT/FR, atajos de control de audio, notificaciones limitadas a incorporaciones propias, avisos manuales y preferencias de verbosidad.

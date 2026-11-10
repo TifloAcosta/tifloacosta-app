@@ -1110,13 +1110,15 @@ struct NativeReaderLibraryScreen: View {
         let key = "native-ios-resume-last-book-shortcut-v1"
         guard defaults.bool(forKey: key) else { return }
         defaults.removeObject(forKey: key)
-        guard let document = library.documents.max(by: {
+        // A newly imported document is not necessarily the last one read.
+        guard let document = library.documents.filter({ $0.lastOpenedAt != nil }).max(by: {
             ($0.lastOpenedAt ?? .distantPast) < ($1.lastOpenedAt ?? .distantPast)
         }) else {
-            shortcutMessage = "No hay libros en TifloLector para continuar."
+            shortcutMessage = "Todavía no hay un libro abierto anteriormente para continuar."
             UIAccessibility.post(notification: .announcement, argument: shortcutMessage)
             return
         }
+        importError = nil
         library.markOpened(document)
         play(document)
         if importError == nil {

@@ -13,6 +13,15 @@ struct NativePodcastSavedEpisode: Codable, Identifiable {
     let audioURL: String
 }
 
+struct NativePodcastPlaybackProgress: Codable, Identifiable {
+    let id: String
+    var title: String
+    var audioURL: String
+    var seconds: Double
+    var duration: Double
+    var updatedAt: Date
+}
+
 private final class NativeOPMLReader: NSObject, XMLParserDelegate {
     var results: [NativeFollowedPodcast] = []
     func parser(_ parser: XMLParser, didStartElement elementName: String,
@@ -34,11 +43,13 @@ final class NativePodcastLibrary: ObservableObject {
     @Published private(set) var followed: [NativeFollowedPodcast] = []
     @Published private(set) var favorites: Set<String> = []
     @Published private(set) var savedEpisodes: [NativePodcastSavedEpisode] = []
+    @Published private(set) var playbackProgress: [NativePodcastPlaybackProgress] = []
     @Published var notice = ""
     private let followedKey = "native-podcast-followed-v1"
     private let favoriteKey = "native-podcast-favorites-v1"
     private let savedKey = "native-podcast-favorite-episodes-v1"
     private let lastSeenKey = "native-podcast-last-seen-v1"
+    private let playbackKey = "native-podcast-playback-progress-v1"
 
     init() {
         if let saved = UserDefaults.standard.data(forKey: followedKey),
@@ -49,6 +60,45 @@ final class NativePodcastLibrary: ObservableObject {
         if let data = UserDefaults.standard.data(forKey: savedKey),
            let episodes = try? JSONDecoder().decode([NativePodcastSavedEpisode].self, from: data) {
             savedEpisodes = episodes.filter { favorites.contains($0.id) }
+        }
+        if let data = UserDefaults.standard.data(forKey: playbackKey),
+           let values = try? JSONDecoder().decode([NativePodcastPlaybackProgress].self, from: data) {
+            playbackProgress = values.filter {
+                $0.seconds.isFinite && $0.duration.isFinite &&
+                $0.seconds >= 0 && $0.duration > 0 &&
+                URL(string: $0.audioURL)?.scheme?.lowercased() == "https"
+            }.sorted { $0.updatedAt > $1.updatedAt }
+        }
+    }
+
+    func progress(for episode: NativePodcastEpisode) -> Double {
+        playbackProgress.first(where: { $0.id == episode.id })?.seconds ?? 0
+    }
+
+    func remember(_ episode: NativePodcastEpisode, seconds: Double, duration: Double) {
+        guard seconds.isFinite, duration.isFinite, duration > 0 else { return }
+        let location = max(0, min(seconds, duration))
+        // No reanudar los episodios terminados ni las pulsaciones accidentales.
+        playbackProgress.removeAll { $0.id == episode.id }
+        if location >= 5 && location < duration - 10 {
+            playbackProgress.insert(NativePodcastPlaybackProgress(
+                id: episode.id, title: episode.title,
+                audioURL: episode.audioURL.absoluteString,
+                seconds: location, duration: duration, updatedAt: Date()
+            ), at: 0)
+        }
+        playbackProgress = Array(playbackProgress.prefix(200))
+        savePlayback()
+    }
+
+    func clearProgress(for episode: NativePodcastEpisode) {
+        playbackProgress.removeAll { $0.id == episode.id }
+        savePlayback()
+    }
+
+    private func savePlayback() {
+        if let data = try? JSONEncoder().encode(playbackProgress) {
+            UserDefaults.standard.set(data, forKey: playbackKey)
         }
     }
 

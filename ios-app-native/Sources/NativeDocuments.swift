@@ -122,6 +122,7 @@ struct NativeRemoteResourceScreen: View {
     let item: NativeCatalogItem
     @EnvironmentObject private var library: NativeReaderLibrary
     @EnvironmentObject private var resourceService: NativeResourceService
+    @EnvironmentObject private var readingActivity: NativeReadingActivity
     @StateObject private var speech = NativeReadingSpeech()
     @State private var documentText = ""
     @State private var paragraphs: [String] = []
@@ -215,6 +216,12 @@ struct NativeRemoteResourceScreen: View {
 
                 if !documentText.isEmpty {
                     VStack(alignment: .leading, spacing: 10) {
+                        Button(readingActivity.isSaved(.resource, item: item)
+                            ? "Quitar de Leer después" : "Guardar para leer después") {
+                            let saved = readingActivity.toggleReadLater(.resource, item: item)
+                            announce(saved ? "Recurso guardado para leer después." :
+                                "Recurso retirado de Leer después.")
+                        }
                         Button("Leer en voz alta") { readAloud() }
                         Button("Detener lectura") { speech.stop() }
                         Button(imported ? "Guardado en TifloLector" : "Guardar en TifloLector") {
@@ -253,7 +260,10 @@ struct NativeRemoteResourceScreen: View {
                 }
             }
         }
-        .task(id: item.id) { await load() }
+        .task(id: item.id) {
+            readingActivity.markOpened(.resource, item: item)
+            await load()
+        }
         .onDisappear { speech.stop() }
     }
 }

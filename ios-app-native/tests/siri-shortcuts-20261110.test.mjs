@@ -42,3 +42,14 @@ test('Siri continúa el último libro abierto desde posición guardada', () => {
   assert.match(reader, /defaults\.removeObject\(forKey: key\)/);
   assert.match(reader, /\.onAppear \{ resumeRequestedBook\(\) \}/);
 });
+
+test('VoiceOver mantiene un título breve por defecto y detalle opcional en una sola línea', () => {
+  const reader = source('NativeTifloLector.swift');
+  const settings = source('NativeUpdatesSettings.swift');
+  assert.match(reader, /@AppStorage\("native-voiceover-library-detail-index"\) private var voiceOverDetailIndex = 0/);
+  assert.match(reader, /guard voiceOverDetailIndex == 1 else \{ return shortLabel \}/);
+  assert.match(reader, /doc\.formatLabel/);
+  assert.match(reader, /doc\.folderName/);
+  assert.match(settings, /title: "Información al recorrer la biblioteca"/);
+  assert.match(settings, /selectedIndex: \$voiceOverDetailIndex/);
+});

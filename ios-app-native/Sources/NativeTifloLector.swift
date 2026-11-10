@@ -2084,7 +2084,7 @@ struct NativeReadingScreen: View {
     }
 
     private func skipReading(_ direction: Int) {
-        if speech.hasAudio {
+        if speech.hasAudio && !speech.isGeneratedSpeech {
             speech.skip(seconds: TimeInterval(direction * timeStep))
             currentPercent = speech.audioPercent
             persistPosition()
@@ -2564,16 +2564,7 @@ struct NativeReadingScreen: View {
         .tifloScreenSurface()
         .navigationTitle(document.title)
         .navigationBarTitleDisplayMode(.inline)
-        .accessibilityAction(.magicTap) {
-            // Nunca arranca una nueva reproducción: solo controla la
-            // lectura del documento que ya está activa o pausada.
-            if speech.isPlaying {
-                pausePlayback()
-            } else if speech.isPaused {
-                speech.resume()
-                applySleepTimer()
-            }
-        }
+
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Acciones") { showDocumentActions = true }

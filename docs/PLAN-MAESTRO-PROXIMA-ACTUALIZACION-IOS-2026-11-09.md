@@ -311,3 +311,12 @@ El usuario acuerda simplificar la pantalla principal de Vídeos para que funcion
 - «Continuar viendo» y «Ver después» poseen pantallas separadas y no presentan sus vídeos en el inicio.
 
 Estado: implementado en código y con contratos de regresión actualizados. Falta confirmar la última compilación y, posteriormente, validar accesibilidad en la prueba integral de TestFlight. No afecta al calendario ni a la restricción de no probar hasta terminar las nueve fases de iOS.
+
+
+## Continuación de la fase general de Vídeos — 10 de noviembre de 2026
+
+- Incorporada en la pantalla individual de cada canal de YouTube la búsqueda por texto mediante campo de edición, botón de búsqueda y opción «Mostrar todos los vídeos de este canal». Los resultados del canal mantienen la paginación de diez en diez y el reproductor accesible.
+- Detectada una incompatibilidad real del servicio: `youtube-worker/src/youtube-api.js` ignoraba las palabras de búsqueda al utilizar `channelId`. Se ha corregido para enviar `q` a la API cuando se escribe una expresión de al menos dos caracteres, conservando las novedades de canal sin filtro cuando `q` queda vacío.
+- Añadidos tests de contrato en iOS y pruebas unitarias del Worker para búsquedas por canal y validación de consultas.
+- **Dependencia de despliegue:** el workflow de YouTube ejecutado por una PR verifica los tests, pero no despliega el Worker público; ese paso está configurado para eventos distintos de `pull_request`. Antes de probar la búsqueda por canal desde TestFlight, deberá estar desplegada y verificada la versión del servicio que respeta `q`. No interpretar un test verde de una PR como despliegue del backend.
+- Sin cambios en Android y sin publicación de la candidata de iOS. La fase de Vídeos sigue sujeta a los demás requisitos del plan y a la validación final integral.

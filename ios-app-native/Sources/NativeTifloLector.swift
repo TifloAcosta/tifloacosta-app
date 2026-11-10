@@ -594,6 +594,28 @@ final class NativeReadingSpeech: ObservableObject {
     private var previousCharacterCount = 0
     private var utteranceOffsets: [ObjectIdentifier: Int] = [:]
     private var lastSpeechUtterance: ObjectIdentifier?
+    // Solo una frase en la cola del sintetizador en cada momento.
+    private var speechQueue: [(utterance: AVSpeechUtterance, delay: TimeInterval)] = []
+    private var speechQueueIndex = 0
+    private var speechDelayTask: Task<Void, Never>?
+
+    private func speakNextSystemSegment(after delay: TimeInterval = 0) {
+        speechDelayTask?.cancel()
+        speechDelayTask = nil
+        guard !isPaused, speechQueue.indices.contains(speechQueueIndex) else { return }
+        if delay <= 0 {
+            synthesizer.speak(speechQueue[speechQueueIndex].utterance)
+            return
+        }
+        speechDelayTask = Task { @MainActor [weak self] in
+            do { try await Task.sleep(for: .seconds(delay)) }
+            catch { return }
+            guard let self, !Task.isCancelled, !self.isPaused,
+                  self.speechQueue.indices.contains(self.speechQueueIndex) else { return }
+            self.synthesizer.speak(self.speechQueue[self.speechQueueIndex].utterance)
+            self.speechDelayTask = nil
+        }
+    }
 
     init() {
         progressDelegate.onWord = { [weak self] range, utterance in
@@ -622,11 +644,20 @@ final class NativeReadingSpeech: ObservableObject {
         progressDelegate.onFinish = { [weak self] utterance in
             Task { @MainActor [weak self] in
                 guard let self, self.player == nil,
-                      self.lastSpeechUtterance == ObjectIdentifier(utterance) else { return }
-                self.textCharacterOffset = self.baseCharacters + self.spokenText.count
-                self.textPercent = 100
-                self.isPlaying = false
-                self.isPaused = false
+                      self.utteranceOffsets[ObjectIdentifier(utterance)] != nil,
+                      self.speechQueue.indices.contains(self.speechQueueIndex),
+                      ObjectIdentifier(self.speechQueue[self.speechQueueIndex].utterance) == ObjectIdentifier(utterance) else { return }
+                let completedDelay = self.speechQueue[self.speechQueueIndex].delay
+                self.speechQueueIndex += 1
+                if self.lastSpeechUtterance == ObjectIdentifier(utterance) {
+                    self.textCharacterOffset = self.baseCharacters + self.spokenText.count
+                    self.textPercent = 100
+                    self.isPlaying = false
+                    self.isPaused = false
+                    self.speechQueue.removeAll()
+                } else if !self.isPaused {
+                    self.speakNextSystemSegment(after: completedDelay)
+                }
             }
         }
         synthesizer.delegate = progressDelegate
@@ -719,6 +750,8 @@ final class NativeReadingSpeech: ObservableObject {
         try? AVAudioSession.sharedInstance().setActive(true)
         utteranceOffsets.removeAll()
         lastSpeechUtterance = nil
+        speechQueueIndex = 0
+        speechQueue.removeAll()
         let segments = NativeReaderPauseProfile.segments(text)
         var utf16Offset = 0
         for (index, segment) in segments.enumerated() {
@@ -730,15 +763,17 @@ final class NativeReadingSpeech: ObservableObject {
                 max(AVSpeechUtteranceMinimumSpeechRate,
                     AVSpeechUtteranceDefaultSpeechRate * Float(speed)))
             utterance.pitchMultiplier = max(0.5, min(2, pitch))
-            utterance.postUtteranceDelay = index == segments.count - 1 ? 0 : segment.delay
+            // El retardo se programa entre frases, sin saturar la cola de AVSpeechSynthesizer.
+            utterance.postUtteranceDelay = 0
             let identifier = ObjectIdentifier(utterance)
             utteranceOffsets[identifier] = utf16Offset
             lastSpeechUtterance = identifier
             utf16Offset += segment.text.utf16.count
-            synthesizer.speak(utterance)
+            speechQueue.append((utterance: utterance, delay: segment.delay))
         }
         isPlaying = true
         isPaused = false
+        speakNextSystemSegment()
     }
 
     private func geminiChunks(_ text: String) -> [String] {
@@ -917,7 +952,13 @@ final class NativeReadingSpeech: ObservableObject {
         else if isGeneratedSpeech {
             geminiGeneration += 1
             geminiTask?.cancel()
-        } else { synthesizer.pauseSpeaking(at: .word) }
+        } else {
+            // .immediate evita que una voz de terceros siga leyendo hasta la palabra siguiente.
+            // Si estamos entre dos frases, el temporizador se suspende igualmente.
+            if synthesizer.isSpeaking { _ = synthesizer.pauseSpeaking(at: .immediate) }
+            speechDelayTask?.cancel()
+            speechDelayTask = nil
+        }
         sleep(after: 0) // Al pausar no sigue corriendo la cuenta del apagado.
         isPlaying = false
         isPaused = true
@@ -930,7 +971,8 @@ final class NativeReadingSpeech: ObservableObject {
         if isGeneratedSpeech {
             if let player { player.play() } else { playNextGeminiSegment() }
         } else if let player { player.play() }
-        else { synthesizer.continueSpeaking() }
+        else if synthesizer.isPaused { _ = synthesizer.continueSpeaking() }
+        else { speakNextSystemSegment() }
         isPlaying = true
     }
 
@@ -979,6 +1021,10 @@ final class NativeReadingSpeech: ObservableObject {
         onTrackChanged = nil
         onAudioError = nil
         synthesizer.stopSpeaking(at: .immediate)
+        speechDelayTask?.cancel()
+        speechDelayTask = nil
+        speechQueue.removeAll()
+        speechQueueIndex = 0
         utteranceOffsets.removeAll()
         lastSpeechUtterance = nil
         isPlaying = false
@@ -2335,6 +2381,10 @@ struct NativeReadingScreen: View {
                 @unknown default: break
                 }
             }
+            .accessibilityAction(.magicTap) {
+                if speech.isPlaying { pausePlayback() }
+                else if speech.isPaused { play() }
+            }
             .accessibilityAction(named: Text("Abrir enlace actual")) {
                 activateCurrentLink()
             }
@@ -2719,10 +2769,7 @@ struct NativeReadingScreen: View {
         }
         .accessibilityAction(.magicTap) {
             if speech.isPlaying { pausePlayback() }
-            else if speech.isPaused {
-                speech.resume()
-                applySleepTimer()
-            }
+            else if speech.isPaused { play() }
         }
         .accessibilityAction(named: Text("Añadir marca")) { addBookmark() }
         .accessibilityAction(named: Text("Avanzar cinco por ciento")) {

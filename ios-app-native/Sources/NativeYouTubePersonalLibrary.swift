@@ -15,18 +15,31 @@ struct NativeSavedYouTubeVideo: Codable, Identifiable {
     var lastWatchedAt: Date?
 }
 
+struct NativeSavedYouTubeChannel: Codable, Identifiable {
+    let id: String
+    var title: String
+    var description: String
+}
+
 @MainActor
 final class NativeYouTubePersonalLibrary: ObservableObject {
     static let shared = NativeYouTubePersonalLibrary()
     @Published private(set) var videos: [NativeSavedYouTubeVideo] = []
+    @Published private(set) var followedChannels: [NativeSavedYouTubeChannel] = []
     private let key = "native-youtube-personal-library-v1"
+    private let followedKey = "native-youtube-followed-channels-v1"
 
     private init() {
-        guard let data = UserDefaults.standard.data(forKey: key),
-              let stored = try? JSONDecoder().decode([NativeSavedYouTubeVideo].self, from: data) else {
-            return
+        if let data = UserDefaults.standard.data(forKey: key),
+           let stored = try? JSONDecoder().decode([NativeSavedYouTubeVideo].self, from: data) {
+            videos = stored.filter { NativeYouTubeVideo.validID($0.id) }
         }
-        videos = stored.filter { NativeYouTubeVideo.validID($0.id) }
+        if let data = UserDefaults.standard.data(forKey: followedKey),
+           let stored = try? JSONDecoder().decode([NativeSavedYouTubeChannel].self, from: data) {
+            followedChannels = stored.filter {
+                $0.id.hasPrefix("UC") && $0.id.count == 24
+            }.sorted { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
+        }
     }
 
     var watchLater: [NativeSavedYouTubeVideo] {
@@ -92,6 +105,25 @@ final class NativeYouTubePersonalLibrary: ObservableObject {
             videos.append(entry)
         }
         save()
+    }
+
+    func isFollowing(_ id: String) -> Bool {
+        followedChannels.contains(where: { $0.id == id })
+    }
+
+    func toggleFollowed(_ channel: NativeYouTubeChannel) {
+        guard channel.id.hasPrefix("UC"), channel.id.count == 24 else { return }
+        if isFollowing(channel.id) {
+            followedChannels.removeAll { $0.id == channel.id }
+        } else {
+            followedChannels.append(NativeSavedYouTubeChannel(
+                id: channel.id, title: channel.title, description: channel.description
+            ))
+            followedChannels.sort { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
+        }
+        if let data = try? JSONEncoder().encode(followedChannels) {
+            UserDefaults.standard.set(data, forKey: followedKey)
+        }
     }
 
     func clearProgress(_ id: String) {

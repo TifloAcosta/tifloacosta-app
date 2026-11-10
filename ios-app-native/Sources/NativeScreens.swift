@@ -75,6 +75,23 @@ struct NativeHomeScreen: View {
     @State private var searchText = ""
     @State private var submittedSearch = ""
     @State private var showingSearch = false
+    @State private var navigationPath = NavigationPath()
+
+    private func openRequestedShortcut() {
+        let defaults = UserDefaults.standard
+        guard let route = defaults.string(forKey: NativeShortcutRoute.key) else { return }
+        let destination: NativeDestination?
+        switch route {
+        case "actualidad": destination = .actualidad
+        case "tifloLector": destination = .tifloLector
+        case "videos": destination = .videos
+        default: destination = nil
+        }
+        defaults.removeObject(forKey: NativeShortcutRoute.key)
+        guard let destination else { return }
+        navigationPath = NavigationPath()
+        navigationPath.append(destination)
+    }
 
     private func search() {
         let term = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -234,7 +251,7 @@ struct NativeHomeScreen: View {
     }
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationPath) {
             ScrollView {
                 VStack(alignment: .leading, spacing: TifloVisual.sectionSpacing) {
                     brandHeader
@@ -263,10 +280,17 @@ struct NativeHomeScreen: View {
             .navigationDestination(item: $inbox.readyToRead) { document in
                 NativeReadingScreen(document: document, speech: sharedReadingSpeech)
             }
-            .onAppear { inbox.importPendingReaderContent(into: library) }
+            .onAppear {
+                inbox.importPendingReaderContent(into: library)
+                openRequestedShortcut()
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .nativeShortcutRouteRequested)) { _ in
+                openRequestedShortcut()
+            }
             .onChange(of: scenePhase) { _, phase in
                 if phase == .active {
                     inbox.importPendingReaderContent(into: library)
+                    openRequestedShortcut()
                 }
             }
             .navigationDestination(isPresented: $showingSearch) {

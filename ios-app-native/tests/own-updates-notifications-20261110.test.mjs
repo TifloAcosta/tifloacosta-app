@@ -13,7 +13,9 @@ test('Solo novedades propias, sin RSS ni noticias externas', () => {
   assert.match(notifier, /videos\.filter \{ \$0\.videoURL != nil \}/);
   assert.doesNotMatch(notifier.replace(/^\s*\/\/\/.*$/gm, ''), /catalog\.news|\.news\.filter|rss|podcast/i);
   assert.match(notifier, /let existing = defaults\.stringArray\(forKey: seenKey\)/);
-  assert.match(notifier, /guard existing != nil, enabled, !additions\.isEmpty/);
+  assert.match(notifier, /if existing == nil \{/);
+  assert.match(notifier, /guard !additions\.isEmpty else \{ return \}/);
+  assert.match(notifier, /if !enabled \{/);
 });
 
 test('Solo solicita permiso tras acción expresa y ofrece desactivación', () => {
@@ -36,4 +38,14 @@ test('Centro de notificaciones recibe avisos discretos sin banner intrusivo en p
   assert.match(notifier, /NativeLocalNotificationDelegate: NSObject, UNUserNotificationCenterDelegate/);
   assert.match(notifier, /completionHandler\(\[\.list\]\)/);
   assert.match(source('TifloAcostaNativeApp.swift'), /UNUserNotificationCenter\.current\(\)\.delegate = NativeLocalNotificationDelegate\.shared/);
+});
+
+test('No marca como recibida una novedad cuando la entrega falla', () => {
+  const requestStart = notifier.indexOf('try await UNUserNotificationCenter.current().add(request)');
+  const markSeen = notifier.indexOf('seen.formUnion(currentIDs)', requestStart);
+  const saveSeen = notifier.indexOf('defaults.set(Array(seen).sorted(), forKey: seenKey)', requestStart);
+  const catchError = notifier.indexOf('} catch {', requestStart);
+  assert.ok(requestStart > -1 && markSeen > requestStart && saveSeen > markSeen && catchError > saveSeen);
+  assert.match(notifier, /content\.sound = nil/);
+  assert.match(notifier, /Do not mark unsent items as seen/);
 });

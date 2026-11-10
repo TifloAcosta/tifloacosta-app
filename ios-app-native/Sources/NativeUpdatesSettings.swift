@@ -228,6 +228,7 @@ struct NativeSettingsScreen: View {
     @AppStorage("native-ios-language") private var languageIndex = 0
     @Environment(\.openURL) private var openURL
     @State private var showVisualSettings = false
+    @ObservedObject private var ownUpdatesNotifications = NativeOwnUpdatesNotifications.shared
 
     private var version: String {
         let dictionary = Bundle.main.infoDictionary
@@ -285,6 +286,30 @@ struct NativeSettingsScreen: View {
                     }
                 }
                 .accessibilityHint("Abre este menú para modificar la presentación de TifloAcosta.")
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+
+            Section("Notificaciones de novedades propias") {
+                Text("Los avisos automáticos solo pueden referirse a nuevos documentos de TifloAcosta y vídeos de su canal. No se generan avisos desde Actualidad ni desde fuentes externas.")
+                    .font(.footnote)
+                    .foregroundStyle(TifloVisual.secondaryText)
+                Text("Estos avisos locales se comprueban cuando la aplicación actualiza su catálogo; no son notificaciones push mientras está cerrada.")
+                    .font(.footnote)
+                    .foregroundStyle(TifloVisual.secondaryText)
+                if ownUpdatesNotifications.enabled {
+                    Button("Desactivar avisos de novedades") {
+                        ownUpdatesNotifications.disable()
+                    }
+                } else {
+                    Button("Activar avisos de novedades") {
+                        Task { await ownUpdatesNotifications.enable() }
+                    }
+                }
+                if !ownUpdatesNotifications.status.isEmpty {
+                    Text(ownUpdatesNotifications.status)
+                        .font(.footnote)
+                        .accessibilityAddTraits(.updatesFrequently)
+                }
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 

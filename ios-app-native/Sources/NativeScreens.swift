@@ -1202,7 +1202,9 @@ private struct NativeYouTubeChannelVideosScreen: View {
                     .autocorrectionDisabled()
                     .submitLabel(.search)
                     .onSubmit {
-                        Task { await youtubeSearch.search(channelQuery, channelID: channel.id) }
+                        let term = channelQuery.trimmingCharacters(in: .whitespacesAndNewlines)
+                        guard term.count >= 2, !youtubeSearch.isLoading else { return }
+                        Task { await youtubeSearch.search(term, channelID: channel.id) }
                     }
                 Button("Buscar en este canal") {
                     Task { await youtubeSearch.search(channelQuery, channelID: channel.id) }

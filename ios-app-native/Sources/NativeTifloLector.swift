@@ -1010,6 +1010,7 @@ struct NativeReaderLibraryScreen: View {
     @State private var selectedDocumentIDs: Set<UUID> = []
     @State private var showBulkMove = false
     @State private var selectionFeedback: String?
+    @State private var shortcutMessage: String?
 
     @AppStorage("native-reading-folder-filter") private var selectedFolder = ""
     @AppStorage("native-reading-filter") private var filterIndex = 0
@@ -1099,6 +1100,26 @@ struct NativeReaderLibraryScreen: View {
         selectionFeedback = message
     }
 
+    private func resumeRequestedBook() {
+        let defaults = UserDefaults.standard
+        let key = "native-ios-resume-last-book-shortcut-v1"
+        guard defaults.bool(forKey: key) else { return }
+        defaults.removeObject(forKey: key)
+        guard let document = library.documents.max(by: {
+            ($0.lastOpenedAt ?? .distantPast) < ($1.lastOpenedAt ?? .distantPast)
+        }) else {
+            shortcutMessage = "No hay libros en TifloLector para continuar."
+            UIAccessibility.post(notification: .announcement, argument: shortcutMessage)
+            return
+        }
+        library.markOpened(document)
+        play(document)
+        if importError == nil {
+            shortcutMessage = "Continuando \(document.title) desde la posición guardada."
+            UIAccessibility.post(notification: .announcement, argument: shortcutMessage)
+        }
+    }
+
     private func play(_ document: NativeReadingDocument) {
         let latest = library.latest(document)
         let chosenSpeed = latest.readerPreferences?.speedIndex ?? speedIndex
@@ -1137,6 +1158,11 @@ struct NativeReaderLibraryScreen: View {
 
     var body: some View {
         List {
+            if let shortcutMessage {
+                Section {
+                    Text(shortcutMessage).font(.footnote)
+                }
+            }
             Section {
                 Button("Importar", systemImage: "square.and.arrow.down") {
                     importSourcesPresented = true
@@ -1255,6 +1281,7 @@ struct NativeReaderLibraryScreen: View {
         }
         .tifloScreenSurface()
         .navigationTitle("TifloLector")
+        .onAppear { resumeRequestedBook() }
         .onDisappear { speech.stop() }
         .confirmationDialog("Importar", isPresented: $importSourcesPresented,
                             titleVisibility: .visible) {

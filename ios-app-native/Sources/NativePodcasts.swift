@@ -102,6 +102,7 @@ final class NativePodcastPlayer: ObservableObject {
     private var endObserver: NSObjectProtocol?
     private var nextEpisodes: [NativePodcastEpisode] = []
     var onEpisodeFinished: ((NativePodcastEpisode) -> Void)?
+    var resolveAudioURL: ((NativePodcastEpisode) -> URL?)?
 
     func select(_ episode: NativePodcastEpisode,
                 at seconds: Double = 0,
@@ -109,7 +110,7 @@ final class NativePodcastPlayer: ObservableObject {
         stop()
         self.episode = episode
         nextEpisodes = episodes
-        let item = AVPlayerItem(url: episode.audioURL)
+        let item = AVPlayerItem(url: resolveAudioURL?(episode) ?? episode.audioURL)
         player = AVPlayer(playerItem: item)
         if seconds.isFinite && seconds > 0 {
             player?.seek(to: CMTime(seconds: seconds, preferredTimescale: 600))
@@ -251,14 +252,9 @@ struct NativePodcastScreen: View {
         } else {
             upcoming = []
         }
-        let local = downloads.localURL(for: episode.id)
-        let playable = local.map {
-            NativePodcastEpisode(id: episode.id, title: episode.title,
-                audioURL: $0, publicationDate: episode.publicationDate)
-        } ?? episode
-        // The next episode is resolved to its local download when it becomes active
-        // only if it was selected directly; online queue retains the source URLs.
-        player.select(playable, at: library.progress(for: episode), followedBy: upcoming)
+        // Every item in the queue independently prefers its local download
+        // while the original podcast URL remains the stable progress identifier.
+        player.select(episode, at: library.progress(for: episode), followedBy: upcoming)
         lastProgressSaved = 0
     }
 
@@ -329,8 +325,10 @@ struct NativePodcastScreen: View {
                 ForEach(downloads.entries) { item in
                     if let file = downloads.localURL(for: item.id) {
                         Button("Escuchar sin conexión: \(item.title)") {
-                            playEpisode(NativePodcastEpisode(id: item.id, title: item.title,
-                                audioURL: file, publicationDate: ""))
+                            if let original = URL(string: item.sourceURL) {
+                                playEpisode(NativePodcastEpisode(id: item.id, title: item.title,
+                                    audioURL: original, publicationDate: ""))
+                            }
                         }
                         Button("Eliminar descarga: \(item.title)") {
                             downloads.delete(item)
@@ -447,6 +445,9 @@ struct NativePodcastScreen: View {
         .tifloScreenSurface()
         .navigationTitle("Podcasts")
         .onAppear {
+            player.resolveAudioURL = { episode in
+                downloads.localURL(for: episode.id)
+            }
             player.onEpisodeFinished = { completed in
                 library.clearProgress(for: completed)
                 lastProgressSaved = 0

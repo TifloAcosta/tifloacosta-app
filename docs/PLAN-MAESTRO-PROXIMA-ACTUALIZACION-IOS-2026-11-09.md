@@ -292,7 +292,7 @@ Se ratifica que las fases específicas de TifloLector desarrolladas en la PR #30
 
 - **Fases generales 1–4:** existen avances técnicos importantes de catálogo, lectura, biblioteca, motores y exportación. No se considerarán validadas hasta contrastar íntegramente los requisitos A/B/C y la prueba final.
 - **Fase general 5:** búsqueda contextual, ayudas de lectura, estadísticas y continuidad de actividad tienen requisitos aún pendientes de auditoría/implementación.
-- **Fase general 6, Vídeos:** implementados técnicamente el guardado «Ver después» sin Google, su acción en el rotor de títulos y «Continuar viendo» con posición local en el reproductor oficial. Progreso guardado sin contraseñas ni acceso a la cuenta. Pendientes el seguimiento local de canales, agregación cronológica de novedades, búsqueda avanzada por canal y demás requisitos de la fase.
+- **Fase general 6, Vídeos:** implementados técnicamente el guardado «Ver después» sin Google, su acción en el rotor de títulos y «Continuar viendo» con posición local en el reproductor oficial. Progreso guardado sin contraseñas ni acceso a la cuenta. También incorporados técnicamente el seguimiento local de canales, las novedades cronológicas de esos canales y la paginación de diez en diez. Pendientes la verificación integral, la búsqueda avanzada dentro de canales y los demás requisitos de la fase.
 - **Fases generales 7–9:** pendientes de auditoría y de completar todo lo que falte en Pódcast, Actualidad, Recursos, idiomas, traducción bajo demanda, Siri/Atajos, notificaciones, preferencias de verbosidad, diagnósticos y envío accesible de sugerencias.
 - **Validación:** las pruebas automatizadas comprueban contratos; la validación de VoiceOver con la candidata final no se adelanta por subsistema.
 

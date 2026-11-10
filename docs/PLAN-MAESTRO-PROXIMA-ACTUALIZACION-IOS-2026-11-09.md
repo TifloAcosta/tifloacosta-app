@@ -297,3 +297,17 @@ Se ratifica que las fases específicas de TifloLector desarrolladas en la PR #30
 - **Validación:** las pruebas automatizadas comprueban contratos; la validación de VoiceOver con la candidata final no se adelanta por subsistema.
 
 Este registro no elimina ni simplifica ninguno de los acuerdos anteriores.
+
+
+## Diseño de navegación de Vídeos — 10 de noviembre de 2026
+
+El usuario acuerda simplificar la pantalla principal de Vídeos para que funcione como menú de acceso a funciones, sin desplegar allí los listados largos. Implementado técnicamente en la rama de integración:
+
+- Pantalla «Vídeos»: accesos independientes a «Buscar en YouTube», «Vídeos del canal TifloAcosta», «Mis suscripciones de YouTube», «Canales seguidos sin cuenta Google», «Novedades de mis canales», «Continuar viendo» y «Ver después».
+- «Vídeos del canal TifloAcosta» conserva la ordenación y la paginación de diez títulos al abrirlo. No recarga el inicio con los vídeos.
+- «Buscar en YouTube» contiene el campo, filtros, resultados, navegación por canales, acciones de VoiceOver y reproductor existentes.
+- «Mis suscripciones de YouTube» conserva los canales de la cuenta cuando hay sesión iniciada y añade el acceso a las novedades de esas suscripciones.
+- Se preserva la diferencia entre canales seguidos localmente (sin cuenta) y suscripciones reales de la cuenta Google. Ambas listas pueden mostrar novedades sin mezclarse.
+- «Continuar viendo» y «Ver después» poseen pantallas separadas y no presentan sus vídeos en el inicio.
+
+Estado: implementado en código y con contratos de regresión actualizados. Falta confirmar la última compilación y, posteriormente, validar accesibilidad en la prueba integral de TestFlight. No afecta al calendario ni a la restricción de no probar hasta terminar las nueve fases de iOS.

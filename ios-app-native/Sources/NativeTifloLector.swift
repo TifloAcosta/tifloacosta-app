@@ -2198,7 +2198,7 @@ struct NativeReadingScreen: View {
     // Las posiciones y el documento original permanecen intactos.
     private func spokenBookmarkExcerpt(_ source: String) -> String {
         source.replacingOccurrences(
-            of: #"^#{1,6}[ \\t]+"#,
+            of: #"^#{1,6}\\s+"#,
             with: "",
             options: .regularExpression
         )
@@ -2231,7 +2231,7 @@ struct NativeReadingScreen: View {
         while start < characters.count && characters[start].isWhitespace { start += 1 }
         let excerpt = String(characters[start..<min(characters.count, start + 140)])
             .trimmingCharacters(in: .whitespacesAndNewlines)
-        return excerpt.isEmpty ? "\(percent) por ciento" : "\(excerpt), \(percent) por ciento"
+        return excerpt.isEmpty ? "\(percent) por ciento" : "\(spokenBookmarkExcerpt(excerpt)), \(percent) por ciento"
     }
 
     private func skipReading(_ direction: Int) {

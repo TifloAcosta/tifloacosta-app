@@ -378,3 +378,11 @@ Estado: implementado en código y con contratos de regresión actualizados. Falt
 - El App Intent de Siri «Continuar el último libro en TifloLector» pide abrir la aplicación y remite a la biblioteca nativa. La pantalla recupera la obra con fecha `lastOpenedAt` más reciente y ejecuta el método de reproducción existente, que utiliza la posición guardada (texto o pistas DAISY/audio) y las preferencias del documento. La petición se elimina antes de ejecutarse para evitar reanudaciones dobles al cambiar de escena. Si la biblioteca está vacía, se muestra y anuncia un mensaje accesible.
 - En Configuración se añade «Información al recorrer la biblioteca», con las opciones «Breve: título y porcentaje leído» (predeterminada) y «Completa: título, porcentaje, formato y carpeta». El título y el porcentaje permanecen en una sola unidad de VoiceOver, independientemente del modo.
 - Se amplían pruebas de contrato de Siri y lectura para comprobar la reanudación desde el último libro y la preferencia de verbosidad. Las nuevas rutas aún precisan validación de voz con VoiceOver en la prueba conjunta final.
+
+
+## Inicio de fase general 9 — informe accesible de incidencias (10 de noviembre de 2026)
+
+- Incorporada una pantalla nativa «Comunicar incidencia de accesibilidad» desde Configuración, con categoría, explicación del problema y pasos opcionales para reproducirlo. Campos editables con etiquetas específicas para VoiceOver.
+- El usuario decide si adjunta diagnósticos básicos (versión de aplicación y compilación, versión iOS, tipo genérico de dispositivo y estado de VoiceOver). No se leen datos de cuentas, bibliotecas, rutas, documentos ni credenciales.
+- El informe se puede copiar al portapapeles o compartir mediante el menú estándar de iOS. No hay subida a servidor ni envío automático; todo requiere acción del usuario. Se conserva el acceso a las vías de contacto habituales.
+- Añadidas pruebas de privacidad y de contrato, además de localización básica al inglés de la nueva pantalla. Pendiente revisión de accesibilidad real y pruebas de flujo en TestFlight al cerrar todas las fases.

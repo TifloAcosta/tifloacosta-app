@@ -2537,6 +2537,14 @@ struct NativeReadingScreen: View {
                 }
                 .padding()
             }
+            // Ensayo de acceso rápido a marcas: mantener pulsada la zona
+            // de lectura dos segundos. El gesto es simultáneo para no
+            // sustituir el desplazamiento ni los controles accesibles.
+            // VoiceOver puede interceptarlo: validar en dispositivo real.
+            .simultaneousGesture(
+                LongPressGesture(minimumDuration: 2.0)
+                    .onEnded { _ in addBookmark() }
+            )
             .onChange(of: focusedFragment) { _, index in
                 guard let index, textLayout.fragmentStarts.indices.contains(index) else { return }
                 if programmaticFocusRequest {

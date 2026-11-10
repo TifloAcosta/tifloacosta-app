@@ -45,3 +45,9 @@ test('Diagnóstico opcional incluye estado accesible y sincronización sin texto
   assert.match(report, /if includeDiagnostics/);
   assert.match(report, /catalogSummary: catalogSummary/);
 });
+
+test('Los datos de diagnóstico se comparten solo si la persona los activa', () => {
+  assert.match(report, /@State private var includeDiagnostics = false/);
+  assert.match(report, /Toggle\("Incluir diagnóstico básico", isOn: \$includeDiagnostics\)/);
+  assert.match(report, /if includeDiagnostics/);
+});

@@ -327,6 +327,16 @@ struct NativeSettingsScreen: View {
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
+            Section("Ayuda y diagnóstico") {
+                NavigationLink("Comunicar incidencia de accesibilidad") {
+                    NativeAccessibilityReportScreen()
+                }
+                Text("Puedes describir el problema y compartir un informe opcional con información técnica básica. El envío siempre depende de tu confirmación.")
+                    .font(.footnote)
+                    .foregroundStyle(TifloVisual.secondaryText)
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+
             Section("Aplicación") {
                 LabeledContent("Versión", value: version)
                 Text("TifloAcosta para iOS utiliza pantallas nativas.")

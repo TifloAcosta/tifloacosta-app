@@ -31,3 +31,13 @@ test('El rotor permite guardar en Ver después sin abrir el vídeo', () => {
   assert.match(screens, /\.accessibilityAction\(named: Text\(personalVideos\.isWatchLater/);
   assert.match(screens, /NativeYouTubeTitleActions/);
 });
+
+test('Canales seguidos locales accesibles sin exigir Google', () => {
+  assert.match(library, /struct NativeSavedYouTubeChannel: Codable, Identifiable/);
+  assert.match(library, /native-youtube-followed-channels-v1/);
+  assert.match(library, /func toggleFollowed\(/);
+  assert.match(library, /func isFollowing\(/);
+  assert.match(screens, /Section\("Canales seguidos sin cuenta Google"\)/);
+  assert.match(screens, /Seguir canal sin cuenta Google/);
+  assert.match(screens, /personalVideos\.toggleFollowed\(channel\)/);
+});

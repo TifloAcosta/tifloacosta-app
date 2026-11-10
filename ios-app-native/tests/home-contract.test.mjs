@@ -30,12 +30,12 @@ const resources = screens.slice(resourcesStart, resourcesEnd);
 assert.match(resources, /@State private var chosenCategory: String\?/);
 assert.match(resources, /"Selecciona un apartado"\] \+ categories/);
 assert.match(resources, /selectedIndex: categorySelection/);
-assert.match(resources, /if let chosenCategory, categories\.contains\(chosenCategory\) \{\s*Section\(chosenCategory\)/);
-assert.match(resources, /guard let chosenCategory, categories\.contains\(chosenCategory\) else \{\s*return \[\]/);
+assert.match(resources, /Section\(chosenCategory/);
+assert.match(resources, /guard !terms/);
 assert.doesNotMatch(resources, /"Todas"\] \+ categories/);
 assert.match(screens, /\.accessibilityAdjustableAction \{ direction in/);
 assert.match(resources, /\.accessibilityAction\(named: Text\("Compartir"\)\)/);
-console.log('OK: Resources stays empty until user selects a category with VoiceOver');
+console.log('OK: Resources supports category choice and keyword search');
 
 assert.match(screens, /private struct NativeBrandMark: View/);
 assert.match(screens, /Canvas \{ context, size in/);

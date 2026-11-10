@@ -432,13 +432,15 @@ struct NativeNewsArticleScreen: View {
                         "Noticia retirada de Leer después.")
                 }
                 if !paragraphs.isEmpty {
-                    NavigationLink("Traducir noticia al idioma de la aplicación") {
-                        NativeOnDemandTranslationScreen(
-                            title: item.title,
-                            originalText: paragraphs.joined(separator: "\n\n"),
-                            sourceLanguage: item.lang,
-                            targetLanguage: languageIndex == 1 ? "en" : "es"
-                        )
+                    if #available(iOS 18.0, *) {
+                        NavigationLink("Traducir noticia al idioma de la aplicación") {
+                            NativeOnDemandTranslationScreen(
+                                title: item.title,
+                                originalText: paragraphs.joined(separator: "\n\n"),
+                                sourceLanguage: item.lang,
+                                targetLanguage: languageIndex == 1 ? "en" : "es"
+                            )
+                        }
                     }
                 }
                 Button("Guardar en TifloLector") { save() }

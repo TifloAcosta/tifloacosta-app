@@ -36,6 +36,17 @@ struct NativeOpenReaderIntent: AppIntent {
     }
 }
 
+struct NativeResumeReaderIntent: AppIntent {
+    static var title: LocalizedStringResource = "Continuar el último libro en TifloLector"
+    static var description = IntentDescription("Reanuda el último libro abierto, desde la posición guardada.")
+    static var openAppWhenRun: Bool = true
+
+    func perform() async throws -> some IntentResult {
+        NativeShortcutRoute.request("resumeReader")
+        return .result()
+    }
+}
+
 struct NativeOpenVideosIntent: AppIntent {
     static var title: LocalizedStringResource = "Abrir vídeos de TifloAcosta"
     static var description = IntentDescription("Abre los vídeos accesibles de TifloAcosta.")
@@ -60,6 +71,12 @@ struct NativeTifloAppShortcuts: AppShortcutsProvider {
             phrases: ["Abre TifloLector en \(.applicationName)"],
             shortTitle: "Abrir TifloLector",
             systemImageName: "books.vertical"
+        )
+        AppShortcut(
+            intent: NativeResumeReaderIntent(),
+            phrases: ["Continúa el libro en \(.applicationName)"],
+            shortTitle: "Continuar libro",
+            systemImageName: "book"
         )
         AppShortcut(
             intent: NativeOpenVideosIntent(),

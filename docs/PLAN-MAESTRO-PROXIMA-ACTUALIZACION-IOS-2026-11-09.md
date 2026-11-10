@@ -369,3 +369,5 @@ Estado: implementado en código y con contratos de regresión actualizados. Falt
 - El primer refresco válido genera una referencia sin avisar de noticias antiguas. Los ID ya vistos se guardan para evitar duplicados, y si hay varias novedades se entrega un único resumen.
 - Los avisos solo se comprueban al refrescar el catálogo mientras la app se ejecuta; **no son push remotas ni garantizan recibir novedades con la app cerrada**. Esta limitación se explica explícitamente en Configuración. No confundir con el canal de avisos manuales que sigue pendiente de diseño y backend.
 - Añadidas pruebas de contrato de ámbito, consentimiento, ausencia de alertas antiguas e integración tras refresco del catálogo.
+
+- Se añadió además un delegado nativo `UNUserNotificationCenterDelegate` para que, estando la aplicación en primer plano, los avisos locales queden en el Centro de notificaciones sin generar un banner invasivo mientras VoiceOver lee. No se presenta como canal de notificaciones push.

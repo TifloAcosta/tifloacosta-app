@@ -2194,6 +2194,16 @@ struct NativeReadingScreen: View {
         }
     }
 
+    // Quitar de las etiquetas de marcas los prefijos Markdown de EPUB.
+    // Las posiciones y el documento original permanecen intactos.
+    private func spokenBookmarkExcerpt(_ source: String) -> String {
+        source.replacingOccurrences(
+            of: #"^#{1,6}[ \\t]+"#,
+            with: "",
+            options: .regularExpression
+        )
+    }
+
     private func bookmarkDescription(atOffset offset: Int) -> String {
         let text = latest.body
         guard !text.isEmpty else { return "Comienzo del documento" }
@@ -2206,7 +2216,7 @@ struct NativeReadingScreen: View {
         while start < characters.count && characters[start].isWhitespace { start += 1 }
         let excerpt = String(characters[start..<min(characters.count, start + 140)])
             .trimmingCharacters(in: .whitespacesAndNewlines)
-        return excerpt.isEmpty ? "Posición \(index)" : excerpt
+        return excerpt.isEmpty ? "Posición \(index)" : spokenBookmarkExcerpt(excerpt)
     }
 
     private func bookmarkDescription(at percent: Int) -> String {
@@ -2249,6 +2259,9 @@ struct NativeReadingScreen: View {
             library.addAudioBookmark(document, track: trackIndex, percent: currentPercent,
                                      seconds: speech.hasAudio ? speech.audioElapsed : nil)
             actionMessage = "Marca guardada en la pista \(trackIndex + 1), \(currentPercent) por ciento."
+        }
+        if let actionMessage {
+            UIAccessibility.post(notification: .announcement, argument: actionMessage)
         }
     }
 

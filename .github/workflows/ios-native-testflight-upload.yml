@@ -3,13 +3,6 @@ name: TifloAcosta iOS nativa - enviar a TestFlight
 # después de integrar y revisar las fases de desarrollo.
 on:
   workflow_dispatch:
-  # Disparar una sola candidata desde la rama integrada al modificar este flujo.
-  # Los cambios de código posteriores NO disparan más subidas automáticamente.
-  push:
-    branches:
-      - integration/ios-phases1-6-consolidated-20261110
-    paths:
-      - '.github/workflows/ios-native-testflight-upload.yml'
 permissions:
   contents: read
   actions: read

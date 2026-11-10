@@ -100,11 +100,33 @@ final class NativePodcastPlayer: ObservableObject {
 
     private var player: AVPlayer?
     private var endObserver: NSObjectProtocol?
+    private var nextEpisodes: [NativePodcastEpisode] = []
+    var onEpisodeFinished: ((NativePodcastEpisode) -> Void)?
 
-    func select(_ episode: NativePodcastEpisode) {
+    func select(_ episode: NativePodcastEpisode,
+                at seconds: Double = 0,
+                followedBy episodes: [NativePodcastEpisode] = []) {
         stop()
         self.episode = episode
-        player = AVPlayer(url: episode.audioURL)
+        nextEpisodes = episodes
+        let item = AVPlayerItem(url: episode.audioURL)
+        player = AVPlayer(playerItem: item)
+        if seconds.isFinite && seconds > 0 {
+            player?.seek(to: CMTime(seconds: seconds, preferredTimescale: 600))
+        }
+        endObserver = NotificationCenter.default.addObserver(
+            forName: .AVPlayerItemDidPlayToEndTime, object: item, queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                guard let self, self.episode?.id == episode.id else { return }
+                self.onEpisodeFinished?(episode)
+                if let next = self.nextEpisodes.first {
+                    self.select(next, followedBy: Array(self.nextEpisodes.dropFirst()))
+                } else {
+                    self.stop()
+                }
+            }
+        }
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
         try? AVAudioSession.sharedInstance().setActive(true)
         player?.play()
@@ -138,6 +160,11 @@ final class NativePodcastPlayer: ObservableObject {
     }
 
     func stop() {
+        if let endObserver {
+            NotificationCenter.default.removeObserver(endObserver)
+            self.endObserver = nil
+        }
+        nextEpisodes = []
         player?.pause()
         player = nil
         episode = nil

@@ -16,7 +16,8 @@ test('Actualidad espera la selección de categoría y admite búsqueda y paginac
   assert.match(news, /@State private var categoryIndex = 0/);
   assert.match(news, /"Selecciona una categoría", "Todas las categorías"/);
   assert.match(news, /NativeAdjustableChoice\(\s*title: "Categoría"/);
-  assert.match(news, /guard categoryIndex > 0 \|\| !terms\.isEmpty else \{ return \[\] \}/);
+  assert.match(news, /guard categoryIndex > 0/);
+  assert.match(news, /sourceIndex > 0 else/);
   assert.match(news, /\.searchable\(text: \$query, prompt: "Buscar noticias"\)/);
   assert.match(news, /matchingNews\.prefix\(visibleCount\)/);
   assert.match(news, /Button\("Mostrar diez más"\)/);

@@ -339,3 +339,14 @@ Estado: implementado en código y con contratos de regresión actualizados. Falt
 - La pantalla de Pódcast incorpora «Episodios descargados», con escucha local y eliminación; los listados recientes y seguidos ofrecen la acción «Descargar».
 - La cola de reproducción continua y las acciones «Continuar escuchando» utilizan el archivo local si existe, pero conservan el identificador y URL original para mantener el progreso entre sesiones y entre reproducción en línea y sin conexión.
 - Añadidos contratos automatizados de descargas y continuidad. **Pendiente** la confirmación de compilación y la prueba integral real en iPhone, así como demás requisitos de Actualidad y Recursos.
+
+
+## Continuación fase general 7 — Actualidad y Recursos, 10 de noviembre de 2026
+
+- Se ha añadido un almacén local compartido `NativeReadingActivity` para la cola «Leer después» y el historial de noticias y recursos abiertos. Identificación estable por tipo, ID e idioma, sin mezclar las colecciones permanentes de Favoritos ni la biblioteca de TifloLector.
+- Las pantallas de Actualidad y Recursos incorporan el acceso «Leer después e historial», con reanudación por título, eliminación individual de pendientes y borrado explícito del historial. Se conservan entradas aunque el catálogo se actualice; solo se presentan aquellas que siguen disponibles.
+- Actualidad permite filtrar por medio de origen y por idioma (idioma de aplicación, todos, español o inglés); no se traduce automáticamente el contenido. Se mantienen categoría, búsqueda textual y paginación.
+- Recursos permite buscar por palabras del título o la descripción sin tener que escoger previamente una categoría, además de filtrar por idioma; conserva selección ajustable de categorías, lectura, TifloLector, descargas y Favoritos.
+- Los lectores nativos registran la apertura en el historial y ofrecen un control visible para guardar o quitar el contenido de «Leer después». La actividad comparte el mismo objeto de entorno SwiftUI.
+- Añadidas pruebas de contrato y actualizado el test preexistente del listado de Recursos para su nueva capacidad de búsqueda.
+- **Pendiente:** verificar compilación y regresiones, completar las restantes funciones comprometidas en Actualidad y Recursos y ejecutar posteriormente una única validación integral de VoiceOver en TestFlight.

@@ -71,3 +71,10 @@ test('Pausar TTS corta el motor y reanuda desde el cursor almacenado', () => {
   assert.match(reader, /&& speechQueue\.isEmpty \{/);
   assert.match(reader, /\.accessibilityAction\(\.magicTap\) \{\s*if speech\.isPlaying \{ pausePlayback\(\) \}/);
 });
+
+test('La voz ignora marcadores estructurales de EPUB conservando las posiciones', () => {
+  assert.match(reader, /private static func textForSpeech\(_ source: String\) -> String/);
+  assert.match(reader, /NSRegularExpression\(pattern: #/);
+  assert.match(reader, /String\(repeating: " ", count: match\.range\.length\)/);
+  assert.match(reader, /NativeReaderPauseProfile\.segments\(Self\.textForSpeech\(text\)\)/);
+});

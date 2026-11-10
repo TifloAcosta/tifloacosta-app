@@ -30,7 +30,7 @@ test('Información marcas y apagado están accesibles antes de ajustes secundari
 });
 
 test('Toque mágico solo controla una reproducción existente sin iniciar audio externo', () => {
-  const chrome = source.slice(source.indexOf('private var readerChrome: some View'), source.indexOf('private var readerWithSheets: some View'));
+  const chrome = source.slice(source.indexOf('var body: some View {\n        readerWithSheets'));
   assert.match(chrome, /\.accessibilityAction\(\.magicTap\)/);
   assert.match(chrome, /if speech\.isPlaying/);
   assert.match(chrome, /else if speech\.isPaused/);

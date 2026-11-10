@@ -1903,8 +1903,11 @@ struct NativeReadingScreen: View {
                 try speech.playGemini(remainder, voice: geminiVoice,
                     baseUTF16: utf16Offset, totalUTF16: document.body.utf16.count,
                     baseCharacters: readingOffset,
-                    onError: { message in actionMessage = message })
-                actionMessage = nil
+                    onError: { message in
+                        actionMessage = message
+                        UIAccessibility.post(notification: .announcement, argument: message)
+                    })
+                actionMessage = "Generando el primer fragmento con Gemini. La reproducción comenzará cuando Google devuelva el audio."
             } catch { actionMessage = error.localizedDescription }
         } else if readingEngine == 2 {
             guard NativePhononRuntime.isUsable else {
@@ -2492,13 +2495,6 @@ struct NativeReadingScreen: View {
                 choices: Self.percentages,
                 selectedIndex: positionBinding
             )
-            if tracks.isEmpty {
-                NativeAdjustableChoice(
-                    title: "Motor de lectura",
-                    choices: ["Voces del sistema", "Gemini", "Phonon"],
-                    selectedIndex: $readingEngine
-                )
-            }
             Button("Audio") { showAudioSettings = true }
                 .accessibilityHint("Abre velocidad, voz y pausas por puntuación.")
             Button("Visual") { showVisualSettings = true }

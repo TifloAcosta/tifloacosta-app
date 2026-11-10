@@ -4,7 +4,7 @@ name: TifloAcosta iOS nativa - enviar a TestFlight
 on:
   workflow_dispatch:
   # Envío solicitado por el propietario de TifloAcosta.
-# Corrección de TifloLector: voz del sistema, Pausa, toque mágico y puntuación. 2026-11-10.
+# Enviar beta correctiva TTS: pausa real, reanudación por cursor y toque mágico; prueba de puntuación satisfactoria. 2026-11-10.
   # Únicamente un cambio de este archivo en esta rama dispara la beta.
   push:
     branches:

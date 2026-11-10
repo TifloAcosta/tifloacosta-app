@@ -2,6 +2,18 @@ import Foundation
 import Combine
 import UserNotifications
 
+/// Quiet delivery in Notification Center while the app is foregrounded.
+/// VoiceOver is not interrupted by a banner while the user is reading.
+final class NativeLocalNotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
+    static let shared = NativeLocalNotificationDelegate()
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.list])
+    }
+}
+
 /// Opt-in local notifications for *own* TifloAcosta documents and channel
 /// videos only. External news, podcast RSS and third-party feeds are excluded.
 @MainActor

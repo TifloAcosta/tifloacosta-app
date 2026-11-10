@@ -440,6 +440,8 @@ struct NativeReaderSettingsScreen: View {
     var body: some View {
         List {
             NavigationLink("Audio y voces") { NativeReaderAudioSettingsScreen() }
+            NavigationLink("Motores externos") { NativeReaderExternalVoiceSettingsScreen() }
+                .accessibilityHint("Configura las voces, la clave API de Gemini y Phonon.")
             NavigationLink("Modo de lectura") {
                 List {
                     Section("Al abrir un documento") {

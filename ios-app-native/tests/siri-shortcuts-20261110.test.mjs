@@ -48,7 +48,8 @@ test('VoiceOver mantiene un título breve por defecto y detalle opcional en una 
   const reader = src('NativeTifloLector.swift');
   const settings = src('NativeUpdatesSettings.swift');
   assert.match(reader, /@AppStorage\("native-voiceover-library-detail-index"\) private var voiceOverDetailIndex = 0/);
-  assert.match(reader, /if voiceOverDetailIndex == 0 \{ return shortLabel \}/);\n  assert.match(reader, /if voiceOverDetailIndex == 1 \{ return formatLabel \}/);
+  assert.match(reader, /if voiceOverDetailIndex == 0 \{ return shortLabel \}/);
+  assert.match(reader, /if voiceOverDetailIndex == 1 \{ return formatLabel \}/);
   assert.match(reader, /doc\.formatLabel/);
   assert.match(reader, /doc\.folderName/);
   assert.match(settings, /title: "Información al recorrer la biblioteca"/);

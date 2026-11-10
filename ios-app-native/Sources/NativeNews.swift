@@ -344,6 +344,7 @@ struct NativeNewsArticleScreen: View {
 
     @EnvironmentObject private var library: NativeReaderLibrary
     @EnvironmentObject private var readingActivity: NativeReadingActivity
+    @AppStorage("native-ios-language") private var languageIndex = 0
     @Environment(\.openURL) private var openURL
     @State private var status: String?
 
@@ -429,6 +430,16 @@ struct NativeNewsArticleScreen: View {
                     let saved = readingActivity.toggleReadLater(.news, item: item)
                     announce(saved ? "Noticia guardada para leer después." :
                         "Noticia retirada de Leer después.")
+                }
+                if !paragraphs.isEmpty {
+                    NavigationLink("Traducir noticia al idioma de la aplicación") {
+                        NativeOnDemandTranslationScreen(
+                            title: item.title,
+                            originalText: paragraphs.joined(separator: "\n\n"),
+                            sourceLanguage: item.lang,
+                            targetLanguage: languageIndex == 1 ? "en" : "es"
+                        )
+                    }
                 }
                 Button("Guardar en TifloLector") { save() }
                 Button("Compartir") { share() }

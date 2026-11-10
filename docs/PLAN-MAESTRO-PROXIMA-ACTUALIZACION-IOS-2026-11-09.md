@@ -330,3 +330,12 @@ Estado: implementado en código y con contratos de regresión actualizados. Falt
 - Añadido ajuste opcional «Reproducir el siguiente episodio automáticamente»; la cola se establece desde la misma lista de episodios, y la reproducción utiliza la notificación `AVPlayerItemDidPlayToEndTime`.
 - Añadidas pruebas de regresión. La compilación de la última revisión se verifica por separado; ninguna prueba funcional con VoiceOver se adelanta a la candidata integral.
 - **Pendiente de fase 7:** descargas y reproducción sin conexión; completar Actualidad, Recursos, filtros, favoritos e historial según acuerdos. No confundir las funciones implementadas de Pódcast con cierre del bloque completo.
+
+
+## Fase general 7 — Descargas de Pódcast, 10 de noviembre de 2026
+
+- Se ha añadido un almacén local `NativePodcastDownloads` para descargar episodios directamente desde su URL RSS HTTPS, usando ficheros privados en Application Support y un índice persistente en UserDefaults.
+- Se limita el fichero descargado a 500 MB, se comprueban formatos de audio compatibles y se utilizan nombres internos derivados de un hash para evitar rutas o nombres de archivo inseguros.
+- La pantalla de Pódcast incorpora «Episodios descargados», con escucha local y eliminación; los listados recientes y seguidos ofrecen la acción «Descargar».
+- La cola de reproducción continua y las acciones «Continuar escuchando» utilizan el archivo local si existe, pero conservan el identificador y URL original para mantener el progreso entre sesiones y entre reproducción en línea y sin conexión.
+- Añadidos contratos automatizados de descargas y continuidad. **Pendiente** la confirmación de compilación y la prueba integral real en iPhone, así como demás requisitos de Actualidad y Recursos.

@@ -913,21 +913,30 @@ final class NativeReadingSpeech: ObservableObject {
     }
 
     func pause() {
-        if let player { player.pause() } else { synthesizer.pauseSpeaking(at: .word) }
+        if let player { player.pause() }
+        else if isGeneratedSpeech {
+            geminiGeneration += 1
+            geminiTask?.cancel()
+        } else { synthesizer.pauseSpeaking(at: .word) }
         sleep(after: 0) // Al pausar no sigue corriendo la cuenta del apagado.
         isPlaying = false
         isPaused = true
     }
 
     func resume() {
-        if let player { player.play() } else { synthesizer.continueSpeaking() }
+        if isGeneratedSpeech {
+            if let player { player.play() } else { playNextGeminiSegment() }
+        } else if let player { player.play() }
+        else { synthesizer.continueSpeaking() }
         isPlaying = true
         isPaused = false
     }
 
     func refresh() {
         if let player, !player.isPlaying && !isPaused { isPlaying = false }
-        if player == nil && !synthesizer.isSpeaking && !isPaused { isPlaying = false }
+        if player == nil && !synthesizer.isSpeaking && !isPaused && !isGeneratedSpeech {
+            isPlaying = false
+        }
     }
 
     func sleep(after minutes: Int) {
@@ -953,6 +962,14 @@ final class NativeReadingSpeech: ObservableObject {
     func stop() {
         sleepTask?.cancel()
         sleepTask = nil
+        geminiGeneration += 1
+        geminiTask?.cancel()
+        geminiTask = nil
+        geminiSegments = []
+        geminiSegmentIndex = 0
+        geminiOnError = nil
+        isGemini = false
+        isPhonon = false
         player?.stop()
         player = nil
         playlistURLs = []
@@ -1582,6 +1599,9 @@ struct NativeReadingScreen: View {
     @AppStorage("native-reader-navigation-unit") private var navigationUnit = 0
     @AppStorage("native-reader-time-step-index") private var timeStepIndex = 1
     @AppStorage("native-reader-reading-mode") private var readingMode = 0
+    @AppStorage("native-reader-reading-engine") private var readingEngine = 0
+    @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
+    @AppStorage("native-reader-phonon-voice") private var phononVoice = ""
     @State private var didApplyOpeningMode = false
     @State private var sleepIndex = 0 // Each open document starts with timer disabled.
     @State private var sleepDeadline: Date?
@@ -1710,7 +1730,7 @@ struct NativeReadingScreen: View {
         let value = max(0, min(100, percent))
         currentPercent = value
         readingOffset = Int(Double(textLayout.totalCharacters) * Double(value) / 100)
-        if speech.hasAudio {
+        if speech.hasAudio && !speech.isGeneratedSpeech {
             speech.seek(to: value)
         } else if speech.isPlaying || speech.isPaused {
             let wasPaused = speech.isPaused
@@ -1735,12 +1755,39 @@ struct NativeReadingScreen: View {
         }
         let remainder = String(document.body.dropFirst(readingOffset))
         guard !remainder.isEmpty else { return }
-        speech.play(remainder, speed: speed, pitch: pitch,
-                    language: AVSpeechSynthesisVoice(identifier: effectiveVoiceID)?.language ?? "es-ES",
-                    voiceIdentifier: effectiveVoiceID,
-                    baseUTF16: String(document.body.prefix(readingOffset)).utf16.count,
-                    totalUTF16: document.body.utf16.count,
-                    baseCharacters: readingOffset)
+        let utf16Offset = String(document.body.prefix(readingOffset)).utf16.count
+        if readingEngine == 1 {
+            guard NativeVoiceCredentialStore.hasKey("gemini") else {
+                actionMessage = "Configura la clave Gemini en Motores externos."
+                return
+            }
+            do {
+                try speech.playGemini(remainder, voice: geminiVoice,
+                    baseUTF16: utf16Offset, totalUTF16: document.body.utf16.count,
+                    baseCharacters: readingOffset,
+                    onError: { message in actionMessage = message })
+                actionMessage = nil
+            } catch { actionMessage = error.localizedDescription }
+        } else if readingEngine == 2 {
+            guard NativePhononRuntime.isUsable else {
+                actionMessage = "Instala el motor y modelo Phonon en Motores externos."
+                return
+            }
+            do {
+                try speech.playPhonon(remainder, voice: phononVoice,
+                    baseUTF16: utf16Offset, totalUTF16: document.body.utf16.count,
+                    baseCharacters: readingOffset,
+                    onError: { message in actionMessage = message })
+                actionMessage = nil
+            } catch { actionMessage = error.localizedDescription }
+        } else {
+            speech.play(remainder, speed: speed, pitch: pitch,
+                language: AVSpeechSynthesisVoice(identifier: effectiveVoiceID)?.language ?? "es-ES",
+                voiceIdentifier: effectiveVoiceID,
+                baseUTF16: utf16Offset, totalUTF16: document.body.utf16.count,
+                baseCharacters: readingOffset)
+            actionMessage = nil
+        }
     }
 
     private func play() {
@@ -2307,6 +2354,13 @@ struct NativeReadingScreen: View {
                 choices: Self.percentages,
                 selectedIndex: positionBinding
             )
+            if tracks.isEmpty {
+                NativeAdjustableChoice(
+                    title: "Motor de lectura",
+                    choices: ["Voces del sistema", "Gemini", "Phonon"],
+                    selectedIndex: $readingEngine
+                )
+            }
             Button("Audio") { showAudioSettings = true }
                 .accessibilityHint("Abre velocidad, voz y pausas por puntuación.")
             Button("Visual") { showVisualSettings = true }
@@ -2599,23 +2653,23 @@ struct NativeReadingScreen: View {
         .onReceive(speech.$textPercent) { percentage in
             // AVSpeechSynthesizer reports each spoken word; no artificial timer
             // advances the text cursor while paused or reading visually.
-            guard !speech.hasAudio, speech.isPlaying else { return }
+            guard (!speech.hasAudio || speech.isGeneratedSpeech), speech.isPlaying else { return }
             if percentage != currentPercent {
                 currentPercent = percentage
                 if abs(percentage - lastSavedPercent) >= 5 { persistPosition() }
             }
         }
         .onReceive(speech.$textCharacterOffset) { offset in
-            guard !speech.hasAudio, speech.isPlaying else { return }
+            guard (!speech.hasAudio || speech.isGeneratedSpeech), speech.isPlaying else { return }
             readingOffset = max(0, min(textLayout.totalCharacters, offset))
         }
         .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
             speech.refresh()
             if speech.isPlaying {
                 playbackTick += 1
-                if !speech.hasAudio { elapsedSpeakingSeconds += 1 }
+                if !speech.hasAudio || speech.isGeneratedSpeech { elapsedSpeakingSeconds += 1 }
             }
-            if speech.hasAudio {
+            if speech.hasAudio && !speech.isGeneratedSpeech {
                 let updated = speech.audioPercent
                 if updated != currentPercent { currentPercent = updated }
                 if abs(updated - lastSavedPercent) >= 5 { persistPosition() }
@@ -2628,7 +2682,10 @@ struct NativeReadingScreen: View {
         }
         .accessibilityAction(.magicTap) {
             if speech.isPlaying { pausePlayback() }
-            else if speech.isPaused { play() }
+            else if speech.isPaused {
+                speech.resume()
+                applySleepTimer()
+            }
         }
         .accessibilityAction(named: Text("Añadir marca")) { addBookmark() }
         .accessibilityAction(named: Text("Avanzar cinco por ciento")) {

@@ -11,7 +11,7 @@ test('Solo novedades propias, sin RSS ni noticias externas', () => {
   assert.match(notifier, /resources\.filter \{/);
   assert.match(notifier, /\$0\.isNew == true && \$0\.resourceURL != nil/);
   assert.match(notifier, /videos\.filter \{ \$0\.videoURL != nil \}/);
-  assert.doesNotMatch(notifier, /catalog\.news|\.news\.filter|rss|podcast/);
+  assert.doesNotMatch(notifier.replace(/^\s*\/\/\/.*$/gm, ''), /catalog\.news|\.news\.filter|rss|podcast/i);
   assert.match(notifier, /let existing = defaults\.stringArray\(forKey: seenKey\)/);
   assert.match(notifier, /guard existing != nil, enabled, !additions\.isEmpty/);
 });

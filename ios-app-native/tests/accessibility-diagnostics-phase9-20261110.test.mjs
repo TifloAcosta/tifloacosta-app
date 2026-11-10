@@ -25,3 +25,11 @@ test('Comunicación de incidencias exige texto e intervención expresa', () => {
   assert.match(report, /No se envía automáticamente/);
   assert.match(settings, /NavigationLink\("Comunicar incidencia de accesibilidad"\)/);
 });
+
+test('Correo de asistencia usa mailto y nunca envía por cuenta propia', () => {
+  assert.match(report, /components\.scheme = "mailto"/);
+  assert.match(report, /components\.path = "tifloacosta@gmail.com"/);
+  assert.match(report, /URLQueryItem\(name: "body", value: reportText\)/);
+  assert.match(report, /Link\(destination: supportMailURL\)/);
+  assert.doesNotMatch(report, /MFMailComposeViewController|URLSession\.shared\.upload|sendMail/);
+});

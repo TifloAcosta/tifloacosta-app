@@ -223,13 +223,15 @@ struct NativeRemoteResourceScreen: View {
                             announce(saved ? "Recurso guardado para leer después." :
                                 "Recurso retirado de Leer después.")
                         }
-                        NavigationLink("Traducir recurso al idioma de la aplicación") {
-                            NativeOnDemandTranslationScreen(
-                                title: item.title,
-                                originalText: documentText,
-                                sourceLanguage: item.lang,
-                                targetLanguage: languageIndex == 1 ? "en" : "es"
-                            )
+                        if #available(iOS 18.0, *) {
+                            NavigationLink("Traducir recurso al idioma de la aplicación") {
+                                NativeOnDemandTranslationScreen(
+                                    title: item.title,
+                                    originalText: documentText,
+                                    sourceLanguage: item.lang,
+                                    targetLanguage: languageIndex == 1 ? "en" : "es"
+                                )
+                            }
                         }
                         Button("Leer en voz alta") { readAloud() }
                         Button("Detener lectura") { speech.stop() }

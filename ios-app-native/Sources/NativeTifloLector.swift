@@ -1768,6 +1768,9 @@ struct NativeReadingScreen: View {
     @State private var showDocumentActions = false
     @State private var showDocumentInformation = false
     @State private var showSavedMarks = false
+    @State private var showDocumentSearch = false
+    @State private var documentSearchText = ""
+    @State private var positionBeforeSearch: Int?
     @State private var programmaticFocusRequest = false
     @State private var actionMessage: String?
     @AccessibilityFocusState private var focusedFragment: Int?
@@ -2204,6 +2207,92 @@ struct NativeReadingScreen: View {
         )
     }
 
+    // Resultados contextualizados a partir del texto original de la obra.
+    // Los índices se calculan en caracteres, igual que readingOffset y las marcas.
+    private struct DocumentSearchHit: Identifiable {
+        let offset: Int
+        let excerpt: String
+        var id: Int { offset }
+    }
+
+    private var documentSearchHits: [DocumentSearchHit] {
+        let query = documentSearchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !query.isEmpty, !latest.body.isEmpty else { return [] }
+        let body = latest.body
+        var cursor = body.startIndex
+        var hits: [DocumentSearchHit] = []
+        while cursor < body.endIndex, hits.count < 150,
+              let match = body.range(
+                of: query,
+                options: [.caseInsensitive, .diacriticInsensitive],
+                range: cursor..<body.endIndex
+              ) {
+            let offset = body.distance(from: body.startIndex, to: match.lowerBound)
+            let chars = Array(body)
+            let left = max(0, offset - 55)
+            let right = min(chars.count, offset + max(1, query.count) + 85)
+            let context = String(chars[left..<right])
+                .replacingOccurrences(of: "\\n", with: " ")
+                .replacingOccurrences(of: "\\r", with: " ")
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+            hits.append(DocumentSearchHit(offset: offset, excerpt: context))
+            cursor = match.upperBound
+        }
+        return hits
+    }
+
+    private func openDocumentSearch() {
+        positionBeforeSearch = readingOffset
+        showDocumentSearch = true
+    }
+
+    private var documentSearchSheetContent: some View {
+        NavigationStack {
+            List {
+                Section("Texto que quieres buscar") {
+                    TextField("Palabra o frase", text: $documentSearchText)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                        .accessibilityHint("Busca dentro del documento actual.")
+                }
+                if documentSearchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    Text("Escribe una palabra o frase para buscar en el documento.")
+                } else {
+                    Section("Resultados") {
+                        if documentSearchHits.isEmpty {
+                            Text("No se han encontrado coincidencias.")
+                        }
+                        ForEach(documentSearchHits) { hit in
+                            Button(hit.excerpt.isEmpty ? "Posición \\(hit.offset)" : hit.excerpt) {
+                                showDocumentSearch = false
+                                jump(to: hit.offset)
+                            }
+                            .accessibilityHint("Ir a esta coincidencia y continuar desde ella.")
+                        }
+                        if documentSearchHits.count == 150 {
+                            Text("Se muestran las primeras 150 coincidencias. Escribe más palabras para afinar la búsqueda.")
+                        }
+                    }
+                }
+                if let positionBeforeSearch {
+                    Section("Posición anterior") {
+                        Button("Volver a donde estaba leyendo") {
+                            showDocumentSearch = false
+                            jump(to: positionBeforeSearch)
+                            self.positionBeforeSearch = nil
+                        }
+                    }
+                }
+            }
+            .tifloScreenSurface()
+            .navigationTitle("Buscar en el documento")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                Button("Cerrar") { showDocumentSearch = false }
+            }
+        }
+    }
+
     private func bookmarkDescription(atOffset offset: Int) -> String {
         let text = latest.body
         guard !text.isEmpty else { return "Comienzo del documento" }
@@ -2491,6 +2580,15 @@ struct NativeReadingScreen: View {
                     selectedIndex: $timeStepIndex
                 )
             }
+            if !latest.body.isEmpty {
+                Button("Buscar en el documento") { openDocumentSearch() }
+                if let positionBeforeSearch {
+                    Button("Volver a la posición anterior a la búsqueda") {
+                        jump(to: positionBeforeSearch)
+                        self.positionBeforeSearch = nil
+                    }
+                }
+            }
             Button("Marcas guardadas") { showSavedMarks = true }
             Button("Añadir marca") { addBookmark() }
             Button("Información") { showDocumentInformation = true }
@@ -2587,6 +2685,9 @@ struct NativeReadingScreen: View {
     private var documentActions: some View {
         Button("Información de la obra") { showDocumentInformation = true }
         Button("Marcas guardadas") { showSavedMarks = true }
+        if !latest.body.isEmpty {
+            Button("Buscar en el documento") { openDocumentSearch() }
+        }
         if !latest.body.isEmpty || !(latest.daisyNavigation ?? []).isEmpty {
             Button("Índice y navegación estructurada") { showStructure = true }
         }
@@ -2762,6 +2863,7 @@ struct NativeReadingScreen: View {
             }
         }
         .sheet(isPresented: $showSavedMarks) { bookmarksSheetContent }
+        .sheet(isPresented: $showDocumentSearch) { documentSearchSheetContent }
         .sheet(isPresented: $showStructure) { structureSheetContent }
         .sheet(isPresented: $showWordTools) {
             NativeReaderWordToolsScreen(voiceIdentifier: effectiveVoiceID, pitch: pitch)

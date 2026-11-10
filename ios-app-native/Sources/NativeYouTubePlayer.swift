@@ -91,6 +91,13 @@ struct NativeYouTubeChannel: Identifiable, Decodable {
     let description: String
     var url: URL { URL(string: "https://www.youtube.com/channel/" + id)! }
 
+    init?(saved channel: NativeSavedYouTubeChannel) {
+        guard channel.id.hasPrefix("UC"), channel.id.count == 24 else { return nil }
+        id = channel.id
+        title = channel.title
+        description = channel.description
+    }
+
     init?(search item: NativeYouTubeSearchItem) {
         guard let channelId = item.channelId, channelId.hasPrefix("UC"),
               channelId.count == 24 else { return nil }

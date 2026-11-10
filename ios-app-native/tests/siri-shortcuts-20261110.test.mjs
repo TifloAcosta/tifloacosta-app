@@ -30,7 +30,7 @@ test('Inicio consume la ruta de Siri una sola vez y evita pantallas web', () => 
 });
 
 test('Siri continúa el último libro abierto desde posición guardada', () => {
-  const reader = source('NativeTifloLector.swift');
+  const reader = src('NativeTifloLector.swift');
   assert.match(intents, /struct NativeResumeReaderIntent: AppIntent/);
   assert.match(intents, /NativeShortcutRoute\.request\("resumeReader"\)/);
   assert.match(home, /case "resumeReader":/);
@@ -44,8 +44,8 @@ test('Siri continúa el último libro abierto desde posición guardada', () => {
 });
 
 test('VoiceOver mantiene un título breve por defecto y detalle opcional en una sola línea', () => {
-  const reader = source('NativeTifloLector.swift');
-  const settings = source('NativeUpdatesSettings.swift');
+  const reader = src('NativeTifloLector.swift');
+  const settings = src('NativeUpdatesSettings.swift');
   assert.match(reader, /@AppStorage\("native-voiceover-library-detail-index"\) private var voiceOverDetailIndex = 0/);
   assert.match(reader, /guard voiceOverDetailIndex == 1 else \{ return shortLabel \}/);
   assert.match(reader, /doc\.formatLabel/);

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-10T11:16:15.805Z",
+  "generatedAt": "2026-11-10T17:53:24.025Z",
   "resources": [
     {
       "kind": "resource",
@@ -5602,6 +5602,267 @@
   "news": [
     {
       "kind": "news",
+      "id": "9to5mac-4c3606f073285334:en",
+      "sourceId": "9to5mac-4c3606f073285334",
+      "lang": "en",
+      "title": "New Apple TV 4K remote’s best feature requires a newer iPhone model",
+      "summary": "A new Apple TV 4K releases this Friday ( pre-order here ), with an upgraded Siri Remote. But the new remote’s best feature might not work on your iPhone. more…",
+      "body": "A new Apple TV 4K releases this Friday ( pre-order here ), with an upgraded Siri Remote. But the new remote’s best feature might not work on your iPhone.\n\nIf you’re interested in the new Apple TV 4K launching this week, or perhaps you just want to buy the upgraded Siri Remote separately ( available here ), there’s a key limitation you should know.\n\nPrecision Finding on the new Siri Remote requires an iPhone 17 or newer.\n\nThe most common problem with the current Siri Remote is that it’s easy to lose. And once you lose it, Apple doesn’t offer many options for finding it. But that’s changing with the 4th gen Siri Remote.\n\nYou can use the new Siri Remote with any previous Apple TV 4K or Apple TV HD model. And if you do, you’ll benefit from the remote’s new built-in speaker that can be triggered from the Find My app.\n\nJoining the new speaker, the other main change with this latest Siri Remote is Precision Finding. If you’ve ever used the Find My app to track down a lost AirTag, you’ll probably be familiar with the feature.\n\nPrecision Finding lets you get step-by-step, guided directions that take you directly to the lost Siri Remote. It’s a huge upgrade from the old tool for finding the remote—which mostly just told you that it’s in your house somewhere.\n\nBut Precision Finding relies on the second-gen Ultra Wideband chip found in iPhone 17 and 17 Pro models (excluding iPhone 17e), iPhone Air, iPhone Duo, and iPhone 18 Pro models.\n\nSo if you don’t have one of those iPhones, you’ll still benefit from the built-in speaker that lets you play a sound to find the lost remote, but Precision Finding won’t be available.\n\nYou can buy the new Siri Remote for $59 on Amazon .\n\nWill this limitation impact your Siri Remote purchase decision? Let us know in the comments.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/10/new-apple-tv-4k-remotes-best-feature-requires-a-newer-iphone-model/",
+      "publishedAt": "2026-11-10T17:47:32.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-a17ffddf9bb172da:en",
+      "sourceId": "the-verge-a17ffddf9bb172da",
+      "lang": "en",
+      "title": "Ableton Live 13 announced with a step sequencer, new drum synth, and more",
+      "summary": "Today, Ableton announced Live 13, which is expected to arrive in early 2027 with a slew of new features. Most of the changes are seemingly minor on paper, but when combined, they make for the biggest update to the digital audio workstation (DAW) in years. The feature most likely to draw attention is the addition […]",
+      "body": "Today, Ableton announced Live 13 , which is expected to arrive in early 2027 with a slew of new features. Most of the changes are seemingly minor on paper, but when combined, they make for the biggest update to the digital audio workstation (DAW) in years.\n\nThe feature most likely to draw attention is the addition of a proper step sequencer. While Ableton's Push controller had a dedicated step sequencer, and you could effectively use the piano roll as one, the desktop app never included one. Ableton didn't phone this feature in either - it's a powerful sequencer. You can change velocity, timing, chance, length, and repeats for each step in th …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1030846/ableton-live-13-announced-step-sequencer-looplet-daw",
+      "publishedAt": "2026-11-10T17:43:49.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-eb758f032fcd7207:en",
+      "sourceId": "engadget-eb758f032fcd7207",
+      "lang": "en",
+      "title": "Google turns Gemini towards medical paperwork",
+      "summary": "Gemini for healthcare is in preview now, with some big-name partners already on board.",
+      "body": "Gemini for healthcare is in preview now, with some big-name partners already on board.\n\nGoogle Cloud has officially announced Gemini for healthcare, bringing agentic AI to the sector.\n\nIn a press release , Google said that the new initiative aims to \"unify the disparate clinical, operational, and administrative systems central to healthcare delivery and health plan operations.\" So rather than scraping the web to diagnose or advise treatments to medical professionals at the point of care, it sounds like Gemini will be used primarily to improve workflow efficiency.\n\nThe healthcare-focused assistant is built on top of the universal Gemini agent, and connects to third-party systems to gather information from health records, billing platforms and official guidelines. The AI can also access Medicare and Medicaid data to suggest next steps and generate multi-step workflows that Google says will be overseen by humans where appropriate, and adhere to \"defined guardrails.\"\n\nGemini for healthcare is intended to relieve the strain on human administrative teams, reducing burnout and in turn allowing more time for patient care. It launches in preview first, with Blue Cross Blue Shield of Massachusetts, Hartford HealthCare, HCA Healthcare, Highmark Health, Northwell Health, Optum and Stanford School of Medicine among the launch customers.\n\nAs for the obvious privacy concerns, Google says that the new platform will be compliant with the Health Insurance Portability and Accountability Act (HIPAA), the federal law that protects patients from having sensitive information disclosed without their permission. The company also insists that \"consequential decisions remain in qualified hands.\"\n\n\"The fundamental challenge in healthcare isn't a lack of information—it's the immense friction of making that data actionable across a highly regulated ecosystem,\" said Thomas Kurian, CEO, Google Cloud. \"By working directly alongside our healthcare customers, we've built a platform that resolves chronic bottlenecks so that the industry can put its focus entirely back on human health.\"\n\nGemini for healthcare connects workflows across Google Workspace and Microsoft 365, as well as ServiceNow and industry-specific platforms like the Salesforce's agentic Health Cloud. It will be available for Gemini Enterprise Standard and Gemini Enterprise Plus customers.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2312279/google-turns-gemini-towards-medical-paperwork/",
+      "publishedAt": "2026-11-10T17:35:46.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-f640d85f6ed8c4e8:en",
+      "sourceId": "the-verge-f640d85f6ed8c4e8",
+      "lang": "en",
+      "title": "Google Fi is bringing back multiple cell network support for better coverage",
+      "summary": "Google Fi is launching a new \"super network\" that can automatically switch users between two different 5G networks depending on which one has better connectivity. The feature is rolling out starting today on Pixel 9 and newer phones that have Google Fi active on eSIM and have any non-Fi SIMs disabled. When Google Fi first […]",
+      "body": "Google Fi is launching a new \"super network\" that can automatically switch users between two different 5G networks depending on which one has better connectivity. The feature is rolling out starting today on Pixel 9 and newer phones that have Google Fi active on eSIM and have any non-Fi SIMs disabled.\n\nWhen Google Fi first launched in 2015, users were originally able to switch between T-Mobile and Sprint's networks. But those two networks eventually became one when T-Mobile acquired Sprint in 2020, and so the network switching stopped there. Jane Harnett, Google Fi Wireless senior product manager, told The Verge that Fi stopped offering the …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1030979/google-fi-automatic-network-switching-pixel",
+      "publishedAt": "2026-11-10T17:32:39.000Z",
+      "categories": [
+        "tecnologia-general",
+        "android"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-a2f045ebaebc710b:en",
+      "sourceId": "engadget-a2f045ebaebc710b",
+      "lang": "en",
+      "title": "Anthropic takes on Google and Microsoft with Claude Sheets",
+      "summary": "The company also has a new whiteboard app.",
+      "body": "The company also has a new whiteboard app.\n\nAnthropic is significantly expanding Claude's suite of productivity tools . At an event in San Francisco today, the company announced Claude Sheets. As you can probably guess, Sheets allows Claude to generate and edit spreadsheets for you. Each file can include its own set of tabs and formulas. You'll also find the usual assortment of formatting options.\n\nAnthropic is billing Sheets as collaborative tool you can use alongside both Claude and your coworkers. Everyone with editing access can make changes to the file, and any tweaks Claude makes will be noted for you and your coworkers to track. You can export any files Claude generates to Excel , and there's even support for Anthropic's Google Workspace plugin. Sheets is currently available in beta to Claude subscribers across the web, desktop and mobile.\n\nAlongside Claude Sheets, Anthropic announced two other new products: Claude Meetings and Claude Whiteboards. The first of those is Anthropic's take on a meeting agent like the kind offered by Otter.ai and other companies. Available in Google Meet to start (which, incidentally, offers its own meeting agent through Gemini), Claude can join your video calls and start taking notes as you and your colleagues talk. You can later chat with Claude about any plans or action items that came up during your call. \"Claude marks itself as a participant and posts a notice in the meeting's chat,\" says Anthropic. \"It won't join a call with outside guests unless an admin allows it, and it leaves if one joins anyway.\" At the moment, Claude Meetings is only available to Team and Enterprise customers.\n\nMoving to Claude Whiteboards, it's a pretty cutesy take on a collaborative brainstorming app. As your team works together, Claude will group everyone's ideas together by theme and draft action items for each individual. In a nifty bit of integration, you can use Claude Meetings and Whiteboards at the same time. Anthropic is billing the tool as a natural extension of how people already use Claude. \"Many people already brainstorm with Claude, but sharing the results with coworkers has meant copy-pasting them somewhere else,\" the company says. Claude Whiteboards is available in beta to all paid users across the web, desktop and mobile.\n\nSeparately from those announcements, Anthropic is renaming Claude Dashboards to Claude Data and starting to roll out the tool to all paid users. Anthropic says it decided to rename the app because \"companies use their data for more than dashboards.\" In any case, you can connect Claude Data to your company's CRM so that the chatbot can then answer specific questions you might have about what's inside.\n\nLastly, Anthropic is upgrading Claude's plugin functionality, which allows you to connect apps like Canva and Notion to the chatbot so it can pull information from those services. As Anthropic notes, there are already more than 9,000 connectors offered through the Claude Marketplace, but now you can open full apps inside of Claude, allowing the chatbot to act on what it sees in the window. Anthropic is rolling out this update starting with a small group of partners that includes Adobe, Atlassian and HubSpot.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2312177/anthropic-takes-on-google-and-microsoft-with-claude-sheets/",
+      "publishedAt": "2026-11-10T17:30:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "windows",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-b2dec410c195b20d:en",
+      "sourceId": "engadget-b2dec410c195b20d",
+      "lang": "en",
+      "title": "Google Fi announces super network automatic carrier switching for improved speed and reception",
+      "summary": "It's rolling out first on Pixel phones before wider availability arrives in 2027.",
+      "body": "It’s rolling out first on Pixel phones before wider availability arrives in 2027.\n\nGetting the fastest mobile data speeds can be tricky because a single carrier may not have optimal coverage in your area. So to address this, Google Fi is introducing its new super network feature which allows your phone to automatically switch between two different carriers to deliver the best connection possible.\n\nThe super network feature begins rolling out today to customers with Pixel phones (Pixel 9 and above with eSIMs). In the event that your phone detects that your connection is sluggish, it will automatically switch from one carrier to another. Unfortunately, Google Fi is not officially disclosing the names of the carriers it's using for its super network, though based on previous partnerships one of them is probably T-Mobile. Regardless, the effect is that if you hit a dead zone or congestion, your phone can connect to a different cell signal without any manual input.\n\nHowever, that's not all, because alongside the super network, Google Fi is also introducing a new Wi-Fi Auto-Connect+ feature designed to improve data speeds indoors in places like malls, airports and more. That means even if you're in a building that interferes with traditional cellular reception, your phone can switch over to Wi-Fi where available, while automatic encryption ensures that your data stays secure. Wi-Fi Auto-Connect+ will initially be available on Pixel phones (Pixel 5a and newer) and some Motorola and Samsung phones (running OneUI 9 and above) across select locations throughout the US, Europe, Asia and Brazil.\n\nBut perhaps the best part is that both Google Fi's super network and Wi-Fi Auto Connect+ will be available to customers with Unlimited Premium and Flexible plans at no extra cost. Furthermore, for international travelers, both features will work in over 200 destinations across the globe.\n\nAlternatively, for customers who need a little extra help or technical support, the company is rolling out its new AI-powered Ask Fi agent inside the app. It's designed to answer questions, straighten out billing concerns or help troubleshoot things like connectivity issues in real time. Thankfully, Google Fi says there will still be actual humans you can reach out to if that's what you prefer.\n\nFinally, to help promote the launch of its super network, Google Fi is offering a free Pixel 11 Pro to new subscribers (via a $500 instant rebate and $599 in credits over 24 months) along with a $10 per month service credit to anyone who signs up for an Unlimited Premium plan (offers lasts until 11/18/26). And if you already own a Pixel phone, new subscribers can get 50 percent off select unlimited plans for 12 months (offers ends 12/1/26).",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2312022/google-fi-super-network-automatic-carrier-switching/",
+      "publishedAt": "2026-11-10T17:30:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "android"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-6c1b741b59ce6d05:en",
+      "sourceId": "techcrunch-6c1b741b59ce6d05",
+      "lang": "en",
+      "title": "Anthropic launches Claude Meetings to turn workplace discussions into plans and tasks",
+      "summary": "As participants talk, Claude can draft the plan being discussed, map out a timeline on a whiteboard, answer questions in the meeting chat, and access connected work apps to retrieve information, such as last year's figures.",
+      "body": "Anthropic announced new workplace features on Tuesday, including Claude Meetings, which brings Claude into video calls to begin working on tasks while participants are still talking. The company also unveiled Claude Whiteboards and Claude Sheets.\n\nThe launch of Anthropic’s new productivity-focused features comes just a few weeks after OpenAI unveiled a series of workplace tools that allow users to collaborate with ChatGPT to do things like visualize company information and create presentations, as both companies compete to turn their products into office suites of sorts to take on Microsoft and Google. Meta is also joining the competition with its Muse AI agent, which can build mini-apps on the fly to help users complete specific tasks.\n\nWith Claude Meetings, teams can add Claude to a video call as a visible participant. Claude then follows the conversation and gets to work on tasks in real time. As participants talk, it can draft the plan being discussed, map out a timeline on a whiteboard, answer questions in the meeting chat, and access connected work apps to retrieve information, such as last year’s figures. After the call, the meeting notes, action items, and other materials Claude created are available in claude.ai.\n\nThe work that comes out of a meeting usually starts after everyone hangs up, but with this new feature, teams can turn discussions into actions in real time, Anthropic says.\n\nClaude identifies itself as a meeting participant and posts a notice in the meeting chat. It won’t join calls with external guests unless authorized by an admin, and will automatically leave if an external guest joins.\n\nClaude Meetings is launching in beta on Team and Enterprise plans. At launch, it works with Google Meet, with support for additional plans expected to follow.\n\nAs for Claude Whiteboards, Anthropic describes the feature as a collaborative board where teams can talk through a plan and have Claude turn it into an organized visual workspace with timelines and deadlines.\n\nThe company notes that many people already brainstorm with Claude, but that in order to share their results with others, they would have to copy-paste them somewhere else. Now, a team can work directly with Claude on the same board in real time.\n\nWhen the brainstorm is done, Claude can turn the board into a doc or a slide deck. Additionally, Whiteboards also work inside Claude Meetings, so the board builds while people talk, Anthropic says.\n\nClaude Whiteboards is available in beta on paid plans, on web, desktop, and mobile.\n\nThe company also launched Claude Sheets, which lets teams create and collaboratively edit spreadsheets with Claude. A team can ask it to build a campaign tracker or hiring budget, and Claude will then generate a working spreadsheet.\n\nAnthropic says Claude handles the initial setup of trackers and budgets, while allowing teams to continue refining and updating the same spreadsheet. Each spreadsheet can include multiple tabs, formulas, formatting, and dropdown menus. Claude also makes edits directly in cells alongside the team, and outlines each change so users can see what it did.\n\nClaude Sheets is available in beta on paid plans, on web, desktop and mobile.\n\nAnthropic also announced that Claude Data, formerly known as Claude Dashboards, is now generally available. The feature connects Claude to systems that companies use to keep their numbers, like a data warehouse or CRM. Users can ask questions, and Claude responds with dashboards, written data stories, or narrated videos.\n\nAdditionally, the company announced interactive connectors that open the full version of apps like Adobe, Atlassian, and HubSpot inside Claude. Anthropic notes that teams can now open these apps directly alongside their Claude conversations and ask the assistant to work within them, essentially bringing existing workflows into the same workspace.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/11/10/anthropic-launches-claude-meetings-to-turn-workplace-discussions-into-plans-and-tasks/",
+      "publishedAt": "2026-11-10T17:30:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-e98bd359d76f99b0:en",
+      "sourceId": "the-verge-e98bd359d76f99b0",
+      "lang": "en",
+      "title": "Anthropic has its own AI-powered office suite now",
+      "summary": "For years, Anthropic has been known for its focus on enterprise and coding tools that attract high-flying corporate clients, inspiring competing frontier labs - like OpenAI, SpaceXSI, and Meta - to copy its strategies. Earlier this year, Claude Code went through its own particular hype cycle. And now, Anthropic is trying to expand its footprint […]",
+      "body": "For years, Anthropic has been known for its focus on enterprise and coding tools that attract high-flying corporate clients, inspiring competing frontier labs - like OpenAI, SpaceXSI, and Meta - to copy its strategies . Earlier this year, Claude Code went through its own particular hype cycle . And now, Anthropic is trying to expand its footprint to other knowledge workers with an AI-powered suite of office tools.\n\nAt an event in San Francisco on Tuesday, Anthropic unveiled new tools for non-technical workers who spend a lot of time attending meetings, brainstorming new ideas, and analyzing metrics: Claude Meetings, Claude Sheets, and Claude W …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1030709/anthropic-has-its-own-ai-powered-office-suite-now",
+      "publishedAt": "2026-11-10T17:30:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "windows",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-9ae0e7155e624eaa:en",
+      "sourceId": "techcrunch-9ae0e7155e624eaa",
+      "lang": "en",
+      "title": "Nvidia CEO Jensen Huang’s affair with alleged Chinese spy: a timeline",
+      "summary": "The affair could have ramifications for national security as the U.S. and China race to develop the most advanced AI infrastructure.",
+      "body": "Nvidia co-founder CEO Jensen Huang has never been as flashy or controversy-prone as AI leaders like OpenAI’s Sam Altman or SpaceXAI’s Elon Musk. Now, the 63-year-old industry kingpin has admitted that he cheated on his wife of 40 years in an affair that could have ramifications beyond Huang’s personal life and potentially impact national security.\n\nUnited States officials believe that Huang’s likely romantic interest, Megaspeed executive Alice Huang, is a Chinese spy who has been feeding information back to Beijing. (Alice Huang, a Chinese citizen, is of no relation to Jensen Huang.)\n\nMegaspeed, a Singapore-based AI infrastructure company, had reportedly purchased $4.8 billion in Nvidia chips over the last two years. The U.S. and Singapore have both previously investigated Megaspeed over suspicions that the firm was illegally sharing chips with China.\n\nThe U.S. and China are embroiled in a fierce technological arms race to build the most advanced AI infrastructure, which could shape each country’s economic future, military prowess, and capacity for innovation. Nvidia is valuable in this competition as one of the world’s largest makers of AI chips, which are essential for accelerating AI development. But as an American company, Nvidia faces government restrictions on the sale of its most powerful chips to Chinese entities.\n\nAs the controversy unfolds, we are organizing the most relevant events into a reverse-chronological timeline to keep you up to date.\n\nThe Nvidia CEO pulled out of upcoming speaking engagements at the ElevenLabs Summit and Anthropic CEO Forum.\n\nAlice Huang and her family reportedly built a network of companies in China and Singapore to acquire Nvidia chips, including founding a Chinese company called Shanghai Century Litong. Founded in 2023, it became a Nvidia preferred cloud partner giving it priority access to chips, the Information reported . The Info reported that Shanghai Century Litong. facilitated buying $7.5 billion worth of Nvidia’s chips, including banned chips.\n\nNvidia’s head lawyer, Tim Teter, intervened in a 2025 US government probe surrounding the suspected smuggling of AI chips by Megaspeed International, Bloomberg reported . Teter contacted Commerce Under Secretary Jeffrey Kessler asking questions about whether the Trump administration played a role in detaining Alice Huang.\n\nIn early 2025, Alice Huang and a business partner sought China-based investors for an Asian data center, promising they had no problem in securing GPUs, the Financial Times reported.\n\nOn Sunday night, President Trump weighed in on Huang’s controversy and showed support for the Nvidia CEO.\n\n“I have not spoken to him about it. I just know he’s a fine person, but you never know what’s going on,” Trump said.\n\nWhen asked if Huang should remain chief of Nvidia , Trump said, “I think so. Oh yeah, sure.”\n\nJensen Huang wrote in a letter to Nvidia employees — which was also published as a press release — that he cheated on his wife.\n\n“I owe my family and all of you an apology,” Huang told his company. “I was unfaithful to my wife. My actions hurt her and our children. There is no excuse for what I did. I am deeply sorry.”\n\nHuang did not mention Alice Huang by name in the message, but linked his infidelity to “the national security concerns raised in news reports.”\n\n“Nvidia’s Board of Directors has initiated an independent investigation. I support the investigation and will cooperate fully. I love our country and our company. I am committed to protecting Nvidia and supporting America’s national security. I am proud and grateful to be an American,” Huang wrote.\n\nNvidia shares slid over 5% the following day.\n\nThree Republican congressmen — Chairman John Moolenaar of the House Select Committee on China, Chairman Brian Mast of the House Foreign Affairs Committee, and Chairman Rick Crawford of the House Permanent Select Committee on Intelligence — sent a request to Huang for a closed-door joint briefing with their three committees.\n\n“Recent reports raise significant national security concerns regarding the [People’s Republic of China]’s access to sensitive U.S. technology and information,” the chairmen wrote . “The issue of PRC infiltration and access to cutting-edge U.S. technology is core to the investigative work of our three committees this Congress. It is vital that Congress determines the extent to which U.S. national security has been placed at risk.”\n\nU.S. officials had been investigating Alice Huang and Megaspeed for more than a year when the New York Times broke the story in late October that the two executives also had a close relationship.\n\nA Nvidia spokesperson denied that this relationship was something out of the ordinary.\n\n“Jensen’s interactions with Ms. Huang are not unusual or unexpected. Meetings with customers are part of a CEO’s job; Jensen talks with thousands of customer executives every year,” Nvidia spokesperson John Rizzo said. He added that “if the U.S. government believes that any person is a threat to American industry, it would let us know.”\n\nU.S. officials circulated a secret memo among policymakers which warned that Megaspeed’s Alice Huang, who had a relationship with Jensen Huang, was a spy for China’s Ministry of State Security. This memo was not public knowledge until it was later reported by the New York Times.\n\nSecretary of State Marco Rubio supervised the drafting of the memo.\n\nAround the same time, per the New York Times’ report , U.S. President Donald Trump was briefed about intelligence findings that possible Chinese spy Alice Huang had formed a close relationship to Jensen Huang. Trump did not act on this information.\n\nThe Nvidia CEO, an ally of Trump , has repeatedly advocated for the U.S. government to let Nvidia expand its business in China.\n\nMegaspeed was confirmed to be under investigation by both the U.S. and Singaporean governments in October 2025. As a customer of Nvidia, Megaspeed was suspected of helping Chinese companies get around American embargoes on chip exports.\n\nMegaspeed, a neocloud that used Nvidia chips, had been renting computing power to Chinese internet giant Alibaba and other Chinese companies, the Times reported. A Commerce Department official who had visited Megaspeed’s data center in Malaysia in 2024 had found a hoard of Nvidia equipment that was still packed in boxes and the concern was that this equipment was was being directly shipped somewhere else, like China, rather than installed and sold as a cloud service.\n\nJensen Huang had been spotted socializing with Megaspeed executive Alice Huang as early as 2024 in Taiwan, where the Nvidia CEO was born.\n\nThese investigations into Megaspeed highlighted concerns about the degree to which Nvidia is able to track its chip exports. At the time, a Nvidia spokesperson told press that the company did not have “any reason to believe products had been diverted.”\n\n“NVIDIA visited multiple Megaspeed sites yet again earlier this week and confirmed what we previously observed — Megaspeed is running a small commercial cloud, like many other companies throughout the world, as allowed by U.S. export control rules,” the Nvidia spokesperson said at the time.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/11/10/nvidia-ceo-jensen-huangs-affair-with-alleged-chinese-spy-a-timeline/",
+      "publishedAt": "2026-11-10T17:04:19.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-bb1f50e4f0006f96:en",
+      "sourceId": "9to5mac-bb1f50e4f0006f96",
+      "lang": "en",
+      "title": "Satechi expands lineup of color-matched accessories for MacBook Neo",
+      "summary": "Earlier this year, Satechi launched a line of Mac accessories in colors inspired by the MacBook Neo . Now, the company is back with a new expansion of that line with four new accessories: MacBook Neo OntheGo 45W GaN Charger with 60W Max $30 MacBook Neo Core USB-C to 4K HDMI Adapter $30 MacBook Neo Slim EX1 Wireless Keyboard $50 MacBook Neo Form Desk Mat $40 more…",
+      "body": "Earlier this year, Satechi launched a line of Mac accessories in colors inspired by the MacBook Neo . Now, the company is back with a new expansion of that line with four new accessories:\n\nThe new 45W charger uses a dynamic power system that delivers up to 60W at plug-in and 45W sustained. It can charge a MacBook Neo at full speed and fast-charge an iPad.\n\nHere’s what else Satechi is launching today:\n\nThe new gear is available to order starting today on Amazon . It’s all available in the same silver, indigo, blush, and citrus options as the MacBook Neo. As we approach the holiday shopping season, this could be a great gift for anyone in your life with a MacBook Neo.\n\nFollow Chance : Threads , X , and Instagram",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/10/satechi-new-macbook-neo-accessories/",
+      "publishedAt": "2026-11-10T17:00:00.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-92fa148b1b691f1a:en",
+      "sourceId": "techcrunch-92fa148b1b691f1a",
+      "lang": "en",
+      "title": "Sundrop turns your endless baby photos into recaps, time-lapses and more — without AI",
+      "summary": "Sundrop is a new iPhone app that uses Apple's on-device AI to help parents rediscover their favorite photos and create keepsakes without uploading images to the cloud.",
+      "body": "New parents take a lot of pictures of their children, but those photos often end up languishing in photo galleries, never to be seen again after the initial snap and share.\n\nA new app, Sundrop , aims to make those pictures more useful by turning them into weekly recaps, highlights, time-lapses of the child growing up, and other cute scenes, like putting the child’s photo on a magazine cover or a rookie card.\n\nWhile Google Photos and Apple Photos already provide extensive tools to organize and manage photos, Sundrop is taking aim at a particular niche: Parents with a new baby (usually their first!) who take an overwhelming number of photos and want to do more with those pictures.\n\nThe app was developed over the past few months by the same team behind the read-it-later app, Matter: Ben Springwater, Sky Lan, and Rob Mackenzie (all dads themselves).\n\nNotably, Sundrop claims it is designed to be private, and processes all photos locally on the device it is installed on. To make this possible, Sundrop taps into Apple’s Vision framework and on-device Core ML (machine learning) models instead of uploading photos to a cloud server or some other hosted AI service.\n\nBoth of the child’s parents can use Sundrop together by linking their accounts, which allows the app to sync their shared photos via Apple’s iCloud service. This feature, the company says, means the pictures aren’t sent to any external servers it runs.\n\nIn addition, the team notes that no generative AI is used in the creation of its scenes or highlights.\n\nThis differentiates it from many photo editing apps on the market, including Google’s, which are increasingly tapping generative AI to create new versions of your photos.\n\nTo find highlights and recaps, Sundrop scans pictures in the parents’ respective Camera Rolls on their iPhones, skipping things like screenshots or duplicates. It then creates highlights or fun scenes, which it calls “drops.”\n\nOne of these is a recap of the week every Sunday, announced as a Lock Screen notification. Others can put two siblings side-by-side at the same age, generate a time-lapse series of photos or a video of a kid growing up, or cut out a photo of the child and place it into a layered template.\n\nParents can also manually edit the photos Sundrop uses to make its creations, or use the app to automatically organize the best photos into galleries with other similar shots.\n\nThe app costs $39.99 per year, and offers a week-long free trial. The annual plan also includes Family Sharing, so only one parent needs to purchase it.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/11/10/sundrop-turns-your-endless-baby-photos-into-recaps-time-lapses-and-more-without-ai/",
+      "publishedAt": "2026-11-10T16:50:38.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple",
+        "apps-accesibles",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-d55f171718f15ca2:en",
+      "sourceId": "9to5mac-d55f171718f15ca2",
+      "lang": "en",
+      "title": "iPadOS 27.3 adds new iPad setting I instantly turned on",
+      "summary": "iPadOS 27.3 is currently available in beta , and it introduces a new iPad setting for app windowing that I instantly turned on. Here are the details. more…",
+      "body": "iPadOS 27.3 is currently available in beta , and it introduces a new iPad setting for app windowing that I instantly turned on. Here are the details.\n\nI use the iPad Pro as my primary computer, and for the most part have found Apple’s software changes in iPadOS 26 and 27 to be great upgrades.\n\nBut with the powerful new windowing capabilities, there have definitely been some quirks that need refining. One of them involves resizing windows with the traffic light controls in the top-left corner.\n\nFor example, in iPadOS 27 the controls move locations and even disappear depending on the size of the window. It can be pretty frustrating.\n\nI need to just get better about learning keyboard shortcuts for window controls. But in the meantime, iPadOS 27.3 adds a new optional setting that I instantly turned on and have been loving.\n\nInside Settings ⇾ Multitasking & Gestures, if you have ‘Windowed Apps’ enabled you’ll see a new option below it: ‘Double-tap Top of Window to Zoom’\n\nIf you use your iPad mostly with touch input, or simply haven’t used keyboard shortcuts enough to remember them, this new setting is a great way to quickly resize windows.\n\nWhen the setting is enabled, two taps (or a double-click with the trackpad) will zoom the window to take up the full screen. Then you can double-tap again to revert it to its previous size.\n\nI generally keep my app windows in specific size setups, but regularly find myself wanting to go fullscreen temporarily. The new setting provides a convenient way to do that quickly without needing the traffic light controls or my keyboard, and is a welcome refinement to iPadOS windowing.\n\nWill you enable this new iPadOS 27.3 setting? Why or why not? Let us know in the comments.\n\n* Buy iPad with 15% discount from Apple refurbished",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/10/ipados-27-3-adds-new-ipad-setting-i-instantly-turned-on/",
+      "publishedAt": "2026-11-10T16:14:54.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "apple-newsroom-accessibility-a0b4a19bfd0d4b3b:en",
+      "sourceId": "apple-newsroom-accessibility-a0b4a19bfd0d4b3b",
+      "lang": "en",
+      "title": "Apple TV introduces new Sign Language interpretation feature",
+      "summary": "Today, Apple announced a new accessibility feature on the Apple TV app offering sign language interpretation for supported titles.",
+      "body": "Text of this article\n\nNovember 10, 2026\n\nUPDATE\n\nApple TV introduces new Sign Language interpretation feature\n\nNew accessibility feature debuts Friday, November 13, with the streaming premiere of Being Heumann\n\nToday, Apple announced a new accessibility feature for the Apple TV app that gives viewers the option to watch supported titles with accompanying sign language interpretation. 1 The feature will be available on Friday, November 13, alongside the global streaming premiere of Being Heumann , a film based on the true story of disability rights activist Judy Heumann, on Apple TV.\n\nIn addition to Being Heumann, interpretation for American Sign Language (ASL) and British Sign Language (BSL) will be available for the movie F1. Later this year, Way of the Warrior Kid and Greyhound will follow, with more Apple Original titles to come. When turned on in Apple TV app settings, the Sign Language option will appear on supported Apple Original titles.\n\n“At Apple, we believe everyone should be able to enjoy great stories and entertainment,” said Sarah Herrlinger, Apple’s senior director of Global Accessibility Policy and Initiatives. “Bringing sign language interpretation to Apple TV is an exciting step forward in making the viewing experience more accessible and inclusive for Deaf audiences. Accessibility is a core value at Apple, and we’re proud to continue creating experiences that allow more people to enjoy the content they love.”\n\nDesigned with Native Signers in the Deaf Community\n\nApple TV offers a sign language experience that’s designed and tested by Deaf and native signers. Each performance is carefully crafted to fit and complement the Apple Original film it interprets.\n\n“It’s incredibly meaningful to see our beautiful language authentically represented onscreen,” said Daniel Durant, who appears in Being Heumann and directed the film’s sign language interpretation. “Bringing this experience to life required a lot of care to ensure every translation captured the emotion and meaning of the story. I’m proud to have been part of Being Heumann and thrilled to see Apple TV supporting greater accessibility for Deaf audiences.”\n\nNew Ways to Discover Titles with Sign Language\n\nTitles with sign language interpretation will be labeled with a Sign Language icon, making it easy to know when the option is available. Viewers can enable the feature in Apple TV app settings, then press the Sign Language button while watching. Search will also make it easier to find titles that feature sign language with simple phrases like “with ASL.”\n\nAs sign language interpretation becomes more widely available across streaming services, the new “Movies & Shows with American Sign Language” collection on the Apple TV app will offer viewers a simple way to explore titles featuring sign language, in one dedicated destination.\n\nBeing Heumann\n\nIn Being Heumann , Judy Heumann (Ruth Madeley) — scrappy, defiant, and done being treated like a burden — turns her outrage into a revolution. In San Francisco in 1977, she and more than 100 disability rights protesters organize a sit-in to send a very loud message: The system is broken — not us. The film marks the second collaboration between Apple Original Films and writer-director Siân Heder, who directed the multi-Academy Award-winning film CODA, which made history as the first film with a predominantly Deaf cast to receive the Best Picture honor.\n\nBeing Heumann premieres globally on Apple TV on Friday, November 13. Viewers can add Being Heumann to their watchlist on Apple TV .\n\nApple TV offers premium, compelling drama and comedy series, feature films, groundbreaking documentaries, and kids and family entertainment, and is available to watch across all of a user’s favorite screens. After its launch on November 1, 2019, Apple TV became the first all-original streaming service to launch around the world, and has premiered more original hits and received more award recognitions faster than any other streaming service in its debut. To date, Apple Original films, documentaries, and series have been honored with 919 wins and 3,829 award nominations and counting, including Academy Award Best Picture winner CODA and Academy Award winner F1, the highest-grossing sports feature of all time.\n\nAbout Apple TV\n\nApple TV is available on the Apple TV app in 170 countries and regions, on over 1 billion screens, including iPhone; iPad; Apple TV 4K; Apple Vision Pro; Mac; popular smart TVs from Samsung, LG, Sony, VIZIO, TCL, and others; Roku and Amazon Fire TV devices; Chromecast with Google TV; PlayStation and Xbox gaming consoles; and at tv.apple.com , for $14.99 per month with a seven-day free trial for new subscribers. For a limited time, customers who purchase and activate a new iPhone, iPad, Apple TV 4K, or Mac can enjoy three months of Apple TV for free. 2\n\nFor more information, visit apple.com/tvpr and see the full list of supported devices .\n\nPress Contacts\n\nSam Citron\n\nApple\n\ncitron@apple.com\n\nOlivia DeJesse\n\nApple\n\noliviad_22@apple.com\n\nApple Media Helpline\n\nmedia.help@apple.com\n\nMedia in this article\n\nSam Citron\n\nApple\n\ncitron@apple.com\n\nOlivia DeJesse\n\nApple\n\noliviad_22@apple.com\n\nApple Media Helpline\n\nmedia.help@apple.com",
+      "sourceName": "Apple Accessibility Newsroom",
+      "originalUrl": "https://www.apple.com/newsroom/2026/11/apple-tv-introduces-new-sign-language-interpretation-feature/",
+      "publishedAt": "2026-11-10T16:00:26.015Z",
+      "categories": [
+        "apple",
+        "tecnologia-accesibilidad",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-30fe41f5cad87066:en",
+      "sourceId": "ars-technica-30fe41f5cad87066",
+      "lang": "en",
+      "title": "DeepMind reveals Gemini Robotics 2.5 and open safety benchmark \"ASIMOV-jailbreak\"",
+      "summary": "The new model is up to twice as successful at some tasks.",
+      "body": "Google DeepMind has revealed a new generation of the AI-powered Gemini Robotics platform. In the 2.5 release, Google says its robotic AI is getting tantalizingly close to completing real-world tasks as well as humans do. In fact, some Gemini robots were able to get actual work done in Mercedes-Benz factories, and the team is preparing for a day when robots operate alongside humans with an open source safety benchmark.\n\nDeepMind's physical AI platform has several computational layers between user input and robotic action. There's the vision-language model piece, which is Gemini Embodied Reasoning. Essentially, it takes your instructions and uses live video to plan how the robot can accomplish the task. The other main component is the vision-language-action (VLA) that actually generates robot actions, like moving an actuator—that's Gemini Robotics, which has been bumped to version 2.5.\n\nDeepMind says that Gemini Robotics 2.5 is much better at tasks that require a high degree of dexterity. The model was evaluated across more than 200 activities, including serving food with tongs and using a pipette, as you would see in a laboratory. Google also showed that Apptronik’s Apollo 2 humanoid robot with Gemini Robotics 2.5 can now tie a bow with its five-fingered hands, a notable feat, because deformable objects (like ribbon) are notoriously difficult for robots to manipulate.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/google/2026/11/deepmind-reveals-gemini-robotics-2-5-and-open-safety-benchmark-asimov-jailbreak/",
+      "publishedAt": "2026-11-10T15:00:39.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "applevis-apps-3d58fc3d05523736:en",
+      "sourceId": "applevis-apps-3d58fc3d05523736",
+      "lang": "en",
+      "title": "Fields Of Fortune",
+      "summary": "Fields of Fortune is a cozy farming game made to be played fully with VoiceOver, and just as fun to play by sight. Every screen is laid out for swiping, every picture is described in words, and every action tells you exactly what happened. GROW YOUR FARM Plant dozens of crops, watch them grow in real time and harvest them in normal, good and excellent quality. Buy more land as you level up, all the way to level 200. RAISE AND BREED ANIMALS Keep chickens, cows, sheep, horses, alpacas, unicorns and many more. Feed them the foods they love, collect their products, help them level up from Standard to Elite, and breed pairs to discover rare new breeds. Dress your animals in clothes you make in the Tailor Shop. MAKE GOODS Turn your harvest into bread, cheese, jam, wine, pizza, sweaters and over a hundred other goods in your own bakery, dairy, kitchen, winery and more. Hire workers to keep production running. FISH FROM THE PIER Cast your line, hear the distance read with every click as you pull back, wait for a bite and reel in fish, shells and rare sea treasures. Upgrade your poles and bait as you go. FARM WITH FRIENDS Add friends, visit their farms, water their crops, feed their animals, send gifts and trade items. Chat with everyone in public chat or privately with friends. Sell your goods to other players on the marketplace. DAILY GOALS AND CHALLENGES Collect a daily reward, complete daily quests, earn bronze, silver and gold medals, climb the leaderboards and compete in weekly challenges for surprise rewards. MADE FOR VOICEOVER - No headings to hunt for: swipe through each screen from the top. - Long lists are grouped into lists that open and close, each with its numbers. - Sounds, music and haptics for every action, with full volume controls. - Reduce Motion is respected everywhere. OPTIONAL PURCHASES The whole game is free to play. The Store sells Fortune Gem packs, for time in the forest and forest tools, three animals you cannot get anywhere else, and Farm Pass, a monthly subscription with extra gifts, free twin breeding on friends' farms and time with your animals. Farm Pass renews monthly until you cancel. Privacy Policy: https://ttqoudbyaxndaahyjmsf.supabase.co/functions/v1/privacy Terms of Use: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+      "body": "Fields of Fortune is a cozy farming game made to be played fully with VoiceOver, and just as fun to play by sight. Every screen is laid out for swiping, every picture is described in words, and every action tells you exactly what happened.\n\nGROW YOUR FARM Plant dozens of crops, watch them grow in real time and harvest them in normal, good and excellent quality. Buy more land as you level up, all the way to level 200.\n\nRAISE AND BREED ANIMALS Keep chickens, cows, sheep, horses, alpacas, unicorns and many more. Feed them the foods they love, collect their products, help them level up from Standard to Elite, and breed pairs to discover rare new breeds. Dress your animals in clothes you make in the Tailor Shop.\n\nMAKE GOODS Turn your harvest into bread, cheese, jam, wine, pizza, sweaters and over a hundred other goods in your own bakery, dairy, kitchen, winery and more. Hire workers to keep production running.\n\nFISH FROM THE PIER Cast your line, hear the distance read with every click as you pull back, wait for a bite and reel in fish, shells and rare sea treasures. Upgrade your poles and bait as you go.\n\nFARM WITH FRIENDS Add friends, visit their farms, water their crops, feed their animals, send gifts and trade items. Chat with everyone in public chat or privately with friends. Sell your goods to other players on the marketplace.\n\nDAILY GOALS AND CHALLENGES Collect a daily reward, complete daily quests, earn bronze, silver and gold medals, climb the leaderboards and compete in weekly challenges for surprise rewards.\n\nMADE FOR VOICEOVER - No headings to hunt for: swipe through each screen from the top. - Long lists are grouped into lists that open and close, each with its numbers. - Sounds, music and haptics for every action, with full volume controls. - Reduce Motion is respected everywhere.\n\nOPTIONAL PURCHASES The whole game is free to play. The Store sells Fortune Gem packs, for time in the forest and forest tools, three animals you cannot get anywhere else, and Farm Pass, a monthly subscription with extra gifts, free twin breeding on friends' farms and time with your animals. Farm Pass renews monthly until you cancel.\n\nPrivacy Policy: https://ttqoudbyaxndaahyjmsf.supabase.co/functions/v1/privacy Terms of Use: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
+      "sourceName": "AppleVis Apps",
+      "originalUrl": "https://www.applevis.com/apps/ios/games/fields-fortune",
+      "publishedAt": "2026-11-10T12:29:21.000Z",
+      "categories": [
+        "apple",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-681ef2755ebe9117:en",
+      "sourceId": "ars-technica-681ef2755ebe9117",
+      "lang": "en",
+      "title": "Ukraine’s fiber-optic drones get squeezed by AI data center demand",
+      "summary": "Ukraine competes with Russia and data centers for China’s optical fiber supply.",
+      "body": "Impervious to battlefield jamming, drones physically connected to human operators by miles of fiber-optic cables have become such a common weapon of war in Ukraine that trees and fields are strewn with tangled cables thinner than fishing lines. But importing such fiber-optic material from China has become more costly as drone warfare’s needs compete with global demand from AI data centers for the same limited supply—and so Ukrainian drone makers have been adapting.\n\nSince the full-scale Russian invasion of Ukraine began in February 2022, the Ukrainians have been forced out of necessity to continually develop battlefield innovations involving first-person view (FPV) quadcopter drones and other heavier types of drones. But it was the Russian military that first deployed unjammable fiber-optic drones to repel Ukrainian forces’ cross-border incursion into the Kursk Oblast in 2024. The Ukrainians quickly followed suit in developing their own fiber-optic drones, given the drones’ capability to shrug off electronic warfare jamming that could neutralize radio-controlled drones.\n\nRussia and Ukraine have relied on Chinese suppliers for some off-the-shelf drones and a wide array of drone components, including bulk orders of fiber wound around very large spools or sometimes small finished spools ready for installation on drones. The finished spools can hold enough fiber-optic cable for drones to regularly operate at ranges of dozens of miles, and sometimes up to 62 miles (100 kilometers) in extreme cases, as reported by the independent Russian publication The Insider .\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/gadgets/2026/11/ukraines-fiber-optic-drones-get-squeezed-by-ai-data-center-demand/",
+      "publishedAt": "2026-11-10T12:15:32.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "conticgo-9609c8ffa45308ac:es",
       "sourceId": "conticgo-9609c8ffa45308ac",
       "lang": "es",
@@ -5614,22 +5875,6 @@
       "categories": [
         "tecnologia-accesibilidad",
         "braille"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-bd61e4e219a1afa2:en",
-      "sourceId": "techcrunch-bd61e4e219a1afa2",
-      "lang": "en",
-      "title": "Otter AI can now follow conversations across 30+ languages",
-      "summary": "Otter AI just added support for 27 languages and revealed an upcoming feature that can follow along if speakers switch between languages.",
-      "body": "Otter.ai, the AI-powered note-taking tool, announced Tuesday that it’s expanding its multilingual capabilities, including a new multilingual transcription feature that can follow conversations as speakers switch between languages during the same meeting.\n\nThe company is also adding support for 27 languages, its largest language expansion to date. Once the rollout is complete, Otter will support 31 languages in total, making the platform more accessible to international teams.\n\nThe upcoming feature will automatically detect language changes and continue transcribing without requiring users to adjust settings. For example, a call could move from English to Korean to Portuguese, with Otter following the conversation throughout.\n\nThe update aims to address a common challenge for global teams, where language differences can make meetings and collaboration more difficult.\n\n“Otter is breaking down language barriers so any company, no matter where they’re based, can build a system of record for the decisions for voice AI communication,” an Otter spokesperson told TechCrunch.\n\nThirteen of the new languages are available now: Mandarin Chinese, Korean, German, Italian, Cantonese, Portuguese, Russian, Indonesian, Malay, Dutch, Turkish, Vietnamese, and Polish.\n\nThe remaining 14 languages are coming soon and include Swedish, Danish, Finnish, Arabic, Hindi, Thai, Hebrew, Norwegian, Greek, Macedonian, Persian, Czech, Hungarian, and Romanian.\n\nThe newly added languages run on Otter’s own speech models. The company told us it trained them using publicly available datasets and worked with native-speaking volunteers to review transcripts and check accuracy.\n\nThe announcement comes as Otter continues to expand beyond transcription and into other workplace AI tools, following its $320 million funding from General Catalyst.\n\nIt recently introduced Work Mode, which uses meeting history and connected apps to help users prepare for upcoming calls. For instance, the feature pulls information from previous customer conversations, outstanding action items, notes from teammates’ similar calls, and recent Google Drive files.\n\nAnother recent addition is Live Assist, which provides real-time coaching during meetings. It analyzes the conversation and offers relevant suggestions based on what has already been talked about and what is happening in the moment.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/11/09/otter-ai-can-now-follow-conversations-across-30-languages/",
-      "publishedAt": "2026-11-10T07:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
       ]
     },
     {
@@ -5652,170 +5897,6 @@
     },
     {
       "kind": "news",
-      "id": "9to5mac-3fb43fd8692d6f98:en",
-      "sourceId": "9to5mac-3fb43fd8692d6f98",
-      "lang": "en",
-      "title": "9to5Mac Daily: November 9, 2026 – Apple software development, iOS 28",
-      "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
-      "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/09/daily-november-9-2026/",
-      "publishedAt": "2026-11-10T00:49:31.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "android",
-        "apps-accesibles",
-        "programas-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-858896563b61668f:en",
-      "sourceId": "the-verge-858896563b61668f",
-      "lang": "en",
-      "title": "David Ellison says AI could be the ‘biggest creative unlock in modern history’",
-      "summary": "During Paramount Skydance's latest earnings call, CEO David Ellison said \"it's hard to imagine\" AI won't have a bigger impact on the film industry than CGI. In response to a question about the company's outlook for AI, Ellison said: \"I think when you zoom out and look at production, AI really has the potential to […]",
-      "body": "During Paramount Skydance's latest earnings call , CEO David Ellison said \"it's hard to imagine\" AI won't have a bigger impact on the film industry than CGI. In response to a question about the company's outlook for AI, Ellison said:\n\n\"I think when you zoom out and look at production, AI really has the potential to be the biggest creative unlock in modern history. The last time we saw anything close to this was really the, you know, advent of CGI and digital composites in the early 90s. That technology gave birth to amazing stories like Jurassic Park and Terminator 2 , and it's hard to imagine that AI is not going to have a more significant i …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/entertainment/1030510/paramount-skydance-david-ellison-ai",
-      "publishedAt": "2026-11-10T00:28:49.000Z",
-      "categories": [
-        "tecnologia-general",
-        "windows",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-9a85f500c98ada54:en",
-      "sourceId": "the-verge-9a85f500c98ada54",
-      "lang": "en",
-      "title": "What could China get from Jensen Huang?",
-      "summary": "It's difficult to overstate Nvidia's power in today's AI landscape. The company's chips are the bedrock upon which advanced AI technology in the US is being built, and demand has consistently outpaced supply for years. Nvidia has also been an influential investor in a wide range of up-and-coming AI companies in recent years, with about […]",
-      "body": "It's difficult to overstate Nvidia's power in today's AI landscape. The company's chips are the bedrock upon which advanced AI technology in the US is being built, and demand has consistently outpaced supply for years. Nvidia has also been an influential investor in a wide range of up-and-coming AI companies in recent years, with about $99 billion worth of equity investments in frontier AI labs, neoclouds, infrastructure companies, and more. Its chief executive has even become close with President Donald Trump.\n\nThis is why, as both cofounder and longtime CEO of Nvidia, Jensen Huang would be a valuable target for a foreign adversary with sig …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1030328/what-could-china-get-from-jensen-huang",
-      "publishedAt": "2026-11-09T23:51:58.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-9438e4170bd12b88:en",
-      "sourceId": "engadget-9438e4170bd12b88",
-      "lang": "en",
-      "title": "Why you probably shouldn't buy gadgets with micro USB ports",
-      "summary": "USB-C has largely taken over where micro USB used to reign, but you'll still spot (and should skip using) some devices using the older connector.",
-      "body": "Micro USB isn't totally extinct, but it's still best avoided if seen.\n\nWe may receive a commission on purchases made from links.\n\nUSB 1.0 dates back to 1996, and since then, the tech industry has made a mockery of the \"universal\" part of the acronym by spinning off more variants than Willy Wonka has candy bars. Even on cutting-edge PCs, you'll likely encounter a mix of USB-A and USB-C ports , then spend a few moments trying to figure out where to plug in your USB 4 cables .\n\nMicro USB is one of the most prolific variants, as it helped spread the data and charging benefits of USB to smaller devices. It came after other standards, like mini USB, but it had much more staying power than others. There's a chance you still have a few micro USB products laying around. And despite the wide transition to USB-C, you might even be able to find new cables and accessories to buy today that still use the older connection standard.\n\nWhen you have a choice, however, it's best to skip micro USB. It's smart to be picky about the charging ports on the products you buy, since micro USB can only hold back their performance and compatibility.\n\nBroadly, the presence of micro USB signifies a product is either old or cutting corners. The format dates back to 2007 — the same year the original iPhone shipped and an eternity in technology. USB-C does presumably raise manufacturing costs, but only relatively. That standard rolled out in 2014, which was well over a decade ago. It's become so common that even cheap USB fans have ditched the micro USB form factor.\n\nMore importantly, micro USB is limited to outdated data and power specs. Data speeds are liable to top out at USB 2.0's 480 Mbps, whereas USB 3.0 enables 5 Gbps and USB 4 starts at 40 Gbps. Power might be the true killer, though. Micro USB wall chargers are unlikely to deliver any more than 7.5W, which is practically glacial when some laptops and Android phones use USB-C to top 100W with modern fast charging standards . At the extreme, devices that fully exploit the USB PD (Power Delivery) standard can hit 240W.\n\nThe compatibility factor we mentioned impacts convenience. Because micro USB is no longer popular, you'll need to keep different cables around than the ones you use to charge everything else. That takes more space in your bag when packing and occupies outlet slots that could be used for additional USB-C cables. Adapters can help, but they're clunky. There's also the practical matter of micro USB not being reversible like USB-C, so you'll have to fumble around to find the right orientation every so often. It's far easier to accidentally bend the pins in the older standard.\n\nAs time goes on, it will be increasingly hard to find any new micro USB products, similarly to how you can't waltz into a local big-box retailer and assume there will be composite cables for an old VCR. You're certainly not going to find micro USB ports on any new smartphone or computer.\n\nFor some gadget categories, there's nothing inherently wrong with micro USB. Wireless earbuds, for example, don't have terribly large batteries to fill, so even 7.5W may be enough to charge them quickly. I used to own Apple's micro USB-based Powerbeats3 buds, and you could get an hour of listening from them with five minutes of charging. As for data, 480Mbps should be plenty fast for file transfers under a gigabyte.\n\nIn most cases, it's worth holding onto the micro USB devices you already have. There's no sense spending money or generating e-waste if the port is the only drawback of a device. Just keep a dedicated charging cable handy for your older Kindle, flashlight, game controller or similar. But when it comes to buying new, look for USB-C. You'll likely get superior performance, and might actually save cash in the long run if it means not having to buy another product prematurely when micro USB's weaknesses rear their head.\n\nUSB-C has advantages even within the categories where micro USB can have value. For instance, while the Powerbeats3 offered up to 12 hours without a case, the Powerbeats Pro 2 come with a USB-C charging case that enables up to 45 hours of total playback. It's hard to imagine that case being feasible at all with micro USB.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2307748/why-avoid-buying-micro-usb-gadgets/",
-      "publishedAt": "2026-11-09T23:30:00.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-b546dca8e707663b:en",
-      "sourceId": "the-verge-b546dca8e707663b",
-      "lang": "en",
-      "title": "Everything we know so far about the Nvidia spy scandal targeting CEO Jensen Huang",
-      "summary": "The leather-jacketed CEO of Nvidia, Jensen Huang, has acknowledged an affair with Megaspeed exec Alice Huang, spurring an investigation by his company and intense discussions worldwide. Recent reporting noted that since last year, US intelligence reports had identified Alice Huang (no relation) as not only the exec for an AI compute company renting access to […]",
-      "body": "The leather-jacketed CEO of Nvidia, Jensen Huang, has acknowledged an affair with Megaspeed exec Alice Huang, spurring an investigation by his company and intense discussions worldwide. Recent reporting noted that since last year, US intelligence reports had identified Alice Huang (no relation) as not only the exec for an AI compute company renting access to Nvidia GPUs, but also a spy for China’s Ministry of State Security.\n\nIn recent years, Nvidia has become a key part of the Trump administration’s AI push, a central figure in negotiations over potential Chinese access to cutting-edge AI hardware, and a company that has used its now $4 trillion-plus market cap to finance other AI companies, including the “neoclouds” like Coreweave who have been some of its biggest customers. So far, Nvidia and Jensen Huang have said that they have “no reason to believe that either national security or NVIDIA secrets were compromised,” but that hasn’t settled things as the investigation continues.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1030422/nvidia-jensen-huang-ai-china-alice-huang",
-      "publishedAt": "2026-11-09T23:07:59.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-7e90ba4f7b74f703:en",
-      "sourceId": "techcrunch-7e90ba4f7b74f703",
-      "lang": "en",
-      "title": "Hotel giant Wyndham exposed customer data after app security lapse",
-      "summary": "Exclusive: Wyndham left a hardcoded credential in its customer app, allowing anyone to access customer data. The hotel giant wouldn't say if it has the ability to check for any past unauthorized access.",
-      "body": "Hotel and resort giant Wyndham has acknowledged a cybersecurity incident after a good-faith security researcher discovered a bug that allowed anyone to access customers’ personal information.\n\nSecurity researcher Robert Wiggins at What Security exclusively told TechCrunch that he found a password inside the source code of Wyndham’s Android app, which granted access to an internal company database, hosted by tech company Salesforce.\n\nWiggins told TechCrunch that the credential exposed personal information including customer names, email addresses, and Wyndham member numbers. The database also stores customer login tokens ( called JWTs ) that keep customers logged-in to their apps without having to repeatedly enter their own passwords. The database also contained Wyndham files and documents.\n\nAccording to Wiggins, the database had millions of entries, but he was unable to determine an accurate number of exposed customer records. Wyndham touts some 129 million enrolled rewards members.\n\nThe researcher said Wyndham has no way to report security flaws, and asked for TechCrunch’s help in alerting the company. Soon after TechCrunch made contact with Wyndham’s cybersecurity staff, the exposed credential was revoked, preventing any further access to the database.\n\n“Our team has taken steps to address the issue,” a Wyndham spokesperson told TechCrunch. “Our security teams have no evidence of any unauthorized access,” the statement added, without providing any further details about the claim.\n\nWyndham’s spokesperson would not say, when asked, whether the company had the technical means, such as server logs, to determine if anyone had access to the customer database prior to Wiggins’ discovery.\n\nTechCrunch also asked Wyndham whether it planned to notify customers whose information was exposed, or disclose the incident to U.S. regulators, such as filing a notice with the U.S. Securities and Exchange Commission, as public companies are required to do for material cybersecurity incidents. Wyndham would not say.\n\nWyndham’s spokesperson also would not say for how long the password was embedded in its customer app, or how Wyndham plans to ship a long-term fix for the app.\n\nApp and software developers generally avoid including passwords or credentials in publicly released software and apps — a process known as “hardcoding” — as anyone with a copy of the software can extract the password and use it to access its associated server or database. Given the simplicity with which credentials can be abused by anyone, many cases of hardcoded credentials are automatically scored with a maximum vulnerability severity rating.\n\nFor Wiggins, this is his second public discovery of hardcoded credentials in two weeks, after finding a near-identical vulnerability in Applebee’s app that exposed customer data. Wiggins relied on AI tools for both discoveries, which make it easier to identify simple security weaknesses, such as hardcoded credentials, by scouring thousands of lines of decompiled app code every second.\n\nWhen asked about Wyndham’s response, Wiggins told TechCrunch that he was glad the company fixed the issue, but noted that without visibility into any past activity, someone with malicious intent could have leaked large amounts of customers’ personal information.\n\nThe company would not say whether it planned to set up a vulnerability disclosure program to allow outside security researchers and hackers to privately report security vulnerabilities.\n\nMichael Francess, Wyndham’s cybersecurity director who responded to the incident, told TechCrunch that researchers can alert [email protected] with details of potential security issues. The company’s spokesperson would not say whether it plans to change its website to allow researchers to alert the company.\n\nThis is the latest known security incident at Wyndham in recent years. In 2024, a security researcher found several Wyndham hotel check-in desks were running remote-access spyware that was leaking screenshots of guest records and booking information to the open web.\n\nSoon after our reporting, the spyware app found on the hotel computers, called pcTattletale, was hacked and its banks of customer data stolen, forcing the company’s owner, Bryan Fleming, to shut down the company. Fleming, a former resident of Michigan, was later arrested by federal authorities and convicted of making, selling, and advertising unlawful spyware.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/11/09/hotel-giant-wyndham-exposed-customer-data-after-app-security-lapse/",
-      "publishedAt": "2026-11-09T23:03:46.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-bf059bf0f4e731ac:en",
-      "sourceId": "engadget-bf059bf0f4e731ac",
-      "lang": "en",
-      "title": "The pros and cons of using mesh Wi-Fi",
-      "summary": "Should you buy a mesh Wi-Fi system or a standalone router? Learn how each handles range, roaming, and cost, and which one fits your home best.",
-      "body": "Mesh covers more ground, but a standalone router may be all you need.\n\nWe may receive a commission on purchases made from links.\n\nDiving into Wi-Fi routers for the first time can be baffling. There are a lot of concepts to understand, and not just the differences between Wi-Fi 6 and 7 . Speeds and features vary between models using the same specification, and it may not be clear which of your devices can (or should) connect to which frequency bands.\n\nOne of the biggest purchasing decisions is whether to go with a mesh Wi-Fi system or stick to a standalone router. Most people probably default to standalone products, since they're cheaper. In fact, given the price gap, it's important to have concrete reasons for stepping up to a mesh product.\n\nThe value of mesh systems mostly boils down to range and seamless roaming. In some situations, however, a standalone router may not only be acceptable, but preferable. Here's how to decide which option is right for you.\n\nThe main advantage of mesh Wi-Fi is range. In a mesh system, each satellite router acts as a sort of repeater for the gateway router that connects to your modem or fiber terminal. In theory, a relatively cheap kit like an Eero 7 two-pack can cover up to 4,000 square feet. If you need more coverage, you just add another compatible router. Conversely, standalone products have a fixed coverage radius unless you buy a Wi-Fi extender .\n\nUnlike extenders, mesh systems enable seamless transitions. There are no separate SSIDs (network IDs) — they simply hand devices off from one unit to another based on how close they are. This avoids the hassle of manual SSID selection and the problems that sometimes arise when devices need to talk to each other and assume a shared network. You also get more consistent speeds, as a signal should never degrade much unless you roam into the wider world.\n\nThis seamlessness comes with downsides beyond price. Since mesh products depend on unified SSIDs, you can't assign separate IDs for each frequency band; band steering is automatic. I know from experience that mesh routers can trip up cheap 2.4GHz-only smart home accessories because their setup apps often can't find them when your phone is on 5 or 6GHz. On the flip side, you might want to force devices like PCs or VR headsets over to 5 or 6GHz for the best possible bandwidth.\n\nIt's also worth noting that with cheaper mesh products, the backhaul between routers sometimes shares the same bands as connecting devices. When that happens, performance can suffer considerably. If you don't have the budget for a tri- or quad-band system, there may not be much point in going with mesh technology unless filling in dead zones is all that matters.\n\nMesh is the obvious choice if you live in a multi-floor house, or want coverage in your backyard, detached shed or garage. A standalone router can cause smart home conflicts and create slow or dead zones, especially since metal and concrete can block signals. When interference persists, some mesh systems will even let you set up a wired Ethernet backhaul as a workaround.\n\nMost apartments should be thoroughly covered by a standalone router unless you're encountering specific speed or range issues. You're better off saving your money or putting the savings toward a faster router.\n\nThere are some borderline cases. For instance, some multi-floor homes are small enough to be covered by a single router. If you want to push the limits, place your router in a relatively central location, and keep it unobscured by anything that might harm signal quality. Think of your router as a radio station — you wouldn't expect to hear the news clearly if the broadcast tower were on the opposite side of a mountain.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2307745/using-mesh-wifi-pros-and-cons/",
-      "publishedAt": "2026-11-09T23:00:00.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-0906a2301b99ee88:en",
-      "sourceId": "9to5mac-0906a2301b99ee88",
-      "lang": "en",
-      "title": "Apple Intelligence completes regulatory registration for iPad and Mac in China",
-      "summary": "Apple has completed an important regulatory step ahead of Apple Intelligence’s expected launch in China this December. Here are the details. more…",
-      "body": "Apple has completed an important regulatory step ahead of Apple Intelligence’s expected launch in China this December. Here are the details.\n\nIn late October, Apple published a press release on its Chinese Newsroom website confirming its intention to launch Apple Intelligence in China this December, as part of iOS 27.3.\n\nApple went on to release the first iOS 27.3 developer beta a few days later, allowing users in China to test Apple Intelligence ahead of its public launch.\n\nIn its press release, however, Apple also noted that the initial rollout would be limited to iPhones, as support for other platforms was still pending regulatory approval.\n\nNow, as spotted by Reuters , Apple Intelligence “has been ‌registered for use on tablets and laptops in China, Shanghai’s cyberspace regulator said on Monday.”\n\nFor context, generative AI services must complete a regulatory registration process before they can launch publicly in China.\n\nApple Intelligence, which, in China, relies on Alibaba’s Qwen model to power certain AI features, had already received regulatory approval for iPhones in July, following months of delays and negotiations with Chinese authorities.\n\nWith today’s registration, Apple has cleared another regulatory hurdle ahead of Apple Intelligence’s launch in China. However, the company has yet to confirm whether iPad and Mac support will also arrive in December.\n\nTo read Reuters ‘ full report, follow this link .",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/09/apple-intelligence-completes-regulatory-registration-for-ipad-and-mac-in-china/",
-      "publishedAt": "2026-11-09T22:54:52.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-4161f0feb953f71f:en",
-      "sourceId": "9to5mac-4161f0feb953f71f",
-      "lang": "en",
-      "title": "Today’s macOS updates fix security gap involving eMudhra certificates",
-      "summary": "Apple today released macOS updates that address a security gap involving compromised eMudhra certificates, after initially blocking them in Safari, Mail, and other apps in October. Here are the details. more…",
-      "body": "Apple today released macOS updates that address a security gap involving compromised eMudhra certificates, after initially blocking them in Safari, Mail, and other apps in October. Here are the details.\n\nA few weeks ago, Mozilla reported that private keys of eight intermediate certificate authorities operated by eMudhra, an Indian digital certification company, had been compromised.\n\nIn essence, these certificates are used to establish trust in digital certificates that verify website identities and enable secure connections.\n\nWith access to the compromised private keys, bad actors could potentially create fraudulent certificates that appear legitimate, allowing them to impersonate websites and intercept sensitive user information.\n\nIn response to the compromise, Apple began automatically blocking the affected certificates on October 19, followed by additional protections on October 23.\n\nThese changes were delivered through automatic certificate configuration updates, meaning users didn’t need to install a macOS update to be protected.\n\nWhile these measures protected Safari, Mail, and apps that use Apple’s networking and security frameworks, they didn’t cover all of macOS, as certain command-line tools, including curl and git, could still accept the compromised certificates.\n\nAt the time, Apple published a support article with instructions for administrators to manually address this remaining security gap, while promising a fix in a future macOS update.\n\nToday, Apple updated the document to confirm that the fix is now available.\n\nAs Apple explains, macOS 27.2.1, macOS 26.7.3, and macOS 15.8.3, released earlier today , prevent the affected command-line tools from accepting the compromised certificates, eliminating the need for administrators to manually address the issue.\n\nThe updates also remove five root CA certificates from /etc/ssl/cert.pem, including three additional eMudhra certificates that weren’t part of Apple’s original manual workaround.\n\nStill, for users who are unable to install the latest macOS updates, Apple continues to provide instructions for manually addressing the issue in its support document, along with the names and SHA-256 fingerprints of the 12 affected certificates and five root CA certificates removed by the updates.\n\nApple also notes that “some apps and tools include their own list of root CA certificates and don’t use Apple’s block or /etc/ssl/cert.pem,” and advises users to contact the developer of those apps and tools.\n\nTo read Apple’s full support document, follow this link .",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/09/todays-macos-updates-fix-security-gap-involving-emudhra-certificates/",
-      "publishedAt": "2026-11-09T22:17:36.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-5a4866d7f206d84f:en",
-      "sourceId": "engadget-5a4866d7f206d84f",
-      "lang": "en",
-      "title": "Apple starts offering $50 extended usage packs for AI features in Creator Studio",
-      "summary": "It'll cost you to access Logic Pro's AI assistant after you reach the monthly usage limit.",
-      "body": "It’ll cost you to access Logic Pro’s AI assistant after you reach the monthly usage limit.\n\nApple has made it clear for a while that Siri AI is bound by daily usage limits and that it will offer expanded access via iCloud+ plans. The company hasn't shed more light on exactly how that will work, but it has revealed how Creator Studio users can continue wielding the AI features of those apps after they reach the regular limits.\n\nIt has started selling $50 intelligence usage packs for Creator Studio, and Logic Pro is the first app to support these. Apple updated Logic Pro last month to include an assistant that's powered by its own models as well as those from third parties. The company said the chatbot can help \"creators and producers navigate production workflows, start a new song, set up a vocal track from a single prompt or refine an active project.\"\n\nAs noted by 9to5Mac , folks can view their AI usage in the app by going to Logic Pro on the menu bar, then Intelligence Features > Show Usage . The window that pops up includes a Buy More Usage button — clicking this takes you to the option to buy an intelligence usage pack.\n\nA support page explains that users with active Apple Creator Studio subscriptions in the US, UK, Canada, Brazil, France, Germany, India and Mexico can buy intelligence usage packs to keep using AI features after they reach their monthly usage limit. A pack is tied to the Apple Account used to purchase it — there's no Family Sharing support.\n\n\"Unused additional usage purchased with intelligence usage packs roll over from month to month and expire 12 months after purchase,\" Apple added. \"Additional usage gets consumed for relevant features only after you've reached your monthly limit in any given month.\"\n\nIt seems likely that Apple will expand intelligence usage packs to other Creator Studio apps, such as Final Cut Pro and Pixelmator Pro. It's interesting that Apple is opting for this approach over a regular subscription, but perhaps the company has other offerings planned for the future. For what it's worth, Creator Studio apps are available via a subscription or one-time purchase .",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2311500/apple-starts-offering-50-dollar-extended-usage-packs-for-ai-features-in-creator-studio/",
-      "publishedAt": "2026-11-09T20:56:51.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "ars-technica-724ba7e1232dd084:en",
       "sourceId": "ars-technica-724ba7e1232dd084",
       "lang": "en",
@@ -5825,21 +5906,6 @@
       "sourceName": "Ars Technica",
       "originalUrl": "https://arstechnica.com/gadgets/2026/11/a-sam-altman-parody-offers-an-amusing-lesson-in-memory-management/",
       "publishedAt": "2026-11-09T20:49:09.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-1cb139eb0d612d47:en",
-      "sourceId": "ars-technica-1cb139eb0d612d47",
-      "lang": "en",
-      "title": "Vulnerability that lets hackers SSH into Linux devices is under active exploitation",
-      "summary": "\"*sshole\" poses a serious threat to Internet security.",
-      "body": "Hackers are actively exploiting a recently discovered critical vulnerability that allows them to log in to privileged accounts on many Linux systems, multiple researchers are reporting.\n\nThe vulnerability, tracked under the name *sshole, arises from the interaction between OpenSSH and a code library known as musl. Linux systems that use both of these packages and meet certain other requirements can be hacked to give unauthenticated access to high-privilege accounts in a matter of seconds. *sshole became publicly known last Thursday and quickly stoked concerns it could lead to widespread compromise of Linux machines. Four days later, the prediction shows signs of becoming real.\n\nSecurity firm Greynoise said Monday that honeypots it maintains in Southeast Asia have come under attack by a group it’s tracking as GT10. The group conducted “mature intrusions\" into the systems, which Greynoise uses to detect attempted or successful attacks in real time. Greynoise subsequently gained access to a GT10 server that revealed potential other victims and some of the tools used in the campaign. A backdoor the group is using in the attacks contains Chinese language comments and appears to be generated with the use of AI.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/security/2026/11/vulnerability-that-lets-hackers-ssh-into-linux-devices-is-under-active-exploitation/",
-      "publishedAt": "2026-11-09T19:41:34.000Z",
       "categories": [
         "tecnologia-general"
       ]
@@ -5861,37 +5927,6 @@
         "apps-accesibles",
         "programas-accesibles",
         "sordoceguera"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-b36ede3b1c297192:en",
-      "sourceId": "techcrunch-b36ede3b1c297192",
-      "lang": "en",
-      "title": "Jensen Huang’s affair with alleged Chinese spy puts Nvidia’s China ambitions under scrutiny",
-      "summary": "Jensen Huang’s alleged affair with a suspected Chinese spy threatens to complicate Nvidia’s lobbying efforts to loosen U.S. chip export restrictions and maintain access to China’s lucrative AI market.",
-      "body": "Nvidia CEO Jensen Huang has never been quiet about his belief that the U.S. should continue selling AI chips to China, rather than shutting the country off from the technology. The revelation that he had an affair with an alleged Chinese spy threatens to complicate that argument.\n\nThe Financial Times reported Friday on Huang’s relationship with Alice Huang, a former executive at Megaspeed, an Nvidia customer. Jensen Huang admitted to the affair and apologized in a memo to the company on Sunday. U.S. intelligence officials believe Alice Huang was recruited by Chinese intelligence to gather information about the CEO and influence the company’s efforts to loosen chip export restrictions.\n\nNvidia’s independent directors, working with outside legal counsel, are investigating the matter, and Congress is already demanding answers .\n\nThe controversy comes at a sensitive moment for Nvidia. Historically, China has been a big market for the company. It has shrunk in recent years due to strict U.S. export controls and an aggressive push by Beijing for domestic alternatives. In the three months ended July 26, Nvidia recorded $7.9 billion in revenue from customers headquartered in China, roughly 8% of total revenue.\n\nHuang has repeatedly lobbied the U.S. government to expand access to China , and some of his persuasion tactics have been successful. Huang met repeatedly with President Donald Trump and administration officials last year; afterward, the government reversed restrictions on Nvidia’s H20 chips and allowed exports of its more powerful H200 processors.\n\nOn numerous occasions, Huang has publicly lamented export controls, calling them a “ failure ” at a conference last year and saying in May that it was “ not wise ” for the U.S. and China to create two distinct AI ecosystems. He has also warned that shutting Nvidia out of China’s compute market would enable the country to develop its own AI chips to challenge Nvidia internationally.\n\nChina is already moving in that direction. Reuters reported last week that about 600,000 H200 chips are being held in Hong Kong, awaiting shipment to mainland China. Beijing is pushing AI companies to prioritize buying chips from Chinese companies instead.\n\nThe idea that Huang needed any encouragement in the form of an attractive woman to push for greater access to China seems like a stretch, particularly because his lobbying efforts predate their reported meeting at an Nvidia event in early 2024. At the end of the day, Huang is a salesman trying to dominate one of the world’s biggest AI markets.\n\nStill, the allegations involving Alice Huang open new scrutiny of the company’s business relationships and could taint any assurances Nvidia offers that it can prevent sensitive technology from reaching unauthorized customers.\n\nOnce made, rumors of questionable allegiances can be hard to shake. Secretary of State Marco Rubio reportedly warned officials close to Trump earlier this year about Huang’s relationship with an alleged spy. Even if Nvidia’s investigation finds that Huang didn’t share secrets with his paramour, the question is whether he’ll be able to convince Washington that Nvidia can still responsibly do business with China.\n\nNvidia did not respond to a request for comment.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/11/09/jensen-huangs-affair-with-alleged-chinese-spy-puts-nvidias-china-ambitions-under-scrutiny/",
-      "publishedAt": "2026-11-09T18:09:52.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-7b31dbaf0a00e6b6:en",
-      "sourceId": "ars-technica-7b31dbaf0a00e6b6",
-      "lang": "en",
-      "title": "Claude Code is accidentally exposing secrets all over GitHub",
-      "summary": "\"Do not ask again\" prompt leads to passwords, API keys, and more being shared.",
-      "body": "Claude Code is leaking sensitive information on public GitHub instances thanks to a partial oversight in the way its settings files are handled. That's the finding of AI security researchers at Apiiro, who discovered thousands of secrets , including database passwords, API tokens, and root logins, amid Claude Code settings files embedded in GitHub repositories.\n\nThe leak stems from the way Claude Code handles user approval for automated shell commands. When a user chooses the \"Yes, and don't ask again\" option to approve running a command, that choice gets stored as part of a rule in the local \".claude/settings.local.json\" file on the user's computer. That rule is sometimes coded as a pattern, but the command itself is often written to that settings file as is, including any sensitive information that may be embedded within it.\n\nThis isn't really a significant security issue if the settings file stays on the user's local machine (assuming that machine doesn't become compromised itself, of course). And Anthropic notes in its Claude Code documentation that this particular settings file gets added to the developer's global .gitignore list , which usually prevents it from being shared publicly.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/ai/2026/11/claude-code-settings-files-expose-thousands-of-secrets-on-github/",
-      "publishedAt": "2026-11-09T17:24:26.000Z",
-      "categories": [
-        "tecnologia-general"
       ]
     },
     {
@@ -5988,7 +6023,7 @@
       "sourceId": "applevis-apps-fd101b8d45f04ec5",
       "lang": "en",
       "title": "Corner Grocer: Market Sim",
-      "summary": "Run a little neighborhood market. Order stock, fill the shelves, set your prices, ring up customers at the register, and grow your shop from a corner store into a premium market with a second branch. Corner Grocer is a market management game built to be played with VoiceOver from the very first day. Sighted players and VoiceOver players play the same game with the same rules. A DAY AT THE MARKET • Morning: check deliveries, prices and today's event, then place your orders in the office. • Open: customers come in, ask for help and queue up. Scan their items, take cash or card, and count out the change. • Stock: open crates in the stockroom, put goods on the right shelves and watch the dates. Goods go off, and a wrong shelf sells less. • Evening: read the report, get one clear tip for tomorrow and decide what to invest in. GROW • Start with an empty corner shop and a basket of bread. Earn, then invest: shelves, fridges, freezers, produce stands, bakery cases and deli counters in build mode. • Move up through four store sizes: corner shop, mini market, big market and premium market. • License new product lines. There are 48 products, from bread and milk to hummus, pet food and olive oil. • Open extra registers and hire cashiers. Your own register is always yours. • Much later, open a second branch run by a manager you choose, and read its result in the evening report. • Invest in upgrades, supplier contracts and campaigns. Contracts and campaigns can renew themselves. • In the office, one button fills your order from the suggestions. In the stockroom, one button places every crate that has room. • Daily goals, 22 achievements, and events such as heat waves, rain, power cuts, rival sales and supplier delays. • There is no final day. Play as long as you like. BUILT FOR VOICEOVER • Every station has labelled controls in a fixed order, plus actions for the rotor. Anything you can drag also has a way to do without dragging. • Three speech levels: Full, Balanced and Sounds First. • Magic Tap pauses and resumes the day. • Sound carries information: door chimes, scanner beeps, queue alerts, shelf warnings. The Listening Room in Settings plays every sound and tells you what it means. • Easy, Normal and Custom modes, with assists for patience, day length, customer flow, wrong-shelf protection, undo and clearing spoiled goods each morning. Assists are for everyone and always free. • Short optional small jobs fill the quiet moments at the register. • Customer voices are generated with AI. You can turn them down or off in Settings. MAKE IT YOURS Decorate your shop in the Shop Studio: floors, walls, counters, signs, lights, decor and outfits, plus atmospheres, music albums and end-of-day tunes. Name your shop and let the game describe it to you. FREE TO PLAY, WITH OPTIONAL ADS AND PURCHASES The game is free to download. Cash from the shop pays for stock, shelves and upgrades. Coins are only for sound and looks, and never make the game easier or harder. You can earn Coins by playing and by watching optional ads, or buy Coin packs. Coin packs and support packs are optional in-app purchases. Accessibility features and Easy mode are always free. ADS Ads come from Google AdMob. Optional ads in the evening report and the Shop Studio give 10 Coins each, up to 3 a day. Without VoiceOver, a short full-screen ad can also play between days from day 5. Players using VoiceOver never get forced ads. Any support pack (Starter, Supporter or Founder) removes ads. Ads are personalised only if you allow tracking when the game asks. Play in 11 languages: English, Turkish, German, Spanish, French, Italian, Japanese, Korean, Portuguese (Brazil), Russian and Chinese (Simplified). Customers speak all 11 languages. English and Turkish voices come with the app; the others download once while you are online. Questions or feedback: support@birkinapps.com",
+      "summary": "Run a little neighborhood market. Order stock, fill the shelves, set your prices, ring up customers at the register, and grow your shop from a corner store into a premium market with a second branch. Corner Grocer is a market management game built to be played with VoiceOver from the very first day. Sighted players and VoiceOver players play the same game with the same rules. A DAY AT THE MARKET • Morning: check deliveries, prices and today's event, then place your orders in the office. • Open: customers come in, ask for help and queue up. Scan their items, take cash or card, and count out the change. • Stock: open crates in the stockroom, put goods on the right shelves and watch the dates. Goods go off, and a wrong shelf sells less. • Evening: read the report, get one clear tip for tomorrow and decide what to invest in. GROW • Start with an empty corner shop and a basket of bread. Earn, then invest: shelves, fridges, freezers, produce stands, bakery cases and deli counters in build mode. • Move up through four store sizes: corner shop, mini market, big market and premium market. • License new product lines. There are 48 products, from bread and milk to hummus, pet food and olive oil. • Open extra registers and hire cashiers. Your own register is always yours. • Much later, open a second branch run by a manager you choose, and read its result in the evening report. • Invest in upgrades, supplier contracts and campaigns. Contracts and campaigns can renew themselves. • In the office, one button fills your order from the suggestions. In the stockroom, one button places every crate that has room. • Daily goals, 22 achievements, and events such as heat waves, rain, power cuts, rival sales and supplier delays. • There is no final day. Play as long as you like. BUILT FOR VOICEOVER • Every station has labelled controls in a fixed order, plus actions for the rotor. Anything you can drag also has a way to do without dragging. • Three speech levels: Full, Balanced and Sounds First. • Magic Tap pauses and resumes the day. • Sound carries information: door chimes, scanner beeps, queue alerts, shelf warnings. The Listening Room in Settings plays every sound and tells you what it means. • Easy, Normal and Custom modes, with assists for patience, day length, customer flow, wrong-shelf protection, undo and clearing spoiled goods each morning. Assists are for everyone and always free. • Short optional small jobs fill the quiet moments at the register. • Customer voices are generated with AI. You can turn them down or off in Settings. MAKE IT YOURS Decorate your shop in the Shop Studio: floors, walls, counters, signs, lights, decor and outfits, plus atmospheres, music albums and end-of-day tunes. Name your shop and let the game describe it to you. FREE TO PLAY, WITH OPTIONAL ADS AND PURCHASES The game is free to download. Cash from the shop pays for stock, shelves and upgrades. Coins are only for sound and looks; earn them by playing or with an optional ad in the Shop Studio, or buy Coin packs. Accessibility features and Easy mode are always free. ADS AND SUPPORT PACKS Ads come from Google AdMob and never play while the shop is open. From day 3 a short full-screen ad can play between days, with or without VoiceOver; the game says when an ad starts and when it closes. Once a day, an optional ad in the evening report doubles that day's profit. Support packs (Starter, Supporter, Founder) remove ads, double the evening profit without an ad and give every new shop extra starting cash. Ads are personalised only if you allow tracking. Play in 11 languages: English, Turkish, German, Spanish, French, Italian, Japanese, Korean, Portuguese (Brazil), Russian and Chinese (Simplified). Customers speak all 11 languages. English and Turkish voices come with the app; the others download once while you are online. Questions or feedback: support@birkinapps.com",
       "body": "Run a little neighborhood market. Order stock, fill the shelves, set your prices, ring up customers at the register, and grow your shop from a corner store into a premium market with a second branch.\n\nCorner Grocer is a market management game built to be played with VoiceOver from the very first day. Sighted players and VoiceOver players play the same game with the same rules.\n\nA DAY AT THE MARKET • Morning: check deliveries, prices and today's event, then place your orders in the office. • Open: customers come in, ask for help and queue up. Scan their items, take cash or card, and count out the change. • Stock: open crates in the stockroom, put goods on the right shelves and watch the dates. Goods go off, and a wrong shelf sells less. • Evening: read the report, get one clear tip for tomorrow and decide what to invest in.\n\nGROW • Start with an empty corner shop and a basket of bread. Earn, then invest: shelves, fridges, freezers, produce stands, bakery cases and deli counters in build mode. • Move up through four store sizes: corner shop, mini market, big market and premium market. • License new product lines. There are 48 products, from bread and milk to hummus, pet food and olive oil. • Open extra registers and hire cashiers. Your own register is always yours. • Much later, open a second branch run by a manager you choose, and read its result in the evening report. • Invest in upgrades, supplier contracts and campaigns. Contracts and campaigns can renew themselves. • In the office, one button fills your order from the suggestions. In the stockroom, one button places every crate that has room. • Daily goals, 22 achievements, and events such as heat waves, rain, power cuts, rival sales and supplier delays. • There is no final day. Play as long as you like.\n\nBUILT FOR VOICEOVER • Every station has labelled controls in a fixed order, plus actions for the rotor. Anything you can drag also has a way to do without dragging. • Three speech levels: Full, Balanced and Sounds First. • Magic Tap pauses and resumes the day. • Sound carries information: door chimes, scanner beeps, queue alerts, shelf warnings. The Listening Room in Settings plays every sound and tells you what it means. • Easy, Normal and Custom modes, with assists for patience, day length, customer flow, wrong-shelf protection, undo and clearing spoiled goods each morning. Assists are for everyone and always free. • Short optional small jobs fill the quiet moments at the register. • Customer voices are generated with AI. You can turn them down or off in Settings.\n\nMAKE IT YOURS Decorate your shop in the Shop Studio: floors, walls, counters, signs, lights, decor and outfits, plus atmospheres, music albums and end-of-day tunes. Name your shop and let the game describe it to you.\n\nFREE TO PLAY, WITH OPTIONAL ADS AND PURCHASES The game is free to download. Cash from the shop pays for stock, shelves and upgrades. Coins are only for sound and looks, and never make the game easier or harder. You can earn Coins by playing and by watching optional ads, or buy Coin packs. Coin packs and support packs are optional in-app purchases. Accessibility features and Easy mode are always free.\n\nADS Ads come from Google AdMob. Optional ads in the evening report and the Shop Studio give 10 Coins each, up to 3 a day. Without VoiceOver, a short full-screen ad can also play between days from day 5. Players using VoiceOver never get forced ads. Any support pack (Starter, Supporter or Founder) removes ads. Ads are personalised only if you allow tracking when the game asks.\n\nPlay in 11 languages: English, Turkish, German, Spanish, French, Italian, Japanese, Korean, Portuguese (Brazil), Russian and Chinese (Simplified). Customers speak all 11 languages. English and Turkish voices come with the app; the others download once while you are online. Questions or feedback: [email protected]",
       "sourceName": "AppleVis Apps",
       "originalUrl": "https://www.applevis.com/apps/ios/games/corner-grocer-market-sim",
@@ -6155,22 +6190,6 @@
     },
     {
       "kind": "news",
-      "id": "applevis-apps-7e5a05a96328b998:en",
-      "sourceId": "applevis-apps-7e5a05a96328b998",
-      "lang": "en",
-      "title": "My Little Window",
-      "summary": "Grow a tiny garden on a sunlit windowsill. Plant a seed, watch it sprout in real time, and come back to a bloom. No ads, ever. My Little Window is a gentle idle garden that grows even while the app is closed. There is no failure here. Nothing withers, nothing rushes you, and every plant is happy to wait. GROW IN REAL TIME Seeds mature on their own schedule, from a one minute pothos to a full day jade. Water them, mist them, give them sun. Well tended plants sell for more. COLLECT THEM ALL Every home has twenty species for your Plant Book, 240 in all, and every one hides a rare variant with its own look. Open seed packs, chase rares, and cross-breed two seeds for a chance at something special. A JOURNEY OF LITTLE HOMES Complete a home to travel down the path to the next: twelve homes across four chapters, each with its own window, its own plants and its own rooms. • The Meadow: a woodland cabin, a suburban flower garden and a farmhouse kitchen garden. • Warm Shores: a beach cottage, a harbor and a lighthouse, where messages in bottles wash up on your sill. • Country Lanes: an English cottage garden, a prairie homestead and a hillside burrow, where bees visit your blooms and leave new seeds. • Sun & Stone: a Tuscan vineyard house, a Moroccan riad and a desert adobe, where every bloom you sell becomes a tile for a mosaic wall. More homes are on the way. MAKE IT YOURS Coins from your blooms furnish five cozy rooms in every home. Every armchair, shelf, and lamp gives your garden a lasting boost, from faster growth to luckier packs. A LIVING WINDOW Morning light, golden hour, starry nights, and quiet rain move across your window through the day. Animal friends wander by. A daily gift waits each morning, and streaks make it sweeter. KIND BY DESIGN No ads. No energy bars. No pressure. Gems can speed things up, but everything in the game can be earned for free. Pull up a chair by the window. Your garden is already growing.",
-      "body": "Grow a tiny garden on a sunlit windowsill. Plant a seed, watch it sprout in real time, and come back to a bloom. No ads, ever.\n\nMy Little Window is a gentle idle garden that grows even while the app is closed. There is no failure here. Nothing withers, nothing rushes you, and every plant is happy to wait.\n\nGROW IN REAL TIME Seeds mature on their own schedule, from a one minute pothos to a full day jade. Water them, mist them, give them sun. Well tended plants sell for more.\n\nCOLLECT THEM ALL Every home has twenty species for your Plant Book, 240 in all, and every one hides a rare variant with its own look. Open seed packs, chase rares, and cross-breed two seeds for a chance at something special.\n\nA JOURNEY OF LITTLE HOMES Complete a home to travel down the path to the next: twelve homes across four chapters, each with its own window, its own plants and its own rooms. • The Meadow: a woodland cabin, a suburban flower garden and a farmhouse kitchen garden. • Warm Shores: a beach cottage, a harbor and a lighthouse, where messages in bottles wash up on your sill. • Country Lanes: an English cottage garden, a prairie homestead and a hillside burrow, where bees visit your blooms and leave new seeds. • Sun & Stone: a Tuscan vineyard house, a Moroccan riad and a desert adobe, where every bloom you sell becomes a tile for a mosaic wall. More homes are on the way.\n\nMAKE IT YOURS Coins from your blooms furnish five cozy rooms in every home. Every armchair, shelf, and lamp gives your garden a lasting boost, from faster growth to luckier packs.\n\nA LIVING WINDOW Morning light, golden hour, starry nights, and quiet rain move across your window through the day. Animal friends wander by. A daily gift waits each morning, and streaks make it sweeter.\n\nKIND BY DESIGN No ads. No energy bars. No pressure. Gems can speed things up, but everything in the game can be earned for free.\n\nPull up a chair by the window. Your garden is already growing.",
-      "sourceName": "AppleVis Apps",
-      "originalUrl": "https://www.applevis.com/apps/ios/games/my-little-window",
-      "publishedAt": "2026-11-05T18:54:24.000Z",
-      "categories": [
-        "apple",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "accessible-android-e2e545a41207fff7:en",
       "sourceId": "accessible-android-e2e545a41207fff7",
       "lang": "en",
@@ -6322,23 +6341,6 @@
       "categories": [
         "windows",
         "nvda"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "freedom-scientific-blog-6b388ebc74e9689f:en",
-      "sourceId": "freedom-scientific-blog-6b388ebc74e9689f",
-      "lang": "en",
-      "title": "Join Us for Our November 2026 Training Events",
-      "summary": "The Freedom Scientific training team offers ongoing opportunities for you to join us in live training sessions and advance your skills. We’re excited to announce our jam-packed November training schedule, where you’re sure to find something that will help you at work, school, or play. If you have questions or need assistance with registration, email …",
-      "body": "The Freedom Scientific training team offers ongoing opportunities for you to join us in live training sessions and advance your skills. We’re excited to announce our jam-packed November training schedule, where you’re sure to find something that will help you at work, school, or play.\n\nIf you have questions or need assistance with registration, email training@vispero.com . We also welcome your suggestions for future training events. Check the Freedom Scientific Training schedule for additional events we may post throughout the month.",
-      "sourceName": "Freedom Scientific",
-      "originalUrl": "https://training.vispero.com/join-us-for-our-november-2026-training-events/",
-      "publishedAt": "2026-10-31T13:00:04.000Z",
-      "categories": [
-        "windows",
-        "tecnologia-accesibilidad",
-        "jaws"
       ]
     }
   ]

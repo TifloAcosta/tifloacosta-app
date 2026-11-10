@@ -66,14 +66,27 @@ final class NativeOwnUpdatesNotifications: ObservableObject {
         let existing = defaults.stringArray(forKey: seenKey)
         var seen = Set(existing ?? [])
         let additions = candidates.filter { !seen.contains($0.0) }
-        for item in candidates { seen.insert(item.0) }
-        defaults.set(Array(seen).sorted(), forKey: seenKey)
+        let currentIDs = Set(candidates.map(\.0))
 
-        guard existing != nil, enabled, !additions.isEmpty else { return }
+        // On first launch establish a baseline; never announce old items.
+        if existing == nil {
+            defaults.set(Array(currentIDs).sorted(), forKey: seenKey)
+            return
+        }
+        guard !additions.isEmpty else { return }
+
+        // If the user has opted out, keep the baseline current without notifying.
+        if !enabled {
+            seen.formUnion(currentIDs)
+            defaults.set(Array(seen).sorted(), forKey: seenKey)
+            return
+        }
+
         let settings = await UNUserNotificationCenter.current().notificationSettings()
         guard settings.authorizationStatus == .authorized ||
               settings.authorizationStatus == .provisional else {
             status = "Los avisos están bloqueados en Ajustes de iOS."
+            // Do not mark unsent items as seen: they can be retried.
             return
         }
         // One digest prevents a burst of individual alerts after a refresh.
@@ -84,13 +97,16 @@ final class NativeOwnUpdatesNotifications: ObservableObject {
         } else {
             content.body = "Hay \(additions.count) nuevas incorporaciones propias: documentos o vídeos."
         }
-        content.sound = .default
+        content.sound = nil
         let request = UNNotificationRequest(
             identifier: "tiflo-own-updates-" + UUID().uuidString,
             content: content, trigger: nil
         )
         do {
             try await UNUserNotificationCenter.current().add(request)
+            // Record delivery only after successfully scheduling the alert.
+            seen.formUnion(currentIDs)
+            defaults.set(Array(seen).sorted(), forKey: seenKey)
         } catch {
             status = "No se pudo mostrar el aviso: \(error.localizedDescription)"
         }

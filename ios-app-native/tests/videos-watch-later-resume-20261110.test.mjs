@@ -44,10 +44,34 @@ test('Canales seguidos locales accesibles sin exigir Google', () => {
 
 test('Novedades reúne los vídeos de canales seguidos por fecha, en grupos de diez', () => {
   assert.match(screens, /private struct NativeYouTubeFollowedUpdatesScreen: View/);
-  assert.match(screens, /NavigationLink\("Ver últimos vídeos de mis canales"\)/);
+  assert.match(screens, /NavigationLink\("Novedades de mis canales"\)/);
   assert.match(screens, /searches\.values\.flatMap/);
   assert.match(screens, /left > right/);
   assert.match(screens, /visibleCount = 10/);
   assert.match(screens, /Button\("Cargar 10 más"\)/);
   assert.match(screens, /loadMore: true/);
+});
+
+test('Inicio de Vídeos ofrece accesos concisos y difiere los listados a cada pantalla', () => {
+  const main = screens.split('struct NativeVideosScreen: View {')[1]
+    .split('private struct NativeYouTubeSearchScreen: View')[0];
+  const choices = [
+    'Buscar en YouTube', 'Vídeos del canal TifloAcosta',
+    'Mis suscripciones de YouTube', 'Canales seguidos sin cuenta Google',
+    'Novedades de mis canales', 'Continuar viendo', 'Ver después'
+  ];
+  for (const label of choices) assert.ok(main.includes('NavigationLink("' + label + '")'));
+  assert.equal((main.match(/NavigationLink\(/g) || []).length, choices.length);
+  assert.doesNotMatch(main, /ForEach|TextField|NativeYouTubeVideoRow|visibleCount/);
+  assert.match(screens, /private struct NativeTifloAcostaChannelVideosScreen: View/);
+  assert.match(screens, /private struct NativeYouTubeSearchScreen: View/);
+  assert.match(screens, /private struct NativeYouTubePersonalVideosScreen: View/);
+  assert.match(screens, /private struct NativeYouTubeLocalChannelsScreen: View/);
+});
+
+test('Mis suscripciones incluye sus novedades, sin mezclar seguimiento local y Google', () => {
+  assert.match(screens, /NavigationLink\("Ver novedades de mis suscripciones"\)/);
+  assert.match(screens, /NativeYouTubeFollowedUpdatesScreen\(useYouTubeSubscriptions: true\)/);
+  assert.match(screens, /NativeYouTubeFollowedUpdatesScreen\(useYouTubeSubscriptions: false\)/);
+  assert.match(screens, /if useYouTubeSubscriptions \{ return account\.subscriptions \}/);
 });

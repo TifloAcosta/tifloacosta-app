@@ -677,6 +677,13 @@ struct NativeVideosScreen: View {
                 }
             }
 
+            Section("Novedades de canales seguidos") {
+                NavigationLink("Ver últimos vídeos de mis canales") {
+                    NativeYouTubeFollowedUpdatesScreen()
+                }
+                .accessibilityHint("Lista cronológica de vídeos de canales seguidos, diez resultados por página.")
+            }
+
             Section("Canales seguidos sin cuenta Google") {
                 if personalVideos.followedChannels.isEmpty {
                     Text("No hay canales seguidos. Busca un canal y elige Seguir canal en sus acciones.")
@@ -749,6 +756,109 @@ struct NativeVideosScreen: View {
             NavigationStack { NativeYouTubeCommentScreen(video: video) }
         }
         .onChange(of: sortIndex) { _, _ in visibleCount = 10 }
+    }
+}
+
+/// Noticias de canales seguidos sin cuenta Google. Cada canal aporta una página
+/// de 10 elementos por cada pulsación de Cargar 10 más, y la lista se ordena
+/// conjuntamente por fecha, no agrupada por canal.
+private struct NativeYouTubeFollowedUpdatesScreen: View {
+    @ObservedObject private var personalVideos = NativeYouTubePersonalLibrary.shared
+    @State private var searches: [String: NativeYouTubeSearchStore] = [:]
+    @State private var collected: [NativeYouTubeVideo] = []
+    @State private var visibleCount = 10
+    @State private var loading = false
+    @State private var message: String?
+    @State private var selectedVideo: NativeYouTubeVideo?
+    @State private var commentingOnVideo: NativeYouTubeVideo?
+
+    private var channelSignature: String {
+        personalVideos.followedChannels.map(\.id).joined(separator: ",")
+    }
+
+    private var hasMore: Bool {
+        searches.values.contains { !$0.nextPageToken.isEmpty }
+    }
+
+    private func gather() {
+        var seen = Set<String>()
+        collected = searches.values.flatMap(\.videos)
+            .filter { seen.insert($0.id).inserted }
+            .sorted {
+                let left = $0.publishedAt ?? ""
+                let right = $1.publishedAt ?? ""
+                return left == right
+                    ? $0.title.localizedStandardCompare($1.title) == .orderedAscending
+                    : left > right
+            }
+    }
+
+    private func load(loadMore: Bool = false) async {
+        guard !loading else { return }
+        loading = true
+        defer { loading = false }
+        if !loadMore {
+            searches.removeAll()
+            collected.removeAll()
+            visibleCount = 10
+        }
+        var failures: [String] = []
+        for channel in personalVideos.followedChannels {
+            let store = searches[channel.id] ?? NativeYouTubeSearchStore()
+            if loadMore {
+                if !store.nextPageToken.isEmpty {
+                    await store.search("", channelID: channel.id, loadMore: true)
+                }
+            } else {
+                await store.search("", channelID: channel.id)
+            }
+            searches[channel.id] = store
+            if store.videos.isEmpty, let error = store.message,
+               !error.contains("resultados encontrados") {
+                failures.append(channel.title)
+            }
+        }
+        gather()
+        if loadMore { visibleCount += 10 }
+        message = failures.isEmpty ? nil
+            : "No se pudieron consultar algunos canales: " + failures.joined(separator: ", ")
+    }
+
+    var body: some View {
+        List {
+            Section("Novedades de mis canales") {
+                Button("Actualizar novedades") { Task { await load() } }
+                    .disabled(loading)
+                if loading { ProgressView("Consultando canales seguidos") }
+                if let message { Text(message).accessibilityAddTraits(.updatesFrequently) }
+                if personalVideos.followedChannels.isEmpty {
+                    Text("Sigue un canal desde los resultados de YouTube para ver aquí sus novedades.")
+                }
+                ForEach(Array(collected.prefix(visibleCount))) { video in
+                    NativeYouTubeVideoRow(video: video,
+                        onPlay: { selectedVideo = $0 },
+                        onComment: { commentingOnVideo = $0 })
+                }
+                if !loading && collected.isEmpty && !personalVideos.followedChannels.isEmpty {
+                    Text("Todavía no se han recibido vídeos de los canales seguidos.")
+                }
+                if !loading && (collected.count > visibleCount || hasMore) {
+                    Button("Cargar 10 más") {
+                        if hasMore { Task { await load(loadMore: true) } }
+                        else { visibleCount += 10 }
+                    }
+                }
+            }
+        }
+        .tifloScreenSurface()
+        .navigationTitle("Novedades de canales")
+        .sheet(item: $selectedVideo) { video in
+            NavigationStack { NativeYouTubePlayerScreen(video: video) }
+        }
+        .sheet(item: $commentingOnVideo) { video in
+            NavigationStack { NativeYouTubeCommentScreen(video: video) }
+        }
+        .task(id: channelSignature) { await load() }
     }
 }
 

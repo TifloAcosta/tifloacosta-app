@@ -5,6 +5,7 @@ import Translation
 /// The original catalog text is never modified or automatically translated.
 /// The user must press the translation button to initiate any model download
 /// or translation, and can always return to the unmodified original.
+@available(iOS 18.0, *)
 struct NativeOnDemandTranslationScreen: View {
     let title: String
     let originalText: String

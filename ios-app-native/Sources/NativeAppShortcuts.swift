@@ -51,19 +51,19 @@ struct NativeTifloAppShortcuts: AppShortcutsProvider {
     static var appShortcuts: [AppShortcut] {
         AppShortcut(
             intent: NativeOpenNewsIntent(),
-            phrases: ["Abre Actualidad en \\(.applicationName)"],
+            phrases: ["Abre Actualidad en \(.applicationName)"],
             shortTitle: "Abrir Actualidad",
             systemImageName: "newspaper"
         )
         AppShortcut(
             intent: NativeOpenReaderIntent(),
-            phrases: ["Abre TifloLector en \\(.applicationName)"],
+            phrases: ["Abre TifloLector en \(.applicationName)"],
             shortTitle: "Abrir TifloLector",
             systemImageName: "books.vertical"
         )
         AppShortcut(
             intent: NativeOpenVideosIntent(),
-            phrases: ["Abre vídeos en \\(.applicationName)"],
+            phrases: ["Abre vídeos en \(.applicationName)"],
             shortTitle: "Abrir vídeos",
             systemImageName: "play.rectangle"
         )

@@ -601,6 +601,21 @@ final class NativeReadingSpeech: ObservableObject {
     // Al pausar texto se corta el sintetizador y se conserva el cursor para reanudar.
     private var systemSpeechNeedsRestart = false
 
+    // Los encabezados importados de EPUB/HTML conservan # para la navegación.
+    // En la voz sustituimos solo esos marcadores por espacios del mismo tamaño:
+    // así ningún cursor, marca o posición de lectura cambia.
+    private static func textForSpeech(_ source: String) -> String {
+        guard let pattern = try? NSRegularExpression(pattern: #"(?m)^#{1,6}(?=[ \t])"#)
+        else { return source }
+        var result = source
+        for match in pattern.matches(in: source,
+                                     range: NSRange(source.startIndex..., in: source)).reversed() {
+            guard let range = Range(match.range, in: result) else { continue }
+            result.replaceSubrange(range, with: String(repeating: " ", count: match.range.length))
+        }
+        return result
+    }
+
     private func speakNextSystemSegment(after delay: TimeInterval = 0) {
         speechDelayTask?.cancel()
         speechDelayTask = nil
@@ -755,7 +770,7 @@ final class NativeReadingSpeech: ObservableObject {
         systemSpeechNeedsRestart = false
         speechQueueIndex = 0
         speechQueue.removeAll()
-        let segments = NativeReaderPauseProfile.segments(text)
+        let segments = NativeReaderPauseProfile.segments(Self.textForSpeech(text))
         var utf16Offset = 0
         for (index, segment) in segments.enumerated() {
             let utterance = AVSpeechUtterance(string: segment.text)

@@ -7,20 +7,30 @@ import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const source = file => readFileSync(path.join(root, 'Sources', file), 'utf8');
 
-test('Vídeos comienza con un buscador universal, sin buscador duplicado del canal', () => {
+test('Vídeos muestra un menú de accesos directos y conserva búsqueda, canal y reproductor', () => {
   const screens = source('NativeScreens.swift');
-  const section = screens.split('struct NativeVideosScreen: View {')[1].split('// Actualidad con filtros')[0];
-  assert.match(section, /Section\("YouTube accesible"\)/);
-  assert.match(section, /TextField\("Buscar en todo YouTube"/);
-  assert.match(section, /Button\("Buscar en YouTube"\)/);
-  assert.match(section, /Section\("Resultados de YouTube"\)/);
-  assert.match(section, /Button\("Mostrar diez resultados más"\)/);
-  assert.match(section, /Section\("Vídeos del canal TifloAcosta"\)/);
-  assert.match(section, /Button\("Mostrar diez más"\)/);
-  assert.match(section, /NativeAdjustableChoice\(\s*title: "Orden"/);
-  assert.doesNotMatch(section, /\.searchable\(/);
-  assert.doesNotMatch(section, /Buscar en los vídeos del canal/);
-  assert.match(section, /\.sheet\(item: \$selectedVideo\)/);
+  const main = screens.split('struct NativeVideosScreen: View {')[1]
+    .split('private struct NativeYouTubeSearchScreen: View')[0];
+  for (const label of [
+    'Buscar en YouTube', 'Vídeos del canal TifloAcosta',
+    'Mis suscripciones de YouTube', 'Canales seguidos sin cuenta Google',
+    'Novedades de mis canales', 'Continuar viendo', 'Ver después'
+  ]) assert.ok(main.includes('NavigationLink("' + label + '")'), label);
+  assert.doesNotMatch(main, /TextField\(/);
+  assert.doesNotMatch(main, /ForEach\(/);
+
+  const subpages = screens.split('private struct NativeYouTubeSearchScreen: View')[1]
+    .split('/// Noticias de canales seguidos sin cuenta Google.')[0];
+  assert.match(subpages, /Section\("YouTube accesible"\)/);
+  assert.match(subpages, /TextField\("Buscar en todo YouTube"/);
+  assert.match(subpages, /Button\("Buscar en YouTube"\)/);
+  assert.match(subpages, /Section\("Resultados de YouTube"\)/);
+  assert.match(subpages, /Button\("Mostrar diez resultados más"\)/);
+  assert.match(subpages, /Section\("Vídeos del canal TifloAcosta"\)/);
+  assert.match(subpages, /Button\("Mostrar diez más"\)/);
+  assert.match(subpages, /NativeAdjustableChoice\(\s*title: "Orden"/);
+  assert.doesNotMatch(subpages, /\.searchable\(/);
+  assert.match(subpages, /\.sheet\(item: \$selectedVideo\)/);
 });
 
 test('Todo título del canal o de resultados abre el mismo reproductor accesible', () => {

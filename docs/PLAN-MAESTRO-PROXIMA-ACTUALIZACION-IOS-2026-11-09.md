@@ -371,3 +371,10 @@ Estado: implementado en código y con contratos de regresión actualizados. Falt
 - Añadidas pruebas de contrato de ámbito, consentimiento, ausencia de alertas antiguas e integración tras refresco del catálogo.
 
 - Se añadió además un delegado nativo `UNUserNotificationCenterDelegate` para que, estando la aplicación en primer plano, los avisos locales queden en el Centro de notificaciones sin generar un banner invasivo mientras VoiceOver lee. No se presenta como canal de notificaciones push.
+
+ 
+## Continuación de fase 8 — Siri «Continuar libro» y verbosidad configurable (10 de noviembre de 2026)
+
+- El App Intent de Siri «Continuar el último libro en TifloLector» pide abrir la aplicación y remite a la biblioteca nativa. La pantalla recupera la obra con fecha `lastOpenedAt` más reciente y ejecuta el método de reproducción existente, que utiliza la posición guardada (texto o pistas DAISY/audio) y las preferencias del documento. La petición se elimina antes de ejecutarse para evitar reanudaciones dobles al cambiar de escena. Si la biblioteca está vacía, se muestra y anuncia un mensaje accesible.
+- En Configuración se añade «Información al recorrer la biblioteca», con las opciones «Breve: título y porcentaje leído» (predeterminada) y «Completa: título, porcentaje, formato y carpeta». El título y el porcentaje permanecen en una sola unidad de VoiceOver, independientemente del modo.
+- Se amplían pruebas de contrato de Siri y lectura para comprobar la reanudación desde el último libro y la preferencia de verbosidad. Las nuevas rutas aún precisan validación de voz con VoiceOver en la prueba conjunta final.

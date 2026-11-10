@@ -320,3 +320,13 @@ Estado: implementado en código y con contratos de regresión actualizados. Falt
 - Añadidos tests de contrato en iOS y pruebas unitarias del Worker para búsquedas por canal y validación de consultas.
 - **Dependencia de despliegue:** el workflow de YouTube ejecutado por una PR verifica los tests, pero no despliega el Worker público; ese paso está configurado para eventos distintos de `pull_request`. Antes de probar la búsqueda por canal desde TestFlight, deberá estar desplegada y verificada la versión del servicio que respeta `q`. No interpretar un test verde de una PR como despliegue del backend.
 - Sin cambios en Android y sin publicación de la candidata de iOS. La fase de Vídeos sigue sujeta a los demás requisitos del plan y a la validación final integral.
+
+
+## Continuación de fase general 7 — Pódcast, 10 de noviembre de 2026
+
+- Revisados seguimiento y cancelación de programas, detección de nuevos episodios, importación OPML y favoritos existentes; se conservan las claves locales y los datos persistidos anteriormente.
+- Añadido modelo `NativePodcastPlaybackProgress` para recordar de manera persistente el episodio, su URL de audio, los segundos escuchados y su duración; solo se ofrecen episodios pendientes, no los terminados.
+- Añadida la sección accesible «Continuar escuchando» y la acción «Olvidar posición». Se guarda la posición durante la escucha y al salir o cambiar de episodio.
+- Añadido ajuste opcional «Reproducir el siguiente episodio automáticamente»; la cola se establece desde la misma lista de episodios, y la reproducción utiliza la notificación `AVPlayerItemDidPlayToEndTime`.
+- Añadidas pruebas de regresión. La compilación de la última revisión se verifica por separado; ninguna prueba funcional con VoiceOver se adelanta a la candidata integral.
+- **Pendiente de fase 7:** descargas y reproducción sin conexión; completar Actualidad, Recursos, filtros, favoritos e historial según acuerdos. No confundir las funciones implementadas de Pódcast con cierre del bloque completo.

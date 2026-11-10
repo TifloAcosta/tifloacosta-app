@@ -49,3 +49,8 @@ test('No marca como recibida una novedad cuando la entrega falla', () => {
   assert.match(notifier, /content\.sound = nil/);
   assert.match(notifier, /Do not mark unsent items as seen/);
 });
+
+test('Los IDs duplicados de una misma fuente no multiplican los avisos', () => {
+  assert.match(notifier, /var uniqueIDs = Set<String>\(\)/);
+  assert.match(notifier, /uniqueIDs\.insert\(\$0\.0\)\.inserted/);
+});

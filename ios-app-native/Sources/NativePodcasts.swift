@@ -197,6 +197,7 @@ struct NativePodcastScreen: View {
     @AppStorage("native-podcast-continuous-playback") private var continuousPlayback = false
     @State private var lastProgressSaved = 0.0
     @StateObject private var library = NativePodcastLibrary()
+    @StateObject private var downloads = NativePodcastDownloads()
     @State private var choosingOPML = false
     @State private var importingOPML = false
     @State private var followedEpisodes: [NativePodcastEpisode] = []
@@ -250,7 +251,14 @@ struct NativePodcastScreen: View {
         } else {
             upcoming = []
         }
-        player.select(episode, at: library.progress(for: episode), followedBy: upcoming)
+        let local = downloads.localURL(for: episode.id)
+        let playable = local.map {
+            NativePodcastEpisode(id: episode.id, title: episode.title,
+                audioURL: $0, publicationDate: episode.publicationDate)
+        } ?? episode
+        // The next episode is resolved to its local download when it becomes active
+        // only if it was selected directly; online queue retains the source URLs.
+        player.select(playable, at: library.progress(for: episode), followedBy: upcoming)
         lastProgressSaved = 0
     }
 
@@ -308,6 +316,28 @@ struct NativePodcastScreen: View {
                     }
                 }
             }
+            Section("Episodios descargados") {
+                if downloads.entries.isEmpty {
+                    Text("No hay episodios descargados para escuchar sin conexión.")
+                }
+                if downloads.downloadingID != nil {
+                    ProgressView("Descargando episodio")
+                }
+                if !downloads.notice.isEmpty {
+                    Text(downloads.notice).accessibilityAddTraits(.updatesFrequently)
+                }
+                ForEach(downloads.entries) { item in
+                    if let file = downloads.localURL(for: item.id) {
+                        Button("Escuchar sin conexión: \(item.title)") {
+                            playEpisode(NativePodcastEpisode(id: item.id, title: item.title,
+                                audioURL: file, publicationDate: ""))
+                        }
+                        Button("Eliminar descarga: \(item.title)") {
+                            downloads.delete(item)
+                        }
+                    }
+                }
+            }
             Section("Reproducción continua") {
                 Toggle("Reproducir el siguiente episodio automáticamente",
                        isOn: $continuousPlayback)
@@ -332,8 +362,17 @@ struct NativePodcastScreen: View {
                     .accessibilityAction(named: Text("Compartir")) {
                         NativeShare.present(url: episode.audioURL)
                     }
+                    .accessibilityAction(named: Text("Descargar episodio")) {
+                        Task { await downloads.download(episode) }
+                    }
                     Button(library.isFavorite(episode) ? "Quitar de favoritos: \(episode.title)" : "Añadir a favoritos: \(episode.title)") {
                         library.toggleFavorite(episode)
+                    }
+                    if downloads.localURL(for: episode.id) == nil {
+                        Button("Descargar: \(episode.title)") {
+                            Task { await downloads.download(episode) }
+                        }
+                        .disabled(downloads.downloadingID != nil)
                     }
                 }
                 if visible < store.episodes.count {
@@ -378,6 +417,12 @@ struct NativePodcastScreen: View {
                     ForEach(followedEpisodes) { episode in
                         Button("Reproducir: \(episode.title)") {
                             playEpisode(episode, collection: followedEpisodes)
+                        }
+                        if downloads.localURL(for: episode.id) == nil {
+                            Button("Descargar: \(episode.title)") {
+                                Task { await downloads.download(episode) }
+                            }
+                            .disabled(downloads.downloadingID != nil)
                         }
                         Button(library.isFavorite(episode) ? "Quitar de favoritos: \(episode.title)" :
                                "Añadir a favoritos: \(episode.title)") {

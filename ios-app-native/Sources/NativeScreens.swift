@@ -391,14 +391,24 @@ struct NativeResourcesScreen: View {
     @EnvironmentObject private var library: NativeReaderLibrary
     @EnvironmentObject private var resourceService: NativeResourceService
     @EnvironmentObject private var favorites: NativeFavoritesStore
+    @EnvironmentObject private var readingActivity: NativeReadingActivity
     @AppStorage("native-ios-language") private var languageIndex = 0
     @State private var chosenCategory: String?
+    @State private var languageFilterIndex = 0
+    @State private var resourceQuery = ""
     @State private var resourceToOpen: NativeCatalogItem?
     @State private var presentingResource = false
     @State private var actionStatus: String?
 
     private var spanishResources: [NativeCatalogItem] {
-        catalog.resources.filter { $0.lang == (languageIndex == 1 ? "en" : "es") }
+        catalog.resources.filter { item in
+            switch languageFilterIndex {
+            case 1: return true
+            case 2: return item.lang == "es"
+            case 3: return item.lang == "en"
+            default: return item.lang == (languageIndex == 1 ? "en" : "es")
+            }
+        }
     }
 
     private var categories: [String] {
@@ -427,10 +437,20 @@ struct NativeResourcesScreen: View {
     }
 
     private var filtered: [NativeCatalogItem] {
-        guard let chosenCategory, categories.contains(chosenCategory) else {
-            return []
+        let terms = resourceQuery.trimmingCharacters(in: .whitespacesAndNewlines)
+            .folding(options: [.diacriticInsensitive, .caseInsensitive], locale: Locale(identifier: "es_ES"))
+            .split(whereSeparator: { $0.isWhitespace }).map(String.init)
+        guard !terms.isEmpty || (chosenCategory != nil && categories.contains(chosenCategory!))
+        else { return [] }
+        return spanishResources.filter { item in
+            if let chosenCategory, item.category != chosenCategory { return false }
+            let searchable = [item.title, item.category ?? "", item.description ?? "", item.summary ?? ""]
+                .joined(separator: " ")
+                .folding(options: [.diacriticInsensitive, .caseInsensitive],
+                         locale: Locale(identifier: "es_ES"))
+            return terms.allSatisfy { searchable.contains($0) }
         }
-        return spanishResources.filter { $0.category == chosenCategory }
+        .sorted { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
     }
 
     private func updateResources() {
@@ -474,6 +494,11 @@ struct NativeResourcesScreen: View {
 
     var body: some View {
         List {
+            Section("Mis lecturas") {
+                NavigationLink("Leer después e historial") {
+                    NativeReadingActivityScreen(kind: .resource)
+                }
+            }
             Section("Contenido de Recursos") {
                 Button("Actualizar recursos") { updateResources() }
                     .disabled(catalog.loading)
@@ -496,7 +521,12 @@ struct NativeResourcesScreen: View {
                     Text(status).font(.footnote).foregroundStyle(.secondary)
                 }
             }
-            Section {
+            Section("Filtrar recursos") {
+                NativeAdjustableChoice(
+                    title: "Idioma de los recursos",
+                    choices: ["Idioma de la aplicación", "Todos los idiomas", "Español", "Inglés"],
+                    selectedIndex: $languageFilterIndex
+                )
                 NativeAdjustableChoice(
                     title: "Categoría",
                     choices: categoryChoices,
@@ -504,8 +534,9 @@ struct NativeResourcesScreen: View {
                 )
             }
 
-            if let chosenCategory, categories.contains(chosenCategory) {
-                Section(chosenCategory) {
+            if (chosenCategory != nil && categories.contains(chosenCategory!)) ||
+               !resourceQuery.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                Section(chosenCategory ?? "Resultados de búsqueda") {
                     if filtered.isEmpty {
                         Text("No hay recursos en la categoría elegida.")
                     }
@@ -525,6 +556,12 @@ struct NativeResourcesScreen: View {
                         .accessibilityAction(named: Text("Leer")) { read(item) }
                         .accessibilityAction(named: Text("Guardar")) { save(item) }
                         .accessibilityAction(named: Text("Descargar")) { download(item) }
+                        .accessibilityAction(named: Text(readingActivity.isSaved(.resource, item: item)
+                            ? "Quitar de Leer después" : "Guardar para leer después")) {
+                            let saved = readingActivity.toggleReadLater(.resource, item: item)
+                            announce(saved ? "Recurso guardado para leer después." :
+                                "Recurso retirado de Leer después.")
+                        }
                         .accessibilityAction(named: Text("Compartir")) {
                             if let url = item.resourceURL { NativeShare.present(url: url) }
                         }
@@ -546,6 +583,8 @@ struct NativeResourcesScreen: View {
         }
         .tifloScreenSurface()
         .navigationTitle("Recursos")
+        .searchable(text: $resourceQuery, prompt: "Buscar recursos")
+        .onChange(of: languageFilterIndex) { _, _ in chosenCategory = nil }
         .navigationDestination(isPresented: $presentingResource) {
             if let resourceToOpen {
                 NativeRemoteResourceScreen(item: resourceToOpen)

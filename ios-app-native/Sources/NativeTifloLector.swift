@@ -2198,7 +2198,7 @@ struct NativeReadingScreen: View {
     // Las posiciones y el documento original permanecen intactos.
     private func spokenBookmarkExcerpt(_ source: String) -> String {
         source.replacingOccurrences(
-            of: #"^#{1,6}\\s+"#,
+            of: #"^#{1,6}\s+"#,
             with: "",
             options: .regularExpression
         )

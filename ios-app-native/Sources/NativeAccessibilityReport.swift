@@ -60,6 +60,17 @@ struct NativeAccessibilityReportScreen: View {
         !description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
 
+    private var supportMailURL: URL? {
+        var components = URLComponents()
+        components.scheme = "mailto"
+        components.path = "tifloacosta@gmail.com"
+        components.queryItems = [
+            URLQueryItem(name: "subject", value: "Incidencia de TifloAcosta"),
+            URLQueryItem(name: "body", value: reportText)
+        ]
+        return components.url
+    }
+
     var body: some View {
         Form {
             Section("Describe la incidencia") {
@@ -97,6 +108,12 @@ struct NativeAccessibilityReportScreen: View {
             }
 
             Section("Enviar o copiar") {
+                if let supportMailURL {
+                    Link(destination: supportMailURL) {
+                        Label("Escribir a TifloAcosta por correo", systemImage: "envelope")
+                    }
+                    .disabled(!canShare)
+                }
                 ShareLink(item: reportText, subject: Text("Incidencia de TifloAcosta"),
                           preview: SharePreview("Incidencia de TifloAcosta")) {
                     Label("Compartir informe de incidencia", systemImage: "square.and.arrow.up")

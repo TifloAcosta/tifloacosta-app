@@ -427,3 +427,4 @@
 "carpeta %@" = "dossier %@";
 "Marca guardada en %d por ciento." = "Signet enregistré à %d pour cent.";
 "Marca guardada en la pista %d, %d por ciento." = "Signet enregistré sur la piste %d, à %d pour cent.";
+"Solo avisos de nuevos recursos y vídeos propios al actualizar contenidos. No se envían avisos de Actualidad ni notificaciones con la app cerrada." = "Seules les nouvelles ressources et vidéos de TifloAcosta sont signalées lors de l’actualisation. Aucune alerte d’actualité ni notification quand l’application est fermée.";

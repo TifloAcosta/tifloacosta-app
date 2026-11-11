@@ -1804,6 +1804,7 @@ private struct NativeReaderTextLayout {
 struct NativeReadingScreen: View {
     let document: NativeReadingDocument
     @ObservedObject var speech: NativeReadingSpeech
+    @AppStorage("native-ios-language") private var languageIndex = 0
     var startPercent: Int? = nil
     var startTrack: Int? = nil
 
@@ -2424,13 +2425,17 @@ struct NativeReadingScreen: View {
     }
 
     private func addBookmark() {
+        let code = NativeAppLanguage.code(for: languageIndex)
+        let locale = Locale(identifier: code)
         if tracks.isEmpty {
             library.addTextBookmark(document, offset: readingOffset)
-            actionMessage = "Marca guardada en \(currentPercent) por ciento."
+            let format = NativeAppLanguage.message("Marca guardada en %d por ciento.", languageCode: code)
+            actionMessage = String(format: format, locale: locale, currentPercent)
         } else {
             library.addAudioBookmark(document, track: trackIndex, percent: currentPercent,
                                      seconds: speech.hasAudio ? speech.audioElapsed : nil)
-            actionMessage = "Marca guardada en la pista \(trackIndex + 1), \(currentPercent) por ciento."
+            let format = NativeAppLanguage.message("Marca guardada en la pista %d, %d por ciento.", languageCode: code)
+            actionMessage = String(format: format, locale: locale, trackIndex + 1, currentPercent)
         }
         if let actionMessage {
             UIAccessibility.post(notification: .announcement, argument: actionMessage)

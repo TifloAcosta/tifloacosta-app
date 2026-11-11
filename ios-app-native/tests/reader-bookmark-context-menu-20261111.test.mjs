@@ -21,6 +21,9 @@ test('Crear marca conserva posición y reanuda si estaba reproduciendo', () => {
   assert.match(action, /let wasPlaying = speech\.isPlaying/);
   assert.match(action, /if wasPlaying \{ pausePlayback\(\) \}/);
   assert.match(action, /addBookmark\(\)/);
+  assert.match(action, /textLayout\.fragmentStarts\[fragment\]/);
   assert.match(action, /if speech\.isPaused \{ speech\.resume\(\); applySleepTimer\(\) \}/);
   assert.match(swift, /Button\("Añadir marca"\) \{ addBookmark\(\) \}/);
+  assert.match(swift, /accessibilityAction\(named: Text\("Crear marca"\)\)/);
+  assert.match(swift, /bookmarkFromContextMenu\(at: index\)/);
 });

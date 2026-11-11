@@ -1,13 +1,13 @@
 [
   {
-    "id": "9to5mac-6498bca439f4e382",
+    "id": "9to5mac-2e92509e4f34f8c7",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/10/ifixit-tears-down-touchscreen-macbook-pro-reveals-light-up-apple-logo-details/",
+    "originalUrl": "https://9to5mac.com/2026/11/10/apple-music-debuts-labrinths-new-single-created-live-on-the-touchscreen-macbook-pro/",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-10T23:14:49.000Z",
+    "publishedAt": "2026-11-11T01:31:51.000Z",
     "categories": [
       "apple",
       "tecnologia-general"
@@ -16,9 +16,133 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "iFixit tears down touchscreen MacBook Pro, reveals light-up Apple logo details",
-        "summary": "iFixit published its teardown of the new MacBook Pro with PROLED XDR Display today, revealing interesting details about how Apple brought back its illuminated logo on the lid. Watch it below. more…",
-        "body": "iFixit published its teardown of the new MacBook Pro with PROLED XDR Display today, revealing interesting details about how Apple brought back its illuminated logo on the lid. Watch it below.\n\niFixit’s teardown of the new MacBook Pro with PROLED XDR Display is now live, and it explores not only how the new illuminated Apple logo works, but also its tandem OLED and how Apple managed to trim its weight down to 3 pounds (1.38 kg) from 3.4 pounds (1.55 kg) on the standard 14-inch model.\n\nThe teardown opens with a close look at the tandem OLED, which stacks two light-emitting layers to deliver higher brightness than conventional single-layer OLED displays.\n\nUnder a microscope, iFixit found that the blue subpixels are larger than the red and green ones, which they say should help reduce strain on the materials and potentially extend the display’s lifespan.\n\nMost of the teardown process is quite familiar from past models, though iFixit noted that replacing the USB-C ports or fans still requires removing the entire logic board, despite both components being independently replaceable.\n\niFixit noted that the headphone jack also requires logic board removal, while the HDMI port, SDXC port, RAM, and storage remain soldered to the board.\n\nAs with past teardowns, iFixit also tested what happens when swapping logic boards between two MacBooks.\n\nWhile last year’s M5 MacBook Pro failed to complete Touch ID calibration through Apple’s Repair Assistant, iFixit noted that the new model successfully recognized the battery, display, and Touch ID sensor after a logic board swap, with True Tone, brightness controls, and the touchscreen all working as expected.\n\niFixit was also able to enroll a fingerprint with the donor board installed from another MacBook Pro with PROLED XDR Display.\n\nAs for the illuminated Apple logo, iFixit had a bit of a rough time getting to it, destroying the OLED panel in the process and even asking whether anyone had managed to remove it intact.\n\nOnce inside, iFixit found that the Apple logo is illuminated by a strip of four LEDs, which work in conjunction with a reflective layer and a diffuser to distribute the light evenly.\n\nThe Apple logo itself, in turn, has a two-way mirror coating that gives it a shiny, reflective appearance when the LEDs are off, while allowing light to pass through when they’re on.\n\nWhen it comes to weight, Apple shaved 92 grams off the chassis and 101 grams off the display assembly, despite adding touch and an illuminated logo. The battery is just 2 grams lighter, while the slightly smaller trackpad saves another 8 grams.\n\nFinally, iFixit gave the new MacBook Pro with PROLED XDR Display a repairability score of 5 out of 10. That was one point higher than last year’s M5 MacBook Pro, but one point below the cheaper MacBook Neo.\n\nYou can watch iFixit’s full teardown below:\n\nBe sure to catch 9to5Mac’s review of the new MacBook Pro with PROLED XDR Display."
+        "title": "Apple Music debuts Labrinth’s new single, created live on the touchscreen MacBook Pro",
+        "summary": "Following last week’s livestream , when Labrinth composed and recorded a song overnight at Apple Tower Theatre in Los Angeles on the new touchscreen MacBook Pro , the single is now available on Apple Music. Here are the details. more…",
+        "body": "Following last week’s livestream , when Labrinth composed and recorded a song overnight at Apple Tower Theatre in Los Angeles on the new touchscreen MacBook Pro , the single is now available on Apple Music. Here are the details.\n\nLast Wednesday evening, singer-songwriter Labrinth transformed Apple Tower Theatre in Downtown Los Angeles into his private studio as he composed a song from scratch using Logic Pro 13 on the new MacBook Pro with PROLED XDR Display .\n\nThe entire session was livestreamed on his YouTube channel, with Labrinth also answering questions from fans along the way.\n\nNow, the finished single, “ Surrender ,” is available on Apple Music, and subscribers can listen to it below:\n\nApple has also published a short video on its YouTube channel with highlights from the entire session, and you can watch it below:\n\nThe video description reads:\n\nOne song. In one night. Created live on the new MacBook Pro with PROLED XDR Display and Touch.\n\nMultiplatinum artist Labrinth transformed Apple Tower Theatre into his personal studio for the night, experimenting with new ways of making music on the new MacBook Pro.\n\nSee how Touch opens up a world of creative possibilities in Logic Pro 13: shaping EQ envelopes, manipulating samples, tweaking Remix FX, and even playing keys right onscreen.\n\nListen to Labrinth on Apple Music\n\nApple Music requires an active subscription. You can sign up for $11.99 per month, with 1 month free, or as part of the Apple One bundle ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-4e0bc0332879dfd5",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1031446/microsoft-automatic-super-resolution-auto-sr-upscaling",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-11T00:34:24.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Microsoft’s DLSS competitor is out for the Xbox Ally X and works in handheld mode",
+        "summary": "Microsoft is now rolling out Automatic Super Resolution (Auto SR), an upscaling technology that competes with Nvidia's DLSS, for the Xbox Ally X, Xbox Ally X20, and select Windows Copilot Plus PCs, the company announced today. Auto SR is also getting some new features alongside this official release. In April, Microsoft started testing Auto SR […]",
+        "body": "Microsoft is now rolling out Automatic Super Resolution (Auto SR), an upscaling technology that competes with Nvidia's DLSS, for the Xbox Ally X, Xbox Ally X20, and select Windows Copilot Plus PCs, the company announced today . Auto SR is also getting some new features alongside this official release.\n\nIn April, Microsoft started testing Auto SR on the Xbox Ally X, but you could only use it while docked. The full release of Auto SR announced today now works while you're playing handheld and running on battery, and it also supports games running at 1080p. Microsoft does note that playing in handheld and at 1080p might lead to performance that …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-839e78ee99c8d9ee",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2312969/ifixit-teardown-shows-how-apples-glowing-proled-macbook-logo-works/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-11T00:03:54.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iFixit teardown shows how Apple's glowing PROLED MacBook logo works",
+        "summary": "The new laptop goes the extra mile to recreate the iconic feature.",
+        "body": "The new laptop goes the extra mile to recreate the iconic feature.\n\niFixit has shared its teardown of Apple's first touchscreen MacBook Pro and besides bemoaning the company's half-hearted commitment to user repairability, it also showed off the physical components that make the laptop's glowing logo work. The new lid design is one of the MacBook Pro with PROLED XDR Display's many charms, alongside its tandem OLED display and lighter weight.\n\nOlder LCD MacBooks featured a physical cutout that let the display's backlight illuminate the logo, but since OLED screens don't require backlights, Apple had to come up with a different solution to bring the design element back. iFixit found that the company uses a light strip with four LEDs layered behind the display, whose light is reflected through a diffuser to illuminate the logo. The Apple logo itself is also coated \"like a two-way mirror,\" according to iFixit, so that it can appear metallic and reflective when the logo is off, but still let light through when the LEDs are on.\n\nApple ditched the glowing logo in 2016, so it's a bit ironic that the company waited until it stopped using backlit displays to bring it back. It used to be a cool bit of branding before, but now the company may see the glowing logo design as an important way to distinguish its most expensive laptop from the kind we peons are forced to use.\n\nThe rest of the internal changes to the laptop are more expected. Apple was able to achieve the new MacBook Pro's lighter weight by using less aluminum in the base and lid of the laptop and including a slightly smaller trackpad. The laptop's hinge was also reworked to make the display wobble less when you tap the screen. Those changes don't make it any easier to fix, though. The laptop is still complex to disassemble: For example, iFixit says that you have to remove the laptop's logic board to switch out its USB-C ports. Plenty of other components, like the MacBook's memory and the HDMI port, are also soldered in place. Anyone dropping up to $15,000 on a laptop probably isn't worried about doing their own repairs, but Apple's thin and light (and glowing) design comes with some tradeoffs, as always."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-5944421bdf560f8f",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/10/daily-november-10-2026/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-11T00:00:34.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "android",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "9to5Mac Daily: November 10, 2026 – iOS 27.2.1, HomeView rumors",
+        "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
+        "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-1614e3c1ec472179",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2312808/how-to-get-ipad-siri-camera-upgrade-early/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-11T00:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "How to get this Siri camera upgrade for your iPad before its public release",
+        "summary": "You'll be able to access Visual Intelligence from a new tab in the tablet's Camera app.",
+        "body": "You’ll be able to access Visual Intelligence from a new tab in the tablet's Camera app.\n\nApple users willing to install beta versions of its OS updates can get their hands on upcoming features sooner than most, as long as they're comfortable contending with the possibility of buggy software or apps breaking. And one such feature is the Siri Mode that's already available in the camera app on supported iPhones . It's also coming to compatible iPads as part of iPadOS 27.3 and will let you ask Siri AI questions about things you point your tablet's camera at.\n\nWe got our first look at this mode when Apple properly unveiled Siri AI at its Worldwide Developers Conference in June this year. It basically brings the company's Visual Intelligence tool for asking questions from photos to the camera app. But there's one distinguishing feature that's unique to iPads which isn't available on iPhones.\n\nOn iPads, Visual Intelligence includes Apple Pencil support. So, much like with Google's Circle to Search feature, you can snap a photo of something with your iPad, use your Apple Pencil to draw a circle around an item and learn more information about the object with the help of Siri AI.\n\nIt's worth noting that Visual Intelligence is already available on compatible tablets — iPad Pro and iPad Air with the M1 chip and newer, and iPad mini with the A17 Pro or A20 Pro chipset . As things stand, you can access it in the Camera app by long-pressing the Camera Control button or pressing the Action button if you've set it up to activate the feature (and your iPad has an Action button, of course).\n\nIn iPadOS 27.3, you'll have another way to access Visual Intelligence in the Camera app. All you'll have to do is swipe through the options in the viewfinder (i.e. photo, video and portrait modes) until you get to the Siri tab.\n\nThe company is expected to release the public version of iPadOS 27.3 in December. However, you can try it on your tablet right now, because Apple released the first beta in early November .\n\nTo install the iPadOS 27.3 beta, open the Settings app on your iPad, then tap General > Software Update . If you haven't already done so, you'll need to enable beta updates. Tap the Beta Updates option, then iPadOS 27 Public Beta. After you go back to the Software Update tab, you should be able to install the iPadOS 27.3 beta.\n\nBefore you install the beta, it's best to create a full backup of your iPad using iCloud , a Mac or a Windows PC . Beta builds aren't the finished product, meaning they're more susceptible to bugs and errors. Backing up your data should be standard practice anyway, but it's especially advisable to do that before installing a beta version of an operating system, just to make sure your files and other information stay safe.\n\nIf you don't feel comfortable enough to install a iPadOS beta, that's perfectly fine! The public version of the OS update is likely coming soon. You can check out the Siri tab on your iPad's Camera app at that point."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-ba5e6d7995d997d4",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/10/apple-confirms-ongoing-outage-affecting-icloud-and-more/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-10T23:48:49.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple confirms ongoing outage affecting iCloud and more [U]",
+        "summary": "Update, 5:18 p.m. PT: Apple says all outages have now been resolved. If you’re having problems accessing iCloud and other Apple services this evening, you’re not alone. Apple has confirmed an ongoing outage affecting iCloud, Find My, and more. more…",
+        "body": "Update, 5:18 p.m. PT: Apple says all outages have now been resolved.\n\nIf you’re having problems accessing iCloud and other Apple services this evening, you’re not alone. Apple has confirmed an ongoing outage affecting iCloud, Find My, and more.\n\nAccording to Apple’s System Status webpage , the outages began around 5:49 p.m. ET/2:49 p.m. PT. The company says the following services are experiencing outages:\n\nThe company also says Find My might be “slow or unavailable,” though it’s not classified as a full-fledged outage.\n\nA quick social media search reveals complaints from frustrated iCloud users. They say they can’t send or receive email via iCloud, can’t sign in to their Apple Account, and more. Some people report being signed out of their Apple Account altogether.\n\nAre you having any problems with iCloud, Find My, or your Apple Account today? Let us know down in the comments.\n\nFollow Chance : Threads , X , and Instagram"
       }
     },
     "media": null
@@ -71,31 +195,6 @@
     "media": null
   },
   {
-    "id": "engadget-f1fbafac6d740271",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2312864/meta-warns-some-of-its-ai-glasses-may-get-too-warm-if-they-get-wet/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-10T22:05:37.000Z",
-    "categories": [
-      "tecnologia-general",
-      "programas-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta warns some of its AI glasses may get 'too warm' if they get wet",
-        "summary": "A software update will tell users if they're affected and direct them to Meta's customer support for a full replacement.",
-        "body": "The company is offering free replacements to affected devices.\n\nMeta is rolling out a software update for its AI glasses to fix an issue that causes some devices to become \"too warm\" when they get wet. The company describes it as a \"rare issue\" affecting only a \"small number\" of its glasses, but is nonetheless urging everyone with a pair of Meta Glasses to update their software and offering free replacements to those affected.\n\nThe company has begun notifying users about the forthcoming update which will roll out to everyone with a pair of Meta-branded frames , which includes Adventurer, Fury, Starfire, Nova and Capri models. Oakley and Ray-Ban glasses are not impacted, according to Meta.\n\nWhile Meta doesn't use the word \"overheating,\" the company compares its glasses fix to how smartphones automatically shut down when they get too hot. \"We've implemented a software update to fix a rare issue that caused a small number of Meta Glasses to get too warm when moisture entered the device,\" a Meta spokesperson said in a statement. \"It works similarly to a phone shutting off automatically when it needs to cool down. If people experience this, they can contact Meta Customer Service for a replacement.\"\n\nIn an email to users reported by 9to5Google , Meta says that the heat-related issue can be triggered by \"excessive moisture or sweat\" entering the glasses. That suggests that at least some of the company's own AI glasses may not be as water resistant as they're supposed to be. According to Meta , all of its AI glasses come with IPX4 water resistance which \"means your glasses are safe if you get caught in light rain while you wear them.\"\n\nThe company hasn't indicated how many pairs of glasses might be affected, but says that those who experience the moisture-related shutdowns will be able to get a free replacement pair of glasses. Affected glasses will show a push notification if they do turn off unexpectedly, and the alert will direct them to Meta's customer support.\n\nIn the meantime, the company is urging everyone with a pair of Meta Glasses to update to the latest software, version 130, to ensure \"the best performance.\" You can update your glasses from the Meta AI app by heading to Settings > Glasses > Updates . The version 130 update is still rolling out so it may take a day or so to hit everyone.\n\nHave you experienced a pair of Meta Glasses getting too hot or unexpectedly shutting down? Contact the author at karissa [at] engadget.com or karissabe.50 on Signal."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "the-verge-a9c566c20e573f29",
     "type": "news",
     "sourceId": "the-verge",
@@ -116,30 +215,6 @@
         "title": "Oura is acquiring medical AI chatbot startup Counsel Health",
         "summary": "Oura announced its quarterly earnings today and said it agreed to acquire Counsel Health for $625 million, after adding the company's AI chatbot to its app earlier this year. Counsel Health calls itself an \"AI-native primary care company,\" using the app to deliver AI-generated responses and insights based on users' health data reported from their […]",
         "body": "Oura announced its quarterly earnings today and said it agreed to acquire Counsel Health for $625 million, after adding the company's AI chatbot to its app earlier this year . Counsel Health calls itself an \"AI-native primary care company,\" using the app to deliver AI-generated responses and insights based on users' health data reported from their wearables that can then proceed to a conversation with one of its in-house physicians.\n\nOura says it expects the deal to close before the end of the year.\n\nOura CEO Tom Hale said in an interview with Bloomberg that the acquisition is part of a plan to connect wearables, clinical AI, and access to do …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-c8ef5e95b1363c81",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/10/apple-to-investigate-accident-that-killed-three-workers-at-iphone-parts-factory-in-india/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-10T21:34:43.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple to investigate accident that killed three workers at iPhone parts factory in India",
-        "summary": "Reuters reports that three contract workers died after inhaling gas during an inspection at a Tata Electronics factory that produces iPhone components in India. Here are the details. more…",
-        "body": "Reuters reports that three contract workers died after inhaling gas during an inspection at a Tata Electronics factory that produces iPhone components in India. Here are the details.\n\nAs frequent 9to5Mac readers probably know, Apple’s supply chain in India relies heavily on Tata, which manufactures iPhone components and accounts for a significant share of the country’s iPhone assembly operations.\n\nSince Apple began diversifying its manufacturing operations away from China, India has emerged as a major production hub, with roughly a quarter of the world’s iPhones now manufactured in the country.\n\nEarlier this year, Apple found itself linked to an environmental controversy in India, after the Tamil Nadu Pollution Control Board investigated allegations that wastewater from a Tata facility had contaminated nearby farmland water.\n\nA few weeks later, however, Tata said the regulator had dropped further action against the facility after the company addressed the concerns raised.\n\nAt the time, Tata said it had ordered separate testing related to the facility and that the results supported its position that the plant was operating within the rules.\n\nHowever, the matter was apparently not fully resolved, as just three days later, Reuters reported that local health officials were still investigating complaints from nearby farmers.\n\nAnd while there had been no major developments reported about the wastewater investigation since then, Reuters reported today that three contract workers died in an accident at the same Tata facility.\n\nFrom Reuters :\n\nThe three contract workers died during maintenance work on an effluent treatment ​plant operated by Nalco Water at the Tata facility, which is located in Hosur in Tamil Nadu, ​district official Dinesh Kumar said, adding that the deaths occurred when the workers inhaled gas while inspecting an external nano-filtration tank.\n\nReuters added that “Apple’s team is visiting ​the plant to assist in ​the ongoing investigation,” though the company did not respond when reached for comment.\n\nThe report added that Tata and Tamil Nadu authorities are also investigating the fatal accident, and noted that “production was not affected as the facility was closed for the Hindu festival of Deepavali this week.”\n\nTo read Reuters ’ full report, follow this link ."
       }
     },
     "media": null
@@ -168,30 +243,6 @@
     "media": null
   },
   {
-    "id": "engadget-ab4e2e078d5bef97",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2307790/what-is-dead-internet-theory/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-10T21:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "What is the 'Dead Internet Theory' and should humanity be worried?",
-        "summary": "As AI-generated content takes over the internet, will human beings still be able to connect online with other humans in a meaningful way?",
-        "body": "When spending time online today, do you ever get the feeling that digital life has become eerily less human? Perhaps social media posts seem a bit off , or you get the sneaking suspicion the customer service representative you are chatting with is actually a bot. If this sounds familiar, you aren't alone: a paradigm called the \"dead internet theory\" has been gaining momentum in the last several years, positing that the internet is increasingly dominated by non-human activity, including bots and AI-generated content.\n\nSince the theory first started making the rounds on internet forums in the 2010s, AI has only gotten more powerful. In September 2026, OpenAI reported that it had found a solution to a famously difficult mathematics puzzle, the Navier-Stokes problem. Meanwhile, a 2026 report from cybersecurity group Thales found that automated traffic continues to overtake human activity online, with bots accounting for 53 percent of all web traffic, up from 51 percent the year before. And bots are now talking to each other without humans in the loop at all: In March, Meta acquired Moltbook — a social network on which AI chatbots communicate with one another, often discussing humans . So as the internet landscape potentially gets less human every day, what exactly is dead internet theory, where does it come from, and should we be worried?\n\nDead Internet Theory — the idea that the majority of the internet is propelled by bots and other non-human agents – has been floating around for quite some time. It first emerged as a conspiracy theory on internet forums in the late 2010s, but gained a more concrete framework following a post in 2021 on online community Agora Road titled, \"Dead Internet Theory: Most of the Internet Is Fake,\" which argued \"the Internet feels empty and devoid of people.\" Followers of the theory argued that the internet \"died\" around 2016 when search engines and social media feeds started surfacing more AI-generated content.\n\nThe popularity of chatbots and AI-generated content has only further expanded since then. In 2024, only 33 percent of Americans said they had used chatbots like ChatGPT, Gemini or Copilot, a study from Pew Research found. By 2026, that number had increased to nearly half of Americans at 49 percent. That same report found that 25 percent of Americans use chatbots every day. In many realms of society we are now facing chatbot loops: in schools, students are writing essays using AI, which teachers then grade with AI. In the job search, employees use chatbots to spit out optimized resumes and cover letters which are then analyzed by AI systems. Increasingly, humans are cut out of the conversation entirely, our voices replaced with bots.\n\nOn a personal level, this chatbot loop can feel uncanny. Those script-like posts we see on LinkedIn or a soulless AI-generated poster at your local cafe can induce a feeling of existential dread, but the consequences go beyond personal discomfort. Bots can spread disinformation that causes real harm. AI chatbots are increasingly a source of election disinformation , and little is being done legislatively to regulate this new frontier, though government agencies have issued warnings on deepfakes and other AI-powered risks to free elections.\n\nAs AI use grows, so has the backlash: 40 percent of Americans say they think AI will have a negative impact on society in the next 20 years, according to a Pew Research study . AI detection is becoming increasingly popular, with company Pangram receiving $9 million in backing in July 2026 for its AI detection system. Following the passage of the EU AI Act, OpenAI has started watermarking AI-generated content. With measures like these, people opposed to AI will hopefully be able to more easily spot and avoid the artificial slop in favor of the human-centric connection they initially came to the internet to find."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "techcrunch-80a42d034d027098",
     "type": "news",
     "sourceId": "techcrunch",
@@ -211,31 +262,6 @@
         "title": "OpenAI, Anthropic face new oversight as New York’s AI safety law takes effect",
         "summary": "New York is preparing to enforce its sweeping AI safety law, requiring major developers like OpenAI and Anthropic to register, disclose safety practices, and report critical incidents or face fines.",
         "body": "New York is gearing up to enforce one of the country’s most significant AI safety laws. The state opened a registration portal Tuesday, with which large frontier AI developers like Anthropic and OpenAI will be required to register by January 1, 2027.\n\nThe RAISE Act , New York’s safety and transparency bill, kicks in at the start of the year. It mandates that large frontier developers — companies with more than $500 million in annual revenue — have to publish safety frameworks on their websites, report critical safety incidents within 72 hours, and issue public model transparency reports.\n\nThe newly formed Office of Digital Innovation, Governance, Integrity, and Trust (DIGIT) will implement the RAISE Act and oversee large frontier AI labs. Penalties can be as high as $1 million for one violation and $3 million for subsequent violations.\n\nThe state also can bring enforcement actions against companies that fail to register with the new portal, though a spokesperson declined to provide specifics.\n\n“Tech moguls tell us that their vision for AI is inevitable,” Governor Kathy Hochul said Tuesday during a press briefing. “They tell us get on board or get left behind… That any collateral damage is worth it as long as we win the race to the AI cliff.”\n\nOn Tuesday, Hochul also launched the New York Center for AI Responsibility and Research based at State University of New York’s Binghamton University. The center will independently evaluate the safety, security, and operation of advanced AI systems and work with DIGIT to review companies’ safety frameworks. Hochul first announced the center in January with $55 million in donations and capital.\n\n“We’re building a national model for smart, sensible AI regulation, a model that puts communities above corporations and people above powerful technology,” Hochul said.\n\nThe RAISE Act isn’t the only safety law New York has passed. Last year, the state began enforcing a law that requires AI companion operators to regularly let users know they’re talking to a bot, and to make reasonable efforts to detect suicidal ideation and self-harm.\n\nIn October, Hochul signed a separate chatbot safety law for minors, restricting behaviors like deceptive human-like interactions, emotionally manipulative or sycophantic responses, and encouragement of behaviors like suicide or disordered eating. That law takes effect June 1, 2027.\n\nOther states have also passed similar AI safety and transparency bills to the RAISE Act. California’s SB 53, which took effect in January, mandates that frontier AI labs have in place and publish safety frameworks, enact whistleblower protections, and report critical safety incidents within 15 days. Illinois’ SB 315, which will go into effect at the start of 2027, has similar requirements, plus includes independent safety compliance audits."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-9d15d775513cbd4c",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/10/spotifys-ai-dj-adds-nine-voices-and-a-setting-to-reduce-interruptions/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-10T20:48:41.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Spotify’s AI DJ adds nine voices and a setting to reduce interruptions",
-        "summary": "Spotify today expanded customization options for its AI DJ, allowing users to choose between different voices and personalities, as well as control how much the DJ talks between songs. Here are the details. more…",
-        "body": "Spotify today expanded customization options for its AI DJ, allowing users to choose between different voices and personalities, as well as control how much the DJ talks between songs. Here are the details.\n\nIf you’re not familiar with Spotify’s AI DJ feature, the company describes it as “a personalized mix of music and commentary to help you discover new favorites and connect more deeply with the artists you love,” adding that it takes your listening history into account to “[bring] together your favorite tracks, songs you haven’t heard in years, and new releases to keep things feeling fresh.”\n\nSpotify first introduced the interactive version of DJ in May 2025, and soon expanded its capabilities to Spanish-speaking users. Then, last May, Spotify expanded availability to more than 75 countries, alongside support for French, German, Italian, and Brazilian Portuguese.\n\nNow, as spotted by TechCrunch , Spotify is introducing more customization options, including new voices and personalities, as well as the ability to reduce commentary between songs.\n\nIn a new post published on Spotify’s For the Record blog, the company announced today that “Spotify Premium listeners in markets where DJ is available can choose from an expanded selection of DJ voices in English and Spanish,” with seven new English options spanning British, American, Irish, Australian, and Indian accents, along with two new Spanish voices.\n\nAdditionally, Spotify now lets users choose whether they want commentary between sets of songs through a toggle that reduces the DJ’s interruptions to brief acknowledgments when starting a session or requesting different music.\n\nHere’s Spotify’s description of each of the nine new DJ voices and their personalities:\n\nSpotify also shared a carousel on Instagram with short audio previews of each new DJ voice, giving users a chance to hear how they sound:\n\nA post shared by This Is Spotify (@thisisspotify)\n\nTo read Spotify’s full announcement, follow this link ."
       }
     },
     "media": null
@@ -307,30 +333,6 @@
         "title": "Starlink Mini 2 adds a swappable battery",
         "summary": "SpaceX announced a new version of its all-in-one satellite internet terminal that integrates a dish, Wi-Fi router, and now a battery into a single device about the size of a laptop. According to some users on X who shared screenshots of invitations to order Starlink Mini 2, the dish is priced at $999, which includes […]",
         "body": "SpaceX announced a new version of its all-in-one satellite internet terminal that integrates a dish, Wi-Fi router, and now a battery into a single device about the size of a laptop. According to some users on X who shared screenshots of invitations to order Starlink Mini 2, the dish is priced at $999, which includes a full year of Roam Unlimited service that SpaceX values at $2,100.\n\nThe Starlink Mini 2 will run for up to 4.5 hours on a full charge, SpaceX claims, but that can be expanded by hot-swapping in additional batteries that will be sold separately, or by connecting the dish to a 60W power source over USB-C.\n\nDespite the addition of …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-b4bef37a417df671",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1031063/jensen-huang-ai-race-us-china-spy",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-10T19:04:05.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The US is winning the AI race. Jensen Huang could have blown it",
-        "summary": "As espionage targets go, Jensen Huang is perhaps one of the least surprising on Earth. The Nvidia CEO runs one of the world's most valuable companies, controls the in-demand technology fueling the AI boom, and is cozy with presidents, CEOs, and all manner of important people. He also wears a cool leather jacket. Which makes […]",
-        "body": "As espionage targets go, Jensen Huang is perhaps one of the least surprising on Earth. The Nvidia CEO runs one of the world's most valuable companies, controls the in-demand technology fueling the AI boom, and is cozy with presidents, CEOs, and all manner of important people. He also wears a cool leather jacket.\n\nWhich makes Huang's admission that he had an affair with a woman suspected of being a Chinese spy - reportedly while her spying was known to US intelligence and even President Donald Trump - all the more shocking. The fallout goes well beyond his marriage, his reputation, or Nvidia itself. Experts tell The Verge the incident threate …\n\nRead the full story at The Verge."
       }
     },
     "media": null

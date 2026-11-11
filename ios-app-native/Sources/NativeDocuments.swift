@@ -229,7 +229,7 @@ struct NativeRemoteResourceScreen: View {
                                     title: item.title,
                                     originalText: documentText,
                                     sourceLanguage: item.lang,
-                                    targetLanguage: languageIndex == 1 ? "en" : "es"
+                                    targetLanguage: NativeAppLanguage.code(for: languageIndex)
                                 )
                             }
                         }

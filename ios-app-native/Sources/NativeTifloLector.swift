@@ -1152,9 +1152,6 @@ struct NativeReaderLibraryScreen: View {
     private var shownDocuments: [NativeReadingDocument] {
         let calendar = Calendar.current
         var items = library.documents.filter { doc in
-            if selectedFolder == "__unfiled__" && doc.folderName != nil { return false }
-            if selectedFolder != "" && selectedFolder != "__unfiled__"
-                && doc.folderName != selectedFolder { return false }
             let ext = (doc.fileExtension ?? "txt").lowercased()
             switch filterIndex {
             case 1: return ["txt", "text", "md", "markdown", "html", "htm", "rtf",
@@ -1198,6 +1195,31 @@ struct NativeReaderLibraryScreen: View {
         selectedDocumentIDs.removeAll()
         selectionMode = false
         selectionFeedback = message
+    }
+
+    /// Las carpetas son pantallas independientes; no modifican el filtro de biblioteca.
+    private func folderDocumentsView(_ folder: String?) -> some View {
+        List {
+            let items = library.documents.filter { $0.folderName == folder }
+            if items.isEmpty {
+                Text("No hay documentos en esta carpeta.")
+            }
+            ForEach(items) { doc in
+                NavigationLink {
+                    NativeReadingScreen(document: doc, speech: speech)
+                        .onAppear { library.markOpened(doc) }
+                } label: {
+                    Text(documentRowLabel(doc))
+                }
+                .accessibilityHint("Abre el documento dentro de la carpeta.")
+                .accessibilityAction(named: Text("Mover a carpeta")) {
+                    showFolderPicker = false
+                    folderForDocument = doc
+                }
+            }
+        }
+        .navigationTitle(folder ?? "Sin carpeta")
+        .tifloScreenSurface()
     }
 
     private func resumeRequestedBook() {
@@ -1374,8 +1396,8 @@ struct NativeReaderLibraryScreen: View {
                 )
             }
             Section("Carpetas") {
-                Button("Carpeta: \(selectedFolderLabel)") { showFolderPicker = true }
-                    .accessibilityHint("Abre el listado de carpetas y permite crear o eliminar carpetas.")
+                Button("Ver por carpetas") { showFolderPicker = true }
+                    .accessibilityHint("Abre una pantalla de carpetas; la biblioteca general conserva todos sus documentos.")
             }
             Section("Más opciones") {
                 NavigationLink("Ajustes") { NativeReaderSettingsScreen() }
@@ -1413,15 +1435,16 @@ struct NativeReaderLibraryScreen: View {
                             showCreateFolder = true
                         }
                     }
-                    Section("Elegir carpeta") {
-                        Button("Todas") { selectedFolder = ""; showFolderPicker = false }
-                        Button("Sin carpeta") { selectedFolder = "__unfiled__"; showFolderPicker = false }
+                    Section("Mis carpetas") {
+                        NavigationLink("Sin carpeta") {
+                            folderDocumentsView(nil)
+                        }
                         ForEach(library.folders, id: \.self) { folder in
-                            Button(folder) {
-                                selectedFolder = folder
-                                showFolderPicker = false
+                            NavigationLink {
+                                folderDocumentsView(folder)
+                            } label: {
+                                Text("\(folder), \(library.documents.filter { $0.folderName == folder }.count) documentos")
                             }
-                            .accessibilityHint("Filtra la biblioteca por esta carpeta.")
                             .accessibilityAction(named: Text("Eliminar carpeta")) {
                                 showFolderPicker = false
                                 folderToDelete = folder

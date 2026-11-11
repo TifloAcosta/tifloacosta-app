@@ -207,7 +207,7 @@ struct NativeNewsScreen: View {
                     NativeReadingActivityScreen(kind: .news)
                 }
             }
-            Section("Podcasts y canales de YouTube") {
+            Section {
                 NativeAdjustableChoice(
                     title: "Seleccionar contenidos multimedia",
                     choices: [
@@ -235,7 +235,7 @@ struct NativeNewsScreen: View {
                 }
                 .listRowBackground(TifloVisual.surfaceRaised)
 
-                Section("Filtrar noticias") {
+                Section {
                     NativeAdjustableChoice(
                         title: "Idioma de las noticias",
                         choices: ["Idioma de la aplicación", "Todos los idiomas", "Español", "Inglés",

@@ -305,25 +305,19 @@ private fun NativeSettingsScreen(english: Boolean) {
         context.getSharedPreferences("native-app-settings-v1", Context.MODE_PRIVATE)
     }
     var language by remember { mutableStateOf(prefs.getString("language", "") ?: "") }
-    val activeLanguage = NativeAppLanguages.normalizedCode(language) ?: "es"
     var theme by remember { mutableStateOf(prefs.getString("theme", "system") ?: "system") }
     var enlarged by remember { mutableStateOf(prefs.getBoolean("enlarged", false)) }
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        val languageIndex = NativeAppLanguages.codes.indexOf(language).coerceAtLeast(0)
-        AdjustableSelector(
-            label = NativeAppLanguages.text(activeLanguage, "appLanguage"),
-            choices = NativeAppLanguages.names,
-            selected = languageIndex,
-            english = english
-        ) { index ->
-            val code = NativeAppLanguages.codes[index]
-            language = code
-            prefs.edit().putString("language", code).apply()
+        Text(if (english) "Language" else "Idioma", style = MaterialTheme.typography.titleMedium)
+        listOf("es" to "Español", "en" to "English").forEach { (code, label) ->
+            OutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = {
+                language = code; prefs.edit().putString("language", code).apply()
+            }) { Text(label + if (language == code) " ✓" else "") }
         }
-        Text(NativeAppLanguages.text(activeLanguage, "languageDescription"))
-        Text(NativeAppLanguages.text(activeLanguage, "appearance"), style = MaterialTheme.typography.titleMedium)
-        listOf("system", "light", "dark").forEach { code ->
-            val label = NativeAppLanguages.text(activeLanguage, code)
+        Text(if (english) "Appearance" else "Aspecto", style = MaterialTheme.typography.titleMedium)
+        listOf("system" to (if (english) "System" else "Sistema"),
+            "light" to (if (english) "Light" else "Claro"),
+            "dark" to (if (english) "Dark" else "Oscuro")).forEach { (code, label) ->
             OutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = {
                 theme = code; prefs.edit().putString("theme", code).apply()
             }) { Text(label + if (theme == code) " ✓" else "") }
@@ -332,9 +326,11 @@ private fun NativeSettingsScreen(english: Boolean) {
             Checkbox(checked = enlarged, onCheckedChange = {
                 enlarged = it; prefs.edit().putBoolean("enlarged", it).apply()
             })
-            Text(NativeAppLanguages.text(activeLanguage, "largerText"))
+            Text(if (english) "Larger text" else "Texto más grande")
         }
-        Text(NativeAppLanguages.text(activeLanguage, "settingsDescription"))
+        Text(if (english)
+            "Settings are saved on this device. Reader voice settings are inside TifloLector."
+            else "Los ajustes se guardan en este dispositivo. Las voces se configuran dentro de TifloLector.")
         Button(onClick = {
             prefs.edit().putBoolean("push-consent", true).apply()
             val consent = Intent("com.tifloacosta.app.ENABLE_NOTIFICATIONS").apply {
@@ -342,12 +338,12 @@ private fun NativeSettingsScreen(english: Boolean) {
             }
             runCatching { context.sendBroadcast(consent) }
         }) {
-            Text(NativeAppLanguages.text(activeLanguage, "enableNotifications"))
+            Text(if (english) "Enable notifications" else "Activar notificaciones")
         }
         Button(onClick = {
             val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                 Uri.parse("package:" + context.packageName))
             runCatching { context.startActivity(intent) }
-        }) { Text(NativeAppLanguages.text(activeLanguage, "notificationPermissions")) }
+        }) { Text(if (english) "Android notification permissions" else "Permisos y notificaciones de Android") }
     }
 }

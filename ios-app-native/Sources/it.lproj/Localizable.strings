@@ -115,3 +115,11 @@
 "Abrir la aplicación Atajos" = "Apri l’app Comandi Rapidi";
 "Doble toque para leer la guía de esta sección." = "Esegui un doppio tocco per leggere le istruzioni di questa sezione.";
 "El idioma elegido se conserva. El cambio se aplica a la interfaz nativa; los títulos y contenidos de fuentes externas mantienen su idioma original." = "La lingua scelta viene memorizzata. Il cambiamento riguarda l’interfaccia nativa; i titoli e i contenuti esterni mantengono la lingua originale.";
+"Traducción terminada. Disponible en pantalla." = "Traduzione completata. Disponibile sullo schermo.";
+"No se pudo completar la traducción." = "Impossibile completare la traduzione.";
+"El documento original se conserva. La traducción solo comienza cuando la solicitas." = "Il documento originale viene conservato. La traduzione inizia solo quando la richiedi.";
+"Pulsa «Traducir ahora» para solicitar la traducción." = "Seleziona Traduci ora per richiedere la traduzione.";
+"Cierra la traducción y vuelve al artículo o listado desde el que accediste." = "Chiudi la traduzione e torna all’articolo o all’elenco precedente.";
+"Regresa a la noticia sin modificar el texto original." = "Torna alla notizia senza modificare il testo originale.";
+"No se pudo completar la traducción: %@. Puedes intentarlo nuevamente." = "Impossibile completare la traduzione: %@. Puoi riprovare.";
+"Idioma solicitado: %@" = "Lingua richiesta: %@";

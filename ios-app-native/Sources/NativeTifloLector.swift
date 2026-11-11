@@ -1101,6 +1101,7 @@ struct NativeReaderLibraryScreen: View {
     @State private var selectionMode = false
     @State private var selectedDocumentIDs: Set<UUID> = []
     @State private var showBulkMove = false
+    @State private var showBulkDelete = false
     @State private var selectionFeedback: String?
     @State private var shortcutMessage: String?
 
@@ -1333,6 +1334,8 @@ struct NativeReaderLibraryScreen: View {
                     Button("Deseleccionar todos") { selectedDocumentIDs.removeAll() }
                     Button("Mover seleccionados a carpeta") { showBulkMove = true }
                         .disabled(visibleSelection.isEmpty)
+                    Button("Eliminar seleccionados") { showBulkDelete = true }
+                        .disabled(visibleSelection.isEmpty)
                     Button("Añadir seleccionados a favoritos") {
                         let count = library.markFavorites(withIDs: visibleSelection, favorite: true)
                         finishSelection("\(count) documentos añadidos a favoritos.")
@@ -1345,7 +1348,8 @@ struct NativeReaderLibraryScreen: View {
                     .disabled(visibleSelection.isEmpty)
                 }
             }
-            // Los controles de gestión quedan después del último libro.
+            // Durante la selección, solo se ofrecen libros y acciones en lote.
+            if !selectionMode {
             Section("Filtrar y ordenar") {
                 NativeAdjustableChoice(
                     title: "Información de cada documento con VoiceOver",
@@ -1384,6 +1388,7 @@ struct NativeReaderLibraryScreen: View {
                 .accessibilityHint("Incluye documentos, posiciones, marcas, carpetas y archivos guardados.")
                 Button("Restaurar copia de seguridad") { restorePresented = true }
                     .accessibilityHint("Importa los libros que faltan sin sustituir los que ya están en la biblioteca.")
+            }
             }
         }
         .tifloScreenSurface()
@@ -1548,9 +1553,23 @@ struct NativeReaderLibraryScreen: View {
         } message: {
             Text("Escribe el nuevo título del documento.")
         }
+        .confirmationDialog("Eliminar documentos seleccionados", isPresented: $showBulkDelete,
+                            titleVisibility: .visible) {
+            Button("Eliminar definitivamente \(visibleSelection.count) documentos", role: .destructive) {
+                let ids = visibleSelection
+                for doc in library.documents where ids.contains(doc.id) {
+                    library.delete(doc)
+                }
+                finishSelection("\(ids.count) documentos eliminados.")
+            }
+            Button("Cancelar", role: .cancel) { showBulkDelete = false }
+        } message: {
+            let titles = library.documents.filter { visibleSelection.contains($0.id) }.map(\.title)
+            Text("Vas a eliminar definitivamente estos \(titles.count) documentos: \(titles.joined(separator: ", ")). Esta operación no se puede deshacer.")
+        }
         .confirmationDialog("Eliminar documento", isPresented: $confirmDeletion,
                             titleVisibility: .visible) {
-            Button("Eliminar definitivamente", role: .destructive) {
+            Button("Eliminar definitivamente \(documentToDelete?.title ?? "el documento")", role: .destructive) {
                 if let doc = documentToDelete { library.delete(doc) }
                 documentToDelete = nil
             }

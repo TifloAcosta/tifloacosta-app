@@ -27,7 +27,7 @@ test('la portada conserva búsqueda y rutas sin controles duplicados', () => {
   assert.ok(home.includes('.onSubmit(search)'));
   assert.ok(home.includes('if !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty'));
   assert.ok(home.includes('Button("Buscar", action: search)'));
-  assert.match(home, /\\.navigationDestination\\(for: NativeDestination\\.self\\)/);
-  assert.match(home, /\\.accessibilityLabel\\(Text\\(LocalizedStringKey\\(destination\\.rawValue\\)\\)\\)/);
-  assert.match(home, /\\.accessibilityAddTraits\\(\\.isHeader\\)/);
+  assert.ok(home.includes('.navigationDestination(for: NativeDestination.self)'));
+  assert.ok(home.includes('.accessibilityLabel(Text(LocalizedStringKey(destination.rawValue)))'));
+  assert.ok(home.includes('.accessibilityAddTraits(.isHeader)'));
 });

@@ -369,7 +369,11 @@ struct NativeSiriShortcutsHelpScreen: View {
         List {
             Section("Atajos disponibles") {
                 ForEach(shortcuts.indices, id: \.self) { index in
-                    LabeledContent(shortcuts[index].name, value: shortcuts[index].detail)
+                    LabeledContent {
+                        Text(LocalizedStringKey(shortcuts[index].detail))
+                    } label: {
+                        Text(LocalizedStringKey(shortcuts[index].name))
+                    }
                 }
             }
             Section("Frases personales") {

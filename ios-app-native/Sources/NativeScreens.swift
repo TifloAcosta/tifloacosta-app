@@ -925,13 +925,22 @@ private struct NativeYouTubeFollowedUpdatesScreen: View {
         searches.values.contains { !$0.nextPageToken.isEmpty }
     }
 
+    private static func publicationDate(_ text: String?) -> Date? {
+        guard let text, !text.isEmpty else { return nil }
+        let parser = ISO8601DateFormatter()
+        parser.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        if let date = parser.date(from: text) { return date }
+        parser.formatOptions = [.withInternetDateTime]
+        return parser.date(from: text)
+    }
+
     private func gather() {
         var seen = Set<String>()
         collected = searches.values.flatMap(\.videos)
             .filter { seen.insert($0.id).inserted }
             .sorted {
-                let left = $0.publishedAt ?? ""
-                let right = $1.publishedAt ?? ""
+                let left = Self.publicationDate($0.publishedAt) ?? .distantPast
+                let right = Self.publicationDate($1.publishedAt) ?? .distantPast
                 return left == right
                     ? $0.title.localizedStandardCompare($1.title) == .orderedAscending
                     : left > right
@@ -1113,6 +1122,10 @@ private struct NativeYouTubeVideoRow: View {
                 Text("Publicado: \(date)")
                     .font(.subheadline)
                     .foregroundStyle(TifloVisual.secondaryText)
+            } else {
+                Text("Fecha de publicación no disponible")
+                    .font(.subheadline)
+                    .foregroundStyle(TifloVisual.secondaryText)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -1138,7 +1151,7 @@ private struct NativeYouTubeVideoRow: View {
         }
         .buttonStyle(.plain)
         // Conservar el botón real: un elemento artificial pierde la acción de doble toque.
-        .accessibilityLabel("\(video.title). Canal: \(video.channelTitle)")
+        .accessibilityLabel("\(video.title). Canal: \(video.channelTitle). \(NativeNewsMetadata.publication(video.publishedAt).map { "Publicado: " + $0 } ?? "Fecha de publicación no disponible")")
         .accessibilityHint("Doble toque para reproducir. Desliza arriba o abajo para más acciones, incluida Ver después.")
         .modifier(NativeYouTubeTitleActions(
             video: video, onPlay: onPlay, onComment: onComment

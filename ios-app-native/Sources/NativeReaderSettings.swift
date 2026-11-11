@@ -224,21 +224,21 @@ struct NativeReaderAudioControls: View {
 
     var body: some View {
         NativeAdjustableChoice(
-            title: "Motor de lectura predeterminado",
+            title: readingEngineSelection == nil ? "Motor de lectura predeterminado" : "Motor de lectura de esta obra",
             choices: ["Voces del sistema", "Gemini", "Phonon"],
             selectedIndex: readingEngineSelection ?? $readingEngine
         )
         if chosenEngine == 1 {
             if NativeVoiceCredentialStore.hasKey("gemini") {
                 NativeAdjustableChoice(
-                    title: "Voz Gemini predeterminada",
+                    title: geminiVoiceSelection == nil ? "Voz Gemini predeterminada" : "Voz Gemini de esta obra",
                     choices: NativeGeminiSpeech.voices,
                     selectedIndex: Binding(
                         get: { NativeGeminiSpeech.voices.firstIndex(of: chosenGeminiVoice) ?? 0 },
                         set: { (geminiVoiceSelection ?? $geminiVoice).wrappedValue = NativeGeminiSpeech.voices[$0] }
                     )
                 )
-                Text("La voz seleccionada se usará al reproducir documentos con Gemini. También se puede comprobar en Motores externos, Gemini.")
+                Text("La voz seleccionada se utilizará según el ámbito de estos ajustes. La conexión de Gemini se configura en Motores externos.")
                     .font(.footnote)
             } else {
                 Text("Gemini necesita una clave API guardada en Motores externos antes de reproducir.")

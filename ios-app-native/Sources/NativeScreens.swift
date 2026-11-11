@@ -218,7 +218,7 @@ struct NativeHomeScreen: View {
                 .accessibilityAddTraits(.isHeader)
 
             LazyVStack(spacing: 0) {
-                ForEach(NativeDestination.allCases) { destination in
+                ForEach(NativeDestination.allCases.filter { $0 != .privacidad }) { destination in
                     NavigationLink(value: destination) {
                         HStack(spacing: 12) {
                             RoundedRectangle(cornerRadius: 2)

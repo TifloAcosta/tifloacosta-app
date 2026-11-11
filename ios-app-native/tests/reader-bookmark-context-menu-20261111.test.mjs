@@ -15,7 +15,7 @@ test('Texto de lectura presenta menú contextual con Crear marca sin menú de se
 });
 
 test('Crear marca conserva posición y reanuda si estaba reproduciendo', () => {
-  const start = swift.indexOf('private func bookmarkFromContextMenu()');
+  const start = swift.indexOf('private func bookmarkFromContextMenu(at fragment: Int)');
   const end = swift.indexOf('private func readerFragment(', start);
   const action = swift.slice(start, end);
   assert.match(action, /let wasPlaying = speech\.isPlaying/);

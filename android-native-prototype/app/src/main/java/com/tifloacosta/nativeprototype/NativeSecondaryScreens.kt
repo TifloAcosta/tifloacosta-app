@@ -320,13 +320,10 @@ private fun NativeSettingsScreen(english: Boolean) {
             language = code
             prefs.edit().putString("language", code).apply()
         }
-        Text(if (english)
-            "The app language is saved independently of your device language."
-            else "El idioma elegido se conserva aunque cambies el idioma del dispositivo.")
+        Text(NativeAppLanguages.text(activeLanguage, "languageDescription"))
         Text(NativeAppLanguages.text(activeLanguage, "appearance"), style = MaterialTheme.typography.titleMedium)
-        listOf("system" to (if (english) "System" else "Sistema"),
-            "light" to (if (english) "Light" else "Claro"),
-            "dark" to (if (english) "Dark" else "Oscuro")).forEach { (code, label) ->
+        listOf("system", "light", "dark").forEach { code ->
+            val label = NativeAppLanguages.text(activeLanguage, code)
             OutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = {
                 theme = code; prefs.edit().putString("theme", code).apply()
             }) { Text(label + if (theme == code) " ✓" else "") }
@@ -335,11 +332,9 @@ private fun NativeSettingsScreen(english: Boolean) {
             Checkbox(checked = enlarged, onCheckedChange = {
                 enlarged = it; prefs.edit().putBoolean("enlarged", it).apply()
             })
-            Text(if (english) "Larger text" else "Texto más grande")
+            Text(NativeAppLanguages.text(activeLanguage, "largerText"))
         }
-        Text(if (english)
-            "Settings are saved on this device. Reader voice settings are inside TifloLector."
-            else "Los ajustes se guardan en este dispositivo. Las voces se configuran dentro de TifloLector.")
+        Text(NativeAppLanguages.text(activeLanguage, "settingsDescription"))
         Button(onClick = {
             prefs.edit().putBoolean("push-consent", true).apply()
             val consent = Intent("com.tifloacosta.app.ENABLE_NOTIFICATIONS").apply {
@@ -347,12 +342,12 @@ private fun NativeSettingsScreen(english: Boolean) {
             }
             runCatching { context.sendBroadcast(consent) }
         }) {
-            Text(if (english) "Enable notifications" else "Activar notificaciones")
+            Text(NativeAppLanguages.text(activeLanguage, "enableNotifications"))
         }
         Button(onClick = {
             val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                 Uri.parse("package:" + context.packageName))
             runCatching { context.startActivity(intent) }
-        }) { Text(if (english) "Android notification permissions" else "Permisos y notificaciones de Android") }
+        }) { Text(NativeAppLanguages.text(activeLanguage, "notificationPermissions")) }
     }
 }

@@ -373,3 +373,5 @@
 "%d por ciento leído" = "%d percent read";
 "formato %@" = "format %@";
 "carpeta %@" = "folder %@";
+"Marca guardada en %d por ciento." = "Bookmark saved at %d percent.";
+"Marca guardada en la pista %d, %d por ciento." = "Bookmark saved on track %d, %d percent.";

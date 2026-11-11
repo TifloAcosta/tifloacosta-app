@@ -98,8 +98,13 @@ struct NativeQuickBookmarkHelpScreen: View {
 
     var body: some View {
         List {
-            Section("Preparar el atajo") {
-                Text("En Atajos, crea uno nuevo, añade la acción Crear marca en TifloLector y guárdalo con ese nombre.")
+            Section("Instalar el atajo Marcar lectura") {
+                Text("Añade el atajo compartido a tu iPhone con un solo enlace. El atajo crea una marca en la posición actual de TifloLector sin detener la reproducción.")
+                Button("Añadir atajo Marcar lectura") {
+                    guard let url = URL(string: "https://www.icloud.com/shortcuts/6f9725e60e24486897d56a8378b46e19") else { return }
+                    openURL(url)
+                }
+                Text("Si prefieres crearlo manualmente, abre Atajos, añade la acción Crear marca en TifloLector y ponle el nombre Marcar lectura.")
                 Button("Abrir Atajos") {
                     guard let url = URL(string: "shortcuts://") else { return }
                     openURL(url)

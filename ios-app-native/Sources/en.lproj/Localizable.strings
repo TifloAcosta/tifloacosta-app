@@ -270,4 +270,11 @@
 "Accesibilidad y VoiceOver" = "Accessibility and VoiceOver";
 "Pódcast" = "Podcasts";
 "Notificaciones" = "Notifications";
-"Otro" = "Other";
+"Otro" = "Other";"Traducción terminada. Disponible en pantalla." = "Translation complete. Available on screen.";
+"No se pudo completar la traducción." = "The translation could not be completed.";
+"El documento original se conserva. La traducción solo comienza cuando la solicitas." = "The original document is preserved. Translation starts only when requested.";
+"Pulsa «Traducir ahora» para solicitar la traducción." = "Choose Translate now to request a translation.";
+"Cierra la traducción y vuelve al artículo o listado desde el que accediste." = "Close the translation and return to the article or list you came from.";
+"Regresa a la noticia sin modificar el texto original." = "Return to the article without changing the original text.";
+"No se pudo completar la traducción: %@. Puedes intentarlo nuevamente." = "Translation could not be completed: %@. You can try again.";
+"Idioma solicitado: %@" = "Requested language: %@";

@@ -81,8 +81,8 @@ test('La voz ignora marcadores estructurales de EPUB conservando las posiciones'
 
 
 test('Motor predeterminado y voz Gemini están dentro de Audio', () => {
-  assert.match(settings, /title: "Motor de lectura predeterminado"/);
-  assert.match(settings, /title: "Voz Gemini predeterminada"/);
+  assert.match(settings, /"Motor de lectura predeterminado" : "Motor de lectura de esta obra"/);
+  assert.match(settings, /"Voz Gemini predeterminada" : "Voz Gemini de esta obra"/);
   assert.doesNotMatch(reader, /title: "Motor de lectura",/);
   assert.match(reader, /Button\("Audio"\) \{ showAudioSettings = true \}/);
 });

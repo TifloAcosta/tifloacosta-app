@@ -64,6 +64,31 @@ enum NativeReaderPauseProfile {
     }
 }
 
+/// Las versiones anteriores guardaban índices 0–4 para 0,75; 0,90; 1; 1,25; 1,50.
+/// Los nuevos índices se guardan como 100 + posición para no reinterpretar libros existentes.
+enum NativeReaderSpeedOptions {
+    static let rates: [Double] = (15...30).map { Double($0) / 20.0 }
+    static let choices: [String] = rates.map { rate in
+        abs(rate - 1.0) < 0.001 ? "Normal, 1,00 veces" :
+            String(format: "%.2f veces", rate).replacingOccurrences(of: ".", with: ",")
+    }
+    private static let legacyRates: [Double] = [0.75, 0.9, 1.0, 1.25, 1.5]
+    static func rate(for stored: Int) -> Double {
+        if stored >= 100 {
+            return rates[max(0, min(rates.count - 1, stored - 100))]
+        }
+        return legacyRates[max(0, min(legacyRates.count - 1, stored))]
+    }
+    static func choiceIndex(for stored: Int) -> Int {
+        if stored >= 100 { return max(0, min(rates.count - 1, stored - 100)) }
+        let old = rate(for: stored)
+        return rates.firstIndex(where: { abs($0 - old) < 0.001 }) ?? 5
+    }
+    static func storedIndex(for choice: Int) -> Int {
+        100 + max(0, min(rates.count - 1, choice))
+    }
+}
+
 /// Controles ajustables con VoiceOver, sin introducir números mediante teclado.
 struct NativeReaderPunctuationControls: View {
     @AppStorage("native-reading-pause-style") private var style = 0
@@ -118,6 +143,9 @@ struct NativeReaderAudioControls: View {
     @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
     @AppStorage("native-reader-phonon-voice") private var phononVoice = ""
     let speedSelection: Binding<Int>?
+    let readingEngineSelection: Binding<Int>?
+    let geminiVoiceSelection: Binding<String>?
+    let phononVoiceSelection: Binding<String>?
     let pitchSelection: Binding<Int>?
     let voiceSelection: Binding<String>?
     let allowVoiceDownloads: Bool
@@ -127,14 +155,30 @@ struct NativeReaderAudioControls: View {
     @State private var personalVoiceStatus = AVSpeechSynthesizer.personalVoiceAuthorizationStatus
 
     init(speedSelection: Binding<Int>? = nil, pitchSelection: Binding<Int>? = nil,
-         voiceSelection: Binding<String>? = nil, allowVoiceDownloads: Bool = true) {
+         voiceSelection: Binding<String>? = nil,
+         readingEngineSelection: Binding<Int>? = nil,
+         geminiVoiceSelection: Binding<String>? = nil,
+         phononVoiceSelection: Binding<String>? = nil,
+         allowVoiceDownloads: Bool = true) {
         self.speedSelection = speedSelection
         self.pitchSelection = pitchSelection
         self.voiceSelection = voiceSelection
+        self.readingEngineSelection = readingEngineSelection
+        self.geminiVoiceSelection = geminiVoiceSelection
+        self.phononVoiceSelection = phononVoiceSelection
         self.allowVoiceDownloads = allowVoiceDownloads
     }
 
     private var selectedVoiceID: String { voiceSelection?.wrappedValue ?? generalVoiceID }
+    private var chosenEngine: Int { readingEngineSelection?.wrappedValue ?? readingEngine }
+    private var chosenGeminiVoice: String { geminiVoiceSelection?.wrappedValue ?? geminiVoice }
+    private var speedChoiceBinding: Binding<Int> {
+        let storage = speedSelection ?? $generalSpeed
+        return Binding(
+            get: { NativeReaderSpeedOptions.choiceIndex(for: storage.wrappedValue) },
+            set: { storage.wrappedValue = NativeReaderSpeedOptions.storedIndex(for: $0) }
+        )
+    }
 
     private var voices: [AVSpeechSynthesisVoice] {
         switch filterIndex {
@@ -180,34 +224,34 @@ struct NativeReaderAudioControls: View {
 
     var body: some View {
         NativeAdjustableChoice(
-            title: "Motor de lectura predeterminado",
+            title: readingEngineSelection == nil ? "Motor de lectura predeterminado" : "Motor de lectura de esta obra",
             choices: ["Voces del sistema", "Gemini", "Phonon"],
-            selectedIndex: $readingEngine
+            selectedIndex: readingEngineSelection ?? $readingEngine
         )
-        if readingEngine == 1 {
+        if chosenEngine == 1 {
             if NativeVoiceCredentialStore.hasKey("gemini") {
                 NativeAdjustableChoice(
-                    title: "Voz Gemini predeterminada",
+                    title: geminiVoiceSelection == nil ? "Voz Gemini predeterminada" : "Voz Gemini de esta obra",
                     choices: NativeGeminiSpeech.voices,
                     selectedIndex: Binding(
-                        get: { NativeGeminiSpeech.voices.firstIndex(of: geminiVoice) ?? 0 },
-                        set: { geminiVoice = NativeGeminiSpeech.voices[$0] }
+                        get: { NativeGeminiSpeech.voices.firstIndex(of: chosenGeminiVoice) ?? 0 },
+                        set: { (geminiVoiceSelection ?? $geminiVoice).wrappedValue = NativeGeminiSpeech.voices[$0] }
                     )
                 )
-                Text("La voz seleccionada se usará al reproducir documentos con Gemini. También se puede comprobar en Motores externos, Gemini.")
+                Text("La voz seleccionada se utilizará según el ámbito de estos ajustes. La conexión de Gemini se configura en Motores externos.")
                     .font(.footnote)
             } else {
                 Text("Gemini necesita una clave API guardada en Motores externos antes de reproducir.")
                     .font(.footnote)
             }
-        } else if readingEngine == 2 {
+        } else if chosenEngine == 2 {
             Text("La disponibilidad de Phonon depende de tener instalado un motor compatible dentro de TifloLector.")
                 .font(.footnote)
         }
         NativeAdjustableChoice(
             title: "Velocidad de voz",
-            choices: ["0,75 veces", "0,9 veces", "Normal", "1,25 veces", "1,5 veces"],
-            selectedIndex: speedSelection ?? $generalSpeed
+            choices: NativeReaderSpeedOptions.choices,
+            selectedIndex: speedChoiceBinding
         )
         NativeAdjustableChoice(
             title: "Tono de lectura",
@@ -349,6 +393,9 @@ struct NativeReaderDocumentAudioControls: View {
     @AppStorage("native-reading-speed-index") private var defaultSpeed = 2
     @AppStorage("native-reading-pitch-index") private var defaultPitch = 2
     @AppStorage("native-reading-voice-id") private var defaultVoiceID = ""
+    @AppStorage("native-reader-reading-engine") private var defaultReadingEngine = 0
+    @AppStorage("native-reader-gemini-voice") private var defaultGeminiVoice = "Kore"
+    @AppStorage("native-reader-phonon-voice") private var defaultPhononVoice = ""
 
     var body: some View {
         NativeReaderAudioControls(
@@ -363,6 +410,18 @@ struct NativeReaderDocumentAudioControls: View {
             voiceSelection: Binding(
                 get: { library.latest(document).readerPreferences?.voiceID ?? defaultVoiceID },
                 set: { value in library.updatePreferences(document) { $0.voiceID = value } }
+            ),
+            readingEngineSelection: Binding(
+                get: { library.latest(document).readerPreferences?.readingEngineIndex ?? defaultReadingEngine },
+                set: { value in library.updatePreferences(document) { $0.readingEngineIndex = value } }
+            ),
+            geminiVoiceSelection: Binding(
+                get: { library.latest(document).readerPreferences?.geminiVoiceID ?? defaultGeminiVoice },
+                set: { value in library.updatePreferences(document) { $0.geminiVoiceID = value } }
+            ),
+            phononVoiceSelection: Binding(
+                get: { library.latest(document).readerPreferences?.phononVoiceID ?? defaultPhononVoice },
+                set: { value in library.updatePreferences(document) { $0.phononVoiceID = value } }
             ),
             allowVoiceDownloads: false
         )

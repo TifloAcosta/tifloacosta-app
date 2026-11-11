@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-11T18:42:59.450Z",
+  "generatedAt": "2026-11-11T22:02:42.713Z",
   "resources": [
     {
       "kind": "resource",
@@ -5602,18 +5602,215 @@
   "news": [
     {
       "kind": "news",
-      "id": "9to5mac-536c3f9e3ea6d3dc:en",
-      "sourceId": "9to5mac-536c3f9e3ea6d3dc",
+      "id": "the-verge-e69463ff385de321:en",
+      "sourceId": "the-verge-e69463ff385de321",
       "lang": "en",
-      "title": "iOS 27.3 adds new setting to bypass website cookie popups (eventually)",
-      "summary": "iOS 27.3 is currently in beta and packed with new features , including a ‘Global Privacy Control’ setting in Safari that could someday put an end to cookie consent pop-ups. more…",
-      "body": "iOS 27.3 is currently in beta and packed with new features , including a ‘Global Privacy Control’ setting in Safari that could someday put an end to cookie consent pop-ups.\n\nApple has several big changes coming to Safari in iOS 27.3, iPadOS 27.3, and macOS 27.3. The browser is adding Vertical Tabs, Adaptive Dark Mode, and new Siri AI powers.\n\nBut iOS 27.3 has another Safari feature that’s hidden away in Settings: a new ‘Global Privacy Control’ option.\n\nInside Settings ⇾ Apps ⇾ Safari ⇾ Advanced you’ll find the ‘Use Global Privacy Control’ setting. Apple describes it this way:\n\nSafari can ask websites to not sell or share your data. This may cause some websites to not function properly or work at all.\n\nThe beta also links to a support document where users can find more information, but it’s currently a broken link. The document will likely be published on iOS 27.3’s release day .\n\nAs noted by Nick Heer on his site Pixel Envy , this Global Privacy Control setting is “effectively a replacement for Do Not Track with legal muscle that should permit you to indicate your tracking preference one time and then, theoretically, never again see a cookie consent banner.”\n\nUltimately though, the dream of automatically declining cookie consents has a long road to reality. Websites have to add support for Global Privacy Control (which some have already done, but most haven’t). And GPC currently only has legal muscle in five US states .\n\nThat said, the addition of a Global Privacy Control setting in iOS 27.3 is a good start. And hopefully it means that in a few years, many Safari users don’t need to see cookie consent popups anymore.\n\nWill you enable Global Privacy Control in iOS 27.3? Let us know in the comments.\n\nIn practice, it will take time for websites to add support, and it requires users to enable the feature in Safari’s Settings.",
+      "title": "United won’t let your AI agent book your flight",
+      "summary": "United says it won't let personal AI assistants book tickets on the airline, citing both privacy and regulatory concerns. The company says it hasn't yet seen many people try to use AI agents to book their flights, The Wall Street Journal reports, in line with observations from other businesses like Doordash. But United is concerned […]",
+      "body": "United says it won't let personal AI assistants book tickets on the airline, citing both privacy and regulatory concerns.\n\nThe company says it hasn't yet seen many people try to use AI agents to book their flights, The Wall Street Journal reports , in line with observations from other businesses like Doordash . But United is concerned that agents could expose customers' information or make purchases they didn't intend, and potentially skirt federal rules about the kind of information airlines need to share with customers - like having them attest that their bags don't have explosives.\n\nWhile agents can still show users United flights, they …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1031623/united-unauthorized-ai-agents",
+      "publishedAt": "2026-11-11T21:54:21.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-5a44bd1ce3aa58e3:en",
+      "sourceId": "9to5mac-5a44bd1ce3aa58e3",
+      "lang": "en",
+      "title": "iPhone Duo one week later: The future, or not for me?",
+      "summary": "My iPhone Duo arrived last Thursday, so I’ve had a week to use it as my daily carry. My early experience has been mixed, so I keep asking myself an important question: is this the iPhone’s future and I just need to adapt, or is the Duo simply not for everyone? more…",
+      "body": "My iPhone Duo arrived last Thursday, so I’ve had a week to use it as my daily carry. My early experience has been mixed, so I keep asking myself an important question: is this the iPhone’s future and I just need to adapt, or is the Duo simply not for everyone?\n\nAfter a week using the iPhone Duo, in some ways I have a lot of clarity about the product, and in other ways my thinking is very clouded.\n\nTo put it simply: I’m not having a great time with the Duo, which makes me wonder if the problem is me, not it.\n\nI’ve seen countless social media posts from Duo owners proclaiming how much they love the product. And I absolutely believe them. The iPhone Duo is a remarkable innovation for the iPhone. It’s cool, weird, and wonderful in all sorts of ways. But for me and my needs (preferences?), it’s been more frustrating than enjoyable.\n\nAnd that frustration mainly boils down to one thing: I almost never want to open it.\n\nI’d estimate at least 90% of my iPhone Duo usage involves the front display. And when I unfold it the remaining 10% of the time, it’s often because I force myself to do it in the hopes of discovering what I’m missing out on. Like, I know I should be unfolding it more, so I do. But it doesn’t add any real value for me.\n\nBecause I rarely want to open the iPhone Duo, I’m left using the outer display all the time. In that mode, the Duo is too heavy for extended use, too wide to comfortably reach, and the UI in most apps is an adjustment.\n\nAre these dealbreakers? No. I could live with the Duo’s outer display if I had to, but it’s definitely an inferior experience to my iPhone 18 Pro.\n\nIf I was opening the iPhone Duo more, and actually taking advantage of the key value proposition of foldables—that you can unfold them—I doubt the outer screen would bother me much.\n\nBut what I’ve found, at least so far, is that one-handed iPhone use is very important to me, which rules out using the inner display. I use my iPhone mostly for quick interactions, and often with a child in one hand (I have three very young kids). In situations when I do have two hands free to open the Duo, I’m probably sitting in front of my iPad Pro with a Magic Keyboard attached and would rather use the iPad instead.\n\nSo again: is the problem with the Duo, or with me?\n\nI think it’s the latter, but I’m not sure “problem” is the right word. I just don’t find myself using it the way it’s meant to be used. And that’s fine.\n\nI want to love the iPhone Duo, because I see how much fun other people are having with it. And maybe given more time, something will click and I’ll start to use it “as intended.”\n\nIf iPhone Duo is the future of the iPhone, I’ll adapt and move on with my life. But one week in, I think it’s probably just not for me. And if it’s not for me, maybe there are a lot of people who will continue preferring non-foldable iPhones for many years to come.\n\nWhat’s your iPhone Duo experience been like? Are you loving it or struggling? Let us know in the comments.",
       "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/11/ios-27-3-adds-new-setting-to-bypass-website-cookie-popups-eventually/",
-      "publishedAt": "2026-11-11T15:07:20.000Z",
+      "originalUrl": "https://9to5mac.com/2026/11/11/iphone-duo-one-week-later-the-future-or-not-for-me/",
+      "publishedAt": "2026-11-11T21:33:21.000Z",
       "categories": [
         "apple",
         "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-7a2c23618d0ad1c6:en",
+      "sourceId": "9to5mac-7a2c23618d0ad1c6",
+      "lang": "en",
+      "title": "Binance warns iPhone crypto holders of security flaw researchers say remains unpatched",
+      "summary": "Crypto exchange Binance has warned iPhone users about an iOS vulnerability that could allow malicious apps to access sensitive data stored by other apps. Here are the details. more…",
+      "body": "Crypto exchange Binance has warned iPhone users about an iOS vulnerability that could allow malicious apps to access sensitive data stored by other apps. Here are the details.\n\nIn a post published on X (via AppleInsider ), Binance says that a vulnerability called worse_query could allow “malicious apps to read local files from other apps, putting seed phrases, private keys, and login credentials at risk across the entire ecosystem.”\n\nBinance says the flaw affects iOS 26.7.1, iOS 27.0.1, and iOS 27.2. However, a Community Note points out that researchers describe the vulnerability as an unpatched zero-day and that Apple’s latest security updates , including iOS 27.2.1 (the current version at the time of writing), do not mention a fix.\n\nThat said, in addition to updating their devices, Binance recommends that iPhone crypto holders take the following immediate actions:\n\nThe vulnerability was disclosed by security researchers @0xjohnny and @forcequitOS , who published a proof of concept on GitHub demonstrating how it can be used to bypass iOS sandbox protections, which normally prevent apps from accessing each other’s files.\n\nResearcher @forcequitOS also noted that neither iOS 27.2.1 nor iOS 27.3 beta 1 patches the vulnerability.\n\nAlthough the researcher describes the code as intended for developers and not useful on its own, other developers have already built apps using it, including a file manager that can access, modify, and delete data belonging to other apps without requiring a jailbreak.\n\nAccording to The Hacker News , neither Binance nor the researchers have reported any attacks or cryptocurrency thefts involving the vulnerability so far.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/11/binance-warns-iphone-crypto-holders-of-security-flaw-researchers-say-remains-unpatched/",
+      "publishedAt": "2026-11-11T21:17:30.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-cd6b83884481c154:en",
+      "sourceId": "9to5mac-cd6b83884481c154",
+      "lang": "en",
+      "title": "Apple Invites app now lets hosts poll guests, plus new emoji effect added",
+      "summary": "Apple Invites, an iCloud+ feature, just added two new features in this month’s update. more…",
+      "body": "Apple Invites, an iCloud+ feature, just added two new features in this month’s update.\n\nInvites is Apple’s digital event planning app for iCloud+ subscribers. It’s available on iPhone and iPad. The app doesn’t require an iPhone or a paid iCloud account to respond to digital events created with Apple Invites.\n\nNovember’s update adds these two new features:\n\nAdditionally, Apple says the new version, 1.13, includes the usual bug fixes and performance improvements.\n\nApple regularly updates the Invites app for iPhone. While there’s no iPad version yet, Apple Invites gained its first iMessage app this year, putting Invites where people are already chatting.\n\nApple Invites for iPhone is available on the App Store . Creating a digital invitation requires iCloud+, and anyone can respond.\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/11/apple-invites-app-now-lets-hosts-poll-guests-plus-new-emoji-effect-added/",
+      "publishedAt": "2026-11-11T21:08:46.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-7ef952a0997895f1:en",
+      "sourceId": "techcrunch-7ef952a0997895f1",
+      "lang": "en",
+      "title": "Why the data center you dread might never even be built",
+      "summary": "The data center boom is running into serious real-world obstacles, from widespread local opposition and permitting delays to a scramble for electricity. Before those challenges even come into play, though, there’s a more basic problem: A lot of the projects being announced may never get built in the first place. With billions of dollars in AI infrastructure […]",
+      "body": "Loading the player…\n\nThe data center boom is running into serious real-world obstacles, from widespread local opposition and permitting delays to a scramble for electricity . Before those challenges even come into play, though, there’s a more basic problem: A lot of the projects being announced may never get built in the first place. With billions of dollars in AI infrastructure investment at stake, separating realistic projects from speculative ones is becoming increasingly important.\n\nOn this episode of TechCrunch’s Equity podcast, hosts Rebecca Bellan and Tim De Chant are joined by Brent Nelson , senior managing director of markets and strategy at Ascend Analytics , to separate the data center projects that are likely to get built from the ones that may never get off the ground.\n\nSubscribe to Equity on YouTube , Apple Podcasts , Overcast , Spotify and all the casts. You also can follow Equity on X and Threads , at @EquityPod.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/video/why-the-data-center-you-dread-might-never-even-be-built/",
+      "publishedAt": "2026-11-11T20:15:15.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-966909434fef76b2:en",
+      "sourceId": "engadget-966909434fef76b2",
+      "lang": "en",
+      "title": "United is restricting AI agents from booking flights",
+      "summary": "The airline believes AI poses security risks and may violate DOT and FAA rules.",
+      "body": "The airline believes AI poses security risks and may violate DOT and FAA rules.\n\nUnited Airlines has announced it will change ticking policies to restrict AI agents' from booking flights through its website, third-party travel agencies and flight aggregators. The airline joins a growing number of businesses, including JPMorgan Chase and Amazon , which block agents from using their products to avoid the security and privacy issues associated with them.\n\nGiving something like your payment details or log-in credentials to an agent can expose sensitive information and lead to \"unintended purchases, account changes or use of MileagePlus miles,\" United says. Allowing an AI agent to complete a booking could also violate existing airline regulations from the Department of Transportation and Federal Aviation Administration. For example, United says only a human can acknowledge that their bag doesn't contain explosives during flight check-in.\n\nUnited would like to avoid association with any agent-based embarrassments, for instance when Meta's Muse leaked a user's address online . Like other companies, it also wants to keep AI from getting in the way of its relationship with customers. The Wall Street Journal reports that United CEO Scott Kirby has been open about the company's reluctance to jump into agentic commerce. \"To be honest, I don't want to create another middleman,\" Kirby said at an event on Tuesday. Not every airline feels the same way: Southwest created a plugin so users can book flights with ChatGPT .\n\nLuckily for United and other companies blocking AI agents , agentic commerce might not be taking off with regular people. During its recent third-quarter earnings call, Uber shared that it handled 320 million trips and deliveries during the week of Halloween; of those, AI agents were responsible for 500 Uber Eats orders and only four rides. Those aren't exactly industry-destroying numbers.\n\nHanding an AI your credit card is very different from handing it your email login, and both are different from just asking it to send you a news summary every morning. Even if a large number of people are downloading apps like Muse , it seems like letting an agent shop for you isn't as frictionless or foolproof as it needs to be to catch on.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2314121/united-is-restricting-ai-agents-from-booking-flights/",
+      "publishedAt": "2026-11-11T20:09:44.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-f1c37036250ba628:en",
+      "sourceId": "engadget-f1c37036250ba628",
+      "lang": "en",
+      "title": "Google brings the Gemini app to Apple CarPlay",
+      "summary": "The chatbot was already available through the Google Maps app.",
+      "body": "The chatbot was already available through the Google Maps app.\n\nContinuing on its apparent quest to ensure the chatbot is inescapable on as many screens, speakers and experiences as possible, Google has brought the Gemini app to Apple CarPlay . It's available starting today for all supported Gemini Live languages.\n\nGoogle previously made the AI assistant available on CarPlay through the Google Maps app . Now, you'll be able to access it just by tapping the Gemini icon on your display. Google said you can pick up where you left off with Gemini in your car or start a new conversation with the chatbot.\n\nThe company suggested drivers could use Gemini to prep for a meeting during their commute, catch up on emails, hear their Daily Brief or get recommendations for local places worth checking out in an area. Your conversations will sync with the Gemini iPhone app and remain in your chat history.\n\nThe Gemini app is now available directly on Apple CarPlay. iOS users can have free-flowing conversations with Gemini Live right from their car's display, hands-free.\n\nUse Gemini in CarPlay to catch-up on what you have coming up in your schedule, talk through your inbox, or... pic.twitter.com/1s4luZ6q0v\n\n— Google (@Google) November 11, 2026\n\nTo use the assistant on CarPlay, you'll need to make sure you have the latest version of the Gemini app on your iPhone and the microphone permissions are on. You'll need to have used Gemini Live at least once on your iPhone as well.\n\nGoogle brought the Gemini app to CarPlay not long after it enabled Personal Assistance (which can access details from other Google apps for more personalized responses) in the chatbot on Android Auto. The company is bringing Personal Intelligence to Gemini on cars with Google built-in as well.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2314093/google-brings-the-gemini-app-to-apple-carplay/",
+      "publishedAt": "2026-11-11T19:54:55.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple",
+        "apps-accesibles",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-f4932fbeae9a1ee1:en",
+      "sourceId": "engadget-f4932fbeae9a1ee1",
+      "lang": "en",
+      "title": "ByteDance is reportedly working on its own AI agent",
+      "summary": "The Chinese company wants to compete with Meta's Muse.",
+      "body": "The Chinese company wants to compete with Meta’s Muse.\n\nByteDance wants to take on Meta's Muse with its own AI agent. The company is readying an AI assistant that could be revealed in \"the coming weeks,\" Bloomberg reports .\n\nThe report doesn't detail what the agent will be called or how it will work, but says that it will \"serve a similar role\" to Meta's Muse. Muse has already drawn more than 10 million users and CEO Mark Zuckerberg has predicted the AI agent could generate more revenue per user than its existing \"family\" of apps. The agent is also expected to play a significant role in Meta's AI glasses, and the company has previewed a standalone \"charm\" for Muse.\n\nIt's not clear if ByteDance is also planning on incorporating its agent into hardware. The AI assistant is one piece of the Chinese company's strategy to compete with frontier AI companies. ByteDance cofounder Zhang Yiming recently told employees that it would likely take \"until at least 2029 or 2030\" for the company's AI efforts to catch up, Bloomberg reported. Within the AI space, ByteDance has been primarily known for its video generator, Seedance. Clips from the video model went viral on social media platforms earlier this year, which eventually drew legal scrutiny from US-based studios.\n\nIf the TikTok maker does introduce its own AI agent, it would also likely raise new concerns about data privacy and how much access personal agents should get. ByteDance didn't immediately respond to a request for comment.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2314064/bytedance-is-reportedly-working-on-its-own-ai-agent/",
+      "publishedAt": "2026-11-11T19:42:19.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-8d1d626e96d11cee:en",
+      "sourceId": "techcrunch-8d1d626e96d11cee",
+      "lang": "en",
+      "title": "With $720M round, Britain’s Fractile gets a leg up in the race for AI chips",
+      "summary": "Fractile has now become one of the top-funded players in the race for purpose-built AI chips.",
+      "body": "Fractile , a British startup developing AI chips, has raised a $720 million Series C backed by Britain’s Sovereign AI Fund with hopes of “ensuring the U.K. has a greater stake in the hardware that will underpin its future economy,” its government stated .\n\nAlongside the likes of Axelera , Etched , and OLIX , this makes Fractile one of the top-funded startup players in the race for purpose-built AI chips. Such chips are one of several avenues being explored to reduce the cost of inference — aka using increasingly demanding AI models in production.\n\nHowever, Fractile seeks to go beyond hardware with a full-stack approach that also includes a machine learning compiler to maximize the speed at which LLMs will get executed on its chips.\n\nAs a result, the company frames itself as a frontier AI company, and its latest round led by Thrive Capital, Founders Fund, Lightspeed Venture Partners and Redpoint was priced accordingly. According to the British government, the valuation was “over £5 billion” — quite possibly $7 billion, a figure reported both by the Financial Times and a Reuters source .\n\nStill, Fractile’s main differentiator will arguably be its hardware design. After a pivot , its approach now revolves on DRAM, the most common type of RAM, but stacked on top of each chip in such a way that it is hoping will bypass the usual tradeoff between memory and capacity.\n\nThis tradeoff has become more problematic with the rise of agentic AI, as companies seek to perform longer chains of tasks with large models without compromising on speed. As compute struggles to keep up, hopes are high for AI chips, despite their limited availability to date.\n\nIn a LinkedIn post , Fractile CEO Walter Goodwin wrote that “there is still a lot of work ahead” for the company, and that the new funding will enable the startup to “ship [its] first chips and systems next year.”",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/11/11/with-720m-round-britains-fractile-gets-a-leg-up-in-the-race-for-ai-chips/",
+      "publishedAt": "2026-11-11T19:34:55.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-f677334991a56ea6:en",
+      "sourceId": "ars-technica-f677334991a56ea6",
+      "lang": "en",
+      "title": "Taiwan’s chipmaking giant TSMC to invest $1B in Anthropic, OpenAI",
+      "summary": "Latest example of the AI boom’s circular financing comes as AI trade wobbles.",
+      "body": "Top chip manufacturer TSMC is ready to invest $1 billion in Anthropic and OpenAI. That would give the Taiwanese chipmaker direct stakes in leading AI developers, even as its own contract chipmaking business has profited enormously from the AI data center buildout.\n\nThe chipmaker’s board approved plans to invest up to $500 million in OpenAI preferred stock reserved for large investors and another $500 million to purchase Anthropic common shares at the latter’s expected IPO price, according to Reuters . Such an investment may give markets “a shot of confidence as the artificial-intelligence trade shows signs of strain,” The Wall Street Journal reported.\n\nBut analysts also warned that such circular financing among investors, suppliers, and customers has made it difficult to evaluate real market demand for AI-related hardware and services, according to the Journal.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/ai/2026/11/taiwans-chipmaking-giant-tsmc-to-invest-1b-in-anthropic-openai/",
+      "publishedAt": "2026-11-11T18:16:40.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "freedom-scientific-blog-981b461364ffd975:en",
+      "sourceId": "freedom-scientific-blog-981b461364ffd975",
+      "lang": "en",
+      "title": "Learn About New Features of JAWS, ZoomText, and Fusion 2027",
+      "summary": "JAWS, ZoomText, and Fusion 2027 introduce new features and enhancements designed to improve accessibility, productivity, and the overall user experience. Join us Thursday, November 12 at noon ET for a live webinar to learn more about the latest updates and how they can support your everyday tasks. What We’ll Cover We’ll discuss new features and …",
+      "body": "JAWS, ZoomText, and Fusion 2027 introduce new features and enhancements designed to improve accessibility, productivity, and the overall user experience. Join us Thursday, November 12 at noon ET for a live webinar to learn more about the latest updates and how they can support your everyday tasks.\n\nWe’ll discuss new features and enhancements that will help you:\n\nVisit the What’s New in JAWS 2027 or What’s New in ZoomText 2027 pages to read additional details about these features.\n\nRegister for this webinar to learn about these new, exciting features that increase efficiency and productivity. ACVREP credits will be available for those who attend the live webinar.\n\nCan’t attend? We archive all webinars on our Webinars on Demand page. Have questions? Send an email to training@vispero.com .",
+      "sourceName": "Freedom Scientific",
+      "originalUrl": "https://training.vispero.com/learn-about-new-features-of-jaws-zoomtext-and-fusion-2027/",
+      "publishedAt": "2026-11-11T17:12:36.000Z",
+      "categories": [
+        "windows",
+        "tecnologia-accesibilidad",
+        "jaws"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-26edff5d71624554:en",
+      "sourceId": "ars-technica-26edff5d71624554",
+      "lang": "en",
+      "title": "IBM to offer access to a dual-processor quantum system in 2027",
+      "summary": "The company plans on linking two 520-qubit chips before next year is over.",
+      "body": "IBM's Quantum Developer's Conference is being held this week, and the company is using the gathering to provide an update to its roadmap: It is aiming to make error-corrected quantum computers before the decade is out.\n\nThe changes greatly expand the scope of its next-generation Nighthawk general-use processors by adding a version with over 500 programmable qubits. At the same time, it's stepping back a bit on its plan to link multiple Nighthawk processors together, dropping the intended number of linked systems from nine to two.\n\nThe total number of qubits planned for next year will remain the same; how the company is getting there, however, will be different.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/science/2026/11/ibm-to-offer-access-to-a-dual-processor-quantum-system-in-2027/",
+      "publishedAt": "2026-11-11T16:33:08.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-a04312263fd51234:en",
+      "sourceId": "the-verge-a04312263fd51234",
+      "lang": "en",
+      "title": "Google’s Tabletop AI experiment lets you build custom collaboration apps",
+      "summary": "Google has cooked up a new experimental AI tool called Tabletop that generates customized collaborative hubs to help you coordinate with family, and friends. The Tabletop platform shares some visual similarities with workplace management apps like Asana and Monday, but with a built-in AI feature that allows you to vibecode personalized interactive tools by describing […]",
+      "body": "Google has cooked up a new experimental AI tool called Tabletop that generates customized collaborative hubs to help you coordinate with family, and friends. The Tabletop platform shares some visual similarities with workplace management apps like Asana and Monday, but with a built-in AI feature that allows you to vibecode personalized interactive tools by describing them, such as savings trackers, chore charts, event plans, and more.\n\n\"Just add in your links, files and ideas, then prompt @tabletop - or pick a starter template - to generate custom interactive trip itineraries, dinner polls, expense splitters and tournament brackets,\" Google …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1031526/google-tabletop-ai-experiment-waitlist-availability",
+      "publishedAt": "2026-11-11T16:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apps-accesibles",
+        "ia-accesibilidad"
       ]
     },
     {
@@ -5622,29 +5819,14 @@
       "sourceId": "techcrunch-8f94d286a5be5dc8",
       "lang": "en",
       "title": "Siri co-founder backs Helix for its voice ID tech",
-      "summary": "Helix said that its voice ID tech can run on an iPhone 13",
+      "summary": "With the rise of AI agents like Instinct and Muse, the industry needs to rethink human identity on the internet and rely on biometric signals like voice, which is where Helix comes in.",
       "body": "For years, websites have relied on technology like CAPTCHA to prove that the user on the other end is human. More recently, social media platforms have turned to photos or videos to verify users’ identities. Now, a startup called Helix is betting that voice technology can do the same job, without requiring users to hand over sensitive personal information.\n\nThe voice technology, which can run directly on a user’s device, has attracted backing from Siri co-founder Dag Kittlaus, who will also act as an advisor.\n\nThe company raised $6 million in funding in a round led by Chicago Ventures, with participation from BAM Ventures, Aglaé Ventures, Corazon Capital, Tusk Ventures, Yonder Ventures, Rule30, and Brown Alumni Group.\n\nThe startup was founded by Alex Oberg, Anna Dorofiyenko, and Mike Hall in 2025. Oberg previously worked at Ticketmaster, which acquired his startup; Dorofiyenko led data science teams at Live Nation and Zillow; and Hall has worked at Nike and Tinder, where he helped develop the initial matching algorithm.\n\nAt Ticketmaster, Oberg played a role in creating Verified Fan, which is designed to keep bots out of the platform. As AI advanced, he started thinking along the same lines for a new solution.\n\n“As AI started to come up in the last two years, I was realizing that it’s going to make it increasingly difficult to determine who’s human and who’s not on the Internet. Identity on the Internet’s always been about proxies for identity, right? It’s your email, it’s your phone, it’s your IP address, it’s your device fingerprint, it’s your device ID,” Oberg said.\n\nHe noted that with the rise of AI agents like Instinct and Muse, the industry needs to rethink human identity on the internet and rely on biometric signals like voice, which is where Helix comes in.\n\nIts core technology can run directly on a device to determine whether someone is human and estimate their age. The company is also running pilots to explore whether voice can be used a biomarker to detect conditions such as adrunkenness or distress.\n\nThe company can deploy its technology to replace or supplement CAPTCHA and help block bot attacks. Helix said that because its model can run locally even on an iPhone 13, the cost of deploying the technology is minimal. The startup said one of its customers is Zeel, an in-home healthcare provider that uses Helix’s tech to verify the identities of providers visiting customers’ homes.\n\nOberg said verifying workers, such as cab drivers, is another use case the startup is exploring. He also said that age-verification regulations for social media platforms around the world are forcing users to trade privacy for access. Helix’s voice technology, he said, could offer an alternative.\n\n“There’s like an avalanche of regulation coming down because essentially society has decided children should not be able to use the Internet as adults. That has created a bit of a strawman argument that everyone needs to trade their privacy for the sake of security and child safety. We are that company that’s saying, nope, don’t agree. It’s a four-second voice challenge,” he said.\n\nThe CEO also emphasized the limitations of Helix’s technology, noting that it cannot reliably detect whether someone is lying. He added that its voice technology doesn’t identify individual speakers and claimed that even if the company stores a voiceprint, it cannot be used to reconstruct a person’s voice.\n\nAI-powered fraud is also a growing problem in phone calls. But Helix believes its technology isn’t yet capable of reliably detecting AI agents during live calls.\n\nSiri co-founder Kittlaus said that voice identification technology has finally reached a point where it works reliably, positioning Helix to scale as AI-powered fraud increases. He also said that Helix’s work to compress its models gives the startup a cost advantage.\n\n“What folks at Helix are doing is, instead of teaching computers how to understand speech, these guys are understanding, what the speech of the speaker actually means, what’s going on with them, who they are they lying, are they impaired? That side of it is fascinating to me within the larger picture that I just described,” he told TechCrunch.",
       "sourceName": "TechCrunch",
       "originalUrl": "https://techcrunch.com/2026/11/11/siri-co-founder-backs-helix-for-its-voice-id-tech/",
       "publishedAt": "2026-11-11T15:02:47.000Z",
       "categories": [
         "tecnologia-general",
-        "apple"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-a04cfc83cbfdfbf1:en",
-      "sourceId": "techcrunch-a04cfc83cbfdfbf1",
-      "lang": "en",
-      "title": "Databricks’ new AI agent tells CEO Ali Ghodsi the unvarnished truth",
-      "summary": "At 12,000 employees, AI Ghodsi is the first to admit that he can't know everyone and that they are unlikely to confess the things that go wrong to him. But he doesn't need them to. He uses Databricks' newly revised Genie agent for that.",
-      "body": "Databricks on Wednesday unveiled an updated version of its AI agent Genie, which can now perform multi-step jobs that take extended work to finish. It does this through an ontology that Databricks built to give Genie the context it needs from the information that customers store on the Databricks platform.\n\nCorporate leaders can now assign the agent a wide range of tasks, and it will complete them unsupervised, the company says. To prove the point, Databricks CEO Ali Ghodsi showed me how he uses it internally. Instead of a product demo, he fired up his actual agent and walked me through his most recent chats and charts.\n\nHe showed me how it analyzed the parts of an employee satisfaction survey where the company didn’t score well, and how it helped him rate (and discard) fixes for those low scores that some executives suggested. He showed me how it summarized a big sales pitch to a prospect that went poorly — including the features the prospect said it needed before buying.\n\nIt also prepped him for a podcast interview by reviewing his previous appearances and developing likely questions. While we talked, he even had it tell him what he should say to me. (And its advice on that wasn’t bad.)\n\nThe fascinating part was that Ghodsi was using Genie to find the stuff that he’s now unlikely to hear as the big boss. It was a source of unvarnished truth about what wasn’t going well that he needed to address.\n\n“Have you heard of Dunbar’s number? The magic number is 150,” he said when I pointed this out. Named for British anthropologist Robin Dunbar, it’s theoretically the maximum number of people with whom humans can maintain stable relationships. In a small startup, a CEO knows everyone, has direct relationships with them, and they feel safe to tell him negative info straight up.\n\nWith 12,000 employees, Ghodsi is the first to admit he can’t know everyone. At that size, a salesperson isn’t likely to confess a disastrous sales call to the CEO. An HR manager isn’t likely to confess that their idea for increasing employee satisfaction will probably fail.\n\n“Anyone who has more than 150 employees, which is a lot of companies, a lot of people can get value out of this,” he said of AI agents generally and his product, Genie, specifically.\n\nGhodsi’s own use of Genie (often called dogfooding, from the phrase “eating your own dogfood”) is one reason why Databricks is now pitching it as an always-on agent for business leaders. He says he also uses it in his personal life, rather than a security-questionable alternative like OpenClaw or Instinct or Muse.\n\nHe believes Genie can do for the business side what AI, agents and harnesses (the software that wraps around an AI model and lets it use tools) are doing for programmers. As for the risk that agents will ratchet up corporate AI costs, Ghodsi has an answer for that, too. He said costs can be controlled through Databricks’ Unity Gateway product. It allows companies to set usage limits and to swap in less expensive open-weight models.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/11/11/databricks-new-ai-agent-tells-ceo-ali-ghodsi-the-unvarnished-truth/",
-      "publishedAt": "2026-11-11T15:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
+        "apple",
         "ia-accesibilidad"
       ]
     },
@@ -5666,22 +5848,6 @@
     },
     {
       "kind": "news",
-      "id": "9to5mac-0779f144d3fc4e7e:en",
-      "sourceId": "9to5mac-0779f144d3fc4e7e",
-      "lang": "en",
-      "title": "If you bought an iPhone Duo, have you kept or returned it? [Poll]",
-      "summary": "When Apple announced the iPhone Duo back in September, the company called it “the most transformational change to iPhone since the original,” and there’s no doubt that it generated a huge amount of excitement. But a new report suggests that for some buyers the novelty quickly wore off, and they ended up returning their devices. Is this just a handful of people, or is it more common … ? more…",
-      "body": "When Apple announced the iPhone Duo back in September, the company called it “the most transformational change to iPhone since the original,” and there’s no doubt that it generated a huge amount of excitement.\n\nBut a new report suggests that for some buyers the novelty quickly wore off, and they ended up returning their devices. Is this just a handful of people, or is it more common … ?\n\nIt’s been a very long time since any smartphone launch has generated quite so much buzz. Apple called it a breakthrough in iPhone design.\n\niPhone Duo features a breakthrough foldable design that’s beautiful, versatile, and durable, opening up possibilities that feel entirely new yet remarkably familiar […]\n\n“iPhone Duo is the most transformational change to iPhone since the original. With an entirely new design and intuitive experiences, it shows what’s possible when hardware and software are engineered together and redefines what it means to use a foldable phone,” said John Ternus.\n\nDespite not really being the target market for the phone, I was still wowed by the launch video and remained incredibly impressed when I got some hands-on time with one.\n\nMany couldn’t resist buying one despite the price – but The Verge notes that not everyone has ending up keeping the device. Apple allows you to return any product within 14 days for a full refund without having to give any reason. That window has come to an end for some of the first buyers and the site’s Alison Johnson spoke with some of those who’d decided to take advantage of it.\n\nThere were a few specific issues:\n\nBut the more fundamental reason for some is that it hasn’t really lived up to their hopes for a multifunctional device.\n\n“If I can have an iPad in my pocket, that would be great.” So thought Ben Seligson, a content creator, photographer, and now former iPhone Duo owner […] “Usually I’d throw a YouTube video on the iPad or throw a podcast up. And then I start cooking dinner and leave my iPad in one spot, but I’d have my phone in my pocket if I got a text, or I needed to set a timer or something like that.” With the Duo, the phone was also the iPad on the counter, so a quick reply became much more of an interruption.\n\nI’m curious as to whether this is just a small minority of buyers or a more common phenomenon. If you bought a Duo early enough to have hit the end of the return window, please take our poll to let us know whether you decided to keep it or return it – and do share your reasons in the comments (which are now back).\n\nOh, and the good news for anyone buying one now is that you’ll have a lot longer to make up your mind, with the extended return window for the holidays in place. You can now return anything bought today through January 8.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/11/if-you-bought-an-iphone-duo-have-you-kept-or-returned-it-poll/",
-      "publishedAt": "2026-11-11T14:13:49.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "ars-technica-2e922df864339b8d:en",
       "sourceId": "ars-technica-2e922df864339b8d",
       "lang": "en",
@@ -5694,70 +5860,6 @@
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-596dcf9d170b3718:en",
-      "sourceId": "9to5mac-596dcf9d170b3718",
-      "lang": "en",
-      "title": "HomeKit Weekly: SwitchBot’s Curtain Track 4 is the easiest smart curtain retrofit yet",
-      "summary": "The worst part of owning smart curtain motors is charging them, because it usually means taking the whole motor down from the track or running a really long USB cord to charge it. Today, SwitchBot has released the SwitchBot Curtain Track 4 aimed at solving that problem with a battery module that detaches on its own, so the motor stays in place, and you only take down the part that needs to charge. more…",
-      "body": "The worst part of owning smart curtain motors is charging them, because it usually means taking the whole motor down from the track or running a really long USB cord to charge it. Today, SwitchBot has released the SwitchBot Curtain Track 4 aimed at solving that problem with a battery module that detaches on its own, so the motor stays in place, and you only take down the part that needs to charge.\n\nHomeKit Weekly is a series focused on smart home accessories, automation tips and tricks, and everything to do with Apple’s smart home framework.\n\nThe SwitchBot Curtain Track 4 is a retrofit motor for curtains that hang on a U-rail track. You hang it on the track between the curtain hooks, run a one-tap calibration in the SwitchBot app, and your existing curtains can then be motorized and used in your smart home. There’s no drilling, no rewiring, and no need to position magnets to stick to the rail, as earlier SwitchBot curtain motors required. SwitchBot claims the whole setup takes about 30 seconds.\n\nOne thing to check first: this version is for U-rail tracks only, not curtain rods.\n\nThe Battery+ version pairs a small built-in battery with a detachable 5,000mAh module for a total of 6,400mAh. SwitchBot rates it at up to 12 months of use for each charge, depending on curtain weight and movement frequency. When it needs charging, you pull the module off, charge it via USB-C, and clip it back on. SwitchBot also sells a Solar version that uses a small panel to keep the battery topped off if the window gets enough sun.\n\nThe motor itself connects via Bluetooth, so getting it into Apple Home requires a compatible SwitchBot Hub, which brings it there via Matter. Once it’s there, the curtains work like any other window covering in your Home app. You can add them to scenes, control them with Siri, and include multiple windows in a single automation. It’s always nice to time smart curtains/shades with dusk/dawn as well.\n\nSwitchBot’s built-in QuietDrift mode opens the curtains slowly in the morning, at about half a centimeter per second, so the room fills with daylight gradually rather than all at once. SwitchBot says it runs at around 25 dB in that mode. You can also give the curtain a gentle tug by hand and the motor takes over, which is great if you don’t have your iPhone with you or someone doesn’t have access to your Apple Home setup.\n\nSwitchBot built it in a way to correct drift over time, so you shouldn’t need to recalibrate it if it gets off.\n\nThe SwitchBot Curtain Track 4 turns the U-rail curtains you already have into Apple Home window coverings without replacing anything. The detachable battery is the best feature here, as it lets you charge it without a long cord.\n\nThe SwitchBot Curtain Track 4 is available now on Amazon and directly from SwitchBot .",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/11/switchbot-curtain-track-4/",
-      "publishedAt": "2026-11-11T14:00:00.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-20961c821a49900a:en",
-      "sourceId": "techcrunch-20961c821a49900a",
-      "lang": "en",
-      "title": "Plurai wants to help AI agents work better using the same approach that helped get self-driving cars to roads",
-      "summary": "Like the end-to-end models trained to drive cars, AI agents are probabilistic systems operating in unpredictable environments.",
-      "body": "AI agents are all the rage, but they’re not quite as capable as their purveyors would have you believe.\n\nEfforts to benchmark agents tasked with complex work show that they aren’t typically reliable enough to function without close supervision. LiveBench 2.0 shows Claude Fable 5.2 and ChatGPT-6 Astra succeeding on 82.9 and 75.6 out of 100 tasks, respectively, and an effort by the AI infrastructure company EON to test agents in a simulated corporate environment found the most successful model tested, Claude Opus 4.8, performed tasks at 76.8% accuracy.\n\nNow, a startup known as Plurai wants to boost those numbers with the same techniques that put self-driving cars on the street: Simulations using synthetic data based on a company’s own digital systems, meant to prepare models to tackle difficult edge cases.\n\nCo-founders Ilan Kadar and Elad Levi previously worked for Nexar, which develops autonomous driving technology. Kadar worked with Waymo to simulate and evaluate its end-to-end deep learning driving software.\n\n“The moment that we saw the wave of AI agents, we saw the same pattern: That it is very easy to build a demo, but [hard] to get something that will be reliable and cost effective,” Kadar told TechCrunch. “Since we saw the same pattern, the same pitch was that we want to build this simulation layer.”\n\nOn Wednesday, the startup said it had raised $13 million in seed funding to make that happen. The round was led by Team8, with participation from U&I, Velocity and Mercer.\n\nLike the end-to-end models trained to drive cars, AI agents are probabilistic systems operating in unpredictable environments. When pressed by customers, agents tasked with booking travel can ignore spending policies. Or, when tasked with querying one database, agents can reliably provide an answer, but combining information from multiple data sets tends to gum up the works. A long conversation with a customer service bot can overwhelm an agent with too much context and lead to wrong turns.\n\nTo fix that, Plurai creates a digital twin of the company’s electronic systems, including the knowledge base and tools that an agent will have access to in production. It then maps all the possible flows of the agents, and uses that graph to prepare the model with evaluations and fixes for possible edge cases. The platform works alongside existing agentic tools like Claude Code, Codex, Copilot and Cursor.\n\nHowever, Kadar says the company’s real promise is using the data it gathers to post-train small, open-weight models tailored to individual customer needs. Tests performed in cooperation with Nvidia and Nebius showed the company’s models outperforming mid-tier frontier models at lower costs.\n\n“We can take a large language model, we can take the task, decompose it into a smaller task using the simulation, train [an open-weight] model, and using the simulation, verify that the quality is higher or comparable to the frontier model, and an order or two orders of magnitude cost reduction,” he said.\n\nReah Miyara, a Google DeepMind researcher who backed Plurai as an angel investor, said the company’s edge comes from understanding failure modes in production, and generating synthetic data to tune models. As businesses try to optimize their AI expense, Plurai’s approach could prove a real advantage, since IT leaders are seeing that “frontier-capable models are out of distribution with my specific data, and the cost of these things isn’t sustainable in the long term,” Miyara said.\n\nPlurai hopes analogies between AI agents in physical and digital environments can prove predictive: While powerful general AI models are imbuing robots with fascinating capabilities, they aren’t yet reliable enough to be deployed widely. Meanwhile, robots powered by AI models built for specific tasks are in the field right now, working for customers and gathering valuable real-world data.\n\n“My view is that no matter how smart OpenAI and Anthropic model will be — and they will be much smarter — they will not know your business and your policy,” Kadar said.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/11/11/plurai-wants-to-help-ai-agents-work-better-using-the-same-approach-that-helped-get-self-driving-cars-to-roads/",
-      "publishedAt": "2026-11-11T14:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-95e88a99372ce9ee:en",
-      "sourceId": "the-verge-95e88a99372ce9ee",
-      "lang": "en",
-      "title": "Adobe’s AI experiments let you walk around in photos and interview your characters",
-      "summary": "Some of the most impressive tech that Adobe showcases at its annual Max conference each year is the experimental features it's developing, and the latest of those tools are being announced today: they can transform images into explorable 3D scenes, design AI characters by talking to them, and turn photo editing into a copy/paste process. […]",
-      "body": "Some of the most impressive tech that Adobe showcases at its annual Max conference each year is the experimental features it's developing, and the latest of those tools are being announced today: they can transform images into explorable 3D scenes, design AI characters by talking to them, and turn photo editing into a copy/paste process.\n\nThe first (and weirdest, in my opinion) is Project Screen Test, which is designed to make AI-generated characters easier to develop and use for video content. Instead of just describing how the character should sound and behave in text prompts, the tool lets you talk to the character and direct them in an a …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1031505/adobe-max-2026-sneaks-experiments-ai",
-      "publishedAt": "2026-11-11T14:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-4f5d976578321d45:en",
-      "sourceId": "the-verge-4f5d976578321d45",
-      "lang": "en",
-      "title": "Not everyone is loving their new iPhone Duo",
-      "summary": "For most new relationships, two weeks probably isn't enough time to decide if you're ready for long-term commitment. But two weeks with a new phone? You probably know. The iPhone Duo launched just over two weeks ago, and that's been enough time for a subset of day-one buyers who aren't loving the phone to make […]",
-      "body": "For most new relationships, two weeks probably isn't enough time to decide if you're ready for long-term commitment. But two weeks with a new phone? You probably know. The iPhone Duo launched just over two weeks ago, and that's been enough time for a subset of day-one buyers who aren't loving the phone to make a decision: It's time to end things. Also, they wanted their $2,000 back.\n\nThis is to be expected, to an extent; the Duo just isn't a phone for everyone. It's an early adopter device - we called it \"a messy, expensive good time\" - and on top of that, the hinge appears to be suffering some first-gen growing pains . Despite all that, Appl …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1030398/iphone-duo-returns-screen-apps",
-      "publishedAt": "2026-11-11T13:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple"
       ]
     },
     {
@@ -5791,86 +5893,6 @@
         "android",
         "apps-accesibles",
         "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-839e78ee99c8d9ee:en",
-      "sourceId": "engadget-839e78ee99c8d9ee",
-      "lang": "en",
-      "title": "iFixit teardown shows how Apple's glowing PROLED MacBook logo works",
-      "summary": "The new laptop goes the extra mile to recreate the iconic feature.",
-      "body": "The new laptop goes the extra mile to recreate the iconic feature.\n\niFixit has shared its teardown of Apple's first touchscreen MacBook Pro and besides bemoaning the company's half-hearted commitment to user repairability, it also showed off the physical components that make the laptop's glowing logo work. The new lid design is one of the MacBook Pro with PROLED XDR Display's many charms, alongside its tandem OLED display and lighter weight.\n\nOlder LCD MacBooks featured a physical cutout that let the display's backlight illuminate the logo, but since OLED screens don't require backlights, Apple had to come up with a different solution to bring the design element back. iFixit found that the company uses a light strip with four LEDs layered behind the display, whose light is reflected through a diffuser to illuminate the logo. The Apple logo itself is also coated \"like a two-way mirror,\" according to iFixit, so that it can appear metallic and reflective when the logo is off, but still let light through when the LEDs are on.\n\nApple ditched the glowing logo in 2016, so it's a bit ironic that the company waited until it stopped using backlit displays to bring it back. It used to be a cool bit of branding before, but now the company may see the glowing logo design as an important way to distinguish its most expensive laptop from the kind we peons are forced to use.\n\nThe rest of the internal changes to the laptop are more expected. Apple was able to achieve the new MacBook Pro's lighter weight by using less aluminum in the base and lid of the laptop and including a slightly smaller trackpad. The laptop's hinge was also reworked to make the display wobble less when you tap the screen. Those changes don't make it any easier to fix, though. The laptop is still complex to disassemble: For example, iFixit says that you have to remove the laptop's logic board to switch out its USB-C ports. Plenty of other components, like the MacBook's memory and the HDMI port, are also soldered in place. Anyone dropping up to $15,000 on a laptop probably isn't worried about doing their own repairs, but Apple's thin and light (and glowing) design comes with some tradeoffs, as always.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2312969/ifixit-teardown-shows-how-apples-glowing-proled-macbook-logo-works/",
-      "publishedAt": "2026-11-11T00:03:54.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-1614e3c1ec472179:en",
-      "sourceId": "engadget-1614e3c1ec472179",
-      "lang": "en",
-      "title": "How to get this Siri camera upgrade for your iPad before its public release",
-      "summary": "You'll be able to access Visual Intelligence from a new tab in the tablet's Camera app.",
-      "body": "You’ll be able to access Visual Intelligence from a new tab in the tablet's Camera app.\n\nApple users willing to install beta versions of its OS updates can get their hands on upcoming features sooner than most, as long as they're comfortable contending with the possibility of buggy software or apps breaking. And one such feature is the Siri Mode that's already available in the camera app on supported iPhones . It's also coming to compatible iPads as part of iPadOS 27.3 and will let you ask Siri AI questions about things you point your tablet's camera at.\n\nWe got our first look at this mode when Apple properly unveiled Siri AI at its Worldwide Developers Conference in June this year. It basically brings the company's Visual Intelligence tool for asking questions from photos to the camera app. But there's one distinguishing feature that's unique to iPads which isn't available on iPhones.\n\nOn iPads, Visual Intelligence includes Apple Pencil support. So, much like with Google's Circle to Search feature, you can snap a photo of something with your iPad, use your Apple Pencil to draw a circle around an item and learn more information about the object with the help of Siri AI.\n\nIt's worth noting that Visual Intelligence is already available on compatible tablets — iPad Pro and iPad Air with the M1 chip and newer, and iPad mini with the A17 Pro or A20 Pro chipset . As things stand, you can access it in the Camera app by long-pressing the Camera Control button or pressing the Action button if you've set it up to activate the feature (and your iPad has an Action button, of course).\n\nIn iPadOS 27.3, you'll have another way to access Visual Intelligence in the Camera app. All you'll have to do is swipe through the options in the viewfinder (i.e. photo, video and portrait modes) until you get to the Siri tab.\n\nThe company is expected to release the public version of iPadOS 27.3 in December. However, you can try it on your tablet right now, because Apple released the first beta in early November .\n\nTo install the iPadOS 27.3 beta, open the Settings app on your iPad, then tap General > Software Update . If you haven't already done so, you'll need to enable beta updates. Tap the Beta Updates option, then iPadOS 27 Public Beta. After you go back to the Software Update tab, you should be able to install the iPadOS 27.3 beta.\n\nBefore you install the beta, it's best to create a full backup of your iPad using iCloud , a Mac or a Windows PC . Beta builds aren't the finished product, meaning they're more susceptible to bugs and errors. Backing up your data should be standard practice anyway, but it's especially advisable to do that before installing a beta version of an operating system, just to make sure your files and other information stay safe.\n\nIf you don't feel comfortable enough to install a iPadOS beta, that's perfectly fine! The public version of the OS update is likely coming soon. You can check out the Siri tab on your iPad's Camera app at that point.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2312808/how-to-get-ipad-siri-camera-upgrade-early/",
-      "publishedAt": "2026-11-11T00:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-487b3fec0f3bd901:en",
-      "sourceId": "engadget-487b3fec0f3bd901",
-      "lang": "en",
-      "title": "These Xiaomi phones are no longer getting support with the latest HyperOS 4 update",
-      "summary": "Xiaomi's HyperOS 4 update includes intriguing new features like Soft Light Glass, memory improvements and more, but the not everyone will get the perks.",
-      "body": "Xiaomi's new software has started rolling out in China, but older phones are being left behind.\n\nOwners of a Xiaomi 17 in China are now receiving the latest HyperOS 4 update, which gives Xiaomi's software a new see-through look that's drawn plenty of comparisons to Apple's Liquid Glass. It began rolling out to the company's newest phones and tablets on October 15, 2026, but owners of the Xiaomi 12T and Redmi Note 12 are missing out. The update isn't coming to those models, which are already at, or are about to reach, the end of software support.\n\nAccording to Xiaomi's official rollout schedule, the first batch of HyperOS 4 updates covers the Xiaomi 17 series, Redmi K100 and K90 series and the Xiaomi Pad 8, with more models following in waves through January 2027. Unfortunately, phones that are reaching the end of support this year, including the Xiaomi 12 and 12T, aren't on that schedule. Firmware trackers have also spotted a handful of cheaper models that, while still within their support windows, haven't been tested with HyperOS 4 at all. Xiaomi hasn't confirmed whether they'll miss out, though, and the rollout is only in China for now.\n\nXiaomi's schedule for its China firmware rollout lists 57 phones and 15 tablets in total. Following the first batch in mid-October 2026, the Xiaomi 17 Max, 17T and 17T Pro, Redmi K90 Max and Redmi Turbo 5 series were due by October 31, followed by the Xiaomi 15 series, MIX Flip 2, Civi 5 Pro and Redmi K80 series by November 15. The Redmi Note 17 and Note 15 lines come next, by November 30. December's batch is the biggest, taking in the Xiaomi 14 and 13 series, MIX Fold 3 and 4, Redmi K70 series and Redmi Note 14 Pro and 14 5G, while January 2027 is reserved for TVs and wearables.\n\nA global beta opened in September 2026 for the Xiaomi 17, 17 Ultra and the Leica Leitzphone, followed by the 17T, 17T Pro, 15 and 15 Ultra, but Xiaomi hasn't yet provided a date for the global release. Beebom reported on October 11 that Xiaomi still hasn't confirmed a timeline for India or any other market, and Poco phones, which aren't sold in China, don't appear on the schedule at all.\n\nXiaomi publishes end-of-support dates on its security center site. Gizmochina has counted 19 devices due to drop off in 2026. The Xiaomi 12 and 12 Pro, Redmi Note 12 5G, Redmi 12C and Redmi A2 and A2+ lost support in March, and the Poco F5 and F5 Pro in May. The Xiaomi 12T and 12T Pro reached the end of the line in October, followed by the Redmi 13C and Poco C65 in November. Once a model winds up on that list, it stops receiving OS upgrades and security patches entirely, so it's worth knowing how to check if your Android phone is still getting security updates . Xiaomi's promises have gotten longer since, with the Xiaomi 15 getting four OS updates and six years of security patches, but that's still short of the seven years Samsung and Google now offer on their flagships.\n\nXimitime , which tracks Xiaomi's firmware, said there were no signs of HyperOS 4 test builds for any phone capped at Android 16. It named six models that hadn't entered testing: the Redmi Note 13 Pro 4G, Redmi Note 14S, Redmi A5 4G, Poco C71, Poco M6 Pro 4G and Poco X6 5G. Xiaomi hasn't confirmed that these phones are excluded, and some still have years of security updates left. If they are included, they'll stay on HyperOS 3.\n\nInterestingly, the Xiaomi 13 series is on December's list, even though Xiaomi promised it three major Android updates, ending at Android 16, back in 2023. However, Xiaomi hasn't said whether its 13 series is getting Android 17 or a version of HyperOS 4 built on Android 16. With four years of security patches promised from its early 2023 global launch, the Xiaomi 13 is also now one of many popular smartphones in their last year of software support .\n\nXiaomi calls the new design Soft Light Glass, a translucent material that it says adjusts its transparency based on the colors and content behind it. The lock screen's clock can now be resized, moved and restyled, much like the iPhones running iOS 26. Per Xiaomi, the full effect will only run on phones sporting a Snapdragon 8 Elite, Dimensity 9500 or Xiaomi's own XRING O1 chip or newer; older phones on the list get a simplified version.\n\nXiaomi also claims that HyperOS 4 leaves 27.2 percent more memory free after eight hours of use and opens apps 17.5 percent faster after long sessions. Meanwhile, its voice assistant, Super XiaoAI 2.0, now runs on Xiaomi's own MiMo AI model and adds an Expert Mode that can carry out multi-step tasks across apps, though most of the AI features are limited to China for now. HyperOS 4 is reportedly based on Android 17, but Xiaomi's newest phones already got Android 17 in July 2026 through an interim release called HyperOS 3.3.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2307810/xiaomi-phones-no-longer-supported-hyper-os-4-update/",
-      "publishedAt": "2026-11-10T23:00:00.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-ac3e69c19f0f3446:en",
-      "sourceId": "ars-technica-ac3e69c19f0f3446",
-      "lang": "en",
-      "title": "Ring cameras go mobile as Amazon debuts AI-powered security drone and robot",
-      "summary": "Amazon's roaming Ring Robotics devices will debut in late 2026 and early 2027.",
-      "body": "Amazon is betting that many Ring customers will also want an AI-powered security drone and robot patrolling their homes or offices. But the company’s upcoming Ring Robotic products are also certain to intensify privacy concerns previously raised around a prior Amazon attempt to popularize a flying security camera.\n\nThe Ring Rover Cam and Ring Drone Cam are expected to reach customers starting at the end of 2026 and in early 2027, respectively, according to an Amazon announcement posted on November 10. Amazon describes the devices as relying on an AI Pilot system that uses each device’s cameras along with “specialized vision models, on-device sensors and cloud processing” to plan patrol routes while autonomously navigating around obstacles such as furniture.\n\nBoth devices also use that AI Pilot system to digitally map the floor plan of the customer’s home or business. This setup process occurs after the customer carries the Ring drone through their indoor spaces or allows the Ring Rover to do some autonomous exploration.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/ai/2026/11/ring-cameras-go-mobile-as-amazon-debuts-ai-powered-security-drone-and-robot/",
-      "publishedAt": "2026-11-10T22:35:01.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-399474de8d10d741:en",
-      "sourceId": "ars-technica-399474de8d10d741",
-      "lang": "en",
-      "title": "What happens to mathematics when AI becomes an oracle?",
-      "summary": "Mathematician Steven Strogatz discusses his new book, Big Math: The Hidden Codes That Run Our World .",
-      "body": "Our modern world runs on math, from social media algorithms, package delivery, and weather prediction to medical imaging and machine learning. The rise of computers helped fuel its dominance, enabling us to work with increasingly large numbers that would otherwise be beyond the capacity of our finite human brains. But with the rise of large language models, AI chatbots, and, soon, quantum computing, so-called \"big math\" is beginning to outstrip its creators entirely. What that means , and how we might adapt, is the focus of a new book, Big Math: The Hidden Codes That Run Our World , by applied mathematicians Steven Strogatz and Alex Townsend.\n\nStrogatz is perhaps best known in his field for his co-authorship of a seminal 1998 paper with Duncan Watts on the collective dynamics of small-world networks. He has also studied chaos theory as applied to physics, the geometry of supercoiled DNA, and the biological collective oscillators, such as swarms of synchronously flashing fireflies and crickets that chirp in unison. In 2005, Strogatz extended his study of synchronicity to the crowds that caused the wobbling of London's Millennium Bridge .\n\nAn award-winning communicator, Strogatz wrote three series of columns on mathematics for The New York Times in 2010, 2012, and 2025 and hosted a podcast for Quanta magazine from 2020–2021. He has written four popular books: Sync (2003), The Calculus of Friendship (2009), The Joy of X (2012), and the New York Times bestseller Infinite Powers (2019).\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/science/2026/11/what-happens-to-mathematics-when-ai-becames-an-oracle/",
-      "publishedAt": "2026-11-10T20:30:01.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
       ]
     },
     {

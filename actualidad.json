@@ -1,13 +1,37 @@
 [
   {
-    "id": "9to5mac-536c3f9e3ea6d3dc",
+    "id": "the-verge-e69463ff385de321",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1031623/united-unauthorized-ai-agents",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-11T21:54:21.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "United won’t let your AI agent book your flight",
+        "summary": "United says it won't let personal AI assistants book tickets on the airline, citing both privacy and regulatory concerns. The company says it hasn't yet seen many people try to use AI agents to book their flights, The Wall Street Journal reports, in line with observations from other businesses like Doordash. But United is concerned […]",
+        "body": "United says it won't let personal AI assistants book tickets on the airline, citing both privacy and regulatory concerns.\n\nThe company says it hasn't yet seen many people try to use AI agents to book their flights, The Wall Street Journal reports , in line with observations from other businesses like Doordash . But United is concerned that agents could expose customers' information or make purchases they didn't intend, and potentially skirt federal rules about the kind of information airlines need to share with customers - like having them attest that their bags don't have explosives.\n\nWhile agents can still show users United flights, they …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-5a44bd1ce3aa58e3",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/11/ios-27-3-adds-new-setting-to-bypass-website-cookie-popups-eventually/",
+    "originalUrl": "https://9to5mac.com/2026/11/11/iphone-duo-one-week-later-the-future-or-not-for-me/",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-11T15:07:20.000Z",
+    "publishedAt": "2026-11-11T21:33:21.000Z",
     "categories": [
       "apple",
       "tecnologia-general"
@@ -16,9 +40,278 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "iOS 27.3 adds new setting to bypass website cookie popups (eventually)",
-        "summary": "iOS 27.3 is currently in beta and packed with new features , including a ‘Global Privacy Control’ setting in Safari that could someday put an end to cookie consent pop-ups. more…",
-        "body": "iOS 27.3 is currently in beta and packed with new features , including a ‘Global Privacy Control’ setting in Safari that could someday put an end to cookie consent pop-ups.\n\nApple has several big changes coming to Safari in iOS 27.3, iPadOS 27.3, and macOS 27.3. The browser is adding Vertical Tabs, Adaptive Dark Mode, and new Siri AI powers.\n\nBut iOS 27.3 has another Safari feature that’s hidden away in Settings: a new ‘Global Privacy Control’ option.\n\nInside Settings ⇾ Apps ⇾ Safari ⇾ Advanced you’ll find the ‘Use Global Privacy Control’ setting. Apple describes it this way:\n\nSafari can ask websites to not sell or share your data. This may cause some websites to not function properly or work at all.\n\nThe beta also links to a support document where users can find more information, but it’s currently a broken link. The document will likely be published on iOS 27.3’s release day .\n\nAs noted by Nick Heer on his site Pixel Envy , this Global Privacy Control setting is “effectively a replacement for Do Not Track with legal muscle that should permit you to indicate your tracking preference one time and then, theoretically, never again see a cookie consent banner.”\n\nUltimately though, the dream of automatically declining cookie consents has a long road to reality. Websites have to add support for Global Privacy Control (which some have already done, but most haven’t). And GPC currently only has legal muscle in five US states .\n\nThat said, the addition of a Global Privacy Control setting in iOS 27.3 is a good start. And hopefully it means that in a few years, many Safari users don’t need to see cookie consent popups anymore.\n\nWill you enable Global Privacy Control in iOS 27.3? Let us know in the comments.\n\nIn practice, it will take time for websites to add support, and it requires users to enable the feature in Safari’s Settings."
+        "title": "iPhone Duo one week later: The future, or not for me?",
+        "summary": "My iPhone Duo arrived last Thursday, so I’ve had a week to use it as my daily carry. My early experience has been mixed, so I keep asking myself an important question: is this the iPhone’s future and I just need to adapt, or is the Duo simply not for everyone? more…",
+        "body": "My iPhone Duo arrived last Thursday, so I’ve had a week to use it as my daily carry. My early experience has been mixed, so I keep asking myself an important question: is this the iPhone’s future and I just need to adapt, or is the Duo simply not for everyone?\n\nAfter a week using the iPhone Duo, in some ways I have a lot of clarity about the product, and in other ways my thinking is very clouded.\n\nTo put it simply: I’m not having a great time with the Duo, which makes me wonder if the problem is me, not it.\n\nI’ve seen countless social media posts from Duo owners proclaiming how much they love the product. And I absolutely believe them. The iPhone Duo is a remarkable innovation for the iPhone. It’s cool, weird, and wonderful in all sorts of ways. But for me and my needs (preferences?), it’s been more frustrating than enjoyable.\n\nAnd that frustration mainly boils down to one thing: I almost never want to open it.\n\nI’d estimate at least 90% of my iPhone Duo usage involves the front display. And when I unfold it the remaining 10% of the time, it’s often because I force myself to do it in the hopes of discovering what I’m missing out on. Like, I know I should be unfolding it more, so I do. But it doesn’t add any real value for me.\n\nBecause I rarely want to open the iPhone Duo, I’m left using the outer display all the time. In that mode, the Duo is too heavy for extended use, too wide to comfortably reach, and the UI in most apps is an adjustment.\n\nAre these dealbreakers? No. I could live with the Duo’s outer display if I had to, but it’s definitely an inferior experience to my iPhone 18 Pro.\n\nIf I was opening the iPhone Duo more, and actually taking advantage of the key value proposition of foldables—that you can unfold them—I doubt the outer screen would bother me much.\n\nBut what I’ve found, at least so far, is that one-handed iPhone use is very important to me, which rules out using the inner display. I use my iPhone mostly for quick interactions, and often with a child in one hand (I have three very young kids). In situations when I do have two hands free to open the Duo, I’m probably sitting in front of my iPad Pro with a Magic Keyboard attached and would rather use the iPad instead.\n\nSo again: is the problem with the Duo, or with me?\n\nI think it’s the latter, but I’m not sure “problem” is the right word. I just don’t find myself using it the way it’s meant to be used. And that’s fine.\n\nI want to love the iPhone Duo, because I see how much fun other people are having with it. And maybe given more time, something will click and I’ll start to use it “as intended.”\n\nIf iPhone Duo is the future of the iPhone, I’ll adapt and move on with my life. But one week in, I think it’s probably just not for me. And if it’s not for me, maybe there are a lot of people who will continue preferring non-foldable iPhones for many years to come.\n\nWhat’s your iPhone Duo experience been like? Are you loving it or struggling? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-7a2c23618d0ad1c6",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/11/binance-warns-iphone-crypto-holders-of-security-flaw-researchers-say-remains-unpatched/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-11T21:17:30.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Binance warns iPhone crypto holders of security flaw researchers say remains unpatched",
+        "summary": "Crypto exchange Binance has warned iPhone users about an iOS vulnerability that could allow malicious apps to access sensitive data stored by other apps. Here are the details. more…",
+        "body": "Crypto exchange Binance has warned iPhone users about an iOS vulnerability that could allow malicious apps to access sensitive data stored by other apps. Here are the details.\n\nIn a post published on X (via AppleInsider ), Binance says that a vulnerability called worse_query could allow “malicious apps to read local files from other apps, putting seed phrases, private keys, and login credentials at risk across the entire ecosystem.”\n\nBinance says the flaw affects iOS 26.7.1, iOS 27.0.1, and iOS 27.2. However, a Community Note points out that researchers describe the vulnerability as an unpatched zero-day and that Apple’s latest security updates , including iOS 27.2.1 (the current version at the time of writing), do not mention a fix.\n\nThat said, in addition to updating their devices, Binance recommends that iPhone crypto holders take the following immediate actions:\n\nThe vulnerability was disclosed by security researchers @0xjohnny and @forcequitOS , who published a proof of concept on GitHub demonstrating how it can be used to bypass iOS sandbox protections, which normally prevent apps from accessing each other’s files.\n\nResearcher @forcequitOS also noted that neither iOS 27.2.1 nor iOS 27.3 beta 1 patches the vulnerability.\n\nAlthough the researcher describes the code as intended for developers and not useful on its own, other developers have already built apps using it, including a file manager that can access, modify, and delete data belonging to other apps without requiring a jailbreak.\n\nAccording to The Hacker News , neither Binance nor the researchers have reported any attacks or cryptocurrency thefts involving the vulnerability so far."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-cd6b83884481c154",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/11/apple-invites-app-now-lets-hosts-poll-guests-plus-new-emoji-effect-added/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-11T21:08:46.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple Invites app now lets hosts poll guests, plus new emoji effect added",
+        "summary": "Apple Invites, an iCloud+ feature, just added two new features in this month’s update. more…",
+        "body": "Apple Invites, an iCloud+ feature, just added two new features in this month’s update.\n\nInvites is Apple’s digital event planning app for iCloud+ subscribers. It’s available on iPhone and iPad. The app doesn’t require an iPhone or a paid iCloud account to respond to digital events created with Apple Invites.\n\nNovember’s update adds these two new features:\n\nAdditionally, Apple says the new version, 1.13, includes the usual bug fixes and performance improvements.\n\nApple regularly updates the Invites app for iPhone. While there’s no iPad version yet, Apple Invites gained its first iMessage app this year, putting Invites where people are already chatting.\n\nApple Invites for iPhone is available on the App Store . Creating a digital invitation requires iCloud+, and anyone can respond.\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-7ef952a0997895f1",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/video/why-the-data-center-you-dread-might-never-even-be-built/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-11T20:15:15.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Why the data center you dread might never even be built",
+        "summary": "The data center boom is running into serious real-world obstacles, from widespread local opposition and permitting delays to a scramble for electricity. Before those challenges even come into play, though, there’s a more basic problem: A lot of the projects being announced may never get built in the first place. With billions of dollars in AI infrastructure […]",
+        "body": "Loading the player…\n\nThe data center boom is running into serious real-world obstacles, from widespread local opposition and permitting delays to a scramble for electricity . Before those challenges even come into play, though, there’s a more basic problem: A lot of the projects being announced may never get built in the first place. With billions of dollars in AI infrastructure investment at stake, separating realistic projects from speculative ones is becoming increasingly important.\n\nOn this episode of TechCrunch’s Equity podcast, hosts Rebecca Bellan and Tim De Chant are joined by Brent Nelson , senior managing director of markets and strategy at Ascend Analytics , to separate the data center projects that are likely to get built from the ones that may never get off the ground.\n\nSubscribe to Equity on YouTube , Apple Podcasts , Overcast , Spotify and all the casts. You also can follow Equity on X and Threads , at @EquityPod."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-966909434fef76b2",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2314121/united-is-restricting-ai-agents-from-booking-flights/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-11T20:09:44.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "United is restricting AI agents from booking flights",
+        "summary": "The airline believes AI poses security risks and may violate DOT and FAA rules.",
+        "body": "The airline believes AI poses security risks and may violate DOT and FAA rules.\n\nUnited Airlines has announced it will change ticking policies to restrict AI agents' from booking flights through its website, third-party travel agencies and flight aggregators. The airline joins a growing number of businesses, including JPMorgan Chase and Amazon , which block agents from using their products to avoid the security and privacy issues associated with them.\n\nGiving something like your payment details or log-in credentials to an agent can expose sensitive information and lead to \"unintended purchases, account changes or use of MileagePlus miles,\" United says. Allowing an AI agent to complete a booking could also violate existing airline regulations from the Department of Transportation and Federal Aviation Administration. For example, United says only a human can acknowledge that their bag doesn't contain explosives during flight check-in.\n\nUnited would like to avoid association with any agent-based embarrassments, for instance when Meta's Muse leaked a user's address online . Like other companies, it also wants to keep AI from getting in the way of its relationship with customers. The Wall Street Journal reports that United CEO Scott Kirby has been open about the company's reluctance to jump into agentic commerce. \"To be honest, I don't want to create another middleman,\" Kirby said at an event on Tuesday. Not every airline feels the same way: Southwest created a plugin so users can book flights with ChatGPT .\n\nLuckily for United and other companies blocking AI agents , agentic commerce might not be taking off with regular people. During its recent third-quarter earnings call, Uber shared that it handled 320 million trips and deliveries during the week of Halloween; of those, AI agents were responsible for 500 Uber Eats orders and only four rides. Those aren't exactly industry-destroying numbers.\n\nHanding an AI your credit card is very different from handing it your email login, and both are different from just asking it to send you a news summary every morning. Even if a large number of people are downloading apps like Muse , it seems like letting an agent shop for you isn't as frictionless or foolproof as it needs to be to catch on."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-f1c37036250ba628",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2314093/google-brings-the-gemini-app-to-apple-carplay/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-11T19:54:55.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google brings the Gemini app to Apple CarPlay",
+        "summary": "The chatbot was already available through the Google Maps app.",
+        "body": "The chatbot was already available through the Google Maps app.\n\nContinuing on its apparent quest to ensure the chatbot is inescapable on as many screens, speakers and experiences as possible, Google has brought the Gemini app to Apple CarPlay . It's available starting today for all supported Gemini Live languages.\n\nGoogle previously made the AI assistant available on CarPlay through the Google Maps app . Now, you'll be able to access it just by tapping the Gemini icon on your display. Google said you can pick up where you left off with Gemini in your car or start a new conversation with the chatbot.\n\nThe company suggested drivers could use Gemini to prep for a meeting during their commute, catch up on emails, hear their Daily Brief or get recommendations for local places worth checking out in an area. Your conversations will sync with the Gemini iPhone app and remain in your chat history.\n\nThe Gemini app is now available directly on Apple CarPlay. iOS users can have free-flowing conversations with Gemini Live right from their car's display, hands-free.\n\nUse Gemini in CarPlay to catch-up on what you have coming up in your schedule, talk through your inbox, or... pic.twitter.com/1s4luZ6q0v\n\n— Google (@Google) November 11, 2026\n\nTo use the assistant on CarPlay, you'll need to make sure you have the latest version of the Gemini app on your iPhone and the microphone permissions are on. You'll need to have used Gemini Live at least once on your iPhone as well.\n\nGoogle brought the Gemini app to CarPlay not long after it enabled Personal Assistance (which can access details from other Google apps for more personalized responses) in the chatbot on Android Auto. The company is bringing Personal Intelligence to Gemini on cars with Google built-in as well."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-f4932fbeae9a1ee1",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2314064/bytedance-is-reportedly-working-on-its-own-ai-agent/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-11T19:42:19.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "ByteDance is reportedly working on its own AI agent",
+        "summary": "The Chinese company wants to compete with Meta's Muse.",
+        "body": "The Chinese company wants to compete with Meta’s Muse.\n\nByteDance wants to take on Meta's Muse with its own AI agent. The company is readying an AI assistant that could be revealed in \"the coming weeks,\" Bloomberg reports .\n\nThe report doesn't detail what the agent will be called or how it will work, but says that it will \"serve a similar role\" to Meta's Muse. Muse has already drawn more than 10 million users and CEO Mark Zuckerberg has predicted the AI agent could generate more revenue per user than its existing \"family\" of apps. The agent is also expected to play a significant role in Meta's AI glasses, and the company has previewed a standalone \"charm\" for Muse.\n\nIt's not clear if ByteDance is also planning on incorporating its agent into hardware. The AI assistant is one piece of the Chinese company's strategy to compete with frontier AI companies. ByteDance cofounder Zhang Yiming recently told employees that it would likely take \"until at least 2029 or 2030\" for the company's AI efforts to catch up, Bloomberg reported. Within the AI space, ByteDance has been primarily known for its video generator, Seedance. Clips from the video model went viral on social media platforms earlier this year, which eventually drew legal scrutiny from US-based studios.\n\nIf the TikTok maker does introduce its own AI agent, it would also likely raise new concerns about data privacy and how much access personal agents should get. ByteDance didn't immediately respond to a request for comment."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-8d1d626e96d11cee",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/11/with-720m-round-britains-fractile-gets-a-leg-up-in-the-race-for-ai-chips/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-11T19:34:55.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "With $720M round, Britain’s Fractile gets a leg up in the race for AI chips",
+        "summary": "Fractile has now become one of the top-funded players in the race for purpose-built AI chips.",
+        "body": "Fractile , a British startup developing AI chips, has raised a $720 million Series C backed by Britain’s Sovereign AI Fund with hopes of “ensuring the U.K. has a greater stake in the hardware that will underpin its future economy,” its government stated .\n\nAlongside the likes of Axelera , Etched , and OLIX , this makes Fractile one of the top-funded startup players in the race for purpose-built AI chips. Such chips are one of several avenues being explored to reduce the cost of inference — aka using increasingly demanding AI models in production.\n\nHowever, Fractile seeks to go beyond hardware with a full-stack approach that also includes a machine learning compiler to maximize the speed at which LLMs will get executed on its chips.\n\nAs a result, the company frames itself as a frontier AI company, and its latest round led by Thrive Capital, Founders Fund, Lightspeed Venture Partners and Redpoint was priced accordingly. According to the British government, the valuation was “over £5 billion” — quite possibly $7 billion, a figure reported both by the Financial Times and a Reuters source .\n\nStill, Fractile’s main differentiator will arguably be its hardware design. After a pivot , its approach now revolves on DRAM, the most common type of RAM, but stacked on top of each chip in such a way that it is hoping will bypass the usual tradeoff between memory and capacity.\n\nThis tradeoff has become more problematic with the rise of agentic AI, as companies seek to perform longer chains of tasks with large models without compromising on speed. As compute struggles to keep up, hopes are high for AI chips, despite their limited availability to date.\n\nIn a LinkedIn post , Fractile CEO Walter Goodwin wrote that “there is still a lot of work ahead” for the company, and that the new funding will enable the startup to “ship [its] first chips and systems next year.”"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-f677334991a56ea6",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/11/taiwans-chipmaking-giant-tsmc-to-invest-1b-in-anthropic-openai/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-11T18:16:40.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Taiwan’s chipmaking giant TSMC to invest $1B in Anthropic, OpenAI",
+        "summary": "Latest example of the AI boom’s circular financing comes as AI trade wobbles.",
+        "body": "Top chip manufacturer TSMC is ready to invest $1 billion in Anthropic and OpenAI. That would give the Taiwanese chipmaker direct stakes in leading AI developers, even as its own contract chipmaking business has profited enormously from the AI data center buildout.\n\nThe chipmaker’s board approved plans to invest up to $500 million in OpenAI preferred stock reserved for large investors and another $500 million to purchase Anthropic common shares at the latter’s expected IPO price, according to Reuters . Such an investment may give markets “a shot of confidence as the artificial-intelligence trade shows signs of strain,” The Wall Street Journal reported.\n\nBut analysts also warned that such circular financing among investors, suppliers, and customers has made it difficult to evaluate real market demand for AI-related hardware and services, according to the Journal.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "freedom-scientific-blog-981b461364ffd975",
+    "type": "news",
+    "sourceId": "freedom-scientific-blog",
+    "sourceName": "Freedom Scientific",
+    "sourceUrl": "https://blog.freedomscientific.com/",
+    "originalUrl": "https://training.vispero.com/learn-about-new-features-of-jaws-zoomtext-and-fusion-2027/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-11T17:12:36.000Z",
+    "categories": [
+      "windows",
+      "tecnologia-accesibilidad",
+      "jaws"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Learn About New Features of JAWS, ZoomText, and Fusion 2027",
+        "summary": "JAWS, ZoomText, and Fusion 2027 introduce new features and enhancements designed to improve accessibility, productivity, and the overall user experience. Join us Thursday, November 12 at noon ET for a live webinar to learn more about the latest updates and how they can support your everyday tasks. What We’ll Cover We’ll discuss new features and …",
+        "body": "JAWS, ZoomText, and Fusion 2027 introduce new features and enhancements designed to improve accessibility, productivity, and the overall user experience. Join us Thursday, November 12 at noon ET for a live webinar to learn more about the latest updates and how they can support your everyday tasks.\n\nWe’ll discuss new features and enhancements that will help you:\n\nVisit the What’s New in JAWS 2027 or What’s New in ZoomText 2027 pages to read additional details about these features.\n\nRegister for this webinar to learn about these new, exciting features that increase efficiency and productivity. ACVREP credits will be available for those who attend the live webinar.\n\nCan’t attend? We archive all webinars on our Webinars on Demand page. Have questions? Send an email to training@vispero.com ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-26edff5d71624554",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/science/2026/11/ibm-to-offer-access-to-a-dual-processor-quantum-system-in-2027/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-11T16:33:08.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "IBM to offer access to a dual-processor quantum system in 2027",
+        "summary": "The company plans on linking two 520-qubit chips before next year is over.",
+        "body": "IBM's Quantum Developer's Conference is being held this week, and the company is using the gathering to provide an update to its roadmap: It is aiming to make error-corrected quantum computers before the decade is out.\n\nThe changes greatly expand the scope of its next-generation Nighthawk general-use processors by adding a version with over 500 programmable qubits. At the same time, it's stepping back a bit on its plan to link multiple Nighthawk processors together, dropping the intended number of linked systems from nine to two.\n\nThe total number of qubits planned for next year will remain the same; how the company is getting there, however, will be different.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-a04312263fd51234",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1031526/google-tabletop-ai-experiment-waitlist-availability",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-11T16:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google’s Tabletop AI experiment lets you build custom collaboration apps",
+        "summary": "Google has cooked up a new experimental AI tool called Tabletop that generates customized collaborative hubs to help you coordinate with family, and friends. The Tabletop platform shares some visual similarities with workplace management apps like Asana and Monday, but with a built-in AI feature that allows you to vibecode personalized interactive tools by describing […]",
+        "body": "Google has cooked up a new experimental AI tool called Tabletop that generates customized collaborative hubs to help you coordinate with family, and friends. The Tabletop platform shares some visual similarities with workplace management apps like Asana and Monday, but with a built-in AI feature that allows you to vibecode personalized interactive tools by describing them, such as savings trackers, chore charts, event plans, and more.\n\n\"Just add in your links, files and ideas, then prompt @tabletop - or pick a starter template - to generate custom interactive trip itineraries, dinner polls, expense splitters and tournament brackets,\" Google …\n\nRead the full story at The Verge."
       }
     },
     "media": null
@@ -34,39 +327,16 @@
     "publishedAt": "2026-11-11T15:02:47.000Z",
     "categories": [
       "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Siri co-founder backs Helix for its voice ID tech",
-        "summary": "Helix said that its voice ID tech can run on an iPhone 13",
-        "body": "For years, websites have relied on technology like CAPTCHA to prove that the user on the other end is human. More recently, social media platforms have turned to photos or videos to verify users’ identities. Now, a startup called Helix is betting that voice technology can do the same job, without requiring users to hand over sensitive personal information.\n\nThe voice technology, which can run directly on a user’s device, has attracted backing from Siri co-founder Dag Kittlaus, who will also act as an advisor.\n\nThe company raised $6 million in funding in a round led by Chicago Ventures, with participation from BAM Ventures, Aglaé Ventures, Corazon Capital, Tusk Ventures, Yonder Ventures, Rule30, and Brown Alumni Group.\n\nThe startup was founded by Alex Oberg, Anna Dorofiyenko, and Mike Hall in 2025. Oberg previously worked at Ticketmaster, which acquired his startup; Dorofiyenko led data science teams at Live Nation and Zillow; and Hall has worked at Nike and Tinder, where he helped develop the initial matching algorithm.\n\nAt Ticketmaster, Oberg played a role in creating Verified Fan, which is designed to keep bots out of the platform. As AI advanced, he started thinking along the same lines for a new solution.\n\n“As AI started to come up in the last two years, I was realizing that it’s going to make it increasingly difficult to determine who’s human and who’s not on the Internet. Identity on the Internet’s always been about proxies for identity, right? It’s your email, it’s your phone, it’s your IP address, it’s your device fingerprint, it’s your device ID,” Oberg said.\n\nHe noted that with the rise of AI agents like Instinct and Muse, the industry needs to rethink human identity on the internet and rely on biometric signals like voice, which is where Helix comes in.\n\nIts core technology can run directly on a device to determine whether someone is human and estimate their age. The company is also running pilots to explore whether voice can be used a biomarker to detect conditions such as adrunkenness or distress.\n\nThe company can deploy its technology to replace or supplement CAPTCHA and help block bot attacks. Helix said that because its model can run locally even on an iPhone 13, the cost of deploying the technology is minimal. The startup said one of its customers is Zeel, an in-home healthcare provider that uses Helix’s tech to verify the identities of providers visiting customers’ homes.\n\nOberg said verifying workers, such as cab drivers, is another use case the startup is exploring. He also said that age-verification regulations for social media platforms around the world are forcing users to trade privacy for access. Helix’s voice technology, he said, could offer an alternative.\n\n“There’s like an avalanche of regulation coming down because essentially society has decided children should not be able to use the Internet as adults. That has created a bit of a strawman argument that everyone needs to trade their privacy for the sake of security and child safety. We are that company that’s saying, nope, don’t agree. It’s a four-second voice challenge,” he said.\n\nThe CEO also emphasized the limitations of Helix’s technology, noting that it cannot reliably detect whether someone is lying. He added that its voice technology doesn’t identify individual speakers and claimed that even if the company stores a voiceprint, it cannot be used to reconstruct a person’s voice.\n\nAI-powered fraud is also a growing problem in phone calls. But Helix believes its technology isn’t yet capable of reliably detecting AI agents during live calls.\n\nSiri co-founder Kittlaus said that voice identification technology has finally reached a point where it works reliably, positioning Helix to scale as AI-powered fraud increases. He also said that Helix’s work to compress its models gives the startup a cost advantage.\n\n“What folks at Helix are doing is, instead of teaching computers how to understand speech, these guys are understanding, what the speech of the speaker actually means, what’s going on with them, who they are they lying, are they impaired? That side of it is fascinating to me within the larger picture that I just described,” he told TechCrunch."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-a04cfc83cbfdfbf1",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/11/databricks-new-ai-agent-tells-ceo-ali-ghodsi-the-unvarnished-truth/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-11T15:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
+      "apple",
       "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Databricks’ new AI agent tells CEO Ali Ghodsi the unvarnished truth",
-        "summary": "At 12,000 employees, AI Ghodsi is the first to admit that he can't know everyone and that they are unlikely to confess the things that go wrong to him. But he doesn't need them to. He uses Databricks' newly revised Genie agent for that.",
-        "body": "Databricks on Wednesday unveiled an updated version of its AI agent Genie, which can now perform multi-step jobs that take extended work to finish. It does this through an ontology that Databricks built to give Genie the context it needs from the information that customers store on the Databricks platform.\n\nCorporate leaders can now assign the agent a wide range of tasks, and it will complete them unsupervised, the company says. To prove the point, Databricks CEO Ali Ghodsi showed me how he uses it internally. Instead of a product demo, he fired up his actual agent and walked me through his most recent chats and charts.\n\nHe showed me how it analyzed the parts of an employee satisfaction survey where the company didn’t score well, and how it helped him rate (and discard) fixes for those low scores that some executives suggested. He showed me how it summarized a big sales pitch to a prospect that went poorly — including the features the prospect said it needed before buying.\n\nIt also prepped him for a podcast interview by reviewing his previous appearances and developing likely questions. While we talked, he even had it tell him what he should say to me. (And its advice on that wasn’t bad.)\n\nThe fascinating part was that Ghodsi was using Genie to find the stuff that he’s now unlikely to hear as the big boss. It was a source of unvarnished truth about what wasn’t going well that he needed to address.\n\n“Have you heard of Dunbar’s number? The magic number is 150,” he said when I pointed this out. Named for British anthropologist Robin Dunbar, it’s theoretically the maximum number of people with whom humans can maintain stable relationships. In a small startup, a CEO knows everyone, has direct relationships with them, and they feel safe to tell him negative info straight up.\n\nWith 12,000 employees, Ghodsi is the first to admit he can’t know everyone. At that size, a salesperson isn’t likely to confess a disastrous sales call to the CEO. An HR manager isn’t likely to confess that their idea for increasing employee satisfaction will probably fail.\n\n“Anyone who has more than 150 employees, which is a lot of companies, a lot of people can get value out of this,” he said of AI agents generally and his product, Genie, specifically.\n\nGhodsi’s own use of Genie (often called dogfooding, from the phrase “eating your own dogfood”) is one reason why Databricks is now pitching it as an always-on agent for business leaders. He says he also uses it in his personal life, rather than a security-questionable alternative like OpenClaw or Instinct or Muse.\n\nHe believes Genie can do for the business side what AI, agents and harnesses (the software that wraps around an AI model and lets it use tools) are doing for programmers. As for the risk that agents will ratchet up corporate AI costs, Ghodsi has an answer for that, too. He said costs can be controlled through Databricks’ Unity Gateway product. It allows companies to set usage limits and to swap in less expensive open-weight models."
+        "title": "Siri co-founder backs Helix for its voice ID tech",
+        "summary": "With the rise of AI agents like Instinct and Muse, the industry needs to rethink human identity on the internet and rely on biometric signals like voice, which is where Helix comes in.",
+        "body": "For years, websites have relied on technology like CAPTCHA to prove that the user on the other end is human. More recently, social media platforms have turned to photos or videos to verify users’ identities. Now, a startup called Helix is betting that voice technology can do the same job, without requiring users to hand over sensitive personal information.\n\nThe voice technology, which can run directly on a user’s device, has attracted backing from Siri co-founder Dag Kittlaus, who will also act as an advisor.\n\nThe company raised $6 million in funding in a round led by Chicago Ventures, with participation from BAM Ventures, Aglaé Ventures, Corazon Capital, Tusk Ventures, Yonder Ventures, Rule30, and Brown Alumni Group.\n\nThe startup was founded by Alex Oberg, Anna Dorofiyenko, and Mike Hall in 2025. Oberg previously worked at Ticketmaster, which acquired his startup; Dorofiyenko led data science teams at Live Nation and Zillow; and Hall has worked at Nike and Tinder, where he helped develop the initial matching algorithm.\n\nAt Ticketmaster, Oberg played a role in creating Verified Fan, which is designed to keep bots out of the platform. As AI advanced, he started thinking along the same lines for a new solution.\n\n“As AI started to come up in the last two years, I was realizing that it’s going to make it increasingly difficult to determine who’s human and who’s not on the Internet. Identity on the Internet’s always been about proxies for identity, right? It’s your email, it’s your phone, it’s your IP address, it’s your device fingerprint, it’s your device ID,” Oberg said.\n\nHe noted that with the rise of AI agents like Instinct and Muse, the industry needs to rethink human identity on the internet and rely on biometric signals like voice, which is where Helix comes in.\n\nIts core technology can run directly on a device to determine whether someone is human and estimate their age. The company is also running pilots to explore whether voice can be used a biomarker to detect conditions such as adrunkenness or distress.\n\nThe company can deploy its technology to replace or supplement CAPTCHA and help block bot attacks. Helix said that because its model can run locally even on an iPhone 13, the cost of deploying the technology is minimal. The startup said one of its customers is Zeel, an in-home healthcare provider that uses Helix’s tech to verify the identities of providers visiting customers’ homes.\n\nOberg said verifying workers, such as cab drivers, is another use case the startup is exploring. He also said that age-verification regulations for social media platforms around the world are forcing users to trade privacy for access. Helix’s voice technology, he said, could offer an alternative.\n\n“There’s like an avalanche of regulation coming down because essentially society has decided children should not be able to use the Internet as adults. That has created a bit of a strawman argument that everyone needs to trade their privacy for the sake of security and child safety. We are that company that’s saying, nope, don’t agree. It’s a four-second voice challenge,” he said.\n\nThe CEO also emphasized the limitations of Helix’s technology, noting that it cannot reliably detect whether someone is lying. He added that its voice technology doesn’t identify individual speakers and claimed that even if the company stores a voiceprint, it cannot be used to reconstruct a person’s voice.\n\nAI-powered fraud is also a growing problem in phone calls. But Helix believes its technology isn’t yet capable of reliably detecting AI agents during live calls.\n\nSiri co-founder Kittlaus said that voice identification technology has finally reached a point where it works reliably, positioning Helix to scale as AI-powered fraud increases. He also said that Helix’s work to compress its models gives the startup a cost advantage.\n\n“What folks at Helix are doing is, instead of teaching computers how to understand speech, these guys are understanding, what the speech of the speaker actually means, what’s going on with them, who they are they lying, are they impaired? That side of it is fascinating to me within the larger picture that I just described,” he told TechCrunch."
       }
     },
     "media": null
@@ -96,30 +366,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-0779f144d3fc4e7e",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/11/if-you-bought-an-iphone-duo-have-you-kept-or-returned-it-poll/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-11T14:13:49.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "If you bought an iPhone Duo, have you kept or returned it? [Poll]",
-        "summary": "When Apple announced the iPhone Duo back in September, the company called it “the most transformational change to iPhone since the original,” and there’s no doubt that it generated a huge amount of excitement. But a new report suggests that for some buyers the novelty quickly wore off, and they ended up returning their devices. Is this just a handful of people, or is it more common … ? more…",
-        "body": "When Apple announced the iPhone Duo back in September, the company called it “the most transformational change to iPhone since the original,” and there’s no doubt that it generated a huge amount of excitement.\n\nBut a new report suggests that for some buyers the novelty quickly wore off, and they ended up returning their devices. Is this just a handful of people, or is it more common … ?\n\nIt’s been a very long time since any smartphone launch has generated quite so much buzz. Apple called it a breakthrough in iPhone design.\n\niPhone Duo features a breakthrough foldable design that’s beautiful, versatile, and durable, opening up possibilities that feel entirely new yet remarkably familiar […]\n\n“iPhone Duo is the most transformational change to iPhone since the original. With an entirely new design and intuitive experiences, it shows what’s possible when hardware and software are engineered together and redefines what it means to use a foldable phone,” said John Ternus.\n\nDespite not really being the target market for the phone, I was still wowed by the launch video and remained incredibly impressed when I got some hands-on time with one.\n\nMany couldn’t resist buying one despite the price – but The Verge notes that not everyone has ending up keeping the device. Apple allows you to return any product within 14 days for a full refund without having to give any reason. That window has come to an end for some of the first buyers and the site’s Alison Johnson spoke with some of those who’d decided to take advantage of it.\n\nThere were a few specific issues:\n\nBut the more fundamental reason for some is that it hasn’t really lived up to their hopes for a multifunctional device.\n\n“If I can have an iPad in my pocket, that would be great.” So thought Ben Seligson, a content creator, photographer, and now former iPhone Duo owner […] “Usually I’d throw a YouTube video on the iPad or throw a podcast up. And then I start cooking dinner and leave my iPad in one spot, but I’d have my phone in my pocket if I got a text, or I needed to set a timer or something like that.” With the Duo, the phone was also the iPad on the counter, so a quick reply became much more of an interruption.\n\nI’m curious as to whether this is just a small minority of buyers or a more common phenomenon. If you bought a Duo early enough to have hit the end of the return window, please take our poll to let us know whether you decided to keep it or return it – and do share your reasons in the comments (which are now back).\n\nOh, and the good news for anyone buying one now is that you’ll have a lot longer to make up your mind, with the extended return window for the holidays in place. You can now return anything bought today through January 8."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-2e922df864339b8d",
     "type": "news",
     "sourceId": "ars-technica",
@@ -139,102 +385,6 @@
         "title": "Google DeepMind just mathematically verified key parts of Signal",
         "summary": "The four-week project hints that AI could make formal verification far more practical.",
         "body": "Google DeepMind researchers used agentic AI to mathematically prove, or “formally verify,” a number of the Signal protocol’s key cryptographic guarantees—a landmark development for the widely used cryptography and AI itself.\n\nConducted as a sort of proof-of-concept project in just four weeks, the work is significant in two ways. It serves as further independent validation of the cryptography that protects massive quantities of the world's communications on platforms like the Signal app , Google Messages, and WhatsApp. And it demonstrates Google DeepMind's formal verification capabilities using a new AI framework called AlphaProof Code.\n\nMore broadly, AI-aided formal verification is having a moment, but it is unclear how practical it will be for widespread use and how effective it can be at securing large amounts of code. Proponents of formal verification have long referred to it as a sort of holy grail in software security, because it uses math to check and validate that software is functioning as intended—in other words, that it doesn't have critical vulnerabilities.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-596dcf9d170b3718",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/11/switchbot-curtain-track-4/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-11T14:00:00.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "HomeKit Weekly: SwitchBot’s Curtain Track 4 is the easiest smart curtain retrofit yet",
-        "summary": "The worst part of owning smart curtain motors is charging them, because it usually means taking the whole motor down from the track or running a really long USB cord to charge it. Today, SwitchBot has released the SwitchBot Curtain Track 4 aimed at solving that problem with a battery module that detaches on its own, so the motor stays in place, and you only take down the part that needs to charge. more…",
-        "body": "The worst part of owning smart curtain motors is charging them, because it usually means taking the whole motor down from the track or running a really long USB cord to charge it. Today, SwitchBot has released the SwitchBot Curtain Track 4 aimed at solving that problem with a battery module that detaches on its own, so the motor stays in place, and you only take down the part that needs to charge.\n\nHomeKit Weekly is a series focused on smart home accessories, automation tips and tricks, and everything to do with Apple’s smart home framework.\n\nThe SwitchBot Curtain Track 4 is a retrofit motor for curtains that hang on a U-rail track. You hang it on the track between the curtain hooks, run a one-tap calibration in the SwitchBot app, and your existing curtains can then be motorized and used in your smart home. There’s no drilling, no rewiring, and no need to position magnets to stick to the rail, as earlier SwitchBot curtain motors required. SwitchBot claims the whole setup takes about 30 seconds.\n\nOne thing to check first: this version is for U-rail tracks only, not curtain rods.\n\nThe Battery+ version pairs a small built-in battery with a detachable 5,000mAh module for a total of 6,400mAh. SwitchBot rates it at up to 12 months of use for each charge, depending on curtain weight and movement frequency. When it needs charging, you pull the module off, charge it via USB-C, and clip it back on. SwitchBot also sells a Solar version that uses a small panel to keep the battery topped off if the window gets enough sun.\n\nThe motor itself connects via Bluetooth, so getting it into Apple Home requires a compatible SwitchBot Hub, which brings it there via Matter. Once it’s there, the curtains work like any other window covering in your Home app. You can add them to scenes, control them with Siri, and include multiple windows in a single automation. It’s always nice to time smart curtains/shades with dusk/dawn as well.\n\nSwitchBot’s built-in QuietDrift mode opens the curtains slowly in the morning, at about half a centimeter per second, so the room fills with daylight gradually rather than all at once. SwitchBot says it runs at around 25 dB in that mode. You can also give the curtain a gentle tug by hand and the motor takes over, which is great if you don’t have your iPhone with you or someone doesn’t have access to your Apple Home setup.\n\nSwitchBot built it in a way to correct drift over time, so you shouldn’t need to recalibrate it if it gets off.\n\nThe SwitchBot Curtain Track 4 turns the U-rail curtains you already have into Apple Home window coverings without replacing anything. The detachable battery is the best feature here, as it lets you charge it without a long cord.\n\nThe SwitchBot Curtain Track 4 is available now on Amazon and directly from SwitchBot ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-20961c821a49900a",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/11/plurai-wants-to-help-ai-agents-work-better-using-the-same-approach-that-helped-get-self-driving-cars-to-roads/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-11T14:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Plurai wants to help AI agents work better using the same approach that helped get self-driving cars to roads",
-        "summary": "Like the end-to-end models trained to drive cars, AI agents are probabilistic systems operating in unpredictable environments.",
-        "body": "AI agents are all the rage, but they’re not quite as capable as their purveyors would have you believe.\n\nEfforts to benchmark agents tasked with complex work show that they aren’t typically reliable enough to function without close supervision. LiveBench 2.0 shows Claude Fable 5.2 and ChatGPT-6 Astra succeeding on 82.9 and 75.6 out of 100 tasks, respectively, and an effort by the AI infrastructure company EON to test agents in a simulated corporate environment found the most successful model tested, Claude Opus 4.8, performed tasks at 76.8% accuracy.\n\nNow, a startup known as Plurai wants to boost those numbers with the same techniques that put self-driving cars on the street: Simulations using synthetic data based on a company’s own digital systems, meant to prepare models to tackle difficult edge cases.\n\nCo-founders Ilan Kadar and Elad Levi previously worked for Nexar, which develops autonomous driving technology. Kadar worked with Waymo to simulate and evaluate its end-to-end deep learning driving software.\n\n“The moment that we saw the wave of AI agents, we saw the same pattern: That it is very easy to build a demo, but [hard] to get something that will be reliable and cost effective,” Kadar told TechCrunch. “Since we saw the same pattern, the same pitch was that we want to build this simulation layer.”\n\nOn Wednesday, the startup said it had raised $13 million in seed funding to make that happen. The round was led by Team8, with participation from U&I, Velocity and Mercer.\n\nLike the end-to-end models trained to drive cars, AI agents are probabilistic systems operating in unpredictable environments. When pressed by customers, agents tasked with booking travel can ignore spending policies. Or, when tasked with querying one database, agents can reliably provide an answer, but combining information from multiple data sets tends to gum up the works. A long conversation with a customer service bot can overwhelm an agent with too much context and lead to wrong turns.\n\nTo fix that, Plurai creates a digital twin of the company’s electronic systems, including the knowledge base and tools that an agent will have access to in production. It then maps all the possible flows of the agents, and uses that graph to prepare the model with evaluations and fixes for possible edge cases. The platform works alongside existing agentic tools like Claude Code, Codex, Copilot and Cursor.\n\nHowever, Kadar says the company’s real promise is using the data it gathers to post-train small, open-weight models tailored to individual customer needs. Tests performed in cooperation with Nvidia and Nebius showed the company’s models outperforming mid-tier frontier models at lower costs.\n\n“We can take a large language model, we can take the task, decompose it into a smaller task using the simulation, train [an open-weight] model, and using the simulation, verify that the quality is higher or comparable to the frontier model, and an order or two orders of magnitude cost reduction,” he said.\n\nReah Miyara, a Google DeepMind researcher who backed Plurai as an angel investor, said the company’s edge comes from understanding failure modes in production, and generating synthetic data to tune models. As businesses try to optimize their AI expense, Plurai’s approach could prove a real advantage, since IT leaders are seeing that “frontier-capable models are out of distribution with my specific data, and the cost of these things isn’t sustainable in the long term,” Miyara said.\n\nPlurai hopes analogies between AI agents in physical and digital environments can prove predictive: While powerful general AI models are imbuing robots with fascinating capabilities, they aren’t yet reliable enough to be deployed widely. Meanwhile, robots powered by AI models built for specific tasks are in the field right now, working for customers and gathering valuable real-world data.\n\n“My view is that no matter how smart OpenAI and Anthropic model will be — and they will be much smarter — they will not know your business and your policy,” Kadar said."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-95e88a99372ce9ee",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1031505/adobe-max-2026-sneaks-experiments-ai",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-11T14:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Adobe’s AI experiments let you walk around in photos and interview your characters",
-        "summary": "Some of the most impressive tech that Adobe showcases at its annual Max conference each year is the experimental features it's developing, and the latest of those tools are being announced today: they can transform images into explorable 3D scenes, design AI characters by talking to them, and turn photo editing into a copy/paste process. […]",
-        "body": "Some of the most impressive tech that Adobe showcases at its annual Max conference each year is the experimental features it's developing, and the latest of those tools are being announced today: they can transform images into explorable 3D scenes, design AI characters by talking to them, and turn photo editing into a copy/paste process.\n\nThe first (and weirdest, in my opinion) is Project Screen Test, which is designed to make AI-generated characters easier to develop and use for video content. Instead of just describing how the character should sound and behave in text prompts, the tool lets you talk to the character and direct them in an a …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-4f5d976578321d45",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1030398/iphone-duo-returns-screen-apps",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-11T13:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Not everyone is loving their new iPhone Duo",
-        "summary": "For most new relationships, two weeks probably isn't enough time to decide if you're ready for long-term commitment. But two weeks with a new phone? You probably know. The iPhone Duo launched just over two weeks ago, and that's been enough time for a subset of day-one buyers who aren't loving the phone to make […]",
-        "body": "For most new relationships, two weeks probably isn't enough time to decide if you're ready for long-term commitment. But two weeks with a new phone? You probably know. The iPhone Duo launched just over two weeks ago, and that's been enough time for a subset of day-one buyers who aren't loving the phone to make a decision: It's time to end things. Also, they wanted their $2,000 back.\n\nThis is to be expected, to an extent; the Duo just isn't a phone for everyone. It's an early adopter device - we called it \"a messy, expensive good time\" - and on top of that, the hinge appears to be suffering some first-gen growing pains . Despite all that, Appl …\n\nRead the full story at The Verge."
       }
     },
     "media": null
@@ -284,126 +434,6 @@
         "title": "Sight Buddy",
         "summary": "Sight Buddy is a free, open-source Android app for asking questions about images and text. Once the models are downloaded, it works offline with no…",
         "body": "Published 11 November 2026 by Tommi Drophouse\n\nSight Buddy is a free, open-source Android app for asking questions about images and text. Once the models are downloaded, it works offline with no account, subscription, or usage limit.\n\nIt can chat about images and text, find the right page in a document, and share, save, or copy text. The app recommends a model setup that fits the phone, so users do not need technical knowledge.\n\nIt is a new release with early users internationally, and user feedback has helped shape the design.\n\nSource code: https://github.com/DrophouseLtd/SightBuddy\n\nFree or paid:\n\nAccessibility and User Comments:\n\nIn previous versions, there were some inconveniences with TalkBack labels and navigation, but these have already been fixed. All feedback is always welcome.\n\nLast Tested App version and Android version:\n\n2.4.3. Android 17\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-839e78ee99c8d9ee",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2312969/ifixit-teardown-shows-how-apples-glowing-proled-macbook-logo-works/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-11T00:03:54.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iFixit teardown shows how Apple's glowing PROLED MacBook logo works",
-        "summary": "The new laptop goes the extra mile to recreate the iconic feature.",
-        "body": "The new laptop goes the extra mile to recreate the iconic feature.\n\niFixit has shared its teardown of Apple's first touchscreen MacBook Pro and besides bemoaning the company's half-hearted commitment to user repairability, it also showed off the physical components that make the laptop's glowing logo work. The new lid design is one of the MacBook Pro with PROLED XDR Display's many charms, alongside its tandem OLED display and lighter weight.\n\nOlder LCD MacBooks featured a physical cutout that let the display's backlight illuminate the logo, but since OLED screens don't require backlights, Apple had to come up with a different solution to bring the design element back. iFixit found that the company uses a light strip with four LEDs layered behind the display, whose light is reflected through a diffuser to illuminate the logo. The Apple logo itself is also coated \"like a two-way mirror,\" according to iFixit, so that it can appear metallic and reflective when the logo is off, but still let light through when the LEDs are on.\n\nApple ditched the glowing logo in 2016, so it's a bit ironic that the company waited until it stopped using backlit displays to bring it back. It used to be a cool bit of branding before, but now the company may see the glowing logo design as an important way to distinguish its most expensive laptop from the kind we peons are forced to use.\n\nThe rest of the internal changes to the laptop are more expected. Apple was able to achieve the new MacBook Pro's lighter weight by using less aluminum in the base and lid of the laptop and including a slightly smaller trackpad. The laptop's hinge was also reworked to make the display wobble less when you tap the screen. Those changes don't make it any easier to fix, though. The laptop is still complex to disassemble: For example, iFixit says that you have to remove the laptop's logic board to switch out its USB-C ports. Plenty of other components, like the MacBook's memory and the HDMI port, are also soldered in place. Anyone dropping up to $15,000 on a laptop probably isn't worried about doing their own repairs, but Apple's thin and light (and glowing) design comes with some tradeoffs, as always."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-1614e3c1ec472179",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2312808/how-to-get-ipad-siri-camera-upgrade-early/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-11T00:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "How to get this Siri camera upgrade for your iPad before its public release",
-        "summary": "You'll be able to access Visual Intelligence from a new tab in the tablet's Camera app.",
-        "body": "You’ll be able to access Visual Intelligence from a new tab in the tablet's Camera app.\n\nApple users willing to install beta versions of its OS updates can get their hands on upcoming features sooner than most, as long as they're comfortable contending with the possibility of buggy software or apps breaking. And one such feature is the Siri Mode that's already available in the camera app on supported iPhones . It's also coming to compatible iPads as part of iPadOS 27.3 and will let you ask Siri AI questions about things you point your tablet's camera at.\n\nWe got our first look at this mode when Apple properly unveiled Siri AI at its Worldwide Developers Conference in June this year. It basically brings the company's Visual Intelligence tool for asking questions from photos to the camera app. But there's one distinguishing feature that's unique to iPads which isn't available on iPhones.\n\nOn iPads, Visual Intelligence includes Apple Pencil support. So, much like with Google's Circle to Search feature, you can snap a photo of something with your iPad, use your Apple Pencil to draw a circle around an item and learn more information about the object with the help of Siri AI.\n\nIt's worth noting that Visual Intelligence is already available on compatible tablets — iPad Pro and iPad Air with the M1 chip and newer, and iPad mini with the A17 Pro or A20 Pro chipset . As things stand, you can access it in the Camera app by long-pressing the Camera Control button or pressing the Action button if you've set it up to activate the feature (and your iPad has an Action button, of course).\n\nIn iPadOS 27.3, you'll have another way to access Visual Intelligence in the Camera app. All you'll have to do is swipe through the options in the viewfinder (i.e. photo, video and portrait modes) until you get to the Siri tab.\n\nThe company is expected to release the public version of iPadOS 27.3 in December. However, you can try it on your tablet right now, because Apple released the first beta in early November .\n\nTo install the iPadOS 27.3 beta, open the Settings app on your iPad, then tap General > Software Update . If you haven't already done so, you'll need to enable beta updates. Tap the Beta Updates option, then iPadOS 27 Public Beta. After you go back to the Software Update tab, you should be able to install the iPadOS 27.3 beta.\n\nBefore you install the beta, it's best to create a full backup of your iPad using iCloud , a Mac or a Windows PC . Beta builds aren't the finished product, meaning they're more susceptible to bugs and errors. Backing up your data should be standard practice anyway, but it's especially advisable to do that before installing a beta version of an operating system, just to make sure your files and other information stay safe.\n\nIf you don't feel comfortable enough to install a iPadOS beta, that's perfectly fine! The public version of the OS update is likely coming soon. You can check out the Siri tab on your iPad's Camera app at that point."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-487b3fec0f3bd901",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2307810/xiaomi-phones-no-longer-supported-hyper-os-4-update/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-10T23:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "These Xiaomi phones are no longer getting support with the latest HyperOS 4 update",
-        "summary": "Xiaomi's HyperOS 4 update includes intriguing new features like Soft Light Glass, memory improvements and more, but the not everyone will get the perks.",
-        "body": "Xiaomi's new software has started rolling out in China, but older phones are being left behind.\n\nOwners of a Xiaomi 17 in China are now receiving the latest HyperOS 4 update, which gives Xiaomi's software a new see-through look that's drawn plenty of comparisons to Apple's Liquid Glass. It began rolling out to the company's newest phones and tablets on October 15, 2026, but owners of the Xiaomi 12T and Redmi Note 12 are missing out. The update isn't coming to those models, which are already at, or are about to reach, the end of software support.\n\nAccording to Xiaomi's official rollout schedule, the first batch of HyperOS 4 updates covers the Xiaomi 17 series, Redmi K100 and K90 series and the Xiaomi Pad 8, with more models following in waves through January 2027. Unfortunately, phones that are reaching the end of support this year, including the Xiaomi 12 and 12T, aren't on that schedule. Firmware trackers have also spotted a handful of cheaper models that, while still within their support windows, haven't been tested with HyperOS 4 at all. Xiaomi hasn't confirmed whether they'll miss out, though, and the rollout is only in China for now.\n\nXiaomi's schedule for its China firmware rollout lists 57 phones and 15 tablets in total. Following the first batch in mid-October 2026, the Xiaomi 17 Max, 17T and 17T Pro, Redmi K90 Max and Redmi Turbo 5 series were due by October 31, followed by the Xiaomi 15 series, MIX Flip 2, Civi 5 Pro and Redmi K80 series by November 15. The Redmi Note 17 and Note 15 lines come next, by November 30. December's batch is the biggest, taking in the Xiaomi 14 and 13 series, MIX Fold 3 and 4, Redmi K70 series and Redmi Note 14 Pro and 14 5G, while January 2027 is reserved for TVs and wearables.\n\nA global beta opened in September 2026 for the Xiaomi 17, 17 Ultra and the Leica Leitzphone, followed by the 17T, 17T Pro, 15 and 15 Ultra, but Xiaomi hasn't yet provided a date for the global release. Beebom reported on October 11 that Xiaomi still hasn't confirmed a timeline for India or any other market, and Poco phones, which aren't sold in China, don't appear on the schedule at all.\n\nXiaomi publishes end-of-support dates on its security center site. Gizmochina has counted 19 devices due to drop off in 2026. The Xiaomi 12 and 12 Pro, Redmi Note 12 5G, Redmi 12C and Redmi A2 and A2+ lost support in March, and the Poco F5 and F5 Pro in May. The Xiaomi 12T and 12T Pro reached the end of the line in October, followed by the Redmi 13C and Poco C65 in November. Once a model winds up on that list, it stops receiving OS upgrades and security patches entirely, so it's worth knowing how to check if your Android phone is still getting security updates . Xiaomi's promises have gotten longer since, with the Xiaomi 15 getting four OS updates and six years of security patches, but that's still short of the seven years Samsung and Google now offer on their flagships.\n\nXimitime , which tracks Xiaomi's firmware, said there were no signs of HyperOS 4 test builds for any phone capped at Android 16. It named six models that hadn't entered testing: the Redmi Note 13 Pro 4G, Redmi Note 14S, Redmi A5 4G, Poco C71, Poco M6 Pro 4G and Poco X6 5G. Xiaomi hasn't confirmed that these phones are excluded, and some still have years of security updates left. If they are included, they'll stay on HyperOS 3.\n\nInterestingly, the Xiaomi 13 series is on December's list, even though Xiaomi promised it three major Android updates, ending at Android 16, back in 2023. However, Xiaomi hasn't said whether its 13 series is getting Android 17 or a version of HyperOS 4 built on Android 16. With four years of security patches promised from its early 2023 global launch, the Xiaomi 13 is also now one of many popular smartphones in their last year of software support .\n\nXiaomi calls the new design Soft Light Glass, a translucent material that it says adjusts its transparency based on the colors and content behind it. The lock screen's clock can now be resized, moved and restyled, much like the iPhones running iOS 26. Per Xiaomi, the full effect will only run on phones sporting a Snapdragon 8 Elite, Dimensity 9500 or Xiaomi's own XRING O1 chip or newer; older phones on the list get a simplified version.\n\nXiaomi also claims that HyperOS 4 leaves 27.2 percent more memory free after eight hours of use and opens apps 17.5 percent faster after long sessions. Meanwhile, its voice assistant, Super XiaoAI 2.0, now runs on Xiaomi's own MiMo AI model and adds an Expert Mode that can carry out multi-step tasks across apps, though most of the AI features are limited to China for now. HyperOS 4 is reportedly based on Android 17, but Xiaomi's newest phones already got Android 17 in July 2026 through an interim release called HyperOS 3.3."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-ac3e69c19f0f3446",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/11/ring-cameras-go-mobile-as-amazon-debuts-ai-powered-security-drone-and-robot/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-10T22:35:01.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Ring cameras go mobile as Amazon debuts AI-powered security drone and robot",
-        "summary": "Amazon's roaming Ring Robotics devices will debut in late 2026 and early 2027.",
-        "body": "Amazon is betting that many Ring customers will also want an AI-powered security drone and robot patrolling their homes or offices. But the company’s upcoming Ring Robotic products are also certain to intensify privacy concerns previously raised around a prior Amazon attempt to popularize a flying security camera.\n\nThe Ring Rover Cam and Ring Drone Cam are expected to reach customers starting at the end of 2026 and in early 2027, respectively, according to an Amazon announcement posted on November 10. Amazon describes the devices as relying on an AI Pilot system that uses each device’s cameras along with “specialized vision models, on-device sensors and cloud processing” to plan patrol routes while autonomously navigating around obstacles such as furniture.\n\nBoth devices also use that AI Pilot system to digitally map the floor plan of the customer’s home or business. This setup process occurs after the customer carries the Ring drone through their indoor spaces or allows the Ring Rover to do some autonomous exploration.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-399474de8d10d741",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/science/2026/11/what-happens-to-mathematics-when-ai-becames-an-oracle/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-10T20:30:01.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "What happens to mathematics when AI becomes an oracle?",
-        "summary": "Mathematician Steven Strogatz discusses his new book, Big Math: The Hidden Codes That Run Our World .",
-        "body": "Our modern world runs on math, from social media algorithms, package delivery, and weather prediction to medical imaging and machine learning. The rise of computers helped fuel its dominance, enabling us to work with increasingly large numbers that would otherwise be beyond the capacity of our finite human brains. But with the rise of large language models, AI chatbots, and, soon, quantum computing, so-called \"big math\" is beginning to outstrip its creators entirely. What that means , and how we might adapt, is the focus of a new book, Big Math: The Hidden Codes That Run Our World , by applied mathematicians Steven Strogatz and Alex Townsend.\n\nStrogatz is perhaps best known in his field for his co-authorship of a seminal 1998 paper with Duncan Watts on the collective dynamics of small-world networks. He has also studied chaos theory as applied to physics, the geometry of supercoiled DNA, and the biological collective oscillators, such as swarms of synchronously flashing fireflies and crickets that chirp in unison. In 2005, Strogatz extended his study of synchronicity to the crowds that caused the wobbling of London's Millennium Bridge .\n\nAn award-winning communicator, Strogatz wrote three series of columns on mathematics for The New York Times in 2010, 2012, and 2025 and hosted a podcast for Quanta magazine from 2020–2021. He has written four popular books: Sync (2003), The Calculus of Friendship (2009), The Joy of X (2012), and the New York Times bestseller Infinite Powers (2019).\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -1926,31 +1956,6 @@
         "title": "Third-Party Screen Readers: Are They a Security Risk?",
         "summary": "Unlike iOS, Android allows third-party apps to request accessibility permission, which makes it possible to develop screen readers for Android rather than limiting blind users…",
         "body": "Published 7 October 2026 by Kareen Kiwan\n\nUnlike iOS, Android allows third-party apps to request accessibility permission, which makes it possible to develop screen readers for Android rather than limiting blind users to the built-in screen reader, TalkBack.\n\nThe presence of third-party screen readers has helped compensate for the lack of features and responsiveness issues in TalkBack. However, for a screen reader to work, it needs to be granted accessibility permission, which comes with powerful privileges that can pose serious risks if they fall into the wrong hands. The risks that come with granting accessibility permission, as well as the gains it provides, and the balance between security and openness, have been hot topics throughout the years. With the growing popularity of third-party screen readers, including new ones being developed recently with the help of AI-assisted vibe coding, the security aspect is becoming increasingly important to discuss and understand so that users can make informed decisions.\n\nBefore going any further, I want to state from the outset that the goal of this article is neither to give clearance to any screen reader or service, nor to accuse another of wrongdoing.\n\nTable of Contents\n\nThe following definition is taken directly from the Android Developers website :\n\n“An accessibility service is an app that enhances the user interface to assist users with disabilities or who might temporarily be unable to fully interact with a device. These services run in the background and communicate with the system to inspect screen content and interact with apps on the user’s behalf. Examples include screen readers (like TalkBack), Switch Access tools, and voice control systems.”\n\nAn article titled Accessibility Service – An Android Blessing and a Security Challenge in the Same Package from Bitdefender states:\n\n“Android’s accessibility service is a powerful tool that allows people with disabilities to use mobile devices more easily. It’s also a favorite among criminals seeking to take over a device because it holds so much power.”\n\nWhen granting an app permission to act as an accessibility service, the user gives the app access to powerful capabilities, including:\n\nAlthough accessibility permission is built for services like screen readers, which are the focus of this article, it is also used by other apps to enable features that would not otherwise be possible. It is a core element of the popular automation app Tasker, and some launchers include an optional accessibility service to gain additional privileges.\n\nCriminals and other bad actors have also found a great opportunity in accessibility services, which they try to seize and exploit to the fullest.\n\nGoogle did not stay on the sidelines for long, taking active steps to make exploiting accessibility permission harder.\n\nSince 2021, apps that use the AccessibilityService API have been required to provide additional information about their use of the API through Google Play’s accessibility declaration process before approval. Starting with Android 13, apps that are not installed from Google Play cannot simply be granted access to restricted settings, including accessibility access, by enabling the service from Accessibility settings. Instead, the user must first allow restricted settings for the app from its App info page and confirm the choice. Apps installed through some third-party installers can still bypass this step at the time of writing.\n\nGoogle even restricts the use of unverified accessibility services when Advanced Protection is enabled, a mode intended for users who may face a higher security risk or who place a particularly high priority on privacy and security.\n\nAs stated above, granting any app the accessibility permission comes with a lot of privileges. However, in order for a screen reader to work, it must be granted accessibility permission. Without granting it this access, the screen reader is essentially useless, as its core functionality relies on the accessibility service it has.\n\nDespite improvements, TalkBack on Android lacks many features that other screen readers provide. Many users find that third-party screen readers are more responsive compared to TalkBack, which still lags when performing certain tasks, such as scrolling, or on specific devices, especially those with mid-range or low-end processors. In fact, better responsiveness is an advantage that most developers of other screen readers use to advertise their apps.\n\nNo matter how we phrase it, granting any app accessibility service privileges poses a potential risk, even if the app is blocked from accessing the internet. However, this doesn’t mean that the app is really a risk, or that it is built with the intention to cause harm or steal users’ data.\n\nThe Play Store is the official app distribution store on Android. Apps are required to meet certain criteria to be hosted in the store. Additionally, Google performs security scans and checks to make sure that apps installed through the Play Store are safe. However, Google has its own set of rules that must be obeyed by developers who want their apps to be in the Play Store. If an app breaks any of those rules, it can be rejected from the store or have its approval revoked. Play Store rules are created to protect users, but there are restrictions that some apps cannot meet due to the features of the apps or how they work. There are app developers who decide willingly against submitting their apps to the Play Store, yet their apps can be completely safe, and the source code may be provided for anyone who wants to review it.\n\nOn the other hand, not having an app in the Play Store reduces the app’s reach, especially since it is always recommended to install apps from the Play Store as the safer choice for most users. People may also link the absence of a Play Store version to foul play, assuming that something prevents the app from gaining Google’s trust and being listed on the Play Store. As users should be more vigilant with accessibility services, it is understandable when a person refuses to install a screen reader that is not in the Play Store. However, not having a Play Store version does not directly translate to being a suspicious or risky app. There are apps that have functionalities that violate certain store restrictions, or simply apps whose developers don’t like to put their screen reader in the store. They could even opt for an open-source approach that is free from any store limitations, with both the updates and source code directly in the hands of users.\n\nOn the contrary, if a screen reader is on the Play Store, that doesn’t mean that it is completely risk-free, even if the risk is minimized. Bad actors are still able to sneak under Google’s verification mechanisms and land on the Play Store, with some apps gaining a high number of installs before being discovered. Additionally, accessibility services that are trusted by the Play Store could be doing shady things indirectly that affect users’ privacy.\n\nIt’s worth mentioning here that even if an app is sideloaded, when Play Protect is turned on, which it is by default, Play Protect scans the app for malicious software. If it identifies an app as potentially harmful, it can warn the user, disable or remove the app, or in some cases prevent it from being installed.\n\nIn order for a screen reader to be effective, it should work reliably without crashes and should be free of restrictions. Some Android UIs trust TalkBack as the built-in screen reader, giving it certain privileges that are not given to third-party screen readers, even if they are granted accessibility permission. Apps might also provide accessibility UI changes or expose data to TalkBack only, not to third-party screen readers.\n\nFor this reason, some screen readers spoof TalkBack by running their service and showing it to the system and other apps as the TalkBack package. Such behavior is not necessarily wrongdoing, even though an app generally shouldn’t try to make other apps believe that it is a different app, if the purpose is simply to enhance usability rather than to gain access to data for suspicious reasons.\n\nAnother example is when an app is given the ability to turn on and off other accessibility services. While this is not a straightforward process because it requires issuing ADB commands, it is still doable with the right knowledge. An app with such capability poses a serious risk, and I cannot imagine that it would be considered compliant with Google’s rules. But if the app is built to assist users in toggling between their screen readers, we look at the matter differently.\n\nAn example is the Shortcut Menu app, which is available on GitHub as an open-source project, and which I highly doubt could be approved for the Play Store if its developer decided to add it there. The app is built to give users an accessible way to switch between screen readers or to turn on another screen reader if one stops working as intended.\n\nWith the widespread use of AI, some screen readers allow the use of online AI services to describe content or perform OCR. They could also allow the use of non-AI services, such as translation or OCR. It is important to differentiate between the screen reader and the services it connects to. Third-party services are governed by the rules of the operators of those services, not by the screen reader utilizing them. This doesn’t mean that the screen reader is completely immune from responsibility. The screen reader should disclose the services it is connecting to, should encrypt data to ensure its safe transfer, should refrain from having any agreements with external services that allow user data to be misused, and should be transparent about everything it does regarding the data it sends.\n\nGoogle TalkBack uses Gemini, which is also developed by Google, to describe and answer questions about content, but Google reassures users that the data is encrypted and deleted after the descriptions are received. Despite its bad reputation when it comes to user data, Google can be trusted with a matter like this one.\n\nUnfortunately, this level of trust cannot be given to third-party screen readers. Jieshuo Screen Reader, for example, uses an online AI model from vivo to provide descriptions and answer user prompts, but there is no disclosure in the app itself of the exact model used or how the data is communicated. There is also no guarantee that the app would disclose if the AI service being used is changed.\n\nAs I am not a user of any other screen reader on the market, I cannot speak about how other screen readers deal with this subject. In all cases, using online services to analyse content should always be optional. If it is not, the user should at least be aware of the functionality that uses the external service so they can decide whether they want to use the screen reader or not.\n\nHere, the advanced extension system found in the Jieshuo Screen Reader comes to mind. It allows users to run Lua scripts, which could be used to communicate with Android APIs, upload and download data from the internet, add, edit, and delete files and folders, and more. Just because the Jieshuo Screen Reader enables the use of Lua extensions doesn’t mean that it is responsible for the damage inflicted by malicious extensions. Users should be vigilant enough to avoid running extensions without trusting their creators, especially since these extensions and tools could be encrypted, so their code cannot be reviewed by the user, even if they have the knowledge to do so, or at least by one of the popular AI services that can review Lua code.\n\nJieshuo Screen Reader might be the only popular screen reader that allows for advanced extensions on Android, but Windows screen readers have this capability as well. If I am a user of NVDA and I decide to run an untrusted add-on, putting myself at risk, I am responsible for the risks I am knowingly exposing myself to.\n\nWith that being said, it is not possible to avoid criticizing how the extension threat is handled by the Jieshuo developer. All users can upload extensions to the Jieshuo servers, where they are discoverable by all Jieshuo users who go to the Extensions, Tools, or Gesture Scheme additional resources. Those codes are not vetted or checked, although their presence on the Jieshuo service could suggest otherwise to an unsuspecting beginner or average user. This user might go ahead and download an extension or tool, trusting its legitimacy, only to fall victim to a malicious one. Jieshuo Screen Reader poses a risk to those users, even if indirectly, because there should be a review of uploaded extensions and tools, or at least a clear warning when downloading those codes that they are not monitored.\n\nThey say that humans are the weakest link in cybersecurity, as many attacks are successful because of human error or reckless actions. With screen readers, the role of human error comes into play when installing unverified APKs. If you see a message on Telegram or WhatsApp that a new screen reader has been developed along with its APK, you don’t have to rush to install it. This could be malware waiting to take control of your device and data.\n\nIf you find someone posting about a new version of a screen reader you use, you don’t have to install and share this new version with others if you cannot trust the person who posted the APK. Popular screen readers have official places where they can be obtained. There are also reputable websites or channels that share official new versions when they are released.\n\nJieshuo Screen Reader, for example, is one of the screen readers that is widely shared in groups and channels, with modified versions sometimes being treated as official versions by users who think they are using the legitimate software when they are actually using a modified app. The screen reader has a GitHub page from which its releases can be downloaded, and new versions can also be downloaded through Jieshuo itself. There is also a website, although it is less known due to the lack of communication between the developer and the international user base.\n\nScreen readers that are found on the Play Store are not immune either, as updates released through the Play Store can take more time to be approved and reach devices, and developers sometimes release versions as direct APKs before pushing them to the Play Store. When those APKs are modified and shared as the official versions, users may download them and put themselves at serious potential risk, something that could have been avoided simply by trying to find the official website or the screen reader developer’s channel.\n\nWhenever an app hides some features behind a paywall, crackers try to use their skills to create and distribute pirated copies that allow users to access the Pro features without paying for them.\n\nPutting aside the illegality and unethical nature of using cracked software, using a modified version of an app comes with the risk of malware being injected into it. This risk significantly increases when the app in question is an accessibility service like a screen reader.\n\nThe prominent example of a paid screen reader that is widely cracked is the Jieshuo Screen Reader , especially given the not-so-convenient method of purchase it utilizes . Maybe I won’t be exaggerating if I say that modified copies of Jieshuo are more widespread than official copies, with users sometimes even unable to differentiate between legitimate and modified copies. With so many cracked copies available, many users are put at risk of having their data stolen, as well as other damage that could result from running malware included in an accessibility service.\n\nHowever, the screen reader’s developer cannot be held responsible for what a crack includes. In fact, the original developers are also victims, losing money due to unauthorized access to paid features, as well as suffering reputational damage because of the presence of cracked copies that could cause the original software to be flagged because of them.\n\nA screen reader can monitor your banking activity. It can go further by silently entering data and simulating clicks without you even knowing what is happening, especially since a screen reader can alter the speech you hear or even perform operations without providing any speech feedback at all.\n\nMany banking apps treat third-party accessibility services as potential threats, with some of them blocking them indiscriminately and others only allowing services that come from the Play Store. Others might flag a specific screen reader and refuse to run even if the screen reader is only installed but not running. While the measures banks take to protect users from unauthorized access and transfers are understandable, deciding whether what a bank does is an indication of wrongdoing by a screen reader is a different matter. First, the user must know why the screen reader is denied access and whether this is a measure applied to all third-party screen readers, to those that don’t come from the Play Store, or to a specific screen reader. If users are able to get the necessary information from their banks, something I doubt many banks would provide, their assessment of the security of the screen readers they use would be more objective and not based on assumptions or fear.\n\nIn all cases, denying access to banking apps and their data undermines the use of a screen reader, even if the user trusts that screen reader completely. I personally don’t like very strict measures such as blocking access to an app just because another app is present on the phone, since making sure that no unverified accessibility service is running while the user is in the bank’s app should be enough, as the user is free to use a certain screen reader elsewhere.\n\nSome users might be very cautious when it comes to running third-party screen readers, especially those that are not in the Play Store, yet they might have a more relaxed attitude toward other types of apps that deal with sensitive data. TTS engines are one important example. Some people don’t realize that TTS engines can be used as a weapon against them and their security. A TTS engine that suddenly appears in a group or channel is still capable of logging every single character sent to it from other apps, including the screen reader. This data can be uploaded to external services, where it is analysed in search of potentially valuable information. With AI tools that can analyse huge sets of data quickly, going through generated speech output is now an easy task.\n\nIf you use TalkBack but have a TTS engine that is constantly consuming an unjustified amount of data, you should be concerned about your security, as the feeling of safety you have may be false.\n\nAnother category of apps that is popular these days is online image description and text recognition apps. Those apps connect to an external service, typically an AI one, where the data is sent and analysed to provide the information requested by the user. The number of these apps is increasing quickly, assisted by vibe coding, which makes app development easier than ever. The same points raised about screen readers communicating with external services are valid here, but there is also the fact that some users don’t think about what they are sending to those services through apps that are not considered risky accessibility services.\n\nThe previous examples are for apps specifically designed for blind people, but other apps can be security threats without requiring accessibility service access. They pose a risk to both sighted and blind people. For this reason, it is always recommended to check the permissions an app asks for, as well as any suspicious behaviour or unjustified use of a permission, such as access to the microphone or camera, or unusually high data consumption.\n\nOpinions about the use of third-party screen readers differ within the blind community, with people at opposite ends of the spectrum.\n\nOn one hand, you find the highly cautious user who thinks that every third-party screen reader is a serious security risk, or even a spy agent harvesting every interaction, and should be avoided at any cost, with some applying this judgment only to screen readers that aren’t on the Play Store. While being reluctant to install potentially risky software is not a problem in itself, the issue starts when those people begin to make unsubstantiated claims. It is fine not to use a piece of software or not to like it, and to give your opinion about the risks of running an unverified accessibility service, but it is not fine to state your own thoughts as facts. Evaluating a software’s security can require procedures that include testing the software in a safe, sandboxed environment to analyse its behaviour and identify anything alarming.\n\nOn the other hand, you have the careless user who thinks that everything is safe. This is the user who doesn’t think for a minute before testing a screen reader, no matter where it comes from. This type of user is the one who argues that they don’t have anything to hide and that more cautious people are complicating the uncomplicated. Those users not only risk their own security and privacy, but they also risk the security and privacy of others, as we don’t live in a vacuum. We interact with other people through phones and tablets that could be running infected screen readers, and we connect to networks that could be subject to attacks. Those people increase the risk of data theft, impersonation to facilitate scamming others, and other forms of damage.\n\nAs with many other topics, our own subjective judgments play a role in whether we consider a screen reader secure and safe or not. Some people assume that a screen reader developed by someone from a certain country is a dangerous security threat, while one created by someone who resides in a country they trust is considered very safe. While it is true that some countries have better regulations and respect user rights more than others, criminal activities can be carried out anywhere. In fact, sometimes the reputation of a country’s strict laws can be a good cover for a bad actor to gain people’s trust. On the contrary, respect for users’ security and privacy can be found in the work of developers who might live in areas where the laws violate security and privacy. As they say, the person who knows the risk best is the person who has faced the risk.\n\nOur biases are our own affairs that can affect what we trust and what we don’t trust, and it is a wise decision for someone who has escaped a totalitarian country not to use apps that come from developers in the country they ran away from. But we must present our statements as our subjective opinions, not as objective facts, if we are not willing or able to carry out the necessary evaluation procedures to determine what can be considered safe and what cannot.\n\nI don’t have an answer to this question, nor is my goal to provide one. This article is an attempt to correct some misconceptions and raise awareness about accessibility services and what they can do. When you enable the accessibility service of a screen reader, you trust that screen reader, but at the same time, you agree that you are putting yourself under a theoretical risk. Those who follow my articles know that my primary screen reader of choice is Jieshuo , the notorious third-party screen reader. But many would not know that I remained reluctant to install this screen reader for years. Even now, I don’t have the confidence to tell people that this screen reader is completely innocent and safe, despite my personal opinion of it and my use of it.\n\nI still have a tendency not to install new screen readers as soon as they are released, and I generally avoid screen readers that are neither on the Play Store nor open source. When it comes to open-source and closed-source screen readers, I lean toward an open-source screen reader free of Play Store limitations over a closed-source one found in the Play Store, provided I can identify its developers. Although I haven’t tested recent screen readers, I follow a few of them closely, with the possibility of installing them on my devices in the future. This doesn’t imply that I find the screen reader I use more secure than the screen readers I haven’t installed. In fact, the opposite could be true. Yet, I still stick to what I use because I have adapted my usage to the screen reader that I have used for years, without ignoring the possibility that something could go wrong one day.\n\nScreen reader developers should be transparent about what data they collect, which external services they communicate with, and how they communicate with those services. When they offer advanced capabilities such as extensions,they should alert users to the risks of using unverified extensions instead of giving them a false sense of safety by letting them explore unvetted extensions or making it very easy to run extensions without any proper warning.\n\nWhatever comes with the accessibility permission, restricting it is not the solution, as these restrictions cause more harm than they prevent. The solution lies in the hands of users, who should use common sense when they want to install a third-party accessibility service. Look at the gains versus the potential risks. Stay away from APKs from unknown sources, and don’t come near cracks. Keep Play Protect scanning for sideloaded apps enabled. Distinguish between the real risks of a screen reader and human error or recklessness. Look for any red flags, but don’t try to dictate your preferences as established facts.\n\nPublished in Articles"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "freedom-scientific-blog-f16fdfd64cd266d1",
-    "type": "news",
-    "sourceId": "freedom-scientific-blog",
-    "sourceName": "Freedom Scientific",
-    "sourceUrl": "https://blog.freedomscientific.com/",
-    "originalUrl": "https://training.vispero.com/join-us-for-our-october-2026-training-events/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-10-07T12:28:47.000Z",
-    "categories": [
-      "windows",
-      "tecnologia-accesibilidad",
-      "jaws"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Join Us for Our October 2026 Training Events",
-        "summary": "The Freedom Scientific training team offers ongoing opportunities for you to join us in live training sessions and advance your skills. We’re excited to announce our jam-packed October training schedule, where you’re sure to find something that will help you at work, school, or play. If you have questions or need assistance with registration, email …",
-        "body": "The Freedom Scientific training team offers ongoing opportunities for you to join us in live training sessions and advance your skills. We’re excited to announce our jam-packed October training schedule, where you’re sure to find something that will help you at work, school, or play.\n\nIf you have questions or need assistance with registration, email training@vispero.com . We also welcome your suggestions for future training events. Check the Freedom Scientific Training schedule for additional events we may post throughout the month."
       }
     },
     "media": null

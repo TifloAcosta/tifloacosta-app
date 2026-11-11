@@ -666,3 +666,16 @@
 "Título A a Z" = "Titre de A à Z";
 "Título Z a A" = "Titre de Z à A";
 "Último abierto" = "Dernier ouvert";
+"Creación rápida de marcas" = "Signets rapides";
+"Crear marca en TifloLector" = "Créer un signet dans TifloLector";
+"Guarda una marca en la posición actual sin interrumpir la reproducción." = "Enregistre un signet à la position actuelle sans interrompre la lecture.";
+"Abre un libro en TifloLector para crear una marca." = "Ouvre un livre dans TifloLector pour créer un signet.";
+"Preparar el atajo" = "Configurer le raccourci";
+"En Atajos, crea uno nuevo, añade la acción Crear marca en TifloLector y guárdalo con ese nombre." = "Dans Raccourcis, crée un raccourci, ajoute l’action Créer un signet dans TifloLector, puis enregistre-le.";
+"Abrir Atajos" = "Ouvrir Raccourcis";
+"Triple toque posterior" = "Triple toucher au dos";
+"Ve a Ajustes del iPhone, Accesibilidad, Tocar, Tocar atrás y Triple toque. Selecciona el atajo Crear marca en TifloLector." = "Dans Réglages, Accessibilité, Toucher, Toucher le dos, Toucher trois fois, choisis ton raccourci de signet.";
+"Botón de Acción" = "Bouton Action";
+"Ve a Ajustes del iPhone, Botón de Acción, Atajo y selecciona Crear marca en TifloLector." = "Dans Réglages, Bouton Action, Raccourci, choisis Créer un signet dans TifloLector.";
+"Durante la lectura" = "Pendant la lecture";
+"Con un libro abierto, ejecuta el atajo para guardar la posición sin detener la reproducción. También puedes utilizar la acción Crear marca del rotor de VoiceOver." = "Avec un livre ouvert, lance le raccourci pour enregistrer ta position sans arrêter la lecture. Tu peux aussi utiliser le rotor VoiceOver.";

@@ -31,16 +31,16 @@ test('Mi libro y Privacidad son pantallas nativas completas, no provisionales', 
 test('Idioma persistente en Configuración cambia el entorno nativo y el catálogo', () => {
   assert.match(settings, /@AppStorage\("native-ios-language"\) private var languageIndex = 0/);
   assert.match(settings, /NativeAdjustableChoice\(\s*title: "Idioma de la aplicación"/);
-  assert.match(settings, /choices: \["Español", "English"\]/);
+  assert.match(settings, /choices: NativeAppLanguage\.names/);
   assert.match(settings, /selectedIndex: \$languageIndex/);
   assert.match(app, /@AppStorage\("native-ios-language"\) private var languageIndex = 0/);
-  assert.match(app, /\.environment\(\\\.locale, Locale\(identifier: languageIndex == 1 \? "en" : "es"\)\)/);
+  assert.match(app, /\.environment\(\\\.locale, Locale\(identifier: NativeAppLanguage\.code\(for: languageIndex\)\)\)/);
   assert.match(screens, /Text\(LocalizedStringKey\(destination\.rawValue\)\)/);
   assert.match(screens, /Text\(LocalizedStringKey\(currentValue\)\)/);
-  assert.match(screens, /default: return item\.lang ==/);
+  assert.match(screens, /default: return languageIndex > 1 \|\| item\.lang ==/);
   assert.match(screens, /languageFilterIndex/);
   assert.match(read('NativeNews.swift'), /languageFilterIndex/);
-  assert.match(read('NativeNews.swift'), /default: return item\.lang ==/);
+  assert.match(read('NativeNews.swift'), /default: return languageIndex > 1 \|\| item\.lang ==/);
   for (const entry of ['"Idioma de la aplicación"','"Configuración"','"Mi libro"','"Privacidad y accesibilidad"','"Contacto y redes"','"Redes sociales"']) {
     assert.ok(english.includes(entry), 'Falta traducción: ' + entry);
   }

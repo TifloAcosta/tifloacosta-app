@@ -98,7 +98,11 @@ struct NativeNewsScreen: View {
             case 1: return true
             case 2: return item.lang == "es"
             case 3: return item.lang == "en"
-            default: return item.lang == (languageIndex == 1 ? "en" : "es")
+            case 4: return item.lang == "pt"
+            case 5: return item.lang == "fr"
+            case 6: return item.lang == "it"
+            case 7: return item.lang == "de"
+            default: return languageIndex > 1 || item.lang == NativeAppLanguage.code(for: languageIndex)
             }
         }
     }
@@ -234,7 +238,8 @@ struct NativeNewsScreen: View {
                 Section("Filtrar noticias") {
                     NativeAdjustableChoice(
                         title: "Idioma de las noticias",
-                        choices: ["Idioma de la aplicación", "Todos los idiomas", "Español", "Inglés"],
+                        choices: ["Idioma de la aplicación", "Todos los idiomas", "Español", "Inglés",
+                                  "Português", "Français", "Italiano", "Deutsch"],
                         selectedIndex: $languageFilterIndex
                     )
                     NativeAdjustableChoice(
@@ -331,7 +336,7 @@ struct NativeNewsScreen: View {
                         title: item.title,
                         originalText: NativeNewsMetadata.articleText(item),
                         sourceLanguage: item.lang,
-                        targetLanguage: languageIndex == 1 ? "en" : "es"
+                        targetLanguage: NativeAppLanguage.code(for: languageIndex)
                     )
                 } else {
                     Text("La traducción integrada requiere iOS 18 o posterior.")
@@ -454,7 +459,7 @@ struct NativeNewsArticleScreen: View {
                                 title: item.title,
                                 originalText: paragraphs.joined(separator: "\n\n"),
                                 sourceLanguage: item.lang,
-                                targetLanguage: languageIndex == 1 ? "en" : "es"
+                                targetLanguage: NativeAppLanguage.code(for: languageIndex)
                             )
                         }
                     }

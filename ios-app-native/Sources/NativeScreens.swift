@@ -184,7 +184,7 @@ struct NativeHomeScreen: View {
                     .fill(TifloVisual.brandRed)
                     .frame(width: 4, height: 28)
                     .accessibilityHidden(true)
-                Text(languageIndex == 1 ? "User guide" : "Guía de uso")
+                Text(LocalizedStringKey("Guía de uso"))
                     .font(.body.weight(.semibold))
                     .foregroundStyle(TifloVisual.primaryText)
                     .fixedSize(horizontal: false, vertical: true)
@@ -201,10 +201,8 @@ struct NativeHomeScreen: View {
             )
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(languageIndex == 1 ? "User guide" : "Guía de uso")
-        .accessibilityHint(languageIndex == 1
-            ? "Instructions for every TifloAcosta section."
-            : "Instrucciones para utilizar cada sección de TifloAcosta.")
+        .accessibilityLabel(Text(LocalizedStringKey("Guía de uso")))
+        .accessibilityHint(Text(LocalizedStringKey("Instrucciones para utilizar cada sección de TifloAcosta.")))
     }
 
     private var destinationsPanel: some View {
@@ -434,7 +432,11 @@ struct NativeResourcesScreen: View {
             case 1: return true
             case 2: return item.lang == "es"
             case 3: return item.lang == "en"
-            default: return item.lang == (languageIndex == 1 ? "en" : "es")
+            case 4: return item.lang == "pt"
+            case 5: return item.lang == "fr"
+            case 6: return item.lang == "it"
+            case 7: return item.lang == "de"
+            default: return languageIndex > 1 || item.lang == NativeAppLanguage.code(for: languageIndex)
             }
         }
     }
@@ -552,7 +554,8 @@ struct NativeResourcesScreen: View {
             Section("Filtrar recursos") {
                 NativeAdjustableChoice(
                     title: "Idioma de los recursos",
-                    choices: ["Idioma de la aplicación", "Todos los idiomas", "Español", "Inglés"],
+                    choices: ["Idioma de la aplicación", "Todos los idiomas", "Español", "Inglés",
+                                  "Português", "Français", "Italiano", "Deutsch"],
                     selectedIndex: $languageFilterIndex
                 )
                 NativeAdjustableChoice(

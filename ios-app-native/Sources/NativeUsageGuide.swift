@@ -11,6 +11,29 @@ private struct NativeGuideSection: Identifiable {
 
     func title(english: Bool) -> String { english ? englishTitle : spanishTitle }
     func paragraphs(english: Bool) -> [String] { english ? englishParagraphs : spanishParagraphs }
+
+    private func translated(_ suffix: String, languageCode: String) -> String? {
+        guard let folder = Bundle.main.path(forResource: languageCode, ofType: "lproj"),
+              let bundle = Bundle(path: folder) else { return nil }
+        let key = "guide.\(id).\(suffix)"
+        let localized = bundle.localizedString(forKey: key, value: nil, table: "Guide")
+        return localized == key ? nil : localized
+    }
+
+    func title(languageCode: String) -> String {
+        if languageCode == "es" { return spanishTitle }
+        if languageCode == "en" { return englishTitle }
+        return translated("title", languageCode: languageCode) ?? spanishTitle
+    }
+
+    func paragraphs(languageCode: String) -> [String] {
+        if languageCode == "es" { return spanishParagraphs }
+        if languageCode == "en" { return englishParagraphs }
+        return spanishParagraphs.indices.map { index in
+            translated("paragraph.\(index + 1)", languageCode: languageCode)
+                ?? spanishParagraphs[index]
+        }
+    }
 }
 
 private enum NativeGuideContent {
@@ -208,20 +231,20 @@ private enum NativeGuideContent {
 
 struct NativeUsageGuideScreen: View {
     @AppStorage("native-ios-language") private var languageIndex = 0
-    private var english: Bool { languageIndex == 1 }
+    private var languageCode: String { NativeAppLanguage.code(for: languageIndex) }
 
     var body: some View {
         List {
             ForEach(NativeGuideContent.sections) { section in
                 NavigationLink {
-                    NativeUsageGuideDetailScreen(section: section, english: english)
+                    NativeUsageGuideDetailScreen(section: section, languageCode: languageCode)
                 } label: {
                     HStack(spacing: 12) {
                         RoundedRectangle(cornerRadius: 2)
                             .fill(TifloVisual.brandRed)
                             .frame(width: 4, height: 28)
                             .accessibilityHidden(true)
-                        Text(section.title(english: english))
+                        Text(section.title(languageCode: languageCode))
                             .font(.body)
                             .foregroundStyle(TifloVisual.primaryText)
                             .fixedSize(horizontal: false, vertical: true)
@@ -229,25 +252,25 @@ struct NativeUsageGuideScreen: View {
                     }
                     .padding(.vertical, 4)
                 }
-                .accessibilityLabel(section.title(english: english))
-                .accessibilityHint(english ? "Double-tap to read the instructions for this section." : "Doble toque para leer la guía de esta sección.")
+                .accessibilityLabel(section.title(languageCode: languageCode))
+                .accessibilityHint(Text(LocalizedStringKey("Doble toque para leer la guía de esta sección.")))
             }
             .listRowBackground(TifloVisual.surfaceRaised)
         }
         .tifloScreenSurface()
-        .navigationTitle(english ? "User guide" : "Guía de uso")
+        .navigationTitle(Text(LocalizedStringKey("Guía de uso")))
         .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 private struct NativeUsageGuideDetailScreen: View {
     let section: NativeGuideSection
-    let english: Bool
+    let languageCode: String
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
-                ForEach(Array(section.paragraphs(english: english).enumerated()), id: \.offset) { _, paragraph in
+                ForEach(Array(section.paragraphs(languageCode: languageCode).enumerated()), id: \.offset) { _, paragraph in
                     Text(paragraph)
                         .font(.body)
                         .foregroundStyle(TifloVisual.primaryText)
@@ -260,7 +283,7 @@ private struct NativeUsageGuideDetailScreen: View {
             .padding(20)
         }
         .tifloScreenSurface()
-        .navigationTitle(section.title(english: english))
+        .navigationTitle(section.title(languageCode: languageCode))
         .navigationBarTitleDisplayMode(.inline)
     }
 }

@@ -28,8 +28,8 @@ test('Se traduce por fragmentos sin truncar deliberadamente documentos extensos'
 test('Actualidad y Recursos usan idioma configurado y no traducen en automático', () => {
   assert.match(news, /NavigationLink\("Traducir noticia al idioma de la aplicación"\)/);
   assert.match(documents, /NavigationLink\("Traducir recurso al idioma de la aplicación"\)/);
-  assert.match(news, /targetLanguage: languageIndex == 1 \? "en" : "es"/);
-  assert.match(documents, /targetLanguage: languageIndex == 1 \? "en" : "es"/);
+  assert.match(news, /targetLanguage: NativeAppLanguage\.code\(for: languageIndex\)/);
+  assert.match(documents, /targetLanguage: NativeAppLanguage\.code\(for: languageIndex\)/);
   assert.match(news, /originalText: paragraphs\.joined/);
   assert.match(documents, /originalText: documentText/);
 });

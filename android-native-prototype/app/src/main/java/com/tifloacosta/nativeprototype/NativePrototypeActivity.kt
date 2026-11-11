@@ -105,7 +105,12 @@ class NativePrototypeActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        selectedLanguage = settings.getString("language", "").orEmpty()
+        // Choose the first supported system language only on initial setup.
+        // Existing explicit choices survive updates and device language changes.
+        if (NativeAppLanguages.normalizedCode(settings.getString("language", null)) == null) {
+            settings.edit().putString("language", NativeAppLanguages.devicePreferredCode()).apply()
+        }
+        selectedLanguage = settings.getString("language", "es").orEmpty()
         selectedTheme = settings.getString("theme", "system").orEmpty()
         selectedEnlarged = settings.getBoolean("enlarged", false)
         settings.registerOnSharedPreferenceChangeListener(settingsListener)
@@ -166,7 +171,7 @@ class NativePrototypeActivity : ComponentActivity() {
 }
 
 @Composable
-private fun AdjustableSelector(
+internal fun AdjustableSelector(
     label: String,
     choices: List<String>,
     selected: Int,
@@ -238,8 +243,8 @@ private fun PrototypeHome(
         }
     }
     LaunchedEffect(Unit) { account.checkSession() }
-    val language = if (languageOverride in listOf("es", "en")) languageOverride
-        else if (Locale.getDefault().language == "en") "en" else "es"
+    val language = NativeAppLanguages.normalizedCode(languageOverride)
+        ?: NativeAppLanguages.devicePreferredCode()
     val english = language == "en"
     var loaded by remember { mutableStateOf(CatalogLoad(Catalog())) }
     var loading by remember { mutableStateOf(true) }
@@ -289,9 +294,11 @@ private fun PrototypeHome(
         mediaLoading = false
     }
 
-    val news = loaded.catalog.news.filter { it.language == language }
-    val resources = loaded.catalog.resources.filter { it.language == language }
-    val videoCatalog = loaded.catalog.videos.filter { it.language == language }
+    // Keep external articles in their original language. Catalog items do not
+    // necessarily exist in every UI language: do not hide them on that account.
+    val news = loaded.catalog.news.filter { language !in listOf("es", "en") || it.language == language }
+    val resources = loaded.catalog.resources.filter { language !in listOf("es", "en") || it.language == language }
+    val videoCatalog = loaded.catalog.videos.filter { language !in listOf("es", "en") || it.language == language }
     val newsCategories = CatalogLogic.newsCategories(news)
     val resourceCategories = CatalogLogic.resourceCategories(resources)
 
@@ -308,8 +315,11 @@ private fun PrototypeHome(
         MediaLogic.sources(mediaLoad.items, mediaIndex)
     val mediaSource = mediaSourceChoices.getOrNull(mediaSourceIndex)?.takeIf { mediaSourceIndex > 0 }
     val filteredMedia = MediaLogic.select(mediaLoad.items, mediaIndex, mediaSource, mediaLanguageIndex)
-    val mediaLanguages = if (english) listOf("All languages", "Spanish", "English")
-        else listOf("Todos los idiomas", "Español", "Inglés")
+    val mediaLanguages = listOf(
+        NativeAppLanguages.text(language, "allLanguages"),
+        NativeAppLanguages.text(language, "spanish"),
+        NativeAppLanguages.text(language, "english")
+    )
 
     val mediaChoices = if (english)
         listOf("News categories", "Podcasts", "YouTube channels", "All media")
@@ -324,9 +334,9 @@ private fun PrototypeHome(
 
     val title = if (context.packageName == "com.tifloacosta.app") "TifloAcosta"
         else if (english) "TifloAcosta Native Trial" else "TifloAcosta Nativa Pruebas"
-    val first = if (english) "News" else "Actualidad"
-    val second = if (english) "Resources" else "Recursos"
-    val third = if (english) "Videos" else "Vídeos"
+    val first = NativeAppLanguages.text(language, "news")
+    val second = NativeAppLanguages.text(language, "resources")
+    val third = NativeAppLanguages.text(language, "videos")
     val readerLabel = "TifloLector"
 
     BackHandler(enabled = playingMediaItem != null) { playingMediaItem = null }
@@ -389,31 +399,31 @@ private fun PrototypeHome(
                 )
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Button(onClick = { section = NativeDestinations.SEARCH }, modifier = Modifier.fillMaxWidth()) {
-                        Text(if (english) "Search" else "Buscar")
+                        Text(NativeAppLanguages.text(language, "search"))
                     }
                     Button(onClick = { section = NativeDestinations.NEW_CONTENT }, modifier = Modifier.fillMaxWidth()) {
-                        Text(if (english) "New content" else "Novedades")
+                        Text(NativeAppLanguages.text(language, "new"))
                     }
                     Button(onClick = { section = PrototypeNavigation.NEWS; visibleCount = 10 }, modifier = Modifier.fillMaxWidth()) { Text(first) }
                     Button(onClick = { section = PrototypeNavigation.RESOURCES; visibleCount = 10 }, modifier = Modifier.fillMaxWidth()) { Text(second) }
                     Button(onClick = { section = PrototypeNavigation.READER }, modifier = Modifier.fillMaxWidth()) { Text(readerLabel) }
                     Button(onClick = { section = NativeDestinations.DOWNLOADS }, modifier = Modifier.fillMaxWidth()) {
-                        Text(if (english) "Downloads" else "Descargas")
+                        Text(NativeAppLanguages.text(language, "downloads"))
                     }
                     Button(onClick = { section = NativeDestinations.FAVORITES }, modifier = Modifier.fillMaxWidth()) {
-                        Text(if (english) "Favorites" else "Favoritos")
+                        Text(NativeAppLanguages.text(language, "favorites"))
                     }
                     Button(onClick = { section = PrototypeNavigation.VIDEOS; visibleCount = 10 }, modifier = Modifier.fillMaxWidth()) { Text(third) }
                     Button(onClick = { section = NativeDestinations.PODCAST }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Podcasts" else "Podcasts") }
-                    Button(onClick = { section = NativeDestinations.CONTACT }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Contact" else "Contacto") }
-                    Button(onClick = { section = NativeDestinations.PRIVACY }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Privacy" else "Privacidad") }
-                    Button(onClick = { section = NativeDestinations.SETTINGS }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Settings" else "Configuración") }
+                    Button(onClick = { section = NativeDestinations.CONTACT }, modifier = Modifier.fillMaxWidth()) { Text(NativeAppLanguages.text(language, "contact")) }
+                    Button(onClick = { section = NativeDestinations.PRIVACY }, modifier = Modifier.fillMaxWidth()) { Text(NativeAppLanguages.text(language, "privacy")) }
+                    Button(onClick = { section = NativeDestinations.SETTINGS }, modifier = Modifier.fillMaxWidth()) { Text(NativeAppLanguages.text(language, "settings")) }
                 }
             } else {
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     TextButton(
                         onClick = { section = PrototypeNavigation.parentOf(section) }
-                    ) { Text(if (english) "Back" else "Volver") }
+                    ) { Text(NativeAppLanguages.text(language, "back")) }
                     Text(
                         when (section) {
                             PrototypeNavigation.NEWS -> first

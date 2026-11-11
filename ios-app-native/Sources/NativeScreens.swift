@@ -84,6 +84,11 @@ struct NativeHomeScreen: View {
         switch route {
         case "actualidad": destination = .actualidad
         case "tifloLector": destination = .tifloLector
+        case "createBookmark":
+            // Preserve the current reader screen and its playback position.
+            defaults.removeObject(forKey: NativeShortcutRoute.key)
+            NativeQuickBookmarkBridge.save()
+            return
         case "resumeReader":
             // The library consumes this request after it has opened.
             defaults.set(true, forKey: "native-ios-resume-last-book-shortcut-v1")

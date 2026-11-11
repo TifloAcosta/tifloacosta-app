@@ -171,7 +171,7 @@ class NativePrototypeActivity : ComponentActivity() {
 }
 
 @Composable
-private fun AdjustableSelector(
+internal fun AdjustableSelector(
     label: String,
     choices: List<String>,
     selected: Int,

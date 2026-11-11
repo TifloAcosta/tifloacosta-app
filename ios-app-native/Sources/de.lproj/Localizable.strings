@@ -425,3 +425,5 @@
 "%d por ciento leído" = "%d Prozent gelesen";
 "formato %@" = "Format %@";
 "carpeta %@" = "Ordner %@";
+"Marca guardada en %d por ciento." = "Lesezeichen bei %d Prozent gespeichert.";
+"Marca guardada en la pista %d, %d por ciento." = "Lesezeichen in Spur %d bei %d Prozent gespeichert.";

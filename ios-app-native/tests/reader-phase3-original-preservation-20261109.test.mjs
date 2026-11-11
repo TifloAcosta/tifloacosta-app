@@ -117,7 +117,7 @@ test("fase 3: el verificador DAISY no almacena todas las pistas en memoria", () 
 
 test("fase 3: selección múltiple VoiceOver con estados y acciones en lote", () => {
   assert.match(reader, /Button\(selectionMode \? "Terminar selección" : "Selección"\)/);
-  assert.match(reader, /"seleccionado" : "no seleccionado"/);
+  assert.match(reader, /"Seleccionado" : "No seleccionado"/);
   assert.match(reader, /Button\("Seleccionar todos los visibles"\)/);
   assert.match(reader, /Button\("Deseleccionar todos"\)/);
   assert.match(reader, /Button\("Mover seleccionados a carpeta"\)/);

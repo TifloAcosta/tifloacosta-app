@@ -52,6 +52,6 @@ test('VoiceOver mantiene un título breve por defecto y detalle opcional en una 
   assert.match(reader, /if voiceOverDetailIndex == 1 \{ return formatLabel \}/);
   assert.match(reader, /doc\.formatLabel/);
   assert.match(reader, /doc\.folderName/);
-  assert.match(settings, /title: "Información al recorrer la biblioteca"/);
+  assert.match(settings, /title: "Detalle de VoiceOver"/);
   assert.match(settings, /selectedIndex: \$voiceOverDetailIndex/);
 });

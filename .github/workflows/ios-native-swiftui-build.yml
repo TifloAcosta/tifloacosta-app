@@ -5,6 +5,7 @@ on:
       - main
       - integration/ios-beta139-complete-20261111
       - feat/six-languages-ios-android-20261111
+      - feat/ios-six-languages-focused-20261111
       - fix/ios-beta142-translation-return-20261111
       - fix/ios-beta142-bulk-move-new-folder-20261111
       - fix/ios-beta140-bookmark-menu-voiceover-20261111

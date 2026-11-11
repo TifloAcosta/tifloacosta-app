@@ -12,6 +12,7 @@ struct NativeOnDemandTranslationScreen: View {
     let sourceLanguage: String?
     let targetLanguage: String
 
+    @Environment(\.dismiss) private var dismiss
     @State private var configuration: TranslationSession.Configuration?
     @State private var translatedParagraphs: [String] = []
     @State private var translatedCount = 0
@@ -66,6 +67,8 @@ struct NativeOnDemandTranslationScreen: View {
             VStack(alignment: .leading, spacing: 12) {
                 Text(title).font(.title3.bold())
                     .accessibilityAddTraits(.isHeader)
+                Button("Volver a la pantalla anterior") { dismiss() }
+                    .accessibilityHint("Cierra la traducción y vuelve al artículo o listado desde el que accediste.")
                 Text("Idioma solicitado: \(targetName)")
                     .font(.subheadline).foregroundStyle(.secondary)
                 Text("El documento original se conserva. La traducción solo comienza cuando la solicitas.")
@@ -93,6 +96,8 @@ struct NativeOnDemandTranslationScreen: View {
                     Text(showingOriginal ? originalText : translatedParagraphs.joined(separator: "\n\n"))
                         .textSelection(.enabled)
                         .frame(maxWidth: .infinity, alignment: .leading)
+                    Button("Volver a la pantalla anterior") { dismiss() }
+                        .accessibilityHint("Regresa a la noticia sin modificar el texto original.")
                 } else if !isTranslating {
                     Text("Pulsa «Traducir ahora» para solicitar la traducción.")
                         .font(.footnote).foregroundStyle(.secondary)
@@ -104,6 +109,12 @@ struct NativeOnDemandTranslationScreen: View {
         .tifloScreenSurface()
         .navigationTitle("Traducir contenido")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button("Cerrar traducción") { dismiss() }
+            }
+        }
+        .accessibilityAction(.escape) { dismiss() }
         .translationTask(configuration) { session in
             await MainActor.run {
                 translatedParagraphs = []

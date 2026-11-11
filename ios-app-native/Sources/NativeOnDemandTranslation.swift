@@ -144,7 +144,8 @@ struct NativeOnDemandTranslationScreen: View {
             } catch {
                 await MainActor.run {
                     isTranslating = false
-                    errorMessage = "No se pudo completar la traducción: \(error.localizedDescription). Puedes intentarlo nuevamente."
+                    let format = announcement("No se pudo completar la traducción: %@. Puedes intentarlo nuevamente.")
+                    errorMessage = String(format: format, locale: Locale(identifier: targetLanguage), error.localizedDescription)
                     UIAccessibility.post(notification: .announcement,
                         argument: announcement("No se pudo completar la traducción."))
                 }

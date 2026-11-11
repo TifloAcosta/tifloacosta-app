@@ -1265,9 +1265,11 @@ struct NativeReaderLibraryScreen: View {
                     Text(shortcutMessage).font(.footnote)
                 }
             }
-            Section {
-                Button("Importar", systemImage: "square.and.arrow.down") {
-                    importSourcesPresented = true
+            if !selectionMode {
+                Section {
+                    Button("Importar", systemImage: "square.and.arrow.down") {
+                        importSourcesPresented = true
+                    }
                 }
             }
             Section("Mi biblioteca") {

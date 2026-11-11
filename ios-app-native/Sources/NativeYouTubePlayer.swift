@@ -53,6 +53,16 @@ struct NativeYouTubeVideo: Identifiable {
         durationSeconds = 0
     }
 
+    init?(saved item: NativeSavedYouTubeVideo) {
+        guard Self.validID(item.id) else { return nil }
+        id = item.id
+        title = item.title
+        channelTitle = item.channelTitle
+        description = item.description
+        publishedAt = item.publishedAt
+        durationSeconds = item.durationSeconds
+    }
+
     init?(result: NativeYouTubeSearchItem) {
         guard let id = result.id, Self.validID(id) else { return nil }
         self.id = id
@@ -80,6 +90,13 @@ struct NativeYouTubeChannel: Identifiable, Decodable {
     let title: String
     let description: String
     var url: URL { URL(string: "https://www.youtube.com/channel/" + id)! }
+
+    init?(saved channel: NativeSavedYouTubeChannel) {
+        guard channel.id.hasPrefix("UC"), channel.id.count == 24 else { return nil }
+        id = channel.id
+        title = channel.title
+        description = channel.description
+    }
 
     init?(search item: NativeYouTubeSearchItem) {
         guard let channelId = item.channelId, channelId.hasPrefix("UC"),
@@ -231,6 +248,11 @@ final class NativeYouTubePlayerEngine: ObservableObject {
     func seek(seconds: Int) {
         run("if(window.tifloPlayer){tifloPlayer.seekTo(Math.max(0,tifloPlayer.getCurrentTime()+(\(seconds))),true)}")
     }
+    func seek(toSeconds seconds: Double) {
+        guard seconds.isFinite else { return }
+        let clamped = max(0, seconds)
+        run("if(window.tifloPlayer){tifloPlayer.seekTo(\(clamped),true)}")
+    }
     func seek(percent: Int) {
         let clamped = min(100, max(0, percent))
         run("if(window.tifloPlayer){tifloPlayer.seekTo(tifloPlayer.getDuration()*\(clamped)/100,true)}")
@@ -365,6 +387,8 @@ struct NativeYouTubePlayerScreen: View {
     @Environment(\.openURL) private var openURL
     @Environment(\.dismiss) private var dismiss
     @StateObject private var engine = NativeYouTubePlayerEngine()
+    @ObservedObject private var personalLibrary = NativeYouTubePersonalLibrary.shared
+    @State private var resumeApplied = false
 
     private func speak(_ text: String) {
         UIAccessibility.post(notification: .announcement, argument: text)
@@ -386,8 +410,17 @@ struct NativeYouTubePlayerScreen: View {
 
                 NativeYouTubeOfficialPlayer(videoID: video.id, engine: engine)
                     .frame(height: 225)
-                    // Evitar que el iframe capture el foco de VoiceOver durante la reproducción.
+                    // El reproductor oficial queda fuera del foco de VoiceOver.
                     .accessibilityHidden(true)
+                    .onChange(of: engine.ready) { _, ready in
+                        guard ready, !resumeApplied else { return }
+                        resumeApplied = true
+                        let seconds = personalLibrary.resumeSeconds(video.id)
+                        if seconds >= 5 {
+                            engine.seek(toSeconds: seconds)
+                            speak("Continuar viendo desde el segundo \(Int(seconds)).")
+                        }
+                    }
 
                 if let error = engine.error {
                     Text(error).foregroundStyle(TifloVisual.secondaryText)
@@ -451,6 +484,20 @@ struct NativeYouTubePlayerScreen: View {
                 if engine.duration > 0 {
                     Text("Tiempo: \(Int(engine.currentTime)) de \(Int(engine.duration)) segundos")
                         .foregroundStyle(TifloVisual.secondaryText)
+                }
+
+                Button(personalLibrary.isWatchLater(video.id)
+                    ? "Quitar de Ver después" : "Guardar para ver después") {
+                    personalLibrary.toggleWatchLater(video)
+                }
+                .buttonStyle(TifloSecondaryActionStyle())
+
+                if personalLibrary.resumeSeconds(video.id) > 0 {
+                    Button("Empezar vídeo desde el principio") {
+                        engine.seek(toSeconds: 0)
+                        personalLibrary.clearProgress(video.id)
+                    }
+                    .buttonStyle(TifloSecondaryActionStyle())
                 }
 
                 if !video.channelTitle.isEmpty {
@@ -562,6 +609,10 @@ struct NativeYouTubePlayerScreen: View {
             await account.verifySession()
             await account.loadState(videoID: video.id)
         }
-        .onDisappear { engine.stop() }
+        .onDisappear {
+            personalLibrary.rememberPlayback(video, seconds: engine.currentTime,
+                                             duration: engine.duration)
+            engine.stop()
+        }
     }
 }

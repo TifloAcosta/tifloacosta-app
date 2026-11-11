@@ -284,3 +284,117 @@ Resumen de requisitos integrados:
 **Verificación:** las pruebas de contrato realizadas durante la fase detectaron expectativas antiguas y se actualizaron. La ejecución 42673082854 superó las pruebas automáticas y finalizó correctamente con compilación para simulador. Tras los últimos cambios de marcas, NCX y apagado, la ejecución de CI 42677632211 debe confirmarse satisfactoria para dar por cerrado el bloque técnico. Las validaciones con archivos DAISY diversos y el manejo con VoiceOver se harán en la prueba integral convenida.
 
 **Siguiente etapa, tras confirmar CI:** fase 3 — biblioteca, Guardar, exportaciones, DAISY generado, nombres originales y copias de seguridad.
+
+
+## Registro de avance — 10 de noviembre de 2026: alcance completo y fase 6 general
+
+Se ratifica que las fases específicas de TifloLector desarrolladas en la PR #303 no representan el cierre de las nueve fases de la actualización completa de TifloAcosta iOS. TestFlight se reserva para una única candidata cuando estén implementadas todas las novedades de este inventario, seguida de la validación integral con VoiceOver. Android permanece fuera del alcance actual.
+
+- **Fases generales 1–4:** existen avances técnicos importantes de catálogo, lectura, biblioteca, motores y exportación. No se considerarán validadas hasta contrastar íntegramente los requisitos A/B/C y la prueba final.
+- **Fase general 5:** búsqueda contextual, ayudas de lectura, estadísticas y continuidad de actividad tienen requisitos aún pendientes de auditoría/implementación.
+- **Fase general 6, Vídeos:** implementados técnicamente el guardado «Ver después» sin Google, su acción en el rotor de títulos y «Continuar viendo» con posición local en el reproductor oficial. Progreso guardado sin contraseñas ni acceso a la cuenta. También incorporados técnicamente el seguimiento local de canales, las novedades cronológicas de esos canales y la paginación de diez en diez. Pendientes la verificación integral, la búsqueda avanzada dentro de canales y los demás requisitos de la fase.
+- **Fases generales 7–9:** pendientes de auditoría y de completar todo lo que falte en Pódcast, Actualidad, Recursos, idiomas, traducción bajo demanda, Siri/Atajos, notificaciones, preferencias de verbosidad, diagnósticos y envío accesible de sugerencias.
+- **Validación:** las pruebas automatizadas comprueban contratos; la validación de VoiceOver con la candidata final no se adelanta por subsistema.
+
+Este registro no elimina ni simplifica ninguno de los acuerdos anteriores.
+
+
+## Diseño de navegación de Vídeos — 10 de noviembre de 2026
+
+El usuario acuerda simplificar la pantalla principal de Vídeos para que funcione como menú de acceso a funciones, sin desplegar allí los listados largos. Implementado técnicamente en la rama de integración:
+
+- Pantalla «Vídeos»: accesos independientes a «Buscar en YouTube», «Vídeos del canal TifloAcosta», «Mis suscripciones de YouTube», «Canales seguidos sin cuenta Google», «Novedades de mis canales», «Continuar viendo» y «Ver después».
+- «Vídeos del canal TifloAcosta» conserva la ordenación y la paginación de diez títulos al abrirlo. No recarga el inicio con los vídeos.
+- «Buscar en YouTube» contiene el campo, filtros, resultados, navegación por canales, acciones de VoiceOver y reproductor existentes.
+- «Mis suscripciones de YouTube» conserva los canales de la cuenta cuando hay sesión iniciada y añade el acceso a las novedades de esas suscripciones.
+- Se preserva la diferencia entre canales seguidos localmente (sin cuenta) y suscripciones reales de la cuenta Google. Ambas listas pueden mostrar novedades sin mezclarse.
+- «Continuar viendo» y «Ver después» poseen pantallas separadas y no presentan sus vídeos en el inicio.
+
+Estado: implementado en código y con contratos de regresión actualizados. Falta confirmar la última compilación y, posteriormente, validar accesibilidad en la prueba integral de TestFlight. No afecta al calendario ni a la restricción de no probar hasta terminar las nueve fases de iOS.
+
+
+## Continuación de la fase general de Vídeos — 10 de noviembre de 2026
+
+- Incorporada en la pantalla individual de cada canal de YouTube la búsqueda por texto mediante campo de edición, botón de búsqueda y opción «Mostrar todos los vídeos de este canal». Los resultados del canal mantienen la paginación de diez en diez y el reproductor accesible.
+- Detectada una incompatibilidad real del servicio: `youtube-worker/src/youtube-api.js` ignoraba las palabras de búsqueda al utilizar `channelId`. Se ha corregido para enviar `q` a la API cuando se escribe una expresión de al menos dos caracteres, conservando las novedades de canal sin filtro cuando `q` queda vacío.
+- Añadidos tests de contrato en iOS y pruebas unitarias del Worker para búsquedas por canal y validación de consultas.
+- **Dependencia de despliegue:** el workflow de YouTube ejecutado por una PR verifica los tests, pero no despliega el Worker público; ese paso está configurado para eventos distintos de `pull_request`. Antes de probar la búsqueda por canal desde TestFlight, deberá estar desplegada y verificada la versión del servicio que respeta `q`. No interpretar un test verde de una PR como despliegue del backend.
+- Sin cambios en Android y sin publicación de la candidata de iOS. La fase de Vídeos sigue sujeta a los demás requisitos del plan y a la validación final integral.
+
+
+## Continuación de fase general 7 — Pódcast, 10 de noviembre de 2026
+
+- Revisados seguimiento y cancelación de programas, detección de nuevos episodios, importación OPML y favoritos existentes; se conservan las claves locales y los datos persistidos anteriormente.
+- Añadido modelo `NativePodcastPlaybackProgress` para recordar de manera persistente el episodio, su URL de audio, los segundos escuchados y su duración; solo se ofrecen episodios pendientes, no los terminados.
+- Añadida la sección accesible «Continuar escuchando» y la acción «Olvidar posición». Se guarda la posición durante la escucha y al salir o cambiar de episodio.
+- Añadido ajuste opcional «Reproducir el siguiente episodio automáticamente»; la cola se establece desde la misma lista de episodios, y la reproducción utiliza la notificación `AVPlayerItemDidPlayToEndTime`.
+- Añadidas pruebas de regresión. La compilación de la última revisión se verifica por separado; ninguna prueba funcional con VoiceOver se adelanta a la candidata integral.
+- **Pendiente de fase 7:** descargas y reproducción sin conexión; completar Actualidad, Recursos, filtros, favoritos e historial según acuerdos. No confundir las funciones implementadas de Pódcast con cierre del bloque completo.
+
+
+## Fase general 7 — Descargas de Pódcast, 10 de noviembre de 2026
+
+- Se ha añadido un almacén local `NativePodcastDownloads` para descargar episodios directamente desde su URL RSS HTTPS, usando ficheros privados en Application Support y un índice persistente en UserDefaults.
+- Se limita el fichero descargado a 500 MB, se comprueban formatos de audio compatibles y se utilizan nombres internos derivados de un hash para evitar rutas o nombres de archivo inseguros.
+- La pantalla de Pódcast incorpora «Episodios descargados», con escucha local y eliminación; los listados recientes y seguidos ofrecen la acción «Descargar».
+- La cola de reproducción continua y las acciones «Continuar escuchando» utilizan el archivo local si existe, pero conservan el identificador y URL original para mantener el progreso entre sesiones y entre reproducción en línea y sin conexión.
+- Añadidos contratos automatizados de descargas y continuidad. **Pendiente** la confirmación de compilación y la prueba integral real en iPhone, así como demás requisitos de Actualidad y Recursos.
+
+
+## Continuación fase general 7 — Actualidad y Recursos, 10 de noviembre de 2026
+
+- Se ha añadido un almacén local compartido `NativeReadingActivity` para la cola «Leer después» y el historial de noticias y recursos abiertos. Identificación estable por tipo, ID e idioma, sin mezclar las colecciones permanentes de Favoritos ni la biblioteca de TifloLector.
+- Las pantallas de Actualidad y Recursos incorporan el acceso «Leer después e historial», con reanudación por título, eliminación individual de pendientes y borrado explícito del historial. Se conservan entradas aunque el catálogo se actualice; solo se presentan aquellas que siguen disponibles.
+- Actualidad permite filtrar por medio de origen y por idioma (idioma de aplicación, todos, español o inglés); no se traduce automáticamente el contenido. Se mantienen categoría, búsqueda textual y paginación.
+- Recursos permite buscar por palabras del título o la descripción sin tener que escoger previamente una categoría, además de filtrar por idioma; conserva selección ajustable de categorías, lectura, TifloLector, descargas y Favoritos.
+- Los lectores nativos registran la apertura en el historial y ofrecen un control visible para guardar o quitar el contenido de «Leer después». La actividad comparte el mismo objeto de entorno SwiftUI.
+- Añadidas pruebas de contrato y actualizado el test preexistente del listado de Recursos para su nueva capacidad de búsqueda.
+- **Pendiente:** verificar compilación y regresiones, completar las restantes funciones comprometidas en Actualidad y Recursos y ejecutar posteriormente una única validación integral de VoiceOver en TestFlight.
+
+
+## Avance fase general 8 — traducción bajo petición y Siri, 10 de noviembre de 2026
+
+- Se añade `NativeOnDemandTranslationScreen`: traducción con el framework nativo de Apple, iniciada únicamente tras pulsar «Traducir ahora». El contenido de Actualidad/Recursos permanece en su idioma original, sin modificación del catálogo ni traducción automática en segundo plano.
+- Los textos extensos se dividen en fragmentos para realizar solicitudes sucesivas sin recortar el documento; se anuncia el progreso y se permite alternar entre traducción completada y original. Las descargas de modelos y disponibilidad de idiomas dependen de la plataforma; los errores se presentan con texto accesible.
+- Compatibilidad: `TranslationSession.Configuration` requiere iOS 18. Se mantiene el despliegue mínimo de la app en iOS 17; las acciones de traducción integrada aparecen mediante comprobación de disponibilidad del sistema. Queda pendiente valorar alternativa del sistema para iOS 17.4.
+- Se añaden `AppIntent` y `AppShortcutsProvider` para abrir Actualidad, la biblioteca TifloLector y Vídeos con Siri/Atajos. `NativeHomeScreen` consume una ruta persistente una sola vez y navega mediante SwiftUI NavigationStack. Todavía **no** se anuncia «continúa el libro» porque requiere reanudación y control de reproducción de TifloLector, no solo navegación.
+- Se han incorporado pruebas de contrato para traducción explícita, preservación del original y apertura de secciones por Siri. Pendiente confirmación de compilación y validación de VoiceOver de forma integral junto con las restantes fases.
+- Pendientes de fase 8: traducciones de otros idiomas y localización PT/FR, atajos de control de audio, notificaciones limitadas a incorporaciones propias, avisos manuales y preferencias de verbosidad.
+
+
+## Fase general 8 — Primeros avisos de Novedades, 10 de noviembre de 2026
+
+- Implementados avisos **locales** con permiso explícito, activación y desactivación accesibles en Configuración. La autorización no se solicita al entrar en la aplicación.
+- Únicas fuentes permitidas: recursos propios con `isNew == true` y vídeos del catálogo del canal TifloAcosta. No se incluyen `catalog.news`, canales externos, pódcast ni RSS.
+- El primer refresco válido genera una referencia sin avisar de noticias antiguas. Los ID ya vistos se guardan para evitar duplicados, y si hay varias novedades se entrega un único resumen.
+- Los avisos solo se comprueban al refrescar el catálogo mientras la app se ejecuta; **no son push remotas ni garantizan recibir novedades con la app cerrada**. Esta limitación se explica explícitamente en Configuración. No confundir con el canal de avisos manuales que sigue pendiente de diseño y backend.
+- Añadidas pruebas de contrato de ámbito, consentimiento, ausencia de alertas antiguas e integración tras refresco del catálogo.
+
+- Se añadió además un delegado nativo `UNUserNotificationCenterDelegate` para que, estando la aplicación en primer plano, los avisos locales queden en el Centro de notificaciones sin generar un banner invasivo mientras VoiceOver lee. No se presenta como canal de notificaciones push.
+
+ 
+## Continuación de fase 8 — Siri «Continuar libro» y verbosidad configurable (10 de noviembre de 2026)
+
+- El App Intent de Siri «Continuar el último libro en TifloLector» pide abrir la aplicación y remite a la biblioteca nativa. La pantalla recupera la obra con fecha `lastOpenedAt` más reciente y ejecuta el método de reproducción existente, que utiliza la posición guardada (texto o pistas DAISY/audio) y las preferencias del documento. La petición se elimina antes de ejecutarse para evitar reanudaciones dobles al cambiar de escena. Si la biblioteca está vacía, se muestra y anuncia un mensaje accesible.
+- En Configuración se añade «Información al recorrer la biblioteca», con las opciones «Breve: título y porcentaje leído» (predeterminada) y «Completa: título, porcentaje, formato y carpeta». El título y el porcentaje permanecen en una sola unidad de VoiceOver, independientemente del modo.
+- Se amplían pruebas de contrato de Siri y lectura para comprobar la reanudación desde el último libro y la preferencia de verbosidad. Las nuevas rutas aún precisan validación de voz con VoiceOver en la prueba conjunta final.
+
+
+## Inicio de fase general 9 — informe accesible de incidencias (10 de noviembre de 2026)
+
+- Incorporada una pantalla nativa «Comunicar incidencia de accesibilidad» desde Configuración, con categoría, explicación del problema y pasos opcionales para reproducirlo. Campos editables con etiquetas específicas para VoiceOver.
+- El usuario decide si adjunta diagnósticos básicos (versión de aplicación y compilación, versión iOS, tipo genérico de dispositivo y estado de VoiceOver). No se leen datos de cuentas, bibliotecas, rutas, documentos ni credenciales.
+- El informe se puede copiar al portapapeles o compartir mediante el menú estándar de iOS. No hay subida a servidor ni envío automático; todo requiere acción del usuario. Se conserva el acceso a las vías de contacto habituales.
+- Añadidas pruebas de privacidad y de contrato, además de localización básica al inglés de la nueva pantalla. Pendiente revisión de accesibilidad real y pruebas de flujo en TestFlight al cerrar todas las fases.
+
+- La pantalla de informe incluye ahora un enlace de correo a `tifloacosta@gmail.com` con asunto y cuerpo precargados mediante `mailto:`, siempre sujeto a la revisión y confirmación del usuario en el cliente de correo. Se mantiene como alternativa «Compartir» y «Copiar informe».
+- El diagnóstico optativo muestra estado de VoiceOver, «Reducir movimiento», texto en negrita del sistema y métricas generales del catálogo: número de recursos, noticias y vídeos, fecha de última actualización y existencia o no de error. No recoge el texto ni los archivos del catálogo, ni contenido de la biblioteca personal.
+- Pendiente de fase 9: auditoría integral de regresiones, verificaciones en dispositivo real con VoiceOver y preparación de la candidata única de TestFlight cuando el conjunto de fases quede implementado.
+
+
+## Auditoría de regresiones fase 9 — continuación
+
+- Revisado el comportamiento de avisos de novedades propias ante fallos de permiso o entrega: no se marca un contenido nuevo como visto hasta que se consigue programar el aviso; al desactivar avisos, el catálogo actualiza la referencia sin provocar alertas antiguas al reactivarlos. Primer refresco sin avisos retroactivos. Los avisos locales se mantienen sin sonido y se eliminan los ID duplicados antes de generar un resumen.
+- En el atajo de Siri «Continuar libro», se evita seleccionar libros que solo fueron importados pero nunca abiertos. Se limpia el error anterior antes de solicitar reproducción, para que el resultado no se confunda con una incidencia pasada.
+- En «Comunicar incidencia», los diagnósticos técnicos ahora están **desmarcados por defecto**. Se envían únicamente si el usuario los activa y confirma posteriormente el uso del correo o menú Compartir.
+- Añadidas y actualizadas pruebas de contrato para cada uno de estos escenarios. Seguimos pendientes de la validación conjunta de los flujos reales en VoiceOver y del resultado de CI de la última revisión.

@@ -3,6 +3,16 @@ name: TifloAcosta iOS nativa - enviar a TestFlight
 # después de integrar y revisar las fases de desarrollo.
 on:
   workflow_dispatch:
+  # Envío solicitado por el propietario de TifloAcosta.
+# Enviar beta correctiva TTS: pausa real, reanudación por cursor y toque mágico; prueba de puntuación satisfactoria. 2026-11-10.
+# Solicitud de TestFlight 2026-11-10: búsqueda dentro del documento, marcas accesibles, ajustes de Gemini y correcciones iOS.
+# Reintento validado: actualización de prueba automatizada para ubicación de motores en Audio.
+  # Únicamente un cambio de este archivo en esta rama dispara la beta.
+  push:
+    branches:
+      - integration/ios-phases1-6-consolidated-20261110
+    paths:
+      - '.github/workflows/ios-native-testflight-upload.yml'
 permissions:
   contents: read
   actions: read
@@ -109,8 +119,23 @@ jobs:
           set -euo pipefail
           IPA="$(find "$RUNNER_TEMP/native-export" -maxdepth 1 -name '*.ipa' -print -quit)"
           test -f "$IPA"
-          xcrun altool --upload-app --type ios --file "$IPA" --apiKey "$API_ID" --apiIssuer "$API_ISSUER"
-          echo "Compilación enviada. Apple debe completar su procesamiento antes de verla en TestFlight."
+          # altool may return exit code 0 even when Apple's response says UPLOAD FAILED.
+          # Capture and validate its entire output instead of trusting the exit code alone.
+          LOG="$RUNNER_TEMP/tifloacosta-upload.log"
+          xcrun altool --upload-app --type ios --file "$IPA" --apiKey "$API_ID" --apiIssuer "$API_ISSUER" >"$LOG" 2>&1 || {
+            cat "$LOG"
+            exit 1
+          }
+          cat "$LOG"
+          if grep -Eiq 'UPLOAD FAILED|Failed to upload package|Validation failed|ERROR:.*altool|Invalid Pre-Release Train' "$LOG"; then
+            echo "::error::Apple ha rechazado la subida. No se declarará como enviada."
+            exit 1
+          fi
+          if ! grep -Eiq 'No errors uploading|successfully uploaded|Upload succeeded|uploaded successfully|UPLOAD SUCCEEDED' "$LOG"; then
+            echo "::error::No hay confirmación inequívoca de subida en altool."
+            exit 1
+          fi
+          echo "Apple ha aceptado la subida; se comprobará el estado de TestFlight."
       - name: Confirmar beta disponible para probadores internos con Apple
         timeout-minutes: 18
         env:

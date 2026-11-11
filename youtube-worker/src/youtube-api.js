@@ -249,7 +249,12 @@ export async function searchVideos(apiKey, searchTerm, pageToken = '', fetchImpl
   const allowed = new Set(['video', 'all', 'channel', 'short', 'live', 'captions']);
   const filter = String(options.filter || 'video');
   if (!allowed.has(filter)) throw typedError('INVALID_SEARCH', 400);
-  const q = channelId ? '' : validSearchTerm(searchTerm);
+  // A channel can be browsed without a query, or searched within using q.
+  // Do not discard the user's search phrase when channelId is present.
+  const channelQuery = String(searchTerm || '').trim();
+  const q = channelId
+    ? (channelQuery ? validSearchTerm(channelQuery) : '')
+    : validSearchTerm(searchTerm);
   const token = validPageToken(pageToken);
   const entries = [
     ['part', 'snippet'],

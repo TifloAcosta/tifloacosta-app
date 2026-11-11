@@ -322,3 +322,26 @@ test('channel videos browse does not require entering a search phrase', async ()
   assert.match(firstURL, /order=date/);
   assert.doesNotMatch(firstURL, /q=/);
 });
+
+test('channel videos filter by text when a channel query is provided', async () => {
+  const channelId = 'UC' + 'd'.repeat(22);
+  let firstURL = '';
+  await searchVideos('api-key', 'lector de pantalla', '', async url => {
+    firstURL = String(url);
+    return jsonResponse({ items: [] });
+  }, { channelId });
+  const parsed = new URL(firstURL);
+  assert.equal(parsed.searchParams.get('channelId'), channelId);
+  assert.equal(parsed.searchParams.get('q'), 'lector de pantalla');
+  assert.equal(parsed.searchParams.get('type'), 'video');
+});
+
+test('channel searches reject too short or invalid query without contacting the API', async () => {
+  const channelId = 'UC' + 'e'.repeat(22);
+  let called = false;
+  await assert.rejects(() => searchVideos('api-key', 'a', '', async () => {
+    called = true;
+    return jsonResponse({});
+  }, { channelId }), /INVALID_SEARCH/);
+  assert.equal(called, false);
+});

@@ -42,6 +42,16 @@ enum NativeDocumentText {
                 of: pattern, with: " ", options: .regularExpression
             )
         }
+        // Keep explicit HTML/XHTML headings visible in plain-text library records.
+        // A Markdown heading marker is recognized by both reader navigation
+        // and DAISY export; no title is inferred from visual styling.
+        for level in 1...6 {
+            content = content.replacingOccurrences(
+                of: "(?i)<h\(level)\\b[^>]*>",
+                with: "\n\n\(String(repeating: "#", count: level)) ",
+                options: .regularExpression
+            )
+        }
         content = content.replacingOccurrences(
             of: "(?i)<br\\s*/?>", with: "\n", options: .regularExpression
         )
@@ -112,6 +122,8 @@ struct NativeRemoteResourceScreen: View {
     let item: NativeCatalogItem
     @EnvironmentObject private var library: NativeReaderLibrary
     @EnvironmentObject private var resourceService: NativeResourceService
+    @EnvironmentObject private var readingActivity: NativeReadingActivity
+    @AppStorage("native-ios-language") private var languageIndex = 0
     @StateObject private var speech = NativeReadingSpeech()
     @State private var documentText = ""
     @State private var paragraphs: [String] = []
@@ -205,6 +217,22 @@ struct NativeRemoteResourceScreen: View {
 
                 if !documentText.isEmpty {
                     VStack(alignment: .leading, spacing: 10) {
+                        Button(readingActivity.isSaved(.resource, item: item)
+                            ? "Quitar de Leer después" : "Guardar para leer después") {
+                            let saved = readingActivity.toggleReadLater(.resource, item: item)
+                            announce(saved ? "Recurso guardado para leer después." :
+                                "Recurso retirado de Leer después.")
+                        }
+                        if #available(iOS 18.0, *) {
+                            NavigationLink("Traducir recurso al idioma de la aplicación") {
+                                NativeOnDemandTranslationScreen(
+                                    title: item.title,
+                                    originalText: documentText,
+                                    sourceLanguage: item.lang,
+                                    targetLanguage: languageIndex == 1 ? "en" : "es"
+                                )
+                            }
+                        }
                         Button("Leer en voz alta") { readAloud() }
                         Button("Detener lectura") { speech.stop() }
                         Button(imported ? "Guardado en TifloLector" : "Guardar en TifloLector") {
@@ -243,7 +271,10 @@ struct NativeRemoteResourceScreen: View {
                 }
             }
         }
-        .task(id: item.id) { await load() }
+        .task(id: item.id) {
+            readingActivity.markOpened(.resource, item: item)
+            await load()
+        }
         .onDisappear { speech.stop() }
     }
 }

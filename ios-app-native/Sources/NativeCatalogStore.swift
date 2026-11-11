@@ -163,6 +163,11 @@ final class NativeCatalogStore: ObservableObject {
                 return
             }
             apply(candidate.snapshot)
+            // Only own documents and channel videos can trigger local alerts.
+            await NativeOwnUpdatesNotifications.shared.checkOwnContent(
+                resources: candidate.snapshot.resources,
+                videos: candidate.snapshot.videos
+            )
             try? candidate.data.write(to: cacheURL, options: .atomic)
             let now = Date()
             lastUpdated = now

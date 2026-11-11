@@ -37,8 +37,10 @@ test('Idioma persistente en Configuración cambia el entorno nativo y el catálo
   assert.match(app, /\.environment\(\\\.locale, Locale\(identifier: languageIndex == 1 \? "en" : "es"\)\)/);
   assert.match(screens, /Text\(LocalizedStringKey\(destination\.rawValue\)\)/);
   assert.match(screens, /Text\(LocalizedStringKey\(currentValue\)\)/);
-  assert.match(screens, /catalog\.resources\.filter \{ \$0\.lang == \(languageIndex == 1 \? "en" : "es"\) \}/);
-  assert.match(read('NativeNews.swift'), /catalog\.news\.filter \{ \$0\.lang == \(languageIndex == 1 \? "en" : "es"\) \}/);
+  assert.match(screens, /default: return item\.lang ==/);
+  assert.match(screens, /languageFilterIndex/);
+  assert.match(read('NativeNews.swift'), /languageFilterIndex/);
+  assert.match(read('NativeNews.swift'), /default: return item\.lang ==/);
   for (const entry of ['"Idioma de la aplicación"','"Configuración"','"Mi libro"','"Privacidad y accesibilidad"','"Contacto y redes"','"Redes sociales"']) {
     assert.ok(english.includes(entry), 'Falta traducción: ' + entry);
   }

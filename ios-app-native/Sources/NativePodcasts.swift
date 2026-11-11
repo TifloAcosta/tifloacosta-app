@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 import AVFoundation
 import Combine
+import UniformTypeIdentifiers
 
 struct NativePodcastEpisode: Identifiable {
     let id: String
@@ -99,11 +100,34 @@ final class NativePodcastPlayer: ObservableObject {
 
     private var player: AVPlayer?
     private var endObserver: NSObjectProtocol?
+    private var nextEpisodes: [NativePodcastEpisode] = []
+    var onEpisodeFinished: ((NativePodcastEpisode) -> Void)?
+    var resolveAudioURL: ((NativePodcastEpisode) -> URL?)?
 
-    func select(_ episode: NativePodcastEpisode) {
+    func select(_ episode: NativePodcastEpisode,
+                at seconds: Double = 0,
+                followedBy episodes: [NativePodcastEpisode] = []) {
         stop()
         self.episode = episode
-        player = AVPlayer(url: episode.audioURL)
+        nextEpisodes = episodes
+        let item = AVPlayerItem(url: resolveAudioURL?(episode) ?? episode.audioURL)
+        player = AVPlayer(playerItem: item)
+        if seconds.isFinite && seconds > 0 {
+            player?.seek(to: CMTime(seconds: seconds, preferredTimescale: 600))
+        }
+        endObserver = NotificationCenter.default.addObserver(
+            forName: .AVPlayerItemDidPlayToEndTime, object: item, queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                guard let self, self.episode?.id == episode.id else { return }
+                self.onEpisodeFinished?(episode)
+                if let next = self.nextEpisodes.first {
+                    self.select(next, followedBy: Array(self.nextEpisodes.dropFirst()))
+                } else {
+                    self.stop()
+                }
+            }
+        }
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
         try? AVAudioSession.sharedInstance().setActive(true)
         player?.play()
@@ -137,6 +161,11 @@ final class NativePodcastPlayer: ObservableObject {
     }
 
     func stop() {
+        if let endObserver {
+            NotificationCenter.default.removeObserver(endObserver)
+            self.endObserver = nil
+        }
+        nextEpisodes = []
         player?.pause()
         player = nil
         episode = nil
@@ -166,6 +195,68 @@ struct NativePodcastScreen: View {
     @EnvironmentObject private var store: NativePodcastStore
     @StateObject private var player = NativePodcastPlayer()
     @State private var visible = 10
+    @AppStorage("native-podcast-continuous-playback") private var continuousPlayback = false
+    @State private var lastProgressSaved = 0.0
+    @StateObject private var library = NativePodcastLibrary()
+    @StateObject private var downloads = NativePodcastDownloads()
+    @State private var choosingOPML = false
+    @State private var importingOPML = false
+    @State private var followedEpisodes: [NativePodcastEpisode] = []
+    @State private var followedFeedTitle = ""
+    @State private var followedFeedStatus = ""
+    @State private var followedFeedBusy = false
+
+    @MainActor
+    private func loadFollowed(_ feed: NativeFollowedPodcast) async {
+        guard !followedFeedBusy, let url = URL(string: feed.url),
+              ["http", "https"].contains(url.scheme?.lowercased() ?? "") else { return }
+        followedFeedBusy = true
+        followedFeedTitle = feed.title
+        followedFeedStatus = "Consultando episodios."
+        defer { followedFeedBusy = false }
+        do {
+            var request = URLRequest(url: url)
+            request.timeoutInterval = 20
+            let (data, response) = try await URLSession.shared.data(for: request)
+            guard data.count <= 2_000_000, (response as? HTTPURLResponse)?.statusCode == 200
+            else { throw URLError(.badServerResponse) }
+            let parser = XMLParser(data: data)
+            let delegate = NativeRSSParser()
+            parser.shouldResolveExternalEntities = false
+            parser.delegate = delegate
+            guard parser.parse() else { throw URLError(.cannotParseResponse) }
+            followedEpisodes = Array(delegate.episodes.prefix(100))
+            let newCount = library.recordFeedCheck(feed, episodes: followedEpisodes)
+            followedFeedStatus = followedEpisodes.isEmpty
+                ? "Este canal no tiene episodios de audio compatibles."
+                : newCount == 0 ? "Sin episodios nuevos desde la consulta anterior."
+                : "Episodios nuevos desde la consulta anterior: \(newCount)."
+        } catch {
+            followedEpisodes = []
+            followedFeedStatus = "No se pudieron consultar los episodios de este canal."
+        }
+    }
+
+    private func saveCurrentPosition() {
+        guard let episode = player.episode else { return }
+        library.remember(episode, seconds: player.seconds, duration: player.duration)
+        lastProgressSaved = player.seconds
+    }
+
+    private func playEpisode(_ episode: NativePodcastEpisode,
+                             collection: [NativePodcastEpisode] = []) {
+        saveCurrentPosition()
+        let upcoming: [NativePodcastEpisode]
+        if continuousPlayback, let index = collection.firstIndex(where: { $0.id == episode.id }) {
+            upcoming = Array(collection.dropFirst(index + 1))
+        } else {
+            upcoming = []
+        }
+        // Every item in the queue independently prefers its local download
+        // while the original podcast URL remains the stable progress identifier.
+        player.select(episode, at: library.progress(for: episode), followedBy: upcoming)
+        lastProgressSaved = 0
+    }
 
     private func clock(_ value: Double) -> String {
         let seconds = Int(max(0, value))
@@ -194,23 +285,92 @@ struct NativePodcastScreen: View {
                     .accessibilityValue("\(clock(player.seconds)) de \(clock(player.duration))")
                     Text("\(clock(player.seconds)) de \(clock(player.duration))")
                         .font(.footnote).foregroundStyle(.secondary)
-                    Button("Cerrar reproductor") { player.stop() }
+                    Button("Cerrar reproductor") {
+                        saveCurrentPosition()
+                        player.stop()
+                    }
                 }
             }
 
+            Section("Continuar escuchando") {
+                if library.playbackProgress.isEmpty {
+                    Text("No hay episodios pendientes de terminar.")
+                }
+                ForEach(library.playbackProgress) { saved in
+                    if let url = URL(string: saved.audioURL) {
+                        let episode = NativePodcastEpisode(
+                            id: saved.id, title: saved.title,
+                            audioURL: url, publicationDate: ""
+                        )
+                        Button("Continuar: \(saved.title), desde \(clock(saved.seconds))") {
+                            playEpisode(episode)
+                        }
+                        .accessibilityHint("Doble toque para reanudar el episodio.")
+                        Button("Olvidar posición: \(saved.title)") {
+                            library.clearProgress(for: episode)
+                        }
+                    }
+                }
+            }
+            Section("Episodios descargados") {
+                if downloads.entries.isEmpty {
+                    Text("No hay episodios descargados para escuchar sin conexión.")
+                }
+                if downloads.downloadingID != nil {
+                    ProgressView("Descargando episodio")
+                }
+                if !downloads.notice.isEmpty {
+                    Text(downloads.notice).accessibilityAddTraits(.updatesFrequently)
+                }
+                ForEach(downloads.entries) { item in
+                    if let file = downloads.localURL(for: item.id) {
+                        Button("Escuchar sin conexión: \(item.title)") {
+                            if let original = URL(string: item.sourceURL) {
+                                playEpisode(NativePodcastEpisode(id: item.id, title: item.title,
+                                    audioURL: original, publicationDate: ""))
+                            }
+                        }
+                        Button("Eliminar descarga: \(item.title)") {
+                            downloads.delete(item)
+                        }
+                    }
+                }
+            }
+            Section("Reproducción continua") {
+                Toggle("Reproducir el siguiente episodio automáticamente",
+                       isOn: $continuousPlayback)
+                    .accessibilityHint("Cuando termine un episodio, reproduce el siguiente de la misma lista.")
+            }
             Section("Episodios recientes") {
                 if store.loading && store.episodes.isEmpty { ProgressView("Cargando podcasts") }
                 if let error = store.error { Text(error) }
                 ForEach(Array(store.episodes.prefix(visible))) { episode in
                     Button {
-                        player.select(episode)
+                        playEpisode(episode, collection: store.episodes)
                     } label: {
                         Text(episode.title)
                     }
                     .accessibilityHint("Doble toque para reproducir dentro de TifloAcosta.")
-                    .accessibilityAction(named: Text("Reproducir")) { player.select(episode) }
+                    .accessibilityAction(named: Text("Reproducir")) {
+                        playEpisode(episode, collection: store.episodes)
+                    }
+                    .accessibilityAction(named: Text(library.isFavorite(episode) ? "Quitar de favoritos" : "Añadir a favoritos")) {
+                        library.toggleFavorite(episode)
+                    }
                     .accessibilityAction(named: Text("Compartir")) {
                         NativeShare.present(url: episode.audioURL)
+                    }
+                    .accessibilityAction(named: Text("Descargar episodio")) {
+                        Task { await downloads.download(episode) }
+                    }
+                    Button(library.isFavorite(episode) ? "Quitar de favoritos: \(episode.title)" : "Añadir a favoritos: \(episode.title)") {
+                        library.toggleFavorite(episode)
+                    }
+                    if downloads.localURL(for: episode.id) == nil {
+                        Button("Descargar: \(episode.title)") {
+                            Task { await downloads.download(episode) }
+                        }
+                        .disabled(downloads.downloadingID != nil)
                     }
                 }
                 if visible < store.episodes.count {
@@ -218,6 +378,55 @@ struct NativePodcastScreen: View {
                 }
                 Button("Actualizar episodios") {
                     Task { await store.refresh() }
+                }
+            }
+            Section("Seguir pódcast y favoritos") {
+                Text("Favoritos guardados: \(library.favorites.count)")
+                ForEach(library.savedEpisodes) { saved in
+                    if let url = URL(string: saved.audioURL) {
+                        Button("Reproducir favorito: \(saved.title)") {
+                            playEpisode(NativePodcastEpisode(id: saved.id, title: saved.title,
+                                                              audioURL: url, publicationDate: ""))
+                        }
+                        Button("Quitar favorito: \(saved.title)") {
+                            library.toggleFavorite(NativePodcastEpisode(id: saved.id, title: saved.title,
+                                                                       audioURL: url, publicationDate: ""))
+                        }
+                    }
+                }
+                Text(library.notice).accessibilityAddTraits(.updatesFrequently)
+                Button("Seguir el pódcast TifloAcosta") {
+                    library.follow(title: "Canal TifloAcosta", url: "https://anchor.fm/s/5b48ca28/podcast/rss")
+                }
+                Button("Importar suscripciones OPML") { choosingOPML = true }
+                    .disabled(importingOPML)
+                if importingOPML { ProgressView("Importando suscripciones") }
+                ForEach(library.followed) { feed in
+                    Text(feed.title)
+                    Button("Consultar episodios: \(feed.title)") {
+                        Task { await loadFollowed(feed) }
+                    }
+                    Button("Dejar de seguir: \(feed.title)") { library.unfollow(feed) }
+                }
+                if followedFeedBusy { ProgressView("Cargando episodios seguidos") }
+                if !followedFeedStatus.isEmpty { Text(followedFeedStatus) }
+                if !followedEpisodes.isEmpty {
+                    Text("Episodios de \(followedFeedTitle)").font(.headline)
+                    ForEach(followedEpisodes) { episode in
+                        Button("Reproducir: \(episode.title)") {
+                            playEpisode(episode, collection: followedEpisodes)
+                        }
+                        if downloads.localURL(for: episode.id) == nil {
+                            Button("Descargar: \(episode.title)") {
+                                Task { await downloads.download(episode) }
+                            }
+                            .disabled(downloads.downloadingID != nil)
+                        }
+                        Button(library.isFavorite(episode) ? "Quitar de favoritos: \(episode.title)" :
+                               "Añadir a favoritos: \(episode.title)") {
+                            library.toggleFavorite(episode)
+                        }
+                    }
                 }
             }
             Section("Escuchar en otras plataformas") {
@@ -235,9 +444,41 @@ struct NativePodcastScreen: View {
         }
         .tifloScreenSurface()
         .navigationTitle("Podcasts")
-        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
-            if player.episode != nil { player.updatePosition() }
+        .onAppear {
+            player.resolveAudioURL = { episode in
+                downloads.localURL(for: episode.id)
+            }
+            player.onEpisodeFinished = { completed in
+                library.clearProgress(for: completed)
+                lastProgressSaved = 0
+            }
         }
-        .onDisappear { player.stop() }
+        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
+            if player.episode != nil {
+                player.updatePosition()
+                if player.isPlaying && player.duration > 0 &&
+                   abs(player.seconds - lastProgressSaved) >= 10 {
+                    saveCurrentPosition()
+                }
+            }
+        }
+        .onDisappear {
+            saveCurrentPosition()
+            player.stop()
+        }
+        .fileImporter(isPresented: $choosingOPML,
+                      allowedContentTypes: [.xml, UTType(filenameExtension: "opml") ?? .xml],
+                      allowsMultipleSelection: false) { result in
+            Task { @MainActor in
+                importingOPML = true
+                defer { importingOPML = false }
+                do {
+                    guard let url = try result.get().first else { return }
+                    _ = try await library.importOPML(url)
+                } catch {
+                    library.notice = "No se pudo importar el OPML: \(error.localizedDescription)"
+                }
+            }
+        }
     }
 }

@@ -240,42 +240,35 @@ struct NativeSettingsScreen: View {
 
     var body: some View {
         Form {
-            Section("Idioma") {
+            Section {
                 NativeAdjustableChoice(
-                    title: "Idioma de la aplicación",
+                    title: "Idioma",
                     choices: NativeAppLanguage.names,
                     selectedIndex: $languageIndex
                 )
-                Text("El idioma elegido se conserva. El cambio se aplica a la interfaz nativa; los títulos y contenidos de fuentes externas mantienen su idioma original.")
-                    .font(.footnote)
-                    .foregroundStyle(TifloVisual.secondaryText)
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
             Section {
                 DisclosureGroup("Ajustes visuales", isExpanded: $showVisualSettings) {
-                    Text("Color y contraste").font(.headline)
                     NativeAdjustableChoice(
                         title: "Perfil de contraste",
                         choices: ["Seguir el sistema", "Alto contraste claro", "Alto contraste oscuro"],
                         selectedIndex: $schemeIndex
                     )
-                    Text("Tamaño del texto").font(.headline)
                     NativeAdjustableChoice(
-                        title: "Tamaño",
+                        title: "Tamaño del texto",
                         choices: ["Predeterminado", "Grande", "Muy grande", "Máximo"],
                         selectedIndex: $textSizeIndex
                     )
                     Text("El tamaño nunca será inferior al configurado en Accesibilidad de iOS.")
                         .font(.footnote)
                         .foregroundStyle(TifloVisual.secondaryText)
-                    Text("Espaciado").font(.headline)
                     NativeAdjustableChoice(
                         title: "Separación entre líneas",
                         choices: ["Normal", "Cómoda", "Amplia"],
                         selectedIndex: $lineSpacingIndex
                     )
-                    Text("Legibilidad").font(.headline)
                     Toggle("Usar texto reforzado", isOn: $strongText)
                         .tint(TifloVisual.actionTint)
                     Button("Restablecer ajustes visuales") {
@@ -290,18 +283,15 @@ struct NativeSettingsScreen: View {
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
-            Section("Detalle de VoiceOver") {
+            Section {
                 NativeAdjustableChoice(
-                    title: "Información al recorrer la biblioteca",
+                    title: "Detalle de VoiceOver",
                     choices: ["Breve: título y porcentaje leído",
                               "Intermedia: título, porcentaje y formato",
                               "Completa: título, porcentaje, formato y carpeta"],
                     selectedIndex: $voiceOverDetailIndex
                 )
-                Text("La opción breve evita repeticiones. En los tres modos, cada libro se anuncia como un único elemento de VoiceOver.")
-                    .font(.footnote)
-                    .foregroundStyle(TifloVisual.secondaryText)
-            }
+             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
             Section("Atajos de Siri") {

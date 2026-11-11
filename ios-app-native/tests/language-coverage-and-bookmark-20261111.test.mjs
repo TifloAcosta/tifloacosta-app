@@ -3,10 +3,18 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 const read = name => readFileSync(new URL('../Sources/' + name, import.meta.url), 'utf8');
-const files = ['NativeUpdatesSettings.swift','NativeReaderSettings.swift','NativeReaderAdvanced.swift','NativeTifloLector.swift','NativeNews.swift','NativeScreens.swift'];
+const files = [
+  'NativeUpdatesSettings.swift','NativeReaderSettings.swift','NativeReaderAdvanced.swift',
+  'NativeTifloLector.swift','NativeNews.swift','NativeScreens.swift',
+  'NativeContact.swift','NativeBookPrivacy.swift','NativeDownloads.swift',
+  'NativeMedia.swift','NativeMediaInline.swift','NativePodcasts.swift',
+  'NativeFavorites.swift','NativeAccessibilityReport.swift',
+  'NativeReaderExternalVoiceCredentials.swift','NativeReadingActivityScreen.swift',
+  'NativeShareInbox.swift','NativeSearch.swift'
+];
 const keyPattern = /^"((?:[^"\\]|\\.)+)"\s*=\s*".*";$/gm;
 
-test('Todos los textos literales de Configuración, TifloLector, Noticias y Vídeos existen en cinco catálogos', () => {
+test('Los textos literales de 18 pantallas principales están presentes en cinco catálogos', () => {
   const required = new Set();
   const pattern = /(?:Text|Section|Button|Toggle|NavigationLink|navigationTitle|accessibilityHint|accessibilityLabel|Picker|LabeledContent)\(\s*"([^"]{4,})"/g;
   for (const file of files) {

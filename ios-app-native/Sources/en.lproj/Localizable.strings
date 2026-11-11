@@ -650,3 +650,16 @@
 "Título A a Z" = "Title A to Z";
 "Título Z a A" = "Title Z to A";
 "Último abierto" = "Last opened";
+"Creación rápida de marcas" = "Quick bookmarks";
+"Crear marca en TifloLector" = "Create bookmark in TifloLector";
+"Guarda una marca en la posición actual sin interrumpir la reproducción." = "Save a bookmark at the current position without interrupting playback.";
+"Abre un libro en TifloLector para crear una marca." = "Open a book in TifloLector to create a bookmark.";
+"Preparar el atajo" = "Set up shortcut";
+"En Atajos, crea uno nuevo, añade la acción Crear marca en TifloLector y guárdalo con ese nombre." = "In Shortcuts, create a shortcut, add the Create Bookmark in TifloLector action and save it with that name.";
+"Abrir Atajos" = "Open Shortcuts";
+"Triple toque posterior" = "Triple Back Tap";
+"Ve a Ajustes del iPhone, Accesibilidad, Tocar, Tocar atrás y Triple toque. Selecciona el atajo Crear marca en TifloLector." = "In iPhone Settings, go to Accessibility, Touch, Back Tap, Triple Tap. Choose your Create Bookmark in TifloLector shortcut.";
+"Botón de Acción" = "Action Button";
+"Ve a Ajustes del iPhone, Botón de Acción, Atajo y selecciona Crear marca en TifloLector." = "In iPhone Settings, open Action Button, Shortcut, then select Create Bookmark in TifloLector.";
+"Durante la lectura" = "While reading";
+"Con un libro abierto, ejecuta el atajo para guardar la posición sin detener la reproducción. También puedes utilizar la acción Crear marca del rotor de VoiceOver." = "With a book open, run the shortcut to bookmark your position without stopping playback. You can also use VoiceOver rotor actions.";

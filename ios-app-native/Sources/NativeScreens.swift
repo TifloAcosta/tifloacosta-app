@@ -140,42 +140,29 @@ struct NativeHomeScreen: View {
 
     private var searchPanel: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Buscar con TifloAcosta")
-                .font(.headline)
-                .foregroundStyle(TifloVisual.primaryText)
-                .accessibilityAddTraits(.isHeader)
+            TextField("Buscar con TifloAcosta", text: $searchText)
+                .textFieldStyle(.plain)
+                .font(.body)
+                .submitLabel(.search)
+                .textInputAutocapitalization(.sentences)
+                .onSubmit(search)
+                .accessibilityLabel(Text("Buscar con TifloAcosta"))
+                .padding(.horizontal, 14)
+                .frame(maxWidth: .infinity, minHeight: 48)
+                .background(
+                    RoundedRectangle(cornerRadius: TifloVisual.controlCornerRadius)
+                        .fill(TifloVisual.surfaceRaised)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: TifloVisual.controlCornerRadius)
+                        .strokeBorder(TifloVisual.border, lineWidth: 1)
+                )
 
-            AnyLayout(
-                dynamicTypeSize.isAccessibilitySize
-                    ? AnyLayout(VStackLayout(alignment: .leading, spacing: 10))
-                    : AnyLayout(HStackLayout(alignment: .center, spacing: 10))
-            ) {
-                TextField("Introduce tu búsqueda", text: $searchText)
-                    .textFieldStyle(.plain)
-                    .font(.body)
-                    .submitLabel(.search)
-                    .textInputAutocapitalization(.sentences)
-                    .onSubmit(search)
-                    .padding(.horizontal, 14)
-                    .frame(maxWidth: .infinity, minHeight: 48)
-                    .background(
-                        RoundedRectangle(cornerRadius: TifloVisual.controlCornerRadius)
-                            .fill(TifloVisual.surfaceRaised)
-                    )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: TifloVisual.controlCornerRadius)
-                            .strokeBorder(TifloVisual.border, lineWidth: 1)
-                    )
-
-                Button(action: search) {
-                    Text("Buscar")
-                        .font(.body.weight(.semibold))
-                        .frame(minHeight: 48)
-                        .padding(.horizontal, 12)
-                }
-                .buttonStyle(.borderedProminent)
-                .tint(TifloVisual.brandRed)
-                .disabled(searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+            if !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                Button("Buscar", action: search)
+                    .buttonStyle(.borderedProminent)
+                    .tint(TifloVisual.brandRed)
+                    .frame(minHeight: 48)
             }
         }
     }
@@ -218,7 +205,7 @@ struct NativeHomeScreen: View {
                 .accessibilityAddTraits(.isHeader)
 
             LazyVStack(spacing: 0) {
-                ForEach(NativeDestination.allCases) { destination in
+                ForEach(NativeDestination.allCases.filter { $0 != .privacidad && $0 != .contacto && $0 != .recibidos }) { destination in
                     NavigationLink(value: destination) {
                         HStack(spacing: 12) {
                             RoundedRectangle(cornerRadius: 2)

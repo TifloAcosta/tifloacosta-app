@@ -328,6 +328,30 @@ struct NativeSettingsScreen: View {
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
+            Section("Elementos compartidos") {
+                NavigationLink("Revisar elementos pendientes") {
+                    NativeInboxScreen()
+                }
+                Text("Los documentos y textos compartidos se incorporan a TifloLector automáticamente. Consulta esta sección para revisar enlaces y elementos que no se hayan podido importar.")
+                    .font(.footnote)
+                    .foregroundStyle(TifloVisual.secondaryText)
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+
+            Section("Contacto y redes") {
+                NavigationLink("Abrir contacto y redes") {
+                    NativeContactScreen()
+                }
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+
+            Section("Privacidad y accesibilidad") {
+                NavigationLink("Consultar privacidad y accesibilidad") {
+                    NativePrivacyAccessibilityScreen()
+                }
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+
             Section("Ayuda y diagnóstico") {
                 NavigationLink("Comunicar incidencia de accesibilidad") {
                     NativeAccessibilityReportScreen()

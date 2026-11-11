@@ -1104,6 +1104,7 @@ struct NativeReaderLibraryScreen: View {
     @State private var selectionMode = false
     @State private var selectedDocumentIDs: Set<UUID> = []
     @State private var showBulkMove = false
+    @State private var showCreateFolderForSelection = false
     @State private var showBulkDelete = false
     @State private var selectionFeedback: String?
     @State private var shortcutMessage: String?
@@ -1306,7 +1307,7 @@ struct NativeReaderLibraryScreen: View {
                             Label(documentRowLabel(document), systemImage: selectedDocumentIDs.contains(document.id)
                                   ? "checkmark.circle.fill" : "circle")
                         }
-                        .accessibilityLabel("\(documentRowLabel(document)), \(selectedDocumentIDs.contains(document.id) ? "seleccionado" : "no seleccionado")")
+                        .accessibilityLabel("\(selectedDocumentIDs.contains(document.id) ? "Seleccionado" : "No seleccionado"), \(documentRowLabel(document))")
                         .accessibilityHint("Doble toque para cambiar la selección de este documento.")
                     } else {
                     NavigationLink {
@@ -1515,6 +1516,10 @@ struct NativeReaderLibraryScreen: View {
         }
         .confirmationDialog("Mover documentos seleccionados",
                             isPresented: $showBulkMove, titleVisibility: .visible) {
+            Button("Crear carpeta nueva") {
+                newFolderName = ""
+                showCreateFolderForSelection = true
+            }
             Button("Sin carpeta") {
                 let count = library.moveDocuments(withIDs: visibleSelection, to: nil)
                 finishSelection("\(count) documentos movidos fuera de las carpetas.")
@@ -1526,6 +1531,27 @@ struct NativeReaderLibraryScreen: View {
                 }
             }
             Button("Cancelar", role: .cancel) {}
+        }
+        .alert("Crear carpeta para los documentos seleccionados",
+               isPresented: $showCreateFolderForSelection) {
+            TextField("Nombre de la carpeta nueva", text: $newFolderName)
+            Button("Crear carpeta y mover") {
+                let name = newFolderName.trimmingCharacters(in: .whitespacesAndNewlines)
+                let documentIDs = visibleSelection
+                guard !documentIDs.isEmpty else {
+                    selectionFeedback = "No hay documentos seleccionados para mover."
+                    return
+                }
+                guard library.createFolder(named: name) else {
+                    selectionFeedback = "No se pudo crear la carpeta. Comprueba que el nombre no esté vacío, repetido o sea demasiado largo."
+                    return
+                }
+                let count = library.moveDocuments(withIDs: documentIDs, to: name)
+                finishSelection("\(count) documentos movidos a la nueva carpeta \(name).")
+            }
+            Button("Cancelar", role: .cancel) {}
+        } message: {
+            Text("Indica el nombre de una carpeta nueva. Los documentos seleccionados se moverán a ella cuando confirmes.")
         }
         .alert("Selección de documentos", isPresented: Binding(
             get: { selectionFeedback != nil },

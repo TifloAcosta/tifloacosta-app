@@ -26,7 +26,10 @@ test('Crear marca conserva posición y reanuda si estaba reproduciendo', () => {
   assert.match(action, /guard textLayout\.fragmentStarts\.indices\.contains\(fragment\) else \{ return \}/);
   assert.doesNotMatch(action, /!speech\.isPaused/);
   assert.match(action, /if speech\.isPaused \{ speech\.resume\(\); applySleepTimer\(\) \}/);
-  assert.match(swift, /Button\("Añadir marca"\) \{ addBookmark\(\) \}/);
+  assert.match(swift, /Button\("Añadir marca"\) \{ addBookmarkFromReaderSelection\(\) \}/);
   assert.match(swift, /accessibilityAction\(named: Text\("Crear marca"\)\)/);
   assert.match(swift, /bookmarkFromContextMenu\(at: index\)/);
+  assert.match(swift, /lastReaderFragment = index/);
+  assert.match(swift, /let fragment = focusedFragment \?\? lastReaderFragment/);
+  assert.match(swift, /\.accessibilityAction\(named: Text\("Añadir marca"\)\) \{ addBookmarkFromReaderSelection\(\) \}/);
 });

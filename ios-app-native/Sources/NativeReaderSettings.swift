@@ -127,8 +127,6 @@ struct NativeReaderPunctuationControls: View {
             NativeAdjustableChoice(title: "Pausa después de salto de párrafo",
                                    choices: choices, selectedIndex: selection($paragraph))
         }
-        Text("Las pausas se aplican a la lectura con voces del sistema. La duración natural depende de la voz. No modifican los audiolibros grabados ni garantizan los mismos tiempos en Gemini o Phonon.")
-            .font(.footnote)
     }
 }
 

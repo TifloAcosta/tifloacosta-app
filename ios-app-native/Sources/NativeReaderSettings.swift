@@ -527,6 +527,7 @@ struct NativeReaderSettingsScreen: View {
     var body: some View {
         List {
             NavigationLink("Audio y voces") { NativeReaderAudioSettingsScreen() }
+            NavigationLink("Creación rápida de marcas") { NativeQuickBookmarkHelpScreen() }
             NavigationLink("Motores externos") { NativeReaderExternalVoiceSettingsScreen() }
                 .accessibilityHint("Configura las voces, la clave API de Gemini y Phonon.")
             NavigationLink("Modo de lectura") {

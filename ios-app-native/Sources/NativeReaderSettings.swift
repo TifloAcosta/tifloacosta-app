@@ -116,7 +116,6 @@ struct NativeReaderPunctuationControls: View {
             selectedIndex: $style
         )
         if style == 3 {
-            Text("Ajusta cada signo con deslizamientos arriba o abajo. Intervalos de 0 a 1,50 segundos, en pasos de 0,05.")
             NativeAdjustableChoice(title: "Pausa después de coma",
                                    choices: choices, selectedIndex: selection($comma))
             NativeAdjustableChoice(title: "Pausa después de punto y coma",
@@ -238,8 +237,6 @@ struct NativeReaderAudioControls: View {
                         set: { (geminiVoiceSelection ?? $geminiVoice).wrappedValue = NativeGeminiSpeech.voices[$0] }
                     )
                 )
-                Text("La voz seleccionada se utilizará según el ámbito de estos ajustes. La conexión de Gemini se configura en Motores externos.")
-                    .font(.footnote)
             } else {
                 Text("Gemini necesita una clave API guardada en Motores externos antes de reproducir.")
                     .font(.footnote)
@@ -290,7 +287,6 @@ struct NativeReaderAudioControls: View {
             } else if personalVoiceStatus == .unsupported {
                 Text("Este dispositivo no admite el uso de Voz personal en TifloLector.")
             }
-            Text("El tono modifica la voz sintetizada, no los audiolibros grabados.").font(.footnote)
             Button("Buscar más voces") { showVoiceHelp = true }
                 .accessibilityHint("Indica dónde descargar voces adicionales de iOS.")
                 .alert("Buscar más voces", isPresented: $showVoiceHelp) {
@@ -453,9 +449,9 @@ struct NativeReaderDocumentAudioSettingsScreen: View {
 
     var body: some View {
         NavigationStack {
-            List { Section("Audio de esta obra") {
+            List {
                 NativeReaderDocumentAudioControls(document: document)
-            }}
+            }
             .tifloScreenSurface()
             .navigationTitle("Audio")
             .navigationBarTitleDisplayMode(.inline)

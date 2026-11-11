@@ -12,9 +12,11 @@ const transfer = source('NativeDriveTransfer.swift');
 test('Configuración conserva las cuatro opciones visuales de la web', () => {
   assert.match(settings, /DisclosureGroup\("Ajustes visuales", isExpanded: \$showVisualSettings\)/);
   assert.match(settings, /@State private var showVisualSettings = false/);
-  for (const title of ['Tamaño del texto', 'Color y contraste', 'Espaciado', 'Legibilidad']) {
-    assert.ok(settings.includes('Text("' + title + '")'), title);
-  }
+  assert.match(settings, /title: "Tamaño del texto"/);
+  assert.match(settings, /title: "Perfil de contraste"/);
+  assert.match(settings, /title: "Separación entre líneas"/);
+  assert.match(settings, /Toggle\("Usar texto reforzado"/);
+  assert.doesNotMatch(settings, /Text\("Color y contraste"\)|Text\("Espaciado"\)|Text\("Legibilidad"\)/);
   for (const key of ['native-ios-color-scheme','native-ios-text-size','native-ios-line-spacing','native-ios-strong-text']) {
     assert.ok(settings.includes('@AppStorage("' + key + '")'), key);
   }

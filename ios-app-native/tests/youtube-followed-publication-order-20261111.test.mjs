@@ -14,7 +14,7 @@ test('Novedades mezclan canales por fecha ISO real antes de paginar', () => {
 });
 
 test('VoiceOver recibe fecha publicada desde el título del vídeo', () => {
-  assert.match(screens, /accessibilityLabel\("\\?\(video\.title\)/);
+  assert.ok(screens.includes('NativeNewsMetadata.publication(video.publishedAt).map'));
   assert.match(screens, /Fecha de publicación no disponible/);
   assert.match(screens, /Publicado:/);
 });

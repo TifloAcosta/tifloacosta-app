@@ -17,7 +17,9 @@ test('Borrado de seleccionados requiere confirmación con títulos', () => {
 });
 
 test('VoiceOver anuncia seleccionado o no seleccionado antes del título', () => {
-  assert.ok(reader.includes('? "Seleccionado" : "No seleccionado"), \\(documentRowLabel(document))'));
+  const start = reader.indexOf('? "Seleccionado" : "No seleccionado"');
+  assert.ok(start >= 0, 'Falta el estado antes del título');
+  assert.ok(reader.slice(start, start + 120).includes('documentRowLabel(document)'));
 });
 
 test('Mover varios libros permite crear carpeta y los mueve tras confirmar', () => {

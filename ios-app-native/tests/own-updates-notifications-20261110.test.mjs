@@ -24,7 +24,7 @@ test('Solo solicita permiso tras acción expresa y ofrece desactivación', () =>
   assert.match(notifier, /func disable\(\)/);
   assert.match(settings, /Button\("Activar avisos de novedades"\)/);
   assert.match(settings, /Button\("Desactivar avisos de novedades"\)/);
-  assert.match(settings, /no son notificaciones push mientras está cerrada/);
+  assert.match(settings, /No se envían avisos de Actualidad ni notificaciones con la app cerrada/);
 });
 
 test('Comprobación solo tras refresco válido de catálogo', () => {

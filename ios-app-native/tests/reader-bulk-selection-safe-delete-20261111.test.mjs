@@ -19,7 +19,12 @@ test('Borrado de seleccionados requiere confirmación con títulos', () => {
 test('VoiceOver anuncia seleccionado o no seleccionado antes del título', () => {
   const start = reader.indexOf('? "Seleccionado" : "No seleccionado"');
   assert.ok(start >= 0, 'Falta el estado antes del título');
-  assert.ok(reader.slice(start, start + 120).includes('documentRowLabel(document)'));
+  // La traducción del estado puede añadir argumentos entre el estado y el título.
+  // Comprobar el anuncio completo en lugar de limitarlo a 120 caracteres.
+  const announcement = reader.slice(reader.lastIndexOf('.accessibilityLabel(', start), start + 350);
+  assert.match(announcement, /NativeAppLanguage\.message\(selectedDocumentIDs\.contains\(document\.id\)/);
+  assert.ok(announcement.indexOf('documentRowLabel(document)') > announcement.indexOf('"Seleccionado"'),
+    'VoiceOver debe anunciar el estado antes del título y el progreso');
 });
 
 test('Mover varios libros permite crear carpeta y los mueve tras confirmar', () => {

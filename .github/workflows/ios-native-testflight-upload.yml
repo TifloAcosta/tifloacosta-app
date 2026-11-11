@@ -17,6 +17,7 @@ on:
   # Beta de pruebas de seis idiomas, ajustes accesibles, marcas, selección y traducción; envío solicitado 2026-11-11.
 # Reintento: simplificar Configuración a un solo ajustable por opción y corregir pruebas VoiceOver; solicitado 2026-11-11.
 # Segundo reintento: actualizar contrato de detalle de VoiceOver al nuevo selector breve.
+  # Beta solicitada 2026-11-11: portada mínima, recibido en Configuración e instalación de atajo Marcar lectura.
   push:
     branches:
       - integration/ios-phases1-6-consolidated-20261110

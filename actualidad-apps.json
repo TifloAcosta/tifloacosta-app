@@ -120,6 +120,18 @@
     "publishedAt": null
   },
   {
+    "id": "applevis-apps-e5a6dccd3b9d2cec",
+    "title": "Clicklet",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/utilities/clicklet",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "Clicklet lets the Camera Control button on your iPhone start your Apple Shortcuts. Pick one shortcut to launch with a press, or turn on Menu mode and choose from a few favorites each time. Clicklet opens Apple Shortcuts to run your workflow, so you'll see the usual Shortcuts screens, along with any permission prompts or app handoffs your shortcut needs. To set up your library, install the included Connect Clicklet helper. It brings in your shortcut names and small icon images, which appear in your library, in the menu, and while a shortcut opens. You can also search for a shortcut or type its name. If you used an earlier version, replace the old helper with the new one and refresh to get icons. From the menu, tap Configure to go back to setup. You can scroll the menu by dragging along its side margins. Your shortcut names, icons and selections stay on your device. There's no account, advertising, analytics, subscription or in-app purchase. Camera access supports the Camera Control and lock-screen handoff and shows a live preview; Clicklet doesn't save photos or videos. Launching while your iPhone is locked requires authentication. Requires iOS 18 or later and Apple's Shortcuts app. Launching from the button requires an iPhone with Camera Control; set Clicklet in Settings > Camera > Camera Control. Opening Clicklet on its own shows your setup without running a shortcut.",
+    "publishedAt": "2026-11-11T09:45:01.000Z"
+  },
+  {
     "id": "applevis-apps-3d58fc3d05523736",
     "title": "Fields Of Fortune",
     "sourceId": "applevis-apps",
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "A luxury hotel, a missing necklace, and a resourceful detective. Enjoy hours of fun in a free mystery adventure you can play offline, with VoiceOver support. Join James F. Pot as he investigates the Golden Lion Hotel. Talk to its quirky guests, uncover clues, try on disguises, and combine items to solve situations that are as puzzling as they are hilarious. HOURS OF FUN AND CLEVER PUZZLES Explore the hotel and tackle logic, memory, and sound puzzles. Every conversation and every item could help you move forward. Sometimes you’ll need a tool. Sometimes, a disguise. And almost always, a little ingenuity. PLAY OFFLINE, AT YOUR OWN PACE Play without an internet connection and take your investigation wherever you go. Automatic saving keeps your progress safe, and three save slots let you organize your adventures. ACCESSIBILITY THAT LETS YOU EXPLORE YOUR WAY • VoiceOver support. • Descriptions of scenes, objects, and characters. • Guided controls to browse, select, and describe elements around you. • Customizable voice narration. • Separate volume controls for music, ambient sounds, voices, and sound effects. • Options for larger buttons and more vivid colors. • Map zoom to explore the details. • Reduced animation and outlines for interactive areas. FOR IPHONE AND IPAD Enjoy retro-style scenery, music, and memorable characters, with text in English, Spanish, French, German and Italian. THE COMPLETE GAME IS FREE No ads and no payments required to continue the story. You can finish the entire adventure for free. If you’d like to support future adventures, you’ll find four optional contribution levels under the star on the main menu. Each level unlocks a supporter emblem, without gameplay advantages or content needed to finish the adventure. Contributions require an internet connection to the App Store. There’s a mystery waiting at the Golden Lion. James F. Pot has just arrived.",
     "publishedAt": "2026-11-06T22:12:22.000Z"
-  },
-  {
-    "id": "applevis-apps-97426edd893ada85",
-    "title": "Sonnounce",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/utilities/sonnounce",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Send announcements to the Sonos speakers in your house – in your own voice. Pick the speakers you want, hold the button down while you talk, and let go. The announcement plays right away. While the announcement plays, the music is turned down, and afterwards it comes back up. The announcement itself plays at the volume the speaker is already set to. NO ACCOUNT. NO CLOUD. NO SUBSCRIPTION. The app talks directly to the speakers on your own network. The sound is recorded on the phone, and the speaker fetches it from there. Your voice never leaves the house. An announcement can be up to five minutes long. CHOOSE YOUR OWN SOUND A short sound plays before the announcement, so everyone knows something is coming. Choose between the standard sound and 20 others – from bells and a gong to a cow, a rooster and a couple of farts – or turn the sound off. FROM YOUR WRIST With Apple Watch you can record an announcement straight from your wrist. The watch passes it on through your iPhone. SHORTCUTS Type a text in Shortcuts, and the phone reads it aloud on your speakers. It is read aloud in the language the app is set to. Use it in automations, for example when dinner is ready or when someone rings the doorbell. You can also have the most recent announcement repeated. AWAY FROM HOME With a Homey or Home Assistant you can send announcements home even when you are out. The app finds them by itself when you are at home, with no login. This requires Sonnounce to be installed on your Homey or in your Home Assistant as well. If you have several homes, each with its own Homey or Home Assistant, the speakers from all of them are in the same list. If you have a VPN to your home, you can also send announcements that way. SAVE THE ANNOUNCEMENTS With a Homey or Home Assistant you can save every announcement sent in the house. They are kept in one place at home – not in the cloud – and you can download them to your iPhone. Requires Sonos speakers on the same Wi-Fi as the phone.",
-    "publishedAt": "2026-11-06T10:48:27.000Z"
   }
 ]

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-11T11:01:52.711Z",
+  "generatedAt": "2026-11-11T15:17:02.516Z",
   "resources": [
     {
       "kind": "resource",
@@ -5602,15 +5602,15 @@
   "news": [
     {
       "kind": "news",
-      "id": "9to5mac-2e92509e4f34f8c7:en",
-      "sourceId": "9to5mac-2e92509e4f34f8c7",
+      "id": "9to5mac-536c3f9e3ea6d3dc:en",
+      "sourceId": "9to5mac-536c3f9e3ea6d3dc",
       "lang": "en",
-      "title": "Apple Music debuts Labrinth’s new single, created live on the touchscreen MacBook Pro",
-      "summary": "Following last week’s livestream , when Labrinth composed and recorded a song overnight at Apple Tower Theatre in Los Angeles on the new touchscreen MacBook Pro , the single is now available on Apple Music. Here are the details. more…",
-      "body": "Following last week’s livestream , when Labrinth composed and recorded a song overnight at Apple Tower Theatre in Los Angeles on the new touchscreen MacBook Pro , the single is now available on Apple Music. Here are the details.\n\nLast Wednesday evening, singer-songwriter Labrinth transformed Apple Tower Theatre in Downtown Los Angeles into his private studio as he composed a song from scratch using Logic Pro 13 on the new MacBook Pro with PROLED XDR Display .\n\nThe entire session was livestreamed on his YouTube channel, with Labrinth also answering questions from fans along the way.\n\nNow, the finished single, “ Surrender ,” is available on Apple Music, and subscribers can listen to it below:\n\nApple has also published a short video on its YouTube channel with highlights from the entire session, and you can watch it below:\n\nThe video description reads:\n\nOne song. In one night. Created live on the new MacBook Pro with PROLED XDR Display and Touch.\n\nMultiplatinum artist Labrinth transformed Apple Tower Theatre into his personal studio for the night, experimenting with new ways of making music on the new MacBook Pro.\n\nSee how Touch opens up a world of creative possibilities in Logic Pro 13: shaping EQ envelopes, manipulating samples, tweaking Remix FX, and even playing keys right onscreen.\n\nListen to Labrinth on Apple Music\n\nApple Music requires an active subscription. You can sign up for $11.99 per month, with 1 month free, or as part of the Apple One bundle .",
+      "title": "iOS 27.3 adds new setting to bypass website cookie popups (eventually)",
+      "summary": "iOS 27.3 is currently in beta and packed with new features , including a ‘Global Privacy Control’ setting in Safari that could someday put an end to cookie consent pop-ups. more…",
+      "body": "iOS 27.3 is currently in beta and packed with new features , including a ‘Global Privacy Control’ setting in Safari that could someday put an end to cookie consent pop-ups.\n\nApple has several big changes coming to Safari in iOS 27.3, iPadOS 27.3, and macOS 27.3. The browser is adding Vertical Tabs, Adaptive Dark Mode, and new Siri AI powers.\n\nBut iOS 27.3 has another Safari feature that’s hidden away in Settings: a new ‘Global Privacy Control’ option.\n\nInside Settings ⇾ Apps ⇾ Safari ⇾ Advanced you’ll find the ‘Use Global Privacy Control’ setting. Apple describes it this way:\n\nSafari can ask websites to not sell or share your data. This may cause some websites to not function properly or work at all.\n\nThe beta also links to a support document where users can find more information, but it’s currently a broken link. The document will likely be published on iOS 27.3’s release day .\n\nAs noted by Nick Heer on his site Pixel Envy , this Global Privacy Control setting is “effectively a replacement for Do Not Track with legal muscle that should permit you to indicate your tracking preference one time and then, theoretically, never again see a cookie consent banner.”\n\nUltimately though, the dream of automatically declining cookie consents has a long road to reality. Websites have to add support for Global Privacy Control (which some have already done, but most haven’t). And GPC currently only has legal muscle in five US states .\n\nThat said, the addition of a Global Privacy Control setting in iOS 27.3 is a good start. And hopefully it means that in a few years, many Safari users don’t need to see cookie consent popups anymore.\n\nWill you enable Global Privacy Control in iOS 27.3? Let us know in the comments.\n\nIn practice, it will take time for websites to add support, and it requires users to enable the feature in Safari’s Settings.",
       "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/10/apple-music-debuts-labrinths-new-single-created-live-on-the-touchscreen-macbook-pro/",
-      "publishedAt": "2026-11-11T01:31:51.000Z",
+      "originalUrl": "https://9to5mac.com/2026/11/11/ios-27-3-adds-new-setting-to-bypass-website-cookie-popups-eventually/",
+      "publishedAt": "2026-11-11T15:07:20.000Z",
       "categories": [
         "apple",
         "tecnologia-general"
@@ -5618,19 +5618,179 @@
     },
     {
       "kind": "news",
-      "id": "the-verge-4e0bc0332879dfd5:en",
-      "sourceId": "the-verge-4e0bc0332879dfd5",
+      "id": "techcrunch-8f94d286a5be5dc8:en",
+      "sourceId": "techcrunch-8f94d286a5be5dc8",
       "lang": "en",
-      "title": "Microsoft’s DLSS competitor is out for the Xbox Ally X and works in handheld mode",
-      "summary": "Microsoft is now rolling out Automatic Super Resolution (Auto SR), an upscaling technology that competes with Nvidia's DLSS, for the Xbox Ally X, Xbox Ally X20, and select Windows Copilot Plus PCs, the company announced today. Auto SR is also getting some new features alongside this official release. In April, Microsoft started testing Auto SR […]",
-      "body": "Microsoft is now rolling out Automatic Super Resolution (Auto SR), an upscaling technology that competes with Nvidia's DLSS, for the Xbox Ally X, Xbox Ally X20, and select Windows Copilot Plus PCs, the company announced today . Auto SR is also getting some new features alongside this official release.\n\nIn April, Microsoft started testing Auto SR on the Xbox Ally X, but you could only use it while docked. The full release of Auto SR announced today now works while you're playing handheld and running on battery, and it also supports games running at 1080p. Microsoft does note that playing in handheld and at 1080p might lead to performance that …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1031446/microsoft-automatic-super-resolution-auto-sr-upscaling",
-      "publishedAt": "2026-11-11T00:34:24.000Z",
+      "title": "Siri co-founder backs Helix for its voice ID tech",
+      "summary": "Helix said that its voice ID tech can run on an iPhone 13",
+      "body": "For years, websites have relied on technology like CAPTCHA to prove that the user on the other end is human. More recently, social media platforms have turned to photos or videos to verify users’ identities. Now, a startup called Helix is betting that voice technology can do the same job, without requiring users to hand over sensitive personal information.\n\nThe voice technology, which can run directly on a user’s device, has attracted backing from Siri co-founder Dag Kittlaus, who will also act as an advisor.\n\nThe company raised $6 million in funding in a round led by Chicago Ventures, with participation from BAM Ventures, Aglaé Ventures, Corazon Capital, Tusk Ventures, Yonder Ventures, Rule30, and Brown Alumni Group.\n\nThe startup was founded by Alex Oberg, Anna Dorofiyenko, and Mike Hall in 2025. Oberg previously worked at Ticketmaster, which acquired his startup; Dorofiyenko led data science teams at Live Nation and Zillow; and Hall has worked at Nike and Tinder, where he helped develop the initial matching algorithm.\n\nAt Ticketmaster, Oberg played a role in creating Verified Fan, which is designed to keep bots out of the platform. As AI advanced, he started thinking along the same lines for a new solution.\n\n“As AI started to come up in the last two years, I was realizing that it’s going to make it increasingly difficult to determine who’s human and who’s not on the Internet. Identity on the Internet’s always been about proxies for identity, right? It’s your email, it’s your phone, it’s your IP address, it’s your device fingerprint, it’s your device ID,” Oberg said.\n\nHe noted that with the rise of AI agents like Instinct and Muse, the industry needs to rethink human identity on the internet and rely on biometric signals like voice, which is where Helix comes in.\n\nIts core technology can run directly on a device to determine whether someone is human and estimate their age. The company is also running pilots to explore whether voice can be used a biomarker to detect conditions such as adrunkenness or distress.\n\nThe company can deploy its technology to replace or supplement CAPTCHA and help block bot attacks. Helix said that because its model can run locally even on an iPhone 13, the cost of deploying the technology is minimal. The startup said one of its customers is Zeel, an in-home healthcare provider that uses Helix’s tech to verify the identities of providers visiting customers’ homes.\n\nOberg said verifying workers, such as cab drivers, is another use case the startup is exploring. He also said that age-verification regulations for social media platforms around the world are forcing users to trade privacy for access. Helix’s voice technology, he said, could offer an alternative.\n\n“There’s like an avalanche of regulation coming down because essentially society has decided children should not be able to use the Internet as adults. That has created a bit of a strawman argument that everyone needs to trade their privacy for the sake of security and child safety. We are that company that’s saying, nope, don’t agree. It’s a four-second voice challenge,” he said.\n\nThe CEO also emphasized the limitations of Helix’s technology, noting that it cannot reliably detect whether someone is lying. He added that its voice technology doesn’t identify individual speakers and claimed that even if the company stores a voiceprint, it cannot be used to reconstruct a person’s voice.\n\nAI-powered fraud is also a growing problem in phone calls. But Helix believes its technology isn’t yet capable of reliably detecting AI agents during live calls.\n\nSiri co-founder Kittlaus said that voice identification technology has finally reached a point where it works reliably, positioning Helix to scale as AI-powered fraud increases. He also said that Helix’s work to compress its models gives the startup a cost advantage.\n\n“What folks at Helix are doing is, instead of teaching computers how to understand speech, these guys are understanding, what the speech of the speaker actually means, what’s going on with them, who they are they lying, are they impaired? That side of it is fascinating to me within the larger picture that I just described,” he told TechCrunch.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/11/11/siri-co-founder-backs-helix-for-its-voice-id-tech/",
+      "publishedAt": "2026-11-11T15:02:47.000Z",
       "categories": [
         "tecnologia-general",
-        "windows",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-a04cfc83cbfdfbf1:en",
+      "sourceId": "techcrunch-a04cfc83cbfdfbf1",
+      "lang": "en",
+      "title": "Databricks’ new AI agent tells CEO Ali Ghodsi the unvarnished truth",
+      "summary": "At 12,000 employees, AI Ghodsi is the first to admit that he can't know everyone and that they are unlikely to confess the things that go wrong to him. But he doesn't need them to. He uses Databricks' newly revised Genie agent for that.",
+      "body": "Databricks on Wednesday unveiled an updated version of its AI agent Genie, which can now perform multi-step jobs that take extended work to finish. It does this through an ontology that Databricks built to give Genie the context it needs from the information that customers store on the Databricks platform.\n\nCorporate leaders can now assign the agent a wide range of tasks, and it will complete them unsupervised, the company says. To prove the point, Databricks CEO Ali Ghodsi showed me how he uses it internally. Instead of a product demo, he fired up his actual agent and walked me through his most recent chats and charts.\n\nHe showed me how it analyzed the parts of an employee satisfaction survey where the company didn’t score well, and how it helped him rate (and discard) fixes for those low scores that some executives suggested. He showed me how it summarized a big sales pitch to a prospect that went poorly — including the features the prospect said it needed before buying.\n\nIt also prepped him for a podcast interview by reviewing his previous appearances and developing likely questions. While we talked, he even had it tell him what he should say to me. (And its advice on that wasn’t bad.)\n\nThe fascinating part was that Ghodsi was using Genie to find the stuff that he’s now unlikely to hear as the big boss. It was a source of unvarnished truth about what wasn’t going well that he needed to address.\n\n“Have you heard of Dunbar’s number? The magic number is 150,” he said when I pointed this out. Named for British anthropologist Robin Dunbar, it’s theoretically the maximum number of people with whom humans can maintain stable relationships. In a small startup, a CEO knows everyone, has direct relationships with them, and they feel safe to tell him negative info straight up.\n\nWith 12,000 employees, Ghodsi is the first to admit he can’t know everyone. At that size, a salesperson isn’t likely to confess a disastrous sales call to the CEO. An HR manager isn’t likely to confess that their idea for increasing employee satisfaction will probably fail.\n\n“Anyone who has more than 150 employees, which is a lot of companies, a lot of people can get value out of this,” he said of AI agents generally and his product, Genie, specifically.\n\nGhodsi’s own use of Genie (often called dogfooding, from the phrase “eating your own dogfood”) is one reason why Databricks is now pitching it as an always-on agent for business leaders. He says he also uses it in his personal life, rather than a security-questionable alternative like OpenClaw or Instinct or Muse.\n\nHe believes Genie can do for the business side what AI, agents and harnesses (the software that wraps around an AI model and lets it use tools) are doing for programmers. As for the risk that agents will ratchet up corporate AI costs, Ghodsi has an answer for that, too. He said costs can be controlled through Databricks’ Unity Gateway product. It allows companies to set usage limits and to swap in less expensive open-weight models.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/11/11/databricks-new-ai-agent-tells-ceo-ali-ghodsi-the-unvarnished-truth/",
+      "publishedAt": "2026-11-11T15:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
         "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-2a50db6f98d4b35a:en",
+      "sourceId": "the-verge-2a50db6f98d4b35a",
+      "lang": "en",
+      "title": "Google’s AlphaGenome 2 zooms in on the cellular roots of disease",
+      "summary": "Researchers at Google DeepMind have unveiled a new AI model designed to unravel how changes in our DNA affect different cells, giving scientists a more detailed view of a notoriously difficult problem that could hold important clues to the causes of disease - and point the way to new treatments. AlphaGenome 2 is the successor […]",
+      "body": "Researchers at Google DeepMind have unveiled a new AI model designed to unravel how changes in our DNA affect different cells, giving scientists a more detailed view of a notoriously difficult problem that could hold important clues to the causes of disease - and point the way to new treatments.\n\nAlphaGenome 2 is the successor to DeepMind's genome-predicting AI model AlphaGenome, which was released last year . While nearly every cell in the human body carries the same DNA, different types of cells - from heart muscle cells and skin cells to immune cells fighting an infection - switch different genes on and off, and those patterns can change d …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1031524/google-deepmind-alphagenome-2-genetic-ai-model",
+      "publishedAt": "2026-11-11T15:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-0779f144d3fc4e7e:en",
+      "sourceId": "9to5mac-0779f144d3fc4e7e",
+      "lang": "en",
+      "title": "If you bought an iPhone Duo, have you kept or returned it? [Poll]",
+      "summary": "When Apple announced the iPhone Duo back in September, the company called it “the most transformational change to iPhone since the original,” and there’s no doubt that it generated a huge amount of excitement. But a new report suggests that for some buyers the novelty quickly wore off, and they ended up returning their devices. Is this just a handful of people, or is it more common … ? more…",
+      "body": "When Apple announced the iPhone Duo back in September, the company called it “the most transformational change to iPhone since the original,” and there’s no doubt that it generated a huge amount of excitement.\n\nBut a new report suggests that for some buyers the novelty quickly wore off, and they ended up returning their devices. Is this just a handful of people, or is it more common … ?\n\nIt’s been a very long time since any smartphone launch has generated quite so much buzz. Apple called it a breakthrough in iPhone design.\n\niPhone Duo features a breakthrough foldable design that’s beautiful, versatile, and durable, opening up possibilities that feel entirely new yet remarkably familiar […]\n\n“iPhone Duo is the most transformational change to iPhone since the original. With an entirely new design and intuitive experiences, it shows what’s possible when hardware and software are engineered together and redefines what it means to use a foldable phone,” said John Ternus.\n\nDespite not really being the target market for the phone, I was still wowed by the launch video and remained incredibly impressed when I got some hands-on time with one.\n\nMany couldn’t resist buying one despite the price – but The Verge notes that not everyone has ending up keeping the device. Apple allows you to return any product within 14 days for a full refund without having to give any reason. That window has come to an end for some of the first buyers and the site’s Alison Johnson spoke with some of those who’d decided to take advantage of it.\n\nThere were a few specific issues:\n\nBut the more fundamental reason for some is that it hasn’t really lived up to their hopes for a multifunctional device.\n\n“If I can have an iPad in my pocket, that would be great.” So thought Ben Seligson, a content creator, photographer, and now former iPhone Duo owner […] “Usually I’d throw a YouTube video on the iPad or throw a podcast up. And then I start cooking dinner and leave my iPad in one spot, but I’d have my phone in my pocket if I got a text, or I needed to set a timer or something like that.” With the Duo, the phone was also the iPad on the counter, so a quick reply became much more of an interruption.\n\nI’m curious as to whether this is just a small minority of buyers or a more common phenomenon. If you bought a Duo early enough to have hit the end of the return window, please take our poll to let us know whether you decided to keep it or return it – and do share your reasons in the comments (which are now back).\n\nOh, and the good news for anyone buying one now is that you’ll have a lot longer to make up your mind, with the extended return window for the holidays in place. You can now return anything bought today through January 8.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/11/if-you-bought-an-iphone-duo-have-you-kept-or-returned-it-poll/",
+      "publishedAt": "2026-11-11T14:13:49.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-2e922df864339b8d:en",
+      "sourceId": "ars-technica-2e922df864339b8d",
+      "lang": "en",
+      "title": "Google DeepMind just mathematically verified key parts of Signal",
+      "summary": "The four-week project hints that AI could make formal verification far more practical.",
+      "body": "Google DeepMind researchers used agentic AI to mathematically prove, or “formally verify,” a number of the Signal protocol’s key cryptographic guarantees—a landmark development for the widely used cryptography and AI itself.\n\nConducted as a sort of proof-of-concept project in just four weeks, the work is significant in two ways. It serves as further independent validation of the cryptography that protects massive quantities of the world's communications on platforms like the Signal app , Google Messages, and WhatsApp. And it demonstrates Google DeepMind's formal verification capabilities using a new AI framework called AlphaProof Code.\n\nMore broadly, AI-aided formal verification is having a moment, but it is unclear how practical it will be for widespread use and how effective it can be at securing large amounts of code. Proponents of formal verification have long referred to it as a sort of holy grail in software security, because it uses math to check and validate that software is functioning as intended—in other words, that it doesn't have critical vulnerabilities.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/ai/2026/11/signals-encryption-just-passed-an-ai-powered-mathematical-checkup/",
+      "publishedAt": "2026-11-11T14:08:57.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-596dcf9d170b3718:en",
+      "sourceId": "9to5mac-596dcf9d170b3718",
+      "lang": "en",
+      "title": "HomeKit Weekly: SwitchBot’s Curtain Track 4 is the easiest smart curtain retrofit yet",
+      "summary": "The worst part of owning smart curtain motors is charging them, because it usually means taking the whole motor down from the track or running a really long USB cord to charge it. Today, SwitchBot has released the SwitchBot Curtain Track 4 aimed at solving that problem with a battery module that detaches on its own, so the motor stays in place, and you only take down the part that needs to charge. more…",
+      "body": "The worst part of owning smart curtain motors is charging them, because it usually means taking the whole motor down from the track or running a really long USB cord to charge it. Today, SwitchBot has released the SwitchBot Curtain Track 4 aimed at solving that problem with a battery module that detaches on its own, so the motor stays in place, and you only take down the part that needs to charge.\n\nHomeKit Weekly is a series focused on smart home accessories, automation tips and tricks, and everything to do with Apple’s smart home framework.\n\nThe SwitchBot Curtain Track 4 is a retrofit motor for curtains that hang on a U-rail track. You hang it on the track between the curtain hooks, run a one-tap calibration in the SwitchBot app, and your existing curtains can then be motorized and used in your smart home. There’s no drilling, no rewiring, and no need to position magnets to stick to the rail, as earlier SwitchBot curtain motors required. SwitchBot claims the whole setup takes about 30 seconds.\n\nOne thing to check first: this version is for U-rail tracks only, not curtain rods.\n\nThe Battery+ version pairs a small built-in battery with a detachable 5,000mAh module for a total of 6,400mAh. SwitchBot rates it at up to 12 months of use for each charge, depending on curtain weight and movement frequency. When it needs charging, you pull the module off, charge it via USB-C, and clip it back on. SwitchBot also sells a Solar version that uses a small panel to keep the battery topped off if the window gets enough sun.\n\nThe motor itself connects via Bluetooth, so getting it into Apple Home requires a compatible SwitchBot Hub, which brings it there via Matter. Once it’s there, the curtains work like any other window covering in your Home app. You can add them to scenes, control them with Siri, and include multiple windows in a single automation. It’s always nice to time smart curtains/shades with dusk/dawn as well.\n\nSwitchBot’s built-in QuietDrift mode opens the curtains slowly in the morning, at about half a centimeter per second, so the room fills with daylight gradually rather than all at once. SwitchBot says it runs at around 25 dB in that mode. You can also give the curtain a gentle tug by hand and the motor takes over, which is great if you don’t have your iPhone with you or someone doesn’t have access to your Apple Home setup.\n\nSwitchBot built it in a way to correct drift over time, so you shouldn’t need to recalibrate it if it gets off.\n\nThe SwitchBot Curtain Track 4 turns the U-rail curtains you already have into Apple Home window coverings without replacing anything. The detachable battery is the best feature here, as it lets you charge it without a long cord.\n\nThe SwitchBot Curtain Track 4 is available now on Amazon and directly from SwitchBot .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/11/switchbot-curtain-track-4/",
+      "publishedAt": "2026-11-11T14:00:00.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-20961c821a49900a:en",
+      "sourceId": "techcrunch-20961c821a49900a",
+      "lang": "en",
+      "title": "Plurai wants to help AI agents work better using the same approach that helped get self-driving cars to roads",
+      "summary": "Like the end-to-end models trained to drive cars, AI agents are probabilistic systems operating in unpredictable environments.",
+      "body": "AI agents are all the rage, but they’re not quite as capable as their purveyors would have you believe.\n\nEfforts to benchmark agents tasked with complex work show that they aren’t typically reliable enough to function without close supervision. LiveBench 2.0 shows Claude Fable 5.2 and ChatGPT-6 Astra succeeding on 82.9 and 75.6 out of 100 tasks, respectively, and an effort by the AI infrastructure company EON to test agents in a simulated corporate environment found the most successful model tested, Claude Opus 4.8, performed tasks at 76.8% accuracy.\n\nNow, a startup known as Plurai wants to boost those numbers with the same techniques that put self-driving cars on the street: Simulations using synthetic data based on a company’s own digital systems, meant to prepare models to tackle difficult edge cases.\n\nCo-founders Ilan Kadar and Elad Levi previously worked for Nexar, which develops autonomous driving technology. Kadar worked with Waymo to simulate and evaluate its end-to-end deep learning driving software.\n\n“The moment that we saw the wave of AI agents, we saw the same pattern: That it is very easy to build a demo, but [hard] to get something that will be reliable and cost effective,” Kadar told TechCrunch. “Since we saw the same pattern, the same pitch was that we want to build this simulation layer.”\n\nOn Wednesday, the startup said it had raised $13 million in seed funding to make that happen. The round was led by Team8, with participation from U&I, Velocity and Mercer.\n\nLike the end-to-end models trained to drive cars, AI agents are probabilistic systems operating in unpredictable environments. When pressed by customers, agents tasked with booking travel can ignore spending policies. Or, when tasked with querying one database, agents can reliably provide an answer, but combining information from multiple data sets tends to gum up the works. A long conversation with a customer service bot can overwhelm an agent with too much context and lead to wrong turns.\n\nTo fix that, Plurai creates a digital twin of the company’s electronic systems, including the knowledge base and tools that an agent will have access to in production. It then maps all the possible flows of the agents, and uses that graph to prepare the model with evaluations and fixes for possible edge cases. The platform works alongside existing agentic tools like Claude Code, Codex, Copilot and Cursor.\n\nHowever, Kadar says the company’s real promise is using the data it gathers to post-train small, open-weight models tailored to individual customer needs. Tests performed in cooperation with Nvidia and Nebius showed the company’s models outperforming mid-tier frontier models at lower costs.\n\n“We can take a large language model, we can take the task, decompose it into a smaller task using the simulation, train [an open-weight] model, and using the simulation, verify that the quality is higher or comparable to the frontier model, and an order or two orders of magnitude cost reduction,” he said.\n\nReah Miyara, a Google DeepMind researcher who backed Plurai as an angel investor, said the company’s edge comes from understanding failure modes in production, and generating synthetic data to tune models. As businesses try to optimize their AI expense, Plurai’s approach could prove a real advantage, since IT leaders are seeing that “frontier-capable models are out of distribution with my specific data, and the cost of these things isn’t sustainable in the long term,” Miyara said.\n\nPlurai hopes analogies between AI agents in physical and digital environments can prove predictive: While powerful general AI models are imbuing robots with fascinating capabilities, they aren’t yet reliable enough to be deployed widely. Meanwhile, robots powered by AI models built for specific tasks are in the field right now, working for customers and gathering valuable real-world data.\n\n“My view is that no matter how smart OpenAI and Anthropic model will be — and they will be much smarter — they will not know your business and your policy,” Kadar said.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/11/11/plurai-wants-to-help-ai-agents-work-better-using-the-same-approach-that-helped-get-self-driving-cars-to-roads/",
+      "publishedAt": "2026-11-11T14:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-95e88a99372ce9ee:en",
+      "sourceId": "the-verge-95e88a99372ce9ee",
+      "lang": "en",
+      "title": "Adobe’s AI experiments let you walk around in photos and interview your characters",
+      "summary": "Some of the most impressive tech that Adobe showcases at its annual Max conference each year is the experimental features it's developing, and the latest of those tools are being announced today: they can transform images into explorable 3D scenes, design AI characters by talking to them, and turn photo editing into a copy/paste process. […]",
+      "body": "Some of the most impressive tech that Adobe showcases at its annual Max conference each year is the experimental features it's developing, and the latest of those tools are being announced today: they can transform images into explorable 3D scenes, design AI characters by talking to them, and turn photo editing into a copy/paste process.\n\nThe first (and weirdest, in my opinion) is Project Screen Test, which is designed to make AI-generated characters easier to develop and use for video content. Instead of just describing how the character should sound and behave in text prompts, the tool lets you talk to the character and direct them in an a …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1031505/adobe-max-2026-sneaks-experiments-ai",
+      "publishedAt": "2026-11-11T14:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-4f5d976578321d45:en",
+      "sourceId": "the-verge-4f5d976578321d45",
+      "lang": "en",
+      "title": "Not everyone is loving their new iPhone Duo",
+      "summary": "For most new relationships, two weeks probably isn't enough time to decide if you're ready for long-term commitment. But two weeks with a new phone? You probably know. The iPhone Duo launched just over two weeks ago, and that's been enough time for a subset of day-one buyers who aren't loving the phone to make […]",
+      "body": "For most new relationships, two weeks probably isn't enough time to decide if you're ready for long-term commitment. But two weeks with a new phone? You probably know. The iPhone Duo launched just over two weeks ago, and that's been enough time for a subset of day-one buyers who aren't loving the phone to make a decision: It's time to end things. Also, they wanted their $2,000 back.\n\nThis is to be expected, to an extent; the Duo just isn't a phone for everyone. It's an early adopter device - we called it \"a messy, expensive good time\" - and on top of that, the hinge appears to be suffering some first-gen growing pains . Despite all that, Appl …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1030398/iphone-duo-returns-screen-apps",
+      "publishedAt": "2026-11-11T13:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "applevis-apps-e5a6dccd3b9d2cec:en",
+      "sourceId": "applevis-apps-e5a6dccd3b9d2cec",
+      "lang": "en",
+      "title": "Clicklet",
+      "summary": "Clicklet lets the Camera Control button on your iPhone start your Apple Shortcuts. Pick one shortcut to launch with a press, or turn on Menu mode and choose from a few favorites each time. Clicklet opens Apple Shortcuts to run your workflow, so you'll see the usual Shortcuts screens, along with any permission prompts or app handoffs your shortcut needs. To set up your library, install the included Connect Clicklet helper. It brings in your shortcut names and small icon images, which appear in your library, in the menu, and while a shortcut opens. You can also search for a shortcut or type its name. If you used an earlier version, replace the old helper with the new one and refresh to get icons. From the menu, tap Configure to go back to setup. You can scroll the menu by dragging along its side margins. Your shortcut names, icons and selections stay on your device. There's no account, advertising, analytics, subscription or in-app purchase. Camera access supports the Camera Control and lock-screen handoff and shows a live preview; Clicklet doesn't save photos or videos. Launching while your iPhone is locked requires authentication. Requires iOS 18 or later and Apple's Shortcuts app. Launching from the button requires an iPhone with Camera Control; set Clicklet in Settings > Camera > Camera Control. Opening Clicklet on its own shows your setup without running a shortcut.",
+      "body": "Clicklet lets the Camera Control button on your iPhone start your Apple Shortcuts. Pick one shortcut to launch with a press, or turn on Menu mode and choose from a few favorites each time.\n\nClicklet opens Apple Shortcuts to run your workflow, so you'll see the usual Shortcuts screens, along with any permission prompts or app handoffs your shortcut needs.\n\nTo set up your library, install the included Connect Clicklet helper. It brings in your shortcut names and small icon images, which appear in your library, in the menu, and while a shortcut opens. You can also search for a shortcut or type its name. If you used an earlier version, replace the old helper with the new one and refresh to get icons.\n\nFrom the menu, tap Configure to go back to setup. You can scroll the menu by dragging along its side margins.\n\nYour shortcut names, icons and selections stay on your device. There's no account, advertising, analytics, subscription or in-app purchase. Camera access supports the Camera Control and lock-screen handoff and shows a live preview; Clicklet doesn't save photos or videos. Launching while your iPhone is locked requires authentication.\n\nRequires iOS 18 or later and Apple's Shortcuts app. Launching from the button requires an iPhone with Camera Control; set Clicklet in Settings > Camera > Camera Control. Opening Clicklet on its own shows your setup without running a shortcut.",
+      "sourceName": "AppleVis Apps",
+      "originalUrl": "https://www.applevis.com/apps/ios/utilities/clicklet",
+      "publishedAt": "2026-11-11T09:45:01.000Z",
+      "categories": [
+        "apple",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "accessible-android-b20052e3e5f6ec10:en",
+      "sourceId": "accessible-android-b20052e3e5f6ec10",
+      "lang": "en",
+      "title": "Sight Buddy",
+      "summary": "Sight Buddy is a free, open-source Android app for asking questions about images and text. Once the models are downloaded, it works offline with no…",
+      "body": "Published 11 November 2026 by Tommi Drophouse\n\nSight Buddy is a free, open-source Android app for asking questions about images and text. Once the models are downloaded, it works offline with no account, subscription, or usage limit.\n\nIt can chat about images and text, find the right page in a document, and share, save, or copy text. The app recommends a model setup that fits the phone, so users do not need technical knowledge.\n\nIt is a new release with early users internationally, and user feedback has helped shape the design.\n\nSource code: https://github.com/DrophouseLtd/SightBuddy\n\nFree or paid:\n\nAccessibility and User Comments:\n\nIn previous versions, there were some inconveniences with TalkBack labels and navigation, but these have already been fixed. All feedback is always welcome.\n\nLast Tested App version and Android version:\n\n2.4.3. Android 17\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility.",
+      "sourceName": "Accessible Android",
+      "originalUrl": "https://accessibleandroid.com/app/sight-buddy/",
+      "publishedAt": "2026-11-11T07:53:55.000Z",
+      "categories": [
+        "android",
+        "apps-accesibles",
+        "tecnologia-accesibilidad"
       ]
     },
     {
@@ -5651,24 +5811,6 @@
     },
     {
       "kind": "news",
-      "id": "9to5mac-5944421bdf560f8f:en",
-      "sourceId": "9to5mac-5944421bdf560f8f",
-      "lang": "en",
-      "title": "9to5Mac Daily: November 10, 2026 – iOS 27.2.1, HomeView rumors",
-      "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
-      "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/10/daily-november-10-2026/",
-      "publishedAt": "2026-11-11T00:00:34.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "android",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "engadget-1614e3c1ec472179:en",
       "sourceId": "engadget-1614e3c1ec472179",
       "lang": "en",
@@ -5682,22 +5824,6 @@
         "tecnologia-general",
         "apple",
         "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-ba5e6d7995d997d4:en",
-      "sourceId": "9to5mac-ba5e6d7995d997d4",
-      "lang": "en",
-      "title": "Apple confirms ongoing outage affecting iCloud and more [U]",
-      "summary": "Update, 5:18 p.m. PT: Apple says all outages have now been resolved. If you’re having problems accessing iCloud and other Apple services this evening, you’re not alone. Apple has confirmed an ongoing outage affecting iCloud, Find My, and more. more…",
-      "body": "Update, 5:18 p.m. PT: Apple says all outages have now been resolved.\n\nIf you’re having problems accessing iCloud and other Apple services this evening, you’re not alone. Apple has confirmed an ongoing outage affecting iCloud, Find My, and more.\n\nAccording to Apple’s System Status webpage , the outages began around 5:49 p.m. ET/2:49 p.m. PT. The company says the following services are experiencing outages:\n\nThe company also says Find My might be “slow or unavailable,” though it’s not classified as a full-fledged outage.\n\nA quick social media search reveals complaints from frustrated iCloud users. They say they can’t send or receive email via iCloud, can’t sign in to their Apple Account, and more. Some people report being signed out of their Apple Account altogether.\n\nAre you having any problems with iCloud, Find My, or your Apple Account today? Let us know down in the comments.\n\nFollow Chance : Threads , X , and Instagram",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/10/apple-confirms-ongoing-outage-affecting-icloud-and-more/",
-      "publishedAt": "2026-11-10T23:48:49.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
       ]
     },
     {
@@ -5733,70 +5859,6 @@
     },
     {
       "kind": "news",
-      "id": "the-verge-a9c566c20e573f29:en",
-      "sourceId": "the-verge-a9c566c20e573f29",
-      "lang": "en",
-      "title": "Oura is acquiring medical AI chatbot startup Counsel Health",
-      "summary": "Oura announced its quarterly earnings today and said it agreed to acquire Counsel Health for $625 million, after adding the company's AI chatbot to its app earlier this year. Counsel Health calls itself an \"AI-native primary care company,\" using the app to deliver AI-generated responses and insights based on users' health data reported from their […]",
-      "body": "Oura announced its quarterly earnings today and said it agreed to acquire Counsel Health for $625 million, after adding the company's AI chatbot to its app earlier this year . Counsel Health calls itself an \"AI-native primary care company,\" using the app to deliver AI-generated responses and insights based on users' health data reported from their wearables that can then proceed to a conversation with one of its in-house physicians.\n\nOura says it expects the deal to close before the end of the year.\n\nOura CEO Tom Hale said in an interview with Bloomberg that the acquisition is part of a plan to connect wearables, clinical AI, and access to do …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/gadgets/1031284/oura-counsel-health-acquisition",
-      "publishedAt": "2026-11-10T21:40:31.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apps-accesibles",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-80c15fed53ca8480:en",
-      "sourceId": "techcrunch-80c15fed53ca8480",
-      "lang": "en",
-      "title": "OpenAI acquires Odessia, travel startup created by Sonder founder",
-      "summary": "OpenAI has not yet said what its plans are for the future of travel. But Sonder founder Francis Davidson is a well-known figure in the travel industry.",
-      "body": "OpenAI has acquired an AI travel agent called Odessia, according to Odessia’s founder, Francis Davidson. Davidson says in a post announcing the deal that he’s now working for OpenAI, helping the AI lab with the future of travel.\n\nTerms of the deal were not disclosed, but this looks like an acqui-hire. Davidson’s announcement focused largely on how he built his AI travel agent Odessia by directing teams of AI agents. The year-old Odessia raised a $6 million pre-seed round led by Sequoia and launched its AI travel agent around five months ago. Davidson says that it had helped early adopters plan millions of dollars’ worth of travel, but the tool has already been shut down.\n\nAn OpenAI spokesperson confirmed the hire to TechCrunch. “We’re thrilled to welcome Francis to OpenAI. Francis is a proven founder who has built multiple businesses to help people travel, and we’re excited he’s chosen to build with us.”\n\nHowever the AI lab has not announced new travel-specific products or plans. It does, however, count such companies as Bookings.com, Expedia, and KAYAK as customers or partners. Travel is also one of the main areas that people are using personal AI assistants to help with. And, back in July 2025, when OpenAI launched its ChatGPT agent , it mentioned travel as one of its potential uses.\n\nOpenAI’s spokesperson didn’t have more to share on its plans for travel-related products, except to say that travel is one of the areas that chatbot users frequently ask about. “1.2 billion people turn to ChatGPT each week for help with everyday tasks — from understanding their health, figuring out what to make for dinner, building a budget, and even planning a trip. We see a real opportunity to make these experiences even more useful,” the spokesperson said.\n\nAcquiring Odessia is interesting for another reason. Davidson is well known in the travel industry after he founded a travel startup called Sonder as a college student in 2014. It was sort of like Airbnb, but it focused on short-term leasing of upscale apartments in major cities worldwide. The pandemic badly hurt it, and as it climbed out of that rut, it went public via a SPAC but didn’t raise as much money as it needed, Davidson later said in a post announcing his resignation as CEO in June 2025.\n\nWhen a key partnership with Marriott fell through , the company went into bankruptcy and wound down. The bankruptcy trustee sold Sonder’s name, trademarks, and website domain in 2026 to TravelAI, and that website operates as a curated guide to the kind of travel rental properties that Sonder was once known for. Prior to its downfall, Davidson had built Sonder into a unicorn with $143 million in revenues. While Sonder was not, ultimately, a success story, Davidson is the kind of battle-scarred founder that Silicon Valley often values.\n\nSo we’ll have to wait and see what OpenAI has in store now with travel, now that he’s joined the company.\n\nNote: This story was updated with OpenAI’s comments.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/11/10/openai-acquires-odessia-travel-startup-created-by-sonder-founder/",
-      "publishedAt": "2026-11-10T21:08:52.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-80a42d034d027098:en",
-      "sourceId": "techcrunch-80a42d034d027098",
-      "lang": "en",
-      "title": "OpenAI, Anthropic face new oversight as New York’s AI safety law takes effect",
-      "summary": "New York is preparing to enforce its sweeping AI safety law, requiring major developers like OpenAI and Anthropic to register, disclose safety practices, and report critical incidents or face fines.",
-      "body": "New York is gearing up to enforce one of the country’s most significant AI safety laws. The state opened a registration portal Tuesday, with which large frontier AI developers like Anthropic and OpenAI will be required to register by January 1, 2027.\n\nThe RAISE Act , New York’s safety and transparency bill, kicks in at the start of the year. It mandates that large frontier developers — companies with more than $500 million in annual revenue — have to publish safety frameworks on their websites, report critical safety incidents within 72 hours, and issue public model transparency reports.\n\nThe newly formed Office of Digital Innovation, Governance, Integrity, and Trust (DIGIT) will implement the RAISE Act and oversee large frontier AI labs. Penalties can be as high as $1 million for one violation and $3 million for subsequent violations.\n\nThe state also can bring enforcement actions against companies that fail to register with the new portal, though a spokesperson declined to provide specifics.\n\n“Tech moguls tell us that their vision for AI is inevitable,” Governor Kathy Hochul said Tuesday during a press briefing. “They tell us get on board or get left behind… That any collateral damage is worth it as long as we win the race to the AI cliff.”\n\nOn Tuesday, Hochul also launched the New York Center for AI Responsibility and Research based at State University of New York’s Binghamton University. The center will independently evaluate the safety, security, and operation of advanced AI systems and work with DIGIT to review companies’ safety frameworks. Hochul first announced the center in January with $55 million in donations and capital.\n\n“We’re building a national model for smart, sensible AI regulation, a model that puts communities above corporations and people above powerful technology,” Hochul said.\n\nThe RAISE Act isn’t the only safety law New York has passed. Last year, the state began enforcing a law that requires AI companion operators to regularly let users know they’re talking to a bot, and to make reasonable efforts to detect suicidal ideation and self-harm.\n\nIn October, Hochul signed a separate chatbot safety law for minors, restricting behaviors like deceptive human-like interactions, emotionally manipulative or sycophantic responses, and encouragement of behaviors like suicide or disordered eating. That law takes effect June 1, 2027.\n\nOther states have also passed similar AI safety and transparency bills to the RAISE Act. California’s SB 53, which took effect in January, mandates that frontier AI labs have in place and publish safety frameworks, enact whistleblower protections, and report critical safety incidents within 15 days. Illinois’ SB 315, which will go into effect at the start of 2027, has similar requirements, plus includes independent safety compliance audits.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/11/10/openai-anthropic-face-new-oversight-as-new-yorks-ai-safety-law-takes-effect/",
-      "publishedAt": "2026-11-10T20:52:13.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-54c8dfb5413a68f4:en",
-      "sourceId": "techcrunch-54c8dfb5413a68f4",
-      "lang": "en",
-      "title": "Proximal Ventures raises debut fund to back startups bringing AI to drug development",
-      "summary": "Former SignalFire investor Sahir Raoof raises $27.5 million for new fund targeting AI in pharma.",
-      "body": "While established venture firms continue to attract capital, first-time fund managers are facing one of the toughest fundraising environments in years. But that didn’t stop Sahir Raoof, a former SignalFire investor and executive at two healthcare startups, from raising $27.5 million for his first solo VC fund.\n\nRaoof’s firm, Proximal Ventures , is betting that AI can transform the tools, infrastructure, and services that support drug development.\n\nPharmaceutical companies have historically outsourced various stages of drug development to specialized service providers, from synthesizing thousands of molecular compounds and figuring out how to manufacture drugs at scale to analyzing clinical trial data.\n\n“For a long time, the assumption was that pharma is not a great buyer of software, but a really good buyer of services,” Raoof told TechCrunch.\n\nRaoof believes AI could automate much of that work, creating an opportunity for startups to capture billions of dollars in pharmaceutical industry spending. By using AI, these companies could deliver the same services at a lower cost and in significantly less time, he said.\n\nSome of the most valuable applications of AI so far have been in service-oriented industries like law and finance, Raoof said. He sees similar opportunities in pharmaceutical services.\n\nProximal plans to invest in pre-seed and seed-stage startups, writing checks from $500,000 to $1.5 million. The firm has already backed seven startups, including ChronicleBio, co-founded by former OpenAI executive Fidji Simo, which uses AI to analyze biological and medical data to better understand chronic diseases and identify potential treatments.\n\nBefore spending two years as a principal at SignalFire, Raoof led business development at clinical trial recruitment startup Iterative Health and previously oversaw partnerships at Flatiron Health, an oncology data company acquired by Roche for $1.9 billion in 2018.\n\n“If you’re building a company that’s selling into the life sciences, one of the hardest things to do is starting that initial commercial flywheel,” Raoof said.\n\nHis sales chops, deep understanding of the healthcare ecosystem, and extensive industry relationships gave limited partners, the investors in VC funds, the confidence that he could spot strong startups and help them land customers. Proximal’s backers include VC firms SignalFire and Kleiner Perkins, Bertelsmann Healthcare Investments, and individual investors such as Dimension Capital co-founders Nan Li and Zavain Dar.\n\nAmy Abernethy, co-founder of Highlander Health and former principal deputy commissioner of the FDA, is also an investor. She first met Raoof when they worked together at Flatiron Health, where she served as chief medical officer. She told TechCrunch that his ability to build relationships and spot industry bottlenecks made a lasting impression. Abernethy is convinced that his abilities, along with the understanding of what the healthcare market needs, will make him a successful investor.\n\nIt is these qualities that have helped Proximal invest in startups alongside some of the better-known, much larger funds, she added.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/11/10/proximal-ventures-raises-debut-fund-to-back-startups-bringing-ai-to-drug-development/",
-      "publishedAt": "2026-11-10T20:47:05.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "ars-technica-399474de8d10d741:en",
       "sourceId": "ars-technica-399474de8d10d741",
       "lang": "en",
@@ -5808,38 +5870,6 @@
       "publishedAt": "2026-11-10T20:30:01.000Z",
       "categories": [
         "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-86266b86773033af:en",
-      "sourceId": "the-verge-86266b86773033af",
-      "lang": "en",
-      "title": "Starlink Mini 2 adds a swappable battery",
-      "summary": "SpaceX announced a new version of its all-in-one satellite internet terminal that integrates a dish, Wi-Fi router, and now a battery into a single device about the size of a laptop. According to some users on X who shared screenshots of invitations to order Starlink Mini 2, the dish is priced at $999, which includes […]",
-      "body": "SpaceX announced a new version of its all-in-one satellite internet terminal that integrates a dish, Wi-Fi router, and now a battery into a single device about the size of a laptop. According to some users on X who shared screenshots of invitations to order Starlink Mini 2, the dish is priced at $999, which includes a full year of Roam Unlimited service that SpaceX values at $2,100.\n\nThe Starlink Mini 2 will run for up to 4.5 hours on a full charge, SpaceX claims, but that can be expanded by hot-swapping in additional batteries that will be sold separately, or by connecting the dish to a 60W power source over USB-C.\n\nDespite the addition of …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1031028/spacex-starlink-mini-2-satellite-internet-terminal-hot-swap-battery",
-      "publishedAt": "2026-11-10T19:19:12.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-78963f87dea2f348:en",
-      "sourceId": "ars-technica-78963f87dea2f348",
-      "lang": "en",
-      "title": "Pixel phones getting new icon styles, Create My Widget, and more in November Pixel Drop",
-      "summary": "Spruce up your home screen with expanded custom icons and AI-generated widgets.",
-      "body": "Google's Pixel phones get an update every month, but most are just security patches and bug fixes. The bigger changes are bundled into quarterly Pixel Drops, and one is rolling out today . The update brings a few new things, and many of the Gemini features previously exclusive to the latest Pixel phones will also expand to Google's Pixel 10 lineup.\n\nThe Pixel 11 was Google's first foray into \"Gemini Intelligence\" branding, something we'll see a lot more of going forward. Some of the features under that heading were limited to Google's newest phones (and in some cases, Samsung's phones). The November Pixel Drop will expand these AI features to the Pixel 10 lineup, but importantly, that doesn't include the budget-oriented Pixel 10a .\n\nFor starters, the Pixel 10 series will get the improved personalized suggestions (previously known as Magic Cue) that debuted on the Pixel 11 . This enables things like sending grocery lists to Google Keep from other apps and generating summaries from the context menu. Rambler, Google's AI-assisted voice input system, is also coming to the 2025 phones. Likewise, Gemini app automation will roll out on Pixel 10 with this update. This feature is still limited to select apps in rideshare, food delivery, travel, and a few other categories.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/gadgets/2026/11/november-pixel-drop-brings-gemini-intelligence-to-pixel-10-family/",
-      "publishedAt": "2026-11-10T19:00:26.000Z",
-      "categories": [
-        "tecnologia-general",
-        "android",
         "ia-accesibilidad"
       ]
     },
@@ -6135,22 +6165,6 @@
         "nvda",
         "windows",
         "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "applevis-apps-97426edd893ada85:en",
-      "sourceId": "applevis-apps-97426edd893ada85",
-      "lang": "en",
-      "title": "Sonnounce",
-      "summary": "Send announcements to the Sonos speakers in your house – in your own voice. Pick the speakers you want, hold the button down while you talk, and let go. The announcement plays right away. While the announcement plays, the music is turned down, and afterwards it comes back up. The announcement itself plays at the volume the speaker is already set to. NO ACCOUNT. NO CLOUD. NO SUBSCRIPTION. The app talks directly to the speakers on your own network. The sound is recorded on the phone, and the speaker fetches it from there. Your voice never leaves the house. An announcement can be up to five minutes long. CHOOSE YOUR OWN SOUND A short sound plays before the announcement, so everyone knows something is coming. Choose between the standard sound and 20 others – from bells and a gong to a cow, a rooster and a couple of farts – or turn the sound off. FROM YOUR WRIST With Apple Watch you can record an announcement straight from your wrist. The watch passes it on through your iPhone. SHORTCUTS Type a text in Shortcuts, and the phone reads it aloud on your speakers. It is read aloud in the language the app is set to. Use it in automations, for example when dinner is ready or when someone rings the doorbell. You can also have the most recent announcement repeated. AWAY FROM HOME With a Homey or Home Assistant you can send announcements home even when you are out. The app finds them by itself when you are at home, with no login. This requires Sonnounce to be installed on your Homey or in your Home Assistant as well. If you have several homes, each with its own Homey or Home Assistant, the speakers from all of them are in the same list. If you have a VPN to your home, you can also send announcements that way. SAVE THE ANNOUNCEMENTS With a Homey or Home Assistant you can save every announcement sent in the house. They are kept in one place at home – not in the cloud – and you can download them to your iPhone. Requires Sonos speakers on the same Wi-Fi as the phone.",
-      "body": "Send announcements to the Sonos speakers in your house – in your own voice. Pick the speakers you want, hold the button down while you talk, and let go. The announcement plays right away. While the announcement plays, the music is turned down, and afterwards it comes back up. The announcement itself plays at the volume the speaker is already set to. NO ACCOUNT. NO CLOUD. NO SUBSCRIPTION. The app talks directly to the speakers on your own network. The sound is recorded on the phone, and the speaker fetches it from there. Your voice never leaves the house. An announcement can be up to five minutes long. FROM YOUR WRIST With Apple Watch you can record an announcement straight from your wrist. The watch passes it on through your iPhone. SHORTCUTS Type a text in Shortcuts, and the phone reads it aloud on your speakers. It is read aloud in the language the app is set to. Use it in automations, for example when dinner is ready or when someone rings the doorbell. You can also have the most recent announcement repeated. AWAY FROM HOME With a Homey Pro you can send announcements home even when you are out. This requires the Sonnounce app to be installed on your Homey as well. If you have a VPN to your home, you can also send announcements that way. SAVE THE ANNOUNCEMENTS With a Homey you can save every announcement sent in the house. They are kept on your own Homey at home – not in the cloud – and you can download them to your iPhone. Requires Sonos speakers on the same Wi-Fi as the phone.",
-      "sourceName": "AppleVis Apps",
-      "originalUrl": "https://www.applevis.com/apps/ios/utilities/sonnounce",
-      "publishedAt": "2026-11-06T10:48:27.000Z",
-      "categories": [
-        "apple",
-        "apps-accesibles"
       ]
     },
     {

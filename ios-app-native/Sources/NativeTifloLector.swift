@@ -10,6 +10,9 @@ struct NativeReaderPreferences: Codable, Hashable {
     var speedIndex: Int? = nil
     var pitchIndex: Int? = nil
     var voiceID: String? = nil
+    var readingEngineIndex: Int? = nil
+    var geminiVoiceID: String? = nil
+    var phononVoiceID: String? = nil
     var textSize: Double? = nil
     var lineSpacingIndex: Int? = nil
     var strongText: Bool? = nil
@@ -1113,8 +1116,7 @@ struct NativeReaderLibraryScreen: View {
     @AppStorage("native-reading-voice-id") private var voiceID = ""
     @AppStorage("native-voiceover-library-detail-index") private var voiceOverDetailIndex = 0
     private let pitches: [Float] = [0.8, 0.9, 1.0, 1.1, 1.2]
-    private let speeds: [Double] = [0.75, 0.9, 1.0, 1.25, 1.5]
-
+ 
     private var folderFilterIndex: Binding<Int> {
         let names = library.folders
         return Binding(
@@ -1247,7 +1249,7 @@ struct NativeReaderLibraryScreen: View {
     private func play(_ document: NativeReadingDocument) {
         let latest = library.latest(document)
         let chosenSpeed = latest.readerPreferences?.speedIndex ?? speedIndex
-        let speed = speeds[max(0, min(speeds.count - 1, chosenSpeed))]
+        let speed = NativeReaderSpeedOptions.rate(for: chosenSpeed)
         let chosenPitch = latest.readerPreferences?.pitchIndex ?? pitchIndex
         let pitch = pitches[max(0, min(pitches.count - 1, chosenPitch))]
         if let paths = latest.trackPaths, !paths.isEmpty {
@@ -1817,6 +1819,9 @@ struct NativeReadingScreen: View {
     @State private var positionBeforeSearch: Int?
     @State private var programmaticFocusRequest = false
     @State private var actionMessage: String?
+    @State private var bookmarkMenuWasPlaying = false
+    @State private var bookmarkMenuActive = false
+    @State private var bookmarkMenuSaved = false
     @AccessibilityFocusState private var focusedFragment: Int?
 
     private let textLayout: NativeReaderTextLayout
@@ -1831,8 +1836,7 @@ struct NativeReadingScreen: View {
         "Desactivado", "5 minutos", "10 minutos", "15 minutos",
         "30 minutos", "45 minutos", "60 minutos"
     ]
-    private let speeds: [Double] = [0.75, 0.9, 1.0, 1.25, 1.5]
-    private let sleepMinutes: [Int] = [0, 5, 10, 15, 30, 45, 60]
+     private let sleepMinutes: [Int] = [0, 5, 10, 15, 30, 45, 60]
 
     init(document: NativeReadingDocument, speech: NativeReadingSpeech,
          startPercent: Int? = nil, startTrack: Int? = nil) {
@@ -1853,7 +1857,10 @@ struct NativeReadingScreen: View {
     private var effectiveTextSize: Double { latest.readerPreferences?.textSize ?? textSize }
     private var effectiveLineSpacing: Int { latest.readerPreferences?.lineSpacingIndex ?? lineSpacingIndex }
     private var effectiveStrongText: Bool { latest.readerPreferences?.strongText ?? strongText }
-    private var speed: Double { speeds[max(0, min(4, effectiveSpeedIndex))] }
+    private var speed: Double { NativeReaderSpeedOptions.rate(for: effectiveSpeedIndex) }
+    private var effectiveReadingEngine: Int { latest.readerPreferences?.readingEngineIndex ?? readingEngine }
+    private var effectiveGeminiVoice: String { latest.readerPreferences?.geminiVoiceID ?? geminiVoice }
+    private var effectivePhononVoice: String { latest.readerPreferences?.phononVoiceID ?? phononVoice }
     private var isAudioOnly: Bool { latest.body.isEmpty && !tracks.isEmpty }
     private var navigationOptions: [(unit: Int, label: String)] {
         var options: [(unit: Int, label: String)] = []
@@ -1941,13 +1948,13 @@ struct NativeReadingScreen: View {
         let remainder = String(document.body.dropFirst(readingOffset))
         guard !remainder.isEmpty else { return }
         let utf16Offset = String(document.body.prefix(readingOffset)).utf16.count
-        if readingEngine == 1 {
+        if effectiveReadingEngine == 1 {
             guard NativeVoiceCredentialStore.hasKey("gemini") else {
                 actionMessage = "Configura la clave Gemini en Motores externos."
                 return
             }
             do {
-                try speech.playGemini(remainder, voice: geminiVoice,
+                try speech.playGemini(remainder, voice: effectiveGeminiVoice,
                     baseUTF16: utf16Offset, totalUTF16: document.body.utf16.count,
                     baseCharacters: readingOffset,
                     onError: { message in
@@ -1956,13 +1963,13 @@ struct NativeReadingScreen: View {
                     })
                 actionMessage = "Generando el primer fragmento con Gemini. La reproducción comenzará cuando Google devuelva el audio."
             } catch { actionMessage = error.localizedDescription }
-        } else if readingEngine == 2 {
+        } else if effectiveReadingEngine == 2 {
             guard NativePhononRuntime.isUsable else {
                 actionMessage = "Instala el motor y modelo Phonon en Motores externos."
                 return
             }
             do {
-                try speech.playPhonon(remainder, voice: phononVoice,
+                try speech.playPhonon(remainder, voice: effectivePhononVoice,
                     baseUTF16: utf16Offset, totalUTF16: document.body.utf16.count,
                     baseCharacters: readingOffset,
                     onError: { message in actionMessage = message })
@@ -2423,7 +2430,7 @@ struct NativeReadingScreen: View {
                 let url = try await NativeGeminiAudioExport.export(
                     text: body, title: title, voice: voice,
                     format: audioExportFormat, engine: engine,
-                    speed: [0.75, 0.9, 1.0, 1.25, 1.5][max(0, min(4, effectiveSpeedIndex))],
+                    speed: NativeReaderSpeedOptions.rate(for: effectiveSpeedIndex),
                     pitch: pitch, language: audioExportLanguage,
                     progress: { finished, total in
                         audioExportProgress = "Generados \(finished) de \(total) fragmentos"
@@ -2660,6 +2667,36 @@ struct NativeReadingScreen: View {
         .background(TifloVisual.surfaceRaised)
     }
 
+    private func bookmarkMenuOpened() {
+        guard !bookmarkMenuActive else { return }
+        bookmarkMenuActive = true
+        bookmarkMenuSaved = false
+        bookmarkMenuWasPlaying = speech.isPlaying
+        if speech.isPlaying { pausePlayback() }
+    }
+
+    private func bookmarkMenuClosed() {
+        guard bookmarkMenuActive else { return }
+        bookmarkMenuActive = false
+        let shouldResume = bookmarkMenuWasPlaying
+        bookmarkMenuWasPlaying = false
+        // Dar tiempo a que VoiceOver termine el anuncio de confirmación.
+        // Se verifica en un iPhone real: SwiftUI no garantiza los callbacks
+        // de apertura/cierre de un menú contextual con todas las versiones VO.
+        if shouldResume {
+            Task { @MainActor in
+                try? await Task.sleep(for: .milliseconds(bookmarkMenuSaved ? 900 : 250))
+                if speech.isPaused { speech.resume(); applySleepTimer() }
+            }
+        }
+    }
+
+    private func bookmarkFromContextMenu() {
+        if !bookmarkMenuActive { bookmarkMenuOpened() }
+        addBookmark()
+        bookmarkMenuSaved = true
+    }
+
     private func readerFragment(at index: Int) -> some View {
         Text(textLayout.fragments[index])
             .font(.system(size: effectiveTextSize))
@@ -2668,6 +2705,14 @@ struct NativeReadingScreen: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .textSelection(.enabled)
             .accessibilityFocused($focusedFragment, equals: index)
+            .contextMenu {
+                Button("Crear marca") { bookmarkFromContextMenu() }
+            } preview: {
+                Text(textLayout.fragments[index])
+                    .lineLimit(5)
+                    .onAppear { bookmarkMenuOpened() }
+                    .onDisappear { bookmarkMenuClosed() }
+            }
     }
 
     private var readingContent: some View {
@@ -2688,14 +2733,6 @@ struct NativeReadingScreen: View {
                 }
                 .padding()
             }
-            // Ensayo de acceso rápido a marcas: mantener pulsada la zona
-            // de lectura dos segundos. El gesto es simultáneo para no
-            // sustituir el desplazamiento ni los controles accesibles.
-            // VoiceOver puede interceptarlo: validar en dispositivo real.
-            .simultaneousGesture(
-                LongPressGesture(minimumDuration: 2.0)
-                    .onEnded { _ in addBookmark() }
-            )
             .onChange(of: focusedFragment) { _, index in
                 guard let index, textLayout.fragmentStarts.indices.contains(index) else { return }
                 if programmaticFocusRequest {

@@ -1856,6 +1856,7 @@ struct NativeReadingScreen: View {
     @State private var programmaticFocusRequest = false
     @State private var actionMessage: String?
     @AccessibilityFocusState private var focusedFragment: Int?
+    @State private var lastReaderFragment: Int?
 
     private let textLayout: NativeReaderTextLayout
     private let wordCount: Int
@@ -2678,7 +2679,7 @@ struct NativeReadingScreen: View {
                 }
             }
             Button("Marcas guardadas") { showSavedMarks = true }
-            Button("Añadir marca") { addBookmark() }
+            Button("Añadir marca") { addBookmarkFromReaderSelection() }
             Button("Información") { showDocumentInformation = true }
                 .accessibilityHint("Abre los porcentajes, tiempos, páginas y datos de la obra.")
             Text(progressDescription)
@@ -2702,6 +2703,18 @@ struct NativeReadingScreen: View {
         .padding(.horizontal, 14)
         .padding(.vertical, 8)
         .background(TifloVisual.surfaceRaised)
+    }
+
+    // El botón y la acción general usan el último párrafo recorrido
+    // con VoiceOver cuando no hay reproducción activa.
+    private func addBookmarkFromReaderSelection() {
+        if tracks.isEmpty && !speech.isPlaying,
+           let fragment = focusedFragment ?? lastReaderFragment,
+           textLayout.fragmentStarts.indices.contains(fragment) {
+            bookmarkFromContextMenu(at: fragment)
+        } else {
+            addBookmark()
+        }
     }
 
     private func bookmarkFromContextMenu(at fragment: Int) {
@@ -2766,6 +2779,7 @@ struct NativeReadingScreen: View {
             }
             .onChange(of: focusedFragment) { _, index in
                 guard let index, textLayout.fragmentStarts.indices.contains(index) else { return }
+                lastReaderFragment = index
                 if programmaticFocusRequest {
                     // Recentrar exclusivamente al ordenar avanzar o retroceder.
                     proxy.scrollTo(index, anchor: .center)
@@ -3047,7 +3061,7 @@ struct NativeReadingScreen: View {
                 applySleepTimer()
             }
         }
-        .accessibilityAction(named: Text("Añadir marca")) { addBookmark() }
+        .accessibilityAction(named: Text("Añadir marca")) { addBookmarkFromReaderSelection() }
         .accessibilityAction(named: Text("Avanzar cinco por ciento")) {
             move(to: min(100, currentPercent + 5))
         }

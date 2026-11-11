@@ -50,7 +50,7 @@ struct NativeUpdatesScreen: View {
     // marcados como nuevos o vídeos del canal, sin noticias externas.
     private var latestUpdates: [NativeUpdateEntry] {
         let resources = catalog.resources
-            .filter { $0.lang == (languageIndex == 1 ? "en" : "es") && $0.isNew == true && $0.resourceURL != nil }
+            .filter { (languageIndex > 1 || $0.lang == NativeAppLanguage.code(for: languageIndex)) && $0.isNew == true && $0.resourceURL != nil }
             .map(NativeUpdateEntry.resource)
         let videos = catalog.videos
             .filter { $0.videoURL != nil }

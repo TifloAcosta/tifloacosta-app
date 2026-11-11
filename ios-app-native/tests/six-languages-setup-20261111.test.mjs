@@ -50,3 +50,22 @@ test('Los avisos de traducción y sus errores usan la lengua elegida de TifloAco
     }
   }
 });
+
+test('Todos los textos del catálogo inglés tienen traducción en los cuatro idiomas ampliados', () => {
+  const english = swift('en.lproj/Localizable.strings');
+  const keys = Array.from(english.matchAll(/^"([^"]+)"\s*=\s*".*";$/gm), m => m[1]);
+  assert.equal(new Set(keys).size, keys.length, 'El catálogo inglés tiene claves duplicadas');
+  for (const lang of ['pt', 'fr', 'it', 'de']) {
+    const translated = swift(lang + '.lproj/Localizable.strings');
+    const supported = new Set(Array.from(translated.matchAll(/^"([^"]+)"\s*=\s*".*";$/gm), m => m[1]));
+    const missing = keys.filter(key => !supported.has(key));
+    assert.deepEqual(missing, [], lang + ': textos de interfaz sin localizar');
+  }
+});
+
+test('VoiceOver localiza estado y progreso antes del título de cada documento', () => {
+  const reader = swift('NativeTifloLector.swift');
+  assert.match(reader, /NativeAppLanguage\.message\("%d por ciento leído", languageCode: code\)/);
+  assert.match(reader, /NativeAppLanguage\.message\(selectedDocumentIDs\.contains\(document\.id\)/);
+  assert.match(reader, /@AppStorage\("native-ios-language"\) private var languageIndex = 0/);
+});

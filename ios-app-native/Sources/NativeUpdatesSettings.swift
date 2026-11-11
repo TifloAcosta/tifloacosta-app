@@ -243,7 +243,7 @@ struct NativeSettingsScreen: View {
             Section("Idioma") {
                 NativeAdjustableChoice(
                     title: "Idioma de la aplicación",
-                    choices: ["Español", "English"],
+                    choices: NativeAppLanguage.names,
                     selectedIndex: $languageIndex
                 )
                 Text("El idioma elegido se conserva. El cambio se aplica a la interfaz nativa; los títulos y contenidos de fuentes externas mantienen su idioma original.")

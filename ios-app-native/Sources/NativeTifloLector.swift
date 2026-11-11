@@ -2481,7 +2481,7 @@ struct NativeReadingScreen: View {
     private var audioExportSheet: some View {
         NavigationStack {
             Form {
-                Section("Formato de salida") {
+                Section {
                     Picker("Formato", selection: $audioExportFormat) {
                         ForEach(NativeGeminiAudioExport.Format.allCases) { item in
                             Text(item.rawValue).tag(item)
@@ -2489,7 +2489,7 @@ struct NativeReadingScreen: View {
                     }
                 }
                 if audioExportFormat == .daisy {
-                    Section("Idioma del libro DAISY") {
+                    Section {
                         Picker("Idioma del contenido", selection: $audioExportLanguage) {
                             Text("Español").tag("es")
                             Text("Inglés").tag("en")
@@ -2501,7 +2501,7 @@ struct NativeReadingScreen: View {
                         Text("Selecciona el idioma del texto original, aunque utilices otro motor de voz.")
                     }
                 }
-                Section("Motor de voz") {
+                Section {
                     Picker("Motor", selection: $audioExportEngine) {
                         Text("Voces del sistema").tag(NativeGeminiAudioExport.Engine.system)
                         Text("Gemini").tag(NativeGeminiAudioExport.Engine.gemini)
@@ -2528,9 +2528,11 @@ struct NativeReadingScreen: View {
                         TextField("Nombre de la voz Phonon", text: $audioExportPhononVoice)
                     }
                 }
-                Section("Estado") {
-                    Text(audioExportProgress.isEmpty ? "Selecciona el formato y el motor." : audioExportProgress)
-                        .accessibilityAddTraits(.updatesFrequently)
+                Section {
+                    if audioExportBusy || !audioExportProgress.isEmpty {
+                        Text(audioExportProgress)
+                            .accessibilityAddTraits(.updatesFrequently)
+                    }
                     Button(audioExportBusy ? "Generando…" : "Generar y compartir") {
                         exportGeneratedAudio()
                     }

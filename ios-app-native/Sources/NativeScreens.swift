@@ -401,7 +401,6 @@ struct NativeAdjustableChoice: View {
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Text(LocalizedStringKey(title)))
         .accessibilityValue(Text(LocalizedStringKey(currentValue)))
-        .accessibilityHint("Desliza arriba o abajo para cambiar. Doble toque para la siguiente opción.")
         .accessibilityAdjustableAction { direction in
             switch direction {
             case .increment: advance(1)

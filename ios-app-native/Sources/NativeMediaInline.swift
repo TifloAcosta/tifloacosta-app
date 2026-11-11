@@ -61,7 +61,7 @@ struct NativeMediaInlineContent: View {
     }
 
     var body: some View {
-        Section("Filtrar contenidos multimedia") {
+        Section {
             NativeAdjustableChoice(
                 title: "Fuente o canal",
                 choices: sourceChoices,

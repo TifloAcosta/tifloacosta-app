@@ -162,7 +162,7 @@ struct NativeMediaScreen: View {
                     .foregroundStyle(TifloVisual.secondaryText)
                     .listRowBackground(TifloVisual.surfaceRaised)
             } else {
-                Section("Filtrar contenidos") {
+                Section {
                     NativeAdjustableChoice(
                         title: "Fuente o canal",
                         choices: sourceChoices,

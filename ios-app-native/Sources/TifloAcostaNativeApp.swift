@@ -18,6 +18,7 @@ struct TifloAcostaNativeApp: App {
     @AppStorage("native-ios-language") private var languageIndex = 0
 
     init() {
+        NativeAppLanguage.initializeIfMissing()
         UNUserNotificationCenter.current().delegate = NativeLocalNotificationDelegate.shared
     }
 
@@ -37,7 +38,7 @@ struct TifloAcostaNativeApp: App {
                 .task { await catalog.refresh(); await podcasts.refresh() }
                 .tint(TifloVisual.actionTint)
                 .environment(\.defaultMinListRowHeight, 48)
-                .environment(\.locale, Locale(identifier: languageIndex == 1 ? "en" : "es"))
+                .environment(\.locale, Locale(identifier: NativeAppLanguage.code(for: languageIndex)))
                 .tifloVisualPreferences()
                 .preferredColorScheme(schemeIndex == 1 ? .light : schemeIndex == 2 ? .dark : nil)
         }

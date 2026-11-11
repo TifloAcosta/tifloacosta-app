@@ -21,8 +21,12 @@ struct NativeOnDemandTranslationScreen: View {
     @State private var showingOriginal = false
     @State private var errorMessage: String?
 
+    private func announcement(_ text: String) -> String {
+        NativeAppLanguage.message(text, languageCode: targetLanguage)
+    }
+
     private var targetName: String {
-        Locale(identifier: "es").localizedString(forLanguageCode: targetLanguage)
+        Locale(identifier: targetLanguage).localizedString(forLanguageCode: targetLanguage)
             ?? targetLanguage
     }
 
@@ -135,14 +139,15 @@ struct NativeOnDemandTranslationScreen: View {
                     isTranslating = false
                     finished = true
                     UIAccessibility.post(notification: .announcement,
-                        argument: "Traducción terminada. Disponible en pantalla.")
+                        argument: announcement("Traducción terminada. Disponible en pantalla."))
                 }
             } catch {
                 await MainActor.run {
                     isTranslating = false
-                    errorMessage = "No se pudo completar la traducción: \(error.localizedDescription). Puedes intentarlo nuevamente."
+                    let format = announcement("No se pudo completar la traducción: %@. Puedes intentarlo nuevamente.")
+                    errorMessage = String(format: format, locale: Locale(identifier: targetLanguage), error.localizedDescription)
                     UIAccessibility.post(notification: .announcement,
-                        argument: "No se pudo completar la traducción.")
+                        argument: announcement("No se pudo completar la traducción."))
                 }
             }
         }

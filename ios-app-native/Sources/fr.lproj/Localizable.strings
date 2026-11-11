@@ -422,3 +422,6 @@
 "Los archivos descargados se guardan en esta sección hasta que los elimines. Importarlos en TifloLector añade una copia a su biblioteca." = "Les fichiers téléchargés restent ici jusqu’à leur suppression. Leur importation dans TifloLector ajoute une copie à la bibliothèque.";
 "Este archivo se eliminará de Mis descargas, pero no de TifloLector si ya lo importaste." = "Ce fichier sera supprimé des téléchargements, mais pas de TifloLector si tu l’as déjà importé.";
 "Doble toque para conocer el libro y consultar las ediciones disponibles." = "Touchez deux fois pour découvrir le livre et ses éditions disponibles.";
+"%d por ciento leído" = "%d pour cent lu";
+"formato %@" = "format %@";
+"carpeta %@" = "dossier %@";

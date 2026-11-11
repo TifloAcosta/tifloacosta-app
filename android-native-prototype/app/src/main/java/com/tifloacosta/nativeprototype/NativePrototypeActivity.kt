@@ -315,8 +315,11 @@ private fun PrototypeHome(
         MediaLogic.sources(mediaLoad.items, mediaIndex)
     val mediaSource = mediaSourceChoices.getOrNull(mediaSourceIndex)?.takeIf { mediaSourceIndex > 0 }
     val filteredMedia = MediaLogic.select(mediaLoad.items, mediaIndex, mediaSource, mediaLanguageIndex)
-    val mediaLanguages = if (english) listOf("All languages", "Spanish", "English")
-        else listOf("Todos los idiomas", "Español", "Inglés")
+    val mediaLanguages = listOf(
+        NativeAppLanguages.text(language, "allLanguages"),
+        NativeAppLanguages.text(language, "spanish"),
+        NativeAppLanguages.text(language, "english")
+    )
 
     val mediaChoices = if (english)
         listOf("News categories", "Podcasts", "YouTube channels", "All media")
@@ -331,9 +334,9 @@ private fun PrototypeHome(
 
     val title = if (context.packageName == "com.tifloacosta.app") "TifloAcosta"
         else if (english) "TifloAcosta Native Trial" else "TifloAcosta Nativa Pruebas"
-    val first = if (english) "News" else "Actualidad"
-    val second = if (english) "Resources" else "Recursos"
-    val third = if (english) "Videos" else "Vídeos"
+    val first = NativeAppLanguages.text(language, "news")
+    val second = NativeAppLanguages.text(language, "resources")
+    val third = NativeAppLanguages.text(language, "videos")
     val readerLabel = "TifloLector"
 
     BackHandler(enabled = playingMediaItem != null) { playingMediaItem = null }
@@ -396,31 +399,31 @@ private fun PrototypeHome(
                 )
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Button(onClick = { section = NativeDestinations.SEARCH }, modifier = Modifier.fillMaxWidth()) {
-                        Text(if (english) "Search" else "Buscar")
+                        Text(NativeAppLanguages.text(language, "search"))
                     }
                     Button(onClick = { section = NativeDestinations.NEW_CONTENT }, modifier = Modifier.fillMaxWidth()) {
-                        Text(if (english) "New content" else "Novedades")
+                        Text(NativeAppLanguages.text(language, "new"))
                     }
                     Button(onClick = { section = PrototypeNavigation.NEWS; visibleCount = 10 }, modifier = Modifier.fillMaxWidth()) { Text(first) }
                     Button(onClick = { section = PrototypeNavigation.RESOURCES; visibleCount = 10 }, modifier = Modifier.fillMaxWidth()) { Text(second) }
                     Button(onClick = { section = PrototypeNavigation.READER }, modifier = Modifier.fillMaxWidth()) { Text(readerLabel) }
                     Button(onClick = { section = NativeDestinations.DOWNLOADS }, modifier = Modifier.fillMaxWidth()) {
-                        Text(if (english) "Downloads" else "Descargas")
+                        Text(NativeAppLanguages.text(language, "downloads"))
                     }
                     Button(onClick = { section = NativeDestinations.FAVORITES }, modifier = Modifier.fillMaxWidth()) {
-                        Text(if (english) "Favorites" else "Favoritos")
+                        Text(NativeAppLanguages.text(language, "favorites"))
                     }
                     Button(onClick = { section = PrototypeNavigation.VIDEOS; visibleCount = 10 }, modifier = Modifier.fillMaxWidth()) { Text(third) }
                     Button(onClick = { section = NativeDestinations.PODCAST }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Podcasts" else "Podcasts") }
-                    Button(onClick = { section = NativeDestinations.CONTACT }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Contact" else "Contacto") }
-                    Button(onClick = { section = NativeDestinations.PRIVACY }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Privacy" else "Privacidad") }
-                    Button(onClick = { section = NativeDestinations.SETTINGS }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Settings" else "Configuración") }
+                    Button(onClick = { section = NativeDestinations.CONTACT }, modifier = Modifier.fillMaxWidth()) { Text(NativeAppLanguages.text(language, "contact")) }
+                    Button(onClick = { section = NativeDestinations.PRIVACY }, modifier = Modifier.fillMaxWidth()) { Text(NativeAppLanguages.text(language, "privacy")) }
+                    Button(onClick = { section = NativeDestinations.SETTINGS }, modifier = Modifier.fillMaxWidth()) { Text(NativeAppLanguages.text(language, "settings")) }
                 }
             } else {
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     TextButton(
                         onClick = { section = PrototypeNavigation.parentOf(section) }
-                    ) { Text(if (english) "Back" else "Volver") }
+                    ) { Text(NativeAppLanguages.text(language, "back")) }
                     Text(
                         when (section) {
                             PrototypeNavigation.NEWS -> first

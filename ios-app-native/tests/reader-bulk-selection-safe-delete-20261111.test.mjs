@@ -15,3 +15,18 @@ test('Borrado de seleccionados requiere confirmación con títulos', () => {
   assert.match(reader, /role: \.destructive/);
   assert.match(reader, /documentToDelete\?\.title/);
 });
+
+test('VoiceOver anuncia seleccionado o no seleccionado antes del título', () => {
+  const start = reader.indexOf('? "Seleccionado" : "No seleccionado"');
+  assert.ok(start >= 0, 'Falta el estado antes del título');
+  assert.ok(reader.slice(start, start + 120).includes('documentRowLabel(document)'));
+});
+
+test('Mover varios libros permite crear carpeta y los mueve tras confirmar', () => {
+  assert.match(reader, /Button\("Crear carpeta nueva"\)/);
+  assert.match(reader, /alert\("Crear carpeta para los documentos seleccionados"/);
+  assert.match(reader, /TextField\("Nombre de la carpeta nueva"/);
+  assert.match(reader, /guard library\.createFolder\(named: name\) else/);
+  assert.match(reader, /library\.moveDocuments\(withIDs: documentIDs, to: name\)/);
+  assert.match(reader, /finishSelection\(/);
+});

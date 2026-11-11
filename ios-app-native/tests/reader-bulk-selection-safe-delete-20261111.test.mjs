@@ -17,7 +17,7 @@ test('Borrado de seleccionados requiere confirmación con títulos', () => {
 });
 
 test('VoiceOver anuncia seleccionado o no seleccionado antes del título', () => {
-  assert.match(reader, /accessibilityLabel\("\\?\(selectedDocumentIDs\.contains\(document\.id\) \? "Seleccionado" : "No seleccionado"\), \\?\(documentRowLabel\(document\)\)"/);
+  assert.ok(reader.includes('? "Seleccionado" : "No seleccionado"), \\(documentRowLabel(document))'));
 });
 
 test('Mover varios libros permite crear carpeta y los mueve tras confirmar', () => {

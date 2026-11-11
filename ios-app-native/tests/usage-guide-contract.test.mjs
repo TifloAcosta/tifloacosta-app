@@ -9,7 +9,7 @@ const guide = read('NativeUsageGuide.swift');
 test('Guía de uso aparece como un botón independiente antes de las secciones', () => {
   assert.match(home, /NavigationLink\s*\{\s*NativeUsageGuideScreen\(\)/);
   assert.match(home, /searchPanel\s+guidePanel\s+destinationsPanel/);
-  assert.match(home, /\.accessibilityLabel\(languageIndex == 1 \? "User guide" : "Guía de uso"\)/);
+  assert.match(home, /\.accessibilityLabel\(Text\(LocalizedStringKey\("Guía de uso"\)\)\)/);
   assert.equal((home.match(/\bguidePanel\s*$/gm) ?? []).length, 1);
 });
 

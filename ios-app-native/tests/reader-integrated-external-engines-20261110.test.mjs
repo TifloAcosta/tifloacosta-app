@@ -13,8 +13,8 @@ test('Gemini y Phonon siguen disponibles para lectura directa, no solo exportaci
   assert.match(reader, /NativePhononRuntime\.generate\(text: segment, voice:/);
   assert.match(settings, /title: "Motor de lectura predeterminado"/);
   assert.match(settings, /choices: \["Voces del sistema", "Gemini", "Phonon"\]/);
-  assert.match(reader, /if readingEngine == 1/);
-  assert.match(reader, /if readingEngine == 2/);
+  assert.match(reader, /if effectiveReadingEngine == 1/);
+  assert.match(reader, /if effectiveReadingEngine == 2/);
   assert.match(settings, /NavigationLink\("Motores externos"\)/);
 });
 

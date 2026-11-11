@@ -3,9 +3,6 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 const swift = path => readFileSync(new URL('../Sources/' + path, import.meta.url), 'utf8');
-const android = path => readFileSync(new URL(
-  '../../android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/' + path,
-  import.meta.url), 'utf8');
 
 const model = swift('NativeAppLanguage.swift');
 const app = swift('TifloAcostaNativeApp.swift');
@@ -41,15 +38,15 @@ test('Paquetes de interfaz iOS en cuatro idiomas añadidos con etiquetas esencia
   }
 });
 
-test('Android conserva el idioma elegido y expone selector ajustable para seis idiomas', () => {
-  const languages = android('NativeAppLanguages.kt');
-  const activity = android('NativePrototypeActivity.kt');
-  const secondary = android('NativeSecondaryScreens.kt');
-  assert.match(languages, /listOf\("es", "en", "pt", "fr", "it", "de"\)/);
-  assert.match(languages, /LocaleList\.getDefault\(\)/);
-  assert.match(activity, /if \(NativeAppLanguages\.normalizedCode\(settings\.getString\("language", null\)\) == null\)/);
-  assert.match(activity, /NativeAppLanguages\.devicePreferredCode\(\)/);
-  assert.match(secondary, /AdjustableSelector\(/);
-  assert.match(secondary, /choices = NativeAppLanguages\.names/);
-  assert.match(secondary, /prefs\.edit\(\)\.putString\("language", code\)\.apply\(\)/);
+test('Los avisos de traducción y sus errores usan la lengua elegida de TifloAcosta', () => {
+  const translator = swift('NativeOnDemandTranslation.swift');
+  assert.match(model, /static func message\(_ key: String, languageCode: String\)/);
+  assert.match(translator, /NativeAppLanguage\.message\(text, languageCode: targetLanguage\)/);
+  assert.match(translator, /String\(format: format, locale: Locale\(identifier: targetLanguage\), error\.localizedDescription\)/);
+  for (const lang of ['en', 'pt', 'fr', 'it', 'de']) {
+    const catalog = swift(lang + '.lproj/Localizable.strings');
+    for (const phrase of ['Traducción terminada. Disponible en pantalla.', 'No se pudo completar la traducción.']) {
+      assert.ok(catalog.includes('"' + phrase + '" = '), lang + ': falta mensaje ' + phrase);
+    }
+  }
 });

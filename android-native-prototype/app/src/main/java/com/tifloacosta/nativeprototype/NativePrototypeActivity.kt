@@ -294,9 +294,11 @@ private fun PrototypeHome(
         mediaLoading = false
     }
 
-    val news = loaded.catalog.news.filter { it.language == language }
-    val resources = loaded.catalog.resources.filter { it.language == language }
-    val videoCatalog = loaded.catalog.videos.filter { it.language == language }
+    // Keep external articles in their original language. Catalog items do not
+    // necessarily exist in every UI language: do not hide them on that account.
+    val news = loaded.catalog.news.filter { language !in listOf("es", "en") || it.language == language }
+    val resources = loaded.catalog.resources.filter { language !in listOf("es", "en") || it.language == language }
+    val videoCatalog = loaded.catalog.videos.filter { language !in listOf("es", "en") || it.language == language }
     val newsCategories = CatalogLogic.newsCategories(news)
     val resourceCategories = CatalogLogic.resourceCategories(resources)
 

@@ -115,3 +115,11 @@
 "Abrir la aplicación Atajos" = "Ouvrir l’application Raccourcis";
 "Doble toque para leer la guía de esta sección." = "Touchez deux fois pour lire les instructions de cette rubrique.";
 "El idioma elegido se conserva. El cambio se aplica a la interfaz nativa; los títulos y contenidos de fuentes externas mantienen su idioma original." = "La langue choisie est conservée. La modification s’applique à l’interface native ; les titres et les contenus externes gardent leur langue d’origine.";
+"Traducción terminada. Disponible en pantalla." = "Traduction terminée. Disponible à l’écran.";
+"No se pudo completar la traducción." = "La traduction n’a pas pu être terminée.";
+"El documento original se conserva. La traducción solo comienza cuando la solicitas." = "Le document original est conservé. La traduction ne commence que sur demande.";
+"Pulsa «Traducir ahora» para solicitar la traducción." = "Sélectionne Traduire maintenant pour lancer la traduction.";
+"Cierra la traducción y vuelve al artículo o listado desde el que accediste." = "Ferme la traduction et reviens à l’article ou à la liste précédente.";
+"Regresa a la noticia sin modificar el texto original." = "Reviens à l’article sans modifier le texte d’origine.";
+"No se pudo completar la traducción: %@. Puedes intentarlo nuevamente." = "La traduction n’a pas pu être terminée : %@. Tu peux réessayer.";
+"Idioma solicitado: %@" = "Langue demandée : %@";

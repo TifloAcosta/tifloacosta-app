@@ -1819,9 +1819,6 @@ struct NativeReadingScreen: View {
     @State private var positionBeforeSearch: Int?
     @State private var programmaticFocusRequest = false
     @State private var actionMessage: String?
-    @State private var bookmarkMenuWasPlaying = false
-    @State private var bookmarkMenuActive = false
-    @State private var bookmarkMenuSaved = false
     @AccessibilityFocusState private var focusedFragment: Int?
 
     private let textLayout: NativeReaderTextLayout
@@ -2667,34 +2664,19 @@ struct NativeReadingScreen: View {
         .background(TifloVisual.surfaceRaised)
     }
 
-    private func bookmarkMenuOpened() {
-        guard !bookmarkMenuActive else { return }
-        bookmarkMenuActive = true
-        bookmarkMenuSaved = false
-        bookmarkMenuWasPlaying = speech.isPlaying
-        if speech.isPlaying { pausePlayback() }
-    }
-
-    private func bookmarkMenuClosed() {
-        guard bookmarkMenuActive else { return }
-        bookmarkMenuActive = false
-        let shouldResume = bookmarkMenuWasPlaying
-        bookmarkMenuWasPlaying = false
-        // Dar tiempo a que VoiceOver termine el anuncio de confirmación.
-        // Se verifica en un iPhone real: SwiftUI no garantiza los callbacks
-        // de apertura/cierre de un menú contextual con todas las versiones VO.
-        if shouldResume {
+    private func bookmarkFromContextMenu() {
+        let wasPlaying = speech.isPlaying
+        if wasPlaying { pausePlayback() }
+        addBookmark()
+        // SwiftUI no expone un evento fiable de apertura/cierre del menú.
+        // Solo se reanuda si la lectura estaba activa al elegir Crear marca.
+        // La pausa al abrir el menú necesitará un puente UIKit posterior.
+        if wasPlaying {
             Task { @MainActor in
-                try? await Task.sleep(for: .milliseconds(bookmarkMenuSaved ? 900 : 250))
+                try? await Task.sleep(for: .milliseconds(1000))
                 if speech.isPaused { speech.resume(); applySleepTimer() }
             }
         }
-    }
-
-    private func bookmarkFromContextMenu() {
-        if !bookmarkMenuActive { bookmarkMenuOpened() }
-        addBookmark()
-        bookmarkMenuSaved = true
     }
 
     private func readerFragment(at index: Int) -> some View {
@@ -2703,15 +2685,15 @@ struct NativeReadingScreen: View {
             .fontWeight(effectiveStrongText ? .bold : .regular)
             .lineSpacing(CGFloat(effectiveLineSpacing) * 4)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .textSelection(.enabled)
+            // La selección de texto abre el menú de edición de iOS e impide
+            // que VoiceOver presente el menú contextual de la aplicación.
+            // Dejar este elemento como lectura estática con una sola acción.
+            .contentShape(Rectangle())
             .accessibilityFocused($focusedFragment, equals: index)
             .contextMenu {
-                Button("Crear marca") { bookmarkFromContextMenu() }
-            } preview: {
-                Text(textLayout.fragments[index])
-                    .lineLimit(5)
-                    .onAppear { bookmarkMenuOpened() }
-                    .onDisappear { bookmarkMenuClosed() }
+                Button("Crear marca", systemImage: "bookmark") {
+                    bookmarkFromContextMenu()
+                }
             }
     }
 

@@ -427,3 +427,4 @@
 "carpeta %@" = "Ordner %@";
 "Marca guardada en %d por ciento." = "Lesezeichen bei %d Prozent gespeichert.";
 "Marca guardada en la pista %d, %d por ciento." = "Lesezeichen in Spur %d bei %d Prozent gespeichert.";
+"Solo avisos de nuevos recursos y vídeos propios al actualizar contenidos. No se envían avisos de Actualidad ni notificaciones con la app cerrada." = "Hinweise nur zu neuen TifloAcosta-Ressourcen und Videos beim Aktualisieren. Keine Nachrichtenhinweise oder Benachrichtigungen bei geschlossener App.";

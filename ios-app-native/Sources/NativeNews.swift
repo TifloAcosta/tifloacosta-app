@@ -89,6 +89,7 @@ struct NativeNewsScreen: View {
     @State private var visibleCount = 10
     @State private var selectedArticle: NativeCatalogItem?
     @State private var showingArticle = false
+    @State private var articleToTranslate: NativeCatalogItem?
     @State private var status: String?
 
     private var spanishNews: [NativeCatalogItem] {
@@ -287,6 +288,7 @@ struct NativeNewsScreen: View {
                             .accessibilityLabel(NativeNewsMetadata.accessibilitySummary(item))
                             .accessibilityHint("Doble toque para leer. Acciones: Leer, Guardar en TifloLector, Compartir y Abrir fuente original.")
                             .accessibilityAction(named: Text("Leer")) { read(item) }
+                            .accessibilityAction(named: Text("Traducir noticia")) { articleToTranslate = item }
                             .accessibilityAction(named: Text("Guardar en TifloLector")) { save(item) }
                             .accessibilityAction(named: Text("Compartir")) { share(item) }
                             .accessibilityAction(named: Text("Abrir fuente original")) { openOriginal(item) }
@@ -322,6 +324,20 @@ struct NativeNewsScreen: View {
         }
         .tifloScreenSurface()
         .navigationTitle("Actualidad")
+        .sheet(item: $articleToTranslate) { item in
+            NavigationStack {
+                if #available(iOS 18.0, *) {
+                    NativeOnDemandTranslationScreen(
+                        title: item.title,
+                        originalText: NativeNewsMetadata.articleText(item),
+                        sourceLanguage: item.lang,
+                        targetLanguage: languageIndex == 1 ? "en" : "es"
+                    )
+                } else {
+                    Text("La traducción integrada requiere iOS 18 o posterior.")
+                }
+            }
+        }
         .searchable(text: $query, prompt: "Buscar noticias")
         .onChange(of: query) { _, _ in visibleCount = 10 }
         .onChange(of: categoryIndex) { _, _ in visibleCount = 10 }

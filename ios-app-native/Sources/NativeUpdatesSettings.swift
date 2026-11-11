@@ -304,6 +304,16 @@ struct NativeSettingsScreen: View {
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
+            Section("Atajos de Siri") {
+                NavigationLink("Consultar y configurar atajos") {
+                    NativeSiriShortcutsHelpScreen()
+                }
+                Text("Las acciones de TifloAcosta están disponibles en Atajos de Apple. Puedes crear tus propias frases de activación desde la aplicación Atajos.")
+                    .font(.footnote)
+                    .foregroundStyle(TifloVisual.secondaryText)
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+
             Section("Notificaciones de novedades propias") {
                 Text("Los avisos automáticos solo pueden referirse a nuevos documentos de TifloAcosta y vídeos de su canal. No se generan avisos desde Actualidad ni desde fuentes externas.")
                     .font(.footnote)
@@ -350,5 +360,40 @@ struct NativeSettingsScreen: View {
         }
         .tifloScreenSurface()
         .navigationTitle("Configuración")
+    }
+}
+
+
+/// Guía accesible de las acciones App Intents registradas en TifloAcosta.
+struct NativeSiriShortcutsHelpScreen: View {
+    @Environment(\.openURL) private var openURL
+
+    private let shortcuts: [(name: String, detail: String)] = [
+        ("Abrir Actualidad", "Accede a las noticias de Actualidad."),
+        ("Abrir TifloLector", "Abre la biblioteca de documentos."),
+        ("Continuar el último libro", "Recupera la lectura del último libro abierto."),
+        ("Abrir Vídeos", "Abre la sección de vídeos accesibles.")
+    ]
+
+    var body: some View {
+        List {
+            Section("Atajos disponibles") {
+                ForEach(shortcuts.indices, id: \.self) { index in
+                    LabeledContent(shortcuts[index].name, value: shortcuts[index].detail)
+                }
+            }
+            Section("Frases personales") {
+                Text("Para usar tus propias órdenes, abre Atajos, crea un nuevo atajo y añade una de las acciones de TifloAcosta. Ponle el nombre con el que quieras llamarlo mediante Siri.")
+                Button("Abrir la aplicación Atajos") {
+                    guard let url = URL(string: "shortcuts://") else { return }
+                    openURL(url)
+                }
+                .accessibilityHint("Abre la aplicación Atajos de Apple, si está disponible.")
+                Text("No es necesario activar permisos individuales en TifloAcosta para utilizar las acciones publicadas por la aplicación.")
+                    .font(.footnote)
+            }
+        }
+        .tifloScreenSurface()
+        .navigationTitle("Atajos de Siri")
     }
 }

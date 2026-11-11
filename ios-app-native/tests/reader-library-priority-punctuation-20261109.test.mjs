@@ -11,8 +11,8 @@ test('La biblioteca presenta Importar y documentos antes de opciones secundarias
   const positions = [
     'Button("Importar", systemImage:',
     'Section("Mi biblioteca")',
-    'Section("Filtrar y ordenar")',
-    'Section("Carpetas")',
+    'title: "Detalle de VoiceOver"',
+    'Button("Carpetas")',
     'Section("Más opciones")'
   ].map(item => screen.indexOf(item));
   assert.ok(positions.every(value => value >= 0), 'Faltan secciones');
@@ -57,7 +57,7 @@ test('El gesto mágico funciona tanto en el botón principal como en el lector',
 });
 
 test('El detalle de biblioteca se puede seleccionar en tres niveles', () => {
-  assert.match(reader, /Información de cada documento con VoiceOver/);
+  assert.match(reader, /title: "Detalle de VoiceOver"/);
   assert.match(reader, /Título, porcentaje y formato/);
   assert.match(reader, /Título, porcentaje, formato y carpeta/);
   assert.match(reader, /if voiceOverDetailIndex == 1 \{ return formatLabel \}/);

@@ -16,11 +16,13 @@ test('The reading opening mode is persistent, opt-in and applied once per openin
   assert.match(reader, /if readingMode == 1 \{ play\(\) \}/);
 });
 
-test('General settings are folded into navigable destinations', () => {
-  for (const title of [
-    'Audio y voces', 'Modo de lectura', 'Ajustes visuales',
-    'Navegación y avances', 'Formatos de lectura'
-  ]) assert.ok(settings.includes('NavigationLink("' + title + '")'), title);
+test('Los controles de un solo ajuste están al alcance sin abrir otra pantalla', () => {
+  for (const title of ['Audio y voces','Ajustes visuales','Formatos de lectura']) {
+    assert.ok(settings.includes('NavigationLink("' + title + '")'), title);
+  }
+  assert.match(settings, /title: "Modo de lectura"/);
+  assert.match(settings, /title: "Unidad de avance"/);
+  assert.doesNotMatch(settings, /NavigationLink\("Modo de lectura"\)|NavigationLink\("Navegación y avances"\)/);
 });
 
 test('Per-document audio and visual settings persist and can inherit global defaults', () => {

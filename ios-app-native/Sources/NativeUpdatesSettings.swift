@@ -298,17 +298,11 @@ struct NativeSettingsScreen: View {
                 NavigationLink("Consultar y configurar atajos") {
                     NativeSiriShortcutsHelpScreen()
                 }
-                Text("Las acciones de TifloAcosta están disponibles en Atajos de Apple. Puedes crear tus propias frases de activación desde la aplicación Atajos.")
-                    .font(.footnote)
-                    .foregroundStyle(TifloVisual.secondaryText)
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
             Section("Notificaciones de novedades propias") {
-                Text("Los avisos automáticos solo pueden referirse a nuevos documentos de TifloAcosta y vídeos de su canal. No se generan avisos desde Actualidad ni desde fuentes externas.")
-                    .font(.footnote)
-                    .foregroundStyle(TifloVisual.secondaryText)
-                Text("Estos avisos locales se comprueban cuando la aplicación actualiza su catálogo; no son notificaciones push mientras está cerrada.")
+                Text("Solo avisos de nuevos recursos y vídeos propios al actualizar contenidos. No se envían avisos de Actualidad ni notificaciones con la app cerrada.")
                     .font(.footnote)
                     .foregroundStyle(TifloVisual.secondaryText)
                 if ownUpdatesNotifications.enabled {
@@ -332,16 +326,11 @@ struct NativeSettingsScreen: View {
                 NavigationLink("Comunicar incidencia de accesibilidad") {
                     NativeAccessibilityReportScreen()
                 }
-                Text("Puedes describir el problema y compartir un informe opcional con información técnica básica. El envío siempre depende de tu confirmación.")
-                    .font(.footnote)
-                    .foregroundStyle(TifloVisual.secondaryText)
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
             Section("Aplicación") {
                 LabeledContent("Versión", value: version)
-                Text("TifloAcosta para iOS utiliza pantallas nativas.")
-                    .font(.footnote)
                 Button("Sitio web de TifloAcosta") {
                     if let url = URL(string: "https://tifloacosta.com") { openURL(url) }
                 }

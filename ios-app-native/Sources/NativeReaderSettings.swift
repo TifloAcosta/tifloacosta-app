@@ -116,7 +116,6 @@ struct NativeReaderPunctuationControls: View {
             selectedIndex: $style
         )
         if style == 3 {
-            Text("Ajusta cada signo con deslizamientos arriba o abajo. Intervalos de 0 a 1,50 segundos, en pasos de 0,05.")
             NativeAdjustableChoice(title: "Pausa después de coma",
                                    choices: choices, selectedIndex: selection($comma))
             NativeAdjustableChoice(title: "Pausa después de punto y coma",
@@ -128,8 +127,6 @@ struct NativeReaderPunctuationControls: View {
             NativeAdjustableChoice(title: "Pausa después de salto de párrafo",
                                    choices: choices, selectedIndex: selection($paragraph))
         }
-        Text("Las pausas se aplican a la lectura con voces del sistema. La duración natural depende de la voz. No modifican los audiolibros grabados ni garantizan los mismos tiempos en Gemini o Phonon.")
-            .font(.footnote)
     }
 }
 
@@ -238,8 +235,6 @@ struct NativeReaderAudioControls: View {
                         set: { (geminiVoiceSelection ?? $geminiVoice).wrappedValue = NativeGeminiSpeech.voices[$0] }
                     )
                 )
-                Text("La voz seleccionada se utilizará según el ámbito de estos ajustes. La conexión de Gemini se configura en Motores externos.")
-                    .font(.footnote)
             } else {
                 Text("Gemini necesita una clave API guardada en Motores externos antes de reproducir.")
                     .font(.footnote)
@@ -253,51 +248,52 @@ struct NativeReaderAudioControls: View {
             choices: NativeReaderSpeedOptions.choices,
             selectedIndex: speedChoiceBinding
         )
-        NativeAdjustableChoice(
-            title: "Tono de lectura",
-            choices: ["Más grave", "Grave", "Normal", "Agudo", "Más agudo"],
-            selectedIndex: pitchSelection ?? $generalPitch
-        )
-        NativeReaderPunctuationControls()
-        NativeAdjustableChoice(
-            title: "Mostrar voces",
-            choices: ["Todos los idiomas", "Español", "Inglés"],
-            selectedIndex: $filterIndex
-        )
-        NativeAdjustableChoice(
-            title: "Voz del sistema",
-            choices: voiceChoices,
-            selectedIndex: selectedVoiceIndex
-        )
-        .onAppear {
-            personalVoiceStatus = AVSpeechSynthesizer.personalVoiceAuthorizationStatus
-            refreshVoices()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: AVSpeechSynthesizer.availableVoicesDidChangeNotification)) { _ in
-            refreshVoices()
-        }
-        if allowVoiceDownloads {
-            if personalVoiceStatus == .notDetermined {
-                Button("Permitir mi Voz personal") {
-                    Task {
-                        personalVoiceStatus = await AVSpeechSynthesizer.requestPersonalVoiceAuthorization()
-                        refreshVoices()
-                    }
-                }
-                .accessibilityHint("Solicita permiso al sistema para utilizar una Voz personal ya creada.")
-            } else if personalVoiceStatus == .denied {
-                Text("Voz personal no autorizada. El permiso puede cambiarse en Ajustes del iPhone.")
-            } else if personalVoiceStatus == .unsupported {
-                Text("Este dispositivo no admite el uso de Voz personal en TifloLector.")
+        if chosenEngine == 0 {
+            NativeAdjustableChoice(
+                title: "Tono de lectura",
+                choices: ["Más grave", "Grave", "Normal", "Agudo", "Más agudo"],
+                selectedIndex: pitchSelection ?? $generalPitch
+            )
+            NativeReaderPunctuationControls()
+            NativeAdjustableChoice(
+                title: "Mostrar voces",
+                choices: ["Todos los idiomas", "Español", "Inglés"],
+                selectedIndex: $filterIndex
+            )
+            NativeAdjustableChoice(
+                title: "Voz del sistema",
+                choices: voiceChoices,
+                selectedIndex: selectedVoiceIndex
+            )
+            .onAppear {
+                personalVoiceStatus = AVSpeechSynthesizer.personalVoiceAuthorizationStatus
+                refreshVoices()
             }
-            Text("El tono modifica la voz sintetizada, no los audiolibros grabados.").font(.footnote)
-            Button("Buscar más voces") { showVoiceHelp = true }
-                .accessibilityHint("Indica dónde descargar voces adicionales de iOS.")
-                .alert("Buscar más voces", isPresented: $showVoiceHelp) {
-                    Button("Entendido", role: .cancel) {}
-                } message: {
-                    Text("Abre Ajustes del iPhone, Accesibilidad, Contenido leído, Voces. Descarga las voces deseadas y vuelve al lector. Después entra de nuevo en Audio para actualizar la lista.")
+            .onReceive(NotificationCenter.default.publisher(for: AVSpeechSynthesizer.availableVoicesDidChangeNotification)) { _ in
+                refreshVoices()
+            }
+            if allowVoiceDownloads {
+                if personalVoiceStatus == .notDetermined {
+                    Button("Permitir mi Voz personal") {
+                        Task {
+                            personalVoiceStatus = await AVSpeechSynthesizer.requestPersonalVoiceAuthorization()
+                            refreshVoices()
+                        }
+                    }
+                    .accessibilityHint("Solicita permiso al sistema para utilizar una Voz personal ya creada.")
+                } else if personalVoiceStatus == .denied {
+                    Text("Voz personal no autorizada. El permiso puede cambiarse en Ajustes del iPhone.")
+                } else if personalVoiceStatus == .unsupported {
+                    Text("Este dispositivo no admite el uso de Voz personal en TifloLector.")
                 }
+                Button("Buscar más voces") { showVoiceHelp = true }
+                    .accessibilityHint("Indica dónde descargar voces adicionales de iOS.")
+                    .alert("Buscar más voces", isPresented: $showVoiceHelp) {
+                        Button("Entendido", role: .cancel) {}
+                    } message: {
+                        Text("Abre Ajustes del iPhone, Accesibilidad, Contenido leído, Voces. Descarga las voces deseadas y vuelve al lector. Después entra de nuevo en Audio para actualizar la lista.")
+                    }
+            }
         }
         // Voice list is refreshed when this control group appears.
     }
@@ -337,21 +333,15 @@ struct NativeReaderVisualControls: View {
             choices: ["Normal", "Cómodo", "Amplio"],
             selectedIndex: spacingSelection ?? $generalSpacing
         )
-        NativeAdjustableChoice(
-            title: "Texto reforzado",
-            choices: ["Desactivado", "Activado"],
-            selectedIndex: Binding(
-                get: { strongTextBinding.wrappedValue ? 1 : 0 },
-                set: { strongTextBinding.wrappedValue = $0 == 1 }
-            )
-        )
+        Toggle("Texto reforzado", isOn: strongTextBinding)
+            .tint(TifloVisual.actionTint)
     }
 }
 
 struct NativeReaderAudioSettingsScreen: View {
     var body: some View {
         List {
-            Section("Audio y voces del sistema") { NativeReaderAudioControls() }
+            NativeReaderAudioControls()
         }
         .tifloScreenSurface()
         .navigationTitle("Audio y voces")
@@ -362,7 +352,7 @@ struct NativeReaderAudioSettingsScreen: View {
 struct NativeReaderVisualSettingsScreen: View {
     var body: some View {
         List {
-            Section("Presentación del documento") { NativeReaderVisualControls() }
+            NativeReaderVisualControls()
         }
         .tifloScreenSurface()
         .navigationTitle("Ajustes visuales")
@@ -459,9 +449,9 @@ struct NativeReaderDocumentAudioSettingsScreen: View {
 
     var body: some View {
         NavigationStack {
-            List { Section("Audio de esta obra") {
+            List {
                 NativeReaderDocumentAudioControls(document: document)
-            }}
+            }
             .tifloScreenSurface()
             .navigationTitle("Audio")
             .navigationBarTitleDisplayMode(.inline)
@@ -476,9 +466,9 @@ struct NativeReaderDocumentVisualSettingsScreen: View {
 
     var body: some View {
         NavigationStack {
-            List { Section("Presentación de esta obra") {
+            List {
                 NativeReaderDocumentVisualControls(document: document)
-            }}
+            }
             .tifloScreenSurface()
             .navigationTitle("Visual")
             .navigationBarTitleDisplayMode(.inline)
@@ -496,17 +486,15 @@ struct NativeReaderDocumentSettingsScreen: View {
         NavigationStack {
             List {
                 NavigationLink("Audio y voz") {
-                    List { Section("Audio de esta obra") {
+                    List {
                         NativeReaderDocumentAudioControls(document: document)
-                    }}.tifloScreenSurface().navigationTitle("Audio")
+                    }.tifloScreenSurface().navigationTitle("Audio")
                 }
                 NavigationLink("Ajustes visuales") {
-                    List { Section("Presentación de esta obra") {
+                    List {
                         NativeReaderDocumentVisualControls(document: document)
-                    }}.tifloScreenSurface().navigationTitle("Visual")
+                    }.tifloScreenSurface().navigationTitle("Visual")
                 }
-                Text("Estos ajustes se guardan para esta obra. Las demás seguirán los ajustes generales.")
-                    .font(.footnote)
                 Button("Usar ajustes generales en esta obra") {
                     library.resetPreferences(document)
                 }
@@ -529,37 +517,19 @@ struct NativeReaderSettingsScreen: View {
             NavigationLink("Audio y voces") { NativeReaderAudioSettingsScreen() }
             NavigationLink("Motores externos") { NativeReaderExternalVoiceSettingsScreen() }
                 .accessibilityHint("Configura las voces, la clave API de Gemini y Phonon.")
-            NavigationLink("Modo de lectura") {
-                List {
-                    Section("Al abrir un documento") {
-                        NativeAdjustableChoice(
-                            title: "Modo de lectura",
-                            choices: ["Manual, reproducir cuando lo indique",
-                                      "Automático, reproducir al abrir"],
-                            selectedIndex: $readingMode
-                        )
-                        Text("La elección se conserva hasta que la cambies. El modo manual permite leer el documento visualmente sin iniciar la voz.")
-                            .font(.footnote)
-                    }
-                }
-                .tifloScreenSurface()
-                .navigationTitle("Modo de lectura")
-            }
+            NativeAdjustableChoice(
+                title: "Modo de lectura",
+                choices: ["Manual, reproducir cuando lo indique",
+                          "Automático, reproducir al abrir"],
+                selectedIndex: $readingMode
+            )
             NavigationLink("Ajustes visuales") { NativeReaderVisualSettingsScreen() }
             NavigationLink("OCR y reconocimiento") { NativeReaderOCRSettingsScreen() }
-            NavigationLink("Navegación y avances") {
-                List {
-                    Section("Desplazamiento") {
-                        NativeAdjustableChoice(
-                            title: "Unidad de avance",
-                            choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
-                            selectedIndex: $navigationUnit
-                        )
-                    }
-                }
-                .tifloScreenSurface()
-                .navigationTitle("Navegación y avances")
-            }
+            NativeAdjustableChoice(
+                title: "Unidad de avance",
+                choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
+                selectedIndex: $navigationUnit
+            )
             NavigationLink("Formatos de lectura") { NativeReaderSupportedFormatsScreen() }
         }
         .tifloScreenSurface()

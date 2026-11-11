@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 const reader = readFileSync(new URL('../Sources/NativeTifloLector.swift', import.meta.url), 'utf8');
 
 test('Selección múltiple mantiene fuera los controles de biblioteca general', () => {
-  assert.match(reader, /if !selectionMode \{\s*Section\("Filtrar y ordenar"\)/);
+  assert.match(reader, /if !selectionMode \{\s*Section \{\s*NativeAdjustableChoice\(/);
   assert.match(reader, /if !selectionMode \{\s*Section \{\s*Button\("Importar"/);
   assert.match(reader, /selectionMode \? "Terminar selección" : "Selección"/);
 });

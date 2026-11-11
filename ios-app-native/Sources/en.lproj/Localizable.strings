@@ -375,3 +375,4 @@
 "carpeta %@" = "folder %@";
 "Marca guardada en %d por ciento." = "Bookmark saved at %d percent.";
 "Marca guardada en la pista %d, %d por ciento." = "Bookmark saved on track %d, %d percent.";
+"Solo avisos de nuevos recursos y vídeos propios al actualizar contenidos. No se envían avisos de Actualidad ni notificaciones con la app cerrada." = "Only new TifloAcosta resources and videos are checked when content is refreshed. No News alerts or notifications while the app is closed.";

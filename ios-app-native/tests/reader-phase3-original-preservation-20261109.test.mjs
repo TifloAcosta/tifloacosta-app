@@ -128,7 +128,7 @@ test("fase 3: selección múltiple VoiceOver con estados y acciones en lote", ()
 });
 
 test("fase 3: carpetas como navegación y crear al inicio del listado", () => {
-  assert.match(reader, /Button\("Ver por carpetas"\)/);
+  assert.match(reader, /Button\("Carpetas"\)/);
   assert.match(reader, /\.sheet\(isPresented: \$showFolderPicker\)/);
   assert.match(reader, /Section\("Mis carpetas"\)/);
   assert.match(reader, /Button\("Crear carpeta"\)/);

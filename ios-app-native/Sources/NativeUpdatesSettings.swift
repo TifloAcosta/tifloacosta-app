@@ -1,3 +1,4 @@
+import AppIntents
 import Foundation
 import SwiftUI
 import UIKit
@@ -364,32 +365,35 @@ struct NativeSettingsScreen: View {
 }
 
 
-/// Guía accesible de las acciones App Intents registradas en TifloAcosta.
+/// Presenta las frases publicadas en AppShortcutsProvider, no solo nombres de acciones.
 struct NativeSiriShortcutsHelpScreen: View {
-    @Environment(\.openURL) private var openURL
-
-    private let shortcuts: [(name: String, detail: String)] = [
-        ("Abrir Actualidad", "Accede a las noticias de Actualidad."),
-        ("Abrir TifloLector", "Abre la biblioteca de documentos."),
-        ("Continuar el último libro", "Recupera la lectura del último libro abierto."),
-        ("Abrir Vídeos", "Abre la sección de vídeos accesibles.")
+    private let shortcuts: [(name: String, phrase: String, detail: String)] = [
+        ("Abrir Actualidad", "Abre Actualidad en TifloAcosta", "Abre la sección Actualidad."),
+        ("Abrir TifloLector", "Abre TifloLector en TifloAcosta", "Abre la biblioteca."),
+        ("Continuar el último libro", "Continúa el libro en TifloAcosta", "Reanuda la lectura guardada."),
+        ("Abrir Vídeos", "Abre vídeos en TifloAcosta", "Abre los vídeos accesibles.")
     ]
 
     var body: some View {
         List {
-            Section("Atajos disponibles") {
+            Section("Frases registradas para Siri") {
+                Text("Al invocar Siri, utiliza la frase completa, incluido «en TifloAcosta». El nombre corto de una acción no equivale necesariamente a su frase de activación.")
+                    .font(.footnote)
                 ForEach(shortcuts.indices, id: \.self) { index in
-                    LabeledContent(shortcuts[index].name, value: shortcuts[index].detail)
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(shortcuts[index].name).font(.headline)
+                        Text("Di a Siri: \(shortcuts[index].phrase)")
+                        Text(shortcuts[index].detail).font(.footnote)
+                    }
+                    .accessibilityElement(children: .combine)
                 }
             }
-            Section("Frases personales") {
-                Text("Para usar tus propias órdenes, abre Atajos, crea un nuevo atajo y añade una de las acciones de TifloAcosta. Ponle el nombre con el que quieras llamarlo mediante Siri.")
-                Button("Abrir la aplicación Atajos") {
-                    guard let url = URL(string: "shortcuts://") else { return }
-                    openURL(url)
-                }
-                .accessibilityHint("Abre la aplicación Atajos de Apple, si está disponible.")
-                Text("No es necesario activar permisos individuales en TifloAcosta para utilizar las acciones publicadas por la aplicación.")
+            Section("Personalizar con Atajos de Apple") {
+                Text("Si Siri no reconoce una frase, abre la colección de atajos de TifloAcosta en la aplicación Atajos y comprueba que las acciones estén disponibles. Puedes crear un atajo personal con el nombre que prefieras.")
+                ShortcutsLink()
+                    .accessibilityLabel("Abrir los atajos de TifloAcosta")
+                    .accessibilityHint("Accede directamente a las acciones de TifloAcosta en la aplicación Atajos.")
+                Text("Estas acciones son proporcionadas por TifloAcosta. Su disponibilidad en Siri depende del registro y reconocimiento del sistema.")
                     .font(.footnote)
             }
         }

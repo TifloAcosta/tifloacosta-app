@@ -137,7 +137,7 @@ struct NativeTifloAppShortcuts: AppShortcutsProvider {
         )
         AppShortcut(
             intent: NativeCreateBookmarkIntent(),
-            phrases: ["Crea una marca en \\(.applicationName)"],
+            phrases: ["Crea una marca en \(.applicationName)"],
             shortTitle: "Crear marca",
             systemImageName: "bookmark"
         )

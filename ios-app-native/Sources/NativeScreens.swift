@@ -432,6 +432,10 @@ struct NativeResourcesScreen: View {
             case 1: return true
             case 2: return item.lang == "es"
             case 3: return item.lang == "en"
+            case 4: return item.lang == "pt"
+            case 5: return item.lang == "fr"
+            case 6: return item.lang == "it"
+            case 7: return item.lang == "de"
             default: return languageIndex > 1 || item.lang == NativeAppLanguage.code(for: languageIndex)
             }
         }
@@ -550,7 +554,8 @@ struct NativeResourcesScreen: View {
             Section("Filtrar recursos") {
                 NativeAdjustableChoice(
                     title: "Idioma de los recursos",
-                    choices: ["Idioma de la aplicación", "Todos los idiomas", "Español", "Inglés"],
+                    choices: ["Idioma de la aplicación", "Todos los idiomas", "Español", "Inglés",
+                                  "Português", "Français", "Italiano", "Deutsch"],
                     selectedIndex: $languageFilterIndex
                 )
                 NativeAdjustableChoice(

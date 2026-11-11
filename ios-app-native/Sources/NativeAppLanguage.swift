@@ -29,6 +29,15 @@ enum NativeAppLanguage {
         defaults.set(preferredIndex(preferredLanguages), forKey: storageKey)
     }
 
+    /// UIAccessibility announcements are plain strings, so the SwiftUI locale
+    /// environment cannot localize them automatically. Resolve against the
+    /// language explicitly selected inside the app instead of the phone locale.
+    static func message(_ key: String, languageCode: String) -> String {
+        guard let path = Bundle.main.path(forResource: languageCode, ofType: "lproj"),
+              let bundle = Bundle(path: path) else { return key }
+        return bundle.localizedString(forKey: key, value: key, table: nil)
+    }
+
     static func code(for index: Int) -> String {
         codes.indices.contains(index) ? codes[index] : "es"
     }

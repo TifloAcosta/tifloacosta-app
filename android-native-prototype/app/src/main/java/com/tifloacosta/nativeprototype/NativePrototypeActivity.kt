@@ -105,7 +105,12 @@ class NativePrototypeActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        selectedLanguage = settings.getString("language", "").orEmpty()
+        // Choose the first supported system language only on initial setup.
+        // Existing explicit choices survive updates and device language changes.
+        if (NativeAppLanguages.normalizedCode(settings.getString("language", null)) == null) {
+            settings.edit().putString("language", NativeAppLanguages.devicePreferredCode()).apply()
+        }
+        selectedLanguage = settings.getString("language", "es").orEmpty()
         selectedTheme = settings.getString("theme", "system").orEmpty()
         selectedEnlarged = settings.getBoolean("enlarged", false)
         settings.registerOnSharedPreferenceChangeListener(settingsListener)
@@ -238,8 +243,8 @@ private fun PrototypeHome(
         }
     }
     LaunchedEffect(Unit) { account.checkSession() }
-    val language = if (languageOverride in listOf("es", "en")) languageOverride
-        else if (Locale.getDefault().language == "en") "en" else "es"
+    val language = NativeAppLanguages.normalizedCode(languageOverride)
+        ?: NativeAppLanguages.devicePreferredCode()
     val english = language == "en"
     var loaded by remember { mutableStateOf(CatalogLoad(Catalog())) }
     var loading by remember { mutableStateOf(true) }

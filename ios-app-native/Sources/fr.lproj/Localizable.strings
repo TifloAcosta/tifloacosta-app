@@ -425,3 +425,5 @@
 "%d por ciento leído" = "%d pour cent lu";
 "formato %@" = "format %@";
 "carpeta %@" = "dossier %@";
+"Marca guardada en %d por ciento." = "Signet enregistré à %d pour cent.";
+"Marca guardada en la pista %d, %d por ciento." = "Signet enregistré sur la piste %d, à %d pour cent.";

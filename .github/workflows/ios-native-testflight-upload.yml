@@ -7,10 +7,13 @@ on:
 # Enviar beta correctiva TTS: pausa real, reanudación por cursor y toque mágico; prueba de puntuación satisfactoria. 2026-11-10.
 # Solicitud de TestFlight 2026-11-10: búsqueda dentro del documento, marcas accesibles, ajustes de Gemini y correcciones iOS.
 # Reintento validado: actualización de prueba automatizada para ubicación de motores en Audio.
-  # Únicamente un cambio de este archivo en esta rama dispara la beta.
+  # Solo una modificación deliberada de este archivo dispara la beta en ramas autorizadas.
+  # Candidata íntegra posterior a beta 139: librería, TTS, marcas, Siri, vídeos y traducción.
+  # Las pruebas de contratos y compilación firmada deben pasar antes de la subida.
   push:
     branches:
       - integration/ios-phases1-6-consolidated-20261110
+      - integration/ios-beta139-complete-20261111
     paths:
       - '.github/workflows/ios-native-testflight-upload.yml'
 permissions:

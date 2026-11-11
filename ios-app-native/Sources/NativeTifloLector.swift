@@ -2664,13 +2664,19 @@ struct NativeReadingScreen: View {
         .background(TifloVisual.surfaceRaised)
     }
 
-    private func bookmarkFromContextMenu() {
+    private func bookmarkFromContextMenu(at fragment: Int) {
         let wasPlaying = speech.isPlaying
         if wasPlaying { pausePlayback() }
+        // Si no hay lectura en curso, la marca pertenece al fragmento
+        // accesible elegido, no a la última posición de otra pantalla.
+        if !wasPlaying && !speech.isPaused,
+           textLayout.fragmentStarts.indices.contains(fragment) {
+            readingOffset = textLayout.fragmentStarts[fragment]
+            currentPercent = min(100, Int(Double(readingOffset) * 100 /
+                Double(max(1, textLayout.totalCharacters))))
+        }
         addBookmark()
-        // SwiftUI no expone un evento fiable de apertura/cierre del menú.
-        // Solo se reanuda si la lectura estaba activa al elegir Crear marca.
-        // La pausa al abrir el menú necesitará un puente UIKit posterior.
+        // No reanudar una lectura detenida de antemano.
         if wasPlaying {
             Task { @MainActor in
                 try? await Task.sleep(for: .milliseconds(1000))
@@ -2690,9 +2696,13 @@ struct NativeReadingScreen: View {
             // Dejar este elemento como lectura estática con una sola acción.
             .contentShape(Rectangle())
             .accessibilityFocused($focusedFragment, equals: index)
+            .accessibilityHint("Acciones disponibles: Crear marca. Con VoiceOver, usa las acciones del rotor.")
+            .accessibilityAction(named: Text("Crear marca")) {
+                bookmarkFromContextMenu(at: index)
+            }
             .contextMenu {
                 Button("Crear marca", systemImage: "bookmark") {
-                    bookmarkFromContextMenu()
+                    bookmarkFromContextMenu(at: index)
                 }
             }
     }

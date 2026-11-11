@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 const reader = readFileSync(new URL('../Sources/NativeTifloLector.swift', import.meta.url), 'utf8');
 
 test('Carpetas ofrecen navegación independiente de los filtros globales', () => {
-  assert.match(reader, /Button\("Ver por carpetas"\)/);
+  assert.match(reader, /Button\("Carpetas"\)/);
   assert.match(reader, /NavigationLink\("Sin carpeta"\)/);
   assert.match(reader, /folderDocumentsView\(folder\)/);
   assert.match(reader, /library\.documents\.filter \{ \$0\.folderName == folder \}/);

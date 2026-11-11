@@ -250,50 +250,52 @@ struct NativeReaderAudioControls: View {
             choices: NativeReaderSpeedOptions.choices,
             selectedIndex: speedChoiceBinding
         )
-        NativeAdjustableChoice(
-            title: "Tono de lectura",
-            choices: ["Más grave", "Grave", "Normal", "Agudo", "Más agudo"],
-            selectedIndex: pitchSelection ?? $generalPitch
-        )
-        NativeReaderPunctuationControls()
-        NativeAdjustableChoice(
-            title: "Mostrar voces",
-            choices: ["Todos los idiomas", "Español", "Inglés"],
-            selectedIndex: $filterIndex
-        )
-        NativeAdjustableChoice(
-            title: "Voz del sistema",
-            choices: voiceChoices,
-            selectedIndex: selectedVoiceIndex
-        )
-        .onAppear {
-            personalVoiceStatus = AVSpeechSynthesizer.personalVoiceAuthorizationStatus
-            refreshVoices()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: AVSpeechSynthesizer.availableVoicesDidChangeNotification)) { _ in
-            refreshVoices()
-        }
-        if allowVoiceDownloads {
-            if personalVoiceStatus == .notDetermined {
-                Button("Permitir mi Voz personal") {
-                    Task {
-                        personalVoiceStatus = await AVSpeechSynthesizer.requestPersonalVoiceAuthorization()
-                        refreshVoices()
-                    }
-                }
-                .accessibilityHint("Solicita permiso al sistema para utilizar una Voz personal ya creada.")
-            } else if personalVoiceStatus == .denied {
-                Text("Voz personal no autorizada. El permiso puede cambiarse en Ajustes del iPhone.")
-            } else if personalVoiceStatus == .unsupported {
-                Text("Este dispositivo no admite el uso de Voz personal en TifloLector.")
+        if chosenEngine == 0 {
+            NativeAdjustableChoice(
+                title: "Tono de lectura",
+                choices: ["Más grave", "Grave", "Normal", "Agudo", "Más agudo"],
+                selectedIndex: pitchSelection ?? $generalPitch
+            )
+            NativeReaderPunctuationControls()
+            NativeAdjustableChoice(
+                title: "Mostrar voces",
+                choices: ["Todos los idiomas", "Español", "Inglés"],
+                selectedIndex: $filterIndex
+            )
+            NativeAdjustableChoice(
+                title: "Voz del sistema",
+                choices: voiceChoices,
+                selectedIndex: selectedVoiceIndex
+            )
+            .onAppear {
+                personalVoiceStatus = AVSpeechSynthesizer.personalVoiceAuthorizationStatus
+                refreshVoices()
             }
-            Button("Buscar más voces") { showVoiceHelp = true }
-                .accessibilityHint("Indica dónde descargar voces adicionales de iOS.")
-                .alert("Buscar más voces", isPresented: $showVoiceHelp) {
-                    Button("Entendido", role: .cancel) {}
-                } message: {
-                    Text("Abre Ajustes del iPhone, Accesibilidad, Contenido leído, Voces. Descarga las voces deseadas y vuelve al lector. Después entra de nuevo en Audio para actualizar la lista.")
+            .onReceive(NotificationCenter.default.publisher(for: AVSpeechSynthesizer.availableVoicesDidChangeNotification)) { _ in
+                refreshVoices()
+            }
+            if allowVoiceDownloads {
+                if personalVoiceStatus == .notDetermined {
+                    Button("Permitir mi Voz personal") {
+                        Task {
+                            personalVoiceStatus = await AVSpeechSynthesizer.requestPersonalVoiceAuthorization()
+                            refreshVoices()
+                        }
+                    }
+                    .accessibilityHint("Solicita permiso al sistema para utilizar una Voz personal ya creada.")
+                } else if personalVoiceStatus == .denied {
+                    Text("Voz personal no autorizada. El permiso puede cambiarse en Ajustes del iPhone.")
+                } else if personalVoiceStatus == .unsupported {
+                    Text("Este dispositivo no admite el uso de Voz personal en TifloLector.")
                 }
+                Button("Buscar más voces") { showVoiceHelp = true }
+                    .accessibilityHint("Indica dónde descargar voces adicionales de iOS.")
+                    .alert("Buscar más voces", isPresented: $showVoiceHelp) {
+                        Button("Entendido", role: .cancel) {}
+                    } message: {
+                        Text("Abre Ajustes del iPhone, Accesibilidad, Contenido leído, Voces. Descarga las voces deseadas y vuelve al lector. Después entra de nuevo en Audio para actualizar la lista.")
+                    }
+            }
         }
         // Voice list is refreshed when this control group appears.
     }

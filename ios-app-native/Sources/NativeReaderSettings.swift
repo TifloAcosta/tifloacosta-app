@@ -337,21 +337,15 @@ struct NativeReaderVisualControls: View {
             choices: ["Normal", "Cómodo", "Amplio"],
             selectedIndex: spacingSelection ?? $generalSpacing
         )
-        NativeAdjustableChoice(
-            title: "Texto reforzado",
-            choices: ["Desactivado", "Activado"],
-            selectedIndex: Binding(
-                get: { strongTextBinding.wrappedValue ? 1 : 0 },
-                set: { strongTextBinding.wrappedValue = $0 == 1 }
-            )
-        )
+        Toggle("Texto reforzado", isOn: strongTextBinding)
+            .tint(TifloVisual.actionTint)
     }
 }
 
 struct NativeReaderAudioSettingsScreen: View {
     var body: some View {
         List {
-            Section("Audio y voces del sistema") { NativeReaderAudioControls() }
+            NativeReaderAudioControls()
         }
         .tifloScreenSurface()
         .navigationTitle("Audio y voces")
@@ -362,7 +356,7 @@ struct NativeReaderAudioSettingsScreen: View {
 struct NativeReaderVisualSettingsScreen: View {
     var body: some View {
         List {
-            Section("Presentación del documento") { NativeReaderVisualControls() }
+            NativeReaderVisualControls()
         }
         .tifloScreenSurface()
         .navigationTitle("Ajustes visuales")
@@ -476,9 +470,9 @@ struct NativeReaderDocumentVisualSettingsScreen: View {
 
     var body: some View {
         NavigationStack {
-            List { Section("Presentación de esta obra") {
+            List {
                 NativeReaderDocumentVisualControls(document: document)
-            }}
+            }
             .tifloScreenSurface()
             .navigationTitle("Visual")
             .navigationBarTitleDisplayMode(.inline)
@@ -496,17 +490,15 @@ struct NativeReaderDocumentSettingsScreen: View {
         NavigationStack {
             List {
                 NavigationLink("Audio y voz") {
-                    List { Section("Audio de esta obra") {
+                    List {
                         NativeReaderDocumentAudioControls(document: document)
-                    }}.tifloScreenSurface().navigationTitle("Audio")
+                    }.tifloScreenSurface().navigationTitle("Audio")
                 }
                 NavigationLink("Ajustes visuales") {
-                    List { Section("Presentación de esta obra") {
+                    List {
                         NativeReaderDocumentVisualControls(document: document)
-                    }}.tifloScreenSurface().navigationTitle("Visual")
+                    }.tifloScreenSurface().navigationTitle("Visual")
                 }
-                Text("Estos ajustes se guardan para esta obra. Las demás seguirán los ajustes generales.")
-                    .font(.footnote)
                 Button("Usar ajustes generales en esta obra") {
                     library.resetPreferences(document)
                 }
@@ -529,37 +521,19 @@ struct NativeReaderSettingsScreen: View {
             NavigationLink("Audio y voces") { NativeReaderAudioSettingsScreen() }
             NavigationLink("Motores externos") { NativeReaderExternalVoiceSettingsScreen() }
                 .accessibilityHint("Configura las voces, la clave API de Gemini y Phonon.")
-            NavigationLink("Modo de lectura") {
-                List {
-                    Section("Al abrir un documento") {
-                        NativeAdjustableChoice(
-                            title: "Modo de lectura",
-                            choices: ["Manual, reproducir cuando lo indique",
-                                      "Automático, reproducir al abrir"],
-                            selectedIndex: $readingMode
-                        )
-                        Text("La elección se conserva hasta que la cambies. El modo manual permite leer el documento visualmente sin iniciar la voz.")
-                            .font(.footnote)
-                    }
-                }
-                .tifloScreenSurface()
-                .navigationTitle("Modo de lectura")
-            }
+            NativeAdjustableChoice(
+                title: "Modo de lectura",
+                choices: ["Manual, reproducir cuando lo indique",
+                          "Automático, reproducir al abrir"],
+                selectedIndex: $readingMode
+            )
             NavigationLink("Ajustes visuales") { NativeReaderVisualSettingsScreen() }
             NavigationLink("OCR y reconocimiento") { NativeReaderOCRSettingsScreen() }
-            NavigationLink("Navegación y avances") {
-                List {
-                    Section("Desplazamiento") {
-                        NativeAdjustableChoice(
-                            title: "Unidad de avance",
-                            choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
-                            selectedIndex: $navigationUnit
-                        )
-                    }
-                }
-                .tifloScreenSurface()
-                .navigationTitle("Navegación y avances")
-            }
+            NativeAdjustableChoice(
+                title: "Unidad de avance",
+                choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
+                selectedIndex: $navigationUnit
+            )
             NavigationLink("Formatos de lectura") { NativeReaderSupportedFormatsScreen() }
         }
         .tifloScreenSurface()

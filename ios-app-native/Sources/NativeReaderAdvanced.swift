@@ -68,7 +68,7 @@ struct NativeReaderOCRSettingsScreen: View {
     @AppStorage("native-reader-ocr-accuracy-index") private var accuracyIndex = 0
     var body: some View {
         List {
-            Section("Reconocimiento de texto") {
+            Section {
                 NativeAdjustableChoice(
                     title: "Idioma del OCR",
                     choices: ["Detectar automáticamente", "Español", "Inglés", "Español e inglés"],
@@ -79,9 +79,6 @@ struct NativeReaderOCRSettingsScreen: View {
                     choices: ["Mayor precisión", "Más rápido"],
                     selectedIndex: $accuracyIndex
                 )
-            }
-            Section {
-                Text("Se aplica a las imágenes y a las páginas escaneadas de PDF que se importen desde ahora. Las páginas que ya contienen texto lo conservan. Los ajustes son permanentes hasta que se cambien.")
             }
         }
         .tifloScreenSurface()

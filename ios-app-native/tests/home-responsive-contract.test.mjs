@@ -23,11 +23,11 @@ test('la tipografía dinámica no se recorta ni se desactiva en la portada', () 
 });
 
 test('la portada conserva búsqueda y rutas sin controles duplicados', () => {
-  assert.match(home, /TextField\\("Buscar con TifloAcosta"/);
-  assert.match(home, /\\.onSubmit\\(search\\)/);
-  assert.match(home, /if !searchText\\.trimmingCharacters\\(in: \\.whitespacesAndNewlines\\)\\.isEmpty/);
-  assert.match(home, /Button\\("Buscar", action: search\\)/);
-  assert.match(home, /\.navigationDestination\(for: NativeDestination\.self\)/);
-  assert.match(home, /\.accessibilityLabel\(Text\(LocalizedStringKey\(destination\.rawValue\)\)\)/);
-  assert.match(home, /\.accessibilityAddTraits\(\.isHeader\)/);
+  assert.ok(home.includes('TextField("Buscar con TifloAcosta", text: $searchText)'));
+  assert.ok(home.includes('.onSubmit(search)'));
+  assert.ok(home.includes('if !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty'));
+  assert.ok(home.includes('Button("Buscar", action: search)'));
+  assert.match(home, /\\.navigationDestination\\(for: NativeDestination\\.self\\)/);
+  assert.match(home, /\\.accessibilityLabel\\(Text\\(LocalizedStringKey\\(destination\\.rawValue\\)\\)\\)/);
+  assert.match(home, /\\.accessibilityAddTraits\\(\\.isHeader\\)/);
 });

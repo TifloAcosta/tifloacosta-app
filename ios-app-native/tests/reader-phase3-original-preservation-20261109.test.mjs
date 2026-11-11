@@ -127,11 +127,12 @@ test("fase 3: selección múltiple VoiceOver con estados y acciones en lote", ()
   assert.match(reader, /func markFavorites\(withIDs ids: Set<UUID>, favorite: Bool\)/);
 });
 
-test("fase 3: botón único de carpetas con crear al inicio del listado", () => {
-  assert.match(reader, /Button\("Carpeta: \\\(selectedFolderLabel\)"\)/);
+test("fase 3: carpetas como navegación y crear al inicio del listado", () => {
+  assert.match(reader, /Button\("Ver por carpetas"\)/);
   assert.match(reader, /\.sheet\(isPresented: \$showFolderPicker\)/);
-  assert.match(reader, /Section\("Elegir carpeta"\)/);
+  assert.match(reader, /Section\("Mis carpetas"\)/);
   assert.match(reader, /Button\("Crear carpeta"\)/);
+  assert.match(reader, /folderDocumentsView\(folder\)/);
 });
 test("fase 3: último abierto persiste sin romper documentos anteriores", () => {
   assert.match(reader, /var lastOpenedAt: Date\? = nil/);

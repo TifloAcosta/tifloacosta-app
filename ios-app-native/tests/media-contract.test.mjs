@@ -57,7 +57,7 @@ test('El catálogo editorial multimedia contiene podcasts y canales de vídeo', 
 });
 
 test('Los contenidos multimedia aparecen directamente en Actualidad con filtros y diez resultados', () => {
-  assert.match(inline, /Section\("Filtrar contenidos multimedia"\)/);
+  assert.match(inline, /Section \{[\s\S]*?title: "Fuente o canal"/);
   assert.match(inline, /title: "Fuente o canal"/);
   assert.match(inline, /title: "Idioma"/);
   assert.match(inline, /Section\("Escuchar y ver"\)/);

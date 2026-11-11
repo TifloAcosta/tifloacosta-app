@@ -663,3 +663,9 @@
 "Ve a Ajustes del iPhone, Botón de Acción, Atajo y selecciona Crear marca en TifloLector." = "In iPhone Settings, open Action Button, Shortcut, then select Create Bookmark in TifloLector.";
 "Durante la lectura" = "While reading";
 "Con un libro abierto, ejecuta el atajo para guardar la posición sin detener la reproducción. También puedes utilizar la acción Crear marca del rotor de VoiceOver." = "With a book open, run the shortcut to bookmark your position without stopping playback. You can also use VoiceOver rotor actions.";
+
+"Elementos compartidos" = "Shared items";
+"Revisar elementos pendientes" = "Review pending items";
+"Los documentos y textos compartidos se incorporan a TifloLector automáticamente. Consulta esta sección para revisar enlaces y elementos que no se hayan podido importar." = "Shared documents and text are added automatically to TifloLector. Check this section for links and items that could not be imported.";
+"Abrir contacto y redes" = "Open contact and social networks";
+"Consultar privacidad y accesibilidad" = "View privacy and accessibility";

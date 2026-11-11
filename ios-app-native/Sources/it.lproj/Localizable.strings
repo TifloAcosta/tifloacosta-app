@@ -666,3 +666,16 @@
 "Título A a Z" = "Titolo dalla A alla Z";
 "Título Z a A" = "Titolo dalla Z alla A";
 "Último abierto" = "Ultimo aperto";
+"Creación rápida de marcas" = "Segnalibri rapidi";
+"Crear marca en TifloLector" = "Crea segnalibro in TifloLector";
+"Guarda una marca en la posición actual sin interrumpir la reproducción." = "Salva un segnalibro nella posizione attuale senza interrompere la riproduzione.";
+"Abre un libro en TifloLector para crear una marca." = "Apri un libro in TifloLector per creare un segnalibro.";
+"Preparar el atajo" = "Configura comando rapido";
+"En Atajos, crea uno nuevo, añade la acción Crear marca en TifloLector y guárdalo con ese nombre." = "In Comandi Rapidi, crea un comando, aggiungi Crea segnalibro in TifloLector e salvalo con quel nome.";
+"Abrir Atajos" = "Apri Comandi Rapidi";
+"Triple toque posterior" = "Triplo tocco posteriore";
+"Ve a Ajustes del iPhone, Accesibilidad, Tocar, Tocar atrás y Triple toque. Selecciona el atajo Crear marca en TifloLector." = "In Impostazioni iPhone, Accessibilità, Tocco, Tocco posteriore, Triplo tocco, scegli il comando rapido per il segnalibro.";
+"Botón de Acción" = "Tasto Azione";
+"Ve a Ajustes del iPhone, Botón de Acción, Atajo y selecciona Crear marca en TifloLector." = "In Impostazioni iPhone, Tasto Azione, Comando rapido, scegli Crea segnalibro in TifloLector.";
+"Durante la lectura" = "Durante la lettura";
+"Con un libro abierto, ejecuta el atajo para guardar la posición sin detener la reproducción. También puedes utilizar la acción Crear marca del rotor de VoiceOver." = "Con un libro aperto, esegui il comando rapido per salvare la posizione senza fermare la lettura. Puoi anche usare il rotore VoiceOver.";

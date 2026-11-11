@@ -2707,14 +2707,12 @@ struct NativeReadingScreen: View {
     private func bookmarkFromContextMenu(at fragment: Int) {
         let wasPlaying = speech.isPlaying
         if wasPlaying { pausePlayback() }
-        // Si no hay lectura en curso, la marca pertenece al fragmento
-        // accesible elegido, no a la última posición de otra pantalla.
-        if !wasPlaying && !speech.isPaused,
-           textLayout.fragmentStarts.indices.contains(fragment) {
-            readingOffset = textLayout.fragmentStarts[fragment]
-            currentPercent = min(100, Int(Double(readingOffset) * 100 /
-                Double(max(1, textLayout.totalCharacters))))
-        }
+        // La marca siempre pertenece al párrafo sobre el que actuó VoiceOver,
+        // aunque la reproducción estuviera en pausa o todavía activa.
+        guard textLayout.fragmentStarts.indices.contains(fragment) else { return }
+        readingOffset = textLayout.fragmentStarts[fragment]
+        currentPercent = min(100, Int(Double(readingOffset) * 100 /
+            Double(max(1, textLayout.totalCharacters))))
         addBookmark()
         // No reanudar una lectura detenida de antemano.
         if wasPlaying {
@@ -2740,10 +2738,11 @@ struct NativeReadingScreen: View {
             .accessibilityAction(named: Text("Crear marca")) {
                 bookmarkFromContextMenu(at: index)
             }
-            .contextMenu {
-                Button("Crear marca", systemImage: "bookmark") {
-                    bookmarkFromContextMenu(at: index)
-                }
+            // VoiceOver convierte doble toque sostenido en una pulsación larga.
+            // Ejecutar la marca directamente, sin depender de que el menú
+            // contextual de SwiftUI se abra sobre un Text no interactivo.
+            .onLongPressGesture(minimumDuration: 0.7) {
+                bookmarkFromContextMenu(at: index)
             }
     }
 

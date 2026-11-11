@@ -1773,6 +1773,9 @@ struct NativeReadingScreen: View {
     @State private var positionBeforeSearch: Int?
     @State private var programmaticFocusRequest = false
     @State private var actionMessage: String?
+    @State private var bookmarkMenuWasPlaying = false
+    @State private var bookmarkMenuActive = false
+    @State private var bookmarkMenuSaved = false
     @AccessibilityFocusState private var focusedFragment: Int?
 
     private let textLayout: NativeReaderTextLayout
@@ -2616,6 +2619,36 @@ struct NativeReadingScreen: View {
         .background(TifloVisual.surfaceRaised)
     }
 
+    private func bookmarkMenuOpened() {
+        guard !bookmarkMenuActive else { return }
+        bookmarkMenuActive = true
+        bookmarkMenuSaved = false
+        bookmarkMenuWasPlaying = speech.isPlaying
+        if speech.isPlaying { pausePlayback() }
+    }
+
+    private func bookmarkMenuClosed() {
+        guard bookmarkMenuActive else { return }
+        bookmarkMenuActive = false
+        let shouldResume = bookmarkMenuWasPlaying
+        bookmarkMenuWasPlaying = false
+        // Dar tiempo a que VoiceOver termine el anuncio de confirmación.
+        // Se verifica en un iPhone real: SwiftUI no garantiza los callbacks
+        // de apertura/cierre de un menú contextual con todas las versiones VO.
+        if shouldResume {
+            Task { @MainActor in
+                try? await Task.sleep(for: .milliseconds(bookmarkMenuSaved ? 900 : 250))
+                if speech.isPaused { speech.resume(); applySleepTimer() }
+            }
+        }
+    }
+
+    private func bookmarkFromContextMenu() {
+        if !bookmarkMenuActive { bookmarkMenuOpened() }
+        addBookmark()
+        bookmarkMenuSaved = true
+    }
+
     private func readerFragment(at index: Int) -> some View {
         Text(textLayout.fragments[index])
             .font(.system(size: effectiveTextSize))
@@ -2624,6 +2657,14 @@ struct NativeReadingScreen: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .textSelection(.enabled)
             .accessibilityFocused($focusedFragment, equals: index)
+            .contextMenu {
+                Button("Crear marca") { bookmarkFromContextMenu() }
+            } preview: {
+                Text(textLayout.fragments[index])
+                    .lineLimit(5)
+                    .onAppear { bookmarkMenuOpened() }
+                    .onDisappear { bookmarkMenuClosed() }
+            }
     }
 
     private var readingContent: some View {
@@ -2644,14 +2685,6 @@ struct NativeReadingScreen: View {
                 }
                 .padding()
             }
-            // Ensayo de acceso rápido a marcas: mantener pulsada la zona
-            // de lectura dos segundos. El gesto es simultáneo para no
-            // sustituir el desplazamiento ni los controles accesibles.
-            // VoiceOver puede interceptarlo: validar en dispositivo real.
-            .simultaneousGesture(
-                LongPressGesture(minimumDuration: 2.0)
-                    .onEnded { _ in addBookmark() }
-            )
             .onChange(of: focusedFragment) { _, index in
                 guard let index, textLayout.fragmentStarts.indices.contains(index) else { return }
                 if programmaticFocusRequest {

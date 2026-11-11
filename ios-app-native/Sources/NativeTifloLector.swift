@@ -1386,9 +1386,9 @@ struct NativeReaderLibraryScreen: View {
             }
             // Durante la selección, solo se ofrecen libros y acciones en lote.
             if !selectionMode {
-            Section("Filtrar y ordenar") {
+            Section {
                 NativeAdjustableChoice(
-                    title: "Información de cada documento con VoiceOver",
+                    title: "Detalle de VoiceOver",
                     choices: ["Título y porcentaje", "Título, porcentaje y formato",
                               "Título, porcentaje, formato y carpeta"],
                     selectedIndex: $voiceOverDetailIndex
@@ -1407,9 +1407,8 @@ struct NativeReaderLibraryScreen: View {
                     selectedIndex: $sortIndex
                 )
             }
-            Section("Carpetas") {
-                Button("Ver por carpetas") { showFolderPicker = true }
-                    .accessibilityHint("Abre una pantalla de carpetas; la biblioteca general conserva todos sus documentos.")
+            Section {
+                Button("Carpetas") { showFolderPicker = true }
             }
             Section("Más opciones") {
                 NavigationLink("Ajustes") { NativeReaderSettingsScreen() }
@@ -2333,15 +2332,12 @@ struct NativeReadingScreen: View {
     private var documentSearchSheetContent: some View {
         NavigationStack {
             List {
-                Section("Texto que quieres buscar") {
+                Section {
                     TextField("Palabra o frase", text: $documentSearchText)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
-                        .accessibilityHint("Busca dentro del documento actual.")
                 }
-                if documentSearchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    Text("Escribe una palabra o frase para buscar en el documento.")
-                } else {
+                if !documentSearchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                     Section("Resultados") {
                         if documentSearchHits.isEmpty {
                             Text("No se han encontrado coincidencias.")
@@ -2359,12 +2355,10 @@ struct NativeReadingScreen: View {
                     }
                 }
                 if let positionBeforeSearch {
-                    Section("Posición anterior") {
-                        Button("Volver a donde estaba leyendo") {
-                            showDocumentSearch = false
-                            jump(to: positionBeforeSearch)
-                            self.positionBeforeSearch = nil
-                        }
+                    Button("Volver a donde estaba leyendo") {
+                        showDocumentSearch = false
+                        jump(to: positionBeforeSearch)
+                        self.positionBeforeSearch = nil
                     }
                 }
             }

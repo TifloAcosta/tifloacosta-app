@@ -10,10 +10,12 @@ on:
   # Solo una modificación deliberada de este archivo dispara la beta en ramas autorizadas.
   # Candidata íntegra posterior a beta 139: librería, TTS, marcas, Siri, vídeos y traducción.
   # Las pruebas de contratos y compilación firmada deben pasar antes de la subida.
+  # Beta correctiva VoiceOver: Crear marca accesible en rotor y menú contextual, sobre beta 140.
   push:
     branches:
       - integration/ios-phases1-6-consolidated-20261110
       - integration/ios-beta139-complete-20261111
+      - release/ios-beta141-bookmarks-voiceover-20261111
     paths:
       - '.github/workflows/ios-native-testflight-upload.yml'
 permissions:

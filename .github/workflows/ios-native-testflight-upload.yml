@@ -12,11 +12,13 @@ on:
   # Las pruebas de contratos y compilación firmada deben pasar antes de la subida.
   # Beta correctiva VoiceOver: Crear marca accesible en rotor y menú contextual, sobre beta 140.
   # Reintento: prueba de regresión actualizada para la firma con fragmento de lectura.
+  # Beta de pruebas de seis idiomas, ajustes accesibles, marcas, selección y traducción; envío solicitado 2026-11-11.
   push:
     branches:
       - integration/ios-phases1-6-consolidated-20261110
       - integration/ios-beta139-complete-20261111
       - release/ios-beta141-bookmarks-voiceover-20261111
+      - release/ios-six-languages-testflight-20261111
     paths:
       - '.github/workflows/ios-native-testflight-upload.yml'
 permissions:

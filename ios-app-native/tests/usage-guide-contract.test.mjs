@@ -15,8 +15,8 @@ test('Guía de uso aparece como un botón independiente antes de las secciones',
 
 test('La guía muestra solo la lista de secciones y luego solo el texto elegido', () => {
   assert.match(guide, /ForEach\(NativeGuideContent\.sections\)/);
-  assert.match(guide, /NativeUsageGuideDetailScreen\(section: section, english: english\)/);
-  assert.match(guide, /ForEach\(Array\(section\.paragraphs\(english: english\)\.enumerated\(\)\)/);
+  assert.match(guide, /NativeUsageGuideDetailScreen\(section: section, languageCode: languageCode\)/);
+  assert.match(guide, /ForEach\(Array\(section\.paragraphs\(languageCode: languageCode\)\.enumerated\(\)\)/);
   assert.doesNotMatch(guide, /WKWebView|UIWebView|SFSafariViewController|import Capacitor/);
   assert.match(guide, /\.tifloScreenSurface\(\)/);
   assert.match(guide, /TifloVisual\.brandRed/);
@@ -31,4 +31,22 @@ test('Todos los destinos actuales tienen ayuda en español e inglés, sin conten
   assert.equal((guide.match(/englishParagraphs:\s*\[\s*\n/g) ?? []).length, appLabels.length);
   assert.equal((guide.match(/spanishParagraphs:\s*\[\s*\n/g) ?? []).length, appLabels.length);
   assert.match(guide, /@AppStorage\("native-ios-language"\)/);
+});
+
+test('La guía proporciona títulos y párrafos locales completos en los cuatro idiomas nuevos', () => {
+  for (const lang of ['pt', 'fr', 'it', 'de']) {
+    const source = readFileSync(new URL('../Sources/' + lang + '.lproj/Guide.strings', import.meta.url), 'utf8');
+    const entries = [...source.matchAll(/^"guide\.(\d+)\.(title|paragraph\.\d+)"\s*=\s*"(.+)";$/gm)];
+    const keys = entries.map(m => m[1] + '.' + m[2]);
+    assert.equal(keys.length, 52, lang + ' debe cubrir todos los párrafos');
+    assert.equal(new Set(keys).size, keys.length, lang + ' incluye claves repetidas');
+    for (let section = 1; section <= 12; section++) {
+      assert.ok(keys.includes(section + '.title'), lang + ': título ' + section);
+      for (let paragraph = 1; paragraph <= (section === 3 || section === 6 || section === 8 ? (section === 8 ? 5 : 4) : 3); paragraph++) {
+        assert.ok(keys.includes(section + '.paragraph.' + paragraph), lang + ': sección ' + section);
+      }
+    }
+  }
+  assert.match(guide, /Bundle\.main\.path\(forResource: languageCode, ofType: "lproj"\)/);
+  assert.match(guide, /table: "Guide"/);
 });

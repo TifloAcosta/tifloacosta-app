@@ -308,12 +308,20 @@ private fun NativeSettingsScreen(english: Boolean) {
     var theme by remember { mutableStateOf(prefs.getString("theme", "system") ?: "system") }
     var enlarged by remember { mutableStateOf(prefs.getBoolean("enlarged", false)) }
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        Text(if (english) "Language" else "Idioma", style = MaterialTheme.typography.titleMedium)
-        listOf("es" to "Español", "en" to "English").forEach { (code, label) ->
-            OutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = {
-                language = code; prefs.edit().putString("language", code).apply()
-            }) { Text(label + if (language == code) " ✓" else "") }
+        val languageIndex = NativeAppLanguages.codes.indexOf(language).coerceAtLeast(0)
+        AdjustableSelector(
+            label = if (english) "App language" else "Idioma de la aplicación",
+            choices = NativeAppLanguages.names,
+            selected = languageIndex,
+            english = english
+        ) { index ->
+            val code = NativeAppLanguages.codes[index]
+            language = code
+            prefs.edit().putString("language", code).apply()
         }
+        Text(if (english)
+            "The app language is saved independently of your device language."
+            else "El idioma elegido se conserva aunque cambies el idioma del dispositivo.")
         Text(if (english) "Appearance" else "Aspecto", style = MaterialTheme.typography.titleMedium)
         listOf("system" to (if (english) "System" else "Sistema"),
             "light" to (if (english) "Light" else "Claro"),

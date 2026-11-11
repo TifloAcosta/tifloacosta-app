@@ -11,6 +11,7 @@ on:
   # Candidata íntegra posterior a beta 139: librería, TTS, marcas, Siri, vídeos y traducción.
   # Las pruebas de contratos y compilación firmada deben pasar antes de la subida.
   # Beta correctiva VoiceOver: Crear marca accesible en rotor y menú contextual, sobre beta 140.
+  # Reintento: prueba de regresión actualizada para la firma con fragmento de lectura.
   push:
     branches:
       - integration/ios-phases1-6-consolidated-20261110

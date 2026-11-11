@@ -6,7 +6,6 @@ on:
       - "feature/android-native-compose-prototype-*"
       - "feat/android-phase5-videos-podcasts-20261106"
       - "audit/android-phase6-integral-20261106"
-      - "feat/six-languages-ios-android-20261111"
     paths:
       - "android-native-prototype/**"
       - ".github/workflows/android-native-prototype.yml"

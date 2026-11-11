@@ -425,3 +425,5 @@
 "%d por ciento leído" = "%d per cento letto";
 "formato %@" = "formato %@";
 "carpeta %@" = "cartella %@";
+"Marca guardada en %d por ciento." = "Segnalibro salvato al %d per cento.";
+"Marca guardada en la pista %d, %d por ciento." = "Segnalibro salvato nella traccia %d, al %d per cento.";

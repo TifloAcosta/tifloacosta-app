@@ -3016,6 +3016,9 @@ struct NativeReadingScreen: View {
                     Int(Double(textLayout.totalCharacters) * Double(initial) / 100)))
                 : Int(Double(textLayout.totalCharacters) * Double(initial) / 100)
             lastSavedPercent = initial
+            // The live reader owns the current cursor, not a stale saved position.
+            // Shortcuts invokes this directly; no stop, seek or navigation occurs.
+            NativeQuickBookmarkBridge.saveActiveReader = { addBookmark() }
             if !didApplyOpeningMode {
                 didApplyOpeningMode = true
                 if readingMode == 1 { play() }
@@ -3050,6 +3053,7 @@ struct NativeReadingScreen: View {
             }
         }
         .onDisappear {
+            NativeQuickBookmarkBridge.saveActiveReader = nil
             persistPosition()
             speech.onSleepExpired = nil
             speech.stop()

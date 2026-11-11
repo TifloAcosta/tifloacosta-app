@@ -7,8 +7,9 @@ const app = read('TifloAcostaNativeApp.swift'), favorites = read('NativeFavorite
 const share = read('NativeShareInbox.swift');
 
 test('Busca desde Inicio anuncia una sola vez el campo editable', () => {
-  assert.ok(home.includes('TextField("Introduce tu búsqueda", text: $searchText)'));
-  assert.ok(!home.includes('.accessibilityLabel("Introduce tu búsqueda")'));
+  assert.ok(home.includes('TextField("Buscar con TifloAcosta", text: $searchText)'));
+  assert.ok(home.includes('.accessibilityLabel(Text("Buscar con TifloAcosta"))'));
+  assert.ok(home.includes('if !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {'));
 });
 test('Favoritos tiene almacén persistente, pantalla nativa y acciones VoiceOver', () => {
   assert.ok(app.includes('NativeFavoritesStore()'));

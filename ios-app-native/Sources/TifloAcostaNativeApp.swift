@@ -1,4 +1,5 @@
 import SwiftUI
+import AppIntents
 import UserNotifications
 
 /// Entrada única y oficial de TifloAcosta para iOS; SwiftUI sin WebView ni Capacitor.
@@ -19,6 +20,7 @@ struct TifloAcostaNativeApp: App {
 
     init() {
         UNUserNotificationCenter.current().delegate = NativeLocalNotificationDelegate.shared
+        NativeTifloAppShortcuts.updateAppShortcutParameters()
     }
 
     var body: some Scene {

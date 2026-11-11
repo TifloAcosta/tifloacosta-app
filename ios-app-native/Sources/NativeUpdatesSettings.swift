@@ -328,6 +328,13 @@ struct NativeSettingsScreen: View {
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
+            Section("Contacto y redes") {
+                NavigationLink("Abrir contacto y redes") {
+                    NativeContactScreen()
+                }
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+
             Section("Privacidad y accesibilidad") {
                 NavigationLink("Consultar privacidad y accesibilidad") {
                     NativePrivacyAccessibilityScreen()

@@ -305,12 +305,13 @@ private fun NativeSettingsScreen(english: Boolean) {
         context.getSharedPreferences("native-app-settings-v1", Context.MODE_PRIVATE)
     }
     var language by remember { mutableStateOf(prefs.getString("language", "") ?: "") }
+    val activeLanguage = NativeAppLanguages.normalizedCode(language) ?: "es"
     var theme by remember { mutableStateOf(prefs.getString("theme", "system") ?: "system") }
     var enlarged by remember { mutableStateOf(prefs.getBoolean("enlarged", false)) }
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
         val languageIndex = NativeAppLanguages.codes.indexOf(language).coerceAtLeast(0)
         AdjustableSelector(
-            label = if (english) "App language" else "Idioma de la aplicación",
+            label = NativeAppLanguages.text(activeLanguage, "appLanguage"),
             choices = NativeAppLanguages.names,
             selected = languageIndex,
             english = english
@@ -322,7 +323,7 @@ private fun NativeSettingsScreen(english: Boolean) {
         Text(if (english)
             "The app language is saved independently of your device language."
             else "El idioma elegido se conserva aunque cambies el idioma del dispositivo.")
-        Text(if (english) "Appearance" else "Aspecto", style = MaterialTheme.typography.titleMedium)
+        Text(NativeAppLanguages.text(activeLanguage, "appearance"), style = MaterialTheme.typography.titleMedium)
         listOf("system" to (if (english) "System" else "Sistema"),
             "light" to (if (english) "Light" else "Claro"),
             "dark" to (if (english) "Dark" else "Oscuro")).forEach { (code, label) ->

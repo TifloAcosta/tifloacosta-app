@@ -10,9 +10,10 @@ for (const label of order) {
   assert.ok(found > previous, 'Home order or label mismatch: ' + label);
   previous = found;
 }
-for (const label of ['Recibidos','Favoritos','TifloAcosta App','Buscar con TifloAcosta','Introduce tu búsqueda','Secciones']) {
+for (const label of ['Recibidos','Favoritos','TifloAcosta App','Buscar con TifloAcosta','Secciones']) {
   assert.ok(screens.includes(label), 'Missing entry: ' + label);
 }
+assert.ok(screens.includes('ForEach(NativeDestination.allCases.filter { $0 != .privacidad && $0 != .contacto && $0 != .recibidos })'), 'Privacy, contact and received items should be absent from Home');
 for (const value of ['NativeReaderLibraryScreen()', 'NativeVideosScreen()', 'NativePodcastScreen()', 'NativeResourcesScreen()', 'NativeDownloadsScreen()', 'NativeSearchResultsScreen(query: submittedSearch)']) {
   assert.ok(screens.includes(value), 'Lost functional route: ' + value);
 }

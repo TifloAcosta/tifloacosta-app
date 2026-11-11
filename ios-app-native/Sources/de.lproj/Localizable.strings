@@ -115,3 +115,11 @@
 "Abrir la aplicación Atajos" = "Kurzbefehle-App öffnen";
 "Doble toque para leer la guía de esta sección." = "Doppeltippe, um die Anleitung für diesen Bereich zu lesen.";
 "El idioma elegido se conserva. El cambio se aplica a la interfaz nativa; los títulos y contenidos de fuentes externas mantienen su idioma original." = "Die gewählte Sprache bleibt gespeichert. Die Änderung betrifft die App-Oberfläche; Titel und externe Inhalte behalten ihre Originalsprache.";
+"Traducción terminada. Disponible en pantalla." = "Übersetzung abgeschlossen. Auf dem Bildschirm verfügbar.";
+"No se pudo completar la traducción." = "Die Übersetzung konnte nicht abgeschlossen werden.";
+"El documento original se conserva. La traducción solo comienza cuando la solicitas." = "Das Originaldokument bleibt erhalten. Die Übersetzung beginnt erst auf deine Anfrage.";
+"Pulsa «Traducir ahora» para solicitar la traducción." = "Wähle Jetzt übersetzen, um die Übersetzung zu starten.";
+"Cierra la traducción y vuelve al artículo o listado desde el que accediste." = "Schließe die Übersetzung und kehre zum vorherigen Artikel oder zur Liste zurück.";
+"Regresa a la noticia sin modificar el texto original." = "Kehre zur Nachricht zurück, ohne den Originaltext zu verändern.";
+"No se pudo completar la traducción: %@. Puedes intentarlo nuevamente." = "Die Übersetzung konnte nicht abgeschlossen werden: %@. Du kannst es erneut versuchen.";
+"Idioma solicitado: %@" = "Gewünschte Sprache: %@";

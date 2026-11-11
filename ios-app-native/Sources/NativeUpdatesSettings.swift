@@ -378,8 +378,8 @@ struct NativeSiriShortcutsHelpScreen: View {
     var body: some View {
         List {
             Section("Atajos disponibles") {
-                ForEach(shortcuts, id: \.name) { item in
-                    LabeledContent(item.name, value: item.detail)
+                ForEach(shortcuts.indices, id: \.self) { index in
+                    LabeledContent(shortcuts[index].name, value: shortcuts[index].detail)
                 }
             }
             Section("Frases personales") {

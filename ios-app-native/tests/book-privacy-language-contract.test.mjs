@@ -30,7 +30,7 @@ test('Mi libro y Privacidad son pantallas nativas completas, no provisionales', 
 
 test('Idioma persistente en Configuración cambia el entorno nativo y el catálogo', () => {
   assert.match(settings, /@AppStorage\("native-ios-language"\) private var languageIndex = 0/);
-  assert.match(settings, /NativeAdjustableChoice\(\s*title: "Idioma de la aplicación"/);
+  assert.match(settings, /Section \{\s*NativeAdjustableChoice\(\s*title: "Idioma"/);
   assert.match(settings, /choices: NativeAppLanguage\.names/);
   assert.match(settings, /selectedIndex: \$languageIndex/);
   assert.match(app, /@AppStorage\("native-ios-language"\) private var languageIndex = 0/);

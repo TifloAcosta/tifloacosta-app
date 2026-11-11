@@ -666,3 +666,16 @@
 "Título A a Z" = "Titel A bis Z";
 "Título Z a A" = "Titel Z bis A";
 "Último abierto" = "Zuletzt geöffnet";
+"Creación rápida de marcas" = "Schnelle Lesezeichen";
+"Crear marca en TifloLector" = "Lesezeichen in TifloLector erstellen";
+"Guarda una marca en la posición actual sin interrumpir la reproducción." = "Speichert ein Lesezeichen an der aktuellen Position ohne die Wiedergabe zu unterbrechen.";
+"Abre un libro en TifloLector para crear una marca." = "Öffne ein Buch in TifloLector, um ein Lesezeichen zu erstellen.";
+"Preparar el atajo" = "Kurzbefehl einrichten";
+"En Atajos, crea uno nuevo, añade la acción Crear marca en TifloLector y guárdalo con ese nombre." = "Erstelle in Kurzbefehle einen Kurzbefehl mit der Aktion Lesezeichen in TifloLector erstellen und speichere ihn.";
+"Abrir Atajos" = "Kurzbefehle öffnen";
+"Triple toque posterior" = "Dreimal auf Rückseite tippen";
+"Ve a Ajustes del iPhone, Accesibilidad, Tocar, Tocar atrás y Triple toque. Selecciona el atajo Crear marca en TifloLector." = "Wähle unter iPhone-Einstellungen, Bedienungshilfen, Tippen, Auf Rückseite tippen, Dreimal tippen den Lesezeichen-Kurzbefehl.";
+"Botón de Acción" = "Aktionstaste";
+"Ve a Ajustes del iPhone, Botón de Acción, Atajo y selecciona Crear marca en TifloLector." = "Öffne Einstellungen, Aktionstaste, Kurzbefehl und wähle Lesezeichen in TifloLector erstellen.";
+"Durante la lectura" = "Beim Lesen";
+"Con un libro abierto, ejecuta el atajo para guardar la posición sin detener la reproducción. También puedes utilizar la acción Crear marca del rotor de VoiceOver." = "Führe bei geöffnetem Buch den Kurzbefehl aus, um die Position ohne Unterbrechung zu speichern. Alternativ nutze den VoiceOver-Rotor.";

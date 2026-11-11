@@ -6,7 +6,7 @@ const reader = readFileSync(new URL('../Sources/NativeTifloLector.swift', import
 test('Selección múltiple mantiene fuera los controles de biblioteca general', () => {
   assert.match(reader, /if !selectionMode \{\s*Section\("Filtrar y ordenar"\)/);
   assert.match(reader, /if !selectionMode \{\s*Section \{\s*Button\("Importar"/);
-  assert.match(reader, /Button\("Terminar selección"/); // replaced based on conditional below?
+  assert.match(reader, /selectionMode \? "Terminar selección" : "Selección"/);
 });
 test('Borrado de seleccionados requiere confirmación con títulos', () => {
   assert.match(reader, /Button\("Eliminar seleccionados"\) \{ showBulkDelete = true \}/);

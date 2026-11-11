@@ -427,3 +427,4 @@
 "carpeta %@" = "cartella %@";
 "Marca guardada en %d por ciento." = "Segnalibro salvato al %d per cento.";
 "Marca guardada en la pista %d, %d por ciento." = "Segnalibro salvato nella traccia %d, al %d per cento.";
+"Solo avisos de nuevos recursos y vídeos propios al actualizar contenidos. No se envían avisos de Actualidad ni notificaciones con la app cerrada." = "Solo avvisi per le nuove risorse e i video di TifloAcosta durante l’aggiornamento. Nessun avviso di notizie né notifiche con l’app chiusa.";

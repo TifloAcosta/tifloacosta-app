@@ -1083,6 +1083,7 @@ final class NativeReadingSpeech: ObservableObject {
 
 struct NativeReaderLibraryScreen: View {
     @EnvironmentObject private var library: NativeReaderLibrary
+    @AppStorage("native-ios-language") private var languageIndex = 0
     @StateObject private var speech = NativeReadingSpeech()
     @State private var importPresented = false
     @State private var restorePresented = false
@@ -1140,16 +1141,24 @@ struct NativeReaderLibraryScreen: View {
         return library.folders.contains(selectedFolder) ? selectedFolder : "Todas"
     }
 
-    /// Título y progreso forman una única unidad de navegación para VoiceOver.
+    /// Un único elemento accesible; el progreso y sus detalles usan el idioma
+    /// de TifloAcosta sin depender del idioma general del dispositivo.
     private func documentRowLabel(_ doc: NativeReadingDocument) -> String {
+        let code = NativeAppLanguage.code(for: languageIndex)
+        let locale = Locale(identifier: code)
         let progress = max(0, min(100, library.latest(doc).lastPercent ?? 0))
-        let shortLabel = "\(doc.title), \(progress) por ciento leído"
+        let progressText = String(format: NativeAppLanguage.message("%d por ciento leído", languageCode: code),
+                                  locale: locale, progress)
+        let shortLabel = "\(doc.title), \(progressText)"
         if voiceOverDetailIndex == 0 { return shortLabel }
-        let formatLabel = "\(shortLabel), formato \(doc.formatLabel)"
+        let formatText = String(format: NativeAppLanguage.message("formato %@", languageCode: code),
+                                locale: locale, doc.formatLabel)
+        let formatLabel = "\(shortLabel), \(formatText)"
         if voiceOverDetailIndex == 1 { return formatLabel }
-        let folder = doc.folderName ?? "Sin carpeta"
-        return "\(formatLabel), carpeta \(folder)"
-
+        let folder = doc.folderName ?? NativeAppLanguage.message("Sin carpeta", languageCode: code)
+        let folderText = String(format: NativeAppLanguage.message("carpeta %@", languageCode: code),
+                                locale: locale, folder)
+        return "\(formatLabel), \(folderText)"
     }
 
     private var shownDocuments: [NativeReadingDocument] {
@@ -1307,7 +1316,7 @@ struct NativeReaderLibraryScreen: View {
                             Label(documentRowLabel(document), systemImage: selectedDocumentIDs.contains(document.id)
                                   ? "checkmark.circle.fill" : "circle")
                         }
-                        .accessibilityLabel("\(selectedDocumentIDs.contains(document.id) ? "Seleccionado" : "No seleccionado"), \(documentRowLabel(document))")
+                        .accessibilityLabel("\(NativeAppLanguage.message(selectedDocumentIDs.contains(document.id) ? "Seleccionado" : "No seleccionado", languageCode: NativeAppLanguage.code(for: languageIndex))), \(documentRowLabel(document))")
                         .accessibilityHint("Doble toque para cambiar la selección de este documento.")
                     } else {
                     NavigationLink {

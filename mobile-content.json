@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-12T08:22:26.138Z",
+  "generatedAt": "2026-11-12T11:19:11.252Z",
   "resources": [
     {
       "kind": "resource",
@@ -5602,6 +5602,55 @@
   "news": [
     {
       "kind": "news",
+      "id": "the-verge-64c7b99a7198a33a:en",
+      "sourceId": "the-verge-64c7b99a7198a33a",
+      "lang": "en",
+      "title": "Ring confirms its camera drone won’t have manual controls after crashing on CBS News",
+      "summary": "When (or if) Ring's security camera drone flies into our homes in January, you won't get the option to pilot it yourself. The Ring Drone Cam relies entirely on an \"AI Pilot\" system to follow pre-programmed routes and navigate autonomously around obstacles, with no manual control option available - and an embarrassing demonstration with CBS […]",
+      "body": "When (or if) Ring's security camera drone flies into our homes in January, you won't get the option to pilot it yourself. The Ring Drone Cam relies entirely on an \"AI Pilot\" system to follow pre-programmed routes and navigate autonomously around obstacles, with no manual control option available - and an embarrassing demonstration with CBS News might reveal why.\n\nThe video, broadcast on CBS Mornings and published on Threads , shows Ring founder Jamie Siminoff allowing technology reporter Jo Ling Kent to manually fly an early version of the drone via a mobile app with integrated controls.\n\nLing Kent: \"Can I control it?\"\n\nSiminoff: \"Yeah, so …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1031817/ring-drone-cam-manual-flight-controls",
+      "publishedAt": "2026-11-12T11:12:32.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "conticgo-4728c3a5598d72c8:es",
+      "sourceId": "conticgo-4728c3a5598d72c8",
+      "lang": "es",
+      "title": "Una retina artificial convierte la luz infrarroja en señales eléctricas para estimular las neuronas del ojo",
+      "summary": "Una investigación publicada en Nature Electronics presenta un implante retiniano capaz de transformar la luz infrarroja cercana en impulsos eléctricos. El dispositivo ha conseguido generar respuestas neuronales en ratones con degeneración de la retina y abre nuevas posibilidades para el desarrollo de prótesis visuales. La ingeniería biomédica continúa explorando nuevas formas de recuperar parcialmente la […] La entrada Una retina artificial convierte la luz infrarroja en señales eléctricas para estimular las neuronas del ojo se publicó primero en Conticgo .",
+      "body": "Una investigación publicada en Nature Electronics presenta un implante retiniano capaz de transformar la luz infrarroja cercana en impulsos eléctricos. El dispositivo ha conseguido generar respuestas neuronales en ratones con degeneración de la retina y abre nuevas posibilidades para el desarrollo de prótesis visuales.\n\nLa ingeniería biomédica continúa explorando nuevas formas de recuperar parcialmente la percepción visual en personas con enfermedades degenerativas de la retina. Una de las últimas investigaciones en este campo propone una solución basada en una retina artificial capaz de transformar la luz infrarroja cercana en señales eléctricas que estimulan directamente las neuronas del ojo.\n\nEl trabajo, publicado en abril de 2026 en la revista científica Nature Electronics , ha sido desarrollado por investigadores de distintas instituciones de Corea del Sur. Su propuesta combina sensores fotosensibles, microelectrodos de metal líquido y un sistema electrónico implantable que permite activar determinadas células de la retina.\n\nLos experimentos realizados en ratones, incluidos animales con degeneración retiniana, han demostrado que el dispositivo puede provocar respuestas neuronales ante estímulos de luz infrarroja.\n\nLa visión natural comienza cuando los fotorreceptores de la retina, conocidos como conos y bastones, detectan la luz y la transforman en señales eléctricas. Estas señales se procesan en diferentes capas retinianas y posteriormente se transmiten al cerebro a través del nervio óptico.\n\nSin embargo, enfermedades como la retinosis pigmentaria provocan la degeneración progresiva de los fotorreceptores. Aunque estas células pueden llegar a desaparecer, otras estructuras de la retina, como las células ganglionares, pueden conservar parte de su funcionalidad.\n\nLa nueva tecnología pretende aprovechar precisamente esta capacidad.\n\nEl implante incorpora una matriz de fototransistores sensibles a la luz infrarroja cercana. Estos pequeños componentes detectan la radiación y generan una respuesta eléctrica que se transmite a través de unos microelectrodos situados en contacto con las neuronas retinianas.\n\nDe esta manera, el dispositivo evita depender de los fotorreceptores dañados y utiliza una vía alternativa para transmitir información visual al cerebro.\n\nUno de los aspectos más innovadores de esta investigación es el material empleado para fabricar los electrodos.\n\nLos investigadores han desarrollado unos pequeños pilares tridimensionales de metal líquido, elaborados a partir de una aleación de galio e indio. Su estructura flexible permite adaptarse mejor a la superficie irregular de la retina y establecer un contacto más cercano con las células ganglionares.\n\nEsta característica es importante porque los electrodos rígidos convencionales pueden generar problemas cuando se implantan en tejidos biológicos tan delicados.\n\nAdemás, los extremos de estos microelectrodos incorporan nanopartículas de platino que mejoran la transmisión de carga eléctrica y facilitan la estimulación neuronal.\n\nEl dispositivo también incluye un filtro óptico ultrafino, de aproximadamente 360 nanómetros de grosor, diseñado para permitir el paso de determinadas longitudes de onda infrarrojas y controlar la entrada de luz visible en los sensores.\n\nPara comprobar el funcionamiento de esta retina artificial, el equipo realizó diferentes experimentos tanto en tejidos retinianos aislados como en animales vivos.\n\nLas pruebas incluyeron ratones sanos y ratones con degeneración retiniana, utilizados como modelo experimental de ceguera asociada a la pérdida de fotorreceptores.\n\nLos investigadores observaron que, cuando el dispositivo recibía luz infrarroja cercana, los fototransistores generaban impulsos eléctricos capaces de activar las células ganglionares.\n\nAdemás, mediante registros de actividad cerebral y pruebas de comportamiento, comprobaron que los estímulos llegaban hasta la corteza visual de los animales.\n\nUno de los resultados más relevantes fue que los ratones con degeneración retiniana también mostraron respuestas ante la estimulación infrarroja. Esto indica que el sistema puede aprovechar determinadas neuronas que permanecen funcionales incluso cuando los fotorreceptores han sufrido un deterioro importante.\n\nLos estudios de biocompatibilidad también mostraron resultados iniciales favorables. En los animales evaluados durante seis meses no se observaron signos relevantes de inflamación o deterioro del tejido asociados al implante.\n\nLa investigación podría abrir una nueva vía para desarrollar prótesis visuales destinadas a personas que han perdido los fotorreceptores como consecuencia de enfermedades degenerativas de la retina.\n\nEn patologías como la retinosis pigmentaria, la pérdida progresiva de conos y bastones puede provocar una reducción importante de la visión e incluso llegar a causar ceguera.\n\nSin embargo, las células ganglionares y otras neuronas internas pueden permanecer relativamente conservadas durante determinadas fases de la enfermedad.\n\nLa propuesta de los investigadores consiste en aprovechar esas estructuras para transmitir información mediante estimulación eléctrica, sin depender de los fotorreceptores originales.\n\nOtro aspecto interesante es que el dispositivo trabaja con luz infrarroja cercana, una región del espectro electromagnético que el ojo humano no puede percibir de forma natural. Esto permitiría crear un canal artificial de percepción que complemente la visión visible que todavía conserve la persona.\n\nLos investigadores también plantean que esta tecnología podría adaptarse en el futuro para detectar otras longitudes de onda, aunque todavía es necesario estudiar sus posibilidades.\n\nA pesar de los resultados obtenidos, esta retina artificial todavía se encuentra en una fase experimental.\n\nLos ensayos se han realizado en ratones y no existen resultados que permitan afirmar que el dispositivo pueda utilizarse ya en personas con retinosis pigmentaria u otras enfermedades degenerativas.\n\nAntes de plantear su aplicación clínica será necesario estudiar su seguridad a largo plazo, mejorar su miniaturización, reducir el consumo energético y comprobar su estabilidad después de periodos prolongados de implantación.\n\nTambién será fundamental investigar cómo se traduce la estimulación eléctrica en una percepción visual útil para las personas. Activar las neuronas retinianas no significa recuperar automáticamente una visión natural.\n\nNo obstante, el trabajo publicado en Nature Electronics representa un avance relevante en el desarrollo de prótesis visuales y demuestra cómo la combinación de microelectrónica y materiales biocompatibles puede abrir nuevas posibilidades para intervenir sobre el sistema visual.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuente: Nature",
+      "sourceName": "Conticgo",
+      "originalUrl": "https://conticgo.net/retina-artificial-luz-infrarroja/",
+      "publishedAt": "2026-11-12T08:29:51.000Z",
+      "categories": [
+        "tecnologia-accesibilidad",
+        "proyectos-prototipos"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-a57e1200ef8b8678:en",
+      "sourceId": "9to5mac-a57e1200ef8b8678",
+      "lang": "en",
+      "title": "Gentler Streak 6.0 adds a new wellbeing timeline and customizable dashboard",
+      "summary": "In an update rolling out today, Gentler Streak is introducing new ways for users to track their wellbeing and personalize the app’s guidance based on how they feel. Here are the details. more…",
+      "body": "In an update rolling out today, Gentler Streak is introducing new ways for users to track their wellbeing and personalize the app’s guidance based on how they feel. Here are the details.\n\nOne of my favorite exercise-tracking apps got even better today with an update that expands its functionality beyond workouts and fitness metrics to better reflect how users actually feel.\n\nStarting today, Gentler Streak will let users log how they feel each day, including their mood, symptoms, and other factors that may not be reflected in their health and fitness data.\n\nSome days, the way we feel isn’t reflected in what the data says, no matter the data quality. “How I Feel” captures the part that devices can’t grasp: personal context. And how you feel is not only a mood: it is also a sore throat, heavy legs or a poor night’s sleep. The feature was inspired by the Gentler Streak community, including people living with chronic fatigue, fibromyalgia, ADHD, and those not wearing their Apple Watch at night. Without overnight signals, their guidance has less to work with.\n\nAccording to the team behind Gentler Streak, these new features are aimed at users whose health and fitness data may not accurately reflect how they feel, including those dealing with chronic conditions, menopause, stress, or poor sleep.\n\nIn practice, the app will now feature four tabs: Today, Health, Workouts, and Insights. In the Today and Health tabs, a new “Anything to add?” field will let users rate how they feel, from Great to Off, and add context about what might be affecting their well-being, including fatigue, feeling calm, or custom tags.\n\nYou decide when the prompt appears. Go to Profile > Settings > Self-Evaluation Prompt and choose one of three options: only when your vitals or sleep are off, always on, or never.\n\nGentler Stories notes that the self-assessments will override the app’s wellbeing estimates for that day, with its daily guidance adjusting accordingly.\n\nThe Today tab will also feature an expanded 10- or 30-day timeline showing logged workouts, wellbeing estimates, potential symptoms, poor sleep or vitals, and the first day of a menstrual period, while Health will introduce an interactive chart showing users how their wellbeing changes over time, with the ability to filter by symptoms.\n\nUsers can now also customize which information appears on their Today screen, including vitals, sleep, steps, menstrual cycle, VO₂ max, and workouts, which is a nice touch.\n\nFor users who are sick, injured, or taking a break from exercise, the app’s hallmark Activity Path will make way for a new Wellbeing Path, which lets them track their wellbeing on a daily basis.\n\nFor users with Active status, a new colorful wellbeing line will appear beneath the Activity Path, reflecting how they feel each day. This information is logged automatically for those who wear their Apple Watch overnight, or based on self-assessments for those who don’t.\n\nImportantly, Gentler Stories notes that all information entered through the new feature remains on the user’s device, with no accounts or company-operated servers involved.\n\nGentler Streak is available for free on the App Store , with in-app purchases for monthly, yearly, family, and lifetime subscriptions.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/12/gentler-streak-6-0-adds-a-new-wellbeing-timeline-and-customizable-dashboard/",
+      "publishedAt": "2026-11-12T08:00:00.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "techcrunch-1ececa89ad95b2bd:en",
       "sourceId": "techcrunch-1ececa89ad95b2bd",
       "lang": "en",
@@ -5659,23 +5708,6 @@
       "sourceName": "9to5Mac",
       "originalUrl": "https://9to5mac.com/2026/11/11/binance-warns-iphone-crypto-holders-of-security-flaw-researchers-say-remains-unpatched/",
       "publishedAt": "2026-11-11T21:17:30.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-cd6b83884481c154:en",
-      "sourceId": "9to5mac-cd6b83884481c154",
-      "lang": "en",
-      "title": "Apple Invites app now lets hosts poll guests, plus new emoji effect added",
-      "summary": "Apple Invites, an iCloud+ feature, just added two new features in this month’s update. more…",
-      "body": "Apple Invites, an iCloud+ feature, just added two new features in this month’s update.\n\nInvites is Apple’s digital event planning app for iCloud+ subscribers. It’s available on iPhone and iPad. The app doesn’t require an iPhone or a paid iCloud account to respond to digital events created with Apple Invites.\n\nNovember’s update adds these two new features:\n\nAdditionally, Apple says the new version, 1.13, includes the usual bug fixes and performance improvements.\n\nApple regularly updates the Invites app for iPhone. While there’s no iPad version yet, Apple Invites gained its first iMessage app this year, putting Invites where people are already chatting.\n\nApple Invites for iPhone is available on the App Store . Creating a digital invitation requires iCloud+, and anyone can respond.\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/11/apple-invites-app-now-lets-hosts-poll-guests-plus-new-emoji-effect-added/",
-      "publishedAt": "2026-11-11T21:08:46.000Z",
       "categories": [
         "apple",
         "tecnologia-general",
@@ -5826,22 +5858,6 @@
       "categories": [
         "tecnologia-general",
         "apps-accesibles",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-2a50db6f98d4b35a:en",
-      "sourceId": "the-verge-2a50db6f98d4b35a",
-      "lang": "en",
-      "title": "Google’s AlphaGenome 2 zooms in on the cellular roots of disease",
-      "summary": "Researchers at Google DeepMind have unveiled a new AI model designed to unravel how changes in our DNA affect different cells, giving scientists a more detailed view of a notoriously difficult problem that could hold important clues to the causes of disease - and point the way to new treatments. AlphaGenome 2 is the successor […]",
-      "body": "Researchers at Google DeepMind have unveiled a new AI model designed to unravel how changes in our DNA affect different cells, giving scientists a more detailed view of a notoriously difficult problem that could hold important clues to the causes of disease - and point the way to new treatments.\n\nAlphaGenome 2 is the successor to DeepMind's genome-predicting AI model AlphaGenome, which was released last year . While nearly every cell in the human body carries the same DNA, different types of cells - from heart muscle cells and skin cells to immune cells fighting an infection - switch different genes on and off, and those patterns can change d …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1031524/google-deepmind-alphagenome-2-genetic-ai-model",
-      "publishedAt": "2026-11-11T15:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
         "ia-accesibilidad"
       ]
     },
@@ -6343,23 +6359,6 @@
         "tecnologia-accesibilidad",
         "gafas-inteligentes",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "accessible-android-0008d2c4d5b8077c:en",
-      "sourceId": "accessible-android-0008d2c4d5b8077c",
-      "lang": "en",
-      "title": "SandFly",
-      "summary": "SandFly is a screen reader for Android phones and tablets running Android 8 or later and Wear OS watches. With SandFly Pro: Screen recognition: finds…",
-      "body": "Published 2 November 2026 by Aaron Hewitt\n\nSandFly is a screen reader for Android phones and tablets running Android 8 or later and Wear OS watches.\n\nWith SandFly Pro:\n\nFree features:\n\nSandFly is free. SandFly Pro is bought in Settings > SandFly Pro, by month or by year, with prices for each country.\n\nSandFly is distributed through GitHub releases and updates itself from them.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nSandFly is a screen reader and is used with itself; its settings, tutorial, notification list, quick settings panel and update notifications all work with SandFly. To turn it on, go to Settings > Accessibility > SandFly, after turning off any other screen reader. An interactive tutorial covers gestures and keyboard commands. Two settings need permissions that Android grants only through adb or Shizuku: Fix stuck touch exploration and Speaker when away from your ear. With Shizuku running, SandFly grants them itself; otherwise each setting shows the adb command, with a Copy command action. Problems can be reported from SandFly with Help & feedback > Report a problem.\n\nLast Tested App version and Android version:\n\nSandFly 0.3.0, Android 17\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility.",
-      "sourceName": "Accessible Android",
-      "originalUrl": "https://accessibleandroid.com/app/sandfly/",
-      "publishedAt": "2026-11-02T09:11:21.000Z",
-      "categories": [
-        "android",
-        "apps-accesibles",
-        "tecnologia-accesibilidad"
       ]
     }
   ]

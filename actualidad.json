@@ -1,5 +1,78 @@
 [
   {
+    "id": "the-verge-64c7b99a7198a33a",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1031817/ring-drone-cam-manual-flight-controls",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-12T11:12:32.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Ring confirms its camera drone won’t have manual controls after crashing on CBS News",
+        "summary": "When (or if) Ring's security camera drone flies into our homes in January, you won't get the option to pilot it yourself. The Ring Drone Cam relies entirely on an \"AI Pilot\" system to follow pre-programmed routes and navigate autonomously around obstacles, with no manual control option available - and an embarrassing demonstration with CBS […]",
+        "body": "When (or if) Ring's security camera drone flies into our homes in January, you won't get the option to pilot it yourself. The Ring Drone Cam relies entirely on an \"AI Pilot\" system to follow pre-programmed routes and navigate autonomously around obstacles, with no manual control option available - and an embarrassing demonstration with CBS News might reveal why.\n\nThe video, broadcast on CBS Mornings and published on Threads , shows Ring founder Jamie Siminoff allowing technology reporter Jo Ling Kent to manually fly an early version of the drone via a mobile app with integrated controls.\n\nLing Kent: \"Can I control it?\"\n\nSiminoff: \"Yeah, so …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "conticgo-4728c3a5598d72c8",
+    "type": "news",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/retina-artificial-luz-infrarroja/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-11-12T08:29:51.000Z",
+    "categories": [
+      "tecnologia-accesibilidad",
+      "proyectos-prototipos"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Una retina artificial convierte la luz infrarroja en señales eléctricas para estimular las neuronas del ojo",
+        "summary": "Una investigación publicada en Nature Electronics presenta un implante retiniano capaz de transformar la luz infrarroja cercana en impulsos eléctricos. El dispositivo ha conseguido generar respuestas neuronales en ratones con degeneración de la retina y abre nuevas posibilidades para el desarrollo de prótesis visuales. La ingeniería biomédica continúa explorando nuevas formas de recuperar parcialmente la […] La entrada Una retina artificial convierte la luz infrarroja en señales eléctricas para estimular las neuronas del ojo se publicó primero en Conticgo .",
+        "body": "Una investigación publicada en Nature Electronics presenta un implante retiniano capaz de transformar la luz infrarroja cercana en impulsos eléctricos. El dispositivo ha conseguido generar respuestas neuronales en ratones con degeneración de la retina y abre nuevas posibilidades para el desarrollo de prótesis visuales.\n\nLa ingeniería biomédica continúa explorando nuevas formas de recuperar parcialmente la percepción visual en personas con enfermedades degenerativas de la retina. Una de las últimas investigaciones en este campo propone una solución basada en una retina artificial capaz de transformar la luz infrarroja cercana en señales eléctricas que estimulan directamente las neuronas del ojo.\n\nEl trabajo, publicado en abril de 2026 en la revista científica Nature Electronics , ha sido desarrollado por investigadores de distintas instituciones de Corea del Sur. Su propuesta combina sensores fotosensibles, microelectrodos de metal líquido y un sistema electrónico implantable que permite activar determinadas células de la retina.\n\nLos experimentos realizados en ratones, incluidos animales con degeneración retiniana, han demostrado que el dispositivo puede provocar respuestas neuronales ante estímulos de luz infrarroja.\n\nLa visión natural comienza cuando los fotorreceptores de la retina, conocidos como conos y bastones, detectan la luz y la transforman en señales eléctricas. Estas señales se procesan en diferentes capas retinianas y posteriormente se transmiten al cerebro a través del nervio óptico.\n\nSin embargo, enfermedades como la retinosis pigmentaria provocan la degeneración progresiva de los fotorreceptores. Aunque estas células pueden llegar a desaparecer, otras estructuras de la retina, como las células ganglionares, pueden conservar parte de su funcionalidad.\n\nLa nueva tecnología pretende aprovechar precisamente esta capacidad.\n\nEl implante incorpora una matriz de fototransistores sensibles a la luz infrarroja cercana. Estos pequeños componentes detectan la radiación y generan una respuesta eléctrica que se transmite a través de unos microelectrodos situados en contacto con las neuronas retinianas.\n\nDe esta manera, el dispositivo evita depender de los fotorreceptores dañados y utiliza una vía alternativa para transmitir información visual al cerebro.\n\nUno de los aspectos más innovadores de esta investigación es el material empleado para fabricar los electrodos.\n\nLos investigadores han desarrollado unos pequeños pilares tridimensionales de metal líquido, elaborados a partir de una aleación de galio e indio. Su estructura flexible permite adaptarse mejor a la superficie irregular de la retina y establecer un contacto más cercano con las células ganglionares.\n\nEsta característica es importante porque los electrodos rígidos convencionales pueden generar problemas cuando se implantan en tejidos biológicos tan delicados.\n\nAdemás, los extremos de estos microelectrodos incorporan nanopartículas de platino que mejoran la transmisión de carga eléctrica y facilitan la estimulación neuronal.\n\nEl dispositivo también incluye un filtro óptico ultrafino, de aproximadamente 360 nanómetros de grosor, diseñado para permitir el paso de determinadas longitudes de onda infrarrojas y controlar la entrada de luz visible en los sensores.\n\nPara comprobar el funcionamiento de esta retina artificial, el equipo realizó diferentes experimentos tanto en tejidos retinianos aislados como en animales vivos.\n\nLas pruebas incluyeron ratones sanos y ratones con degeneración retiniana, utilizados como modelo experimental de ceguera asociada a la pérdida de fotorreceptores.\n\nLos investigadores observaron que, cuando el dispositivo recibía luz infrarroja cercana, los fototransistores generaban impulsos eléctricos capaces de activar las células ganglionares.\n\nAdemás, mediante registros de actividad cerebral y pruebas de comportamiento, comprobaron que los estímulos llegaban hasta la corteza visual de los animales.\n\nUno de los resultados más relevantes fue que los ratones con degeneración retiniana también mostraron respuestas ante la estimulación infrarroja. Esto indica que el sistema puede aprovechar determinadas neuronas que permanecen funcionales incluso cuando los fotorreceptores han sufrido un deterioro importante.\n\nLos estudios de biocompatibilidad también mostraron resultados iniciales favorables. En los animales evaluados durante seis meses no se observaron signos relevantes de inflamación o deterioro del tejido asociados al implante.\n\nLa investigación podría abrir una nueva vía para desarrollar prótesis visuales destinadas a personas que han perdido los fotorreceptores como consecuencia de enfermedades degenerativas de la retina.\n\nEn patologías como la retinosis pigmentaria, la pérdida progresiva de conos y bastones puede provocar una reducción importante de la visión e incluso llegar a causar ceguera.\n\nSin embargo, las células ganglionares y otras neuronas internas pueden permanecer relativamente conservadas durante determinadas fases de la enfermedad.\n\nLa propuesta de los investigadores consiste en aprovechar esas estructuras para transmitir información mediante estimulación eléctrica, sin depender de los fotorreceptores originales.\n\nOtro aspecto interesante es que el dispositivo trabaja con luz infrarroja cercana, una región del espectro electromagnético que el ojo humano no puede percibir de forma natural. Esto permitiría crear un canal artificial de percepción que complemente la visión visible que todavía conserve la persona.\n\nLos investigadores también plantean que esta tecnología podría adaptarse en el futuro para detectar otras longitudes de onda, aunque todavía es necesario estudiar sus posibilidades.\n\nA pesar de los resultados obtenidos, esta retina artificial todavía se encuentra en una fase experimental.\n\nLos ensayos se han realizado en ratones y no existen resultados que permitan afirmar que el dispositivo pueda utilizarse ya en personas con retinosis pigmentaria u otras enfermedades degenerativas.\n\nAntes de plantear su aplicación clínica será necesario estudiar su seguridad a largo plazo, mejorar su miniaturización, reducir el consumo energético y comprobar su estabilidad después de periodos prolongados de implantación.\n\nTambién será fundamental investigar cómo se traduce la estimulación eléctrica en una percepción visual útil para las personas. Activar las neuronas retinianas no significa recuperar automáticamente una visión natural.\n\nNo obstante, el trabajo publicado en Nature Electronics representa un avance relevante en el desarrollo de prótesis visuales y demuestra cómo la combinación de microelectrónica y materiales biocompatibles puede abrir nuevas posibilidades para intervenir sobre el sistema visual.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuente: Nature"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-a57e1200ef8b8678",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/12/gentler-streak-6-0-adds-a-new-wellbeing-timeline-and-customizable-dashboard/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-12T08:00:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Gentler Streak 6.0 adds a new wellbeing timeline and customizable dashboard",
+        "summary": "In an update rolling out today, Gentler Streak is introducing new ways for users to track their wellbeing and personalize the app’s guidance based on how they feel. Here are the details. more…",
+        "body": "In an update rolling out today, Gentler Streak is introducing new ways for users to track their wellbeing and personalize the app’s guidance based on how they feel. Here are the details.\n\nOne of my favorite exercise-tracking apps got even better today with an update that expands its functionality beyond workouts and fitness metrics to better reflect how users actually feel.\n\nStarting today, Gentler Streak will let users log how they feel each day, including their mood, symptoms, and other factors that may not be reflected in their health and fitness data.\n\nSome days, the way we feel isn’t reflected in what the data says, no matter the data quality. “How I Feel” captures the part that devices can’t grasp: personal context. And how you feel is not only a mood: it is also a sore throat, heavy legs or a poor night’s sleep. The feature was inspired by the Gentler Streak community, including people living with chronic fatigue, fibromyalgia, ADHD, and those not wearing their Apple Watch at night. Without overnight signals, their guidance has less to work with.\n\nAccording to the team behind Gentler Streak, these new features are aimed at users whose health and fitness data may not accurately reflect how they feel, including those dealing with chronic conditions, menopause, stress, or poor sleep.\n\nIn practice, the app will now feature four tabs: Today, Health, Workouts, and Insights. In the Today and Health tabs, a new “Anything to add?” field will let users rate how they feel, from Great to Off, and add context about what might be affecting their well-being, including fatigue, feeling calm, or custom tags.\n\nYou decide when the prompt appears. Go to Profile > Settings > Self-Evaluation Prompt and choose one of three options: only when your vitals or sleep are off, always on, or never.\n\nGentler Stories notes that the self-assessments will override the app’s wellbeing estimates for that day, with its daily guidance adjusting accordingly.\n\nThe Today tab will also feature an expanded 10- or 30-day timeline showing logged workouts, wellbeing estimates, potential symptoms, poor sleep or vitals, and the first day of a menstrual period, while Health will introduce an interactive chart showing users how their wellbeing changes over time, with the ability to filter by symptoms.\n\nUsers can now also customize which information appears on their Today screen, including vitals, sleep, steps, menstrual cycle, VO₂ max, and workouts, which is a nice touch.\n\nFor users who are sick, injured, or taking a break from exercise, the app’s hallmark Activity Path will make way for a new Wellbeing Path, which lets them track their wellbeing on a daily basis.\n\nFor users with Active status, a new colorful wellbeing line will appear beneath the Activity Path, reflecting how they feel each day. This information is logged automatically for those who wear their Apple Watch overnight, or based on self-assessments for those who don’t.\n\nImportantly, Gentler Stories notes that all information entered through the new feature remains on the user’s device, with no accounts or company-operated servers involved.\n\nGentler Streak is available for free on the App Store , with in-app purchases for monthly, yearly, family, and lifetime subscriptions."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "techcrunch-1ececa89ad95b2bd",
     "type": "news",
     "sourceId": "techcrunch",
@@ -92,31 +165,6 @@
         "title": "Binance warns iPhone crypto holders of security flaw researchers say remains unpatched",
         "summary": "Crypto exchange Binance has warned iPhone users about an iOS vulnerability that could allow malicious apps to access sensitive data stored by other apps. Here are the details. more…",
         "body": "Crypto exchange Binance has warned iPhone users about an iOS vulnerability that could allow malicious apps to access sensitive data stored by other apps. Here are the details.\n\nIn a post published on X (via AppleInsider ), Binance says that a vulnerability called worse_query could allow “malicious apps to read local files from other apps, putting seed phrases, private keys, and login credentials at risk across the entire ecosystem.”\n\nBinance says the flaw affects iOS 26.7.1, iOS 27.0.1, and iOS 27.2. However, a Community Note points out that researchers describe the vulnerability as an unpatched zero-day and that Apple’s latest security updates , including iOS 27.2.1 (the current version at the time of writing), do not mention a fix.\n\nThat said, in addition to updating their devices, Binance recommends that iPhone crypto holders take the following immediate actions:\n\nThe vulnerability was disclosed by security researchers @0xjohnny and @forcequitOS , who published a proof of concept on GitHub demonstrating how it can be used to bypass iOS sandbox protections, which normally prevent apps from accessing each other’s files.\n\nResearcher @forcequitOS also noted that neither iOS 27.2.1 nor iOS 27.3 beta 1 patches the vulnerability.\n\nAlthough the researcher describes the code as intended for developers and not useful on its own, other developers have already built apps using it, including a file manager that can access, modify, and delete data belonging to other apps without requiring a jailbreak.\n\nAccording to The Hacker News , neither Binance nor the researchers have reported any attacks or cryptocurrency thefts involving the vulnerability so far."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-cd6b83884481c154",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/11/apple-invites-app-now-lets-hosts-poll-guests-plus-new-emoji-effect-added/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-11T21:08:46.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple Invites app now lets hosts poll guests, plus new emoji effect added",
-        "summary": "Apple Invites, an iCloud+ feature, just added two new features in this month’s update. more…",
-        "body": "Apple Invites, an iCloud+ feature, just added two new features in this month’s update.\n\nInvites is Apple’s digital event planning app for iCloud+ subscribers. It’s available on iPhone and iPad. The app doesn’t require an iPhone or a paid iCloud account to respond to digital events created with Apple Invites.\n\nNovember’s update adds these two new features:\n\nAdditionally, Apple says the new version, 1.13, includes the usual bug fixes and performance improvements.\n\nApple regularly updates the Invites app for iPhone. While there’s no iPad version yet, Apple Invites gained its first iMessage app this year, putting Invites where people are already chatting.\n\nApple Invites for iPhone is available on the App Store . Creating a digital invitation requires iCloud+, and anyone can respond.\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable"
       }
     },
     "media": null
@@ -336,30 +384,6 @@
         "title": "Google’s Tabletop AI experiment lets you build custom collaboration apps",
         "summary": "Google has cooked up a new experimental AI tool called Tabletop that generates customized collaborative hubs to help you coordinate with family, and friends. The Tabletop platform shares some visual similarities with workplace management apps like Asana and Monday, but with a built-in AI feature that allows you to vibecode personalized interactive tools by describing […]",
         "body": "Google has cooked up a new experimental AI tool called Tabletop that generates customized collaborative hubs to help you coordinate with family, and friends. The Tabletop platform shares some visual similarities with workplace management apps like Asana and Monday, but with a built-in AI feature that allows you to vibecode personalized interactive tools by describing them, such as savings trackers, chore charts, event plans, and more.\n\n\"Just add in your links, files and ideas, then prompt @tabletop - or pick a starter template - to generate custom interactive trip itineraries, dinner polls, expense splitters and tournament brackets,\" Google …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-2a50db6f98d4b35a",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1031524/google-deepmind-alphagenome-2-genetic-ai-model",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-11T15:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google’s AlphaGenome 2 zooms in on the cellular roots of disease",
-        "summary": "Researchers at Google DeepMind have unveiled a new AI model designed to unravel how changes in our DNA affect different cells, giving scientists a more detailed view of a notoriously difficult problem that could hold important clues to the causes of disease - and point the way to new treatments. AlphaGenome 2 is the successor […]",
-        "body": "Researchers at Google DeepMind have unveiled a new AI model designed to unravel how changes in our DNA affect different cells, giving scientists a more detailed view of a notoriously difficult problem that could hold important clues to the causes of disease - and point the way to new treatments.\n\nAlphaGenome 2 is the successor to DeepMind's genome-predicting AI model AlphaGenome, which was released last year . While nearly every cell in the human body carries the same DNA, different types of cells - from heart muscle cells and skin cells to immune cells fighting an infection - switch different genes on and off, and those patterns can change d …\n\nRead the full story at The Verge."
       }
     },
     "media": null
@@ -1342,30 +1366,6 @@
         "title": "Asistente para identificar los requisitos de accesibilidad aplicables a las TIC - EN 301 549 V4.1.1 (2026)",
         "summary": "En este artículo os recomiendo la herramienta del Gobierno de Canadá ICT accessibility requirements wizard - EN 301 549 V4.1.1 (2026), que ayuda a identificar los requisitos de la norma que aplican a un producto o servicio TIC. La nueva versión de la EN 301 549 v4.1.1 tiene más de 300 requisitos. Esta herramienta permite filtrarlos en función de sus condiciones de aplicación para obtener el",
         "body": "Nota 1: como todos los artículos de este blog, este artículo NO está promocionado.\n\nNota 2: como todos los artículos de este blog, este artículo se ha ideado y elaborado sin el uso de herramientas IA, solo se han usado para la revisión final de la ortografía.\n\nAutor: Olga Carreras Montoto\n\nEtiquetas: EN 301 549 , herramientas\n\nCompártelo en:\n\nHistórico de artículos:\n\nSubir al comienzo de la página"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "conticgo-61365ef43bc8de89",
-    "type": "news",
-    "sourceId": "conticgo",
-    "sourceName": "Conticgo",
-    "sourceUrl": "https://conticgo.net/",
-    "originalUrl": "https://conticgo.net/tdk-desarrolla-un-espejo-ultrafino-para-proyectar-imagenes-directamente-en-la-retina/",
-    "originalLanguage": "es",
-    "publishedAt": "2026-10-27T07:00:43.000Z",
-    "categories": [
-      "tecnologia-accesibilidad",
-      "gafas-inteligentes"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "TDK desarrolla un espejo ultrafino para proyectar imágenes directamente en la retina",
-        "summary": "La empresa tecnológica TDK ha presentado un sistema que utiliza un espejo metaóptico de apenas 150 nanómetros de grosor para dirigir imágenes hacia la retina. Esta tecnología podría facilitar el desarrollo de gafas inteligentes más discretas y ligeras. El avance se dirige al mercado de las gafas inteligentes y la realidad aumentada. Además, abre nuevas […] La entrada TDK desarrolla un espejo ultrafino para proyectar imágenes directamente en la retina se publicó primero en Conticgo .",
-        "body": "La empresa tecnológica TDK ha presentado un sistema que utiliza un espejo metaóptico de apenas 150 nanómetros de grosor para dirigir imágenes hacia la retina. Esta tecnología podría facilitar el desarrollo de gafas inteligentes más discretas y ligeras.\n\nEl avance se dirige al mercado de las gafas inteligentes y la realidad aumentada. Además, abre nuevas posibilidades para investigar futuras aplicaciones de la tiflotecnología. Sin embargo, todavía no es una ayuda visual disponible para personas con baja visión.\n\nLos sistemas de proyección retinal dirigen haces de luz hacia la retina para generar una imagen que percibe la persona que lleva el dispositivo. De esta forma, pueden mostrar información digital sin depender exclusivamente de una pantalla convencional situada delante de los ojos.\n\nHasta ahora, uno de los retos de esta tecnología era el tamaño de sus componentes ópticos. Algunos sistemas necesitan espejos curvos voluminosos cerca de los ojos, lo que dificulta conseguir unas gafas con una apariencia similar a la de unas gafas convencionales.\n\nPara resolver este problema, TDK ha desarrollado un espejo metaóptico que utiliza estructuras a escala nanométrica para controlar la reflexión de la luz. Su diseño permite integrar el componente directamente en una lente, en lugar de utilizar un espejo curvo de mayor tamaño.\n\nEl nuevo componente presentado por TDK destaca por sus dimensiones y transparencia. Según los datos publicados por la empresa, sus principales características son:\n\nAdemás, el diseño pretende reducir la visibilidad de las imágenes proyectadas desde el exterior. Así, otras personas no deberían ver el contenido digital que recibe quien lleva las gafas.\n\nLos resultados técnicos también se han recogido en un artículo publicado en SID Symposium Digest of Technical Papers en septiembre de 2026. El trabajo describe la integración del espejo metaóptico en una lente y un sistema de visualización con resolución de 1.280 × 720 píxeles y un campo de visión diagonal de 45 grados.\n\nLa investigación sobre proyección retinal puede resultar relevante para el desarrollo de futuras ayudas visuales. Unas gafas con componentes ópticos más pequeños podrían facilitar la integración de información digital sin recurrir a estructuras voluminosas.\n\nEn el ámbito de la discapacidad visual, estas tecnologías podrían investigarse para mostrar información contextual, indicaciones de navegación o elementos de realidad aumentada. También podrían combinarse en el futuro con sistemas de inteligencia artificial capaces de describir el entorno o proporcionar información mediante audio.\n\nNo obstante, es importante distinguir entre las posibilidades de una tecnología y sus aplicaciones demostradas. TDK ha presentado un avance en el sistema óptico de las gafas, pero no ha demostrado que este desarrollo mejore la autonomía de personas con baja visión en situaciones cotidianas.\n\nLa utilidad para cada persona dependerá, entre otros factores, de sus necesidades visuales, las características de la imagen, el contraste, el brillo y la facilidad de uso del dispositivo completo.\n\nPor el momento, el desarrollo de TDK se encuentra en fase de demostración tecnológica. La empresa trabaja para conseguir una versión a todo color y avanzar hacia la fabricación en serie durante los próximos años.\n\nPor tanto, todavía no se puede hablar de un producto comercial de ayuda visual ni confirmar su precio, disponibilidad en España o utilidad clínica. También será necesario conocer las prestaciones del dispositivo completo y evaluar aspectos como la seguridad ocular, la autonomía y el funcionamiento en diferentes condiciones de iluminación.\n\nEl espejo metaóptico de TDK representa un avance en la miniaturización de los sistemas ópticos para gafas inteligentes. Su integración en una lente transparente podría ayudar a superar algunas de las barreras de diseño que han limitado el desarrollo de estos dispositivos.\n\nPara la tiflotecnología, el interés está en comprobar si futuros sistemas basados en esta tecnología pueden ofrecer funciones realmente útiles y accesibles para las personas con discapacidad visual.\n\nDesde EsRetina seguiremos atentos a la evolución de estas investigaciones y a las novedades que puedan traducirse en soluciones prácticas para mejorar la accesibilidad y la autonomía personal.\n\nFuentes: TDK: comunicado oficial sobre el sistema de proyección retinal (2 de octubre de 2026) , Mizuno y colaboradores: Direct Retinal Projection by Meta-Optic Mirror for Smart Glasses , SID Symposium Digest of Technical Papers (2026) , TDK: explicación técnica del espejo metaóptico"
       }
     },
     "media": null

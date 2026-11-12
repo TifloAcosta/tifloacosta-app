@@ -734,3 +734,14 @@
 "Abrir sección del catálogo." = "Open catalog section.";
 "Descarga la obra y la incorpora a TifloLector." = "Downloads the book and adds it to TifloReader.";
 "No se pudo completar la operación" = "Could not complete the operation";
+"Escribir a TifloAcosta por correo" = "Email TifloAcosta";
+"Instalar el atajo Marcar lectura" = "Install the Mark Reading shortcut";
+"Añade el atajo compartido a tu iPhone con un solo enlace. El atajo crea una marca en la posición actual de TifloLector sin detener la reproducción." = "Add the shared shortcut to your iPhone using a single link. It creates a bookmark at the current position in TifloReader without stopping playback.";
+"Añadir atajo Marcar lectura" = "Add Mark Reading shortcut";
+"Si prefieres crearlo manualmente, abre Atajos, añade la acción Crear marca en TifloLector y ponle el nombre Marcar lectura." = "To create it manually, open Shortcuts, add the Create Bookmark in TifloReader action, and name it Mark Reading.";
+"Eliminar modelo Phonon" = "Delete Phonon model";
+"Eliminar clave" = "Delete API key";
+"No se pudo completar" = "Could not complete";
+"Posición del vídeo" = "Video position";
+"Desliza arriba para avanzar diez por ciento; abajo para retroceder." = "Swipe up to move forward ten percent; swipe down to move back.";
+"Reproductor accesible" = "Accessible player";

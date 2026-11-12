@@ -105,3 +105,4 @@ if(process.env.GITHUB_STEP_SUMMARY) {
 }
 
 // Public availability follow-up: recheck Apple version state after review submission.
+// Read-only status check requested 12 November 2026, afternoon Canary Islands time.

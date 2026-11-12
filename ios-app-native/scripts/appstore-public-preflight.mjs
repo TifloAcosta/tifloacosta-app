@@ -84,7 +84,7 @@ const release=JSON.parse(fs.readFileSync('ios-app-native/release/appstore-1.2.js
 if(release.bundleId !== output.bundleId || release.version !== '1.2') throw Error('Release config or bundle mismatch');
 if(!release.whatsNew?.[release.primaryLocale]?.trim()) throw Error('Spanish What’s New is missing');
 const existingDraft=output.versions.find(x=>x.number===release.version);
-if(existingDraft && !['PREPARE_FOR_SUBMISSION','DEVELOPER_REJECTED','REJECTED'].includes(existingDraft.state))
+if(existingDraft && !['PREPARE_FOR_SUBMISSION','DEVELOPER_REJECTED','REJECTED','WAITING_FOR_REVIEW','IN_REVIEW','PENDING_APPLE_RELEASE','READY_FOR_DISTRIBUTION','PROCESSING_FOR_APP_STORE'].includes(existingDraft.state))
   throw Error('Version '+release.version+' exists in non-editable state '+existingDraft.state);
 const uploadedNumbers=output.recentBuilds.map(x=>Number(x.number)).filter(Number.isInteger);
 const nextBuild=Math.max(500151,...uploadedNumbers.map(x=>x+1));

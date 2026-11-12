@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TifloLector: guía completa de lectura accesible | TifloAcosta</title>
+<meta name="description" content="Guía práctica de TifloLector para iPhone: importar archivos, PowerPoint y Excel accesibles, bibliotecas, VoiceOver, voces, navegación, marcas, traducción y exportación DAISY.">
+<style>
+:root{color-scheme:light dark}body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;font-size:1.05rem;line-height:1.75;max-width:880px;margin:0 auto;padding:1.2rem;color:CanvasText;background:Canvas}a{color:LinkText;text-decoration:underline}a:focus-visible{outline:3px solid currentColor;outline-offset:4px}h1,h2,h3{line-height:1.3}h2{margin-top:2.6rem}nav{padding:1rem 1.3rem;border:1px solid #777;border-radius:.5rem}nav ol{padding-left:1.5rem}li{margin:.45rem 0}p{margin:.8rem 0}.firma{font-weight:600}.nota{padding:1rem 1.2rem;border-left:4px solid currentColor}.small{font-size:.95rem}main{display:block}footer{margin-top:3rem;padding-top:1rem;border-top:1px solid #777}.salto{position:absolute;left:-9999px}.salto:focus{position:static}
+</style>
+</head><body>
+<a class="salto" href="#contenido">Saltar al contenido</a>
+<header>
+<h1>TifloLector: guía completa para leer, estudiar, navegar y crear audiolibros accesibles</h1>
+<p class="firma">Tony Acosta - TifloAcosta</p>
+<p class="small">Edición de referencia: TifloAcosta iOS 1.2, preparada para la revisión de Apple en noviembre de 2026. Las funciones futuras se diferencian de las disponibles.</p>
+<p>De un documento de Word a una presentación, de una hoja de cálculo a un audiolibro DAISY: esta guía te explica cómo utilizar cada herramienta y cómo combinarla con VoiceOver.</p>
+</header>
+<nav aria-label="Índice de la guía"><h2>Índice</h2><ol>
+<li><a href="#presentacion">1. TifloLector: qué es y a quién puede servir</a></li>
+<li><a href="#primeros">2. Primer contacto: entrar y orientarte</a></li>
+<li><a href="#importar">3. Importar desde Archivos y desde otras aplicaciones</a></li>
+<li><a href="#formatos">4. Formatos admitidos: no solo libros electrónicos</a></li>
+<li><a href="#powerpoint">5. Presentaciones PowerPoint: convertir diapositivas en una lectura útil</a></li>
+<li><a href="#excel">6. Hojas de cálculo: leer datos sin perderse entre celdas</a></li>
+<li><a href="#ocr">7. PDF escaneados e imágenes: reconocer el texto</a></li>
+<li><a href="#bibliotecas">8. Bibliotecas en línea y catálogos OPDS</a></li>
+<li><a href="#organizacion">9. Mi biblioteca: encontrar, ordenar y organizar</a></li>
+<li><a href="#lectura">10. Reproducir, pausar y reanudar sin perder la posición</a></li>
+<li><a href="#navegacion">11. Navegación avanzada: mucho más que pasar páginas</a></li>
+<li><a href="#buscar">12. Buscar dentro de un documento y regresar</a></li>
+<li><a href="#marcas">13. Marcas de lectura: guardar ideas sin interrumpir la voz</a></li>
+<li><a href="#voz-sistema">14. Voces del sistema, voces adicionales y Voz personal</a></li>
+<li><a href="#motores">15. Gemini y Phonon: motores de voz externos</a></li>
+<li><a href="#ajustes-audio">16. Personalizar la voz: velocidad, tono y puntuación</a></li>
+<li><a href="#visual">17. Presentación visual y modo de lectura</a></li>
+<li><a href="#timer">18. Temporizador y controles para escuchar con tranquilidad</a></li>
+<li><a href="#traduccion">19. Traducir un documento completo y conservar el original</a></li>
+<li><a href="#herramientas">20. Diccionario, pronunciación y enlaces</a></li>
+<li><a href="#audio-daisy">21. Crear audiolibros: MP3, M4A, WAV y DAISY</a></li>
+<li><a href="#daisy-import">22. Leer audiolibros DAISY y paquetes de audio</a></li>
+<li><a href="#exportar">23. Compartir, recuperar el original y exportar texto</a></li>
+<li><a href="#copias">24. Copia de seguridad y restauración de tu biblioteca</a></li>
+<li><a href="#ejemplos">25. Cuatro maneras de sacar verdadero partido a TifloLector</a></li>
+<li><a href="#limitaciones">26. Lo que conviene saber antes de empezar</a></li>
+<li><a href="#preguntas">27. Preguntas frecuentes</a></li>
+<li><a href="#cierre">28. Una invitación a probarlo con tus propios documentos</a></li>
+</ol></nav>
+<main id="contenido">
+<section aria-labelledby="h-presentacion" id="presentacion"><h2 id="h-presentacion">1. TifloLector: qué es y a quién puede servir</h2>
+<p>TifloLector es el lector de documentos y biblioteca personal integrado en TifloAcosta. Su objetivo no es limitarse a decir en voz alta lo que contiene un archivo: pretende ayudarte a encontrarlo, comprender su estructura, escucharlo de la forma que te resulte más cómoda y volver después al punto exacto donde interrumpiste la lectura.</p>
+<p>Puedes utilizarlo para disfrutar de una novela, estudiar apuntes, repasar una presentación, consultar una hoja de cálculo, escuchar un audiolibro o convertir un documento en audio para llevarlo contigo. La aplicación presta una atención especial a VoiceOver, pero también ofrece opciones visuales para quienes leen en pantalla.</p>
+<p>Este tutorial describe principalmente las funciones de TifloLector en la versión 1.2 de TifloAcosta para iPhone, enviada a revisión de Apple el 12 de noviembre de 2026. Algunas opciones dependen del formato, la versión de iOS, el motor de voz disponible y los servicios externos. Las funciones que todavía están en preparación se identifican expresamente.</p>
+</section>
+<section aria-labelledby="h-primeros" id="primeros"><h2 id="h-primeros">2. Primer contacto: entrar y orientarte</h2>
+<p>Abre TifloAcosta y entra en TifloLector. Encontrarás el botón Importar, la sección Mi biblioteca, los controles de filtrado y ordenación, las carpetas y el acceso a Ajustes. Si todavía no has incorporado obras, la biblioteca se mostrará vacía.</p>
+<p>Con VoiceOver, desplázate mediante los gestos habituales. Cuando encuentres un control ajustable, desliza un dedo hacia arriba o hacia abajo para cambiar su valor. Los títulos de documentos admiten acciones de accesibilidad: no necesitas abrir un libro para realizar operaciones sobre él.</p>
+<p>Una recomendación práctica: importa primero un TXT, un EPUB o un documento corto, comprueba cómo funciona Reproducir y explora Modo de navegación. Así te familiarizarás con los controles antes de abordar archivos complejos.</p>
+<h3>Cómo hacerlo paso a paso</h3>
+<ol>
+<li>Abre TifloAcosta y selecciona TifloLector.</li>
+<li>Pulsa Importar y selecciona Desde Archivos.</li>
+<li>Busca un documento en la aplicación Archivos del iPhone y confirma su importación.</li>
+<li>Regresa a Mi biblioteca y abre el título.</li>
+<li>Pulsa Reproducir o usa el modo manual para examinar el texto.</li>
+</ol>
+</section>
+<section aria-labelledby="h-importar" id="importar"><h2 id="h-importar">3. Importar desde Archivos y desde otras aplicaciones</h2>
+<p>El botón Importar abre dos caminos: Desde Archivos y Bibliotecas en línea. Desde Archivos permite seleccionar documentos guardados en el iPhone, iCloud Drive u otras ubicaciones ofrecidas por el selector de iOS.</p>
+<p>También puedes enviar contenido a TifloAcosta desde la opción Compartir de otra aplicación. Los archivos recibidos pueden pasar por la sección Recibidos, desde la que se incorporan a TifloLector. Una vez importados, los encontrarás en Mi biblioteca.</p>
+<p>TifloLector conserva una copia del archivo original cuando la importación lo permite. Así puedes compartir posteriormente el documento tal como lo recibiste, sin confundirlo con la versión de texto preparada para la lectura.</p>
+<h3>Cómo hacerlo paso a paso</h3>
+<ol>
+<li>En TifloLector, pulsa Importar.</li>
+<li>Elige Desde Archivos o Bibliotecas en línea.</li>
+<li>Si escoges Archivos, localiza y selecciona el fichero.</li>
+<li>Espera a que aparezca en Mi biblioteca.</li>
+<li>Si recibes algo desde Compartir, comprueba primero Recibidos y utiliza la opción de importación.</li>
+</ol>
+<p class="nota"><strong>Consejo:</strong> Si un archivo no se importa, revisa la extensión y consulta Ajustes de TifloLector, Formatos de lectura. No todos los ZIP y todos los formatos antiguos de Office están admitidos.</p>
+</section>
+<section aria-labelledby="h-formatos" id="formatos"><h2 id="h-formatos">4. Formatos admitidos: no solo libros electrónicos</h2>
+<p>Entre los textos que puede importar se encuentran TXT, TEXT, MD, MARKDOWN, CSV, JSON, XML, LOG y SRT. Para documentos y publicaciones se contemplan EPUB, PDF con texto o con páginas escaneadas mediante OCR, HTML, HTM, RTF, DOCX, ODT y FB2. La extracción de ODT y FB2 se centra en el texto, no en reproducir las imágenes incrustadas.</p>
+<p>En presentaciones se admiten PPTX, PPSX y PPTM. Para hojas de cálculo se admiten XLSX y XLSM. Los formatos antiguos PPT, PPS y XLS todavía no se pueden importar directamente en esta versión para iOS; debes convertirlos previamente al formato moderno correspondiente.</p>
+<p>El lector admite imágenes JPG, JPEG, PNG, HEIC, HEIF, TIF y TIFF para reconocer su texto mediante OCR. También admite archivos de audio MP3, M4A, M4B, AAC, WAV, AIF, AIFF y CAF, así como determinados paquetes ZIP de audiolibros y libros DAISY. No interpreta archivos RAR, 7Z o ZIP arbitrarios como si fueran libros.</p>
+<p class="nota"><strong>Consejo:</strong> Una presentación PPS antigua se puede convertir a PPSX o PPTX con una herramienta compatible antes de importarla. Un XLS antiguo debe convertirse a XLSX. No confundas «admitir un formato» con conservar todas sus características gráficas o fórmulas.</p>
+</section>
+<section aria-labelledby="h-powerpoint" id="powerpoint"><h2 id="h-powerpoint">5. Presentaciones PowerPoint: convertir diapositivas en una lectura útil</h2>
+<p>Una presentación no está pensada necesariamente para ser leída de manera lineal. Cuando importas un PPTX, PPSX o PPTM, TifloLector extrae el texto de sus diapositivas, lo ordena por número y lo presenta en bloques identificados como «Diapositiva 1», «Diapositiva 2», etcétera.</p>
+<p>Este tratamiento evita escuchar código técnico o un conjunto de elementos inconexos. Puedes recorrer el contenido como texto, detenerte en una diapositiva, colocar una marca o utilizar la estructura que el lector consiga identificar. Resulta especialmente práctico para clases, reuniones, formaciones y presentaciones recibidas por correo.</p>
+<p>No se trata de una descripción inteligente de imágenes ni de una interpretación semántica de gráficos: el contenido que solo existe como imagen puede quedar fuera, y el orden de algunos elementos visuales complejos puede requerir comprobar el original.</p>
+<h3>Cómo hacerlo paso a paso</h3>
+<ol>
+<li>Convierte el archivo antiguo PPS/PPT a PPSX/PPTX si fuera necesario.</li>
+<li>Importa la presentación desde Archivos.</li>
+<li>Abre el documento en Mi biblioteca.</li>
+<li>En Índice de la obra localiza las divisiones de diapositiva, si se han reconocido.</li>
+<li>Escucha la diapositiva deseada o utiliza Buscar en el documento para localizar una palabra.</li>
+</ol>
+<p class="nota"><strong>Consejo:</strong> Para una conferencia, busca primero los términos clave de la presentación y crea marcas en las diapositivas a las que quieras volver.</p>
+</section>
+<section aria-labelledby="h-excel" id="excel"><h2 id="h-excel">6. Hojas de cálculo: leer datos sin perderse entre celdas</h2>
+<p>La lectura convencional de una hoja de cálculo puede convertirse en un recorrido agotador. En XLSX y XLSM, TifloLector organiza el texto extraído por hojas, filas y columnas. Así puede anunciar, por ejemplo: «Hoja 1», «Fila 4», «Columna A: Producto», «Columna B: Cantidad», «Columna C: 25».</p>
+<p>La interpretación permite escuchar los datos en un orden razonable y reconocer a qué columna corresponde cada valor. Se procesan también las cadenas compartidas del formato Excel, de modo que muchas celdas de texto se leen correctamente en vez de presentar identificadores internos.</p>
+<p>Es una ayuda para consultar, estudiar y escuchar información tabular; no sustituye un editor de hojas de cálculo. No debes presuponer que interpreta el significado de las fórmulas, que reproduce gráficos, formatos de celda o relaciones complejas entre tablas.</p>
+<h3>Cómo hacerlo paso a paso</h3>
+<ol>
+<li>Guarda la hoja en XLSX o XLSM; convierte primero los XLS antiguos.</li>
+<li>Impórtala en TifloLector.</li>
+<li>Abre el documento y escucha el encabezado de cada hoja.</li>
+<li>Avanza por los bloques del documento o usa Buscar para localizar un concepto, cifra o nombre.</li>
+<li>Si vuelves con frecuencia a un conjunto de datos, crea una marca cercana a la fila relevante.</li>
+</ol>
+<p class="nota"><strong>Consejo:</strong> En hojas grandes conviene conocer los encabezados originales de las columnas antes de escuchar los datos. La lectura lineal es una representación accesible, no una edición interactiva de Excel.</p>
+</section>
+<section aria-labelledby="h-ocr" id="ocr"><h2 id="h-ocr">7. PDF escaneados e imágenes: reconocer el texto</h2>
+<p>No todos los PDF contienen letras seleccionables: algunos son fotografías de páginas. TifloLector utiliza el reconocimiento óptico de caracteres, u OCR, cuando encuentra páginas escaneadas sin texto. También puede reconocer texto en imágenes compatibles.</p>
+<p>Desde Ajustes de TifloLector, OCR y reconocimiento, puedes elegir el idioma de reconocimiento y la prioridad entre precisión y rapidez. El ajuste afecta a las importaciones posteriores; no transforma automáticamente documentos ya importados.</p>
+<p>La calidad del resultado depende del escaneo: una fotografía torcida, borrosa o con tablas complejas puede generar errores. Como medida de seguridad, la importación OCR de PDF está limitada a un máximo de 150 páginas escaneadas por archivo. Si superas ese límite, divide el documento.</p>
+<h3>Cómo hacerlo paso a paso</h3>
+<ol>
+<li>Entra en Ajustes de TifloLector y abre OCR y reconocimiento.</li>
+<li>Elige idioma y precisión apropiados.</li>
+<li>Importa el PDF escaneado o la imagen.</li>
+<li>Abre el resultado y revisa una muestra de texto.</li>
+<li>Si detectas errores, intenta obtener un escaneo mejor o divide el archivo.</li>
+</ol>
+</section>
+<section aria-labelledby="h-bibliotecas" id="bibliotecas"><h2 id="h-bibliotecas">8. Bibliotecas en línea y catálogos OPDS</h2>
+<p>En Importar, elige Bibliotecas en línea. Este apartado permite consultar Proyecto Gutenberg y añadir tus propios catálogos OPDS públicos a través de HTTPS, tanto OPDS 1 (Atom) como OPDS 2 (JSON).</p>
+<p>Puedes recorrer los resultados, buscar por título o autor en las opciones ofrecidas por el catálogo y utilizar «Importar a mi biblioteca» cuando una obra disponga de un enlace de descarga compatible. El contenido pasa a formar parte de tu biblioteca personal.</p>
+<p>La opción de Bookshare abre actualmente su sitio web: la descarga integrada exige los requisitos de cuenta y autorización propios del servicio. La existencia de una biblioteca en el apartado no garantiza acceso libre a todos sus libros.</p>
+<p>Estamos realizando gestiones para una posible integración de la biblioteca de Tiflonexos. La intención es facilitar un acceso acreditado de forma accesible, pero, a la fecha de esta guía, esa biblioteca no debe considerarse integrada ni disponible. Cuando exista un acuerdo y un mecanismo funcional, se anunciará por los canales oficiales de TifloAcosta.</p>
+<h3>Cómo hacerlo paso a paso</h3>
+<ol>
+<li>Pulsa Importar y elige Bibliotecas en línea.</li>
+<li>Selecciona Proyecto Gutenberg para explorar obras públicas.</li>
+<li>Si conoces otro catálogo compatible, utiliza Añadir catálogo OPDS.</li>
+<li>Escribe un nombre y su dirección HTTPS, y guarda el catálogo.</li>
+<li>Abre un resultado, identifica el formato ofrecido y pulsa Importar a mi biblioteca si está disponible.</li>
+</ol>
+<p class="nota"><strong>Consejo:</strong> Comprueba las condiciones de acceso, copyright y descarga de cada biblioteca. Una obra que aparece en un catálogo puede no ofrecer un formato compatible.</p>
+</section>
+<section aria-labelledby="h-organizacion" id="organizacion"><h2 id="h-organizacion">9. Mi biblioteca: encontrar, ordenar y organizar</h2>
+<p>En Mi biblioteca tienes documentos de formatos distintos en un mismo lugar. El control Filtrar documentos ofrece Todos, Textos, PDF, EPUB, Office, Audio y DAISY, Con marcas, Favoritos, Importados hoy, Últimos siete días y Último mes.</p>
+<p>El control Ordenar permite Más recientes, Más antiguos, Título A a Z, Título Z a A, Formato y Último abierto. Puedes agrupar libros por carpetas mediante Ver por carpetas, crear una carpeta y mover documentos sin alterar el archivo original del sistema.</p>
+<p>El botón Selección permite trabajar con varias obras a la vez: seleccionarlas todas entre las visibles, deseleccionarlas, moverlas a una carpeta, eliminarlas o añadirlas y retirarlas de Favoritos.</p>
+<p>Las acciones accesibles disponibles en el título incluyen Reproducir, Compartir documento original, Información, Ajustes del documento, Mover a carpeta, Añadir a favoritos, Cambiar título, Traducir y Eliminar. VoiceOver puede presentar la información de cada documento con más o menos detalle, desde título y porcentaje hasta formato y carpeta.</p>
+<h3>Cómo hacerlo paso a paso</h3>
+<ol>
+<li>Colócate sobre Filtrar documentos y elige, por ejemplo, Office.</li>
+<li>Usa Ordenar para elegir Último abierto.</li>
+<li>Abre Ver por carpetas y crea una carpeta para materiales de estudio o trabajo.</li>
+<li>Sitúate sobre el título de una obra y utiliza las acciones del rotor de VoiceOver para moverla, cambiarle el nombre o consultar sus datos.</li>
+<li>Para varias obras, activa Selección, marca los documentos y elige la operación.</li>
+</ol>
+<p class="nota"><strong>Consejo:</strong> Antes de borrar varios documentos, comprueba el filtro activo y el número de elementos seleccionados.</p>
+</section>
+<section aria-labelledby="h-lectura" id="lectura"><h2 id="h-lectura">10. Reproducir, pausar y reanudar sin perder la posición</h2>
+<p>Dentro de cada documento encontrarás Reproducir o Pausar, además de los controles de desplazamiento. En Ajustes de TifloLector, Modo de lectura, puedes decidir si el documento comienza a sonar automáticamente al abrirlo o si esperará a que tú pulses Reproducir.</p>
+<p>La posición de lectura queda registrada para continuar después, y las marcas sirven para conservar puntos de interés independientes del último lugar leído. Al trabajar con audio grabado, el control de reproducción se adapta a las pistas disponibles.</p>
+<p>La reproducción de audio admite el uso en segundo plano según el tipo de contenido y el motor. Los controles y la respuesta al bloqueo de pantalla pueden variar entre audio pregrabado, voces del sistema y servicios externos.</p>
+<h3>Cómo hacerlo paso a paso</h3>
+<ol>
+<li>Abre un libro desde Mi biblioteca.</li>
+<li>Si estás en modo manual, pulsa Reproducir.</li>
+<li>Pulsa Pausar cuando quieras detenerte.</li>
+<li>Regresa a la biblioteca y vuelve a abrir el mismo título para continuar desde la posición almacenada.</li>
+<li>Utiliza Información para conocer los porcentajes leídos y, cuando estén disponibles, los tiempos.</li>
+</ol>
+</section>
+<section aria-labelledby="h-navegacion" id="navegacion"><h2 id="h-navegacion">11. Navegación avanzada: mucho más que pasar páginas</h2>
+<p>Uno de los elementos más útiles de TifloLector es Modo de navegación. Según el tipo de obra y su estructura, puedes desplazarte por bloque, párrafo, frase, página, encabezado, tiempo, marcas, enlaces, capítulo y, en libros DAISY compatibles, páginas y referencias DAISY.</p>
+<p>Las modalidades que no tienen sentido para un documento concreto pueden no aparecer. Por ejemplo, un libro sin encabezados detectables no ofrece exactamente las mismas posibilidades que un DAISY con un índice estructurado.</p>
+<p>Para cambiar de unidad, sitúate en Modo de navegación y desliza hacia arriba o abajo con VoiceOver. El control de reproducción admite acciones ajustables para avanzar o retroceder siguiendo la unidad seleccionada. También tienes Índice de la obra, que agrupa encabezados, páginas, diapositivas, hojas y puntos de navegación DAISY cuando el documento los proporciona.</p>
+<p>Existe además Ir a posición, con porcentajes del 0 al 100, y un ajuste de Intervalo de tiempo con 30 segundos, 1 minuto, 2 minutos y 5 minutos, útil especialmente para material sonoro.</p>
+<h3>Cómo hacerlo paso a paso</h3>
+<ol>
+<li>Abre una obra con varios capítulos.</li>
+<li>Busca Modo de navegación y selecciona Capítulo o Encabezado cuando esté disponible.</li>
+<li>Avanza y retrocede con las acciones ajustables del control de reproducción.</li>
+<li>Pulsa Índice y navegación estructurada para saltar directamente a un punto concreto.</li>
+<li>Para un salto aproximado, utiliza Ir a posición y elige un porcentaje.</li>
+</ol>
+<p class="nota"><strong>Consejo:</strong> Para estudiar, combina capítulos, encabezados y marcas. Un salto por porcentaje es útil para aproximarte, pero la estructura real del documento suele ser más precisa.</p>
+</section>
+<section aria-labelledby="h-buscar" id="buscar"><h2 id="h-buscar">12. Buscar dentro de un documento y regresar</h2>
+<p>La opción Buscar en el documento permite localizar una palabra o expresión dentro de la obra que estás leyendo. En lugar de recorrer cientos de párrafos, puedes buscar un término específico y desplazarte hasta el resultado.</p>
+<p>TifloLector contempla volver a la posición anterior a la búsqueda, para que una consulta no interrumpa definitivamente tu lectura. Esto es especialmente útil para un manual técnico, un temario o un libro de referencia.</p>
+<h3>Cómo hacerlo paso a paso</h3>
+<ol>
+<li>Abre el documento.</li>
+<li>Pulsa Buscar en el documento.</li>
+<li>Introduce un término y examina los resultados.</li>
+<li>Accede a la coincidencia que te interese.</li>
+<li>Para volver al punto de lectura anterior, utiliza Volver a la posición anterior a la búsqueda.</li>
+</ol>
+</section>
+<section aria-labelledby="h-marcas" id="marcas"><h2 id="h-marcas">13. Marcas de lectura: guardar ideas sin interrumpir la voz</h2>
+<p>Una marca conserva un punto específico de lectura. No tiene por qué coincidir con la posición donde dejaste el libro. Puedes guardar varias marcas y consultarlas desde Marcas guardadas, volver a ellas y eliminarlas individualmente.</p>
+<p>En los documentos de texto, las marcas pueden conservar una referencia al fragmento correspondiente; en audio, pueden señalar la pista y el porcentaje. Cuando se guarda una marca, VoiceOver dispone de mensajes de confirmación.</p>
+<p>Hay varias formas de crear marcas: el botón Añadir marca dentro del lector, la acción Crear marca en el rotor de VoiceOver y un atajo de iOS diseñado para hacerlo sin detener la reproducción.</p>
+<p>En Ajustes de TifloLector, Creación rápida de marcas, se explica cómo instalar el atajo «Marcar lectura». Puedes añadirlo a Atajos y, si tu iPhone lo permite, asignarlo al triple toque posterior o al botón de Acción. El gesto se configura en los Ajustes de iOS; no se impone automáticamente.</p>
+<h3>Cómo hacerlo paso a paso</h3>
+<ol>
+<li>Abre una obra y comienza a escucharla.</li>
+<li>Sitúate sobre el elemento de lectura y utiliza la acción Crear marca de VoiceOver, o pulsa Añadir marca.</li>
+<li>Para hacerlo sin buscar el botón, entra en Ajustes, Creación rápida de marcas, e instala el atajo indicado.</li>
+<li>Asocia el atajo al triple toque posterior o al botón de Acción en los Ajustes del iPhone, si te resulta cómodo.</li>
+<li>Consulta Marcas guardadas para volver a un punto concreto.</li>
+</ol>
+<p class="nota"><strong>Consejo:</strong> Una estrategia de estudio: crea una marca al comienzo de cada tema y otra en las dudas que quieras revisar.</p>
+</section>
+<section aria-labelledby="h-voz-sistema" id="voz-sistema"><h2 id="h-voz-sistema">14. Voces del sistema, voces adicionales y Voz personal</h2>
+<p>Por defecto puedes utilizar las voces de síntesis de iOS. En Ajustes de TifloLector, Audio y voces, selecciona Voces del sistema, consulta las disponibles y elige la que prefieras.</p>
+<p>El botón Buscar más voces indica el camino por los Ajustes del iPhone para descargar voces adicionales. Una vez instaladas, vuelve a TifloLector y actualiza la lista. La disponibilidad exacta depende del idioma y de la versión de iOS.</p>
+<p>En dispositivos compatibles también existe una opción para solicitar permiso de uso de una Voz personal ya creada en iOS. No significa que TifloLector pueda crear esa voz por sí mismo; el proceso de creación pertenece al sistema.</p>
+<h3>Cómo hacerlo paso a paso</h3>
+<ol>
+<li>Entra en Ajustes de TifloLector y abre Audio y voces.</li>
+<li>Elige Voces del sistema como motor de lectura.</li>
+<li>Selecciona la voz que quieres escuchar.</li>
+<li>Si necesitas otras voces, pulsa Buscar más voces y sigue las instrucciones para descargarlas en iOS.</li>
+<li>Regresa a TifloLector; si utilizas Voz personal, concede el permiso correspondiente cuando el dispositivo lo admita.</li>
+</ol>
+</section>
+<section aria-labelledby="h-motores" id="motores"><h2 id="h-motores">15. Gemini y Phonon: motores de voz externos</h2>
+<p>Además de las voces del sistema, TifloLector ofrece un apartado Motores externos. Allí encontrarás Gemini y Phonon. Cada motor cuenta con su propia pantalla para no mezclar credenciales, modelos y ajustes.</p>
+<p>Gemini funciona mediante los servicios de Google y requiere que cada persona obtenga y guarde su propia clave API. TifloAcosta incluye una guía accesible: abre Crear clave API con guía, accede a Google AI Studio, inicia sesión si procede, crea la clave, cópiala y utiliza Pegar y Guardar al regresar a la aplicación. La opción de comprobar la conexión permite saber si la clave funciona. No debes compartir la clave ni publicarla.</p>
+<p>El uso de Gemini puede consumir una cuota y estar sujeto a condiciones o costes establecidos por Google; TifloAcosta no proporciona una clave común ni asume ese consumo. Puedes probar voces Gemini y seleccionarlas para leer o exportar.</p>
+<p>Phonon se orienta a voces locales y no necesita una clave API, pero requiere un motor y modelos compatibles instalados. La versión actual ofrece opciones de descarga o importación de modelos Core ML compatibles; el uso depende de las licencias, del idioma, de la disponibilidad del motor nativo y, en ciertos casos, de iOS 18 o posterior. Instalar una aplicación independiente de Phonon no equivale automáticamente a habilitar Phonon dentro de TifloLector.</p>
+<h3>Cómo hacerlo paso a paso</h3>
+<ol>
+<li>Abre Ajustes de TifloLector y entra en Motores externos.</li>
+<li>Si quieres Gemini, abre Gemini, selecciona Crear clave API con guía y sigue los pasos accesibles.</li>
+<li>Pega la clave, pulsa Guardar y luego Comprueba la conexión; elige una voz y escucha la muestra.</li>
+<li>Regresa a Audio y voces y selecciona Gemini como motor cuando esté correctamente configurado.</li>
+<li>Si te interesa Phonon, abre su apartado, consulta la compatibilidad, instala un modelo admitido y escucha una muestra antes de seleccionarlo.</li>
+</ol>
+<p class="nota"><strong>Consejo:</strong> Las voces del sistema son la opción más directa para empezar: no requieren crear claves. Antes de utilizar servicios externos consulta sus términos y cuotas.</p>
+</section>
+<section aria-labelledby="h-ajustes-audio" id="ajustes-audio"><h2 id="h-ajustes-audio">16. Personalizar la voz: velocidad, tono y puntuación</h2>
+<p>No todas las personas comprenden igual una voz rápida, grave o con pocas pausas. Por eso TifloLector permite ajustar por separado la velocidad, el tono y los intervalos de puntuación para la lectura con las voces del sistema.</p>
+<p>La velocidad cuenta con pasos pequeños, desde 0,75 hasta 1,50 veces, en incrementos de 0,05. El tono ofrece cinco niveles: Más grave, Grave, Normal, Agudo y Más agudo. Puedes modificar estos controles mediante gestos ajustables de VoiceOver, sin escribir números.</p>
+<p>Las Pausas por puntuación ofrecen los perfiles Normal, Mayor, Expresiva y Personalizadas. En Personalizadas se puede definir cuánto se espera después de coma, punto y coma, dos puntos, punto o signos de interrogación o exclamación, y salto de párrafo. El rango va de 0 a 1,50 segundos en pasos de 0,05 segundos.</p>
+<p>Conviene distinguir entre la síntesis del sistema y los demás motores: estas pausas añadidas están implementadas específicamente para las voces del sistema. No modifican un audiolibro ya grabado ni garantizan la misma cadencia en Gemini o Phonon.</p>
+<p>Puedes establecer preferencias generales o modificar ajustes propios de una obra. De ese modo, un manual técnico puede escucharse de forma pausada mientras una novela conserva un ritmo más vivo.</p>
+<h3>Cómo hacerlo paso a paso</h3>
+<ol>
+<li>Abre Ajustes, Audio y voces.</li>
+<li>Selecciona Velocidad de voz y ajusta poco a poco con deslizamientos arriba o abajo.</li>
+<li>Prueba Tono de lectura hasta encontrar una voz cómoda.</li>
+<li>En Pausas por puntuación, escucha primero Normal, Mayor y Expresiva.</li>
+<li>Si buscas un resultado muy concreto, selecciona Personalizadas y ajusta cada signo por separado.</li>
+<li>En una obra concreta, abre Ajustes del documento para definir preferencias propias.</li>
+</ol>
+<p class="nota"><strong>Consejo:</strong> Para fórmulas, listas o material académico, una pausa mayor entre frases o párrafos puede mejorar mucho la comprensión. La mejor configuración depende del contenido y de cada persona.</p>
+</section>
+<section aria-labelledby="h-visual" id="visual"><h2 id="h-visual">17. Presentación visual y modo de lectura</h2>
+<p>TifloLector ofrece ajustes visuales como tamaño de letra, separación entre líneas y texto reforzado. Son relevantes para quienes combinan lectura visual y síntesis de voz, o trabajan con ampliación de pantalla.</p>
+<p>El modo Manual permite abrir y examinar un documento sin que empiece a hablar por sí mismo. El modo Automático inicia la reproducción al abrirlo. La elección se mantiene hasta que decidas cambiarla.</p>
+<p>En el iPhone también puedes configurar opciones generales de contraste y presentación de la aplicación.</p>
+<h3>Cómo hacerlo paso a paso</h3>
+<ol>
+<li>Entra en Ajustes de TifloLector, Ajustes visuales.</li>
+<li>Selecciona el tamaño de letra y espaciado que necesites.</li>
+<li>Si prefieres explorar primero un texto con VoiceOver, entra en Modo de lectura y elige Manual.</li>
+<li>Para escuchar inmediatamente al abrir cada libro, selecciona Automático.</li>
+</ol>
+</section>
+<section aria-labelledby="h-timer" id="timer"><h2 id="h-timer">18. Temporizador y controles para escuchar con tranquilidad</h2>
+<p>La opción Apagado automático permite que la reproducción se detenga después de un intervalo. Actualmente se contemplan Desactivado, 5, 10, 15, 30, 45 y 60 minutos.</p>
+<p>Es especialmente útil si escuchas una novela antes de dormir o si quieres reservar un tiempo concreto de estudio. Los controles de avance y retroceso permiten localizar un punto sin tener que recorrer todo el documento.</p>
+<h3>Cómo hacerlo paso a paso</h3>
+<ol>
+<li>Abre la obra y localiza Apagado automático.</li>
+<li>Selecciona, por ejemplo, 15 minutos.</li>
+<li>Comienza a escuchar.</li>
+<li>Si necesitas continuar, revisa o cambia el temporizador desde el mismo control.</li>
+</ol>
+</section>
+<section aria-labelledby="h-traduccion" id="traduccion"><h2 id="h-traduccion">19. Traducir un documento completo y conservar el original</h2>
+<p>Una función de la versión 1.2 es Traducir, disponible entre las acciones de accesibilidad del título de un documento de texto en Mi biblioteca. El objetivo es traducir toda la obra, no solamente una frase o un fragmento.</p>
+<p>Puedes elegir entre español, inglés, portugués, francés, italiano y alemán como idioma de destino. TifloLector divide el texto en fragmentos, muestra el progreso y guarda una copia traducida como una entrada nueva de la biblioteca. El original no se sobrescribe.</p>
+<p>Esta función utiliza la tecnología de traducción disponible en iOS 18 o posterior; según el par de idiomas puede necesitar recursos del sistema, descargas de idiomas o disponibilidad del servicio. Los contenidos exclusivamente sonoros no disponen automáticamente de un texto que traducir. Conviene revisar nombres propios, terminología especializada y resultados antes de utilizarlos como referencia definitiva.</p>
+<p>Además, dentro del lector hay una opción distinta, Traducir fragmento actual, destinada a una consulta puntual, cuando el contenido y el sistema lo permitan.</p>
+<h3>Cómo hacerlo paso a paso</h3>
+<ol>
+<li>En Mi biblioteca, sitúate sobre el título del documento con texto.</li>
+<li>Abre sus acciones de accesibilidad con el rotor de VoiceOver y elige Traducir.</li>
+<li>Selecciona el idioma de destino.</li>
+<li>Pulsa Traducir documento y sigue el progreso.</li>
+<li>Cuando termine, abre la copia traducida que se habrá guardado en la biblioteca.</li>
+</ol>
+<p class="nota"><strong>Consejo:</strong> Si estudias en otro idioma, conserva juntas las dos versiones del documento para cotejar los términos importantes.</p>
+</section>
+<section aria-labelledby="h-herramientas" id="herramientas"><h2 id="h-herramientas">20. Diccionario, pronunciación y enlaces</h2>
+<p>Desde las acciones del documento puedes acceder a Diccionario y pronunciación cuando existe texto apropiado para consultar. Estas herramientas facilitan aclarar una palabra sin abandonar por completo la lectura.</p>
+<p>En documentos con enlaces reconocidos también puede aparecer Enlaces como unidad de navegación, con una acción para abrir el enlace actual. Es útil en manuales, artículos HTML o publicaciones con referencias.</p>
+<p>Las posibilidades dependen de que el texto haya conservado enlaces o estructura: no todo documento contiene referencias navegables.</p>
+<h3>Cómo hacerlo paso a paso</h3>
+<ol>
+<li>Sitúate en un fragmento que quieras consultar.</li>
+<li>Abre Acciones y selecciona Diccionario y pronunciación, si está disponible.</li>
+<li>Para recorrer referencias, cambia Modo de navegación a Enlaces cuando aparezca.</li>
+<li>Utiliza Abrir enlace actual sobre el vínculo pertinente.</li>
+</ol>
+</section>
+<section aria-labelledby="h-audio-daisy" id="audio-daisy"><h2 id="h-audio-daisy">21. Crear audiolibros: MP3, M4A, WAV y DAISY</h2>
+<p>Aquí se encuentra una de las diferencias más interesantes de TifloLector: además de escuchar un texto, puedes generar archivos sonoros para compartirlos o utilizarlos fuera de la aplicación. Las opciones de exportación contemplan MP3, M4A, WAV y DAISY, según el contenido y el motor disponible.</p>
+<p>La opción DAISY no se limita a entregar un MP3 renombrado. La generación DAISY 3 incluye texto estructurado, archivos de audio, sincronización a nivel de párrafo mediante SMIL y un índice de navegación NCX. El paquete se verifica antes de compartirse.</p>
+<p>Esto tiene un valor especial para quienes estudian o consultan material técnico. Un audio continuo sirve para escuchar una novela, pero en un libro DAISY compatible es posible aprovechar la estructura para ir a secciones o pasajes sin empezar desde el principio. La navegación exacta depende tanto del paquete generado como del reproductor DAISY con el que lo utilices.</p>
+<p>Puedes generar la narración con una voz del sistema y, cuando estén configurados, con los motores externos compatibles. El límite de 60.000 caracteres afecta a las exportaciones mediante la API de Gemini, no a las voces locales en general. La duración y el coste de la generación dependerán del motor, del tamaño del documento y del espacio de almacenamiento.</p>
+<p>En la exportación puedes seleccionar el idioma del contenido DAISY, que debe corresponder al idioma del texto original. Se guarda el archivo con un nombre basado en el título de la obra, evitando identificadores técnicos innecesarios.</p>
+<h3>Cómo hacerlo paso a paso</h3>
+<ol>
+<li>Abre un documento que contenga texto.</li>
+<li>Pulsa Acciones y selecciona Exportar audio MP3 o DAISY.</li>
+<li>Elige Formato: MP3, M4A, WAV o DAISY.</li>
+<li>Selecciona el motor de voz y, cuando corresponda, su voz.</li>
+<li>Si eliges DAISY, indica el idioma real del contenido del libro.</li>
+<li>Pulsa Generar y compartir, consulta el progreso y espera a que termine.</li>
+<li>Guarda el paquete o compártelo con la aplicación que quieras utilizar.</li>
+</ol>
+<p class="nota"><strong>Consejo:</strong> Para un manual con capítulos y párrafos, prueba DAISY. Para un archivo que solamente quieres escuchar en cualquier reproductor, MP3 suele ser la alternativa más sencilla. Comprueba siempre el resultado final antes de distribuirlo a otras personas.</p>
+</section>
+<section aria-labelledby="h-daisy-import" id="daisy-import"><h2 id="h-daisy-import">22. Leer audiolibros DAISY y paquetes de audio</h2>
+<p>TifloLector puede importar paquetes DAISY en ZIP o archivos con extensión DAISY, además de ZIP que contengan pistas de audio reconocibles. Es importante diferenciar un ZIP de audiolibro de un libro DAISY propiamente dicho: el primero agrupa pistas, mientras que el segundo puede incorporar una estructura para navegar.</p>
+<p>En libros DAISY compatibles, TifloLector puede mostrar capítulos, páginas y referencias identificadas en la información de navegación del paquete, así como texto y pistas sonoras cuando están presentes. La navegación SMIL completa de todos los tipos de paquetes DAISY todavía está en desarrollo; por tanto, no debe prometerse compatibilidad universal con cualquier DAISY.</p>
+<p>Si el audio se compone de varias pistas, puedes seleccionar una concreta, avanzar o retroceder y guardar marcas asociadas a su posición. También existen opciones para compartir el archivo de audio o todas las pistas como ZIP cuando procede.</p>
+<h3>Cómo hacerlo paso a paso</h3>
+<ol>
+<li>Importa el libro DAISY o ZIP con audio desde Archivos.</li>
+<li>Abre la obra y comprueba si aparecen pistas, texto o elementos de navegación DAISY.</li>
+<li>Utiliza Modo de navegación para seleccionar capítulos, páginas o referencias cuando estén disponibles.</li>
+<li>Guarda marcas en puntos relevantes y consulta el índice si el libro dispone de uno.</li>
+</ol>
+</section>
+<section aria-labelledby="h-exportar" id="exportar"><h2 id="h-exportar">23. Compartir, recuperar el original y exportar texto</h2>
+<p>En las acciones del título de la biblioteca puedes utilizar Compartir documento original para enviar el archivo que importaste, sin confundirlo con el texto extraído para leer. Dentro de la obra también puede aparecer Exportar texto, que genera un TXT a partir del contenido legible.</p>
+<p>Para documentos sonoros se ofrecen opciones adicionales de compartir pistas, y para texto la opción de generar MP3 o DAISY. Cada operación responde a una necesidad distinta: conservar el original, obtener una versión textual o crear un audiolibro.</p>
+<h3>Cómo hacerlo paso a paso</h3>
+<ol>
+<li>Abre las acciones del título desde Mi biblioteca.</li>
+<li>Elige Compartir documento original para enviar exactamente el archivo importado.</li>
+<li>Si quieres un TXT, abre el documento y utiliza Acciones, Exportar texto.</li>
+<li>Si necesitas audio, utiliza Exportar audio MP3 o DAISY y selecciona el formato correspondiente.</li>
+</ol>
+</section>
+<section aria-labelledby="h-copias" id="copias"><h2 id="h-copias">24. Copia de seguridad y restauración de tu biblioteca</h2>
+<p>En la biblioteca hay opciones Exportar copia de seguridad y Restaurar copia de seguridad. La copia puede incluir el registro de documentos, archivos originales, medios, carpetas, posiciones y marcas.</p>
+<p>Es una protección práctica si vas a cambiar de dispositivo, deseas conservar una biblioteca personal o quieres evitar perder el trabajo de lectura y organización. La restauración está diseñada para incorporar documentos que falten, sin reemplazar automáticamente los existentes.</p>
+<p>Una copia de seguridad no equivale a una sincronización permanente entre dispositivos. Conserva el archivo exportado en un lugar seguro y comprueba periódicamente que puedes localizarlo.</p>
+<h3>Cómo hacerlo paso a paso</h3>
+<ol>
+<li>Entra en TifloLector, Más opciones.</li>
+<li>Pulsa Exportar copia de seguridad.</li>
+<li>Guarda el archivo en Archivos o en un almacenamiento de confianza.</li>
+<li>Para recuperarlo, utiliza Restaurar copia de seguridad y selecciona el paquete guardado.</li>
+<li>Comprueba que aparezcan los documentos, carpetas y marcas esperados.</li>
+</ol>
+<p class="nota"><strong>Consejo:</strong> Guarda la copia fuera de la aplicación, por ejemplo en Archivos o iCloud Drive, para conservarla aunque elimines TifloAcosta.</p>
+</section>
+<section aria-labelledby="h-ejemplos" id="ejemplos"><h2 id="h-ejemplos">25. Cuatro maneras de sacar verdadero partido a TifloLector</h2>
+<p>Para estudiar: importa el temario en EPUB, PDF o DOCX; selecciona una voz clara y pausas más amplias; navega por capítulos o encabezados, crea marcas en los conceptos difíciles y utiliza Buscar cuando necesites repasar un término.</p>
+<p>Para una presentación recibida por correo: guárdala como PPTX o PPSX, impórtala y escucha su contenido organizado por diapositivas. Si vas a exponer, marca los puntos que quieras recuperar rápidamente.</p>
+<p>Para consultar un presupuesto o una lista extensa: abre su XLSX o XLSM y aprovecha las referencias de hoja, fila y columna. Busca nombres o cifras y vuelve a la sección que necesites.</p>
+<p>Para convertir un manual en audiolibro: comprueba que el documento contiene texto, revisa su estructura, elige una voz y exporta en DAISY para aprovechar la organización del contenido, o en MP3 para escucharlo en un reproductor convencional.</p>
+</section>
+<section aria-labelledby="h-limitaciones" id="limitaciones"><h2 id="h-limitaciones">26. Lo que conviene saber antes de empezar</h2>
+<p>No se debe afirmar que todos los archivos Office antiguos se importan directamente: PPS/PPT y XLS aún necesitan conversión previa. Las presentaciones con muchas imágenes y las hojas de cálculo con gráficos o fórmulas complejas pueden perder detalles al convertirse en lectura lineal.</p>
+<p>Las funciones de OCR dependen de la calidad del archivo; la traducción completa depende de iOS 18 o posterior y del par de idiomas; los motores externos requieren sus propios requisitos y pueden tener cuotas o licencias; la navegación DAISY depende de la estructura del paquete.</p>
+<p>La biblioteca Tiflonexos es una posibilidad en preparación, no un servicio que se deba anunciar como integrado. Para contenido protegido, cada usuario debe respetar los permisos y condiciones de su proveedor.</p>
+<p>Esta guía refleja el código preparado para la versión iOS 1.2. Algunas funciones pueden variar o no estar presentes todavía en Android, en versiones anteriores de iOS o en la aplicación web. Durante la revisión de Apple, la 1.2 no debe confundirse con la versión que ya está publicada en la App Store.</p>
+</section>
+<section aria-labelledby="h-preguntas" id="preguntas"><h2 id="h-preguntas">27. Preguntas frecuentes</h2>
+<p>¿Necesito una clave API para utilizar TifloLector? No. Puedes utilizar las voces del sistema sin configurar Gemini. La clave solo es necesaria para conectar el servicio externo correspondiente.</p>
+<p>¿Una copia DAISY es lo mismo que un MP3? No. DAISY puede incluir audio, texto sincronizado y una estructura navegable; un MP3 corriente no ofrece por sí solo esas prestaciones.</p>
+<p>¿Puedo leer un PPS o un XLS antiguo? Antes de importarlo en la versión iOS actual, conviértelo a PPSX/PPTX o XLSX, respectivamente.</p>
+<p>¿Puedo traducir un libro y conservar el original? Sí, cuando el libro tiene texto y la función de traducción está disponible en el dispositivo. Se crea una obra adicional.</p>
+<p>¿Tiflonexos ya aparece en Bibliotecas en línea? No. Se están realizando gestiones, pero no se ha completado la integración.</p>
+<p>¿Qué ocurre si cierro un libro? El lector conserva la posición de lectura y las marcas registradas; las opciones concretas pueden depender del tipo de documento.</p>
+<p>¿Puedo escuchar un PDF escaneado? Si el OCR consigue reconocer el texto, sí. Revisa el resultado para detectar posibles errores.</p>
+</section>
+<section aria-labelledby="h-cierre" id="cierre"><h2 id="h-cierre">28. Una invitación a probarlo con tus propios documentos</h2>
+<p>TifloLector quiere que el documento se adapte a tus necesidades, y no al revés. No es lo mismo seguir una novela que estudiar un temario, preparar una clase o consultar una tabla: por eso hay distintos motores de voz, velocidades, pausas, unidades de navegación y formatos de salida.</p>
+<p>Empieza con un documento que conozcas. Prueba las marcas, cambia el modo de navegación, ajusta una voz y, si te interesa, genera un archivo DAISY. Las mejores posibilidades aparecen cuando descubres qué combinación de herramientas facilita de verdad tu lectura.</p>
+<p>Esta guía servirá como base para una serie de tutoriales de TifloAcosta y para elaborar material audiovisual de divulgación. Las próximas funciones y las bibliotecas que se incorporen se anunciarán únicamente cuando estén disponibles.</p>
+</section>
+</main>
+<footer><p>Guía divulgativa de TifloAcosta. Para noticias sobre disponibilidad e incorporaciones oficiales, visita <a href="https://tifloacosta.com/">tifloacosta.com</a>.</p></footer>
+</body></html>

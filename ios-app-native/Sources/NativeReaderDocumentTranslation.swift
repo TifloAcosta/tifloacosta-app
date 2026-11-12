@@ -128,6 +128,8 @@ struct NativeReaderDocumentTranslationScreen: View {
                     }
                     completed += 1
                 }
+                try Task.checkCancellation()
+                guard isTranslating else { return }
                 let languageName = Locale(identifier: currentLanguageCode).localizedString(forLanguageCode: targetLanguage)
                     ?? targetLanguage.uppercased()
                 try saveTranslation(translated, "\(document.title) (\(languageName))")

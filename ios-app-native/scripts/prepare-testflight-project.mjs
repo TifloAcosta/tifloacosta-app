@@ -8,7 +8,7 @@ let yaml=fs.readFileSync(config,'utf8');
 for (const name of ['IOS_PROFILE_APP_NAME','IOS_PROFILE_EXTENSION_NAME','GITHUB_RUN_NUMBER']) {
   if(!process.env[name]) throw Error('Falta variable: '+name);
 }
-const version=String(Math.max(500003,500000+Number(process.env.GITHUB_RUN_NUMBER)));
+const version=process.env.TIFLO_IOS_BUILD_NUMBER || String(Math.max(500003,500000+Number(process.env.GITHUB_RUN_NUMBER)));
 // Apple has closed the 1.1 train after approving 1.1. New builds must use a higher version.
 const marketingVersion=process.env.TIFLO_IOS_MARKETING_VERSION || '1.2';
 if(!/^[1-9]\d*\.\d+(?:\.\d+)?$/.test(marketingVersion) || ['1.0','1.1'].includes(marketingVersion))

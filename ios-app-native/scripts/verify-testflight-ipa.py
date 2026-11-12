@@ -19,6 +19,17 @@ with zipfile.ZipFile(files[0]) as z:
     if not app_info_path or not extension_info_path:
         raise SystemExit('Falta la app o su Share Extension')
     app_info = plistlib.loads(z.read(app_info_path))
+    expected_languages = {'es', 'en', 'pt', 'fr', 'it', 'de'}
+    declared_languages = set(app_info.get('CFBundleLocalizations', []))
+    if declared_languages != expected_languages:
+        raise SystemExit('Idiomas declarados incorrectos en IPA: ' + str(sorted(declared_languages)))
+    for language in expected_languages - {'es'}:
+        resource = next((p for p in z.namelist()
+                         if p.startswith('Payload/') and
+                         p.endswith('.app/' + language + '.lproj/Localizable.strings')), None)
+        if not resource:
+            raise SystemExit('Falta el catálogo de idioma ' + language + ' dentro de la IPA')
+    print('Seis idiomas de TifloAcosta declarados y empaquetados correctamente')
     ext_info = plistlib.loads(z.read(extension_info_path))
     for info, identifier in [(app_info, 'com.tifloacosta.app'),
                              (ext_info, 'com.tifloacosta.app.ShareExtension')]:

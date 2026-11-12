@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - audit/ios-public-release-six-languages-20261112
       - integration/ios-beta139-complete-20261111
       - feat/six-languages-ios-android-20261111
       - feat/ios-six-languages-focused-20261111
@@ -21,6 +22,10 @@ on:
       - 'ios-app-native/**'
       - '.github/workflows/ios-native-swiftui-build.yml'
   workflow_dispatch:
+
+concurrency:
+  group: ios-native-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

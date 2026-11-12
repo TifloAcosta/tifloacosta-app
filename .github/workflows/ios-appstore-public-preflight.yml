@@ -1,0 +1,23 @@
+name: Preflight publicacion App Store iOS (solo lectura)
+on:
+  push:
+    branches:
+      - audit/ios-public-release-six-languages-20261112
+    paths:
+      - '.github/workflows/ios-appstore-public-preflight.yml'
+      - 'ios-app-native/scripts/appstore-public-preflight.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      APPSTORE_API_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+      APPSTORE_API_ISSUER_ID: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+      APPSTORE_API_PRIVATE_KEY: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Consultar versiones, compilaciones, idiomas comerciales y novedades sin cambios
+        run: node ios-app-native/scripts/appstore-public-preflight.mjs

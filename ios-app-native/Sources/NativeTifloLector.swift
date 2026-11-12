@@ -1102,6 +1102,7 @@ struct NativeReaderLibraryScreen: View {
     @State private var folderToDelete: String?
     @State private var folderForDocument: NativeReadingDocument?
     @State private var documentToConfigure: NativeReadingDocument?
+    @State private var documentToTranslate: NativeReadingDocument?
     @State private var selectionMode = false
     @State private var selectedDocumentIDs: Set<UUID> = []
     @State private var showBulkMove = false
@@ -1346,6 +1347,9 @@ struct NativeReaderLibraryScreen: View {
                     .accessibilityAction(named: Text("Cambiar título")) {
                         documentToRename = document
                         proposedTitle = document.title
+                    }
+                    .accessibilityAction(named: Text("Traducir")) {
+                        documentToTranslate = document
                     }
                     .accessibilityAction(named: Text("Eliminar")) {
                         documentToDelete = document
@@ -1600,6 +1604,17 @@ struct NativeReaderLibraryScreen: View {
         }
         .sheet(item: $documentToConfigure) { doc in
             NativeReaderDocumentSettingsScreen(document: doc)
+        }
+        .sheet(item: $documentToTranslate) { doc in
+            if #available(iOS 18.0, *) {
+                NavigationStack {
+                    NativeReaderDocumentTranslationScreen(document: doc) { text, title in
+                        try library.importSharedText(text, title: title)
+                    }
+                }
+            } else {
+                Text("La traducción de documentos requiere iOS 18 o posterior.")
+            }
         }
         .alert("Cambiar título", isPresented: Binding(
             get: { documentToRename != nil },

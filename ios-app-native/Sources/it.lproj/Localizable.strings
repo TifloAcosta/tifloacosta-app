@@ -733,3 +733,14 @@
 "Abrir sección del catálogo." = "Apri la sezione del catalogo.";
 "Descarga la obra y la incorpora a TifloLector." = "Scarica il libro e lo aggiunge a TifloLector.";
 "No se pudo completar la operación" = "Impossibile completare l’operazione";
+"Escribir a TifloAcosta por correo" = "Scrivi a TifloAcosta via e-mail";
+"Instalar el atajo Marcar lectura" = "Installa il comando rapido Segna lettura";
+"Añade el atajo compartido a tu iPhone con un solo enlace. El atajo crea una marca en la posición actual de TifloLector sin detener la reproducción." = "Aggiungi il comando rapido condiviso al tuo iPhone con un solo link. Crea un segnalibro nella posizione corrente di TifloLector senza interrompere la riproduzione.";
+"Añadir atajo Marcar lectura" = "Aggiungi il comando rapido Segna lettura";
+"Si prefieres crearlo manualmente, abre Atajos, añade la acción Crear marca en TifloLector y ponle el nombre Marcar lectura." = "Per crearlo manualmente, apri Comandi rapidi, aggiungi l'azione Crea segnalibro in TifloLector e chiamalo Segna lettura.";
+"Eliminar modelo Phonon" = "Elimina modello Phonon";
+"Eliminar clave" = "Elimina chiave";
+"No se pudo completar" = "Impossibile completare";
+"Posición del vídeo" = "Posizione del video";
+"Desliza arriba para avanzar diez por ciento; abajo para retroceder." = "Scorri verso l’alto per avanzare del dieci per cento e verso il basso per tornare indietro.";
+"Reproductor accesible" = "Lettore accessibile";

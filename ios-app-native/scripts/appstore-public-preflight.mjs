@@ -80,6 +80,19 @@ const output={
   recentBuilds:builds.data.map(x=>({number:x.attributes?.version,
     processingState:x.attributes?.processingState,uploadedDate:x.attributes?.uploadedDate}))
 };
+const release=JSON.parse(fs.readFileSync('ios-app-native/release/appstore-1.2.json','utf8'));
+if(release.bundleId !== output.bundleId || release.version !== '1.2') throw Error('Release config or bundle mismatch');
+if(!release.whatsNew?.[release.primaryLocale]?.trim()) throw Error('Spanish What’s New is missing');
+const existingDraft=output.versions.find(x=>x.number===release.version);
+if(existingDraft && !['PREPARE_FOR_SUBMISSION','DEVELOPER_REJECTED','REJECTED'].includes(existingDraft.state))
+  throw Error('Version '+release.version+' exists in non-editable state '+existingDraft.state);
+const uploadedNumbers=output.recentBuilds.map(x=>Number(x.number)).filter(Number.isInteger);
+const nextBuild=Math.max(500151,...uploadedNumbers.map(x=>x+1));
+if(!Number.isInteger(nextBuild)) throw Error('Invalid next build number');
+output.nextBuildNumber=nextBuild;
+output.releaseConfig={version:release.version,locale:release.primaryLocale,releaseType:release.releaseType};
+if(process.env.GITHUB_ENV) fs.appendFileSync(process.env.GITHUB_ENV,
+  'TIFLO_IOS_BUILD_NUMBER='+nextBuild+'\nTIFLO_IOS_MARKETING_VERSION='+release.version+'\n');
 const summary=JSON.stringify(output,null,2);
 console.log('APPLE_PUBLIC_RELEASE_PREFLIGHT:\n'+summary);
 if(process.env.GITHUB_STEP_SUMMARY) {

@@ -17,7 +17,7 @@ struct NativeReaderDocumentTranslationScreen: View {
     @State private var translationError: String?
     @State private var finished = false
 
-    private let choices = NativeAppLanguage.codes
+    private var currentLanguageCode: String { NativeAppLanguage.code(for: appLanguageIndex) }
 
     private func chunks(_ text: String, maximum: Int = 1800) -> [String] {
         // Keep paragraph boundaries and preserve empty lines when possible.
@@ -48,7 +48,7 @@ struct NativeReaderDocumentTranslationScreen: View {
 
     private func beginTranslation() {
         guard !isTranslating, !document.body.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            translationError = String(localized: "No hay texto que traducir en este documento.")
+            translationError = NativeAppLanguage.message("No hay texto que traducir en este documento.", languageCode: currentLanguageCode)
             return
         }
         translationError = nil
@@ -77,6 +77,13 @@ struct NativeReaderDocumentTranslationScreen: View {
                     .font(.footnote)
                 Button("Traducir documento") { beginTranslation() }
                     .disabled(isTranslating || finished || document.body.isEmpty)
+                if isTranslating {
+                    Button("Cancelar traducción") {
+                        configuration = nil
+                        isTranslating = false
+                        translationError = NativeAppLanguage.message("Traducción cancelada.", languageCode: currentLanguageCode)
+                    }
+                }
             }
             if isTranslating {
                 Section("Progreso de la traducción") {
@@ -98,6 +105,12 @@ struct NativeReaderDocumentTranslationScreen: View {
             }
         }
         .navigationTitle("Traducir documento")
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button("Cerrar") { dismiss() }.disabled(isTranslating)
+            }
+        }
+        .interactiveDismissDisabled(isTranslating)
         .onAppear { targetLanguage = NativeAppLanguage.code(for: appLanguageIndex) }
         .translationTask(configuration) { session in
             let portions = chunks(document.body)
@@ -108,14 +121,19 @@ struct NativeReaderDocumentTranslationScreen: View {
                     try Task.checkCancellation()
                     let response = try await session.translate(portion)
                     translated += response.targetText
+                    if portion.hasSuffix("\n") && !response.targetText.hasSuffix("\n") {
+                        translated += "\n"
+                    } else if !portion.hasSuffix("\n") && !response.targetText.hasSuffix(" ") {
+                        translated += " "
+                    }
                     completed += 1
                 }
-                let languageName = Locale.current.localizedString(forLanguageCode: targetLanguage)
+                let languageName = Locale(identifier: currentLanguageCode).localizedString(forLanguageCode: targetLanguage)
                     ?? targetLanguage.uppercased()
                 try saveTranslation(translated, "\(document.title) (\(languageName))")
                 finished = true
             } catch is CancellationError {
-                translationError = String(localized: "Traducción cancelada.")
+                translationError = NativeAppLanguage.message("Traducción cancelada.", languageCode: currentLanguageCode)
             } catch {
                 translationError = error.localizedDescription
             }

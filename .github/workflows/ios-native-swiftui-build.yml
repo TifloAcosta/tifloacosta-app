@@ -23,6 +23,10 @@ on:
       - '.github/workflows/ios-native-swiftui-build.yml'
   workflow_dispatch:
 
+concurrency:
+  group: ios-native-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 

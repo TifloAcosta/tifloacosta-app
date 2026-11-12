@@ -103,3 +103,5 @@ if(process.env.GITHUB_STEP_SUMMARY) {
     ', What’s New locales: '+v.locales.filter(l=>l.whatsNewPresent).map(l=>l.locale).join(', '));
   fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,lines.join('\n')+'\n');
 }
+
+// Public availability follow-up: recheck Apple version state after review submission.

@@ -685,3 +685,15 @@
 "Los documentos y textos compartidos se incorporan a TifloLector automáticamente. Consulta esta sección para revisar enlaces y elementos que no se hayan podido importar." = "Les documents et textes partagés sont ajoutés automatiquement à TifloLector. Consulte cette section pour retrouver les liens et les éléments qui n’ont pas pu être importés.";
 "Abrir contacto y redes" = "Ouvrir les contacts et réseaux sociaux";
 "Consultar privacidad y accesibilidad" = "Consulter la confidentialité et l’accessibilité";
+"Solo avisos de nuevos recursos y vídeos propios al actualizar contenidos. No se envían avisos de Actualidad ni notificaciones con la app cerrada." = "Seules les nouvelles ressources et vidéos de TifloAcosta sont signalées lors de l’actualisation. Aucune alerte d’actualité ni notification quand l’application est fermée.";
+"Traducir" = "Traduire";
+"Traducir documento" = "Traduire le document";
+"Idioma de destino" = "Langue cible";
+"Se guardará una copia traducida en la biblioteca. El documento original no se modifica." = "Une copie traduite sera enregistrée dans la bibliothèque. Le document original ne sera pas modifié.";
+"Progreso de la traducción" = "Progression de la traduction";
+"Traducción guardada en la biblioteca." = "Traduction enregistrée dans la bibliothèque.";
+"No hay texto que traducir en este documento." = "Ce document ne contient aucun texte à traduire.";
+"Traducción cancelada." = "Traduction annulée.";
+"La traducción de documentos requiere iOS 18 o posterior." = "La traduction de documents nécessite iOS 18 ou une version ultérieure.";
+"Fragmentos traducidos: %lld de %lld" = "Sections traduites : %lld sur %lld";
+"%lld de %lld fragmentos" = "%lld sections sur %lld";

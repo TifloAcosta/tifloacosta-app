@@ -221,3 +221,18 @@
 "Mi libro: La vida vista desde donde estoy" = "My book: La vida vista desde donde estoy";
 "Archivo de Google Drive" = "Google Drive file";
 "Documento de Google (PDF)" = "Google document (PDF)";
+
+"Detalle de VoiceOver" = "VoiceOver Details";
+"Traducir" = "Translate";
+"Traducir documento" = "Translate document";
+"Idioma de destino" = "Target language";
+"Francés" = "French";
+"Portugués" = "Portuguese";
+"Se guardará una copia traducida en la biblioteca. El documento original no se modifica." = "A translated copy will be saved to your library. The original document will not be changed.";
+"Progreso de la traducción" = "Translation progress";
+"Traducción guardada en la biblioteca." = "Translation saved to the library.";
+"No hay texto que traducir en este documento." = "This document contains no text to translate.";
+"Traducción cancelada." = "Translation cancelled.";
+"La traducción de documentos requiere iOS 18 o posterior." = "Document translation requires iOS 18 or later.";
+"Fragmentos traducidos: %lld de %lld" = "Translated sections: %lld of %lld";
+"%lld de %lld fragmentos" = "%lld of %lld sections";

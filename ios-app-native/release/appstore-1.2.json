@@ -1,0 +1,10 @@
+{
+  "version": "1.2",
+  "bundleId": "com.tifloacosta.app",
+  "primaryLocale": "es-ES",
+  "whatsNew": {
+    "es-ES": "TifloAcosta incorpora una interfaz en español, inglés, portugués, francés, italiano y alemán, con mejoras en las etiquetas y acciones de VoiceOver. En TifloLector puedes traducir documentos completos desde la biblioteca, conservando el original. Mejoramos la creación de marcas de lectura, la navegación, las búsquedas, los controles de reproducción y la gestión de libros. También hemos revisado el acceso a vídeos, atajos de Siri, voces y ajustes de lectura, además de corregir errores de accesibilidad y estabilidad."
+  },
+  "requiresLocalesFromApple": true,
+  "releaseType": "AFTER_APPROVAL"
+}

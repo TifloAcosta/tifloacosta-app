@@ -3,6 +3,15 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleDevelopmentRegion</key><string>es</string>
+    <key>CFBundleLocalizations</key>
+    <array>
+        <string>es</string>
+        <string>en</string>
+        <string>pt</string>
+        <string>fr</string>
+        <string>it</string>
+        <string>de</string>
+    </array>
     <key>CFBundleDisplayName</key><string>TifloAcosta</string>
     <key>CFBundleExecutable</key><string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key><string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>

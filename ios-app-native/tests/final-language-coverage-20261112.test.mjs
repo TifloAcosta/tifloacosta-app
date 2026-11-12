@@ -84,3 +84,17 @@ test('Translation action is attached to a document title and saves a separate te
   assert.match(translator, /try await session\.translate\(portion\)/);
   assert.match(translator, /NativeAppLanguage\.code\(for:\s*appLanguageIndex\)/);
 });
+
+
+test('App Store binary declares the same six languages available in the app settings', () => {
+  const plist = fs.readFileSync(path.join(sourceRoot, 'Info.plist'), 'utf8');
+  const block = plist.match(/<key>CFBundleLocalizations<\/key>\s*<array>([\s\S]*?)<\/array>/);
+  assert.ok(block, 'Missing CFBundleLocalizations in Info.plist');
+  const declared = [...block[1].matchAll(/<string>([^<]+)<\/string>/g)].map(m => m[1]);
+  assert.deepEqual(declared, ['es', 'en', 'pt', 'fr', 'it', 'de']);
+  const languageSource = fs.readFileSync(path.join(sourceRoot, 'NativeAppLanguage.swift'), 'utf8');
+  assert.match(languageSource, /static let codes = \["es", "en", "pt", "fr", "it", "de"\]/);
+  for (const lang of ['en', 'pt', 'fr', 'it', 'de']) {
+    assert.ok(fs.existsSync(path.join(sourceRoot, lang + '.lproj', 'Localizable.strings')));
+  }
+});

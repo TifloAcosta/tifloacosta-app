@@ -746,3 +746,13 @@
 "Reproductor accesible" = "Lecteur accessible";
 "Compartir seleccionados" = "Partager les documents sélectionnés";
 "Compartir documentos" = "Partager des documents";
+"Pocket TTS (prueba en español)" = "Pocket TTS (essai en espagnol)";
+"Prueba de Pocket TTS" = "Essai de Pocket TTS";
+"Motor experimental local en español. La voz inicial es Lola. No modifica la voz predeterminada de tus libros." = "Moteur expérimental local en espagnol. La voix initiale est Lola. La voix par défaut de vos livres reste inchangée.";
+"Texto de la muestra en español" = "Texte de l'extrait en espagnol";
+"Probar mi propia voz" = "Essayer ma propre voix";
+"Solo importa una grabación de tu propia voz o de alguien que te haya dado permiso expreso. Se procesa en el iPhone y la muestra se descarta al salir de esta pantalla." = "Importez uniquement votre voix ou celle d'une personne ayant donné son accord explicite. Le traitement se fait sur l'iPhone et l'échantillon est supprimé en quittant cet écran.";
+"Tengo permiso para utilizar esta voz" = "J'ai l'autorisation d'utiliser cette voix";
+"Importar grabación para crear mi voz" = "Importer un enregistrement de ma voix";
+"Prueba con una grabación de entre 1 y 20 segundos, con una sola voz y sin música." = "Utilisez un enregistrement de 1 à 20 secondes avec une seule voix et sans musique.";
+"Pocket TTS en español" = "Pocket TTS en espagnol";

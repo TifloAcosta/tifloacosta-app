@@ -13,6 +13,9 @@ packages:
   SwiftMP3:
     url: https://github.com/mierau/swift-mp3.git
     from: 1.0.0
+  FluidAudio:
+    url: https://github.com/FluidInference/FluidAudio.git
+    from: 0.18.2
 targets:
   TifloAcostaNative:
     type: application
@@ -38,6 +41,7 @@ targets:
       - target: TifloAcostaShare
       - package: ZIPFoundation
       - package: SwiftMP3
+      - package: FluidAudio
   TifloAcostaShare:
     type: app-extension
     platform: iOS

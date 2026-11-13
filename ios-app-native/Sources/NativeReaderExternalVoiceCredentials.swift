@@ -173,6 +173,9 @@ struct NativeReaderExternalVoiceSettingsScreen: View {
             NavigationLink("Gemini") {
                 NativeReaderExternalVoiceDetailScreen(provider: .gemini)
             }
+            NavigationLink("Pocket TTS (prueba en español)") {
+                NativePocketTtsTrialScreen()
+            }
         }
         .tifloScreenSurface()
         .navigationTitle("Motores externos")

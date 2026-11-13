@@ -431,11 +431,8 @@ enum NativeReaderFormats {
             }
             format = ext
         case "epub":
-            let pages = all.filter {
-                ($0.hasSuffix(".xhtml") || $0.hasSuffix(".html") || $0.hasSuffix(".htm"))
-                    && !$0.contains("nav.")
-                    && !$0.contains("toc.")
-            }
+            let pages = try NativeEpubSpine.readingOrder(
+                in: directory, availableFiles: Set(all))
             var segments: [String] = []
             var pageOffsets: [String: Int] = [:]
             var pageTexts: [String: String] = [:]

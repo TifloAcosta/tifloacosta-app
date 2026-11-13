@@ -109,7 +109,7 @@ enum NativeGeminiDaisyExport {
             } else {
                 paragraphs.append("<p id=\"\(id)\" smilref=\"sync.smil#\(par)\">\(escape(segment.text))</p>")
             }
-            pars.append("<par id=\"\(par)\"><text src=\"book.xml#\(id)\"/><audio src=\"\(file)\" clipBegin=\"00:00:00\" clipEnd=\"\(clock(duration))\"/></par>")
+            pars.append("<par id=\"\(par)\"><text src=\"book.xml#\(id)\"/><audio src=\"\(file)\" clipBegin=\"00:00:00.000\" clipEnd=\"\(clock(duration))\"/></par>")
             manifest.append("<item id=\"audio\(number)\" href=\"\(file)\" media-type=\"audio/mpeg\"/>")
             totalSeconds += duration
             await progress(number, segments.count)

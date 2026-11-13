@@ -181,6 +181,55 @@ final class NativeReaderLibrary: ObservableObject {
         return url
     }
 
+    /// Reúne los originales conservados sin alterar la biblioteca.
+    /// Los registros antiguos sin original se exportan expresamente como TXT.
+    func sharingURLs(for documents: [NativeReadingDocument]) throws
+        -> (urls: [URL], textFallbackCount: Int) {
+        guard !documents.isEmpty else { return ([], 0) }
+        let manager = FileManager.default
+        let staging = manager.temporaryDirectory
+            .appendingPathComponent("TifloShare-\(UUID().uuidString)", isDirectory: true)
+        try manager.createDirectory(at: staging, withIntermediateDirectories: true)
+        var urls: [URL] = []
+        var usedNames: Set<String> = []
+        var textFallbackCount = 0
+
+        for document in documents {
+            let source: URL
+            if let original = originalURL(for: document) {
+                source = original
+            } else if !document.body.isEmpty {
+                let safeTitle = document.title.replacingOccurrences(
+                    of: #"[\\/:*?"<>|\x00-\x1F]"#, with: "_", options: .regularExpression)
+                let name = safeTitle.isEmpty ? "Documento" : safeTitle
+                let destination = staging.appendingPathComponent("\(name)-\(document.id.uuidString)")
+                    .appendingPathExtension("txt")
+                try document.body.write(to: destination, atomically: true, encoding: .utf8)
+                urls.append(destination)
+                textFallbackCount += 1
+                continue
+            } else if document.hasAudio {
+                source = try exportAudioTracks(document)
+            } else {
+                throw CocoaError(.fileNoSuchFile)
+            }
+
+            let filename = source.lastPathComponent
+            let uniqueName: String
+            if usedNames.insert(filename.lowercased()).inserted {
+                uniqueName = filename
+            } else {
+                uniqueName = source.deletingPathExtension().lastPathComponent
+                    + "-" + document.id.uuidString + "." + source.pathExtension
+                usedNames.insert(uniqueName.lowercased())
+            }
+            let destination = staging.appendingPathComponent(uniqueName)
+            try manager.copyItem(at: source, to: destination)
+            urls.append(destination)
+        }
+        return (urls, textFallbackCount)
+    }
+
     /// Exporta todas las pistas de una obra sin confundir un ZIP de audio con DAISY.
     func exportAudioTracks(_ document: NativeReadingDocument) throws -> URL {
         let current = latest(document)
@@ -1105,6 +1154,9 @@ struct NativeReaderLibraryScreen: View {
     @State private var documentToTranslate: NativeReadingDocument?
     @State private var selectionMode = false
     @State private var selectedDocumentIDs: Set<UUID> = []
+    @State private var showShareFallbackWarning = false
+    @State private var pendingShareURLs: [URL] = []
+    @State private var shareFallbackCount = 0
     @State private var showBulkMove = false
     @State private var showCreateFolderForSelection = false
     @State private var showBulkDelete = false
@@ -1372,6 +1424,22 @@ struct NativeReaderLibraryScreen: View {
                         selectedDocumentIDs.formUnion(shownDocuments.map(\.id))
                     }
                     Button("Deseleccionar todos") { selectedDocumentIDs.removeAll() }
+                    Button("Compartir seleccionados", systemImage: "square.and.arrow.up") {
+                        let documents = shownDocuments.filter { visibleSelection.contains($0.id) }
+                        do {
+                            let prepared = try library.sharingURLs(for: documents)
+                            if prepared.textFallbackCount > 0 {
+                                pendingShareURLs = prepared.urls
+                                shareFallbackCount = prepared.textFallbackCount
+                                showShareFallbackWarning = true
+                            } else {
+                                NativeShare.present(urls: prepared.urls)
+                            }
+                        } catch {
+                            importError = "No se pudieron preparar todos los documentos: \(error.localizedDescription)"
+                        }
+                    }
+                    .disabled(visibleSelection.isEmpty)
                     Button("Mover seleccionados a carpeta") { showBulkMove = true }
                         .disabled(visibleSelection.isEmpty)
                     Button("Eliminar seleccionados") { showBulkDelete = true }
@@ -1571,6 +1639,18 @@ struct NativeReaderLibraryScreen: View {
             set: { if !$0 { selectionFeedback = nil } }
         )) { Button("Aceptar") { selectionFeedback = nil } } message: {
             Text(selectionFeedback ?? "")
+        }
+        .alert("Compartir documentos", isPresented: $showShareFallbackWarning) {
+            Button("Compartir") {
+                let urls = pendingShareURLs
+                pendingShareURLs = []
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                    NativeShare.present(urls: urls)
+                }
+            }
+            Button("Cancelar", role: .cancel) { pendingShareURLs = [] }
+        } message: {
+            Text("\(shareFallbackCount) documentos antiguos no conservan su archivo original y se compartirán como texto TXT. Los demás se compartirán en su formato original.")
         }
         .confirmationDialog("Mover a carpeta",
                             isPresented: Binding(

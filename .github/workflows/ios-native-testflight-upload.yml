@@ -171,3 +171,5 @@ jobs:
           if [ -n "$IOS_TEMP_KEYCHAIN" ]; then security delete-keychain "$IOS_TEMP_KEYCHAIN" || true; fi
 
   # Solicitud Tony 2026-11-13: beta con ajustes de lectura inmediatos, tono normal y exportación accesible con VoiceOver.
+
+  # Solicitud Tony 2026-11-13: beta del guardado permanente de MP3 y DAISY antes de Compartir o Cancelar.

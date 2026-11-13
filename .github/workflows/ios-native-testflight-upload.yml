@@ -17,11 +17,13 @@ on:
   # Beta de pruebas de seis idiomas, ajustes accesibles, marcas, selección y traducción; envío solicitado 2026-11-11.
 # Reintento: simplificar Configuración a un solo ajustable por opción y corregir pruebas VoiceOver; solicitado 2026-11-11.
 # Segundo reintento: actualizar contrato de detalle de VoiceOver al nuevo selector breve.
+  # Beta solicitada: EPUB a DAISY, línea braille, compartir documentos y motor español Pocket TTS; 2026-11-13.
   # Beta solicitada 2026-11-11: portada mínima, recibido en Configuración e instalación de atajo Marcar lectura.
   # Reintento controlado tras incidencia de GitHub Actions: sustituir ejecución anterior bloqueada.
   # Reintento de publicación solicitado tras corregir pruebas de portada y completar traducciones. 2026-11-11.
   push:
     branches:
+      - fix/ios-daisy-clipbegin-milliseconds-20261113
       - integration/ios-phases1-6-consolidated-20261110
       - integration/ios-beta139-complete-20261111
       - release/ios-beta141-bookmarks-voiceover-20261111

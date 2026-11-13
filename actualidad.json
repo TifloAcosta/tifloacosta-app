@@ -1,5 +1,294 @@
 [
   {
+    "id": "ars-technica-d68f8686e65bbcc0",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/features/2026/11/faa-expands-ai-advice-to-manage-air-traffic-congestion-across-entire-us-airspace/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-13T21:20:47.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "FAA expands AI advice to manage air traffic congestion across entire US airspace",
+        "summary": "Airlines praised the AI tool, but the air traffic controllers’ union wasn’t involved.",
+        "body": "The US government has expanded the use of an AI tool for advising air traffic controllers to assist in managing air traffic across the entire national airspace system. Airline executives have voiced support for the rollout, but the US labor union representing air traffic controllers has said it was not involved in designing or testing the AI-driven system.\n\nThe Federal Aviation Administration (FAA) says the $875 million SMART system has helped reroute 180 flights since being implemented in airspace over Washington, DC, on September 21. The agency claims that this saved an average of 10 minutes per flight and almost 80 gallons of fuel per flight—and it is apparently hoping such results can be replicated nationwide through the expanded deployment.\n\n“After a successful initial rollout to the National Capital Region in September, the FAA will now use SMART in the airspace of all 22 centers across the country to reduce delays, reduce fuel consumption and improve the travel experience for the flying public,” according to the agency statement posted on November 10.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-5373194510ef834c",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/13/9to5mac-overtime-090-iphone-duo-honeymoon/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-13T21:00:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "9to5Mac Overtime 090: iPhone Duo honeymoon",
+        "summary": "The Overtime crew revisits the iPhone Duo after prolonged usage. Is it still worth it without a telephoto lens or Face ID? We dig into its multitasking chops, standout FaceTime features, and how it stacks up against the Galaxy Z Fold 8. Plus, we break down Apple’s unprecedented product blitz and rumors of a second-gen MacBook Neo. Sponsored by Memoket : Memoket Gem is an AI wearable that slots beside your Apple Watch. One press captures a conversation, and KITE memory connects it to what you said weeks ago. Save 10% with code LL86MDO6 on Amazon and Memoket’s websit e. more…",
+        "body": "The Overtime crew revisits the iPhone Duo after prolonged usage. Is it still worth it without a telephoto lens or Face ID? We dig into its multitasking chops, standout FaceTime features, and how it stacks up against the Galaxy Z Fold 8. Plus, we break down Apple’s unprecedented product blitz and rumors of a second-gen MacBook Neo.\n\nJeff Benjamin's favorite wireless earbuds; they just keep getting better.\n\n9to5Mac Overtime is a weekly video-first podcast exploring fun and interesting observations in the Apple ecosystem, featuring 9to5Mac’s Fernando Silva & Jeff Benjamin. Subscribe to Overtime via Apple Podcasts and our YouTube channel for more."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-b5453ebba6ef7206",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1033425/openai-chatgpt-wallet",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-13T20:45:10.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "ChatGPT Wallet lets OpenAI’s Dots agents make purchases for you",
+        "summary": "After launching its Dots AI agents platform earlier this year, OpenAI is launching a wallet for the agents. ChatGPT Wallet is rolling out starting today for ChatGPT Pro subscribers in the US aged 18 and older using a US billing address and \"eligible US-issued American Express, Chase, Mastercard and Visa cards.\" After adding a card […]",
+        "body": "After launching its Dots AI agents platform earlier this year, OpenAI is launching a wallet for the agents. ChatGPT Wallet is rolling out starting today for ChatGPT Pro subscribers in the US aged 18 and older using a US billing address and \"eligible US-issued American Express, Chase, Mastercard and Visa cards.\"\n\nAfter adding a card to the wallet, your Dots agents can use it to buy things in response to your prompts, but they'll check in with you each time before checking out. OpenAI's support page says every purchase with ChatGPT Wallet requires a security check with biometric verification like Face ID or a fingerprint scan.\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-4ff091d62881adf9",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/13/perplexity-brings-ai-agents-feature-called-teammates-to-the-mac/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-13T19:31:05.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Perplexity brings AI agents feature called Teammates to the Mac",
+        "summary": "This week, Perplexity has deployed its new proactive agentic AI feature called Teammates to the Mac. Perplexity Teammates were previously limited to iOS and the web. more…",
+        "body": "This week, Perplexity has deployed its new proactive agentic AI feature called Teammates to the Mac. Perplexity Teammates were previously limited to iOS and the web.\n\nSimilar to Grok Bot, Perplexity Teammates are task-oriented proactive agentic AI threads that work for you without constantly being prompted. Meta Muse and ChatGPT Dots are similar, but use a single chat model rather than supporting multiple instances.\n\nHere’s more about Perplexity Teammates :\n\nTeammates are a team of AI agents that own ongoing work. Give a teammate a responsibility, such as managing a growth campaign, triaging incoming bug reports, tracking your metrics, or researching a new market, and it owns that work around the clock. It plans the tasks, brings in more agents when the work grows, and follows through until the result is ready for your review.\n\nAccess to Teammates currently requires a paid Perplexity Max subscription. The feature builds on top of Perplexity’s existing AI orchestration system.\n\nRelated Perplexity stories:\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-01f4a7a2081ebdca",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2316384/google-now-lets-people-connect-gemini-to-their-bank-accounts/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-13T19:15:32.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google now lets people connect Gemini to their bank accounts",
+        "summary": "This is for spending analysis and not for making purchases.",
+        "body": "This is for spending analysis and not for making purchases.\n\nGoogle just announced that Gemini users can now connect the chatbot to their bank accounts via integration with Google Wallet . This is not a shopping platform in which chatbots buy stuff on command, like Meta Muse . Rather, it's being pitched as a way for users to \"get more tailored responses around personal finance.\"\n\nOnce connected, folks can ask the chatbot questions about their accounts. This could, in theory, help save money by finding unnecessary subscriptions and the like. Google gives an example of the chatbot sussing out a price increase for a particular subscription. This information could already be gleaned by just looking at a bank statement or two, but where would be the fun in that?\n\nPersonal Intelligence in Gemini securely connects information from apps you already use to make your experience more personalized and helpful. Today, we're adding Google Wallet to the list of connected apps so you can get more tailored responses in the @GeminiApp around personal...\n\n— Google (@Google) November 13, 2026\n\nThe company does give a couple of examples that go above and beyond what one would find by staring at a banking app. Users can ask Gemini to come up with specific budgets for predetermined time periods, complete with \"dynamic charts tracking cash flow, asset allocation\" and more. It can also reportedly help set up a holiday budget, and it's getting to be that time of the year .\n\nOf course, security is a major concern here. AI chatbots are going to make mistakes every once in a while, and we would all very much like these mistakes to stay far away from our personal finances. This new toolset only lets Gemini read information from accounts and it cannot \"move, manage or invest\" any money. It's also a completely opt-in experience and it looks like the feature can be turned on and off rather easily via settings .\n\nThis integration is rolling out right now across web and mobile. Google says it has also partnered with the fintech company Plaid to help users \"unlock deeper insights.\" The company didn't give any specifics here. Engadget has reached out to Google to inquire about this partnership and will update the post when we hear back.\n\nThis is just the latest news involving AI chatbots having access to our money. OpenAI recently unveiled a feature that lets its Dots agents shop on a user's behalf , joining Meta Muse. This kind of thing has already caused a headache in certain sectors of the internet. Companies like United Airlines , Delta and even Amazon have all banned AI agents from shopping on their respective platforms."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-212d5ca1ea0baa0b",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/13/ios-27-3-adds-three-new-features-ive-used-almost-every-day/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-13T18:56:41.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27.3 adds three new features I’ve used almost every day",
+        "summary": "iOS 27.3 is coming next month , and during the beta so far there are three new features I’ve been using almost every day. more…",
+        "body": "iOS 27.3 is coming next month , and during the beta so far there are three new features I’ve been using almost every day.\n\nSiri AI in iOS 27 brings major upgrades by providing world knowledge, personal context features, and being more conversational than ever. But one previously announced Siri improvement—an expanded set of actions for Apple apps—didn’t make the cut in iOS 27.0.\n\nNow in iOS 27.3, though, Apple is rolling out its first set of new app actions for Siri AI.\n\nSiri AI has new capabilities across apps like Calendar, Files, Journal, Mail, Maps, Messages, Music, Notes, Photos, Preview, Reminders, Safari, Shortcuts, and Weather. It’s a big step toward making voice-driven computing more powerful on Apple platforms, and I’ve had fun experimenting with everything new Siri can do.\n\nRead more : iOS 27.3 expands Siri AI with many new capabilities across Apple apps\n\nApple Health gets a big overhaul in iOS 27.3, with a fresh design and new features that utilize Apple Intelligence for more personalized health insights. Per Apple :\n\nThe updated experience includes a new Insights tab that surfaces timely, holistic summaries spanning heart, sleep, readiness, fitness, vitals, and cycle tracking data throughout the day. A dedicated For You section delivers intelligent recommendations tailored to a user’s daily habits — such as practical guidance to adjust a wind-down routine following consecutive nights of interrupted sleep. The app pairs data with dynamic health content, offering educational videos and articles featuring Health app clinical experts.\n\nIn my testing so far, I’ve especially enjoyed getting up-to-date guidance every day on my health metrics, browsing the deep collection of new educational videos and articles, and understanding all the factors that contribute to longevity. I think Apple is moving the right direction with this update.\n\nRead more : iOS 27.3 adds all-new Apple Health app, details here\n\nIf you have an Apple Watch Series 12 or Apple Watch Ultra 4 , iOS 27.3 adds a powerful new feature called Siri Recap that “ambiently takes notes on your conversations throughout your day and creates high-level Apple Intelligence–generated summaries that you can use later to jog your memory.”\n\nSiri Recap functions like an outsourced short-term memory reserve. The data it collects is saved inside the Siri app in a new Recaps tab, where it lives for seven days and is then deleted—unless you manually save a specific recap.\n\nSo far in the beta, I’ve found the summaries Siri generates to strike a good balance of being helpful but not too invasive. It reminds me of key details, but there’s nothing I’ve seen that feels overly sensitive or personalized. That may change over time the more I use it, but so far I think this could prove a really valuable feature.\n\nRead more : watchOS 27.3 adds new Apple Watch feature that I absolutely love\n\nWhich new iOS 27.3 features have you been enjoying in the beta? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-351e5a9b05d8a5e7",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/13/export-banned-nvidia-chips-are-behind-chinas-most-powerful-ai-models-uh-oh-jensen/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-13T18:40:30.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Export-banned Nvidia chips are behind China’s most powerful AI models — uh-oh, Jensen!",
+        "summary": "New research shows the most advanced AI models from China were trained on banned Nvidia chips.",
+        "body": "The leading open-weight models developed by Chinese companies were trained on Nvidia chips that the U.S. government restricted from shipping to its largest geopolitical rival, a new research effort claims.\n\nThe apparently widespread access to Blackwell GPUs among Chinese frontier labs shows the magnitude of the problem facing the leading chip designer. Nvidia CEO Jensen Huang left the company this week after admitting to his affair with Alice Huang, executive of Megaspeed, a company implicated in smuggling Nvidia chips into China. Alice Huang has also been alleged to be an agent of China’s intelligence service.\n\nWhile Jensen Huang’s relationships with a customer and two employees have drawn the most public interest, Nvidia’s potential corporate liability for export control violations likely factored into its decision to part ways with Huang.\n\nU.S. export controls are intended to protect the country’s leadership in AI capabilities against China, but Huang has long sought to open up that market. Blackwell GPUs are banned from export to China or Chinese-owned firms, while the Trump administration allows Nvidia to export the H200, a less powerful chip, provided shipments take a circuitous shipping route that allows the U.S. to claim a 25% tariff.\n\nWill DePue, a former OpenAI researcher who leads the nonprofit research group Unemployment Labs, analyzed the weights — the unique structure — of large language models released openly by DeepSeek, Moonshot AI, MiniMax, and Ant Group. The weights still reflect the configurations of the chips used to train them, and DePue was able to find compelling evidence that the most closely watched models, including Moonshot’s Kimi’s K3 releases and DeepSeek’s V4 models, bear fingerprints from training on Blackwell chips.\n\nWhite House technology adviser Michael Kratsios said earlier this year that Moonshot had used export-banned Nvidia chips, citing U.S. intelligence sources. Epoch AI, a nonprofit research organization, estimates that about two million advanced chips entered China in 2024 and 2025 through schemes designed to hide their final destination.\n\nThat doesn’t mean that these models were trained entirely on Nvidia chips, or that export control laws were necessarily violated; the chips could have been in an offshore data center, which has proven a popular way for Chinese firms to access compute and driven an industrial revolution in Malaysia. Epoch’s data estimates that 275,000 Nvidia AI accelerators were imported to Malaysia in 2024 and 2025.\n\nHowever, the ostensible goal of the export bans is to prevent exactly that: Chinese AI labs training on the most powerful chips. China hawks have long called for stronger controls on who uses chips, not just who owns them or where they are installed.\n\n“If we care about the U.S. tech edge, it doesn’t make any sense to me that you would not allow Chinese companies to access chips in mainland China or Hong Kong and Macau, but then say, actually, if you just go over to Malaysia, you can do whatever you want,” Sam Bresnick, a researcher at the Georgetown Center for Security and Emerging Technology, told TechCrunch this summer.\n\nMegaspeed, the company led by Alice Huang, has been at the center of that trade for several years through its subsidiary Speedmatrix, and has been the subject of investigations by both the U.S. and S i ngaporean government. Friday, Bloomberg also reported that a company with links to Alice Huang was involved in smuggling banned Nvidia chips to a data center in Shanghai.\n\nIn May, the short-selling research firm Culper published a report arguing that Nvidia had a “ China problem ” because a significant share of its revenue was driven by Chinese demand, either through remote data centers or smuggling in violation of U.S. law. It detailed Megaspeed’s relationship with Nvidia and alleged that Alice Huang’s companies are backed by Chinese firms that are barred from accessing U.S. chips.\n\nIronically, short-seller Culper’s bet against Nvidia wasn’t driven by the expectation of a U.S. government crackdown. Instead, it was focused on the Chinese government’s response to the bans, which was to recommit to its domestic chip industry.\n\nIf China succeeds, billions of dollars in Chinese demand for Nvidia chips could dry up. Some 600,000 H200 chips are reportedly stockpiled in Hong Kong, awaiting shipment into China. While Chinese companies might want the chips, observers have no consensus on why they haven’t been cleared for import.\n\nGraham Webster, a research scholar at Stanford who focuses on U.S.-China technology policy, said he doesn’t buy the idea that holding the chips back would drive domestic production, since demand for chips is so large. Other theories for the hold-up include preparation for a potential trade deal that would involve importing a large volume of U.S. goods, or concerns about potential surveillance technology in the chips.\n\nFor now, U.S. companies have limited obligations to track what their customers do with controlled goods like AI chips. However, Jensen Huang’s personal and professional entanglements with Alice Huang create a much bigger problem for Nvidia if government investigators confirm that chip smuggling took place and that he was aware of it. Nvidia and Huang have both vouched for Megaspeed’s data centers, saying Nvidia officials had visited them to confirm they were legitimate.\n\nThe U.S. government’s treatment of Nvidia and Megaspeed is also under scrutiny. Secretary of Commerce Howard Lutnick, who oversees the agencies that license chip exports, could reportedly lose his job after reports that his investigators failed to uncover suspicious chip buyers and were too cozy with Nvidia officials."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-13265030b1c88126",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1033051/nvidia-jensen-huang-chips-gpu-supply-chain-climate-pollution",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-13T17:44:22.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Jensen Huang was reckless with the environment, too",
+        "summary": "Under cofounder Jensen Huang, Nvidia has become the engine for the AI boom - and one of the tech industry's biggest environmental liabilities. Its sought-after chips have triggered a new wave of water- and chemical-intensive factories, drained power grids from inside massive data centers, and set the stage for a looming e-waste problem. Under Huang's […]",
+        "body": "Under cofounder Jensen Huang, Nvidia has become the engine for the AI boom - and one of the tech industry's biggest environmental liabilities. Its sought-after chips have triggered a new wave of water- and chemical-intensive factories , drained power grids from inside massive data centers , and set the stage for a looming e-waste problem .\n\nUnder Huang's leadership, Nvidia clashed with environmental groups seeking to hold the company accountable for its so-called \" hidden \" emissions. Huang has talked up the idea of using AI to fight climate change while his company's supply chain emissions ballooned. Nvidia's investments, meanwhile, have support …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-6ca9a561bc4de7e4",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/11/ai-is-the-most-likely-reason-youll-die-openai-board-member-warns/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-13T17:25:45.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "OpenAI board member worries an AI \"takeover\" of society could be months away",
+        "summary": "Researcher traces a path from AI reward hacking to potential human extinction.",
+        "body": "How do you think you're going to die?\n\nIf you go by the current statistics for deaths in the US , it's reasonable to expect that cancer or heart disease will eventually get you. But OpenAI Foundation board member and Alignment Research Center Executive Director Paul Cristiano thinks we should all be worried about another major mortality risk. Speaking at a lecture series this week , Cristiano bluntly told the audience in a Toronto Convention Center, \"I think for most people in this room, the most likely reason they will die is because of an AI accident.\"\n\nIn the opening lecture of a three-part series , Cristiano outlined his worries about the risk of an impending \"AI takeover.\" He defined that as a situation where goal-pursuing AI systems \"call the shots in the same sense that humans today call the shots and what happens on Earth\" and where any human trying to stop them \"would be as ineffective as if you or me was trying to stop the US military.\" Such a situation would likely lead to mass death and perhaps uninhabitable environments for humans, Cristiano said.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-cf705a8abed48e67",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2316137/you-can-now-tempt-fate-and-give-your-banking-information-to-chatgpt/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-13T17:17:51.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "You can now tempt fate and give your banking information to ChatGPT",
+        "summary": "The new Wallet feature will allow its AI agents to make purchases on your behalf.",
+        "body": "The new Wallet feature will allow its AI agents to make purchases on your behalf.\n\nOpenAI just announced ChatGPT Wallet , a payment feature that enables its newly-released Dots AI agents to make purchases on behalf of users. Of course, that requires handing over your payment information to a chatbot, which carries some risk . OpenAI says that users only have to input card information once and then it's good to go.\n\nThe company has built some guardrails into the system to help attract those wary of letting hallucination-prone chatbots handle their personal finances. First of all, the bots are allowed to run loose and gather up stuff to purchase, but the human has to finalize everything.\n\nNow your dot can securely complete purchases on your behalf—with your approval.\n\nWith ChatGPT Wallet, agents pay without access to your actual card details. Every purchase requires a security check.\n\nChatGPT Wallet is rolling out starting today to dots, for Pro subscribers in the... pic.twitter.com/EhtEZNaKnt\n\n— ChatGPT (@ChatGPT) November 13, 2026\n\nEach purchase has to be approved via a security check like Face ID or a fingerprint scan, similar to how Meta Muse operates . An approval reportedly \"creates a clear record of the purchase\" which could help with dispute mitigation down the line. The store doesn't receive the actual card information, but rather is provided a \"payment token\" which is a \"substitute for the user's actual card details.\"\n\nOpenAI has partnered with American Express, Mastercard and Visa for this endeavor. The company promises that this program allows cardholders to maintain their current credit card rewards points and protections.\n\n\"Our goal here is to really focus on merchants and our network partners and start building out a really great foundation that's safe and easy to use,\" Chaya Nayak, who leads product for monetization and payments at OpenAI, told CNBC .\n\nThe company is not taking a cut of any purchases made through the system just yet. That should help keep prices low, for now, though it'll most certainly become a revenue stream for OpenAI down the line. We all know modern tech companies like to take the \"drug dealer\" approach to things. It'll be cheap or free at first until the company slams down the cost hammer in a year or two. Remember how affordable Uber used to be ?\n\nChatGPT Wallet is rolling out right now, though only to US-based Pro subscribers aged 18 and older. The company promises that it'll \"work with businesses, banks and payment networks to learn from early use and expand availability\" in the future.\n\nThe influx of AI agents running around and making purchases on their own has certainly caused some hiccups in certain corners of the internet. Many companies are outright banning the use of these agents to make purchases, such as Delta and United Airlines . Amazon is doing the same thing , but probably less out of an abundance of caution and more out of jealousy that its own chatbots aren't quite there yet .\n\nOne last thing. Why are these AI shopping agents so cute? They always look like Pixar characters or something. It's a bit creepy."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-58c05f8ee7adfb85",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1033026/camp-snap-retro-digital-video-campcorder-cs-8-micro-keychain",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-13T17:12:56.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The smallest version of Camp Snap’s retro digital camcorder fits on your keychain",
+        "summary": "Last week, Camp Snap launched a miniaturized version of its screen-free CS-8 video camera that was half the size of the original with a smaller grip designed to be easier for kids to hold. But it turns out the company wasn't done shrinking its hardware. Camp Snap's new CS-8 Micro is even smaller than the […]",
+        "body": "Last week, Camp Snap launched a miniaturized version of its screen-free CS-8 video camera that was half the size of the original with a smaller grip designed to be easier for kids to hold. But it turns out the company wasn't done shrinking its hardware. Camp Snap's new CS-8 Micro is even smaller than the CS-8 Mini. It's around three inches long and weighs just 1.5 ounces so you can hang it from your keys and, like its larger predecessors, it can capture video using one of five built-in filters.\n\nThe CS-8 Micro will be available starting on November 17th at 11AM ET through Camp Snap's online store , Target, and Urban Outfitters for $39.99 , and …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-b39321d3c27538fb",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/security/2026/11/windows-0-day-dropped-by-disgruntled-researcher-hands-hackers-system-rights/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-13T16:26:32.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Windows 0-day dropped by disgruntled researcher hands hackers System rights",
+        "summary": "\"SignDrop\" exploit lets local users gain all-powerful System rights.",
+        "body": "Nightmare Eclipse, the pseudonym of a researcher with an ongoing, very public beef with Microsoft, has dropped yet another Windows zero-day.\n\nOn Tuesday, Nightmare Eclipse disclosed SignDrop, a vulnerability that gives local users full System rights on some versions of Windows. The vulnerability resides in the Common Log File System , which Microsoft describes as a “general-purpose logging service used by software clients running in user-mode or kernel-mode.” By forcing a privileged process such as Windows Defender to open a crafted CLFS container, an attacker with ordinary user rights can abuse the privileged file creation to elevate privileges to System.\n\nThe attack exploits the interaction of CLFS, Windows Defender, and Windows file permissions. The exploit uses Windows Defender to open a log file created by a standard user by calling ServerMpUpdateEngineSignature, a legitimate Defender function for processing antivirus signature updates.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
     "id": "techcrunch-8d3d0ae89868e722",
     "type": "news",
     "sourceId": "techcrunch",
@@ -19,55 +308,6 @@
         "title": "ChatGPT’s new Wallet lets AI agents shop and check out for you",
         "summary": "ChatGPT Wallet lets AI agents shop and check out on users' behalf, starting with a limited rollout to U.S. Pro subscribers.",
         "body": "ChatGPT can now shop for you. On Friday, OpenAI launched a new wallet feature that lets its agents, called dots , help you decide what to buy and then complete the purchase on your behalf. The option will initially be available to a limited number of U.S. ChatGPT Pro subscribers, ages 18 and up, with a U.S.-issued Visa, Mastercard, or American Express.\n\nOpenAI says that users are fully in control of the purchases, as they’re able to review the items, the total, and the payment card that will be used to complete the transaction before the checkout occurs. In addition, users will approve the purchases directly with a security check like Face ID or a fingerprint, which creates a record of their transaction.\n\nThe addition comes as consumer-facing AI tools are working to find the right product-market fit, in terms of how they can help people be more efficient as they complete various tasks. While companies like DoorDash and Uber have so far reported low numbers of orders placed by AI agents, Meta’s Muse, which now has over 10 million users, has seen AI-assisted shopping become a top activity on its app.\n\nOther personal AI agents, like Instinct, also support making purchases on users’ behalf.\n\nIt’s no surprise, then, that OpenAI would want to enter this space more with an agentic shopping feature of its own.\n\nTo get started, ChatGPT subscribers add their eligible payment cards to the new ChatGPT Wallet, then ask their dot to help with a purchase. (This setup is a one-time thing; users don’t have to re-enter their payment information every time they buy.) When it’s time to transact, ChatGPT’s Wallet charges the selected card using a payment token, which is a substitute for the user’s actual card details, so that information isn’t shared with either the dot or the merchant.\n\nThe merchant will automatically receive what it needs to fulfill the order from the dot, like the shipping address and contact information, OpenAI says. The company notes that customers who shop via their dots will still be able to earn their credit card rewards and be able to take advantage of protections that typically come with cards, like being able to dispute transactions.\n\nThe limited availability at launch will allow OpenAI to test and improve the feature and its capabilities before rolling it out more broadly. In the future, the company plans to offer users more control over the feature by allowing them to set spending limits or configure other parameters around purchase categories or time periods, so they can pre-approve purchases that their agent can then handle more autonomously.\n\nIt also aims to make the agentic shopping feature an option at a broader number of supported retailers. This could be a challenge in some areas, where retailers are blocking AI agents from using their site ; on the shopping front, the largest retailer to ban AI agents is Amazon, as it aims to steer users to its own AI agent, Alexa, instead.\n\nTo help retailers adapt to agentic commerce, OpenAI also published a Commerce Partner Playbook that offers tools and guidance to sites that want to support customers using agents."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-f7ccc1629644a39d",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1032141/paprika-4-recipe-grocery-pantry-app-update-subscription-hands-on",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-13T16:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "android",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "My favorite recipe app just got a big upgrade — and a subscription fee",
-        "summary": "Nearly 10 years after the launch of Paprika 3, the recipe-managing, pantry-organizing, grocery list-making app has gotten a big upgrade that adds more functionality to nearly every corner of the experience. I tested Paprika 4 for several weeks while it was in open beta, and the update recently launched across Android (the version I've been […]",
-        "body": "Nearly 10 years after the launch of Paprika 3, the recipe-managing, pantry-organizing, grocery list-making app has gotten a big upgrade that adds more functionality to nearly every corner of the experience. I tested Paprika 4 for several weeks while it was in open beta, and the update recently launched across Android (the version I've been using), iOS , Windows , and macOS .\n\nWhere Paprika 3 was a one-time purchase per platform, accessing most of the new features in Paprika 4 requires an annual subscription fee of $14.99 (it can also be gifted ). With the subscription, you can access the app on any supported platform. New users, as well as those …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-908fc9bede1b28ac",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/13/ios-27-2-has-two-carplay-improvements-heres-whats-new/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-13T15:59:49.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27.2 has two CarPlay improvements, here’s what’s new",
-        "summary": "iOS 27.2 arrived last month with new features for Messages , Apple TV , and more, plus two improvements for CarPlay. Here’s what’s new for CarPlay users. more…",
-        "body": "iOS 27.2 arrived last month with new features for Messages , Apple TV , and more, plus two improvements for CarPlay. Here’s what’s new for CarPlay users.\n\nApple Podcasts in iOS 27.2 adds two new sections to the Home tab: ‘New Episodes’ and ‘Continue Playing.’\n\nEssentially, Apple has rethought how the core ‘Up Next’ queue of its Podcasts app works.\n\nLike you would expect, ‘New Episodes’ contains only the latest episodes from your favorite shows. But after you’ve started an episode, you’ll find it in the ‘Continue Playing’ row just below.\n\nThis overhaul to podcast management makes it easier to find the latest episodes of your shows and also pick up where you previously left off. I’m a big fan of the change.\n\nSiri AI introduces a variety of upgrades in iOS 27.2, including two that carry over to CarPlay as well.\n\nPer Apple’s release notes :\n\nIt can take some adjustment to remember that Siri AI is available in the car just like on iPhone. But CarPlay is an especially useful platform for Apple’s more powerful assistant.\n\nIt’s arguable whether this qualifies as an “improvement,” but it is a change worth mentioning. iOS 27.2 includes a new app icon for Apple Music, plus some minor design tweaks in the app.\n\nThese changes are related to the broader rebrand of Apple Music that was recently unveiled .\n\nFor more new features in CarPlay that debuted in iOS 27, see our coverage here .\n\nWhat are your favorite recent changes in CarPlay? Let us know in the comments."
       }
     },
     "media": null
@@ -97,127 +337,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-6716944e226085bd",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/13/security-bite-apple-details-secure-exclaves-a-glimpse-at-its-ambient-computing-future/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-13T15:42:20.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Security Bite: Apple details Secure Exclaves, a glimpse at its ambient computing future",
-        "summary": "9to5Mac Security Bite is exclusively brought to you by Mosyle, the only Apple Unified Platform . Making Apple devices work-ready and enterprise-safe is all we do. Our unique integrated approach to management and security combines state-of-the-art Apple-specific security solutions for fully automated Hardening & Compliance, Next Generation EDR, AI-powered Zero Trust, and exclusive Privilege Management with the most powerful and modern Apple MDM on the market. The result is a totally automated Apple Unified Platform currently trusted by over 45,000 organizations to make millions of Apple devices work-ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple . Apple published a new security research post this week detailing Secure Exclaves, a new architecture built to handle what the company calls “ambient sensing.” The latter isn’t anything new. “Hey, Siri” has been using a version of this always-on listening technology for years. The difference now (particularly on newer devices like Apple Watch Series 12 and HomeView ) is new features need far more data from your surroundings, and Apple has changed where that data gets processed. more…",
-        "body": "9to5Mac Security Bite is exclusively brought to you by Mosyle, the only Apple Unified Platform . Making Apple devices work-ready and enterprise-safe is all we do. Our unique integrated approach to management and security combines state-of-the-art Apple-specific security solutions for fully automated Hardening & Compliance, Next Generation EDR, AI-powered Zero Trust, and exclusive Privilege Management with the most powerful and modern Apple MDM on the market. The result is a totally automated Apple Unified Platform currently trusted by over 45,000 organizations to make millions of Apple devices work-ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple .\n\nApple published a new security research post this week detailing Secure Exclaves, a new architecture built to handle what the company calls “ambient sensing.” The latter isn’t anything new. “Hey, Siri” has been using a version of this always-on listening technology for years. The difference now (particularly on newer devices like Apple Watch Series 12 and HomeView ) is new features need far more data from your surroundings, and Apple has changed where that data gets processed.\n\nToday, on most Apple hardware, wake-word detections run locally on-device on a smaller, low-power chip. But once it thinks it heard you say “Hey, Siri,” the main operating system gets involved to confirm and wake up the smart assistant for use. There’s nothing necessarily wrong with this process. The split second of audio is all processed locally and not sent to Apple servers.\n\nThe problem lies in Apple’s newer features that ask for a lot more from users than a wake word.\n\nPerson recognition on HomeView identifies who’s in the room by face and voice, and Siri Recap and Live Rewind need to keep a running sense of what’s been happening around you. That adds up to a constant stream of sensitive camera and mic data, and it needs a more secure way of being processed than anything Apple had before.\n\nMuch like the existing Secure Enclaves architecture for authentication, instead of passing operations to the main OS, Secure Exclaves (notice the x) run their own tiny, separate operating system. Raw data goes in and a simple “that’s Arin” or “that’s the wake word” is outputted back to the OS, everything else is thrown away. According to Apple , that data “cannot be accessed by the main operating system, apps, or Apple.”\n\nThe changes don’t stop there. In recent SB column , I mentioned how on iPhone, the green dot that appears indicating that the camera or mic is live is all software connected, not like the hardwired LED that exists on the Mac. Now on iPhone 18 Pro, iPhone Duo, and MacBook Neo, the camera and mic indicators now live inside this new exclave, meaning even a compromised OS shouldn’t be able to hide them for malicious purposes.\n\nIt’s apparent Apple is building toward this new level of ambient computing across every type of device when you read technical reports like this. Future AI-first products, like the heavily rumored AirPods Pro with inferred cameras , will most certainly built on this new Secure Exclave architecture.\n\nOverall, this new technical post reads like Apple laying the privacy groundwork for the always-listening, always-watching products that are here and coming in the near future. It’s the privacy-first approach we’ve come to love from Apple and further demonstrates its lead on this front. I highly recommend checking it out.\n\nSecurity Bite is 9to5Mac’s weekly deep dive into the world of Apple security. Each week, Arin Waichulis unpacks new threats, privacy concerns, vulnerabilities, and more, shaping an ecosystem of over 2 billion devices. Every other week on the Security Bite Podcast , he sits down with experts in the field to break down the most pressing topics ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-90430d36b1e9c4b8",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/13/apple-homes-new-video-doorbell-smart-cameras-now-available-to-order/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-13T15:14:32.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple Home’s new video doorbell, smart cameras now available to order",
-        "summary": "Today Apple has launched two Home products: HomeView and a new Apple TV 4K . Additionally, the first three accessories in the Apple Home Collection are now available to order: a video doorbell and two smart home security cameras. more…",
-        "body": "Today Apple has launched two Home products: HomeView and a new Apple TV 4K . Additionally, the first three accessories in the Apple Home Collection are now available to order: a video doorbell and two smart home security cameras.\n\nWhether you’re interested in diving into the smart home market for the first time, or you simply want to upgrade your setup, Apple has several new accessories worth considering.\n\nApple Home Collection is a curated set of accessories that Apple co-developed in partnership with LG and Schneider. They are designed for seamless setup in the Home app with no third-party apps or accounts required, and support all the latest Apple Home technologies.\n\nIn total, Apple has nearly 10 accessories coming—from smart thermostats to indoor sensors, a smart lock, security cameras, and more.\n\nToday, the first three Apple Home Collection products are now available to order:\n\nEach product is currently estimated to deliver in mid-December, a week or so before Christmas.\n\nIt’s unclear whether additional Apple Home Collection accessories will go on sale before 2027. We might need to wait until the new year for the thermostats, smart lock, and more. But if you want to get a first look at Apple’s new accessory lineup, the LG products above are the answer.\n\nDo you plan to buy any of the Apple Home Collection products? Why or why not? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-e84704b7fe29d37f",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/13/uber-confirms-hackers-stole-thousands-of-drivers-license-information-in-data-breach/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-13T14:57:55.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Uber confirms hackers stole thousands of drivers’ license information in data breach",
-        "summary": "The ride-sharing giant said driver's license information stored by AI cloud company Fireworks AI was stolen during a security incident.",
-        "body": "Uber is notifying thousands of drivers that their personal and driver’s license information was stolen during an October data breach at one of the company’s tech providers.\n\nIn notices filed this week with several U.S. attorneys general, including California , the ride-hail giant said it was notified on October 9 by the provider that hackers broke in and stole internal credentials, which were used to access Uber’s data.\n\nThe company said it subsequently began notifying affected drivers that their personal information was stored with the provider.\n\nTechCrunch has learned that the provider is Fireworks AI, which lets developers access and use open AI models. Fireworks reported a data breach last month in which hackers stole its customers’ information, including billing data and some private AI datasets.\n\nOnline productivity startup Notion confirmed its data was also stolen in the Fireworks hack.\n\n“The notices to drivers are in relation to a security incident impacting one of our third-party vendors, Fireworks.ai, which had access to some Uber data,” an Uber spokesperson told TechCrunch, deferring our questions to Fireworks.\n\nUber did not say how many customers are affected by the breach, nor how many drivers it was notifying about the incident.\n\nWhen reached by email, a spokesperson for Fireworks confirmed that the company identified a security issue involving unauthorized access to some of its systems, which affected customer data, but the spokesperson did not address our questions about the incident.\n\nAccording to data breach notices seen by TechCrunch, the stolen data includes driver’s licenses of 2,567 individuals in Massachusetts, 3,430 people across South Carolina, and 1,873 residents of Rhode Island. A filing with Illinois showed that some state residents had their driver’s license information stolen, but that the number of affected people was pending. Uber also notified drivers who live in California, but did not say how many had their information stolen.\n\nThe number is expected to rise as more data breach notifications roll in.\n\nFireworks attributed its breach to a financially motivated cybercriminal group whose goals are to sell stolen tokens for accessing large language models, or LLMs.\n\nNo known cybercriminal group has taken credit for the data theft.\n\nThis is Uber’s second known data breach this year. The company reported a security incident at its Uber Freight truck shipping unit, for which an extortion gang took credit for stealing data.\n\nUpdated with a response from Fireworks."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-99122ecbf6bed3f9",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/podcast/1032866/jensen-huang-nvidia-china-trump-vergecast",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-13T14:47:16.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "What’s really at stake in the Jensen Huang saga",
-        "summary": "One part of the saga surrounding Nvidia CEO Jensen Huang ended on Thursday, when Huang resigned from his position at the top of AI's most important company. But in the coming weeks and months, a much bigger story may be about to unfold. A story about Nvidia's dealings in China, about the US government's willingness […]",
-        "body": "One part of the saga surrounding Nvidia CEO Jensen Huang ended on Thursday, when Huang resigned from his position at the top of AI's most important company. But in the coming weeks and months, a much bigger story may be about to unfold. A story about Nvidia's dealings in China, about the US government's willingness to turn a lot of blind eyes to protect a powerful ally, and about the very stability of the AI industry as a whole. It's a lot.\n\nOn this episode of The Vergecast , David and Nilay start by trying to unpack the many parts of the story. We're all going to learn a lot more about Megaspeed than we ever planned or wanted, and we're goin …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-2f3d0f3c838142b3",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2315338/why-apples-homeview-relies-so-heavily-on-your-iphone/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-13T14:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Why Apple's HomeView relies so heavily on your iPhone",
-        "summary": "To make the HomeView both personal and communal, there was only one place to go.",
-        "body": "It all comes down to convenience and personalization without sacrificing privacy.\n\n\"There's no product in the world better designed to be your intelligent personal hub than iPhone.\"\n\nThat's the statement newly minted Apple CEO John Ternus made during his opening remarks at his first iPhone event this year. It should be no surprise then, that the device holding so much of your data would play a vital role with a separate \"intelligent personal hub\" that stays inside your home.\n\nThis week marks the arrival of the HomeView , Apple's long-rumored smart display that was announced last month. As I explained in detail in my review , it's basically a combination of several gadgets in one. It's both a visual interface and a smart speaker that is always listening for your Siri queries. It's a smart home hub for a range of connected devices. It's a sous chef in the kitchen, and it's a FaceTime station when you need to catch up with friends and family. Heck, it's even a digital photo frame.\n\nThe HomeView doesn't run apps though. It performs all those functions, and more, by mirroring the apps that you have on your iPhone or iPad. Instead of allowing you to download software from the App Store, the HomeView's system works like CarPlay does in your car. It shows you the compatible apps you've already installed on your phone or tablet, as well as Apple's core suite, including Calendar, Messages, Reminders and Weather.\n\nThis is just one of the reasons an iPhone (or iPad) needs to be close by for the HomeView to work.\n\n\"When we design home products, we always keep three things in mind,\" Cecilia Dantas, a member of Apple's Home product marketing team, told me. \"They have to be intelligent, personal and private.\"\n\nSince Siri AI needs all those apps to be able to provide the very personal context that makes its answers more intelligent and conversational, Apple needed a way to grant it that access that didn't compromise your privacy. Having your iPhone be the only container for that information and requiring it to be around for your data to be accessible helps keep it safe from prying eyes when you're away.\n\nAs a more general home hub, the HomeView has to work for every member of your household so they can turn lights off or see who's at the door. But it shouldn't be showing them every text message you get from your parents or revealing your calendar invites and inadvertently ruining surprises. This privacy is why, in addition to the built-in face and voice recognition, the HomeView relies so heavily on an iPhone or iPad.\n\n\"Everything that feels natural on a phone is now available in a subtle, glanceable device that gives you what you need in the moment,\" VP of hardware engineering Matthew Costello said. \"It recognizes you and shows you your information, but when you step away, it's gone.\"\n\nCostello further explained that the HomeView offers the best combination of personal information with the convenience of a dedicated communal device. Since the iPhone is a user's hub for their personal content — and really, their life — it only made sense to \"extend and link that intelligence\" into products like the HomeView.\n\nIf the HomeView doesn't recognize a user, it will only allow them to perform basic tasks. And even if you are a recognized user, you'll need to have your recently unlocked iPhone or iPad nearby for the smart display to show things like your Messages or Calendar.\n\n\"Personal information only surfaces once you've been recognized by your face, and [if] your paired iPhone is present and recently unlocked,\" Costello noted. \"We thought building on the contextual information and the intelligence, but also the privacy, was super critical and also very unique.\"\n\nBy tying what shows up for you on the HomeView to your phone, your data is displayed while you're interacting with the device and disappears with you when you do. As Costello explained, it's not \"posted on or housed on the device in any way.\"\n\nThe heavy reliance on an iPhone or an iPad has additional benefits. Like you can on a HomePod, the HomeView allows you to hand off music, FaceTime calls and more. One of the device's best features is recipe integration in Safari that makes cooking easier. It's also powered by the hand off action, so you need that other Apple device to kickstart the process. But Dantas explained that Apple doesn't see reliance on your phone or tablet as a hindrance.\n\n\"It's not just dependency, it's also part of this ecosystem,\" she said. The HomeView's similarity to your phone doesn't just enable familiar apps, but also a familiar method of interaction.\n\nSpeaking of interaction, there's a reason why there aren't any buttons on the HomeView. Apple intentionally built it like this. I found it odd, considering the device is a bit of a hybrid of an iPad (touchscreen), an Apple Watch (square shape) and a HomePod (speaker), two of which have physical buttons. But Costello said touch input was always meant to be secondary.\n\n\"We always envisioned it as something that was voice first, then touch second,\" he explained. \"As we [designed] the product, that's how we thought about it, so that eliminated buttons and physical controls.\"\n\nFor Dantas, one of the main challenges during the product development phase was restraint. The process of bringing a new product and new software to life was obviously a tall task, but the engineering team also had to determine which parts of Apple's existing devices and services to include and which ones to leave behind.\n\n\"We've had home products for a while, and we built on that foundation,\" she said. \"I think it was really, really challenging to go through and decide what do we bring and what do we not bring [to the HomeView]. That was very intentional to deliver this experience that's powerful and that's simple.\""
-      }
-    },
-    "media": null
-  },
-  {
     "id": "engadget-d01ad051453e6331",
     "type": "news",
     "sourceId": "engadget",
@@ -236,30 +355,6 @@
         "title": "The Motorola Signature 27 is a beast",
         "summary": "Motorola's latest phone has a monstrous tandem OLED display, a huge 7,000mah battery, fancy cameras and a massive $1,600 price tag.",
         "body": "It’s got a monstrous tandem OLED display, a huge 7,000mAh battery, fancy cameras and a massive $1,600 price tag.\n\nThe Motorola Signature 27 is slated to be the first phone on sale in the US to feature Qualcomm's next top-tier processor — the Snapdragon 8 Elite Extreme Gen 6 . That alone would make the handset notable. But when you factor in a ton of other high-end hardware including a gorgeous tandem OLED display, a massive silicon-carbon battery and triple rear cameras with a dedicated action sensor, the Signature 27 becomes a powerhouse of a phone.\n\nIn some respects, it feels like Motorola's design process was simply to take every fancy component it could get its hands on and shove it in the Signature 27. The phone features a big 6.8-inch Extreme AMOLED Duo display, which is based on the same tandem OLED tech Apple used in the new ProLED MacBook Pro . Unsurprisingly, it looks awesome. Colors are super saturated and it has a ridiculous peak brightness of 12,000 nits, though I couldn't fully test that during my evening demo session. To put that number into context, the peak brightness of the Galaxy S26 Ultra is merely 2,600 nits, and that panel is still super easy to view outdoors. And then over the top of the display, Moto went with Corning's latest Gorilla Glass Ceramic 3.\n\nAround back, the Signature 27's rear cameras are based around a 50-megapixel Sony LYTIA L910 sensor for its main camera. There's also a 50MP ultra-wide camera and a high-res 200MP telephoto camera with a 3x optical zoom. Now, those three alone would be a pretty formidable kit, and when I got a chance to take a telephoto picture of the NYC skyline at sunset, I was rather impressed at how sharp and detailed the final image looked. This is coming from someone who has often lamented Moto's inability to keep up with Apple, Samsung and Google on previous releases. When I used the main camera to take a shot at dusk, I was really pleased with the 27's low-light sensitivity and dynamic range.\n\nThe 27's photo kit doesn't stop there. There's actually a fourth EVS sensor — which the company claims is a first in a smartphone — designed to detect pixel-level changes in light to help the phone snap extremely sharp action pics. Sadly, I didn't get to test this feature out in-depth, but it could be a really powerful solution for capturing sports without needing to lug a proper camera around. It could also be a great tool for all the parents who can't get their kids to sit still for a photo.\n\nMeanwhile, on the inside, in addition to a Qualcomm Snapdragon 8 Elite Extreme Gen 6 chip, the phone also features 12GB of memory and 512GB of base storage. And if that's not enough, Moto has included a nifty RAM boost that effectively doubles the memory to 24GB to improve things like multitasking. Furthermore, to help deliver strong sustained performance, the 27 features a large 3D vapor chamber (8,384mm²) with what Moto claims is diamond-infused thermal gel to pull heat away from its processor.\n\nPerhaps the best upgrade on the Signature for power users is the move to a huge 7,000 mAh silicon-carbon battery, which dwarfs pretty much anything else on sale in the US right now. Naturally, its charging speeds are pretty rapid too, with up to 90 watts wired or 50 watts wirelessly. The caveat is that you'll need to rely on one of Motorola's proprietary TurboPower adapters. Sadly, the 27 doesn't have built-in magnets either, so if you want support for magnetic accessories, you'll need a case.\n\nReally, every component on the phone is high-end in some way. That's even true of its audio, which is composed of speakers tuned by Bang & Olufsen. I must admit, I'm pretty fond of the phone's general design as well. In addition to your standard lock button and volume rocker, there's a dedicated AI button that can also be customized to open an app of your choosing. The olive green model sports a nifty finish that reminds me of a mix between cloth and leather, while the coal smoke variant features a \"tactical weave\" reminiscent of ballistic nylon. Even its dust and water resistance is top-notch thanks to an IP69 rating that's good enough for submersion of up to five feet for up to 30 minutes.\n\nHowever, the design trait I like the most is the way the back of the phone subtly rises to meet all those rear cameras, resulting in a sloping rear panel that leaves all of its lenses basically flush against the back of the phone. There's no big protrusion or bump for stuff to get caught on. That said, with four lenses in back plus a dedicated flash, the Signature 27 is quickly beginning to look like one of those Light L16 cameras from nearly a decade ago. At this point, I have to wonder if it might be easier, and better looking, to go with a more visor-like approach similar to what Google did on the Pixel 6.\n\nOver the past few years, there has been demand for a proper Motorola flagship phone that can truly rival the fancy handsets from Samsung, Apple and Google. With the Signature 27, it really feels like the company took that message to heart. This phone has practically everything you could ask for in a super premium handset, and then some. The downside is that all of this comes with a similarly super premium price tag of $1,600. But if you want an absolute monster of a phone and don't want to wait for next year when more devices get their own Snapdragon 8 Elite Extreme Gen 6 chip, keep an eye out when pre-orders go live on November 19."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-c1ce398870aca1d0",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1032518/claude-duet-ai-agent-hands-on",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-13T14:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Claude’s Duet agent is a little neurotic and surprisingly helpful",
-        "summary": "Normally, the products I test don't offer to help me write up my experience with them. Duet is different. Claude Duet is Anthropic's AI agent for consumers, the latest attempt by an AI company to try to convince us that agents can be useful for people who don't write code. It's been an interesting couple […]",
-        "body": "Normally, the products I test don't offer to help me write up my experience with them. Duet is different.\n\nClaude Duet is Anthropic's AI agent for consumers, the latest attempt by an AI company to try to convince us that agents can be useful for people who don't write code. It's been an interesting couple of months: Instinct gave us an impressive text-based assistant , Meta offered us its cute little guy, Muse, to help us buy things , and OpenAI gave us the more work-oriented Dots . Claude Duet is even more focused on work than those. It's also more consumer-friendly than Claude Cowork , which was more consumer-friendly than Claude Code - the co …\n\nRead the full story at The Verge."
       }
     },
     "media": null
@@ -284,31 +379,6 @@
         "title": "Use Photo Tracking in ZoomText to Jump to the Objects in a Picture",
         "summary": "Have you ever opened a photo and wanted to know right away who’s in it, or spot the dog in the corner, or see what’s on the dinner plate? If you use magnification, you know how that usually goes. You zoom in, pan across the picture bit by bit, and hope you don’t miss what …",
         "body": "Have you ever opened a photo and wanted to know right away who’s in it, or spot the dog in the corner, or see what’s on the dinner plate? If you use magnification, you know how that usually goes. You zoom in, pan across the picture bit by bit, and hope you don’t miss what you’re looking for. It works, but it takes time and patience.\n\nPhoto Tracking, new in ZoomText 2027, makes this much easier. Instead of scanning every corner of an image, you can go straight to the things that matter to you. Let’s take a look at what it does and how to get started.\n\nPhoto Tracking identifies people, animals, food, and other objects in an image. Then it moves the magnified view directly from one object to the next. You no longer need to zoom and pan across the whole picture to find what you want. Photo Tracking takes you right to it.\n\nPhoto Tracking is available in ZoomText Magnifier/Reader, ZoomText Magnifier, and Fusion.\n\nPictures are everywhere: on web pages, in Word documents and PDFs, and in your own photo collection. Photo Tracking helps you get to the parts of an image you care about quickly, so you spend less time searching and more time enjoying or using what you find.\n\nThere’s another big benefit. All recognition happens locally on your computer. That means Photo Tracking works offline, and it’s suitable for secure environments where images can’t be sent to an online service.\n\nGetting started takes just a few steps:\n\nTip: You can also set Photo Tracking to analyze the active window automatically.\n\nPhoto Tracking sorts the objects it finds into ten categories:\n\nIt starts with your favorite categories, which are Animals and People by default. If you’d rather start somewhere else, you can change your favorites in Photo Tracking Settings.\n\nUse these keystrokes while you explore an image:\n\nWhen you zoom in or out with CAPS LOCK+UP ARROW , CAPS LOCK+DOWN ARROW , or CAPS LOCK+ENTER while using Photo Tracking, ZoomText announces the new magnification level, so you always know where you are.\n\nFor complete hotkeys and settings, see the Photo Tracking help topic in ZoomText. To learn more about Photo Tracking and other ZoomText 2027 features, visit What’s New in ZoomText 2027 .\n\nGive Photo Tracking a try the next time you come across a picture. We think you’ll enjoy how quickly you can find what you’re looking for.\n\nHave questions? Send an email to training@vispero.com ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-c3178c21c12c4a1d",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2314873/surface-laptop-ultra-review/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-13T13:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "windows"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Surface Laptop Ultra review: The most powerful Surface yet, but it still lags behind Apple",
-        "summary": "Microsoft's latest Surface is a beautiful flagship device for NVIDIA's RTX Spark.",
-        "body": "It’s a beautiful flagship device for NVIDIA’s RTX Spark.\n\nWith a name like Surface Laptop Ultra, Microsoft's latest notebook better be impressive. It's one of the flagship devices for NVIDIA's new RTX Spark platform , making it the most powerful Surface device yet. It can be equipped with up to 128GB of unified memory, which is ideal for running local AI models. And in just about every other respect, from its super-bright 15-inch screen to its sleek case, the Surface Laptop Ultra screams quality. So sure, the name fits.\n\nBut with its high $2,599 starting price, which easily escalates if you want to go beyond its stock 24GB of RAM, the Surface Laptop Ultra is really only meant for the most demanding users. To be fair, though, the same is true of all the RTX Spark laptops, including the excellent ASUS ProArt P16 we recently reviewed . Even Apple is pushing the limits of laptop pricing with its new touchscreen MacBook Pros with PROLED screens , which start at $2.899.\n\nLike some sort of cosmic capitalist joke, PC makers have inexplicably decided to release pricier computers, even though we're already suffering from AI-driven memory price hikes. I'm sure the Surface Laptop Ultra's high price won't stop AI enthusiasts who've been eagerly awaiting capable Windows systems from buying one, but most gamers and content creators would likely be better off saving $1,000 and buying a capable gaming laptop instead.\n\nMuch like the standard Surface Laptop, the Ultra variant doesn't have any of the bells and whistles from Microsoft's convertible Surfaces. It just looks like a sleek, all-metal business laptop. Pop it open and you'll notice that its 15-inch screen has a tall 3:2 aspect ratio instead of the typical widescreen configuration. And if you peer along the bottom of the case, you'll see a slightly segmented base (reminiscent of the Surface Laptop Studio ), which makes a bit of room for cooling vents and downward-firing speakers.\n\nWhile there's a lot to admire about Microsoft's design prowess, the biggest selling point of the Surface Laptop Ultra is NVIDIA's RTX Spark chip. It's an Arm-based system-on-a-chip that can be equipped with up to 20 CPU cores and 6,144 GPU cores. Take note: You'll need to shell out $3,700 to get the most powerful RTX Spark hardware here, but at least that ships with 32GB of RAM. The base $2,600 Surface Laptop Ultra has 18 CPU cores and 5,120 GPU cores.\n\nTaking a cue from Apple Silicon and Qualcomm's recent Snapdragon X chips, the RTX Spark also features unified memory, which is accessible to both the CPU and GPU. That gives it even more memory bandwidth than a typical Intel or AMD-based Windows PC, which have their RAM, CPU and dedicated GPUs spread out across their motherboards. By having direct access to tons of RAM, RTX Spark hardware can also house large AI models locally, which is a major reason why both Microsoft and NVIDIA are pitching it as a major evolution for PCs .\n\nThanks to its NVIDIA GPU cores, the RTX Spark chip also delivers gaming performance similar to an RTX 5070 laptop GPU. That makes it ideal for 1440p gaming, and you can probably also get decent performance in 4K and other higher resolutions thanks to NVIDIA's DLSS upscaling and frame generation. The Surface Laptop Ultra starts at a much higher price than most RTX 5070 gaming notebooks, though, so it's not something you'd want to buy for pure gaming.\n\nThe RTX Spark's Arm CPU is both a blessing and a curse: It technically can perform more efficiently than Intel and AMD's x86-64 chips, but it also requires emulating older Windows software and drivers. That opens the door to unforeseen bugs and issues, especially for niche apps and minimally-supported third-party drivers. While this was a major problem when Microsoft first started dabbling with Windows on Arm (think back to the original Surface with Windows RT or the Surface Pro X ), the company's emulation for x86-64 software has dramatically improved. Kernel-level anti-cheat software for multiplayer games initially didn't work on the first Snapdragon X Windows systems, but both Microsoft and NVIDIA have worked on resolving that. Now, you can easily play Fortnite Arm-based Windows systems.\n\nMicrosoft initially touted the Surface Laptop Ultra's 15-inch screen as the brightest laptop display on the market, thanks to its eye-searing 2,000 nits of HDR brightness. Apple's new MacBook Pro with PROLED Display stole that thunder a bit, though: Its screen can reach the same brightness, and its OLED screen delivers deeper blacks and higher contrast. The Surface Laptop Ultra's mini-LED display is still plenty impressive though, especially while watching films in HDR with rich colors, or playing games that truly push its brightness and HDR capabilities.\n\nThe Surface Laptop Ultra also features a keyboard that's similar to the Surface Laptop's, which has always felt great to type on thanks to its deep key depth and satisfying feedback. Its large trackpad also supports newer haptic feedback in Windows — for example, you can feel a slight nudge as you move apps along the edges of the screen to lock them into place. We've seen similar haptic feedback in mice like Logitech's MX Master 4 , and while it's not exactly groundbreaking, I find it to be a nifty addition to the aging Windows interface.\n\nStrangely enough, one of the most interesting things about the Surface Laptop Ultra is its magnetic USB-C charging cable. It allows the notebook's charging cable to snap into place on one USB-C port, and similar to Apple's MagSafe cable, it also lets the cable easily slide out if someone trips on it. It's a useful replacement for the proprietary Surface charging connection, since it allows Microsoft to keep a standard USB-C port on the Laptop Ultra for charging, which will also work seamlessly with every other USB-C charging cable. The magnetic USB-C charging cable is Microsoft's invention, but the company says it could bring it to partner laptops if they're interested.\n\nThe Surface Laptop Pro's ports mostly match the MacBook Pro's, with three USB-C ports, HDMI, SD card slot and a headphone jack. But, crucially, there's also a USB Type-A connection for older devices. I could see that being very useful for some Windows creatives.\n\nThe Surface Laptop is a beautiful beast. While every RTX Spark laptop will be similarly speedy, Microsoft has gone to great effort to make the Surface Laptop Ultra stand out from every other Windows notebook. Its aluminum case feels both as solid as a rock, and as smooth as a piece of fine jewelry. It also rejects fingerprints so it always looks pristine — something the ASUS ProArt P16 completely failed at. I wish the Surface Laptop Ultra was a bit lighter, though: At 4.4 pounds, it feels more like a brick than I'd expect for a premium notebook in 2026. Dell's XPS 16 weighs 3.65 pounds, and Apple's new 16-inch PROLED MacBook Pro comes in at 4 pounds.\n\nIn benchmarks, the RTX Spark chip excelled at multi-threaded tests, like Cinebench 2024, where it scored several hundred points higher than the ASUS ProArt PX13, which was powered by AMD's Ryzen AI Max+ 395 chip. NVIDIA still lags behind Apple, though. The new PROLED MacBook Pro, which was powered by an M5 Pro chip, scored 2,188 points in that same test, whereas the Surface Laptop Ultra came in at 1,553 points. Apple also has the lead in single-threaded performance: The M5 Pro scored 192 points to the Surface's 120. Apple's newer M6 chip in the 14-inch MacBook Pro does even better, reaching 210 points.\n\nNVIDIA's big draw is that its chip can power Windows and Linux, while you'll need to become a macOS convert to use Apple's hardware. While doing so isn't tough these days , I've talked to AI researchers who rely on Windows apps to get their work done. Moving to a Mac would just be a pain for them.\n\nThe Surface Laptop Ultra scored 1,000 points lower than the ASUS ProArt P16 in the PCMark 10 Applications test, which is surprising since they're both using the same RTX Spark chip. It could be a difference in RAM: The Surface Laptop we tested had 32GB of RAM, while the ASUS was stuffed to the brim with 128GB. But in real-world usage, that extra RAM is only useful if you want to run large AI models on your system, it doesn't directly mean faster performance. And personally, I'll take Microsoft's refined build quality over slightly better benchmark speeds any day.\n\nWith 32GB of RAM, our review unit couldn't run the massive AI models that fit into the ASUS P16, but I was still able to get OpenClaw running with Qwen3.6 35B-A38. It was quick to fetch me updates on recent news, as well as transcribe audio from a podcast. I even had it generate an audio podcast from a written review — sacrilege for a podcaster, I know — and it managed to do so in a few minutes. I don't personally use agentic AI models, but with a bit more RAM, I could see the Surface Laptop Ultra being a fitting home for one.\n\nGiven its GPU prowess, I wasn't surprised to see the Surface Laptop Ultra reach 87 fps in Cyberpunk 2077 while playing in 1440p with maxed-out graphics settings, 4x frame generation and path tracing enabled. That would be my ideal way to play that game on a 15-inch screen. I could even hit 117 fps by pushing the frame generation to 6x, but that leads to occasional graphical weirdness. I was also able to crank up the graphics settings in Star Wars: Galactic Racer and Gears of War: E-Day while keeping a decently high frame rate.\n\nWhile I would have liked to see more than a 120Hz refresh rate on the Surface Laptop Ultra, that's still fast enough to make most games look pretty smooth. (There's also the additional benefit of making scrolling around Windows look much smoother.) And I can't praise Microsoft's screen technology enough. At times, I preferred playing Gears of War on the Surface Laptop Ultra instead of my 32-inch 4K gaming monitor, simply because it looked so much brighter.\n\nAs for battery life, the Surface Laptop Ultra lasted for 13 hours and 25 minutes in the PCMark 10 battery benchmark. That's two and a half hours longer than the ASUS ProArt P16 and 90 minutes more than the XPS 16. During the workday, I used the system for around seven and a half hours before it conked out, handling a variety of video calls, writing and web browsing across dozens of tabs.\n\nIf you're a diehard Windows user (yes, they exist) who's really into AI, and you want one of the most premium laptops around, the Surface Laptop Ultra is a solid choice. But just be aware that you'll have to pay out the nose to enjoy it. Our review unit, which was equipped with 32GB of RAM, 1TB of storage and the full-powered RTX Spark chip, sells for $3,700. Bumping up to 64GB of RAM would run you $4,300, and it jumps to $5,900 with 128GB of RAM. All of a sudden, the $2,600 base price doesn't seem so bad.\n\nIt's strange that the Surface Laptop Ultra maxes out at 2TB of storage, though. Other premium systems have offered up to 4TB for years, shouldn't the \"Ultra\" Surface device at least match that?\n\nIf you have deep pockets and want the most for your money, though, Apple's MacBook Pros are still a better choice when it comes to pure power. NVIDIA's first-gen RTX Spark chip just can't beat the M5 Pro, and it's certainly no match for even more capable M5 Max and Ultra chips. Sure, they'll cost a ton, but you can also get a 16-inch MacBook Pro PROLED that weighs just four pounds and is stuffed with 128GB of RAM. If you're already spending close to $10,000 on a laptop, why not get the best one possible?\n\nMicrosoft has finally managed to make a powerful Surface device with modern hardware, something it failed to do with the previous Surface Book and Laptop Studio systems. The Surface Laptop Ultra's sheer refinement is a sign of just how far Microsoft has come. It sure is expensive, though. And even with its high price tag, it still lags behind Apple's hardware when it comes to raw performance."
       }
     },
     "media": null
@@ -356,78 +426,6 @@
         "title": "In-Process 13th November 2026",
         "summary": "This week, we’ve updated NVDA, and some documentation, we hear from our user group in Japan, plus there are tips for File Explorer and more! NVDA 2026.3.1 Updated VPAT / ACR NVDA on show in Japan Unassigned gestures File Explorer shortcuts NVDA 2026.3.1 NV Access is pleased to announce that version 2026.3.1 of NVDA, the… Read More",
         "body": "This week, we’ve updated NVDA, and some documentation, we hear from our user group in Japan, plus there are tips for File Explorer and more!\n\nNV Access is pleased to announce that version 2026.3.1 of NVDA , the free screen reader for Microsoft Windows, is now available for download. We encourage all users to upgrade to this version.\n\nHighlights This is a patch release to fix security issues. A bug fix is also included for an issue introduced in 2026.3 with the task switcher in Windows 10. The Brazilian Portuguese eSpeak voice was restored to the behaviour in 2026.2.\n\nRead the full changes and download at the NVDA 2026.3.1 release announcement .\n\nWe’ve updated our VPAT. Actually we’ve updated our ACR , but whatever you call it, there’s a new one. Mostly of interest to companies who use NVDA and need to keep a copy on file for any software they use, the activity of completing it is useful, even for us as a screen reader manufacturer. VPAT stands for Voluntary Product Accessibility Template – it’s a large document which gives you points to consider and rate your software and website on many aspects of accessibility. VPAT is technically the blank template. The Accessibility Conformance Report (ACR) is the completed report about a product.\n\nNVDA is, as you would expect, quite good at all the things someone who is blind might need. However, through this process, over the years, we have previously identified and fixed several issues which may affect other users. The newest version of this document doesn’t dramatically change any of our ratings or identify or fix any new issues, but it is up to date for NVDA 2026.3.1. So, if your organisation needs a copy, head over to the VPAT section of the Corporate and Government page and you’ll find it there.\n\nWe love to hear from our communities all around the world. There is a very active community of users, and contributors in Japan. They have a website devoted to the local community: https://www.nvda.jp/ and recently attended the Sight World 2026 conference in Tokyo https://www.sight-world.com/sightworld2026\n\nNobuyuki and the team presented at the conference on four main themes: Screen sharing using Copilot Add-on Store NVDA Coach New Forms of Learning with NVDA\n\nThey wrote to advise us that the event was a huge success, and they had around 100 people in attendance at their presentation. They sent us photographs and a link to their video presentation:\n\nThe Video is in Japanese, and includes a message from NV Access Training & Support manager Quentin Christensen (in English).\n\nA banner from the NVDA Japanese Team session titled “NVDAではじめる、新しい「学び」のかたち” (“A New Form of ‘Learning’ Starting with NVDA”), presented at Sight World 2026 in Tokyo.\n\nUnassigned gestures The last couple of releases I’ve highlighted the unassigned gestures, so let’s do that again. Unassigned gestures are things which you can do with a keystroke or touch action etc, but we didn’t set one up by default. There are only two this time around: Magnifier: A new unassigned command has been added to move the mouse cursor to the center of the magnified view. Added an unassigned Quick Navigation Command for jumping to the next/previous clickable element in browse mode.\n\nThe magnifier command is thanks to Cyrille, and the clickable one thanks to Cary. Thank you to them and ALL of our amazing NVDA community contributors!\n\nOne of the fixes in NVDA 2026.3.1 is with reporting switching Windows in Windows 10. I was thinking of writing a post on using alt+tab and the other ways of switching Windows – there are a few! But I realised, I already wrote a piece on switching Windows .\n\nI’d forgotten about alt+escape ; I’m going to get back into using that! But that got me thinking about other general Windows keystrokes we might not know or (like me) might have forgotten. Another recent fix in NVDA (from NVDA 2026.3) is with File Explorer, so I thought we’d have a look at a couple of shortcuts which are well worth knowing, and some you may find useful:\n\nFirstly, to start File Explorer, press Windows+e Open a new File Explorer window (from within File Explorer), with control+n\n\nNavigating Move to next area: tab Move to previous area: shift+tab The focus starts in the “Items view list” – the contents of the currently selected folder. From here: Press shift+tab once to the folder list (you had to press it twice in some versions). Press tab to the “Split button” which is the name of the field the item list is sorted on. Once on the split button, use the arrows to select a field and enter or space to sort on it – if you select the same field, it will reverse the sort).\n\nWhen in the items list view, you can customise the view. Windows provides shortcuts for the various views: control+shift+1 : Extra-large icons control+shift+2 : Large icons control+shift+3 : Medium icons control+shift+4 : Small icons control+shift+5 : List view control+shift+6 : Details view control+shift+7 : Tiles control+shift+8 : Content Note that in some versions of Windows (such as recent builds of Windows 11) these shortcuts do NOT work, but control+ALT+number works, for instance control+alt+6 for details view. The “details” view is the one I would personally recommend, as everything is in one list, and you get the most information about each item (file type, size, date modified etc) and can sort on any of those fields as needed. In details view, use the up and down arrow keys to move through the list. In most other view types, e.g. the icons views, use the left and right arrow keys .\n\nTabs Like browsers, you can have multiple folders open in different tabs or different windows: New blank tab: control+t Move to next tab: control+tab Move to previous tab: control+shift+tab\n\nI cannot find a keystroke to open the current folder in a new tab. If you know one, please let me know! In the meantime, the following would work: Press shift+f6 once from the folder list to move to the tab control list. Press the applications key (or shift+f10 ) to open the context menu. Press the up arrow once to “Duplicate tab”. Press enter to open a new tab with the current folder.\n\nTo close a tab without closing all the other tabs, press control+w .\n\nAddress bar Move the focus to the address bar: alt+d . On the address bar, you can type the name of the folder or paste it from elsewhere, then press enter to load that folder.\n\nWindows has several special folders. If you email us for help with an issue, we might ask you to send us your NVDA log, which you can find in your %temp% folder. To get to your %temp% folder: In File Explorer, press alt+d to go to the address bar Type: %temp% (That is, the word ‘temp’ with a percent sign either side) Press enter Windows will load a folder such as C:\\Users\\YourName\\AppData\\Local\\Temp which is where it is storing your temporary files. There are others such as %onedrive% for your OneDrive folder (if setup), as well as system folders which are worth being careful around.\n\nFile properties One other quirk in File Explorer is opening file properties. In the file list, once you have located a file, press alt+enter to open the file properties for that file. This only works from the file list, even though you can access “ Properties ” in the context menu on folders in the folder list and it notes the alt+enter shortcut.\n\nThat’s all for this fortnight. We’ll be back towards the end of the month with more news, tips and tricks. I’m not sure what will be in that edition, but after all those lists of things in the file manager section, I’m going to aim for zero lists next fortnight – keep an eye out for that to see if I can do it!\n\nDo keep the conversation going in the NVDA users email group , and remember, if you’d like to receive this blog by email, you can! Just go to https://www.nvaccess.org/newsletter and you can sign up for the blog, for details as new versions of NVDA drop, and more."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-ce431deb7a2c815f",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/11/faa-expands-ai-advice-to-manage-air-traffic-congestion-across-entire-us-airspace/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-12T22:28:47.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "FAA expands AI advice to manage air traffic congestion across entire US airspace",
-        "summary": "Airlines praised the AI tool, but the air traffic controllers’ union wasn’t involved.",
-        "body": "The US government has expanded the use of an AI tool for advising air traffic controllers to assist in managing air traffic across the entire national airspace system. Airline executives have voiced support for the rollout, but the US labor union representing air traffic controllers has said it was not involved in designing or testing the AI-driven system.\n\nThe Federal Aviation Administration (FAA) says the $875 million SMART system has helped reroute 180 flights since being implemented in airspace over Washington, DC, on September 21. The agency claims that this saved an average of 10 minutes per flight and almost 80 gallons of fuel per flight—and it is apparently hoping such results can be replicated nationwide through the expanded deployment.\n\n“After a successful initial rollout to the National Capital Region in September, the FAA will now use SMART in the airspace of all 22 centers across the country to reduce delays, reduce fuel consumption and improve the travel experience for the flying public,” according to the agency statement posted on November 10.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-92e74cee3cf42408",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/gaming/2026/11/the-elder-scrolls-most-obscure-adventure-gets-a-4k-pc-makeover/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-12T19:49:11.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The Elder Scrolls' most obscure adventure gets a 4K PC makeover",
-        "summary": "N-Gage exclusive Shadowkey gets an AI-coded glow-up with plenty of new features.",
-        "body": "So, you think you're an Elder Scrolls superfan? You say you've been there since The Elder Scrolls Arena on MS-DOS and have logged hundreds of hours in The Elder Scrolls Online ? You say you've bought all of the roughly 5,000 re-releases and remasters of Skyrim that have been made available in the last 15 years?\n\nTell me, then: What do you think of The Elder Scrolls Travels: Shadowkey ?\n\nWhat's that? You've never played Shadowkey ? You weren't there day one back in 2004, Nokia N-Gage in hand , ready to experience the game's 176 x 208 resolution mobile hack-and-slash RPG combat for yourself? And you call yourself a real Elder Scrolls fan?\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-28d4860515bdbea9",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/google/2026/11/google-rolls-out-gemini-4-hydrogen-finally-replacing-3-8-flash/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-12T19:23:03.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google rolls out Gemini 4 Hydrogen, finally replacing 3.8 Flash",
-        "summary": "Gemini 4 Hydrogen isn't getting a slow, security-conscious release like Carbon and Argon.",
-        "body": "Google is continuing its elemental AI naming scheme with the new Gemini 4 Hydrogen . These names are less descriptive than the Pro/Flash monikers of earlier releases, but Hydrogen's purpose is clear: It replaces the faster, more economical Flash models most people in Google's ecosystem use.\n\nWith Google's recent Argon and Carbon releases, the rollout was staged and began with cybersecurity researchers. Even when general availability began, Google restricted access to users paying for its most expensive AI subscription. The limits for Hydrogen are much more relaxed, with access beginning immediately. This model has replaced Gemini 3.8 Flash across the company's products.\n\nGoogle claims that Hydrogen represents a major improvement versus the previous Flash model. It runs in one of four thinking levels (low, medium, high, and the new xhigh), and even in high mode, it's 2.5 times faster than Flash 3.8. Plus, it reduces \"fabricated claims\" by more than 5x, according to Google's analysis. Users will also see gains in code generation, with Hydrogen more than tripling 3.8 Flash's score in Terminal-Bench. In some cases, Hydrogen even trades blows with Argon. It managed a score of 54 in the popular Artificial Analysis Intelligence Index with xhigh mode versus 50 for Argon.\n\nRead full article\n\nComments"
       }
     },
     "media": null

@@ -756,3 +756,5 @@
 "Importar grabación para crear mi voz" = "Importer un enregistrement de ma voix";
 "Prueba con una grabación de entre 1 y 20 segundos, con una sola voz y sin música." = "Utilisez un enregistrement de 1 à 20 secondes avec une seule voix et sans musique.";
 "Pocket TTS en español" = "Pocket TTS en espagnol";
+"Conversión completada. Archivo guardado en la biblioteca" = "Conversion terminée. Fichier enregistré dans la bibliothèque";
+"El archivo MP3 o DAISY permanece en la biblioteca. Puedes compartirlo también más adelante." = "Le fichier MP3 ou DAISY reste dans la bibliothèque. Vous pourrez aussi le partager plus tard.";

@@ -1959,6 +1959,8 @@ struct NativeReadingScreen: View {
     @State private var audioExportBusy = false
     @State private var audioExportProgress = ""
     @State private var audioExportTask: Task<Void, Never>?
+    @State private var showExportCompleted = false
+    @State private var savedExportURL: URL?
     @State private var audioExportFormat: NativeGeminiAudioExport.Format = .mp3
     @State private var audioExportLanguage = "es"
     @State private var audioExportEngine: NativeGeminiAudioExport.Engine = .system
@@ -2570,6 +2572,7 @@ struct NativeReadingScreen: View {
     private func exportGeneratedAudio() {
         guard !audioExportBusy, !latest.body.isEmpty else { return }
         let engine = audioExportEngine
+        let format = audioExportFormat
         let voice: String
         switch engine {
         case .system:
@@ -2591,16 +2594,29 @@ struct NativeReadingScreen: View {
             do {
                 let url = try await NativeGeminiAudioExport.export(
                     text: body, title: title, voice: voice,
-                    format: audioExportFormat, engine: engine,
+                    format: format, engine: engine,
                     speed: NativeReaderSpeedOptions.rate(for: effectiveSpeedIndex),
                     pitch: pitch, language: audioExportLanguage,
                     progress: { finished, total in
                         audioExportProgress = "Generados \(finished) de \(total) fragmentos"
                     })
                 try Task.checkCancellation()
+                // The share sheet can fail or be dismissed. Persist the result
+                // first, preserving its original MP3/DAISY package for later.
+                let savedID = UUID()
+                let savedTitle = "\(title) - \(format == .mp3 ? "MP3" : "DAISY")"
+                try library.importDocuments(from: [url], sharingID: savedID,
+                                            preferredTitle: savedTitle)
+                guard let stored = library.documents.first(where: { $0.id == savedID }),
+                      let relativePath = stored.originalRelativePath,
+                      let persistentURL = NativeReaderFormats.storedURL(for: relativePath),
+                      FileManager.default.fileExists(atPath: persistentURL.path) else {
+                    throw CocoaError(.fileNoSuchFile)
+                }
+                savedExportURL = persistentURL
                 showAudioExport = false
-                audioExportProgress = "Exportación completada."
-                NativeShare.present(url: url)
+                audioExportProgress = "Conversión completada. Archivo guardado en la biblioteca."
+                showExportCompleted = true
             } catch is CancellationError {
                 audioExportProgress = "Exportación cancelada."
             } catch {
@@ -3113,6 +3129,15 @@ struct NativeReadingScreen: View {
             }
         }
         .sheet(isPresented: $showAudioExport) { audioExportSheet }
+        .alert("Conversión completada. Archivo guardado en la biblioteca",
+               isPresented: $showExportCompleted) {
+            Button("Compartir") {
+                if let savedExportURL { NativeShare.present(url: savedExportURL) }
+            }
+            Button("Cancelar", role: .cancel) { savedExportURL = nil }
+        } message: {
+            Text("El archivo MP3 o DAISY permanece en la biblioteca. Puedes compartirlo también más adelante.")
+        }
         .confirmationDialog("Acciones del documento",
                             isPresented: $showDocumentActions,
                             titleVisibility: .visible) {

@@ -2671,12 +2671,12 @@ struct NativeReadingScreen: View {
     private var quickControls: some View {
         VStack(alignment: .leading, spacing: 6) {
             playbackRow
-            trackButtons
             NativeAdjustableChoice(
                 title: "Modo de navegación",
                 choices: navigationOptions.map { $0.label },
                 selectedIndex: navigationSelection
             )
+            trackButtons
             if effectiveNavigationUnit == 5 {
                 NativeAdjustableChoice(
                     title: "Intervalo de tiempo",
@@ -2684,22 +2684,7 @@ struct NativeReadingScreen: View {
                     selectedIndex: $timeStepIndex
                 )
             }
-            if !latest.body.isEmpty {
-                Button("Buscar en el documento") { openDocumentSearch() }
-                if let positionBeforeSearch {
-                    Button("Volver a la posición anterior a la búsqueda") {
-                        jump(to: positionBeforeSearch)
-                        self.positionBeforeSearch = nil
-                    }
-                }
-            }
-            Button("Marcas guardadas") { showSavedMarks = true }
             Button("Añadir marca") { addBookmarkFromReaderSelection() }
-            Button("Información") { showDocumentInformation = true }
-                .accessibilityHint("Abre los porcentajes, tiempos, páginas y datos de la obra.")
-            Text(progressDescription)
-                .font(.footnote)
-                .accessibilityLabel(progressDescription)
             NativeAdjustableChoice(
                 title: "Apagado automático",
                 choices: Self.sleepChoices,
@@ -2710,6 +2695,15 @@ struct NativeReadingScreen: View {
                 choices: Self.percentages,
                 selectedIndex: positionBinding
             )
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 8)
+        .background(TifloVisual.surfaceRaised)
+    }
+
+    private var readerFooterControls: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Button("Marcas guardadas") { showSavedMarks = true }
             Button("Audio") { showAudioSettings = true }
                 .accessibilityHint("Abre velocidad, voz y pausas por puntuación.")
             Button("Visual") { showVisualSettings = true }
@@ -2749,6 +2743,20 @@ struct NativeReadingScreen: View {
                 if speech.isPaused { speech.resume(); applySleepTimer() }
             }
         }
+    }
+
+    /// Restore manual VoiceOver/braille reading without starting audio or
+    /// stealing focus from an active speech session.
+    private func restoreManualReadingFocus(using proxy: ScrollViewProxy) {
+        guard readingMode != 1, !speech.isPlaying,
+              !textLayout.fragmentStarts.isEmpty else { return }
+        let savedOffset = max(0, min(textLayout.totalCharacters,
+            latest.lastTextOffset ?? readingOffset))
+        let savedFragment = textLayout.fragmentIndex(for: savedOffset)
+        lastReaderFragment = savedFragment
+        programmaticFocusRequest = true
+        proxy.scrollTo(savedFragment, anchor: .center)
+        focusedFragment = savedFragment
     }
 
     private func readerFragment(at index: Int) -> some View {
@@ -2805,8 +2813,14 @@ struct NativeReadingScreen: View {
                     readingOffset = textLayout.fragmentStarts[index]
                     currentPercent = min(100, Int(Double(readingOffset) * 100 /
                         Double(max(1, textLayout.totalCharacters))))
-                    if abs(currentPercent - lastSavedPercent) >= 5 { persistPosition() }
+                    // Braille/manual reading is a real reading position too.
+                    // A five-percent threshold could lose several chapters.
+                    persistPosition()
                 }
+            }
+            .task {
+                await Task.yield()
+                restoreManualReadingFocus(using: proxy)
             }
         }
     }
@@ -2825,14 +2839,18 @@ struct NativeReadingScreen: View {
     @ViewBuilder
     private var documentActions: some View {
         Button("Información de la obra") { showDocumentInformation = true }
-        Button("Marcas guardadas") { showSavedMarks = true }
         if !latest.body.isEmpty {
             Button("Buscar en el documento") { openDocumentSearch() }
+            if let positionBeforeSearch {
+                Button("Volver a la posición anterior a la búsqueda") {
+                    jump(to: positionBeforeSearch)
+                    self.positionBeforeSearch = nil
+                }
+            }
         }
         if !latest.body.isEmpty || !(latest.daisyNavigation ?? []).isEmpty {
             Button("Índice y navegación estructurada") { showStructure = true }
         }
-        Button("Añadir marca") { addBookmark() }
         Button(latest.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos") {
             library.toggleFavorite(document)
         }
@@ -2957,6 +2975,7 @@ struct NativeReadingScreen: View {
             quickControls
             Divider().accessibilityHidden(true)
             translatedReadingContent
+            readerFooterControls
         }
         .tifloScreenSurface()
         .navigationTitle(document.title)

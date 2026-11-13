@@ -45,15 +45,14 @@ enum NativeReaderPauseProfile {
     }
 
     static func segments(_ text: String, settings: UserDefaults = .standard) -> [Segment] {
-        guard settings.integer(forKey: "native-reading-pause-style") != 0 else {
-            return [Segment(text: text, delay: 0)]
-        }
         var parts: [Segment] = []
         var buffer = ""
         for character in text {
             buffer.append(character)
             let delay = duration(for: character, settings: settings)
-            if delay > 0 {
+            // Preserve sentence boundaries even in Normal mode, so a live
+            // speed, pitch or voice change applies to the next sentence.
+            if delay > 0 || ",;:.!?\n".contains(character) {
                 parts.append(Segment(text: buffer, delay: delay))
                 buffer = ""
             }

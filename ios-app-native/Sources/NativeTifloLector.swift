@@ -686,6 +686,26 @@ final class NativeReadingSpeech: ObservableObject {
         }
     }
 
+    /// Existing utterances capture their rate/pitch/voice when queued. Update
+    /// only the not-yet-spoken utterances so the current sentence finishes
+    /// naturally and the next one uses the user's new settings.
+    func updateLiveSystemSettings(speed: Double, pitch: Float,
+                                  voiceIdentifier: String, language: String = "es-ES") {
+        guard player == nil, !isGeneratedSpeech, !speechQueue.isEmpty else { return }
+        let first = systemSpeechNeedsRestart ? speechQueueIndex : speechQueueIndex + 1
+        guard first < speechQueue.count else { return }
+        for index in first..<speechQueue.count {
+            let utterance = speechQueue[index].utterance
+            utterance.rate = min(AVSpeechUtteranceMaximumSpeechRate,
+                max(AVSpeechUtteranceMinimumSpeechRate,
+                    AVSpeechUtteranceDefaultSpeechRate * Float(speed)))
+            utterance.pitchMultiplier = max(0.5, min(2, pitch))
+            utterance.voice = (voiceIdentifier.isEmpty ? nil :
+                AVSpeechSynthesisVoice(identifier: voiceIdentifier))
+                ?? AVSpeechSynthesisVoice(language: language)
+        }
+    }
+
     init() {
         progressDelegate.onWord = { [weak self] range, utterance in
             Task { @MainActor [weak self] in
@@ -716,7 +736,10 @@ final class NativeReadingSpeech: ObservableObject {
                       self.utteranceOffsets[ObjectIdentifier(utterance)] != nil,
                       self.speechQueue.indices.contains(self.speechQueueIndex),
                       ObjectIdentifier(self.speechQueue[self.speechQueueIndex].utterance) == ObjectIdentifier(utterance) else { return }
-                let completedDelay = self.speechQueue[self.speechQueueIndex].delay
+                let completedText = self.speechQueue[self.speechQueueIndex].utterance.speechString
+                let completedDelay = completedText.last.map {
+                    NativeReaderPauseProfile.duration(for: $0)
+                } ?? 0
                 self.speechQueueIndex += 1
                 if self.lastSpeechUtterance == ObjectIdentifier(utterance) {
                     self.textCharacterOffset = self.baseCharacters + self.spokenText.count
@@ -2129,6 +2152,12 @@ struct NativeReadingScreen: View {
         applySleepTimer()
     }
 
+    private func refreshLiveReadingSettings() {
+        speech.updateLiveSystemSettings(
+            speed: speed, pitch: pitch, voiceIdentifier: effectiveVoiceID,
+            language: AVSpeechSynthesisVoice(identifier: effectiveVoiceID)?.language ?? "es-ES")
+    }
+
     private func applySleepTimer(reset: Bool = false) {
         let index = max(0, min(sleepMinutes.count - 1, sleepIndex))
         let minutes = sleepMinutes[index]
@@ -2584,46 +2613,62 @@ struct NativeReadingScreen: View {
         NavigationStack {
             Form {
                 Section("Formato de salida") {
-                    Picker("Formato", selection: $audioExportFormat) {
-                        ForEach(NativeGeminiAudioExport.Format.allCases) { item in
-                            Text(item.rawValue).tag(item)
-                        }
-                    }
+                    NativeAdjustableChoice(
+                        title: "Formato",
+                        choices: NativeGeminiAudioExport.Format.allCases.map(\.rawValue),
+                        selectedIndex: Binding(
+                            get: { NativeGeminiAudioExport.Format.allCases.firstIndex(of: audioExportFormat) ?? 0 },
+                            set: { audioExportFormat = NativeGeminiAudioExport.Format.allCases[$0] }
+                        ))
                 }
                 if audioExportFormat == .daisy {
                     Section("Idioma del libro DAISY") {
-                        Picker("Idioma del contenido", selection: $audioExportLanguage) {
-                            Text("Español").tag("es")
-                            Text("Inglés").tag("en")
-                            Text("Portugués").tag("pt")
-                            Text("Francés").tag("fr")
-                            Text("Alemán").tag("de")
-                            Text("Italiano").tag("it")
-                        }
+                        NativeAdjustableChoice(
+                            title: "Idioma del contenido",
+                            choices: ["Español", "Inglés", "Portugués", "Francés", "Alemán", "Italiano"],
+                            selectedIndex: Binding(
+                                get: { ["es", "en", "pt", "fr", "de", "it"].firstIndex(of: audioExportLanguage) ?? 0 },
+                                set: { audioExportLanguage = ["es", "en", "pt", "fr", "de", "it"][$0] }
+                            ))
                         Text("Selecciona el idioma del texto original, aunque utilices otro motor de voz.")
                     }
                 }
                 Section("Motor de voz") {
-                    Picker("Motor", selection: $audioExportEngine) {
-                        Text("Voces del sistema").tag(NativeGeminiAudioExport.Engine.system)
-                        Text("Gemini").tag(NativeGeminiAudioExport.Engine.gemini)
-                        if NativePhononRuntime.isUsable {
-                            Text("Phonon").tag(NativeGeminiAudioExport.Engine.phonon)
-                        }
-                    }
+                    NativeAdjustableChoice(
+                        title: "Motor",
+                        choices: NativePhononRuntime.isUsable
+                            ? ["Voces del sistema", "Gemini", "Phonon"]
+                            : ["Voces del sistema", "Gemini"],
+                        selectedIndex: Binding(
+                            get: { audioExportEngine == .system ? 0 : audioExportEngine == .gemini ? 1 : 2 },
+                            set: { audioExportEngine = [.system, .gemini, .phonon][$0] }
+                        ))
                     if audioExportEngine == .system {
-                        Picker("Voz", selection: $audioExportSystemVoice) {
-                            Text("Voz del documento").tag("")
-                            ForEach(AVSpeechSynthesisVoice.speechVoices(), id: \.identifier) { voice in
-                                Text("\(voice.name), \(voice.language)").tag(voice.identifier)
-                            }
-                        }
+                        NativeAdjustableChoice(
+                            title: "Voz",
+                            choices: ["Voz del documento"] + AVSpeechSynthesisVoice.speechVoices().map {
+                                "\($0.name), \($0.language)"
+                            },
+                            selectedIndex: Binding(
+                                get: {
+                                    (AVSpeechSynthesisVoice.speechVoices().firstIndex {
+                                        $0.identifier == audioExportSystemVoice
+                                    }.map { $0 + 1 }) ?? 0
+                                },
+                                set: { index in
+                                    let voices = AVSpeechSynthesisVoice.speechVoices()
+                                    audioExportSystemVoice = index > 0 && voices.indices.contains(index - 1)
+                                        ? voices[index - 1].identifier : ""
+                                }
+                            ))
                     } else if audioExportEngine == .gemini {
-                        Picker("Voz", selection: $audioExportGeminiVoice) {
-                            ForEach(NativeGeminiSpeech.voices, id: \.self) { voice in
-                                Text(voice).tag(voice)
-                            }
-                        }
+                        NativeAdjustableChoice(
+                            title: "Voz",
+                            choices: NativeGeminiSpeech.voices,
+                            selectedIndex: Binding(
+                                get: { NativeGeminiSpeech.voices.firstIndex(of: audioExportGeminiVoice) ?? 0 },
+                                set: { audioExportGeminiVoice = NativeGeminiSpeech.voices[$0] }
+                            ))
                         Text("Gemini requiere una clave personal configurada en Motores externos.")
                     } else {
                         Text("Phonon requiere el motor y sus modelos instalados.")
@@ -3140,6 +3185,13 @@ struct NativeReadingScreen: View {
         }
         .onChange(of: sleepIndex) { _, _ in
             applySleepTimer(reset: true)
+        }
+        .onReceive(library.$documents) { _ in
+            // @Published emits before the stored document is replaced.
+            Task { @MainActor in refreshLiveReadingSettings() }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)) { _ in
+            refreshLiveReadingSettings()
         }
         .onReceive(speech.$textPercent) { percentage in
             // AVSpeechSynthesizer reports each spoken word; no artificial timer

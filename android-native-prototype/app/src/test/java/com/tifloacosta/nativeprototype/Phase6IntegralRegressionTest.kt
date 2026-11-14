@@ -85,7 +85,7 @@ class Phase6IntegralRegressionTest {
     @Test fun accessibleSpeedPitchAndPunctuationControls() {
         val settings = source("NativeReaderSettings.kt")
         val service = source("NativeReaderPlaybackService.kt")
-        assertTrue(settings.contains("contentDescription = label + \": \" + choices[index]"))
+        assertTrue(settings.contains("ReaderCompactChoice(label, choices, selected, onSelected = onSelected)"))
         assertTrue(settings.contains("NativeReaderSettingsStrings.get(uiLanguage, \"systemPitch\")"))
         assertTrue(settings.contains("NativeReaderSettingsStrings.get(uiLanguage, \"pauseComma\")"))
         assertTrue(settings.contains("NativeReaderSettingsStrings.get(uiLanguage, \"pausePeriod\")"))

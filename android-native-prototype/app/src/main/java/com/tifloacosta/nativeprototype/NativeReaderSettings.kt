@@ -45,24 +45,7 @@ fun ReaderAdjustableChoice(
     selected: Int,
     onSelected: (Int) -> Unit
 ) {
-    if (choices.isEmpty()) return
-    val index = selected.coerceIn(0, choices.lastIndex)
-    // The adjustable control itself must announce its purpose AND selected value.
-    // A separate visible-only label forces an unnecessary extra TalkBack stop.
-    if (choices.size > 1) {
-        Slider(
-            value = index.toFloat(),
-            onValueChange = { onSelected(it.roundToInt().coerceIn(0, choices.lastIndex)) },
-            valueRange = 0f..choices.lastIndex.toFloat(),
-            steps = (choices.size - 2).coerceAtLeast(0),
-            modifier = Modifier.fillMaxWidth().semantics {
-                contentDescription = label + ": " + choices[index]
-                stateDescription = choices[index]
-            }
-        )
-    } else {
-        Text(label + ": " + choices[index])
-    }
+    ReaderCompactChoice(label, choices, selected, onSelected = onSelected)
 }
 
 /**

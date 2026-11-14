@@ -44,4 +44,10 @@ class NativeSettingsCompactContractTest {
         assertTrue(library.contains("screen = \"filters\""))
         assertFalse(library.contains("if (filtersExpanded)"))
     }
+
+    @Test fun allDiscreteReaderSettingsShareOneAccessibleChoice() {
+        val readerSettings = source("NativeReaderSettings.kt")
+        assertTrue(readerSettings.contains("ReaderCompactChoice(label, choices, selected, onSelected = onSelected)"))
+        assertFalse(readerSettings.contains("contentDescription = label + \": \" + choices[index]"))
+    }
 }

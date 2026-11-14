@@ -50,4 +50,27 @@ class NativeSettingsCompactContractTest {
         assertTrue(readerSettings.contains("ReaderCompactChoice(label, choices, selected, onSelected = onSelected)"))
         assertFalse(readerSettings.contains("contentDescription = label + \": \" + choices[index]"))
     }
+
+    @Test fun documentDetailPanelsDoNotOverlayReadingControls() {
+        val screen = source("NativeTifloLector.kt")
+        assertTrue(screen.contains("val detailOpen = showAudio || showVisual || jumping"))
+        assertTrue(screen.contains("if (!detailOpen) {"))
+        assertFalse(screen.contains("if (showAudio) \"expanded\" else \"collapsed\""))
+        assertFalse(screen.contains("if (showVisual) \"expanded\" else \"collapsed\""))
+        assertFalse(screen.contains("if (jumping) \"expanded\" else \"collapsed\""))
+    }
+
+    @Test fun audiobookBookmarksHaveTheirOwnScreen() {
+        val audio = source("NativeReaderAudio.kt")
+        assertTrue(audio.contains("if (!expandedMore) {"))
+        assertTrue(audio.contains("if (expandedMore) {"))
+        assertFalse(audio.contains("if (expandedMore) \"expanded\" else \"collapsed\""))
+    }
+
+    @Test fun exportAndOtherToolsAreIndependentPages() {
+        val actions = source("NativeReaderDocumentActions.kt")
+        assertTrue(actions.contains("if (!showAudioExport && !showOtherActions)"))
+        assertFalse(actions.contains("if (showAudioExport) \"expanded\" else \"collapsed\""))
+        assertFalse(actions.contains("if (showOtherActions) \"expanded\" else \"collapsed\""))
+    }
 }

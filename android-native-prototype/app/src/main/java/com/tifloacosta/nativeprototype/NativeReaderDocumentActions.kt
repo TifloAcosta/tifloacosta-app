@@ -247,27 +247,33 @@ fun NativeReaderDocumentActions(
     DisposableEffect(book.id) {
         onDispose { actionJob?.cancel() }
     }
-    BackHandler { onBack() }
+    fun backFromTools() {
+        if (showAudioExport || showOtherActions) {
+            showAudioExport = false
+            showOtherActions = false
+        } else onBack()
+    }
+    BackHandler { backFromTools() }
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        TextButton(onClick = onBack) {
-            Text(NativeReaderToolsStrings.get(uiLanguage, "backReading"))
+        TextButton(onClick = { backFromTools() }) {
+            Text(if (showAudioExport || showOtherActions) NativeUiText.get(uiLanguage, "back")
+                else NativeReaderToolsStrings.get(uiLanguage, "backReading"))
         }
-        Text(NativeReaderToolsStrings.get(uiLanguage, "toolsTitle"),
+        Text(NativeReaderToolsStrings.get(uiLanguage,
+            if (showAudioExport) "audioExport" else if (showOtherActions) "otherTools" else "toolsTitle"),
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.semantics { heading() })
+        if (!showAudioExport && !showOtherActions) {
         Text(book.title)
-        Button(onClick = { showAudioExport = !showAudioExport },
-            modifier = Modifier.fillMaxWidth().semantics {
-                stateDescription = NativeReaderToolsStrings.get(uiLanguage,
-                    if (showAudioExport) "expanded" else "collapsed")
-            }) {
+        Button(onClick = { showAudioExport = true }, modifier = Modifier.fillMaxWidth()) {
             Text(NativeReaderToolsStrings.get(uiLanguage, "convert"))
         }
+        TextButton(onClick = { showOtherActions = true }, modifier = Modifier.fillMaxWidth()) {
+            Text(NativeReaderToolsStrings.get(uiLanguage, "otherTools"))
+        }
+        }
         if (showAudioExport) {
-        Text(NativeReaderToolsStrings.get(uiLanguage, "audioExport"),
-            style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.semantics { heading() })
         ReaderAdjustableChoice(
             NativeReaderToolsStrings.get(uiLanguage, "engine"),
             availableExportEngines.map {
@@ -422,13 +428,6 @@ fun NativeReaderDocumentActions(
             }
         }
 
-        }
-        TextButton(onClick = { showOtherActions = !showOtherActions },
-            modifier = Modifier.fillMaxWidth().semantics {
-                stateDescription = NativeReaderToolsStrings.get(uiLanguage,
-                    if (showOtherActions) "expanded" else "collapsed")
-            }) {
-            Text(NativeReaderToolsStrings.get(uiLanguage, "otherTools"))
         }
         if (showOtherActions) {
         Text(NativeReaderToolsStrings.get(uiLanguage, "originalFormat") + ": " +

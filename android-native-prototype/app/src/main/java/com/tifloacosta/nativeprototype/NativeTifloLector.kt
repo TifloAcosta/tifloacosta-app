@@ -1044,11 +1044,13 @@ private fun NativeReadingScreen(
         return
     }
 
+    val detailOpen = showAudio || showVisual || jumping
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
             .semantics { isTraversalGroup = true }.padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
+        if (!detailOpen) {
         Text(
             book.title,
             style = MaterialTheme.typography.headlineSmall,
@@ -1183,14 +1185,17 @@ private fun NativeReadingScreen(
             sleepIndex = index
             if (active) send(NativeReaderPlaybackService.ACTION_SLEEP, sleepMinutes[index])
         }
-        TextButton(
-            onClick = { showAudio = !showAudio },
-            modifier = Modifier.semantics {
-                stateDescription = NativeReaderLibraryStrings.get(uiLanguage,
-                    if (showAudio) "expanded" else "collapsed")
-            }
-        ) { Text(NativeReaderInlineStrings.get(uiLanguage, "audio")) }
+        }
+        if (!detailOpen) TextButton(onClick = { showAudio = true }) {
+            Text(NativeReaderInlineStrings.get(uiLanguage, "audio"))
+        }
         if (showAudio) {
+        TextButton(onClick = { showAudio = false }) {
+            Text(NativeReaderPlaybackStrings.get(uiLanguage, "back"))
+        }
+        Text(NativeReaderInlineStrings.get(uiLanguage, "audio"),
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.semantics { heading() })
         ReaderCompactChoice(
             NativeReaderInlineStrings.get(uiLanguage, "engine"),
             if (phononReady) {
@@ -1252,14 +1257,16 @@ private fun NativeReadingScreen(
                 showPronunciation = true
             }) { Text(NativeReaderInlineStrings.get(uiLanguage, "pronunciation")) }
         }
-        TextButton(
-            onClick = { showVisual = !showVisual },
-            modifier = Modifier.semantics {
-                stateDescription = NativeReaderLibraryStrings.get(uiLanguage,
-                    if (showVisual) "expanded" else "collapsed")
-            }
-        ) { Text(NativeReaderInlineStrings.get(uiLanguage, "visual")) }
+        if (!detailOpen) TextButton(onClick = { showVisual = true }) {
+            Text(NativeReaderInlineStrings.get(uiLanguage, "visual"))
+        }
         if (showVisual) {
+            TextButton(onClick = { showVisual = false }) {
+                Text(NativeReaderPlaybackStrings.get(uiLanguage, "back"))
+            }
+            Text(NativeReaderInlineStrings.get(uiLanguage, "visual"),
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.semantics { heading() })
             ReaderCompactChoice(
                 NativeReaderInlineStrings.get(uiLanguage, "textSize"),
                 (14..40 step 2).map { it.toString() }, textSize, english
@@ -1273,19 +1280,23 @@ private fun NativeReadingScreen(
                 listOf("no", "yes").map { NativeReaderInlineStrings.get(uiLanguage, it) }, boldText, english
             ) { boldText = it; prefs.edit().putInt("bold." + book.id, it).apply() }
         }
-        TextButton(onClick = onDeleteRequest) {
+        if (!detailOpen) TextButton(onClick = onDeleteRequest) {
             Text(NativeReaderInlineStrings.get(uiLanguage, "delete"))
         }
-        TextButton(
-            onClick = { jumping = !jumping },
-            modifier = Modifier.semantics {
-                stateDescription = NativeReaderPlaybackStrings.get(uiLanguage,
-                    if (jumping) "expanded" else "collapsed")
-            }
-        ) {
+        if (!detailOpen) TextButton(onClick = { jumping = true }) {
             Text(NativeReaderPlaybackStrings.get(uiLanguage, "moreActions"))
         }
         if (jumping) {
+            TextButton(onClick = {
+                if (showMarks) showMarks = false else jumping = false
+            }) { Text(NativeReaderPlaybackStrings.get(uiLanguage, "back")) }
+            Text(if (showMarks) NativeReaderPlaybackStrings.get(uiLanguage, "bookmarks")
+                else NativeReaderPlaybackStrings.get(uiLanguage, "moreActions"),
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.semantics { heading() })
+            if (bookmarkMessage.isNotEmpty()) Text(bookmarkMessage,
+                modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })
+            if (!showMarks) {
             Text(NativeReaderInlineStrings.get(uiLanguage, "goPosition"))
             Slider(
                 value = jumpTo,
@@ -1314,14 +1325,9 @@ private fun NativeReadingScreen(
             }) {
                 Text(NativeReaderPlaybackStrings.get(uiLanguage, "addBookmark"))
             }
-            TextButton(
-                onClick = { showMarks = !showMarks },
-                modifier = Modifier.semantics {
-                    stateDescription = NativeReaderPlaybackStrings.get(uiLanguage,
-                        if (showMarks) "expanded" else "collapsed")
-                }
-            ) {
+            TextButton(onClick = { showMarks = true }) {
                 Text(NativeReaderPlaybackStrings.get(uiLanguage, "bookmarks"))
+            }
             }
             if (showMarks) {
                 if (visibleMarks.isEmpty()) Text(NativeReaderPlaybackStrings.get(uiLanguage, "noBookmarks"))
@@ -1334,7 +1340,7 @@ private fun NativeReadingScreen(
             }
         }
 
-        if (preview != null) {
+        if (!detailOpen && preview != null) {
             Text(
                 NativeReaderInlineStrings.get(uiLanguage, "readingText"),
                 style = MaterialTheme.typography.titleMedium,

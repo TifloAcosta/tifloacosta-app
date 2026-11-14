@@ -164,6 +164,7 @@ fun NativeReaderAudioScreen(
 
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        if (!expandedMore) {
         TextButton(onClick = onBack) {
             Text(NativeReaderAudioStrings.get(uiLanguage, "back"))
         }
@@ -284,12 +285,17 @@ fun NativeReaderAudioScreen(
             sleepIndex = chosen
             if (active) command(NativeReaderPlaybackService.ACTION_SLEEP, sleepTimes[chosen])
         }
-        TextButton(onClick = { expandedMore = !expandedMore },
-            modifier = Modifier.semantics {
-                stateDescription = NativeReaderPlaybackStrings.get(uiLanguage,
-                    if (expandedMore) "expanded" else "collapsed")
-            }) { Text(NativeReaderAudioStrings.get(uiLanguage, "more")) }
+        TextButton(onClick = { expandedMore = true }) {
+            Text(NativeReaderAudioStrings.get(uiLanguage, "more"))
+        }
+        }
         if (expandedMore) {
+            TextButton(onClick = { expandedMore = false }) {
+                Text(NativeReaderAudioStrings.get(uiLanguage, "back"))
+            }
+            Text(NativeReaderAudioStrings.get(uiLanguage, "more"),
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.semantics { heading() })
             Button(onClick = { bookmark() }, enabled = active) {
                 Text(NativeReaderAudioStrings.get(uiLanguage, "saveMark"))
             }

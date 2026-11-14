@@ -1951,7 +1951,6 @@ struct NativeReadingScreen: View {
     @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
     @AppStorage("native-reader-phonon-voice") private var phononVoice = ""
     @State private var didApplyOpeningMode = false
-    @State private var openingPlaybackTask: Task<Void, Never>?
     @State private var sleepIndex = 0 // Each open document starts with timer disabled.
     @State private var sleepDeadline: Date?
     @State private var currentPercent = 0
@@ -1987,6 +1986,7 @@ struct NativeReadingScreen: View {
     @State private var programmaticFocusRequest = false
     @State private var actionMessage: String?
     @AccessibilityFocusState private var focusedFragment: Int?
+    @AccessibilityFocusState private var playbackButtonFocused: Bool
     @State private var lastReaderFragment: Int?
 
     private let textLayout: NativeReaderTextLayout
@@ -2163,17 +2163,6 @@ struct NativeReadingScreen: View {
             startTextSpeech()
         }
         applySleepTimer()
-    }
-
-    private func startAutomaticReadingAfterOpening() {
-        openingPlaybackTask?.cancel()
-        // Wait for the reader, accessibility focus and stored cursor to settle.
-        // The same continuous playback path is used as the Reproducir button.
-        openingPlaybackTask = Task { @MainActor in
-            try? await Task.sleep(for: .milliseconds(350))
-            guard !Task.isCancelled, readingMode == 1, !speech.isPlaying else { return }
-            play()
-        }
     }
 
     private func refreshLiveReadingSettings() {
@@ -2802,6 +2791,7 @@ struct NativeReadingScreen: View {
             .accessibilityAction(named: Text("Abrir enlace actual")) {
                 activateCurrentLink()
             }
+            .accessibilityFocused($playbackButtonFocused)
 
         }
         .buttonStyle(.bordered)
@@ -3008,6 +2998,27 @@ struct NativeReadingScreen: View {
         }
     }
 
+    private func shareCurrentDocument() {
+        if let original = library.originalURL(for: document) {
+            // For an imported DAISY this is the complete ZIP package, not a
+            // separate text export or a bundle of audio tracks alone.
+            NativeShare.present(url: original)
+        } else if tracks.count > 1 {
+            do {
+                NativeShare.present(url: try library.exportAudioTracks(document))
+            } catch {
+                actionMessage = "No se pudo compartir: \(error.localizedDescription)"
+            }
+        } else if tracks.count == 1, let track = tracks.first,
+                  let url = NativeReaderFormats.storedURL(for: track) {
+            NativeShare.present(url: url)
+        } else if !latest.body.isEmpty {
+            exportText()
+        } else {
+            actionMessage = "No hay un archivo disponible para compartir."
+        }
+    }
+
     @ViewBuilder
     private var documentActions: some View {
         Button("Información de la obra") { showDocumentInformation = true }
@@ -3169,6 +3180,9 @@ struct NativeReadingScreen: View {
                     .accessibilityAction(named: Text("Exportar")) {
                         showAudioExport = true
                     }
+                    .accessibilityAction(named: Text("Compartir")) {
+                        shareCurrentDocument()
+                    }
             }
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Acciones") { showDocumentActions = true }
@@ -3252,7 +3266,12 @@ struct NativeReadingScreen: View {
             NativeQuickBookmarkBridge.saveActiveReader = { addBookmark() }
             if !didApplyOpeningMode {
                 didApplyOpeningMode = true
-                if readingMode == 1 { startAutomaticReadingAfterOpening() }
+                if readingMode == 1 {
+                    Task { @MainActor in
+                        await Task.yield()
+                        if readingMode == 1 { playbackButtonFocused = true }
+                    }
+                }
             }
         }
         .onChange(of: sleepIndex) { _, _ in
@@ -3291,8 +3310,6 @@ struct NativeReadingScreen: View {
             }
         }
         .onDisappear {
-            openingPlaybackTask?.cancel()
-            openingPlaybackTask = nil
             NativeQuickBookmarkBridge.saveActiveReader = nil
             persistPosition()
             speech.onSleepExpired = nil

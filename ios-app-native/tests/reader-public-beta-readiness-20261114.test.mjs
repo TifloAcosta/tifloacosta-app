@@ -21,7 +21,8 @@ test('a saved DAISY can be shared as the full original ZIP', () => {
   assert.match(reader, /Compartir libro DAISY completo \(ZIP\)/);
 });
 
-test('opening playback is deferred until the view has settled', () => {
+test('opening playback is manual and the selected focus is applied', () => {
   assert.doesNotMatch(reader, /if readingMode == 1 \{ play\(\) \}/);
-  assert.match(reader, /startAutomaticReadingAfterOpening/);
+  assert.doesNotMatch(reader, /startAutomaticReadingAfterOpening/);
+  assert.match(reader, /if readingMode == 1 \{ playbackButtonFocused = true \}/);
 });

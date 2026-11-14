@@ -771,3 +771,8 @@
 "Pocket TTS en español" = "Pocket TTS in Spanish";
 "Conversión completada. Archivo guardado en la biblioteca" = "Conversion complete. File saved to the library";
 "El archivo MP3 o DAISY permanece en la biblioteca. Puedes compartirlo también más adelante." = "The MP3 or DAISY file stays in the library. You can also share it later.";
+"Reproducción automática al abrir" = "Play automatically when opening";
+"Foco inicial en Reproducir" = "Initial focus on Play";
+"Activado: al abrir el documento, el foco se sitúa en Reproducir. Desactivado: el foco se sitúa en el texto. La voz solo comienza cuando pulsas Reproducir." = "On: opening a document focuses Play. Off: focus moves to the text. Speech starts only when you press Play.";
+"No se pudo compartir: %@" = "Could not share: %@";
+"No hay un archivo disponible para compartir." = "No file is available to share.";

@@ -523,6 +523,10 @@ struct NativeReaderSettingsScreen: View {
     @AppStorage("native-reader-navigation-unit") private var navigationUnit = 0
     @AppStorage("native-reader-reading-mode") private var readingMode = 0
 
+    private var automaticReadingBinding: Binding<Bool> {
+        Binding(get: { readingMode == 1 }, set: { readingMode = $0 ? 1 : 0 })
+    }
+
     var body: some View {
         List {
             NavigationLink("Audio y voces") { NativeReaderAudioSettingsScreen() }
@@ -532,34 +536,29 @@ struct NativeReaderSettingsScreen: View {
             NavigationLink("Modo de lectura") {
                 List {
                     Section("Al abrir un documento") {
-                        NativeAdjustableChoice(
-                            title: "Modo de lectura",
-                            choices: ["Manual, reproducir cuando lo indique",
-                                      "Automático, reproducir al abrir"],
-                            selectedIndex: $readingMode
-                        )
-                        Text("La elección se conserva hasta que la cambies. El modo manual permite leer el documento visualmente sin iniciar la voz.")
+                        Toggle("Foco inicial en Reproducir", isOn: automaticReadingBinding)
+                        Text("Activado: al abrir el documento, el foco se sitúa en Reproducir. Desactivado: el foco se sitúa en el texto. La voz solo comienza cuando pulsas Reproducir.")
                             .font(.footnote)
+                    }
+                    NavigationLink("Lectura con línea braille") {
+                        List {
+                            Section("Lectura continua") {
+                                Text("TifloLector conserva los párrafos y la posición para navegar con VoiceOver y una línea braille. Puedes utilizar braille y voz al mismo tiempo.")
+                                Text("Los controles de reproducción y ajustes aparecen antes del texto. Al leer manualmente no se inicia la voz ni se desplaza el foco por cuenta de TifloLector.")
+                            }
+                            Section("Preferencias de VoiceOver") {
+                                Text("Para configurar tu línea: Ajustes del iPhone, Accesibilidad, VoiceOver, Braille.")
+                                Text("Duración del avance automático: ajusta el ritmo de avance de la línea si tu dispositivo lo admite.")
+                                Text("Cambio de página automático: permite continuar al desplazarte cuando la presentación lo admite.")
+                                Text("Estas opciones pertenecen a VoiceOver; TifloLector no modifica sus valores.")
+                            }
+                        }
+                        .tifloScreenSurface()
+                        .navigationTitle("Lectura con línea braille")
                     }
                 }
                 .tifloScreenSurface()
                 .navigationTitle("Modo de lectura")
-            }
-            NavigationLink("Lectura con línea braille") {
-                List {
-                    Section("Lectura continua") {
-                        Text("TifloLector conserva los párrafos y la posición para navegar con VoiceOver y una línea braille. Puedes utilizar braille y voz al mismo tiempo.")
-                        Text("Los controles de reproducción y ajustes aparecen antes del texto. Al leer manualmente no se inicia la voz ni se desplaza el foco por cuenta de TifloLector.")
-                    }
-                    Section("Preferencias de VoiceOver") {
-                        Text("Para configurar tu línea: Ajustes del iPhone, Accesibilidad, VoiceOver, Braille.")
-                        Text("Duración del avance automático: ajusta el ritmo de avance de la línea si tu dispositivo lo admite.")
-                        Text("Cambio de página automático: permite continuar al desplazarte cuando la presentación lo admite.")
-                        Text("Estas opciones pertenecen a VoiceOver; TifloLector no modifica sus valores.")
-                    }
-                }
-                .tifloScreenSurface()
-                .navigationTitle("Lectura con línea braille")
             }
             NavigationLink("Ajustes visuales") { NativeReaderVisualSettingsScreen() }
             NavigationLink("OCR y reconocimiento") { NativeReaderOCRSettingsScreen() }

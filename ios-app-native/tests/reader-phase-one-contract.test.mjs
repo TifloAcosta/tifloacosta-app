@@ -7,13 +7,13 @@ const reader = source('NativeTifloLector.swift');
 const settings = source('NativeReaderSettings.swift');
 const formats = source('NativeReaderFormats.swift');
 
-test('The reading opening mode is persistent, opt-in and applied once per opening', () => {
+test('The reading opening focus preference is persistent, opt-in and applied once per opening', () => {
   assert.match(settings, /@AppStorage\("native-reader-reading-mode"\) private var readingMode = 0/);
   assert.match(reader, /@AppStorage\("native-reader-reading-mode"\) private var readingMode = 0/);
-  assert.match(settings, /Manual, reproducir cuando lo indique/);
-  assert.match(settings, /Automático, reproducir al abrir/);
+  assert.match(settings, /Toggle\("Foco inicial en Reproducir", isOn: automaticReadingBinding\)/);
+  assert.match(settings, /get: \{ readingMode == 1 \}/);
   assert.match(reader, /if !didApplyOpeningMode/);
-  assert.match(reader, /if readingMode == 1 \{ startAutomaticReadingAfterOpening\(\) \}/);
+  assert.match(reader, /if readingMode == 1 \{ playbackButtonFocused = true \}/);
 });
 
 test('General settings are folded into navigable destinations', () => {

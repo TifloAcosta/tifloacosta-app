@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - audit/android-phase6-integral-20261106
+      - feature/android-native-compose-prototype-l10n-20261114
     paths:
       - 'android-native-prototype/**'
       - 'mobile/**'

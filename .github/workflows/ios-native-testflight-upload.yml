@@ -23,6 +23,7 @@ on:
   # Beta solicitada 2026-11-11: portada mínima, recibido en Configuración e instalación de atajo Marcar lectura.
   # Reintento controlado tras incidencia de GitHub Actions: sustituir ejecución anterior bloqueada.
   # Reintento de publicación solicitado tras corregir pruebas de portada y completar traducciones. 2026-11-11.
+  # Beta solicitada por Tony 2026-11-14: DAISY completo, ajustes braille, accesibilidad y retirada de Pocket TTS.
   push:
     branches:
       - fix/ios-daisy-clipbegin-milliseconds-20261113

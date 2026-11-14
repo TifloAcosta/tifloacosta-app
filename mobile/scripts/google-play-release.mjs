@@ -111,7 +111,11 @@ export function createPlayReleaseClient({ packageName, accessToken, fetchImpl = 
             inAppUpdatePriority: priority,
             releaseNotes: [
               { language: 'es-ES', text: notes.es },
-              { language: 'en-US', text: notes.en }
+              { language: 'en-US', text: notes.en },
+              { language: 'pt-PT', text: notes.pt },
+              { language: 'fr-FR', text: notes.fr },
+              { language: 'it-IT', text: notes.it },
+              { language: 'de-DE', text: notes.de }
             ]
           }]
         }

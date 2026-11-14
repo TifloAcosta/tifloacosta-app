@@ -102,10 +102,10 @@ test('native reader warns about unmigrated legacy books instead of showing a fal
   assert.match(audit, /LegacyLibraryState\(null, true\)/);
   assert.doesNotMatch(audit, /SQLiteOpenHelper|OPEN_READWRITE|deleteDatabase/);
   assert.match(reader, /NativeLegacyLibraryCheck\.inspect/);
-  assert.match(reader, /Libros que ya tenías/);
+  assert.match(reader, /NativeReaderLegacyStrings\.get\(uiLanguage, "legacyCount"/);
   assert.match(reader, /legacyBooks\.forEach/);
   assert.match(reader, /openPreviousBook\(previous\.id\)/);
-  assert.match(reader, /No se pudo comprobar la biblioteca anterior/);
+  assert.match(reader, /NativeReaderLegacyStrings\.get\(uiLanguage, "legacyUnreadable"\)/);
 });
 
 test('Android API24 legacy Office compatibility requirements remain accounted for in release', async () => {
@@ -154,7 +154,7 @@ test('existing library can be reached from native reader without migrating or de
   assert.match(app, /restoreExistingReaderNavigation/);
   assert.match(app, /router.navigate\('reading-library'\)/);
   assert.match(settings, /export const NativeFeatures/);
-  assert.match(reader, /Abrir biblioteca anterior/);
+  assert.match(reader, /NativeReaderLegacyStrings\.get\(uiLanguage, "legacyComplete"\)/);
   assert.match(reader, /FLAG_ACTIVITY_CLEAR_TOP/);
   assert.doesNotMatch(reader, /deleteDatabase\(/);
 });

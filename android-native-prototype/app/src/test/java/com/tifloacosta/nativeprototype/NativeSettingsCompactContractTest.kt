@@ -37,4 +37,11 @@ class NativeSettingsCompactContractTest {
         assertTrue(providers.contains("ReaderCompactChoice("))
         assertFalse(providers.contains("Checkbox(\n"))
     }
+
+    @Test fun libraryFiltersOpenTheirOwnScreen() {
+        val library = source("NativeTifloLector.kt")
+        assertTrue(library.contains("if (screen == \"filters\")"))
+        assertTrue(library.contains("screen = \"filters\""))
+        assertFalse(library.contains("if (filtersExpanded)"))
+    }
 }

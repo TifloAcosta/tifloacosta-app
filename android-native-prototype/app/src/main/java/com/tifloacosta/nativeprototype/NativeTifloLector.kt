@@ -110,7 +110,6 @@ fun NativeTifloLector(
     var playOnOpen by remember { mutableStateOf(false) }
     var exportBookId by remember { mutableStateOf<String?>(null) }
     var screen by rememberSaveable { mutableStateOf("home") }
-    var filtersExpanded by rememberSaveable { mutableStateOf(false) }
     var filter by rememberSaveable { mutableIntStateOf(0) }
     var order by rememberSaveable { mutableIntStateOf(0) }
     val preferences = remember { context.getSharedPreferences("native-reader-preferences", 0) }
@@ -409,6 +408,36 @@ fun NativeTifloLector(
         }
         return
     }
+    if (screen == "filters") {
+        Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            TextButton(onClick = { screen = "home" }) {
+                Text(NativeReaderLegacyStrings.get(uiLanguage, "backReader"))
+            }
+            Text(NativeReaderLibraryStrings.get(uiLanguage, "filters"),
+                style = MaterialTheme.typography.headlineSmall,
+                modifier = Modifier.semantics { heading() })
+            ReaderAdjustableChoice(
+                NativeReaderLibraryStrings.get(uiLanguage, "details"),
+                NativeReaderLibraryStrings.detailLevels(uiLanguage), talkBackDetail
+            ) {
+                talkBackDetail = it
+                preferences.edit().putInt("talkback-library-details", it).apply()
+            }
+            ReaderAdjustableChoice(
+                NativeReaderLibraryStrings.get(uiLanguage, "filter"),
+                NativeReaderBookFilters.formatFilters(uiLanguage), filter
+            ) { filter = it; visibleCount = 10 }
+            ReaderAdjustableChoice(
+                NativeReaderLibraryStrings.get(uiLanguage, "sort"),
+                NativeReaderBookFilters.sortChoices(uiLanguage), order
+            ) { order = it }
+            TextButton(onClick = { screen = "queue" }, modifier = Modifier.fillMaxWidth()) {
+                Text(NativeReaderLibraryStrings.get(uiLanguage, "queue"))
+            }
+        }
+        return
+    }
     if (screen == "catalogs") {
         NativeReaderCatalogsScreen(english,
             onImport = { entry ->
@@ -599,31 +628,8 @@ fun NativeTifloLector(
         TextButton(onClick = { screen = "folders" }, modifier = Modifier.fillMaxWidth()) {
             Text(NativeReaderLibraryStrings.get(uiLanguage, "folders"))
         }
-        TextButton(onClick = { filtersExpanded = !filtersExpanded },
-            modifier = Modifier.fillMaxWidth().semantics {
-                stateDescription = NativeReaderLibraryStrings.get(uiLanguage,
-                    if (filtersExpanded) "expanded" else "collapsed")
-            }) { Text(NativeReaderLibraryStrings.get(uiLanguage, "filters")) }
-        if (filtersExpanded) {
-            ReaderAdjustableChoice(
-                NativeReaderLibraryStrings.get(uiLanguage, "details"),
-                NativeReaderLibraryStrings.detailLevels(uiLanguage),
-                talkBackDetail
-            ) {
-                talkBackDetail = it
-                preferences.edit().putInt("talkback-library-details", it).apply()
-            }
-            ReaderAdjustableChoice(
-                NativeReaderLibraryStrings.get(uiLanguage, "filter"),
-                NativeReaderBookFilters.formatFilters(uiLanguage), filter
-            ) { filter = it; visibleCount = 10 }
-            ReaderAdjustableChoice(
-                NativeReaderLibraryStrings.get(uiLanguage, "sort"),
-                NativeReaderBookFilters.sortChoices(uiLanguage), order
-            ) { order = it }
-            TextButton(onClick = { screen = "queue" }, modifier = Modifier.fillMaxWidth()) {
-                Text(NativeReaderLibraryStrings.get(uiLanguage, "queue"))
-            }
+        TextButton(onClick = { screen = "filters" }, modifier = Modifier.fillMaxWidth()) {
+            Text(NativeReaderLibraryStrings.get(uiLanguage, "filters"))
         }
         // La biblioteca de la versión antigua NO forma parte de la biblioteca
         // predeterminada. Los archivos originales no se borran ni se modifican.

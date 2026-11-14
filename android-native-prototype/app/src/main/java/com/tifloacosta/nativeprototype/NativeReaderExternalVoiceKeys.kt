@@ -21,6 +21,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -30,10 +31,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.liveRegion
@@ -122,7 +122,6 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
     val phononPreview = remember { NativePhononReader(context.applicationContext) }
     val mainHandler = remember { Handler(Looper.getMainLooper()) }
     var phononSamplePlaying by remember { mutableStateOf(false) }
-    var phononVoiceExpanded by remember { mutableStateOf(false) }
     var phononVoice by remember {
         mutableStateOf(context.getSharedPreferences("native-reader-preferences", Context.MODE_PRIVATE)
             .getString("phonon.voice", "").orEmpty())
@@ -156,12 +155,10 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
     var phononLanguage by remember {
         mutableStateOf(prefs.getString("phonon.language", "en") ?: "en")
     }
-    var phononLanguagesExpanded by remember { mutableStateOf(false) }
     val phononLanguageOptions = listOf(
         "en" to "English", "es" to "Español", "fr" to "Français",
         "de" to "Deutsch", "pt" to "Português"
     )
-    var voicesExpanded by remember { mutableStateOf(false) }
     var generating by remember { mutableStateOf(false) }
     var samplePlaying by remember { mutableStateOf(false) }
     DisposableEffect(Unit) {
@@ -230,52 +227,36 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
                 NativeReaderPhononStrings.get(uiLanguage, "cpuMissing")
             }
         )
-        Row {
-            Checkbox(
-                checked = phononTermsAccepted,
-                onCheckedChange = { phononTermsAccepted = it }
-            )
+        Row(modifier = Modifier.fillMaxWidth().toggleable(
+            value = phononTermsAccepted, role = Role.Checkbox,
+            onValueChange = { phononTermsAccepted = it }
+        )) {
             Text(NativeReaderPhononStrings.get(uiLanguage, "license"))
         }
         Button(
             enabled = !phononImportBusy && phononTermsAccepted,
             onClick = { importPhonon.launch(arrayOf("application/zip", "application/octet-stream")) }
         ) { Text(NativeReaderPhononStrings.get(uiLanguage, "importZip")) }
-        Button(onClick = { phononLanguagesExpanded = true }) {
-            Text(NativeReaderPhononStrings.get(uiLanguage, "modelLanguage") +
-                (phononLanguageOptions.firstOrNull { it.first == phononLanguage }?.second ?: phononLanguage))
+        ReaderCompactChoice(
+            NativeReaderPhononStrings.get(uiLanguage, "modelLanguage"),
+            phononLanguageOptions.map { it.second },
+            phononLanguageOptions.indexOfFirst { it.first == phononLanguage }.coerceAtLeast(0)
+        ) { selected ->
+            val language = phononLanguageOptions[selected].first
+            phononLanguage = language
+            prefs.edit().putString("phonon.language", language).apply()
         }
-        DropdownMenu(
-            expanded = phononLanguagesExpanded,
-            onDismissRequest = { phononLanguagesExpanded = false }
-        ) {
-            phononLanguageOptions.forEach { (language, label) ->
-                DropdownMenuItem(text = { Text(label) }, onClick = {
-                    phononLanguage = language
-                    prefs.edit().putString("phonon.language", language).apply()
-                    phononLanguagesExpanded = false
-                })
-            }
-        }
-        Text(NativeReaderPhononStrings.get(uiLanguage, "selectLanguage"))
         Text(NativeReaderPhononStrings.get(uiLanguage, "legalHelp"))
         if (phononModelInstalled &&
             NativePhononReader.isAvailable(context.applicationContext)) {
             val names = NativePhononModelStore.voices(context)
             if (names.isNotEmpty()) {
-                Button(onClick = { phononVoiceExpanded = true }) {
-                    Text(NativeReaderPhononStrings.get(uiLanguage, "voice") +
-                        phononVoice.ifBlank { names.first() })
-                }
-                DropdownMenu(expanded = phononVoiceExpanded,
-                    onDismissRequest = { phononVoiceExpanded = false }) {
-                    names.forEach { name ->
-                        DropdownMenuItem(text = { Text(name) }, onClick = {
-                            phononVoice = name
-                            prefs.edit().putString("phonon.voice", name).apply()
-                            phononVoiceExpanded = false
-                        })
-                    }
+                ReaderCompactChoice(
+                    NativeReaderPhononStrings.get(uiLanguage, "voice"), names,
+                    names.indexOf(phononVoice).coerceAtLeast(0)
+                ) { selected ->
+                    phononVoice = names[selected]
+                    prefs.edit().putString("phonon.voice", phononVoice).apply()
                 }
                 Button(onClick = {
                     phononPreview.stop()
@@ -357,17 +338,13 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
             }
         }) { Text(NativeReaderGeminiStrings.get(uiLanguage, "save")) }
         if (present) {
-            Button(onClick = { voicesExpanded = true }) {
-                Text(NativeReaderGeminiStrings.get(uiLanguage, "voice") + voice)
-            }
-            DropdownMenu(expanded = voicesExpanded, onDismissRequest = { voicesExpanded = false }) {
-                NativeGeminiSpeech.voices.forEach { option ->
-                    DropdownMenuItem(text = { Text(option) }, onClick = {
-                        voice = option
-                        prefs.edit().putString("gemini.voice", option).apply()
-                        voicesExpanded = false
-                    })
-                }
+            ReaderCompactChoice(
+                NativeReaderGeminiStrings.get(uiLanguage, "voice"),
+                NativeGeminiSpeech.voices,
+                NativeGeminiSpeech.voices.indexOf(voice).coerceAtLeast(0)
+            ) { selected ->
+                voice = NativeGeminiSpeech.voices[selected]
+                prefs.edit().putString("gemini.voice", voice).apply()
             }
             Button(enabled = !generating, onClick = {
                 generating = true

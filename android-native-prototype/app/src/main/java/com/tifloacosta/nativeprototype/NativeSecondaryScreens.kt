@@ -8,6 +8,8 @@ import android.os.Environment
 import android.provider.Settings
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -16,7 +18,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
@@ -30,6 +31,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
@@ -338,27 +341,35 @@ private fun NativeSettingsScreen(english: Boolean) {
         return
     }
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        Text(NativeUiText.get(uiLanguage, "language"), style = MaterialTheme.typography.titleMedium)
-        NativeUiText.choices.forEach { (code, label) ->
-            OutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = {
-                language = code; prefs.edit().putString("language", code).apply()
-            }) { Text(label + if (language == code) " ✓" else "") }
+        ReaderCompactChoice(
+            NativeUiText.get(uiLanguage, "language"),
+            NativeUiText.choices.map { it.second },
+            NativeUiText.choices.indexOfFirst {
+                it.first == language.ifEmpty { uiLanguage }
+            }.coerceAtLeast(0)
+        ) { selected ->
+            val code = NativeUiText.choices[selected].first
+            language = code; prefs.edit().putString("language", code).apply()
         }
-        Text(NativeUiText.get(uiLanguage, "appearance"), style = MaterialTheme.typography.titleMedium)
-        listOf("system" to NativeUiText.get(uiLanguage, "system"),
+        val themes = listOf("system" to NativeUiText.get(uiLanguage, "system"),
             "light" to NativeUiText.get(uiLanguage, "light"),
-            "dark" to NativeUiText.get(uiLanguage, "dark")).forEach { (code, label) ->
-            OutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = {
-                theme = code; prefs.edit().putString("theme", code).apply()
-            }) { Text(label + if (theme == code) " ✓" else "") }
+            "dark" to NativeUiText.get(uiLanguage, "dark"))
+        ReaderCompactChoice(
+            NativeUiText.get(uiLanguage, "appearance"), themes.map { it.second },
+            themes.indexOfFirst { it.first == theme }.coerceAtLeast(0)
+        ) { selected ->
+            val code = themes[selected].first
+            theme = code; prefs.edit().putString("theme", code).apply()
         }
-        androidx.compose.foundation.layout.Row {
-            Checkbox(checked = enlarged, onCheckedChange = {
+        Row(
+            modifier = Modifier.fillMaxWidth().toggleable(
+                value = enlarged, role = Role.Checkbox, onValueChange = {
                 enlarged = it; prefs.edit().putBoolean("enlarged", it).apply()
-            })
+            }),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Text(NativeUiText.get(uiLanguage, "largerText"))
         }
-        Text(NativeUiText.get(uiLanguage, "settingsNote"))
         Button(onClick = { details = "guide" }, modifier = Modifier.fillMaxWidth()) {
             Text(NativeUsageGuideStrings.get(uiLanguage, "guide"))
         }

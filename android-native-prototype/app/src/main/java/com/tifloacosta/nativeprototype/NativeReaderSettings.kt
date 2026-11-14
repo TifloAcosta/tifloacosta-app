@@ -248,7 +248,7 @@ fun NativeReaderGeneralSettings(
     var voiceRefresh by remember { mutableIntStateOf(0) }
     val speaker = remember(voiceRefresh) { NativeReaderSpeaker(context.applicationContext) }
     DisposableEffect(speaker) { onDispose { speaker.close() } }
-    var expanded by remember { mutableIntStateOf(-1) }
+    var selectedGroup by remember { mutableIntStateOf(-1) }
     var speed by remember { mutableIntStateOf(
         SPEEDS.indices.minByOrNull { kotlin.math.abs(SPEEDS[it] - prefs.getFloat("rate", 1f)) } ?: 2
     ) }
@@ -320,22 +320,26 @@ fun NativeReaderGeneralSettings(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        TextButton(onClick = onBack) { Text(NativeReaderSettingsStrings.get(uiLanguage, "backReader")) }
-        Text(NativeReaderSettingsStrings.get(uiLanguage, "title"),
+        TextButton(onClick = { if (selectedGroup >= 0) selectedGroup = -1 else onBack() }) {
+            Text(NativeReaderSettingsStrings.get(uiLanguage,
+                if (selectedGroup >= 0) "backSettings" else "backReader"))
+        }
+        Text(if (selectedGroup >= 0) groups[selectedGroup]
+            else NativeReaderSettingsStrings.get(uiLanguage, "title"),
             style = MaterialTheme.typography.headlineSmall)
+        if (selectedGroup < 0) {
         TextButton(
             onClick = { nested = "licenses" },
             modifier = Modifier.fillMaxWidth()
         ) { Text(NativeReaderSettingsStrings.get(uiLanguage, "licenses")) }
         groups.forEachIndexed { i, title ->
             TextButton(
-                modifier = Modifier.fillMaxWidth().semantics {
-                    stateDescription = NativeReaderSettingsStrings.get(uiLanguage,
-                        if (expanded == i) "expanded" else "collapsed")
-                },
-                onClick = { expanded = if (expanded == i) -1 else i }
+                modifier = Modifier.fillMaxWidth(),
+                onClick = { selectedGroup = i }
             ) { Text(title) }
-            if (expanded == i) when (i) {
+        }
+        } else {
+            when (selectedGroup) {
                 0 -> {
                     ReaderAdjustableChoice(
                         NativeReaderSettingsStrings.get(uiLanguage, "speechSpeed"),

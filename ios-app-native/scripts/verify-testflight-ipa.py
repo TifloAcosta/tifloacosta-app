@@ -35,8 +35,10 @@ with zipfile.ZipFile(files[0]) as z:
                              (ext_info, 'com.tifloacosta.app.ShareExtension')]:
         if info.get('CFBundleIdentifier') != identifier:
             raise SystemExit('Identificador incorrecto: ' + str(info.get('CFBundleIdentifier')))
-        if str(info.get('CFBundleVersion')) != os.environ['IOS_BUILD_VERSION']:
-            raise SystemExit('Número de compilación distinto entre aplicación y extensión')
+        actual_version = str(info.get('CFBundleVersion'))
+        if actual_version != os.environ['IOS_BUILD_VERSION']:
+            raise SystemExit('Número de compilación distinto en ' + identifier +
+                             ': ' + actual_version + ' frente a ' + os.environ['IOS_BUILD_VERSION'])
         expected_version = os.environ.get('TIFLO_IOS_MARKETING_VERSION', '1.2')
         if info.get('CFBundleShortVersionString') != expected_version:
             raise SystemExit('Versión pública incorrecta: se esperaba ' + expected_version + ', se obtuvo ' + str(info.get('CFBundleShortVersionString')))

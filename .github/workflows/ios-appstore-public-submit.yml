@@ -1,15 +1,16 @@
-name: TifloAcosta 1.2 - enviar version publica a revision Apple
+name: TifloAcosta 1.3 - enviar version publica a revision Apple
 on:
   push:
     branches:
       - audit/ios-public-release-six-languages-20261112
+      - fix/ios-daisy-clipbegin-milliseconds-20261113
     paths:
       - '.github/workflows/ios-appstore-public-submit.yml'
   workflow_dispatch:
 permissions:
   contents: read
 concurrency:
-  group: tifloacosta-ios-appstore-version-1-2-submission
+  group: tifloacosta-ios-appstore-version-1-3-submission
   cancel-in-progress: false
 jobs:
   submit:
@@ -19,12 +20,12 @@ jobs:
       APPSTORE_API_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
       APPSTORE_API_ISSUER_ID: ${{ secrets.APPSTORE_API_ISSUER_ID }}
       APPSTORE_API_PRIVATE_KEY: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
-      TARGET_BUILD: "500151"
+      TARGET_BUILD: "500157"
     steps:
       - uses: actions/checkout@v4
       - name: Comprobar sintaxis de la automatizacion y novedades oficiales
         run: |
           node --check ios-app-native/scripts/appstore-public-submit.mjs
           node --test ios-app-native/tests/final-language-coverage-20261112.test.mjs
-      - name: Asociar compilacion validada y enviar actualizacion 1.2 a revision
+      - name: Asociar compilacion validada y enviar actualizacion 1.3 a revision
         run: node ios-app-native/scripts/appstore-public-submit.mjs

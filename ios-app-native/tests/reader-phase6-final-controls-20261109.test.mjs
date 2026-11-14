@@ -19,9 +19,9 @@ test('Navegación adaptable no conserva un modo inexistente del libro anterior',
   assert.match(source, /unit: unit/);
 });
 
-test('Información marcas y apagado están accesibles antes de ajustes secundarios', () => {
+test('Navegación, marcas y apagado preceden al texto; ajustes secundarios quedan después', () => {
   const controls = source.slice(source.indexOf('private var quickControls: some View'), source.indexOf('private func readerFragment('));
-  const labels = ['Button("Marcas guardadas")', 'Button("Información")', 'title: "Apagado automático"', 'Button("Audio")', 'Button("Visual")'];
+  const labels = ['title: "Modo de navegación"', 'Button("Añadir marca")', 'title: "Apagado automático"', 'Button("Marcas guardadas")', 'Button("Audio")', 'Button("Visual")'];
   const indices = labels.map(s => controls.indexOf(s));
   assert.ok(indices.every(i => i >= 0));
   assert.ok(indices.every((v, i) => i === 0 || v > indices[i-1]));

@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - audit/ios-public-release-six-languages-20261112
+      - fix/ios-daisy-clipbegin-milliseconds-20261113
     paths:
       - '.github/workflows/ios-appstore-public-preflight.yml'
       - 'ios-app-native/scripts/appstore-public-preflight.mjs'

@@ -1,0 +1,10 @@
+{
+  "version": "1.3",
+  "bundleId": "com.tifloacosta.app",
+  "primaryLocale": "es-ES",
+  "whatsNew": {
+    "es-ES": "Mejoras de TifloLector: exportación de audio y DAISY con resultados conservados en la biblioteca, acceso para compartir desde el título de los documentos y controles de lectura reorganizados. Nuevo ajuste del foco inicial para comenzar en Reproducir o en el texto, y acceso a la configuración de lectura con línea braille. Correcciones de lectura de encabezados y puntuación, navegación, marcas y accesibilidad con VoiceOver."
+  },
+  "requiresLocalesFromApple": true,
+  "releaseType": "AFTER_APPROVAL"
+}

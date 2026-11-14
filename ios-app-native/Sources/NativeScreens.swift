@@ -1336,6 +1336,11 @@ private struct NativeYouTubeChannelVideosScreen: View {
 @MainActor
 enum NativeShare {
     static func present(url: URL) {
+        present(urls: [url])
+    }
+
+    static func present(urls: [URL]) {
+        guard !urls.isEmpty else { return }
         guard let scene = UIApplication.shared.connectedScenes
             .compactMap({ $0 as? UIWindowScene })
             .first(where: { $0.activationState == .foregroundActive }),
@@ -1345,7 +1350,7 @@ enum NativeShare {
             presenter = presented
         }
         presenter.present(
-            UIActivityViewController(activityItems: [url], applicationActivities: nil),
+            UIActivityViewController(activityItems: urls, applicationActivities: nil),
             animated: true
         )
     }

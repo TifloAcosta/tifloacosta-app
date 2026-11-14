@@ -64,9 +64,9 @@ test("fase 3: el nombre de exportación conserva Unicode y evita colisiones temp
 
 test("fase 3: exportadores de audio conectados con controles accesibles", () => {
   assert.match(reader, /Button\("Exportar audio MP3 o DAISY"\)/);
-  assert.match(reader, /Picker\("Formato", selection: \$audioExportFormat\)/);
-  assert.match(reader, /Picker\("Motor", selection: \$audioExportEngine\)/);
-  assert.match(reader, /Picker\("Voz", selection: \$audioExportSystemVoice\)/);
+  assert.match(reader, /NativeAdjustableChoice\(\s*title: "Formato"/);
+  assert.match(reader, /NativeAdjustableChoice\(\s*title: "Motor"/);
+  assert.match(reader, /NativeAdjustableChoice\(\s*title: "Voz"/);
   assert.match(reader, /NativeGeminiAudioExport\.export\(/);
   assert.match(reader, /audioExportTask\?\.cancel\(\)/);
   assert.match(reader, /NativeShare\.present\(url: url\)/);
@@ -84,7 +84,7 @@ test("fase 3: exportación DAISY incluye verificación del paquete antes de comp
 test("fase 3: metadatos DAISY respetan el idioma seleccionado", () => {
   const daisy = readFileSync(new URL("../Sources/NativeGeminiDaisyExport.swift", import.meta.url), "utf8");
   const audio = readFileSync(new URL("../Sources/NativeGeminiAudioExport.swift", import.meta.url), "utf8");
-  assert.match(reader, /Picker\("Idioma del contenido", selection: \$audioExportLanguage\)/);
+  assert.match(reader, /NativeAdjustableChoice\(\s*title: "Idioma del contenido"/);
   assert.match(reader, /language: audioExportLanguage/);
   assert.match(audio, /language: language, progress: progress/);
   assert.match(daisy, /xml:lang="\\\(lang\)"/);

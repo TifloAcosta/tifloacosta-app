@@ -80,8 +80,8 @@ const output={
   recentBuilds:builds.data.map(x=>({number:x.attributes?.version,
     processingState:x.attributes?.processingState,uploadedDate:x.attributes?.uploadedDate}))
 };
-const release=JSON.parse(fs.readFileSync('ios-app-native/release/appstore-1.2.json','utf8'));
-if(release.bundleId !== output.bundleId || release.version !== '1.2') throw Error('Release config or bundle mismatch');
+const release=JSON.parse(fs.readFileSync('ios-app-native/release/appstore-1.3.json','utf8'));
+if(release.bundleId !== output.bundleId || release.version !== '1.3') throw Error('Release config or bundle mismatch');
 if(!release.whatsNew?.[release.primaryLocale]?.trim()) throw Error('Spanish What’s New is missing');
 const existingDraft=output.versions.find(x=>x.number===release.version);
 if(existingDraft && !['PREPARE_FOR_SUBMISSION','DEVELOPER_REJECTED','REJECTED','WAITING_FOR_REVIEW','IN_REVIEW','PENDING_APPLE_RELEASE','READY_FOR_DISTRIBUTION','PROCESSING_FOR_APP_STORE'].includes(existingDraft.state))

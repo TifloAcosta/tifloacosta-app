@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -36,6 +37,7 @@ import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
@@ -78,6 +80,8 @@ data class NativeDownloadItem(val name: String, val url: String, val source: Str
 @Composable
 fun NativeDownloadScreen(english: Boolean, initialUrl: String = "") {
     val context = LocalContext.current
+    val uiLanguage = LocalNativeUiLanguage.current
+    fun label(key: String, count: Int? = null) = NativeLinkDownloadStrings.get(uiLanguage, key, count)
     val scope = rememberCoroutineScope()
     var url by remember(initialUrl) { mutableStateOf(initialUrl) }
     var status by remember { mutableStateOf("") }
@@ -97,27 +101,26 @@ fun NativeDownloadScreen(english: Boolean, initialUrl: String = "") {
                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
                 .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, safe)
             (context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager).enqueue(request)
-            status = if (english) "Queued in Android Downloads" else
-                "Descarga añadida al gestor de descargas de Android"
+            status = label("queued")
         } catch (_: Exception) {
-            status = if (english) "Could not start download" else "No se pudo iniciar la descarga"
+            status = label("failure")
         }
     }
 
     Column(verticalArrangement = Arrangement.spacedBy(9.dp)) {
-        Text(if (english) "Download a file from a link" else "Descargar un archivo desde un enlace",
+        Text(label("title"),
             style = MaterialTheme.typography.titleMedium)
         OutlinedTextField(url, { url = it.take(2048) }, modifier = Modifier.fillMaxWidth(),
-            label = { Text(if (english) "HTTPS file or cloud link" else "Enlace HTTPS de archivo o nube") })
+            label = { Text(label("url")) })
         Button(enabled = !analyzing, modifier = Modifier.fillMaxWidth(), onClick = {
             val parsed = Uri.parse(url.trim())
             if (parsed.scheme != "https" || parsed.host.isNullOrBlank()) {
-                status = if (english) "Enter a valid HTTPS address" else "Introduce una dirección HTTPS válida"
+                status = label("invalid")
             } else {
                 analyzing = true
                 items = emptyList()
                 external = ""
-                status = if (english) "Analyzing link" else "Analizando enlace"
+                status = label("analyzing")
                 scope.launch {
                     try {
                         val payload = withContext(Dispatchers.IO) {
@@ -134,29 +137,27 @@ fun NativeDownloadScreen(english: Boolean, initialUrl: String = "") {
                         items = found
                         external = payload.optString("url", url.trim())
                         status = if (found.isEmpty())
-                            (if (english) "No direct files found; open the source if needed"
-                             else "No se encontraron archivos directos; puedes abrir la fuente")
-                        else if (english) "${found.size} files" else "${found.size} archivos"
+                            label("notFound")
+                        else label("files", found.size)
                     } catch (_: Exception) {
-                        status = if (english) "Analyzer unavailable; the original link is preserved"
-                            else "Analizador no disponible; se conserva el enlace original"
+                        status = label("analyzerError")
                         external = url.trim()
                     } finally { analyzing = false }
                 }
             }
-        }) { Text(if (english) "Analyze link" else "Analizar enlace") }
+        }) { Text(label("analyze")) }
         Text(status)
         LazyColumn(modifier = Modifier.heightIn(max = 340.dp)) {
             items(items, key = { it.url }) { file ->
                 Button(modifier = Modifier.fillMaxWidth(), onClick = { download(file) }) {
-                    Text((if (english) "Download: " else "Descargar: ") + file.name)
+                    Text(label("download") + file.name)
                 }
                 if (file.source.isNotBlank()) Text(file.source)
             }
         }
         if (items.isEmpty() && MediaLogic.validWebUrl(external))
             TextButton(onClick = { nativeExternal(context, external) }) {
-                Text(if (english) "Open original link" else "Abrir enlace original")
+                Text(label("open"))
             }
     }
 }
@@ -166,6 +167,8 @@ data class NativeSound(val name: String, val page: String, val preview: String)
 @Composable
 fun NativeSoundSearchScreen(english: Boolean) {
     val context = LocalContext.current
+    val uiLanguage = LocalNativeUiLanguage.current
+    fun label(key: String, count: Int? = null) = NativeSoundStrings.get(uiLanguage, key, count)
     val scope = rememberCoroutineScope()
     var term by remember { mutableStateOf("") }
     var status by remember { mutableStateOf("") }
@@ -173,28 +176,28 @@ fun NativeSoundSearchScreen(english: Boolean) {
     var busy by remember { mutableStateOf(false) }
     var category by remember { mutableStateOf(0) }
     val categories = listOf(
-        "" to (if (english) "All sounds" else "Todos los sonidos"),
-        "ringtones" to (if (english) "Ringtones" else "Tonos de llamada"),
-        "notifications" to (if (english) "Notifications" else "Notificaciones"),
-        "alarms" to (if (english) "Alarms" else "Alarmas"),
-        "phones" to (if (english) "Phone sounds" else "Teléfonos"),
-        "technology" to (if (english) "Technology" else "Tecnología"),
-        "nature" to (if (english) "Nature" else "Naturaleza"),
-        "animals" to (if (english) "Animals" else "Animales"),
-        "ambience" to (if (english) "Ambience" else "Ambiente"),
-        "funny" to (if (english) "Fun" else "Divertidos"),
-        "games" to (if (english) "Games" else "Juegos")
+        "" to label("all"),
+        "ringtones" to label("ringtones"),
+        "notifications" to label("notifications"),
+        "alarms" to label("alarms"),
+        "phones" to label("phones"),
+        "technology" to label("technology"),
+        "nature" to label("nature"),
+        "animals" to label("animals"),
+        "ambience" to label("ambience"),
+        "funny" to label("funny"),
+        "games" to label("games")
     )
     var preview by remember { mutableStateOf<MediaPlayer?>(null) }
     DisposableEffect(Unit) {
         onDispose { preview?.let { runCatching { it.stop(); it.release() } } }
     }
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        ReaderAdjustableChoice(if (english) "Sound category" else "Categoría de sonidos",
+        ReaderAdjustableChoice(label("category"),
             categories.map { it.second }, category) { category = it }
 
         OutlinedTextField(term, { term = it.take(120) }, modifier = Modifier.fillMaxWidth(),
-            label = { Text(if (english) "Sound to find" else "Sonido que buscas") })
+            label = { Text(label("query")) })
         Button(enabled = !busy && term.trim().length >= 2, onClick = {
             busy = true
             scope.launch {
@@ -215,12 +218,12 @@ fun NativeSoundSearchScreen(english: Boolean) {
                         }
                     }
                     results = found
-                    status = if (english) "${found.size} sounds found" else "${found.size} sonidos encontrados"
+                    status = label("found", found.size)
                 } catch (_: Exception) {
-                    status = if (english) "Sound search unavailable" else "No se pudo consultar el banco de sonidos"
+                    status = label("unavailable")
                 } finally { busy = false }
             }
-        }) { Text(if (english) "Search sounds" else "Buscar sonidos") }
+        }) { Text(label("search")) }
         Text(status)
         listOf(
             "Mixkit" to "https://mixkit.co/free-sound-effects/",
@@ -241,7 +244,7 @@ fun NativeSoundSearchScreen(english: Boolean) {
                             player.setOnErrorListener { _, _, _ -> true }
                             player.prepareAsync()
                         }.onFailure { runCatching { player.release() }; preview = null }
-                    }) { Text((if (english) "Listen: " else "Escuchar: ") + sound.name) }
+                    }) { Text(label("listen") + sound.name) }
                 }
                 if (MediaLogic.validWebUrl(sound.page)) {
                     OutlinedButton(modifier = Modifier.fillMaxWidth(),
@@ -282,6 +285,8 @@ private fun episodesFromRss(xml: String): List<NativeEpisode> {
 @Composable
 fun NativePodcastScreen(english: Boolean, media: List<MediaItem>) {
     val context = LocalContext.current
+    val uiLanguage = LocalNativeUiLanguage.current
+    fun label(key: String, value: Any? = null) = NativePodcastStrings.get(uiLanguage, key, value)
     val library = remember { NativePodcastLibrary(context) }
     var favorites by remember { mutableStateOf(library.favorites()) }
     var followed by remember { mutableStateOf(library.subscriptions()) }
@@ -294,16 +299,14 @@ fun NativePodcastScreen(english: Boolean, media: List<MediaItem>) {
     val importOPML = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri != null && !opmlImportBusy) {
             opmlImportBusy = true
-            libraryNotice = if (english) "Importing subscriptions…" else "Importando suscripciones…"
+            libraryNotice = label("importing")
             scope.launch {
                 try {
                     val count = withContext(Dispatchers.IO) { library.importOPML(uri) }
                     followed = library.subscriptions()
-                    libraryNotice = if (english) "Imported $count podcast subscriptions."
-                        else "Suscripciones importadas: $count."
+                    libraryNotice = label("importSuccess", count)
                 } catch (_: Exception) {
-                    libraryNotice = if (english) "Could not import OPML."
-                        else "No se pudo importar el archivo OPML."
+                    libraryNotice = label("importError")
                 } finally {
                     opmlImportBusy = false
                 }
@@ -311,6 +314,7 @@ fun NativePodcastScreen(english: Boolean, media: List<MediaItem>) {
         }
     }
     var episodes by remember { mutableStateOf<List<NativeEpisode>>(emptyList()) }
+    var visibleEpisodes by remember { mutableIntStateOf(10) }
     var status by remember { mutableStateOf("") }
     var chosen by remember { mutableStateOf<NativeEpisode?>(null) }
     var playing by remember { mutableStateOf(false) }
@@ -318,24 +322,31 @@ fun NativePodcastScreen(english: Boolean, media: List<MediaItem>) {
     var duration by remember { mutableStateOf(0f) }
     val player = remember { MediaPlayer() }
     DisposableEffect(player) { onDispose { runCatching { player.stop(); player.release() } } }
+    LaunchedEffect(player, chosen, playing) {
+        while (playing) {
+            position = runCatching { player.currentPosition.coerceAtLeast(0).toFloat() }
+                .getOrDefault(position)
+            delay(750)
+        }
+    }
     LaunchedEffect(Unit) {
-        status = if (english) "Loading episodes" else "Cargando episodios"
+        status = label("loading")
         try {
             episodes = withContext(Dispatchers.IO) {
                 episodesFromRss(limitedResponse("https://anchor.fm/s/5b48ca28/podcast/rss"))
             }
-            status = if (episodes.isEmpty()) (if (english) "No episodes" else "Sin episodios")
+            status = if (episodes.isEmpty()) label("none")
                 else ""
         } catch (_: Exception) {
             episodes = media.filter { it.type == "audio" && MediaLogic.validWebUrl(it.openUrl) }
                 .map { NativeEpisode(it.title, it.openUrl) }
-            status = if (english) "Using the saved podcast list" else "Utilizando la lista de podcasts guardada"
+            status = label("savedList")
         }
     }
     fun playEpisode(episode: NativeEpisode) {
         chosen = episode
         playing = false
-        status = if (english) "Preparing audio" else "Preparando audio"
+        status = label("preparing")
         runCatching {
             player.reset()
             player.setDataSource(episode.url)
@@ -347,35 +358,41 @@ fun NativePodcastScreen(english: Boolean, media: List<MediaItem>) {
                 playing = true
             }
             player.setOnErrorListener { _, _, _ ->
-                status = if (english) "Cannot play episode" else "No se puede reproducir"
+                status = label("playError")
                 playing = false
                 true
             }
+            player.setOnCompletionListener {
+                playing = false
+                position = duration
+            }
             player.prepareAsync()
-        }.onFailure { status = if (english) "Audio error" else "Error de audio" }
+        }.onFailure { status = label("audioError") }
     }
-    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+    LazyColumn(modifier = Modifier.fillMaxWidth()) {
+      item {
+       Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
         if (status.isNotBlank()) Text(status)
-        Text(if (english) "Podcast library" else "Biblioteca de pódcast",
+        Text(label("library"),
             style = MaterialTheme.typography.titleMedium, modifier = Modifier.semantics { heading() })
         Button(onClick = {
             library.follow("Canal TifloAcosta", "https://anchor.fm/s/5b48ca28/podcast/rss")
             followed = library.subscriptions()
-            libraryNotice = if (english) "Subscription saved." else "Suscripción guardada."
-        }) { Text(if (english) "Follow TifloAcosta podcast" else "Seguir el pódcast TifloAcosta") }
+            libraryNotice = label("subscriptionSaved")
+        }) { Text(label("follow")) }
         Button(enabled = !opmlImportBusy, onClick = { importOPML.launch(arrayOf("text/xml", "application/xml", "text/x-opml", "*/*")) }) {
-            Text(if (english) "Import OPML subscriptions" else "Importar suscripciones OPML")
+            Text(label("import"))
         }
-        Text(if (english) "Favorite episodes: ${favorites.size}" else "Episodios favoritos: ${favorites.size}")
+        Text(label("favoritesCount", favorites.size))
         library.savedEpisodes().forEach { saved ->
             TextButton(onClick = { playEpisode(NativeEpisode(saved.title, saved.url)) }) {
-                Text((if (english) "Play favorite: " else "Reproducir favorito: ") + saved.title)
+                Text(label("favoritePlay") + saved.title)
             }
             TextButton(onClick = {
                 library.toggleFavoriteEpisode(saved.title, saved.url)
                 favorites = library.favorites()
             }) {
-                Text((if (english) "Remove favorite: " else "Quitar favorito: ") + saved.title)
+                Text(label("favoriteRemove") + saved.title)
             }
         }
         if (libraryNotice.isNotBlank()) Text(libraryNotice)
@@ -384,7 +401,7 @@ fun NativePodcastScreen(english: Boolean, media: List<MediaItem>) {
             TextButton(enabled = !followedBusy, onClick = {
                 followedTitle = podcast.title
                 followedBusy = true
-                libraryNotice = if (english) "Loading followed episodes" else "Consultando episodios seguidos"
+                libraryNotice = label("followedLoading")
                 scope.launch {
                     try {
                         followedEpisodes = withContext(Dispatchers.IO) {
@@ -394,34 +411,30 @@ fun NativePodcastScreen(english: Boolean, media: List<MediaItem>) {
                             library.recordFeedCheck(podcast.url, followedEpisodes.map { it.url })
                         }
                         libraryNotice = if (followedEpisodes.isEmpty()) {
-                            if (english) "No playable episodes" else "Sin episodios compatibles"
-                        } else if (english) "$newCount new episodes since the previous check."
-                        else "$newCount episodios nuevos desde la consulta anterior."
+                            label("noPlayable")
+                        } else label("newEpisodes", newCount)
                     } catch (_: Exception) {
                         followedEpisodes = emptyList()
-                        libraryNotice = if (english) "Could not load podcast feed"
-                            else "No se pudo consultar el canal."
+                        libraryNotice = label("feedError")
                     } finally { followedBusy = false }
                 }
-            }) { Text((if (english) "Browse episodes: " else "Consultar episodios: ") + podcast.title) }
+            }) { Text(label("browse") + podcast.title) }
             TextButton(onClick = {
                 library.unfollow(podcast.url)
                 followed = library.subscriptions()
-            }) { Text((if (english) "Unfollow: " else "Dejar de seguir: ") + podcast.title) }
+            }) { Text(label("unfollow") + podcast.title) }
         }
-        if (followedBusy) Text(if (english) "Loading episodes" else "Cargando episodios")
+        if (followedBusy) Text(label("loading"))
         if (followedEpisodes.isNotEmpty()) {
             Text(followedTitle, style = MaterialTheme.typography.titleMedium)
             followedEpisodes.take(100).forEach { episode ->
                 TextButton(onClick = { playEpisode(episode) }) {
-                    Text((if (english) "Play: " else "Reproducir: ") + episode.title)
+                    Text(label("playEpisode") + episode.title)
                 }
                 TextButton(onClick = {
                     library.toggleFavoriteEpisode(episode.title, episode.url)
                     favorites = library.favorites()
-                }) { Text((if (episode.url in favorites)
-                    (if (english) "Remove favorite: " else "Quitar de favoritos: ")
-                    else (if (english) "Add favorite: " else "Añadir a favoritos: ")) + episode.title) }
+                }) { Text(label(if (episode.url in favorites) "removeFavorite" else "addFavorite") + episode.title) }
             }
         }
         chosen?.let { current ->
@@ -432,15 +445,14 @@ fun NativePodcastScreen(english: Boolean, media: List<MediaItem>) {
                         if (player.isPlaying) { player.pause(); playing = false }
                         else { player.start(); playing = true }
                     }
-                }) { Text(if (playing) (if (english) "Pause" else "Pausar")
-                    else (if (english) "Play" else "Reproducir")) }
+                }) { Text(label(if (playing) "pause" else "play")) }
                 TextButton(onClick = {
                     runCatching { player.seekTo((player.currentPosition - 30_000).coerceAtLeast(0)) }
-                }) { Text("-30 s") }
+                }) { Text(label("skipBack")) }
                 TextButton(onClick = {
                     runCatching { player.seekTo((player.currentPosition + 30_000)
                         .coerceAtMost(player.duration.coerceAtLeast(0))) }
-                }) { Text("+30 s") }
+                }) { Text(label("skipForward")) }
             }
             if (duration > 0f) Slider(
                 value = position.coerceIn(0f, duration),
@@ -451,25 +463,31 @@ fun NativePodcastScreen(english: Boolean, media: List<MediaItem>) {
                 valueRange = 0f..duration,
                 modifier = Modifier.fillMaxWidth())
             TextButton(onClick = { nativeExternal(context, current.url) }) {
-                Text(if (english) "Open episode source" else "Abrir origen del episodio")
+                Text(label("source"))
             }
         }
-        Text(if (english) "Episodes" else "Episodios", style = MaterialTheme.typography.titleMedium,
+        Text(label("episodes"), style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.semantics { heading() })
-        LazyColumn {
-            items(episodes.take(100), key = { it.url }) { episode ->
+       }
+      }
+            items(episodes.take(visibleEpisodes), key = { it.url }) { episode ->
+              Column {
                 OutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = {
                     playEpisode(episode)
                 }) { Text(episode.title) }
                 TextButton(onClick = {
                     val added = library.toggleFavoriteEpisode(episode.title, episode.url)
                     favorites = library.favorites()
-                    libraryNotice = if (english) (if (added) "Added to favorites." else "Removed from favorites.")
-                        else (if (added) "Añadido a favoritos." else "Retirado de favoritos.")
-                }) { Text((if (episode.url in favorites)
-                    (if (english) "Remove favorite: " else "Quitar de favoritos: ")
-                    else (if (english) "Add favorite: " else "Añadir a favoritos: ")) + episode.title) }
+                    libraryNotice = label(if (added) "added" else "removed")
+                }) { Text(label(if (episode.url in favorites) "removeFavorite" else "addFavorite") + episode.title) }
+              }
             }
-        }
+            if (episodes.size > visibleEpisodes) {
+                item {
+                    TextButton(onClick = { visibleEpisodes += 10 }, modifier = Modifier.fillMaxWidth()) {
+                        Text(label("more"))
+                    }
+                }
+            }
     }
 }

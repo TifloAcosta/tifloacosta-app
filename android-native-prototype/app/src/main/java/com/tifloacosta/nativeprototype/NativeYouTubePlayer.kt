@@ -109,6 +109,7 @@ fun NativeYouTubePlayer(
     onBack: () -> Unit
 ) {
     val context = LocalContext.current
+    val uiLanguage = LocalNativeUiLanguage.current
     val videoId = remember(item.originalUrl) { MediaLogic.youTubeVideoId(item.originalUrl) }
     var view by remember(videoId) { mutableStateOf<WebView?>(null) }
     var state by remember(videoId) { mutableStateOf(YouTubeState()) }
@@ -118,12 +119,7 @@ fun NativeYouTubePlayer(
     var editingComment by remember(videoId) { mutableStateOf(false) }
     var commentText by remember(videoId) { mutableStateOf("") }
     val scope = rememberCoroutineScope()
-    val actions = if (english)
-        listOf("Play or pause", "Back 30 seconds", "Forward 30 seconds",
-            "Like", "Subscribe", "Comment", "Share", "Open YouTube")
-    else
-        listOf("Reproducir o pausar", "Retroceder 30 segundos", "Avanzar 30 segundos",
-            "Me gusta", "Suscribirme", "Comentar", "Compartir", "Abrir en YouTube")
+    val actions = NativeYouTubePlayerStrings.actions(uiLanguage)
 
     LaunchedEffect(videoId, account.authenticated) {
         if (videoId != null && account.authenticated) account.loadVideoState(videoId)
@@ -192,7 +188,7 @@ fun NativeYouTubePlayer(
                     context.startActivity(Intent.createChooser(Intent(Intent.ACTION_SEND).apply {
                         type = "text/plain"
                         putExtra(Intent.EXTRA_TEXT, link)
-                    }, if (english) "Share video" else "Compartir vídeo"))
+                    }, NativeYouTubeRowStrings.get(uiLanguage, "shareVideo")))
                 }
             }
             7 -> if (item.openUrl.isNotBlank())
@@ -206,7 +202,7 @@ fun NativeYouTubePlayer(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         TextButton(onClick = onBack) {
-            Text(if (english) "Back to media" else "Volver a multimedia")
+            Text(NativeYouTubePlayerStrings.get(uiLanguage, "back"))
         }
         // The title itself is the adjustable TalkBack stop, instead of
         // requiring users to locate a second selector below the player.
@@ -216,7 +212,7 @@ fun NativeYouTubePlayer(
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.semantics {
                 contentDescription = item.title
-                stateDescription = (if (english) "Selected video action: " else "Acción del vídeo: ") +
+                stateDescription = NativeYouTubePlayerStrings.get(uiLanguage, "selected") +
                     actions[gestureIndex]
                 progressBarRangeInfo = ProgressBarRangeInfo(
                     gestureIndex.toFloat(), 0f..actions.lastIndex.toFloat(),
@@ -226,21 +222,20 @@ fun NativeYouTubePlayer(
                     gestureIndex = requested.roundToInt().coerceIn(0, actions.lastIndex)
                     true
                 }
-                onClick(label = if (english) "Perform selected video action"
-                    else "Ejecutar acción del vídeo") {
+                onClick(label = NativeYouTubePlayerStrings.get(uiLanguage, "performSelected")) {
                     runAction(gestureIndex)
                     true
                 }
                 customActions = listOf(
-                    CustomAccessibilityAction(if (english) "Previous action" else "Acción anterior") {
+                    CustomAccessibilityAction(NativeYouTubePlayerStrings.get(uiLanguage, "previous")) {
                         gestureIndex = (gestureIndex - 1).coerceAtLeast(0)
                         true
                     },
-                    CustomAccessibilityAction(if (english) "Next action" else "Acción siguiente") {
+                    CustomAccessibilityAction(NativeYouTubePlayerStrings.get(uiLanguage, "next")) {
                         gestureIndex = (gestureIndex + 1).coerceAtMost(actions.lastIndex)
                         true
                     },
-                    CustomAccessibilityAction(if (english) "Perform action" else "Ejecutar acción") {
+                    CustomAccessibilityAction(NativeYouTubePlayerStrings.get(uiLanguage, "perform")) {
                         runAction(gestureIndex)
                         true
                     }
@@ -271,12 +266,11 @@ fun NativeYouTubePlayer(
                 modifier = Modifier.fillMaxWidth().height(250.dp)
             )
             if (!state.ready && state.error == 0) {
-                Text(if (english) "Loading YouTube player…" else "Cargando reproductor de YouTube…")
+                Text(NativeYouTubePlayerStrings.get(uiLanguage, "loading"))
             }
             if (state.error != 0) {
                 Text(
-                    if (english) "YouTube has blocked embedded playback (error " + state.error + "). Use the original link."
-                    else "YouTube no permite reproducir aquí este vídeo (error " + state.error + "). Utiliza el enlace original."
+                    NativeYouTubePlayerStrings.blockedMessage(uiLanguage, state.error)
                 )
             }
             val enabled = state.ready && state.error == 0
@@ -284,19 +278,18 @@ fun NativeYouTubePlayer(
                 Button(enabled = enabled, onClick = {
                     issue("yt.seekTo(Math.max(0,yt.getCurrentTime()-30),true);")
                 }) {
-                    Text(if (english) "Back 30 seconds" else "Retroceder 30 segundos")
+                    Text(actions[1])
                 }
                 Button(enabled = enabled, onClick = {
                     issue(if (state.playing) "yt.pauseVideo();" else "yt.playVideo();")
                 }) {
-                    Text(if (state.playing) (if (english) "Pause" else "Pausar")
-                        else (if (english) "Play" else "Reproducir"))
+                    Text(NativeYouTubePlayerStrings.get(uiLanguage, if (state.playing) "pause" else "play"))
                 }
             }
             Button(enabled = enabled, onClick = {
                 issue("yt.seekTo(yt.getCurrentTime()+30,true);")
             }) {
-                Text(if (english) "Forward 30 seconds" else "Avanzar 30 segundos")
+                Text(actions[2])
             }
             if (state.length > 0) {
                 Slider(
@@ -309,7 +302,7 @@ fun NativeYouTubePlayer(
                         seeking = false
                     },
                     modifier = Modifier.fillMaxWidth().semantics {
-                        contentDescription = if (english) "Video position" else "Posición del vídeo"
+                        contentDescription = NativeYouTubePlayerStrings.get(uiLanguage, "position")
                         stateDescription = timeText(state.seconds) + " / " + timeText(state.length)
                     }
                 )
@@ -321,47 +314,45 @@ fun NativeYouTubePlayer(
             // Normal button remains an accessible fallback for users whose
             // TalkBack reading-control settings reserve the up/down gesture.
             Button(onClick = { runAction(gestureIndex) }) {
-                Text((if (english) "Perform: " else "Ejecutar: ") + actions[gestureIndex])
+                Text(NativeYouTubePlayerStrings.get(uiLanguage, "performPrefix") + actions[gestureIndex])
             }
         } else {
             Text(
-                if (english) "This item does not contain a YouTube video link."
-                else "Este contenido no incluye un enlace directo a un vídeo de YouTube."
+                NativeYouTubePlayerStrings.get(uiLanguage, "notVideo")
             )
         }
         if (videoId != null) {
             if (!account.authenticated) {
                 Text(
-                    if (english) "To like, subscribe or comment, connect a Google account. Playback does not require it."
-                    else "Para indicar Me gusta, suscribirte o comentar, conecta Google. Reproducir no requiere una cuenta."
+                    NativeYouTubePlayerStrings.get(uiLanguage, "signInHelp")
                 )
                 Button(onClick = onAuthorize) {
-                    Text(if (english) "Sign in with Google" else "Iniciar sesión con Google")
+                    Text(NativeYouTubePlayerStrings.get(uiLanguage, "signIn"))
                 }
             } else {
-                Text(if (english) "Google account connected" else "Cuenta de Google conectada")
+                Text(NativeYouTubePlayerStrings.get(uiLanguage, "connected"))
                 if (account.videoState.rating == "like") {
-                    Text(if (english) "You already liked this video." else "Ya has indicado Me gusta.")
+                    Text(NativeYouTubePlayerStrings.get(uiLanguage, "liked"))
                 } else {
                     OutlinedButton(
                         enabled = !account.busy,
                         onClick = { runAction(3) }
-                    ) { Text(if (english) "Like this video" else "Me gusta") }
+                    ) { Text(NativeYouTubePlayerStrings.get(uiLanguage, "like")) }
                 }
                 if (account.videoState.subscribed == true) {
-                    Text(if (english) "Already subscribed to the channel." else "Ya estás suscrito al canal.")
+                    Text(NativeYouTubePlayerStrings.get(uiLanguage, "alreadySubscribed"))
                 } else {
                     OutlinedButton(
                         enabled = !account.busy,
                         onClick = { runAction(4) }
-                    ) { Text(if (english) "Subscribe to channel" else "Suscribirme al canal") }
+                    ) { Text(NativeYouTubePlayerStrings.get(uiLanguage, "subscribe")) }
                 }
                 OutlinedButton(
                     enabled = !account.busy,
                     onClick = { editingComment = true }
-                ) { Text(if (english) "Comment on this video" else "Comentar este vídeo") }
+                ) { Text(NativeYouTubePlayerStrings.get(uiLanguage, "comment")) }
                 TextButton(onClick = account::signOut) {
-                    Text(if (english) "Sign out" else "Cerrar sesión de YouTube")
+                    Text(NativeYouTubePlayerStrings.get(uiLanguage, "signOut"))
                 }
             }
             if (account.message.isNotEmpty()) Text(account.message)
@@ -370,7 +361,7 @@ fun NativeYouTubePlayer(
             TextButton(onClick = {
                 context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(item.openUrl)))
             }) {
-                Text(if (english) "Open on YouTube (alternative)" else "Abrir en YouTube (alternativa)")
+                Text(NativeYouTubePlayerStrings.get(uiLanguage, "alternative"))
             }
         }
         if (item.summary.isNotBlank()) Text(item.summary)
@@ -379,12 +370,12 @@ fun NativeYouTubePlayer(
     if (editingComment && videoId != null) {
         AlertDialog(
             onDismissRequest = { editingComment = false },
-            title = { Text(if (english) "Comment on YouTube" else "Comentar en YouTube") },
+            title = { Text(NativeYouTubeRowStrings.get(uiLanguage, "commentTitle")) },
             text = {
                 TextField(
                     value = commentText,
                     onValueChange = { commentText = it },
-                    label = { Text(if (english) "Your comment" else "Tu comentario") },
+                    label = { Text(NativeYouTubeRowStrings.get(uiLanguage, "yourComment")) },
                     maxLines = 5
                 )
             },
@@ -399,11 +390,11 @@ fun NativeYouTubePlayer(
                             }
                         }
                     }
-                ) { Text(if (english) "Publish comment" else "Publicar comentario") }
+                ) { Text(NativeYouTubeRowStrings.get(uiLanguage, "publish")) }
             },
             dismissButton = {
                 TextButton(onClick = { editingComment = false }) {
-                    Text(if (english) "Cancel" else "Cancelar")
+                    Text(NativeYouTubeRowStrings.get(uiLanguage, "cancel"))
                 }
             }
         )

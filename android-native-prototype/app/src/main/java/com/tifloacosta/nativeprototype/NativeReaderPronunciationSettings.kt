@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun NativePronunciationSettings(english: Boolean, onBack: () -> Unit) {
     val context = LocalContext.current
+    val uiLanguage = LocalNativeUiLanguage.current
     val store = remember { NativePronunciationStore(context.applicationContext) }
     var rules by remember { mutableStateOf(store.read()) }
     var original by remember { mutableStateOf("") }
@@ -40,30 +41,27 @@ fun NativePronunciationSettings(english: Boolean, onBack: () -> Unit) {
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         TextButton(onClick = onBack) {
-            Text(if (english) "Back to audio and voices" else "Volver a Audio y voces")
+            Text(NativeReaderPronunciationStrings.get(uiLanguage, "back"))
         }
         Text(
-            if (english) "Pronunciation dictionary" else "Diccionario de pronunciación",
+            NativeReaderPronunciationStrings.get(uiLanguage, "title"),
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.semantics { heading() }
         )
         Text(
-            if (english) "Replace a word or phrase only while TifloLector speaks. " +
-                "The original book, reading position and bookmarks remain unchanged."
-            else "Cambia la pronunciación de una palabra o expresión al escucharla. " +
-                "El documento original, su posición y sus marcas no se modifican."
+            NativeReaderPronunciationStrings.get(uiLanguage, "help")
         )
         TextField(
             value = original,
             onValueChange = { original = it.take(80) },
-            label = { Text(if (english) "Written word" else "Palabra escrita") },
+            label = { Text(NativeReaderPronunciationStrings.get(uiLanguage, "written")) },
             singleLine = true,
             modifier = Modifier.fillMaxWidth()
         )
         TextField(
             value = spoken,
             onValueChange = { spoken = it.take(120) },
-            label = { Text(if (english) "Speak as" else "Pronunciar como") },
+            label = { Text(NativeReaderPronunciationStrings.get(uiLanguage, "spoken")) },
             singleLine = true,
             modifier = Modifier.fillMaxWidth()
         )
@@ -76,18 +74,18 @@ fun NativePronunciationSettings(english: Boolean, onBack: () -> Unit) {
                 )
                 if (original.isBlank() || spoken.isBlank() || next.size == rules.size &&
                     next.none { it.original.equals(original.trim(), true) }) {
-                    feedback = if (english) "Enter both fields." else "Completa los dos campos."
+                    feedback = NativeReaderPronunciationStrings.get(uiLanguage, "fields")
                 } else {
                     store.save(next)
                     rules = next
                     original = ""
                     spoken = ""
-                    feedback = if (english) "Pronunciation saved" else "Pronunciación guardada"
+                    feedback = NativeReaderPronunciationStrings.get(uiLanguage, "saved")
                 }
             }
-        ) { Text(if (english) "Save pronunciation" else "Guardar pronunciación") }
+        ) { Text(NativeReaderPronunciationStrings.get(uiLanguage, "save")) }
         if (rules.isEmpty()) {
-            Text(if (english) "No pronunciation entries yet." else "Todavía no hay pronunciaciones guardadas.")
+            Text(NativeReaderPronunciationStrings.get(uiLanguage, "empty"))
         } else {
             rules.forEach { rule ->
                 TextButton(
@@ -95,7 +93,7 @@ fun NativePronunciationSettings(english: Boolean, onBack: () -> Unit) {
                     onClick = { removing = rule }
                 ) {
                     Text(rule.original + ": " + rule.spoken +
-                        (if (english) ", delete" else ", eliminar"))
+                        NativeReaderPronunciationStrings.get(uiLanguage, "deleteAction"))
                 }
             }
         }
@@ -105,7 +103,7 @@ fun NativePronunciationSettings(english: Boolean, onBack: () -> Unit) {
     removing?.let { rule ->
         AlertDialog(
             onDismissRequest = { removing = null },
-            title = { Text(if (english) "Delete pronunciation?" else "¿Eliminar pronunciación?") },
+            title = { Text(NativeReaderPronunciationStrings.get(uiLanguage, "confirm")) },
             text = { Text(rule.original + ": " + rule.spoken) },
             confirmButton = {
                 TextButton(onClick = {
@@ -113,11 +111,11 @@ fun NativePronunciationSettings(english: Boolean, onBack: () -> Unit) {
                     store.save(next)
                     rules = next
                     removing = null
-                }) { Text(if (english) "Delete" else "Eliminar") }
+                }) { Text(NativeReaderPronunciationStrings.get(uiLanguage, "delete")) }
             },
             dismissButton = {
                 TextButton(onClick = { removing = null }) {
-                    Text(if (english) "Cancel" else "Cancelar")
+                    Text(NativeReaderPronunciationStrings.get(uiLanguage, "cancel"))
                 }
             }
         )

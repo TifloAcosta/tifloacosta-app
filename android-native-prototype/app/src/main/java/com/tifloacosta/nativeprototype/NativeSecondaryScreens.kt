@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.AlertDialog
@@ -98,6 +100,7 @@ private fun NativeCatalogResult(
     onFavoriteChange: () -> Unit
 ) {
     val context = LocalContext.current
+    val uiLanguage = LocalNativeUiLanguage.current
     var details by remember(item.id, kind) { mutableStateOf(false) }
     Column(modifier = Modifier.fillMaxWidth().padding(vertical = 5.dp)) {
         OutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = {
@@ -106,7 +109,7 @@ private fun NativeCatalogResult(
             Text(item.title)
         }
         if (favorites.list().contains(kind to item.id)) {
-            Text(if (english) "Favorite" else "Favorito")
+            Text(NativeSecondaryStrings.get(uiLanguage, "favorite"))
         }
     }
     if (details) AlertDialog(
@@ -114,24 +117,24 @@ private fun NativeCatalogResult(
         title = { Text(item.title) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text(item.summary.ifBlank { if (english) "No additional description" else "Sin descripción adicional" })
+                Text(item.summary.ifBlank { NativeSecondaryStrings.get(uiLanguage, "noDescription") })
                 TextButton(onClick = {
                     favorites.toggle(kind, item.id)
                     onFavoriteChange()
                 }) {
                     Text(if (favorites.list().contains(kind to item.id))
-                        (if (english) "Remove favorite" else "Quitar favorito")
-                    else (if (english) "Add favorite" else "Añadir a favoritos"))
+                        NativeSecondaryStrings.get(uiLanguage, "remove")
+                    else NativeSecondaryStrings.get(uiLanguage, "add"))
                 }
             }
         },
         confirmButton = {
             if (item.url.isNotBlank()) TextButton(onClick = {
                 nativeExternal(context, item.url)
-            }) { Text(if (english) "Open source" else "Abrir origen") }
+            }) { Text(NativeSecondaryStrings.get(uiLanguage, "openSource")) }
         },
         dismissButton = { TextButton(onClick = { details = false }) {
-            Text(if (english) "Close" else "Cerrar")
+            Text(NativeSecondaryStrings.get(uiLanguage, "close"))
         } }
     )
 }
@@ -158,10 +161,10 @@ fun NativeSecondaryScreen(
     val all = catalog.news.map { "news" to it } +
         catalog.resources.map { "resource" to it } +
         catalog.videos.map { "video" to it }
-    val lang = if (english) "en" else "es"
+    val uiLanguage = LocalNativeUiLanguage.current
     val filtered = when (destination) {
         NativeDestinations.NEW_CONTENT -> all.filter {
-            it.first == "resource" && it.second.language == lang && it.second.isNew
+            it.first == "resource" && it.second.isNew
         }.sortedByDescending { it.second.newsDate }
         NativeDestinations.FAVORITES -> {
             favoriteGeneration
@@ -169,38 +172,41 @@ fun NativeSecondaryScreen(
             all.filter { (kind, item) -> refs.contains(kind to item.id) }
         }
         NativeDestinations.SEARCH -> all.filter { (_, item) ->
-            item.language == lang && query.length >= 2 &&
+            query.length >= 2 &&
                 (item.title.contains(query.trim(), ignoreCase = true) ||
                     item.summary.contains(query.trim(), ignoreCase = true))
         }
         else -> emptyList()
     }
     val heading = when (destination) {
-        NativeDestinations.SEARCH -> if (english) "Search" else "Buscar"
-        NativeDestinations.NEW_CONTENT -> if (english) "What's new" else "Novedades"
-        NativeDestinations.DOWNLOADS -> if (english) "Downloads" else "Descargas"
-        NativeDestinations.FAVORITES -> if (english) "Favorites" else "Favoritos"
-        NativeDestinations.PODCAST -> "Podcasts"
-        NativeDestinations.CONTACT -> if (english) "Contact" else "Contacto"
-        NativeDestinations.PRIVACY -> if (english) "Privacy and accessibility" else "Privacidad y accesibilidad"
-        NativeDestinations.SETTINGS -> if (english) "Settings" else "Configuración"
-        NativeDestinations.SOUND_SEARCH -> if (english) "Sound effects" else "Bancos de sonidos"
-        else -> if (english) "YouTube search" else "Buscar en YouTube"
+        NativeDestinations.SEARCH -> NativeUiText.get(uiLanguage, "search")
+        NativeDestinations.NEW_CONTENT -> NativeUiText.get(uiLanguage, "newContent")
+        NativeDestinations.DOWNLOADS -> NativeUiText.get(uiLanguage, "downloads")
+        NativeDestinations.FAVORITES -> NativeUiText.get(uiLanguage, "favorites")
+        NativeDestinations.PODCAST -> NativePodcastStrings.get(uiLanguage, "title")
+        NativeDestinations.CONTACT -> NativeUiText.get(uiLanguage, "contact")
+        NativeDestinations.PRIVACY -> NativeUiText.get(uiLanguage, "privacy")
+        NativeDestinations.SETTINGS -> NativeUiText.get(uiLanguage, "settings")
+        NativeDestinations.SOUND_SEARCH -> NativeUiText.get(uiLanguage, "sounds")
+        else -> NativeUiText.get(uiLanguage, "youtubeSearch")
     }
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp),
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp).then(
+        if (destination == NativeDestinations.SETTINGS) Modifier.verticalScroll(rememberScrollState())
+        else Modifier
+    ),
         verticalArrangement = Arrangement.spacedBy(6.dp)) {
-        TextButton(onClick = onBack) { Text(if (english) "Back" else "Volver") }
+        TextButton(onClick = onBack) { Text(NativeUiText.get(uiLanguage, "back")) }
         Text(heading, style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.semantics { heading() })
         if (destination in setOf(NativeDestinations.SEARCH, NativeDestinations.NEW_CONTENT, NativeDestinations.FAVORITES)) {
             if (destination == NativeDestinations.SEARCH) {
                 OutlinedTextField(query, { query = it.take(160) },
-                    label = { Text(if (english) "Search news, resources and videos" else "Buscar noticias, recursos y vídeos") },
+                    label = { Text(NativeSecondaryStrings.get(uiLanguage, "searchLabel")) },
                     modifier = Modifier.fillMaxWidth(), singleLine = true)
             }
-            if (filtered.isEmpty()) Text(if (english) "No results" else "Sin resultados")
+            if (filtered.isEmpty()) Text(NativeSecondaryStrings.get(uiLanguage, "empty"))
             else {
-                Text(if (english) "${filtered.size} results" else "${filtered.size} resultados")
+                Text("${filtered.size} " + NativeSecondaryStrings.get(uiLanguage, "result"))
                 LazyColumn {
                     items(filtered, key = { it.first + ":" + it.second.id }) { (kind, item) ->
                         NativeCatalogResult(item, kind, english, favorites, onOpenVideo) {
@@ -213,25 +219,25 @@ fun NativeSecondaryScreen(
             NativeDestinations.DOWNLOADS -> {
                 if (showSounds) {
                     TextButton(onClick = { showSounds = false }) {
-                        Text(if (english) "Back to Downloads" else "Volver a Descargas")
+                        Text(NativeSecondaryStrings.get(uiLanguage, "backDownloads"))
                     }
                     NativeSoundSearchScreen(english)
                 } else {
                     TextButton(onClick = { showSounds = true }) {
-                        Text(if (english) "Search sound effects" else "Buscar efectos de sonido")
+                        Text(NativeSecondaryStrings.get(uiLanguage, "sounds"))
                     }
                     NativeDownloadScreen(english, initialText)
                 }
             }
             NativeDestinations.PODCAST -> NativePodcastScreen(english, media)
-            NativeDestinations.CONTACT -> NativeContactScreen(english)
-            NativeDestinations.PRIVACY -> NativePrivacyScreen(english)
+            NativeDestinations.CONTACT -> NativeContactScreen()
+            NativeDestinations.PRIVACY -> NativePrivacyScreen()
             NativeDestinations.SETTINGS -> NativeSettingsScreen(english)
             NativeDestinations.SOUND_SEARCH -> NativeSoundSearchScreen(english)
             NativeDestinations.YOUTUBE_SEARCH -> {
-                Text(if (english) "Public YouTube results" else "Resultados públicos de YouTube")
+                Text(NativeSecondaryStrings.get(uiLanguage, "youtubeResults"))
                 TextButton(onClick = onSearchYouTube) {
-                    Text(if (english) "Search videos" else "Buscar vídeos")
+                    Text(NativeSecondaryStrings.get(uiLanguage, "searchVideos"))
                 }
             }
         }
@@ -240,8 +246,9 @@ fun NativeSecondaryScreen(
 }
 
 @Composable
-private fun NativeContactScreen(english: Boolean) {
+private fun NativeContactScreen() {
     val context = LocalContext.current
+    val uiLanguage = LocalNativeUiLanguage.current
     val contacts = listOf(
         "WhatsApp" to "https://wa.me/34603516398",
         "Instagram" to "https://www.instagram.com/tifloacosta/",
@@ -249,7 +256,7 @@ private fun NativeContactScreen(english: Boolean) {
     )
     var book by rememberSaveable { mutableStateOf(false) }
     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-        Text(if (english) "Direct contact" else "Contacto directo",
+        Text(NativeSettingsDetailStrings.get(uiLanguage, "directContact"),
             style = MaterialTheme.typography.titleMedium)
         contacts.forEach { (label, url) ->
             Button(modifier = Modifier.fillMaxWidth(), onClick = { nativeExternal(context, url) }) {
@@ -259,65 +266,88 @@ private fun NativeContactScreen(english: Boolean) {
         Button(modifier = Modifier.fillMaxWidth(), onClick = {
             val email = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:tifloacosta@gmail.com"))
             runCatching { context.startActivity(email) }
-        }) { Text(if (english) "Send email" else "Enviar correo") }
+        }) { Text(NativeSettingsDetailStrings.get(uiLanguage, "email")) }
         OutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = { book = true }) {
-            Text(if (english) "My book" else "Mi libro")
+            Text(NativeSettingsDetailStrings.get(uiLanguage, "myBook"))
         }
     }
     if (book) AlertDialog(
         onDismissRequest = { book = false },
         title = { Text("La vida vista desde donde estoy") },
-        text = { Text(if (english) "Tony Acosta's book, available in print and Kindle." else
-            "Libro de Tony Acosta, disponible en papel y Kindle.") },
+        text = { Text(NativeSettingsDetailStrings.get(uiLanguage, "bookDescription")) },
         confirmButton = { TextButton(onClick = {
             nativeExternal(context, "https://www.amazon.es/s?k=9798185909218&i=stripbooks")
-        }) { Text(if (english) "Print edition" else "Edición en papel") } },
-        dismissButton = { TextButton(onClick = { book = false }) { Text(if (english) "Close" else "Cerrar") } }
+        }) { Text(NativeSettingsDetailStrings.get(uiLanguage, "print")) } },
+        dismissButton = { TextButton(onClick = { book = false }) { Text(NativeSettingsDetailStrings.get(uiLanguage, "close")) } }
     )
 }
 
 @Composable
-private fun NativePrivacyScreen(english: Boolean) {
+private fun NativePrivacyScreen() {
     val context = LocalContext.current
+    val uiLanguage = LocalNativeUiLanguage.current
     Column(verticalArrangement = Arrangement.spacedBy(9.dp)) {
-        Text(if (english)
-            "You can use TifloAcosta without creating an account."
-            else "Puedes utilizar TifloAcosta sin crear una cuenta.")
-        Text(if (english)
-            "Imported documents, reading progress and bookmarks remain in the app's private storage."
-            else "Los documentos, las posiciones de lectura y las marcas permanecen en el almacenamiento privado de la aplicación.")
-        Text(if (english)
-            "Notifications are optional. You can change Android permissions in system settings."
-            else "Las notificaciones son opcionales. Puedes cambiar los permisos desde los ajustes de Android.")
-        Text(if (english)
-            "You control when a document or link is shared with another app."
-            else "Tú decides cuándo compartir un documento o enlace con otras aplicaciones.")
+        Text(NativeSettingsDetailStrings.get(uiLanguage, "account"))
+        Text(NativeSettingsDetailStrings.get(uiLanguage, "storage"))
+        Text(NativeSettingsDetailStrings.get(uiLanguage, "notifications"))
+        Text(NativeSettingsDetailStrings.get(uiLanguage, "sharing"))
         Button(onClick = { nativeExternal(context, "https://tifloacosta.com/privacidad/") }) {
-            Text(if (english) "Full privacy policy" else "Política de privacidad completa")
+            Text(NativeSettingsDetailStrings.get(uiLanguage, "fullPolicy"))
         }
+    }
+}
+
+@Composable
+private fun NativeAccessibilityScreen() {
+    val uiLanguage = LocalNativeUiLanguage.current
+    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        Text(NativeSettingsAccessibilityStrings.get(uiLanguage, "talkBack"))
+        Text(NativeSettingsAccessibilityStrings.get(uiLanguage, "navigation"))
+        Text(NativeSettingsAccessibilityStrings.get(uiLanguage, "largerText"))
+        Text(NativeSettingsAccessibilityStrings.get(uiLanguage, "reading"))
+        Text(NativeSettingsAccessibilityStrings.get(uiLanguage, "originalContent"))
+        Text(NativeSettingsAccessibilityStrings.get(uiLanguage, "feedback"))
     }
 }
 
 @Composable
 private fun NativeSettingsScreen(english: Boolean) {
     val context = LocalContext.current
+    val uiLanguage = LocalNativeUiLanguage.current
     val prefs = remember(context) {
         context.getSharedPreferences("native-app-settings-v1", Context.MODE_PRIVATE)
     }
     var language by remember { mutableStateOf(prefs.getString("language", "") ?: "") }
     var theme by remember { mutableStateOf(prefs.getString("theme", "system") ?: "system") }
     var enlarged by remember { mutableStateOf(prefs.getBoolean("enlarged", false)) }
+    var details by rememberSaveable { mutableStateOf("") }
+    if (details.isNotEmpty()) {
+        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            TextButton(onClick = { details = "" }) { Text(NativeUiText.get(uiLanguage, "back")) }
+            Text(if (details == "guide") NativeUsageGuideStrings.get(uiLanguage, "guide")
+                else NativeUiText.get(uiLanguage, details),
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.semantics { heading() })
+            when (details) {
+                "privacy" -> NativePrivacyScreen()
+                "accessibility" -> NativeAccessibilityScreen()
+                "guide" -> NativeUsageGuideScreen()
+                else -> NativeContactScreen()
+            }
+        }
+        return
+    }
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        Text(if (english) "Language" else "Idioma", style = MaterialTheme.typography.titleMedium)
-        listOf("es" to "Español", "en" to "English").forEach { (code, label) ->
+        Text(NativeUiText.get(uiLanguage, "language"), style = MaterialTheme.typography.titleMedium)
+        NativeUiText.choices.forEach { (code, label) ->
             OutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = {
                 language = code; prefs.edit().putString("language", code).apply()
             }) { Text(label + if (language == code) " ✓" else "") }
         }
-        Text(if (english) "Appearance" else "Aspecto", style = MaterialTheme.typography.titleMedium)
-        listOf("system" to (if (english) "System" else "Sistema"),
-            "light" to (if (english) "Light" else "Claro"),
-            "dark" to (if (english) "Dark" else "Oscuro")).forEach { (code, label) ->
+        Text(NativeUiText.get(uiLanguage, "appearance"), style = MaterialTheme.typography.titleMedium)
+        listOf("system" to NativeUiText.get(uiLanguage, "system"),
+            "light" to NativeUiText.get(uiLanguage, "light"),
+            "dark" to NativeUiText.get(uiLanguage, "dark")).forEach { (code, label) ->
             OutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = {
                 theme = code; prefs.edit().putString("theme", code).apply()
             }) { Text(label + if (theme == code) " ✓" else "") }
@@ -326,11 +356,21 @@ private fun NativeSettingsScreen(english: Boolean) {
             Checkbox(checked = enlarged, onCheckedChange = {
                 enlarged = it; prefs.edit().putBoolean("enlarged", it).apply()
             })
-            Text(if (english) "Larger text" else "Texto más grande")
+            Text(NativeUiText.get(uiLanguage, "largerText"))
         }
-        Text(if (english)
-            "Settings are saved on this device. Reader voice settings are inside TifloLector."
-            else "Los ajustes se guardan en este dispositivo. Las voces se configuran dentro de TifloLector.")
+        Text(NativeUiText.get(uiLanguage, "settingsNote"))
+        Button(onClick = { details = "guide" }, modifier = Modifier.fillMaxWidth()) {
+            Text(NativeUsageGuideStrings.get(uiLanguage, "guide"))
+        }
+        Button(onClick = { details = "privacy" }, modifier = Modifier.fillMaxWidth()) {
+            Text(NativeUiText.get(uiLanguage, "privacy"))
+        }
+        Button(onClick = { details = "accessibility" }, modifier = Modifier.fillMaxWidth()) {
+            Text(NativeUiText.get(uiLanguage, "accessibility"))
+        }
+        Button(onClick = { details = "contact" }, modifier = Modifier.fillMaxWidth()) {
+            Text(NativeUiText.get(uiLanguage, "contact"))
+        }
         Button(onClick = {
             prefs.edit().putBoolean("push-consent", true).apply()
             val consent = Intent("com.tifloacosta.app.ENABLE_NOTIFICATIONS").apply {
@@ -338,12 +378,12 @@ private fun NativeSettingsScreen(english: Boolean) {
             }
             runCatching { context.sendBroadcast(consent) }
         }) {
-            Text(if (english) "Enable notifications" else "Activar notificaciones")
+            Text(NativeUiText.get(uiLanguage, "notifications"))
         }
         Button(onClick = {
             val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                 Uri.parse("package:" + context.packageName))
             runCatching { context.startActivity(intent) }
-        }) { Text(if (english) "Android notification permissions" else "Permisos y notificaciones de Android") }
+        }) { Text(NativeUiText.get(uiLanguage, "androidPermissions")) }
     }
 }

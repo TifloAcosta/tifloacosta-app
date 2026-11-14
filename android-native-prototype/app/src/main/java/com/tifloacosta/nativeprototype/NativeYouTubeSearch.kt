@@ -85,6 +85,7 @@ fun NativeYouTubeSearch(
     onPlay: (CatalogItem) -> Unit
 ) {
     val scope = rememberCoroutineScope()
+    val uiLanguage = LocalNativeUiLanguage.current
     val accountContext = androidx.compose.ui.platform.LocalContext.current
     var input by remember { mutableStateOf("") }
     var lastQuery by remember { mutableStateOf("") }
@@ -97,27 +98,27 @@ fun NativeYouTubeSearch(
         val q = if (more) lastQuery else input.trim()
         if (q.length < 2 || busy || (more && page.nextPage.isBlank())) return
         busy = true
-        status = if (english) "Searching YouTube" else "Buscando en YouTube"
+        status = NativeYouTubeSearchStrings.get(uiLanguage, "searching")
         scope.launch {
             try {
                 val next = NativeYouTubeSearchRepository.search(q, if (more) page.nextPage else "")
                 lastQuery = q
                 page = next
                 results = if (more) results + next.videos else next.videos
-                status = if (english) "${results.size} results" else "${results.size} resultados"
+                status = "${results.size} " + NativeYouTubeSearchStrings.get(uiLanguage, "results")
             } catch (_: Exception) {
-                status = if (english) "YouTube search unavailable" else "No se pudo completar la búsqueda de YouTube"
+                status = NativeYouTubeSearchStrings.get(uiLanguage, "unavailable")
             } finally { busy = false }
         }
     }
 
     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-        Text(if (english) "My YouTube subscriptions" else "Mis suscripciones de YouTube",
+        Text(NativeYouTubeSearchStrings.get(uiLanguage, "subscriptions"),
             style = MaterialTheme.typography.titleMedium)
         if (account.authenticated) {
             Button(enabled = !account.subscriptionsBusy,
                 onClick = { scope.launch { account.loadSubscriptions() } }) {
-                Text(if (english) "Load subscribed channels" else "Consultar canales suscritos")
+                Text(NativeYouTubeSearchStrings.get(uiLanguage, "channels"))
             }
             account.subscribedChannels.forEach { (id, title) ->
                 TextButton(onClick = {
@@ -133,26 +134,25 @@ fun NativeYouTubeSearch(
             if (account.subscriptionsNextPageToken.isNotBlank()) {
                 TextButton(enabled = !account.subscriptionsBusy,
                     onClick = { scope.launch { account.loadSubscriptions(more = true) } }) {
-                    Text(if (english) "Show ten more channels" else "Mostrar diez canales más")
+                    Text(NativeYouTubeSearchStrings.get(uiLanguage, "tenChannels"))
                 }
             }
             if (account.subscriptionsBusy) {
-                Text(if (english) "Loading subscriptions" else "Cargando suscripciones")
+                Text(NativeYouTubeSearchStrings.get(uiLanguage, "loading"))
             }
             if (account.subscriptionMessage.isNotBlank()) Text(account.subscriptionMessage)
         } else {
             Button(onClick = onAuthorize) {
-                Text(if (english) "Sign in to Google to see subscriptions"
-                    else "Iniciar sesión con Google para ver suscripciones")
+                Text(NativeYouTubeSearchStrings.get(uiLanguage, "signIn"))
             }
         }
-        Text(if (english) "Search public YouTube videos" else "Buscar vídeos públicos de YouTube",
+        Text(NativeYouTubeSearchStrings.get(uiLanguage, "publicVideos"),
             style = MaterialTheme.typography.titleMedium)
         OutlinedTextField(input, { input = it.take(150) }, modifier = Modifier.fillMaxWidth(),
-            label = { Text(if (english) "YouTube search" else "Búsqueda en YouTube") },
+            label = { Text(NativeYouTubeSearchStrings.get(uiLanguage, "searchLabel")) },
             singleLine = true)
         Button(enabled = !busy && input.trim().length >= 2, onClick = { search(false) }) {
-            Text(if (english) "Search" else "Buscar")
+            Text(NativeYouTubeSearchStrings.get(uiLanguage, "search"))
         }
         if (status.isNotEmpty()) Text(status)
         if (results.isNotEmpty()) {
@@ -164,7 +164,7 @@ fun NativeYouTubeSearch(
                 }
                 if (page.nextPage.isNotBlank()) {
                     item { TextButton(enabled = !busy, onClick = { search(true) }) {
-                        Text(if (english) "Show ten more" else "Mostrar diez más")
+                        Text(NativeYouTubeSearchStrings.get(uiLanguage, "tenMore"))
                     } }
                 }
             }

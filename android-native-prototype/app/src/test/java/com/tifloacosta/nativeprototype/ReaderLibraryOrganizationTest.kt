@@ -62,4 +62,36 @@ class ReaderLibraryOrganizationTest {
         assertEquals("Imágenes con OCR", NativeReaderBookFilters.formatFiltersEs[11])
         assertEquals("Cola de lectura", NativeReaderBookFilters.formatFiltersEs[12])
     }
+
+    @Test fun sortByLastReadingPlacesUnopenedDocumentsAtEnd() {
+        val books = listOf(book("new", "Nuevo"), book("old", "Antes", lastReadAt = 100),
+            book("recent", "Ahora", lastReadAt = 900))
+        assertEquals("Última lectura", NativeReaderBookFilters.sortEs[5])
+        assertEquals(listOf("recent", "old", "new"),
+            NativeReaderBookFilters.apply(books, order = 5).map { it.id })
+    }
+
+    @Test fun sortByLastOpenedIsIndependentFromPlayback() {
+        val books = listOf(
+            book("read", "Leído", lastReadAt = 900).copy(lastOpenedAt = 10),
+            book("opened", "Abierto sin reproducir").copy(lastOpenedAt = 1000),
+            book("never", "Nunca abierto")
+        )
+        assertEquals("Último abierto", NativeReaderBookFilters.sortEs[6])
+        assertEquals(listOf("opened", "read", "never"),
+            NativeReaderBookFilters.apply(books, order = 6).map { it.id })
+    }
+
+    @Test fun TalkBackRowDetailLevelsKeepTitleAndProgressTogether() {
+        val item = book("one", "El principito", folder = "Narrativa")
+            .copy(format = "epub")
+        val basic = NativeReaderRowPresentation.label(item, "2 % leído", 0, false)
+        assertEquals("El principito. 2 % leído", basic)
+        assertEquals("El principito. 2 % leído. Formato: EPUB",
+            NativeReaderRowPresentation.label(item, "2 % leído", 1, false))
+        assertEquals("El principito. 2 % leído. Formato: EPUB. Carpeta: Narrativa",
+            NativeReaderRowPresentation.label(item, "2 % leído", 2, false))
+        assertEquals("The Little Prince. 2% read. Format: PDF. Folder: No folder",
+            NativeReaderRowPresentation.label(book("en", "The Little Prince").copy(format = "pdf"), "2% read", 2, true))
+    }
 }

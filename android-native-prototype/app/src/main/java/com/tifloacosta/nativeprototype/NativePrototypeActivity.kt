@@ -121,7 +121,7 @@ class NativePrototypeActivity : ComponentActivity() {
                 else -> isSystemInDarkTheme()
             }
             val density = LocalDensity.current
-            CompositionLocalProvider(LocalDensity provides Density(
+            CompositionLocalProvider(LocalNativeUiLanguage provides NativeUiText.normalize(selectedLanguage), LocalDensity provides Density(
                 density.density,
                 (density.fontScale * if (selectedEnlarged) 1.25f else 1f).coerceAtMost(3.5f)
             )) {
@@ -173,11 +173,12 @@ private fun AdjustableSelector(
     english: Boolean,
     onSelected: (Int) -> Unit
 ) {
+    val uiLanguage = LocalNativeUiLanguage.current
     if (choices.isEmpty()) return
     val index = selected.coerceIn(0, choices.lastIndex)
     val value = choices[index]
-    val previous = if (english) "Previous option" else "Opción anterior"
-    val next = if (english) "Next option" else "Opción siguiente"
+    val previous = NativeHomeAdjustableStrings.get(uiLanguage, "previous")
+    val next = NativeHomeAdjustableStrings.get(uiLanguage, "next")
 
     Column(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
         Text(
@@ -238,8 +239,7 @@ private fun PrototypeHome(
         }
     }
     LaunchedEffect(Unit) { account.checkSession() }
-    val language = if (languageOverride in listOf("es", "en")) languageOverride
-        else if (Locale.getDefault().language == "en") "en" else "es"
+    val language = NativeUiText.normalize(languageOverride, Locale.getDefault().language)
     val english = language == "en"
     var loaded by remember { mutableStateOf(CatalogLoad(Catalog())) }
     var loading by remember { mutableStateOf(true) }
@@ -289,31 +289,34 @@ private fun PrototypeHome(
         mediaLoading = false
     }
 
-    val news = loaded.catalog.news.filter { it.language == language }
-    val resources = loaded.catalog.resources.filter { it.language == language }
-    val videoCatalog = loaded.catalog.videos.filter { it.language == language }
+    // Editorial material stays in its source language; changing the app
+    // interface must not hide publications in another language.
+    val news = loaded.catalog.news
+    val resources = loaded.catalog.resources
+    val videoCatalog = loaded.catalog.videos
     val newsCategories = CatalogLogic.newsCategories(news)
     val resourceCategories = CatalogLogic.resourceCategories(resources)
 
     val newsChoices = listOf(
-        if (english) "Choose a category" else "Selecciona una categoría",
-        if (english) "All categories" else "Todas las categorías"
-    ) + newsCategories.map(CatalogLogic::categoryLabel)
+        NativeUiText.get(language, "chooseCategory"),
+        NativeUiText.get(language, "allCategories")
+    ) + newsCategories.map { NativeNewsResourcesStrings.categoryLabel(language, it) }
 
     val resourceChoices = listOf(
-        if (english) "Choose a category" else "Selecciona una categoría"
-    ) + resourceCategories
+        NativeUiText.get(language, "chooseCategory")
+    ) + resourceCategories.map { NativeNewsResourcesStrings.categoryLabel(language, it) }
 
-    val mediaSourceChoices = listOf(if (english) "All sources" else "Todas las fuentes") +
+    val mediaSourceChoices = listOf(NativeNewsResourcesStrings.get(language, "allSources")) +
         MediaLogic.sources(mediaLoad.items, mediaIndex)
     val mediaSource = mediaSourceChoices.getOrNull(mediaSourceIndex)?.takeIf { mediaSourceIndex > 0 }
     val filteredMedia = MediaLogic.select(mediaLoad.items, mediaIndex, mediaSource, mediaLanguageIndex)
-    val mediaLanguages = if (english) listOf("All languages", "Spanish", "English")
-        else listOf("Todos los idiomas", "Español", "Inglés")
+    val mediaLanguages = listOf("allLanguages", "spanish", "english").map {
+        NativeNewsResourcesStrings.get(language, it)
+    }
 
-    val mediaChoices = if (english)
-        listOf("News categories", "Podcasts", "YouTube channels", "All media")
-    else listOf("Categorías de noticias", "Podcasts", "Canales de YouTube", "Todos los formatos")
+    val mediaChoices = listOf("mediaCategories", "mediaPodcasts", "mediaChannels", "mediaAll").map {
+        NativeNewsResourcesStrings.get(language, it)
+    }
 
     val filtered = if (section == PrototypeNavigation.NEWS) {
         if (mediaIndex == 0) CatalogLogic.newsForCategory(news, newsCategories, newsCategory)
@@ -323,10 +326,10 @@ private fun PrototypeHome(
     } else emptyList()
 
     val title = if (context.packageName == "com.tifloacosta.app") "TifloAcosta"
-        else if (english) "TifloAcosta Native Trial" else "TifloAcosta Nativa Pruebas"
-    val first = if (english) "News" else "Actualidad"
-    val second = if (english) "Resources" else "Recursos"
-    val third = if (english) "Videos" else "Vídeos"
+        else NativeHomeAdjustableStrings.get(language, "trial")
+    val first = NativeUiText.get(language, "news")
+    val second = NativeUiText.get(language, "resources")
+    val third = NativeUiText.get(language, "videos")
     val readerLabel = "TifloLector"
 
     BackHandler(enabled = playingMediaItem != null) { playingMediaItem = null }
@@ -389,31 +392,29 @@ private fun PrototypeHome(
                 )
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Button(onClick = { section = NativeDestinations.SEARCH }, modifier = Modifier.fillMaxWidth()) {
-                        Text(if (english) "Search" else "Buscar")
+                        Text(NativeUiText.get(language, "search"))
                     }
                     Button(onClick = { section = NativeDestinations.NEW_CONTENT }, modifier = Modifier.fillMaxWidth()) {
-                        Text(if (english) "New content" else "Novedades")
+                        Text(NativeUiText.get(language, "newContent"))
                     }
                     Button(onClick = { section = PrototypeNavigation.NEWS; visibleCount = 10 }, modifier = Modifier.fillMaxWidth()) { Text(first) }
                     Button(onClick = { section = PrototypeNavigation.RESOURCES; visibleCount = 10 }, modifier = Modifier.fillMaxWidth()) { Text(second) }
                     Button(onClick = { section = PrototypeNavigation.READER }, modifier = Modifier.fillMaxWidth()) { Text(readerLabel) }
                     Button(onClick = { section = NativeDestinations.DOWNLOADS }, modifier = Modifier.fillMaxWidth()) {
-                        Text(if (english) "Downloads" else "Descargas")
+                        Text(NativeUiText.get(language, "downloads"))
                     }
                     Button(onClick = { section = NativeDestinations.FAVORITES }, modifier = Modifier.fillMaxWidth()) {
-                        Text(if (english) "Favorites" else "Favoritos")
+                        Text(NativeUiText.get(language, "favorites"))
                     }
                     Button(onClick = { section = PrototypeNavigation.VIDEOS; visibleCount = 10 }, modifier = Modifier.fillMaxWidth()) { Text(third) }
-                    Button(onClick = { section = NativeDestinations.PODCAST }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Podcasts" else "Podcasts") }
-                    Button(onClick = { section = NativeDestinations.CONTACT }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Contact" else "Contacto") }
-                    Button(onClick = { section = NativeDestinations.PRIVACY }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Privacy" else "Privacidad") }
-                    Button(onClick = { section = NativeDestinations.SETTINGS }, modifier = Modifier.fillMaxWidth()) { Text(if (english) "Settings" else "Configuración") }
+                    Button(onClick = { section = NativeDestinations.PODCAST }, modifier = Modifier.fillMaxWidth()) { Text(NativePodcastStrings.get(language, "title")) }
+                    Button(onClick = { section = NativeDestinations.SETTINGS }, modifier = Modifier.fillMaxWidth()) { Text(NativeUiText.get(language, "settings")) }
                 }
             } else {
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     TextButton(
                         onClick = { section = PrototypeNavigation.parentOf(section) }
-                    ) { Text(if (english) "Back" else "Volver") }
+                    ) { Text(NativeUiText.get(language, "back")) }
                     Text(
                         when (section) {
                             PrototypeNavigation.NEWS -> first
@@ -429,7 +430,7 @@ private fun PrototypeHome(
 
             if (section == PrototypeNavigation.NEWS) {
                 AdjustableSelector(
-                    label = if (english) "Content type" else "Tipo de contenido",
+                    label = NativeNewsResourcesStrings.get(language, "contentType"),
                     choices = mediaChoices, selected = mediaIndex, english = english
                 ) {
                     if (mediaIndex != it) {
@@ -441,22 +442,22 @@ private fun PrototypeHome(
 
                 if (mediaIndex == 0) {
                     AdjustableSelector(
-                        label = if (english) "Category" else "Categoría",
+                        label = NativeNewsResourcesStrings.get(language, "category"),
                         choices = newsChoices, selected = newsCategory, english = english
                     ) { newsCategory = it; visibleCount = 10 }
                 } else {
                     AdjustableSelector(
-                        label = if (english) "Source or channel" else "Fuente o canal",
+                        label = NativeNewsResourcesStrings.get(language, "source"),
                         choices = mediaSourceChoices, selected = mediaSourceIndex, english = english
                     ) { mediaSourceIndex = it; visibleCount = 10 }
                     AdjustableSelector(
-                        label = if (english) "Language" else "Idioma",
+                        label = NativeNewsResourcesStrings.get(language, "language"),
                         choices = mediaLanguages, selected = mediaLanguageIndex, english = english
                     ) { mediaLanguageIndex = it; visibleCount = 10 }
                 }
             } else if (section == PrototypeNavigation.RESOURCES) {
                 AdjustableSelector(
-                    label = if (english) "Category" else "Categoría",
+                    label = NativeNewsResourcesStrings.get(language, "category"),
                     choices = resourceChoices, selected = resourceCategory, english = english
                 ) { resourceCategory = it; visibleCount = 10 }
             }
@@ -469,21 +470,20 @@ private fun PrototypeHome(
                 }
                 if (!account.authenticated) {
                     Button(onClick = onSignIn) {
-                        Text(if (english) "Sign in with Google" else "Iniciar sesión con Google")
+                        Text(NativeNewsResourcesStrings.get(language, "signIn"))
                     }
                     Text(
-                        if (english) "You can watch videos without logging in. Sign in to like, subscribe and comment."
-                        else "Puedes ver los vídeos sin iniciar sesión. Conecta Google para indicar Me gusta, suscribirte y comentar."
+                        NativeNewsResourcesStrings.get(language, "signInHelp")
                     )
                 } else {
-                    Text(if (english) "YouTube account connected" else "Cuenta de YouTube conectada")
+                    Text(NativeNewsResourcesStrings.get(language, "connected"))
                     TextButton(onClick = account::signOut) {
-                        Text(if (english) "Sign out" else "Cerrar sesión de YouTube")
+                        Text(NativeNewsResourcesStrings.get(language, "signOut"))
                     }
                 }
                 if (account.message.isNotEmpty()) Text(account.message)
                 Text(
-                    if (english) "Videos on TifloAcosta" else "Vídeos de TifloAcosta",
+                    NativeNewsResourcesStrings.get(language, "myVideos"),
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.semantics { heading() }
                 )
@@ -513,21 +513,21 @@ private fun PrototypeHome(
                     if (videoCatalog.size > visibleCount) {
                         item {
                             TextButton(onClick = { visibleCount += 10 }) {
-                                Text(if (english) "Show ten more" else "Mostrar diez más")
+                                Text(NativeNewsResourcesStrings.get(language, "more"))
                             }
                         }
                     }
                 }
             } else if (section == PrototypeNavigation.NEWS && mediaIndex != 0) {
                 if (mediaLoading) {
-                    Text(if (english) "Loading channels..." else "Cargando canales…")
+                    Text(NativeNewsResourcesStrings.get(language, "mediaLoading"))
                 } else {
                     if (mediaLoad.status.isNotEmpty()) Text(mediaLoad.status)
                     if (filteredMedia.isEmpty()) {
-                        Text(if (english) "No media found." else "No hay contenidos multimedia en esta selección.")
+                        Text(NativeNewsResourcesStrings.get(language, "noMedia"))
                     } else {
                         Text(
-                            if (english) "${filteredMedia.size} results" else "${filteredMedia.size} resultados",
+                            "${filteredMedia.size} " + NativeNewsResourcesStrings.get(language, "result"),
                             style = MaterialTheme.typography.titleMedium,
                             modifier = Modifier.padding(vertical = 8.dp).semantics { heading() }
                         )
@@ -549,7 +549,7 @@ private fun PrototypeHome(
                             if (filteredMedia.size > visibleCount) {
                                 item {
                                     TextButton(onClick = { visibleCount += 10 }) {
-                                        Text(if (english) "Show ten more" else "Mostrar diez más")
+                                        Text(NativeUiText.get(language, "more"))
                                     }
                                 }
                             }
@@ -558,19 +558,19 @@ private fun PrototypeHome(
                 }
             } else {
                 if (section != PrototypeNavigation.HOME && loading) {
-                    Text(if (english) "Loading..." else "Cargando…")
+                    Text(NativeUiText.get(language, "loading"))
                 }
                 if (section != PrototypeNavigation.HOME && loaded.status.isNotEmpty()) Text(loaded.status)
                 if (!loading && section != PrototypeNavigation.HOME && filtered.isEmpty()) {
                 val selectionMade = if (section == PrototypeNavigation.NEWS) newsCategory > 0
                     else resourceCategory > 0
                 if (selectionMade) {
-                    Text(if (english) "No results." else "Sin resultados.")
+                    Text(NativeUiText.get(language, "noResults"))
                 }
             } else if (!loading && section != PrototypeNavigation.HOME) {
                 val count = filtered.size
                 Text(
-                    if (english) "$count results" else "$count resultados",
+                    "$count " + NativeNewsResourcesStrings.get(language, "result"),
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.padding(vertical = 8.dp).semantics { heading() }
                 )
@@ -590,7 +590,7 @@ private fun PrototypeHome(
                     if (count > visibleCount) {
                         item {
                             TextButton(onClick = { visibleCount += 10 }) {
-                                Text(if (english) "Show ten more" else "Mostrar diez más")
+                                Text(NativeNewsResourcesStrings.get(language, "more"))
                             }
                         }
                     }
@@ -610,7 +610,7 @@ private fun PrototypeHome(
                 ) {
                     Text(
                         (if (item.type == "audio") "Podcast" else "YouTube") +
-                            ". " + (if (english) "Source: " else "Fuente: ") + item.sourceName
+                            ". " + NativeNewsResourcesStrings.get(language, "sourcePrefix") + item.sourceName
                     )
                     if (item.summary.isNotBlank()) Text(item.summary)
                 }
@@ -622,9 +622,9 @@ private fun PrototypeHome(
                     }) {
                         Text(
                             if (item.type == "audio") {
-                                if (english) "Listen at source" else "Escuchar en la fuente"
+                                NativeNewsResourcesStrings.get(language, "listenSource")
                             } else {
-                                if (english) "Open YouTube video" else "Ver vídeo en YouTube"
+                                NativeNewsResourcesStrings.get(language, "openVideo")
                             }
                         )
                     }
@@ -632,7 +632,7 @@ private fun PrototypeHome(
             },
             dismissButton = {
                 TextButton(onClick = { selectedMediaItem = null }) {
-                    Text(if (english) "Close" else "Cerrar")
+                    Text(NativeNewsResourcesStrings.get(language, "close"))
                 }
             }
         )
@@ -647,7 +647,7 @@ private fun PrototypeHome(
                     modifier = Modifier.heightIn(max = 340.dp).verticalScroll(rememberScrollState())
                 ) {
                     Text(item.summary.ifBlank {
-                        if (english) "No additional description." else "No hay descripción adicional."
+                        NativeNewsResourcesStrings.get(language, "description")
                     })
                 }
             },
@@ -656,13 +656,13 @@ private fun PrototypeHome(
                     TextButton(onClick = {
                         context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(item.url)))
                     }) {
-                        Text(if (english) "Open original" else "Abrir original")
+                        Text(NativeNewsResourcesStrings.get(language, "original"))
                     }
                 }
             },
             dismissButton = {
                 TextButton(onClick = { selectedItem = null }) {
-                    Text(if (english) "Close" else "Cerrar")
+                    Text(NativeNewsResourcesStrings.get(language, "close"))
                 }
             }
         )

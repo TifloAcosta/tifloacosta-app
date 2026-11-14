@@ -13,8 +13,33 @@ object NativeReaderBookFilters {
         "With bookmarks", "Favorites", "Imported today", "Last seven days", "Last month",
         "OCR images", "Reading queue", "In progress", "Finished"
     )
-    val sortEs = listOf("Más recientes", "Más antiguos", "Título A a Z", "Título Z a A", "Formato")
-    val sortEn = listOf("Newest", "Oldest", "Title A to Z", "Title Z to A", "Format")
+    val sortEs = listOf("Más recientes", "Más antiguos", "Título A a Z", "Título Z a A", "Formato", "Última lectura", "Último abierto")
+    val sortEn = listOf("Newest", "Oldest", "Title A to Z", "Title Z to A", "Format", "Last read", "Last opened")
+
+    private val localizedFilters = mapOf(
+        "pt" to listOf("Todos", "Textos", "PDF", "Livros eletrónicos", "Office", "Áudio e DAISY", "Com marcadores", "Favoritos", "Importados hoje", "Últimos sete dias", "Último mês", "Imagens com OCR", "Fila de leitura", "Em curso", "Concluídos"),
+        "fr" to listOf("Tous", "Textes", "PDF", "Livres numériques", "Office", "Audio et DAISY", "Avec signets", "Favoris", "Importés aujourd’hui", "Sept derniers jours", "Dernier mois", "Images avec OCR", "Liste de lecture", "En cours", "Terminés"),
+        "it" to listOf("Tutti", "Testi", "PDF", "Libri elettronici", "Office", "Audio e DAISY", "Con segnalibri", "Preferiti", "Importati oggi", "Ultimi sette giorni", "Ultimo mese", "Immagini con OCR", "Coda di lettura", "In corso", "Completati"),
+        "de" to listOf("Alle", "Texte", "PDF", "E-Books", "Office", "Audio und DAISY", "Mit Lesezeichen", "Favoriten", "Heute importiert", "Letzte sieben Tage", "Letzter Monat", "Bilder mit OCR", "Lesewarteschlange", "In Bearbeitung", "Abgeschlossen")
+    )
+    private val localizedSort = mapOf(
+        "pt" to listOf("Mais recentes", "Mais antigos", "Título A a Z", "Título Z a A", "Formato", "Última leitura", "Última abertura"),
+        "fr" to listOf("Plus récents", "Plus anciens", "Titre A à Z", "Titre Z à A", "Format", "Dernière lecture", "Dernière ouverture"),
+        "it" to listOf("Più recenti", "Più vecchi", "Titolo A-Z", "Titolo Z-A", "Formato", "Ultima lettura", "Ultima apertura"),
+        "de" to listOf("Neueste zuerst", "Älteste zuerst", "Titel A bis Z", "Titel Z bis A", "Format", "Zuletzt gelesen", "Zuletzt geöffnet")
+    )
+
+    fun formatFilters(language: String): List<String> = when (language) {
+        "es" -> formatFiltersEs
+        "en" -> formatFiltersEn
+        else -> localizedFilters[language] ?: formatFiltersEs
+    }
+
+    fun sortChoices(language: String): List<String> = when (language) {
+        "es" -> sortEs
+        "en" -> sortEn
+        else -> localizedSort[language] ?: sortEs
+    }
 
     fun apply(
         books: List<ReaderBook>, filter: Int = 0, order: Int = 0,
@@ -58,7 +83,32 @@ object NativeReaderBookFilters {
             2 -> filtered.sortedBy { it.title.lowercase() }
             3 -> filtered.sortedByDescending { it.title.lowercase() }
             4 -> filtered.sortedWith(compareBy<ReaderBook> { it.format }.thenBy { it.title })
+            5 -> filtered.sortedWith(compareByDescending<ReaderBook> { it.lastReadAt }.thenBy { it.title.lowercase() })
+            6 -> filtered.sortedWith(compareByDescending<ReaderBook> { it.lastOpenedAt }.thenBy { it.title.lowercase() })
             else -> filtered.sortedByDescending { it.createdAt }
         }
+    }
+}
+
+/** One TalkBack stop per title; additional details are opt-in, as on iOS. */
+object NativeReaderRowPresentation {
+    fun label(book: ReaderBook, progress: String, detail: Int, language: String): String {
+        val basic = "${book.title}. $progress"
+        if (detail <= 0) return basic
+        val labels = when (language) {
+            "en" -> listOf("Format", "Folder", "No folder")
+            "pt" -> listOf("Formato", "Pasta", "Sem pasta")
+            "fr" -> listOf("Format", "Dossier", "Sans dossier")
+            "it" -> listOf("Formato", "Cartella", "Nessuna cartella")
+            "de" -> listOf("Format", "Ordner", "Kein Ordner")
+            else -> listOf("Formato", "Carpeta", "Sin carpeta")
+        }
+        val withFormat = "$basic. ${labels[0]}: ${book.format.uppercase()}"
+        if (detail == 1) return withFormat
+        return "$withFormat. ${labels[1]}: ${book.folder.ifBlank { labels[2] }}"
+    }
+
+    fun label(book: ReaderBook, progress: String, detail: Int, english: Boolean): String {
+        return label(book, progress, detail, if (english) "en" else "es")
     }
 }

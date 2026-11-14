@@ -43,6 +43,9 @@ class NativeYouTubeAccount(private val context: Context) {
     }
 
     private val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+    private val settings = context.getSharedPreferences("native-app-settings-v1", Context.MODE_PRIVATE)
+    private val uiLanguage: String get() = NativeUiText.normalize(settings.getString("language", ""))
+    private fun label(key: String) = NativeYouTubeAccountStatusStrings.get(uiLanguage, key)
     private var ticket: String? = restore()
     private var expiry: Long = prefs.getLong(EXPIRY_KEY, 0L)
     var authenticated by mutableStateOf(ticket != null && expiry > System.currentTimeMillis())
@@ -111,7 +114,7 @@ class NativeYouTubeAccount(private val context: Context) {
         val verifier = b64(random)
         val challenge = b64(MessageDigest.getInstance("SHA-256").digest(verifier.toByteArray()))
         prefs.edit().putString(VERIFIER_KEY, verifier).apply()
-        message = "Abriendo identificación segura de Google."
+        message = label("authorizationOpening")
         return Uri.parse(BASE).buildUpon()
             .appendPath("auth").appendPath("native").appendPath("start")
             .appendQueryParameter("challenge", challenge)
@@ -131,18 +134,18 @@ class NativeYouTubeAccount(private val context: Context) {
 
     fun signOut() {
         expire()
-        message = "Sesión de YouTube cerrada en TifloAcosta."
+        message = label("signedOut")
     }
 
     private fun errorText(error: String): String = when (error) {
-        "COMMENTS_DISABLED" -> "Los comentarios están desactivados en este vídeo."
+        "COMMENTS_DISABLED" -> label("commentsDisabled")
         "SESSION_EXPIRED", "NATIVE_AUTH_INVALID" ->
-            "La sesión ha caducado o la autorización no es válida. Conecta Google de nuevo."
-        "QUOTA_EXCEEDED", "RATE_LIMITED" -> "Se ha alcanzado temporalmente el límite de YouTube."
-        "INSUFFICIENT_PERMISSIONS" -> "Google no concedió los permisos necesarios."
-        "INELIGIBLE_ACCOUNT" -> "La cuenta de YouTube no permite esta acción."
-        "NETWORK" -> "No se pudo conectar con el servicio de YouTube."
-        else -> "No se pudo completar la operación con YouTube."
+            label("sessionExpired")
+        "QUOTA_EXCEEDED", "RATE_LIMITED" -> label("quota")
+        "INSUFFICIENT_PERMISSIONS" -> label("permissions")
+        "INELIGIBLE_ACCOUNT" -> label("ineligible")
+        "NETWORK" -> label("network")
+        else -> label("error")
     }
 
     private suspend fun api(path: String, method: String = "GET",
@@ -179,12 +182,12 @@ class NativeYouTubeAccount(private val context: Context) {
         prefs.edit().remove(VERIFIER_KEY).apply()
         val rejected = uri.getQueryParameter("error")
         if (rejected != null) {
-            message = "Google no completó la autorización. Comprueba los permisos e inténtalo de nuevo."
+            message = label("authRejected")
             return
         }
         val ticketFromCallback = uri.getQueryParameter("ticket")
         if (ticketFromCallback.isNullOrBlank() || verifier.isNullOrBlank()) {
-            message = "La autorización no devolvió un código válido."
+            message = label("authInvalid")
             return
         }
         busy = true
@@ -199,7 +202,7 @@ class NativeYouTubeAccount(private val context: Context) {
             check(exchange.optBoolean("authenticated") && token.isNotBlank() &&
                 expires > System.currentTimeMillis())
             persist(token, expires)
-            message = "Sesión de YouTube iniciada."
+            message = label("signedIn")
         } catch (e: Exception) {
             message = errorText(e.message.orEmpty())
         } finally { busy = false }
@@ -234,7 +237,7 @@ class NativeYouTubeAccount(private val context: Context) {
                 else fresh.distinctBy { it.first }
             subscriptionsNextPageToken = response.optString("nextPageToken")
             if (subscribedChannels.isEmpty())
-                subscriptionMessage = "No hay canales suscritos."
+                subscriptionMessage = label("noSubscriptions")
         } catch (error: Exception) {
             if (error.message == "SESSION_EXPIRED") expire()
             subscriptionMessage = errorText(error.message.orEmpty())
@@ -260,7 +263,7 @@ class NativeYouTubeAccount(private val context: Context) {
             action !in setOf("like", "subscribe", "comment") ||
             MediaLogic.youTubeVideoId("https://youtu.be/$videoId") != videoId) return false
         if (action == "comment" && comment.isNullOrBlank()) {
-            message = "Escribe un comentario antes de publicarlo."
+            message = label("commentEmpty")
             return false
         }
         busy = true
@@ -274,9 +277,9 @@ class NativeYouTubeAccount(private val context: Context) {
                     else videoState.subscribed
             )
             message = when (action) {
-                "like" -> "Me gusta añadido."
-                "subscribe" -> "Suscripción realizada."
-                else -> "Comentario publicado en YouTube."
+                "like" -> label("liked")
+                "subscribe" -> label("subscribed")
+                else -> label("commentPublished")
             }
             true
         } catch (e: Exception) {

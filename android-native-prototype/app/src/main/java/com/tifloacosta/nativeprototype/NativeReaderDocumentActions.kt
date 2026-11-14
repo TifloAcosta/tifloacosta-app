@@ -51,6 +51,7 @@ fun NativeReaderDocumentActions(
     onBack: () -> Unit
 ) {
     val context = LocalContext.current
+    val uiLanguage = LocalNativeUiLanguage.current
     val scope = rememberCoroutineScope()
     val store = remember { NativeReaderStore(context.applicationContext) }
     val prefs = remember { context.getSharedPreferences("native-reader-preferences", 0) }
@@ -71,6 +72,11 @@ fun NativeReaderDocumentActions(
     var actionJob by remember(book.id) { mutableStateOf<Job?>(null) }
     var exportContent by remember(book.id) { mutableStateOf("") }
     var audioExport by remember(book.id) { mutableStateOf<ByteArray?>(null) }
+    var audioExportFile by remember(book.id) { mutableStateOf<java.io.File?>(null) }
+    DisposableEffect(audioExportFile) {
+        val staged = audioExportFile
+        onDispose { staged?.delete() }
+    }
     var audioFormatIndex by remember(book.id) { mutableIntStateOf(0) }
     var completedAudioFormat by remember(book.id) {
         mutableStateOf(NativeGeminiAudioExport.Format.MP3)
@@ -130,8 +136,7 @@ fun NativeReaderDocumentActions(
                         else out.write(body.toByteArray(Charsets.UTF_8))
                     }
                 }
-                status = if (english) "File exported successfully."
-                    else "Archivo exportado correctamente."
+                status = NativeReaderToolsStrings.get(uiLanguage, "fileExported")
                 error = ""
             } catch (e: Exception) {
                 alert(e.message ?: "No se pudo exportar el archivo.")
@@ -140,17 +145,32 @@ fun NativeReaderDocumentActions(
     }
     fun saveGeneratedAudio(uri: Uri?) {
         val bytes = audioExport
-        if (uri != null && bytes != null) {
+        val file = audioExportFile
+        if (uri == null) {
+            if (audioExport != null || audioExportFile != null) {
+                status = NativeReaderToolsStrings.get(uiLanguage, "audioLater")
+            }
+            return
+        }
+        if (bytes != null || file != null) {
             actionJob = scope.launch {
                 try {
                     withContext(Dispatchers.IO) {
                         val stream = context.contentResolver.openOutputStream(uri, "w")
                             ?: throw IOException("No se pudo abrir el archivo de destino.")
-                        stream.use { it.write(bytes) }
+                        stream.use { output ->
+                            if (file != null) {
+                                file.inputStream().use { input -> input.copyTo(output) }
+                            } else if (bytes != null) output.write(bytes)
+                        }
                     }
-                    status = if (english) "Audio saved." else "Audio guardado."
+                    status = NativeReaderToolsStrings.get(uiLanguage, "audioSaved")
                     error = ""
                 } catch (e: Exception) {
+                    // A partial MP3/DAISY is worse than no file; keep the
+                    // finished conversion available for another save attempt.
+                    try { context.contentResolver.delete(uri, null, null) }
+                    catch (_: Exception) { /* Some providers do not support deletion. */ }
                     alert(e.message ?: "No se pudo guardar el audio.")
                 }
             }
@@ -193,7 +213,7 @@ fun NativeReaderDocumentActions(
         }
         try {
             context.startActivity(Intent.createChooser(intent,
-                if (english) "Share text" else "Compartir texto"))
+                NativeReaderToolsStrings.get(uiLanguage, "shareTextChooser")))
         } catch (e: Exception) {
             alert("No se pudo abrir el menú para compartir.")
         }
@@ -217,7 +237,7 @@ fun NativeReaderDocumentActions(
                 putExtra(Intent.EXTRA_SUBJECT, book.title)
             }
             context.startActivity(Intent.createChooser(intent,
-                if (english) "Share original file" else "Compartir archivo original"))
+                NativeReaderToolsStrings.get(uiLanguage, "shareOriginalChooser")))
             error = ""
         } catch (e: Exception) {
             alert(e.message ?: "No se pudo compartir el archivo.")
@@ -231,32 +251,32 @@ fun NativeReaderDocumentActions(
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)) {
         TextButton(onClick = onBack) {
-            Text(if (english) "Back to reading" else "Volver a la lectura")
+            Text(NativeReaderToolsStrings.get(uiLanguage, "backReading"))
         }
-        Text(if (english) "Book details and tools" else "Detalles y herramientas",
+        Text(NativeReaderToolsStrings.get(uiLanguage, "toolsTitle"),
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.semantics { heading() })
         Text(book.title)
         Button(onClick = { showAudioExport = !showAudioExport },
             modifier = Modifier.fillMaxWidth().semantics {
-                stateDescription = if (showAudioExport)
-                    (if (english) "Expanded" else "Abierto")
-                else (if (english) "Collapsed" else "Cerrado")
+                stateDescription = NativeReaderToolsStrings.get(uiLanguage,
+                    if (showAudioExport) "expanded" else "collapsed")
             }) {
-            Text(if (english) "Convert to audio or DAISY" else "Convertir a audio o DAISY")
+            Text(NativeReaderToolsStrings.get(uiLanguage, "convert"))
         }
         if (showAudioExport) {
-        Text(if (english) "Audio export" else "Exportar audio",
+        Text(NativeReaderToolsStrings.get(uiLanguage, "audioExport"),
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.semantics { heading() })
         ReaderAdjustableChoice(
-            if (english) "Engine" else "Motor",
-            if (english) availableExportEngines.map { if (it == "Sistema") "System" else it }
-            else availableExportEngines, audioEngineIndex
-        ) { index -> audioEngineIndex = index; audioExport = null }
+            NativeReaderToolsStrings.get(uiLanguage, "engine"),
+            availableExportEngines.map {
+                if (it == "Sistema") NativeReaderToolsStrings.get(uiLanguage, "systemEngine") else it
+            }, audioEngineIndex
+        ) { index -> audioEngineIndex = index; audioExport = null; audioExportFile = null }
         if (audioEngineIndex == 2 && phononReady && phononVoices.isNotEmpty()) {
             ReaderAdjustableChoice(
-                if (english) "Voice" else "Voz",
+                NativeReaderToolsStrings.get(uiLanguage, "voice"),
                 phononVoices, phononVoiceIndex
             ) { index ->
                 phononVoiceIndex = index
@@ -264,37 +284,33 @@ fun NativeReaderDocumentActions(
             }
         } else if (audioEngineIndex == 1) {
             ReaderAdjustableChoice(
-                if (english) "Voice" else "Voz",
+                NativeReaderToolsStrings.get(uiLanguage, "voice"),
                 NativeGeminiSpeech.voices, audioVoice
             ) { index ->
                 audioVoice = index
                 prefs.edit().putString("gemini.voice", NativeGeminiSpeech.voices[index]).apply()
             }
         } else {
-            Text(if (english) "Uses the installed Android system voice. No Gemini key needed."
-                else "Utiliza la voz instalada del sistema Android. No necesita clave Gemini.")
+            Text(NativeReaderToolsStrings.get(uiLanguage, "systemVoice"))
         }
         ReaderAdjustableChoice(
-            if (english) "Format" else "Formato",
+            NativeReaderToolsStrings.get(uiLanguage, "format"),
             listOf("MP3", "M4A", "WAV", "DAISY"), audioFormatIndex
-        ) { audioFormatIndex = it; audioExport = null }
+        ) { audioFormatIndex = it; audioExport = null; audioExportFile = null }
         if (audioFormatIndex == 3) {
-            Text(if (english) "DAISY includes full text, synchronized clips and navigation. External-player compatibility is not yet validated."
-                else "DAISY incluye texto, audio sincronizado e índice. La compatibilidad externa aún no está validada.")
+            Text(NativeReaderToolsStrings.get(uiLanguage, "daisyNote"))
         }
-        Text(when (audioEngineIndex) {
-            0 -> if (english) "Android system TTS exports locally if supported by the installed voice. Maximum 60,000 characters."
-                else "La voz del sistema genera audio localmente si permite exportarlo. Máximo 60.000 caracteres."
-            2 -> if (english) "Phonon generates audio on your device. Maximum 60,000 characters."
-                else "Phonon genera el audio en el dispositivo. Máximo 60.000 caracteres."
-            else -> if (english) "Gemini may use your personal quota. Maximum 60,000 characters."
-                else "Gemini puede consumir tu cuota personal. Máximo 60.000 caracteres."
-        })
+        Text(NativeReaderToolsStrings.get(uiLanguage, when (audioEngineIndex) {
+            0 -> "systemExportNote"
+            2 -> "phononExportNote"
+            else -> "geminiExportNote"
+        }))
         Button(enabled = !audioExportBusy, onClick = {
             audioExportBusy = true
             audioExport = null
+            audioExportFile = null
             error = ""
-            status = if (english) "Generating audio." else "Generando audio."
+            status = NativeReaderToolsStrings.get(uiLanguage, "generating")
             actionJob = scope.launch {
                 try {
                     val text = withContext(Dispatchers.IO) { store.read(book) }
@@ -311,10 +327,35 @@ fun NativeReaderDocumentActions(
                         else -> NativeGeminiAudioExport.Format.WAV
                     }
                     val wantsDaisy = audioFormatIndex == 3
+                    val localStreaming = systemTts || localPhonon
+                    if (localStreaming) {
+                        audioExportFile = withContext(Dispatchers.IO) {
+                            val notifyProgress: suspend (Int, Int) -> Unit = { n, total ->
+                                withContext(Dispatchers.Main) {
+                                    status = NativeReaderToolsStrings.get(uiLanguage, "generatingProgress") + " " + n + " / " + total
+                                }
+                            }
+                            val generateLocal: suspend (suspend (String, String) -> ByteArray) -> java.io.File = { render ->
+                                if (wantsDaisy)
+                                    NativeGeminiDaisyExport.generateToFile(context, text, book.title, voice, notifyProgress, render)
+                                else if (format == NativeGeminiAudioExport.Format.MP3)
+                                    NativeStreamingLocalMp3.generate(context, text, voice, notifyProgress, render)
+                                else if (format == NativeGeminiAudioExport.Format.M4A)
+                                    NativeStreamingLocalM4a.generate(context, text, voice, notifyProgress, render)
+                                else NativeStreamingLocalWav.generate(context, text, voice, notifyProgress, render)
+                            }
+                            if (systemTts) NativeSystemAudioSynth(context).use { synth ->
+                                generateLocal { part, selected -> synth.render(part, selected) }
+                            } else NativePhononAudioSynth(context,
+                                prefs.getString("phonon.language", "en") ?: "en").use { synth ->
+                                generateLocal { part, selected -> synth.render(part, selected) }
+                            }
+                        }
+                    } else {
                     audioExport = withContext(Dispatchers.IO) {
                         val notifyProgress: suspend (Int, Int) -> Unit = { n, total ->
                             withContext(Dispatchers.Main) {
-                                status = (if (english) "Generating " else "Generando ") +
+                                status = NativeReaderToolsStrings.get(uiLanguage, "generatingProgress") + " " +
                                     n + " / " + total
                             }
                         }
@@ -347,12 +388,12 @@ fun NativeReaderDocumentActions(
                             context, text, voice, format, notifyProgress
                         )
                     }
+                    }
                     audioDaisyReady = wantsDaisy
                     completedAudioFormat = format
-                    status = if (english) "Audio ready. Press Save."
-                        else "Audio preparado. Pulsa Guardar."
+                    status = NativeReaderToolsStrings.get(uiLanguage, "ready")
                 } catch (e: kotlinx.coroutines.CancellationException) {
-                    status = if (english) "Cancelled." else "Cancelado."
+                    status = NativeReaderToolsStrings.get(uiLanguage, "cancelled")
                 } catch (e: Exception) {
                     alert(e.message ?: "No se pudo generar el audio.")
                 } finally {
@@ -360,14 +401,14 @@ fun NativeReaderDocumentActions(
                 }
             }
         }, modifier = Modifier.fillMaxWidth()) {
-            Text(if (english) "Generate" else "Generar")
+            Text(NativeReaderToolsStrings.get(uiLanguage, "generate"))
         }
         if (audioExportBusy) {
             TextButton(onClick = { actionJob?.cancel() }) {
-                Text(if (english) "Cancel" else "Cancelar")
+                Text(NativeReaderToolsStrings.get(uiLanguage, "cancel"))
             }
         }
-        if (audioExport != null) {
+        if (audioExport != null || audioExportFile != null) {
             Button(onClick = {
                 if (audioDaisyReady) exportAudioDAISY.launch(labelFile("zip"))
                 else if (completedAudioFormat == NativeGeminiAudioExport.Format.MP3)
@@ -377,39 +418,38 @@ fun NativeReaderDocumentActions(
                 else exportAudioWAV.launch(labelFile("wav"))
             },
                 modifier = Modifier.fillMaxWidth()) {
-                Text(if (english) "Save" else "Guardar")
+                Text(NativeReaderToolsStrings.get(uiLanguage, "save"))
             }
         }
 
         }
         TextButton(onClick = { showOtherActions = !showOtherActions },
             modifier = Modifier.fillMaxWidth().semantics {
-                stateDescription = if (showOtherActions)
-                    (if (english) "Expanded" else "Abierto")
-                else (if (english) "Collapsed" else "Cerrado")
+                stateDescription = NativeReaderToolsStrings.get(uiLanguage,
+                    if (showOtherActions) "expanded" else "collapsed")
             }) {
-            Text(if (english) "Other document tools" else "Otras herramientas del documento")
+            Text(NativeReaderToolsStrings.get(uiLanguage, "otherTools"))
         }
         if (showOtherActions) {
-        Text((if (english) "Original format: " else "Formato original: ") +
+        Text(NativeReaderToolsStrings.get(uiLanguage, "originalFormat") + ": " +
             book.format.uppercase())
-        Text((if (english) "Text length: " else "Extensión de texto: ") +
-            book.length + (if (english) " characters" else " caracteres"))
+        Text(NativeReaderToolsStrings.get(uiLanguage, "textLength") + ": " +
+            book.length + " " + NativeReaderToolsStrings.get(uiLanguage, "characters"))
         if (book.tracks.isNotEmpty()) {
-            Text((if (english) "Audio tracks: " else "Pistas de audio: ") +
+            Text(NativeReaderToolsStrings.get(uiLanguage, "audioTracks") + ": " +
                 book.tracks.size)
         }
-        Text((if (english) "Bookmarks: " else "Marcas: ") +
+        Text(NativeReaderToolsStrings.get(uiLanguage, "marks") + ": " +
             (book.marks.size + book.audioMarks.size))
 
         NativeReaderAdvancedOcrPanel(book, store, english,
             onTextRefreshed = onOcrCompleted)
 
-        Text(if (english) "Share and export" else "Compartir y exportar",
+        Text(NativeReaderToolsStrings.get(uiLanguage, "shareExport"),
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.semantics { heading() })
         Button(onClick = { shareOriginal() }, modifier = Modifier.fillMaxWidth()) {
-            Text(if (english) "Share original file" else "Compartir archivo original")
+            Text(NativeReaderToolsStrings.get(uiLanguage, "shareOriginal"))
         }
         Button(onClick = {
             error = ""
@@ -417,7 +457,7 @@ fun NativeReaderDocumentActions(
                 ?: book.format
             exportOriginal.launch(labelFile(suffix))
         }, modifier = Modifier.fillMaxWidth()) {
-            Text(if (english) "Save original file to…" else "Guardar original en…")
+            Text(NativeReaderTranslationStrings.get(uiLanguage, "saveOriginal"))
         }
         Button(onClick = {
             actionJob = scope.launch {
@@ -427,43 +467,40 @@ fun NativeReaderDocumentActions(
                 } catch (e: Exception) { alert(e.message.orEmpty()) }
             }
         }, modifier = Modifier.fillMaxWidth()) {
-            Text(if (english) "Share extracted text" else "Compartir texto extraído")
+            Text(NativeReaderTranslationStrings.get(uiLanguage, "shareText"))
         }
         Button(onClick = {
             exportContent = ""
             exportText.launch(labelFile("txt"))
         }, modifier = Modifier.fillMaxWidth()) {
-            Text(if (english) "Export accessible TXT…" else "Exportar TXT accesible…")
+            Text(NativeReaderTranslationStrings.get(uiLanguage, "exportTxt"))
         }
 
-        Text(if (english) "Translation" else "Traducción",
+        Text(NativeReaderTranslationStrings.get(uiLanguage, "translation"),
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.semantics { heading() })
-        Text(if (english)
-            "Models are downloaded on the first use. Translation happens on the device; the original is never changed. Review automated translations before using them."
-            else "La primera traducción requiere descargar el modelo. Después, la traducción se realiza en el dispositivo y no modifica el original. Revisa el resultado automático antes de utilizarlo.")
-        ReaderAdjustableChoice(if (english) "Source language" else "Idioma de origen",
+        Text(NativeReaderTranslationStrings.get(uiLanguage, "help"))
+        ReaderAdjustableChoice(NativeReaderTranslationStrings.get(uiLanguage, "source"),
             languages.map { it.label }, sourceIndex
         ) {
             sourceIndex = it
             prefs.edit().putString("translate.source." + book.id, languages[it].tag).apply()
         }
-        ReaderAdjustableChoice(if (english) "Target language" else "Idioma de destino",
+        ReaderAdjustableChoice(NativeReaderTranslationStrings.get(uiLanguage, "target"),
             languages.map { it.label }, targetIndex
         ) {
             targetIndex = it
             prefs.edit().putString("translate.target." + book.id, languages[it].tag).apply()
         }
-        ReaderAdjustableChoice(if (english) "Translate" else "Traducir",
-            if (english) listOf("Current fragment", "Entire document (max. 60,000 chars)")
-            else listOf("Fragmento actual", "Documento completo (máx. 60.000 caracteres)"),
+        ReaderAdjustableChoice(NativeReaderTranslationStrings.get(uiLanguage, "scope"),
+            NativeReaderTranslationStrings.scopeChoices(uiLanguage),
             translationScope
         ) { translationScope = it }
         Button(enabled = !translating, onClick = {
             translating = true
             error = ""
             translated = ""
-            status = if (english) "Preparing translation…" else "Preparando traducción…"
+            status = NativeReaderTranslationStrings.get(uiLanguage, "preparing")
             actionJob = scope.launch {
                 try {
                     val input = if (translationScope == 0) fragment
@@ -471,27 +508,26 @@ fun NativeReaderDocumentActions(
                     val result = NativeReaderTranslation.translate(
                         input, languages[sourceIndex].tag, languages[targetIndex].tag
                     ) { n, total ->
-                        status = (if (english) "Translating " else "Traduciendo ") +
+                        status = NativeReaderTranslationStrings.get(uiLanguage, "translating") +
                             n + " / " + total
                     }
                     translated = result
-                    status = if (english) "Translation finished."
-                        else "Traducción terminada."
+                    status = NativeReaderTranslationStrings.get(uiLanguage, "done")
                 } catch (e: Exception) {
                     if (e !is kotlinx.coroutines.CancellationException)
-                        alert(e.message ?: "No se pudo traducir.")
+                        alert(e.message ?: NativeReaderTranslationStrings.get(uiLanguage, "error"))
                 } finally { translating = false }
             }
         }, modifier = Modifier.fillMaxWidth()) {
-            Text(if (english) "Translate now" else "Traducir ahora")
+            Text(NativeReaderTranslationStrings.get(uiLanguage, "translateNow"))
         }
         if (translating) {
             TextButton(onClick = { actionJob?.cancel(); translating = false }) {
-                Text(if (english) "Cancel translation" else "Cancelar traducción")
+                Text(NativeReaderTranslationStrings.get(uiLanguage, "cancel"))
             }
         }
         if (translated.isNotBlank()) {
-            Text(if (english) "Translated text" else "Texto traducido",
+            Text(NativeReaderTranslationStrings.get(uiLanguage, "translated"),
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.semantics { heading() })
             androidx.compose.foundation.text.selection.SelectionContainer {
@@ -499,36 +535,31 @@ fun NativeReaderDocumentActions(
             }
             Button(onClick = { shareText(translated) },
                 modifier = Modifier.fillMaxWidth()) {
-                Text(if (english) "Share translation" else "Compartir traducción")
+                Text(NativeReaderTranslationStrings.get(uiLanguage, "share"))
             }
             Button(onClick = {
                 exportContent = translated
                 exportText.launch(labelFile("traducido.txt"))
             }, modifier = Modifier.fillMaxWidth()) {
-                Text(if (english) "Export translated TXT…" else "Exportar traducción como TXT…")
+                Text(NativeReaderTranslationStrings.get(uiLanguage, "exportTranslated"))
             }
         }
 
-        Text(if (english) "Settings for this book" else "Ajustes de esta obra",
+        Text(NativeReaderTranslationStrings.get(uiLanguage, "bookSettings"),
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.semantics { heading() })
-        Text(if (english)
-            "Opening a document never starts speech. Use Play when you want to listen."
-            else "Abrir un documento no inicia la voz. Utiliza Reproducir cuando quieras escuchar.")
+        Text(NativeReaderTranslationStrings.get(uiLanguage, "opening"))
         if (book.tracks.isEmpty()) {
             ReaderAdjustableChoice(
-                if (english) "Navigation unit" else "Unidad de navegación",
-                if (english) listOf("Block", "Paragraph", "Sentence")
-                else listOf("Bloque", "Párrafo", "Frase"), unit
+                NativeReaderTranslationStrings.get(uiLanguage, "unit"),
+                NativeReaderTranslationStrings.navigationChoices(uiLanguage), unit
             ) {
                 unit = it
                 prefs.edit().putInt("unit." + book.id, it).apply()
                 onUnitChange(it)
             }
         }
-        Text(if (english)
-            "Voice, speed and presentation settings are available in the Audio and Visual sections of the reader and are kept separately for this book."
-            else "La voz, la velocidad y la presentación están en los apartados Audio y Visual del lector y se conservan por separado para esta obra.")
+        Text(NativeReaderTranslationStrings.get(uiLanguage, "voiceSettings"))
         }
         if (status.isNotBlank()) Text(status)
         if (error.isNotBlank()) Text(error)

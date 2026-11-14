@@ -33,11 +33,10 @@ fun NativeDaisyNavigationScreen(
     onGo: (Int) -> Unit,
     onBack: () -> Unit
 ) {
+    val uiLanguage = LocalNativeUiLanguage.current
     val points = book.daisyNavigation
     val clips = book.audioSegments
-    val choices = if (english)
-        listOf("Headings", "Pages", "Notes", "Other references", "Audio fragments")
-    else listOf("Encabezados", "Páginas", "Notas", "Otros puntos", "Fragmentos de audio")
+    val choices = NativeReaderDaisyStrings.types(uiLanguage)
     var kind by remember(book.id) {
         mutableIntStateOf(if (points.any { it.kind == "heading" }) 0 else 4)
     }
@@ -52,7 +51,7 @@ fun NativeDaisyNavigationScreen(
         3 -> NativeDaisyNavigation.filter(points, "landmark")
         else -> clips.indices.map { i ->
             ReaderDaisyNavPoint("fragment", 0, clips[i].label.ifBlank {
-                (if (english) "Fragment " else "Fragmento ") + (i + 1)
+                NativeReaderDaisyStrings.get(uiLanguage, "fragment") + " " + (i + 1)
             }, i)
         }
     }
@@ -62,54 +61,48 @@ fun NativeDaisyNavigationScreen(
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         TextButton(onClick = onBack) {
-            Text(if (english) "Back to audiobook" else "Volver al audiolibro")
+            Text(NativeReaderDaisyStrings.get(uiLanguage, "back"))
         }
-        Text(if (english) "DAISY navigation" else "Navegación DAISY",
+        Text(NativeReaderDaisyStrings.get(uiLanguage, "title"),
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.semantics { heading() })
         Text(book.title)
         ReaderAdjustableChoice(
-            if (english) "Navigate by" else "Navegar por",
+            NativeReaderDaisyStrings.get(uiLanguage, "navigateBy"),
             choices, kind
         ) { kind = it; count = 10; level = 0 }
         if (kind == 0) {
             ReaderAdjustableChoice(
-                if (english) "Heading level" else "Nivel de encabezado",
-                if (english) listOf("All levels", "Level 1", "Level 2",
-                    "Level 3", "Level 4", "Level 5", "Level 6")
-                else listOf("Todos los niveles", "Nivel 1", "Nivel 2",
-                    "Nivel 3", "Nivel 4", "Nivel 5", "Nivel 6"), level
+                NativeReaderDaisyStrings.get(uiLanguage, "headingLevel"),
+                NativeReaderDaisyStrings.levels(uiLanguage), level
             ) { level = it; count = 10 }
         }
         if (kind == 1 && filtered.isNotEmpty()) {
             TextField(value = requestedPage,
                 onValueChange = { requestedPage = it.take(30); pageMessage = "" },
                 singleLine = true,
-                label = { Text(if (english) "Printed page number" else "Número de página") },
+                label = { Text(NativeReaderDaisyStrings.get(uiLanguage, "pageNumber")) },
                 modifier = Modifier.fillMaxWidth())
             Button(onClick = {
                 val match = filtered.firstOrNull {
                     it.label.trim().equals(requestedPage.trim(), ignoreCase = true)
                 }
-                if (match == null) pageMessage = if (english)
-                    "That page number is not indexed in this DAISY."
-                    else "Esa página no está identificada en este DAISY."
+                if (match == null) pageMessage = NativeReaderDaisyStrings.get(uiLanguage, "pageMissing")
                 else onGo(match.segmentIndex)
             }, enabled = requestedPage.isNotBlank()) {
-                Text(if (english) "Go to page" else "Ir a página")
+                Text(NativeReaderDaisyStrings.get(uiLanguage, "goPage"))
             }
             if (pageMessage.isNotBlank()) Text(pageMessage)
         }
-        Text((if (english) "Entries: " else "Entradas: ") + filtered.size)
+        Text(NativeReaderDaisyStrings.get(uiLanguage, "entries") + ": " + filtered.size)
         if (filtered.isEmpty()) {
-            Text(if (english) "This DAISY book does not include navigation points of this type."
-                else "Este DAISY no contiene puntos de navegación de esta clase.")
+            Text(NativeReaderDaisyStrings.get(uiLanguage, "empty"))
         }
         filtered.take(count).forEachIndexed { ordinal, point ->
             val caption = if (point.kind == "heading") {
-                (if (english) "Level " else "Nivel ") + point.level + ", " + point.label
+                NativeReaderDaisyStrings.get(uiLanguage, "level") + " " + point.level + ", " + point.label
             } else if (point.kind == "fragment") {
-                (if (english) "Fragment " else "Fragmento ") + (point.segmentIndex + 1) +
+                NativeReaderDaisyStrings.get(uiLanguage, "fragment") + " " + (point.segmentIndex + 1) +
                     ", " + point.label
             } else point.label
             Button(
@@ -117,12 +110,12 @@ fun NativeDaisyNavigationScreen(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(caption + if (point.segmentIndex == currentSegment)
-                    (if (english) ", current" else ", actual") else "")
+                    ", " + NativeReaderDaisyStrings.get(uiLanguage, "current") else "")
             }
         }
         if (filtered.size > count) {
             TextButton(onClick = { count += 10 }) {
-                Text(if (english) "Show ten more" else "Mostrar diez más")
+                Text(NativeReaderDaisyStrings.get(uiLanguage, "more"))
             }
         }
     }

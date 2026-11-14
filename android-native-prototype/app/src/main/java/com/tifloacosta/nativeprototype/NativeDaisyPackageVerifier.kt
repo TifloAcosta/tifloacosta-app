@@ -1,8 +1,13 @@
 package com.tifloacosta.nativeprototype
 
 import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import java.io.File
 import java.io.IOException
+import java.util.zip.ZipEntry
+import java.util.zip.ZipFile
 import java.util.zip.ZipInputStream
+import java.util.zip.ZipOutputStream
 import javax.xml.parsers.DocumentBuilderFactory
 import org.w3c.dom.Document
 import org.w3c.dom.Element
@@ -11,6 +16,46 @@ import org.w3c.dom.Element
  * This validates structural links, not full DAISY 3 conformance.
  */
 internal object NativeDaisyPackageVerifier {
+    /** Verify DAISY references without loading the book's MP3 tracks into memory. */
+    internal fun validateFile(file: File) {
+        val sample = ByteArrayOutputStream()
+        ZipFile(file).use { source ->
+            ZipOutputStream(sample).use { target ->
+                val entries = source.entries()
+                var count = 0
+                var metadataBytes = 0L
+                while (entries.hasMoreElements()) {
+                    val entry = entries.nextElement()
+                    if (++count > 2048) throw IOException("DAISY: demasiados archivos.")
+                    val audio = entry.name.endsWith(".mp3", ignoreCase = true)
+                    val bytes = source.getInputStream(entry).use { input ->
+                        if (audio) {
+                            val header = ByteArray(64)
+                            val length = input.read(header)
+                            if (length < 0) ByteArray(0) else header.copyOf(length)
+                        } else {
+                            val buffer = ByteArrayOutputStream()
+                            val chunk = ByteArray(16384)
+                            while (true) {
+                                val read = input.read(chunk)
+                                if (read < 0) break
+                                metadataBytes += read
+                                if (metadataBytes > 64L * 1024 * 1024)
+                                    throw IOException("DAISY: metadatos demasiado grandes.")
+                                buffer.write(chunk, 0, read)
+                            }
+                            buffer.toByteArray()
+                        }
+                    }
+                    target.putNextEntry(ZipEntry(entry.name))
+                    target.write(bytes)
+                    target.closeEntry()
+                }
+            }
+        }
+        validate(sample.toByteArray())
+    }
+
     internal fun validate(data: ByteArray) {
         val files = mutableMapOf<String, ByteArray>()
         var totalBytes = 0L

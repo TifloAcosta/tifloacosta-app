@@ -25,20 +25,10 @@ import androidx.compose.ui.unit.dp
 import java.util.Locale
 
 /** Android's Voice API exposes name, locale, quality and network need, not reliable gender. */
-internal fun voiceQualityDescription(quality: Int, english: Boolean): String = when (quality) {
-    Voice.QUALITY_VERY_HIGH -> if (english) "Very high" else "Muy alta"
-    Voice.QUALITY_HIGH -> if (english) "High" else "Alta"
-    Voice.QUALITY_NORMAL -> if (english) "Normal" else "Normal"
-    Voice.QUALITY_LOW -> if (english) "Low" else "Baja"
-    Voice.QUALITY_VERY_LOW -> if (english) "Very low" else "Muy baja"
-    else -> if (english) "Not specified" else "No indicada"
-}
+internal fun voiceQualityDescription(quality: Int, language: String): String =
+    NativeReaderVoicePickerStrings.quality(language, quality)
 
-private fun sampleFor(language: String): String = when (language) {
-    "es" -> "Hola, estás escuchando una muestra de voz de TifloLector. Así sonará la lectura de tus documentos."
-    "en" -> "Hello, this is a voice sample from TifloLector. This is how your documents will sound."
-    else -> "Uno, dos, tres. One, two, three."
-}
+private fun sampleFor(language: String): String = NativeReaderVoicePickerStrings.sample(language)
 
 @Composable
 fun NativeReaderVoicePicker(
@@ -50,6 +40,7 @@ fun NativeReaderVoicePicker(
     onVoiceSelected: (String) -> Unit,
     onBeforePreview: () -> Unit = {}
 ) {
+    val uiLanguage = LocalNativeUiLanguage.current
     var showing by remember { mutableStateOf(false) }
     var restoreSettingsFocus by remember { mutableStateOf(false) }
     val voiceListToggleFocus = remember { FocusRequester() }
@@ -66,22 +57,22 @@ fun NativeReaderVoicePicker(
         filter == 0 || (filter == 1 && candidate.locale.language == "es") ||
             (filter == 2 && candidate.locale.language == "en")
     }
-    val locale = if (english) Locale.ENGLISH else Locale.forLanguageTag("es-ES")
+    val locale = Locale.forLanguageTag(uiLanguage)
     val selected = installed.firstOrNull { it.name == selectedVoice }
     val selectedDescription = if (selected == null)
-        (if (english) "System default" else "Predeterminada del sistema")
+        NativeReaderVoicePickerStrings.get(uiLanguage, "systemDefault")
     else selected.locale.getDisplayName(locale) + ", " + selected.name
 
-    Text((if (english) "Voice: " else "Voz: ") + selectedDescription)
-    Text((if (english) "Engine: " else "Motor: ") + speaker.engineLabel())
+    Text(NativeReaderVoicePickerStrings.get(uiLanguage, "voice") + selectedDescription)
+    Text(NativeReaderVoicePickerStrings.get(uiLanguage, "engine") + speaker.engineLabel())
      if (!speaker.ready.value) {
-        Text(if (english) "Loading installed voices…" else "Cargando voces instaladas…")
+        Text(NativeReaderVoicePickerStrings.get(uiLanguage, "loading"))
         return
     }
     Button(modifier = Modifier.fillMaxWidth().focusRequester(voiceListToggleFocus),
         onClick = { showing = !showing }) {
-        Text(if (showing) (if (english) "Close" else "Cerrar")
-            else (if (english) "Voices (" else "Voces (") +
+        Text(if (showing) NativeReaderVoicePickerStrings.get(uiLanguage, "close")
+            else NativeReaderVoicePickerStrings.get(uiLanguage, "voices") +
                 voices.size + ")")
     }
     if (status.isNotBlank()) {
@@ -98,8 +89,7 @@ fun NativeReaderVoicePicker(
         }
         if (!success) {
             playingName = null
-            status = if (english) "Could not play this voice. Check its download and connection."
-                else "No se pudo escuchar esta voz. Comprueba su descarga y la conexión."
+            status = NativeReaderVoicePickerStrings.get(uiLanguage, "previewError")
         }
     }
 
@@ -108,40 +98,40 @@ fun NativeReaderVoicePicker(
             TextButton(onClick = {
                 speaker.stop()
                 playingName = null
-            }) { Text(if (english) "Stop sample" else "Detener muestra") }
+            }) { Text(NativeReaderVoicePickerStrings.get(uiLanguage, "stop")) }
         }
-        Text(if (english) "System default voice" else "Voz predeterminada del sistema")
+        Text(NativeReaderVoicePickerStrings.get(uiLanguage, "defaultVoice"))
         OutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = {
             speaker.stop()
             playingName = null
             onVoiceSelected("")
             showing = false
             restoreSettingsFocus = true
-            status = if (english) "System voice selected" else "Voz del sistema seleccionada"
+            status = NativeReaderVoicePickerStrings.get(uiLanguage, "selectedSystem")
         }) {
-            Text(if (english) "Select" else "Elegir")
+            Text(NativeReaderVoicePickerStrings.get(uiLanguage, "select"))
         }
         OutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = {
             preview("", locale.language)
         }) {
-            Text(if (english) "Listen" else "Escuchar")
+            Text(NativeReaderVoicePickerStrings.get(uiLanguage, "listen"))
         }
         voices.forEachIndexed { index, v ->
             val number = index + 1
-            val caption = (if (english) "Voice " else "Voz ") + number +
+            val caption = NativeReaderVoicePickerStrings.get(uiLanguage, "voice") + number +
                 ". " + v.locale.getDisplayName(locale) +
-                ". " + (if (english) "Technical name: " else "Nombre técnico: ") + v.name +
-                ". " + (if (english) "Quality: " else "Calidad: ") +
-                voiceQualityDescription(v.quality, english) +
+                ". " + NativeReaderVoicePickerStrings.get(uiLanguage, "technical") + v.name +
+                ". " + NativeReaderVoicePickerStrings.get(uiLanguage, "quality") +
+                voiceQualityDescription(v.quality, uiLanguage) +
                 ". " + (if (v.isNetworkConnectionRequired)
-                    (if (english) "Internet required" else "Necesita Internet")
-                else (if (english) "Offline capable" else "Puede funcionar sin conexión")) +
-                (if (selectedVoice == v.name) (if (english) ". Selected" else ". Seleccionada") else "")
+                    NativeReaderVoicePickerStrings.get(uiLanguage, "online")
+                else NativeReaderVoicePickerStrings.get(uiLanguage, "offline")) +
+                (if (selectedVoice == v.name) NativeReaderVoicePickerStrings.get(uiLanguage, "selected") else "")
             Text(caption)
             OutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = {
                 preview(v.name, v.locale.language)
             }) {
-                Text(if (english) "Listen" else "Escuchar")
+                Text(NativeReaderVoicePickerStrings.get(uiLanguage, "listen"))
             }
             Button(modifier = Modifier.fillMaxWidth(), onClick = {
                 speaker.stop()
@@ -149,15 +139,13 @@ fun NativeReaderVoicePicker(
                 onVoiceSelected(v.name)
                 showing = false
                 restoreSettingsFocus = true
-                status = if (english) "Voice $number selected for reading"
-                    else "Voz $number seleccionada para leer"
+                status = NativeReaderVoicePickerStrings.get(uiLanguage, "voiceSelected") + " $number"
             }) {
-                Text(if (english) "Select" else "Elegir")
+                Text(NativeReaderVoicePickerStrings.get(uiLanguage, "select"))
             }
         }
         if (voices.isEmpty()) {
-            Text(if (english) "No installed voices match this language filter."
-                else "No hay voces instaladas para este filtro de idioma.")
+            Text(NativeReaderVoicePickerStrings.get(uiLanguage, "empty"))
         }
     }
 }

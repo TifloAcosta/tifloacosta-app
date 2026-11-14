@@ -73,4 +73,10 @@ class NativeSettingsCompactContractTest {
         assertFalse(actions.contains("if (showAudioExport) \"expanded\" else \"collapsed\""))
         assertFalse(actions.contains("if (showOtherActions) \"expanded\" else \"collapsed\""))
     }
+
+    @Test fun previousLibraryOpensDedicatedScreen() {
+        val screen = source("NativeTifloLector.kt")
+        assertTrue(screen.contains("if (screen == \"legacy\")"))
+        assertFalse(screen.contains("if (showPreviousLibrary)"))
+    }
 }

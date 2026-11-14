@@ -86,7 +86,6 @@ fun NativeTifloLector(
     var legacyReadError by remember { mutableStateOf("") }
     // La biblioteca nueva es la predeterminada. El historial anterior permanece
     // recuperable solo si el usuario solicita expresamente verlo.
-    var showPreviousLibrary by rememberSaveable { mutableStateOf(false) }
     LaunchedEffect(Unit) {
         try {
             val previous = withContext(Dispatchers.IO) {
@@ -514,6 +513,55 @@ fun NativeTifloLector(
         }
     }
 
+    if (screen == "legacy") {
+        Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            TextButton(onClick = { screen = "home" }) {
+                Text(NativeReaderLegacyStrings.get(uiLanguage, "backReader"))
+            }
+            Text(NativeReaderLegacyStrings.get(uiLanguage, "legacyRecover"),
+                style = MaterialTheme.typography.headlineSmall,
+                modifier = Modifier.semantics { heading() })
+            legacyState?.let { state ->
+                if (legacyReadError.isNotBlank()) Text(legacyReadError)
+                if (state.databasePresent && state.bookCount == null) {
+                    Text(NativeReaderLegacyStrings.get(uiLanguage, "legacyUnreadable"))
+                } else if ((state.bookCount ?: 0) > 0) {
+                    Text(NativeReaderLegacyStrings.get(uiLanguage, "legacyCount", state.bookCount ?: 0))
+                    legacyBooks.forEach { previous ->
+                        TextButton(onClick = { openPreviousBook(previous.id) },
+                            modifier = Modifier.fillMaxWidth()) {
+                            Text(NativeReaderLegacyStrings.get(uiLanguage, "legacyOpen") + previous.title)
+                        }
+                    }
+                    if (legacyBooks.size < (state.bookCount ?: 0)) {
+                        TextButton(onClick = {
+                            scope.launch {
+                                try {
+                                    val next = withContext(Dispatchers.IO) {
+                                        NativeLegacyLibraryCheck.listBooks(context.applicationContext,
+                                            offset = legacyBooks.size, limit = 20)
+                                    }
+                                    legacyBooks = legacyBooks + next
+                                } catch (_: Exception) {
+                                    legacyReadError = NativeReaderLegacyStrings.get(uiLanguage, "legacyLoadError")
+                                }
+                            }
+                        }, modifier = Modifier.fillMaxWidth()) {
+                            Text(NativeReaderLegacyStrings.get(uiLanguage, "legacyMore"))
+                        }
+                    }
+                }
+                if (state.databasePresent && state.bookCount != 0) {
+                    TextButton(onClick = { openPreviousBook() }, modifier = Modifier.fillMaxWidth()) {
+                        Text(NativeReaderLegacyStrings.get(uiLanguage, "legacyComplete"))
+                    }
+                }
+            }
+        }
+        return
+    }
+
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)) {
         TextButton(onClick = onBack) { Text(NativeReaderLibraryStrings.get(uiLanguage, "home")) }
@@ -634,60 +682,8 @@ fun NativeTifloLector(
         // La biblioteca de la versión antigua NO forma parte de la biblioteca
         // predeterminada. Los archivos originales no se borran ni se modifican.
         if (legacyState?.databasePresent == true && legacyState?.bookCount != 0) {
-            TextButton(
-                onClick = { showPreviousLibrary = !showPreviousLibrary },
-                modifier = Modifier.fillMaxWidth().semantics {
-                    stateDescription = NativeReaderLibraryStrings.get(uiLanguage,
-                        if (showPreviousLibrary) "expanded" else "collapsed")
-                }
-            ) {
+            TextButton(onClick = { screen = "legacy" }, modifier = Modifier.fillMaxWidth()) {
                 Text(NativeReaderLegacyStrings.get(uiLanguage, "legacyRecover"))
-            }
-        }
-        if (showPreviousLibrary) legacyState?.let { state ->
-            if (legacyReadError.isNotBlank()) Text(legacyReadError)
-            if (state.databasePresent && state.bookCount == null) {
-                Text(NativeReaderLegacyStrings.get(uiLanguage, "legacyUnreadable"))
-            } else if ((state.bookCount ?: 0) > 0) {
-                Text(
-                    NativeReaderLegacyStrings.get(uiLanguage, "legacyCount", state.bookCount ?: 0),
-                    style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier.semantics { heading() }
-                )
-                legacyBooks.forEach { previous ->
-                    TextButton(
-                        onClick = { openPreviousBook(previous.id) },
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(NativeReaderLegacyStrings.get(uiLanguage, "legacyOpen") + previous.title)
-                    }
-                }
-                if (legacyBooks.size < (state.bookCount ?: 0)) {
-                    TextButton(
-                        onClick = {
-                            scope.launch {
-                                try {
-                                    val next = withContext(Dispatchers.IO) {
-                                        NativeLegacyLibraryCheck.listBooks(
-                                            context.applicationContext,
-                                            offset = legacyBooks.size, limit = 20
-                                        )
-                                    }
-                                    legacyBooks = legacyBooks + next
-                                } catch (failure: Exception) {
-                                    legacyReadError = NativeReaderLegacyStrings.get(uiLanguage, "legacyLoadError")
-                                }
-                            }
-                        }, modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(NativeReaderLegacyStrings.get(uiLanguage, "legacyMore"))
-                    }
-                }
-            }
-            if (state.databasePresent && state.bookCount != 0) {
-                TextButton(onClick = { openPreviousBook() }, modifier = Modifier.fillMaxWidth()) {
-                    Text(NativeReaderLegacyStrings.get(uiLanguage, "legacyComplete"))
-                }
             }
         }
         if (importResult.isNotBlank()) Text(importResult,

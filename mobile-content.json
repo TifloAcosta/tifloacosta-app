@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-14T06:28:57.500Z",
+  "generatedAt": "2026-11-14T11:31:40.264Z",
   "resources": [
     {
       "kind": "resource",
@@ -5624,6 +5624,56 @@
   "news": [
     {
       "kind": "news",
+      "id": "applevis-apps-492c00d6aac1d6a9:en",
+      "sourceId": "applevis-apps-492c00d6aac1d6a9",
+      "lang": "en",
+      "title": "Teddy Dreams: Match 3 Puzzle",
+      "summary": "Teddy Dreams is a cozy teddy bear puzzle game with soft bedtime charm, juicy match gameplay, and dream-world surprises. Swap teddy bears to make matches, collect level goals, and use powerful bonus items like Blanket Rockets, Pillow Pops, Honey Hearts, and Sparkle Stars. Every level brings a fresh goal: clear special bears, break sleepy obstacles, collect memory cards, rescue falling stars, or survive playful gravity changes. FEATURES • Match colorful teddy bears in quick, satisfying levels • Use cozy bonuses and huge combo clears • Clear Pillow Blocks, Blanket Knots, Toy Boxes, and Dream Fog • Play unlimited journey levels with rising challenge • Try daily challenges and build win streaks • Unlock new teddy styles with useful perks • Follow Teddy across a dreamy level map • Enjoy readable goals, soft animations, and gentle fail states Teddy Dreams is made for short puzzle sessions that still feel magical. Plan smart swaps, set up bonuses, and help Teddy bring light back to each cozy dream.",
+      "body": "Teddy Dreams is a cozy teddy bear puzzle game with soft bedtime charm, juicy match gameplay, and dream-world surprises.\n\nSwap teddy bears to make matches, collect level goals, and use powerful bonus items like Blanket Rockets, Pillow Pops, Honey Hearts, and Sparkle Stars. Every level brings a fresh goal: clear special bears, break sleepy obstacles, collect memory cards, rescue falling stars, or survive playful gravity changes.\n\nFEATURES\n\n• Match colorful teddy bears in quick, satisfying levels • Use cozy bonuses and huge combo clears • Clear Pillow Blocks, Blanket Knots, Toy Boxes, and Dream Fog • Play unlimited journey levels with rising challenge • Try daily challenges and build win streaks • Unlock new teddy styles with useful perks • Follow Teddy across a dreamy level map • Enjoy readable goals, soft animations, and gentle fail states\n\nTeddy Dreams is made for short puzzle sessions that still feel magical. Plan smart swaps, set up bonuses, and help Teddy bring light back to each cozy dream.",
+      "sourceName": "AppleVis Apps",
+      "originalUrl": "https://www.applevis.com/apps/ios/games/teddy-dreams-match-3-puzzle",
+      "publishedAt": "2026-11-14T09:34:16.000Z",
+      "categories": [
+        "apple",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "applevis-apps-0718cba2bff3cd40:en",
+      "sourceId": "applevis-apps-0718cba2bff3cd40",
+      "lang": "en",
+      "title": "Bloom: Garden Puzzle Game",
+      "summary": "Merge two matching flowers, grow a garden, and turn a single seed into a mythical bloom. A relaxing offline tile puzzle with no account, no wifi and no timers. Free to play, forever. HOW TO PLAY • Swipe up, down, left, or right to slide every tile in that direction • Two matching plants merge into the next stage and grow your score • The run keeps going forever, until the board fills up and no merges remain WHAT MAKES BLOOM DIFFERENT • Endless growth. The trophy is just the beginning. Mythical tiers stack past it • Calm, hand-drawn pixel art with gentle haptic feedback on every merge • Plays fully offline, bring it to flights, subways, and waiting rooms • Global leaderboard via World Ladder, see how your best stacks up worldwide • No accounts, no sign-ups, no friend invites. Just plants PERFECT FOR • Five minutes between meetings • Wind-down before bed • Anyone who loves merge / 2048-style puzzles Grow life from a seed. One tap at a time.",
+      "body": "Merge two matching flowers, grow a garden, and turn a single seed into a mythical bloom. A relaxing offline tile puzzle with no account, no wifi and no timers. Free to play, forever.\n\nHOW TO PLAY • Swipe up, down, left, or right to slide every tile in that direction • Two matching plants merge into the next stage and grow your score • The run keeps going forever, until the board fills up and no merges remain\n\nWHAT MAKES BLOOM DIFFERENT • Endless growth. The trophy is just the beginning. Mythical tiers stack past it • Calm, hand-drawn pixel art with gentle haptic feedback on every merge • Plays fully offline, bring it to flights, subways, and waiting rooms • Global leaderboard via World Ladder, see how your best stacks up worldwide • No accounts, no sign-ups, no friend invites. Just plants\n\nPERFECT FOR • Five minutes between meetings • Wind-down before bed • Anyone who loves merge / 2048-style puzzles\n\nGrow life from a seed. One tap at a time.",
+      "sourceName": "AppleVis Apps",
+      "originalUrl": "https://www.applevis.com/apps/ios/games/bloom-garden-puzzle-game",
+      "publishedAt": "2026-11-14T09:23:18.000Z",
+      "categories": [
+        "apple",
+        "apps-accesibles",
+        "android"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "accessible-android-283e15533a6a9ecd:en",
+      "sourceId": "accessible-android-283e15533a6a9ecd",
+      "lang": "en",
+      "title": "Easy Voice",
+      "summary": "Easy Voice is a free text-to-speech routing app for Android. It does not synthesize speech itself; instead, it sits between Android and the TTS engines…",
+      "body": "Published 14 November 2026 by Syed Sharib Ali\n\nEasy Voice is a free text-to-speech routing app for Android. It does not synthesize speech itself; instead, it sits between Android and the TTS engines already installed on the device, routing text to the engine best suited to the detected language and selected mode.\n\nDual Languages Mode uses a primary and secondary language, routing Latin-script text through the primary language and matching non-Latin text to the configured secondary engine.\n\nAuto Language Mode can use as many configured languages as needed and sends each complete block of text to a single matching engine.\n\nMixed Mode processes words and languages with their own configured TTS engines, making it better suited to content that frequently switches languages.\n\nEasy Voice also includes advanced options for smart number processing, punctuation handling, quick character reading, accessibility-volume output, and Keep Alive behavior.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nSetting up Easy Voice takes only a few minutes. Follow these steps:\n\nThe Configurations tab gives you detailed control over every language. You can enable, disable, or remove languages at any time. There is also a checkbox that invokes the corresponding TTS engine immediately, with no delay. This is especially useful when a TTS engine supports only one language.\n\nThe Advanced tab offers several options for tuning how Easy Voice behaves:\n\nLast Tested App version and Android version:\n\n1.1. Android 17\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility.\n\nPublished in General",
+      "sourceName": "Accessible Android",
+      "originalUrl": "https://accessibleandroid.com/app/easy-voice/",
+      "publishedAt": "2026-11-14T07:01:30.000Z",
+      "categories": [
+        "android",
+        "apps-accesibles",
+        "tecnologia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "applevis-blog-d7fabc9d936dd7df:en",
       "sourceId": "applevis-blog-d7fabc9d936dd7df",
       "lang": "en",
@@ -6259,39 +6309,6 @@
     },
     {
       "kind": "news",
-      "id": "applevis-apps-f6701b041c7d7fbc:en",
-      "sourceId": "applevis-apps-f6701b041c7d7fbc",
-      "lang": "en",
-      "title": "Nano Empire 2",
-      "summary": "Once, nanobots gave humans godlike power to create worlds, limited only by their imagination. But now the Creators have lost control of the creations! You, a humble starship captain, are all that stands between the galaxy and destruction. Nano Empire 2 is an incremental sandbox text adventure, featuring 30 handcrafted worlds where dreams have turned into nightmares. Endless beach parties suddenly have a leviathan problem. Crystal automata rise up against the Queen of Light. A rogue nanobot factory produces strangely beautiful horrors. A royal family of sentient trees has forgotten how to reproduce. There are also vampires, inverted merpeople, and a Great Clown Head. And of course, all these factions are at war... Without nanobots meeting everyone's needs automatically, ship captains like you are about to become the most important people in the galaxy. Transport resources to populations who desperately need them, take sides in wars or profit from both sides, befriend eccentric creatures, grow your fleet, and maybe even research a way to undo the damage. Every world has a dramatically different vision for the future of civilization, and your choices will determine which one is successful. You don't need to have played Nano Empire 1 to enjoy this game, but returning players will notice many recurring characters... -Will Peter Frederick ever grow up and care about something other than partying? -Will Zithguul the giant scorpion escape from the Petting Zoo? -What will happen with Roland, Carla, and the ongoing conflict between the Underworld and the Core?* Features: -100% human-written. No generative AI was used to make this game. -Simple and elegant resource management as in Nano Empire 1. All the storytelling of an open world space opera with none of the tedious inventory management. -30 factions playing out a dynamic simulation of economy, war, and culture. Every action you take affects the balance of power. -Several days of idle gameplay. Each world unlocks new activities over time as it grows. -Collect artifacts and allies with world-shattering effects (sometimes literally). -Over 40 possible endings! (You can experience multiple endings without having to restart the game every time. A handy Ending Tracker is included.) -Play the complete game for free with no ads. An in-app purchase is available to unlock optional worlds and bonus resources. -Fully accessible with VoiceOver. *If you haven't already figured it out, this game takes place after the most interesting ending of Nano Empire: the one with the apocalypse...",
-      "body": "Once, nanobots gave humans godlike power to create worlds, limited only by their imagination. But now the Creators have lost control of the creations! You, a humble starship captain, are all that stands between the galaxy and destruction.\n\nNano Empire 2 is an incremental sandbox text adventure, featuring 30 handcrafted worlds where dreams have turned into nightmares. Endless beach parties suddenly have a leviathan problem. Crystal automata rise up against the Queen of Light. A rogue nanobot factory produces strangely beautiful horrors. A royal family of sentient trees has forgotten how to reproduce. There are also vampires, inverted merpeople, and a Great Clown Head. And of course, all these factions are at war...\n\nWithout nanobots meeting everyone's needs automatically, ship captains like you are about to become the most important people in the galaxy. Transport resources to populations who desperately need them, take sides in wars or profit from both sides, befriend eccentric creatures, grow your fleet, and maybe even research a way to undo the damage. Every world has a dramatically different vision for the future of civilization, and your choices will determine which one is successful.\n\nYou don't need to have played Nano Empire 1 to enjoy this game, but returning players will notice many recurring characters... -Will Peter Frederick ever grow up and care about something other than partying? -Will Zithguul the giant scorpion escape from the Petting Zoo? -What will happen with Roland, Carla, and the ongoing conflict between the Underworld and the Core?*\n\nFeatures: -100% human-written. No generative AI was used to make this game. -Simple and elegant resource management as in Nano Empire 1. All the storytelling of an open world space opera with none of the tedious inventory management. -30 factions playing out a dynamic simulation of economy, war, and culture. Every action you take affects the balance of power. -Several days of idle gameplay. Each world unlocks new activities over time as it grows. -Collect artifacts and allies with world-shattering effects (sometimes literally). -Over 40 possible endings! (You can experience multiple endings without having to restart the game every time. A handy Ending Tracker is included.) -Play the complete game for free with no ads. An in-app purchase is available to unlock optional worlds and bonus resources. -Fully accessible with VoiceOver.\n\n*If you haven't already figured it out, this game takes place after the most interesting ending of Nano Empire: the one with the apocalypse... Ratings & Reviews",
-      "sourceName": "AppleVis Apps",
-      "originalUrl": "https://www.applevis.com/apps/ios/games/nano-empire-2",
-      "publishedAt": "2026-11-07T09:00:20.000Z",
-      "categories": [
-        "apple",
-        "apps-accesibles",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "applevis-apps-5607d31a1bc19b36:en",
-      "sourceId": "applevis-apps-5607d31a1bc19b36",
-      "lang": "en",
-      "title": "FruitPot Adventures",
-      "summary": "A luxury hotel, a missing necklace, and a resourceful detective. Enjoy hours of fun in a free mystery adventure you can play offline, with VoiceOver support. Join James F. Pot as he investigates the Golden Lion Hotel. Talk to its quirky guests, uncover clues, try on disguises, and combine items to solve situations that are as puzzling as they are hilarious. HOURS OF FUN AND CLEVER PUZZLES Explore the hotel and tackle logic, memory, and sound puzzles. Every conversation and every item could help you move forward. Sometimes you’ll need a tool. Sometimes, a disguise. And almost always, a little ingenuity. PLAY OFFLINE, AT YOUR OWN PACE Play without an internet connection and take your investigation wherever you go. Automatic saving keeps your progress safe, and three save slots let you organize your adventures. ACCESSIBILITY THAT LETS YOU EXPLORE YOUR WAY • VoiceOver support. • Descriptions of scenes, objects, and characters. • Guided controls to browse, select, and describe elements around you. • Customizable voice narration. • Separate volume controls for music, ambient sounds, voices, and sound effects. • Options for larger buttons and more vivid colors. • Map zoom to explore the details. • Reduced animation and outlines for interactive areas. FOR IPHONE AND IPAD Enjoy retro-style scenery, music, and memorable characters, with text in English, Spanish, French, German and Italian. THE COMPLETE GAME IS FREE No ads and no payments required to continue the story. You can finish the entire adventure for free. If you’d like to support future adventures, you’ll find four optional contribution levels under the star on the main menu. Each level unlocks a supporter emblem, without gameplay advantages or content needed to finish the adventure. Contributions require an internet connection to the App Store. There’s a mystery waiting at the Golden Lion. James F. Pot has just arrived.",
-      "body": "A luxury hotel, a missing necklace, and a resourceful detective. Enjoy hours of fun in a free mystery adventure you can play offline, with VoiceOver support.\n\nJoin James F. Pot as he investigates the Golden Lion Hotel. Talk to its quirky guests, uncover clues, try on disguises, and combine items to solve situations that are as puzzling as they are hilarious.\n\nHOURS OF FUN AND CLEVER PUZZLES\n\nExplore the hotel and tackle logic, memory, and sound puzzles. Every conversation and every item could help you move forward. Sometimes you’ll need a tool. Sometimes, a disguise. And almost always, a little ingenuity.\n\nPLAY OFFLINE, AT YOUR OWN PACE\n\nPlay without an internet connection and take your investigation wherever you go. Automatic saving keeps your progress safe, and three save slots let you organize your adventures.\n\nACCESSIBILITY THAT LETS YOU EXPLORE YOUR WAY\n\n• VoiceOver support. • Descriptions of scenes, objects, and characters. • Guided controls to browse, select, and describe elements around you. • Customizable voice narration. • Separate volume controls for music, ambient sounds, voices, and sound effects. • Options for larger buttons and more vivid colors. • Map zoom to explore the details. • Reduced animation and outlines for interactive areas.\n\nFOR IPHONE AND IPAD\n\nEnjoy retro-style scenery, music, and memorable characters, with text in English, Spanish, French, German and Italian.\n\nTHE COMPLETE GAME IS FREE\n\nNo ads and no payments required to continue the story. You can finish the entire adventure for free.\n\nIf you’d like to support future adventures, you’ll find four optional contribution levels under the star on the main menu. Each level unlocks a supporter emblem, without gameplay advantages or content needed to finish the adventure. Contributions require an internet connection to the App Store.\n\nThere’s a mystery waiting at the Golden Lion. James F. Pot has just arrived.",
-      "sourceName": "AppleVis Apps",
-      "originalUrl": "https://www.applevis.com/apps/ios/games/fruitpot-adventures",
-      "publishedAt": "2026-11-06T22:12:22.000Z",
-      "categories": [
-        "apple",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "nvda-es-79fb7dbcfcc0ec0b:es",
       "sourceId": "nvda-es-79fb7dbcfcc0ec0b",
       "lang": "es",
@@ -6389,23 +6406,6 @@
         "windows",
         "tecnologia-accesibilidad",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "nvda-es-d4e8e6cd34198fb4:es",
-      "sourceId": "nvda-es-d4e8e6cd34198fb4",
-      "lang": "es",
-      "title": "Ya disponible la primera candidata a liberación de NVDA 2026.3.1 con correcciones de seguridad",
-      "summary": "Tal y como ha anunciado NV Access mediante esta publicación, la rc 1 de NVDA 2026.3.1 ya se encuentra disponible para descarga y pruebas. Se recomienda a todos los usuarios descargar esta versión y proporcionar comentarios por los canales de la comunidad, o por el sistema de informe de fallos de NV Access. A menos … Continuar leyendo \"Ya disponible la primera candidata a liberación de NVDA 2026.3.1 con correcciones de seguridad\" La entrada Ya disponible la primera candidata a liberación de NVDA 2026.3.1 con correcciones de seguridad se publicó primero en NVDA en español .",
-      "body": "Tal y como ha anunciado NV Access mediante esta publicación , la rc 1 de NVDA 2026.3.1 ya se encuentra disponible para descarga y pruebas. Se recomienda a todos los usuarios descargar esta versión y proporcionar comentarios por los canales de la comunidad, o por el sistema de informe de fallos de NV Access . A menos que se detecten fallos críticos de última hora, esta versión será idéntica a la versión final de NVDA 2026.3. Esta versión no es apta para entornos de producción. Al instalar esta rc te unirás al canal beta, y sólo recibirás avisos de actualización de compilaciones beta y candidatas a liberación (rc). El canal beta/rc siempre te mantendrá al día con la versión más reciente de NVDA. La última rc de un ciclo de liberación es idéntica a la última versión estable. Para regresar al canal de versiones estables, instala a mano la última versión estable.\n\nEsta versión contiene un parche que resuelve incidencias de seguridad. También corrige un fallo introducido en NVDA 2026.3 con el conmutador de tareas de Windows 10. Se ha restaurado la voz de Espeak NG en portugués de Brasil al comportamiento que tenía en NVDA 2026.2. Para instalar esta rc, puedes configurar el canal «rc y beta» en el complemento Selector del canal de actualización y buscar actualizaciones desde el menú Ayuda de NVDA, o actualizar desde una beta anterior. Y como siempre, también puedes descargar manualmente el instalador de NVDA 2026.3.1 rc 1 . Su suma de comprobación SHA256, que te permitirá garantizar la integridad del archivo descargado, es 25761ace59812a5d60cc7282cca253c78d9293ce3e710eafb2b29783b5a1257c. ¡Feliz miércoles!\n\nLa entrada Ya disponible la primera candidata a liberación de NVDA 2026.3.1 con correcciones de seguridad se publicó primero en NVDA en español .",
-      "sourceName": "NVDA en español",
-      "originalUrl": "https://nvda.es/2026/11/04/ya-disponible-la-primera-candidata-a-liberacion-de-nvda-2026-3-1-con-correcciones-de-seguridad/",
-      "publishedAt": "2026-11-04T06:39:45.000Z",
-      "categories": [
-        "nvda",
-        "windows",
-        "tecnologia-accesibilidad"
       ]
     }
   ]

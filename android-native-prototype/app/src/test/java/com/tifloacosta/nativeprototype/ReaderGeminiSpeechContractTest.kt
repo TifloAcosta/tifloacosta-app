@@ -24,6 +24,7 @@ class ReaderGeminiSpeechContractTest {
         assertTrue(ui.contains("NativeGeminiSpeech.generate"))
         assertTrue(ui.contains("preview.play(wav)"))
         assertTrue(ui.contains("preview.stop()"))
-        assertTrue(ui.contains("puede consumir cuota"))
+        assertTrue(ui.contains("NativeReaderGeminiStrings.get(uiLanguage, \"quota\")"))
+        assertTrue(source("NativeReaderGeminiStrings.kt").contains("puede consumir cuota"))
     }
 }

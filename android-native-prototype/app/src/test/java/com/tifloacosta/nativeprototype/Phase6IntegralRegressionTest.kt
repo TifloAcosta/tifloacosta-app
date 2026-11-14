@@ -30,16 +30,19 @@ class Phase6IntegralRegressionTest {
     @Test fun bookmarkActionsHaveAccessibleFeedback() {
         val reader = source("NativeTifloLector.kt")
         assertTrue(reader.contains("bookmarkMessage"))
-        assertTrue(reader.contains("Marca solicitada en la posición actual."))
-        assertTrue(reader.contains("Ya existe una marca en esta posición."))
+        assertTrue(reader.contains("NativeReaderInlineStrings.get(uiLanguage, \"bookmarkCreated\")"))
+        assertTrue(reader.contains("NativeReaderInlineStrings.get(uiLanguage, \"bookmarkExists\")"))
+        val labels = source("NativeReaderInlineStrings.kt")
+        assertTrue(labels.contains("\"bookmarkCreated\""))
+        assertTrue(labels.contains("\"bookmarkExists\""))
         assertTrue(reader.contains("liveRegion = LiveRegionMode.Polite"))
     }
 
     @Test fun navigationSelectorStaysNextToPlaybackControl() {
         val reader = source("NativeTifloLector.kt")
-        val play = reader.indexOf("else (if (english) \"Play\" else \"Reproducir\")")
-        val navigation = reader.indexOf("if (english) \"Move by\" else \"Avanzar y retroceder por\"")
-        val engine = reader.indexOf("if (english) \"Engine\" else \"Motor\"")
+        val play = reader.indexOf("NativeReaderPlaybackStrings.get(uiLanguage, \"play\")")
+        val navigation = reader.indexOf("NativeReaderPlaybackStrings.get(uiLanguage, \"moveBy\")")
+        val engine = reader.indexOf("NativeReaderInlineStrings.get(uiLanguage, \"engine\")")
         assertTrue("Playback button must precede the navigation selector", play >= 0 && navigation > play)
         assertTrue("Navigation must precede voice configuration", engine > navigation)
     }
@@ -51,7 +54,8 @@ class Phase6IntegralRegressionTest {
         assertTrue(screen.contains("selectedProvider = \"gemini\""))
         assertTrue(screen.contains("selectedProvider == \"phonon\""))
         assertTrue(screen.contains("selectedProvider == \"gemini\""))
-        assertTrue(screen.contains("Volver a motores"))
+        assertTrue(screen.contains("\"backEngines\""))
+        assertTrue(source("NativeReaderPhononStrings.kt").contains("\"backEngines\""))
         assertTrue(screen.contains("if (selectedProvider != null) backFromProvider() else onBack()"))
     }
 
@@ -59,7 +63,7 @@ class Phase6IntegralRegressionTest {
         val reader = source("NativeTifloLector.kt")
         val service = source("NativeReaderPlaybackService.kt")
         assertTrue(reader.contains("if (startOnOpen && !playing) startSpeech()"))
-        assertTrue(reader.contains("Detener lectura"))
+        assertTrue(reader.contains("NativeReaderPlaybackStrings.get(uiLanguage, \"stop\")"))
         assertTrue(reader.contains("ACTION_STOP"))
         assertTrue(service.contains("handler.removeCallbacks(resumeAfterPunctuation)"))
         assertTrue(service.contains("phononGeneration++"))
@@ -69,9 +73,10 @@ class Phase6IntegralRegressionTest {
     @Test fun libraryShowsFoldersAndDirectAudioExportAction() {
         val reader = source("NativeTifloLector.kt")
         val tools = source("NativeReaderDocumentActions.kt")
-        assertTrue(reader.contains("Convertir a audio o DAISY"))
         assertTrue(reader.contains("open(book, openExport = true)"))
-        assertTrue(reader.contains("Carpetas"))
+        assertTrue(source("NativeReaderPlaybackStrings.kt").contains("\"convert\""))
+        assertTrue(reader.contains("open(book, openExport = true)"))
+        assertTrue(reader.contains("NativeReaderLibraryStrings.get(uiLanguage, \"myLibrary\")"))
         assertTrue(tools.contains("initialAudioExport"))
         assertTrue(tools.contains("if (showAudioExport)"))
         assertTrue(tools.contains("if (showOtherActions)"))
@@ -81,9 +86,9 @@ class Phase6IntegralRegressionTest {
         val settings = source("NativeReaderSettings.kt")
         val service = source("NativeReaderPlaybackService.kt")
         assertTrue(settings.contains("contentDescription = label + \": \" + choices[index]"))
-        assertTrue(settings.contains("Tono de la voz del sistema"))
-        assertTrue(settings.contains("Pausa tras comas y punto y coma"))
-        assertTrue(settings.contains("Pausa al final de frase"))
+        assertTrue(settings.contains("NativeReaderSettingsStrings.get(uiLanguage, \"systemPitch\")"))
+        assertTrue(settings.contains("NativeReaderSettingsStrings.get(uiLanguage, \"pauseComma\")"))
+        assertTrue(settings.contains("NativeReaderSettingsStrings.get(uiLanguage, \"pausePeriod\")"))
         assertTrue(service.contains("setPitch("))
         assertTrue(service.contains("pause.comma"))
         assertTrue(service.contains("pause.period"))
@@ -91,7 +96,7 @@ class Phase6IntegralRegressionTest {
 
     @Test fun libraryTitleAndProgressShareOneTalkBackStop() {
         val library = source("NativeTifloLector.kt")
-        assertTrue(library.contains("contentDescription = book.title + \". \" + readingStatus"))
+        assertTrue(library.contains("contentDescription = NativeReaderRowPresentation.label(book, readingStatus, talkBackDetail, uiLanguage)"))
         assertTrue(library.contains("Text(book.title + \". \" + readingStatus)"))
         assertTrue(!library.contains("Text(readingStatus + if (book.id in queuedIds)"))
     }
@@ -112,8 +117,9 @@ class Phase6IntegralRegressionTest {
         assertTrue(library.contains("fun savedEpisodes()"))
         assertTrue(library.contains("fun importOPML("))
         assertTrue(library.contains("fun recordFeedCheck("))
-        assertTrue(screen.contains("Reproducir favorito"))
-        assertTrue(screen.contains("Consultar episodios"))
+        assertTrue(screen.contains("label(\"favoritePlay\")"))
+        assertTrue(screen.contains("label(\"followedLoading\")"))
+        assertTrue(screen.contains("library.recordFeedCheck("))
     }
 
     @Test fun youtubeAccountKeepsOptionalSignInAndSubscriptionPages() {

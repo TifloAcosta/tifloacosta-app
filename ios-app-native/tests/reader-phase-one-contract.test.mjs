@@ -13,7 +13,7 @@ test('The reading opening mode is persistent, opt-in and applied once per openin
   assert.match(settings, /Manual, reproducir cuando lo indique/);
   assert.match(settings, /Automático, reproducir al abrir/);
   assert.match(reader, /if !didApplyOpeningMode/);
-  assert.match(reader, /if readingMode == 1 \{ play\(\) \}/);
+  assert.match(reader, /if readingMode == 1 \{ startAutomaticReadingAfterOpening\(\) \}/);
 });
 
 test('General settings are folded into navigable destinations', () => {

@@ -213,6 +213,17 @@
 "Traducir fragmento actual" = "Traduzir fragmento atual";
 "Compartir archivo de audio" = "Partilhar ficheiro de áudio";
 "Compartir todas las pistas de audio (ZIP)" = "Partilhar todas as faixas de áudio (ZIP)";
+"Compartir libro DAISY completo (ZIP)" = "Partilhar o livro DAISY completo (ZIP)";
+"Exportar" = "Exportar";
+"Lectura con línea braille" = "Leitura com linha braille";
+"Lectura continua" = "Leitura contínua";
+"TifloLector conserva los párrafos y la posición para navegar con VoiceOver y una línea braille. Puedes utilizar braille y voz al mismo tiempo." = "O TifloLector mantém os parágrafos e a posição de leitura para navegar com VoiceOver e uma linha braille. Podes usar braille e voz em simultâneo.";
+"Los controles de reproducción y ajustes aparecen antes del texto. Al leer manualmente no se inicia la voz ni se desplaza el foco por cuenta de TifloLector." = "Os controlos de reprodução e as definições surgem antes do texto. Na leitura manual, o TifloLector não inicia a voz nem desloca o foco automaticamente.";
+"Preferencias de VoiceOver" = "Preferências do VoiceOver";
+"Para configurar tu línea: Ajustes del iPhone, Accesibilidad, VoiceOver, Braille." = "Para configurar a linha: Definições do iPhone, Acessibilidade, VoiceOver, Braille.";
+"Duración del avance automático: ajusta el ritmo de avance de la línea si tu dispositivo lo admite." = "Duração do avanço automático: ajusta a velocidade se o dispositivo o permitir.";
+"Cambio de página automático: permite continuar al desplazarte cuando la presentación lo admite." = "Mudança automática de página: continua ao deslocar-te quando a apresentação o permitir.";
+"Estas opciones pertenecen a VoiceOver; TifloLector no modifica sus valores." = "Estas opções pertencem ao VoiceOver; o TifloLector não altera os seus valores.";
 "Esta obra todavía no tiene marcas." = "Este livro ainda não tem marcadores.";
 "Eliminar esta marca" = "Eliminar este marcador";
 "Navegación DAISY" = "Navegação DAISY";

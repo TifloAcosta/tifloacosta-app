@@ -32,7 +32,7 @@ test('reproducción automática continúa de pista en pista, sin saltar al pausa
   assert.match(reader, /self\.playlistIndex = next/);
   assert.match(reader, /self\.onTrackChanged\?\(next\)/);
   assert.match(reader, /player\.pause\(\)/);
-  assert.match(reader, /onDisappear \{\s*NativeQuickBookmarkBridge\.saveActiveReader = nil\s*persistPosition\(\)\s*speech\.onSleepExpired = nil\s*speech\.stop\(\)/);
+  assert.match(reader, /onDisappear \{\s*openingPlaybackTask\?\.cancel\(\)\s*openingPlaybackTask = nil\s*NativeQuickBookmarkBridge\.saveActiveReader = nil\s*persistPosition\(\)\s*speech\.onSleepExpired = nil\s*speech\.stop\(\)/);
 });
 
 test('progreso conserva pista y porcentaje; marcas de audio distinguen capítulos', () => {

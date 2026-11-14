@@ -657,13 +657,20 @@ final class NativeReadingSpeech: ObservableObject {
     // En la voz sustituimos solo esos marcadores por espacios del mismo tamaño:
     // así ningún cursor, marca o posición de lectura cambia.
     private static func textForSpeech(_ source: String) -> String {
-        guard let pattern = try? NSRegularExpression(pattern: #"(?m)^#{1,6}(?=[ \t])"#)
-        else { return source }
         var result = source
-        for match in pattern.matches(in: source,
-                                     range: NSRange(source.startIndex..., in: source)).reversed() {
-            guard let range = Range(match.range, in: result) else { continue }
-            result.replaceSubrange(range, with: String(repeating: " ", count: match.range.length))
+        if let pattern = try? NSRegularExpression(pattern: #"(?m)^#{1,6}(?=[ \t])"#) {
+            for match in pattern.matches(in: source,
+                                         range: NSRange(source.startIndex..., in: source)).reversed() {
+                guard let range = Range(match.range, in: result) else { continue }
+                result.replaceSubrange(range, with: String(repeating: " ", count: match.range.length))
+            }
+        }
+        // Keep original punctuation in EPUB/DAISY/braille. Some voices read
+        // the opening mark aloud; for synthesized speech the closing ! still
+        // signals the exclamation. Replace one character with one space so
+        // saved offsets and bookmarks remain stable.
+        if let opening = try? NSRegularExpression(pattern: #"¡(?=\p{L})"#) {
+            result = opening.replacingMatches(in: result, range: NSRange(result.startIndex..., in: result), withTemplate: " ")
         }
         return result
     }
@@ -1941,6 +1948,7 @@ struct NativeReadingScreen: View {
     @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
     @AppStorage("native-reader-phonon-voice") private var phononVoice = ""
     @State private var didApplyOpeningMode = false
+    @State private var openingPlaybackTask: Task<Void, Never>?
     @State private var sleepIndex = 0 // Each open document starts with timer disabled.
     @State private var sleepDeadline: Date?
     @State private var currentPercent = 0
@@ -2152,6 +2160,17 @@ struct NativeReadingScreen: View {
             startTextSpeech()
         }
         applySleepTimer()
+    }
+
+    private func startAutomaticReadingAfterOpening() {
+        openingPlaybackTask?.cancel()
+        // Wait for the reader, accessibility focus and stored cursor to settle.
+        // The same continuous playback path is used as the Reproducir button.
+        openingPlaybackTask = Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(350))
+            guard !Task.isCancelled, readingMode == 1, !speech.isPlaying else { return }
+            play()
+        }
     }
 
     private func refreshLiveReadingSettings() {
@@ -2900,8 +2919,17 @@ struct NativeReadingScreen: View {
         focusedFragment = savedFragment
     }
 
+    private func visibleReaderFragment(at index: Int) -> String {
+        // The imported Markdown heading marks are structural metadata; do not
+        // expose a literal # to VoiceOver or a refreshable braille display.
+        textLayout.fragments[index].replacingOccurrences(
+            of: #"(?m)^#{1,6}(?=[ \t])"#,
+            with: "", options: .regularExpression
+        )
+    }
+
     private func readerFragment(at index: Int) -> some View {
-        Text(textLayout.fragments[index])
+        Text(visibleReaderFragment(at: index))
             .font(.system(size: effectiveTextSize))
             .fontWeight(effectiveStrongText ? .bold : .regular)
             .lineSpacing(CGFloat(effectiveLineSpacing) * 4)
@@ -2996,7 +3024,14 @@ struct NativeReadingScreen: View {
             library.toggleFavorite(document)
         }
         if let original = library.originalURL(for: document) {
-            Button("Compartir documento original") { NativeShare.present(url: original) }
+            if latest.fileExtension?.lowercased() == "daisy",
+               original.pathExtension.lowercased() == "zip" {
+                Button("Compartir libro DAISY completo (ZIP)") {
+                    NativeShare.present(url: original)
+                }
+            } else {
+                Button("Compartir documento original") { NativeShare.present(url: original) }
+            }
         }
         if !latest.body.isEmpty {
             Button("Exportar texto") { exportText() }
@@ -3115,14 +3150,23 @@ struct NativeReadingScreen: View {
         VStack(spacing: 0) {
             quickControls
             Divider().accessibilityHidden(true)
-            translatedReadingContent
             readerFooterControls
+            translatedReadingContent
         }
         .tifloScreenSurface()
         .navigationTitle(document.title)
         .navigationBarTitleDisplayMode(.inline)
 
         .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(document.title)
+                    .font(.headline)
+                    .lineLimit(1)
+                    .accessibilityAddTraits(.isHeader)
+                    .accessibilityAction(named: Text("Exportar")) {
+                        showAudioExport = true
+                    }
+            }
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Acciones") { showDocumentActions = true }
                     .accessibilityHint("Marcas, favoritos, traducción, exportación y navegación.")
@@ -3205,7 +3249,7 @@ struct NativeReadingScreen: View {
             NativeQuickBookmarkBridge.saveActiveReader = { addBookmark() }
             if !didApplyOpeningMode {
                 didApplyOpeningMode = true
-                if readingMode == 1 { play() }
+                if readingMode == 1 { startAutomaticReadingAfterOpening() }
             }
         }
         .onChange(of: sleepIndex) { _, _ in
@@ -3244,6 +3288,8 @@ struct NativeReadingScreen: View {
             }
         }
         .onDisappear {
+            openingPlaybackTask?.cancel()
+            openingPlaybackTask = nil
             NativeQuickBookmarkBridge.saveActiveReader = nil
             persistPosition()
             speech.onSleepExpired = nil

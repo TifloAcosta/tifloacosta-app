@@ -14,9 +14,9 @@ test('reader quick controls appear in requested order before text', () => {
   assert.doesNotMatch(controls, /Button\("Información"|Button\("Buscar en el documento"|Button\("Marcas guardadas"/);
 });
 
-test('marks and visual/audio settings follow the document text', () => {
+test('marks and visual/audio settings precede the document text', () => {
   const chrome = section('private var readerChrome: some View {', 'private var readerWithSheets');
-  assert.match(chrome, /translatedReadingContent\s+readerFooterControls/);
+  assert.match(chrome, /readerFooterControls\s+translatedReadingContent/);
   const footer = section('private var readerFooterControls: some View {', 'private var readerChrome');
   assert.match(footer, /Button\("Marcas guardadas"/);
   assert.match(footer, /Button\("Audio"/);

@@ -545,6 +545,22 @@ struct NativeReaderSettingsScreen: View {
                 .tifloScreenSurface()
                 .navigationTitle("Modo de lectura")
             }
+            NavigationLink("Lectura con línea braille") {
+                List {
+                    Section("Lectura continua") {
+                        Text("TifloLector conserva los párrafos y la posición para navegar con VoiceOver y una línea braille. Puedes utilizar braille y voz al mismo tiempo.")
+                        Text("Los controles de reproducción y ajustes aparecen antes del texto. Al leer manualmente no se inicia la voz ni se desplaza el foco por cuenta de TifloLector.")
+                    }
+                    Section("Preferencias de VoiceOver") {
+                        Text("Para configurar tu línea: Ajustes del iPhone, Accesibilidad, VoiceOver, Braille.")
+                        Text("Duración del avance automático: ajusta el ritmo de avance de la línea si tu dispositivo lo admite.")
+                        Text("Cambio de página automático: permite continuar al desplazarte cuando la presentación lo admite.")
+                        Text("Estas opciones pertenecen a VoiceOver; TifloLector no modifica sus valores.")
+                    }
+                }
+                .tifloScreenSurface()
+                .navigationTitle("Lectura con línea braille")
+            }
             NavigationLink("Ajustes visuales") { NativeReaderVisualSettingsScreen() }
             NavigationLink("OCR y reconocimiento") { NativeReaderOCRSettingsScreen() }
             NavigationLink("Navegación y avances") {

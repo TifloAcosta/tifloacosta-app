@@ -213,6 +213,17 @@
 "Traducir fragmento actual" = "Aktuellen Abschnitt übersetzen";
 "Compartir archivo de audio" = "Audiodatei teilen";
 "Compartir todas las pistas de audio (ZIP)" = "Alle Audiospuren teilen (ZIP)";
+"Compartir libro DAISY completo (ZIP)" = "Vollständiges DAISY-Buch teilen (ZIP)";
+"Exportar" = "Exportieren";
+"Lectura con línea braille" = "Lesen mit Braillezeile";
+"Lectura continua" = "Fortlaufendes Lesen";
+"TifloLector conserva los párrafos y la posición para navegar con VoiceOver y una línea braille. Puedes utilizar braille y voz al mismo tiempo." = "TifloLector erhält Absätze und Leseposition für die Navigation mit VoiceOver und einer Braillezeile. Braille und Sprachausgabe lassen sich gleichzeitig nutzen.";
+"Los controles de reproducción y ajustes aparecen antes del texto. Al leer manualmente no se inicia la voz ni se desplaza el foco por cuenta de TifloLector." = "Wiedergabesteuerung und Einstellungen stehen vor dem Text. Beim manuellen Lesen startet TifloLector keine Sprachausgabe und verschiebt den Fokus nicht selbstständig.";
+"Preferencias de VoiceOver" = "VoiceOver-Einstellungen";
+"Para configurar tu línea: Ajustes del iPhone, Accesibilidad, VoiceOver, Braille." = "Braillezeile konfigurieren: iPhone-Einstellungen, Bedienungshilfen, VoiceOver, Braille.";
+"Duración del avance automático: ajusta el ritmo de avance de la línea si tu dispositivo lo admite." = "Dauer des automatischen Vorlaufs: Lesegeschwindigkeit einstellen, sofern das Gerät dies unterstützt.";
+"Cambio de página automático: permite continuar al desplazarte cuando la presentación lo admite." = "Automatischer Seitenwechsel: beim Weiterschalten fortfahren, sofern die Darstellung es unterstützt.";
+"Estas opciones pertenecen a VoiceOver; TifloLector no modifica sus valores." = "Diese Einstellungen gehören zu VoiceOver; TifloLector ändert ihre Werte nicht.";
 "Esta obra todavía no tiene marcas." = "Dieses Buch hat noch keine Lesezeichen.";
 "Eliminar esta marca" = "Dieses Lesezeichen löschen";
 "Navegación DAISY" = "DAISY-Navigation";

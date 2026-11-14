@@ -1,10 +1,10 @@
-// Public App Store 1.2 submission. It never assigns a TestFlight tester group.
+// Public App Store 1.3 submission. It never assigns a TestFlight tester group.
 import crypto from 'node:crypto';
 import fs from 'node:fs';
-const spec=JSON.parse(fs.readFileSync('ios-app-native/release/appstore-1.2.json','utf8'));
+const spec=JSON.parse(fs.readFileSync('ios-app-native/release/appstore-1.3.json','utf8'));
 const buildNumber=process.env.TARGET_BUILD;
 if(!buildNumber || !/^\d+$/.test(buildNumber))throw Error('Explicit target build is required');
-if(spec.version!=='1.2'||spec.bundleId!=='com.tifloacosta.app')throw Error('Wrong release target');
+if(spec.version!=='1.3'||spec.bundleId!=='com.tifloacosta.app')throw Error('Wrong release target');
 const required=['APPSTORE_API_KEY_ID','APPSTORE_API_ISSUER_ID','APPSTORE_API_PRIVATE_KEY'];
 for(const name of required)if(!process.env[name])throw Error('Missing protected Apple key '+name);
 let key=process.env.APPSTORE_API_PRIVATE_KEY.trim().replace(/^["']|["']$/g,'')
@@ -70,7 +70,7 @@ if(appLocaleCodes.length===0)throw Error('No public metadata locales');
 const notesLocaleCodes=Object.keys(spec.whatsNew).sort();
 if(JSON.stringify(appLocaleCodes)!==JSON.stringify(notesLocaleCodes))
  throw Error('App Store locales '+appLocaleCodes.join(',')+' do not match prepared What’s New '+notesLocaleCodes.join(','));
-const previous=allVersions.find(x=>x.attributes?.versionString==='1.1');
+const previous=allVersions.find(x=>x.attributes?.versionString==='1.2');
 const priorLocals=previous?
   await list('appStoreVersions/'+previous.id+'/appStoreVersionLocalizations?limit=100'):[];
 let current=await list('appStoreVersions/'+version.id+'/appStoreVersionLocalizations?limit=100');

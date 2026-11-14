@@ -1,8 +1,9 @@
-name: TifloAcosta iOS 1.2 - compilar y subir candidata publica a Apple
+name: TifloAcosta iOS 1.3 - compilar y subir candidata publica a Apple
 on:
   push:
     branches:
       - audit/ios-public-release-six-languages-20261112
+      - fix/ios-daisy-clipbegin-milliseconds-20261113
     paths:
       - '.github/workflows/ios-appstore-public-upload.yml'
   workflow_dispatch:

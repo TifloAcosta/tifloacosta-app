@@ -670,7 +670,10 @@ final class NativeReadingSpeech: ObservableObject {
         // signals the exclamation. Replace one character with one space so
         // saved offsets and bookmarks remain stable.
         if let opening = try? NSRegularExpression(pattern: #"¡(?=\p{L})"#) {
-            result = opening.replacingMatches(in: result, range: NSRange(result.startIndex..., in: result), withTemplate: " ")
+            result = opening.stringByReplacingMatches(
+                in: result, options: [],
+                range: NSRange(result.startIndex..., in: result), withTemplate: " "
+            )
         }
         return result
     }

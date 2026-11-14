@@ -13,5 +13,5 @@ test('heading markers are hidden from VoiceOver and braille without changing doc
 test('leading inverted exclamation is suppressed only for generated speech', () => {
   const block = reader.split('private static func textForSpeech(_ source: String) -> String {')[1]?.split('private func speakNextSystemSegment')[0] ?? '';
   assert.match(block, /¡/);
-  assert.match(block, /replacingMatches/);
+  assert.match(block, /stringByReplacingMatches/);
 });

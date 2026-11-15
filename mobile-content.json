@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-15T02:43:36.907Z",
+  "generatedAt": "2026-11-15T09:56:58.787Z",
   "resources": [
     {
       "kind": "resource",
@@ -6343,38 +6343,6 @@
         "tecnologia-accesibilidad",
         "jaws",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "accessible-android-e2e545a41207fff7:en",
-      "sourceId": "accessible-android-e2e545a41207fff7",
-      "lang": "en",
-      "title": "Cookie Voice Recipes",
-      "summary": "Cookie Voice Recipes is a voice-first recipe app built for blind and low-vision cooks. You can find recipes, have them read aloud, and move through…",
-      "body": "Published 5 November 2026 by cheffy\n\nCookie Voice Recipes is a voice-first recipe app built for blind and low-vision cooks. You can find recipes, have them read aloud, and move through ingredients and steps hands-free by voice, so you can cook without needing to touch or look at your phone.\n\nVoice commands can be used to repeat steps or ask about ingredient quantities. The app was developed with input from blind and low-vision users, including user testing with vision rehabilitation teachers.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nDisclosure: I’m the developer of Cookie Voice Recipes. The app was designed from the start for screen reader users. It has been tested with TalkBack. All buttons and controls have accessible labels, and the core cooking flow—including reading ingredients, moving to the next or previous step, and repeating a step—can be used entirely by voice without touching the screen.\n\nLast Tested App version and Android version:\n\nCookie Voice 1.0.1. Android 17\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility.",
-      "sourceName": "Accessible Android",
-      "originalUrl": "https://accessibleandroid.com/app/cookie-voice-recipes/",
-      "publishedAt": "2026-11-05T07:25:00.000Z",
-      "categories": [
-        "android",
-        "apps-accesibles",
-        "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "conticgo-8ff20348612816ec:es",
-      "sourceId": "conticgo-8ff20348612816ec",
-      "lang": "es",
-      "title": "GRETA & STARKS y ConUnPack impulsan la accesibilidad en las salas de cine españolas",
-      "summary": "Las personas con discapacidad visual o auditiva podrán acceder a recursos de accesibilidad durante las sesiones habituales de cine gracias a soluciones como GRETA. La compañía tecnológica GRETA & STARKS y la distribuidora española ConUnPack han anunciado una alianza para impulsar el uso de esta tecnología en las salas españolas. La iniciativa se presenta en […] La entrada GRETA & STARKS y ConUnPack impulsan la accesibilidad en las salas de cine españolas se publicó primero en Conticgo .",
-      "body": "Las personas con discapacidad visual o auditiva podrán acceder a recursos de accesibilidad durante las sesiones habituales de cine gracias a soluciones como GRETA. La compañía tecnológica GRETA & STARKS y la distribuidora española ConUnPack han anunciado una alianza para impulsar el uso de esta tecnología en las salas españolas.\n\nLa iniciativa se presenta en MERCI 2026, el Mercado de Cine Independiente organizado por la Semana Internacional de Cine de Valladolid (SEMINCI) y la Asociación de Distribuidores Independientes Cinematográficos (ADICINE). El encuentro celebra su sexta edición del 28 al 30 de octubre en Valladolid.\n\nGRETA es una aplicación móvil que permite utilizar diferentes recursos de accesibilidad sincronizados con la película. De este modo, cada espectador puede disfrutar de la sesión con los apoyos que necesita desde su propio dispositivo.\n\nEntre sus principales funciones se encuentran:\n\nSegún explica la web oficial de GRETA , la aplicación utiliza el reconocimiento del sonido para sincronizar los recursos de accesibilidad con la película. Para utilizarla, basta con un teléfono móvil y, en el caso de la audiodescripción, unos auriculares.\n\nUna de las principales ventajas de esta tecnología es que permite compartir una misma sesión cinematográfica sin necesidad de organizar proyecciones específicas para las personas con discapacidad visual o auditiva.\n\nCada espectador utiliza de forma individual el recurso que necesita. Así, una persona puede escuchar la audiodescripción mientras el resto del público sigue la película con el sonido habitual de la sala. Del mismo modo, los subtítulos adaptados pueden consultarse en la pantalla del teléfono móvil.\n\nEsta posibilidad favorece una experiencia cinematográfica compartida y contribuye a reducir las barreras de acceso a la cultura.\n\nNo obstante, es importante tener en cuenta que la aplicación no garantiza la accesibilidad de todos los títulos. Para utilizar sus funciones, la película debe contar con los recursos correspondientes y estar disponible en el catálogo.\n\nLa alianza entre GRETA & STARKS y ConUnPack busca acercar estas soluciones a los profesionales de la exhibición cinematográfica en España.\n\nUna de las ventajas del sistema es que no requiere instalar equipamiento específico en las salas para que cada usuario pueda utilizar la aplicación. Esto puede facilitar su incorporación en cines independientes y en espacios con menos recursos técnicos.\n\nSin embargo, la disponibilidad de películas accesibles y las condiciones de implantación del servicio siguen siendo factores importantes. Para ampliar su alcance, resulta fundamental que distribuidoras y exhibidores colaboren para ofrecer más títulos con audiodescripción y subtítulos adaptados.\n\nLa alianza se presenta en el marco de MERCI 2026, un encuentro profesional que reúne a representantes de la distribución, la exhibición y otros ámbitos de la industria audiovisual.\n\nLa programación oficial de SEMINCI incluye una presentación dedicada al cine accesible con la aplicación GRETA.\n\nEste tipo de iniciativas pone de relieve la importancia de incorporar la accesibilidad a la distribución y exhibición cinematográfica. No basta con que una película llegue a las salas: también es necesario que las personas con diferentes necesidades sensoriales puedan acceder a su contenido.\n\nDesde esta perspectiva, las herramientas de audio descripción y subtitulado adaptado representan un paso más hacia una cultura audiovisual inclusiva.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuentes: SEMINCI: programación profesional y MERCI 2026 , GRETA & STARKS: funcionamiento y características de la aplicación , Audiovisual451: información sobre la alianza entre ConUnPack y GRETA & STARKS , Ciné-Sens: información sobre el funcionamiento y la disponibilidad de recursos accesibles .",
-      "sourceName": "Conticgo",
-      "originalUrl": "https://conticgo.net/greta-starks-y-conunpack-impulsan-la-accesibilidad-en-las-salas-de-cine-espanolas/",
-      "publishedAt": "2026-11-05T07:00:22.000Z",
-      "categories": [
-        "tecnologia-accesibilidad"
       ]
     }
   ]

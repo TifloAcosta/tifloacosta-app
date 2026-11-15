@@ -328,27 +328,48 @@ struct NativeReaderDocumentSettingsScreen: View {
 struct NativeReaderSettingsScreen: View {
     @AppStorage("native-reader-navigation-unit") private var navigationUnit = 0
     @AppStorage("native-reader-reading-mode") private var readingMode = 0
+    @AppStorage("native-reader-presentation-mode") private var presentationMode = 0
 
     var body: some View {
         List {
-            NavigationLink("Audio y voces") { NativeReaderAudioSettingsScreen() }
-            NavigationLink("Modo de lectura") {
-                List {
-                    Section("Al abrir un documento") {
-                        NativeAdjustableChoice(
-                            title: "Modo de lectura",
-                            choices: ["Manual, reproducir cuando lo indique",
-                                      "Automático, reproducir al abrir"],
-                            selectedIndex: $readingMode
-                        )
-                        Text("La elección se conserva hasta que la cambies. El modo manual permite leer el documento visualmente sin iniciar la voz.")
-                            .font(.footnote)
-                    }
-                }
-                .tifloScreenSurface()
-                .navigationTitle("Modo de lectura")
+            Section("Modo de lectura") {
+                NativeAdjustableChoice(
+                    title: "Modo de lectura",
+                    choices: ["Voz TTS", "Lectura visual", "Línea braille"],
+                    selectedIndex: $presentationMode
+                )
+                .accessibilityHint("Desliza arriba o abajo para elegir cómo leer. Los ajustes siguientes cambian con el modo seleccionado.")
             }
-            NavigationLink("Ajustes visuales") { NativeReaderVisualSettingsScreen() }
+            if presentationMode == 0 {
+                Section("Voz TTS") {
+                    NativeAdjustableChoice(
+                        title: "Al abrir un documento",
+                        choices: ["Reproducir cuando lo indique", "Reproducir automáticamente"],
+                        selectedIndex: $readingMode
+                    )
+                    NativeReaderAudioControls()
+                }
+                Section("Motor de lectura con voz") {
+                    NativeSpeechProviderChoice()
+                }
+                Section("Microsoft Azure Speech, prueba experimental") {
+                    NativeAzureSpeechSettings()
+                }
+            } else if presentationMode == 1 {
+                Section("Lectura visual") { NativeReaderVisualControls() }
+            } else {
+                Section("Línea braille") {
+                    Text("TifloLector presenta todo el texto del documento de forma continua, sin cortes por bloques. El avance automático se activa y ajusta en VoiceOver.")
+                        .font(.footnote)
+                    NativeAdjustableChoice(
+                        title: "Unidad de navegación de TifloLector",
+                        choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
+                        selectedIndex: $navigationUnit
+                    )
+                    Text("Los comandos físicos de la línea braille y la velocidad del avance automático se configuran en Ajustes del iPhone, Accesibilidad, VoiceOver, Braille.")
+                        .font(.footnote)
+                }
+            }
             NavigationLink("OCR y reconocimiento") { NativeReaderOCRSettingsScreen() }
             NavigationLink("Navegación y avances") {
                 List {

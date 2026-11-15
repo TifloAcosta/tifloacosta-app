@@ -10,15 +10,20 @@ const formats = source('NativeReaderFormats.swift');
 test('The reading opening mode is persistent, opt-in and applied once per opening', () => {
   assert.match(settings, /@AppStorage\("native-reader-reading-mode"\) private var readingMode = 0/);
   assert.match(reader, /@AppStorage\("native-reader-reading-mode"\) private var readingMode = 0/);
-  assert.match(settings, /Manual, reproducir cuando lo indique/);
-  assert.match(settings, /Automático, reproducir al abrir/);
+  assert.match(reader, /@AppStorage\("native-reader-presentation-mode"\) private var presentationMode = 0/);
+  assert.match(settings, /Reproducir cuando lo indique/);
+  assert.match(settings, /Reproducir automáticamente/);
   assert.match(reader, /if !didApplyOpeningMode/);
-  assert.match(reader, /if readingMode == 1 \{ play\(\) \}/);
+  assert.match(reader, /if presentationMode == 0 && readingMode == 1 \{ play\(\) \}/);
 });
 
-test('General settings are folded into navigable destinations', () => {
+test('Reader modes reveal their settings in place; shared settings stay navigable', () => {
+  assert.match(settings, /selectedIndex: \$presentationMode/);
+  assert.match(settings, /if presentationMode == 0/);
+  assert.match(settings, /else if presentationMode == 1/);
+  assert.match(settings, /NativeReaderAudioControls\(\)/);
+  assert.match(settings, /NativeReaderVisualControls\(\)/);
   for (const title of [
-    'Audio y voces', 'Modo de lectura', 'Ajustes visuales',
     'Navegación y avances', 'Formatos de lectura'
   ]) assert.ok(settings.includes('NavigationLink("' + title + '")'), title);
 });

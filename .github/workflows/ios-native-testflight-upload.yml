@@ -109,12 +109,18 @@ jobs:
           set -euo pipefail
           IPA="$(find "$RUNNER_TEMP/native-export" -maxdepth 1 -name '*.ipa' -print -quit)"
           test -f "$IPA"
-          xcrun altool --upload-app --type ios --file "$IPA" --apiKey "$API_ID" --apiIssuer "$API_ISSUER"
+          echo "UPLOAD_STARTED_AT=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
+          xcrun altool --upload-app --type ios --file "$IPA" --apiKey "$API_ID" --apiIssuer "$API_ISSUER" 2>&1 | tee "$RUNNER_TEMP/apple-upload.log"
+          if grep -Eqi 'UPLOAD FAILED|Validation failed|Failed to upload package' "$RUNNER_TEMP/apple-upload.log"; then
+            echo '::error::Apple rechazó la IPA; no se puede confirmar TestFlight.'
+            exit 1
+          fi
           echo "Compilación enviada. Apple debe completar su procesamiento antes de verla en TestFlight."
       - name: Confirmar beta disponible para probadores internos con Apple
         timeout-minutes: 18
         env:
           TARGET_BUILD: ${{ env.IOS_BUILD_VERSION }}
+          UPLOAD_STARTED_AT: ${{ env.UPLOAD_STARTED_AT }}
         run: node .github/scripts/verify-native-testflight.mjs
       - name: Limpiar claves y llavero temporal
         if: always()

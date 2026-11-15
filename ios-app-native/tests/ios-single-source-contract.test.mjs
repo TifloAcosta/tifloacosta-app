@@ -33,3 +33,17 @@ test('El proyecto main compila automáticamente; TestFlight se ejecuta solo a pe
  assert.match(release,/verify-native-testflight\.mjs/);
  assert.doesNotMatch(build+release,/nativeprototype|npx cap add ios|npx cap sync ios/);
 });
+test('TestFlight prepara una versión posterior a 1.3 y no acepta falsos éxitos de subida', () => {
+ const prep=get('ios-app-native/scripts/prepare-testflight-project.mjs');
+ const extension=get('ios-app-native/ShareExtension/Info.plist');
+ const ipa=get('ios-app-native/scripts/verify-testflight-ipa.py');
+ const release=get('.github/workflows/ios-native-testflight-upload.yml');
+ const verify=get('.github/scripts/verify-native-testflight.mjs');
+ assert.match(prep,/MARKETING_VERSION: "1\.4"/);
+ assert.match(extension,/<key>CFBundleShortVersionString<\/key><string>1\.4<\/string>/);
+ assert.match(ipa,/CFBundleShortVersionString.*1\.4/);
+ assert.match(release,/UPLOAD FAILED/);
+ assert.match(release,/UPLOAD_STARTED_AT/);
+ assert.match(verify,/UPLOAD_STARTED_AT/);
+ assert.match(verify,/uploadedDate/);
+});

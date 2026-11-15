@@ -1,123 +1,15 @@
 [
   {
-    "id": "buscaapps-05a73434a44f0671",
-    "title": "Parchis accesible",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1253",
-    "lang": "es",
-    "platform": "iOS",
-    "summary": "Juega al parchís con la IA o con amigos",
-    "publishedAt": null
-  },
-  {
-    "id": "buscaapps-f84d7c802a02a642",
-    "title": "KEEFORGE",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1252",
-    "lang": "es",
-    "platform": "iOS",
-    "summary": "Si quieres gestionar tus contraseñas en Iphone o Mac, y quieres que éstas no las tenga nadie en su nube, esta es tu APP.",
-    "publishedAt": null
-  },
-  {
-    "id": "buscaapps-55e2d4169e03c286",
-    "title": "SPG BW",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1251",
-    "lang": "es",
-    "platform": "Windows",
-    "summary": "Sintetizador musical VST para Windows mediante archivo DLL",
-    "publishedAt": null
-  },
-  {
-    "id": "buscaapps-340a79d460e20512",
-    "title": "ImageType | Accessible Editor",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1249",
-    "lang": "es",
-    "platform": "Android",
-    "summary": "Editor de imágenes accesible para añadir texto y estilos personalizados a tus fotos de forma perfecta.",
-    "publishedAt": null
-  },
-  {
-    "id": "buscaapps-99bef765dd708e48",
-    "title": "Afinador de guitarra Victoria",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1248",
-    "lang": "es",
-    "platform": "Web",
-    "summary": "afinador de guitarra gratuito y accesible desarrollado siguiendo los principios del diseño universal",
-    "publishedAt": null
-  },
-  {
-    "id": "buscaapps-6ecc16af0394397c",
-    "title": "Youtube-downloader",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1247",
-    "lang": "es",
-    "platform": "Windows",
-    "summary": "Descarga y reproduce vídeos y listas de Youtube",
-    "publishedAt": null
-  },
-  {
-    "id": "buscaapps-21944859a6200ffe",
-    "title": "Reconocedor de Ciudades",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1246",
-    "lang": "es",
-    "platform": "Windows",
-    "summary": "Explora la ciudad virtualmente, planifica rutas, simula trayectos y crea un mapa mental antes de recorrerla físicamente",
-    "publishedAt": null
-  },
-  {
-    "id": "buscaapps-dd759c58258b4f45",
-    "title": "Foreca Weather",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1245",
-    "lang": "es",
-    "platform": "iOS",
-    "summary": "App del tiempo con alertas meteorológicas",
-    "publishedAt": null
-  },
-  {
-    "id": "buscaapps-544e573da359d046",
-    "title": "Foreca Weather",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1244",
-    "lang": "es",
-    "platform": "Android",
-    "summary": "App del tiempo con alertas meteorológicas",
-    "publishedAt": null
-  },
-  {
-    "id": "buscaapps-7fa0d7323d75c31d",
-    "title": "EasyWeather - Tiempo Accesible",
-    "sourceId": "buscaapps",
-    "sourceName": "BuscaApps",
-    "sourceUrl": "https://www.buscaapps.com/",
-    "originalUrl": "https://www.buscaapps.com/buscaapps2.php?id=1243",
-    "lang": "es",
-    "platform": "iOS",
-    "summary": "Una app del tiempo precisa, privada y accesible.",
-    "publishedAt": null
+    "id": "applevis-apps-678e3ffaa16d9278",
+    "title": "RTÉ Listen",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/music/rt-listen",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "From breaking news to great music and brilliant storytelling, RTÉ Listen lets you play live radio or hear the latest podcasts and on-demand audio from RTÉ. LIVE RADIO PLAYER: Tune in to RTÉ Radio 1, RTÉ 2FM, RTÉ lyric fm, RTÉ Raidió na Gaeltachta and RTÉ Gold. ON-DEMAND RADIO: Pick up where you left off or play full episodes of your favourite shows, like Brendan O'Connor, Marty in the Morning, Morning Ireland and 2FM Drive with Laura and Katja. TRENDING CLIPS: Catch the moments everyone's talking about, from the biggest trending interviews to the best bits from across the RTÉ schedule. DOWNLOADS AND FAVOURITES: Create an account to favourite shows you love, manage your queue and download episodes for on-the-go.",
+    "publishedAt": "2026-11-15T00:40:26.000Z"
   },
   {
     "id": "applevis-apps-7297b52d2f81d1ea",
@@ -226,17 +118,5 @@
     "platform": "Apple",
     "summary": "NoteTell Money Reader is designed to help people who are blind or have low vision identify bills in real time. Simply point the iPhone camera at the bill you want to identify, then hear, feel, or see its value. If you’re blind, have low vision, or are deafblind, NoteTell Money Reader lets you identify bills without any assistance. While shopping, use NoteTell to check your money at the checkout and make sure you get the right change back. You can also use NoteTell to quickly sort your money at home. NoteTell doesn’t require an internet connection, so it identifies bills anywhere, at any time. NoteTell can identify bills at any angle. It is designed to work with bills that are folded, creased, worn, or partly in view. NoteTell is designed to work indoors, outdoors, and even in total darkness. When your environment is too dark to identify bills, NoteTell turns the flashlight on automatically. Vibration Mode tells you the value of each bill as vibrations in your hand—without anyone else hearing it. Each bill has its own vibration pattern. The lowest bill has one pulse, and each higher bill has one more. Pulses come in pairs, so they’re easier to count. Vibration Mode is also useful in noisy places and for people who are deafblind. When VoiceOver is on, double-tap with two fingers to switch between Speech Mode and Vibration Mode. For users with low vision, NoteTell shows the value of each bill in large, high-contrast numbers on the screen. You can complete every task in NoteTell Money Reader using only VoiceOver, without sighted assistance. If you use a braille display with VoiceOver, you can use NoteTell to get the value of each bill in real time. Ask Siri, “Identify currency with NoteTell,” to use NoteTell hands-free. You can also add NoteTell to Control Center or the Lock Screen, assign it to the Action button, or set it up as a Vocal Shortcut. With the full version, you can use Currency Conversion to hear each bill’s value in your home currency when you travel. NoteTell uses on-device processing to identify bills, which means your data never leaves your iPhone. Camera images are never stored on the device or on any servers. You can try the full version free for 14 days. You won’t be charged when the trial ends. You can continue using NoteTell for free to identify the lowest notes of each currency. The full version is also available as a one-time purchase. And with Family Sharing, up to five other people can enjoy your purchase too.",
     "publishedAt": "2026-11-10T05:08:40.000Z"
-  },
-  {
-    "id": "applevis-apps-1da4fdc2bfb19886",
-    "title": "Evermyth - God Life Simulator",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/evermyth-god-life-simulator",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Become a god. Rule the world. Evermyth is a mythic life sim where you play a god from your very first prayer. Choose your domain, win the faithful, build an island realm, fall in love and face the other gods. Every life is a new myth, and every choice is yours. CHOOSE 1 OF 12 DOMAINS Death, War, Love, Sea, Sky, Nature, Knowledge, Order, Chaos, Craft, Fortune or Hearth. Each plays differently, with its own powers, prayers and stories. Be born to your seat, spring from the world itself, rise from mortal life, or seize the throne from the god before you. CREATE YOUR GOD Shape your face, hair, eyes, crown and robes in hand-drawn art inspired by ancient Greek pottery. Name your cult, choose its sacred sign, and fill a pantheon of twelve with Greek, Roman or Egyptian gods, or invent your own. WIELD 400+ DIVINE POWERS Send the rain. Hurl thunder at the assembly. Curse a king. Raise the dead. Awaken five aspects of your domain and unleash great acts: drown the world in a flood, raise a golden city, or walk among mortals in disguise. ANSWER PRAYERS, SHAPE MORTAL LIVES 400+ prayers, nearly 700 events and 240+ story chains that unfold across years. Shipwrecks, secrets, plagues, weddings, prophecies and family feuds. Every choice has a price, and mortals remember what you did. FACE CALAMITY Locust years, plague ships, great fires, a waking mountain. Save your people, bargain with another god, or let the world burn. WAGE WAR Rival realms want your island. Read your scouts and fight round by round: charge, hold the line, flank, or call down your domain to turn the battle. Sack cities, take tribute or make peace. RAISE A DIVINE BEAST Dragon, kraken, leviathan, hydra, basilisk, great wolf, golden lion, shadow panther, nine-tailed fox, star stag or moon moth. Feed it, train it, fly together, and loose it on your enemies before a hero comes hunting. LOVE, SCHEME AND FEUD Flirt, feast, beguile, trade favors and hold grudges. Marry, raise godborn children, and decide which of them deserves your seat. Win the favor of every court, from the God of the Sky to the smallest river nymph. GODS CAN FALL Rivals and even your own children can challenge you to a contest to the death. Win, and end them the old ways: cast into the pit, chained beneath a mountain, torn apart or swallowed whole. Lose, and your myth may end there. BUILD YOUR REALM Raise temples, markets, harbors, theaters and a Colossus. Keep nobles, priests and commoners on your side, or rule by fear. Change your island's climate, dress your city in your colors, and watch it come alive from dawn to night. GROW YOUR FAITH Turn a handful of believers into ten thousand faithful. Found oracles, ordain a high priest and choose the doctrines of your worship. LIVE A GOD'S OWN LIFE Wander the world as yourself, a mortal or a beast. Visit the Oracle and the Fates, take up pastimes, witness rare wonders, and earn epithets like the Merciful, Godslayer or Ender of Ages. BECOME A LEGEND Pass your seat to an heir and play on as them, or rise to the sky and set yourself among the stars. Every ended myth joins your Hall of Myths. Then begin again as a new god in a new age. PLAY YOUR WAY Free to play with no time limit. Three difficulties, from Gentle to Cruel. Day, evening and night modes. Plays offline, and no accounts, ads, subscriptions, energy timers or currencies.",
-    "publishedAt": "2026-11-08T17:33:01.000Z"
   }
 ]

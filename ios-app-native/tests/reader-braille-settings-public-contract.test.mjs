@@ -6,22 +6,20 @@ const read = file => readFileSync(new URL('../Sources/' + file, import.meta.url)
 const settings = read('NativeReaderSettings.swift');
 const reader = read('NativeTifloLector.swift');
 
-test('braille guidance lives in its own destination independently of playback mode', () => {
-  assert.match(settings, /NavigationLink\("Lectura con línea braille"\)/);
-  assert.match(settings, /Duración del avance automático/);
-  assert.match(settings, /Cambio de página automático/);
+test('braille guidance appears directly when Braille is the selected mode', () => {
+  assert.match(settings, /selectedIndex: \$presentationMode/);
+  assert.match(settings, /else \{\s+Section\("Línea braille"\)/);
+  assert.match(settings, /avance automático se configura en VoiceOver/);
+  assert.match(settings, /Unidad de navegación de TifloLector/);
   assert.match(settings, /@AppStorage\("native-reader-reading-mode"\)/);
 });
 
-test('reading mode uses a double-tap toggle and keeps braille settings inside its destination', () => {
+test('reading focus preference remains available only in voice mode', () => {
   assert.match(settings, /Toggle\("Foco inicial en Reproducir", isOn: automaticReadingBinding\)/);
   assert.match(settings, /get: \{ readingMode == 1 \}/);
   assert.match(settings, /set: \{ readingMode = \$0 \? 1 : 0 \}/);
-  const readingModeScreen = settings.slice(settings.indexOf('NavigationLink("Modo de lectura")'));
-  const braille = readingModeScreen.indexOf('NavigationLink("Lectura con línea braille")');
-  const nextTopLevel = readingModeScreen.indexOf('NavigationLink("Ajustes visuales")');
-  assert.ok(braille > 0 && braille < nextTopLevel);
-  assert.equal((settings.match(/NavigationLink\("Lectura con línea braille"\)/g) ?? []).length, 1);
+  assert.match(settings, /if presentationMode == 0 \{/);
+  assert.match(settings, /else if presentationMode == 1 \{/);
 });
 
 test('the actual document title exposes Exportar as a VoiceOver action', () => {

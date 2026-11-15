@@ -1,4 +1,25 @@
 /* Initial interface glossary. Additional screens require localization audit before public release. */
+"Azure necesita conexión a Internet, una clave propia y una voz elegida. Puede tener costes según el plan de Microsoft. Las voces del iPhone siguen disponibles sin conexión." = "Azure nécessite une connexion Internet, votre propre clé et une voix sélectionnée. Des frais peuvent s'appliquer selon votre offre Microsoft. Les voix de l'iPhone restent accessibles hors ligne.";
+"Guía para configurar Azure desde el iPhone" = "Guide de configuration d'Azure sur iPhone";
+"Paso 1. Abre el portal de Azure con Safari e inicia sesión con tu cuenta de Microsoft. Si todavía no tienes una suscripción de Azure, sigue el proceso de alta. Comprueba cualquier requisito de verificación o facturación antes de aceptarlo." = "Étape 1. Ouvrez le portail Azure dans Safari et connectez-vous à votre compte Microsoft. Si vous n'avez pas encore d'abonnement Azure, suivez la procédure d'inscription. Vérifiez les conditions de validation ou de facturation avant d'accepter.";
+"Paso 2. En el portal, busca Speech y crea un recurso de voz. Si está disponible para tu cuenta, elige el nivel gratuito F0: incluye hasta 500.000 caracteres neuronales al mes por recurso, sujeto a las condiciones de Microsoft." = "Étape 2. Dans le portail, recherchez Speech et créez une ressource vocale. Si votre compte le permet, choisissez l'offre gratuite F0 : jusqu'à 500 000 caractères neuronaux par mois et par ressource, selon les conditions de Microsoft.";
+"Paso 3. Cuando el recurso esté creado, abre Claves y punto de conexión. Copia una de las claves y anota el nombre de la región, por ejemplo westeurope." = "Étape 3. Une fois la ressource créée, ouvrez Clés et point de terminaison. Copiez une clé et notez le nom de la région, par exemple westeurope.";
+"Paso 4. Regresa a TifloLector. Pulsa Pegar clave, escribe la región, guarda la clave y selecciona Comprobar conexión. Después elige una voz y escucha la muestra." = "Étape 4. Revenez dans TifloLector. Touchez Coller la clé, saisissez la région, enregistrez la clé et sélectionnez Vérifier la connexion. Choisissez ensuite une voix et écoutez l'extrait.";
+"No compartas tu clave con otras personas. La accesibilidad exacta del portal de Azure con VoiceOver requiere una prueba real." = "Ne communiquez votre clé à personne. L'accessibilité réelle du portail Azure avec VoiceOver doit encore être vérifiée.";
+"Pegar clave" = "Coller la clé";
+"Región de Azure, por ejemplo westeurope" = "Région Azure, par exemple westeurope";
+"Guardar clave en el iPhone" = "Enregistrer la clé sur l'iPhone";
+"Voz de Azure" = "Voix Azure";
+"Selecciona una voz" = "Choisir une voix";
+"Escuchar muestra de Azure" = "Écouter un extrait Azure";
+"Servicio de Microsoft con cuenta propia. Puede tener límites o costes según tu plan. Azure se utiliza para leer documentos cuando eliges ese motor. Requiere conexión a Internet y una clave y voz válidas." = "Service Microsoft avec votre propre compte. Des limites ou frais peuvent s'appliquer selon votre offre. Azure lit les documents quand ce moteur est sélectionné. Une connexion Internet, une clé et une voix valides sont nécessaires.";
+"Microsoft Azure Speech" = "Microsoft Azure Speech";
+"Desliza arriba o abajo para elegir el modo. Los ajustes siguientes cambian con la selección." = "Balayez vers le haut ou le bas pour choisir le mode. Les réglages suivants changent selon votre choix.";
+"Voz TTS" = "Synthèse vocale";
+"Lectura visual" = "Lecture visuelle";
+"Línea braille" = "Plage braille";
+"La lectura braille presenta el texto completo de forma continua, sin saltar entre bloques. El avance automático se configura en VoiceOver." = "La lecture braille présente tout le texte en continu, sans saut entre les blocs. Configurez le défilement automatique dans VoiceOver.";
+"Los comandos de la línea y la velocidad del avance automático se ajustan en Ajustes del iPhone, Accesibilidad, VoiceOver, Braille." = "Réglez les commandes de la plage et la vitesse du défilement automatique dans Réglages de l’iPhone, Accessibilité, VoiceOver, Braille.";
 "Actualidad" = "Actualités";
 "Recursos" = "Ressources";
 "TifloLector" = "TifloLector";

@@ -1,4 +1,25 @@
 /* Initial interface glossary. Additional screens require localization audit before public release. */
+"Azure necesita conexión a Internet, una clave propia y una voz elegida. Puede tener costes según el plan de Microsoft. Las voces del iPhone siguen disponibles sin conexión." = "Azure richiede Internet, una chiave personale e una voce selezionata. Potrebbero esserci costi in base al piano Microsoft. Le voci dell'iPhone restano disponibili offline.";
+"Guía para configurar Azure desde el iPhone" = "Guida alla configurazione di Azure su iPhone";
+"Paso 1. Abre el portal de Azure con Safari e inicia sesión con tu cuenta de Microsoft. Si todavía no tienes una suscripción de Azure, sigue el proceso de alta. Comprueba cualquier requisito de verificación o facturación antes de aceptarlo." = "Passaggio 1. Apri il portale Azure in Safari e accedi con il tuo account Microsoft. Se non hai ancora un abbonamento Azure, segui la registrazione. Verifica eventuali requisiti di conferma o fatturazione prima di accettare.";
+"Paso 2. En el portal, busca Speech y crea un recurso de voz. Si está disponible para tu cuenta, elige el nivel gratuito F0: incluye hasta 500.000 caracteres neuronales al mes por recurso, sujeto a las condiciones de Microsoft." = "Passaggio 2. Nel portale cerca Speech e crea una risorsa vocale. Se disponibile per il tuo account, scegli il livello gratuito F0: include fino a 500.000 caratteri neurali al mese per risorsa, secondo le condizioni Microsoft.";
+"Paso 3. Cuando el recurso esté creado, abre Claves y punto de conexión. Copia una de las claves y anota el nombre de la región, por ejemplo westeurope." = "Passaggio 3. Dopo aver creato la risorsa, apri Chiavi ed endpoint. Copia una chiave e annota la regione, ad esempio westeurope.";
+"Paso 4. Regresa a TifloLector. Pulsa Pegar clave, escribe la región, guarda la clave y selecciona Comprobar conexión. Después elige una voz y escucha la muestra." = "Passaggio 4. Torna in TifloLector. Tocca Incolla chiave, inserisci la regione, salva la chiave e seleziona Verifica connessione. Poi scegli una voce e ascolta l'anteprima.";
+"No compartas tu clave con otras personas. La accesibilidad exacta del portal de Azure con VoiceOver requiere una prueba real." = "Non condividere la tua chiave. L'accessibilità effettiva del portale Azure con VoiceOver deve ancora essere verificata.";
+"Pegar clave" = "Incolla chiave";
+"Región de Azure, por ejemplo westeurope" = "Area Azure, ad esempio westeurope";
+"Guardar clave en el iPhone" = "Salva chiave su iPhone";
+"Voz de Azure" = "Voce Azure";
+"Selecciona una voz" = "Seleziona una voce";
+"Escuchar muestra de Azure" = "Ascolta anteprima Azure";
+"Servicio de Microsoft con cuenta propia. Puede tener límites o costes según tu plan. Azure se utiliza para leer documentos cuando eliges ese motor. Requiere conexión a Internet y una clave y voz válidas." = "Servizio Microsoft con account personale. Potrebbero esserci limiti o costi secondo il piano. Azure legge i documenti quando scegli questo motore. Richiede Internet, una chiave e una voce valide.";
+"Microsoft Azure Speech" = "Microsoft Azure Speech";
+"Desliza arriba o abajo para elegir el modo. Los ajustes siguientes cambian con la selección." = "Scorri verso l’alto o il basso per scegliere la modalità. Le impostazioni seguenti cambiano in base alla scelta.";
+"Voz TTS" = "Voce TTS";
+"Lectura visual" = "Lettura visiva";
+"Línea braille" = "Display braille";
+"La lectura braille presenta el texto completo de forma continua, sin saltar entre bloques. El avance automático se configura en VoiceOver." = "La lettura braille presenta l’intero testo in modo continuo, senza salti tra i blocchi. Configura l’avanzamento automatico in VoiceOver.";
+"Los comandos de la línea y la velocidad del avance automático se ajustan en Ajustes del iPhone, Accesibilidad, VoiceOver, Braille." = "Configura i comandi del display e la velocità di avanzamento automatico in Impostazioni iPhone, Accessibilità, VoiceOver, Braille.";
 "Actualidad" = "Attualità";
 "Recursos" = "Risorse";
 "TifloLector" = "TifloLector";

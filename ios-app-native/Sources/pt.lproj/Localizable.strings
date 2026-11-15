@@ -1,4 +1,25 @@
 /* Initial interface glossary. Additional screens require localization audit before public release. */
+"Azure necesita conexión a Internet, una clave propia y una voz elegida. Puede tener costes según el plan de Microsoft. Las voces del iPhone siguen disponibles sin conexión." = "O Azure requer ligação à Internet, uma chave própria e uma voz selecionada. Pode ter custos conforme o plano Microsoft. As vozes do iPhone continuam disponíveis sem Internet.";
+"Guía para configurar Azure desde el iPhone" = "Guia para configurar o Azure no iPhone";
+"Paso 1. Abre el portal de Azure con Safari e inicia sesión con tu cuenta de Microsoft. Si todavía no tienes una suscripción de Azure, sigue el proceso de alta. Comprueba cualquier requisito de verificación o facturación antes de aceptarlo." = "Passo 1. Abre o portal do Azure no Safari e inicia sessão com a tua conta Microsoft. Se ainda não tens uma subscrição Azure, segue o registo. Verifica os requisitos de confirmação ou faturação antes de aceitar.";
+"Paso 2. En el portal, busca Speech y crea un recurso de voz. Si está disponible para tu cuenta, elige el nivel gratuito F0: incluye hasta 500.000 caracteres neuronales al mes por recurso, sujeto a las condiciones de Microsoft." = "Passo 2. No portal, procura Speech e cria um recurso de voz. Se estiver disponível na tua conta, escolhe o nível gratuito F0: inclui até 500.000 caracteres neurais por mês e por recurso, sujeito às condições da Microsoft.";
+"Paso 3. Cuando el recurso esté creado, abre Claves y punto de conexión. Copia una de las claves y anota el nombre de la región, por ejemplo westeurope." = "Passo 3. Depois de criar o recurso, abre Chaves e ponto de extremidade. Copia uma chave e anota a região, por exemplo westeurope.";
+"Paso 4. Regresa a TifloLector. Pulsa Pegar clave, escribe la región, guarda la clave y selecciona Comprobar conexión. Después elige una voz y escucha la muestra." = "Passo 4. Volta ao TifloLector. Toca em Colar chave, introduz a região, guarda a chave e seleciona Verificar ligação. Depois escolhe uma voz e ouve a amostra.";
+"No compartas tu clave con otras personas. La accesibilidad exacta del portal de Azure con VoiceOver requiere una prueba real." = "Não partilhes a tua chave. A acessibilidade real do portal Azure com VoiceOver ainda precisa de ser testada.";
+"Pegar clave" = "Colar chave";
+"Región de Azure, por ejemplo westeurope" = "Região do Azure, por exemplo westeurope";
+"Guardar clave en el iPhone" = "Guardar chave no iPhone";
+"Voz de Azure" = "Voz do Azure";
+"Selecciona una voz" = "Seleciona uma voz";
+"Escuchar muestra de Azure" = "Ouvir amostra do Azure";
+"Servicio de Microsoft con cuenta propia. Puede tener límites o costes según tu plan. Azure se utiliza para leer documentos cuando eliges ese motor. Requiere conexión a Internet y una clave y voz válidas." = "Serviço da Microsoft com conta própria. Pode ter limites ou custos conforme o teu plano. O Azure lê documentos quando escolhes este motor. Requer Internet e uma chave e voz válidas.";
+"Microsoft Azure Speech" = "Microsoft Azure Speech";
+"Desliza arriba o abajo para elegir el modo. Los ajustes siguientes cambian con la selección." = "Desliza para cima ou para baixo para escolher o modo. As definições seguintes mudam conforme a seleção.";
+"Voz TTS" = "Voz TTS";
+"Lectura visual" = "Leitura visual";
+"Línea braille" = "Linha braille";
+"La lectura braille presenta el texto completo de forma continua, sin saltar entre bloques. El avance automático se configura en VoiceOver." = "A leitura braille apresenta o texto completo de forma contínua, sem saltar entre blocos. Configura o avanço automático no VoiceOver.";
+"Los comandos de la línea y la velocidad del avance automático se ajustan en Ajustes del iPhone, Accesibilidad, VoiceOver, Braille." = "Configura os comandos da linha e a velocidade do avanço automático em Definições do iPhone, Acessibilidade, VoiceOver, Braille.";
 "Actualidad" = "Atualidade";
 "Recursos" = "Recursos";
 "TifloLector" = "TifloLector";

@@ -1,4 +1,25 @@
 /* Initial interface glossary. Additional screens require localization audit before public release. */
+"Azure necesita conexión a Internet, una clave propia y una voz elegida. Puede tener costes según el plan de Microsoft. Las voces del iPhone siguen disponibles sin conexión." = "Azure benötigt eine Internetverbindung, einen eigenen Schlüssel und eine ausgewählte Stimme. Je nach Microsoft-Tarif können Kosten anfallen. Die iPhone-Stimmen bleiben offline verfügbar.";
+"Guía para configurar Azure desde el iPhone" = "Azure auf dem iPhone einrichten";
+"Paso 1. Abre el portal de Azure con Safari e inicia sesión con tu cuenta de Microsoft. Si todavía no tienes una suscripción de Azure, sigue el proceso de alta. Comprueba cualquier requisito de verificación o facturación antes de aceptarlo." = "Schritt 1. Öffne das Azure-Portal in Safari und melde dich mit deinem Microsoft-Konto an. Falls du noch kein Azure-Abonnement hast, folge der Registrierung. Prüfe vorher mögliche Bestätigungs- oder Abrechnungsanforderungen.";
+"Paso 2. En el portal, busca Speech y crea un recurso de voz. Si está disponible para tu cuenta, elige el nivel gratuito F0: incluye hasta 500.000 caracteres neuronales al mes por recurso, sujeto a las condiciones de Microsoft." = "Schritt 2. Suche im Portal nach Speech und erstelle eine Sprachressource. Falls für dein Konto verfügbar, wähle den kostenlosen Tarif F0: bis zu 500.000 neuronale Zeichen pro Monat und Ressource, gemäß den Bedingungen von Microsoft.";
+"Paso 3. Cuando el recurso esté creado, abre Claves y punto de conexión. Copia una de las claves y anota el nombre de la región, por ejemplo westeurope." = "Schritt 3. Öffne nach dem Erstellen der Ressource Schlüssel und Endpunkt. Kopiere einen Schlüssel und notiere die Region, zum Beispiel westeurope.";
+"Paso 4. Regresa a TifloLector. Pulsa Pegar clave, escribe la región, guarda la clave y selecciona Comprobar conexión. Después elige una voz y escucha la muestra." = "Schritt 4. Kehre zu TifloLector zurück. Tippe auf Schlüssel einfügen, gib die Region ein, speichere den Schlüssel und wähle Verbindung prüfen. Wähle dann eine Stimme und höre die Hörprobe.";
+"No compartas tu clave con otras personas. La accesibilidad exacta del portal de Azure con VoiceOver requiere una prueba real." = "Gib deinen Schlüssel nicht weiter. Die tatsächliche Zugänglichkeit des Azure-Portals mit VoiceOver muss noch erprobt werden.";
+"Pegar clave" = "Schlüssel einfügen";
+"Región de Azure, por ejemplo westeurope" = "Azure-Region, zum Beispiel westeurope";
+"Guardar clave en el iPhone" = "Schlüssel auf dem iPhone speichern";
+"Voz de Azure" = "Azure-Stimme";
+"Selecciona una voz" = "Stimme auswählen";
+"Escuchar muestra de Azure" = "Azure-Hörprobe anhören";
+"Servicio de Microsoft con cuenta propia. Puede tener límites o costes según tu plan. Azure se utiliza para leer documentos cuando eliges ese motor. Requiere conexión a Internet y una clave y voz válidas." = "Microsoft-Dienst mit eigenem Konto. Je nach Tarif können Nutzungsgrenzen oder Kosten gelten. Azure liest Dokumente, wenn du diesen Motor auswählst. Er benötigt Internet, einen gültigen Schlüssel und eine Stimme.";
+"Microsoft Azure Speech" = "Microsoft Azure Speech";
+"Desliza arriba o abajo para elegir el modo. Los ajustes siguientes cambian con la selección." = "Streiche nach oben oder unten, um den Modus auszuwählen. Die folgenden Einstellungen ändern sich entsprechend.";
+"Voz TTS" = "Sprachausgabe";
+"Lectura visual" = "Visuelles Lesen";
+"Línea braille" = "Braillezeile";
+"La lectura braille presenta el texto completo de forma continua, sin saltar entre bloques. El avance automático se configura en VoiceOver." = "Beim Lesen mit Braille wird der gesamte Text fortlaufend ohne Blockwechsel angezeigt. Den automatischen Vorschub stellst du in VoiceOver ein.";
+"Los comandos de la línea y la velocidad del avance automático se ajustan en Ajustes del iPhone, Accesibilidad, VoiceOver, Braille." = "Befehle der Braillezeile und Geschwindigkeit des automatischen Vorschubs findest du unter iPhone-Einstellungen, Bedienungshilfen, VoiceOver, Braille.";
 "Actualidad" = "Aktuelles";
 "Recursos" = "Ressourcen";
 "TifloLector" = "TifloLector";

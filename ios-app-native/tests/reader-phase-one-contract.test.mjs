@@ -16,11 +16,12 @@ test('The reading opening focus preference is persistent, opt-in and applied onc
   assert.match(reader, /if readingMode == 1 \{ playbackButtonFocused = true \}/);
 });
 
-test('General settings are folded into navigable destinations', () => {
-  for (const title of [
-    'Audio y voces', 'Modo de lectura', 'Ajustes visuales',
-    'Navegación y avances', 'Formatos de lectura'
-  ]) assert.ok(settings.includes('NavigationLink("' + title + '")'), title);
+test('General settings expose only the settings relevant to the selected reading mode', () => {
+  assert.match(settings, /selectedIndex: \$presentationMode/);
+  assert.match(settings, /NativeReaderAudioControls\(\)/);
+  assert.match(settings, /NativeReaderVisualControls\(\)/);
+  assert.match(settings, /title: "Unidad de avance"/);
+  assert.ok(settings.includes('NavigationLink("Formatos de lectura")'));
 });
 
 test('Per-document audio and visual settings persist and can inherit global defaults', () => {

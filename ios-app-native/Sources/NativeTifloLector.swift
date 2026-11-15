@@ -812,6 +812,7 @@ final class NativeReadingSpeech: ObservableObject {
     private var geminiSegments: [String] = []
     private var geminiSegmentIndex = 0
     private var geminiVoice = "Kore"
+    private var azureRegion = ""
     private var geminiCursorUTF16 = 0
     private var geminiGeneration = 0
     private var geminiOnError: ((String) -> Void)?
@@ -819,7 +820,8 @@ final class NativeReadingSpeech: ObservableObject {
     private var generatedCharacters = 0
     private(set) var isGemini = false
     private(set) var isPhonon = false
-    var isGeneratedSpeech: Bool { isGemini || isPhonon }
+    private(set) var isAzure = false
+    var isGeneratedSpeech: Bool { isGemini || isPhonon || isAzure }
     private var sleepTask: Task<Void, Never>?
     var onSleepExpired: (() -> Void)?
     @Published private(set) var isPlaying = false
@@ -922,14 +924,26 @@ final class NativeReadingSpeech: ObservableObject {
                           baseUTF16: baseUTF16, totalUTF16: totalUTF16, baseCharacters: baseCharacters, onError: onError)
     }
 
+    func playAzure(_ text: String, voice: String, region: String,
+                   baseUTF16: Int, totalUTF16: Int, baseCharacters: Int,
+                   onError: @escaping (String) -> Void) throws {
+        guard NativeAzureSpeechService.isConfigured(region: region, voice: voice) else {
+            throw NativeAzureSpeechError.configuration
+        }
+        try playGenerated(text, engine: 3, voice: voice,
+                          baseUTF16: baseUTF16, totalUTF16: totalUTF16,
+                          baseCharacters: baseCharacters, region: region, onError: onError)
+    }
+
     private func playGenerated(_ text: String, engine: Int, voice: String,
                     baseUTF16: Int, totalUTF16: Int, baseCharacters: Int,
-                    onError: @escaping (String) -> Void) throws {
+                    region: String = "", onError: @escaping (String) -> Void) throws {
         stop()
         // The selected external engine only starts when the user presses Play.
         guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
         geminiSegments = geminiChunks(text)
         geminiVoice = voice
+        azureRegion = region
         geminiSegmentIndex = 0
         geminiCursorUTF16 = baseUTF16
         generatedBaseCharacters = baseCharacters
@@ -940,6 +954,7 @@ final class NativeReadingSpeech: ObservableObject {
         self.geminiOnError = onError
         isGemini = engine == 1
         isPhonon = engine == 2
+        isAzure = engine == 3
         isPlaying = true
         isPaused = false
         playNextGeminiSegment()
@@ -959,6 +974,7 @@ final class NativeReadingSpeech: ObservableObject {
             textPercent = 100
             isGemini = false
             isPhonon = false
+            isAzure = false
             isPlaying = false
             return
         }
@@ -970,6 +986,10 @@ final class NativeReadingSpeech: ObservableObject {
                 let data: Data
                 if self.isPhonon {
                     data = try await NativePhononRuntime.generate(text: segment, voice: self.geminiVoice)
+                } else if self.isAzure {
+                    data = try await NativeAzureSpeechService.synthesize(
+                        segment, voice: self.geminiVoice,
+                        key: NativeMicrosoftSpeechKeychain.load(), region: self.azureRegion)
                 } else {
                     data = try await NativeGeminiSpeech.generate(segment, voice: self.geminiVoice)
                 }
@@ -1144,6 +1164,7 @@ final class NativeReadingSpeech: ObservableObject {
         geminiOnError = nil
         isGemini = false
         isPhonon = false
+        isAzure = false
         player?.stop()
         player = nil
         playlistURLs = []
@@ -1929,6 +1950,50 @@ private struct NativeReaderTextLayout {
     }
 }
 
+/// Braille requires one uninterrupted accessibility text surface. Separate
+/// SwiftUI paragraph elements force VoiceOver to stop at each focus boundary.
+private struct NativeBrailleContinuousText: UIViewRepresentable {
+    let text: String
+    let fontSize: Double
+    let strongText: Bool
+    let requestedOffset: Int
+
+    final class Coordinator {
+        var lastAppliedOffset: Int?
+    }
+
+    func makeCoordinator() -> Coordinator { Coordinator() }
+
+    func makeUIView(context: Context) -> UITextView {
+        let view = UITextView()
+        view.isEditable = false
+        view.isSelectable = true
+        view.isScrollEnabled = true
+        view.backgroundColor = .clear
+        view.textContainer.lineFragmentPadding = 0
+        view.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        view.adjustsFontForContentSizeCategory = true
+        return view
+    }
+
+    func updateUIView(_ view: UITextView, context: Context) {
+        // Do not reset the selection when SwiftUI refreshes playback state.
+        if view.text != text {
+            view.text = text
+            context.coordinator.lastAppliedOffset = nil
+        }
+        if context.coordinator.lastAppliedOffset != requestedOffset {
+            let validOffset = max(0, min(requestedOffset, text.count))
+            view.selectedRange = NSRange(location: String(text.prefix(validOffset)).utf16.count, length: 0)
+            context.coordinator.lastAppliedOffset = requestedOffset
+        }
+        let weight: UIFont.Weight = strongText ? .bold : .regular
+        let font = UIFont.systemFont(ofSize: fontSize, weight: weight)
+        if view.font != font { view.font = font }
+        view.textColor = .label
+    }
+}
+
 struct NativeReadingScreen: View {
     let document: NativeReadingDocument
     @ObservedObject var speech: NativeReadingSpeech
@@ -1947,7 +2012,11 @@ struct NativeReadingScreen: View {
     @AppStorage("native-reader-navigation-unit") private var navigationUnit = 0
     @AppStorage("native-reader-time-step-index") private var timeStepIndex = 1
     @AppStorage("native-reader-reading-mode") private var readingMode = 0
+    @AppStorage("native-reader-presentation-mode") private var presentationMode = 0
     @AppStorage("native-reader-reading-engine") private var readingEngine = 0
+    @AppStorage("native-reading-speech-provider") private var speechProvider = 0
+    @AppStorage("native-azure-speech-region") private var azureRegion = "westeurope"
+    @AppStorage("native-azure-speech-voice") private var azureVoice = ""
     @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
     @AppStorage("native-reader-phonon-voice") private var phononVoice = ""
     @State private var didApplyOpeningMode = false
@@ -1955,6 +2024,7 @@ struct NativeReadingScreen: View {
     @State private var sleepDeadline: Date?
     @State private var currentPercent = 0
     @State private var readingOffset = 0
+    @State private var brailleRequestedOffset = 0
     @State private var lastSavedPercent = -1
     @State private var trackIndex = 0
     @State private var didRestoreAudioPosition = false
@@ -2087,6 +2157,7 @@ struct NativeReadingScreen: View {
         let value = max(0, min(100, percent))
         currentPercent = value
         readingOffset = Int(Double(textLayout.totalCharacters) * Double(value) / 100)
+        if presentationMode == 2 { brailleRequestedOffset = readingOffset }
         if speech.hasAudio && !speech.isGeneratedSpeech {
             speech.seek(to: value)
         } else if speech.isPlaying || speech.isPaused {
@@ -2113,7 +2184,18 @@ struct NativeReadingScreen: View {
         let remainder = String(document.body.dropFirst(readingOffset))
         guard !remainder.isEmpty else { return }
         let utf16Offset = String(document.body.prefix(readingOffset)).utf16.count
-        if effectiveReadingEngine == 1 {
+        if speechProvider == 1 {
+            do {
+                try speech.playAzure(remainder, voice: azureVoice, region: azureRegion,
+                    baseUTF16: utf16Offset, totalUTF16: document.body.utf16.count,
+                    baseCharacters: readingOffset,
+                    onError: { message in
+                        actionMessage = message
+                        UIAccessibility.post(notification: .announcement, argument: message)
+                    })
+                actionMessage = "Generando el primer fragmento con Azure Speech."
+            } catch { actionMessage = error.localizedDescription }
+        } else if effectiveReadingEngine == 1 {
             guard NativeVoiceCredentialStore.hasKey("gemini") else {
                 actionMessage = "Configura la clave Gemini en Motores externos."
                 return
@@ -2269,6 +2351,7 @@ struct NativeReadingScreen: View {
 
     private func jump(to offset: Int) {
         readingOffset = max(0, min(textLayout.totalCharacters, offset))
+        if presentationMode == 2 { brailleRequestedOffset = readingOffset }
         let ratio = Double(readingOffset) / Double(max(1, textLayout.totalCharacters))
         currentPercent = min(100, Int((ratio * 100).rounded()))
         persistPosition()
@@ -2944,7 +3027,21 @@ struct NativeReadingScreen: View {
             }
     }
 
+    @ViewBuilder
     private var readingContent: some View {
+        if presentationMode == 2 && !latest.body.isEmpty {
+            NativeBrailleContinuousText(
+                text: latest.body,
+                fontSize: effectiveTextSize,
+                strongText: effectiveStrongText,
+                requestedOffset: brailleRequestedOffset
+            )
+        } else {
+            segmentedReadingContent
+        }
+    }
+
+    private var segmentedReadingContent: some View {
         ScrollViewReader { proxy in
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 12) {
@@ -3260,6 +3357,7 @@ struct NativeReadingScreen: View {
                         ?? Int(Double(textLayout.totalCharacters) * Double(initial) / 100)) :
                     Int(Double(textLayout.totalCharacters) * Double(initial) / 100)))
                 : Int(Double(textLayout.totalCharacters) * Double(initial) / 100)
+            if presentationMode == 2 { brailleRequestedOffset = readingOffset }
             lastSavedPercent = initial
             // The live reader owns the current cursor, not a stale saved position.
             // Shortcuts invokes this directly; no stop, seek or navigation occurs.

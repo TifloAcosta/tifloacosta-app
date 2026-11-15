@@ -24,8 +24,10 @@ on:
   # Reintento controlado tras incidencia de GitHub Actions: sustituir ejecución anterior bloqueada.
   # Reintento de publicación solicitado tras corregir pruebas de portada y completar traducciones. 2026-11-11.
   # Beta solicitada por Tony 2026-11-14: DAISY completo, ajustes braille, accesibilidad y retirada de Pocket TTS.
+  # Beta de recuperación 2026-11-15: base pública 1.3 más braille continuo, Azure y correcciones verificadas.
   push:
     branches:
+      - recovery/ios-public-plus-braille-azure-20261115
       - fix/ios-daisy-clipbegin-milliseconds-20261113
       - integration/ios-phases1-6-consolidated-20261110
       - integration/ios-beta139-complete-20261111

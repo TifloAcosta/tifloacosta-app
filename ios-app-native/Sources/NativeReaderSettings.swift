@@ -137,6 +137,7 @@ struct NativeReaderPunctuationControls: View {
 struct NativeReaderAudioControls: View {
     @AppStorage("native-reading-speed-index") private var generalSpeed = 2
     @AppStorage("native-reading-pitch-index") private var generalPitch = 2
+    @AppStorage("native-reading-volume-index") private var generalVolume = 10
     @AppStorage("native-reading-voice-id") private var generalVoiceID = ""
     @AppStorage("native-reader-reading-engine") private var readingEngine = 0
     @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
@@ -152,6 +153,8 @@ struct NativeReaderAudioControls: View {
     @State private var systemVoices: [AVSpeechSynthesisVoice] = []
     @State private var showVoiceHelp = false
     @State private var personalVoiceStatus = AVSpeechSynthesizer.personalVoiceAuthorizationStatus
+    @State private var previewSynthesizer = AVSpeechSynthesizer()
+    @State private var voiceProfileStatus = ""
 
     init(speedSelection: Binding<Int>? = nil, pitchSelection: Binding<Int>? = nil,
          voiceSelection: Binding<String>? = nil,
@@ -209,9 +212,40 @@ struct NativeReaderAudioControls: View {
                 let identifier = index > 0 && voices.indices.contains(index - 1)
                     ? voices[index - 1].identifier : ""
                 if let voiceSelection { voiceSelection.wrappedValue = identifier }
-                else { generalVoiceID = identifier }
+                else {
+                    generalVoiceID = identifier
+                    if let profile = NativeReaderVoiceProfiles.load(for: identifier) {
+                        generalSpeed = profile.speedIndex
+                        generalPitch = profile.pitchIndex
+                        generalVolume = profile.volumeIndex
+                        NativeReaderVoiceProfiles.applyPauses(profile)
+                        voiceProfileStatus = "Ajustes guardados de esta voz aplicados."
+                    } else { voiceProfileStatus = "Esta voz no tiene ajustes guardados." }
+                }
             }
         )
+    }
+
+    private func playVoiceSample() {
+        previewSynthesizer.stopSpeaking(at: .immediate)
+        let sample = "Hola, esta es una muestra de lectura. ¿Te gusta el tono, la velocidad y las pausas? Puedes seguir ajustándolos."
+        let profile = NativeReaderPauseProfile.segments(sample)
+        let voice = AVSpeechSynthesisVoice(identifier: selectedVoiceID)
+            ?? AVSpeechSynthesisVoice(language: "es-ES")
+        let index = speedSelection?.wrappedValue ?? generalSpeed
+        let pitch = pitchSelection?.wrappedValue ?? generalPitch
+        let pitches: [Float] = [0.8, 0.9, 1.0, 1.1, 1.2]
+        let speed = NativeReaderSpeedOptions.rate(for: index)
+        for segment in profile {
+            let utterance = AVSpeechUtterance(string: segment.text)
+            utterance.voice = voice
+            utterance.rate = min(AVSpeechUtteranceMaximumSpeechRate,
+                max(AVSpeechUtteranceMinimumSpeechRate, AVSpeechUtteranceDefaultSpeechRate * Float(speed)))
+            utterance.pitchMultiplier = pitches[max(0, min(pitches.count - 1, pitch))]
+            utterance.volume = Float(max(0, min(10, generalVolume))) / 10
+            utterance.postUtteranceDelay = segment.delay
+            previewSynthesizer.speak(utterance)
+        }
     }
 
     private func refreshVoices() {
@@ -257,7 +291,16 @@ struct NativeReaderAudioControls: View {
             choices: ["Más grave", "Grave", "Normal", "Agudo", "Más agudo"],
             selectedIndex: pitchSelection ?? $generalPitch
         )
+        NativeAdjustableChoice(
+            title: "Volumen de la voz",
+            choices: (0...10).map { "\($0 * 10) por ciento" },
+            selectedIndex: $generalVolume
+        )
         NativeReaderPunctuationControls()
+        if chosenEngine == 0 {
+            Button("Escuchar muestra") { playVoiceSample() }
+                .accessibilityHint("Escucha la voz con la velocidad, tono, volumen y pausas seleccionados.")
+        }
         NativeAdjustableChoice(
             title: "Mostrar voces",
             choices: ["Todos los idiomas", "Español", "Inglés"],
@@ -268,6 +311,15 @@ struct NativeReaderAudioControls: View {
             choices: voiceChoices,
             selectedIndex: selectedVoiceIndex
         )
+        if chosenEngine == 0 && voiceSelection == nil && !selectedVoiceID.isEmpty {
+            Button("Guardar ajustes de esta voz") {
+                let profile = NativeReaderVoiceProfiles.capture(
+                    speedIndex: generalSpeed, pitchIndex: generalPitch, volumeIndex: generalVolume)
+                voiceProfileStatus = NativeReaderVoiceProfiles.save(profile, for: selectedVoiceID)
+                    ? "Ajustes guardados para esta voz." : "No se pudieron guardar los ajustes."
+            }
+            Text(voiceProfileStatus).font(.footnote)
+        }
         .onAppear {
             personalVoiceStatus = AVSpeechSynthesizer.personalVoiceAuthorizationStatus
             refreshVoices()

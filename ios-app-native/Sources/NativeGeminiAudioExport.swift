@@ -8,6 +8,13 @@ enum NativeGeminiAudioExport {
     static let maximumCharacters = 60_000 // Applies only to Gemini API exports
     static let chunkSize = 1_200
 
+    /// Keep Markdown headings in the DAISY text/navigation, but do not read
+    /// the literal number sign aloud in the generated audio.
+    static func spokenText(_ text: String) -> String {
+        text.replacingOccurrences(of: #"(?m)^#{1,6}(?=[ \t])"#,
+                                  with: "", options: .regularExpression)
+    }
+
     enum Engine: String, CaseIterable, Identifiable {
         case system = "Sistema iOS"
         case gemini = "Gemini"
@@ -18,13 +25,14 @@ enum NativeGeminiAudioExport {
     static func synthesize(_ text: String, voice: String, engine: Engine,
                            speed: Double = 1.0, pitch: Float = 1.0) async throws -> Data {
         try Task.checkCancellation()
+        let spoken = spokenText(text)
         switch engine {
         case .system:
-            return try await NativeSystemSpeechExport.generate(text, voice: voice, speed: speed, pitch: pitch)
+            return try await NativeSystemSpeechExport.generate(spoken, voice: voice, speed: speed, pitch: pitch)
         case .gemini:
-            return try await NativeGeminiSpeech.generate(text, voice: voice)
+            return try await NativeGeminiSpeech.generate(spoken, voice: voice)
         case .phonon:
-            return try await NativePhononRuntime.generate(text: text, voice: voice)
+            return try await NativePhononRuntime.generate(text: spoken, voice: voice)
         }
     }
 

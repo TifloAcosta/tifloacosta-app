@@ -1,4 +1,8 @@
 /* Initial interface glossary. Additional screens require localization audit before public release. */
+"Escucha la voz con la velocidad, tono, volumen y pausas seleccionados." = "Ascolta la voce con la velocità, il tono, il volume e le pause selezionati.";
+"Guardar ajustes de esta voz" = "Salva le impostazioni di questa voce";
+"Volver a la biblioteca" = "Torna alla biblioteca";
+"Seguir leyendo" = "Continua a leggere";
 "Azure necesita conexión a Internet, una clave propia y una voz elegida. Puede tener costes según el plan de Microsoft. Las voces del iPhone siguen disponibles sin conexión." = "Azure richiede Internet, una chiave personale e una voce selezionata. Potrebbero esserci costi in base al piano Microsoft. Le voci dell'iPhone restano disponibili offline.";
 "Guía para configurar Azure desde el iPhone" = "Guida alla configurazione di Azure su iPhone";
 "Paso 1. Abre el portal de Azure con Safari e inicia sesión con tu cuenta de Microsoft. Si todavía no tienes una suscripción de Azure, sigue el proceso de alta. Comprueba cualquier requisito de verificación o facturación antes de aceptarlo." = "Passaggio 1. Apri il portale Azure in Safari e accedi con il tuo account Microsoft. Se non hai ancora un abbonamento Azure, segui la registrazione. Verifica eventuali requisiti di conferma o fatturazione prima di accettare.";

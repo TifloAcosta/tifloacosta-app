@@ -713,6 +713,9 @@ final class NativeReadingSpeech: ObservableObject {
             utterance.voice = (voiceIdentifier.isEmpty ? nil :
                 AVSpeechSynthesisVoice(identifier: voiceIdentifier))
                 ?? AVSpeechSynthesisVoice(language: language)
+            let volumeSetting = UserDefaults.standard.object(forKey: "native-reading-volume-index") == nil
+                ? 10 : UserDefaults.standard.integer(forKey: "native-reading-volume-index")
+            utterance.volume = Float(max(0, min(10, volumeSetting))) / 10
         }
     }
 
@@ -836,7 +839,7 @@ final class NativeReadingSpeech: ObservableObject {
     }
 
     func play(_ text: String, speed: Double = 1.0, pitch: Float = 1.0,
-              language: String = "es-ES", voiceIdentifier: String = "", baseUTF16: Int = 0,
+              volume: Float = 1.0, language: String = "es-ES", voiceIdentifier: String = "", baseUTF16: Int = 0,
               totalUTF16: Int? = nil, baseCharacters: Int = 0) {
         stop()
         guard !text.isEmpty else { return }
@@ -868,6 +871,7 @@ final class NativeReadingSpeech: ObservableObject {
                 max(AVSpeechUtteranceMinimumSpeechRate,
                     AVSpeechUtteranceDefaultSpeechRate * Float(speed)))
             utterance.pitchMultiplier = max(0.5, min(2, pitch))
+            utterance.volume = max(0, min(1, volume))
             // El retardo se programa entre frases, sin saturar la cola de AVSpeechSynthesizer.
             utterance.postUtteranceDelay = 0
             let identifier = ObjectIdentifier(utterance)
@@ -1103,12 +1107,13 @@ final class NativeReadingSpeech: ObservableObject {
                 Double($0.rate / AVSpeechUtteranceDefaultSpeechRate)
             } ?? 1.0
             let resumedPitch = currentUtterance?.pitchMultiplier ?? 1.0
+            let resumedVolume = currentUtterance?.volume ?? 1.0
             let total = totalUTF16
             let base = baseUTF16 + resumeUTF16
             let characterBase = baseCharacters + resumeCharacters
             systemSpeechNeedsRestart = false
             if !remainder.isEmpty {
-                play(remainder, speed: resumedSpeed, pitch: resumedPitch,
+                play(remainder, speed: resumedSpeed, pitch: resumedPitch, volume: resumedVolume,
                      language: resumedLanguage, voiceIdentifier: resumedVoice,
                      baseUTF16: base, totalUTF16: total, baseCharacters: characterBase)
             } else { stop() }
@@ -1222,6 +1227,7 @@ struct NativeReaderLibraryScreen: View {
     @AppStorage("native-reading-sort") private var sortIndex = 0
     @AppStorage("native-reading-speed-index") private var speedIndex = 2
     @AppStorage("native-reading-pitch-index") private var pitchIndex = 2
+    @AppStorage("native-reading-volume-index") private var volumeIndex = 10
     @AppStorage("native-reading-voice-id") private var voiceID = ""
     @AppStorage("native-voiceover-library-detail-index") private var voiceOverDetailIndex = 0
     private let pitches: [Float] = [0.8, 0.9, 1.0, 1.1, 1.2]
@@ -1392,6 +1398,7 @@ struct NativeReaderLibraryScreen: View {
             let offset = max(0, min(latest.body.count,
                 latest.lastTextOffset ?? Int(Double(latest.body.count) * Double(latest.lastPercent ?? 0) / 100)))
             speech.play(String(latest.body.dropFirst(offset)), speed: speed, pitch: pitch,
+                volume: Float(max(0, min(10, volumeIndex))) / 10,
                 language: AVSpeechSynthesisVoice(identifier: latest.readerPreferences?.voiceID ?? voiceID)?.language ?? "es-ES",
                 voiceIdentifier: latest.readerPreferences?.voiceID ?? voiceID,
                 baseUTF16: String(latest.body.prefix(offset)).utf16.count,
@@ -2002,10 +2009,12 @@ struct NativeReadingScreen: View {
     var startTrack: Int? = nil
 
     @EnvironmentObject private var library: NativeReaderLibrary
+    @Environment(\.dismiss) private var dismiss
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @AppStorage("native-reading-text-size") private var textSize = 20.0
     @AppStorage("native-reading-speed-index") private var speedIndex = 2
     @AppStorage("native-reading-pitch-index") private var pitchIndex = 2
+    @AppStorage("native-reading-volume-index") private var volumeIndex = 10
     @AppStorage("native-reading-voice-id") private var voiceID = ""
     @AppStorage("native-reading-line-spacing-index") private var lineSpacingIndex = 0
     @AppStorage("native-reading-strong-text") private var strongText = false
@@ -2224,6 +2233,7 @@ struct NativeReadingScreen: View {
             } catch { actionMessage = error.localizedDescription }
         } else {
             speech.play(remainder, speed: speed, pitch: pitch,
+                volume: Float(max(0, min(10, volumeIndex))) / 10,
                 language: AVSpeechSynthesisVoice(identifier: effectiveVoiceID)?.language ?? "es-ES",
                 voiceIdentifier: effectiveVoiceID,
                 baseUTF16: utf16Offset, totalUTF16: document.body.utf16.count,
@@ -2233,7 +2243,11 @@ struct NativeReadingScreen: View {
     }
 
     private func play() {
-        if speech.isPaused {
+        if speech.isPaused && tracks.isEmpty {
+            // Resume from the exact visible cursor. A previously queued
+            // utterance must never send the reader to an earlier chapter.
+            startTextSpeech()
+        } else if speech.isPaused {
             speech.resume()
         } else if !tracks.isEmpty {
             playTrack()
@@ -3292,7 +3306,11 @@ struct NativeReadingScreen: View {
             Button("Compartir") {
                 if let savedExportURL { NativeShare.present(url: savedExportURL) }
             }
-            Button("Cancelar", role: .cancel) { savedExportURL = nil }
+            Button("Volver a la biblioteca") {
+                savedExportURL = nil
+                dismiss()
+            }
+            Button("Seguir leyendo", role: .cancel) { savedExportURL = nil }
         } message: {
             Text("El archivo MP3 o DAISY permanece en la biblioteca. Puedes compartirlo también más adelante.")
         }

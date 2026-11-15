@@ -1,4 +1,8 @@
 "Abre el podcast de TifloAcosta en la plataforma seleccionada." = "Opens the TifloAcosta podcast on the selected platform.";
+"Escucha la voz con la velocidad, tono, volumen y pausas seleccionados." = "Listen to the voice with the selected speed, pitch, volume and pauses.";
+"Guardar ajustes de esta voz" = "Save settings for this voice";
+"Volver a la biblioteca" = "Return to library";
+"Seguir leyendo" = "Continue reading";
 "Azure necesita conexión a Internet, una clave propia y una voz elegida. Puede tener costes según el plan de Microsoft. Las voces del iPhone siguen disponibles sin conexión." = "Azure requires an Internet connection, your own key and a selected voice. Costs may apply depending on your Microsoft plan. iPhone voices remain available offline.";
 "Guía para configurar Azure desde el iPhone" = "Guide to setting up Azure on iPhone";
 "Paso 1. Abre el portal de Azure con Safari e inicia sesión con tu cuenta de Microsoft. Si todavía no tienes una suscripción de Azure, sigue el proceso de alta. Comprueba cualquier requisito de verificación o facturación antes de aceptarlo." = "Step 1. Open the Azure portal in Safari and sign in with your Microsoft account. If you do not yet have an Azure subscription, follow the registration process. Check any verification or billing requirements before accepting.";

@@ -1,6 +1,27 @@
 import SwiftUI
 import AVFoundation
 
+/// Los índices antiguos 0–4 conservan su significado. Los nuevos se guardan
+/// a partir de 100 para evitar cambiar silenciosamente la velocidad de un libro.
+enum NativeReaderSpeedOptions {
+    static let rates: [Double] = (15...30).map { Double($0) / 20.0 }
+    static let choices: [String] = rates.map { rate in
+        abs(rate - 1.0) < 0.001 ? "Normal, 1,00 veces" :
+            String(format: "%.2f veces", rate).replacingOccurrences(of: ".", with: ",")
+    }
+    private static let legacyRates: [Double] = [0.75, 0.9, 1.0, 1.25, 1.5]
+    static func rate(for stored: Int) -> Double {
+        if stored >= 100 { return rates[max(0, min(rates.count - 1, stored - 100))] }
+        return legacyRates[max(0, min(legacyRates.count - 1, stored))]
+    }
+    static func choiceIndex(for stored: Int) -> Int {
+        if stored >= 100 { return max(0, min(rates.count - 1, stored - 100)) }
+        let old = rate(for: stored)
+        return rates.firstIndex(where: { abs($0 - old) < 0.001 }) ?? 5
+    }
+    static func storedIndex(for choice: Int) -> Int { 100 + max(0, min(rates.count - 1, choice)) }
+}
+
 /// Reusable VoiceOver-adjustable controls. A document can supply independent
 /// bindings; the general settings keep using the existing AppStorage keys.
 struct NativeReaderAudioControls: View {
@@ -25,6 +46,13 @@ struct NativeReaderAudioControls: View {
     }
 
     private var selectedVoiceID: String { voiceSelection?.wrappedValue ?? generalVoiceID }
+    private var speedChoiceBinding: Binding<Int> {
+        let storage = speedSelection ?? $generalSpeed
+        return Binding(
+            get: { NativeReaderSpeedOptions.choiceIndex(for: storage.wrappedValue) },
+            set: { storage.wrappedValue = NativeReaderSpeedOptions.storedIndex(for: $0) }
+        )
+    }
 
     private var voices: [AVSpeechSynthesisVoice] {
         switch filterIndex {
@@ -71,8 +99,8 @@ struct NativeReaderAudioControls: View {
     var body: some View {
         NativeAdjustableChoice(
             title: "Velocidad de voz",
-            choices: ["0,75 veces", "0,9 veces", "Normal", "1,25 veces", "1,5 veces"],
-            selectedIndex: speedSelection ?? $generalSpeed
+            choices: NativeReaderSpeedOptions.choices,
+            selectedIndex: speedChoiceBinding
         )
         NativeAdjustableChoice(
             title: "Tono de lectura",
@@ -371,18 +399,14 @@ struct NativeReaderSettingsScreen: View {
                 }
             }
             NavigationLink("OCR y reconocimiento") { NativeReaderOCRSettingsScreen() }
-            NavigationLink("Navegación y avances") {
-                List {
-                    Section("Desplazamiento") {
-                        NativeAdjustableChoice(
-                            title: "Unidad de avance",
-                            choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
-                            selectedIndex: $navigationUnit
-                        )
-                    }
+            if presentationMode != 2 {
+                Section {
+                    NativeAdjustableChoice(
+                        title: "Unidad de avance",
+                        choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
+                        selectedIndex: $navigationUnit
+                    )
                 }
-                .tifloScreenSurface()
-                .navigationTitle("Navegación y avances")
             }
             NavigationLink("Formatos de lectura") { NativeReaderSupportedFormatsScreen() }
         }

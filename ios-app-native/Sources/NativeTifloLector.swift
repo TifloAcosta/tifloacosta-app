@@ -1113,6 +1113,13 @@ private struct NativeBrailleContinuousText: UIViewRepresentable {
     let text: String
     let fontSize: Double
     let strongText: Bool
+    let requestedOffset: Int
+
+    final class Coordinator {
+        var lastAppliedOffset: Int?
+    }
+
+    func makeCoordinator() -> Coordinator { Coordinator() }
 
     func makeUIView(context: Context) -> UITextView {
         let view = UITextView()
@@ -1129,7 +1136,16 @@ private struct NativeBrailleContinuousText: UIViewRepresentable {
     func updateUIView(_ view: UITextView, context: Context) {
         // Changing the text on every SwiftUI state update resets VoiceOver's
         // braille reading position. Only reload when the document has changed.
-        if view.text != text { view.text = text }
+        if view.text != text {
+            view.text = text
+            context.coordinator.lastAppliedOffset = nil
+        }
+        if context.coordinator.lastAppliedOffset != requestedOffset {
+            let validOffset = max(0, min(requestedOffset, text.count))
+            let utf16Offset = String(text.prefix(validOffset)).utf16.count
+            view.selectedRange = NSRange(location: utf16Offset, length: 0)
+            context.coordinator.lastAppliedOffset = requestedOffset
+        }
         let weight: UIFont.Weight = strongText ? .bold : .regular
         let font = UIFont.systemFont(ofSize: fontSize, weight: weight)
         if view.font != font { view.font = font }
@@ -1162,6 +1178,7 @@ struct NativeReadingScreen: View {
     @State private var sleepDeadline: Date?
     @State private var currentPercent = 0
     @State private var readingOffset = 0
+    @State private var brailleRequestedOffset = 0
     @State private var lastSavedPercent = -1
     @State private var trackIndex = 0
     @State private var didRestoreAudioPosition = false
@@ -1229,6 +1246,7 @@ struct NativeReadingScreen: View {
         let value = max(0, min(100, percent))
         currentPercent = value
         readingOffset = Int(Double(textLayout.totalCharacters) * Double(value) / 100)
+        if presentationMode == 2 { brailleRequestedOffset = readingOffset }
         if speech.hasAudio {
             speech.seek(to: value)
         } else if speech.isPlaying || speech.isPaused {
@@ -1388,6 +1406,7 @@ struct NativeReadingScreen: View {
 
     private func jump(to offset: Int) {
         readingOffset = max(0, min(textLayout.totalCharacters, offset))
+        if presentationMode == 2 { brailleRequestedOffset = readingOffset }
         let ratio = Double(readingOffset) / Double(max(1, textLayout.totalCharacters))
         currentPercent = min(100, Int((ratio * 100).rounded()))
         persistPosition()
@@ -1640,7 +1659,8 @@ struct NativeReadingScreen: View {
             NativeBrailleContinuousText(
                 text: latest.body,
                 fontSize: effectiveTextSize,
-                strongText: effectiveStrongText
+                strongText: effectiveStrongText,
+                requestedOffset: brailleRequestedOffset
             )
         } else {
             segmentedReadingContent
@@ -1881,6 +1901,7 @@ struct NativeReadingScreen: View {
                     Int(Double(textLayout.totalCharacters) * Double(initial) / 100)))
                 : Int(Double(textLayout.totalCharacters) * Double(initial) / 100)
             lastSavedPercent = initial
+            if presentationMode == 2 { brailleRequestedOffset = readingOffset }
             if !didApplyOpeningMode {
                 didApplyOpeningMode = true
                 if presentationMode == 0 && readingMode == 1 { play() }

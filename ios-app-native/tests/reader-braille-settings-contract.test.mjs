@@ -15,7 +15,7 @@ test('braille is a persistent reading mode without a character cutoff', () => {
   assert.match(reader, /NativeBrailleContinuousText\(/);
   assert.match(reader, /private struct NativeBrailleContinuousText: UIViewRepresentable/);
   assert.match(reader, /view\.isEditable = false/);
-  assert.match(reader, /if view\.text != text \{ view\.text = text \}/);
+  assert.match(reader, /if view\.text != text \{\s*view\.text = text/);
   assert.doesNotMatch(reader, /12_000/);
 });
 
@@ -24,4 +24,12 @@ test('braille options describe VoiceOver ownership and expose functional navigat
   assert.match(settings, /selectedIndex: \$navigationUnit/);
   assert.match(settings, /avance automático se activa y ajusta en VoiceOver/);
   assert.match(settings, /Ajustes del iPhone, Accesibilidad, VoiceOver, Braille/);
+});
+
+test('braille navigation moves the native text selection without resetting it on each render', () => {
+  assert.match(reader, /let requestedOffset: Int/);
+  assert.match(reader, /context\.coordinator\.lastAppliedOffset != requestedOffset/);
+  assert.match(reader, /view\.selectedRange = NSRange\(location:/);
+  assert.match(reader, /requestedOffset: brailleRequestedOffset/);
+  assert.match(reader, /brailleRequestedOffset = readingOffset/);
 });

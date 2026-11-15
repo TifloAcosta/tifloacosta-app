@@ -21,6 +21,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -30,10 +31,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.liveRegion
@@ -103,6 +103,7 @@ internal class NativeVoiceCredentials(private val context: Context) {
 @Composable
 fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
     val context = LocalContext.current
+    val uiLanguage = LocalNativeUiLanguage.current
     val credentials = remember { NativeVoiceCredentials(context.applicationContext) }
     var key by remember { mutableStateOf("") }
     var present by remember { mutableStateOf(credentials.hasKey("gemini")) }
@@ -121,7 +122,6 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
     val phononPreview = remember { NativePhononReader(context.applicationContext) }
     val mainHandler = remember { Handler(Looper.getMainLooper()) }
     var phononSamplePlaying by remember { mutableStateOf(false) }
-    var phononVoiceExpanded by remember { mutableStateOf(false) }
     var phononVoice by remember {
         mutableStateOf(context.getSharedPreferences("native-reader-preferences", Context.MODE_PRIVATE)
             .getString("phonon.voice", "").orEmpty())
@@ -131,7 +131,7 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
     ) { uri ->
         if (uri != null && !phononImportBusy) {
             phononImportBusy = true
-            message = if (english) "Installing Phonon model…" else "Instalando modelo Phonon…"
+            message = NativeReaderPhononStrings.get(uiLanguage, "installing")
             scope.launch {
                 message = try {
                     withContext(Dispatchers.IO) {
@@ -139,8 +139,7 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
                     }
                     phononPreview.refreshModel()
                     phononModelInstalled = true
-                    if (english) "Phonon model installed locally."
-                    else "Modelo Phonon instalado en el dispositivo."
+                    NativeReaderPhononStrings.get(uiLanguage, "installed")
                 } catch (error: Exception) {
                     error.localizedMessage ?: "No se pudo importar el modelo Phonon."
                 }
@@ -156,12 +155,10 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
     var phononLanguage by remember {
         mutableStateOf(prefs.getString("phonon.language", "en") ?: "en")
     }
-    var phononLanguagesExpanded by remember { mutableStateOf(false) }
     val phononLanguageOptions = listOf(
         "en" to "English", "es" to "Español", "fr" to "Français",
         "de" to "Deutsch", "pt" to "Português"
     )
-    var voicesExpanded by remember { mutableStateOf(false) }
     var generating by remember { mutableStateOf(false) }
     var samplePlaying by remember { mutableStateOf(false) }
     DisposableEffect(Unit) {
@@ -175,7 +172,7 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
         try {
             context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
         } catch (_: Exception) {
-            message = if (english) "Could not open the site." else "No se pudo abrir el sitio."
+            message = NativeReaderPhononStrings.get(uiLanguage, "siteError")
         }
     }
 
@@ -196,11 +193,10 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
         TextButton(onClick = {
             if (selectedProvider != null) backFromProvider() else onBack()
         }) {
-            Text(if (selectedProvider != null)
-                (if (english) "Back to engines" else "Volver a motores")
-                else (if (english) "Back" else "Volver"))
+            Text(NativeReaderPhononStrings.get(uiLanguage,
+                if (selectedProvider != null) "backEngines" else "back"))
         }
-        Text(if (english) "External engines" else "Motores externos")
+        Text(NativeReaderPhononStrings.get(uiLanguage, "external"))
         if (selectedProvider == null) {
             Button(onClick = { selectedProvider = "phonon" },
                 modifier = Modifier.fillMaxWidth()) {
@@ -213,84 +209,59 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
         }
         if (selectedProvider == "phonon") {
         Text("Phonon")
-        Text(if (english) "On-device voices. No API key needed. VoiceOver integration does not automatically make the engine available inside TifloLector."
-            else "Voces locales, sin clave API. La integración con VoiceOver no implica que el motor esté disponible directamente en TifloLector.")
+        Text(NativeReaderPhononStrings.get(uiLanguage, "help"))
         Button(onClick = { open("https://gradium.ai/phonon") }) {
-            Text(if (english) "Phonon" else "Phonon")
+            Text("Phonon")
         }
         Button(onClick = { open("https://huggingface.co/gradium/phonon-31m-en") }) {
-            Text(if (english) "English model" else "Modelo inglés")
+            Text(NativeReaderPhononStrings.get(uiLanguage, "englishModel"))
         }
         Button(onClick = { open("https://huggingface.co/gradium/phonon-40m-multilingual") }) {
-            Text(if (english) "Multilingual model and license" else "Modelo multilingüe y licencia")
+            Text(NativeReaderPhononStrings.get(uiLanguage, "multilingual"))
         }
-        Text(if (english)
-            "Import a CPU checkpoint ZIP containing config.json, tokenizer.json, model weights and voice files. iPhone Core ML ZIPs are not supported on Android."
-            else "Importa un ZIP de modelo CPU con config.json, tokenizer.json, pesos del modelo y archivos de voz. Los ZIP Core ML de iPhone no sirven para Android.")
+        Text(NativeReaderPhononStrings.get(uiLanguage, "zipHelp"))
         Text(
             if (phononModelInstalled) {
-                if (english) "CPU model installed." else "Modelo CPU instalado."
+                NativeReaderPhononStrings.get(uiLanguage, "cpuInstalled")
             } else {
-                if (english) "No CPU model installed." else "Sin modelo CPU instalado."
+                NativeReaderPhononStrings.get(uiLanguage, "cpuMissing")
             }
         )
-        Row {
-            Checkbox(
-                checked = phononTermsAccepted,
-                onCheckedChange = { phononTermsAccepted = it }
-            )
-            Text(if (english)
-                "I will respect the model and voice licenses, including non-commercial restrictions."
-                else "Respetaré las licencias del modelo y de las voces, incluidas sus restricciones no comerciales.")
+        Row(modifier = Modifier.fillMaxWidth().toggleable(
+            value = phononTermsAccepted, role = Role.Checkbox,
+            onValueChange = { phononTermsAccepted = it }
+        )) {
+            Text(NativeReaderPhononStrings.get(uiLanguage, "license"))
         }
         Button(
             enabled = !phononImportBusy && phononTermsAccepted,
             onClick = { importPhonon.launch(arrayOf("application/zip", "application/octet-stream")) }
-        ) { Text(if (english) "Import model ZIP" else "Importar modelo ZIP") }
-        Button(onClick = { phononLanguagesExpanded = true }) {
-            Text((if (english) "Model language: " else "Idioma del modelo: ") +
-                (phononLanguageOptions.firstOrNull { it.first == phononLanguage }?.second ?: phononLanguage))
+        ) { Text(NativeReaderPhononStrings.get(uiLanguage, "importZip")) }
+        ReaderCompactChoice(
+            NativeReaderPhononStrings.get(uiLanguage, "modelLanguage"),
+            phononLanguageOptions.map { it.second },
+            phononLanguageOptions.indexOfFirst { it.first == phononLanguage }.coerceAtLeast(0)
+        ) { selected ->
+            val language = phononLanguageOptions[selected].first
+            phononLanguage = language
+            prefs.edit().putString("phonon.language", language).apply()
         }
-        DropdownMenu(
-            expanded = phononLanguagesExpanded,
-            onDismissRequest = { phononLanguagesExpanded = false }
-        ) {
-            phononLanguageOptions.forEach { (language, label) ->
-                DropdownMenuItem(text = { Text(label) }, onClick = {
-                    phononLanguage = language
-                    prefs.edit().putString("phonon.language", language).apply()
-                    phononLanguagesExpanded = false
-                })
-            }
-        }
-        Text(if (english) "Choose the actual language of your installed checkpoint."
-            else "Selecciona el idioma real del modelo que hayas instalado.")
-        Text(if (english)
-            "Import only a complete CPU checkpoint with its own license. Phonon 31m speaks English; the Spanish 40m model has non-commercial restrictions. A model alone does not install the native engine."
-            else "Importa un modelo CPU completo y respeta su licencia. Phonon 31m habla inglés; el modelo español 40m tiene restricciones de uso no comercial. Importar el modelo no instala por sí solo el motor nativo.")
+        Text(NativeReaderPhononStrings.get(uiLanguage, "legalHelp"))
         if (phononModelInstalled &&
             NativePhononReader.isAvailable(context.applicationContext)) {
             val names = NativePhononModelStore.voices(context)
             if (names.isNotEmpty()) {
-                Button(onClick = { phononVoiceExpanded = true }) {
-                    Text((if (english) "Phonon voice: " else "Voz Phonon: ") +
-                        phononVoice.ifBlank { names.first() })
-                }
-                DropdownMenu(expanded = phononVoiceExpanded,
-                    onDismissRequest = { phononVoiceExpanded = false }) {
-                    names.forEach { name ->
-                        DropdownMenuItem(text = { Text(name) }, onClick = {
-                            phononVoice = name
-                            prefs.edit().putString("phonon.voice", name).apply()
-                            phononVoiceExpanded = false
-                        })
-                    }
+                ReaderCompactChoice(
+                    NativeReaderPhononStrings.get(uiLanguage, "voice"), names,
+                    names.indexOf(phononVoice).coerceAtLeast(0)
+                ) { selected ->
+                    phononVoice = names[selected]
+                    prefs.edit().putString("phonon.voice", phononVoice).apply()
                 }
                 Button(onClick = {
                     phononPreview.stop()
                     phononSamplePlaying = true
-                    message = if (english) "Playing Phonon sample."
-                        else "Reproduciendo muestra Phonon."
+                    message = NativeReaderPhononStrings.get(uiLanguage, "playing")
                     phononPreview.speak(
                         when (phononLanguage) {
                             "es" -> "Hola. Esta es una prueba de la voz Phonon."
@@ -311,32 +282,32 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
                         }
                     )
                 }) {
-                    Text(if (english) "Listen to Phonon" else "Escuchar Phonon")
+                    Text(NativeReaderPhononStrings.get(uiLanguage, "listen"))
                 }
                 if (phononSamplePlaying) {
                     Button(onClick = {
                         phononPreview.stop()
                         phononSamplePlaying = false
-                    }) { Text(if (english) "Stop sample" else "Detener muestra") }
+                    }) { Text(NativeReaderPhononStrings.get(uiLanguage, "stop")) }
                 }
             }
         }
         if (phononModelInstalled) {
             if (phononDeleteConfirm) {
-                Text(if (english) "Delete installed Phonon model?" else "¿Eliminar el modelo Phonon?")
+                Text(NativeReaderPhononStrings.get(uiLanguage, "deleteQuestion"))
                 Button(onClick = {
                     phononPreview.refreshModel()
                     phononModelInstalled = !NativePhononModelStore.remove(context)
                     phononDeleteConfirm = false
-                    message = if (phononModelInstalled) "No se pudo eliminar el modelo."
-                        else "Modelo Phonon eliminado."
-                }) { Text(if (english) "Confirm" else "Confirmar") }
+                    message = NativeReaderPhononStrings.get(uiLanguage,
+                        if (phononModelInstalled) "deleteFailed" else "deleteSuccess")
+                }) { Text(NativeReaderPhononStrings.get(uiLanguage, "confirm")) }
                 TextButton(onClick = { phononDeleteConfirm = false }) {
-                    Text(if (english) "Cancel" else "Cancelar")
+                    Text(NativeReaderPhononStrings.get(uiLanguage, "cancel"))
                 }
             } else {
                 TextButton(onClick = { phononDeleteConfirm = true }) {
-                    Text(if (english) "Delete model" else "Eliminar modelo")
+                    Text(NativeReaderPhononStrings.get(uiLanguage, "deleteModel"))
                 }
             }
         }
@@ -344,15 +315,14 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
         }
         if (selectedProvider == "gemini") {
         Text("Gemini")
-        Text(if (present) (if (english) "Key saved" else "Clave guardada")
-            else (if (english) "No key" else "Sin clave"))
+        Text(NativeReaderGeminiStrings.get(uiLanguage, if (present) "keySaved" else "noKey"))
         Button(onClick = { open("https://aistudio.google.com/api-keys") }) {
-            Text(if (english) "Create key" else "Crear clave")
+            Text(NativeReaderGeminiStrings.get(uiLanguage, "create"))
         }
         OutlinedTextField(
             value = key,
             onValueChange = { key = it },
-            label = { Text(if (english) "Paste key" else "Pegar clave") },
+            label = { Text(NativeReaderGeminiStrings.get(uiLanguage, "paste")) },
             visualTransformation = PasswordVisualTransformation(),
             singleLine = true,
             modifier = Modifier.fillMaxWidth()
@@ -362,55 +332,46 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
                 credentials.save("gemini", key)
                 key = ""
                 present = true
-                message = if (english) "Key saved on this device."
-                    else "Clave guardada en este dispositivo."
+                message = NativeReaderGeminiStrings.get(uiLanguage, "saved")
             } catch (_: Exception) {
-                message = if (english) "Could not save key." else "No se pudo guardar la clave."
+                message = NativeReaderGeminiStrings.get(uiLanguage, "saveError")
             }
-        }) { Text(if (english) "Save" else "Guardar") }
+        }) { Text(NativeReaderGeminiStrings.get(uiLanguage, "save")) }
         if (present) {
-            Button(onClick = { voicesExpanded = true }) {
-                Text((if (english) "Voice: " else "Voz: ") + voice)
-            }
-            DropdownMenu(expanded = voicesExpanded, onDismissRequest = { voicesExpanded = false }) {
-                NativeGeminiSpeech.voices.forEach { option ->
-                    DropdownMenuItem(text = { Text(option) }, onClick = {
-                        voice = option
-                        prefs.edit().putString("gemini.voice", option).apply()
-                        voicesExpanded = false
-                    })
-                }
+            ReaderCompactChoice(
+                NativeReaderGeminiStrings.get(uiLanguage, "voice"),
+                NativeGeminiSpeech.voices,
+                NativeGeminiSpeech.voices.indexOf(voice).coerceAtLeast(0)
+            ) { selected ->
+                voice = NativeGeminiSpeech.voices[selected]
+                prefs.edit().putString("gemini.voice", voice).apply()
             }
             Button(enabled = !generating, onClick = {
                 generating = true
                 preview.stop()
                 samplePlaying = false
-                message = if (english) "Generating audio; your account quota may be used."
-                    else "Generando audio; puede consumir cuota de tu cuenta."
+                message = NativeReaderGeminiStrings.get(uiLanguage, "quota")
                 scope.launch {
                     try {
                         val wav = withContext(Dispatchers.IO) {
                             NativeGeminiSpeech.generate(context,
-                                if (english) "Hello. This is a Gemini voice sample in TifloLector."
-                                else "Hola. Esta es una prueba de voz Gemini en TifloLector.",
+                                NativeReaderGeminiStrings.get(uiLanguage, "sample"),
                                 voice)
                         }
                         preview.play(wav)
                         samplePlaying = true
-                        message = if (english) "Playing Gemini sample."
-                            else "Reproduciendo muestra Gemini."
+                        message = NativeReaderGeminiStrings.get(uiLanguage, "playing")
                     } catch (_: Exception) {
-                        message = if (english) "Could not generate or play Gemini audio."
-                            else "No se pudo generar o reproducir audio Gemini."
+                        message = NativeReaderGeminiStrings.get(uiLanguage, "playError")
                     }
                     generating = false
                 }
-            }) { Text(if (english) "Listen" else "Escuchar") }
+            }) { Text(NativeReaderGeminiStrings.get(uiLanguage, "listen")) }
             if (samplePlaying) {
                 Button(onClick = {
                     preview.stop()
                     samplePlaying = false
-                }) { Text(if (english) "Stop" else "Detener") }
+                }) { Text(NativeReaderGeminiStrings.get(uiLanguage, "stop")) }
             }
             Button(enabled = !checking, onClick = {
                 checking = true
@@ -433,45 +394,39 @@ fun NativeReaderExternalVoiceKeysScreen(english: Boolean, onBack: () -> Unit) {
                             }
                         }
                         when (responseCode) {
-                            in 200..299 -> if (english)
-                                "Connection OK. Gemini can read documents and export audio."
-                                else "Conexión correcta. Gemini permite leer documentos y exportar audio."
-                            401, 403 -> if (english) "Key rejected or insufficient permissions."
-                                else "Clave rechazada o sin permisos."
-                            429 -> if (english) "Quota exceeded." else "Cuota agotada."
-                            else -> if (english) "Provider error: $responseCode"
-                                else "Error del proveedor: $responseCode"
+                            in 200..299 -> NativeReaderGeminiStrings.get(uiLanguage, "connected")
+                            401, 403 -> NativeReaderGeminiStrings.get(uiLanguage, "rejected")
+                            429 -> NativeReaderGeminiStrings.get(uiLanguage, "exhausted")
+                            else -> NativeReaderGeminiStrings.get(uiLanguage, "providerError") + responseCode
                         }
                     } catch (_: Exception) {
-                        if (english) "Could not check connection."
-                        else "No se pudo comprobar la conexión."
+                        NativeReaderGeminiStrings.get(uiLanguage, "checkError")
                     }
                     checking = false
                 }
-            }) { Text(if (english) "Check" else "Comprobar") }
+            }) { Text(NativeReaderGeminiStrings.get(uiLanguage, "check")) }
             if (confirmingDelete) {
-                Text(if (english) "Delete the saved key?" else "¿Eliminar la clave guardada?")
+                Text(NativeReaderGeminiStrings.get(uiLanguage, "deleteQuestion"))
                 Button(onClick = {
                     try {
                         credentials.delete("gemini")
                         present = false
                         confirmingDelete = false
-                        message = if (english) "Key deleted." else "Clave eliminada."
+                        message = NativeReaderGeminiStrings.get(uiLanguage, "deleted")
                     } catch (_: Exception) {
-                        message = if (english) "Could not delete key." else "No se pudo eliminar la clave."
+                        message = NativeReaderGeminiStrings.get(uiLanguage, "deleteError")
                     }
-                }) { Text(if (english) "Confirm" else "Confirmar") }
+                }) { Text(NativeReaderPhononStrings.get(uiLanguage, "confirm")) }
                 TextButton(onClick = { confirmingDelete = false }) {
-                    Text(if (english) "Cancel" else "Cancelar")
+                    Text(NativeReaderPhononStrings.get(uiLanguage, "cancel"))
                 }
             } else {
                 TextButton(onClick = { confirmingDelete = true }) {
-                    Text(if (english) "Delete" else "Eliminar")
+                    Text(NativeReaderGeminiStrings.get(uiLanguage, "delete"))
                 }
             }
         }
-        Text(if (english) "Your API key and quota belong to you. The app does not provide a shared key. Gemini sample generates real audio and may use quota. Choose Gemini as the engine to read or export documents."
-            else "Cada usuario gestiona su clave, cuota y posibles costes. TifloAcosta no proporciona una clave compartida. La muestra genera audio real y puede consumir cuota. Elige Gemini como motor para leer documentos o exportar audio.")
+        Text(NativeReaderGeminiStrings.get(uiLanguage, "help"))
         }
         if (selectedProvider != null && message.isNotBlank()) {
             Text(message, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite })

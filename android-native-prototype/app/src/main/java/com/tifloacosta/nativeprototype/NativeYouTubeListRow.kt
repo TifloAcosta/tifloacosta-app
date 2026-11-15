@@ -44,6 +44,7 @@ fun NativeYouTubeListRow(
     onPlay: () -> Unit
 ) {
     val context = LocalContext.current
+    val uiLanguage = LocalNativeUiLanguage.current
     val scope = rememberCoroutineScope()
     val videoId = remember(item.id, item.url) {
         MediaLogic.youTubeVideoId(item.url)
@@ -51,17 +52,17 @@ fun NativeYouTubeListRow(
     }
     val link = videoId?.let { "https://www.youtube.com/watch?v=$it" }.orEmpty()
     val actions = buildList<Pair<String, String>> {
-        add("play" to if (english) "Play video" else "Reproducir vídeo")
+        add("play" to NativeYouTubeRowStrings.get(uiLanguage, "play"))
         if (videoId != null) {
             if (account.authenticated) {
-                add("like" to if (english) "Like" else "Me gusta")
-                add("subscribe" to if (english) "Subscribe" else "Suscribirme")
-                add("comment" to if (english) "Comment" else "Comentar")
+                add("like" to NativeYouTubeRowStrings.get(uiLanguage, "like"))
+                add("subscribe" to NativeYouTubeRowStrings.get(uiLanguage, "subscribe"))
+                add("comment" to NativeYouTubeRowStrings.get(uiLanguage, "comment"))
             } else {
-                add("sign-in" to if (english) "Sign in with Google" else "Iniciar sesión con Google")
+                add("sign-in" to NativeYouTubeRowStrings.get(uiLanguage, "signIn"))
             }
-            add("share" to if (english) "Share" else "Compartir")
-            add("youtube" to if (english) "Open on YouTube" else "Abrir en YouTube")
+            add("share" to NativeYouTubeRowStrings.get(uiLanguage, "share"))
+            add("youtube" to NativeYouTubeRowStrings.get(uiLanguage, "open"))
         }
     }
     var selectedAction by remember(item.id, account.authenticated) { mutableIntStateOf(0) }
@@ -88,7 +89,7 @@ fun NativeYouTubeListRow(
                         Intent(Intent.ACTION_SEND).apply {
                             type = "text/plain"
                             putExtra(Intent.EXTRA_TEXT, link)
-                        }, if (english) "Share video" else "Compartir vídeo"
+                        }, NativeYouTubeRowStrings.get(uiLanguage, "shareVideo")
                     ))
                 }
             }
@@ -104,7 +105,7 @@ fun NativeYouTubeListRow(
         onClick = { runAction(actions[selected].first) },
         modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp).semantics {
             contentDescription = item.title
-            stateDescription = (if (english) "Selected action: " else "Acción: ") +
+            stateDescription = NativeYouTubeRowStrings.get(uiLanguage, "selected") +
                 actions[selected].second
             if (actions.size > 1) {
                 progressBarRangeInfo = ProgressBarRangeInfo(
@@ -125,12 +126,12 @@ fun NativeYouTubeListRow(
     if (editingComment && videoId != null) {
         AlertDialog(
             onDismissRequest = { editingComment = false },
-            title = { Text(if (english) "Comment on YouTube" else "Comentar en YouTube") },
+            title = { Text(NativeYouTubeRowStrings.get(uiLanguage, "commentTitle")) },
             text = {
                 TextField(
                     value = commentText,
                     onValueChange = { commentText = it },
-                    label = { Text(if (english) "Your comment" else "Tu comentario") },
+                    label = { Text(NativeYouTubeRowStrings.get(uiLanguage, "yourComment")) },
                     maxLines = 5
                 )
             },
@@ -145,11 +146,11 @@ fun NativeYouTubeListRow(
                             }
                         }
                     }
-                ) { Text(if (english) "Publish comment" else "Publicar comentario") }
+                ) { Text(NativeYouTubeRowStrings.get(uiLanguage, "publish")) }
             },
             dismissButton = {
                 TextButton(onClick = { editingComment = false }) {
-                    Text(if (english) "Cancel" else "Cancelar")
+                    Text(NativeYouTubeRowStrings.get(uiLanguage, "cancel"))
                 }
             }
         )

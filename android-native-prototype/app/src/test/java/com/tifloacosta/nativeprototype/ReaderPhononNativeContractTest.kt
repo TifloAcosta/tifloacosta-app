@@ -22,7 +22,7 @@ class ReaderPhononNativeContractTest {
         val ui = source("NativeTifloLector.kt")
         val service = source("NativeReaderPlaybackService.kt")
         assertTrue(ui.contains("NativePhononReader.isAvailable"))
-        assertTrue(ui.contains("listOf(\"Sistema\", \"Gemini\", \"Phonon\")"))
+        assertTrue(ui.contains("listOf(NativeReaderInlineStrings.get(uiLanguage, \"system\"), \"Gemini\", \"Phonon\")"))
         assertTrue(service.contains("phononEnabled = chosenEngine == 2"))
         // A paused synthesis must be stopped to prevent late native audio after Pause.
         assertTrue(service.contains("phononGeneration++"))

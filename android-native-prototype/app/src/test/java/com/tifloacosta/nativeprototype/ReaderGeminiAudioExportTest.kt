@@ -18,6 +18,16 @@ class ReaderGeminiAudioExportTest {
         NativeGeminiAudioExport.chunks("a".repeat(NativeGeminiAudioExport.MAX_CHARACTERS + 1))
     }
 
+    @Test fun streamingChunksDoNotHaveTheOldCharacterLimit() {
+        val text = ("Capítulo largo con una frase y salto de línea.\n").repeat(4000)
+        assertTrue(text.length > 60_000)
+        val parts = NativeGeminiAudioExport.streamingChunks(text)
+        assertEquals(text, parts.joinToString(""))
+        assertTrue(NativeGeminiAudioExport.streamingChunks(text).all {
+            it.length in 1..NativeGeminiAudioExport.CHUNK_SIZE
+        })
+    }
+
     @Test fun wavDataExtractionRejectsTruncatedInput() {
         try {
             NativeGeminiAudioExport.pcm(byteArrayOf(1, 2, 3))

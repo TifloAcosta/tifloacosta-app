@@ -220,6 +220,7 @@ fun NativeReaderCatalogsScreen(
     onBack: () -> Unit
 ) {
     val context = LocalContext.current
+    val uiLanguage = LocalNativeUiLanguage.current
     val scope = rememberCoroutineScope()
     val prefs = remember { context.getSharedPreferences("reader-opds-catalogs", Context.MODE_PRIVATE) }
     fun readSaved(): List<ReaderCatalog> {
@@ -257,8 +258,8 @@ fun NativeReaderCatalogsScreen(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        TextButton(onClick = onBack) { Text(if (english) "Back to import" else "Volver a Importar") }
-        Text(if (english) "External libraries (OPDS)" else "Bibliotecas externas (OPDS)")
+        TextButton(onClick = onBack) { Text(NativeReaderCatalogStrings.get(uiLanguage, "back")) }
+        Text(NativeReaderCatalogStrings.get(uiLanguage, "libraries"))
         if (page == null) {
             OutlinedButton(onClick = { open(NativeReaderOPDS.gutenberg.url) },
                 modifier = Modifier.fillMaxWidth()) { Text("Proyecto Gutenberg") }
@@ -266,12 +267,12 @@ fun NativeReaderCatalogsScreen(
                 OutlinedButton(onClick = { open(library.url) },
                     modifier = Modifier.fillMaxWidth()) { Text(library.name) }
             }
-            Button(onClick = { add = !add }) { Text(if (english) "Add library" else "Añadir biblioteca") }
+            Button(onClick = { add = !add }) { Text(NativeReaderCatalogStrings.get(uiLanguage, "add")) }
             if (add) {
                 TextField(value = newName, onValueChange = { newName = it.take(80) },
-                    label = { Text(if (english) "Catalog name" else "Nombre del catálogo") })
+                    label = { Text(NativeReaderCatalogStrings.get(uiLanguage, "name")) })
                 TextField(value = newUrl, onValueChange = { newUrl = it },
-                    label = { Text(if (english) "OPDS HTTPS URL" else "Dirección HTTPS OPDS") })
+                    label = { Text(NativeReaderCatalogStrings.get(uiLanguage, "url")) })
                 Button(onClick = {
                     try {
                         val link = NativeReaderOPDS.secure(newUrl.trim())
@@ -290,14 +291,14 @@ fun NativeReaderCatalogsScreen(
                             newUrl = ""
                         }
                     } catch (e: Exception) { error = e.message.orEmpty() }
-                }) { Text(if (english) "Save library" else "Guardar biblioteca") }
+                }) { Text(NativeReaderCatalogStrings.get(uiLanguage, "save")) }
             }
         } else {
             TextButton(onClick = { page = null }) {
-                Text(if (english) "All libraries" else "Todas las bibliotecas")
+                Text(NativeReaderCatalogStrings.get(uiLanguage, "all"))
             }
             val available = page!!
-            if (available.entries.isEmpty()) Text(if (english) "No entries" else "Sin obras")
+            if (available.entries.isEmpty()) Text(NativeReaderCatalogStrings.get(uiLanguage, "empty"))
             available.entries.forEach { entry ->
                 OutlinedButton(
                     modifier = Modifier.fillMaxWidth(),
@@ -311,11 +312,11 @@ fun NativeReaderCatalogsScreen(
             }
             if (available.next.isNotBlank()) {
                 Button(onClick = { open(available.next) }) {
-                    Text(if (english) "Next page" else "Página siguiente")
+                    Text(NativeReaderCatalogStrings.get(uiLanguage, "next"))
                 }
             }
         }
-        if (loading) Text(if (english) "Loading catalog" else "Cargando catálogo")
+        if (loading) Text(NativeReaderCatalogStrings.get(uiLanguage, "loading"))
         if (error.isNotBlank()) Text(error)
     }
 }

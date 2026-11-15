@@ -4,6 +4,8 @@ import android.content.Context
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
 import java.util.UUID
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
@@ -24,8 +26,9 @@ internal object NativeGeminiDaisyExport {
     internal data class TextUnit(val text: String, val heading: String? = null)
 
     /** Detect only headings explicitly preserved in extracted text, without guessing. */
-    internal fun units(text: String): List<TextUnit> {
-        NativeGeminiAudioExport.chunks(text) // Reject empty/oversized documents.
+    internal fun units(text: String, unbounded: Boolean = false): List<TextUnit> {
+        if (unbounded) NativeGeminiAudioExport.streamingChunks(text).firstOrNull()
+        else NativeGeminiAudioExport.chunks(text) // Keep old in-memory paths bounded.
         val headingPattern = Regex(
             "^(?:#{1,6}[ \t]+|(?:capítulo|capitulo|sección|seccion)[ \t]+[0-9IVXLCDM]+(?:[.: -]|$))",
             RegexOption.IGNORE_CASE
@@ -46,7 +49,9 @@ internal object NativeGeminiDaisyExport {
                 } else if (full.length <= NativeGeminiAudioExport.CHUNK_SIZE) {
                     result += TextUnit(full)
                 } else {
-                    NativeGeminiAudioExport.chunks(full).forEach { result += TextUnit(it) }
+                    val fragments = if (unbounded) NativeGeminiAudioExport.streamingChunks(full)
+                        else NativeGeminiAudioExport.chunks(full).asSequence()
+                    fragments.forEach { result += TextUnit(it) }
                 }
             }
         }
@@ -69,13 +74,47 @@ internal object NativeGeminiDaisyExport {
         progress: suspend (Int, Int) -> Unit,
         synthesize: suspend (String, String) -> ByteArray
     ): ByteArray {
-        val parts = units(text)
+        return ByteArrayOutputStream().use { bytes ->
+            ZipOutputStream(bytes).use { zip ->
+                writePackage(text, title, voice, progress, synthesize, zip, unbounded = false)
+            }
+            bytes.toByteArray().also { NativeDaisyPackageVerifier.validate(it) }
+        }
+    }
+
+    /** Streams each generated MP3 directly into a private ZIP. Never retain
+     * the book's entire encoded audio in a list or ByteArrayOutputStream.
+     */
+    internal suspend fun generateToFile(
+        context: Context, text: String, title: String, voice: String,
+        progress: suspend (Int, Int) -> Unit,
+        synthesize: suspend (String, String) -> ByteArray
+    ): File {
+        val file = File.createTempFile("tiflo-daisy-", ".zip", context.cacheDir)
+        try {
+            ZipOutputStream(FileOutputStream(file)).use { zip ->
+                writePackage(text, title, voice, progress, synthesize, zip, unbounded = true)
+            }
+            NativeDaisyPackageVerifier.validateFile(file)
+            return file
+        } catch (failure: Exception) {
+            file.delete()
+            throw failure
+        }
+    }
+
+    private suspend fun writePackage(
+        text: String, title: String, voice: String,
+        progress: suspend (Int, Int) -> Unit,
+        synthesize: suspend (String, String) -> ByteArray,
+        zip: ZipOutputStream, unbounded: Boolean
+    ) {
+        val parts = units(text, unbounded)
         val identifier = "urn:uuid:" + UUID.randomUUID().toString()
         val escapedTitle = xml(title)
         val written = mutableListOf<String>()
         val parallel = mutableListOf<String>()
         val manifest = mutableListOf<String>()
-        val soundFiles = mutableListOf<Pair<String, ByteArray>>()
         var duration = 0.0
         val chapterPoints = mutableListOf<Pair<String, String>>()
         var firstPar = ""
@@ -108,7 +147,9 @@ internal object NativeGeminiDaisyExport {
                     "<audio src=\"$filename\" clipBegin=\"00:00:00\" " +
                     "clipEnd=\"" + clock(seconds) + "\"/></par>"
                 manifest += "<item id=\"audio$number\" href=\"$filename\" media-type=\"audio/mpeg\"/>"
-                soundFiles += filename to NativeGeminiAudioExport.encodeMP3(pcm)
+                zip.putNextEntry(ZipEntry(filename))
+                zip.write(NativeGeminiAudioExport.encodeMP3(pcm))
+                zip.closeEntry()
             } else {
                 // Full-text DTBook also retains silent whitespace.
                 written += "<p>" + xml(fragment.text) + "</p>"
@@ -179,23 +220,14 @@ internal object NativeGeminiDaisyExport {
             </manifest><spine toc="ncx"><itemref idref="sync"/></spine></package>
         """.trimIndent().replace("TOTALTIME", total)
             .replace("PLACEHOLDER_MANIFEST", manifest.joinToString("\n"))
-        return ByteArrayOutputStream().use { bytes ->
-            ZipOutputStream(bytes).use { zip ->
-                fun add(name: String, data: ByteArray) {
-                    zip.putNextEntry(ZipEntry(name))
-                    zip.write(data)
-                    zip.closeEntry()
-                }
-                for ((name, value) in listOf(
-                    "book.opf" to opf, "book.xml" to dtbook,
-                    "book.ncx" to ncx, "sync.smil" to smil
-                )) add(name, value.toByteArray(Charsets.UTF_8))
-                soundFiles.forEach { (name, audio) ->
-                    currentCoroutineContext().ensureActive()
-                    add(name, audio)
-                }
-            }
-            bytes.toByteArray().also { NativeDaisyPackageVerifier.validate(it) }
+        fun add(name: String, data: ByteArray) {
+            zip.putNextEntry(ZipEntry(name))
+            zip.write(data)
+            zip.closeEntry()
         }
+        for ((name, value) in listOf(
+            "book.opf" to opf, "book.xml" to dtbook,
+            "book.ncx" to ncx, "sync.smil" to smil
+        )) add(name, value.toByteArray(Charsets.UTF_8))
     }
 }

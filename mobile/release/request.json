@@ -7,6 +7,10 @@
   "notifyUpdate": false,
   "notes": {
     "es": "TifloLector renovado: biblioteca con carpetas, navegación accesible, marcas persistentes y lectura con TalkBack. Nuevos ajustes de voz y pausas, reproducción y exportación a MP3, M4A, WAV y DAISY. Mejoras de accesibilidad en Vídeos, Pódcast y otras secciones.",
-    "en": "Updated TifloLector: folders, accessible navigation, persistent bookmarks, and TalkBack reading. New speech and punctuation controls, audio playback and MP3, M4A, WAV, and DAISY export. Accessibility improvements to Videos, Podcasts, and other sections."
+    "en": "Updated TifloLector: folders, accessible navigation, persistent bookmarks, and TalkBack reading. New speech and punctuation controls, audio playback and MP3, M4A, WAV, and DAISY export. Accessibility improvements to Videos, Podcasts, and other sections.",
+    "pt": "TifloLector renovado: biblioteca com pastas, navegação acessível, marcadores persistentes e leitura com TalkBack. Novas opções de voz e pausas, reprodução e exportação para MP3, M4A, WAV e DAISY. Melhorias de acessibilidade em Vídeos, Podcasts e outras secções.",
+    "fr": "TifloLector amélioré : bibliothèque avec dossiers, navigation accessible, signets conservés et lecture avec TalkBack. Nouveaux réglages de voix et de pauses, lecture audio et exportation MP3, M4A, WAV et DAISY. Accessibilité améliorée dans Vidéos, Podcasts et d’autres sections.",
+    "it": "TifloLector aggiornato: libreria con cartelle, navigazione accessibile, segnalibri persistenti e lettura con TalkBack. Nuove impostazioni per voce e pause, riproduzione ed esportazione in MP3, M4A, WAV e DAISY. Miglioramenti dell’accessibilità in Video, Podcast e altre sezioni.",
+    "de": "TifloLector verbessert: Bibliothek mit Ordnern, barrierefreie Navigation, gespeicherte Lesezeichen und Vorlesen mit TalkBack. Neue Einstellungen für Stimme und Pausen, Audiowiedergabe und Export als MP3, M4A, WAV und DAISY. Verbesserte Barrierefreiheit bei Videos, Podcasts und weiteren Bereichen."
   }
 }

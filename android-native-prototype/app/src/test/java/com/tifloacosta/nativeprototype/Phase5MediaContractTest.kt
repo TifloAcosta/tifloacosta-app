@@ -32,7 +32,8 @@ class Phase5MediaContractTest {
         assertTrue(library.contains("fun savedEpisodes()"))
         assertTrue(library.contains("fun toggleFavoriteEpisode("))
         assertTrue(screen.contains("library.savedEpisodes()"))
-        assertTrue(screen.contains("Reproducir favorito: "))
+        assertTrue(screen.contains("label(\"favoritePlay\") + saved.title"))
+        assertTrue(source("NativePodcastStrings.kt").contains("\"favoritePlay\""))
     }
 
     @Test fun youtubeSubscriptionsUseExistingProtectedSessionAndPagination() {

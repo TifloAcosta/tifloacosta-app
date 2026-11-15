@@ -45,24 +45,7 @@ fun ReaderAdjustableChoice(
     selected: Int,
     onSelected: (Int) -> Unit
 ) {
-    if (choices.isEmpty()) return
-    val index = selected.coerceIn(0, choices.lastIndex)
-    // The adjustable control itself must announce its purpose AND selected value.
-    // A separate visible-only label forces an unnecessary extra TalkBack stop.
-    if (choices.size > 1) {
-        Slider(
-            value = index.toFloat(),
-            onValueChange = { onSelected(it.roundToInt().coerceIn(0, choices.lastIndex)) },
-            valueRange = 0f..choices.lastIndex.toFloat(),
-            steps = (choices.size - 2).coerceAtLeast(0),
-            modifier = Modifier.fillMaxWidth().semantics {
-                contentDescription = label + ": " + choices[index]
-                stateDescription = choices[index]
-            }
-        )
-    } else {
-        Text(label + ": " + choices[index])
-    }
+    ReaderCompactChoice(label, choices, selected, onSelected = onSelected)
 }
 
 /**
@@ -78,6 +61,7 @@ fun ReaderCompactChoice(
     english: Boolean = false,
     onSelected: (Int) -> Unit
 ) {
+    val uiLanguage = LocalNativeUiLanguage.current
     if (choices.isEmpty()) return
     val index = selected.coerceIn(0, choices.lastIndex)
     TextButton(
@@ -87,20 +71,20 @@ fun ReaderCompactChoice(
         modifier = Modifier.fillMaxWidth().clearAndSetSemantics {
             contentDescription = label
             stateDescription = choices[index]
-            onClick(label = if (english) "Choose next value" else "Elegir el siguiente valor") {
+            onClick(label = NativeReaderAccessibilityStrings.get(uiLanguage, "nextValue")) {
                 onSelected(NativeReaderGestureSteps.wrapNext(index, choices.size))
                 true
             }
             if (choices.size > 1) {
                 customActions = listOf(
                     CustomAccessibilityAction(
-                        if (english) "Previous option" else "Opción anterior"
+                        NativeReaderAccessibilityStrings.get(uiLanguage, "previousOption")
                     ) {
                         onSelected((index - 1).coerceAtLeast(0))
                         true
                     },
                     CustomAccessibilityAction(
-                        if (english) "Next option" else "Opción siguiente"
+                        NativeReaderAccessibilityStrings.get(uiLanguage, "nextOption")
                     ) {
                         onSelected((index + 1).coerceAtMost(choices.lastIndex))
                         true
@@ -136,6 +120,7 @@ fun ReaderCompactPosition(
     english: Boolean = false,
     onSelected: (Int) -> Unit
 ) {
+    val uiLanguage = LocalNativeUiLanguage.current
     val last = (count - 1).coerceAtLeast(0)
     val index = current.coerceIn(0, last)
     TextButton(
@@ -145,21 +130,21 @@ fun ReaderCompactPosition(
         // unlabeled progress bar plus repeated explanatory text.
         modifier = Modifier.fillMaxWidth().clearAndSetSemantics {
             contentDescription = label
-            stateDescription = "${index + 1} ${if (english) "of" else "de"} ${count.coerceAtLeast(1)}"
-            onClick(label = if (english) "Next reading unit" else "Siguiente unidad de lectura") {
+            stateDescription = "${index + 1} ${NativeReaderAccessibilityStrings.get(uiLanguage, "of")} ${count.coerceAtLeast(1)}"
+            onClick(label = NativeReaderAccessibilityStrings.get(uiLanguage, "nextUnit")) {
                 if (index < last) onSelected(index + 1)
                 true
             }
             if (count > 1) {
                 customActions = listOf(
                     CustomAccessibilityAction(
-                        if (english) "Previous" else "Anterior"
+                        NativeReaderAccessibilityStrings.get(uiLanguage, "previous")
                     ) {
                         if (index > 0) onSelected(index - 1)
                         true
                     },
                     CustomAccessibilityAction(
-                        if (english) "Next" else "Siguiente"
+                        NativeReaderAccessibilityStrings.get(uiLanguage, "next")
                     ) {
                         if (index < last) onSelected(index + 1)
                         true
@@ -195,22 +180,23 @@ fun ReaderCompactOffsetPosition(
     onPrevious: () -> Unit,
     onNext: () -> Unit
 ) {
+    val uiLanguage = LocalNativeUiLanguage.current
     TextButton(
         enabled = maximum > 0,
         onClick = onNext,
         modifier = Modifier.fillMaxWidth().clearAndSetSemantics {
             contentDescription = label
             stateDescription = valueLabel
-            onClick(label = if (english) "Next position" else "Posición siguiente") {
+            onClick(label = NativeReaderAccessibilityStrings.get(uiLanguage, "nextPosition")) {
                 onNext()
                 true
             }
             customActions = listOf(
-                CustomAccessibilityAction(if (english) "Previous position" else "Posición anterior") {
+                CustomAccessibilityAction(NativeReaderAccessibilityStrings.get(uiLanguage, "previousPosition")) {
                     onPrevious()
                     true
                 },
-                CustomAccessibilityAction(if (english) "Next position" else "Posición siguiente") {
+                CustomAccessibilityAction(NativeReaderAccessibilityStrings.get(uiLanguage, "nextPosition")) {
                     onNext()
                     true
                 }
@@ -237,6 +223,7 @@ fun NativeReaderGeneralSettings(
     onBack: () -> Unit
 ) {
     val context = LocalContext.current
+    val uiLanguage = LocalNativeUiLanguage.current
     val prefs = remember {
         context.getSharedPreferences("native-reader-preferences", 0)
     }
@@ -244,7 +231,7 @@ fun NativeReaderGeneralSettings(
     var voiceRefresh by remember { mutableIntStateOf(0) }
     val speaker = remember(voiceRefresh) { NativeReaderSpeaker(context.applicationContext) }
     DisposableEffect(speaker) { onDispose { speaker.close() } }
-    var expanded by remember { mutableIntStateOf(-1) }
+    var selectedGroup by remember { mutableIntStateOf(-1) }
     var speed by remember { mutableIntStateOf(
         SPEEDS.indices.minByOrNull { kotlin.math.abs(SPEEDS[it] - prefs.getFloat("rate", 1f)) } ?: 2
     ) }
@@ -273,11 +260,7 @@ fun NativeReaderGeneralSettings(
     var bold by remember { mutableIntStateOf(prefs.getInt("bold", 0).coerceIn(0, 1)) }
     var voice by remember { mutableStateOf(prefs.getString("voice", "").orEmpty()) }
     var voiceFilter by remember { mutableIntStateOf(0) }
-    val groups = if (english)
-        listOf("Audio and voices", "Reading mode", "Visual presentation",
-            "Navigation and steps", "Supported formats", "Backup and restore")
-    else listOf("Audio y voces", "Modo de lectura", "Presentación visual",
-        "Navegación y avances", "Formatos compatibles", "Copias de seguridad")
+    val groups = NativeReaderSettingsStrings.options(uiLanguage, "groups")
 
     if (nested == "backup") {
         NativeReaderBackupScreen(english, onRestored = onDataRestored,
@@ -307,9 +290,9 @@ fun NativeReaderGeneralSettings(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             TextButton(onClick = { nested = "" }) {
-                Text(if (english) "Back to settings" else "Volver a ajustes")
+                Text(NativeReaderSettingsStrings.get(uiLanguage, "backSettings"))
             }
-            Text(if (english) "Open-source notices" else "Licencias y código fuente",
+            Text(NativeReaderSettingsStrings.get(uiLanguage, "licenses"),
                 style = MaterialTheme.typography.headlineSmall)
             Text(notices)
         }
@@ -320,32 +303,36 @@ fun NativeReaderGeneralSettings(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        TextButton(onClick = onBack) { Text(if (english) "Back to reader" else "Volver a TifloLector") }
-        Text(if (english) "TifloLector settings" else "Ajustes de TifloLector",
+        TextButton(onClick = { if (selectedGroup >= 0) selectedGroup = -1 else onBack() }) {
+            Text(NativeReaderSettingsStrings.get(uiLanguage,
+                if (selectedGroup >= 0) "backSettings" else "backReader"))
+        }
+        Text(if (selectedGroup >= 0) groups[selectedGroup]
+            else NativeReaderSettingsStrings.get(uiLanguage, "title"),
             style = MaterialTheme.typography.headlineSmall)
+        if (selectedGroup < 0) {
         TextButton(
             onClick = { nested = "licenses" },
             modifier = Modifier.fillMaxWidth()
-        ) { Text(if (english) "Licenses and source code" else "Licencias y código fuente") }
+        ) { Text(NativeReaderSettingsStrings.get(uiLanguage, "licenses")) }
         groups.forEachIndexed { i, title ->
             TextButton(
-                modifier = Modifier.fillMaxWidth().semantics {
-                    stateDescription = if (expanded == i) (if (english) "Expanded" else "Abierto")
-                    else (if (english) "Collapsed" else "Cerrado")
-                },
-                onClick = { expanded = if (expanded == i) -1 else i }
+                modifier = Modifier.fillMaxWidth(),
+                onClick = { selectedGroup = i }
             ) { Text(title) }
-            if (expanded == i) when (i) {
+        }
+        } else {
+            when (selectedGroup) {
                 0 -> {
                     ReaderAdjustableChoice(
-                        if (english) "Speech speed" else "Velocidad de voz",
+                        NativeReaderSettingsStrings.get(uiLanguage, "speechSpeed"),
                         listOf("0,75", "0,9", "Normal", "1,25", "1,5"), speed
                     ) {
                         speed = it
                         prefs.edit().putFloat("rate", SPEEDS[it]).apply()
                     }
                     ReaderAdjustableChoice(
-                        if (english) "System TTS pitch" else "Tono de la voz del sistema",
+                        NativeReaderSettingsStrings.get(uiLanguage, "systemPitch"),
                         listOf("0,7", "0,85", "Normal", "1,15", "1,3"),
                         pitchIndex
                     ) {
@@ -353,26 +340,23 @@ fun NativeReaderGeneralSettings(
                         prefs.edit().putFloat("pitch", pitchValues[it]).apply()
                     }
                     ReaderAdjustableChoice(
-                        if (english) "Pause after commas and semicolons" else "Pausa tras comas y punto y coma",
+                        NativeReaderSettingsStrings.get(uiLanguage, "pauseComma"),
                         pauseCommaValues.map { it.toString() + " ms" }, commaIndex
                     ) {
                         commaIndex = it
                         prefs.edit().putInt("pause.comma", pauseCommaValues[it]).apply()
                     }
                     ReaderAdjustableChoice(
-                        if (english) "Pause at sentence endings" else "Pausa al final de frase",
+                        NativeReaderSettingsStrings.get(uiLanguage, "pausePeriod"),
                         pausePeriodValues.map { it.toString() + " ms" }, periodIndex
                     ) {
                         periodIndex = it
                         prefs.edit().putInt("pause.period", pausePeriodValues[it]).apply()
                     }
-                    Text(if (english)
-                        "Pitch and punctuation pauses apply to the Android system speech engine. External engines manage their own prosody."
-                        else "El tono y las pausas por puntuación se aplican a la voz del sistema Android. Los motores externos controlan su propia prosodia.")
+                    Text(NativeReaderSettingsStrings.get(uiLanguage, "pauseHelp"))
                     ReaderAdjustableChoice(
-                        if (english) "Show voices" else "Mostrar voces",
-                        if (english) listOf("All", "Spanish", "English")
-                        else listOf("Todas", "Español", "Inglés"), voiceFilter
+                        NativeReaderSettingsStrings.get(uiLanguage, "voices"),
+                        NativeReaderSettingsStrings.options(uiLanguage, "voiceFilters"), voiceFilter
                     ) { voiceFilter = it }
                     NativeReaderVoicePicker(
                         english = english,
@@ -386,70 +370,45 @@ fun NativeReaderGeneralSettings(
                         }
                     )
                     Button(onClick = { nested = "keys" }) {
-                        Text(if (english) "External engines" else "Motores externos")
+                        Text(NativeReaderSettingsStrings.get(uiLanguage, "externalEngines"))
                     }
                     Button(onClick = { nested = "external" }) {
-                        Text(if (english) "Find voices from other providers"
-                            else "Buscar voces de otros proveedores")
+                        Text(NativeReaderSettingsStrings.get(uiLanguage, "otherVoices"))
                     }
                     Button(onClick = { nested = "pronunciation" }) {
-                        Text(if (english) "Pronunciation dictionary"
-                            else "Diccionario de pronunciación")
+                        Text(NativeReaderSettingsStrings.get(uiLanguage, "pronunciation"))
                     }
                     Button(onClick = { voiceRefresh++ }) {
-                        Text(if (english) "Refresh installed voices"
-                            else "Actualizar voces instaladas")
+                        Text(NativeReaderSettingsStrings.get(uiLanguage, "refreshVoices"))
                     }
                     Button(onClick = {
                         val intent = Intent("com.android.settings.TTS_SETTINGS")
                         if (intent.resolveActivity(context.packageManager) != null) {
                             context.startActivity(intent)
                         } else context.startActivity(Intent(Settings.ACTION_SETTINGS))
-                    }) { Text(if (english) "Find more voices in Android" else "Buscar más voces en Android") }
+                    }) { Text(NativeReaderSettingsStrings.get(uiLanguage, "androidVoices")) }
                 }
-                1 -> Text(if (english)
-                    "Reading starts only when you press Play. Opening a book never starts speech."
-                    else "La lectura comienza cuando pulsas Reproducir. Abrir un libro no activa la voz.")
+                1 -> Text(NativeReaderSettingsStrings.get(uiLanguage, "readingHelp"))
                 2 -> {
-                    ReaderAdjustableChoice(if (english) "Text size" else "Tamaño de letra",
+                    ReaderAdjustableChoice(NativeReaderSettingsStrings.get(uiLanguage, "textSize"),
                         (14..40 step 2).map { "$it" }, font
                     ) { font = it; prefs.edit().putInt("font", it).apply() }
-                    ReaderAdjustableChoice(if (english) "Line spacing" else "Interlineado",
-                        if (english) listOf("Normal", "Comfortable", "Wide")
-                        else listOf("Normal", "Cómodo", "Amplio"), spacing
+                    ReaderAdjustableChoice(NativeReaderSettingsStrings.get(uiLanguage, "spacing"),
+                        NativeReaderSettingsStrings.options(uiLanguage, "spacingOptions"), spacing
                     ) { spacing = it; prefs.edit().putInt("spacing", it).apply() }
-                    ReaderAdjustableChoice(if (english) "Bold text" else "Texto reforzado",
-                        if (english) listOf("Off", "On") else listOf("No", "Sí"), bold
+                    ReaderAdjustableChoice(NativeReaderSettingsStrings.get(uiLanguage, "bold"),
+                        NativeReaderSettingsStrings.options(uiLanguage, "onOff"), bold
                     ) { bold = it; prefs.edit().putInt("bold", it).apply() }
                 }
                 3 -> ReaderAdjustableChoice(
-                    if (english) "Movement unit" else "Unidad de avance",
-                    if (english) listOf("Block", "Paragraph", "Sentence")
-                    else listOf("Bloque", "Párrafo", "Frase"), unit
+                    NativeReaderSettingsStrings.get(uiLanguage, "movement"),
+                    NativeReaderSettingsStrings.options(uiLanguage, "navigationOptions"), unit
                 ) { unit = it; prefs.edit().putInt("unit", it).apply() }
-                4 -> {
-                    Text(
-                        if (english) "Reader formats: TXT, Markdown, HTML, XHTML, RTF, PDF with offline Latin OCR, " +
-                            "JPEG, PNG, WebP, BMP, HEIC, EPUB, DOCX, PPTX, PPSX, XLSX, ODT, ODS, ODP, " +
-                            "legacy DOC, PPT, PPS and XLS (text extraction), FB2, unencrypted " +
-                            "PalmDOC/MOBI/PRC/PDB and compatible AZW/AZW3 files, ZIP, RAR and 7Z including DAISY, " +
-                            "and MP3, M4A, M4B, AAC, WAV, OGG, FLAC, OPUS where supported by Android. " +
-                            "DRM, Kindle HUFF/CDIC compression, some KF8 layouts and unsupported encoding " +
-                            "remain unavailable. Office images still require separate OCR."
-                        else "Formatos del lector: TXT, Markdown, HTML, XHTML, RTF, PDF con OCR latino local, " +
-                            "JPEG, PNG, WebP, BMP, HEIC, EPUB, DOCX, PPTX, PPSX, XLSX, ODT, ODS, ODP, " +
-                            "DOC, PPT, PPS y XLS antiguos (extracción de texto), FB2, PalmDOC/MOBI/PRC/PDB " +
-                            "sin cifrar y algunos AZW/AZW3 compatibles, ZIP, RAR y 7Z incluidos DAISY, " +
-                            "y MP3, M4A, M4B, AAC, WAV, OGG, FLAC y OPUS según Android. " +
-                            "Quedan excluidos DRM, compresión Kindle HUFF/CDIC, algunos diseños KF8 " +
-                            "e imágenes de Office que necesiten OCR."
-                    )
-                }
+                4 -> Text(NativeReaderSettingsStrings.get(uiLanguage, "formats"))
                 5 -> {
                     Button(onClick = { nested = "backup" },
                         modifier = Modifier.fillMaxWidth()) {
-                        Text(if (english) "Open backup and restore tools"
-                            else "Abrir copia y restauración")
+                        Text(NativeReaderSettingsStrings.get(uiLanguage, "backupOpen"))
                     }
                 }
             }

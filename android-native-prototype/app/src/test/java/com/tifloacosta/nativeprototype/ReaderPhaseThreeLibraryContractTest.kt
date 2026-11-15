@@ -21,16 +21,17 @@ class ReaderPhaseThreeLibraryContractTest {
 
     @Test fun multiSelectRequiresConfirmationBeforeDeletion() {
         val s = source("NativeTifloLector.kt")
-        assertTrue(s.contains("Selección"))
+        assertTrue(s.contains("NativeReaderLibraryStrings.get(uiLanguage, if (selectionMode) \"done\" else \"select\")"))
         assertTrue(s.contains("selectedBookIds"))
         assertTrue(s.contains("confirmMultipleDeletion"))
-        assertTrue(s.contains("¿Eliminar los libros seleccionados?"))
+        assertTrue(s.contains("NativeReaderBookDialogStrings.get(uiLanguage, \"deleteMultipleBody\""))
+        assertTrue(source("NativeReaderBookDialogStrings.kt").contains("¿Eliminar los libros seleccionados?"))
         assertTrue(s.contains("store.delete(book)"))
     }
 
     @Test fun openedTextAndAudioBooksOfferDeletion() {
-        assertTrue(source("NativeTifloLector.kt").contains("Eliminar esta obra"))
-        assertTrue(source("NativeReaderAudio.kt").contains("Eliminar este audiolibro"))
+        assertTrue(source("NativeTifloLector.kt").contains("NativeReaderInlineStrings.get(uiLanguage, \"delete\")"))
+        assertTrue(source("NativeReaderAudio.kt").contains("NativeReaderAudioStrings.get(uiLanguage, \"delete\")"))
         assertTrue(source("NativeTifloLector.kt").contains("onDeleteRequest"))
     }
 

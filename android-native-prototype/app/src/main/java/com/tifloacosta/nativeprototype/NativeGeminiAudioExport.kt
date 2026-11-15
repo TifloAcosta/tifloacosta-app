@@ -30,7 +30,14 @@ internal object NativeGeminiAudioExport {
         require(text.length <= MAX_CHARACTERS) {
             "El documento supera el límite de 60.000 caracteres."
         }
-        val parts = mutableListOf<String>()
+        return streamingChunks(text).toList()
+    }
+
+    /** Lazy segmentation for disk-backed local exports. No character-count cap;
+     * a streaming encoder must bound disk use and must not join all PCM in RAM.
+     */
+    fun streamingChunks(text: String): Sequence<String> = sequence {
+        require(text.isNotBlank()) { "El documento está vacío." }
         var begin = 0
         while (begin < text.length) {
             var end = (begin + CHUNK_SIZE).coerceAtMost(text.length)
@@ -39,10 +46,9 @@ internal object NativeGeminiAudioExport {
                     .firstOrNull { text[it] in ".!?\n " }
                 if (boundary != null) end = boundary + 1
             }
-            parts += text.substring(begin, end)
+            yield(text.substring(begin, end))
             begin = end
         }
-        return parts
     }
 
     fun pcm(wav: ByteArray): ByteArray {

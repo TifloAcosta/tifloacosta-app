@@ -48,6 +48,7 @@ fun NativeReaderAudioScreen(
     onBack: () -> Unit
 ) {
     val context = LocalContext.current
+    val uiLanguage = LocalNativeUiLanguage.current
     val state by NativeReaderPlaybackService.snapshot.collectAsState()
     val active = state.bookId == book.id && state.kind == "audio"
     val reading = active && state.playing
@@ -124,11 +125,7 @@ fun NativeReaderAudioScreen(
         if (!active) start()
         else command(NativeReaderPlaybackService.ACTION_NEXT)
     }
-    val actions = if (english)
-        listOf("Play or pause", "Back 30 seconds", "Forward 30 seconds",
-            "Previous section", "Next section", "Bookmark", "More actions")
-    else listOf("Reproducir o pausar", "Retroceder 30 segundos", "Avanzar 30 segundos",
-        "Sección anterior", "Sección siguiente", "Añadir marca", "Más acciones")
+    val actions = NativeReaderAudioStrings.actions(uiLanguage)
     fun perform(index: Int) {
         when (index) {
             0 -> toggle()
@@ -167,11 +164,12 @@ fun NativeReaderAudioScreen(
 
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        if (!expandedMore) {
         TextButton(onClick = onBack) {
-            Text(if (english) "Back to My library" else "Volver a Mi biblioteca")
+            Text(NativeReaderAudioStrings.get(uiLanguage, "back"))
         }
         TextButton(onClick = onDeleteRequest) {
-            Text(if (english) "Delete this audiobook" else "Eliminar este audiolibro")
+            Text(NativeReaderAudioStrings.get(uiLanguage, "delete"))
         }
         Text(book.title, style = MaterialTheme.typography.titleLarge,
             modifier = Modifier.fillMaxWidth().clickable { perform(selectedAction) }.semantics {
@@ -191,24 +189,23 @@ fun NativeReaderAudioScreen(
             })
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             Button(onClick = { toggle() }) {
-                Text(if (reading) (if (english) "Pause" else "Pausar")
-                    else (if (english) "Play" else "Reproducir"))
+                Text(NativeReaderAudioStrings.get(uiLanguage, if (reading) "pause" else "play"))
             }
             TextButton(onClick = { if (active) command(NativeReaderPlaybackService.ACTION_STOP) }) {
-                Text(if (english) "Stop" else "Detener")
+                Text(NativeReaderAudioStrings.get(uiLanguage, "stop"))
             }
         }
-        Text((if (english) "Section " else "Sección ") +
+        Text(NativeReaderAudioStrings.get(uiLanguage, "section") + " " +
             (current + 1) + " / " + segments.size +
             ", " + (position / 1000) + " / " + (duration / 1000) + " s")
         TextButton(onClick = { showTools = true },
             modifier = Modifier.fillMaxWidth()) {
-            Text(if (english) "Book details and tools" else "Detalles y herramientas")
+            Text(NativeReaderAudioStrings.get(uiLanguage, "details"))
         }
         if (book.format == "daisy" || book.daisyNavigation.isNotEmpty()) {
             TextButton(onClick = { showDaisyNavigation = true },
                 modifier = Modifier.fillMaxWidth()) {
-                Text(if (english) "DAISY navigation" else "Navegación DAISY")
+                Text(NativeReaderAudioStrings.get(uiLanguage, "daisyNavigation"))
             }
         }
         beforeDaisyJump?.let { origin ->
@@ -224,35 +221,34 @@ fun NativeReaderAudioScreen(
                 }
                 beforeDaisyJump = null
             }) {
-                Text(if (english) "Return to position before navigation"
-                    else "Volver a la posición anterior al salto")
+                Text(NativeReaderAudioStrings.get(uiLanguage, "returnPosition"))
             }
         }
         if (active && state.synchronizedText.isNotBlank()) {
-            Text(if (english) "Synchronized text" else "Texto sincronizado",
+            Text(NativeReaderAudioStrings.get(uiLanguage, "synchronized"),
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.semantics { heading() })
             Text(state.synchronizedText)
         }
         ReaderCompactChoice(
-            if (english) "Navigation mode" else "Modo de navegación",
-            if (english) listOf("Bookmarks", "Time (1 minute)")
-            else listOf("Marcas", "Tiempo (1 minuto)"),
+            NativeReaderAudioStrings.get(uiLanguage, "navigationMode"),
+            listOf(NativeReaderAudioStrings.get(uiLanguage, "marks"),
+                NativeReaderAudioStrings.get(uiLanguage, "minute")),
             navigationMode, english
         ) { navigationMode = it }
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             Button(onClick = { navigate(false) }) {
-                Text(if (english) "Previous" else "Anterior")
+                Text(NativeReaderAudioStrings.get(uiLanguage, "previous"))
             }
             Button(onClick = { navigate(true) }) {
-                Text(if (english) "Next" else "Siguiente")
+                Text(NativeReaderAudioStrings.get(uiLanguage, "next"))
             }
         }
         // One adjustable control for each direction-based navigation action.
         // Flick up/down for an exact +30/-30-second jump, not a percentage seek.
         if (active && duration > 0) {
             ReaderCompactPosition(
-                label = if (english) "Skip 30 seconds" else "Saltar 30 segundos",
+                label = NativeReaderAudioStrings.get(uiLanguage, "skip30"),
                 current = (position / 1000).coerceAtLeast(0),
                 count = (duration / 1000) + 1,
                 english = english
@@ -262,7 +258,7 @@ fun NativeReaderAudioScreen(
             }
         }
         ReaderCompactPosition(
-            label = if (english) "Section" else "Sección",
+            label = NativeReaderAudioStrings.get(uiLanguage, "section"),
             current = current,
             count = segments.size,
             english = english
@@ -273,7 +269,7 @@ fun NativeReaderAudioScreen(
                 sleepMinutes = sleepTimes[sleepIndex], segmentIndex = chosen)
         }
         ReaderCompactChoice(
-            if (english) "Playback speed" else "Velocidad de reproducción",
+            NativeReaderAudioStrings.get(uiLanguage, "speed"),
             listOf("0,75", "0,9", "Normal", "1,25", "1,5"),
             speedIndex, english
         ) { chosen ->
@@ -282,23 +278,26 @@ fun NativeReaderAudioScreen(
             if (active) command(NativeReaderPlaybackService.ACTION_SPEED, speeds[chosen])
         }
         ReaderCompactChoice(
-            if (english) "Sleep timer" else "Apagado automático",
-            if (english) listOf("Off", "5 minutes", "10 minutes", "15 minutes",
-                "30 minutes", "45 minutes", "60 minutes")
-            else listOf("Desactivado", "5 minutos", "10 minutos", "15 minutos",
-                "30 minutos", "45 minutos", "60 minutos"),
+            NativeReaderAudioStrings.get(uiLanguage, "sleep"),
+            NativeReaderPlaybackStrings.sleepChoices(uiLanguage),
             sleepIndex, english
         ) { chosen ->
             sleepIndex = chosen
             if (active) command(NativeReaderPlaybackService.ACTION_SLEEP, sleepTimes[chosen])
         }
-        TextButton(onClick = { expandedMore = !expandedMore },
-            modifier = Modifier.semantics {
-                stateDescription = if (expandedMore) "Abierto" else "Cerrado"
-            }) { Text(if (english) "More actions" else "Más acciones") }
+        TextButton(onClick = { expandedMore = true }) {
+            Text(NativeReaderAudioStrings.get(uiLanguage, "more"))
+        }
+        }
         if (expandedMore) {
+            TextButton(onClick = { expandedMore = false }) {
+                Text(NativeReaderAudioStrings.get(uiLanguage, "back"))
+            }
+            Text(NativeReaderAudioStrings.get(uiLanguage, "more"),
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.semantics { heading() })
             Button(onClick = { bookmark() }, enabled = active) {
-                Text(if (english) "Save bookmark" else "Guardar marca")
+                Text(NativeReaderAudioStrings.get(uiLanguage, "saveMark"))
             }
             marks.forEachIndexed { index, mark ->
                 TextButton(onClick = {
@@ -308,14 +307,12 @@ fun NativeReaderAudioScreen(
                         command(NativeReaderPlaybackService.ACTION_SEEK, mark.positionMs)
                     }
                 }) {
-                    Text((if (english) "Bookmark " else "Marca ") + (index + 1) +
-                        ", " + (if (english) "section " else "sección ") + (mark.segmentIndex + 1))
+                    Text(NativeReaderAudioStrings.get(uiLanguage, "mark") + " " + (index + 1) +
+                        ", " + NativeReaderAudioStrings.get(uiLanguage, "section") + " " + (mark.segmentIndex + 1))
                 }
             }
         }
         if (active && state.error.isNotBlank()) Text(state.error)
-        if (reading) Text(if (english)
-            "Playback continues when the screen is locked."
-            else "La reproducción continúa al bloquear la pantalla.")
+        if (reading) Text(NativeReaderAudioStrings.get(uiLanguage, "lockScreen"))
     }
 }

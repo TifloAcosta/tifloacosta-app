@@ -10,10 +10,10 @@ class ReaderGeminiContinuousContractTest {
 
     @Test fun engineChoiceIsExplicitAndLocalByDefault() {
         val ui = source("NativeTifloLector.kt")
-        assertTrue(ui.contains("listOf(\"Sistema\", \"Gemini\")"))
+        assertTrue(ui.contains("listOf(NativeReaderInlineStrings.get(uiLanguage, \"system\"), \"Gemini\")"))
         assertTrue(ui.contains("getInt(\"engine.\" + book.id, 0)"))
         assertTrue(ui.contains("NativeVoiceCredentials(context).hasKey(\"gemini\")"))
-        assertTrue(ui.contains("envía fragmentos del documento a Google"))
+        assertTrue(ui.contains("NativeReaderInlineStrings.get(uiLanguage, \"geminiPrivacy\")"))
     }
 
     @Test fun continuousAudioRunsInForegroundWithRealCursorAndCancellation() {

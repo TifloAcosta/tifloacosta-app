@@ -42,6 +42,7 @@ fun NativeReaderAdvancedOcrPanel(
     onTextRefreshed: () -> Unit
 ) {
     val context = androidx.compose.ui.platform.LocalContext.current
+    val uiLanguage = LocalNativeUiLanguage.current
     val scope = rememberCoroutineScope()
     val main = remember { Handler(Looper.getMainLooper()) }
     val mode = when {
@@ -59,7 +60,7 @@ fun NativeReaderAdvancedOcrPanel(
     fun runRecognition() {
         if (busy) return
         busy = true
-        message = if (english) "Preparing OCR…" else "Preparando OCR…"
+        message = NativeReaderOcrStrings.get(uiLanguage, "preparing")
         job = scope.launch {
             val parent = currentCoroutineContext()
             try {
@@ -75,18 +76,15 @@ fun NativeReaderAdvancedOcrPanel(
                 }
                 progress = final
                 onTextRefreshed()
-                message = if (english) "OCR completed. The accessible text is available in the reader."
-                    else "OCR terminado. El texto accesible está disponible en el lector."
+                message = NativeReaderOcrStrings.get(uiLanguage, "completed")
             } catch (_: CancellationException) {
-                message = if (english) "OCR paused. Progress was saved; tap Resume to continue."
-                    else "OCR interrumpido. El avance está guardado; pulsa Reanudar para continuar."
+                message = NativeReaderOcrStrings.get(uiLanguage, "interrupted")
                 onTextRefreshed()
             } catch (_: InterruptedException) {
-                message = if (english) "OCR paused. You can resume it."
-                    else "OCR pausado. Puedes reanudarlo."
+                message = NativeReaderOcrStrings.get(uiLanguage, "paused")
                 onTextRefreshed()
             } catch (e: Exception) {
-                message = e.message ?: "No se pudo completar el OCR."
+                message = e.message ?: NativeReaderOcrStrings.get(uiLanguage, "error")
                 onTextRefreshed()
             } finally {
                 progress = NativeReaderAdvancedOcr.progress(context, book, mode)
@@ -100,35 +98,28 @@ fun NativeReaderAdvancedOcrPanel(
     }
     Column(verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)) {
-        Text(if (english) "Advanced OCR" else "OCR avanzado",
+        Text(NativeReaderOcrStrings.get(uiLanguage, "title"),
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.semantics { heading() })
-        Text(if (mode == "pdf") {
-            if (english) "Processes large PDFs page by page; retains selectable text where available."
-            else "Reconoce PDF grandes por páginas y conserva el texto seleccionable que ya exista."
-        } else {
-            if (english) "Recognizes compatible embedded images in this EPUB/Office document."
-            else "Reconoce las imágenes incrustadas compatibles de este EPUB o documento Office."
-        })
+        Text(NativeReaderOcrStrings.get(uiLanguage,
+            if (mode == "pdf") "pdfInfo" else "imagesInfo"))
         if (progress.total > 0) Text(
-            (if (english) "Saved progress: " else "Avance guardado: ") +
+            NativeReaderOcrStrings.get(uiLanguage, "savedProgress") + ": " +
                 progress.finished + " / " + progress.total +
-                if (progress.complete) (if (english) ". Complete" else ". Completo") else ""
+                if (progress.complete) ". " + NativeReaderOcrStrings.get(uiLanguage, "complete") else ""
         )
         Button(enabled = !busy, modifier = Modifier.fillMaxWidth(), onClick = { runRecognition() }) {
             Text(when {
-                progress.complete -> if (english) "Review OCR again" else "Comprobar OCR nuevamente"
-                progress.finished > 0 -> if (english) "Resume OCR" else "Reanudar OCR"
-                mode == "pdf" -> if (english) "Recognize PDF in batches" else "Reconocer PDF por lotes"
-                else -> if (english) "Recognize embedded images" else "Reconocer imágenes incrustadas"
+                progress.complete -> NativeReaderOcrStrings.get(uiLanguage, "review")
+                progress.finished > 0 -> NativeReaderOcrStrings.get(uiLanguage, "resume")
+                mode == "pdf" -> NativeReaderOcrStrings.get(uiLanguage, "recognizePdf")
+                else -> NativeReaderOcrStrings.get(uiLanguage, "recognizeImages")
             })
         }
         if (busy) TextButton(onClick = { job?.cancel() }) {
-            Text(if (english) "Cancel OCR and save progress" else "Cancelar OCR y guardar el avance")
+            Text(NativeReaderOcrStrings.get(uiLanguage, "cancel"))
         }
         if (message.isNotBlank()) Text(message)
-        Text(if (english)
-            "Pages or images are saved individually. After a cancellation or app closure, start OCR again to resume. The original stays intact."
-            else "Cada página o imagen queda guardada por separado. Tras cancelar o cerrar la aplicación, puedes reanudar desde aquí. El original no se modifica.")
+        Text(NativeReaderOcrStrings.get(uiLanguage, "help"))
     }
 }

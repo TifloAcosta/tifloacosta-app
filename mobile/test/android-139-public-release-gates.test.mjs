@@ -48,10 +48,12 @@ test('all main menu destinations are Compose screens and never enter legacy WebV
   assert.doesNotMatch(activity, /onOpenLegacy/);
   for (const destination of [
     'SEARCH', 'NEW_CONTENT', 'DOWNLOADS', 'FAVORITES',
-    'PODCAST', 'CONTACT', 'PRIVACY', 'SETTINGS'
+    'PODCAST', 'SETTINGS'
   ]) {
     assert.match(activity, new RegExp('section = NativeDestinations\\.' + destination));
   }
+  assert.match(screens, /NativeDestinations\.CONTACT -> NativeContactScreen\(\)/);
+  assert.match(screens, /NativeDestinations\.PRIVACY -> NativePrivacyScreen\(\)/);
   assert.match(activity, /NativeSecondaryScreen\(/);
   assert.match(screens, /NativeDownloadScreen\(/);
   assert.match(screens, /NativePodcastScreen\(/);

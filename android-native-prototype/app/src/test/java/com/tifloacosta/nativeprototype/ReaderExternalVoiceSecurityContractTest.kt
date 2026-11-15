@@ -13,9 +13,13 @@ class ReaderExternalVoiceSecurityContractTest {
         assertTrue(s.contains("AndroidKeyStore"))
         assertTrue(s.contains("AES/GCM/NoPadding"))
         assertTrue(s.contains("PasswordVisualTransformation"))
-        assertTrue(s.contains("Pegar clave"))
-        assertTrue(s.contains("Comprobar"))
-        assertTrue(s.contains("Clave guardada"))
+        assertTrue(s.contains("NativeReaderGeminiStrings.get(uiLanguage, \"paste\")"))
+        assertTrue(s.contains("NativeReaderGeminiStrings.get(uiLanguage, \"check\")"))
+        assertTrue(s.contains("NativeReaderGeminiStrings.get(uiLanguage, if (present) \"keySaved\" else \"noKey\")"))
+        val labels = source("NativeReaderGeminiStrings.kt")
+        assertTrue(labels.contains("Pegar clave"))
+        assertTrue(labels.contains("Comprobar"))
+        assertTrue(labels.contains("Clave guardada"))
     }
 
     @Test fun externalEnginesAreDiscoverableWithoutClaimingActiveTts() {
@@ -23,6 +27,7 @@ class ReaderExternalVoiceSecurityContractTest {
         assertTrue(settings.contains("NativeReaderExternalVoiceKeysScreen"))
         val keys = source("NativeReaderExternalVoiceKeys.kt")
         assertTrue(keys.contains("Phonon"))
-        assertTrue(keys.contains("La muestra genera audio real y puede consumir cuota"))
+        assertTrue(keys.contains("NativeReaderGeminiStrings.get(uiLanguage, \"quota\")"))
+        assertTrue(source("NativeReaderGeminiStrings.kt").contains("puede consumir cuota"))
     }
 }

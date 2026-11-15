@@ -20,6 +20,7 @@ fun NativeReaderFolderManager(
     organization: NativeReaderOrganization, store: NativeReaderStore,
     onChanged: () -> Unit, onBack: () -> Unit
 ) {
+    val uiLanguage = LocalNativeUiLanguage.current
     var name by remember { mutableStateOf("") }
     var rename by remember { mutableStateOf<String?>(null) }
     var deletion by remember { mutableStateOf<String?>(null) }
@@ -34,39 +35,39 @@ fun NativeReaderFolderManager(
                 withContext(Dispatchers.IO) { action() }
                 error = ""
                 onChanged()
-            } catch (e: Exception) { error = e.message ?: "No se pudo modificar la carpeta." }
+            } catch (e: Exception) { error = e.message ?: NativeReaderPanelStrings.get(uiLanguage, "folderError") }
             finally { busy = false }
         }
     }
     BackHandler { onBack() }
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        TextButton(onClick = onBack) { Text(if (english) "Back to filters" else "Volver a filtros") }
-        Text(if (english) "My folders" else "Mis carpetas",
+        TextButton(onClick = onBack) { Text(NativeReaderPanelStrings.get(uiLanguage, "backFilters")) }
+        Text(NativeReaderPanelStrings.get(uiLanguage, "folders"),
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.semantics { heading() })
         TextField(value = name, onValueChange = { name = it.take(70) },
             singleLine = true,
-            label = { Text(if (english) "New folder name" else "Nombre de nueva carpeta") },
+            label = { Text(NativeReaderPanelStrings.get(uiLanguage, "newFolder")) },
             modifier = Modifier.fillMaxWidth())
         Button(enabled = !busy && name.isNotBlank(), onClick = {
             val proposed = name
             task { organization.createFolder(proposed, store.list()) }
             name = ""
         }, modifier = Modifier.fillMaxWidth()) {
-            Text(if (english) "Create folder" else "Crear carpeta")
+            Text(NativeReaderPanelStrings.get(uiLanguage, "create"))
         }
-        if (folders.isEmpty()) Text(if (english) "No folders yet." else "Todavía no hay carpetas.")
+        if (folders.isEmpty()) Text(NativeReaderPanelStrings.get(uiLanguage, "noFolders"))
         folders.forEach { entry ->
             val count = books.count { it.folder == entry }
-            Text(entry + ", " + count + (if (english) " books" else " libros"),
+            Text(entry + ", " + count + NativeReaderPanelStrings.get(uiLanguage, "books"),
                 style = MaterialTheme.typography.titleMedium)
             Row {
                 TextButton(enabled = !busy, onClick = { rename = entry; name = entry }) {
-                    Text(if (english) "Rename" else "Renombrar")
+                    Text(NativeReaderPanelStrings.get(uiLanguage, "rename"))
                 }
                 TextButton(enabled = !busy, onClick = { deletion = entry }) {
-                    Text(if (english) "Delete folder" else "Eliminar carpeta")
+                    Text(NativeReaderPanelStrings.get(uiLanguage, "deleteFolder"))
                 }
             }
         }
@@ -74,31 +75,29 @@ fun NativeReaderFolderManager(
     }
     rename?.let { old ->
         AlertDialog(onDismissRequest = { rename = null },
-            title = { Text(if (english) "Rename folder" else "Renombrar carpeta") },
+            title = { Text(NativeReaderPanelStrings.get(uiLanguage, "renameTitle")) },
             text = { TextField(value = name, onValueChange = { name = it.take(70) },
-                label = { Text(if (english) "Folder name" else "Nombre de carpeta") }) },
+                label = { Text(NativeReaderPanelStrings.get(uiLanguage, "folderName")) }) },
             confirmButton = { TextButton(enabled = !busy && name.isNotBlank(), onClick = {
                 val proposed = name
                 rename = null
                 task { organization.renameFolder(old, proposed, store) }
                 name = ""
-            }) { Text(if (english) "Save" else "Guardar") } },
+            }) { Text(NativeReaderPanelStrings.get(uiLanguage, "save")) } },
             dismissButton = { TextButton(onClick = { rename = null; name = "" }) {
-                Text(if (english) "Cancel" else "Cancelar")
+                Text(NativeReaderPanelStrings.get(uiLanguage, "cancel"))
             } })
     }
     deletion?.let { old ->
         AlertDialog(onDismissRequest = { deletion = null },
-            title = { Text(if (english) "Delete folder?" else "¿Eliminar carpeta?") },
-            text = { Text(if (english)
-                "Books remain in the library without a folder; no book is deleted."
-                else "Sus libros permanecerán en Mi biblioteca como Sin carpeta. No se eliminará ningún libro.") },
+            title = { Text(NativeReaderPanelStrings.get(uiLanguage, "deleteConfirm")) },
+            text = { Text(NativeReaderPanelStrings.get(uiLanguage, "deleteWarning")) },
             confirmButton = { TextButton(enabled = !busy, onClick = {
                 deletion = null
                 task { organization.deleteFolder(old, store) }
-            }) { Text(if (english) "Delete folder" else "Eliminar carpeta") } },
+            }) { Text(NativeReaderPanelStrings.get(uiLanguage, "deleteFolder")) } },
             dismissButton = { TextButton(onClick = { deletion = null }) {
-                Text(if (english) "Cancel" else "Cancelar")
+                Text(NativeReaderPanelStrings.get(uiLanguage, "cancel"))
             } })
     }
 }
@@ -109,6 +108,7 @@ fun NativeReaderQueueManager(
     organization: NativeReaderOrganization,
     onChanged: () -> Unit, onOpen: (ReaderBook) -> Unit, onBack: () -> Unit
 ) {
+    val uiLanguage = LocalNativeUiLanguage.current
     val scope = rememberCoroutineScope()
     var error by remember { mutableStateOf("") }
     val ids = queuedIds
@@ -125,26 +125,26 @@ fun NativeReaderQueueManager(
     BackHandler { onBack() }
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        TextButton(onClick = onBack) { Text(if (english) "Back to filters" else "Volver a filtros") }
-        Text(if (english) "Reading queue" else "Cola de lectura",
+        TextButton(onClick = onBack) { Text(NativeReaderPanelStrings.get(uiLanguage, "backFilters")) }
+        Text(NativeReaderPanelStrings.get(uiLanguage, "queue"),
             style = MaterialTheme.typography.headlineSmall, modifier = Modifier.semantics { heading() })
-        if (ids.isEmpty()) Text(if (english) "The queue is empty." else "La cola está vacía.")
+        if (ids.isEmpty()) Text(NativeReaderPanelStrings.get(uiLanguage, "queueEmpty"))
         ids.forEachIndexed { i, id ->
             val book = mapped[id] ?: return@forEachIndexed
             Text((i + 1).toString() + ". " + book.title, style = MaterialTheme.typography.titleMedium)
             Row {
-                TextButton(onClick = { onOpen(book) }) { Text(if (english) "Open" else "Abrir") }
+                TextButton(onClick = { onOpen(book) }) { Text(NativeReaderPanelStrings.get(uiLanguage, "open")) }
                 TextButton(enabled = i > 0,
                     onClick = { modify { organization.moveInQueue(id, -1, books) } }) {
-                    Text(if (english) "Up" else "Subir")
+                    Text(NativeReaderPanelStrings.get(uiLanguage, "up"))
                 }
                 TextButton(enabled = i < ids.lastIndex,
                     onClick = { modify { organization.moveInQueue(id, 1, books) } }) {
-                    Text(if (english) "Down" else "Bajar")
+                    Text(NativeReaderPanelStrings.get(uiLanguage, "down"))
                 }
                 TextButton(onClick = {
                     modify { organization.removeFromQueue(id, books) }
-                }) { Text(if (english) "Remove" else "Quitar") }
+                }) { Text(NativeReaderPanelStrings.get(uiLanguage, "remove")) }
             }
         }
         if (error.isNotBlank()) Text(error)
@@ -157,6 +157,7 @@ fun NativeReaderBookmarksPanel(
     onTextMark: (Int) -> Unit, onAudioMark: (ReaderAudioMark) -> Unit,
     onBack: () -> Unit
 ) {
+    val uiLanguage = LocalNativeUiLanguage.current
     BackHandler { onBack() }
     val marks = book.audioMarks.ifEmpty {
         book.marks.map { ReaderAudioMark(book.trackIndex, it) }
@@ -164,25 +165,25 @@ fun NativeReaderBookmarksPanel(
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)) {
         TextButton(onClick = onBack) {
-            Text(if (english) "Back to my library" else "Volver a Mi biblioteca")
+            Text(NativeReaderPanelStrings.get(uiLanguage, "backLibrary"))
         }
-        Text((if (english) "Bookmarks: " else "Marcas: ") + book.title,
+        Text(NativeReaderPanelStrings.get(uiLanguage, "marks") + book.title,
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.semantics { heading() })
         if (book.tracks.isNotEmpty()) {
-            if (marks.isEmpty()) Text(if (english) "No bookmarks" else "No hay marcas")
+            if (marks.isEmpty()) Text(NativeReaderPanelStrings.get(uiLanguage, "noMarks"))
             marks.forEachIndexed { i, mark ->
                 OutlinedButton(onClick = { onAudioMark(mark) }, modifier = Modifier.fillMaxWidth()) {
-                    Text((if (english) "Bookmark " else "Marca ") + (i + 1) +
-                        (if (english) ", section " else ", sección ") + (mark.segmentIndex + 1) +
-                        (if (english) ", at " else ", en ") + (mark.positionMs / 1000) + " s")
+                    Text(NativeReaderPanelStrings.get(uiLanguage, "mark") + (i + 1) +
+                        NativeReaderPanelStrings.get(uiLanguage, "section") + (mark.segmentIndex + 1) +
+                        NativeReaderPanelStrings.get(uiLanguage, "at") + (mark.positionMs / 1000) + " s")
                 }
             }
         } else {
-            if (book.marks.isEmpty()) Text(if (english) "No bookmarks" else "No hay marcas")
+            if (book.marks.isEmpty()) Text(NativeReaderPanelStrings.get(uiLanguage, "noMarks"))
             book.marks.forEachIndexed { i, offset ->
                 OutlinedButton(onClick = { onTextMark(offset) }, modifier = Modifier.fillMaxWidth()) {
-                    Text((if (english) "Bookmark " else "Marca ") + (i + 1) +
+                    Text(NativeReaderPanelStrings.get(uiLanguage, "mark") + (i + 1) +
                         ", " + ReaderUnits.percent(offset, book.length) + "%")
                 }
             }

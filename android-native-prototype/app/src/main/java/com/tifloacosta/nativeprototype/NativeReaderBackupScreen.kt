@@ -42,6 +42,7 @@ import kotlinx.coroutines.withContext
 @Composable
 fun NativeReaderBackupScreen(english: Boolean, onRestored: () -> Unit, onBack: () -> Unit) {
     val context = LocalContext.current
+    val uiLanguage = LocalNativeUiLanguage.current
     val scope = rememberCoroutineScope()
     val main = remember { Handler(Looper.getMainLooper()) }
     var working by remember { mutableStateOf(false) }
@@ -53,7 +54,7 @@ fun NativeReaderBackupScreen(english: Boolean, onRestored: () -> Unit, onBack: (
         if (working) return
         working = true
         message = ""
-        progress = if (english) "Preparing…" else "Preparando…"
+        progress = NativeReaderToolsStrings.get(uiLanguage, "preparing")
         running = scope.launch {
             val task = currentCoroutineContext()
             try {
@@ -61,25 +62,23 @@ fun NativeReaderBackupScreen(english: Boolean, onRestored: () -> Unit, onBack: (
                     val result = withContext(Dispatchers.IO) {
                         NativeReaderBackup.restore(context, uri,
                             onProgress = { count, _ ->
-                                main.post { progress = (if (english) "Checking file " else "Comprobando archivo ") + count }
+                                main.post { progress = NativeReaderToolsStrings.get(uiLanguage, "checking") + " " + count }
                             }, keepWorking = { task.isActive })
                     }
                     onRestored()
-                    message = if (english)
-                        "Restored " + result.added + " books. " + result.skipped +
-                        " already existed. Folders: " + result.folders
-                    else "Libros incorporados: " + result.added + ". Ya existían: " +
-                        result.skipped + ". Carpetas: " + result.folders
+                    message = NativeReaderToolsStrings.get(uiLanguage, "restoredCount") + ": " +
+                        result.added + ". " + NativeReaderToolsStrings.get(uiLanguage, "alreadyExisted") +
+                        ": " + result.skipped + ". " +
+                        NativeReaderToolsStrings.get(uiLanguage, "foldersCount") + ": " + result.folders
                 } else {
                     withContext(Dispatchers.IO) {
                         NativeReaderBackup.export(context, uri,
                             onProgress = { count, total ->
-                                main.post { progress = (if (english) "Backing up " else "Guardando ") +
+                                main.post { progress = NativeReaderToolsStrings.get(uiLanguage, "backing") + " " +
                                     count + " / " + total }
                             }, keepWorking = { task.isActive })
                     }
-                    message = if (english) "Backup created. Keep the ZIP outside this app."
-                        else "Copia creada. Conserva el ZIP fuera de esta aplicación."
+                    message = NativeReaderToolsStrings.get(uiLanguage, "backupCreated")
                 }
             } catch (e: Exception) {
                 if (!isRestore) {
@@ -87,10 +86,8 @@ fun NativeReaderBackupScreen(english: Boolean, onRestored: () -> Unit, onBack: (
                     try { context.contentResolver.delete(uri, null, null) } catch (_: Exception) {}
                 }
                 message = if (e is CancellationException || e is InterruptedException)
-                    (if (english) "Operation canceled. No existing books were deleted."
-                        else "Operación cancelada. No se ha eliminado ningún libro existente.")
-                else e.message ?: if (english) "The operation failed."
-                    else "No se pudo completar la operación."
+                    NativeReaderToolsStrings.get(uiLanguage, "operationCanceled")
+                else e.message ?: NativeReaderToolsStrings.get(uiLanguage, "failed")
             } finally { working = false; progress = ""; running = null }
         }
     }
@@ -105,28 +102,26 @@ fun NativeReaderBackupScreen(english: Boolean, onRestored: () -> Unit, onBack: (
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)) {
         TextButton(enabled = !working, onClick = onBack) {
-            Text(if (english) "Back to settings" else "Volver a Ajustes")
+            Text(NativeReaderToolsStrings.get(uiLanguage, "backupBack"))
         }
-        Text(if (english) "Backup and restore" else "Copia de seguridad y restauración",
+        Text(NativeReaderToolsStrings.get(uiLanguage, "backupTitle"),
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.semantics { heading() })
-        Text(if (english)
-            "Create a portable copy before uninstalling a test build. Includes books, originals, audio, OCR checkpoints, bookmarks, folders and reading queue. Save outside this app."
-            else "Haz una copia antes de desinstalar una versión de pruebas. Incluye libros, originales, audios, avances de OCR, marcas, carpetas y cola. Guárdala fuera de esta aplicación.")
+        Text(NativeReaderToolsStrings.get(uiLanguage, "backupIntro"))
+        Text(NativeReaderToolsStrings.get(uiLanguage, "backupCompat"))
         Button(enabled = !working, onClick = { save.launch(NativeReaderBackup.ARCHIVE_NAME) },
             modifier = Modifier.fillMaxWidth()) {
-            Text(if (english) "Export library backup…" else "Exportar copia de la biblioteca…")
+            Text(NativeReaderToolsStrings.get(uiLanguage, "backupExport"))
         }
         Button(enabled = !working,
             onClick = { open.launch(arrayOf("application/zip", "application/octet-stream", "*/*")) },
             modifier = Modifier.fillMaxWidth()) {
-            Text(if (english) "Restore from backup ZIP…" else "Restaurar desde ZIP de copia…")
+            Text(NativeReaderToolsStrings.get(uiLanguage, "backupRestore"))
         }
-        Text(if (english) "Restore adds missing books without overwriting existing ones. Only use your own backups."
-            else "La restauración añade libros sin sobrescribir los existentes. Utiliza únicamente tus propias copias.")
+        Text(NativeReaderToolsStrings.get(uiLanguage, "backupNote"))
         if (working) {
             TextButton(onClick = { running?.cancel() }) {
-                Text(if (english) "Cancel operation" else "Cancelar operación")
+                Text(NativeReaderToolsStrings.get(uiLanguage, "cancelOperation"))
             }
         }
         if (progress.isNotBlank()) Text(progress,
@@ -136,16 +131,14 @@ fun NativeReaderBackupScreen(english: Boolean, onRestored: () -> Unit, onBack: (
     }
     selectedBackup?.let { uri ->
         AlertDialog(onDismissRequest = { selectedBackup = null },
-            title = { Text(if (english) "Restore backup?" else "¿Restaurar esta copia?") },
-            text = { Text(if (english)
-                "This may require significant storage. Existing books stay untouched. Continue?"
-                else "Puede necesitar bastante almacenamiento. Los libros existentes se conservarán. ¿Continuar?") },
+            title = { Text(NativeReaderToolsStrings.get(uiLanguage, "restoreConfirm")) },
+            text = { Text(NativeReaderToolsStrings.get(uiLanguage, "restoreWarning")) },
             confirmButton = { TextButton(onClick = {
                 selectedBackup = null
                 run(true, uri)
-            }) { Text(if (english) "Restore" else "Restaurar") } },
+            }) { Text(NativeReaderToolsStrings.get(uiLanguage, "restore")) } },
             dismissButton = { TextButton(onClick = { selectedBackup = null }) {
-                Text(if (english) "Cancel" else "Cancelar")
+                Text(NativeReaderToolsStrings.get(uiLanguage, "cancel"))
             } })
     }
 }

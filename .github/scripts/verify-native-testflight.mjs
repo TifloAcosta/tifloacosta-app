@@ -2,7 +2,7 @@
 // si es necesario, la compilación al grupo de probadores internos existente.
 // No publica en la App Store ni incorpora probadores externos.
 import crypto from 'node:crypto';
-const required=['API_ID','API_ISSUER','API_PRIVATE','TARGET_BUILD'];
+const required=['API_ID','API_ISSUER','API_PRIVATE','TARGET_BUILD','UPLOAD_STARTED_AT'];
 for(const key of required)if(!process.env[key])throw Error('Falta configuración protegida: '+key);
 let privateKey=process.env.API_PRIVATE.trim().replace(/^["']|["']$/g,'')
   .replace(/\\r\\n/g,'\n').replace(/\\n/g,'\n');
@@ -40,7 +40,8 @@ let assigned=false;
 for(let attempt=1;attempt<=15;attempt++){
   const list=await api('builds?filter%5Bapp%5D='+app.id+
     '&sort=-uploadedDate&limit=50&include=buildBetaDetail,betaGroups');
-  const build=list.data.find(x=>String(x.attributes.version)===process.env.TARGET_BUILD);
+  const build=list.data.find(x=>String(x.attributes.version)===process.env.TARGET_BUILD &&
+    Date.parse(x.attributes.uploadedDate)>Date.parse(process.env.UPLOAD_STARTED_AT));
   if(build){
     const processing=build.attributes.processingState;
     if(processing==='FAILED'||processing==='INVALID')

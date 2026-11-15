@@ -26,7 +26,7 @@ with zipfile.ZipFile(files[0]) as z:
             raise SystemExit('Identificador incorrecto: ' + str(info.get('CFBundleIdentifier')))
         if str(info.get('CFBundleVersion')) != os.environ['IOS_BUILD_VERSION']:
             raise SystemExit('Número de compilación distinto entre aplicación y extensión')
-        if info.get('CFBundleShortVersionString') != '1.0':
+        if info.get('CFBundleShortVersionString') != '1.4':
             raise SystemExit('Versión pública incorrecta')
     if ext_info.get('NSExtension', {}).get('NSExtensionPointIdentifier') != 'com.apple.share-services':
         raise SystemExit('Extensión Compartir sin punto de entrada')

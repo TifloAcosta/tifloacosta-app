@@ -10,7 +10,16 @@ const reader = readFileSync(new URL('NativeTifloLector.swift', root), 'utf8');
 test('Azure aparece únicamente entre los ajustes del modo de voz y está identificado como experimental', () => {
   assert.match(settings, /if presentationMode == 0 \{[\s\S]*?Section\("Microsoft Azure Speech, prueba experimental"\)/);
   assert.match(settings, /NativeAzureSpeechSettings\(\)/);
-  assert.match(microsoft, /todavía no cambia el motor de lectura de documentos/);
+  assert.match(microsoft, /Azure se utiliza para leer documentos cuando eliges ese motor/);
+});
+
+test('Azure ofrece guía para iPhone, pegar clave y verificar acceso con VoiceOver', () => {
+  assert.match(microsoft, /Guía para configurar Azure desde el iPhone/);
+  assert.match(microsoft, /https:\/\/portal\.azure\.com/);
+  assert.match(microsoft, /Button\("Pegar clave"\)/);
+  assert.match(microsoft, /UIPasteboard\.general\.string/);
+  assert.match(microsoft, /Button\("Comprobar conexión"\)/);
+  assert.match(microsoft, /UIAccessibility\.post\(notification: \.announcement/);
 });
 
 test('el usuario elige explícitamente voces del iPhone o Azure y comprueba las credenciales antes de usar el servicio', () => {

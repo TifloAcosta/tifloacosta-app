@@ -2,6 +2,7 @@ import Foundation
 import Security
 import SwiftUI
 import AVFoundation
+import UIKit
 
 /// User-owned Azure Speech credentials stay in Keychain, never UserDefaults.
 enum NativeMicrosoftSpeechKeychain {
@@ -160,26 +161,48 @@ struct NativeAzureSpeechSettings: View {
     @State private var isLoading = false
     @State private var previewPlayer: AVAudioPlayer?
 
+    private func announceStatus(_ message: String) {
+        status = message
+        UIAccessibility.post(notification: .announcement, argument: message)
+    }
+
     var body: some View {
         Group {
+            DisclosureGroup("Guía para configurar Azure desde el iPhone") {
+                Text("Paso 1. Abre el portal de Azure con Safari e inicia sesión con tu cuenta de Microsoft. Si todavía no tienes una suscripción de Azure, sigue el proceso de alta. Comprueba cualquier requisito de verificación o facturación antes de aceptarlo.")
+                Text("Paso 2. En el portal, busca Speech y crea un recurso de voz. Si está disponible para tu cuenta, elige el nivel gratuito F0: incluye hasta 500.000 caracteres neuronales al mes por recurso, sujeto a las condiciones de Microsoft.")
+                Text("Paso 3. Cuando el recurso esté creado, abre Claves y punto de conexión. Copia una de las claves y anota el nombre de la región, por ejemplo westeurope.")
+                Text("Paso 4. Regresa a TifloLector. Pulsa Pegar clave, escribe la región, guarda la clave y selecciona Comprobar conexión. Después elige una voz y escucha la muestra.")
+                Text("No compartas tu clave con otras personas. La accesibilidad exacta del portal de Azure con VoiceOver requiere una prueba real.")
+            }
+            Link("Abrir portal de Microsoft Azure en Safari", destination: URL(string: "https://portal.azure.com/")!)
             SecureField("Clave de Azure Speech", text: $key)
                 .textContentType(.password)
                 .autocorrectionDisabled()
+            Button("Pegar clave") {
+                guard let pasted = UIPasteboard.general.string?.trimmingCharacters(in: .whitespacesAndNewlines),
+                      !pasted.isEmpty else {
+                    announceStatus("El portapapeles está vacío o no contiene una clave de texto.")
+                    return
+                }
+                key = pasted
+                announceStatus("Clave pegada. Ahora puedes guardarla en el iPhone.")
+            }
             TextField("Región de Azure, por ejemplo westeurope", text: $region)
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
             Button("Guardar clave en el iPhone") {
                 let saved = NativeMicrosoftSpeechKeychain.save(key.trimmingCharacters(in: .whitespacesAndNewlines))
-                status = saved ? "Clave guardada en el llavero del dispositivo." : "No se ha podido guardar la clave."
+                announceStatus(saved ? "Clave guardada en el llavero del dispositivo." : "No se ha podido guardar la clave.")
             }
-            Button("Consultar voces disponibles") {
+            Button("Comprobar conexión") {
                 isLoading = true
                 Task {
                     do {
                         voices = try await NativeAzureSpeechService.voices(key: key, region: region)
                             .filter { $0.Locale.lowercased().hasPrefix("es") }
-                        status = "Se encontraron \(voices.count) voces en español."
-                    } catch { status = error.localizedDescription }
+                        announceStatus("Conexión correcta. Se encontraron \(voices.count) voces en español.")
+                    } catch { announceStatus("No se ha podido comprobar Azure Speech. \(error.localizedDescription)") }
                     isLoading = false
                 }
             }
@@ -203,14 +226,14 @@ struct NativeAzureSpeechSettings: View {
                         try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
                         previewPlayer = try AVAudioPlayer(data: data)
                         previewPlayer?.play()
-                        status = "Reproduciendo muestra."
-                    } catch { status = error.localizedDescription }
+                        announceStatus("Reproduciendo muestra.")
+                    } catch { announceStatus(error.localizedDescription) }
                     isLoading = false
                 }
             }
             .disabled(isLoading || selectedVoice.isEmpty || key.isEmpty)
             Text(status).font(.footnote).accessibilityAddTraits(.updatesFrequently)
-            Text("Servicio de Microsoft con cuenta propia. Puede tener límites o costes según tu plan. Esta pantalla permite comprobar la conexión y escuchar una muestra; todavía no cambia el motor de lectura de documentos.")
+            Text("Servicio de Microsoft con cuenta propia. Puede tener límites o costes según tu plan. Azure se utiliza para leer documentos cuando eliges ese motor. Requiere conexión a Internet y una clave y voz válidas.")
                 .font(.footnote)
         }
         .onAppear { key = NativeMicrosoftSpeechKeychain.load() }

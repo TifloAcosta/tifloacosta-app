@@ -23,9 +23,8 @@ test('Reader modes reveal their settings in place; shared settings stay navigabl
   assert.match(settings, /else if presentationMode == 1/);
   assert.match(settings, /NativeReaderAudioControls\(\)/);
   assert.match(settings, /NativeReaderVisualControls\(\)/);
-  for (const title of [
-    'Navegación y avances', 'Formatos de lectura'
-  ]) assert.ok(settings.includes('NavigationLink("' + title + '")'), title);
+  assert.match(settings, /title: "Unidad de avance"/);
+  assert.ok(settings.includes('NavigationLink("Formatos de lectura")'));
 });
 
 test('Per-document audio and visual settings persist and can inherit global defaults', () => {

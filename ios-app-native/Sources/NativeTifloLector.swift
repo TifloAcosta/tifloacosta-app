@@ -710,7 +710,6 @@ struct NativeReaderLibraryScreen: View {
     @AppStorage("native-reading-pitch-index") private var pitchIndex = 2
     @AppStorage("native-reading-voice-id") private var voiceID = ""
     private let pitches: [Float] = [0.8, 0.9, 1.0, 1.1, 1.2]
-    private let speeds: [Double] = [0.75, 0.9, 1.0, 1.25, 1.5]
 
     private var folderFilterIndex: Binding<Int> {
         let names = library.folders
@@ -763,7 +762,7 @@ struct NativeReaderLibraryScreen: View {
     private func play(_ document: NativeReadingDocument) {
         let latest = library.latest(document)
         let chosenSpeed = latest.readerPreferences?.speedIndex ?? speedIndex
-        let speed = speeds[max(0, min(speeds.count - 1, chosenSpeed))]
+        let speed = NativeReaderSpeedOptions.rate(for: chosenSpeed)
         let chosenPitch = latest.readerPreferences?.pitchIndex ?? pitchIndex
         let pitch = pitches[max(0, min(pitches.count - 1, chosenPitch))]
         if let paths = latest.trackPaths, !paths.isEmpty {
@@ -1203,7 +1202,6 @@ struct NativeReadingScreen: View {
         "Desactivado", "5 minutos", "10 minutos", "15 minutos",
         "30 minutos", "45 minutos", "60 minutos"
     ]
-    private let speeds: [Double] = [0.75, 0.9, 1.0, 1.25, 1.5]
     private let sleepMinutes: [Int] = [0, 5, 10, 15, 30, 45, 60]
 
     init(document: NativeReadingDocument, speech: NativeReadingSpeech,
@@ -1225,7 +1223,7 @@ struct NativeReadingScreen: View {
     private var effectiveTextSize: Double { latest.readerPreferences?.textSize ?? textSize }
     private var effectiveLineSpacing: Int { latest.readerPreferences?.lineSpacingIndex ?? lineSpacingIndex }
     private var effectiveStrongText: Bool { latest.readerPreferences?.strongText ?? strongText }
-    private var speed: Double { speeds[max(0, min(4, effectiveSpeedIndex))] }
+    private var speed: Double { NativeReaderSpeedOptions.rate(for: effectiveSpeedIndex) }
     private var isAudioOnly: Bool { latest.body.isEmpty && !tracks.isEmpty }
     private var excerpt: String {
         guard !textLayout.fragments.isEmpty else { return "" }

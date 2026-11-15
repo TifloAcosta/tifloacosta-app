@@ -388,6 +388,21 @@ final class NativeReadingSpeech: ObservableObject {
         audioDelegate.onFinish = { [weak self] completed, success in
             Task { @MainActor [weak self] in
                 guard let self, self.player === completed else { return }
+                if self.azureActive {
+                    self.player = nil
+                    guard success else {
+                        self.azureFail("No se ha podido reproducir el audio de Azure.")
+                        return
+                    }
+                    self.azureCompletedCharacters += self.azureChunkCharacters
+                    self.textCharacterOffset = self.baseCharacters + self.azureCompletedCharacters
+                    self.textPercent = max(0, min(100, Int(Double(self.textCharacterOffset) * 100 /
+                        Double(max(1, self.azureTotalCharacters)))))
+                    self.azureRemaining = String(self.azureRemaining.dropFirst(self.azureChunkCharacters))
+                    self.azureChunkCharacters = 0
+                    self.requestAzureChunk()
+                    return
+                }
                 self.isPlaying = false
                 self.isPaused = false
                 guard success, self.playlistURLs.indices.contains(self.playlistIndex + 1) else {
@@ -406,12 +421,26 @@ final class NativeReadingSpeech: ObservableObject {
         }
     }
     private var player: AVAudioPlayer?
+    private var azureTask: Task<Void, Never>?
+    private var azureGeneration = 0
+    private var azureActive = false
+    private var azureRemaining = ""
+    private var azureCompletedCharacters = 0
+    private var azureChunkCharacters = 0
+    private var azureTotalCharacters = 0
+    private var azurePendingData: Data?
+    private var azureVoice = ""
+    private var azureRegion = ""
+    private var azureKey = ""
+    private var azureSpeed = 1.0
+    private var azureError: ((String) -> Void)?
     private var sleepTask: Task<Void, Never>?
     var onSleepExpired: (() -> Void)?
     @Published private(set) var isPlaying = false
     @Published private(set) var isPaused = false
 
-    var hasAudio: Bool { player != nil }
+    /// Azure produces temporary audio for text: it is not an audiobook track.
+    var hasAudio: Bool { player != nil && !azureActive }
     var audioDuration: TimeInterval { player?.duration ?? 0 }
     var audioElapsed: TimeInterval { player?.currentTime ?? 0 }
     var audioPercent: Int {
@@ -446,6 +475,89 @@ final class NativeReadingSpeech: ObservableObject {
         synthesizer.speak(utterance)
         isPlaying = true
         isPaused = false
+    }
+
+    func playAzure(_ text: String, voice: String, region: String, key: String,
+                   speed: Double, baseCharacters: Int, totalCharacters: Int,
+                   onError: @escaping (String) -> Void) {
+        stop()
+        guard !text.isEmpty else { return }
+        azureActive = true
+        azureRemaining = text
+        azureCompletedCharacters = 0
+        azureChunkCharacters = 0
+        azureTotalCharacters = max(1, totalCharacters)
+        azureVoice = voice
+        azureRegion = region
+        azureKey = key
+        azureSpeed = speed
+        azureError = onError
+        self.baseCharacters = baseCharacters
+        textCharacterOffset = baseCharacters
+        textPercent = Int(Double(baseCharacters) * 100 / Double(azureTotalCharacters))
+        isPlaying = true
+        isPaused = false
+        requestAzureChunk()
+    }
+
+    private func azureFail(_ message: String) {
+        let handler = azureError
+        stop()
+        handler?(message)
+    }
+
+    private func playAzureData(_ data: Data) {
+        guard azureActive else { return }
+        if isPaused {
+            azurePendingData = data
+            return
+        }
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
+            try AVAudioSession.sharedInstance().setActive(true)
+            let audio = try AVAudioPlayer(data: data)
+            audio.delegate = audioDelegate
+            audio.enableRate = true
+            audio.rate = Float(max(0.5, min(2, azureSpeed)))
+            audio.prepareToPlay()
+            guard audio.play() else { throw NativeAzureSpeechError.emptyAudio }
+            player = audio
+            isPlaying = true
+        } catch {
+            azureFail("No se puede reproducir la voz de Azure: \(error.localizedDescription)")
+        }
+    }
+
+    private func requestAzureChunk() {
+        guard azureActive, azureTask == nil, !isPaused else { return }
+        guard !azureRemaining.isEmpty else {
+            azureActive = false
+            isPlaying = false
+            isPaused = false
+            textCharacterOffset = azureTotalCharacters
+            textPercent = 100
+            azureKey = ""
+            return
+        }
+        let chunk = NativeAzureSpeechService.nextChunk(azureRemaining)
+        azureChunkCharacters = chunk.count
+        let generation = azureGeneration
+        let voice = azureVoice, key = azureKey, region = azureRegion
+        azureTask = Task { [weak self] in
+            do {
+                let data = try await NativeAzureSpeechService.synthesize(
+                    chunk, voice: voice, key: key, region: region)
+                guard let self, self.azureActive, self.azureGeneration == generation,
+                      !Task.isCancelled else { return }
+                self.azureTask = nil
+                self.playAzureData(data)
+            } catch {
+                guard let self, self.azureActive, self.azureGeneration == generation,
+                      !Task.isCancelled else { return }
+                self.azureTask = nil
+                self.azureFail("Azure Speech: \(error.localizedDescription)")
+            }
+        }
     }
 
     private func startAudio(_ url: URL, speed: Double, at percent: Int) throws {
@@ -513,12 +625,20 @@ final class NativeReadingSpeech: ObservableObject {
     }
 
     func resume() {
-        if let player { player.play() } else { synthesizer.continueSpeaking() }
+        if let player { player.play() }
+        else if azureActive {
+            if let data = azurePendingData {
+                azurePendingData = nil
+                isPaused = false
+                playAzureData(data)
+            } else if azureTask == nil { requestAzureChunk() }
+        } else { synthesizer.continueSpeaking() }
         isPlaying = true
         isPaused = false
     }
 
     func refresh() {
+        if azureActive { return }
         if let player, !player.isPlaying && !isPaused { isPlaying = false }
         if player == nil && !synthesizer.isSpeaking && !isPaused { isPlaying = false }
     }
@@ -544,6 +664,14 @@ final class NativeReadingSpeech: ObservableObject {
     }
 
     func stop() {
+        azureGeneration += 1
+        azureTask?.cancel()
+        azureTask = nil
+        azureActive = false
+        azurePendingData = nil
+        azureRemaining = ""
+        azureKey = ""
+        azureError = nil
         sleepTask?.cancel()
         sleepTask = nil
         player?.stop()
@@ -977,6 +1105,56 @@ private struct NativeReaderTextLayout {
     }
 }
 
+/// UITextView exposes a single native, scrollable text document to VoiceOver.
+/// Unlike a SwiftUI stack of Text fragments, it has no application-imposed
+/// accessibility focus boundary at each paragraph or page. TextKit handles
+/// layout lazily, even when the underlying text is a long book.
+private struct NativeBrailleContinuousText: UIViewRepresentable {
+    let text: String
+    let fontSize: Double
+    let strongText: Bool
+    let requestedOffset: Int
+
+    final class Coordinator {
+        var lastAppliedOffset: Int?
+    }
+
+    func makeCoordinator() -> Coordinator { Coordinator() }
+
+    func makeUIView(context: Context) -> UITextView {
+        let view = UITextView()
+        view.isEditable = false
+        view.isSelectable = true
+        view.isScrollEnabled = true
+        view.backgroundColor = .clear
+        view.textContainer.lineFragmentPadding = 0
+        view.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        view.adjustsFontForContentSizeCategory = true
+        return view
+    }
+
+    func updateUIView(_ view: UITextView, context: Context) {
+        // Changing the text on every SwiftUI state update resets VoiceOver's
+        // braille reading position. Only reload when the document has changed.
+        if view.text != text {
+            view.text = text
+            context.coordinator.lastAppliedOffset = nil
+        }
+        if context.coordinator.lastAppliedOffset != requestedOffset {
+            let validOffset = max(0, min(requestedOffset, text.count))
+            let utf16Offset = String(text.prefix(validOffset)).utf16.count
+            view.selectedRange = NSRange(location: utf16Offset, length: 0)
+            context.coordinator.lastAppliedOffset = requestedOffset
+        }
+        let weight: UIFont.Weight = strongText ? .bold : .regular
+        let font = UIFont.systemFont(ofSize: fontSize, weight: weight)
+        if view.font != font { view.font = font }
+        view.textColor = UIColor.label
+        // Keep the continuous accessibility text intact; do not substitute
+        // snippets or inject per-page announcements.
+    }
+}
+
 struct NativeReadingScreen: View {
     let document: NativeReadingDocument
     @ObservedObject var speech: NativeReadingSpeech
@@ -993,11 +1171,14 @@ struct NativeReadingScreen: View {
     @AppStorage("native-reading-strong-text") private var strongText = false
     @AppStorage("native-reader-navigation-unit") private var navigationUnit = 0
     @AppStorage("native-reader-reading-mode") private var readingMode = 0
+    @AppStorage("native-reader-presentation-mode") private var presentationMode = 0
+    @AppStorage("native-reading-speech-provider") private var speechProvider = 0
     @State private var didApplyOpeningMode = false
     @State private var sleepIndex = 0 // Each open document starts with timer disabled.
     @State private var sleepDeadline: Date?
     @State private var currentPercent = 0
     @State private var readingOffset = 0
+    @State private var brailleRequestedOffset = 0
     @State private var lastSavedPercent = -1
     @State private var trackIndex = 0
     @State private var didRestoreAudioPosition = false
@@ -1065,6 +1246,7 @@ struct NativeReadingScreen: View {
         let value = max(0, min(100, percent))
         currentPercent = value
         readingOffset = Int(Double(textLayout.totalCharacters) * Double(value) / 100)
+        if presentationMode == 2 { brailleRequestedOffset = readingOffset }
         if speech.hasAudio {
             speech.seek(to: value)
         } else if speech.isPlaying || speech.isPaused {
@@ -1090,6 +1272,19 @@ struct NativeReadingScreen: View {
         }
         let remainder = String(document.body.dropFirst(readingOffset))
         guard !remainder.isEmpty else { return }
+        if speechProvider == 1 {
+            let region = UserDefaults.standard.string(forKey: "native-azure-speech-region") ?? "westeurope"
+            let voice = UserDefaults.standard.string(forKey: "native-azure-speech-voice") ?? ""
+            guard NativeAzureSpeechService.isConfigured(region: region, voice: voice) else {
+                actionMessage = "Configura primero una clave, región y voz de Microsoft Azure Speech en los ajustes de lectura."
+                return
+            }
+            speech.playAzure(remainder, voice: voice, region: region,
+                             key: NativeMicrosoftSpeechKeychain.load(), speed: speed,
+                             baseCharacters: readingOffset, totalCharacters: document.body.count,
+                             onError: { error in actionMessage = error })
+            return
+        }
         speech.play(remainder, speed: speed, pitch: pitch,
                     language: AVSpeechSynthesisVoice(identifier: effectiveVoiceID)?.language ?? "es-ES",
                     voiceIdentifier: effectiveVoiceID,
@@ -1211,6 +1406,7 @@ struct NativeReadingScreen: View {
 
     private func jump(to offset: Int) {
         readingOffset = max(0, min(textLayout.totalCharacters, offset))
+        if presentationMode == 2 { brailleRequestedOffset = readingOffset }
         let ratio = Double(readingOffset) / Double(max(1, textLayout.totalCharacters))
         currentPercent = min(100, Int((ratio * 100).rounded()))
         persistPosition()
@@ -1457,7 +1653,21 @@ struct NativeReadingScreen: View {
             .accessibilityFocused($focusedFragment, equals: index)
     }
 
+    @ViewBuilder
     private var readingContent: some View {
+        if presentationMode == 2 && !latest.body.isEmpty {
+            NativeBrailleContinuousText(
+                text: latest.body,
+                fontSize: effectiveTextSize,
+                strongText: effectiveStrongText,
+                requestedOffset: brailleRequestedOffset
+            )
+        } else {
+            segmentedReadingContent
+        }
+    }
+
+    private var segmentedReadingContent: some View {
         ScrollViewReader { proxy in
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 12) {
@@ -1691,9 +1901,10 @@ struct NativeReadingScreen: View {
                     Int(Double(textLayout.totalCharacters) * Double(initial) / 100)))
                 : Int(Double(textLayout.totalCharacters) * Double(initial) / 100)
             lastSavedPercent = initial
+            if presentationMode == 2 { brailleRequestedOffset = readingOffset }
             if !didApplyOpeningMode {
                 didApplyOpeningMode = true
-                if readingMode == 1 { play() }
+                if presentationMode == 0 && readingMode == 1 { play() }
             }
         }
         .onChange(of: sleepIndex) { _, _ in

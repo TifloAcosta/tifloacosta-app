@@ -311,6 +311,13 @@ struct NativeReaderAudioControls: View {
             choices: voiceChoices,
             selectedIndex: selectedVoiceIndex
         )
+        .onAppear {
+            personalVoiceStatus = AVSpeechSynthesizer.personalVoiceAuthorizationStatus
+            refreshVoices()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: AVSpeechSynthesizer.availableVoicesDidChangeNotification)) { _ in
+            refreshVoices()
+        }
         if chosenEngine == 0 && voiceSelection == nil && !selectedVoiceID.isEmpty {
             Button("Guardar ajustes de esta voz") {
                 let profile = NativeReaderVoiceProfiles.capture(
@@ -319,13 +326,6 @@ struct NativeReaderAudioControls: View {
                     ? "Ajustes guardados para esta voz." : "No se pudieron guardar los ajustes."
             }
             Text(voiceProfileStatus).font(.footnote)
-        }
-        .onAppear {
-            personalVoiceStatus = AVSpeechSynthesizer.personalVoiceAuthorizationStatus
-            refreshVoices()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: AVSpeechSynthesizer.availableVoicesDidChangeNotification)) { _ in
-            refreshVoices()
         }
         if allowVoiceDownloads {
             if personalVoiceStatus == .notDetermined {

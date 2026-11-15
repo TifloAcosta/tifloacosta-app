@@ -10,7 +10,7 @@ for (const name of ['IOS_PROFILE_APP_NAME','IOS_PROFILE_EXTENSION_NAME','GITHUB_
 }
 const version=process.env.TIFLO_IOS_BUILD_NUMBER || String(Math.max(500003,500000+Number(process.env.GITHUB_RUN_NUMBER)));
 // Apple has closed the 1.1 train after approving 1.1. New builds must use a higher version.
-const marketingVersion=process.env.TIFLO_IOS_MARKETING_VERSION || '1.2';
+const marketingVersion=process.env.TIFLO_IOS_MARKETING_VERSION || '1.4';
 if(!/^[1-9]\d*\.\d+(?:\.\d+)?$/.test(marketingVersion) || ['1.0','1.1'].includes(marketingVersion))
   throw Error('Versión de TestFlight inválida o cerrada: '+marketingVersion);
 if(!/^\d+$/.test(version))throw Error('Número de compilación inválido');

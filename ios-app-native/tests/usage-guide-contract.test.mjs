@@ -27,8 +27,9 @@ test('Todos los destinos actuales tienen ayuda en español e inglés, sin conten
     .split('var id: String')[0];
   const appLabels = [...start.matchAll(/case\s+\w+\s*=\s*"([^"]+)"/g)].map(match => match[1]);
   const guideLabels = [...guide.matchAll(/spanishTitle:\s*"([^"]+)"/g)].map(match => match[1]);
-  assert.deepEqual(guideLabels, appLabels);
-  assert.equal((guide.match(/englishParagraphs:\s*\[\s*\n/g) ?? []).length, appLabels.length);
-  assert.equal((guide.match(/spanishParagraphs:\s*\[\s*\n/g) ?? []).length, appLabels.length);
+  for(const label of appLabels) assert.ok(guideLabels.includes(label),'Falta guía: '+label);
+  for(const label of ['Recibidos','Contacto y redes','Privacidad y accesibilidad']) assert.ok(guideLabels.includes(label),'Falta ayuda de Configuración: '+label);
+  assert.equal((guide.match(/englishParagraphs:\s*\[\s*\n/g) ?? []).length, guideLabels.length);
+  assert.equal((guide.match(/spanishParagraphs:\s*\[\s*\n/g) ?? []).length, guideLabels.length);
   assert.match(guide, /@AppStorage\("native-ios-language"\)/);
 });

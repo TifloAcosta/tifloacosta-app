@@ -13,7 +13,7 @@ test('Mi libro y Privacidad son pantallas nativas completas, no provisionales', 
   assert.match(read('NativeContact.swift'), /NavigationLink\s*\{\s*NativeBookScreen\(\)/);
   assert.doesNotMatch(screens, /case \.libro: NativeBookScreen\(\)/);
   assert.doesNotMatch(screens, /case libro = "Mi libro"/);
-  assert.match(screens, /case \.privacidad: NativePrivacyAccessibilityScreen\(\)/);
+  assert.match(settings, /NavigationLink\("Privacidad y accesibilidad"\) \{ NativePrivacyAccessibilityScreen\(\) \}/);
   assert.doesNotMatch(screens, /case \.favoritos, \.libro, \.privacidad/);
   assert.match(bookPrivacy, /struct NativeBookScreen: View/);
   assert.match(bookPrivacy, /struct NativePrivacyAccessibilityScreen: View/);

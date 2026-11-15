@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 const screens = readFileSync(new URL('../Sources/NativeScreens.swift', import.meta.url), 'utf8');
 const home = screens.slice(
   screens.indexOf('struct NativeHomeScreen: View {'),
-  screens.indexOf('private struct NativePendingSectionScreen: View {')
+  screens.indexOf('/// La portada anuncia')
 );
 
 test('la portada usa distribución compacta, sin separación automática de lista agrupada', () => {
@@ -23,9 +23,8 @@ test('la tipografía dinámica no se recorta ni se desactiva en la portada', () 
 });
 
 test('la portada conserva búsqueda y rutas sin controles duplicados', () => {
-  assert.match(home, /TextField\("Introduce tu búsqueda"/);
-  assert.match(home, /\.onSubmit\(search\)/);
-  assert.match(home, /Button\(action: search\)/);
+  assert.match(home, /NavigationLink\s*\{\s*NativeSearchEntryScreen\(\)/);
+  assert.doesNotMatch(home, /TextField\("Introduce tu búsqueda"/);
   assert.match(home, /\.navigationDestination\(for: NativeDestination\.self\)/);
   assert.match(home, /\.accessibilityLabel\(Text\(LocalizedStringKey\(destination\.rawValue\)\)\)/);
   assert.match(home, /\.accessibilityAddTraits\(\.isHeader\)/);

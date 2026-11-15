@@ -297,6 +297,13 @@ struct NativeSettingsScreen: View {
                 }
             }
             .listRowBackground(TifloVisual.surfaceRaised)
+
+            Section("Información y contacto") {
+                NavigationLink("Recibidos") { NativeInboxScreen() }
+                NavigationLink("Contacto y redes") { NativeContactScreen() }
+                NavigationLink("Privacidad y accesibilidad") { NativePrivacyAccessibilityScreen() }
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
         }
         .tifloScreenSurface()
         .navigationTitle("Configuración")

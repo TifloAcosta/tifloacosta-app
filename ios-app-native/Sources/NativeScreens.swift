@@ -6,14 +6,11 @@ private enum NativeDestination: String, CaseIterable, Hashable, Identifiable {
     case actualidad = "Actualidad"
     case recursos = "Recursos"
     case tifloLector = "TifloLector"
-    case recibidos = "Recibidos"
     case novedades = "Novedades"
     case descargas = "Descargar desde un enlace"
     case favoritos = "Favoritos"
     case videos = "Vídeos"
     case podcasts = "Podcast"
-    case contacto = "Contacto y redes"
-    case privacidad = "Privacidad y accesibilidad"
     case configuracion = "Configuración"
 
     var id: String { rawValue }
@@ -72,16 +69,6 @@ struct NativeHomeScreen: View {
     @EnvironmentObject private var catalog: NativeCatalogStore
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @AppStorage("native-ios-language") private var languageIndex = 0
-    @State private var searchText = ""
-    @State private var submittedSearch = ""
-    @State private var showingSearch = false
-
-    private func search() {
-        let term = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !term.isEmpty else { return }
-        submittedSearch = term
-        showingSearch = true
-    }
 
     // Una portada compacta y adaptable. ScrollView evita los márgenes y
     // alturas automáticas de List(.insetGrouped) en tamaños de accesibilidad.
@@ -113,45 +100,15 @@ struct NativeHomeScreen: View {
     }
 
     private var searchPanel: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        NavigationLink {
+            NativeSearchEntryScreen()
+        } label: {
             Text("Buscar con TifloAcosta")
-                .font(.headline)
-                .foregroundStyle(TifloVisual.primaryText)
-                .accessibilityAddTraits(.isHeader)
-
-            AnyLayout(
-                dynamicTypeSize.isAccessibilitySize
-                    ? AnyLayout(VStackLayout(alignment: .leading, spacing: 10))
-                    : AnyLayout(HStackLayout(alignment: .center, spacing: 10))
-            ) {
-                TextField("Introduce tu búsqueda", text: $searchText)
-                    .textFieldStyle(.plain)
-                    .font(.body)
-                    .submitLabel(.search)
-                    .textInputAutocapitalization(.sentences)
-                    .onSubmit(search)
-                    .padding(.horizontal, 14)
-                    .frame(maxWidth: .infinity, minHeight: 48)
-                    .background(
-                        RoundedRectangle(cornerRadius: TifloVisual.controlCornerRadius)
-                            .fill(TifloVisual.surfaceRaised)
-                    )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: TifloVisual.controlCornerRadius)
-                            .strokeBorder(TifloVisual.border, lineWidth: 1)
-                    )
-
-                Button(action: search) {
-                    Text("Buscar")
-                        .font(.body.weight(.semibold))
-                        .frame(minHeight: 48)
-                        .padding(.horizontal, 12)
-                }
-                .buttonStyle(.borderedProminent)
-                .tint(TifloVisual.brandRed)
-                .disabled(searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-            }
+                .font(.body.weight(.semibold))
+                .frame(maxWidth: .infinity, minHeight: 48)
         }
+        .buttonStyle(.borderedProminent)
+        .tint(TifloVisual.brandRed)
     }
 
     private var guidePanel: some View {
@@ -269,25 +226,47 @@ struct NativeHomeScreen: View {
                     inbox.importPendingReaderContent(into: library)
                 }
             }
-            .navigationDestination(isPresented: $showingSearch) {
-                NativeSearchResultsScreen(query: submittedSearch)
-            }
             .navigationDestination(for: NativeDestination.self) { destination in
                 switch destination {
                 case .actualidad: NativeNewsScreen()
                 case .recursos: NativeResourcesScreen()
                 case .tifloLector: NativeReaderLibraryScreen()
-                case .recibidos: NativeInboxScreen()
                 case .novedades: NativeUpdatesScreen()
                 case .descargas: NativeDownloadsScreen()
                 case .videos: NativeVideosScreen()
                 case .podcasts: NativePodcastScreen()
                 case .configuracion: NativeSettingsScreen()
-                case .contacto: NativeContactScreen()
                 case .favoritos: NativeFavoritesScreen()
-                case .privacidad: NativePrivacyAccessibilityScreen()
                 }
             }
+        }
+    }
+}
+
+/// La portada anuncia un único botón de búsqueda; el formulario aparece al abrirlo.
+private struct NativeSearchEntryScreen: View {
+    @State private var query = ""
+    @State private var submitted = ""
+    @State private var showResults = false
+
+    private func search() {
+        let term = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !term.isEmpty else { return }
+        submitted = term
+        showResults = true
+    }
+
+    var body: some View {
+        Form {
+            TextField("Introduce tu búsqueda", text: $query)
+                .submitLabel(.search)
+                .onSubmit(search)
+            Button("Buscar") { search() }
+                .disabled(query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+        }
+        .navigationTitle("Buscar con TifloAcosta")
+        .navigationDestination(isPresented: $showResults) {
+            NativeSearchResultsScreen(query: submitted)
         }
     }
 }

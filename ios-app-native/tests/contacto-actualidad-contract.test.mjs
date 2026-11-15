@@ -11,7 +11,7 @@ const inline = native('NativeMediaInline.swift');
 const web = readFileSync(new URL('../../index.html', import.meta.url), 'utf8');
 
 test('Contacto y redes existe como sección nativa operativa, no provisional', () => {
-  assert.match(screens, /case \.contacto: NativeContactScreen\(\)/);
+  assert.match(native('NativeUpdatesSettings.swift'), /NavigationLink\("Contacto y redes"\) \{ NativeContactScreen\(\) \}/);
   assert.doesNotMatch(screens, /case \.favoritos, \.libro, \.contacto, \.privacidad/);
   for (const heading of ['Sobre TifloAcosta', 'Contacto directo', 'Redes sociales', 'Web oficial']) {
     assert.ok(contact.includes('Section("' + heading + '")'), 'Sección omitida: ' + heading);

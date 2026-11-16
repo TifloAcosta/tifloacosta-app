@@ -5,6 +5,7 @@ on:
     paths:
       - 'apple-chat-analytics-requests/*.json'
       - '.github/workflows/check-ios-app-analytics.yml'
+      - '.github/scripts/apple-analytics-catalog.mjs'
 permissions:
   contents: read
 jobs:

@@ -1,0 +1,25 @@
+name: Consultar aprobación beta externa TestFlight
+on:
+  workflow_dispatch:
+    inputs:
+      build:
+        description: Número de compilación de TestFlight
+        required: false
+        default: '500159'
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+      API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+      API_PRIVATE: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+      TARGET_BUILD: ${{ inputs.build }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprobar reglas de interpretación del estado
+        run: node --test .github/scripts/testflight-status.test.mjs
+      - name: Consultar oficialmente TestFlight sin modificar nada
+        run: node .github/scripts/testflight-status.mjs

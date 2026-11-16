@@ -4,7 +4,7 @@
 
 **Goal:** Deliver each newly available TifloAcosta Apple Analytics report as a readable email to tonytenerife@gmail.com, polling every six hours without duplicate deliveries.
 
-**Architecture:** Extend the existing apple-chat-commands GitHub Actions bridge using its permanent APPSTORE_ANALYTICS_* secrets. Separate Apple API download, metric summarization, delivery and durable deduplication; keep real email disabled until a protected sender is configured and tested.
+**Architecture:** Extend the existing apple-chat-commands GitHub Actions bridge using its permanent APPSTORE_ANALYTICS_* secrets. Separate Apple API download and metric summarization in GitHub; an existing ChatGPT Automation (created 2026-11-16, every six hours) performs Gmail delivery from/to tonytenerife@gmail.com and deduplicates by stable report identifiers.
 
 **Tech Stack:** Node.js (built in crypto, zlib, fetch, node:test), GitHub Actions, Apple App Store Connect Analytics Reports API.
 
@@ -14,7 +14,7 @@
 - Preserve all existing secrets and workflows unrelated to analytics.
 - Do not store private keys or raw personal analytics in source control.
 - Do not fabricate zero values for absent metrics.
-- No live email before sender authentication is securely configured.
+- Gmail account tonytenerife@gmail.com verified; never send an email without validated report data and duplicate verification.
 - Continue to support chat-initiated read-only checks.
 
 ## Review Focus
@@ -44,19 +44,19 @@
 - [ ] Run tests to confirm GREEN.
 - [ ] Commit.
 
-### Task 3: Safe delivery and deduplication
-**Files:** Create .github/scripts/apple-analytics-delivery.mjs, .github/scripts/apple-analytics-delivery.test.mjs.
-**Interfaces:** `pendingItems(observed,delivered)`, `sendSummary(message,credentials)`, `recordDelivered(id)`.
-- [ ] Write tests for unchanged instances, new instances, retry-on-error, and duplicate/concurrent invocation safety.
+### Task 3: Summaries for Gmail automation and deduplication
+**Files:** Create .github/scripts/apple-analytics-export.mjs, .github/scripts/apple-analytics-export.test.mjs.
+**Interfaces:** `serializeSummary(observed)` with stable identifiers; Gmail delivery and sent-mail deduplication handled by ChatGPT Automation.
+- [ ] Write tests for stable instance identifiers, unchanged instances, and safe export without sensitive data.
 - [ ] Run to confirm RED.
-- [ ] Implement delivery adapter; configure protected credentials only after Tony approves sender method.
-- [ ] Run to confirm GREEN and dry-run without actual email.
+- [ ] Implement export adapter and verification; Gmail authentication is already connected and verified.
+- [ ] Run to confirm GREEN and verify no actual email was sent.
 - [ ] Commit.
 
 ### Task 4: Scheduled workflow and end-to-end checks
 **Files:** Modify .github/workflows/check-ios-app-analytics.yml or add a closely scoped workflow .github/workflows/send-ios-app-analytics-email.yml.
-- [ ] Add cron every six hours, dispatch/read-only testing, concurrency protection; skip real send until sender verified.
+- [ ] Add cron every six hours, dispatch/read-only testing, concurrency protection; expose processed report metadata safely for existing six-hour ChatGPT task.
 - [ ] Verify read-only live API calls and absence of duplicate messages via Actions logs.
-- [ ] Confirm with Tony before live first email if external send is not already authorized.
-- [ ] Confirm first delivered email, then enable schedule and monitor.
+- [ ] Check that the connected Gmail identity matches Tony's authorized sender and recipient.
+- [ ] Confirm first delivered email and monitor the existing ChatGPT scheduled task.
 - [ ] Commit and report remaining blockers.

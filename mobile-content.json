@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-15T22:51:48.549Z",
+  "generatedAt": "2026-11-16T02:11:50.798Z",
   "resources": [
     {
       "kind": "resource",
@@ -6370,24 +6370,6 @@
       "categories": [
         "tecnologia-accesibilidad",
         "gafas-inteligentes",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "freedom-scientific-blog-b31bcd974583543b:en",
-      "sourceId": "freedom-scientific-blog-b31bcd974583543b",
-      "lang": "en",
-      "title": "Getting the Most Out of Vispero Companion: Tips and Best Practices",
-      "summary": "Vispero Companion has grown from a helpful question-and-answer assistant into your one conversational home for all the AI features in JAWS. Whether you want to know how a feature works, get a description of a photo, explore a busy web page, or have a task done for you, it all happens in one familiar, accessible …",
-      "body": "Vispero Companion has grown from a helpful question-and-answer assistant into your one conversational home for all the AI features in JAWS. Whether you want to know how a feature works, get a description of a photo, explore a busy web page, or have a task done for you, it all happens in one familiar, accessible window. And because everything lives in a single conversation, you can keep asking follow-up questions without starting over. Here are some tips and best practices for getting the most out of Vispero Companion.\n\nWith Vispero Companion Actions, Companion does more than answer questions. Just ask, and it can help you:\n\nYou’re always in control. Companion only works when you ask, asks for your approval before executing important steps, and stops immediately when you press ESC.\n\nThe new Vispero Companion is available through the Early Adopter Program to users in the United States who are signed in to a Vispero account. To turn it on:\n\nOnce it’s on, press JAWS KEY+SPACEBAR followed by F1 to open Companion. The JAWS key is INSERT when using Desktop Keyboard layout, and CAPS LOCK when using Laptop layout.\n\nCompanion looks at what is on your screen to understand what you’re asking about. If the application window isn’t maximized, content can be cut off at the edges, and Companion may even pick up parts of other windows, such as the taskbar. Before you ask for help, place focus in the application you are working in and press WINDOWS+UP ARROW to maximize it.\n\nWhen Companion carries out a task for you, it moves to your application and works there, much as you would. If you type, click, switch windows, or open another program while it’s working, you can change what Companion sees and pull it away from the task. It’s best to leave the keyboard and mouse alone until the task is complete, and Companion will let you know what it did once it’s finished. If you need to stop it, press ESC .\n\nOnce Companion takes its first action in an application, it stays in that app for the rest of the conversation. Outlook and Word, for example, are treated as separate applications. If you want help with something in a different program such as a web browser, close Companion and relaunch it from that application.\n\nCompanion opens in its own window, just like any other application on your computer. When you’re finished with it, press ALT+F4 to close it, the same way you would close any other window.\n\nYou don’t need to know which feature or setting does the job. Just tell Companion what you need, for example:\n\nThe more detail you give, the fewer attempts Companion needs to get it right. “For example, if you are asking Companion to help you book a flight, “Set the departure date to November 14” will work better than “Select November 14,” because Companion will know which type of date you want to set.\n\nCompanion keeps track of your current conversation while it is open so you can ask a follow-up question or for the next step without starting over. When you’re ready to change topics, select New Request for a fresh start or close and then relaunch Companion from a different application.\n\nAlready have the Picture Smart and Page Explorer commands in muscle memory? Keep using them. They now bring their results right into Companion, where you can ask follow-up questions.\n\nCompanion asks before doing anything that can’t easily be undone, such as submitting a form. Take a moment to read what it’s about to do before you confirm, and check its report when the task is finished so you know exactly where things stand.\n\nYour feedback shapes what comes next for Companion. Select Give Feedback beside New Request to rate an answer or leave a comment. This button requires the Submit Anonymous Usage Data (telemetry) option to be turned on. If you’d prefer to leave it off, email your comments to SoftwareSuggestions@vispero.com . You can also select the Send Feedback button in the JAWS Early Adopter Program dialog.\n\nFor more information and a live demo, join us for our webinar on new features of JAWS, ZoomText, and Fusion 2027 at noon ET on Thursday, November 12. Have questions? Send an email to training@vispero.com .",
-      "sourceName": "Freedom Scientific",
-      "originalUrl": "https://training.vispero.com/getting-the-most-out-of-vispero-companion-tips-and-best-practices/",
-      "publishedAt": "2026-11-06T00:52:11.000Z",
-      "categories": [
-        "windows",
-        "tecnologia-accesibilidad",
-        "jaws",
         "ia-accesibilidad"
       ]
     }

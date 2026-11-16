@@ -2,9 +2,10 @@ name: Consultar estado de TifloAcosta en App Store Connect
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [main, apple-chat-commands]
     paths:
       - '.github/workflows/check-ios-appstore-status.yml'
+      - 'apple-chat-requests/*.json'
 permissions:
   contents: read
 jobs:

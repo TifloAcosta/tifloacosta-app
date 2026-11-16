@@ -3,7 +3,7 @@ on:
   schedule:
     - cron: '17 */3 * * *'
   push:
-    branches: [main]
+    branches: [main, apple-chat-commands]
     paths:
       - '.github/workflows/check-ios-testflight-external.yml'
       - 'apple-chat-requests/*.json'

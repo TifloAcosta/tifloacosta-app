@@ -1,0 +1,6 @@
+{
+  "purpose": "validate approval gates only",
+  "approved": false,
+  "expected": "no write to Apple",
+  "requestedBy": "Tony Acosta"
+}

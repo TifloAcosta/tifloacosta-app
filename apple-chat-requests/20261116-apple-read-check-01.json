@@ -1,0 +1,13 @@
+{
+  "requestId": "20261116-apple-read-check-01",
+  "requestedBy": "Tony Acosta",
+  "source": "ChatGPT",
+  "mode": "read-only",
+  "checks": [
+    "appstore-reviews",
+    "testflight-external"
+  ],
+  "build": "500159",
+  "approvedAt": "2026-11-16",
+  "purpose": "Verificación de consultas sin modificar App Store Connect"
+}

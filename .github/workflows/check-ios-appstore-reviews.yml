@@ -1,0 +1,23 @@
+name: Consultar reseñas de TifloAcosta en App Store
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/check-ios-appstore-reviews.yml'
+permissions:
+  contents: read
+jobs:
+  reviews:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+      API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+      API_PRIVATE: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar interpretación de las respuestas
+        run: node --test .github/scripts/appstore-reviews.test.mjs
+      - name: Consultar reseñas y respuestas sin publicar nada
+        run: node .github/scripts/appstore-reviews.mjs

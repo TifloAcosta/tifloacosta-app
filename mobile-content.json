@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T20:31:15.642Z",
+  "generatedAt": "2026-11-16T22:08:30.319Z",
   "resources": [
     {
       "kind": "resource",
@@ -5624,15 +5624,225 @@
   "news": [
     {
       "kind": "news",
-      "id": "the-verge-d2c93c74fc208022:en",
-      "sourceId": "the-verge-d2c93c74fc208022",
+      "id": "9to5mac-bc33be906fe874b8:en",
+      "sourceId": "9to5mac-bc33be906fe874b8",
       "lang": "en",
-      "title": "Senator slams Commerce Secretary for flow of Nvidia AI chips to China",
-      "summary": "Washington Senator Maria Cantwell, one of the top Democrats on the Senate commerce committee, has taken fire at the Department of Commerce (DOC) under Secretary Howard Lutnick for neglecting to enforce protections intended to keep Nvidia's AI chips away from China. In a letter to Lutnick on Sunday, Cantwell said the DOC has \"undermined America's […]",
-      "body": "Washington Senator Maria Cantwell, one of the top Democrats on the Senate commerce committee, has taken fire at the Department of Commerce (DOC) under Secretary Howard Lutnick for neglecting to enforce protections intended to keep Nvidia's AI chips away from China. In a letter to Lutnick on Sunday, Cantwell said the DOC has \"undermined America's national security,\" and that its failures \"help give away America's technology advantage in AI.\"\n\n\"Despite clear authority from Congress, the Department of Commerce has allowed advanced AI chips to flow through companies with ties to the People's Republic of China (PRC). The Department of Commerce h …\n\nRead the full story at The Verge.",
+      "title": "Apple expands Apple Intelligence beta testing in China to iPads and Macs",
+      "summary": "Following the arrival of Apple Intelligence on iPhones in China with iOS 27.3 beta 1, Apple is now expanding support to iPads and Macs ahead of the public release of its 27.3 updates. Here are the details. more…",
+      "body": "Following the arrival of Apple Intelligence on iPhones in China with iOS 27.3 beta 1, Apple is now expanding support to iPads and Macs ahead of the public release of its 27.3 updates. Here are the details.\n\nApple’s road to releasing Apple Intelligence in China has been a particularly eventful one.\n\nAfter a significant amount of regulatory back-and-forth, the company confirmed in late October that Apple Intelligence would make its way to iPhones as of iOS 27.3, beginning with the first beta of the system, released in early November.\n\nJust a few days later, Reuters reported that Apple had cleared another regulatory hurdle in the country by registering Apple Intelligence for use on tablets and laptops.\n\nToday, Apple released the second developer betas of iPadOS 27.3 and macOS 27.3, both of which now include Apple Intelligence support in China, as spotted by MacRumors .\n\nAs with the initial iPhone rollout in the first iOS 27.3 beta, Apple Intelligence on iPads and Macs in China does not include Siri AI or the other next-generation AI features announced at WWDC 2026.\n\nInstead, users get access to earlier capabilities such as Writing Tools, Genmoji, Live Translation, and notification summaries, with Alibaba’s Qwen model powering certain features.\n\nYou can learn more about the Apple Intelligence features set to be available in China at launch here .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/16/apple-expands-apple-intelligence-beta-testing-in-china-to-ipads-and-macs/",
+      "publishedAt": "2026-11-16T21:38:55.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-77a77cb2e9301205:en",
+      "sourceId": "9to5mac-77a77cb2e9301205",
+      "lang": "en",
+      "title": "New iPhone Duo orders now deliver a month earlier than before",
+      "summary": "Interested in getting an iPhone Duo before Christmas? You might be in luck, as Apple’s online store delivery estimates just got pulled forward by a full month, with December delivery now expected. more…",
+      "body": "Interested in getting an iPhone Duo before Christmas? You might be in luck, as Apple’s online store delivery estimates just got pulled forward by a full month, with December delivery now expected.\n\nApple seems to be finding success in ramping up its iPhone Duo production.\n\nWithin minutes of iPhone Duo pre-orders opening on October 16, delivery estimates quickly slipped into November, then December, and after about a half hour of orders, the earliest you could get an iPhone Duo was late January.\n\nApple did deliver some Duo units earlier than the initial estimates. But the late January timeframe remained in place for all new iPhone Duo orders until now.\n\nBut as spotted by Max Weinbach , new iPhone Duo orders from Apple just got bumped up by about a month. Now, delivery estimates are showing December 16-23 for customers in the US and elsewhere.\n\nThis is a great indicator that Apple has been able to accelerate production. It’s also likely that there was a slowdown in orders due to the late January estimate putting off prospective buyers, thus making it easier for the company to catch up on backorders.\n\nWhile we still don’t know sales numbers, the iPhone Duo by all appearances has been a hit already. And with iOS 27.3 adding a face unlock feature soon, one of the biggest critiques reviewers had is largely being mitigated.\n\nDo you plan to place a new iPhone Duo order? Let us know in the comments",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/16/new-iphone-duo-orders-now-deliver-a-month-earlier-than-before/",
+      "publishedAt": "2026-11-16T21:28:12.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-e2a03589b9cc8ecc:en",
+      "sourceId": "engadget-e2a03589b9cc8ecc",
+      "lang": "en",
+      "title": "The iPhone Duo gets face unlock with the latest iOS 27 beta.",
+      "summary": "You won't need to wait for TouchID on your $2,000 foldable.",
+      "body": "You won't need to wait for TouchID on your $2,000 foldable.\n\nThe lack of Face ID is one of the main complaints users have had about the iPhone Duo. And while rumors suggest that the company might add a TrueDepth camera to the second generation of its foldable phone next year, it seems that Apple has a more immediate solution to address these complaints. The second beta of iOS 27.3, released to developers on Monday, adds a new option to unlock the iPhone Duo with facial recognition using its front-facing camera.\n\nThe feature is called \" Unlock with Front Camera \" and can be enabled in the Touch ID & Passcode settings in the Settings app. Engadget confirmed that the feature works on an iPhone Duo running the beta — but how it works is quite intriguing. Unlike most modern iPhones, the Duo lacks a TrueDepth camera with the depth sensors that Face ID uses to map a face in 3D. Instead, it has regular cameras on both the outer and inner screens, which is likely the main reason it relies on Touch ID for unlocking.\n\nAnd the new feature in iOS 27.3 beta makes this very clear — the setup screen warns users that the feature \"provides convenience\" but \"isn't as secure as Touch ID or Face ID.\" It's still too early to tell, but Engadget's tests show that the feature works reasonably well. It unlocks faster than Touch ID and wasn't fooled when a photo of the user's face was pointed at the camera. It also seems to work in certain low-light conditions, though not when it's completely dark.\n\nOf course, Apple has set some limits to ensure that malicious people don't take advantage of the new feature to tamper with others' iPhones without their consent. It only works to bypass the Lock Screen, and you can't unlock apps, view your passwords or use Apple Pay with your face — Touch ID is still required for more sensitive actions. Not using your phone for more than 45 minutes also temporarily disables Unlock with Front Camera. The feature doesn't work using the iPhone Duo's inner display either, but that's most likely because the under-display camera has a very low resolution.\n\nThe approach is very similar to what Apple did with the recently announced HomeView . It also lacks Face ID and relies on a simpler form of facial recognition to identify who is using the device in order to display personal content. It seems that Apple has now brought the same system to the iPhone Duo. In our review , we found the Duo's Touch ID accurate but a bit slower to unlock than expected. The same beta also adds a setting to lock the Duo when it's closed, instead of moving content to the outer display.\n\nApple hasn't said when iOS 27.3 will be released to the public, but the update is likely to be rolled out sometime mid-December. For now, only developers and beta testers have access to it.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2318489/iphone-duo-gets-face-unlock-with-the-latest-ios-27-beta/",
+      "publishedAt": "2026-11-16T21:17:24.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-088138fdc1e52d3f:en",
+      "sourceId": "techcrunch-088138fdc1e52d3f",
+      "lang": "en",
+      "title": "Apple reveals new Mac security controls as AI agents raise privacy risks",
+      "summary": "Following an October announcement, Apple has detailed new permission controls, warnings, and transparency features coming to macOS 27.3 to address risks posed by AI agents and other apps.",
+      "body": "As promised last month , Apple on Monday announced changes to Mac security controls designed to protect users’ data from the growing popularity of AI agents and their apps’ demand for “full disk access.”\n\n“Before granting an app such extraordinary access, users should understand that it puts all of the data on their Mac at risk,” Apple wanred in a new blog post aimed at app developers.\n\nUnlike AI chatbots that simply answer questions, agents run on a user’s device where they can take actions across the operating system, files, and apps on the user’s behalf.\n\nWhile the tools can be useful, Apple has grown concerned about the increased risks to users’ data and privacy that these AI agents introduce. At the same time, the company has been benefiting from sales of Mac minis and Mac Studio computers that AI early adopters have been purchasing specifically to run their local AI models.\n\nTo balance these competing interests, Apple said in October that it would revise some of its security settings around Mac apps. The announcement followed two notable incidents involving AI agents. In one, a journalist claimed that Meta’s Muse app read their private messages without consent; a separate report from Wired cited a flaw in ChatGPT’s Mac app that could have allowed hackers to access sensitive data.\n\nNow, Apple is sharing the changes it’s making.\n\nFor starters, it’s splitting up Device Control and Data Access into two settings: System & App Protection Override and Accessibility. The changes is designed to help users better understand that selecting the first option means overriding built-in security protections.\n\nTo streamline configurations, Apple says there will now also be a single method for granting permissions that involves selecting the requested app from a list. The company will also introduce new guidance encouraging users to grant access only to the specific apps that need it when they enable the System & App Protection Override setting. Similar guidance will appear when users enable Full Disk Access to allow an app to access their folders.\n\nThe company will also provide users with “increased visibility into the wide range of data apps will receive access to or control over if full permissions are granted,” the blog post notes.\n\nAnother change will give users more granular control over when an AI agent or app can gain access by allowing users to configure their apps to ask for permission every time access is needed. While arguably tedious and a potential obstacle to true automation, the feature could allow users to experiment with local AI without giving the agent carte blanche.\n\nThere will also be a new transparency indicator that appears when an app is controlling another app through the System & App Protection Override option.\n\nThe changes, which are arriving with macOS 27.3, don’t appear to prevent Mac users from installing and running AI agents or other apps that ask for higher levels of access. Instead, they give users more nuanced options, control, and information about the choices they’re making.\n\nApple advises app developers to adjust their onboarding processes to account for the new changes and suggests that their apps learn to “gracefully handle having access to only a limited set of folders or apps.”\n\nDevelopers of apps that request Full Disk Access for disk backup or to provide assistive technologies can request exceptions to the new rules (which Apple calls “entitlements”) to preserve the same functionality they offered before the macOS 27.3 update.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/11/16/apple-reveals-new-mac-security-controls-as-ai-agents-raise-privacy-risks/",
+      "publishedAt": "2026-11-16T21:01:02.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple",
+        "apps-accesibles",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-c31e33f2f4ef3cd0:en",
+      "sourceId": "the-verge-c31e33f2f4ef3cd0",
+      "lang": "en",
+      "title": "Sam Altman says he wants everyone ‘to have a lot of RAM’",
+      "summary": "OpenAI CEO Sam Altman is once again addressing his controversial comments on PC RAM purchases. \"I want to be clear, I want people to have a lot of RAM, I think everybody should be able to buy a lot of RAM for their own computer,\" Altman said today. \"I think the home tinkering is great.\" […]",
+      "body": "OpenAI CEO Sam Altman is once again addressing his controversial comments on PC RAM purchases. \"I want to be clear, I want people to have a lot of RAM, I think everybody should be able to buy a lot of RAM for their own computer,\" Altman said today. \"I think the home tinkering is great.\"\n\nThe comments were made on stage at Semafor's Silicon Valley & The World summit on Monday.\n\nAltman's remarks on RAM stirred up controversy last month. In an appearance on the Cheeky Pint podcast , Altman said that it's \"quite terrible\" for everyone to have RAM in personal computers rather than in data centers. He later followed up on those comments in posts on …\n\nRead the full story at The Verge.",
       "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/policy/1034047/nvidia-us-commerce-department-cantwell-lutnick",
-      "publishedAt": "2026-11-16T11:00:00.000Z",
+      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1034787/sam-altman-ram-shortage-semafor",
+      "publishedAt": "2026-11-16T20:41:28.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-ec28055f8218b0a2:en",
+      "sourceId": "ars-technica-ec28055f8218b0a2",
+      "lang": "en",
+      "title": "Comcast's \"fiber-powered Wi-Fi\" is just cable, AT&T says in false advertising case",
+      "summary": "AT&T demands Comcast give AT&T profits it made from advertising cable as fiber.",
+      "body": "AT&T on Friday accused Comcast of false advertising in a lawsuit challenging the marketing claim that Comcast's cable broadband service and Wi-Fi is \"fiber-powered.\"\n\n\"This case challenges Comcast’s false advertising campaign for its residential Internet service, marketed under the Xfinity brand to consumers nationwide,\" AT&T's lawsuit said. \"At the center of that campaign is Comcast’s claim that Xfinity Internet and its associated Wi-Fi service are 'Fiber-Powered.'\"\n\nWhile Comcast has deployed plenty of fiber throughout the US, its cable Internet service makes the final connection to homes with coaxial cable. This results in upload speeds being far slower than download speeds.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/tech-policy/2026/11/comcast-falsely-advertises-cable-internet-as-fiber-powered-att-lawsuit-says/",
+      "publishedAt": "2026-11-16T20:27:58.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-745cf7bef77ddc3a:en",
+      "sourceId": "9to5mac-745cf7bef77ddc3a",
+      "lang": "en",
+      "title": "iPhone Duo now has twice as many optimized apps as it did 10 days ago",
+      "summary": "Apple marketing SVP Greg Joswiak said today that the number of iPhone Duo-ready apps on the App Store is twice what it was when Apple last reported the figure. Here are the details. more…",
+      "body": "Apple marketing SVP Greg Joswiak said today that the number of iPhone Duo-ready apps on the App Store is twice what it was when Apple last reported the figure. Here are the details.\n\nWhile it was obvious that the number of iPhone Duo-ready apps would increase over time, their limited availability was a big part of the conversation around early reviews and online commentary in the first days after the device launched.\n\nThat said, it was clear even from the early reviews that app updates were picking up quickly, with some reviewers having to rewrite or re-record parts of their coverage as more apps gained support for the device.\n\nEarlier this month, Apple put a number to that progress when it announced it had surpassed 100,000 optimized apps.\n\nNow, just 10 days later, that number has doubled, according to Apple’s senior vice president of Worldwide Marketing, Greg Joswiak. In a post on X , he touted that more than 200,000 apps are now optimized for iPhone Duo, adding that he is “excited by how quickly developers have embraced” the device.\n\nJoswiak’s update came on the same day that Apple released iOS 27.3 developer beta 2, which addresses two other common complaints from early iPhone Duo reviews: the lack of Face ID, and the inability to automatically lock the device when closing it.\n\nAs 9to5Mac covered earlier today, the second developer beta of iOS 27.3 introduces a new unlock option that uses the outer display’s camera to recognize the user’s face, as well as a setting to automatically lock the device when folded shut.\n\nThe latter addresses a common complaint from users who found it strange that closing the phone didn’t automatically lock it, requiring them to press the side button instead.\n\nFor more details on these two features coming to the iPhone Duo with iOS 27.3, follow this link .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/16/iphone-duo-now-has-twice-as-many-optimized-apps-as-it-did-10-days-ago/",
+      "publishedAt": "2026-11-16T20:18:40.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-8c088ad17dd6ceb8:en",
+      "sourceId": "techcrunch-8c088ad17dd6ceb8",
+      "lang": "en",
+      "title": "Uber says hackers stole information on close to 150,000 driver’s licenses during data breach",
+      "summary": "The ridesharing giant said drivers' license information stored by AI cloud company Fireworks AI was stolen during a security incident.",
+      "body": "Uber is notifying close to 150,000 drivers that their personal and driver’s license information was stolen during an October data breach at one of the company’s tech providers.\n\nIn notices filed this week with several U.S. attorneys general, including California and Iowa , the ride-hailing giant said it was notified on October 9 by the provider that hackers broke in and stole internal credentials, which were used to access Uber’s data.\n\nThe company said it subsequently began notifying affected drivers that their personal information was stored with the provider.\n\nThe stolen data includes affected drivers’ names, addresses, dates of birth, and driver’s license numbers.\n\nTechCrunch has learned that the provider is Fireworks AI, which lets developers access and use open-weight AI models. Fireworks reported a data breach last month in which hackers stole its customers’ information, including billing data and some private AI datasets.\n\nOnline productivity startup Notion and AI coding startup Cursor have both confirmed that they had data stolen during the Fireworks hack.\n\nIn Uber’s case, the company said it had alerts enabled to detect unauthorized access to its Fireworks environment, but because the hackers used Fireworks’ own internal credentials, “no alerts were triggered.”\n\nWhen reached for comment, an Uber spokesperson told TechCrunch: “The notices to drivers are in relation to a security incident impacting one of our third-party vendors, Fireworks.ai, which had access to some Uber data,” and deferred our questions to Fireworks.\n\nA spokesperson for Fireworks confirmed that the company identified a security issue involving unauthorized access to some of its systems, which affected customer data, but the spokesperson did not address our questions about the incident.\n\nFireworks attributed its breach to a financially motivated cybercriminal group whose goals are to sell stolen tokens for accessing large language models, or LLMs. No known cybercriminal group has taken credit for the data theft.\n\nIn a notice filed with Oregon’s attorney general, Uber said it notified 149,346 people in total that their information had been taken in the breach at Fireworks.\n\nTechCrunch previously reported that Uber has notified drivers in California, Illinois, Massachusetts, Rhode Island, and South Carolina. We’ve also seen data breach notices filed in Texas and Vermont.\n\nWhen asked by TechCrunch, Uber’s spokesperson did not say how many drivers are affected by the breach, nor how many drivers it was notifying about the incident.\n\nIt’s unclear if the number of affected drivers is expected to rise, and Uber did not respond to a follow-up email sent Monday.\n\nThis is Uber’s second known data breach this year. The company reported a security incident at its Uber Freight truck shipping unit, for which an extortion gang took credit for stealing data.\n\nFirst published on November 13, and updated with a response from Fireworks, and again with a new updated figure of affected individuals from Oregon’s attorney general.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/11/16/uber-confirms-hackers-stole-thousands-of-drivers-license-information-in-data-breach/",
+      "publishedAt": "2026-11-16T19:53:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-4288f362b1000a32:en",
+      "sourceId": "engadget-4288f362b1000a32",
+      "lang": "en",
+      "title": "Which Google Pixel phone is most similar to the Galaxy S26+?",
+      "summary": "Trying to choose between the Google Pixel 11 Pro and Samsung Galaxy S26+? We break down the specs, cameras and prices to help find the best one for you.",
+      "body": "Google Pixel is considered the cleanest Android experience, but which model holds up against the Samsung Galaxy S26+?\n\nOn paper, Samsung's Galaxy S26 and Google's Pixel 11 family of smartphones look surprisingly alike. You get three models to choose from on either side of the divide, but pit the two companies' offerings head-to-head and you'll find that the comparison isn't as straightforward.\n\nFor instance, the Galaxy S26+ specifically sits in the middle of Samsung's flagship lineup. However, you'll need to step up to Google's top-of-the-line Pixel 11 Pro XL for a direct equivalent. The Pixel 11 Pro also comes close to offering the same experience, but it makes a few tradeoffs while undercutting the Galaxy S26+ on price by a small margin.\n\nWith that in mind, here's how the Pixel 11 series stacks up against the Galaxy S26+, the middle child of Samsung's flagship smartphone lineup. Let's start with the Pixel 11 Pro, which seems like a natural competitor to the Galaxy S26+ as they each occupy the middle slot in Google and Samsung's flagship portfolios, respectively. Look a bit closer, though, and you'll find some fairly significant differences between them.\n\nSamsung's Galaxy S26+ is a fairly large smartphone — it packs a 6.7-inch display that's only 0.2 inches smaller than the S26 Ultra. The Pixel 11 Pro, meanwhile, is quite compact by modern smartphone standards as we found out in our review . It has a 6.3-inch display, which is exactly the same as the base Galaxy S26.\n\nIf you don't mind the screen size difference, though, the Pixel 11 Pro is nearly an even match for the Galaxy S26+ in many other ways. In fact, Google's Pro phone offers a brighter display and more capable set of cameras. One major caveat is that the Galaxy S26 series enjoys a healthy lead in terms of raw performance. Google's Tensor G6 is primarily designed to support AI workloads , while the Galaxy S26's Snapdragon Elite Gen 5 — quoted as the \"world's faster mobile system-on-a-chip\" at launch by manufacturer Qualcomm — delivers considerably more processing and graphics horsepower (as does its international Exynos 2600 chip).\n\nStill, the Pixel 11's Tensor G6 can handle day-to-day tasks and even multitasking just fine. The Galaxy S26+ simply pulls ahead in gaming, video editing and other resource-intensive applications. But on the plus side, the Pixel 11 Pro's $1,099 price tag undercuts the Galaxy S26+'s $1,199 MSRP.\n\nIf you find the Pixel 11 Pro too small, Google's larger Pro XL model is a much closer match to the Galaxy S26+. Its 6.8-inch display is a touch larger than the 6.7-inch panel found on Samsung's middleweight flagship. Google also equips the Pixel 11 Pro with superior camera hardware, offering a 50MP primary lens, 48MP ultrawide and 48MP telephoto with 5x optical zoom. The Galaxy S26+ has a 50MP main camera but only a 12MP ultrawide and 10MP telephoto with 3x optical zoom. Samsung reserves its best optical sensors for the top-of-the-line Galaxy S26 Ultra.\n\nAt $1,299, the Pixel 11 Pro XL is $100 more than the Galaxy S26+'s $1,199 MSRP. Because Samsung's flagship line has been on the market longer, you're more likely to score a discount on the Galaxy S26+. You'll also notice a major difference in hand: the largest Pixel weighs a hefty 8 ounces (226 grams) compared to the 6.7-ounce (190-gram) Galaxy S26+. It's easy to notice the difference when holding the phones in the real world. The Pixel 11 Pro XL feels reassuringly hefty, but that feeling can eventually turn to fatigue during extended use.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2314824/google-pixel-phone-most-similar-to-galaxy-s26-plus/",
+      "publishedAt": "2026-11-16T19:30:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "android"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-d99bccb046c463de:en",
+      "sourceId": "techcrunch-d99bccb046c463de",
+      "lang": "en",
+      "title": "Apple adds ‘face unlock’ to the iPhone Duo, but it’s not Face ID",
+      "summary": "Apple's latest iOS 27.3 developer beta introduces a limited face unlock feature for the iPhone Duo, alongside other improvements.",
+      "body": "One of the top complaints from tech reviewers about Apple’s new foldable, the iPhone Duo, has been its reliance on Touch ID, a technology that’s been largely replaced by Face ID across the company’s iPhone lineup.\n\nWith Monday’s release of iOS 27.3 beta for developers, Apple is addressing that complaint with a new “face unlock” feature that lets iPhone Duo users unlock their phones using the front camera, rather than waiting for a future hardware upgrade.\n\nTo be clear, this feature is not Face ID.\n\nDue to hardware constraints, the iPhone Duo shipped without support for Face ID technology primarily because its thin, foldable design doesn’t offer enough space for the TrueDepth sensor array that Face ID requires. A recent report from Bloomberg suggests that the company is working to change that in a future version of the iPhone Duo. In the meantime, the Duo uses Touch ID for unlocking, authentication, and Apple Pay.\n\nThe new face unlock feature, however, will allow users to quickly unlock the device using the front camera when the phone is close. It only works if users have recently authenticated with Touch ID or a passcode. Apple notes that Apple Pay and passwords will still require Touch ID, and users will have to authenticate with Touch ID again after 45 minutes of inactivity.\n\nThe move is meant to make it easier for people to use the Duo in the way they’re accustomed to, after years of unlocking an iPhone just by looking at it.\n\nApple isn’t going so far as to allow face unlock to work across the entire device, though, because the technology isn’t as secure as Face ID. The latter uses Apple’s TrueDepth 3D sensing hardware, which includes a flood illuminator and a dot projector that casts over 30,000 invisible infrared dots onto the user’s face to build a unique 3D map of the face. The system combines this map with attention-awareness checks, making it resistant to attempts to fool it with photos or other 2D images.\n\nThe software update addresses another complaint by incorporating one of the “hacks” iPhone Duo early adopters were using to force their phone to lock when they shut it. That involved creating a shortcut that would automatically run when the phone was closed. Now, Apple says users can enable this feature directly in Settings, under Display and Brightness.\n\nAlongside the software update, Apple announced that more than 200,000 apps are now optimized for the iPhone Duo, up from over 100,000 earlier this month .\n\nOther new features in this latest software release include an option to ask Siri questions about the content of a webpage, even portions that aren’t visible without scrolling. Apple is also introducing video podcasts in Apple Podcasts in the Apple TV app, catching up with rivals like YouTube and Spotify.\n\nApple is also expanding access to Apple News puzzles for News+ subscribers in Australia, the U.K., and for French-Canadian users. Australian News+ subscribers will get access to a daily quick crossword, crossword mini, and Sudoku, as well as Apple’s original puzzles, Quartiles and Emoji Game . U.K. users will get the quick crossword, the crossword mini, and Sudoku, while French-Canadian subscribers will get access to Apple’s original puzzles.\n\nThe iOS 27.3 software update is currently available to developers and will soon arrive for public beta testers. It will roll out more broadly to all users after further testing is complete.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/11/16/apple-adds-face-unlock-to-the-iphone-duo-but-its-not-face-id/",
+      "publishedAt": "2026-11-16T19:26:55.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-1ce76003b99330e4:en",
+      "sourceId": "the-verge-1ce76003b99330e4",
+      "lang": "en",
+      "title": "Apple is testing daily usage limits for more complex Siri AI interactions",
+      "summary": "Apple released betas of iOS 27.3, iPadOS 27.3, and macOS 27.3 today, and the company is using the update to test new per device daily usage limits for some Siri AI and Apple Intelligence features, according to MacRumors. Basic Siri commands and requests will remain free and unlimited, but more advanced features that rely on […]",
+      "body": "Apple released betas of iOS 27.3, iPadOS 27.3, and macOS 27.3 today, and the company is using the update to test new per device daily usage limits for some Siri AI and Apple Intelligence features, according to MacRumors .\n\nBasic Siri commands and requests will remain free and unlimited, but more advanced features that rely on cloud-based processing like generating, cleaning up, or extending images in Photos will be subjected to the daily limits. There are four categories of limited usage, MacRumors reports, including using Siri AI for \"multi-step, personal context requests,\" image generation and editing tools, automations in Shortcuts that \"r …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1034581/apple-intelligence-siri-ai-daily-usage-limits-icloud-subscription",
+      "publishedAt": "2026-11-16T19:24:40.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-02403f50d7939172:en",
+      "sourceId": "the-verge-02403f50d7939172",
+      "lang": "en",
+      "title": "OpenAI wants to stop deepfakes from overwhelming child abuse tiplines",
+      "summary": "OpenAI is announcing a tool that it says will help child sexual abuse investigators cut through the noise to find harmful material they can act on quickly. At a Monday press briefing in Washington, DC, OpenAI announced a classifier it says can better detect abusive imagery of kids, including whether it's AI-generated. It's also offering […]",
+      "body": "OpenAI is announcing a tool that it says will help child sexual abuse investigators cut through the noise to find harmful material they can act on quickly.\n\nAt a Monday press briefing in Washington, DC, OpenAI announced a classifier it says can better detect abusive imagery of kids, including whether it's AI-generated. It's also offering free access to vetted organizations, giving developers more guidance on how to detect this type of content, and helping to train law enforcement on how AI can aid their investigations. The news comes as policymakers and others are pushing for more safety restrictions on AI tools, accusing OpenAI and other co …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/policy/1034527/openai-csam-classifier",
+      "publishedAt": "2026-11-16T19:23:45.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-9f36aa2066d20b80:en",
+      "sourceId": "ars-technica-9f36aa2066d20b80",
+      "lang": "en",
+      "title": "US moves to cut China’s remote access to AI chips",
+      "summary": "Trump bets China won’t mind US blocking remote access to AI chips.",
+      "body": "On the heels of the Nvidia scandal , the Trump administration is preparing to crack down on foreign data centers that are fueling China’s advancements in artificial intelligence by allowing remote access to otherwise restricted high-end chips necessary for AI training.\n\nIn a summary of the rule change, the Commerce Department said it was closing a loophole that previously allowed foreign rivals like China, Russia, and Iran to bypass export curbs on certain advanced computer chips by instead renting access to those chips from data centers in Indonesia, Malaysia, Singapore, Thailand, and Brazil.\n\nUS rivals could possibly use that access to train and run advanced AI models “capable of supporting military- and intelligence-related activities that could threaten US national security or foreign policy interests,” the Commerce Department said. Among threats, the US fears rivals could use advanced AI to develop \"more effective weapons of mass destruction and advanced conventional weapons, coordinated cyber-espionage and targeted cyber-disruption, algorithmic theft, and weaponized disinformation.”\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/tech-policy/2026/11/us-moves-to-cut-chinas-remote-access-to-ai-chips/",
+      "publishedAt": "2026-11-16T19:10:09.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-080f9556304d091a:en",
+      "sourceId": "engadget-080f9556304d091a",
+      "lang": "en",
+      "title": "Google adds 66 regional dialects to Gemini",
+      "summary": "From today, Gemini's making more of an effort to speak your language in a way that sounds more accurate.",
+      "body": "The feature was teased during Google I/O earlier this year.\n\nOne of the less visible risks of conversational AI is its flattening effect on a culture's unique dialect and accent. Humanity speaks with a thousand voices, but assistants often just respond in a nicely generic transatlantic monotone. Now, Google is doing something about it by adding 66 regional dialects to Gemini to help it better relate to the people using it. The feature was first teased at Google I/O earlier this year, and starting today, the Android and iOS apps will be able to speak to users in a variety of voices from different countries.\n\nFor instance, UK users can set Gemini to speak in a Geordie, Scouse and Brummie accent to better engage with people from Tyneside, Merseyside and Birmingham. The list also includes Scots , Welsh, Northern Irish and Multicultural London English, among many others. And it's not just the UK that gets this treatment, with tailored dialects for India, Brazil, Indonesia and Korea also in the mix.\n\nGoogle says it worked with native speakers to ensure the voices were authentic and clear, rather than exaggerated and stereotypical. It added that Gemini isn't going to suddenly fill its responses with \"street slang,\" but instead focus on sounding more \"like a local.\" Given how much pride people put into their accent as a signifier of their heritage, it'll be very interesting to see how well these voices are received by the people intended to use them.\n\nTo activate the voices, you'll need to access the voice settings in the Gemini app or tap the three-dot menu. Google suggests a good way to test their authenticity is to ask for a recommendation for local food to better hear the \"warmth and rhythm of each voice.\"",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2317417/google-adds-66-regional-dialects-to-gemini/",
+      "publishedAt": "2026-11-16T17:00:00.000Z",
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
@@ -5651,189 +5861,6 @@
       "publishedAt": "2026-11-16T07:00:24.000Z",
       "categories": [
         "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-8e76a4d060ada73e:en",
-      "sourceId": "engadget-8e76a4d060ada73e",
-      "lang": "en",
-      "title": "Apple's new research app is designed to make AI health tools more user-friendly",
-      "summary": "Apple has unveiled a new research study with the aim of learning how people use AI health tools.",
-      "body": "It will allow users to ask health questions and rate the responses.\n\nApple has unveiled a new research study with the aim of learning how people use AI health tools in order to make them more effective and user-friendly. The company is launching the Health AI Usage Study in conjunction with OpenEvidence , a clinical AI platform used by health professionals that draws medical data from sources like The New England Journal of Medicine .\n\nA key part of the research is a new app now available for download , with Apple aiming to have up to 200,000 participants. Users must live in the US and be 21 or older, and have an iPhone 15 Pro or later model running iOS 26 and up. They can choose to share (or not) Apple HealthKit data, including activity levels, sleep quality and lab results, for extra context around their health.\n\nParticipants will use the app to ask medical questions via text-based prompts like \"how can I improve my heart health,\" according to the app's screen shots. They'll then receive non-jargony responses with links to peer-reviewed clinical sources. Apple's goal is to use the data to create AI health tools that deliver relevant, easy-to-understand and actionable health information.\n\nApple notes that the app is not integrated with Siri or Apple Intelligence, and said that participant data will remain confidential and won't be used to train AI models.\n\n\"[We] believe responsible innovation starts with scientific rigor and clinical grounding,\" said Apple VP of Health and fitness Sumbul Desai, MD, in a statement. \"Insights from this study will help advance the broader scientific conversation and ensure that as technology evolves, we continue building trusted tools that genuinely support people wherever they are on their health journey.\"",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2317303/apple-new-research-app-designed-to-make-ai-health-tools-user-friendly/",
-      "publishedAt": "2026-11-16T06:06:05.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple",
-        "apps-accesibles",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-c8e93389792660d1:en",
-      "sourceId": "techcrunch-c8e93389792660d1",
-      "lang": "en",
-      "title": "Apple launches new app to study how people use AI for health",
-      "summary": "Apple's new app for a study will answer everyday medical questions",
-      "body": "Big AI labs like OpenAI and Anthropic have made their bets on offering chatbots that can answer health-related queries with specialized features. Apple is debuting a new study to understand how people use AI for health. But it isn’t quite following other AI startups just yet; it wants to study how clinically grounded answers can help people.\n\nThe iPhone maker is partnering with healthcare-focused AI company OpenEvidence to launch a new study app. Apple is inviting users in the U.S. over 21, using iPhone 15 or later, and running iOS 26 or later, with Apple Intelligence enabled. The company is aiming to run this study with up to 200,000 participants for more than 12 months.\n\nThe new app will allow users to ask health-related questions, as they do with ChatGPT or Claude, with answers grounded in clinical data, from sources including The New England Journal of Medicine, Journal of the American Medical Association, and Nature. Apple said that the app will try to give simplified answers to everyday medical questions. Users can rate those answers and provide feedback about the responses; they’ll also be asked to participate in monthly surveys.\n\nParticipants can share data from HealthKit such as resting heart rate, activity, sleep, or lab results to get more personalized and pointed suggestions from the app. The company said the app can also help prepare participants better for a doctor’s visit, and it will guide users to specific providers for answers related to concerning medical issues.\n\nApple specified that the data will be anonymized before sending it to a secure third-party cloud provider, and it won’t be used to train any kind of AI models. The company said that OpenEvidence deletes the query and response data after 24 hours.\n\n“At Apple, we believe responsible innovation starts with scientific rigor and clinical grounding. Health is deeply personal, and conducting a dedicated research study is the most thoughtful way to understand how people engage with, comprehend, and evaluate health AI in everyday life,” Sumbul Desai, M.D., Apple’s vice president of Health and Fitness, said in a statement, adding, “Insights from this study will help advance the broader scientific conversation and ensure that as technology evolves, we continue building trusted tools that genuinely support people wherever they are on their health journey.”\n\nThe app is available to download starting today for U.S. users. It’s not clear if Apple wants to release AI-powered answering to its Health app or Siri yet. The potential is huge — earlier this year, OpenAI said users were asking over 300 million health-related queries each week .",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/11/15/apple-launches-new-app-to-study-how-people-use-ai-for-health/",
-      "publishedAt": "2026-11-16T01:30:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple",
-        "apps-accesibles",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-466ddfde56694f1f:en",
-      "sourceId": "the-verge-466ddfde56694f1f",
-      "lang": "en",
-      "title": "Apple’s new study looks to improve the effectiveness of AI health tools",
-      "summary": "Apple announced a new study today with the goal of better understanding how people interact with conversational AI health tools and how useful their responses actually are. The company is conducting the Apple Health AI Usage Study in collaboration with OpenEvidence, a clinical AI platform used by healthcare professionals that generates answers based on medical […]",
-      "body": "Apple announced a new study today with the goal of better understanding how people interact with conversational AI health tools and how useful their responses actually are. The company is conducting the Apple Health AI Usage Study in collaboration with OpenEvidence , a clinical AI platform used by healthcare professionals that generates answers based on medical information from sources like The New England Journal of Medicine . Participants will use a new iOS app to ask medical questions and then rate the responses based on criteria including accuracy, detail, and relevance.\n\nThe app is now available for download, and enrollment starts today, …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1033355/apples-new-study-looks-to-improve-the-effectiveness-of-ai-health-tools",
-      "publishedAt": "2026-11-16T01:26:56.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-c2c19555b6708310:en",
-      "sourceId": "engadget-c2c19555b6708310",
-      "lang": "en",
-      "title": "The oldest gadget in your house could be your home network's biggest security hole",
-      "summary": "It may be more economical to hold onto gadgets for as long as possible, but you're putting your entire home network at risk with outdate hardware.",
-      "body": "Your home network is only as secure as its weakest link.\n\nIt may not seem like you would need to replace a perfectly functional 10-year-old connected camera in your home. However, your network is only as secure as its weakest link, and that's often a device that is so outdated it no longer receives updates from its manufacturer.\n\nMany of us don't realize how often gadgets need to be replaced, and it's not just cameras. Security cameras should be replaced every five to seven years, with router manufacturer Netgear recommending a hardware replacement every four or five years. You'll know it's well beyond time to replace your router when you start experiencing slower connections. At that point, you may already be facing security concerns.\n\nWhen outdated gadgets like these are compromised, they could be sending your data to bad actors or working as part of a botnet. In 2025, the FBI issued a warning that end-of-life (EOL) routers–devices that are no longer receiving software updates or security patches–are being compromised by cybercriminals. It's ultimately up to the consumer to perform a regular device audit to determine if routers, cameras and other smart devices pose a security risk.\n\nAny connected device in your home that no longer receives bug patches and security updates may be a risk. Per a 2024 Consumer Reports study, most appliance makers don't tell consumers in advance how long they will offer updates to software. It found that of 19 major brands that make smart appliances, only three told customers how long they would maintain support, and even the longest promised about five years of updates, falling short of consumer expectations of 10.\n\nRouters are also often at risk. A 2025 FBI warning stated that routers dated 2010 or earlier likely no longer receive updates and should be replaced. In this particular case, such gadgets were being targeted by malware called TheMoon, which infects routers to install proxies, so criminals can operate anonymously. TheMoon hack doesn't even require a password, instead exploiting open ports and a vulnerable script. Even if you have a strong password, an old router can be a risk.\n\nRouters and other smart devices that have been hacked can be recruited as part of a botnet, a network of devices used to overwhelm websites with traffic to take them offline. A recent report from Cisco found that nearly 40 percent of the vulnerabilities attackers targeted most affected end-of-life devices, and about a third of exploited vulnerabilities were at least a decade old. The report focused on businesses, but the lesson applies at home too: Attackers keep targeting old hardware because it never gets fixed. Even if most of your cameras and routers are up to date, just one outdated device can allow bad actors to enter the network and compromise anything else connected to it.\n\nThe good news is you don't have to replace everything in your home. Start by taking stock of everything on your network. First, log into your router's admin page and go through the list of connected devices. You may find gadgets you have forgotten about, like an old camera, smart plug or even your fridge. Then, search online for whether the manufacturer still releases updates for each device. If your router no longer gets firmware updates or is considered an EOL gadget, it may be time to get rid of it. If your smart appliance is too old to get automatic updates, you can simply turn off connected features. Chances are you don't need them anyway.\n\nThe latest standard for router security is WPA3. To upgrade your router from WPA2, go to the router's admin page, find the wireless security setting and choose WPA3. Some older gadgets will struggle to connect after switching, so choose WPA2/WPA3 if you run into that issue. If there is no WPA3 option, it is time to replace the router.\n\nTo make your home network more secure in general, turn off remote management and use a strong password. Never use the default password that came with your router. Turn on automatic updates to ensure firmware is updated as soon as it is offered. Otherwise, you can put any old gadgets and smart appliances on a separate network so that, if they are compromised, they can't get to more important gadgets like your laptop or phone. It's worth noting, though, that the data stored on outdated gadgets is still vulnerable, so it's always best to replace old hardware for maximum security.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2314057/home-network-oldest-device-could-be-biggest-security-risk/",
-      "publishedAt": "2026-11-16T01:00:00.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-c617dc78bc441b1b:en",
-      "sourceId": "engadget-c617dc78bc441b1b",
-      "lang": "en",
-      "title": "The pros and cons of using cloud storage over local storage",
-      "summary": "Before AI ran rampant through the technology market, cloud storage was the new, big thing, as it seems like every major company has its own cloud service.",
-      "body": "Cloud storage can be super convenient, but there are times when using local storage is the better move.\n\nExternal hard drives and USB flash drives are usually easy ways to back up your files, especially since they don't require an internet connection or waiting for uploads. You just plug them into your computer, copy the files you need, and that's it. But cloud services like iCloud and Google Drive have also made it a lot easier to back up everything — and most of the time, it all happens automatically.\n\nYour photos, videos, contacts and more are all synced to the cloud without having to copy each file manually. Plus, there's no risk of leaving your external drive somewhere or damaging it to the point where you lose your files . That doesn't mean cloud storage is perfect, and both have their pros and cons — it really comes down to choosing what works best for your needs. If you're unsure whether to choose local or cloud storage to back up your data, here's how the two stack up on access, cost and reliability.\n\nOne of the biggest advantages of using cloud storage is the convenience of not having to worry about your files. Once you upload them to the cloud, they're with you wherever you go. Just log in to your account on another laptop or phone, and you can access everything in just a few minutes. It's perfect for people who use multiple devices or who need to access files from their home computer at the office or college. Plus, most cloud services let you have your files synced automatically . That's the case with iCloud — once you enable it on your device, it automatically backs up everything every day.\n\nSharing files through a cloud service is also much easier than sharing them from local storage. Once a file is uploaded to the cloud, you can easily share it with someone with just a click — cloud platforms generate a link so others can view and download that file. There's also collaboration, so multiple people can work on the same document or spreadsheet at the same time. Platforms like Google Docs even offer tools that allow each collaborator to leave comments in real time, perfect for workplaces and schools.\n\nSafety is another big plus, since major cloud providers keep copies of your data spread across multiple servers and data centers. The chances of something bad happening and you losing all your data are very low – though not impossible . Plus, your cloud account can be protected with a password and two-factor authentication, meaning others can't just take your files from you.\n\nCloud storage relies on a stable internet connection, and you're prone to unexpected outages. A slow connection or an outage on your provider's servers could prevent you from downloading a file when you need it most. Also, uploading and downloading large files can take a while if you're using a slow connection. With an external SSD, you can copy gigabytes of files in just minutes. Internet has no impact on local storage, so it's something to consider if you're always traveling and rely on mobile data, for example.\n\nCost is another reason that might push people away from cloud services. While you only have to pay once to buy an external hard drive, cloud providers typically charge recurring subscription fees on a monthly or annual basis. Apple charges $9.99 per month in the US for 2TB of iCloud+ , which comes to nearly $240 if you pay for two years — and the storage isn't really yours. Stop paying, and your files may be deleted after a while, not to mention possible price increases down the road . By comparison, you can find 2TB SSDs for around $290, but they'll always be yours, with no extra charges.\n\nThat doesn't mean you should ditch the cloud and rely entirely on local storage. Subscribing to a cloud service that allows you to back up all your files and access them from anywhere is very handy, and you can also benefit from local storage by offloading some of your larger files or those you really want to make sure you never lose.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2313943/pros-cons-using-cloud-storage-over-local/",
-      "publishedAt": "2026-11-16T00:30:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-2fd9d5fbd5cd2b12:en",
-      "sourceId": "techcrunch-2fd9d5fbd5cd2b12",
-      "lang": "en",
-      "title": "Indian chip startup Bharat Semi lands $24M seed round as it eyes global AI sensor market",
-      "summary": "Bharat Semi says it has secured design wins for its AI-enabled sensor technology with companies including General Atomics.",
-      "body": "Bharat Semi , an Indian semiconductor startup, has raised $24 million in seed funding to develop AI-enabled image sensors, as it seeks to win customers in the United States and elsewhere.\n\nThe investment comes as the nearly five-year-old, pre-revenue startup says it has secured design wins with U.S. defense technology company General Atomics and India’s Kaynes Semicon. Its image sensors, however, remain under development, with the startup targeting its initial commercial production in 2027.\n\nIndia has committed billions of dollars to build up a domestic semiconductor industry, with a hope to become an alternative manufacturing hub as U.S. companies look to diversify supply chains beyond China. The country, however, has yet to establish itself as a major chip manufacturing hub. Meanwhile, the AI boom is also giving Indian startups such as Bharat Semi an opportunity to develop specialized chips for global markets.\n\nThe New Delhi-based startup is developing programmable image sensors that combine image capture, processing, and AI capabilities on a single chip, reducing the need to send visual data to separate processors. The move could cut system costs by at least 70% compared with conventional setups that use a separate image sensor, image signal processor, and a system-on-chip, co-founder Vrinda Kapoor (pictured above, right) said in an interview.\n\n“Our aim here is to move from sensors to sense-making solutions,” Kapoor told TechCrunch.\n\nKapoor, a South Park Commons fellow who earlier worked in healthcare technology, co-founded Bharat Semi in late 2021 with Vinayak Dalmia (pictured above, left), the startup’s managing director, who previously worked at McKinsey and in private equity. Its chief technology officer, Boyd Fowler, previously held the same role at image-sensor maker OmniVision.\n\nBharat Semi is targeting smart homes, industrial automation, surveillance, and aerospace. Without disclosing specifics, Kapoor pointed to air conditioners that could detect when a room is empty and adjust automatically and drones that could process visual information — even with the absence of more expensive computing hardware elsewhere in the system.\n\nThe startup’s first-generation sensors are already in prototyping, while its second-generation sensors, which will incorporate more advanced AI capabilities, are expected to reach the prototype stage by mid-2027, Kapoor said. Moreover, the startup plans to get those newer sensors into customers’ hands by the end of 2027.\n\nThe all-equity seed round was led by Info Edge Group, South Park Commons, and Indus Bridge Ventures, with participation from Valour Capital, Micromax, Gaingels, and individual investors. Bharat Semi, Kapoor said, plans to use the funding to expand its engineering team, complete product development, and bring its sensors to market.\n\nBharat Semi has about 75 employees across India and the U.S., including 10 to 12 in its American operations, which span engineering and business development in Santa Clara. The startup plans to increase its U.S. headcount to around 20 by mid-2027, Kapoor said. It has also begun hiring engineers in Europe.\n\n“It’s a story of can we build a global technology company out of India,” Kapoor said.\n\nIn 2024, Bharat Semi announced plans for a semiconductor fabrication project in India involving a technology partnership with the U.S. Space Force. The initiative, Kapoor said, remains in development and the startup is working to identify domestic partners that would build and operate the facility.\n\nThe project is separate from Bharat Semi’s image-sensor business, Kapoor added. The startup plans to remain fabless, outsourcing chip manufacturing while focusing on semiconductor design and software. The new funding will not be used to finance the proposed fabrication facility.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/11/15/indian-chip-startup-bharat-semi-lands-24m-seed-round-as-it-eyes-global-ai-sensor-market/",
-      "publishedAt": "2026-11-15T23:30:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-81e9696838644dd4:en",
-      "sourceId": "9to5mac-81e9696838644dd4",
-      "lang": "en",
-      "title": "Apple’s Messages app keeps getting better; here are my favorite updates",
-      "summary": "9to5Mac is brought to you by Tello Mobile. Switching to Tello Mobile can bring the cost of your plan down to as little as $5 a month, or an unlimited plan for just $25 a month, all on America’s largest 5G network. See all of the available plans at tello.com . Apple’s Messages app is the most-used app for many iPhone users. As such, Apple regularly makes the app better with new features and important changes. Here’s a rundown of some of Apple’s biggest recent changes to Messages on iPhone. more…",
-      "body": "9to5Mac is brought to you by Tello Mobile. Switching to Tello Mobile can bring the cost of your plan down to as little as $5 a month, or an unlimited plan for just $25 a month, all on America’s largest 5G network. See all of the available plans at tello.com .\n\nApple’s Messages app is the most-used app for many iPhone users. As such, Apple regularly makes the app better with new features and important changes. Here’s a rundown of some of Apple’s biggest recent changes to Messages on iPhone.\n\nWith iOS 26 last year, Apple added a host of new features to Messages. Here are some of my favorites:\n\nWith iOS 27 this year, Apple added even more to the Messages app — headlined by a focus on bug fixes and performance improvements.\n\nAll of this comes as Apple has also continued to improve its implementation of RCS, making cross-platform communication with your Android friends and family even better. Most notably, Apple this year added support for end-to-end encryption when using RCS.\n\nWhat are some of your favorite features in the Messages app? What’s on your wishlist? Let us know down in the comments.\n\nFollow Chance : Threads , Bluesky , Instagram , and Mastodon .\n\n9to5Mac is brought to you by Tello Mobile. Switching to Tello Mobile can bring the cost of your plan down to as little as $5 a month, or an unlimited plan for just $25 a month, all on America’s largest 5G network. See all of the available plans at tello.com .",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/15/apples-messages-app-keeps-getting-better-here-are-my-favorite-updates/",
-      "publishedAt": "2026-11-15T23:06:10.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-f895e2c270944112:en",
-      "sourceId": "techcrunch-f895e2c270944112",
-      "lang": "en",
-      "title": "Is bad news for Jensen Huang also bad news for the AI industry?",
-      "summary": "\"Jensen is Nvidia, right? And so much of this economy is riding on Nvidia.\"",
-      "body": "We didn’t see this coming. Or at least, I didn’t — a week ago, when I wrote about Nvidia’s board opening an investigation into then-CEO Jensen Huang, I assumed his job was safe.\n\nOn the latest episode of TechCrunch’s Equity podcast , Rebecca Bellan, Tim De Chant, and I discussed how Huang’s ouster went down and what it means for the larger AI economy. While Tim said he saw it coming (albeit not this quickly), Rebecca said, “I didn’t think it was going to happen at all.”\n\n“Jensen is Nvidia, right?” she added. “And so much of this economy is riding on Nvidia.”\n\nSimilarly, I marveled at how quickly Huang’s support seemed to crumble, with more scandals seeming to emerge every day. (At the same time, there are many who’d still like to see him return .) And we also took a moment to wonder what will happen to Nvidia’s investments in the larger AI ecosystem.\n\nKeep reading for a preview of our conversation, edited for length and clarity; you can listen to the whole episode here .\n\nTim De Chant: I figured this was coming. I didn’t think it would happen this quickly. I thought there would be at least a few days.\n\nRebecca Bellan: I didn’t think it was going to happen at all. I mean, Jensen is Nvidia, right? And so much of this economy is riding on Nvidia. And we’ve got nothing but the last few years of data to show us that billionaires can do whatever the hell they want. So it was surprising to me — it almost restored my faith in humanity, that he resigned.\n\nBut someone said to me, “If this were Elon, nothing would happen.” He would not be resigning. Nothing would be going down\n\nAnthony Ha: Which is interesting, because I would have said, as of a week ago, or even just a few days ago, that Jensen is in the same category as Elon. I mean, no one is quite as special as Elon is, but it’s a big, incredibly successful company. Like you said — in a lot of ways, the entire AI economy is built on top of Nvidia.\n\nAnd for most people, Jensen Huang is Nvidia. He’s the biggest shareholder. He has family members who work at the company, and probably most importantly, there was no succession plan in place. So this was not something that they were prepared for at all.\n\nRebecca: I think we should actually take a step back, because we just launched into this conversation assuming — rightly so — that our listeners will know what the heck we’re talking about.\n\nBut for those who somehow don’t, Jensen resigned on Thursday, after it came out he was having an affair with a former executive at an Nvidia customer called Megaspeed, who’s alleged to have ties to Chinese intelligence. And then there was another reported affair with an Nvidia executive.\n\nSo he’s resigned. Nvidia CFO Collette Kress is jumping in as the interim CEO. She’s a longtime board member. I think it’s always interesting when a CFO steps in to be a CEO. It just means we’re going to manage expenses right now, like that’s the key.\n\nAnthony: I think a big part of the message is: This is not necessarily someone you should expect to be in this role for the long term. No disrespect to her, but it feels like a caretaker appointment while they figure things out.\n\nJust to get into that backstory a little bit more, what has been really remarkable to me has been this sense that a lot of what ultimately brought Huang down, [that] stuff was at least known in intelligence circles for a while. Apparently, this report that [raises] questions, concerns about his relationship with Alice Huang is something that was circulating a year ago, or close to a year ago.\n\nAnd then suddenly, everything really accelerated, Starting over the weekend, with Jensen Huang admitting to having an affair, the board saying it was investigating, but that it still had a lot of faith in him. And then this week, this other affair being reported on, and it just felt like there was all this bad news coming fairly quickly.\n\nBut also, it wasn’t this thing that no one had known before. I guess a lot of the general public hadn’t known. So it’s this combined feeling of, “Wow, the ground kind of shifted so quickly under him,” even though the worst stuff, the possibility that somehow national security might have been threatened, is something that actually has been known by the government for nearly a year, if not more.\n\nRebecca: That’s exactly right. Trump was given some warnings about Huang’s affair with someone who has ties to Chinese intelligence, potentially, and it seemed like he didn’t really mind.\n\nI think what’s important here, though, is to note that Jensen Huang has been an advocate for loosening chip exports to China. And so this is where the crux of it is. Can anyone trust him as the CEO of this company when he’s advocating for loosening chip exports to China? Which a lot of people believe is a national security issue, because that means it will give Chinese AI companies access to our powerful chips, which will help them improve their AI, which could threaten America.\n\nI mean, there’s two sides of this coin. And I think, honestly, that Jensen does not need a woman to tell him that — he just wants to sell more chips, and to anybody and everybody, and whether or not that’s good for national security or not, I think is honestly secondary to him.\n\nTim: I completely agree. I think the big turning point seems to happen on November 9 — so that would have been earlier this week, Monday, when the Bloomberg report came out and suggested that Nvidia’s head attorney had some role in inquiring about the Department of Commerce’s investigation into Alice Huang.\n\nThings seem to have accelerated in the last few days following that. And I don’t know what role exactly that report played in it, but it seems to be maybe there was a shift within government or within the board, a kind of a daunting realization of the extent to which this had spread just beyond Jensen and some affair.\n\nAnthony: There’s also just the question of: What does this mean for Nvidia? What does this mean for the broader AI industry? And one of the reasons those two things are very tightly connected is not just Nvidia chips themselves, but also the fact that under Jensen Huang, the company has invested very, very heavily in a number of AI startups.\n\nPeople talk about the idea of an AI circular economy, and I think Nvidia has been one of the biggest players in that, in terms of both funding a lot of things, [but] also, obviously, providing the infrastructure for a lot of AI projects. So if Nvidia is going into this stage of lockdown, circle the wagons — even if it just means a small pullback, that could have really dramatic repercussions.\n\nRebecca: Yeah, that’s what I want to know: What happens to the Bank of Nvidia without Jensen? Is he the one leading this?\n\nJust to throw some numbers at you, Nvidia apparently accounts for roughly 80% of the AI GPU market. It reported $99 billion in investments and another $25 billion in commitments, plus $36 billion dollars in cloud service commitments. A lot of those include investments into CoreWeave, Nebius, OpenAI, Anthropic, major data center projects. They’ve got their fingers in literally everybody’s pie.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/11/15/is-bad-news-for-jensen-huang-also-bad-news-for-the-ai-industry/",
-      "publishedAt": "2026-11-15T21:56:35.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-1d77423e245bf7de:en",
-      "sourceId": "the-verge-1d77423e245bf7de",
-      "lang": "en",
-      "title": "Congress wants to tighten export rules on AI chips after Nvidia spy scandal",
-      "summary": "Unsurprisingly, following the scandal involving now-former Nvidia CEO Jensen Huang and a suspected Chinese spy, Congress is looking to further restrict exports of AI chips. Both Democrats and Republicans have voiced support for various measures and bills that would tighten rules and have demanded that Huang and other Nvidia leaders testify before Congress. Senate Minority […]",
-      "body": "Unsurprisingly, following the scandal involving now-former Nvidia CEO Jensen Huang and a suspected Chinese spy, Congress is looking to further restrict exports of AI chips. Both Democrats and Republicans have voiced support for various measures and bills that would tighten rules and have demanded that Huang and other Nvidia leaders testify before Congress.\n\nSenate Minority Leader Chuck Schumer has already said that Huang and the Trump administration need to answer to Congress . Senate Banking Committee Chairman Tim Scott has also sent letters to both Huang and Commerce Secretary Howard Lutnick calling on them to publicly testify to the commit …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1033984/congress-export-rules-ai-chips-china",
-      "publishedAt": "2026-11-15T19:15:43.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-10f865ab2976e5b6:en",
-      "sourceId": "9to5mac-10f865ab2976e5b6",
-      "lang": "en",
-      "title": "Apple engineers ‘actively working’ on Face ID for iPhone Duo 2’s outer display: report",
-      "summary": "Next fall, Apple will introduce its second-generation iPhone Duo. It’s unclear what it’ll offer in terms of meaningful upgrades outside of the usual chip upgrades and camera improvements, but Apple engineers are reportedly attempting to bake Face ID into the device. That said, the feature might not make the cutoff. more…",
-      "body": "Next fall, Apple will introduce its second-generation iPhone Duo. It’s unclear what it’ll offer in terms of meaningful upgrades outside of the usual chip upgrades and camera improvements, but Apple engineers are reportedly attempting to bake Face ID into the device. That said, the feature might not make the cutoff.\n\nAccording to Bloomberg’s Mark Gurman , Apple has two priorities for iPhone Duo: Face ID and the Action Button. The latter might just end up being a new software addition to Camera Control that allows you to remap the hold action from Siri in Camera to an app of your choice.\n\nAs for Face ID, Apple engineers are ‘actively working’ on integrating the technology on the device, specifically on the outer display:\n\nOther goals for the next couple of generations include adding a telephoto camera and making the device thinner and lighter overall. But Face ID is the top priority. I’m told that Apple has already developed prototypes of the iPhone Duo 2 with Face ID, and engineers are still actively working to integrate the facial-recognition system into the outer display of the second-generation model.\n\nThat said, the feature might not make it. According to Gurman, the timelines are tight here and it isn’t quite ready – so he isn’t reporting with certainty on whether or not this feature will make it. If it doesn’t debut with the iPhone Duo 2, it’ll likely be in the cards for iPhone Duo 3 in 2028.\n\nLater down the road, the company wants to introduce an improved camera system for the iPhone Duo, including a telephoto camera. It also wants to make the device even thinner and lighter. The Duo definitely needs to be lighter, but making it even thinner would be an interesting feat.\n\nWhile Face ID on the iPhone Duo would certainly be much appreciated, I’m not quite convinced that it’ll be super meaningful on only the outer display.\n\nI’m fine with Touch ID, but whenever it is bothersome, it’s usually on the inner display, where it can be hard to reach the button depending on how you’re holding the device. If I could only have Face ID on one display, I think I’d rather have it on the inner display.\n\nOrientation can make a huge difference for how you reach Touch ID on the inner display, whereas you’re generally only going to hold the outer display one of two ways: upright in your left hand, or upright in your right hand.\n\nSome of my favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/15/apple-engineers-actively-working-on-face-id-for-iphone-duo-2s-outer-display-report/",
-      "publishedAt": "2026-11-15T16:36:12.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-b8975d4445f43a4b:en",
-      "sourceId": "9to5mac-b8975d4445f43a4b",
-      "lang": "en",
-      "title": "Apple’s Siri AI smart glasses are reportedly launching next year, here’s what to expect",
-      "summary": "Apple’s long awaited smart glasses, akin to Meta Ray-Bans but tailored to Siri AI and the Apple ecosystem, are almost here. According to Bloomberg’s Mark Gurman , the product should be introduced at the next WWDC, and they should be on the market by the end of the year. Here’s what to expect. more…",
-      "body": "Apple’s long awaited smart glasses, akin to Meta Ray-Bans but tailored to Siri AI and the Apple ecosystem, are almost here. According to Bloomberg’s Mark Gurman , the product should be introduced at the next WWDC, and they should be on the market by the end of the year. Here’s what to expect.\n\nFirst and foremost, Apple wants to rely on its deep app ecosystem to give its glasses a boost. While companies like Meta are undeniably leading in the agentic AI assistant game, the third party app integration just isn’t quite there.\n\nStarting with iOS 27.3 beta, Apple is finally l aying the groundwork for proper third party app integration within Siri, rather than just Siri Shortcuts. By the time the glasses release at the end of next year, there should be a plethora of third-party integrations to utilize.\n\nThat said, the glasses themselves won’t run apps directly. Everything will rely on a nearby iPhone, per Gurman . The glasses will still have Wi-Fi for apps to function if an iPhone isn’t nearby, but these will largely serve as an iPhone accessory.\n\nAccording to the report, Apple’s glasses will likely be slightly thinner than a pair of Meta Ray-Bans :\n\nIn terms of industrial design, internal prototypes are slightly thinner than Meta’s second-generation Ray-Ban glasses. At least on some test units, the cameras are housed in oval-shaped openings that sit flush with the frame — rather than protruding from it. There’s also a light on the front that shows when the glasses are in use or charging. Apple has been experimenting with other features on the front of the glasses related to privacy.\n\nLastly, a big focus of these glasses is the audio quality. According to Bloomberg , engineers are describing the audio quality as “industry-leading.”\n\nSome of my favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/15/apples-siri-ai-smart-glasses-are-reportedly-launching-next-year-heres-what-to-expect/",
-      "publishedAt": "2026-11-15T15:48:52.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "gafas-inteligentes",
-        "ia-accesibilidad"
       ]
     },
     {
@@ -6019,54 +6046,6 @@
         "programas-accesibles",
         "ia-accesibilidad",
         "sordoceguera"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-d68f8686e65bbcc0:en",
-      "sourceId": "ars-technica-d68f8686e65bbcc0",
-      "lang": "en",
-      "title": "FAA expands AI advice to manage air traffic congestion across entire US airspace",
-      "summary": "Airlines praised the AI tool, but the air traffic controllers’ union wasn’t involved.",
-      "body": "The US government has expanded the use of an AI tool for advising air traffic controllers to assist in managing air traffic across the entire national airspace system. Airline executives have voiced support for the rollout, but the US labor union representing air traffic controllers has said it was not involved in designing or testing the AI-driven system.\n\nThe Federal Aviation Administration (FAA) says the $875 million SMART system has helped reroute 180 flights since being implemented in airspace over Washington, DC, on September 21. The agency claims that this saved an average of 10 minutes per flight and almost 80 gallons of fuel per flight—and it is apparently hoping such results can be replicated nationwide through the expanded deployment.\n\n“After a successful initial rollout to the National Capital Region in September, the FAA will now use SMART in the airspace of all 22 centers across the country to reduce delays, reduce fuel consumption and improve the travel experience for the flying public,” according to the agency statement posted on November 10.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/features/2026/11/faa-expands-ai-advice-to-manage-air-traffic-congestion-across-entire-us-airspace/",
-      "publishedAt": "2026-11-13T21:20:47.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-6ca9a561bc4de7e4:en",
-      "sourceId": "ars-technica-6ca9a561bc4de7e4",
-      "lang": "en",
-      "title": "OpenAI board member worries an AI \"takeover\" of society could be months away",
-      "summary": "Researcher traces a path from AI reward hacking to potential human extinction.",
-      "body": "How do you think you're going to die?\n\nIf you go by the current statistics for deaths in the US , it's reasonable to expect that cancer or heart disease will eventually get you. But OpenAI Foundation board member and Alignment Research Center Executive Director Paul Cristiano thinks we should all be worried about another major mortality risk. Speaking at a lecture series this week , Cristiano bluntly told the audience in a Toronto Convention Center, \"I think for most people in this room, the most likely reason they will die is because of an AI accident.\"\n\nIn the opening lecture of a three-part series , Cristiano outlined his worries about the risk of an impending \"AI takeover.\" He defined that as a situation where goal-pursuing AI systems \"call the shots in the same sense that humans today call the shots and what happens on Earth\" and where any human trying to stop them \"would be as ineffective as if you or me was trying to stop the US military.\" Such a situation would likely lead to mass death and perhaps uninhabitable environments for humans, Cristiano said.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/ai/2026/11/ai-is-the-most-likely-reason-youll-die-openai-board-member-warns/",
-      "publishedAt": "2026-11-13T17:25:45.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-b39321d3c27538fb:en",
-      "sourceId": "ars-technica-b39321d3c27538fb",
-      "lang": "en",
-      "title": "Windows 0-day dropped by disgruntled researcher hands hackers System rights",
-      "summary": "\"SignDrop\" exploit lets local users gain all-powerful System rights.",
-      "body": "Nightmare Eclipse, the pseudonym of a researcher with an ongoing, very public beef with Microsoft, has dropped yet another Windows zero-day.\n\nOn Tuesday, Nightmare Eclipse disclosed SignDrop, a vulnerability that gives local users full System rights on some versions of Windows. The vulnerability resides in the Common Log File System , which Microsoft describes as a “general-purpose logging service used by software clients running in user-mode or kernel-mode.” By forcing a privileged process such as Windows Defender to open a crafted CLFS container, an attacker with ordinary user rights can abuse the privileged file creation to elevate privileges to System.\n\nThe attack exploits the interaction of CLFS, Windows Defender, and Windows file permissions. The exploit uses Windows Defender to open a log file created by a standard user by calling ServerMpUpdateEngineSignature, a legitimate Defender function for processing antivirus signature updates.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/security/2026/11/windows-0-day-dropped-by-disgruntled-researcher-hands-hackers-system-rights/",
-      "publishedAt": "2026-11-13T16:26:32.000Z",
-      "categories": [
-        "tecnologia-general",
-        "windows"
       ]
     },
     {

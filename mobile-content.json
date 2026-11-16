@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T02:46:11.410Z",
+  "generatedAt": "2026-11-16T09:48:34.106Z",
   "resources": [
     {
       "kind": "resource",
@@ -6361,23 +6361,6 @@
         "nvda",
         "windows",
         "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "conticgo-f193b5663d959666:es",
-      "sourceId": "conticgo-f193b5663d959666",
-      "lang": "es",
-      "title": "Eva: la inteligencia artificial que adapta unas gafas inteligentes a las necesidades visuales de cada persona",
-      "summary": "La inteligencia artificial continúa abriendo nuevas posibilidades para mejorar la autonomía de las personas con discapacidad visual. La última propuesta llega de la mano de Eyedaptic, una empresa especializada en tecnología de mejora visual que acaba de anunciar el lanzamiento de Eva, un asistente inteligente integrado en sus gafas EYE7. La principal novedad es que […] La entrada Eva: la inteligencia artificial que adapta unas gafas inteligentes a las necesidades visuales de cada persona se publicó primero en Conticgo .",
-      "body": "La inteligencia artificial continúa abriendo nuevas posibilidades para mejorar la autonomía de las personas con discapacidad visual. La última propuesta llega de la mano de Eyedaptic , una empresa especializada en tecnología de mejora visual que acaba de anunciar el lanzamiento de Eva, un asistente inteligente integrado en sus gafas EYE7.\n\nLa principal novedad es que Eva no se limita a describir lo que aparece delante de la cámara. También puede interpretar lo que necesita el usuario y actuar sobre las funciones de mejora visual de las gafas.\n\nHasta ahora, muchas herramientas de asistencia visual basadas en inteligencia artificial se han centrado en reconocer objetos, leer textos o describir escenas. Eva pretende ir un paso más allá.\n\nSu funcionamiento se basa en la interpretación de instrucciones expresadas mediante lenguaje natural. Esto permite que la persona pueda comunicarse con las gafas de una manera más intuitiva, sin necesidad de aprender comandos específicos.\n\nPor ejemplo, si alguien está intentando leer un cartel y dice «no consigo leer eso», Eva puede interpretar la petición y ajustar la experiencia visual para facilitar la lectura.\n\nDe esta manera, la tecnología no solo proporciona información sobre el entorno, sino que también puede modificar determinados ajustes de las gafas para adaptarlos a la actividad que se está realizando.\n\nSegún Eyedaptic, el asistente está diseñado para ayudar en diferentes situaciones de la vida cotidiana. Entre sus aplicaciones se encuentran:\n\nAdemás, la compañía indica que Eva permite comunicarse en hasta 99 idiomas, lo que amplía sus posibilidades de utilización.\n\nEva está integrada en las gafas EYE7 de Eyedaptic, un dispositivo que combina tecnología de visión artificial, inteligencia artificial y realidad aumentada.\n\nEstas gafas incorporan pantallas de alta definición y diferentes funciones de mejora visual. Su objetivo es ayudar a las personas con pérdida de visión central, especialmente aquellas con enfermedades de la retina como la degeneración macular asociada a la edad (DMAE).\n\nUna de sus características es que las funciones pueden controlarse mediante instrucciones de voz, lo que permite interactuar con el dispositivo sin tener que manejar constantemente sus controles.\n\nLa llegada de Eva refuerza esta propuesta: la inteligencia artificial puede interpretar las necesidades de la persona y actuar directamente sobre las funciones de mejora visual disponibles.\n\nEyedaptic ha comunicado que, durante sus pruebas internas, Eva alcanzó una precisión superior al 99 % en lectura y del 97 % en la interpretación de comandos.\n\nLa empresa también señala que el asistente ya está disponible para los usuarios de EYE7 mediante una actualización remota del software, por lo que no es necesario adquirir unas gafas nuevas para incorporar esta función.\n\nNo obstante, estas cifras deben interpretarse con cautela. Se trata de resultados comunicados por el fabricante y no de una evaluación independiente publicada en una revista científica. Será necesario conocer su funcionamiento en situaciones reales y con diferentes perfiles de discapacidad visual para valorar su utilidad.\n\nLa propuesta de Eyedaptic refleja una tendencia cada vez más presente en la tiflotecnología: desarrollar herramientas que no solo proporcionen información sobre el entorno, sino que también se adapten a las necesidades de cada persona.\n\nPara quienes tienen baja visión, poder ajustar una ayuda visual mediante una conversación sencilla puede facilitar determinadas actividades y reducir la necesidad de navegar por menús o aprender controles específicos.\n\nSin embargo, estas soluciones deben entenderse como herramientas de apoyo. No recuperan la visión ni sustituyen la rehabilitación visual, las ayudas ópticas o los dispositivos de movilidad.\n\nEl verdadero potencial de Eva dependerá de su rendimiento en el día a día, de su facilidad de uso y de cómo responda a las necesidades reales de las personas con discapacidad visual.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuente de la noticia: Eyedaptic .",
-      "sourceName": "Conticgo",
-      "originalUrl": "https://conticgo.net/eva-la-inteligencia-artificial-que-adapta-unas-gafas-inteligentes-a-las-necesidades-visuales-de-cada-persona/",
-      "publishedAt": "2026-11-06T07:00:23.000Z",
-      "categories": [
-        "tecnologia-accesibilidad",
-        "gafas-inteligentes",
-        "ia-accesibilidad"
       ]
     }
   ]

@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/check-ios-testflight-external.yml'
+      - 'apple-chat-requests/*.json'
   workflow_dispatch:
     inputs:
       build:

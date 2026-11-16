@@ -23,3 +23,32 @@ jobs:
       - name: Consultar disponibilidad de informes sin modificar Apple
         if: env.API_ID != '' && env.API_ISSUER != '' && env.API_PRIVATE != ''
         run: node .github/scripts/apple-analytics-access-probe.mjs
+      - name: Verificar solicitud ONGOING con la clave permanente
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import crypto from 'node:crypto';
+          import fs from 'node:fs';
+          try {
+            for (const name of ['API_ID','API_ISSUER','API_PRIVATE']) {
+              if (!process.env[name]) throw new Error('Faltan credenciales permanentes de Analytics.');
+            }
+            let key = process.env.API_PRIVATE.trim().replace(/^['"]|['"]$/g,'').replace(/\\r\\n/g,'\n').replace(/\\n/g,'\n');
+            if (!key.includes('-----BEGIN')) key = Buffer.from(key,'base64').toString('utf8');
+            const encode = value => Buffer.from(JSON.stringify(value)).toString('base64url');
+            const now = Math.floor(Date.now()/1000);
+            const message = encode({alg:'ES256',kid:process.env.API_ID,typ:'JWT'})+'.'+encode({iss:process.env.API_ISSUER,iat:now-30,exp:now+600,aud:'appstoreconnect-v1'});
+            const token = message+'.'+crypto.sign('sha256',Buffer.from(message),{key,dsaEncoding:'ieee-p1363'}).toString('base64url');
+            const id = 'b26b6c8c-d699-48b1-8b62-cd66071c81ee';
+            const response = await fetch('https://api.appstoreconnect.apple.com/v1/analyticsReportRequests/'+id,{method:'GET',redirect:'error',headers:{Authorization:'Bearer '+token},signal:AbortSignal.timeout(45000)});
+            if (response.status !== 200) throw new Error('Apple HTTP '+response.status);
+            const {data} = await response.json();
+            if (data?.id !== id || data.attributes?.accessType !== 'ONGOING' || data.attributes?.stoppedDueToInactivity !== false) throw new Error('La solicitud indicada no está activa.');
+            const output = JSON.stringify({requestId:data.id,accessType:data.attributes.accessType,stoppedDueToInactivity:data.attributes.stoppedDueToInactivity,verifiedWith:'TifloAcosta Analytics',verifiedAt:new Date().toISOString()},null,2);
+            console.log(output);
+            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,'\n## Comprobación de la solicitud periódica\n\n~~~json\n'+output+'\n~~~\n');
+          } catch (error) {
+            console.error(/^(Apple HTTP|Faltan credenciales|La solicitud)/.test(error.message) ? error.message : 'No se pudo verificar Analytics; las credenciales no se muestran.');
+            process.exitCode = 1;
+          }
+          NODE

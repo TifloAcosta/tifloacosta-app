@@ -1,0 +1,52 @@
+name: Vincular compilación TestFlight aprobada por Tony
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'testflight-approvals/*.json'
+      - '.github/workflows/link-approved-testflight-build.yml'
+permissions:
+  contents: read
+jobs:
+  link:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+      API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+      API_PRIVATE: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Comprobar las restricciones de vinculación
+        run: node --test .github/scripts/testflight-link-build.test.mjs
+      - name: Identificar una nueva aprobación
+        id: approval
+        shell: bash
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+        run: |
+          if [[ "$BEFORE_SHA" =~ ^0+$ ]]; then
+            echo 'No se admiten aprobaciones en el primer commit de una rama.'
+            exit 1
+          fi
+          mapfile -t files < <(git diff --name-only --diff-filter=A "$BEFORE_SHA" "$GITHUB_SHA" -- 'testflight-approvals/*.json')
+          if [[ ${#files[@]} -gt 1 ]]; then
+            echo '::error::Solo una vinculación aprobada por ejecución.'
+            exit 1
+          fi
+          if [[ ${#files[@]} -eq 0 ]]; then
+            echo 'No hay solicitudes nuevas; comprobación del sistema solamente.'
+            echo 'has_approval=false' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo 'has_approval=true' >> "$GITHUB_OUTPUT"
+          echo "file=${files[0]}" >> "$GITHUB_OUTPUT"
+      - name: Vincular compilación al grupo indicado
+        if: steps.approval.outputs.has_approval == 'true'
+        env:
+          APPROVAL_FILE: ${{ steps.approval.outputs.file }}
+          LINK_EXECUTE: 'true'
+          LINK_APPROVED: 'YES'
+        run: node .github/scripts/testflight-link-build.mjs

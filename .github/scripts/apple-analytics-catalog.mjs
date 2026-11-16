@@ -13,7 +13,7 @@ const token = unsigned + '.' + crypto.sign('sha256', Buffer.from(unsigned), { ke
 const client = createAnalyticsClient({ token });
 const requestId = 'b26b6c8c-d699-48b1-8b62-cd66071c81ee';
 const reports = await client.listReports(requestId);
-const selected = reports.filter(x => /App Store Downloads|App Store Installations and Deletions|App Sessions|App Store Discovery and Engagement|App Store Web Preview/i.test(x.attributes?.name || '')).slice(0, 25);
+const selected = reports.filter(x => /Download|Install|Delet|Session|Engagement|Preview/i.test(x.attributes?.name || '')).slice(0, 35);
 const overview = [];
 for (const report of selected) {
   const instances = await client.listInstances(report.id);

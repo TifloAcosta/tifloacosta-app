@@ -1,0 +1,83 @@
+name: Activar informes periodicos de Apple
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/setup-apple-analytics-ongoing.yml'
+permissions:
+  contents: read
+concurrency:
+  group: setup-apple-analytics-ongoing
+  cancel-in-progress: false
+jobs:
+  configure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Registrar ONGOING y verificar con Analytics
+        env:
+          ADMIN_KEY_ID: ${{ secrets.APPSTORE_REPORTS_ADMIN_KEY_ID }}
+          ADMIN_ISSUER_ID: ${{ secrets.APPSTORE_REPORTS_ADMIN_ISSUER_ID }}
+          ADMIN_PRIVATE_KEY: ${{ secrets.APPSTORE_REPORTS_ADMIN_PRIVATE_KEY }}
+          READER_KEY_ID: ${{ secrets.APPSTORE_ANALYTICS_KEY_ID }}
+          READER_ISSUER_ID: ${{ secrets.APPSTORE_ANALYTICS_ISSUER_ID }}
+          READER_PRIVATE_KEY: ${{ secrets.APPSTORE_ANALYTICS_PRIVATE_KEY }}
+        shell: bash
+        run: |
+          node <<'NODE'
+          const crypto = require('node:crypto');
+          const fs = require('node:fs');
+          const APP = '6820517829';
+          const BASE = 'https://api.appstoreconnect.apple.com/v1';
+          const enc = value => Buffer.from(JSON.stringify(value)).toString('base64url');
+          function token(prefix) {
+            const kid = process.env[prefix + '_KEY_ID'];
+            const iss = process.env[prefix + '_ISSUER_ID'];
+            const pem = process.env[prefix + '_PRIVATE_KEY'];
+            if (!kid || !iss || !pem) throw new Error('Faltan secretos protegidos.');
+            const now = Math.floor(Date.now() / 1000);
+            const message = enc({alg:'ES256',kid,typ:'JWT'}) + '.' + enc({iss,iat:now-30,exp:now+600,aud:'appstoreconnect-v1'});
+            const signature = crypto.sign('sha256', Buffer.from(message), {key:crypto.createPrivateKey(pem.replace(/\\n/g,'\n')),dsaEncoding:'ieee-p1363'}).toString('base64url');
+            return message + '.' + signature;
+          }
+          async function api(path, jwt, method='GET', body) {
+            const url = new URL(path, BASE + '/');
+            if (url.origin !== 'https://api.appstoreconnect.apple.com' || !url.pathname.startsWith('/v1/')) throw new Error('Destino no permitido.');
+            const response = await fetch(url, {method,redirect:'error',headers:{Authorization:'Bearer '+jwt,'Content-Type':'application/json'},body:body ? JSON.stringify(body) : undefined,signal:AbortSignal.timeout(45000)});
+            if (!response.ok) throw new Error('Apple HTTP ' + response.status + ' en ' + method + ' ' + url.pathname);
+            return response.json();
+          }
+          async function pages(path,jwt) {
+            const rows=[]; const visited=new Set();
+            while(path) {
+              if(visited.has(path) || visited.size>=50) throw new Error('Paginación no válida.');
+              visited.add(path);
+              const result=await api(path,jwt);
+              if(!Array.isArray(result.data)) throw new Error('Respuesta de Apple inesperada.');
+              rows.push(...result.data); path=result.links?.next;
+            }
+            return rows;
+          }
+          (async()=>{
+            const admin=token('ADMIN');
+            const existing=await pages('apps/'+APP+'/analyticsReportRequests?limit=200',admin);
+            let request=existing.find(r=>r.attributes?.accessType==='ONGOING' && r.attributes?.stoppedDueToInactivity===false);
+            let created=false;
+            if(!request) {
+              const result=await api('analyticsReportRequests',admin,'POST',{data:{type:'analyticsReportRequests',attributes:{accessType:'ONGOING'},relationships:{app:{data:{type:'apps',id:APP}}}}});
+              request=result.data; created=true;
+            }
+            if(!request?.id || request.attributes?.accessType!=='ONGOING') throw new Error('No se ha confirmado una solicitud ONGOING.');
+            const reader=token('READER');
+            const confirmed=await api('analyticsReportRequests/'+encodeURIComponent(request.id),reader);
+            if(confirmed.data?.attributes?.accessType!=='ONGOING' || confirmed.data?.attributes?.stoppedDueToInactivity!==false) throw new Error('La solicitud no está activa.');
+            const list=await pages('apps/'+APP+'/analyticsReportRequests?limit=200',reader);
+            if(!list.some(r=>r.id===request.id)) throw new Error('La solicitud no figura en la app.');
+            const reports=await pages('analyticsReportRequests/'+encodeURIComponent(request.id)+'/reports?limit=200',reader);
+            const output={appId:APP,verifiedAt:new Date().toISOString(),created,requestId:request.id,accessType:confirmed.data.attributes.accessType,stoppedDueToInactivity:confirmed.data.attributes.stoppedDueToInactivity,verifiedWith:'TifloAcosta Analytics',requests:list.map(r=>({id:r.id,...r.attributes})),reports:reports.map(r=>({id:r.id,name:r.attributes?.name,category:r.attributes?.category}))};
+            const safe=JSON.stringify(output,null,2);
+            console.log(safe);
+            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,'# Informes periódicos de TifloAcosta\n\n~~~json\n'+safe+'\n~~~\n\nLos primeros informes pueden tardar 24–48 horas. No se han revocado claves ni eliminado secretos.\n');
+          })().catch(error=>{ console.error('Configuración no completada: '+(/^(Apple HTTP|Faltan secretos|No se ha|La solicitud|Destino|Paginación|Respuesta)/.test(error.message)?error.message:'Error de autenticación o conexión; no se muestran credenciales.'));process.exitCode=1; });
+          NODE

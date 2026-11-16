@@ -1,0 +1,21 @@
+name: Comprobar acceso a estadísticas App Store desde ChatGPT
+on:
+  push:
+    branches: [apple-chat-commands]
+    paths:
+      - 'apple-chat-analytics-requests/*.json'
+      - '.github/workflows/check-ios-app-analytics.yml'
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+      API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+      API_PRIVATE: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Consultar disponibilidad de informes sin modificar Apple
+        run: node .github/scripts/apple-analytics-access-probe.mjs

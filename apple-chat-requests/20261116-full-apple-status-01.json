@@ -1,0 +1,12 @@
+{
+  "requestId": "20261116-full-apple-status-01",
+  "source": "ChatGPT",
+  "mode": "read-only",
+  "checks": [
+    "appstore-reviews",
+    "testflight-external",
+    "testflight-groups",
+    "appstore-versions"
+  ],
+  "purpose": "Auditoría completa desde chat sin cambios en Apple"
+}

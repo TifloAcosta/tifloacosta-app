@@ -1,0 +1,11 @@
+{
+  "requestId": "20261116-isolated-read-01",
+  "source": "ChatGPT",
+  "mode": "read-only",
+  "checks": [
+    "appstore-reviews",
+    "testflight-external"
+  ],
+  "build": "500159",
+  "purpose": "Verificar rama aislada sin publicación ni envíos"
+}

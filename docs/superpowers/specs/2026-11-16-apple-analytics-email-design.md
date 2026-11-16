@@ -16,9 +16,9 @@ Entregar a tonytenerife@gmail.com un resumen en español al detectar nuevos info
 
 ## Decisiones y límites
 - Apple no emite webhook de nuevos informes: GitHub Actions realizará polling cada seis horas.
-- Propuesta: estado persistido en rama dedicada o artifact duradero, con actualización atómica y bloqueo de concurrencia; avanzar marcador solo tras entrega confirmada. Ninguna clave privada ni informe bruto sensible se registrará en el repositorio.
+- El sistema ChatGPT Automations comprueba cada seis horas los datos procesados y usa la conexión Gmail existente para enviar desde y hacia tonytenerife@gmail.com. La búsqueda de enviados con identificadores de segmento evita duplicados; no se necesitan secretos SMTP nuevos. Ninguna clave privada ni informe bruto sensible se registrará en el repositorio.
 - Datos faltantes no equivalen a cero; separar fecha de procesamiento y fecha de métrica; evitar sumas entre métricas diferentes.
-- No enviar emails reales hasta disponer de credenciales de envío protegidas y una prueba explícitamente autorizada. Remitente por decidir con Tony; preferir un servicio conectado que ya controle.
+- La cuenta remitente/destinataria tonytenerife@gmail.com fue confirmada por Tony y verificada en el conector Gmail. Enviar solo cifras realmente procesadas y contrastadas; no enviar si no se puede verificar la ausencia de duplicados.
 - Los archivos analíticos pueden contener campos sujetos a privacidad; el correo debe ser un resumen agregado sin registros identificables.
 
 ## Opciones consideradas

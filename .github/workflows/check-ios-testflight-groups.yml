@@ -2,9 +2,10 @@ name: Auditar grupos y probadores de TestFlight
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [main, apple-chat-commands]
     paths:
       - '.github/workflows/check-ios-testflight-groups.yml'
+      - 'apple-chat-requests/*.json'
 permissions:
   contents: read
 jobs:

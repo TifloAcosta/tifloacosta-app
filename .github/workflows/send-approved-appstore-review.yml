@@ -1,0 +1,52 @@
+name: Enviar respuesta de reseña aprobada por Tony
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'review-approvals/*.json'
+      - '.github/workflows/send-approved-appstore-review.yml'
+permissions:
+  contents: read
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+      API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+      API_PRIVATE: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Comprobar las protecciones de las respuestas
+        run: node --test .github/scripts/appstore-review-reply.test.mjs
+      - name: Identificar una única aprobación nueva
+        id: approval
+        shell: bash
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+        run: |
+          if [[ "$BEFORE_SHA" =~ ^0+$ ]]; then
+            echo 'No se admiten envíos desde una rama recién creada.'
+            exit 1
+          fi
+          mapfile -t files < <(git diff --name-only --diff-filter=A "$BEFORE_SHA" "$GITHUB_SHA" -- 'review-approvals/*.json')
+          if [[ ${#files[@]} -gt 1 ]]; then
+            echo '::error::Una única aprobación por envío.'
+            exit 1
+          fi
+          if [[ ${#files[@]} -eq 0 ]]; then
+            echo 'No hay una aprobación nueva; solamente se ha actualizado el sistema.'
+            echo 'has_approval=false' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo 'has_approval=true' >> "$GITHUB_OUTPUT"
+          echo "file=${files[0]}" >> "$GITHUB_OUTPUT"
+      - name: Enviar solo la respuesta expresamente aprobada
+        if: steps.approval.outputs.has_approval == 'true'
+        env:
+          APPROVAL_FILE: ${{ steps.approval.outputs.file }}
+          REPLY_EXECUTE: 'true'
+          REPLY_APPROVED: 'YES'
+        run: node .github/scripts/appstore-review-reply.mjs

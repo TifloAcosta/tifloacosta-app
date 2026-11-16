@@ -1,0 +1,20 @@
+name: Test Apple Analytics report parser
+on:
+  push:
+    branches: [apple-chat-commands]
+    paths:
+      - '.github/scripts/apple-analytics-reports.mjs'
+      - '.github/scripts/apple-analytics-reports.test.mjs'
+      - '.github/workflows/test-apple-analytics-reports.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test .github/scripts/apple-analytics-reports.test.mjs

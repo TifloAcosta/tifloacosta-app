@@ -4,7 +4,7 @@ on:
     - cron: '37 */6 * * *'
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [main, apple-chat-commands]
     paths:
       - '.github/workflows/check-ios-appstore-reviews.yml'
       - 'apple-chat-requests/*.json'

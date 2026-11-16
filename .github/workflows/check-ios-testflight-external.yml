@@ -1,5 +1,9 @@
 name: Consultar aprobación beta externa TestFlight
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/check-ios-testflight-external.yml'
   workflow_dispatch:
     inputs:
       build:

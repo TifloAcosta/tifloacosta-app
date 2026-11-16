@@ -29,15 +29,29 @@ test('does not dispatch if main changed after approval',async()=>{
   assert.equal(calls.length,1);
 });
 
-test('dispatches existing upload workflow on main only when SHA matches',async()=>{
+test('claims a unique tag and dispatches the approved SHA, not a moving main branch',async()=>{
   const calls=[];
   const fetchImpl=async(url,options)=>{
     calls.push({url,options});
     if(calls.length===1)return {ok:true,status:200,json:async()=>({object:{sha}})};
+    if(calls.length===2)return {ok:true,status:201};
     return {ok:true,status:204};
   };
   await dispatchUpload({requestId,expectedMainSha:sha},{fetchImpl,repo:'TifloAcosta/tifloacosta-app',token:'test'});
-  assert.equal(calls.length,2);
-  assert.match(calls[1].url,/ios-native-testflight-upload\.yml\/dispatches$/);
-  assert.deepEqual(JSON.parse(calls[1].options.body),{ref:'main'});
+  assert.equal(calls.length,3);
+  assert.match(calls[1].url,/\/git\/refs$/);
+  assert.deepEqual(JSON.parse(calls[1].options.body),{ref:`refs/tags/apple-chat-upload-${requestId}`,sha});
+  assert.match(calls[2].url,/ios-native-testflight-upload\.yml\/dispatches$/);
+  assert.deepEqual(JSON.parse(calls[2].options.body),{ref:`apple-chat-upload-${requestId}`});
+});
+
+test('refuses a second dispatch when the unique tag already exists',async()=>{
+  let count=0;
+  const fetchImpl=async()=>{
+    count++;
+    if(count===1)return {ok:true,status:200,json:async()=>({object:{sha}})};
+    return {ok:false,status:422};
+  };
+  await assert.rejects(()=>dispatchUpload({requestId,expectedMainSha:sha},{fetchImpl,repo:'TifloAcosta/tifloacosta-app',token:'test'}),/utilizada/);
+  assert.equal(count,2);
 });

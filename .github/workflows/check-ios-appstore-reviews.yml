@@ -1,5 +1,7 @@
 name: Consultar reseñas de TifloAcosta en App Store
 on:
+  schedule:
+    - cron: '37 */6 * * *'
   workflow_dispatch:
   push:
     branches: [main]

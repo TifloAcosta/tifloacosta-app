@@ -1,0 +1,53 @@
+name: Validar orden de TestFlight desde ChatGPT (sin enviar)
+on:
+  push:
+    branches: [apple-chat-commands]
+    paths:
+      - 'testflight-upload-approvals/*.json'
+      - '.github/workflows/apple-chat-testflight-upload-approval.yml'
+permissions:
+  contents: read
+  actions: write
+concurrency:
+  group: apple-chat-testflight-upload-approval
+  cancel-in-progress: false
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Probar validación de autorización
+        run: node --test .github/scripts/apple-chat-upload-approval.test.mjs
+      - name: Detectar una única orden nueva
+        id: approval
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$BEFORE_SHA" =~ ^0+$ ]]; then
+            echo 'No se admiten órdenes desde una rama recién creada.'
+            exit 1
+          fi
+          mapfile -t files < <(git diff --name-only --diff-filter=A "$BEFORE_SHA" "$GITHUB_SHA" -- 'testflight-upload-approvals/*.json')
+          if [[ ${#files[@]} -gt 1 ]]; then
+            echo '::error::Solo se admite una autorización por envío.'
+            exit 1
+          fi
+          if [[ ${#files[@]} -eq 0 ]]; then
+            echo 'No se ha solicitado una nueva compilación.'
+            echo 'has_approval=false' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo 'has_approval=true' >> "$GITHUB_OUTPUT"
+          echo "file=${files[0]}" >> "$GITHUB_OUTPUT"
+      - name: Validar sin iniciar subida
+        if: steps.approval.outputs.has_approval == 'true'
+        env:
+          APPROVAL_FILE: ${{ steps.approval.outputs.file }}
+          UPLOAD_DISPATCH_EXECUTE: 'false'
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node .github/scripts/apple-chat-upload-approval.mjs

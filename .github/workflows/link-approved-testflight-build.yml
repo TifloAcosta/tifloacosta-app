@@ -5,6 +5,7 @@ on:
     paths:
       - 'testflight-approvals/*.json'
       - '.github/workflows/link-approved-testflight-build.yml'
+      - 'apple-chat-write-checks/*.json'
 permissions:
   contents: read
 jobs:

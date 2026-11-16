@@ -7,7 +7,7 @@ on:
       - '.github/workflows/apple-chat-testflight-upload-approval.yml'
 permissions:
   contents: read
-  actions: write
+  actions: read
 concurrency:
   group: apple-chat-testflight-upload-approval
   cancel-in-progress: false

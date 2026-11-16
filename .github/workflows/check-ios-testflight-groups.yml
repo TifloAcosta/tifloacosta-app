@@ -1,0 +1,23 @@
+name: Auditar grupos y probadores de TestFlight
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/check-ios-testflight-groups.yml'
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+      API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+      API_PRIVATE: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprobar el resumen de grupos sin datos personales
+        run: node --test .github/scripts/testflight-groups.test.mjs
+      - name: Consultar grupos y compilaciones en Apple sin modificarlos
+        run: node .github/scripts/testflight-groups.mjs

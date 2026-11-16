@@ -1,4 +1,4 @@
-name: Validar orden de TestFlight desde ChatGPT (sin enviar)
+name: Ejecutar orden autorizada de TestFlight desde ChatGPT
 on:
   push:
     branches: [apple-chat-commands]
@@ -6,8 +6,8 @@ on:
       - 'testflight-upload-approvals/*.json'
       - '.github/workflows/apple-chat-testflight-upload-approval.yml'
 permissions:
-  contents: read
-  actions: read
+  contents: write
+  actions: write
 concurrency:
   group: apple-chat-testflight-upload-approval
   cancel-in-progress: false
@@ -44,10 +44,10 @@ jobs:
           fi
           echo 'has_approval=true' >> "$GITHUB_OUTPUT"
           echo "file=${files[0]}" >> "$GITHUB_OUTPUT"
-      - name: Validar sin iniciar subida
+      - name: Iniciar subida solo con autorización nueva
         if: steps.approval.outputs.has_approval == 'true'
         env:
           APPROVAL_FILE: ${{ steps.approval.outputs.file }}
-          UPLOAD_DISPATCH_EXECUTE: 'false'
+          UPLOAD_DISPATCH_EXECUTE: 'true'
           GITHUB_TOKEN: ${{ github.token }}
         run: node .github/scripts/apple-chat-upload-approval.mjs

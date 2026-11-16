@@ -5,6 +5,7 @@ on:
     paths:
       - 'review-approvals/*.json'
       - '.github/workflows/send-approved-appstore-review.yml'
+      - 'apple-chat-write-checks/*.json'
 permissions:
   contents: read
 jobs:

@@ -20,8 +20,15 @@ export async function dispatchUpload(approval,{fetchImpl=fetch,repo,token}){
   if(!main.ok)throw Error('No se pudo verificar la rama main: HTTP '+main.status);
   const current=(await main.json()).object?.sha;
   if(current!==approval.expectedMainSha)throw Error('La rama main ha cambiado desde la autorización');
+  const tag=`apple-chat-upload-${approval.requestId}`;
+  const claimed=await fetchImpl(`https://api.github.com/repos/${repo}/git/refs`,{
+    method:'POST',headers:{...headers,'Content-Type':'application/json'},
+    body:JSON.stringify({ref:`refs/tags/${tag}`,sha:current})
+  });
+  if(claimed.status===422)throw Error('La autorización ya fue utilizada; no se repite el envío');
+  if(claimed.status!==201)throw Error('No se pudo reservar la autorización: HTTP '+claimed.status);
   const triggered=await fetchImpl(`https://api.github.com/repos/${repo}/actions/workflows/ios-native-testflight-upload.yml/dispatches`,{
-    method:'POST',headers:{...headers,'Content-Type':'application/json'},body:JSON.stringify({ref:'main'})
+    method:'POST',headers:{...headers,'Content-Type':'application/json'},body:JSON.stringify({ref:tag})
   });
   if(triggered.status!==204)throw Error('GitHub no aceptó el envío a TestFlight: HTTP '+triggered.status);
   return {accepted:true,requestId:approval.requestId,sha:current};

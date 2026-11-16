@@ -23,6 +23,9 @@ jobs:
       - name: Consultar disponibilidad de informes sin modificar Apple
         if: env.API_ID != '' && env.API_ISSUER != '' && env.API_PRIVATE != ''
         run: node .github/scripts/apple-analytics-access-probe.mjs
+      - name: Enumerar informes y fechas disponibles con credenciales permanentes
+        if: env.API_ID != '' && env.API_ISSUER != '' && env.API_PRIVATE != ''
+        run: node .github/scripts/apple-analytics-catalog.mjs
       - name: Verificar solicitud ONGOING con la clave permanente
         shell: bash
         run: |

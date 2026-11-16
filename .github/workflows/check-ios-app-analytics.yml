@@ -12,9 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
-      API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
-      API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
-      API_PRIVATE: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+      API_ID: ${{ secrets.APPSTORE_ANALYTICS_KEY_ID }}
+      API_ISSUER: ${{ secrets.APPSTORE_ANALYTICS_ISSUER_ID }}
+      API_PRIVATE: ${{ secrets.APPSTORE_ANALYTICS_PRIVATE_KEY }}
     steps:
       - uses: actions/checkout@v4
       - name: Consultar disponibilidad de informes sin modificar Apple

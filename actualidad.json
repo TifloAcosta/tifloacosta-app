@@ -1,5 +1,177 @@
 [
   {
+    "id": "techcrunch-c8e93389792660d1",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/15/apple-launches-new-app-to-study-how-people-use-ai-for-health/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-16T01:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple launches new app to study how people use AI for health",
+        "summary": "Apple's new app for a study will answer everyday medical questions",
+        "body": "Big AI labs like OpenAI and Anthropic have made their bets on offering chatbots that can answer health-related queries with specialized features. Apple is debuting a new study to understand how people use AI for health. But it isn’t quite following other AI startups just yet; it wants to study how clinically grounded answers can help people.\n\nThe iPhone maker is partnering with healthcare-focused AI company OpenEvidence to launch a new study app. Apple is inviting users in the U.S. over 21, using iPhone 15 or later, and running iOS 26 or later, with Apple Intelligence enabled. The company is aiming to run this study with up to 200,000 participants for more than 12 months.\n\nThe new app will allow users to ask health-related questions, as they do with ChatGPT or Claude, with answers grounded in clinical data, from sources including The New England Journal of Medicine, Journal of the American Medical Association, and Nature. Apple said that the app will try to give simplified answers to everyday medical questions. Users can rate those answers and provide feedback about the responses; they’ll also be asked to participate in monthly surveys.\n\nParticipants can share data from HealthKit such as resting heart rate, activity, sleep, or lab results to get more personalized and pointed suggestions from the app. The company said the app can also help prepare participants better for a doctor’s visit, and it will guide users to specific providers for answers related to concerning medical issues.\n\nApple specified that the data will be anonymized before sending it to a secure third-party cloud provider, and it won’t be used to train any kind of AI models. The company said that OpenEvidence deletes the query and response data after 24 hours.\n\n“At Apple, we believe responsible innovation starts with scientific rigor and clinical grounding. Health is deeply personal, and conducting a dedicated research study is the most thoughtful way to understand how people engage with, comprehend, and evaluate health AI in everyday life,” Sumbul Desai, M.D., Apple’s vice president of Health and Fitness, said in a statement, adding, “Insights from this study will help advance the broader scientific conversation and ensure that as technology evolves, we continue building trusted tools that genuinely support people wherever they are on their health journey.”\n\nThe app is available to download starting today for U.S. users. It’s not clear if Apple wants to release AI-powered answering to its Health app or Siri yet. The potential is huge — earlier this year, OpenAI said users were asking over 300 million health-related queries each week ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-466ddfde56694f1f",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1033355/apples-new-study-looks-to-improve-the-effectiveness-of-ai-health-tools",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-16T01:26:56.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple’s new study looks to improve the effectiveness of AI health tools",
+        "summary": "Apple announced a new study today with the goal of better understanding how people interact with conversational AI health tools and how useful their responses actually are. The company is conducting the Apple Health AI Usage Study in collaboration with OpenEvidence, a clinical AI platform used by healthcare professionals that generates answers based on medical […]",
+        "body": "Apple announced a new study today with the goal of better understanding how people interact with conversational AI health tools and how useful their responses actually are. The company is conducting the Apple Health AI Usage Study in collaboration with OpenEvidence , a clinical AI platform used by healthcare professionals that generates answers based on medical information from sources like The New England Journal of Medicine . Participants will use a new iOS app to ask medical questions and then rate the responses based on criteria including accuracy, detail, and relevance.\n\nThe app is now available for download, and enrollment starts today, …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-c2c19555b6708310",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2314057/home-network-oldest-device-could-be-biggest-security-risk/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-16T01:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The oldest gadget in your house could be your home network's biggest security hole",
+        "summary": "It may be more economical to hold onto gadgets for as long as possible, but you're putting your entire home network at risk with outdate hardware.",
+        "body": "Your home network is only as secure as its weakest link.\n\nIt may not seem like you would need to replace a perfectly functional 10-year-old connected camera in your home. However, your network is only as secure as its weakest link, and that's often a device that is so outdated it no longer receives updates from its manufacturer.\n\nMany of us don't realize how often gadgets need to be replaced, and it's not just cameras. Security cameras should be replaced every five to seven years, with router manufacturer Netgear recommending a hardware replacement every four or five years. You'll know it's well beyond time to replace your router when you start experiencing slower connections. At that point, you may already be facing security concerns.\n\nWhen outdated gadgets like these are compromised, they could be sending your data to bad actors or working as part of a botnet. In 2025, the FBI issued a warning that end-of-life (EOL) routers–devices that are no longer receiving software updates or security patches–are being compromised by cybercriminals. It's ultimately up to the consumer to perform a regular device audit to determine if routers, cameras and other smart devices pose a security risk.\n\nAny connected device in your home that no longer receives bug patches and security updates may be a risk. Per a 2024 Consumer Reports study, most appliance makers don't tell consumers in advance how long they will offer updates to software. It found that of 19 major brands that make smart appliances, only three told customers how long they would maintain support, and even the longest promised about five years of updates, falling short of consumer expectations of 10.\n\nRouters are also often at risk. A 2025 FBI warning stated that routers dated 2010 or earlier likely no longer receive updates and should be replaced. In this particular case, such gadgets were being targeted by malware called TheMoon, which infects routers to install proxies, so criminals can operate anonymously. TheMoon hack doesn't even require a password, instead exploiting open ports and a vulnerable script. Even if you have a strong password, an old router can be a risk.\n\nRouters and other smart devices that have been hacked can be recruited as part of a botnet, a network of devices used to overwhelm websites with traffic to take them offline. A recent report from Cisco found that nearly 40 percent of the vulnerabilities attackers targeted most affected end-of-life devices, and about a third of exploited vulnerabilities were at least a decade old. The report focused on businesses, but the lesson applies at home too: Attackers keep targeting old hardware because it never gets fixed. Even if most of your cameras and routers are up to date, just one outdated device can allow bad actors to enter the network and compromise anything else connected to it.\n\nThe good news is you don't have to replace everything in your home. Start by taking stock of everything on your network. First, log into your router's admin page and go through the list of connected devices. You may find gadgets you have forgotten about, like an old camera, smart plug or even your fridge. Then, search online for whether the manufacturer still releases updates for each device. If your router no longer gets firmware updates or is considered an EOL gadget, it may be time to get rid of it. If your smart appliance is too old to get automatic updates, you can simply turn off connected features. Chances are you don't need them anyway.\n\nThe latest standard for router security is WPA3. To upgrade your router from WPA2, go to the router's admin page, find the wireless security setting and choose WPA3. Some older gadgets will struggle to connect after switching, so choose WPA2/WPA3 if you run into that issue. If there is no WPA3 option, it is time to replace the router.\n\nTo make your home network more secure in general, turn off remote management and use a strong password. Never use the default password that came with your router. Turn on automatic updates to ensure firmware is updated as soon as it is offered. Otherwise, you can put any old gadgets and smart appliances on a separate network so that, if they are compromised, they can't get to more important gadgets like your laptop or phone. It's worth noting, though, that the data stored on outdated gadgets is still vulnerable, so it's always best to replace old hardware for maximum security."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-c617dc78bc441b1b",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2313943/pros-cons-using-cloud-storage-over-local/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-16T00:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The pros and cons of using cloud storage over local storage",
+        "summary": "Before AI ran rampant through the technology market, cloud storage was the new, big thing, as it seems like every major company has its own cloud service.",
+        "body": "Cloud storage can be super convenient, but there are times when using local storage is the better move.\n\nExternal hard drives and USB flash drives are usually easy ways to back up your files, especially since they don't require an internet connection or waiting for uploads. You just plug them into your computer, copy the files you need, and that's it. But cloud services like iCloud and Google Drive have also made it a lot easier to back up everything — and most of the time, it all happens automatically.\n\nYour photos, videos, contacts and more are all synced to the cloud without having to copy each file manually. Plus, there's no risk of leaving your external drive somewhere or damaging it to the point where you lose your files . That doesn't mean cloud storage is perfect, and both have their pros and cons — it really comes down to choosing what works best for your needs. If you're unsure whether to choose local or cloud storage to back up your data, here's how the two stack up on access, cost and reliability.\n\nOne of the biggest advantages of using cloud storage is the convenience of not having to worry about your files. Once you upload them to the cloud, they're with you wherever you go. Just log in to your account on another laptop or phone, and you can access everything in just a few minutes. It's perfect for people who use multiple devices or who need to access files from their home computer at the office or college. Plus, most cloud services let you have your files synced automatically . That's the case with iCloud — once you enable it on your device, it automatically backs up everything every day.\n\nSharing files through a cloud service is also much easier than sharing them from local storage. Once a file is uploaded to the cloud, you can easily share it with someone with just a click — cloud platforms generate a link so others can view and download that file. There's also collaboration, so multiple people can work on the same document or spreadsheet at the same time. Platforms like Google Docs even offer tools that allow each collaborator to leave comments in real time, perfect for workplaces and schools.\n\nSafety is another big plus, since major cloud providers keep copies of your data spread across multiple servers and data centers. The chances of something bad happening and you losing all your data are very low – though not impossible . Plus, your cloud account can be protected with a password and two-factor authentication, meaning others can't just take your files from you.\n\nCloud storage relies on a stable internet connection, and you're prone to unexpected outages. A slow connection or an outage on your provider's servers could prevent you from downloading a file when you need it most. Also, uploading and downloading large files can take a while if you're using a slow connection. With an external SSD, you can copy gigabytes of files in just minutes. Internet has no impact on local storage, so it's something to consider if you're always traveling and rely on mobile data, for example.\n\nCost is another reason that might push people away from cloud services. While you only have to pay once to buy an external hard drive, cloud providers typically charge recurring subscription fees on a monthly or annual basis. Apple charges $9.99 per month in the US for 2TB of iCloud+ , which comes to nearly $240 if you pay for two years — and the storage isn't really yours. Stop paying, and your files may be deleted after a while, not to mention possible price increases down the road . By comparison, you can find 2TB SSDs for around $290, but they'll always be yours, with no extra charges.\n\nThat doesn't mean you should ditch the cloud and rely entirely on local storage. Subscribing to a cloud service that allows you to back up all your files and access them from anywhere is very handy, and you can also benefit from local storage by offloading some of your larger files or those you really want to make sure you never lose."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-7e44077aef52e6f1",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2310550/other-things-iphone-notes-app-can-do/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-16T00:15:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "10 things your iPhone's Notes app can do other than taking notes",
+        "summary": "Apple Notes can be much more than a place for random scraps of information once you learn everything it's capable of.",
+        "body": "Apple Notes has a lot of tricks you might not have properly explored.\n\nFor most people, the Notes app is where grocery lists, stray thoughts and various codes go to live. If you've only used it for basic text, you've probably missed how Apple has added new features to the mix that can solve complex equations, draw graphs, transcribe audio and turn your doodles into images. iOS 27 brought even more, including smarter Siri integration and divider lines, so the app is more capable than ever.\n\nA few of the features below rely on Apple Intelligence , requiring newer hardware to work as intended. On the iPhone, that means the iPhone 15 Pro, iPhone 15 Pro Max and any iPhone 16 model or later. Those features are flagged along the way, along with anything that requires a specific version of iOS.\n\nThe Notes app has a calculator hiding inside it, with the math happening while you're typing. Since iOS 18, when you type an equation and add an equals sign, Math Notes fills in the answer on the spot. It also works with variables, so if you write \"dinner = $42\" and change that value later, every result that uses it updates automatically. That makes it a surprisingly easy way to split the bill or plan a monthly budget.\n\nMath Notes can do more than give you simple answers. After you type an equation that starts with \"y =\", tap the equals sign and choose Insert Graph to plot what you've typed right inside the note. If you change the variable, the graph changes automatically to match. It's a neat tool for students to check their homework without a dedicated graphing app.\n\nIf you don't have a physical scanner at home, there's no need to download a dedicated scanner app to replace it. Tapping the attachment button in any note shows the Scan Documents option, where Notes will capture a page automatically, including cropping and straightening it for you. The scanner also offers a flash option and image filters if needed.\n\nIn Auto mode, you don't even need to tap on the shutter button; the system captures the document once it detects the page's edges and you're holding your iPhone steady. You can scan multiple pages into a single document, which is useful for contracts, lease agreements or anything else that runs longer than a page.\n\nIf the document needs a signature, open the scan, tap Markup , then go to Add > Signature . Use a saved signature or draw a new one with your finger, then resize it and drag it into place. It's an easy way to sign and send a form without taking a printout of the pages. Scans are saved to the note as PDFs, which you can annotate.\n\nNotes can double as a recorder: choose Record Audio in any note to record and transcribe everything your phone hears. The transcript is searchable, so you can jump into the relevant part of a long lecture instead of scrubbing through the entire session. On iPhone models with Apple Intelligence, Notes can summarize entire recorded lectures or meetings. Phone calls you record also land in Notes inside the Call Recordings folder with a transcript.\n\nThe iPhone already has a dedicated recording app in Voice Memos , so it's worth knowing when to use which. Notes is the better pick when the recording is part of something bigger. For a class or a meeting, for example, you can type your own notes, add photos of the whiteboard and keep the recording all in the same note. Everything stays together, so you won't have to switch between multiple apps when you're going through your notes at home. Meanwhile, Voice Memos makes more sense when the audio itself matters most, like an interview you plan to edit or share.\n\nIf you need some help when drawing, sketch something rough with the Markup tools, then pick Image Wand from the same tool palette and circle your sketch. Add a few words describing the image you want, and Apple Intelligence will turn your doodle into a polished image.\n\nYou also have the option to circle an empty spot in the note and create a new image based on the text around it. Afterward, fine-tune the image by adding or removing descriptive words. If your note is a packing list for a beach trip, for instance, it will generate a matching seaside illustration to sit at the top.\n\nIn iOS 27, Image Playground , which powers this feature in the Notes app, got a new model that can make photorealistic images, not just stylized ones. Since iOS 27.2, most images you generate or edit carry a SynthID watermark, which the SynthID detection website uses to know something was made by AI.\n\nYour notes don't have to be only for you; it's possible to share a specific note or an entire folder with your family, friends and coworkers, then everyone can make changes in real time. This is ideal for a household grocery list or a group plan for a trip. The person who creates the shared note remains in control of who can do what.\n\nJust tap the Share button in the note you want to add people to, then choose whether each person can make changes or only view it. Type @ followed by someone's name and they'll get a notification pointing them to the note. If several people are editing the same note, the activity view and highlights show who changed what and when. And in iOS 27, the Shared folder now sits at the top of the folders list with a new icon, so multi-person notes are easier to spot.\n\nThe Notes app can help with the actual writing you do. Select some text, tap the Apple Intelligence button in the toolbar and pick an option from the Writing Tools menu. This can proofread your text for spelling and grammar mistakes and rewrite it in a friendlier, more professional or more concise tone.\n\nThe suite is also useful for reshaping messy notes. It's able to create a summary of a long note or pull out its key points, which is handy after a meeting or before an exam. It will also turn a block of text into a bulleted list or even convert it into a table. If you've jotted down a few phone plans with their prices and data limits, for example, the Table option can organize them into neat rows and columns so they're easier to compare.\n\nWriting Tools isn't limited to just the Notes app; it works almost anywhere you can type on the iPhone, including third-party apps. In iOS 27, Apple Intelligence also suggests ways to improve your writing.\n\nLong notes quickly become messy and hard to organize, but Notes has a few tools to keep them neat. With iOS 18 and newer, you have the option to collapse any heading to minimize sections you're not working on. This means the final version is a bit cleaner to view, while it's also easier to manage everything while writing.\n\nIf that's not enough, you can also highlight text in different colors, curating them by sections, information or any other preference. To do so, select the text, tap the Aa format button and pick a color. Notes offers five color options to choose from: pink, purple, orange, mint and blue. iOS 27 also added divider lines, which gives another option to tidy up a mess. Place your cursor where you want a break, open the edit menu and choose Insert Divider Line . If someone views the note on iOS 26 or prior, the divider lines show up as three hyphens(—), so nothing breaks.\n\niOS 27 also added section links to the mix, letting you link to a specific section of a note where tapping the link jumps straight there. That's particularly useful for a table of contents in a long note. Pasting Markdown now converts it to formatted text automatically, and a new Copy as Markdown option easily brings notes to other apps with the formatting intact.\n\niOS 26 added a reed pen to the Markup tools, which is designed for a traditional calligraphy experience. Like the actual writing instrument, your strokes get thicker or thinner depending on the direction you draw in. It's a unique way to write, especially for special occasions like birthdays and invitations. You'll find the reed pen in the list of Markup tools; tapping it again after selecting it is how you pick a preset.\n\nThere are five angle presets to choose from, with the one you pick deciding which stroke direction gives the thickest line. The angle is fixed no matter how you hold your finger, so your strokes stay consistent. Apart from the Notes app, the reed pen also works in Freeform, Journal and Preview — basically anywhere the Markup tools are available.\n\nThe search bar in the Notes app is smarter than it looks and than how most people casually use it. Beyond your own typed notes, it can search handwriting, objects in images and text in scanned documents. Tap the search button, then type a word from a page or a photo. If you scanned a receipt months ago, searching for the store's name should bring it up. It's an easy way to find snippets from longer notes, especially when you're transcribing lectures or meetings.\n\nThis turns your Notes library into a practical place to store paperwork you might need in the future. Consider storing information like warranty cards, appliance manuals, prescriptions and receipts all in Notes, then you can find them by searching for a word on the page instead of scrolling through dozens of scans and navigating file names.\n\nSiri and Notes finally work together properly in iOS 27. Siri can create notes with generated content, like information it pulled from the web, instead of only typing what you say. Ask it to put together a packing list for a trip and save it to a new note, and it will comply. This really comes in handy for smaller notes or basic reminders, as well as capturing ideas on the spot when you can't stop to type.\n\nIt can also add to an existing note or clean up a list before saving it. If you've got a messy, unformatted list, ask Siri to tidy it up and add it to the right note. Of course, the full power of this requires Siri AI, which launched in English first. iOS 27.2 added French, Japanese, Korean, Portuguese and Spanish. Older iPhone models can also create notes with Siri, but without the AI-generated content, which slightly limits the feature. But the basics are still there to jot down ideas."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-2fd9d5fbd5cd2b12",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/15/indian-chip-startup-bharat-semi-lands-24m-seed-round-as-it-eyes-global-ai-sensor-market/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-15T23:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Indian chip startup Bharat Semi lands $24M seed round as it eyes global AI sensor market",
+        "summary": "Bharat Semi says it has secured design wins for its AI-enabled sensor technology with companies including General Atomics.",
+        "body": "Bharat Semi , an Indian semiconductor startup, has raised $24 million in seed funding to develop AI-enabled image sensors, as it seeks to win customers in the United States and elsewhere.\n\nThe investment comes as the nearly five-year-old, pre-revenue startup says it has secured design wins with U.S. defense technology company General Atomics and India’s Kaynes Semicon. Its image sensors, however, remain under development, with the startup targeting its initial commercial production in 2027.\n\nIndia has committed billions of dollars to build up a domestic semiconductor industry, with a hope to become an alternative manufacturing hub as U.S. companies look to diversify supply chains beyond China. The country, however, has yet to establish itself as a major chip manufacturing hub. Meanwhile, the AI boom is also giving Indian startups such as Bharat Semi an opportunity to develop specialized chips for global markets.\n\nThe New Delhi-based startup is developing programmable image sensors that combine image capture, processing, and AI capabilities on a single chip, reducing the need to send visual data to separate processors. The move could cut system costs by at least 70% compared with conventional setups that use a separate image sensor, image signal processor, and a system-on-chip, co-founder Vrinda Kapoor (pictured above, right) said in an interview.\n\n“Our aim here is to move from sensors to sense-making solutions,” Kapoor told TechCrunch.\n\nKapoor, a South Park Commons fellow who earlier worked in healthcare technology, co-founded Bharat Semi in late 2021 with Vinayak Dalmia (pictured above, left), the startup’s managing director, who previously worked at McKinsey and in private equity. Its chief technology officer, Boyd Fowler, previously held the same role at image-sensor maker OmniVision.\n\nBharat Semi is targeting smart homes, industrial automation, surveillance, and aerospace. Without disclosing specifics, Kapoor pointed to air conditioners that could detect when a room is empty and adjust automatically and drones that could process visual information — even with the absence of more expensive computing hardware elsewhere in the system.\n\nThe startup’s first-generation sensors are already in prototyping, while its second-generation sensors, which will incorporate more advanced AI capabilities, are expected to reach the prototype stage by mid-2027, Kapoor said. Moreover, the startup plans to get those newer sensors into customers’ hands by the end of 2027.\n\nThe all-equity seed round was led by Info Edge Group, South Park Commons, and Indus Bridge Ventures, with participation from Valour Capital, Micromax, Gaingels, and individual investors. Bharat Semi, Kapoor said, plans to use the funding to expand its engineering team, complete product development, and bring its sensors to market.\n\nBharat Semi has about 75 employees across India and the U.S., including 10 to 12 in its American operations, which span engineering and business development in Santa Clara. The startup plans to increase its U.S. headcount to around 20 by mid-2027, Kapoor said. It has also begun hiring engineers in Europe.\n\n“It’s a story of can we build a global technology company out of India,” Kapoor said.\n\nIn 2024, Bharat Semi announced plans for a semiconductor fabrication project in India involving a technology partnership with the U.S. Space Force. The initiative, Kapoor said, remains in development and the startup is working to identify domestic partners that would build and operate the facility.\n\nThe project is separate from Bharat Semi’s image-sensor business, Kapoor added. The startup plans to remain fabless, outsourcing chip manufacturing while focusing on semiconductor design and software. The new funding will not be used to finance the proposed fabrication facility."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-81e9696838644dd4",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/15/apples-messages-app-keeps-getting-better-here-are-my-favorite-updates/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-15T23:06:10.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple’s Messages app keeps getting better; here are my favorite updates",
+        "summary": "9to5Mac is brought to you by Tello Mobile. Switching to Tello Mobile can bring the cost of your plan down to as little as $5 a month, or an unlimited plan for just $25 a month, all on America’s largest 5G network. See all of the available plans at tello.com . Apple’s Messages app is the most-used app for many iPhone users. As such, Apple regularly makes the app better with new features and important changes. Here’s a rundown of some of Apple’s biggest recent changes to Messages on iPhone. more…",
+        "body": "9to5Mac is brought to you by Tello Mobile. Switching to Tello Mobile can bring the cost of your plan down to as little as $5 a month, or an unlimited plan for just $25 a month, all on America’s largest 5G network. See all of the available plans at tello.com .\n\nApple’s Messages app is the most-used app for many iPhone users. As such, Apple regularly makes the app better with new features and important changes. Here’s a rundown of some of Apple’s biggest recent changes to Messages on iPhone.\n\nWith iOS 26 last year, Apple added a host of new features to Messages. Here are some of my favorites:\n\nWith iOS 27 this year, Apple added even more to the Messages app — headlined by a focus on bug fixes and performance improvements.\n\nAll of this comes as Apple has also continued to improve its implementation of RCS, making cross-platform communication with your Android friends and family even better. Most notably, Apple this year added support for end-to-end encryption when using RCS.\n\nWhat are some of your favorite features in the Messages app? What’s on your wishlist? Let us know down in the comments.\n\nFollow Chance : Threads , Bluesky , Instagram , and Mastodon .\n\n9to5Mac is brought to you by Tello Mobile. Switching to Tello Mobile can bring the cost of your plan down to as little as $5 a month, or an unlimited plan for just $25 a month, all on America’s largest 5G network. See all of the available plans at tello.com ."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "techcrunch-f895e2c270944112",
     "type": "news",
     "sourceId": "techcrunch",
@@ -24,76 +196,6 @@
     "media": null
   },
   {
-    "id": "engadget-2dea5c40a3c1d729",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2313904/how-to-maximize-ring-camera-security-protection/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-15T21:30:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "How to get the most protection from your Ring camera security system",
-        "summary": "A Ring camera can provide a huge boost to the safety of your home, but there's more you can do to maximize that added layer of security.",
-        "body": "Simply putting the camera on your front door may not be enough.\n\nLet's be blunt here. There are good reasons to skip Ring for your home security, from ongoing privacy concerns to some key features relying on a subscription . At the same time, it remains the most practical security platform for a lot of people, at least in the US. That's especially true if your smart home platform of choice is Alexa, which is likewise owned by Amazon.\n\nIf you are going to use Ring, it's vital to maximize your setup's efficiency. Some of the company's products can be costly, and your goal here is to deter and record intruders (although you'll need a Ring subscription to do this), not just maintain an illusion of security. If that's all you care about, you might as well slap a few ADT stickers on your home along with a \"Beware of Dog\" sign.\n\nEfficiency isn't about covering the widest area — it's about thinking like a thief, yet spending as little as possible for the results you need. You also need to be concerned about minimizing false alerts.\n\nYour first consideration should be capturing all possible points of entry — and we mean all of them. Don't just position cameras over your doorways. If you've got a side alley, for example, it's possible that an intruder could climb a fence and break in without ever appearing on your door-based video feeds. Give your outdoor cameras overlapping views when possible, and make sure they're installed around 9 feet high, excluding doorbells. This will not only ensure a wide field of view, but make it harder for intruders to smash or tamper with your equipment. That said, cameras should also be easily visible beyond your property. Any halfway intelligent thief is going to think twice if they know they're being recorded.\n\nRing is eager to sell you indoor cameras, but these aren't actually necessary unless you're hoping to monitor a child, pet or guests. By the time an intruder makes it indoors, all you're really doing is capturing further evidence of their crimes. If you do buy indoor cameras, position them high in the corners for broad coverage, with an eye toward entryways.\n\nOnce cameras are in position, be sure to spend time customizing their Motion Zones via the Ring app. This can prevent unwanted motion detection from objects such as passing traffic or trees blowing in the wind. But really, you'll also want to turn on Advanced Motion Detection if a camera supports it, and most importantly, Smart Alerts. These let you narrow alerts to people, packages and/or vehicles, so when you receive notifications on your phone, you'll know to take them seriously instead of tuning them out. Smart Alerts do require a subscription, so remember that before you come to depend on them.\n\nA factor that's all too easy to neglect is redundancy. You should always have a backup battery available for your cameras powered by removable batteries, for example, because it can take hours to fully recharge one. You may also want spare cables or installation tools.\n\nEven more critical is the quality of your Wi-Fi network, since you need a stable signal for uninterrupted video. Be sure to test for any weak spots or dead zones, and consider upgrading to a mesh system if you can't fix them with better router placement. You don't need to go with Amazon's eero routers, but if you can't afford any downtime whatsoever, look into models with cellular backup features. These can keep your entire network online at the cost of a monthly fee. You may want power backup too, however, and that can get very expensive on the whole-home level.\n\nLastly, don't forget to consider supplementing your cameras with door and window sensors (tied to a Ring Alarm system), as well as automatic lighting. While newer Ring cameras do have great night vision, lights from Ring or otherwise can improve video clarity further and make intruders visible to everyone. Just make sure lights aren't blaring into your neighbor's windows or too easily triggered by people passing by."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-62da6f452b800eec",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2313896/wifi-8-attempt-fix-biggest-problem-wireless-internet/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-15T21:15:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Wi-Fi 8 is an attempt to fix the biggest problem with wireless internet",
-        "summary": "With current Wi-Fi standards reaching beyond consumer-level speeds, Wi-Fi 8 is entering the fray with a fix that makes those speeds mean something.",
-        "body": "Because perfection currently remains just out of range.\n\nSometimes, better doesn't mean faster. With Wi-Fi 7 realistically capping out at about 23 Gbps (a number virtually nobody will see in the real world), speed is more than covered in the current generation. At this point, the biggest concern is reliability. Released in 2024, Wi-Fi 7 has been known to suffer from pain points like poor stability, weak wall penetration, and relatively short range.\n\nWi-Fi 8, which is still in development, is designed to address the considerable reliability issues plaguing the internet today. Final approval is expected in 2028, although companies like ASUS and TP-Link wasted no time announcing their first Wi-Fi 8 router based on the draft spec.\n\nMost home internet plans offer speeds of a few hundred megabits per second, which older Wi-Fi 6 routers should handle with ease. For faster speeds, like a 2 Gbps fiber connection, Wi-Fi 7 can largely keep up (especially if you're sitting right next to the router). Wi-Fi 8 shifts the focus to stability, aiming to plug the holes that lead to shaky connections. It's being designed to fix common issues, like a weak signal in one part of the house, an apartment building with 20 networks competing for airtime or a clunky mesh handoff when walking between rooms.\n\nThe underlying standard, 802.11bn, is nicknamed \"Ultra High Reliability,\" accentuating its focus on consistency and stability. Wi-Fi 8 should achieve 25 percent better throughput for weak signals, 25 percent fewer dropped packets (especially when moving between access points) and 25 percent lower latency at the shakiest moments.\n\nThe main way it gets there relates to how access points work together. Today's routers share channels by taking turns, and not always in the most efficient manner. Wi-Fi 8 refines that by letting compatible access points coordinate when each one transmits. That will make the most sense with mesh systems .\n\nAlthough you can buy an ASUS gaming router or mesh system built on Wi-Fi 8 today, with a TP-Link model coming soon in some regions, they won't make much difference yet. For the upgrades to show themselves, both the router and the device (phone, laptop or tablet) on the other end need to support it as well.\n\nSo buying one now is more about investing in the future than some mythical immediate payoff. (Not that you'd know it from the marketing.) And since these first devices are built on a draft spec, there's no guarantee they'll support everything in the final version.\n\nEventually, Wi-Fi 8 should be worthwhile, especially if you live in a congested building or use a mesh network. Just be prepared to wait a year or two before you reap the benefits. For now, Wi-Fi 7 is still a perfectly reasonable choice for a new router. And if yours isn't positioned ideally, moving it to a central location will likely do more than any new standard, whether draft or final, will"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-f94fe6cca62bc681",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2313890/apple-switch-control-feature-on-other-devices/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-15T20:45:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "You can control your other devices with this resourceful Apple feature",
-        "summary": "There's a lot you can do with this accessibility feature.",
-        "body": "This accessibility feature can be really useful.\n\nWith iOS's Switch Control, you can control your iPhone or iPad using alternate input methods ranging from external adaptive controllers to head movements and hand gestures. It's a useful accessibility feature for anyone with limited mobility that's even more powerful than it might seem at first if you dig into its settings. One option, Use Other Devices for Switch Control, lets you use the alternate controls you set up on one iOS device to control other devices on the same Wi-Fi network, and it only takes a little bit of setup.\n\nFirst, you need to enable Switch Control across your devices. Make sure any devices you want to control are connected to the same Wi-Fi network and you're signed into the same iCloud account on all of them. If you want to control a Mac desktop computer remotely, you also need to open the Apple menu, click Accessibility and open the Switch Control menu. Select Allow platform switching to control your computer . Then on your mobile devices, open the Settings app, click Accessibility and turn the Switch Control toggle on. Now you can assign external controllers or gestures to specific actions by selecting Add New Switch under the Switches menu and following the onscreen prompts.\n\nOnce you have your switches set up, head back to the main Switch Control menu and select Device , then Use Other Device . This will show you a list of all the compatible devices linked to your network. Select one and you can use the switches you've already established to control them remotely. When you want to stop controlling the remote device, just select Stop Using Device under the same menu.\n\nWhile Switch Control's Use Other Devices feature can only be used to control iOS devices, you can assign non-Apple devices as your external controllers. Adaptive controllers made by other companies like Microsoft can be mapped as switches, but you can even use devices that aren't intended as accessibility tools. Standard game controllers work as well, along with other devices that can connect to your iPhone or iPad via Bluetooth or USB, like Bluetooth keyboards.\n\nSwitch Control is intended to make navigating iOS devices and selecting items on screen easier for people with limited mobility, but some users have found novel ways to use it for more than basic functionality. Switch Control lets you set up Recipes, which can be used to record and replay sequences of inputs. With a little work, iOS users have set up Switch Control to automate repetitive actions in mobile games or other apps and to turn pages in the Kindle app. These unintended applications may not always be the best use of Switch Control, but it's worth experimenting with how you can use the feature, especially if you've got multiple iOS devices and want to try controlling them all from one place."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "the-verge-1d77423e245bf7de",
     "type": "news",
     "sourceId": "the-verge",
@@ -113,30 +215,6 @@
         "title": "Congress wants to tighten export rules on AI chips after Nvidia spy scandal",
         "summary": "Unsurprisingly, following the scandal involving now-former Nvidia CEO Jensen Huang and a suspected Chinese spy, Congress is looking to further restrict exports of AI chips. Both Democrats and Republicans have voiced support for various measures and bills that would tighten rules and have demanded that Huang and other Nvidia leaders testify before Congress. Senate Minority […]",
         "body": "Unsurprisingly, following the scandal involving now-former Nvidia CEO Jensen Huang and a suspected Chinese spy, Congress is looking to further restrict exports of AI chips. Both Democrats and Republicans have voiced support for various measures and bills that would tighten rules and have demanded that Huang and other Nvidia leaders testify before Congress.\n\nSenate Minority Leader Chuck Schumer has already said that Huang and the Trump administration need to answer to Congress . Senate Banking Committee Chairman Tim Scott has also sent letters to both Huang and Commerce Secretary Howard Lutnick calling on them to publicly testify to the commit …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-e3fb0450c903b02d",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/15/techcrunch-mobility-the-nvidia-backup-plan-for-chinas-self-driving-industry/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-15T17:05:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "TechCrunch Mobility: The Nvidia backup plan for China’s self-driving industry",
-        "summary": "Welcome back to TechCrunch Mobility, your hub for the future of transportation and now, more than ever, the role AI is playing in it.",
-        "body": "Welcome back to TechCrunch Mobility , your hub for the future of transportation and now, more than ever, the role AI is playing in it. To get this in your inbox, sign up here for free — just click TechCrunch Mobility !\n\nI am traveling through Portugal now that Web Summit has wrapped up, so please enjoy this shortened edition.\n\nWeb Summit leaned heavily into Chinese founders and companies this year. The opening remarks from Web Summit co-founder Paddy Cosgrave drove the point home when he said the superstars of the future are coming from China, not California. He also gave a strong endorsement of China and open source technology when he noted that Chinese companies are building more of our shared future than anyone else.\n\nThese remarks carried a different kind of weight just a few days later as the news spread throughout the conference that Nvidia founder and CEO Jensen Huang had resigned from his leadership post after admitting to an affair with an alleged spy.\n\nThe former CEO, after all, has been one of the strongest proponents for open source in the United States. And anyone who has followed the emergence of autonomous vehicle tech knows how central Nvidia is to that ecosystem.\n\nNvidia is a major supplier of AI computing technology to the industry — although the degree of reliance varies. Some companies are using Nvidia’s automotive processors to run automated driving software, while others are using Nvidia GPUs to train autonomous driving models. And then there are the full-stack partnerships, which includes Mercedes-Benz, Zoox, and Wayve.\n\nI spoke to Leo Wang , the CFO of Chinese autonomous vehicle company Pony.ai , this week. I asked him about the challenges China’s self-driving industry faces and what he thinks will happen if the fallout from Huang’s resignation results in even stricter export controls on Nvidia chips shipped to China.\n\nDemand is already far greater than supply, Wang said, noting that it’s one of the pain points Pony.ai struggles with. The company’s strategy is twofold. Engineers are directed to be as efficient as possible when deploying its training models. That might mean using midtier compute resources instead of high-end ones, he said.\n\nPony.ai is also turning more to domestically produced chips to help close the gap.\n\n“If you look at the whole ecosystem, especially in recent years, definitely domestic chips in China also get lots of attention and development,” he said, noting that these chips provide another option for AI training. “I think that gives us some flexibility.”\n\nWhen asked what he thinks will happen if export restrictions on Nvidia chips tighten, Wang said Chinese companies have already been preparing.\n\n“If you look at the whole situation, this has been developing for already a couple of years,” he said. “Everyone, I would say, is also practicing kind of like a Plan B for a few years, so at least if you think about that, I would say there are alternatives. Although cost-effectiveness-wise, probably it’s not the best choice yet. But still, it’s an alternative way that already exists and which is more mature than a few years ago.”\n\nMay Mobility plans to use the Volkswagen all-electric ID. Buzz for its global ride-hailing platform. The company said it is targeting the deployment of more than 10,000 autonomous vehicles through 2031. This does not mean that VW’s MOIA group is ditching Mobileye, I have been told. Instead, VW told me, the company is offering an automated driving-ready base vehicle to other companies that develop their own self-driving systems. (This was just presented last month during Nvidia GTC in Berlin.)\n\nNewmo , a Japanese robotaxi startup, raised a ¥20.8 billion (roughly $135 million) round led by KDDI.\n\nParkBee , a Dutch parking technology company, acquired Mobian’s city and parking operations.\n\nPort , an urban logistics company, raised €14.5 million in a round led by the European Bank for Reconstruction and Development (EBRD) and Balnord.\n\nLucid reported Q3 revenue of $350 million, below Wall Street expectations, and it is still losing money. Although its Q3 net loss did narrow to $830.9 million. Notably, the EV maker increased its delayed draw term loan from its largest shareholder, Saudi Arabia’s Public Investment Fund, to $1.75 billion.\n\nThe National Highway Traffic Safety Administration is investigating a Waymo software recall from a year ago that was issued after numerous reports that its robotaxis were illegally passing school buses. The agency said that a majority of these reported incidents occurred after the company deployed a software update intended to fix the problem. Sources familiar with Waymo tell me that there have not been school bus-related incidents since March. I have not been able to independently verify that with the Austin Independent School District.\n\nThe Tesla Cybertruck will live on through next summer, but production will ultimately end , according to Elon Musk, who defended the polarizing steel-clad truck.\n\nTesla is expanding its robotaxi service to San Antonio, Texas, as it seeks to compete with Waymo and position itself as more than just an automaker.\n\nUber is launching a new service that lets customers reserve and pay for parking in major U.S. cities, about nine months after the ride-hailing company acquired parking app SpotHero. Meanwhile, the company is notifying thousands of drivers that their personal and driver’s license information was stolen during an October data breach at one of the company’s tech providers.\n\nUnited Airlines will restrict access to AI agents seeking to book flights and manage reservations on their users’ behalf."
       }
     },
     "media": null
@@ -212,53 +290,6 @@
         "title": "Apple’s Siri AI smart glasses are reportedly launching next year, here’s what to expect",
         "summary": "Apple’s long awaited smart glasses, akin to Meta Ray-Bans but tailored to Siri AI and the Apple ecosystem, are almost here. According to Bloomberg’s Mark Gurman , the product should be introduced at the next WWDC, and they should be on the market by the end of the year. Here’s what to expect. more…",
         "body": "Apple’s long awaited smart glasses, akin to Meta Ray-Bans but tailored to Siri AI and the Apple ecosystem, are almost here. According to Bloomberg’s Mark Gurman , the product should be introduced at the next WWDC, and they should be on the market by the end of the year. Here’s what to expect.\n\nFirst and foremost, Apple wants to rely on its deep app ecosystem to give its glasses a boost. While companies like Meta are undeniably leading in the agentic AI assistant game, the third party app integration just isn’t quite there.\n\nStarting with iOS 27.3 beta, Apple is finally l aying the groundwork for proper third party app integration within Siri, rather than just Siri Shortcuts. By the time the glasses release at the end of next year, there should be a plethora of third-party integrations to utilize.\n\nThat said, the glasses themselves won’t run apps directly. Everything will rely on a nearby iPhone, per Gurman . The glasses will still have Wi-Fi for apps to function if an iPhone isn’t nearby, but these will largely serve as an iPhone accessory.\n\nAccording to the report, Apple’s glasses will likely be slightly thinner than a pair of Meta Ray-Bans :\n\nIn terms of industrial design, internal prototypes are slightly thinner than Meta’s second-generation Ray-Ban glasses. At least on some test units, the cameras are housed in oval-shaped openings that sit flush with the frame — rather than protruding from it. There’s also a light on the front that shows when the glasses are in use or charging. Apple has been experimenting with other features on the front of the glasses related to privacy.\n\nLastly, a big focus of these glasses is the audio quality. According to Bloomberg , engineers are describing the audio quality as “industry-leading.”\n\nSome of my favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-6cc24bf6238802b5",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/15/hands-on-this-25w-magsafe-charger-is-thinner-than-an-iphone-kuxiu-k4-air-video/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-15T15:23:31.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Hands-on: This 25W MagSafe charger is thinner than an iPhone: KUXIU K4 Air [Video]",
-        "summary": "When it comes to 3-in-1 travel chargers, I look at two main things: How fast it can charge my iPhone and how portable it is. I have tested plenty of travel chargers that aim to be as portable as possible by using lightweight materials or folding into a smaller footprint, but there usually seems to be some sort of compromise. But this new K4 Air by Kuxiu might be the most impressive option I’ve tested to date. This charger is just 8.5mm thin, weighs less than 120 g, and can wirelessly charge your iPhone at up to 25W. After spending a few weeks with it and traveling across the Atlantic, here is what you should know about the Kuxiu K4 Air. more…",
-        "body": "When it comes to 3-in-1 travel chargers, I look at two main things: How fast it can charge my iPhone and how portable it is. I have tested plenty of travel chargers that aim to be as portable as possible by using lightweight materials or folding into a smaller footprint, but there usually seems to be some sort of compromise. But this new K4 Air by Kuxiu might be the most impressive option I’ve tested to date. This charger is just 8.5mm thin, weighs less than 120 g, and can wirelessly charge your iPhone at up to 25W. After spending a few weeks with it and traveling across the Atlantic, here is what you should know about the Kuxiu K4 Air.\n\nBe sure to check out our hands-on video with the K4 Air to see it in action!\n\nThe biggest selling point of the new Kuxiu K4 Air is its design. When completely folded, this thing is barely thicker than an iPhone. For reference, my iPhone 17 Pro measures roughly 8.25mm thick, while the K4 Air comes in at just 8.5mm. That is insanely compact for something that can charge three devices at once. And even though they went ultra-slim, they did not really need to sacrifice any charging performance. You get:\n\nOne of my favorite things about Kuxiu has always been their price-to-performance ratio. While some brands and companies are removing charging bricks and even cables, Kuxiu is adding a ton of value here by including everything you need directly in the packaging. The build quality of the charger is also fantastic. It feels balanced, well-made, and extremely versatile because of all the situations you can use it in.\n\nKuxiu has also done a great job of bringing us a Burgundy color option that perfectly matches the new Burgundy iPhone color. I wish Apple would continue making the Cosmic Orange iPhone because the K4 Air in that orange would have been awesome.\n\nI recommend watching our video to see my reaction when I pick up the K4 Air for the first time. I was shocked at how small it was. It was thin and lightweight, but still felt solid because it was made of metal and not plastic. The form factor and size make it incredibly easy to throw into any bag, pocket, purse, or even just leave it attached to your iPhone for when it is needed.\n\nThe charging experience is actually pretty straightforward. You unfold the charger, connect the USB-C cable, and you’re ready to go. The main magnetic charging surface supports your iPhone, while the second surface is for AirPods . They even added magnets to the AirPods charging pad to ensure they stay in place every single time. There is also a dedicated Apple Watch charger that folds down to charge any Apple Watch. I was charging my Apple Watch Ultra 4 , and it fit perfectly.\n\nBut now the big question: how well does it work with the iPhone Duo? Personally, I charge my iPhone Duo on my nightstand charger when it is folded shut. So I have zero issues with it. But if you open the iPhone, place it on the charger in landscape mode, and then use it, it will tilt slightly to the left. But to my surprise, if you use the iPhone Duo and open it in portrait mode, it works great! The charger doubles as a stand and easily supports the iPhone Duo. Another cool piece that the form factor unlocks is that it can technically charge two iPhones at the same time, so if you are in a pinch, you can charge two iPhones at once,\n\nSo, regardless of which iPhone you are using, as long as it supports MagSafe, you are good to go. But how much does something like this cost?\n\nThe Kuxiu K4 Air is finally back in stock after a limited initial run. You can get it on Kuxiu’s website for $79 . It comes in Space Gray and their new Burgundy color. As I mentioned above, you also get the charging cable, a 45W charging brick, and a carrying pouch.\n\nPersonally, I am a huge fan of how good the Burgundy color looks.\n\nAfter using the Kuxiu K4 Air , it is just one of those accessories that makes sense. It is small, compact, lightweight, and extremely useful. It fits perfectly into the travel charger category. There are a ton of great 3-in-1 chargers, with new ones flooding the market daily, but very few combine this level of portability with all the features we discussed.\n\nSo if you are shopping for a portable 3-in-1 travel charger for yourself or as a gift, I would highly recommend giving this one a shot. It’s well-built, charges your big three Apple products, and looks fantastic."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-fcc0fb41ffab10fe",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/podcast/1033948/sony-aibo-robot-dog-version-history",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-15T13:57:30.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The Sony Aibo was a robot revolution dressed like a dog",
-        "summary": "In the 1990s, Sony was absolutely convinced that we were on the precipice of a robot takeover. Pretty soon, the company decided, we'd all be living among countless humanoid robots. Some would be our coworkers; others would be our friends; and at least one would be our pet. And \"pet\" was exactly what Sony was […]",
-        "body": "In the 1990s, Sony was absolutely convinced that we were on the precipice of a robot takeover. Pretty soon, the company decided, we'd all be living among countless humanoid robots. Some would be our coworkers; others would be our friends; and at least one would be our pet. And \"pet\" was exactly what Sony was going for when it created the Aibo. It was supposed to be part of the family.\n\nOn this episode of Version History , we go back in time and tell the story of the Aibo. David Pierce is joined by The Verge's Victoria Song and Jennifer Pattison Tuohy, and together they discuss the origins of this remarkable robot dog, and its impressive succe …\n\nRead the full story at The Verge."
       }
     },
     "media": null
@@ -381,30 +412,6 @@
         "title": "Spellweaver's Deck: Roguelike",
         "summary": "A dark-fantasy roguelike deckbuilder where the story changes the cards in your hand. Built for one-thumb portrait play on iPhone. Pay once. No ads, no energy, no pay-to-win. The Hush is spreading through Vessany, taking voices, then names, then the people who owned them. You are a Spellweaver. You bind spells, oaths and memories into a grimoire of cards, and you set out from the Loom to learn what the silence wants. Every run is a new weave. Every choice leaves a thread behind. FOUR SPELLWEAVERS, FOUR WAYS TO FIGHT • Ashbinder – stoke Ember and let Burn do the killing. • Warden – raise Barriers, swear Oaths, and make every blow cost them. • Veilsinger – sow Dread, Echo your best spells, Exhaust what you no longer need. • Bonecaller – spend Bone Shards and your own blood, then hex the weakened. Almost 400 cards to collect and play, dozens of relics, dual-path upgrades, and Inscriptions that rewrite every card they touch. Read enemy intents, plan the turn, drag a card onto or tap and select its target. COMPANIONS WHO REMEMBER Recruit allies who bring their own gift cards and a once-per-fight intervention you trigger from the battle screen. Earn their devotion and they fight harder. Lose their trust and they leave, and the card they gave you curdles into a Regret curse in your deck. Every companion has a fate waiting on the ending screen. A WORLD THAT TALKS BACK More than a hundred story events across three acts. Bosses and elites speak when you meet them, when they turn, and when they die. Choices you made in Act I send their invoices in Act III. Multiple endings, and secrets past them. THE LOOM REMEMBERS Fall, and bind one earned card to the Loom for the next Weaver to carry. Spend Threads on new classes, cards, relics and boons. Climb ten levels of Weave Depth. Stack Trials for a higher score multiplier. Watch the tapestry gain a band with every victory, and the sky over the Loom remember how you ended. MORE WAYS TO WEAVE • Daily Weave – one seed for everyone, with rival ghosts showing where they fell. • Weekly Gauntlet – a named modifier stack, three attempts, a recurring leaderboard. • The Tolling – six bells, elite to boss, about twelve minutes. • Loomcast – draft your grimoire before you set out. • Seeded practice – any seed, any unlocked depth. MADE FOR IPHONE, WORKS ON IPAD Portrait, one-thumb, drag-to-target. Haptics, floating numbers, screen shake, and a full score with act, boss, shop and rest themes. Autosave and resume at any moment. Game Center leaderboards and achievements. iCloud backup of your progress. Plays offline. FAIR BY DESIGN Buy it once and the whole game is yours. The optional extras are cosmetic: card backs, card faces, tapestry themes, thread dyes. Nothing you can buy changes a card, a drop rate, or a difficulty. Money never buys balance. The world is falling silent. What will you weave?",
         "body": "A dark-fantasy roguelike deckbuilder where the story changes the cards in your hand. Built for one-thumb portrait play on iPhone. Pay once. No ads, no energy, no pay-to-win.\n\nThe Hush is spreading through Vessany, taking voices, then names, then the people who owned them. You are a Spellweaver. You bind spells, oaths and memories into a grimoire of cards, and you set out from the Loom to learn what the silence wants. Every run is a new weave. Every choice leaves a thread behind.\n\nFOUR SPELLWEAVERS, FOUR WAYS TO FIGHT • Ashbinder – stoke Ember and let Burn do the killing. • Warden – raise Barriers, swear Oaths, and make every blow cost them. • Veilsinger – sow Dread, Echo your best spells, Exhaust what you no longer need. • Bonecaller – spend Bone Shards and your own blood, then hex the weakened. Almost 400 cards to collect and play, dozens of relics, dual-path upgrades, and Inscriptions that rewrite every card they touch. Read enemy intents, plan the turn, drag a card onto or tap and select its target.\n\nCOMPANIONS WHO REMEMBER Recruit allies who bring their own gift cards and a once-per-fight intervention you trigger from the battle screen. Earn their devotion and they fight harder. Lose their trust and they leave, and the card they gave you curdles into a Regret curse in your deck. Every companion has a fate waiting on the ending screen.\n\nA WORLD THAT TALKS BACK More than a hundred story events across three acts. Bosses and elites speak when you meet them, when they turn, and when they die. Choices you made in Act I send their invoices in Act III. Multiple endings, and secrets past them.\n\nTHE LOOM REMEMBERS Fall, and bind one earned card to the Loom for the next Weaver to carry. Spend Threads on new classes, cards, relics and boons. Climb ten levels of Weave Depth. Stack Trials for a higher score multiplier. Watch the tapestry gain a band with every victory, and the sky over the Loom remember how you ended.\n\nMORE WAYS TO WEAVE • Daily Weave – one seed for everyone, with rival ghosts showing where they fell. • Weekly Gauntlet – a named modifier stack, three attempts, a recurring leaderboard. • The Tolling – six bells, elite to boss, about twelve minutes. • Loomcast – draft your grimoire before you set out. • Seeded practice – any seed, any unlocked depth.\n\nMADE FOR IPHONE, WORKS ON IPAD Portrait, one-thumb, drag-to-target. Haptics, floating numbers, screen shake, and a full score with act, boss, shop and rest themes. Autosave and resume at any moment. Game Center leaderboards and achievements. iCloud backup of your progress. Plays offline.\n\nFAIR BY DESIGN Buy it once and the whole game is yours. The optional extras are cosmetic: card backs, card faces, tapestry themes, thread dyes. Nothing you can buy changes a card, a drop rate, or a difficulty. Money never buys balance.\n\nThe world is falling silent. What will you weave?"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-f8bf0d5ddfc12287",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/14/got-an-iphone-duo-these-9-settings-make-it-easier-to-use/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-14T18:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Got an iPhone Duo? These 9 settings make it easier to use",
-        "summary": "From Touch ID shortcuts to smarter volume buttons and camera tricks, these tweaks make Apple's foldable iPhone easier to use every day.",
-        "body": "Apple’s new foldable , the iPhone Duo, has proven popular enough that the company can’t keep the device in stock . While the Duo introduces a new way to use an iPhone, getting the most out of this initial version may require adjusting a few settings to make it work better when it comes to everyday tasks, like unlocking the device with Touch ID, navigating the interface, and taking photos.\n\nAfter spending some time with the Duo, we’d recommend making the following adjustments to make the new iPhone a bit easier to use, most notably when it comes to the use of Touch ID.\n\nUnlike modern iPhones, the Duo doesn’t support Face ID. That means you have to adjust to pressing a finger on the side of the device once again to authenticate with apps, unlock the device, and use Apple Pay. But there are a few things you can do to make the switch back to the older technology a bit less painful.\n\nThere are a few settings that could also improve your experience with the iPhone Duo, as they may make it easier to perform certain everyday tasks, like taking screenshots or reaching different parts of the screen, among other things.\n\nThe camera tricks are a little more niche, but some Duo owners have found the following to be helpful."
       }
     },
     "media": null

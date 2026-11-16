@@ -1,7 +1,7 @@
 name: Vincular compilación TestFlight aprobada por Tony
 on:
   push:
-    branches: [main]
+    branches: [main, apple-chat-commands]
     paths:
       - 'testflight-approvals/*.json'
       - '.github/workflows/link-approved-testflight-build.yml'

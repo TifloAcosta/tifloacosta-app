@@ -1,0 +1,10 @@
+{
+  "requestedBy": "Tony Acosta",
+  "scope": [
+    "appstore-reviews",
+    "testflight-external",
+    "ios-app-status",
+    "testflight-groups"
+  ],
+  "readOnly": true
+}

@@ -1,0 +1,9 @@
+{
+  "requestId": "20261116-safe-activation-01",
+  "source": "ChatGPT",
+  "mode": "validation-only",
+  "approved": false,
+  "reviewApproval": false,
+  "testflightApproval": false,
+  "purpose": "Ejecutar pruebas de protección; no enviar ni vincular nada en Apple"
+}

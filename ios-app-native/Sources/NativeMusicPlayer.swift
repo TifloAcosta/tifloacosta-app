@@ -2,6 +2,11 @@ import Foundation
 import AVFoundation
 import Combine
 
+private struct MusicAudioSnapshot: Codable {
+    let name: String
+    let gains: [Float]
+}
+
 /// Motor de Mi Música; no comparte sesión ni preferencias con la lectura TTS.
 @MainActor
 final class NativeMusicPlayer: ObservableObject {
@@ -26,6 +31,7 @@ final class NativeMusicPlayer: ObservableObject {
     ]
     @Published private(set) var selectedPreset = UserDefaults.standard.string(forKey: "mi-musica-eq-preset") ?? "Normal"
     @Published private(set) var gains: [Float] = [0, 0, 0, 0, 0]
+    @Published private(set) var currentHasOverride = false
 
     private let engine = AVAudioEngine()
     private let node = AVAudioPlayerNode()
@@ -62,7 +68,6 @@ final class NativeMusicPlayer: ObservableObject {
         guard let preset = Self.presets.first(where: { $0.name == name }) else { return }
         selectedPreset = preset.name
         gains = preset.gains
-        UserDefaults.standard.set(name, forKey: "mi-musica-eq-preset")
         applyEqualizer()
     }
 
@@ -70,8 +75,46 @@ final class NativeMusicPlayer: ObservableObject {
         guard gains.indices.contains(index) else { return }
         gains[index] = (gains[index] + amount).clamped(to: -12...12)
         selectedPreset = "Personalizado"
+        applyEqualizer()
+    }
+
+    func saveAsGeneral() {
         UserDefaults.standard.set(selectedPreset, forKey: "mi-musica-eq-preset")
         UserDefaults.standard.set(gains.map(Double.init), forKey: "mi-musica-eq-bands")
+    }
+
+    private func overrideKey(_ url: URL) -> String { "mi-musica-eq-song-" + url.lastPathComponent }
+
+    func saveForCurrent() {
+        guard queue.indices.contains(index) else { return }
+        let snapshot = MusicAudioSnapshot(name: selectedPreset, gains: gains)
+        guard let data = try? JSONEncoder().encode(snapshot) else { return }
+        UserDefaults.standard.set(data, forKey: overrideKey(queue[index].url))
+        currentHasOverride = true
+    }
+
+    func removeCurrentOverride() {
+        guard queue.indices.contains(index) else { return }
+        UserDefaults.standard.removeObject(forKey: overrideKey(queue[index].url))
+        loadProfile(for: queue[index].url)
+    }
+
+    private func loadProfile(for url: URL) {
+        let saved = UserDefaults.standard.data(forKey: overrideKey(url))
+            .flatMap { try? JSONDecoder().decode(MusicAudioSnapshot.self, from: $0) }
+        currentHasOverride = saved != nil
+        if let saved, saved.gains.count == 5 {
+            selectedPreset = saved.name
+            gains = saved.gains.map { $0.clamped(to: -12...12) }
+        } else {
+            selectedPreset = UserDefaults.standard.string(forKey: "mi-musica-eq-preset") ?? "Normal"
+            if selectedPreset == "Personalizado",
+               let custom = UserDefaults.standard.array(forKey: "mi-musica-eq-bands") as? [Double], custom.count == 5 {
+                gains = custom.map { Float($0).clamped(to: -12...12) }
+            } else {
+                gains = Self.presets.first(where: { $0.name == selectedPreset })?.gains ?? [0, 0, 0, 0, 0]
+            }
+        }
         applyEqualizer()
     }
 
@@ -95,6 +138,7 @@ final class NativeMusicPlayer: ObservableObject {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
             try AVAudioSession.sharedInstance().setActive(true)
             let item = queue[index]
+            loadProfile(for: item.url)
             generation += 1
             node.stop()
             let audioFile = try AVAudioFile(forReading: item.url)

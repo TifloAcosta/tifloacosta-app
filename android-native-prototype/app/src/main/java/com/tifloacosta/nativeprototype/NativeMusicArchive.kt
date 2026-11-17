@@ -24,11 +24,12 @@ internal class NativeMusicArchive(private val context: Context) {
                     val sources = track.getJSONArray("locations")
                     val sourceUri = (0 until sources.length()).map { sources.getJSONObject(it) }
                         .firstOrNull { it.optString("provider") == "android-document" }
-                        ?.optString("remoteId") ?: continue
+                        ?.optString("remoteId") ?: throw IllegalStateException("No se puede completar la copia: falta el origen de ${track.optString("title")}")
                     val extension = track.optString("title").substringAfterLast('.', "mp3").lowercase()
                     val safeExtension = if (extension in setOf("mp3", "m4a", "wav", "aac", "flac", "ogg")) extension else "mp3"
                     val relative = "audio/${UUID.randomUUID()}.$safeExtension"
-                    val stream = context.contentResolver.openInputStream(Uri.parse(sourceUri)) ?: continue
+                    val stream = context.contentResolver.openInputStream(Uri.parse(sourceUri))
+                        ?: throw IllegalStateException("No se puede completar la copia: no se puede leer ${track.optString("title")}")
                     stream.use {
                         archive.putNextEntry(ZipEntry(relative))
                         it.copyTo(archive)
@@ -48,6 +49,7 @@ internal class NativeMusicArchive(private val context: Context) {
 
     fun restore(source: Uri): Restored {
         val staging = File(context.cacheDir, "music-restore-${UUID.randomUUID()}")
+        val createdFiles = mutableListOf<File>()
         staging.mkdirs()
         try {
             var manifest: JSONObject? = null
@@ -101,6 +103,7 @@ internal class NativeMusicArchive(private val context: Context) {
                 require(original.isFile) { "No se encontró una canción incluida en el manifiesto" }
                 val local = File(destination, "${UUID.randomUUID()}.${path.substringAfterLast('.')}")
                 original.copyTo(local)
+                createdFiles.add(local)
                 val uri = Uri.fromFile(local).toString()
                 idToUri[id] = uri
                 restored.add("$uri\n${track.getString("title")}")
@@ -114,6 +117,9 @@ internal class NativeMusicArchive(private val context: Context) {
                 folders[name] = (0 until ids.length()).mapNotNull { idToUri[ids.getString(it)] }.toSet()
             }
             return Restored(restored, folders)
+        } catch (failure: Exception) {
+            createdFiles.forEach { it.delete() }
+            throw failure
         } finally { staging.deleteRecursively() }
     }
 }

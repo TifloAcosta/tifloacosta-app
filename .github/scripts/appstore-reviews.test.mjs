@@ -13,6 +13,8 @@ test('distinguishes published responses from unanswered reviews', () => {
   assert.equal(result.responded,1);
   assert.equal(result.pending,1);
   assert.deepEqual(result.unanswered.map(x=>x.nickname),['Adolfo']);
+  assert.deepEqual(result.writtenRatingsByStars, {'1':0,'2':0,'3':0,'4':1,'5':1});
+  assert.equal(result.writtenBelowFive,1);
 });
 
 test('pending response is not mistaken for a published answer', () => {

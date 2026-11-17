@@ -18,13 +18,23 @@ class NativeMusicPlayer(private val context: Context) {
         private set
     var durationMs by mutableStateOf(0)
         private set
+    private val preferences = context.getSharedPreferences("mi-musica-player-v1", 0)
+    var repeatMode by mutableStateOf(preferences.getString("repeat", "off") ?: "off")
+        private set
+    var shuffleEnabled by mutableStateOf(preferences.getBoolean("shuffle", false))
+        private set
+    var sleepRemainingSeconds by mutableStateOf(0)
+        private set
 
     private var audio: MediaPlayer? = null
     private var queue: List<Pair<String, String>> = emptyList()
+    private var originalQueue: List<Pair<String, String>> = emptyList()
     private var index = -1
+    private var sleepDeadlineMs: Long? = null
 
     fun play(uri: String, title: String, songs: List<Pair<String, String>>) {
-        queue = songs
+        originalQueue = songs
+        queue = if (shuffleEnabled) songs.filter { it.first == uri } + songs.filterNot { it.first == uri }.shuffled() else songs
         index = queue.indexOfFirst { it.first == uri }
         if (index >= 0) startCurrent()
     }
@@ -41,7 +51,7 @@ class NativeMusicPlayer(private val context: Context) {
                 .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC).build())
             player.setDataSource(context, Uri.parse(item.first))
             player.prepare()
-            player.setOnCompletionListener { next() }
+            player.setOnCompletionListener { if (repeatMode == "one") startCurrent() else next() }
             player.start()
             audio = player
             currentTitle = item.second
@@ -61,8 +71,32 @@ class NativeMusicPlayer(private val context: Context) {
         }
     }
 
-    fun next() { index += 1; startCurrent() }
+    fun next() {
+        index += 1
+        if (index >= queue.size && repeatMode == "all") index = 0
+        startCurrent()
+    }
     fun previous() { index = (index - 1).coerceAtLeast(0); startCurrent() }
+    fun changeRepeat() {
+        repeatMode = when (repeatMode) { "off" -> "all"; "all" -> "one"; else -> "off" }
+        preferences.edit().putString("repeat", repeatMode).apply()
+    }
+
+    fun toggleShuffle() {
+        shuffleEnabled = !shuffleEnabled
+        preferences.edit().putBoolean("shuffle", shuffleEnabled).apply()
+        if (index !in queue.indices) return
+        val currentUri = queue[index].first
+        queue = if (shuffleEnabled) listOf(queue[index]) + queue.filterNot { it.first == currentUri }.shuffled() else originalQueue
+        index = queue.indexOfFirst { it.first == currentUri }
+    }
+
+    fun setSleep(minutes: Int) {
+        sleepDeadlineMs = System.currentTimeMillis() + minutes * 60_000L
+        sleepRemainingSeconds = minutes * 60
+    }
+
+    fun cancelSleep() { sleepDeadlineMs = null; sleepRemainingSeconds = 0 }
     fun skip(seconds: Int) {
         audio?.let { player ->
             val destination = (player.currentPosition.toLong() + seconds.toLong() * 1000)
@@ -73,6 +107,10 @@ class NativeMusicPlayer(private val context: Context) {
     }
 
     fun updateProgress() {
+        sleepDeadlineMs?.let { deadline ->
+            sleepRemainingSeconds = ((deadline - System.currentTimeMillis() + 999) / 1000).coerceAtLeast(0).toInt()
+            if (sleepRemainingSeconds == 0) { cancelSleep(); stop(); return }
+        }
         audio?.let { if (it.isPlaying) progressMs = it.currentPosition }
     }
 

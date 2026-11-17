@@ -65,12 +65,19 @@ fun NativeMyMusic(onBack: () -> Unit) {
     var autoBackupDays by remember { mutableStateOf(prefs.getInt("auto-backup-days", 0)) }
 
     fun backupSnapshot(): JSONObject {
-        val tracks = JSONArray().apply { songs.forEach { put(JSONObject().put("uri", it.uri).put("title", it.title)) } }
-        val folderArray = JSONArray().apply { folders.forEach { folder ->
-            put(JSONObject().put("name", folder).put("uris", JSONArray(prefs.getStringSet("folder:$folder", emptySet()).orEmpty().toList())))
+        val tracks = JSONObject().apply { songs.forEach { song ->
+            put(song.uri, JSONObject().put("id", song.uri).put("title", song.title)
+                .put("locations", JSONArray().put(JSONObject().put("provider", "android-document").put("remoteId", song.uri))))
         } }
-        return JSONObject().put("format", "tifloacosta-mi-musica-android-index")
-            .put("version", 1).put("includesAudioFiles", false).put("tracks", tracks).put("folders", folderArray)
+        val folderArray = JSONArray().apply { folders.forEach { folder ->
+            put(JSONObject().put("id", "folder:$folder").put("name", folder)
+                .put("trackIds", JSONArray(prefs.getStringSet("folder:$folder", emptySet()).orEmpty().toList())))
+        } }
+        return JSONObject().put("format", "tifloacosta-mi-musica")
+            .put("version", 1).put("createdAt", java.time.Instant.now().toString())
+            .put("includesAudioFiles", false)
+            .put("catalog", JSONObject().put("version", 1).put("tracks", tracks))
+            .put("folders", folderArray).put("playlists", JSONArray()).put("audioProfiles", JSONObject())
     }
 
     fun performAutomaticBackupIfDue() {
@@ -107,18 +114,27 @@ fun NativeMyMusic(onBack: () -> Unit) {
             val raw = context.contentResolver.openInputStream(source)?.bufferedReader()?.use { it.readText() }
                 ?: throw IllegalStateException("No se pudo leer el respaldo")
             val snapshot = JSONObject(raw)
-            require(snapshot.optString("format") == "tifloacosta-mi-musica-android-index" && snapshot.optInt("version") == 1 && !snapshot.optBoolean("includesAudioFiles")) {
+            require(snapshot.optString("format") == "tifloacosta-mi-musica" && snapshot.optInt("version") == 1 && !snapshot.optBoolean("includesAudioFiles")) {
                 "El archivo no es un índice de Mi Música compatible"
             }
-            val importedTracks = snapshot.getJSONArray("tracks")
+            val importedTracks = snapshot.getJSONObject("catalog").getJSONObject("tracks")
             val importedFolders = snapshot.getJSONArray("folders")
+            snapshot.getJSONArray("playlists")
             val records = prefs.getStringSet("songs", emptySet()).orEmpty().toMutableSet()
-            for (index in 0 until importedTracks.length()) {
-                val entry = importedTracks.getJSONObject(index)
-                val uri = entry.getString("uri")
+            var unavailable = 0
+            for (key in importedTracks.keys()) {
+                val entry = importedTracks.getJSONObject(key)
                 val title = entry.getString("title")
-                require(uri.isNotBlank() && title.isNotBlank() && !uri.contains('\n'))
-                records.add("$uri\n$title")
+                val locations = entry.getJSONArray("locations")
+                val uri = (0 until locations.length()).map { locations.getJSONObject(it) }
+                    .firstOrNull { it.getString("provider") == "android-document" }
+                    ?.getString("remoteId")
+                if (uri != null && uri.isNotBlank() && !uri.contains('\n') && title.isNotBlank()) {
+                    val permission = context.contentResolver.persistedUriPermissions.any {
+                        it.uri.toString() == uri && it.isReadPermission
+                    }
+                    if (permission) records.add("$uri\n$title") else unavailable++
+                } else unavailable++
             }
             val nextFolders = folders.toMutableSet()
             val memberships = mutableMapOf<String, Set<String>>()
@@ -127,7 +143,7 @@ fun NativeMyMusic(onBack: () -> Unit) {
                 val name = entry.getString("name")
                 require(name.isNotBlank())
                 nextFolders.add(name)
-                val members = entry.getJSONArray("uris")
+                val members = entry.getJSONArray("trackIds")
                 memberships[name] = (0 until members.length()).map { members.getString(it) }.toSet()
             }
             val editor = prefs.edit().putStringSet("songs", records).putStringSet("folders", nextFolders)
@@ -135,6 +151,7 @@ fun NativeMyMusic(onBack: () -> Unit) {
             editor.apply()
             songs = savedSongs()
             folders = nextFolders.sorted()
+            if (unavailable > 0) error = "Organización restaurada. Hay $unavailable canciones sin permisos de audio; impórtalas para reproducirlas."
         } catch (failure: Exception) { error = "No se pudo restaurar el respaldo: ${failure.localizedMessage}" }
     }
 

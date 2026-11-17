@@ -3,7 +3,7 @@ export function createMusicQueue(trackIds, startIndex = 0) {
   if (!Number.isInteger(startIndex) || startIndex < 0 || (ids.length && startIndex >= ids.length)) {
     throw new RangeError('Posición de inicio fuera de la cola');
   }
-  return { trackIds: ids, index: ids.length ? startIndex : -1, currentId: ids[startIndex] ?? null, repeat: 'off' };
+  return { trackIds: ids, originalTrackIds: [...ids], index: ids.length ? startIndex : -1, currentId: ids[startIndex] ?? null, repeat: 'off', shuffle: false };
 }
 
 export function setMusicRepeat(queue, repeat) {
@@ -35,4 +35,30 @@ export function seekMusicPosition(positionMs, durationMs) {
 export function resolvePlayableTrack(track) {
   const location = track?.locations?.find((item) => item.available !== false) ?? null;
   return location ? { location, reason: null } : { location: null, reason: 'unavailable' };
+}
+
+export function setMusicShuffle(queue, enabled, random = Math.random) {
+  if (!enabled) {
+    const trackIds = [...(queue.originalTrackIds ?? queue.trackIds)];
+    const index = trackIds.indexOf(queue.currentId);
+    return { ...queue, trackIds, index, shuffle: false };
+  }
+  if (queue.shuffle) return queue;
+  const currentId = queue.currentId;
+  const others = queue.trackIds.filter((id, index) => index !== queue.index);
+  for (let index = others.length - 1; index > 0; index--) {
+    const randomIndex = Math.floor(Math.max(0, Math.min(0.999999, random())) * (index + 1));
+    [others[index], others[randomIndex]] = [others[randomIndex], others[index]];
+  }
+  const trackIds = currentId === null ? others : [currentId, ...others];
+  return { ...queue, originalTrackIds: [...(queue.originalTrackIds ?? queue.trackIds)], trackIds, index: currentId === null ? -1 : 0, shuffle: true };
+}
+
+export function sleepDeadline(nowMs, minutes) {
+  if (!Number.isFinite(minutes) || minutes <= 0) throw new RangeError('Duración del temporizador no válida');
+  return nowMs + Math.round(minutes * 60_000);
+}
+
+export function remainingSleepSeconds(deadlineMs, nowMs) {
+  return Math.max(0, Math.ceil((deadlineMs - nowMs) / 1000));
 }

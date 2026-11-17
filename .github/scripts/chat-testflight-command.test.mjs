@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { validateCommand } from './chat-testflight-command.mjs';
+import { validateCommand, authorizeRealUpload } from './chat-testflight-command.mjs';
 
 const event = { action: 'created', sender: { login: 'TifloAcosta' }, issue: { number: 345 }, comment: { id: 567, body: '/tiflo testflight dry-run feature/mi-musica', user: { login: 'TifloAcosta' } } };
 const check = (changes = {}) => validateCommand({ ...event, ...changes }, { controlIssue: 345 });
@@ -23,4 +23,10 @@ test('rejects unexpected or unsafe branches', () => {
 });
 test('rejects duplicate delivery and non-created actions', () => {
   assert.throws(() => check({ action: 'edited' }), /action/);
+});
+
+test('does not permit real dispatch unless separately enabled', () => {
+  assert.throws(() => authorizeRealUpload({ ALLOW_REAL_UPLOAD: 'false' }), /disabled/);
+  assert.throws(() => authorizeRealUpload({}), /disabled/);
+  assert.doesNotThrow(() => authorizeRealUpload({ ALLOW_REAL_UPLOAD: 'true' }));
 });

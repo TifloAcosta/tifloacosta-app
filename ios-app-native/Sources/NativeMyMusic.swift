@@ -1,5 +1,20 @@
 import SwiftUI
 import UniformTypeIdentifiers
+import ZIPFoundation
+import UIKit
+
+private struct MusicArchiveSelection: Identifiable {
+    let url: URL
+    var id: URL { url }
+}
+
+private struct MusicArchiveShareSheet: UIViewControllerRepresentable {
+    let archiveURL: URL
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        UIActivityViewController(activityItems: [archiveURL], applicationActivities: nil)
+    }
+    func updateUIViewController(_ controller: UIActivityViewController, context: Context) {}
+}
 
 private struct MusicBackupDocument: FileDocument {
     static var readableContentTypes: [UTType] { [.json] }
@@ -210,6 +225,96 @@ private final class NativeMusicLibrary: ObservableObject {
             if unavailable > 0 { self.error = "Organización restaurada. Hay \(unavailable) canciones sin audio local; tendrás que importarlas para reproducirlas." }
         } catch { self.error = "No se pudo restaurar el índice: \(error.localizedDescription)" }
     }
+
+    func createCompleteArchive() -> URL? {
+        let staging = FileManager.default.temporaryDirectory.appendingPathComponent("music-export-\(UUID().uuidString)", isDirectory: true)
+        let output = FileManager.default.temporaryDirectory.appendingPathComponent("MiMusica-completa-\(UUID().uuidString).zip")
+        do {
+            try FileManager.default.createDirectory(at: staging.appendingPathComponent("audio"), withIntermediateDirectories: true)
+            guard let text = exportIndex()?.text,
+                  let bytes = text.data(using: .utf8),
+                  let backup = try? JSONDecoder().decode(MusicIndexBackup.self, from: bytes) else {
+                throw CocoaError(.fileReadCorruptFile)
+            }
+            var tracks = backup.catalog.tracks
+            var copied: [String] = []
+            for file in files {
+                let original = audioURL(for: file)
+                guard FileManager.default.fileExists(atPath: original.path) else { continue }
+                let relative = "audio/\(UUID().uuidString).\(original.pathExtension.lowercased())"
+                try FileManager.default.copyItem(at: original, to: staging.appendingPathComponent(relative))
+                copied.append(relative)
+                if let track = tracks[file.id.uuidString] {
+                    tracks[file.id.uuidString] = MusicPortableTrack(id: track.id, title: track.title,
+                        locations: track.locations + [MusicPortableLocation(provider: "archive", remoteId: relative)])
+                }
+            }
+            let complete = MusicIndexBackup(format: backup.format, version: backup.version,
+                createdAt: backup.createdAt, includesAudioFiles: true,
+                catalog: MusicPortableCatalog(version: 1, tracks: tracks),
+                folders: backup.folders, playlists: backup.playlists, audioProfiles: backup.audioProfiles)
+            try JSONEncoder().encode(complete).write(to: staging.appendingPathComponent("manifest.json"))
+            guard let archive = Archive(url: output, accessMode: .create) else { throw CocoaError(.fileWriteUnknown) }
+            try archive.addEntry(with: "manifest.json", relativeTo: staging)
+            for relative in copied { try archive.addEntry(with: relative, relativeTo: staging) }
+            try? FileManager.default.removeItem(at: staging)
+            return output
+        } catch {
+            try? FileManager.default.removeItem(at: staging)
+            try? FileManager.default.removeItem(at: output)
+            self.error = "No se pudo crear la copia con audio: \(error.localizedDescription)"
+            return nil
+        }
+    }
+
+    func restoreCompleteArchive(_ source: URL) {
+        let accessed = source.startAccessingSecurityScopedResource()
+        defer { if accessed { source.stopAccessingSecurityScopedResource() } }
+        let staging = FileManager.default.temporaryDirectory.appendingPathComponent("music-import-\(UUID().uuidString)", isDirectory: true)
+        do {
+            try FileManager.default.createDirectory(at: staging, withIntermediateDirectories: true)
+            guard let archive = Archive(url: source, accessMode: .read) else { throw CocoaError(.fileReadCorruptFile) }
+            var total: Int64 = 0
+            for entry in archive {
+                let name = entry.path
+                guard name == "manifest.json" || name.range(of: #"^audio/[a-zA-Z0-9-]+\.(mp3|m4a|aac|wav|flac|ogg)$"#, options: .regularExpression) != nil,
+                      entry.type == .file else { throw CocoaError(.fileReadCorruptFile) }
+                total += Int64(entry.uncompressedSize)
+                guard total <= 2_147_483_648 else { throw CocoaError(.fileReadCorruptFile) }
+                let target = staging.appendingPathComponent(name)
+                try FileManager.default.createDirectory(at: target.deletingLastPathComponent(), withIntermediateDirectories: true)
+                _ = try archive.extract(entry, to: target)
+            }
+            let manifest = staging.appendingPathComponent("manifest.json")
+            guard let attributes = try? FileManager.default.attributesOfItem(atPath: manifest.path),
+                  let size = attributes[.size] as? NSNumber, size.intValue <= 8_388_608 else { throw CocoaError(.fileReadCorruptFile) }
+            let backup = try JSONDecoder().decode(MusicIndexBackup.self, from: Data(contentsOf: manifest))
+            guard backup.format == "tifloacosta-mi-musica", backup.version == 1, backup.includesAudioFiles else { throw CocoaError(.fileReadCorruptFile) }
+            try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+            var imported: [MusicLocalFile] = []
+            var ids: [String: UUID] = [:]
+            for (id, track) in backup.catalog.tracks {
+                guard let stored = track.locations.first(where: { $0.provider == "archive" }),
+                      stored.remoteId.range(of: #"^audio/[a-zA-Z0-9-]+\.(mp3|m4a|aac|wav|flac|ogg)$"#, options: .regularExpression) != nil else { continue }
+                let original = staging.appendingPathComponent(stored.remoteId)
+                guard FileManager.default.fileExists(atPath: original.path) else { throw CocoaError(.fileReadCorruptFile) }
+                let newID = UUID()
+                let fileName = UUID().uuidString + "." + original.pathExtension
+                try FileManager.default.copyItem(at: original, to: directory.appendingPathComponent(fileName))
+                imported.append(MusicLocalFile(id: newID, name: track.title, fileName: fileName))
+                ids[id] = newID
+            }
+            let additions = backup.folders.map { folder in
+                MusicVirtualFolder(id: UUID(), name: folder.name, trackIds: folder.trackIds.compactMap { ids[$0] })
+            }
+            let originalFiles = files
+            let originalFolders = folders
+            files += imported
+            folders += additions
+            do { try save() } catch { files = originalFiles; folders = originalFolders; throw error }
+        } catch { self.error = "No se pudo restaurar la copia con audio: \(error.localizedDescription)" }
+        try? FileManager.default.removeItem(at: staging)
+    }
 }
 
 struct NativeMyMusicScreen: View {
@@ -223,6 +328,8 @@ struct NativeMyMusicScreen: View {
     @State private var exportingBackup = false
     @State private var importingBackup = false
     @State private var backupDocument: MusicBackupDocument?
+    @State private var completeArchiveURL: URL?
+    @State private var importingCompleteBackup = false
 
     private var visibleFiles: [MusicLocalFile] {
         let query = searchText.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)
@@ -244,6 +351,8 @@ struct NativeMyMusicScreen: View {
                     exportingBackup = backupDocument != nil
                 }
                 Button("Restaurar respaldo de biblioteca") { importingBackup = true }
+                Button("Exportar copia completa con audio") { completeArchiveURL = library.createCompleteArchive() }
+                Button("Restaurar copia completa con audio") { importingCompleteBackup = true }
                 Text("Copia automática: \(library.autoBackupDays == 0 ? "desactivada" : "cada \(library.autoBackupDays) días")")
                 Button("Desactivar copia automática") { library.setAutomaticBackup(days: 0) }
                 Button("Cada 7 días") { library.setAutomaticBackup(days: 7) }
@@ -361,6 +470,16 @@ struct NativeMyMusicScreen: View {
         .fileImporter(isPresented: $importingBackup, allowedContentTypes: [.json]) { result in
             switch result {
             case .success(let url): library.restoreIndex(url)
+            case .failure(let failure): library.error = failure.localizedDescription
+            }
+        }
+        .sheet(item: Binding(
+            get: { completeArchiveURL.map { MusicArchiveSelection(url: $0) } },
+            set: { if $0 == nil { completeArchiveURL = nil } }
+        )) { selection in MusicArchiveShareSheet(archiveURL: selection.url) }
+        .fileImporter(isPresented: $importingCompleteBackup, allowedContentTypes: [.zip]) { result in
+            switch result {
+            case .success(let url): library.restoreCompleteArchive(url)
             case .failure(let failure): library.error = failure.localizedDescription
             }
         }

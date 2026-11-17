@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { MUSIC_EQ_FREQUENCIES, MUSIC_EQ_PRESETS, createMusicAudioSettings, setMusicAudioOverride, resolveMusicAudioProfile, normalizeMusicEqBands } from '../shared/music-audio-profiles.mjs';
+import { MUSIC_EQ_FREQUENCIES, MUSIC_EQ_PRESETS, createMusicAudioSettings, setMusicAudioOverride, removeMusicAudioOverride, resolveMusicAudioProfile, normalizeMusicEqBands } from '../shared/music-audio-profiles.mjs';
 
 test('five accessible EQ bands have fixed frequencies and safe gain bounds', () => {
   assert.deepEqual(MUSIC_EQ_FREQUENCIES, [80, 250, 1000, 4000, 12000]);
@@ -30,4 +30,20 @@ test('settings are independent and accept a custom five-band profile', () => {
   const music = setMusicAudioOverride(createMusicAudioSettings(), 'song', 'track-1', { name: 'Mis auriculares', bands: [1, 0, -2, 3, 4] });
   assert.deepEqual(resolveMusicAudioProfile(music, { songId: 'track-1' }).bands, [1, 0, -2, 3, 4]);
   assert.deepEqual(readerSettings, { speed: 1.25, voice: 'Ana' });
+});
+
+test('removing a song override restores playlist and general inheritance', () => {
+  let settings = createMusicAudioSettings('normal');
+  settings = setMusicAudioOverride(settings, 'playlist', 'favorites', 'rock');
+  settings = setMusicAudioOverride(settings, 'song', 'track-a', 'clarity');
+  const restored = removeMusicAudioOverride(settings, 'song', 'track-a');
+  assert.equal(resolveMusicAudioProfile(restored, { songId: 'track-a', playlistId: 'favorites' }).name, 'rock');
+  assert.equal(resolveMusicAudioProfile(settings, { songId: 'track-a' }).name, 'clarity');
+});
+
+test('serialized settings retain custom profiles without leaking reader settings', () => {
+  const settings = setMusicAudioOverride(createMusicAudioSettings(), 'song', 'track-a', { name: 'Mi perfil', bands: [-2, 1, 0, 2, 3] });
+  const restored = JSON.parse(JSON.stringify(settings));
+  assert.deepEqual(resolveMusicAudioProfile(restored, { songId: 'track-a' }).bands, [-2, 1, 0, 2, 3]);
+  assert.equal(JSON.stringify(restored).includes('reading'), false);
 });

@@ -1,6 +1,30 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
+private struct MusicBackupDocument: FileDocument {
+    static var readableContentTypes: [UTType] { [.json] }
+    var text: String = ""
+    init(text: String = "") { self.text = text }
+    init(configuration: ReadConfiguration) throws {
+        guard let bytes = configuration.file.regularFileContents, let value = String(data: bytes, encoding: .utf8) else {
+            throw CocoaError(.fileReadCorruptFile)
+        }
+        text = value
+    }
+    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+        FileWrapper(regularFileWithContents: Data(text.utf8))
+    }
+}
+
+private struct MusicIndexBackup: Codable {
+    let format: String
+    let version: Int
+    let createdAt: String
+    let includesAudioFiles: Bool
+    let files: [MusicLocalFile]
+    let folders: [MusicVirtualFolder]
+}
+
 private struct MusicLocalFile: Identifiable, Codable {
     let id: UUID
     let name: String
@@ -89,6 +113,31 @@ private final class NativeMusicLibrary: ObservableObject {
     func audioURL(for file: MusicLocalFile) -> URL {
         directory.appendingPathComponent(file.fileName)
     }
+
+    func exportIndex() -> MusicBackupDocument? {
+        do {
+            let backup = MusicIndexBackup(format: "tifloacosta-mi-musica-ios-index", version: 1,
+                createdAt: ISO8601DateFormatter().string(from: Date()), includesAudioFiles: false,
+                files: files, folders: folders)
+            let bytes = try JSONEncoder().encode(backup)
+            return MusicBackupDocument(text: String(decoding: bytes, as: UTF8.self))
+        } catch { self.error = "No se pudo preparar el respaldo: \(error.localizedDescription)"; return nil }
+    }
+
+    func restoreIndex(_ url: URL) {
+        let accessed = url.startAccessingSecurityScopedResource()
+        defer { if accessed { url.stopAccessingSecurityScopedResource() } }
+        do {
+            let imported = try JSONDecoder().decode(MusicIndexBackup.self, from: Data(contentsOf: url))
+            guard imported.format == "tifloacosta-mi-musica-ios-index", imported.version == 1,
+                  !imported.includesAudioFiles else { throw CocoaError(.fileReadCorruptFile) }
+            let originalFiles = files
+            let originalFolders = folders
+            files = Array(Dictionary((files + imported.files).map { ($0.id, $0) }, uniquingKeysWith: { existing, _ in existing }).values)
+            folders = Array(Dictionary((folders + imported.folders).map { ($0.id, $0) }, uniquingKeysWith: { existing, _ in existing }).values)
+            do { try save() } catch { files = originalFiles; folders = originalFolders; throw error }
+        } catch { self.error = "No se pudo restaurar el índice: \(error.localizedDescription)" }
+    }
 }
 
 struct NativeMyMusicScreen: View {
@@ -99,6 +148,9 @@ struct NativeMyMusicScreen: View {
     @State private var newFolderName = ""
     @State private var showingFolderEditor = false
     @State private var pendingRemoval: MusicLocalFile?
+    @State private var exportingBackup = false
+    @State private var importingBackup = false
+    @State private var backupDocument: MusicBackupDocument?
 
     private var visibleFiles: [MusicLocalFile] {
         let query = searchText.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)
@@ -113,6 +165,14 @@ struct NativeMyMusicScreen: View {
                 Button("Importar canciones") { isImporting = true }
                     .accessibilityHint("Selecciona archivos de audio. Los originales se conservarán en su ubicación.")
                 Button("Crear carpeta") { showingFolderEditor = true }
+            }
+            Section("Copias de seguridad") {
+                Button("Exportar respaldo de biblioteca") {
+                    backupDocument = library.exportIndex()
+                    exportingBackup = backupDocument != nil
+                }
+                Button("Restaurar respaldo de biblioteca") { importingBackup = true }
+                Text("Este respaldo conserva el índice y las carpetas, pero no incluye los archivos de audio. Para recuperar música en otro dispositivo tendrás que importar también las canciones.")
             }
             Section("Mis carpetas") {
                 ForEach(library.folders) { folder in
@@ -216,6 +276,15 @@ struct NativeMyMusicScreen: View {
             switch result {
             case .success(let urls): library.importFiles(urls)
             case .failure(let error): library.error = error.localizedDescription
+            }
+        }
+        .fileExporter(isPresented: $exportingBackup, document: backupDocument, contentType: .json, defaultFilename: "MiMusica-respaldo") { result in
+            if case .failure(let failure) = result { library.error = failure.localizedDescription }
+        }
+        .fileImporter(isPresented: $importingBackup, allowedContentTypes: [.json]) { result in
+            switch result {
+            case .success(let url): library.restoreIndex(url)
+            case .failure(let failure): library.error = failure.localizedDescription
             }
         }
         .alert("Importación de música", isPresented: Binding(

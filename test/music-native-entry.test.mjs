@@ -27,6 +27,9 @@ test('Mi Música has an independent iOS navigation destination and an accessible
   assert.match(music, /Reproducción aleatoria/);
   assert.match(music, /Repetición/);
   assert.match(music, /Ecualizador/);
+  assert.match(music, /Guardar perfil para esta canción/);
+  assert.match(music, /Guardar como perfil general/);
+  assert.match(music, /Quitar perfil de esta canción/);
 });
 
 test('Mi Música has an independent Android navigation destination and document picker', () => {
@@ -48,4 +51,7 @@ test('Mi Música has an independent Android navigation destination and document 
   assert.match(read('android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativeMusicEqualizer.kt'), /Equalizer\(0, sessionId\)/);
   assert.match(read('android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativeMusicEqualizer.kt'), /setBandLevel/);
   assert.match(music, /Ecualizador/);
+  assert.match(music, /Guardar perfil para esta canción/);
+  assert.match(music, /Guardar como perfil general/);
+  assert.match(music, /Quitar perfil de esta canción/);
 });

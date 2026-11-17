@@ -123,6 +123,29 @@ private final class NativeMusicLibrary: ObservableObject {
         }
     }
 
+    func importFolder(_ folder: URL) {
+        let accessed = folder.startAccessingSecurityScopedResource()
+        defer { if accessed { folder.stopAccessingSecurityScopedResource() } }
+        guard let enumerator = FileManager.default.enumerator(at: folder,
+            includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles]) else {
+            error = "No se pudo acceder al contenido de la carpeta seleccionada"
+            return
+        }
+        let allowed = Set(["mp3", "m4a", "aac", "wav", "flac", "ogg"])
+        var candidates: [URL] = []
+        for case let url as URL in enumerator {
+            guard allowed.contains(url.pathExtension.lowercased()),
+                  (try? url.resourceValues(forKeys: [.isRegularFileKey]).isRegularFile) == true else { continue }
+            candidates.append(url)
+            if candidates.count >= 5_000 { break }
+        }
+        if candidates.isEmpty {
+            error = "No se encontraron archivos musicales compatibles en esa carpeta"
+        } else {
+            importFiles(candidates)
+        }
+    }
+
     private func save() throws {
         let data = try JSONEncoder().encode(files)
         try data.write(to: directory.appendingPathComponent("library.json"), options: .atomic)
@@ -321,6 +344,7 @@ struct NativeMyMusicScreen: View {
     @StateObject private var library = NativeMusicLibrary()
     @StateObject private var player = NativeMusicPlayer()
     @State private var isImporting = false
+    @State private var isImportingFolder = false
     @State private var searchText = ""
     @State private var newFolderName = ""
     @State private var showingFolderEditor = false
@@ -343,6 +367,8 @@ struct NativeMyMusicScreen: View {
             Section {
                 Button("Importar canciones") { isImporting = true }
                     .accessibilityHint("Selecciona archivos de audio. Los originales se conservarán en su ubicación.")
+                Button("Importar carpeta desde Archivos o nube") { isImportingFolder = true }
+                    .accessibilityHint("Elige una carpeta disponible en Archivos. Las canciones se copiarán a Mi Música para escucharlas sin depender de la conexión.")
                 Button("Crear carpeta") { showingFolderEditor = true }
             }
             Section("Copias de seguridad") {
@@ -462,6 +488,12 @@ struct NativeMyMusicScreen: View {
             switch result {
             case .success(let urls): library.importFiles(urls)
             case .failure(let error): library.error = error.localizedDescription
+            }
+        }
+        .fileImporter(isPresented: $isImportingFolder, allowedContentTypes: [.folder]) { result in
+            switch result {
+            case .success(let url): library.importFolder(url)
+            case .failure(let failure): library.error = failure.localizedDescription
             }
         }
         .fileExporter(isPresented: $exportingBackup, document: backupDocument, contentType: .json, defaultFilename: "MiMusica-respaldo") { result in

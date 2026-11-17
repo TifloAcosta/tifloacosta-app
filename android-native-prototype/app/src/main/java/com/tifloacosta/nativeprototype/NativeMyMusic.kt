@@ -7,6 +7,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -30,6 +31,8 @@ import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
+import org.json.JSONArray
+import org.json.JSONObject
 
 private data class ImportedSong(val uri: String, val title: String)
 
@@ -58,6 +61,55 @@ fun NativeMyMusic(onBack: () -> Unit) {
     var pendingRemoval by remember { mutableStateOf<ImportedSong?>(null) }
     var folders by remember { mutableStateOf(prefs.getStringSet("folders", emptySet()).orEmpty().sorted()) }
     var folderForTrack by remember { mutableStateOf<ImportedSong?>(null) }
+
+    val exportBackup = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/json")) { destination ->
+        if (destination != null) try {
+            val tracks = JSONArray().apply { songs.forEach { put(JSONObject().put("uri", it.uri).put("title", it.title)) } }
+            val folderArray = JSONArray().apply { folders.forEach { folder ->
+                put(JSONObject().put("name", folder).put("uris", JSONArray(prefs.getStringSet("folder:$folder", emptySet()).orEmpty().toList())))
+            } }
+            val snapshot = JSONObject().put("format", "tifloacosta-mi-musica-android-index")
+                .put("version", 1).put("includesAudioFiles", false).put("tracks", tracks).put("folders", folderArray)
+            context.contentResolver.openOutputStream(destination)?.use { stream ->
+                stream.write(snapshot.toString(2).toByteArray(Charsets.UTF_8))
+            } ?: throw IllegalStateException("No se pudo abrir el destino del respaldo")
+        } catch (failure: Exception) { error = "No se pudo exportar el respaldo: ${failure.localizedMessage}" }
+    }
+    val restoreBackup = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { source ->
+        if (source != null) try {
+            val raw = context.contentResolver.openInputStream(source)?.bufferedReader()?.use { it.readText() }
+                ?: throw IllegalStateException("No se pudo leer el respaldo")
+            val snapshot = JSONObject(raw)
+            require(snapshot.optString("format") == "tifloacosta-mi-musica-android-index" && snapshot.optInt("version") == 1 && !snapshot.optBoolean("includesAudioFiles")) {
+                "El archivo no es un índice de Mi Música compatible"
+            }
+            val importedTracks = snapshot.getJSONArray("tracks")
+            val importedFolders = snapshot.getJSONArray("folders")
+            val records = prefs.getStringSet("songs", emptySet()).orEmpty().toMutableSet()
+            for (index in 0 until importedTracks.length()) {
+                val entry = importedTracks.getJSONObject(index)
+                val uri = entry.getString("uri")
+                val title = entry.getString("title")
+                require(uri.isNotBlank() && title.isNotBlank() && !uri.contains('\n'))
+                records.add("$uri\n$title")
+            }
+            val nextFolders = folders.toMutableSet()
+            val memberships = mutableMapOf<String, Set<String>>()
+            for (index in 0 until importedFolders.length()) {
+                val entry = importedFolders.getJSONObject(index)
+                val name = entry.getString("name")
+                require(name.isNotBlank())
+                nextFolders.add(name)
+                val members = entry.getJSONArray("uris")
+                memberships[name] = (0 until members.length()).map { members.getString(it) }.toSet()
+            }
+            val editor = prefs.edit().putStringSet("songs", records).putStringSet("folders", nextFolders)
+            memberships.forEach { (name, members) -> editor.putStringSet("folder:$name", prefs.getStringSet("folder:$name", emptySet()).orEmpty() + members) }
+            editor.apply()
+            songs = savedSongs()
+            folders = nextFolders.sorted()
+        } catch (failure: Exception) { error = "No se pudo restaurar el respaldo: ${failure.localizedMessage}" }
+    }
 
     fun createFolder() {
         val name = folderName.trim()
@@ -103,6 +155,10 @@ fun NativeMyMusic(onBack: () -> Unit) {
             Text("Importar canciones")
         }
         Button(onClick = { editingFolder = true }, modifier = Modifier.fillMaxWidth()) { Text("Crear carpeta") }
+        Text("Copias de seguridad", modifier = Modifier.semantics { heading() })
+        Button(onClick = { exportBackup.launch("MiMusica-respaldo.json") }) { Text("Exportar respaldo de biblioteca") }
+        Button(onClick = { restoreBackup.launch("application/json") }) { Text("Restaurar respaldo de biblioteca") }
+        Text("El respaldo guarda canciones y carpetas como referencias, sin copiar los archivos de audio. En otro teléfono deberás importar también tus canciones.")
         OutlinedTextField(value = query, onValueChange = { query = it }, label = { Text("Buscar canciones") }, modifier = Modifier.fillMaxWidth())
         error?.let { Text(it) }
         player.error?.let { Text(it) }

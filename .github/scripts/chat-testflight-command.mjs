@@ -1,5 +1,4 @@
 import { readFileSync } from 'node:fs';
-
 const COMMAND = /^\/tiflo testflight (dry-run|run) (feature\/[a-z0-9][a-z0-9._/-]{0,90}|release\/[a-z0-9][a-z0-9._/-]{0,90})$/;
 
 export function validateCommand(event, { controlIssue }) {
@@ -30,12 +29,17 @@ export async function execute(event, env = process.env) {
   if (!token || !/^[\w.-]+\/[\w.-]+$/.test(repo ?? '')) throw Error('Missing GitHub context');
   const base = `${env.GITHUB_API_URL || 'https://api.github.com'}/repos/${repo}`;
   const reactions = await request(base, token, `/issues/comments/${command.commentId}/reactions?per_page=100`);
-  if (reactions.some(r => r.content === 'rocket' && r.user?.login === 'github-actions[bot]')) throw Error('Duplicate command previously dispatched');
+  if (reactions.some(r => ['eyes', 'rocket'].includes(r.content) && r.user?.login === 'github-actions[bot]')) throw Error('Duplicate or previously claimed command');
   await request(base, token, `/branches/${encodeURIComponent(command.branch)}`);
   if (command.mode === 'dry-run') {
     console.log(`DRY RUN: validated ${command.branch}; no TestFlight workflow triggered.`);
     return;
   }
+  // Claim before dispatch: a failed acknowledgment must not permit a duplicate upload.
+  await request(base, token, `/issues/comments/${command.commentId}/reactions`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ content: 'eyes' })
+  });
   await request(base, token, '/actions/workflows/ios-native-testflight-upload.yml/dispatches', {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ ref: command.branch })

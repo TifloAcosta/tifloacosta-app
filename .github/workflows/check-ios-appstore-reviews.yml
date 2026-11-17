@@ -8,6 +8,7 @@ on:
     paths:
       - '.github/workflows/check-ios-appstore-reviews.yml'
       - 'apple-chat-requests/*.json'
+      - '.github/scripts/appstore-reviews.mjs'
 permissions:
   contents: read
 jobs:

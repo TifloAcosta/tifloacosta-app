@@ -263,7 +263,9 @@ private final class NativeMusicLibrary: ObservableObject {
             var copied: [String] = []
             for file in files {
                 let original = audioURL(for: file)
-                guard FileManager.default.fileExists(atPath: original.path) else { continue }
+                guard FileManager.default.fileExists(atPath: original.path) else {
+                    throw NSError(domain: "MiMusica", code: 1, userInfo: [NSLocalizedDescriptionKey: "No se puede completar la copia: falta el audio de \(file.name)"])
+                }
                 let relative = "audio/\(UUID().uuidString).\(original.pathExtension.lowercased())"
                 try FileManager.default.copyItem(at: original, to: staging.appendingPathComponent(relative))
                 copied.append(relative)
@@ -294,6 +296,7 @@ private final class NativeMusicLibrary: ObservableObject {
         let accessed = source.startAccessingSecurityScopedResource()
         defer { if accessed { source.stopAccessingSecurityScopedResource() } }
         let staging = FileManager.default.temporaryDirectory.appendingPathComponent("music-import-\(UUID().uuidString)", isDirectory: true)
+        var createdFiles: [URL] = []
         do {
             try FileManager.default.createDirectory(at: staging, withIntermediateDirectories: true)
             guard let archive = Archive(url: source, accessMode: .read) else { throw CocoaError(.fileReadCorruptFile) }
@@ -323,7 +326,9 @@ private final class NativeMusicLibrary: ObservableObject {
                 guard FileManager.default.fileExists(atPath: original.path) else { throw CocoaError(.fileReadCorruptFile) }
                 let newID = UUID()
                 let fileName = UUID().uuidString + "." + original.pathExtension
-                try FileManager.default.copyItem(at: original, to: directory.appendingPathComponent(fileName))
+                let destination = directory.appendingPathComponent(fileName)
+                try FileManager.default.copyItem(at: original, to: destination)
+                createdFiles.append(destination)
                 imported.append(MusicLocalFile(id: newID, name: track.title, fileName: fileName))
                 ids[id] = newID
             }
@@ -335,7 +340,10 @@ private final class NativeMusicLibrary: ObservableObject {
             files += imported
             folders += additions
             do { try save() } catch { files = originalFiles; folders = originalFolders; throw error }
-        } catch { self.error = "No se pudo restaurar la copia con audio: \(error.localizedDescription)" }
+        } catch {
+            createdFiles.forEach { try? FileManager.default.removeItem(at: $0) }
+            self.error = "No se pudo restaurar la copia con audio: \(error.localizedDescription)"
+        }
         try? FileManager.default.removeItem(at: staging)
     }
 }

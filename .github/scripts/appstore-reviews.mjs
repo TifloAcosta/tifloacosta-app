@@ -16,8 +16,15 @@ export function summarizeReviews(reviews, included) {
       responseState:state
     };
   });
+  const writtenRatingsByStars=Object.fromEntries([1,2,3,4,5].map(n=>[String(n),0]));
+  for(const entry of entries){
+    if(Number.isInteger(entry.rating) && entry.rating>=1 && entry.rating<=5)
+      writtenRatingsByStars[String(entry.rating)]++;
+  }
   return {
     total:entries.length,
+    writtenRatingsByStars,
+    writtenBelowFive:[1,2,3,4].reduce((total,n)=>total+writtenRatingsByStars[String(n)],0),
     responded:entries.filter(x=>x.responseState==='PUBLISHED').length,
     awaitingPublication:entries.filter(x=>x.responseState!=='PUBLISHED' && x.responseState!=='SIN_RESPUESTA').length,
     pending:entries.filter(x=>x.responseState==='SIN_RESPUESTA').length,
@@ -80,6 +87,9 @@ async function main() {
     'Respuesta publicada: '+result.responded,
     'Respuesta existente sin confirmar publicación: '+result.awaitingPublication,
     'Sin respuesta: '+result.pending,
+    'Distribución de estrellas de reseñas ESCRITAS (no incluye valoraciones sin texto): '+
+      [1,2,3,4,5].map(n=>n+' estrella(s): '+result.writtenRatingsByStars[String(n)]).join(' | '),
+    'Reseñas escritas con menos de cinco estrellas: '+result.writtenBelowFive,
     ...result.entries.map(x=>`${x.createdDate.slice(0,10)} | ${x.nickname} | ${x.rating}/5 | ${x.title} | ${x.territory} | ${x.responseState}`),
     '',
     '# Texto íntegro de reseñas sin respuesta',

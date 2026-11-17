@@ -2,8 +2,9 @@ import Foundation
 import AVFoundation
 import Combine
 
+/// Motor de Mi Música; no comparte sesión ni preferencias con la lectura TTS.
 @MainActor
-final class NativeMusicPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
+final class NativeMusicPlayer: ObservableObject {
     @Published private(set) var currentName = ""
     @Published private(set) var isPlaying = false
     @Published private(set) var position: TimeInterval = 0
@@ -13,16 +14,76 @@ final class NativeMusicPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate
     @Published private(set) var shuffleEnabled = UserDefaults.standard.bool(forKey: "mi-musica-shuffle")
     @Published private(set) var sleepRemaining = 0
 
-    private var audio: AVAudioPlayer?
+    static let frequencies: [Float] = [80, 250, 1000, 4000, 12000]
+    static let presets: [(name: String, gains: [Float])] = [
+        ("Normal", [0, 0, 0, 0, 0]),
+        ("Rock", [4, 2, -1, 3, 2]),
+        ("Pop", [2, 1, 0, 2, 2]),
+        ("Clásica", [0, 0, 0, 1, 2]),
+        ("Jazz", [2, 1, 0, 1, 1]),
+        ("Claridad vocal", [-2, -1, 1, 3, 2]),
+        ("Graves", [5, 3, 0, -1, -1])
+    ]
+    @Published private(set) var selectedPreset = UserDefaults.standard.string(forKey: "mi-musica-eq-preset") ?? "Normal"
+    @Published private(set) var gains: [Float] = [0, 0, 0, 0, 0]
+
+    private let engine = AVAudioEngine()
+    private let node = AVAudioPlayerNode()
+    private let equalizer = AVAudioUnitEQ(numberOfBands: 5)
+    private var file: AVAudioFile?
     private var queue: [(name: String, url: URL)] = []
     private var originalQueue: [(name: String, url: URL)] = []
     private var index = -1
     private var timer: Timer?
     private var sleepUntil: Date?
+    private var startFrame: AVAudioFramePosition = 0
+    private var generation = 0
+
+    init() {
+        engine.attach(node)
+        engine.attach(equalizer)
+        for (index, band) in equalizer.bands.enumerated() {
+            band.filterType = .parametric
+            band.frequency = Self.frequencies[index]
+            band.bandwidth = 1
+            band.bypass = false
+        }
+        if selectedPreset == "Personalizado",
+           let saved = UserDefaults.standard.array(forKey: "mi-musica-eq-bands") as? [Double],
+           saved.count == 5 {
+            gains = saved.map { Float($0).clamped(to: -12...12) }
+        } else {
+            gains = Self.presets.first(where: { $0.name == selectedPreset })?.gains ?? [0, 0, 0, 0, 0]
+        }
+        applyEqualizer()
+    }
+
+    func selectPreset(_ name: String) {
+        guard let preset = Self.presets.first(where: { $0.name == name }) else { return }
+        selectedPreset = preset.name
+        gains = preset.gains
+        UserDefaults.standard.set(name, forKey: "mi-musica-eq-preset")
+        applyEqualizer()
+    }
+
+    func adjustBand(_ index: Int, by amount: Float) {
+        guard gains.indices.contains(index) else { return }
+        gains[index] = (gains[index] + amount).clamped(to: -12...12)
+        selectedPreset = "Personalizado"
+        UserDefaults.standard.set(selectedPreset, forKey: "mi-musica-eq-preset")
+        UserDefaults.standard.set(gains.map(Double.init), forKey: "mi-musica-eq-bands")
+        applyEqualizer()
+    }
+
+    private func applyEqualizer() {
+        for (index, band) in equalizer.bands.enumerated() { band.gain = gains[index] }
+        // Atenuación preventiva al reforzar frecuencias: limita el riesgo de saturación.
+        equalizer.globalGain = gains.contains(where: { $0 > 0 }) ? -6 : 0
+    }
 
     func play(name: String, url: URL, queue: [(name: String, url: URL)]) {
-        self.originalQueue = queue
-        self.queue = shuffleEnabled ? [queue.first(where: { $0.url == url })].compactMap { $0 } + queue.filter { $0.url != url }.shuffled() : queue
+        originalQueue = queue
+        self.queue = shuffleEnabled ? queue.filter { $0.url == url } + queue.filter { $0.url != url }.shuffled() : queue
         guard let position = self.queue.firstIndex(where: { $0.url == url }) else { return }
         index = position
         startCurrent()
@@ -34,37 +95,65 @@ final class NativeMusicPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
             try AVAudioSession.sharedInstance().setActive(true)
             let item = queue[index]
-            audio?.stop()
-            let player = try AVAudioPlayer(contentsOf: item.url)
-            player.delegate = self
-            player.prepareToPlay()
-            guard player.play() else { throw NSError(domain: "MiMusica", code: 1, userInfo: [NSLocalizedDescriptionKey: "No se pudo iniciar la reproducción."]) }
-            audio = player
-            currentName = item.name
-            duration = player.duration
+            generation += 1
+            node.stop()
+            let audioFile = try AVAudioFile(forReading: item.url)
+            file = audioFile
+            engine.disconnectNodeOutput(node)
+            engine.disconnectNodeOutput(equalizer)
+            engine.connect(node, to: equalizer, format: audioFile.processingFormat)
+            engine.connect(equalizer, to: engine.mainMixerNode, format: audioFile.processingFormat)
+            startFrame = 0
+            duration = Double(audioFile.length) / audioFile.processingFormat.sampleRate
             position = 0
+            currentName = item.name
+            try schedule(from: 0)
+            if !engine.isRunning { try engine.start() }
+            node.play()
             isPlaying = true
-            timer?.invalidate()
-            timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
-                Task { @MainActor in
-                    guard let self else { return }
-                    self.position = self.audio?.currentTime ?? 0
-                    if let until = self.sleepUntil {
-                        self.sleepRemaining = max(0, Int(ceil(until.timeIntervalSinceNow)))
-                        if self.sleepRemaining == 0 { self.cancelSleep(); self.stop() }
-                    }
-                }
-            }
+            startTimer()
         } catch {
             self.error = "No se pudo reproducir la canción: \(error.localizedDescription)"
-            isPlaying = false
+            stop()
+        }
+    }
+
+    private func schedule(from frame: AVAudioFramePosition) throws {
+        guard let file else { return }
+        let remaining = file.length - frame
+        guard remaining > 0 else { return }
+        let count = AVAudioFrameCount(min(remaining, AVAudioFramePosition(UInt32.max)))
+        let thisGeneration = generation
+        node.scheduleSegment(file, startingFrame: frame, frameCount: count, at: nil,
+                             completionCallbackType: .dataPlayedBack) { [weak self] _ in
+            Task { @MainActor in
+                guard let self, self.generation == thisGeneration else { return }
+                if self.repeatMode == "one" { self.startCurrent() } else { self.next() }
+            }
+        }
+    }
+
+    private func startTimer() {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
+            Task { @MainActor in
+                guard let self else { return }
+                if let audioFile = self.file, let render = self.node.lastRenderTime,
+                   let played = self.node.playerTime(forNodeTime: render) {
+                    self.position = min(self.duration, Double(self.startFrame) / audioFile.processingFormat.sampleRate + Double(played.sampleTime) / played.sampleRate)
+                }
+                if let until = self.sleepUntil {
+                    self.sleepRemaining = max(0, Int(ceil(until.timeIntervalSinceNow)))
+                    if self.sleepRemaining == 0 { self.cancelSleep(); self.stop() }
+                }
+            }
         }
     }
 
     func toggle() {
-        guard let audio else { return }
-        if audio.isPlaying { audio.pause() } else { audio.play() }
-        isPlaying = audio.isPlaying
+        guard file != nil else { return }
+        if isPlaying { node.pause() } else { node.play() }
+        isPlaying.toggle()
     }
 
     func next() {
@@ -72,7 +161,24 @@ final class NativeMusicPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate
         if index >= queue.count && repeatMode == "all" { index = 0 }
         startCurrent()
     }
+
     func previous() { index = max(0, index - 1); startCurrent() }
+
+    func skip(seconds: TimeInterval) {
+        guard let file else { return }
+        let target = min(max(position + seconds, 0), duration)
+        generation += 1
+        node.stop()
+        startFrame = min(file.length - 1, AVAudioFramePosition(target * file.processingFormat.sampleRate))
+        do {
+            try schedule(from: startFrame)
+            node.play()
+            isPlaying = true
+            position = target
+        } catch {
+            self.error = error.localizedDescription
+        }
+    }
 
     func changeRepeat() {
         repeatMode = repeatMode == "off" ? "all" : repeatMode == "all" ? "one" : "off"
@@ -95,15 +201,11 @@ final class NativeMusicPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate
 
     func cancelSleep() { sleepUntil = nil; sleepRemaining = 0 }
 
-    func skip(seconds: TimeInterval) {
-        guard let audio else { return }
-        audio.currentTime = min(max(audio.currentTime + seconds, 0), audio.duration)
-        position = audio.currentTime
-    }
-
     func stop() {
-        audio?.stop()
-        audio = nil
+        generation += 1
+        node.stop()
+        engine.stop()
+        file = nil
         timer?.invalidate()
         timer = nil
         currentName = ""
@@ -111,10 +213,8 @@ final class NativeMusicPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate
         position = 0
         duration = 0
     }
+}
 
-    nonisolated func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        Task { @MainActor in
-            if self.repeatMode == "one" { self.startCurrent() } else { self.next() }
-        }
-    }
+private extension Float {
+    func clamped(to range: ClosedRange<Float>) -> Float { min(max(self, range.lowerBound), range.upperBound) }
 }

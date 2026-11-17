@@ -1,5 +1,6 @@
 import crypto from 'node:crypto';
 import { createAnalyticsClient, parseTsvGzip } from './apple-analytics-reports.mjs';
+import { summarizeReportRows } from './apple-analytics-aggregate.mjs';
 
 const { API_ID, API_ISSUER, API_PRIVATE } = process.env;
 if (![API_ID, API_ISSUER, API_PRIVATE].every(Boolean)) throw new Error('Faltan credenciales permanentes de Apple Analytics.');
@@ -31,10 +32,19 @@ for (const report of selected) {
     let rows = 0;
     let metricColumn = null;
     let metricReliable = true;
+    const breakdown = {};
     const checkedSegments = [];
     for (const segment of segments) {
       const gz = await client.downloadSegment(segment);
       const parsed = parseTsvGzip(gz);
+      const summary = summarizeReportRows(parsed);
+      for (const [dimension, values] of Object.entries(summary)) {
+        if (dimension === 'metric') continue;
+        const totals = breakdown[dimension] ||= {};
+        for (const [key, value] of Object.entries(values)) {
+          totals[key] = (totals[key] ?? 0) + value;
+        }
+      }
       checkedSegments.push({ id: segment.id, checksum: segment.attributes?.checksum ?? null, bytes: gz.length });
       if (!parsed.length) continue;
       const fields = Object.keys(parsed[0]);
@@ -68,6 +78,7 @@ for (const report of selected) {
       rows,
       dates: [...dates].sort(),
       fields: [...fieldNames].sort(),
+      breakdown,
       // Omit totals altogether if this report lacks a trustworthy additive count column.
       ...(rows && metricReliable && metricColumn ? { countColumn: metricColumn, countsByType: Object.fromEntries([...metricTotals].sort()) } : {})
     });

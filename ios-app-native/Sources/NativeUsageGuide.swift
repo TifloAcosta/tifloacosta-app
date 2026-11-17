@@ -63,6 +63,23 @@ private enum NativeGuideContent {
             ]
         ),
         NativeGuideSection(
+            id: "mi-musica",
+            spanishTitle: "Mi Música",
+            englishTitle: "My Music",
+            spanishParagraphs: [
+                "Mi Música es tu biblioteca musical personal. Pulsa Importar canciones para seleccionar archivos de audio, o Importar carpeta desde Archivos o nube para copiar canciones de una carpeta disponible en el sistema. Los originales se conservan.",
+                "Puedes buscar canciones, crear carpetas y listas de reproducción y añadir canciones desde el menú Acciones de cada título. Las carpetas inteligentes reúnen automáticamente las canciones cuyo título contiene la palabra que elijas.",
+                "En Reproductor encontrarás reproducir o pausar, canción anterior y siguiente, saltos de quince segundos, reproducción aleatoria, repetición y temporizador. El Ecualizador permite elegir perfiles o modificar cinco bandas y guardar ajustes generales o particulares para una canción.",
+                "En Copias de seguridad puedes exportar o restaurar el índice, crear un ZIP con archivos musicales y activar una copia automática del índice cada siete o treinta días. Para guardar el audio en un respaldo, utiliza Exportar copia completa con audio. Las copias automáticas del índice se realizan al abrir Mi Música cuando corresponde."
+            ],
+            englishParagraphs: [
+                "My Music is your personal music library. Use Import songs to select audio files, or Import folder from Files or cloud to copy songs from a folder exposed by the system. Original files are preserved.",
+                "Search for songs, create folders and playlists, and add songs from each title's Actions menu. Smart folders automatically collect songs whose titles contain your chosen word.",
+                "The Player provides play or pause, previous and next track, fifteen-second skips, shuffle, repeat and a sleep timer. The Equalizer lets you select sound profiles or adjust five frequency bands, and save global or per-song settings.",
+                "In Backups, export or restore the library index, create a ZIP including audio files, or enable automatic index backups every seven or thirty days. Select Export complete backup with audio to include music files. Automatic index backups run when you open My Music and the interval has elapsed."
+            ]
+        ),
+        NativeGuideSection(
             id: "4",
             spanishTitle: "Recibidos",
             englishTitle: "Received items",
@@ -221,46 +238,3 @@ struct NativeUsageGuideScreen: View {
                             .fill(TifloVisual.brandRed)
                             .frame(width: 4, height: 28)
                             .accessibilityHidden(true)
-                        Text(section.title(english: english))
-                            .font(.body)
-                            .foregroundStyle(TifloVisual.primaryText)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .frame(maxWidth: .infinity, minHeight: 48, alignment: .leading)
-                    }
-                    .padding(.vertical, 4)
-                }
-                .accessibilityLabel(section.title(english: english))
-                .accessibilityHint(english ? "Double-tap to read the instructions for this section." : "Doble toque para leer la guía de esta sección.")
-            }
-            .listRowBackground(TifloVisual.surfaceRaised)
-        }
-        .tifloScreenSurface()
-        .navigationTitle(english ? "User guide" : "Guía de uso")
-        .navigationBarTitleDisplayMode(.inline)
-    }
-}
-
-private struct NativeUsageGuideDetailScreen: View {
-    let section: NativeGuideSection
-    let english: Bool
-
-    var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 18) {
-                ForEach(Array(section.paragraphs(english: english).enumerated()), id: \.offset) { _, paragraph in
-                    Text(paragraph)
-                        .font(.body)
-                        .foregroundStyle(TifloVisual.primaryText)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
-            }
-            .frame(maxWidth: 680)
-            .frame(maxWidth: .infinity)
-            .padding(20)
-        }
-        .tifloScreenSurface()
-        .navigationTitle(section.title(english: english))
-        .navigationBarTitleDisplayMode(.inline)
-    }
-}

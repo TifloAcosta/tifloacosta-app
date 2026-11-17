@@ -19,6 +19,9 @@ test('Mi Música has an independent iOS navigation destination and an accessible
   assert.match(read('ios-app-native/Sources/NativeMusicPlayer.swift'), /AVAudioPlayer/);
   assert.match(music, /Canción siguiente/);
   assert.match(music, /Avanzar 15 segundos/);
+  assert.match(music, /Temporizador de 15 minutos/);
+  assert.match(music, /Reproducción aleatoria/);
+  assert.match(music, /Repetición/);
 });
 
 test('Mi Música has an independent Android navigation destination and document picker', () => {
@@ -34,4 +37,7 @@ test('Mi Música has an independent Android navigation destination and document 
   assert.match(read('android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativeMusicPlayer.kt'), /MediaPlayer/);
   assert.match(music, /Canción siguiente/);
   assert.match(music, /Avanzar 15 segundos/);
+  assert.match(music, /Temporizador de 15 minutos/);
+  assert.match(music, /Reproducción aleatoria/);
+  assert.match(music, /Repetición/);
 });

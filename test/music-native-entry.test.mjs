@@ -40,4 +40,7 @@ test('Mi Música has an independent Android navigation destination and document 
   assert.match(music, /Temporizador de 15 minutos/);
   assert.match(music, /Reproducción aleatoria/);
   assert.match(music, /Repetición/);
+  assert.match(read('android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativeMusicEqualizer.kt'), /Equalizer\(0, sessionId\)/);
+  assert.match(read('android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativeMusicEqualizer.kt'), /setBandLevel/);
+  assert.match(music, /Ecualizador/);
 });

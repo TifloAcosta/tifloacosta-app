@@ -67,6 +67,17 @@ fun NativeMyMusic(onBack: () -> Unit) {
     var pendingRemoval by remember { mutableStateOf<ImportedSong?>(null) }
     var folders by remember { mutableStateOf(prefs.getStringSet("folders", emptySet()).orEmpty().sorted()) }
     var folderForTrack by remember { mutableStateOf<ImportedSong?>(null) }
+    var playlists by remember { mutableStateOf(prefs.getStringSet("playlists", emptySet()).orEmpty().sorted()) }
+    var playlistName by remember { mutableStateOf("") }
+    var editingPlaylist by remember { mutableStateOf(false) }
+    var playlistForTrack by remember { mutableStateOf<ImportedSong?>(null) }
+    var smartFolderName by remember { mutableStateOf("") }
+    var smartFolderKeyword by remember { mutableStateOf("") }
+    var editingSmartFolder by remember { mutableStateOf(false) }
+    var smartFolders by remember { mutableStateOf(prefs.getStringSet("smart-folders", emptySet()).orEmpty().mapNotNull {
+        val parts = it.split('\n', limit = 2)
+        if (parts.size == 2) parts[0] to parts[1] else null
+    }) }
     var autoBackupDays by remember { mutableStateOf(prefs.getInt("auto-backup-days", 0)) }
     var archiveBusy by remember { mutableStateOf(false) }
 
@@ -79,11 +90,19 @@ fun NativeMyMusic(onBack: () -> Unit) {
             put(JSONObject().put("id", "folder:$folder").put("name", folder)
                 .put("trackIds", JSONArray(prefs.getStringSet("folder:$folder", emptySet()).orEmpty().toList())))
         } }
+        val playlistArray = JSONArray().apply { playlists.forEach { name ->
+            put(JSONObject().put("id", "playlist:$name").put("name", name)
+                .put("trackIds", JSONArray(prefs.getStringSet("playlist:$name", emptySet()).orEmpty().toList())))
+        } }
+        val smartArray = JSONArray().apply { smartFolders.forEach { (name, keyword) ->
+            put(JSONObject().put("id", "smart:$name").put("name", name).put("titleContains", keyword))
+        } }
         return JSONObject().put("format", "tifloacosta-mi-musica")
             .put("version", 1).put("createdAt", java.time.Instant.now().toString())
             .put("includesAudioFiles", false)
             .put("catalog", JSONObject().put("version", 1).put("tracks", tracks))
-            .put("folders", folderArray).put("playlists", JSONArray()).put("audioProfiles", JSONObject())
+            .put("folders", folderArray).put("playlists", playlistArray)
+            .put("smartFolders", smartArray).put("audioProfiles", JSONObject())
     }
 
     fun performAutomaticBackupIfDue() {
@@ -125,7 +144,8 @@ fun NativeMyMusic(onBack: () -> Unit) {
             }
             val importedTracks = snapshot.getJSONObject("catalog").getJSONObject("tracks")
             val importedFolders = snapshot.getJSONArray("folders")
-            snapshot.getJSONArray("playlists")
+            val importedPlaylists = snapshot.getJSONArray("playlists")
+            val importedSmart = snapshot.optJSONArray("smartFolders") ?: JSONArray()
             val records = prefs.getStringSet("songs", emptySet()).orEmpty().toMutableSet()
             var unavailable = 0
             for (key in importedTracks.keys()) {
@@ -154,9 +174,28 @@ fun NativeMyMusic(onBack: () -> Unit) {
             }
             val editor = prefs.edit().putStringSet("songs", records).putStringSet("folders", nextFolders)
             memberships.forEach { (name, members) -> editor.putStringSet("folder:$name", prefs.getStringSet("folder:$name", emptySet()).orEmpty() + members) }
+            val nextPlaylists = playlists.toMutableSet()
+            for (index in 0 until importedPlaylists.length()) {
+                val entry = importedPlaylists.getJSONObject(index)
+                val name = entry.getString("name")
+                nextPlaylists.add(name)
+                val refs = entry.getJSONArray("trackIds")
+                val selected = (0 until refs.length()).map { refs.getString(it) }.toSet()
+                editor.putStringSet("playlist:$name", prefs.getStringSet("playlist:$name", emptySet()).orEmpty() + selected)
+            }
+            editor.putStringSet("playlists", nextPlaylists)
+            val smartEntries = smartFolders.toMutableList()
+            for (index in 0 until importedSmart.length()) {
+                val item = importedSmart.getJSONObject(index)
+                smartEntries.removeAll { it.first == item.getString("name") }
+                smartEntries.add(item.getString("name") to item.getString("titleContains"))
+            }
+            editor.putStringSet("smart-folders", smartEntries.map { it.first + "\n" + it.second }.toSet())
             editor.apply()
             songs = savedSongs()
             folders = nextFolders.sorted()
+            playlists = nextPlaylists.sorted()
+            smartFolders = smartEntries
             if (unavailable > 0) error = "Organización restaurada. Hay $unavailable canciones sin permisos de audio; impórtalas para reproducirlas."
         } catch (failure: Exception) { error = "No se pudo restaurar el respaldo: ${failure.localizedMessage}" }
     }
@@ -181,12 +220,20 @@ fun NativeMyMusic(onBack: () -> Unit) {
                     val existing = prefs.getStringSet("songs", emptySet()).orEmpty()
                     val editor = prefs.edit().putStringSet("songs", existing + restored.songs)
                         .putStringSet("folders", (folders + restored.folders.keys).toSet())
+                        .putStringSet("playlists", (playlists + restored.playlists.keys).toSet())
                     restored.folders.forEach { (name, uris) ->
                         editor.putStringSet("folder:$name", prefs.getStringSet("folder:$name", emptySet()).orEmpty() + uris)
                     }
+                    restored.playlists.forEach { (name, uris) ->
+                        editor.putStringSet("playlist:$name", prefs.getStringSet("playlist:$name", emptySet()).orEmpty() + uris)
+                    }
+                    val newSmart = (smartFolders + restored.smartFolders).distinctBy { it.first }
+                    editor.putStringSet("smart-folders", newSmart.map { it.first + "\n" + it.second }.toSet())
                     editor.apply()
                     songs = savedSongs()
                     folders = (folders + restored.folders.keys).distinct().sorted()
+                    playlists = (playlists + restored.playlists.keys).distinct().sorted()
+                    smartFolders = newSmart
                 } catch (failure: Exception) { error = "No se pudo restaurar la copia con audio: ${failure.localizedMessage}" }
                 finally { archiveBusy = false }
             }
@@ -204,10 +251,38 @@ fun NativeMyMusic(onBack: () -> Unit) {
         editingFolder = false
     }
 
+    fun createPlaylist() {
+        val name = playlistName.trim()
+        if (name.isNotEmpty()) {
+            val next = (playlists + name).distinct().sorted()
+            prefs.edit().putStringSet("playlists", next.toSet()).apply()
+            playlists = next
+        }
+        playlistName = ""
+        editingPlaylist = false
+    }
+
+    fun createSmartFolder() {
+        val name = smartFolderName.trim().replace("\n", " ")
+        val keyword = smartFolderKeyword.trim().replace("\n", " ")
+        if (name.isNotEmpty() && keyword.isNotEmpty()) {
+            val next = smartFolders.filterNot { it.first == name } + (name to keyword)
+            prefs.edit().putStringSet("smart-folders", next.map { it.first + "\n" + it.second }.toSet()).apply()
+            smartFolders = next
+        }
+        smartFolderName = ""
+        smartFolderKeyword = ""
+        editingSmartFolder = false
+    }
+
     fun removeFromLibrary(song: ImportedSong) {
         val records = prefs.getStringSet("songs", emptySet()).orEmpty()
             .filterNot { it.substringBefore('\n') == song.uri }.toSet()
         prefs.edit().putStringSet("songs", records).apply()
+        playlists.forEach { name ->
+            val key = "playlist:$name"
+            prefs.edit().putStringSet(key, prefs.getStringSet(key, emptySet()).orEmpty() - song.uri).apply()
+        }
         songs = savedSongs()
         pendingRemoval = null
     }
@@ -262,6 +337,8 @@ fun NativeMyMusic(onBack: () -> Unit) {
         }
         Text("Puedes combinar canciones del dispositivo y de proveedores de archivos compatibles. Si se pierde la conexión o el permiso, el archivo externo podría dejar de reproducirse.")
         Button(onClick = { editingFolder = true }, modifier = Modifier.fillMaxWidth()) { Text("Crear carpeta") }
+        Button(onClick = { editingPlaylist = true }, modifier = Modifier.fillMaxWidth()) { Text("Crear lista de reproducción") }
+        Button(onClick = { editingSmartFolder = true }, modifier = Modifier.fillMaxWidth()) { Text("Crear carpeta inteligente") }
         Text("Copias de seguridad", modifier = Modifier.semantics { heading() })
         Button(onClick = { exportBackup.launch("MiMusica-respaldo.json") }) { Text("Exportar respaldo de biblioteca") }
         Button(onClick = { restoreBackup.launch("application/json") }) { Text("Restaurar respaldo de biblioteca") }
@@ -287,6 +364,37 @@ fun NativeMyMusic(onBack: () -> Unit) {
                 }) { Text("Eliminar carpeta $folder") }
             }
         }
+        if (playlists.isNotEmpty()) {
+            Text("Listas de reproducción", modifier = Modifier.semantics { heading() })
+            playlists.forEach { name ->
+                val refs = prefs.getStringSet("playlist:$name", emptySet()).orEmpty()
+                val entries = refs.mapNotNull { uri -> songs.firstOrNull { it.uri == uri } }
+                Text("$name, ${entries.size} canciones")
+                Button(onClick = {
+                    entries.firstOrNull()?.let { first -> player.play(first.uri, first.title, entries.map { it.uri to it.title }) }
+                }, enabled = entries.isNotEmpty()) { Text("Reproducir lista $name") }
+                TextButton(onClick = {
+                    val next = playlists - name
+                    prefs.edit().putStringSet("playlists", next.toSet()).remove("playlist:$name").apply()
+                    playlists = next
+                }) { Text("Eliminar lista $name") }
+            }
+        }
+        if (smartFolders.isNotEmpty()) {
+            Text("Carpetas inteligentes", modifier = Modifier.semantics { heading() })
+            smartFolders.forEach { (name, keyword) ->
+                val matches = songs.filter { it.title.contains(keyword, ignoreCase = true) }
+                Text("$name, título contiene $keyword, ${matches.size} canciones")
+                Button(onClick = {
+                    matches.firstOrNull()?.let { first -> player.play(first.uri, first.title, matches.map { it.uri to it.title }) }
+                }, enabled = matches.isNotEmpty()) { Text("Reproducir carpeta inteligente $name") }
+                TextButton(onClick = {
+                    val next = smartFolders.filterNot { it.first == name }
+                    prefs.edit().putStringSet("smart-folders", next.map { it.first + "\n" + it.second }.toSet()).apply()
+                    smartFolders = next
+                }) { Text("Eliminar carpeta inteligente $name") }
+            }
+        }
         if (songs.isEmpty()) {
             Text("Todavía no hay canciones. Selecciona Importar canciones para empezar.")
         } else {
@@ -298,6 +406,7 @@ fun NativeMyMusic(onBack: () -> Unit) {
                             player.play(song.uri, song.title, songs.map { it.uri to it.title })
                         }) { Text("Reproducir ${song.title}") }
                         TextButton(onClick = { folderForTrack = song }, enabled = folders.isNotEmpty()) { Text("Añadir a carpeta") }
+                        TextButton(onClick = { playlistForTrack = song }, enabled = playlists.isNotEmpty()) { Text("Añadir a lista de reproducción") }
                         TextButton(onClick = { pendingRemoval = song }) { Text("Eliminar de la biblioteca") }
                     }
                 }
@@ -349,6 +458,32 @@ fun NativeMyMusic(onBack: () -> Unit) {
             confirmButton = { TextButton(onClick = ::createFolder) { Text("Crear") } },
             dismissButton = { TextButton(onClick = { editingFolder = false }) { Text("Cancelar") } }
         )
+    }
+    if (editingPlaylist) {
+        AlertDialog(onDismissRequest = { editingPlaylist = false }, title = { Text("Crear lista de reproducción") },
+            text = { OutlinedTextField(value = playlistName, onValueChange = { playlistName = it }, label = { Text("Nombre") }) },
+            confirmButton = { TextButton(onClick = ::createPlaylist) { Text("Crear") } },
+            dismissButton = { TextButton(onClick = { editingPlaylist = false }) { Text("Cancelar") } })
+    }
+    if (editingSmartFolder) {
+        AlertDialog(onDismissRequest = { editingSmartFolder = false }, title = { Text("Crear carpeta inteligente") },
+            text = { Column {
+                OutlinedTextField(value = smartFolderName, onValueChange = { smartFolderName = it }, label = { Text("Nombre") })
+                OutlinedTextField(value = smartFolderKeyword, onValueChange = { smartFolderKeyword = it }, label = { Text("El título contiene") })
+            } },
+            confirmButton = { TextButton(onClick = ::createSmartFolder) { Text("Crear") } },
+            dismissButton = { TextButton(onClick = { editingSmartFolder = false }) { Text("Cancelar") } })
+    }
+    playlistForTrack?.let { song ->
+        AlertDialog(onDismissRequest = { playlistForTrack = null }, title = { Text("Añadir a lista de reproducción") },
+            text = { Column { playlists.forEach { name ->
+                TextButton(onClick = {
+                    val key = "playlist:$name"
+                    prefs.edit().putStringSet(key, prefs.getStringSet(key, emptySet()).orEmpty() + song.uri).apply()
+                    playlistForTrack = null
+                }) { Text(name) }
+            } } },
+            confirmButton = { TextButton(onClick = { playlistForTrack = null }) { Text("Cerrar") } })
     }
     pendingRemoval?.let { song ->
         AlertDialog(onDismissRequest = { pendingRemoval = null },

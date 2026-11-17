@@ -38,6 +38,9 @@ test('Mi Música has an independent iOS navigation destination and an accessible
   assert.match(music, /tifloacosta-mi-musica"/);
   assert.match(music, /catalog/);
   assert.match(music, /playlists/);
+  assert.match(music, /Exportar copia completa con audio/);
+  assert.match(music, /Restaurar copia completa con audio/);
+  assert.match(music, /ZIPFoundation/);
 });
 
 test('Mi Música has an independent Android navigation destination and document picker', () => {
@@ -70,4 +73,9 @@ test('Mi Música has an independent Android navigation destination and document 
   assert.match(music, /tifloacosta-mi-musica"/);
   assert.match(music, /catalog/);
   assert.match(music, /playlists/);
+  assert.match(music, /Exportar copia completa con audio/);
+  assert.match(music, /Restaurar copia completa con audio/);
+  const androidArchive = read('android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativeMusicArchive.kt');
+  assert.match(androidArchive, /ZipOutputStream/);
+  assert.match(androidArchive, /ZipInputStream/);
 });

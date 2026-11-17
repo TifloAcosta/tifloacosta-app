@@ -15,6 +15,10 @@ test('Mi Música has an independent iOS navigation destination and an accessible
   assert.match(music, /Importar carpeta desde Archivos o nube/);
   assert.match(music, /navigationTitle\("Mi Música"\)/);
   assert.match(music, /Crear carpeta/);
+  assert.match(music, /Crear lista de reproducción/);
+  assert.match(music, /Crear carpeta inteligente/);
+  assert.match(music, /MusicPortablePlaylist/);
+  assert.match(music, /MusicPortableSmartFolder/);
   assert.match(music, /Buscar canciones/);
   assert.match(music, /Eliminar de la biblioteca/);
   const iosPlayer = read('ios-app-native/Sources/NativeMusicPlayer.swift');
@@ -56,6 +60,9 @@ test('Mi Música has an independent Android navigation destination and document 
   assert.match(music, /Añadir carpeta local o en la nube/);
   assert.match(music, /OpenDocumentTree/);
   assert.match(music, /Crear carpeta/);
+  assert.match(music, /Crear lista de reproducción/);
+  assert.match(music, /Crear carpeta inteligente/);
+  assert.match(music, /"smartFolders"/);
   assert.match(music, /Buscar canciones/);
   assert.match(read('android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativeMusicPlayer.kt'), /MediaPlayer/);
   assert.match(music, /Canción siguiente/);

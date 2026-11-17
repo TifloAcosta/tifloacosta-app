@@ -9,6 +9,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 
 class NativeMusicPlayer(private val context: Context) {
+    val equalizer = NativeMusicEqualizer(context)
     var currentTitle by mutableStateOf("")
         private set
     var playing by mutableStateOf(false)
@@ -43,6 +44,7 @@ class NativeMusicPlayer(private val context: Context) {
         if (index !in queue.indices) { stop(); return }
         val item = queue[index]
         try {
+            equalizer.release()
             audio?.release()
             audio = null
             val player = MediaPlayer()
@@ -51,6 +53,7 @@ class NativeMusicPlayer(private val context: Context) {
                 .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC).build())
             player.setDataSource(context, Uri.parse(item.first))
             player.prepare()
+            equalizer.attach(player.audioSessionId)
             player.setOnCompletionListener { if (repeatMode == "one") startCurrent() else next() }
             player.start()
             audio = player
@@ -115,6 +118,7 @@ class NativeMusicPlayer(private val context: Context) {
     }
 
     fun stop() {
+        equalizer.release()
         audio?.release()
         audio = null
         currentTitle = ""

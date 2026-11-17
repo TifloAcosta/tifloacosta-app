@@ -1,6 +1,7 @@
 package com.tifloacosta.nativeprototype
 
 import android.content.Context
+import android.net.Uri
 import android.media.audiofx.Equalizer
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -31,6 +32,44 @@ class NativeMusicEqualizer(context: Context) {
     var error by mutableStateOf<String?>(null)
         private set
     private var effect: Equalizer? = null
+    var currentHasOverride by mutableStateOf(false)
+        private set
+    private var currentSong: String? = null
+
+    private fun songKey(uri: String) = "song-${Uri.encode(uri)}"
+
+    fun loadForSong(uri: String) {
+        currentSong = uri
+        val stored = prefs.getString(songKey(uri), null)
+        currentHasOverride = stored != null
+        if (stored != null) {
+            val parts = stored.split("|")
+            val custom = parts.getOrNull(1)?.split(",")?.mapNotNull { it.toFloatOrNull() }
+            selectedPreset = parts.firstOrNull() ?: "Normal"
+            gains = if (custom?.size == frequencies.size) custom else presets[selectedPreset] ?: presets.getValue("Normal")
+        } else {
+            selectedPreset = prefs.getString("preset", "Normal") ?: "Normal"
+            val global = prefs.getString("bands", null)?.split(",")?.mapNotNull { it.toFloatOrNull() }
+            gains = if (selectedPreset == "Personalizado" && global?.size == frequencies.size) global else presets[selectedPreset] ?: presets.getValue("Normal")
+        }
+        applyBands()
+    }
+
+    fun saveAsGeneral() {
+        prefs.edit().putString("preset", selectedPreset).putString("bands", gains.joinToString(",")).apply()
+    }
+
+    fun saveForCurrentSong() {
+        val uri = currentSong ?: return
+        prefs.edit().putString(songKey(uri), "$selectedPreset|${gains.joinToString(",")}").apply()
+        currentHasOverride = true
+    }
+
+    fun removeCurrentSongOverride() {
+        val uri = currentSong ?: return
+        prefs.edit().remove(songKey(uri)).apply()
+        loadForSong(uri)
+    }
 
     fun attach(sessionId: Int) {
         release()
@@ -50,7 +89,6 @@ class NativeMusicEqualizer(context: Context) {
         val next = presets[name] ?: return
         selectedPreset = name
         gains = next
-        prefs.edit().putString("preset", name).apply()
         applyBands()
     }
 
@@ -58,7 +96,6 @@ class NativeMusicEqualizer(context: Context) {
         if (index !in frequencies.indices) return
         gains = gains.toMutableList().also { it[index] = (it[index] + step).coerceIn(-12f, 12f) }
         selectedPreset = "Personalizado"
-        prefs.edit().putString("preset", selectedPreset).putString("bands", gains.joinToString(",")).apply()
         applyBands()
     }
 

@@ -8,6 +8,7 @@ export function validateCommand(event, { controlIssue }) {
   const match = COMMAND.exec(event.comment?.body?.trim() ?? '');
   if (!match) throw Error('Invalid command or branch');
   const branch = match[2];
+  if (branch !== 'feature/mi-musica') throw Error('branch not allowlisted for TestFlight');
   if (branch.includes('..') || branch.includes('//') || branch.endsWith('/') || branch.endsWith('.')) throw Error('Invalid branch');
   if (!Number.isSafeInteger(event.comment?.id)) throw Error('Invalid comment ID');
   return { mode: match[1], branch, commentId: event.comment.id };

@@ -21,6 +21,8 @@ jobs:
       API_PRIVATE: ${{ secrets.APPSTORE_ANALYTICS_PRIVATE_KEY }}
     steps:
       - uses: actions/checkout@v4
+      - name: Verificar agregación de datos antes de consultar Apple
+        run: node --test .github/scripts/apple-analytics-aggregate.test.mjs
       - name: Avisar de credenciales analíticas pendientes
         if: env.API_ID == '' || env.API_ISSUER == '' || env.API_PRIVATE == ''
         run: echo 'PENDIENTE - configurar clave de estadísticas Apple en los secretos protegidos de GitHub.'

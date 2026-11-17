@@ -12,3 +12,5 @@ En esta primera fase únicamente está autorizada la rama `feature/mi-musica`. O
 Las órdenes emitidas por otra cuenta, en otra incidencia o con sintaxis inesperada se rechazan. El receptor usa el token efímero propio de GitHub Actions; no requiere claves nuevas de Apple. Una reacción 👀 del bot reclama la orden antes de enviarla y una reacción 🚀 confirma que se despachó. Si el despacho falla después de reclamar la orden, se necesita una nueva orden tras verificar que no se envió ninguna compilación. Una ejecución con fallo debe investigarse antes de reintentar; no se reenvía automáticamente.
 
 El workflow receptor solo funciona cuando está incorporado a la rama predeterminada `main`. Hasta entonces no se procesa ninguna orden. Este mecanismo no publica versiones en App Store.
+
+Estado inicial: `ALLOW_REAL_UPLOAD` está fijado en `false` en el workflow. Por tanto, incluso una orden `run` se rechaza sin enviar nada. Su activación exige un nuevo cambio de código y autorización de Tony, tras superar la prueba inocua.

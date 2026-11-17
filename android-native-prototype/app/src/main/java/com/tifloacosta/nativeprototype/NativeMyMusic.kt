@@ -10,8 +10,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.OutlinedTextField
@@ -96,7 +96,7 @@ fun NativeMyMusic(onBack: () -> Unit) {
         songs = savedSongs()
     }
 
-    Column(modifier = Modifier.fillMaxSize().padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+    Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         TextButton(onClick = onBack) { Text("Volver") }
         Text("Mi Música", modifier = Modifier.semantics { heading() })
         Button(onClick = { picker.launch(arrayOf("audio/*")) }, modifier = Modifier.fillMaxWidth()) {
@@ -119,8 +119,8 @@ fun NativeMyMusic(onBack: () -> Unit) {
         if (songs.isEmpty()) {
             Text("Todavía no hay canciones. Selecciona Importar canciones para empezar.")
         } else {
-            LazyColumn {
-                items(songs.filter { it.title.contains(query.trim(), ignoreCase = true) }, key = { it.uri }) { song ->
+            Column {
+                songs.filter { it.title.contains(query.trim(), ignoreCase = true) }.forEach { song ->
                     Column(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)) {
                         Text("Canción: ${song.title}")
                         Button(onClick = {
@@ -152,6 +152,19 @@ fun NativeMyMusic(onBack: () -> Unit) {
             TextButton(onClick = { player.cancelSleep() }) { Text("Cancelar temporizador") }
         }
         Text("Posición: ${player.progressMs / 1000} de ${player.durationMs / 1000} segundos")
+        Text("Ecualizador", modifier = Modifier.semantics { heading() })
+        Text("Perfil actual: ${player.equalizer.selectedPreset}")
+        player.equalizer.presets.keys.forEach { preset ->
+            TextButton(onClick = { player.equalizer.selectPreset(preset) }) { Text("Perfil $preset") }
+        }
+        player.equalizer.frequencies.forEachIndexed { index, frequency ->
+            Text("$frequency hercios: ${player.equalizer.gains[index]} decibelios")
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                TextButton(onClick = { player.equalizer.adjustBand(index, -1f) }) { Text("Reducir $frequency hercios") }
+                TextButton(onClick = { player.equalizer.adjustBand(index, 1f) }) { Text("Aumentar $frequency hercios") }
+            }
+        }
+        player.equalizer.error?.let { Text(it) }
     }
     if (editingFolder) {
         AlertDialog(

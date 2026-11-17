@@ -59,6 +59,7 @@ object PrototypeNavigation {
     const val RESOURCES = 1
     const val VIDEOS = 2
     const val READER = 3
+    const val MUSIC = 4
     fun parentOf(destination: Int): Int = HOME
 }
 
@@ -366,6 +367,11 @@ private fun PrototypeHome(
         return
     }
 
+    if (section == PrototypeNavigation.MUSIC) {
+        NativeMyMusic(onBack = { section = PrototypeNavigation.HOME })
+        return
+    }
+
     if (section in NativeDestinations.SEARCH..NativeDestinations.SOUND_SEARCH) {
         NativeSecondaryScreen(
             destination = section, english = english,
@@ -400,6 +406,7 @@ private fun PrototypeHome(
                     Button(onClick = { section = PrototypeNavigation.NEWS; visibleCount = 10 }, modifier = Modifier.fillMaxWidth()) { Text(first) }
                     Button(onClick = { section = PrototypeNavigation.RESOURCES; visibleCount = 10 }, modifier = Modifier.fillMaxWidth()) { Text(second) }
                     Button(onClick = { section = PrototypeNavigation.READER }, modifier = Modifier.fillMaxWidth()) { Text(readerLabel) }
+                    Button(onClick = { section = PrototypeNavigation.MUSIC }, modifier = Modifier.fillMaxWidth()) { Text("Mi Música") }
                     Button(onClick = { section = NativeDestinations.DOWNLOADS }, modifier = Modifier.fillMaxWidth()) {
                         Text(NativeUiText.get(language, "downloads"))
                     }

@@ -21,8 +21,32 @@ private struct MusicIndexBackup: Codable {
     let version: Int
     let createdAt: String
     let includesAudioFiles: Bool
-    let files: [MusicLocalFile]
-    let folders: [MusicVirtualFolder]
+    let catalog: MusicPortableCatalog
+    let folders: [MusicPortableFolder]
+    let playlists: [String]
+    let audioProfiles: [String: String]
+}
+
+private struct MusicPortableCatalog: Codable {
+    let version: Int
+    let tracks: [String: MusicPortableTrack]
+}
+
+private struct MusicPortableTrack: Codable {
+    let id: String
+    let title: String
+    let locations: [MusicPortableLocation]
+}
+
+private struct MusicPortableLocation: Codable {
+    let provider: String
+    let remoteId: String
+}
+
+private struct MusicPortableFolder: Codable {
+    let id: String
+    let name: String
+    let trackIds: [String]
 }
 
 private struct MusicLocalFile: Identifiable, Codable {
@@ -120,9 +144,18 @@ private final class NativeMusicLibrary: ObservableObject {
 
     func exportIndex() -> MusicBackupDocument? {
         do {
-            let backup = MusicIndexBackup(format: "tifloacosta-mi-musica-ios-index", version: 1,
+            let tracks = Dictionary(uniqueKeysWithValues: files.map { file in
+                (file.id.uuidString, MusicPortableTrack(id: file.id.uuidString, title: file.name,
+                    locations: [MusicPortableLocation(provider: "ios-local", remoteId: file.fileName)]))
+            })
+            let portableFolders = folders.map { folder in
+                MusicPortableFolder(id: folder.id.uuidString, name: folder.name,
+                    trackIds: folder.trackIds.map { $0.uuidString })
+            }
+            let backup = MusicIndexBackup(format: "tifloacosta-mi-musica", version: 1,
                 createdAt: ISO8601DateFormatter().string(from: Date()), includesAudioFiles: false,
-                files: files, folders: folders)
+                catalog: MusicPortableCatalog(version: 1, tracks: tracks),
+                folders: portableFolders, playlists: [], audioProfiles: [:])
             let bytes = try JSONEncoder().encode(backup)
             return MusicBackupDocument(text: String(decoding: bytes, as: UTF8.self))
         } catch { self.error = "No se pudo preparar el respaldo: \(error.localizedDescription)"; return nil }
@@ -155,13 +188,26 @@ private final class NativeMusicLibrary: ObservableObject {
         defer { if accessed { url.stopAccessingSecurityScopedResource() } }
         do {
             let imported = try JSONDecoder().decode(MusicIndexBackup.self, from: Data(contentsOf: url))
-            guard imported.format == "tifloacosta-mi-musica-ios-index", imported.version == 1,
+            guard imported.format == "tifloacosta-mi-musica", imported.version == 1,
                   !imported.includesAudioFiles else { throw CocoaError(.fileReadCorruptFile) }
             let originalFiles = files
             let originalFolders = folders
-            files = Array(Dictionary((files + imported.files).map { ($0.id, $0) }, uniquingKeysWith: { existing, _ in existing }).values)
-            folders = Array(Dictionary((folders + imported.folders).map { ($0.id, $0) }, uniquingKeysWith: { existing, _ in existing }).values)
+            let importable = imported.catalog.tracks.values.compactMap { track -> MusicLocalFile? in
+                guard let location = track.locations.first(where: { $0.provider == "ios-local" }),
+                      let id = UUID(uuidString: track.id),
+                      URL(fileURLWithPath: location.remoteId).lastPathComponent == location.remoteId,
+                      FileManager.default.fileExists(atPath: directory.appendingPathComponent(location.remoteId).path) else { return nil }
+                return MusicLocalFile(id: id, name: track.title, fileName: location.remoteId)
+            }
+            files = Array(Dictionary((files + importable).map { ($0.id, $0) }, uniquingKeysWith: { existing, _ in existing }).values)
+            let importedFolders = imported.folders.map { folder in
+                MusicVirtualFolder(id: UUID(uuidString: folder.id) ?? UUID(), name: folder.name,
+                    trackIds: folder.trackIds.compactMap { UUID(uuidString: $0) })
+            }
+            folders = Array(Dictionary((folders + importedFolders).map { ($0.name, $0) }, uniquingKeysWith: { existing, _ in existing }).values)
             do { try save() } catch { files = originalFiles; folders = originalFolders; throw error }
+            let unavailable = imported.catalog.tracks.count - importable.count
+            if unavailable > 0 { self.error = "Organización restaurada. Hay \(unavailable) canciones sin audio local; tendrás que importarlas para reproducirlas." }
         } catch { self.error = "No se pudo restaurar el índice: \(error.localizedDescription)" }
     }
 }

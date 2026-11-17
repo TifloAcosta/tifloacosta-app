@@ -53,6 +53,7 @@ class NativeMusicPlayer(private val context: Context) {
                 .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC).build())
             player.setDataSource(context, Uri.parse(item.first))
             player.prepare()
+            equalizer.loadForSong(item.first)
             equalizer.attach(player.audioSessionId)
             player.setOnCompletionListener { if (repeatMode == "one") startCurrent() else next() }
             player.start()

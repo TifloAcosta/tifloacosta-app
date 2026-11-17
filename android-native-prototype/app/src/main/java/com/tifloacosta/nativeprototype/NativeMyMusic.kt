@@ -18,6 +18,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -27,12 +29,21 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
 
 private data class ImportedSong(val uri: String, val title: String)
 
 @Composable
 fun NativeMyMusic(onBack: () -> Unit) {
     val context = LocalContext.current
+    val player = remember { NativeMusicPlayer(context.applicationContext) }
+    DisposableEffect(player) { onDispose { player.stop() } }
+    LaunchedEffect(player.playing) {
+        while (player.playing) {
+            player.updateProgress()
+            delay(500)
+        }
+    }
     val prefs = remember { context.getSharedPreferences("mi-musica-library-v1", 0) }
     fun savedSongs(): List<ImportedSong> = prefs.getStringSet("songs", emptySet()).orEmpty()
         .mapNotNull { encoded ->
@@ -94,6 +105,7 @@ fun NativeMyMusic(onBack: () -> Unit) {
         Button(onClick = { editingFolder = true }, modifier = Modifier.fillMaxWidth()) { Text("Crear carpeta") }
         OutlinedTextField(value = query, onValueChange = { query = it }, label = { Text("Buscar canciones") }, modifier = Modifier.fillMaxWidth())
         error?.let { Text(it) }
+        player.error?.let { Text(it) }
         if (folders.isNotEmpty()) {
             Text("Mis carpetas", modifier = Modifier.semantics { heading() })
             folders.forEach { folder ->
@@ -111,12 +123,23 @@ fun NativeMyMusic(onBack: () -> Unit) {
                 items(songs.filter { it.title.contains(query.trim(), ignoreCase = true) }, key = { it.uri }) { song ->
                     Column(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)) {
                         Text("Canción: ${song.title}")
+                        Button(onClick = {
+                            player.play(song.uri, song.title, songs.map { it.uri to it.title })
+                        }) { Text("Reproducir ${song.title}") }
                         TextButton(onClick = { folderForTrack = song }, enabled = folders.isNotEmpty()) { Text("Añadir a carpeta") }
                         TextButton(onClick = { pendingRemoval = song }) { Text("Eliminar de la biblioteca") }
                     }
                 }
             }
         }
+        Text("Reproductor", modifier = Modifier.semantics { heading() })
+        Text(player.currentTitle.ifBlank { "Ninguna canción en reproducción" })
+        Button(onClick = { player.toggle() }, enabled = player.currentTitle.isNotEmpty()) { Text(if (player.playing) "Pausar" else "Reproducir") }
+        Button(onClick = { player.previous() }, enabled = player.currentTitle.isNotEmpty()) { Text("Canción anterior") }
+        Button(onClick = { player.skip(-15) }, enabled = player.currentTitle.isNotEmpty()) { Text("Retroceder 15 segundos") }
+        Button(onClick = { player.skip(15) }, enabled = player.currentTitle.isNotEmpty()) { Text("Avanzar 15 segundos") }
+        Button(onClick = { player.next() }, enabled = player.currentTitle.isNotEmpty()) { Text("Canción siguiente") }
+        Text("Posición: ${player.progressMs / 1000} de ${player.durationMs / 1000} segundos")
     }
     if (editingFolder) {
         AlertDialog(

@@ -32,6 +32,9 @@ test('Mi Música has an independent iOS navigation destination and an accessible
   assert.match(music, /Quitar perfil de esta canción/);
   assert.match(music, /Exportar respaldo de biblioteca/);
   assert.match(music, /Restaurar respaldo de biblioteca/);
+  assert.match(music, /Copia automática/);
+  assert.match(music, /Cada 7 días/);
+  assert.match(music, /Cada 30 días/);
 });
 
 test('Mi Música has an independent Android navigation destination and document picker', () => {
@@ -58,4 +61,7 @@ test('Mi Música has an independent Android navigation destination and document 
   assert.match(music, /Quitar perfil de esta canción/);
   assert.match(music, /Exportar respaldo de biblioteca/);
   assert.match(music, /Restaurar respaldo de biblioteca/);
+  assert.match(music, /Copia automática/);
+  assert.match(music, /Cada 7 días/);
+  assert.match(music, /Cada 30 días/);
 });

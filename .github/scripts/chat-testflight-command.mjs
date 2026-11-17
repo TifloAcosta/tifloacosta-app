@@ -14,6 +14,10 @@ export function validateCommand(event, { controlIssue }) {
   return { mode: match[1], branch, commentId: event.comment.id };
 }
 
+export function authorizeRealUpload(env) {
+  if (env.ALLOW_REAL_UPLOAD !== 'true') throw Error('Real TestFlight dispatch disabled pending integration verification');
+}
+
 async function request(base, token, endpoint, options = {}) {
   const response = await fetch(`${base}${endpoint}`, {
     ...options,
@@ -36,6 +40,7 @@ export async function execute(event, env = process.env) {
     console.log(`DRY RUN: validated ${command.branch}; no TestFlight workflow triggered.`);
     return;
   }
+  authorizeRealUpload(env);
   // Claim before dispatch: a failed acknowledgment must not permit a duplicate upload.
   await request(base, token, `/issues/comments/${command.commentId}/reactions`, {
     method: 'POST', headers: { 'Content-Type': 'application/json' },

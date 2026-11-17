@@ -42,6 +42,8 @@ private final class NativeMusicLibrary: ObservableObject {
     @Published private(set) var files: [MusicLocalFile] = []
     @Published private(set) var folders: [MusicVirtualFolder] = []
     @Published var error: String?
+    @Published private(set) var autoBackupDays = UserDefaults.standard.integer(forKey: "mi-musica-auto-backup-days")
+    @Published private(set) var lastAutomaticBackup: Date?
 
     private var directory: URL {
         FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -59,6 +61,8 @@ private final class NativeMusicLibrary: ObservableObject {
            let decoded = try? JSONDecoder().decode([MusicVirtualFolder].self, from: data) {
             folders = decoded
         }
+        lastAutomaticBackup = UserDefaults.standard.object(forKey: "mi-musica-last-auto-backup") as? Date
+        performAutomaticBackupIfDue()
     }
 
     func importFiles(_ urls: [URL]) {
@@ -124,6 +128,28 @@ private final class NativeMusicLibrary: ObservableObject {
         } catch { self.error = "No se pudo preparar el respaldo: \(error.localizedDescription)"; return nil }
     }
 
+    func setAutomaticBackup(days: Int) {
+        guard [0, 7, 30].contains(days) else { return }
+        autoBackupDays = days
+        UserDefaults.standard.set(days, forKey: "mi-musica-auto-backup-days")
+        performAutomaticBackupIfDue()
+    }
+
+    func performAutomaticBackupIfDue() {
+        guard autoBackupDays > 0 else { return }
+        if let previous = lastAutomaticBackup,
+           Date().timeIntervalSince(previous) < Double(autoBackupDays) * 86_400 { return }
+        guard let document = exportIndex() else { return }
+        do {
+            let folder = directory.appendingPathComponent("Respaldos", isDirectory: true)
+            try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+            let destination = folder.appendingPathComponent("MiMusica-indice-automatico.json")
+            try Data(document.text.utf8).write(to: destination, options: .atomic)
+            lastAutomaticBackup = Date()
+            UserDefaults.standard.set(lastAutomaticBackup, forKey: "mi-musica-last-auto-backup")
+        } catch { self.error = "No se pudo guardar la copia automática: \(error.localizedDescription)" }
+    }
+
     func restoreIndex(_ url: URL) {
         let accessed = url.startAccessingSecurityScopedResource()
         defer { if accessed { url.stopAccessingSecurityScopedResource() } }
@@ -172,6 +198,11 @@ struct NativeMyMusicScreen: View {
                     exportingBackup = backupDocument != nil
                 }
                 Button("Restaurar respaldo de biblioteca") { importingBackup = true }
+                Text("Copia automática: \(library.autoBackupDays == 0 ? "desactivada" : "cada \(library.autoBackupDays) días")")
+                Button("Desactivar copia automática") { library.setAutomaticBackup(days: 0) }
+                Button("Cada 7 días") { library.setAutomaticBackup(days: 7) }
+                Button("Cada 30 días") { library.setAutomaticBackup(days: 30) }
+                Text("Las copias automáticas del índice se crean al abrir Mi Música cuando corresponde; no se ejecutan en segundo plano.")
                 Text("Este respaldo conserva el índice y las carpetas, pero no incluye los archivos de audio. Para recuperar música en otro dispositivo tendrás que importar también las canciones.")
             }
             Section("Mis carpetas") {

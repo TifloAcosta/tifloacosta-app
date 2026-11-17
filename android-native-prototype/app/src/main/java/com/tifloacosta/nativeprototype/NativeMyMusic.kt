@@ -154,6 +154,25 @@ fun NativeMyMusic(onBack: () -> Unit) {
             if (unavailable > 0) error = "Organización restaurada. Hay $unavailable canciones sin permisos de audio; impórtalas para reproducirlas."
         } catch (failure: Exception) { error = "No se pudo restaurar el respaldo: ${failure.localizedMessage}" }
     }
+    val exportCompleteBackup = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/zip")) { destination ->
+        if (destination != null) try {
+            NativeMusicArchive(context).export(destination, backupSnapshot())
+        } catch (failure: Exception) { error = "No se pudo exportar la copia con audio: ${failure.localizedMessage}" }
+    }
+    val restoreCompleteBackup = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { source ->
+        if (source != null) try {
+            val restored = NativeMusicArchive(context).restore(source)
+            val existing = prefs.getStringSet("songs", emptySet()).orEmpty()
+            val editor = prefs.edit().putStringSet("songs", existing + restored.songs)
+                .putStringSet("folders", (folders + restored.folders.keys).toSet())
+            restored.folders.forEach { (name, uris) ->
+                editor.putStringSet("folder:$name", prefs.getStringSet("folder:$name", emptySet()).orEmpty() + uris)
+            }
+            editor.apply()
+            songs = savedSongs()
+            folders = (folders + restored.folders.keys).distinct().sorted()
+        } catch (failure: Exception) { error = "No se pudo restaurar la copia con audio: ${failure.localizedMessage}" }
+    }
 
     fun createFolder() {
         val name = folderName.trim()
@@ -202,6 +221,8 @@ fun NativeMyMusic(onBack: () -> Unit) {
         Text("Copias de seguridad", modifier = Modifier.semantics { heading() })
         Button(onClick = { exportBackup.launch("MiMusica-respaldo.json") }) { Text("Exportar respaldo de biblioteca") }
         Button(onClick = { restoreBackup.launch("application/json") }) { Text("Restaurar respaldo de biblioteca") }
+        Button(onClick = { exportCompleteBackup.launch("MiMusica-completa.zip") }) { Text("Exportar copia completa con audio") }
+        Button(onClick = { restoreCompleteBackup.launch("application/zip") }) { Text("Restaurar copia completa con audio") }
         Text("Copia automática: ${if (autoBackupDays == 0) "desactivada" else "cada $autoBackupDays días"}")
         Button(onClick = { setAutomaticBackup(0) }) { Text("Desactivar copia automática") }
         Button(onClick = { setAutomaticBackup(7) }) { Text("Cada 7 días") }

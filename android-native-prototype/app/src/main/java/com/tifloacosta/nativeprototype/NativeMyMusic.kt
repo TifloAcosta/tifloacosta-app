@@ -26,12 +26,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -41,6 +45,7 @@ private data class ImportedSong(val uri: String, val title: String)
 fun NativeMyMusic(onBack: () -> Unit) {
     val context = LocalContext.current
     val player = remember { NativeMusicPlayer(context.applicationContext) }
+    val scope = rememberCoroutineScope()
     DisposableEffect(player) { onDispose { player.stop() } }
     LaunchedEffect(player.playing) {
         while (player.playing) {
@@ -210,6 +215,27 @@ fun NativeMyMusic(onBack: () -> Unit) {
         prefs.edit().putStringSet("songs", records).apply()
         songs = savedSongs()
     }
+    val folderPicker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocumentTree()) { treeUri ->
+        if (treeUri != null) {
+            try {
+                context.contentResolver.takePersistableUriPermission(treeUri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                scope.launch {
+                    try {
+                        val discovered = withContext(Dispatchers.IO) { NativeMusicFolderScanner(context).scan(treeUri) }
+                        val records = prefs.getStringSet("songs", emptySet()).orEmpty().toMutableSet()
+                        discovered.forEach { (uri, title) ->
+                            records.removeAll { it.substringBefore('\n') == uri }
+                            records.add("$uri\n$title")
+                        }
+                        prefs.edit().putStringSet("songs", records).apply()
+                        songs = savedSongs()
+                    } catch (failure: Exception) {
+                        error = "No se pudo leer la carpeta seleccionada: ${failure.localizedMessage}"
+                    }
+                }
+            } catch (failure: Exception) { error = "No se pudo autorizar la carpeta: ${failure.localizedMessage}" }
+        }
+    }
 
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         TextButton(onClick = onBack) { Text("Volver") }
@@ -217,6 +243,10 @@ fun NativeMyMusic(onBack: () -> Unit) {
         Button(onClick = { picker.launch(arrayOf("audio/*")) }, modifier = Modifier.fillMaxWidth()) {
             Text("Importar canciones")
         }
+        Button(onClick = { folderPicker.launch(null) }, modifier = Modifier.fillMaxWidth()) {
+            Text("Añadir carpeta local o en la nube")
+        }
+        Text("Puedes combinar canciones del dispositivo y de proveedores de archivos compatibles. Si se pierde la conexión o el permiso, el archivo externo podría dejar de reproducirse.")
         Button(onClick = { editingFolder = true }, modifier = Modifier.fillMaxWidth()) { Text("Crear carpeta") }
         Text("Copias de seguridad", modifier = Modifier.semantics { heading() })
         Button(onClick = { exportBackup.launch("MiMusica-respaldo.json") }) { Text("Exportar respaldo de biblioteca") }

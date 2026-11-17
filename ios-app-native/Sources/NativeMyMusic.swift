@@ -161,6 +161,16 @@ struct NativeMyMusicScreen: View {
                     .disabled(player.currentName.isEmpty)
                 Button("Canción siguiente") { player.next() }
                     .disabled(player.currentName.isEmpty)
+                Button("Reproducción aleatoria: \(player.shuffleEnabled ? "activada" : "desactivada")") { player.toggleShuffle() }
+                Button("Repetición: \(player.repeatMode == "off" ? "desactivada" : player.repeatMode == "all" ? "toda la lista" : "una canción")") { player.changeRepeat() }
+                Button("Temporizador de 15 minutos") { player.setSleep(minutes: 15) }
+                    .disabled(player.currentName.isEmpty)
+                Button("Temporizador de 30 minutos") { player.setSleep(minutes: 30) }
+                    .disabled(player.currentName.isEmpty)
+                if player.sleepRemaining > 0 {
+                    Text("Temporizador: \(player.sleepRemaining) segundos restantes")
+                    Button("Cancelar temporizador") { player.cancelSleep() }
+                }
                 Text("Posición: \(Int(player.position)) de \(Int(player.duration)) segundos")
             }
         }

@@ -1,6 +1,7 @@
 package com.tifloacosta.nativeprototype
 
 import android.content.Intent
+import android.content.Context
 import android.net.Uri
 import android.provider.OpenableColumns
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -61,15 +62,41 @@ fun NativeMyMusic(onBack: () -> Unit) {
     var pendingRemoval by remember { mutableStateOf<ImportedSong?>(null) }
     var folders by remember { mutableStateOf(prefs.getStringSet("folders", emptySet()).orEmpty().sorted()) }
     var folderForTrack by remember { mutableStateOf<ImportedSong?>(null) }
+    var autoBackupDays by remember { mutableStateOf(prefs.getInt("auto-backup-days", 0)) }
+
+    fun backupSnapshot(): JSONObject {
+        val tracks = JSONArray().apply { songs.forEach { put(JSONObject().put("uri", it.uri).put("title", it.title)) } }
+        val folderArray = JSONArray().apply { folders.forEach { folder ->
+            put(JSONObject().put("name", folder).put("uris", JSONArray(prefs.getStringSet("folder:$folder", emptySet()).orEmpty().toList())))
+        } }
+        return JSONObject().put("format", "tifloacosta-mi-musica-android-index")
+            .put("version", 1).put("includesAudioFiles", false).put("tracks", tracks).put("folders", folderArray)
+    }
+
+    fun performAutomaticBackupIfDue() {
+        if (autoBackupDays == 0) return
+        val now = System.currentTimeMillis()
+        val previous = prefs.getLong("last-auto-backup", 0L)
+        if (previous > 0 && now - previous < autoBackupDays * 86_400_000L) return
+        try {
+            context.openFileOutput("mi-musica-auto-index.json", Context.MODE_PRIVATE).use {
+                it.write(backupSnapshot().toString(2).toByteArray(Charsets.UTF_8))
+            }
+            prefs.edit().putLong("last-auto-backup", now).apply()
+        } catch (failure: Exception) { error = "No se pudo guardar la copia automática: ${failure.localizedMessage}" }
+    }
+
+    LaunchedEffect(autoBackupDays) { performAutomaticBackupIfDue() }
+
+    fun setAutomaticBackup(days: Int) {
+        if (days !in listOf(0, 7, 30)) return
+        autoBackupDays = days
+        prefs.edit().putInt("auto-backup-days", days).apply()
+    }
 
     val exportBackup = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/json")) { destination ->
         if (destination != null) try {
-            val tracks = JSONArray().apply { songs.forEach { put(JSONObject().put("uri", it.uri).put("title", it.title)) } }
-            val folderArray = JSONArray().apply { folders.forEach { folder ->
-                put(JSONObject().put("name", folder).put("uris", JSONArray(prefs.getStringSet("folder:$folder", emptySet()).orEmpty().toList())))
-            } }
-            val snapshot = JSONObject().put("format", "tifloacosta-mi-musica-android-index")
-                .put("version", 1).put("includesAudioFiles", false).put("tracks", tracks).put("folders", folderArray)
+            val snapshot = backupSnapshot()
             context.contentResolver.openOutputStream(destination)?.use { stream ->
                 stream.write(snapshot.toString(2).toByteArray(Charsets.UTF_8))
             } ?: throw IllegalStateException("No se pudo abrir el destino del respaldo")
@@ -158,6 +185,11 @@ fun NativeMyMusic(onBack: () -> Unit) {
         Text("Copias de seguridad", modifier = Modifier.semantics { heading() })
         Button(onClick = { exportBackup.launch("MiMusica-respaldo.json") }) { Text("Exportar respaldo de biblioteca") }
         Button(onClick = { restoreBackup.launch("application/json") }) { Text("Restaurar respaldo de biblioteca") }
+        Text("Copia automática: ${if (autoBackupDays == 0) "desactivada" else "cada $autoBackupDays días"}")
+        Button(onClick = { setAutomaticBackup(0) }) { Text("Desactivar copia automática") }
+        Button(onClick = { setAutomaticBackup(7) }) { Text("Cada 7 días") }
+        Button(onClick = { setAutomaticBackup(30) }) { Text("Cada 30 días") }
+        Text("La copia automática del índice se guarda al abrir Mi Música cuando corresponde, sin ejecutarse en segundo plano.")
         Text("El respaldo guarda canciones y carpetas como referencias, sin copiar los archivos de audio. En otro teléfono deberás importar también tus canciones.")
         OutlinedTextField(value = query, onValueChange = { query = it }, label = { Text("Buscar canciones") }, modifier = Modifier.fillMaxWidth())
         error?.let { Text(it) }

@@ -238,3 +238,46 @@ struct NativeUsageGuideScreen: View {
                             .fill(TifloVisual.brandRed)
                             .frame(width: 4, height: 28)
                             .accessibilityHidden(true)
+                        Text(section.title(english: english))
+                            .font(.body)
+                            .foregroundStyle(TifloVisual.primaryText)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .frame(maxWidth: .infinity, minHeight: 48, alignment: .leading)
+                    }
+                    .padding(.vertical, 4)
+                }
+                .accessibilityLabel(section.title(english: english))
+                .accessibilityHint(english ? "Double-tap to read the instructions for this section." : "Doble toque para leer la guía de esta sección.")
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+        }
+        .tifloScreenSurface()
+        .navigationTitle(english ? "User guide" : "Guía de uso")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+private struct NativeUsageGuideDetailScreen: View {
+    let section: NativeGuideSection
+    let english: Bool
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 18) {
+                ForEach(Array(section.paragraphs(english: english).enumerated()), id: \.offset) { _, paragraph in
+                    Text(paragraph)
+                        .font(.body)
+                        .foregroundStyle(TifloVisual.primaryText)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }
+            .frame(maxWidth: 680)
+            .frame(maxWidth: .infinity)
+            .padding(20)
+        }
+        .tifloScreenSurface()
+        .navigationTitle(section.title(english: english))
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}

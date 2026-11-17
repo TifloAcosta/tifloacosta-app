@@ -1,0 +1,32 @@
+name: Orden autorizada de ChatGPT para TestFlight
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+  issues: write
+  actions: write
+
+concurrency:
+  group: chat-testflight-command-control
+  cancel-in-progress: false
+
+jobs:
+  authorize-and-dispatch:
+    if: >-
+      github.event.issue.number == 345 &&
+      github.event.sender.login == 'TifloAcosta' &&
+      github.event.comment.user.login == 'TifloAcosta' &&
+      startsWith(github.event.comment.body, '/tiflo testflight ')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Validate and process exact TestFlight command
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CONTROL_ISSUE: '345'
+        run: node .github/scripts/chat-testflight-command.mjs

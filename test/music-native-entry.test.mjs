@@ -12,6 +12,7 @@ test('Mi Música has an independent iOS navigation destination and an accessible
   assert.match(home, /case \.miMusica: NativeMyMusicScreen\(\)/);
   assert.match(music, /fileImporter\(/);
   assert.match(music, /Importar canciones/);
+  assert.match(music, /Importar carpeta desde Archivos o nube/);
   assert.match(music, /navigationTitle\("Mi Música"\)/);
   assert.match(music, /Crear carpeta/);
   assert.match(music, /Buscar canciones/);
@@ -51,6 +52,8 @@ test('Mi Música has an independent Android navigation destination and document 
   assert.match(music, /ActivityResultContracts\.OpenMultipleDocuments/);
   assert.match(music, /Mi Música/);
   assert.match(music, /Importar canciones/);
+  assert.match(music, /Añadir carpeta local o en la nube/);
+  assert.match(music, /OpenDocumentTree/);
   assert.match(music, /Crear carpeta/);
   assert.match(music, /Buscar canciones/);
   assert.match(read('android-native-prototype/app/src/main/java/com/tifloacosta/nativeprototype/NativeMusicPlayer.kt'), /MediaPlayer/);

@@ -184,6 +184,12 @@ struct NativeMyMusicScreen: View {
                     Button("Reducir \(Int(frequency)) hercios") { player.adjustBand(index, by: -1) }
                     Button("Aumentar \(Int(frequency)) hercios") { player.adjustBand(index, by: 1) }
                 }
+                Button("Guardar como perfil general") { player.saveAsGeneral() }
+                Button("Guardar perfil para esta canción") { player.saveForCurrent() }
+                    .disabled(player.currentName.isEmpty)
+                if player.currentHasOverride {
+                    Button("Quitar perfil de esta canción") { player.removeCurrentOverride() }
+                }
             }
         }
         .navigationTitle("Mi Música")

@@ -11,7 +11,12 @@ import java.util.zip.ZipInputStream
 import java.util.zip.ZipOutputStream
 
 internal class NativeMusicArchive(private val context: Context) {
-    data class Restored(val songs: Set<String>, val folders: Map<String, Set<String>>)
+    data class Restored(
+        val songs: Set<String>,
+        val folders: Map<String, Set<String>>,
+        val playlists: Map<String, Set<String>>,
+        val smartFolders: List<Pair<String, String>>,
+    )
 
     fun export(destination: Uri, snapshot: JSONObject) {
         val manifest = JSONObject(snapshot.toString())
@@ -116,7 +121,19 @@ internal class NativeMusicArchive(private val context: Context) {
                 val ids = folder.getJSONArray("trackIds")
                 folders[name] = (0 until ids.length()).mapNotNull { idToUri[ids.getString(it)] }.toSet()
             }
-            return Restored(restored, folders)
+            val playlists = mutableMapOf<String, Set<String>>()
+            val listEntries = data.getJSONArray("playlists")
+            for (index in 0 until listEntries.length()) {
+                val item = listEntries.getJSONObject(index)
+                val ids = item.getJSONArray("trackIds")
+                playlists[item.getString("name")] = (0 until ids.length()).mapNotNull { idToUri[ids.getString(it)] }.toSet()
+            }
+            val smart = data.optJSONArray("smartFolders") ?: JSONArray()
+            val smartFolders = (0 until smart.length()).map { index ->
+                val item = smart.getJSONObject(index)
+                item.getString("name") to item.getString("titleContains")
+            }
+            return Restored(restored, folders, playlists, smartFolders)
         } catch (failure: Exception) {
             createdFiles.forEach { it.delete() }
             throw failure

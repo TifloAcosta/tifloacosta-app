@@ -19,6 +19,7 @@ test('rejects a malformed or extra command', () => {
 });
 test('rejects unexpected or unsafe branches', () => {
   assert.throws(() => check({ comment: { ...event.comment, body: '/tiflo testflight run main' } }), /branch/);
+  assert.throws(() => check({ comment: { ...event.comment, body: '/tiflo testflight run feature/unreviewed' } }), /branch/);
 });
 test('rejects duplicate delivery and non-created actions', () => {
   assert.throws(() => check({ action: 'edited' }), /action/);

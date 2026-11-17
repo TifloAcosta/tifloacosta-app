@@ -13,6 +13,9 @@ test('Mi Música has an independent iOS navigation destination and an accessible
   assert.match(music, /fileImporter\(/);
   assert.match(music, /Importar canciones/);
   assert.match(music, /navigationTitle\("Mi Música"\)/);
+  assert.match(music, /Crear carpeta/);
+  assert.match(music, /Buscar canciones/);
+  assert.match(music, /Eliminar de la biblioteca/);
 });
 
 test('Mi Música has an independent Android navigation destination and document picker', () => {
@@ -23,4 +26,6 @@ test('Mi Música has an independent Android navigation destination and document 
   assert.match(music, /ActivityResultContracts\.OpenMultipleDocuments/);
   assert.match(music, /Mi Música/);
   assert.match(music, /Importar canciones/);
+  assert.match(music, /Crear carpeta/);
+  assert.match(music, /Buscar canciones/);
 });

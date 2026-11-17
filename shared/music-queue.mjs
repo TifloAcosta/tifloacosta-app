@@ -3,7 +3,7 @@ export function createMusicQueue(trackIds, startIndex = 0) {
   if (!Number.isInteger(startIndex) || startIndex < 0 || (ids.length && startIndex >= ids.length)) {
     throw new RangeError('Posición de inicio fuera de la cola');
   }
-  return { trackIds: ids, originalTrackIds: [...ids], index: ids.length ? startIndex : -1, currentId: ids[startIndex] ?? null, repeat: 'off', shuffle: false };
+  return { trackIds: ids, originalTrackIds: [...ids], originalPositions: ids.map((_, index) => index), index: ids.length ? startIndex : -1, currentId: ids[startIndex] ?? null, repeat: 'off', shuffle: false };
 }
 
 export function setMusicRepeat(queue, repeat) {
@@ -40,18 +40,21 @@ export function resolvePlayableTrack(track) {
 export function setMusicShuffle(queue, enabled, random = Math.random) {
   if (!enabled) {
     const trackIds = [...(queue.originalTrackIds ?? queue.trackIds)];
-    const index = trackIds.indexOf(queue.currentId);
-    return { ...queue, trackIds, index, shuffle: false };
+    const index = queue.index < 0 ? -1 : queue.originalPositions[queue.index];
+    return { ...queue, trackIds, originalPositions: trackIds.map((_, position) => position), index, shuffle: false };
   }
   if (queue.shuffle) return queue;
   const currentId = queue.currentId;
-  const others = queue.trackIds.filter((id, index) => index !== queue.index);
+  const others = queue.trackIds.map((id, index) => ({ id, originalPosition: queue.originalPositions[index] }))
+    .filter((_, index) => index !== queue.index);
   for (let index = others.length - 1; index > 0; index--) {
     const randomIndex = Math.floor(Math.max(0, Math.min(0.999999, random())) * (index + 1));
     [others[index], others[randomIndex]] = [others[randomIndex], others[index]];
   }
-  const trackIds = currentId === null ? others : [currentId, ...others];
-  return { ...queue, originalTrackIds: [...(queue.originalTrackIds ?? queue.trackIds)], trackIds, index: currentId === null ? -1 : 0, shuffle: true };
+  const selected = queue.index < 0 ? [] : [{ id: currentId, originalPosition: queue.originalPositions[queue.index] }];
+  const ordered = [...selected, ...others];
+  const trackIds = ordered.map((item) => item.id);
+  return { ...queue, originalTrackIds: [...(queue.originalTrackIds ?? queue.trackIds)], trackIds, originalPositions: ordered.map((item) => item.originalPosition), index: currentId === null ? -1 : 0, shuffle: true };
 }
 
 export function sleepDeadline(nowMs, minutes) {

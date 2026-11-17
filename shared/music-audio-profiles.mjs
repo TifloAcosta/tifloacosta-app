@@ -36,6 +36,13 @@ export function setMusicAudioOverride(settings, scope, id, input) {
   return { ...settings, [scope]: { ...settings[scope], [id]: profile(input) } };
 }
 
+export function removeMusicAudioOverride(settings, scope, id) {
+  if (!['album', 'playlist', 'song'].includes(scope) || !id) throw new TypeError('Destino de perfil desconocido');
+  const overrides = { ...settings[scope] };
+  delete overrides[id];
+  return { ...settings, [scope]: overrides };
+}
+
 export function resolveMusicAudioProfile(settings, { songId, playlistId, albumId } = {}) {
   const selected = (songId && settings.song[songId]) ||
     (playlistId && settings.playlist[playlistId]) ||

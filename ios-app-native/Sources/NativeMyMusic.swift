@@ -38,8 +38,21 @@ private struct MusicIndexBackup: Codable {
     let includesAudioFiles: Bool
     let catalog: MusicPortableCatalog
     let folders: [MusicPortableFolder]
-    let playlists: [String]
+    let playlists: [MusicPortablePlaylist]
+    let smartFolders: [MusicPortableSmartFolder]
     let audioProfiles: [String: String]
+}
+
+private struct MusicPortablePlaylist: Codable {
+    let id: String
+    let name: String
+    let trackIds: [String]
+}
+
+private struct MusicPortableSmartFolder: Codable {
+    let id: String
+    let name: String
+    let titleContains: String
 }
 
 private struct MusicPortableCatalog: Codable {
@@ -76,10 +89,24 @@ private struct MusicVirtualFolder: Identifiable, Codable {
     var trackIds: [UUID]
 }
 
+private struct MusicPlaylist: Identifiable, Codable {
+    let id: UUID
+    var name: String
+    var trackIds: [UUID]
+}
+
+private struct MusicSmartFolder: Identifiable, Codable {
+    let id: UUID
+    var name: String
+    var titleContains: String
+}
+
 @MainActor
 private final class NativeMusicLibrary: ObservableObject {
     @Published private(set) var files: [MusicLocalFile] = []
     @Published private(set) var folders: [MusicVirtualFolder] = []
+    @Published private(set) var playlists: [MusicPlaylist] = []
+    @Published private(set) var smartFolders: [MusicSmartFolder] = []
     @Published var error: String?
     @Published private(set) var autoBackupDays = UserDefaults.standard.integer(forKey: "mi-musica-auto-backup-days")
     @Published private(set) var lastAutomaticBackup: Date?
@@ -100,6 +127,10 @@ private final class NativeMusicLibrary: ObservableObject {
            let decoded = try? JSONDecoder().decode([MusicVirtualFolder].self, from: data) {
             folders = decoded
         }
+        if let data = try? Data(contentsOf: directory.appendingPathComponent("playlists.json")),
+           let decoded = try? JSONDecoder().decode([MusicPlaylist].self, from: data) { playlists = decoded }
+        if let data = try? Data(contentsOf: directory.appendingPathComponent("smart-folders.json")),
+           let decoded = try? JSONDecoder().decode([MusicSmartFolder].self, from: data) { smartFolders = decoded }
         lastAutomaticBackup = UserDefaults.standard.object(forKey: "mi-musica-last-auto-backup") as? Date
         performAutomaticBackupIfDue()
     }
@@ -150,6 +181,8 @@ private final class NativeMusicLibrary: ObservableObject {
         let data = try JSONEncoder().encode(files)
         try data.write(to: directory.appendingPathComponent("library.json"), options: .atomic)
         try JSONEncoder().encode(folders).write(to: directory.appendingPathComponent("folders.json"), options: .atomic)
+        try JSONEncoder().encode(playlists).write(to: directory.appendingPathComponent("playlists.json"), options: .atomic)
+        try JSONEncoder().encode(smartFolders).write(to: directory.appendingPathComponent("smart-folders.json"), options: .atomic)
     }
 
     func addFolder(_ name: String) {
@@ -165,6 +198,41 @@ private final class NativeMusicLibrary: ObservableObject {
         do { try save() } catch { self.error = error.localizedDescription }
     }
 
+    func addPlaylist(_ name: String) {
+        let clean = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !clean.isEmpty else { return }
+        playlists.append(MusicPlaylist(id: UUID(), name: clean, trackIds: []))
+        do { try save() } catch { self.error = error.localizedDescription }
+    }
+
+    func addToPlaylist(_ trackId: UUID, playlistId: UUID) {
+        guard let index = playlists.firstIndex(where: { $0.id == playlistId }) else { return }
+        playlists[index].trackIds.append(trackId)
+        do { try save() } catch { self.error = error.localizedDescription }
+    }
+
+    func removePlaylist(_ id: UUID) {
+        playlists.removeAll { $0.id == id }
+        do { try save() } catch { self.error = error.localizedDescription }
+    }
+
+    func addSmartFolder(_ name: String, titleContains: String) {
+        let cleanName = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        let keyword = titleContains.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !cleanName.isEmpty, !keyword.isEmpty else { return }
+        smartFolders.append(MusicSmartFolder(id: UUID(), name: cleanName, titleContains: keyword))
+        do { try save() } catch { self.error = error.localizedDescription }
+    }
+
+    func removeSmartFolder(_ id: UUID) {
+        smartFolders.removeAll { $0.id == id }
+        do { try save() } catch { self.error = error.localizedDescription }
+    }
+
+    func matchingTracks(for smart: MusicSmartFolder) -> [MusicLocalFile] {
+        files.filter { $0.name.localizedStandardContains(smart.titleContains) }
+    }
+
     func removeFolder(_ id: UUID) {
         folders.removeAll { $0.id == id }
         do { try save() } catch { self.error = error.localizedDescription }
@@ -173,6 +241,7 @@ private final class NativeMusicLibrary: ObservableObject {
     func removeFromLibrary(_ id: UUID) {
         files.removeAll { $0.id == id }
         for index in folders.indices { folders[index].trackIds.removeAll { $0 == id } }
+        for index in playlists.indices { playlists[index].trackIds.removeAll { $0 == id } }
         do { try save() } catch { self.error = error.localizedDescription }
     }
 
@@ -193,7 +262,11 @@ private final class NativeMusicLibrary: ObservableObject {
             let backup = MusicIndexBackup(format: "tifloacosta-mi-musica", version: 1,
                 createdAt: ISO8601DateFormatter().string(from: Date()), includesAudioFiles: false,
                 catalog: MusicPortableCatalog(version: 1, tracks: tracks),
-                folders: portableFolders, playlists: [], audioProfiles: [:])
+                folders: portableFolders,
+                playlists: playlists.map { MusicPortablePlaylist(id: $0.id.uuidString, name: $0.name,
+                    trackIds: $0.trackIds.map { $0.uuidString }) },
+                smartFolders: smartFolders.map { MusicPortableSmartFolder(id: $0.id.uuidString, name: $0.name,
+                    titleContains: $0.titleContains) }, audioProfiles: [:])
             let bytes = try JSONEncoder().encode(backup)
             return MusicBackupDocument(text: String(decoding: bytes, as: UTF8.self))
         } catch { self.error = "No se pudo preparar el respaldo: \(error.localizedDescription)"; return nil }
@@ -230,6 +303,8 @@ private final class NativeMusicLibrary: ObservableObject {
                   !imported.includesAudioFiles else { throw CocoaError(.fileReadCorruptFile) }
             let originalFiles = files
             let originalFolders = folders
+            let originalPlaylists = playlists
+            let originalSmart = smartFolders
             let importable = imported.catalog.tracks.values.compactMap { track -> MusicLocalFile? in
                 guard let location = track.locations.first(where: { $0.provider == "ios-local" }),
                       let id = UUID(uuidString: track.id),
@@ -243,7 +318,16 @@ private final class NativeMusicLibrary: ObservableObject {
                     trackIds: folder.trackIds.compactMap { UUID(uuidString: $0) })
             }
             folders = Array(Dictionary((folders + importedFolders).map { ($0.name, $0) }, uniquingKeysWith: { existing, _ in existing }).values)
-            do { try save() } catch { files = originalFiles; folders = originalFolders; throw error }
+            let addedLists = imported.playlists.map { item in
+                MusicPlaylist(id: UUID(uuidString: item.id) ?? UUID(), name: item.name,
+                    trackIds: item.trackIds.compactMap { UUID(uuidString: $0) })
+            }
+            playlists = Array(Dictionary((playlists + addedLists).map { ($0.name, $0) }, uniquingKeysWith: { existing, _ in existing }).values)
+            let addedSmart = imported.smartFolders.map { item in
+                MusicSmartFolder(id: UUID(uuidString: item.id) ?? UUID(), name: item.name, titleContains: item.titleContains)
+            }
+            smartFolders = Array(Dictionary((smartFolders + addedSmart).map { ($0.name, $0) }, uniquingKeysWith: { existing, _ in existing }).values)
+            do { try save() } catch { files = originalFiles; folders = originalFolders; playlists = originalPlaylists; smartFolders = originalSmart; throw error }
             let unavailable = imported.catalog.tracks.count - importable.count
             if unavailable > 0 { self.error = "Organización restaurada. Hay \(unavailable) canciones sin audio local; tendrás que importarlas para reproducirlas." }
         } catch { self.error = "No se pudo restaurar el índice: \(error.localizedDescription)" }
@@ -277,7 +361,8 @@ private final class NativeMusicLibrary: ObservableObject {
             let complete = MusicIndexBackup(format: backup.format, version: backup.version,
                 createdAt: backup.createdAt, includesAudioFiles: true,
                 catalog: MusicPortableCatalog(version: 1, tracks: tracks),
-                folders: backup.folders, playlists: backup.playlists, audioProfiles: backup.audioProfiles)
+                folders: backup.folders, playlists: backup.playlists,
+                smartFolders: backup.smartFolders, audioProfiles: backup.audioProfiles)
             try JSONEncoder().encode(complete).write(to: staging.appendingPathComponent("manifest.json"))
             guard let archive = Archive(url: output, accessMode: .create) else { throw CocoaError(.fileWriteUnknown) }
             try archive.addEntry(with: "manifest.json", relativeTo: staging)
@@ -335,11 +420,21 @@ private final class NativeMusicLibrary: ObservableObject {
             let additions = backup.folders.map { folder in
                 MusicVirtualFolder(id: UUID(), name: folder.name, trackIds: folder.trackIds.compactMap { ids[$0] })
             }
+            let importedLists = backup.playlists.map { item in
+                MusicPlaylist(id: UUID(), name: item.name, trackIds: item.trackIds.compactMap { ids[$0] })
+            }
+            let importedSmart = backup.smartFolders.map { item in
+                MusicSmartFolder(id: UUID(), name: item.name, titleContains: item.titleContains)
+            }
             let originalFiles = files
             let originalFolders = folders
+            let originalPlaylists = playlists
+            let originalSmart = smartFolders
             files += imported
             folders += additions
-            do { try save() } catch { files = originalFiles; folders = originalFolders; throw error }
+            playlists += importedLists
+            smartFolders += importedSmart
+            do { try save() } catch { files = originalFiles; folders = originalFolders; playlists = originalPlaylists; smartFolders = originalSmart; throw error }
         } catch {
             createdFiles.forEach { try? FileManager.default.removeItem(at: $0) }
             self.error = "No se pudo restaurar la copia con audio: \(error.localizedDescription)"
@@ -356,6 +451,11 @@ struct NativeMyMusicScreen: View {
     @State private var searchText = ""
     @State private var newFolderName = ""
     @State private var showingFolderEditor = false
+    @State private var showingPlaylistEditor = false
+    @State private var showingSmartFolderEditor = false
+    @State private var newPlaylistName = ""
+    @State private var newSmartFolderName = ""
+    @State private var newSmartFolderKeyword = ""
     @State private var pendingRemoval: MusicLocalFile?
     @State private var exportingBackup = false
     @State private var importingBackup = false
@@ -378,6 +478,8 @@ struct NativeMyMusicScreen: View {
                 Button("Importar carpeta desde Archivos o nube") { isImportingFolder = true }
                     .accessibilityHint("Elige una carpeta disponible en Archivos. Las canciones se copiarán a Mi Música para escucharlas sin depender de la conexión.")
                 Button("Crear carpeta") { showingFolderEditor = true }
+                Button("Crear lista de reproducción") { showingPlaylistEditor = true }
+                Button("Crear carpeta inteligente") { showingSmartFolderEditor = true }
             }
             Section("Copias de seguridad") {
                 Button("Exportar respaldo de biblioteca") {
@@ -404,6 +506,31 @@ struct NativeMyMusicScreen: View {
                     }
                 }
             }
+            Section("Listas de reproducción") {
+                ForEach(library.playlists) { playlist in
+                    Text("\(playlist.name), \(playlist.trackIds.count) canciones")
+                    Button("Reproducir lista \(playlist.name)") {
+                        let items = playlist.trackIds.compactMap { id in
+                            library.files.first(where: { $0.id == id })
+                        }.map { (name: $0.name, url: library.audioURL(for: $0)) }
+                        if let first = items.first { player.play(name: first.name, url: first.url, queue: items) }
+                    }
+                    .disabled(playlist.trackIds.isEmpty)
+                    Button("Eliminar lista \(playlist.name)") { library.removePlaylist(playlist.id) }
+                }
+            }
+            Section("Carpetas inteligentes") {
+                ForEach(library.smartFolders) { folder in
+                    let matches = library.matchingTracks(for: folder)
+                    Text("\(folder.name), criterio: título contiene \(folder.titleContains), \(matches.count) canciones")
+                    Button("Reproducir carpeta inteligente \(folder.name)") {
+                        let items = matches.map { (name: $0.name, url: library.audioURL(for: $0)) }
+                        if let first = items.first { player.play(name: first.name, url: first.url, queue: items) }
+                    }
+                    .disabled(matches.isEmpty)
+                    Button("Eliminar carpeta inteligente \(folder.name)") { library.removeSmartFolder(folder.id) }
+                }
+            }
             Section("Mi biblioteca") {
                 if library.files.isEmpty {
                     Text("Todavía no hay canciones. Usa Importar canciones para añadir música.")
@@ -421,6 +548,9 @@ struct NativeMyMusicScreen: View {
                             Menu("Acciones de \(file.name)") {
                                 ForEach(library.folders) { folder in
                                     Button("Añadir a \(folder.name)") { library.assign(file.id, to: folder.id) }
+                                }
+                                ForEach(library.playlists) { playlist in
+                                    Button("Añadir a lista \(playlist.name)") { library.addToPlaylist(file.id, playlistId: playlist.id) }
                                 }
                                 Button("Eliminar de la biblioteca", role: .destructive) { pendingRemoval = file }
                             }
@@ -481,6 +611,21 @@ struct NativeMyMusicScreen: View {
         } message: {
             Text("La carpeta será virtual y no modificará tus archivos originales.")
         }
+        .alert("Crear lista de reproducción", isPresented: $showingPlaylistEditor) {
+            TextField("Nombre de la lista", text: $newPlaylistName)
+            Button("Crear") { library.addPlaylist(newPlaylistName); newPlaylistName = "" }
+            Button("Cancelar", role: .cancel) { newPlaylistName = "" }
+        } message: { Text("Puedes añadir canciones desde el menú Acciones de cada canción.") }
+        .alert("Crear carpeta inteligente", isPresented: $showingSmartFolderEditor) {
+            TextField("Nombre de la carpeta", text: $newSmartFolderName)
+            TextField("El título contiene", text: $newSmartFolderKeyword)
+            Button("Crear") {
+                library.addSmartFolder(newSmartFolderName, titleContains: newSmartFolderKeyword)
+                newSmartFolderName = ""
+                newSmartFolderKeyword = ""
+            }
+            Button("Cancelar", role: .cancel) { newSmartFolderName = ""; newSmartFolderKeyword = "" }
+        } message: { Text("Su contenido se actualiza automáticamente al añadir o retirar canciones.") }
         .confirmationDialog("Eliminar de la biblioteca", isPresented: Binding(
             get: { pendingRemoval != nil },
             set: { if !$0 { pendingRemoval = nil } }

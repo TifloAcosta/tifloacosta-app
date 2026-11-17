@@ -29,4 +29,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CONTROL_ISSUE: '345'
+          ALLOW_REAL_UPLOAD: 'false'
         run: node .github/scripts/chat-testflight-command.mjs

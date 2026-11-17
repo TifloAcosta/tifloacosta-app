@@ -139,6 +139,18 @@ fun NativeMyMusic(onBack: () -> Unit) {
         Button(onClick = { player.skip(-15) }, enabled = player.currentTitle.isNotEmpty()) { Text("Retroceder 15 segundos") }
         Button(onClick = { player.skip(15) }, enabled = player.currentTitle.isNotEmpty()) { Text("Avanzar 15 segundos") }
         Button(onClick = { player.next() }, enabled = player.currentTitle.isNotEmpty()) { Text("Canción siguiente") }
+        Button(onClick = { player.toggleShuffle() }) {
+            Text("Reproducción aleatoria: ${if (player.shuffleEnabled) "activada" else "desactivada"}")
+        }
+        Button(onClick = { player.changeRepeat() }) {
+            Text("Repetición: ${when (player.repeatMode) { "all" -> "toda la lista"; "one" -> "una canción"; else -> "desactivada" }}")
+        }
+        Button(onClick = { player.setSleep(15) }, enabled = player.currentTitle.isNotEmpty()) { Text("Temporizador de 15 minutos") }
+        Button(onClick = { player.setSleep(30) }, enabled = player.currentTitle.isNotEmpty()) { Text("Temporizador de 30 minutos") }
+        if (player.sleepRemainingSeconds > 0) {
+            Text("Temporizador: ${player.sleepRemainingSeconds} segundos restantes")
+            TextButton(onClick = { player.cancelSleep() }) { Text("Cancelar temporizador") }
+        }
         Text("Posición: ${player.progressMs / 1000} de ${player.durationMs / 1000} segundos")
     }
     if (editingFolder) {

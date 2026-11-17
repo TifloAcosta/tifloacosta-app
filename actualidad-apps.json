@@ -120,6 +120,18 @@
     "publishedAt": null
   },
   {
+    "id": "applevis-apps-4c8fe1dd58aa1c48",
+    "title": "Guest House",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/mac/utilities/guest-house",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "Guest House: a free Mac app for running Windows and Linux with VoiceOver, no sighted help Hi everyone, I want to tell you about a free Mac app called Guest House. A friend of mine, Amena Thomas, develops it, so I'm not neutral, but I think a lot of people here will want to know it exists. Guest House sets up and runs virtual machines on a Mac, and it is built for VoiceOver users from the start. You can install Windows 11 without sighted help at any step. The app speaks what it is doing through VoiceOver, and when something goes wrong it tells you what happened and what to do next. What it does: - **Windows 11 for ARM:** Guest House can download Windows straight from Microsoft, answer the setup questions for you, and install it. - **A screen reader from the first sign-in:** it can install NVDA for you, and JAWS if you choose it. JAWS needs your own license. - **Linux:** Ubuntu, Debian, Fedora, Kali, AlmaLinux, Rocky Linux and openSUSE Tumbleweed install with no installer questions, with Orca speaking from the first boot. - **macOS:** it can also run macOS virtual machines. - **Braille displays:** you can pass a USB braille display through to Windows. - **Windows apps in Command-Tab:** your Windows apps can appear in the Mac's app switcher. - **Control-Alt keys with VoiceOver on:** VoiceOver keeps Control-Option for itself, so you hold Command-Option instead. Command-Option-Right Arrow reaches Windows as Control-Alt-Right Arrow. - **Everyday extras:** copy and paste between the Mac and Windows, a shared folder, restore points, and a list of Windows apps it can install for you. What you should know: - It needs a Mac with Apple silicon. It does not run on Intel Macs. - It is free and open source, under the GPL version 2. - It is still in early testing, so you may find bugs. Help > Report a Problem puts a report on the clipboard and opens a new issue for you to paste it into. - It grew out of Allison Meloy's Accessible Virtual Machine, and builds on her work. I have been testing this and Amena has been incredibly responsive fixing a show-stopping issue for my specific use case very quickly once reported. She is keen for any feedback so please don't hesitate to get in touch. You can download it and read more here: https://fullcircleat.com/guest-house/",
+    "publishedAt": "2026-11-17T13:29:37.000Z"
+  },
+  {
     "id": "applevis-apps-409ee172503d0672",
     "title": "Beasties: Offline Puzzle Games",
     "sourceId": "applevis-apps",
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "Clicklet lets the Camera Control button on your iPhone start your Apple Shortcuts. Pick one shortcut to launch with a press, or turn on Menu mode and choose from a few favorites each time. Clicklet opens Apple Shortcuts to run your workflow, so you'll see the usual Shortcuts screens, along with any permission prompts or app handoffs your shortcut needs. To set up your library, install the included Connect Clicklet helper. It brings in your shortcut names and small icon images, which appear in your library, in the menu, and while a shortcut opens. You can also search for a shortcut or type its name. If you used an earlier version, replace the old helper with the new one and refresh to get icons. From the menu, tap Configure to go back to setup. You can scroll the menu by dragging along its side margins. Your shortcut names, icons and selections stay on your device. There's no account, advertising, analytics, subscription or in-app purchase. Camera access supports the Camera Control and lock-screen handoff and shows a live preview; Clicklet doesn't save photos or videos. Launching while your iPhone is locked requires authentication. Requires iOS 18 or later and Apple's Shortcuts app. Launching from the button requires an iPhone with Camera Control; set Clicklet in Settings > Camera > Camera Control. Opening Clicklet on its own shows your setup without running a shortcut.",
     "publishedAt": "2026-11-11T09:45:01.000Z"
-  },
-  {
-    "id": "applevis-apps-3d58fc3d05523736",
-    "title": "Fields Of Fortune",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/fields-fortune",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Fields of Fortune is a cozy farming game made to be played fully with VoiceOver, and just as fun to play by sight. Every screen is laid out for swiping, every picture is described in words, and every action tells you exactly what happened. GROW YOUR FARM Plant dozens of crops, watch them grow in real time and harvest them in normal, good and excellent quality. Buy more land as you level up, all the way to level 200. RAISE AND BREED ANIMALS Keep chickens, cows, sheep, horses, alpacas, unicorns and many more. Feed them the foods they love, collect their products, help them level up from Standard to Elite, and breed pairs to discover rare new breeds. Dress your animals in clothes you make in the Tailor Shop. MAKE GOODS Turn your harvest into bread, cheese, jam, wine, pizza, sweaters and over a hundred other goods in your own bakery, dairy, kitchen, winery and more. Hire workers to keep production running. FISH FROM THE PIER Cast your line, hear the distance read with every click as you pull back, wait for a bite and reel in fish, shells and rare sea treasures. Upgrade your poles and bait as you go. FARM WITH FRIENDS Add friends, visit their farms, water their crops, feed their animals, send gifts and trade items. Chat with everyone in public chat or privately with friends. Sell your goods to other players on the marketplace. DAILY GOALS AND CHALLENGES Collect a daily reward, complete daily quests, earn bronze, silver and gold medals, climb the leaderboards and compete in weekly challenges for surprise rewards. MADE FOR VOICEOVER - No headings to hunt for: swipe through each screen from the top. - Long lists are grouped into lists that open and close, each with its numbers. - Sounds, music and haptics for every action, with full volume controls. - Reduce Motion is respected everywhere. OPTIONAL PURCHASES The whole game is free to play. The Store sells Fortune Gem packs, for time in the forest and forest tools, three animals you cannot get anywhere else, and Farm Pass, a monthly subscription with extra gifts, free twin breeding on friends' farms and time with your animals. Farm Pass renews monthly until you cancel. Privacy Policy: https://ttqoudbyaxndaahyjmsf.supabase.co/functions/v1/privacy Terms of Use: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
-    "publishedAt": "2026-11-10T12:29:21.000Z"
   }
 ]

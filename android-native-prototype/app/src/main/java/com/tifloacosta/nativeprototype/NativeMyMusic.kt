@@ -153,6 +153,11 @@ fun NativeMyMusic(onBack: () -> Unit) {
         }
         Text("Posición: ${player.progressMs / 1000} de ${player.durationMs / 1000} segundos")
         Text("Ecualizador", modifier = Modifier.semantics { heading() })
+        Button(onClick = { player.equalizer.saveAsGeneral() }) { Text("Guardar como perfil general") }
+        Button(onClick = { player.equalizer.saveForCurrentSong() }, enabled = player.currentTitle.isNotEmpty()) { Text("Guardar perfil para esta canción") }
+        if (player.equalizer.currentHasOverride) {
+            Button(onClick = { player.equalizer.removeCurrentSongOverride() }) { Text("Quitar perfil de esta canción") }
+        }
         Text("Perfil actual: ${player.equalizer.selectedPreset}")
         player.equalizer.presets.keys.forEach { preset ->
             TextButton(onClick = { player.equalizer.selectPreset(preset) }) { Text("Perfil $preset") }

@@ -1,5 +1,195 @@
 [
   {
+    "id": "9to5mac-8a07416d81d69855",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/16/iphone-duo-gets-one-of-face-ids-best-features-with-upcoming-ios-27-3-update/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-17T03:15:50.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iPhone Duo gets one of Face ID’s best features with upcoming iOS 27.3 update",
+        "summary": "Soon, your alarms, timers, and phone calls will be less disruptive on iPhone Duo. more…",
+        "body": "Soon, your alarms, timers, and phone calls will be less disruptive on iPhone Duo.\n\nWith today’s iOS 27.3 developer beta 2 , iPhone Duo gained a new feature: Unlock with Front Camera . This lets you unlock your iPhone Duo in a similar fashion to Face ID, but using the front selfie camera, rather than Face ID’s TrueDepth 3D camera system. But, Face ID is more than just unlocking: it also provides Attention Aware features.\n\nAttention Aware features, which were first introduced with iPhone X, check for when you’re looking at the phone before performing certain actions:\n\niPhone will check for attention before dimming the display, expanding a notification when locked, or lowering the volume of some alerts.\n\nPreviously, Attention Aware features required Face ID, but iOS 27.3 extends it to iPhone Duo. Like the new face unlock feature , Attention Aware features only work when using the outer display. However, the face unlock feature does not have to be set up to use the Attention Aware features.\n\nAfter updating to iOS 27.3, the features should be automatically enabled. You can enable or disable the feature in Settings → Accessibility → Face Recognition & Attention . You can also enable Haptic on Successful Unlock there, just like an iPhone with Face ID.\n\nIn my experience, Attention Aware features will lower the volume of alarms, timers, and incoming calls when your iPhone is already unlocked. It also will prevent the display from dimming and locking while you are actively looking at it. Finally, it will expand and show notification content on the Lock Screen after unlocking with the new face unlock feature.\n\nMy favorite Apple accessories:\n\nFollow Dylan: Twitter , Threads"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-4a31a5199167780a",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/16/tvos-27-3-beta-2-brings-siri-ai-to-apple-tv-beta-testers/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-17T01:36:22.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "tvOS 27.3 beta 2 brings Siri AI to Apple TV beta testers",
+        "summary": "Following the rollout of Siri AI to select Apple TV models with tvOS 27.2.1, Apple today expanded availability to users running the tvOS 27.3 developer beta. Here are the details. more…",
+        "body": "Following the rollout of Siri AI to select Apple TV models with tvOS 27.2.1, Apple today expanded availability to users running the tvOS 27.3 developer beta. Here are the details.\n\nLast Friday, Apple released tvOS 27.2.1 , bringing the new Siri AI to Apple TV 4K 2nd-gen and 3rd-gen models. The feature requires a nearby, paired device with Siri AI enabled.\n\nThe update came just hours after the official launch of the Apple TV 4K (4th generation) , which ships with Siri AI support out of the box.\n\nHowever, users running tvOS 27.3 beta 1 still had no access to the new Siri AI. This means that although the feature was available in the latest public release, users on the beta were left without it.\n\nEarlier tonight, Apple released tvOS 27.3 beta 2 , which, as leaker pdfu noted in a post on X, now includes a new setup screen inviting users to enable Siri AI.\n\n9to5Mac was able to confirm the change, with the new splash screen introducing Siri AI and giving users the option to try the new assistant or continue using Siri Classic.\n\nWith Siri AI now available on both the public and beta versions of tvOS, the new HomePod mini 2 is still waiting for the feature. Apple previously confirmed that Siri AI would arrive in a future software update, but it was not included in last Friday’s HomePod 27.2.1 release, and the company has yet to announce a rollout date.\n\nTo learn more about Siri AI availability, including supported regions and languages, follow this link .\n\nBe sure to catch 9to5Mac’s review of the new Apple TV 4K (4th gen)"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-d823fe6f36a9abf8",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2315195/gmail-security-settings-most-important-use/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-17T00:30:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The important Gmail security settings you should be using",
+        "summary": "If you haven't taken steps to secure your Gmail account recently, it's time to log in and make sure these settings are squared away.",
+        "body": "Having your Google account compromised can be a huge deal.\n\nGmail is no longer just an email service. Plenty of websites and apps let you log in with your Google account, and many people use that one login for almost everything they do online. It makes signing in a lot easier. It also means that whoever holds the keys to your account holds a lot more than just your private emails.\n\nGoogle is very aware of that, which is why it offers a variety of security and privacy settings to keep your account safe and keep third parties out of it. These are some of the most important ones you should be using.\n\nStart with Security Checkup ; it's a page in your Google Account that gives you personalized recommendations, like adding a recovery phone number and email. Those might sound like very basic steps, but they matter more than you might think: Google uses them to alert you to suspicious activity and to help you get back in if someone locks you out. From google.com, click your profile icon in the upper right, then click Manage your Google Account . Click Security & sign-in . At the top of the page, you'll see an icon. A green shield means nothing needs your attention right now. A blue, yellow or red exclamation mark means there's something to fix.\n\nThe single biggest fix is two-step verification, also known as two-factor authentication. With it on, a stolen password isn't enough, because signing in also takes something you physically have on you, like your phone or your own computer. To switch it on, go to Security & sign-in , find the How you sign in to Google section, select Turn on 2-Step Verification and follow the prompts.\n\nThen there are passkeys, which let you sign in with your fingerprint, face scan or screen lock instead of a password. A passkey can't be shared, copied or written down, so it holds up against phishing. To create one, go to your account's passkey page and select Create a passkey . Only do it on devices you own; once a passkey exists, anyone who can unlock that device can get into your account.\n\nLocking the front door doesn't help if someone already has a key, so check who and what is connected. Go to myaccount.google.com , open Security & sign-in and scroll down to the linked apps section, then select See all linked apps . You'll see the apps and sites you use Sign in with Google for, plus anything that has been given access to your account data. Anything you don't recognize or no longer use can go: select Remove access , then Confirm .\n\nNext, look at Gmail itself. An attacker who gets in often changes a few quiet settings so they can keep reading your mail later. Open Gmail on your computer, click the gear icon in the top right and select See all settings . Then check for anything unfamiliar under automatic forwarding, filters, labels, scheduled emails, your vacation responder, and IMAP or POP access. Mail delegation, which lets someone else read, send and delete email in your account, has its own spot: go to the Accounts and Import tab and look under Grant access to your account . If a name is there that you didn't add, click Delete next to it. You can't manage delegates from the Gmail app, only on the desktop site. Automatic forwarding is the nasty one. It sends a copy of every new message, except spam, to another address, and you'd never notice. If you find a forwarding rule you didn't set up, change your password right away and turn it off.\n\nThe devices page is the other place to look. It lives in your Google Account, not in Gmail's settings: go to myaccount.google.com , open Security & sign-in (on a computer it may show up as just Security in the left-hand menu), find Your devices and select Manage all devices . You'll see everywhere you're signed in or have been in the last few weeks. Watch for a device you don't recognize, a location you weren't in or a browser you don't normally use. Take a moment to think about it, though: an airport, a library computer or a phone you recently reset can all look odd. If something really isn't yours, select the device and tap Sign out .\n\nOnce the settings are in place, a few habits keep them working. Keep two-step verification on, and never share a verification code with anyone. Google guarantees it won't call you to ask for one. Run Security Checkup again every now and then, since recommendations change and old devices and apps pile up.\n\nIn general, keep an eye out for any suspicious activity, or even lack of activity. For example, you stop receiving mail, friends tell you they got spam from you, there are emails sent that you didn't write or messages vanish from your inbox without landing in Trash. If any of that sounds familiar, change your password first, then work through the devices, apps and Gmail settings above."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-e7c2d147035ec8ea",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2315100/how-to-put-ipad-in-recovery-mode/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-16T23:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "How to put your iPad in recovery mode (with and without a home button)",
+        "summary": "A failed update or too many wrong passcodes can leave your iPad unusable. Find out how recovery mode works and when it's worth trying as a last resort.",
+        "body": "A failed update or a forgotten passcode doesn't have to mean the end of your iPad.\n\nMany iPad problems can be fixed with a simple restart, but sometimes that's not enough. Severe issues with the tablet's software can make it completely inoperable, and in these cases, putting the iPad in recovery mode might be your only option.\n\nRecovery mode also lets you connect your iPad to your computer to update it, or in the worst-case scenario, restore it to its factory default settings. It's best to save recovery mode for when nothing else works, but when it's needed, it can mean the difference between a bricked iPad and one that works just like new.\n\nThere are a few situations when you might want to use recovery mode. Major software updates can sometimes fail, leaving you with a partially installed update that keeps your iPad from turning on. Your iPad might reboot itself continuously, or you might enter the wrong passcode too many times and get locked out. Your computer might also stop recognizing your iPad, or your iPad might show a screen prompting you to connect it to a computer.\n\nTo put your iPad in recovery mode, first connect it to your computer with a USB cable, and open Finder on Mac or the Apple Devices app on PC. From here, the process differs based on whether your iPad has a home button or not. If it does, hold the home and the power button down at the same time. Eventually, your iPad screen will go black and then show the Apple logo. Finally, it will show the recovery mode icon: an image of a USB cable connecting to a computer. Now release the buttons.\n\nNewer iPads, like the iPad Pro , don't have a home button, so you need to use the power and volume buttons instead. First press and release the volume up button and then the volume down button. Next, press and hold the power button, and keep holding it through the Apple logo until the recovery mode icon appears. Then let go.\n\nAt this point, you can use the Finder or Apple Devices on your computer to find your iPad. If the process worked, you should see a pop-up explaining that the iPad needs to be restored or updated. It's best to start with the update option, which will allow your computer to reinstall iPadOS without affecting anything else stored on your device.\n\nIf this option is successful, you'll be able to use your iPad again without losing any data. If it doesn't work, though, you'll have to put it back in recovery mode and choose the restore option. This will restore the iPad to its factory settings, completely erasing your data in the process.\n\nYou can restore everything from your most recent backup (if you have enough iCloud storage ), but it's a far more disruptive process that should only be used as a last resort. If your iPad still isn't working after trying both options or you can't get it to enter recovery mode, it may be time to get it professionally repaired or shop for a new iPad ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-apps-409ee172503d0672",
+    "type": "news",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/beasties-offline-puzzle-games",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-16T23:17:47.000Z",
+    "categories": [
+      "apple",
+      "apps-accesibles",
+      "android"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Beasties: Offline Puzzle Games",
+        "summary": "Sort puzzles and brain teasers with monsters, offline and without a single ad. 19 games, over 75,000 levels: Gnatz and the gang are waiting for you. STACKS: THE SORT PUZZLE Move the monsters from pole to pole until every pole holds just one family. Sleepy monsters only wake up when they reach the top. Every level can be solved, and the fewer moves you need, the more stars you win. MORE GAMES TO PLAY • Triple Trouble: swap monsters and line up three of a kind. • Tile Pile: pick tiles off the pile and match three on your bench. • Bumper Cars: tap the cars out of the arena without a single crash. • Laundry Day: hang three matching socks on one line. • Block Munch: place the pieces, fill lines and clear the fog. • Hive Stacks: drop monster stacks on the honeycomb, and ten of a kind get gobbled up. • Paint Trail: swipe, and the monster paints every tile it slides over. • Ice Slide: tilt the pond and slide every monster into its own nest. • Colour Gulp: pick a shade, and the slime gulps every matching tile it touches. BRAIN TEASERS • Sudoku: 1 to 9 once in every row, column and box. Always one solution. • Nonogram: paint cells by the number clues and a pixel monster appears. • Mines: use the numbers to find every monster asleep under the tiles, without waking one. • Dens: one monster per den, never two in a row or column, never touching. • Number Bite: keep the digits that make the sums, and Gnatz munches the rest. • Cage Sums: sudoku with dashed cages, the digits in each cage add up to its sum. • Number Pairs: clear pairs that are equal or make 10 until the field is empty. • Number Cross: a crossword with digits, every line adds up to its clue. • Goo Pipes: turn the pipes until the goo reaches every hungry monster, without a leak. AT YOUR OWN PACE • No ads, ever, not even for a hint • Plays offline: on the train, on a plane, at the bottom of the garden • No account, no sign-up • No timer, no lives, no waiting • Four difficulties: Chill, Normal, Tricky and Devilish • Three daily challenges, every day YOUR MONSTER, YOUR STYLE Win stars, hatch eggs and dress up your monster in the monster workshop: hats, eyes, horns, patterns and more. The free season pass adds parts you can only get that season. BEASTIES PRO Every game has 150 free levels on each of Chill, Normal and Tricky, and you can unlock more with stars. A one-time purchase unlocks all 999 levels per difficulty in every game, the Devilish difficulty and 500 bonus stars. No subscription, and it works with Family Sharing. An idea or a problem? Tap \"Write feedback\" in the app. We read every message.",
+        "body": "Sort puzzles and brain teasers with monsters, offline and without a single ad. 19 games, over 75,000 levels: Gnatz and the gang are waiting for you.\n\nSTACKS: THE SORT PUZZLE Move the monsters from pole to pole until every pole holds just one family. Sleepy monsters only wake up when they reach the top. Every level can be solved, and the fewer moves you need, the more stars you win.\n\nMORE GAMES TO PLAY • Triple Trouble: swap monsters and line up three of a kind. • Tile Pile: pick tiles off the pile and match three on your bench. • Bumper Cars: tap the cars out of the arena without a single crash. • Laundry Day: hang three matching socks on one line. • Block Munch: place the pieces, fill lines and clear the fog. • Hive Stacks: drop monster stacks on the honeycomb, and ten of a kind get gobbled up. • Paint Trail: swipe, and the monster paints every tile it slides over. • Ice Slide: tilt the pond and slide every monster into its own nest. • Colour Gulp: pick a shade, and the slime gulps every matching tile it touches.\n\nBRAIN TEASERS • Sudoku: 1 to 9 once in every row, column and box. Always one solution. • Nonogram: paint cells by the number clues and a pixel monster appears. • Mines: use the numbers to find every monster asleep under the tiles, without waking one. • Dens: one monster per den, never two in a row or column, never touching. • Number Bite: keep the digits that make the sums, and Gnatz munches the rest. • Cage Sums: sudoku with dashed cages, the digits in each cage add up to its sum. • Number Pairs: clear pairs that are equal or make 10 until the field is empty. • Number Cross: a crossword with digits, every line adds up to its clue. • Goo Pipes: turn the pipes until the goo reaches every hungry monster, without a leak.\n\nAT YOUR OWN PACE • No ads, ever, not even for a hint • Plays offline: on the train, on a plane, at the bottom of the garden • No account, no sign-up • No timer, no lives, no waiting • Four difficulties: Chill, Normal, Tricky and Devilish • Three daily challenges, every day\n\nYOUR MONSTER, YOUR STYLE Win stars, hatch eggs and dress up your monster in the monster workshop: hats, eyes, horns, patterns and more. The free season pass adds parts you can only get that season.\n\nBEASTIES PRO Every game has 150 free levels on each of Chill, Normal and Tricky, and you can unlock more with stars. A one-time purchase unlocks all 999 levels per difficulty in every game, the Devilish difficulty and 500 bonus stars. No subscription, and it works with Family Sharing.\n\nAn idea or a problem? Tap \"Write feedback\" in the app. We read every message."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-fa97d5d7d0f55977",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2314944/nintendo-switch-charging-mistakes-ruin-battery/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-16T23:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The charging mistakes that could ruin your Nintendo Switch's battery",
+        "summary": "To avoid turning your Nintendo Switch into just another stationary console, there are a few common and easy-to-overlook charging mistakes you'll want to avoid",
+        "body": "Don't let bad charging habits turn your battery from Super to Super Smashed.\n\nAs great as handheld consoles can be, from the familiar-feeling Switch 2 to the Steam Deck OLED that still holds up against other PC handhelds , their batteries really are their Achilles' heel. There's only so much playtime you can squeeze out of any portable device, and the more powerful the console, the shorter that tends to be. Moreover, most recent handhelds aren't designed for quick battery replacement. It's doable — Nintendo even provides instructions — but it's not like slapping a few AAs into a flashlight.\n\nOn a long enough timeline, all Switch batteries are bound to degrade until your console is only usable when docked. It's just a fact of lithium-ion technology. But if you're careful about how you charge, you can prolong this fate. If you're lucky, you might push things off until Nintendo's next-gen console arrives, whether that's the Switch 3 or another innovation.\n\nMostly, this is a matter of how often you charge your Switch, and to what percentage. There are some additional factors to consider, though, and we'll touch on those so you can put the free Mario Kart 8 Deluxe Switch 2 update through its paces .\n\nNever let your Switch drain to zero. Lithium-ion batteries have a finite number of charge cycles, and letting the battery die burns through them faster. Granted, the number of cycles is going to be well into the hundreds for any device, even beyond the 800 mark in the case of the Switch 1. But as you progress towards the end of that limit, your battery is going to offer diminished capacity. Nintendo also warns that you should charge once every six months, if you're not actively using it, to avoid permanently losing the ability to charge.\n\nYou should also avoid charging to 100% unless you need as many hours as you can get. That's because the optimal charge for lithium-ion batteries is both more than zero and less than full. On most devices, the rule of thumb is between 20% and 80%. On the Switch 2, though, Nintendo has added a Stop Charging Around 90% option, which you can find under System Settings . Just remember to toggle this off and wait a few minutes longer when you're heading out on a trip to maximize your time.\n\nAnother important factor is ambient temperature. Realistically, you may be unlikely to store or use a Switch beyond its official operating range, which is 41 to 95 Fahrenheit (5 to 35 Celsius). Charging in extreme heat can, however, accelerate capacity loss, so you might want to avoid leaving your console in sunlight for prolonged stretches, or charging outside in climates with intense summer heat. Notably, while extreme cold can have an impact, it shouldn't be permanent.\n\nA Switch is a complex device with delicate electronics, and the battery is embedded inside, rather than in an easily accessible compartment. Making a mistake could break something critical. In fact, Nintendo strongly urges contacting its Customer Service department instead of doing things yourself, and there's no official DIY guide for any Switch 1 model.\n\nWhile there is an official guide for the Switch 2, Nintendo notes that only consoles with the BEE-001(-01) marking contain user-replaceable batteries, as far as the company is concerned. On top of that, you need Nintendo's BEE-003(-01) Battery Replacement Kit, a careful touch, and an electrically grounded surface. A large enough static shock could fry circuitry.\n\nThe good news here is that if you charge your Switch properly, the odds of it surviving until your next upgrade without a battery swap are pretty good. It's more a question of whether anyone you pass it along to will enjoy the same luxury."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-395a7924b4012194",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/11/robo-soldier-startup-backed-by-eric-trump-misses-payroll-may-collapse/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-16T22:58:27.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Robo-soldier startup backed by Eric Trump misses payroll, may collapse",
+        "summary": "Robotics startup misses payroll a year after CEO used funds for luxury home.",
+        "body": "A humanoid robotics company backed and advised by President Donald Trump’s son, Eric Trump, has reportedly missed payroll and may be on the brink of collapse after a funding shortfall. The Silicon Valley startup, Foundation Future Industries, claims it is developing and testing robots for military roles on battlefields from Ukraine to Gaza.\n\nFoundation failed to pay employees for the payroll period ending on October 30, anonymous sources told CNBC . The startup’s staff is especially angry because Foundation’s co-founder and CEO, Sankaet Pathak , supposedly borrowed $4.6 million in company funds to buy a luxury home overlooking San Francisco Bay about a year ago.\n\nThis comes as Pathak and Foundation’s leadership are still looking to raise funding to support a $3 billion valuation, based on their promise to develop a humanoid robot ready for combat duty and capable of wielding various weapons.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-4a7fa6f27e93f59e",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/16/cyber-giant-infoblox-confirms-security-incident-after-hackers-access-company-information/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-16T22:12:31.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Cyber giant Infoblox confirms security incident after hackers access ‘company information’",
+        "summary": "The cybersecurity and automation giant said it's working with outside investigators to understand the scale of the breach.",
+        "body": "Cybersecurity and automation giant Infoblox has confirmed a cybersecurity incident, during which hackers accessed company information through one of its technology vendors.\n\nInfoblox is a privately held cyber giant that provides companies cybersecurity and networking services, such as domain name resolution and identity and user access management.\n\nIn a statement, a spokesperson for Infoblox told TechCrunch that the company is “investigating a security event involving unauthorized access to certain company information through a compromised third-party data migration vendor.”\n\n“We immediately activated our incident response procedures, took steps to contain the incident and are working with leading outside cybersecurity experts to investigate the facts, understand the scope and address any confirmed risks.”\n\nTechCrunch has learned that the data breach involves a vendor that provides SharePoint data migration services, according to a notification sent by Infoblox about the breach, two people with knowledge of the incident told TechCrunch.\n\nOne of the people said sensitive customer data was taken in the breach.\n\nAccording to public internet records seen by TechCrunch, Infoblox hosts much of its files, emails, and infrastructure with Microsoft, including a SharePoint server, which TechCrunch confirmed is accessible through Infoblox’s single sign-on provider. SharePoint is web-based software that companies use to share and host internal files and documents.\n\nInfoblox has not named the third-party migration vendor that was hacked, but one person with knowledge of the incident said that Infoblox has terminated its work with the vendor.\n\nThe company’s spokesperson did not comment on this, but added that the company has “no indication that any Infoblox products, cloud services, software updates or build-and-release processes were involved” in the breach.\n\nInfoblox would not say how many customers were affected by the incident, or if the company is aware at this time. The company also did not say, when asked, if it had been contacted by the hackers and if they had made any demands."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "9to5mac-bc33be906fe874b8",
     "type": "news",
     "sourceId": "9to5mac",
@@ -19,54 +209,6 @@
         "title": "Apple expands Apple Intelligence beta testing in China to iPads and Macs",
         "summary": "Following the arrival of Apple Intelligence on iPhones in China with iOS 27.3 beta 1, Apple is now expanding support to iPads and Macs ahead of the public release of its 27.3 updates. Here are the details. more…",
         "body": "Following the arrival of Apple Intelligence on iPhones in China with iOS 27.3 beta 1, Apple is now expanding support to iPads and Macs ahead of the public release of its 27.3 updates. Here are the details.\n\nApple’s road to releasing Apple Intelligence in China has been a particularly eventful one.\n\nAfter a significant amount of regulatory back-and-forth, the company confirmed in late October that Apple Intelligence would make its way to iPhones as of iOS 27.3, beginning with the first beta of the system, released in early November.\n\nJust a few days later, Reuters reported that Apple had cleared another regulatory hurdle in the country by registering Apple Intelligence for use on tablets and laptops.\n\nToday, Apple released the second developer betas of iPadOS 27.3 and macOS 27.3, both of which now include Apple Intelligence support in China, as spotted by MacRumors .\n\nAs with the initial iPhone rollout in the first iOS 27.3 beta, Apple Intelligence on iPads and Macs in China does not include Siri AI or the other next-generation AI features announced at WWDC 2026.\n\nInstead, users get access to earlier capabilities such as Writing Tools, Genmoji, Live Translation, and notification summaries, with Alibaba’s Qwen model powering certain features.\n\nYou can learn more about the Apple Intelligence features set to be available in China at launch here ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-77a77cb2e9301205",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/16/new-iphone-duo-orders-now-deliver-a-month-earlier-than-before/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-16T21:28:12.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "New iPhone Duo orders now deliver a month earlier than before",
-        "summary": "Interested in getting an iPhone Duo before Christmas? You might be in luck, as Apple’s online store delivery estimates just got pulled forward by a full month, with December delivery now expected. more…",
-        "body": "Interested in getting an iPhone Duo before Christmas? You might be in luck, as Apple’s online store delivery estimates just got pulled forward by a full month, with December delivery now expected.\n\nApple seems to be finding success in ramping up its iPhone Duo production.\n\nWithin minutes of iPhone Duo pre-orders opening on October 16, delivery estimates quickly slipped into November, then December, and after about a half hour of orders, the earliest you could get an iPhone Duo was late January.\n\nApple did deliver some Duo units earlier than the initial estimates. But the late January timeframe remained in place for all new iPhone Duo orders until now.\n\nBut as spotted by Max Weinbach , new iPhone Duo orders from Apple just got bumped up by about a month. Now, delivery estimates are showing December 16-23 for customers in the US and elsewhere.\n\nThis is a great indicator that Apple has been able to accelerate production. It’s also likely that there was a slowdown in orders due to the late January estimate putting off prospective buyers, thus making it easier for the company to catch up on backorders.\n\nWhile we still don’t know sales numbers, the iPhone Duo by all appearances has been a hit already. And with iOS 27.3 adding a face unlock feature soon, one of the biggest critiques reviewers had is largely being mitigated.\n\nDo you plan to place a new iPhone Duo order? Let us know in the comments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-e2a03589b9cc8ecc",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2318489/iphone-duo-gets-face-unlock-with-the-latest-ios-27-beta/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-16T21:17:24.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The iPhone Duo gets face unlock with the latest iOS 27 beta.",
-        "summary": "You won't need to wait for TouchID on your $2,000 foldable.",
-        "body": "You won't need to wait for TouchID on your $2,000 foldable.\n\nThe lack of Face ID is one of the main complaints users have had about the iPhone Duo. And while rumors suggest that the company might add a TrueDepth camera to the second generation of its foldable phone next year, it seems that Apple has a more immediate solution to address these complaints. The second beta of iOS 27.3, released to developers on Monday, adds a new option to unlock the iPhone Duo with facial recognition using its front-facing camera.\n\nThe feature is called \" Unlock with Front Camera \" and can be enabled in the Touch ID & Passcode settings in the Settings app. Engadget confirmed that the feature works on an iPhone Duo running the beta — but how it works is quite intriguing. Unlike most modern iPhones, the Duo lacks a TrueDepth camera with the depth sensors that Face ID uses to map a face in 3D. Instead, it has regular cameras on both the outer and inner screens, which is likely the main reason it relies on Touch ID for unlocking.\n\nAnd the new feature in iOS 27.3 beta makes this very clear — the setup screen warns users that the feature \"provides convenience\" but \"isn't as secure as Touch ID or Face ID.\" It's still too early to tell, but Engadget's tests show that the feature works reasonably well. It unlocks faster than Touch ID and wasn't fooled when a photo of the user's face was pointed at the camera. It also seems to work in certain low-light conditions, though not when it's completely dark.\n\nOf course, Apple has set some limits to ensure that malicious people don't take advantage of the new feature to tamper with others' iPhones without their consent. It only works to bypass the Lock Screen, and you can't unlock apps, view your passwords or use Apple Pay with your face — Touch ID is still required for more sensitive actions. Not using your phone for more than 45 minutes also temporarily disables Unlock with Front Camera. The feature doesn't work using the iPhone Duo's inner display either, but that's most likely because the under-display camera has a very low resolution.\n\nThe approach is very similar to what Apple did with the recently announced HomeView . It also lacks Face ID and relies on a simpler form of facial recognition to identify who is using the device in order to display personal content. It seems that Apple has now brought the same system to the iPhone Duo. In our review , we found the Duo's Touch ID accurate but a bit slower to unlock than expected. The same beta also adds a setting to lock the Duo when it's closed, instead of moving content to the outer display.\n\nApple hasn't said when iOS 27.3 will be released to the public, but the update is likely to be rolled out sometime mid-December. For now, only developers and beta testers have access to it."
       }
     },
     "media": null
@@ -115,7 +257,7 @@
       "en": {
         "title": "Sam Altman says he wants everyone ‘to have a lot of RAM’",
         "summary": "OpenAI CEO Sam Altman is once again addressing his controversial comments on PC RAM purchases. \"I want to be clear, I want people to have a lot of RAM, I think everybody should be able to buy a lot of RAM for their own computer,\" Altman said today. \"I think the home tinkering is great.\" […]",
-        "body": "OpenAI CEO Sam Altman is once again addressing his controversial comments on PC RAM purchases. \"I want to be clear, I want people to have a lot of RAM, I think everybody should be able to buy a lot of RAM for their own computer,\" Altman said today. \"I think the home tinkering is great.\"\n\nThe comments were made on stage at Semafor's Silicon Valley & The World summit on Monday.\n\nAltman's remarks on RAM stirred up controversy last month. In an appearance on the Cheeky Pint podcast , Altman said that it's \"quite terrible\" for everyone to have RAM in personal computers rather than in data centers. He later followed up on those comments in posts on …\n\nRead the full story at The Verge."
+        "body": "OpenAI CEO Sam Altman is once again addressing his controversial comments on PC RAM purchases. \"I want to be clear, I want people to have a lot of RAM, I think everybody should be able to buy a lot of RAM for their own computer,\" Altman said today. \"I think the home tinkering is great.\"\n\nThe comments were made onstage at Semafor's Silicon Valley & The World summit on Monday.\n\nAltman's remarks on RAM stirred up controversy last month. In an appearance on the Cheeky Pint podcast , Altman said that it's \"quite terrible\" for everyone to have RAM in personal computers rather than in data centers. He later followed up on those comments in posts on …\n\nRead the full story at The Verge."
       }
     },
     "media": null
@@ -144,31 +286,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-745cf7bef77ddc3a",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/16/iphone-duo-now-has-twice-as-many-optimized-apps-as-it-did-10-days-ago/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-16T20:18:40.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iPhone Duo now has twice as many optimized apps as it did 10 days ago",
-        "summary": "Apple marketing SVP Greg Joswiak said today that the number of iPhone Duo-ready apps on the App Store is twice what it was when Apple last reported the figure. Here are the details. more…",
-        "body": "Apple marketing SVP Greg Joswiak said today that the number of iPhone Duo-ready apps on the App Store is twice what it was when Apple last reported the figure. Here are the details.\n\nWhile it was obvious that the number of iPhone Duo-ready apps would increase over time, their limited availability was a big part of the conversation around early reviews and online commentary in the first days after the device launched.\n\nThat said, it was clear even from the early reviews that app updates were picking up quickly, with some reviewers having to rewrite or re-record parts of their coverage as more apps gained support for the device.\n\nEarlier this month, Apple put a number to that progress when it announced it had surpassed 100,000 optimized apps.\n\nNow, just 10 days later, that number has doubled, according to Apple’s senior vice president of Worldwide Marketing, Greg Joswiak. In a post on X , he touted that more than 200,000 apps are now optimized for iPhone Duo, adding that he is “excited by how quickly developers have embraced” the device.\n\nJoswiak’s update came on the same day that Apple released iOS 27.3 developer beta 2, which addresses two other common complaints from early iPhone Duo reviews: the lack of Face ID, and the inability to automatically lock the device when closing it.\n\nAs 9to5Mac covered earlier today, the second developer beta of iOS 27.3 introduces a new unlock option that uses the outer display’s camera to recognize the user’s face, as well as a setting to automatically lock the device when folded shut.\n\nThe latter addresses a common complaint from users who found it strange that closing the phone didn’t automatically lock it, requiring them to press the side button instead.\n\nFor more details on these two features coming to the iPhone Duo with iOS 27.3, follow this link ."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "techcrunch-8c088ad17dd6ceb8",
     "type": "news",
     "sourceId": "techcrunch",
@@ -186,105 +303,8 @@
     "locales": {
       "en": {
         "title": "Uber says hackers stole information on close to 150,000 driver’s licenses during data breach",
-        "summary": "The ridesharing giant said drivers' license information stored by AI cloud company Fireworks AI was stolen during a security incident.",
+        "summary": "The ride-sharing giant said driver's license information stored by AI cloud company Fireworks AI was stolen during a security incident.",
         "body": "Uber is notifying close to 150,000 drivers that their personal and driver’s license information was stolen during an October data breach at one of the company’s tech providers.\n\nIn notices filed this week with several U.S. attorneys general, including California and Iowa , the ride-hailing giant said it was notified on October 9 by the provider that hackers broke in and stole internal credentials, which were used to access Uber’s data.\n\nThe company said it subsequently began notifying affected drivers that their personal information was stored with the provider.\n\nThe stolen data includes affected drivers’ names, addresses, dates of birth, and driver’s license numbers.\n\nTechCrunch has learned that the provider is Fireworks AI, which lets developers access and use open-weight AI models. Fireworks reported a data breach last month in which hackers stole its customers’ information, including billing data and some private AI datasets.\n\nOnline productivity startup Notion and AI coding startup Cursor have both confirmed that they had data stolen during the Fireworks hack.\n\nIn Uber’s case, the company said it had alerts enabled to detect unauthorized access to its Fireworks environment, but because the hackers used Fireworks’ own internal credentials, “no alerts were triggered.”\n\nWhen reached for comment, an Uber spokesperson told TechCrunch: “The notices to drivers are in relation to a security incident impacting one of our third-party vendors, Fireworks.ai, which had access to some Uber data,” and deferred our questions to Fireworks.\n\nA spokesperson for Fireworks confirmed that the company identified a security issue involving unauthorized access to some of its systems, which affected customer data, but the spokesperson did not address our questions about the incident.\n\nFireworks attributed its breach to a financially motivated cybercriminal group whose goals are to sell stolen tokens for accessing large language models, or LLMs. No known cybercriminal group has taken credit for the data theft.\n\nIn a notice filed with Oregon’s attorney general, Uber said it notified 149,346 people in total that their information had been taken in the breach at Fireworks.\n\nTechCrunch previously reported that Uber has notified drivers in California, Illinois, Massachusetts, Rhode Island, and South Carolina. We’ve also seen data breach notices filed in Texas and Vermont.\n\nWhen asked by TechCrunch, Uber’s spokesperson did not say how many drivers are affected by the breach, nor how many drivers it was notifying about the incident.\n\nIt’s unclear if the number of affected drivers is expected to rise, and Uber did not respond to a follow-up email sent Monday.\n\nThis is Uber’s second known data breach this year. The company reported a security incident at its Uber Freight truck shipping unit, for which an extortion gang took credit for stealing data.\n\nFirst published on November 13, and updated with a response from Fireworks, and again with a new updated figure of affected individuals from Oregon’s attorney general."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-4288f362b1000a32",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2314824/google-pixel-phone-most-similar-to-galaxy-s26-plus/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-16T19:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "android"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Which Google Pixel phone is most similar to the Galaxy S26+?",
-        "summary": "Trying to choose between the Google Pixel 11 Pro and Samsung Galaxy S26+? We break down the specs, cameras and prices to help find the best one for you.",
-        "body": "Google Pixel is considered the cleanest Android experience, but which model holds up against the Samsung Galaxy S26+?\n\nOn paper, Samsung's Galaxy S26 and Google's Pixel 11 family of smartphones look surprisingly alike. You get three models to choose from on either side of the divide, but pit the two companies' offerings head-to-head and you'll find that the comparison isn't as straightforward.\n\nFor instance, the Galaxy S26+ specifically sits in the middle of Samsung's flagship lineup. However, you'll need to step up to Google's top-of-the-line Pixel 11 Pro XL for a direct equivalent. The Pixel 11 Pro also comes close to offering the same experience, but it makes a few tradeoffs while undercutting the Galaxy S26+ on price by a small margin.\n\nWith that in mind, here's how the Pixel 11 series stacks up against the Galaxy S26+, the middle child of Samsung's flagship smartphone lineup. Let's start with the Pixel 11 Pro, which seems like a natural competitor to the Galaxy S26+ as they each occupy the middle slot in Google and Samsung's flagship portfolios, respectively. Look a bit closer, though, and you'll find some fairly significant differences between them.\n\nSamsung's Galaxy S26+ is a fairly large smartphone — it packs a 6.7-inch display that's only 0.2 inches smaller than the S26 Ultra. The Pixel 11 Pro, meanwhile, is quite compact by modern smartphone standards as we found out in our review . It has a 6.3-inch display, which is exactly the same as the base Galaxy S26.\n\nIf you don't mind the screen size difference, though, the Pixel 11 Pro is nearly an even match for the Galaxy S26+ in many other ways. In fact, Google's Pro phone offers a brighter display and more capable set of cameras. One major caveat is that the Galaxy S26 series enjoys a healthy lead in terms of raw performance. Google's Tensor G6 is primarily designed to support AI workloads , while the Galaxy S26's Snapdragon Elite Gen 5 — quoted as the \"world's faster mobile system-on-a-chip\" at launch by manufacturer Qualcomm — delivers considerably more processing and graphics horsepower (as does its international Exynos 2600 chip).\n\nStill, the Pixel 11's Tensor G6 can handle day-to-day tasks and even multitasking just fine. The Galaxy S26+ simply pulls ahead in gaming, video editing and other resource-intensive applications. But on the plus side, the Pixel 11 Pro's $1,099 price tag undercuts the Galaxy S26+'s $1,199 MSRP.\n\nIf you find the Pixel 11 Pro too small, Google's larger Pro XL model is a much closer match to the Galaxy S26+. Its 6.8-inch display is a touch larger than the 6.7-inch panel found on Samsung's middleweight flagship. Google also equips the Pixel 11 Pro with superior camera hardware, offering a 50MP primary lens, 48MP ultrawide and 48MP telephoto with 5x optical zoom. The Galaxy S26+ has a 50MP main camera but only a 12MP ultrawide and 10MP telephoto with 3x optical zoom. Samsung reserves its best optical sensors for the top-of-the-line Galaxy S26 Ultra.\n\nAt $1,299, the Pixel 11 Pro XL is $100 more than the Galaxy S26+'s $1,199 MSRP. Because Samsung's flagship line has been on the market longer, you're more likely to score a discount on the Galaxy S26+. You'll also notice a major difference in hand: the largest Pixel weighs a hefty 8 ounces (226 grams) compared to the 6.7-ounce (190-gram) Galaxy S26+. It's easy to notice the difference when holding the phones in the real world. The Pixel 11 Pro XL feels reassuringly hefty, but that feeling can eventually turn to fatigue during extended use."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-d99bccb046c463de",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/16/apple-adds-face-unlock-to-the-iphone-duo-but-its-not-face-id/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-16T19:26:55.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple adds ‘face unlock’ to the iPhone Duo, but it’s not Face ID",
-        "summary": "Apple's latest iOS 27.3 developer beta introduces a limited face unlock feature for the iPhone Duo, alongside other improvements.",
-        "body": "One of the top complaints from tech reviewers about Apple’s new foldable, the iPhone Duo, has been its reliance on Touch ID, a technology that’s been largely replaced by Face ID across the company’s iPhone lineup.\n\nWith Monday’s release of iOS 27.3 beta for developers, Apple is addressing that complaint with a new “face unlock” feature that lets iPhone Duo users unlock their phones using the front camera, rather than waiting for a future hardware upgrade.\n\nTo be clear, this feature is not Face ID.\n\nDue to hardware constraints, the iPhone Duo shipped without support for Face ID technology primarily because its thin, foldable design doesn’t offer enough space for the TrueDepth sensor array that Face ID requires. A recent report from Bloomberg suggests that the company is working to change that in a future version of the iPhone Duo. In the meantime, the Duo uses Touch ID for unlocking, authentication, and Apple Pay.\n\nThe new face unlock feature, however, will allow users to quickly unlock the device using the front camera when the phone is close. It only works if users have recently authenticated with Touch ID or a passcode. Apple notes that Apple Pay and passwords will still require Touch ID, and users will have to authenticate with Touch ID again after 45 minutes of inactivity.\n\nThe move is meant to make it easier for people to use the Duo in the way they’re accustomed to, after years of unlocking an iPhone just by looking at it.\n\nApple isn’t going so far as to allow face unlock to work across the entire device, though, because the technology isn’t as secure as Face ID. The latter uses Apple’s TrueDepth 3D sensing hardware, which includes a flood illuminator and a dot projector that casts over 30,000 invisible infrared dots onto the user’s face to build a unique 3D map of the face. The system combines this map with attention-awareness checks, making it resistant to attempts to fool it with photos or other 2D images.\n\nThe software update addresses another complaint by incorporating one of the “hacks” iPhone Duo early adopters were using to force their phone to lock when they shut it. That involved creating a shortcut that would automatically run when the phone was closed. Now, Apple says users can enable this feature directly in Settings, under Display and Brightness.\n\nAlongside the software update, Apple announced that more than 200,000 apps are now optimized for the iPhone Duo, up from over 100,000 earlier this month .\n\nOther new features in this latest software release include an option to ask Siri questions about the content of a webpage, even portions that aren’t visible without scrolling. Apple is also introducing video podcasts in Apple Podcasts in the Apple TV app, catching up with rivals like YouTube and Spotify.\n\nApple is also expanding access to Apple News puzzles for News+ subscribers in Australia, the U.K., and for French-Canadian users. Australian News+ subscribers will get access to a daily quick crossword, crossword mini, and Sudoku, as well as Apple’s original puzzles, Quartiles and Emoji Game . U.K. users will get the quick crossword, the crossword mini, and Sudoku, while French-Canadian subscribers will get access to Apple’s original puzzles.\n\nThe iOS 27.3 software update is currently available to developers and will soon arrive for public beta testers. It will roll out more broadly to all users after further testing is complete."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-1ce76003b99330e4",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1034581/apple-intelligence-siri-ai-daily-usage-limits-icloud-subscription",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-16T19:24:40.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple is testing daily usage limits for more complex Siri AI interactions",
-        "summary": "Apple released betas of iOS 27.3, iPadOS 27.3, and macOS 27.3 today, and the company is using the update to test new per device daily usage limits for some Siri AI and Apple Intelligence features, according to MacRumors. Basic Siri commands and requests will remain free and unlimited, but more advanced features that rely on […]",
-        "body": "Apple released betas of iOS 27.3, iPadOS 27.3, and macOS 27.3 today, and the company is using the update to test new per device daily usage limits for some Siri AI and Apple Intelligence features, according to MacRumors .\n\nBasic Siri commands and requests will remain free and unlimited, but more advanced features that rely on cloud-based processing like generating, cleaning up, or extending images in Photos will be subjected to the daily limits. There are four categories of limited usage, MacRumors reports, including using Siri AI for \"multi-step, personal context requests,\" image generation and editing tools, automations in Shortcuts that \"r …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-02403f50d7939172",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/policy/1034527/openai-csam-classifier",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-16T19:23:45.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "OpenAI wants to stop deepfakes from overwhelming child abuse tiplines",
-        "summary": "OpenAI is announcing a tool that it says will help child sexual abuse investigators cut through the noise to find harmful material they can act on quickly. At a Monday press briefing in Washington, DC, OpenAI announced a classifier it says can better detect abusive imagery of kids, including whether it's AI-generated. It's also offering […]",
-        "body": "OpenAI is announcing a tool that it says will help child sexual abuse investigators cut through the noise to find harmful material they can act on quickly.\n\nAt a Monday press briefing in Washington, DC, OpenAI announced a classifier it says can better detect abusive imagery of kids, including whether it's AI-generated. It's also offering free access to vetted organizations, giving developers more guidance on how to detect this type of content, and helping to train law enforcement on how AI can aid their investigations. The news comes as policymakers and others are pushing for more safety restrictions on AI tools, accusing OpenAI and other co …\n\nRead the full story at The Verge."
       }
     },
     "media": null
@@ -309,30 +329,6 @@
         "title": "US moves to cut China’s remote access to AI chips",
         "summary": "Trump bets China won’t mind US blocking remote access to AI chips.",
         "body": "On the heels of the Nvidia scandal , the Trump administration is preparing to crack down on foreign data centers that are fueling China’s advancements in artificial intelligence by allowing remote access to otherwise restricted high-end chips necessary for AI training.\n\nIn a summary of the rule change, the Commerce Department said it was closing a loophole that previously allowed foreign rivals like China, Russia, and Iran to bypass export curbs on certain advanced computer chips by instead renting access to those chips from data centers in Indonesia, Malaysia, Singapore, Thailand, and Brazil.\n\nUS rivals could possibly use that access to train and run advanced AI models “capable of supporting military- and intelligence-related activities that could threaten US national security or foreign policy interests,” the Commerce Department said. Among threats, the US fears rivals could use advanced AI to develop \"more effective weapons of mass destruction and advanced conventional weapons, coordinated cyber-espionage and targeted cyber-disruption, algorithmic theft, and weaponized disinformation.”\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-080f9556304d091a",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2317417/google-adds-66-regional-dialects-to-gemini/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-16T17:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google adds 66 regional dialects to Gemini",
-        "summary": "From today, Gemini's making more of an effort to speak your language in a way that sounds more accurate.",
-        "body": "The feature was teased during Google I/O earlier this year.\n\nOne of the less visible risks of conversational AI is its flattening effect on a culture's unique dialect and accent. Humanity speaks with a thousand voices, but assistants often just respond in a nicely generic transatlantic monotone. Now, Google is doing something about it by adding 66 regional dialects to Gemini to help it better relate to the people using it. The feature was first teased at Google I/O earlier this year, and starting today, the Android and iOS apps will be able to speak to users in a variety of voices from different countries.\n\nFor instance, UK users can set Gemini to speak in a Geordie, Scouse and Brummie accent to better engage with people from Tyneside, Merseyside and Birmingham. The list also includes Scots , Welsh, Northern Irish and Multicultural London English, among many others. And it's not just the UK that gets this treatment, with tailored dialects for India, Brazil, Indonesia and Korea also in the mix.\n\nGoogle says it worked with native speakers to ensure the voices were authentic and clear, rather than exaggerated and stereotypical. It added that Gemini isn't going to suddenly fill its responses with \"street slang,\" but instead focus on sounding more \"like a local.\" Given how much pride people put into their accent as a signifier of their heritage, it'll be very interesting to see how well these voices are received by the people intended to use them.\n\nTo activate the voices, you'll need to access the voice settings in the Gemini app or tap the three-dot menu. Google suggests a good way to test their authenticity is to ask for a recommendation for local food to better hear the \"warmth and rhythm of each voice.\""
       }
     },
     "media": null
@@ -874,32 +870,6 @@
         "title": "Cadence Tactile Tablet, la pantalla táctil que permite explorar gráficos, braille y vídeo en tiempo real",
         "summary": "El acceso a la información digital sigue planteando importantes barreras para las personas ciegas y con discapacidad visual. Aunque las líneas braille y los lectores de pantalla han facilitado considerablemente el uso de ordenadores y dispositivos electrónicos, determinados contenidos, como gráficos, mapas, imágenes o vídeos, continúan siendo difíciles de explorar de forma autónoma. En este […] La entrada Cadence Tactile Tablet, la pantalla táctil que permite explorar gráficos, braille y vídeo en tiempo real se publicó primero en Conticgo .",
         "body": "El acceso a la información digital sigue planteando importantes barreras para las personas ciegas y con discapacidad visual. Aunque las líneas braille y los lectores de pantalla han facilitado considerablemente el uso de ordenadores y dispositivos electrónicos, determinados contenidos, como gráficos, mapas, imágenes o vídeos, continúan siendo difíciles de explorar de forma autónoma.\n\nEn este contexto surge Cadence Tactile Tablet , un dispositivo desarrollado por la empresa estadounidense Tactile Engineering que propone una nueva forma de interactuar con los contenidos digitales: una pantalla táctil dinámica capaz de representar texto en braille, gráficos e incluso imágenes en movimiento.\n\nA diferencia de las líneas braille tradicionales, que presentan los caracteres de forma secuencial en una única línea, Cadence incorpora una superficie formada por pequeños puntos móviles que pueden elevarse y descender para representar información mediante el tacto.\n\nSu pantalla dispone de 384 puntos táctiles , distribuidos en 48 celdas braille de ocho puntos, organizadas en cuatro líneas de doce celdas. Esta configuración permite consultar varias líneas de texto simultáneamente y explorar representaciones gráficas sin depender exclusivamente de descripciones verbales.\n\nEl dispositivo utiliza tecnología MEMS ( Micro-Electro-Mechanical Systems ), basada en sistemas microelectromecánicos, para controlar el movimiento de los puntos táctiles. Según el fabricante, estos pueden actualizarse hasta tres veces por segundo, permitiendo modificar la información que aparece bajo los dedos.\n\nUna de las características más llamativas de Cadence es su capacidad para representar gráficos táctiles dinámicos. Esto significa que la superficie no se limita a mostrar una imagen estática, sino que puede modificar los puntos en tiempo real para transmitir información cambiante.\n\nEntre sus posibilidades destacan:\n\nUna demostración especialmente llamativa tuvo lugar durante las 500 Millas de Indianápolis de 2026. Mediante Cadence, los aficionados ciegos pudieron seguir táctilmente el movimiento de los coches en el circuito, convirtiendo la información visual de la carrera en patrones que cambiaban bajo sus dedos.\n\nEsta experiencia muestra cómo la tecnología táctil puede ampliar el acceso no solo a la lectura y al aprendizaje, sino también a acontecimientos deportivos y contenidos audiovisuales.\n\nOtra de sus particularidades es su diseño modular. Cadence puede utilizarse como una unidad independiente o conectarse con otras unidades para ampliar la superficie táctil disponible.\n\nEl fabricante contempla configuraciones de hasta cuatro dispositivos conectados, que permiten trabajar con una superficie de mayor tamaño y representar contenidos más amplios.\n\nAdemás, incorpora teclado braille tipo Perkins, controles direccionales y botones multifunción para navegar por los contenidos, seleccionar líneas, acceder a etiquetas y controlar diferentes aplicaciones.\n\nLa conexión con ordenadores y dispositivos compatibles se realiza mediante Bluetooth o USB-C. También dispone de software propio, CadenceOS, que permite gestionar el dispositivo y acceder a diferentes aplicaciones y contenidos.\n\nLas aplicaciones de una pantalla táctil de estas características pueden ser especialmente interesantes en el ámbito educativo.\n\nEl acceso a mapas, gráficos matemáticos, representaciones científicas y otros recursos visuales constituye uno de los grandes retos de la educación inclusiva. Aunque existen materiales en relieve y herramientas de adaptación, su elaboración puede requerir tiempo, conocimientos especializados y recursos específicos.\n\nDispositivos como Cadence permiten explorar nuevas formas de presentar estos contenidos digitalmente, facilitando su actualización y ofreciendo posibilidades de interacción que no proporcionan los materiales táctiles estáticos.\n\nTambién pueden contribuir al acceso a información que cambia constantemente, como gráficos estadísticos, retransmisiones deportivas o determinadas representaciones audiovisuales.\n\nNo obstante, es importante recordar que la disponibilidad de una pantalla táctil dinámica no garantiza por sí sola la accesibilidad de cualquier contenido. La distribución de los puntos, la complejidad de las representaciones y la necesidad de una adaptación comprensible siguen siendo aspectos fundamentales para que la información pueda interpretarse correctamente mediante el tacto.\n\nCadence Tactile Tablet representa una evolución interesante dentro de la tiflotecnología: pasar de dispositivos centrados principalmente en reproducir texto braille a superficies capaces de transmitir información espacial y dinámica.\n\nSu desarrollo abre nuevas posibilidades para la lectura, la educación, la comunicación y el acceso a contenidos digitales. También plantea una cuestión importante de cara al futuro: cómo conseguir que las imágenes, los gráficos y otros contenidos diseñados originalmente para la vista puedan convertirse en experiencias táctiles realmente comprensibles y accesibles.\n\nLa tecnología todavía tiene retos por delante, pero propuestas como esta muestran que el futuro de la accesibilidad digital también pasa por ampliar las posibilidades del sentido del tacto.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuente: Tactile Engineering , Double Tap Live ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-apps-daf46bd7f721efa8",
-    "type": "news",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/utilities/notetell-money-reader",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-10T05:08:40.000Z",
-    "categories": [
-      "apple",
-      "apps-accesibles",
-      "braille",
-      "sordoceguera"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "NoteTell Money Reader",
-        "summary": "NoteTell Money Reader is designed to help people who are blind or have low vision identify bills in real time. Simply point the iPhone camera at the bill you want to identify, then hear, feel, or see its value. If you’re blind, have low vision, or are deafblind, NoteTell Money Reader lets you identify bills without any assistance. While shopping, use NoteTell to check your money at the checkout and make sure you get the right change back. You can also use NoteTell to quickly sort your money at home. NoteTell doesn’t require an internet connection, so it identifies bills anywhere, at any time. NoteTell can identify bills at any angle. It is designed to work with bills that are folded, creased, worn, or partly in view. NoteTell is designed to work indoors, outdoors, and even in total darkness. When your environment is too dark to identify bills, NoteTell turns the flashlight on automatically. Vibration Mode tells you the value of each bill as vibrations in your hand—without anyone else hearing it. Each bill has its own vibration pattern. The lowest bill has one pulse, and each higher bill has one more. Pulses come in pairs, so they’re easier to count. Vibration Mode is also useful in noisy places and for people who are deafblind. When VoiceOver is on, double-tap with two fingers to switch between Speech Mode and Vibration Mode. For users with low vision, NoteTell shows the value of each bill in large, high-contrast numbers on the screen. You can complete every task in NoteTell Money Reader using only VoiceOver, without sighted assistance. If you use a braille display with VoiceOver, you can use NoteTell to get the value of each bill in real time. Ask Siri, “Identify currency with NoteTell,” to use NoteTell hands-free. You can also add NoteTell to Control Center or the Lock Screen, assign it to the Action button, or set it up as a Vocal Shortcut. With the full version, you can use Currency Conversion to hear each bill’s value in your home currency when you travel. NoteTell uses on-device processing to identify bills, which means your data never leaves your iPhone. Camera images are never stored on the device or on any servers. You can try the full version free for 14 days. You won’t be charged when the trial ends. You can continue using NoteTell for free to identify the lowest notes of each currency. The full version is also available as a one-time purchase. And with Family Sharing, up to five other people can enjoy your purchase too.",
-        "body": "NoteTell Money Reader is designed to help people who are blind or have low vision identify bills in real time. Simply point the iPhone camera at the bill you want to identify, then hear, feel, or see its value.\n\nIf you’re blind, have low vision, or are deafblind, NoteTell Money Reader lets you identify bills without any assistance. While shopping, use NoteTell to check your money at the checkout and make sure you get the right change back. You can also use NoteTell to quickly sort your money at home.\n\nNoteTell doesn’t require an internet connection, so it identifies bills anywhere, at any time.\n\nNoteTell can identify bills at any angle. It is designed to work with bills that are folded, creased, worn, or partly in view.\n\nNoteTell is designed to work indoors, outdoors, and even in total darkness. When your environment is too dark to identify bills, NoteTell turns the flashlight on automatically.\n\nVibration Mode tells you the value of each bill as vibrations in your hand—without anyone else hearing it. Each bill has its own vibration pattern. The lowest bill has one pulse, and each higher bill has one more. Pulses come in pairs, so they’re easier to count. Vibration Mode is also useful in noisy places and for people who are deafblind. When VoiceOver is on, double-tap with two fingers to switch between Speech Mode and Vibration Mode.\n\nFor users with low vision, NoteTell shows the value of each bill in large, high-contrast numbers on the screen.\n\nYou can complete every task in NoteTell Money Reader using only VoiceOver, without sighted assistance. If you use a braille display with VoiceOver, you can use NoteTell to get the value of each bill in real time.\n\nAsk Siri, “Identify currency with NoteTell,” to use NoteTell hands-free. You can also add NoteTell to Control Center or the Lock Screen, assign it to the Action button, or set it up as a Vocal Shortcut.\n\nWith the full version, you can use Currency Conversion to hear each bill’s value in your home currency when you travel.\n\nNoteTell uses on-device processing to identify bills, which means your data never leaves your iPhone. Camera images are never stored on the device or on any servers.\n\nYou can try the full version free for 14 days. You won’t be charged when the trial ends. You can continue using NoteTell for free to identify the lowest notes of each currency. The full version is also available as a one-time purchase. And with Family Sharing, up to five other people can enjoy your purchase too."
       }
     },
     "media": null

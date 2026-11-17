@@ -43,6 +43,13 @@ test('shuffle keeps the playing track and can restore the original order', () =>
   assert.equal(restored.currentId, 'b');
 });
 
+test('shuffle keeps the selected occurrence when a playlist repeats a song', () => {
+  const start = createMusicQueue(['a', 'a', 'b'], 1);
+  const restored = setMusicShuffle(setMusicShuffle(start, true, () => 0), false);
+  assert.equal(restored.index, 1);
+  assert.deepEqual(restored.trackIds, ['a', 'a', 'b']);
+});
+
 test('sleep timer rejects invalid intervals and reports whole seconds', () => {
   assert.equal(sleepDeadline(1000, 5), 301000);
   assert.equal(remainingSleepSeconds(301000, 300001), 1);

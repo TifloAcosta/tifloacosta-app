@@ -1,5 +1,8 @@
 name: Comprobar acceso a estadísticas App Store desde ChatGPT
 on:
+  schedule:
+    - cron: '15 4 * * *'
+  workflow_dispatch:
   push:
     branches: [apple-chat-commands]
     paths:
@@ -11,7 +14,7 @@ permissions:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 20
     env:
       API_ID: ${{ secrets.APPSTORE_ANALYTICS_KEY_ID }}
       API_ISSUER: ${{ secrets.APPSTORE_ANALYTICS_ISSUER_ID }}
@@ -24,7 +27,7 @@ jobs:
       - name: Consultar disponibilidad de informes sin modificar Apple
         if: env.API_ID != '' && env.API_ISSUER != '' && env.API_PRIVATE != ''
         run: node .github/scripts/apple-analytics-access-probe.mjs
-      - name: Enumerar informes y fechas disponibles con credenciales permanentes
+      - name: Descargar y verificar segmentos de informes con credenciales permanentes
         if: env.API_ID != '' && env.API_ISSUER != '' && env.API_PRIVATE != ''
         run: node .github/scripts/apple-analytics-catalog.mjs
       - name: Verificar solicitud ONGOING con la clave permanente

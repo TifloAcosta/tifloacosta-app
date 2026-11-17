@@ -85,10 +85,15 @@ private final class NativeMusicLibrary: ObservableObject {
         for index in folders.indices { folders[index].trackIds.removeAll { $0 == id } }
         do { try save() } catch { self.error = error.localizedDescription }
     }
+
+    func audioURL(for file: MusicLocalFile) -> URL {
+        directory.appendingPathComponent(file.fileName)
+    }
 }
 
 struct NativeMyMusicScreen: View {
     @StateObject private var library = NativeMusicLibrary()
+    @StateObject private var player = NativeMusicPlayer()
     @State private var isImporting = false
     @State private var searchText = ""
     @State private var newFolderName = ""
@@ -125,7 +130,13 @@ struct NativeMyMusicScreen: View {
                 } else {
                     ForEach(visibleFiles) { file in
                         HStack {
-                            Text(file.name).accessibilityLabel("Canción, \(file.name)")
+                            Button("Reproducir \(file.name)") {
+                                player.play(
+                                    name: file.name,
+                                    url: library.audioURL(for: file),
+                                    queue: library.files.map { (name: $0.name, url: library.audioURL(for: $0)) }
+                                )
+                            }
                             Spacer()
                             Menu("Acciones de \(file.name)") {
                                 ForEach(library.folders) { folder in
@@ -136,6 +147,21 @@ struct NativeMyMusicScreen: View {
                         }
                     }
                 }
+            }
+            Section("Reproductor") {
+                Text(player.currentName.isEmpty ? "Ninguna canción en reproducción" : player.currentName)
+                    .accessibilityAddTraits(.isHeader)
+                Button(player.isPlaying ? "Pausar" : "Reproducir") { player.toggle() }
+                    .disabled(player.currentName.isEmpty)
+                Button("Canción anterior") { player.previous() }
+                    .disabled(player.currentName.isEmpty)
+                Button("Retroceder 15 segundos") { player.skip(seconds: -15) }
+                    .disabled(player.currentName.isEmpty)
+                Button("Avanzar 15 segundos") { player.skip(seconds: 15) }
+                    .disabled(player.currentName.isEmpty)
+                Button("Canción siguiente") { player.next() }
+                    .disabled(player.currentName.isEmpty)
+                Text("Posición: \(Int(player.position)) de \(Int(player.duration)) segundos")
             }
         }
         .navigationTitle("Mi Música")
@@ -171,6 +197,14 @@ struct NativeMyMusicScreen: View {
             Button("Aceptar") { library.error = nil }
         } message: {
             Text(library.error ?? "")
+        }
+        .alert("Reproducción de música", isPresented: Binding(
+            get: { player.error != nil },
+            set: { if !$0 { player.error = nil } }
+        )) {
+            Button("Aceptar") { player.error = nil }
+        } message: {
+            Text(player.error ?? "")
         }
     }
 }

@@ -173,6 +173,18 @@ struct NativeMyMusicScreen: View {
                 }
                 Text("Posición: \(Int(player.position)) de \(Int(player.duration)) segundos")
             }
+            Section("Ecualizador") {
+                Text("Perfil actual: \(player.selectedPreset)")
+                ForEach(NativeMusicPlayer.presets.map { $0.name }, id: \.self) { name in
+                    Button("Perfil \(name)") { player.selectPreset(name) }
+                }
+                ForEach(NativeMusicPlayer.frequencies.indices, id: \.self) { index in
+                    let frequency = NativeMusicPlayer.frequencies[index]
+                    Text("\(Int(frequency)) hercios: \(Int(player.gains[index])) decibelios")
+                    Button("Reducir \(Int(frequency)) hercios") { player.adjustBand(index, by: -1) }
+                    Button("Aumentar \(Int(frequency)) hercios") { player.adjustBand(index, by: 1) }
+                }
+            }
         }
         .navigationTitle("Mi Música")
         .searchable(text: $searchText, prompt: "Buscar canciones")

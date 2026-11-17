@@ -68,6 +68,7 @@ fun NativeMyMusic(onBack: () -> Unit) {
     var folders by remember { mutableStateOf(prefs.getStringSet("folders", emptySet()).orEmpty().sorted()) }
     var folderForTrack by remember { mutableStateOf<ImportedSong?>(null) }
     var autoBackupDays by remember { mutableStateOf(prefs.getInt("auto-backup-days", 0)) }
+    var archiveBusy by remember { mutableStateOf(false) }
 
     fun backupSnapshot(): JSONObject {
         val tracks = JSONObject().apply { songs.forEach { song ->
@@ -160,23 +161,36 @@ fun NativeMyMusic(onBack: () -> Unit) {
         } catch (failure: Exception) { error = "No se pudo restaurar el respaldo: ${failure.localizedMessage}" }
     }
     val exportCompleteBackup = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/zip")) { destination ->
-        if (destination != null) try {
-            NativeMusicArchive(context).export(destination, backupSnapshot())
-        } catch (failure: Exception) { error = "No se pudo exportar la copia con audio: ${failure.localizedMessage}" }
+        if (destination != null) {
+            val snapshot = backupSnapshot()
+            scope.launch {
+                archiveBusy = true
+                try {
+                    withContext(Dispatchers.IO) { NativeMusicArchive(context).export(destination, snapshot) }
+                } catch (failure: Exception) { error = "No se pudo exportar la copia con audio: ${failure.localizedMessage}" }
+                finally { archiveBusy = false }
+            }
+        }
     }
     val restoreCompleteBackup = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { source ->
-        if (source != null) try {
-            val restored = NativeMusicArchive(context).restore(source)
-            val existing = prefs.getStringSet("songs", emptySet()).orEmpty()
-            val editor = prefs.edit().putStringSet("songs", existing + restored.songs)
-                .putStringSet("folders", (folders + restored.folders.keys).toSet())
-            restored.folders.forEach { (name, uris) ->
-                editor.putStringSet("folder:$name", prefs.getStringSet("folder:$name", emptySet()).orEmpty() + uris)
+        if (source != null) {
+            scope.launch {
+                archiveBusy = true
+                try {
+                    val restored = withContext(Dispatchers.IO) { NativeMusicArchive(context).restore(source) }
+                    val existing = prefs.getStringSet("songs", emptySet()).orEmpty()
+                    val editor = prefs.edit().putStringSet("songs", existing + restored.songs)
+                        .putStringSet("folders", (folders + restored.folders.keys).toSet())
+                    restored.folders.forEach { (name, uris) ->
+                        editor.putStringSet("folder:$name", prefs.getStringSet("folder:$name", emptySet()).orEmpty() + uris)
+                    }
+                    editor.apply()
+                    songs = savedSongs()
+                    folders = (folders + restored.folders.keys).distinct().sorted()
+                } catch (failure: Exception) { error = "No se pudo restaurar la copia con audio: ${failure.localizedMessage}" }
+                finally { archiveBusy = false }
             }
-            editor.apply()
-            songs = savedSongs()
-            folders = (folders + restored.folders.keys).distinct().sorted()
-        } catch (failure: Exception) { error = "No se pudo restaurar la copia con audio: ${failure.localizedMessage}" }
+        }
     }
 
     fun createFolder() {
@@ -251,8 +265,9 @@ fun NativeMyMusic(onBack: () -> Unit) {
         Text("Copias de seguridad", modifier = Modifier.semantics { heading() })
         Button(onClick = { exportBackup.launch("MiMusica-respaldo.json") }) { Text("Exportar respaldo de biblioteca") }
         Button(onClick = { restoreBackup.launch("application/json") }) { Text("Restaurar respaldo de biblioteca") }
-        Button(onClick = { exportCompleteBackup.launch("MiMusica-completa.zip") }) { Text("Exportar copia completa con audio") }
-        Button(onClick = { restoreCompleteBackup.launch("application/zip") }) { Text("Restaurar copia completa con audio") }
+        Button(onClick = { exportCompleteBackup.launch("MiMusica-completa.zip") }, enabled = !archiveBusy) { Text("Exportar copia completa con audio") }
+        Button(onClick = { restoreCompleteBackup.launch("application/zip") }, enabled = !archiveBusy) { Text("Restaurar copia completa con audio") }
+        if (archiveBusy) { Text("Procesando copia de seguridad con audio. Espera a que termine.") }
         Text("Copia automática: ${if (autoBackupDays == 0) "desactivada" else "cada $autoBackupDays días"}")
         Button(onClick = { setAutomaticBackup(0) }) { Text("Desactivar copia automática") }
         Button(onClick = { setAutomaticBackup(7) }) { Text("Cada 7 días") }

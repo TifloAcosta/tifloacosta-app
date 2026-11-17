@@ -83,7 +83,7 @@ async function main() {
     ...result.entries.map(x=>`${x.createdDate.slice(0,10)} | ${x.nickname} | ${x.rating}/5 | ${x.title} | ${x.territory} | ${x.responseState}`),
     '',
     '# Texto íntegro de reseñas sin respuesta',
-    ...result.unanswered.map(x=>`Usuario: ${x.nickname} (${x.territory})\nTítulo: ${x.title}\nComentario: ${x.body||'[Sin texto adicional]'}\n`)
+    ...result.unanswered.map(x=>`ID: ${x.id}\nUsuario: ${x.nickname} (${x.territory})\nTítulo: ${x.title}\nComentario: ${x.body||'[Sin texto adicional]'}\n`)
   ];
   const output=lines.join('\n');
   console.log(output);

@@ -11,7 +11,7 @@ export function summarizeReviews(reviews, included) {
     const state=response?.attributes?.state||(responseId?'RESPUESTA_NO_DISPONIBLE':'SIN_RESPUESTA');
     return {
       id:review.id,nickname:review.attributes?.reviewerNickname||'Sin nombre',
-      title:review.attributes?.title||'Sin título',rating:review.attributes?.rating||0,
+      title:review.attributes?.title||'Sin título',body:review.attributes?.body||'',rating:review.attributes?.rating||0,
       createdDate:review.attributes?.createdDate||'',territory:review.attributes?.territory||'',
       responseState:state
     };
@@ -80,7 +80,10 @@ async function main() {
     'Respuesta publicada: '+result.responded,
     'Respuesta existente sin confirmar publicación: '+result.awaitingPublication,
     'Sin respuesta: '+result.pending,
-    ...result.entries.map(x=>`${x.createdDate.slice(0,10)} | ${x.nickname} | ${x.rating}/5 | ${x.title} | ${x.territory} | ${x.responseState}`)
+    ...result.entries.map(x=>`${x.createdDate.slice(0,10)} | ${x.nickname} | ${x.rating}/5 | ${x.title} | ${x.territory} | ${x.responseState}`),
+    '',
+    '# Texto íntegro de reseñas sin respuesta',
+    ...result.unanswered.map(x=>`Usuario: ${x.nickname} (${x.territory})\nTítulo: ${x.title}\nComentario: ${x.body||'[Sin texto adicional]'}\n`)
   ];
   const output=lines.join('\n');
   console.log(output);

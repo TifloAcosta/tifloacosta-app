@@ -4,7 +4,7 @@ import Security
 import UIKit
 
 /// Credentials are held locally in the device Keychain, not in app preferences.
-private enum NativeGeminiKeychain {
+enum NativeGeminiKeychain {
     private static let service = "com.tifloacosta.app.reader.gemini"
     private static let account = "user-api-key"
 

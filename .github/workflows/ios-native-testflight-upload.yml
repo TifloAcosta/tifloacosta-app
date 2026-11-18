@@ -3,6 +3,13 @@ name: TifloAcosta iOS nativa - enviar a TestFlight
 # después de integrar y revisar las fases de desarrollo.
 on:
   workflow_dispatch:
+  # Autorización excepcional de Tony: un único envío desde la rama de recuperación.
+  # Los cambios ordinarios de código no activan distribución alguna.
+  push:
+    branches:
+      - recovery/ios-public-500157-20261118
+    paths:
+      - '.github/testflight-authorizations/recovery-20261118.txt'
 permissions:
   contents: read
   actions: read
@@ -11,6 +18,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   build-upload:
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.event.head_commit.message == 'Authorize one-time recovery TestFlight upload 2026-11-18')
     runs-on: macos-15
     timeout-minutes: 80
     env:

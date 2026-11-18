@@ -42,6 +42,7 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
     let importedAt: Date
     // Optional properties allow older beta library JSON to remain decodable.
     var fileExtension: String? = nil
+    var originalPath: String? = nil
     var trackPaths: [String]? = nil
     var markedPositions: [Int]? = nil
     var textBookmarks: [NativeTextBookmark]? = nil
@@ -108,6 +109,7 @@ final class NativeReaderLibrary: ObservableObject {
             if documents.contains(where: { $0.id == identifier }) { continue }
             do {
                 let payload = try NativeReaderFormats.read(url, documentID: identifier)
+                let originalPath = try NativeReaderFormats.storeOriginal(url, documentID: identifier)
                 documents.insert(
                     NativeReadingDocument(
                         id: identifier,
@@ -116,6 +118,7 @@ final class NativeReaderLibrary: ObservableObject {
                         body: payload.body,
                         importedAt: .now,
                         fileExtension: payload.fileExtension,
+                        originalPath: originalPath,
                         trackPaths: payload.trackPaths,
                         daisyNavigation: payload.daisyNavigation
                     ), at: 0
@@ -812,6 +815,15 @@ struct NativeReaderLibraryScreen: View {
                     .accessibilityLabel("\(document.title), \(document.formatLabel)")
                     .accessibilityHint("Doble toque para abrir. Hay acciones de accesibilidad.")
                     .accessibilityAction(named: Text("Reproducir")) { play(document) }
+                    .accessibilityAction(named: Text("Compartir documento")) {
+                        if let originalPath = document.originalPath,
+                           let originalURL = NativeReaderFormats.storedURL(for: originalPath),
+                           FileManager.default.fileExists(atPath: originalURL.path) {
+                            NativeShare.present(url: originalURL)
+                        } else {
+                            importError = "No se conservó el archivo original. Vuelve a importar el documento para compartirlo completo."
+                        }
+                    }
                     .accessibilityAction(named: Text("Información")) { information = document }
                     .accessibilityAction(named: Text("Ajustes del documento")) {
                         documentToConfigure = document
@@ -1531,6 +1543,16 @@ struct NativeReadingScreen: View {
         }
     }
 
+    private func shareDocument() {
+        guard let originalPath = latest.originalPath,
+              let originalURL = NativeReaderFormats.storedURL(for: originalPath),
+              FileManager.default.fileExists(atPath: originalURL.path) else {
+            actionMessage = "No se conservó el archivo original de esta importación. Vuelve a importar el documento para compartirlo completo."
+            return
+        }
+        NativeShare.present(url: originalURL)
+    }
+
     private func formatDuration(_ seconds: Int) -> String {
         let value = max(0, seconds)
         return value >= 3600
@@ -1755,6 +1777,7 @@ struct NativeReadingScreen: View {
             Button("Índice y navegación estructurada") { showStructure = true }
         }
         Button("Añadir marca") { addBookmark() }
+        Button("Compartir documento") { shareDocument() }
         Button(latest.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos") {
             library.toggleFavorite(document)
         }
@@ -1769,10 +1792,6 @@ struct NativeReadingScreen: View {
             }
             Button("Unidad anterior") { moveUnit(-1) }
             Button("Unidad siguiente") { moveUnit(1) }
-        }
-        if let track = tracks.first,
-           let url = NativeReaderFormats.storedURL(for: track) {
-            Button("Compartir archivo de audio") { NativeShare.present(url: url) }
         }
         Button("Cancelar", role: .cancel) {}
     }
@@ -2008,6 +2027,7 @@ struct NativeReadingScreen: View {
             else if speech.isPaused { play() }
         }
         .accessibilityAction(named: Text("Añadir marca")) { addBookmark() }
+        .accessibilityAction(named: Text("Compartir documento")) { shareDocument() }
         .accessibilityAction(named: Text("Avanzar cinco por ciento")) {
             move(to: min(100, currentPercent + 5))
         }

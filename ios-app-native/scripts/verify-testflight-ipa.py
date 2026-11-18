@@ -11,6 +11,7 @@ if len(files) != 1:
     raise SystemExit('No se generó una sola IPA')
 
 group = 'group.com.tifloacosta.app'
+expected_version = os.environ['IOS_MARKETING_VERSION']
 with zipfile.ZipFile(files[0]) as z:
     app_info_path = next((p for p in z.namelist()
                           if p.startswith('Payload/') and p.endswith('.app/Info.plist')), None)
@@ -26,8 +27,10 @@ with zipfile.ZipFile(files[0]) as z:
             raise SystemExit('Identificador incorrecto: ' + str(info.get('CFBundleIdentifier')))
         if str(info.get('CFBundleVersion')) != os.environ['IOS_BUILD_VERSION']:
             raise SystemExit('Número de compilación distinto entre aplicación y extensión')
-        if info.get('CFBundleShortVersionString') != '1.0':
-            raise SystemExit('Versión pública incorrecta')
+        if info.get('CFBundleShortVersionString') != expected_version:
+            raise SystemExit('Versión de distribución incorrecta: ' +
+                             str(info.get('CFBundleShortVersionString')) +
+                             ', esperada ' + expected_version)
     if ext_info.get('NSExtension', {}).get('NSExtensionPointIdentifier') != 'com.apple.share-services':
         raise SystemExit('Extensión Compartir sin punto de entrada')
 

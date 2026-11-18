@@ -1,13 +1,110 @@
 [
   {
-    "id": "9to5mac-205bc26f9308d17b",
+    "id": "9to5mac-036deb719ba4dd52",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/17/apple-announces-app-store-price-changes-in-multiple-countries-new-california-tax-rules/",
+    "originalUrl": "https://9to5mac.com/2026/11/18/leaker-claims-apple-developing-four-models-of-20th-anniversary-iphone/",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-18T02:17:48.000Z",
+    "publishedAt": "2026-11-18T13:30:06.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Leaker claims Apple developing four models of 20th anniversary iPhone",
+        "summary": "Leaker Ice Universe says Apple is currently developing four models of the 20th anniversary iPhone which we’ve been referring to as the iPhone 20 . We’re expecting next year’s flagship models to be a radical new design with an all-glass appearance. Why four models rather than two is unclear, but it seems possible Apple is testing two versions of both the Pro and the Pro Max to determine just how ambitious it can be with the final product … more…",
+        "body": "Leaker Ice Universe says Apple is currently developing four models of the 20th anniversary iPhone which we’ve been referring to as the iPhone 20 . We’re expecting next year’s flagship models to be a radical new design with an all-glass appearance.\n\nWhy four models rather than two is unclear, but it seems possible Apple is testing two versions of both the Pro and the Pro Max to determine just how ambitious it can be with the final product …\n\nIce Universe says that two of the four models have quad-curved glass backs and two have flat glass. They indicate that Apple has already had to ramp back its ambitions with the curvature.\n\nApple is currently developing four models in total: two with flat glass backs and two with quad-curved glass backs. Apple has been prototyping this quad-curved design for three years, making several revisions along the way—particularly regarding the glass curvature, which is still being refined. The earliest version had a very pronounced curve; it was later reduced somewhat.\n\nIt’s standard practice for Apple to develop multiple competing prototypes of new devices, evaluating them for everything from usability and durability to ease of manufacturing.\n\nWe’re expecting Apple to use a combination of ultra-thin bezels and curved glass to create the illusion of no bezels at all – a more sophisticated version of the effect seen on the Apple Watch. Today’s report says the bezels are around 1mm thick.\n\nThe curved edges on the quad-curved version are approximately 1mm wide. However, because the glass curves around all sides, when viewed straight on from the front, the bezel becomes nearly invisible, creating a near‑borderless appearance. The actual visual effect could be quite stunning.\n\nWe yesterday saw an AI-generated render of what the design could look like. It’s expected to be the biggest redesign of the standard iPhone since the iPhone X."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-a97b69982ec5c27e",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5google.com/2026/11/18/vwfndr-mbl-camera-app-color-grading-android-iphone-release/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T13:10:02.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "android",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The Android camera app that doesn’t overprocess adds new color grading sets, expands to iPhone",
+        "summary": "VWFNDR + MBL, an Android camera app that doesn’t overprocess and delivers high-quality DNG (RAW) files, is getting a 2.0 release with improved color grading and an expansion to the iPhone. more…",
+        "body": "VWFNDR + MBL, an Android camera app that doesn’t overprocess and delivers high-quality DNG (RAW) files, is getting a 2.0 release with improved color grading and an expansion to the iPhone.\n\nVWFNDR + MBL launched on Android in May 2026 with a few points that stood out. A unique UI that adapts to the shot, minimal processing for a natural look, and support for DNG files at a level that only Google’s Pixel Camera app can truly compete with.\n\nThe app has been downloaded over 300,000 times since then, and is now getting a pretty substantial update.\n\nOn Android, this comes in the form of new color grading profiles built into the app. “NATURAL,” “NIHON,” or “B+W.” The app still saves an unprocessed DNG alongside the JPG and the grading adapts across the frame rather than having a fixed result, keeping highlights and shadows in place.\n\nVWFNDR explains:\n\nColour grades: MBL still records unprocessed Bayer RAW DNG, and the JPG it renders alongside now uses one of three grades: NATURAL, NIHON, or B+W. Grading happens on VWFNDR’s own spatial engine. Instead of applying a fixed LUT, it adapts across the frame, much like a raw editor, so highlights and shadows keep their detail. The DNG stays untouched.\n\nHere’s what the output looks like:\n\nThe rest of VWFNDR + MBL 2.0 takes place off of Android.\n\nIn a rare case of the tables turning, MBL was released first on Android, and only on Android for the first several months. But VWFNDR is now bringing the app to iPhone with support for variable aperture on iPhone 18 Pro and Content Credentials, Apple’s version of the C2PA standard that’s meant to prove a photo is real and not AI-generated.\n\nFollow Ben: Twitter/X , Threads , Bluesky , and Instagram"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-31b2d675402481ff",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2320303/youll-need-the-latest-ps5-firmware-update-to-play-gta-vi/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T13:01:42.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "You'll need the latest PS5 firmware update to play GTA VI",
+        "summary": "Double-check your PS5's firmware is up to date, or you may not be able to play GTA VI.",
+        "body": "Sony might be attempting to patch jailbreak vulnerabilities before the biggest game of the year launches.\n\nGrand Theft Auto VI fans will have to download a new PlayStation 5 update, or they won't be able to launch the game. Sony has released new firmware for the console that's required to access the long-awaited title. It's encouraging fans on X to download and install it before the game's release at midnight on November 19, so they don't have to wait a second longer to start playing.\n\nAs IGN reports, PS5 firmware update 14.23 is 1.267GB in size and contains \"security fixes to the system software.\" Sony didn't say why it's required to run GTA VI on the PS5. However, IGN notes that it was released just a day after a famous PS5 jailbreaker claimed they were able to successfully dump a game binary on PS5 firmware version 14.22. Presumably, that means they were able to extract and copy data from a disc or a digital version of a PS5 game. Firmware 14.23 may have patched whatever allowed them to do so.\n\nThose planning to get the game sometime today may want to purchase and install it soon. The digital version is 212GB in size and would take more than an hour to download for those with a 1Gbps internet connection. Rockstar Games has also rolled out pre-release patches since GTA VI became available for pre-order, with the latest one being 600 MB. The patches should automatically download for those who've already preloaded the game.\n\nSony Interactive has issued a PS5 system software update that is required before playing Grand Theft Auto VI. Players should download this update prior to midnight on November 19 so that they're ready to play on launch day, November 19.\n\n— PlayStation Support US (@PS_Support_US) November 18, 2026"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-f1a86b144e16d0b6",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1036445/nvidia-h200-ai-chips-china-stop-selling",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T13:01:05.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Nvidia isn’t selling any more AI chips to China",
+        "summary": "Nvidia has stopped sending its advanced AI chips to China, despite the approval it received from the White House to do so in December last year. The announcement was made by interim Nvidia CEO Colette Kress during an earnings call on Tuesday, marking a notable shift for the company that, under former CEO Jensen Huang, […]",
+        "body": "Nvidia has stopped sending its advanced AI chips to China, despite the approval it received from the White House to do so in December last year . The announcement was made by interim Nvidia CEO Colette Kress during an earnings call on Tuesday , marking a notable shift for the company that, under former CEO Jensen Huang, fought for the right to ship its powerful Hopper architecture H200 chips to China.\n\n\"Our guidance ⁠does not have any licensed Hopper data center products included, and we are no longer shipping ​licenced Hopper data center products to China,\" Kress said . She did not explain why Nvidia was ceasing its H200 processor shipments, o …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-4d84ba0592c7f22e",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/18/macpaws-moonlock-comes-to-iphone-helping-users-detect-potential-scams/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T13:00:00.000Z",
     "categories": [
       "apple",
       "tecnologia-general",
@@ -17,9 +114,129 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Apple announces App Store price changes in multiple countries, new California tax rules",
-        "summary": "Apple today announced that App Store prices for apps and In-App Purchases will be adjusted in five countries starting December 3, following changes in taxes and foreign exchange rates. Here are the details. more…",
-        "body": "Apple today announced that App Store prices for apps and In-App Purchases will be adjusted in five countries starting December 3, following changes in taxes and foreign exchange rates. Here are the details.\n\nIn a new post published on its developer portal, Apple today announced a series of changes to App Store pricing, as well as updates to tax rules affecting developers and customers in several countries, including the US.\n\nAccording to the company, developers’ proceeds from eligible app and In-App Purchase sales have been adjusted in four countries, reflecting the following tax updates:\n\nSpecific to Botswana and Rwanda, Apple said that “Exhibit B of the Paid Applications Agreement will be updated to indicate that Apple collects and remits applicable taxes.”\n\nApple added that a new “Software as a Service (SaaS)” attribute is now available for several App Store tax categories, including App Store Software, Software Training Material, Dating, and Boosting. Developers can review and update their tax category selections in App Store Connect.\n\nAdditionally, starting December 3, developers who rely on Apple’s automatic pricing adjustments will see changes to app and In-App Purchase prices in:\n\nApple usually makes these adjustments to account for changes in taxes and foreign exchange rates, and notes that prices won’t change in countries selected as the base storefront, for auto-renewable subscriptions, or in storefronts where developers manually manage their prices.\n\nThe announcement does not go into detail about how much prices will change in each country, or whether they will increase or decrease.\n\nFinally, starting January 1, 2027, apps and In-App Purchases in the SaaS, App Store Software, Software Training Material, Dating, and Boosting categories will become subject to sales and use taxes in California.\n\nApple noted that “prices on the United States storefront are displayed to customers exclusive of taxes, so the tax change will not affect them,” but added that while developers’ proceeds will remain unchanged, “the total amount customers are charged, inclusive of tax, may increase.”\n\nTo read Apple’s full announcement, follow this link ."
+        "title": "MacPaw’s Moonlock comes to iPhone, helping users detect potential scams",
+        "summary": "After launching Moonlock for Mac last year, MacPaw is bringing its scam-detection app to iPhone today. Here are the details. more…",
+        "body": "After launching Moonlock for Mac last year, MacPaw is bringing its scam-detection app to iPhone today. Here are the details.\n\nWhen MacPaw launched Moonlock on the Mac , the company described its new app as something that “complements Apple’s built-in security tools, protects from Mac-specific malware, and helps you understand cybersecurity better.”\n\nIn practice, the Mac app includes real-time protection against potential threats. Users can also manually scan their Mac for malware, including suspicious files hidden in system folders and email attachments.\n\nBeyond that, Moonlock includes a VPN to encrypt internet traffic, a network inspector that shows where apps are sending data and lets users block connections to specific countries, and an AI-powered scam detector that analyzes messages pasted into the app for signs of phishing. It also helps users review and adjust macOS security settings.\n\nToday, MacPaw is launching Moonlock for iPhone , a move the company says “helps people recognize potential scams, understand their iPhone’s security and take practical steps to improve it.”\n\nUnlike the Mac version, Moonlock for iPhone doesn’t scan for malware, as iOS prevents third-party apps from accessing other apps and their files. Instead, it focuses on identifying potential scams, checking for exposed personal information, and helping users improve their iPhone’s security.\n\nOn the iPhone, Moonlock lets users quickly check suspicious texts, screenshots, and QR codes for phishing, in addition to checking whether their email addresses have appeared in known data breaches.\n\nAs MacPaw explains it, Moonlock’s Scam Detect “helps people check suspicious messages they encounter throughout the day. Whether it’s a text message, a screenshot shared by a friend, or a QR code, users can paste, scan or share content directly with Moonlock and receive an assessment explaining why something may be suspicious.”\n\nHere’s Oleg Stukalenko, Head of Product Management at Moonlock by MacPaw, on today’s launch:\n\n“When we launched Moonlock, our goal was to make cybersecurity something anyone could understand and use. But so much of what people do today, from banking to everyday conversations, happens on their phones. Bringing Moonlock to iPhone felt like the natural next step. We want to help people spot a scam before they tap, see where their security stands, and know exactly what to do next.”\n\nMacPaw adds that Moonlock for iPhone also includes the following features:\n\nMacPaw’s Moonlock for iPhone is free to download, with subscriptions available for $9.99 per month or $49.99 per year.\n\nCheck out Moonlock for iPhone on the App Store"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-eaac7b5bfc65e301",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/18/felicis-leads-7-5m-bet-on-unsiloed-ai-to-make-enterprise-documents-usable-by-ai-agents/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T12:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Felicis leads $7.5M bet on Unsiloed AI to make enterprise documents usable by AI agents",
+        "summary": "With a team of just seven, Unsiloed AI plans to compete with tech giants and specialized startups in the crowded AI document-processing market.",
+        "body": "As businesses increasingly turn to AI agents to automate work, the vast amounts of information locked in complex documents remain a challenge. Unsiloed AI has raised $7.5 million in seed funding led by Felicis to tackle that problem, aiming to help enterprises make their documents more accessible to AI agents through specialized technology.\n\nSilicon Valley venture capital firm Felicis led the round, with participation from Y Combinator, Orange Collective, and Uncorrelated Ventures. Angel investors Aarthi Ramamurthy and Beth Turner also participated.\n\nBusiness documents often include tables, charts, and complicated layouts that AI systems can struggle to interpret accurately. But getting the information wrong can lead to costly mistakes for businesses, and the impact could be severe in the case of a bank, hospital, or a law firm, as they rely on these documents for their daily work.\n\nUnsiloed aims to solve this problem with software that breaks down complex documents, extracts information from tables, charts and other elements, and turns it into structured data that AI agents can use. The technology also shows where the extracted information came from in the original document, so businesses can check the results rather than take the AI’s output at face value.\n\n“The problem with LLMs is they’re inherently probabilistic,” said Unsiloed co-founder and CEO Aman Mishra (pictured above, right) in an interview. “There is going to be some deviation induced. There is going to be some hallucination involved, and that has a massive negative impact downstream.”\n\nMishra co-founded Unsiloed with Adnan Abbas (pictured above, left), his former classmate at the Indian Institute of Technology (IIT) Kharagpur. The two joined Y Combinator’s Fall 2025 batch after spending some time developing the technology.\n\nUnsiloed is already working with customers in finance, legal services, and healthcare, Mishra told TechCrunch. One bank is using its technology to process documents, while a law firm has deployed it on its own servers to handle contracts and old case files, he said, without naming either customer. Mishra, however, named voice AI startup Bolna AI as a customer, saying it uses Unsiloed to ingest knowledge bases for building voice agents.\n\nThe San Francisco-headquartered startup has entered a market that is already crowded and includes specialized document-processing startups such as Reducto and Unstructured, as well as offerings from Microsoft and Amazon. Businesses also sometimes use general-purpose AI models to extract information from documents, giving Unsiloed another set of competitors.\n\nMishra told TechCrunch that Unsiloed’s advantage lies in how it processes complex documents. The startup uses what it calls “dual-stream” vision models, which handle text and image data separately, along with a technique called “heat map-based chunking” that helps identify the most important parts of a document.\n\n“In one of the streams you have the text tokens, in the other stream you have the exact image tokens,” Mishra said. “This is something that we have spent a lot of time architecting.”\n\nThe technology then directs more computing power toward areas such as figures, numbers, and charts. Unsiloed also uses a specialized decoder that takes industry-specific terminology into account, helping it distinguish between terms that can mean different things in different business contexts.\n\nSupporting those claims, Mishra pointed to a test involving 542 financial documents supplied by an enterprise customer. Unsiloed achieved 99.78% accuracy across roughly 84,000 extracted data points, per a technical brief shared by the startup. The test compared Unsiloed with major AI models, Microsoft’s Azure Document Intelligence, and the customer’s in-house extraction tool. The results have, however, not been independently verified.\n\nUnsiloed also claims to have outperformed competing AI document-processing tools on olmOCR-Bench, a public benchmark developed by Allen AI. In tests conducted by the startup, Unsiloed scored 88.0, compared with 66.0 for Reducto’s agentic system and 39.9 for Unstructured. The benchmark covered 1,403 PDF pages and tested how well the systems handled tables, mathematical expressions, scanned documents, and complex layouts.\n\nUnsiloed’s pricing, Mishra said, starts at one cent per page. He asserted that the startup’s approach also helps keep its costs down by directing computing power toward the parts of a document that need the most attention, instead of processing every section in the same way.\n\nCurrently, Unsiloed has a headcount of seven people. The startup, Mishra said, plans to use the fresh funding to hire more researchers and engineers, expand its sales efforts and develop proprietary datasets to improve its technology."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-82f36b88b1239e86",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/18/accel-backs-indias-humyn-labs-to-supply-training-data-needed-by-u-s-robotics-ai-developers/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T11:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "India’s Humyn Labs raises $47M to feed U.S. robotics companies the data they need",
+        "summary": "Founded in February, Humyn Labs competes with startups including Mecka AI and XDOF, with about 90% of its revenue coming from the U.S.",
+        "body": "As demand grows for real-world data to train robots, India’s Humyn Labs has raised $47 million in Series A financing to help U.S. AI and robotics companies build models that can operate in physical environments.\n\nThe funding comprises $26 million in equity led by Accel, with participation from Prosus Ventures, BeeGlobal, Bajaj Finance’s Finserv Intelligence and Bajaj Alts AI Opportunities Fund, Dallas Venture Capital, Lighthouse Canton, and Jump Trading. It also includes $21 million in venture debt led by Lighthouse Canton, with participation from Trifecta Capital.\n\nCompanies around the world are trying to build robots capable of performing everyday human tasks , but getting enough quality data to train them remains difficult. Startups including Mecka AI , XDOF , and MicroAGI are already tackling the problem by collecting real-world data for robotics training. Bengaluru-based Humyn Labs aims to compete with them.\n\nHumyn Labs has developed its own two-camera hardware to record people performing everyday tasks. It then uses its software to process and label the footage, which means tagging what happens in each clip so AI can learn from it. The startup collects data across over 20 countries in Latin America and Asia, with Brazil, India, and South Korea serving as its main hubs, co-founder Manish Agarwal (pictured above, right) said in an interview.\n\nAgarwal, the former CEO of Indian gaming company Nazara Technologies, founded Humyn Labs in February with Ishank Gupta (pictured above, left), a former executive at the brewing giant AB InBev. The duo previously founded Kratos Studios, now known as KGeN . KGeN has a network of contributors across emerging markets, and that network helps Humyn Labs collect data in people’s homes, the founders told TechCrunch.\n\nCollecting footage of human activity is only part of the challenge, Agarwal said. He added that Humyn Labs also uses software to track hand movements, interactions with objects, and other details, turning raw recordings into data that AI models can learn from.\n\n“Scale, diversity, and quality are important aspects, and they need to work in tandem,” Agarwal said.\n\nHumyn Labs says it has 12 paying customers, including frontier AI labs, robotics companies, and developers of world models. About 90% of its revenue comes from the U.S., Gupta said, though he declined to name specific customers.\n\nThe startup generated $10 million in revenue between April and October and has another $20 million in signed contracts, Agarwal told TechCrunch, adding that a further $20 million in deals has yet to be finalized.\n\nThat growth has also increased Humyn Labs’ need for working capital, Agarwal said, explaining the $21 million venture debt component. The startup pays workers and data collection partners daily or weekly but typically waits 30 to 60 days to receive payments from its AI lab customers. Borrowing helps bridge that gap and is less dilutive than selling more equity, he said.\n\nOver the last few months, India has emerged as a hub for collecting training data for so-called physical AI, with startups including Human Archive and BuildAI tapping into the country’s large workforce to record people performing everyday tasks. However, the practice has also raised questions about privacy and consent, particularly when people are recorded inside their homes.\n\nAgarwal said Humyn Labs collects data from people doing their usual work or household chores instead of asking them to perform staged activities. The startup works with local partners to identify collection sites and oversee the process. “The worker is a worker who is incentivized, but he needs to be monitored and supervised for the right input,” he stated.\n\nHumyn Labs currently has 51 full-time employees, most based in Bengaluru, plus a network of local partners across the countries where it collects data, Agarwal said."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-8a3a5b6824902242",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1036415/suno-visuals-ai-generated-video-images-feature",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T11:16:53.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Suno now lets you make AI videos for your AI music",
+        "summary": "Suno has introduced image and video generation in its latest effort to expand beyond being an AI music platform. The new feature, called \"Visuals,\" allows users to turn Suno songs into AI-generated video clips that automatically lipsync to lyrics, or make images via prompt descriptions that can be used as thumbnails and album artwork. Visuals […]",
+        "body": "Suno has introduced image and video generation in its latest effort to expand beyond being an AI music platform. The new feature, called \"Visuals,\" allows users to turn Suno songs into AI-generated video clips that automatically lipsync to lyrics, or make images via prompt descriptions that can be used as thumbnails and album artwork.\n\nVisuals is available on web, iOS, and Android. The exact layout differs across Suno's desktop and mobile interfaces, but users will find a new Visuals tab under Create mode on each version. Web users can also access Visuals by selecting the three dot menu on a song in their library. From there, users can selec …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-ed2863d58efafe94",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/18/china-dominates-battery-graphite-but-this-startup-could-break-the-monopoly/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T11:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "China dominates battery graphite, but this startup could break the monopoly",
+        "summary": "Chinese companies maintain near total dominance of the graphite industry, but Molten Industries says its new factory in Oakland could spell the end of the monopoly.",
+        "body": "Electric vehicle sales in the U.S. may have leveled off, but the market for batteries inside them isn’t slowing down, quintupling in the last five years. Many of those are made in the U.S., but they’re largely dependent on China for key ingredients, including graphite.\n\nGraphite is a key ingredient in lithium-ion batteries, where it forms the anode, the part that stores the battery’s charge. Chinese companies control about three-quarters of the graphite anode supply chain and 97% of synthetic (human-made) graphite anode production, according to Benchmark Mineral Intelligence . One five-year-old startup, Molten Industries , is working to break that dominance.\n\nMolten Industries has started operating a demonstration plant in Oakland meant to prove the technology works, the company exclusively told TechCrunch. The plant is will pave the way for U.S.-made graphite to win a share of the market.\n\n“The new plant will be producing graphite that’s at cost parity with China plus tariffs,” Caleb Boyd, co-founder and CTO of Molten Industries, told TechCrunch. In other words, once U.S. import taxes are added to Chinese graphite, Molten’s price would match it. He said future plants should match China’s cost even without tariffs, which he called a built-in advantage of the technology.\n\nMolten’s Oakland plant will make about 300 metric tons of graphite annually, which is enough for 300 megawatt-hours of batteries. That’s enough for about 4,300 EVs. The bulk of the output will go to undisclosed customers that are testing it in their battery cells.\n\nThe next facility, which Molten has yet to announce, will take the same template used in the Oakland plant and replicate it several times over, said Boyd.\n\nThe startup’s technology began in a Silicon Valley garage . It uses electrical resistive heating, which passes electricity through a material to heat it, to split methane (the main ingredient in natural gas) into pure carbon and hydrogen. “You can think of it almost like a massive toaster,” Boyd said. The company says the system uses three times less electricity than existing methods, and it runs on natural gas, which is cheap and plentiful in the U.S.\n\n“We think it’s very hard to compete with China if you’re just copying their processes and trying to compete on cost,” said Kevin Bush, who co-founded Molten Industries with Boyd and is the company’s CEO. “So we are using a resource in the United States that’s abundant in natural gas, and we’ve brought some innovation to actually be able to drive down the cost of graphite production globally.”\n\nHere’s how the chemistry works: When methane (CH4) is heated without oxygen, each molecule breaks into one carbon atom and four hydrogen atoms. The hydrogen atoms pair up into hydrogen gas (H2), which Molten sells at market prices to a customer next door. The carbon is then processed to meet battery makers’ requirements.\n\nThe basic idea of using heat to separate methane has been around for over a century, but early attempts to commercialize it ran into trouble. Carbon built up and clogged the reactor, and Boyd said no company before Molten had been able to produce high-quality graphite this way.\n\nSolving that problem changed the company’s direction. Boyd and Bush — both materials science PhDs from Stanford — originally set out to make clean hydrogen from natural gas. Most hydrogen today comes from steam reforming, a cheap but polluting process. The two wanted to reap the benefits of a low-cost feedstock like natural gas without the pollution, and they expected to sell the leftover carbon as a byproduct.\n\nBut as they experimented with ways to keep the reactor clean, “we actually started making this really high quality graphite,” Boyd said, which “changed the entire economics of what we were doing.” Molten went from a hydrogen company that happened to sell graphite to a battery-grade graphite company that happens to sell hydrogen.\n\nThe company says both businesses could bring in billions of dollars. If Molten supplied the entire U.S. battery market, it could also provide about a third of the hydrogen used in the country, the company claims. Other uses for high-quality graphite, like thermal batteries that store energy as heat, could expand both markets further.\n\nThe new factory, Boyd said, “is really a milestone, not just for the company, we think, but globally.”"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "conticgo-67bd8d309c122f96",
+    "type": "news",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/proyecto-ability-la-ia-que-permite-tocar-graficos-y-mapas/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-11-18T07:04:31.000Z",
+    "categories": [
+      "tecnologia-accesibilidad",
+      "proyectos-prototipos",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Proyecto ABILITY: la IA que permite tocar gráficos y mapas",
+        "summary": "La Unión Europea impulsa una innovadora tecnología que combina pantallas táctiles bidimensionales e inteligencia artificial. Gracias a este avance, las personas ciegas podrán explorar esquemas, mapas y documentos digitales en tiempo real. ¿Qué es exactamente el proyecto ABILITY y por qué importa? El proyecto ABILITY (Accessible Digital Services for Blind and Partially Sighted People) es […] La entrada Proyecto ABILITY: la IA que permite tocar gráficos y mapas se publicó primero en Conticgo .",
+        "body": "La Unión Europea impulsa una innovadora tecnología que combina pantallas táctiles bidimensionales e inteligencia artificial. Gracias a este avance, las personas ciegas podrán explorar esquemas, mapas y documentos digitales en tiempo real.\n\nEl proyecto ABILITY ( Accessible Digital Services for Blind and Partially Sighted People ) es una investigación financiada por la Unión Europea dentro del programa Horizonte Europa. Su objetivo principal es eliminar la brecha visual en el entorno digital.\n\nHasta ahora, las líneas braille convencionales solo muestran una fila de caracteres a la vez. Si un estudiante abre un libro de biología o un informe económico, el software solo puede leer una breve descripción escrita por el autor. Cuando esa descripción no existe, la información se pierde por completo. ABILITY resuelve este obstáculo permitiendo que el usuario sienta la forma real del contenido directamente bajo sus dedos.\n\nPara lograr que una imagen compleja tenga sentido al tacto, no basta con levantar puntos al azar. Una fotografía o un gráfico saturado de líneas resultaría confuso para la yema de los dedos. Por ello, el sistema funciona en tres fases coordinadas:\n\nAnálisis mediante visión por computador: Primero, la inteligencia artificial escanea el archivo digital, web o presentación. El algoritmo identifica qué elementos son relevantes y elimina el ruido visual innecesario.\n\nTraducción a vectores táctiles: A continuación, el software simplifica la imagen y la envía a una tableta gráfica táctil de alta densidad. Esta superficie eleva pequeños pines físicos en tiempo real, dibujando el contorno del mapa o la curva del gráfico.\n\nInteracción multimodal con audio: Finalmente, el sistema combina el tacto con la voz. Cuando la persona desliza su dedo por un punto concreto de la pantalla, el dispositivo lee en voz alta el dato exacto o la etiqueta de esa zona.\n\nEl concepto de las pantallas táctiles gráficas no es nuevo en el sector. Dispositivos comerciales como Graphiti o Canute ya demostraron su utilidad hace años. No obstante, su precio —que oscila entre los 3.000 y los 15.000 euros— los convierte en herramientas inalcanzables para la mayoría de los hogares.\n\nUno de los pilares del proyecto ABILITY es precisamente la democratización económica. El consorcio europeo, en el que participan centros de referencia como la Universidad Johannes Kepler de Linz y empresas especializadas como Inventivio, trabaja con nuevos materiales y actuadores más económicos. De este modo, buscan que esta tecnología llegue tanto a colegios y universidades como a puestos de trabajo cotidianos.\n\nLa llegada de soluciones como ABILITY abre la puerta a una verdadera igualdad de oportunidades en ámbitos académicos y profesionales. Hasta hoy, cursar ingeniería, matemáticas, economía o arquitectura exigía depender de impresoras especiales de relieve (como los hornos Fuser) y esperar semanas para recibir el material adaptado.\n\nCon esta nueva generación de tabletas táctiles inteligentes, cualquier alumno ciego podrá descargar los apuntes en clase y explorar los mismos diagramas que sus compañeros al instante. La tiflotecnología da así un paso gigante hacia una accesibilidad universal real, autónoma y sin esperas.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuentes: CORDIS EU Research Results – ABILITY Project , ABILITY Project Official Website , Instituto de Informática Integrada de la Universidad Johannes Kepler"
       }
     },
     "media": null
@@ -73,30 +290,6 @@
     "media": null
   },
   {
-    "id": "engadget-4b8b39c4d4eae89c",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2315475/google-gemini-memory-summary-see-what-remembers-about-you/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-18T00:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "You can now see and edit what Google Gemini remembers about you",
-        "summary": "Editing the AI's memory is one way you can shape its responses.",
-        "body": "Editing the AI’s memory is one way you can shape its responses.\n\nBesides the ability to connect and use other applications and services, a lot of AI assistants' utility comes from their capacity to shape their responses based on what they learn and remember about you. Google's Personal Intelligence feature allows Gemini to pull in context from Gmail, YouTube, Search and other Google apps, and the AI also builds out its memory based on your preferences and other personal facts that come up in chats . For example, if you share with Gemini that you're lactose intolerant, the bot will avoid recommending milk-based products.\n\nDepending on what you share, Gemini's picture of you can be fairly intimate, which makes the ability to edit the AI's memory all the more important. If you're curious about what Gemini knows or you want to edit what the AI can draw from to personalize its responses, Google is rolling out a way to see and change Gemini's memory directly from the settings menu.\n\nGoogle has two layers of settings for what you could call Gemini's memory, though the company only refers to one of them by that name. The first layer, the Keep Activity toggle, determines whether chats with Gemini are saved and associated with your Google Account. If you're 18 or older and you're logged into your personal account while using Gemini, the toggle is on by default. With Keep Activity enabled, whenever you sign in with your account you can pull up and re-engage past chats. If you disable it, chats won't be saved to your account, meaning they'll disappear after 72 hours and won't follow you across devices.\n\nThe second layer is what Google actually calls the AI's Memory . Using the content of past chats, Gemini is able to build out a profile of you that it can reference to personalize its responses. The AI isn't able to create any memories unless it can remember and access your inputs, so Keep Activity needs to be on for this to work. If it is, you may notice Gemini taking your preferences and personal information into account in its responses. That's the AI's memory at work.\n\nIf you're in the US, have a paid Google AI plan and memory is on, you can access Gemini's memory summary to see what it's compiled about you and edit this information to your liking. In the Gemini web app, click the Settings button (the gear icon) in the bottom left corner, click Personal Intelligence and then click Memory summary . Gemini will then generate a bulleted list of the major details it's gleaned about you, sorted into categories focused on things like your personal data, career information and various interests. It tends to know your pets' names, too.\n\nYou can stop there if you only care about what Gemini knows, or you can tweak the AI's memory by clicking on the Edit button (the pen icon) in the top-right corner of the Memory summary window. In edit mode, any line in the summary can be rewritten or deleted, just like a Google Doc. If you'd prefer to prompt Gemini to make additions or subtractions, you can alternatively enter a prompt via the text box at the bottom of the window. Once you're happy with your changes, you can click Save to commit them to Gemini's memory. Gemini also saves a memory history of these changes and when they were made. So, while you can easily alter your personal timeline as it pertains to Gemini's reality, any adjustments will be tracked.\n\nIf you'd prefer to turn off the memory system entirely rather than simply edit it, you can do so by clicking on the Memory toggle in the Personal Intelligence menu. Deselecting the toggle will stop Gemini from committing new facts to memory, but it doesn't delete old things it's learned. You can edit those details using the Memory summary, or delete chats completely from the Activity menu.\n\nTo delete chats, head to the Gemini web app, click Settings and then select Activity . From the Activity menu, you can scroll through interactions you've had with Gemini by date and delete whichever ones you'd like by clicking on the \"X\" next to them. Deleting them removes those chats from the context pool that Gemini uses to personalize its responses.\n\nBy combining all of these options, you can exert more control over what Google's AI knows and how it responds to your inputs, and ideally get more useful outputs in the process."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "the-verge-7e91de7ba6cb367f",
     "type": "news",
     "sourceId": "the-verge",
@@ -122,55 +315,6 @@
     "media": null
   },
   {
-    "id": "techcrunch-4638f9039e10aabd",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/17/nvidia-says-its-open-source-ai-strategy-remains-intact-after-jensen-huangs-exit/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-17T23:04:35.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Nvidia says its open source AI strategy remains intact after Jensen Huang’s exit",
-        "summary": "Nvidia's interim CEO reaffirmed its open source AI strategy and plans to acquire Hugging Face, despite Jensen Huang's sudden departure.",
-        "body": "Nvidia interim CEO Colette Kress reaffirmed the company’s commitment to open source AI during Tuesday’s earnings call with analysts — the first since CEO Jensen Huang’s resignation.\n\n“At Nvidia, we are committed to fostering a vibrant open model ecosystem, so every country, company, and industry can build its own intelligence,” Kress said in her opening remarks. She also noted that open models were accelerating AI adoption, citing a 35-fold year-over-year surge in weekly token volume on OpenRouter, including a 3.5-fold increase over the past three months.\n\nKress also spoke about Nvidia’s plans for Hugging Face, a platform for open source AI models that the company agreed to acquire for $12.9 billion in September, in what would be the second-largest acquisition in Nvidia’s history.\n\nThe platform, which serves more than 18 million developers and 200,000 companies, is still on track to join Nvidia, despite Huang’s ouster. Huang had heavily advocated for open source AI technology. His departure had raised questions about the company’s future approach to open source AI models, with Hugging Face’s CEO calling Huang’s departure “a sad day,” and promising to “keep fighting for open-source AI, harder than ever.”\n\nSo far, Nvidia’s plans for Hugging Face appear unchanged. The acquisition was not directly addressed during the Q&A portion of the earnings call.\n\n“Together, we will scale its platform and make intelligence more open, more capable, and more accessible,” said Kress of Nvidia’s plans for Hugging Face.\n\nLast week, Nvidia founder Huang resigned from his position as CEO following news about his extramarital affairs, including one with Alice Huang, an executive at the Singapore-based company Megaspeed who is suspected of being a Chinese spy. He’s also accused of having extramarital affairs with two direct reports and is now set to testify before Congress by Thanksgiving. Meanwhile, the SEC is investigating Nvidia over whether the company’s disclosures misled investors, The WSJ reported .\n\nWithin Nvidia, Huang pushed for the development of the Nemotron family of open-weight AI models built for long-running agentic AI systems and reasoning workloads. On today’s call, Kress noted that Nemotron is now the “most widely used U.S. open model on OpenRouter,” and it’s “where developers start to build their own intelligence.”\n\n“That foundation is empowering the ecosystem,” she said.\n\nCorrection: Due to a typo, an earlier version of this article incorrectly stated the number of developers served by Hugging Face; it is 18 million, not 118 million."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-c90aac0fd62865dd",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/17/whatsapps-first-party-chat-history-backup-service-moves-ahead/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-17T22:57:08.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "WhatsApp’s first-party chat history backup service moves ahead",
-        "summary": "Select WhatsApp beta testers on iOS are now seeing an option to use the app’s own backup service as an alternative to iCloud. Here are the details. more…",
-        "body": "Select WhatsApp beta testers on iOS are now seeing an option to use the app’s own backup service as an alternative to iCloud. Here are the details.\n\nA few months ago, WABetaInfo reported that WhatsApp was working on its own backup service as an alternative to the current method of backing up chats, which relies on Apple’s iCloud.\n\nAt the time, the feature wasn’t available even to beta testers, but WABetaInfo ’s report provided details on how it would work, including 2GB of free storage, optional paid plans for larger backups, and mandatory end-to-end encryption for backups stored on WhatsApp’s servers.\n\nNow, the site reports that some WhatsApp users running the latest TestFlight build are seeing the option to switch from iCloud to WhatsApp’s own backup service, suggesting that a wider rollout may not be too far off.\n\nFrom WABetaInfo :\n\nUsers can switch to WhatsApp cloud storage from the Chat backup screen. Here, users will have to choose the backup provider they want to use. If they choose WhatsApp, they will have to secure their backups using end-to-end encryption. Since encryption is mandatory, users cannot skip this step. However, they can choose a different method to encrypt their backups. For example, users can secure their backups using a 64-digit encryption key. Users who do not know what to choose can opt for the passkey, which is the default method WhatsApp recommends. After users complete the setup, they can back up their chat history on WhatsApp’s servers. WhatsApp keeps the backup on its servers for four months after a subscription expires. If users do not renew their subscription, WhatsApp deletes the backup permanently.\n\nImportantly, the site notes that backups stored on WhatsApp’s servers cannot currently be used to restore chats across platforms, meaning users switching from iPhone to Android, or vice versa, will still need to rely on WhatsApp’s built-in chat transfer feature.\n\nIn the screenshots shared in the report, WhatsApp confirms that users will get 2GB of free cloud storage for backups, while WhatsApp Plus subscribers will have access to 100GB. WABetaInfo adds that Meta One subscribers “can receive up to 4 TB based on the plan they choose.”\n\nAlthough the feature appears to be rolling out to beta testers first, the report notes that “the latest version available on the App Store is also compatible with this functionality,” meaning WhatsApp could theoretically enable it for users running the public version without requiring another app update.\n\nTo read WABetaInfo ‘s full report, follow this link ."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-fa3911f9d3c40ab2",
     "type": "news",
     "sourceId": "ars-technica",
@@ -190,127 +334,6 @@
         "title": "Hundreds of websites deliver potent malware cocktail to unsuspecting visitors",
         "summary": "Malware cocktail delivers cryptocurrency theft payloads and iOS exploits, among other things.",
         "body": "Hundreds of websites using the Optimizely website personalization platform served unsuspecting visitors a potent malware cocktail that targeted cryptocurrency wallets, stole payment card data, cookies, and screenshots, and delivered exploit kits for infecting iPhones and iPads, researchers said Tuesday.\n\nReportURI said it identified 178 websites—including CNN, Zoom, the BBC, and Salesforce—that were affected. JavaScript digitally signed by Optimizely and then loaded into customer pages had been modified to include malicious components that attempted to infect visitor devices with multiple payloads. When wares were installed successfully, they swapped user cryptocurrency wallet addresses for the attackers. Other components skimmed payment cards, stole cookies and screenshots, and, on iPhones and iPads, delivered iOS exploit kits known as Coruna and DarkSword.\n\nOptimizely serves JavaScript “snippets” that include both company code and code that is provided by each customer. The JavaScript, which can be served directly from Optimizely or from a customer endpoint, runs on every page the customer serves. Somehow, the attackers wrote their own code into a portion of each affected customer’s JavaScript and then delivered it from cdn.optimizely.com. A valid certificate for that domain signed the JavaScript.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-0ac65313655a9af8",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1036045/ifixit-teardown-apple-homeview-smart-home-hub",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-17T22:25:41.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iFixit’s Apple HomeView teardown reveals a device that will be difficult to repair",
-        "summary": "After finding recent versions of Apple's iPads and HomePods much easier to disassemble for battery replacements or other repairs, iFixit assumed it would be the same story for Apple's new HomeView hub that looks like a seven-inch tablet stuck to a smart speaker. The reality was much different and by the time they got the […]",
-        "body": "After finding recent versions of Apple's iPads and HomePods much easier to disassemble for battery replacements or other repairs, iFixit assumed it would be the same story for Apple's new HomeView hub that looks like a seven-inch tablet stuck to a smart speaker. The reality was much different and by the time they got the HomeView apart iFixit's skilled techs had \"ripped a connector, snapped a speaker in two, and put more force on the poor logic board than any of us were comfortable with.\"\n\nThe tablet section of the HomeView proved to be the bigger challenge to disassemble as a result of some questionable decisions with Apple's design. The …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-d0a1e296d279ea93",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/17/report-iphone-set-to-gain-market-share-in-2027-amid-industry-wide-slump/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-17T22:07:22.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Report: iPhone set to gain market share in 2027 amid industry-wide slump",
-        "summary": "Apple could see iPhone shipments rise 7% next year, giving it a 26% share of global smartphone shipments, according to a new report. Here are the details. more…",
-        "body": "Apple could see iPhone shipments rise 7% next year, giving it a 26% share of global smartphone shipments, according to a new report. Here are the details.\n\nAs detailed by AppleInsider , a new Morgan Stanley research report says Apple is poised to ship approximately 270 million iPhones in 2027, a 7% bump from 2026.\n\nThe forecast comes amid a change of pace for Apple , which launched only the iPhone 18 Pro models and iPhone Duo this fall, with the rest of its iPhone lineup reportedly set to arrive early next year.\n\nMorgan Stanley notes that this could push some purchases from late 2026 into 2027, contributing to the projected shipment growth without necessarily reflecting an increase in underlying demand.\n\nThe report also comes as Apple and the rest of the smartphone industry continue to grapple with rising memory and storage prices, though previous reports have suggested that Apple is better positioned than many of its competitors to absorb those costs.\n\nApple raised iPhone prices in September, after keeping them stable for much of the year while competitors had already introduced price hikes. In some cases, they raised prices more than once within a matter of months.\n\nBack to the report, it notes that global smartphone shipments are expected to drop 5% next year, compared with a previous forecast of 3.6% growth. That said, it’s still an improvement over the estimated 13.8% decline in 2026.\n\nWhen it comes to Apple and the iPhone specifically, Morgan Stanley notes that consumer interest in upgrading has remained largely unchanged year over year, with 37% of iPhone owners saying they are extremely likely to upgrade within the next 12 months. That’s compared with 41% of smartphone owners overall, a figure that dropped by 2 percentage points year over year.\n\nAs for the market’s reaction to the iPhone Duo, Morgan Stanley found that 22% of non-iPhone users surveyed expressed interest in switching to Apple’s foldable device, with that figure reaching 34% in China.\n\nImportantly, Morgan Stanley’s survey was conducted after the iPhone Duo was announced, but before it launched, so these figures reflect consumer interest rather than actual purchasing behavior.\n\nApple Intelligence was another factor examined in the survey, with Morgan Stanley concluding that AI features are becoming less important in driving iPhone upgrades, while factors such as battery life and upgrade eligibility are gaining importance.\n\nFinally, Morgan Stanley found that Apple’s customer retention rate increased three percentage points to a record 93%, while its net switching rate improved to 12%.\n\nHuawei was the only other major smartphone brand to show a positive and improving net switching rate, while Samsung and Google remained relatively neutral, and Xiaomi, Motorola, Honor, Oppo, and Vivo recorded negative rates.\n\nTo read AppleInsider ’s full report of Morgan Stanley’s research findings, follow this link ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-8e817cfedc35d8d6",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/news/1035957/meta-alexandr-wang-sam-altman-instagram-ai-deepfake",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-17T21:00:55.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Not even Sam Altman is safe from AI deepfakes on Instagram",
-        "summary": "Instagram is filled with people posting deepfaked content - including, as of late, from one of Meta's most prominent executives. Earlier in November, Alexandr Wang, Meta's chief AI officer, shared a short clip to promote Muse, the company's consumer AI agent. In the AI-generated clip, Wang, Meta CEO Mark Zuckerberg, OpenAI CEO Sam Altman, and […]",
-        "body": "Instagram is filled with people posting deepfaked content - including, as of late, from one of Meta's most prominent executives.\n\nEarlier in November, Alexandr Wang, Meta's chief AI officer, shared a short clip to promote Muse, the company's consumer AI agent. In the AI-generated clip, Wang, Meta CEO Mark Zuckerberg, OpenAI CEO Sam Altman, and Jolly, the anthropomorphic mascot of Muse, are on a four-way video call. When Altman joins the call he's dressed like Jolly, wearing a furry hooded suit and face paint to look like the cutesy character. The clip is captioned \"When the homies meet about openai product strategy,\" a reference to the AI ag …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-ed27e67f2a47a0a3",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/17/google-expands-access-to-gemini-tasks-which-can-help-with-calls-purchases/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-17T19:02:20.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google expands access to Gemini Tasks, which can help with calls, purchases",
-        "summary": "Gemini's Task mode can help users coordinate calls, log into websites, and even make purchases on the user's behalf.",
-        "body": "Posted:\n\nGoogle is expanding the rollout of Tasks, a toggle in Gemini that converts the chatbot into a more active helper.\n\nUnlike Gemini’s Chat, which merely allows users to talk to Google’s AI assistant for informational purposes, Tasks empowers the app to complete basic secretarial functions, deputizing it as a kind of personal assistant.\n\nHow, specifically, can you use it? Google says that the app can call businesses and book appointments on users’ behalf; it can also complete purchases for them via Google Pay, and even sign into websites securely if prompted to do so.\n\nIn a blog post , Josh Woodword, VP of Gemini, claims to have recently used the feature to call local car dealerships to schedule a service appointment for his family’s minivan. He says he also used it to analyze his electrical bill.\n\nTasks was initially launched to select testers back in May as Gemini Spark, a 24/7 agentic helper, and was expanded to U.S. subscribers of its Google AI Ultra tier. Gemini Spark eventually became “Task Mode.” Google is now making the feature available for free to hundreds of millions of people who are using the company’s new Gemini 4 Hydrogen model.\n\nGetting the function up and running is easy. Users merely flip a toggle within the app from Chat to Tasks, which enables the feature. Users can also send texts to Gemini or call the app to give it commands."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-35f6ba85537efab0",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/17/apple-services-including-icloud-app-store-and-apple-music-hit-by-outage/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-17T18:55:40.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple services, including iCloud, App Store, Apple Music, and more, hit by outage",
-        "summary": "Apple's status page confirms its services are facing outages, but has not confirmed the cause.",
-        "body": "After a recent slew of tech outages, service disruptions, and flight chaos this week, now it’s Apple customers who are facing technical issues.\n\nThe iPhone maker’s System Status page indicates that there are issues with iCloud’s Account & Sign In services affecting “all users,” which could make the service slow or unavailable. The App Store, AppleCare on Device, and Apple Music are also experiencing issues, the page indicates.\n\nLike all major tech companies, Apple faces outages and other technical issues affecting its cloud services at times. However, today’s issues are likely more noticeable to end users because problems with iCloud can lead to account sign-in problems. This could cause your iPhone to ask for your Apple ID and password, and you could see other attempts to sign in to services with your Apple account information fail.\n\nOn Reddit, some folks also noted that they were unable to activate a new iPhone , which is likely related to these ongoing issues.\n\nGiven the recent increase in AI-driven cyberattacks, users across social media have already begun to speculate about the cause. In particular, users are expressing concerns about the Apple outage, as it arrives only days after technical failures at Microsoft led to its cloud systems that power flagship services like Outlook and Teams failing due to cascading software issues .\n\nSimilarly, a brief outage of Chase’s banking app this week garnered attention, as did an ongoing partial outage (at the time of publication) of the National Security Agency’s internal classified network, both of which were blamed on software glitches.\n\nSo far, none of the outages in the past week have been attributed to cyberattacks, but rather to technical problems.\n\nApple responded to TechCrunch’s request for comment (which it initially gave to Bloomberg ), noting that the outages were caused by an internal update and not a cyberattack. “Many of our systems are back up and running after an internal update caused some outages this morning. We’re working to get the remaining systems online as soon as possible,” the statement read.\n\nAfter the initial outages were reported, Apple’s status page was updated to include other outages impacting Apple School Manager, iCloud Mail, iCloud Web Apps (iCloud.com), Schoolwork, and the Volume Purchase Program.\n\nThis article was updated after publication with the status of the outages."
       }
     },
     "media": null
@@ -1215,29 +1238,6 @@
         "title": "Cookie Voice Recipes",
         "summary": "Cookie Voice Recipes is a voice-first recipe app built for blind and low-vision cooks. You can find recipes, have them read aloud, and move through…",
         "body": "Published 5 November 2026 by cheffy\n\nCookie Voice Recipes is a voice-first recipe app built for blind and low-vision cooks. You can find recipes, have them read aloud, and move through ingredients and steps hands-free by voice, so you can cook without needing to touch or look at your phone.\n\nVoice commands can be used to repeat steps or ask about ingredient quantities. The app was developed with input from blind and low-vision users, including user testing with vision rehabilitation teachers.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nDisclosure: I’m the developer of Cookie Voice Recipes. The app was designed from the start for screen reader users. It has been tested with TalkBack. All buttons and controls have accessible labels, and the core cooking flow—including reading ingredients, moving to the next or previous step, and repeating a step—can be used entirely by voice without touching the screen.\n\nLast Tested App version and Android version:\n\nCookie Voice 1.0.1. Android 17\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "conticgo-8ff20348612816ec",
-    "type": "news",
-    "sourceId": "conticgo",
-    "sourceName": "Conticgo",
-    "sourceUrl": "https://conticgo.net/",
-    "originalUrl": "https://conticgo.net/greta-starks-y-conunpack-impulsan-la-accesibilidad-en-las-salas-de-cine-espanolas/",
-    "originalLanguage": "es",
-    "publishedAt": "2026-11-05T07:00:22.000Z",
-    "categories": [
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "GRETA & STARKS y ConUnPack impulsan la accesibilidad en las salas de cine españolas",
-        "summary": "Las personas con discapacidad visual o auditiva podrán acceder a recursos de accesibilidad durante las sesiones habituales de cine gracias a soluciones como GRETA. La compañía tecnológica GRETA & STARKS y la distribuidora española ConUnPack han anunciado una alianza para impulsar el uso de esta tecnología en las salas españolas. La iniciativa se presenta en […] La entrada GRETA & STARKS y ConUnPack impulsan la accesibilidad en las salas de cine españolas se publicó primero en Conticgo .",
-        "body": "Las personas con discapacidad visual o auditiva podrán acceder a recursos de accesibilidad durante las sesiones habituales de cine gracias a soluciones como GRETA. La compañía tecnológica GRETA & STARKS y la distribuidora española ConUnPack han anunciado una alianza para impulsar el uso de esta tecnología en las salas españolas.\n\nLa iniciativa se presenta en MERCI 2026, el Mercado de Cine Independiente organizado por la Semana Internacional de Cine de Valladolid (SEMINCI) y la Asociación de Distribuidores Independientes Cinematográficos (ADICINE). El encuentro celebra su sexta edición del 28 al 30 de octubre en Valladolid.\n\nGRETA es una aplicación móvil que permite utilizar diferentes recursos de accesibilidad sincronizados con la película. De este modo, cada espectador puede disfrutar de la sesión con los apoyos que necesita desde su propio dispositivo.\n\nEntre sus principales funciones se encuentran:\n\nSegún explica la web oficial de GRETA , la aplicación utiliza el reconocimiento del sonido para sincronizar los recursos de accesibilidad con la película. Para utilizarla, basta con un teléfono móvil y, en el caso de la audiodescripción, unos auriculares.\n\nUna de las principales ventajas de esta tecnología es que permite compartir una misma sesión cinematográfica sin necesidad de organizar proyecciones específicas para las personas con discapacidad visual o auditiva.\n\nCada espectador utiliza de forma individual el recurso que necesita. Así, una persona puede escuchar la audiodescripción mientras el resto del público sigue la película con el sonido habitual de la sala. Del mismo modo, los subtítulos adaptados pueden consultarse en la pantalla del teléfono móvil.\n\nEsta posibilidad favorece una experiencia cinematográfica compartida y contribuye a reducir las barreras de acceso a la cultura.\n\nNo obstante, es importante tener en cuenta que la aplicación no garantiza la accesibilidad de todos los títulos. Para utilizar sus funciones, la película debe contar con los recursos correspondientes y estar disponible en el catálogo.\n\nLa alianza entre GRETA & STARKS y ConUnPack busca acercar estas soluciones a los profesionales de la exhibición cinematográfica en España.\n\nUna de las ventajas del sistema es que no requiere instalar equipamiento específico en las salas para que cada usuario pueda utilizar la aplicación. Esto puede facilitar su incorporación en cines independientes y en espacios con menos recursos técnicos.\n\nSin embargo, la disponibilidad de películas accesibles y las condiciones de implantación del servicio siguen siendo factores importantes. Para ampliar su alcance, resulta fundamental que distribuidoras y exhibidores colaboren para ofrecer más títulos con audiodescripción y subtítulos adaptados.\n\nLa alianza se presenta en el marco de MERCI 2026, un encuentro profesional que reúne a representantes de la distribución, la exhibición y otros ámbitos de la industria audiovisual.\n\nLa programación oficial de SEMINCI incluye una presentación dedicada al cine accesible con la aplicación GRETA.\n\nEste tipo de iniciativas pone de relieve la importancia de incorporar la accesibilidad a la distribución y exhibición cinematográfica. No basta con que una película llegue a las salas: también es necesario que las personas con diferentes necesidades sensoriales puedan acceder a su contenido.\n\nDesde esta perspectiva, las herramientas de audio descripción y subtitulado adaptado representan un paso más hacia una cultura audiovisual inclusiva.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuentes: SEMINCI: programación profesional y MERCI 2026 , GRETA & STARKS: funcionamiento y características de la aplicación , Audiovisual451: información sobre la alianza entre ConUnPack y GRETA & STARKS , Ciné-Sens: información sobre el funcionamiento y la disponibilidad de recursos accesibles ."
       }
     },
     "media": null

@@ -1510,6 +1510,8 @@ struct NativeReadingScreen: View {
     }
 
     private func moveUnit(_ direction: Int) {
+        if navigationUnit == 5 { skipReading(direction); return }
+        if document.body.isEmpty, !tracks.isEmpty { skipReading(direction); return }
         guard !document.body.isEmpty,
               let next = textLayout.nearbyOffset(readingOffset,
                                                   direction: direction, unit: navigationUnit)
@@ -1807,17 +1809,15 @@ struct NativeReadingScreen: View {
             Button(speech.isPlaying ? "Pausar" : "Reproducir") {
                 speech.isPlaying ? pausePlayback() : play()
             }
-            .accessibilityHint("Doble toque para reproducir o pausar. Desliza arriba para avanzar un minuto y abajo para retroceder un minuto.")
+            .accessibilityHint("Doble toque para reproducir o pausar. Desliza arriba o abajo para avanzar o retroceder según el modo de navegación seleccionado.")
             .accessibilityValue("\(currentPercent) por ciento")
             .accessibilityAdjustableAction { direction in
                 switch direction {
-                case .increment: skipReading(1)
-                case .decrement: skipReading(-1)
+                case .increment: moveUnit(1)
+                case .decrement: moveUnit(-1)
                 @unknown default: break
                 }
             }
-            Button("Retroceder un minuto") { skipReading(-1) }
-            Button("Avanzar un minuto") { skipReading(1) }
         }
         .buttonStyle(.bordered)
         .controlSize(.small)
@@ -1861,7 +1861,7 @@ struct NativeReadingScreen: View {
             if !document.body.isEmpty {
                 NativeAdjustableChoice(
                     title: "Modo de navegación",
-                    choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
+                    choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado", "Un minuto"],
                     selectedIndex: $navigationUnit
                 )
                 HStack {

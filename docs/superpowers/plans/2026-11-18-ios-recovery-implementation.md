@@ -48,6 +48,7 @@
 - [ ] Abrir la página oficial en el navegador integrado del sistema con control accesible «Cerrar/Volver a TifloLector»; al regresar, dirigir el foco de accesibilidad al cuadro «Clave API de Gemini» y situar «Pegar clave copiada» inmediatamente después. Probar con VoiceOver todo el trayecto Google → copia → retorno → pegado sin necesidad de recorrer de nuevo los ajustes.
 - [ ] Advertir claramente que la creación de clave puede requerir cuenta y condiciones de Google, y que las pruebas y el uso podrían consumir cuota/costes, sin prometer gratuidad.
 - [ ] Phonon: verificar compatibilidad iOS/modelos/licencia, selección y muestra accesibles, mensajes claros si falta un modelo; no pedir clave API de Phonon.
+- [ ] Restricción detectada el 18/11: paquete oficial PhononTTS/ptts usa iOS 18+ y motor Core ML; el proyecto público declara iOS 17+. No añadir la dependencia Phonon sin resolver primero el aislamiento de versión o una variante de compilación iOS 18, ni subir el mínimo de iOS de la versión pública por accidente. El adaptador actual se compila condicionalmente y no muestra Phonon si no puede reproducir.
 - [ ] Comprobar experiencia completa con lector de pantalla y errores previsibles; ejecutar pruebas y commit antes de compilar.
 
 ### Tarea 4. DAISY e integración con Compartir

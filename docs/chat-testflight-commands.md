@@ -13,4 +13,4 @@ Las órdenes emitidas por otra cuenta, en otra incidencia o con sintaxis inesper
 
 El workflow receptor solo funciona cuando está incorporado a la rama predeterminada `main`. Hasta entonces no se procesa ninguna orden. Este mecanismo no publica versiones en App Store.
 
-Estado inicial: `ALLOW_REAL_UPLOAD` está fijado en `false` en el workflow. Por tanto, incluso una orden `run` se rechaza sin enviar nada. Su activación exige un nuevo cambio de código y autorización de Tony, tras superar la prueba inocua.
+Estado actual: la prueba inocua de la ejecución 44261762742 terminó correctamente. `ALLOW_REAL_UPLOAD` está habilitado exclusivamente para comandos exactos en la incidencia #345, procedentes de `TifloAcosta` y dirigidos a `feature/mi-musica`. Una orden `run` requiere autorización expresa de Tony para cada envío; no se ejecutará de forma preventiva.

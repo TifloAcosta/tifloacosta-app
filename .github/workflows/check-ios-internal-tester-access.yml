@@ -1,0 +1,21 @@
+name: Diagnóstico acceso TestFlight interno 500168 (sin cambios Apple)
+on:
+  push:
+    branches:
+      - recovery/ios-true-public-500157-20261118
+    paths:
+      - .github/workflows/check-ios-internal-tester-access.yml
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+      API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+      API_PRIVATE: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Consultar integrantes y asignación de compilación
+        run: node ios-app-native/scripts/check-internal-tester-access.mjs

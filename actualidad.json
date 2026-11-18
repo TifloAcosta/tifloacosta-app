@@ -1,5 +1,176 @@
 [
   {
+    "id": "9to5mac-205bc26f9308d17b",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/17/apple-announces-app-store-price-changes-in-multiple-countries-new-california-tax-rules/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T02:17:48.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple announces App Store price changes in multiple countries, new California tax rules",
+        "summary": "Apple today announced that App Store prices for apps and In-App Purchases will be adjusted in five countries starting December 3, following changes in taxes and foreign exchange rates. Here are the details. more…",
+        "body": "Apple today announced that App Store prices for apps and In-App Purchases will be adjusted in five countries starting December 3, following changes in taxes and foreign exchange rates. Here are the details.\n\nIn a new post published on its developer portal, Apple today announced a series of changes to App Store pricing, as well as updates to tax rules affecting developers and customers in several countries, including the US.\n\nAccording to the company, developers’ proceeds from eligible app and In-App Purchase sales have been adjusted in four countries, reflecting the following tax updates:\n\nSpecific to Botswana and Rwanda, Apple said that “Exhibit B of the Paid Applications Agreement will be updated to indicate that Apple collects and remits applicable taxes.”\n\nApple added that a new “Software as a Service (SaaS)” attribute is now available for several App Store tax categories, including App Store Software, Software Training Material, Dating, and Boosting. Developers can review and update their tax category selections in App Store Connect.\n\nAdditionally, starting December 3, developers who rely on Apple’s automatic pricing adjustments will see changes to app and In-App Purchase prices in:\n\nApple usually makes these adjustments to account for changes in taxes and foreign exchange rates, and notes that prices won’t change in countries selected as the base storefront, for auto-renewable subscriptions, or in storefronts where developers manually manage their prices.\n\nThe announcement does not go into detail about how much prices will change in each country, or whether they will increase or decrease.\n\nFinally, starting January 1, 2027, apps and In-App Purchases in the SaaS, App Store Software, Software Training Material, Dating, and Boosting categories will become subject to sales and use taxes in California.\n\nApple noted that “prices on the United States storefront are displayed to customers exclusive of taxes, so the tax change will not affect them,” but added that while developers’ proceeds will remain unchanged, “the total amount customers are charged, inclusive of tax, may increase.”\n\nTo read Apple’s full announcement, follow this link ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-2a811aa81bf75f66",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2315721/pc-wont-read-external-hard-drive-fixes/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T01:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "programas-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Here's what you can do if your PC won't read an external hard drive",
+        "summary": "Don't panic if your PC or Mac won't read an external hard drive. We break down the simple hardware tests and software fixes you can use to recover your data.",
+        "body": "Bring a dead external drive back to life with these troubleshooting steps, including Disk Utility and swapping cables.\n\nFinding the best portable SSD is almost a must in the modern tech landscape. Although you can get by with internal storage and cloud backup, an external drive makes it far easier to move media and document libraries between machines. It can also be a safeguard against worst-case scenarios by starting to use fail safes such as the 3-2-1 rule , which means keeping three copies of your data stored on two types of media with one copy kept in a safe location at home or away from the workplace.\n\nAs with any local storage, though, there's a possibility that a drive will suddenly stop working, or fail to run in the first place. If these things happen, don't panic, at least not yet. There may be troubleshooting steps you can take to get back on track.\n\nA few of these should be relatively intuitive, like testing different hardware combinations. Less so are the ones that involve software, since they involve tools you're probably not using on a regular basis, unless perhaps you're an IT professional. Mercifully, if a software fix is possible, you probably won't have to spend any money.\n\nThe first step is to rule out bad hardware that's not your drive. Try plugging it into another port, or swapping in another matching USB or Thunderbolt cable. Thunderbolt cables cover charging, data transfer and video , so it's always good practice to use the right cable and port. Remember also that all external drives require a power supply. Some USB ports on your computer might not have sufficient power, and of course if a drive has a jack for an AC adapter, you're not getting anywhere until that adapter is plugged in. Try plugging a drive into a second computer, if you have one.\n\nDrives can however be detected by Windows or macOS but still fail to load, possibly because they haven't been formatted correctly. In Windows 11, open Device Manager by searching for it in the taskbar, then expand the Disk drives section. If your drive shows up, you may be able to bring it back by right-clicking on it, then selecting Properties > Volumes > Populate .\n\nNext, click on Disk Managemen t and look for the disk number you should've seen a moment ago. If there's no drive letter assigned, you may be able to assign one. But if the drive is missing NTFS formatting, you may have to reformat it if you want it to work with Windows. You'll lose any existing data on the disk, so treat this option as a last resort. Before reformatting, it's wiser to try Windows' CHKDSK utility. Open the Terminal app using taskbar search, then enter chkdsk [drive letter] /r . This will attempt to both fix errors and recover bad sectors.\n\nOn Macs, the catch-all software solution is typically Disk Utility. Once you've opened the app, select View > Show All Devices . If you see your drive, click on the indented entry and then select Mount at the top of the app. Should that not work, click First Aid instead. This may let you repair errors without losing data. If not, Disk Utility will let you reformat, once again at the cost of wiping a drive clean.\n\nOne simpler possibility is that you need to update your hardware drivers. This is dead simple on macOS, since Apple typically bundles these in with the latest OS updates. Just head to Apple menu > System Settings > General > Software Update to check. In Windows 11, swing by Settings > Windows Update to install anything there.\n\nIn some cases, though, Windows users may need to return to the right-click Properties menu for a drive in Device Manager . Once you're there, click on the Driver tab, then try updating or uninstalling. If you uninstall without selecting the driver deletion option, restarting your PC should automatically reinstall the correct software, which might repair it.\n\nIf you've gotten this far without luck, there may not be much you can do other than cross your fingers that a reboot will solve things or seek out third-party help, such as the drive manufacturer or a repair shop. You might need a recovery firm's help if valuable data is trapped. You can also try your Mac or PC's general OS recovery tools, but these are unlikely to fix anything we haven't already suggested."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-ed19649e206059da",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2319928/how-to-set-up-ev-routing-carplay-android-auto/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T00:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "How to set up EV routing on CarPlay and Android Auto",
+        "summary": "Tired of hunting for chargers on road trips? See how EV routing works on CarPlay and Android Auto and what to check in your car before you go.",
+        "body": "Whether EV routing works depends on your car, your phone and the navigation app you use.\n\nOwning an electric car means you need to adapt your driving to your surroundings. You're not worrying about where to fill up your gas tank anymore, but about where to find the nearest charging station. Long trips mean you're likely to need to top off your EV's battery; otherwise you're going to reach an abrupt end.\n\nYou could find charging stations yourself and add them as stops on your trip, but that's not ideal. EV routing can take some of the hassle out of planning. It'll plan stops around your route with an idea of when you're arriving and how much charge you'll have left. Google Maps and Apple Maps both feature EV routing on CarPlay and Android Auto , but there are some differences, and it isn't universal. You'll need to know what your car supports and how to use your navigation app.\n\nBefore you grab your keys, check that your car supports the EV routing features you need. Just having CarPlay or Android Auto doesn't guarantee support, unfortunately. Some cars will also work directly with EV features through CarPlay, while others might need an extra app to link the car to Apple Maps.\n\nFord's Mustang Mach-E and F-150 Lightning support Apple Maps EV routing, as do Toyota's 2023 and newer EVs in the US. Google expanded Android Auto's charging recommendations to more than 350 US EV models in March 2026.\n\nAndroid Auto isn't the same as having Google Maps built into your car. Android Auto displays the apps from your phone, but if your car already has Google Maps built in, it'll run directly on your infotainment system with access to the car's battery data.\n\nThere are three ways for EV routing to work on Apple Maps via CarPlay. For cars that don't need a manufacturer app installed, connect your iPhone to CarPlay while you're parked, then open the Apple Maps app. Search for your final destination to get your directions, then tap Connect above the list of available routes.\n\nIf your car needs a manufacturer app installed, you'll need to download it from the App Store first. Once it's installed and set up, open Apple Maps, tap your profile picture then tap Vehicles > Connect Your Electric Vehicles . Follow any of the on-screen instructions to complete the process. You'll be able to set up your preferred charging network at this point, too.\n\nSome manufacturers have their own connection process in their app. Toyota owners, for example, tap Find > Apple Maps EV Routing , agree to the terms, then tap Connect Vehicle to Apple Maps and follow any extra instructions. Once connected, you'll be able to track your EV's battery levels in the app, with appropriate charging stops recommended on your route and live charger availability in some cases. When your battery drops too low, Maps will route you to the nearest compatible charger.\n\nCheck your network preferences, too. Ford suggests Tesla Superchargers as the preferred network for some Mustang owners, and Apple Maps can prioritize them, though you'll need the right fast-charging adapter.\n\nMake sure Google Maps is up to date on your phone. Google says you'll need version 25.44 or later for battery estimates to work.\n\nNext, head to Google Maps and tap your profile icon, then tap Settings > Your vehicles . Select Electric as your engine type, then tap Add vehicle . You'll be asked to choose the make, model, year and trim. Double-check the connections listed under Your plugs and edit them if you need to, then tap Save to confirm.\n\nAt this point, connect to Android Auto and confirm your car details when prompted. Start planning your trip in Google Maps and you'll see the estimated battery usage and an Add charging button on your car's display. Select that, add your starting battery percentage and then confirm. Google Maps will then add charging stops to your trip and display your predicted arrival battery percentage. You can change these stops and set a preferred arrival battery level, too.\n\nDon't take the prediction as gospel, though. Live driving conditions, your car's condition and the weather can all affect the estimate, so keep an eye on your charge level as you drive.\n\nIt's easier to use Google Maps or Apple Maps for EV routing, but there are other options. For instance, the A Better Routeplanner app (or ABRP for short) supports EV-specific trip planning. You can add your car model and a destination, and it'll generate routes with charging stops on the way. You can use it on your dashboard through CarPlay or Android Auto if you've got an ABRP Premium subscription.\n\nABRP does support live battery information in some cars if you're running Android Auto, but you'll need to give it the Car information permission in the app's settings. There's no equivalent option for CarPlay users, though.\n\nYou don't necessarily need EV routing to find compatible chargers. With your car profile set up, search Google Maps for charging stations and select Your plugs as the EV plug filter. You'll need to judge whether you can reach each stop on your current charge.\n\nUntil EV charging stops are as ubiquitous as gas stations, you'll need to think a little more about where you can charge on long trips. Just make sure you leave plenty of charge between stops so you're not left running low with no chargers nearby."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-4b8b39c4d4eae89c",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2315475/google-gemini-memory-summary-see-what-remembers-about-you/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T00:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "You can now see and edit what Google Gemini remembers about you",
+        "summary": "Editing the AI's memory is one way you can shape its responses.",
+        "body": "Editing the AI’s memory is one way you can shape its responses.\n\nBesides the ability to connect and use other applications and services, a lot of AI assistants' utility comes from their capacity to shape their responses based on what they learn and remember about you. Google's Personal Intelligence feature allows Gemini to pull in context from Gmail, YouTube, Search and other Google apps, and the AI also builds out its memory based on your preferences and other personal facts that come up in chats . For example, if you share with Gemini that you're lactose intolerant, the bot will avoid recommending milk-based products.\n\nDepending on what you share, Gemini's picture of you can be fairly intimate, which makes the ability to edit the AI's memory all the more important. If you're curious about what Gemini knows or you want to edit what the AI can draw from to personalize its responses, Google is rolling out a way to see and change Gemini's memory directly from the settings menu.\n\nGoogle has two layers of settings for what you could call Gemini's memory, though the company only refers to one of them by that name. The first layer, the Keep Activity toggle, determines whether chats with Gemini are saved and associated with your Google Account. If you're 18 or older and you're logged into your personal account while using Gemini, the toggle is on by default. With Keep Activity enabled, whenever you sign in with your account you can pull up and re-engage past chats. If you disable it, chats won't be saved to your account, meaning they'll disappear after 72 hours and won't follow you across devices.\n\nThe second layer is what Google actually calls the AI's Memory . Using the content of past chats, Gemini is able to build out a profile of you that it can reference to personalize its responses. The AI isn't able to create any memories unless it can remember and access your inputs, so Keep Activity needs to be on for this to work. If it is, you may notice Gemini taking your preferences and personal information into account in its responses. That's the AI's memory at work.\n\nIf you're in the US, have a paid Google AI plan and memory is on, you can access Gemini's memory summary to see what it's compiled about you and edit this information to your liking. In the Gemini web app, click the Settings button (the gear icon) in the bottom left corner, click Personal Intelligence and then click Memory summary . Gemini will then generate a bulleted list of the major details it's gleaned about you, sorted into categories focused on things like your personal data, career information and various interests. It tends to know your pets' names, too.\n\nYou can stop there if you only care about what Gemini knows, or you can tweak the AI's memory by clicking on the Edit button (the pen icon) in the top-right corner of the Memory summary window. In edit mode, any line in the summary can be rewritten or deleted, just like a Google Doc. If you'd prefer to prompt Gemini to make additions or subtractions, you can alternatively enter a prompt via the text box at the bottom of the window. Once you're happy with your changes, you can click Save to commit them to Gemini's memory. Gemini also saves a memory history of these changes and when they were made. So, while you can easily alter your personal timeline as it pertains to Gemini's reality, any adjustments will be tracked.\n\nIf you'd prefer to turn off the memory system entirely rather than simply edit it, you can do so by clicking on the Memory toggle in the Personal Intelligence menu. Deselecting the toggle will stop Gemini from committing new facts to memory, but it doesn't delete old things it's learned. You can edit those details using the Memory summary, or delete chats completely from the Activity menu.\n\nTo delete chats, head to the Gemini web app, click Settings and then select Activity . From the Activity menu, you can scroll through interactions you've had with Gemini by date and delete whichever ones you'd like by clicking on the \"X\" next to them. Deleting them removes those chats from the context pool that Gemini uses to personalize its responses.\n\nBy combining all of these options, you can exert more control over what Google's AI knows and how it responds to your inputs, and ideally get more useful outputs in the process."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-7e91de7ba6cb367f",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1036111/satya-nadella-says-hes-agi-pilled-now",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-17T23:41:18.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Satya Nadella says he’s AGI-pilled now",
+        "summary": "Microsoft CEO Satya Nadella says he's AGI-pilled, at least when it comes to how AI might make startling changes to the structure of the economy and how politics might change because of it. \"I am AGI-pilled in the sense that at an economy level, what is the political economy's organization around AGI?\" he asked at […]",
+        "body": "Microsoft CEO Satya Nadella says he's AGI-pilled, at least when it comes to how AI might make startling changes to the structure of the economy and how politics might change because of it. \"I am AGI-pilled in the sense that at an economy level, what is the political economy's organization around AGI?\" he asked at a roundtable discussion following his Microsoft Ignite keynote at the Chase Center in San Francisco.\n\nBut Nadella doesn't think frontier models like Claude are conscious. \"I don't think so,\" he said, adding that he follows Microsoft AI CEO Mustafa Suleyman's view that companies should not give rights to models and treat them like th …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-4638f9039e10aabd",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/17/nvidia-says-its-open-source-ai-strategy-remains-intact-after-jensen-huangs-exit/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-17T23:04:35.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Nvidia says its open source AI strategy remains intact after Jensen Huang’s exit",
+        "summary": "Nvidia's interim CEO reaffirmed its open source AI strategy and plans to acquire Hugging Face, despite Jensen Huang's sudden departure.",
+        "body": "Nvidia interim CEO Colette Kress reaffirmed the company’s commitment to open source AI during Tuesday’s earnings call with analysts — the first since CEO Jensen Huang’s resignation.\n\n“At Nvidia, we are committed to fostering a vibrant open model ecosystem, so every country, company, and industry can build its own intelligence,” Kress said in her opening remarks. She also noted that open models were accelerating AI adoption, citing a 35-fold year-over-year surge in weekly token volume on OpenRouter, including a 3.5-fold increase over the past three months.\n\nKress also spoke about Nvidia’s plans for Hugging Face, a platform for open source AI models that the company agreed to acquire for $12.9 billion in September, in what would be the second-largest acquisition in Nvidia’s history.\n\nThe platform, which serves more than 18 million developers and 200,000 companies, is still on track to join Nvidia, despite Huang’s ouster. Huang had heavily advocated for open source AI technology. His departure had raised questions about the company’s future approach to open source AI models, with Hugging Face’s CEO calling Huang’s departure “a sad day,” and promising to “keep fighting for open-source AI, harder than ever.”\n\nSo far, Nvidia’s plans for Hugging Face appear unchanged. The acquisition was not directly addressed during the Q&A portion of the earnings call.\n\n“Together, we will scale its platform and make intelligence more open, more capable, and more accessible,” said Kress of Nvidia’s plans for Hugging Face.\n\nLast week, Nvidia founder Huang resigned from his position as CEO following news about his extramarital affairs, including one with Alice Huang, an executive at the Singapore-based company Megaspeed who is suspected of being a Chinese spy. He’s also accused of having extramarital affairs with two direct reports and is now set to testify before Congress by Thanksgiving. Meanwhile, the SEC is investigating Nvidia over whether the company’s disclosures misled investors, The WSJ reported .\n\nWithin Nvidia, Huang pushed for the development of the Nemotron family of open-weight AI models built for long-running agentic AI systems and reasoning workloads. On today’s call, Kress noted that Nemotron is now the “most widely used U.S. open model on OpenRouter,” and it’s “where developers start to build their own intelligence.”\n\n“That foundation is empowering the ecosystem,” she said.\n\nCorrection: Due to a typo, an earlier version of this article incorrectly stated the number of developers served by Hugging Face; it is 18 million, not 118 million."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-c90aac0fd62865dd",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/17/whatsapps-first-party-chat-history-backup-service-moves-ahead/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-17T22:57:08.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "WhatsApp’s first-party chat history backup service moves ahead",
+        "summary": "Select WhatsApp beta testers on iOS are now seeing an option to use the app’s own backup service as an alternative to iCloud. Here are the details. more…",
+        "body": "Select WhatsApp beta testers on iOS are now seeing an option to use the app’s own backup service as an alternative to iCloud. Here are the details.\n\nA few months ago, WABetaInfo reported that WhatsApp was working on its own backup service as an alternative to the current method of backing up chats, which relies on Apple’s iCloud.\n\nAt the time, the feature wasn’t available even to beta testers, but WABetaInfo ’s report provided details on how it would work, including 2GB of free storage, optional paid plans for larger backups, and mandatory end-to-end encryption for backups stored on WhatsApp’s servers.\n\nNow, the site reports that some WhatsApp users running the latest TestFlight build are seeing the option to switch from iCloud to WhatsApp’s own backup service, suggesting that a wider rollout may not be too far off.\n\nFrom WABetaInfo :\n\nUsers can switch to WhatsApp cloud storage from the Chat backup screen. Here, users will have to choose the backup provider they want to use. If they choose WhatsApp, they will have to secure their backups using end-to-end encryption. Since encryption is mandatory, users cannot skip this step. However, they can choose a different method to encrypt their backups. For example, users can secure their backups using a 64-digit encryption key. Users who do not know what to choose can opt for the passkey, which is the default method WhatsApp recommends. After users complete the setup, they can back up their chat history on WhatsApp’s servers. WhatsApp keeps the backup on its servers for four months after a subscription expires. If users do not renew their subscription, WhatsApp deletes the backup permanently.\n\nImportantly, the site notes that backups stored on WhatsApp’s servers cannot currently be used to restore chats across platforms, meaning users switching from iPhone to Android, or vice versa, will still need to rely on WhatsApp’s built-in chat transfer feature.\n\nIn the screenshots shared in the report, WhatsApp confirms that users will get 2GB of free cloud storage for backups, while WhatsApp Plus subscribers will have access to 100GB. WABetaInfo adds that Meta One subscribers “can receive up to 4 TB based on the plan they choose.”\n\nAlthough the feature appears to be rolling out to beta testers first, the report notes that “the latest version available on the App Store is also compatible with this functionality,” meaning WhatsApp could theoretically enable it for users running the public version without requiring another app update.\n\nTo read WABetaInfo ‘s full report, follow this link ."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "ars-technica-fa3911f9d3c40ab2",
     "type": "news",
     "sourceId": "ars-technica",
@@ -96,80 +267,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-80326722d7dc10dd",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/17/ios-27-3s-redesigned-apple-health-app-requires-newer-iphone-model/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-17T20:19:51.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27.3’s redesigned Apple Health app requires newer iPhone model",
-        "summary": "iOS 27.3 will introduce an all-new Apple Health experience when it ships next month, but you’ll need an AI-compatible iPhone to get it. Here’s why. more…",
-        "body": "iOS 27.3 will introduce an all-new Apple Health experience when it ships next month, but you’ll need an AI-compatible iPhone to get it. Here’s why.\n\nWhen iOS 27.3 launches next month, it will include a variety of upgrades for Apple TV , Apple Music , Siri AI , iCloud+ , the iPhone Duo , and more.\n\nAnother tentpole addition is an all-new Apple Health app, which was first unveiled back in September when new Apple Watch models debuted.\n\nThe Health app is getting a full revamp in iOS 27.3 that’s meant to be more personalized and informative than ever. New features include an Insights tab, Longevity tab, educational videos, at-home movement evaluations, and more.\n\nBut for many iPhone users who update to iOS 27.3, the Health app might remain largely unchanged. Why? Because the new experience relies on Apple Intelligence, so you’ll need an AI-compatible iPhone to get it.\n\nThat means an iPhone 15 Pro or newer is required.\n\nIf you have an older iPhone model, or simply have chosen not to enable Apple Intelligence on your device, you’ll miss out on the new Health features. They’ll also only be available in select languages initially.\n\nThese forthcoming Health upgrades join the 20+ other new Apple Intelligence features that recently debuted in iOS 27.\n\nHave you tried the new Health app in iOS 27.3? How is it working for you? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-bf9831959717e161",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2319673/google-wallet-is-launching-on-ios/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-17T19:33:27.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google Wallet is launching on iOS",
-        "summary": "In case you, for some reason, don't want to use the nearly identical Apple Wallet.",
-        "body": "In case you, for some reason, don’t want to use the nearly identical Apple Wallet.\n\nGoogle and Apple have a long history of not launching first-party software for their rival's hardware, so it's usually a bit of a surprise when these companies manage to make nice. The latest instance is Google Wallet, which is available starting today on iOS for US users.\n\nIt's an odd integration considering Apple has its own Wallet app that's very similar to Google's offering. Both can handle digital payment tools, they store tickets and travel information and they safely store IDs and credentials.\n\nThe notable standout in today's announcement is the positioning of Google Wallet as a hub for agentic purchases made across Google tools. That seems like the only area where this could be a markedly different app experience, since Apple has been more cautious about agentic AI than its competitors to date. The iOS version of Google Wallet also will not support tap-to-pay, but the blog post didn't specify whether that feature might be added in the future."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-9fc85dbeab004526",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/17/airpods-pro-3-keep-getting-better-heres-whats-new-ios-27/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-17T19:28:12.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "AirPods Pro 3 keep getting better, here’s what’s new in iOS 27",
-        "summary": "AirPods got a variety of new features this fall in iOS 27, several of which are exclusive to AirPods Pro 3 (now only $179). Here’s everything new. more…",
-        "body": "AirPods got a variety of new features this fall in iOS 27, several of which are exclusive to AirPods Pro 3 (now only $179) . Here’s everything new.\n\nCustom EQ is a feature that some AirPods users thought Apple would never ship, but iOS 27 adds it.\n\nWith Custom EQ, Apple now lets you set your own sound profile for AirPods. Per Apple:\n\nAirPods are designed and engineered by Apple to faithfully represent music, TV shows and movies, and calls. If you prefer a different sound profile, you can customize how AirPods represent any audio played.\n\nYou can change the EQ by going to your AirPods’ settings ⇾ Audio & Routing ⇾ Equalizer ⇾ Custom. From here, you can adjust the sound profile for low, mid, and high frequencies.\n\nCustom EQ is available on AirPods Pro 3, AirPods Pro 2, AirPods Max 2, AirPods 5, and AirPods 4.\n\nApple GymKit has been available for years, but only for Apple Watch. It lets you pair and sync workout data with compatible cardio equipment, like treadmills, ellipticals, indoor bikes, and more.\n\nIn iOS 27, GymKit expands to support iPhone using AirPods Pro 3’s heart rate sensor. My colleague Zac gave it a try :\n\nThe setup is simple. I tapped my iPhone to the treadmill, picked Indoor Walk (Indoor Run is also offered), and started the workout from the treadmill. With GymKit, workout data is stored privately on iPhone and removed from the equipment.\n\nOnce the workout started, the treadmill received heart-rate data from AirPods Pro 3. Meanwhile, the Fitness app on iPhone received the treadmill’s distance, pace, incline, and calorie data. Treadmills know details that an iPhone and AirPods can’t know on their own, especially incline and precise belt distance.\n\nFor more details on iOS 27’s GymKit feature for AirPods Pro 3, check out Zac’s full hands-on below.\n\nRead more : iOS 27 basically turns your iPhone and AirPods into an Apple Watch at the gym\n\nFor most AirPods users, the single biggest upgrade in iOS 27 is Siri AI.\n\nSiri AI is available on compatible iPhone hardware in iOS 27, and Apple made sure to expand full support for the AI assistant to AirPods too.\n\nAirPods are essentially becoming an AI wearable thanks to the new Siri. It will let users do a lot more than the current Siri. Here are some key features via Apple’s website :\n\nEarlier this year when AirTag 2 launched, Apple brought Precision Finding support to Apple Watch for the first time. Until now though, it’s been limited to AirTag 2.\n\nBut with iOS 27 and watchOS 27, Apple expands Precision Finding on the Watch to AirPods Pro 3.\n\nAirPods Pro 3’s case includes the latest second-generation Ultra Wideband (UWB) chip, letting you find it with greater precision and step-by-step guidance right from your wrist.\n\nWith every batch of new AirPods features that debuts, the AirPods settings screen in the Settings app gets more cluttered.\n\nBut in iOS 27, Apple has a welcome fix: it’s redesigned and reorganized all AirPods settings.\n\nNow, you’ll find AirPods settings organized into more categories and submenus, accompanied by colorful icons. It makes finding the right setting way easier and more intuitive than before.\n\nRead more : iOS 27 revamps AirPods settings in a big way, here’s the new design\n\nWhich AirPods features in iOS 27 are you most excited about? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "techcrunch-ed27e67f2a47a0a3",
     "type": "news",
     "sourceId": "techcrunch",
@@ -214,77 +311,6 @@
         "title": "Apple services, including iCloud, App Store, Apple Music, and more, hit by outage",
         "summary": "Apple's status page confirms its services are facing outages, but has not confirmed the cause.",
         "body": "After a recent slew of tech outages, service disruptions, and flight chaos this week, now it’s Apple customers who are facing technical issues.\n\nThe iPhone maker’s System Status page indicates that there are issues with iCloud’s Account & Sign In services affecting “all users,” which could make the service slow or unavailable. The App Store, AppleCare on Device, and Apple Music are also experiencing issues, the page indicates.\n\nLike all major tech companies, Apple faces outages and other technical issues affecting its cloud services at times. However, today’s issues are likely more noticeable to end users because problems with iCloud can lead to account sign-in problems. This could cause your iPhone to ask for your Apple ID and password, and you could see other attempts to sign in to services with your Apple account information fail.\n\nOn Reddit, some folks also noted that they were unable to activate a new iPhone , which is likely related to these ongoing issues.\n\nGiven the recent increase in AI-driven cyberattacks, users across social media have already begun to speculate about the cause. In particular, users are expressing concerns about the Apple outage, as it arrives only days after technical failures at Microsoft led to its cloud systems that power flagship services like Outlook and Teams failing due to cascading software issues .\n\nSimilarly, a brief outage of Chase’s banking app this week garnered attention, as did an ongoing partial outage (at the time of publication) of the National Security Agency’s internal classified network, both of which were blamed on software glitches.\n\nSo far, none of the outages in the past week have been attributed to cyberattacks, but rather to technical problems.\n\nApple responded to TechCrunch’s request for comment (which it initially gave to Bloomberg ), noting that the outages were caused by an internal update and not a cyberattack. “Many of our systems are back up and running after an internal update caused some outages this morning. We’re working to get the remaining systems online as soon as possible,” the statement read.\n\nAfter the initial outages were reported, Apple’s status page was updated to include other outages impacting Apple School Manager, iCloud Mail, iCloud Web Apps (iCloud.com), Schoolwork, and the Volume Purchase Program.\n\nThis article was updated after publication with the status of the outages."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-a1491e31d7f359b7",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/17/google-to-keep-gemini-chats-for-two-months-up-from-72-hours-even-with-history-off/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-17T18:48:23.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google to keep Gemini chats for 2 months, up from 72 hours, even with history off",
-        "summary": "Google's Gemini update extending chat retention will roll out globally over the coming weeks.",
-        "body": "Google is extending how long it keeps temporary Gemini chats and conversations made with chat history turned off to around two months, saying the change aims to improve safety and security as AI systems become more capable.\n\nThe change , which will roll out globally in the Gemini app over the coming weeks, marks a significant increase from the previous 72-hour retention period mentioned in Google’s Gemini Apps Privacy Hub, according to an archived version from November 12.\n\nOpenAI, by comparison, says it may keep temporary chats in ChatGPT for up to 30 days, whereas Anthropic retains incognito chats in Claude for 30 days by default. However, companies may keep some data longer for legal or safety reasons, or to investigate policy violations.\n\nGoogle did not answer questions about what prompted the change and whether it would affect how conversations are accessed or reviewed, instead pointing to a blog post that says chats are kept longer to respond to users, process feedback, and protect its services and users. Its updated Gemini Apps Privacy Hub also cites potential system failures as a reason for retaining chats and says temporary conversations are not used to train AI models.\n\nThe longer retention period comes as Google introduces separate settings for Gemini’s chat history and AI training. Until now, both were tied to a single “Keep Activity” setting. Users will now be able to keep their conversations in their chat history without using them to train Google’s generative AI models.\n\nGoogle says both new settings will be turned off by default for users who previously disabled Keep Activity. For those who had Keep Activity turned on, their chat history will remain enabled. They can, though, decide separately whether Google can use their conversations to train AI models."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-676ff009279a0de2",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2319483/grados-gw200-headphones-boast-fresh-drivers-and-a-longer-battery-life/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-17T18:07:29.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Grado's GW200 headphones boast fresh drivers and a longer battery life",
-        "summary": "They run $329 and are up for preorder now.",
-        "body": "They run $329 and are up for preorder now.\n\nGrado has been a big name among audiophiles for decades. The company resisted making a wireless model until 2018 when it launched the well-received GW100 open-back headphones . Now, Grado is back with a major refresh of those initial Bluetooth cans.\n\nThe GW200 brings a spate of upgraded features to the table. First of all, there's a newly-designed audio driver. The 44mm S is based on the larger drivers found with some of its wired headphones, like the HP100 SE . The company promises they delivery \"clarity, detail and a full-bodied musical presentation while preserving the openness and natural character that define the Grado listening experience.\"\n\nThe battery life here has also been improved. The GW100 headphones topped out at just 15 hours. This was an issue even back in 2018. However, the GW200 can last around 60 hours per charge, which is more in line with competitors. They can also operate via a wired 3.5mm connection and this won't draw any power.\n\nThey use Bluetooth 5.4 and support for a bunch of common codecs, including Qualcomm aptX Lossless, aptX Adaptive and SBC, among others. The headphones also include multipoint connectivity that can maintain two simultaneous Bluetooth connections. That should make it easy to switch audio sources on the fly.\n\nThese are on the lighter side, especially when compared to the GW100 headphones. The GW200 cans weigh 235 grams and include a padded leather strap and an adjustable steel band. They even integrate with the company's complete range of standalone headphone cushions, for increased comfort.\n\nGrado's new GW200 headphones are available to preorder right now and cost $329. Shipments should go out in December. Since launching the wireless GW100 headphones back in 2018, the company has also branched out into wireless earbuds ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-2620c7b51bc2487f",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2315321/signs-someone-blocked-your-number-iphone/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-17T18:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Ways to tell if someone blocked your phone number on iPhone",
-        "summary": "Unanswered calls and missing read receipts don't always mean a block. See which signs are worth noticing and what else could be going on instead.",
-        "body": "A missing read receipt or an unanswered FaceTime call could mean a block, or it could just be a bad signal.\n\nLet's be very clear about this — if someone has blocked your phone number, whether on iPhone or Android, that's their right and you shouldn't disregard it. They probably don't want to talk to you, and deliberately trying to circumvent that could constitute harassment, maybe even at the criminal level. It's better to just move on.\n\nThat said, there's no inherent harm in trying to determine if you've been blocked. It may even be crucial if you have an honest reason to think it was a mistake. While blocking a number by accident is unlikely, it's not impossible.\n\nSince you're using an iPhone, the clues are mostly in Apple's Phone, Messages, and FaceTime apps. But you may want to expand your sleuthing to third-party messaging platforms, depending on how you previously communicated with someone.\n\nYour biggest clue is likely to be a call in the Phone app that goes straight to voicemail after one ring or no ring at all. You can only be sure after multiple calls at varying hours, however. That's because with a single call, or several calls within a short timeframe, there may be alternative explanations. Perhaps the person has Do Not Disturb or another Focus mode on. It could also be that their cellular or Wi-Fi signal is bad, that their phone is off or even that they're in the middle of an iOS or Android update, which requires a lengthy reboot.\n\nA faster way of confirming things is by calling from a second number if you have one, such as Google Voice or a work phone. Exercise caution here, since this could be seen as harassment. Passive options are always preferable. Besides, if someone knows (or knew) you well enough, there's a good chance they've blocked all your normal contact options.\n\nFurther signs that you've been blocked could include FaceTime calls failing to connect, or absent read receipts in the Messages app even though it's been hours or days since your last text. Once again, there may be other issues at play. Apart from bad signal quality or a phone being turned off, if they're an iPhone owner, it could be that they've disabled iMessage, or that Apple's servers are temporarily offline. Android phones won't provide receipts at all unless they're using RCS instead of SMS.\n\nWhile third-party apps like WhatsApp, Signal and Telegram are often linked to your phone number, blocking someone via iOS settings doesn't affect those apps, for the simple reason that they rely on frameworks beyond Apple's control. Missing read receipts or unanswered calls could be evidence that you've been blocked across multiple platforms. However, they might mean something else, such as Meta or Telegram experiencing technical difficulties.\n\nYou also can't read too much into automated replies, regardless of the app. They can, however, be used as a kind of \"soft\" block, discouraging you from calling or texting without seeming so harsh. If you're encountering an iPhone's automatic call screening when it wasn't there before, the other person may have deleted you from their Contacts app, which could make it the most obvious sign that you should stop.\n\nUnfortunately, that's about for your options. Apple and your carrier can't tell you that you're blocked. That would be unethical anyway, since it would violate the privacy of the blocker. You're just going to have to rely on all the clues we've suggested so far."
       }
     },
     "media": null

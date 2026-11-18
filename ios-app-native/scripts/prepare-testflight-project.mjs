@@ -23,7 +23,7 @@ replaceUnique(
     '        CODE_SIGN_IDENTITY: "Apple Distribution"',
     '        PROVISIONING_PROFILE_SPECIFIER: "'+process.env.IOS_PROFILE_APP_NAME+'"',
     '        CURRENT_PROJECT_VERSION: "'+version+'"',
-    '        MARKETING_VERSION: "1.0"',
+    '        MARKETING_VERSION: "1.5"',
     '        ASSETCATALOG_COMPILER_APPICON_NAME: "AppIcon"',
     ''
   ].join('\n')
@@ -37,7 +37,7 @@ replaceUnique(
     '        CODE_SIGN_IDENTITY: "Apple Distribution"',
     '        PROVISIONING_PROFILE_SPECIFIER: "'+process.env.IOS_PROFILE_EXTENSION_NAME+'"',
     '        CURRENT_PROJECT_VERSION: "'+version+'"',
-    '        MARKETING_VERSION: "1.0"',
+    '        MARKETING_VERSION: "1.5"',
     ''
   ].join('\n')
 );

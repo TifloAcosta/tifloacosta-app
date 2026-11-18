@@ -40,6 +40,15 @@
 - [ ] Implementar correcciones mínimas, velocidades 0,05 y navegación accesible; repetir pruebas y commit.
 - [ ] Eliminar Azure Speech de la interfaz y dependencias de lectura; prueba negativa de ausencia de Azure y commit.
 
+### Tarea 3B. Recuperación accesible de Gemini y Phonon
+**Archivos:** ajustes y motor iOS TifloLector, servicios de credenciales, pruebas; comparar flujos ya implementados en Android.
+- [ ] Auditar si hubo una implementación iOS posterior a la versión pública y verificar su origen antes de reutilizarla; no trasladar sin más código de Android o web.
+- [ ] Crear pruebas de selección de motor: voces iOS predeterminadas, Gemini solo con credencial válida, Phonon solo con modelo compatible instalado.
+- [ ] Gemini: guía sencilla por pasos para abrir el servicio oficial, crear/copiar la clave, volver, «Pegar clave» desde portapapeles, guardar de forma segura y comprobar conexión/voz con mensajes VoiceOver; confirmar antes de eliminar. No pronunciar ni mostrar el secreto en avisos.
+- [ ] Advertir claramente que la creación de clave puede requerir cuenta y condiciones de Google, y que las pruebas y el uso podrían consumir cuota/costes, sin prometer gratuidad.
+- [ ] Phonon: verificar compatibilidad iOS/modelos/licencia, selección y muestra accesibles, mensajes claros si falta un modelo; no pedir clave API de Phonon.
+- [ ] Comprobar experiencia completa con lector de pantalla y errores previsibles; ejecutar pruebas y commit antes de compilar.
+
 ### Tarea 4. DAISY e integración con Compartir
 **Archivos:** exportadores iOS, NativeDaisyNCX.swift, Share Extension, pruebas de exportación.
 - [ ] Registrar fallos de DAISY incompleto, ZIP de MP3 y diferenciación EPUB/DAISY importado.

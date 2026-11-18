@@ -119,6 +119,16 @@ enum NativeReaderFormats {
         return supportDirectory.appendingPathComponent(relativePath)
     }
 
+    /// Preserve the exact imported file for sharing, including every DAISY member.
+    /// Extracted media alone cannot reconstruct a complete DAISY package.
+    static func storeOriginal(_ source: URL, documentID: UUID) throws -> String {
+        let directory = try mediaDirectory(for: documentID)
+        let filename = source.lastPathComponent
+        let destination = directory.appendingPathComponent("Original-" + filename)
+        try FileManager.default.copyItem(at: source, to: destination)
+        return "ReaderMedia/\(documentID.uuidString)/Original-\(filename)"
+    }
+
     static func deleteStoredFiles(for id: UUID) {
         try? FileManager.default.removeItem(at: supportDirectory
             .appendingPathComponent("ReaderMedia", isDirectory: true)

@@ -396,7 +396,7 @@ struct NativeReaderSettingsScreen: View {
                         .font(.footnote)
                     NativeAdjustableChoice(
                         title: "Unidad de navegación de TifloLector",
-                        choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
+                        choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado", "Un minuto"],
                         selectedIndex: $navigationUnit
                     )
                     Text("Los comandos físicos de la línea braille y la velocidad del avance automático se configuran en Ajustes del iPhone, Accesibilidad, VoiceOver, Braille.")
@@ -409,7 +409,7 @@ struct NativeReaderSettingsScreen: View {
                     Section("Desplazamiento") {
                         NativeAdjustableChoice(
                             title: "Unidad de avance",
-                            choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
+                            choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado", "Un minuto"],
                             selectedIndex: $navigationUnit
                         )
                     }

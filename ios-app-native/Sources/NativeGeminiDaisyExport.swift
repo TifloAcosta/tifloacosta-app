@@ -220,3 +220,19 @@ enum NativeGeminiDaisyExport {
         return output
     }
 }
+
+/// Comprueba que el archivo final contiene los documentos de navegación,
+/// sincronización, texto y al menos una pista de audio real.
+enum NativeDaisyPackageVerifier {
+    static func validate(_ url: URL) throws {
+        guard let archive = Archive(url: url, accessMode: .read) else {
+            throw NativeGeminiAudioExport.ExportError.unsupportedFormat
+        }
+        let entries = Set(archive.map(\.path))
+        let required: Set<String> = ["book.opf", "book.ncx", "book.xml", "sync.smil"]
+        guard required.isSubset(of: entries),
+              entries.contains(where: { $0.hasPrefix("audio") && $0.hasSuffix(".mp3") }) else {
+            throw NativeGeminiAudioExport.ExportError.unsupportedFormat
+        }
+    }
+}

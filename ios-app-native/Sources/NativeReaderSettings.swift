@@ -382,6 +382,9 @@ struct NativeReaderSettingsScreen: View {
                     NavigationLink("Preparar clave de Gemini") {
                         NativeGeminiSetupScreen()
                     }
+                    NavigationLink("Phonon: compatibilidad e instalación") {
+                        NativePhononSetupScreen()
+                    }
                     Text("Las voces del iPhone siguen disponibles sin configurar cuentas. Gemini utiliza tu clave personal y puede consumir cuota.")
                         .font(.footnote)
                 }

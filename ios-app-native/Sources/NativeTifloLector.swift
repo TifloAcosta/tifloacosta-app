@@ -1049,6 +1049,7 @@ struct NativeReadingScreen: View {
     var startTrack: Int? = nil
 
     @EnvironmentObject private var library: NativeReaderLibrary
+    @Environment(\.dismiss) private var dismiss
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @AppStorage("native-reading-text-size") private var textSize = 20.0
     @AppStorage("native-reading-speed-index") private var speedIndex = 2
@@ -1079,6 +1080,8 @@ struct NativeReadingScreen: View {
     @State private var showDocumentInformation = false
     @State private var showSavedMarks = false
     @State private var showDocumentSearch = false
+    @State private var showDaisyExportChoice = false
+    @State private var preparedDaisyURL: URL?
     @State private var documentSearchQuery = ""
     @State private var positionBeforeSearch: Int?
     @State private var programmaticFocusRequest = false
@@ -1412,6 +1415,31 @@ struct NativeReadingScreen: View {
         NativeShare.present(url: originalURL)
     }
 
+    private func prepareDaisyOriginalCopy() {
+        guard latest.fileExtension == "daisy",
+              let originalPath = latest.originalPath,
+              let originalURL = NativeReaderFormats.storedURL(for: originalPath),
+              FileManager.default.fileExists(atPath: originalURL.path) else {
+            actionMessage = "No se conserva el DAISY original completo. Vuelve a importar el libro para exportarlo."
+            return
+        }
+        do {
+            let directory = FileManager.default.temporaryDirectory
+                .appendingPathComponent("TifloDaisyExports", isDirectory: true)
+            try FileManager.default.createDirectory(at: directory,
+                                                    withIntermediateDirectories: true)
+            let filename = latest.title.replacingOccurrences(
+                of: #"[^A-Za-z0-9 _.-]"#, with: "_", options: .regularExpression)
+            let destination = directory.appendingPathComponent(
+                "\(filename)-\(UUID().uuidString).\(originalURL.pathExtension)")
+            try FileManager.default.copyItem(at: originalURL, to: destination)
+            preparedDaisyURL = destination
+            showDaisyExportChoice = true
+        } catch {
+            actionMessage = "No se pudo preparar el paquete DAISY: \(error.localizedDescription)"
+        }
+    }
+
     private func formatDuration(_ seconds: Int) -> String {
         let value = max(0, seconds)
         return value >= 3600
@@ -1637,6 +1665,9 @@ struct NativeReadingScreen: View {
         }
         Button("Añadir marca") { addBookmark() }
         Button("Compartir documento") { shareDocument() }
+        if latest.fileExtension == "daisy" {
+            Button("Preparar copia del DAISY original") { prepareDaisyOriginalCopy() }
+        }
         Button(latest.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos") {
             library.toggleFavorite(document)
         }
@@ -1825,6 +1856,21 @@ struct NativeReadingScreen: View {
         }
         .sheet(isPresented: $showVisualSettings) {
             NativeReaderDocumentVisualSettingsScreen(document: document)
+        }
+        .confirmationDialog("Paquete DAISY preparado", isPresented: $showDaisyExportChoice,
+                            titleVisibility: .visible) {
+            Button("Compartir paquete DAISY") {
+                if let url = preparedDaisyURL {
+                    DispatchQueue.main.async { NativeShare.present(url: url) }
+                }
+            }
+            Button("No compartir y volver a la biblioteca") {
+                preparedDaisyURL = nil
+                dismiss()
+            }
+            Button("Seguir leyendo", role: .cancel) { preparedDaisyURL = nil }
+        } message: {
+            Text("El paquete original completo está preparado. Puedes compartirlo o regresar a tu biblioteca.")
         }
     }
 

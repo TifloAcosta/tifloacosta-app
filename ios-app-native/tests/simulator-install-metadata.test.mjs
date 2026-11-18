@@ -16,6 +16,8 @@ test('la compilación sin firma tiene números de versión válidos para instala
   const verifier = fs.readFileSync(new URL('../scripts/verify-testflight-ipa.py', import.meta.url), 'utf8');
   assert.match(verifier, /os\.environ\['IOS_MARKETING_VERSION'\]/);
   assert.match(verifier, /CFBundleShortVersionString'\) != expected_version/);
+  const shareInfo = fs.readFileSync(new URL('../ShareExtension/Info.plist', import.meta.url), 'utf8');
+  assert.match(shareInfo, /<key>CFBundleShortVersionString<\/key><string>\$\(MARKETING_VERSION\)<\/string>/);
 });
 
 test('el flujo de TestFlight no anuncia éxito ante un rechazo de altool', () => {

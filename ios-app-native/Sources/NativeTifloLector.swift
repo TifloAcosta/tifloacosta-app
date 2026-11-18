@@ -1080,6 +1080,7 @@ struct NativeReadingScreen: View {
     @State private var showDocumentInformation = false
     @State private var showSavedMarks = false
     @State private var showDocumentSearch = false
+    @State private var showTextSelection = false
     @State private var showDaisyExportChoice = false
     @State private var preparedDaisyURL: URL?
     @State private var documentSearchQuery = ""
@@ -1390,6 +1391,40 @@ struct NativeReadingScreen: View {
         }
     }
 
+    private func currentParagraphText() -> String? {
+        let text = latest.body
+        guard !text.isEmpty else { return nil }
+        // The reading position is a character offset, not a UTF-16 offset.
+        // A line break delimits a paragraph in OCR, EPUB and plain text.
+        let clamped = min(max(0, readingOffset), text.count)
+        let position = text.index(text.startIndex, offsetBy: clamped)
+        let before = text[..<position]
+        let start = before.lastIndex(of: "\n").map { text.index(after: $0) }
+            ?? text.startIndex
+        let after = text[position...]
+        let end = after.firstIndex(of: "\n") ?? text.endIndex
+        let paragraph = String(text[start..<end])
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        if !paragraph.isEmpty { return paragraph }
+        // If the cursor is on a blank separator, prefer the next line.
+        let remaining = text[end...].split(separator: "\n", omittingEmptySubsequences: true)
+        if let next = remaining.first?.trimmingCharacters(in: .whitespacesAndNewlines),
+           !next.isEmpty { return next }
+        let previous = before.split(separator: "\n", omittingEmptySubsequences: true)
+        return previous.last.map { String($0).trimmingCharacters(in: .whitespacesAndNewlines) }
+    }
+
+    private func copyCurrentParagraph() {
+        guard let paragraph = currentParagraphText(), !paragraph.isEmpty else {
+            actionMessage = "No hay texto en este punto para copiar."
+            return
+        }
+        UIPasteboard.general.string = paragraph
+        let message = "Párrafo copiado al portapapeles."
+        actionMessage = message
+        UIAccessibility.post(notification: .announcement, argument: message)
+    }
+
     private func exportText() {
         guard !latest.body.isEmpty else { return }
         let name = latest.title.replacingOccurrences(
@@ -1672,6 +1707,8 @@ struct NativeReadingScreen: View {
             library.toggleFavorite(document)
         }
         if !latest.body.isEmpty {
+            Button("Copiar párrafo actual") { copyCurrentParagraph() }
+            Button("Seleccionar y copiar texto") { showTextSelection = true }
             Button("Exportar texto") { exportText() }
             Button("Diccionario y pronunciación") {
                 if speech.isPlaying { pausePlayback() }
@@ -1797,6 +1834,27 @@ struct NativeReadingScreen: View {
 
     private var readerWithSheets: some View {
         readerChrome
+        .sheet(isPresented: $showTextSelection) {
+            NavigationStack {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Selecciona palabras o párrafos con las funciones de selección de VoiceOver y utiliza Copiar. Al cerrar, regresarás al mismo punto del libro.")
+                        .font(.footnote)
+                        .padding(.horizontal)
+                    NativeBrailleContinuousText(
+                        text: latest.body,
+                        fontSize: effectiveTextSize,
+                        strongText: effectiveStrongText,
+                        requestedOffset: readingOffset
+                    )
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+                .tifloScreenSurface()
+                .navigationTitle("Seleccionar y copiar texto")
+                .toolbar {
+                    Button("Volver al libro") { showTextSelection = false }
+                }
+            }
+        }
         .sheet(isPresented: $showDocumentSearch) {
             NavigationStack {
                 List {
@@ -1932,6 +1990,12 @@ struct NativeReadingScreen: View {
             else if speech.isPaused { play() }
         }
         .accessibilityAction(named: Text("Añadir marca")) { addBookmark() }
+        .accessibilityAction(named: Text("Copiar párrafo actual")) {
+            if !latest.body.isEmpty { copyCurrentParagraph() }
+        }
+        .accessibilityAction(named: Text("Seleccionar y copiar texto")) {
+            if !latest.body.isEmpty { showTextSelection = true }
+        }
         .accessibilityAction(named: Text("Compartir documento")) { shareDocument() }
         .accessibilityAction(named: Text("Avanzar cinco por ciento")) {
             move(to: min(100, currentPercent + 5))

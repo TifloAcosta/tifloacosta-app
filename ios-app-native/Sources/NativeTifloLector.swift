@@ -1816,6 +1816,8 @@ struct NativeReadingScreen: View {
                 @unknown default: break
                 }
             }
+            Button("Retroceder un minuto") { skipReading(-1) }
+            Button("Avanzar un minuto") { skipReading(1) }
         }
         .buttonStyle(.bordered)
         .controlSize(.small)
@@ -1878,6 +1880,7 @@ struct NativeReadingScreen: View {
                     showDocumentSearch = true
                 }
             }
+            Button("Información") { showDocumentInformation = true }
             Text(progressDescription)
                 .font(.footnote)
                 .accessibilityLabel(progressDescription)

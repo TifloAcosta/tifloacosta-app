@@ -1,4 +1,4 @@
-name: Diagnóstico acceso TestFlight interno 500168 (verificar ID desarrollador)
+name: Diagnóstico acceso TestFlight interno 500168 (estado invitación)
 on:
   push:
     branches:

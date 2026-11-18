@@ -65,10 +65,11 @@ test('la navegación accesible del lector salta de cinco en cinco por ciento', (
   assert.doesNotMatch(reader, /Avanzar diez por ciento|Retroceder diez por ciento/);
 });
 
-test('Botón Reproducir ofrece gestos de un minuto y mantiene doble toque', () => {
+test('Botón Reproducir usa el modo de avance seleccionado y mantiene doble toque', () => {
   assert.match(reader, /\.accessibilityAdjustableAction \{ direction in/);
-  assert.match(reader, /case \.increment: skipReading\(1\)/);
-  assert.match(reader, /case \.decrement: skipReading\(-1\)/);
+  assert.match(reader, /case \.increment: moveUnit\(1\)/);
+  assert.match(reader, /case \.decrement: moveUnit\(-1\)/);
+  assert.match(reader, /if navigationUnit == 5 \{ skipReading\(direction\); return \}/);
   assert.match(reader, /speech\.skip\(seconds: TimeInterval\(direction \* 60\)\)/);
   assert.match(reader, /speech\.isPlaying \? pausePlayback\(\) : play\(\)/);
 });
@@ -85,7 +86,7 @@ test('Marcas incluyen contexto y borrado anuncia el título exacto', () => {
 
 test('Navegación y marcas son accesibles junto a los controles principales', () => {
   assert.match(reader, /title: "Modo de navegación"/);
-  assert.match(reader, /choices: \["Bloque", "Párrafo", "Frase", "Página", "Encabezado"\]/);
+  assert.match(reader, /choices: \["Bloque", "Párrafo", "Frase", "Página", "Encabezado", "Un minuto"\]/);
   assert.match(reader, /Button\("Unidad anterior"\) \{ moveUnit\(-1\) \}/);
   assert.match(reader, /Button\("Unidad siguiente"\) \{ moveUnit\(1\) \}/);
   assert.match(reader, /Button\("Marcas guardadas"\) \{ showSavedMarks = true \}/);

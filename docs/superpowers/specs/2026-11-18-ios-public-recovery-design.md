@@ -18,6 +18,8 @@ Responsable: Tony Acosta. Estado: preparación. Sin autorización para envío a 
 6. Exportar/Compartir original real; DAISY completo con texto, audio, NCX y SMIL; audiolibro MP3 ZIP para Voice Dream sin resintetizar; validar compatibilidad.
 7. Importación desde Compartir distingue EPUB de DAISY, incluso desde Drive.
 8. Listas YouTube con reproducción automática del vídeo siguiente, orden y navegación accesible; novedades de canales con fecha y orden real.
+9. Dentro de cada documento, la acción accesible «Compartir» entrega el archivo original o, si es DAISY, el paquete completo (texto, audio, navegación y sincronización), nunca solo su primera pista de audio.
+10. Después de exportar a DAISY, la oferta de compartir es opcional: «Compartir» abre la hoja del sistema y «No compartir»/«Volver a la biblioteca» la cierra sin perder el archivo generado ni dejar atrapado al usuario en la exportación.
 9. Selección múltiple y carpetas navegables; preferencias particulares por documento independientes.
 10. Mi Música desde feature/mi-musica, con importación, listas, carpetas inteligentes y copia/restauración.
 11. Traducción y retorno, atajos Siri, incrementos velocidad 0,05, accesibilidad e idiomas; comparar estado real antes de incorporar.

@@ -802,7 +802,35 @@ struct NativeReaderLibraryScreen: View {
                 Button("Importar", systemImage: "square.and.arrow.down") {
                     importSourcesPresented = true
                 }
-                NavigationLink("Ajustes") { NativeReaderSettingsScreen() }
+            }
+            Section("Mi biblioteca") {
+                if shownDocuments.isEmpty { Text("No hay documentos con el filtro actual.") }
+                ForEach(shownDocuments) { document in
+                    NavigationLink {
+                        NativeReadingScreen(document: document, speech: speech)
+                    } label: { Text(document.title) }
+                    .accessibilityLabel("\(document.title), \(document.formatLabel)")
+                    .accessibilityHint("Doble toque para abrir. Hay acciones de accesibilidad.")
+                    .accessibilityAction(named: Text("Reproducir")) { play(document) }
+                    .accessibilityAction(named: Text("Información")) { information = document }
+                    .accessibilityAction(named: Text("Ajustes del documento")) {
+                        documentToConfigure = document
+                    }
+                    .accessibilityAction(named: Text("Mover a carpeta")) {
+                        folderForDocument = document
+                    }
+                    .accessibilityAction(named: Text("Añadir a favoritos")) {
+                        library.toggleFavorite(document)
+                    }
+                    .accessibilityAction(named: Text("Cambiar título")) {
+                        documentToRename = document
+                        proposedTitle = document.title
+                    }
+                    .accessibilityAction(named: Text("Eliminar")) {
+                        documentToDelete = document
+                        confirmDeletion = true
+                    }
+                }
             }
             Section("Filtrar y ordenar") {
                 NativeAdjustableChoice(
@@ -835,34 +863,8 @@ struct NativeReaderLibraryScreen: View {
                         }
                 }
             }
-            Section("Mi biblioteca") {
-                if shownDocuments.isEmpty { Text("No hay documentos con el filtro actual.") }
-                ForEach(shownDocuments) { document in
-                    NavigationLink {
-                        NativeReadingScreen(document: document, speech: speech)
-                    } label: { Text(document.title) }
-                    .accessibilityLabel("\(document.title), \(document.formatLabel)")
-                    .accessibilityHint("Doble toque para abrir. Hay acciones de accesibilidad.")
-                    .accessibilityAction(named: Text("Reproducir")) { play(document) }
-                    .accessibilityAction(named: Text("Información")) { information = document }
-                    .accessibilityAction(named: Text("Ajustes del documento")) {
-                        documentToConfigure = document
-                    }
-                    .accessibilityAction(named: Text("Mover a carpeta")) {
-                        folderForDocument = document
-                    }
-                    .accessibilityAction(named: Text("Añadir a favoritos")) {
-                        library.toggleFavorite(document)
-                    }
-                    .accessibilityAction(named: Text("Cambiar título")) {
-                        documentToRename = document
-                        proposedTitle = document.title
-                    }
-                    .accessibilityAction(named: Text("Eliminar")) {
-                        documentToDelete = document
-                        confirmDeletion = true
-                    }
-                }
+            Section {
+                NavigationLink("Ajustes") { NativeReaderSettingsScreen() }
             }
         }
         .tifloScreenSurface()
@@ -1192,6 +1194,9 @@ struct NativeReadingScreen: View {
     @State private var showDocumentActions = false
     @State private var showDocumentInformation = false
     @State private var showSavedMarks = false
+    @State private var showDocumentSearch = false
+    @State private var documentSearchQuery = ""
+    @State private var positionBeforeSearch: Int?
     @State private var programmaticFocusRequest = false
     @State private var actionMessage: String?
     @AccessibilityFocusState private var focusedFragment: Int?
@@ -1230,6 +1235,28 @@ struct NativeReadingScreen: View {
     private var excerpt: String {
         guard !textLayout.fragments.isEmpty else { return "" }
         return textLayout.fragments[textLayout.fragmentIndex(for: readingOffset)]
+    }
+
+    private var documentSearchResults: [(offset: Int, preview: String)] {
+        let query = documentSearchQuery.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !query.isEmpty, !latest.body.isEmpty else { return [] }
+        let body = latest.body
+        var results: [(offset: Int, preview: String)] = []
+        var cursor = body.startIndex
+        while cursor < body.endIndex, results.count < 100,
+              let match = body.range(of: query, options: [.caseInsensitive, .diacriticInsensitive],
+                                     range: cursor..<body.endIndex) {
+            let offset = body.distance(from: body.startIndex, to: match.lowerBound)
+            let previewStart = body.index(match.lowerBound, offsetBy: -45,
+                                          limitedBy: body.startIndex) ?? body.startIndex
+            let previewEnd = body.index(match.upperBound, offsetBy: 75,
+                                        limitedBy: body.endIndex) ?? body.endIndex
+            let preview = String(body[previewStart..<previewEnd])
+                .replacingOccurrences(of: "\n", with: " ")
+            results.append((offset: offset, preview: preview))
+            cursor = match.upperBound > cursor ? match.upperBound : body.index(after: cursor)
+        }
+        return results
     }
 
     private func persistPosition() {
@@ -1548,11 +1575,6 @@ struct NativeReadingScreen: View {
                 @unknown default: break
                 }
             }
-            Button("Detener") { stopPlayback() }
-            Button("Audio") { showAudioSettings = true }
-                .accessibilityHint("Abre velocidad, voz e idioma de lectura.")
-            Button("Visual") { showVisualSettings = true }
-                .accessibilityHint("Abre tamaño de letra y presentación visual.")
         }
         .buttonStyle(.bordered)
         .controlSize(.small)
@@ -1608,6 +1630,13 @@ struct NativeReadingScreen: View {
             }
             Button("Marcas guardadas") { showSavedMarks = true }
             Button("Añadir marca") { addBookmark() }
+            if !latest.body.isEmpty {
+                Button("Buscar en el documento") {
+                    positionBeforeSearch = readingOffset
+                    documentSearchQuery = ""
+                    showDocumentSearch = true
+                }
+            }
             Text(progressDescription)
                 .font(.footnote)
                 .accessibilityLabel(progressDescription)
@@ -1637,6 +1666,10 @@ struct NativeReadingScreen: View {
                 choices: Self.percentages,
                 selectedIndex: positionBinding
             )
+            Button("Audio") { showAudioSettings = true }
+                .accessibilityHint("Abre velocidad, voz e idioma de lectura.")
+            Button("Visual") { showVisualSettings = true }
+                .accessibilityHint("Abre tamaño de letra y presentación visual.")
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 8)
@@ -1855,6 +1888,36 @@ struct NativeReadingScreen: View {
 
     private var readerWithSheets: some View {
         readerChrome
+        .sheet(isPresented: $showDocumentSearch) {
+            NavigationStack {
+                List {
+                    TextField("Texto que deseas encontrar", text: $documentSearchQuery)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                    if !documentSearchQuery.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                        if documentSearchResults.isEmpty {
+                            Text("No hay coincidencias en el texto del documento.")
+                        } else {
+                            Text("\(documentSearchResults.count) coincidencias, hasta un máximo de 100.")
+                            ForEach(Array(documentSearchResults.enumerated()), id: \.offset) { index, result in
+                                Button("Resultado \(index + 1): \(result.preview)") {
+                                    jump(to: result.offset)
+                                    showDocumentSearch = false
+                                }
+                            }
+                        }
+                    }
+                    if let previous = positionBeforeSearch {
+                        Button("Volver a la posición anterior") {
+                            jump(to: previous)
+                            showDocumentSearch = false
+                        }
+                    }
+                }
+                .navigationTitle("Buscar en el documento")
+                .toolbar { Button("Cerrar") { showDocumentSearch = false } }
+            }
+        }
         .sheet(isPresented: $showDocumentInformation) {
             NavigationStack {
                 List {

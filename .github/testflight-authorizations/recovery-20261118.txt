@@ -7,3 +7,5 @@ Reintento después de validar la excepción explícita en las pruebas de segurid
 Segundo reintento: Apple rechazó el tren 1.3/1.0; app y extensión usan 1.5 y el envío valida errores de altool.
 
 Tercer intento: verificador IPA sincronizado con versión de distribución 1.5, sin omitir comprobaciones de firma.
+
+Cuarto intento: Info.plist de la extensión usa MARKETING_VERSION dinámico, idéntico al de la aplicación.

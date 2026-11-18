@@ -45,6 +45,7 @@
 - [ ] Auditar si hubo una implementación iOS posterior a la versión pública y verificar su origen antes de reutilizarla; no trasladar sin más código de Android o web.
 - [ ] Crear pruebas de selección de motor: voces iOS predeterminadas, Gemini solo con credencial válida, Phonon solo con modelo compatible instalado.
 - [ ] Gemini: guía sencilla por pasos para abrir el servicio oficial, crear/copiar la clave, volver, «Pegar clave» desde portapapeles, guardar de forma segura y comprobar conexión/voz con mensajes VoiceOver; confirmar antes de eliminar. No pronunciar ni mostrar el secreto en avisos.
+- [ ] Abrir la página oficial en el navegador integrado del sistema con control accesible «Cerrar/Volver a TifloLector»; al regresar, dirigir el foco de accesibilidad al cuadro «Clave API de Gemini» y situar «Pegar clave copiada» inmediatamente después. Probar con VoiceOver todo el trayecto Google → copia → retorno → pegado sin necesidad de recorrer de nuevo los ajustes.
 - [ ] Advertir claramente que la creación de clave puede requerir cuenta y condiciones de Google, y que las pruebas y el uso podrían consumir cuota/costes, sin prometer gratuidad.
 - [ ] Phonon: verificar compatibilidad iOS/modelos/licencia, selección y muestra accesibles, mensajes claros si falta un modelo; no pedir clave API de Phonon.
 - [ ] Comprobar experiencia completa con lector de pantalla y errores previsibles; ejecutar pruebas y commit antes de compilar.

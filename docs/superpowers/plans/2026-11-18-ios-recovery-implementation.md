@@ -44,12 +44,15 @@
 **Archivos:** exportadores iOS, NativeDaisyNCX.swift, Share Extension, pruebas de exportación.
 - [ ] Registrar fallos de DAISY incompleto, ZIP de MP3 y diferenciación EPUB/DAISY importado.
 - [ ] Exportar original, DAISY de texto+audio+SMIL+NCX, ZIP MP3 Voice Dream y hoja Compartir accesible.
+- [ ] Añadir «Compartir documento» a las acciones de accesibilidad de la obra y al menú de acciones; al compartir DAISY, entregar el ZIP íntegro y no una pista suelta.
+- [ ] Tras generar DAISY, ofrecer explícitamente «Compartir» o «No compartir y volver a la biblioteca»; ambas opciones accesibles con VoiceOver y sin nueva exportación involuntaria.
 - [ ] Validar estructura ZIP en automatización y reproductor externo; commit.
 
 ### Tarea 5. Vídeos, Actualidad y elementos comunes
 **Archivos:** NativeYouTubePlayer.swift, NativeScreens.swift y pruebas.
 - [ ] Escribir prueba de avance entre elementos de lista real de YouTube, orden, pausa y foco.
 - [ ] Integrar reproducción continua; probar con condiciones de error.
+- [ ] Al terminar cada vídeo de una lista, iniciar el siguiente sin pulsar Reproducir de nuevo; conservar Pausa y la navegación manual y evitar saltos automáticos al final, al cancelar o tras un error.
 - [ ] Validar fechas de canales, traducción y retorno; incorporar solo faltantes y commit.
 
 ### Tarea 6. Incorporación selectiva Mi Música

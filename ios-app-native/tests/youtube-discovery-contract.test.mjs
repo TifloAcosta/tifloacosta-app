@@ -35,7 +35,7 @@ test('Channel and subscription browsing stay native, paginated and use the acces
   assert.match(screens, /account\.loadSubscriptions\(loadMore: true\)/);
   assert.match(screens, /Button\("Mostrar diez canales más"\)/);
   assert.match(screens, /Button\("Mostrar diez vídeos más"\)/);
-  assert.match(screens, /NativeYouTubePlayerScreen\(video: video\)/);
+  assert.match(screens, /NativeYouTubePlayerScreen\(video: video, playlist:/);
   assert.match(player, /appendingPathComponent\("channel-videos"\)/);
   assert.match(player, /URLQueryItem\(name: "filter"/);
   assert.match(player, /@Published private\(set\) var channels/);

@@ -3,3 +3,5 @@ Enviar exclusivamente a TestFlight la rama recovery/ios-public-500157-20261118, 
 Esta señal se crea una sola vez y solo este cambio activa el envío.
 
 Reintento después de validar la excepción explícita en las pruebas de seguridad.
+
+Segundo reintento: Apple rechazó el tren 1.3/1.0; app y extensión usan 1.5 y el envío valida errores de altool.

@@ -329,6 +329,19 @@ struct NativeReaderSettingsScreen: View {
     @AppStorage("native-reader-navigation-unit") private var navigationUnit = 0
     @AppStorage("native-reader-reading-mode") private var readingMode = 0
     @AppStorage("native-reader-presentation-mode") private var presentationMode = 0
+    @AppStorage("native-reader-speech-engine") private var speechEngine = "system"
+    @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
+
+    private var engineSelection: Binding<Int> {
+        Binding(
+            get: {
+                if speechEngine == "gemini" { return 1 }
+                if speechEngine == "phonon", NativePhononRuntime.isUsable { return 2 }
+                return 0
+            },
+            set: { index in speechEngine = ["system", "gemini", "phonon"][max(0, min(2, index))] }
+        )
+    }
 
     var body: some View {
         List {
@@ -350,9 +363,27 @@ struct NativeReaderSettingsScreen: View {
                     NativeReaderAudioControls()
                 }
                 Section("Servicios de voz opcionales") {
+                    NativeAdjustableChoice(
+                        title: "Motor de lectura",
+                        choices: ["Voces del iPhone", "Gemini"] +
+                            (NativePhononRuntime.isUsable ? ["Phonon"] : []),
+                        selectedIndex: engineSelection
+                    )
+                    if speechEngine == "gemini" {
+                        NativeAdjustableChoice(
+                            title: "Voz Gemini",
+                            choices: NativeGeminiSpeech.voices,
+                            selectedIndex: Binding(
+                                get: { NativeGeminiSpeech.voices.firstIndex(of: geminiVoice) ?? 0 },
+                                set: { geminiVoice = NativeGeminiSpeech.voices[$0] }
+                            )
+                        )
+                    }
                     NavigationLink("Preparar clave de Gemini") {
                         NativeGeminiSetupScreen()
                     }
+                    Text("Las voces del iPhone siguen disponibles sin configurar cuentas. Gemini utiliza tu clave personal y puede consumir cuota.")
+                        .font(.footnote)
                 }
             } else if presentationMode == 1 {
                 Section("Lectura visual") { NativeReaderVisualControls() }

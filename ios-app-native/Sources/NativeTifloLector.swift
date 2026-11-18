@@ -391,6 +391,20 @@ final class NativeReadingSpeech: ObservableObject {
         audioDelegate.onFinish = { [weak self] completed, success in
             Task { @MainActor [weak self] in
                 guard let self, self.player === completed else { return }
+                if self.externalActive {
+                    self.player = nil
+                    guard success else {
+                        self.externalFail("La reproducción de la voz externa se ha interrumpido.")
+                        return
+                    }
+                    self.externalPlayedCharacters += self.externalChunks[self.externalIndex].count
+                    self.externalIndex += 1
+                    self.textCharacterOffset = self.externalBaseCharacters + self.externalPlayedCharacters
+                    self.textPercent = min(100, Int(Double(self.textCharacterOffset) * 100 /
+                        Double(max(1, self.externalTotalCharacters))))
+                    self.requestExternalChunk()
+                    return
+                }
                 self.isPlaying = false
                 self.isPaused = false
                 guard success, self.playlistURLs.indices.contains(self.playlistIndex + 1) else {
@@ -409,12 +423,25 @@ final class NativeReadingSpeech: ObservableObject {
         }
     }
     private var player: AVAudioPlayer?
+    private var externalActive = false
+    private var externalTask: Task<Void, Never>?
+    private var externalGeneration = 0
+    private var externalChunks: [String] = []
+    private var externalIndex = 0
+    private var externalPlayedCharacters = 0
+    private var externalBaseCharacters = 0
+    private var externalTotalCharacters = 0
+    private var externalEngine: NativeGeminiAudioExport.Engine = .gemini
+    private var externalVoice = "Kore"
+    private var externalSpeed = 1.0
+    private var externalPendingData: Data?
+    private var externalError: ((String) -> Void)?
     private var sleepTask: Task<Void, Never>?
     var onSleepExpired: (() -> Void)?
     @Published private(set) var isPlaying = false
     @Published private(set) var isPaused = false
 
-    var hasAudio: Bool { player != nil }
+    var hasAudio: Bool { player != nil && !externalActive }
     var audioDuration: TimeInterval { player?.duration ?? 0 }
     var audioElapsed: TimeInterval { player?.currentTime ?? 0 }
     var audioPercent: Int {
@@ -449,6 +476,97 @@ final class NativeReadingSpeech: ObservableObject {
         synthesizer.speak(utterance)
         isPlaying = true
         isPaused = false
+    }
+
+    func playExternalText(_ text: String, engine: NativeGeminiAudioExport.Engine,
+                          voice: String, speed: Double, baseCharacters: Int,
+                          totalCharacters: Int, onError: @escaping (String) -> Void) {
+        stop()
+        guard !text.isEmpty else { return }
+        do {
+            // The reading stream has no fixed 60,000-character limit: requests
+            // are made in individual segments and only one is kept in memory.
+            externalChunks = try NativeGeminiAudioExport.chunks(text, engine: .system)
+        } catch {
+            onError(error.localizedDescription)
+            return
+        }
+        externalActive = true
+        externalEngine = engine
+        externalVoice = voice
+        externalSpeed = speed
+        externalBaseCharacters = baseCharacters
+        externalTotalCharacters = max(1, totalCharacters)
+        textCharacterOffset = baseCharacters
+        textPercent = Int(Double(baseCharacters) * 100 / Double(externalTotalCharacters))
+        externalError = onError
+        isPlaying = true
+        isPaused = false
+        requestExternalChunk()
+    }
+
+    private func externalFail(_ message: String) {
+        let callback = externalError
+        stop()
+        callback?(message)
+    }
+
+    private func playExternalData(_ data: Data) {
+        guard externalActive else { return }
+        if isPaused { externalPendingData = data; return }
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
+            try AVAudioSession.sharedInstance().setActive(true)
+            let audio = try AVAudioPlayer(data: data)
+            audio.delegate = audioDelegate
+            audio.enableRate = true
+            audio.rate = Float(max(0.5, min(2.0, externalSpeed)))
+            audio.prepareToPlay()
+            guard audio.play() else {
+                externalFail("No se ha podido iniciar el audio de la voz seleccionada.")
+                return
+            }
+            player = audio
+            isPlaying = true
+        } catch {
+            externalFail("No se ha podido reproducir la voz externa: \(error.localizedDescription)")
+        }
+    }
+
+    private func requestExternalChunk() {
+        guard externalActive, externalTask == nil, !isPaused else { return }
+        guard externalChunks.indices.contains(externalIndex) else {
+            externalActive = false
+            isPlaying = false
+            isPaused = false
+            textCharacterOffset = externalTotalCharacters
+            textPercent = 100
+            return
+        }
+        let fragment = externalChunks[externalIndex]
+        if fragment.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            externalPlayedCharacters += fragment.count
+            externalIndex += 1
+            requestExternalChunk()
+            return
+        }
+        let generation = externalGeneration
+        let engine = externalEngine, voice = externalVoice
+        externalTask = Task { [weak self] in
+            do {
+                let data = try await NativeGeminiAudioExport.synthesize(
+                    fragment, voice: voice, engine: engine)
+                guard let self, self.externalActive, self.externalGeneration == generation,
+                      !Task.isCancelled else { return }
+                self.externalTask = nil
+                self.playExternalData(data)
+            } catch {
+                guard let self, self.externalActive, self.externalGeneration == generation,
+                      !Task.isCancelled else { return }
+                self.externalTask = nil
+                self.externalFail("No se pudo generar la voz: \(error.localizedDescription)")
+            }
+        }
     }
 
     private func startAudio(_ url: URL, speed: Double, at percent: Int) throws {
@@ -509,6 +627,7 @@ final class NativeReadingSpeech: ObservableObject {
     }
 
     func pause() {
+        if externalActive { updateExternalProgress() }
         if let player { player.pause() } else { synthesizer.pauseSpeaking(at: .word) }
         sleep(after: 0) // Al pausar no sigue corriendo la cuenta del apagado.
         isPlaying = false
@@ -517,14 +636,35 @@ final class NativeReadingSpeech: ObservableObject {
 
     func resume() {
         if let player { player.play() }
+        else if externalActive {
+            isPaused = false
+            if let data = externalPendingData {
+                externalPendingData = nil
+                playExternalData(data)
+            } else { requestExternalChunk() }
+        }
         else { synthesizer.continueSpeaking() }
         isPlaying = true
         isPaused = false
     }
 
     func refresh() {
+        if externalActive {
+            if isPlaying { updateExternalProgress() }
+            return
+        }
         if let player, !player.isPlaying && !isPaused { isPlaying = false }
         if player == nil && !synthesizer.isSpeaking && !isPaused { isPlaying = false }
+    }
+
+    private func updateExternalProgress() {
+        guard externalActive, let player,
+              externalChunks.indices.contains(externalIndex), player.duration > 0 else { return }
+        let fraction = max(0, min(1, player.currentTime / player.duration))
+        let partial = Int(Double(externalChunks[externalIndex].count) * fraction)
+        textCharacterOffset = externalBaseCharacters + externalPlayedCharacters + partial
+        textPercent = min(100, Int(Double(textCharacterOffset) * 100 /
+            Double(max(1, externalTotalCharacters))))
     }
 
     func sleep(after minutes: Int) {
@@ -548,6 +688,13 @@ final class NativeReadingSpeech: ObservableObject {
     }
 
     func stop() {
+        externalGeneration += 1
+        externalTask?.cancel()
+        externalTask = nil
+        externalActive = false
+        externalPendingData = nil
+        externalChunks = []
+        externalError = nil
         sleepTask?.cancel()
         sleepTask = nil
         player?.stop()
@@ -1060,6 +1207,8 @@ struct NativeReadingScreen: View {
     @AppStorage("native-reader-navigation-unit") private var navigationUnit = 0
     @AppStorage("native-reader-reading-mode") private var readingMode = 0
     @AppStorage("native-reader-presentation-mode") private var presentationMode = 0
+    @AppStorage("native-reader-speech-engine") private var speechEngine = "system"
+    @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
     @State private var didApplyOpeningMode = false
     @State private var sleepIndex = 0 // Each open document starts with timer disabled.
     @State private var sleepDeadline: Date?
@@ -1199,6 +1348,24 @@ struct NativeReadingScreen: View {
         }
         let remainder = String(document.body.dropFirst(readingOffset))
         guard !remainder.isEmpty else { return }
+        if speechEngine == "gemini" {
+            guard NativeGeminiKeychain.load() != nil else {
+                actionMessage = "Gemini necesita una clave. Abre Ajustes de TifloLector, Preparar clave de Gemini, o selecciona Voces del iPhone."
+                return
+            }
+            speech.playExternalText(remainder, engine: .gemini, voice: geminiVoice,
+                                    speed: speed, baseCharacters: readingOffset,
+                                    totalCharacters: document.body.count,
+                                    onError: { error in actionMessage = error })
+            return
+        }
+        if speechEngine == "phonon" && NativePhononRuntime.isUsable {
+            speech.playExternalText(remainder, engine: .phonon, voice: "",
+                                    speed: speed, baseCharacters: readingOffset,
+                                    totalCharacters: document.body.count,
+                                    onError: { error in actionMessage = error })
+            return
+        }
         speech.play(remainder, speed: speed, pitch: pitch,
                     language: AVSpeechSynthesisVoice(identifier: effectiveVoiceID)?.language ?? "es-ES",
                     voiceIdentifier: effectiveVoiceID,
@@ -1297,6 +1464,10 @@ struct NativeReadingScreen: View {
 
     private func pausePlayback() {
         speech.pause()
+        if tracks.isEmpty {
+            readingOffset = max(0, min(textLayout.totalCharacters, speech.textCharacterOffset))
+            currentPercent = speech.textPercent
+        }
         sleepDeadline = nil
         persistPosition()
     }

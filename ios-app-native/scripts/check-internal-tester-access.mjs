@@ -30,9 +30,11 @@ for (const group of groups.data) {
   const testers = await apple(`betaTesters?filter%5BbetaGroups%5D=${group.id}&limit=200`);
   const addresses = testers.data.map(t => (t.attributes.email || '').toLowerCase());
   const tonyMailboxFound = addresses.includes('tonytenerife@gmail.com');
+  const developerMailboxFound = addresses.includes('tifloacosta@yahoo.es');
   console.log(`Grupo ${name}: interno=${group.attributes.isInternalGroup}; ` +
     `miembros=${testers.data.length}; acceso_todas=${group.attributes.hasAccessToAllBuilds}; ` +
-    `buzón_habitual_de_Tony=${tonyMailboxFound ? 'en_grupo' : 'no_consta'}`);
+    `buzón_habitual_de_Tony=${tonyMailboxFound ? 'en_grupo' : 'no_consta'}; ` +
+    `ID_desarrollador=${developerMailboxFound ? 'en_grupo' : 'no_consta'}`);
   const builds = await apple(`betaGroups/${group.id}/builds?limit=100`);
   const target = builds.data.find(b => String(b.attributes.version) === '500168');
   console.log(`Compilación 500168 asignada directamente a ${name}: ${Boolean(target)}`);

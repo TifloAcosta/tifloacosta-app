@@ -349,12 +349,6 @@ struct NativeReaderSettingsScreen: View {
                     )
                     NativeReaderAudioControls()
                 }
-                Section("Motor de lectura con voz") {
-                    NativeSpeechProviderChoice()
-                }
-                Section("Microsoft Azure Speech, prueba experimental") {
-                    NativeAzureSpeechSettings()
-                }
             } else if presentationMode == 1 {
                 Section("Lectura visual") { NativeReaderVisualControls() }
             } else {

@@ -117,7 +117,15 @@ jobs:
           set -euo pipefail
           IPA="$(find "$RUNNER_TEMP/native-export" -maxdepth 1 -name '*.ipa' -print -quit)"
           test -f "$IPA"
-          xcrun altool --upload-app --type ios --file "$IPA" --apiKey "$API_ID" --apiIssuer "$API_ISSUER"
+          UPLOAD_LOG="$(mktemp)"
+          if ! xcrun altool --upload-app --type ios --file "$IPA" --apiKey "$API_ID" --apiIssuer "$API_ISSUER" 2>&1 | tee "$UPLOAD_LOG"; then
+            echo "::error::Apple ha rechazado el envío a TestFlight"
+            exit 1
+          fi
+          if grep -Eiq 'UPLOAD FAILED|Validation failed|ERROR: \[altool' "$UPLOAD_LOG"; then
+            echo "::error::Apple ha rechazado el IPA aunque altool haya devuelto un código de éxito"
+            exit 1
+          fi
           echo "Compilación enviada. Apple debe completar su procesamiento antes de verla en TestFlight."
       - name: Confirmar beta disponible para probadores internos con Apple
         timeout-minutes: 18

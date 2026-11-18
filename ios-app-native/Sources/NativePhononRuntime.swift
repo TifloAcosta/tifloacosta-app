@@ -67,6 +67,12 @@ final class NativePhononDriver {
 #endif
 
 enum NativePhononRuntime {
+    static var isIncluded: Bool {
+        #if canImport(PhononTTS)
+        if #available(iOS 18, *) { return true }
+        #endif
+        return false
+    }
     enum RuntimeError: LocalizedError {
         case engineUnavailable, modelMissing, unsupportedLanguage, empty
         var errorDescription: String? {

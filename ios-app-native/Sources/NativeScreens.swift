@@ -6,6 +6,7 @@ private enum NativeDestination: String, CaseIterable, Hashable, Identifiable {
     case actualidad = "Actualidad"
     case recursos = "Recursos"
     case tifloLector = "TifloLector"
+    case miMusica = "Mi Música"
     case recibidos = "Recibidos"
     case novedades = "Novedades"
     case descargas = "Descargar desde un enlace"
@@ -295,6 +296,7 @@ struct NativeHomeScreen: View {
                 case .actualidad: NativeNewsScreen()
                 case .recursos: NativeResourcesScreen()
                 case .tifloLector: NativeReaderLibraryScreen()
+                case .miMusica: NativeMyMusicScreen()
                 case .recibidos: NativeInboxScreen()
                 case .novedades: NativeUpdatesScreen()
                 case .descargas: NativeDownloadsScreen()
@@ -741,7 +743,7 @@ private struct NativeYouTubeSearchScreen: View {
         .tifloScreenSurface()
         .navigationTitle("Buscar en YouTube")
         .sheet(item: $selectedVideo) { video in
-            NavigationStack { NativeYouTubePlayerScreen(video: video) }
+            NavigationStack { NativeYouTubePlayerScreen(video: video, playlist: youtubeSearch.videos) }
         }
         .sheet(item: $commentingOnVideo) { video in
             NavigationStack { NativeYouTubeCommentScreen(video: video) }
@@ -802,7 +804,10 @@ private struct NativeTifloAcostaChannelVideosScreen: View {
         .tifloScreenSurface()
         .navigationTitle("Vídeos de TifloAcosta")
         .sheet(item: $selectedVideo) { video in
-            NavigationStack { NativeYouTubePlayerScreen(video: video) }
+            NavigationStack {
+                NativeYouTubePlayerScreen(video: video,
+                    playlist: Array(ordered.prefix(visibleCount)).compactMap(NativeYouTubeVideo.init(catalog:)))
+            }
         }
         .sheet(item: $commentingOnVideo) { video in
             NavigationStack { NativeYouTubeCommentScreen(video: video) }
@@ -1320,7 +1325,7 @@ private struct NativeYouTubeChannelVideosScreen: View {
         .tifloScreenSurface()
         .navigationTitle(channel.title)
         .sheet(item: $selectedVideo) { video in
-            NavigationStack { NativeYouTubePlayerScreen(video: video) }
+            NavigationStack { NativeYouTubePlayerScreen(video: video, playlist: youtubeSearch.videos) }
         }
         .sheet(item: $commentingOnVideo) { video in
             NavigationStack { NativeYouTubeCommentScreen(video: video) }

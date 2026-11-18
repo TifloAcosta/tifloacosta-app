@@ -51,3 +51,6 @@
 "guide.12.paragraph.1" = "Escolhe o idioma da aplicação entre espanhol, inglês, português, francês, italiano e alemão. A preferência fica guardada.";
 "guide.12.paragraph.2" = "Abre as definições visuais para ajustar contraste, tamanho do texto, espaçamento e reforço das letras.";
 "guide.12.paragraph.3" = "Consulta a versão instalada e o site oficial. As preferências de leitura de cada obra ficam no TifloLector.";
+"guide.13.title" = "A minha música";
+"guide.13.paragraph.1" = "A minha música reúne as tuas canções locais e permite reproduzi-las, organizá-las em listas e pastas inteligentes e ajustar o som com o equalizador.";
+"guide.13.paragraph.2" = "Usa Importar músicas para adicionar ficheiros de áudio. As opções de cópia de segurança permitem guardar o catálogo ou criar uma cópia completa com os ficheiros.";

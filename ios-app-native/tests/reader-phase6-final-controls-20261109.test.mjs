@@ -29,10 +29,10 @@ test('Navegación, marcas y apagado preceden al texto; ajustes secundarios queda
   assert.match(source, /Tiempo restante estimado/);
 });
 
-test('Toque mágico solo controla una reproducción existente sin iniciar audio externo', () => {
+test('Toque mágico pausa, reanuda e inicia la lectura a petición', () => {
   const chrome = source.slice(source.lastIndexOf('.accessibilityAction(.magicTap)'), source.lastIndexOf('.accessibilityAction(named: Text("Añadir marca"))'));
   assert.match(chrome, /\.accessibilityAction\(\.magicTap\)/);
   assert.match(chrome, /if speech\.isPlaying/);
   assert.match(chrome, /else if speech\.isPaused/);
-  assert.doesNotMatch(chrome, /\bplay\(\)/);
+  assert.match(chrome, /else \{ play\(\) \}/);
 });

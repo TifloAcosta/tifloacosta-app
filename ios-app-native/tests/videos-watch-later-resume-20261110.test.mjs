@@ -24,7 +24,7 @@ test('Progreso del vídeo se retoma y descarta el punto al terminar', () => {
   assert.match(player, /func seek\(toSeconds seconds: Double\)/);
   assert.match(player, /\.onChange\(of: engine\.ready\)/);
   assert.match(player, /engine\.seek\(toSeconds: seconds\)/);
-  assert.match(player, /personalLibrary\.rememberPlayback\(video, seconds: engine\.currentTime/);
+  assert.match(player, /personalLibrary\.rememberPlayback\(currentVideo, seconds: engine\.currentTime/);
 });
 
 test('El rotor permite guardar en Ver después sin abrir el vídeo', () => {

@@ -37,8 +37,8 @@ test('El reproductor permite interactuar con YouTube y control VoiceOver con la 
     'Publicar comentario', 'Cancelar comentario', 'Cerrar sesión de YouTube']) {
     assert.ok(player.includes(expected), expected);
   }
-  assert.match(player, /await account\.publishComment\(commentText, videoID: video\.id\)/);
-  assert.match(player, /account\.loadState\(videoID: video\.id\)/);
+  assert.match(player, /await account\.publishComment\(commentText, videoID: currentVideo\.id\)/);
+  assert.match(player, /account\.loadState\(videoID: currentVideo\.id\)/);
   assert.match(player, /\.accessibilityLabel\("Escribir comentario en YouTube"\)/);
   assert.match(account, /"unsubscribe"/);
   assert.match(account, /"unlike"/);

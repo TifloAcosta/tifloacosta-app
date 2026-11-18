@@ -13,7 +13,7 @@ test('The reading opening focus preference is persistent, opt-in and applied onc
   assert.match(settings, /Toggle\("Foco inicial en Reproducir", isOn: automaticReadingBinding\)/);
   assert.match(settings, /get: \{ readingMode == 1 \}/);
   assert.match(reader, /if !didApplyOpeningMode/);
-  assert.match(reader, /if readingMode == 1 \{ playbackButtonFocused = true \}/);
+  assert.match(reader, /if presentationMode == 0 && readingMode == 1 \{ playbackButtonFocused = true \}/);
 });
 
 test('General settings are folded into navigable destinations', () => {

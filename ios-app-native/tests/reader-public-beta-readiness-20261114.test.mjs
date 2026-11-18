@@ -24,5 +24,5 @@ test('a saved DAISY can be shared as the full original ZIP', () => {
 test('opening playback is manual and the selected focus is applied', () => {
   assert.doesNotMatch(reader, /if readingMode == 1 \{ play\(\) \}/);
   assert.doesNotMatch(reader, /startAutomaticReadingAfterOpening/);
-  assert.match(reader, /if readingMode == 1 \{ playbackButtonFocused = true \}/);
+  assert.match(reader, /if presentationMode == 0 && readingMode == 1 \{ playbackButtonFocused = true \}/);
 });

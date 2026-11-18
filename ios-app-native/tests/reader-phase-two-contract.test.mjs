@@ -237,10 +237,10 @@ test('HTML y EPUB retienen enlaces estructurados sin desplazar los marcadores', 
   assert.match(reader, /\(latest\.textLinks \?\? \[\]\)\.map/);
 });
 
-test('Un solo control de reproducción navega por tiempo configurable y estructura DAISY', () => {
-  assert.match(reader, /native-reader-time-step-index/);
-  assert.match(reader, /title: "Intervalo de tiempo"/);
-  assert.match(reader, /timeStepSeconds = \[30, 60, 120, 300\]/);
+test('Un solo control de reproducción navega por un minuto y estructura DAISY', () => {
+  assert.match(reader, /\(5, "Un minuto"\)/);
+  assert.doesNotMatch(reader, /title: "Intervalo de tiempo"/);
+  assert.match(reader, /private let timeStep = 60/);
   assert.match(reader, /TimeInterval\(direction \* timeStep\)/);
   assert.match(reader, /unit == 9 \|\| unit == 10/);
   assert.match(reader, /moveDaisyPoint\(direction, kind:/);

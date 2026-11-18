@@ -51,3 +51,6 @@
 "guide.12.paragraph.1" = "Scegli la lingua dell’app tra spagnolo, inglese, portoghese, francese, italiano e tedesco. La scelta viene memorizzata.";
 "guide.12.paragraph.2" = "Apri le impostazioni visive per regolare contrasto, dimensione del testo, interlinea e testo in grassetto.";
 "guide.12.paragraph.3" = "Controlla la versione installata e il sito ufficiale. Le preferenze di lettura dei singoli documenti si trovano in TifloLector.";
+"guide.13.title" = "La mia musica";
+"guide.13.paragraph.1" = "La mia musica raccoglie i brani locali e permette di riprodurli, organizzarli in playlist e cartelle smart e regolare l’audio con l’equalizzatore.";
+"guide.13.paragraph.2" = "Usa Importa brani per aggiungere file audio. Le opzioni di backup consentono di salvare il catalogo o creare una copia completa con i file.";

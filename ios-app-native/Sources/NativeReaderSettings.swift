@@ -522,6 +522,7 @@ struct NativeReaderDocumentSettingsScreen: View {
 struct NativeReaderSettingsScreen: View {
     @AppStorage("native-reader-navigation-unit") private var navigationUnit = 0
     @AppStorage("native-reader-reading-mode") private var readingMode = 0
+    @AppStorage("native-reader-presentation-mode") private var presentationMode = 0
 
     private var automaticReadingBinding: Binding<Bool> {
         Binding(get: { readingMode == 1 }, set: { readingMode = $0 ? 1 : 0 })
@@ -535,6 +536,15 @@ struct NativeReaderSettingsScreen: View {
                 .accessibilityHint("Configura las voces, la clave API de Gemini y Phonon.")
             NavigationLink("Modo de lectura") {
                 List {
+                    Section("Presentación de lectura") {
+                        NativeAdjustableChoice(
+                            title: "Modo de lectura",
+                            choices: ["Voz", "Visual", "Braille"],
+                            selectedIndex: $presentationMode
+                        )
+                        Text("Voz: el foco puede comenzar en Reproducir. Visual: lectura manual del texto. Braille: lectura manual del mismo texto con la línea braille conectada a VoiceOver. Los tres modos conservan posición y marcas.")
+                            .font(.footnote)
+                    }
                     Section("Al abrir un documento") {
                         Toggle("Foco inicial en Reproducir", isOn: automaticReadingBinding)
                         Text("Activado: al abrir el documento, el foco se sitúa en Reproducir. Desactivado: el foco se sitúa en el texto. La voz solo comienza cuando pulsas Reproducir.")

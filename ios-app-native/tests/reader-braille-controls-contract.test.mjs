@@ -7,11 +7,11 @@ const section = (begin, end) => source.split(begin)[1]?.split(end)[0] ?? '';
 
 test('reader quick controls appear in requested order before text', () => {
   const controls = section('private var quickControls: some View {', 'private var readerFooterControls');
-  const labels = ['playbackRow', 'Modo de navegación', 'Añadir marca', 'Apagado automático', 'Ir a posición'];
+  const labels = ['playbackRow', 'Modo de navegación', 'Añadir marca', 'Buscar en el documento', 'Apagado automático', 'Ir a posición'];
   const positions = labels.map(label => controls.indexOf(label));
   assert.ok(positions.every(pos => pos >= 0));
   assert.deepEqual(positions, [...positions].sort((a, b) => a - b));
-  assert.doesNotMatch(controls, /Button\("Información"|Button\("Buscar en el documento"|Button\("Marcas guardadas"/);
+  assert.doesNotMatch(controls, /Button\("Información"|Button\("Marcas guardadas"/);
 });
 
 test('marks and visual/audio settings precede the document text', () => {
@@ -23,9 +23,8 @@ test('marks and visual/audio settings precede the document text', () => {
   assert.match(footer, /Button\("Visual"/);
 });
 
-test('actions retain information and search but do not duplicate bookmark controls', () => {
+test('actions retain information without duplicating search or bookmark controls', () => {
   const actions = section('private var documentActions: some View {', 'private var bookmarksSheetContent');
   assert.match(actions, /Button\("Información de la obra"/);
-  assert.match(actions, /Button\("Buscar en el documento"/);
-  assert.doesNotMatch(actions, /Button\("Marcas guardadas"|Button\("Añadir marca"/);
+  assert.doesNotMatch(actions, /Button\("Buscar en el documento"|Button\("Marcas guardadas"|Button\("Añadir marca"/);
 });

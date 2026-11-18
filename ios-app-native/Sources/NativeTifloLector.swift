@@ -1,4 +1,5 @@
 import SwiftUI
+import MediaPlayer
 import PDFKit
 import UIKit
 import AVFoundation
@@ -1937,6 +1938,7 @@ struct NativeReadingScreen: View {
     var startTrack: Int? = nil
 
     @EnvironmentObject private var library: NativeReaderLibrary
+    @Environment(\.dismiss) private var dismiss
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @AppStorage("native-reading-text-size") private var textSize = 20.0
     @AppStorage("native-reading-speed-index") private var speedIndex = 2
@@ -1945,8 +1947,8 @@ struct NativeReadingScreen: View {
     @AppStorage("native-reading-line-spacing-index") private var lineSpacingIndex = 0
     @AppStorage("native-reading-strong-text") private var strongText = false
     @AppStorage("native-reader-navigation-unit") private var navigationUnit = 0
-    @AppStorage("native-reader-time-step-index") private var timeStepIndex = 1
     @AppStorage("native-reader-reading-mode") private var readingMode = 0
+    @AppStorage("native-reader-presentation-mode") private var presentationMode = 0
     @AppStorage("native-reader-reading-engine") private var readingEngine = 0
     @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
     @AppStorage("native-reader-phonon-voice") private var phononVoice = ""
@@ -1963,6 +1965,7 @@ struct NativeReadingScreen: View {
     @State private var showTranslation = false
     @State private var showStructure = false
     @State private var showWordTools = false
+    @State private var showTextSelection = false
     @State private var showAudioSettings = false
     @State private var showVisualSettings = false
     @State private var showAudioExport = false
@@ -1988,15 +1991,12 @@ struct NativeReadingScreen: View {
     @AccessibilityFocusState private var focusedFragment: Int?
     @AccessibilityFocusState private var playbackButtonFocused: Bool
     @State private var lastReaderFragment: Int?
+    @State private var remoteCommandTokens: [Any] = []
 
     private let textLayout: NativeReaderTextLayout
     private let wordCount: Int
     private static let percentages = (0...100).map { "\($0) por ciento" }
-    private static let timeStepChoices = ["30 segundos", "1 minuto", "2 minutos", "5 minutos"]
-    private static let timeStepSeconds = [30, 60, 120, 300]
-    private var timeStep: Int {
-        Self.timeStepSeconds[max(0, min(Self.timeStepSeconds.count - 1, timeStepIndex))]
-    }
+    private let timeStep = 60
     private static let sleepChoices = [
         "Desactivado", "5 minutos", "10 minutos", "15 minutos",
         "30 minutos", "45 minutos", "60 minutos"
@@ -2041,7 +2041,7 @@ struct NativeReadingScreen: View {
                 options.append((10, "Referencia DAISY"))
             }
         }
-        if !tracks.isEmpty || !latest.body.isEmpty { options.append((5, "Tiempo")) }
+        if !tracks.isEmpty || !latest.body.isEmpty { options.append((5, "Un minuto")) }
         if latest.hasBookmarks { options.append((6, "Marcas")) }
         if !textLayout.linkStarts.isEmpty || !(latest.textLinks ?? []).isEmpty {
             options.append((8, "Enlaces"))
@@ -2248,6 +2248,43 @@ struct NativeReadingScreen: View {
         speech.pause()
         sleepDeadline = nil
         persistPosition()
+    }
+
+    private func registerRemotePlaybackCommands() {
+        guard remoteCommandTokens.isEmpty else { return }
+        let remoteCommandCenter = MPRemoteCommandCenter.shared()
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+        remoteCommandCenter.playCommand.isEnabled = true
+        remoteCommandCenter.pauseCommand.isEnabled = true
+        remoteCommandCenter.togglePlayPauseCommand.isEnabled = true
+        let playToken = remoteCommandCenter.playCommand.addTarget { _ in
+            DispatchQueue.main.async {
+                if !speech.isPlaying { play() }
+            }
+            return .success
+        }
+        let pauseToken = remoteCommandCenter.pauseCommand.addTarget { _ in
+            DispatchQueue.main.async {
+                if speech.isPlaying { pausePlayback() }
+            }
+            return .success
+        }
+        let toggleToken = remoteCommandCenter.togglePlayPauseCommand.addTarget { _ in
+            DispatchQueue.main.async {
+                if speech.isPlaying { pausePlayback() } else { play() }
+            }
+            return .success
+        }
+        remoteCommandTokens = [playToken, pauseToken, toggleToken]
+    }
+
+    private func unregisterRemotePlaybackCommands() {
+        guard remoteCommandTokens.count == 3 else { return }
+        let remoteCommandCenter = MPRemoteCommandCenter.shared()
+        remoteCommandCenter.playCommand.removeTarget(remoteCommandTokens[0])
+        remoteCommandCenter.pauseCommand.removeTarget(remoteCommandTokens[1])
+        remoteCommandCenter.togglePlayPauseCommand.removeTarget(remoteCommandTokens[2])
+        remoteCommandTokens = []
     }
 
     private func stopPlayback() {
@@ -2830,14 +2867,10 @@ struct NativeReadingScreen: View {
                 selectedIndex: navigationSelection
             )
             trackButtons
-            if effectiveNavigationUnit == 5 {
-                NativeAdjustableChoice(
-                    title: "Intervalo de tiempo",
-                    choices: Self.timeStepChoices,
-                    selectedIndex: $timeStepIndex
-                )
-            }
             Button("Añadir marca") { addBookmarkFromReaderSelection() }
+            if !latest.body.isEmpty {
+                Button("Buscar en el documento") { openDocumentSearch() }
+            }
             NativeAdjustableChoice(
                 title: "Apagado automático",
                 choices: Self.sleepChoices,
@@ -2901,7 +2934,7 @@ struct NativeReadingScreen: View {
     /// Restore manual VoiceOver/braille reading without starting audio or
     /// stealing focus from an active speech session.
     private func restoreManualReadingFocus(using proxy: ScrollViewProxy) {
-        guard readingMode != 1, !speech.isPlaying,
+        guard (presentationMode != 0 || readingMode != 1), !speech.isPlaying,
               !textLayout.fragmentStarts.isEmpty else { return }
         let savedOffset = max(0, min(textLayout.totalCharacters,
             latest.lastTextOffset ?? readingOffset))
@@ -3023,7 +3056,6 @@ struct NativeReadingScreen: View {
     private var documentActions: some View {
         Button("Información de la obra") { showDocumentInformation = true }
         if !latest.body.isEmpty {
-            Button("Buscar en el documento") { openDocumentSearch() }
             if let positionBeforeSearch {
                 Button("Volver a la posición anterior a la búsqueda") {
                     jump(to: positionBeforeSearch)
@@ -3049,6 +3081,7 @@ struct NativeReadingScreen: View {
         }
         if !latest.body.isEmpty {
             Button("Exportar texto") { exportText() }
+            Button("Seleccionar y copiar texto") { showTextSelection = true }
             Button("Exportar audio MP3 o DAISY") { showAudioExport = true }
             Button("Diccionario y pronunciación") {
                 if speech.isPlaying { pausePlayback() }
@@ -3195,7 +3228,11 @@ struct NativeReadingScreen: View {
             Button("Compartir") {
                 if let savedExportURL { NativeShare.present(url: savedExportURL) }
             }
-            Button("Cancelar", role: .cancel) { savedExportURL = nil }
+            Button("No compartir y volver a la biblioteca", role: .cancel) {
+                savedExportURL = nil
+                persistPosition()
+                dismiss()
+            }
         } message: {
             Text("El archivo MP3 o DAISY permanece en la biblioteca. Puedes compartirlo también más adelante.")
         }
@@ -3235,6 +3272,19 @@ struct NativeReadingScreen: View {
         }
         .sheet(isPresented: $showSavedMarks) { bookmarksSheetContent }
         .sheet(isPresented: $showDocumentSearch) { documentSearchSheetContent }
+        .sheet(isPresented: $showTextSelection) {
+            NavigationStack {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Selecciona con VoiceOver las palabras o párrafos que necesites y utiliza Copiar. Al cerrar regresarás al mismo punto del libro.")
+                        .font(.footnote)
+                    NativeReaderSelectableText(text: latest.body, requestedOffset: readingOffset)
+                }
+                .padding(.horizontal, 14)
+                .tifloScreenSurface()
+                .navigationTitle("Seleccionar y copiar texto")
+                .toolbar { Button("Cerrar") { showTextSelection = false } }
+            }
+        }
         .sheet(isPresented: $showStructure) { structureSheetContent }
         .sheet(isPresented: $showWordTools) {
             NativeReaderWordToolsScreen(voiceIdentifier: effectiveVoiceID, pitch: pitch)
@@ -3250,6 +3300,7 @@ struct NativeReadingScreen: View {
     var body: some View {
         readerWithSheets
         .onAppear {
+            registerRemotePlaybackCommands()
             let initial = max(0, min(100, startPercent ?? latest.lastPercent ?? 0))
             trackIndex = min(max(0, startTrack ?? latest.lastTrackIndex ?? 0),
                              max(0, tracks.count - 1))
@@ -3266,10 +3317,10 @@ struct NativeReadingScreen: View {
             NativeQuickBookmarkBridge.saveActiveReader = { addBookmark() }
             if !didApplyOpeningMode {
                 didApplyOpeningMode = true
-                if readingMode == 1 {
+                if presentationMode == 0 && readingMode == 1 {
                     Task { @MainActor in
                         await Task.yield()
-                        if readingMode == 1 { playbackButtonFocused = true }
+                        if presentationMode == 0 && readingMode == 1 { playbackButtonFocused = true }
                     }
                 }
             }
@@ -3310,6 +3361,7 @@ struct NativeReadingScreen: View {
             }
         }
         .onDisappear {
+            unregisterRemotePlaybackCommands()
             NativeQuickBookmarkBridge.saveActiveReader = nil
             persistPosition()
             speech.onSleepExpired = nil
@@ -3321,8 +3373,12 @@ struct NativeReadingScreen: View {
                 speech.resume()
                 applySleepTimer()
             }
+            else { play() }
         }
         .accessibilityAction(named: Text("Añadir marca")) { addBookmarkFromReaderSelection() }
+        .accessibilityAction(named: Text("Seleccionar y copiar texto")) {
+            if !latest.body.isEmpty { showTextSelection = true }
+        }
         .accessibilityAction(named: Text("Avanzar cinco por ciento")) {
             move(to: min(100, currentPercent + 5))
         }

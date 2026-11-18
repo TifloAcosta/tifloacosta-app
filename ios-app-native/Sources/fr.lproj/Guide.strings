@@ -51,3 +51,6 @@
 "guide.12.paragraph.1" = "Choisis la langue de l’application parmi l’espagnol, l’anglais, le portugais, le français, l’italien et l’allemand. Ce choix est conservé.";
 "guide.12.paragraph.2" = "Ouvre les réglages d’affichage pour ajuster le contraste, la taille du texte, l’interligne et le renforcement du texte.";
 "guide.12.paragraph.3" = "Consulte la version installée et le site officiel. Les préférences de lecture propres à chaque document se trouvent dans TifloLector.";
+"guide.13.title" = "Ma musique";
+"guide.13.paragraph.1" = "Ma musique regroupe vos morceaux locaux et permet de les écouter, de les organiser en playlists et dossiers intelligents et de régler le son avec l’égaliseur.";
+"guide.13.paragraph.2" = "Utilisez Importer des morceaux pour ajouter des fichiers audio. Les sauvegardes permettent d’enregistrer le catalogue ou une copie complète avec les fichiers.";

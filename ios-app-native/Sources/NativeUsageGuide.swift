@@ -86,6 +86,19 @@ private enum NativeGuideContent {
             ]
         ),
         NativeGuideSection(
+            id: "13",
+            spanishTitle: "Mi Música",
+            englishTitle: "My Music",
+            spanishParagraphs: [
+                "Mi Música reúne tus canciones locales y permite reproducirlas, ordenarlas en listas y carpetas inteligentes y ajustar el sonido con el ecualizador.",
+                "Utiliza Importar canciones para añadir archivos de audio. Las opciones de Copias de seguridad permiten guardar el índice o crear una copia completa con los archivos."
+            ],
+            englishParagraphs: [
+                "My Music contains your local songs, with playback, playlists, smart folders and an equalizer for sound adjustments.",
+                "Use Import songs to add audio files. Backup options let you save the catalog or make a complete copy that includes the audio files."
+            ]
+        ),
+        NativeGuideSection(
             id: "4",
             spanishTitle: "Recibidos",
             englishTitle: "Received items",

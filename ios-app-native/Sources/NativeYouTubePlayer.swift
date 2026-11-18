@@ -202,6 +202,9 @@ final class NativeYouTubePlayerEngine: ObservableObject {
     @Published private(set) var currentTime = 0.0
     @Published private(set) var duration = 0.0
     @Published private(set) var error: String?
+    @Published private(set) var completedSequence = 0
+    private var previousState = -1
+    private var hasPlayed = false
 
     weak var webView: WKWebView?
 
@@ -212,7 +215,15 @@ final class NativeYouTubePlayerEngine: ObservableObject {
 
     func report(_ data: [String: Any]) {
         if let isReady = data["ready"] as? Bool { ready = isReady }
-        if let state = data["state"] as? Int { playing = state == 1 }
+        if let state = data["state"] as? Int {
+            if state == 1 { hasPlayed = true }
+            if state == 0 && previousState != 0 && hasPlayed && error == nil {
+                completedSequence += 1
+                hasPlayed = false
+            }
+            previousState = state
+            playing = state == 1
+        }
         if let current = data["current"] as? Double, current.isFinite { currentTime = max(0, current) }
         if let total = data["duration"] as? Double, total.isFinite { duration = max(0, total) }
         if let errorCode = data["error"] as? Int {
@@ -227,6 +238,17 @@ final class NativeYouTubePlayerEngine: ObservableObject {
 
     func toggle() {
         run("if(window.tifloPlayer){if(tifloPlayer.getPlayerState()===1){tifloPlayer.pauseVideo()}else{tifloPlayer.playVideo()}}")
+    }
+    func loadVideo(id: String) {
+        guard NativeYouTubeVideo.validID(id) else { return }
+        previousState = -1
+        hasPlayed = false
+        playing = false
+        currentTime = 0
+        duration = 0
+        error = nil
+        // The video ID is validated before it enters this JavaScript command.
+        run("if(window.tifloPlayer){tifloPlayer.loadVideoById('\(id)')}")
     }
     func seek(seconds: Int) {
         run("if(window.tifloPlayer){tifloPlayer.seekTo(Math.max(0,tifloPlayer.getCurrentTime()+(\(seconds))),true)}")
@@ -362,9 +384,26 @@ struct NativeYouTubePlayerScreen: View {
     @State private var editingComment = false
     @State private var commentText = ""
     let video: NativeYouTubeVideo
+    let playlist: [NativeYouTubeVideo]
+    @State private var currentVideo: NativeYouTubeVideo
     @Environment(\.openURL) private var openURL
     @Environment(\.dismiss) private var dismiss
     @StateObject private var engine = NativeYouTubePlayerEngine()
+
+    init(video: NativeYouTubeVideo, playlist: [NativeYouTubeVideo] = []) {
+        self.video = video
+        self.playlist = playlist
+        _currentVideo = State(initialValue: video)
+    }
+
+    private func advancePlaylist() {
+        guard let index = playlist.firstIndex(where: { $0.id == currentVideo.id }) else { return }
+        let next = index + 1
+        guard playlist.indices.contains(next) else { return }
+        currentVideo = playlist[next]
+        engine.loadVideo(id: currentVideo.id)
+        speak("Siguiente vídeo de la lista: \(currentVideo.title).")
+    }
 
     private func speak(_ text: String) {
         UIAccessibility.post(notification: .announcement, argument: text)
@@ -379,12 +418,12 @@ struct NativeYouTubePlayerScreen: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: TifloVisual.sectionSpacing) {
-                Text(video.title)
+                Text(currentVideo.title)
                     .font(.title3.bold())
                     .foregroundStyle(TifloVisual.primaryText)
                     .accessibilityAddTraits(.isHeader)
 
-                NativeYouTubeOfficialPlayer(videoID: video.id, engine: engine)
+                NativeYouTubeOfficialPlayer(videoID: currentVideo.id, engine: engine)
                     .frame(height: 225)
                     // Evitar que el iframe capture el foco de VoiceOver durante la reproducción.
                     .accessibilityHidden(true)
@@ -453,19 +492,19 @@ struct NativeYouTubePlayerScreen: View {
                         .foregroundStyle(TifloVisual.secondaryText)
                 }
 
-                if !video.channelTitle.isEmpty {
-                    Text("Canal: \(video.channelTitle)")
+                if !currentVideo.channelTitle.isEmpty {
+                    Text("Canal: \(currentVideo.channelTitle)")
                         .foregroundStyle(TifloVisual.secondaryText)
                 }
-                if let date = NativeNewsMetadata.publication(video.publishedAt) {
+                if let date = NativeNewsMetadata.publication(currentVideo.publishedAt) {
                     Text("Publicado: \(date)").foregroundStyle(TifloVisual.secondaryText)
                 }
-                if video.durationSeconds > 0 {
-                    Text("Duración: \(video.durationSeconds) segundos")
+                if currentVideo.durationSeconds > 0 {
+                    Text("Duración: \(currentVideo.durationSeconds) segundos")
                         .foregroundStyle(TifloVisual.secondaryText)
                 }
-                if !video.description.isEmpty {
-                    Text(video.description)
+                if !currentVideo.description.isEmpty {
+                    Text(currentVideo.description)
                         .textSelection(.enabled)
                         .foregroundStyle(TifloVisual.primaryText)
                 }
@@ -481,7 +520,7 @@ struct NativeYouTubePlayerScreen: View {
                 }
                 if account.authenticated && (account.subscribed == nil || account.rating == nil) {
                     Button("Reintentar consulta de Me gusta y suscripciones") {
-                        Task { await account.loadState(videoID: video.id) }
+                        Task { await account.loadState(videoID: currentVideo.id) }
                     }
                     .disabled(account.busy)
                     .buttonStyle(TifloSecondaryActionStyle())
@@ -490,21 +529,21 @@ struct NativeYouTubePlayerScreen: View {
                     Text("Para indicar Me gusta, suscribirte o comentar, debes iniciar sesión en Google. Buscar y reproducir vídeos no requiere una cuenta.")
                         .foregroundStyle(TifloVisual.secondaryText)
                     Button(account.busy ? "Conectando con Google" : "Iniciar sesión con Google") {
-                        account.signIn(videoID: video.id)
+                        account.signIn(videoID: currentVideo.id)
                     }
                     .disabled(account.busy)
                     .buttonStyle(TifloSecondaryActionStyle())
                 } else {
                     if let subscribed = account.subscribed {
                         Button(subscribed ? "Cancelar suscripción al canal" : "Suscribirse al canal") {
-                            Task { await account.setSubscribed(!subscribed, videoID: video.id) }
+                            Task { await account.setSubscribed(!subscribed, videoID: currentVideo.id) }
                         }
                         .disabled(account.busy)
                         .buttonStyle(TifloSecondaryActionStyle())
                     }
                     if let rating = account.rating {
                         Button(rating == "like" ? "Quitar Me gusta" : "Me gusta") {
-                            Task { await account.setLiked(rating != "like", videoID: video.id) }
+                            Task { await account.setLiked(rating != "like", videoID: currentVideo.id) }
                         }
                         .disabled(account.busy)
                         .buttonStyle(TifloSecondaryActionStyle())
@@ -515,7 +554,7 @@ struct NativeYouTubePlayerScreen: View {
                     .disabled(account.busy)
                     .buttonStyle(TifloSecondaryActionStyle())
                     if editingComment {
-                        Text("Comentario público en el vídeo: \(video.title)")
+                        Text("Comentario público en el vídeo: \(currentVideo.title)")
                             .foregroundStyle(TifloVisual.secondaryText)
                         TextEditor(text: $commentText)
                             .frame(minHeight: 120)
@@ -523,7 +562,7 @@ struct NativeYouTubePlayerScreen: View {
                             .accessibilityLabel("Escribir comentario en YouTube")
                         Button("Publicar comentario") {
                             Task {
-                                if await account.publishComment(commentText, videoID: video.id) {
+                                if await account.publishComment(commentText, videoID: currentVideo.id) {
                                     commentText = ""
                                     editingComment = false
                                 }
@@ -543,9 +582,9 @@ struct NativeYouTubePlayerScreen: View {
                     }
                     .buttonStyle(TifloSecondaryActionStyle())
                 }
-                Button("Compartir vídeo") { NativeShare.present(url: video.url) }
+                Button("Compartir vídeo") { NativeShare.present(url: currentVideo.url) }
                     .buttonStyle(TifloSecondaryActionStyle())
-                Button("Abrir en YouTube") { openURL(video.url) }
+                Button("Abrir en YouTube") { openURL(currentVideo.url) }
                     .buttonStyle(TifloSecondaryActionStyle())
             }
             .padding(16)
@@ -558,9 +597,12 @@ struct NativeYouTubePlayerScreen: View {
                 Button("Cerrar") { engine.stop(); dismiss() }
             }
         }
-        .task(id: video.id) {
+        .onChange(of: engine.completedSequence) { _, _ in
+            advancePlaylist()
+        }
+        .task(id: currentVideo.id) {
             await account.verifySession()
-            await account.loadState(videoID: video.id)
+            await account.loadState(videoID: currentVideo.id)
         }
         .onDisappear { engine.stop() }
     }

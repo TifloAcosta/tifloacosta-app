@@ -1,0 +1,3 @@
+Autorización de Tony Acosta, 18 de noviembre de 2026.
+Enviar exclusivamente a TestFlight la rama recovery/ios-public-500157-20261118, sin publicar en App Store.
+Esta señal se crea una sola vez y solo este cambio activa el envío.

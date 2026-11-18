@@ -26,6 +26,7 @@ on:
   # Beta solicitada por Tony 2026-11-14: DAISY completo, ajustes braille, accesibilidad y retirada de Pocket TTS.
   push:
     branches:
+      - recovery/ios-true-public-500157-20261118
       - fix/ios-daisy-clipbegin-milliseconds-20261113
       - integration/ios-phases1-6-consolidated-20261110
       - integration/ios-beta139-complete-20261111

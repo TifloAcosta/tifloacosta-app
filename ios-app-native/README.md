@@ -36,19 +36,4 @@ Las compilaciones que sustituyen a la beta híbrida previa pueden necesitar migr
 4. No afectar al código Android, web ni al catálogo de contenidos salvo encargo separado.
 5. Comprobar los controles con VoiceOver real tras la instalación; una compilación de simulador no valida por sí sola gestos.
 
-## Pruebas pendientes de Azure Speech antes de TestFlight público
-
-La sección «Motor de voz» permite elegir «Voces de iOS» (predeterminado) o «Microsoft Azure Speech» (experimental). Azure necesita una clave personal de Microsoft Speech guardada en Keychain, región y una voz elegida en Ajustes de TifloLector. Las solicitudes sintetizan tramos de texto sucesivos; su consumo puede estar sujeto a costes o límites del servicio de Microsoft. **No existe todavía una integración autorizada y comprobada de Edge Neural gratuito en esta aplicación.**
-
-En un iPhone físico, con VoiceOver, comprobar antes de ofrecer esta versión a probadores:
-
-1. Reproducción y lectura completa de TXT, EPUB y PDF accesible con Azure; posición al terminar un tramo y al volver a abrir el libro.
-2. Pausa y continuación durante audio y mientras llega un fragmento por Internet; detener y cambiar de libro mientras la petición sigue pendiente (no debe sonar audio antiguo).
-3. Avanzar/retroceder, saltar por marcas, guardar posición y volver a reproducir sin omisiones inesperadas.
-4. Pérdida de conexión, región errónea, clave inválida y agotamiento de cuota: error accesible, reproducción detenida y sin reintentos de pago automáticos.
-5. Reproducción en segundo plano y con pantalla bloqueada; temporizador de apagado y toque mágico de VoiceOver.
-6. Elegir de nuevo «Voces de iOS» y reproducir sin Internet; comprobar que audiolibros MP3 y DAISY siguen usando su reproductor previo.
-7. Libro largo con caracteres no latinos, puntuación y saltos de párrafo; comprobar pronunciación y continuidad entre fragmentos.
-8. Activar modo braille y verificar con una línea física que no queda afectada la lectura continua ni el avance configurado en VoiceOver.
-
-Las pruebas Node del repositorio comprueban contratos de código; **no sustituyen** una compilación de Xcode ni una prueba del servicio real con credenciales válidas.
+La recuperación privada mantiene la síntesis de voz integrada de iOS. Las pruebas Node comprueban contratos de código; no sustituyen una compilación de Xcode ni pruebas reales con VoiceOver.

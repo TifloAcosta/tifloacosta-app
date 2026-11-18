@@ -349,6 +349,11 @@ struct NativeReaderSettingsScreen: View {
                     )
                     NativeReaderAudioControls()
                 }
+                Section("Servicios de voz opcionales") {
+                    NavigationLink("Preparar clave de Gemini") {
+                        NativeGeminiSetupScreen()
+                    }
+                }
             } else if presentationMode == 1 {
                 Section("Lectura visual") { NativeReaderVisualControls() }
             } else {

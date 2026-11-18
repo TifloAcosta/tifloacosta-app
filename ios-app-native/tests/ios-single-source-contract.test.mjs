@@ -26,7 +26,14 @@ test('El proyecto main compila automáticamente; TestFlight se ejecuta solo a pe
  const release=get('.github/workflows/ios-native-testflight-upload.yml');
  assert.match(build,/branches: \[main\]/);
  assert.match(release,/workflow_dispatch:/);
- assert.doesNotMatch(release,/^\s+push:/m);
+ // Excepción expresa: una única señal de Tony, confinada a esta rama y
+ // protegida por mensaje de autorización exacto. No permite envíos por cambios de código.
+ if (/^\s+push:/m.test(release)) {
+  assert.match(release,/recovery\/ios-public-500157-20261118/);
+  assert.match(release,/\.github\/testflight-authorizations\/recovery-20261118\.txt/);
+  assert.match(release,/github\.event\.head_commit\.message == 'Authorize one-time recovery TestFlight upload 2026-11-18'/);
+  assert.doesNotMatch(release,/push:\s*\n\s*branches:\s*\[main\]/);
+ }
  assert.doesNotMatch(release,/branches: \[main\]/);
  assert.match(build,/ios-app-native\/tests\/\*\.test\.mjs/);
  assert.match(release,/ios-app-native\/tests\/\*\.test\.mjs/);

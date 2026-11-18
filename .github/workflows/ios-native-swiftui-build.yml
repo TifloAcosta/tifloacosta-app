@@ -2,6 +2,7 @@ name: iOS native SwiftUI compilation
 on:
   push:
     branches:
+      - recovery/ios-true-public-500157-20261118
       - main
       - fix/ios-daisy-clipbegin-milliseconds-20261113
       - audit/ios-public-release-six-languages-20261112

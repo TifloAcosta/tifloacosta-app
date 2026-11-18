@@ -693,7 +693,11 @@ struct NativeVideosScreen: View {
         .tifloScreenSurface()
         .navigationTitle("Vídeos")
         .sheet(item: $selectedVideo) { video in
-            NavigationStack { NativeYouTubePlayerScreen(video: video) }
+            let searchQueue = youtubeSearch.videos
+            let channelQueue = ordered.compactMap(NativeYouTubeVideo.init(catalog:))
+            let queue = searchQueue.contains(where: { $0.id == video.id })
+                ? searchQueue : channelQueue
+            NavigationStack { NativeYouTubePlayerScreen(video: video, playlist: queue) }
         }
         .sheet(item: $commentingOnVideo) { video in
             NavigationStack { NativeYouTubeCommentScreen(video: video) }
@@ -960,7 +964,7 @@ private struct NativeYouTubeChannelVideosScreen: View {
         .tifloScreenSurface()
         .navigationTitle(channel.title)
         .sheet(item: $selectedVideo) { video in
-            NavigationStack { NativeYouTubePlayerScreen(video: video) }
+            NavigationStack { NativeYouTubePlayerScreen(video: video, playlist: youtubeSearch.videos) }
         }
         .sheet(item: $commentingOnVideo) { video in
             NavigationStack { NativeYouTubeCommentScreen(video: video) }

@@ -7,10 +7,17 @@ const reading = source.slice(source.indexOf('struct NativeReadingScreen: View'))
 const playback = reading.slice(reading.indexOf('private var playbackRow:'), reading.indexOf('private var trackButtons:'));
 const controls = reading.slice(reading.indexOf('private var quickControls:'), reading.indexOf('private func readerFragment'));
 
-test('reproducir y desplazarse un minuto comparten el primer grupo de controles', () => {
-  assert.match(playback, /Button\("Retroceder un minuto"\)/);
-  assert.match(playback, /Button\("Avanzar un minuto"\)/);
+test('reproducir conserva los gestos de avance sin botones extra para un minuto', () => {
+  assert.doesNotMatch(playback, /Button\("Retroceder un minuto"\)/);
+  assert.doesNotMatch(playback, /Button\("Avanzar un minuto"\)/);
+  assert.match(playback, /case \.increment: moveUnit\(1\)/);
+  assert.match(playback, /case \.decrement: moveUnit\(-1\)/);
   assert.doesNotMatch(playback, /Button\("Detener"\)/);
+});
+
+test('un minuto es una opción del modo de navegación', () => {
+  assert.match(controls, /"Bloque", "Párrafo", "Frase", "Página", "Encabezado", "Un minuto"/);
+  assert.match(reading, /if navigationUnit == 5 \{ skipReading\(direction\); return \}/);
 });
 
 test('información, marcas y apagado automático están disponibles en lectura', () => {

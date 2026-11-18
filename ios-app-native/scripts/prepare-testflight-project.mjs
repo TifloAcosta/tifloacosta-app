@@ -9,6 +9,7 @@ for (const name of ['IOS_PROFILE_APP_NAME','IOS_PROFILE_EXTENSION_NAME','GITHUB_
   if(!process.env[name]) throw Error('Falta variable: '+name);
 }
 const version=String(Math.max(500003,500000+Number(process.env.GITHUB_RUN_NUMBER)));
+const marketingVersion='1.5';
 if(!/^\d+$/.test(version))throw Error('Número de compilación inválido');
 function replaceUnique(oldValue,newValue){
   if(yaml.split(oldValue).length!==2)throw Error('No se encuentra unívocamente '+oldValue);
@@ -23,7 +24,7 @@ replaceUnique(
     '        CODE_SIGN_IDENTITY: "Apple Distribution"',
     '        PROVISIONING_PROFILE_SPECIFIER: "'+process.env.IOS_PROFILE_APP_NAME+'"',
     '        CURRENT_PROJECT_VERSION: "'+version+'"',
-    '        MARKETING_VERSION: "1.5"',
+    '        MARKETING_VERSION: "'+marketingVersion+'"',
     '        ASSETCATALOG_COMPILER_APPICON_NAME: "AppIcon"',
     ''
   ].join('\n')
@@ -37,7 +38,7 @@ replaceUnique(
     '        CODE_SIGN_IDENTITY: "Apple Distribution"',
     '        PROVISIONING_PROFILE_SPECIFIER: "'+process.env.IOS_PROFILE_EXTENSION_NAME+'"',
     '        CURRENT_PROJECT_VERSION: "'+version+'"',
-    '        MARKETING_VERSION: "1.5"',
+    '        MARKETING_VERSION: "'+marketingVersion+'"',
     ''
   ].join('\n')
 );
@@ -52,4 +53,5 @@ fs.writeFileSync(path.join(assetDir,'Contents.json'),JSON.stringify({
   info:{author:'xcode',version:1}
 },null,2));
 fs.appendFileSync(process.env.GITHUB_ENV,'IOS_BUILD_VERSION='+version+'\n');
+fs.appendFileSync(process.env.GITHUB_ENV,'IOS_MARKETING_VERSION='+marketingVersion+'\n');
 console.log('Se prepara la distribución de com.tifloacosta.app, compilación '+version);

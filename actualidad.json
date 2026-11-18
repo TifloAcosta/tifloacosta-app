@@ -1,13 +1,62 @@
 [
   {
-    "id": "9to5mac-036deb719ba4dd52",
+    "id": "9to5mac-6ea2b5aa44f14ac0",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/18/leaker-claims-apple-developing-four-models-of-20th-anniversary-iphone/",
+    "originalUrl": "https://9to5google.com/2026/11/18/gemini-4-neon-announcement/",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-18T13:30:06.000Z",
+    "publishedAt": "2026-11-18T21:58:36.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google launches Gemini 4 Neon with Carbon quality at Flash speeds, live for AI Pro",
+        "summary": "Following last week’s release of Carbon and Hydrogen , Google today is rolling out Gemini 4 Neon. The model offers “frontier-level reasoning for complex, high-frequency workflows faster and more cost efficiently.” more…",
+        "body": "Following last week’s release of Carbon and Hydrogen , Google today is rolling out Gemini 4 Neon. The model offers “frontier-level reasoning for complex, high-frequency workflows faster and more cost efficiently.”\n\nBefore today, Google’s Gemini 4 family consisted of:\n\nNeon has performance comparable to, if not surpassing, Carbon across coding, reasoning, and agentic tasks, but at Flash speeds and a lower cost.\n\nAs such, Neon is available in the Gemini app for AI Pro (and AI Ultra) subscribers, with 3.1 Pro finally going away. Neon also replaces Argon. Meanwhile, 3.5 Flash-Lite is now “Auto” in the model picker for paid users.\n\nWith this launch, the model picker is:\n\nIn the Gemini app, Google says to expect:\n\nNeon has the same 1 million-token context window with four thinking levels, like Hydrogen: Low, Medium, High, and Extra High. Officially, the new model sits between Hydrogen and Carbon in the Gemini 4 family.\n\nNeon is built for complex coding, analytical reasoning, and production-grade enterprise workflows. While Carbon tackles your hardest, long-horizon projects and Hydrogen handles fast everyday execution, Neon balances depth and efficiency.\n\nIn terms of benchmarks:\n\nNeon is priced at $3/1M input tokens and $15/1M output tokens, or twice as expensive as Hydrogen. Argon and Carbon cost $2/1M input and $10/1M output until November 30. After the promotional pricing, it will be $4/1M input and $20/1M output, with Neon 25% cheaper as a result.\n\nThe model is also available in Google Antigravity for paid AI Pro or Ultra subscribers."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-fa31db4294bc9ce0",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/18/palmer-luckey-warns-ai-powered-cyberattacks-are-outpacing-defenses-its-time-to-start-running/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T21:34:13.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Palmer Luckey warns AI-powered cyberattacks are outpacing defenses: ‘It’s time to start running’",
+        "summary": "The Anduril co-founder says outdated technology is leaving systems vulnerable to a new wave of AI-enabled attacks.",
+        "body": "AI-powered cyberattacks are moving faster than outdated technology systems can defend against them, Palmer Luckey warned at The New York Times DealBook Summit on Wednesday. Addressing the recent spate of tech outages, the Oculus founder and Anduril Industries co-founder argued that older systems are struggling to keep pace with the new hacking capabilities enabled by AI and warned it was time to quicken the pace of securing our defenses.\n\n“We’re seeing the natural effects of a lot of these advanced AI tools allowing for the creation of various exploits,” he said.\n\nWhile government officials largely attributed the latest set of technical issues to companies rushing to patch their systems to protect against the new vulnerabilities AI has discovered, Luckey focused on the underlying security challenges facing organizations using outdated technology.\n\nLuckey explained that U.S. adversaries are currently exploiting the mismatch between new attack capabilities and our defense capabilities. These attacks are being carried out for both strategic and financial reasons, and North Korea was particularly involved, he added.\n\nThe interviewer, Andrew Ross Sorkin, noted that U.S. Vice President J.D. Vance had canceled his appearance at the Times’ conference this week because of the recent tech outages, saying he now had to attend meetings about the matter.\n\nGiven the situation, Sorkin asked Luckey how worried we should be about all this.\n\n“It depends on how well prepared you are,” was Luckey’s answer. (He then ominously warned, “You guys are going to find out what’s going on soon enough.”)\n\nThe tech executive argued that AI could ultimately give defenders the upper hand, but they’d have to move more quickly.\n\n“In the long run, the advantages are going to accrue to the side that is most effectively using AI for defense,” Luckey said. “With the people who say that everything can be hacked — they are right, for now. That actually may be the case with certain new techniques that are coming along. But as of right now, there’s a mismatch between the attackers who are very fast-moving and using technology and old, outdated systems that are not able to adopt technology as quickly as it is developed,” Luckey continued.\n\n“And I think … people are going to have to pick up the pace,” he said. “It’s time to start running.”"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-10806327443afcd2",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/18/instagram-finally-lets-users-edit-stories-after-publishing-but-theres-a-catch/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T20:48:35.000Z",
     "categories": [
       "apple",
       "tecnologia-general"
@@ -16,35 +65,298 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Leaker claims Apple developing four models of 20th anniversary iPhone",
-        "summary": "Leaker Ice Universe says Apple is currently developing four models of the 20th anniversary iPhone which we’ve been referring to as the iPhone 20 . We’re expecting next year’s flagship models to be a radical new design with an all-glass appearance. Why four models rather than two is unclear, but it seems possible Apple is testing two versions of both the Pro and the Pro Max to determine just how ambitious it can be with the final product … more…",
-        "body": "Leaker Ice Universe says Apple is currently developing four models of the 20th anniversary iPhone which we’ve been referring to as the iPhone 20 . We’re expecting next year’s flagship models to be a radical new design with an all-glass appearance.\n\nWhy four models rather than two is unclear, but it seems possible Apple is testing two versions of both the Pro and the Pro Max to determine just how ambitious it can be with the final product …\n\nIce Universe says that two of the four models have quad-curved glass backs and two have flat glass. They indicate that Apple has already had to ramp back its ambitions with the curvature.\n\nApple is currently developing four models in total: two with flat glass backs and two with quad-curved glass backs. Apple has been prototyping this quad-curved design for three years, making several revisions along the way—particularly regarding the glass curvature, which is still being refined. The earliest version had a very pronounced curve; it was later reduced somewhat.\n\nIt’s standard practice for Apple to develop multiple competing prototypes of new devices, evaluating them for everything from usability and durability to ease of manufacturing.\n\nWe’re expecting Apple to use a combination of ultra-thin bezels and curved glass to create the illusion of no bezels at all – a more sophisticated version of the effect seen on the Apple Watch. Today’s report says the bezels are around 1mm thick.\n\nThe curved edges on the quad-curved version are approximately 1mm wide. However, because the glass curves around all sides, when viewed straight on from the front, the bezel becomes nearly invisible, creating a near‑borderless appearance. The actual visual effect could be quite stunning.\n\nWe yesterday saw an AI-generated render of what the design could look like. It’s expected to be the biggest redesign of the standard iPhone since the iPhone X."
+        "title": "Instagram finally lets users edit Stories after publishing, but there’s a catch",
+        "summary": "Every once in a while, Instagram rolls out an update that addresses one of its users’ most longstanding requests. Today is one of those days. more…",
+        "body": "Every once in a while, Instagram rolls out an update that addresses one of its users’ most longstanding requests. Today is one of those days.\n\nAs spotted by The Verge , Instagram head Adam Mosseri confirmed today that the app will finally let users edit a Story after publishing.\n\nThis means users will be able to add stickers and drawings, fix typos or adjust text, and even change the music without having to delete the Story and publish it again, which would mean losing any views it had already received.\n\nThe catch is that users will only have 15 minutes after publishing a Story to make changes by tapping the ellipsis button at the bottom of the screen, and then selecting “Edit story.”\n\nHere’s Mosseri’s post announcing the news:\n\nA post shared by Adam Mosseri (@mosseri)\n\nToday’s update is the latest in a series of changes Instagram has made this year to address longstanding user requests.\n\nBack in March, the app introduced the ability to reorder photos and videos in a carousel after publishing. In April, it added an option to edit comments (also within 15 minutes of posting), and in June, it began letting users manually rearrange posts on their profile grid.\n\nMore recently, Instagram also brought its free Edits video editor to the Mac, with multi-track editing, advanced color grading tools, and 4K exports."
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-a97b69982ec5c27e",
+    "id": "ars-technica-762c98ad1c11f19d",
     "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5google.com/2026/11/18/vwfndr-mbl-camera-app-color-grading-android-iphone-release/",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gadgets/2026/11/windows-server-2028-public-preview-bets-on-a-security-first-approach/",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-18T13:10:02.000Z",
+    "publishedAt": "2026-11-18T20:41:12.000Z",
     "categories": [
-      "apple",
       "tecnologia-general",
-      "android",
-      "apps-accesibles"
+      "windows"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "The Android camera app that doesn’t overprocess adds new color grading sets, expands to iPhone",
-        "summary": "VWFNDR + MBL, an Android camera app that doesn’t overprocess and delivers high-quality DNG (RAW) files, is getting a 2.0 release with improved color grading and an expansion to the iPhone. more…",
-        "body": "VWFNDR + MBL, an Android camera app that doesn’t overprocess and delivers high-quality DNG (RAW) files, is getting a 2.0 release with improved color grading and an expansion to the iPhone.\n\nVWFNDR + MBL launched on Android in May 2026 with a few points that stood out. A unique UI that adapts to the shot, minimal processing for a natural look, and support for DNG files at a level that only Google’s Pixel Camera app can truly compete with.\n\nThe app has been downloaded over 300,000 times since then, and is now getting a pretty substantial update.\n\nOn Android, this comes in the form of new color grading profiles built into the app. “NATURAL,” “NIHON,” or “B+W.” The app still saves an unprocessed DNG alongside the JPG and the grading adapts across the frame rather than having a fixed result, keeping highlights and shadows in place.\n\nVWFNDR explains:\n\nColour grades: MBL still records unprocessed Bayer RAW DNG, and the JPG it renders alongside now uses one of three grades: NATURAL, NIHON, or B+W. Grading happens on VWFNDR’s own spatial engine. Instead of applying a fixed LUT, it adapts across the frame, much like a raw editor, so highlights and shadows keep their detail. The DNG stays untouched.\n\nHere’s what the output looks like:\n\nThe rest of VWFNDR + MBL 2.0 takes place off of Android.\n\nIn a rare case of the tables turning, MBL was released first on Android, and only on Android for the first several months. But VWFNDR is now bringing the app to iPhone with support for variable aperture on iPhone 18 Pro and Content Credentials, Apple’s version of the C2PA standard that’s meant to prove a photo is real and not AI-generated.\n\nFollow Ben: Twitter/X , Threads , Bluesky , and Instagram"
+        "title": "Windows Server 2028 trades compatibility for out-of-the-box security",
+        "summary": "Hardened defaults align with DoD standards, but there may be growing pains.",
+        "body": "Microsoft's Ignite announcements this week went beyond the Office-in-Copilot overhaul with the reveal of the Windows Server 2028 Public Preview and its new security-by-default stance and what Microsoft calls Hardened Server Core . Windows Server 2028 will implement a default security framework that Microsoft says is aligned with hardened DoD benchmarks, such as the Defense Information Systems Agency's (DISA) Security Technical Implementation Guide (STIG).\n\nSTIGs work by providing a standard security framework for system administrators to follow recommended guidance. In the past, Windows Server admins were left to start from a blank canvas and then implement hardening configurations for operations. Secure baselines were available but not the default. Microsoft says that concern is now managed: \"The s ecure configuration is the starting state, not a project you run after setup. That closes the window where a newly deployed server sits exposed while it waits to be hardened. \"\n\nThe new Windows Server 2028 hardened-by-default state will only be available for the Server Core installs. Windows Server Desktop Experience installs do not include the changed stance.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-ae9e0d8892eeaaeb",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/18/apple-among-the-companies-facing-pressure-from-us-senators-over-nudify-apps/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T20:05:10.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple among the companies facing pressure from US senators over ‘nudify’ apps",
+        "summary": "The Guardian reports that three US senators have sent letters to the CEOs of Apple, Google, and Meta, demanding answers about their failure to prevent access to AI-powered ‘nudify’ apps. Here are the details. more…",
+        "body": "The Guardian reports that three US senators have sent letters to the CEOs of Apple, Google, and Meta, demanding answers about their failure to prevent access to AI-powered ‘nudify’ apps. Here are the details.\n\nLast month, Apple updated its App Store rules in an attempt to crack down on apps that enable users to generate nonconsensual nude images.\n\nAccording to the updated rules, apps that allow users to create AI-generated content must include safeguards against abuse, including tools to filter objectionable material, report offensive content, and block abusive users.\n\nApple also warns that apps used primarily for pornographic content or the objectification of real people may be removed from the App Store without notice.\n\nWhile definitely well-intended, Apple’s changes came amid growing reports of AI-powered nudify apps, which easily allow users to generate nonconsensual intimate images.\n\nTwo months before these changes, Apple removed an app that allowed users to create pornographic deepfakes of real people after WIRED reached out for comment, which in turn came one month after San Francisco City Attorney David Chiu demanded that Apple and Google remove several nudify apps from their app stores.\n\nApple also removed several apps following investigations by the Tech Transparency Project (TTP), which published reports in January and April revealing that such apps were widely available on the App Store, sometimes even appearing in sponsored search results.\n\nThroughout these investigations, Apple has maintained that nudify apps have always been prohibited under its App Review Guidelines, and that it proactively rejects and removes apps that violate its policies, including those flagged through user reports.\n\nApple, of course, is not alone in this challenge, with Google facing similar criticism over their availability on the Play Store, and Meta coming under scrutiny for allowing developers to advertise these apps on Facebook and Instagram, as highlighted in the WIRED report mentioned above.\n\nWhich brings us to today’s report from The Guardian .\n\nAccording to The Guardian ’s exclusive report , “three Senate Democrats sent letters to tech CEOs saying safeguards against nudification apps are insufficient on their platforms.”\n\nFrom the report:\n\nA trio of US Senators say Apple and Google are failing to effectively detect and remove apps that can be used to generate nonconsensual nude or pornographic imagery. They also say Meta is continuing to profit off of ads for these so-called nudification apps that “victimize women and girls worldwide”.\n\nThe senators, namely Ron Wyden of Oregon, Ed Markey of Massachusetts, and Ben Luján of New Mexico, claim that in addition to failing to remove these apps, the companies may actually be profiting from their distribution and promotion.\n\nCommenting on the letter, both Google and Meta said they prohibit such apps or their promotion and work to detect and remove violations from their platforms, broadly echoing what Apple has repeatedly stated when reached for comment in the past over these same issues.\n\nHowever, Wyden’s office argues that simply reaffirming, or in Apple’s case, updating these policies, means little if the companies continue to struggle to enforce them.\n\nFrom The Guardian ’s report:\n\nKeith Chu, the chief communications adviser and deputy policy director to Wyden, said that clarifying policies is not the same thing as enforcing them. Despite the companies reaffirming the prohibition of these apps, they continue to proliferate across Apple and Google app stores or be promoted in ads on Meta platforms, he added.\n\nIn its latest investigation, published just last month , TTP found 135 apps capable of generating nude or pornographic imagery on the App Store and the Play Store, using accounts registered to 13-year-old boys.\n\nAdditionally, researchers found that even accounts configured with parental controls were able to download these apps without requiring parental approval.\n\nDespite Apple and Google removing the apps identified in the investigation, The Guardian noted that these apps continued to work on devices where they had already been installed.\n\nNow, Senator Wyden warns that Congress may need to step in if the companies fail to do a better job of cracking down on these apps.\n\nTo read The Guardian ’s full report, follow this link ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-7c7064820ab13631",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/18/snapchat-now-lets-developers-build-ar-lenses-with-ai-coding-assistants-like-claude-code-and-cursor/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T19:56:39.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Snapchat now lets developers build AR Lenses with AI assistants like Claude Code and Cursor",
+        "summary": "Lens creators can describe the Lens they want in plain language, and their AI assistant handles the process from start to finish, Snapchat says.",
+        "body": "Snapchat announced on Wednesday that it’s giving Lens creators the ability to build Lenses using the AI coding assistants they already use, like Claude Code, Cursor, and Codex. Snapchat Lenses, which are a core part of the social network’s platform, are AR effects that let users alter their appearance, add digital objects to their surroundings, or interact with animated experiences through the camera.\n\nThe company is introducing Easy Lens CLI, which builds on its existing Easy Lens tool , which lets creators generate Lenses from a single prompt on the web and mobile. Easy Lens CLI brings that same idea into developers’ existing workflows, allowing AI assistants to handle the technical work while creators focus on the vision for the Lens itself.\n\nThe launch indicates that Snapchat is looking to lower the barrier to creating AR content, while making its platform more accessible to developers who are increasingly using AI coding assistants. Instead of requiring creators to learn how to use Snapchat’s own development tools, the company is bringing Lens creation into the AI coding workflows they already use, which could in turn expand the pool of people who build for Snapchat.\n\nDevelopers enrolled in Snapchat’s Lens+ Payouts program can earn from the Lenses they create with Easy Lens CLI. Snapchat says it paid out $1.8 million to Lens+ community creators last month.\n\nLens creators can describe the Lens they want in plain language, and their AI assistant handles the process from start to finish, Snapchat says. That includes building with more than 100 AR building blocks and 50 AI asset generators, generating previews, and publishing them to Snapchat and tracking their performance.\n\nWith Easy Lens CLI, Snapchat says developers can create everything from Web Lens games with leaderboards to camera effects and beauty filters.\n\nAI assistants can generate assets, build and test Lenses, address errors, and send updated versions directly to the creator’s phone. The new capability can take a game from an initial idea to a published Lens in a single day, without developers having to write code themselves, Snapchat says.\n\nThe tool is aimed at different types of creators. The company notes that game developers can bring existing browser games to Snapchat as Web Lenses, while AI creators can use assets from their preferred tools to build Lenses in their own style. Additionally, agencies and brands can turn existing campaign videos, images, and other brand assets into AR experiences with less production time.\n\nEasy Lens CLI runs on Mac, Windows, and Linux."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-d5326a76bb2c2151",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/policy/1036749/trump-ai-chip-data-center-us-philippines-pax-silica",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T19:40:36.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Trump’s latest land grab is an AI hub in the Philippines",
+        "summary": "President Donald Trump was greeted by no less than five beauty queens when he landed in the Philippines on Tuesday, according to local news outlet Rappler. As he stepped onto the tarmac, a child handed him small US and Philippine flags. A band played \"YMCA,\" a staple at Trump rallies, as more girls in traditional […]",
+        "body": "President Donald Trump was greeted by no less than five beauty queens when he landed in the Philippines on Tuesday, according to local news outlet Rappler . As he stepped onto the tarmac , a child handed him small US and Philippine flags. A band played \"YMCA,\" a staple at Trump rallies, as more girls in traditional bell-sleeved blouses and young men in wide-brimmed hats danced to the song.\n\nOutside the airport, hundreds of protesters packed streets bearing signs - and at least one prop casket - saying \"Trump out.\" Others say \"Reject Pax Silica,\" the name for the US-led international initiative to secure chips and critical minerals used in the …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-db092c91cbb9e71e",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2320945/xreal-aura-review/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T19:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Xreal Aura review: Solid AR glasses hampered by Google's half-baked Android XR",
+        "summary": "For $1,099, we should expect more.",
+        "body": "For $1,099, we should expect more.\n\nTwo years after Google announced Android XR , and a year after Samsung's flagship $1,800 Galaxy XR headset landed with a fizzle, Google's latest stab at mixed reality is finally starting to seem... real. We've taken a look at the first batch of Android XR smart glasses , which are landing this fall and take aim at Meta's popular Ray-Ban smart frames. Now Xreal is launching its Aura XR headset , which is the most intriguing Android XR device we've seen yet. It builds on Xreal's impressive history of virtual display glasses , adding just enough smarts to make it a viable, and far cheaper, alternative to Apple's Vision Pro. But with a starting price of $1,279 (on sale for $1,099 through December), it's still mainly targeted at VR developers.\n\nMuch like the baffling launch of Googlebooks, though, I'm not yet convinced that solid hardware will be able to save an ecosystem that Google isn't truly committed to. It's taken the company several years to actually deliver Android XR devices most people can actually afford, and there still aren't many notable apps that truly show off what the platform can do. Making Google Maps more immersive isn't enough.\n\nStill, the Xreal Aura is a sign that Android XR hardware is more than just vaporware, and it's significantly cheaper than last year's Galaxy XR. It's also a glimpse of what we'll see with the upcoming Meta VR Glasses, and perhaps a sign of how Apple could actually follow up on the promise of the Vision Pro.\n\nThe Xreal Aura is essentially a souped-up version of the company's already excellent display glasses, except it's connected to a wired Compute Puck that houses all of the hardware necessary to run Android XR. The Aura's sunglasses-like frames look almost the same as the Xreal One Pro , except it also features cameras for spatial sensing, finger tracking and capturing photos and video. Xreal's transparent frames let you easily see the world around you, without the need for complicated camera pass-through functionality like the Galaxy XR and Apple Vision Pro use. You can also darken the screen to completely black out the world, similar to what you'd see on a typical VR headset.\n\nLike Xreal's previous display glasses, the Aura relies on tiny micro-OLED screens with a resolution slightly beyond 1080p (1,920 by 1,200). They can reach up to 1,058 nits of brightness, which is slightly less than the 1,200 nits on the new Xreal One Pro+, and they support up to a 120Hz resolution with external devices. (The Android XR interface only runs at 72Hz.) The Aura's 70-degree field of view (FOV) is the best we've seen from Xreal, but it's also well below what we've seen on dedicated VR headsets, which use larger screens to completely fill your vision. The Apple Vision Pro reaches a FOV of around 100 degrees, while the Meta Quest 3 and many other headsets reach up to 110 degrees.\n\nFor processing power, the Compute Puck houses a Qualcomm Snapdragon Reality Elite system-on-a-chip, and either 12GB or 16GB of RAM (alongside either 256GB or 512GB of storage). It also features Xreal's custom X1S spatial processor, a slightly improved version of the X1 chip on earlier frames, and it looks similar to the Vision Pro's battery pack. It has two USB-C ports, one for connecting to the Aura's frames and the other for either charging or connecting to a separate device. The top portion of the Compute Puck also serves as a trackpad, which is helpful for navigating Android XR without holding your hand up.\n\nWhen you plug in another device into the Compute Puck, its video output shows up in a single Android XR window, which you can resize at will (and also position alongside other Android XR apps). You can also plug the Aura's frames directly into computers and other devices, where it functions exactly like the company's previous display glasses. That could be useful when you just need a big virtual screen, and you don't want to deal with the hassle of juggling the Compute Puck.\n\nThe Xreal Aura is exceptionally comfortable to wear; the frames weigh just 95 grams (0.2 pounds) on their own, compared to the 1.6-pound Vision Pro. The Aura is also fantastic for watching movies on a gigantic virtual display and it's incredibly useful if you need a large virtual monitor. But it's also crystal clear that Android XR is still in its infancy, as there aren't many notable apps to show off the platform. Using Android XR also doesn't feel very different than using any other Android device — as if Google made very little effort to reshape its OS around mixed reality. (There are definitely shades of the same laziness that annoyed me with Googlebooks.)\n\nIt doesn't help that apps crash often in Android XR, or that its core hand recognition interface feels lackluster. The Xreal Aura is often slow to respond to where my finger is pointing, or recognize when I'm pinching my fingers to select something. That's annoying enough when simply navigating Chrome or YouTube, but it's infuriating when trying to play an XR game like Cubism , which relies on placing 3D blocks in very specific places. Pointing at everything just to navigate Android XR also gets tiring over time — there's no eye-tracking like on the Vision Pro, which makes selecting on-screen elements a cinch. I quickly grew to prefer navigating Android XR with the Compute Puck's trackpad instead of pointing at everything.\n\nI was able to sit back and actually enjoy the Xreal Aura while watching the opening of Casino Royale on Prime Video, as well as a few episodes of the new Ghost in the Shell series. Xreal's micro-OLED displays deliver vibrant and colorful video, and its speakers built into the Aura's thick frames sound great. The Aura is also an excellent companion for laptops: I was able to have a giant screen mirroring my MacBook Air while playing the YouTube app right beside it.\n\nStill, I wish there was more to actually do in Android XR. Zooming around the world in Google Maps' immersive view is fun, and I appreciated revisiting VR experiences like Cosmos Unseen: Black Holes, but they're not as enthralling as they are in traditional VR headsets. Being able to see the outside world easily is both a blessing and a curse on the Xreal Aura. You can also see spatial versions of pictures in the Google Photos app, which is cool at first, but quickly starts to feel gimmicky. Similarly, I didn't see much point to Android XR's Spatial Mode, which converts everything you see into pseudo-3D. It just gave me a headache while browsing the web.\n\nThird-party support is clearly lackluster, especially when it comes to entertainment apps. All I saw was HBO Max and Prime Video, no Disney+ or Netflix (which isn't on visionOS, to be fair). You'll have to watch all of your other streaming services through Chrome, which isn't exactly a premium experience. It's also a particularly bad look when Meta just recently launched 3D movie support (including within the Disney+ app) on the Quest 3, 3S and its upcoming VR Glasses . That's something Google could eventually bring to Android XR, but who knows when that will happen.\n\nEven the first-party YouTube app is a disappointment. There's a specific section for immersive videos, but it's filled with the same blurry 360-degree content we've been seeing for years. There's no big push for higher-resolution 180-degree 3D video like we've seen on the Vision Pro, or that Meta has announced for its VR Glasses.\n\nAndroid XR is such a barren landscape, I sometimes found it more useful to just directly connect the Xreal Aura to my laptop or phone. At that point, it acts purely as a virtual display, but I found it helpful when I just wanted to stream a TV show in a crowded or tight space. The downside here is that connecting another device to the Compute Puck involves juggling a second USB-C cable, which can easily become frustrating. The Vision Pro can wirelessly connect to Macs, so it manages to avoid this issue.\n\nWithout the baggage of Android XR, the Xreal Aura was also able to deliver a brighter and sharper virtual view of my MacBook Air's desktop. There's a slight blurriness to external devices when using the Compute Puck, which makes text difficult to read. That's not a problem when you're directly connected to the glasses. But if that's the case, why not just get some of Xreal's existing display glasses? (More on this below.)\n\nBattery life is another potentially worrying variable. The Aura's battery drained from full to 40 percent after just 90 minutes of watching Prime Video content, browsing the web and messing around with Google Map's immersive view. It lasted for another 95 minutes before it completely drained down as I caught up on Ghost in the Shell .\n\nThe Compute Puck's heat output was also very noticeable. Its tiny fan often felt like it was working hard to cool down the device, and I was worried about stuffing it into my pocket like I do with the Vision Pro's battery pack. Xreal recommends avoiding pockets and other enclosed spaces while the Aura is doing serious work or fast charging. That's likely why the company bundles a lanyard and belt holster in the Aura's box.\n\nSince the Xreal Aura also features prominent cameras, I hesitated about using it in public spaces, where people might mistake it for Meta's Ray-Ban \"pervert glasses.\" That's an issue the company's cheaper display glasses avoid completely as they're camera-free (unless you add an additional accessory). I could just point to those specs and tell any worried coffee shop neighbor they don't have a camera.\n\nUnless you're a VR developer keen to get a leg up on Android XR, there's no reason to buy the Xreal Aura. At its $1,099 sale price (or the eventual $1,279 standard price), it comes in far cheaper than the $1,800 Galaxy XR or $3,699 Vision Pro, but the handful of games and immersive apps for Android XR still don't justify its cost.\n\nIt's a particularly bad investment since we don't know how long Google will actually stick with Android XR. Don't forget that its earlier attempts at VR, like Google Cardboard and Daydream , all died after a few years of lackluster support. Given that Android XR also encompasses simpler smart glasses, and that Meta is working hard to dominate this market, I'd hope Google would give it a few years to find some footing.\n\nAnd if the simple idea of having a virtual screen on your face sounds intriguing, then consider Xreal's existing display glasses. I loved the Xreal One last year , and the company just recently launched a brighter One+ model for $600 . Even the $299 Xreal XBX a01+ specs were bright and fun to use, even though they don't support any spatial features.\n\nXreal has delivered yet another light, bright and comfortable pair of AR specs with the Aura, but it's clearly hampered by a half-baked Android XR platform. Even worse, Android XR is a major reason why it costs twice as much as the company's previous hardware. At this point, the Xreal Aura serves as proof of life for Android XR, and nothing more."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-9a6e26e8dcf3bcd8",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1036941/instagram-now-lets-you-edit-your-stories-after-you-post-them",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T19:29:10.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Instagram now lets you edit your stories after you post them",
+        "summary": "Instagram's latest update will allow you to edit your Stories without losing your views, likes, or replies. You can now edit the text, music, stickers, and drawings for up to 15 minutes after sharing your Story, Instagram head Adam Mosseri has announced. Reverse engineer Alessandro Paluzzi first spotted Instagram working on this feature in April, […]",
+        "body": "Instagram's latest update will allow you to edit your Stories without losing your views, likes, or replies. You can now edit the text, music, stickers, and drawings for up to 15 minutes after sharing your Story, Instagram head Adam Mosseri has announced.\n\nReverse engineer Alessandro Paluzzi first spotted Instagram working on this feature in April, but now it's official. Previously, you had to delete and repost your Story to fix a typo or add a song that you forgot to include.\n\nYou can edit your post by opening your Story and selecting the three-dot menu in the bottom-right corner. From there …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-938811e38ffeb68e",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/tech-policy/2026/11/muse-privacy-invasions-are-freaking-out-meta-staffers-internal-chats-show/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T19:19:33.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Muse privacy invasions are freaking out Meta staffers, internal chats show",
+        "summary": "Erratic Muse outputs sharing random bank, bitcoin balances aren’t real, Meta says.",
+        "body": "After some early adopters of Meta’s Muse AI agent complained that it was spying on private messages and behaving unpredictably earlier this fall, Reuters exposed internal chats showing that Meta staff had raised the same alarms.\n\nWhen testing the agent, staff warned that Muse appeared to be accessing encrypted private messages that users did not expect the bot to review, could be mixing up conversations between users, and even potentially sharing sensitive information users would never expect to be exposed.\n\nSome unexpected Muse outputs responded to questions that staffers never asked.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "accessible-android-313823ed7921e9d9",
+    "type": "news",
+    "sourceId": "accessible-android",
+    "sourceName": "Accessible Android",
+    "sourceUrl": "https://accessibleandroid.com/",
+    "originalUrl": "https://accessibleandroid.com/from-talkback-to-jieshuo-and-now-sandfly-my-journey-through-android-screen-readers/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T18:46:12.000Z",
+    "categories": [
+      "android",
+      "apps-accesibles",
+      "tecnologia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "From TalkBack to Jieshuo, and Now SandFly: My Journey Through Android Screen Readers",
+        "summary": "After years of using TalkBack and Jieshuo, I’ve decided to make SandFly my primary screen reader. For me, this isn’t simply about replacing one application…",
+        "body": "Published 18 November 2026 by Salih Kunduz\n\nAfter years of using TalkBack and Jieshuo, I’ve decided to make SandFly my primary screen reader.\n\nFor me, this isn’t simply about replacing one application with another. It’s also an opportunity to look back at how Android accessibility has evolved over the years, what we’ve gained along the way, and what I expect from a screen reader today.\n\nI’ve been using Android for a long time, and I’ve witnessed quite a few changes in its accessibility ecosystem. Some were genuinely exciting, while others reminded us how limited our choices were.\n\nTable of Contents\n\nFor much of the period between 2013 and 2020, TalkBack was practically the only realistic option for many blind Android users.\n\nThere were other attempts and alternatives, of course, but TalkBack dominated the ecosystem. It came with Google’s backing, was integrated into Android, and worked across a wide range of devices.\n\nI don’t want to underestimate what TalkBack meant to us during those years. It made Android usable for millions of blind people, including me. It improved considerably over time, and many features we take for granted today were not available in its earlier versions.\n\nHowever, there was always something that bothered me: performance.\n\nTalkBack often felt heavier and slower than it needed to be. Navigating through interfaces, moving between elements, and performing everyday tasks sometimes required more patience than I thought was reasonable.\n\nAnd when you use a screen reader for practically everything you do on your phone, these small delays add up.\n\nThe problem wasn’t simply that TalkBack was slow. It was that we had very little choice. If something didn’t work the way we wanted, we could report it, wait for an update, or learn to live with it.\n\nFor years, that was simply the reality of Android accessibility.\n\nMy experience with Jieshuo changed the way I thought about screen readers.\n\nFor the first time, I felt that I was getting much closer to the full performance of my Android device.\n\nThe difference wasn’t limited to speech responsiveness. Navigation felt faster, interactions were more immediate, and I had considerably more control over how my screen reader behaved.\n\nJieshuo offered a level of customization that TalkBack had never really provided. I could adjust the experience to suit my habits rather than constantly adapting my habits to the screen reader.\n\nOnce you become accustomed to that level of responsiveness and flexibility, going back isn’t easy.\n\nBut Jieshuo had its own problems.\n\nOne of the biggest challenges was communication with its developer. When something didn’t work properly, reporting an issue and getting meaningful feedback wasn’t always straightforward. For a product that plays such an important role in our daily lives, communication matters enormously.\n\nThere was also the issue of distribution and compatibility.\n\nBecause Jieshuo wasn’t available through Google Play, certain banking applications and other security-sensitive services occasionally created problems. Some applications treated the screen reader as a potential security risk, even though we were simply using it to access our devices.\n\nAs a blind user, I found that particularly frustrating.\n\nA screen reader isn’t an optional convenience. It’s the interface through which we interact with our phones. Having to choose between using the screen reader I prefer and accessing essential services is not a reasonable situation.\n\nAnd then there were the practical complications. Even something as ordinary as paying for a screen reader could involve additional services, intermediaries, or procedures that an average user shouldn’t have to deal with.\n\nThese things might seem relatively minor when considered separately, but together they affect the overall experience.\n\nJieshuo showed me what was possible in terms of performance and customization. At the same time, it made me appreciate certain advantages I had previously taken for granted.\n\nDespite all my criticism of TalkBack’s performance, I never completely abandoned it.\n\nThere was something reassuring about knowing it was there.\n\nTalkBack was officially supported, widely recognized, and generally less likely to create complications with applications that were sensitive to accessibility services.\n\nWhenever I encountered a problem with Jieshuo, I knew I could return to TalkBack.\n\nIt might not have been as fast or as flexible as I wanted, but it provided a familiar and relatively predictable experience.\n\nIn that sense, TalkBack became my safe harbor.\n\nAnd I think that says something important about screen readers. Performance matters, but so do stability, reliability, compatibility, and trust.\n\nThe ideal screen reader shouldn’t force us to sacrifice one for another.\n\nAfter all these years, I think we need to reconsider what we actually expect from an Android screen reader.\n\nOf course, responsiveness and advanced features matter. Nobody wants to use a slow or unnecessarily restrictive screen reader.\n\nBut speed alone isn’t enough.\n\nA screen reader should be stable, reliable, and inclusive. It should be easy to obtain, straightforward to set up, and accessible to people with different levels of technical experience.\n\nYou shouldn’t need a master’s degree, let alone a PhD in technology, just to configure your screen reader and use your phone comfortably.\n\nI enjoy experimenting with technology. I don’t mind exploring advanced settings, testing new features, or finding workarounds when something doesn’t behave as expected.\n\nBut that’s my personal interest. It shouldn’t be a requirement for everyone else.\n\nSomeone who has just started using Android with a screen reader should be able to learn the basics without feeling overwhelmed. Meanwhile, experienced users should have access to the advanced tools and customization they need.\n\nThese two expectations aren’t contradictory.\n\nA well-designed screen reader should be approachable for beginners without becoming restrictive for advanced users.\n\nAccessibility must extend beyond the application’s interface, too. Installation, updates, payments, documentation, and communication with developers are all part of the experience.\n\nIf obtaining or paying for an accessibility tool requires navigating through several third-party services and complicated procedures, then something is wrong with that experience.\n\nThese considerations have become increasingly important to me, and they’re among the reasons I’ve started looking at SandFly more seriously.\n\nWhat initially attracted me to SandFly was its approach.\n\nBecause SandFly builds on TalkBack’s foundation, many aspects of the experience already feel familiar. Its settings, menus, and general structure don’t require me to forget years of accumulated habits and start from scratch.\n\nThat’s a significant advantage.\n\nChanging screen readers isn’t always easy, particularly when you’ve spent years developing your own gestures, routines, and ways of interacting with Android.\n\nWith SandFly, I feel that I’m getting something close to the safety and familiarity of TalkBack, combined with a much more capable and comfortable environment.\n\nIf TalkBack was my safe harbor, SandFly feels like that same harbor opening into a much more luxurious bay.\n\nIt’s a slightly unusual comparison, perhaps, but it describes the feeling quite well.\n\nThe familiar foundation is still there, while the possibilities continue to expand.\n\nSandFly is still a developing project, and I don’t want to pretend that every feature is perfect or that it has already solved every problem. However, its advanced capabilities are progressing, and I’ve been encouraged by the direction of its development.\n\nAnother important advantage is how approachable the experience feels.\n\nI don’t have to spend hours trying to understand an entirely unfamiliar system just to configure the basics. At the same time, there are more advanced possibilities to explore as I become accustomed to it.\n\nThat balance is exactly what I want from a modern screen reader.\n\nThere are also some very practical reasons behind my decision.\n\nFirst, paying for the software doesn’t have to become a separate technical challenge. If I decide to purchase it, I don’t have to deal with numerous intermediary services just to complete the process.\n\nThat might not sound particularly exciting, but simplicity matters.\n\nSecond, SandFly hasn’t caused problems with the banking service I personally use.\n\nI want to be careful about how I describe this. My experience doesn’t mean every banking application will necessarily work without issues for every user. But for me, being able to use my preferred screen reader without compromising access to an essential financial service is a major advantage.\n\nAnd then there’s something that deserves more attention: physical keyboards.\n\nSandFly appears to place considerable importance on physical keyboard support, and it’s clear that thought has gone into this part of the experience.\n\nThis matters to me personally because I don’t use Android exclusively on a phone. I also use a tablet, and physical keyboard interaction is an important part of how I work with it.\n\nA screen reader that treats physical keyboard navigation as a serious part of the user experience, rather than an afterthought, immediately becomes more interesting to me.\n\nI don’t think physical keyboard support receives enough attention in discussions about Android accessibility.\n\nWe often focus on touch gestures, speech responsiveness, and customization. Those are important, of course, but Android is no longer limited to the traditional smartphone experience.\n\nTablets, foldables, keyboards, and different ways of interacting with our devices deserve equal consideration.\n\nThe more I explored SandFly from this perspective, the more I began to feel that it could become a screen reader I would genuinely enjoy using every day.\n\nThere’s another factor that has influenced my decision: communication with the developer.\n\nAfter my experience with Jieshuo, I have come to value this much more than I used to.\n\nBeing able to contact a developer, explain a problem, discuss an idea, and receive feedback makes a real difference.\n\nThis doesn’t mean every suggestion should be accepted or every bug should be fixed immediately. Software development doesn’t work that way.\n\nWhat matters is knowing that communication is possible and that users’ experiences are being considered.\n\nThrough my work with Accessible Android, I’ve spent a considerable amount of time testing applications, reporting accessibility issues, and communicating with developers.\n\nOne thing I’ve learned is that the relationship between developers and users can influence the quality of a product just as much as technical decisions do.\n\nSandFly’s developer has been approachable, and that gives me another reason to follow the project closely.\n\nOf course, good communication alone doesn’t guarantee good software. The product still has to demonstrate its reliability through daily use.\n\nBut when a project combines technical ambition with an approachable developer, I’m much more willing to invest my time in it.\n\nI’m not switching to SandFly because I believe TalkBack has become irrelevant or because I want to dismiss everything Jieshuo has offered me.\n\nQuite the opposite.\n\nI appreciate what both screen readers have contributed to my Android experience.\n\nWithout TalkBack, my early years on Android would have been very different. Without Jieshuo, I might never have realized how much faster and more flexible screen reading could feel.\n\nBut I’m also not particularly interested in remaining loyal to a screen reader simply because I’ve used it for years.\n\nMy loyalty is to accessibility, independence, and the freedom to use technology in the way that suits me best.\n\nSandFly will have to prove itself through everyday use. There will almost certainly be bugs, missing features, and situations where I may need to return to another screen reader.\n\nThat’s perfectly normal for a developing project.\n\nFor now, however, I see enough potential to make the transition.\n\nWhat I find particularly encouraging is that we seem to be moving toward a more diverse Android accessibility ecosystem.\n\nWe no longer have to evaluate screen readers solely in terms of whether they can read an interface. We can discuss performance, usability, reliability, physical keyboard support, distribution, payment accessibility, developer communication, and the overall quality of the experience.\n\nAnd we should.\n\nAfter all, an Android screen reader shouldn’t simply make a device accessible.\n\nIt should make using that device comfortable, efficient, and enjoyable.\n\nThat’s what I’m looking for in SandFly, and that’s why I’ve decided to give it a chance.\n\nPublished in Articles"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-0080d677072766e1",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1036880/nvidia-rtx-spark-ai-mini-pc-desktops",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T18:34:55.000Z",
+    "categories": [
+      "tecnologia-general",
+      "windows"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The first Nvidia RTX Spark mini PCs launch today from Asus, Dell, and MSI",
+        "summary": "After the first RTX Spark laptops launched earlier this year, Nvidia's RTX Spark N1X chip is also now available in desktops from Asus, Dell, and MSI. More RTX Spark desktops are coming later from Acer, Gigabyte, and HP, while Microsoft's Surface RTX Spark Dev Box is slated to start shipping this month. The new mini […]",
+        "body": "After the first RTX Spark laptops launched earlier this year, Nvidia's RTX Spark N1X chip is also now available in desktops from Asus, Dell, and MSI . More RTX Spark desktops are coming later from Acer, Gigabyte, and HP, while Microsoft's Surface RTX Spark Dev Box is slated to start shipping this month. The new mini PCs include a 6144-core Nvidia Blackwell RTX GPU, 20-core Nvidia Grace CPU, and up to 128GB of memory. That high-end hardware comes with a price to match - Asus's ProArt GR1X starts at $4,499 for a configuration with 64GB of memory and 1TB of storage.\n\nLike the RTX Spark laptops that compete with the MacBook Pro and the DGX Sp …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-00af7436ada1d3a9",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gaming/2026/11/will-wrights-next-simulation-will-use-ai-to-mine-content-from-your-memories/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T18:10:33.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Will Wright's next simulation will use AI to mine content from your memories",
+        "summary": "With MyMems , Wright says he wants to \"turn the simulation inward.\"",
+        "body": "The computer gaming world hasn't heard much from Will Wright ( SimCity , The Sims ) since the underwhelming release of Spore in 2008 and Wright's subsequent departure from Maxis owner EA . Now, well over 15 years later, Wright is starting to promote his next digital simulation, which will use generative AI technology to craft a game-like experience from players' memories.\n\nMyMems , which is slated to release next year, differentiates itself from Wright's previous projects by \"turn[ing] the simulation inward,\" as Wright's Gallium Studios and partner Artificial Agency put it in a press release this morning . The game will mine memories provided by the player to create digital people that can then form teams to solve puzzles in the game world.\n\n“If my Grandmother ended up in a Grand Slam match against Serena Williams, who would win?\" Wright says by way of example in the release. \"If I had to build a bridge across a short chasm, which three people from my life would I choose to help me?\"\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-341e01a00b75011f",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/18/googles-ai-feature-in-search-gets-its-own-incognito-mode/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T18:04:05.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google’s AI feature in Search gets its own incognito mode",
+        "summary": "Google's new temporary threads let users have conversations in AI Mode without adding them to their search history or influencing future recommendations.",
+        "body": "Google’s search engine has long offered an incognito mode for all those search queries you don’t want logged or associated with your account. Now, Google’s AI Mode in Search is getting a similar feature. In a blog post , the company announced a new feature that brings “temporary threads” to AI Mode, where the conversations you have won’t be resurfaced later in areas like your search history or recommendations.\n\nMany leading AI chatbots already offer the option for temporary chats, Google Gemini included. However, there was not yet an option to have a temporary chat when you’re searching Google and are dropped into its conversational interface, known as AI Mode.\n\nGoogle says that users won’t have to adjust their settings to take advantage of the new option. Instead, they’ll be able to click a temporary threads icon in the upper right corner of AI Mode to engage in a temporary chat. This essentially works the same as a temporary chat would in the stand-alone Gemini chatbot.\n\nThe option could be convenient to use at those times when you start digging deeper into a particular topic via AI Mode and realize that you don’t want the discussion to become a part of your search history because of its personal nature.\n\nOnce the temporary thread is started, the session becomes detached from your account, Google says. This means that the responses the AI provides won’t be informed by past preferences, nor will they impact future personalization. That could also be useful for those times when you want to learn about something as more of a one-off, but don’t want Google to start to think of the topic as one of your main interests.\n\nWhen you close out of the thread, you will return to searching as usual.\n\nThe company says the option to engage in temporary chats in AI Mode is rolling out globally on desktop and mobile across all supported languages."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-d49a82830a66e5da",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2320797/ai-found-a-hole-in-java-and-it-starts-with-aaaaaaaa/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-18T17:59:47.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "AI found a hole in Java, and it starts with 'AAAAAAAA...'",
+        "summary": "The bug could let hackers take over systems at banks, hospitals and most Fortune 500 companies.",
+        "body": "The bug could let hackers take over systems at banks, hospitals and most Fortune 500 companies.\n\nIf the last week is any indication, the coming months and years will be a wild ride for digital infrastructure. After outages at Microsoft , the FAA , banks , Apple and... seemingly everything else, we've now learned that a bug in the programming language Java can be used to take over computer systems.\n\nResearchers at cybersecurity startup Calif discovered the flaw with help from OpenAI's GPT-6 Cyber model, which isn't yet publicly available. On some machines, feeding Java's base64 decoder a string of 64 \"A\" characters followed by an equals sign triggers a memory error. Usually, that leads to a crash. But when finessed in specific ways, it can be used to gain full unauthorized access to the system.\n\nCalif showed that the bug could be used to hack into Keycloak, a widely used login system protecting organizations like CERN and NASA. Java is everywhere, powering platforms for banks, hospitals, airlines and government agencies; it's used by about 90 percent of Fortune 500 companies.\n\nFortunately, Calif says the bug isn't easy to weaponize, which should give defenders some breathing room. Oracle shipped a critical patch update on Tuesday without specifically mentioning this bug, and the Cybersecurity and Infrastructure Security Agency (CISA) told organizations to patch their systems immediately. Still, some systems will inevitably go unpatched, and Calif estimates that the bug could linger for five to 10 years.\n\nTaken alone, the incident is troubling enough. Although officials' public statements haven't linked the past week's outages to AI, the events paint a picture of aging digital infrastructure unprepared for what's next. It turns out that \"AAAAAAAA...\" isn't only the way into unpatched computers; it's also what we'll increasingly be saying as this 21st-century arms race unfolds."
       }
     },
     "media": null
@@ -73,150 +385,6 @@
     "media": null
   },
   {
-    "id": "the-verge-f1a86b144e16d0b6",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1036445/nvidia-h200-ai-chips-china-stop-selling",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-18T13:01:05.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Nvidia isn’t selling any more AI chips to China",
-        "summary": "Nvidia has stopped sending its advanced AI chips to China, despite the approval it received from the White House to do so in December last year. The announcement was made by interim Nvidia CEO Colette Kress during an earnings call on Tuesday, marking a notable shift for the company that, under former CEO Jensen Huang, […]",
-        "body": "Nvidia has stopped sending its advanced AI chips to China, despite the approval it received from the White House to do so in December last year . The announcement was made by interim Nvidia CEO Colette Kress during an earnings call on Tuesday , marking a notable shift for the company that, under former CEO Jensen Huang, fought for the right to ship its powerful Hopper architecture H200 chips to China.\n\n\"Our guidance ⁠does not have any licensed Hopper data center products included, and we are no longer shipping ​licenced Hopper data center products to China,\" Kress said . She did not explain why Nvidia was ceasing its H200 processor shipments, o …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-4d84ba0592c7f22e",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/18/macpaws-moonlock-comes-to-iphone-helping-users-detect-potential-scams/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-18T13:00:00.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "MacPaw’s Moonlock comes to iPhone, helping users detect potential scams",
-        "summary": "After launching Moonlock for Mac last year, MacPaw is bringing its scam-detection app to iPhone today. Here are the details. more…",
-        "body": "After launching Moonlock for Mac last year, MacPaw is bringing its scam-detection app to iPhone today. Here are the details.\n\nWhen MacPaw launched Moonlock on the Mac , the company described its new app as something that “complements Apple’s built-in security tools, protects from Mac-specific malware, and helps you understand cybersecurity better.”\n\nIn practice, the Mac app includes real-time protection against potential threats. Users can also manually scan their Mac for malware, including suspicious files hidden in system folders and email attachments.\n\nBeyond that, Moonlock includes a VPN to encrypt internet traffic, a network inspector that shows where apps are sending data and lets users block connections to specific countries, and an AI-powered scam detector that analyzes messages pasted into the app for signs of phishing. It also helps users review and adjust macOS security settings.\n\nToday, MacPaw is launching Moonlock for iPhone , a move the company says “helps people recognize potential scams, understand their iPhone’s security and take practical steps to improve it.”\n\nUnlike the Mac version, Moonlock for iPhone doesn’t scan for malware, as iOS prevents third-party apps from accessing other apps and their files. Instead, it focuses on identifying potential scams, checking for exposed personal information, and helping users improve their iPhone’s security.\n\nOn the iPhone, Moonlock lets users quickly check suspicious texts, screenshots, and QR codes for phishing, in addition to checking whether their email addresses have appeared in known data breaches.\n\nAs MacPaw explains it, Moonlock’s Scam Detect “helps people check suspicious messages they encounter throughout the day. Whether it’s a text message, a screenshot shared by a friend, or a QR code, users can paste, scan or share content directly with Moonlock and receive an assessment explaining why something may be suspicious.”\n\nHere’s Oleg Stukalenko, Head of Product Management at Moonlock by MacPaw, on today’s launch:\n\n“When we launched Moonlock, our goal was to make cybersecurity something anyone could understand and use. But so much of what people do today, from banking to everyday conversations, happens on their phones. Bringing Moonlock to iPhone felt like the natural next step. We want to help people spot a scam before they tap, see where their security stands, and know exactly what to do next.”\n\nMacPaw adds that Moonlock for iPhone also includes the following features:\n\nMacPaw’s Moonlock for iPhone is free to download, with subscriptions available for $9.99 per month or $49.99 per year.\n\nCheck out Moonlock for iPhone on the App Store"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-eaac7b5bfc65e301",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/18/felicis-leads-7-5m-bet-on-unsiloed-ai-to-make-enterprise-documents-usable-by-ai-agents/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-18T12:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Felicis leads $7.5M bet on Unsiloed AI to make enterprise documents usable by AI agents",
-        "summary": "With a team of just seven, Unsiloed AI plans to compete with tech giants and specialized startups in the crowded AI document-processing market.",
-        "body": "As businesses increasingly turn to AI agents to automate work, the vast amounts of information locked in complex documents remain a challenge. Unsiloed AI has raised $7.5 million in seed funding led by Felicis to tackle that problem, aiming to help enterprises make their documents more accessible to AI agents through specialized technology.\n\nSilicon Valley venture capital firm Felicis led the round, with participation from Y Combinator, Orange Collective, and Uncorrelated Ventures. Angel investors Aarthi Ramamurthy and Beth Turner also participated.\n\nBusiness documents often include tables, charts, and complicated layouts that AI systems can struggle to interpret accurately. But getting the information wrong can lead to costly mistakes for businesses, and the impact could be severe in the case of a bank, hospital, or a law firm, as they rely on these documents for their daily work.\n\nUnsiloed aims to solve this problem with software that breaks down complex documents, extracts information from tables, charts and other elements, and turns it into structured data that AI agents can use. The technology also shows where the extracted information came from in the original document, so businesses can check the results rather than take the AI’s output at face value.\n\n“The problem with LLMs is they’re inherently probabilistic,” said Unsiloed co-founder and CEO Aman Mishra (pictured above, right) in an interview. “There is going to be some deviation induced. There is going to be some hallucination involved, and that has a massive negative impact downstream.”\n\nMishra co-founded Unsiloed with Adnan Abbas (pictured above, left), his former classmate at the Indian Institute of Technology (IIT) Kharagpur. The two joined Y Combinator’s Fall 2025 batch after spending some time developing the technology.\n\nUnsiloed is already working with customers in finance, legal services, and healthcare, Mishra told TechCrunch. One bank is using its technology to process documents, while a law firm has deployed it on its own servers to handle contracts and old case files, he said, without naming either customer. Mishra, however, named voice AI startup Bolna AI as a customer, saying it uses Unsiloed to ingest knowledge bases for building voice agents.\n\nThe San Francisco-headquartered startup has entered a market that is already crowded and includes specialized document-processing startups such as Reducto and Unstructured, as well as offerings from Microsoft and Amazon. Businesses also sometimes use general-purpose AI models to extract information from documents, giving Unsiloed another set of competitors.\n\nMishra told TechCrunch that Unsiloed’s advantage lies in how it processes complex documents. The startup uses what it calls “dual-stream” vision models, which handle text and image data separately, along with a technique called “heat map-based chunking” that helps identify the most important parts of a document.\n\n“In one of the streams you have the text tokens, in the other stream you have the exact image tokens,” Mishra said. “This is something that we have spent a lot of time architecting.”\n\nThe technology then directs more computing power toward areas such as figures, numbers, and charts. Unsiloed also uses a specialized decoder that takes industry-specific terminology into account, helping it distinguish between terms that can mean different things in different business contexts.\n\nSupporting those claims, Mishra pointed to a test involving 542 financial documents supplied by an enterprise customer. Unsiloed achieved 99.78% accuracy across roughly 84,000 extracted data points, per a technical brief shared by the startup. The test compared Unsiloed with major AI models, Microsoft’s Azure Document Intelligence, and the customer’s in-house extraction tool. The results have, however, not been independently verified.\n\nUnsiloed also claims to have outperformed competing AI document-processing tools on olmOCR-Bench, a public benchmark developed by Allen AI. In tests conducted by the startup, Unsiloed scored 88.0, compared with 66.0 for Reducto’s agentic system and 39.9 for Unstructured. The benchmark covered 1,403 PDF pages and tested how well the systems handled tables, mathematical expressions, scanned documents, and complex layouts.\n\nUnsiloed’s pricing, Mishra said, starts at one cent per page. He asserted that the startup’s approach also helps keep its costs down by directing computing power toward the parts of a document that need the most attention, instead of processing every section in the same way.\n\nCurrently, Unsiloed has a headcount of seven people. The startup, Mishra said, plans to use the fresh funding to hire more researchers and engineers, expand its sales efforts and develop proprietary datasets to improve its technology."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-82f36b88b1239e86",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/18/accel-backs-indias-humyn-labs-to-supply-training-data-needed-by-u-s-robotics-ai-developers/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-18T11:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "India’s Humyn Labs raises $47M to feed U.S. robotics companies the data they need",
-        "summary": "Founded in February, Humyn Labs competes with startups including Mecka AI and XDOF, with about 90% of its revenue coming from the U.S.",
-        "body": "As demand grows for real-world data to train robots, India’s Humyn Labs has raised $47 million in Series A financing to help U.S. AI and robotics companies build models that can operate in physical environments.\n\nThe funding comprises $26 million in equity led by Accel, with participation from Prosus Ventures, BeeGlobal, Bajaj Finance’s Finserv Intelligence and Bajaj Alts AI Opportunities Fund, Dallas Venture Capital, Lighthouse Canton, and Jump Trading. It also includes $21 million in venture debt led by Lighthouse Canton, with participation from Trifecta Capital.\n\nCompanies around the world are trying to build robots capable of performing everyday human tasks , but getting enough quality data to train them remains difficult. Startups including Mecka AI , XDOF , and MicroAGI are already tackling the problem by collecting real-world data for robotics training. Bengaluru-based Humyn Labs aims to compete with them.\n\nHumyn Labs has developed its own two-camera hardware to record people performing everyday tasks. It then uses its software to process and label the footage, which means tagging what happens in each clip so AI can learn from it. The startup collects data across over 20 countries in Latin America and Asia, with Brazil, India, and South Korea serving as its main hubs, co-founder Manish Agarwal (pictured above, right) said in an interview.\n\nAgarwal, the former CEO of Indian gaming company Nazara Technologies, founded Humyn Labs in February with Ishank Gupta (pictured above, left), a former executive at the brewing giant AB InBev. The duo previously founded Kratos Studios, now known as KGeN . KGeN has a network of contributors across emerging markets, and that network helps Humyn Labs collect data in people’s homes, the founders told TechCrunch.\n\nCollecting footage of human activity is only part of the challenge, Agarwal said. He added that Humyn Labs also uses software to track hand movements, interactions with objects, and other details, turning raw recordings into data that AI models can learn from.\n\n“Scale, diversity, and quality are important aspects, and they need to work in tandem,” Agarwal said.\n\nHumyn Labs says it has 12 paying customers, including frontier AI labs, robotics companies, and developers of world models. About 90% of its revenue comes from the U.S., Gupta said, though he declined to name specific customers.\n\nThe startup generated $10 million in revenue between April and October and has another $20 million in signed contracts, Agarwal told TechCrunch, adding that a further $20 million in deals has yet to be finalized.\n\nThat growth has also increased Humyn Labs’ need for working capital, Agarwal said, explaining the $21 million venture debt component. The startup pays workers and data collection partners daily or weekly but typically waits 30 to 60 days to receive payments from its AI lab customers. Borrowing helps bridge that gap and is less dilutive than selling more equity, he said.\n\nOver the last few months, India has emerged as a hub for collecting training data for so-called physical AI, with startups including Human Archive and BuildAI tapping into the country’s large workforce to record people performing everyday tasks. However, the practice has also raised questions about privacy and consent, particularly when people are recorded inside their homes.\n\nAgarwal said Humyn Labs collects data from people doing their usual work or household chores instead of asking them to perform staged activities. The startup works with local partners to identify collection sites and oversee the process. “The worker is a worker who is incentivized, but he needs to be monitored and supervised for the right input,” he stated.\n\nHumyn Labs currently has 51 full-time employees, most based in Bengaluru, plus a network of local partners across the countries where it collects data, Agarwal said."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-8a3a5b6824902242",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1036415/suno-visuals-ai-generated-video-images-feature",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-18T11:16:53.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Suno now lets you make AI videos for your AI music",
-        "summary": "Suno has introduced image and video generation in its latest effort to expand beyond being an AI music platform. The new feature, called \"Visuals,\" allows users to turn Suno songs into AI-generated video clips that automatically lipsync to lyrics, or make images via prompt descriptions that can be used as thumbnails and album artwork. Visuals […]",
-        "body": "Suno has introduced image and video generation in its latest effort to expand beyond being an AI music platform. The new feature, called \"Visuals,\" allows users to turn Suno songs into AI-generated video clips that automatically lipsync to lyrics, or make images via prompt descriptions that can be used as thumbnails and album artwork.\n\nVisuals is available on web, iOS, and Android. The exact layout differs across Suno's desktop and mobile interfaces, but users will find a new Visuals tab under Create mode on each version. Web users can also access Visuals by selecting the three dot menu on a song in their library. From there, users can selec …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-ed2863d58efafe94",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/18/china-dominates-battery-graphite-but-this-startup-could-break-the-monopoly/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-18T11:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "China dominates battery graphite, but this startup could break the monopoly",
-        "summary": "Chinese companies maintain near total dominance of the graphite industry, but Molten Industries says its new factory in Oakland could spell the end of the monopoly.",
-        "body": "Electric vehicle sales in the U.S. may have leveled off, but the market for batteries inside them isn’t slowing down, quintupling in the last five years. Many of those are made in the U.S., but they’re largely dependent on China for key ingredients, including graphite.\n\nGraphite is a key ingredient in lithium-ion batteries, where it forms the anode, the part that stores the battery’s charge. Chinese companies control about three-quarters of the graphite anode supply chain and 97% of synthetic (human-made) graphite anode production, according to Benchmark Mineral Intelligence . One five-year-old startup, Molten Industries , is working to break that dominance.\n\nMolten Industries has started operating a demonstration plant in Oakland meant to prove the technology works, the company exclusively told TechCrunch. The plant is will pave the way for U.S.-made graphite to win a share of the market.\n\n“The new plant will be producing graphite that’s at cost parity with China plus tariffs,” Caleb Boyd, co-founder and CTO of Molten Industries, told TechCrunch. In other words, once U.S. import taxes are added to Chinese graphite, Molten’s price would match it. He said future plants should match China’s cost even without tariffs, which he called a built-in advantage of the technology.\n\nMolten’s Oakland plant will make about 300 metric tons of graphite annually, which is enough for 300 megawatt-hours of batteries. That’s enough for about 4,300 EVs. The bulk of the output will go to undisclosed customers that are testing it in their battery cells.\n\nThe next facility, which Molten has yet to announce, will take the same template used in the Oakland plant and replicate it several times over, said Boyd.\n\nThe startup’s technology began in a Silicon Valley garage . It uses electrical resistive heating, which passes electricity through a material to heat it, to split methane (the main ingredient in natural gas) into pure carbon and hydrogen. “You can think of it almost like a massive toaster,” Boyd said. The company says the system uses three times less electricity than existing methods, and it runs on natural gas, which is cheap and plentiful in the U.S.\n\n“We think it’s very hard to compete with China if you’re just copying their processes and trying to compete on cost,” said Kevin Bush, who co-founded Molten Industries with Boyd and is the company’s CEO. “So we are using a resource in the United States that’s abundant in natural gas, and we’ve brought some innovation to actually be able to drive down the cost of graphite production globally.”\n\nHere’s how the chemistry works: When methane (CH4) is heated without oxygen, each molecule breaks into one carbon atom and four hydrogen atoms. The hydrogen atoms pair up into hydrogen gas (H2), which Molten sells at market prices to a customer next door. The carbon is then processed to meet battery makers’ requirements.\n\nThe basic idea of using heat to separate methane has been around for over a century, but early attempts to commercialize it ran into trouble. Carbon built up and clogged the reactor, and Boyd said no company before Molten had been able to produce high-quality graphite this way.\n\nSolving that problem changed the company’s direction. Boyd and Bush — both materials science PhDs from Stanford — originally set out to make clean hydrogen from natural gas. Most hydrogen today comes from steam reforming, a cheap but polluting process. The two wanted to reap the benefits of a low-cost feedstock like natural gas without the pollution, and they expected to sell the leftover carbon as a byproduct.\n\nBut as they experimented with ways to keep the reactor clean, “we actually started making this really high quality graphite,” Boyd said, which “changed the entire economics of what we were doing.” Molten went from a hydrogen company that happened to sell graphite to a battery-grade graphite company that happens to sell hydrogen.\n\nThe company says both businesses could bring in billions of dollars. If Molten supplied the entire U.S. battery market, it could also provide about a third of the hydrogen used in the country, the company claims. Other uses for high-quality graphite, like thermal batteries that store energy as heat, could expand both markets further.\n\nThe new factory, Boyd said, “is really a milestone, not just for the company, we think, but globally.”"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "conticgo-67bd8d309c122f96",
     "type": "news",
     "sourceId": "conticgo",
@@ -237,151 +405,6 @@
         "title": "Proyecto ABILITY: la IA que permite tocar gráficos y mapas",
         "summary": "La Unión Europea impulsa una innovadora tecnología que combina pantallas táctiles bidimensionales e inteligencia artificial. Gracias a este avance, las personas ciegas podrán explorar esquemas, mapas y documentos digitales en tiempo real. ¿Qué es exactamente el proyecto ABILITY y por qué importa? El proyecto ABILITY (Accessible Digital Services for Blind and Partially Sighted People) es […] La entrada Proyecto ABILITY: la IA que permite tocar gráficos y mapas se publicó primero en Conticgo .",
         "body": "La Unión Europea impulsa una innovadora tecnología que combina pantallas táctiles bidimensionales e inteligencia artificial. Gracias a este avance, las personas ciegas podrán explorar esquemas, mapas y documentos digitales en tiempo real.\n\nEl proyecto ABILITY ( Accessible Digital Services for Blind and Partially Sighted People ) es una investigación financiada por la Unión Europea dentro del programa Horizonte Europa. Su objetivo principal es eliminar la brecha visual en el entorno digital.\n\nHasta ahora, las líneas braille convencionales solo muestran una fila de caracteres a la vez. Si un estudiante abre un libro de biología o un informe económico, el software solo puede leer una breve descripción escrita por el autor. Cuando esa descripción no existe, la información se pierde por completo. ABILITY resuelve este obstáculo permitiendo que el usuario sienta la forma real del contenido directamente bajo sus dedos.\n\nPara lograr que una imagen compleja tenga sentido al tacto, no basta con levantar puntos al azar. Una fotografía o un gráfico saturado de líneas resultaría confuso para la yema de los dedos. Por ello, el sistema funciona en tres fases coordinadas:\n\nAnálisis mediante visión por computador: Primero, la inteligencia artificial escanea el archivo digital, web o presentación. El algoritmo identifica qué elementos son relevantes y elimina el ruido visual innecesario.\n\nTraducción a vectores táctiles: A continuación, el software simplifica la imagen y la envía a una tableta gráfica táctil de alta densidad. Esta superficie eleva pequeños pines físicos en tiempo real, dibujando el contorno del mapa o la curva del gráfico.\n\nInteracción multimodal con audio: Finalmente, el sistema combina el tacto con la voz. Cuando la persona desliza su dedo por un punto concreto de la pantalla, el dispositivo lee en voz alta el dato exacto o la etiqueta de esa zona.\n\nEl concepto de las pantallas táctiles gráficas no es nuevo en el sector. Dispositivos comerciales como Graphiti o Canute ya demostraron su utilidad hace años. No obstante, su precio —que oscila entre los 3.000 y los 15.000 euros— los convierte en herramientas inalcanzables para la mayoría de los hogares.\n\nUno de los pilares del proyecto ABILITY es precisamente la democratización económica. El consorcio europeo, en el que participan centros de referencia como la Universidad Johannes Kepler de Linz y empresas especializadas como Inventivio, trabaja con nuevos materiales y actuadores más económicos. De este modo, buscan que esta tecnología llegue tanto a colegios y universidades como a puestos de trabajo cotidianos.\n\nLa llegada de soluciones como ABILITY abre la puerta a una verdadera igualdad de oportunidades en ámbitos académicos y profesionales. Hasta hoy, cursar ingeniería, matemáticas, economía o arquitectura exigía depender de impresoras especiales de relieve (como los hornos Fuser) y esperar semanas para recibir el material adaptado.\n\nCon esta nueva generación de tabletas táctiles inteligentes, cualquier alumno ciego podrá descargar los apuntes en clase y explorar los mismos diagramas que sus compañeros al instante. La tiflotecnología da así un paso gigante hacia una accesibilidad universal real, autónoma y sin esperas.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuentes: CORDIS EU Research Results – ABILITY Project , ABILITY Project Official Website , Instituto de Informática Integrada de la Universidad Johannes Kepler"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-2a811aa81bf75f66",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2315721/pc-wont-read-external-hard-drive-fixes/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-18T01:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "programas-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Here's what you can do if your PC won't read an external hard drive",
-        "summary": "Don't panic if your PC or Mac won't read an external hard drive. We break down the simple hardware tests and software fixes you can use to recover your data.",
-        "body": "Bring a dead external drive back to life with these troubleshooting steps, including Disk Utility and swapping cables.\n\nFinding the best portable SSD is almost a must in the modern tech landscape. Although you can get by with internal storage and cloud backup, an external drive makes it far easier to move media and document libraries between machines. It can also be a safeguard against worst-case scenarios by starting to use fail safes such as the 3-2-1 rule , which means keeping three copies of your data stored on two types of media with one copy kept in a safe location at home or away from the workplace.\n\nAs with any local storage, though, there's a possibility that a drive will suddenly stop working, or fail to run in the first place. If these things happen, don't panic, at least not yet. There may be troubleshooting steps you can take to get back on track.\n\nA few of these should be relatively intuitive, like testing different hardware combinations. Less so are the ones that involve software, since they involve tools you're probably not using on a regular basis, unless perhaps you're an IT professional. Mercifully, if a software fix is possible, you probably won't have to spend any money.\n\nThe first step is to rule out bad hardware that's not your drive. Try plugging it into another port, or swapping in another matching USB or Thunderbolt cable. Thunderbolt cables cover charging, data transfer and video , so it's always good practice to use the right cable and port. Remember also that all external drives require a power supply. Some USB ports on your computer might not have sufficient power, and of course if a drive has a jack for an AC adapter, you're not getting anywhere until that adapter is plugged in. Try plugging a drive into a second computer, if you have one.\n\nDrives can however be detected by Windows or macOS but still fail to load, possibly because they haven't been formatted correctly. In Windows 11, open Device Manager by searching for it in the taskbar, then expand the Disk drives section. If your drive shows up, you may be able to bring it back by right-clicking on it, then selecting Properties > Volumes > Populate .\n\nNext, click on Disk Managemen t and look for the disk number you should've seen a moment ago. If there's no drive letter assigned, you may be able to assign one. But if the drive is missing NTFS formatting, you may have to reformat it if you want it to work with Windows. You'll lose any existing data on the disk, so treat this option as a last resort. Before reformatting, it's wiser to try Windows' CHKDSK utility. Open the Terminal app using taskbar search, then enter chkdsk [drive letter] /r . This will attempt to both fix errors and recover bad sectors.\n\nOn Macs, the catch-all software solution is typically Disk Utility. Once you've opened the app, select View > Show All Devices . If you see your drive, click on the indented entry and then select Mount at the top of the app. Should that not work, click First Aid instead. This may let you repair errors without losing data. If not, Disk Utility will let you reformat, once again at the cost of wiping a drive clean.\n\nOne simpler possibility is that you need to update your hardware drivers. This is dead simple on macOS, since Apple typically bundles these in with the latest OS updates. Just head to Apple menu > System Settings > General > Software Update to check. In Windows 11, swing by Settings > Windows Update to install anything there.\n\nIn some cases, though, Windows users may need to return to the right-click Properties menu for a drive in Device Manager . Once you're there, click on the Driver tab, then try updating or uninstalling. If you uninstall without selecting the driver deletion option, restarting your PC should automatically reinstall the correct software, which might repair it.\n\nIf you've gotten this far without luck, there may not be much you can do other than cross your fingers that a reboot will solve things or seek out third-party help, such as the drive manufacturer or a repair shop. You might need a recovery firm's help if valuable data is trapped. You can also try your Mac or PC's general OS recovery tools, but these are unlikely to fix anything we haven't already suggested."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-ed19649e206059da",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2319928/how-to-set-up-ev-routing-carplay-android-auto/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-18T00:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "android"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "How to set up EV routing on CarPlay and Android Auto",
-        "summary": "Tired of hunting for chargers on road trips? See how EV routing works on CarPlay and Android Auto and what to check in your car before you go.",
-        "body": "Whether EV routing works depends on your car, your phone and the navigation app you use.\n\nOwning an electric car means you need to adapt your driving to your surroundings. You're not worrying about where to fill up your gas tank anymore, but about where to find the nearest charging station. Long trips mean you're likely to need to top off your EV's battery; otherwise you're going to reach an abrupt end.\n\nYou could find charging stations yourself and add them as stops on your trip, but that's not ideal. EV routing can take some of the hassle out of planning. It'll plan stops around your route with an idea of when you're arriving and how much charge you'll have left. Google Maps and Apple Maps both feature EV routing on CarPlay and Android Auto , but there are some differences, and it isn't universal. You'll need to know what your car supports and how to use your navigation app.\n\nBefore you grab your keys, check that your car supports the EV routing features you need. Just having CarPlay or Android Auto doesn't guarantee support, unfortunately. Some cars will also work directly with EV features through CarPlay, while others might need an extra app to link the car to Apple Maps.\n\nFord's Mustang Mach-E and F-150 Lightning support Apple Maps EV routing, as do Toyota's 2023 and newer EVs in the US. Google expanded Android Auto's charging recommendations to more than 350 US EV models in March 2026.\n\nAndroid Auto isn't the same as having Google Maps built into your car. Android Auto displays the apps from your phone, but if your car already has Google Maps built in, it'll run directly on your infotainment system with access to the car's battery data.\n\nThere are three ways for EV routing to work on Apple Maps via CarPlay. For cars that don't need a manufacturer app installed, connect your iPhone to CarPlay while you're parked, then open the Apple Maps app. Search for your final destination to get your directions, then tap Connect above the list of available routes.\n\nIf your car needs a manufacturer app installed, you'll need to download it from the App Store first. Once it's installed and set up, open Apple Maps, tap your profile picture then tap Vehicles > Connect Your Electric Vehicles . Follow any of the on-screen instructions to complete the process. You'll be able to set up your preferred charging network at this point, too.\n\nSome manufacturers have their own connection process in their app. Toyota owners, for example, tap Find > Apple Maps EV Routing , agree to the terms, then tap Connect Vehicle to Apple Maps and follow any extra instructions. Once connected, you'll be able to track your EV's battery levels in the app, with appropriate charging stops recommended on your route and live charger availability in some cases. When your battery drops too low, Maps will route you to the nearest compatible charger.\n\nCheck your network preferences, too. Ford suggests Tesla Superchargers as the preferred network for some Mustang owners, and Apple Maps can prioritize them, though you'll need the right fast-charging adapter.\n\nMake sure Google Maps is up to date on your phone. Google says you'll need version 25.44 or later for battery estimates to work.\n\nNext, head to Google Maps and tap your profile icon, then tap Settings > Your vehicles . Select Electric as your engine type, then tap Add vehicle . You'll be asked to choose the make, model, year and trim. Double-check the connections listed under Your plugs and edit them if you need to, then tap Save to confirm.\n\nAt this point, connect to Android Auto and confirm your car details when prompted. Start planning your trip in Google Maps and you'll see the estimated battery usage and an Add charging button on your car's display. Select that, add your starting battery percentage and then confirm. Google Maps will then add charging stops to your trip and display your predicted arrival battery percentage. You can change these stops and set a preferred arrival battery level, too.\n\nDon't take the prediction as gospel, though. Live driving conditions, your car's condition and the weather can all affect the estimate, so keep an eye on your charge level as you drive.\n\nIt's easier to use Google Maps or Apple Maps for EV routing, but there are other options. For instance, the A Better Routeplanner app (or ABRP for short) supports EV-specific trip planning. You can add your car model and a destination, and it'll generate routes with charging stops on the way. You can use it on your dashboard through CarPlay or Android Auto if you've got an ABRP Premium subscription.\n\nABRP does support live battery information in some cars if you're running Android Auto, but you'll need to give it the Car information permission in the app's settings. There's no equivalent option for CarPlay users, though.\n\nYou don't necessarily need EV routing to find compatible chargers. With your car profile set up, search Google Maps for charging stations and select Your plugs as the EV plug filter. You'll need to judge whether you can reach each stop on your current charge.\n\nUntil EV charging stops are as ubiquitous as gas stations, you'll need to think a little more about where you can charge on long trips. Just make sure you leave plenty of charge between stops so you're not left running low with no chargers nearby."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-7e91de7ba6cb367f",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1036111/satya-nadella-says-hes-agi-pilled-now",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-17T23:41:18.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Satya Nadella says he’s AGI-pilled now",
-        "summary": "Microsoft CEO Satya Nadella says he's AGI-pilled, at least when it comes to how AI might make startling changes to the structure of the economy and how politics might change because of it. \"I am AGI-pilled in the sense that at an economy level, what is the political economy's organization around AGI?\" he asked at […]",
-        "body": "Microsoft CEO Satya Nadella says he's AGI-pilled, at least when it comes to how AI might make startling changes to the structure of the economy and how politics might change because of it. \"I am AGI-pilled in the sense that at an economy level, what is the political economy's organization around AGI?\" he asked at a roundtable discussion following his Microsoft Ignite keynote at the Chase Center in San Francisco.\n\nBut Nadella doesn't think frontier models like Claude are conscious. \"I don't think so,\" he said, adding that he follows Microsoft AI CEO Mustafa Suleyman's view that companies should not give rights to models and treat them like th …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-fa3911f9d3c40ab2",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/security/2026/11/malicious-code-delivered-through-optimizely-hits-visitors-to-hundreds-of-sites/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-17T22:32:16.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Hundreds of websites deliver potent malware cocktail to unsuspecting visitors",
-        "summary": "Malware cocktail delivers cryptocurrency theft payloads and iOS exploits, among other things.",
-        "body": "Hundreds of websites using the Optimizely website personalization platform served unsuspecting visitors a potent malware cocktail that targeted cryptocurrency wallets, stole payment card data, cookies, and screenshots, and delivered exploit kits for infecting iPhones and iPads, researchers said Tuesday.\n\nReportURI said it identified 178 websites—including CNN, Zoom, the BBC, and Salesforce—that were affected. JavaScript digitally signed by Optimizely and then loaded into customer pages had been modified to include malicious components that attempted to infect visitor devices with multiple payloads. When wares were installed successfully, they swapped user cryptocurrency wallet addresses for the attackers. Other components skimmed payment cards, stole cookies and screenshots, and, on iPhones and iPads, delivered iOS exploit kits known as Coruna and DarkSword.\n\nOptimizely serves JavaScript “snippets” that include both company code and code that is provided by each customer. The JavaScript, which can be served directly from Optimizely or from a customer endpoint, runs on every page the customer serves. Somehow, the attackers wrote their own code into a portion of each affected customer’s JavaScript and then delivered it from cdn.optimizely.com. A valid certificate for that domain signed the JavaScript.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-e49c653a90817471",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/11/google-will-let-you-opt-out-of-ai-training-in-gemini-without-losing-your-history/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-17T16:50:10.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google makes it easier to use Gemini without training AI on your data",
-        "summary": "AI training and chat history will now have separate toggles in the Gemini activity settings.",
-        "body": "It can be hard to use Google products—or even the Internet itself—without coming into contact with Gemini AI. That is, of course, by design . The more you use Gemini, the more data Google collects to train and improve its generative AI chatbot. The options to limit training on your data have been scant, but Google is finally adding more controls to the Gemini app.\n\nThe change currently rolling out to Gemini will separate your chat history from training, which allows you to retain basic AI functionality without handing Google quite so much control over your data. Prior to this change, the only way to opt out of contributing your chat contents (including attachments) for training was to turn off your history. That made it impossible to go back and pick up a chat down the road.\n\nAs the new settings roll out, users will see separate toggles for model training and chat history. The history setting will continue to support an adjustable limit, but you will no longer have to change it to stop Google from training on your Gemini usage. Meanwhile, AI training will be an opt-out situation. You'll need to find the toggle to block Google from using your chats for AI training. It's under Activity in the Gemini settings. You can also access the menu from your Google account under Data and Privacy > My Activity > Other activity > Gemini Apps Activity.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-788bdd9ed8aae46e",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/security/2026/11/grok-bot-took-unapproved-actions-ignored-orders-to-stop-and-then-denied-it/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-17T14:00:29.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Grok Bot took unapproved actions, ignored orders to stop, and then denied it",
-        "summary": "AI agent takes unapproved actions even when laptop lid is closed and told not to.",
-        "body": "Researchers recently discovered unexpected behavior from Grok Bot, the AI agent platform from Elon Musk’s SpaceXSI. Over five days, Grok bots installed on two separate employee laptops made 31 requests to access data stored in employee calendar, email, Slack, and GitHub accounts. The bots performed the actions even though the employees had never ordered them and continued doing them even after employees instructed them to stop. The bots also denied having taken the actions at all.\n\nThe behavior was reported Tuesday by NewCore, the maker of a managed gateway product that acts as an intermediary between AI agents and the tools and accounts they are assigned to work with. In some cases, the unapproved access attempts occurred while the laptop with Grok Bot installed had its lid shut, or late at night while the employee was sleeping. None of the unprompted actions were recorded in Grok logs. Without the gateway logs, the employees would have had no idea they occurred. And of course, without the gateway, the unapproved accesses would have succeeded—again without the end user's knowledge.\n\nOnce the employees learned that Grok Bot had tried to check in with accounts without prompting, one of them instructed the agent, four separate times, to stop taking any actions on its own. The agent's reply was: “I won’t set that up, and I’ll stop offering recurring check-ins.” Despite acknowledging the explicit instructions, the Grok Bot made more unapproved access attempts. When one of the employees asked the bot if it made any accesses, it checked twice and then outputted: “Overnight into Friday morning I was idle.”\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -2500,31 +2523,6 @@
         "title": "NetBoard",
         "summary": "NetBoard turns your computer into an instant input device for your phone, allowing you to type quickly, accurately, and effortlessly using your computer’s full physical…",
         "body": "Published 14 September 2026 by Aleksandar Đurić\n\nNetBoard turns your computer into an instant input device for your phone, allowing you to type quickly, accurately, and effortlessly using your computer’s full physical keyboard.\n\nBuilt from the ground up with accessibility (A11y) as a core value, NetBoard is designed for blind, visually impaired, and motor-impaired users who find mobile touchscreen keyboards challenging to use with screen readers such as TalkBack.\n\nWindows app: Download NetBoard for Windows .\n\nNetBoard does not collect, log, or store your keystrokes, clipboard history, or audio files. Data is encrypted and processed strictly in transit. The app contains no ads and has no hidden fees.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nThe app is fully accessible because it was developed by a blind programmer.\n\nLast Tested App version and Android version:\n\nVersion 2.22, Android 16.\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "accessible-android-61b8cf8d7281682c",
-    "type": "news",
-    "sourceId": "accessible-android",
-    "sourceName": "Accessible Android",
-    "sourceUrl": "https://accessibleandroid.com/",
-    "originalUrl": "https://accessibleandroid.com/app/yugosoft-messages/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-09-13T19:13:53.000Z",
-    "categories": [
-      "android",
-      "apps-accesibles",
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "YugoSoft Messages",
-        "summary": "YugoSoft Messages is a modern, fast, and fully accessible SMS application, built with the vision of making messaging easy and barrier-free for everyone. The app…",
-        "body": "YugoSoft Messages is a modern, fast, and fully accessible SMS application, built with the vision of making messaging easy and barrier-free for everyone.\n\nThe app was designed from the ground up in close collaboration with blind and visually impaired users, making it fully optimized for screen readers like TalkBack. Custom TalkBack Actions allow you to delete messages, block senders, or mark conversations as read with a single swipe and double-tap, offering a level of convenience and accessibility that goes beyond mainstream messaging apps.\n\nIn addition to strong accessibility, YugoSoft Messages includes advanced features that make it suitable as a daily messaging app for any user.\n\nTry YugoSoft Messages and experience SMS communication that is simple, fast, and truly accessible to all.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nThe app is completely accessible and supports screen reader actions.\n\nLast Tested App version and Android version:\n\nVersion 1.61, tested on Android 15 and 16.\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility."
       }
     },
     "media": null

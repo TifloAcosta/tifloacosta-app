@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-18T14:03:41.530Z",
+  "generatedAt": "2026-11-18T20:35:10.068Z",
   "resources": [
     {
       "kind": "resource",
@@ -6357,23 +6357,6 @@
       "categories": [
         "nvda",
         "windows",
-        "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "accessible-android-8044eab84ef76f4b:en",
-      "sourceId": "accessible-android-8044eab84ef76f4b",
-      "lang": "en",
-      "title": "How To Route Screen Reader Audio To Different Devices With Sandfly Screen Reader",
-      "summary": "There is no need to explain why a screen reader user might sometimes want to have the screen reader’s audio routed to a different audio…",
-      "body": "Published 8 November 2026 by Kareen Kiwan\n\nThere is no need to explain why a screen reader user might sometimes want to have the screen reader’s audio routed to a different audio device than the default one.\n\nOn Android, this is not natively possible. Samsung’s One UI offers a workaround through the Separate App Sound feature, which gets the job done, even if it is not perfect. However, to my knowledge, other OEMs do not offer a comparable feature.\n\nTalkBack, Android’s default built-in screen reader, does not offer a similar capability either. Sandfly , an open-source screen reader, allows users to change the device used to output the screen reader’s speech and audio. It also provides an option to route the audio to the phone’s speaker when specific audio devices are connected.\n\nSandfly is not the only screen reader that provides this feature. Another screen reader that offers similar functionality is Backtalk , and other screen readers might have something similar. However, this post only covers how to use the audio output feature found in Sandfly. Note that setting up Sandfly is outside the scope of this post.\n\nOpen Sandfly settings. You can access them from the Sandfly menu or by selecting Sandfly from the list of installed accessibility services. You can also access the settings by selecting the app from the apps list.\n\nFind “Audio output” and activate it.\n\nThen, press “Audio output device” to see a list of currently available audio devices, including System Default, Phone Speaker, and connected wired and wireless audio devices.\n\nSelect any device to route Sandfly’s audio through it.\n\nTo have the audio come out of the phone’s speaker when a certain device is connected, choose “Phone speaker with these devices” and check all the devices you want. Whenever one of the selected devices is connected, Sandfly’s audio will come out of the phone’s speaker instead of the connected device.\n\nUse the “Keep speech on the phone while casting” option to determine whether you want the screen reader’s audio to come out of the phone’s speaker when you cast your screen.\n\nAlthough Sandfly is not my primary screen reader at the moment, I tested Audio Output and was impressed by the reliability of the audio routing. I was able to switch between Bluetooth headphones, wired USB-C earbuds, and the phone’s speakers without any issues or interference with media playback. This is consistent with tests conducted by other team members, including full-time Sandfly users.\n\nPublished in Tips and Tricks Tutorials",
-      "sourceName": "Accessible Android",
-      "originalUrl": "https://accessibleandroid.com/how-to-route-screen-reader-audio-to-different-devices-with-sandfly-screen-reader/",
-      "publishedAt": "2026-11-08T20:30:41.000Z",
-      "categories": [
-        "android",
-        "apps-accesibles",
         "tecnologia-accesibilidad"
       ]
     }

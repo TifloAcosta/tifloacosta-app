@@ -900,3 +900,4 @@
 "Siguiente canción de la lista" = "Next playlist song";
 "Detener reproducción de lista" = "Stop playlist playback";
 "Canción %d de %d: %@" = "Song %d of %d: %@";
+"Esta canción no se pudo reproducir. Se conserva en tu lista." = "This song could not be played. It remains in your playlist.";

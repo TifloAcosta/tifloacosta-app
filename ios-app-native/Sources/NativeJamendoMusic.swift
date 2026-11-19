@@ -74,10 +74,11 @@ final class NativeJamendoPlayer: ObservableObject {
     private var endObserver: NSObjectProtocol?
     private var remoteTokens: [Any] = []
 
-    func playSaved(id: String) async {
+    @discardableResult
+    func playSaved(id: String) async -> Bool {
         guard id.range(of: #"^[0-9]+$"#, options: .regularExpression) != nil else {
             error = MusicLocalized.format("El identificador guardado de Jamendo no es válido.")
-            return
+            return false
         }
         do {
             var url = URLComponents(string: "https://api.jamendo.com/v3.0/tracks/")!
@@ -92,10 +93,14 @@ final class NativeJamendoPlayer: ObservableObject {
             guard result.headers.status == "success", let track = result.results.first,
                   let streamURL = track.streamURL else {
                 error = MusicLocalized.format("Esta canción ya no está disponible en Jamendo. Se conserva en tu lista.")
-                return
+                return false
             }
             play(name: track.name, artist: track.artistName, url: streamURL)
-        } catch { self.error = MusicLocalized.format("No se pudo recuperar la canción guardada de Jamendo.") }
+            return isPlaying
+        } catch {
+            self.error = MusicLocalized.format("No se pudo recuperar la canción guardada de Jamendo.")
+            return false
+        }
     }
 
     func play(name: String, artist: String, url: URL) {

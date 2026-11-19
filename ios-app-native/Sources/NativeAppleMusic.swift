@@ -94,14 +94,15 @@ final class NativeAppleMusicPlayer: ObservableObject {
         }
     }
 
-    func playSaved(id: String, title: String) async {
+    @discardableResult
+    func playSaved(id: String, title: String) async -> Bool {
         guard !id.isEmpty else {
             error = MusicLocalized.format("La referencia guardada de Apple Music no es válida.")
-            return
+            return false
         }
         if !authorized || !canPlayCatalog {
             await connect()
-            guard authorized, canPlayCatalog else { return }
+            guard authorized, canPlayCatalog else { return false }
         }
         do {
             var request = MusicCatalogSearchRequest(term: title, types: [Song.self])
@@ -109,11 +110,13 @@ final class NativeAppleMusicPlayer: ObservableObject {
             let result = try await request.response()
             guard let song = result.songs.first(where: { $0.id.rawValue == id }) else {
                 error = MusicLocalized.format("Esta canción ya no está disponible en Apple Music. Se conserva en tu lista.")
-                return
+                return false
             }
             await play(song)
+            return isPlaying
         } catch {
             self.error = MusicLocalized.format("No se pudo recuperar la canción guardada de Apple Music.")
+            return false
         }
     }
 

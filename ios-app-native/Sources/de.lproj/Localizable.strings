@@ -898,3 +898,4 @@
 "Siguiente canción de la lista" = "Nächster Titel der Playlist";
 "Detener reproducción de lista" = "Playlist-Wiedergabe stoppen";
 "Canción %d de %d: %@" = "Titel %d von %d: %@";
+"Esta canción no se pudo reproducir. Se conserva en tu lista." = "Dieser Titel konnte nicht abgespielt werden. Er bleibt in deiner Playlist.";

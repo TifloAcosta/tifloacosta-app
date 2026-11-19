@@ -64,17 +64,18 @@ final class NativeAudiusPlayer: ObservableObject {
     private var endObserver: NSObjectProtocol?
     private var remoteTokens: [Any] = []
 
-    func play(id: String, title: String) {
+    @discardableResult
+    func play(id: String, title: String) -> Bool {
         guard id.range(of: #"^[A-Za-z0-9_-]+$"#, options: .regularExpression) != nil else {
             error = "Esta pista no tiene un identificador compatible."
-            return
+            return false
         }
         var url = URLComponents()
         url.scheme = "https"
         url.host = "api.audius.co"
         url.path = "/v1/tracks/\(id)/stream"
         url.queryItems = [URLQueryItem(name: "app_name", value: "TifloAcosta")]
-        guard let target = url.url else { return }
+        guard let target = url.url else { return false }
         NativeJamendoPlayer.shared.pauseForOtherAudio()
         NativeAppleMusicPlayer.shared.pauseForOtherAudio()
         NativeRadioPlayer.shared.pauseForOtherAudio()
@@ -103,7 +104,11 @@ final class NativeAudiusPlayer: ObservableObject {
             isPlaying = true
             updateNowPlaying()
             error = nil
-        } catch { self.error = "No se pudo iniciar la canción: \(error.localizedDescription)" }
+            return true
+        } catch {
+            self.error = "No se pudo iniciar la canción: \(error.localizedDescription)"
+            return false
+        }
     }
 
     func toggle() {

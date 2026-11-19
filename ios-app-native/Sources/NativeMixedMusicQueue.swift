@@ -84,7 +84,11 @@ final class NativeMixedMusicQueue: ObservableObject {
                 NativeAppleMusicPlayer.shared.onPlaybackFinished = finished
                 Task { @MainActor in
                     guard generation == playbackGeneration else { return }
-                    await NativeAppleMusicPlayer.shared.playSaved(id: remoteID, title: entry.title)
+                    let played = await NativeAppleMusicPlayer.shared.playSaved(id: remoteID, title: entry.title)
+                    if !played && generation == playbackGeneration {
+                        error = MusicLocalized.format("Esta canción no se pudo reproducir. Se conserva en tu lista.")
+                        next()
+                    }
                 }
             case .audius:
                 guard let remoteID = entry.appleMusicSongId, !remoteID.isEmpty else {
@@ -92,7 +96,12 @@ final class NativeMixedMusicQueue: ObservableObject {
                     continue
                 }
                 NativeAudiusPlayer.shared.onPlaybackFinished = finished
-                NativeAudiusPlayer.shared.play(id: remoteID, title: entry.title)
+                let played = NativeAudiusPlayer.shared.play(id: remoteID, title: entry.title)
+                if !played {
+                    error = MusicLocalized.format("Esta canción no se pudo reproducir. Se conserva en tu lista.")
+                    currentIndex += 1
+                    continue
+                }
             case .jamendo:
                 guard let remoteID = entry.appleMusicSongId, !remoteID.isEmpty else {
                     currentIndex += 1
@@ -101,7 +110,11 @@ final class NativeMixedMusicQueue: ObservableObject {
                 NativeJamendoPlayer.shared.onPlaybackFinished = finished
                 Task { @MainActor in
                     guard generation == playbackGeneration else { return }
-                    await NativeJamendoPlayer.shared.playSaved(id: remoteID)
+                    let played = await NativeJamendoPlayer.shared.playSaved(id: remoteID)
+                    if !played && generation == playbackGeneration {
+                        error = MusicLocalized.format("Esta canción no se pudo reproducir. Se conserva en tu lista.")
+                        next()
+                    }
                 }
             }
             return

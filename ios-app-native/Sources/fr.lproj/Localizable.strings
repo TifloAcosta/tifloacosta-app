@@ -898,3 +898,4 @@
 "Siguiente canción de la lista" = "Morceau suivant de la playlist";
 "Detener reproducción de lista" = "Arrêter la lecture de la playlist";
 "Canción %d de %d: %@" = "Morceau %d sur %d : %@";
+"Esta canción no se pudo reproducir. Se conserva en tu lista." = "Ce morceau n'a pas pu être lu. Il reste dans votre playlist.";

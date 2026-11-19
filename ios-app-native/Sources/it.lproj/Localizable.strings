@@ -898,3 +898,4 @@
 "Siguiente canción de la lista" = "Brano successivo della playlist";
 "Detener reproducción de lista" = "Interrompi riproduzione playlist";
 "Canción %d de %d: %@" = "Brano %d di %d: %@";
+"Esta canción no se pudo reproducir. Se conserva en tu lista." = "Impossibile riprodurre questo brano. Rimane nella tua playlist.";

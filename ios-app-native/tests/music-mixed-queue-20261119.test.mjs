@@ -45,6 +45,17 @@ test('Apple Music distinguishes natural stopped status from a user pause', () =>
   assert.match(queue, /NativeAppleMusicPlayer\.shared\.onPlaybackFinished = finished/);
 });
 
+test('a saved unavailable remote track returns a failure so the mixed queue can continue', () => {
+  const queue = source('NativeMixedMusicQueue.swift');
+  const apple = source('NativeAppleMusic.swift');
+  const jamendo = source('NativeJamendoMusic.swift');
+  assert.match(apple, /func playSaved\(id: String, title: String\) async -> Bool/);
+  assert.match(jamendo, /func playSaved\(id: String\) async -> Bool/);
+  assert.match(queue, /if !played && generation == playbackGeneration/);
+  const audius = source('NativeAudiusMusic.swift');
+  assert.match(audius, /func play\(id: String, title: String\) -> Bool/);
+});
+
 test('unavailable entries are skipped iteratively and do not recurse across the entire playlist', () => {
   const queue = source('NativeMixedMusicQueue.swift');
   assert.match(queue, /while entries\.indices\.contains\(currentIndex\)/);
@@ -64,7 +75,8 @@ test('mixed playlist transport labels exist in all five translated interface cat
   for (const language of ['en', 'pt', 'fr', 'it', 'de']) {
     const catalog = source(`${language}.lproj/Localizable.strings`);
     for (const key of ['Reproducción de lista', 'Canción anterior de la lista',
-      'Siguiente canción de la lista', 'Detener reproducción de lista', 'Canción %d de %d: %@']) {
+      'Siguiente canción de la lista', 'Detener reproducción de lista', 'Canción %d de %d: %@',
+      'Esta canción no se pudo reproducir. Se conserva en tu lista.']) {
       assert.ok(catalog.includes(`"${key}" = `), `${language} missing ${key}`);
     }
   }

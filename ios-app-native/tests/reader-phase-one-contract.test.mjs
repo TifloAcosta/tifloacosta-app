@@ -18,9 +18,11 @@ test('The reading opening focus preference is persistent, opt-in and applied onc
 
 test('General settings are folded into navigable destinations', () => {
   for (const title of [
-    'Audio y voces', 'Modo de lectura', 'Ajustes visuales',
+    'Motores externos', 'Modo de lectura',
     'Navegación y avances', 'Formatos de lectura'
   ]) assert.ok(settings.includes('NavigationLink("' + title + '")'), title);
+  const screen = settings.split('struct NativeReaderSettingsScreen: View {')[1];
+  assert.doesNotMatch(screen, /NavigationLink\("Audio y voces"\)|NavigationLink\("Ajustes visuales"\)/);
 });
 
 test('Per-document audio and visual settings persist and can inherit global defaults', () => {

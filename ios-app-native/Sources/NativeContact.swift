@@ -18,6 +18,7 @@ struct NativeContactScreen: View {
     ]
 
     private let social = [
+        NativeContactLink(title: "TifloAcosta en X", address: "https://x.com/TifloAcosta"),
         NativeContactLink(title: "Canal TifloAcosta en YouTube", address: "https://www.youtube.com/@tifloacosta"),
         NativeContactLink(title: "Instagram", address: "https://www.instagram.com/tifloacosta/"),
         NativeContactLink(title: "Facebook — Canal TifloAcosta", address: "https://www.facebook.com/profile.php?id=61586738581998"),

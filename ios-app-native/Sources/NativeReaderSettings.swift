@@ -1,5 +1,6 @@
 import SwiftUI
 import AVFoundation
+import UIKit
 
 
 /// Pausas añadidas entre fragmentos del sintetizador del sistema, en segundos.
@@ -140,6 +141,7 @@ struct NativeReaderAudioControls: View {
     @AppStorage("native-reading-voice-id") private var generalVoiceID = ""
     @AppStorage("native-reader-reading-engine") private var readingEngine = 0
     @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
+    @AppStorage("native-reader-gemini-validated") private var geminiValidated = false
     @AppStorage("native-reader-phonon-voice") private var phononVoice = ""
     let speedSelection: Binding<Int>?
     let readingEngineSelection: Binding<Int>?
@@ -169,8 +171,29 @@ struct NativeReaderAudioControls: View {
     }
 
     private var selectedVoiceID: String { voiceSelection?.wrappedValue ?? generalVoiceID }
-    private var chosenEngine: Int { readingEngineSelection?.wrappedValue ?? readingEngine }
+    private var chosenEngine: Int {
+        let saved = readingEngineSelection?.wrappedValue ?? readingEngine
+        return availableEngines.contains(where: { $0.id == saved }) ? saved : 0
+    }
     private var chosenGeminiVoice: String { geminiVoiceSelection?.wrappedValue ?? geminiVoice }
+    private var availableEngines: [(id: Int, title: String)] {
+        var engines: [(id: Int, title: String)] = [(0, "Voces del sistema")]
+        if geminiValidated && NativeVoiceCredentialStore.hasKey("gemini") {
+            engines.append((1, "Gemini"))
+        }
+        if NativePhononRuntime.isUsable { engines.append((2, "Phonon")) }
+        return engines
+    }
+    private var availableEngineSelection: Binding<Int> {
+        let storage = readingEngineSelection ?? $readingEngine
+        return Binding(
+            get: { availableEngines.firstIndex(where: { $0.id == storage.wrappedValue }) ?? 0 },
+            set: { index in
+                guard availableEngines.indices.contains(index) else { return }
+                storage.wrappedValue = availableEngines[index].id
+            }
+        )
+    }
     private var speedChoiceBinding: Binding<Int> {
         let storage = speedSelection ?? $generalSpeed
         return Binding(
@@ -224,8 +247,8 @@ struct NativeReaderAudioControls: View {
     var body: some View {
         NativeAdjustableChoice(
             title: readingEngineSelection == nil ? "Motor de lectura predeterminado" : "Motor de lectura de esta obra",
-            choices: ["Voces del sistema", "Gemini", "Phonon"],
-            selectedIndex: readingEngineSelection ?? $readingEngine
+            choices: availableEngines.map { $0.title },
+            selectedIndex: availableEngineSelection
         )
         if chosenEngine == 1 {
             if NativeVoiceCredentialStore.hasKey("gemini") {
@@ -237,16 +260,16 @@ struct NativeReaderAudioControls: View {
                         set: { (geminiVoiceSelection ?? $geminiVoice).wrappedValue = NativeGeminiSpeech.voices[$0] }
                     )
                 )
-                Text("La voz seleccionada se utilizará según el ámbito de estos ajustes. La conexión de Gemini se configura en Motores externos.")
-                    .font(.footnote)
             } else {
                 Text("Gemini necesita una clave API guardada en Motores externos antes de reproducir.")
                     .font(.footnote)
             }
         } else if chosenEngine == 2 {
-            Text("La disponibilidad de Phonon depende de tener instalado un motor compatible dentro de TifloLector.")
-                .font(.footnote)
+            if !NativePhononRuntime.isUsable {
+                Text("Configura Phonon en Motores externos antes de utilizarlo.")
+            }
         }
+        if chosenEngine == 0 {
         NativeAdjustableChoice(
             title: "Velocidad de voz",
             choices: NativeReaderSpeedOptions.choices,
@@ -275,7 +298,8 @@ struct NativeReaderAudioControls: View {
         .onReceive(NotificationCenter.default.publisher(for: AVSpeechSynthesizer.availableVoicesDidChangeNotification)) { _ in
             refreshVoices()
         }
-        if allowVoiceDownloads {
+        }
+        if allowVoiceDownloads && chosenEngine == 0 {
             if personalVoiceStatus == .notDetermined {
                 Button("Permitir mi Voz personal") {
                     Task {
@@ -290,7 +314,7 @@ struct NativeReaderAudioControls: View {
                 Text("Este dispositivo no admite el uso de Voz personal en TifloLector.")
             }
             Text("El tono modifica la voz sintetizada, no los audiolibros grabados.").font(.footnote)
-            Button("Buscar más voces") { showVoiceHelp = true }
+            Button("Cómo instalar más voces del sistema") { showVoiceHelp = true }
                 .accessibilityHint("Indica dónde descargar voces adicionales de iOS.")
                 .alert("Buscar más voces", isPresented: $showVoiceHelp) {
                     Button("Entendido", role: .cancel) {}
@@ -519,6 +543,23 @@ struct NativeReaderDocumentSettingsScreen: View {
     }
 }
 
+struct NativeReaderBrailleControls: View {
+    @AppStorage("native-reader-navigation-unit") private var navigationUnit = 0
+
+    var body: some View {
+        NativeAdjustableChoice(
+            title: "Unidad de navegación en braille",
+            choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
+            selectedIndex: $navigationUnit
+        )
+        Button("Configurar línea braille en VoiceOver") {
+            guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+            UIApplication.shared.open(url)
+        }
+        .accessibilityHint("Abre Ajustes del iPhone. La línea braille se configura en Accesibilidad, VoiceOver, Braille.")
+    }
+}
+
 struct NativeReaderSettingsScreen: View {
     @AppStorage("native-reader-navigation-unit") private var navigationUnit = 0
     @AppStorage("native-reader-reading-mode") private var readingMode = 0
@@ -530,47 +571,28 @@ struct NativeReaderSettingsScreen: View {
 
     var body: some View {
         List {
-            NavigationLink("Audio y voces") { NativeReaderAudioSettingsScreen() }
             NavigationLink("Creación rápida de marcas") { NativeQuickBookmarkHelpScreen() }
             NavigationLink("Motores externos") { NativeReaderExternalVoiceSettingsScreen() }
-                .accessibilityHint("Configura las voces, la clave API de Gemini y Phonon.")
+                .accessibilityHint("Prepara Gemini o Phonon antes de seleccionarlos para leer.")
             NavigationLink("Modo de lectura") {
                 List {
-                    Section("Presentación de lectura") {
                         NativeAdjustableChoice(
                             title: "Modo de lectura",
                             choices: ["Voz", "Visual", "Braille"],
                             selectedIndex: $presentationMode
                         )
-                        Text("Voz: el foco puede comenzar en Reproducir. Visual: lectura manual del texto. Braille: lectura manual del mismo texto con la línea braille conectada a VoiceOver. Los tres modos conservan posición y marcas.")
-                            .font(.footnote)
-                    }
-                    Section("Al abrir un documento") {
+                    if presentationMode == 0 {
                         Toggle("Foco inicial en Reproducir", isOn: automaticReadingBinding)
-                        Text("Activado: al abrir el documento, el foco se sitúa en Reproducir. Desactivado: el foco se sitúa en el texto. La voz solo comienza cuando pulsas Reproducir.")
-                            .font(.footnote)
-                    }
-                    NavigationLink("Lectura con línea braille") {
-                        List {
-                            Section("Lectura continua") {
-                                Text("TifloLector conserva los párrafos y la posición para navegar con VoiceOver y una línea braille. Puedes utilizar braille y voz al mismo tiempo.")
-                                Text("Los controles de reproducción y ajustes aparecen antes del texto. Al leer manualmente no se inicia la voz ni se desplaza el foco por cuenta de TifloLector.")
-                            }
-                            Section("Preferencias de VoiceOver") {
-                                Text("Para configurar tu línea: Ajustes del iPhone, Accesibilidad, VoiceOver, Braille.")
-                                Text("Duración del avance automático: ajusta el ritmo de avance de la línea si tu dispositivo lo admite.")
-                                Text("Cambio de página automático: permite continuar al desplazarte cuando la presentación lo admite.")
-                                Text("Estas opciones pertenecen a VoiceOver; TifloLector no modifica sus valores.")
-                            }
-                        }
-                        .tifloScreenSurface()
-                        .navigationTitle("Lectura con línea braille")
+                        NativeReaderAudioControls()
+                    } else if presentationMode == 1 {
+                        NativeReaderVisualControls()
+                    } else {
+                        NativeReaderBrailleControls()
                     }
                 }
                 .tifloScreenSurface()
                 .navigationTitle("Modo de lectura")
             }
-            NavigationLink("Ajustes visuales") { NativeReaderVisualSettingsScreen() }
             NavigationLink("OCR y reconocimiento") { NativeReaderOCRSettingsScreen() }
             NavigationLink("Navegación y avances") {
                 List {

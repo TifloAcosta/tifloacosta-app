@@ -71,7 +71,8 @@ test('Botón Reproducir usa el modo elegido para los gestos y mantiene doble toq
   assert.match(reader, /case \.decrement: moveUnit\(-1\)/);
   assert.match(reader, /if unit == 5 \{/);
   assert.match(reader, /if unit == 6 \{/);
-  assert.match(reader, /speech\.isPlaying \? pausePlayback\(\) : play\(\)/);
+  assert.match(reader, /private func activatePlaybackButton\(\)/);
+  assert.match(reader, /if speech\.isPlaying \{ pausePlayback\(\) \} else \{ play\(\) \}/);
 });
 test('Toque mágico solo controla la reproducción actual', () => {
   assert.match(reader, /\.accessibilityAction\(\.magicTap\)/);

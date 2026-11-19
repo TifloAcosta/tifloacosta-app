@@ -21,9 +21,9 @@ test('Cada valor literal de los selectores tiene traducción en los cinco idioma
       for (const item of block[1].matchAll(/"([^"]+)"/g)) values.add(item[1]);
     }
   }
-  assert.ok(values.has('Intermedia: título, porcentaje y formato'));
-  assert.ok(values.has('Breve: título y porcentaje leído'));
-  assert.ok(values.has('Completa: título, porcentaje, formato y carpeta'));
+  assert.ok(values.has('Título y porcentaje'));
+  assert.ok(values.has('Título, porcentaje y formato'));
+  assert.ok(values.has('Título, porcentaje, formato y carpeta'));
   for (const lang of ['en', 'pt', 'fr', 'it', 'de']) {
     const catalog = source(lang + '.lproj/Localizable.strings');
     const keys = new Set([...catalog.matchAll(/^"((?:[^"\\]|\\.)+)"\s*=/gm)].map(x => x[1]));

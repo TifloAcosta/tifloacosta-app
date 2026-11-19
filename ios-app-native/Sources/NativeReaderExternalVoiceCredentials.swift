@@ -195,6 +195,7 @@ struct NativeReaderExternalVoiceDetailScreen: View {
     @AccessibilityFocusState private var focusGeminiCheck: Bool
     @State private var returnedFromGeminiGuide = false
     @State private var hasGeminiKey = NativeVoiceCredentialStore.hasKey("gemini")
+    @AppStorage("native-reader-gemini-validated") private var geminiValidated = false
     @State private var message = ""
     @State private var confirmDeletion = false
     @State private var checking = false
@@ -261,8 +262,10 @@ struct NativeReaderExternalVoiceDetailScreen: View {
             }
             switch http.statusCode {
             case 200..<300:
+                geminiValidated = true
                 message = "Conexión correcta. Puedes utilizar Gemini para leer documentos y exportar audio."
             case 401, 403:
+                geminiValidated = false
                 message = "Clave rechazada o sin permisos. Revisa Google AI Studio."
             case 429:
                 message = "Límite de solicitudes alcanzado. Revisa tu cuota."
@@ -392,6 +395,7 @@ struct NativeReaderExternalVoiceDetailScreen: View {
                         try NativeVoiceCredentialStore.save(keyInput, provider: "gemini")
                         keyInput = ""
                         hasGeminiKey = true
+                        geminiValidated = false
                         message = "Clave guardada en el dispositivo. Pulsa Comprobar conexión."
                         focusGeminiCheck = true
                     } catch {
@@ -513,6 +517,7 @@ struct NativeReaderExternalVoiceDetailScreen: View {
                     try NativeVoiceCredentialStore.delete("gemini")
                     hasGeminiKey = false
                     message = "Clave eliminada."
+                    geminiValidated = false
                 } catch {
                     message = error.localizedDescription
                 }

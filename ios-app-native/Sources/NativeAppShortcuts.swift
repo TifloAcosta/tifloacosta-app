@@ -60,6 +60,17 @@ struct NativeOpenVideosIntent: AppIntent {
     }
 }
 
+struct NativeOpenMusicIntent: AppIntent {
+    static var title: LocalizedStringResource = "Abrir Mi Música en TifloAcosta"
+    static var description = IntentDescription("Abre la biblioteca musical de TifloAcosta.")
+    static var openAppWhenRun: Bool = true
+
+    func perform() async throws -> some IntentResult {
+        NativeShortcutRoute.request("miMusica")
+        return .result()
+    }
+}
+
 
 /// The reader owns the live playback cursor. The shortcut only asks that
 /// active reader to save a bookmark; it never pauses or restarts speech.
@@ -157,6 +168,12 @@ struct NativeTifloAppShortcuts: AppShortcutsProvider {
             phrases: ["Abre vídeos en \(.applicationName)"],
             shortTitle: "Abrir vídeos",
             systemImageName: "play.rectangle"
+        ),
+        AppShortcut(
+            intent: NativeOpenMusicIntent(),
+            phrases: ["Abre Mi Música en \(.applicationName)"],
+            shortTitle: "Abrir Mi Música",
+            systemImageName: "music.note.list"
         )
     }
 }

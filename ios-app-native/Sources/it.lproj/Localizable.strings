@@ -824,3 +824,21 @@
 "Un minuto" = "Un minuto";
 "Presentación de lectura" = "Modalità di lettura";
 "Voz: el foco puede comenzar en Reproducir. Visual: lectura manual del texto. Braille: lectura manual del mismo texto con la línea braille conectada a VoiceOver. Los tres modos conservan posición y marcas." = "Voce: il focus può iniziare su Riproduci. Visuale: lettura manuale del testo. Braille: lettura manuale dello stesso testo con un display braille collegato a VoiceOver. Tutte e tre le modalità mantengono la posizione e i segnalibri.";
+// Beta: modos de lectura y acciones accesibles.
+"Configura Phonon en Motores externos antes de utilizarlo." = "Configura Phonon in Motori esterni prima di utilizzarlo.";
+"Cómo instalar más voces del sistema" = "Come installare altre voci di sistema";
+"Configurar línea braille en VoiceOver" = "Configura il display braille in VoiceOver";
+"Abre Ajustes del iPhone. La línea braille se configura en Accesibilidad, VoiceOver, Braille." = "Apre Impostazioni iPhone. Configura il display braille in Accessibilità, VoiceOver, Braille.";
+"Prepara Gemini o Phonon antes de seleccionarlos para leer." = "Configura Gemini o Phonon prima di selezionarli per la lettura.";
+"Compartir documento" = "Condividi documento";
+"Convertir a audio o DAISY" = "Converti in audio o DAISY";
+"Unidad de navegación en braille" = "Unità di navigazione braille";
+"No se conserva el documento original para compartirlo." = "Il documento originale non è disponibile per la condivisione.";
+"El paquete DAISY completo no está disponible como ZIP; no se compartirá un archivo incompleto." = "Il pacchetto DAISY completo non è disponibile in formato ZIP; non verrà condiviso un file incompleto.";
+"Esta obra no contiene texto que se pueda convertir a voz." = "Questo documento non contiene testo convertibile in voce.";
+"El motor seleccionado debe prepararse en Motores externos." = "Il motore selezionato deve essere configurato in Motori esterni.";
+"Abrir Mi Música en TifloAcosta" = "Apri La mia musica in TifloAcosta";
+"Abre la biblioteca musical de TifloAcosta." = "Apre la libreria musicale di TifloAcosta.";
+"Abrir Mi Música" = "Apri La mia musica";
+"TifloAcosta en X" = "TifloAcosta su X";
+"Convertir y guardar" = "Converti e salva";

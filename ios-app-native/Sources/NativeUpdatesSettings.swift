@@ -226,7 +226,6 @@ struct NativeSettingsScreen: View {
     @AppStorage("native-ios-line-spacing") private var lineSpacingIndex = 0
     @AppStorage("native-ios-strong-text") private var strongText = false
     @AppStorage("native-ios-language") private var languageIndex = 0
-    @AppStorage("native-voiceover-library-detail-index") private var voiceOverDetailIndex = 0
     @Environment(\.openURL) private var openURL
     @State private var showVisualSettings = false
     @ObservedObject private var ownUpdatesNotifications = NativeOwnUpdatesNotifications.shared
@@ -281,17 +280,6 @@ struct NativeSettingsScreen: View {
                 }
                 .accessibilityHint("Abre este menú para modificar la presentación de TifloAcosta.")
             }
-            .listRowBackground(TifloVisual.surfaceRaised)
-
-            Section {
-                NativeAdjustableChoice(
-                    title: "Detalle de VoiceOver",
-                    choices: ["Breve: título y porcentaje leído",
-                              "Intermedia: título, porcentaje y formato",
-                              "Completa: título, porcentaje, formato y carpeta"],
-                    selectedIndex: $voiceOverDetailIndex
-                )
-             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
             Section("Atajos de Siri") {

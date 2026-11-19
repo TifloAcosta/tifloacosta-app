@@ -1185,6 +1185,7 @@ struct NativeReaderLibraryScreen: View {
     @State private var folderToDelete: String?
     @State private var folderForDocument: NativeReadingDocument?
     @State private var documentToConfigure: NativeReadingDocument?
+    @State private var documentToConvert: NativeReadingDocument?
     @State private var documentToTranslate: NativeReadingDocument?
     @State private var selectionMode = false
     @State private var selectedDocumentIDs: Set<UUID> = []
@@ -1379,6 +1380,18 @@ struct NativeReaderLibraryScreen: View {
         }
     }
 
+    private func shareDocumentFromLibrary(_ document: NativeReadingDocument) {
+        guard let original = library.originalURL(for: document) else {
+            importError = "No se conserva el documento original para compartirlo."
+            return
+        }
+        if document.fileExtension?.lowercased() == "daisy" && original.pathExtension.lowercased() != "zip" {
+            importError = "El paquete DAISY completo no está disponible como ZIP; no se compartirá un archivo incompleto."
+            return
+        }
+        NativeShare.present(url: original)
+    }
+
     var body: some View {
         List {
             if let shortcutMessage {
@@ -1412,12 +1425,15 @@ struct NativeReaderLibraryScreen: View {
                     } label: { Text(documentRowLabel(document)) }
                     .accessibilityLabel(documentRowLabel(document))
                     .accessibilityHint("Doble toque para abrir. Hay acciones de accesibilidad.")
-                    .accessibilityAction(named: Text("Reproducir")) { play(document) }
-                    .accessibilityAction(named: Text("Compartir documento original")) {
-                        if let url = library.originalURL(for: document) {
-                            NativeShare.present(url: url)
-                        } else {
-                            importError = "El documento original no está disponible. Puedes exportar el texto desde el lector si existe."
+                    .accessibilityActions {
+                        Button("Reproducir") { play(document) }
+                        if library.originalURL(for: document) != nil {
+                            Button("Compartir documento") { shareDocumentFromLibrary(document) }
+                        }
+                        if !document.body.isEmpty {
+                            Button("Convertir a audio o DAISY") {
+                            documentToConvert = document
+                            }
                         }
                     }
                     .accessibilityAction(named: Text("Información")) { information = document }
@@ -1576,6 +1592,12 @@ struct NativeReaderLibraryScreen: View {
                         Button("Cerrar") { showFolderPicker = false }
                     }
                 }
+            }
+        }
+        .sheet(item: $documentToConvert) { doc in
+            NavigationStack {
+                NativeReadingScreen(document: doc, speech: speech, startWithConversion: true)
+                    .environmentObject(library)
             }
         }
         .sheet(isPresented: $externalCatalogPresented) {
@@ -1936,6 +1958,7 @@ struct NativeReadingScreen: View {
     @AppStorage("native-ios-language") private var languageIndex = 0
     var startPercent: Int? = nil
     var startTrack: Int? = nil
+    var startWithConversion = false
 
     @EnvironmentObject private var library: NativeReaderLibrary
     @Environment(\.dismiss) private var dismiss
@@ -1951,6 +1974,7 @@ struct NativeReadingScreen: View {
     @AppStorage("native-reader-presentation-mode") private var presentationMode = 0
     @AppStorage("native-reader-reading-engine") private var readingEngine = 0
     @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
+    @AppStorage("native-reader-gemini-validated") private var geminiValidated = false
     @AppStorage("native-reader-phonon-voice") private var phononVoice = ""
     @State private var didApplyOpeningMode = false
     @State private var sleepIndex = 0 // Each open document starts with timer disabled.
@@ -1977,6 +2001,14 @@ struct NativeReadingScreen: View {
     @State private var audioExportFormat: NativeGeminiAudioExport.Format = .mp3
     @State private var audioExportLanguage = "es"
     @State private var audioExportEngine: NativeGeminiAudioExport.Engine = .system
+    private var availableExportEngines: [(engine: NativeGeminiAudioExport.Engine, title: String)] {
+        var engines: [(engine: NativeGeminiAudioExport.Engine, title: String)] = [(.system, "Voces del sistema")]
+        if geminiValidated && NativeVoiceCredentialStore.hasKey("gemini") {
+            engines.append((.gemini, "Gemini"))
+        }
+        if NativePhononRuntime.isUsable { engines.append((.phonon, "Phonon")) }
+        return engines
+    }
     @State private var audioExportSystemVoice = ""
     @State private var audioExportGeminiVoice = "Kore"
     @State private var audioExportPhononVoice = ""
@@ -2004,11 +2036,13 @@ struct NativeReadingScreen: View {
      private let sleepMinutes: [Int] = [0, 5, 10, 15, 30, 45, 60]
 
     init(document: NativeReadingDocument, speech: NativeReadingSpeech,
-         startPercent: Int? = nil, startTrack: Int? = nil) {
+         startPercent: Int? = nil, startTrack: Int? = nil,
+         startWithConversion: Bool = false) {
         self.document = document
         self.speech = speech
         self.startPercent = startPercent
         self.startTrack = startTrack
+        self.startWithConversion = startWithConversion
         self.textLayout = NativeReaderTextLayout(document.body)
         self.wordCount = document.body.split(whereSeparator: \.isWhitespace).count
     }
@@ -2023,7 +2057,12 @@ struct NativeReadingScreen: View {
     private var effectiveLineSpacing: Int { latest.readerPreferences?.lineSpacingIndex ?? lineSpacingIndex }
     private var effectiveStrongText: Bool { latest.readerPreferences?.strongText ?? strongText }
     private var speed: Double { NativeReaderSpeedOptions.rate(for: effectiveSpeedIndex) }
-    private var effectiveReadingEngine: Int { latest.readerPreferences?.readingEngineIndex ?? readingEngine }
+    private var effectiveReadingEngine: Int {
+        let selected = latest.readerPreferences?.readingEngineIndex ?? readingEngine
+        if selected == 1 && !(geminiValidated && NativeVoiceCredentialStore.hasKey("gemini")) { return 0 }
+        if selected == 2 && !NativePhononRuntime.isUsable { return 0 }
+        return selected
+    }
     private var effectiveGeminiVoice: String { latest.readerPreferences?.geminiVoiceID ?? geminiVoice }
     private var effectivePhononVoice: String { latest.readerPreferences?.phononVoiceID ?? phononVoice }
     private var isAudioOnly: Bool { latest.body.isEmpty && !tracks.isEmpty }
@@ -2245,6 +2284,9 @@ struct NativeReadingScreen: View {
     }
 
     private func pausePlayback() {
+        if tracks.isEmpty {
+            readingOffset = max(0, min(textLayout.totalCharacters, speech.textCharacterOffset))
+        }
         speech.pause()
         sleepDeadline = nil
         persistPosition()
@@ -2619,6 +2661,10 @@ struct NativeReadingScreen: View {
 
     private func exportGeneratedAudio() {
         guard !audioExportBusy, !latest.body.isEmpty else { return }
+        guard availableExportEngines.contains(where: { $0.engine == audioExportEngine }) else {
+            audioExportProgress = "El motor seleccionado debe prepararse en Motores externos."
+            return
+        }
         let engine = audioExportEngine
         let format = audioExportFormat
         let voice: String
@@ -2700,12 +2746,13 @@ struct NativeReadingScreen: View {
                 Section("Motor de voz") {
                     NativeAdjustableChoice(
                         title: "Motor",
-                        choices: NativePhononRuntime.isUsable
-                            ? ["Voces del sistema", "Gemini", "Phonon"]
-                            : ["Voces del sistema", "Gemini"],
+                        choices: availableExportEngines.map { $0.title },
                         selectedIndex: Binding(
-                            get: { audioExportEngine == .system ? 0 : audioExportEngine == .gemini ? 1 : 2 },
-                            set: { audioExportEngine = [.system, .gemini, .phonon][$0] }
+                            get: { availableExportEngines.firstIndex(where: { $0.engine == audioExportEngine }) ?? 0 },
+                            set: { index in
+                                guard availableExportEngines.indices.contains(index) else { return }
+                                audioExportEngine = availableExportEngines[index].engine
+                            }
                         ))
                     if audioExportEngine == .system {
                         NativeAdjustableChoice(
@@ -2742,7 +2789,7 @@ struct NativeReadingScreen: View {
                 Section("Estado") {
                     Text(audioExportProgress.isEmpty ? "Selecciona el formato y el motor." : audioExportProgress)
                         .accessibilityAddTraits(.updatesFrequently)
-                    Button(audioExportBusy ? "Generando…" : "Generar y compartir") {
+                    Button(audioExportBusy ? "Generando…" : "Convertir y guardar") {
                         exportGeneratedAudio()
                     }
                     .disabled(audioExportBusy)
@@ -2753,7 +2800,7 @@ struct NativeReadingScreen: View {
                     }
                 }
             }
-            .navigationTitle("Exportar audio")
+            .navigationTitle("Convertir a audio o DAISY")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Cerrar") { showAudioExport = false }
@@ -2807,6 +2854,18 @@ struct NativeReadingScreen: View {
         return "\(position) Voz reproducida \(formatDuration(elapsedSpeakingSeconds)). Tiempo restante estimado \(formatDuration(remaining))."
     }
 
+    private func activatePlaybackButton() {
+        if speech.isPlaying { pausePlayback() } else { play() }
+        // The label changes from Reproducir to Pausar. Reapply focus after
+        // SwiftUI has replaced the accessible label, not to the toolbar.
+        if presentationMode == 0 && readingMode == 1 {
+            Task { @MainActor in
+                await Task.yield()
+                playbackButtonFocused = true
+            }
+        }
+    }
+
     private var playbackRow: some View {
         AnyLayout(
             dynamicTypeSize.isAccessibilitySize
@@ -2814,7 +2873,7 @@ struct NativeReadingScreen: View {
                 : AnyLayout(HStackLayout(spacing: 8))
         ) {
             Button(speech.isPlaying ? "Pausar" : "Reproducir") {
-                speech.isPlaying ? pausePlayback() : play()
+                activatePlaybackButton()
             }
             .accessibilityHint("Doble toque para reproducir o pausar. Desliza arriba o abajo para moverte según el modo de navegación seleccionado.")
             .accessibilityValue("\(currentPercent) por ciento")
@@ -3082,7 +3141,7 @@ struct NativeReadingScreen: View {
         if !latest.body.isEmpty {
             Button("Exportar texto") { exportText() }
             Button("Seleccionar y copiar texto") { showTextSelection = true }
-            Button("Exportar audio MP3 o DAISY") { showAudioExport = true }
+            Button("Convertir a audio o DAISY") { showAudioExport = true }
             Button("Diccionario y pronunciación") {
                 if speech.isPlaying { pausePlayback() }
                 showWordTools = true
@@ -3210,7 +3269,7 @@ struct NativeReadingScreen: View {
                     .font(.headline)
                     .lineLimit(1)
                     .accessibilityAddTraits(.isHeader)
-                    .accessibilityAction(named: Text("Exportar")) {
+                    .accessibilityAction(named: Text("Convertir a audio o DAISY")) {
                         showAudioExport = true
                     }
                     .accessibilityAction(named: Text("Compartir")) {
@@ -3301,6 +3360,7 @@ struct NativeReadingScreen: View {
         readerWithSheets
         .onAppear {
             registerRemotePlaybackCommands()
+            if startWithConversion { showAudioExport = true }
             let initial = max(0, min(100, startPercent ?? latest.lastPercent ?? 0))
             trackIndex = min(max(0, startTrack ?? latest.lastTrackIndex ?? 0),
                              max(0, tracks.count - 1))

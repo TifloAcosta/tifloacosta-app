@@ -15,13 +15,13 @@ test("fase 3: el archivo fuente se copia y se elimina junto a la obra", () => {
   assert.match(reader, /NativeReaderFormats\.deleteOriginal\(for: document\.id\)/);
 });
 test("fase 3: documento original accesible en las acciones de VoiceOver y del lector", () => {
-  assert.match(reader, /accessibilityAction\(named: Text\("Compartir documento original"\)\)/);
+  assert.match(reader, /Button\("Compartir documento"\) \{ shareDocumentFromLibrary\(document\) \}/);
   assert.match(reader, /Button\("Compartir documento original"\)/);
   assert.match(reader, /NativeShare\.present\(url: original\)/);
 });
 test("fase 3: no confundir texto extraído con archivo de origen", () => {
   assert.match(reader, /Button\("Exportar texto"\)/);
-  assert.match(reader, /El documento original no está disponible/);
+  assert.match(reader, /No se conserva el documento original para compartirlo/);
 });
 
 test("fase 3: la copia ZIP incluye datos de biblioteca y archivos asociados", () => {
@@ -63,7 +63,7 @@ test("fase 3: el nombre de exportación conserva Unicode y evita colisiones temp
 });
 
 test("fase 3: exportadores de audio conectados con controles accesibles", () => {
-  assert.match(reader, /Button\("Exportar audio MP3 o DAISY"\)/);
+  assert.match(reader, /Button\("Convertir a audio o DAISY"\)/);
   assert.match(reader, /NativeAdjustableChoice\(\s*title: "Formato"/);
   assert.match(reader, /NativeAdjustableChoice\(\s*title: "Motor"/);
   assert.match(reader, /NativeAdjustableChoice\(\s*title: "Voz"/);

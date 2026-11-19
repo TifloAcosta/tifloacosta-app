@@ -10,7 +10,8 @@ test('La base pública mantiene la portada simplificada, los seis idiomas y el c
   const reader = src('NativeTifloLector.swift');
   assert.match(home, /allCases\.filter \{ \$0 != \.privacidad && \$0 != \.contacto && \$0 != \.recibidos \}/);
   assert.match(settings, /choices: NativeAppLanguage\.names/);
-  assert.match(settings, /title: "Detalle de VoiceOver"/);
+  assert.doesNotMatch(settings, /title: "Detalle de VoiceOver"/);
+  assert.match(reader, /title: "Información de cada documento con VoiceOver"/);
   assert.match(reader, /systemSpeechNeedsRestart/);
   assert.match(reader, /synthesizer\.stopSpeaking\(at: \.immediate\)/);
   assert.match(reader, /private var documentSearchHits/);

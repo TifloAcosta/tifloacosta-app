@@ -26,6 +26,6 @@ test('Cada ajustable anuncia etiqueta y valor a VoiceOver en un único elemento'
 
 test('Presentación y VoiceOver sin títulos repetidos antes de sus controles', () => {
   assert.match(settings, /title: "Tamaño del texto"/);
-  assert.match(settings, /title: "Detalle de VoiceOver"/);
+  assert.doesNotMatch(settings, /title: "Detalle de VoiceOver"/);
   assert.doesNotMatch(settings, /Text\("Color y contraste"\)|Text\("Legibilidad"\)|Section\("Detalle de VoiceOver"\)/);
 });

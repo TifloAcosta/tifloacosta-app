@@ -95,6 +95,7 @@ struct NativeHomeScreen: View {
             defaults.set(true, forKey: "native-ios-resume-last-book-shortcut-v1")
             destination = .tifloLector
         case "videos": destination = .videos
+        case "miMusica": destination = .miMusica
         default: destination = nil
         }
         defaults.removeObject(forKey: NativeShortcutRoute.key)

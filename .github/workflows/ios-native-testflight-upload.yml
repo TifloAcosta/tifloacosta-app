@@ -20,6 +20,7 @@ jobs:
       P12_PASSWORD: ${{ secrets.IOS_SIGNING_KEY_PASSPHRASE }}
       GITHUB_TOKEN: ${{ github.token }}
       GITHUB_RUN_NUMBER: ${{ github.run_number }}
+      TIFLO_IOS_MARKETING_VERSION: "1.6"
     steps:
       - uses: actions/checkout@v4
       - name: Validar Actualidad, Recursos y diseño sin HTML
@@ -77,7 +78,8 @@ jobs:
             -allowProvisioningUpdates \
             -authenticationKeyPath "$ASC_KEY_PATH" \
             -authenticationKeyID "$API_ID" \
-            -authenticationKeyIssuerID "$API_ISSUER" archive
+            -authenticationKeyIssuerID "$API_ISSUER" \
+            MARKETING_VERSION="$TIFLO_IOS_MARKETING_VERSION" CURRENT_PROJECT_VERSION="$IOS_BUILD_VERSION" archive
       - name: Configurar exportación con los dos perfiles de firma
         run: |
           python3 - <<'PY'
@@ -109,18 +111,25 @@ jobs:
           set -euo pipefail
           IPA="$(find "$RUNNER_TEMP/native-export" -maxdepth 1 -name '*.ipa' -print -quit)"
           test -f "$IPA"
-          echo "UPLOAD_STARTED_AT=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
-          xcrun altool --upload-app --type ios --file "$IPA" --apiKey "$API_ID" --apiIssuer "$API_ISSUER" 2>&1 | tee "$RUNNER_TEMP/apple-upload.log"
-          if grep -Eqi 'UPLOAD FAILED|Validation failed|Failed to upload package' "$RUNNER_TEMP/apple-upload.log"; then
-            echo '::error::Apple rechazó la IPA; no se puede confirmar TestFlight.'
+          LOG="$RUNNER_TEMP/tifloacosta-upload.log"
+          xcrun altool --upload-app --type ios --file "$IPA" --apiKey "$API_ID" --apiIssuer "$API_ISSUER" >"$LOG" 2>&1 || {
+            cat "$LOG"
+            exit 1
+          }
+          cat "$LOG"
+          if grep -Eiq 'UPLOAD FAILED|Failed to upload package|Validation failed|ERROR:.*altool|Invalid Pre-Release Train' "$LOG"; then
+            echo '::error::Apple ha rechazado la subida. No se declarará como enviada.'
             exit 1
           fi
-          echo "Compilación enviada. Apple debe completar su procesamiento antes de verla en TestFlight."
+          if ! grep -Eiq 'No errors uploading|successfully uploaded|Upload succeeded|uploaded successfully|UPLOAD SUCCEEDED' "$LOG"; then
+            echo "::error::No hay confirmación inequívoca de subida en altool."
+            exit 1
+          fi
+          echo "Apple ha aceptado la subida; se comprobará el estado de TestFlight."
       - name: Confirmar beta disponible para probadores internos con Apple
         timeout-minutes: 18
         env:
           TARGET_BUILD: ${{ env.IOS_BUILD_VERSION }}
-          UPLOAD_STARTED_AT: ${{ env.UPLOAD_STARTED_AT }}
         run: node .github/scripts/verify-native-testflight.mjs
       - name: Limpiar claves y llavero temporal
         if: always()

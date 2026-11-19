@@ -93,43 +93,10 @@ Fuente de requisitos: `docs/superpowers/specs/2026-11-17-mi-musica-design.md` y 
 
 No dar por concluida la compilación candidata ni ejecutar TestFlight hasta: (1) recuperar y clasificar la mayor cantidad verificable de decisiones de los intercambios originales, (2) resolver cada incumplimiento funcional anterior, (3) probar contratos de comportamiento y compilación Swift en macOS, (4) preparar una única prueba integral en iPhone con VoiceOver. Las partes del historial a las que no se tenga acceso deben quedar identificadas explícitamente como no verificadas. No abrir ramas remotas adicionales.
 
-### Progreso de corrección — 19/11, revisión posterior
+### Avance adicional de listas mixtas — 19/11/2026
 
-Commit de trabajo `d13305e` en la misma rama `feature/mi-musica`:
-
-- OCR: añadidas selecciones de portugués, francés, italiano y alemán, conservando índices antiguos; se consulta la compatibilidad de Vision y, si el idioma no está disponible, se utiliza detección automática. **Implementado en código, sin compilación Swift ni validación de dispositivo todavía.**
-- Enlaces de documentos: los URL externos y enlaces descriptivos estructurados con destino web se representan como atributos `.link` dentro de los fragmentos visibles, además de conservar la navegación existente. **Implementado en código, falta comprobar doble toque de VoiceOver en iPhone y textos extensos.** No se afirma activación directa de referencias internas.
-- Pruebas automatizadas iOS de la nueva revisión: **336 aprobadas, cero fallidas**. Pruebas generales: **461 aprobadas, cero fallidas**. Estos contratos no equivalen a compilación Swift.
-- Permanecen pendientes: vista previa/guardar perfiles por voz individual, braille continuo, las diferencias de listas mixtas, perfiles de ecualización, destino de copias, reglas inteligentes, fuentes remotas y auditoría de idiomas en pantallas.
-
-No ejecutar TestFlight todavía.
-
-### Progreso de corrección — perfiles individuales de voz
-
-Commit `358ef47` sobre la misma rama, sin TestFlight:
-
-- Se añadió un perfil opcional por identificador de voz del sistema, con velocidad, tono, modalidad de pausas y cinco duraciones individuales. Una voz sin perfil conserva velocidad y tono normales, sin pausas adicionales. Las preferencias generales antiguas que no sean naturales se migran a la voz que estaba seleccionada, sin extenderlas a las demás.
-- Los ajustes se editan en un borrador. «Escuchar muestra» usa ese borrador, «Guardar cambios de esta voz» lo confirma, «Descartar cambios» recupera el guardado y «Restablecer voz natural» elimina el perfil de esa voz. Hay botón «Detener muestra».
-- El lector consulta el perfil de la voz seleccionada tanto desde la biblioteca como dentro de la obra; las preferencias particulares ya existentes del documento conservan precedencia cuando están configuradas.
-- Se añadieron traducciones de los nuevos controles a EN/PT/FR/IT/DE. **339 pruebas automatizadas iOS y 461 generales aprobadas.** La compilación Swift y la prueba auditiva con VoiceOver siguen pendientes. No declarar el comportamiento validado en iPhone.
-- Continúan abiertos braille continuo y las discrepancias de «Mi música» descritas anteriormente.
-
-### Progreso de corrección — lectura braille continua
-
-Commit `5369940` en `feature/mi-musica`:
-
-- En modo Braille, los documentos de texto utilizan una superficie `UITextView` continua en vez de los fragmentos independientes de 1800 caracteres de SwiftUI. El resto de modalidades conserva el diseño actual.
-- Se intenta recuperar el cursor de lectura y guardar sus cambios en caracteres mediante el delegado de selección; los enlaces URL conservan la detección nativa de iOS. Los prefijos Markdown `#` de encabezados se ocultan sustituyendo caracteres por espacios de igual longitud para no desplazar las posiciones guardadas.
-- Pruebas automatizadas: **342 de iOS y 461 generales aprobadas**, sin fallos. **Pendiente de compilación Swift y validación en dispositivo con línea braille real**: estos tests no demuestran por sí solos que VoiceOver permita recorrer todo el documento sin una acción adicional.
-
-Las diferencias de «Mi música» siguen pendientes; no se ha ejecutado TestFlight.
-
-### Progreso de corrección — destino de copias de «Mi música»
-
-Commit `7e9e461`:
-
-- Se añadió «Elegir destino de copias automáticas» en Ajustes de Mi Música, con selector de carpetas, conservación del permiso mediante bookmark de URL, indicación del destino actual y «Restablecer destino interno».
-- Si un destino previamente elegido es inaccesible o el bookmark ha caducado, no se marca la copia como completada: se muestra un error. La copia automática continúa intentándose únicamente al abrir Mi Música cuando vence su intervalo; no se promete ejecución en segundo plano.
-- Se añadieron las etiquetas a EN/PT/FR/IT/DE. **344 tests iOS y 461 generales aprobados**; pendiente compilación Swift y comprobación con carpetas reales de Archivos/iCloud y VoiceOver.
-
-Se mantienen pendientes la reproducción continua de listas mixtas, perfiles de ecualización por lista/álbum, reglas inteligentes y las conexiones de almacenamiento externo.
+- El botón «Reproducir lista» ahora utiliza las entradas ordenadas de proveedores mixtos en lugar de solo los IDs locales. Se añadió `NativeMixedMusicQueue` con índice, navegación y descarte de entradas inexistentes.
+- El avance al finalizar pistas locales, Audius y Jamendo ya tiene conexiones en código. Para Apple Music se observa el cambio de estado de `playing` a `stopped` mediante MusicKit; la conducta exacta en canciones del catálogo requiere prueba con suscripción e iPhone.
+- La pantalla presenta controles accesibles de anterior, siguiente, detener y posición de lista, con traducciones en los cinco catálogos adicionales. Se prepararon rutas de recuperación de referencias remotas inválidas y cancelación de búsquedas al saltar pista.
+- Pruebas locales en esta etapa: 357 iOS y 461 generales. Compilación nativa confirmada hasta el cambio `30356451` (fase de compilación Xcode satisfactoria), última modificación `19c4f5fe` aún pendiente de compilación en GitHub.
+- **NO CERRADO FUNCIONALMENTE:** no hay todavía prueba real de transiciones entre los cuatro proveedores, fallo tardío de streaming, notificaciones de fondo ni VoiceOver en dispositivo. No confundir pruebas de contrato con reproducción real verificada.

@@ -904,3 +904,16 @@
 "Álbumes" = "Alben";
 "Guardar ecualización para álbum %@" = "Equalizer für Album %@ speichern";
 "Quitar ecualización de álbum %@" = "Equalizer für Album %@ entfernen";
+"Editar género" = "Genre bearbeiten";
+"Criterio de carpeta inteligente" = "Kriterium für intelligenten Ordner";
+"Valor del criterio" = "Kriteriumswert";
+"Para fecha, escribe AAAA-MM-DD. Para reproducciones, escribe el número mínimo." = "Für Datumsangaben JJJJ-MM-TT eingeben. Für Wiedergaben die Mindestanzahl eingeben.";
+"Género musical" = "Musikgenre";
+"Este género solo se guardará en tu biblioteca y no modificará el archivo original." = "Dieses Genre wird nur in deiner Mediathek gespeichert und verändert die Originaldatei nicht.";
+"Título contiene" = "Titel enthält";
+"Artista contiene" = "Künstler enthält";
+"Género contiene" = "Genre enthält";
+"Importada desde fecha (AAAA-MM-DD)" = "Importiert seit Datum (JJJJ-MM-TT)";
+"Reproducciones como mínimo" = "Mindestanzahl Wiedergaben";
+"Subir %@ en la lista" = "%@ in der Liste nach oben";
+"Bajar %@ en la lista" = "%@ in der Liste nach unten";

@@ -42,6 +42,7 @@ private struct MusicAudioSnapshot: Codable {
 final class NativeMusicPlayer: ObservableObject {
     static let shared = NativeMusicPlayer()
     var onPlaybackFinished: (() -> Void)?
+    var onTrackStarted: ((URL) -> Void)?
     @Published private(set) var currentName = ""
     @Published private(set) var isPlaying = false
     @Published private(set) var position: TimeInterval = 0
@@ -362,6 +363,7 @@ final class NativeMusicPlayer: ObservableObject {
             if !engine.isRunning { try engine.start() }
             node.play()
             isPlaying = true
+            onTrackStarted?(item.url)
             NativeRemotePlaybackOwner.claim(.music)
             registerRemoteCommands()
             updateNowPlaying()

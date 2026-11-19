@@ -76,6 +76,7 @@ private struct MusicPortableSmartFolder: Codable {
     let id: String
     let name: String
     let titleContains: String
+    var rule: String? = nil
 }
 
 private struct MusicPortableCatalog: Codable {
@@ -89,6 +90,9 @@ private struct MusicPortableTrack: Codable {
     let locations: [MusicPortableLocation]
     var album: String? = nil
     var artist: String? = nil
+    var genre: String? = nil
+    var importedAt: Date? = nil
+    var playCount: Int? = nil
 }
 
 private struct MusicPortableLocation: Codable {
@@ -108,6 +112,9 @@ private struct MusicLocalFile: Identifiable, Codable {
     let fileName: String
     var album: String? = nil
     var artist: String? = nil
+    var genre: String? = nil
+    var importedAt: Date? = nil
+    var playCount: Int? = nil
 
     var albumKey: String? {
         guard let album = album?.trimmingCharacters(in: .whitespacesAndNewlines), !album.isEmpty else { return nil }
@@ -135,6 +142,23 @@ private struct MusicSmartFolder: Identifiable, Codable {
     let id: UUID
     var name: String
     var titleContains: String
+    var rule: String? = nil
+
+    var ruleKind: MusicSmartRuleKind { MusicSmartRuleKind(rawValue: rule ?? "title") ?? .title }
+}
+
+private enum MusicSmartRuleKind: String, CaseIterable, Identifiable {
+    case title, artist, genre, importDate, playCount
+    var id: Self { self }
+    var label: String {
+        switch self {
+        case .title: return "Título contiene"
+        case .artist: return "Artista contiene"
+        case .genre: return "Género contiene"
+        case .importDate: return "Importada desde fecha (AAAA-MM-DD)"
+        case .playCount: return "Reproducciones como mínimo"
+        }
+    }
 }
 
 private struct MusicAlbumGroup: Identifiable {
@@ -144,6 +168,7 @@ private struct MusicAlbumGroup: Identifiable {
 
 @MainActor
 private final class NativeMusicLibrary: ObservableObject {
+    static let shared = NativeMusicLibrary()
     @Published private(set) var files: [MusicLocalFile] = []
     @Published private(set) var folders: [MusicVirtualFolder] = []
     @Published private(set) var playlists: [MusicPlaylist] = []
@@ -176,6 +201,7 @@ private final class NativeMusicLibrary: ObservableObject {
         if let data = try? Data(contentsOf: directory.appendingPathComponent("smart-folders.json")),
            let decoded = try? JSONDecoder().decode([MusicSmartFolder].self, from: data) { smartFolders = decoded }
         lastAutomaticBackup = UserDefaults.standard.object(forKey: "mi-musica-last-auto-backup") as? Date
+        NativeMusicPlayer.shared.onTrackStarted = { [weak self] url in self?.recordPlay(for: url) }
         performAutomaticBackupIfDue()
         Task { await refreshMissingAlbumMetadata() }
     }
@@ -211,7 +237,8 @@ private final class NativeMusicLibrary: ObservableObject {
                 let target = directory.appendingPathComponent(fileName)
                 try FileManager.default.copyItem(at: url, to: target)
                 let newID = UUID()
-                files.append(MusicLocalFile(id: newID, name: url.deletingPathExtension().lastPathComponent, fileName: fileName))
+                files.append(MusicLocalFile(id: newID, name: url.deletingPathExtension().lastPathComponent,
+                                            fileName: fileName, importedAt: Date(), playCount: 0))
                 newlyImported.append(newID)
             }
             try save()
@@ -299,16 +326,43 @@ private final class NativeMusicLibrary: ObservableObject {
         }
     }
 
+    func movePlaylistEntry(playlistID: UUID, entryID: UUID, by offset: Int) {
+        guard offset == -1 || offset == 1,
+              let index = playlists.firstIndex(where: { $0.id == playlistID }) else { return }
+        var orderedEntries = playlistEntries(playlists[index])
+        guard let position = orderedEntries.firstIndex(where: { $0.id == entryID }),
+              orderedEntries.indices.contains(position + offset) else { return }
+        let destination = position + offset
+        orderedEntries.swapAt(position, destination)
+        playlists[index].orderedEntries = orderedEntries
+        playlists[index].trackIds = orderedEntries.compactMap(\.localId)
+        do { try save() } catch { self.error = error.localizedDescription }
+    }
+
+    func updateGenre(_ id: UUID, genre: String) {
+        guard let index = files.firstIndex(where: { $0.id == id }) else { return }
+        let clean = genre.trimmingCharacters(in: .whitespacesAndNewlines)
+        files[index].genre = clean.isEmpty ? nil : clean
+        do { try save() } catch { self.error = error.localizedDescription }
+    }
+
+    func recordPlay(for url: URL) {
+        guard let index = files.firstIndex(where: { audioURL(for: $0) == url }) else { return }
+        files[index].playCount = min(Int.max - 1, max(0, min(Int.max - 2, files[index].playCount ?? 0)) + 1)
+        do { try save() } catch { self.error = error.localizedDescription }
+    }
+
     func removePlaylist(_ id: UUID) {
         playlists.removeAll { $0.id == id }
         do { try save() } catch { self.error = error.localizedDescription }
     }
 
-    func addSmartFolder(_ name: String, titleContains: String) {
+    func addSmartFolder(_ name: String, titleContains: String, rule: MusicSmartRuleKind = .title) {
         let cleanName = name.trimmingCharacters(in: .whitespacesAndNewlines)
         let keyword = titleContains.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !cleanName.isEmpty, !keyword.isEmpty else { return }
-        smartFolders.append(MusicSmartFolder(id: UUID(), name: cleanName, titleContains: keyword))
+        smartFolders.append(MusicSmartFolder(id: UUID(), name: cleanName, titleContains: keyword,
+                                             rule: rule.rawValue))
         do { try save() } catch { self.error = error.localizedDescription }
     }
 
@@ -318,7 +372,26 @@ private final class NativeMusicLibrary: ObservableObject {
     }
 
     func matchingTracks(for smart: MusicSmartFolder) -> [MusicLocalFile] {
-        files.filter { $0.name.localizedStandardContains(smart.titleContains) }
+        let query = smart.titleContains.trimmingCharacters(in: .whitespacesAndNewlines)
+        return files.filter { file in
+            switch smart.ruleKind {
+            case .title: return file.name.localizedStandardContains(query)
+            case .artist: return file.artist?.localizedStandardContains(query) == true
+            case .genre: return file.genre?.localizedStandardContains(query) == true
+            case .playCount:
+                guard let minimum = Int(query), minimum >= 0 else { return false }
+                return (file.playCount ?? 0) >= minimum
+            case .importDate:
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                formatter.locale = Locale(identifier: "en_US_POSIX")
+                formatter.timeZone = TimeZone(secondsFromGMT: 0)
+                formatter.isLenient = false
+                guard let since = formatter.date(from: query) else { return false }
+                let recorded = file.importedAt ?? ((try? FileManager.default.attributesOfItem(atPath: audioURL(for: file).path))?[.creationDate] as? Date)
+                return recorded.map { $0 >= since } ?? false
+            }
+        }
     }
 
     func removeFolder(_ id: UUID) {
@@ -345,7 +418,8 @@ private final class NativeMusicLibrary: ObservableObject {
             let tracks = Dictionary(uniqueKeysWithValues: files.map { file in
                 (file.id.uuidString, MusicPortableTrack(id: file.id.uuidString, title: file.name,
                     locations: [MusicPortableLocation(provider: "ios-local", remoteId: file.fileName)],
-                    album: file.album, artist: file.artist))
+                    album: file.album, artist: file.artist, genre: file.genre,
+                    importedAt: file.importedAt, playCount: file.playCount))
             })
             let portableFolders = folders.map { folder in
                 MusicPortableFolder(id: folder.id.uuidString, name: folder.name,
@@ -358,7 +432,7 @@ private final class NativeMusicLibrary: ObservableObject {
                 playlists: playlists.map { MusicPortablePlaylist(id: $0.id.uuidString, name: $0.name,
                     trackIds: $0.trackIds.map { $0.uuidString }, orderedEntries: $0.orderedEntries) },
                 smartFolders: smartFolders.map { MusicPortableSmartFolder(id: $0.id.uuidString, name: $0.name,
-                    titleContains: $0.titleContains) }, audioProfiles: NativeMusicPlayer.shared.exportProfiles())
+                    titleContains: $0.titleContains, rule: $0.rule) }, audioProfiles: NativeMusicPlayer.shared.exportProfiles())
             let bytes = try JSONEncoder().encode(backup)
             return MusicBackupDocument(text: String(decoding: bytes, as: UTF8.self))
         } catch { self.error = "No se pudo preparar el respaldo: \(error.localizedDescription)"; return nil }
@@ -448,7 +522,8 @@ private final class NativeMusicLibrary: ObservableObject {
                       URL(fileURLWithPath: location.remoteId).lastPathComponent == location.remoteId,
                       FileManager.default.fileExists(atPath: directory.appendingPathComponent(location.remoteId).path) else { return nil }
                 return MusicLocalFile(id: id, name: track.title, fileName: location.remoteId,
-                    album: track.album, artist: track.artist)
+                    album: track.album, artist: track.artist, genre: track.genre,
+                    importedAt: track.importedAt, playCount: track.playCount)
             }
             files = Array(Dictionary((files + importable).map { ($0.id, $0) }, uniquingKeysWith: { existing, _ in existing }).values)
             let importedFolders = imported.folders.map { folder in
@@ -462,7 +537,8 @@ private final class NativeMusicLibrary: ObservableObject {
             }
             playlists = Array(Dictionary((playlists + addedLists).map { ($0.name, $0) }, uniquingKeysWith: { existing, _ in existing }).values)
             let addedSmart = imported.smartFolders.map { item in
-                MusicSmartFolder(id: UUID(uuidString: item.id) ?? UUID(), name: item.name, titleContains: item.titleContains)
+                MusicSmartFolder(id: UUID(uuidString: item.id) ?? UUID(), name: item.name,
+                                 titleContains: item.titleContains, rule: item.rule)
             }
             smartFolders = Array(Dictionary((smartFolders + addedSmart).map { ($0.name, $0) }, uniquingKeysWith: { existing, _ in existing }).values)
             do { try save() } catch { files = originalFiles; folders = originalFolders; playlists = originalPlaylists; smartFolders = originalSmart; throw error }
@@ -495,7 +571,8 @@ private final class NativeMusicLibrary: ObservableObject {
                 if let track = tracks[file.id.uuidString] {
                     tracks[file.id.uuidString] = MusicPortableTrack(id: track.id, title: track.title,
                         locations: track.locations + [MusicPortableLocation(provider: "archive", remoteId: relative)],
-                        album: track.album, artist: track.artist)
+                        album: track.album, artist: track.artist, genre: track.genre,
+                        importedAt: track.importedAt, playCount: track.playCount)
                 }
             }
             let complete = MusicIndexBackup(format: backup.format, version: backup.version,
@@ -555,7 +632,8 @@ private final class NativeMusicLibrary: ObservableObject {
                 try FileManager.default.copyItem(at: original, to: destination)
                 createdFiles.append(destination)
                 imported.append(MusicLocalFile(id: newID, name: track.title, fileName: fileName,
-                    album: track.album, artist: track.artist))
+                    album: track.album, artist: track.artist, genre: track.genre,
+                    importedAt: track.importedAt, playCount: track.playCount))
                 ids[id] = newID
             }
             let additions = backup.folders.map { folder in
@@ -572,7 +650,8 @@ private final class NativeMusicLibrary: ObservableObject {
                                      trackIds: item.trackIds.compactMap { ids[$0] }, orderedEntries: restored)
             }
             let importedSmart = backup.smartFolders.map { item in
-                MusicSmartFolder(id: UUID(), name: item.name, titleContains: item.titleContains)
+                MusicSmartFolder(id: UUID(), name: item.name, titleContains: item.titleContains,
+                                 rule: item.rule)
             }
             let originalFiles = files
             let originalFolders = folders
@@ -593,7 +672,7 @@ private final class NativeMusicLibrary: ObservableObject {
 }
 
 struct NativeMyMusicScreen: View {
-    @StateObject private var library = NativeMusicLibrary()
+    @StateObject private var library = NativeMusicLibrary.shared
     @ObservedObject private var player = NativeMusicPlayer.shared
     @ObservedObject private var mixedQueue = NativeMixedMusicQueue.shared
     @State private var isImporting = false
@@ -606,6 +685,9 @@ struct NativeMyMusicScreen: View {
     @State private var newPlaylistName = ""
     @State private var newSmartFolderName = ""
     @State private var newSmartFolderKeyword = ""
+    @State private var selectedSmartRule = MusicSmartRuleKind.title
+    @State private var editingGenreFile: MusicLocalFile?
+    @State private var editingGenreValue = ""
     @State private var pendingRemoval: MusicLocalFile?
     @State private var exportingBackup = false
     @State private var importingBackup = false
@@ -770,6 +852,10 @@ struct NativeMyMusicScreen: View {
                             }
                             Spacer()
                             Menu("Acciones de \(file.name)") {
+                                Button("Editar género") {
+                                    editingGenreFile = file
+                                    editingGenreValue = file.genre ?? ""
+                                }
                                 ForEach(library.folders) { folder in
                                     Button("Añadir a \(folder.name)") { library.assign(file.id, to: folder.id) }
                                 }
@@ -855,6 +941,16 @@ struct NativeMyMusicScreen: View {
                                 Text("\(entry.title), archivo no disponible")
                             }
                         }
+                        HStack {
+                            Button(MusicLocalized.format("Subir %@ en la lista", entry.title)) {
+                                library.movePlaylistEntry(playlistID: playlist.id, entryID: entry.id, by: -1)
+                            }
+                            .disabled(library.playlistEntries(playlist).first?.id == entry.id)
+                            Button(MusicLocalized.format("Bajar %@ en la lista", entry.title)) {
+                                library.movePlaylistEntry(playlistID: playlist.id, entryID: entry.id, by: 1)
+                            }
+                            .disabled(library.playlistEntries(playlist).last?.id == entry.id)
+                        }
                     }
                     Button("Eliminar lista \(playlist.name)") { library.removePlaylist(playlist.id) }
                 }
@@ -862,7 +958,7 @@ struct NativeMyMusicScreen: View {
             Section("Carpetas inteligentes") {
                 ForEach(library.smartFolders) { folder in
                     let matches = library.matchingTracks(for: folder)
-                    Text("\(folder.name), criterio: título contiene \(folder.titleContains), \(matches.count) canciones")
+                    Text("\(folder.name), criterio: \(folder.ruleKind.label) \(folder.titleContains), \(matches.count) canciones")
                     Button("Reproducir carpeta inteligente \(folder.name)") {
                         let items = matches.map { (name: $0.name, url: library.audioURL(for: $0)) }
                         if let first = items.first { player.play(name: first.name, url: first.url, queue: items,
@@ -906,16 +1002,51 @@ struct NativeMyMusicScreen: View {
             Button("Crear") { library.addPlaylist(newPlaylistName); newPlaylistName = "" }
             Button("Cancelar", role: .cancel) { newPlaylistName = "" }
         } message: { Text("Puedes añadir canciones desde el menú Acciones de cada canción.") }
-        .alert("Crear carpeta inteligente", isPresented: $showingSmartFolderEditor) {
-            TextField("Nombre de la carpeta", text: $newSmartFolderName)
-            TextField("El título contiene", text: $newSmartFolderKeyword)
-            Button("Crear") {
-                library.addSmartFolder(newSmartFolderName, titleContains: newSmartFolderKeyword)
-                newSmartFolderName = ""
-                newSmartFolderKeyword = ""
+        .sheet(isPresented: $showingSmartFolderEditor) {
+            NavigationStack {
+                Form {
+                    TextField("Nombre de la carpeta", text: $newSmartFolderName)
+                    Picker("Criterio de carpeta inteligente", selection: $selectedSmartRule) {
+                        ForEach(MusicSmartRuleKind.allCases) { rule in
+                            Text(LocalizedStringKey(rule.label)).tag(rule)
+                        }
+                    }
+                    TextField("Valor del criterio", text: $newSmartFolderKeyword)
+                    Text("Para fecha, escribe AAAA-MM-DD. Para reproducciones, escribe el número mínimo.")
+                    Text("Su contenido se actualiza automáticamente al añadir o retirar canciones.")
+                }
+                .navigationTitle("Crear carpeta inteligente")
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Cancelar") { showingSmartFolderEditor = false }
+                    }
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button("Crear") {
+                            library.addSmartFolder(newSmartFolderName, titleContains: newSmartFolderKeyword, rule: selectedSmartRule)
+                            newSmartFolderName = ""
+                            newSmartFolderKeyword = ""
+                            selectedSmartRule = .title
+                            showingSmartFolderEditor = false
+                        }
+                        .disabled(newSmartFolderName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ||
+                            newSmartFolderKeyword.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                    }
+                }
             }
-            Button("Cancelar", role: .cancel) { newSmartFolderName = ""; newSmartFolderKeyword = "" }
-        } message: { Text("Su contenido se actualiza automáticamente al añadir o retirar canciones.") }
+        }
+        .alert("Editar género", isPresented: Binding(
+            get: { editingGenreFile != nil },
+            set: { if !$0 { editingGenreFile = nil } }
+        )) {
+            TextField("Género musical", text: $editingGenreValue)
+            Button("Guardar") {
+                if let file = editingGenreFile { library.updateGenre(file.id, genre: editingGenreValue) }
+                editingGenreFile = nil
+            }
+            Button("Cancelar", role: .cancel) { editingGenreFile = nil }
+        } message: {
+            Text("Este género solo se guardará en tu biblioteca y no modificará el archivo original.")
+        }
         .confirmationDialog("Eliminar de la biblioteca", isPresented: Binding(
             get: { pendingRemoval != nil },
             set: { if !$0 { pendingRemoval = nil } }

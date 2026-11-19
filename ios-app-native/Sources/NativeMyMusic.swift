@@ -480,20 +480,34 @@ struct NativeMyMusicScreen: View {
         )
     }
 
-    var body: some View {
+    private var equalizerPresetChoice: Binding<Int> {
+        let names = NativeMusicPlayer.presets.map(\.name)
+        return Binding(
+            get: { names.firstIndex(of: player.selectedPreset) ?? names.count },
+            set: { index in
+                guard names.indices.contains(index) else { return }
+                player.selectPreset(names[index])
+            }
+        )
+    }
+
+    private var equalizerBandValues: [String] {
+        (-12...12).map { "\($0) dB" }
+    }
+
+    private func equalizerBandChoice(_ index: Int) -> Binding<Int> {
+        Binding(
+            get: { min(24, max(0, Int(player.gains[index].rounded()) + 12)) },
+            set: { selected in
+                guard (0...24).contains(selected) else { return }
+                let change = Float(selected - 12) - player.gains[index]
+                player.adjustBand(index, by: change)
+            }
+        )
+    }
+
+    private var musicSettings: some View {
         List {
-            Section {
-                NavigationLink("Plataformas musicales") { NativeMusicPlatformsScreen() }
-            }
-            Section {
-                Button("Importar canciones") { isImporting = true }
-                    .accessibilityHint("Selecciona archivos de audio. Los originales se conservarán en su ubicación.")
-                Button("Importar carpeta desde Archivos o nube") { isImportingFolder = true }
-                    .accessibilityHint("Elige una carpeta disponible en Archivos. Las canciones se copiarán a Mi Música para escucharlas sin depender de la conexión.")
-                Button("Crear carpeta") { showingFolderEditor = true }
-                Button("Crear lista de reproducción") { showingPlaylistEditor = true }
-                Button("Crear carpeta inteligente") { showingSmartFolderEditor = true }
-            }
             Section("Copias de seguridad") {
                 Button("Exportar respaldo de biblioteca") {
                     backupDocument = library.exportIndex()
@@ -509,6 +523,84 @@ struct NativeMyMusicScreen: View {
                 )
                 Text("Las copias automáticas del índice se crean al abrir Mi Música cuando corresponde; no se ejecutan en segundo plano.")
                 Text("Este respaldo conserva el índice y las carpetas, pero no incluye los archivos de audio. Para recuperar música en otro dispositivo tendrás que importar también las canciones.")
+            }
+            Section("Ecualizador") {
+                NativeAdjustableChoice(
+                    title: "Perfil de ecualización",
+                    choices: NativeMusicPlayer.presets.map(\.name) + ["Personalizado"],
+                    selectedIndex: equalizerPresetChoice
+                )
+                ForEach(NativeMusicPlayer.frequencies.indices, id: \.self) { index in
+                    NativeAdjustableChoice(
+                        title: "\(Int(NativeMusicPlayer.frequencies[index])) Hz",
+                        choices: equalizerBandValues,
+                        selectedIndex: equalizerBandChoice(index)
+                    )
+                }
+                Button("Guardar como perfil general") { player.saveAsGeneral() }
+                Button("Guardar perfil para esta canción") { player.saveForCurrent() }
+                    .disabled(player.currentName.isEmpty)
+                if player.currentHasOverride {
+                    Button("Quitar perfil de esta canción") { player.removeCurrentOverride() }
+                }
+            }
+        }
+        .navigationTitle("Ajustes de Mi Música")
+    }
+
+    var body: some View {
+        List {
+            Section("Reproductor") {
+                Text(player.currentName.isEmpty ? "Ninguna canción en reproducción" : player.currentName)
+                    .accessibilityAddTraits(.isHeader)
+                Button(player.isPlaying ? "Pausar" : "Reproducir") { player.toggle() }
+                    .disabled(player.currentName.isEmpty)
+                Button("Canción anterior") { player.previous() }
+                    .disabled(player.currentName.isEmpty)
+                Button("Retroceder 15 segundos") { player.skip(seconds: -15) }
+                    .disabled(player.currentName.isEmpty)
+                Button("Avanzar 15 segundos") { player.skip(seconds: 15) }
+                    .disabled(player.currentName.isEmpty)
+                Button("Canción siguiente") { player.next() }
+                    .disabled(player.currentName.isEmpty)
+                Button("Reproducción aleatoria: \(player.shuffleEnabled ? "activada" : "desactivada")") { player.toggleShuffle() }
+                Button("Repetición: \(player.repeatMode == "off" ? "desactivada" : player.repeatMode == "all" ? "toda la lista" : "una canción")") { player.changeRepeat() }
+                Button("Temporizador de 15 minutos") { player.setSleep(minutes: 15) }
+                    .disabled(player.currentName.isEmpty)
+                Button("Temporizador de 30 minutos") { player.setSleep(minutes: 30) }
+                    .disabled(player.currentName.isEmpty)
+                if player.sleepRemaining > 0 {
+                    Text("Temporizador: \(player.sleepRemaining) segundos restantes")
+                    Button("Cancelar temporizador") { player.cancelSleep() }
+                }
+                Text("Posición: \(Int(player.position)) de \(Int(player.duration)) segundos")
+            }
+            Section("Mi biblioteca") {
+                if library.files.isEmpty {
+                    Text("Todavía no hay canciones. Usa Organizar mi música para importarlas.")
+                } else {
+                    ForEach(visibleFiles) { file in
+                        HStack {
+                            Button("Reproducir \(file.name)") {
+                                player.play(
+                                    name: file.name,
+                                    url: library.audioURL(for: file),
+                                    queue: library.files.map { (name: $0.name, url: library.audioURL(for: $0)) }
+                                )
+                            }
+                            Spacer()
+                            Menu("Acciones de \(file.name)") {
+                                ForEach(library.folders) { folder in
+                                    Button("Añadir a \(folder.name)") { library.assign(file.id, to: folder.id) }
+                                }
+                                ForEach(library.playlists) { playlist in
+                                    Button("Añadir a lista \(playlist.name)") { library.addToPlaylist(file.id, playlistId: playlist.id) }
+                                }
+                                Button("Eliminar de la biblioteca", role: .destructive) { pendingRemoval = file }
+                            }
+                        }
+                    }
+                }
             }
             Section("Mis carpetas") {
                 ForEach(library.folders) { folder in
@@ -545,75 +637,16 @@ struct NativeMyMusicScreen: View {
                     Button("Eliminar carpeta inteligente \(folder.name)") { library.removeSmartFolder(folder.id) }
                 }
             }
-            Section("Mi biblioteca") {
-                if library.files.isEmpty {
-                    Text("Todavía no hay canciones. Usa Importar canciones para añadir música.")
-                } else {
-                    ForEach(visibleFiles) { file in
-                        HStack {
-                            Button("Reproducir \(file.name)") {
-                                player.play(
-                                    name: file.name,
-                                    url: library.audioURL(for: file),
-                                    queue: library.files.map { (name: $0.name, url: library.audioURL(for: $0)) }
-                                )
-                            }
-                            Spacer()
-                            Menu("Acciones de \(file.name)") {
-                                ForEach(library.folders) { folder in
-                                    Button("Añadir a \(folder.name)") { library.assign(file.id, to: folder.id) }
-                                }
-                                ForEach(library.playlists) { playlist in
-                                    Button("Añadir a lista \(playlist.name)") { library.addToPlaylist(file.id, playlistId: playlist.id) }
-                                }
-                                Button("Eliminar de la biblioteca", role: .destructive) { pendingRemoval = file }
-                            }
-                        }
-                    }
+            Section {
+                Menu("Organizar mi música") {
+                    Button("Importar canciones") { isImporting = true }
+                    Button("Importar carpeta desde Archivos o nube") { isImportingFolder = true }
+                    Button("Crear carpeta") { showingFolderEditor = true }
+                    Button("Crear lista de reproducción") { showingPlaylistEditor = true }
+                    Button("Crear carpeta inteligente") { showingSmartFolderEditor = true }
                 }
-            }
-            Section("Reproductor") {
-                Text(player.currentName.isEmpty ? "Ninguna canción en reproducción" : player.currentName)
-                    .accessibilityAddTraits(.isHeader)
-                Button(player.isPlaying ? "Pausar" : "Reproducir") { player.toggle() }
-                    .disabled(player.currentName.isEmpty)
-                Button("Canción anterior") { player.previous() }
-                    .disabled(player.currentName.isEmpty)
-                Button("Retroceder 15 segundos") { player.skip(seconds: -15) }
-                    .disabled(player.currentName.isEmpty)
-                Button("Avanzar 15 segundos") { player.skip(seconds: 15) }
-                    .disabled(player.currentName.isEmpty)
-                Button("Canción siguiente") { player.next() }
-                    .disabled(player.currentName.isEmpty)
-                Button("Reproducción aleatoria: \(player.shuffleEnabled ? "activada" : "desactivada")") { player.toggleShuffle() }
-                Button("Repetición: \(player.repeatMode == "off" ? "desactivada" : player.repeatMode == "all" ? "toda la lista" : "una canción")") { player.changeRepeat() }
-                Button("Temporizador de 15 minutos") { player.setSleep(minutes: 15) }
-                    .disabled(player.currentName.isEmpty)
-                Button("Temporizador de 30 minutos") { player.setSleep(minutes: 30) }
-                    .disabled(player.currentName.isEmpty)
-                if player.sleepRemaining > 0 {
-                    Text("Temporizador: \(player.sleepRemaining) segundos restantes")
-                    Button("Cancelar temporizador") { player.cancelSleep() }
-                }
-                Text("Posición: \(Int(player.position)) de \(Int(player.duration)) segundos")
-            }
-            Section("Ecualizador") {
-                Text("Perfil actual: \(player.selectedPreset)")
-                ForEach(NativeMusicPlayer.presets.map { $0.name }, id: \.self) { name in
-                    Button("Perfil \(name)") { player.selectPreset(name) }
-                }
-                ForEach(NativeMusicPlayer.frequencies.indices, id: \.self) { index in
-                    let frequency = NativeMusicPlayer.frequencies[index]
-                    Text("\(Int(frequency)) hercios: \(Int(player.gains[index])) decibelios")
-                    Button("Reducir \(Int(frequency)) hercios") { player.adjustBand(index, by: -1) }
-                    Button("Aumentar \(Int(frequency)) hercios") { player.adjustBand(index, by: 1) }
-                }
-                Button("Guardar como perfil general") { player.saveAsGeneral() }
-                Button("Guardar perfil para esta canción") { player.saveForCurrent() }
-                    .disabled(player.currentName.isEmpty)
-                if player.currentHasOverride {
-                    Button("Quitar perfil de esta canción") { player.removeCurrentOverride() }
-                }
+                NavigationLink("Ajustes de Mi Música") { musicSettings }
+                NavigationLink("Plataformas musicales") { NativeMusicPlatformsScreen() }
             }
         }
         .navigationTitle("Mi Música")

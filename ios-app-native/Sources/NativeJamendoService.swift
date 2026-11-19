@@ -59,38 +59,38 @@ final class NativeJamendoService: ObservableObject {
             let (data, response) = try await URLSession.shared.data(from: components.url!)
             guard (response as? HTTPURLResponse)?.statusCode == 200 else {
                 tracks = []
-                message = "Jamendo no está disponible en este momento."
+                message = MusicLocalized.format("Jamendo no está disponible en este momento.")
                 return
             }
             let parsed = try JSONDecoder().decode(JamendoTrackResponse.self, from: data)
             guard parsed.headers.status == "success" else {
                 tracks = []
-                message = "Jamendo rechazó la consulta: \(parsed.headers.errorMessage ?? "Error desconocido")"
+                message = MusicLocalized.format("Jamendo rechazó la consulta: %@", parsed.headers.errorMessage ?? MusicLocalized.format("Error desconocido"))
                 return
             }
             tracks = parsed.results.filter { $0.verifiedStreamURL != nil }
-            message = tracks.isEmpty ? "No se encontraron canciones reproducibles en Jamendo." : nil
+            message = tracks.isEmpty ? MusicLocalized.format("No se encontraron canciones reproducibles en Jamendo.") : nil
         } catch {
             tracks = []
-            message = "No se pudo consultar Jamendo: \(error.localizedDescription)"
+            message = MusicLocalized.format("No se pudo consultar Jamendo: %@", error.localizedDescription)
         }
     }
 
     func play(_ track: JamendoTrack) {
         guard let url = track.verifiedStreamURL else {
-            message = "Esta canción no tiene una dirección de reproducción válida."
+            message = MusicLocalized.format("Esta canción no tiene una dirección de reproducción válida.")
             return
         }
         player?.pause()
         player = AVPlayer(url: url)
         player?.play()
         playingName = track.name
-        message = "Iniciando \(track.name), de \(track.artistName), desde Jamendo."
+        message = MusicLocalized.format("Iniciando %@, de %@, desde Jamendo.", track.name, track.artistName)
     }
 
     func playSavedTrack(id: String) async {
         guard id.range(of: #"^[0-9]+$"#, options: .regularExpression) != nil else {
-            message = "El identificador guardado en Jamendo no es válido."
+            message = MusicLocalized.format("El identificador guardado en Jamendo no es válido.")
             return
         }
         do {
@@ -100,18 +100,18 @@ final class NativeJamendoService: ObservableObject {
                                      URLQueryItem(name: "id", value: id)]
             let (data, response) = try await URLSession.shared.data(from: components.url!)
             guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-                message = "No se pudo recuperar la canción guardada de Jamendo."
+                message = MusicLocalized.format("No se pudo recuperar la canción guardada de Jamendo.")
                 return
             }
             let result = try JSONDecoder().decode(JamendoTrackResponse.self, from: data)
             guard result.headers.status == "success", let track = result.results.first,
                   track.verifiedStreamURL != nil else {
-                message = "Esta canción ya no está disponible en Jamendo."
+                message = MusicLocalized.format("Esta canción ya no está disponible en Jamendo.")
                 return
             }
             play(track)
         } catch {
-            message = "No se pudo abrir la canción guardada: \(error.localizedDescription)"
+            message = MusicLocalized.format("No se pudo abrir la canción guardada: %@", error.localizedDescription)
         }
     }
 

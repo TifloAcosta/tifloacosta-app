@@ -17,7 +17,7 @@ final class NativeAppleMusicService: ObservableObject {
     func requestAuthorization() async {
         authorizationStatus = await MusicAuthorization.request()
         guard authorizationStatus == .authorized else {
-            message = "No se ha autorizado Apple Music. Tu música personal sigue disponible."
+            message = MusicLocalized.format("No se ha autorizado Apple Music. Tu música personal sigue disponible.")
             return
         }
         await refreshSubscription()
@@ -32,18 +32,18 @@ final class NativeAppleMusicService: ObservableObject {
             let subscription = try await MusicSubscription.current
             subscriptionAvailable = subscription.canPlayCatalogContent
             if !subscriptionAvailable {
-                message = "Tu cuenta no tiene reproducción del catálogo de Apple Music disponible."
+                message = MusicLocalized.format("Tu cuenta no tiene reproducción del catálogo de Apple Music disponible.")
             }
         } catch {
             subscriptionAvailable = false
-            message = "No se pudo comprobar la suscripción: \(error.localizedDescription)"
+            message = MusicLocalized.format("No se pudo comprobar la suscripción: %@", error.localizedDescription)
         }
     }
 
     func searchCatalog(query: String) async {
         let term = query.trimmingCharacters(in: .whitespacesAndNewlines)
         guard authorizationStatus == .authorized else {
-            message = "Conecta Apple Music antes de buscar en su catálogo."
+            message = MusicLocalized.format("Conecta Apple Music antes de buscar en su catálogo.")
             return
         }
         guard !term.isEmpty else {
@@ -59,20 +59,20 @@ final class NativeAppleMusicService: ObservableObject {
             songs = Array(response.songs)
             albums = Array(response.albums)
             artists = Array(response.artists)
-            message = songs.isEmpty && albums.isEmpty && artists.isEmpty ? "No se encontraron resultados en Apple Music." : nil
+            message = songs.isEmpty && albums.isEmpty && artists.isEmpty ? MusicLocalized.format("No se encontraron resultados en Apple Music.") : nil
         } catch {
-            message = "No se pudo buscar en Apple Music. Comprueba la conexión: \(error.localizedDescription)"
+            message = MusicLocalized.format("No se pudo buscar en Apple Music. Comprueba la conexión: %@", error.localizedDescription)
         }
     }
 
     func playCatalogSong(_ song: Song) async {
         guard authorizationStatus == .authorized else {
-            message = "Debes autorizar Apple Music para reproducir esta canción."
+            message = MusicLocalized.format("Debes autorizar Apple Music para reproducir esta canción.")
             return
         }
         await refreshSubscription()
         guard subscriptionAvailable else {
-            message = "La reproducción requiere una suscripción de Apple Music compatible."
+            message = MusicLocalized.format("La reproducción requiere una suscripción de Apple Music compatible.")
             return
         }
         do {
@@ -81,17 +81,17 @@ final class NativeAppleMusicService: ObservableObject {
             try await musicPlayer.play()
             message = nil
         } catch {
-            message = "No se pudo reproducir la canción: \(error.localizedDescription)"
+            message = MusicLocalized.format("No se pudo reproducir la canción: %@", error.localizedDescription)
         }
     }
 
     func playSavedCatalogSong(id: String, title: String) async {
         guard authorizationStatus == .authorized else {
-            message = "Conecta Apple Music para reproducir esta canción guardada."
+            message = MusicLocalized.format("Conecta Apple Music para reproducir esta canción guardada.")
             return
         }
         guard !id.isEmpty else {
-            message = "La referencia de esta canción no es válida."
+            message = MusicLocalized.format("La referencia de esta canción no es válida.")
             return
         }
         do {
@@ -99,12 +99,12 @@ final class NativeAppleMusicService: ObservableObject {
             request.limit = 25
             let response = try await request.response()
             guard let song = response.songs.first(where: { $0.id.rawValue == id }) else {
-                message = "Esta canción ya no está disponible en el catálogo consultado. Se conserva en tu lista."
+                message = MusicLocalized.format("Esta canción ya no está disponible en el catálogo consultado. Se conserva en tu lista.")
                 return
             }
             await playCatalogSong(song)
         } catch {
-            message = "No se pudo recuperar esta canción de Apple Music: \(error.localizedDescription)"
+            message = MusicLocalized.format("No se pudo recuperar esta canción de Apple Music: %@", error.localizedDescription)
         }
     }
 

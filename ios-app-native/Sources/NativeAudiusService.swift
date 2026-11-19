@@ -39,46 +39,46 @@ final class NativeAudiusService: ObservableObject {
                                      URLQueryItem(name: "limit", value: "20")]
             let (data, response) = try await URLSession.shared.data(from: components.url!)
             guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-                message = "Audius no está disponible en este momento."
+                message = MusicLocalized.format("Audius no está disponible en este momento.")
                 tracks = []
                 return
             }
             tracks = try JSONDecoder().decode(AudiusSearchResponse.self, from: data).data
-            message = tracks.isEmpty ? "No se encontraron canciones en Audius." : nil
+            message = tracks.isEmpty ? MusicLocalized.format("No se encontraron canciones en Audius.") : nil
         } catch {
             tracks = []
-            message = "No se pudo consultar Audius: \(error.localizedDescription)"
+            message = MusicLocalized.format("No se pudo consultar Audius: %@", error.localizedDescription)
         }
     }
 
     func play(_ track: AudiusTrack) {
         guard track.isStreamable != false else {
-            message = "Esta canción no permite reproducción desde Audius."
+            message = MusicLocalized.format("Esta canción no permite reproducción desde Audius.")
             return
         }
         guard track.id.range(of: #"^[A-Za-z0-9_-]+$"#, options: .regularExpression) != nil,
               let url = URL(string: "https://api.audius.co/v1/tracks/\(track.id)/stream") else {
-            message = "El identificador de la canción no es válido."
+            message = MusicLocalized.format("El identificador de la canción no es válido.")
             return
         }
         player?.pause()
         player = AVPlayer(url: url)
         player?.play()
         playingName = track.title
-        message = "Iniciando \(track.title) desde Audius."
+        message = MusicLocalized.format("Iniciando %@ desde Audius.", track.title)
     }
 
     func playSavedTrack(id: String, title: String) {
         guard id.range(of: #"^[A-Za-z0-9_-]+$"#, options: .regularExpression) != nil,
               let url = URL(string: "https://api.audius.co/v1/tracks/\(id)/stream") else {
-            message = "El identificador guardado en Audius no es válido."
+            message = MusicLocalized.format("El identificador guardado en Audius no es válido.")
             return
         }
         player?.pause()
         player = AVPlayer(url: url)
         player?.play()
         playingName = title
-        message = "Iniciando \(title) desde Audius."
+        message = MusicLocalized.format("Iniciando %@ desde Audius.", title)
     }
 
     func pause() {

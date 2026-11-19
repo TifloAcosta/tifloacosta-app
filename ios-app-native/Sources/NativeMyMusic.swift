@@ -554,16 +554,16 @@ struct NativeMyMusicScreen: View {
                 Button("Buscar en Jamendo") { Task { await jamendo.search(jamendoQuery) } }
                 if jamendo.loading { ProgressView("Consultando Jamendo") }
                 ForEach(jamendo.tracks) { track in
-                    Button("Reproducir \(track.name), \(track.artistName), Jamendo") {
+                    Button(MusicLocalized.format("Reproducir %@, %@, Jamendo", track.name, track.artistName)) {
                         player.stop()
                         audius.pause()
                         Task { await appleMusic.pause() }
                         jamendo.play(track)
                     }
                     if !library.playlists.isEmpty {
-                        Menu("Añadir \(track.name) a una lista") {
+                        Menu(MusicLocalized.format("Añadir %@ a una lista", track.name)) {
                             ForEach(library.playlists) { playlist in
-                                Button("Añadir a \(playlist.name)") {
+                                Button(MusicLocalized.format("Añadir a %@", playlist.name)) {
                                     library.addStreamingSong(provider: .jamendo, id: track.id,
                                         title: track.name, artist: track.artistName, playlistId: playlist.id)
                                 }
@@ -583,16 +583,16 @@ struct NativeMyMusicScreen: View {
                 Button("Buscar en Audius") { Task { await audius.search(audiusQuery) } }
                 if audius.loading { ProgressView("Consultando Audius") }
                 ForEach(audius.tracks) { track in
-                    Button("Reproducir \(track.title), \(track.user.name), Audius") {
+                    Button(MusicLocalized.format("Reproducir %@, %@, Audius", track.title, track.user.name)) {
                         player.stop()
                         jamendo.pause()
                         Task { await appleMusic.pause() }
                         audius.play(track)
                     }
                     if !library.playlists.isEmpty {
-                        Menu("Añadir \(track.title) a una lista") {
+                        Menu(MusicLocalized.format("Añadir %@ a una lista", track.title)) {
                             ForEach(library.playlists) { playlist in
-                                Button("Añadir a \(playlist.name)") {
+                                Button(MusicLocalized.format("Añadir a %@", playlist.name)) {
                                     library.addStreamingSong(provider: .audius, id: track.id,
                                         title: track.title, artist: track.user.name, playlistId: playlist.id)
                                 }
@@ -611,7 +611,7 @@ struct NativeMyMusicScreen: View {
                     }
                     Text("Opcional. No necesitas una cuenta de Apple Music para escuchar tus archivos personales.")
                 } else {
-                    Text(appleMusic.subscriptionAvailable ? "Apple Music: reproducción disponible" : "Apple Music: reproducción no disponible con esta cuenta")
+                    Text(LocalizedStringKey(appleMusic.subscriptionAvailable ? "Apple Music: reproducción disponible" : "Apple Music: reproducción no disponible con esta cuenta"))
                     TextField("Buscar en Apple Music", text: $appleMusicQuery)
                         .submitLabel(.search)
                         .onSubmit { Task { await appleMusic.searchCatalog(query: appleMusicQuery) } }
@@ -620,16 +620,16 @@ struct NativeMyMusicScreen: View {
                     }
                     if appleMusic.isLoading { ProgressView("Buscando en Apple Music") }
                     ForEach(appleMusic.songs, id: \.id) { song in
-                        Button("Reproducir \(song.title), \(song.artistName), Apple Music") {
+                        Button(MusicLocalized.format("Reproducir %@, %@, Apple Music", song.title, song.artistName)) {
                             audius.pause()
                             jamendo.pause()
                             player.stop()
                             Task { await appleMusic.playCatalogSong(song) }
                         }
                         if !library.playlists.isEmpty {
-                            Menu("Añadir \(song.title) a una lista") {
+                            Menu(MusicLocalized.format("Añadir %@ a una lista", song.title)) {
                                 ForEach(library.playlists) { playlist in
-                                    Button("Añadir a \(playlist.name)") {
+                                    Button(MusicLocalized.format("Añadir a %@", playlist.name)) {
                                         library.addAppleMusicSong(id: song.id.rawValue, title: song.title,
                                                                   artist: song.artistName, playlistId: playlist.id)
                                     }
@@ -638,10 +638,10 @@ struct NativeMyMusicScreen: View {
                         }
                     }
                     ForEach(appleMusic.albums, id: \.id) { album in
-                        Text("Álbum: \(album.title), \(album.artistName), Apple Music")
+                        Text(MusicLocalized.format("Álbum: %@, %@, Apple Music", album.title, album.artistName))
                     }
                     ForEach(appleMusic.artists, id: \.id) { artist in
-                        Text("Artista: \(artist.name), Apple Music")
+                        Text(MusicLocalized.format("Artista: %@, Apple Music", artist.name))
                     }
                     Button("Pausar Apple Music") { Task { await appleMusic.pause() } }
                 }
@@ -685,24 +685,24 @@ struct NativeMyMusicScreen: View {
             }
             Section("Listas de reproducción") {
                 ForEach(library.playlists) { playlist in
-                    Text("\(playlist.name), \(library.playlistEntries(playlist).count) canciones")
+                    Text(MusicLocalized.format("%@, %d canciones", playlist.name, library.playlistEntries(playlist).count))
                     ForEach(library.playlistEntries(playlist)) { entry in
                         if entry.provider == .appleMusic {
-                            Button("Reproducir \(entry.title), \(entry.artist ?? ""), Apple Music") {
+                            Button(MusicLocalized.format("Reproducir %@, %@, Apple Music", entry.title, entry.artist ?? "")) {
                                 audius.pause()
                                 jamendo.pause()
                                 player.stop()
                                 Task { await appleMusic.playSavedCatalogSong(id: entry.appleMusicSongId ?? "", title: entry.title) }
                             }
                         } else if entry.provider == .audius {
-                            Button("Reproducir \(entry.title), \(entry.artist ?? ""), Audius") {
+                            Button(MusicLocalized.format("Reproducir %@, %@, Audius", entry.title, entry.artist ?? "")) {
                                 player.stop()
                                 jamendo.pause()
                                 Task { await appleMusic.pause() }
                                 audius.playSavedTrack(id: entry.appleMusicSongId ?? "", title: entry.title)
                             }
                         } else if entry.provider == .jamendo {
-                            Button("Reproducir \(entry.title), \(entry.artist ?? ""), Jamendo") {
+                            Button(MusicLocalized.format("Reproducir %@, %@, Jamendo", entry.title, entry.artist ?? "")) {
                                 player.stop()
                                 audius.pause()
                                 Task { await appleMusic.pause() }
@@ -710,7 +710,7 @@ struct NativeMyMusicScreen: View {
                             }
                         } else if let localId = entry.localId,
                                   let file = library.files.first(where: { $0.id == localId }) {
-                            Button("Reproducir \(file.name), archivo personal") {
+                            Button(MusicLocalized.format("Reproducir %@, archivo personal", file.name)) {
                                 audius.pause()
                                 jamendo.pause()
                                 Task { await appleMusic.pause() }
@@ -718,10 +718,10 @@ struct NativeMyMusicScreen: View {
                                             queue: [(name: file.name, url: library.audioURL(for: file))])
                             }
                         } else {
-                            Text("\(entry.title), archivo no disponible")
+                            Text(MusicLocalized.format("%@, archivo no disponible", entry.title))
                         }
                     }
-                    Button("Reproducir archivos locales de \(playlist.name)") {
+                    Button(MusicLocalized.format("Reproducir archivos locales de %@", playlist.name)) {
                         audius.pause()
                         jamendo.pause()
                         Task { await appleMusic.pause() }
@@ -734,7 +734,7 @@ struct NativeMyMusicScreen: View {
                     if library.playlistEntries(playlist).contains(where: { $0.provider != .local }) {
                         Text("Las canciones de los catálogos en línea se reproducen individualmente desde esta lista.")
                     }
-                    Button("Eliminar lista \(playlist.name)") { library.removePlaylist(playlist.id) }
+                    Button(MusicLocalized.format("Eliminar lista %@", playlist.name)) { library.removePlaylist(playlist.id) }
                 }
             }
             Section("Carpetas inteligentes") {

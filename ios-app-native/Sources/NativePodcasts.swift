@@ -305,7 +305,6 @@ struct NativePodcastScreen: View {
                         Button("Continuar: \(saved.title), desde \(clock(saved.seconds))") {
                             playEpisode(episode)
                         }
-                        .accessibilityHint("Doble toque para reanudar el episodio.")
                         Button("Olvidar posición: \(saved.title)") {
                             library.clearProgress(for: episode)
                         }
@@ -350,7 +349,6 @@ struct NativePodcastScreen: View {
                     } label: {
                         Text(episode.title)
                     }
-                    .accessibilityHint("Doble toque para reproducir dentro de TifloAcosta.")
                     .accessibilityAction(named: Text("Reproducir")) {
                         playEpisode(episode, collection: store.episodes)
                     }

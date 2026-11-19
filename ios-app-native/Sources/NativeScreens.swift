@@ -577,7 +577,6 @@ struct NativeResourcesScreen: View {
                             }
                         }
                         .accessibilityLabel(item.title)
-                        .accessibilityHint("Doble toque para leer. Acciones: Leer, Guardar, Descargar y Compartir.")
                         .accessibilityAction(named: Text("Leer")) { read(item) }
                         .accessibilityAction(named: Text("Guardar")) { save(item) }
                         .accessibilityAction(named: Text("Descargar")) { download(item) }
@@ -717,7 +716,6 @@ private struct NativeYouTubeSearchScreen: View {
                         }
                         .accessibilityElement(children: .ignore)
                         .accessibilityLabel("\(channel.title). Canal de YouTube")
-                        .accessibilityHint("Doble toque para consultar sus vídeos en TifloAcosta.")
                         .accessibilityAction(named: Text("Compartir canal")) {
                             NativeShare.present(url: channel.url)
                         }
@@ -1152,7 +1150,6 @@ private struct NativeYouTubeVideoRow: View {
         .buttonStyle(.plain)
         // Conservar el botón real: un elemento artificial pierde la acción de doble toque.
         .accessibilityLabel("\(video.title). Canal: \(video.channelTitle). \(NativeNewsMetadata.publication(video.publishedAt).map { "Publicado: " + $0 } ?? "Fecha de publicación no disponible")")
-        .accessibilityHint("Doble toque para reproducir. Desliza arriba o abajo para más acciones, incluida Ver después.")
         .modifier(NativeYouTubeTitleActions(
             video: video, onPlay: onPlay, onComment: onComment
         ))

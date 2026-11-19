@@ -40,7 +40,6 @@ struct NativeContactScreen: View {
                     .frame(minHeight: 44)
                 }
                 .accessibilityLabel(Text(LocalizedStringKey(item.title)))
-                .accessibilityHint("Doble toque para abrir el enlace externo.")
                 .accessibilityAction(named: Text("Compartir enlace")) {
                     NativeShare.present(url: url)
                 }
@@ -65,7 +64,6 @@ struct NativeContactScreen: View {
                         .frame(minHeight: 44)
                 }
                 .accessibilityLabel("Mi libro: La vida vista desde donde estoy")
-                .accessibilityHint("Doble toque para conocer el libro y consultar las ediciones disponibles.")
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 

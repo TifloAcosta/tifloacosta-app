@@ -145,7 +145,6 @@ struct NativeUpdatesScreen: View {
                         }
                         .accessibilityElement(children: .ignore)
                         .accessibilityLabel("\(item.title). Recurso de TifloAcosta")
-                        .accessibilityHint("Doble toque para leer. Acciones: Leer, Guardar, Descargar y Compartir.")
                         .accessibilityAction(named: Text("Leer")) { read(item) }
                         .accessibilityAction(named: Text("Guardar")) { save(item) }
                         .accessibilityAction(named: Text("Descargar")) { download(item) }
@@ -164,7 +163,6 @@ struct NativeUpdatesScreen: View {
                         }
                         .accessibilityElement(children: .ignore)
                         .accessibilityLabel("\(item.title). Vídeo del canal TifloAcosta")
-                        .accessibilityHint("Doble toque para abrir el vídeo. Acciones: Abrir en YouTube y Compartir.")
                         .accessibilityAction(named: Text("Abrir en YouTube")) {
                             openVideo(item)
                         }

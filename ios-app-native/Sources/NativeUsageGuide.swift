@@ -266,7 +266,6 @@ struct NativeUsageGuideScreen: View {
                     .padding(.vertical, 4)
                 }
                 .accessibilityLabel(section.title(languageCode: languageCode))
-                .accessibilityHint(Text(LocalizedStringKey("Doble toque para leer la guía de esta sección.")))
             }
             .listRowBackground(TifloVisual.surfaceRaised)
         }

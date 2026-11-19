@@ -1428,7 +1428,6 @@ struct NativeReaderLibraryScreen: View {
                                   ? "checkmark.circle.fill" : "circle")
                         }
                         .accessibilityLabel("\(NativeAppLanguage.message(selectedDocumentIDs.contains(document.id) ? "Seleccionado" : "No seleccionado", languageCode: NativeAppLanguage.code(for: languageIndex))), \(documentRowLabel(document))")
-                        .accessibilityHint("Doble toque para cambiar la selección de este documento.")
                     } else {
                     NavigationLink {
                         NativeReadingScreen(document: document, speech: speech)

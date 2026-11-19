@@ -212,7 +212,6 @@ struct NativeMediaScreen: View {
                             (NativeNewsMetadata.publication(item.publishedAt)
                                 .map { "Publicado: \($0)" } ?? "")
                         )
-                        .accessibilityHint("Doble toque para conocer el contenido. Acciones: \(item.openLabel), Visitar fuente y Compartir.")
                         .accessibilityAction(named: Text(item.openLabel)) { open(item) }
                         .accessibilityAction(named: Text("Visitar fuente")) {
                             if let url = item.sourceURL { openURL(url) }

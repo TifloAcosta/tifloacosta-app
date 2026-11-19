@@ -227,7 +227,6 @@ struct NativeDownloadsScreen: View {
                             .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
                     }
                     .accessibilityLabel(file.title)
-                    .accessibilityHint("Doble toque para importar en TifloLector. Otras acciones: Compartir y Eliminar.")
                     .accessibilityAction(named: Text("Importar en TifloLector")) { importFile(file) }
                     .accessibilityAction(named: Text("Compartir")) { NativeShare.present(url: file.url) }
                     .accessibilityAction(named: Text("Eliminar")) { pendingDeletion = file }

@@ -291,7 +291,6 @@ struct NativeNewsScreen: View {
                             }
                             .accessibilityElement(children: .ignore)
                             .accessibilityLabel(NativeNewsMetadata.accessibilitySummary(item))
-                            .accessibilityHint("Doble toque para leer. Acciones: Leer, Guardar en TifloLector, Compartir y Abrir fuente original.")
                             .accessibilityAction(named: Text("Leer")) { read(item) }
                             .accessibilityAction(named: Text("Traducir noticia")) { articleToTranslate = item }
                             .accessibilityAction(named: Text("Guardar en TifloLector")) { save(item) }

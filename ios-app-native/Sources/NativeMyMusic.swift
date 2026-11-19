@@ -470,6 +470,16 @@ struct NativeMyMusicScreen: View {
         }
     }
 
+    private var automaticBackupChoice: Binding<Int> {
+        Binding(
+            get: { [0, 7, 30].firstIndex(of: library.autoBackupDays) ?? 0 },
+            set: { index in
+                guard [0, 7, 30].indices.contains(index) else { return }
+                library.setAutomaticBackup(days: [0, 7, 30][index])
+            }
+        )
+    }
+
     var body: some View {
         List {
             Section {
@@ -489,10 +499,11 @@ struct NativeMyMusicScreen: View {
                 Button("Restaurar respaldo de biblioteca") { importingBackup = true }
                 Button("Exportar copia completa con audio") { completeArchiveURL = library.createCompleteArchive() }
                 Button("Restaurar copia completa con audio") { importingCompleteBackup = true }
-                Text("Copia automática: \(library.autoBackupDays == 0 ? "desactivada" : "cada \(library.autoBackupDays) días")")
-                Button("Desactivar copia automática") { library.setAutomaticBackup(days: 0) }
-                Button("Cada 7 días") { library.setAutomaticBackup(days: 7) }
-                Button("Cada 30 días") { library.setAutomaticBackup(days: 30) }
+                NativeAdjustableChoice(
+                    title: "Copia automática",
+                    choices: ["Desactivada", "Cada 7 días", "Cada 30 días"],
+                    selectedIndex: automaticBackupChoice
+                )
                 Text("Las copias automáticas del índice se crean al abrir Mi Música cuando corresponde; no se ejecutan en segundo plano.")
                 Text("Este respaldo conserva el índice y las carpetas, pero no incluye los archivos de audio. Para recuperar música en otro dispositivo tendrás que importar también las canciones.")
             }

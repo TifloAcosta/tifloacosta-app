@@ -26,7 +26,7 @@ final class NativeAppleMusicPlayer: ObservableObject {
             let subscription = try await MusicSubscription.current
             canPlayCatalog = subscription.canPlayCatalogContent
             error = canPlayCatalog ? nil :
-                "Sin suscripción activa puedes escuchar tu música comprada o sincronizada, pero no el catálogo completo de Apple Music."
+                "El catálogo de Apple Music requiere una suscripción compatible. Tus canciones importadas siguen disponibles en Mi Música."
         } catch {
             canPlayCatalog = false
             self.error = "No se pudo comprobar el acceso a Apple Music."

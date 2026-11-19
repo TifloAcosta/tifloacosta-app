@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-19T03:33:09.188Z",
+  "generatedAt": "2026-11-19T10:24:15.376Z",
   "resources": [
     {
       "kind": "resource",
@@ -6335,45 +6335,6 @@
         "apps-accesibles",
         "programas-accesibles",
         "sordoceguera"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "tecnoconocimiento-accesible-f15523c89a20d78a:es",
-      "sourceId": "tecnoconocimiento-accesible-f15523c89a20d78a",
-      "lang": "es",
-      "title": "Llega TCA DjMix 1.0: 🧑‍🦯 DJ accesible para Windows!",
-      "summary": "Hola gente, ¿qué tal les va?",
-      "body": "Hola gente, ¿qué tal les va?\n\nDespués de bastante tiempo trabajando en un proyecto nuevo y distinto dentro de la familia TCA Software, ¡por fin llega TCA DjMix 1.0!\n\nSi eres de los que creció viendo a algún DJ mezclar pistas con fundidos suaves y sincronizando beats al milisegundo… pues este es tu programa. Y lo mejor: está diseñado desde cero para que cualquiera pueda usarlo con lector de pantalla.\n\nSí, lo has leído bien. TCA DjMix es la primera aplicación de DJ accesible para Windows pensada específicamente para quienes usamos NVDA, JAWS o Narrador. Pero no es solo para nosotros: cualquier persona puede usarla con teclado, con ratón o incluso con una controladora MIDI.\n\nY esto tiene algo todavía más especial: este es el primer programa de toda la familia TCA Software que fue construido usando Inteligencia Artificial. Sí, justo como lo lees. Por primera vez en la historia de TCA Software, creamos un programa \"by coding\" con ayuda de IA.\n\nTCA DjMix es una aplicación de mezcla musical accesible que reúne todo lo necesario para crear tus sesiones. Estas son sus funciones clave:\n\n• Biblioteca unificada y platos independientes\n\nTCA DjMix incluye una biblioteca centralizada donde cargas tu carpeta de música, la cual se navega 100% con lector de pantalla y lista todos los archivos automáticamente (formatos compatibles: WAV, FLAC, OGG, MP3 y AIFF). Desde esa misma lista puedes cargar las pistas de manera independiente en el plato 1 o en el plato 2 usando los atajos (Alt+1 o Alt+2), controlando el volumen y la reproducción de cada plato por separado.\n\n• Sincronización automática de BPM (Beatmatch)\n\nEl Beatmatch automático analiza ambas pistas y ajusta sus tempos para que se sincronicen solos. Ideal para quienes están empezando y no quieren complicarse ajustando a mano.\n\n• Crossfader accesible\n\nEl crossfader permite hacer fundidos suaves entre los dos platos, tal como lo hacen los DJ profesionales. Se puede controlar cómodamente desde el teclado o con el ratón.\n\n• Efectos de sonido (Samples)\n\nPuedes agregar efectos como scratches, fades o hits con un solo atajo de teclado. Solo hay que poner los archivos WAV de efectos en la carpeta \"samples\" y ya están listos para sonar.\n\n• Compatible con controladoras MIDI (funcionalidad en versión prueba).\n\nSi tienes una controladora Pioneer DDJ-400, DDJ-SR o DDJ-SR2, TCA DjMix la detecta automáticamente. No hace falta configurar nada: conéctala y empieza a mezclar usando los controles físicos que ya conoces.\n\nAlgunos de los atajos más prácticos para controlar todo con el teclado:\n\n• Ctrl+L: Abrir carpeta y cargar música en la biblioteca.\n\n• Alt+1 / Alt+2: Cargar pista seleccionada en el plato 1 o plato 2.\n\n• F5 / F6: Reproducir o pausar el plato 1 / plato 2.\n\n• F7 / F8: Detener el plato 1 / plato 2.\n\n• Tab: Recorrer controles.\n\n• Ctrl+B: Sincronizar el plato activo con el otro plato.\n\n• Ctrl+F1 a Ctrl+F12: Reproducir samples del banco actual.\n\n• Ctrl+S: Detener todos los samples.\n\n• Ctrl+M: Iniciar o detener la automezcla.\n\n• Ctrl+P: Abrir la configuración.\n\n• Ctrl+J: Panel de controladora MIDI.\n\nTCA DjMix está pensado para cualquier persona interesada en la mezcla musical, pero especialmente para personas ciegas o con baja visión que usan lectores de pantalla y que siempre soñaron con hacer una mezcla como un DJ profesional. Con los atajos correctos y un poco de práctica, cualquiera puede manejarlo sin necesidad de ver la pantalla.\n\nY hablando de práctica... ¡te lo ponemos muy fácil! Más abajo, en esta misma entrada, te dejamos el tutorial en audio y vídeo donde puedes ver y escuchar el programa en acción paso a paso.\n\nEl programa es compatible con: • Windows 10 X64.\n\n• Windows 11.\n\n• TCA DjMix 1.0 se distribuye como un archivo ZIP descargable. Incluye todo lo necesario: el ejecutable, los samples predeterminados y las instrucciones. No requiere instalación, simplemente descomprime y ejecuta.\n\n• Es multilenguaje: español, italiano, inglés y portugués.\n\n• En algunos PC, podrían necesitar la instalación de las librerías Visual Estudio C++ (en la descarga estarán).\n\nLes dejaré en la descarga:\n\n• El audio tutorial (en los canales Odysse y YouTube estará en video tutorial).\n\n• El programa: TCA DjMix 1.0.\n\n• Archivo con las librerías Visual Estudio C++.\n\nTCA DjMix es una herramienta que demuestra que la accesibilidad en la tecnología musical no tiene por qué ser un sueño imposible. Con un diseño pensado desde cero para lectores de pantalla, soporte para controladoras MIDI reales y funciones profesionales como beatmatch automático y efectos de sonido, este programa abre las puertas del mundo DJ a personas que antes tenían dificultades para acceder a estas herramientas.\n\nY lo más bonito: nació del esfuerzo dentro de la familia TCA Software, que ahora además cuenta con IA como herramienta de desarrollo. ¿Quién dice que no se puede?\n\n¡Los leo en los comentarios! Cualquier duda, sugerencia o historia contándome cómo usaron TCA DjMix, no duden en escribirme.\n\n¡Un abrazo y buena música!\n\nY ya sabes, Si te gusta este contenido,\n\nApóyanos haciendo una donación:\n\nDona aquí en PayPal.\n\ncompártelo en: Facebook, X.\n\nDeja un comentario sobre esta entrada.\n\nSíguenos en X:\n\nAbajo tienes el botón.\n\nSuscríbete al blog:\n\nAhora puedes unirte a nuestros grupos de WhatsApp o Telegram:\n\nPuedes escribir al mail del blog con tus datos si deseas ingresar a los mismos.\n\nEscucha todos nuestros audio tutoriales, cómodamente:\n\nEntrando desde aquí, a nuestro canal en YouTube.\n\nAhora también, en nuestro canal en Odysse:\n\nEntra al canal de Tecnoconocimiento Accesible en Odysse.\n\nO si prefieres escúchanos en:\n\nAnchor:\n\nEscúchanos en Anchor.",
-      "sourceName": "TecnoConocimientoAccesible",
-      "originalUrl": "https://tecnoconocimientoaccesible.blogspot.com/2026/11/llega-tca-djmix-10-dj-accesible-para.html",
-      "publishedAt": "2026-11-09T09:55:14.674Z",
-      "categories": [
-        "tecnologia-accesibilidad",
-        "programas-accesibles",
-        "windows",
-        "jaws",
-        "nvda",
-        "apps-accesibles",
-        "proyectos-prototipos",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "nvda-es-a7cd167bffdd2997:es",
-      "sourceId": "nvda-es-a7cd167bffdd2997",
-      "lang": "es",
-      "title": "Ya disponible la versión final de NVDA 2026.3.1 con correcciones de seguridad",
-      "summary": "Tras una candidata a liberación, NV Access ha anunciado mediante esta publicación que ya se encuentra disponible para su descarga la versión final de NVDA 2026.3.1, el lector de pantalla gratuito y de código abierto para Microsoft Windows. Se recomienda a todos los usuarios actualizar a esta nueva versión, cuyo uso se considera apto también … Continuar leyendo \"Ya disponible la versión final de NVDA 2026.3.1 con correcciones de seguridad\" La entrada Ya disponible la versión final de NVDA 2026.3.1 con correcciones de seguridad se publicó primero en NVDA en español .",
-      "body": "Tras una candidata a liberación, NV Access ha anunciado mediante esta publicación que ya se encuentra disponible para su descarga la versión final de NVDA 2026.3.1, el lector de pantalla gratuito y de código abierto para Microsoft Windows. Se recomienda a todos los usuarios actualizar a esta nueva versión, cuyo uso se considera apto también en entornos de producción.\n\nEsta versión contiene un parche que resuelve incidencias de seguridad. También corrige un fallo introducido en NVDA 2026.3 con el conmutador de tareas de Windows 10. Se ha restaurado la voz de Espeak NG en portugués de Brasil al comportamiento que tenía en NVDA 2026.2. Tan pronto como actualices NVDA, no olvides reiniciar el equipo. El reinicio garantiza que se pueden actualizar archivos que antes no se podían modificar porque estaban abiertos para escritura. En la práctica, al reiniciar vuelven a funcionar aplicaciones basadas en Electron, tales como Teams, Dropbox o Google Drive, y dejan de producirse comportamientos extraños con el explorador de archivos, Thunderbird, Office y algunos navegadores. Reiniciar es lo primero que debes hacer antes de informar de cualquier fallo. Hazlo pulsando windows+d para ir al escritorio, alt+f4, e intro sobre la opción Reiniciar. Puedes descargar NVDA 2026.3, así como las últimas versiones compatibles con sistemas antiguos y material útil para desarrolladores, desde nuestra página de descargas . La suma SHA256 de NVDA 2026.3.1, que se usa para garantizar la integridad de la descarga, es 6f80a5b0ca720a7d0d314b5be212f37388bbe81a1107ac3298c1821a1cd3f052. Si tienes una versión estable anterior, también puedes actualizar automáticamente desde el menú Ayuda. Y desde la rc1, con el complemento Selector del canal de actualización, se puede hacer del mismo modo configurando previamente el canal estable. Si todavía no conoces NVDA y quieres leer algo más sobre él antes de probarlo, te recomendamos consultar la guía de usuario y la referencia rápida de órdenes . Si te gustan nuestros proyectos y el contenido que ofrecemos, plantéate contribuir mensualmente con una pequeña cantidad. Tan sólo un euro es capaz de marcar la diferencia y ayudarnos a mejorar. Visita la página de donaciones para obtener más información, o la tienda para hacerte con libros de formación traducidos y sintetizadores de voz de alta calidad. ¡Feliz lunes!\n\nLa entrada Ya disponible la versión final de NVDA 2026.3.1 con correcciones de seguridad se publicó primero en NVDA en español .",
-      "sourceName": "NVDA en español",
-      "originalUrl": "https://nvda.es/2026/11/09/ya-disponible-la-version-final-de-nvda-2026-3-1-con-correcciones-de-seguridad/",
-      "publishedAt": "2026-11-09T09:39:59.000Z",
-      "categories": [
-        "nvda",
-        "windows",
-        "tecnologia-accesibilidad"
       ]
     }
   ]

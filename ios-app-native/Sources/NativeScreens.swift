@@ -7,11 +7,14 @@ private enum NativeDestination: String, CaseIterable, Hashable, Identifiable {
     case recursos = "Recursos"
     case tifloLector = "TifloLector"
     case miMusica = "Mi Música"
+    case recibidos = "Recibidos"
     case novedades = "Novedades"
     case descargas = "Descargar desde un enlace"
     case favoritos = "Favoritos"
     case videos = "Vídeos"
     case podcasts = "Podcast"
+    case contacto = "Contacto y redes"
+    case privacidad = "Privacidad y accesibilidad"
     case configuracion = "Configuración"
 
     var id: String { rawValue }
@@ -70,6 +73,43 @@ struct NativeHomeScreen: View {
     @EnvironmentObject private var catalog: NativeCatalogStore
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @AppStorage("native-ios-language") private var languageIndex = 0
+    @State private var searchText = ""
+    @State private var submittedSearch = ""
+    @State private var showingSearch = false
+    @State private var navigationPath = NavigationPath()
+
+    private func openRequestedShortcut() {
+        let defaults = UserDefaults.standard
+        guard let route = defaults.string(forKey: NativeShortcutRoute.key) else { return }
+        let destination: NativeDestination?
+        switch route {
+        case "actualidad": destination = .actualidad
+        case "tifloLector": destination = .tifloLector
+        case "createBookmark":
+            // Preserve the current reader screen and its playback position.
+            defaults.removeObject(forKey: NativeShortcutRoute.key)
+            NativeQuickBookmarkBridge.save()
+            return
+        case "resumeReader":
+            // The library consumes this request after it has opened.
+            defaults.set(true, forKey: "native-ios-resume-last-book-shortcut-v1")
+            destination = .tifloLector
+        case "videos": destination = .videos
+        case "miMusica": destination = .miMusica
+        default: destination = nil
+        }
+        defaults.removeObject(forKey: NativeShortcutRoute.key)
+        guard let destination else { return }
+        navigationPath = NavigationPath()
+        navigationPath.append(destination)
+    }
+
+    private func search() {
+        let term = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !term.isEmpty else { return }
+        submittedSearch = term
+        showingSearch = true
+    }
 
     // Una portada compacta y adaptable. ScrollView evita los márgenes y
     // alturas automáticas de List(.insetGrouped) en tamaños de accesibilidad.
@@ -101,15 +141,32 @@ struct NativeHomeScreen: View {
     }
 
     private var searchPanel: some View {
-        NavigationLink {
-            NativeSearchEntryScreen()
-        } label: {
-            Text("Buscar con TifloAcosta")
-                .font(.body.weight(.semibold))
+        VStack(alignment: .leading, spacing: 10) {
+            TextField("Buscar con TifloAcosta", text: $searchText)
+                .textFieldStyle(.plain)
+                .font(.body)
+                .submitLabel(.search)
+                .textInputAutocapitalization(.sentences)
+                .onSubmit(search)
+                .accessibilityLabel(Text("Buscar con TifloAcosta"))
+                .padding(.horizontal, 14)
                 .frame(maxWidth: .infinity, minHeight: 48)
+                .background(
+                    RoundedRectangle(cornerRadius: TifloVisual.controlCornerRadius)
+                        .fill(TifloVisual.surfaceRaised)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: TifloVisual.controlCornerRadius)
+                        .strokeBorder(TifloVisual.border, lineWidth: 1)
+                )
+
+            if !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                Button("Buscar", action: search)
+                    .buttonStyle(.borderedProminent)
+                    .tint(TifloVisual.brandRed)
+                    .frame(minHeight: 48)
+            }
         }
-        .buttonStyle(.borderedProminent)
-        .tint(TifloVisual.brandRed)
     }
 
     private var guidePanel: some View {
@@ -121,7 +178,7 @@ struct NativeHomeScreen: View {
                     .fill(TifloVisual.brandRed)
                     .frame(width: 4, height: 28)
                     .accessibilityHidden(true)
-                Text(languageIndex == 1 ? "User guide" : "Guía de uso")
+                Text(LocalizedStringKey("Guía de uso"))
                     .font(.body.weight(.semibold))
                     .foregroundStyle(TifloVisual.primaryText)
                     .fixedSize(horizontal: false, vertical: true)
@@ -138,10 +195,8 @@ struct NativeHomeScreen: View {
             )
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(languageIndex == 1 ? "User guide" : "Guía de uso")
-        .accessibilityHint(languageIndex == 1
-            ? "Instructions for every TifloAcosta section."
-            : "Instrucciones para utilizar cada sección de TifloAcosta.")
+        .accessibilityLabel(Text(LocalizedStringKey("Guía de uso")))
+        .accessibilityHint(Text(LocalizedStringKey("Instrucciones para utilizar cada sección de TifloAcosta.")))
     }
 
     private var destinationsPanel: some View {
@@ -152,7 +207,7 @@ struct NativeHomeScreen: View {
                 .accessibilityAddTraits(.isHeader)
 
             LazyVStack(spacing: 0) {
-                ForEach(NativeDestination.allCases) { destination in
+                ForEach(NativeDestination.allCases.filter { $0 != .privacidad && $0 != .contacto && $0 != .recibidos }) { destination in
                     NavigationLink(value: destination) {
                         HStack(spacing: 12) {
                             RoundedRectangle(cornerRadius: 2)
@@ -192,7 +247,7 @@ struct NativeHomeScreen: View {
     }
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationPath) {
             ScrollView {
                 VStack(alignment: .leading, spacing: TifloVisual.sectionSpacing) {
                     brandHeader
@@ -221,11 +276,21 @@ struct NativeHomeScreen: View {
             .navigationDestination(item: $inbox.readyToRead) { document in
                 NativeReadingScreen(document: document, speech: sharedReadingSpeech)
             }
-            .onAppear { inbox.importPendingReaderContent(into: library) }
+            .onAppear {
+                inbox.importPendingReaderContent(into: library)
+                openRequestedShortcut()
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .nativeShortcutRouteRequested)) { _ in
+                openRequestedShortcut()
+            }
             .onChange(of: scenePhase) { _, phase in
                 if phase == .active {
                     inbox.importPendingReaderContent(into: library)
+                    openRequestedShortcut()
                 }
+            }
+            .navigationDestination(isPresented: $showingSearch) {
+                NativeSearchResultsScreen(query: submittedSearch)
             }
             .navigationDestination(for: NativeDestination.self) { destination in
                 switch destination {
@@ -233,42 +298,17 @@ struct NativeHomeScreen: View {
                 case .recursos: NativeResourcesScreen()
                 case .tifloLector: NativeReaderLibraryScreen()
                 case .miMusica: NativeMyMusicScreen()
+                case .recibidos: NativeInboxScreen()
                 case .novedades: NativeUpdatesScreen()
                 case .descargas: NativeDownloadsScreen()
                 case .videos: NativeVideosScreen()
                 case .podcasts: NativePodcastScreen()
                 case .configuracion: NativeSettingsScreen()
+                case .contacto: NativeContactScreen()
                 case .favoritos: NativeFavoritesScreen()
+                case .privacidad: NativePrivacyAccessibilityScreen()
                 }
             }
-        }
-    }
-}
-
-/// La portada anuncia un único botón de búsqueda; el formulario aparece al abrirlo.
-private struct NativeSearchEntryScreen: View {
-    @State private var query = ""
-    @State private var submitted = ""
-    @State private var showResults = false
-
-    private func search() {
-        let term = query.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !term.isEmpty else { return }
-        submitted = term
-        showResults = true
-    }
-
-    var body: some View {
-        Form {
-            TextField("Introduce tu búsqueda", text: $query)
-                .submitLabel(.search)
-                .onSubmit(search)
-            Button("Buscar") { search() }
-                .disabled(query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-        }
-        .navigationTitle("Buscar con TifloAcosta")
-        .navigationDestination(isPresented: $showResults) {
-            NativeSearchResultsScreen(query: submitted)
         }
     }
 }
@@ -356,7 +396,6 @@ struct NativeAdjustableChoice: View {
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Text(LocalizedStringKey(title)))
         .accessibilityValue(Text(LocalizedStringKey(currentValue)))
-        .accessibilityHint("Desliza arriba o abajo para cambiar. Doble toque para la siguiente opción.")
         .accessibilityAdjustableAction { direction in
             switch direction {
             case .increment: advance(1)
@@ -372,14 +411,28 @@ struct NativeResourcesScreen: View {
     @EnvironmentObject private var library: NativeReaderLibrary
     @EnvironmentObject private var resourceService: NativeResourceService
     @EnvironmentObject private var favorites: NativeFavoritesStore
+    @EnvironmentObject private var readingActivity: NativeReadingActivity
     @AppStorage("native-ios-language") private var languageIndex = 0
     @State private var chosenCategory: String?
+    @State private var languageFilterIndex = 0
+    @State private var resourceQuery = ""
     @State private var resourceToOpen: NativeCatalogItem?
     @State private var presentingResource = false
     @State private var actionStatus: String?
 
     private var spanishResources: [NativeCatalogItem] {
-        catalog.resources.filter { $0.lang == (languageIndex == 1 ? "en" : "es") }
+        catalog.resources.filter { item in
+            switch languageFilterIndex {
+            case 1: return true
+            case 2: return item.lang == "es"
+            case 3: return item.lang == "en"
+            case 4: return item.lang == "pt"
+            case 5: return item.lang == "fr"
+            case 6: return item.lang == "it"
+            case 7: return item.lang == "de"
+            default: return languageIndex > 1 || item.lang == NativeAppLanguage.code(for: languageIndex)
+            }
+        }
     }
 
     private var categories: [String] {
@@ -408,10 +461,20 @@ struct NativeResourcesScreen: View {
     }
 
     private var filtered: [NativeCatalogItem] {
-        guard let chosenCategory, categories.contains(chosenCategory) else {
-            return []
+        let terms = resourceQuery.trimmingCharacters(in: .whitespacesAndNewlines)
+            .folding(options: [.diacriticInsensitive, .caseInsensitive], locale: Locale(identifier: "es_ES"))
+            .split(whereSeparator: { $0.isWhitespace }).map(String.init)
+        guard !terms.isEmpty || (chosenCategory != nil && categories.contains(chosenCategory!))
+        else { return [] }
+        return spanishResources.filter { item in
+            if let chosenCategory, item.category != chosenCategory { return false }
+            let searchable = [item.title, item.category ?? "", item.description ?? "", item.summary ?? ""]
+                .joined(separator: " ")
+                .folding(options: [.diacriticInsensitive, .caseInsensitive],
+                         locale: Locale(identifier: "es_ES"))
+            return terms.allSatisfy { searchable.contains($0) }
         }
-        return spanishResources.filter { $0.category == chosenCategory }
+        .sorted { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
     }
 
     private func updateResources() {
@@ -455,6 +518,11 @@ struct NativeResourcesScreen: View {
 
     var body: some View {
         List {
+            Section("Mis lecturas") {
+                NavigationLink("Leer después e historial") {
+                    NativeReadingActivityScreen(kind: .resource)
+                }
+            }
             Section("Contenido de Recursos") {
                 Button("Actualizar recursos") { updateResources() }
                     .disabled(catalog.loading)
@@ -477,7 +545,13 @@ struct NativeResourcesScreen: View {
                     Text(status).font(.footnote).foregroundStyle(.secondary)
                 }
             }
-            Section {
+            Section("Filtrar recursos") {
+                NativeAdjustableChoice(
+                    title: "Idioma de los recursos",
+                    choices: ["Idioma de la aplicación", "Todos los idiomas", "Español", "Inglés",
+                                  "Português", "Français", "Italiano", "Deutsch"],
+                    selectedIndex: $languageFilterIndex
+                )
                 NativeAdjustableChoice(
                     title: "Categoría",
                     choices: categoryChoices,
@@ -485,8 +559,9 @@ struct NativeResourcesScreen: View {
                 )
             }
 
-            if let chosenCategory, categories.contains(chosenCategory) {
-                Section(chosenCategory) {
+            if (chosenCategory != nil && categories.contains(chosenCategory!)) ||
+               !resourceQuery.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                Section(chosenCategory ?? "Resultados de búsqueda") {
                     if filtered.isEmpty {
                         Text("No hay recursos en la categoría elegida.")
                     }
@@ -502,10 +577,15 @@ struct NativeResourcesScreen: View {
                             }
                         }
                         .accessibilityLabel(item.title)
-                        .accessibilityHint("Doble toque para leer. Acciones: Leer, Guardar, Descargar y Compartir.")
                         .accessibilityAction(named: Text("Leer")) { read(item) }
                         .accessibilityAction(named: Text("Guardar")) { save(item) }
                         .accessibilityAction(named: Text("Descargar")) { download(item) }
+                        .accessibilityAction(named: Text(readingActivity.isSaved(.resource, item: item)
+                            ? "Quitar de Leer después" : "Guardar para leer después")) {
+                            let saved = readingActivity.toggleReadLater(.resource, item: item)
+                            announce(saved ? "Recurso guardado para leer después." :
+                                "Recurso retirado de Leer después.")
+                        }
                         .accessibilityAction(named: Text("Compartir")) {
                             if let url = item.resourceURL { NativeShare.present(url: url) }
                         }
@@ -527,6 +607,8 @@ struct NativeResourcesScreen: View {
         }
         .tifloScreenSurface()
         .navigationTitle("Recursos")
+        .searchable(text: $resourceQuery, prompt: "Buscar recursos")
+        .onChange(of: languageFilterIndex) { _, _ in chosenCategory = nil }
         .navigationDestination(isPresented: $presentingResource) {
             if let resourceToOpen {
                 NativeRemoteResourceScreen(item: resourceToOpen)
@@ -536,14 +618,47 @@ struct NativeResourcesScreen: View {
 }
 
 struct NativeVideosScreen: View {
-    @EnvironmentObject private var catalog: NativeCatalogStore
-    @EnvironmentObject private var favorites: NativeFavoritesStore
-    @EnvironmentObject private var account: NativeYouTubeAccountStore
+    var body: some View {
+        List {
+            Section("Explorar vídeos") {
+                NavigationLink("Buscar en YouTube") {
+                    NativeYouTubeSearchScreen()
+                }
+                NavigationLink("Vídeos del canal TifloAcosta") {
+                    NativeTifloAcostaChannelVideosScreen()
+                }
+            }
+            Section("Mis canales") {
+                NavigationLink("Mis suscripciones de YouTube") {
+                    NativeYouTubeSubscriptionsScreen()
+                }
+                NavigationLink("Canales seguidos sin cuenta Google") {
+                    NativeYouTubeLocalChannelsScreen()
+                }
+                NavigationLink("Novedades de mis canales") {
+                    NativeYouTubeFollowedUpdatesScreen(useYouTubeSubscriptions: false)
+                }
+            }
+            Section("Mi actividad") {
+                NavigationLink("Continuar viendo") {
+                    NativeYouTubePersonalVideosScreen(showWatchLater: false)
+                }
+                NavigationLink("Ver después") {
+                    NativeYouTubePersonalVideosScreen(showWatchLater: true)
+                }
+            }
+        }
+        .tifloScreenSurface()
+        .navigationTitle("Vídeos")
+    }
+}
+
+/// La búsqueda y sus resultados se recorren solamente al activar Buscar en YouTube.
+private struct NativeYouTubeSearchScreen: View {
     @StateObject private var youtubeSearch = NativeYouTubeSearchStore()
+    @ObservedObject private var personalVideos = NativeYouTubePersonalLibrary.shared
     @State private var searchText = ""
     @State private var filterIndex = 0
-    @State private var sortIndex = 0
-    @State private var visibleCount = 10
     @State private var selectedVideo: NativeYouTubeVideo?
     @State private var commentingOnVideo: NativeYouTubeVideo?
 
@@ -552,10 +667,6 @@ struct NativeVideosScreen: View {
         "En directo", "Con subtítulos"
     ]
     private let filterValues = ["all", "video", "channel", "short", "live", "captions"]
-
-    private var ordered: [NativeCatalogItem] {
-        sortIndex == 0 ? catalog.videos : Array(catalog.videos.reversed())
-    }
 
     private func search(loadMore: Bool = false) {
         let filter = filterValues[filterIndex]
@@ -605,9 +716,12 @@ struct NativeVideosScreen: View {
                         }
                         .accessibilityElement(children: .ignore)
                         .accessibilityLabel("\(channel.title). Canal de YouTube")
-                        .accessibilityHint("Doble toque para consultar sus vídeos en TifloAcosta.")
                         .accessibilityAction(named: Text("Compartir canal")) {
                             NativeShare.present(url: channel.url)
+                        }
+                        .accessibilityAction(named: Text(personalVideos.isFollowing(channel.id)
+                            ? "Dejar de seguir canal" : "Seguir canal sin cuenta Google")) {
+                            personalVideos.toggleFollowed(channel)
                         }
                     }
                     ForEach(youtubeSearch.videos) { video in
@@ -624,18 +738,33 @@ struct NativeVideosScreen: View {
                 .listRowBackground(TifloVisual.surfaceRaised)
             }
 
-            Section("Cuenta de YouTube") {
-                NavigationLink("Mis suscripciones de YouTube") {
-                    NativeYouTubeSubscriptionsScreen()
-                }
-                if !account.authenticated {
-                    Text("Puedes buscar y reproducir sin iniciar sesión. Las suscripciones requieren acceso con Google.")
-                        .font(.subheadline)
-                        .foregroundStyle(TifloVisual.secondaryText)
-                }
-            }
-            .listRowBackground(TifloVisual.surfaceRaised)
+        }
+        .tifloScreenSurface()
+        .navigationTitle("Buscar en YouTube")
+        .sheet(item: $selectedVideo) { video in
+            NavigationStack { NativeYouTubePlayerScreen(video: video, playlist: youtubeSearch.videos) }
+        }
+        .sheet(item: $commentingOnVideo) { video in
+            NavigationStack { NativeYouTubeCommentScreen(video: video) }
+        }
+    }
+}
 
+/// Los vídeos del canal editorial mantienen ordenación y carga de diez en diez.
+private struct NativeTifloAcostaChannelVideosScreen: View {
+    @EnvironmentObject private var catalog: NativeCatalogStore
+    @EnvironmentObject private var favorites: NativeFavoritesStore
+    @State private var sortIndex = 0
+    @State private var visibleCount = 10
+    @State private var selectedVideo: NativeYouTubeVideo?
+    @State private var commentingOnVideo: NativeYouTubeVideo?
+
+    private var ordered: [NativeCatalogItem] {
+        sortIndex == 0 ? catalog.videos : Array(catalog.videos.reversed())
+    }
+
+    var body: some View {
+        List {
             Section {
                 NativeAdjustableChoice(
                     title: "Orden",
@@ -672,9 +801,12 @@ struct NativeVideosScreen: View {
             .listRowBackground(TifloVisual.surfaceRaised)
         }
         .tifloScreenSurface()
-        .navigationTitle("Vídeos")
+        .navigationTitle("Vídeos de TifloAcosta")
         .sheet(item: $selectedVideo) { video in
-            NavigationStack { NativeYouTubePlayerScreen(video: video) }
+            NavigationStack {
+                NativeYouTubePlayerScreen(video: video,
+                    playlist: Array(ordered.prefix(visibleCount)).compactMap(NativeYouTubeVideo.init(catalog:)))
+            }
         }
         .sheet(item: $commentingOnVideo) { video in
             NavigationStack { NativeYouTubeCommentScreen(video: video) }
@@ -683,9 +815,217 @@ struct NativeVideosScreen: View {
     }
 }
 
+/// Los contenidos personales se consultan por separado, con controles de VoiceOver.
+private struct NativeYouTubePersonalVideosScreen: View {
+    let showWatchLater: Bool
+    @ObservedObject private var personalVideos = NativeYouTubePersonalLibrary.shared
+    @State private var selectedVideo: NativeYouTubeVideo?
+    @State private var commentingOnVideo: NativeYouTubeVideo?
+
+    var body: some View {
+        List {
+            if showWatchLater {
+            Section("Ver después") {
+                if personalVideos.watchLater.isEmpty {
+                    Text("No has guardado vídeos para ver después.")
+                }
+                ForEach(personalVideos.watchLater) { saved in
+                    if let video = NativeYouTubeVideo(saved: saved) {
+                        NativeYouTubeVideoRow(
+                            video: video, onPlay: { selectedVideo = $0 },
+                            onComment: { commentingOnVideo = $0 }
+                        )
+                    }
+                }
+            }
+
+            } else {
+            Section("Continuar viendo") {
+                if personalVideos.continueWatching.isEmpty {
+                    Text("No hay vídeos con una reproducción pendiente.")
+                }
+                ForEach(personalVideos.continueWatching) { saved in
+                    if let video = NativeYouTubeVideo(saved: saved) {
+                        NativeYouTubeVideoRow(
+                            video: video, onPlay: { selectedVideo = $0 },
+                            onComment: { commentingOnVideo = $0 }
+                        )
+                        .accessibilityHint("Retoma el vídeo desde el segundo \(Int(saved.resumeSeconds)).")
+                    }
+                }
+            }
+
+            }
+        }
+        .tifloScreenSurface()
+        .navigationTitle(showWatchLater ? "Ver después" : "Continuar viendo")
+        .sheet(item: $selectedVideo) { video in
+            NavigationStack { NativeYouTubePlayerScreen(video: video) }
+        }
+        .sheet(item: $commentingOnVideo) { video in
+            NavigationStack { NativeYouTubeCommentScreen(video: video) }
+        }
+    }
+}
+
+private struct NativeYouTubeLocalChannelsScreen: View {
+    @ObservedObject private var personalVideos = NativeYouTubePersonalLibrary.shared
+
+    var body: some View {
+        List {
+            Section("Canales seguidos sin cuenta Google") {
+                if personalVideos.followedChannels.isEmpty {
+                    Text("No hay canales seguidos. Busca un canal y elige Seguir canal en sus acciones.")
+                }
+                ForEach(personalVideos.followedChannels) { saved in
+                    if let channel = NativeYouTubeChannel(saved: saved) {
+                        NavigationLink(channel.title) {
+                            NativeYouTubeChannelVideosScreen(channel: channel)
+                        }
+                        .accessibilityAction(named: Text("Dejar de seguir canal")) {
+                            personalVideos.toggleFollowed(channel)
+                        }
+                    }
+                }
+            }
+
+        }
+        .tifloScreenSurface()
+        .navigationTitle("Canales seguidos")
+    }
+}
+
+/// Noticias de canales seguidos sin cuenta Google. Cada canal aporta una página
+/// de 10 elementos por cada pulsación de Cargar 10 más, y la lista se ordena
+/// conjuntamente por fecha, no agrupada por canal.
+private struct NativeYouTubeFollowedUpdatesScreen: View {
+    let useYouTubeSubscriptions: Bool
+    @EnvironmentObject private var account: NativeYouTubeAccountStore
+    @ObservedObject private var personalVideos = NativeYouTubePersonalLibrary.shared
+    @State private var searches: [String: NativeYouTubeSearchStore] = [:]
+    @State private var collected: [NativeYouTubeVideo] = []
+    @State private var visibleCount = 10
+    @State private var loading = false
+    @State private var message: String?
+    @State private var selectedVideo: NativeYouTubeVideo?
+    @State private var commentingOnVideo: NativeYouTubeVideo?
+
+    private var channels: [NativeYouTubeChannel] {
+        if useYouTubeSubscriptions { return account.subscriptions }
+        return personalVideos.followedChannels.compactMap(NativeYouTubeChannel.init(saved:))
+    }
+
+    private var channelSignature: String {
+        channels.map(\.id).joined(separator: ",")
+    }
+
+    private var hasMore: Bool {
+        searches.values.contains { !$0.nextPageToken.isEmpty }
+    }
+
+    private static func publicationDate(_ text: String?) -> Date? {
+        guard let text, !text.isEmpty else { return nil }
+        let parser = ISO8601DateFormatter()
+        parser.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        if let date = parser.date(from: text) { return date }
+        parser.formatOptions = [.withInternetDateTime]
+        return parser.date(from: text)
+    }
+
+    private func gather() {
+        var seen = Set<String>()
+        collected = searches.values.flatMap(\.videos)
+            .filter { seen.insert($0.id).inserted }
+            .sorted {
+                let left = Self.publicationDate($0.publishedAt) ?? .distantPast
+                let right = Self.publicationDate($1.publishedAt) ?? .distantPast
+                return left == right
+                    ? $0.title.localizedStandardCompare($1.title) == .orderedAscending
+                    : left > right
+            }
+    }
+
+    private func load(loadMore: Bool = false) async {
+        guard !loading else { return }
+        loading = true
+        defer { loading = false }
+        if !loadMore {
+            searches.removeAll()
+            collected.removeAll()
+            visibleCount = 10
+        }
+        var failures: [String] = []
+        for channel in channels {
+            let store = searches[channel.id] ?? NativeYouTubeSearchStore()
+            if loadMore {
+                if !store.nextPageToken.isEmpty {
+                    await store.search("", channelID: channel.id, loadMore: true)
+                }
+            } else {
+                await store.search("", channelID: channel.id)
+            }
+            searches[channel.id] = store
+            if store.videos.isEmpty, let error = store.message,
+               !error.contains("resultados encontrados") {
+                failures.append(channel.title)
+            }
+        }
+        gather()
+        if loadMore { visibleCount += 10 }
+        message = failures.isEmpty ? nil
+            : "No se pudieron consultar algunos canales: " + failures.joined(separator: ", ")
+    }
+
+    var body: some View {
+        List {
+            Section(useYouTubeSubscriptions ? "Novedades de mis suscripciones" : "Novedades de mis canales") {
+                Button("Actualizar novedades") { Task { await load() } }
+                    .disabled(loading)
+                if loading { ProgressView("Consultando canales seguidos") }
+                if let message { Text(message).accessibilityAddTraits(.updatesFrequently) }
+                if channels.isEmpty {
+                    Text(useYouTubeSubscriptions
+                        ? "No hay suscripciones disponibles. Comprueba tu sesión y actualiza las suscripciones."
+                        : "Sigue un canal desde los resultados de YouTube para ver aquí sus novedades.")
+                }
+                ForEach(Array(collected.prefix(visibleCount))) { video in
+                    NativeYouTubeVideoRow(video: video,
+                        onPlay: { selectedVideo = $0 },
+                        onComment: { commentingOnVideo = $0 })
+                }
+                if !loading && collected.isEmpty && !channels.isEmpty {
+                    Text("Todavía no se han recibido vídeos de los canales seguidos.")
+                }
+                if !loading && (collected.count > visibleCount || hasMore) {
+                    Button("Cargar 10 más") {
+                        if hasMore { Task { await load(loadMore: true) } }
+                        else { visibleCount += 10 }
+                    }
+                }
+            }
+        }
+        .tifloScreenSurface()
+        .navigationTitle(useYouTubeSubscriptions
+            ? "Novedades de suscripciones" : "Novedades de canales")
+        .sheet(item: $selectedVideo) { video in
+            NavigationStack { NativeYouTubePlayerScreen(video: video) }
+        }
+        .sheet(item: $commentingOnVideo) { video in
+            NavigationStack { NativeYouTubeCommentScreen(video: video) }
+        }
+        .task(id: channelSignature) {
+            if useYouTubeSubscriptions, account.authenticated, account.subscriptions.isEmpty {
+                await account.loadSubscriptions()
+            }
+            await load()
+        }
+    }
+}
+
 // Una sola definición de gestos para títulos en búsquedas, canal y suscripciones.
 private struct NativeYouTubeTitleActions: ViewModifier {
     @EnvironmentObject private var account: NativeYouTubeAccountStore
+    @ObservedObject private var personalVideos = NativeYouTubePersonalLibrary.shared
     @Environment(\.openURL) private var openURL
     let video: NativeYouTubeVideo
     let onPlay: (NativeYouTubeVideo) -> Void
@@ -697,6 +1037,10 @@ private struct NativeYouTubeTitleActions: ViewModifier {
             .accessibilityAction(named: Text("Abrir en YouTube")) { openURL(video.url) }
             .accessibilityAction(named: Text("Compartir")) {
                 NativeShare.present(url: video.url)
+            }
+            .accessibilityAction(named: Text(personalVideos.isWatchLater(video.id)
+                ? "Quitar de Ver después" : "Guardar para ver después")) {
+                personalVideos.toggleWatchLater(video)
             }
         if account.authenticated {
             basic
@@ -776,6 +1120,10 @@ private struct NativeYouTubeVideoRow: View {
                 Text("Publicado: \(date)")
                     .font(.subheadline)
                     .foregroundStyle(TifloVisual.secondaryText)
+            } else {
+                Text("Fecha de publicación no disponible")
+                    .font(.subheadline)
+                    .foregroundStyle(TifloVisual.secondaryText)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -801,8 +1149,7 @@ private struct NativeYouTubeVideoRow: View {
         }
         .buttonStyle(.plain)
         // Conservar el botón real: un elemento artificial pierde la acción de doble toque.
-        .accessibilityLabel("\(video.title). Canal: \(video.channelTitle)")
-        .accessibilityHint("Doble toque para reproducir. Desliza arriba o abajo para más acciones.")
+        .accessibilityLabel("\(video.title). Canal: \(video.channelTitle). \(NativeNewsMetadata.publication(video.publishedAt).map { "Publicado: " + $0 } ?? "Fecha de publicación no disponible")")
         .modifier(NativeYouTubeTitleActions(
             video: video, onPlay: onPlay, onComment: onComment
         ))
@@ -863,6 +1210,12 @@ private struct NativeYouTubeSubscriptionsScreen: View {
                 }
                 .listRowBackground(TifloVisual.surfaceRaised)
             } else {
+                Section("Novedades de mis suscripciones") {
+                    NavigationLink("Ver novedades de mis suscripciones") {
+                        NativeYouTubeFollowedUpdatesScreen(useYouTubeSubscriptions: true)
+                    }
+                    .accessibilityHint("Vídeos de los canales de tu cuenta de YouTube ordenados por fecha.")
+                }
                 Section("Canales a los que estás suscrito") {
                     ForEach(account.subscriptions) { channel in
                         NavigationLink {
@@ -906,12 +1259,41 @@ private struct NativeYouTubeSubscriptionsScreen: View {
 
 private struct NativeYouTubeChannelVideosScreen: View {
     let channel: NativeYouTubeChannel
+    @ObservedObject private var personalVideos = NativeYouTubePersonalLibrary.shared
     @StateObject private var youtubeSearch = NativeYouTubeSearchStore()
+    @State private var channelQuery = ""
     @State private var selectedVideo: NativeYouTubeVideo?
     @State private var commentingOnVideo: NativeYouTubeVideo?
 
     var body: some View {
         List {
+            Section("Canal") {
+                Button(personalVideos.isFollowing(channel.id)
+                    ? "Dejar de seguir canal" : "Seguir canal sin cuenta Google") {
+                    personalVideos.toggleFollowed(channel)
+                }
+            }
+            Section("Buscar en este canal") {
+                TextField("Buscar vídeos de este canal", text: $channelQuery)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .submitLabel(.search)
+                    .onSubmit {
+                        let term = channelQuery.trimmingCharacters(in: .whitespacesAndNewlines)
+                        guard term.count >= 2, !youtubeSearch.isLoading else { return }
+                        Task { await youtubeSearch.search(term, channelID: channel.id) }
+                    }
+                Button("Buscar en este canal") {
+                    Task { await youtubeSearch.search(channelQuery, channelID: channel.id) }
+                }
+                .disabled(youtubeSearch.isLoading ||
+                    channelQuery.trimmingCharacters(in: .whitespacesAndNewlines).count < 2)
+                Button("Mostrar todos los vídeos de este canal") {
+                    channelQuery = ""
+                    Task { await youtubeSearch.search("", channelID: channel.id) }
+                }
+                .disabled(youtubeSearch.isLoading)
+            }
             Section("Vídeos del canal") {
                 if youtubeSearch.isLoading {
                     ProgressView("Cargando vídeos")
@@ -930,7 +1312,7 @@ private struct NativeYouTubeChannelVideosScreen: View {
                 if !youtubeSearch.nextPageToken.isEmpty {
                     Button("Mostrar diez vídeos más") {
                         Task { await youtubeSearch.search(
-                            "", channelID: channel.id, loadMore: true
+                            channelQuery, channelID: channel.id, loadMore: true
                         ) }
                     }
                     .disabled(youtubeSearch.isLoading)
@@ -941,7 +1323,7 @@ private struct NativeYouTubeChannelVideosScreen: View {
         .tifloScreenSurface()
         .navigationTitle(channel.title)
         .sheet(item: $selectedVideo) { video in
-            NavigationStack { NativeYouTubePlayerScreen(video: video) }
+            NavigationStack { NativeYouTubePlayerScreen(video: video, playlist: youtubeSearch.videos) }
         }
         .sheet(item: $commentingOnVideo) { video in
             NavigationStack { NativeYouTubeCommentScreen(video: video) }
@@ -957,6 +1339,11 @@ private struct NativeYouTubeChannelVideosScreen: View {
 @MainActor
 enum NativeShare {
     static func present(url: URL) {
+        present(urls: [url])
+    }
+
+    static func present(urls: [URL]) {
+        guard !urls.isEmpty else { return }
         guard let scene = UIApplication.shared.connectedScenes
             .compactMap({ $0 as? UIWindowScene })
             .first(where: { $0.activationState == .foregroundActive }),
@@ -966,7 +1353,7 @@ enum NativeShare {
             presenter = presented
         }
         presenter.present(
-            UIActivityViewController(activityItems: [url], applicationActivities: nil),
+            UIActivityViewController(activityItems: urls, applicationActivities: nil),
             animated: true
         )
     }

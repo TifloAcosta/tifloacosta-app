@@ -50,7 +50,7 @@ struct NativeUpdatesScreen: View {
     // marcados como nuevos o vídeos del canal, sin noticias externas.
     private var latestUpdates: [NativeUpdateEntry] {
         let resources = catalog.resources
-            .filter { $0.lang == (languageIndex == 1 ? "en" : "es") && $0.isNew == true && $0.resourceURL != nil }
+            .filter { (languageIndex > 1 || $0.lang == NativeAppLanguage.code(for: languageIndex)) && $0.isNew == true && $0.resourceURL != nil }
             .map(NativeUpdateEntry.resource)
         let videos = catalog.videos
             .filter { $0.videoURL != nil }
@@ -145,7 +145,6 @@ struct NativeUpdatesScreen: View {
                         }
                         .accessibilityElement(children: .ignore)
                         .accessibilityLabel("\(item.title). Recurso de TifloAcosta")
-                        .accessibilityHint("Doble toque para leer. Acciones: Leer, Guardar, Descargar y Compartir.")
                         .accessibilityAction(named: Text("Leer")) { read(item) }
                         .accessibilityAction(named: Text("Guardar")) { save(item) }
                         .accessibilityAction(named: Text("Descargar")) { download(item) }
@@ -164,7 +163,6 @@ struct NativeUpdatesScreen: View {
                         }
                         .accessibilityElement(children: .ignore)
                         .accessibilityLabel("\(item.title). Vídeo del canal TifloAcosta")
-                        .accessibilityHint("Doble toque para abrir el vídeo. Acciones: Abrir en YouTube y Compartir.")
                         .accessibilityAction(named: Text("Abrir en YouTube")) {
                             openVideo(item)
                         }
@@ -228,6 +226,7 @@ struct NativeSettingsScreen: View {
     @AppStorage("native-ios-language") private var languageIndex = 0
     @Environment(\.openURL) private var openURL
     @State private var showVisualSettings = false
+    @ObservedObject private var ownUpdatesNotifications = NativeOwnUpdatesNotifications.shared
 
     private var version: String {
         let dictionary = Bundle.main.infoDictionary
@@ -238,42 +237,35 @@ struct NativeSettingsScreen: View {
 
     var body: some View {
         Form {
-            Section("Idioma") {
+            Section {
                 NativeAdjustableChoice(
-                    title: "Idioma de la aplicación",
-                    choices: ["Español", "English"],
+                    title: "Idioma",
+                    choices: NativeAppLanguage.names,
                     selectedIndex: $languageIndex
                 )
-                Text("El idioma elegido se conserva. El cambio se aplica a la interfaz nativa; los títulos y contenidos de fuentes externas mantienen su idioma original.")
-                    .font(.footnote)
-                    .foregroundStyle(TifloVisual.secondaryText)
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
             Section {
                 DisclosureGroup("Ajustes visuales", isExpanded: $showVisualSettings) {
-                    Text("Color y contraste").font(.headline)
                     NativeAdjustableChoice(
                         title: "Perfil de contraste",
                         choices: ["Seguir el sistema", "Alto contraste claro", "Alto contraste oscuro"],
                         selectedIndex: $schemeIndex
                     )
-                    Text("Tamaño del texto").font(.headline)
                     NativeAdjustableChoice(
-                        title: "Tamaño",
+                        title: "Tamaño del texto",
                         choices: ["Predeterminado", "Grande", "Muy grande", "Máximo"],
                         selectedIndex: $textSizeIndex
                     )
                     Text("El tamaño nunca será inferior al configurado en Accesibilidad de iOS.")
                         .font(.footnote)
                         .foregroundStyle(TifloVisual.secondaryText)
-                    Text("Espaciado").font(.headline)
                     NativeAdjustableChoice(
                         title: "Separación entre líneas",
                         choices: ["Normal", "Cómoda", "Amplia"],
                         selectedIndex: $lineSpacingIndex
                     )
-                    Text("Legibilidad").font(.headline)
                     Toggle("Usar texto reforzado", isOn: $strongText)
                         .tint(TifloVisual.actionTint)
                     Button("Restablecer ajustes visuales") {
@@ -288,6 +280,74 @@ struct NativeSettingsScreen: View {
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
+            Section("Atajos de Siri") {
+                NavigationLink("Consultar y configurar atajos") {
+                    NativeSiriShortcutsHelpScreen()
+                }
+                Text("Las acciones de TifloAcosta están disponibles en Atajos de Apple. Puedes crear tus propias frases de activación desde la aplicación Atajos.")
+                    .font(.footnote)
+                    .foregroundStyle(TifloVisual.secondaryText)
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+
+            Section("Notificaciones de novedades propias") {
+                Text("Los avisos automáticos solo pueden referirse a nuevos documentos de TifloAcosta y vídeos de su canal. No se generan avisos desde Actualidad ni desde fuentes externas.")
+                    .font(.footnote)
+                    .foregroundStyle(TifloVisual.secondaryText)
+                Text("Estos avisos locales se comprueban cuando la aplicación actualiza su catálogo; no son notificaciones push mientras está cerrada.")
+                    .font(.footnote)
+                    .foregroundStyle(TifloVisual.secondaryText)
+                if ownUpdatesNotifications.enabled {
+                    Button("Desactivar avisos de novedades") {
+                        ownUpdatesNotifications.disable()
+                    }
+                } else {
+                    Button("Activar avisos de novedades") {
+                        Task { await ownUpdatesNotifications.enable() }
+                    }
+                }
+                if !ownUpdatesNotifications.status.isEmpty {
+                    Text(ownUpdatesNotifications.status)
+                        .font(.footnote)
+                        .accessibilityAddTraits(.updatesFrequently)
+                }
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+
+            Section("Elementos compartidos") {
+                NavigationLink("Revisar elementos pendientes") {
+                    NativeInboxScreen()
+                }
+                Text("Los documentos y textos compartidos se incorporan a TifloLector automáticamente. Consulta esta sección para revisar enlaces y elementos que no se hayan podido importar.")
+                    .font(.footnote)
+                    .foregroundStyle(TifloVisual.secondaryText)
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+
+            Section("Contacto y redes") {
+                NavigationLink("Abrir contacto y redes") {
+                    NativeContactScreen()
+                }
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+
+            Section("Privacidad y accesibilidad") {
+                NavigationLink("Consultar privacidad y accesibilidad") {
+                    NativePrivacyAccessibilityScreen()
+                }
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+
+            Section("Ayuda y diagnóstico") {
+                NavigationLink("Comunicar incidencia de accesibilidad") {
+                    NativeAccessibilityReportScreen()
+                }
+                Text("Puedes describir el problema y compartir un informe opcional con información técnica básica. El envío siempre depende de tu confirmación.")
+                    .font(.footnote)
+                    .foregroundStyle(TifloVisual.secondaryText)
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+
             Section("Aplicación") {
                 LabeledContent("Versión", value: version)
                 Text("TifloAcosta para iOS utiliza pantallas nativas.")
@@ -297,15 +357,47 @@ struct NativeSettingsScreen: View {
                 }
             }
             .listRowBackground(TifloVisual.surfaceRaised)
-
-            Section("Información y contacto") {
-                NavigationLink("Recibidos") { NativeInboxScreen() }
-                NavigationLink("Contacto y redes") { NativeContactScreen() }
-                NavigationLink("Privacidad y accesibilidad") { NativePrivacyAccessibilityScreen() }
-            }
-            .listRowBackground(TifloVisual.surfaceRaised)
         }
         .tifloScreenSurface()
         .navigationTitle("Configuración")
+    }
+}
+
+
+/// Guía accesible de las acciones App Intents registradas en TifloAcosta.
+struct NativeSiriShortcutsHelpScreen: View {
+    @Environment(\.openURL) private var openURL
+
+    private let shortcuts: [(name: String, detail: String)] = [
+        ("Abrir Actualidad", "Accede a las noticias de Actualidad."),
+        ("Abrir TifloLector", "Abre la biblioteca de documentos."),
+        ("Continuar el último libro", "Recupera la lectura del último libro abierto."),
+        ("Abrir Vídeos", "Abre la sección de vídeos accesibles.")
+    ]
+
+    var body: some View {
+        List {
+            Section("Atajos disponibles") {
+                ForEach(shortcuts.indices, id: \.self) { index in
+                    LabeledContent {
+                        Text(LocalizedStringKey(shortcuts[index].detail))
+                    } label: {
+                        Text(LocalizedStringKey(shortcuts[index].name))
+                    }
+                }
+            }
+            Section("Frases personales") {
+                Text("Para usar tus propias órdenes, abre Atajos, crea un nuevo atajo y añade una de las acciones de TifloAcosta. Ponle el nombre con el que quieras llamarlo mediante Siri.")
+                Button("Abrir la aplicación Atajos") {
+                    guard let url = URL(string: "shortcuts://") else { return }
+                    openURL(url)
+                }
+                .accessibilityHint("Abre la aplicación Atajos de Apple, si está disponible.")
+                Text("No es necesario activar permisos individuales en TifloAcosta para utilizar las acciones publicadas por la aplicación.")
+                    .font(.footnote)
+            }
+        }
+        .tifloScreenSurface()
+        .navigationTitle("Atajos de Siri")
     }
 }

@@ -1,0 +1,242 @@
+import SwiftUI
+import AVFoundation
+import MediaPlayer
+import UIKit
+
+private struct NativeJamendoSearchResult: Decodable {
+    struct Headers: Decodable {
+        let status: String
+        let errorMessage: String?
+        enum CodingKeys: String, CodingKey { case status; case errorMessage = "error_message" }
+    }
+    let headers: Headers
+    let results: [NativeJamendoTrack]
+}
+
+private struct NativeJamendoTrack: Decodable, Identifiable {
+    let id: String
+    let name: String
+    let artistName: String
+    let audio: String
+    enum CodingKeys: String, CodingKey { case id, name, audio; case artistName = "artist_name" }
+
+    var streamURL: URL? {
+        guard let url = URL(string: audio), url.scheme == "https", url.host != nil else { return nil }
+        return url
+    }
+}
+
+@MainActor
+private final class NativeJamendoDirectory: ObservableObject {
+    @Published private(set) var tracks: [NativeJamendoTrack] = []
+    @Published private(set) var loading = false
+    @Published var error: String?
+    private let publicClientID = "7e385841"
+
+    func search(_ term: String) async {
+        let query = term.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !query.isEmpty else { tracks = []; error = nil; return }
+        loading = true
+        defer { loading = false }
+        do {
+            var url = URLComponents(string: "https://api.jamendo.com/v3.0/tracks/")!
+            url.queryItems = [
+                URLQueryItem(name: "client_id", value: publicClientID),
+                URLQueryItem(name: "format", value: "json"),
+                URLQueryItem(name: "search", value: query),
+                URLQueryItem(name: "limit", value: "20")
+            ]
+            let (data, response) = try await URLSession.shared.data(from: url.url!)
+            guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw URLError(.badServerResponse) }
+            let result = try JSONDecoder().decode(NativeJamendoSearchResult.self, from: data)
+            guard result.headers.status == "success" else {
+                error = result.headers.errorMessage ?? MusicLocalized.format("Jamendo no pudo completar la búsqueda.")
+                tracks = []
+                return
+            }
+            tracks = result.results.filter { $0.streamURL != nil }
+            error = tracks.isEmpty ? MusicLocalized.format("No se encontraron canciones disponibles en Jamendo.") : nil
+        } catch {
+            tracks = []
+            self.error = MusicLocalized.format("No se pudo consultar Jamendo. Comprueba la conexión.")
+        }
+    }
+}
+
+@MainActor
+final class NativeJamendoPlayer: ObservableObject {
+    static let shared = NativeJamendoPlayer()
+    @Published private(set) var title = ""
+    @Published private(set) var isPlaying = false
+    @Published var error: String?
+    private var player: AVPlayer?
+    private var remoteTokens: [Any] = []
+
+    func playSaved(id: String) async {
+        guard id.range(of: #"^[0-9]+$"#, options: .regularExpression) != nil else {
+            error = MusicLocalized.format("El identificador guardado de Jamendo no es válido.")
+            return
+        }
+        do {
+            var url = URLComponents(string: "https://api.jamendo.com/v3.0/tracks/")!
+            url.queryItems = [
+                URLQueryItem(name: "client_id", value: "7e385841"),
+                URLQueryItem(name: "format", value: "json"),
+                URLQueryItem(name: "id", value: id)
+            ]
+            let (data, response) = try await URLSession.shared.data(from: url.url!)
+            guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw URLError(.badServerResponse) }
+            let result = try JSONDecoder().decode(NativeJamendoSearchResult.self, from: data)
+            guard result.headers.status == "success", let track = result.results.first,
+                  let streamURL = track.streamURL else {
+                error = MusicLocalized.format("Esta canción ya no está disponible en Jamendo. Se conserva en tu lista.")
+                return
+            }
+            play(name: track.name, artist: track.artistName, url: streamURL)
+        } catch { error = MusicLocalized.format("No se pudo recuperar la canción guardada de Jamendo.") }
+    }
+
+    func play(name: String, artist: String, url: URL) {
+        guard url.scheme == "https", url.host != nil else {
+            error = MusicLocalized.format("La dirección de reproducción de Jamendo no es válida.")
+            return
+        }
+        NativeAudiusPlayer.shared.pauseForOtherAudio()
+        NativeAppleMusicPlayer.shared.pauseForOtherAudio()
+        NativeRadioPlayer.shared.pauseForOtherAudio()
+        NativeMusicPlayer.shared.pauseForReader()
+        NativeReaderPlaybackBridge.pauseActiveReader?()
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+            player?.pause()
+            player = AVPlayer(url: url)
+            title = name
+            NativeRemotePlaybackOwner.claim(.jamendo)
+            registerRemoteCommands()
+            player?.play()
+            isPlaying = true
+            updateNowPlaying()
+            error = nil
+        } catch { self.error = MusicLocalized.format("No se pudo reproducir Jamendo: %@", error.localizedDescription) }
+    }
+
+    func toggle() {
+        guard let player else { return }
+        if isPlaying {
+            player.pause()
+            isPlaying = false
+        } else {
+            NativeAudiusPlayer.shared.pauseForOtherAudio()
+            NativeAppleMusicPlayer.shared.pauseForOtherAudio()
+            NativeRadioPlayer.shared.pauseForOtherAudio()
+            NativeMusicPlayer.shared.pauseForReader()
+            NativeReaderPlaybackBridge.pauseActiveReader?()
+            NativeRemotePlaybackOwner.claim(.jamendo)
+            player.play()
+            isPlaying = true
+        }
+        updateNowPlaying()
+    }
+
+    func pauseForOtherAudio() {
+        guard isPlaying else { return }
+        player?.pause()
+        isPlaying = false
+        updateNowPlaying()
+    }
+
+    func stop() {
+        player?.pause()
+        player = nil
+        isPlaying = false
+        title = ""
+        unregisterRemoteCommands()
+        NativeRemotePlaybackOwner.release(.jamendo)
+    }
+
+    private func updateNowPlaying() {
+        guard NativeRemotePlaybackOwner.current == .jamendo else { return }
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+            MPMediaItemPropertyTitle: title,
+            MPNowPlayingInfoPropertyPlaybackRate: isPlaying ? 1.0 : 0.0
+        ]
+    }
+
+    private func registerRemoteCommands() {
+        guard remoteTokens.isEmpty else { return }
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+        let remote = MPRemoteCommandCenter.shared()
+        remoteTokens = [
+            remote.playCommand.addTarget { [weak self] _ in
+                Task { @MainActor [weak self] in
+                    guard NativeRemotePlaybackOwner.current == .jamendo, let self, !self.isPlaying else { return }
+                    self.toggle()
+                }
+                return .success
+            },
+            remote.pauseCommand.addTarget { [weak self] _ in
+                Task { @MainActor [weak self] in
+                    guard NativeRemotePlaybackOwner.current == .jamendo, let self, self.isPlaying else { return }
+                    self.toggle()
+                }
+                return .success
+            },
+            remote.togglePlayPauseCommand.addTarget { [weak self] _ in
+                Task { @MainActor [weak self] in
+                    guard NativeRemotePlaybackOwner.current == .jamendo else { return }
+                    self?.toggle()
+                }
+                return .success
+            }
+        ]
+    }
+
+    private func unregisterRemoteCommands() {
+        guard remoteTokens.count == 3 else { return }
+        let remote = MPRemoteCommandCenter.shared()
+        remote.playCommand.removeTarget(remoteTokens[0])
+        remote.pauseCommand.removeTarget(remoteTokens[1])
+        remote.togglePlayPauseCommand.removeTarget(remoteTokens[2])
+        remoteTokens = []
+    }
+}
+
+struct NativeJamendoScreen: View {
+    var playlists: [MusicPlaylistDestination] = []
+    var addToPlaylist: NativeMusicAddToPlaylist? = nil
+    @StateObject private var directory = NativeJamendoDirectory()
+    @ObservedObject private var player = NativeJamendoPlayer.shared
+    @State private var query = ""
+
+    var body: some View {
+        List {
+            Section("Reproductor Jamendo") {
+                Text(player.title.isEmpty ? "Ninguna canción en reproducción" : player.title)
+                    .accessibilityAddTraits(.isHeader)
+                Button(player.isPlaying ? "Pausar Jamendo" : "Reanudar Jamendo") { player.toggle() }
+                    .disabled(player.title.isEmpty)
+                Button("Detener Jamendo") { player.stop() }
+                    .disabled(player.title.isEmpty)
+            }
+            Section("Catálogo Jamendo") {
+                Text("Puedes escuchar música disponible en Jamendo sin iniciar sesión. Respeta las licencias de cada obra.")
+                if directory.loading { ProgressView("Buscando en Jamendo") }
+                ForEach(directory.tracks) { track in
+                    if let url = track.streamURL {
+                        Button("Escuchar \(track.name), \(track.artistName)") {
+                            player.play(name: track.name, artist: track.artistName, url: url)
+                        }
+                        NativeMusicPlaylistMenu(playlists: playlists, provider: "jamendo",
+                            songID: track.id, title: track.name, artist: track.artistName,
+                            addToPlaylist: addToPlaylist)
+                    }
+                }
+                if let error = directory.error ?? player.error { Text(error) }
+            }
+        }
+        .navigationTitle("Jamendo")
+        .searchable(text: $query, prompt: "Buscar en Jamendo")
+        .onSubmit(of: .search) { Task { await directory.search(query) } }
+    }
+}

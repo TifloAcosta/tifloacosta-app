@@ -11,6 +11,29 @@ private struct NativeGuideSection: Identifiable {
 
     func title(english: Bool) -> String { english ? englishTitle : spanishTitle }
     func paragraphs(english: Bool) -> [String] { english ? englishParagraphs : spanishParagraphs }
+
+    private func translated(_ suffix: String, languageCode: String) -> String? {
+        guard let folder = Bundle.main.path(forResource: languageCode, ofType: "lproj"),
+              let bundle = Bundle(path: folder) else { return nil }
+        let key = "guide.\(id).\(suffix)"
+        let localized = bundle.localizedString(forKey: key, value: nil, table: "Guide")
+        return localized == key ? nil : localized
+    }
+
+    func title(languageCode: String) -> String {
+        if languageCode == "es" { return spanishTitle }
+        if languageCode == "en" { return englishTitle }
+        return translated("title", languageCode: languageCode) ?? spanishTitle
+    }
+
+    func paragraphs(languageCode: String) -> [String] {
+        if languageCode == "es" { return spanishParagraphs }
+        if languageCode == "en" { return englishParagraphs }
+        return spanishParagraphs.indices.map { index in
+            translated("paragraph.\(index + 1)", languageCode: languageCode)
+                ?? spanishParagraphs[index]
+        }
+    }
 }
 
 private enum NativeGuideContent {
@@ -63,20 +86,16 @@ private enum NativeGuideContent {
             ]
         ),
         NativeGuideSection(
-            id: "mi-musica",
+            id: "13",
             spanishTitle: "Mi Música",
             englishTitle: "My Music",
             spanishParagraphs: [
-                "Mi Música es tu biblioteca musical personal. Pulsa Importar canciones para seleccionar archivos de audio, o Importar carpeta desde Archivos o nube para copiar canciones de una carpeta disponible en el sistema. Los originales se conservan.",
-                "Puedes buscar canciones, crear carpetas y listas de reproducción y añadir canciones desde el menú Acciones de cada título. Las carpetas inteligentes reúnen automáticamente las canciones cuyo título contiene la palabra que elijas.",
-                "En Reproductor encontrarás reproducir o pausar, canción anterior y siguiente, saltos de quince segundos, reproducción aleatoria, repetición y temporizador. El Ecualizador permite elegir perfiles o modificar cinco bandas y guardar ajustes generales o particulares para una canción.",
-                "En Copias de seguridad puedes exportar o restaurar el índice, crear un ZIP con archivos musicales y activar una copia automática del índice cada siete o treinta días. Para guardar el audio en un respaldo, utiliza Exportar copia completa con audio. Las copias automáticas del índice se realizan al abrir Mi Música cuando corresponde."
+                "Mi Música reúne tus canciones locales y permite reproducirlas, ordenarlas en listas y carpetas inteligentes y ajustar el sonido con el ecualizador.",
+                "Utiliza Importar canciones para añadir archivos de audio. Las opciones de Copias de seguridad permiten guardar el índice o crear una copia completa con los archivos."
             ],
             englishParagraphs: [
-                "My Music is your personal music library. Use Import songs to select audio files, or Import folder from Files or cloud to copy songs from a folder exposed by the system. Original files are preserved.",
-                "Search for songs, create folders and playlists, and add songs from each title's Actions menu. Smart folders automatically collect songs whose titles contain your chosen word.",
-                "The Player provides play or pause, previous and next track, fifteen-second skips, shuffle, repeat and a sleep timer. The Equalizer lets you select sound profiles or adjust five frequency bands, and save global or per-song settings.",
-                "In Backups, export or restore the library index, create a ZIP including audio files, or enable automatic index backups every seven or thirty days. Select Export complete backup with audio to include music files. Automatic index backups run when you open My Music and the interval has elapsed."
+                "My Music contains your local songs, with playback, playlists, smart folders and an equalizer for sound adjustments.",
+                "Use Import songs to add audio files. Backup options let you save the catalog or make a complete copy that includes the audio files."
             ]
         ),
         NativeGuideSection(
@@ -225,20 +244,20 @@ private enum NativeGuideContent {
 
 struct NativeUsageGuideScreen: View {
     @AppStorage("native-ios-language") private var languageIndex = 0
-    private var english: Bool { languageIndex == 1 }
+    private var languageCode: String { NativeAppLanguage.code(for: languageIndex) }
 
     var body: some View {
         List {
             ForEach(NativeGuideContent.sections) { section in
                 NavigationLink {
-                    NativeUsageGuideDetailScreen(section: section, english: english)
+                    NativeUsageGuideDetailScreen(section: section, languageCode: languageCode)
                 } label: {
                     HStack(spacing: 12) {
                         RoundedRectangle(cornerRadius: 2)
                             .fill(TifloVisual.brandRed)
                             .frame(width: 4, height: 28)
                             .accessibilityHidden(true)
-                        Text(section.title(english: english))
+                        Text(section.title(languageCode: languageCode))
                             .font(.body)
                             .foregroundStyle(TifloVisual.primaryText)
                             .fixedSize(horizontal: false, vertical: true)
@@ -246,25 +265,24 @@ struct NativeUsageGuideScreen: View {
                     }
                     .padding(.vertical, 4)
                 }
-                .accessibilityLabel(section.title(english: english))
-                .accessibilityHint(english ? "Double-tap to read the instructions for this section." : "Doble toque para leer la guía de esta sección.")
+                .accessibilityLabel(section.title(languageCode: languageCode))
             }
             .listRowBackground(TifloVisual.surfaceRaised)
         }
         .tifloScreenSurface()
-        .navigationTitle(english ? "User guide" : "Guía de uso")
+        .navigationTitle(Text(LocalizedStringKey("Guía de uso")))
         .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 private struct NativeUsageGuideDetailScreen: View {
     let section: NativeGuideSection
-    let english: Bool
+    let languageCode: String
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
-                ForEach(Array(section.paragraphs(english: english).enumerated()), id: \.offset) { _, paragraph in
+                ForEach(Array(section.paragraphs(languageCode: languageCode).enumerated()), id: \.offset) { _, paragraph in
                     Text(paragraph)
                         .font(.body)
                         .foregroundStyle(TifloVisual.primaryText)
@@ -277,7 +295,7 @@ private struct NativeUsageGuideDetailScreen: View {
             .padding(20)
         }
         .tifloScreenSurface()
-        .navigationTitle(section.title(english: english))
+        .navigationTitle(section.title(languageCode: languageCode))
         .navigationBarTitleDisplayMode(.inline)
     }
 }

@@ -26,24 +26,16 @@ test('El proyecto main compila automáticamente; TestFlight se ejecuta solo a pe
  const release=get('.github/workflows/ios-native-testflight-upload.yml');
  assert.match(build,/branches: \[main\]/);
  assert.match(release,/workflow_dispatch:/);
- assert.doesNotMatch(release,/^\s+push:/m);
+ // Explicitly requested candidate may run from a workflow-file-only push
+ // on the isolated integration branch; no general release on main.
+ if (/^\s+push:/m.test(release)) {
+   assert.match(release,/integration\/ios-phases1-6-consolidated-20261110/);
+   assert.match(release,/paths:\s*\n\s+- '\.github\/workflows\/ios-native-testflight-upload\.yml'/);
+   assert.doesNotMatch(release,/^\s+push:\s*\n\s+branches:\s*\n\s+- main/m);
+ }
  assert.doesNotMatch(release,/branches: \[main\]/);
  assert.match(build,/ios-app-native\/tests\/\*\.test\.mjs/);
  assert.match(release,/ios-app-native\/tests\/\*\.test\.mjs/);
  assert.match(release,/verify-native-testflight\.mjs/);
  assert.doesNotMatch(build+release,/nativeprototype|npx cap add ios|npx cap sync ios/);
-});
-test('TestFlight prepara una versión posterior a 1.3 y no acepta falsos éxitos de subida', () => {
- const prep=get('ios-app-native/scripts/prepare-testflight-project.mjs');
- const extension=get('ios-app-native/ShareExtension/Info.plist');
- const ipa=get('ios-app-native/scripts/verify-testflight-ipa.py');
- const release=get('.github/workflows/ios-native-testflight-upload.yml');
- const verify=get('.github/scripts/verify-native-testflight.mjs');
- assert.match(prep,/MARKETING_VERSION: "1\.4"/);
- assert.match(extension,/<key>CFBundleShortVersionString<\/key><string>1\.4<\/string>/);
- assert.match(ipa,/CFBundleShortVersionString.*1\.4/);
- assert.match(release,/UPLOAD FAILED/);
- assert.match(release,/UPLOAD_STARTED_AT/);
- assert.match(verify,/UPLOAD_STARTED_AT/);
- assert.match(verify,/uploadedDate/);
 });

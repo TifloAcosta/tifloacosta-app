@@ -9,7 +9,7 @@ test('Recursos conserva el selector ajustable, categorías y aspecto nativo', ()
   const section = screens.split('struct NativeResourcesScreen: View {')[1]?.split('struct NativeVideosScreen: View {')[0];
   assert.ok(section, 'NativeResourcesScreen debe existir');
   assert.match(section, /NativeAdjustableChoice\(\s*title:\s*"Categoría"/);
-  assert.match(section, /Section\(chosenCategory\)/);
+  assert.match(section, /Section\(chosenCategory \?\? "Resultados de búsqueda"\)/);
   assert.match(section, /NavigationLink\s*\{\s*NativeRemoteResourceScreen/);
   assert.doesNotMatch(section, /WKWebView|UIWebView|WebView/);
 });

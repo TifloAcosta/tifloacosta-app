@@ -120,7 +120,6 @@ struct NativeFavoritesScreen: View {
                         }
                         .accessibilityElement(children: .ignore)
                         .accessibilityLabel("\(entry.item.title), recurso favorito")
-                        .accessibilityHint("Doble toque para leer. Acción: Quitar de favoritos.")
                         .accessibilityAction(named: Text("Quitar de favoritos")) { remove(entry) }
 
                     case .news:
@@ -136,7 +135,6 @@ struct NativeFavoritesScreen: View {
                         }
                         .accessibilityElement(children: .ignore)
                         .accessibilityLabel("\(entry.item.title), noticia favorita")
-                        .accessibilityHint("Doble toque para leer. Acción: Quitar de favoritos.")
                         .accessibilityAction(named: Text("Quitar de favoritos")) { remove(entry) }
 
                     case .video:
@@ -151,7 +149,6 @@ struct NativeFavoritesScreen: View {
                             }
                         }
                         .accessibilityLabel("\(entry.item.title), vídeo favorito")
-                        .accessibilityHint("Doble toque para reproducir en TifloAcosta. Acciones: Abrir en YouTube y Quitar de favoritos.")
                         .accessibilityAction(named: Text("Abrir en YouTube")) {
                             if let url = entry.item.videoURL { openURL(url) }
                         }

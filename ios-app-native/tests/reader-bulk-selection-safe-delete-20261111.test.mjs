@@ -1,0 +1,37 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+const reader = readFileSync(new URL('../Sources/NativeTifloLector.swift', import.meta.url), 'utf8');
+
+test('Selección múltiple mantiene fuera los controles de biblioteca general', () => {
+  assert.match(reader, /if !selectionMode \{\s*Section\("Filtrar y ordenar"\)/);
+  assert.match(reader, /if !selectionMode \{\s*Section \{\s*Button\("Importar"/);
+  assert.match(reader, /selectionMode \? "Terminar selección" : "Selección"/);
+});
+test('Borrado de seleccionados requiere confirmación con títulos', () => {
+  assert.match(reader, /Button\("Eliminar seleccionados"\) \{ showBulkDelete = true \}/);
+  assert.match(reader, /confirmationDialog\("Eliminar documentos seleccionados"/);
+  assert.match(reader, /titles\.joined\(separator: ", "\)/);
+  assert.match(reader, /role: \.destructive/);
+  assert.match(reader, /documentToDelete\?\.title/);
+});
+
+test('VoiceOver anuncia seleccionado o no seleccionado antes del título', () => {
+  const start = reader.indexOf('? "Seleccionado" : "No seleccionado"');
+  assert.ok(start >= 0, 'Falta el estado antes del título');
+  // La traducción del estado puede añadir argumentos entre el estado y el título.
+  // Comprobar el anuncio completo en lugar de limitarlo a 120 caracteres.
+  const announcement = reader.slice(reader.lastIndexOf('.accessibilityLabel(', start), start + 350);
+  assert.match(announcement, /NativeAppLanguage\.message\(selectedDocumentIDs\.contains\(document\.id\)/);
+  assert.ok(announcement.indexOf('documentRowLabel(document)') > announcement.indexOf('"Seleccionado"'),
+    'VoiceOver debe anunciar el estado antes del título y el progreso');
+});
+
+test('Mover varios libros permite crear carpeta y los mueve tras confirmar', () => {
+  assert.match(reader, /Button\("Crear carpeta nueva"\)/);
+  assert.match(reader, /alert\("Crear carpeta para los documentos seleccionados"/);
+  assert.match(reader, /TextField\("Nombre de la carpeta nueva"/);
+  assert.match(reader, /guard library\.createFolder\(named: name\) else/);
+  assert.match(reader, /library\.moveDocuments\(withIDs: documentIDs, to: name\)/);
+  assert.match(reader, /finishSelection\(/);
+});

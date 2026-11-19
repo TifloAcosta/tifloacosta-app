@@ -44,3 +44,15 @@ test('Channel and subscription browsing stay native, paginated and use the acces
   assert.match(account, /call\(\s*"subscriptions"/);
   assert.match(account, /func signIn\(videoID: String = ""\)/);
 });
+
+test('Buscar en un canal es independiente de buscar en todo YouTube', () => {
+  const channelScreen = screens.split('private struct NativeYouTubeChannelVideosScreen: View {')[1]
+    .split('// Actualidad con filtros')[0];
+  assert.match(channelScreen, /TextField\("Buscar vídeos de este canal", text: \$channelQuery\)/);
+  assert.match(channelScreen, /Button\("Buscar en este canal"\)/);
+  assert.match(channelScreen, /youtubeSearch\.search\(channelQuery, channelID: channel\.id\)/);
+  assert.match(channelScreen, /Button\("Mostrar todos los vídeos de este canal"\)/);
+  assert.match(channelScreen, /youtubeSearch\.search\("", channelID: channel\.id\)/);
+  assert.match(channelScreen, /channelQuery, channelID: channel\.id, loadMore: true/);
+  assert.match(channelScreen, /\.submitLabel\(\.search\)/);
+});

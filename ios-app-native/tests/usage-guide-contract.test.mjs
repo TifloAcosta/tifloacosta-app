@@ -9,14 +9,14 @@ const guide = read('NativeUsageGuide.swift');
 test('Guía de uso aparece como un botón independiente antes de las secciones', () => {
   assert.match(home, /NavigationLink\s*\{\s*NativeUsageGuideScreen\(\)/);
   assert.match(home, /searchPanel\s+guidePanel\s+destinationsPanel/);
-  assert.match(home, /\.accessibilityLabel\(languageIndex == 1 \? "User guide" : "Guía de uso"\)/);
+  assert.match(home, /\.accessibilityLabel\(Text\(LocalizedStringKey\("Guía de uso"\)\)\)/);
   assert.equal((home.match(/\bguidePanel\s*$/gm) ?? []).length, 1);
 });
 
 test('La guía muestra solo la lista de secciones y luego solo el texto elegido', () => {
   assert.match(guide, /ForEach\(NativeGuideContent\.sections\)/);
-  assert.match(guide, /NativeUsageGuideDetailScreen\(section: section, english: english\)/);
-  assert.match(guide, /ForEach\(Array\(section\.paragraphs\(english: english\)\.enumerated\(\)\)/);
+  assert.match(guide, /NativeUsageGuideDetailScreen\(section: section, languageCode: languageCode\)/);
+  assert.match(guide, /ForEach\(Array\(section\.paragraphs\(languageCode: languageCode\)\.enumerated\(\)\)/);
   assert.doesNotMatch(guide, /WKWebView|UIWebView|SFSafariViewController|import Capacitor/);
   assert.match(guide, /\.tifloScreenSurface\(\)/);
   assert.match(guide, /TifloVisual\.brandRed/);
@@ -27,9 +27,30 @@ test('Todos los destinos actuales tienen ayuda en español e inglés, sin conten
     .split('var id: String')[0];
   const appLabels = [...start.matchAll(/case\s+\w+\s*=\s*"([^"]+)"/g)].map(match => match[1]);
   const guideLabels = [...guide.matchAll(/spanishTitle:\s*"([^"]+)"/g)].map(match => match[1]);
-  for(const label of appLabels) assert.ok(guideLabels.includes(label),'Falta guía: '+label);
-  for(const label of ['Recibidos','Contacto y redes','Privacidad y accesibilidad']) assert.ok(guideLabels.includes(label),'Falta ayuda de Configuración: '+label);
-  assert.equal((guide.match(/englishParagraphs:\s*\[\s*\n/g) ?? []).length, guideLabels.length);
-  assert.equal((guide.match(/spanishParagraphs:\s*\[\s*\n/g) ?? []).length, guideLabels.length);
+  assert.deepEqual(guideLabels, appLabels);
+  assert.equal((guide.match(/englishParagraphs:\s*\[\s*\n/g) ?? []).length, appLabels.length);
+  assert.equal((guide.match(/spanishParagraphs:\s*\[\s*\n/g) ?? []).length, appLabels.length);
   assert.match(guide, /@AppStorage\("native-ios-language"\)/);
+});
+
+test('La guía proporciona títulos y párrafos locales completos en los cuatro idiomas nuevos', () => {
+  for (const lang of ['pt', 'fr', 'it', 'de']) {
+    const source = readFileSync(new URL('../Sources/' + lang + '.lproj/Guide.strings', import.meta.url), 'utf8');
+    const entries = [...source.matchAll(/^"guide\.(\d+)\.(title|paragraph\.\d+)"\s*=\s*"(.+)";$/gm)];
+    const keys = entries.map(m => m[1] + '.' + m[2]);
+    assert.equal(keys.length, 55, lang + ' debe cubrir todos los párrafos');
+    assert.equal(new Set(keys).size, keys.length, lang + ' incluye claves repetidas');
+    for (let section = 1; section <= 12; section++) {
+      assert.ok(keys.includes(section + '.title'), lang + ': título ' + section);
+      for (let paragraph = 1; paragraph <= (section === 3 || section === 6 || section === 8 ? (section === 8 ? 5 : 4) : 3); paragraph++) {
+        assert.ok(keys.includes(section + '.paragraph.' + paragraph), lang + ': sección ' + section);
+      }
+    }
+    assert.ok(keys.includes('13.title'), lang + ': título Mi Música');
+    for (let paragraph = 1; paragraph <= 2; paragraph++) {
+      assert.ok(keys.includes('13.paragraph.' + paragraph), lang + ': ayuda de Mi Música ' + paragraph);
+    }
+  }
+  assert.match(guide, /Bundle\.main\.path\(forResource: languageCode, ofType: "lproj"\)/);
+  assert.match(guide, /table: "Guide"/);
 });

@@ -18,6 +18,7 @@ struct NativeContactScreen: View {
     ]
 
     private let social = [
+        NativeContactLink(title: "TifloAcosta en X", address: "https://x.com/TifloAcosta"),
         NativeContactLink(title: "Canal TifloAcosta en YouTube", address: "https://www.youtube.com/@tifloacosta"),
         NativeContactLink(title: "Instagram", address: "https://www.instagram.com/tifloacosta/"),
         NativeContactLink(title: "Facebook — Canal TifloAcosta", address: "https://www.facebook.com/profile.php?id=61586738581998"),
@@ -39,7 +40,6 @@ struct NativeContactScreen: View {
                     .frame(minHeight: 44)
                 }
                 .accessibilityLabel(Text(LocalizedStringKey(item.title)))
-                .accessibilityHint("Doble toque para abrir el enlace externo.")
                 .accessibilityAction(named: Text("Compartir enlace")) {
                     NativeShare.present(url: url)
                 }
@@ -64,7 +64,6 @@ struct NativeContactScreen: View {
                         .frame(minHeight: 44)
                 }
                 .accessibilityLabel("Mi libro: La vida vista desde donde estoy")
-                .accessibilityHint("Doble toque para conocer el libro y consultar las ediciones disponibles.")
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 

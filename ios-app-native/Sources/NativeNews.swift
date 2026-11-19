@@ -77,20 +77,45 @@ struct NativeNewsScreen: View {
     @EnvironmentObject private var catalog: NativeCatalogStore
     @EnvironmentObject private var library: NativeReaderLibrary
     @EnvironmentObject private var favorites: NativeFavoritesStore
+    @EnvironmentObject private var readingActivity: NativeReadingActivity
     @AppStorage("native-ios-language") private var languageIndex = 0
     @Environment(\.openURL) private var openURL
 
     @State private var mediaKindIndex = 0
     @State private var categoryIndex = 0
+    @State private var sourceIndex = 0
+    @State private var languageFilterIndex = 0
     @State private var query = ""
     @State private var visibleCount = 10
     @State private var selectedArticle: NativeCatalogItem?
     @State private var showingArticle = false
+    @State private var articleToTranslate: NativeCatalogItem?
     @State private var status: String?
 
     private var spanishNews: [NativeCatalogItem] {
-        catalog.news.filter { $0.lang == (languageIndex == 1 ? "en" : "es") }
+        catalog.news.filter { item in
+            switch languageFilterIndex {
+            case 1: return true
+            case 2: return item.lang == "es"
+            case 3: return item.lang == "en"
+            case 4: return item.lang == "pt"
+            case 5: return item.lang == "fr"
+            case 6: return item.lang == "it"
+            case 7: return item.lang == "de"
+            default: return languageIndex > 1 || item.lang == NativeAppLanguage.code(for: languageIndex)
+            }
+        }
     }
+
+    private var sources: [String] {
+        Array(Set(spanishNews.map { NativeNewsMetadata.source($0) }))
+            .sorted { $0.localizedStandardCompare($1) == .orderedAscending }
+    }
+
+    private var sourceChoices: [String] {
+        ["Todos los medios"] + sources
+    }
+
 
     private var categories: [String] {
         Array(Set(spanishNews.flatMap { $0.categories ?? [] }))
@@ -109,11 +134,14 @@ struct NativeNewsScreen: View {
         let terms = query.trimmingCharacters(in: .whitespacesAndNewlines)
             .folding(options: [.diacriticInsensitive, .caseInsensitive], locale: Locale(identifier: "es_ES"))
             .split(whereSeparator: { $0.isWhitespace }).map(String.init)
-        guard categoryIndex > 0 || !terms.isEmpty else { return [] }
+        guard categoryIndex > 0 || !terms.isEmpty || sourceIndex > 0 else { return [] }
         let chosen = categories.indices.contains(categoryIndex - 2)
             ? categories[categoryIndex - 2] : nil
 
+        let chosenSource = sources.indices.contains(sourceIndex - 1)
+            ? sources[sourceIndex - 1] : nil
         return spanishNews.filter { item in
+            if let chosenSource, NativeNewsMetadata.source(item) != chosenSource { return false }
             if let chosen, !(item.categories ?? []).contains(chosen) { return false }
             let searchable = [
                 item.title, item.sourceName ?? "", item.summary ?? "",
@@ -174,6 +202,11 @@ struct NativeNewsScreen: View {
 
     var body: some View {
         List {
+            Section("Mis lecturas") {
+                NavigationLink("Leer después e historial") {
+                    NativeReadingActivityScreen(kind: .news)
+                }
+            }
             Section("Podcasts y canales de YouTube") {
                 NativeAdjustableChoice(
                     title: "Seleccionar contenidos multimedia",
@@ -202,7 +235,21 @@ struct NativeNewsScreen: View {
                 }
                 .listRowBackground(TifloVisual.surfaceRaised)
 
-                if categoryIndex == 0 && query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                Section("Filtrar noticias") {
+                    NativeAdjustableChoice(
+                        title: "Idioma de las noticias",
+                        choices: ["Idioma de la aplicación", "Todos los idiomas", "Español", "Inglés",
+                                  "Português", "Français", "Italiano", "Deutsch"],
+                        selectedIndex: $languageFilterIndex
+                    )
+                    NativeAdjustableChoice(
+                        title: "Medio de origen",
+                        choices: sourceChoices,
+                        selectedIndex: $sourceIndex
+                    )
+                }
+                if categoryIndex == 0 && sourceIndex == 0 &&
+                   query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                     Text("Selecciona una categoría o escribe una búsqueda para consultar noticias.")
                         .foregroundStyle(TifloVisual.secondaryText)
                         .listRowBackground(TifloVisual.surfaceRaised)
@@ -244,11 +291,17 @@ struct NativeNewsScreen: View {
                             }
                             .accessibilityElement(children: .ignore)
                             .accessibilityLabel(NativeNewsMetadata.accessibilitySummary(item))
-                            .accessibilityHint("Doble toque para leer. Acciones: Leer, Guardar en TifloLector, Compartir y Abrir fuente original.")
                             .accessibilityAction(named: Text("Leer")) { read(item) }
+                            .accessibilityAction(named: Text("Traducir noticia")) { articleToTranslate = item }
                             .accessibilityAction(named: Text("Guardar en TifloLector")) { save(item) }
                             .accessibilityAction(named: Text("Compartir")) { share(item) }
                             .accessibilityAction(named: Text("Abrir fuente original")) { openOriginal(item) }
+                            .accessibilityAction(named: Text(readingActivity.isSaved(.news, item: item)
+                                ? "Quitar de Leer después" : "Guardar para leer después")) {
+                                let saved = readingActivity.toggleReadLater(.news, item: item)
+                                announce(saved ? "Noticia guardada para leer después." :
+                                    "Noticia retirada de Leer después.")
+                            }
                             .accessibilityAction(named: Text(favorites.contains(.news, item: item)
                                 ? "Quitar de favoritos" : "Añadir a favoritos")) {
                                 let added = favorites.toggle(.news, item: item)
@@ -275,9 +328,29 @@ struct NativeNewsScreen: View {
         }
         .tifloScreenSurface()
         .navigationTitle("Actualidad")
+        .sheet(item: $articleToTranslate) { item in
+            NavigationStack {
+                if #available(iOS 18.0, *) {
+                    NativeOnDemandTranslationScreen(
+                        title: item.title,
+                        originalText: NativeNewsMetadata.articleText(item),
+                        sourceLanguage: item.lang,
+                        targetLanguage: NativeAppLanguage.code(for: languageIndex)
+                    )
+                } else {
+                    Text("La traducción integrada requiere iOS 18 o posterior.")
+                }
+            }
+        }
         .searchable(text: $query, prompt: "Buscar noticias")
         .onChange(of: query) { _, _ in visibleCount = 10 }
         .onChange(of: categoryIndex) { _, _ in visibleCount = 10 }
+        .onChange(of: sourceIndex) { _, _ in visibleCount = 10 }
+        .onChange(of: languageFilterIndex) { _, _ in
+            sourceIndex = 0
+            categoryIndex = 0
+            visibleCount = 10
+        }
         .navigationDestination(isPresented: $showingArticle) {
             if let selectedArticle {
                 NativeNewsArticleScreen(item: selectedArticle)
@@ -290,6 +363,8 @@ struct NativeNewsArticleScreen: View {
     let item: NativeCatalogItem
 
     @EnvironmentObject private var library: NativeReaderLibrary
+    @EnvironmentObject private var readingActivity: NativeReadingActivity
+    @AppStorage("native-ios-language") private var languageIndex = 0
     @Environment(\.openURL) private var openURL
     @State private var status: String?
 
@@ -370,6 +445,24 @@ struct NativeNewsArticleScreen: View {
                         .foregroundStyle(.secondary)
                 }
 
+                Button(readingActivity.isSaved(.news, item: item)
+                    ? "Quitar de Leer después" : "Guardar para leer después") {
+                    let saved = readingActivity.toggleReadLater(.news, item: item)
+                    announce(saved ? "Noticia guardada para leer después." :
+                        "Noticia retirada de Leer después.")
+                }
+                if !paragraphs.isEmpty {
+                    if #available(iOS 18.0, *) {
+                        NavigationLink("Traducir noticia al idioma de la aplicación") {
+                            NativeOnDemandTranslationScreen(
+                                title: item.title,
+                                originalText: paragraphs.joined(separator: "\n\n"),
+                                sourceLanguage: item.lang,
+                                targetLanguage: NativeAppLanguage.code(for: languageIndex)
+                            )
+                        }
+                    }
+                }
                 Button("Guardar en TifloLector") { save() }
                 Button("Compartir") { share() }
                 if let url = NativeNewsMetadata.originalURL(item) {
@@ -385,5 +478,6 @@ struct NativeNewsArticleScreen: View {
         .tifloScreenSurface()
         .navigationTitle("Noticia")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear { readingActivity.markOpened(.news, item: item) }
     }
 }

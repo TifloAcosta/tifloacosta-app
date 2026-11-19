@@ -3,25 +3,18 @@ import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
 const screens = readFileSync(fileURLToPath(new URL('../Sources/NativeScreens.swift', import.meta.url)), 'utf8');
 const search = readFileSync(fileURLToPath(new URL('../Sources/NativeSearch.swift', import.meta.url)), 'utf8');
-const order = ['Actualidad','Recursos','TifloLector','Novedades','Descargar desde un enlace','Vídeos','Podcast','Configuración'];
+const order = ['Actualidad','Recursos','TifloLector','Novedades','Descargar desde un enlace','Vídeos','Podcast','Contacto y redes','Privacidad y accesibilidad','Configuración'];
 let previous = -1;
 for (const label of order) {
   const found = screens.indexOf('= "' + label + '"');
   assert.ok(found > previous, 'Home order or label mismatch: ' + label);
   previous = found;
 }
-for (const label of ['Favoritos','TifloAcosta App','Buscar con TifloAcosta','Secciones']) {
+for (const label of ['Recibidos','Favoritos','TifloAcosta App','Buscar con TifloAcosta','Secciones']) {
   assert.ok(screens.includes(label), 'Missing entry: ' + label);
 }
-const home = screens.slice(screens.indexOf('struct NativeHomeScreen: View {'), screens.indexOf('/// La portada anuncia'));
-assert.doesNotMatch(home,/case (recibidos|contacto|privacidad)\s*=/);
-assert.doesNotMatch(home,/TextField\("Introduce tu búsqueda"/);
-assert.match(home,/NavigationLink\s*\{\s*NativeSearchEntryScreen\(\)/);
-const settings = readFileSync(fileURLToPath(new URL('../Sources/NativeUpdatesSettings.swift', import.meta.url)), 'utf8');
-for(const target of ['NativeInboxScreen()', 'NativeContactScreen()', 'NativePrivacyAccessibilityScreen()']) {
- assert.ok(settings.includes(target),'Configuración debe contener '+target);
-}
-for (const value of ['NativeReaderLibraryScreen()', 'NativeVideosScreen()', 'NativePodcastScreen()', 'NativeResourcesScreen()', 'NativeDownloadsScreen()', 'NativeSearchResultsScreen(query: submitted)']) {
+assert.ok(screens.includes('ForEach(NativeDestination.allCases.filter { $0 != .privacidad && $0 != .contacto && $0 != .recibidos })'), 'Privacy, contact and received items should be absent from Home');
+for (const value of ['NativeReaderLibraryScreen()', 'NativeVideosScreen()', 'NativePodcastScreen()', 'NativeResourcesScreen()', 'NativeDownloadsScreen()', 'NativeSearchResultsScreen(query: submittedSearch)']) {
   assert.ok(screens.includes(value), 'Lost functional route: ' + value);
 }
 for (const value of ['catalog.resources','catalog.news','catalog.videos','NativeNewsArticleScreen(item: match.item)','NativeRemoteResourceScreen(item: match.item)','NativeSearchVideoDetailScreen(item: match.item)']) {
@@ -38,12 +31,12 @@ const resources = screens.slice(resourcesStart, resourcesEnd);
 assert.match(resources, /@State private var chosenCategory: String\?/);
 assert.match(resources, /"Selecciona un apartado"\] \+ categories/);
 assert.match(resources, /selectedIndex: categorySelection/);
-assert.match(resources, /if let chosenCategory, categories\.contains\(chosenCategory\) \{\s*Section\(chosenCategory\)/);
-assert.match(resources, /guard let chosenCategory, categories\.contains\(chosenCategory\) else \{\s*return \[\]/);
+assert.match(resources, /Section\(chosenCategory/);
+assert.match(resources, /guard !terms/);
 assert.doesNotMatch(resources, /"Todas"\] \+ categories/);
 assert.match(screens, /\.accessibilityAdjustableAction \{ direction in/);
 assert.match(resources, /\.accessibilityAction\(named: Text\("Compartir"\)\)/);
-console.log('OK: Resources stays empty until user selects a category with VoiceOver');
+console.log('OK: Resources supports category choice and keyword search');
 
 assert.match(screens, /private struct NativeBrandMark: View/);
 assert.match(screens, /Canvas \{ context, size in/);

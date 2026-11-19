@@ -7,24 +7,22 @@ const reader = source('NativeTifloLector.swift');
 const settings = source('NativeReaderSettings.swift');
 const formats = source('NativeReaderFormats.swift');
 
-test('The reading opening mode is persistent, opt-in and applied once per opening', () => {
+test('The reading opening focus preference is persistent, opt-in and applied once per opening', () => {
   assert.match(settings, /@AppStorage\("native-reader-reading-mode"\) private var readingMode = 0/);
   assert.match(reader, /@AppStorage\("native-reader-reading-mode"\) private var readingMode = 0/);
-  assert.match(reader, /@AppStorage\("native-reader-presentation-mode"\) private var presentationMode = 0/);
-  assert.match(settings, /Reproducir cuando lo indique/);
-  assert.match(settings, /Reproducir automáticamente/);
+  assert.match(settings, /Toggle\("Foco inicial en Reproducir", isOn: automaticReadingBinding\)/);
+  assert.match(settings, /get: \{ readingMode == 1 \}/);
   assert.match(reader, /if !didApplyOpeningMode/);
-  assert.match(reader, /if presentationMode == 0 && readingMode == 1 \{ play\(\) \}/);
+  assert.match(reader, /if presentationMode == 0 && readingMode == 1 \{ playbackButtonFocused = true \}/);
 });
 
-test('Reader modes reveal their settings in place; shared settings stay navigable', () => {
-  assert.match(settings, /selectedIndex: \$presentationMode/);
-  assert.match(settings, /if presentationMode == 0/);
-  assert.match(settings, /else if presentationMode == 1/);
-  assert.match(settings, /NativeReaderAudioControls\(\)/);
-  assert.match(settings, /NativeReaderVisualControls\(\)/);
-  assert.match(settings, /title: "Unidad de avance"/);
-  assert.ok(settings.includes('NavigationLink("Formatos de lectura")'));
+test('General settings are folded into navigable destinations', () => {
+  for (const title of [
+    'Motores externos', 'Modo de lectura',
+    'Navegación y avances', 'Formatos de lectura'
+  ]) assert.ok(settings.includes('NavigationLink("' + title + '")'), title);
+  const screen = settings.split('struct NativeReaderSettingsScreen: View {')[1];
+  assert.doesNotMatch(screen, /NavigationLink\("Audio y voces"\)|NavigationLink\("Ajustes visuales"\)/);
 });
 
 test('Per-document audio and visual settings persist and can inherit global defaults', () => {

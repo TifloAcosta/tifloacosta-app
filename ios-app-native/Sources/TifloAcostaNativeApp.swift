@@ -1,4 +1,5 @@
 import SwiftUI
+import UserNotifications
 
 /// Entrada única y oficial de TifloAcosta para iOS; SwiftUI sin WebView ni Capacitor.
 /// Se publica con com.tifloacosta.app en TestFlight y posteriormente App Store.
@@ -7,6 +8,7 @@ struct TifloAcostaNativeApp: App {
     @StateObject private var catalog = NativeCatalogStore()
     @StateObject private var library = NativeReaderLibrary()
     @StateObject private var favorites = NativeFavoritesStore()
+    @StateObject private var readingActivity = NativeReadingActivity()
     @StateObject private var resourceService = NativeResourceService()
     @StateObject private var inbox = NativeShareInbox()
     @StateObject private var podcasts = NativePodcastStore()
@@ -15,12 +17,18 @@ struct TifloAcostaNativeApp: App {
     @AppStorage("native-ios-color-scheme") private var schemeIndex = 0
     @AppStorage("native-ios-language") private var languageIndex = 0
 
+    init() {
+        NativeAppLanguage.initializeIfMissing()
+        UNUserNotificationCenter.current().delegate = NativeLocalNotificationDelegate.shared
+    }
+
     var body: some Scene {
         WindowGroup {
             NativeHomeScreen()
                 .environmentObject(catalog)
                 .environmentObject(library)
                 .environmentObject(favorites)
+                .environmentObject(readingActivity)
                 .environmentObject(resourceService)
                 .environmentObject(inbox)
                 .environmentObject(podcasts)
@@ -30,7 +38,7 @@ struct TifloAcostaNativeApp: App {
                 .task { await catalog.refresh(); await podcasts.refresh() }
                 .tint(TifloVisual.actionTint)
                 .environment(\.defaultMinListRowHeight, 48)
-                .environment(\.locale, Locale(identifier: languageIndex == 1 ? "en" : "es"))
+                .environment(\.locale, Locale(identifier: NativeAppLanguage.code(for: languageIndex)))
                 .tifloVisualPreferences()
                 .preferredColorScheme(schemeIndex == 1 ? .light : schemeIndex == 2 ? .dark : nil)
         }

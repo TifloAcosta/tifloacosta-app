@@ -6,11 +6,10 @@ const home = read('NativeScreens.swift'), news = read('NativeNews.swift');
 const app = read('TifloAcostaNativeApp.swift'), favorites = read('NativeFavorites.swift');
 const share = read('NativeShareInbox.swift');
 
-test('Inicio ofrece un único acceso a búsqueda y el campo se abre dentro', () => {
-  assert.ok(home.includes('NavigationLink {\n            NativeSearchEntryScreen()'));
-  assert.ok(home.includes('TextField("Introduce tu búsqueda", text: $query)'));
-  assert.ok(!home.slice(home.indexOf('struct NativeHomeScreen:'),home.indexOf('private struct NativeSearchEntryScreen:')).includes('TextField("Introduce tu búsqueda"'));
-  assert.ok(!home.includes('.accessibilityLabel("Introduce tu búsqueda")'));
+test('Busca desde Inicio anuncia una sola vez el campo editable', () => {
+  assert.ok(home.includes('TextField("Buscar con TifloAcosta", text: $searchText)'));
+  assert.ok(home.includes('.accessibilityLabel(Text("Buscar con TifloAcosta"))'));
+  assert.ok(home.includes('if !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {'));
 });
 test('Favoritos tiene almacén persistente, pantalla nativa y acciones VoiceOver', () => {
   assert.ok(app.includes('NativeFavoritesStore()'));

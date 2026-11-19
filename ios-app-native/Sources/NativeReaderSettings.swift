@@ -1,8 +1,71 @@
 import SwiftUI
 import AVFoundation
+import UIKit
 
-/// Los índices antiguos 0–4 conservan su significado. Los nuevos se guardan
-/// a partir de 100 para evitar cambiar silenciosamente la velocidad de un libro.
+
+/// Pausas añadidas entre fragmentos del sintetizador del sistema, en segundos.
+/// El perfil Normal conserva la puntuación natural propia de cada voz.
+enum NativeReaderPauseProfile {
+    struct Segment {
+        let text: String
+        let delay: TimeInterval
+    }
+
+    static func duration(for sign: Character, settings: UserDefaults = .standard) -> TimeInterval {
+        let style = settings.integer(forKey: "native-reading-pause-style")
+        guard style != 0 else { return 0 }
+        let key: String
+        switch sign {
+        case ",": key = "comma"
+        case ";": key = "semicolon"
+        case ":": key = "colon"
+        case ".", "!", "?": key = "sentence"
+        case "\n": key = "paragraph"
+        default: return 0
+        }
+        let major: [String: Double] = [
+            "comma": 0.18, "semicolon": 0.28, "colon": 0.28,
+            "sentence": 0.48, "paragraph": 0.65
+        ]
+        let expressive: [String: Double] = [
+            "comma": 0.32, "semicolon": 0.48, "colon": 0.48,
+            "sentence": 0.80, "paragraph": 1.10
+        ]
+        if style == 1 { return major[key] ?? 0 }
+        if style == 2 { return expressive[key] ?? 0 }
+        let storageKey = "native-reading-pause-" + key
+        // @AppStorage defaults are not necessarily present in UserDefaults
+        // before the user first opens the controls.
+        let defaultValues: [String: Double] = [
+            "comma": 0.15, "semicolon": 0.25, "colon": 0.25,
+            "sentence": 0.40, "paragraph": 0.60
+        ]
+        let configured = settings.object(forKey: storageKey) == nil
+            ? (defaultValues[key] ?? 0) : settings.double(forKey: storageKey)
+        return min(1.5, max(0, configured))
+    }
+
+    static func segments(_ text: String, settings: UserDefaults = .standard) -> [Segment] {
+        var parts: [Segment] = []
+        var buffer = ""
+        for character in text {
+            buffer.append(character)
+            let delay = duration(for: character, settings: settings)
+            // Preserve sentence boundaries even in Normal mode, so a live
+            // speed, pitch or voice change applies to the next sentence.
+            if delay > 0 || ",;:.!?\n".contains(character) {
+                parts.append(Segment(text: buffer, delay: delay))
+                buffer = ""
+            }
+        }
+        if !buffer.isEmpty { parts.append(Segment(text: buffer, delay: 0)) }
+        if parts.isEmpty { parts.append(Segment(text: text, delay: 0)) }
+        return parts
+    }
+}
+
+/// Las versiones anteriores guardaban índices 0–4 para 0,75; 0,90; 1; 1,25; 1,50.
+/// Los nuevos índices se guardan como 100 + posición para no reinterpretar libros existentes.
 enum NativeReaderSpeedOptions {
     static let rates: [Double] = (15...30).map { Double($0) / 20.0 }
     static let choices: [String] = rates.map { rate in
@@ -11,7 +74,9 @@ enum NativeReaderSpeedOptions {
     }
     private static let legacyRates: [Double] = [0.75, 0.9, 1.0, 1.25, 1.5]
     static func rate(for stored: Int) -> Double {
-        if stored >= 100 { return rates[max(0, min(rates.count - 1, stored - 100))] }
+        if stored >= 100 {
+            return rates[max(0, min(rates.count - 1, stored - 100))]
+        }
         return legacyRates[max(0, min(legacyRates.count - 1, stored))]
     }
     static func choiceIndex(for stored: Int) -> Int {
@@ -19,7 +84,50 @@ enum NativeReaderSpeedOptions {
         let old = rate(for: stored)
         return rates.firstIndex(where: { abs($0 - old) < 0.001 }) ?? 5
     }
-    static func storedIndex(for choice: Int) -> Int { 100 + max(0, min(rates.count - 1, choice)) }
+    static func storedIndex(for choice: Int) -> Int {
+        100 + max(0, min(rates.count - 1, choice))
+    }
+}
+
+/// Controles ajustables con VoiceOver, sin introducir números mediante teclado.
+struct NativeReaderPunctuationControls: View {
+    @AppStorage("native-reading-pause-style") private var style = 0
+    @AppStorage("native-reading-pause-comma") private var comma = 0.15
+    @AppStorage("native-reading-pause-semicolon") private var semicolon = 0.25
+    @AppStorage("native-reading-pause-colon") private var colon = 0.25
+    @AppStorage("native-reading-pause-sentence") private var sentence = 0.4
+    @AppStorage("native-reading-pause-paragraph") private var paragraph = 0.6
+
+    private let choices = (0...30).map {
+        String(format: "%.2f segundos", Double($0) * 0.05)
+    }
+
+    private func selection(_ value: Binding<Double>) -> Binding<Int> {
+        Binding(
+            get: { max(0, min(30, Int((value.wrappedValue / 0.05).rounded()))) },
+            set: { value.wrappedValue = Double($0) * 0.05 }
+        )
+    }
+
+    var body: some View {
+        NativeAdjustableChoice(
+            title: "Pausas por puntuación",
+            choices: ["Normal", "Mayor", "Expresiva", "Personalizadas"],
+            selectedIndex: $style
+        )
+        if style == 3 {
+            NativeAdjustableChoice(title: "Pausa después de coma",
+                                   choices: choices, selectedIndex: selection($comma))
+            NativeAdjustableChoice(title: "Pausa después de punto y coma",
+                                   choices: choices, selectedIndex: selection($semicolon))
+            NativeAdjustableChoice(title: "Pausa después de dos puntos",
+                                   choices: choices, selectedIndex: selection($colon))
+            NativeAdjustableChoice(title: "Pausa después de punto, interrogación o exclamación",
+                                   choices: choices, selectedIndex: selection($sentence))
+            NativeAdjustableChoice(title: "Pausa después de salto de párrafo",
+                                   choices: choices, selectedIndex: selection($paragraph))
+        }
+    }
 }
 
 /// Reusable VoiceOver-adjustable controls. A document can supply independent
@@ -28,7 +136,14 @@ struct NativeReaderAudioControls: View {
     @AppStorage("native-reading-speed-index") private var generalSpeed = 2
     @AppStorage("native-reading-pitch-index") private var generalPitch = 2
     @AppStorage("native-reading-voice-id") private var generalVoiceID = ""
+    @AppStorage("native-reader-reading-engine") private var readingEngine = 0
+    @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
+    @AppStorage("native-reader-gemini-validated") private var geminiValidated = false
+    @AppStorage("native-reader-phonon-voice") private var phononVoice = ""
     let speedSelection: Binding<Int>?
+    let readingEngineSelection: Binding<Int>?
+    let geminiVoiceSelection: Binding<String>?
+    let phononVoiceSelection: Binding<String>?
     let pitchSelection: Binding<Int>?
     let voiceSelection: Binding<String>?
     let allowVoiceDownloads: Bool
@@ -38,14 +153,44 @@ struct NativeReaderAudioControls: View {
     @State private var personalVoiceStatus = AVSpeechSynthesizer.personalVoiceAuthorizationStatus
 
     init(speedSelection: Binding<Int>? = nil, pitchSelection: Binding<Int>? = nil,
-         voiceSelection: Binding<String>? = nil, allowVoiceDownloads: Bool = true) {
+         voiceSelection: Binding<String>? = nil,
+         readingEngineSelection: Binding<Int>? = nil,
+         geminiVoiceSelection: Binding<String>? = nil,
+         phononVoiceSelection: Binding<String>? = nil,
+         allowVoiceDownloads: Bool = true) {
         self.speedSelection = speedSelection
         self.pitchSelection = pitchSelection
         self.voiceSelection = voiceSelection
+        self.readingEngineSelection = readingEngineSelection
+        self.geminiVoiceSelection = geminiVoiceSelection
+        self.phononVoiceSelection = phononVoiceSelection
         self.allowVoiceDownloads = allowVoiceDownloads
     }
 
     private var selectedVoiceID: String { voiceSelection?.wrappedValue ?? generalVoiceID }
+    private var chosenEngine: Int {
+        let saved = readingEngineSelection?.wrappedValue ?? readingEngine
+        return availableEngines.contains(where: { $0.id == saved }) ? saved : 0
+    }
+    private var chosenGeminiVoice: String { geminiVoiceSelection?.wrappedValue ?? geminiVoice }
+    private var availableEngines: [(id: Int, title: String)] {
+        var engines: [(id: Int, title: String)] = [(0, "Voces del sistema")]
+        if geminiValidated && NativeVoiceCredentialStore.hasKey("gemini") {
+            engines.append((1, "Gemini"))
+        }
+        if NativePhononRuntime.isUsable { engines.append((2, "Phonon")) }
+        return engines
+    }
+    private var availableEngineSelection: Binding<Int> {
+        let storage = readingEngineSelection ?? $readingEngine
+        return Binding(
+            get: { availableEngines.firstIndex(where: { $0.id == storage.wrappedValue }) ?? 0 },
+            set: { index in
+                guard availableEngines.indices.contains(index) else { return }
+                storage.wrappedValue = availableEngines[index].id
+            }
+        )
+    }
     private var speedChoiceBinding: Binding<Int> {
         let storage = speedSelection ?? $generalSpeed
         return Binding(
@@ -98,6 +243,31 @@ struct NativeReaderAudioControls: View {
 
     var body: some View {
         NativeAdjustableChoice(
+            title: readingEngineSelection == nil ? "Motor de lectura predeterminado" : "Motor de lectura de esta obra",
+            choices: availableEngines.map { $0.title },
+            selectedIndex: availableEngineSelection
+        )
+        if chosenEngine == 1 {
+            if NativeVoiceCredentialStore.hasKey("gemini") {
+                NativeAdjustableChoice(
+                    title: geminiVoiceSelection == nil ? "Voz Gemini predeterminada" : "Voz Gemini de esta obra",
+                    choices: NativeGeminiSpeech.voices,
+                    selectedIndex: Binding(
+                        get: { NativeGeminiSpeech.voices.firstIndex(of: chosenGeminiVoice) ?? 0 },
+                        set: { (geminiVoiceSelection ?? $geminiVoice).wrappedValue = NativeGeminiSpeech.voices[$0] }
+                    )
+                )
+            } else {
+                Text("Gemini necesita una clave API guardada en Motores externos antes de reproducir.")
+                    .font(.footnote)
+            }
+        } else if chosenEngine == 2 {
+            if !NativePhononRuntime.isUsable {
+                Text("Configura Phonon en Motores externos antes de utilizarlo.")
+            }
+        }
+        if chosenEngine == 0 {
+        NativeAdjustableChoice(
             title: "Velocidad de voz",
             choices: NativeReaderSpeedOptions.choices,
             selectedIndex: speedChoiceBinding
@@ -107,6 +277,7 @@ struct NativeReaderAudioControls: View {
             choices: ["Más grave", "Grave", "Normal", "Agudo", "Más agudo"],
             selectedIndex: pitchSelection ?? $generalPitch
         )
+        NativeReaderPunctuationControls()
         NativeAdjustableChoice(
             title: "Mostrar voces",
             choices: ["Todos los idiomas", "Español", "Inglés"],
@@ -124,7 +295,8 @@ struct NativeReaderAudioControls: View {
         .onReceive(NotificationCenter.default.publisher(for: AVSpeechSynthesizer.availableVoicesDidChangeNotification)) { _ in
             refreshVoices()
         }
-        if allowVoiceDownloads {
+        }
+        if allowVoiceDownloads && chosenEngine == 0 {
             if personalVoiceStatus == .notDetermined {
                 Button("Permitir mi Voz personal") {
                     Task {
@@ -138,8 +310,7 @@ struct NativeReaderAudioControls: View {
             } else if personalVoiceStatus == .unsupported {
                 Text("Este dispositivo no admite el uso de Voz personal en TifloLector.")
             }
-            Text("El tono modifica la voz sintetizada, no los audiolibros grabados.").font(.footnote)
-            Button("Buscar más voces") { showVoiceHelp = true }
+            Button("Cómo instalar más voces del sistema") { showVoiceHelp = true }
                 .accessibilityHint("Indica dónde descargar voces adicionales de iOS.")
                 .alert("Buscar más voces", isPresented: $showVoiceHelp) {
                     Button("Entendido", role: .cancel) {}
@@ -241,6 +412,9 @@ struct NativeReaderDocumentAudioControls: View {
     @AppStorage("native-reading-speed-index") private var defaultSpeed = 2
     @AppStorage("native-reading-pitch-index") private var defaultPitch = 2
     @AppStorage("native-reading-voice-id") private var defaultVoiceID = ""
+    @AppStorage("native-reader-reading-engine") private var defaultReadingEngine = 0
+    @AppStorage("native-reader-gemini-voice") private var defaultGeminiVoice = "Kore"
+    @AppStorage("native-reader-phonon-voice") private var defaultPhononVoice = ""
 
     var body: some View {
         NativeReaderAudioControls(
@@ -255,6 +429,18 @@ struct NativeReaderDocumentAudioControls: View {
             voiceSelection: Binding(
                 get: { library.latest(document).readerPreferences?.voiceID ?? defaultVoiceID },
                 set: { value in library.updatePreferences(document) { $0.voiceID = value } }
+            ),
+            readingEngineSelection: Binding(
+                get: { library.latest(document).readerPreferences?.readingEngineIndex ?? defaultReadingEngine },
+                set: { value in library.updatePreferences(document) { $0.readingEngineIndex = value } }
+            ),
+            geminiVoiceSelection: Binding(
+                get: { library.latest(document).readerPreferences?.geminiVoiceID ?? defaultGeminiVoice },
+                set: { value in library.updatePreferences(document) { $0.geminiVoiceID = value } }
+            ),
+            phononVoiceSelection: Binding(
+                get: { library.latest(document).readerPreferences?.phononVoiceID ?? defaultPhononVoice },
+                set: { value in library.updatePreferences(document) { $0.phononVoiceID = value } }
             ),
             allowVoiceDownloads: false
         )
@@ -353,60 +539,71 @@ struct NativeReaderDocumentSettingsScreen: View {
     }
 }
 
+struct NativeReaderBrailleControls: View {
+    @AppStorage("native-reader-navigation-unit") private var navigationUnit = 0
+    @AppStorage("native-reader-braille-initial-text-focus") private var brailleFocusText = true
+
+    var body: some View {
+        Toggle("Foco inicial en el texto", isOn: $brailleFocusText)
+        NativeAdjustableChoice(
+            title: "Unidad de navegación en braille",
+            choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
+            selectedIndex: $navigationUnit
+        )
+        Button("Configurar línea braille en VoiceOver") {
+            guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+            UIApplication.shared.open(url)
+        }
+        .accessibilityHint("Abre Ajustes del iPhone. La línea braille se configura en Accesibilidad, VoiceOver, Braille.")
+    }
+}
+
 struct NativeReaderSettingsScreen: View {
     @AppStorage("native-reader-navigation-unit") private var navigationUnit = 0
     @AppStorage("native-reader-reading-mode") private var readingMode = 0
     @AppStorage("native-reader-presentation-mode") private var presentationMode = 0
 
+    private var automaticReadingBinding: Binding<Bool> {
+        Binding(get: { readingMode == 1 }, set: { readingMode = $0 ? 1 : 0 })
+    }
+
     var body: some View {
         List {
-            Section("Modo de lectura") {
-                NativeAdjustableChoice(
-                    title: "Modo de lectura",
-                    choices: ["Voz TTS", "Lectura visual", "Línea braille"],
-                    selectedIndex: $presentationMode
-                )
-                .accessibilityHint("Desliza arriba o abajo para elegir cómo leer. Los ajustes siguientes cambian con el modo seleccionado.")
-            }
-            if presentationMode == 0 {
-                Section("Voz TTS") {
-                    NativeAdjustableChoice(
-                        title: "Al abrir un documento",
-                        choices: ["Reproducir cuando lo indique", "Reproducir automáticamente"],
-                        selectedIndex: $readingMode
-                    )
-                    NativeReaderAudioControls()
+            NavigationLink("Creación rápida de marcas") { NativeQuickBookmarkHelpScreen() }
+            NavigationLink("Motores externos") { NativeReaderExternalVoiceSettingsScreen() }
+                .accessibilityHint("Prepara Gemini o Phonon antes de seleccionarlos para leer.")
+            NavigationLink("Modo de lectura") {
+                List {
+                        NativeAdjustableChoice(
+                            title: "Modo de lectura",
+                            choices: ["Voz", "Visual", "Braille"],
+                            selectedIndex: $presentationMode
+                        )
+                    if presentationMode == 0 {
+                        Toggle("Foco inicial en Reproducir", isOn: automaticReadingBinding)
+                        NativeReaderAudioControls()
+                    } else if presentationMode == 1 {
+                        NativeReaderVisualControls()
+                    } else {
+                        NativeReaderBrailleControls()
+                    }
                 }
-                Section("Motor de lectura con voz") {
-                    NativeSpeechProviderChoice()
-                }
-                Section("Microsoft Azure Speech, prueba experimental") {
-                    NativeAzureSpeechSettings()
-                }
-            } else if presentationMode == 1 {
-                Section("Lectura visual") { NativeReaderVisualControls() }
-            } else {
-                Section("Línea braille") {
-                    Text("TifloLector presenta todo el texto del documento de forma continua, sin cortes por bloques. El avance automático se activa y ajusta en VoiceOver.")
-                        .font(.footnote)
-                    NativeAdjustableChoice(
-                        title: "Unidad de navegación de TifloLector",
-                        choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
-                        selectedIndex: $navigationUnit
-                    )
-                    Text("Los comandos físicos de la línea braille y la velocidad del avance automático se configuran en Ajustes del iPhone, Accesibilidad, VoiceOver, Braille.")
-                        .font(.footnote)
-                }
+                .tifloScreenSurface()
+                .navigationTitle("Modo de lectura")
             }
             NavigationLink("OCR y reconocimiento") { NativeReaderOCRSettingsScreen() }
-            if presentationMode != 2 {
-                Section {
-                    NativeAdjustableChoice(
-                        title: "Unidad de avance",
-                        choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
-                        selectedIndex: $navigationUnit
-                    )
+            NavigationLink("Navegación y avances") {
+                List {
+                    Section("Desplazamiento") {
+                        NativeAdjustableChoice(
+                            title: "Unidad de avance",
+                            choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
+                            selectedIndex: $navigationUnit
+                        )
+                    }
                 }
+                .tifloScreenSurface()
+                .navigationTitle("Navegación y avances")
             }
             NavigationLink("Formatos de lectura") { NativeReaderSupportedFormatsScreen() }
         }

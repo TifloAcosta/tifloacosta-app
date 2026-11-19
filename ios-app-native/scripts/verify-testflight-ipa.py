@@ -19,15 +19,29 @@ with zipfile.ZipFile(files[0]) as z:
     if not app_info_path or not extension_info_path:
         raise SystemExit('Falta la app o su Share Extension')
     app_info = plistlib.loads(z.read(app_info_path))
+    expected_languages = {'es', 'en', 'pt', 'fr', 'it', 'de'}
+    declared_languages = set(app_info.get('CFBundleLocalizations', []))
+    if declared_languages != expected_languages:
+        raise SystemExit('Idiomas declarados incorrectos en IPA: ' + str(sorted(declared_languages)))
+    for language in expected_languages - {'es'}:
+        resource = next((p for p in z.namelist()
+                         if p.startswith('Payload/') and
+                         p.endswith('.app/' + language + '.lproj/Localizable.strings')), None)
+        if not resource:
+            raise SystemExit('Falta el catálogo de idioma ' + language + ' dentro de la IPA')
+    print('Seis idiomas de TifloAcosta declarados y empaquetados correctamente')
     ext_info = plistlib.loads(z.read(extension_info_path))
     for info, identifier in [(app_info, 'com.tifloacosta.app'),
                              (ext_info, 'com.tifloacosta.app.ShareExtension')]:
         if info.get('CFBundleIdentifier') != identifier:
             raise SystemExit('Identificador incorrecto: ' + str(info.get('CFBundleIdentifier')))
-        if str(info.get('CFBundleVersion')) != os.environ['IOS_BUILD_VERSION']:
-            raise SystemExit('Número de compilación distinto entre aplicación y extensión')
-        if info.get('CFBundleShortVersionString') != '1.4':
-            raise SystemExit('Versión pública incorrecta')
+        actual_version = str(info.get('CFBundleVersion'))
+        if actual_version != os.environ['IOS_BUILD_VERSION']:
+            raise SystemExit('Número de compilación distinto en ' + identifier +
+                             ': ' + actual_version + ' frente a ' + os.environ['IOS_BUILD_VERSION'])
+        expected_version = os.environ.get('TIFLO_IOS_MARKETING_VERSION', '1.2')
+        if info.get('CFBundleShortVersionString') != expected_version:
+            raise SystemExit('Versión pública incorrecta: se esperaba ' + expected_version + ', se obtuvo ' + str(info.get('CFBundleShortVersionString')))
     if ext_info.get('NSExtension', {}).get('NSExtensionPointIdentifier') != 'com.apple.share-services':
         raise SystemExit('Extensión Compartir sin punto de entrada')
 

@@ -45,6 +45,7 @@ final class NativeMixedMusicQueue: ObservableObject {
     private func stopPlaying() {
         playbackGeneration += 1
         NativeMusicPlayer.shared.onPlaybackFinished = nil
+        NativeAppleMusicPlayer.shared.onPlaybackFinished = nil
         NativeAudiusPlayer.shared.onPlaybackFinished = nil
         NativeJamendoPlayer.shared.onPlaybackFinished = nil
         NativeMusicPlayer.shared.stop()
@@ -80,6 +81,7 @@ final class NativeMixedMusicQueue: ObservableObject {
                     currentIndex += 1
                     continue
                 }
+                NativeAppleMusicPlayer.shared.onPlaybackFinished = finished
                 Task { @MainActor in
                     guard generation == playbackGeneration else { return }
                     await NativeAppleMusicPlayer.shared.playSaved(id: remoteID, title: entry.title)

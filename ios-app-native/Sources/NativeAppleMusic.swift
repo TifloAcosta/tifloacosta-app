@@ -6,6 +6,7 @@ import MusicKit
 @MainActor
 final class NativeAppleMusicPlayer: ObservableObject {
     static let shared = NativeAppleMusicPlayer()
+    var onPlaybackFinished: (() -> Void)?
     @Published private(set) var tracks: [Song] = []
     @Published private(set) var currentTitle = ""
     @Published private(set) var isPlaying = false
@@ -14,6 +15,26 @@ final class NativeAppleMusicPlayer: ObservableObject {
     @Published var error: String?
 
     private let player = ApplicationMusicPlayer.shared
+    private var completionTimer: Timer?
+    private var observedPlaying = false
+
+    private func watchNaturalCompletion() {
+        completionTimer?.invalidate()
+        observedPlaying = false
+        guard onPlaybackFinished != nil else { return }
+        completionTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] timer in
+            Task { @MainActor [weak self] in
+                guard let self else { timer.invalidate(); return }
+                if self.player.state.playbackStatus == .playing { self.observedPlaying = true }
+                if self.observedPlaying && self.player.state.playbackStatus == .stopped {
+                    timer.invalidate()
+                    self.completionTimer = nil
+                    self.isPlaying = false
+                    self.onPlaybackFinished?()
+                }
+            }
+        }
+    }
 
     func connect() async {
         let status = await MusicAuthorization.request()
@@ -65,6 +86,7 @@ final class NativeAppleMusicPlayer: ObservableObject {
             try await player.play()
             currentTitle = song.title
             isPlaying = true
+            watchNaturalCompletion()
             error = nil
         } catch {
             isPlaying = false
@@ -109,17 +131,22 @@ final class NativeAppleMusicPlayer: ObservableObject {
                 NativeRemotePlaybackOwner.claim(.appleMusic)
                 try await player.play()
                 isPlaying = true
+                watchNaturalCompletion()
             } catch { self.error = "No se pudo reanudar Apple Music." }
         }
     }
 
     func pauseForOtherAudio() {
         guard isPlaying else { return }
+        completionTimer?.invalidate()
+        completionTimer = nil
         player.pause()
         isPlaying = false
     }
 
     func stop() {
+        completionTimer?.invalidate()
+        completionTimer = nil
         player.pause()
         isPlaying = false
         currentTitle = ""

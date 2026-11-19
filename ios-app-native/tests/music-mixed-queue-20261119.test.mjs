@@ -36,6 +36,15 @@ test('natural playback completion advances a mixed queue without relying on loca
   assert.match(jamendo, /AVPlayerItemDidPlayToEndTime/);
 });
 
+test('Apple Music distinguishes natural stopped status from a user pause', () => {
+  const apple = source('NativeAppleMusic.swift');
+  const queue = source('NativeMixedMusicQueue.swift');
+  assert.match(apple, /var onPlaybackFinished: \(\(\) -> Void\)\?/);
+  assert.match(apple, /player\.state\.playbackStatus == \.stopped/);
+  assert.match(apple, /observedPlaying/);
+  assert.match(queue, /NativeAppleMusicPlayer\.shared\.onPlaybackFinished = finished/);
+});
+
 test('unavailable entries are skipped iteratively and do not recurse across the entire playlist', () => {
   const queue = source('NativeMixedMusicQueue.swift');
   assert.match(queue, /while entries\.indices\.contains\(currentIndex\)/);

@@ -3042,8 +3042,53 @@ struct NativeReadingScreen: View {
         )
     }
 
+    /// Real hyperlinks inside text must be activatable with a VoiceOver double
+    /// tap, not only through the separate "Abrir enlace actual" action.
+    private func linkedReaderFragment(at index: Int) -> AttributedString {
+        let fragment = visibleReaderFragment(at: index)
+        var matches: [(range: Range<String.Index>, target: URL)] = []
+        if let regex = try? NSRegularExpression(pattern: #"https?://[^\s<>\"']+"#, options: [.caseInsensitive]) {
+            let full = NSRange(fragment.startIndex..<fragment.endIndex, in: fragment)
+            for match in regex.matches(in: fragment, range: full) {
+                guard let range = Range(match.range, in: fragment),
+                      let target = URL(string: String(fragment[range])),
+                      ["https", "http"].contains(target.scheme?.lowercased() ?? ""),
+                      target.host != nil else { continue }
+                matches.append((range, target))
+            }
+        }
+
+        // A hyperlink with a descriptive label (e.g. "Descargar guía") is
+        // invisible to URL detection. Resolve its exact imported text offset.
+        let start = textLayout.fragmentStarts[index]
+        for link in latest.textLinks ?? [] {
+            let relative = link.offset - start
+            guard relative >= 0, relative + link.title.count <= fragment.count,
+                  let target = URL(string: link.url),
+                  ["https", "http"].contains(target.scheme?.lowercased() ?? ""),
+                  target.host != nil else { continue }
+            let first = fragment.index(fragment.startIndex, offsetBy: relative)
+            let end = fragment.index(first, offsetBy: link.title.count)
+            guard String(fragment[first..<end]) == link.title else { continue }
+            matches.append((first..<end, target))
+        }
+
+        matches.sort { $0.range.lowerBound < $1.range.lowerBound }
+        var result = AttributedString()
+        var cursor = fragment.startIndex
+        for match in matches where match.range.lowerBound >= cursor {
+            result += AttributedString(String(fragment[cursor..<match.range.lowerBound]))
+            var linkedText = AttributedString(String(fragment[match.range]))
+            linkedText.link = match.target
+            result += linkedText
+            cursor = match.range.upperBound
+        }
+        result += AttributedString(String(fragment[cursor...]))
+        return result
+    }
+
     private func readerFragment(at index: Int) -> some View {
-        Text(visibleReaderFragment(at: index))
+        Text(linkedReaderFragment(at: index))
             .font(.system(size: effectiveTextSize))
             .fontWeight(effectiveStrongText ? .bold : .regular)
             .lineSpacing(CGFloat(effectiveLineSpacing) * 4)

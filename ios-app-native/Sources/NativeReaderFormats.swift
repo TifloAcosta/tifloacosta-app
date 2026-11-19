@@ -262,11 +262,23 @@ enum NativeReaderFormats {
         request.recognitionLevel = UserDefaults.standard.integer(
             forKey: "native-reader-ocr-accuracy-index") == 1 ? .fast : .accurate
         request.usesLanguageCorrection = true
+        let selected: [String]
         switch UserDefaults.standard.integer(forKey: "native-reader-ocr-language-index") {
-        case 1: request.recognitionLanguages = ["es-ES"]
-        case 2: request.recognitionLanguages = ["en-US"]
-        case 3: request.recognitionLanguages = ["es-ES", "en-US"]
-        default: request.automaticallyDetectsLanguage = true
+        case 1: selected = ["es-ES"]
+        case 2: selected = ["en-US"]
+        case 3: selected = ["es-ES", "en-US"]
+        case 4: selected = ["pt-PT"]
+        case 5: selected = ["fr-FR"]
+        case 6: selected = ["it-IT"]
+        case 7: selected = ["de-DE"]
+        default: selected = []
+        }
+        let supported = (try? request.supportedRecognitionLanguages()) ?? []
+        if !selected.isEmpty && selected.allSatisfy({ supported.contains($0) }) {
+            request.recognitionLanguages = selected
+        } else {
+            // Device/language support varies; never reject the whole import.
+            request.automaticallyDetectsLanguage = true
         }
         return request
     }

@@ -71,7 +71,8 @@ struct NativeReaderOCRSettingsScreen: View {
             Section("Reconocimiento de texto") {
                 NativeAdjustableChoice(
                     title: "Idioma del OCR",
-                    choices: ["Detectar automáticamente", "Español", "Inglés", "Español e inglés"],
+                    choices: ["Detectar automáticamente", "Español", "Inglés", "Español e inglés",
+                              "Portugués", "Francés", "Italiano", "Alemán"],
                     selectedIndex: $languageIndex
                 )
                 NativeAdjustableChoice(

@@ -6,7 +6,8 @@ const reader = readFileSync(new URL('../Sources/NativeTifloLector.swift', import
 
 test('heading markers are hidden from VoiceOver and braille without changing document offsets', () => {
   assert.match(reader, /private func visibleReaderFragment\(at index: Int\) -> String/);
-  assert.match(reader, /Text\(visibleReaderFragment\(at: index\)\)/);
+  assert.match(reader, /let fragment = visibleReaderFragment\(at: index\)/);
+  assert.match(reader, /Text\(linkedReaderFragment\(at: index\)\)/);
   assert.match(reader, /textLayout\.fragmentStarts\[index\]/);
 });
 

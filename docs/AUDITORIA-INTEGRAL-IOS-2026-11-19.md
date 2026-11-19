@@ -60,3 +60,35 @@ Se tomó como base el árbol iOS de `a1137c8`, no el árbol iOS incompleto de la
 ## Política de ramas
 
 La única rama activa de integración para esta candidata es `feature/mi-musica`. No crear ramas adicionales para cambios de esta versión. Las referencias antiguas de recuperación pueden conservarse temporalmente para trazabilidad y no deben fusionarse de nuevo como fuente de código. Cualquier borrado de ramas históricas debe efectuarse solo después de comprobar su finalidad y que no contienen trabajo exclusivo necesario.
+
+## Rectificación de auditoría funcional: decisiones de 16–19 de noviembre
+
+**Esta sección sustituye cualquier afirmación anterior de «completo» para las funciones que se detallan.** La auditoría inicial contrastó principalmente nombres presentes en código y pruebas de contrato, no el comportamiento solicitado en las conversaciones. El historial conversacional recuperado es parcial; las referencias conocidas se separan de las promesas del asistente. No se autoriza cerrar la candidata todavía.
+
+### TifloLector: discrepancias demostradas
+
+- **Muestra de cambios de voz: AUSENTE.** En `NativeReaderAudioControls` no hay botón para probar conjuntamente velocidad, tono, pausas y voz. Los botones de muestra existentes están dentro de Gemini y Phonon. **Decisión corregida por Tony:** personalizar una voz concreta, escuchar una muestra **antes de guardar**, confirmar o cancelar; otras voces conservan su comportamiento natural. Debe conservar ajustes independientes por identificador de voz y ofrecer restablecimiento natural. Los actuales controles generales y por documento no equivalen a este requisito.
+- **Braille continuo: AUSENTE.** `NativeReaderTextLayout` divide el texto en fragmentos de hasta 1800 caracteres y `readerFragment` expone elementos separados. Falta una modalidad de recorrido continuo de todo el documento sin tener que pasar manualmente al siguiente fragmento.
+- **OCR multilingüe: PARCIAL.** `NativeReaderOCRSettingsScreen` ofrece detectar automáticamente, español, inglés y ambos. Vision dispone de detección automática, pero no existe una selección explícita de otros idiomas acordados ni una lista dinámica de los idiomas realmente soportados.
+- **Enlaces con doble toque en la lectura: PARCIAL.** Se extraen enlaces HTML/EPUB, existe navegación «Enlaces» y la acción «Abrir enlace actual», pero los fragmentos normales del lector siguen siendo `Text` estáticos, no enlaces interactivos activables directamente con doble toque. Las URLs visibles detectadas sin estructura no se resuelven en `activateCurrentLink` como enlaces externos.
+- **Seleccionar y copiar: PRESENTE EN CÓDIGO.** `NativeReaderSelectableText` presenta un `UITextView` seleccionable y la acción `Seleccionar y copiar texto` conserva la posición al cerrar; pendiente ensayo VoiceOver.
+- **Nombre de conversión: PRESENTE EN CÓDIGO.** Decisión recuperada del 19/11: sustituir «Exportar audio o DAISY» por «Convertir a audio o DAISY». En biblioteca y lector aparece el nuevo nombre; «Compartir documento original» y «Compartir libro DAISY completo (ZIP)» son acciones distintas.
+- **Voice Dream y DAISY con audio: SIN VALIDACIÓN COMPLETA.** El diálogo recuperado del 17/11 describió que Voice Dream ignoraba el audio del DAISY texto+audio; hay que acreditar un audiolibro exportado con MP3 reproducible, no inferir compatibilidad a partir de generar un ZIP.
+
+### «Mi música»: contraste de diseño aprobado frente a pantalla actual
+
+Fuente de requisitos: `docs/superpowers/specs/2026-11-17-mi-musica-design.md` y decisiones recuperadas del 17–19 de noviembre.
+
+- **Menú de organización: PRESENTE.** La pantalla conserva «Organizar mi música» con Importar canciones, Importar carpeta, Crear carpeta, Crear lista de reproducción y Crear carpeta inteligente. Es un menú dentro de una sección final, después de listas y carpetas; verificar si el acceso y el orden final cumplen la prioridad de diseño indicada por Tony.
+- **Fuentes externas de archivos: PENDIENTE.** La especificación contempla Google Drive, Dropbox, OneDrive y MEGA con autorización, elección de carpeta y adaptadores. `NativeMyMusic.swift` solo importa archivos o carpetas seleccionados mediante el selector de Archivos; esto no es una conexión persistente ni un adaptador autenticado de dichos servicios. «Desde Archivos o nube» no equivale a conectores API completos.
+- **Biblioteca virtual avanzada: PARCIAL.** Existen carpetas virtuales y listas; las carpetas inteligentes solo admiten la regla «título contiene». No hay reglas completas por artista, género, fecha y reproducciones ni una interfaz para reordenar canciones de una lista. Las carpetas virtuales no deben tocar archivos originales.
+- **Listas mixtas: PARCIAL.** Se guardan referencias a Apple Music, Audius, Jamendo y pistas locales, pero «Reproducir lista» construye la cola exclusivamente con `playlist.trackIds` locales; las entradas remotas tienen botones individuales. Falta reproducción continua y secuencial de listas mixtas, incluida gestión de pistas no disponibles.
+- **Ecualizador: PARCIAL.** Hay cinco bandas, perfiles predefinidos, ajuste general y excepción por canción **local**. No aparecen los perfiles por álbum ni por lista acordados, ni una precedencia canción > lista > álbum > general para todas las fuentes.
+- **Destino de copia automática: PENDIENTE.** Tony aprobó respaldo manual y automático con destino predeterminado modificable. El destino automático actual está fijado dentro del almacenamiento de `MiMusica/Respaldos` y solo se comprueba al abrir la sección, sin selector de destino. Las copias completas manuales existen.
+- **Reproductor: PRESENTE PARCIAL.** AVAudioEngine local tiene cola, anterior/siguiente, salto de 15 s, aleatorio, repetición, temporizador y controles remotos. Falta demostrar continuidad y equivalencia de las funciones en Apple Music, Audius, Jamendo y radio, además de accesibilidad real.
+- **Plataformas: INTEGRADAS A NIVEL DE CÓDIGO.** Radio, Audius, Apple Music y Jamendo aparecen enlazadas; la autorización, disponibilidad de catálogo, licencias de Jamendo y reproducción real aún requieren comprobación.
+- **Idiomas: PENDIENTE AUDITORÍA EN PANTALLA.** Hay catálogos ES/EN/PT/FR/IT/DE y pruebas de presencia, pero las interpolaciones, descripciones y errores de las nuevas pantallas no están acreditados individualmente en cada idioma de dispositivo. La existencia de 879 claves por idioma no demuestra cobertura total de la experiencia musical.
+
+### Criterio de salida
+
+No dar por concluida la compilación candidata ni ejecutar TestFlight hasta: (1) recuperar y clasificar la mayor cantidad verificable de decisiones de los intercambios originales, (2) resolver cada incumplimiento funcional anterior, (3) probar contratos de comportamiento y compilación Swift en macOS, (4) preparar una única prueba integral en iPhone con VoiceOver. Las partes del historial a las que no se tenga acceso deben quedar identificadas explícitamente como no verificadas. No abrir ramas remotas adicionales.

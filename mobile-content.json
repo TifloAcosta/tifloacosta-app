@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-19T02:01:27.021Z",
+  "generatedAt": "2026-11-19T03:33:09.188Z",
   "resources": [
     {
       "kind": "resource",
@@ -5624,6 +5624,89 @@
   "news": [
     {
       "kind": "news",
+      "id": "9to5mac-0fce7ae60b5e6662:en",
+      "sourceId": "9to5mac-0fce7ae60b5e6662",
+      "lang": "en",
+      "title": "Siri Modular Apple Watch face gains two new styles with watchOS 27.3",
+      "summary": "Siri Modular, the new Apple Watch face in watchOS 27, is gaining new style options. watchOS 27.3, currently in beta, adds two more style options to the existing set. This gives users five options for adjusting what type of information appears on Siri Modular. more…",
+      "body": "Siri Modular, the new Apple Watch face in watchOS 27, is gaining new style options. watchOS 27.3, currently in beta, adds two more style options to the existing set. This gives users five options for adjusting what type of information appears on Siri Modular.\n\nSiri Modular originally shipped with three style options. Each supports a small line complication above the time.\n\nAdditionally, the original three styles include these options:\n\nIn watchOS 27.3, Apple introduces two new Siri features that work with Apple Watch Series 12 and Apple Watch Ultra 4 .\n\nFirst, there’s Siri Recap which uses the Apple Watch to turn audio into high-level text summaries. Second, there’s Live Rewind which lets you view a transcript of the last 15 seconds of spoken word.\n\nThe two new Siri Modular Apple Watch face styles help surface three things: invoking Siri, viewing conversations with Siri, and viewing Siri Recaps on the Apple Watch.\n\nThe new styles include a pill-shaped module that includes icon shortcuts that go directly to Siri conversations, invoke Siri AI, or go directly to Siri Recaps in the Siri app.\n\nOne style features a large digital clock with the new three-button Siri module. Another includes a compact digital clock with a Smart Stack tile and the new three-button Siri module.\n\nThis brings the style options to five. If you use the three circular complications configuration, you can also assign a Siri icon that invokes Siri AI.\n\nwatchOS 27.3 is currently in beta and expected to be released officially in December.\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/18/siri-modular-apple-watch-face-gains-two-new-styles-with-watchos-27-3/",
+      "publishedAt": "2026-11-19T00:49:22.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-9f7421192feae1fb:en",
+      "sourceId": "techcrunch-9f7421192feae1fb",
+      "lang": "en",
+      "title": "Microsoft CEO Satya Nadella explains why he asked 60K employees to quit",
+      "summary": "Microsoft CEO Satya Nadella explained why he offered buyouts to 60,000 of his employees in October, essentially urging them to voluntarily quit, rather than reducing the workforce via another massive layoff. The short answer is AI, but not in the way you might expect.",
+      "body": "Microsoft CEO Satya Nadella explained Wednesday why he offered buyouts to 60,000 of his employees in October, essentially urging them to voluntarily quit instead of reducing the workforce via another massive layoff.\n\nShort answer: AI, but not, he insists, in the way you might expect. He’s not saying he’s replacing employees with AI, especially software engineers. He’s saying he’s reorganizing Microsoft into a company where everyone uses AI to do their work, and their jobs become focused on managing that AI.\n\nThe buyout was “to make sure that at least everyone felt like they had agency in making choices,” he told Andrew Ross Sorkin during the DealBook Summit.\n\n“Let’s take software engineering. We went from, ‘Well, we don’t buy that AI can ever do software.’ To suddenly, ‘Wow, it can do all software, and why do we need software engineers?’ To now rediscovering that software engineering is very much alive and, in fact, is going to thrive, except the way the team is organized and the work that a software engineer does has now got a new operating point,” he explained.\n\nFor some people, “that reorganization and change is sort of hard, right?” he added, “but, I mean, it has to be done.”\n\nHe offered the example of the team that builds Cowork, the AI agent in Microsoft 365 apps. He said the team consists of just 11 developers who have mastered using AI to do their jobs. “They build a software factory that builds the product. They don’t build the product.”\n\nHe believes that every employee will one day similarly become a manager of agents, rather than a person directly doing the work. “That level of direction is what, by the way, is going to happen in all jobs.”\n\nBut Microsoft, as a 51-year-old company, didn’t grow up as an AI-first company. “So the question is, how quickly can an incumbent transform the work, the workflow, and the work artifact, and with all the wage support that goes with it?” he said. “It’s going to take a bit more time than anyone expects. And there is going to be in all of this, you know, people who may say, ‘Hey, I have some other choices I want to make.’”\n\nWhen asked about this same topic — why ask 60,000 people to voluntarily resign — last week by Gergely Orosz on his The Pragmatic Engineer podcast , Nadella further explained, “We have created enormous anxiety in people sort of feeling that they don’t have control of their own destiny because the way we have talked about this AI revolution.”\n\nHe called out talk about the singularity (the hypothetical point at which AI surpasses human intelligence) and predictions that AI will take away all jobs. “All of that leads anyone who even wants to change to be sort of anxious … You have to sort of walk the hard walk of really making the structural changes, getting people slotted, giving them opportunity.”\n\nIn other words, the buyout was the message to employees: You can get with the new AI-first program, which will radically change your job, or you choose to get on with your life. Elsewhere.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/11/18/microsoft-ceo-satya-nadella-explains-why-he-asked-60k-employees-to-quit/",
+      "publishedAt": "2026-11-19T00:42:56.000Z",
+      "categories": [
+        "tecnologia-general",
+        "windows",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-19e15ec568bcefe7:en",
+      "sourceId": "techcrunch-19e15ec568bcefe7",
+      "lang": "en",
+      "title": "Amidst fears of AI cyberattacks, Satya Nadella says lots of critical infrastructure is ‘unpatchable’",
+      "summary": "The Microsoft CEO downplayed the recent Outlook outage while noting that AI was causing both opportunities and new challenges for securing much of the connected world.",
+      "body": "During his appearance at The New York Times’ DealBook Summit on Wednesday, Microsoft CEO Satya Nadella lamented the fact that a lot of America’s software systems — including those governing everyday hardware and transportation systems — suffer from unfixable software vulnerabilities that, in the age of AI-aided cyberattacks, are just waiting to be exploited.\n\n“Remember, there is a lot of stuff in our critical infrastructure that’s unpatchable,” Nadella said. “I mean, think about all the firmware and the chillers [a cooling device often used in data centers] and the HVAC systems everywhere else. So all of that, by the way, they’re on the internet.”\n\nIn other words: The smartification of the economy, in which much of the world’s “dumb” devices were hooked up to the internet, is now causing tremendous headaches.\n\nThe conversation took place against the backdrop of a wave of recent large-scale outages — including one involving Microsoft Outlook. Others have involved the NSA, the FFA, and Apple. Concerns have swirled that these outages are the result of cyberattacks, although officials have denied those claims. Still, the reality of AI-aided cyberattacks is spurring companies to find new strategies for vulnerability discovery and remediation.\n\nNadella touched briefly on the recent Outlook situation, noting that the global inconvenience was the result of a “latent bug” that led to a “perfect storm.”\n\n“We put out an incident response, and we’re going to obviously take all of the learnings, both upstream architectural, as well as operational, and fix that,” he added.\n\n“Somebody was telling me about sort of even the transportation systems and the amount of stuff that’s discoverable but with unpatchable firmware,” Nadella also added on the topic of vulnerable systems. “So we’ll have to really modernize for sure … and then we will have to assess what the threat vector looks like, what our own ability to both detect and then defend in real time looks like.”\n\nNadella made a broader point as well, which is that the process of patching software vulnerabilities has escalated to match the speed of potential exploitation, but that this has caused more problems.\n\n“We now have a very powerful tool that finds vulnerabilities,” he said. However, companies used to have more time to test those patches, understand a situation, and deploy them, he said. At the same time, AI has made sophisticated cyberattacks much easier to enact.\n\n“The patch [now] needs to go instantly from being available to being patched in production, because it’s being exploited in the wild, right? So that’s going to create instability.”",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/11/18/amidst-fears-of-ai-cyberattacks-satya-nadella-says-lots-of-critical-infrastructure-is-unpatchable/",
+      "publishedAt": "2026-11-18T23:45:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "windows",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-dbb2e1e54acf161f:en",
+      "sourceId": "the-verge-dbb2e1e54acf161f",
+      "lang": "en",
+      "title": "The nation’s largest school districts consider ditching Google Search",
+      "summary": "New York, Los Angeles, and Chicago schools are considering Google alternatives after the company said it will disable Search for schools that opt out of its AI features, according to The New York Times. Starting next year, schools will not have the option to disable Gemini-powered features without also disabling Search. Chris Phillips, Google's vice […]",
+      "body": "New York, Los Angeles, and Chicago schools are considering Google alternatives after the company said it will disable Search for schools that opt out of its AI features, according to The New York Times . Starting next year, schools will not have the option to disable Gemini-powered features without also disabling Search. Chris Phillips, Google's vice president of education, told the Times that, \"Search and AI are deeply integrated,\" and that schools that turn off Google's AI features \"will not have access to Search.\"\n\nMany elected officials, including New York City Mayor Zohran Mamdani and Senator Bernie Sanders, responded harshly, calling Go …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1037151/school-districts-ditching-google",
+      "publishedAt": "2026-11-18T23:18:35.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-e653f8087c5c4e78:en",
+      "sourceId": "techcrunch-e653f8087c5c4e78",
+      "lang": "en",
+      "title": "Satya Nadella predicts AI agents will reshuffle the economics of the web",
+      "summary": "Microsoft's CEO says AI agents could disrupt advertising-driven business models, forcing companies like Amazon to rethink how they compete for customers.",
+      "body": "Posted:\n\nMicrosoft CEO Satya Nadella predicts that the rise of AI agents is going to reshape the economics of the internet, impacting the business models of the companies that rely on advertising and what he referred to as “human web” traffic.\n\nSpeaking at The New York Times DealBook Summit on Wednesday, the tech executive argued that the shift to an agentic web could change which companies pay others for traffic and for transactions, similar to how the transition from web portals like Yahoo to search engines like Google did years ago.\n\n“The current aggregators who have a business model which was for the human web will get, in some sense, reshuffled,” said Nadella. “And if you were monetizing ads because of the eyeballs, you now have to probably get down to essentially maybe CPC [cost-per-click] wins; maybe it’s more transactional,” he continued. “And so if you don’t accept the agent, somebody else will.”\n\nThe discussion turned to Amazon and its decision to block AI agents from accessing its retail website, preventing them from browsing its catalog and making purchases on behalf of their users. Nadella suggested that companies trying to protect their existing business models could lose out to others that are more willing to embrace the AI agents. For instance, if Amazon continues blocking agents, another shopping platform such as Shopify, could allow them, and gain an advantage.\n\n“I think this is going to be interesting,” he said, speaking to the changing models. “It’s the same thing that’s happening in other categories, right? Which is, if you’re in love with a particular business model, you have to kind of scramble,” he said.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/11/18/satya-nadella-predicts-ai-agents-will-reshuffle-the-economics-of-the-web/",
+      "publishedAt": "2026-11-18T22:58:11.000Z",
+      "categories": [
+        "tecnologia-general",
+        "windows",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "9to5mac-6ea2b5aa44f14ac0:en",
       "sourceId": "9to5mac-6ea2b5aa44f14ac0",
       "lang": "en",
@@ -5635,22 +5718,6 @@
       "publishedAt": "2026-11-18T21:58:36.000Z",
       "categories": [
         "apple",
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-fa31db4294bc9ce0:en",
-      "sourceId": "techcrunch-fa31db4294bc9ce0",
-      "lang": "en",
-      "title": "Palmer Luckey warns AI-powered cyberattacks are outpacing defenses: ‘It’s time to start running’",
-      "summary": "The Anduril co-founder says outdated technology is leaving systems vulnerable to a new wave of AI-enabled attacks.",
-      "body": "AI-powered cyberattacks are moving faster than outdated technology systems can defend against them, Palmer Luckey warned at The New York Times DealBook Summit on Wednesday. Addressing the recent spate of tech outages, the Oculus founder and Anduril Industries co-founder argued that older systems are struggling to keep pace with the new hacking capabilities enabled by AI and warned it was time to quicken the pace of securing our defenses.\n\n“We’re seeing the natural effects of a lot of these advanced AI tools allowing for the creation of various exploits,” he said.\n\nWhile government officials largely attributed the latest set of technical issues to companies rushing to patch their systems to protect against the new vulnerabilities AI has discovered, Luckey focused on the underlying security challenges facing organizations using outdated technology.\n\nLuckey explained that U.S. adversaries are currently exploiting the mismatch between new attack capabilities and our defense capabilities. These attacks are being carried out for both strategic and financial reasons, and North Korea was particularly involved, he added.\n\nThe interviewer, Andrew Ross Sorkin, noted that U.S. Vice President J.D. Vance had canceled his appearance at the Times’ conference this week because of the recent tech outages, saying he now had to attend meetings about the matter.\n\nGiven the situation, Sorkin asked Luckey how worried we should be about all this.\n\n“It depends on how well prepared you are,” was Luckey’s answer. (He then ominously warned, “You guys are going to find out what’s going on soon enough.”)\n\nThe tech executive argued that AI could ultimately give defenders the upper hand, but they’d have to move more quickly.\n\n“In the long run, the advantages are going to accrue to the side that is most effectively using AI for defense,” Luckey said. “With the people who say that everything can be hacked — they are right, for now. That actually may be the case with certain new techniques that are coming along. But as of right now, there’s a mismatch between the attackers who are very fast-moving and using technology and old, outdated systems that are not able to adopt technology as quickly as it is developed,” Luckey continued.\n\n“And I think … people are going to have to pick up the pace,” he said. “It’s time to start running.”",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/11/18/palmer-luckey-warns-ai-powered-cyberattacks-are-outpacing-defenses-its-time-to-start-running/",
-      "publishedAt": "2026-11-18T21:34:13.000Z",
-      "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
       ]
@@ -5685,40 +5752,6 @@
       "categories": [
         "tecnologia-general",
         "windows"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-ae9e0d8892eeaaeb:en",
-      "sourceId": "9to5mac-ae9e0d8892eeaaeb",
-      "lang": "en",
-      "title": "Apple among the companies facing pressure from US senators over ‘nudify’ apps",
-      "summary": "The Guardian reports that three US senators have sent letters to the CEOs of Apple, Google, and Meta, demanding answers about their failure to prevent access to AI-powered ‘nudify’ apps. Here are the details. more…",
-      "body": "The Guardian reports that three US senators have sent letters to the CEOs of Apple, Google, and Meta, demanding answers about their failure to prevent access to AI-powered ‘nudify’ apps. Here are the details.\n\nLast month, Apple updated its App Store rules in an attempt to crack down on apps that enable users to generate nonconsensual nude images.\n\nAccording to the updated rules, apps that allow users to create AI-generated content must include safeguards against abuse, including tools to filter objectionable material, report offensive content, and block abusive users.\n\nApple also warns that apps used primarily for pornographic content or the objectification of real people may be removed from the App Store without notice.\n\nWhile definitely well-intended, Apple’s changes came amid growing reports of AI-powered nudify apps, which easily allow users to generate nonconsensual intimate images.\n\nTwo months before these changes, Apple removed an app that allowed users to create pornographic deepfakes of real people after WIRED reached out for comment, which in turn came one month after San Francisco City Attorney David Chiu demanded that Apple and Google remove several nudify apps from their app stores.\n\nApple also removed several apps following investigations by the Tech Transparency Project (TTP), which published reports in January and April revealing that such apps were widely available on the App Store, sometimes even appearing in sponsored search results.\n\nThroughout these investigations, Apple has maintained that nudify apps have always been prohibited under its App Review Guidelines, and that it proactively rejects and removes apps that violate its policies, including those flagged through user reports.\n\nApple, of course, is not alone in this challenge, with Google facing similar criticism over their availability on the Play Store, and Meta coming under scrutiny for allowing developers to advertise these apps on Facebook and Instagram, as highlighted in the WIRED report mentioned above.\n\nWhich brings us to today’s report from The Guardian .\n\nAccording to The Guardian ’s exclusive report , “three Senate Democrats sent letters to tech CEOs saying safeguards against nudification apps are insufficient on their platforms.”\n\nFrom the report:\n\nA trio of US Senators say Apple and Google are failing to effectively detect and remove apps that can be used to generate nonconsensual nude or pornographic imagery. They also say Meta is continuing to profit off of ads for these so-called nudification apps that “victimize women and girls worldwide”.\n\nThe senators, namely Ron Wyden of Oregon, Ed Markey of Massachusetts, and Ben Luján of New Mexico, claim that in addition to failing to remove these apps, the companies may actually be profiting from their distribution and promotion.\n\nCommenting on the letter, both Google and Meta said they prohibit such apps or their promotion and work to detect and remove violations from their platforms, broadly echoing what Apple has repeatedly stated when reached for comment in the past over these same issues.\n\nHowever, Wyden’s office argues that simply reaffirming, or in Apple’s case, updating these policies, means little if the companies continue to struggle to enforce them.\n\nFrom The Guardian ’s report:\n\nKeith Chu, the chief communications adviser and deputy policy director to Wyden, said that clarifying policies is not the same thing as enforcing them. Despite the companies reaffirming the prohibition of these apps, they continue to proliferate across Apple and Google app stores or be promoted in ads on Meta platforms, he added.\n\nIn its latest investigation, published just last month , TTP found 135 apps capable of generating nude or pornographic imagery on the App Store and the Play Store, using accounts registered to 13-year-old boys.\n\nAdditionally, researchers found that even accounts configured with parental controls were able to download these apps without requiring parental approval.\n\nDespite Apple and Google removing the apps identified in the investigation, The Guardian noted that these apps continued to work on devices where they had already been installed.\n\nNow, Senator Wyden warns that Congress may need to step in if the companies fail to do a better job of cracking down on these apps.\n\nTo read The Guardian ’s full report, follow this link .",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/18/apple-among-the-companies-facing-pressure-from-us-senators-over-nudify-apps/",
-      "publishedAt": "2026-11-18T20:05:10.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "apps-accesibles",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-7c7064820ab13631:en",
-      "sourceId": "techcrunch-7c7064820ab13631",
-      "lang": "en",
-      "title": "Snapchat now lets developers build AR Lenses with AI assistants like Claude Code and Cursor",
-      "summary": "Lens creators can describe the Lens they want in plain language, and their AI assistant handles the process from start to finish, Snapchat says.",
-      "body": "Snapchat announced on Wednesday that it’s giving Lens creators the ability to build Lenses using the AI coding assistants they already use, like Claude Code, Cursor, and Codex. Snapchat Lenses, which are a core part of the social network’s platform, are AR effects that let users alter their appearance, add digital objects to their surroundings, or interact with animated experiences through the camera.\n\nThe company is introducing Easy Lens CLI, which builds on its existing Easy Lens tool , which lets creators generate Lenses from a single prompt on the web and mobile. Easy Lens CLI brings that same idea into developers’ existing workflows, allowing AI assistants to handle the technical work while creators focus on the vision for the Lens itself.\n\nThe launch indicates that Snapchat is looking to lower the barrier to creating AR content, while making its platform more accessible to developers who are increasingly using AI coding assistants. Instead of requiring creators to learn how to use Snapchat’s own development tools, the company is bringing Lens creation into the AI coding workflows they already use, which could in turn expand the pool of people who build for Snapchat.\n\nDevelopers enrolled in Snapchat’s Lens+ Payouts program can earn from the Lenses they create with Easy Lens CLI. Snapchat says it paid out $1.8 million to Lens+ community creators last month.\n\nLens creators can describe the Lens they want in plain language, and their AI assistant handles the process from start to finish, Snapchat says. That includes building with more than 100 AR building blocks and 50 AI asset generators, generating previews, and publishing them to Snapchat and tracking their performance.\n\nWith Easy Lens CLI, Snapchat says developers can create everything from Web Lens games with leaderboards to camera effects and beauty filters.\n\nAI assistants can generate assets, build and test Lenses, address errors, and send updated versions directly to the creator’s phone. The new capability can take a game from an initial idea to a published Lens in a single day, without developers having to write code themselves, Snapchat says.\n\nThe tool is aimed at different types of creators. The company notes that game developers can bring existing browser games to Snapchat as Web Lenses, while AI creators can use assets from their preferred tools to build Lenses in their own style. Additionally, agencies and brands can turn existing campaign videos, images, and other brand assets into AR experiences with less production time.\n\nEasy Lens CLI runs on Mac, Windows, and Linux.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/11/18/snapchat-now-lets-developers-build-ar-lenses-with-ai-coding-assistants-like-claude-code-and-cursor/",
-      "publishedAt": "2026-11-18T19:56:39.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
       ]
     },
     {
@@ -5802,22 +5835,6 @@
     },
     {
       "kind": "news",
-      "id": "the-verge-0080d677072766e1:en",
-      "sourceId": "the-verge-0080d677072766e1",
-      "lang": "en",
-      "title": "The first Nvidia RTX Spark mini PCs launch today from Asus, Dell, and MSI",
-      "summary": "After the first RTX Spark laptops launched earlier this year, Nvidia's RTX Spark N1X chip is also now available in desktops from Asus, Dell, and MSI. More RTX Spark desktops are coming later from Acer, Gigabyte, and HP, while Microsoft's Surface RTX Spark Dev Box is slated to start shipping this month. The new mini […]",
-      "body": "After the first RTX Spark laptops launched earlier this year, Nvidia's RTX Spark N1X chip is also now available in desktops from Asus, Dell, and MSI . More RTX Spark desktops are coming later from Acer, Gigabyte, and HP, while Microsoft's Surface RTX Spark Dev Box is slated to start shipping this month. The new mini PCs include a 6144-core Nvidia Blackwell RTX GPU, 20-core Nvidia Grace CPU, and up to 128GB of memory. That high-end hardware comes with a price to match - Asus's ProArt GR1X starts at $4,499 for a configuration with 64GB of memory and 1TB of storage.\n\nLike the RTX Spark laptops that compete with the MacBook Pro and the DGX Sp …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1036880/nvidia-rtx-spark-ai-mini-pc-desktops",
-      "publishedAt": "2026-11-18T18:34:55.000Z",
-      "categories": [
-        "tecnologia-general",
-        "windows"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "ars-technica-00af7436ada1d3a9:en",
       "sourceId": "ars-technica-00af7436ada1d3a9",
       "lang": "en",
@@ -5827,22 +5844,6 @@
       "sourceName": "Ars Technica",
       "originalUrl": "https://arstechnica.com/gaming/2026/11/will-wrights-next-simulation-will-use-ai-to-mine-content-from-your-memories/",
       "publishedAt": "2026-11-18T18:10:33.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-341e01a00b75011f:en",
-      "sourceId": "techcrunch-341e01a00b75011f",
-      "lang": "en",
-      "title": "Google’s AI feature in Search gets its own incognito mode",
-      "summary": "Google's new temporary threads let users have conversations in AI Mode without adding them to their search history or influencing future recommendations.",
-      "body": "Google’s search engine has long offered an incognito mode for all those search queries you don’t want logged or associated with your account. Now, Google’s AI Mode in Search is getting a similar feature. In a blog post , the company announced a new feature that brings “temporary threads” to AI Mode, where the conversations you have won’t be resurfaced later in areas like your search history or recommendations.\n\nMany leading AI chatbots already offer the option for temporary chats, Google Gemini included. However, there was not yet an option to have a temporary chat when you’re searching Google and are dropped into its conversational interface, known as AI Mode.\n\nGoogle says that users won’t have to adjust their settings to take advantage of the new option. Instead, they’ll be able to click a temporary threads icon in the upper right corner of AI Mode to engage in a temporary chat. This essentially works the same as a temporary chat would in the stand-alone Gemini chatbot.\n\nThe option could be convenient to use at those times when you start digging deeper into a particular topic via AI Mode and realize that you don’t want the discussion to become a part of your search history because of its personal nature.\n\nOnce the temporary thread is started, the session becomes detached from your account, Google says. This means that the responses the AI provides won’t be informed by past preferences, nor will they impact future personalization. That could also be useful for those times when you want to learn about something as more of a one-off, but don’t want Google to start to think of the topic as one of your main interests.\n\nWhen you close out of the thread, you will return to searching as usual.\n\nThe company says the option to engage in temporary chats in AI Mode is rolling out globally on desktop and mobile across all supported languages.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/11/18/googles-ai-feature-in-search-gets-its-own-incognito-mode/",
-      "publishedAt": "2026-11-18T18:04:05.000Z",
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"

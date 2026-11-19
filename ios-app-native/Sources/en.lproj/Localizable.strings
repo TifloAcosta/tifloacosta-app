@@ -901,3 +901,5 @@
 "Detener reproducción de lista" = "Stop playlist playback";
 "Canción %d de %d: %@" = "Song %d of %d: %@";
 "Esta canción no se pudo reproducir. Se conserva en tu lista." = "This song could not be played. It remains in your playlist.";
+"Guardar ecualización para lista %@" = "Save equalizer settings for playlist %@";
+"Quitar ecualización de lista %@" = "Remove equalizer settings from playlist %@";

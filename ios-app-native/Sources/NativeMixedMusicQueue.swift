@@ -10,12 +10,14 @@ final class NativeMixedMusicQueue: ObservableObject {
     @Published var error: String?
 
     private var localURLs: [UUID: URL] = [:]
+    private var playlistID: UUID?
     private var playbackGeneration = 0
     private var pendingRemoteTask: Task<Void, Never>?
 
-    func play(entries: [MusicPlaylistEntry], localURLs: [UUID: URL]) {
+    func play(entries: [MusicPlaylistEntry], playlistID: UUID, localURLs: [UUID: URL]) {
         stopPlaying()
         self.entries = entries
+        self.playlistID = playlistID
         self.localURLs = localURLs
         currentIndex = 0
         error = nil
@@ -40,6 +42,7 @@ final class NativeMixedMusicQueue: ObservableObject {
         stopPlaying()
         entries = []
         localURLs = [:]
+        playlistID = nil
         currentIndex = -1
     }
 
@@ -78,7 +81,8 @@ final class NativeMixedMusicQueue: ObservableObject {
                     continue
                 }
                 NativeMusicPlayer.shared.onPlaybackFinished = finished
-                NativeMusicPlayer.shared.play(name: entry.title, url: url, queue: [(name: entry.title, url: url)])
+                NativeMusicPlayer.shared.play(name: entry.title, url: url,
+                    queue: [(name: entry.title, url: url)], playlistID: playlistID)
             case .appleMusic:
                 guard let remoteID = entry.appleMusicSongId, !remoteID.isEmpty else {
                     currentIndex += 1

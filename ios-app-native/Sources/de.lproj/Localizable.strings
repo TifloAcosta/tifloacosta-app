@@ -899,3 +899,5 @@
 "Detener reproducción de lista" = "Playlist-Wiedergabe stoppen";
 "Canción %d de %d: %@" = "Titel %d von %d: %@";
 "Esta canción no se pudo reproducir. Se conserva en tu lista." = "Dieser Titel konnte nicht abgespielt werden. Er bleibt in deiner Playlist.";
+"Guardar ecualización para lista %@" = "Equalizer für Playlist %@ speichern";
+"Quitar ecualización de lista %@" = "Equalizer für Playlist %@ entfernen";

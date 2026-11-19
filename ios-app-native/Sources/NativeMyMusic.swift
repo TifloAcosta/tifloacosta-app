@@ -743,10 +743,17 @@ struct NativeMyMusicScreen: View {
                 ForEach(library.playlists) { playlist in
                     Text("\(playlist.name), \(library.playlistEntries(playlist).count) canciones")
                     Button("Reproducir lista \(playlist.name)") {
-                        mixedQueue.play(entries: library.playlistEntries(playlist), localURLs: Dictionary(
+                        mixedQueue.play(entries: library.playlistEntries(playlist), playlistID: playlist.id, localURLs: Dictionary(
                             uniqueKeysWithValues: library.files.map { ($0.id, library.audioURL(for: $0)) }))
                     }
                     .disabled(library.playlistEntries(playlist).isEmpty)
+                    Button(MusicLocalized.format("Guardar ecualización para lista %@", playlist.name)) {
+                        player.saveForPlaylist(playlist.id)
+                    }
+                    Button(MusicLocalized.format("Quitar ecualización de lista %@", playlist.name)) {
+                        player.removePlaylistOverride(playlist.id)
+                    }
+                    .disabled(!player.hasPlaylistOverride(playlist.id))
                     ForEach(library.playlistEntries(playlist)) { entry in
                         switch entry.provider {
                         case .appleMusic:

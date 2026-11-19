@@ -899,3 +899,5 @@
 "Detener reproducción de lista" = "Parar reprodução da lista";
 "Canción %d de %d: %@" = "Música %d de %d: %@";
 "Esta canción no se pudo reproducir. Se conserva en tu lista." = "Não foi possível reproduzir esta música. Ela permanece na sua lista.";
+"Guardar ecualización para lista %@" = "Guardar equalização para a lista %@";
+"Quitar ecualización de lista %@" = "Remover equalização da lista %@";

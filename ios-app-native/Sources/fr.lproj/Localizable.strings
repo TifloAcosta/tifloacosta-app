@@ -899,3 +899,5 @@
 "Detener reproducción de lista" = "Arrêter la lecture de la playlist";
 "Canción %d de %d: %@" = "Morceau %d sur %d : %@";
 "Esta canción no se pudo reproducir. Se conserva en tu lista." = "Ce morceau n'a pas pu être lu. Il reste dans votre playlist.";
+"Guardar ecualización para lista %@" = "Enregistrer l'égalisation pour la playlist %@";
+"Quitar ecualización de lista %@" = "Supprimer l'égalisation de la playlist %@";

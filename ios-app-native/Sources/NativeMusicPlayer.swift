@@ -305,7 +305,14 @@ final class NativeMusicPlayer: ObservableObject {
 
     func toggle() {
         guard file != nil else { return }
-        if isPlaying { node.pause() } else { node.play() }
+        if isPlaying {
+            node.pause()
+        } else {
+            NativeReaderPlaybackBridge.pauseActiveReader?()
+            NativeRemotePlaybackOwner.claim(.music)
+            registerRemoteCommands()
+            node.play()
+        }
         isPlaying.toggle()
         updateNowPlaying()
     }
@@ -326,6 +333,9 @@ final class NativeMusicPlayer: ObservableObject {
         startFrame = min(file.length - 1, AVAudioFramePosition(target * file.processingFormat.sampleRate))
         do {
             try schedule(from: startFrame)
+            NativeReaderPlaybackBridge.pauseActiveReader?()
+            NativeRemotePlaybackOwner.claim(.music)
+            registerRemoteCommands()
             node.play()
             isPlaying = true
             position = target

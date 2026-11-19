@@ -36,3 +36,18 @@ test('reader releases remote controls without removing music handlers', () => {
   assert.match(music, /NativeReaderPlaybackBridge\.pauseActiveReader\?\(\)/);
   assert.match(reader, /NativeReaderPlaybackBridge\.pauseActiveReader = \{ if speech\.isPlaying \{ pausePlayback\(\) \} \}/);
 });
+
+test('resuming paused music takes audio and headset control back from the reader', () => {
+  const toggle = music.match(/func toggle\(\) \{([\s\S]*?)\n    \}/)?.[1] ?? '';
+  const resumeBranch = toggle.split('} else {')[1] ?? '';
+  assert.match(resumeBranch, /NativeReaderPlaybackBridge\.pauseActiveReader\?\(\)/);
+  assert.match(resumeBranch, /NativeRemotePlaybackOwner\.claim\(\.music\)/);
+  assert.match(resumeBranch, /registerRemoteCommands\(\)/);
+});
+
+test('seeking from paused music reacquires playback control before audio starts', () => {
+  const skip = music.match(/func skip\(seconds: TimeInterval\) \{([\s\S]*?)\n    \}/)?.[1] ?? '';
+  assert.match(skip, /NativeReaderPlaybackBridge\.pauseActiveReader\?\(\)/);
+  assert.match(skip, /NativeRemotePlaybackOwner\.claim\(\.music\)/);
+  assert.ok(skip.indexOf('NativeRemotePlaybackOwner.claim(.music)') < skip.indexOf('node.play()'));
+});

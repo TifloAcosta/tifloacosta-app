@@ -446,6 +446,8 @@ private final class NativeMusicLibrary: ObservableObject {
 struct NativeMyMusicScreen: View {
     @StateObject private var library = NativeMusicLibrary()
     @StateObject private var player = NativeMusicPlayer()
+    @StateObject private var appleMusic = NativeAppleMusicService()
+    @State private var appleMusicQuery = ""
     @State private var isImporting = false
     @State private var isImportingFolder = false
     @State private var searchText = ""
@@ -472,6 +474,38 @@ struct NativeMyMusicScreen: View {
 
     var body: some View {
         List {
+            Section("Apple Music") {
+                if !appleMusic.isAuthorized {
+                    Button("Conectar Apple Music") {
+                        Task { await appleMusic.requestAuthorization() }
+                    }
+                    Text("Opcional. No necesitas una cuenta de Apple Music para escuchar tus archivos personales.")
+                } else {
+                    Text(appleMusic.subscriptionAvailable ? "Apple Music: reproducción disponible" : "Apple Music: reproducción no disponible con esta cuenta")
+                    TextField("Buscar en Apple Music", text: $appleMusicQuery)
+                        .submitLabel(.search)
+                        .onSubmit { Task { await appleMusic.searchCatalog(query: appleMusicQuery) } }
+                    Button("Buscar canciones, álbumes y artistas") {
+                        Task { await appleMusic.searchCatalog(query: appleMusicQuery) }
+                    }
+                    if appleMusic.isLoading { ProgressView("Buscando en Apple Music") }
+                    ForEach(appleMusic.songs, id: \.id) { song in
+                        Button("Reproducir \(song.title), \(song.artistName), Apple Music") {
+                            Task { await appleMusic.playCatalogSong(song) }
+                        }
+                    }
+                    ForEach(appleMusic.albums, id: \.id) { album in
+                        Text("Álbum: \(album.title), \(album.artistName), Apple Music")
+                    }
+                    ForEach(appleMusic.artists, id: \.id) { artist in
+                        Text("Artista: \(artist.name), Apple Music")
+                    }
+                    Button("Pausar Apple Music") { Task { await appleMusic.pause() } }
+                }
+                if let message = appleMusic.message {
+                    Text(message).accessibilityAddTraits(.updatesFrequently)
+                }
+            }
             Section {
                 Button("Importar canciones") { isImporting = true }
                     .accessibilityHint("Selecciona archivos de audio. Los originales se conservarán en su ubicación.")

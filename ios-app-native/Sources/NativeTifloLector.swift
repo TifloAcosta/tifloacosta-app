@@ -2036,6 +2036,7 @@ struct NativeReadingScreen: View {
     @State private var actionMessage: String?
     @AccessibilityFocusState private var focusedFragment: Int?
     @AccessibilityFocusState private var playbackButtonFocused: Bool
+    @AccessibilityFocusState private var continuousBrailleFocused: Bool
     @State private var lastReaderFragment: Int?
     @State private var remoteCommandTokens: [Any] = []
 
@@ -3121,7 +3122,29 @@ struct NativeReadingScreen: View {
             }
     }
 
+    @ViewBuilder
     private var readingContent: some View {
+        if presentationMode == 2 && !latest.body.isEmpty {
+            NativeReaderContinuousBrailleText(
+                text: latest.body,
+                initialOffset: max(0, min(latest.body.count, latest.lastTextOffset ?? readingOffset)),
+                textSize: effectiveTextSize,
+                strongText: effectiveStrongText,
+                onPositionChange: { offset in
+                    guard !speech.isPlaying else { return }
+                    readingOffset = offset
+                    currentPercent = min(100, Int(Double(offset) * 100 /
+                        Double(max(1, textLayout.totalCharacters))))
+                    library.saveTextPosition(document, offset: offset)
+                }
+            )
+            .accessibilityFocused($continuousBrailleFocused)
+            .task {
+                guard brailleFocusText, !speech.isPlaying else { return }
+                await Task.yield()
+                continuousBrailleFocused = true
+            }
+        } else {
         ScrollViewReader { proxy in
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 12) {
@@ -3161,6 +3184,7 @@ struct NativeReadingScreen: View {
                 await Task.yield()
                 restoreManualReadingFocus(using: proxy)
             }
+        }
         }
     }
 

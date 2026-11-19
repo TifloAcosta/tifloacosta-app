@@ -104,6 +104,7 @@ final class NativeAppleMusicPlayer: ObservableObject {
             await connect()
             guard authorized, canPlayCatalog else { return false }
         }
+        guard !Task.isCancelled else { return false }
         do {
             var request = MusicCatalogSearchRequest(term: title, types: [Song.self])
             request.limit = 25
@@ -112,6 +113,7 @@ final class NativeAppleMusicPlayer: ObservableObject {
                 error = MusicLocalized.format("Esta canción ya no está disponible en Apple Music. Se conserva en tu lista.")
                 return false
             }
+            guard !Task.isCancelled else { return false }
             await play(song)
             return isPlaying
         } catch {

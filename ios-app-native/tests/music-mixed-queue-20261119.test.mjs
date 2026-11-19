@@ -56,6 +56,14 @@ test('a saved unavailable remote track returns a failure so the mixed queue can 
   assert.match(audius, /func play\(id: String, title: String\) -> Bool/);
 });
 
+test('a pending remote lookup is cancelled when the playlist is skipped or stopped', () => {
+  const queue = source('NativeMixedMusicQueue.swift');
+  assert.match(queue, /private var pendingRemoteTask: Task<Void, Never>\?/);
+  assert.match(queue, /pendingRemoteTask\?\.cancel\(\)/);
+  assert.match(source('NativeAppleMusic.swift'), /Task\.isCancelled/);
+  assert.match(source('NativeJamendoMusic.swift'), /Task\.isCancelled/);
+});
+
 test('unavailable entries are skipped iteratively and do not recurse across the entire playlist', () => {
   const queue = source('NativeMixedMusicQueue.swift');
   assert.match(queue, /while entries\.indices\.contains\(currentIndex\)/);

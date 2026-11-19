@@ -95,6 +95,7 @@ final class NativeJamendoPlayer: ObservableObject {
                 error = MusicLocalized.format("Esta canción ya no está disponible en Jamendo. Se conserva en tu lista.")
                 return false
             }
+            guard !Task.isCancelled else { return false }
             play(name: track.name, artist: track.artistName, url: streamURL)
             return isPlaying
         } catch {

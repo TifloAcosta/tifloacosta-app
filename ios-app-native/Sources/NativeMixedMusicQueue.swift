@@ -11,6 +11,7 @@ final class NativeMixedMusicQueue: ObservableObject {
 
     private var localURLs: [UUID: URL] = [:]
     private var playbackGeneration = 0
+    private var pendingRemoteTask: Task<Void, Never>?
 
     func play(entries: [MusicPlaylistEntry], localURLs: [UUID: URL]) {
         stopPlaying()
@@ -44,6 +45,8 @@ final class NativeMixedMusicQueue: ObservableObject {
 
     private func stopPlaying() {
         playbackGeneration += 1
+        pendingRemoteTask?.cancel()
+        pendingRemoteTask = nil
         NativeMusicPlayer.shared.onPlaybackFinished = nil
         NativeAppleMusicPlayer.shared.onPlaybackFinished = nil
         NativeAudiusPlayer.shared.onPlaybackFinished = nil
@@ -82,7 +85,7 @@ final class NativeMixedMusicQueue: ObservableObject {
                     continue
                 }
                 NativeAppleMusicPlayer.shared.onPlaybackFinished = finished
-                Task { @MainActor in
+                pendingRemoteTask = Task { @MainActor in
                     guard generation == playbackGeneration else { return }
                     let played = await NativeAppleMusicPlayer.shared.playSaved(id: remoteID, title: entry.title)
                     if !played && generation == playbackGeneration {
@@ -108,7 +111,7 @@ final class NativeMixedMusicQueue: ObservableObject {
                     continue
                 }
                 NativeJamendoPlayer.shared.onPlaybackFinished = finished
-                Task { @MainActor in
+                pendingRemoteTask = Task { @MainActor in
                     guard generation == playbackGeneration else { return }
                     let played = await NativeJamendoPlayer.shared.playSaved(id: remoteID)
                     if !played && generation == playbackGeneration {

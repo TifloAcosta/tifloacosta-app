@@ -103,3 +103,13 @@ Commit de trabajo `d13305e` en la misma rama `feature/mi-musica`:
 - Permanecen pendientes: vista previa/guardar perfiles por voz individual, braille continuo, las diferencias de listas mixtas, perfiles de ecualización, destino de copias, reglas inteligentes, fuentes remotas y auditoría de idiomas en pantallas.
 
 No ejecutar TestFlight todavía.
+
+### Progreso de corrección — perfiles individuales de voz
+
+Commit `358ef47` sobre la misma rama, sin TestFlight:
+
+- Se añadió un perfil opcional por identificador de voz del sistema, con velocidad, tono, modalidad de pausas y cinco duraciones individuales. Una voz sin perfil conserva velocidad y tono normales, sin pausas adicionales. Las preferencias generales antiguas que no sean naturales se migran a la voz que estaba seleccionada, sin extenderlas a las demás.
+- Los ajustes se editan en un borrador. «Escuchar muestra» usa ese borrador, «Guardar cambios de esta voz» lo confirma, «Descartar cambios» recupera el guardado y «Restablecer voz natural» elimina el perfil de esa voz. Hay botón «Detener muestra».
+- El lector consulta el perfil de la voz seleccionada tanto desde la biblioteca como dentro de la obra; las preferencias particulares ya existentes del documento conservan precedencia cuando están configuradas.
+- Se añadieron traducciones de los nuevos controles a EN/PT/FR/IT/DE. **339 pruebas automatizadas iOS y 461 generales aprobadas.** La compilación Swift y la prueba auditiva con VoiceOver siguen pendientes. No declarar el comportamiento validado en iPhone.
+- Continúan abiertos braille continuo y las discrepancias de «Mi música» descritas anteriormente.

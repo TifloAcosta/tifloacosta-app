@@ -73,6 +73,7 @@ final class NativeRadioPlayer: ObservableObject {
             error = "Esta emisora no dispone de una transmisión segura compatible."
             return
         }
+        NativeAudiusPlayer.shared.pauseForOtherAudio()
         NativeMusicPlayer.shared.pauseForReader()
         NativeReaderPlaybackBridge.pauseActiveReader?()
         do {
@@ -98,6 +99,7 @@ final class NativeRadioPlayer: ObservableObject {
             player.pause()
             isPlaying = false
         } else {
+            NativeAudiusPlayer.shared.pauseForOtherAudio()
             NativeMusicPlayer.shared.pauseForReader()
             NativeReaderPlaybackBridge.pauseActiveReader?()
             NativeRemotePlaybackOwner.claim(.radio)
@@ -178,6 +180,7 @@ struct NativeMusicPlatformsScreen: View {
     var body: some View {
         List {
             NavigationLink("Radio musical gratuita") { NativeRadioScreen() }
+            NavigationLink("Audius: música gratuita") { NativeAudiusScreen() }
         }
         .navigationTitle("Plataformas musicales")
     }

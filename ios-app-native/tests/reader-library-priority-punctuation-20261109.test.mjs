@@ -53,7 +53,7 @@ test('La reproducción del sistema respeta cada pausa sin encolar todo el docume
 test('El gesto mágico funciona tanto en el botón principal como en el lector', () => {
   assert.equal((reader.match(/\.accessibilityAction\(\.magicTap\)/g) || []).length, 1);
   assert.match(reader, /if speech\.isPlaying \{ pausePlayback\(\) \}/);
-  assert.match(reader, /else if speech\.isPaused \{\s*speech\.resume\(\)/);
+  assert.match(reader, /\.accessibilityAction\(\.magicTap\) \{\s*if speech\.isPlaying \{ pausePlayback\(\) \}\s*else \{ play\(\) \}/);
 });
 
 test('El detalle de biblioteca se puede seleccionar en tres niveles', () => {

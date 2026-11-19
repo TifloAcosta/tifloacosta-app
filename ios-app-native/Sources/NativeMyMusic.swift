@@ -445,7 +445,7 @@ private final class NativeMusicLibrary: ObservableObject {
 
 struct NativeMyMusicScreen: View {
     @StateObject private var library = NativeMusicLibrary()
-    @StateObject private var player = NativeMusicPlayer()
+    @ObservedObject private var player = NativeMusicPlayer.shared
     @State private var isImporting = false
     @State private var isImportingFolder = false
     @State private var searchText = ""

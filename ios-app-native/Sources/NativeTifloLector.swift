@@ -2201,6 +2201,8 @@ struct NativeReadingScreen: View {
     }
 
     private func play() {
+        NativeMusicPlayer.shared.pauseForReader()
+        NativeRemotePlaybackOwner.claim(.reader)
         if speech.isPaused {
             speech.resume()
         } else if !tracks.isEmpty {
@@ -2212,6 +2214,10 @@ struct NativeReadingScreen: View {
         } else {
             startTextSpeech()
         }
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+            MPMediaItemPropertyTitle: latest.title,
+            MPNowPlayingInfoPropertyPlaybackRate: speech.isPlaying ? 1.0 : 0.0
+        ]
         applySleepTimer()
     }
 
@@ -2299,6 +2305,11 @@ struct NativeReadingScreen: View {
             readingOffset = max(0, min(textLayout.totalCharacters, speech.textCharacterOffset))
         }
         speech.pause()
+        if NativeRemotePlaybackOwner.current == .reader {
+            var info = MPNowPlayingInfoCenter.default().nowPlayingInfo ?? [:]
+            info[MPNowPlayingInfoPropertyPlaybackRate] = 0.0
+            MPNowPlayingInfoCenter.default().nowPlayingInfo = info
+        }
         sleepDeadline = nil
         persistPosition()
     }
@@ -2306,24 +2317,28 @@ struct NativeReadingScreen: View {
     private func registerRemotePlaybackCommands() {
         guard remoteCommandTokens.isEmpty else { return }
         let remoteCommandCenter = MPRemoteCommandCenter.shared()
+        if NativeRemotePlaybackOwner.current == nil { NativeRemotePlaybackOwner.claim(.reader) }
         UIApplication.shared.beginReceivingRemoteControlEvents()
         remoteCommandCenter.playCommand.isEnabled = true
         remoteCommandCenter.pauseCommand.isEnabled = true
         remoteCommandCenter.togglePlayPauseCommand.isEnabled = true
         let playToken = remoteCommandCenter.playCommand.addTarget { _ in
             DispatchQueue.main.async {
+                guard NativeRemotePlaybackOwner.current == .reader else { return }
                 if !speech.isPlaying { play() }
             }
             return .success
         }
         let pauseToken = remoteCommandCenter.pauseCommand.addTarget { _ in
             DispatchQueue.main.async {
+                guard NativeRemotePlaybackOwner.current == .reader else { return }
                 if speech.isPlaying { pausePlayback() }
             }
             return .success
         }
         let toggleToken = remoteCommandCenter.togglePlayPauseCommand.addTarget { _ in
             DispatchQueue.main.async {
+                guard NativeRemotePlaybackOwner.current == .reader else { return }
                 if speech.isPlaying { pausePlayback() } else { play() }
             }
             return .success
@@ -3387,6 +3402,7 @@ struct NativeReadingScreen: View {
             // The live reader owns the current cursor, not a stale saved position.
             // Shortcuts invokes this directly; no stop, seek or navigation occurs.
             NativeQuickBookmarkBridge.saveActiveReader = { addBookmark() }
+            NativeReaderPlaybackBridge.pauseActiveReader = { if speech.isPlaying { pausePlayback() } }
             if !didApplyOpeningMode {
                 didApplyOpeningMode = true
                 if presentationMode == 0 && readingMode == 1 {
@@ -3436,17 +3452,15 @@ struct NativeReadingScreen: View {
         }
         .onDisappear {
             unregisterRemotePlaybackCommands()
+            NativeRemotePlaybackOwner.release(.reader)
             NativeQuickBookmarkBridge.saveActiveReader = nil
+            NativeReaderPlaybackBridge.pauseActiveReader = nil
             persistPosition()
             speech.onSleepExpired = nil
             speech.stop()
         }
         .accessibilityAction(.magicTap) {
             if speech.isPlaying { pausePlayback() }
-            else if speech.isPaused {
-                speech.resume()
-                applySleepTimer()
-            }
             else { play() }
         }
         .accessibilityAction(named: Text("Añadir marca")) { addBookmarkFromReaderSelection() }

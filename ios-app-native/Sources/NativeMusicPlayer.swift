@@ -1,6 +1,36 @@
 import Foundation
 import AVFoundation
 import Combine
+import MediaPlayer
+import UIKit
+
+/// The remote command center is shared by every audio section in the app.
+/// A command must only act on the player that currently owns playback.
+@MainActor
+enum NativeRemotePlaybackOwner {
+    enum Destination: Equatable { case reader, music }
+    private(set) static var current: Destination?
+
+    static func claim(_ destination: Destination) {
+        current = destination
+        let remote = MPRemoteCommandCenter.shared()
+        remote.nextTrackCommand.isEnabled = destination == .music
+        remote.previousTrackCommand.isEnabled = destination == .music
+    }
+
+    static func release(_ destination: Destination) {
+        guard current == destination else { return }
+        current = nil
+        MPRemoteCommandCenter.shared().nextTrackCommand.isEnabled = false
+        MPRemoteCommandCenter.shared().previousTrackCommand.isEnabled = false
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
+    }
+}
+
+@MainActor
+enum NativeReaderPlaybackBridge {
+    static var pauseActiveReader: (() -> Void)?
+}
 
 private struct MusicAudioSnapshot: Codable {
     let name: String
@@ -10,6 +40,7 @@ private struct MusicAudioSnapshot: Codable {
 /// Motor de Mi Música; no comparte sesión ni preferencias con la lectura TTS.
 @MainActor
 final class NativeMusicPlayer: ObservableObject {
+    static let shared = NativeMusicPlayer()
     @Published private(set) var currentName = ""
     @Published private(set) var isPlaying = false
     @Published private(set) var position: TimeInterval = 0
@@ -44,6 +75,79 @@ final class NativeMusicPlayer: ObservableObject {
     private var sleepUntil: Date?
     private var startFrame: AVAudioFramePosition = 0
     private var generation = 0
+    private var remoteCommandTokens: [Any] = []
+
+    private func updateNowPlaying() {
+        guard NativeRemotePlaybackOwner.current == .music, !currentName.isEmpty else { return }
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+            MPMediaItemPropertyTitle: currentName,
+            MPMediaItemPropertyPlaybackDuration: duration,
+            MPNowPlayingInfoPropertyElapsedPlaybackTime: position,
+            MPNowPlayingInfoPropertyPlaybackRate: isPlaying ? 1.0 : 0.0
+        ]
+    }
+
+    private func registerRemoteCommands() {
+        guard remoteCommandTokens.isEmpty else { return }
+        let remoteCommandCenter = MPRemoteCommandCenter.shared()
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+        remoteCommandCenter.playCommand.isEnabled = true
+        remoteCommandCenter.pauseCommand.isEnabled = true
+        remoteCommandCenter.togglePlayPauseCommand.isEnabled = true
+        let play = remoteCommandCenter.playCommand.addTarget { [weak self] _ in
+            Task { @MainActor [weak self] in
+                guard NativeRemotePlaybackOwner.current == .music, let self,
+                      !self.isPlaying else { return }
+                self.toggle()
+            }
+            return .success
+        }
+        let pause = remoteCommandCenter.pauseCommand.addTarget { [weak self] _ in
+            Task { @MainActor [weak self] in
+                guard NativeRemotePlaybackOwner.current == .music, let self,
+                      self.isPlaying else { return }
+                self.toggle()
+            }
+            return .success
+        }
+        let toggle = remoteCommandCenter.togglePlayPauseCommand.addTarget { [weak self] _ in
+            Task { @MainActor [weak self] in
+                guard NativeRemotePlaybackOwner.current == .music else { return }
+                self?.toggle()
+            }
+            return .success
+        }
+        let next = remoteCommandCenter.nextTrackCommand.addTarget { [weak self] _ in
+            Task { @MainActor [weak self] in
+                guard NativeRemotePlaybackOwner.current == .music else { return }
+                self?.next()
+            }
+            return .success
+        }
+        let previous = remoteCommandCenter.previousTrackCommand.addTarget { [weak self] _ in
+            Task { @MainActor [weak self] in
+                guard NativeRemotePlaybackOwner.current == .music else { return }
+                self?.previous()
+            }
+            return .success
+        }
+        remoteCommandTokens = [play, pause, toggle, next, previous]
+    }
+
+    private func unregisterRemoteCommands() {
+        guard remoteCommandTokens.count == 5 else { return }
+        let remoteCommandCenter = MPRemoteCommandCenter.shared()
+        remoteCommandCenter.playCommand.removeTarget(remoteCommandTokens[0])
+        remoteCommandCenter.pauseCommand.removeTarget(remoteCommandTokens[1])
+        remoteCommandCenter.togglePlayPauseCommand.removeTarget(remoteCommandTokens[2])
+        remoteCommandCenter.nextTrackCommand.removeTarget(remoteCommandTokens[3])
+        remoteCommandCenter.previousTrackCommand.removeTarget(remoteCommandTokens[4])
+        remoteCommandTokens = []
+    }
+
+    func pauseForReader() {
+        if isPlaying { toggle() }
+    }
 
     init() {
         engine.attach(node)
@@ -135,6 +239,7 @@ final class NativeMusicPlayer: ObservableObject {
     private func startCurrent() {
         guard queue.indices.contains(index) else { stop(); return }
         do {
+            NativeReaderPlaybackBridge.pauseActiveReader?()
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
             try AVAudioSession.sharedInstance().setActive(true)
             let item = queue[index]
@@ -155,6 +260,9 @@ final class NativeMusicPlayer: ObservableObject {
             if !engine.isRunning { try engine.start() }
             node.play()
             isPlaying = true
+            NativeRemotePlaybackOwner.claim(.music)
+            registerRemoteCommands()
+            updateNowPlaying()
             startTimer()
         } catch {
             self.error = "No se pudo reproducir la canción: \(error.localizedDescription)"
@@ -185,6 +293,7 @@ final class NativeMusicPlayer: ObservableObject {
                 if let audioFile = self.file, let render = self.node.lastRenderTime,
                    let played = self.node.playerTime(forNodeTime: render) {
                     self.position = min(self.duration, Double(self.startFrame) / audioFile.processingFormat.sampleRate + Double(played.sampleTime) / played.sampleRate)
+                    self.updateNowPlaying()
                 }
                 if let until = self.sleepUntil {
                     self.sleepRemaining = max(0, Int(ceil(until.timeIntervalSinceNow)))
@@ -198,6 +307,7 @@ final class NativeMusicPlayer: ObservableObject {
         guard file != nil else { return }
         if isPlaying { node.pause() } else { node.play() }
         isPlaying.toggle()
+        updateNowPlaying()
     }
 
     func next() {
@@ -219,6 +329,7 @@ final class NativeMusicPlayer: ObservableObject {
             node.play()
             isPlaying = true
             position = target
+            updateNowPlaying()
         } catch {
             self.error = error.localizedDescription
         }
@@ -256,6 +367,8 @@ final class NativeMusicPlayer: ObservableObject {
         isPlaying = false
         position = 0
         duration = 0
+        unregisterRemoteCommands()
+        NativeRemotePlaybackOwner.release(.music)
     }
 }
 

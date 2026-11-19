@@ -494,8 +494,10 @@ struct NativeMyMusicScreen: View {
     @StateObject private var player = NativeMusicPlayer()
     @StateObject private var appleMusic = NativeAppleMusicService()
     @StateObject private var audius = NativeAudiusService()
+    @StateObject private var jamendo = NativeJamendoService()
     @State private var appleMusicQuery = ""
     @State private var audiusQuery = ""
+    @State private var jamendoQuery = ""
     @State private var isImporting = false
     @State private var isImportingFolder = false
     @State private var searchText = ""
@@ -522,6 +524,25 @@ struct NativeMyMusicScreen: View {
 
     var body: some View {
         List {
+            Section("Jamendo") {
+                Text("Busca y escucha música de Jamendo sin iniciar sesión. Cada obra conserva las condiciones de su autor.")
+                TextField("Buscar en Jamendo", text: $jamendoQuery)
+                    .submitLabel(.search)
+                    .onSubmit { Task { await jamendo.search(jamendoQuery) } }
+                Button("Buscar en Jamendo") { Task { await jamendo.search(jamendoQuery) } }
+                if jamendo.loading { ProgressView("Consultando Jamendo") }
+                ForEach(jamendo.tracks) { track in
+                    Button("Reproducir \(track.name), \(track.artistName), Jamendo") {
+                        player.stop()
+                        audius.pause()
+                        Task { await appleMusic.pause() }
+                        jamendo.play(track)
+                    }
+                }
+                Button("Pausar Jamendo") { jamendo.pause() }
+                    .disabled(jamendo.playingName == nil)
+                if let message = jamendo.message { Text(message) }
+            }
             Section("Audius") {
                 Text("Catálogo musical gratuito. No necesitas crear una cuenta para buscar canciones.")
                 TextField("Buscar en Audius", text: $audiusQuery)
@@ -532,6 +553,7 @@ struct NativeMyMusicScreen: View {
                 ForEach(audius.tracks) { track in
                     Button("Reproducir \(track.title), \(track.user.name), Audius") {
                         player.stop()
+                        jamendo.pause()
                         Task { await appleMusic.pause() }
                         audius.play(track)
                     }
@@ -557,6 +579,9 @@ struct NativeMyMusicScreen: View {
                     if appleMusic.isLoading { ProgressView("Buscando en Apple Music") }
                     ForEach(appleMusic.songs, id: \.id) { song in
                         Button("Reproducir \(song.title), \(song.artistName), Apple Music") {
+                            audius.pause()
+                            jamendo.pause()
+                            player.stop()
                             Task { await appleMusic.playCatalogSong(song) }
                         }
                         if !library.playlists.isEmpty {
@@ -622,6 +647,9 @@ struct NativeMyMusicScreen: View {
                     ForEach(library.playlistEntries(playlist)) { entry in
                         if entry.provider == .appleMusic {
                             Button("Reproducir \(entry.title), \(entry.artist ?? ""), Apple Music") {
+                                audius.pause()
+                                jamendo.pause()
+                                player.stop()
                                 Task { await appleMusic.playSavedCatalogSong(id: entry.appleMusicSongId ?? "", title: entry.title) }
                             }
                         } else if let localId = entry.localId,

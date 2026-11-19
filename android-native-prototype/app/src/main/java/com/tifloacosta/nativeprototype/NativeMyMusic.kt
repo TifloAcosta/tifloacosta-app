@@ -3,6 +3,7 @@ package com.tifloacosta.nativeprototype
 import android.content.Intent
 import android.content.Context
 import android.net.Uri
+import android.media.MediaPlayer
 import android.provider.OpenableColumns
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -60,6 +61,12 @@ fun NativeMyMusic(onBack: () -> Unit) {
             if (separator > 0) ImportedSong(encoded.substring(0, separator), encoded.substring(separator + 1)) else null
         }.sortedBy { it.title.lowercase() }
     var songs by remember { mutableStateOf(savedSongs()) }
+    var jamendoQuery by remember { mutableStateOf("") }
+    var jamendoTracks by remember { mutableStateOf<List<JamendoSong>>(emptyList()) }
+    var jamendoBusy by remember { mutableStateOf(false) }
+    var jamendoMessage by remember { mutableStateOf<String?>(null) }
+    var jamendoPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
+    DisposableEffect(Unit) { onDispose { jamendoPlayer?.release() } }
     var error by remember { mutableStateOf<String?>(null) }
     var query by remember { mutableStateOf("") }
     var folderName by remember { mutableStateOf("") }
@@ -329,6 +336,37 @@ fun NativeMyMusic(onBack: () -> Unit) {
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         TextButton(onClick = onBack) { Text("Volver") }
         Text("Mi Música", modifier = Modifier.semantics { heading() })
+        Text("Jamendo", modifier = Modifier.semantics { heading() })
+        Text("Música del catálogo Jamendo. No necesitas iniciar sesión para buscar y escuchar.")
+        OutlinedTextField(value = jamendoQuery, onValueChange = { jamendoQuery = it },
+            label = { Text("Buscar en Jamendo") }, modifier = Modifier.fillMaxWidth())
+        Button(onClick = {
+            scope.launch {
+                jamendoBusy = true
+                try {
+                    jamendoTracks = NativeJamendo.search(jamendoQuery)
+                    jamendoMessage = if (jamendoTracks.isEmpty()) "No se encontraron canciones en Jamendo" else null
+                } catch (failure: Exception) {
+                    jamendoTracks = emptyList()
+                    jamendoMessage = "No se pudo consultar Jamendo: ${failure.localizedMessage}"
+                } finally { jamendoBusy = false }
+            }
+        }, enabled = !jamendoBusy) { Text("Buscar canciones en Jamendo") }
+        if (jamendoBusy) Text("Consultando Jamendo")
+        jamendoTracks.forEach { track ->
+            Button(onClick = {
+                try {
+                    player.stop()
+                    jamendoPlayer?.release()
+                    jamendoPlayer = NativeJamendo.start(track) { jamendoMessage = it }
+                    jamendoMessage = "Iniciando ${track.title}, de ${track.artist}, desde Jamendo"
+                } catch (failure: Exception) {
+                    jamendoMessage = "No se pudo iniciar Jamendo: ${failure.localizedMessage}"
+                }
+            }) { Text("Reproducir ${track.title}, ${track.artist}, Jamendo") }
+        }
+        Button(onClick = { jamendoPlayer?.pause() }, enabled = jamendoPlayer != null) { Text("Pausar Jamendo") }
+        jamendoMessage?.let { Text(it) }
         Button(onClick = { picker.launch(arrayOf("audio/*")) }, modifier = Modifier.fillMaxWidth()) {
             Text("Importar canciones")
         }

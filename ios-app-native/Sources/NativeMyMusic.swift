@@ -133,6 +133,9 @@ private final class NativeMusicLibrary: ObservableObject {
     @Published var error: String?
     @Published private(set) var autoBackupDays = UserDefaults.standard.integer(forKey: "mi-musica-auto-backup-days")
     @Published private(set) var lastAutomaticBackup: Date?
+    @Published private(set) var automaticBackupDestinationName = UserDefaults.standard.string(
+        forKey: "mi-musica-auto-backup-destination-name") ?? "Carpeta interna de Mi Música"
+    private let automaticBackupBookmarkKey = "mi-musica-auto-backup-destination-bookmark"
 
     private var directory: URL {
         FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -325,16 +328,61 @@ private final class NativeMusicLibrary: ObservableObject {
         performAutomaticBackupIfDue()
     }
 
+    func chooseAutomaticBackupDestination(_ url: URL) {
+        let accessed = url.startAccessingSecurityScopedResource()
+        defer { if accessed { url.stopAccessingSecurityScopedResource() } }
+        guard accessed else {
+            error = "No se obtuvo permiso para guardar copias en la carpeta seleccionada."
+            return
+        }
+        do {
+            let bookmark = try url.bookmarkData(options: [],
+                includingResourceValuesForKeys: nil, relativeTo: nil)
+            UserDefaults.standard.set(bookmark, forKey: automaticBackupBookmarkKey)
+            UserDefaults.standard.set(url.lastPathComponent,
+                forKey: "mi-musica-auto-backup-destination-name")
+            automaticBackupDestinationName = url.lastPathComponent
+            error = nil
+        } catch {
+            self.error = "No se pudo guardar el destino elegido: \(error.localizedDescription)"
+        }
+    }
+
+    func resetAutomaticBackupDestination() {
+        UserDefaults.standard.removeObject(forKey: automaticBackupBookmarkKey)
+        UserDefaults.standard.removeObject(forKey: "mi-musica-auto-backup-destination-name")
+        automaticBackupDestinationName = "Carpeta interna de Mi Música"
+    }
+
+    private func automaticBackupDirectory() throws -> URL {
+        guard let bookmark = UserDefaults.standard.data(forKey: automaticBackupBookmarkKey) else {
+            return directory.appendingPathComponent("Respaldos", isDirectory: true)
+        }
+        var stale = false
+        let folder = try URL(resolvingBookmarkData: bookmark, options: [],
+            relativeTo: nil, bookmarkDataIsStale: &stale)
+        guard !stale else { throw CocoaError(.fileReadNoPermission) }
+        return folder
+    }
+
+    private func writeAutomaticBackup(_ document: MusicBackupDocument, to folder: URL) throws {
+        let isCustom = UserDefaults.standard.data(forKey: automaticBackupBookmarkKey) != nil
+        let accessed = isCustom ? folder.startAccessingSecurityScopedResource() : false
+        defer { if accessed { folder.stopAccessingSecurityScopedResource() } }
+        guard !isCustom || accessed else { throw CocoaError(.fileWriteNoPermission) }
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        let destination = folder.appendingPathComponent("MiMusica-indice-automatico.json")
+        try Data(document.text.utf8).write(to: destination, options: .atomic)
+    }
+
     func performAutomaticBackupIfDue() {
         guard autoBackupDays > 0 else { return }
         if let previous = lastAutomaticBackup,
            Date().timeIntervalSince(previous) < Double(autoBackupDays) * 86_400 { return }
         guard let document = exportIndex() else { return }
         do {
-            let folder = directory.appendingPathComponent("Respaldos", isDirectory: true)
-            try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
-            let destination = folder.appendingPathComponent("MiMusica-indice-automatico.json")
-            try Data(document.text.utf8).write(to: destination, options: .atomic)
+            let folder = try automaticBackupDirectory()
+            try writeAutomaticBackup(document, to: folder)
             lastAutomaticBackup = Date()
             UserDefaults.standard.set(lastAutomaticBackup, forKey: "mi-musica-last-auto-backup")
         } catch { self.error = "No se pudo guardar la copia automática: \(error.localizedDescription)" }
@@ -515,6 +563,7 @@ struct NativeMyMusicScreen: View {
     @State private var backupDocument: MusicBackupDocument?
     @State private var completeArchiveURL: URL?
     @State private var importingCompleteBackup = false
+    @State private var selectingBackupDestination = false
 
     private var visibleFiles: [MusicLocalFile] {
         let query = searchText.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)
@@ -574,6 +623,18 @@ struct NativeMyMusicScreen: View {
                     choices: ["Desactivada", "Cada 7 días", "Cada 30 días"],
                     selectedIndex: automaticBackupChoice
                 )
+                Text("Destino de copias")
+                if library.automaticBackupDestinationName == "Carpeta interna de Mi Música" {
+                    Text("Carpeta interna de Mi Música")
+                } else {
+                    Text(library.automaticBackupDestinationName)
+                }
+                Button("Elegir destino de copias automáticas") {
+                    selectingBackupDestination = true
+                }
+                Button("Restablecer destino interno") {
+                    library.resetAutomaticBackupDestination()
+                }
                 Text("Las copias automáticas del índice se crean al abrir Mi Música cuando corresponde; no se ejecutan en segundo plano.")
                 Text("Este respaldo conserva el índice y las carpetas, pero no incluye los archivos de audio. Para recuperar música en otro dispositivo tendrás que importar también las canciones.")
             }
@@ -778,6 +839,12 @@ struct NativeMyMusicScreen: View {
         .fileImporter(isPresented: $isImportingFolder, allowedContentTypes: [.folder]) { result in
             switch result {
             case .success(let url): library.importFolder(url)
+            case .failure(let failure): library.error = failure.localizedDescription
+            }
+        }
+        .fileImporter(isPresented: $selectingBackupDestination, allowedContentTypes: [.folder]) { result in
+            switch result {
+            case .success(let url): library.chooseAutomaticBackupDestination(url)
             case .failure(let failure): library.error = failure.localizedDescription
             }
         }

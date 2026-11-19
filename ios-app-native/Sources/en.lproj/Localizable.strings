@@ -891,3 +891,7 @@
 "Esta voz utiliza de nuevo sus ajustes naturales." = "This voice is using its natural settings again.";
 "Velocidad específica del documento" = "Document-specific speed";
 "Tono específico del documento" = "Document-specific pitch";
+"Destino de copias" = "Backup destination";
+"Carpeta interna de Mi Música" = "Internal My Music folder";
+"Elegir destino de copias automáticas" = "Choose automatic backup destination";
+"Restablecer destino interno" = "Restore internal destination";

@@ -30,3 +30,19 @@ test('iOS playlists accept Audius and Jamendo catalog references', () => {
   assert.match(screen, /audius\.playSavedTrack\(/);
   assert.match(screen, /jamendo\.playSavedTrack\(/);
 });
+
+test('local playback from every library collection pauses online providers', () => {
+  const localActions = [
+    'Reproducir archivos locales de',
+    'Reproducir carpeta inteligente',
+    'Reproducir \\(file.name)'
+  ];
+  for (const action of localActions) {
+    const start = screen.indexOf(action);
+    assert.ok(start >= 0, `missing action ${action}`);
+    const body = screen.slice(start, start + 900);
+    assert.match(body, /audius\.pause\(\)/);
+    assert.match(body, /jamendo\.pause\(\)/);
+    assert.match(body, /appleMusic\.pause\(\)/);
+  }
+});

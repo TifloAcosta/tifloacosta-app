@@ -722,6 +722,9 @@ struct NativeMyMusicScreen: View {
                         }
                     }
                     Button("Reproducir archivos locales de \(playlist.name)") {
+                        audius.pause()
+                        jamendo.pause()
+                        Task { await appleMusic.pause() }
                         let items = playlist.trackIds.compactMap { id in
                             library.files.first(where: { $0.id == id })
                         }.map { (name: $0.name, url: library.audioURL(for: $0)) }
@@ -739,6 +742,9 @@ struct NativeMyMusicScreen: View {
                     let matches = library.matchingTracks(for: folder)
                     Text("\(folder.name), criterio: título contiene \(folder.titleContains), \(matches.count) canciones")
                     Button("Reproducir carpeta inteligente \(folder.name)") {
+                        audius.pause()
+                        jamendo.pause()
+                        Task { await appleMusic.pause() }
                         let items = matches.map { (name: $0.name, url: library.audioURL(for: $0)) }
                         if let first = items.first { player.play(name: first.name, url: first.url, queue: items) }
                     }
@@ -753,6 +759,9 @@ struct NativeMyMusicScreen: View {
                     ForEach(visibleFiles) { file in
                         HStack {
                             Button("Reproducir \(file.name)") {
+                                audius.pause()
+                                jamendo.pause()
+                                Task { await appleMusic.pause() }
                                 player.play(
                                     name: file.name,
                                     url: library.audioURL(for: file),

@@ -182,6 +182,21 @@ final class NativeReaderLibrary: ObservableObject {
         return url
     }
 
+    /// DAISY archives are preserved byte-for-byte when imported. A package
+    /// originally named .daisy gets a ZIP extension for external players.
+    func shareableOriginalURL(for document: NativeReadingDocument) throws -> URL {
+        guard let original = originalURL(for: document) else { throw CocoaError(.fileNoSuchFile) }
+        guard latest(document).fileExtension?.lowercased() == "daisy" else { return original }
+        guard Archive(url: original, accessMode: .read) != nil else {
+            throw NativeReaderFormatError.invalidArchive
+        }
+        if original.pathExtension.lowercased() == "zip" { return original }
+        let destination = FileManager.default.temporaryDirectory
+            .appendingPathComponent("DAISY-\(UUID().uuidString).zip")
+        try FileManager.default.copyItem(at: original, to: destination)
+        return destination
+    }
+
     /// Reúne los originales conservados sin alterar la biblioteca.
     /// Los registros antiguos sin original se exportan expresamente como TXT.
     func sharingURLs(for documents: [NativeReadingDocument]) throws
@@ -1381,15 +1396,11 @@ struct NativeReaderLibraryScreen: View {
     }
 
     private func shareDocumentFromLibrary(_ document: NativeReadingDocument) {
-        guard let original = library.originalURL(for: document) else {
-            importError = "No se conserva el documento original para compartirlo."
-            return
+        do {
+            NativeShare.present(url: try library.shareableOriginalURL(for: document))
+        } catch {
+            importError = "No se pudo compartir el documento completo: \(error.localizedDescription)"
         }
-        if document.fileExtension?.lowercased() == "daisy" && original.pathExtension.lowercased() != "zip" {
-            importError = "El paquete DAISY completo no está disponible como ZIP; no se compartirá un archivo incompleto."
-            return
-        }
-        NativeShare.present(url: original)
     }
 
     var body: some View {
@@ -3091,10 +3102,12 @@ struct NativeReadingScreen: View {
     }
 
     private func shareCurrentDocument() {
-        if let original = library.originalURL(for: document) {
-            // For an imported DAISY this is the complete ZIP package, not a
-            // separate text export or a bundle of audio tracks alone.
-            NativeShare.present(url: original)
+        if library.originalURL(for: document) != nil {
+            do {
+                NativeShare.present(url: try library.shareableOriginalURL(for: document))
+            } catch {
+                actionMessage = "No se pudo compartir: \(error.localizedDescription)"
+            }
         } else if tracks.count > 1 {
             do {
                 NativeShare.present(url: try library.exportAudioTracks(document))
@@ -3128,14 +3141,13 @@ struct NativeReadingScreen: View {
         Button(latest.isFavorite == true ? "Quitar de favoritos" : "Añadir a favoritos") {
             library.toggleFavorite(document)
         }
-        if let original = library.originalURL(for: document) {
-            if latest.fileExtension?.lowercased() == "daisy",
-               original.pathExtension.lowercased() == "zip" {
+        if library.originalURL(for: document) != nil {
+            if latest.fileExtension?.lowercased() == "daisy" {
                 Button("Compartir libro DAISY completo (ZIP)") {
-                    NativeShare.present(url: original)
+                    shareCurrentDocument()
                 }
             } else {
-                Button("Compartir documento original") { NativeShare.present(url: original) }
+                Button("Compartir documento original") { shareCurrentDocument() }
             }
         }
         if !latest.body.isEmpty {

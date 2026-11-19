@@ -17,11 +17,11 @@ test("fase 3: el archivo fuente se copia y se elimina junto a la obra", () => {
 test("fase 3: documento original accesible en las acciones de VoiceOver y del lector", () => {
   assert.match(reader, /Button\("Compartir documento"\) \{ shareDocumentFromLibrary\(document\) \}/);
   assert.match(reader, /Button\("Compartir documento original"\)/);
-  assert.match(reader, /NativeShare\.present\(url: original\)/);
+  assert.match(reader, /NativeShare\.present\(url: try library\.shareableOriginalURL\(for: document\)\)/);
 });
 test("fase 3: no confundir texto extraído con archivo de origen", () => {
   assert.match(reader, /Button\("Exportar texto"\)/);
-  assert.match(reader, /No se conserva el documento original para compartirlo/);
+  assert.match(reader, /No se pudo compartir el documento completo/);
 });
 
 test("fase 3: la copia ZIP incluye datos de biblioteca y archivos asociados", () => {

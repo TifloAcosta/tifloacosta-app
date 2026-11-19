@@ -39,6 +39,15 @@ test('voice selection filters unavailable engines and hides system voices when G
   assert.match(settings, /Button\("Cómo instalar más voces del sistema"\)/);
 });
 
+test('Gemini readiness verifies real TTS audio, not just access to the model list', () => {
+  const check = credentials.split('private func checkGeminiConnection() async {')[1]
+    ?.split('    var body: some View')[0] ?? '';
+  assert.match(check, /NativeGeminiSpeech\.generate\("Prueba de voz", voice: "Kore"\)/);
+  assert.doesNotMatch(check, /\/v1beta\/models"/);
+  assert.match(check, /geminiValidated = true/);
+  assert.match(check, /geminiValidated = false/);
+});
+
 test('VoiceOver library detail lives only in the library', () => {
   assert.doesNotMatch(general, /NativeAdjustableChoice\(\s*title: "Detalle de VoiceOver"/);
 });
@@ -60,6 +69,14 @@ test('library actions offer conversion only for text and complete DAISY sharing'
   assert.match(reader, /Button\(audioExportBusy \? "Generando…" : "Convertir y guardar"\)/);
   assert.match(reader, /availableExportEngines/);
   assert.match(reader, /availableExportEngines\.map \{ \$0\.title \}/);
+});
+
+test('a DAISY originally stored with .daisy extension shares a complete ZIP copy', () => {
+  assert.match(reader, /func shareableOriginalURL\(for document: NativeReadingDocument\) throws -> URL/);
+  assert.match(reader, /Archive\(url: original, accessMode: \.read\)/);
+  assert.match(reader, /appendingPathComponent\("[^"]*"\)/);
+  assert.match(reader, /try FileManager\.default\.copyItem\(at: original, to: destination\)/);
+  assert.match(reader, /try library\.shareableOriginalURL\(for: document\)/);
 });
 
 test('playback button explicitly retains VoiceOver focus after a user activation', () => {

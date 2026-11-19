@@ -247,33 +247,27 @@ struct NativeReaderExternalVoiceDetailScreen: View {
         checking = true
         defer { checking = false }
         do {
-            guard let key = try NativeVoiceCredentialStore.get("gemini") else {
+            guard NativeVoiceCredentialStore.hasKey("gemini") else {
+                geminiValidated = false
                 message = "No hay ninguna clave guardada."
                 return
             }
-            var request = URLRequest(url: URL(string:
-                "https://generativelanguage.googleapis.com/v1beta/models")!)
-            request.setValue(key, forHTTPHeaderField: "x-goog-api-key")
-            request.timeoutInterval = 15
-            let (_, response) = try await URLSession.shared.data(for: request)
-            guard let http = response as? HTTPURLResponse else {
-                message = "No se recibió respuesta del proveedor."
+            // Listing Google's models can succeed even if this key cannot
+            // synthesize audio. The readiness check must exercise real TTS.
+            let sample = try await NativeGeminiSpeech.generate("Prueba de voz", voice: "Kore")
+            guard sample.starts(with: Data("RIFF".utf8)) else {
+                message = "Gemini respondió, pero no devolvió audio compatible."
                 return
             }
-            switch http.statusCode {
-            case 200..<300:
-                geminiValidated = true
-                message = "Conexión correcta. Puedes utilizar Gemini para leer documentos y exportar audio."
-            case 401, 403:
-                geminiValidated = false
-                message = "Clave rechazada o sin permisos. Revisa Google AI Studio."
-            case 429:
-                message = "Límite de solicitudes alcanzado. Revisa tu cuota."
-            default:
-                message = "Google respondió con error \(http.statusCode)."
-            }
+            geminiValidated = true
+            message = "Prueba de voz correcta. Gemini está preparado para leer y convertir documentos."
+        } catch NativeGeminiSpeech.Error.refused {
+            geminiValidated = false
+            message = "Google rechazó la clave o sus permisos. Revisa Google AI Studio."
         } catch {
-            message = "No se pudo comprobar la conexión. Revisa Internet e inténtalo de nuevo."
+            // A temporary outage or exhausted quota does not erase a key
+            // that has previously passed the actual TTS check.
+            message = "No se pudo generar la muestra de voz: \(error.localizedDescription)"
         }
     }
 

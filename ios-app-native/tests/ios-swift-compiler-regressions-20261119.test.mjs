@@ -20,3 +20,9 @@ test('MusicKit authorization uses a conditional block whose execution can contin
   assert.doesNotMatch(file, /guard authorized, canPlayCatalog else\s*\{\s*await connect\(\)/);
   assert.match(file, /if !authorized \|\| !canPlayCatalog\s*\{\s*await connect\(\)/);
 });
+
+test('Jamendo catch updates the player error property, not the caught error', () => {
+  const file = source('NativeJamendoMusic.swift');
+  assert.doesNotMatch(file, /catch\s*\{\s*error\s*=/);
+  assert.match(file, /catch\s*\{\s*self\.error = MusicLocalized\.format\("No se pudo recuperar la canción guardada de Jamendo\."\)/);
+});

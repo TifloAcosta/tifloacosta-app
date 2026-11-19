@@ -93,7 +93,7 @@ final class NativeJamendoPlayer: ObservableObject {
                 return
             }
             play(name: track.name, artist: track.artistName, url: streamURL)
-        } catch { error = MusicLocalized.format("No se pudo recuperar la canción guardada de Jamendo.") }
+        } catch { self.error = MusicLocalized.format("No se pudo recuperar la canción guardada de Jamendo.") }
     }
 
     func play(name: String, artist: String, url: URL) {

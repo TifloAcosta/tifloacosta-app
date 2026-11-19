@@ -14,3 +14,9 @@ test('MusicKit catch does not assign an error message to the caught immutable er
   assert.doesNotMatch(file, /catch\s*\{\s*error\s*=/);
   assert.match(file, /self\.error = "No se pudo reanudar Apple Music\."/);
 });
+
+test('MusicKit authorization uses a conditional block whose execution can continue', () => {
+  const file = source('NativeAppleMusic.swift');
+  assert.doesNotMatch(file, /guard authorized, canPlayCatalog else\s*\{\s*await connect\(\)/);
+  assert.match(file, /if !authorized \|\| !canPlayCatalog\s*\{\s*await connect\(\)/);
+});

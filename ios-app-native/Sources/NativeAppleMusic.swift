@@ -77,7 +77,7 @@ final class NativeAppleMusicPlayer: ObservableObject {
             error = MusicLocalized.format("La referencia guardada de Apple Music no es válida.")
             return
         }
-        guard authorized, canPlayCatalog else {
+        if !authorized || !canPlayCatalog {
             await connect()
             guard authorized, canPlayCatalog else { return }
         }

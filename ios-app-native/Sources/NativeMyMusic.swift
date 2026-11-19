@@ -483,6 +483,9 @@ struct NativeMyMusicScreen: View {
     var body: some View {
         List {
             Section {
+                NavigationLink("Plataformas musicales") { NativeMusicPlatformsScreen() }
+            }
+            Section {
                 Button("Importar canciones") { isImporting = true }
                     .accessibilityHint("Selecciona archivos de audio. Los originales se conservarán en su ubicación.")
                 Button("Importar carpeta desde Archivos o nube") { isImportingFolder = true }

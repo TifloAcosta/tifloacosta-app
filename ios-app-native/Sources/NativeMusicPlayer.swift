@@ -8,7 +8,7 @@ import UIKit
 /// A command must only act on the player that currently owns playback.
 @MainActor
 enum NativeRemotePlaybackOwner {
-    enum Destination: Equatable { case reader, music }
+    enum Destination: Equatable { case reader, music, radio }
     private(set) static var current: Destination?
 
     static func claim(_ destination: Destination) {
@@ -239,6 +239,7 @@ final class NativeMusicPlayer: ObservableObject {
     private func startCurrent() {
         guard queue.indices.contains(index) else { stop(); return }
         do {
+            NativeRadioPlayer.shared.pauseForOtherAudio()
             NativeReaderPlaybackBridge.pauseActiveReader?()
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
             try AVAudioSession.sharedInstance().setActive(true)
@@ -308,6 +309,7 @@ final class NativeMusicPlayer: ObservableObject {
         if isPlaying {
             node.pause()
         } else {
+            NativeRadioPlayer.shared.pauseForOtherAudio()
             NativeReaderPlaybackBridge.pauseActiveReader?()
             NativeRemotePlaybackOwner.claim(.music)
             registerRemoteCommands()
@@ -333,6 +335,7 @@ final class NativeMusicPlayer: ObservableObject {
         startFrame = min(file.length - 1, AVAudioFramePosition(target * file.processingFormat.sampleRate))
         do {
             try schedule(from: startFrame)
+            NativeRadioPlayer.shared.pauseForOtherAudio()
             NativeReaderPlaybackBridge.pauseActiveReader?()
             NativeRemotePlaybackOwner.claim(.music)
             registerRemoteCommands()

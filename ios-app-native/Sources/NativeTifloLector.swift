@@ -2200,6 +2200,7 @@ struct NativeReadingScreen: View {
     }
 
     private func play() {
+        NativeRadioPlayer.shared.pauseForOtherAudio()
         NativeMusicPlayer.shared.pauseForReader()
         NativeRemotePlaybackOwner.claim(.reader)
         if speech.isPaused {

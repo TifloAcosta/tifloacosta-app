@@ -123,5 +123,5 @@ No dar por concluida la compilación candidata ni ejecutar TestFlight hasta: (1)
 - Las listas admiten botones accesibles para subir o bajar cada entrada, también si proviene de Apple Music, Audius o Jamendo. Su orden se guarda en la lista virtual y no mueve ni elimina archivos musicales.
 - Los respaldos de índice y completos transportan regla inteligente, género, fecha de importación y contador; sus formas anteriores siguen siendo decodificables.
 - Los nuevos textos de controles y criterios tienen traducciones en inglés, portugués, francés, italiano y alemán, además del español original.
-- Comprobaciones locales: **373 contratos iOS y 461 pruebas generales correctas**. Commit de código remoto `692938e3`; compilación Xcode en GitHub Actions pendiente de resultado al redactar este párrafo.
+- Comprobaciones locales: **373 contratos iOS y 461 pruebas generales correctas**. Commit de código remoto `692938e3`; compilación Xcode para simulador de iPhone y validación de la extensión **correctas** en GitHub Actions `44636112209`. La captura visual auxiliar no forma parte de esta validación.
 - No se ha creado otra rama ni publicado compilación en TestFlight. Queda para la fase de validación probar con VoiceOver en iPhone los cambios de orden, las fechas, los respaldos restaurados y los filtros sobre archivos musicales reales.

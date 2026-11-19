@@ -92,3 +92,14 @@ Fuente de requisitos: `docs/superpowers/specs/2026-11-17-mi-musica-design.md` y 
 ### Criterio de salida
 
 No dar por concluida la compilación candidata ni ejecutar TestFlight hasta: (1) recuperar y clasificar la mayor cantidad verificable de decisiones de los intercambios originales, (2) resolver cada incumplimiento funcional anterior, (3) probar contratos de comportamiento y compilación Swift en macOS, (4) preparar una única prueba integral en iPhone con VoiceOver. Las partes del historial a las que no se tenga acceso deben quedar identificadas explícitamente como no verificadas. No abrir ramas remotas adicionales.
+
+### Progreso de corrección — 19/11, revisión posterior
+
+Commit de trabajo `d13305e` en la misma rama `feature/mi-musica`:
+
+- OCR: añadidas selecciones de portugués, francés, italiano y alemán, conservando índices antiguos; se consulta la compatibilidad de Vision y, si el idioma no está disponible, se utiliza detección automática. **Implementado en código, sin compilación Swift ni validación de dispositivo todavía.**
+- Enlaces de documentos: los URL externos y enlaces descriptivos estructurados con destino web se representan como atributos `.link` dentro de los fragmentos visibles, además de conservar la navegación existente. **Implementado en código, falta comprobar doble toque de VoiceOver en iPhone y textos extensos.** No se afirma activación directa de referencias internas.
+- Pruebas automatizadas iOS de la nueva revisión: **336 aprobadas, cero fallidas**. Pruebas generales: **461 aprobadas, cero fallidas**. Estos contratos no equivalen a compilación Swift.
+- Permanecen pendientes: vista previa/guardar perfiles por voz individual, braille continuo, las diferencias de listas mixtas, perfiles de ecualización, destino de copias, reglas inteligentes, fuentes remotas y auditoría de idiomas en pantallas.
+
+No ejecutar TestFlight todavía.

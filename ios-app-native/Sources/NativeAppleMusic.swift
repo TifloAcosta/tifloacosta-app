@@ -109,7 +109,7 @@ final class NativeAppleMusicPlayer: ObservableObject {
                 NativeRemotePlaybackOwner.claim(.appleMusic)
                 try await player.play()
                 isPlaying = true
-            } catch { error = "No se pudo reanudar Apple Music." }
+            } catch { self.error = "No se pudo reanudar Apple Music." }
         }
     }
 

@@ -168,7 +168,7 @@ struct NativeTifloAppShortcuts: AppShortcutsProvider {
             phrases: ["Abre vídeos en \(.applicationName)"],
             shortTitle: "Abrir vídeos",
             systemImageName: "play.rectangle"
-        ),
+        )
         AppShortcut(
             intent: NativeOpenMusicIntent(),
             phrases: ["Abre Mi Música en \(.applicationName)"],

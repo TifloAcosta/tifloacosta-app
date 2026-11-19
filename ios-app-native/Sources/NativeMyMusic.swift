@@ -51,7 +51,7 @@ private struct MusicPortablePlaylist: Codable {
 }
 
 private struct MusicPlaylistEntry: Codable, Identifiable {
-    enum Provider: String, Codable { case local, appleMusic }
+    enum Provider: String, Codable { case local, appleMusic, audius, jamendo }
     let id: UUID
     let provider: Provider
     let localId: UUID?
@@ -66,6 +66,11 @@ private struct MusicPlaylistEntry: Codable, Identifiable {
 
     static func appleMusic(id: String, title: String, artist: String) -> Self {
         Self(id: UUID(), provider: .appleMusic, localId: nil, appleMusicSongId: id,
+             title: title, artist: artist)
+    }
+
+    static func streaming(provider: Provider, id: String, title: String, artist: String) -> Self {
+        Self(id: UUID(), provider: provider, localId: nil, appleMusicSongId: id,
              title: title, artist: artist)
     }
 }
@@ -245,6 +250,16 @@ private final class NativeMusicLibrary: ObservableObject {
             files.first(where: { $0.id == id }).map(MusicPlaylistEntry.local)
         }
         playlists[index].orderedEntries = oldEntries + [.appleMusic(id: id, title: title, artist: artist)]
+        do { try save() } catch { self.error = error.localizedDescription }
+    }
+
+    func addStreamingSong(provider: MusicPlaylistEntry.Provider, id: String, title: String,
+                          artist: String, playlistId: UUID) {
+        guard provider == .audius || provider == .jamendo, !id.isEmpty,
+              let index = playlists.firstIndex(where: { $0.id == playlistId }) else { return }
+        let oldEntries = playlistEntries(playlists[index])
+        playlists[index].orderedEntries = oldEntries + [.streaming(provider: provider, id: id,
+                                                                    title: title, artist: artist)]
         do { try save() } catch { self.error = error.localizedDescription }
     }
 
@@ -467,7 +482,14 @@ private final class NativeMusicLibrary: ObservableObject {
                 MusicVirtualFolder(id: UUID(), name: folder.name, trackIds: folder.trackIds.compactMap { ids[$0] })
             }
             let importedLists = backup.playlists.map { item in
-                MusicPlaylist(id: UUID(), name: item.name, trackIds: item.trackIds.compactMap { ids[$0] })
+                let restoredEntries = item.orderedEntries?.compactMap { entry -> MusicPlaylistEntry? in
+                    guard entry.provider == .local else { return entry }
+                    guard let localId = entry.localId, let mapped = ids[localId.uuidString] else { return nil }
+                    return MusicPlaylistEntry(id: entry.id, provider: .local, localId: mapped,
+                                              appleMusicSongId: nil, title: entry.title, artist: entry.artist)
+                }
+                return MusicPlaylist(id: UUID(), name: item.name,
+                                     trackIds: item.trackIds.compactMap { ids[$0] }, orderedEntries: restoredEntries)
             }
             let importedSmart = backup.smartFolders.map { item in
                 MusicSmartFolder(id: UUID(), name: item.name, titleContains: item.titleContains)
@@ -538,6 +560,16 @@ struct NativeMyMusicScreen: View {
                         Task { await appleMusic.pause() }
                         jamendo.play(track)
                     }
+                    if !library.playlists.isEmpty {
+                        Menu("Añadir \(track.name) a una lista") {
+                            ForEach(library.playlists) { playlist in
+                                Button("Añadir a \(playlist.name)") {
+                                    library.addStreamingSong(provider: .jamendo, id: track.id,
+                                        title: track.name, artist: track.artistName, playlistId: playlist.id)
+                                }
+                            }
+                        }
+                    }
                 }
                 Button("Pausar Jamendo") { jamendo.pause() }
                     .disabled(jamendo.playingName == nil)
@@ -556,6 +588,16 @@ struct NativeMyMusicScreen: View {
                         jamendo.pause()
                         Task { await appleMusic.pause() }
                         audius.play(track)
+                    }
+                    if !library.playlists.isEmpty {
+                        Menu("Añadir \(track.title) a una lista") {
+                            ForEach(library.playlists) { playlist in
+                                Button("Añadir a \(playlist.name)") {
+                                    library.addStreamingSong(provider: .audius, id: track.id,
+                                        title: track.title, artist: track.user.name, playlistId: playlist.id)
+                                }
+                            }
+                        }
                     }
                 }
                 Button("Pausar Audius") { audius.pause() }
@@ -652,9 +694,26 @@ struct NativeMyMusicScreen: View {
                                 player.stop()
                                 Task { await appleMusic.playSavedCatalogSong(id: entry.appleMusicSongId ?? "", title: entry.title) }
                             }
+                        } else if entry.provider == .audius {
+                            Button("Reproducir \(entry.title), \(entry.artist ?? ""), Audius") {
+                                player.stop()
+                                jamendo.pause()
+                                Task { await appleMusic.pause() }
+                                audius.playSavedTrack(id: entry.appleMusicSongId ?? "", title: entry.title)
+                            }
+                        } else if entry.provider == .jamendo {
+                            Button("Reproducir \(entry.title), \(entry.artist ?? ""), Jamendo") {
+                                player.stop()
+                                audius.pause()
+                                Task { await appleMusic.pause() }
+                                Task { await jamendo.playSavedTrack(id: entry.appleMusicSongId ?? "") }
+                            }
                         } else if let localId = entry.localId,
                                   let file = library.files.first(where: { $0.id == localId }) {
                             Button("Reproducir \(file.name), archivo personal") {
+                                audius.pause()
+                                jamendo.pause()
+                                Task { await appleMusic.pause() }
                                 player.play(name: file.name, url: library.audioURL(for: file),
                                             queue: [(name: file.name, url: library.audioURL(for: file))])
                             }
@@ -669,8 +728,8 @@ struct NativeMyMusicScreen: View {
                         if let first = items.first { player.play(name: first.name, url: first.url, queue: items) }
                     }
                     .disabled(playlist.trackIds.isEmpty)
-                    if library.playlistEntries(playlist).contains(where: { $0.provider == .appleMusic }) {
-                        Text("Las canciones de Apple Music se pueden reproducir individualmente desde esta lista.")
+                    if library.playlistEntries(playlist).contains(where: { $0.provider != .local }) {
+                        Text("Las canciones de los catálogos en línea se reproducen individualmente desde esta lista.")
                     }
                     Button("Eliminar lista \(playlist.name)") { library.removePlaylist(playlist.id) }
                 }

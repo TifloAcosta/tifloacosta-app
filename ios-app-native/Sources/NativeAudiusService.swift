@@ -68,6 +68,19 @@ final class NativeAudiusService: ObservableObject {
         message = "Iniciando \(track.title) desde Audius."
     }
 
+    func playSavedTrack(id: String, title: String) {
+        guard id.range(of: #"^[A-Za-z0-9_-]+$"#, options: .regularExpression) != nil,
+              let url = URL(string: "https://api.audius.co/v1/tracks/\(id)/stream") else {
+            message = "El identificador guardado en Audius no es válido."
+            return
+        }
+        player?.pause()
+        player = AVPlayer(url: url)
+        player?.play()
+        playingName = title
+        message = "Iniciando \(title) desde Audius."
+    }
+
     func pause() {
         player?.pause()
         playingName = nil

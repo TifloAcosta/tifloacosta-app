@@ -17,3 +17,16 @@ test('legacy local-only playlist backup remains valid when ordered entries are a
   assert.match(screen, /MusicPortablePlaylist/);
   assert.match(screen, /addAppleMusicSong/);
 });
+
+test('complete archive restores mixed playlist entries and remaps local IDs', () => {
+  assert.match(screen, /item\.orderedEntries\?\.compactMap/);
+  assert.match(screen, /ids\[localId\.uuidString\]/);
+  assert.match(screen, /orderedEntries: restoredEntries/);
+});
+
+test('iOS playlists accept Audius and Jamendo catalog references', () => {
+  assert.match(screen, /case local, appleMusic, audius, jamendo/);
+  assert.match(screen, /func addStreamingSong\(/);
+  assert.match(screen, /audius\.playSavedTrack\(/);
+  assert.match(screen, /jamendo\.playSavedTrack\(/);
+});

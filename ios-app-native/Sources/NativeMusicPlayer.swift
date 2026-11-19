@@ -199,8 +199,12 @@ final class NativeMusicPlayer: ObservableObject {
             result[key] = data.base64EncodedString()
         }
         let generalName = UserDefaults.standard.string(forKey: "mi-musica-eq-preset") ?? "Normal"
-        let generalGains = (UserDefaults.standard.array(forKey: "mi-musica-eq-bands") as? [Double])?.map(Float.init)
-            ?? Self.presets.first(where: { $0.name == generalName })?.gains ?? [0, 0, 0, 0, 0]
+        let generalGains: [Float]
+        if let saved = UserDefaults.standard.array(forKey: "mi-musica-eq-bands") as? [Double], saved.count == 5 {
+            generalGains = saved.map { Float($0) }
+        } else {
+            generalGains = Self.presets.first(where: { $0.name == generalName })?.gains ?? [0, 0, 0, 0, 0]
+        }
         let general = MusicAudioSnapshot(name: generalName, gains: generalGains)
         if let data = try? JSONEncoder().encode(general) { result["mi-musica-eq-general"] = data.base64EncodedString() }
         return result

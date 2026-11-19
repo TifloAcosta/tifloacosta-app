@@ -26,3 +26,9 @@ test('Jamendo catch updates the player error property, not the caught error', ()
   assert.doesNotMatch(file, /catch\s*\{\s*error\s*=/);
   assert.match(file, /catch\s*\{\s*self\.error = MusicLocalized\.format\("No se pudo recuperar la canción guardada de Jamendo\."\)/);
 });
+
+test('equalizer backup general gains have an explicit Float array type for Swift compiler', () => {
+  const file = source('NativeMusicPlayer.swift');
+  assert.match(file, /let generalGains: \[Float\]/);
+  assert.doesNotMatch(file, /let generalGains = \(UserDefaults\.standard\.array/);
+});

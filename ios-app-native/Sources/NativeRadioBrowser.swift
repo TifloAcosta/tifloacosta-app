@@ -73,6 +73,7 @@ final class NativeRadioPlayer: ObservableObject {
             error = "Esta emisora no dispone de una transmisión segura compatible."
             return
         }
+        NativeAppleMusicPlayer.shared.pauseForOtherAudio()
         NativeAudiusPlayer.shared.pauseForOtherAudio()
         NativeMusicPlayer.shared.pauseForReader()
         NativeReaderPlaybackBridge.pauseActiveReader?()
@@ -99,6 +100,7 @@ final class NativeRadioPlayer: ObservableObject {
             player.pause()
             isPlaying = false
         } else {
+            NativeAppleMusicPlayer.shared.pauseForOtherAudio()
             NativeAudiusPlayer.shared.pauseForOtherAudio()
             NativeMusicPlayer.shared.pauseForReader()
             NativeReaderPlaybackBridge.pauseActiveReader?()
@@ -181,6 +183,9 @@ struct NativeMusicPlatformsScreen: View {
         List {
             NavigationLink("Radio musical gratuita") { NativeRadioScreen() }
             NavigationLink("Audius: música gratuita") { NativeAudiusScreen() }
+            if Bundle.main.object(forInfoDictionaryKey: "TifloAppleMusicEnabled") as? Bool == true {
+                NavigationLink("Apple Music") { NativeAppleMusicScreen() }
+            }
         }
         .navigationTitle("Plataformas musicales")
     }

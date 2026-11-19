@@ -13,6 +13,7 @@
         <string>de</string>
     </array>
     <key>CFBundleDisplayName</key><string>TifloAcosta</string>
+    <key>NSAppleMusicUsageDescription</key><string>TifloAcosta necesita tu permiso para buscar y reproducir música de tu biblioteca mediante Apple Music.</string>
     <key>CFBundleExecutable</key><string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key><string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
     <key>CFBundleInfoDictionaryVersion</key><string>6.0</string>

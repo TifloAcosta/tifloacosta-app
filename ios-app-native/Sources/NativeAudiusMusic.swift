@@ -73,6 +73,7 @@ final class NativeAudiusPlayer: ObservableObject {
         url.path = "/v1/tracks/\(id)/stream"
         url.queryItems = [URLQueryItem(name: "app_name", value: "TifloAcosta")]
         guard let target = url.url else { return }
+        NativeAppleMusicPlayer.shared.pauseForOtherAudio()
         NativeRadioPlayer.shared.pauseForOtherAudio()
         NativeMusicPlayer.shared.pauseForReader()
         NativeReaderPlaybackBridge.pauseActiveReader?()
@@ -97,6 +98,7 @@ final class NativeAudiusPlayer: ObservableObject {
             player.pause()
             isPlaying = false
         } else {
+            NativeAppleMusicPlayer.shared.pauseForOtherAudio()
             NativeRadioPlayer.shared.pauseForOtherAudio()
             NativeMusicPlayer.shared.pauseForReader()
             NativeReaderPlaybackBridge.pauseActiveReader?()

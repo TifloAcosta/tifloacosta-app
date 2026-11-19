@@ -72,6 +72,7 @@ final class NativeMusicPlayer: ObservableObject {
     private var queue: [(name: String, url: URL)] = []
     private var originalQueue: [(name: String, url: URL)] = []
     private var currentPlaylistID: UUID?
+    private var albumKeysByURL: [URL: String] = [:]
     private var index = -1
     private var timer: Timer?
     private var sleepUntil: Date?
@@ -189,10 +190,67 @@ final class NativeMusicPlayer: ObservableObject {
         UserDefaults.standard.set(gains.map(Double.init), forKey: "mi-musica-eq-bands")
     }
 
+    func exportProfiles() -> [String: String] {
+        let prefixes = ["mi-musica-eq-song-", "mi-musica-eq-playlist-", "mi-musica-eq-album-"]
+        var result: [String: String] = [:]
+        for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
+            guard prefixes.contains(where: { key.hasPrefix($0) }), let data = value as? Data,
+                  data.count <= 4_096 else { continue }
+            result[key] = data.base64EncodedString()
+        }
+        let generalName = UserDefaults.standard.string(forKey: "mi-musica-eq-preset") ?? "Normal"
+        let generalGains = (UserDefaults.standard.array(forKey: "mi-musica-eq-bands") as? [Double])?.map(Float.init)
+            ?? Self.presets.first(where: { $0.name == generalName })?.gains ?? [0, 0, 0, 0, 0]
+        let general = MusicAudioSnapshot(name: generalName, gains: generalGains)
+        if let data = try? JSONEncoder().encode(general) { result["mi-musica-eq-general"] = data.base64EncodedString() }
+        return result
+    }
+
+    func restoreProfiles(_ profiles: [String: String]) {
+        let prefixes = ["mi-musica-eq-song-", "mi-musica-eq-playlist-", "mi-musica-eq-album-"]
+        for (key, encoded) in profiles.prefix(5_000) {
+            guard (key == "mi-musica-eq-general" || prefixes.contains(where: { key.hasPrefix($0) })),
+                  key.count < 250, encoded.count <= 6_000,
+                  let data = Data(base64Encoded: encoded),
+                  let saved = try? JSONDecoder().decode(MusicAudioSnapshot.self, from: data),
+                  saved.gains.count == 5, saved.gains.allSatisfy({ $0.isFinite && (-12...12).contains($0) }),
+                  saved.name.count <= 60 else { continue }
+            if key == "mi-musica-eq-general" {
+                UserDefaults.standard.set(saved.name, forKey: "mi-musica-eq-preset")
+                UserDefaults.standard.set(saved.gains.map(Double.init), forKey: "mi-musica-eq-bands")
+                selectedPreset = saved.name
+                gains = saved.gains
+                applyEqualizer()
+            } else {
+                UserDefaults.standard.set(data, forKey: key)
+            }
+        }
+        if queue.indices.contains(index) { loadProfile(for: queue[index].url) }
+    }
+
     private func overrideKey(_ url: URL) -> String { "mi-musica-eq-song-" + url.lastPathComponent }
 
     private func playlistOverrideKey(_ playlistID: UUID) -> String {
         "mi-musica-eq-playlist-" + playlistID.uuidString
+    }
+
+    private func albumOverrideKey(_ albumKey: String) -> String { "mi-musica-eq-album-" + albumKey }
+
+    func hasAlbumOverride(_ albumKey: String) -> Bool {
+        UserDefaults.standard.data(forKey: albumOverrideKey(albumKey)) != nil
+    }
+
+    func saveForAlbum(_ albumKey: String) {
+        let snapshot = MusicAudioSnapshot(name: selectedPreset, gains: gains)
+        guard let data = try? JSONEncoder().encode(snapshot) else { return }
+        UserDefaults.standard.set(data, forKey: albumOverrideKey(albumKey))
+    }
+
+    func removeAlbumOverride(_ albumKey: String) {
+        UserDefaults.standard.removeObject(forKey: albumOverrideKey(albumKey))
+        if queue.indices.contains(index), albumKeysByURL[queue[index].url] == albumKey {
+            loadProfile(for: queue[index].url)
+        }
     }
 
     func hasPlaylistOverride(_ playlistID: UUID) -> Bool {
@@ -231,6 +289,8 @@ final class NativeMusicPlayer: ObservableObject {
             .flatMap { try? JSONDecoder().decode(MusicAudioSnapshot.self, from: $0) }
         let playlistSaved = currentPlaylistID.flatMap { UserDefaults.standard.data(forKey: playlistOverrideKey($0)) }
             .flatMap { try? JSONDecoder().decode(MusicAudioSnapshot.self, from: $0) }
+        let albumSaved = albumKeysByURL[url].flatMap { UserDefaults.standard.data(forKey: albumOverrideKey($0)) }
+            .flatMap { try? JSONDecoder().decode(MusicAudioSnapshot.self, from: $0) }
         currentHasOverride = saved != nil
         if let saved, saved.gains.count == 5 {
             selectedPreset = saved.name
@@ -238,6 +298,9 @@ final class NativeMusicPlayer: ObservableObject {
         } else if let playlistSaved, playlistSaved.gains.count == 5 {
             selectedPreset = playlistSaved.name
             gains = playlistSaved.gains.map { $0.clamped(to: -12...12) }
+        } else if let albumSaved, albumSaved.gains.count == 5 {
+            selectedPreset = albumSaved.name
+            gains = albumSaved.gains.map { $0.clamped(to: -12...12) }
         } else {
             selectedPreset = UserDefaults.standard.string(forKey: "mi-musica-eq-preset") ?? "Normal"
             if selectedPreset == "Personalizado",
@@ -256,8 +319,10 @@ final class NativeMusicPlayer: ObservableObject {
         equalizer.globalGain = gains.contains(where: { $0 > 0 }) ? -6 : 0
     }
 
-    func play(name: String, url: URL, queue: [(name: String, url: URL)], playlistID: UUID? = nil) {
+    func play(name: String, url: URL, queue: [(name: String, url: URL)], playlistID: UUID? = nil,
+              albumKeysByURL: [URL: String] = [:]) {
         currentPlaylistID = playlistID
+        self.albumKeysByURL = albumKeysByURL
         originalQueue = queue
         self.queue = shuffleEnabled ? queue.filter { $0.url == url } + queue.filter { $0.url != url }.shuffled() : queue
         guard let position = self.queue.firstIndex(where: { $0.url == url }) else { return }

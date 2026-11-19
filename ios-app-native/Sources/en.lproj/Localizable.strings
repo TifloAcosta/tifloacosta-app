@@ -903,3 +903,6 @@
 "Esta canción no se pudo reproducir. Se conserva en tu lista." = "This song could not be played. It remains in your playlist.";
 "Guardar ecualización para lista %@" = "Save equalizer settings for playlist %@";
 "Quitar ecualización de lista %@" = "Remove equalizer settings from playlist %@";
+"Álbumes" = "Albums";
+"Guardar ecualización para álbum %@" = "Save equalizer settings for album %@";
+"Quitar ecualización de álbum %@" = "Remove equalizer settings from album %@";

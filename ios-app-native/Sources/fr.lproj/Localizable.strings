@@ -901,3 +901,6 @@
 "Esta canción no se pudo reproducir. Se conserva en tu lista." = "Ce morceau n'a pas pu être lu. Il reste dans votre playlist.";
 "Guardar ecualización para lista %@" = "Enregistrer l'égalisation pour la playlist %@";
 "Quitar ecualización de lista %@" = "Supprimer l'égalisation de la playlist %@";
+"Álbumes" = "Albums";
+"Guardar ecualización para álbum %@" = "Enregistrer l'égalisation pour l'album %@";
+"Quitar ecualización de álbum %@" = "Supprimer l'égalisation de l'album %@";

@@ -901,3 +901,6 @@
 "Esta canción no se pudo reproducir. Se conserva en tu lista." = "Dieser Titel konnte nicht abgespielt werden. Er bleibt in deiner Playlist.";
 "Guardar ecualización para lista %@" = "Equalizer für Playlist %@ speichern";
 "Quitar ecualización de lista %@" = "Equalizer für Playlist %@ entfernen";
+"Álbumes" = "Alben";
+"Guardar ecualización para álbum %@" = "Equalizer für Album %@ speichern";
+"Quitar ecualización de álbum %@" = "Equalizer für Album %@ entfernen";

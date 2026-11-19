@@ -2,6 +2,7 @@ import SwiftUI
 import UniformTypeIdentifiers
 import ZIPFoundation
 import UIKit
+import AVFoundation
 
 private struct MusicArchiveSelection: Identifiable {
     let url: URL
@@ -86,6 +87,8 @@ private struct MusicPortableTrack: Codable {
     let id: String
     let title: String
     let locations: [MusicPortableLocation]
+    var album: String? = nil
+    var artist: String? = nil
 }
 
 private struct MusicPortableLocation: Codable {
@@ -103,6 +106,16 @@ private struct MusicLocalFile: Identifiable, Codable {
     let id: UUID
     let name: String
     let fileName: String
+    var album: String? = nil
+    var artist: String? = nil
+
+    var albumKey: String? {
+        guard let album = album?.trimmingCharacters(in: .whitespacesAndNewlines), !album.isEmpty else { return nil }
+        let stableLocale = Locale(identifier: "en_US_POSIX")
+        let title = album.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: stableLocale).lowercased()
+        let author = (artist ?? "").folding(options: [.diacriticInsensitive, .caseInsensitive], locale: stableLocale).lowercased()
+        return "\(author)|\(title)"
+    }
 }
 
 private struct MusicVirtualFolder: Identifiable, Codable {
@@ -122,6 +135,11 @@ private struct MusicSmartFolder: Identifiable, Codable {
     let id: UUID
     var name: String
     var titleContains: String
+}
+
+private struct MusicAlbumGroup: Identifiable {
+    let id: String
+    let name: String
 }
 
 @MainActor
@@ -159,9 +177,29 @@ private final class NativeMusicLibrary: ObservableObject {
            let decoded = try? JSONDecoder().decode([MusicSmartFolder].self, from: data) { smartFolders = decoded }
         lastAutomaticBackup = UserDefaults.standard.object(forKey: "mi-musica-last-auto-backup") as? Date
         performAutomaticBackupIfDue()
+        Task { await refreshMissingAlbumMetadata() }
+    }
+
+    func refreshMissingAlbumMetadata() async {
+        await refreshAlbumMetadata(for: files.filter { $0.album == nil }.map(\.id))
+    }
+
+    private func refreshAlbumMetadata(for ids: [UUID]) async {
+        for id in ids {
+            guard let index = files.firstIndex(where: { $0.id == id }) else { continue }
+            let asset = AVURLAsset(url: audioURL(for: files[index]))
+            guard let metadata = try? await asset.load(.commonMetadata) else { continue }
+            let album = AVMetadataItem.metadataItems(from: metadata, filteredByIdentifier: .commonIdentifierAlbumName).first?.stringValue
+            let artist = AVMetadataItem.metadataItems(from: metadata, filteredByIdentifier: .commonIdentifierArtist).first?.stringValue
+            guard let freshIndex = files.firstIndex(where: { $0.id == id }) else { continue }
+            files[freshIndex].album = album
+            files[freshIndex].artist = artist
+        }
+        try? save()
     }
 
     func importFiles(_ urls: [URL]) {
+        var newlyImported: [UUID] = []
         do {
             try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
             for url in urls {
@@ -172,9 +210,13 @@ private final class NativeMusicLibrary: ObservableObject {
                 let fileName = UUID().uuidString + "." + url.pathExtension.lowercased()
                 let target = directory.appendingPathComponent(fileName)
                 try FileManager.default.copyItem(at: url, to: target)
-                files.append(MusicLocalFile(id: UUID(), name: url.deletingPathExtension().lastPathComponent, fileName: fileName))
+                let newID = UUID()
+                files.append(MusicLocalFile(id: newID, name: url.deletingPathExtension().lastPathComponent, fileName: fileName))
+                newlyImported.append(newID)
             }
             try save()
+            let importedIDs = newlyImported
+            Task { await refreshAlbumMetadata(for: importedIDs) }
         } catch {
             self.error = "No se pudo importar la música: \(error.localizedDescription)"
         }
@@ -302,7 +344,8 @@ private final class NativeMusicLibrary: ObservableObject {
         do {
             let tracks = Dictionary(uniqueKeysWithValues: files.map { file in
                 (file.id.uuidString, MusicPortableTrack(id: file.id.uuidString, title: file.name,
-                    locations: [MusicPortableLocation(provider: "ios-local", remoteId: file.fileName)]))
+                    locations: [MusicPortableLocation(provider: "ios-local", remoteId: file.fileName)],
+                    album: file.album, artist: file.artist))
             })
             let portableFolders = folders.map { folder in
                 MusicPortableFolder(id: folder.id.uuidString, name: folder.name,
@@ -315,7 +358,7 @@ private final class NativeMusicLibrary: ObservableObject {
                 playlists: playlists.map { MusicPortablePlaylist(id: $0.id.uuidString, name: $0.name,
                     trackIds: $0.trackIds.map { $0.uuidString }, orderedEntries: $0.orderedEntries) },
                 smartFolders: smartFolders.map { MusicPortableSmartFolder(id: $0.id.uuidString, name: $0.name,
-                    titleContains: $0.titleContains) }, audioProfiles: [:])
+                    titleContains: $0.titleContains) }, audioProfiles: NativeMusicPlayer.shared.exportProfiles())
             let bytes = try JSONEncoder().encode(backup)
             return MusicBackupDocument(text: String(decoding: bytes, as: UTF8.self))
         } catch { self.error = "No se pudo preparar el respaldo: \(error.localizedDescription)"; return nil }
@@ -404,7 +447,8 @@ private final class NativeMusicLibrary: ObservableObject {
                       let id = UUID(uuidString: track.id),
                       URL(fileURLWithPath: location.remoteId).lastPathComponent == location.remoteId,
                       FileManager.default.fileExists(atPath: directory.appendingPathComponent(location.remoteId).path) else { return nil }
-                return MusicLocalFile(id: id, name: track.title, fileName: location.remoteId)
+                return MusicLocalFile(id: id, name: track.title, fileName: location.remoteId,
+                    album: track.album, artist: track.artist)
             }
             files = Array(Dictionary((files + importable).map { ($0.id, $0) }, uniquingKeysWith: { existing, _ in existing }).values)
             let importedFolders = imported.folders.map { folder in
@@ -422,6 +466,7 @@ private final class NativeMusicLibrary: ObservableObject {
             }
             smartFolders = Array(Dictionary((smartFolders + addedSmart).map { ($0.name, $0) }, uniquingKeysWith: { existing, _ in existing }).values)
             do { try save() } catch { files = originalFiles; folders = originalFolders; playlists = originalPlaylists; smartFolders = originalSmart; throw error }
+            NativeMusicPlayer.shared.restoreProfiles(imported.audioProfiles)
             let unavailable = imported.catalog.tracks.count - importable.count
             if unavailable > 0 { self.error = "Organización restaurada. Hay \(unavailable) canciones sin audio local; tendrás que importarlas para reproducirlas." }
         } catch { self.error = "No se pudo restaurar el índice: \(error.localizedDescription)" }
@@ -449,7 +494,8 @@ private final class NativeMusicLibrary: ObservableObject {
                 copied.append(relative)
                 if let track = tracks[file.id.uuidString] {
                     tracks[file.id.uuidString] = MusicPortableTrack(id: track.id, title: track.title,
-                        locations: track.locations + [MusicPortableLocation(provider: "archive", remoteId: relative)])
+                        locations: track.locations + [MusicPortableLocation(provider: "archive", remoteId: relative)],
+                        album: track.album, artist: track.artist)
                 }
             }
             let complete = MusicIndexBackup(format: backup.format, version: backup.version,
@@ -508,7 +554,8 @@ private final class NativeMusicLibrary: ObservableObject {
                 let destination = directory.appendingPathComponent(fileName)
                 try FileManager.default.copyItem(at: original, to: destination)
                 createdFiles.append(destination)
-                imported.append(MusicLocalFile(id: newID, name: track.title, fileName: fileName))
+                imported.append(MusicLocalFile(id: newID, name: track.title, fileName: fileName,
+                    album: track.album, artist: track.artist))
                 ids[id] = newID
             }
             let additions = backup.folders.map { folder in
@@ -536,6 +583,7 @@ private final class NativeMusicLibrary: ObservableObject {
             playlists += importedLists
             smartFolders += importedSmart
             do { try save() } catch { files = originalFiles; folders = originalFolders; playlists = originalPlaylists; smartFolders = originalSmart; throw error }
+            NativeMusicPlayer.shared.restoreProfiles(backup.audioProfiles)
         } catch {
             createdFiles.forEach { try? FileManager.default.removeItem(at: $0) }
             self.error = "No se pudo restaurar la copia con audio: \(error.localizedDescription)"
@@ -571,6 +619,22 @@ struct NativeMyMusicScreen: View {
         return library.files.filter {
             query.isEmpty || $0.name.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current).contains(query)
         }
+    }
+
+    private var musicAlbums: [MusicAlbumGroup] {
+        let groups = library.files.compactMap { file -> MusicAlbumGroup? in
+            guard let key = file.albumKey, let name = file.album else { return nil }
+            return MusicAlbumGroup(id: key, name: name)
+        }
+        return Array(Dictionary(groups.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first }).values)
+            .sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
+    }
+
+    private var albumKeysByURL: [URL: String] {
+        Dictionary(uniqueKeysWithValues: library.files.compactMap { file -> (URL, String)? in
+            guard let albumKey = file.albumKey else { return nil }
+            return (library.audioURL(for: file), albumKey)
+        })
     }
 
     private var automaticBackupChoice: Binding<Int> {
@@ -700,7 +764,8 @@ struct NativeMyMusicScreen: View {
                                 player.play(
                                     name: file.name,
                                     url: library.audioURL(for: file),
-                                    queue: library.files.map { (name: $0.name, url: library.audioURL(for: $0)) }
+                                    queue: library.files.map { (name: $0.name, url: library.audioURL(for: $0)) },
+                                    albumKeysByURL: albumKeysByURL
                                 )
                             }
                             Spacer()
@@ -715,6 +780,18 @@ struct NativeMyMusicScreen: View {
                             }
                         }
                     }
+                }
+            }
+            Section("Álbumes") {
+                ForEach(musicAlbums) { album in
+                    Text(album.name)
+                    Button(MusicLocalized.format("Guardar ecualización para álbum %@", album.name)) {
+                        player.saveForAlbum(album.id)
+                    }
+                    Button(MusicLocalized.format("Quitar ecualización de álbum %@", album.name)) {
+                        player.removeAlbumOverride(album.id)
+                    }
+                    .disabled(!player.hasAlbumOverride(album.id))
                 }
             }
             Section("Mis carpetas") {
@@ -744,7 +821,8 @@ struct NativeMyMusicScreen: View {
                     Text("\(playlist.name), \(library.playlistEntries(playlist).count) canciones")
                     Button("Reproducir lista \(playlist.name)") {
                         mixedQueue.play(entries: library.playlistEntries(playlist), playlistID: playlist.id, localURLs: Dictionary(
-                            uniqueKeysWithValues: library.files.map { ($0.id, library.audioURL(for: $0)) }))
+                            uniqueKeysWithValues: library.files.map { ($0.id, library.audioURL(for: $0)) }),
+                            albumKeysByURL: albumKeysByURL)
                     }
                     .disabled(library.playlistEntries(playlist).isEmpty)
                     Button(MusicLocalized.format("Guardar ecualización para lista %@", playlist.name)) {
@@ -787,7 +865,8 @@ struct NativeMyMusicScreen: View {
                     Text("\(folder.name), criterio: título contiene \(folder.titleContains), \(matches.count) canciones")
                     Button("Reproducir carpeta inteligente \(folder.name)") {
                         let items = matches.map { (name: $0.name, url: library.audioURL(for: $0)) }
-                        if let first = items.first { player.play(name: first.name, url: first.url, queue: items) }
+                        if let first = items.first { player.play(name: first.name, url: first.url, queue: items,
+                            albumKeysByURL: albumKeysByURL) }
                     }
                     .disabled(matches.isEmpty)
                     Button("Eliminar carpeta inteligente \(folder.name)") { library.removeSmartFolder(folder.id) }

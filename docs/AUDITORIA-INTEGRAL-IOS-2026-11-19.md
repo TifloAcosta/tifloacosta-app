@@ -113,3 +113,13 @@ Commit `358ef47` sobre la misma rama, sin TestFlight:
 - El lector consulta el perfil de la voz seleccionada tanto desde la biblioteca como dentro de la obra; las preferencias particulares ya existentes del documento conservan precedencia cuando están configuradas.
 - Se añadieron traducciones de los nuevos controles a EN/PT/FR/IT/DE. **339 pruebas automatizadas iOS y 461 generales aprobadas.** La compilación Swift y la prueba auditiva con VoiceOver siguen pendientes. No declarar el comportamiento validado en iPhone.
 - Continúan abiertos braille continuo y las discrepancias de «Mi música» descritas anteriormente.
+
+### Progreso de corrección — lectura braille continua
+
+Commit `5369940` en `feature/mi-musica`:
+
+- En modo Braille, los documentos de texto utilizan una superficie `UITextView` continua en vez de los fragmentos independientes de 1800 caracteres de SwiftUI. El resto de modalidades conserva el diseño actual.
+- Se intenta recuperar el cursor de lectura y guardar sus cambios en caracteres mediante el delegado de selección; los enlaces URL conservan la detección nativa de iOS. Los prefijos Markdown `#` de encabezados se ocultan sustituyendo caracteres por espacios de igual longitud para no desplazar las posiciones guardadas.
+- Pruebas automatizadas: **342 de iOS y 461 generales aprobadas**, sin fallos. **Pendiente de compilación Swift y validación en dispositivo con línea braille real**: estos tests no demuestran por sí solos que VoiceOver permita recorrer todo el documento sin una acción adicional.
+
+Las diferencias de «Mi música» siguen pendientes; no se ha ejecutado TestFlight.

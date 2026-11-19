@@ -123,3 +123,13 @@ Commit `5369940` en `feature/mi-musica`:
 - Pruebas automatizadas: **342 de iOS y 461 generales aprobadas**, sin fallos. **Pendiente de compilación Swift y validación en dispositivo con línea braille real**: estos tests no demuestran por sí solos que VoiceOver permita recorrer todo el documento sin una acción adicional.
 
 Las diferencias de «Mi música» siguen pendientes; no se ha ejecutado TestFlight.
+
+### Progreso de corrección — destino de copias de «Mi música»
+
+Commit `7e9e461`:
+
+- Se añadió «Elegir destino de copias automáticas» en Ajustes de Mi Música, con selector de carpetas, conservación del permiso mediante bookmark de URL, indicación del destino actual y «Restablecer destino interno».
+- Si un destino previamente elegido es inaccesible o el bookmark ha caducado, no se marca la copia como completada: se muestra un error. La copia automática continúa intentándose únicamente al abrir Mi Música cuando vence su intervalo; no se promete ejecución en segundo plano.
+- Se añadieron las etiquetas a EN/PT/FR/IT/DE. **344 tests iOS y 461 generales aprobados**; pendiente compilación Swift y comprobación con carpetas reales de Archivos/iCloud y VoiceOver.
+
+Se mantienen pendientes la reproducción continua de listas mixtas, perfiles de ecualización por lista/álbum, reglas inteligentes y las conexiones de almacenamiento externo.

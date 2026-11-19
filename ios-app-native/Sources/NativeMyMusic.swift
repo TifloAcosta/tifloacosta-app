@@ -50,7 +50,7 @@ private struct MusicPortablePlaylist: Codable {
     var orderedEntries: [MusicPlaylistEntry]? = nil
 }
 
-private struct MusicPlaylistEntry: Codable, Identifiable {
+struct MusicPlaylistEntry: Codable, Identifiable {
     enum Provider: String, Codable { case local, appleMusic, audius, jamendo }
     let id: UUID
     let provider: Provider
@@ -60,7 +60,7 @@ private struct MusicPlaylistEntry: Codable, Identifiable {
     let title: String
     let artist: String?
 
-    static func local(_ file: MusicLocalFile) -> Self {
+    fileprivate static func local(_ file: MusicLocalFile) -> Self {
         Self(id: UUID(), provider: .local, localId: file.id, appleMusicSongId: nil,
              title: file.name, artist: nil)
     }
@@ -547,6 +547,7 @@ private final class NativeMusicLibrary: ObservableObject {
 struct NativeMyMusicScreen: View {
     @StateObject private var library = NativeMusicLibrary()
     @ObservedObject private var player = NativeMusicPlayer.shared
+    @ObservedObject private var mixedQueue = NativeMixedMusicQueue.shared
     @State private var isImporting = false
     @State private var isImportingFolder = false
     @State private var searchText = ""
@@ -730,12 +731,10 @@ struct NativeMyMusicScreen: View {
                 ForEach(library.playlists) { playlist in
                     Text("\(playlist.name), \(library.playlistEntries(playlist).count) canciones")
                     Button("Reproducir lista \(playlist.name)") {
-                        let items = playlist.trackIds.compactMap { id in
-                            library.files.first(where: { $0.id == id })
-                        }.map { (name: $0.name, url: library.audioURL(for: $0)) }
-                        if let first = items.first { player.play(name: first.name, url: first.url, queue: items) }
+                        mixedQueue.play(entries: library.playlistEntries(playlist), localURLs: Dictionary(
+                            uniqueKeysWithValues: library.files.map { ($0.id, library.audioURL(for: $0)) }))
                     }
-                    .disabled(playlist.trackIds.isEmpty)
+                    .disabled(library.playlistEntries(playlist).isEmpty)
                     ForEach(library.playlistEntries(playlist)) { entry in
                         switch entry.provider {
                         case .appleMusic:

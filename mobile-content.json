@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-19T13:14:43.281Z",
+  "generatedAt": "2026-11-19T19:10:13.331Z",
   "resources": [
     {
       "kind": "resource",
@@ -6339,25 +6339,6 @@
       "categories": [
         "tecnologia-accesibilidad",
         "braille"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "applevis-blog-b302c2053e3f4c80:en",
-      "sourceId": "applevis-blog-b302c2053e3f4c80",
-      "lang": "en",
-      "title": "Apple Releases Version 27.2.1 of iOS, iPadOS, macOS, and watchOS with Bug Fixes and Security Updates",
-      "summary": "Apple has today released version 27.2.1 of iOS, iPadOS, macOS, and watchOS, bringing bug fixes and security updates, including for a vulnerability that allowed macOS command line tools to use compromised eMudhra certificates. As the 27.2.1 updates were not distributed to external testers prior to their release, we do not have any information on whether they contain any accessibility fixes for blind, deaf blind, or low vision users at the time of writing. However, as these updates appear to have been released to address a small number of specific issues, we do not expect them to contain any such fixes. Release Notes iOS 27.2.1 This update provides bug fixes and security updates for your iPhone. For information on the security content of Apple software updates, please visit: https://support.apple.com/100100 . iPadOS 27.2.1 This update provides bug fixes and security updates for your iPad. For information on the security content of Apple software updates, please visit: https://support.apple.com/100100 . macOS Golden Gate 27.2.1 This update provides bug fixes and security updates for your Mac. watchOS 27.2.1 This update provides bug fixes and security updates for your Apple Watch. For information on the security content of Apple software updates, please visit: https://support.apple.com/100100 . How to Update iOS and iPadOS 27.2.1 are available over-the-air (Settings > General > Software Update), via Finder on a Mac with macOS Catalina or later, or via iTunes on a PC or Mac with macOS Mojave or earlier. Before updating, we strongly recommend making a full and complete backup of your device (either locally or in iCloud, depending on personal preference). This will ensure that, in the unlikely event that something goes wrong during the update process, you will have a current backup on hand in case a device restore becomes necessary. Also, if updating OTA, we recommend plugging your device into a power source for the duration of the download/installation process, so as to prevent the unlikely event of your battery going dead during the update. To install macOS Golden Gate 27.2.1, choose System Settings from the Apple menu, select General in the table, click Software Update in the scroll area, and click the Update Now button to begin the update process. If other updates are available, you can click the Info button to see details about them and select specific updates to install. watchOS 27.2.1 is available over-the-air (Settings > General > Software Update) or by going to the Watch app on your iPhone and navigating to General > Software Update. To install the update, your Watch must be connected to its charger and have at least 50% battery power.",
-      "body": "Apple has today released version 27.2.1 of iOS, iPadOS, macOS, and watchOS, bringing bug fixes and security updates, including for a vulnerability that allowed macOS command line tools to use compromised eMudhra certificates.\n\nAs the 27.2.1 updates were not distributed to external testers prior to their release, we do not have any information on whether they contain any accessibility fixes for blind, deaf blind, or low vision users at the time of writing. However, as these updates appear to have been released to address a small number of specific issues, we do not expect them to contain any such fixes.\n\nThis update provides bug fixes and security updates for your iPhone.\n\nFor information on the security content of Apple software updates, please visit: https://support.apple.com/100100 .\n\nThis update provides bug fixes and security updates for your iPad.\n\nFor information on the security content of Apple software updates, please visit: https://support.apple.com/100100 .\n\nThis update provides bug fixes and security updates for your Mac.\n\nThis update provides bug fixes and security updates for your Apple Watch.\n\nFor information on the security content of Apple software updates, please visit: https://support.apple.com/100100 .\n\niOS and iPadOS 27.2.1 are available over-the-air (Settings > General > Software Update), via Finder on a Mac with macOS Catalina or later, or via iTunes on a PC or Mac with macOS Mojave or earlier.\n\nBefore updating, we strongly recommend making a full and complete backup of your device (either locally or in iCloud, depending on personal preference). This will ensure that, in the unlikely event that something goes wrong during the update process, you will have a current backup on hand in case a device restore becomes necessary. Also, if updating OTA, we recommend plugging your device into a power source for the duration of the download/installation process, so as to prevent the unlikely event of your battery going dead during the update.\n\nTo install macOS Golden Gate 27.2.1, choose System Settings from the Apple menu, select General in the table, click Software Update in the scroll area, and click the Update Now button to begin the update process. If other updates are available, you can click the Info button to see details about them and select specific updates to install.\n\nwatchOS 27.2.1 is available over-the-air (Settings > General > Software Update) or by going to the Watch app on your iPhone and navigating to General > Software Update. To install the update, your Watch must be connected to its charger and have at least 50% battery power.",
-      "sourceName": "AppleVis Blog",
-      "originalUrl": "https://www.applevis.com/blog/apple-releases-version-2721-ios-ipados-macos-watchos-bug-fixes-security-updates",
-      "publishedAt": "2026-11-09T18:49:05.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-accesibilidad",
-        "apps-accesibles",
-        "programas-accesibles",
-        "sordoceguera"
       ]
     }
   ]

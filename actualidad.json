@@ -1,38 +1,65 @@
 [
   {
-    "id": "the-verge-99d796d35a1f84dc",
+    "id": "9to5mac-9a992e147e7df8b6",
     "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1037100/apple-siri-recap-audio-intelligence-hands-on",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/19/apple-releases-ios-27-3-public-beta-2-heres-whats-new/",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-19T13:00:00.000Z",
+    "publishedAt": "2026-11-19T21:37:58.000Z",
     "categories": [
-      "tecnologia-general",
       "apple",
+      "tecnologia-general",
+      "apps-accesibles",
       "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "I let Apple’s always-listening AI summarize my life for two weeks",
-        "summary": "Was it worth it? I've been asking myself this quite a bit over the last month or so while testing both the Amazon Bee Frontier and Siri Recap on the Apple Watch Ultra 4. Both enable a wearable to ambiently listen to your conversations and, using AI, summarize them for you. Why? So you can […]",
-        "body": "Was it worth it?\n\nI've been asking myself this quite a bit over the last month or so while testing both the Amazon Bee Frontier and Siri Recap on the Apple Watch Ultra 4. Both enable a wearable to ambiently listen to your conversations and, using AI, summarize them for you. Why? So you can remember better and, hopefully, stay more present.\n\nThe main difference is that Amazon's Bee takes a maximalist (and frankly reality-bending) approach, whereas Apple is going for a more minimalist, privacy-first take. Both, however, require explicit disclosures to the people around you about recording what they say, and potentially follow-up explanations a …\n\nRead the full story at The Verge."
+        "title": "Apple releases iOS 27.3 public beta 2, here’s what’s new",
+        "summary": "Apple has released iOS 27.3 public beta 2 for iPhone. The update brings new Calendar controls, more Siri AI capabilities, and new features for iPhone Duo. It also includes the redesigned Health app and other changes introduced earlier this month. more…",
+        "body": "Apple has released iOS 27.3 public beta 2 for iPhone. The update brings new Calendar controls, more Siri AI capabilities, and new features for iPhone Duo. It also includes the redesigned Health app and other changes introduced earlier this month.\n\nThe update follows yesterday’s second developer beta and the first public beta on November 5 .\n\nHere are the latest changes to try:\n\nApple has also detailed higher daily usage limits for Siri AI and other Apple Intelligence features through eligible iCloud+ plans . Plans with 200GB or more include extra capacity; the 50GB plan keeps standard limits.\n\nSee our full iOS 27.3 beta 2 roundup for more on the latest discoveries.\n\nThe first public beta brought back the redesigned Health app after its earlier preview during iOS 27.2 testing. On iPhones with Apple Intelligence support, Insights collects trends across your health data, while Longevity includes a Health Age comparison based on Apple Watch measurements.\n\nOther changes already available include:\n\nIf you’re already testing the public beta, open Settings > General > Software Update to check for the new version.\n\nJoining for the first time? Make a backup, then enroll in the free Apple Beta Software Program using your iPhone’s Apple Account. In Settings > General > Software Update > Beta Updates , choose iOS 27 Public Beta . Go back to Software Update to download and install it.\n\nWhat are you trying first in iOS 27.3 public beta 2? Let us know in the comments.\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable"
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-075cc4962abc3040",
+    "id": "9to5mac-6008f9d7f8c18f56",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/19/oled-imac-plans-may-be-cancelled-by-apple-for-two-reasons/",
+    "originalUrl": "https://9to5mac.com/2026/11/19/daily-november-19-2026/",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-19T12:51:43.000Z",
+    "publishedAt": "2026-11-19T21:11:02.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "android",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "9to5Mac Daily: November 19, 2026 – New iPhone rumors, leadership changes",
+        "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
+        "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-9746058edc659127",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/19/next-years-iphone-pro-redesign-sounds-like-exactly-what-ive-been-wanting/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-19T20:49:24.000Z",
     "categories": [
       "apple",
       "tecnologia-general"
@@ -41,73 +68,22 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "OLED iMac plans may be cancelled by Apple for two reasons",
-        "summary": "Apple is considering abandoning plans to launch an OLED iMac , according to a new supply chain report. The news comes just weeks after the first OLED Mac was launched in the form of the new touchscreen MacBook Pro . The company is said to be holding discussions with display partner Samsung about either delaying the planned launch or abandoning it altogether, with two reasons cited … more…",
-        "body": "Apple is considering abandoning plans to launch an OLED iMac , according to a new supply chain report. The news comes just weeks after the first OLED Mac was launched in the form of the new touchscreen MacBook Pro .\n\nThe company is said to be holding discussions with display partner Samsung about either delaying the planned launch or abandoning it altogether, with two reasons cited …\n\nApple’s journey into OLED screens began with the Apple Watch while other products were still using IPS LCD. The company subsequently switched to OLED for some iPhones and iPads before a long-awaited launch of the first OLED MacBook Pro back in October.\n\nIt was expected that the company would gradually transition to OLED across the full range of Macs over time. However, this process was expected to take a number of years, with the iMac not likely to join the party until 2029 or 2030 .\n\nThe Elec today reports that the move may be delayed even further or even abandoned altogether, for two reasons: cost and demand.\n\nThe company is said to be discussing a potential delay or cancellation of the project with Samsung Display. High OLED panel costs and weak sales of existing OLED-equipped products are believed to be factors behind the reconsideration […]\n\nThe biggest factor behind the review is cost. The iMac sells in smaller volumes than smartphones or laptops, making it difficult to maintain competitive pricing if expensive OLED panels are adopted. Weak sales of the OLED iPad Pro are also believed to have influenced the decision.\n\nThe report suggests that incoming CEO John Ternus has been reviewing the commercial viability of upgrading more products to OLED. As further evidence, the report says Apple has sent quotation requests to LCD suppliers for an iMac screen to be launched in around 2029."
+        "title": "Next year’s iPhone Pro redesign sounds like exactly what I’ve been wanting",
+        "summary": "Rumors about next year’s 20th anniversary iPhone Pro models have been ramping up, and they suggest Apple is designing an ‘iPhone 20 Pro’ that combines traits from two current models. more…",
+        "body": "Rumors about next year’s 20th anniversary iPhone Pro models have been ramping up, and they suggest Apple is designing an ‘iPhone 20 Pro’ that combines traits from two current models.\n\nApple keeps expanding the iPhone line to include new models. And while it’s great that there are more models for differing preferences and needs, it’s also left me missing the days of having one model that was the clear “best.”\n\nThat problem isn’t going away, since the iPhone Duo represents a brand new type of iPhone that some users will love, while others find it isn’t for them.\n\nWith my failed iPhone Duo experiment over, I’m back to using iPhone 18 Pro as my default model. But I still have an iPhone Air around for work, and every time I pick it up, I’m struck by how impressive it remains.\n\nI used the iPhone Air all of last year and loved it. The main reason I upgraded to an iPhone 18 Pro is the camera system. I have young children at home—including newborn twins—and want to capture the best possible photos before they get older.\n\niPhone 18 Pro’s Main camera has been fantastic , and it’s great having the Telephoto again too.\n\nBut I still sorely miss the overall design of the iPhone Air. And it sounds like next year, I could get the best of both models.\n\nRumors indicate Apple’s 20th anniversary iPhone Pro models will have a unique new design featuring a quad-curved display that makes it look bezel-free.\n\nThe new models are expected to also be a bit slimmer, use curved edges, and possibly even bring back titanium. Leakers say the new design borrows a lot from the iPhone Air’s look.\n\nThis sounds like exactly what I’ve been hoping for.\n\nWhile the ‘iPhone 20 Pro’ certainly won’t—and shouldn’t—be as thin as iPhone Air, if it can slim down a little and adopt several other Air design traits, I suspect it will evoke the same affection the Air has.\n\nBut unlike the Air, the new Pro model will still offer the best camera system in an iPhone (not to mention better battery life).\n\nAs a huge fan of the design of the Air, and the functionality of the 18 Pro, Apple’s 20th anniversary iPhone model could prove the perfect model for me. And for anyone else not opting for iPhone Duo 2 .\n\nWhat do you think of the rumored iPhone 20 Pro design? Let us know in the comments."
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-2053051f54d39e99",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/19/canva-introduces-new-controls-to-hide-generative-ai-features/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-19T12:30:00.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Canva introduces new controls to hide generative AI features",
-        "summary": "In light of growing pushback from users who want more control over how AI is integrated into their apps (if at all), Canva is introducing new settings that let them hide generative AI features and see less AI-generated content. Here are the details. more…",
-        "body": "In light of growing pushback from users who want more control over how AI is integrated into their apps (if at all), Canva is introducing new settings that let them hide generative AI features and see less AI-generated content. Here are the details.\n\nCanva today announced new controls that will let Free and Pro users choose whether to see generative AI features across the app, as well as how much AI-generated content appears in search results and in recommendations for templates and design elements.\n\nThe company notes that both controls are available at no additional cost and can be turned on or off at any time.\n\nAccording to Canva, “the future of creativity isn’t a choice between AI and no AI.” For this reason, it is introducing the following controls:\n\nThe company says that, while it knows that there is an ongoing debate between users with opposing views on whether AI has a place in creative work, it thinks “both views are valid”:\n\n“It’s not our place to tell anyone how to create, so today we’re launching two new controls that put that decision firmly with our community […].”\n\nImportantly, the company noted that select features that use AI without generating new content will remain available even when generative AI features are turned off:\n\n“Some of Canva’s everyday editing tools use AI to make simple tasks faster, without generating anything new. Background Remover, one of Canva’s most popular tools, lifts a subject cleanly out of a photo in a single click, and Magic Grab lets creators select an object in an image and move it somewhere else in the design. Both remain available when the generative AI switch is off, because they work only with what’s already in a design.”\n\nCanva added that these tools also won’t add an AI label to a design’s metadata, since that label is reserved for AI-generated content.\n\nAs for the company’s design content library, Canva said that while “a small portion of the library is AI-generated content made by Canva, including some abstract backgrounds and illustrated graphics,” its community has told it “they want an easier way to find design assets made by real people, so the content control reduces the number of AI-generated templates and elements that appear in search results and recommendations.”\n\nWith today’s announcement, Canva is essentially expanding on the AI permissions already available to administrators of Business, Enterprise, Teams, and Education accounts, which let organizations control how their teams use AI.\n\nCanva’s official announcement should go live here shortly, and we’ll update this post with the direct link once it’s up."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-48782fcc3521b4e2",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2321318/canva-will-let-users-switch-off-most-generative-ai/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-19T12:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Canva will let users switch off most generative AI",
-        "summary": "Canva is rolling out new settings to purge most generative AI from its app.",
-        "body": "The platform is adding new controls for its editing tools and its image library.\n\nLike most companies, Canva has added a fair number of AI tools and integrations to its platform over the past year. Today, the company is giving its users the option to strip the generative AI out of their experience. Canva is adding two new settings, one to turn all the gen AI features off or on, and a second to reduce how much gen AI content appears in a user's library. Free and Pro users will both be able to access the new controls.\n\nThere are some limitations to these AI settings. Some of the AI-powered editing tools, such as the Background Remover and Magic Grab, will remain available even when the broader AI tools are disabled. That's because those options don't leverage generative AI, only the content of an existing image, and using those features doesn't add the AI tag to the resulting image's metadata. And the library option will \"reduce\" the odds of an AI-generated image from Canva appearing in searches, but the company doesn't go so far as to say it will completely block them from the results.\n\nBoth new settings can be changed under the \"profile\" tab. For managing the platform-wide AI tools, it's under the \"permissions\" section of the settings menu, with the text \"Enable generative AI features.\" The library setting can be reached by navigating to \"Your Account\" and then the AI personalization section."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-27dc59ec8f3f1b5a",
+    "id": "the-verge-ce172acd59fbb5c4",
     "type": "news",
     "sourceId": "the-verge",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1037126/canva-ai-features-off-button",
+    "originalUrl": "https://www.theverge.com/tech/1038087/meta-muse-charm-ai-price",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-19T12:30:00.000Z",
+    "publishedAt": "2026-11-19T20:22:17.000Z",
     "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
@@ -116,82 +92,251 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Canva adds an AI ‘off’ button",
-        "summary": "Canva will now allow you to turn off its generative AI features. With this change, you can disable the graphic design platform's array of AI tools, such as its AI photo-extending Magic Expand feature, as well as turn off the ability to generate images with its Canva chatbot. This toggle doesn't turn off every AI-powered […]",
-        "body": "Canva will now allow you to turn off its generative AI features. With this change , you can disable the graphic design platform's array of AI tools, such as its AI photo-extending Magic Expand feature, as well as turn off the ability to generate images with its Canva chatbot .\n\nThis toggle doesn't turn off every AI-powered feature on Canva, however. That includes Canva's background remover and its Magic Grab tool, which lets you select an object in an image and move it somewhere else. Canva says these tools will stay on because they \"make everyday tasks faster without generating anything new.\"\n\nThe toggle still turns off many of Canva's other …\n\nRead the full story at The Verge."
+        "title": "Meta’s Muse Charm might cost $300",
+        "summary": "Meta is planning to price the Muse Charm, a little gadget with a screen that lets you chat with your Muse AI agent, at $300, according to The Information. CEO Mark Zuckerberg revealed the gadget earlier this year and said the company expected to ship the Charm \"in time for the holidays in December,\" but […]",
+        "body": "Meta is planning to price the Muse Charm, a little gadget with a screen that lets you chat with your Muse AI agent, at $300, according to The Information . CEO Mark Zuckerberg revealed the gadget earlier this year and said the company expected to ship the Charm \"in time for the holidays in December,\" but he didn't provide a price at the time.\n\nWhen he announced the Muse Charm, Zuckerberg said that the company had \"packed the whole Muse experience,\" including real-time voice and avatar technology, into the gadget. It has a fingerprint sensor, and you can tap it to be able to talk to a Muse AI agent without unlocking a phone or opening an app. …\n\nRead the full story at The Verge."
       }
     },
     "media": null
   },
   {
-    "id": "9to5mac-8f2d96847f006c5b",
+    "id": "techcrunch-ae9a988ae0f4e9cc",
     "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/19/major-privacy-breaches-reported-in-muse-ai-including-bank-balances/",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/19/nvidia-ceo-jensen-huangs-affair-with-alleged-chinese-spy-a-timeline/",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-19T12:20:00.000Z",
+    "publishedAt": "2026-11-19T20:18:49.000Z",
     "categories": [
-      "apple",
       "tecnologia-general",
-      "apps-accesibles",
       "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Major privacy breaches reported in Muse AI, including bank balances",
-        "summary": "Meta employees have expressed concerns about what appear to be major privacy breaches when using Muse , currently the second most popular free iPhone app in the App Store with over 10 million downloads. This includes again accessing end-to-end encrypted messaging without permission, and sharing what may be the bank balances of another Muse user … more…",
-        "body": "Meta employees have expressed concerns about what appear to be major privacy breaches when using Muse , currently the second most popular free iPhone app in the App Store with over 10 million downloads.\n\nThis includes again accessing end-to-end encrypted messaging without permission, and sharing what may be the bank balances of another Muse user …\n\nSiri AI was not the only AI app to launch back in September; Meta’s Muse AI app was launched the same month , with the company describing it as “your personal AI agent that gets things done across every part of life.”\n\nMuse initially launched as an iPhone app, with Mac and iPad apps following shortly afterwards. It immediately moved to the top of the US App Store charts , overtaking ChatGPT. It quickly exceeded 5 million downloads following a major advertising push by Meta, and that number has since doubled.\n\nIt wasn’t long before major privacy concerns were raised. Tech writer John Ternus reported that the Mac app accessed his messages despite him explicitly refusing permission. The app then lied to him about how it had achieved this. Meta described this as a bug .\n\nSecurity researcher Patrick Wardle also discovered a zero-day vulnerability that could allow an attacker to hijack dictated prompts , directing them instead to their own server.\n\nI said at the time that I would absolutely not be one of the millions of people using the app, and the wisdom of that decision has now been underlined by a fresh report.\n\nReuters now reports Meta employees discussing further breaches. This includes another example of accessing encrypted messages without permission.\n\nAn employee using Muse on her personal phone reported it had surprised her with a reminder to respond to a message from her sister on Signal, an end-to-end encrypted messaging service popular with privacy advocates that competes with Meta’s WhatsApp.\n\n“This seems like an extreme privacy violation. I definitely did not grant it access to other apps, or recall being asked about this,” the employee said in her post.\n\nThe report says this appears to have been done by capturing push notifications. However, this was what the app claimed had happened in the earlier case, and it turned out not to be true. The AI Now Institute was able to replicate the problem of Muse accessing Signal messages without permission.\n\nAnother employee reported receiving unsolicited bank balances that they say appeared to be those of another Muse user.\n\nMuse had randomly added an extra message to its regular chats about fishing-related weather and tide information, saying: “BTW, two bank updates, your Capital One balance is $2722.58, your Charles Schwab balance is $5899.57.”\n\n“I have never shared my bank account with Muse and never discussed any banking topic with Muse. I’m afraid it’s sending other’s bank info to me,” the staffer wrote in his post.\n\nMeta told Reuters that these were “isolated incidents” and suggested that the bank balances may have been AI hallucinations rather than leaked information.\n\nI can only repeat my previous take on Muse: Nope.\n\nImage: 9to5Mac/Meta/ Public domain vectors"
+        "title": "The unfolding Jensen Huang scandal: a timeline",
+        "summary": "Jensen Huang has resigned from Nvidia following an affair, which could have ramifications for national security as the U.S. and China race to develop the most advanced AI infrastructure.",
+        "body": "Nvidia co-founder and now former CEO Jensen Huang has never been as prone to controversy as AI leaders like OpenAI’s Sam Altman or SpaceXAI’s Elon Musk. But the 63-year-old industry kingpin recently admitted that he cheated on his wife of 40 years in affairs that could have ramifications beyond Huang’s personal life and U.S. national security.\n\nU.S. officials believe that one of Huang’s likely romantic interests, Megaspeed executive Alice Huang, is a Chinese spy who has been feeding information back to Beijing. (Alice Huang, a Chinese citizen, is of no relation to Jensen Huang.)\n\nMegaspeed is a Singapore-based AI infrastructure company that reportedly purchased $4.8 billion worth of Nvidia chips over the last two years. The U.S. and Singapore have both previously investigated Megaspeed over suspicions that the firm was illegally sharing chips with China. The Justice Department has since taken over the federal investigation into the company, The New York Times has reported.\n\nThe story took a sudden turn on Wednesday. Citing five people who worked at Nvidia, the Times reported that Huang also had an extramarital relationship with Kimberly Powell, the company’s vice president of healthcare, who reports directly to him. Nvidia, Huang and Powell have not confirmed the report. Reached by a Times reporter, Huang reportedly said, “I don’t think you should be talking to me directly,” before hanging up.\n\nBy early Thursday morning, Huang was no longer CEO of the company he co-founded 33 years ago. Then, Thursday afternoon, Reuters dropped another bombshell, publishing a report alleging that Huang had yet another extramarital affair with another unnamed Nvidia employee.\n\nThe U.S. and China are embroiled in a fierce technological arms race to build the most advanced AI infrastructure, which could shape each country’s economic future, military prowess, and capacity for innovation. Nvidia is valuable in this competition as one of the world’s largest makers of AI chips, which are essential for accelerating AI development. But as an American company, Nvidia faces government restrictions on the sale of its most powerful chips to Chinese entities.\n\nAs the controversy unfolds, we are organizing the most relevant events into a reverse-chronological timeline to keep you up to date.\n\nNvidia reported its quarterly earnings on Tuesday, which beat Wall Street expectations with $115.8 billion in revenue, up 103% year-over-year. Despite the unknowns the company faces without Huang involved, interim CEO Colette Kress said that full-year revenue is also on track to exceed expectations. The company also plans to raise its outlook for the 2028 fiscal year, indicating confidence that this unexpected leadership change won’t get in the way of its trajectory.\n\n“We have the best technologists on the planet with a world-class multi-year roadmap,” Kress said. “From a business perspective, it’s business as usual. We’ve engaged with our customers, we’ve engaged with our suppliers, our partners. They’re all 100% behind us.”\n\nNvidia chairman Harvey C. Jones affirmed that the company is not considering reinstating Huang. Kress also said that Nvidia will no longer sell its H200 chips in China, ending the company’s participation in a controversial loophole in the U.S. ban on the sale of advanced chips to the country.\n\nJensen Huang posted his first public statement since he admitted to having an extramarital affair more than a week earlier.\n\n“Since my departure, I’ve seen an outpouring of calls from NVIDIA’s employees, investors, business partners, and customers for me to return as CEO. Many continue to reach out to me directly as the company navigates complex technology, market, competitive, and geopolitical dynamics. NVIDIA is a once-in-a-generation company. If the Board of Directors decides that my return is in the best interest of our shareholders, our employees, the company, and America, I would be honored to answer these calls and return as CEO,” he wrote.\n\nMany of Huang’s colleagues in the tech industry, including Elon Musk, Anduril founder Palmer Luckey , and Y Combinator President and CEO Garry Tan, have called for his return.\n\nMore reports continue to roll out that illustrate the shock and severity of Huang’s resignation from Nvidia.\n\nBloomberg reported that Huang looked “broken and shattered, his legendary energy depleted” by the time he surrendered his role on Wednesday night, uttering phrases like “whatever” and “I don’t care.”\n\nSeparately, The Wall Street Journal reported that Huang had been critical of his CFO and current interim CEO, Colette Kress. Huang is said to have described Kress as “a deer in the headlights” during a presentation this summer, and he had described Kress as someone who could not help him steer strategy or decision-making.\n\nIn a scathing letter sent to Commerce Secretary Howard Lutnick, Representative Richard Neal (D-MA) and Senator Ron Wyden (D-OR) said they will investigate how the Trump administration handled Nvidia’s chip sales to China, especially after Trump was briefed about Huang’s relationship with a purported Chinese spy.\n\n“Although [Lutnick] and President Trump were reportedly briefed on this intelligence, the Administration did not appear to acknowledge this evident national security threat. On the contrary: despite reportedly learning of Mr. Huang’s compromising relationship last fall, President Trump granted Nvidia permission to sell its advanced H200 AI chips to China in December 2025 in exchange for a cut of the export sales,” the letter states.\n\nThat same evening, Senator Tim Scott (R-SC) requested that Huang and Lutnick both testify before the Senate Banking Committee.\n\n“The American people deserve answers,” Scott wrote on X.\n\nAfter Huang was already ousted from Nvidia, we continued to learn more incriminating claims about the former CEO. According to Reuters, Huang had a third affair with an additional, unnamed employee of Nvidia.\n\nNvidia said its board had accepted Huang’s resignation on Wednesday. The company’s current CFO, Colette Kress , will take over as interim CEO while still fulfilling her CFO duties. Nvidia is expected to conduct a larger search to determine a permanent successor to Huang.\n\nHarvey C. Jones, a managing partner of Square Wave Ventures and former CEO of Synopsys, was appointed as the company’s first-ever chair of the board of directors. Jones has been on Nvidia’s board since 1993.\n\nLater in the day, Huang confirmed that he would testify in Congress at some point before Thanksgiving, which falls on November 26.\n\n“Jensen and I have been very at odds as some of you already know on export controls, but Nvidia is a very important company to the United States of America,” House Foreign Affairs Committee Chairman Brian Mast said to reporters. “I don’t want to see anything hurt in Nvidia, but he has some very serious questions to answer.”\n\nThe testimony is expected to take place behind closed doors, but Mast believes the briefing will be recorded and transcribed.\n\nAfter reports of a second extramarital affair, Nvidia’s board reportedly plans to meet to discuss Huang’s future at the company, per The Wall Street Journal. Stock fell about 8% in after-hours trading on Wednesday and is down 11% in the past five days.\n\nHuang famously delegates very little and has about 60 direct reports, he has said . The company has not had an obvious successor or a succession plan.\n\nThe New York Times reported that Jensen Huang also had an affair with Nvidia vice president of healthcare Kimberly Powell, who reports directly to the CEO.\n\nAccording to the report, Huang and Powell were captured on film “being affectionate” at a hotel during a conference earlier this year.\n\nHuang has not responded to a request from three Republican congressmen to appear for a closed-door briefing for questioning about his affair with an alleged Chinese spy. House China Committee Chairman John Moolenaar said Wednesday on Fox Business that if Huang doesn’t agree to the briefing, he’ll likely be subpoenaed .\n\nThe Nvidia CEO pulled out of upcoming speaking engagements at the ElevenLabs Summit and Anthropic CEO Forum.\n\nAlice Huang and her family reportedly built a network of companies in China and Singapore to acquire Nvidia chips, including founding a Chinese company called Shanghai Century Litong. Founded in 2023, it became an Nvidia-preferred cloud partner, giving it priority access to chips, The Information reported . The Information also reported that Shanghai Century Litong facilitated buying $7.5 billion worth of Nvidia’s chips, including banned chips.\n\nNvidia’s head lawyer, Tim Teter, intervened in a 2025 U.S. government probe surrounding the suspected smuggling of AI chips by Megaspeed International, Bloomberg reported . Teter contacted Commerce Under Secretary Jeffrey Kessler asking questions about whether the Trump administration played a role in detaining Alice Huang.\n\nIn early 2025, Alice Huang and a business partner sought China-based investors for an Asian data center, promising they had no problem in securing GPUs, the Financial Times reported.\n\nOn Sunday night, President Trump weighed in on Huang’s controversy and showed support for the Nvidia CEO.\n\n“I have not spoken to him about it. I just know he’s a fine person, but you never know what’s going on,” Trump said.\n\nWhen asked if Huang should remain chief of Nvidia , Trump said, “I think so. Oh yeah, sure.”\n\nJensen Huang wrote in a letter to Nvidia employees — which was also published as a press release — that he cheated on his wife.\n\n“I owe my family and all of you an apology,” Huang told his company. “I was unfaithful to my wife. My actions hurt her and our children. There is no excuse for what I did. I am deeply sorry.”\n\nHuang did not mention Alice Huang by name in the message, but linked his infidelity to “the national security concerns raised in news reports.”\n\n“Nvidia’s Board of Directors has initiated an independent investigation. I support the investigation and will cooperate fully. I love our country and our company. I am committed to protecting Nvidia and supporting America’s national security. I am proud and grateful to be an American,” Huang wrote.\n\nNvidia shares slid over 5% the following day.\n\nThree Republican congressmen — Chairman John Moolenaar of the House Select Committee on China, Chairman Brian Mast of the House Foreign Affairs Committee, and Chairman Rick Crawford of the House Permanent Select Committee on Intelligence — sent a request to Huang for a closed-door joint briefing with their three committees.\n\n“Recent reports raise significant national security concerns regarding the [People’s Republic of China]’s access to sensitive U.S. technology and information,” the chairmen wrote . “The issue of PRC infiltration and access to cutting-edge U.S. technology is core to the investigative work of our three committees this Congress. It is vital that Congress determines the extent to which U.S. national security has been placed at risk.”\n\nU.S. officials had been investigating Alice Huang and Megaspeed for more than a year when the New York Times broke the story in late October that the two executives also had a close relationship.\n\nAn Nvidia spokesperson denied that this relationship was something out of the ordinary.\n\n“Jensen’s interactions with Ms. Huang are not unusual or unexpected. Meetings with customers are part of a CEO’s job; Jensen talks with thousands of customer executives every year,” Nvidia spokesperson John Rizzo said. He added that “if the U.S. government believes that any person is a threat to American industry, it would let us know.”\n\nU.S. officials circulated a secret memo among policymakers that warned that Megaspeed’s Alice Huang, who had a relationship with Jensen Huang, was a spy for China’s Ministry of State Security. This memo was not public knowledge until it was later reported by the New York Times.\n\nSecretary of State Marco Rubio supervised the drafting of the memo.\n\nAround the same time, per the New York Times’ report , U.S. President Donald Trump was briefed about intelligence findings that possible Chinese spy Alice Huang had formed a close relationship with Jensen Huang. Trump did not act on this information.\n\nThe Nvidia CEO, an ally of Trump , has repeatedly advocated for the U.S. government to let Nvidia expand its business in China.\n\nMegaspeed was confirmed to be under investigation by both the U.S. and Singaporean governments in October 2025. As a customer of Nvidia, Megaspeed was suspected of helping Chinese companies get around American embargoes on chip exports.\n\nMegaspeed, a neocloud that used Nvidia chips, had been renting computing power to Chinese internet giant Alibaba and other Chinese companies, the Times reported. A Commerce Department official who had visited Megaspeed’s data center in Malaysia in 2024 had found a hoard of Nvidia equipment that was still packed in boxes and the concern was that this equipment was being directly shipped somewhere else, like China, rather than installed and sold as a cloud service.\n\nJensen Huang had been spotted socializing with Megaspeed executive Alice Huang as early as 2024 in Taiwan, where the Nvidia CEO was born.\n\nThese investigations into Megaspeed highlighted concerns about the degree to which Nvidia is able to track its chip exports. At the time, an Nvidia spokesperson told press that the company did not have “any reason to believe products had been diverted.”\n\n“NVIDIA visited multiple Megaspeed sites yet again earlier this week and confirmed what we previously observed — Megaspeed is running a small commercial cloud, like many other companies throughout the world, as allowed by U.S. export control rules,” the Nvidia spokesperson said at the time."
       }
     },
     "media": null
   },
   {
-    "id": "the-verge-c7c34760e8cd0dc3",
+    "id": "the-verge-da1482c82b22a18f",
     "type": "news",
     "sourceId": "the-verge",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/features/1034740/ketogenic-diet-anorexia-roblox-medical-funding",
+    "originalUrl": "https://www.theverge.com/tech/1038059/google-search-homepage-ai-chats",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-19T12:00:00.000Z",
+    "publishedAt": "2026-11-19T20:05:06.000Z",
     "categories": [
-      "tecnologia-general"
+      "tecnologia-general",
+      "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Roblox money is pushing a controversial anorexia treatment",
-        "summary": "In a dark room, a man with a camera makes his pitch: Therapy isn't the first treatment you should get if you have anorexia or bulimia, he says. He's in his late 20s, wearing a backward camo baseball cap and a silver chain. \"Instead of going straight to the therapy, let's do a keto diet […]",
-        "body": "In a dark room, a man with a camera makes his pitch: Therapy isn't the first treatment you should get if you have anorexia or bulimia, he says. He's in his late 20s, wearing a backward camo baseball cap and a silver chain. \"Instead of going straight to the therapy, let's do a keto diet where we encourage you to eat as much as you want\" - all while limiting your carbohydrate intake to 30 grams a day. He tells his viewers that this shift will force your brain to use a different fuel source, and \"all those defective neural pathways that were causing you to engage in that eating disorder, they heal up and they start to work correctly.\"\n\n\"Suddenl …\n\nRead the full story at The Verge."
+        "title": "Google is putting AI chats right on the homepage",
+        "summary": "Google is updating its homepage to include AI searches. In a post on X, Google's vice president of product, Robby Stein, shows how you can now open a collapsible sidebar to view and continue your AI chats. Based on the GIF shared by Stein, it looks like you can open the sidebar by clicking the […]",
+        "body": "Google is updating its homepage to include AI searches. In a post on X , Google's vice president of product, Robby Stein, shows how you can now open a collapsible sidebar to view and continue your AI chats.\n\nBased on the GIF shared by Stein, it looks like you can open the sidebar by clicking the gray bar that appears on the left side of your screen. From there, Google will show a list of the searches you've made using AI Mode, along with the ability to start a new thread, search your threads, or connect a Gemini Notebook.\n\nRead the full story at The Verge."
       }
     },
     "media": null
   },
   {
-    "id": "engadget-3c0ef47eb395a541",
+    "id": "engadget-fbae1806d917d0d7",
     "type": "news",
     "sourceId": "engadget",
     "sourceName": "Engadget",
     "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2321489/doj-accuses-russian-national-of-spying-on-and-harassing-palantir-employees/",
+    "originalUrl": "https://www.engadget.com/2322304/employees-call-out-google-over-ai-search-in-schools/",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-19T10:33:59.000Z",
+    "publishedAt": "2026-11-19T20:00:12.000Z",
     "categories": [
       "tecnologia-general",
-      "programas-accesibles"
+      "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "DOJ accuses Russian national of spying on and harassing Palantir employees",
-        "summary": "The DOJ says the Russian national was ordered to spy on Palantir over Ukraine's use of its software for wartime purposes.",
-        "body": "He allegedly took photos of their work laptops and even once followed a female employee for 30 miles.\n\nA Russian national has been indicted for spying on and harassing the employees of a Silicon Valley technology and defense company, according to the Department of Justice . While the agency's announcement didn't name the specific company, Bloomberg reports that it was Palantir , and that the Russian national was told to do so over Ukraine's use of the company's software for wartime purposes.\n\nIgor D'iu was reportedly recruited by the Russian government through Telegram, where he also received orders on what to do, the DOJ says. He traveled from Istanbul, Turkey to Mexico City, from where he illegally crossed the border to the US in June 2026. On US soil, he was made to purchase laptops, phones, remote access software and wireless networking equipment. He was told that that the company he was monitoring \"was providing weapons to fight against Russia in Ukraine.\"\n\nThe Russian officials he was in contact with told him to visit a coffee shop near Palantir's Palo Alto office and take photos of its employees' laptop screens. They also made him switch on his laptop at designated areas near the company's offices, so they could remotely access and collect information from the devices of employees in the vicinity.\n\nHis assignment included the surveillance of Palantir employees and their homes, as well. In September, he allegedly followed a female employee in a car for more than 30 miles. D'iu's home was searched on October 8, where authorities found two Russian passports and $18,035 in cash. Authorities had also intercepted packages for him shipped from overseas, containing a fake California ID card and an authentic US passport altered with his photograph.\n\nPalantir, a tech company, is controversial for providing governments, law enforcement and the military products they can then use for mass surveillance . Wired previously reported that ICE used a database built by the company to compile dossiers on people accused of observing and protesting its activities. According to Bloomberg , the US uses Palantir's technology to offer targeting support to Ukraine. In addition, Ukrainian forces in Kyiv use its products for various purposes, including the removal of unexploded Russian mines in the country.\n\nD'iu has been charged with \"one count of conspiracy to act as an agent of a foreign government, one count of acting as an agent of a foreign government without notice to the Attorney General, one count of interstate stalking and one count of fraud in connection with identification documents.\" He is scheduled to appear in federal court on November 24."
+        "title": "Employees call out Google over AI Search in schools",
+        "summary": "The Alphabet Workers Union voiced concern over Google requiring its AI tools be bundled with Search.",
+        "body": "The Alphabet Workers Union voiced concern over Google requiring its AI tools be bundled with Search.\n\nGoogle continues to draw fire for its handling of AI features in its Classroom services for students. Earlier this month, Google set out a policy that would essentially require schools to have some AI features enabled in order for their students to use the company's Search tools. The argument from the business was that \"Search and AI are deeply integrated\" to the point that a blanket ban on AI at a school would make Search unavailable to its students. The claim seems to dismiss Google's decades of operation before it even launched Gemini and other public-facing AI tools. It's a controversial enough move that some of Google's own employees have spoken out opposing the decision.\n\nMembers of the Alphabet Workers Union, CWA Local 9009, released a statement today criticizing Google for its handling of the issue. \"Any opportunity to drive positive change with AI in education will rely on educators having the freedom to choose how to implement it in their curriculum,\" the statement reads. \"Cutting off access to Search for schools that don't wish to use AI will not help persuade our users, and will more likely result in them shutting out Google products altogether.\" More than 500 employees signed the petition, calling on Google leadership to \"reconsider this decision, and allow schools to turn off AI features in Search without disrupting their ability to use search as a whole.\"\n\nThe concern about splitting from Google appears to be justified. According to The New York Times , school districts in New York City, Los Angeles and Chicago are all considering adopting an alternate search engine rather than cede control over how students use AI to Google.\n\nIt's also a reminder to that despite Google's attempts to make Gemini and its other AI products essential, they can in fact be turned off. It's just a matter of the company being unwilling to turn them off."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-apps-71a9f1c9a9e7885b",
+    "type": "news",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/i-have-garden",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-19T19:48:08.000Z",
+    "categories": [
+      "apple",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "I Have a Garden",
+        "summary": "One zucchini, 48 real days. It keeps growing while the app is closed. From December 1, overripe tomatoes turn into Christmas baubles. One zucchini plant. 48 real days. Here the game's time is your time. You water it tonight and by tomorrow the soil will be a little drier. It gets light and dark at the same time as it does outside your window. The stems, the leaves and the flowers are drawn by an algorithm that imitates how a plant really grows. No two games give you the same shape, or the same harvest. Once you have the zucchini figured out, try the tomato plant: twice the days, up to twenty tomatoes, suckers to prune and a plant that climbs tied to its stake. It brings its own seeds, its own chimera tomato and new achievements. And for a third challenge, the pepper plant: 72 days, and snails that climb the stem to eat its leaves and peppers, which you pick off with your gloves. Each pepper turns from green to yellow to red, and you have to pick it at the right moment. It brings its own chimera pepper, its own seeds and new achievements. You unlock it with a single purchase, which also removes the ads. All three plants grow at the same time, each in its own plot. WHAT YOU'LL DO You check on it, water or feed it if it's time, look for pests and pull the odd weed. For as long as you feel like. HOW THE CYCLE GOES You start by preparing the soil and burying the seed. Until flowering you have to look after it as well as you can, because that stretch decides how many flowers open. When they do, the bees arrive to pollinate them, and if you've kept it up, every one sets fruit. The last stretch takes the most attention: each zucchini has its right moment, and picking it early or leaving it too long costs you points. IMPROVE YOUR PLANT When the cycle ends, you can take the seeds out of the Prime and Overripe zucchini you harvested. There are four qualities: Wild, Adapted, Selected and Heirloom. The better the seed, the more main branches the stem puts out. That raises your chances of getting a chimera zucchini, the hardest thing in the game to pull off. ACHIEVEMENTS There are twenty-seven achievements to earn along the way, gardener's ranks among them: when you gather the harvest you get a score and the rank you earned with the plant. WHAT IT DOESN'T DO No account, no email. No lives, no paying your way forward: the only purchase is the pepper plant, and it's optional. No leaderboard, nobody to beat. And it doesn't message you for the sake of it: a notification arrives when the plant actually needs something, at most one a day, not every evening at seven. It's free and kept going by advertising. If you'd rather support it another way, the pepper purchase removes the ads for good. ALSO You can put a widget on your home screen with the water and feed gauges, without opening the game. A notebook inside that explains every mechanic with real numbers, if you want to know why. A daily graph of water, feed and pests since the day you planted the seed. And a few more surprises. Thank you for playing.",
+        "body": "One zucchini, 48 real days. It keeps growing while the app is closed. From December 1, overripe tomatoes turn into Christmas baubles.\n\nOne zucchini plant. 48 real days.\n\nHere the game's time is your time. You water it tonight and by tomorrow the soil will be a little drier. It gets light and dark at the same time as it does outside your window. The stems, the leaves and the flowers are drawn by an algorithm that imitates how a plant really grows. No two games give you the same shape, or the same harvest.\n\nOnce you have the zucchini figured out, try the tomato plant: twice the days, up to twenty tomatoes, suckers to prune and a plant that climbs tied to its stake. It brings its own seeds, its own chimera tomato and new achievements. And for a third challenge, the pepper plant: 72 days, and snails that climb the stem to eat its leaves and peppers, which you pick off with your gloves. Each pepper turns from green to yellow to red, and you have to pick it at the right moment. It brings its own chimera pepper, its own seeds and new achievements. You unlock it with a single purchase, which also removes the ads.\n\nAll three plants grow at the same time, each in its own plot.\n\nWHAT YOU'LL DO You check on it, water or feed it if it's time, look for pests and pull the odd weed. For as long as you feel like.\n\nHOW THE CYCLE GOES You start by preparing the soil and burying the seed. Until flowering you have to look after it as well as you can, because that stretch decides how many flowers open. When they do, the bees arrive to pollinate them, and if you've kept it up, every one sets fruit. The last stretch takes the most attention: each zucchini has its right moment, and picking it early or leaving it too long costs you points.\n\nIMPROVE YOUR PLANT When the cycle ends, you can take the seeds out of the Prime and Overripe zucchini you harvested. There are four qualities: Wild, Adapted, Selected and Heirloom. The better the seed, the more main branches the stem puts out. That raises your chances of getting a chimera zucchini, the hardest thing in the game to pull off.\n\nACHIEVEMENTS There are twenty-seven achievements to earn along the way, gardener's ranks among them: when you gather the harvest you get a score and the rank you earned with the plant.\n\nWHAT IT DOESN'T DO No account, no email. No lives, no paying your way forward: the only purchase is the pepper plant, and it's optional. No leaderboard, nobody to beat. And it doesn't message you for the sake of it: a notification arrives when the plant actually needs something, at most one a day, not every evening at seven. It's free and kept going by advertising. If you'd rather support it another way, the pepper purchase removes the ads for good.\n\nALSO You can put a widget on your home screen with the water and feed gauges, without opening the game. A notebook inside that explains every mechanic with real numbers, if you want to know why. A daily graph of water, feed and pests since the day you planted the seed. And a few more surprises.\n\nThank you for playing."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-fc54012dcd0045ef",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2322205/ubisoft-lays-off-166-more-workers-opens-a-generative-ai-studio/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-19T19:06:04.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Ubisoft lays off 166 more workers, opens a generative AI studio",
+        "summary": "Even Rockstar developers fear layoffs, as GTA 6 rakes in billions of dollars.",
+        "body": "Even Rockstar developers fear layoffs, as GTA 6 rakes in billions of dollars.\n\nGaming jobs seemingly aren't safe, whether your company is struggling or you just shipped the biggest game ever. But don't worry: AI studios are coming with \"groundbreaking experiences.\"\n\nOn Thursday, Ubisoft announced that it's laying off 166 workers at its Montreal and Quebec City studios. GamesIndustry.biz reports that the cuts are mostly in production and support roles tied to canceled or reworked projects.\n\nThe layoffs follow previous rounds in January , which it described at the time as \"final.\" Since then, Ubisoft has closed several studios and reduced the headcount at others. All told, the company's headcount dropped by about 1,100 people between April and September.\n\nThe new cuts reportedly include some employees at Vantage Studios, the Tencent-backed venture that handles Assassin's Creed, Far Cry and Rainbow Six. In its earnings report on Thursday, Ubisoft described its Assassin's Creed Black Flag remake as a \"strong commercial success,\" with the company's new structure \"delivering first tangible benefits.\" (About 1,100 former Ubisoft employees may disagree.)\n\nUbisoft added that it's opening a new subsidiary, Motherbrain, focused on \"AI for gameplay innovation.\" Its crew made Teammates , Ubisoft's \"first playable generative AI experience.\"\n\nWhile Ubisoft has been struggling for years, you can't say the same for Take-Two. Earlier this week, one of its studios, Firaxis (maker of Civilization and XCOM), announced that it's laying off about a third of its workforce. Today, of course, marks the launch of Grand Theft Auto VI . Take-Two described the game's preorders as reaching \"unprecedented levels,\" and analysts estimate nearly $2 billion in first-day sales alone.\n\nSurely, GTA 6 developers feel safe then, right? Not necessarily. The Guardian published an op-ed on Wednesday by Rockstar North programmer Nestor Uriarte, who wrote that he and his colleagues worry about what comes next. \"It says a lot about the industry that even my colleagues and I, working on the biggest game of all time, are worried about getting laid off,\" he wrote.\n\nThese are precisely the kinds of worries that labor unions are designed to address. Over 1,600 Rockstar UK workers are voting this month on whether the company should recognize their union , which would be the largest in the UK gaming industry. That vote comes as a UK tribunal weighs whether Rockstar's firing of over 30 employees last year , most of whom were union members or organizers, was union-busting. Rockstar claims the workers were let go for leaking confidential information.\n\nMeanwhile, a new GDC survey found that one in three gaming industry workers have been laid off in the past two years. Unsurprisingly, 55 percent of respondents said generative AI is having a negative effect on the industry."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-a774746205959596",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/19/google-gives-gemini-the-ability-to-use-your-mac-for-you/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-19T18:09:11.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google gives Gemini the ability to use your Mac for you",
+        "summary": "Google's latest update to Gemini brings an AI agent to the Mac that can organize files, fill out forms, and tackle multistep workflows.",
+        "body": "Google on Thursday announced that it is bringing computer use to its Gemini desktop application on macOS, allowing its AI to complete tasks on users’ behalf, navigating native Mac apps, and browsing websites in the background.\n\nThe tech giant is a little late to the game with this launch, as other leading AI model makers like OpenAI, Anthropic, and Meta have already been offering agentic features in their desktop applications for some time. Meanwhile, Google only this week announced the broader rollout of Gemini’s “Tasks,” the in-app feature that allows the AI to work more as an agent, helping users sign into websites, make online purchases, or book appointments.\n\nGoogle also only recently began admitting early testers to try its revamped “CC” AI agent, announced in September , which is designed to help families stay organized across email, calendars, chats, and tasks.\n\nComputer use is another type of agentic offering that allows an AI agent to take actions directly on the user’s computer — in Gemini’s case, a Mac. This allows the AI to complete multistep tasks that involve getting things done across local files, apps, and the web. After the user instructs the AI what they want to do, they’ll see the agent working in a live preview in their chat, while still keeping their screen and cursor free to continue working on other things.\n\nAs with other AI agents offering computer use, users can pause, stop, and approve Gemini’s actions before they happen.\n\nGoogle suggests the feature could be useful for tedious tasks and other workflows, like filling out forms, repeating the same task over and over across a batch of files, organizing files into folders based on specific criteria, creating slideshows from files or information in online dashboards, and more.\n\nThe feature is initially available in English in the U.S. and requires the Gemini app for Mac and a Google AI Plus, Pro, or Ultra subscription. The company didn’t say when it would expand to other markets or platforms."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-b69f75f30ef59aa5",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/gadgets/2026/11/google-will-launch-android-app-verification-requirement-globally-in-january-2027/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-19T18:00:33.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google will launch Android app verification requirement globally in January 2027",
+        "summary": "Google says almost all developers have already gotten on board with verification.",
+        "body": "Google announced Android developer verification last year , and despite numerous objections from developers and users, the company is forging ahead . It began blocking the installation of unregistered apps in some countries this fall, and the system is expanding globally soon. Google says it will start rolling out the requirement in all regions in January 2027, and it urges devs who still haven't registered their apps to do so soon.\n\nThe apps you download from the Play Store all come from verified developers, and Google's new requirement expands that requirement to apps from third-party sources. Once developer verification is live in your region, you won't be able to sideload apps unless the developer has registered with Google, which is framed as a security measure . Verification requires providing government identification and paying a $25 fee, which will allegedly make it harder for nefarious actors to distribute malware and scammy apps.\n\nIn September, Google launched verification in Brazil, Indonesia, Singapore, and Thailand. Apparently, nothing exploded, so the company is now ready to expand. It previously said verification would go global in 2027, and it's not wasting any time with the January start. It says that verification will reach all devices within \"several months.\"\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-apps-9069daf9a9107466",
+    "type": "news",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/scribblegrid-word-search",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-19T17:48:55.000Z",
+    "categories": [
+      "apple",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "ScribbleGrid: Word Search",
+        "summary": "Word search at its most satisfying! Read the clue, figure out the word, then swipe across the grid to find it. Every word you find reveals a letter of the Secret Word — crack it before you finish the grid! THE SECRET WORD: A NEW LAYER ON WORD SEARCH Every puzzle hides a Secret Word. Each word you find reveals one of its letters. Guess it before the grid is done: the earlier you crack it, the bigger the bonus. You get 3 guesses! DAILY PUZZLE One puzzle a day, the same for everyone — including the same Secret Word. Keep your streak, share your result with a spoiler-free emoji card and climb the daily Game Center leaderboard. NO WORD LIST, JUST CLUES The words aren't handed to you — you work them out from clues. They hide horizontally, vertically, diagonally, even backwards. PLAY WITH VOICEOVER ScribbleGrid can be played from start to finish with VoiceOver. Clues and grid letters are read aloud; mark a word by double-tapping its first and last letters. Hear a whole row, column or diagonal at once, and hear every letter as you type the Secret Word. A step-by-step VoiceOver guide is built into the game. COMBO SCORING Find words within 10 seconds of each other to push your multiplier up to x5. THREE DIFFICULTY LEVELS Easy: short words, straight directions. Medium: reversed directions join in. Hard: long words in all 8 directions. STATS AND STREAK REMINDERS Track your streak, best times and solved Secret Words. If the puzzle is still waiting, get an optional reminder at 8 PM. TWO LANGUAGES, THOUSANDS OF WORDS Thousands of carefully written clues in English and Turkish. Great for language learners too. PLAY ANYWHERE A 10x10 grid on iPhone, a huge 15x15 grid on iPad. No internet needed — play on a plane, on the subway, anywhere. NO ADS There are no ads in the game. ScribbleGrid Pro adds unlimited hints, 2x coin rewards and instant solve in classic mode — a one-time purchase, no subscription. If you love word games, puzzles and brain teasers, ScribbleGrid is made for you. Download now and crack today's Secret Word!",
+        "body": "Word search at its most satisfying! Read the clue, figure out the word, then swipe across the grid to find it. Every word you find reveals a letter of the Secret Word — crack it before you finish the grid!\n\nTHE SECRET WORD: A NEW LAYER ON WORD SEARCH Every puzzle hides a Secret Word. Each word you find reveals one of its letters. Guess it before the grid is done: the earlier you crack it, the bigger the bonus. You get 3 guesses!\n\nDAILY PUZZLE One puzzle a day, the same for everyone — including the same Secret Word. Keep your streak, share your result with a spoiler-free emoji card and climb the daily Game Center leaderboard.\n\nNO WORD LIST, JUST CLUES The words aren't handed to you — you work them out from clues. They hide horizontally, vertically, diagonally, even backwards.\n\nPLAY WITH VOICEOVER ScribbleGrid can be played from start to finish with VoiceOver. Clues and grid letters are read aloud; mark a word by double-tapping its first and last letters. Hear a whole row, column or diagonal at once, and hear every letter as you type the Secret Word. A step-by-step VoiceOver guide is built into the game.\n\nCOMBO SCORING Find words within 10 seconds of each other to push your multiplier up to x5.\n\nTHREE DIFFICULTY LEVELS Easy: short words, straight directions. Medium: reversed directions join in. Hard: long words in all 8 directions.\n\nSTATS AND STREAK REMINDERS Track your streak, best times and solved Secret Words. If the puzzle is still waiting, get an optional reminder at 8 PM.\n\nTWO LANGUAGES, THOUSANDS OF WORDS Thousands of carefully written clues in English and Turkish. Great for language learners too.\n\nPLAY ANYWHERE A 10x10 grid on iPhone, a huge 15x15 grid on iPad. No internet needed — play on a plane, on the subway, anywhere.\n\nNO ADS There are no ads in the game. ScribbleGrid Pro adds unlimited hints, 2x coin rewards and instant solve in classic mode — a one-time purchase, no subscription.\n\nIf you love word games, puzzles and brain teasers, ScribbleGrid is made for you. Download now and crack today's Secret Word!"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-6122b2f96acad98b",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/19/metas-ai-agent-muse-is-mixing-up-conversations-and-exposing-private-data-report-says/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-19T17:38:40.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta’s AI agent Muse is mixing up conversations and could be exposing private data, report says",
+        "summary": "In some of these instances, employees said Muse surfaced messages about childcare requests they never made, career advice they never asked for, product orders they never placed, and bank account balances that didn't belong to them.",
+        "body": "Posted:\n\nMeta employees have raised concerns that the company’s AI agent Muse has been mixing up conversations across different accounts and exposing private user data, according to a new Reuters report that looked at internal company posts.\n\nIn some of these instances, employees said Muse surfaced messages about childcare requests they never made, career advice they never asked for, product orders they never placed, and bank account balances that didn’t belong to them.\n\nOne employee told colleagues that Muse had randomly sent an extra message in a chat about weather and tide information, saying: “BTW, two bank updates, your Capital One balance is $2722.58, your Charles Schwab balance is $5899.57.”\n\nIn another example, an employee using the AI agent on her personal phone received a reminder from Muse to respond to a message from her sister on Signal, the popular end-to-end encrypted messaging app.\n\n“This seems like an extreme privacy violation. I definitely did not grant it access to other apps, or recall being asked about this,” the employee said in her post, according to the report.\n\n“Employee testing is core to the product development process and the entire point is to get feedback, so we can implement safety and privacy protections and improve products,” a Meta spokesperson said in an email to TechCrunch. “Importantly, employees have access to different versions of Muse than the public, so they’re often reviewing features, functionality, and behavior not available elsewhere.”\n\nLaunched in September, Muse is one of the fastest-growing apps on record, with more than 10 million downloads.\n\nUpdate 11/19/2026 12:05 PM PT: The article was updated to include Meta’s comment."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-de603ec97f6b839c",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2321939/apple-homepod-mini-2-review/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-19T17:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple HomePod mini 2 review: A necessary, but underwhelming update",
+        "summary": "The most notable upgrade on the HomePod mini 2 is its S10 chip, which is supposed to power Siri AI, but that's still in the works.",
+        "body": "Siri AI? More like Siri MIA.\n\nI'd be willing to forgive you if you forgot about the new HomePod mini . The overhauled smart speaker played a supporting role at best during Apple's Welcome Home event last month, behind the HomeView , and probably, in some minds, behind the updated Apple TV 4K . Still, the company provides a few upgrades in the HomePod mini 2 ($149) , ensuring that it's ready for Siri AI and the assistant's newfound ability to offer personalized context for your queries. The main problem? The speaker doesn't yet support the recently upgraded virtual assistant Apple spent years improving.\n\nThe most notable update on the HomePod mini 2 is on the inside. Apple swapped in its S10 chip from the Apple Watch Series 10, kicking the nearly antique S5 silicon to the curb. For a Watch comparison, that's like going from a Series 5 or first-gen Watch SE, which debuted in 2019 and 2020 respectively, to the 2024 edition. It's a big leap, and it's one Apple says was necessary for the HomePod mini to work with Siri AI .\n\nThe recently updated assistant isn't all the S10 is helping with here. Apple says the component can run real-time music evaluation \"to optimize dynamic range, loudness and acoustic performance,\" with a hand from \"advanced computational analysis.\" When connected to the newly introduced fourth-gen Apple TV 4K, you can use four HomePod mini 2 speakers as a surround sound setup. That S10 chip helps the speakers recognize their positions in a room and adjust the lag, convey that info to Apple's streaming box, and audio levels accordingly.\n\nI only have two HomePod mini 2s, so I wasn't able to test this configuration, but I did hear it during Apple's event in October. Even with that brief experience, I can tell you using two second-gen HomePods as the front speakers and two HomePod minis as the rears is a much better setup. The HomePod mini doesn't muster enough bass to be a great home theater speaker on its own, and those full-size HomePods bring the boom when an action scene demands it.\n\nBefore now, you could send audio from a Mac to a HomePod mini, but Apple has expanded the functionality so that the second-gen model can serve as persistent default speakers. This means, in theory, they'll stay connected to your Mac as the primary output rather than just relying on a temporary AirPlay link. This allows you to use the HomePod mini 2, or a pair of them, for everything on your computer — from FaceTime calls to games — without having to think about connecting each app or session to the speaker(s).\n\nThe HomePod line has always had lights on the top, but they haven't really done much. Before now, the top touch panel would light up if audio was playing or display an animation when you chatted with Siri. With a new feature called Sound Glow, those lights now show hues that compliment a song's album artwork. The lights move in real time, reacting to the bass and treble in each tune. If you opt for a soundscape, Sound Glow reacts to that too, showing an animation that resembles the pitter patter of rain drops, for example. It isn't a game-changing feature, but it's a nice use of lighting that was barely utilized previously.\n\nLastly, there are the new colors. The HomePod mini 2 comes in pink, green, blue, white and midnight (dark grey), with those first three coordinating well with Apple's iMac colors . That list means the company retired orange and yellow from the previous generation, both of which looked great in their time. As you can see, my review units are green, and I've enjoyed the pop of color they've added to my desk over the last few weeks.\n\nGiven that Apple saw fit to bestow a \"2\" on this HomePod mini, I expected some upgrades to overall sound quality to be in the mix. Unfortunately, I can't notice a difference between old and new models. Sometimes I think there's some variation, but it's not substantial enough that I'm sure, and it's not consistent across various musical styles. I do like the audio performance of the HomePod mini for its size, but it still has a sound profile of crisp highs and prominent mids offset by bass tone that lacks dynamics and depth. It's good enough for casual listening or background tunes, but not for anything more than that.\n\nDespite the lack of Siri AI, I was hoping the S10 chip would provide a performance boost for the old Siri experience you have to settle for right now. However, the assistant's responses to basic questions took the same amount of time as they do on the first-gen model. To be clear, they're quick on both devices, I'm merely pointing out there's no difference in this regard. Just don't try to ask the old assistant to dive into Apple's core apps for you, or try to have an on-going conversation — neither request will bear any fruit.\n\nThe biggest issue with the HomePod mini 2 right now is its biggest omission: Siri AI. The recently updated assistant isn't available on the speaker yet, and Apple hasn't provided a timeline for its arrival either. The upgraded HomePod mini is equipped to support the now-current-gen Siri, thanks to the S10 chip. However, you'll have to wait for Siri's newfound contextual awareness to dive into your Messages, Calendar and other apps on your iPhone or iPad. And to me, that's a huge miss for Apple on an overhauled smart speaker. You'll also have to wait for the more conversational chats with Siri as the HomePod mini 2 doesn't yet support those either.\n\nI like the idea of using a HomePod mini 2 or a stereo pair of them as a persistent computer speaker with a Mac, but it's not a great experience in practice. Any time you do anything — start a song, pause a song, skip tracks — there's a 1-2 second delay in the audio responding. The lights on the top of the speakers, including the Sound Glow effect, will stop shining immediately, but the audio has to catch up. There's also a slight delay between speakers if you're using a stereo pair, which sounds like every song has added reverb. For these reasons, I found the Mac speaker feature more frustrating than enjoyable, and I quickly moved back to AirPlay over a nearby Sonos speaker for my productivity tunes. And I haven't even mentioned the fact that I can't get the persistent connection to stick with my MacBook Air either. I'm constantly reselecting the HomePod mini 2 as the audio output.\n\nAnother item that's disappointing is something else that's not here: a substantial overhaul. The original HomePod mini is six years old at this point, so I expected a much bigger redesign for the second-gen version (until the rumor mill squashed that). If you have a first-gen HomePod mini, you'll miss out on the updated Siri, whenever it arrives, and new features like Sound Glow and the home theater option. And if you're hoping to create a stereo pair, you'll need two of the same generation HomePod minis to do that; you can't pair a first-gen speaker with a second-gen model for that purpose.\n\nLastly, there's the price. The previous version was $99 before Apple raised it to $129 in June when the company hiked the prices on pretty much all of its hardware. Now, I'm well aware of the global economic factors at play, especially the AI-fueled cost increase on RAM and other components, but asking $50 more than the first-gen model for incremental updates is tough. Had Apple kept the price at the June rate, the HomePod mini 2 would be a much easier recommendation.\n\nIt's baffling to me that Apple would announce an updated HomePod mini without support for the latest version of Siri ready to go. The speaker's primary use is a hands-free conduit to the company's voice assistant, after all. The only decent conclusion I can come to is that Apple wanted to announce what it considered was a full suite of home products around the HomeView debut, and it felt like the Apple TV 4K, HomePod mini and a collection of smart home devices were the best way to do that. I would be interested to know what the hold up is, because the Apple Watch Series 10 supports Siri AI already, and those wearables are also running the same S10 chip as the HomePod mini 2. But, of course, Apple isn't talking specifics.\n\nAfter spending a few weeks with the HomePod mini 2, I mostly wish Apple had just waited. At a higher price, this isn't as compelling as it used to be in terms of getting Siri in your home. And with Siri AI missing, and some of the new audio features proving to be unreliable, it's clear a bit more polish was needed here."
       }
     },
     "media": null
@@ -222,81 +367,6 @@
     "media": null
   },
   {
-    "id": "techcrunch-9f7421192feae1fb",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/18/microsoft-ceo-satya-nadella-explains-why-he-asked-60k-employees-to-quit/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-19T00:42:56.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Microsoft CEO Satya Nadella explains why he asked 60K employees to quit",
-        "summary": "Microsoft CEO Satya Nadella explained why he offered buyouts to 60,000 of his employees in October, essentially urging them to voluntarily quit, rather than reducing the workforce via another massive layoff. The short answer is AI, but not in the way you might expect.",
-        "body": "Microsoft CEO Satya Nadella explained Wednesday why he offered buyouts to 60,000 of his employees in October, essentially urging them to voluntarily quit instead of reducing the workforce via another massive layoff.\n\nShort answer: AI, but not, he insists, in the way you might expect. He’s not saying he’s replacing employees with AI, especially software engineers. He’s saying he’s reorganizing Microsoft into a company where everyone uses AI to do their work, and their jobs become focused on managing that AI.\n\nThe buyout was “to make sure that at least everyone felt like they had agency in making choices,” he told Andrew Ross Sorkin during the DealBook Summit.\n\n“Let’s take software engineering. We went from, ‘Well, we don’t buy that AI can ever do software.’ To suddenly, ‘Wow, it can do all software, and why do we need software engineers?’ To now rediscovering that software engineering is very much alive and, in fact, is going to thrive, except the way the team is organized and the work that a software engineer does has now got a new operating point,” he explained.\n\nFor some people, “that reorganization and change is sort of hard, right?” he added, “but, I mean, it has to be done.”\n\nHe offered the example of the team that builds Cowork, the AI agent in Microsoft 365 apps. He said the team consists of just 11 developers who have mastered using AI to do their jobs. “They build a software factory that builds the product. They don’t build the product.”\n\nHe believes that every employee will one day similarly become a manager of agents, rather than a person directly doing the work. “That level of direction is what, by the way, is going to happen in all jobs.”\n\nBut Microsoft, as a 51-year-old company, didn’t grow up as an AI-first company. “So the question is, how quickly can an incumbent transform the work, the workflow, and the work artifact, and with all the wage support that goes with it?” he said. “It’s going to take a bit more time than anyone expects. And there is going to be in all of this, you know, people who may say, ‘Hey, I have some other choices I want to make.’”\n\nWhen asked about this same topic — why ask 60,000 people to voluntarily resign — last week by Gergely Orosz on his The Pragmatic Engineer podcast , Nadella further explained, “We have created enormous anxiety in people sort of feeling that they don’t have control of their own destiny because the way we have talked about this AI revolution.”\n\nHe called out talk about the singularity (the hypothetical point at which AI surpasses human intelligence) and predictions that AI will take away all jobs. “All of that leads anyone who even wants to change to be sort of anxious … You have to sort of walk the hard walk of really making the structural changes, getting people slotted, giving them opportunity.”\n\nIn other words, the buyout was the message to employees: You can get with the new AI-first program, which will radically change your job, or you choose to get on with your life. Elsewhere."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-19e15ec568bcefe7",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/18/amidst-fears-of-ai-cyberattacks-satya-nadella-says-lots-of-critical-infrastructure-is-unpatchable/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-18T23:45:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Amidst fears of AI cyberattacks, Satya Nadella says lots of critical infrastructure is ‘unpatchable’",
-        "summary": "The Microsoft CEO downplayed the recent Outlook outage while noting that AI was causing both opportunities and new challenges for securing much of the connected world.",
-        "body": "During his appearance at The New York Times’ DealBook Summit on Wednesday, Microsoft CEO Satya Nadella lamented the fact that a lot of America’s software systems — including those governing everyday hardware and transportation systems — suffer from unfixable software vulnerabilities that, in the age of AI-aided cyberattacks, are just waiting to be exploited.\n\n“Remember, there is a lot of stuff in our critical infrastructure that’s unpatchable,” Nadella said. “I mean, think about all the firmware and the chillers [a cooling device often used in data centers] and the HVAC systems everywhere else. So all of that, by the way, they’re on the internet.”\n\nIn other words: The smartification of the economy, in which much of the world’s “dumb” devices were hooked up to the internet, is now causing tremendous headaches.\n\nThe conversation took place against the backdrop of a wave of recent large-scale outages — including one involving Microsoft Outlook. Others have involved the NSA, the FFA, and Apple. Concerns have swirled that these outages are the result of cyberattacks, although officials have denied those claims. Still, the reality of AI-aided cyberattacks is spurring companies to find new strategies for vulnerability discovery and remediation.\n\nNadella touched briefly on the recent Outlook situation, noting that the global inconvenience was the result of a “latent bug” that led to a “perfect storm.”\n\n“We put out an incident response, and we’re going to obviously take all of the learnings, both upstream architectural, as well as operational, and fix that,” he added.\n\n“Somebody was telling me about sort of even the transportation systems and the amount of stuff that’s discoverable but with unpatchable firmware,” Nadella also added on the topic of vulnerable systems. “So we’ll have to really modernize for sure … and then we will have to assess what the threat vector looks like, what our own ability to both detect and then defend in real time looks like.”\n\nNadella made a broader point as well, which is that the process of patching software vulnerabilities has escalated to match the speed of potential exploitation, but that this has caused more problems.\n\n“We now have a very powerful tool that finds vulnerabilities,” he said. However, companies used to have more time to test those patches, understand a situation, and deploy them, he said. At the same time, AI has made sophisticated cyberattacks much easier to enact.\n\n“The patch [now] needs to go instantly from being available to being patched in production, because it’s being exploited in the wild, right? So that’s going to create instability.”"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-e653f8087c5c4e78",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/18/satya-nadella-predicts-ai-agents-will-reshuffle-the-economics-of-the-web/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-18T22:58:11.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Satya Nadella predicts AI agents will reshuffle the economics of the web",
-        "summary": "Microsoft's CEO says AI agents could disrupt advertising-driven business models, forcing companies like Amazon to rethink how they compete for customers.",
-        "body": "Posted:\n\nMicrosoft CEO Satya Nadella predicts that the rise of AI agents is going to reshape the economics of the internet, impacting the business models of the companies that rely on advertising and what he referred to as “human web” traffic.\n\nSpeaking at The New York Times DealBook Summit on Wednesday, the tech executive argued that the shift to an agentic web could change which companies pay others for traffic and for transactions, similar to how the transition from web portals like Yahoo to search engines like Google did years ago.\n\n“The current aggregators who have a business model which was for the human web will get, in some sense, reshuffled,” said Nadella. “And if you were monetizing ads because of the eyeballs, you now have to probably get down to essentially maybe CPC [cost-per-click] wins; maybe it’s more transactional,” he continued. “And so if you don’t accept the agent, somebody else will.”\n\nThe discussion turned to Amazon and its decision to block AI agents from accessing its retail website, preventing them from browsing its catalog and making purchases on behalf of their users. Nadella suggested that companies trying to protect their existing business models could lose out to others that are more willing to embrace the AI agents. For instance, if Amazon continues blocking agents, another shopping platform such as Shopify, could allow them, and gain an advantage.\n\n“I think this is going to be interesting,” he said, speaking to the changing models. “It’s the same thing that’s happening in other categories, right? Which is, if you’re in love with a particular business model, you have to kind of scramble,” he said."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "ars-technica-762c98ad1c11f19d",
     "type": "news",
     "sourceId": "ars-technica",
@@ -316,30 +386,6 @@
         "title": "Windows Server 2028 trades compatibility for out-of-the-box security",
         "summary": "Hardened defaults align with DoD standards, but there may be growing pains.",
         "body": "Microsoft's Ignite announcements this week went beyond the Office-in-Copilot overhaul with the reveal of the Windows Server 2028 Public Preview and its new security-by-default stance and what Microsoft calls Hardened Server Core . Windows Server 2028 will implement a default security framework that Microsoft says is aligned with hardened DoD benchmarks, such as the Defense Information Systems Agency's (DISA) Security Technical Implementation Guide (STIG).\n\nSTIGs work by providing a standard security framework for system administrators to follow recommended guidance. In the past, Windows Server admins were left to start from a blank canvas and then implement hardening configurations for operations. Secure baselines were available but not the default. Microsoft says that concern is now managed: \"The s ecure configuration is the starting state, not a project you run after setup. That closes the window where a newly deployed server sits exposed while it waits to be hardened. \"\n\nThe new Windows Server 2028 hardened-by-default state will only be available for the Server Core installs. Windows Server Desktop Experience installs do not include the changed stance.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-db092c91cbb9e71e",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2320945/xreal-aura-review/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-18T19:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "android"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Xreal Aura review: Solid AR glasses hampered by Google's half-baked Android XR",
-        "summary": "For $1,099, we should expect more.",
-        "body": "For $1,099, we should expect more.\n\nTwo years after Google announced Android XR , and a year after Samsung's flagship $1,800 Galaxy XR headset landed with a fizzle, Google's latest stab at mixed reality is finally starting to seem... real. We've taken a look at the first batch of Android XR smart glasses , which are landing this fall and take aim at Meta's popular Ray-Ban smart frames. Now Xreal is launching its Aura XR headset , which is the most intriguing Android XR device we've seen yet. It builds on Xreal's impressive history of virtual display glasses , adding just enough smarts to make it a viable, and far cheaper, alternative to Apple's Vision Pro. But with a starting price of $1,279 (on sale for $1,099 through December), it's still mainly targeted at VR developers.\n\nMuch like the baffling launch of Googlebooks, though, I'm not yet convinced that solid hardware will be able to save an ecosystem that Google isn't truly committed to. It's taken the company several years to actually deliver Android XR devices most people can actually afford, and there still aren't many notable apps that truly show off what the platform can do. Making Google Maps more immersive isn't enough.\n\nStill, the Xreal Aura is a sign that Android XR hardware is more than just vaporware, and it's significantly cheaper than last year's Galaxy XR. It's also a glimpse of what we'll see with the upcoming Meta VR Glasses, and perhaps a sign of how Apple could actually follow up on the promise of the Vision Pro.\n\nThe Xreal Aura is essentially a souped-up version of the company's already excellent display glasses, except it's connected to a wired Compute Puck that houses all of the hardware necessary to run Android XR. The Aura's sunglasses-like frames look almost the same as the Xreal One Pro , except it also features cameras for spatial sensing, finger tracking and capturing photos and video. Xreal's transparent frames let you easily see the world around you, without the need for complicated camera pass-through functionality like the Galaxy XR and Apple Vision Pro use. You can also darken the screen to completely black out the world, similar to what you'd see on a typical VR headset.\n\nLike Xreal's previous display glasses, the Aura relies on tiny micro-OLED screens with a resolution slightly beyond 1080p (1,920 by 1,200). They can reach up to 1,058 nits of brightness, which is slightly less than the 1,200 nits on the new Xreal One Pro+, and they support up to a 120Hz resolution with external devices. (The Android XR interface only runs at 72Hz.) The Aura's 70-degree field of view (FOV) is the best we've seen from Xreal, but it's also well below what we've seen on dedicated VR headsets, which use larger screens to completely fill your vision. The Apple Vision Pro reaches a FOV of around 100 degrees, while the Meta Quest 3 and many other headsets reach up to 110 degrees.\n\nFor processing power, the Compute Puck houses a Qualcomm Snapdragon Reality Elite system-on-a-chip, and either 12GB or 16GB of RAM (alongside either 256GB or 512GB of storage). It also features Xreal's custom X1S spatial processor, a slightly improved version of the X1 chip on earlier frames, and it looks similar to the Vision Pro's battery pack. It has two USB-C ports, one for connecting to the Aura's frames and the other for either charging or connecting to a separate device. The top portion of the Compute Puck also serves as a trackpad, which is helpful for navigating Android XR without holding your hand up.\n\nWhen you plug in another device into the Compute Puck, its video output shows up in a single Android XR window, which you can resize at will (and also position alongside other Android XR apps). You can also plug the Aura's frames directly into computers and other devices, where it functions exactly like the company's previous display glasses. That could be useful when you just need a big virtual screen, and you don't want to deal with the hassle of juggling the Compute Puck.\n\nThe Xreal Aura is exceptionally comfortable to wear; the frames weigh just 95 grams (0.2 pounds) on their own, compared to the 1.6-pound Vision Pro. The Aura is also fantastic for watching movies on a gigantic virtual display and it's incredibly useful if you need a large virtual monitor. But it's also crystal clear that Android XR is still in its infancy, as there aren't many notable apps to show off the platform. Using Android XR also doesn't feel very different than using any other Android device — as if Google made very little effort to reshape its OS around mixed reality. (There are definitely shades of the same laziness that annoyed me with Googlebooks.)\n\nIt doesn't help that apps crash often in Android XR, or that its core hand recognition interface feels lackluster. The Xreal Aura is often slow to respond to where my finger is pointing, or recognize when I'm pinching my fingers to select something. That's annoying enough when simply navigating Chrome or YouTube, but it's infuriating when trying to play an XR game like Cubism , which relies on placing 3D blocks in very specific places. Pointing at everything just to navigate Android XR also gets tiring over time — there's no eye-tracking like on the Vision Pro, which makes selecting on-screen elements a cinch. I quickly grew to prefer navigating Android XR with the Compute Puck's trackpad instead of pointing at everything.\n\nI was able to sit back and actually enjoy the Xreal Aura while watching the opening of Casino Royale on Prime Video, as well as a few episodes of the new Ghost in the Shell series. Xreal's micro-OLED displays deliver vibrant and colorful video, and its speakers built into the Aura's thick frames sound great. The Aura is also an excellent companion for laptops: I was able to have a giant screen mirroring my MacBook Air while playing the YouTube app right beside it.\n\nStill, I wish there was more to actually do in Android XR. Zooming around the world in Google Maps' immersive view is fun, and I appreciated revisiting VR experiences like Cosmos Unseen: Black Holes, but they're not as enthralling as they are in traditional VR headsets. Being able to see the outside world easily is both a blessing and a curse on the Xreal Aura. You can also see spatial versions of pictures in the Google Photos app, which is cool at first, but quickly starts to feel gimmicky. Similarly, I didn't see much point to Android XR's Spatial Mode, which converts everything you see into pseudo-3D. It just gave me a headache while browsing the web.\n\nThird-party support is clearly lackluster, especially when it comes to entertainment apps. All I saw was HBO Max and Prime Video, no Disney+ or Netflix (which isn't on visionOS, to be fair). You'll have to watch all of your other streaming services through Chrome, which isn't exactly a premium experience. It's also a particularly bad look when Meta just recently launched 3D movie support (including within the Disney+ app) on the Quest 3, 3S and its upcoming VR Glasses . That's something Google could eventually bring to Android XR, but who knows when that will happen.\n\nEven the first-party YouTube app is a disappointment. There's a specific section for immersive videos, but it's filled with the same blurry 360-degree content we've been seeing for years. There's no big push for higher-resolution 180-degree 3D video like we've seen on the Vision Pro, or that Meta has announced for its VR Glasses.\n\nAndroid XR is such a barren landscape, I sometimes found it more useful to just directly connect the Xreal Aura to my laptop or phone. At that point, it acts purely as a virtual display, but I found it helpful when I just wanted to stream a TV show in a crowded or tight space. The downside here is that connecting another device to the Compute Puck involves juggling a second USB-C cable, which can easily become frustrating. The Vision Pro can wirelessly connect to Macs, so it manages to avoid this issue.\n\nWithout the baggage of Android XR, the Xreal Aura was also able to deliver a brighter and sharper virtual view of my MacBook Air's desktop. There's a slight blurriness to external devices when using the Compute Puck, which makes text difficult to read. That's not a problem when you're directly connected to the glasses. But if that's the case, why not just get some of Xreal's existing display glasses? (More on this below.)\n\nBattery life is another potentially worrying variable. The Aura's battery drained from full to 40 percent after just 90 minutes of watching Prime Video content, browsing the web and messing around with Google Map's immersive view. It lasted for another 95 minutes before it completely drained down as I caught up on Ghost in the Shell .\n\nThe Compute Puck's heat output was also very noticeable. Its tiny fan often felt like it was working hard to cool down the device, and I was worried about stuffing it into my pocket like I do with the Vision Pro's battery pack. Xreal recommends avoiding pockets and other enclosed spaces while the Aura is doing serious work or fast charging. That's likely why the company bundles a lanyard and belt holster in the Aura's box.\n\nSince the Xreal Aura also features prominent cameras, I hesitated about using it in public spaces, where people might mistake it for Meta's Ray-Ban \"pervert glasses.\" That's an issue the company's cheaper display glasses avoid completely as they're camera-free (unless you add an additional accessory). I could just point to those specs and tell any worried coffee shop neighbor they don't have a camera.\n\nUnless you're a VR developer keen to get a leg up on Android XR, there's no reason to buy the Xreal Aura. At its $1,099 sale price (or the eventual $1,279 standard price), it comes in far cheaper than the $1,800 Galaxy XR or $3,699 Vision Pro, but the handful of games and immersive apps for Android XR still don't justify its cost.\n\nIt's a particularly bad investment since we don't know how long Google will actually stick with Android XR. Don't forget that its earlier attempts at VR, like Google Cardboard and Daydream , all died after a few years of lackluster support. Given that Android XR also encompasses simpler smart glasses, and that Meta is working hard to dominate this market, I'd hope Google would give it a few years to find some footing.\n\nAnd if the simple idea of having a virtual screen on your face sounds intriguing, then consider Xreal's existing display glasses. I loved the Xreal One last year , and the company just recently launched a brighter One+ model for $600 . Even the $299 Xreal XBX a01+ specs were bright and fun to use, even though they don't support any spatial features.\n\nXreal has delivered yet another light, bright and comfortable pair of AR specs with the Aura, but it's clearly hampered by a half-baked Android XR platform. Even worse, Android XR is a major reason why it costs twice as much as the company's previous hardware. At this point, the Xreal Aura serves as proof of life for Android XR, and nothing more."
       }
     },
     "media": null
@@ -388,30 +434,6 @@
         "title": "From TalkBack to Jieshuo, and Now SandFly: My Journey Through Android Screen Readers",
         "summary": "After years of using TalkBack and Jieshuo, I’ve decided to make SandFly my primary screen reader. For me, this isn’t simply about replacing one application…",
         "body": "Published 18 November 2026 by Salih Kunduz\n\nAfter years of using TalkBack and Jieshuo, I’ve decided to make SandFly my primary screen reader.\n\nFor me, this isn’t simply about replacing one application with another. It’s also an opportunity to look back at how Android accessibility has evolved over the years, what we’ve gained along the way, and what I expect from a screen reader today.\n\nI’ve been using Android for a long time, and I’ve witnessed quite a few changes in its accessibility ecosystem. Some were genuinely exciting, while others reminded us how limited our choices were.\n\nTable of Contents\n\nFor much of the period between 2013 and 2020, TalkBack was practically the only realistic option for many blind Android users.\n\nThere were other attempts and alternatives, of course, but TalkBack dominated the ecosystem. It came with Google’s backing, was integrated into Android, and worked across a wide range of devices.\n\nI don’t want to underestimate what TalkBack meant to us during those years. It made Android usable for millions of blind people, including me. It improved considerably over time, and many features we take for granted today were not available in its earlier versions.\n\nHowever, there was always something that bothered me: performance.\n\nTalkBack often felt heavier and slower than it needed to be. Navigating through interfaces, moving between elements, and performing everyday tasks sometimes required more patience than I thought was reasonable.\n\nAnd when you use a screen reader for practically everything you do on your phone, these small delays add up.\n\nThe problem wasn’t simply that TalkBack was slow. It was that we had very little choice. If something didn’t work the way we wanted, we could report it, wait for an update, or learn to live with it.\n\nFor years, that was simply the reality of Android accessibility.\n\nMy experience with Jieshuo changed the way I thought about screen readers.\n\nFor the first time, I felt that I was getting much closer to the full performance of my Android device.\n\nThe difference wasn’t limited to speech responsiveness. Navigation felt faster, interactions were more immediate, and I had considerably more control over how my screen reader behaved.\n\nJieshuo offered a level of customization that TalkBack had never really provided. I could adjust the experience to suit my habits rather than constantly adapting my habits to the screen reader.\n\nOnce you become accustomed to that level of responsiveness and flexibility, going back isn’t easy.\n\nBut Jieshuo had its own problems.\n\nOne of the biggest challenges was communication with its developer. When something didn’t work properly, reporting an issue and getting meaningful feedback wasn’t always straightforward. For a product that plays such an important role in our daily lives, communication matters enormously.\n\nThere was also the issue of distribution and compatibility.\n\nBecause Jieshuo wasn’t available through Google Play, certain banking applications and other security-sensitive services occasionally created problems. Some applications treated the screen reader as a potential security risk, even though we were simply using it to access our devices.\n\nAs a blind user, I found that particularly frustrating.\n\nA screen reader isn’t an optional convenience. It’s the interface through which we interact with our phones. Having to choose between using the screen reader I prefer and accessing essential services is not a reasonable situation.\n\nAnd then there were the practical complications. Even something as ordinary as paying for a screen reader could involve additional services, intermediaries, or procedures that an average user shouldn’t have to deal with.\n\nThese things might seem relatively minor when considered separately, but together they affect the overall experience.\n\nJieshuo showed me what was possible in terms of performance and customization. At the same time, it made me appreciate certain advantages I had previously taken for granted.\n\nDespite all my criticism of TalkBack’s performance, I never completely abandoned it.\n\nThere was something reassuring about knowing it was there.\n\nTalkBack was officially supported, widely recognized, and generally less likely to create complications with applications that were sensitive to accessibility services.\n\nWhenever I encountered a problem with Jieshuo, I knew I could return to TalkBack.\n\nIt might not have been as fast or as flexible as I wanted, but it provided a familiar and relatively predictable experience.\n\nIn that sense, TalkBack became my safe harbor.\n\nAnd I think that says something important about screen readers. Performance matters, but so do stability, reliability, compatibility, and trust.\n\nThe ideal screen reader shouldn’t force us to sacrifice one for another.\n\nAfter all these years, I think we need to reconsider what we actually expect from an Android screen reader.\n\nOf course, responsiveness and advanced features matter. Nobody wants to use a slow or unnecessarily restrictive screen reader.\n\nBut speed alone isn’t enough.\n\nA screen reader should be stable, reliable, and inclusive. It should be easy to obtain, straightforward to set up, and accessible to people with different levels of technical experience.\n\nYou shouldn’t need a master’s degree, let alone a PhD in technology, just to configure your screen reader and use your phone comfortably.\n\nI enjoy experimenting with technology. I don’t mind exploring advanced settings, testing new features, or finding workarounds when something doesn’t behave as expected.\n\nBut that’s my personal interest. It shouldn’t be a requirement for everyone else.\n\nSomeone who has just started using Android with a screen reader should be able to learn the basics without feeling overwhelmed. Meanwhile, experienced users should have access to the advanced tools and customization they need.\n\nThese two expectations aren’t contradictory.\n\nA well-designed screen reader should be approachable for beginners without becoming restrictive for advanced users.\n\nAccessibility must extend beyond the application’s interface, too. Installation, updates, payments, documentation, and communication with developers are all part of the experience.\n\nIf obtaining or paying for an accessibility tool requires navigating through several third-party services and complicated procedures, then something is wrong with that experience.\n\nThese considerations have become increasingly important to me, and they’re among the reasons I’ve started looking at SandFly more seriously.\n\nWhat initially attracted me to SandFly was its approach.\n\nBecause SandFly builds on TalkBack’s foundation, many aspects of the experience already feel familiar. Its settings, menus, and general structure don’t require me to forget years of accumulated habits and start from scratch.\n\nThat’s a significant advantage.\n\nChanging screen readers isn’t always easy, particularly when you’ve spent years developing your own gestures, routines, and ways of interacting with Android.\n\nWith SandFly, I feel that I’m getting something close to the safety and familiarity of TalkBack, combined with a much more capable and comfortable environment.\n\nIf TalkBack was my safe harbor, SandFly feels like that same harbor opening into a much more luxurious bay.\n\nIt’s a slightly unusual comparison, perhaps, but it describes the feeling quite well.\n\nThe familiar foundation is still there, while the possibilities continue to expand.\n\nSandFly is still a developing project, and I don’t want to pretend that every feature is perfect or that it has already solved every problem. However, its advanced capabilities are progressing, and I’ve been encouraged by the direction of its development.\n\nAnother important advantage is how approachable the experience feels.\n\nI don’t have to spend hours trying to understand an entirely unfamiliar system just to configure the basics. At the same time, there are more advanced possibilities to explore as I become accustomed to it.\n\nThat balance is exactly what I want from a modern screen reader.\n\nThere are also some very practical reasons behind my decision.\n\nFirst, paying for the software doesn’t have to become a separate technical challenge. If I decide to purchase it, I don’t have to deal with numerous intermediary services just to complete the process.\n\nThat might not sound particularly exciting, but simplicity matters.\n\nSecond, SandFly hasn’t caused problems with the banking service I personally use.\n\nI want to be careful about how I describe this. My experience doesn’t mean every banking application will necessarily work without issues for every user. But for me, being able to use my preferred screen reader without compromising access to an essential financial service is a major advantage.\n\nAnd then there’s something that deserves more attention: physical keyboards.\n\nSandFly appears to place considerable importance on physical keyboard support, and it’s clear that thought has gone into this part of the experience.\n\nThis matters to me personally because I don’t use Android exclusively on a phone. I also use a tablet, and physical keyboard interaction is an important part of how I work with it.\n\nA screen reader that treats physical keyboard navigation as a serious part of the user experience, rather than an afterthought, immediately becomes more interesting to me.\n\nI don’t think physical keyboard support receives enough attention in discussions about Android accessibility.\n\nWe often focus on touch gestures, speech responsiveness, and customization. Those are important, of course, but Android is no longer limited to the traditional smartphone experience.\n\nTablets, foldables, keyboards, and different ways of interacting with our devices deserve equal consideration.\n\nThe more I explored SandFly from this perspective, the more I began to feel that it could become a screen reader I would genuinely enjoy using every day.\n\nThere’s another factor that has influenced my decision: communication with the developer.\n\nAfter my experience with Jieshuo, I have come to value this much more than I used to.\n\nBeing able to contact a developer, explain a problem, discuss an idea, and receive feedback makes a real difference.\n\nThis doesn’t mean every suggestion should be accepted or every bug should be fixed immediately. Software development doesn’t work that way.\n\nWhat matters is knowing that communication is possible and that users’ experiences are being considered.\n\nThrough my work with Accessible Android, I’ve spent a considerable amount of time testing applications, reporting accessibility issues, and communicating with developers.\n\nOne thing I’ve learned is that the relationship between developers and users can influence the quality of a product just as much as technical decisions do.\n\nSandFly’s developer has been approachable, and that gives me another reason to follow the project closely.\n\nOf course, good communication alone doesn’t guarantee good software. The product still has to demonstrate its reliability through daily use.\n\nBut when a project combines technical ambition with an approachable developer, I’m much more willing to invest my time in it.\n\nI’m not switching to SandFly because I believe TalkBack has become irrelevant or because I want to dismiss everything Jieshuo has offered me.\n\nQuite the opposite.\n\nI appreciate what both screen readers have contributed to my Android experience.\n\nWithout TalkBack, my early years on Android would have been very different. Without Jieshuo, I might never have realized how much faster and more flexible screen reading could feel.\n\nBut I’m also not particularly interested in remaining loyal to a screen reader simply because I’ve used it for years.\n\nMy loyalty is to accessibility, independence, and the freedom to use technology in the way that suits me best.\n\nSandFly will have to prove itself through everyday use. There will almost certainly be bugs, missing features, and situations where I may need to return to another screen reader.\n\nThat’s perfectly normal for a developing project.\n\nFor now, however, I see enough potential to make the transition.\n\nWhat I find particularly encouraging is that we seem to be moving toward a more diverse Android accessibility ecosystem.\n\nWe no longer have to evaluate screen readers solely in terms of whether they can read an interface. We can discuss performance, usability, reliability, physical keyboard support, distribution, payment accessibility, developer communication, and the overall quality of the experience.\n\nAnd we should.\n\nAfter all, an Android screen reader shouldn’t simply make a device accessible.\n\nIt should make using that device comfortable, efficient, and enjoyable.\n\nThat’s what I’m looking for in SandFly, and that’s why I’ve decided to give it a chance.\n\nPublished in Articles"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-00af7436ada1d3a9",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/gaming/2026/11/will-wrights-next-simulation-will-use-ai-to-mine-content-from-your-memories/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-18T18:10:33.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Will Wright's next simulation will use AI to mine content from your memories",
-        "summary": "With MyMems , Wright says he wants to \"turn the simulation inward.\"",
-        "body": "The computer gaming world hasn't heard much from Will Wright ( SimCity , The Sims ) since the underwhelming release of Spore in 2008 and Wright's subsequent departure from Maxis owner EA . Now, well over 15 years later, Wright is starting to promote his next digital simulation, which will use generative AI technology to craft a game-like experience from players' memories.\n\nMyMems , which is slated to release next year, differentiates itself from Wright's previous projects by \"turn[ing] the simulation inward,\" as Wright's Gallium Studios and partner Artificial Agency put it in a press release this morning . The game will mine memories provided by the player to create digital people that can then form teams to solve puzzles in the game world.\n\n“If my Grandmother ended up in a Grand Slam match against Serena Williams, who would win?\" Wright says by way of example in the release. \"If I had to build a bridge across a short chasm, which three people from my life would I choose to help me?\"\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -764,31 +786,6 @@
     "media": null
   },
   {
-    "id": "applevis-apps-0718cba2bff3cd40",
-    "type": "news",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/bloom-garden-puzzle-game",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-14T09:23:18.000Z",
-    "categories": [
-      "apple",
-      "apps-accesibles",
-      "android"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Bloom: Garden Puzzle Game",
-        "summary": "Merge two matching flowers, grow a garden, and turn a single seed into a mythical bloom. A relaxing offline tile puzzle with no account, no wifi and no timers. Free to play, forever. HOW TO PLAY • Swipe up, down, left, or right to slide every tile in that direction • Two matching plants merge into the next stage and grow your score • The run keeps going forever, until the board fills up and no merges remain WHAT MAKES BLOOM DIFFERENT • Endless growth. The trophy is just the beginning. Mythical tiers stack past it • Calm, hand-drawn pixel art with gentle haptic feedback on every merge • Plays fully offline, bring it to flights, subways, and waiting rooms • Global leaderboard via World Ladder, see how your best stacks up worldwide • No accounts, no sign-ups, no friend invites. Just plants PERFECT FOR • Five minutes between meetings • Wind-down before bed • Anyone who loves merge / 2048-style puzzles Grow life from a seed. One tap at a time.",
-        "body": "Merge two matching flowers, grow a garden, and turn a single seed into a mythical bloom. A relaxing offline tile puzzle with no account, no wifi and no timers. Free to play, forever.\n\nHOW TO PLAY • Swipe up, down, left, or right to slide every tile in that direction • Two matching plants merge into the next stage and grow your score • The run keeps going forever, until the board fills up and no merges remain\n\nWHAT MAKES BLOOM DIFFERENT • Endless growth. The trophy is just the beginning. Mythical tiers stack past it • Calm, hand-drawn pixel art with gentle haptic feedback on every merge • Plays fully offline, bring it to flights, subways, and waiting rooms • Global leaderboard via World Ladder, see how your best stacks up worldwide • No accounts, no sign-ups, no friend invites. Just plants\n\nPERFECT FOR • Five minutes between meetings • Wind-down before bed • Anyone who loves merge / 2048-style puzzles\n\nGrow life from a seed. One tap at a time."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "accessible-android-283e15533a6a9ecd",
     "type": "news",
     "sourceId": "accessible-android",
@@ -960,30 +957,6 @@
         "title": "Learn About New Features of JAWS, ZoomText, and Fusion 2027",
         "summary": "JAWS, ZoomText, and Fusion 2027 introduce new features and enhancements designed to improve accessibility, productivity, and the overall user experience. Join us Thursday, November 12 at noon ET for a live webinar to learn more about the latest updates and how they can support your everyday tasks. What We’ll Cover We’ll discuss new features and …",
         "body": "JAWS, ZoomText, and Fusion 2027 introduce new features and enhancements designed to improve accessibility, productivity, and the overall user experience. Join us Thursday, November 12 at noon ET for a live webinar to learn more about the latest updates and how they can support your everyday tasks.\n\nWe’ll discuss new features and enhancements that will help you:\n\nVisit the What’s New in JAWS 2027 or What’s New in ZoomText 2027 pages to read additional details about these features.\n\nRegister for this webinar to learn about these new, exciting features that increase efficiency and productivity. ACVREP credits will be available for those who attend the live webinar.\n\nCan’t attend? We archive all webinars on our Webinars on Demand page. Have questions? Send an email to training@vispero.com ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-apps-e5a6dccd3b9d2cec",
-    "type": "news",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/utilities/clicklet",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-11T09:45:01.000Z",
-    "categories": [
-      "apple",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Clicklet",
-        "summary": "Clicklet lets the Camera Control button on your iPhone start your Apple Shortcuts. Pick one shortcut to launch with a press, or turn on Menu mode and choose from a few favorites each time. Clicklet opens Apple Shortcuts to run your workflow, so you'll see the usual Shortcuts screens, along with any permission prompts or app handoffs your shortcut needs. To set up your library, install the included Connect Clicklet helper. It brings in your shortcut names and small icon images, which appear in your library, in the menu, and while a shortcut opens. You can also search for a shortcut or type its name. If you used an earlier version, replace the old helper with the new one and refresh to get icons. From the menu, tap Configure to go back to setup. You can scroll the menu by dragging along its side margins. Your shortcut names, icons and selections stay on your device. There's no account, advertising, analytics, subscription or in-app purchase. Camera access supports the Camera Control and lock-screen handoff and shows a live preview; Clicklet doesn't save photos or videos. Launching while your iPhone is locked requires authentication. Requires iOS 18 or later and Apple's Shortcuts app. Launching from the button requires an iPhone with Camera Control; set Clicklet in Settings > Camera > Camera Control. Opening Clicklet on its own shows your setup without running a shortcut.",
-        "body": "Clicklet lets the Camera Control button on your iPhone start your Apple Shortcuts. Pick one shortcut to launch with a press, or turn on Menu mode and choose from a few favorites each time.\n\nClicklet opens Apple Shortcuts to run your workflow, so you'll see the usual Shortcuts screens, along with any permission prompts or app handoffs your shortcut needs.\n\nTo set up your library, install the included Connect Clicklet helper. It brings in your shortcut names and small icon images, which appear in your library, in the menu, and while a shortcut opens. You can also search for a shortcut or type its name. If you used an earlier version, replace the old helper with the new one and refresh to get icons.\n\nFrom the menu, tap Configure to go back to setup. You can scroll the menu by dragging along its side margins.\n\nYour shortcut names, icons and selections stay on your device. There's no account, advertising, analytics, subscription or in-app purchase. Camera access supports the Camera Control and lock-screen handoff and shows a live preview; Clicklet doesn't save photos or videos. Launching while your iPhone is locked requires authentication.\n\nRequires iOS 18 or later and Apple's Shortcuts app. Launching from the button requires an iPhone with Camera Control; set Clicklet in Settings > Camera > Camera Control. Opening Clicklet on its own shows your setup without running a shortcut."
       }
     },
     "media": null

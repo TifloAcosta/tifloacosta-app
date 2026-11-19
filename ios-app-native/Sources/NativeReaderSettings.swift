@@ -116,7 +116,6 @@ struct NativeReaderPunctuationControls: View {
             selectedIndex: $style
         )
         if style == 3 {
-            Text("Ajusta cada signo con deslizamientos arriba o abajo. Intervalos de 0 a 1,50 segundos, en pasos de 0,05.")
             NativeAdjustableChoice(title: "Pausa después de coma",
                                    choices: choices, selectedIndex: selection($comma))
             NativeAdjustableChoice(title: "Pausa después de punto y coma",
@@ -128,8 +127,6 @@ struct NativeReaderPunctuationControls: View {
             NativeAdjustableChoice(title: "Pausa después de salto de párrafo",
                                    choices: choices, selectedIndex: selection($paragraph))
         }
-        Text("Las pausas se aplican a la lectura con voces del sistema. La duración natural depende de la voz. No modifican los audiolibros grabados ni garantizan los mismos tiempos en Gemini o Phonon.")
-            .font(.footnote)
     }
 }
 
@@ -313,7 +310,6 @@ struct NativeReaderAudioControls: View {
             } else if personalVoiceStatus == .unsupported {
                 Text("Este dispositivo no admite el uso de Voz personal en TifloLector.")
             }
-            Text("El tono modifica la voz sintetizada, no los audiolibros grabados.").font(.footnote)
             Button("Cómo instalar más voces del sistema") { showVoiceHelp = true }
                 .accessibilityHint("Indica dónde descargar voces adicionales de iOS.")
                 .alert("Buscar más voces", isPresented: $showVoiceHelp) {
@@ -545,8 +541,10 @@ struct NativeReaderDocumentSettingsScreen: View {
 
 struct NativeReaderBrailleControls: View {
     @AppStorage("native-reader-navigation-unit") private var navigationUnit = 0
+    @AppStorage("native-reader-braille-initial-text-focus") private var brailleFocusText = true
 
     var body: some View {
+        Toggle("Foco inicial en el texto", isOn: $brailleFocusText)
         NativeAdjustableChoice(
             title: "Unidad de navegación en braille",
             choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],

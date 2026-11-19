@@ -1435,7 +1435,6 @@ struct NativeReaderLibraryScreen: View {
                             .onAppear { library.markOpened(document) }
                     } label: { Text(documentRowLabel(document)) }
                     .accessibilityLabel(documentRowLabel(document))
-                    .accessibilityHint("Doble toque para abrir. Hay acciones de accesibilidad.")
                     .accessibilityActions {
                         Button("Reproducir") { play(document) }
                         if library.originalURL(for: document) != nil {
@@ -1983,6 +1982,7 @@ struct NativeReadingScreen: View {
     @AppStorage("native-reader-navigation-unit") private var navigationUnit = 0
     @AppStorage("native-reader-reading-mode") private var readingMode = 0
     @AppStorage("native-reader-presentation-mode") private var presentationMode = 0
+    @AppStorage("native-reader-braille-initial-text-focus") private var brailleFocusText = true
     @AppStorage("native-reader-reading-engine") private var readingEngine = 0
     @AppStorage("native-reader-gemini-voice") private var geminiVoice = "Kore"
     @AppStorage("native-reader-gemini-validated") private var geminiValidated = false
@@ -2901,7 +2901,6 @@ struct NativeReadingScreen: View {
             Button(speech.isPlaying ? "Pausar" : "Reproducir") {
                 activatePlaybackButton()
             }
-            .accessibilityHint("Doble toque para reproducir o pausar. Desliza arriba o abajo para moverte según el modo de navegación seleccionado.")
             .accessibilityValue("\(currentPercent) por ciento")
             .accessibilityAdjustableAction { direction in
                 switch direction {
@@ -3020,6 +3019,7 @@ struct NativeReadingScreen: View {
     /// stealing focus from an active speech session.
     private func restoreManualReadingFocus(using proxy: ScrollViewProxy) {
         guard (presentationMode != 0 || readingMode != 1), !speech.isPlaying,
+              (presentationMode != 2 || brailleFocusText),
               !textLayout.fragmentStarts.isEmpty else { return }
         let savedOffset = max(0, min(textLayout.totalCharacters,
             latest.lastTextOffset ?? readingOffset))
@@ -3050,7 +3050,6 @@ struct NativeReadingScreen: View {
             // Dejar este elemento como lectura estática con una sola acción.
             .contentShape(Rectangle())
             .accessibilityFocused($focusedFragment, equals: index)
-            .accessibilityHint("Acciones disponibles: Crear marca. Con VoiceOver, usa las acciones del rotor.")
             .accessibilityAction(named: Text("Crear marca")) {
                 bookmarkFromContextMenu(at: index)
             }

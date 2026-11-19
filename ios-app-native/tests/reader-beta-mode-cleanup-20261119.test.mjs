@@ -24,6 +24,34 @@ test('only the active reading mode displays its own controls', () => {
   assert.match(modes, /NavigationLink\("Motores externos"\)/);
 });
 
+test('braille provides a real per-reader focus preference instead of repeated help text', () => {
+  assert.match(settings, /@AppStorage\("native-reader-braille-initial-text-focus"\) private var brailleFocusText = true/);
+  assert.match(settings, /Toggle\("Foco inicial en el texto", isOn: \$brailleFocusText\)/);
+  assert.match(reader, /@AppStorage\("native-reader-braille-initial-text-focus"\) private var brailleFocusText = true/);
+  assert.match(reader, /presentationMode != 2 \|\| brailleFocusText/);
+});
+
+test('repeated book rows and text fragments have no redundant VoiceOver hints', () => {
+  const fragment = reader.split('private func readerFragment(at index: Int) -> some View {')[1]
+    ?.split('private var readingContent: some View')[0] ?? '';
+  assert.doesNotMatch(fragment, /\.accessibilityHint\("Acciones disponibles: Crear marca/);
+  const playback = reader.split('private var playbackRow: some View {')[1]
+    ?.split('private var trackButtons: some View')[0] ?? '';
+  assert.doesNotMatch(playback, /\.accessibilityHint\("Doble toque para reproducir o pausar/);
+  const libraryRows = reader.split('Section("Mi biblioteca")')[1]
+    ?.split('Section("Filtrar y ordenar")')[0] ?? '';
+  assert.doesNotMatch(libraryRows, /\.accessibilityHint\("Doble toque para abrir\. Hay acciones de accesibilidad/);
+  assert.match(fragment, /\.accessibilityAction\(named: Text\("Crear marca"\)\)/);
+});
+
+test('voice configuration uses labelled controls without permanent instructional paragraphs', () => {
+  assert.doesNotMatch(settings, /Text\("Ajusta cada signo con deslizamientos arriba o abajo/);
+  assert.doesNotMatch(settings, /Text\("Las pausas se aplican a la lectura con voces del sistema/);
+  assert.doesNotMatch(settings, /Text\("El tono modifica la voz sintetizada/);
+  assert.match(settings, /title: "Pausas por puntuación"/);
+  assert.match(settings, /title: "Pausa después de coma"/);
+});
+
 test('voice selection filters unavailable engines and hides system voices when Gemini selected', () => {
   assert.match(settings, /NativeVoiceCredentialStore\.hasKey\("gemini"\)/);
   assert.match(settings, /native-reader-gemini-validated/);

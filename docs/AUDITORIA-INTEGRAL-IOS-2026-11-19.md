@@ -115,3 +115,13 @@ No dar por concluida la compilación candidata ni ejecutar TestFlight hasta: (1)
 - Exportación y restauración de respaldo conservan perfiles de canción, lista, álbum y general mediante el campo existente `audioProfiles` (datos validados, sin secretos ni credenciales). Los respaldos antiguos sin metadatos de álbum siguen siendo decodificables por sus campos opcionales.
 - 369 pruebas iOS y 461 generales pasaron. Compilación Swift de `0d0a6751` y comprobación de metadatos `.appex` **correctas**; la acción GitHub puede seguir finalizando su captura no bloqueante.
 - **Validación pendiente:** comprobación en iPhone del reconocimiento de metadatos de varios formatos reales, restauración entre dispositivos, controles VoiceOver y reproducción/equalización de servicios externos. Las pistas que un servicio externo reproduce fuera de AVAudioEngine local no reciben estas bandas; la equivalencia no debe anunciarse.
+
+### Fase 1 de 6: organización musical — 19/11/2026
+
+- Se amplían las carpetas inteligentes: título, artista, género, fecha de importación y número mínimo de reproducciones. Las carpetas antiguas siguen usando la regla original por título; los campos nuevos son opcionales para conservar bibliotecas y respaldos anteriores.
+- El género puede asignarse dentro de la biblioteca sin alterar el archivo original; la fecha se registra al importar (con consulta de fecha de creación para archivos antiguos) y el contador avanza al iniciar la reproducción local.
+- Las listas admiten botones accesibles para subir o bajar cada entrada, también si proviene de Apple Music, Audius o Jamendo. Su orden se guarda en la lista virtual y no mueve ni elimina archivos musicales.
+- Los respaldos de índice y completos transportan regla inteligente, género, fecha de importación y contador; sus formas anteriores siguen siendo decodificables.
+- Los nuevos textos de controles y criterios tienen traducciones en inglés, portugués, francés, italiano y alemán, además del español original.
+- Comprobaciones locales: **373 contratos iOS y 461 pruebas generales correctas**. Commit de código remoto `692938e3`; compilación Xcode en GitHub Actions pendiente de resultado al redactar este párrafo.
+- No se ha creado otra rama ni publicado compilación en TestFlight. Queda para la fase de validación probar con VoiceOver en iPhone los cambios de orden, las fechas, los respaldos restaurados y los filtros sobre archivos musicales reales.

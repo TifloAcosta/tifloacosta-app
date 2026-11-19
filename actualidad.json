@@ -1,13 +1,38 @@
 [
   {
-    "id": "9to5mac-0fce7ae60b5e6662",
+    "id": "the-verge-99d796d35a1f84dc",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1037100/apple-siri-recap-audio-intelligence-hands-on",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-19T13:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "I let Apple’s always-listening AI summarize my life for two weeks",
+        "summary": "Was it worth it? I've been asking myself this quite a bit over the last month or so while testing both the Amazon Bee Frontier and Siri Recap on the Apple Watch Ultra 4. Both enable a wearable to ambiently listen to your conversations and, using AI, summarize them for you. Why? So you can […]",
+        "body": "Was it worth it?\n\nI've been asking myself this quite a bit over the last month or so while testing both the Amazon Bee Frontier and Siri Recap on the Apple Watch Ultra 4. Both enable a wearable to ambiently listen to your conversations and, using AI, summarize them for you. Why? So you can remember better and, hopefully, stay more present.\n\nThe main difference is that Amazon's Bee takes a maximalist (and frankly reality-bending) approach, whereas Apple is going for a more minimalist, privacy-first take. Both, however, require explicit disclosures to the people around you about recording what they say, and potentially follow-up explanations a …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-075cc4962abc3040",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/18/siri-modular-apple-watch-face-gains-two-new-styles-with-watchos-27-3/",
+    "originalUrl": "https://9to5mac.com/2026/11/19/oled-imac-plans-may-be-cancelled-by-apple-for-two-reasons/",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-19T00:49:22.000Z",
+    "publishedAt": "2026-11-19T12:51:43.000Z",
     "categories": [
       "apple",
       "tecnologia-general"
@@ -16,9 +41,182 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Siri Modular Apple Watch face gains two new styles with watchOS 27.3",
-        "summary": "Siri Modular, the new Apple Watch face in watchOS 27, is gaining new style options. watchOS 27.3, currently in beta, adds two more style options to the existing set. This gives users five options for adjusting what type of information appears on Siri Modular. more…",
-        "body": "Siri Modular, the new Apple Watch face in watchOS 27, is gaining new style options. watchOS 27.3, currently in beta, adds two more style options to the existing set. This gives users five options for adjusting what type of information appears on Siri Modular.\n\nSiri Modular originally shipped with three style options. Each supports a small line complication above the time.\n\nAdditionally, the original three styles include these options:\n\nIn watchOS 27.3, Apple introduces two new Siri features that work with Apple Watch Series 12 and Apple Watch Ultra 4 .\n\nFirst, there’s Siri Recap which uses the Apple Watch to turn audio into high-level text summaries. Second, there’s Live Rewind which lets you view a transcript of the last 15 seconds of spoken word.\n\nThe two new Siri Modular Apple Watch face styles help surface three things: invoking Siri, viewing conversations with Siri, and viewing Siri Recaps on the Apple Watch.\n\nThe new styles include a pill-shaped module that includes icon shortcuts that go directly to Siri conversations, invoke Siri AI, or go directly to Siri Recaps in the Siri app.\n\nOne style features a large digital clock with the new three-button Siri module. Another includes a compact digital clock with a Smart Stack tile and the new three-button Siri module.\n\nThis brings the style options to five. If you use the three circular complications configuration, you can also assign a Siri icon that invokes Siri AI.\n\nwatchOS 27.3 is currently in beta and expected to be released officially in December.\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable"
+        "title": "OLED iMac plans may be cancelled by Apple for two reasons",
+        "summary": "Apple is considering abandoning plans to launch an OLED iMac , according to a new supply chain report. The news comes just weeks after the first OLED Mac was launched in the form of the new touchscreen MacBook Pro . The company is said to be holding discussions with display partner Samsung about either delaying the planned launch or abandoning it altogether, with two reasons cited … more…",
+        "body": "Apple is considering abandoning plans to launch an OLED iMac , according to a new supply chain report. The news comes just weeks after the first OLED Mac was launched in the form of the new touchscreen MacBook Pro .\n\nThe company is said to be holding discussions with display partner Samsung about either delaying the planned launch or abandoning it altogether, with two reasons cited …\n\nApple’s journey into OLED screens began with the Apple Watch while other products were still using IPS LCD. The company subsequently switched to OLED for some iPhones and iPads before a long-awaited launch of the first OLED MacBook Pro back in October.\n\nIt was expected that the company would gradually transition to OLED across the full range of Macs over time. However, this process was expected to take a number of years, with the iMac not likely to join the party until 2029 or 2030 .\n\nThe Elec today reports that the move may be delayed even further or even abandoned altogether, for two reasons: cost and demand.\n\nThe company is said to be discussing a potential delay or cancellation of the project with Samsung Display. High OLED panel costs and weak sales of existing OLED-equipped products are believed to be factors behind the reconsideration […]\n\nThe biggest factor behind the review is cost. The iMac sells in smaller volumes than smartphones or laptops, making it difficult to maintain competitive pricing if expensive OLED panels are adopted. Weak sales of the OLED iPad Pro are also believed to have influenced the decision.\n\nThe report suggests that incoming CEO John Ternus has been reviewing the commercial viability of upgrading more products to OLED. As further evidence, the report says Apple has sent quotation requests to LCD suppliers for an iMac screen to be launched in around 2029."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-2053051f54d39e99",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/19/canva-introduces-new-controls-to-hide-generative-ai-features/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-19T12:30:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Canva introduces new controls to hide generative AI features",
+        "summary": "In light of growing pushback from users who want more control over how AI is integrated into their apps (if at all), Canva is introducing new settings that let them hide generative AI features and see less AI-generated content. Here are the details. more…",
+        "body": "In light of growing pushback from users who want more control over how AI is integrated into their apps (if at all), Canva is introducing new settings that let them hide generative AI features and see less AI-generated content. Here are the details.\n\nCanva today announced new controls that will let Free and Pro users choose whether to see generative AI features across the app, as well as how much AI-generated content appears in search results and in recommendations for templates and design elements.\n\nThe company notes that both controls are available at no additional cost and can be turned on or off at any time.\n\nAccording to Canva, “the future of creativity isn’t a choice between AI and no AI.” For this reason, it is introducing the following controls:\n\nThe company says that, while it knows that there is an ongoing debate between users with opposing views on whether AI has a place in creative work, it thinks “both views are valid”:\n\n“It’s not our place to tell anyone how to create, so today we’re launching two new controls that put that decision firmly with our community […].”\n\nImportantly, the company noted that select features that use AI without generating new content will remain available even when generative AI features are turned off:\n\n“Some of Canva’s everyday editing tools use AI to make simple tasks faster, without generating anything new. Background Remover, one of Canva’s most popular tools, lifts a subject cleanly out of a photo in a single click, and Magic Grab lets creators select an object in an image and move it somewhere else in the design. Both remain available when the generative AI switch is off, because they work only with what’s already in a design.”\n\nCanva added that these tools also won’t add an AI label to a design’s metadata, since that label is reserved for AI-generated content.\n\nAs for the company’s design content library, Canva said that while “a small portion of the library is AI-generated content made by Canva, including some abstract backgrounds and illustrated graphics,” its community has told it “they want an easier way to find design assets made by real people, so the content control reduces the number of AI-generated templates and elements that appear in search results and recommendations.”\n\nWith today’s announcement, Canva is essentially expanding on the AI permissions already available to administrators of Business, Enterprise, Teams, and Education accounts, which let organizations control how their teams use AI.\n\nCanva’s official announcement should go live here shortly, and we’ll update this post with the direct link once it’s up."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-48782fcc3521b4e2",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2321318/canva-will-let-users-switch-off-most-generative-ai/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-19T12:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Canva will let users switch off most generative AI",
+        "summary": "Canva is rolling out new settings to purge most generative AI from its app.",
+        "body": "The platform is adding new controls for its editing tools and its image library.\n\nLike most companies, Canva has added a fair number of AI tools and integrations to its platform over the past year. Today, the company is giving its users the option to strip the generative AI out of their experience. Canva is adding two new settings, one to turn all the gen AI features off or on, and a second to reduce how much gen AI content appears in a user's library. Free and Pro users will both be able to access the new controls.\n\nThere are some limitations to these AI settings. Some of the AI-powered editing tools, such as the Background Remover and Magic Grab, will remain available even when the broader AI tools are disabled. That's because those options don't leverage generative AI, only the content of an existing image, and using those features doesn't add the AI tag to the resulting image's metadata. And the library option will \"reduce\" the odds of an AI-generated image from Canva appearing in searches, but the company doesn't go so far as to say it will completely block them from the results.\n\nBoth new settings can be changed under the \"profile\" tab. For managing the platform-wide AI tools, it's under the \"permissions\" section of the settings menu, with the text \"Enable generative AI features.\" The library setting can be reached by navigating to \"Your Account\" and then the AI personalization section."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-27dc59ec8f3f1b5a",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1037126/canva-ai-features-off-button",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-19T12:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Canva adds an AI ‘off’ button",
+        "summary": "Canva will now allow you to turn off its generative AI features. With this change, you can disable the graphic design platform's array of AI tools, such as its AI photo-extending Magic Expand feature, as well as turn off the ability to generate images with its Canva chatbot. This toggle doesn't turn off every AI-powered […]",
+        "body": "Canva will now allow you to turn off its generative AI features. With this change , you can disable the graphic design platform's array of AI tools, such as its AI photo-extending Magic Expand feature, as well as turn off the ability to generate images with its Canva chatbot .\n\nThis toggle doesn't turn off every AI-powered feature on Canva, however. That includes Canva's background remover and its Magic Grab tool, which lets you select an object in an image and move it somewhere else. Canva says these tools will stay on because they \"make everyday tasks faster without generating anything new.\"\n\nThe toggle still turns off many of Canva's other …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-8f2d96847f006c5b",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/19/major-privacy-breaches-reported-in-muse-ai-including-bank-balances/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-19T12:20:00.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Major privacy breaches reported in Muse AI, including bank balances",
+        "summary": "Meta employees have expressed concerns about what appear to be major privacy breaches when using Muse , currently the second most popular free iPhone app in the App Store with over 10 million downloads. This includes again accessing end-to-end encrypted messaging without permission, and sharing what may be the bank balances of another Muse user … more…",
+        "body": "Meta employees have expressed concerns about what appear to be major privacy breaches when using Muse , currently the second most popular free iPhone app in the App Store with over 10 million downloads.\n\nThis includes again accessing end-to-end encrypted messaging without permission, and sharing what may be the bank balances of another Muse user …\n\nSiri AI was not the only AI app to launch back in September; Meta’s Muse AI app was launched the same month , with the company describing it as “your personal AI agent that gets things done across every part of life.”\n\nMuse initially launched as an iPhone app, with Mac and iPad apps following shortly afterwards. It immediately moved to the top of the US App Store charts , overtaking ChatGPT. It quickly exceeded 5 million downloads following a major advertising push by Meta, and that number has since doubled.\n\nIt wasn’t long before major privacy concerns were raised. Tech writer John Ternus reported that the Mac app accessed his messages despite him explicitly refusing permission. The app then lied to him about how it had achieved this. Meta described this as a bug .\n\nSecurity researcher Patrick Wardle also discovered a zero-day vulnerability that could allow an attacker to hijack dictated prompts , directing them instead to their own server.\n\nI said at the time that I would absolutely not be one of the millions of people using the app, and the wisdom of that decision has now been underlined by a fresh report.\n\nReuters now reports Meta employees discussing further breaches. This includes another example of accessing encrypted messages without permission.\n\nAn employee using Muse on her personal phone reported it had surprised her with a reminder to respond to a message from her sister on Signal, an end-to-end encrypted messaging service popular with privacy advocates that competes with Meta’s WhatsApp.\n\n“This seems like an extreme privacy violation. I definitely did not grant it access to other apps, or recall being asked about this,” the employee said in her post.\n\nThe report says this appears to have been done by capturing push notifications. However, this was what the app claimed had happened in the earlier case, and it turned out not to be true. The AI Now Institute was able to replicate the problem of Muse accessing Signal messages without permission.\n\nAnother employee reported receiving unsolicited bank balances that they say appeared to be those of another Muse user.\n\nMuse had randomly added an extra message to its regular chats about fishing-related weather and tide information, saying: “BTW, two bank updates, your Capital One balance is $2722.58, your Charles Schwab balance is $5899.57.”\n\n“I have never shared my bank account with Muse and never discussed any banking topic with Muse. I’m afraid it’s sending other’s bank info to me,” the staffer wrote in his post.\n\nMeta told Reuters that these were “isolated incidents” and suggested that the bank balances may have been AI hallucinations rather than leaked information.\n\nI can only repeat my previous take on Muse: Nope.\n\nImage: 9to5Mac/Meta/ Public domain vectors"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-c7c34760e8cd0dc3",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/features/1034740/ketogenic-diet-anorexia-roblox-medical-funding",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-19T12:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Roblox money is pushing a controversial anorexia treatment",
+        "summary": "In a dark room, a man with a camera makes his pitch: Therapy isn't the first treatment you should get if you have anorexia or bulimia, he says. He's in his late 20s, wearing a backward camo baseball cap and a silver chain. \"Instead of going straight to the therapy, let's do a keto diet […]",
+        "body": "In a dark room, a man with a camera makes his pitch: Therapy isn't the first treatment you should get if you have anorexia or bulimia, he says. He's in his late 20s, wearing a backward camo baseball cap and a silver chain. \"Instead of going straight to the therapy, let's do a keto diet where we encourage you to eat as much as you want\" - all while limiting your carbohydrate intake to 30 grams a day. He tells his viewers that this shift will force your brain to use a different fuel source, and \"all those defective neural pathways that were causing you to engage in that eating disorder, they heal up and they start to work correctly.\"\n\n\"Suddenl …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-3c0ef47eb395a541",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2321489/doj-accuses-russian-national-of-spying-on-and-harassing-palantir-employees/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-19T10:33:59.000Z",
+    "categories": [
+      "tecnologia-general",
+      "programas-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "DOJ accuses Russian national of spying on and harassing Palantir employees",
+        "summary": "The DOJ says the Russian national was ordered to spy on Palantir over Ukraine's use of its software for wartime purposes.",
+        "body": "He allegedly took photos of their work laptops and even once followed a female employee for 30 miles.\n\nA Russian national has been indicted for spying on and harassing the employees of a Silicon Valley technology and defense company, according to the Department of Justice . While the agency's announcement didn't name the specific company, Bloomberg reports that it was Palantir , and that the Russian national was told to do so over Ukraine's use of the company's software for wartime purposes.\n\nIgor D'iu was reportedly recruited by the Russian government through Telegram, where he also received orders on what to do, the DOJ says. He traveled from Istanbul, Turkey to Mexico City, from where he illegally crossed the border to the US in June 2026. On US soil, he was made to purchase laptops, phones, remote access software and wireless networking equipment. He was told that that the company he was monitoring \"was providing weapons to fight against Russia in Ukraine.\"\n\nThe Russian officials he was in contact with told him to visit a coffee shop near Palantir's Palo Alto office and take photos of its employees' laptop screens. They also made him switch on his laptop at designated areas near the company's offices, so they could remotely access and collect information from the devices of employees in the vicinity.\n\nHis assignment included the surveillance of Palantir employees and their homes, as well. In September, he allegedly followed a female employee in a car for more than 30 miles. D'iu's home was searched on October 8, where authorities found two Russian passports and $18,035 in cash. Authorities had also intercepted packages for him shipped from overseas, containing a fake California ID card and an authentic US passport altered with his photograph.\n\nPalantir, a tech company, is controversial for providing governments, law enforcement and the military products they can then use for mass surveillance . Wired previously reported that ICE used a database built by the company to compile dossiers on people accused of observing and protesting its activities. According to Bloomberg , the US uses Palantir's technology to offer targeting support to Ukraine. In addition, Ukrainian forces in Kyiv use its products for various purposes, including the removal of unexploded Russian mines in the country.\n\nD'iu has been charged with \"one count of conspiracy to act as an agent of a foreign government, one count of acting as an agent of a foreign government without notice to the Attorney General, one count of interstate stalking and one count of fraud in connection with identification documents.\" He is scheduled to appear in federal court on November 24."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "conticgo-4e6afbf31aca74b1",
+    "type": "news",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/irisvision-ultra-unas-nuevas-gafas-inteligentes-amplian-la-vision-hasta-10-aumentos-con-ayuda-de-la-inteligencia-artificial/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-11-19T06:56:50.000Z",
+    "categories": [
+      "tecnologia-accesibilidad",
+      "gafas-inteligentes",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "IrisVision Ultra: unas nuevas gafas inteligentes amplían la visión hasta 10 aumentos con ayuda de la inteligencia artificial",
+        "summary": "La compañía IrisVision presenta un nuevo dispositivo electrónico para personas con baja visión. Incorpora enfoque automático, diferentes modos de visualización y un asistente de inteligencia artificial capaz de leer textos y adaptar la imagen a las necesidades del usuario. La tecnología continúa ofreciendo nuevas alternativas para las personas con discapacidad visual. Una de las últimas […] La entrada IrisVision Ultra: unas nuevas gafas inteligentes amplían la visión hasta 10 aumentos con ayuda de la inteligencia artificial se publicó primero en Conticgo .",
+        "body": "La compañía IrisVision presenta un nuevo dispositivo electrónico para personas con baja visión. Incorpora enfoque automático, diferentes modos de visualización y un asistente de inteligencia artificial capaz de leer textos y adaptar la imagen a las necesidades del usuario.\n\nLa tecnología continúa ofreciendo nuevas alternativas para las personas con discapacidad visual. Una de las últimas novedades llega de la mano de IrisVision, que ha presentado sus nuevas IrisVision Ultra , unas gafas electrónicas diseñadas para facilitar actividades cotidianas como leer, reconocer rostros, ver la televisión o consultar información a distancia.\n\nUno de los principales atractivos de las IrisVision Ultra es su capacidad de ampliación. El dispositivo permite aumentar la imagen hasta 10 veces y cuenta con un sistema de enfoque automático que mantiene la nitidez al observar objetos a diferentes distancias.\n\nEsto permite utilizar las gafas para distintas actividades, tanto de cerca como a distancias intermedias o lejanas.\n\nAdemás, incorporan varios modos de visualización para adaptar la imagen a diferentes necesidades:\n\nTambién incluyen un modo específico para televisión, que ajusta la exposición para reducir los reflejos y mejorar la visualización de los contenidos.\n\nOtra de las novedades es la integración de Iris, la plataforma de inteligencia artificial de IrisVision.\n\nEste asistente permite controlar diferentes funciones mediante comandos de voz. El usuario puede solicitar que aumente la imagen, modifique el brillo, cambie el contraste o active un modo de lectura.\n\nUna de sus funciones más interesantes es la lectura de textos en voz alta. Basta con dirigir la mirada hacia una página, una etiqueta o una carta para pedirle a Iris que lea su contenido.\n\nEl sistema admite 14 idiomas, entre ellos el español, y permite interactuar con las gafas utilizando instrucciones sencillas.\n\nLa inteligencia artificial también facilita el acceso a otros contenidos. Por ejemplo, permite buscar vídeos en YouTube, consultar películas, escuchar audiolibros y acceder a juegos diseñados específicamente para personas con baja visión.\n\nLas IrisVision Ultra pesan aproximadamente 230 gramos y ofrecen una autonomía de hasta 10 horas, según las condiciones de uso y la configuración del dispositivo.\n\nUna de sus novedades es la incorporación de botones táctiles directamente en las gafas. Gracias a ellos, el usuario puede desplazarse por los diferentes modos, modificar los aumentos y controlar las funciones sin necesidad de manejar un mando independiente.\n\nEsta característica resulta especialmente interesante desde el punto de vista de la accesibilidad, ya que permite localizar los controles mediante el tacto.\n\nAdemás, cada dispositivo incluye una sesión individual de formación a distancia para ayudar al usuario a familiarizarse con sus funciones.\n\nIrisVision presenta este dispositivo como una ayuda electrónica para personas con diferentes patologías visuales.\n\nEntre los perfiles a los que se dirige se encuentran personas con:\n\nLas diferentes opciones de ampliación, contraste y adaptación del campo visual permiten personalizar la experiencia según las necesidades de cada persona.\n\nNo obstante, estas gafas no son una solución universal. Su utilidad depende del resto visual, las características de cada patología y las necesidades concretas del usuario. Por eso, es recomendable probar el dispositivo y contar con asesoramiento especializado en baja visión antes de adquirirlo.\n\nEl precio es uno de los aspectos más importantes de este lanzamiento.\n\nSegún la página oficial del fabricante, las IrisVision Ultra tienen un precio promocional de 3.799 dólares , frente a los 3.999 dólares de su precio original.\n\nAl cambio aproximado, esta cantidad equivale a unos 3.460 euros. Sin embargo, hay que tener en cuenta que se trata de una conversión orientativa y que el precio final para compradores europeos puede variar.\n\nLa compañía indica además un coste de envío internacional de 135 dólares. A esta cantidad podrían añadirse impuestos y otros gastos de importación, por lo que conviene consultar las condiciones antes de realizar el pedido.\n\nPor el momento, el fabricante comercializa el dispositivo directamente desde su página web.\n\nLas IrisVision Ultra representan una nueva apuesta por las ayudas electrónicas portátiles para personas con baja visión.\n\nSu combinación de ampliación de imagen, ajustes de contraste, lectura de textos e inteligencia artificial busca facilitar actividades cotidianas que pueden resultar complicadas cuando existe una pérdida de visión.\n\nAunque su precio sigue siendo elevado y será necesario conocer la experiencia de los usuarios con este nuevo modelo, el dispositivo muestra cómo la tecnología puede ofrecer herramientas cada vez más personalizadas para aprovechar el resto visual.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuente: Iris Vision"
       }
     },
     "media": null
@@ -74,30 +272,6 @@
     "media": null
   },
   {
-    "id": "the-verge-dbb2e1e54acf161f",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1037151/school-districts-ditching-google",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-18T23:18:35.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The nation’s largest school districts consider ditching Google Search",
-        "summary": "New York, Los Angeles, and Chicago schools are considering Google alternatives after the company said it will disable Search for schools that opt out of its AI features, according to The New York Times. Starting next year, schools will not have the option to disable Gemini-powered features without also disabling Search. Chris Phillips, Google's vice […]",
-        "body": "New York, Los Angeles, and Chicago schools are considering Google alternatives after the company said it will disable Search for schools that opt out of its AI features, according to The New York Times . Starting next year, schools will not have the option to disable Gemini-powered features without also disabling Search. Chris Phillips, Google's vice president of education, told the Times that, \"Search and AI are deeply integrated,\" and that schools that turn off Google's AI features \"will not have access to Search.\"\n\nMany elected officials, including New York City Mayor Zohran Mamdani and Senator Bernie Sanders, responded harshly, calling Go …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "techcrunch-e653f8087c5c4e78",
     "type": "news",
     "sourceId": "techcrunch",
@@ -118,55 +292,6 @@
         "title": "Satya Nadella predicts AI agents will reshuffle the economics of the web",
         "summary": "Microsoft's CEO says AI agents could disrupt advertising-driven business models, forcing companies like Amazon to rethink how they compete for customers.",
         "body": "Posted:\n\nMicrosoft CEO Satya Nadella predicts that the rise of AI agents is going to reshape the economics of the internet, impacting the business models of the companies that rely on advertising and what he referred to as “human web” traffic.\n\nSpeaking at The New York Times DealBook Summit on Wednesday, the tech executive argued that the shift to an agentic web could change which companies pay others for traffic and for transactions, similar to how the transition from web portals like Yahoo to search engines like Google did years ago.\n\n“The current aggregators who have a business model which was for the human web will get, in some sense, reshuffled,” said Nadella. “And if you were monetizing ads because of the eyeballs, you now have to probably get down to essentially maybe CPC [cost-per-click] wins; maybe it’s more transactional,” he continued. “And so if you don’t accept the agent, somebody else will.”\n\nThe discussion turned to Amazon and its decision to block AI agents from accessing its retail website, preventing them from browsing its catalog and making purchases on behalf of their users. Nadella suggested that companies trying to protect their existing business models could lose out to others that are more willing to embrace the AI agents. For instance, if Amazon continues blocking agents, another shopping platform such as Shopify, could allow them, and gain an advantage.\n\n“I think this is going to be interesting,” he said, speaking to the changing models. “It’s the same thing that’s happening in other categories, right? Which is, if you’re in love with a particular business model, you have to kind of scramble,” he said."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-6ea2b5aa44f14ac0",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5google.com/2026/11/18/gemini-4-neon-announcement/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-18T21:58:36.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google launches Gemini 4 Neon with Carbon quality at Flash speeds, live for AI Pro",
-        "summary": "Following last week’s release of Carbon and Hydrogen , Google today is rolling out Gemini 4 Neon. The model offers “frontier-level reasoning for complex, high-frequency workflows faster and more cost efficiently.” more…",
-        "body": "Following last week’s release of Carbon and Hydrogen , Google today is rolling out Gemini 4 Neon. The model offers “frontier-level reasoning for complex, high-frequency workflows faster and more cost efficiently.”\n\nBefore today, Google’s Gemini 4 family consisted of:\n\nNeon has performance comparable to, if not surpassing, Carbon across coding, reasoning, and agentic tasks, but at Flash speeds and a lower cost.\n\nAs such, Neon is available in the Gemini app for AI Pro (and AI Ultra) subscribers, with 3.1 Pro finally going away. Neon also replaces Argon. Meanwhile, 3.5 Flash-Lite is now “Auto” in the model picker for paid users.\n\nWith this launch, the model picker is:\n\nIn the Gemini app, Google says to expect:\n\nNeon has the same 1 million-token context window with four thinking levels, like Hydrogen: Low, Medium, High, and Extra High. Officially, the new model sits between Hydrogen and Carbon in the Gemini 4 family.\n\nNeon is built for complex coding, analytical reasoning, and production-grade enterprise workflows. While Carbon tackles your hardest, long-horizon projects and Hydrogen handles fast everyday execution, Neon balances depth and efficiency.\n\nIn terms of benchmarks:\n\nNeon is priced at $3/1M input tokens and $15/1M output tokens, or twice as expensive as Hydrogen. Argon and Carbon cost $2/1M input and $10/1M output until November 30. After the promotional pricing, it will be $4/1M input and $20/1M output, with Neon 25% cheaper as a result.\n\nThe model is also available in Google Antigravity for paid AI Pro or Ultra subscribers."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-10806327443afcd2",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/18/instagram-finally-lets-users-edit-stories-after-publishing-but-theres-a-catch/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-18T20:48:35.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Instagram finally lets users edit Stories after publishing, but there’s a catch",
-        "summary": "Every once in a while, Instagram rolls out an update that addresses one of its users’ most longstanding requests. Today is one of those days. more…",
-        "body": "Every once in a while, Instagram rolls out an update that addresses one of its users’ most longstanding requests. Today is one of those days.\n\nAs spotted by The Verge , Instagram head Adam Mosseri confirmed today that the app will finally let users edit a Story after publishing.\n\nThis means users will be able to add stickers and drawings, fix typos or adjust text, and even change the music without having to delete the Story and publish it again, which would mean losing any views it had already received.\n\nThe catch is that users will only have 15 minutes after publishing a Story to make changes by tapping the ellipsis button at the bottom of the screen, and then selecting “Edit story.”\n\nHere’s Mosseri’s post announcing the news:\n\nA post shared by Adam Mosseri (@mosseri)\n\nToday’s update is the latest in a series of changes Instagram has made this year to address longstanding user requests.\n\nBack in March, the app introduced the ability to reorder photos and videos in a carousel after publishing. In April, it added an option to edit comments (also within 15 minutes of posting), and in June, it began letting users manually rearrange posts on their profile grid.\n\nMore recently, Instagram also brought its free Edits video editor to the Mac, with multi-track editing, advanced color grading tools, and 4K exports."
       }
     },
     "media": null
@@ -196,30 +321,6 @@
     "media": null
   },
   {
-    "id": "the-verge-d5326a76bb2c2151",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/policy/1036749/trump-ai-chip-data-center-us-philippines-pax-silica",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-18T19:40:36.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Trump’s latest land grab is an AI hub in the Philippines",
-        "summary": "President Donald Trump was greeted by no less than five beauty queens when he landed in the Philippines on Tuesday, according to local news outlet Rappler. As he stepped onto the tarmac, a child handed him small US and Philippine flags. A band played \"YMCA,\" a staple at Trump rallies, as more girls in traditional […]",
-        "body": "President Donald Trump was greeted by no less than five beauty queens when he landed in the Philippines on Tuesday, according to local news outlet Rappler . As he stepped onto the tarmac , a child handed him small US and Philippine flags. A band played \"YMCA,\" a staple at Trump rallies, as more girls in traditional bell-sleeved blouses and young men in wide-brimmed hats danced to the song.\n\nOutside the airport, hundreds of protesters packed streets bearing signs - and at least one prop casket - saying \"Trump out.\" Others say \"Reject Pax Silica,\" the name for the US-led international initiative to secure chips and critical minerals used in the …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "engadget-db092c91cbb9e71e",
     "type": "news",
     "sourceId": "engadget",
@@ -239,29 +340,6 @@
         "title": "Xreal Aura review: Solid AR glasses hampered by Google's half-baked Android XR",
         "summary": "For $1,099, we should expect more.",
         "body": "For $1,099, we should expect more.\n\nTwo years after Google announced Android XR , and a year after Samsung's flagship $1,800 Galaxy XR headset landed with a fizzle, Google's latest stab at mixed reality is finally starting to seem... real. We've taken a look at the first batch of Android XR smart glasses , which are landing this fall and take aim at Meta's popular Ray-Ban smart frames. Now Xreal is launching its Aura XR headset , which is the most intriguing Android XR device we've seen yet. It builds on Xreal's impressive history of virtual display glasses , adding just enough smarts to make it a viable, and far cheaper, alternative to Apple's Vision Pro. But with a starting price of $1,279 (on sale for $1,099 through December), it's still mainly targeted at VR developers.\n\nMuch like the baffling launch of Googlebooks, though, I'm not yet convinced that solid hardware will be able to save an ecosystem that Google isn't truly committed to. It's taken the company several years to actually deliver Android XR devices most people can actually afford, and there still aren't many notable apps that truly show off what the platform can do. Making Google Maps more immersive isn't enough.\n\nStill, the Xreal Aura is a sign that Android XR hardware is more than just vaporware, and it's significantly cheaper than last year's Galaxy XR. It's also a glimpse of what we'll see with the upcoming Meta VR Glasses, and perhaps a sign of how Apple could actually follow up on the promise of the Vision Pro.\n\nThe Xreal Aura is essentially a souped-up version of the company's already excellent display glasses, except it's connected to a wired Compute Puck that houses all of the hardware necessary to run Android XR. The Aura's sunglasses-like frames look almost the same as the Xreal One Pro , except it also features cameras for spatial sensing, finger tracking and capturing photos and video. Xreal's transparent frames let you easily see the world around you, without the need for complicated camera pass-through functionality like the Galaxy XR and Apple Vision Pro use. You can also darken the screen to completely black out the world, similar to what you'd see on a typical VR headset.\n\nLike Xreal's previous display glasses, the Aura relies on tiny micro-OLED screens with a resolution slightly beyond 1080p (1,920 by 1,200). They can reach up to 1,058 nits of brightness, which is slightly less than the 1,200 nits on the new Xreal One Pro+, and they support up to a 120Hz resolution with external devices. (The Android XR interface only runs at 72Hz.) The Aura's 70-degree field of view (FOV) is the best we've seen from Xreal, but it's also well below what we've seen on dedicated VR headsets, which use larger screens to completely fill your vision. The Apple Vision Pro reaches a FOV of around 100 degrees, while the Meta Quest 3 and many other headsets reach up to 110 degrees.\n\nFor processing power, the Compute Puck houses a Qualcomm Snapdragon Reality Elite system-on-a-chip, and either 12GB or 16GB of RAM (alongside either 256GB or 512GB of storage). It also features Xreal's custom X1S spatial processor, a slightly improved version of the X1 chip on earlier frames, and it looks similar to the Vision Pro's battery pack. It has two USB-C ports, one for connecting to the Aura's frames and the other for either charging or connecting to a separate device. The top portion of the Compute Puck also serves as a trackpad, which is helpful for navigating Android XR without holding your hand up.\n\nWhen you plug in another device into the Compute Puck, its video output shows up in a single Android XR window, which you can resize at will (and also position alongside other Android XR apps). You can also plug the Aura's frames directly into computers and other devices, where it functions exactly like the company's previous display glasses. That could be useful when you just need a big virtual screen, and you don't want to deal with the hassle of juggling the Compute Puck.\n\nThe Xreal Aura is exceptionally comfortable to wear; the frames weigh just 95 grams (0.2 pounds) on their own, compared to the 1.6-pound Vision Pro. The Aura is also fantastic for watching movies on a gigantic virtual display and it's incredibly useful if you need a large virtual monitor. But it's also crystal clear that Android XR is still in its infancy, as there aren't many notable apps to show off the platform. Using Android XR also doesn't feel very different than using any other Android device — as if Google made very little effort to reshape its OS around mixed reality. (There are definitely shades of the same laziness that annoyed me with Googlebooks.)\n\nIt doesn't help that apps crash often in Android XR, or that its core hand recognition interface feels lackluster. The Xreal Aura is often slow to respond to where my finger is pointing, or recognize when I'm pinching my fingers to select something. That's annoying enough when simply navigating Chrome or YouTube, but it's infuriating when trying to play an XR game like Cubism , which relies on placing 3D blocks in very specific places. Pointing at everything just to navigate Android XR also gets tiring over time — there's no eye-tracking like on the Vision Pro, which makes selecting on-screen elements a cinch. I quickly grew to prefer navigating Android XR with the Compute Puck's trackpad instead of pointing at everything.\n\nI was able to sit back and actually enjoy the Xreal Aura while watching the opening of Casino Royale on Prime Video, as well as a few episodes of the new Ghost in the Shell series. Xreal's micro-OLED displays deliver vibrant and colorful video, and its speakers built into the Aura's thick frames sound great. The Aura is also an excellent companion for laptops: I was able to have a giant screen mirroring my MacBook Air while playing the YouTube app right beside it.\n\nStill, I wish there was more to actually do in Android XR. Zooming around the world in Google Maps' immersive view is fun, and I appreciated revisiting VR experiences like Cosmos Unseen: Black Holes, but they're not as enthralling as they are in traditional VR headsets. Being able to see the outside world easily is both a blessing and a curse on the Xreal Aura. You can also see spatial versions of pictures in the Google Photos app, which is cool at first, but quickly starts to feel gimmicky. Similarly, I didn't see much point to Android XR's Spatial Mode, which converts everything you see into pseudo-3D. It just gave me a headache while browsing the web.\n\nThird-party support is clearly lackluster, especially when it comes to entertainment apps. All I saw was HBO Max and Prime Video, no Disney+ or Netflix (which isn't on visionOS, to be fair). You'll have to watch all of your other streaming services through Chrome, which isn't exactly a premium experience. It's also a particularly bad look when Meta just recently launched 3D movie support (including within the Disney+ app) on the Quest 3, 3S and its upcoming VR Glasses . That's something Google could eventually bring to Android XR, but who knows when that will happen.\n\nEven the first-party YouTube app is a disappointment. There's a specific section for immersive videos, but it's filled with the same blurry 360-degree content we've been seeing for years. There's no big push for higher-resolution 180-degree 3D video like we've seen on the Vision Pro, or that Meta has announced for its VR Glasses.\n\nAndroid XR is such a barren landscape, I sometimes found it more useful to just directly connect the Xreal Aura to my laptop or phone. At that point, it acts purely as a virtual display, but I found it helpful when I just wanted to stream a TV show in a crowded or tight space. The downside here is that connecting another device to the Compute Puck involves juggling a second USB-C cable, which can easily become frustrating. The Vision Pro can wirelessly connect to Macs, so it manages to avoid this issue.\n\nWithout the baggage of Android XR, the Xreal Aura was also able to deliver a brighter and sharper virtual view of my MacBook Air's desktop. There's a slight blurriness to external devices when using the Compute Puck, which makes text difficult to read. That's not a problem when you're directly connected to the glasses. But if that's the case, why not just get some of Xreal's existing display glasses? (More on this below.)\n\nBattery life is another potentially worrying variable. The Aura's battery drained from full to 40 percent after just 90 minutes of watching Prime Video content, browsing the web and messing around with Google Map's immersive view. It lasted for another 95 minutes before it completely drained down as I caught up on Ghost in the Shell .\n\nThe Compute Puck's heat output was also very noticeable. Its tiny fan often felt like it was working hard to cool down the device, and I was worried about stuffing it into my pocket like I do with the Vision Pro's battery pack. Xreal recommends avoiding pockets and other enclosed spaces while the Aura is doing serious work or fast charging. That's likely why the company bundles a lanyard and belt holster in the Aura's box.\n\nSince the Xreal Aura also features prominent cameras, I hesitated about using it in public spaces, where people might mistake it for Meta's Ray-Ban \"pervert glasses.\" That's an issue the company's cheaper display glasses avoid completely as they're camera-free (unless you add an additional accessory). I could just point to those specs and tell any worried coffee shop neighbor they don't have a camera.\n\nUnless you're a VR developer keen to get a leg up on Android XR, there's no reason to buy the Xreal Aura. At its $1,099 sale price (or the eventual $1,279 standard price), it comes in far cheaper than the $1,800 Galaxy XR or $3,699 Vision Pro, but the handful of games and immersive apps for Android XR still don't justify its cost.\n\nIt's a particularly bad investment since we don't know how long Google will actually stick with Android XR. Don't forget that its earlier attempts at VR, like Google Cardboard and Daydream , all died after a few years of lackluster support. Given that Android XR also encompasses simpler smart glasses, and that Meta is working hard to dominate this market, I'd hope Google would give it a few years to find some footing.\n\nAnd if the simple idea of having a virtual screen on your face sounds intriguing, then consider Xreal's existing display glasses. I loved the Xreal One last year , and the company just recently launched a brighter One+ model for $600 . Even the $299 Xreal XBX a01+ specs were bright and fun to use, even though they don't support any spatial features.\n\nXreal has delivered yet another light, bright and comfortable pair of AR specs with the Aura, but it's clearly hampered by a half-baked Android XR platform. Even worse, Android XR is a major reason why it costs twice as much as the company's previous hardware. At this point, the Xreal Aura serves as proof of life for Android XR, and nothing more."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-9a6e26e8dcf3bcd8",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1036941/instagram-now-lets-you-edit-your-stories-after-you-post-them",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-18T19:29:10.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Instagram now lets you edit your stories after you post them",
-        "summary": "Instagram's latest update will allow you to edit your Stories without losing your views, likes, or replies. You can now edit the text, music, stickers, and drawings for up to 15 minutes after sharing your Story, Instagram head Adam Mosseri has announced. Reverse engineer Alessandro Paluzzi first spotted Instagram working on this feature in April, […]",
-        "body": "Instagram's latest update will allow you to edit your Stories without losing your views, likes, or replies. You can now edit the text, music, stickers, and drawings for up to 15 minutes after sharing your Story, Instagram head Adam Mosseri has announced.\n\nReverse engineer Alessandro Paluzzi first spotted Instagram working on this feature in April, but now it's official. Previously, you had to delete and repost your Story to fix a typo or add a song that you forgot to include.\n\nYou can edit your post by opening your Story and selecting the three-dot menu in the bottom-right corner. From there …\n\nRead the full story at The Verge."
       }
     },
     "media": null
@@ -334,53 +412,6 @@
         "title": "Will Wright's next simulation will use AI to mine content from your memories",
         "summary": "With MyMems , Wright says he wants to \"turn the simulation inward.\"",
         "body": "The computer gaming world hasn't heard much from Will Wright ( SimCity , The Sims ) since the underwhelming release of Spore in 2008 and Wright's subsequent departure from Maxis owner EA . Now, well over 15 years later, Wright is starting to promote his next digital simulation, which will use generative AI technology to craft a game-like experience from players' memories.\n\nMyMems , which is slated to release next year, differentiates itself from Wright's previous projects by \"turn[ing] the simulation inward,\" as Wright's Gallium Studios and partner Artificial Agency put it in a press release this morning . The game will mine memories provided by the player to create digital people that can then form teams to solve puzzles in the game world.\n\n“If my Grandmother ended up in a Grand Slam match against Serena Williams, who would win?\" Wright says by way of example in the release. \"If I had to build a bridge across a short chasm, which three people from my life would I choose to help me?\"\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-d49a82830a66e5da",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2320797/ai-found-a-hole-in-java-and-it-starts-with-aaaaaaaa/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-18T17:59:47.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "AI found a hole in Java, and it starts with 'AAAAAAAA...'",
-        "summary": "The bug could let hackers take over systems at banks, hospitals and most Fortune 500 companies.",
-        "body": "The bug could let hackers take over systems at banks, hospitals and most Fortune 500 companies.\n\nIf the last week is any indication, the coming months and years will be a wild ride for digital infrastructure. After outages at Microsoft , the FAA , banks , Apple and... seemingly everything else, we've now learned that a bug in the programming language Java can be used to take over computer systems.\n\nResearchers at cybersecurity startup Calif discovered the flaw with help from OpenAI's GPT-6 Cyber model, which isn't yet publicly available. On some machines, feeding Java's base64 decoder a string of 64 \"A\" characters followed by an equals sign triggers a memory error. Usually, that leads to a crash. But when finessed in specific ways, it can be used to gain full unauthorized access to the system.\n\nCalif showed that the bug could be used to hack into Keycloak, a widely used login system protecting organizations like CERN and NASA. Java is everywhere, powering platforms for banks, hospitals, airlines and government agencies; it's used by about 90 percent of Fortune 500 companies.\n\nFortunately, Calif says the bug isn't easy to weaponize, which should give defenders some breathing room. Oracle shipped a critical patch update on Tuesday without specifically mentioning this bug, and the Cybersecurity and Infrastructure Security Agency (CISA) told organizations to patch their systems immediately. Still, some systems will inevitably go unpatched, and Calif estimates that the bug could linger for five to 10 years.\n\nTaken alone, the incident is troubling enough. Although officials' public statements haven't linked the past week's outages to AI, the events paint a picture of aging digital infrastructure unprepared for what's next. It turns out that \"AAAAAAAA...\" isn't only the way into unpatched computers; it's also what we'll increasingly be saying as this 21st-century arms race unfolds."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-31b2d675402481ff",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2320303/youll-need-the-latest-ps5-firmware-update-to-play-gta-vi/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-18T13:01:42.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "You'll need the latest PS5 firmware update to play GTA VI",
-        "summary": "Double-check your PS5's firmware is up to date, or you may not be able to play GTA VI.",
-        "body": "Sony might be attempting to patch jailbreak vulnerabilities before the biggest game of the year launches.\n\nGrand Theft Auto VI fans will have to download a new PlayStation 5 update, or they won't be able to launch the game. Sony has released new firmware for the console that's required to access the long-awaited title. It's encouraging fans on X to download and install it before the game's release at midnight on November 19, so they don't have to wait a second longer to start playing.\n\nAs IGN reports, PS5 firmware update 14.23 is 1.267GB in size and contains \"security fixes to the system software.\" Sony didn't say why it's required to run GTA VI on the PS5. However, IGN notes that it was released just a day after a famous PS5 jailbreaker claimed they were able to successfully dump a game binary on PS5 firmware version 14.22. Presumably, that means they were able to extract and copy data from a disc or a digital version of a PS5 game. Firmware 14.23 may have patched whatever allowed them to do so.\n\nThose planning to get the game sometime today may want to purchase and install it soon. The digital version is 212GB in size and would take more than an hour to download for those with a 1Gbps internet connection. Rockstar Games has also rolled out pre-release patches since GTA VI became available for pre-order, with the latest one being 600 MB. The patches should automatically download for those who've already preloaded the game.\n\nSony Interactive has issued a PS5 system software update that is required before playing Grand Theft Auto VI. Players should download this update prior to midnight on November 19 so that they're ready to play on launch day, November 19.\n\n— PlayStation Support US (@PS_Support_US) November 18, 2026"
       }
     },
     "media": null
@@ -1186,31 +1217,6 @@
         "title": "Nuevo curso de introducción a Python de NVDA.es y otras actualizaciones",
         "summary": "¡Hola, comunidad! Llevábamos tiempo sin traer novedades por aquí. Aprovechando que NVDA 2026.3.1 está al caer, hemos pensado que era un buen momento. En esta entrada te hablamos de la A11yconf 2026, nuestra nueva plataforma de formación y el nuevo curso que estrenamos junto a ella, y el cifrado de datos en TeleNVDA. ¡Comenzamos! A11yconf … Continuar leyendo \"Nuevo curso de introducción a Python de NVDA.es y otras actualizaciones\" La entrada Nuevo curso de introducción a Python de NVDA.es y otras actualizaciones se publicó primero en NVDA en español .",
         "body": "¡Hola, comunidad! Llevábamos tiempo sin traer novedades por aquí. Aprovechando que NVDA 2026.3.1 está al caer, hemos pensado que era un buen momento. En esta entrada te hablamos de la A11yconf 2026, nuestra nueva plataforma de formación y el nuevo curso que estrenamos junto a ella, y el cifrado de datos en TeleNVDA. ¡Comenzamos!\n\nLa A11yconf del año pasado salió muy bien, hasta el punto de que este año han repetido. Nosotros, por nuestra parte, también hemos repetido patrocinando el evento y echando una mano para que dispongan de los recursos necesarios. Este año, la A11yconf tendrá lugar el 28 de noviembre en Zaragoza. Si todavía no tienes tu entrada, ¡te aconsejamos comprarla cuanto antes! Visita la página de la A11yconf En esta ocasión no disponemos de stand independiente, pero estaremos en el recinto. ¡No dudes en preguntar por nosotros si vas por allí!\n\nLa inteligencia artificial generativa ha venido a revolucionar nuestra forma de trabajar, sin importar el sector. Si tenemos un ordenador delante, ya es habitual hablar de Claude, Gemini o GPT. Y en el desarrollo de NVDA no podía ser menos: es raro el día que no aparece un complemento nuevo en la tienda internacional. Montones de nuevos autores construyen y comparten complementos cuyo desarrollo ha sido asistido o enteramente realizado por la IA. A priori, esto suena a cambio positivo. Sin embargo, la realidad es muy distinta. A menudo nos encontramos complementos que duplican funciones existentes de otros complementos, están plagados de fallos, o añaden funciones que ya vienen en el propio NVDA. La tienda está llena de traductores, descargadores de Youtube, reproductores de radio, y complementos para preguntar a la IA, entre otros. Muchas personas que no se conocen entre sí tienen la misma idea. La IA, que tiende cada vez más a dar el mismo resultado con las mismas condiciones de partida, elabora complementos con sutiles diferencias, que en esencia son iguales y pueden coincidir hasta en nombre. A la falta de análisis previo se unen la falta de conocimientos en programación y la ausencia de juicio crítico. Muchos de los autores que han sumado complementos a la tienda no tienen conocimientos de programación, y por tanto son incapaces de defender por sí mismos sus propias creaciones. Con este panorama, estamos seguros de que entenderás por qué sólo se actualizan complementos clásicos en el catálogo de nuestra comunidad, y por qué no añadimos complementos nuevos. Los esfuerzos necesarios para filtrar y revisar se han disparado hasta un punto que, con el escaso tiempo que tenemos, se ha vuelto inasumible. Así que hemos decidido entrar en acción utilizando exactamente la misma herramienta que causa el problema: la IA. Bien usada, la inteligencia artificial constituye una herramienta muy potente. Gracias a ella, hemos preparado un curso en el que, paradójicamente, el uso de IA está prohibido, así como el uso de entornos de desarrollo con autocompletado e indentado automático. Se trata de un curso de introducción a Python que ayuda a sentar las bases del lenguaje y enseña a obtener información de Internet y crear interfaces gráficas. Quien supere el curso será capaz de leer código fuente, ya sea de NVDA o de un complemento, y comprender lo que hará el intérprete con ese código. Como bien han podido comprobar los participantes de nuestra prueba piloto, el curso entraña cierta dificultad, y no es el típico que se saca en dos tardes: además de los conceptos teóricos, existen ejercicios prácticos, todos de respuesta abierta y corregidos a mano. Queremos que aprendas a programar en condiciones, interiorizando cada concepto. Las herramientas que uses después, ya son cosa tuya, pero tendrás la capacidad de juzgar el resultado. El acceso al curso es totalmente gratuito. Opcionalmente, al acabar, podrás comprar un certificado de aprovechamiento, en el que también contemplamos descuentos para personas que pasen por dificultades económicas. El curso funciona sobre una plataforma de formación propia, también construida con la ayuda de la IA. Puedes ver su código fuente en este repositorio y conectarte directamente a ella en la siguiente dirección: https://formacion.nvda.es . ¡Te esperamos!\n\nEn los protocolos y programas de control remoto con NVDA, la seguridad siempre ha tenido una prioridad crítica. NVDA es un lector de pantalla que capta, procesa y devuelve un montón de información que puede contener datos sensibles y jugarnos una mala pasada si cae en malas manos. Tradicionalmente, las conexiones entre el complemento y los servidores de control se cifraban con un certificado SSL, pero esto no impide que un propietario malintencionado de un servidor pueda interceptar y descifrar las comunicaciones. Por eso, TeleNVDA añade una capa de seguridad extra: el cifrado de datos. No lo hemos querido llamar cifrado de extremo a extremo, porque no lo es, pero impedirá que el propietario del servidor descifre lo que está pasando, así que en ese sentido se le parece. Cuando te conectes, comprobarás que, además del típico campo de clave, existe otro que permite introducir una contraseña adicional. Si lo rellenas, los datos se cifran con AES-GCM-256, de tal forma que sólo los miembros de la sesión que conozcan las dos contraseñas podrán unirse y participar con normalidad en el control remoto. Por desgracia, esta segunda contraseña acaba con la compatibilidad con el soporte remoto integrado en NVDA. Si necesitas garantizar compatibilidad, basta con no rellenarla. ¿Todavía no ves este campo? Es posible que tu TeleNVDA esté sin actualizar. Descarga aquí la versión más reciente Esto es todo por ahora. En breve volveremos para hablar de NVDA 2026.3.1 y sus correcciones de seguridad. ¡Hasta la próxima!\n\nLa entrada Nuevo curso de introducción a Python de NVDA.es y otras actualizaciones se publicó primero en NVDA en español ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "conticgo-f193b5663d959666",
-    "type": "news",
-    "sourceId": "conticgo",
-    "sourceName": "Conticgo",
-    "sourceUrl": "https://conticgo.net/",
-    "originalUrl": "https://conticgo.net/eva-la-inteligencia-artificial-que-adapta-unas-gafas-inteligentes-a-las-necesidades-visuales-de-cada-persona/",
-    "originalLanguage": "es",
-    "publishedAt": "2026-11-06T07:00:23.000Z",
-    "categories": [
-      "tecnologia-accesibilidad",
-      "gafas-inteligentes",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "Eva: la inteligencia artificial que adapta unas gafas inteligentes a las necesidades visuales de cada persona",
-        "summary": "La inteligencia artificial continúa abriendo nuevas posibilidades para mejorar la autonomía de las personas con discapacidad visual. La última propuesta llega de la mano de Eyedaptic, una empresa especializada en tecnología de mejora visual que acaba de anunciar el lanzamiento de Eva, un asistente inteligente integrado en sus gafas EYE7. La principal novedad es que […] La entrada Eva: la inteligencia artificial que adapta unas gafas inteligentes a las necesidades visuales de cada persona se publicó primero en Conticgo .",
-        "body": "La inteligencia artificial continúa abriendo nuevas posibilidades para mejorar la autonomía de las personas con discapacidad visual. La última propuesta llega de la mano de Eyedaptic , una empresa especializada en tecnología de mejora visual que acaba de anunciar el lanzamiento de Eva, un asistente inteligente integrado en sus gafas EYE7.\n\nLa principal novedad es que Eva no se limita a describir lo que aparece delante de la cámara. También puede interpretar lo que necesita el usuario y actuar sobre las funciones de mejora visual de las gafas.\n\nHasta ahora, muchas herramientas de asistencia visual basadas en inteligencia artificial se han centrado en reconocer objetos, leer textos o describir escenas. Eva pretende ir un paso más allá.\n\nSu funcionamiento se basa en la interpretación de instrucciones expresadas mediante lenguaje natural. Esto permite que la persona pueda comunicarse con las gafas de una manera más intuitiva, sin necesidad de aprender comandos específicos.\n\nPor ejemplo, si alguien está intentando leer un cartel y dice «no consigo leer eso», Eva puede interpretar la petición y ajustar la experiencia visual para facilitar la lectura.\n\nDe esta manera, la tecnología no solo proporciona información sobre el entorno, sino que también puede modificar determinados ajustes de las gafas para adaptarlos a la actividad que se está realizando.\n\nSegún Eyedaptic, el asistente está diseñado para ayudar en diferentes situaciones de la vida cotidiana. Entre sus aplicaciones se encuentran:\n\nAdemás, la compañía indica que Eva permite comunicarse en hasta 99 idiomas, lo que amplía sus posibilidades de utilización.\n\nEva está integrada en las gafas EYE7 de Eyedaptic, un dispositivo que combina tecnología de visión artificial, inteligencia artificial y realidad aumentada.\n\nEstas gafas incorporan pantallas de alta definición y diferentes funciones de mejora visual. Su objetivo es ayudar a las personas con pérdida de visión central, especialmente aquellas con enfermedades de la retina como la degeneración macular asociada a la edad (DMAE).\n\nUna de sus características es que las funciones pueden controlarse mediante instrucciones de voz, lo que permite interactuar con el dispositivo sin tener que manejar constantemente sus controles.\n\nLa llegada de Eva refuerza esta propuesta: la inteligencia artificial puede interpretar las necesidades de la persona y actuar directamente sobre las funciones de mejora visual disponibles.\n\nEyedaptic ha comunicado que, durante sus pruebas internas, Eva alcanzó una precisión superior al 99 % en lectura y del 97 % en la interpretación de comandos.\n\nLa empresa también señala que el asistente ya está disponible para los usuarios de EYE7 mediante una actualización remota del software, por lo que no es necesario adquirir unas gafas nuevas para incorporar esta función.\n\nNo obstante, estas cifras deben interpretarse con cautela. Se trata de resultados comunicados por el fabricante y no de una evaluación independiente publicada en una revista científica. Será necesario conocer su funcionamiento en situaciones reales y con diferentes perfiles de discapacidad visual para valorar su utilidad.\n\nLa propuesta de Eyedaptic refleja una tendencia cada vez más presente en la tiflotecnología: desarrollar herramientas que no solo proporcionen información sobre el entorno, sino que también se adapten a las necesidades de cada persona.\n\nPara quienes tienen baja visión, poder ajustar una ayuda visual mediante una conversación sencilla puede facilitar determinadas actividades y reducir la necesidad de navegar por menús o aprender controles específicos.\n\nSin embargo, estas soluciones deben entenderse como herramientas de apoyo. No recuperan la visión ni sustituyen la rehabilitación visual, las ayudas ópticas o los dispositivos de movilidad.\n\nEl verdadero potencial de Eva dependerá de su rendimiento en el día a día, de su facilidad de uso y de cómo responda a las necesidades reales de las personas con discapacidad visual.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuente de la noticia: Eyedaptic ."
       }
     },
     "media": null

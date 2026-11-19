@@ -107,3 +107,11 @@ No dar por concluida la compilación candidata ni ejecutar TestFlight hasta: (1)
 - Esta mejora no garantiza ecualización de streams externos: Apple Music, Audius y Jamendo utilizan motores diferentes, sin pasar por `AVAudioUnitEQ` local.
 - **Pendiente por álbum:** `MusicLocalFile` no almacena álbum ni artista; incorporar un perfil de álbum sin metadatos persistentes asociaría canciones incorrectamente. Falta obtener y conservar esa identidad, con respaldo/restauración.
 - Pruebas de la fase: **361 pruebas iOS y 461 generales**. La compilación Swift de `9ca597c3` terminó satisfactoriamente; queda verificación del resultado global de GitHub y prueba funcional en dispositivo.
+
+### Consolidación de álbumes y copias — 19/11/2026
+
+- `MusicLocalFile` y los registros portables del respaldo incluyen ahora álbum y artista opcionales. La importación solicita metadatos comunes de `AVURLAsset` de forma asíncrona; al abrir la biblioteca también se intenta completar información de archivos importados anteriormente. Los archivos sin álbum conocido no reciben identificaciones inferidas.
+- Se añadió una sección «Álbumes» accesible con opciones para guardar/quitar perfiles por identidad estable de artista y álbum; la normalización no depende del idioma de dispositivo. El orden del EQ local es ahora **canción > lista > álbum > general**, incluida la reproducción de listas mixtas para sus pistas locales.
+- Exportación y restauración de respaldo conservan perfiles de canción, lista, álbum y general mediante el campo existente `audioProfiles` (datos validados, sin secretos ni credenciales). Los respaldos antiguos sin metadatos de álbum siguen siendo decodificables por sus campos opcionales.
+- 369 pruebas iOS y 461 generales pasaron. Compilación Swift de `0d0a6751` y comprobación de metadatos `.appex` **correctas**; la acción GitHub puede seguir finalizando su captura no bloqueante.
+- **Validación pendiente:** comprobación en iPhone del reconocimiento de metadatos de varios formatos reales, restauración entre dispositivos, controles VoiceOver y reproducción/equalización de servicios externos. Las pistas que un servicio externo reproduce fuera de AVAudioEngine local no reciben estas bandas; la equivalencia no debe anunciarse.

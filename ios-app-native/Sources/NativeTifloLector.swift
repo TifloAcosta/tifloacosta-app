@@ -871,7 +871,7 @@ final class NativeReadingSpeech: ObservableObject {
         systemSpeechNeedsRestart = false
         speechQueueIndex = 0
         speechQueue.removeAll()
-        let segments = NativeReaderPauseProfile.segments(Self.textForSpeech(text))
+        let segments = NativeReaderPauseProfile.segments(Self.textForSpeech(text), voiceIdentifier: voiceIdentifier)
         var utf16Offset = 0
         for (index, segment) in segments.enumerated() {
             let utterance = AVSpeechUtterance(string: segment.text)
@@ -1361,9 +1361,13 @@ struct NativeReaderLibraryScreen: View {
 
     private func play(_ document: NativeReadingDocument) {
         let latest = library.latest(document)
-        let chosenSpeed = latest.readerPreferences?.speedIndex ?? speedIndex
+        let chosenVoiceID = latest.readerPreferences?.voiceID ?? voiceID
+        let savedVoiceProfile = NativeReaderVoiceProfileStore.load(for: chosenVoiceID)
+        let chosenSpeed = latest.readerPreferences?.speedIndex ?? savedVoiceProfile?.speedIndex
+            ?? NativeReaderVoiceProfile.natural.speedIndex
         let speed = NativeReaderSpeedOptions.rate(for: chosenSpeed)
-        let chosenPitch = latest.readerPreferences?.pitchIndex ?? pitchIndex
+        let chosenPitch = latest.readerPreferences?.pitchIndex ?? savedVoiceProfile?.pitchIndex
+            ?? NativeReaderVoiceProfile.natural.pitchIndex
         let pitch = pitches[max(0, min(pitches.count - 1, chosenPitch))]
         if let paths = latest.trackPaths, !paths.isEmpty {
             let urls = paths.compactMap { NativeReaderFormats.storedURL(for: $0) }
@@ -1388,8 +1392,8 @@ struct NativeReaderLibraryScreen: View {
             let offset = max(0, min(latest.body.count,
                 latest.lastTextOffset ?? Int(Double(latest.body.count) * Double(latest.lastPercent ?? 0) / 100)))
             speech.play(String(latest.body.dropFirst(offset)), speed: speed, pitch: pitch,
-                language: AVSpeechSynthesisVoice(identifier: latest.readerPreferences?.voiceID ?? voiceID)?.language ?? "es-ES",
-                voiceIdentifier: latest.readerPreferences?.voiceID ?? voiceID,
+                language: AVSpeechSynthesisVoice(identifier: chosenVoiceID)?.language ?? "es-ES",
+                voiceIdentifier: chosenVoiceID,
                 baseUTF16: String(latest.body.prefix(offset)).utf16.count,
                 totalUTF16: latest.body.utf16.count, baseCharacters: offset)
         }
@@ -2059,8 +2063,16 @@ struct NativeReadingScreen: View {
 
     private var latest: NativeReadingDocument { library.latest(document) }
     private var tracks: [String] { latest.trackPaths ?? [] }
-    private var effectiveSpeedIndex: Int { latest.readerPreferences?.speedIndex ?? speedIndex }
-    private var effectivePitchIndex: Int { latest.readerPreferences?.pitchIndex ?? pitchIndex }
+    private var effectiveSpeedIndex: Int {
+        latest.readerPreferences?.speedIndex
+            ?? NativeReaderVoiceProfileStore.load(for: effectiveVoiceID)?.speedIndex
+            ?? NativeReaderVoiceProfile.natural.speedIndex
+    }
+    private var effectivePitchIndex: Int {
+        latest.readerPreferences?.pitchIndex
+            ?? NativeReaderVoiceProfileStore.load(for: effectiveVoiceID)?.pitchIndex
+            ?? NativeReaderVoiceProfile.natural.pitchIndex
+    }
     private var pitch: Float { [0.8, 0.9, 1.0, 1.1, 1.2][max(0, min(4, effectivePitchIndex))] }
     private var effectiveVoiceID: String { latest.readerPreferences?.voiceID ?? voiceID }
     private var effectiveTextSize: Double { latest.readerPreferences?.textSize ?? textSize }

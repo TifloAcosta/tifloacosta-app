@@ -2,6 +2,154 @@ import SwiftUI
 import AVFoundation
 import UIKit
 
+/// Voice-specific, opt-in adjustments. Voices without a saved profile keep
+/// their natural pace, pitch and punctuation. An unsaved draft has no effect.
+struct NativeReaderVoiceProfile: Codable, Equatable {
+    var speedIndex: Int
+    var pitchIndex: Int
+    var pauseStyle: Int
+    var pauseSeconds: [Double]
+
+    static let natural = Self(speedIndex: NativeReaderSpeedOptions.storedIndex(for: 5),
+        pitchIndex: 2, pauseStyle: 0, pauseSeconds: [0.15, 0.25, 0.25, 0.40, 0.60])
+}
+
+enum NativeReaderVoiceProfileStore {
+    private static let prefix = "native-reader-voice-profile-"
+    private static let migratedKey = "native-reader-voice-profiles-migrated-v1"
+
+    private static func key(_ voiceIdentifier: String) -> String {
+        prefix + (voiceIdentifier.isEmpty ? "system-default" : voiceIdentifier)
+    }
+
+    /// Respect existing users' voice adjustments by assigning old global
+    /// values to the voice that was selected before this version.
+    private static func migrateIfNeeded(_ defaults: UserDefaults = .standard) {
+        guard !defaults.bool(forKey: migratedKey) else { return }
+        let oldSpeed = defaults.object(forKey: "native-reading-speed-index") as? Int ?? 2
+        let oldPitch = defaults.object(forKey: "native-reading-pitch-index") as? Int ?? 2
+        let oldStyle = defaults.integer(forKey: "native-reading-pause-style")
+        if oldSpeed != 2 || oldPitch != 2 || oldStyle != 0 {
+            let previousVoice = defaults.string(forKey: "native-reading-voice-id") ?? ""
+            if defaults.data(forKey: key(previousVoice)) == nil {
+                let names = ["comma", "semicolon", "colon", "sentence", "paragraph"]
+                let durations = zip(names, NativeReaderVoiceProfile.natural.pauseSeconds).map { item in
+                    let (name, fallback) = item
+                    return defaults.object(forKey: "native-reading-pause-" + name) == nil
+                        ? fallback : defaults.double(forKey: "native-reading-pause-" + name)
+                }
+                let profile = NativeReaderVoiceProfile(speedIndex: oldSpeed, pitchIndex: oldPitch,
+                    pauseStyle: oldStyle, pauseSeconds: durations)
+                if let bytes = try? JSONEncoder().encode(profile) {
+                    defaults.set(bytes, forKey: key(previousVoice))
+                }
+            }
+        }
+        defaults.set(true, forKey: migratedKey)
+    }
+
+    static func load(for voiceIdentifier: String) -> NativeReaderVoiceProfile? {
+        migrateIfNeeded()
+        guard let data = UserDefaults.standard.data(forKey: key(voiceIdentifier)) else { return nil }
+        return try? JSONDecoder().decode(NativeReaderVoiceProfile.self, from: data)
+    }
+
+    static func save(_ profile: NativeReaderVoiceProfile, for voiceIdentifier: String) {
+        migrateIfNeeded()
+        guard let data = try? JSONEncoder().encode(profile) else { return }
+        UserDefaults.standard.set(data, forKey: key(voiceIdentifier))
+    }
+
+    static func remove(for voiceIdentifier: String) {
+        migrateIfNeeded()
+        UserDefaults.standard.removeObject(forKey: key(voiceIdentifier))
+    }
+}
+
+@MainActor
+private final class NativeReaderVoicePreview: ObservableObject {
+    private let synthesizer = AVSpeechSynthesizer()
+
+    func listen(voiceIdentifier: String, profile: NativeReaderVoiceProfile) {
+        synthesizer.stopSpeaking(at: .immediate)
+        let sample = "Hola, esta es una prueba de lectura. ¿Te gusta el resultado? "
+            + "Hay pausas: después de dos puntos; y también de una coma.\nAhora sigue el párrafo."
+        for segment in NativeReaderPauseProfile.segments(sample, profile: profile) {
+            let utterance = AVSpeechUtterance(string: segment.text)
+            utterance.voice = voiceIdentifier.isEmpty ? nil : AVSpeechSynthesisVoice(identifier: voiceIdentifier)
+            utterance.rate = min(AVSpeechUtteranceMaximumSpeechRate,
+                max(AVSpeechUtteranceMinimumSpeechRate,
+                    AVSpeechUtteranceDefaultSpeechRate * Float(
+                        NativeReaderSpeedOptions.rate(for: profile.speedIndex))))
+            utterance.pitchMultiplier = [0.8, 0.9, 1.0, 1.1, 1.2][max(0, min(4, profile.pitchIndex))]
+            utterance.postUtteranceDelay = segment.delay
+            synthesizer.speak(utterance)
+        }
+    }
+
+    func stop() { synthesizer.stopSpeaking(at: .immediate) }
+}
+
+struct NativeReaderVoiceCustomizationControls: View {
+    let voiceIdentifier: String
+    @State private var draft = NativeReaderVoiceProfile.natural
+    @StateObject private var preview = NativeReaderVoicePreview()
+    @State private var feedback = ""
+
+    private let pauseNames = ["Pausa después de coma", "Pausa después de punto y coma",
+        "Pausa después de dos puntos", "Pausa después de punto, interrogación o exclamación",
+        "Pausa después de salto de párrafo"]
+    private let pauseChoices = (0...30).map { String(format: "%.2f segundos", Double($0) * 0.05) }
+
+    private func load() {
+        preview.stop()
+        draft = NativeReaderVoiceProfileStore.load(for: voiceIdentifier) ?? .natural
+        feedback = ""
+    }
+
+    var body: some View {
+        NativeAdjustableChoice(title: "Velocidad de voz", choices: NativeReaderSpeedOptions.choices,
+            selectedIndex: Binding(
+                get: { NativeReaderSpeedOptions.choiceIndex(for: draft.speedIndex) },
+                set: { draft.speedIndex = NativeReaderSpeedOptions.storedIndex(for: $0) }))
+        NativeAdjustableChoice(title: "Tono de lectura",
+            choices: ["Más grave", "Grave", "Normal", "Agudo", "Más agudo"],
+            selectedIndex: $draft.pitchIndex)
+        NativeAdjustableChoice(title: "Pausas por puntuación",
+            choices: ["Normal", "Mayor", "Expresiva", "Personalizadas"],
+            selectedIndex: $draft.pauseStyle)
+        if draft.pauseStyle == 3 {
+            ForEach(0..<pauseNames.count, id: \.self) { index in
+                NativeAdjustableChoice(title: pauseNames[index], choices: pauseChoices,
+                    selectedIndex: Binding(
+                        get: { max(0, min(30, Int((draft.pauseSeconds[index] / 0.05).rounded()))) },
+                        set: { draft.pauseSeconds[index] = Double($0) * 0.05 }))
+            }
+        }
+        Button("Escuchar muestra") {
+            preview.listen(voiceIdentifier: voiceIdentifier, profile: draft)
+        }
+        Button("Detener muestra") { preview.stop() }
+        Button("Guardar cambios de esta voz") {
+            NativeReaderVoiceProfileStore.save(draft, for: voiceIdentifier)
+            feedback = "Cambios guardados exclusivamente para esta voz."
+        }
+        Button("Descartar cambios") { load() }
+        Button("Restablecer voz natural") {
+            NativeReaderVoiceProfileStore.remove(for: voiceIdentifier)
+            load()
+            feedback = "Esta voz utiliza de nuevo sus ajustes naturales."
+        }
+        if !feedback.isEmpty {
+            Text(LocalizedStringKey(feedback)).accessibilityAddTraits(.updatesFrequently)
+        }
+        Text("La muestra utiliza los cambios provisionales. Las demás voces no se modifican.")
+            .font(.footnote)
+        .onAppear { load() }
+        .onChange(of: voiceIdentifier) { _, _ in load() }
+        .onDisappear { preview.stop() }
+    }
+}
 
 /// Pausas añadidas entre fragmentos del sintetizador del sistema, en segundos.
 /// El perfil Normal conserva la puntuación natural propia de cada voz.
@@ -43,6 +191,44 @@ enum NativeReaderPauseProfile {
         let configured = settings.object(forKey: storageKey) == nil
             ? (defaultValues[key] ?? 0) : settings.double(forKey: storageKey)
         return min(1.5, max(0, configured))
+    }
+
+    static func duration(for sign: Character, profile: NativeReaderVoiceProfile) -> TimeInterval {
+        guard profile.pauseStyle != 0 else { return 0 }
+        let index: Int
+        switch sign {
+        case ",": index = 0
+        case ";": index = 1
+        case ":": index = 2
+        case ".", "!", "?": index = 3
+        case "\n": index = 4
+        default: return 0
+        }
+        if profile.pauseStyle == 1 { return [0.18, 0.28, 0.28, 0.48, 0.65][index] }
+        if profile.pauseStyle == 2 { return [0.32, 0.48, 0.48, 0.80, 1.10][index] }
+        guard profile.pauseSeconds.indices.contains(index) else { return 0 }
+        return min(1.5, max(0, profile.pauseSeconds[index]))
+    }
+
+    static func segments(_ text: String, voiceIdentifier: String) -> [Segment] {
+        let profile = NativeReaderVoiceProfileStore.load(for: voiceIdentifier) ?? .natural
+        return segments(text, profile: profile)
+    }
+
+    static func segments(_ text: String, profile: NativeReaderVoiceProfile) -> [Segment] {
+        var parts: [Segment] = []
+        var buffer = ""
+        for character in text {
+            buffer.append(character)
+            let delay = duration(for: character, profile: profile)
+            if delay > 0 || ",;:.!?\n".contains(character) {
+                parts.append(Segment(text: buffer, delay: delay))
+                buffer = ""
+            }
+        }
+        if !buffer.isEmpty { parts.append(Segment(text: buffer, delay: 0)) }
+        if parts.isEmpty { parts.append(Segment(text: text, delay: 0)) }
+        return parts
     }
 
     static func segments(_ text: String, settings: UserDefaults = .standard) -> [Segment] {
@@ -267,17 +453,15 @@ struct NativeReaderAudioControls: View {
             }
         }
         if chosenEngine == 0 {
-        NativeAdjustableChoice(
-            title: "Velocidad de voz",
-            choices: NativeReaderSpeedOptions.choices,
-            selectedIndex: speedChoiceBinding
-        )
-        NativeAdjustableChoice(
-            title: "Tono de lectura",
-            choices: ["Más grave", "Grave", "Normal", "Agudo", "Más agudo"],
-            selectedIndex: pitchSelection ?? $generalPitch
-        )
-        NativeReaderPunctuationControls()
+        if speedSelection != nil || pitchSelection != nil {
+            // Existing per-book overrides remain available for books that
+            // already have their own reading preferences.
+            NativeAdjustableChoice(title: "Velocidad específica del documento",
+                choices: NativeReaderSpeedOptions.choices, selectedIndex: speedChoiceBinding)
+            NativeAdjustableChoice(title: "Tono específico del documento",
+                choices: ["Más grave", "Grave", "Normal", "Agudo", "Más agudo"],
+                selectedIndex: pitchSelection ?? $generalPitch)
+        }
         NativeAdjustableChoice(
             title: "Mostrar voces",
             choices: ["Todos los idiomas", "Español", "Inglés"],
@@ -295,6 +479,7 @@ struct NativeReaderAudioControls: View {
         .onReceive(NotificationCenter.default.publisher(for: AVSpeechSynthesizer.availableVoicesDidChangeNotification)) { _ in
             refreshVoices()
         }
+        NativeReaderVoiceCustomizationControls(voiceIdentifier: selectedVoiceID)
         }
         if allowVoiceDownloads && chosenEngine == 0 {
             if personalVoiceStatus == .notDetermined {

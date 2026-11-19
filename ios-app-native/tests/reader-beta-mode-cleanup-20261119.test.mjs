@@ -60,9 +60,10 @@ test('voice selection filters unavailable engines and hides system voices when G
   assert.match(settings, /NativePhononRuntime\.isUsable/);
   assert.match(settings, /availableEngines/);
   assert.match(settings, /if chosenEngine == 0\s*\{/);
-  const system = settings.split('if chosenEngine == 0 {')[1]?.split('NativeReaderPunctuationControls()')[0] ?? '';
-  assert.match(system, /title: "Velocidad de voz"/);
-  assert.match(system, /title: "Tono de lectura"/);
+  const system = settings.split('if chosenEngine == 0 {')[1]?.split('if allowVoiceDownloads')[0] ?? '';
+  assert.match(system, /NativeReaderVoiceCustomizationControls\(voiceIdentifier: selectedVoiceID\)/);
+  assert.match(settings, /title: "Velocidad de voz"/);
+  assert.match(settings, /title: "Tono de lectura"/);
   assert.match(settings, /title: "Mostrar voces"/);
   assert.match(settings, /Button\("Cómo instalar más voces del sistema"\)/);
 });

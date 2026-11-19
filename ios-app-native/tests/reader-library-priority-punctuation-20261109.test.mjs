@@ -27,7 +27,7 @@ test('Pausas Normal Mayor Expresiva y Personalizadas ofrecen ajustes reales por 
     assert.match(settings, new RegExp('native-reading-pause-' + name));
   }
   assert.match(settings, /NativeReaderPauseProfile/);
-  assert.match(reader, /NativeReaderPauseProfile\.segments\(Self\.textForSpeech\(text\)\)/);
+  assert.match(reader, /NativeReaderPauseProfile\.segments\(Self\.textForSpeech\(text\), voiceIdentifier: voiceIdentifier\)/);
   assert.match(reader, /utterance\.postUtteranceDelay =/);
   assert.match(reader, /utteranceOffsets\[identifier\] = utf16Offset/);
   assert.match(reader, /self\.lastSpeechUtterance == ObjectIdentifier\(utterance\)/);
@@ -76,7 +76,7 @@ test('La voz ignora marcadores estructurales de EPUB conservando las posiciones'
   assert.match(reader, /private static func textForSpeech\(_ source: String\) -> String/);
   assert.match(reader, /NSRegularExpression\(pattern: #/);
   assert.match(reader, /String\(repeating: " ", count: match\.range\.length\)/);
-  assert.match(reader, /NativeReaderPauseProfile\.segments\(Self\.textForSpeech\(text\)\)/);
+  assert.match(reader, /NativeReaderPauseProfile\.segments\(Self\.textForSpeech\(text\), voiceIdentifier: voiceIdentifier\)/);
 });
 
 

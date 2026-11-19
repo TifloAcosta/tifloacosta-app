@@ -881,3 +881,11 @@
 "La referencia guardada de Apple Music no es válida." = "La référence Apple Music enregistrée n'est pas valide.";
 "Esta canción ya no está disponible en Apple Music. Se conserva en tu lista." = "Ce morceau n'est plus disponible sur Apple Music. Il reste dans votre playlist.";
 "No se pudo recuperar la canción guardada de Apple Music." = "Impossible de récupérer le morceau Apple Music enregistré.";
+"Guardar cambios de esta voz" = "Enregistrer les modifications de cette voix";
+"Descartar cambios" = "Annuler les modifications";
+"Restablecer voz natural" = "Rétablir la voix naturelle";
+"La muestra utiliza los cambios provisionales. Las demás voces no se modifican." = "L'extrait utilise les modifications non enregistrées. Les autres voix restent inchangées.";
+"Cambios guardados exclusivamente para esta voz." = "Modifications enregistrées uniquement pour cette voix.";
+"Esta voz utiliza de nuevo sus ajustes naturales." = "Cette voix utilise à nouveau ses réglages naturels.";
+"Velocidad específica del documento" = "Vitesse propre au document";
+"Tono específico del documento" = "Hauteur propre au document";

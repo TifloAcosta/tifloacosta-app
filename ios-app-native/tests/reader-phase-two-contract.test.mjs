@@ -11,7 +11,8 @@ const ncx = swift('NativeDaisyNCX.swift');
 
 test('la voz informa el progreso real por palabra sin avanzar al pausar', () => {
   assert.match(reader, /willSpeakRangeOfSpeechString/);
-  assert.match(reader, /guard let self, self.isPlaying/);
+  assert.match(reader, /guard let self, \(self\.isPlaying \|\| self\.isPaused\)/);
+  assert.match(reader, /guard \(!speech\.hasAudio \|\| speech\.isGeneratedSpeech\), speech\.isPlaying else \{ return \}/);
   assert.match(reader, /onReceive\(speech\.\$textPercent\)/);
   assert.match(reader, /baseUTF16:/);
   assert.match(reader, /startTextSpeech\(\)/);

@@ -735,7 +735,7 @@ final class NativeReadingSpeech: ObservableObject {
     init() {
         progressDelegate.onWord = { [weak self] range, utterance in
             Task { @MainActor [weak self] in
-                guard let self, self.isPlaying, self.player == nil,
+                guard let self, (self.isPlaying || self.isPaused), self.player == nil,
                       self.totalUTF16 > 0 else { return }
                 // Los callbacks de una reproducción cancelada nunca deben
                 // modificar la posición de la siguiente reproducción.
@@ -3417,8 +3417,10 @@ struct NativeReadingScreen: View {
             }
         }
         .onReceive(speech.$textCharacterOffset) { offset in
-            guard (!speech.hasAudio || speech.isGeneratedSpeech), speech.isPlaying else { return }
+            guard (!speech.hasAudio || speech.isGeneratedSpeech),
+                  (speech.isPlaying || speech.isPaused) else { return }
             readingOffset = max(0, min(textLayout.totalCharacters, offset))
+            if speech.isPaused { persistPosition() }
         }
         .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
             speech.refresh()

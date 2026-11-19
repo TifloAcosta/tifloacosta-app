@@ -493,7 +493,9 @@ struct NativeMyMusicScreen: View {
     @StateObject private var library = NativeMusicLibrary()
     @StateObject private var player = NativeMusicPlayer()
     @StateObject private var appleMusic = NativeAppleMusicService()
+    @StateObject private var audius = NativeAudiusService()
     @State private var appleMusicQuery = ""
+    @State private var audiusQuery = ""
     @State private var isImporting = false
     @State private var isImportingFolder = false
     @State private var searchText = ""
@@ -520,6 +522,24 @@ struct NativeMyMusicScreen: View {
 
     var body: some View {
         List {
+            Section("Audius") {
+                Text("Catálogo musical gratuito. No necesitas crear una cuenta para buscar canciones.")
+                TextField("Buscar en Audius", text: $audiusQuery)
+                    .submitLabel(.search)
+                    .onSubmit { Task { await audius.search(audiusQuery) } }
+                Button("Buscar en Audius") { Task { await audius.search(audiusQuery) } }
+                if audius.loading { ProgressView("Consultando Audius") }
+                ForEach(audius.tracks) { track in
+                    Button("Reproducir \(track.title), \(track.user.name), Audius") {
+                        player.stop()
+                        Task { await appleMusic.pause() }
+                        audius.play(track)
+                    }
+                }
+                Button("Pausar Audius") { audius.pause() }
+                    .disabled(audius.playingName == nil)
+                if let message = audius.message { Text(message) }
+            }
             Section("Apple Music") {
                 if !appleMusic.isAuthorized {
                     Button("Conectar Apple Music") {

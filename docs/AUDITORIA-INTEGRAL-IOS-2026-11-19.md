@@ -100,3 +100,10 @@ No dar por concluida la compilación candidata ni ejecutar TestFlight hasta: (1)
 - La pantalla presenta controles accesibles de anterior, siguiente, detener y posición de lista, con traducciones en los cinco catálogos adicionales. Se prepararon rutas de recuperación de referencias remotas inválidas y cancelación de búsquedas al saltar pista.
 - Pruebas locales en esta etapa: 357 iOS y 461 generales. Compilación nativa confirmada hasta el cambio `30356451` (fase de compilación Xcode satisfactoria), última modificación `19c4f5fe` aún pendiente de compilación en GitHub.
 - **NO CERRADO FUNCIONALMENTE:** no hay todavía prueba real de transiciones entre los cuatro proveedores, fallo tardío de streaming, notificaciones de fondo ni VoiceOver en dispositivo. No confundir pruebas de contrato con reproducción real verificada.
+
+### Avance de ecualización — 19/11/2026
+
+- Ya hay persistencia de perfiles de ecualización para cada lista (`UUID` de lista) en el reproductor local. En una canción de lista se aplica la precedencia **canción > lista > general**. La interfaz permite guardar o retirar el perfil de esa lista y conserva etiquetas traducidas ES/EN/PT/FR/IT/DE.
+- Esta mejora no garantiza ecualización de streams externos: Apple Music, Audius y Jamendo utilizan motores diferentes, sin pasar por `AVAudioUnitEQ` local.
+- **Pendiente por álbum:** `MusicLocalFile` no almacena álbum ni artista; incorporar un perfil de álbum sin metadatos persistentes asociaría canciones incorrectamente. Falta obtener y conservar esa identidad, con respaldo/restauración.
+- Pruebas de la fase: **361 pruebas iOS y 461 generales**. La compilación Swift de `9ca597c3` terminó satisfactoriamente; queda verificación del resultado global de GitHub y prueba funcional en dispositivo.

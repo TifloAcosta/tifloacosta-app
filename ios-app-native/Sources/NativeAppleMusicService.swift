@@ -85,6 +85,29 @@ final class NativeAppleMusicService: ObservableObject {
         }
     }
 
+    func playSavedCatalogSong(id: String, title: String) async {
+        guard authorizationStatus == .authorized else {
+            message = "Conecta Apple Music para reproducir esta canción guardada."
+            return
+        }
+        guard !id.isEmpty else {
+            message = "La referencia de esta canción no es válida."
+            return
+        }
+        do {
+            var request = MusicCatalogSearchRequest(term: title, types: [Song.self])
+            request.limit = 25
+            let response = try await request.response()
+            guard let song = response.songs.first(where: { $0.id.rawValue == id }) else {
+                message = "Esta canción ya no está disponible en el catálogo consultado. Se conserva en tu lista."
+                return
+            }
+            await playCatalogSong(song)
+        } catch {
+            message = "No se pudo recuperar esta canción de Apple Music: \(error.localizedDescription)"
+        }
+    }
+
     func pause() async {
         ApplicationMusicPlayer.shared.pause()
     }

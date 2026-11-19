@@ -47,6 +47,27 @@ private struct MusicPortablePlaylist: Codable {
     let id: String
     let name: String
     let trackIds: [String]
+    var orderedEntries: [MusicPlaylistEntry]? = nil
+}
+
+private struct MusicPlaylistEntry: Codable, Identifiable {
+    enum Provider: String, Codable { case local, appleMusic }
+    let id: UUID
+    let provider: Provider
+    let localId: UUID?
+    let appleMusicSongId: String?
+    let title: String
+    let artist: String?
+
+    static func local(_ file: MusicLocalFile) -> Self {
+        Self(id: UUID(), provider: .local, localId: file.id, appleMusicSongId: nil,
+             title: file.name, artist: nil)
+    }
+
+    static func appleMusic(id: String, title: String, artist: String) -> Self {
+        Self(id: UUID(), provider: .appleMusic, localId: nil, appleMusicSongId: id,
+             title: title, artist: artist)
+    }
 }
 
 private struct MusicPortableSmartFolder: Codable {
@@ -93,6 +114,7 @@ private struct MusicPlaylist: Identifiable, Codable {
     let id: UUID
     var name: String
     var trackIds: [UUID]
+    var orderedEntries: [MusicPlaylistEntry]? = nil
 }
 
 private struct MusicSmartFolder: Identifiable, Codable {
@@ -207,8 +229,29 @@ private final class NativeMusicLibrary: ObservableObject {
 
     func addToPlaylist(_ trackId: UUID, playlistId: UUID) {
         guard let index = playlists.firstIndex(where: { $0.id == playlistId }) else { return }
+        let oldEntries = playlists[index].orderedEntries ?? playlists[index].trackIds.compactMap { id in
+            files.first(where: { $0.id == id }).map(MusicPlaylistEntry.local)
+        }
         playlists[index].trackIds.append(trackId)
+        if let file = files.first(where: { $0.id == trackId }) {
+            playlists[index].orderedEntries = oldEntries + [.local(file)]
+        }
         do { try save() } catch { self.error = error.localizedDescription }
+    }
+
+    func addAppleMusicSong(id: String, title: String, artist: String, playlistId: UUID) {
+        guard !id.isEmpty, let index = playlists.firstIndex(where: { $0.id == playlistId }) else { return }
+        let oldEntries = playlists[index].orderedEntries ?? playlists[index].trackIds.compactMap { id in
+            files.first(where: { $0.id == id }).map(MusicPlaylistEntry.local)
+        }
+        playlists[index].orderedEntries = oldEntries + [.appleMusic(id: id, title: title, artist: artist)]
+        do { try save() } catch { self.error = error.localizedDescription }
+    }
+
+    func playlistEntries(_ playlist: MusicPlaylist) -> [MusicPlaylistEntry] {
+        playlist.orderedEntries ?? playlist.trackIds.compactMap { id in
+            files.first(where: { $0.id == id }).map(MusicPlaylistEntry.local)
+        }
     }
 
     func removePlaylist(_ id: UUID) {
@@ -241,7 +284,10 @@ private final class NativeMusicLibrary: ObservableObject {
     func removeFromLibrary(_ id: UUID) {
         files.removeAll { $0.id == id }
         for index in folders.indices { folders[index].trackIds.removeAll { $0 == id } }
-        for index in playlists.indices { playlists[index].trackIds.removeAll { $0 == id } }
+        for index in playlists.indices {
+            playlists[index].trackIds.removeAll { $0 == id }
+            playlists[index].orderedEntries?.removeAll { $0.localId == id }
+        }
         do { try save() } catch { self.error = error.localizedDescription }
     }
 
@@ -264,7 +310,7 @@ private final class NativeMusicLibrary: ObservableObject {
                 catalog: MusicPortableCatalog(version: 1, tracks: tracks),
                 folders: portableFolders,
                 playlists: playlists.map { MusicPortablePlaylist(id: $0.id.uuidString, name: $0.name,
-                    trackIds: $0.trackIds.map { $0.uuidString }) },
+                    trackIds: $0.trackIds.map { $0.uuidString }, orderedEntries: $0.orderedEntries) },
                 smartFolders: smartFolders.map { MusicPortableSmartFolder(id: $0.id.uuidString, name: $0.name,
                     titleContains: $0.titleContains) }, audioProfiles: [:])
             let bytes = try JSONEncoder().encode(backup)
@@ -320,7 +366,7 @@ private final class NativeMusicLibrary: ObservableObject {
             folders = Array(Dictionary((folders + importedFolders).map { ($0.name, $0) }, uniquingKeysWith: { existing, _ in existing }).values)
             let addedLists = imported.playlists.map { item in
                 MusicPlaylist(id: UUID(uuidString: item.id) ?? UUID(), name: item.name,
-                    trackIds: item.trackIds.compactMap { UUID(uuidString: $0) })
+                    trackIds: item.trackIds.compactMap { UUID(uuidString: $0) }, orderedEntries: item.orderedEntries)
             }
             playlists = Array(Dictionary((playlists + addedLists).map { ($0.name, $0) }, uniquingKeysWith: { existing, _ in existing }).values)
             let addedSmart = imported.smartFolders.map { item in
@@ -493,6 +539,16 @@ struct NativeMyMusicScreen: View {
                         Button("Reproducir \(song.title), \(song.artistName), Apple Music") {
                             Task { await appleMusic.playCatalogSong(song) }
                         }
+                        if !library.playlists.isEmpty {
+                            Menu("Añadir \(song.title) a una lista") {
+                                ForEach(library.playlists) { playlist in
+                                    Button("Añadir a \(playlist.name)") {
+                                        library.addAppleMusicSong(id: song.id.rawValue, title: song.title,
+                                                                  artist: song.artistName, playlistId: playlist.id)
+                                    }
+                                }
+                            }
+                        }
                     }
                     ForEach(appleMusic.albums, id: \.id) { album in
                         Text("Álbum: \(album.title), \(album.artistName), Apple Music")
@@ -542,14 +598,32 @@ struct NativeMyMusicScreen: View {
             }
             Section("Listas de reproducción") {
                 ForEach(library.playlists) { playlist in
-                    Text("\(playlist.name), \(playlist.trackIds.count) canciones")
-                    Button("Reproducir lista \(playlist.name)") {
+                    Text("\(playlist.name), \(library.playlistEntries(playlist).count) canciones")
+                    ForEach(library.playlistEntries(playlist)) { entry in
+                        if entry.provider == .appleMusic {
+                            Button("Reproducir \(entry.title), \(entry.artist ?? ""), Apple Music") {
+                                Task { await appleMusic.playSavedCatalogSong(id: entry.appleMusicSongId ?? "", title: entry.title) }
+                            }
+                        } else if let localId = entry.localId,
+                                  let file = library.files.first(where: { $0.id == localId }) {
+                            Button("Reproducir \(file.name), archivo personal") {
+                                player.play(name: file.name, url: library.audioURL(for: file),
+                                            queue: [(name: file.name, url: library.audioURL(for: file))])
+                            }
+                        } else {
+                            Text("\(entry.title), archivo no disponible")
+                        }
+                    }
+                    Button("Reproducir archivos locales de \(playlist.name)") {
                         let items = playlist.trackIds.compactMap { id in
                             library.files.first(where: { $0.id == id })
                         }.map { (name: $0.name, url: library.audioURL(for: $0)) }
                         if let first = items.first { player.play(name: first.name, url: first.url, queue: items) }
                     }
                     .disabled(playlist.trackIds.isEmpty)
+                    if library.playlistEntries(playlist).contains(where: { $0.provider == .appleMusic }) {
+                        Text("Las canciones de Apple Music se pueden reproducir individualmente desde esta lista.")
+                    }
                     Button("Eliminar lista \(playlist.name)") { library.removePlaylist(playlist.id) }
                 }
             }

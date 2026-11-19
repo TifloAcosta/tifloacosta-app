@@ -66,10 +66,12 @@ private final class NativeJamendoDirectory: ObservableObject {
 @MainActor
 final class NativeJamendoPlayer: ObservableObject {
     static let shared = NativeJamendoPlayer()
+    var onPlaybackFinished: (() -> Void)?
     @Published private(set) var title = ""
     @Published private(set) var isPlaying = false
     @Published var error: String?
     private var player: AVPlayer?
+    private var endObserver: NSObjectProtocol?
     private var remoteTokens: [Any] = []
 
     func playSaved(id: String) async {
@@ -109,8 +111,19 @@ final class NativeJamendoPlayer: ObservableObject {
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
             try AVAudioSession.sharedInstance().setActive(true)
+            clearEndObserver()
             player?.pause()
             player = AVPlayer(url: url)
+            if let currentItem = player?.currentItem {
+                endObserver = NotificationCenter.default.addObserver(
+                    forName: .AVPlayerItemDidPlayToEndTime, object: currentItem, queue: .main
+                ) { [weak self] _ in
+                    Task { @MainActor [weak self] in
+                        self?.isPlaying = false
+                        self?.onPlaybackFinished?()
+                    }
+                }
+            }
             title = name
             NativeRemotePlaybackOwner.claim(.jamendo)
             registerRemoteCommands()
@@ -147,12 +160,18 @@ final class NativeJamendoPlayer: ObservableObject {
     }
 
     func stop() {
+        clearEndObserver()
         player?.pause()
         player = nil
         isPlaying = false
         title = ""
         unregisterRemoteCommands()
         NativeRemotePlaybackOwner.release(.jamendo)
+    }
+
+    private func clearEndObserver() {
+        if let endObserver { NotificationCenter.default.removeObserver(endObserver) }
+        endObserver = nil
     }
 
     private func updateNowPlaying() {

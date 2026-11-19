@@ -895,3 +895,8 @@
 "Carpeta interna de Mi Música" = "Internal My Music folder";
 "Elegir destino de copias automáticas" = "Choose automatic backup destination";
 "Restablecer destino interno" = "Restore internal destination";
+"Reproducción de lista" = "Playlist playback";
+"Canción anterior de la lista" = "Previous playlist song";
+"Siguiente canción de la lista" = "Next playlist song";
+"Detener reproducción de lista" = "Stop playlist playback";
+"Canción %d de %d: %@" = "Song %d of %d: %@";

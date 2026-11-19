@@ -893,3 +893,8 @@
 "Carpeta interna de Mi Música" = "Interner Ordner Meine Musik";
 "Elegir destino de copias automáticas" = "Ziel für automatische Sicherungen wählen";
 "Restablecer destino interno" = "Internes Ziel wiederherstellen";
+"Reproducción de lista" = "Wiedergabe der Playlist";
+"Canción anterior de la lista" = "Vorheriger Titel der Playlist";
+"Siguiente canción de la lista" = "Nächster Titel der Playlist";
+"Detener reproducción de lista" = "Playlist-Wiedergabe stoppen";
+"Canción %d de %d: %@" = "Titel %d von %d: %@";

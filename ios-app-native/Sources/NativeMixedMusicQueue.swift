@@ -44,43 +44,66 @@ final class NativeMixedMusicQueue: ObservableObject {
 
     private func stopPlaying() {
         playbackGeneration += 1
+        NativeMusicPlayer.shared.onPlaybackFinished = nil
+        NativeAudiusPlayer.shared.onPlaybackFinished = nil
+        NativeJamendoPlayer.shared.onPlaybackFinished = nil
         NativeMusicPlayer.shared.stop()
         NativeAppleMusicPlayer.shared.stop()
         NativeAudiusPlayer.shared.stop()
         NativeJamendoPlayer.shared.stop()
     }
 
+    func finishedNaturally(generation: Int) {
+        guard generation == playbackGeneration else { return }
+        next()
+    }
+
     private func playCurrent() {
-        guard entries.indices.contains(currentIndex) else {
-            stop()
+        while entries.indices.contains(currentIndex) {
+            let entry = entries[currentIndex]
+            let generation = playbackGeneration
+            let finished: () -> Void = { [weak self] in
+                self?.finishedNaturally(generation: generation)
+            }
+            switch entry.provider {
+            case .local:
+                guard let id = entry.localId, let url = localURLs[id],
+                      FileManager.default.fileExists(atPath: url.path) else {
+                    error = MusicLocalized.format("Esta canción ya no está disponible. Se conserva en tu lista.")
+                    currentIndex += 1
+                    continue
+                }
+                NativeMusicPlayer.shared.onPlaybackFinished = finished
+                NativeMusicPlayer.shared.play(name: entry.title, url: url, queue: [(name: entry.title, url: url)])
+            case .appleMusic:
+                guard let remoteID = entry.appleMusicSongId, !remoteID.isEmpty else {
+                    currentIndex += 1
+                    continue
+                }
+                Task { @MainActor in
+                    guard generation == playbackGeneration else { return }
+                    await NativeAppleMusicPlayer.shared.playSaved(id: remoteID, title: entry.title)
+                }
+            case .audius:
+                guard let remoteID = entry.appleMusicSongId, !remoteID.isEmpty else {
+                    currentIndex += 1
+                    continue
+                }
+                NativeAudiusPlayer.shared.onPlaybackFinished = finished
+                NativeAudiusPlayer.shared.play(id: remoteID, title: entry.title)
+            case .jamendo:
+                guard let remoteID = entry.appleMusicSongId, !remoteID.isEmpty else {
+                    currentIndex += 1
+                    continue
+                }
+                NativeJamendoPlayer.shared.onPlaybackFinished = finished
+                Task { @MainActor in
+                    guard generation == playbackGeneration else { return }
+                    await NativeJamendoPlayer.shared.playSaved(id: remoteID)
+                }
+            }
             return
         }
-        let entry = entries[currentIndex]
-        let generation = playbackGeneration
-        switch entry.provider {
-        case .local:
-            guard let id = entry.localId, let url = localURLs[id],
-                  FileManager.default.fileExists(atPath: url.path) else {
-                error = MusicLocalized.format("Esta canción ya no está disponible. Se conserva en tu lista.")
-                next()
-                return
-            }
-            NativeMusicPlayer.shared.play(name: entry.title, url: url, queue: [(name: entry.title, url: url)])
-        case .appleMusic:
-            guard let remoteID = entry.appleMusicSongId, !remoteID.isEmpty else { next(); return }
-            Task { @MainActor in
-                guard generation == playbackGeneration else { return }
-                await NativeAppleMusicPlayer.shared.playSaved(id: remoteID, title: entry.title)
-            }
-        case .audius:
-            guard let remoteID = entry.appleMusicSongId, !remoteID.isEmpty else { next(); return }
-            NativeAudiusPlayer.shared.play(id: remoteID, title: entry.title)
-        case .jamendo:
-            guard let remoteID = entry.appleMusicSongId, !remoteID.isEmpty else { next(); return }
-            Task { @MainActor in
-                guard generation == playbackGeneration else { return }
-                await NativeJamendoPlayer.shared.playSaved(id: remoteID)
-            }
-        }
+        stop()
     }
 }

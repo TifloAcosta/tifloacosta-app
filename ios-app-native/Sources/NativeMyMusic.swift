@@ -727,6 +727,18 @@ struct NativeMyMusicScreen: View {
                     }
                 }
             }
+            if mixedQueue.entries.indices.contains(mixedQueue.currentIndex) {
+                Section("Reproducción de lista") {
+                    Text(MusicLocalized.format("Canción %d de %d: %@", mixedQueue.currentIndex + 1,
+                        mixedQueue.entries.count, mixedQueue.entries[mixedQueue.currentIndex].title))
+                    Button("Canción anterior de la lista") { mixedQueue.previous() }
+                        .disabled(mixedQueue.currentIndex == 0)
+                    Button("Siguiente canción de la lista") { mixedQueue.next() }
+                        .disabled(mixedQueue.currentIndex + 1 >= mixedQueue.entries.count)
+                    Button("Detener reproducción de lista") { mixedQueue.stop() }
+                    if let problem = mixedQueue.error { Text(problem) }
+                }
+            }
             Section("Listas de reproducción") {
                 ForEach(library.playlists) { playlist in
                     Text("\(playlist.name), \(library.playlistEntries(playlist).count) canciones")

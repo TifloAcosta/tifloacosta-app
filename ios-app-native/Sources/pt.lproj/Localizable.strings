@@ -893,3 +893,8 @@
 "Carpeta interna de Mi Música" = "Pasta interna de Minha Música";
 "Elegir destino de copias automáticas" = "Escolher destino das cópias automáticas";
 "Restablecer destino interno" = "Restaurar destino interno";
+"Reproducción de lista" = "Reprodução da lista";
+"Canción anterior de la lista" = "Música anterior da lista";
+"Siguiente canción de la lista" = "Próxima música da lista";
+"Detener reproducción de lista" = "Parar reprodução da lista";
+"Canción %d de %d: %@" = "Música %d de %d: %@";

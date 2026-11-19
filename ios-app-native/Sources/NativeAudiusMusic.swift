@@ -56,10 +56,12 @@ private final class NativeAudiusDirectory: ObservableObject {
 @MainActor
 final class NativeAudiusPlayer: ObservableObject {
     static let shared = NativeAudiusPlayer()
+    var onPlaybackFinished: (() -> Void)?
     @Published private(set) var title = ""
     @Published private(set) var isPlaying = false
     @Published var error: String?
     private var player: AVPlayer?
+    private var endObserver: NSObjectProtocol?
     private var remoteTokens: [Any] = []
 
     func play(id: String, title: String) {
@@ -81,8 +83,19 @@ final class NativeAudiusPlayer: ObservableObject {
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
             try AVAudioSession.sharedInstance().setActive(true)
+            clearEndObserver()
             player?.pause()
             player = AVPlayer(url: target)
+            if let currentItem = player?.currentItem {
+                endObserver = NotificationCenter.default.addObserver(
+                    forName: .AVPlayerItemDidPlayToEndTime, object: currentItem, queue: .main
+                ) { [weak self] _ in
+                    Task { @MainActor [weak self] in
+                        self?.isPlaying = false
+                        self?.onPlaybackFinished?()
+                    }
+                }
+            }
             self.title = title
             NativeRemotePlaybackOwner.claim(.audius)
             registerRemoteCommands()
@@ -119,12 +132,18 @@ final class NativeAudiusPlayer: ObservableObject {
     }
 
     func stop() {
+        clearEndObserver()
         player?.pause()
         player = nil
         isPlaying = false
         title = ""
         unregisterRemoteCommands()
         NativeRemotePlaybackOwner.release(.audius)
+    }
+
+    private func clearEndObserver() {
+        if let endObserver { NotificationCenter.default.removeObserver(endObserver) }
+        endObserver = nil
     }
 
     private func updateNowPlaying() {

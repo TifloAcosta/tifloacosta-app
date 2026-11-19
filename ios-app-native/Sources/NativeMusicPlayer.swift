@@ -41,6 +41,7 @@ private struct MusicAudioSnapshot: Codable {
 @MainActor
 final class NativeMusicPlayer: ObservableObject {
     static let shared = NativeMusicPlayer()
+    var onPlaybackFinished: (() -> Void)?
     @Published private(set) var currentName = ""
     @Published private(set) var isPlaying = false
     @Published private(set) var position: TimeInterval = 0
@@ -284,7 +285,9 @@ final class NativeMusicPlayer: ObservableObject {
                              completionCallbackType: .dataPlayedBack) { [weak self] _ in
             Task { @MainActor in
                 guard let self, self.generation == thisGeneration else { return }
-                if self.repeatMode == "one" { self.startCurrent() } else { self.next() }
+                if let finished = self.onPlaybackFinished { finished() }
+                else if self.repeatMode == "one" { self.startCurrent() }
+                else { self.next() }
             }
         }
     }

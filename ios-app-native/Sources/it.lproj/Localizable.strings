@@ -893,3 +893,8 @@
 "Carpeta interna de Mi Música" = "Cartella interna La mia musica";
 "Elegir destino de copias automáticas" = "Scegli la destinazione dei backup automatici";
 "Restablecer destino interno" = "Ripristina destinazione interna";
+"Reproducción de lista" = "Riproduzione playlist";
+"Canción anterior de la lista" = "Brano precedente della playlist";
+"Siguiente canción de la lista" = "Brano successivo della playlist";
+"Detener reproducción de lista" = "Interrompi riproduzione playlist";
+"Canción %d de %d: %@" = "Brano %d di %d: %@";

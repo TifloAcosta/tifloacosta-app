@@ -147,3 +147,15 @@ No dar por concluida la compilación candidata ni ejecutar TestFlight hasta: (1)
 - La pantalla de OCR consulta ahora los idiomas efectivamente disponibles en Vision para la precisión seleccionada, los presenta con nombres comprensibles y actualiza la lista al cambiar entre reconocimiento preciso o rápido.
 - Se mantiene la codificación de preferencias anterior, sin alterar los ajustes guardados ni impedir la importación por falta de algún idioma.
 - La prueba de regresión comprueba la consulta dinámica y el comportamiento de reserva. Pendiente compilación Swift macOS y verificación del anuncio en VoiceOver.
+
+### Fase 5 de 6: importación musical recuperable — 20/11/2026
+
+- En importaciones múltiples mediante Archivos, una copia fallida podía dejar archivos nuevos en el almacenamiento aunque la operación no hubiese terminado de guardar la biblioteca. Se conserva el estado previo y se eliminan exclusivamente los archivos recién copiados si falla la importación; se intenta restaurar el índice anterior.
+- Se mantiene el selector nativo de Archivos con acceso a proveedores instalados, sin afirmar que exista integración OAuth/API persistente con Google Drive, Dropbox, OneDrive o MEGA. **La implementación de adaptadores independientes sigue pendiente** y no queda cubierta por esta reparación de seguridad.
+- Se añadieron pruebas para la reversión de una importación múltiple y para verificar que la actualización de metadatos no se inicia antes de guardar el índice.
+
+### Fase 6 de 6: textos de error de importación en seis idiomas — 20/11/2026
+
+- Los tres mensajes de error del flujo de importación musical —fallo de copia, carpeta inaccesible y carpeta sin audio compatible— utilizan ahora el mismo mecanismo de traducción que el resto de «Mi música», con variantes para EN/PT/FR/IT/DE y conservación del español de base.
+- Las traducciones parametrizadas conservan el detalle técnico de error sin romper el formato en otros idiomas.
+- Se añadieron contratos de presencia y de uso de la traducción. **Esto no constituye una auditoría lingüística exhaustiva**: siguen sin verificarse todas las interpolaciones, errores de servicios, pantallas con VoiceOver y combinaciones de idioma.

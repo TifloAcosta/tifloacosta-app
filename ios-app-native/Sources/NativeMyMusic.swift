@@ -869,202 +869,234 @@ struct NativeMyMusicScreen: View {
         .navigationTitle("Ajustes de Mi Música")
     }
 
+    private var musicPlayerSection: some View {
+        Section("Reproductor") {
+            Text(player.currentName.isEmpty ? "Ninguna canción en reproducción" : player.currentName)
+                .accessibilityAddTraits(.isHeader)
+            Button(player.isPlaying ? "Pausar" : "Reproducir") { player.toggle() }
+                .disabled(player.currentName.isEmpty)
+            Button("Canción anterior") { player.previous() }
+                .disabled(player.currentName.isEmpty)
+            Button("Retroceder 15 segundos") { player.skip(seconds: -15) }
+                .disabled(player.currentName.isEmpty)
+            Button("Avanzar 15 segundos") { player.skip(seconds: 15) }
+                .disabled(player.currentName.isEmpty)
+            Button("Canción siguiente") { player.next() }
+                .disabled(player.currentName.isEmpty)
+            Button("Reproducción aleatoria: \(player.shuffleEnabled ? "activada" : "desactivada")") { player.toggleShuffle() }
+            Button("Repetición: \(player.repeatMode == "off" ? "desactivada" : player.repeatMode == "all" ? "toda la lista" : "una canción")") { player.changeRepeat() }
+            Button("Temporizador de 15 minutos") { player.setSleep(minutes: 15) }
+                .disabled(player.currentName.isEmpty)
+            Button("Temporizador de 30 minutos") { player.setSleep(minutes: 30) }
+                .disabled(player.currentName.isEmpty)
+            if player.sleepRemaining > 0 {
+                Text("Temporizador: \(player.sleepRemaining) segundos restantes")
+                Button("Cancelar temporizador") { player.cancelSleep() }
+            }
+            Text("Posición: \(Int(player.position)) de \(Int(player.duration)) segundos")
+        }
+    }
+
+    private var musicLibrarySection: some View {
+        Section("Mi biblioteca") {
+            if library.files.isEmpty {
+                Text("Todavía no hay canciones. Usa Organizar mi música para importarlas.")
+            } else {
+                ForEach(visibleFiles) { file in
+                    HStack {
+                        Button("Reproducir \(file.name)") {
+                            player.play(
+                                name: file.name,
+                                url: library.audioURL(for: file),
+                                queue: library.files.map { (name: $0.name, url: library.audioURL(for: $0)) },
+                                albumKeysByURL: albumKeysByURL
+                            )
+                        }
+                        .accessibilityLabel(detailedVoiceOver ?
+                            MusicLocalized.format("Reproducir %@, artista %@, álbum %@, disponible sin conexión", file.name, file.artist ?? MusicLocalized.format("No indicado"), file.album ?? MusicLocalized.format("No indicado")) :
+                            MusicLocalized.format("Reproducir %@", file.name))
+                        Spacer()
+                        Menu("Acciones de \(file.name)") {
+                            Button("Editar género") {
+                                editingGenreFile = file
+                                editingGenreValue = file.genre ?? ""
+                            }
+                            ForEach(library.folders) { folder in
+                                Button("Añadir a \(folder.name)") { library.assign(file.id, to: folder.id) }
+                            }
+                            ForEach(library.playlists) { playlist in
+                                Button("Añadir a lista \(playlist.name)") { library.addToPlaylist(file.id, playlistId: playlist.id) }
+                            }
+                            Button("Eliminar de la biblioteca", role: .destructive) { pendingRemoval = file }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private var musicAlbumsSection: some View {
+        Section("Álbumes") {
+            ForEach(musicAlbums) { album in
+                Text(album.name)
+                Button(MusicLocalized.format("Guardar ecualización para álbum %@", album.name)) {
+                    player.saveForAlbum(album.id)
+                }
+                Button(MusicLocalized.format("Quitar ecualización de álbum %@", album.name)) {
+                    player.removeAlbumOverride(album.id)
+                }
+                .disabled(!player.hasAlbumOverride(album.id))
+            }
+        }
+    }
+
+    private var musicFoldersSection: some View {
+        Section("Mis carpetas") {
+            ForEach(library.folders) { folder in
+                HStack {
+                    Text("\(folder.name), \(folder.trackIds.count) canciones")
+                        .accessibilityLabel(detailedVoiceOver ?
+                            MusicLocalized.format("%@, carpeta, %d canciones, guardadas en el iPhone", folder.name, folder.trackIds.count) :
+                            MusicLocalized.format("%@, %d canciones", folder.name, folder.trackIds.count))
+                    Spacer()
+                    Button("Eliminar carpeta \(folder.name)") { library.removeFolder(folder.id) }
+                        .accessibilityHint("Solo elimina esta carpeta virtual; las canciones se conservan.")
+                }
+            }
+        }
+    }
+
+    @ViewBuilder private var musicQueueSection: some View {
+        if mixedQueue.entries.indices.contains(mixedQueue.currentIndex) {
+            Section("Reproducción de lista") {
+                Text(MusicLocalized.format("Canción %d de %d: %@", mixedQueue.currentIndex + 1,
+                    mixedQueue.entries.count, mixedQueue.entries[mixedQueue.currentIndex].title))
+                Button("Canción anterior de la lista") { mixedQueue.previous() }
+                    .disabled(mixedQueue.currentIndex == 0)
+                Button("Siguiente canción de la lista") { mixedQueue.next() }
+                    .disabled(mixedQueue.currentIndex + 1 >= mixedQueue.entries.count)
+                Button("Detener reproducción de lista") { mixedQueue.stop() }
+                if let problem = mixedQueue.error { Text(problem) }
+            }
+        }
+    }
+
+    private var musicPlaylistsSection: some View {
+        Section("Listas de reproducción") {
+            ForEach(library.playlists) { playlist in
+                Text("\(playlist.name), \(library.playlistEntries(playlist).count) canciones")
+                Button("Reproducir lista \(playlist.name)") {
+                    mixedQueue.play(entries: library.playlistEntries(playlist), playlistID: playlist.id, localURLs: Dictionary(
+                        uniqueKeysWithValues: library.files.map { ($0.id, library.audioURL(for: $0)) }),
+                        albumKeysByURL: albumKeysByURL)
+                }
+                .disabled(library.playlistEntries(playlist).isEmpty)
+                Button(MusicLocalized.format("Guardar ecualización para lista %@", playlist.name)) {
+                    player.saveForPlaylist(playlist.id)
+                }
+                Button(MusicLocalized.format("Quitar ecualización de lista %@", playlist.name)) {
+                    player.removePlaylistOverride(playlist.id)
+                }
+                .disabled(!player.hasPlaylistOverride(playlist.id))
+                ForEach(library.playlistEntries(playlist)) { entry in
+                    switch entry.provider {
+                    case .appleMusic:
+                        Button(MusicLocalized.format("Escuchar %@, %@, Apple Music", entry.title, entry.artist ?? "")) {
+                            playOnline {
+                                Task {
+                                    await NativeAppleMusicPlayer.shared.playSaved(
+                                        id: entry.appleMusicSongId ?? "", title: entry.title)
+                                }
+                            }
+                        }
+                    case .audius:
+                        Button(MusicLocalized.format("Escuchar %@, %@, Audius", entry.title, entry.artist ?? "")) {
+                            playOnline { NativeAudiusPlayer.shared.play(id: entry.appleMusicSongId ?? "", title: entry.title) }
+                        }
+                    case .jamendo:
+                        Button(MusicLocalized.format("Escuchar %@, %@, Jamendo", entry.title, entry.artist ?? "")) {
+                            playOnline { Task { await NativeJamendoPlayer.shared.playSaved(id: entry.appleMusicSongId ?? "") } }
+                        }
+                    case .local:
+                        if entry.localId != nil,
+                           !library.files.contains(where: { $0.id == entry.localId }) {
+                            Text("\(entry.title), archivo no disponible")
+                        }
+                    }
+                    HStack {
+                        Button(MusicLocalized.format("Subir %@ en la lista", entry.title)) {
+                            library.movePlaylistEntry(playlistID: playlist.id, entryID: entry.id, by: -1)
+                        }
+                        .disabled(library.playlistEntries(playlist).first?.id == entry.id)
+                        Button(MusicLocalized.format("Bajar %@ en la lista", entry.title)) {
+                            library.movePlaylistEntry(playlistID: playlist.id, entryID: entry.id, by: 1)
+                        }
+                        .disabled(library.playlistEntries(playlist).last?.id == entry.id)
+                    }
+                }
+                Button("Eliminar lista \(playlist.name)") { library.removePlaylist(playlist.id) }
+            }
+        }
+    }
+
+    private var musicSmartFoldersSection: some View {
+        Section("Carpetas inteligentes") {
+            ForEach(library.smartFolders) { folder in
+                let matches = library.matchingTracks(for: folder)
+                Text("\(folder.name), criterio: \(folder.ruleKind.label) \(folder.titleContains), \(matches.count) canciones")
+                Button("Reproducir carpeta inteligente \(folder.name)") {
+                    let items = matches.map { (name: $0.name, url: library.audioURL(for: $0)) }
+                    if let first = items.first { player.play(name: first.name, url: first.url, queue: items,
+                        albumKeysByURL: albumKeysByURL) }
+                }
+                .disabled(matches.isEmpty)
+                Button("Eliminar carpeta inteligente \(folder.name)") { library.removeSmartFolder(folder.id) }
+            }
+        }
+    }
+
+    private var musicOrganizeSection: some View {
+        Section {
+            Menu("Organizar mi música") {
+                Button("Importar canciones") { isImporting = true }
+                Button("Importar carpeta desde Archivos o nube") { isImportingFolder = true }
+                Button("Crear carpeta") { showingFolderEditor = true }
+                Button("Crear lista de reproducción") { showingPlaylistEditor = true }
+                Button("Crear carpeta inteligente") { showingSmartFolderEditor = true }
+            }
+            NavigationLink("Google Drive") {
+                NativeCloudGooglePickerScreen(onImport: { file in
+                    library.importFiles([file])
+                }, allowCellularDownloads: allowCellularDownloads)
+            }
+            NavigationLink("Dropbox") {
+                NativeCloudFolderBrowserScreen(provider: .dropbox, onImport: { file in
+                    library.importFiles([file])
+                }, allowCellularDownloads: allowCellularDownloads)
+            }
+            NavigationLink("Ajustes") { musicSettings }
+            NavigationLink("Plataformas musicales") {
+                NativeMusicPlatformsScreen(playlists: library.playlists.map {
+                    MusicPlaylistDestination(id: $0.id, name: $0.name)
+                }, addToPlaylist: { provider, songID, title, artist, playlistID in
+                    guard let source = MusicPlaylistEntry.Provider(rawValue: provider) else { return }
+                    library.addRemoteToPlaylist(provider: source, songID: songID,
+                        title: title, artist: artist, playlistID: playlistID)
+                })
+            }
+        }
+    }
+
     var body: some View {
         List {
-            Section("Reproductor") {
-                Text(player.currentName.isEmpty ? "Ninguna canción en reproducción" : player.currentName)
-                    .accessibilityAddTraits(.isHeader)
-                Button(player.isPlaying ? "Pausar" : "Reproducir") { player.toggle() }
-                    .disabled(player.currentName.isEmpty)
-                Button("Canción anterior") { player.previous() }
-                    .disabled(player.currentName.isEmpty)
-                Button("Retroceder 15 segundos") { player.skip(seconds: -15) }
-                    .disabled(player.currentName.isEmpty)
-                Button("Avanzar 15 segundos") { player.skip(seconds: 15) }
-                    .disabled(player.currentName.isEmpty)
-                Button("Canción siguiente") { player.next() }
-                    .disabled(player.currentName.isEmpty)
-                Button("Reproducción aleatoria: \(player.shuffleEnabled ? "activada" : "desactivada")") { player.toggleShuffle() }
-                Button("Repetición: \(player.repeatMode == "off" ? "desactivada" : player.repeatMode == "all" ? "toda la lista" : "una canción")") { player.changeRepeat() }
-                Button("Temporizador de 15 minutos") { player.setSleep(minutes: 15) }
-                    .disabled(player.currentName.isEmpty)
-                Button("Temporizador de 30 minutos") { player.setSleep(minutes: 30) }
-                    .disabled(player.currentName.isEmpty)
-                if player.sleepRemaining > 0 {
-                    Text("Temporizador: \(player.sleepRemaining) segundos restantes")
-                    Button("Cancelar temporizador") { player.cancelSleep() }
-                }
-                Text("Posición: \(Int(player.position)) de \(Int(player.duration)) segundos")
-            }
-            Section("Mi biblioteca") {
-                if library.files.isEmpty {
-                    Text("Todavía no hay canciones. Usa Organizar mi música para importarlas.")
-                } else {
-                    ForEach(visibleFiles) { file in
-                        HStack {
-                            Button("Reproducir \(file.name)") {
-                                player.play(
-                                    name: file.name,
-                                    url: library.audioURL(for: file),
-                                    queue: library.files.map { (name: $0.name, url: library.audioURL(for: $0)) },
-                                    albumKeysByURL: albumKeysByURL
-                                )
-                            }
-                            .accessibilityLabel(detailedVoiceOver ?
-                                MusicLocalized.format("Reproducir %@, artista %@, álbum %@, disponible sin conexión", file.name, file.artist ?? MusicLocalized.format("No indicado"), file.album ?? MusicLocalized.format("No indicado")) :
-                                MusicLocalized.format("Reproducir %@", file.name))
-                            Spacer()
-                            Menu("Acciones de \(file.name)") {
-                                Button("Editar género") {
-                                    editingGenreFile = file
-                                    editingGenreValue = file.genre ?? ""
-                                }
-                                ForEach(library.folders) { folder in
-                                    Button("Añadir a \(folder.name)") { library.assign(file.id, to: folder.id) }
-                                }
-                                ForEach(library.playlists) { playlist in
-                                    Button("Añadir a lista \(playlist.name)") { library.addToPlaylist(file.id, playlistId: playlist.id) }
-                                }
-                                Button("Eliminar de la biblioteca", role: .destructive) { pendingRemoval = file }
-                            }
-                        }
-                    }
-                }
-            }
-            Section("Álbumes") {
-                ForEach(musicAlbums) { album in
-                    Text(album.name)
-                    Button(MusicLocalized.format("Guardar ecualización para álbum %@", album.name)) {
-                        player.saveForAlbum(album.id)
-                    }
-                    Button(MusicLocalized.format("Quitar ecualización de álbum %@", album.name)) {
-                        player.removeAlbumOverride(album.id)
-                    }
-                    .disabled(!player.hasAlbumOverride(album.id))
-                }
-            }
-            Section("Mis carpetas") {
-                ForEach(library.folders) { folder in
-                    HStack {
-                        Text("\(folder.name), \(folder.trackIds.count) canciones")
-                            .accessibilityLabel(detailedVoiceOver ?
-                                MusicLocalized.format("%@, carpeta, %d canciones, guardadas en el iPhone", folder.name, folder.trackIds.count) :
-                                MusicLocalized.format("%@, %d canciones", folder.name, folder.trackIds.count))
-                        Spacer()
-                        Button("Eliminar carpeta \(folder.name)") { library.removeFolder(folder.id) }
-                            .accessibilityHint("Solo elimina esta carpeta virtual; las canciones se conservan.")
-                    }
-                }
-            }
-            if mixedQueue.entries.indices.contains(mixedQueue.currentIndex) {
-                Section("Reproducción de lista") {
-                    Text(MusicLocalized.format("Canción %d de %d: %@", mixedQueue.currentIndex + 1,
-                        mixedQueue.entries.count, mixedQueue.entries[mixedQueue.currentIndex].title))
-                    Button("Canción anterior de la lista") { mixedQueue.previous() }
-                        .disabled(mixedQueue.currentIndex == 0)
-                    Button("Siguiente canción de la lista") { mixedQueue.next() }
-                        .disabled(mixedQueue.currentIndex + 1 >= mixedQueue.entries.count)
-                    Button("Detener reproducción de lista") { mixedQueue.stop() }
-                    if let problem = mixedQueue.error { Text(problem) }
-                }
-            }
-            Section("Listas de reproducción") {
-                ForEach(library.playlists) { playlist in
-                    Text("\(playlist.name), \(library.playlistEntries(playlist).count) canciones")
-                    Button("Reproducir lista \(playlist.name)") {
-                        mixedQueue.play(entries: library.playlistEntries(playlist), playlistID: playlist.id, localURLs: Dictionary(
-                            uniqueKeysWithValues: library.files.map { ($0.id, library.audioURL(for: $0)) }),
-                            albumKeysByURL: albumKeysByURL)
-                    }
-                    .disabled(library.playlistEntries(playlist).isEmpty)
-                    Button(MusicLocalized.format("Guardar ecualización para lista %@", playlist.name)) {
-                        player.saveForPlaylist(playlist.id)
-                    }
-                    Button(MusicLocalized.format("Quitar ecualización de lista %@", playlist.name)) {
-                        player.removePlaylistOverride(playlist.id)
-                    }
-                    .disabled(!player.hasPlaylistOverride(playlist.id))
-                    ForEach(library.playlistEntries(playlist)) { entry in
-                        switch entry.provider {
-                        case .appleMusic:
-                            Button(MusicLocalized.format("Escuchar %@, %@, Apple Music", entry.title, entry.artist ?? "")) {
-                                playOnline {
-                                    Task {
-                                        await NativeAppleMusicPlayer.shared.playSaved(
-                                            id: entry.appleMusicSongId ?? "", title: entry.title)
-                                    }
-                                }
-                            }
-                        case .audius:
-                            Button(MusicLocalized.format("Escuchar %@, %@, Audius", entry.title, entry.artist ?? "")) {
-                                playOnline { NativeAudiusPlayer.shared.play(id: entry.appleMusicSongId ?? "", title: entry.title) }
-                            }
-                        case .jamendo:
-                            Button(MusicLocalized.format("Escuchar %@, %@, Jamendo", entry.title, entry.artist ?? "")) {
-                                playOnline { Task { await NativeJamendoPlayer.shared.playSaved(id: entry.appleMusicSongId ?? "") } }
-                            }
-                        case .local:
-                            if entry.localId != nil,
-                               !library.files.contains(where: { $0.id == entry.localId }) {
-                                Text("\(entry.title), archivo no disponible")
-                            }
-                        }
-                        HStack {
-                            Button(MusicLocalized.format("Subir %@ en la lista", entry.title)) {
-                                library.movePlaylistEntry(playlistID: playlist.id, entryID: entry.id, by: -1)
-                            }
-                            .disabled(library.playlistEntries(playlist).first?.id == entry.id)
-                            Button(MusicLocalized.format("Bajar %@ en la lista", entry.title)) {
-                                library.movePlaylistEntry(playlistID: playlist.id, entryID: entry.id, by: 1)
-                            }
-                            .disabled(library.playlistEntries(playlist).last?.id == entry.id)
-                        }
-                    }
-                    Button("Eliminar lista \(playlist.name)") { library.removePlaylist(playlist.id) }
-                }
-            }
-            Section("Carpetas inteligentes") {
-                ForEach(library.smartFolders) { folder in
-                    let matches = library.matchingTracks(for: folder)
-                    Text("\(folder.name), criterio: \(folder.ruleKind.label) \(folder.titleContains), \(matches.count) canciones")
-                    Button("Reproducir carpeta inteligente \(folder.name)") {
-                        let items = matches.map { (name: $0.name, url: library.audioURL(for: $0)) }
-                        if let first = items.first { player.play(name: first.name, url: first.url, queue: items,
-                            albumKeysByURL: albumKeysByURL) }
-                    }
-                    .disabled(matches.isEmpty)
-                    Button("Eliminar carpeta inteligente \(folder.name)") { library.removeSmartFolder(folder.id) }
-                }
-            }
-            Section {
-                Menu("Organizar mi música") {
-                    Button("Importar canciones") { isImporting = true }
-                    Button("Importar carpeta desde Archivos o nube") { isImportingFolder = true }
-                    Button("Crear carpeta") { showingFolderEditor = true }
-                    Button("Crear lista de reproducción") { showingPlaylistEditor = true }
-                    Button("Crear carpeta inteligente") { showingSmartFolderEditor = true }
-                }
-                NavigationLink("Google Drive") {
-                    NativeCloudGooglePickerScreen(onImport: { file in
-                        library.importFiles([file])
-                    }, allowCellularDownloads: allowCellularDownloads)
-                }
-                NavigationLink("Dropbox") {
-                    NativeCloudFolderBrowserScreen(provider: .dropbox, onImport: { file in
-                        library.importFiles([file])
-                    }, allowCellularDownloads: allowCellularDownloads)
-                }
-                NavigationLink("Ajustes") { musicSettings }
-                NavigationLink("Plataformas musicales") {
-                    NativeMusicPlatformsScreen(playlists: library.playlists.map {
-                        MusicPlaylistDestination(id: $0.id, name: $0.name)
-                    }, addToPlaylist: { provider, songID, title, artist, playlistID in
-                        guard let source = MusicPlaylistEntry.Provider(rawValue: provider) else { return }
-                        library.addRemoteToPlaylist(provider: source, songID: songID,
-                            title: title, artist: artist, playlistID: playlistID)
-                    })
-                }
-            }
+            musicPlayerSection
+            musicLibrarySection
+            musicAlbumsSection
+            musicFoldersSection
+            musicQueueSection
+            musicPlaylistsSection
+            musicSmartFoldersSection
+            musicOrganizeSection
         }
         .navigationTitle("Mi Música")
         .onReceive(network.$path) { _ in stopOnlineIfConnectionIsRestricted() }

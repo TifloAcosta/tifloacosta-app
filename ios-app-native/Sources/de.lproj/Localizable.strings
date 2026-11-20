@@ -1045,3 +1045,11 @@
 "Buscar por nombre" = "Nach Namen suchen";
 "%@, artista %@, álbum %@, disponible sin conexión" = "%@, Künstler %@, Album %@, offline verfügbar";
 "Lectura braille continua activada" = "Fortlaufendes Braillelesen aktiviert";
+
+"¿Dónde guardar el audio?" = "Wo soll die Audiodatei gespeichert werden?";
+"Mi música" = "Meine Musik";
+"Selecciona dónde importar el archivo de audio." = "Wähle aus, wohin die Audiodatei importiert werden soll.";
+"Elegir destino del audio" = "Audioziel auswählen";
+"Importar en Mi música" = "In Meine Musik importieren";
+"Elige TifloLector o Mi música." = "Wähle TifloLector oder Meine Musik.";
+"Importa el audio en Mi música." = "Importiert die Audiodatei in Meine Musik.";

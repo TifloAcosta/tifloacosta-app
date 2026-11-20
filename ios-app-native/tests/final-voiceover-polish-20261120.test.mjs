@@ -13,7 +13,9 @@ test('Dynamic VoiceOver labels resolve the language chosen in TifloAcosta', () =
   assert.match(helper, /NativeAppLanguage\.storageKey/);
   assert.doesNotMatch(helper, /NSLocalizedString\(/);
   const music = read('NativeMyMusic.swift');
-  assert.match(music, /MusicLocalized\.format\("Reproducir %@, artista %@, álbum %@, disponible sin conexión"/);
+  assert.match(music, /MusicLocalized\.format\("%@, artista %@, álbum %@, disponible sin conexión"/);
+  assert.match(music, /\.accessibilityLabel\(detailedVoiceOver \?/);
+  assert.match(music, /\.accessibilityActions \{/);
   assert.match(music, /MusicLocalized\.format\("%@, carpeta, %d canciones, guardadas en el iPhone"/);
 });
 

@@ -2,12 +2,12 @@
 
 ## Objetivo de la actualización actual
 
-Conectar Google Drive, Dropbox y OneDrive con **Mi música** en iOS, sin retirar la importación existente desde Archivos ni modificar los demás módulos. La autenticación será una capacidad compartida y reutilizable por futuras secciones de TifloAcosta; solo Mi música la consumirá en esta actualización.
+Conectar Google Drive, Dropbox y OneDrive como **servicios globales de TifloAcosta**, disponibles mediante interfaces compartidas para cualquier sección actual o futura. Las cuentas, permisos y navegación en la nube no pertenecerán a Mi música. En esta actualización se conectará Mi música como primer consumidor sin retirar la importación existente desde Archivos ni modificar indebidamente otros módulos.
 
 ## Queda fuera de esta actualización
 
 - Cine, series, audiodescripción y catálogos externos.
-- Nuevos accesos desde TifloLector u otras pantallas (podrán aprovechar el módulo común después).
+- Funcionalidades nuevas de lectura en TifloLector u otras pantallas: su incorporación funcional podrá hacerse después, pero la arquitectura global y sus interfaces para esas secciones son requisito de esta actualización.
 - MEGA.
 - Envíos a TestFlight y publicación en tiendas.
 
@@ -20,11 +20,11 @@ Conectar Google Drive, Dropbox y OneDrive con **Mi música** en iOS, sin retirar
 
 ## Diseño elegido
 
-- Un coordinador de cuentas de almacenamiento, independiente de la música, que expone conexión, desconexión, estado, renovación de credenciales y sesión vigente por proveedor.
+- Un coordinador global de cuentas de almacenamiento, independiente de cualquier sección, que expone conexión, desconexión, estado, renovación de credenciales y sesión vigente por proveedor a toda TifloAcosta.
 - Flujos OAuth del sistema con PKCE y permisos mínimos; credenciales de sesión guardadas en Keychain y nunca en preferencias, URL de registros o repositorio. Configuración pública de clientes separada por proveedor.
 - Un explorador accesible de carpetas y archivos con paginación, cancelación, estado de carga y anuncios VoiceOver. Solo se importan archivos seleccionados; no sincronización masiva ni lectura indiscriminada.
 - La pantalla Mi música ofrece «Conectar» y «Explorar» por proveedor y entrega los ficheros temporales descargados a su biblioteca actual, sin alterar la organización, listas, carpetas inteligentes ni reproductor.
-- La API de almacenamiento permanecerá independiente de Mi música para posteriores clientes de TifloAcosta.
+- Un punto de acceso general a las cuentas y al explorador de nube estará disponible para los módulos presentes y futuros, sin duplicar autorizaciones. TifloLector, multimedia y cualquier función posterior podrán usar los mismos contratos sin reescribir la conexión; activar sus funciones específicas será trabajo separado.
 
 ## Restricciones de seguridad y producto
 
@@ -36,8 +36,8 @@ Conectar Google Drive, Dropbox y OneDrive con **Mi música** en iOS, sin retirar
 
 ## Criterios de aceptación
 
-1. El usuario conecta y desconecta cada proveedor sin introducir contraseñas en TifloAcosta.
-2. Puede navegar por carpetas, elegir audio compatible e importarlo con nombre correcto.
+1. El usuario conecta y desconecta cada proveedor desde una gestión global, sin introducir contraseñas en TifloAcosta ni repetir la autorización para cada sección.
+2. La navegación y selección de archivos están expuestas como servicios generales, con filtros de formatos definidos por cada sección; Mi música puede elegir audio compatible e importarlo con nombre correcto.
 3. Puede seguir usando importaciones existentes sin iniciar sesión en estos servicios.
 4. Cancelación, expiración de tokens, falta de red, permisos revocados, carpetas vacías y archivos demasiado grandes producen mensajes accesibles.
 5. No se exponen tokens ni secretos en GitHub, logs o respaldos.

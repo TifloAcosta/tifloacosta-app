@@ -123,8 +123,8 @@ final class ShareViewController: UIViewController {
             saveReaderButton.isHidden = true
             saveMusicButton.isHidden = true
             finish(destination == "music"
-                ? "Audio guardado para Mi música. Se importará al abrir TifloAcosta."
-                : "Audio guardado para TifloLector. Se importará al abrir TifloAcosta.")
+                ? "Audio guardado para Mi música. Abre Recibidos en TifloAcosta para incorporarlo."
+                : "Audio guardado para TifloLector. Abre Recibidos en TifloAcosta para incorporarlo.")
         } catch {
             finish("No se pudo guardar el destino del audio. El archivo permanece en Recibidos.")
         }

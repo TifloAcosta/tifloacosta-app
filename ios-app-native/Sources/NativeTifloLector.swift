@@ -1401,7 +1401,16 @@ struct NativeReaderLibraryScreen: View {
 
     private func shareDocumentFromLibrary(_ document: NativeReadingDocument) {
         do {
-            NativeShare.present(url: try library.shareableOriginalURL(for: document))
+            if document.fileExtension?.lowercased() == "daisy" {
+                // Nunca presentar un TXT extraído como si fuese un paquete DAISY completo.
+                NativeShare.present(url: try library.shareableOriginalURL(for: document))
+            } else if library.originalURL(for: document) != nil {
+                NativeShare.present(url: try library.shareableOriginalURL(for: document))
+            } else {
+                let result = try library.sharingURLs(for: [document])
+                guard let url = result.urls.first else { throw CocoaError(.fileNoSuchFile) }
+                NativeShare.present(url: url)
+            }
         } catch {
             importError = "No se pudo compartir el documento completo: \(error.localizedDescription)"
         }
@@ -1442,9 +1451,7 @@ struct NativeReaderLibraryScreen: View {
                     .accessibilityLabel(documentRowLabel(document))
                     .accessibilityActions {
                         Button("Reproducir") { play(document) }
-                        if library.originalURL(for: document) != nil {
-                            Button("Compartir documento") { shareDocumentFromLibrary(document) }
-                        }
+                        Button("Compartir documento") { shareDocumentFromLibrary(document) }
                         if !document.body.isEmpty {
                             Button("Convertir a audio o DAISY") {
                             documentToConvert = document

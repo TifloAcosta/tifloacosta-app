@@ -911,7 +911,6 @@ struct NativeMyMusicScreen: View {
         case "all": return "toda la lista"
         default: return "una canción"
         }
-        }
     }
 
     private var musicLibrarySection: some View {

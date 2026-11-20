@@ -225,6 +225,8 @@ private final class NativeMusicLibrary: ObservableObject {
     }
 
     func importFiles(_ urls: [URL]) {
+        let previousFiles = files
+        var copiedDestinations: [URL] = []
         var newlyImported: [UUID] = []
         do {
             try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
@@ -236,6 +238,7 @@ private final class NativeMusicLibrary: ObservableObject {
                 let fileName = UUID().uuidString + "." + url.pathExtension.lowercased()
                 let target = directory.appendingPathComponent(fileName)
                 try FileManager.default.copyItem(at: url, to: target)
+                copiedDestinations.append(target)
                 let newID = UUID()
                 files.append(MusicLocalFile(id: newID, name: url.deletingPathExtension().lastPathComponent,
                                             fileName: fileName, importedAt: Date(), playCount: 0))
@@ -245,7 +248,10 @@ private final class NativeMusicLibrary: ObservableObject {
             let importedIDs = newlyImported
             Task { await refreshAlbumMetadata(for: importedIDs) }
         } catch {
-            self.error = "No se pudo importar la música: \(error.localizedDescription)"
+            files = previousFiles
+            copiedDestinations.forEach { try? FileManager.default.removeItem(at: $0) }
+            try? save()
+            self.error = MusicLocalized.format("No se pudo importar la música: %@", error.localizedDescription)
         }
     }
 
@@ -254,7 +260,7 @@ private final class NativeMusicLibrary: ObservableObject {
         defer { if accessed { folder.stopAccessingSecurityScopedResource() } }
         guard let enumerator = FileManager.default.enumerator(at: folder,
             includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles]) else {
-            error = "No se pudo acceder al contenido de la carpeta seleccionada"
+            error = MusicLocalized.format("No se pudo acceder al contenido de la carpeta seleccionada")
             return
         }
         let allowed = Set(["mp3", "m4a", "aac", "wav", "flac", "ogg"])
@@ -266,7 +272,7 @@ private final class NativeMusicLibrary: ObservableObject {
             if candidates.count >= 5_000 { break }
         }
         if candidates.isEmpty {
-            error = "No se encontraron archivos musicales compatibles en esa carpeta"
+            error = MusicLocalized.format("No se encontraron archivos musicales compatibles en esa carpeta")
         } else {
             importFiles(candidates)
         }

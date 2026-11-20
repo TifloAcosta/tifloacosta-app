@@ -690,6 +690,10 @@ private final class NativeMusicLibrary: ObservableObject {
 }
 
 struct NativeMyMusicScreen: View {
+    @AppStorage("music.cellularPlayback") private var allowCellularPlayback = true
+    @AppStorage("music.cellularDownloads") private var allowCellularDownloads = false
+    @AppStorage("music.detailedVoiceOver") private var detailedVoiceOver = false
+    @ObservedObject private var network = NativeMusicConnectionPolicy.shared
     @StateObject private var library = NativeMusicLibrary.shared
     @ObservedObject private var player = NativeMusicPlayer.shared
     @ObservedObject private var mixedQueue = NativeMixedMusicQueue.shared
@@ -713,6 +717,35 @@ struct NativeMyMusicScreen: View {
     @State private var completeArchiveURL: URL?
     @State private var importingCompleteBackup = false
     @State private var selectingBackupDestination = false
+    @State private var connectionWarning: String?
+
+    private var playbackConnection: Binding<Int> {
+        Binding(get: { allowCellularPlayback ? 1 : 0 }, set: { allowCellularPlayback = $0 == 1 })
+    }
+
+    private var downloadConnection: Binding<Int> {
+        Binding(get: { allowCellularDownloads ? 1 : 0 }, set: { allowCellularDownloads = $0 == 1 })
+    }
+
+    private var voiceOverInformation: Binding<Int> {
+        Binding(get: { detailedVoiceOver ? 1 : 0 }, set: { detailedVoiceOver = $0 == 1 })
+    }
+
+    private func playOnline(_ action: () -> Void) {
+        guard network.canStream(allowCellular: allowCellularPlayback) else {
+            connectionWarning = "La reproducción necesita una conexión permitida. Puedes cambiarla en Ajustes, Conexión."
+            return
+        }
+        action()
+    }
+
+    private func stopOnlineIfConnectionIsRestricted() {
+        guard !network.canStream(allowCellular: allowCellularPlayback) else { return }
+        NativeRadioPlayer.shared.stop()
+        NativeAudiusPlayer.shared.stop()
+        NativeJamendoPlayer.shared.stop()
+        NativeAppleMusicPlayer.shared.stop()
+    }
 
     private var visibleFiles: [MusicLocalFile] {
         let query = searchText.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)
@@ -775,6 +808,16 @@ struct NativeMyMusicScreen: View {
 
     private var musicSettings: some View {
         List {
+            Section("Conexión") {
+                NativeAdjustableChoice(title: "Reproducción",
+                    choices: ["Solo Wi-Fi", "Wi-Fi y datos móviles"], selectedIndex: playbackConnection)
+                NativeAdjustableChoice(title: "Descargas",
+                    choices: ["Solo Wi-Fi", "Wi-Fi y datos móviles"], selectedIndex: downloadConnection)
+            }
+            Section("Información de VoiceOver") {
+                NativeAdjustableChoice(title: "Nivel",
+                    choices: ["Normal", "Detallada"], selectedIndex: voiceOverInformation)
+            }
             Section("Copias de seguridad") {
                 Button("Exportar respaldo de biblioteca") {
                     backupDocument = library.exportIndex()
@@ -868,6 +911,9 @@ struct NativeMyMusicScreen: View {
                                     albumKeysByURL: albumKeysByURL
                                 )
                             }
+                            .accessibilityLabel(detailedVoiceOver ?
+                                "Reproducir \(file.name), \(file.artist ?? "artista no indicado"), \(file.album ?? "álbum no indicado"), disponible sin conexión" :
+                                "Reproducir \(file.name)")
                             Spacer()
                             Menu("Acciones de \(file.name)") {
                                 Button("Editar género") {
@@ -902,6 +948,9 @@ struct NativeMyMusicScreen: View {
                 ForEach(library.folders) { folder in
                     HStack {
                         Text("\(folder.name), \(folder.trackIds.count) canciones")
+                            .accessibilityLabel(detailedVoiceOver ?
+                                "\(folder.name), carpeta, \(folder.trackIds.count) canciones, guardadas en el iPhone" :
+                                "\(folder.name), \(folder.trackIds.count) canciones")
                         Spacer()
                         Button("Eliminar carpeta \(folder.name)") { library.removeFolder(folder.id) }
                             .accessibilityHint("Solo elimina esta carpeta virtual; las canciones se conservan.")
@@ -940,18 +989,20 @@ struct NativeMyMusicScreen: View {
                         switch entry.provider {
                         case .appleMusic:
                             Button(MusicLocalized.format("Escuchar %@, %@, Apple Music", entry.title, entry.artist ?? "")) {
-                                Task {
-                                    await NativeAppleMusicPlayer.shared.playSaved(
-                                        id: entry.appleMusicSongId ?? "", title: entry.title)
+                                playOnline {
+                                    Task {
+                                        await NativeAppleMusicPlayer.shared.playSaved(
+                                            id: entry.appleMusicSongId ?? "", title: entry.title)
+                                    }
                                 }
                             }
                         case .audius:
                             Button(MusicLocalized.format("Escuchar %@, %@, Audius", entry.title, entry.artist ?? "")) {
-                                NativeAudiusPlayer.shared.play(id: entry.appleMusicSongId ?? "", title: entry.title)
+                                playOnline { NativeAudiusPlayer.shared.play(id: entry.appleMusicSongId ?? "", title: entry.title) }
                             }
                         case .jamendo:
                             Button(MusicLocalized.format("Escuchar %@, %@, Jamendo", entry.title, entry.artist ?? "")) {
-                                Task { await NativeJamendoPlayer.shared.playSaved(id: entry.appleMusicSongId ?? "") }
+                                playOnline { Task { await NativeJamendoPlayer.shared.playSaved(id: entry.appleMusicSongId ?? "") } }
                             }
                         case .local:
                             if entry.localId != nil,
@@ -995,14 +1046,14 @@ struct NativeMyMusicScreen: View {
                     Button("Crear carpeta inteligente") { showingSmartFolderEditor = true }
                 }
                 NavigationLink("Google Drive") {
-                    NativeCloudGooglePickerScreen { file in
+                    NativeCloudGooglePickerScreen(onImport: { file in
                         library.importFiles([file])
-                    }
+                    }, allowCellularDownloads: allowCellularDownloads)
                 }
                 NavigationLink("Dropbox") {
-                    NativeCloudFolderBrowserScreen(provider: .dropbox) { file in
+                    NativeCloudFolderBrowserScreen(provider: .dropbox, onImport: { file in
                         library.importFiles([file])
-                    }
+                    }, allowCellularDownloads: allowCellularDownloads)
                 }
                 NavigationLink("Ajustes de Mi Música") { musicSettings }
                 NavigationLink("Plataformas musicales") {
@@ -1017,6 +1068,11 @@ struct NativeMyMusicScreen: View {
             }
         }
         .navigationTitle("Mi Música")
+        .onReceive(network.$path) { _ in stopOnlineIfConnectionIsRestricted() }
+        .onChange(of: allowCellularPlayback) { _, _ in stopOnlineIfConnectionIsRestricted() }
+        .alert("Conexión", isPresented: Binding(
+            get: { connectionWarning != nil }, set: { if !$0 { connectionWarning = nil } }
+        )) { Button("Aceptar") { connectionWarning = nil } } message: { Text(connectionWarning ?? "") }
         .searchable(text: $searchText, prompt: "Buscar canciones")
         .alert("Crear carpeta", isPresented: $showingFolderEditor) {
             TextField("Nombre de la carpeta", text: $newFolderName)

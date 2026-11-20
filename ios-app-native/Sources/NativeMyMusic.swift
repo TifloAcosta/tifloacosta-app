@@ -871,29 +871,46 @@ struct NativeMyMusicScreen: View {
 
     private var musicPlayerSection: some View {
         Section("Reproductor") {
-            Text(player.currentName.isEmpty ? "Ninguna canción en reproducción" : player.currentName)
-                .accessibilityAddTraits(.isHeader)
-            Button(player.isPlaying ? "Pausar" : "Reproducir") { player.toggle() }
-                .disabled(player.currentName.isEmpty)
-            Button("Canción anterior") { player.previous() }
-                .disabled(player.currentName.isEmpty)
-            Button("Retroceder 15 segundos") { player.skip(seconds: -15) }
-                .disabled(player.currentName.isEmpty)
-            Button("Avanzar 15 segundos") { player.skip(seconds: 15) }
-                .disabled(player.currentName.isEmpty)
-            Button("Canción siguiente") { player.next() }
-                .disabled(player.currentName.isEmpty)
-            Button("Reproducción aleatoria: \(player.shuffleEnabled ? "activada" : "desactivada")") { player.toggleShuffle() }
-            Button("Repetición: \(player.repeatMode == "off" ? "desactivada" : player.repeatMode == "all" ? "toda la lista" : "una canción")") { player.changeRepeat() }
-            Button("Temporizador de 15 minutos") { player.setSleep(minutes: 15) }
-                .disabled(player.currentName.isEmpty)
-            Button("Temporizador de 30 minutos") { player.setSleep(minutes: 30) }
-                .disabled(player.currentName.isEmpty)
-            if player.sleepRemaining > 0 {
-                Text("Temporizador: \(player.sleepRemaining) segundos restantes")
-                Button("Cancelar temporizador") { player.cancelSleep() }
-            }
-            Text("Posición: \(Int(player.position)) de \(Int(player.duration)) segundos")
+            musicTransportControls
+            musicPlaybackOptions
+        }
+    }
+
+    @ViewBuilder private var musicTransportControls: some View {
+        Text(player.currentName.isEmpty ? "Ninguna canción en reproducción" : player.currentName)
+            .accessibilityAddTraits(.isHeader)
+        Button(player.isPlaying ? "Pausar" : "Reproducir") { player.toggle() }
+            .disabled(player.currentName.isEmpty)
+        Button("Canción anterior") { player.previous() }
+            .disabled(player.currentName.isEmpty)
+        Button("Retroceder 15 segundos") { player.skip(seconds: -15) }
+            .disabled(player.currentName.isEmpty)
+        Button("Avanzar 15 segundos") { player.skip(seconds: 15) }
+            .disabled(player.currentName.isEmpty)
+        Button("Canción siguiente") { player.next() }
+            .disabled(player.currentName.isEmpty)
+    }
+
+    @ViewBuilder private var musicPlaybackOptions: some View {
+        Button("Reproducción aleatoria: \(player.shuffleEnabled ? "activada" : "desactivada")") { player.toggleShuffle() }
+        Button("Repetición: \(musicRepeatDescription)") { player.changeRepeat() }
+        Button("Temporizador de 15 minutos") { player.setSleep(minutes: 15) }
+            .disabled(player.currentName.isEmpty)
+        Button("Temporizador de 30 minutos") { player.setSleep(minutes: 30) }
+            .disabled(player.currentName.isEmpty)
+        if player.sleepRemaining > 0 {
+            Text("Temporizador: \(player.sleepRemaining) segundos restantes")
+            Button("Cancelar temporizador") { player.cancelSleep() }
+        }
+        Text("Posición: \(Int(player.position)) de \(Int(player.duration)) segundos")
+    }
+
+    private var musicRepeatDescription: String {
+        switch player.repeatMode {
+        case "off": return "desactivada"
+        case "all": return "toda la lista"
+        default: return "una canción"
+        }
         }
     }
 

@@ -226,6 +226,9 @@ struct NativeMusicPlatformsScreen: View {
             NavigationLink("Jamendo: música gratuita") {
                 NativeJamendoScreen(playlists: playlists, addToPlaylist: addToPlaylist)
             }
+            NavigationLink("Conciertos y grabaciones") {
+                NativeInternetArchiveScreen()
+            }
             if Bundle.main.object(forInfoDictionaryKey: "TifloAppleMusicEnabled") as? Bool == true {
                 NavigationLink("Apple Music") {
                     NativeAppleMusicScreen(playlists: playlists, addToPlaylist: addToPlaylist)

@@ -1025,3 +1025,22 @@
 "Apagado automático completado." = "Ausschalt-Timer abgelaufen.";
 "No se encuentra la pista de audio." = "Audiospur nicht gefunden.";
 "No hay un archivo disponible para compartir." = "Keine Datei zum Teilen verfügbar.";
+
+/* Mi Música: navegación, emisoras y accesibilidad */
+"Conciertos y grabaciones" = "Konzerte und Aufnahmen";
+"Selección de canciones" = "Songauswahl";
+"Explorar por estilos" = "Nach Musikrichtung stöbern";
+"Nubes" = "Cloud-Dienste";
+"No hay emisoras disponibles con estos criterios." = "Keine Sender entsprechen diesen Kriterien.";
+"Nombre de emisora" = "Sendername";
+"País" = "Land";
+"Estilo" = "Musikrichtung";
+"Buscar emisoras" = "Sender suchen";
+"Búsqueda avanzada" = "Erweiterte Suche";
+"Explorar emisoras" = "Sender entdecken";
+"Emisoras populares" = "Beliebte Sender";
+"Buscar por países" = "Nach Ländern suchen";
+"Buscar por idiomas" = "Nach Sprachen suchen";
+"Buscar por estilos" = "Nach Musikrichtungen suchen";
+"Buscar por nombre" = "Nach Namen suchen";
+"%@, artista %@, álbum %@, disponible sin conexión" = "%@, Künstler %@, Album %@, offline verfügbar";

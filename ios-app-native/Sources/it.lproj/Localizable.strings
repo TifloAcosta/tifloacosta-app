@@ -928,6 +928,7 @@
 "Selecciona archivos de audio en Google Drive para importarlos." = "Seleziona file audio in Google Drive per importarli.";
 "Google Drive" = "Google Drive";
 "Dropbox" = "Dropbox";
+"OneDrive" = "OneDrive";
 "La conexión todavía no está configurada en esta compilación." = "Questa connessione non è ancora configurata in questa versione.";
 "Conectar cuenta" = "Collega account";
 "Desconectar cuenta" = "Disconnetti account";

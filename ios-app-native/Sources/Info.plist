@@ -33,7 +33,13 @@
     <key>UILaunchScreen</key><dict/>
     <key>CloudOAuthGoogleClientID</key><string>559558644861-tiepud65eqshl9639u2hpqjmo75ema0i.apps.googleusercontent.com</string>
     <key>CloudOAuthGoogleRedirectURI</key><string>com.googleusercontent.apps.559558644861-tiepud65eqshl9639u2hpqjmo75ema0i:/oauthredirect</string>
+    <key>CloudOAuthDropboxClientID</key><string>malbkwdta42k68y</string>
+    <key>CloudOAuthDropboxRedirectURI</key><string>db-malbkwdta42k68y://oauthredirect</string>
     <key>CFBundleURLTypes</key><array>
+        <dict>
+            <key>CFBundleURLName</key><string>com.tifloacosta.app.dropbox</string>
+            <key>CFBundleURLSchemes</key><array><string>db-malbkwdta42k68y</string></array>
+        </dict>
         <dict>
             <key>CFBundleTypeRole</key><string>Viewer</string>
             <key>CFBundleURLName</key><string>com.tifloacosta.app.youtube</string>

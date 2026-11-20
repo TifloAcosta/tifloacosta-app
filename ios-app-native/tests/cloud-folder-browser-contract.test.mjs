@@ -18,3 +18,8 @@ test('Dropbox is available as an optional provider in Mi música', () => {
   assert.match(music, /NativeCloudFolderBrowserScreen\(provider: \.dropbox/);
   assert.match(music, /library\.importFiles\(\[file\]\)/);
 });
+
+test('OneDrive uses the same global folder explorer and account store', () => {
+  assert.match(music, /NativeCloudFolderBrowserScreen\(provider: \.oneDrive/);
+  assert.match(browser, /validAccessToken\(for: provider\)/);
+});

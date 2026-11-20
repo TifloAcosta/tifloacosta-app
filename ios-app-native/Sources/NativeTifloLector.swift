@@ -1346,7 +1346,7 @@ struct NativeReaderLibraryScreen: View {
         guard let document = library.documents.filter({ $0.lastOpenedAt != nil }).max(by: {
             ($0.lastOpenedAt ?? .distantPast) < ($1.lastOpenedAt ?? .distantPast)
         }) else {
-            shortcutMessage = "Todavía no hay un libro abierto anteriormente para continuar."
+            shortcutMessage = MusicLocalized.message("Todavía no hay un libro abierto anteriormente para continuar.")
             UIAccessibility.post(notification: .announcement, argument: shortcutMessage)
             return
         }
@@ -1354,7 +1354,7 @@ struct NativeReaderLibraryScreen: View {
         library.markOpened(document)
         play(document)
         if importError == nil {
-            shortcutMessage = "Continuando \(document.title) desde la posición guardada."
+            shortcutMessage = MusicLocalized.format("Continuando %@ desde la posición guardada.", document.title)
             UIAccessibility.post(notification: .announcement, argument: shortcutMessage)
         }
     }
@@ -2276,7 +2276,7 @@ struct NativeReadingScreen: View {
         let seconds = max(0, sleepDeadline!.timeIntervalSinceNow)
         if seconds == 0 {
             stopPlayback()
-            actionMessage = "Apagado automático completado."
+            actionMessage = MusicLocalized.message("Apagado automático completado.")
         } else {
             speech.sleep(afterSeconds: seconds)
         }
@@ -2285,7 +2285,7 @@ struct NativeReadingScreen: View {
     private func playTrack() {
         guard tracks.indices.contains(trackIndex),
               NativeReaderFormats.storedURL(for: tracks[trackIndex]) != nil else {
-            actionMessage = "No se encuentra la pista de audio."
+            actionMessage = MusicLocalized.message("No se encuentra la pista de audio.")
             return
         }
         let urls = tracks.compactMap { NativeReaderFormats.storedURL(for: $0) }
@@ -3238,7 +3238,7 @@ struct NativeReadingScreen: View {
         } else if !latest.body.isEmpty {
             exportText()
         } else {
-            actionMessage = "No hay un archivo disponible para compartir."
+            actionMessage = MusicLocalized.message("No hay un archivo disponible para compartir.")
         }
     }
 

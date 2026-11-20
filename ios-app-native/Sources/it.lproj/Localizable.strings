@@ -773,7 +773,6 @@
 "Foco inicial en Reproducir" = "Focus iniziale su Riproduci";
 "Activado: al abrir el documento, el foco se sitúa en Reproducir. Desactivado: el foco se sitúa en el texto. La voz solo comienza cuando pulsas Reproducir." = "Attivato: aprendo il documento, il focus va su Riproduci. Disattivato: il focus va sul testo. La voce inizia solo premendo Riproduci.";
 "No se pudo compartir: %@" = "Impossibile condividere: %@";
-"No hay un archivo disponible para compartir." = "Nessun file disponibile da condividere.";
 // Mi Música: etiquetas de la sección y accesibilidad.
 "Importar canciones" = "Importa brani";
 "Selecciona archivos de audio. Los originales se conservarán en su ubicación." = "Seleziona file audio. Gli originali restano nella posizione iniziale.";
@@ -987,3 +986,8 @@
 "Eliminado de Favoritos" = "Rimosso dai preferiti";
 "No hay enlace original para compartir." = "Nessun link originale da condividere.";
 "Eliminado de Favoritos: %@" = "Rimosso dai preferiti: %@";
+"Todavía no hay un libro abierto anteriormente para continuar." = "Nessun libro aperto in precedenza da riprendere.";
+"Continuando %@ desde la posición guardada." = "Ripresa di %@ dalla posizione salvata.";
+"Apagado automático completado." = "Timer di spegnimento terminato.";
+"No se encuentra la pista de audio." = "Traccia audio non trovata.";
+"No hay un archivo disponible para compartir." = "Nessun file disponibile da condividere.";

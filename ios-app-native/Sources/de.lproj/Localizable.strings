@@ -773,7 +773,6 @@
 "Foco inicial en Reproducir" = "Anfangsfokus auf Wiedergabe";
 "Activado: al abrir el documento, el foco se sitúa en Reproducir. Desactivado: el foco se sitúa en el texto. La voz solo comienza cuando pulsas Reproducir." = "Ein: Beim Öffnen liegt der Fokus auf Wiedergabe. Aus: Der Fokus liegt auf dem Text. Die Sprachausgabe startet erst nach dem Drücken von Wiedergabe.";
 "No se pudo compartir: %@" = "Teilen nicht möglich: %@";
-"No hay un archivo disponible para compartir." = "Keine Datei zum Teilen verfügbar.";
 // Mi Música: etiquetas de la sección y accesibilidad.
 "Importar canciones" = "Titel importieren";
 "Selecciona archivos de audio. Los originales se conservarán en su ubicación." = "Wähle Audiodateien aus. Die Originale bleiben am bisherigen Speicherort.";
@@ -987,3 +986,8 @@
 "Eliminado de Favoritos" = "Aus Favoriten entfernt";
 "No hay enlace original para compartir." = "Kein Quelllink zum Teilen vorhanden.";
 "Eliminado de Favoritos: %@" = "Aus Favoriten entfernt: %@";
+"Todavía no hay un libro abierto anteriormente para continuar." = "Kein zuvor geöffnetes Buch zum Fortsetzen vorhanden.";
+"Continuando %@ desde la posición guardada." = "%@ an der gespeicherten Stelle fortsetzen.";
+"Apagado automático completado." = "Ausschalt-Timer abgelaufen.";
+"No se encuentra la pista de audio." = "Audiospur nicht gefunden.";
+"No hay un archivo disponible para compartir." = "Keine Datei zum Teilen verfügbar.";

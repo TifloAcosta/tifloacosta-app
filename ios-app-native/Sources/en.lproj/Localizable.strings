@@ -987,5 +987,9 @@
 "Eliminado de Favoritos" = "Removed from Favorites";
 "No hay enlace original para compartir." = "No source link is available to share.";
 "Eliminado de Favoritos: %@" = "Removed from Favorites: %@";
+"Todavía no hay un libro abierto anteriormente para continuar." = "No previously opened book to resume.";
+"Continuando %@ desde la posición guardada." = "Resuming %@ from the saved position.";
+"Apagado automático completado." = "Sleep timer completed.";
+"No se encuentra la pista de audio." = "Audio track not found.";
 "La reproducción necesita una conexión permitida. Puedes cambiarla en Ajustes, Conexión." = "Playback needs an allowed connection. Change this in Settings, Connection.";
 "La reproducción por Internet está limitada por tu ajuste de Conexión." = "Online playback is restricted by your Connection setting.";

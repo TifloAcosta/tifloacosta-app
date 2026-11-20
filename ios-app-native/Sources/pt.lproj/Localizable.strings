@@ -773,7 +773,6 @@
 "Foco inicial en Reproducir" = "Foco inicial em Reproduzir";
 "Activado: al abrir el documento, el foco se sitúa en Reproducir. Desactivado: el foco se sitúa en el texto. La voz solo comienza cuando pulsas Reproducir." = "Ativado: ao abrir o documento, o foco fica em Reproduzir. Desativado: o foco fica no texto. A voz só começa quando toca em Reproduzir.";
 "No se pudo compartir: %@" = "Não foi possível partilhar: %@";
-"No hay un archivo disponible para compartir." = "Não há ficheiro disponível para partilhar.";
 // Mi Música: etiquetas de la sección y accesibilidad.
 "Importar canciones" = "Importar músicas";
 "Selecciona archivos de audio. Los originales se conservarán en su ubicación." = "Seleciona ficheiros de áudio. Os originais permanecem no local de origem.";
@@ -987,3 +986,8 @@
 "Eliminado de Favoritos" = "Removido dos favoritos";
 "No hay enlace original para compartir." = "Não existe ligação original para partilhar.";
 "Eliminado de Favoritos: %@" = "Removido dos favoritos: %@";
+"Todavía no hay un libro abierto anteriormente para continuar." = "Não há nenhum livro aberto anteriormente para retomar.";
+"Continuando %@ desde la posición guardada." = "A retomar %@ da posição guardada.";
+"Apagado automático completado." = "Temporizador de suspensão concluído.";
+"No se encuentra la pista de audio." = "Faixa de áudio não encontrada.";
+"No hay un archivo disponible para compartir." = "Não há ficheiro disponível para partilhar.";

@@ -994,6 +994,11 @@ struct NativeMyMusicScreen: View {
                     Button("Crear lista de reproducción") { showingPlaylistEditor = true }
                     Button("Crear carpeta inteligente") { showingSmartFolderEditor = true }
                 }
+                NavigationLink("Google Drive") {
+                    NativeCloudGooglePickerScreen { file in
+                        library.importFiles([file])
+                    }
+                }
                 NavigationLink("Ajustes de Mi Música") { musicSettings }
                 NavigationLink("Plataformas musicales") {
                     NativeMusicPlatformsScreen(playlists: library.playlists.map {

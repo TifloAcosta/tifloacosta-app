@@ -90,7 +90,7 @@ private final class NativeArchiveTracks: ObservableObject {
             error = files.isEmpty ? "Esta grabación no ofrece pistas de audio compatibles." : nil
         } catch {
             files = []
-            error = "No se pudieron recuperar las pistas de esta grabación."
+            self.error = "No se pudieron recuperar las pistas de esta grabación."
         }
     }
 

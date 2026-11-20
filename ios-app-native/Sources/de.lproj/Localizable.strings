@@ -927,3 +927,12 @@
 "Archivos seleccionados" = "Ausgewählte Dateien";
 "Selecciona archivos de audio en Google Drive para importarlos." = "Wähle Audiodateien aus Google Drive zum Importieren aus.";
 "Google Drive" = "Google Drive";
+"Dropbox" = "Dropbox";
+"La conexión todavía no está configurada en esta compilación." = "Diese Verbindung ist in dieser Version noch nicht eingerichtet.";
+"Conectar cuenta" = "Konto verbinden";
+"Desconectar cuenta" = "Konto trennen";
+"Actualizar archivos" = "Dateien aktualisieren";
+"Archivos y carpetas" = "Dateien und Ordner";
+"Volver a la carpeta anterior" = "Zurück zum vorherigen Ordner";
+"No hay archivos en esta carpeta." = "In diesem Ordner sind keine Dateien.";
+"Cargar más archivos" = "Weitere Dateien laden";

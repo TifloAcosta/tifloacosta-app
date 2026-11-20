@@ -729,6 +729,8 @@ struct NativeReaderBrailleControls: View {
     @AppStorage("native-reader-braille-initial-text-focus") private var brailleFocusText = true
 
     var body: some View {
+        Text("Lectura braille continua activada")
+            .font(.footnote)
         Toggle("Foco inicial en el texto", isOn: $brailleFocusText)
         NativeAdjustableChoice(
             title: "Unidad de navegación en braille",

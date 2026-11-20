@@ -1,0 +1,149 @@
+name: TifloAcosta iOS nativa - preparar carga para App Store
+# Proceso manual de carga a App Store Connect. No selecciona grupos de TestFlight,
+# no solicita revisión pública ni publica automáticamente.
+# Ejecutar solo con autorización expresa de Tony.
+on:
+  workflow_dispatch:
+    inputs:
+      build_number:
+        description: "Compilación nueva, superior a 500177, para App Store Connect"
+        type: string
+        required: true
+        default: "500200"
+
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: tifloacosta-ios-native-appstore-upload
+  cancel-in-progress: false
+jobs:
+  build-upload:
+    runs-on: macos-15
+    timeout-minutes: 80
+    env:
+      API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+      API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+      API_PRIVATE: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+      P12_PASSWORD: ${{ secrets.IOS_SIGNING_KEY_PASSPHRASE }}
+      GITHUB_TOKEN: ${{ github.token }}
+      GITHUB_RUN_NUMBER: ${{ github.run_number }}
+      TIFLO_IOS_MARKETING_VERSION: "1.6"
+      TIFLO_IOS_BUILD_NUMBER: ${{ inputs.build_number }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verificar rama y número de compilación pública
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = "feature/mi-musica" || { echo "::error::Rama pública incorrecta"; exit 1; }
+          [[ "$TIFLO_IOS_BUILD_NUMBER" =~ ^[0-9]+$ ]] || exit 1
+          test "$TIFLO_IOS_BUILD_NUMBER" -gt 500177 || { echo "::error::Debe superar la compilación ya distribuida"; exit 1; }
+      - name: Validar Actualidad, Recursos y diseño sin HTML
+        run: |
+          set -euo pipefail
+          node --test ios-app-native/tests/*.test.mjs
+          # Única excepción: YouTube exige su reproductor oficial dentro de WebKit.
+          # No permitir pantallas web ni Capacitor en el resto de SwiftUI.
+          if find ios-app-native/Sources -name '*.swift' ! -name 'NativeYouTubePlayer.swift' -print0 | xargs -0 grep -nE 'WKWebView|CAPBridgeViewController|import Capacitor'; then
+            echo "::error::Se ha detectado una interfaz híbrida fuera del reproductor oficial"
+            exit 1
+          fi
+          if grep -nE 'CAPBridgeViewController|import Capacitor' ios-app-native/Sources/NativeYouTubePlayer.swift; then
+            echo "::error::El reproductor de YouTube contiene código híbrido"
+            exit 1
+          fi
+      - name: Seleccionar Xcode 26 y preparar herramientas
+        run: |
+          set -euo pipefail
+          XCODE="$(find /Applications -maxdepth 1 -type d -name 'Xcode_26*.app' -print | sort | tail -n 1)"
+          test -n "$XCODE" || { echo "::error::Xcode 26 no disponible"; exit 1; }
+          sudo xcode-select --switch "$XCODE/Contents/Developer"
+          xcodebuild -version
+          brew install xcodegen openssl@3
+      - name: Preparar API protegida de App Store Connect
+        run: node ios-app-native/scripts/prepare-apple-key.mjs
+      - name: Recuperar certificado Apple Distribution existente
+        run: node ios-app-native/scripts/ensure-signing.mjs
+      - name: Conservar P12 protegido si se generó un certificado
+        if: env.NEW_P12 == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: TifloAcosta-P12-protegido
+          path: ${{ runner.temp }}/ios-signing/TifloAcosta.p12
+          retention-days: 90
+      - name: Importar certificado sin exponer claves
+        run: bash ios-app-native/scripts/import-distribution-key.sh
+      - name: Crear perfiles de app y extensión para App Store
+        run: node ios-app-native/scripts/create-appstore-profiles.mjs
+      - name: Preparar versión, identificadores y logo corporativo
+        run: |
+          set -euo pipefail
+          node ios-app-native/scripts/prepare-testflight-project.mjs
+          swift ios-app-native/scripts/make-app-icon.swift tifloacosta-icon-512.png ios-app-native/Sources/Assets.xcassets/AppIcon.appiconset/AppIcon.png
+          test -s ios-app-native/Sources/Assets.xcassets/AppIcon.appiconset/AppIcon.png
+          (cd ios-app-native && xcodegen generate --spec project.yml)
+      - name: Archivar app SwiftUI firmada para distribución Apple
+        run: |
+          set -euo pipefail
+          xcodebuild -project ios-app-native/TifloAcostaNative.xcodeproj \
+            -scheme TifloAcostaNative \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -archivePath "$RUNNER_TEMP/TifloAcosta.xcarchive" \
+            -allowProvisioningUpdates \
+            -authenticationKeyPath "$ASC_KEY_PATH" \
+            -authenticationKeyID "$API_ID" \
+            -authenticationKeyIssuerID "$API_ISSUER" \
+            MARKETING_VERSION="$TIFLO_IOS_MARKETING_VERSION" CURRENT_PROJECT_VERSION="$IOS_BUILD_VERSION" archive
+      - name: Configurar exportación con los dos perfiles de firma
+        run: |
+          python3 - <<'PY'
+          import os,plistlib
+          options={'method':'app-store-connect','destination':'export',
+                   'signingStyle':'manual','signingCertificate':'Apple Distribution',
+                   'teamID':'3A8G8A62YZ','provisioningProfiles':{
+                       'com.tifloacosta.app':os.environ['IOS_PROFILE_APP_NAME'],
+                       'com.tifloacosta.app.ShareExtension':os.environ['IOS_PROFILE_EXTENSION_NAME']
+                   }}
+          with open(os.environ['RUNNER_TEMP']+'/ExportOptions.plist','wb') as output:
+              plistlib.dump(options,output)
+          PY
+      - name: Exportar IPA para App Store Connect
+        run: |
+          set -euo pipefail
+          xcodebuild -exportArchive \
+            -archivePath "$RUNNER_TEMP/TifloAcosta.xcarchive" \
+            -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" \
+            -exportPath "$RUNNER_TEMP/native-export" \
+            -allowProvisioningUpdates \
+            -authenticationKeyPath "$ASC_KEY_PATH" \
+            -authenticationKeyID "$API_ID" \
+            -authenticationKeyIssuerID "$API_ISSUER"
+      - name: Validar IPA y extensión antes de enviar
+        run: python3 ios-app-native/scripts/verify-testflight-ipa.py
+      - name: Subir candidata pública a App Store Connect
+        run: |
+          set -euo pipefail
+          IPA="$(find "$RUNNER_TEMP/native-export" -maxdepth 1 -name '*.ipa' -print -quit)"
+          test -f "$IPA"
+          LOG="$RUNNER_TEMP/tifloacosta-upload.log"
+          echo "UPLOAD_STARTED_AT=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
+          xcrun altool --upload-app --type ios --file "$IPA" --apiKey "$API_ID" --apiIssuer "$API_ISSUER" >"$LOG" 2>&1 || {
+            cat "$LOG"
+            exit 1
+          }
+          cat "$LOG"
+          if grep -Eiq 'UPLOAD FAILED|Failed to upload package|Validation failed|ERROR:.*altool|Invalid Pre-Release Train' "$LOG"; then
+            echo '::error::Apple ha rechazado la subida. No se declarará como enviada.'
+            exit 1
+          fi
+          if ! grep -Eiq 'No errors uploading|successfully uploaded|Upload succeeded|uploaded successfully|UPLOAD SUCCEEDED' "$LOG"; then
+            echo "::error::No hay confirmación inequívoca de subida en altool."
+            exit 1
+          fi
+          echo "Apple ha aceptado la carga en App Store Connect; queda pendiente seleccionar la compilación en la versión pública y enviarla a revisión."
+      - name: Limpiar claves y llavero temporal
+        if: always()
+        run: |
+          if [ -n "$ASC_KEY_PATH" ]; then rm -f "$ASC_KEY_PATH"; fi
+          if [ -n "$IOS_TEMP_KEYCHAIN" ]; then security delete-keychain "$IOS_TEMP_KEYCHAIN" || true; fi

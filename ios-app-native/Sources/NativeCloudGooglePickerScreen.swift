@@ -5,12 +5,15 @@ import UIKit
 /// reuse the account and selection APIs with their own file import handlers.
 struct NativeCloudGooglePickerScreen: View {
     let onImport: (URL) -> Void
+    var allowCellularDownloads = true
 
     @StateObject private var accounts = NativeCloudAccountStore.shared
+    @ObservedObject private var network = NativeMusicConnectionPolicy.shared
     @State private var selection: [NativeCloudItem] = []
     @State private var loading = false
     @State private var importingID: String?
     @State private var alertMessage: String?
+    @State private var pendingDownload: NativeCloudItem?
 
     var body: some View {
         List {
@@ -40,7 +43,7 @@ struct NativeCloudGooglePickerScreen: View {
                         Text("Carpeta: \(item.name)")
                     } else {
                         Button(importingID == item.id ? "Importando \(item.name)…" : "Importar \(item.name)") {
-                            Task { await importItem(item) }
+                            requestImport(item)
                         }
                         .disabled(loading || importingID != nil)
                         .accessibilityLabel("Importar \(item.name) desde Google Drive")
@@ -56,6 +59,18 @@ struct NativeCloudGooglePickerScreen: View {
             Button("Aceptar") { alertMessage = nil }
         } message: {
             Text(alertMessage ?? "")
+        }
+        .alert("Descarga con datos móviles", isPresented: Binding(
+            get: { pendingDownload != nil },
+            set: { if !$0 { pendingDownload = nil } }
+        )) {
+            Button("Usar datos una vez") {
+                if let item = pendingDownload { Task { await importItem(item, allowCellular: true) } }
+                pendingDownload = nil
+            }
+            Button("Cancelar", role: .cancel) { pendingDownload = nil }
+        } message: {
+            Text("La descarga está limitada a Wi-Fi. Puedes autorizar solo este archivo con datos móviles.")
         }
     }
 
@@ -73,13 +88,25 @@ struct NativeCloudGooglePickerScreen: View {
         }
     }
 
-    private func importItem(_ item: NativeCloudItem) async {
+    private func requestImport(_ item: NativeCloudItem) {
+        if !network.canDownload(allowCellular: allowCellularDownloads) {
+            pendingDownload = item
+        } else {
+            Task { await importItem(item, allowCellular: allowCellularDownloads) }
+        }
+    }
+
+    private func importItem(_ item: NativeCloudItem, allowCellular: Bool) async {
         importingID = item.id
         defer { importingID = nil }
         do {
+            guard network.canDownload(allowCellular: allowCellular) else {
+                alertMessage = "No hay una conexión permitida para descargar este archivo."
+                return
+            }
             let token = try await accounts.validAccessToken(for: .googleDrive)
             let cloud = try NativeCloudStorage(provider: .googleDrive, accessToken: token)
-            let file = try await cloud.download(item)
+            let file = try await cloud.download(item, allowsCellular: allowCellular)
             onImport(file)
             UIAccessibility.post(notification: .announcement, argument: "Importado \(item.name)")
         } catch {

@@ -248,12 +248,8 @@ struct NativeNewsScreen: View {
                         selectedIndex: $sourceIndex
                     )
                 }
-                if categoryIndex == 0 && sourceIndex == 0 &&
-                   query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    Text("Selecciona una categoría o escribe una búsqueda para consultar noticias.")
-                        .foregroundStyle(TifloVisual.secondaryText)
-                        .listRowBackground(TifloVisual.surfaceRaised)
-                } else {
+                if categoryIndex != 0 || sourceIndex != 0 ||
+                   !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                     Section("Noticias") {
                         Text("\(matchingNews.count) noticias encontradas")
                             .font(.subheadline)

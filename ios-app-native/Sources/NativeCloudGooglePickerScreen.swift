@@ -34,19 +34,18 @@ struct NativeCloudGooglePickerScreen: View {
                     Text("Google Drive todavía no está configurado en esta compilación.")
                 }
             }
-            Section("Archivos seleccionados") {
-                if selection.isEmpty {
-                    Text("Selecciona archivos de audio en Google Drive para importarlos.")
-                }
-                ForEach(selection) { item in
-                    if item.isFolder {
-                        Text("Carpeta: \(item.name)")
-                    } else {
-                        Button(importingID == item.id ? "Importando \(item.name)…" : "Importar \(item.name)") {
-                            requestImport(item)
+            if !selection.isEmpty {
+                Section("Archivos seleccionados") {
+                    ForEach(selection) { item in
+                        if item.isFolder {
+                            Text("Carpeta: \(item.name)")
+                        } else {
+                            Button(importingID == item.id ? "Importando \(item.name)…" : "Importar \(item.name)") {
+                                requestImport(item)
+                            }
+                            .disabled(loading || importingID != nil)
+                            .accessibilityLabel(MusicLocalized.format("Importar %@ desde Google Drive", item.name))
                         }
-                        .disabled(loading || importingID != nil)
-                        .accessibilityLabel(MusicLocalized.format("Importar %@ desde Google Drive", item.name))
                     }
                 }
             }

@@ -1,6 +1,6 @@
 # Registro de proveedores de nube para TifloAcosta
 
-Estado: capa REST compartida preparada para Google Drive, Dropbox y OneDrive; **la conexión de cuentas de usuarios NO está habilitada**. No mostrar botones que aparenten iniciar sesión sin completar los registros y las pruebas OAuth.
+Estado: capa REST compartida para Google Drive, Dropbox y OneDrive. Consultar el registro y la verificación de cada proveedor a continuación.
 
 ## Google Drive
 
@@ -11,8 +11,9 @@ Estado: capa REST compartida preparada para Google Drive, Dropbox y OneDrive; **
 
 ## Dropbox
 
-- [Dropbox App Console](https://www.dropbox.com/developers/apps) mostró «Inicia sesión o regístrate de forma gratuita». El titular debe iniciar sesión con la cuenta que administrará la integración. El registro de la app queda pendiente de acceso.
-- Registrar la aplicación con `files.metadata.read` y `files.content.read` y la redirección del cliente iOS. Implementar OAuth 2.0 Authorization Code + PKCE con el identificador público. El adaptador existente lista carpetas, pagina los resultados y descarga el archivo seleccionado.
+- La [consola de Dropbox](https://www.dropbox.com/developers/apps) muestra TifloAcosta en modo Desarrollo, con clientes públicos activados y los permisos `files.metadata.read` y `files.content.read` habilitados.
+- El retorno OAuth de iOS `db-malbkwdta42k68y://oauthredirect` se registró en la consola y coincide con el esquema y el identificador público configurados en `ios-app-native/Sources/Info.plist`.
+- El gestor compartido usa OAuth 2.0 con PKCE S256 y solicita permisos de lectura. Queda pendiente validar el consentimiento, el retorno, la sesión y la importación de un audio en un iPhone.
 
 ## OneDrive
 

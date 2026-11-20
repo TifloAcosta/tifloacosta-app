@@ -7,10 +7,23 @@ import SwiftUI
 struct NativeShareMessage: Decodable, Identifiable {
     let id: String
     let kind: String
+    let destination: String?
     let name: String
     let value: String?
     let storedName: String?
     let createdAt: String?
+
+    var isAudioFile: Bool {
+        guard kind == "file" else { return false }
+        let extensions: Set<String> = [
+            "mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff", "caf", "flac"
+        ]
+        return extensions.contains(URL(fileURLWithPath: name).pathExtension.lowercased())
+    }
+
+    var needsAudioDestination: Bool {
+        isAudioFile && (destination == nil || destination == "pending")
+    }
 }
 
 @MainActor
@@ -108,6 +121,26 @@ final class NativeShareInbox: ObservableObject {
         return document
     }
 
+    /// Importación hacia Mi música: la extensión original se reconstruye solo
+    /// en una carpeta temporal y se elimina la bandeja tras copiar con éxito.
+    func importToMusic(_ item: NativeShareMessage) throws {
+        guard item.isAudioFile, let source = fileURL(for: item) else {
+            throw CocoaError(.fileReadUnsupportedScheme)
+        }
+        let safeName = URL(fileURLWithPath: item.name).lastPathComponent
+        guard !safeName.isEmpty && safeName != "." && safeName != ".." else {
+            throw CocoaError(.fileReadInvalidFileName)
+        }
+        let temp = FileManager.default.temporaryDirectory
+            .appendingPathComponent("SharedMusic-" + item.id, isDirectory: true)
+        try FileManager.default.createDirectory(at: temp, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: temp) }
+        let named = temp.appendingPathComponent(safeName)
+        try FileManager.default.copyItem(at: source, to: named)
+        try NativeMusicSharedAudio.importFile(named)
+        complete(item)
+    }
+
     /// Share files are queued by the iOS share extension without launching our app.
     /// On the next foreground activation, they join the reader automatically.
     /// Only true files/text are consumed. URLs remain in Recibidos for URL actions.
@@ -116,7 +149,9 @@ final class NativeShareInbox: ObservableObject {
         let oldToNew = items.reversed()
         var lastImported: NativeReadingDocument?
         var failures: [String] = []
-        for item in oldToNew where item.kind == "file" || item.kind == "text" {
+        for item in oldToNew where (item.kind == "file" || item.kind == "text")
+            && item.destination != "pending" && item.destination != "music"
+            && !item.needsAudioDestination {
             do {
                 lastImported = try importToReader(item, library: library)
             } catch {
@@ -145,8 +180,13 @@ struct NativeInboxScreen: View {
     @EnvironmentObject private var library: NativeReaderLibrary
     @Environment(\.openURL) private var openURL
     @State private var importError: String?
+    @State private var pendingAudioChoice: NativeShareMessage?
 
-    private func perform(_ item: NativeShareMessage) {
+    private func perform(_ item: NativeShareMessage, destination: String? = nil) {
+        if destination == nil && item.needsAudioDestination {
+            pendingAudioChoice = item
+            return
+        }
         do {
             if item.kind == "url" {
                 guard let value = item.value, let url = URL(string: value),
@@ -155,9 +195,9 @@ struct NativeInboxScreen: View {
                 }
                 openURL(url)
                 inbox.complete(item)
+            } else if destination == "music" || (destination == nil && item.destination == "music") {
+                try inbox.importToMusic(item)
             } else {
-                // EPUB, Office, audio and text all use the same real import path.
-                // The hosting NavigationStack opens the imported document directly.
                 inbox.readyToRead = try inbox.importToReader(item, library: library)
             }
         } catch {
@@ -179,12 +219,17 @@ struct NativeInboxScreen: View {
                 } label: {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(item.name).font(.body)
-                        Text(item.kind == "url" ? "Abrir enlace" : "Importar en TifloLector")
+                        Text(item.kind == "url" ? "Abrir enlace" :
+                            item.needsAudioDestination ? "Elegir destino del audio" :
+                            item.destination == "music" ? "Importar en Mi música" :
+                            "Importar en TifloLector")
                             .font(.caption).foregroundStyle(.secondary)
                     }
                 }
                 .accessibilityLabel(item.name)
                 .accessibilityHint(item.kind == "url" ? "Abre el enlace recibido." :
+                    item.needsAudioDestination ? "Elige TifloLector o Mi música." :
+                    item.destination == "music" ? "Importa el audio en Mi música." :
                     "Importa y abre el archivo o texto en TifloLector.")
                 .accessibilityAction(named: Text("Compartir archivo")) {
                     if let exported = inbox.exportURL(for: item) {
@@ -197,6 +242,22 @@ struct NativeInboxScreen: View {
             }
         }
         .tifloScreenSurface()
+        .confirmationDialog("¿Dónde guardar el audio?", isPresented: Binding(
+            get: { pendingAudioChoice != nil },
+            set: { if !$0 { pendingAudioChoice = nil } }
+        )) {
+            Button("TifloLector") {
+                if let item = pendingAudioChoice { perform(item, destination: "reader") }
+                pendingAudioChoice = nil
+            }
+            Button("Mi música") {
+                if let item = pendingAudioChoice { perform(item, destination: "music") }
+                pendingAudioChoice = nil
+            }
+            Button("Cancelar", role: .cancel) { pendingAudioChoice = nil }
+        } message: {
+            Text("Selecciona dónde importar el archivo de audio.")
+        }
         .navigationTitle("Recibidos")
         .toolbar { Button("Actualizar") { inbox.refresh() } }
         .onAppear { inbox.refresh() }

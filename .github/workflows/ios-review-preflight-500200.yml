@@ -1,0 +1,50 @@
+name: Verificar candidata App Store 1.6 500200 antes de revisión
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ios-review-preflight-500200.yml']
+permissions:
+  contents: read
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    env:
+      API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+      API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+      API_PRIVATE: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+    steps:
+      - name: Consultar App Store Connect sin modificar nada
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import crypto from 'node:crypto';
+          const encode=v=>Buffer.from(JSON.stringify(v)).toString('base64url');
+          let key=process.env.API_PRIVATE?.trim().replace(/^['"]|['"]$/g,'').replace(/\\r\\n/g,'\n').replace(/\\n/g,'\n');
+          if (!key?.includes('-----BEGIN')) key=Buffer.from(key||'','base64').toString();
+          const now=Math.floor(Date.now()/1000);
+          const value=encode({alg:'ES256',kid:process.env.API_ID,typ:'JWT'})+'.'+encode({iss:process.env.API_ISSUER,iat:now,exp:now+600,aud:'appstoreconnect-v1'});
+          const token=value+'.'+crypto.sign('sha256',Buffer.from(value),{key,dsaEncoding:'ieee-p1363'}).toString('base64url');
+          async function get(route){
+            const r=await fetch('https://api.appstoreconnect.apple.com/v1/'+route,{headers:{Authorization:'Bearer '+token}});
+            const j=await r.json();
+            if(!r.ok)throw Error('GET '+route.split('?')[0]+' HTTP '+r.status+': '+JSON.stringify(j.errors||[]).slice(0,650));
+            return j;
+          }
+          const apps=await get('apps?filter%5BbundleId%5D=com.tifloacosta.app&limit=20');
+          const app=apps.data.find(x=>x.attributes?.bundleId==='com.tifloacosta.app');
+          if(!app)throw Error('TifloAcosta no encontrada');
+          console.log('APP_ID='+app.id);
+          const versions=await get('apps/'+app.id+'/appStoreVersions?filter%5Bplatform%5D=IOS&limit=100&include=build');
+          for(const v of versions.data){
+            console.log('VERSION '+JSON.stringify({id:v.id,version:v.attributes?.versionString,state:v.attributes?.appVersionState,release:v.attributes?.releaseType,buildId:v.relationships?.build?.data?.id||null}));
+          }
+          const builds=await get('builds?filter%5Bapp%5D='+app.id+'&filter%5Bversion%5D=500200&limit=100');
+          for(const b of builds.data){
+            console.log('BUILD '+JSON.stringify({id:b.id,number:b.attributes?.version,processingState:b.attributes?.processingState,expired:b.attributes?.expired,usesNonExemptEncryption:b.attributes?.usesNonExemptEncryption}));
+          }
+          const submissions=await get('apps/'+app.id+'/reviewSubmissions?limit=100');
+          for(const s of submissions.data){
+            console.log('REVIEW_SUBMISSION '+JSON.stringify({id:s.id,platform:s.attributes?.platform,state:s.attributes?.state,submittedDate:s.attributes?.submittedDate}));
+          }
+          NODE

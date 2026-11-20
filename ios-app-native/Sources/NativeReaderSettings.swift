@@ -754,9 +754,6 @@ struct NativeReaderSettingsScreen: View {
 
     var body: some View {
         List {
-            NavigationLink("Creación rápida de marcas") { NativeQuickBookmarkHelpScreen() }
-            NavigationLink("Motores externos") { NativeReaderExternalVoiceSettingsScreen() }
-                .accessibilityHint("Prepara Gemini o Phonon antes de seleccionarlos para leer.")
             NavigationLink("Modo de lectura") {
                 List {
                         NativeAdjustableChoice(
@@ -776,6 +773,9 @@ struct NativeReaderSettingsScreen: View {
                 .tifloScreenSurface()
                 .navigationTitle("Modo de lectura")
             }
+            NavigationLink("Creación rápida de marcas") { NativeQuickBookmarkHelpScreen() }
+            NavigationLink("Motores externos") { NativeReaderExternalVoiceSettingsScreen() }
+                .accessibilityHint("Prepara Gemini o Phonon antes de seleccionarlos para leer.")
             NavigationLink("OCR y reconocimiento") { NativeReaderOCRSettingsScreen() }
             NavigationLink("Navegación y avances") {
                 List {

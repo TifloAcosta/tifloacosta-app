@@ -1025,3 +1025,22 @@
 "Apagado automático completado." = "Timer di spegnimento terminato.";
 "No se encuentra la pista de audio." = "Traccia audio non trovata.";
 "No hay un archivo disponible para compartir." = "Nessun file disponibile da condividere.";
+
+/* Mi Música: navegación, emisoras y accesibilidad */
+"Conciertos y grabaciones" = "Concerti e registrazioni";
+"Selección de canciones" = "Selezione di brani";
+"Explorar por estilos" = "Esplora per genere";
+"Nubes" = "Cloud";
+"No hay emisoras disponibles con estos criterios." = "Nessuna stazione disponibile con questi criteri.";
+"Nombre de emisora" = "Nome della stazione";
+"País" = "Paese";
+"Estilo" = "Genere";
+"Buscar emisoras" = "Cerca stazioni";
+"Búsqueda avanzada" = "Ricerca avanzata";
+"Explorar emisoras" = "Esplora stazioni";
+"Emisoras populares" = "Stazioni popolari";
+"Buscar por países" = "Cerca per paese";
+"Buscar por idiomas" = "Cerca per lingua";
+"Buscar por estilos" = "Cerca per genere";
+"Buscar por nombre" = "Cerca per nome";
+"%@, artista %@, álbum %@, disponible sin conexión" = "%@, artista %@, album %@, disponibile offline";

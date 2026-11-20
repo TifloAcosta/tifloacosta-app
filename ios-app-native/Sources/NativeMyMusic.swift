@@ -957,8 +957,24 @@ struct NativeMyMusicScreen: View {
                             )
                         }
                         .accessibilityLabel(detailedVoiceOver ?
-                            MusicLocalized.format("Reproducir %@, artista %@, álbum %@, disponible sin conexión", file.name, file.artist ?? MusicLocalized.format("No indicado"), file.album ?? MusicLocalized.format("No indicado")) :
-                            MusicLocalized.format("Reproducir %@", file.name))
+                            MusicLocalized.format("%@, artista %@, álbum %@, disponible sin conexión", file.name, file.artist ?? MusicLocalized.format("No indicado"), file.album ?? MusicLocalized.format("No indicado")) :
+                            file.name)
+                        .accessibilityActions {
+                            Button("Reproducir") {
+                                player.play(name: file.name, url: library.audioURL(for: file),
+                                    queue: library.files.map { (name: $0.name, url: library.audioURL(for: $0)) },
+                                    albumKeysByURL: albumKeysByURL)
+                            }
+                            ForEach(library.playlists) { playlist in
+                                Button("Añadir a lista \(playlist.name)") {
+                                    library.addToPlaylist(file.id, playlistId: playlist.id)
+                                }
+                            }
+                            ForEach(library.folders) { folder in
+                                Button("Añadir a \(folder.name)") { library.assign(file.id, to: folder.id) }
+                            }
+                            Button("Eliminar de la biblioteca") { pendingRemoval = file }
+                        }
                         Spacer()
                         Menu("Acciones de \(file.name)") {
                             Button("Editar género") {

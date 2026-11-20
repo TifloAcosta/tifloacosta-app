@@ -212,8 +212,13 @@ struct NativeMusicPlaylistMenu: View {
 struct NativeMusicPlatformsScreen: View {
     var playlists: [MusicPlaylistDestination] = []
     var addToPlaylist: NativeMusicAddToPlaylist? = nil
+    @AppStorage("music.cellularPlayback") private var allowCellularPlayback = true
+    @ObservedObject private var network = NativeMusicConnectionPolicy.shared
     var body: some View {
         List {
+            if !network.canStream(allowCellular: allowCellularPlayback) {
+                Text("La reproducción por Internet está limitada por tu ajuste de Conexión.")
+            } else {
             NavigationLink("Radio musical gratuita") { NativeRadioScreen() }
             NavigationLink("Audius: música gratuita") {
                 NativeAudiusScreen(playlists: playlists, addToPlaylist: addToPlaylist)
@@ -225,6 +230,7 @@ struct NativeMusicPlatformsScreen: View {
                 NavigationLink("Apple Music") {
                     NativeAppleMusicScreen(playlists: playlists, addToPlaylist: addToPlaylist)
                 }
+            }
             }
         }
         .navigationTitle("Plataformas musicales")

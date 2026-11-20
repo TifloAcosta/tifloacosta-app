@@ -56,8 +56,12 @@ private final class NativeCloudNoRedirects: NSObject, URLSessionTaskDelegate {
                     completionHandler: @escaping (URLRequest?) -> Void) {
         // OneDrive may redirect /content to a pre-authorized download host.
         // Follow HTTPS only, and strip all original authorization headers.
-        guard allowRedirect, request.url?.scheme == "https" else { completionHandler(nil); return }
-        var redirected = URLRequest(url: request.url!)
+        guard allowRedirect, task.originalRequest?.url?.path.hasSuffix("/content") == true,
+              let destination = request.url, destination.scheme == "https" else {
+            completionHandler(nil)
+            return
+        }
+        var redirected = URLRequest(url: destination)
         redirected.setValue(nil, forHTTPHeaderField: "Authorization")
         completionHandler(redirected)
     }
@@ -128,6 +132,21 @@ final class NativeCloudStorage {
         return object
     }
 
+    /// Resolves an item explicitly selected in Google Picker with the drive.file scope.
+    func googleDriveSelection(id: String) async throws -> NativeCloudItem {
+        guard provider == .googleDrive, !id.isEmpty,
+              var parts = URLComponents(string: "https://www.googleapis.com/drive/v3/files/\(Self.encodedID(id))") else {
+            throw NativeCloudStorageError.invalidResponse
+        }
+        parts.queryItems = [URLQueryItem(name: "fields", value: "id,name,mimeType,size")]
+        guard let url = parts.url else { throw NativeCloudStorageError.invalidResponse }
+        let json = try await send(authorized(url))
+        guard let selection = item(json, provider: .googleDrive), selection.id == id else {
+            throw NativeCloudStorageError.invalidResponse
+        }
+        return selection
+    }
+
     /// Lists one page only; the caller explicitly requests subsequent pages.
     func listFolder(id: String?, cursor: String? = nil) async throws -> NativeCloudPage {
         switch provider {
@@ -182,7 +201,7 @@ final class NativeCloudStorage {
         case .dropbox: folder = (value[".tag"] as? String) == "folder"
         case .oneDrive: folder = value["folder"] != nil
         }
-        let bytes = (value["size"] as? NSNumber)?.int64Value
+        let bytes = (value["size"] as? NSNumber)?.int64Value ?? (value["size"] as? String).flatMap { Int64($0) }
         return NativeCloudItem(id: id, name: name, isFolder: folder, size: bytes, provider: provider)
     }
 

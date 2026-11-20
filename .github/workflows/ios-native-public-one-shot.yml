@@ -1,5 +1,5 @@
 name: TifloAcosta iOS 1.6 - carga publica autorizada
-# Proceso manual de carga a App Store Connect. No selecciona grupos de TestFlight,
+# Ejecucion unica de carga publica autorizada a App Store Connect. No selecciona grupos de TestFlight,
 # no solicita revisión pública ni publica automáticamente.
 # Ejecutar solo con autorización expresa de Tony.
 on:
@@ -17,7 +17,8 @@ concurrency:
   cancel-in-progress: false
 jobs:
   build-upload:
-    if: ${{ github.event.head_commit.message == 'release: authorize one-time TifloAcosta 1.6 App Store Connect upload' }}
+    if: >-
+      github.event.head_commit.message == 'release: authorize one-time TifloAcosta 1.6 App Store Connect upload'
     runs-on: macos-15
     timeout-minutes: 80
     env:

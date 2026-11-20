@@ -929,3 +929,12 @@
 "Archivos seleccionados" = "Selected files";
 "Selecciona archivos de audio en Google Drive para importarlos." = "Select audio files in Google Drive to import them.";
 "Google Drive" = "Google Drive";
+"Dropbox" = "Dropbox";
+"La conexión todavía no está configurada en esta compilación." = "This connection is not yet configured in this build.";
+"Conectar cuenta" = "Connect account";
+"Desconectar cuenta" = "Disconnect account";
+"Actualizar archivos" = "Refresh files";
+"Archivos y carpetas" = "Files and folders";
+"Volver a la carpeta anterior" = "Back to previous folder";
+"No hay archivos en esta carpeta." = "There are no files in this folder.";
+"Cargar más archivos" = "Load more files";

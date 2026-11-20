@@ -1025,3 +1025,22 @@
 "Apagado automático completado." = "Temporizador de suspensão concluído.";
 "No se encuentra la pista de audio." = "Faixa de áudio não encontrada.";
 "No hay un archivo disponible para compartir." = "Não há ficheiro disponível para partilhar.";
+
+/* Mi Música: navegación, emisoras y accesibilidad */
+"Conciertos y grabaciones" = "Concertos e gravações";
+"Selección de canciones" = "Seleção de músicas";
+"Explorar por estilos" = "Explorar por estilos";
+"Nubes" = "Nuvens";
+"No hay emisoras disponibles con estos criterios." = "Não há estações disponíveis com estes critérios.";
+"Nombre de emisora" = "Nome da estação";
+"País" = "País";
+"Estilo" = "Estilo";
+"Buscar emisoras" = "Pesquisar estações";
+"Búsqueda avanzada" = "Pesquisa avançada";
+"Explorar emisoras" = "Explorar estações";
+"Emisoras populares" = "Estações populares";
+"Buscar por países" = "Pesquisar por países";
+"Buscar por idiomas" = "Pesquisar por idiomas";
+"Buscar por estilos" = "Pesquisar por estilos";
+"Buscar por nombre" = "Pesquisar por nome";
+"%@, artista %@, álbum %@, disponible sin conexión" = "%@, artista %@, álbum %@, disponível offline";

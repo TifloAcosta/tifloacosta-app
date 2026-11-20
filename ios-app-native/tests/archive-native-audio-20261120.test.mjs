@@ -16,6 +16,6 @@ test('Internet Archive includes native audio candidates including FLAC, not Shor
 test('streaming failures are observable rather than showing Playing for unsupported streams', () => {
   const player = radio.slice(radio.indexOf('class NativeRadioPlayer'), radio.indexOf('struct MusicPlaylistDestination'));
   assert.match(player, /NSKeyValueObservation/);
-  assert.match(player, /observe\(\\?\.status|observe\(\\.status/);
+  assert.ok(player.includes('observe(\\.status'));
   assert.match(player, /\.failed/);
 });

@@ -110,6 +110,7 @@ final class NativeRadioPlayer: ObservableObject {
     @Published var error: String?
 
     private var player: AVPlayer?
+    private var itemStatusObservation: NSKeyValueObservation?
     private var remoteTokens: [Any] = []
 
     func play(name: String, url: URL) {
@@ -126,7 +127,21 @@ final class NativeRadioPlayer: ObservableObject {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
             try AVAudioSession.sharedInstance().setActive(true)
             player?.pause()
-            player = AVPlayer(url: url)
+            itemStatusObservation = nil
+            let item = AVPlayerItem(url: url)
+            player = AVPlayer(playerItem: item)
+            // AVPlayer.play() no confirma que el códec del servidor sea legible.
+            // Comprobamos el estado del elemento y explicamos el error al usuario.
+            itemStatusObservation = item.observe(\.status, options: [.new]) { [weak self] observed, _ in
+                Task { @MainActor [weak self] in
+                    guard let self, self.player?.currentItem === observed else { return }
+                    if observed.status == .failed {
+                        self.isPlaying = false
+                        self.error = "Este archivo de audio no puede reproducirse con los formatos admitidos por iOS."
+                        self.updateNowPlaying()
+                    }
+                }
+            }
             stationName = name
             NativeRemotePlaybackOwner.claim(.radio)
             registerRemoteCommands()
@@ -166,6 +181,7 @@ final class NativeRadioPlayer: ObservableObject {
 
     func stop() {
         player?.pause()
+        itemStatusObservation = nil
         player = nil
         isPlaying = false
         stationName = ""

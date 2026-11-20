@@ -133,3 +133,17 @@ No dar por concluida la compilación candidata ni ejecutar TestFlight hasta: (1)
 - Al restablecer el destino interno también se crea primero su copia inicial y solo después se retira la configuración del destino anterior.
 - La programación de 7 o 30 días sigue siendo bajo demanda al abrir Mi música, sin afirmar que iOS ejecute respaldos en segundo plano. Las copias automáticas siguen siendo del índice, no del audio; para trasladar audio existe la copia completa manual.
 - Se añadieron dos pruebas para los cambios de carpeta y se mantienen los contratos de compatibilidad de las restauraciones. **375 contratos iOS correctos** en entorno local Linux. Compilación Swift en macOS y restauración funcional entre dispositivos todavía pendientes de comprobación.
+
+### Fase 3 de 6: abrir enlaces visibles desde la navegación — 20/11/2026
+
+- La revisión del código actual confirmó que la muestra previa por voz, el perfil individual, el braille continuo, seis opciones lingüísticas de OCR y los enlaces interactivos en el texto ya estaban implementados. Los apartados anteriores de esta auditoría describen el estado inicial, no el posterior a esas reparaciones.
+- Se corrigió «Abrir enlace actual» cuando la navegación encuentra una URL escrita literalmente en el documento, aunque no exista un enlace HTML/EPUB estructurado. Se comprueba que el desplazamiento corresponde al inicio de una URL web y se valida protocolo y dominio antes de abrirla.
+- La navegación anuncia ahora también la dirección de los enlaces visibles, y elimina la puntuación final habitual de la dirección antes de abrirla.
+- Se añadió un contrato de regresión para este caso. La activación física mediante doble toque y la compilación Swift siguen requiriendo verificación en macOS/iPhone.
+
+### Fase 4 de 6: transparencia de idiomas OCR — 20/11/2026
+
+- El motor ya admitía español, inglés, portugués, francés, italiano y alemán, con detección automática de reserva si Vision no reconocía el idioma en el dispositivo.
+- La pantalla de OCR consulta ahora los idiomas efectivamente disponibles en Vision para la precisión seleccionada, los presenta con nombres comprensibles y actualiza la lista al cambiar entre reconocimiento preciso o rápido.
+- Se mantiene la codificación de preferencias anterior, sin alterar los ajustes guardados ni impedir la importación por falta de algún idioma.
+- La prueba de regresión comprueba la consulta dinámica y el comportamiento de reserva. Pendiente compilación Swift macOS y verificación del anuncio en VoiceOver.

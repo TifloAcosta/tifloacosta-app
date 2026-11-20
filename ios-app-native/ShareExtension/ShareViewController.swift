@@ -208,7 +208,7 @@ final class ShareViewController: UIViewController {
             "csv", "json", "xml", "log", "srt", "rtf", "fb2",
             "docx", "odt", "pptx", "ppsx", "pptm", "xlsx", "xlsm",
             "epub", "mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff",
-            "caf", "zip", "daisy", "png", "jpg", "jpeg",
+            "caf", "mp4", "m4v", "mov", "zip", "daisy", "png", "jpg", "jpeg",
             "heic", "heif", "tif", "tiff"
         ]
         let providers = incoming.flatMap { $0.attachments ?? [] }

@@ -1842,6 +1842,7 @@ private struct NativeReaderNavigationPoint: Identifiable {
 }
 
 private struct NativeReaderTextLayout {
+    private let fullText: String
     let fragments: [String]
     let fragmentStarts: [Int]
     let paragraphStarts: [Int]
@@ -1856,6 +1857,7 @@ private struct NativeReaderTextLayout {
     let totalCharacters: Int
 
     init(_ body: String) {
+        fullText = body
         totalCharacters = body.count
         var sections: [String] = []
         var offsets: [Int] = []
@@ -1934,6 +1936,20 @@ private struct NativeReaderTextLayout {
         namedPages = pageEntries.isEmpty
             ? offsets.enumerated().map { .init(offset: $0.element, title: "Bloque \($0.offset + 1)") }
             : pageEntries
+    }
+
+    func visibleURL(at offset: Int) -> URL? {
+        guard linkStarts.contains(offset), offset >= 0, offset < fullText.count else { return nil }
+        let beginning = fullText.index(fullText.startIndex, offsetBy: offset)
+        let remainder = String(fullText[beginning...])
+        guard let regex = try? NSRegularExpression(pattern: #"^https?://[^\s<>\"']+"#, options: [.caseInsensitive]),
+              let match = regex.firstMatch(in: remainder, range: NSRange(remainder.startIndex..<remainder.endIndex, in: remainder)),
+              let range = Range(match.range, in: remainder) else { return nil }
+        let candidate = String(remainder[range]).trimmingCharacters(in: CharacterSet(charactersIn: ".,;:!?)]"))
+        guard let url = URL(string: candidate),
+              ["https", "http"].contains(url.scheme?.lowercased() ?? ""),
+              url.host != nil else { return nil }
+        return url
     }
 
     func nearbyOffset(_ offset: Int, direction: Int, unit: Int) -> Int? {
@@ -2412,19 +2428,19 @@ struct NativeReadingScreen: View {
             actionMessage = "Selecciona Enlaces en Modo de navegación."
             return
         }
-        guard let link = latest.textLinks?.first(where: { $0.offset == readingOffset }) else {
-            actionMessage = "No hay un enlace estructurado en esta posición."
-            return
-        }
-        if let target = link.targetOffset {
+        if let link = latest.textLinks?.first(where: { $0.offset == readingOffset }),
+           let target = link.targetOffset {
             jump(to: target)
             actionMessage = "Destino: \(link.title)"
-        } else if let url = URL(string: link.url),
+        } else if let link = latest.textLinks?.first(where: { $0.offset == readingOffset }),
+                  let url = URL(string: link.url),
                   ["https", "http"].contains(url.scheme?.lowercased() ?? ""),
                   url.host != nil {
             UIApplication.shared.open(url)
+        } else if let url = textLayout.visibleURL(at: readingOffset) {
+            UIApplication.shared.open(url)
         } else {
-            actionMessage = "Este enlace no tiene un destino disponible."
+            actionMessage = "No hay un enlace disponible en esta posición."
         }
     }
 
@@ -2447,6 +2463,8 @@ struct NativeReadingScreen: View {
             jump(to: next)
             if let link = latest.textLinks?.first(where: { $0.offset == next }) {
                 actionMessage = "Enlace: \(link.title)"
+            } else if let url = textLayout.visibleURL(at: next) {
+                actionMessage = "Enlace: \(url.absoluteString)"
             }
             return
         }

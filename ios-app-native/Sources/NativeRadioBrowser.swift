@@ -15,6 +15,48 @@ private struct NativeRadioStation: Codable, Identifiable {
     var urlResolved: URL? { URL(string: url_resolved) }
 }
 
+private struct NativeRadioFilter {
+    var name = ""
+    var countryCode = ""
+    var language = ""
+    var genre = ""
+
+    var queryItems: [URLQueryItem] {
+        var fields: [URLQueryItem] = []
+        if !name.isEmpty { fields.append(URLQueryItem(name: "name", value: name)) }
+        if !countryCode.isEmpty { fields.append(URLQueryItem(name: "countrycode", value: countryCode)) }
+        if !language.isEmpty { fields.append(URLQueryItem(name: "language", value: language)) }
+        if !genre.isEmpty { fields.append(URLQueryItem(name: "tag", value: genre)) }
+        if fields.isEmpty { fields.append(URLQueryItem(name: "tag", value: "music")) }
+        return fields
+    }
+}
+
+private struct RadioFilterOption: Identifiable {
+    let id: String
+    let title: String
+    static let countries: [RadioFilterOption] = [
+        .init(id: "ES", title: "España"), .init(id: "MX", title: "México"),
+        .init(id: "AR", title: "Argentina"), .init(id: "CO", title: "Colombia"),
+        .init(id: "CL", title: "Chile"), .init(id: "US", title: "Estados Unidos"),
+        .init(id: "GB", title: "Reino Unido"), .init(id: "FR", title: "Francia"),
+        .init(id: "DE", title: "Alemania"), .init(id: "BR", title: "Brasil"),
+        .init(id: "IT", title: "Italia"), .init(id: "PT", title: "Portugal")
+    ]
+    static let languages: [RadioFilterOption] = [
+        .init(id: "spanish", title: "Español"), .init(id: "english", title: "Inglés"),
+        .init(id: "french", title: "Francés"), .init(id: "portuguese", title: "Portugués"),
+        .init(id: "italian", title: "Italiano"), .init(id: "german", title: "Alemán")
+    ]
+    static let genres: [RadioFilterOption] = [
+        .init(id: "rock", title: "Rock"), .init(id: "pop", title: "Pop"),
+        .init(id: "jazz", title: "Jazz"), .init(id: "classical", title: "Clásica"),
+        .init(id: "country", title: "Country"), .init(id: "electronic", title: "Electrónica"),
+        .init(id: "latin", title: "Latina"), .init(id: "blues", title: "Blues"),
+        .init(id: "talk", title: "Programas hablados")
+    ]
+}
+
 @MainActor
 private final class NativeRadioDirectory: ObservableObject {
     @Published private(set) var stations: [NativeRadioStation] = []
@@ -22,15 +64,17 @@ private final class NativeRadioDirectory: ObservableObject {
     @Published var error: String?
 
     func search(_ query: String) async {
+        await search(filter: NativeRadioFilter(name: query))
+    }
+
+    func search(filter: NativeRadioFilter) async {
         isSearching = true
         defer { isSearching = false }
         var parts = URLComponents()
         parts.scheme = "https"
         parts.host = "de1.api.radio-browser.info"
         parts.path = "/json/stations/search"
-        let name = query.trimmingCharacters(in: .whitespacesAndNewlines)
-        parts.queryItems = [
-            URLQueryItem(name: name.isEmpty ? "tag" : "name", value: name.isEmpty ? "music" : name),
+        parts.queryItems = filter.queryItems + [
             URLQueryItem(name: "hidebroken", value: "true"),
             URLQueryItem(name: "limit", value: "50"),
             URLQueryItem(name: "order", value: "votes"),
@@ -240,27 +284,152 @@ struct NativeMusicPlatformsScreen: View {
     }
 }
 
-private struct NativeRadioScreen: View {
-    @StateObject private var directory = NativeRadioDirectory()
+private struct NativeRadioStationRow: View {
+    let station: NativeRadioStation
     @ObservedObject private var radio = NativeRadioPlayer.shared
-    @State private var query = ""
     @AppStorage("mi-musica-radio-favorites-v2") private var savedFavorites = ""
 
-    private var savedStations: [NativeRadioStation] {
+    private var favorites: [NativeRadioStation] {
         guard let data = savedFavorites.data(using: .utf8) else { return [] }
         return (try? JSONDecoder().decode([NativeRadioStation].self, from: data)) ?? []
     }
 
-    private func toggleFavorite(_ station: NativeRadioStation) {
-        var updated = savedStations
+    private func toggleFavorite() {
+        var updated = favorites
         if let index = updated.firstIndex(where: { $0.id == station.id }) {
             updated.remove(at: index)
         } else {
             updated.append(station)
         }
-        guard let data = try? JSONEncoder().encode(updated),
-              let value = String(data: data, encoding: .utf8) else { return }
-        savedFavorites = value
+        if let data = try? JSONEncoder().encode(updated),
+           let text = String(data: data, encoding: .utf8) {
+            savedFavorites = text
+        }
+    }
+
+    var body: some View {
+        Button(station.name) {
+            guard let url = station.urlResolved else { return }
+            radio.play(name: station.name, url: url)
+        }
+        .accessibilityAction(named: Text("Reproducir")) {
+            guard let url = station.urlResolved else { return }
+            radio.play(name: station.name, url: url)
+        }
+        .accessibilityAction(named: Text(favorites.contains(where: { $0.id == station.id })
+            ? "Quitar de favoritas" : "Guardar favorita")) { toggleFavorite() }
+    }
+}
+
+private struct NativeRadioResultsScreen: View {
+    let title: String
+    let filter: NativeRadioFilter
+    @StateObject private var directory = NativeRadioDirectory()
+    @State private var query = ""
+
+    var body: some View {
+        List {
+            if directory.isSearching { ProgressView("Buscando emisoras") }
+            ForEach(directory.stations) { station in NativeRadioStationRow(station: station) }
+            if !directory.isSearching && directory.stations.isEmpty && directory.error == nil {
+                Text("No hay emisoras disponibles con estos criterios.")
+            }
+            if let error = directory.error { Text(error) }
+        }
+        .navigationTitle(title)
+        .searchable(text: $query, prompt: "Buscar emisoras por nombre")
+        .onSubmit(of: .search) {
+            var selected = filter
+            selected.name = query.trimmingCharacters(in: .whitespacesAndNewlines)
+            Task { await directory.search(filter: selected) }
+        }
+        .task { await directory.search(filter: filter) }
+    }
+}
+
+private enum RadioCategory {
+    case countries, languages, genres
+
+    var title: String {
+        switch self {
+        case .countries: return "Países"
+        case .languages: return "Idiomas"
+        case .genres: return "Estilos"
+        }
+    }
+    var options: [RadioFilterOption] {
+        switch self {
+        case .countries: return RadioFilterOption.countries
+        case .languages: return RadioFilterOption.languages
+        case .genres: return RadioFilterOption.genres
+        }
+    }
+    func filter(_ option: RadioFilterOption) -> NativeRadioFilter {
+        switch self {
+        case .countries: return NativeRadioFilter(countryCode: option.id)
+        case .languages: return NativeRadioFilter(language: option.id)
+        case .genres: return NativeRadioFilter(genre: option.id)
+        }
+    }
+}
+
+private struct NativeRadioCategoryScreen: View {
+    let category: RadioCategory
+
+    var body: some View {
+        List {
+            ForEach(category.options) { option in
+                NavigationLink(option.title) {
+                    NativeRadioResultsScreen(title: option.title, filter: category.filter(option))
+                }
+            }
+        }
+        .navigationTitle(category.title)
+    }
+}
+
+private struct NativeRadioAdvancedSearch: View {
+    @State private var name = ""
+    @State private var countryCode = ""
+    @State private var language = ""
+    @State private var genre = ""
+
+    private var filter: NativeRadioFilter {
+        NativeRadioFilter(
+            name: name.trimmingCharacters(in: .whitespacesAndNewlines),
+            countryCode: countryCode, language: language, genre: genre)
+    }
+
+    var body: some View {
+        Form {
+            TextField("Nombre de emisora", text: $name)
+            Picker("País", selection: $countryCode) {
+                Text("Todos").tag("")
+                ForEach(RadioFilterOption.countries) { Text($0.title).tag($0.id) }
+            }
+            Picker("Idioma", selection: $language) {
+                Text("Todos").tag("")
+                ForEach(RadioFilterOption.languages) { Text($0.title).tag($0.id) }
+            }
+            Picker("Estilo", selection: $genre) {
+                Text("Todos").tag("")
+                ForEach(RadioFilterOption.genres) { Text($0.title).tag($0.id) }
+            }
+            NavigationLink("Buscar emisoras") {
+                NativeRadioResultsScreen(title: "Resultados", filter: filter)
+            }
+        }
+        .navigationTitle("Búsqueda avanzada")
+    }
+}
+
+private struct NativeRadioScreen: View {
+    @ObservedObject private var radio = NativeRadioPlayer.shared
+    @AppStorage("mi-musica-radio-favorites-v2") private var savedFavorites = ""
+
+    private var savedStations: [NativeRadioStation] {
+        guard let data = savedFavorites.data(using: .utf8) else { return [] }
+        return (try? JSONDecoder().decode([NativeRadioStation].self, from: data)) ?? []
     }
 
     var body: some View {
@@ -272,33 +441,24 @@ private struct NativeRadioScreen: View {
                 Button("Detener radio") { radio.stop() }
                     .disabled(radio.stationName.isEmpty)
             }
+            Section("Explorar emisoras") {
+                NavigationLink("Emisoras populares") {
+                    NativeRadioResultsScreen(title: "Emisoras populares", filter: NativeRadioFilter())
+                }
+                NavigationLink("Buscar por países") { NativeRadioCategoryScreen(category: .countries) }
+                NavigationLink("Buscar por idiomas") { NativeRadioCategoryScreen(category: .languages) }
+                NavigationLink("Buscar por estilos") { NativeRadioCategoryScreen(category: .genres) }
+                NavigationLink("Buscar por nombre") {
+                    NativeRadioResultsScreen(title: "Buscar emisoras", filter: NativeRadioFilter())
+                }
+                NavigationLink("Búsqueda avanzada") { NativeRadioAdvancedSearch() }
+            }
             if !savedStations.isEmpty {
                 Section("Emisoras favoritas") {
-                    ForEach(savedStations) { station in
-                        Button("Escuchar \(station.name)") {
-                            guard let url = station.urlResolved else { return }
-                            radio.play(name: station.name, url: url)
-                        }
-                        .accessibilityAction(named: Text("Quitar de favoritas")) { toggleFavorite(station) }
-                    }
+                    ForEach(savedStations) { station in NativeRadioStationRow(station: station) }
                 }
             }
-            Section("Emisoras") {
-                if directory.isSearching { ProgressView("Buscando emisoras") }
-                ForEach(directory.stations) { station in
-                    Button("Escuchar \(station.name)") {
-                        guard let url = station.urlResolved else { return }
-                        radio.play(name: station.name, url: url)
-                    }
-                    .accessibilityAction(named: Text(savedStations.contains(where: { $0.id == station.id })
-                        ? "Quitar de favoritas" : "Guardar favorita")) { toggleFavorite(station) }
-                }
-            }
-            if let error = directory.error ?? radio.error { Text(error) }
         }
         .navigationTitle("Radio musical gratuita")
-        .searchable(text: $query, prompt: "Buscar emisoras")
-        .onSubmit(of: .search) { Task { await directory.search(query) } }
-        .task { await directory.search("") }
     }
 }

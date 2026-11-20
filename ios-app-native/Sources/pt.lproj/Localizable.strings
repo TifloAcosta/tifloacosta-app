@@ -920,3 +920,10 @@
 "No se pudo importar la música: %@" = "Não foi possível importar a música: %@";
 "No se pudo acceder al contenido de la carpeta seleccionada" = "Não foi possível aceder ao conteúdo da pasta selecionada";
 "No se encontraron archivos musicales compatibles en esa carpeta" = "Não foram encontrados ficheiros de música compatíveis nessa pasta";
+"Cuenta" = "Conta";
+"Elegir archivos de Google Drive" = "Escolher ficheiros do Google Drive";
+"Desconectar Google Drive" = "Desligar Google Drive";
+"Google Drive todavía no está configurado en esta compilación." = "O Google Drive ainda não está configurado nesta versão.";
+"Archivos seleccionados" = "Ficheiros selecionados";
+"Selecciona archivos de audio en Google Drive para importarlos." = "Selecione ficheiros de áudio no Google Drive para importar.";
+"Google Drive" = "Google Drive";

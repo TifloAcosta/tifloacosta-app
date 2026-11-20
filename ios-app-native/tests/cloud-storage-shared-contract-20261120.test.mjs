@@ -18,7 +18,7 @@ test('remote files use only official HTTPS endpoints and bearer tokens stay in r
   }
   assert.ok(cloud.includes('setValue("Bearer \\(accessToken)"'));
   assert.doesNotMatch(cloud, /UserDefaults|print\(|NSLog\(/);
-  assert.match(cloud, /func download\(_ item: NativeCloudItem\) async throws -> URL/);
+  assert.match(cloud, /func download\(_ item: NativeCloudItem, allowsCellular: Bool = true\) async throws -> URL/);
   assert.match(cloud, /response\.url\?\.scheme == "https"/);
 });
 

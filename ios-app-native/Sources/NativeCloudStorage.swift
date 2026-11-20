@@ -231,7 +231,12 @@ final class NativeCloudStorage {
         let size = (try FileManager.default.attributesOfItem(atPath: temporary.path)[.size] as? NSNumber)?.int64Value ?? 0
         guard size > 0, size <= Self.maximumAudioBytes else { throw NativeCloudStorageError.oversized }
         let ext = (item.name as NSString).pathExtension.lowercased()
-        let destination = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString + "." + ext)
+        // Keep the title shown in the user's library; isolate the remote filename
+        // under an unpredictable local directory rather than trusting its path.
+        let folder = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString, isDirectory: true)
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        let destination = folder.appendingPathComponent((item.name as NSString).lastPathComponent)
         try FileManager.default.moveItem(at: temporary, to: destination)
         return destination
     }

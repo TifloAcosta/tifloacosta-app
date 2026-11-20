@@ -27,7 +27,10 @@ private struct ArchiveItemMetadata: Decodable {
         var playable: Bool {
             guard privateFile != "true" else { return false }
             let lower = name.lowercased()
-            return lower.hasSuffix(".mp3") || lower.hasSuffix(".m4a")
+            // Se muestran formatos candidatos que el sistema puede abrir sin códecs
+            // adicionales. AVPlayer decidirá la compatibilidad real de cada archivo.
+            return ["mp3", "m4a", "aac", "wav", "aif", "aiff", "caf", "flac"]
+                .contains { lower.hasSuffix("." + $0) }
         }
     }
     let files: [AudioFile]?

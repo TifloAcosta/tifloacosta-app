@@ -999,6 +999,11 @@ struct NativeMyMusicScreen: View {
                         library.importFiles([file])
                     }
                 }
+                NavigationLink("Dropbox") {
+                    NativeCloudFolderBrowserScreen(provider: .dropbox) { file in
+                        library.importFiles([file])
+                    }
+                }
                 NavigationLink("Ajustes de Mi Música") { musicSettings }
                 NavigationLink("Plataformas musicales") {
                     NativeMusicPlatformsScreen(playlists: library.playlists.map {

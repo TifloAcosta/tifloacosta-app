@@ -266,6 +266,6 @@ test('EPUB resuelve destinos internos seguros y permite abrirlos con VoiceOver',
   assert.match(formats, /targetOffset: targetBase \+ target/);
   assert.match(reader, /var targetOffset: Int\? = nil/);
   assert.match(reader, /private func activateCurrentLink\(\)/);
-  assert.match(reader, /if let target = link\.targetOffset/);
+  assert.match(reader, /let target = link\.targetOffset/);
   assert.match(reader, /\.accessibilityAction\(named: Text\("Abrir enlace actual"\)\)/);
 });

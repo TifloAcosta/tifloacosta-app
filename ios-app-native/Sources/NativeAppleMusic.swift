@@ -185,8 +185,19 @@ struct NativeAppleMusicScreen: View {
                 if music.canPlayCatalog {
                     Section("Resultados") {
                         ForEach(music.tracks) { song in
-                            Button("Escuchar \(song.title), \(song.artistName)") {
+                            Button("\(song.title), \(song.artistName)") {
                                 Task { await music.play(song) }
+                            }
+                            .accessibilityActions {
+                                Button("Reproducir") { Task { await music.play(song) } }
+                                if let addToPlaylist {
+                                    ForEach(playlists) { playlist in
+                                        Button("Añadir a \(playlist.name)") {
+                                            addToPlaylist("appleMusic", song.id.rawValue,
+                                                song.title, song.artistName, playlist.id)
+                                        }
+                                    }
+                                }
                             }
                             NativeMusicPlaylistMenu(playlists: playlists, provider: "appleMusic",
                                 songID: song.id.rawValue, title: song.title,

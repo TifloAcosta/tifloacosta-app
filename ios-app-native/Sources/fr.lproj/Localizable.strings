@@ -917,3 +917,6 @@
 "Reproducciones como mínimo" = "Nombre minimum d’écoutes";
 "Subir %@ en la lista" = "Monter %@ dans la liste";
 "Bajar %@ en la lista" = "Descendre %@ dans la liste";
+"No se pudo importar la música: %@" = "Impossible d’importer la musique : %@";
+"No se pudo acceder al contenido de la carpeta seleccionada" = "Impossible d’accéder au contenu du dossier sélectionné";
+"No se encontraron archivos musicales compatibles en esa carpeta" = "Aucun fichier musical compatible trouvé dans ce dossier";

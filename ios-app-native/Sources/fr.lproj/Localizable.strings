@@ -937,3 +937,14 @@
 "Volver a la carpeta anterior" = "Retour au dossier précédent";
 "No hay archivos en esta carpeta." = "Ce dossier ne contient aucun fichier.";
 "Cargar más archivos" = "Charger plus de fichiers";
+"Solo Wi-Fi" = "Wi-Fi uniquement";
+"Wi-Fi y datos móviles" = "Wi-Fi et données mobiles";
+"Información de VoiceOver" = "Informations VoiceOver";
+"Nivel" = "Niveau";
+"Detallada" = "Détaillée";
+"Descarga con datos móviles" = "Téléchargement via données mobiles";
+"Usar datos una vez" = "Utiliser les données une fois";
+"La descarga está limitada a Wi-Fi. Puedes autorizar solo este archivo con datos móviles." = "Les téléchargements sont limités au Wi-Fi. Vous pouvez autoriser les données mobiles pour ce fichier uniquement.";
+"No hay una conexión permitida para descargar este archivo." = "Aucune connexion autorisée pour télécharger ce fichier.";
+"La reproducción necesita una conexión permitida. Puedes cambiarla en Ajustes, Conexión." = "La lecture nécessite une connexion autorisée. Modifiez-la dans Réglages, Connexion.";
+"La reproducción por Internet está limitada por tu ajuste de Conexión." = "La lecture en ligne est limitée par votre réglage Connexion.";

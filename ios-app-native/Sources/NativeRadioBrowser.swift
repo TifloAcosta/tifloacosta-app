@@ -273,6 +273,7 @@ struct NativeMusicPlatformsScreen: View {
             NavigationLink("Conciertos y grabaciones") {
                 NativeInternetArchiveScreen()
             }
+            Link("Radio gratuita de Apple Music", destination: URL(string: "https://music.apple.com/es/radio")!)
             if Bundle.main.object(forInfoDictionaryKey: "TifloAppleMusicEnabled") as? Bool == true {
                 NavigationLink("Apple Music") {
                     NativeAppleMusicScreen(playlists: playlists, addToPlaylist: addToPlaylist)

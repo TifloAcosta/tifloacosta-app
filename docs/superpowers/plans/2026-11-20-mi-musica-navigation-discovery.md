@@ -94,3 +94,21 @@
 - [ ] Run `node --test ios-app-native/tests/*.test.mjs` and examine failures.
 - [ ] Run `ios-native-testflight-upload.yml` on `feature/mi-musica` only once code/tests are ready; inspect full build and Apple verification steps. This workflow is the Xcode compilation gate.
 - [ ] Report the precise run/build and TestFlight status; never claim availability before confirmation.
+
+### Task 6: Internet Archive — recordings and concerts
+
+**Files:**
+- Create: `ios-app-native/Sources/NativeInternetArchiveMusic.swift`
+- Modify: `ios-app-native/Sources/NativeRadioBrowser.swift` (platform navigation)
+- Test: `ios-app-native/tests/music-internet-archive.test.mjs`
+
+**Interfaces:**
+- Produces: `NativeInternetArchiveScreen` with featured Live Music Archive recordings, artist/title search and selected-item audio tracks.
+
+- [ ] Write failing tests for public search and metadata URL construction, safe HTTPS audio selection, empty results, and no unlicensed download action; verify red.
+- [ ] Implement read-only browsing using Internet Archive's public search and metadata APIs, prioritizing the Live Music Archive. Display rights/source metadata where available, open original item's rights details, and permit streaming only for publicly accessible playable files.
+- [ ] Add an accessible platform entry without requiring user signup or developer credentials; retain previous providers untouched.
+- [ ] Run targeted and full Node suites; test the signed iOS build through the existing native workflow before TestFlight.
+- [ ] Commit after verification.
+
+**Deferred candidates:** Radio Paradise requires checking third-party embedding terms; Mixcloud uses an embedded player and needs VoiceOver evaluation; SoundCloud needs approved API credentials. Spotify, Amazon and Deezer remain outside this phase due provider restrictions.

@@ -1,4 +1,5 @@
 import SwiftUI
+import Vision
 import AVFoundation
 import UIKit
 
@@ -66,6 +67,23 @@ struct NativeReaderWordToolsScreen: View {
 struct NativeReaderOCRSettingsScreen: View {
     @AppStorage("native-reader-ocr-language-index") private var languageIndex = 0
     @AppStorage("native-reader-ocr-accuracy-index") private var accuracyIndex = 0
+    @State private var supportedLanguagesDescription = ""
+
+    private func refreshSupportedLanguages() {
+        let request = VNRecognizeTextRequest()
+        request.recognitionLevel = accuracyIndex == 1 ? .fast : .accurate
+        do {
+            let codes = try request.supportedRecognitionLanguages()
+            let spanish = Locale(identifier: "es_ES")
+            let names = Set(codes.map { code in
+                spanish.localizedString(forLanguageCode: String(code.prefix(2))) ?? code
+            })
+            supportedLanguagesDescription = names.sorted().joined(separator: ", ")
+        } catch {
+            supportedLanguagesDescription = "No se pudo consultar la lista de idiomas."
+        }
+    }
+
     var body: some View {
         List {
             Section("Reconocimiento de texto") {
@@ -80,6 +98,9 @@ struct NativeReaderOCRSettingsScreen: View {
                     choices: ["Mayor precisión", "Más rápido"],
                     selectedIndex: $accuracyIndex
                 )
+                if !supportedLanguagesDescription.isEmpty {
+                    Text("Idiomas admitidos por el dispositivo: \(supportedLanguagesDescription)")
+                }
             }
             Section {
                 Text("Se aplica a las imágenes y a las páginas escaneadas de PDF que se importen desde ahora. Las páginas que ya contienen texto lo conservan. Los ajustes son permanentes hasta que se cambien.")
@@ -88,5 +109,7 @@ struct NativeReaderOCRSettingsScreen: View {
         .tifloScreenSurface()
         .navigationTitle("OCR y reconocimiento")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear { refreshSupportedLanguages() }
+        .onChange(of: accuracyIndex) { _, _ in refreshSupportedLanguages() }
     }
 }

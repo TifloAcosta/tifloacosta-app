@@ -1,0 +1,67 @@
+name: TifloAcosta 1.6 - solicitar revision App Store
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ios-review-submit-500200.yml']
+permissions:
+  contents: read
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+      API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+      API_PRIVATE: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+    steps:
+      - name: Presentar exclusivamente TifloAcosta iOS 1.6 compilacion 500200
+        run: |
+          node --input-type=module <<'NODE'
+          import crypto from 'node:crypto';
+          const enc=x=>Buffer.from(JSON.stringify(x)).toString('base64url');
+          let key=process.env.API_PRIVATE.trim().replace(/\\r\\n/g,'\n').replace(/\\n/g,'\n');
+          if(!key.includes('-----BEGIN'))key=Buffer.from(key,'base64').toString('utf8');
+          const now=Math.floor(Date.now()/1000),base=enc({alg:'ES256',kid:process.env.API_ID,typ:'JWT'})+'.'+enc({iss:process.env.API_ISSUER,iat:now,exp:now+600,aud:'appstoreconnect-v1'});
+          const token=base+'.'+crypto.sign('sha256',Buffer.from(base),{key,dsaEncoding:'ieee-p1363'}).toString('base64url');
+          async function api(path,method='GET',body){
+            const r=await fetch('https://api.appstoreconnect.apple.com/v1/'+path,{method,headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},...(body?{body:JSON.stringify(body)}:{})});
+            const txt=await r.text();const j=txt?JSON.parse(txt):{};
+            if(!r.ok)throw Error(method+' '+path.split('?')[0]+' HTTP '+r.status+' '+JSON.stringify(j.errors||[]).slice(0,1400));
+            return j;
+          }
+          const apps=await api('apps?filter%5BbundleId%5D=com.tifloacosta.app&limit=20');
+          const app=apps.data.find(v=>v.attributes?.bundleId==='com.tifloacosta.app');
+          if(!app)throw Error('TifloAcosta no encontrada');
+          const builds=await api('builds?filter%5Bapp%5D='+app.id+'&filter%5Bversion%5D=500200&limit=100');
+          const build=builds.data.find(v=>v.attributes?.version==='500200'&&v.attributes?.processingState==='VALID'&&!v.attributes?.expired);
+          if(!build)throw Error('La compilacion 500200 no esta valida');
+          const vrs=await api('apps/'+app.id+'/appStoreVersions?filter%5Bplatform%5D=IOS&limit=100');
+          let version=vrs.data.find(v=>v.attributes?.versionString==='1.6');
+          if(!version){
+            const res=await api('appStoreVersions','POST',{data:{type:'appStoreVersions',attributes:{platform:'IOS',versionString:'1.6',releaseType:'AFTER_APPROVAL'},relationships:{app:{data:{type:'apps',id:app.id}}}}});
+            version=res.data;console.log('VERSION_CREADA='+version.id);
+          }
+          const attached=await api('appStoreVersions/'+version.id+'/relationships/build');
+          if(attached.data?.id!==build.id){
+            if(version.attributes?.appVersionState!=='PREPARE_FOR_SUBMISSION')throw Error('No se puede alterar la compilacion de la version');
+            await api('appStoreVersions/'+version.id+'/relationships/build','PATCH',{data:{type:'builds',id:build.id}});
+            console.log('COMPILACION_ASOCIADA=500200');
+          }
+          const submissions=await api('apps/'+app.id+'/reviewSubmissions?limit=100');
+          let sub=submissions.data.find(s=>s.attributes?.platform==='IOS'&&!['COMPLETE','CANCELED'].includes(s.attributes?.state));
+          if(sub){
+            const existing=await api('reviewSubmissions/'+sub.id+'/items?limit=100');
+            if(existing.data.some(i=>i.relationships?.appStoreVersion?.data?.id!==version.id))throw Error('Revision existente con elementos ajenos');
+            if(sub.attributes?.state!=='READY_FOR_REVIEW')throw Error('Revision existente en estado '+sub.attributes?.state);
+          }else{
+            sub=(await api('reviewSubmissions','POST',{data:{type:'reviewSubmissions',attributes:{platform:'IOS'},relationships:{app:{data:{type:'apps',id:app.id}}}}})).data;
+            console.log('REVISION_CREADA='+sub.id);
+          }
+          const items=await api('reviewSubmissions/'+sub.id+'/items?limit=100');
+          if(!items.data.some(i=>i.relationships?.appStoreVersion?.data?.id===version.id)){
+            await api('reviewSubmissionItems','POST',{data:{type:'reviewSubmissionItems',relationships:{reviewSubmission:{data:{type:'reviewSubmissions',id:sub.id}},appStoreVersion:{data:{type:'appStoreVersions',id:version.id}}}}});
+            console.log('VERSION_ANADIDA='+version.id);
+          }
+          const sent=await api('reviewSubmissions/'+sub.id,'PATCH',{data:{type:'reviewSubmissions',id:sub.id,attributes:{submitted:true}}});
+          console.log('REVISION_PRESENTADA='+JSON.stringify({id:sent.data.id,state:sent.data.attributes?.state,submittedDate:sent.data.attributes?.submittedDate,version:'1.6',build:'500200'}));
+          NODE

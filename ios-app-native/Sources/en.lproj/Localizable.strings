@@ -1047,3 +1047,11 @@
 "Buscar por nombre" = "Search by name";
 "%@, artista %@, álbum %@, disponible sin conexión" = "%@, artist %@, album %@, available offline";
 "Lectura braille continua activada" = "Continuous braille reading enabled";
+
+"¿Dónde guardar el audio?" = "Where should the audio be saved?";
+"Mi música" = "My Music";
+"Selecciona dónde importar el archivo de audio." = "Choose where to import the audio file.";
+"Elegir destino del audio" = "Choose audio destination";
+"Importar en Mi música" = "Import into My Music";
+"Elige TifloLector o Mi música." = "Choose TifloLector or My Music.";
+"Importa el audio en Mi música." = "Import the audio into My Music.";

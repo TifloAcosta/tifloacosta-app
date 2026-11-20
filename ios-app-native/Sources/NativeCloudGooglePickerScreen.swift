@@ -46,7 +46,7 @@ struct NativeCloudGooglePickerScreen: View {
                             requestImport(item)
                         }
                         .disabled(loading || importingID != nil)
-                        .accessibilityLabel("Importar \(item.name) desde Google Drive")
+                        .accessibilityLabel(MusicLocalized.format("Importar %@ desde Google Drive", item.name))
                     }
                 }
             }

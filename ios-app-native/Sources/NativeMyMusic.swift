@@ -831,11 +831,10 @@ struct NativeMyMusicScreen: View {
                     choices: ["Desactivada", "Cada 7 días", "Cada 30 días"],
                     selectedIndex: automaticBackupChoice
                 )
-                Text("Destino de copias")
                 if library.automaticBackupDestinationName == "Carpeta interna de Mi Música" {
-                    Text("Carpeta interna de Mi Música")
+                    Text("Destino de copias: Carpeta interna de Mi Música")
                 } else {
-                    Text(library.automaticBackupDestinationName)
+                    Text(MusicLocalized.format("Destino de copias: %@", library.automaticBackupDestinationName))
                 }
                 Button("Elegir destino de copias automáticas") {
                     selectingBackupDestination = true
@@ -912,8 +911,8 @@ struct NativeMyMusicScreen: View {
                                 )
                             }
                             .accessibilityLabel(detailedVoiceOver ?
-                                "Reproducir \(file.name), \(file.artist ?? "artista no indicado"), \(file.album ?? "álbum no indicado"), disponible sin conexión" :
-                                "Reproducir \(file.name)")
+                                MusicLocalized.format("Reproducir %@, artista %@, álbum %@, disponible sin conexión", file.name, file.artist ?? MusicLocalized.format("No indicado"), file.album ?? MusicLocalized.format("No indicado")) :
+                                MusicLocalized.format("Reproducir %@", file.name))
                             Spacer()
                             Menu("Acciones de \(file.name)") {
                                 Button("Editar género") {
@@ -949,8 +948,8 @@ struct NativeMyMusicScreen: View {
                     HStack {
                         Text("\(folder.name), \(folder.trackIds.count) canciones")
                             .accessibilityLabel(detailedVoiceOver ?
-                                "\(folder.name), carpeta, \(folder.trackIds.count) canciones, guardadas en el iPhone" :
-                                "\(folder.name), \(folder.trackIds.count) canciones")
+                                MusicLocalized.format("%@, carpeta, %d canciones, guardadas en el iPhone", folder.name, folder.trackIds.count) :
+                                MusicLocalized.format("%@, %d canciones", folder.name, folder.trackIds.count))
                         Spacer()
                         Button("Eliminar carpeta \(folder.name)") { library.removeFolder(folder.id) }
                             .accessibilityHint("Solo elimina esta carpeta virtual; las canciones se conservan.")
@@ -1055,7 +1054,7 @@ struct NativeMyMusicScreen: View {
                         library.importFiles([file])
                     }, allowCellularDownloads: allowCellularDownloads)
                 }
-                NavigationLink("Ajustes de Mi Música") { musicSettings }
+                NavigationLink("Ajustes") { musicSettings }
                 NavigationLink("Plataformas musicales") {
                     NativeMusicPlatformsScreen(playlists: library.playlists.map {
                         MusicPlaylistDestination(id: $0.id, name: $0.name)

@@ -57,7 +57,7 @@ struct NativeCloudFolderBrowserScreen: View {
                         } else {
                             Button("Importar \(item.name)") { requestImport(item) }
                                 .disabled(busy || importingID != nil)
-                                .accessibilityLabel("Importar \(item.name) desde \(provider.title)")
+                                .accessibilityLabel(MusicLocalized.format("Importar %@ desde %@", item.name, provider.title))
                         }
                     }
                     if nextCursor != nil {
@@ -111,7 +111,7 @@ struct NativeCloudFolderBrowserScreen: View {
             folderID = id
             items = page.items
             nextCursor = page.nextCursor
-            UIAccessibility.post(notification: .announcement, argument: "\(items.count) elementos")
+            UIAccessibility.post(notification: .announcement, argument: MusicLocalized.format("%d elementos", items.count))
         } catch {
             self.error = error.localizedDescription
         }
@@ -152,7 +152,7 @@ struct NativeCloudFolderBrowserScreen: View {
             let storage = try NativeCloudStorage(provider: provider, accessToken: token)
             let file = try await storage.download(item, allowsCellular: allowCellular)
             onImport(file)
-            UIAccessibility.post(notification: .announcement, argument: "Importado \(item.name)")
+            UIAccessibility.post(notification: .announcement, argument: MusicLocalized.format("Importado %@", item.name))
         } catch {
             self.error = error.localizedDescription
         }

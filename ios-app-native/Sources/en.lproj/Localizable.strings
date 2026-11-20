@@ -948,5 +948,16 @@
 "Usar datos una vez" = "Use cellular data once";
 "La descarga está limitada a Wi-Fi. Puedes autorizar solo este archivo con datos móviles." = "Downloads are limited to Wi-Fi. You can allow cellular data for this file only.";
 "No hay una conexión permitida para descargar este archivo." = "No permitted connection is available to download this file.";
+"Destino de copias: Carpeta interna de Mi Música" = "Backup destination: My Music internal folder";
+"Destino de copias: %@" = "Backup destination: %@";
+"No indicado" = "Not specified";
+"Reproducir %@, artista %@, álbum %@, disponible sin conexión" = "Play %@, artist %@, album %@, available offline";
+"Reproducir %@" = "Play %@";
+"%@, carpeta, %d canciones, guardadas en el iPhone" = "%@, folder, %d songs, saved on iPhone";
+"%@, %d canciones" = "%@, %d songs";
+"Importar %@ desde %@" = "Import %@ from %@";
+"Importar %@ desde Google Drive" = "Import %@ from Google Drive";
+"%d elementos" = "%d items";
+"Importado %@" = "Imported %@";
 "La reproducción necesita una conexión permitida. Puedes cambiarla en Ajustes, Conexión." = "Playback needs an allowed connection. Change this in Settings, Connection.";
 "La reproducción por Internet está limitada por tu ajuste de Conexión." = "Online playback is restricted by your Connection setting.";

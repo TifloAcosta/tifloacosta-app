@@ -157,11 +157,7 @@ struct NativeMediaScreen: View {
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
-            if formatIndex == 0 && query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                Text("Selecciona Podcasts o Canales de YouTube para consultar los contenidos. También puedes escribir una búsqueda.")
-                    .foregroundStyle(TifloVisual.secondaryText)
-                    .listRowBackground(TifloVisual.surfaceRaised)
-            } else {
+            if formatIndex != 0 || !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 Section("Filtrar contenidos") {
                     NativeAdjustableChoice(
                         title: "Fuente o canal",

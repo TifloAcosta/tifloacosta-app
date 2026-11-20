@@ -948,3 +948,14 @@
 "No hay una conexión permitida para descargar este archivo." = "Não há ligação permitida para transferir este ficheiro.";
 "La reproducción necesita una conexión permitida. Puedes cambiarla en Ajustes, Conexión." = "A reprodução necessita de uma ligação permitida. Altere-a em Definições, Ligação.";
 "La reproducción por Internet está limitada por tu ajuste de Conexión." = "A reprodução online está limitada pela definição de Ligação.";
+"Destino de copias: Carpeta interna de Mi Música" = "Destino das cópias: pasta interna A minha música";
+"Destino de copias: %@" = "Destino das cópias: %@";
+"No indicado" = "Não indicado";
+"Reproducir %@, artista %@, álbum %@, disponible sin conexión" = "Reproduzir %@, artista %@, álbum %@, disponível offline";
+"Reproducir %@" = "Reproduzir %@";
+"%@, carpeta, %d canciones, guardadas en el iPhone" = "%@, pasta, %d músicas, guardadas no iPhone";
+"%@, %d canciones" = "%@, %d músicas";
+"Importar %@ desde %@" = "Importar %@ de %@";
+"Importar %@ desde Google Drive" = "Importar %@ do Google Drive";
+"%d elementos" = "%d itens";
+"Importado %@" = "%@ importado";

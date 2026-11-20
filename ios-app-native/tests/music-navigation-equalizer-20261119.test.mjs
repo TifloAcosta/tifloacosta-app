@@ -8,7 +8,7 @@ test('Mi Música shows playable content first, then organization and settings co
   const body = music.slice(music.indexOf('    var body: some View {', music.indexOf('struct NativeMyMusicScreen')), music.indexOf('.navigationTitle("Mi Música")'));
   assert.ok(body.indexOf('Section("Reproductor")') < body.indexOf('Section("Mi biblioteca")'));
   assert.ok(body.indexOf('Section("Mi biblioteca")') < body.indexOf('Menu("Organizar mi música")'));
-  assert.match(body, /NavigationLink\("Ajustes de Mi Música"\)/);
+  assert.match(body, /NavigationLink\("Ajustes"\)/);
   assert.match(body, /NavigationLink\("Plataformas musicales"\)/);
   assert.doesNotMatch(body, /Section\("Ecualizador"\)/);
   assert.doesNotMatch(body, /Section\("Copias de seguridad"\)/);

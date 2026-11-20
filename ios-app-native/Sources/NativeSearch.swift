@@ -134,11 +134,6 @@ struct NativeSearchResultsScreen: View {
                     }
                 }
             }
-            Section {
-                Text("Se busca en los recursos, noticias y vídeos del catálogo de TifloAcosta. La búsqueda en todo YouTube se incorporará con TifloReproductor.")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-            }
         }
         .tifloScreenSurface()
         .navigationTitle("Resultados de búsqueda")

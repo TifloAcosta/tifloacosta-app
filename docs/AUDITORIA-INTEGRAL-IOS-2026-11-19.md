@@ -125,3 +125,11 @@ No dar por concluida la compilación candidata ni ejecutar TestFlight hasta: (1)
 - Los nuevos textos de controles y criterios tienen traducciones en inglés, portugués, francés, italiano y alemán, además del español original.
 - Comprobaciones locales: **373 contratos iOS y 461 pruebas generales correctas**. Commit de código remoto `692938e3`; compilación Xcode para simulador de iPhone y validación de la extensión **correctas** en GitHub Actions `44636112209`. La captura visual auxiliar no forma parte de esta validación.
 - No se ha creado otra rama ni publicado compilación en TestFlight. Queda para la fase de validación probar con VoiceOver en iPhone los cambios de orden, las fechas, los respaldos restaurados y los filtros sobre archivos musicales reales.
+
+### Fase 2 de 6: destino y seguridad de los respaldos — 20/11/2026
+
+- La selección de destino y los respaldos manuales/completos ya existían antes de esta fase; la revisión detectó que cambiar la carpeta dejaba el destino nuevo sin una copia inicial hasta la siguiente fecha programada.
+- Al elegir una carpeta, ahora se escribe primero un índice actualizado y solo después se guarda el destino elegido y la fecha de la copia. Si falla la escritura, se conserva el destino previo y se comunica el error.
+- Al restablecer el destino interno también se crea primero su copia inicial y solo después se retira la configuración del destino anterior.
+- La programación de 7 o 30 días sigue siendo bajo demanda al abrir Mi música, sin afirmar que iOS ejecute respaldos en segundo plano. Las copias automáticas siguen siendo del índice, no del audio; para trasladar audio existe la copia completa manual.
+- Se añadieron dos pruebas para los cambios de carpeta y se mantienen los contratos de compatibilidad de las restauraciones. **375 contratos iOS correctos** en entorno local Linux. Compilación Swift en macOS y restauración funcional entre dispositivos todavía pendientes de comprobación.

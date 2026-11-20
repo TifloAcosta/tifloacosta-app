@@ -124,6 +124,7 @@ private struct NativeArchiveRecordingScreen: View {
                 }
             }
             if let error = tracks.error { Text(error) }
+            if let error = player.error { Text(error) }
             if let source = URL(string: "https://archive.org/details/\(recording.identifier)") {
                 Link("Información y derechos en Internet Archive", destination: source)
             }

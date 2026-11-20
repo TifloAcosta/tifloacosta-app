@@ -206,13 +206,13 @@ final class NativeCloudStorage {
     }
 
     /// A temporary file is returned; the consumer must explicitly import or discard it.
-    func download(_ item: NativeCloudItem) async throws -> URL {
+    func download(_ item: NativeCloudItem, allowsCellular: Bool = true) async throws -> URL {
         guard item.provider == provider, !item.isFolder,
               ["mp3", "m4a", "aac", "wav", "flac", "ogg"].contains((item.name as NSString).pathExtension.lowercased()) else {
             throw NativeCloudStorageError.unsupportedFile
         }
         if let size = item.size, size > Self.maximumAudioBytes { throw NativeCloudStorageError.oversized }
-        let request: URLRequest
+        var request: URLRequest
         switch provider {
         case .googleDrive:
             var parts = URLComponents(string: "https://www.googleapis.com/drive/v3/files/\(Self.encodedID(item.remoteId))")!
@@ -226,6 +226,8 @@ final class NativeCloudStorage {
         case .oneDrive:
             request = try authorized(URL(string: "https://graph.microsoft.com/v1.0/me/drive/items/\(Self.encodedID(item.remoteId))/content")!)
         }
+        // The OS must also enforce Wi-Fi-only if the route changes mid-transfer.
+        request.allowsCellularAccess = allowsCellular
         let (temporary, response) = try await session.download(for: request)
         _ = try validated(response, allowDownloadHost: provider == .oneDrive)
         let size = (try FileManager.default.attributesOfItem(atPath: temporary.path)[.size] as? NSNumber)?.int64Value ?? 0

@@ -1320,3 +1320,18 @@ struct NativeMyMusicScreen: View {
             }
     }
 }
+
+// Punto de entrada para los audios recibidos desde la extensión Compartir.
+// Mantiene privada la biblioteca y utiliza exactamente su importador habitual.
+@MainActor
+enum NativeMusicSharedAudio {
+    static func importFile(_ url: URL) throws {
+        let library = NativeMusicLibrary.shared
+        let previousCount = library.files.count
+        library.error = nil
+        library.importFiles([url])
+        guard library.files.count == previousCount + 1 else {
+            throw CocoaError(.fileReadUnknown)
+        }
+    }
+}

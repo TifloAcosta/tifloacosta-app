@@ -15,6 +15,7 @@ final class NativeCloudAccountStore: NSObject, ObservableObject {
     @Published private(set) var connected: Set<NativeCloudProvider> = []
     @Published private(set) var busy: Set<NativeCloudProvider> = []
     @Published private(set) var message: String?
+    @Published private(set) var pickedGoogleDriveIDs: [String] = []
 
     private struct Configuration {
         let clientID: String
@@ -154,6 +155,13 @@ final class NativeCloudAccountStore: NSObject, ObservableObject {
         ]
         if provider == .dropbox {
             url.queryItems?.append(URLQueryItem(name: "token_access_type", value: "offline"))
+        } else if provider == .googleDrive {
+            // Native Google Picker grants per-file access without broad Drive scopes.
+            url.queryItems?.append(contentsOf: [
+                URLQueryItem(name: "prompt", value: "consent"),
+                URLQueryItem(name: "trigger_onepick", value: "true"),
+                URLQueryItem(name: "access_type", value: "offline")
+            ])
         }
         guard let authorizationURL = url.url else { throw NativeCloudStorageError.invalidResponse }
         busy.insert(provider)
@@ -182,6 +190,25 @@ final class NativeCloudAccountStore: NSObject, ObservableObject {
               !code.isEmpty else { throw NativeCloudStorageError.unauthorized }
         let credential = try await exchange(code: code, verifier: verifier, configuration: configuration)
         try save(credential, for: provider)
+        if provider == .googleDrive {
+            let selected = response?.queryItems?.first(where: { $0.name == "picked_file_ids" })?.value ?? ""
+            pickedGoogleDriveIDs = Array(Set(selected.split(separator: ",").map(String.init)
+                .filter { !$0.isEmpty && $0.count <= 512 })).sorted()
+        }
+    }
+
+    /// Returns user-picked items for any caller (music, reader or later modules).
+    /// With drive.file, arbitrary root enumeration is intentionally unavailable.
+    func selectGoogleDriveFiles() async throws -> [NativeCloudItem] {
+        pickedGoogleDriveIDs = []
+        try await connect(provider: .googleDrive)
+        let token = try await validAccessToken(for: .googleDrive)
+        let transport = try NativeCloudStorage(provider: .googleDrive, accessToken: token)
+        var items: [NativeCloudItem] = []
+        for id in pickedGoogleDriveIDs.prefix(100) {
+            items.append(try await transport.googleDriveSelection(id: id))
+        }
+        return items
     }
 
     private func exchange(code: String, verifier: String, configuration: Configuration) async throws -> Credential {

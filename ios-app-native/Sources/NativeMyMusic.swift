@@ -1104,7 +1104,7 @@ struct NativeMyMusicScreen: View {
     }
 
     var body: some View {
-        List {
+        let list = List {
             musicPlayerSection
             musicLibrarySection
             musicAlbumsSection
@@ -1114,133 +1114,149 @@ struct NativeMyMusicScreen: View {
             musicSmartFoldersSection
             musicOrganizeSection
         }
-        .navigationTitle("Mi Música")
-        .onReceive(network.$path) { _ in stopOnlineIfConnectionIsRestricted() }
-        .onChange(of: allowCellularPlayback) { _, _ in stopOnlineIfConnectionIsRestricted() }
-        .alert("Conexión", isPresented: Binding(
-            get: { connectionWarning != nil }, set: { if !$0 { connectionWarning = nil } }
-        )) { Button("Aceptar") { connectionWarning = nil } } message: { Text(connectionWarning ?? "") }
-        .searchable(text: $searchText, prompt: "Buscar canciones")
-        .alert("Crear carpeta", isPresented: $showingFolderEditor) {
-            TextField("Nombre de la carpeta", text: $newFolderName)
-            Button("Crear") { library.addFolder(newFolderName); newFolderName = "" }
-            Button("Cancelar", role: .cancel) { newFolderName = "" }
-        } message: {
-            Text("La carpeta será virtual y no modificará tus archivos originales.")
-        }
-        .alert("Crear lista de reproducción", isPresented: $showingPlaylistEditor) {
-            TextField("Nombre de la lista", text: $newPlaylistName)
-            Button("Crear") { library.addPlaylist(newPlaylistName); newPlaylistName = "" }
-            Button("Cancelar", role: .cancel) { newPlaylistName = "" }
-        } message: { Text("Puedes añadir canciones desde el menú Acciones de cada canción.") }
-        .sheet(isPresented: $showingSmartFolderEditor) {
-            NavigationStack {
-                Form {
-                    TextField("Nombre de la carpeta", text: $newSmartFolderName)
-                    Picker("Criterio de carpeta inteligente", selection: $selectedSmartRule) {
-                        ForEach(MusicSmartRuleKind.allCases) { rule in
-                            Text(LocalizedStringKey(rule.label)).tag(rule)
+
+        let searchableList = list
+            .navigationTitle("Mi Música")
+            .onReceive(network.$path) { _ in stopOnlineIfConnectionIsRestricted() }
+            .onChange(of: allowCellularPlayback) { _, _ in stopOnlineIfConnectionIsRestricted() }
+            .alert("Conexión", isPresented: Binding(
+                get: { connectionWarning != nil }, set: { if !$0 { connectionWarning = nil } }
+            )) { Button("Aceptar") { connectionWarning = nil } } message: { Text(connectionWarning ?? "") }
+            .searchable(text: $searchText, prompt: "Buscar canciones")
+
+        let folderAlerts = searchableList
+            .alert("Crear carpeta", isPresented: $showingFolderEditor) {
+                TextField("Nombre de la carpeta", text: $newFolderName)
+                Button("Crear") { library.addFolder(newFolderName); newFolderName = "" }
+                Button("Cancelar", role: .cancel) { newFolderName = "" }
+            } message: {
+                Text("La carpeta será virtual y no modificará tus archivos originales.")
+            }
+            .alert("Crear lista de reproducción", isPresented: $showingPlaylistEditor) {
+                TextField("Nombre de la lista", text: $newPlaylistName)
+                Button("Crear") { library.addPlaylist(newPlaylistName); newPlaylistName = "" }
+                Button("Cancelar", role: .cancel) { newPlaylistName = "" }
+            } message: { Text("Puedes añadir canciones desde el menú Acciones de cada canción.") }
+
+        let smartFolderSheet = folderAlerts
+            .sheet(isPresented: $showingSmartFolderEditor) {
+                NavigationStack {
+                    Form {
+                        TextField("Nombre de la carpeta", text: $newSmartFolderName)
+                        Picker("Criterio de carpeta inteligente", selection: $selectedSmartRule) {
+                            ForEach(MusicSmartRuleKind.allCases) { rule in
+                                Text(LocalizedStringKey(rule.label)).tag(rule)
+                            }
+                        }
+                        TextField("Valor del criterio", text: $newSmartFolderKeyword)
+                        Text("Para fecha, escribe AAAA-MM-DD. Para reproducciones, escribe el número mínimo.")
+                        Text("Su contenido se actualiza automáticamente al añadir o retirar canciones.")
+                    }
+                    .navigationTitle("Crear carpeta inteligente")
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Cancelar") { showingSmartFolderEditor = false }
+                        }
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("Crear") {
+                                library.addSmartFolder(newSmartFolderName, titleContains: newSmartFolderKeyword, rule: selectedSmartRule)
+                                newSmartFolderName = ""
+                                newSmartFolderKeyword = ""
+                                selectedSmartRule = .title
+                                showingSmartFolderEditor = false
+                            }
+                            .disabled(newSmartFolderName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ||
+                                newSmartFolderKeyword.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                         }
                     }
-                    TextField("Valor del criterio", text: $newSmartFolderKeyword)
-                    Text("Para fecha, escribe AAAA-MM-DD. Para reproducciones, escribe el número mínimo.")
-                    Text("Su contenido se actualiza automáticamente al añadir o retirar canciones.")
-                }
-                .navigationTitle("Crear carpeta inteligente")
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancelar") { showingSmartFolderEditor = false }
-                    }
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button("Crear") {
-                            library.addSmartFolder(newSmartFolderName, titleContains: newSmartFolderKeyword, rule: selectedSmartRule)
-                            newSmartFolderName = ""
-                            newSmartFolderKeyword = ""
-                            selectedSmartRule = .title
-                            showingSmartFolderEditor = false
-                        }
-                        .disabled(newSmartFolderName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ||
-                            newSmartFolderKeyword.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-                    }
                 }
             }
-        }
-        .alert("Editar género", isPresented: Binding(
-            get: { editingGenreFile != nil },
-            set: { if !$0 { editingGenreFile = nil } }
-        )) {
-            TextField("Género musical", text: $editingGenreValue)
-            Button("Guardar") {
-                if let file = editingGenreFile { library.updateGenre(file.id, genre: editingGenreValue) }
-                editingGenreFile = nil
+
+        let libraryActions = smartFolderSheet
+            .alert("Editar género", isPresented: Binding(
+                get: { editingGenreFile != nil },
+                set: { if !$0 { editingGenreFile = nil } }
+            )) {
+                TextField("Género musical", text: $editingGenreValue)
+                Button("Guardar") {
+                    if let file = editingGenreFile { library.updateGenre(file.id, genre: editingGenreValue) }
+                    editingGenreFile = nil
+                }
+                Button("Cancelar", role: .cancel) { editingGenreFile = nil }
+            } message: {
+                Text("Este género solo se guardará en tu biblioteca y no modificará el archivo original.")
             }
-            Button("Cancelar", role: .cancel) { editingGenreFile = nil }
-        } message: {
-            Text("Este género solo se guardará en tu biblioteca y no modificará el archivo original.")
-        }
-        .confirmationDialog("Eliminar de la biblioteca", isPresented: Binding(
-            get: { pendingRemoval != nil },
-            set: { if !$0 { pendingRemoval = nil } }
-        )) {
-            Button("Eliminar de la biblioteca", role: .destructive) {
-                if let file = pendingRemoval { library.removeFromLibrary(file.id) }
-                pendingRemoval = nil
+            .confirmationDialog("Eliminar de la biblioteca", isPresented: Binding(
+                get: { pendingRemoval != nil },
+                set: { if !$0 { pendingRemoval = nil } }
+            )) {
+                Button("Eliminar de la biblioteca", role: .destructive) {
+                    if let file = pendingRemoval { library.removeFromLibrary(file.id) }
+                    pendingRemoval = nil
+                }
+            } message: {
+                Text("La canción dejará de aparecer en Mi Música, pero no se borrará el archivo original.")
             }
-        } message: {
-            Text("La canción dejará de aparecer en Mi Música, pero no se borrará el archivo original.")
-        }
-        .fileImporter(isPresented: $isImporting, allowedContentTypes: [.audio], allowsMultipleSelection: true) { result in
-            switch result {
-            case .success(let urls): library.importFiles(urls)
-            case .failure(let error): library.error = error.localizedDescription
+
+        let musicImports = libraryActions
+            .fileImporter(isPresented: $isImporting, allowedContentTypes: [.audio], allowsMultipleSelection: true) { result in
+                switch result {
+                case .success(let urls): library.importFiles(urls)
+                case .failure(let error): library.error = error.localizedDescription
+                }
             }
-        }
-        .fileImporter(isPresented: $isImportingFolder, allowedContentTypes: [.folder]) { result in
-            switch result {
-            case .success(let url): library.importFolder(url)
-            case .failure(let failure): library.error = failure.localizedDescription
+            .fileImporter(isPresented: $isImportingFolder, allowedContentTypes: [.folder]) { result in
+                switch result {
+                case .success(let url): library.importFolder(url)
+                case .failure(let failure): library.error = failure.localizedDescription
+                }
             }
-        }
-        .fileImporter(isPresented: $selectingBackupDestination, allowedContentTypes: [.folder]) { result in
-            switch result {
-            case .success(let url): library.chooseAutomaticBackupDestination(url)
-            case .failure(let failure): library.error = failure.localizedDescription
+
+        let backupActions = musicImports
+            .fileImporter(isPresented: $selectingBackupDestination, allowedContentTypes: [.folder]) { result in
+                switch result {
+                case .success(let url): library.chooseAutomaticBackupDestination(url)
+                case .failure(let failure): library.error = failure.localizedDescription
+                }
             }
-        }
-        .fileExporter(isPresented: $exportingBackup, document: backupDocument, contentType: .json, defaultFilename: "MiMusica-respaldo") { result in
-            if case .failure(let failure) = result { library.error = failure.localizedDescription }
-        }
-        .fileImporter(isPresented: $importingBackup, allowedContentTypes: [.json]) { result in
-            switch result {
-            case .success(let url): library.restoreIndex(url)
-            case .failure(let failure): library.error = failure.localizedDescription
+            .fileExporter(isPresented: $exportingBackup, document: backupDocument, contentType: .json, defaultFilename: "MiMusica-respaldo") { result in
+                if case .failure(let failure) = result { library.error = failure.localizedDescription }
             }
-        }
-        .sheet(item: Binding(
-            get: { completeArchiveURL.map { MusicArchiveSelection(url: $0) } },
-            set: { if $0 == nil { completeArchiveURL = nil } }
-        )) { selection in MusicArchiveShareSheet(archiveURL: selection.url) }
-        .fileImporter(isPresented: $importingCompleteBackup, allowedContentTypes: [.zip]) { result in
-            switch result {
-            case .success(let url): library.restoreCompleteArchive(url)
-            case .failure(let failure): library.error = failure.localizedDescription
+            .fileImporter(isPresented: $importingBackup, allowedContentTypes: [.json]) { result in
+                switch result {
+                case .success(let url): library.restoreIndex(url)
+                case .failure(let failure): library.error = failure.localizedDescription
+                }
             }
-        }
-        .alert("Importación de música", isPresented: Binding(
-            get: { library.error != nil },
-            set: { if !$0 { library.error = nil } }
-        )) {
-            Button("Aceptar") { library.error = nil }
-        } message: {
-            Text(library.error ?? "")
-        }
-        .alert("Reproducción de música", isPresented: Binding(
-            get: { player.error != nil },
-            set: { if !$0 { player.error = nil } }
-        )) {
-            Button("Aceptar") { player.error = nil }
-        } message: {
-            Text(player.error ?? "")
-        }
+
+        let archiveActions = backupActions
+            .sheet(item: Binding(
+                get: { completeArchiveURL.map { MusicArchiveSelection(url: $0) } },
+                set: { if $0 == nil { completeArchiveURL = nil } }
+            )) { selection in MusicArchiveShareSheet(archiveURL: selection.url) }
+            .fileImporter(isPresented: $importingCompleteBackup, allowedContentTypes: [.zip]) { result in
+                switch result {
+                case .success(let url): library.restoreCompleteArchive(url)
+                case .failure(let failure): library.error = failure.localizedDescription
+                }
+            }
+
+        return archiveActions
+            .alert("Importación de música", isPresented: Binding(
+                get: { library.error != nil },
+                set: { if !$0 { library.error = nil } }
+            )) {
+                Button("Aceptar") { library.error = nil }
+            } message: {
+                Text(library.error ?? "")
+            }
+            .alert("Reproducción de música", isPresented: Binding(
+                get: { player.error != nil },
+                set: { if !$0 { player.error = nil } }
+            )) {
+                Button("Aceptar") { player.error = nil }
+            } message: {
+                Text(player.error ?? "")
+            }
     }
 }

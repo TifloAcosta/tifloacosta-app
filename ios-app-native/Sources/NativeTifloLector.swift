@@ -3,6 +3,7 @@ import MediaPlayer
 import PDFKit
 import UIKit
 import AVFoundation
+import AVKit
 import Translation
 import UniformTypeIdentifiers
 import ZIPFoundation
@@ -1336,8 +1337,13 @@ struct NativeReaderLibraryScreen: View {
             }
             ForEach(items) { doc in
                 NavigationLink {
-                    NativeReadingScreen(document: doc, speech: speech)
-                        .onAppear { library.markOpened(doc) }
+                    if NativeReaderFormats.isVideo(doc) {
+                        NativeReaderVideoScreen(document: doc)
+                            .onAppear { library.markOpened(doc) }
+                    } else {
+                        NativeReadingScreen(document: doc, speech: speech)
+                            .onAppear { library.markOpened(doc) }
+                    }
                 } label: {
                     Text(documentRowLabel(doc))
                 }
@@ -1460,8 +1466,13 @@ struct NativeReaderLibraryScreen: View {
                             documentRowLabel(document)))
                     } else {
                     NavigationLink {
-                        NativeReadingScreen(document: document, speech: speech)
-                            .onAppear { library.markOpened(document) }
+                        if NativeReaderFormats.isVideo(document) {
+                            NativeReaderVideoScreen(document: document)
+                                .onAppear { library.markOpened(document) }
+                        } else {
+                            NativeReadingScreen(document: document, speech: speech)
+                                .onAppear { library.markOpened(document) }
+                        }
                     } label: { Text(documentRowLabel(document)) }
                     .accessibilityLabel(documentRowLabel(document))
                     .accessibilityActions {
@@ -2002,6 +2013,104 @@ private struct NativeReaderTextLayout {
             else { high = middle }
         }
         return max(0, low - 1)
+    }
+}
+
+// Reproductor local de vídeo con controles y decodificación exclusivos de Apple.
+// Se mantiene separado del TTS y del motor de audiolibros para no alterar DAISY.
+struct NativeReaderVideoScreen: View {
+    let document: NativeReadingDocument
+    @EnvironmentObject private var library: NativeReaderLibrary
+    @State private var player: AVPlayer?
+    @State private var isPlaying = false
+    @State private var error: String?
+    @State private var lastSavedSecond = -1
+
+    var body: some View {
+        VStack(spacing: 18) {
+            if let player {
+                VideoPlayer(player: player)
+                    .frame(minHeight: 240)
+                    .accessibilityLabel(document.title)
+                HStack {
+                    Button(isPlaying ? "Pausar" : "Reproducir") { togglePlayback() }
+                    Button("Retroceder diez segundos") { skip(seconds: -10) }
+                    Button("Avanzar diez segundos") { skip(seconds: 10) }
+                }
+                .buttonStyle(.bordered)
+            } else {
+                Text(error ?? "Vídeo no disponible.")
+            }
+            if let error { Text(error).foregroundStyle(.secondary) }
+        }
+        .padding()
+        .navigationTitle(document.title)
+        .onAppear { prepareVideo() }
+        .onDisappear {
+            savePosition()
+            player?.pause()
+            player = nil
+        }
+        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
+            guard let player else { return }
+            isPlaying = player.rate > 0
+            if player.currentItem?.status == .failed {
+                error = "No se pudo reproducir el vídeo con el reproductor de Apple."
+                isPlaying = false
+            }
+            let current = player.currentTime().seconds
+            if current.isFinite && Int(current) >= lastSavedSecond + 5 {
+                savePosition()
+            }
+        }
+        .accessibilityAction(.magicTap) { togglePlayback() }
+    }
+
+    private func prepareVideo() {
+        guard player == nil else { return }
+        guard let path = document.trackPaths?.first,
+              let url = NativeReaderFormats.storedURL(for: path) else {
+            error = "Vídeo no disponible."
+            return
+        }
+        let instance = AVPlayer(url: url)
+        player = instance
+        if let seconds = document.lastAudioSeconds, seconds.isFinite, seconds > 0 {
+            instance.seek(to: CMTime(seconds: seconds, preferredTimescale: 600))
+        }
+    }
+
+    private func togglePlayback() {
+        guard let player else { return }
+        if player.rate > 0 {
+            player.pause()
+            savePosition()
+            isPlaying = false
+        } else {
+            player.play()
+            isPlaying = true
+        }
+    }
+
+    private func skip(seconds: Double) {
+        guard let player else { return }
+        let current = player.currentTime().seconds
+        guard current.isFinite else { return }
+        let duration = player.currentItem?.duration.seconds ?? 0
+        let target = max(0, duration.isFinite && duration > 0
+            ? min(duration, current + seconds) : current + seconds)
+        player.seek(to: CMTime(seconds: target, preferredTimescale: 600))
+    }
+
+    private func savePosition() {
+        guard let player else { return }
+        let seconds = player.currentTime().seconds
+        guard seconds.isFinite, seconds >= 0 else { return }
+        let duration = player.currentItem?.duration.seconds ?? 0
+        let percent = duration.isFinite && duration > 0
+            ? Int(max(0, min(100, seconds / duration * 100))) : 0
+        library.saveAudioPosition(document, track: 0, percent: percent, seconds: seconds)
+        lastSavedSecond = Int(seconds)
     }
 }
 

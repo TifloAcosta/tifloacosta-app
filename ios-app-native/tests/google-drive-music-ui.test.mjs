@@ -10,7 +10,7 @@ test('Google Drive has an accessible selection entry in Mi música', () => {
   assert.match(music, /NativeCloudGooglePickerScreen/);
   assert.match(browser, /selectGoogleDriveFiles\(\)/);
   assert.match(browser, /accessibilityLabel/);
-  assert.match(browser, /download\(item\)/);
+  assert.match(browser, /download\(item, allowsCellular: allowCellular\)/);
 });
 
 test('downloaded audio retains its title and is imported through existing library', () => {

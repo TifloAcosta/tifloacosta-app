@@ -973,3 +973,17 @@
 "%d por ciento" = "%d por cento";
 "%@ de %@" = "%@ de %@";
 "%@, %@" = "%@, %@";
+"Esta noticia no contiene texto para guardar." = "Esta notícia não contém texto para guardar.";
+"Esta noticia no tiene texto para guardar." = "Esta notícia não tem texto para guardar.";
+"La noticia ya está guardada en TifloLector." = "Esta notícia já está guardada no TifloLector.";
+"Noticia guardada en TifloLector." = "Notícia guardada no TifloLector.";
+"No se pudo guardar la noticia: %@" = "Não foi possível guardar a notícia: %@";
+"No se pudo guardar: %@" = "Não foi possível guardar: %@";
+"Esta noticia no tiene un enlace original para compartir." = "Esta notícia não tem ligação original para partilhar.";
+"La fuente original no está disponible." = "A fonte original não está disponível.";
+"Noticia guardada para leer después." = "Notícia guardada para ler mais tarde.";
+"Noticia retirada de Leer después." = "Notícia removida de Ler mais tarde.";
+"Añadido a Favoritos" = "Adicionado aos favoritos";
+"Eliminado de Favoritos" = "Removido dos favoritos";
+"No hay enlace original para compartir." = "Não existe ligação original para partilhar.";
+"Eliminado de Favoritos: %@" = "Removido dos favoritos: %@";

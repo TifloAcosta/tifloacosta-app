@@ -90,7 +90,7 @@ struct NativeFavoritesScreen: View {
 
     private func remove(_ entry: NativeFavoriteDisplay) {
         _ = store.toggle(entry.key.kind, item: entry.item)
-        status = "Eliminado de Favoritos: \(entry.item.title)"
+        status = MusicLocalized.format("Eliminado de Favoritos: %@", entry.item.title)
         UIAccessibility.post(notification: .announcement, argument: status)
     }
 

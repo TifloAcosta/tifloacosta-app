@@ -160,8 +160,8 @@ struct NativeNewsScreen: View {
     }
 
     private func announce(_ message: String) {
-        status = message
-        UIAccessibility.post(notification: .announcement, argument: message)
+        status = MusicLocalized.message(message)
+        UIAccessibility.post(notification: .announcement, argument: status)
     }
 
     private func read(_ item: NativeCatalogItem) {
@@ -183,7 +183,7 @@ struct NativeNewsScreen: View {
             try library.importSharedText(contents, title: item.title)
             announce("Noticia guardada en TifloLector.")
         } catch {
-            announce("No se pudo guardar la noticia: \(error.localizedDescription)")
+            announce(MusicLocalized.format("No se pudo guardar la noticia: %@", error.localizedDescription))
         }
     }
 
@@ -385,13 +385,13 @@ struct NativeNewsArticleScreen: View {
             try library.importSharedText(text, title: item.title)
             announce("Noticia guardada en TifloLector.")
         } catch {
-            announce("No se pudo guardar: \(error.localizedDescription)")
+            announce(MusicLocalized.format("No se pudo guardar: %@", error.localizedDescription))
         }
     }
 
     private func announce(_ message: String) {
-        status = message
-        UIAccessibility.post(notification: .announcement, argument: message)
+        status = MusicLocalized.message(message)
+        UIAccessibility.post(notification: .announcement, argument: status)
     }
 
     private func share() {

@@ -43,6 +43,7 @@ enum NativeReaderFormats {
         .init(title: "Hojas de cálculo", details: "XLSX y XLSM: lectura por hojas, filas y columnas, incluidas cadenas compartidas. Los archivos XLS antiguos todavía no están admitidos."),
         .init(title: "Imágenes con OCR", details: "JPG, JPEG, PNG, HEIC, HEIF, TIF y TIFF."),
         .init(title: "Audiolibros y audio", details: "MP3, M4A, M4B, AAC, WAV, AIF, AIFF, CAF y FLAC. Pistas consecutivas dentro de un ZIP de audiolibro, ordenadas naturalmente por sus nombres."),
+        .init(title: "Vídeos", details: "MP4, M4V y MOV con audio o vídeo compatibles con el reproductor de Apple."),
         .init(title: "DAISY", details: "Libros DAISY empaquetados en ZIP o con extensión DAISY. Lectura de texto y pistas de audio; la navegación SMIL completa sigue en desarrollo."),
         .init(title: "Archivos comprimidos", details: "ZIP con pistas de audio o libros DAISY. No se admiten ZIP arbitrarios, RAR, 7Z ni CBR/CBZ.")
     ]
@@ -135,13 +136,19 @@ enum NativeReaderFormats {
     private static let audioExtensions: Set<String> = [
         "mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff", "caf", "flac"
     ]
+    private static let videoExtensions: Set<String> = ["mp4", "m4v", "mov"]
+
+    static func isVideo(_ document: NativeReadingDocument) -> Bool {
+        videoExtensions.contains(document.fileExtension?.lowercased() ?? "")
+    }
+
     private static let textExtensions: Set<String> = [
         "txt", "text", "md", "markdown", "csv", "json", "xml", "log", "srt"
     ]
 
     static func read(_ url: URL, documentID: UUID) throws -> NativeReaderImportedPayload {
         let ext = url.pathExtension.lowercased()
-        if audioExtensions.contains(ext) {
+        if audioExtensions.contains(ext) || videoExtensions.contains(ext) {
             let saved = try storeMedia(url, documentID: documentID)
             return .init(body: "", fileExtension: ext, trackPaths: [saved])
         }

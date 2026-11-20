@@ -220,8 +220,19 @@ struct NativeAudiusScreen: View {
             Section("Canciones") {
                 if directory.loading { ProgressView("Buscando canciones") }
                 ForEach(directory.tracks) { track in
-                    Button("Escuchar \(track.title), \(track.user?.name ?? "Audius")") {
+                    Button("\(track.title), \(track.user?.name ?? "Audius")") {
                         player.play(id: track.id, title: track.title)
+                    }
+                    .accessibilityActions {
+                        Button("Reproducir") { player.play(id: track.id, title: track.title) }
+                        if let addToPlaylist {
+                            ForEach(playlists) { playlist in
+                                Button("Añadir a \(playlist.name)") {
+                                    addToPlaylist("audius", track.id, track.title,
+                                        track.user?.name ?? "Audius", playlist.id)
+                                }
+                            }
+                        }
                     }
                     NativeMusicPlaylistMenu(playlists: playlists, provider: "audius", songID: track.id,
                         title: track.title, artist: track.user?.name ?? "Audius", addToPlaylist: addToPlaylist)

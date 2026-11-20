@@ -10,6 +10,9 @@ final class ShareViewController: UIViewController {
     private let statusLabel = UILabel()
     private let closeButton = UIButton(type: .system)
     private let previewButton = UIButton(type: .system)
+    private let saveReaderButton = UIButton(type: .system)
+    private let saveMusicButton = UIButton(type: .system)
+    private var pendingAudioID: String?
     private let readAloudButton = UIButton(type: .system)
     private let pauseButton = UIButton(type: .system)
     private let previewTextView = UITextView()
@@ -51,6 +54,12 @@ final class ShareViewController: UIViewController {
         pauseButton.titleLabel?.font = .preferredFont(forTextStyle: .body)
         pauseButton.addTarget(self, action: #selector(togglePause), for: .touchUpInside)
         pauseButton.isHidden = true
+        saveReaderButton.setTitle("Guardar en TifloLector", for: .normal)
+        saveReaderButton.addTarget(self, action: #selector(saveToReader), for: .touchUpInside)
+        saveReaderButton.isHidden = true
+        saveMusicButton.setTitle("Guardar en Mi música", for: .normal)
+        saveMusicButton.addTarget(self, action: #selector(saveToMusic), for: .touchUpInside)
+        saveMusicButton.isHidden = true
         previewTextView.isEditable = false
         previewTextView.isSelectable = true
         previewTextView.isScrollEnabled = true
@@ -61,7 +70,7 @@ final class ShareViewController: UIViewController {
         previewTextView.accessibilityHint = "Vista rápida. El libro completo quedará disponible en TifloLector al abrir TifloAcosta."
         let stack = UIStackView(arrangedSubviews: [
             heading, statusLabel, previewButton, previewTextView,
-            readAloudButton, pauseButton, closeButton
+            readAloudButton, pauseButton, saveReaderButton, saveMusicButton, closeButton
         ])
         stack.axis = .vertical
         stack.alignment = .fill
@@ -90,6 +99,34 @@ final class ShareViewController: UIViewController {
             self.statusLabel.text = text
             self.closeButton.isEnabled = true
             UIAccessibility.post(notification: .screenChanged, argument: self.statusLabel)
+        }
+    }
+
+    @objc private func saveToReader() { confirmDestination("reader") }
+
+    @objc private func saveToMusic() { confirmDestination("music") }
+
+    private func confirmDestination(_ destination: String) {
+        guard let id = pendingAudioID,
+              let root = FileManager.default.containerURL(
+                forSecurityApplicationGroupIdentifier: groupId) else { return }
+        let manifest = root.appendingPathComponent("ShareInbox", isDirectory: true)
+            .appendingPathComponent(id + ".json")
+        do {
+            let data = try Data(contentsOf: manifest)
+            guard var message = try JSONSerialization.jsonObject(with: data) as? [String: String]
+            else { throw CocoaError(.fileReadCorruptFile) }
+            message["destination"] = destination
+            let updated = try JSONSerialization.data(withJSONObject: message, options: [.sortedKeys])
+            try updated.write(to: manifest, options: [.atomic])
+            pendingAudioID = nil
+            saveReaderButton.isHidden = true
+            saveMusicButton.isHidden = true
+            finish(destination == "music"
+                ? "Audio guardado para Mi música. Se importará al abrir TifloAcosta."
+                : "Audio guardado para TifloLector. Se importará al abrir TifloAcosta.")
+        } catch {
+            finish("No se pudo guardar el destino del audio. El archivo permanece en Recibidos.")
         }
     }
 
@@ -352,6 +389,12 @@ final class ShareViewController: UIViewController {
                 "id": id, "kind": kind,
                 "name": String(clean.prefix(170)), "createdAt": ISO8601DateFormatter().string(from: Date())
             ]
+            let audioExtensions: Set<String> = [
+                "mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff", "caf", "flac"
+            ]
+            let isAudio = kind == "file" && audioExtensions.contains(
+                URL(fileURLWithPath: clean).pathExtension.lowercased())
+            if isAudio { message["destination"] = "pending" }
             if kind == "file" {
                 let detected = typeIdentifier.flatMap { UTType($0) }
                     ?? UTType(filenameExtension: URL(fileURLWithPath: clean).pathExtension)
@@ -378,6 +421,11 @@ final class ShareViewController: UIViewController {
             let data = try JSONSerialization.data(withJSONObject: message, options: [.sortedKeys])
             try data.write(to: manifest, options: [.atomic])
             DispatchQueue.main.async {
+                if isAudio {
+                    self.pendingAudioID = id
+                    self.saveReaderButton.isHidden = false
+                    self.saveMusicButton.isHidden = false
+                }
                 self.receivedFile = kind == "file" ? inbox.appendingPathComponent(id + ".data") : nil
                 self.receivedFilename = kind == "file" ? clean : (kind == "text" ? "Texto.txt" : "")
                 self.receivedText = kind == "text" ? value : nil
@@ -390,7 +438,9 @@ final class ShareViewController: UIViewController {
                         URL(fileURLWithPath: clean).pathExtension.lowercased()
                     )))
             }
-            if kind == "file" {
+            if isAudio {
+                finish("Audio recibido. Elige Guardar en TifloLector o Guardar en Mi música. Si cierras, quedará pendiente en Recibidos.")
+            } else if kind == "file" {
                 finish("Documento guardado para TifloLector. Puedes leerlo ahora si aparece esa opción. Al abrir TifloAcosta se incorporará a la biblioteca y se abrirá directamente.")
             } else if kind == "url" {
                 finish("Enlace recibido. Estará disponible en Recibidos para abrirlo o analizarlo.")

@@ -1,4 +1,4 @@
-name: Verificar candidata App Store 1.6 500200 antes de revisión
+name: Comprobar estado de revision Apple version 1.6 500200
 on:
   push:
     branches: [main]

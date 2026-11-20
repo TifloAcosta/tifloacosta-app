@@ -5,8 +5,10 @@ import UIKit
 struct NativeCloudFolderBrowserScreen: View {
     let provider: NativeCloudProvider
     let onImport: (URL) -> Void
+    var allowCellularDownloads = true
 
     @StateObject private var accounts = NativeCloudAccountStore.shared
+    @ObservedObject private var network = NativeMusicConnectionPolicy.shared
     @State private var folderID: String?
     @State private var folderHistory: [String?] = []
     @State private var items: [NativeCloudItem] = []
@@ -14,6 +16,7 @@ struct NativeCloudFolderBrowserScreen: View {
     @State private var busy = false
     @State private var importingID: String?
     @State private var error: String?
+    @State private var pendingDownload: NativeCloudItem?
 
     var body: some View {
         List {
@@ -52,7 +55,7 @@ struct NativeCloudFolderBrowserScreen: View {
                             }
                             .disabled(busy)
                         } else {
-                            Button("Importar \(item.name)") { Task { await importItem(item) } }
+                            Button("Importar \(item.name)") { requestImport(item) }
                                 .disabled(busy || importingID != nil)
                                 .accessibilityLabel("Importar \(item.name) desde \(provider.title)")
                         }
@@ -71,6 +74,18 @@ struct NativeCloudFolderBrowserScreen: View {
         .alert(provider.title, isPresented: Binding(
             get: { error != nil }, set: { if !$0 { error = nil } }
         )) { Button("Aceptar") { error = nil } } message: { Text(error ?? "") }
+        .alert("Descarga con datos móviles", isPresented: Binding(
+            get: { pendingDownload != nil },
+            set: { if !$0 { pendingDownload = nil } }
+        )) {
+            Button("Usar datos una vez") {
+                if let item = pendingDownload { Task { await importItem(item, allowCellular: true) } }
+                pendingDownload = nil
+            }
+            Button("Cancelar", role: .cancel) { pendingDownload = nil }
+        } message: {
+            Text("La descarga está limitada a Wi-Fi. Puedes autorizar solo este archivo con datos móviles.")
+        }
     }
 
     private func connect() async {
@@ -117,13 +132,25 @@ struct NativeCloudFolderBrowserScreen: View {
         }
     }
 
-    private func importItem(_ item: NativeCloudItem) async {
+    private func requestImport(_ item: NativeCloudItem) {
+        if !network.canDownload(allowCellular: allowCellularDownloads) {
+            pendingDownload = item
+        } else {
+            Task { await importItem(item, allowCellular: allowCellularDownloads) }
+        }
+    }
+
+    private func importItem(_ item: NativeCloudItem, allowCellular: Bool) async {
         importingID = item.id
         defer { importingID = nil }
         do {
+            guard network.canDownload(allowCellular: allowCellular) else {
+                error = "No hay una conexión permitida para descargar este archivo."
+                return
+            }
             let token = try await accounts.validAccessToken(for: provider)
             let storage = try NativeCloudStorage(provider: provider, accessToken: token)
-            let file = try await storage.download(item)
+            let file = try await storage.download(item, allowsCellular: allowCellular)
             onImport(file)
             UIAccessibility.post(notification: .announcement, argument: "Importado \(item.name)")
         } catch {

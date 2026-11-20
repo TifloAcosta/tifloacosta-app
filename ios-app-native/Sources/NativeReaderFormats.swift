@@ -133,7 +133,7 @@ enum NativeReaderFormats {
     }
 
     private static let audioExtensions: Set<String> = [
-        "mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff", "caf"
+        "mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff", "caf", "flac"
     ]
     private static let textExtensions: Set<String> = [
         "txt", "text", "md", "markdown", "csv", "json", "xml", "log", "srt"

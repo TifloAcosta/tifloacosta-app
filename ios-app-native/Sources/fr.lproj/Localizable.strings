@@ -1025,3 +1025,22 @@
 "No se pudo guardar el archivo: %@" = "Impossible d’enregistrer le fichier : %@";
 "Apagado automático completado." = "Minuterie de veille terminée.";
 "No se encuentra la pista de audio." = "Piste audio introuvable.";
+
+/* Mi Música: navegación, emisoras y accesibilidad */
+"Conciertos y grabaciones" = "Concerts et enregistrements";
+"Selección de canciones" = "Sélection de titres";
+"Explorar por estilos" = "Explorer par genre";
+"Nubes" = "Cloud";
+"No hay emisoras disponibles con estos criterios." = "Aucune station ne correspond à ces critères.";
+"Nombre de emisora" = "Nom de la station";
+"País" = "Pays";
+"Estilo" = "Genre";
+"Buscar emisoras" = "Rechercher des stations";
+"Búsqueda avanzada" = "Recherche avancée";
+"Explorar emisoras" = "Explorer les stations";
+"Emisoras populares" = "Stations populaires";
+"Buscar por países" = "Rechercher par pays";
+"Buscar por idiomas" = "Rechercher par langue";
+"Buscar por estilos" = "Rechercher par genre";
+"Buscar por nombre" = "Rechercher par nom";
+"%@, artista %@, álbum %@, disponible sin conexión" = "%@, artiste %@, album %@, disponible hors connexion";

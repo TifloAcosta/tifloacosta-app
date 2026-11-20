@@ -763,6 +763,21 @@ final class NativeReadingSpeech: ObservableObject {
                       self.speechQueue.indices.contains(self.speechQueueIndex),
                       ObjectIdentifier(self.speechQueue[self.speechQueueIndex].utterance) == ObjectIdentifier(utterance) else { return }
                 let completedText = self.speechQueue[self.speechQueueIndex].utterance.speechString
+                let segmentBase = self.utteranceOffsets[ObjectIdentifier(utterance)] ?? 0
+                let completedUTF16 = min(self.spokenText.utf16.count,
+                                         segmentBase + completedText.utf16.count)
+                // El último callback de palabra puede no llegar al cerrar una frase.
+                // Consolidar su final evita reanudar desde el párrafo anterior.
+                if completedUTF16 >= self.previousUTF16 {
+                    self.previousUTF16 = completedUTF16
+                    let completedIndex = String.Index(utf16Offset: completedUTF16,
+                                                      in: self.spokenText)
+                    self.previousCharacterCount = self.spokenText.distance(
+                        from: self.spokenText.startIndex, to: completedIndex)
+                    self.textCharacterOffset = self.baseCharacters + self.previousCharacterCount
+                    self.textPercent = max(0, min(100, Int(Double(self.baseUTF16 + completedUTF16)
+                        * 100 / Double(max(1, self.totalUTF16)))))
+                }
                 let completedDelay = completedText.last.map {
                     NativeReaderPauseProfile.duration(for: $0)
                 } ?? 0

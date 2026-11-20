@@ -2038,10 +2038,10 @@ struct NativeReaderVideoScreen: View {
                     Button("Avanzar diez segundos") { skip(seconds: 10) }
                 }
                 .buttonStyle(.bordered)
+                if let error { Text(error).foregroundStyle(.secondary) }
             } else {
                 Text(error ?? "Vídeo no disponible.")
             }
-            if let error { Text(error).foregroundStyle(.secondary) }
         }
         .padding()
         .navigationTitle(document.title)
@@ -2063,7 +2063,7 @@ struct NativeReaderVideoScreen: View {
                 savePosition()
             }
         }
-        .accessibilityAction(.magicTap) { togglePlayback() }
+        // AVKit mantiene sus propios controles accesibles de reproducción.
     }
 
     private func prepareVideo() {

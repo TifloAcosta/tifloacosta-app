@@ -31,11 +31,6 @@ private struct ArchiveItemMetadata: Decodable {
         }
     }
     let files: [AudioFile]?
-    let isDark: Bool?
-    enum CodingKeys: String, CodingKey {
-        case files
-        case isDark = "is_dark"
-    }
 }
 
 @MainActor
@@ -91,7 +86,7 @@ private final class NativeArchiveTracks: ObservableObject {
             let (bytes, response) = try await URLSession.shared.data(from: url)
             guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw URLError(.badServerResponse) }
             let metadata = try JSONDecoder().decode(ArchiveItemMetadata.self, from: bytes)
-            files = metadata.isDark == true ? [] : (metadata.files ?? []).filter(\.playable)
+            files = (metadata.files ?? []).filter(\.playable)
             error = files.isEmpty ? "Esta grabación no ofrece pistas de audio compatibles." : nil
         } catch {
             files = []

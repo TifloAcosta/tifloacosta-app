@@ -231,7 +231,7 @@ private final class NativeMusicLibrary: ObservableObject {
         do {
             try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
             for url in urls {
-                let allowed = ["mp3", "m4a", "aac", "wav", "flac"]
+                let allowed = ["mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff", "caf", "flac"]
                 guard allowed.contains(url.pathExtension.lowercased()) else { continue }
                 let accessed = url.startAccessingSecurityScopedResource()
                 defer { if accessed { url.stopAccessingSecurityScopedResource() } }
@@ -263,7 +263,7 @@ private final class NativeMusicLibrary: ObservableObject {
             error = MusicLocalized.format("No se pudo acceder al contenido de la carpeta seleccionada")
             return
         }
-        let allowed = Set(["mp3", "m4a", "aac", "wav", "flac", "ogg"])
+        let allowed = Set(["mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff", "caf", "flac"])
         var candidates: [URL] = []
         for case let url as URL in enumerator {
             guard allowed.contains(url.pathExtension.lowercased()),

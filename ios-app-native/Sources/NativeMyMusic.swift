@@ -808,16 +808,38 @@ struct NativeMyMusicScreen: View {
 
     private var musicSettings: some View {
         List {
+            NavigationLink("Conexión") { musicConnectionSettings }
+            NavigationLink("Información de VoiceOver") { musicVoiceOverSettings }
+            NavigationLink("Copias de seguridad") { musicBackupSettings }
+            NavigationLink("Ecualizador") { musicEqualizerSettings }
+        }
+        .navigationTitle("Ajustes de Mi Música")
+    }
+
+    private var musicConnectionSettings: some View {
+        List {
             Section("Conexión") {
                 NativeAdjustableChoice(title: "Reproducción",
                     choices: ["Solo Wi-Fi", "Wi-Fi y datos móviles"], selectedIndex: playbackConnection)
                 NativeAdjustableChoice(title: "Descargas",
                     choices: ["Solo Wi-Fi", "Wi-Fi y datos móviles"], selectedIndex: downloadConnection)
             }
+        }
+        .navigationTitle("Conexión")
+    }
+
+    private var musicVoiceOverSettings: some View {
+        List {
             Section("Información de VoiceOver") {
                 NativeAdjustableChoice(title: "Nivel",
                     choices: ["Normal", "Detallada"], selectedIndex: voiceOverInformation)
             }
+        }
+        .navigationTitle("Información de VoiceOver")
+    }
+
+    private var musicBackupSettings: some View {
+        List {
             Section("Copias de seguridad") {
                 Button("Exportar respaldo de biblioteca") {
                     backupDocument = library.exportIndex()
@@ -845,6 +867,12 @@ struct NativeMyMusicScreen: View {
                 Text("Las copias automáticas del índice se crean al abrir Mi Música cuando corresponde; no se ejecutan en segundo plano.")
                 Text("Este respaldo conserva el índice y las carpetas, pero no incluye los archivos de audio. Para recuperar música en otro dispositivo tendrás que importar también las canciones.")
             }
+        }
+        .navigationTitle("Copias de seguridad")
+    }
+
+    private var musicEqualizerSettings: some View {
+        List {
             Section("Ecualizador") {
                 NativeAdjustableChoice(
                     title: "Perfil de ecualización",
@@ -866,7 +894,7 @@ struct NativeMyMusicScreen: View {
                 }
             }
         }
-        .navigationTitle("Ajustes de Mi Música")
+        .navigationTitle("Ecualizador")
     }
 
     private var musicPlayerSection: some View {
@@ -1071,15 +1099,8 @@ struct NativeMyMusicScreen: View {
         }
     }
 
-    private var musicOrganizeSection: some View {
-        Section {
-            Menu("Organizar mi música") {
-                Button("Importar canciones") { isImporting = true }
-                Button("Importar carpeta desde Archivos o nube") { isImportingFolder = true }
-                Button("Crear carpeta") { showingFolderEditor = true }
-                Button("Crear lista de reproducción") { showingPlaylistEditor = true }
-                Button("Crear carpeta inteligente") { showingSmartFolderEditor = true }
-            }
+    private var musicClouds: some View {
+        List {
             NavigationLink("Google Drive") {
                 NativeCloudGooglePickerScreen(onImport: { file in
                     library.importFiles([file])
@@ -1090,7 +1111,12 @@ struct NativeMyMusicScreen: View {
                     library.importFiles([file])
                 }, allowCellularDownloads: allowCellularDownloads)
             }
-            NavigationLink("Ajustes") { musicSettings }
+        }
+        .navigationTitle("Nubes")
+    }
+
+    private var musicPlatformsSection: some View {
+        Section {
             NavigationLink("Plataformas musicales") {
                 NativeMusicPlatformsScreen(playlists: library.playlists.map {
                     MusicPlaylistDestination(id: $0.id, name: $0.name)
@@ -1103,9 +1129,24 @@ struct NativeMyMusicScreen: View {
         }
     }
 
+    private var musicOrganizeSection: some View {
+        Section {
+            Menu("Organizar mi música") {
+                Button("Importar canciones") { isImporting = true }
+                Button("Importar carpeta desde Archivos o nube") { isImportingFolder = true }
+                Button("Crear carpeta") { showingFolderEditor = true }
+                Button("Crear lista de reproducción") { showingPlaylistEditor = true }
+                Button("Crear carpeta inteligente") { showingSmartFolderEditor = true }
+            }
+            NavigationLink("Nubes") { musicClouds }
+            NavigationLink("Ajustes") { musicSettings }
+        }
+    }
+
     var body: some View {
         let list = List {
             musicPlayerSection
+            musicPlatformsSection
             musicLibrarySection
             musicAlbumsSection
             musicFoldersSection

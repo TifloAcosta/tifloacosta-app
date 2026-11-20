@@ -1027,3 +1027,22 @@
 "No se encuentra la pista de audio." = "Audio track not found.";
 "La reproducción necesita una conexión permitida. Puedes cambiarla en Ajustes, Conexión." = "Playback needs an allowed connection. Change this in Settings, Connection.";
 "La reproducción por Internet está limitada por tu ajuste de Conexión." = "Online playback is restricted by your Connection setting.";
+
+/* Mi Música: navegación, emisoras y accesibilidad */
+"Conciertos y grabaciones" = "Concerts and recordings";
+"Selección de canciones" = "Featured songs";
+"Explorar por estilos" = "Browse by genre";
+"Nubes" = "Cloud services";
+"No hay emisoras disponibles con estos criterios." = "No stations match these criteria.";
+"Nombre de emisora" = "Station name";
+"País" = "Country";
+"Estilo" = "Genre";
+"Buscar emisoras" = "Search stations";
+"Búsqueda avanzada" = "Advanced search";
+"Explorar emisoras" = "Browse stations";
+"Emisoras populares" = "Popular stations";
+"Buscar por países" = "Browse by country";
+"Buscar por idiomas" = "Browse by language";
+"Buscar por estilos" = "Browse by genre";
+"Buscar por nombre" = "Search by name";
+"%@, artista %@, álbum %@, disponible sin conexión" = "%@, artist %@, album %@, available offline";

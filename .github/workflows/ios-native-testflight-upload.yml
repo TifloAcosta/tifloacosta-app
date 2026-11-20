@@ -3,6 +3,11 @@ name: TifloAcosta iOS nativa - enviar a TestFlight
 # después de integrar y revisar las fases de desarrollo.
 on:
   workflow_dispatch:
+    inputs:
+      verify_build:
+        description: "Compilación ya subida que se quiere verificar en TestFlight"
+        type: string
+        required: false
 permissions:
   contents: read
   actions: read
@@ -11,6 +16,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   build-upload:
+    if: ${{ inputs.verify_build == '' }}
     runs-on: macos-15
     timeout-minutes: 80
     env:
@@ -112,6 +118,7 @@ jobs:
           IPA="$(find "$RUNNER_TEMP/native-export" -maxdepth 1 -name '*.ipa' -print -quit)"
           test -f "$IPA"
           LOG="$RUNNER_TEMP/tifloacosta-upload.log"
+          echo "UPLOAD_STARTED_AT=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
           xcrun altool --upload-app --type ios --file "$IPA" --apiKey "$API_ID" --apiIssuer "$API_ISSUER" >"$LOG" 2>&1 || {
             cat "$LOG"
             exit 1
@@ -136,3 +143,19 @@ jobs:
         run: |
           if [ -n "$ASC_KEY_PATH" ]; then rm -f "$ASC_KEY_PATH"; fi
           if [ -n "$IOS_TEMP_KEYCHAIN" ]; then security delete-keychain "$IOS_TEMP_KEYCHAIN" || true; fi
+  verify-uploaded-build:
+    if: ${{ inputs.verify_build != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    env:
+      API_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+      API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+      API_PRIVATE: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+      TARGET_BUILD: ${{ inputs.verify_build }}
+      UPLOAD_STARTED_AT: "1970-01-01T00:00:00Z"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Confirmar beta ya subida para probadores internos
+        run: |
+          [[ "$TARGET_BUILD" =~ ^[0-9]+$ ]]
+          node .github/scripts/verify-native-testflight.mjs

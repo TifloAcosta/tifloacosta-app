@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-20T09:12:13.158Z",
+  "generatedAt": "2026-11-20T12:57:36.333Z",
   "resources": [
     {
       "kind": "resource",
@@ -5624,6 +5624,169 @@
   "news": [
     {
       "kind": "news",
+      "id": "9to5mac-b0bf7ed4fe438385:en",
+      "sourceId": "9to5mac-b0bf7ed4fe438385",
+      "lang": "en",
+      "title": "iPhone Air 2 dummy unit shows off new dual-camera design",
+      "summary": "Apple is expected to release the iPhone 18 and iPhone Air 2 sometime next spring. Ahead of that launch, new dummy units posted to social media today give us a closer look at the devices, including a big update to the iPhone Air 2. 9to5Mac is supported by Sony : Score Sony’s ULT Field 1 Bluetooth speaker for 51% off . Powerful bass, room-filling sound, up to 12 hours of battery life, IP67 durability, stereo pairing support, and much more. more…",
+      "body": "Apple is expected to release the iPhone 18 and iPhone Air 2 sometime next spring. Ahead of that launch, new dummy units posted to social media today give us a closer look at the devices, including a big update to the iPhone Air 2.\n\n9to5Mac is supported by Sony : Score Sony’s ULT Field 1 Bluetooth speaker for 51% off . Powerful bass, room-filling sound, up to 12 hours of battery life, IP67 durability, stereo pairing support, and much more.\n\nIn a post on X, Sonny Dickson shared dummy units of the iPhone Air 2, giving us a glimpse of the new dual-camera system. Meanwhile, the base iPhone 18 looks largely unchanged compared to the iPhone 17.\n\nThe first-generation iPhone Air has a single 48MP Main camera. The second-generation model, however, will reportedly add an Ultra Wide camera.\n\nAs expected, the iPhone Air 2 cameras are arranged horizontally across the pill-shaped camera plateau, similar to the iPhone Duo’s arrangement.\n\nIn addition to the dual-camera system, the iPhone Air 2 is expected to be powered by the A20 Pro chip. Apple is also reportedly working to improve the battery life. The Information has reported the device will feature a vapor chamber cooling system, which Apple debuted with the iPhone 17 Pro. Another report suggested the device will have a smaller Dynamic Island.\n\nThe base model iPhone 18, meanwhile, will reportedly use Apple’s A20 chip. Ming-Chi Kuo has reported it will have 9GB of RAM, up from the iPhone 17’s 8GB. It’s expected to be a modest year-over-year update, with Apple focused on cutting costs .\n\nFollow Chance : Threads , X , and Instagram",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/20/iphone-air-2-dual-camera-system/",
+      "publishedAt": "2026-11-20T12:56:31.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-689f8a5ec504387a:en",
+      "sourceId": "engadget-689f8a5ec504387a",
+      "lang": "en",
+      "title": "Google boosts Gemini's ability to do 'repetitive tasks' on its Mac app",
+      "summary": "Google's Gemini app for Mac can now use your computer to list items on eBay, speed up creative tasks and fill out forms for you.",
+      "body": "The feature can list multiple items on e-commerce platforms for you, among other things.\n\nGoogle's Gemini app for Mac now has the ability to do repetitive tasks on its own. The feature has been available to PC users for a while, but now the Mac app can also access Gemini's \"Computer Use\" capability. That means it can now see what's on your screen via screenshots, as well as click, type, scroll and navigate programs and websites for you. You can use the capability to automate tasks that would usually take several steps across programs and devices, as long as you tell Gemini what to do in natural language.\n\nThe AI app will work on your tasks in a background window and will just give you a live preview in your chat. It will not be taking control of your screen or your cursor, so you can use your Mac computer like you always do. Of course, Gemini will only be able to use the apps and programs you've given it access to, and it will ask for your approval for key actions.\n\nIn Google's announcement, it gave several examples for how you can use the new capability. You can use it to list items for sale on platforms like eBay in batches. If you're selling a whole bunch of clothes, for instance, you can ask Gemini to go through the photos you took of them stored in a local folder, research their pricing, log their details and then stage their listings. You can use it to quickly fill out local PDFs, such as shipping declaration forms. You can also use it to speed up creative work, such as getting Gemini to automatically turn a pencil sketch into a 3D model.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2322728/google-boosts-geminis-ability-to-do-repetitive-tasks-on-its-mac-app/",
+      "publishedAt": "2026-11-20T12:36:11.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apps-accesibles",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-8f8f43014af05fa7:en",
+      "sourceId": "the-verge-8f8f43014af05fa7",
+      "lang": "en",
+      "title": "Signal is blocking Gemini and Siri AI from reading your screen",
+      "summary": "Signal is restricting the ability to take screenshots on Android and iOS devices in an effort to prevent AI agents from reading users' messages and other data. The agentic AI capabilities built into operating systems that analyze on-screen information to learn more about the user are \"undermining Signal's ability to independently guarantee privacy,\" Signal president […]",
+      "body": "Signal is restricting the ability to take screenshots on Android and iOS devices in an effort to prevent AI agents from reading users' messages and other data. The agentic AI capabilities built into operating systems that analyze on-screen information to learn more about the user are \"undermining Signal's ability to independently guarantee privacy,\" Signal president Meredith Whittaker said in a blog post , while urging OS providers to make it easier for app developers to control what data agents can access.\n\n\"We want to be very clear: it is a serious problem that Signal - and application developers beyond - lack robust tools to prevent AI age …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/ai-artificial-intelligence/1038390/signal-blocking-ai-agent-screenshots-mobile-app",
+      "publishedAt": "2026-11-20T12:30:47.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple",
+        "android",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-8f7bc8f939dd6afd:en",
+      "sourceId": "ars-technica-8f7bc8f939dd6afd",
+      "lang": "en",
+      "title": "Trump admin still won't let Wi-Fi giant TP-Link sell its latest routers in US",
+      "summary": "TP-Link's struggle illustrates how Trump admin wields control over device makers.",
+      "body": "TP-Link, which may be the top provider of wireless routers for US homes and small businesses, isn't allowed to sell its latest Wi-Fi routers in the US. The Trump administration imposed a sweeping ban on foreign-made consumer routers in March 2026, and TP-Link hasn't been able to obtain an exemption.\n\nThe rules prevent the import or sale of all new router models that are manufactured, assembled, designed, or developed outside the US. The Trump administration has control over which router makers receive special permission to import and sell new products through a waiver-review process involving the Federal Communications Commission, the Department of Defense, and the Department of Homeland Security.\n\nWhile some of its competitors have obtained exemptions to the ban, TP-Link appears to be having a hard time making its case to government officials. Its routers approved before the March 2026 ban remain available for sale in the US, but its newly released Wi-Fi 8 routers cannot be imported or sold.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/tech-policy/2026/11/trump-admin-still-wont-let-wi-fi-giant-tp-link-sell-its-latest-routers-in-us/",
+      "publishedAt": "2026-11-20T12:00:43.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-1717d396a6d2c0f2:en",
+      "sourceId": "9to5mac-1717d396a6d2c0f2",
+      "lang": "en",
+      "title": "Security Bite Podcast: Not amused, two months of Meta Muse privacy problems",
+      "summary": "9to5Mac Security Bite is exclusively brought to you by Mosyle, the only Apple Unified Platform . Making Apple devices work-ready and enterprise-safe is all we do. Our unique integrated approach to management and security combines state-of-the-art Apple-specific security solutions for fully automated Hardening & Compliance, Next Generation EDR, AI-powered Zero Trust, and exclusive Privilege Management with the most powerful and modern Apple MDM on the market. The result is a totally automated Apple Unified Platform currently trusted by over 45,000 organizations to make millions of Apple devices work-ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple . Meta’s Muse AI agent has well surpassed a whopping 10 million downloads despite two months of security and privacy problems. In this solo episode, I recap all of it, from the “not-a-mused” zero-day, to the company’s former security chief calling it “totally insane” to trust AI agents with your passwords and finances, to this week’s Reuters report on Meta’s own employees raising alarms. more…",
+      "body": "9to5Mac Security Bite is exclusively brought to you by Mosyle, the only Apple Unified Platform . Making Apple devices work-ready and enterprise-safe is all we do. Our unique integrated approach to management and security combines state-of-the-art Apple-specific security solutions for fully automated Hardening & Compliance, Next Generation EDR, AI-powered Zero Trust, and exclusive Privilege Management with the most powerful and modern Apple MDM on the market. The result is a totally automated Apple Unified Platform currently trusted by over 45,000 organizations to make millions of Apple devices work-ready with no effort and at an affordable cost. Request your EXTENDED TRIAL today and understand why Mosyle is everything you need to work with Apple .\n\nMeta’s Muse AI agent has well surpassed a whopping 10 million downloads despite two months of security and privacy problems. In this solo episode, I recap all of it, from the “not-a-mused” zero-day, to the company’s former security chief calling it “totally insane” to trust AI agents with your passwords and finances, to this week’s Reuters report on Meta’s own employees raising alarms.\n\nSecurity Bite is 9to5Mac’s weekly deep dive into the world of Apple security. Each week, Arin Waichulis unpacks new threats, privacy concerns, vulnerabilities, and more, shaping an ecosystem of over 2 billion devices. Every other week on the Security Bite Podcast , he sits down with experts in the field to break down the most pressing topics .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/20/security-bite-podcast-not-amused-two-months-of-meta-muse-privacy-problems/",
+      "publishedAt": "2026-11-20T11:00:00.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-3d00ac5405bed4d1:en",
+      "sourceId": "engadget-3d00ac5405bed4d1",
+      "lang": "en",
+      "title": "The Trump administration has replaced its cybersecurity chief",
+      "summary": "The White House has replaced cybersecurity chief Sean Cairncross with the Pentagon's Kirsten Davies.",
+      "body": "Sean Cairncross was ousted following several high-profile tech outages.\n\nSean Cairncross is no longer the US National Cyber Director. The Trump administration has fired him, following several tech outages in the country, according to Reuters . If you'll recall, Microsoft's services recently went down and remained offline for almost a full day, which had affected businesses, hospitals and even governments around the world. The Federal Aviation Administration had also ordered a nationwide ground stop that had disrupted more than 18,000 flights inside, to and from the US.\n\nIt's not quite clear why the White House removed Cairncross in relation to those incidents, but the government has been getting flak over its response to cybersecurity threats, including those posed by advanced AI agents and tools. Cairncoss oversaw the administration's cybersecurity strategy, as well as the implementation of related policies across the federal government. According to Axios , however, Trump's new chief of staff, Stephen Miller, wanted him out because he \"lacked the strong cyber credentials to perform the job.\" The president, \"fully supported firing Sean Cairncross from his position,\" Reuters ' source said.\n\nIn a statement , Cairncross said he was proud of what he had done \"to strengthen America's cyber security, protect our critical infrastructure, confront foreign threats, and position America to lead the world in super intelligence.\"\n\nKirsten A. Davies, the Department of Defense's chief information officer, will now serve as the new US National Cyber Director. Davies had held cybersecurity-related posts in the private sector before, including in companies like Hewlett-Packard and Siemens. The administration reportedly believes she has the experience and the credentials needed to be able to excel in the position.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2322705/the-trump-administration-has-replaced-its-cybersecurity-chief/",
+      "publishedAt": "2026-11-20T10:53:36.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "applevis-apps-a266de1fcb38950b:en",
+      "sourceId": "applevis-apps-a266de1fcb38950b",
+      "lang": "en",
+      "title": "Boat Hunter",
+      "summary": "Command an autonomous warship in the North Atlantic: tactical map, radar, torpedoes and missions, playable by everyone thanks to its accessibility. Year 2077. The Atlantic Ocean no longer separates continents. It watches them. For decades, the world learned to smile while sharpening its teeth. Europe and Asia forged an alliance. The American bloc answered with steel, satellites, and fortified trade routes. No one declared open war. No one had to. Peace remained in the speeches, on the screens, and in the treaties. But on the high seas, the truth took another form. The cargo ships never stopped sailing. Food, fuel, minerals, data, weapons—everything kept crossing the ocean under legal flags and flawless orders. Only one thing changed. There are no captains anymore. Now the ships think. Every convoy, every armed destroyer, every autonomous freighter, and every ocean hunter is commanded by artificial intelligences trained to calculate, anticipate, and survive. War no longer needs hatred. It only needs algorithms better than the enemy’s. And you are the finest algorithm ever deployed. You are the most advanced naval combat unit ever built: the fastest hull, the sharpest sensors, the deadliest tactical architecture. You do not sleep. You do not hesitate. You do not forget. Where others detect noise, you see patterns. Where others see waves, you read intentions. Where others react, you have already decided. Your mission is simple to state and nearly impossible to execute: protect your routes, intercept threats, dominate the Atlantic. But the ocean does not forgive mistakes. In its waters travel allies, enemies, and machines that have not yet decided what they will become when the final order arrives. Every radar echo may be a freighter. Every silence may be an ambush. Every encounter may be the beginning of a war the world still insists on denying. There are no heroes here. No parades. No witnesses. Only steel, fog, encrypted signals, and decisions made at the speed of death. On this sea, peace is a display. War is what you are. Welcome to the Atlantic. Enter combat! ---------- Boat Hunter is an accessible naval action and strategy game set in the North Atlantic. You control an autonomous warship on a patrol of consecutive missions, where every decision can put the next operation at risk. MASTER THE OCEAN • Navigate the tactical map, set your heading, and interpret contacts, signals, and radio messages. • Identify allies and enemies: armed ships, merchant vessels, submarines, oil platforms, and floating bases. • Fight at close range with your autocannon and torpedoes. • Repair damage, deploy smoke screens, and decide when to disengage. EVERY MISSION DEMANDS A STRATEGY Reach coordinates, clear hostile sectors, intercept convoys, sink merchant tonnage, defend positions, rescue allies, resupply, and destroy floating targets. Sea conditions, time limits, and enemy behavior will force you to adapt your plans. UPGRADE YOUR SHIP Earn money and score points by completing objectives and sinking enemies. Between missions, upgrade your hull, engine, weapons, damage control, smoke screen, and gunner systems. Higher-quality enemies are more dangerous, but grant greater rewards. Keep your remaining money to begin your next game with an advantage. LEARN AT YOUR OWN PACE A three-mission tutorial teaches you to navigate, aim, and survive. Read the manual and listen to every signal in the sound guide before entering combat. Play visually or through sound and VoiceOver. Choose from three difficulty levels: Deckhand, Captain, and Admiral. Complete as many missions as possible, keep your ship operational, and beat your best score. ---------- This app supports VoiceOver, Zoom, and other iOS accessibility features. If you encounter an accessibility problem, please contact us so we can fix it. Accessibility should be the foundation of a project, not a patch applied to the product.",
+      "body": "Command an autonomous warship in the North Atlantic: tactical map, radar, torpedoes and missions, playable by everyone thanks to its accessibility.\n\nYear 2077.\n\nThe Atlantic Ocean no longer separates continents. It watches them.\n\nFor decades, the world learned to smile while sharpening its teeth. Europe and Asia forged an alliance. The American bloc answered with steel, satellites, and fortified trade routes. No one declared open war. No one had to. Peace remained in the speeches, on the screens, and in the treaties. But on the high seas, the truth took another form.\n\nThe cargo ships never stopped sailing. Food, fuel, minerals, data, weapons—everything kept crossing the ocean under legal flags and flawless orders. Only one thing changed.\n\nThere are no captains anymore. Now the ships think. Every convoy, every armed destroyer, every autonomous freighter, and every ocean hunter is commanded by artificial intelligences trained to calculate, anticipate, and survive. War no longer needs hatred. It only needs algorithms better than the enemy’s. And you are the finest algorithm ever deployed.\n\nYou are the most advanced naval combat unit ever built: the fastest hull, the sharpest sensors, the deadliest tactical architecture. You do not sleep. You do not hesitate. You do not forget. Where others detect noise, you see patterns. Where others see waves, you read intentions. Where others react, you have already decided.\n\nYour mission is simple to state and nearly impossible to execute: protect your routes, intercept threats, dominate the Atlantic. But the ocean does not forgive mistakes. In its waters travel allies, enemies, and machines that have not yet decided what they will become when the final order arrives. Every radar echo may be a freighter. Every silence may be an ambush. Every encounter may be the beginning of a war the world still insists on denying.\n\nThere are no heroes here. No parades. No witnesses. Only steel, fog, encrypted signals, and decisions made at the speed of death. On this sea, peace is a display. War is what you are.\n\nWelcome to the Atlantic. Enter combat!\n\n----------\n\nBoat Hunter is an accessible naval action and strategy game set in the North Atlantic. You control an autonomous warship on a patrol of consecutive missions, where every decision can put the next operation at risk.\n\nMASTER THE OCEAN\n\n• Navigate the tactical map, set your heading, and interpret contacts, signals, and radio messages. • Identify allies and enemies: armed ships, merchant vessels, submarines, oil platforms, and floating bases. • Fight at close range with your autocannon and torpedoes. • Repair damage, deploy smoke screens, and decide when to disengage.\n\nEVERY MISSION DEMANDS A STRATEGY\n\nReach coordinates, clear hostile sectors, intercept convoys, sink merchant tonnage, defend positions, rescue allies, resupply, and destroy floating targets. Sea conditions, time limits, and enemy behavior will force you to adapt your plans.\n\nUPGRADE YOUR SHIP\n\nEarn money and score points by completing objectives and sinking enemies. Between missions, upgrade your hull, engine, weapons, damage control, smoke screen, and gunner systems. Higher-quality enemies are more dangerous, but grant greater rewards. Keep your remaining money to begin your next game with an advantage.\n\nLEARN AT YOUR OWN PACE\n\nA three-mission tutorial teaches you to navigate, aim, and survive. Read the manual and listen to every signal in the sound guide before entering combat.\n\nPlay visually or through sound and VoiceOver. Choose from three difficulty levels: Deckhand, Captain, and Admiral. Complete as many missions as possible, keep your ship operational, and beat your best score.\n\n----------\n\nThis app supports VoiceOver, Zoom, and other iOS accessibility features. If you encounter an accessibility problem, please contact us so we can fix it.\n\nAccessibility should be the foundation of a project, not a patch applied to the product.",
+      "sourceName": "AppleVis Apps",
+      "originalUrl": "https://www.applevis.com/apps/ios/games/boat-hunter",
+      "publishedAt": "2026-11-20T08:14:56.000Z",
+      "categories": [
+        "apple",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "applevis-apps-1fdc9e94e91eaa17:en",
+      "sourceId": "applevis-apps-1fdc9e94e91eaa17",
+      "lang": "en",
+      "title": "Atomicom",
+      "summary": "300 missions of atoms, electrons and molecules — and a board you can hear. Playable end to end with VoiceOver, by sight or without it. Space is young, dark and scattered. Atoms drift alone, touching nothing, and in all that emptiness not one thing has ever been built. No water. No stone. No star with a planet worth the name. That is what you are here to change. Atomicom is a puzzle game about binding matter together. Atoms come to you one at a time. Place them on the board, let their loose electrons find a partner, and when every electron in a connected group has one, the molecule is finished: it holds, it leaves the board, and the universe keeps a piece of itself that did not exist a moment ago. HOW IT PLAYS • An atom arrives in the glass cylinder below the board. Take it and drop it on any free square. • Atoms bond with the neighbours above, below, left and right of them. Never diagonally. • A green atom has one electron to give, yellow has two, orange three, red four. Blue atoms give nothing at all: they only take up room you were going to need. • Satisfy every electron in a connected group and the molecule forms and goes. • Run out of squares, or let the cylinder overflow, and the mission ends there. 300 MISSIONS The board starts wide and gets smaller: twelve squares across, then ten, then eight, then a six by six where there is nowhere left to be careless. Every mission asks more than the one before it — more molecules, more obstacles in the way, heavier atoms that need more neighbours before they are satisfied — and every time the board shrinks you begin again at something gentle and climb back up. MADE TO BE PLAYED BY EVERYONE Atomicom is made by Tyflos Accessible Software. Accessibility here is not a switch in the settings, it is how the game is built. • Fully playable with VoiceOver, from the first tap to the last molecule. Nothing has to be seen. • Every square tells you its coordinate, what is on it and how many electrons are still free: \"A2, red, 3 free bonds\". • The sound tells you where. An atom bonding on the left is heard on the left, and the top of the board sounds higher than the bottom, so the board has a shape you can hear. • Everything that happens without you touching it is spoken: an atom arriving, a molecule finished, a move the rules will not allow and why not. • Vibration answers every move, soft for an atom placed and hard for a molecule completed. • Drag if you like, or tap the atom and then the square. Both always work. • Dynamic Type throughout, and Reduce Motion and Reduce Transparency are obeyed. • Choose your own background, square borders and cylinder colour, and the game tells you when a colour you picked is too faint to make out. ALSO • Play in seventeen languages. • Made for iPhone and iPad. • Your game saves itself: leave in the middle of a mission and pick it up later. • A table of your best games, kept on your device. FREE, AND WHAT COSTS MONEY • The first ten missions are free, with advertising. • \"All levels\" is a one-off purchase that opens the three hundred. The advertising stays. • \"No ads\" is a second one-off purchase that removes the banner. It needs \"All levels\" first. The universe is not going to assemble itself. Start with two atoms.",
+      "body": "300 missions of atoms, electrons and molecules — and a board you can hear. Playable end to end with VoiceOver, by sight or without it.\n\nSpace is young, dark and scattered. Atoms drift alone, touching nothing, and in all that emptiness not one thing has ever been built. No water. No stone. No star with a planet worth the name.\n\nThat is what you are here to change.\n\nAtomicom is a puzzle game about binding matter together. Atoms come to you one at a time. Place them on the board, let their loose electrons find a partner, and when every electron in a connected group has one, the molecule is finished: it holds, it leaves the board, and the universe keeps a piece of itself that did not exist a moment ago.\n\nHOW IT PLAYS • An atom arrives in the glass cylinder below the board. Take it and drop it on any free square. • Atoms bond with the neighbours above, below, left and right of them. Never diagonally. • A green atom has one electron to give, yellow has two, orange three, red four. Blue atoms give nothing at all: they only take up room you were going to need. • Satisfy every electron in a connected group and the molecule forms and goes. • Run out of squares, or let the cylinder overflow, and the mission ends there.\n\n300 MISSIONS The board starts wide and gets smaller: twelve squares across, then ten, then eight, then a six by six where there is nowhere left to be careless. Every mission asks more than the one before it — more molecules, more obstacles in the way, heavier atoms that need more neighbours before they are satisfied — and every time the board shrinks you begin again at something gentle and climb back up.\n\nMADE TO BE PLAYED BY EVERYONE Atomicom is made by Tyflos Accessible Software. Accessibility here is not a switch in the settings, it is how the game is built. • Fully playable with VoiceOver, from the first tap to the last molecule. Nothing has to be seen. • Every square tells you its coordinate, what is on it and how many electrons are still free: \"A2, red, 3 free bonds\". • The sound tells you where. An atom bonding on the left is heard on the left, and the top of the board sounds higher than the bottom, so the board has a shape you can hear. • Everything that happens without you touching it is spoken: an atom arriving, a molecule finished, a move the rules will not allow and why not. • Vibration answers every move, soft for an atom placed and hard for a molecule completed. • Drag if you like, or tap the atom and then the square. Both always work. • Dynamic Type throughout, and Reduce Motion and Reduce Transparency are obeyed. • Choose your own background, square borders and cylinder colour, and the game tells you when a colour you picked is too faint to make out.\n\nALSO • Play in seventeen languages. • Made for iPhone and iPad. • Your game saves itself: leave in the middle of a mission and pick it up later. • A table of your best games, kept on your device.\n\nFREE, AND WHAT COSTS MONEY • The first ten missions are free, with advertising. • \"All levels\" is a one-off purchase that opens the three hundred. The advertising stays. • \"No ads\" is a second one-off purchase that removes the banner. It needs \"All levels\" first.\n\nThe universe is not going to assemble itself. Start with two atoms.",
+      "sourceName": "AppleVis Apps",
+      "originalUrl": "https://www.applevis.com/apps/ios/games/atomicom",
+      "publishedAt": "2026-11-20T08:12:06.000Z",
+      "categories": [
+        "apple",
+        "apps-accesibles",
+        "programas-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-2034e04e37fedfd9:en",
+      "sourceId": "engadget-2034e04e37fedfd9",
+      "lang": "en",
+      "title": "OpenAI is testing Dots personal agents on its $20 per month Plus tier",
+      "summary": "OpenAI is expanding access to Dots, the proactive AI agents that can work for you without any supervision or assistance.",
+      "body": "Dots are also coming to all ChatGPT Business Standard users starting today.\n\nOpenAI is expanding access to Dots , the proactive, always-on AI agents that can toil at tasks for you without any supervision or assistance. After launching the feature for higher-tier plans from ChatGP Pro and up, the company announced that it's testing Dots with a small number of users on the cheaper $20 per month ChatGPT Plus plan.\n\n\"Heads up, we're starting to test dots with a small number of ChatGPT Plus users,\" OpenAI's ChatGPT engineering lead Thibault \"Tibo\" Sottiaux wrote on X . \"Looking forward to the continued feedback as we expand and I'm recently seeing a lot more positives around how good the proactivity has been after many improvements.\"\n\nHeads up, we're starting to test dots with a small number of ChatGPT Plus users. Looking forward to the continued feedback as we expand and I'm recently seeing a lot more positives around how good the proactivity has been after many improvements.\n\nWe're also bringing dots to all...\n\n— Tibo (@thsottiaux) November 19, 2026\n\nDots can interact with over 4,000 apps thanks to their access to OpenAI's plugin ecosystem. The agents can work autonomously on tasks and make progress even when you don't interact with them. They can even connect to your PC, allowing them to control it on your behalf and work alongside you. You can check up on their progress by opening a Dot's \"computer\" at any time.\n\nAlong with limited availability on ChatGPT Plus, Dots are coming to all ChatGPT Business Standard users starting today, Tibo said. For higher-tier plans, conversations with the agents don't count toward regular ChatGPT usage limits for Pro and Business Premium subscribers, as long as they don't involve complex tasks. It's not clear, though, if Plus or Business Standard users will get that benefit as well.\n\nOriginally powered by GPT-6 Astra, Dots can now run on GPT-6.1 Terra as well. The company just launched several new features for them as well, including iOS widgets and Shortcuts integration, along with iMessage and RCS support, plus iOS notification replies. If you're on a Plus plan, you may gain access starting today, but OpenAI has yet to say whether the upgrade will be permanent.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2322656/openai-is-testing-dots-personal-agents-on-its-20-per-month-plus-tier/",
+      "publishedAt": "2026-11-20T07:31:25.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "conticgo-bb9189aea7f01c79:es",
+      "sourceId": "conticgo-bb9189aea7f01c79",
+      "lang": "es",
+      "title": "El audio espacial y los auriculares «open-ear» revolucionan la movilidad de las personas con discapacidad visual",
+      "summary": "La unión entre el sonido binaural en 360 grados y los dispositivos de oído abierto resuelve uno de los mayores dilemas de la tiflotecnología. Gracias a este avance, las personas ciegas pueden recibir indicaciones GPS sin aislarse del ruido de la calle. Para una persona ciega o con baja visión, el oído funciona como un […] La entrada El audio espacial y los auriculares «open-ear» revolucionan la movilidad de las personas con discapacidad visual se publicó primero en Conticgo .",
+      "body": "La unión entre el sonido binaural en 360 grados y los dispositivos de oído abierto resuelve uno de los mayores dilemas de la tiflotecnología. Gracias a este avance, las personas ciegas pueden recibir indicaciones GPS sin aislarse del ruido de la calle.\n\nPara una persona ciega o con baja visión, el oído funciona como un radar constante. Escuchar el tráfico, los pasos o el eco de las paredes resulta vital para caminar con seguridad. Sin embargo, usar el móvil o una aplicación GPS en la calle siempre obligaba a elegir entre dos malas opciones. Podías ponerte ambos auriculares y perder el contacto con el entorno, o llevar solo uno y sacrificar la orientación estéreo. Hoy, la combinación de audio espacial y auriculares open-ear acaba por fin con este dilema.\n\nEl audio espacial va mucho más allá del sonido estéreo tradicional. Mediante algoritmos binaurales y sensores de movimiento integrados en los auriculares, el sistema sitúa los sonidos en un espacio tridimensional de 360 grados alrededor del usuario.\n\nAplicaciones de navegación accesible como Soundscape Community o VoiceVista aprovechan esta tecnología para crear balizas sonoras virtuales. Por ejemplo, si tienes una cafetería o un paso de peatones a tu derecha, escucharás el aviso exactamente desde ese punto. Además, gracias al seguimiento dinámico de cabeza ( head tracking ), si giras el cuello para mirar hacia otro lado, el sonido permanece anclado en la ubicación física real.\n\nLa segunda pieza de esta revolución es el diseño de oído abierto ( open-ear ). A diferencia de los auriculares tradicionales de botón o de diadema cerrada, estos modelos dejan el canal auditivo completamente despejado. De este modo, el usuario percibe el sonido digital de su teléfono mezclado de forma natural con el ambiente de la calle.\n\nActualmente, existen tres formatos principales que compiten en el día a día de la comunidad ciega:\n\nConducción ósea: Dispositivos como los Shokz OpenRun Pro 2 transmiten el sonido mediante suaves vibraciones a través de los pómulos. Son extremadamente ligeros, resistentes al sudor y dejan el oído libre al cien por cien para la ecolocalización natural.\n\nConducción aérea direccional (OWS): Modelos como los Cleer ARC 5 , los Bose Ultra Open o los Shokz OpenFit colocan pequeños altavoces justo encima del canal auditivo. Ofrecen una calidad de graves superior y reproducen el audio espacial 3D con mucha mayor precisión.\n\nIntraurales con modo transparencia: Auriculares como los AirPods Pro logran un audio espacial sobresaliente, pero recrean el sonido exterior mediante micrófonos. Aunque resultan muy eficaces, muchos usuarios prefieren la naturalidad de no llevar nada dentro del oído.\n\nEl impacto de combinar audio espacial y auriculares open-ear no se limita a los desplazamientos urbanos. En el ámbito deportivo, permite correr o entrenar siguiendo métricas por voz sin perder de vista el entorno.\n\nAsimismo, el sector del gaming accesible está sacando un enorme partido a esta tecnología. Los audiogames y videojuegos con diseño sonoro 3D permiten identificar la posición exacta de enemigos, objetos o puertas mediante el sonido. Con unos buenos auriculares de oído abierto, disfrutar de estas experiencias resulta mucho más cómodo y evita la fatiga auditiva tras varias horas de uso.\n\nFuentes: Estudio sobre movilidad urbana y audio espacial en discapacidad visual , VoiceVista (ficha oficial en la App Store de Apple) ,",
+      "sourceName": "Conticgo",
+      "originalUrl": "https://conticgo.net/adios-a-caminar-con-un-solo-auricular-el-audio-espacial-y-los-auriculares-open-ear-revolucionan-la-movilidad/",
+      "publishedAt": "2026-11-20T07:00:09.000Z",
+      "categories": [
+        "tecnologia-accesibilidad",
+        "movilidad"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "techcrunch-daeae20ccbe7b55b:en",
       "sourceId": "techcrunch-daeae20ccbe7b55b",
       "lang": "en",
@@ -5676,23 +5839,6 @@
     },
     {
       "kind": "news",
-      "id": "engadget-44cbede32b4d3618:en",
-      "sourceId": "engadget-44cbede32b4d3618",
-      "lang": "en",
-      "title": "Job posting seemingly confirms Apple is working on its own AI agent for coding and other tasks",
-      "summary": "Apple is is hiring a senior engineering manager to build \"capable, reliable and safe\" agentic tools.",
-      "body": "It is hiring a senior engineering manager to build “capable, reliable and safe” agentic tools.\n\nApple appears to be developing its own in-house AI agent. While we picked up on this development via Mark Gurman at Bloomberg , the news actually comes direct from the company this time. Apple has an open job listing for a senior engineering manager of agentic AI that was posted earlier this week. The description states: \"As a senior leader in this org, you will own the technical direction and delivery of our agent platform and the AI capabilities built on it.\" It includes both general computer use and more technical coding tasks as falling within the future AI agent's purview, with the goal of being \"capable, reliable and safe.\"\n\nMany companies have already launched AI agents for public use this year. That includes heavy hitters in the AI space, such as Dots from OpenAI, Muse from Meta and Gemini Spark from Google. But other businesses not directly working in artificial intelligence are also embracing the agentic path.\n\nApple, on the other hand, has been a bit more cautious when it comes to agents. It recently warned developers that working with agentic AI \"could put users at risk\" by unwittingly allowing Full Disk Access. Apple then rolled out new controls earlier this week to give individuals better oversight into what data AI agents can access. Privacy is a frequent buzzword in Apple's recent software launches, so it will be interesting to see how the company walks the line whenever it unveils its own service.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2322586/job-posting-seemingly-confirms-apple-is-working-on-its-own-ai-agent-for-coding-and-other-tasks/",
-      "publishedAt": "2026-11-20T00:03:22.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "9to5mac-75baa23f1966b265:en",
       "sourceId": "9to5mac-75baa23f1966b265",
       "lang": "en",
@@ -5705,22 +5851,6 @@
       "categories": [
         "apple",
         "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-316239f2fc0b970e:en",
-      "sourceId": "engadget-316239f2fc0b970e",
-      "lang": "en",
-      "title": "Meta's Muse Charm will reportedly cost $300 and come with free Verizon 5G",
-      "summary": "Meta's standalone AI gadget won't be cheap, but it might come with a free data plan.",
-      "body": "The AI gadget was announced in September as a standalone way to interact with the company’s AI agent.\n\nMeta reportedly plans to sell the Muse Charm , a Tamagotchi-esque gadget for talking to its Muse AI agent, for $300, according to The Information . The company introduced the Muse Charm at Meta Connect in September as a way to use its agent without having to reach for a smartphone, and said it would launch in time for the holidays.\n\nAt Connect, CEO Mark Zuckerberg said the Muse Charm packs \"the whole Muse experience, including the real-time voice and avatar stack into something that fits on a keychain and is always available to talk to.\" The device features a fingerprint reader to verify your identity before you're able to give commands and will come with up to 12 months of free 5G data from Verizon, The Information reports.\n\nEngadget has asked Meta to comment on The Information 's report. We'll update this article if we hear back.\n\nIn October, Meta shared open source guides for interested developers to build their own \"Muse Gadgets.\" The company is clearly trying to capitalize on the popularity of Muse — the agent has already drawn more than 10 million users — by making it as accessible as possible and leaning into the cuteness and customizability of the Muse avatar. The company also recently released a Muse app for Wear OS and watchOS . Meta's work on its own smartwatch-like device has been delayed to 2027, according to The Information.\n\nMeta's larger goal for its AI models and hardware products appears to be directly owning its relationship with customers. Right now most people access Meta's products through apps on their smartphones, where they're subject to Apple's and Google's rules. A world where an AI agent takes the place of a variety of apps and is usable without a phone is one where Meta has a lot more control. The company is also working on commerce tools that will allow it to charge businesses a fee when Muse users make a purchase via the agent. Mark Zuckerberg has said he believes Muse could one day generate more revenue per user than the company's existing apps.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2322541/metas-muse-charm-will-reportedly-cost-300-and-come-with-free-verizon-5g/",
-      "publishedAt": "2026-11-19T22:56:42.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
       ]
     },
     {
@@ -5760,24 +5890,6 @@
     },
     {
       "kind": "news",
-      "id": "9to5mac-59f223ec4eece2af:en",
-      "sourceId": "9to5mac-59f223ec4eece2af",
-      "lang": "en",
-      "title": "Report: Apple job listings detail plans for autonomous AI agents",
-      "summary": "Bloomberg reports that Apple is hiring engineers to develop an autonomous AI agent capable of browsing the web, writing code, and controlling apps on behalf of users. Here are the details. more…",
-      "body": "Bloomberg reports that Apple is hiring engineers to develop an autonomous AI agent capable of browsing the web, writing code, and controlling apps on behalf of users. Here are the details.\n\nIn a report published today, Bloomberg notes that new job listings on Apple’s website indicate the company’s efforts to develop an autonomous AI agent capable of performing complex tasks on the user’s behalf.\n\nSince the breakout success of OpenClaw, autonomous AI agents have become increasingly popular, with companies such as OpenAI, Anthropic, Meta, and SpaceXSI among those offering their own solutions.\n\nThe increasing popularity of these agents has put Apple under pressure to catch up, while the company has also introduced new restrictions on how third-party AI agents can access and control Macs.\n\nLast month, Apple announced plans to tighten macOS privacy controls around Full Disk Access, with changes introduced in the macOS 27.3 beta that give users more granular control over which apps and information third-party AI agents can access.\n\nOver at the App Store, Meta’s Muse has become one of the fastest-growing apps in US history, surpassing 10 million downloads in just 40 days, according to Sensor Tower, and spending weeks at the top of the charts. As of today, it sits at No. 2 among free apps, behind TikTok.\n\nAnd while there are differences in how phone-based and computer-based agents operate, these systems can usually work together, coordinating tasks across devices and apps to accomplish increasingly complex goals.\n\nBack to Bloomberg ’s report, it notes Apple recently posted new job listings that offer a closer look at its plans to develop autonomous AI agents:\n\nIn one, Apple said it’s seeking a senior engineering manager for a proactive, agentic AI assistant. The system will write code, browse the web, control apps and navigate devices on a user’s behalf, according to the post.\n\nOne job listing, which is for “ Senior Engineering Manager, Agentic AI – Proactive ,” features the following summary:\n\n“Imagine an AI agent that can use a computer the way a capable person does. It browses the web, works across apps, runs commands, writes and debugs code, and calls services, and it chooses the right tool for each step. It does all this privately and with the polish people expect from Apple. Our team is building the foundation for that future, and we’re looking for a senior engineering leader to make it real.”\n\nThe listing also notes that Apple is building agents that can “plan and carry out multi-step tasks across apps, browsers, command lines, code, and APIs, and they can coordinate specialized sub-agents along the way,” much like existing solutions from frontier AI labs.\n\nToday’s report on the new job listings comes just days after Bloomberg reported that Apple wants to make Siri more like an autonomous AI agent, with the ability to proactively carry out tasks without requiring users to initiate every step. According to Mark Gurman, the company could introduce these capabilities as soon as next year.\n\nWith the new job listings, Apple has offered a more detailed look at its plans for autonomous AI agents, although the language suggests that development is still in its early stages.\n\nOf course, given how quickly the technology is evolving, the landscape could look very different by the time Apple is ready to introduce its own solution next year, much like how the industry had already moved toward autonomous agents by the time Apple finally launched its long-awaited Siri AI overhaul.\n\nTo read Bloomberg ’s report, follow this link .",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/19/report-apple-job-listings-detail-plans-for-autonomous-ai-agents/",
-      "publishedAt": "2026-11-19T22:21:28.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "apps-accesibles",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "the-verge-dffc921634522f9c:en",
       "sourceId": "the-verge-dffc921634522f9c",
       "lang": "en",
@@ -5789,54 +5901,6 @@
       "publishedAt": "2026-11-19T21:59:35.000Z",
       "categories": [
         "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-f063774c9b0e80de:en",
-      "sourceId": "9to5mac-f063774c9b0e80de",
-      "lang": "en",
-      "title": "First macOS Sequoia 15.8.4 and macOS Tahoe 26.7.4 RCs rolling out [U: Public]",
-      "summary": "Update, November 19, 4:46 p.m. ET: The release candidates are now available to public beta testers, with the same build numbers as the developer RCs. In addition to macOS 27.3 beta 2 , Apple is also rolling out the first Release Candidates for macOS Sequoia 15.8.4 and macOS Tahoe 26.7.4. Here are the details. more…",
-      "body": "Update, November 19, 4:46 p.m. ET: The release candidates are now available to public beta testers, with the same build numbers as the developer RCs.\n\nIn addition to macOS 27.3 beta 2 , Apple is also rolling out the first Release Candidates for macOS Sequoia 15.8.4 and macOS Tahoe 26.7.4. Here are the details.\n\nTwo weeks ago, Apple released macOS Tahoe 26.7.3 and Sequoia 15.8.3, along with macOS 27.2.1 Golden Gate, all of which included security fixes related to AirPlay, Bluetooth, and Messages, among others.\n\nToday, the company released the first RCs for macOS Sequoia 15.8.4 and macOS Tahoe 26.7.4, along with the second developer beta for macOS 27.3.\n\nAs is usually the case with direct-to-RC rollouts, Apple’s notes mention only that the updates provide ”security fixes for your Mac.” The actual release notes will likely become available soon after Apple officially releases macOS Sequoia 15.8.4 and macOS Tahoe 26.7.4 in the coming weeks.\n\nThe build for macOS Sequoia 15.8.4 RC 1 is 24H319, and the build for macOS Tahoe 26.7.4 RC 1 is 25G422.\n\nDid you spot anything new in today’s RCs? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/19/first-macos-sequoia-15-8-4-and-macos-tahoe-26-7-4-rcs-rolling-out/",
-      "publishedAt": "2026-11-19T21:48:30.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-ce172acd59fbb5c4:en",
-      "sourceId": "the-verge-ce172acd59fbb5c4",
-      "lang": "en",
-      "title": "Meta’s Muse Charm might cost $300",
-      "summary": "Meta is planning to price the Muse Charm, a little gadget with a screen that lets you chat with your Muse AI agent, at $300, according to The Information. CEO Mark Zuckerberg revealed the gadget earlier this year and said the company expected to ship the Charm \"in time for the holidays in December,\" but […]",
-      "body": "Meta is planning to price the Muse Charm, a little gadget with a screen that lets you chat with your Muse AI agent, at $300, according to The Information . CEO Mark Zuckerberg revealed the gadget earlier this year and said the company expected to ship the Charm \"in time for the holidays in December,\" but he didn't provide a price at the time.\n\nWhen he announced the Muse Charm, Zuckerberg said that the company had \"packed the whole Muse experience,\" including real-time voice and avatar technology, into the gadget. It has a fingerprint sensor, and you can tap it to be able to talk to a Muse AI agent without unlocking a phone or opening an app. …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1038087/meta-muse-charm-ai-price",
-      "publishedAt": "2026-11-19T20:22:17.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-fbae1806d917d0d7:en",
-      "sourceId": "engadget-fbae1806d917d0d7",
-      "lang": "en",
-      "title": "Employees call out Google over AI Search in schools",
-      "summary": "The Alphabet Workers Union voiced concern over Google requiring its AI tools be bundled with Search.",
-      "body": "The Alphabet Workers Union voiced concern over Google requiring its AI tools be bundled with Search.\n\nGoogle continues to draw fire for its handling of AI features in its Classroom services for students. Earlier this month, Google set out a policy that would essentially require schools to have some AI features enabled in order for their students to use the company's Search tools. The argument from the business was that \"Search and AI are deeply integrated\" to the point that a blanket ban on AI at a school would make Search unavailable to its students. The claim seems to dismiss Google's decades of operation before it even launched Gemini and other public-facing AI tools. It's a controversial enough move that some of Google's own employees have spoken out opposing the decision.\n\nMembers of the Alphabet Workers Union, CWA Local 9009, released a statement today criticizing Google for its handling of the issue. \"Any opportunity to drive positive change with AI in education will rely on educators having the freedom to choose how to implement it in their curriculum,\" the statement reads. \"Cutting off access to Search for schools that don't wish to use AI will not help persuade our users, and will more likely result in them shutting out Google products altogether.\" More than 500 employees signed the petition, calling on Google leadership to \"reconsider this decision, and allow schools to turn off AI features in Search without disrupting their ability to use search as a whole.\"\n\nThe concern about splitting from Google appears to be justified. According to The New York Times , school districts in New York City, Los Angeles and Chicago are all considering adopting an alternate search engine rather than cede control over how students use AI to Google.\n\nIt's also a reminder to that despite Google's attempts to make Gemini and its other AI products essential, they can in fact be turned off. It's just a matter of the company being unwilling to turn them off.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2322304/employees-call-out-google-over-ai-search-in-schools/",
-      "publishedAt": "2026-11-19T20:00:12.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
       ]
     },
     {
@@ -5919,21 +5983,6 @@
       "categories": [
         "tecnologia-general",
         "windows"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-938811e38ffeb68e:en",
-      "sourceId": "ars-technica-938811e38ffeb68e",
-      "lang": "en",
-      "title": "Muse privacy invasions are freaking out Meta staffers, internal chats show",
-      "summary": "Erratic Muse outputs sharing random bank, bitcoin balances aren’t real, Meta says.",
-      "body": "After some early adopters of Meta’s Muse AI agent complained that it was spying on private messages and behaving unpredictably earlier this fall, Reuters exposed internal chats showing that Meta staff had raised the same alarms.\n\nWhen testing the agent, staff warned that Muse appeared to be accessing encrypted private messages that users did not expect the bot to review, could be mixing up conversations between users, and even potentially sharing sensitive information users would never expect to be exposed.\n\nSome unexpected Muse outputs responded to questions that staffers never asked.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/tech-policy/2026/11/muse-privacy-invasions-are-freaking-out-meta-staffers-internal-chats-show/",
-      "publishedAt": "2026-11-18T19:19:33.000Z",
-      "categories": [
-        "tecnologia-general"
       ]
     },
     {
@@ -6125,22 +6174,6 @@
     },
     {
       "kind": "news",
-      "id": "applevis-apps-fd26878664bfe2cb:en",
-      "sourceId": "applevis-apps-fd26878664bfe2cb",
-      "lang": "en",
-      "title": "Spellweaver's Deck: Roguelike",
-      "summary": "A dark-fantasy roguelike deckbuilder where the story changes the cards in your hand. Built for one-thumb portrait play on iPhone. Pay once. No ads, no energy, no pay-to-win. The Hush is spreading through Vessany, taking voices, then names, then the people who owned them. You are a Spellweaver. You bind spells, oaths and memories into a grimoire of cards, and you set out from the Loom to learn what the silence wants. Every run is a new weave. Every choice leaves a thread behind. FOUR SPELLWEAVERS, FOUR WAYS TO FIGHT • Ashbinder – stoke Ember and let Burn do the killing. • Warden – raise Barriers, swear Oaths, and make every blow cost them. • Veilsinger – sow Dread, Echo your best spells, Exhaust what you no longer need. • Bonecaller – spend Bone Shards and your own blood, then hex the weakened. Almost 400 cards to collect and play, dozens of relics, dual-path upgrades, and Inscriptions that rewrite every card they touch. Read enemy intents, plan the turn, drag a card onto or tap and select its target. COMPANIONS WHO REMEMBER Recruit allies who bring their own gift cards and a once-per-fight intervention you trigger from the battle screen. Earn their devotion and they fight harder. Lose their trust and they leave, and the card they gave you curdles into a Regret curse in your deck. Every companion has a fate waiting on the ending screen. A WORLD THAT TALKS BACK More than a hundred story events across three acts. Bosses and elites speak when you meet them, when they turn, and when they die. Choices you made in Act I send their invoices in Act III. Multiple endings, and secrets past them. THE LOOM REMEMBERS Fall, and bind one earned card to the Loom for the next Weaver to carry. Spend Threads on new classes, cards, relics and boons. Climb ten levels of Weave Depth. Stack Trials for a higher score multiplier. Watch the tapestry gain a band with every victory, and the sky over the Loom remember how you ended. MORE WAYS TO WEAVE • Daily Weave – one seed for everyone, with rival ghosts showing where they fell. • Weekly Gauntlet – a named modifier stack, three attempts, a recurring leaderboard. • The Tolling – six bells, elite to boss, about twelve minutes. • Loomcast – draft your grimoire before you set out. • Seeded practice – any seed, any unlocked depth. MADE FOR IPHONE, WORKS ON IPAD Portrait, one-thumb, drag-to-target. Haptics, floating numbers, screen shake, and a full score with act, boss, shop and rest themes. Autosave and resume at any moment. Game Center leaderboards and achievements. iCloud backup of your progress. Plays offline. FAIR BY DESIGN Buy it once and the whole game is yours. The optional extras are cosmetic: card backs, card faces, tapestry themes, thread dyes. Nothing you can buy changes a card, a drop rate, or a difficulty. Money never buys balance. The world is falling silent. What will you weave?",
-      "body": "A dark-fantasy roguelike deckbuilder where the story changes the cards in your hand. Built for one-thumb portrait play on iPhone. Pay once. No ads, no energy, no pay-to-win.\n\nThe Hush is spreading through Vessany, taking voices, then names, then the people who owned them. You are a Spellweaver. You bind spells, oaths and memories into a grimoire of cards, and you set out from the Loom to learn what the silence wants. Every run is a new weave. Every choice leaves a thread behind.\n\nFOUR SPELLWEAVERS, FOUR WAYS TO FIGHT • Ashbinder – stoke Ember and let Burn do the killing. • Warden – raise Barriers, swear Oaths, and make every blow cost them. • Veilsinger – sow Dread, Echo your best spells, Exhaust what you no longer need. • Bonecaller – spend Bone Shards and your own blood, then hex the weakened. Almost 400 cards to collect and play, dozens of relics, dual-path upgrades, and Inscriptions that rewrite every card they touch. Read enemy intents, plan the turn, drag a card onto or tap and select its target.\n\nCOMPANIONS WHO REMEMBER Recruit allies who bring their own gift cards and a once-per-fight intervention you trigger from the battle screen. Earn their devotion and they fight harder. Lose their trust and they leave, and the card they gave you curdles into a Regret curse in your deck. Every companion has a fate waiting on the ending screen.\n\nA WORLD THAT TALKS BACK More than a hundred story events across three acts. Bosses and elites speak when you meet them, when they turn, and when they die. Choices you made in Act I send their invoices in Act III. Multiple endings, and secrets past them.\n\nTHE LOOM REMEMBERS Fall, and bind one earned card to the Loom for the next Weaver to carry. Spend Threads on new classes, cards, relics and boons. Climb ten levels of Weave Depth. Stack Trials for a higher score multiplier. Watch the tapestry gain a band with every victory, and the sky over the Loom remember how you ended.\n\nMORE WAYS TO WEAVE • Daily Weave – one seed for everyone, with rival ghosts showing where they fell. • Weekly Gauntlet – a named modifier stack, three attempts, a recurring leaderboard. • The Tolling – six bells, elite to boss, about twelve minutes. • Loomcast – draft your grimoire before you set out. • Seeded practice – any seed, any unlocked depth.\n\nMADE FOR IPHONE, WORKS ON IPAD Portrait, one-thumb, drag-to-target. Haptics, floating numbers, screen shake, and a full score with act, boss, shop and rest themes. Autosave and resume at any moment. Game Center leaderboards and achievements. iCloud backup of your progress. Plays offline.\n\nFAIR BY DESIGN Buy it once and the whole game is yours. The optional extras are cosmetic: card backs, card faces, tapestry themes, thread dyes. Nothing you can buy changes a card, a drop rate, or a difficulty. Money never buys balance.\n\nThe world is falling silent. What will you weave?",
-      "sourceName": "AppleVis Apps",
-      "originalUrl": "https://www.applevis.com/apps/ios/games/spellweavers-deck-roguelike",
-      "publishedAt": "2026-11-14T21:19:42.000Z",
-      "categories": [
-        "apple",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "accessible-android-4ff0db36f595ad3f:en",
       "sourceId": "accessible-android-4ff0db36f595ad3f",
       "lang": "en",
@@ -6154,22 +6187,6 @@
         "android",
         "apps-accesibles",
         "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "applevis-apps-d55eda5d5d7fe73a:en",
-      "sourceId": "applevis-apps-d55eda5d5d7fe73a",
-      "lang": "en",
-      "title": "Still: Breathing Exercises",
-      "summary": "Wind down after work with a short breathing practice. Start with seven free practices, including Box Breathing, 4-7-8 Breathing and Equal Breathing, at 3 and 5 minutes, most with a one-minute version. Choose a quiet reset, refocus between tasks, or make a little room as you wind down. Follow one living ring with visual cues and gentle haptics. No account needed. BOX AND 4-7-8 BREATHING, FREE Two well-known named rhythms, free at 3 and 5 minutes. Box Breathing: 4 in · 4 hold · 4 out · 4 pause. 4-7-8 Breathing: 4 in · 7 hold · 8 out. Holds are gentle and optional, voice guidance marks each hold with a soft spoken cue, and you can breathe out early at any time. Box Breathing also comes as a 10-minute session with Premium; 4-7-8 Breathing is offered at 3 and 5 minutes. START FREE Repeat the seven free practices as often as you like, and begin with a free three-day starter collection. Soft rain and noise backgrounds, personal practice history, and history backups through Files or iCloud Drive stay free. Full English voice guidance is part of Still Premium; free 30-second samples let you hear it before subscribing. FIND YOUR RHYTHM Clear visual cues and gentle haptics guide each practice. Choose from three English guidance voices, preview them with free 30-second samples, or set a custom rhythm of your own with Premium. Breathe comfortably and return to your own pace whenever you need to. EXPLORE STILL PREMIUM Make more room for your practice with the complete library of 27 practices, a custom rhythm, sessions up to 10 minutes, all 10 soundscapes, English voice guidance, and four seven-day guided collections. Every subscription plan includes the same Premium access. Anyone can browse the collections, and days built on free practices can be started without Premium. KEEP A QUIET HISTORY See your completed sessions, minutes, weekly rhythm, and streaks. Add a Home or Lock Screen widget, and optionally save mindful minutes to Apple Health. Your practice history is stored locally, with optional synchronization through your private iCloud database. READY OFFLINE Practices and audio are bundled in the app. Buying or restoring Premium needs an internet connection; verified, active Premium access supports offline practice. The app interface is available in English, German, French, Spanish, Japanese, and Portuguese (Brazil); voice guidance is in English. No advertising or cross-app tracking. Usage sharing is optional and stays off unless you turn it on. Apple and RevenueCat process purchases and subscription-related information, as described in our Privacy Policy. Still Premium is an optional auto-renewable subscription. Plans, prices, and billing periods are shown before purchase. Eligible subscribers may receive a free trial on the weekly or yearly plan; the renewal price and billing period are shown before purchase. Payment is charged to your Apple Account at confirmation. Subscriptions renew automatically unless canceled at least 24 hours before the current period ends. Your account is charged for renewal within 24 hours before the end of the current period. Manage or cancel in your App Store account settings. Still provides general-wellness breathing and mindfulness content, not medical advice, diagnosis, or treatment. Stop if you feel unwell or uncomfortable. Do not practice while driving, in water, or during an activity requiring your full attention. Privacy Policy: https://still.calimanu.com/privacy Terms of Use: https://still.calimanu.com/terms Support: https://still.calimanu.com/support",
-      "body": "Wind down after work with a free three-minute practice. Explore English voice, longer sessions and guided collections with Still Premium. No account needed.\n\nWind down after work with a short breathing practice.\n\nStart with six free practices, including Box Breathing and 4-7-8 Breathing, at 3 and 5 minutes. Choose a quiet reset, refocus between tasks, or make a little room as you wind down. Follow one living ring with visual cues and gentle haptics. No account needed.\n\nBOX AND 4-7-8 BREATHING, FREE Two well-known named rhythms, free at 3 and 5 minutes. Box Breathing: 4 in · 4 hold · 4 out · 4 pause. 4-7-8 Breathing: 4 in · 7 hold · 8 out. Holds are gentle and optional, the voice stays silent while you hold, and you can breathe out early at any time. Box Breathing also comes as a 10-minute session with Premium; 4-7-8 Breathing is offered at 3 and 5 minutes.\n\nSTART FREE Repeat the six free practices as often as you like. Soft rain and noise backgrounds, personal practice history, and history backups through Files or iCloud Drive stay free. Full English voice guidance is part of Still Premium; free 30-second samples let you hear it before subscribing.\n\nFIND YOUR RHYTHM Clear visual cues and gentle haptics guide each practice. Preview the English voice with free 30-second samples. Breathe comfortably and return to your own pace whenever you need to.\n\nEXPLORE STILL PREMIUM Make more room for your practice with the complete library of 26 practices, 3-, 5-, and 10-minute sessions, all 10 soundscapes, English voice guidance, and four guided collections. Every subscription plan includes the same Premium access. Anyone can browse the collections, and days built on free practices can be started without Premium.\n\nKEEP A QUIET HISTORY See your completed sessions, minutes, weekly rhythm, and streaks. Your practice history is stored locally, with optional synchronization through your private iCloud database.\n\nREADY OFFLINE Practices and audio are bundled in the app. Buying or restoring Premium needs an internet connection; verified, active Premium access supports offline practice. The app interface is available in English, German, French, Spanish, Japanese, and Portuguese (Brazil); voice guidance is in English.\n\nNo advertising or cross-app tracking. Apple and RevenueCat process purchases and subscription-related information, as described in our Privacy Policy.\n\nStill Premium is an optional auto-renewable subscription. Plans, prices, and billing periods are shown before purchase. Eligible subscribers may receive a free trial on the weekly or yearly plan; the renewal price and billing period are shown before purchase.\n\nPayment is charged to your Apple Account at confirmation. Subscriptions renew automatically unless canceled at least 24 hours before the current period ends. Your account is charged for renewal within 24 hours before the end of the current period. Manage or cancel in your App Store account settings.\n\nStill provides general-wellness breathing and mindfulness content, not medical advice, diagnosis, or treatment. Stop if you feel unwell or uncomfortable. Do not practice while driving, in water, or during an activity requiring your full attention.",
-      "sourceName": "AppleVis Apps",
-      "originalUrl": "https://www.applevis.com/apps/ios/health-fitness/still-breathing-exercises",
-      "publishedAt": "2026-11-14T17:18:05.000Z",
-      "categories": [
-        "apple",
-        "apps-accesibles"
       ]
     },
     {

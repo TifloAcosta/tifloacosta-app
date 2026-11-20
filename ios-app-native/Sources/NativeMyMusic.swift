@@ -1069,14 +1069,17 @@ struct NativeMyMusicScreen: View {
                                 }
                             }
                         }
+                        .accessibilityLabel(MusicLocalized.format("%@, %@, Apple Music", entry.title, entry.artist ?? ""))
                     case .audius:
                         Button(MusicLocalized.format("Escuchar %@, %@, Audius", entry.title, entry.artist ?? "")) {
                             playOnline { NativeAudiusPlayer.shared.play(id: entry.appleMusicSongId ?? "", title: entry.title) }
                         }
+                        .accessibilityLabel(MusicLocalized.format("%@, %@, Audius", entry.title, entry.artist ?? ""))
                     case .jamendo:
                         Button(MusicLocalized.format("Escuchar %@, %@, Jamendo", entry.title, entry.artist ?? "")) {
                             playOnline { Task { await NativeJamendoPlayer.shared.playSaved(id: entry.appleMusicSongId ?? "") } }
                         }
+                        .accessibilityLabel(MusicLocalized.format("%@, %@, Jamendo", entry.title, entry.artist ?? ""))
                     case .local:
                         if entry.localId != nil,
                            !library.files.contains(where: { $0.id == entry.localId }) {

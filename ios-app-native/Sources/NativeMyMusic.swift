@@ -455,10 +455,14 @@ private final class NativeMusicLibrary: ObservableObject {
         do {
             let bookmark = try url.bookmarkData(options: [],
                 includingResourceValuesForKeys: nil, relativeTo: nil)
+            guard let document = exportIndex() else { return }
+            try writeAutomaticBackup(document, to: url, custom: true)
             UserDefaults.standard.set(bookmark, forKey: automaticBackupBookmarkKey)
             UserDefaults.standard.set(url.lastPathComponent,
                 forKey: "mi-musica-auto-backup-destination-name")
             automaticBackupDestinationName = url.lastPathComponent
+            lastAutomaticBackup = Date()
+            UserDefaults.standard.set(lastAutomaticBackup, forKey: "mi-musica-last-auto-backup")
             error = nil
         } catch {
             self.error = "No se pudo guardar el destino elegido: \(error.localizedDescription)"
@@ -466,9 +470,16 @@ private final class NativeMusicLibrary: ObservableObject {
     }
 
     func resetAutomaticBackupDestination() {
-        UserDefaults.standard.removeObject(forKey: automaticBackupBookmarkKey)
-        UserDefaults.standard.removeObject(forKey: "mi-musica-auto-backup-destination-name")
-        automaticBackupDestinationName = "Carpeta interna de Mi Música"
+        guard let document = exportIndex() else { return }
+        do {
+            try writeAutomaticBackup(document, to: directory.appendingPathComponent("Respaldos", isDirectory: true), custom: false)
+            UserDefaults.standard.removeObject(forKey: automaticBackupBookmarkKey)
+            UserDefaults.standard.removeObject(forKey: "mi-musica-auto-backup-destination-name")
+            automaticBackupDestinationName = "Carpeta interna de Mi Música"
+            lastAutomaticBackup = Date()
+            UserDefaults.standard.set(lastAutomaticBackup, forKey: "mi-musica-last-auto-backup")
+            error = nil
+        } catch { self.error = "No se pudo restablecer el destino interno: \(error.localizedDescription)" }
     }
 
     private func automaticBackupDirectory() throws -> URL {
@@ -482,11 +493,8 @@ private final class NativeMusicLibrary: ObservableObject {
         return folder
     }
 
-    private func writeAutomaticBackup(_ document: MusicBackupDocument, to folder: URL) throws {
-        let isCustom = UserDefaults.standard.data(forKey: automaticBackupBookmarkKey) != nil
-        let accessed = isCustom ? folder.startAccessingSecurityScopedResource() : false
-        defer { if accessed { folder.stopAccessingSecurityScopedResource() } }
-        guard !isCustom || accessed else { throw CocoaError(.fileWriteNoPermission) }
+    private func writeAutomaticBackup(_ document: MusicBackupDocument, to folder: URL, custom: Bool) throws {
+        // The caller holds any security-scoped access while choosing a new destination.
         try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
         let destination = folder.appendingPathComponent("MiMusica-indice-automatico.json")
         try Data(document.text.utf8).write(to: destination, options: .atomic)
@@ -499,7 +507,11 @@ private final class NativeMusicLibrary: ObservableObject {
         guard let document = exportIndex() else { return }
         do {
             let folder = try automaticBackupDirectory()
-            try writeAutomaticBackup(document, to: folder)
+            let custom = UserDefaults.standard.data(forKey: automaticBackupBookmarkKey) != nil
+            let accessed = custom ? folder.startAccessingSecurityScopedResource() : false
+            defer { if accessed { folder.stopAccessingSecurityScopedResource() } }
+            guard !custom || accessed else { throw CocoaError(.fileWriteNoPermission) }
+            try writeAutomaticBackup(document, to: folder, custom: custom)
             lastAutomaticBackup = Date()
             UserDefaults.standard.set(lastAutomaticBackup, forKey: "mi-musica-last-auto-backup")
         } catch { self.error = "No se pudo guardar la copia automática: \(error.localizedDescription)" }

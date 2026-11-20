@@ -1004,11 +1004,6 @@ struct NativeMyMusicScreen: View {
                         library.importFiles([file])
                     }
                 }
-                NavigationLink("OneDrive") {
-                    NativeCloudFolderBrowserScreen(provider: .oneDrive) { file in
-                        library.importFiles([file])
-                    }
-                }
                 NavigationLink("Ajustes de Mi Música") { musicSettings }
                 NavigationLink("Plataformas musicales") {
                     NativeMusicPlatformsScreen(playlists: library.playlists.map {

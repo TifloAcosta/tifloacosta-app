@@ -42,7 +42,7 @@ enum NativeReaderFormats {
         .init(title: "Presentaciones", details: "PPTX, PPSX y PPTM: lectura por diapositivas. Las presentaciones PPS y PPT antiguas todavía no están admitidas."),
         .init(title: "Hojas de cálculo", details: "XLSX y XLSM: lectura por hojas, filas y columnas, incluidas cadenas compartidas. Los archivos XLS antiguos todavía no están admitidos."),
         .init(title: "Imágenes con OCR", details: "JPG, JPEG, PNG, HEIC, HEIF, TIF y TIFF."),
-        .init(title: "Audiolibros y audio", details: "MP3, M4A, M4B, AAC, WAV, AIF, AIFF y CAF. Pistas consecutivas dentro de un ZIP de audiolibro, ordenadas naturalmente por sus nombres."),
+        .init(title: "Audiolibros y audio", details: "MP3, M4A, M4B, AAC, WAV, AIF, AIFF, CAF y FLAC. Pistas consecutivas dentro de un ZIP de audiolibro, ordenadas naturalmente por sus nombres."),
         .init(title: "DAISY", details: "Libros DAISY empaquetados en ZIP o con extensión DAISY. Lectura de texto y pistas de audio; la navegación SMIL completa sigue en desarrollo."),
         .init(title: "Archivos comprimidos", details: "ZIP con pistas de audio o libros DAISY. No se admiten ZIP arbitrarios, RAR, 7Z ni CBR/CBZ.")
     ]

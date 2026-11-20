@@ -129,7 +129,7 @@ private struct NativeGeminiKeyGuide: View {
                         Button("Pegar la clave copiada") {
                             if pasteCopiedKey() { dismiss() }
                             else {
-                                status = "No hay texto copiado. Vuelve a Google, copia la clave y regresa."
+                                status = MusicLocalized.message("No hay texto copiado. Vuelve a Google, copia la clave y regresa.")
                             }
                         }
                         .accessibilityFocused($focusPasteButton)
@@ -238,7 +238,7 @@ struct NativeReaderExternalVoiceDetailScreen: View {
         }
         keyInput = copied
         returnedFromGeminiGuide = true
-        message = "Clave copiada en el campo. Pulsa Guardar para almacenarla de forma segura."
+        message = MusicLocalized.message("Clave copiada en el campo. Pulsa Guardar para almacenarla de forma segura.")
         return true
     }
 
@@ -249,25 +249,25 @@ struct NativeReaderExternalVoiceDetailScreen: View {
         do {
             guard NativeVoiceCredentialStore.hasKey("gemini") else {
                 geminiValidated = false
-                message = "No hay ninguna clave guardada."
+                message = MusicLocalized.message("No hay ninguna clave guardada.")
                 return
             }
             // Listing Google's models can succeed even if this key cannot
             // synthesize audio. The readiness check must exercise real TTS.
             let sample = try await NativeGeminiSpeech.generate("Prueba de voz", voice: "Kore")
             guard sample.starts(with: Data("RIFF".utf8)) else {
-                message = "Gemini respondió, pero no devolvió audio compatible."
+                message = MusicLocalized.message("Gemini respondió, pero no devolvió audio compatible.")
                 return
             }
             geminiValidated = true
-            message = "Prueba de voz correcta. Gemini está preparado para leer y convertir documentos."
+            message = MusicLocalized.message("Prueba de voz correcta. Gemini está preparado para leer y convertir documentos.")
         } catch NativeGeminiSpeech.Error.refused {
             geminiValidated = false
-            message = "Google rechazó la clave o sus permisos. Revisa Google AI Studio."
+            message = MusicLocalized.message("Google rechazó la clave o sus permisos. Revisa Google AI Studio.")
         } catch {
             // A temporary outage or exhausted quota does not erase a key
             // that has previously passed the actual TTS check.
-            message = "No se pudo generar la muestra de voz: \(error.localizedDescription)"
+            message = MusicLocalized.format("No se pudo generar la muestra de voz: %@", error.localizedDescription)
         }
     }
 
@@ -379,7 +379,7 @@ struct NativeReaderExternalVoiceDetailScreen: View {
                     if pasteGeminiKeyFromClipboard() {
                         focusGeminiSave = true
                     } else {
-                        message = "No hay una clave de texto copiada. Abre Crear clave API con guía e inténtalo de nuevo."
+                        message = MusicLocalized.message("No hay una clave de texto copiada. Abre Crear clave API con guía e inténtalo de nuevo.")
                     }
                 }
                 .accessibilityFocused($focusGeminiPaste)
@@ -390,7 +390,7 @@ struct NativeReaderExternalVoiceDetailScreen: View {
                         keyInput = ""
                         hasGeminiKey = true
                         geminiValidated = false
-                        message = "Clave guardada en el dispositivo. Pulsa Comprobar conexión."
+                        message = MusicLocalized.message("Clave guardada en el dispositivo. Pulsa Comprobar conexión.")
                         focusGeminiCheck = true
                     } catch {
                         message = error.localizedDescription
@@ -510,7 +510,7 @@ struct NativeReaderExternalVoiceDetailScreen: View {
                 do {
                     try NativeVoiceCredentialStore.delete("gemini")
                     hasGeminiKey = false
-                    message = "Clave eliminada."
+                    message = MusicLocalized.message("Clave eliminada.")
                     geminiValidated = false
                 } catch {
                     message = error.localizedDescription

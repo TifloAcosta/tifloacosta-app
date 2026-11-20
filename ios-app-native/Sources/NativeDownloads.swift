@@ -76,7 +76,7 @@ final class NativeDownloadStore: ObservableObject {
                         // Google Drive may refuse HEAD while allowing a normal
                         // download. Only the actual GET can confirm its access.
                         canDownload = true
-                        message = "Enlace de Google Drive reconocido, pero no se pudo verificar el acceso previamente. Prueba Descargar. Si falla, abre el enlace original y revisa sus permisos."
+                        message = MusicLocalized.message("Enlace de Google Drive reconocido, pero no se pudo verificar el acceso previamente. Prueba Descargar. Si falla, abre el enlace original y revisa sus permisos.")
                         return
                     default: break
                     }
@@ -89,7 +89,7 @@ final class NativeDownloadStore: ObservableObject {
                 note = "No se pudo verificar el acceso previo. Se comprobará al descargar."
             }
             canDownload = true
-            message = "\(item.type) reconocido. \(note)"
+            message = MusicLocalized.format("%@ reconocido. %@", item.type, note)
         } catch {
             message = error.localizedDescription
         }
@@ -99,7 +99,7 @@ final class NativeDownloadStore: ObservableObject {
         guard !busy else { return }
         busy = true
         defer { busy = false }
-        message = "Descargando archivo…"
+        message = MusicLocalized.message("Descargando archivo…")
         do {
             let (temporary, response) = try await NativeDriveTransfer.download(item)
             try NativeAnalyzedDownload.verifyResponse(response, for: item)
@@ -123,20 +123,20 @@ final class NativeDownloadStore: ObservableObject {
             let destination = folder.appendingPathComponent(UUID().uuidString + "-" + String(name.prefix(120)))
             try FileManager.default.copyItem(at: temporary, to: destination)
             refresh()
-            message = "Archivo descargado en TifloAcosta: \(name). Está disponible en Mis descargas para importar a TifloLector o compartir."
+            message = MusicLocalized.format("Archivo descargado en TifloAcosta: %@. Está disponible en Mis descargas para importar a TifloLector o compartir.", name)
         } catch let error as NativeDownloadLinkError {
             message = error.localizedDescription
         } catch let error as URLError {
             switch error.code {
             case .timedOut:
-                message = "La descarga ha agotado el tiempo de espera. Comprueba la conexión."
+                message = MusicLocalized.message("La descarga ha agotado el tiempo de espera. Comprueba la conexión.")
             case .notConnectedToInternet, .networkConnectionLost:
-                message = "No hay conexión a Internet disponible para descargar."
+                message = MusicLocalized.message("No hay conexión a Internet disponible para descargar.")
             default:
-                message = "No fue posible descargar el archivo. Comprueba el enlace y vuelve a intentarlo."
+                message = MusicLocalized.message("No fue posible descargar el archivo. Comprueba el enlace y vuelve a intentarlo.")
             }
         } catch {
-            message = "No se pudo guardar el archivo: \(error.localizedDescription)"
+            message = MusicLocalized.format("No se pudo guardar el archivo: %@", error.localizedDescription)
         }
     }
 

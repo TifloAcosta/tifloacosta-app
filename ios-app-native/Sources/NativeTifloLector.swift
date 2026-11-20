@@ -2195,7 +2195,7 @@ struct NativeReadingScreen: View {
         let utf16Offset = String(document.body.prefix(readingOffset)).utf16.count
         if effectiveReadingEngine == 1 {
             guard NativeVoiceCredentialStore.hasKey("gemini") else {
-                actionMessage = "Configura la clave Gemini en Motores externos."
+                actionMessage = MusicLocalized.message("Configura la clave Gemini en Motores externos.")
                 return
             }
             do {
@@ -2206,11 +2206,11 @@ struct NativeReadingScreen: View {
                         actionMessage = message
                         UIAccessibility.post(notification: .announcement, argument: message)
                     })
-                actionMessage = "Generando el primer fragmento con Gemini. La reproducción comenzará cuando Google devuelva el audio."
+                actionMessage = MusicLocalized.message("Generando el primer fragmento con Gemini. La reproducción comenzará cuando Google devuelva el audio.")
             } catch { actionMessage = error.localizedDescription }
         } else if effectiveReadingEngine == 2 {
             guard NativePhononRuntime.isUsable else {
-                actionMessage = "Instala el motor y modelo Phonon en Motores externos."
+                actionMessage = MusicLocalized.message("Instala el motor y modelo Phonon en Motores externos.")
                 return
             }
             do {
@@ -2290,7 +2290,7 @@ struct NativeReadingScreen: View {
         }
         let urls = tracks.compactMap { NativeReaderFormats.storedURL(for: $0) }
         guard urls.count == tracks.count else {
-            actionMessage = "Faltan archivos de audio de esta obra."
+            actionMessage = MusicLocalized.message("Faltan archivos de audio de esta obra.")
             return
         }
         do {
@@ -2301,10 +2301,10 @@ struct NativeReadingScreen: View {
                     persistPosition()
                     applySleepTimer()
                 },
-                onError: { error in actionMessage = "No se pudo reproducir: " + error })
+                onError: { error in actionMessage = MusicLocalized.format("No se pudo reproducir: %@", error) })
             actionMessage = nil
         } catch {
-            actionMessage = "No se pudo reproducir: \(error.localizedDescription)"
+            actionMessage = MusicLocalized.format("No se pudo reproducir: %@", error.localizedDescription)
         }
     }
 
@@ -2318,7 +2318,7 @@ struct NativeReadingScreen: View {
 
     private func jumpToDaisy(_ point: NativeDaisyNavigationPoint) {
         guard tracks.indices.contains(point.track) else {
-            actionMessage = "La pista indicada no está disponible."
+            actionMessage = MusicLocalized.message("La pista indicada no está disponible.")
             return
         }
         trackIndex = point.track
@@ -2427,13 +2427,13 @@ struct NativeReadingScreen: View {
 
     private func activateCurrentLink() {
         guard navigationUnit == 8 else {
-            actionMessage = "Selecciona Enlaces en Modo de navegación."
+            actionMessage = MusicLocalized.message("Selecciona Enlaces en Modo de navegación.")
             return
         }
         if let link = latest.textLinks?.first(where: { $0.offset == readingOffset }),
            let target = link.targetOffset {
             jump(to: target)
-            actionMessage = "Destino: \(link.title)"
+            actionMessage = MusicLocalized.format("Destino: %@", link.title)
         } else if let link = latest.textLinks?.first(where: { $0.offset == readingOffset }),
                   let url = URL(string: link.url),
                   ["https", "http"].contains(url.scheme?.lowercased() ?? ""),
@@ -2442,7 +2442,7 @@ struct NativeReadingScreen: View {
         } else if let url = textLayout.visibleURL(at: readingOffset) {
             UIApplication.shared.open(url)
         } else {
-            actionMessage = "No hay un enlace disponible en esta posición."
+            actionMessage = MusicLocalized.message("No hay un enlace disponible en esta posición.")
         }
     }
 
@@ -2459,14 +2459,14 @@ struct NativeReadingScreen: View {
                 ? offsets.first(where: { $0 > readingOffset })
                 : offsets.last(where: { $0 < readingOffset })
             guard let next else {
-                actionMessage = "No hay más enlaces en esa dirección."
+                actionMessage = MusicLocalized.message("No hay más enlaces en esa dirección.")
                 return
             }
             jump(to: next)
             if let link = latest.textLinks?.first(where: { $0.offset == next }) {
-                actionMessage = "Enlace: \(link.title)"
+                actionMessage = MusicLocalized.format("Enlace: %@", link.title)
             } else if let url = textLayout.visibleURL(at: next) {
-                actionMessage = "Enlace: \(url.absoluteString)"
+                actionMessage = MusicLocalized.format("Enlace: %@", url.absoluteString)
             }
             return
         }
@@ -2505,7 +2505,7 @@ struct NativeReadingScreen: View {
             return direction > 0 ? seconds > currentTime + 0.5 : seconds < currentTime - 0.5
         }
         guard let point = direction > 0 ? candidates.first : candidates.last else {
-            actionMessage = "No hay más elementos de ese tipo en esa dirección."
+            actionMessage = MusicLocalized.message("No hay más elementos de ese tipo en esa dirección.")
             return
         }
         jumpToDaisy(point)
@@ -2531,7 +2531,7 @@ struct NativeReadingScreen: View {
                     : mark.percent < currentPercent
             }
             guard let mark = direction > 0 ? candidates.first : candidates.last else {
-                actionMessage = "No hay más marcas en esa dirección."
+                actionMessage = MusicLocalized.message("No hay más marcas en esa dirección.")
                 return
             }
             trackIndex = mark.track
@@ -2553,7 +2553,7 @@ struct NativeReadingScreen: View {
                 ? offsets.first(where: { $0 > readingOffset })
                 : offsets.last(where: { $0 < readingOffset })
             guard let next else {
-                actionMessage = "No hay más marcas en esa dirección."
+                actionMessage = MusicLocalized.message("No hay más marcas en esa dirección.")
                 return
             }
             jump(to: next)
@@ -2691,7 +2691,7 @@ struct NativeReadingScreen: View {
             speech.skip(seconds: TimeInterval(direction * timeStep))
             currentPercent = speech.audioPercent
             persistPosition()
-            actionMessage = "Posición: \(currentPercent) por ciento."
+            actionMessage = MusicLocalized.format("Posición: %d por ciento.", currentPercent)
         } else {
             guard !document.body.isEmpty else { return }
             let charactersPerMinute = Double(textLayout.totalCharacters) /
@@ -2699,7 +2699,7 @@ struct NativeReadingScreen: View {
             let offset = readingOffset + direction * max(1,
                 Int(charactersPerMinute * Double(timeStep) / 60.0))
             jump(to: offset)
-            actionMessage = "Posición: \(currentPercent) por ciento."
+            actionMessage = MusicLocalized.format("Posición: %d por ciento.", currentPercent)
         }
     }
 
@@ -2886,7 +2886,7 @@ struct NativeReadingScreen: View {
             try latest.body.write(to: url, atomically: true, encoding: .utf8)
             NativeShare.present(url: url)
         } catch {
-            actionMessage = "No se pudo exportar: \(error.localizedDescription)"
+            actionMessage = MusicLocalized.format("No se pudo exportar: %@", error.localizedDescription)
         }
     }
 
@@ -3224,13 +3224,13 @@ struct NativeReadingScreen: View {
             do {
                 NativeShare.present(url: try library.shareableOriginalURL(for: document))
             } catch {
-                actionMessage = "No se pudo compartir: \(error.localizedDescription)"
+                actionMessage = MusicLocalized.format("No se pudo compartir: %@", error.localizedDescription)
             }
         } else if tracks.count > 1 {
             do {
                 NativeShare.present(url: try library.exportAudioTracks(document))
             } catch {
-                actionMessage = "No se pudo compartir: \(error.localizedDescription)"
+                actionMessage = MusicLocalized.format("No se pudo compartir: %@", error.localizedDescription)
             }
         } else if tracks.count == 1, let track = tracks.first,
                   let url = NativeReaderFormats.storedURL(for: track) {
@@ -3288,7 +3288,7 @@ struct NativeReadingScreen: View {
                 do {
                     NativeShare.present(url: try library.exportAudioTracks(document))
                 } catch {
-                    actionMessage = "No se pudieron compartir todas las pistas: \(error.localizedDescription)"
+                    actionMessage = MusicLocalized.format("No se pudieron compartir todas las pistas: %@", error.localizedDescription)
                 }
             }
         }

@@ -145,7 +145,7 @@ struct NativeCloudFolderBrowserScreen: View {
         defer { importingID = nil }
         do {
             guard network.canDownload(allowCellular: allowCellular) else {
-                error = "No hay una conexión permitida para descargar este archivo."
+                error = MusicLocalized.message("No hay una conexión permitida para descargar este archivo.")
                 return
             }
             let token = try await accounts.validAccessToken(for: provider)

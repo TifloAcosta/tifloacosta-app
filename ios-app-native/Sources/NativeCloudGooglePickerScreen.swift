@@ -100,7 +100,7 @@ struct NativeCloudGooglePickerScreen: View {
         defer { importingID = nil }
         do {
             guard network.canDownload(allowCellular: allowCellular) else {
-                alertMessage = "No hay una conexión permitida para descargar este archivo."
+                alertMessage = MusicLocalized.message("No hay una conexión permitida para descargar este archivo.")
                 return
             }
             let token = try await accounts.validAccessToken(for: .googleDrive)

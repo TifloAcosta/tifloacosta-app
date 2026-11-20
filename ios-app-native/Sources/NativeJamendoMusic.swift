@@ -274,8 +274,18 @@ private struct NativeJamendoTrackRows: View {
                 Button("\(track.name), \(track.artistName)") {
                     player.play(name: track.name, artist: track.artistName, url: url)
                 }
-                .accessibilityAction(named: Text("Reproducir")) {
-                    player.play(name: track.name, artist: track.artistName, url: url)
+                .accessibilityActions {
+                    Button("Reproducir") {
+                        player.play(name: track.name, artist: track.artistName, url: url)
+                    }
+                    if let addToPlaylist {
+                        ForEach(playlists) { playlist in
+                            Button("Añadir a \(playlist.name)") {
+                                addToPlaylist("jamendo", track.id, track.name,
+                                    track.artistName, playlist.id)
+                            }
+                        }
+                    }
                 }
                 NativeMusicPlaylistMenu(playlists: playlists, provider: "jamendo",
                     songID: track.id, title: track.name, artist: track.artistName,

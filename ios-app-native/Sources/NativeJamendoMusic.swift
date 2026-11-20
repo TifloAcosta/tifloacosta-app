@@ -35,18 +35,38 @@ private final class NativeJamendoDirectory: ObservableObject {
 
     func search(_ term: String) async {
         let query = term.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !query.isEmpty else { tracks = []; error = nil; return }
+        guard !query.isEmpty else { await browse(genre: nil); return }
+        await load(search: query, genre: nil)
+    }
+
+    func browse(genre: String?) async {
+        await load(search: nil, genre: genre)
+    }
+
+    private func load(search: String?, genre: String?) async {
         loading = true
         defer { loading = false }
         do {
             var url = URLComponents(string: "https://api.jamendo.com/v3.0/tracks/")!
-            url.queryItems = [
+            var parameters = [
                 URLQueryItem(name: "client_id", value: publicClientID),
                 URLQueryItem(name: "format", value: "json"),
-                URLQueryItem(name: "search", value: query),
-                URLQueryItem(name: "limit", value: "20")
+                URLQueryItem(name: "limit", value: "30"),
+                URLQueryItem(name: "audioformat", value: "mp32")
             ]
-            let (data, response) = try await URLSession.shared.data(from: url.url!)
+            if let search {
+                parameters.append(URLQueryItem(name: "search", value: search))
+            } else if let genre {
+                parameters.append(URLQueryItem(name: "tags", value: genre))
+                parameters.append(URLQueryItem(name: "boost", value: "popularity_total"))
+            } else {
+                parameters.append(URLQueryItem(name: "order", value: "popularity_week"))
+            }
+            url.queryItems = parameters
+            guard let target = url.url else { throw URLError(.badURL) }
+            var request = URLRequest(url: target)
+            request.timeoutInterval = 15
+            let (data, response) = try await URLSession.shared.data(for: request)
             guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw URLError(.badServerResponse) }
             let result = try JSONDecoder().decode(NativeJamendoSearchResult.self, from: data)
             guard result.headers.status == "success" else {
@@ -227,6 +247,61 @@ final class NativeJamendoPlayer: ObservableObject {
     }
 }
 
+private struct JamendoGenre: Identifiable {
+    let id: String
+    let title: String
+    static let choices = [
+        JamendoGenre(id: "rock", title: "Rock"),
+        JamendoGenre(id: "pop", title: "Pop"),
+        JamendoGenre(id: "jazz", title: "Jazz"),
+        JamendoGenre(id: "classical", title: "Clásica"),
+        JamendoGenre(id: "electronic", title: "Electrónica"),
+        JamendoGenre(id: "folk", title: "Folk"),
+        JamendoGenre(id: "ambient", title: "Ambient"),
+        JamendoGenre(id: "blues", title: "Blues")
+    ]
+}
+
+private struct NativeJamendoTrackRows: View {
+    let tracks: [NativeJamendoTrack]
+    let playlists: [MusicPlaylistDestination]
+    let addToPlaylist: NativeMusicAddToPlaylist?
+    @ObservedObject private var player = NativeJamendoPlayer.shared
+
+    var body: some View {
+        ForEach(tracks) { track in
+            if let url = track.streamURL {
+                Button("\(track.name), \(track.artistName)") {
+                    player.play(name: track.name, artist: track.artistName, url: url)
+                }
+                .accessibilityAction(named: Text("Reproducir")) {
+                    player.play(name: track.name, artist: track.artistName, url: url)
+                }
+                NativeMusicPlaylistMenu(playlists: playlists, provider: "jamendo",
+                    songID: track.id, title: track.name, artist: track.artistName,
+                    addToPlaylist: addToPlaylist)
+            }
+        }
+    }
+}
+
+private struct NativeJamendoGenreScreen: View {
+    let genre: JamendoGenre
+    let playlists: [MusicPlaylistDestination]
+    let addToPlaylist: NativeMusicAddToPlaylist?
+    @StateObject private var directory = NativeJamendoDirectory()
+
+    var body: some View {
+        List {
+            if directory.loading { ProgressView("Buscando en Jamendo") }
+            NativeJamendoTrackRows(tracks: directory.tracks, playlists: playlists, addToPlaylist: addToPlaylist)
+            if let error = directory.error { Text(error) }
+        }
+        .navigationTitle(genre.title)
+        .task { await directory.browse(genre: genre.id) }
+    }
+}
+
 struct NativeJamendoScreen: View {
     var playlists: [MusicPlaylistDestination] = []
     var addToPlaylist: NativeMusicAddToPlaylist? = nil
@@ -244,24 +319,22 @@ struct NativeJamendoScreen: View {
                 Button("Detener Jamendo") { player.stop() }
                     .disabled(player.title.isEmpty)
             }
-            Section("Catálogo Jamendo") {
-                Text("Puedes escuchar música disponible en Jamendo sin iniciar sesión. Respeta las licencias de cada obra.")
+            Section("Selección de canciones") {
                 if directory.loading { ProgressView("Buscando en Jamendo") }
-                ForEach(directory.tracks) { track in
-                    if let url = track.streamURL {
-                        Button("Escuchar \(track.name), \(track.artistName)") {
-                            player.play(name: track.name, artist: track.artistName, url: url)
-                        }
-                        NativeMusicPlaylistMenu(playlists: playlists, provider: "jamendo",
-                            songID: track.id, title: track.name, artist: track.artistName,
-                            addToPlaylist: addToPlaylist)
+                NativeJamendoTrackRows(tracks: directory.tracks, playlists: playlists, addToPlaylist: addToPlaylist)
+                if let error = directory.error ?? player.error { Text(error) }
+            }
+            Section("Explorar por estilos") {
+                ForEach(JamendoGenre.choices) { genre in
+                    NavigationLink(genre.title) {
+                        NativeJamendoGenreScreen(genre: genre, playlists: playlists, addToPlaylist: addToPlaylist)
                     }
                 }
-                if let error = directory.error ?? player.error { Text(error) }
             }
         }
         .navigationTitle("Jamendo")
         .searchable(text: $query, prompt: "Buscar en Jamendo")
         .onSubmit(of: .search) { Task { await directory.search(query) } }
+        .task { await directory.browse(genre: nil) }
     }
 }

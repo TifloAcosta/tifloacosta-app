@@ -144,7 +144,7 @@ struct NativeUpdatesScreen: View {
                             titleLabel(entry)
                         }
                         .accessibilityElement(children: .ignore)
-                        .accessibilityLabel("\(item.title). Recurso de TifloAcosta")
+                        .accessibilityLabel(MusicLocalized.format("%@. Recurso de TifloAcosta", item.title))
                         .accessibilityAction(named: Text("Leer")) { read(item) }
                         .accessibilityAction(named: Text("Guardar")) { save(item) }
                         .accessibilityAction(named: Text("Descargar")) { download(item) }
@@ -162,7 +162,7 @@ struct NativeUpdatesScreen: View {
                             titleLabel(entry)
                         }
                         .accessibilityElement(children: .ignore)
-                        .accessibilityLabel("\(item.title). Vídeo del canal TifloAcosta")
+                        .accessibilityLabel(MusicLocalized.format("%@. Vídeo del canal TifloAcosta", item.title))
                         .accessibilityAction(named: Text("Abrir en YouTube")) {
                             openVideo(item)
                         }
@@ -273,7 +273,7 @@ struct NativeSettingsScreen: View {
                         textSizeIndex = 0
                         lineSpacingIndex = 0
                         strongText = false
-                        UIAccessibility.post(notification: .announcement, argument: "Ajustes visuales restablecidos.")
+                        UIAccessibility.post(notification: .announcement, argument: MusicLocalized.format("Ajustes visuales restablecidos."))
                     }
                 }
                 .accessibilityHint("Abre este menú para modificar la presentación de TifloAcosta.")

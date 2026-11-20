@@ -85,7 +85,7 @@ struct NativeOnDemandTranslationScreen: View {
 
                 if isTranslating {
                     ProgressView("Traduciendo fragmento \(min(translatedCount + 1, segments.count)) de \(segments.count)")
-                        .accessibilityLabel("Traducción en curso, \(translatedCount) de \(segments.count) fragmentos terminados")
+                        .accessibilityLabel(MusicLocalized.format("Traducción en curso, %d de %d fragmentos terminados", translatedCount, segments.count))
                 }
                 if let errorMessage {
                     Text(errorMessage).foregroundStyle(.secondary)

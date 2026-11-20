@@ -1431,7 +1431,9 @@ struct NativeReaderLibraryScreen: View {
                             Label(documentRowLabel(document), systemImage: selectedDocumentIDs.contains(document.id)
                                   ? "checkmark.circle.fill" : "circle")
                         }
-                        .accessibilityLabel("\(NativeAppLanguage.message(selectedDocumentIDs.contains(document.id) ? "Seleccionado" : "No seleccionado", languageCode: NativeAppLanguage.code(for: languageIndex))), \(documentRowLabel(document))")
+                        .accessibilityLabel(MusicLocalized.format("%@, %@",
+                            NativeAppLanguage.message(selectedDocumentIDs.contains(document.id) ? "Seleccionado" : "No seleccionado", languageCode: NativeAppLanguage.code(for: languageIndex)),
+                            documentRowLabel(document)))
                     } else {
                     NavigationLink {
                         NativeReadingScreen(document: document, speech: speech)
@@ -2935,7 +2937,7 @@ struct NativeReadingScreen: View {
             Button(speech.isPlaying ? "Pausar" : "Reproducir") {
                 activatePlaybackButton()
             }
-            .accessibilityValue("\(currentPercent) por ciento")
+            .accessibilityValue(MusicLocalized.format("%d por ciento", currentPercent))
             .accessibilityAdjustableAction { direction in
                 switch direction {
                 case .increment: moveUnit(1)

@@ -80,7 +80,7 @@ struct NativeCloudGooglePickerScreen: View {
         do {
             selection = try await accounts.selectGoogleDriveFiles()
             UIAccessibility.post(notification: .announcement,
-                                 argument: "\(selection.count) elementos seleccionados en Google Drive")
+                                 argument: MusicLocalized.format("%d elementos seleccionados en Google Drive", selection.count))
         } catch is CancellationError {
             // Leaving the Google consent screen is not a failed import.
         } catch {
@@ -108,7 +108,7 @@ struct NativeCloudGooglePickerScreen: View {
             let cloud = try NativeCloudStorage(provider: .googleDrive, accessToken: token)
             let file = try await cloud.download(item, allowsCellular: allowCellular)
             onImport(file)
-            UIAccessibility.post(notification: .announcement, argument: "Importado \(item.name)")
+            UIAccessibility.post(notification: .announcement, argument: MusicLocalized.format("Importado %@", item.name))
         } catch {
             alertMessage = error.localizedDescription
         }

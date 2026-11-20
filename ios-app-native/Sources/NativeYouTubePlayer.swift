@@ -515,7 +515,7 @@ struct NativeYouTubePlayerScreen: View {
                     .padding(.vertical, 12)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .accessibilityLabel("Posición del vídeo")
-                    .accessibilityValue("\(engine.percent) por ciento")
+                    .accessibilityValue(MusicLocalized.format("%d por ciento", engine.percent))
                     .accessibilityHint("Desliza arriba para avanzar diez por ciento; abajo para retroceder.")
                     .accessibilityAdjustableAction { direction in
                         guard engine.ready && engine.duration > 0 else { return }

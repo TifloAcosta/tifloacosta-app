@@ -282,7 +282,7 @@ struct NativePodcastScreen: View {
                     ), in: 0...max(player.duration, 1), step: 1) {
                         Text("Posición del episodio")
                     }
-                    .accessibilityValue("\(clock(player.seconds)) de \(clock(player.duration))")
+                    .accessibilityValue(MusicLocalized.format("%@ de %@", clock(player.seconds), clock(player.duration)))
                     Text("\(clock(player.seconds)) de \(clock(player.duration))")
                         .font(.footnote).foregroundStyle(.secondary)
                     Button("Cerrar reproductor") {

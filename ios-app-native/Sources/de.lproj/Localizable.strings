@@ -959,3 +959,17 @@
 "Importar %@ desde Google Drive" = "%@ aus Google Drive importieren";
 "%d elementos" = "%d Elemente";
 "Importado %@" = "%@ importiert";
+"%d elementos seleccionados en Google Drive" = "%d Elemente in Google Drive ausgewählt";
+"Traducción en curso, %d de %d fragmentos terminados" = "Übersetzung läuft, %d von %d Abschnitten abgeschlossen";
+"%@, recurso favorito" = "%@, favorisierte Ressource";
+"%@, noticia favorita" = "%@, favorisierte Nachricht";
+"%@, vídeo favorito" = "%@, favorisiertes Video";
+"%@. Recurso de TifloAcosta" = "%@. TifloAcosta-Ressource";
+"%@. Vídeo del canal TifloAcosta" = "%@. Video des TifloAcosta-Kanals";
+"%@. Canal de YouTube" = "%@. YouTube-Kanal";
+"Retoma el vídeo desde el segundo %d." = "Video ab Sekunde %d fortsetzen.";
+"%@. Canal: %@. %@" = "%@. Kanal: %@. %@";
+"Publicado: %@" = "Veröffentlicht: %@";
+"%d por ciento" = "%d Prozent";
+"%@ de %@" = "%@ von %@";
+"%@, %@" = "%@, %@";

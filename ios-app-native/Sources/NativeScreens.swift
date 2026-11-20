@@ -715,7 +715,7 @@ private struct NativeYouTubeSearchScreen: View {
                             }
                         }
                         .accessibilityElement(children: .ignore)
-                        .accessibilityLabel("\(channel.title). Canal de YouTube")
+                        .accessibilityLabel(MusicLocalized.format("%@. Canal de YouTube", channel.title))
                         .accessibilityAction(named: Text("Compartir canal")) {
                             NativeShare.present(url: channel.url)
                         }
@@ -850,7 +850,7 @@ private struct NativeYouTubePersonalVideosScreen: View {
                             video: video, onPlay: { selectedVideo = $0 },
                             onComment: { commentingOnVideo = $0 }
                         )
-                        .accessibilityHint("Retoma el vídeo desde el segundo \(Int(saved.resumeSeconds)).")
+                        .accessibilityHint(MusicLocalized.format("Retoma el vídeo desde el segundo %d.", Int(saved.resumeSeconds)))
                     }
                 }
             }
@@ -1149,7 +1149,9 @@ private struct NativeYouTubeVideoRow: View {
         }
         .buttonStyle(.plain)
         // Conservar el botón real: un elemento artificial pierde la acción de doble toque.
-        .accessibilityLabel("\(video.title). Canal: \(video.channelTitle). \(NativeNewsMetadata.publication(video.publishedAt).map { "Publicado: " + $0 } ?? "Fecha de publicación no disponible")")
+        .accessibilityLabel(MusicLocalized.format("%@. Canal: %@. %@", video.title, video.channelTitle,
+            NativeNewsMetadata.publication(video.publishedAt).map { MusicLocalized.format("Publicado: %@", $0) }
+                ?? MusicLocalized.format("Fecha de publicación no disponible")))
         .modifier(NativeYouTubeTitleActions(
             video: video, onPlay: onPlay, onComment: onComment
         ))

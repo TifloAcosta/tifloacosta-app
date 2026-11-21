@@ -120,6 +120,18 @@
     "publishedAt": null
   },
   {
+    "id": "applevis-apps-b9f78db7af37ce65",
+    "title": "Game World: Accessible Games",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/game-world-accessible-games",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "Play Dominoes, Ludo, word games and more with friends. Blind, low-vision and sighted players can play together with VoiceOver support. Join friends in Dominoes and Ludo, challenge computer opponents, or enjoy a game on your own. Explore 10 games: • Dominoes — Challenge friends or computer opponents, or sharpen your skills in practice mode. • Ludo — Race your pawns home in this classic board game with other players or computer opponents. • Blackjack — Take on the dealer in the classic game of 21. • Video Poker — Play five-card draw, choose which cards to hold, and chase a Royal Flush. • Word Builder — Discover hidden words in a wheel of letters. • Hangman — Solve word puzzles one guess at a time. • Trivia Trail — Test your knowledge with timed or untimed play. • Simon — Remember and repeat increasingly challenging sequences. • Battle Cats — Find hidden words in letter grids and explore themed puzzles at your own pace. • Craps — Learn with guided solo practice and spoken roll results. Designed for accessible play: • VoiceOver navigation and spoken gameplay feedback. • Themes and sound settings to personalize your game room. • Multiplayer, computer opponents, and solo experiences across the game collection. • In-game chat to stay connected while you play. From AppA11y, the team behind Dice World and Card World. Download Game World and find your next favorite game. Gold Membership is an auto-renewable subscription. All Access Membership is an auto-renewable subscription. Privacy Policy: https://www.appa11y.com/gameworld/privacy/privacy-en.html (Also added to app description and in the app on the Store screen.) Terms: https://www.appa11y.com/gameworld/terms/terms-en.html (Also added to app description and in the app on the Store screen.) Terms of Use (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/ (Also added to app description)",
+    "publishedAt": "2026-11-21T20:17:29.000Z"
+  },
+  {
     "id": "applevis-apps-a266de1fcb38950b",
     "title": "Boat Hunter",
     "sourceId": "applevis-apps",
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "Each swipe sends your pigeon sliding until something stops it. Cats take one step after every move, so think ahead. Every level can be solved, and there's a shortest route if you want every star. Hundreds of puzzles across every place, from the free Rooftops and Funfair to the Fish Market and the Museum at night. Each place has its own moving pieces, from trains and drawbridges to tower cranes. - A new Daily Coo puzzle every day - Make your own levels and share them - Dress up your pigeon and grow your flock - No ads, plays offline. Buy a pack once and keep it forever. New levels and new places in every update.",
     "publishedAt": "2026-11-14T21:44:24.000Z"
-  },
-  {
-    "id": "applevis-apps-1f7b29b09746509d",
-    "title": "Unraveled - Ravelry Companion",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/lifestyle/unraveled-ravelry-companion",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Unraveled is an independent third-party client for Ravelry. It's the fastest way to manage your projects, browse patterns, organize your stash, get inspiration, and keep up with your queue. Beautifully designed for iPhone and iPad. Built to get out of your way so you can spend more time doing what you love most. WHAT YOU GET • Projects — view, edit, add photos, and note every project. Track status, progress, gauge, needles, hooks, and yarn. • Queue — what's next, prioritized your way. Quick-add from any pattern. • Stash &amp; Library — your yarn, patterns, and purchase history, fully searchable. • Favorites &amp; Bundles — collect patterns by project, season, or theme. • Search — the full filter set: craft, weight, fiber type, sort, and dozens more, in a native iOS interface. • Messages &amp; Friends — your messages and friend activity, on the go. • Widgets — projects, queue, stash, and Hot Right Now widgets in every size, right in your home screen. Tap to jump straight into the right place. • iPad Sidebar — adaptive split view for browsing patterns and projects side by side. • Quick Actions — press and hold any project, pattern, or stash item for a shortcut menu of common things you'd do next. • Ravelry your way — reorder filters and tabs so you can get to what you care about quicker than ever. • Built for iOS 26 — Dynamic Type, Dark Mode, VoiceOver, Reduced Motion, and Spotlight deep links throughout. NO SUBSCRIPTION. NO ADS. NO TRACKING. Unraveled is free for 14 days with full access to every feature. After the trial, a one-time $7.99 unlock gives you lifetime access. No recurring fees. No advertising. No third-party tracking. Just a beautifully made tool that gets out of your way so you can get back to crafting. “I just downloaded your app and it's stunning. It's the first app I've seen that really looks like Ravelry!” — Michelle “That was quick... 3 minutes to download and update my latest projects with photos. I'd never do that in a browser while waiting for food on Market Street!” — Emily, San Francisco “Finally! A well designed Ravelry app for Apple devices!!” — Brittany Download now and find out what all the hype is about!",
-    "publishedAt": "2026-11-14T21:23:23.000Z"
   }
 ]

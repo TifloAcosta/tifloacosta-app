@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-21T07:13:26.018Z",
+  "generatedAt": "2026-11-21T11:09:24.332Z",
   "resources": [
     {
       "kind": "resource",
@@ -6323,23 +6323,6 @@
         "windows",
         "tecnologia-accesibilidad",
         "jaws"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "accessible-android-b20052e3e5f6ec10:en",
-      "sourceId": "accessible-android-b20052e3e5f6ec10",
-      "lang": "en",
-      "title": "Sight Buddy",
-      "summary": "Sight Buddy is a free, open-source Android app for asking questions about images and text. Once the models are downloaded, it works offline with no…",
-      "body": "Published 11 November 2026 by Tommi Drophouse\n\nSight Buddy is a free, open-source Android app for asking questions about images and text. Once the models are downloaded, it works offline with no account, subscription, or usage limit.\n\nIt can chat about images and text, find the right page in a document, and share, save, or copy text. The app recommends a model setup that fits the phone, so users do not need technical knowledge.\n\nIt is a new release with early users internationally, and user feedback has helped shape the design.\n\nSource code: https://github.com/DrophouseLtd/SightBuddy\n\nFree or paid:\n\nAccessibility and User Comments:\n\nIn previous versions, there were some inconveniences with TalkBack labels and navigation, but these have already been fixed. All feedback is always welcome.\n\nLast Tested App version and Android version:\n\n2.4.3. Android 17\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility.",
-      "sourceName": "Accessible Android",
-      "originalUrl": "https://accessibleandroid.com/app/sight-buddy/",
-      "publishedAt": "2026-11-11T07:53:55.000Z",
-      "categories": [
-        "android",
-        "apps-accesibles",
-        "tecnologia-accesibilidad"
       ]
     }
   ]

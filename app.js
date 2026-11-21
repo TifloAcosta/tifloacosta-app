@@ -331,7 +331,8 @@
     const open=document.createElement('a'); open.href=item.url; open.textContent=item.title; open.setAttribute('aria-haspopup','dialog');
     open.addEventListener('click',event=>{event.preventDefault();openResourceMenu(item,open);});
     title.append(open);
-    if(item.new){ const badge=document.createElement('span'); badge.className='badge'; badge.textContent=c.newBadge; title.append(' ',badge); }
+    // En Píldoras, no repetir «Nuevo» con cada título: Novedades sigue usando item.new.
+    if(item.new && item.category !== 'Píldoras' && item.category !== 'Pills'){ const badge=document.createElement('span'); badge.className='badge'; badge.textContent=c.newBadge; title.append(' ',badge); }
     const meta=document.createElement('p'); meta.className='resource-meta'; meta.textContent=item.category;
     article.append(title,meta); return article;
   }

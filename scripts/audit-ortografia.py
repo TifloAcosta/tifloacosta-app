@@ -30,21 +30,21 @@ FIXES = {
     "faciles": "fáciles", "rapido": "rápido", "rapida": "rápida",
     "informacion": "información", "configuracion": "configuración",
     "reproduccion": "reproducción", "aplicacion": "aplicación",
-    "seleccion": "selección", "seccion": "sección", "secciones": "secciones",
+    "seleccion": "selección", "seccion": "sección", 
     "conexion": "conexión", "busqueda": "búsqueda",
-    "cancion": "canción", "canciones": "canciones",
-    "opcion": "opción", "opciones": "opciones",
+    "cancion": "canción", 
+    "opcion": "opción", 
     "exportacion": "exportación", "importacion": "importación",
     "navegacion": "navegación", "descripcion": "descripción",
     "audiodescripcion": "audiodescripción",
-    "publicacion": "publicación", "publicaciones": "publicaciones",
+    "publicacion": "publicación", 
     "capitulo": "capítulo", "capitulos": "capítulos",
     "articulo": "artículo", "articulos": "artículos",
-    "version": "versión", "versiones": "versiones",
-    "accesible": "accesible", "contrasena": "contraseña",
+    "version": "versión", 
+     "contrasena": "contraseña",
     "caracter": "carácter", "tambien": "también",
     "asi": "así", "aqui": "aquí", "detras": "detrás",
-    "imagenes": "imágenes", "imagen": "imagen",
+    "imagenes": "imágenes", 
     "metodo": "método", "metodos": "métodos",
     "movil": "móvil", "moviles": "móviles",
     "telefono": "teléfono", "telefonos": "teléfonos",
@@ -63,6 +63,12 @@ FINDINGS = []
 
 def inspect_text(path: Path, line: int, origin: str, value: str) -> None:
     if not value.strip():
+        return
+    # Evita las rutas técnicas y los textos ingleses.
+    rel = str(path.relative_to(ROOT)).replace(os.sep, "/")
+    if rel.startswith("docs/en/"):
+        return
+    if origin == "literal" and (re.fullmatch(r"[A-Za-z0-9_-]+", value.strip()) or "/" in value or "://" in value):
         return
     for m in WORDS.finditer(value):
         found = m.group(0)
@@ -114,6 +120,9 @@ for path in ROOT.rglob("*"):
         continue
     if any(part in SKIP_DIRS for part in path.relative_to(ROOT).parts):
         continue
+    rel = str(path.relative_to(ROOT)).replace(os.sep, "/")
+    if rel.startswith((".github/", "test/", "scripts/", "android-native-prototype/app/src/test/", "ios-app-native/tests/")):
+        continue
     if path.stat().st_size > 350000:
         continue
     try:
@@ -127,6 +136,10 @@ for path in ROOT.rglob("*"):
     # Literales probablemente expuestos: texto entrecomillado, sin rutas ni código desnudo.
     for n, line in enumerate(content.splitlines(), 1):
         if path.suffix.lower() == ".json" and len(line) > 2500:
+            continue
+        if any(pattern in line for pattern in ('"pt" to', '"it" to', '"fr" to', '"de" to', '"en" to", "'pt' to", "'it' to", "'fr' to", "'de' to", "'en' to")):
+            continue
+        if path.suffix.lower() == ".json" and any(line.lstrip().startswith('"' + key + '"') for key in ("id", "url", "openUrl", "searchText", "slug", "tag", "type", "sourceUrl", "source", "image", "category")):
             continue
         for fragment in re.findall(r'(?:"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\')', line):
             if len(fragment) > 8000 or "/" in fragment or "\\" in fragment:

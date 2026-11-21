@@ -51,6 +51,19 @@ FIXES = {
     "pais": "país", "paises": "países",
     "senal": "señal", "senales": "señales",
     "tamano": "tamaño",
+    "camara": "cámara", "camaras": "cámaras",
+    "precision": "precisión", "inversion": "inversión",
+    "categorias": "categorías", "categoria": "categoría",
+    "bateria": "batería", "decada": "década",
+    "contratacion": "contratación",
+    "tecnico": "técnico", "tecnica": "técnica",
+    "area": "área", "areas": "áreas",
+    "patron": "patrón", "disenar": "diseñar",
+    "fisicamente": "físicamente", "solucion": "solución",
+    "pelicula": "película", "peliculas": "películas",
+    "maquinas": "máquinas", "maquina": "máquina",
+    "guien": "guíen", "interpretaria": "interpretaría",
+    "parecian": "parecían", "revison": "revisión",
 }
 # Palabras polisémicas sin tilde no se sustituyen automáticamente:
 # mas/más, si/sí, el/él, tu/tú, que/qué, como/cómo, esta/está,
@@ -168,4 +181,15 @@ if summary:
         sink.write(f"## Auditoría ortográfica\n\n")
         sink.write(f"Archivos examinados: {len(SCANNED)}. Posibles errores: {len(FINDINGS)}.\n\n")
         sink.write("Ver el artefacto JSON para los casos y contexto. Los falsos positivos requieren revisión editorial.\n")
-sys.exit(0)
+# Bloqueo preventivo para faltas inequívocas en Píldoras de la web.
+# Palabras ambiguas y expresiones citadas se siguen revisando editorialmente.
+CI_SAFE = set(FIXES) - {"ultima", "ultimas", "ultimo", "ultimos", "version", "area", "areas"}
+critical = [f for f in FINDINGS
+            if f["archivo"].startswith("docs/es/pildoras/")
+            and f["zona"] in ("visible", "atributo aria-label", "atributo alt", "meta")
+            and f["hallado"].lower() in CI_SAFE]
+if critical:
+    print(f"ERRORES DE PÍLDORAS QUE REQUIEREN CORRECCIÓN: {len(critical)}")
+    for item in critical[:30]:
+        print(f'{item["archivo"]}:{item["linea"]} {item["hallado"]} -> {item["propuesta"]}')
+sys.exit(1 if critical and "--check" in sys.argv else 0)

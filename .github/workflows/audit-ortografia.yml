@@ -28,7 +28,7 @@ jobs:
       - name: Obtener la rama principal
         uses: actions/checkout@v4
       - name: Analizar textos
-        run: python3 scripts/audit-ortografia.py
+        run: python3 scripts/audit-ortografia.py --check
       - name: Guardar informe de hallazgos
         uses: actions/upload-artifact@v4
         with:

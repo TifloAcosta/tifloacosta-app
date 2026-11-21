@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-20T23:59:50.504Z",
+  "generatedAt": "2026-11-21T02:20:03.129Z",
   "resources": [
     {
       "kind": "resource",
@@ -5624,6 +5624,107 @@
   "news": [
     {
       "kind": "news",
+      "id": "9to5mac-7ac1064e059574cc:en",
+      "sourceId": "9to5mac-7ac1064e059574cc",
+      "lang": "en",
+      "title": "9to5Mac Daily: November 20, 2026 – Siri AI limits, HomeView update",
+      "summary": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players. Sponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily . more…",
+      "body": "Listen to a recap of the top stories of the day from 9to5Mac . 9to5Mac Daily is available on iTunes and Apple’s Podcasts app , Stitcher , TuneIn , Google Play , or through our dedicated RSS feed for Overcast and other podcast players.\n\nSponsored by Backblaze : Backup you can rely on. Save 20% with code 9to5daily .\n\nNew episodes of 9to5Mac Daily are recorded every weekday. Subscribe to our podcast in Apple Podcast or your favorite podcast player to guarantee new episodes are delivered as soon as they’re available.\n\nStories discussed in this episode:\n\nListen & Subscribe:\n\nSubscribe to support Chance directly with 9to5Mac Daily Plus and unlock:\n\nDrop us a line at happyhour@9to5mac.com . You can also rate us in Apple Podcasts or recommend us in Overcast to help more people discover the show.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/20/daily-november-20-2026/",
+      "publishedAt": "2026-11-20T23:43:15.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "android",
+        "apps-accesibles",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-94cc72130a7ceff1:en",
+      "sourceId": "9to5mac-94cc72130a7ceff1",
+      "lang": "en",
+      "title": "iOS 27 lets you use two iPhones with the same phone number",
+      "summary": "9to5Mac is brought to you by Tello Mobile. Switching to Tello Mobile can bring the cost of your plan down to as little as $5 a month, or an unlimited plan for just $25 a month, all on America’s largest 5G network. See all of the available plans at tello.com . Among iOS 27’s many new features is a great change for anyone with multiple iPhones: you can now keep the same phone number on two iPhones via iPhone Handoff. more…",
+      "body": "9to5Mac is brought to you by Tello Mobile. Switching to Tello Mobile can bring the cost of your plan down to as little as $5 a month, or an unlimited plan for just $25 a month, all on America’s largest 5G network. See all of the available plans at tello.com .\n\nAmong iOS 27’s many new features is a great change for anyone with multiple iPhones: you can now keep the same phone number on two iPhones via iPhone Handoff.\n\nWith iOS 27, Apple introduces big AI upgrades like Siri AI , plus exciting new features for apps like Wallet , Messages , Notes , and also CarPlay and AirPods .\n\nBut the update also has a lot of smaller, more niche improvements.\n\nOne such addition is iPhone Handoff, which enables switching seamlessly between two iPhones using the same phone number.\n\nHere’s how it works, per Apple :\n\nAfter iPhone Handoff is set up, one iPhone becomes the main iPhone and the other iPhone becomes the secondary iPhone that shares the number. Your main iPhone should be the one you use most often. Some carrier services, like Call Forwarding and Caller ID, and carrier account management can only be managed on your main iPhone. Contact your carrier for more details.\n\nTo move between your main iPhone and secondary iPhone, simply unlock the device that you want to start using — your phone number will automatically become active on that device. The message “Switched to this iPhone” will display at the top of your screen to confirm it’s now active. Your phone number will only be active on one iPhone at a time when using iPhone Handoff.\n\nMost users will never need this feature. But if you’re someone who, for whatever reason, has separate devices that you want on the same number, iOS 27 has the solution.\n\nIf you’re trying to decide between an iPhone Duo and iPhone 18 Pro, perhaps iPhone Handoff is Apple’s subtle way of saying: “Why choose?”\n\nSo far carrier support is limited ( here’s the latest list ), but Apple plans to expand iPhone Handoff to more carriers soon.\n\nDo you have a need to use the same phone number on multiple iPhones? For what reason? Let us know in the comments.\n\n9to5Mac is brought to you by Tello Mobile. Switching to Tello Mobile can bring the cost of your plan down to as little as $5 a month, or an unlimited plan for just $25 a month, all on America’s largest 5G network. See all of the available plans at tello.com .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/20/ios-27-lets-you-use-two-iphones-with-the-same-phone-number/",
+      "publishedAt": "2026-11-20T23:06:00.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-af93e4875347d7fa:en",
+      "sourceId": "9to5mac-af93e4875347d7fa",
+      "lang": "en",
+      "title": "9to5Mac Overtime 091: Kicking the tires and seeing what works",
+      "summary": "Fernando and Jeff are back to talk about the iPhone Duo after a month of use, including the new face unlock and close-to-lock toggle in iOS 27.3 beta 2. They also dig into Siri AI’s Health app access and its quirks, the HomePod mini stereo pair on Mac, the M6 Mac mini, the new iPad mini, and Apple’s upsell-heavy configurations. 9to5Mac Overtime is a weekly video-first podcast exploring fun and interesting observations in the Apple ecosystem, featuring 9to5Mac’s Fernando Silva & Jeff Benjamin. Subscribe to Overtime via Apple Podcasts and our YouTube channel for more. more…",
+      "body": "Fernando and Jeff are back to talk about the iPhone Duo after a month of use, including the new face unlock and close-to-lock toggle in iOS 27.3 beta 2. They also dig into Siri AI’s Health app access and its quirks, the HomePod mini stereo pair on Mac, the M6 Mac mini, the new iPad mini, and Apple’s upsell-heavy configurations.\n\n9to5Mac Overtime is a weekly video-first podcast exploring fun and interesting observations in the Apple ecosystem, featuring 9to5Mac’s Fernando Silva & Jeff Benjamin. Subscribe to Overtime via Apple Podcasts and our YouTube channel for more.\n\nApple's budget MacBook, the cheapest way to experience macOS on the go.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/20/9to5mac-overtime-091-kicking-the-tires-and-seeing-what-works/",
+      "publishedAt": "2026-11-20T21:58:47.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "apps-accesibles",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-df236494145d4c46:en",
+      "sourceId": "ars-technica-df236494145d4c46",
+      "lang": "en",
+      "title": "Google rolls out new search homepage with AI chat history and no search button",
+      "summary": "Google search is making it even easier to access AI tools on the search page.",
+      "body": "Google's flagship search experience is evolving into an AI experience with stunning speed. Even time-tested elements of search are getting AI makeovers, and the latest to get this treatment is the search homepage on Google.com. A redesign that's been in testing for the last few weeks is now official, bringing easier access to AI chats and dropping the dedicated search button entirely.\n\nGoogle search VP Robby Stein confirmed on X that Google is deploying the new desktop search page after a successful test. The page will now have a few more buttons under the search bar, all connected to AI features. There's an image generation button, one for analyzing files, and one for brainstorming with Gemini. The \"I'm Feeling Lucky\" button remains, but the Google Search button that used to sit next to it is gone.\n\nThe search button has obviously been a part of Google's search page forever. However, it wasn't in a very convenient location in the modern interface. When you begin typing a query, the autocomplete suggestions cover that button. You have to click out of the text field to access the button, which is an extra step compared to simply mashing the Enter key to run your search.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/ai/2026/11/googles-latest-search-page-redesign-drops-the-search-button-adds-ai-sidebar/",
+      "publishedAt": "2026-11-20T21:58:29.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-df41a7f376c9f921:en",
+      "sourceId": "engadget-df41a7f376c9f921",
+      "lang": "en",
+      "title": "How to stream GTA 6 on your iPhone, iPad or Mac",
+      "summary": "If you're excited about GTA 6, chances are you'll want to keep playing it when you're away from your console.",
+      "body": "Because there’s no such thing as too much Vice City.\n\nAfter an excruciatingly long wait of 13 years, Grand Theft Auto 6 is finally available to play on the PlayStation 5 and Xbox Series X/S. If you're taking your time to enjoy the new title, it can take a while to reveal GTA 6's full map . People have taken time off work just to spend more time exploring Leonida, and if you're that excited about the game, chances are you'll want to keep playing it when you're away from your console. Well, both Sony and Microsoft offer remote play functionality on their consoles, allowing you to stream GTA 6 on your phone, tablet or computer.\n\nUnlike cloud gaming that utilizes remote servers and often requires a subscription, remote play harnesses the power of your own console. It streams its video and audio feed to another device, which in this case can be an iPhone, iPad, Mac, Android phone or Windows PC. Sony offers the PS Remote Play app that you can install on your device, while Xbox lets you play remotely through the browser itself.\n\nTo get started, you'll of course need either a PlayStation 5 or Xbox Series X/S console with a copy of GTA 6 purchased and downloaded . Though on-screen controls may be available, a compatible gamepad, like the DualSense or Xbox controller, will make the experience considerably better, especially for a game as detailed and immersive as GTA 6 .\n\nYou don't need to be connected to the same network to stream GTA 6 on your phone or computer, but a fast and stable internet connection on both ends is required to minimize input lag and connectivity issues during gameplay. Sony recommends a connection speed of 15 Mbps and Xbox suggests using a 5GHz Wi-Fi network with a speed of at least 7 – 10 Mbps.\n\nYou'll first need to configure your PS5 to work with remote play. Turn on your console, navigate to Settings > System > Remote Play and turn on the Enable Remote Play option. Head back to Settings and navigate to Power Saving > Features Available in Rest Mode . Here, turn the Stay Connected to the Internet and Enable Turning on PS5 from Network options on. These will allow you to wake your console from Rest Mode remotely so that you don't need to keep it running all the time.\n\nNow, download the PS Remote Play app on your Android , iOS , macOS or Windows device. Once installed, launch the app and sign into the same PlayStation account you use on your console. Your PS5 should show up in the list of available consoles. Select it and give the app a moment to establish a remote play session with your console.\n\nYou can now interact with your PS5's interface using your phone, tablet or computer. Navigate to your game library and launch GTA 6 . In our testing, the game works beautifully on both Android and iPhone with remote play on the same network. Input lag wasn't noticeable, although the DualSense controller's haptics and adaptive triggers didn't seem to kick in — these features did work on Mac and Windows with a wired connection.\n\nTo connect your DualSense controller , you'll need to put it in pairing mode first. You can do this by pressing and holding both the PS and Create buttons simultaneously until the controller starts flashing blue. Head to Bluetooth settings on your device and look for DualSense Wireless Controller in the list of available devices.\n\nIf you're an Xbox user, the steps to play GTA 6 remotely on your phone or computer are very similar. First, turn your Xbox console on and navigate to Profile & system > Settings > Devices & connections > Remote features . Turn the Enable remote features toggle on and under the Power options setting, select Sleep . You have now configured your Xbox Series X/S to support remote play.\n\nOpen the browser on your smartphone, tablet or computer and head to the Xbox remote play website. Sign into your Microsoft account, select your Xbox console and tap or click on the Remote play on this device button. Once again, pairing an Xbox controller with the device you're streaming GTA 6 on will allow for much better controls. You can enter pairing mode on your Xbox controller by holding down the Pair button for three seconds. Then, head to your device's Bluetooth settings to add the controller.\n\nAlthough Grand Theft Auto 6 is only available natively on current-gen consoles from Sony and Microsoft, Xbox One users can enjoy the game through Xbox Cloud Gaming. You still need to buy the game digitally and will likely spend a bit more to get additional cloud gaming hours, seeing as how the Game Pass Ultimate tier now only includes 15 hours of cloud playtime per month.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2323793/how-to-stream-gta-6-iphone-ipad-mac/",
+      "publishedAt": "2026-11-20T21:50:12.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apple"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-56483382d3b85e3e:en",
+      "sourceId": "ars-technica-56483382d3b85e3e",
+      "lang": "en",
+      "title": "Meta reconsiders 2030 net-zero goal amid record emissions from AI data centers",
+      "summary": "Meta is “re-evaluating” 2030 sustainability goals. Will others follow?",
+      "body": "Meta’s executives are rethinking the company’s original goal of achieving net-zero emissions by 2030. That revelation in Meta’s latest sustainability report comes as the company reported a record percentage increase in greenhouse gas emissions that exceeds any other Big Tech competitor racing to build new AI data centers.\n\nThe company’s 2026 sustainability report claims that “our long-term ambitions haven’t changed, but our operating environment has,” according to an introduction from Rachel Peterson, vice president of data centers at Meta, and Blair Swedeen, global head of net zero and sustainability at Meta. In the November 19, 2026, report, they attributed the changing conditions and the need for a rethink to how “demand for AI infrastructure has grown faster than almost anyone projected.”\n\n“We are re-evaluating our timelines, sequencing, and interim milestones—including the 2030 timeframe for our net zero emissions goal and our near-term intensity targets—so our approach reflects current operating realities while keeping progress transparent year over year,” Peterson and Swedeen wrote in the report.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/ai/2026/11/meta-reconsiders-2030-net-zero-goal-amid-record-emissions-from-ai-data-centers/",
+      "publishedAt": "2026-11-20T21:47:10.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "engadget-a1df750ae0542cc6:en",
       "sourceId": "engadget-a1df750ae0542cc6",
       "lang": "en",
@@ -5642,9 +5743,9 @@
       "id": "ars-technica-7bd62e67c7b68117:en",
       "sourceId": "ars-technica-7bd62e67c7b68117",
       "lang": "en",
-      "title": "A leaky AI supply chain is exposing secret user data at an alarming rate",
+      "title": "Researcher plants 2m canaries into the AI supply chain. A privacy disaster surfaced.",
       "summary": "Test using prompts with unique, trackable secrets proves that data doesn't stay private.",
-      "body": "Researchers planted 2 million digital tripwires in requests sent through a sprawling network of AI services to find out what happened to sensitive information entrusted to them. What they discovered was an ecosystem that leaked highly sensitive data like a sieve.\n\nThe exposure was found through an ingenious experiment designed to test if sensitive information can leak through the vast chain of widely used AI services and how that information is exploited when it does. Many of today’s AI apps use services such as OpenRouter or Vercel that act as brokers. These “AI routers,” sometimes also known as “AI gateways,” receive large numbers of prompts sent from AI app end users and route them to an available inference engine based on criteria such as the one charging the lowest price or being best suited for the given task. Instead of using Anthropic, OpenAI, or another big provider, the developer hires an AI router to find the most suitable model.\n\nTo test for potential leakage, researcher HD Moore assembled a collection of AWS access keys, functioning credentials tied to empty AWS accounts, passwords for services such as SSH, and unique URLs, DNS names, and private git repository references. None of the secrets had ever been used before, and he controlled the infrastructure that received any requests using the credentials. He then seeded each secret into exactly one prompt sent to a single provider. In the event any of the secrets were leaked, these “canaries”—so called because they resemble the role of that bird when taken into coal mines—would allow Moore to identify each link in the chain that was responsible.\n\nRead full article\n\nComments",
+      "body": "Researchers planted 2 million digital tripwires in requests sent through a sprawling network of AI services to find out what happened to sensitive information entrusted to them. What they discovered was an ecosystem that leaked highly sensitive data like a sieve.\n\nThe exposure was found through an ingenious experiment designed to test if sensitive information can leak through the vast chain of widely used AI services and how that information is exploited when it does. Many of today’s AI apps use services such as OpenRouter or Vercel that act as brokers. These “AI routers,” sometimes also known as “AI gateways,” receive large numbers of prompts sent from AI app end users and route them to an available inference engine based on criteria such as the one charging the lowest price or being best suited for the given task. Instead of using Anthropic, OpenAI, or another big provider, the developer hires an AI router to find the most suitable model.\n\nTo test for potential leakage, researcher HD Moore assembled a collection of Amazon Web Services access keys, functioning credentials tied to empty AWS accounts, passwords for services such as SSH, and unique URLs, DNS names, and private git repository references. None of the secrets had ever been used before, and he controlled the infrastructure that received any requests using the credentials. He then seeded each secret into exactly one prompt sent to a single provider. In the event any of the secrets were leaked, these “canaries”—so called because they resemble the role of that bird when taken into coal mines—would allow Moore to identify each link in the chain that was responsible.\n\nRead full article\n\nComments",
       "sourceName": "Ars Technica",
       "originalUrl": "https://arstechnica.com/security/2026/11/a-leaky-ai-supply-chain-is-exposing-secret-user-data-at-an-alarming-rate/",
       "publishedAt": "2026-11-20T20:59:08.000Z",
@@ -5658,7 +5759,7 @@
       "id": "techcrunch-0158a04a885fcca9:en",
       "sourceId": "techcrunch-0158a04a885fcca9",
       "lang": "en",
-      "title": "Experts warn: nearly everyone in AI is susceptible to a honey trap scheme right now",
+      "title": "Experts warn: Nearly everyone in AI is susceptible to a honey-trap scheme right now",
       "summary": "Techies are building technology that can advance all aspects of the world — but can they protect their hearts? That's the vulnerability that honey pots exploit.",
       "body": "Even as the fall-out for Nvidia over Jensen Huang’s alleged honey-trap scandal is still unfolding, Silicon Valley has yet to reckon with a new reality: many more people among them are at risk.\n\n“Nobody briefs founders on counterintelligence,” Aaron Brown, a former senior CIA officer and current founder of the software company Lumbra, told TechCrunch.\n\nThat’s because historically honey traps have been associated with politicians, the military and national intelligence — the people “behind clearances and a workforce trained to expect an approach,” from spies and other attackers.\n\nBut now many of the most valuable secrets “sit inside companies building chips, models, and infrastructure,” Brown says, adding that a spy “wants what the CEO can touch. The roadmap, the export decisions, the customer list, who gets the technology. The CEO is the shortest path to all of it.”\n\nHuang has been accused of falling for just such a honey trap by having an affair with Alice Huang. She’s a former executive of a Singapore neocloud who’s been accused of being a Chinese spy and of smuggling billions of dollars’ worth of restricted Nvidia chips into China.\n\nAfter the Huang allegations broke, jokes flooded the internet about which tech CEO will be next, but it’s not just CEOs and founders who are at risk. The WSJ reported that OpenAI started warning its employees about outsiders trying to cozy up to them in search of company secrets. Anyone with access to sensitive information — from board members to executive assistants — can be the target of a honey-trap.\n\nAnd typically, the attackers aren’t lovers. Friendship is actually the oldest honest trap scheme around, Brown said.\n\nHoney traps gain access to their targets as investors, customers, recruiters, and consultancies. Their requests look legitimate on paper and don’t need their targets to fall in love. “They need you to feel comfortable talking,” Brown said. “They last longer because nobody’s looking.”\n\nWhat’s interesting, too, is the irony. So many tech founders are moving to automate and digitize so much of human life and yet remain vulnerable to the oldest bug around, a person who preys on the human need to be understood by others.\n\n“Why fight through a firewall when you can get close to the person who can open doors, influence decisions, or make requests nobody wants to question?” Perry Carpenter, a cybercrimologist and chief deception strategist at KnowBe4, told TechCrunch.\n\nOnce targets realize they have been compromised, the threat can escalate: attackers now have a means of blackmail.\n\nAnother irony: AI has made honey trapping much easier and cheaper. Planning a scheme used to take months or years of research, crafting a persona, knowing the target, and executing a plan. These days, it’s easy to use AI to research a target, generate fake social profiles, fake backgrounds, even fake voice calls.\n\n“AI can help sustain an entire fictional backstory,” Carpenter said. “The technology helps set the stage, but the deception ultimately plays out through human relationships.”\n\nThe AI industry “became a national security industry faster than its culture caught up,” Brown said.\n\n“Part of being honey trapped is not knowing,” he added. “It doesn’t feel like manipulation. It feels genuine, even lucky.”\n\nCarpenter said a good first step is looking for unusual patterns. Note, for instance, “coincidental encounters that happen a little too often,” he said. There are also obvious signs, like persistent curiosity about work and colleagues, or requesting secrecy about meeting up, and pressing for introductions or information.\n\nBigger red flags include if someone’s requests are getting bigger, pushing the boundaries of what you usually would be uncomfortable doing. “A simple gut check,” Brown said. “Would this person still be around if you lost your job tomorrow?”\n\nIt also helps to try and understand when emotions might be influencing a decision. Carpenter suggests putting up a clear boundary between one’s personal and professional life. Within companies, it also helps to “eliminate executive exceptionalism,” he said, the idea that the rules don’t apply to people in power at the company.\n\nBrown added that company culture plays another role, too: are employees comfortable with raising concerns, challenging unusual requests, and escalating possible threats? “One of the most dangerous security cultures is one where nobody feels comfortable questioning the CEO,” Carpenter said.\n\n“Founders need to take risks, and they need to explore business opportunities,” Brown said. “Paranoia doesn’t help. Recognizing you’re a target does.”",
       "sourceName": "TechCrunch",
@@ -5667,22 +5768,6 @@
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-61c8df0c92a660ef:en",
-      "sourceId": "9to5mac-61c8df0c92a660ef",
-      "lang": "en",
-      "title": "Apple Watch Series 12: Four standout features make me glad I upgraded",
-      "summary": "I upgraded to an Apple Watch Series 12 this fall ( now $329 on Amazon ), and there are four main features that make me especially glad I did. more…",
-      "body": "I upgraded to an Apple Watch Series 12 this fall ( now $329 on Amazon ), and there are four main features that make me especially glad I did.\n\nThe Apple Watch was overdue for a chip update, with Apple skipping any changes last year and not having any true performance upgrades since the S9.\n\nI’m happy to report that the new S11 chip appears much faster and more capable than its predecessor, the S10.\n\nEveryday tasks on Apple Watch Series 12 just feel fast. And Siri AI, a tentpole addition in watchOS 27, very much feels made for this latest hardware. Siri was sluggish on older hardware in my testing, but it performs much more like I’d hoped on Series 12.\n\nThe new Health Sensing System makes Apple Watch Series 12 better at tracking key metrics like heart rate and steps. But this isn’t a case where accuracy is the only improvement.\n\nBecause of the new health sensors, Series 12 offers three complications not available before:\n\nThe complications let you see up-to-date readings on your current heart rate, step count, and readiness score right from your watch face. These are very welcome additions that meaningfully improve the Apple Watch’s health and wellness feature set.\n\nI’ve been using the watchOS 27.3 beta, which adds a new Siri Recap feature for Series 12 models that I really love.\n\nHere’s what it does per Apple:\n\nSiri Recap ambiently takes notes on your conversations throughout your day and creates high-level Apple Intelligence–generated summaries that you can use later to jog your memory, so you can stay present in the moment.\n\nMost of what Siri documents, I’ll never need to reference and it gets deleted automatically. But for those times I have trouble remembering a key piece of information, I’ve found Siri Recap a very convenient addition.\n\nApple Watch Series 12 offers largely the same battery life as Series 11, though it will last 25% longer for outdoor workouts.\n\nMore battery is always nice, but I’m especially a fan of the faster charging available on Series 12. Here’s how it stacks up to Series 11:\n\nI wear my Apple Watch to bed and generally try to top it off quickly in the evening, but I’m not always great at giving it much time on the charger. With faster charging support on Series 12, my poor planning isn’t a problem.\n\nApple Watch Series 12 is now only $329 on Amazon, down from $399.\n\nHave you upgraded to Apple Watch Series 12? Why or why not? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/20/apple-watch-series-12-four-standout-features-glad-i-upgraded/",
-      "publishedAt": "2026-11-20T20:25:35.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
       ]
     },
     {
@@ -5722,7 +5807,7 @@
       "id": "techcrunch-179a6b5f08001c0e:en",
       "sourceId": "techcrunch-179a6b5f08001c0e",
       "lang": "en",
-      "title": "AI claimed a solution to the 167-year-old Riemann Hypothesis — and a human did, too",
+      "title": "AI claimed a solution to the 167-year-old Riemann hypothesis — and a human did, too",
       "summary": "Mathematicians are having their minds blown by the latest AI-driven result — and there's a competing human solution, too.",
       "body": "It’s a big week for Levent Alpöge: The mathematician saw his employer, Anthropic, become the first publicly traded frontier AI lab. He also appears to have solved one of the most important problems in mathematics.\n\n“The precise timing is horrible,” he wrote in an essay announcing his findings and describing how he messaged Anthropic CEO Dario Amodei last Sunday night to ask how to announce that he had found a Lean-compilable solution to the Riemann Hypothesis, which dates back to 1859 and is among the Millennium Prize math problems.\n\nThe Hypothesis conjectures that there is a hidden structure underlying the appearance of prime numbers. If the claimed result holds true, we’re entering sublime-mysteries-of-the-universe territory.\n\nMaybe the best way to understand how exciting this is to the mathematics community is to watch the experts puzzling through the result in a chat on Zulip . Mathematicians like Chris Birkbeck, a number theorist at the University of East Anglia, are posting thoughts like this …\n\nThe cohomology bound is proved by what looks like an automorphy-lifting argument. It genuinely uses the existence of Galois representations attached to regular algebraic, polarized cuspidal automorphic representations of GL_n over CM fields, along with base change, Jacquet–Shalika, Clozel’s purity, Bernstein–Zelevinsky, the main theorem of CM, Deligne–Ribet and more.\n\nFor my part, I tapped out of mathematics at college calculus, so I can’t help decode exactly what that means.\n\nBut that comment was followed by 20 readers reacting 🤯.\n\nIt will be a while before the mathematics community feels like it has a handle on the proof, but most appear confident that the formalized Lean result will hold. Lean is an an open source language that essentially helps verify mathematical proofs.\n\nAlpöge appeared in his essay to feel a bit guilty about releasing the proof without a truly human-intelligible explanation, but his obsession with the problem since childhood made him feel he “could not live” if he waited to release the finding.\n\nAlpöge described a “stream-of-consciousness jaunt through the experience of finding all the pieces of the argument through incredible confusion with Claude” with more than a hint of AI euphoria, describing how the model “flew, and danced, and sparkled near that finish line.”\n\nHowever, for all that action to mean anything, we’ll have to wait for humans to be able to understand the result and explain it to each other, something Alpöge has committed to pursue.\n\nAlpöge and a collaborator, NYU mathematician Tristan Buckmaster, also released another important proof related to the Navier-Stokes equations, problems that helped kick off the race between frontier labs and mathematicians to solve outstanding problems this summer.\n\nMeanwhile, Ravi Vakil, a Stanford professor and the president of the American Mathematics Association, posted a proof of the General Riemann Hypothesis written by Stanford postdoc Alessandro Masullo, noting that “it is all human, with no AI. The hope was to bring Alessandro to Stanford for a year to polish the writing and then announce it after running it by enough people. Now it seems best to put out the current draft.”\n\nIn a brief introduction to his proof, which he said is the result of 12 years of work, Masullo wrote that “if any message at all this work is meant to send to the mathematician who feels discouraged by the pace and tone of the current climate, it is this: we are still here. We are very much alive. We are not going anywhere.”",
       "sourceName": "TechCrunch",
@@ -5731,39 +5816,6 @@
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-79fe45ba74d893c6:en",
-      "sourceId": "9to5mac-79fe45ba74d893c6",
-      "lang": "en",
-      "title": "AirPods 5 vs AirPods Pro 3: Which should you buy this holiday season?",
-      "summary": "The holiday shopping season is here, and Apple’s AirPods are sure to be one of the most popular gifts. If you’re shopping for AirPods, Apple sells three different models: AirPods 5, AirPods Pro 3, and AirPods Max 2. Here’s how they compare. Buy AirPods Pro 3 $179 (Reg. $249) Buy AirPods Max $419 (Reg. $549) Buy AirPods 5 from $129 more…",
-      "body": "The holiday shopping season is here, and Apple’s AirPods are sure to be one of the most popular gifts. If you’re shopping for AirPods, Apple sells three different models: AirPods 5, AirPods Pro 3, and AirPods Max 2. Here’s how they compare.\n\nAirPods 5 were introduced in September and come in two different versions. Unlike their predecessors, both versions of AirPods 5 offer Active Noise Cancellation. They differ in the charging case, battery life, and volume control. The base model AirPods 5 ($129) come with a case that can only charge via USB-C.\n\nThe case for the higher-end AirPods 5 ($149) supports wireless charging and Find My. You also get one extra hour of battery life. The higher-end model also adds on-stem volume control, so you can adjust the volume just by swiping up or down on one of the earbud stems.\n\nHere’s a full comparison between both AirPods 5 models:\n\nThe key thing about AirPods 5 is their open-ear design, unlike the in-ear design of the AirPods Pro 3 (more on those later). Even with that open-ear design, AirPods 5 offer incredible Active Noise Cancellation capabilities.\n\nIf you are shopping for AirPods 5, I do recommend spending the extra $20 to get the higher-end model. The better charging case alone is worth the extra money. With Find My integration and a built-in speaker, you can track your AirPods and play a sound from the case if you lose them.\n\nIf the person you’re shopping for doesn’t like in-ear earbuds, AirPods 5 are an excellent choice.\n\nFor most people, though, AirPods Pro 3 are probably the better choice …\n\nAirPods Pro 3 are Apple’s most capable earbuds, even with the introduction of AirPods 5 this year. They offer an in-ear fit and come with five foam-infused silicone ear tip sizes. With that in-ear design, AirPods Pro 3 can offer up to 3x stronger noise cancellation than AirPods 5. In my testing, this difference is notable.\n\nAirPods Pro 3 also offer several other features you won’t find on AirPods 5, including a heart rate sensor for workouts, plus Hearing Test, Hearing Aid, and Hearing Protection features.\n\nI still think AirPods Pro 3 are one of the best products in Apple’s lineup today. I wear mine for multiple hours every single day and can’t imagine life without them. I love the in-ear fit, and the ANC still impresses me, whether I’m at home or somewhere like a coffee shop.\n\nIf you know the person you’re shopping for (whether it’s yourself or someone else) likes the in-ear earbud design, I think AirPods Pro 3 are the best option. This is especially true when AirPods Pro 3 are on sale, like they are right now at $179. The price difference between AirPods 5 and AirPods Pro 3 is very small, and you’re getting a much better product.\n\nFinally, we have AirPods Max . These are Apple’s only option for people who want AirPods in an over-ear headphone form factor. Last year, they were pretty hard to recommend since they’d gone five years without a real upgrade.\n\nThis year, however, Apple officially introduced AirPods Max 2 , bringing modern features to Apple’s high-end headphones. This includes features like Adaptive Audio, Conversation Awareness, Personalized Volume, and more.\n\nAirPods Max 2 are a far more compelling option than AirPods Max were at this time last year. They’re still pricey, but I love the aesthetics and find them very comfortable. There’s something about the premium aluminum design with an elegant Digital Crown that really stands out.\n\nIf you’re looking to splurge this holiday season, AirPods Max 2 are a great choice. For more realistic budgets, I think AirPods Pro 3 are the best option.\n\nAre you planning to buy anyone AirPods this holiday season? Are they on your wishlist? Let us know down in the comments.\n\nFollow Chance : Threads , X , and Instagram",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/20/airpods-5-vs-airpods-pro-3-which-should-you-buy-this-holiday-season/",
-      "publishedAt": "2026-11-20T19:12:19.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-ddab9fc85730d063:en",
-      "sourceId": "9to5mac-ddab9fc85730d063",
-      "lang": "en",
-      "title": "iOS 27 has clever new Messages feature I’ve been using a lot",
-      "summary": "iOS 27 gives the Messages app a variety of welcome upgrades , including one I’ve found myself using a lot: a Smart Reply feature that’s now personalized to the user’s writing style. more…",
-      "body": "iOS 27 gives the Messages app a variety of welcome upgrades , including one I’ve found myself using a lot: a Smart Reply feature that’s now personalized to the user’s writing style.\n\nWhen the first wave of Apple Intelligence features were announced in 2024, one that I immediately thought sounded useful was Smart Reply.\n\nThe idea behind Smart Reply is simple. Rather than needing to manually type out replies in Messages and Mail, your iPhone can offer prewritten replies you can choose and send with a couple taps.\n\nGreat in theory, but the ‘Smart’ part of Smart Reply struggled to materialize in iOS 18.\n\nFortunately, with a key Apple Intelligence upgrade in iOS 27, the new version of the feature finally lives up to its name. Per Apple :\n\nSmart Reply in Mail and Messages can now draw on a user’s personalized writing style.\n\nBefore, Smart Reply would look at the context of a conversation to craft its suggestions. But now, it also aims to match your writing style, punctuation, and tone.\n\nIn iOS 18, I almost never used Smart Reply. That’s because despite being fine at suggesting replies that technically worked, those suggestions didn’t sound like me at all.\n\nThat’s changed in iOS 27. Smart Reply now consistently impresses me. It no longer offers generic responses that sound like AI wrote them. Instead, its suggestions actually fit with my normal style of communication.\n\nThe only drawback is that right now, you’ll only ever see two Smart Reply suggestions. If Apple expanded the feature by letting you scroll horizontally through more options, I suspect I’d use Smart Reply even more.\n\nHave you been using iOS 27’s Smart Reply feature in Messages? Let us know in the comments.",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/20/ios-27-has-clever-new-messages-feature-ive-been-using-a-lot/",
-      "publishedAt": "2026-11-20T18:50:59.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "apps-accesibles"
       ]
     },
     {
@@ -5780,21 +5832,6 @@
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-7518c0c142805b7b:en",
-      "sourceId": "engadget-7518c0c142805b7b",
-      "lang": "en",
-      "title": "OpenAI brings its collaborative Space hubs to Plus users",
-      "summary": "You can upload documents, files and more to the hubs for easy sharing.",
-      "body": "You can upload documents, files and more to the hubs for easy sharing.\n\nBack at its Dev Day event in September, OpenAI debuted ChatGPT Space . It's a hub that allows you, your coworkers or friends and any Dot agents you've set up to share information and collaborate on documents and other files. On release, ChatGPT Space was available to users on the company's Pro, Business and Enterprise plans. Now, OpenAI is expanding availability to those paying for its $20 per month Plus subscription. If you're one those people, you can create your own Spaces starting today.\n\nYou can create your first one by selecting \"Space\" from the left-hand navigation bar. It's where the Library section used to live. From there, click or tap the plus icon to make your first Space, and select a template or start uploading pages, slides, spreadsheets, images or links to websites. \"Pages are a great place to start: they're a new type of document built specifically for the work you do with agents, like writing, visualizing, researching and coding,\" OpenAI explains. \"Pages can stay automatically updated from your connected tools, too.\"\n\nSpaces work with ChatGPT's recently revamped Scheduled Tasks feature, and you can invite others to collaborate on your projects with you. As a Plus user, you can't use a Dot with your Spaces (or at all, for that matter), but that's likely to change soon, with OpenAI starting to test the agents with a select group of Plus subscribers as of yesterday . As for use cases, the company suggests you can use a Space to create a city guide for a friend that plans to visit your home soon. As you find new spots, you can add them to the guide for ChatGPT to organize. For students, you can use the feature to create a study guide with 3D visuals and questions to quiz yourself. As with most of these kind of tools, a little bit of creativity goes a long way.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2323016/openai-brings-its-collaborative-space-hubs-to-plus-users/",
-      "publishedAt": "2026-11-20T18:00:00.000Z",
-      "categories": [
-        "tecnologia-general"
       ]
     },
     {
@@ -5845,36 +5882,6 @@
         "android",
         "apps-accesibles",
         "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-8a1f017cf680e290:en",
-      "sourceId": "ars-technica-8a1f017cf680e290",
-      "lang": "en",
-      "title": "SpaceX lenders don’t want Elon Musk launching their collateral into space",
-      "summary": "Bondholders want SpaceX’s valuable chip collateral kept on Earth and within reach.",
-      "body": "Lenders backing SpaceX’s latest $43 billion debt package, which is secured by its advanced AI chips, have tried to bar Elon Musk from firing the collateral into space as part of his plan for orbital data centers.\n\nThe world’s richest man has outlined ambitious plans to power AI models with data centers cooled by the vacuum of space. That will require packing satellites full of advanced chips.\n\nSpaceX has said it plans to use the chips involved in the debt deal on Earth. But lenders have expressed concerns that if the group later decided to shoot the valuable chips that underpin their loans into space, it would prevent them from reclaiming and selling the semiconductors in the event of a default, according to people familiar with the matter.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/space/2026/11/spacex-lenders-dont-want-elon-musk-launching-their-collateral-into-space/",
-      "publishedAt": "2026-11-20T14:15:21.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-8f7bc8f939dd6afd:en",
-      "sourceId": "ars-technica-8f7bc8f939dd6afd",
-      "lang": "en",
-      "title": "Trump admin still won't let Wi-Fi giant TP-Link sell its latest routers in US",
-      "summary": "TP-Link's struggle illustrates how Trump admin wields control over device makers.",
-      "body": "TP-Link, which may be the top provider of wireless routers for US homes and small businesses, isn't allowed to sell its latest Wi-Fi routers in the US. The Trump administration imposed a sweeping ban on foreign-made consumer routers in March 2026, and TP-Link hasn't been able to obtain an exemption.\n\nThe rules prevent the import or sale of all new router models that are manufactured, assembled, designed, or developed outside the US. The Trump administration has control over which router makers receive special permission to import and sell new products through a waiver-review process involving the Federal Communications Commission, the Department of Defense, and the Department of Homeland Security.\n\nWhile some of its competitors have obtained exemptions to the ban, TP-Link appears to be having a hard time making its case to government officials. Its routers approved before the March 2026 ban remain available for sale in the US, but its newly released Wi-Fi 8 routers cannot be imported or sold.\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/tech-policy/2026/11/trump-admin-still-wont-let-wi-fi-giant-tp-link-sell-its-latest-routers-in-us/",
-      "publishedAt": "2026-11-20T12:00:43.000Z",
-      "categories": [
-        "tecnologia-general"
       ]
     },
     {

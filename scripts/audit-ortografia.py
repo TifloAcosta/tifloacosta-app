@@ -137,7 +137,7 @@ for path in ROOT.rglob("*"):
     for n, line in enumerate(content.splitlines(), 1):
         if path.suffix.lower() == ".json" and len(line) > 2500:
             continue
-        if any(pattern in line for pattern in ('"pt" to', '"it" to', '"fr" to', '"de" to', '"en" to", "'pt' to", "'it' to", "'fr' to", "'de' to", "'en' to")):
+        if any(pattern in line for pattern in ('"pt" to', '"it" to', '"fr" to', '"de" to', '"en" to', "'pt' to", "'it' to", "'fr' to", "'de' to", "'en' to")):
             continue
         if path.suffix.lower() == ".json" and any(line.lstrip().startswith('"' + key + '"') for key in ("id", "url", "openUrl", "searchText", "slug", "tag", "type", "sourceUrl", "source", "image", "category")):
             continue

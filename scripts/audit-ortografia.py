@@ -15,7 +15,7 @@ from pathlib import Path
 import re
 import sys
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(os.environ.get('TIFLO_AUDIT_ROOT', Path(__file__).resolve().parents[1])).resolve()
 FIXES = {
     "pildora": "píldora", "pildoras": "píldoras",
     "tecnologia": "tecnología", "tecnologias": "tecnologías",

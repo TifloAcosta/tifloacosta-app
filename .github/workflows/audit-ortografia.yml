@@ -12,6 +12,10 @@ on:
       - 'android-native-prototype/app/src/main/**'
       - 'mobile/src/**'
       - 'data.js'
+      - 'videos.json'
+      - 'actualidad-media.json'
+      - 'actualidad-sources.json'
+      - 'mobile/release/**'
       - 'app.js'
       - 'index.html'
       - 'shared/**'
@@ -34,4 +38,19 @@ jobs:
         with:
           name: auditoria-ortografia
           path: auditoria-ortografia.json
+          retention-days: 30
+      - name: Obtener la rama única de la próxima aplicación
+        uses: actions/checkout@v4
+        with:
+          ref: development/next-public-1.6-500200-20261121
+          path: app-base
+      - name: Auditar también el código de la futura actualización móvil
+        env:
+          TIFLO_AUDIT_ROOT: ${{ github.workspace }}/app-base
+        run: python3 scripts/audit-ortografia.py
+      - name: Guardar el informe móvil sin modificar el código
+        uses: actions/upload-artifact@v4
+        with:
+          name: auditoria-ortografia-app
+          path: app-base/auditoria-ortografia.json
           retention-days: 30

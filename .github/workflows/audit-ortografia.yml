@@ -1,0 +1,37 @@
+name: Auditoría ortográfica accesible TifloAcosta
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/audit-ortografia.py'
+      - '.github/workflows/audit-ortografia.yml'
+      - 'docs/**'
+      - 'ios-app-native/Sources/**'
+      - 'android-native-prototype/app/src/main/**'
+      - 'mobile/src/**'
+      - 'data.js'
+      - 'app.js'
+      - 'index.html'
+      - 'shared/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ortografia:
+    name: Examinar textos visibles, títulos y etiquetas accesibles
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obtener la rama principal
+        uses: actions/checkout@v4
+      - name: Analizar textos
+        run: python3 scripts/audit-ortografia.py
+      - name: Guardar informe de hallazgos
+        uses: actions/upload-artifact@v4
+        with:
+          name: auditoria-ortografia
+          path: auditoria-ortografia.json
+          retention-days: 30

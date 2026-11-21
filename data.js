@@ -1,5 +1,29 @@
 window.TIFLO_RESOURCES = [
 {
+  "id": "es-pildoras-2026-26",
+  "lang": "es",
+  "category": "Píldoras",
+  "year": 2026,
+  "title": "Píldoras 26",
+  "searchText": "Píldoras tecnológicas 26 de 2026 gafas inteligentes Google Meta Apple VoiceOver Tim Cook Nvidia Anthropic inteligencia artificial ciencia tecnología diez noticias",
+  "url": "https://tifloacosta.com/docs/es/pildoras/2026/pildoras-26-2026.html",
+  "openUrl": "https://tifloacosta.com/docs/es/pildoras/2026/pildoras-26-2026.html",
+  "new": true,
+  "newsDate": "2026-11-21T10:00:00Z"
+},
+{
+  "id": "en-pildoras-2026-26",
+  "lang": "en",
+  "category": "Pills",
+  "year": 2026,
+  "title": "Technology Pills 26",
+  "searchText": "Technology Pills 26 of 2026 smart glasses Google Meta Apple VoiceOver Tim Cook Nvidia Anthropic artificial intelligence science technology ten news stories",
+  "url": "https://tifloacosta.com/docs/en/pildoras/2026/tech-pills-26-2026.html",
+  "openUrl": "https://tifloacosta.com/docs/en/pildoras/2026/tech-pills-26-2026.html",
+  "new": true,
+  "newsDate": "2026-11-21T10:00:00Z"
+},
+{
   "id": "es-guia-tiflolector-2026",
   "lang": "es",
   "category": "Guías de TifloAcosta",

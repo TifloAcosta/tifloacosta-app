@@ -159,10 +159,12 @@
       "issue": "#355",
       "evidence": [
         "ios-app-native/Sources/NativeAccessibleCinema.swift",
+        "ios-app-native/Sources/NativeAccessibleCinemaLibrary.swift",
         "ios-app-native/Sources/NativeScreens.swift",
-        "ios-app-native/tests/cinema-primary-section-20261122.test.mjs"
+        "ios-app-native/tests/cinema-primary-section-20261122.test.mjs",
+        "ios-app-native/tests/cinema-personal-audio-playback-20261122.test.mjs"
       ],
-      "validation": "Primera pantalla funcional y 16 fuentes oficiales en directorio; pendientes títulos, catálogo Audesc, permisos de reproducción integrada, filtros completos y pruebas reales."
+      "validation": "Pantalla nativa y 16 fuentes, dos colecciones FOAL y filtros, además de biblioteca personal local: importar audio/vídeo desde Archivos, reproducir, pausar, saltar 30 segundos, guardar/recuperar posición y eliminar. Localizado a seis idiomas. PENDIENTE catálogo de obras Audesc España/Latino, permisos de acceso, reproducción remota autorizada, validación VoiceOver y pruebas reales."
     }
   ],
   "operational": [

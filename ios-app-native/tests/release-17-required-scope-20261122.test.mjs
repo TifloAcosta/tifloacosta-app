@@ -6,11 +6,11 @@ const manifest = JSON.parse(readFileSync(new URL('../release-readiness-1.7.json'
 const workflow = readFileSync(new URL('../../.github/workflows/ios-native-testflight-upload.yml', import.meta.url), 'utf8');
 const guardScript = readFileSync(new URL('../scripts/check-release-readiness.mjs', import.meta.url), 'utf8');
 
-test('the approved update retains all 20 changes and mandatory Multicines', () => {
+test('the approved update retains all 20 changes and mandatory Multicines and YouTube search', () => {
   const ids = manifest.requirements.map(x => x.id);
   assert.equal(manifest.version, '1.7');
-  assert.deepEqual(ids, [...Array(20)].map((_, i) => i + 1).concat([22]));
-  assert.match(manifest.requirements.at(-1).title, /Multicines Accesibles/);
+  assert.deepEqual(ids, [...Array(20)].map((_, i) => i + 1).concat([22, 23]));
+  assert.match(manifest.requirements.find(x => x.id === 22).title, /Multicines Accesibles/);
   assert.ok(manifest.requirements.some(x => /RTF/.test(x.title)));
 });
 
@@ -28,4 +28,5 @@ test('the implementation status inventory is not falsely marked complete', () =>
   assert.equal(manifest.requirements.find(x => x.id === 20).status, 'partial');
   assert.ok(manifest.requirements.some(x => x.status !== 'implemented'));
   assert.equal(manifest.requirements.find(x => x.id === 22).status, 'partial');
+  assert.equal(manifest.requirements.find(x => x.id === 23).status, 'partial');
 });

@@ -1055,3 +1055,6 @@
 "Importa el audio en Mi música." = "Importe l’audio dans Ma musique.";
 "Retroceder diez segundos" = "Reculer de dix secondes";
 "Avanzar diez segundos" = "Avancer de dix secondes";
+"Ya existe una marca en esta posición." = "Un signet existe déjà à cet emplacement.";
+"No se pudo crear la marca: documento no disponible." = "Impossible de créer le signet : document indisponible.";
+"No se pudo guardar la marca. Inténtalo de nuevo." = "Impossible d’enregistrer le signet. Réessayez.";

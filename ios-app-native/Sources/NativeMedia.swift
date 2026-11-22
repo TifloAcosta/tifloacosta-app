@@ -27,8 +27,43 @@ struct NativeMediaItem: Decodable, Identifiable {
     var directAudioURL: URL? { type == "audio" ? verifiedURL(mediaUrl) : nil }
     var formatLabel: String { type == "audio" ? "Podcast" : "Vídeo de YouTube" }
     var openLabel: String {
-        if type == "video" { return "Ver vídeo en YouTube" }
-        return directAudioURL == nil ? "Abrir episodio en la fuente original" : "Escuchar episodio"
+        if type == "video" {
+            return NativeYouTubeVideo(media: self) == nil
+                ? "Abrir vídeo en la fuente original" : "Reproducir vídeo en TifloAcosta"
+        }
+        return directAudioURL == nil ? "Abrir episodio en la fuente original"
+                                     : "Escuchar episodio en TifloAcosta"
+    }
+}
+
+/// Keep playable media in TifloAcosta; open source websites only when
+/// no direct audio or embeddable official YouTube video is available.
+@MainActor
+enum NativeMediaPlayback {
+    static func open(_ item: NativeMediaItem,
+                     player: NativePodcastPlayer,
+                     library: NativePodcastLibrary,
+                     playVideo: (NativeYouTubeVideo) -> Void,
+                     openExternal: (URL) -> Void) {
+        if item.type == "audio", let audioURL = item.directAudioURL {
+            let episode = NativePodcastEpisode(
+                id: "media:" + item.id, title: item.title,
+                audioURL: audioURL, publicationDate: item.publishedAt ?? ""
+            )
+            player.updatePosition()
+            if let previous = player.episode {
+                library.remember(previous, seconds: player.seconds, duration: player.duration)
+            }
+            player.select(episode, at: library.progress(for: episode))
+            return
+        }
+        if let video = NativeYouTubeVideo(media: item) {
+            playVideo(video)
+            return
+        }
+        if let externalURL = item.originalURL {
+            openExternal(externalURL)
+        }
     }
 }
 
@@ -76,7 +111,10 @@ final class NativeMediaStore: ObservableObject {
 
 struct NativeMediaScreen: View {
     @EnvironmentObject private var store: NativeMediaStore
+    @EnvironmentObject private var player: NativePodcastPlayer
+    @EnvironmentObject private var podcastLibrary: NativePodcastLibrary
     @Environment(\.openURL) private var openURL
+    @State private var selectedVideo: NativeYouTubeVideo?
 
     // Al entrar desde Actualidad, conservar el tipo elegido mediante VoiceOver.
     init(initialFormatIndex: Int = 0) {
@@ -139,7 +177,8 @@ struct NativeMediaScreen: View {
     }
 
     private func open(_ item: NativeMediaItem) {
-        if let url = item.directAudioURL ?? item.originalURL { openURL(url) }
+        NativeMediaPlayback.open(item, player: player, library: podcastLibrary,
+            playVideo: { selectedVideo = $0 }, openExternal: { openURL($0) })
     }
 
     private func share(_ item: NativeMediaItem) {
@@ -243,12 +282,23 @@ struct NativeMediaScreen: View {
         .onChange(of: languageIndex) { _, _ in visibleCount = 10 }
         .onChange(of: query) { _, _ in visibleCount = 10 }
         .task { if store.items.isEmpty { await store.refresh() } }
+        .sheet(item: $selectedVideo) { video in
+            NavigationStack { NativeYouTubePlayerScreen(video: video) }
+        }
     }
 }
 
 struct NativeMediaDetailScreen: View {
     let item: NativeMediaItem
     @Environment(\.openURL) private var openURL
+    @EnvironmentObject private var player: NativePodcastPlayer
+    @EnvironmentObject private var podcastLibrary: NativePodcastLibrary
+    @State private var selectedVideo: NativeYouTubeVideo?
+
+    private func open(_ item: NativeMediaItem) {
+        NativeMediaPlayback.open(item, player: player, library: podcastLibrary,
+            playVideo: { selectedVideo = $0 }, openExternal: { openURL($0) })
+    }
 
     var body: some View {
         List {
@@ -269,8 +319,8 @@ struct NativeMediaDetailScreen: View {
             .listRowBackground(TifloVisual.surfaceRaised)
 
             Section("Acciones") {
-                if let url = item.directAudioURL ?? item.originalURL {
-                    Button(item.openLabel) { openURL(url) }
+                if item.directAudioURL != nil || item.originalURL != nil {
+                    Button(item.openLabel) { open(item) }
                 }
                 if let url = item.sourceURL {
                     Button("Visitar fuente o canal") { openURL(url) }
@@ -289,5 +339,8 @@ struct NativeMediaDetailScreen: View {
         .tifloScreenSurface()
         .navigationTitle(item.formatLabel)
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(item: $selectedVideo) { video in
+            NavigationStack { NativeYouTubePlayerScreen(video: video) }
+        }
     }
 }

@@ -2317,7 +2317,7 @@ struct NativeReadingScreen: View {
         if !textLayout.linkStarts.isEmpty || !(latest.textLinks ?? []).isEmpty {
             options.append((8, "Enlaces"))
         }
-        if !textLayout.chapterStarts.isEmpty || daisySections.count > 1 {
+        if textLayout.chapterStarts.count > 1 || daisySections.count > 1 {
             options.append((7, "Capítulo"))
         }
         return options

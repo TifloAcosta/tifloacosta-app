@@ -77,8 +77,19 @@
     {
       "id": 9,
       "title": "YouTube: listas de reproducción, búsqueda por canal y traducciones",
-      "status": "pending",
-      "issue": "#356"
+      "status": "partial",
+      "issue": "#356",
+      "evidence": [
+        "youtube-worker/src/youtube-api.js",
+        "youtube-worker/src/index.js",
+        "youtube-worker/test/youtube-api.test.mjs",
+        "youtube-worker/test/routes.test.mjs",
+        "ios-app-native/Sources/NativeYouTubePlaylist.swift",
+        "ios-app-native/Sources/NativeYouTubePlayer.swift",
+        "ios-app-native/Sources/NativeScreens.swift",
+        "ios-app-native/tests/youtube-playlist-native-20261122.test.mjs"
+      ],
+      "validation": "En rama única: búsqueda de listas y filtro Todos, lectura de vídeos en orden con páginas de 20, reproductor oficial integrado y navegación VoiceOver, traducciones de controles en seis idiomas. Worker unit tests SUCCESS; ruta /playlist-items NO desplegada a producción, compilación iOS más reciente pendiente y prueba física con VoiceOver no realizada. Auditoría completa de traducciones todavía pendiente."
     },
     {
       "id": 10,

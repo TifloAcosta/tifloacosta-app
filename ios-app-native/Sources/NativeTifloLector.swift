@@ -2778,44 +2778,48 @@ struct NativeReadingScreen: View {
                     ? ($0.seconds ?? Double($0.percent)) < ($1.seconds ?? Double($1.percent))
                     : $0.track < $1.track
             }
+            let currentTime = speech.hasAudio ? speech.audioElapsed
+                : (pendingDaisyAudioSeconds ?? latest.lastAudioSeconds)
             let candidates = marks.filter { mark in
                 if mark.track != trackIndex {
                     return direction > 0 ? mark.track > trackIndex : mark.track < trackIndex
                 }
-                if let seconds = mark.seconds, speech.hasAudio {
-                    return direction > 0 ? seconds > speech.audioElapsed + 0.5
-                        : seconds < speech.audioElapsed - 0.5
+                if let seconds = mark.seconds, let currentTime {
+                    return direction > 0 ? seconds > currentTime + 0.5
+                        : seconds < currentTime - 0.5
                 }
                 return direction > 0 ? mark.percent > currentPercent
                     : mark.percent < currentPercent
             }
             guard let mark = direction > 0 ? candidates.first : candidates.last else {
-                actionMessage = MusicLocalized.message("No hay más marcas en esa dirección.")
+                navigationFeedback = MusicLocalized.message("No hay más marcas en esa dirección.")
                 return
             }
+            if speech.isPlaying || speech.isPaused { stopPlayback() }
             trackIndex = mark.track
             currentPercent = mark.percent
             didRestoreAudioPosition = true
-            playTrack()
-            if speech.hasAudio, let seconds = mark.seconds {
-                speech.seek(toSeconds: seconds)
-                currentPercent = speech.audioPercent
-            }
-            persistPosition()
-            applySleepTimer()
+            pendingDaisyAudioSeconds = mark.seconds.flatMap { $0.isFinite ? max(0, $0) : nil }
+            // For older percent-only bookmarks, Play starts at currentPercent.
+            library.saveAudioPosition(document, track: trackIndex, percent: currentPercent,
+                                      seconds: pendingDaisyAudioSeconds)
+            lastSavedPercent = currentPercent
+            navigationFeedback = MusicLocalized.format("Marca: pista %d", mark.track + 1)
+            actionMessage = nil
         } else {
             let offsets = Set(latest.savedTextBookmarks.map(\.offset)
                 + latest.bookmarks.map {
                     Int(Double(textLayout.totalCharacters) * Double($0) / 100.0)
                 }).sorted()
-            let next = direction > 0
+            guard let next = direction > 0
                 ? offsets.first(where: { $0 > readingOffset })
-                : offsets.last(where: { $0 < readingOffset })
-            guard let next else {
-                actionMessage = MusicLocalized.message("No hay más marcas en esa dirección.")
+                : offsets.last(where: { $0 < readingOffset }) else {
+                navigationFeedback = MusicLocalized.message("No hay más marcas en esa dirección.")
                 return
             }
-            jump(to: next)
+            navigateText(to: next, unit: 6)
+            navigationFeedback = MusicLocalized.format("Marca: %@",
+                NativeReaderHeadingDisplay.title(bookmarkDescription(atOffset: next), limit: 90))
         }
     }
 
@@ -2942,20 +2946,57 @@ struct NativeReadingScreen: View {
     }
 
     private func skipReading(_ direction: Int) {
-        if speech.hasAudio && !speech.isGeneratedSpeech {
-            speech.skip(seconds: TimeInterval(direction * timeStep))
-            currentPercent = speech.audioPercent
-            persistPosition()
-            actionMessage = MusicLocalized.format("Posición: %d por ciento.", currentPercent)
-        } else {
-            guard !document.body.isEmpty else { return }
+        let feedback = direction > 0 ? "Avanzado un minuto." : "Retrocedido un minuto."
+        if !tracks.isEmpty && !speech.isGeneratedSpeech {
+            if speech.hasAudio {
+                let previous = speech.audioElapsed
+                speech.skip(seconds: TimeInterval(direction * timeStep))
+                currentPercent = speech.audioPercent
+                persistPosition()
+                navigationFeedback = abs(speech.audioElapsed - previous) > 0.01
+                    ? MusicLocalized.message(feedback)
+                    : MusicLocalized.message("No se puede avanzar más en esta pista.")
+            } else if tracks.indices.contains(trackIndex),
+                      let url = NativeReaderFormats.storedURL(for: tracks[trackIndex]),
+                      let audio = try? AVAudioPlayer(contentsOf: url),
+                      audio.duration.isFinite && audio.duration > 0 {
+                // A DAISY should also advance while paused or before Play.
+                // Read the local duration without starting playback.
+                let previous = pendingDaisyAudioSeconds ?? latest.lastAudioSeconds
+                    ?? (Double(currentPercent) * audio.duration / 100)
+                let target = max(0, min(audio.duration,
+                    previous + TimeInterval(direction * timeStep)))
+                pendingDaisyAudioSeconds = target
+                currentPercent = Int((target / audio.duration * 100).rounded())
+                didRestoreAudioPosition = true
+                library.saveAudioPosition(document, track: trackIndex, percent: currentPercent,
+                                          seconds: target)
+                lastSavedPercent = currentPercent
+                navigationFeedback = abs(target - previous) > 0.01
+                    ? MusicLocalized.message(feedback)
+                    : MusicLocalized.message("No se puede avanzar más en esta pista.")
+            } else {
+                navigationFeedback = MusicLocalized.message(
+                    "No se pudo consultar la duración de esta pista.")
+            }
+        } else if !latest.body.isEmpty {
             let charactersPerMinute = Double(textLayout.totalCharacters) /
                 Double(max(1, wordCount)) * 165.0 * speed
-            let offset = readingOffset + direction * max(1,
-                Int(charactersPerMinute * Double(timeStep) / 60.0))
-            jump(to: offset)
-            actionMessage = MusicLocalized.format("Posición: %d por ciento.", currentPercent)
+            let offset = max(0, min(textLayout.totalCharacters,
+                readingOffset + direction * max(1,
+                    Int(charactersPerMinute * Double(timeStep) / 60.0))))
+            if offset == readingOffset {
+                navigationFeedback = MusicLocalized.message(
+                    "No se puede avanzar más en esta posición.")
+            } else {
+                navigateText(to: offset, unit: 5)
+                navigationFeedback = MusicLocalized.message(feedback)
+            }
+        } else {
+            navigationFeedback = MusicLocalized.message(
+                "No hay contenido disponible para este modo de navegación.")
         }
+        actionMessage = nil
     }
 
     private func addBookmark() {

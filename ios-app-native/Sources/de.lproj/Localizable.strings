@@ -1058,3 +1058,9 @@
 "Ya existe una marca en esta posición." = "An dieser Stelle ist bereits ein Lesezeichen vorhanden.";
 "No se pudo crear la marca: documento no disponible." = "Lesezeichen konnte nicht erstellt werden: Dokument nicht verfügbar.";
 "No se pudo guardar la marca. Inténtalo de nuevo." = "Lesezeichen konnte nicht gespeichert werden. Bitte erneut versuchen.";
+"Abrir vídeo en la fuente original" = "Video auf der Originalseite öffnen";
+"Reproducir vídeo en TifloAcosta" = "Video in TifloAcosta abspielen";
+"Abrir episodio en la fuente original" = "Folge auf der Originalseite öffnen";
+"Escuchar episodio en TifloAcosta" = "Folge in TifloAcosta anhören";
+"Escuchando en TifloAcosta: %@" = "Wiedergabe in TifloAcosta: %@";
+"Pódcast en reproducción: %@" = "Podcast wird abgespielt: %@";

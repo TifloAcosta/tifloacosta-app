@@ -9,7 +9,7 @@ const inbox = load('Sources/NativeShareInbox.swift');
 
 test('DAISY and ZIP use a 750 MB file-transfer ceiling, not the old 100 MB limit', () => {
   assert.match(ext, /private let maxArchiveBytes: Int64 = 750_000_000/);
-  assert.match(ext, /ext == "zip" \\|\\| ext == "daisy" \\? maxArchiveBytes : maxInMemoryBytes/);
+  assert.match(ext, /ext == "zip" \|\| ext == "daisy" \? maxArchiveBytes : maxInMemoryBytes/);
   assert.match(ext, /let limit = fileTransferLimit\(for: clean\)/);
   assert.match(ext, /Int64\(size\) <= limit/);
   assert.match(ext, /provider\.loadFileRepresentation\(forTypeIdentifier: identifier\)/);
@@ -24,10 +24,10 @@ test('data-only providers remain bounded to 100 MiB to avoid allocating huge buf
 });
 
 test('reader applies the same decompressed safety limit to ZIP and .daisy', () => {
-  assert.match(formats, /\(ext == "zip" \\|\\| ext == "daisy"\) \\? 750_000_000 : 250_000_000/);
+  assert.match(formats, /\(ext == "zip" \|\| ext == "daisy"\) \? 750_000_000 : 250_000_000/);
   assert.match(formats, /entries <= 4000/);
   assert.match(formats, /total <= sizeLimit/);
-  assert.match(formats, /guard isDaisy \\|\\| \(ext == "zip" && !audioFiles\.isEmpty\)/);
+  assert.match(formats, /guard isDaisy \|\| \(ext == "zip" && !audioFiles\.isEmpty\)/);
 });
 
 test('incoming share remains in the inbox on import errors and preserves the source extension', () => {

@@ -107,6 +107,8 @@ struct NativeYouTubeSearchItem: Decodable {
     let id: String?
     let kind: String?
     let channelId: String?
+    let playlistId: String?
+    let position: Int?
     let title: String
     let channelTitle: String
     let description: String
@@ -136,6 +138,29 @@ struct NativeYouTubeChannel: Identifiable, Decodable {
     }
 }
 
+struct NativeYouTubePlaylist: Identifiable {
+    let id: String
+    let title: String
+    let channelTitle: String
+    let description: String
+
+    var url: URL {
+        var parts = URLComponents(string: "https://www.youtube.com/playlist")!
+        parts.queryItems = [URLQueryItem(name: "list", value: id)]
+        return parts.url!
+    }
+
+    init?(search item: NativeYouTubeSearchItem) {
+        guard let playlistID = item.playlistId,
+              playlistID.range(of: "^[A-Za-z0-9_-]{10,150}$",
+                               options: .regularExpression) != nil else { return nil }
+        id = playlistID
+        title = item.title
+        channelTitle = item.channelTitle
+        description = item.description
+    }
+}
+
 struct NativeYouTubeSubscriptionPage: Decodable {
     let items: [NativeYouTubeChannel]
     let nextPageToken: String
@@ -152,6 +177,7 @@ private struct NativeYouTubeSearchFailure: Decodable {
 final class NativeYouTubeSearchStore: ObservableObject {
     @Published private(set) var videos: [NativeYouTubeVideo] = []
     @Published private(set) var channels: [NativeYouTubeChannel] = []
+    @Published private(set) var playlists: [NativeYouTubePlaylist] = []
     @Published private(set) var nextPageToken = ""
     @Published private(set) var isLoading = false
     @Published private(set) var message: String?
@@ -203,6 +229,7 @@ final class NativeYouTubeSearchStore: ObservableObject {
             nextPageToken = ""
             videos = []
             channels = []
+            playlists = []
             hasSearched = true
         }
         isLoading = true
@@ -257,8 +284,11 @@ final class NativeYouTubeSearchStore: ObservableObject {
             let newChannels = page.items.compactMap(NativeYouTubeChannel.init(search:))
             let previousChannelIDs = Set(channels.map(\.id))
             channels += newChannels.filter { !previousChannelIDs.contains($0.id) }
+            let newPlaylists = page.items.compactMap(NativeYouTubePlaylist.init(search:))
+            let previousPlaylistIDs = Set(playlists.map(\.id))
+            playlists += newPlaylists.filter { !previousPlaylistIDs.contains($0.id) }
             nextPageToken = page.nextPageToken
-            let count = videos.count + channels.count
+            let count = videos.count + channels.count + playlists.count
             message = count == 0 ? "No se encontraron resultados."
                 : "\(count) resultados encontrados hasta el momento."
         } catch {

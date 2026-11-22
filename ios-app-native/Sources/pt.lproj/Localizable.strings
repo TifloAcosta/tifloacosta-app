@@ -1151,3 +1151,19 @@
 
 "Selecciona tus propios archivos de audio desde una nube conectada. Se importarán a tu colección personal con el idioma y el tipo elegidos arriba." = "Seleciona os teus ficheiros de áudio numa nuvem ligada. Serão importados para a tua coleção pessoal com o idioma e o tipo selecionados acima.";
 "Archivo incorporado: %@" = "Ficheiro adicionado: %@";
+
+// Diagnóstico detallado de YouTube y recuperación de búsquedas.
+"YouTube ha alcanzado temporalmente su límite de búsqueda." = "O YouTube atingiu temporariamente o limite de pesquisas.";
+"El servicio de búsqueda de YouTube no está disponible." = "A pesquisa do YouTube não está disponível neste momento.";
+"Demasiadas búsquedas consecutivas. Inténtalo nuevamente más tarde." = "Demasiadas pesquisas seguidas. Tenta novamente mais tarde.";
+"El servidor rechazó la solicitud de búsqueda de esta aplicación." = "O servidor rejeitou o pedido de pesquisa desta aplicação.";
+"El servicio de YouTube devolvió un error al buscar." = "O serviço YouTube devolveu um erro de pesquisa.";
+"El servicio de YouTube respondió, pero sus datos no pudieron interpretarse." = "O YouTube respondeu, mas não foi possível interpretar os dados.";
+"El iPhone no tiene una conexión disponible para buscar en YouTube." = "Este iPhone não tem ligação disponível para pesquisar no YouTube.";
+"El iPhone no encuentra el servidor de búsqueda de YouTube." = "Este iPhone não consegue encontrar o servidor de pesquisa do YouTube.";
+"El servidor de búsqueda de YouTube no responde desde este dispositivo." = "O servidor de pesquisa do YouTube não responde neste dispositivo.";
+"No se pudo establecer una conexión segura con el buscador de YouTube." = "Não foi possível estabelecer uma ligação segura à pesquisa do YouTube.";
+"Se produjo un error de comunicación con el buscador de YouTube." = "Ocorreu um erro de comunicação com a pesquisa do YouTube.";
+"No fue posible procesar la búsqueda de YouTube en este momento." = "Não foi possível processar a pesquisa do YouTube neste momento.";
+"Reintentar búsqueda" = "Tentar pesquisar novamente";
+"Buscar directamente en YouTube" = "Pesquisar diretamente no YouTube";

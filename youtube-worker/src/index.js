@@ -22,7 +22,8 @@ import {
   subscribe,
   unsubscribe,
   listMySubscriptions,
-  searchVideos
+  searchVideos,
+  listPlaylistVideos
 } from './youtube-api.js';
 
 const PUBLIC_SEARCH_ORIGINS = new Set([
@@ -39,7 +40,7 @@ function corsHeaders(request, env) {
   const origin = request.headers.get('Origin') || '';
   const url = new URL(request.url);
   const allowed = origin === env.ALLOWED_ORIGIN ||
-    (['/search', '/channel-videos'].includes(url.pathname) && PUBLIC_SEARCH_ORIGINS.has(origin));
+    (['/search', '/channel-videos', '/playlist-items'].includes(url.pathname) && PUBLIC_SEARCH_ORIGINS.has(origin));
   if (!allowed) return {};
   return {
     'Access-Control-Allow-Origin': origin,
@@ -94,6 +95,7 @@ function safeError(error) {
   if (code === 'NATIVE_AUTH_INVALID') return appError('NATIVE_AUTH_INVALID', 401);
   if (code === 'INVALID_SEARCH') return appError('INVALID_SEARCH', 400);
   if (code === 'INVALID_CHANNEL') return appError('INVALID_CHANNEL', 400);
+  if (code === 'INVALID_PLAYLIST') return appError('INVALID_PLAYLIST', 400);
   if (code === 'SEARCH_UNAVAILABLE') return appError('SEARCH_UNAVAILABLE', 503);
   if (code === 'COMMENTS_DISABLED') return appError('COMMENTS_DISABLED', error.status || 403);
   if (code === 'VIDEO_NOT_FOUND') return appError('VIDEO_NOT_FOUND', 404);
@@ -329,6 +331,23 @@ export async function handleRequest(request, env, deps = {}) {
       return redirect(oauthState?.nativeChallenge
         ? 'tifloacosta://youtube-auth?error=failed'
         : oauthFailure(env), [clearOauth]);
+    }
+  }
+
+  if (url.pathname === '/playlist-items' && request.method === 'GET') {
+    if (!searchOriginAllowed(request, env)) {
+      return json({ error: 'ORIGIN_NOT_ALLOWED' }, 403, cors);
+    }
+    try {
+      const page = await listPlaylistVideos(
+        env.YOUTUBE_API_KEY,
+        url.searchParams.get('playlistId') || '',
+        url.searchParams.get('pageToken') || '',
+        fetchImpl
+      );
+      return json(page, 200, cors);
+    } catch (error) {
+      return errorResponse(error, cors);
     }
   }
 

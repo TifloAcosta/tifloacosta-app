@@ -186,8 +186,9 @@ struct NativeAccessibleCinemaScreen: View {
     @State private var importStatus = ""
     @State private var pendingDeletion: NativeCinemaLocalItem?
     @State private var confirmDeletion = false
-    @StateObject private var personalLibrary = NativeCinemaLocalLibrary()
-    @StateObject private var personalPlayer = NativeCinemaAudioPlayer()
+    // Shared instances allow personal playback to continue after leaving Multicines.
+    @StateObject private var personalLibrary = NativeCinemaLocalLibrary.shared
+    @StateObject private var personalPlayer = NativeCinemaAudioPlayer.shared
 
     private var selectedLanguage: AccessibleCinemaLanguage {
         AccessibleCinemaLanguage.allCases[min(max(0, languageIndex), AccessibleCinemaLanguage.allCases.count - 1)]
@@ -462,6 +463,6 @@ struct NativeAccessibleCinemaScreen: View {
         .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
             personalPlayer.refresh(library: personalLibrary)
         }
-        .onDisappear { personalPlayer.pauseAndSave(library: personalLibrary) }
+        .onDisappear { personalPlayer.refresh(library: personalLibrary) }
     }
 }

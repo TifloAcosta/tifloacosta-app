@@ -3502,7 +3502,7 @@ struct NativeReadingScreen: View {
         if presentationMode == 2 && !latest.body.isEmpty {
             NativeReaderContinuousBrailleText(
                 text: latest.body,
-                initialOffset: max(0, min(latest.body.count, latest.lastTextOffset ?? readingOffset)),
+                initialOffset: max(0, min(latest.body.count, readingOffset)),
                 textSize: effectiveTextSize,
                 strongText: effectiveStrongText,
                 onPositionChange: { offset in

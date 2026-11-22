@@ -29,10 +29,10 @@ struct NativeMediaItem: Decodable, Identifiable {
     var openLabel: String {
         if type == "video" {
             return NativeYouTubeVideo(media: self) == nil
-                ? "Abrir vídeo en la fuente original" : "Reproducir vídeo en TifloAcosta"
+                ? MusicLocalized.message("Abrir vídeo en la fuente original") : MusicLocalized.message("Reproducir vídeo en TifloAcosta")
         }
-        return directAudioURL == nil ? "Abrir episodio en la fuente original"
-                                     : "Escuchar episodio en TifloAcosta"
+        return directAudioURL == nil ? MusicLocalized.message("Abrir episodio en la fuente original")
+                                     : MusicLocalized.message("Escuchar episodio en TifloAcosta")
     }
 }
 

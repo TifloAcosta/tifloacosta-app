@@ -10,7 +10,7 @@ test('DAISY heading is a navigable unit even for audio-only books', () => {
   assert.match(options, /latest\.daisyNavigation/);
   assert.match(options, /options\.append\(\(4, "Encabezado"\)\)/);
   const move = part('private func moveUnit(_ direction: Int) {', 'private func moveDaisyPoint(');
-  assert.match(move, /if unit == 4/);
+  assert.match(move, /unit == 7 \\|\\| unit == 4/);
   assert.match(move, /moveDaisyPoint\(direction, kind: nil\)/);
 });
 

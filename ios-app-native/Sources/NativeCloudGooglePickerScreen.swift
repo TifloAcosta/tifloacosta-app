@@ -6,6 +6,9 @@ import UIKit
 struct NativeCloudGooglePickerScreen: View {
     let onImport: (URL) -> Void
     var allowCellularDownloads = true
+    // Optional validated importer: report a real failure rather than
+    // announcing success when the destination rejects this file.
+    var onImportValidated: ((URL) throws -> Void)? = nil
 
     @StateObject private var accounts = NativeCloudAccountStore.shared
     @ObservedObject private var network = NativeMusicConnectionPolicy.shared
@@ -106,7 +109,11 @@ struct NativeCloudGooglePickerScreen: View {
             let token = try await accounts.validAccessToken(for: .googleDrive)
             let cloud = try NativeCloudStorage(provider: .googleDrive, accessToken: token)
             let file = try await cloud.download(item, allowsCellular: allowCellular)
-            onImport(file)
+            if let onImportValidated {
+                try onImportValidated(file)
+            } else {
+                onImport(file)
+            }
             UIAccessibility.post(notification: .announcement, argument: MusicLocalized.format("Importado %@", item.name))
         } catch {
             alertMessage = error.localizedDescription

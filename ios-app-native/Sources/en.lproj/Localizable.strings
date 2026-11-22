@@ -1060,3 +1060,9 @@
 "Ya existe una marca en esta posición." = "There is already a bookmark at this position.";
 "No se pudo crear la marca: documento no disponible." = "Could not create the bookmark: document unavailable.";
 "No se pudo guardar la marca. Inténtalo de nuevo." = "Could not save the bookmark. Try again.";
+"Abrir vídeo en la fuente original" = "Open video on the original website";
+"Reproducir vídeo en TifloAcosta" = "Play video in TifloAcosta";
+"Abrir episodio en la fuente original" = "Open episode on the original website";
+"Escuchar episodio en TifloAcosta" = "Listen to episode in TifloAcosta";
+"Escuchando en TifloAcosta: %@" = "Listening in TifloAcosta: %@";
+"Pódcast en reproducción: %@" = "Podcast playing: %@";

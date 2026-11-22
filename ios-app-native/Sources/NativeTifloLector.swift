@@ -2289,14 +2289,20 @@ struct NativeReadingScreen: View {
     private var isAudioOnly: Bool { latest.body.isEmpty && !tracks.isEmpty }
     private var navigationOptions: [(unit: Int, label: String)] {
         var options: [(unit: Int, label: String)] = []
+        let daisySections = (latest.daisyNavigation ?? []).filter {
+            $0.kind != "Página" && $0.kind != "Referencia"
+        }
         if !latest.body.isEmpty {
-            options += [(0, "Bloque"), (1, "Párrafo"), (2, "Frase"), (3, "Página")]
-            if !textLayout.headingStarts.isEmpty { options.append((4, "Encabezado")) }
+            options.append((0, "Bloque"))
+            // Do not offer empty navigation modes. A virtual page made from a
+            // fragment is a block, not a numbered page in the source document.
+            if textLayout.paragraphStarts.count > 2 { options.append((1, "Párrafo")) }
+            if textLayout.sentenceStarts.count > 2 { options.append((2, "Frase")) }
+            if textLayout.hasRealPages { options.append((3, "Página")) }
+            if textLayout.headingStarts.count > 1 { options.append((4, "Encabezado")) }
         }
         if !tracks.isEmpty {
-            if (latest.daisyNavigation ?? []).contains(where: {
-                $0.kind != "Página" && $0.kind != "Referencia"
-            }) && !options.contains(where: { $0.unit == 4 }) {
+            if daisySections.count > 1 && !options.contains(where: { $0.unit == 4 }) {
                 options.append((4, "Encabezado"))
             }
             if (latest.daisyNavigation ?? []).contains(where: { $0.kind == "Página" }) {
@@ -2311,8 +2317,7 @@ struct NativeReadingScreen: View {
         if !textLayout.linkStarts.isEmpty || !(latest.textLinks ?? []).isEmpty {
             options.append((8, "Enlaces"))
         }
-        if !textLayout.chapterStarts.isEmpty ||
-            (latest.daisyNavigation ?? []).contains(where: { $0.kind != "Página" && $0.kind != "Referencia" }) {
+        if !textLayout.chapterStarts.isEmpty || daisySections.count > 1 {
             options.append((7, "Capítulo"))
         }
         return options

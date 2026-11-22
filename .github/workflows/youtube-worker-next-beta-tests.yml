@@ -25,4 +25,5 @@ jobs:
         working-directory: youtube-worker
         run: npm test
       - name: Confirmar que no se ha realizado despliegue
-        run: echo "Solo pruebas: no se conecta a Cloudflare ni se modifica producción."
+        run: |
+          echo "Solo pruebas: no se conecta a Cloudflare ni se modifica producción."

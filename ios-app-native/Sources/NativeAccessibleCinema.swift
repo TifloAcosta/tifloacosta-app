@@ -3,7 +3,7 @@ import SwiftUI
 /// Multicines Accesibles: native entry point and verified-source directory.
 /// Only the original provider can deliver third-party works unless distribution
 /// and streaming permissions have been explicitly documented.
-private enum AccessibleCinemaLanguage: String, CaseIterable {
+enum AccessibleCinemaLanguage: String, CaseIterable, Codable {
     case all = "Todos los idiomas"
     case spain = "Español de España"
     case latino = "Español de Latinoamérica"
@@ -14,7 +14,7 @@ private enum AccessibleCinemaLanguage: String, CaseIterable {
     case german = "Alemán"
 }
 
-private enum AccessibleCinemaKind: String, CaseIterable {
+enum AccessibleCinemaKind: String, CaseIterable, Codable {
     case all = "Todos los contenidos"
     case film = "Películas"
     case series = "Series"

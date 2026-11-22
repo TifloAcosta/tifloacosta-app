@@ -207,7 +207,7 @@ final class NativeReaderLibrary: ObservableObject {
         var failures: [String] = []
         for (index, file) in files.enumerated() {
             if Task.isCancelled { throw CancellationError() }
-            onProgress("Importando \(index + 1) de \(files.count): \(file.lastPathComponent)")
+            onProgress(MusicLocalized.format("Importando %d de %d: %@", index + 1, files.count, file.lastPathComponent))
             await Task.yield()
             do {
                 try importDocuments(from: [file])
@@ -1772,20 +1772,20 @@ struct NativeReaderLibraryScreen: View {
             case .success(let urls):
                 guard let folder = urls.first, !importingFolder else { return }
                 importingFolder = true
-                importFolderStatus = "Preparando importación de carpeta."
+                importFolderStatus = MusicLocalized.message("Preparando importación de carpeta.")
                 Task { @MainActor in
                     defer { importingFolder = false }
                     do {
                         let summary = try await library.importFolder(from: folder) { message in
                             importFolderStatus = message
                         }
-                        importFolderStatus = "Importación terminada. Documentos importados: \(summary.imported). Omitidos: \(summary.skipped). Fallidos: \(summary.failed.count)."
+                        importFolderStatus = MusicLocalized.format("Importación terminada. Documentos importados: %d. Omitidos: %d. Fallidos: %d.", summary.imported, summary.skipped, summary.failed.count)
                         if !summary.failed.isEmpty {
-                            importError = summary.failed.prefix(6).joined(separator: "\\n")
+                            importError = summary.failed.prefix(6).joined(separator: "\n")
                         }
                     } catch {
-                        importError = "No se pudo importar la carpeta: " + error.localizedDescription
-                        importFolderStatus = "Importación de carpeta interrumpida."
+                        importError = MusicLocalized.format("No se pudo importar la carpeta: %@", error.localizedDescription)
+                        importFolderStatus = MusicLocalized.message("Importación de carpeta interrumpida.")
                     }
                     UIAccessibility.post(notification: .announcement, argument: importFolderStatus)
                 }

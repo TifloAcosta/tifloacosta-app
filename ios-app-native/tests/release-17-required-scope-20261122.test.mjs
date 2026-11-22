@@ -25,6 +25,7 @@ test('internal beta cannot build before all requirements have code', () => {
 
 test('the implementation status inventory is not falsely marked complete', () => {
   assert.equal(manifest.requirements.find(x => x.id === 4).status, 'pending');
-  assert.equal(manifest.requirements.find(x => x.id === 20).status, 'pending');
+  assert.equal(manifest.requirements.find(x => x.id === 20).status, 'partial');
+  assert.ok(manifest.requirements.some(x => x.status !== 'implemented'));
   assert.equal(manifest.requirements.find(x => x.id === 22).status, 'partial');
 });

@@ -8,10 +8,28 @@ import UIKit
 /// A command must only act on the player that currently owns playback.
 @MainActor
 enum NativeRemotePlaybackOwner {
-    enum Destination: Equatable { case reader, music, radio, audius, appleMusic, jamendo }
+    enum Destination: Hashable { case reader, music, radio, audius, appleMusic, jamendo, podcast, cinema, youtube }
     private(set) static var current: Destination?
+    // Keep each media engine independent while arbitrating a single active
+    // audible source. The weak-capturing callbacks belong to view-owned players.
+    private static var interruptionHandlers: [Destination: () -> Void] = [:]
+
+    static func onInterrupted(_ destination: Destination, perform: @escaping () -> Void) {
+        interruptionHandlers[destination] = perform
+    }
 
     static func claim(_ destination: Destination) {
+        if let previous = current, previous != destination {
+            switch previous {
+            case .reader: NativeReaderPlaybackBridge.pauseActiveReader?()
+            case .music: NativeMusicPlayer.shared.pauseForReader()
+            case .radio: NativeRadioPlayer.shared.pauseForOtherAudio()
+            case .audius: NativeAudiusPlayer.shared.pauseForOtherAudio()
+            case .appleMusic: NativeAppleMusicPlayer.shared.pauseForOtherAudio()
+            case .jamendo: NativeJamendoPlayer.shared.pauseForOtherAudio()
+            case .podcast, .cinema, .youtube: interruptionHandlers[previous]?()
+            }
+        }
         current = destination
         let remote = MPRemoteCommandCenter.shared()
         remote.nextTrackCommand.isEnabled = destination == .music

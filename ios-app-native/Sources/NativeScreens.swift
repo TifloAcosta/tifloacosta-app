@@ -730,6 +730,7 @@ struct NativeVideosScreen: View {
 
 /// La búsqueda y sus resultados se recorren solamente al activar Buscar en YouTube.
 private struct NativeYouTubeSearchScreen: View {
+    @Environment(\.openURL) private var openURL
     @StateObject private var youtubeSearch = NativeYouTubeSearchStore()
     @ObservedObject private var personalVideos = NativeYouTubePersonalLibrary.shared
     @State private var searchText = ""
@@ -772,6 +773,18 @@ private struct NativeYouTubeSearchScreen: View {
                         .font(.subheadline)
                         .foregroundStyle(TifloVisual.secondaryText)
                         .accessibilityAddTraits(.updatesFrequently)
+                }
+                if youtubeSearch.searchFailed {
+                    Button("Reintentar búsqueda") { search() }
+                        .disabled(youtubeSearch.isLoading)
+                    Button("Buscar directamente en YouTube") {
+                        let term = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+                        guard term.count >= 2 else { return }
+                        var target = URLComponents(string: "https://www.youtube.com/results")!
+                        target.queryItems = [URLQueryItem(name: "search_query", value: term)]
+                        if let url = target.url { openURL(url) }
+                    }
+                    .disabled(searchText.trimmingCharacters(in: .whitespacesAndNewlines).count < 2)
                 }
             }
             .listRowBackground(TifloVisual.surfaceRaised)

@@ -87,7 +87,7 @@ test("fase 3: metadatos DAISY respetan el idioma seleccionado", () => {
   assert.match(reader, /NativeAdjustableChoice\(\s*title: "Idioma del contenido"/);
   assert.match(reader, /language: audioExportLanguage/);
   assert.match(audio, /language: language,/);
-  assert.match(audio, /audioOnly202: format == \\.daisyVoiceDream, progress: progress/);
+  assert.match(audio, /audioOnly202: format == \.daisyVoiceDream, progress: progress/);
   assert.match(daisy, /xml:lang="\\\(lang\)"/);
   assert.match(daisy, /<dc:Language>\\\(lang\)<\/dc:Language>/);
 });

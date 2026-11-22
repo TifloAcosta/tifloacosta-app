@@ -2676,6 +2676,11 @@ struct NativeReadingScreen: View {
     }
 
     private func moveUnit(_ direction: Int) {
+        guard navigationOptions.contains(where: { $0.unit == navigationUnit }) else {
+            navigationFeedback = MusicLocalized.message(
+                "El modo elegido no está disponible en este libro.")
+            return
+        }
         let unit = effectiveNavigationUnit
         if unit == 9 || unit == 10 {
             moveDaisyPoint(direction, kind: unit == 9 ? "Página" : "Referencia")
@@ -2684,48 +2689,27 @@ struct NativeReadingScreen: View {
         if unit == 8 {
             let offsets = Array(Set(textLayout.linkStarts +
                                     (latest.textLinks ?? []).map { $0.offset })).sorted()
-            let next = direction > 0
+            guard let next = direction > 0
                 ? offsets.first(where: { $0 > readingOffset })
-                : offsets.last(where: { $0 < readingOffset })
-            guard let next else {
-                actionMessage = MusicLocalized.message("No hay más enlaces en esa dirección.")
+                : offsets.last(where: { $0 < readingOffset }) else {
+                navigationFeedback = MusicLocalized.message("No hay más enlaces en esa dirección.")
                 return
             }
-            jump(to: next)
+            navigateText(to: next, unit: 8)
             if let link = latest.textLinks?.first(where: { $0.offset == next }) {
-                actionMessage = MusicLocalized.format("Enlace: %@", link.title)
+                navigationFeedback = MusicLocalized.format("Enlace: %@",
+                    NativeReaderHeadingDisplay.title(link.title, limit: 90))
             } else if let url = textLayout.visibleURL(at: next) {
-                actionMessage = MusicLocalized.format("Enlace: %@", url.absoluteString)
+                navigationFeedback = MusicLocalized.format("Enlace: %@",
+                    String(url.absoluteString.prefix(90)))
             }
             return
         }
-        if unit == 7 && !tracks.isEmpty {
+        if (unit == 7 || unit == 4) && !tracks.isEmpty &&
+            (latest.daisyNavigation ?? []).contains(where: {
+                $0.kind != "Página" && $0.kind != "Referencia"
+            }) {
             moveDaisyPoint(direction, kind: nil)
-            return
-        }
-        if unit == 4 {
-            if !tracks.isEmpty &&
-               (latest.daisyNavigation ?? []).contains(where: {
-                   $0.kind != "Página" && $0.kind != "Referencia"
-               }) {
-                moveDaisyPoint(direction, kind: nil)
-                return
-            }
-            guard let next = textLayout.nearbyOffset(readingOffset,
-                                                     direction: direction, unit: 4) else {
-                actionMessage = MusicLocalized.message("No hay más encabezados en esa dirección.")
-                return
-            }
-            // Do not start or restart synthetic speech while navigating.
-            if speech.isPlaying || speech.isPaused { stopPlayback() }
-            jump(to: next, focusReader: false)
-            let label = textLayout.namedHeadings.first(where: { $0.offset == next })?.title
-                ?? String(document.body.dropFirst(next).prefix(90).split(separator: "\n").first ?? "")
-            actionMessage = nil
-            let message = MusicLocalized.format(
-                "Encabezado: %@. Pulsa Reproducir para escuchar.",
-                String(label.trimmingCharacters(in: .whitespacesAndNewlines).prefix(90)))
-            UIAccessibility.post(notification: .announcement, argument: message)
             return
         }
         if unit == 5 {
@@ -2736,11 +2720,23 @@ struct NativeReadingScreen: View {
             moveBetweenMarks(direction)
             return
         }
-        guard !document.body.isEmpty,
+        guard !latest.body.isEmpty,
               let next = textLayout.nearbyOffset(readingOffset,
                                                   direction: direction, unit: unit)
-        else { return }
-        jump(to: next)
+        else {
+            navigationFeedback = MusicLocalized.message(
+                "No hay más elementos del modo elegido en esa dirección.")
+            return
+        }
+        navigateText(to: next, unit: unit)
+        if unit == 4 || unit == 7 {
+            let title = textLayout.namedHeadings.first(where: { $0.offset == next })?.title
+                ?? String(latest.body.dropFirst(next).prefix(90)
+                    .split(separator: "\n").first ?? "")
+            navigationFeedback = MusicLocalized.format("%@: %@",
+                unit == 4 ? "Encabezado" : "Capítulo",
+                NativeReaderHeadingDisplay.title(title, limit: 90))
+        }
     }
 
     private func moveDaisyPoint(_ direction: Int, kind: String?) {
@@ -2760,11 +2756,16 @@ struct NativeReadingScreen: View {
             return direction > 0 ? seconds > currentTime + 0.5 : seconds < currentTime - 0.5
         }
         guard let point = direction > 0 ? candidates.first : candidates.last else {
-            actionMessage = MusicLocalized.message("No hay más elementos de ese tipo en esa dirección.")
+            navigationFeedback = MusicLocalized.message(
+                "No hay más elementos de ese tipo en esa dirección.")
             return
         }
-        jumpToDaisy(point)
-        actionMessage = point.title
+        jumpToDaisy(point, announce: false)
+        let modeName = kind == "Página" ? "Página DAISY"
+            : kind == "Referencia" ? "Referencia DAISY"
+            : (effectiveNavigationUnit == 4 ? "Encabezado" : "Capítulo")
+        navigationFeedback = MusicLocalized.format("%@: %@", modeName,
+            NativeReaderHeadingDisplay.title(point.title, limit: 90))
     }
 
     private func moveBetweenMarks(_ direction: Int) {

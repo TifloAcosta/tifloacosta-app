@@ -36,6 +36,8 @@ jobs:
             exit 1
           fi
       - uses: actions/checkout@v4
+      - name: Impedir beta incompleta según registro de actualización
+        run: node ios-app-native/scripts/check-release-readiness.mjs
       - name: Validar Actualidad, Recursos y diseño sin HTML
         run: |
           set -euo pipefail

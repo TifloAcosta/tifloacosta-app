@@ -23,10 +23,10 @@ enum NativeCinemaLocalError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .unsupported: "Elige un archivo de audio o vídeo compatible."
-        case .oversized: "El archivo supera el tamaño máximo permitido de 2 GB."
-        case .missing: "El archivo ya no está disponible en la biblioteca."
-        case .invalidFile: "No se puede importar este archivo."
+        case .unsupported: MusicLocalized.message("Elige un archivo de audio o vídeo compatible.")
+        case .oversized: MusicLocalized.message("El archivo supera el tamaño máximo permitido de 2 GB.")
+        case .missing: MusicLocalized.message("El archivo ya no está disponible en la biblioteca.")
+        case .invalidFile: MusicLocalized.message("No se puede importar este archivo.")
         }
     }
 }
@@ -195,6 +195,9 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         if duration > 0 && seconds >= duration - 0.2 && playing {
             playing = false
             player.pause()
+            player.seek(to: .zero)
+            seconds = 0
+            lastSavedSecond = 0
             if let currentID { library.savePosition(0, for: currentID) }
         }
     }

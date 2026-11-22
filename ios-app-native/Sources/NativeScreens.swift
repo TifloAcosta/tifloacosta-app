@@ -520,6 +520,72 @@ struct NativeResourcesScreen: View {
         ["Selecciona un apartado"] + categories
     }
 
+    // Píldoras use dates for 2024/2025 and edition numbers for 2026.
+    private var isPillsCategory: Bool {
+        chosenCategory == "Píldoras" || chosenCategory == "Pills"
+    }
+
+    private func metadataYear(for item: NativeCatalogItem) -> Int? {
+        for value in [item.id, item.openUrl ?? "", item.url ?? "",
+                      item.publishedAt ?? ""] {
+            let parts = value.components(separatedBy: CharacterSet.decimalDigits.inverted)
+            for part in parts where part.count == 4 {
+                if let year = Int(part), (2000...2100).contains(year) { return year }
+            }
+        }
+        return nil
+    }
+
+    private func pillEditionNumber(_ item: NativeCatalogItem) -> Int? {
+        let parts = item.title.components(
+            separatedBy: CharacterSet.decimalDigits.inverted).filter { !$0.isEmpty }
+        guard let value = parts.last, value.count <= 3 else { return nil }
+        return Int(value)
+    }
+
+    private func pillsYear(for item: NativeCatalogItem) -> Int? {
+        if let year = metadataYear(for: item) { return year }
+        // A few legacy translated records have opaque IDs. Infer the year
+        // only from an unambiguous dated counterpart of the same edition.
+        guard let edition = pillEditionNumber(item) else { return nil }
+        let candidates = Set(catalog.resources.filter {
+            ($0.category == "Píldoras" || $0.category == "Pills") &&
+                pillEditionNumber($0) == edition
+        }.compactMap { metadataYear(for: $0) })
+        return candidates.count == 1 ? candidates.first : nil
+    }
+
+    private var pillsYears: [Int] {
+        Array(Set(filtered.compactMap { pillsYear(for: $0) })).sorted(by: >)
+    }
+
+    private func pillsOrder(_ item: NativeCatalogItem, year: Int) -> Int {
+        let fields = item.id.split(separator: "-").map(String.init)
+        if let index = fields.firstIndex(of: String(year)),
+           index + 2 < fields.count,
+           let month = Int(fields[index + 1]),
+           let day = Int(fields[index + 2]),
+           (1...12).contains(month), (1...31).contains(day) {
+            return month * 100 + day
+        }
+        return pillEditionNumber(item) ?? 0
+    }
+
+    private func pillsForYear(_ year: Int) -> [NativeCatalogItem] {
+        filtered.filter { pillsYear(for: $0) == year }
+            .sorted {
+                let first = pillsOrder($0, year: year)
+                let second = pillsOrder($1, year: year)
+                return first == second
+                    ? $0.title.localizedStandardCompare($1.title) == .orderedAscending
+                    : first > second
+            }
+    }
+
+    private var pillsWithoutYear: [NativeCatalogItem] {
+        filtered.filter { pillsYear(for: $0) == nil }
+    }
+
     // Preserve the native adjustable selector and its currently chosen category.
     private var categorySelection: Binding<Int> {
         Binding(
@@ -591,6 +657,39 @@ struct NativeResourcesScreen: View {
         }
     }
 
+
+    @ViewBuilder
+    private func resourceRow(_ item: NativeCatalogItem) -> some View {
+        NavigationLink {
+            NativeRemoteResourceScreen(item: item)
+        } label: {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(item.title).font(.body)
+                if let category = item.category {
+                    Text(category).font(.caption).foregroundStyle(.secondary)
+                }
+            }
+        }
+        .accessibilityLabel(item.title)
+        .accessibilityAction(named: Text("Leer")) { read(item) }
+        .accessibilityAction(named: Text("Guardar")) { save(item) }
+        .accessibilityAction(named: Text("Descargar")) { download(item) }
+        .accessibilityAction(named: Text(readingActivity.isSaved(.resource, item: item)
+            ? "Quitar de Leer después" : "Guardar para leer después")) {
+            let saved = readingActivity.toggleReadLater(.resource, item: item)
+            announce(saved ? "Recurso guardado para leer después." :
+                "Recurso retirado de Leer después.")
+        }
+        .accessibilityAction(named: Text("Compartir")) {
+            if let url = item.resourceURL { NativeShare.present(url: url) }
+        }
+        .accessibilityAction(named: Text(favorites.contains(.resource, item: item)
+            ? "Quitar de favoritos" : "Añadir a favoritos")) {
+            let added = favorites.toggle(.resource, item: item)
+            announce(added ? "Añadido a Favoritos" : "Eliminado de Favoritos")
+        }
+    }
+
     var body: some View {
         List {
             Section("Mis lecturas") {
@@ -640,34 +739,28 @@ struct NativeResourcesScreen: View {
                     if filtered.isEmpty {
                         Text("No hay recursos en la categoría elegida.")
                     }
-                    ForEach(filtered) { item in
-                        NavigationLink {
-                            NativeRemoteResourceScreen(item: item)
-                        } label: {
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(item.title).font(.body)
-                                if let category = item.category {
-                                    Text(category).font(.caption).foregroundStyle(.secondary)
+
+                    if isPillsCategory &&
+                       resourceQuery.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                        ForEach(pillsYears, id: \.self) { year in
+                            NavigationLink(String(year)) {
+                                List {
+                                    ForEach(pillsForYear(year)) { item in
+                                        resourceRow(item)
+                                    }
                                 }
+                                .tifloScreenSurface()
+                                .navigationTitle(chosenCategory == "Pills"
+                                    ? "Pills \(year)" : "Píldoras \(year)")
                             }
                         }
-                        .accessibilityLabel(item.title)
-                        .accessibilityAction(named: Text("Leer")) { read(item) }
-                        .accessibilityAction(named: Text("Guardar")) { save(item) }
-                        .accessibilityAction(named: Text("Descargar")) { download(item) }
-                        .accessibilityAction(named: Text(readingActivity.isSaved(.resource, item: item)
-                            ? "Quitar de Leer después" : "Guardar para leer después")) {
-                            let saved = readingActivity.toggleReadLater(.resource, item: item)
-                            announce(saved ? "Recurso guardado para leer después." :
-                                "Recurso retirado de Leer después.")
+                        // Keep undated legacy entries reachable.
+                        ForEach(pillsWithoutYear) { item in
+                            resourceRow(item)
                         }
-                        .accessibilityAction(named: Text("Compartir")) {
-                            if let url = item.resourceURL { NativeShare.present(url: url) }
-                        }
-                        .accessibilityAction(named: Text(favorites.contains(.resource, item: item)
-                            ? "Quitar de favoritos" : "Añadir a favoritos")) {
-                            let added = favorites.toggle(.resource, item: item)
-                            announce(added ? "Añadido a Favoritos" : "Eliminado de Favoritos")
+                    } else {
+                        ForEach(filtered) { item in
+                            resourceRow(item)
                         }
                     }
                 }

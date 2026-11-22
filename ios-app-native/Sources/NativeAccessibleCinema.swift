@@ -259,6 +259,15 @@ struct NativeAccessibleCinemaScreen: View {
         }
     }
 
+    @MainActor private func importCloudAudio(_ url: URL) throws {
+        let language = AccessibleCinemaLanguage.allCases[
+            min(max(1, importLanguageIndex), AccessibleCinemaLanguage.allCases.count - 1)]
+        let kind = AccessibleCinemaKind.allCases[
+            min(max(1, importKindIndex), AccessibleCinemaKind.allCases.count - 1)]
+        let item = try personalLibrary.importAudio(from: url, language: language, kind: kind)
+        importStatus = MusicLocalized.format("Archivo incorporado: %@", item.title)
+    }
+
     var body: some View {
         List {
             Section("Explorar Multicines Accesibles") {
@@ -342,6 +351,27 @@ struct NativeAccessibleCinemaScreen: View {
                         }
                     }
                     .accessibilityElement(children: .contain)
+                }
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+
+            Section("Nubes") {
+                Text("Selecciona tus propios archivos de audio desde una nube conectada. Se importarán a tu colección personal con el idioma y el tipo elegidos arriba.")
+                    .font(.footnote)
+                NavigationLink("Google Drive") {
+                    NativeCloudGooglePickerScreen(
+                        onImport: { _ in },
+                        allowCellularDownloads: true,
+                        onImportValidated: { url in try importCloudAudio(url) }
+                    )
+                }
+                NavigationLink("Dropbox") {
+                    NativeCloudFolderBrowserScreen(
+                        provider: .dropbox,
+                        onImport: { _ in },
+                        allowCellularDownloads: true,
+                        onImportValidated: { url in try importCloudAudio(url) }
+                    )
                 }
             }
             .listRowBackground(TifloVisual.surfaceRaised)

@@ -137,4 +137,102 @@ enum NativeDaisyPackageVerifier {
             }
         }
     }
+
+    /// Validate the audio-only DAISY 2.02 profile independently of DAISY 3.
+    /// Both the NCC and every SMIL audio reference must resolve within the ZIP.
+    static func validateAudioOnly202(_ url: URL) throws {
+        guard let archive = Archive(url: url, accessMode: .read) else {
+            throw Failure.invalid
+        }
+        var files: [String: Data] = [:]
+        var audioHeaders: [String: Data] = [:]
+        var audioSizes: [String: UInt64] = [:]
+        var entries: Set<String> = []
+        var totalSize: UInt64 = 0
+        for entry in archive {
+            let name = entry.path
+            guard entry.type == .file, !name.contains(".."), !name.contains("/"),
+                  !entries.contains(name), entries.count < 2048,
+                  entry.uncompressedSize < 512 * 1024 * 1024 else {
+                throw Failure.invalid
+            }
+            entries.insert(name)
+            totalSize += UInt64(entry.uncompressedSize)
+            guard totalSize < 512 * 1024 * 1024 else { throw Failure.invalid }
+            let isAudio = name.lowercased().hasSuffix(".mp3")
+            guard isAudio || ["ncc.html", "audio.smil"].contains(name) else {
+                throw Failure.invalid
+            }
+            var bytes = Data()
+            _ = try archive.extract(entry) { part in
+                if isAudio {
+                    let remaining = max(0, 65_536 - bytes.count)
+                    if remaining > 0 { bytes.append(contentsOf: part.prefix(remaining)) }
+                } else {
+                    bytes.append(part)
+                }
+            }
+            if isAudio {
+                audioHeaders[name] = bytes
+                audioSizes[name] = UInt64(entry.uncompressedSize)
+            } else {
+                guard bytes.count < 8 * 1024 * 1024 else { throw Failure.invalid }
+                files[name] = bytes
+            }
+        }
+        guard let nccData = files["ncc.html"], let smilData = files["audio.smil"],
+              let ncc = String(data: nccData, encoding: .utf8),
+              let smil = String(data: smilData, encoding: .utf8),
+              !audioHeaders.isEmpty, !entries.contains("book.xml"),
+              ncc.contains("name=\"dc:format\" content=\"Daisy 2.02\""),
+              ncc.contains("name=\"ncc:multimediaType\" content=\"audioNCC\""),
+              smil.contains("name=\"dc:format\" content=\"Daisy 2.02\"") else {
+            throw Failure.invalid
+        }
+
+        for xml in [ncc, smil] {
+            let clean = xml.replacingOccurrences(
+                of: #"(?is)<!DOCTYPE[^>]*>"#, with: "", options: .regularExpression)
+            let parser = XMLParser(data: Data(clean.utf8))
+            parser.shouldResolveExternalEntities = false
+            guard parser.parse() else { throw Failure.invalid }
+        }
+
+        func captures(_ source: String, pattern: String) -> [String] {
+            guard let regex = try? NSRegularExpression(pattern: pattern) else { return [] }
+            let range = NSRange(source.startIndex..., in: source)
+            return regex.matches(in: source, range: range).compactMap { match in
+                guard let captured = Range(match.range(at: 1), in: source) else { return nil }
+                return String(source[captured])
+            }
+        }
+        let chapterIDs = captures(ncc, pattern: #"<a\b[^>]*href="audio\.smil#([^"]+)""#)
+        let navigationIDs = captures(ncc, pattern: #"<(?:h1|h2)\b[^>]*id="([^"]+)""#)
+        let smilTextIDs = captures(smil, pattern: #"<text\b[^>]*src="ncc\.html#([^"]+)""#)
+        let audioRefs = captures(smil, pattern: #"<audio\b[^>]*src="([^"]+)""#)
+        let audioEnds = captures(smil, pattern: #"<audio\b[^>]*clip-end="npt=([0-9]+(?:\.[0-9]+)?)s""#)
+        guard !chapterIDs.isEmpty,
+              chapterIDs.count == navigationIDs.count,
+              smilTextIDs.count == chapterIDs.count,
+              !audioRefs.isEmpty,
+              audioRefs.count == audioEnds.count,
+              Set(audioRefs).count == audioRefs.count,
+              Set(audioRefs) == Set(audioHeaders.keys),
+              chapterIDs.allSatisfy({ smil.contains("id=\"\($0)\"") }),
+              smilTextIDs.allSatisfy({ navigationIDs.contains($0) }),
+              audioEnds.allSatisfy({ (Double($0) ?? 0) > 0 }) else {
+            throw Failure.invalid
+        }
+        for filename in audioRefs {
+            guard let header = audioHeaders[filename], let size = audioSizes[filename],
+                  filename.lowercased().hasSuffix(".mp3"), size > 100 else {
+                throw Failure.invalid
+            }
+            let bytes = Array(header)
+            guard !bytes.starts(with: Array("RIFF".utf8)),
+                  zip(bytes, bytes.dropFirst()).contains(where: {
+                      $0.0 == 0xff && ($0.1 & 0xe0) == 0xe0
+                  }) else { throw Failure.invalid }
+        }
+    }
 }

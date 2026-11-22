@@ -1058,3 +1058,9 @@
 "Ya existe una marca en esta posición." = "Já existe um marcador nesta posição.";
 "No se pudo crear la marca: documento no disponible." = "Não foi possível criar o marcador: documento indisponível.";
 "No se pudo guardar la marca. Inténtalo de nuevo." = "Não foi possível guardar o marcador. Tente novamente.";
+"Abrir vídeo en la fuente original" = "Abrir vídeo na página original";
+"Reproducir vídeo en TifloAcosta" = "Reproduzir vídeo no TifloAcosta";
+"Abrir episodio en la fuente original" = "Abrir episódio na página original";
+"Escuchar episodio en TifloAcosta" = "Ouvir episódio no TifloAcosta";
+"Escuchando en TifloAcosta: %@" = "A ouvir no TifloAcosta: %@";
+"Pódcast en reproducción: %@" = "Podcast em reprodução: %@";

@@ -152,6 +152,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
     private weak var activeLibrary: NativeCinemaLocalLibrary?
     private var currentTitle = ""
     private var remoteCommandTokens: [Any] = []
+    private var progressTimer: Timer?
 
     func open(_ item: NativeCinemaLocalItem, library: NativeCinemaLocalLibrary) throws {
         guard let url = library.fileURL(for: item) else {
@@ -174,12 +175,26 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         registerRemoteCommands()
         player?.play()
         playing = true
+        beginProgressTracking(library: library)
         updateNowPlaying()
+    }
+
+    private func beginProgressTracking(library: NativeCinemaLocalLibrary) {
+        progressTimer?.invalidate()
+        progressTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {
+            [weak self, weak library] _ in
+            Task { @MainActor [weak self, weak library] in
+                guard let self, let library, self.currentID != nil else { return }
+                // Keep the saved position current even after leaving Multicines.
+                self.refresh(library: library)
+            }
+        }
     }
 
     func toggle(library: NativeCinemaLocalLibrary) {
         guard let player else { return }
         if playing {
+            refresh(library: library)
             player.pause()
             playing = false
             save(library: library, force: true)
@@ -223,6 +238,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
 
     func pauseForOtherAudio() {
         guard playing else { return }
+        if let activeLibrary { refresh(library: activeLibrary) }
         player?.pause()
         playing = false
         if let activeLibrary { save(library: activeLibrary, force: true) }
@@ -280,8 +296,11 @@ final class NativeCinemaAudioPlayer: ObservableObject {
     }
 
     func pauseAndSave(library: NativeCinemaLocalLibrary) {
+        refresh(library: library)
         save(library: library, force: true)
         player?.pause()
+        progressTimer?.invalidate()
+        progressTimer = nil
         player = nil
         playing = false
         currentID = nil

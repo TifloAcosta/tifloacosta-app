@@ -6,7 +6,15 @@ import UniformTypeIdentifiers
 // Accept exactly one input and store it privately until the host imports it.
 final class ShareViewController: UIViewController {
     private let groupId = "group.com.tifloacosta.app"
-    private let maxBytes: Int64 = 100 * 1024 * 1024
+    // Keep ordinary files at the existing limit. DAISY/ZIP archives are
+    // transferred as files, never materialized as large Data in the extension.
+    private let maxInMemoryBytes: Int64 = 100 * 1024 * 1024
+    private let maxArchiveBytes: Int64 = 750_000_000
+
+    private func fileTransferLimit(for filename: String) -> Int64 {
+        let ext = URL(fileURLWithPath: filename).pathExtension.lowercased()
+        return ext == "zip" || ext == "daisy" ? maxArchiveBytes : maxInMemoryBytes
+    }
     private let statusLabel = UILabel()
     private let closeButton = UIButton(type: .system)
     private let previewButton = UIButton(type: .system)
@@ -272,7 +280,7 @@ final class ShareViewController: UIViewController {
                     // it into a misleading web link or discarding the original.
                     provider.loadDataRepresentation(forTypeIdentifier: identifier) { [weak self] data, _ in
                         guard let self = self, let data = data, !data.isEmpty,
-                              Int64(data.count) <= self.maxBytes else {
+                              Int64(data.count) <= self.maxInMemoryBytes else {
                             self?.finish("No se pudo recibir el archivo. Inténtalo de nuevo desde la aplicación de origen.")
                             return
                         }
@@ -401,9 +409,17 @@ final class ShareViewController: UIViewController {
                 message["contentType"] = detected?.preferredMIMEType ?? ""
             }
             if let file = file {
-                let size = try file.resourceValues(forKeys: [.fileSizeKey]).fileSize ?? 0
-                guard size >= 0 && Int64(size) <= maxBytes else {
-                    finish("El archivo supera el límite de 100 MB.")
+                let size = try file.resourceValues(forKeys: [.fileSizeKey]).fileSize
+                    ?? (try manager.attributesOfItem(atPath: file.path)[.size] as? NSNumber)?.intValue
+                guard let size, size > 0 else {
+                    finish("No se pudo comprobar el tamaño del archivo recibido.")
+                    return
+                }
+                let limit = fileTransferLimit(for: clean)
+                guard Int64(size) <= limit else {
+                    finish(limit == maxArchiveBytes
+                        ? "El ZIP o DAISY supera el límite de 750 MB. El archivo permanece en la aplicación de origen."
+                        : "El archivo supera el límite de 100 MB.")
                     return
                 }
                 let storedName = id + ".data"

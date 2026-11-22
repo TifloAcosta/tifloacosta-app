@@ -409,3 +409,50 @@ test('GET /channel-videos is restricted to the TifloAcosta origin and valid chan
   ), env, { fetchImpl: mockFetch() });
   assert.equal(disallowed.status, 403);
 });
+
+
+test('public playlist items can be browsed with TifloAcosta or Capacitor origins only', async () => {
+  const playlistId = 'PL' + 'x'.repeat(32);
+  for (const origin of [env.ALLOWED_ORIGIN, 'https://localhost']) {
+    const calls = [];
+    const response = await handleRequest(new Request(
+      'https://youtube-auth.tifloacosta.com/playlist-items?playlistId=' + playlistId,
+      { headers: { Origin: origin } }
+    ), env, { fetchImpl: async url => {
+      calls.push(String(url));
+      if (String(url).includes('/playlistItems?')) {
+        return jsonResponse({ items: [
+          { snippet: { title: 'Descripción', position: 0 },
+            contentDetails: { videoId: 'abcdefghijk' } }
+        ] });
+      }
+      if (String(url).includes('/videos?')) {
+        return jsonResponse({ items: [{ id: 'abcdefghijk',
+          contentDetails: { duration: 'PT3M' } }] });
+      }
+      throw Error('Unexpected URL');
+    }});
+    assert.equal(response.status, 200);
+    const data = await response.json();
+    assert.equal(data.items.length, 1);
+    assert.equal(data.items[0].id, 'abcdefghijk');
+    assert.equal(data.items[0].position, 0);
+    assert.equal(data.items[0].durationSeconds, 180);
+    assert.equal(response.headers.get('Access-Control-Allow-Origin'), origin);
+    assert.ok(calls[0].includes('/playlistItems?'));
+  }
+});
+
+test('playlist items reject foreign origin or invalid playlist identifiers before YouTube', async () => {
+  const url = 'https://youtube-auth.tifloacosta.com/playlist-items?playlistId=INVALID';
+  const blocked = await handleRequest(new Request(url,
+    { headers: { Origin: 'https://example.com' } }), env,
+    { fetchImpl: async () => { throw Error('no upstream access'); } });
+  assert.equal(blocked.status, 403);
+  assert.deepEqual(await blocked.json(), { error: 'ORIGIN_NOT_ALLOWED' });
+  const invalid = await handleRequest(new Request(url,
+    { headers: { Origin: env.ALLOWED_ORIGIN } }), env,
+    { fetchImpl: async () => { throw Error('no upstream access'); } });
+  assert.equal(invalid.status, 400);
+  assert.deepEqual(await invalid.json(), { error: 'INVALID_PLAYLIST' });
+});

@@ -1123,3 +1123,5 @@
 "Importación terminada. Documentos importados: %d. Omitidos: %d. Fallidos: %d." = "Importation terminée. Documents importés : %d. Ignorés : %d. Échecs : %d.";
 "No se pudo importar la carpeta: %@" = "Impossible d’importer le dossier : %@";
 "Importación de carpeta interrumpida." = "Importation du dossier interrompue.";
+
+"Volumen de esta voz" = "Volume de cette voix";

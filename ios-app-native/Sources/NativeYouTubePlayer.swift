@@ -536,24 +536,31 @@ struct NativeYouTubePlayerScreen: View {
     let video: NativeYouTubeVideo
     let playlist: [NativeYouTubeVideo]
     @State private var currentVideo: NativeYouTubeVideo
+    @State private var currentPlaylistIndex: Int
     @Environment(\.openURL) private var openURL
     @Environment(\.dismiss) private var dismiss
     @StateObject private var engine = NativeYouTubePlayerEngine()
     @ObservedObject private var personalLibrary = NativeYouTubePersonalLibrary.shared
     @State private var resumeApplied = false
 
-    init(video: NativeYouTubeVideo, playlist: [NativeYouTubeVideo] = []) {
+    init(video: NativeYouTubeVideo, playlist: [NativeYouTubeVideo] = [],
+         playlistStartIndex: Int? = nil) {
         self.video = video
         self.playlist = playlist
         _currentVideo = State(initialValue: video)
+        let index = playlistStartIndex.flatMap { playlist.indices.contains($0) ? $0 : nil }
+            ?? playlist.firstIndex(where: { $0.id == video.id })
+            ?? -1
+        _currentPlaylistIndex = State(initialValue: index)
     }
 
     private func advancePlaylist() {
-        guard let index = playlist.firstIndex(where: { $0.id == currentVideo.id }) else { return }
-        let next = index + 1
+        guard playlist.indices.contains(currentPlaylistIndex) else { return }
+        let next = currentPlaylistIndex + 1
         guard playlist.indices.contains(next) else { return }
         personalLibrary.rememberPlayback(currentVideo, seconds: engine.currentTime,
                                          duration: engine.duration)
+        currentPlaylistIndex = next
         currentVideo = playlist[next]
         resumeApplied = true // A playlist always starts the next video at its beginning.
         engine.loadVideo(id: currentVideo.id)

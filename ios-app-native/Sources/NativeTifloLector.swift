@@ -2211,6 +2211,8 @@ struct NativeReadingScreen: View {
     @State private var positionBeforeSearch: Int?
     @State private var programmaticFocusRequest = false
     @State private var actionMessage: String?
+    // DAISY navigation sets a target without starting the reader's audio.
+    @State private var pendingDaisyAudioSeconds: TimeInterval?
     @AccessibilityFocusState private var focusedFragment: Int?
     @AccessibilityFocusState private var playbackButtonFocused: Bool
     @AccessibilityFocusState private var continuousBrailleFocused: Bool
@@ -2270,7 +2272,12 @@ struct NativeReadingScreen: View {
         var options: [(unit: Int, label: String)] = []
         if !latest.body.isEmpty {
             options += [(0, "Bloque"), (1, "Párrafo"), (2, "Frase"), (3, "Página")]
-            if !textLayout.headingStarts.isEmpty { options.append((4, "Encabezado")) }
+            if !textLayout.headingStarts.isEmpty ||
+                (latest.daisyNavigation ?? []).contains(where: {
+                    $0.kind != "Página" && $0.kind != "Referencia"
+                }) {
+                options.append((4, "Encabezado"))
+            }
         }
         if !tracks.isEmpty {
             if (latest.daisyNavigation ?? []).contains(where: { $0.kind == "Página" }) {
@@ -2317,7 +2324,8 @@ struct NativeReadingScreen: View {
             library.saveTextPosition(document, offset: readingOffset)
         } else {
             library.saveAudioPosition(document, track: trackIndex, percent: currentPercent,
-                                      seconds: speech.hasAudio ? speech.audioElapsed : nil)
+                                      seconds: speech.hasAudio ? speech.audioElapsed
+                                          : (pendingDaisyAudioSeconds ?? latest.lastAudioSeconds))
         }
         lastSavedPercent = currentPercent
     }
@@ -2400,7 +2408,12 @@ struct NativeReadingScreen: View {
             speech.resume()
         } else if !tracks.isEmpty {
             playTrack()
-            if !didRestoreAudioPosition {
+            if let targetSeconds = pendingDaisyAudioSeconds, speech.hasAudio {
+                speech.seek(toSeconds: targetSeconds)
+                currentPercent = speech.audioPercent
+                pendingDaisyAudioSeconds = nil
+                persistPosition()
+            } else if !didRestoreAudioPosition {
                 restoreAudioPosition()
                 didRestoreAudioPosition = true
             }
@@ -2475,22 +2488,32 @@ struct NativeReadingScreen: View {
         persistPosition()
     }
 
+    /// Moving through DAISY headings never begins playback. Playing audio as a
+    /// side effect competes with VoiceOver and can make navigation impossible.
     private func jumpToDaisy(_ point: NativeDaisyNavigationPoint) {
         guard tracks.indices.contains(point.track) else {
             actionMessage = MusicLocalized.message("La pista indicada no está disponible.")
             return
         }
+        // Cancel any ongoing audio/TTS before changing the track or announcing.
+        if speech.isPlaying || speech.isPaused { stopPlayback() }
         trackIndex = point.track
         currentPercent = 0
         didRestoreAudioPosition = true
-        playTrack()
-        if speech.hasAudio, let seconds = point.seconds {
-            speech.seek(toSeconds: seconds)
-            currentPercent = speech.audioPercent
-        }
-        persistPosition()
-        applySleepTimer()
+        pendingDaisyAudioSeconds = max(0, (point.seconds?.isFinite == true ? point.seconds! : 0))
+        library.saveAudioPosition(document, track: trackIndex, percent: 0,
+                                  seconds: pendingDaisyAudioSeconds)
+        lastSavedPercent = 0
+        sleepDeadline = nil
         showStructure = false
+        // One short announcement, no continuous speech or automatic focus jump.
+        actionMessage = nil
+        let heading = String(point.title.trimmingCharacters(in: .whitespacesAndNewlines).prefix(90))
+        let message = MusicLocalized.format("Encabezado: %@. Pulsa Reproducir para escuchar.", heading)
+        Task { @MainActor in
+            await Task.yield()
+            UIAccessibility.post(notification: .announcement, argument: message)
+        }
     }
 
     private func pausePlayback() {
@@ -2558,6 +2581,7 @@ struct NativeReadingScreen: View {
     private func changeTrack(_ delta: Int) {
         guard tracks.indices.contains(trackIndex + delta) else { return }
         persistPosition()
+        pendingDaisyAudioSeconds = nil
         trackIndex += delta
         didRestoreAudioPosition = true
         move(to: 0)
@@ -2565,14 +2589,16 @@ struct NativeReadingScreen: View {
         applySleepTimer()
     }
 
-    private func jump(to offset: Int) {
+    private func jump(to offset: Int, focusReader: Bool = true) {
         readingOffset = max(0, min(textLayout.totalCharacters, offset))
         let ratio = Double(readingOffset) / Double(max(1, textLayout.totalCharacters))
         currentPercent = min(100, Int((ratio * 100).rounded()))
         persistPosition()
-        let index = textLayout.fragmentIndex(for: readingOffset)
-        programmaticFocusRequest = true
-        focusedFragment = index
+        if focusReader {
+            let index = textLayout.fragmentIndex(for: readingOffset)
+            programmaticFocusRequest = true
+            focusedFragment = index
+        }
         if speech.isPlaying || speech.isPaused {
             let wasPaused = speech.isPaused
             if readingOffset >= textLayout.totalCharacters { speech.stop() }
@@ -2633,6 +2659,31 @@ struct NativeReadingScreen: View {
             moveDaisyPoint(direction, kind: nil)
             return
         }
+        if unit == 4 {
+            if !tracks.isEmpty &&
+               (latest.daisyNavigation ?? []).contains(where: {
+                   $0.kind != "Página" && $0.kind != "Referencia"
+               }) {
+                moveDaisyPoint(direction, kind: nil)
+                return
+            }
+            guard let next = textLayout.nearbyOffset(readingOffset,
+                                                     direction: direction, unit: 4) else {
+                actionMessage = MusicLocalized.message("No hay más encabezados en esa dirección.")
+                return
+            }
+            // Do not start or restart synthetic speech while navigating.
+            if speech.isPlaying || speech.isPaused { stopPlayback() }
+            jump(to: next, focusReader: false)
+            let label = textLayout.namedHeadings.first(where: { $0.offset == next })?.title
+                ?? String(document.body.dropFirst(next).prefix(90).split(separator: "\n").first ?? "")
+            actionMessage = nil
+            let message = MusicLocalized.format(
+                "Encabezado: %@. Pulsa Reproducir para escuchar.",
+                String(label.trimmingCharacters(in: .whitespacesAndNewlines).prefix(90)))
+            UIAccessibility.post(notification: .announcement, argument: message)
+            return
+        }
         if unit == 5 {
             skipReading(direction)
             return
@@ -2655,7 +2706,8 @@ struct NativeReadingScreen: View {
         }.sorted {
             $0.track == $1.track ? ($0.seconds ?? 0) < ($1.seconds ?? 0) : $0.track < $1.track
         }
-        let currentTime = speech.hasAudio ? speech.audioElapsed : (latest.lastAudioSeconds ?? 0)
+        let currentTime = speech.hasAudio ? speech.audioElapsed
+            : (pendingDaisyAudioSeconds ?? latest.lastAudioSeconds ?? 0)
         let candidates = points.filter { point in
             if point.track != trackIndex {
                 return direction > 0 ? point.track > trackIndex : point.track < trackIndex
@@ -3158,6 +3210,7 @@ struct NativeReadingScreen: View {
                         get: { trackIndex },
                         set: { index in
                             guard tracks.indices.contains(index), index != trackIndex else { return }
+                            pendingDaisyAudioSeconds = nil
                             trackIndex = index
                             currentPercent = 0
                             playTrack()

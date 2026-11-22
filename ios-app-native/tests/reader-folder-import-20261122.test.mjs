@@ -20,9 +20,9 @@ test('folder enumeration stays within a scoped URL and skips symlinks', () => {
 });
 
 test('folder progress reports real document counts and continues on individual failures', () => {
-  assert.match(reader, /Importando \\(index \+ 1\) de \\(files\.count\)/);
+  assert.match(reader, /MusicLocalized\.format\("Importando %d de %d: %@"/);
   assert.match(reader, /try importDocuments\(from: \[file\]\)/);
   assert.match(reader, /failures\.append\(/);
-  assert.match(reader, /Documentos importados: \\(summary\.imported\)/);
+  assert.match(reader, /Importación terminada\. Documentos importados: %d\. Omitidos: %d\. Fallidos: %d\./);
   assert.match(reader, /UIAccessibility\.post\(notification: \.announcement, argument: importFolderStatus\)/);
 });

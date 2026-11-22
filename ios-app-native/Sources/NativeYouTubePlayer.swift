@@ -350,6 +350,7 @@ final class NativeYouTubePlayerEngine: ObservableObject {
     @Published private(set) var completedSequence = 0
     private var previousState = -1
     private var hasPlayed = false
+    private var externallyPaused = false
 
     weak var webView: WKWebView?
 
@@ -361,7 +362,18 @@ final class NativeYouTubePlayerEngine: ObservableObject {
     func report(_ data: [String: Any]) {
         if let isReady = data["ready"] as? Bool { ready = isReady }
         if let state = data["state"] as? Int {
-            if state == 1 { hasPlayed = true }
+            if state == 1 {
+                hasPlayed = true
+                if externallyPaused {
+                    // A delayed iframe status must not reclaim audio from a new player.
+                    run("if(window.tifloPlayer){tifloPlayer.pauseVideo()}")
+                } else {
+                    NativeRemotePlaybackOwner.onInterrupted(.youtube) { [weak self] in
+                        self?.pauseForOtherAudio()
+                    }
+                    NativeRemotePlaybackOwner.claim(.youtube)
+                }
+            }
             if state == 0 && previousState != 0 && hasPlayed && error == nil {
                 completedSequence += 1
                 hasPlayed = false
@@ -382,12 +394,25 @@ final class NativeYouTubePlayerEngine: ObservableObject {
     }
 
     func toggle() {
-        run("if(window.tifloPlayer){if(tifloPlayer.getPlayerState()===1){tifloPlayer.pauseVideo()}else{tifloPlayer.playVideo()}}")
+        if externallyPaused {
+            externallyPaused = false
+            run("if(window.tifloPlayer){tifloPlayer.playVideo()}")
+        } else {
+            run("if(window.tifloPlayer){if(tifloPlayer.getPlayerState()===1){tifloPlayer.pauseVideo()}else{tifloPlayer.playVideo()}}")
+        }
+    }
+
+    func pauseForOtherAudio() {
+        guard playing else { return }
+        externallyPaused = true
+        run("if(window.tifloPlayer){tifloPlayer.pauseVideo()}")
+        playing = false
     }
     func loadVideo(id: String) {
         guard NativeYouTubeVideo.validID(id) else { return }
         previousState = -1
         hasPlayed = false
+        externallyPaused = false
         playing = false
         currentTime = 0
         duration = 0
@@ -407,6 +432,8 @@ final class NativeYouTubePlayerEngine: ObservableObject {
         run("if(window.tifloPlayer){tifloPlayer.seekTo(tifloPlayer.getDuration()*\(clamped)/100,true)}")
     }
     func stop() {
+        externallyPaused = false
+        NativeRemotePlaybackOwner.release(.youtube)
         hasPlayed = false // Closing a player must never advance the playlist.
         webView?.evaluateJavaScript("if(window.tifloPlayer){tifloPlayer.stopVideo()}", completionHandler: nil)
         webView = nil

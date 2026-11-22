@@ -25,8 +25,14 @@
     {
       "id": 4,
       "title": "Volumen individual por voz sin alterar VoiceOver",
-      "status": "pending",
-      "issue": "#353"
+      "status": "partial",
+      "issue": "#353",
+      "validation": "En código: volumen individual persistente para cada voz del sistema, con selección accesible 0–100%, aplicación a previsualización y lectura sin alterar VoiceOver; falta validar en iPhone y comprobar motores externos Gemini/Phonon.",
+      "evidence": [
+        "ios-app-native/Sources/NativeReaderSettings.swift",
+        "ios-app-native/Sources/NativeTifloLector.swift",
+        "ios-app-native/tests/reader-per-voice-volume-20261122.test.mjs"
+      ]
     },
     {
       "id": 5,

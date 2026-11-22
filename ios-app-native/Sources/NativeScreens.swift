@@ -265,10 +265,10 @@ struct NativeHomeScreen: View {
     private var persistentPodcastControls: some View {
         VStack(alignment: .leading, spacing: 6) {
             if let episode = podcastPlayer.episode {
-                Text("Escuchando en TifloAcosta: \(episode.title)")
+                Text(MusicLocalized.format("Escuchando en TifloAcosta: %@", episode.title))
                     .font(.subheadline.weight(.semibold))
                     .lineLimit(1)
-                    .accessibilityLabel("Pódcast en reproducción: \(episode.title)")
+                    .accessibilityLabel(MusicLocalized.format("Pódcast en reproducción: %@", episode.title))
                 HStack(spacing: 12) {
                     Button(podcastPlayer.isPlaying ? "Pausar" : "Reproducir") {
                         podcastPlayer.toggle()

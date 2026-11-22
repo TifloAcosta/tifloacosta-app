@@ -2298,7 +2298,9 @@ struct NativeReadingScreen: View {
             // fragment is a block, not a numbered page in the source document.
             if textLayout.paragraphStarts.count > 2 { options.append((1, "Párrafo")) }
             if textLayout.sentenceStarts.count > 2 { options.append((2, "Frase")) }
-            if textLayout.hasRealPages { options.append((3, "Página")) }
+            if textLayout.hasRealPages && textLayout.namedPages.count > 1 {
+                options.append((3, "Página"))
+            }
             if textLayout.headingStarts.count > 1 { options.append((4, "Encabezado")) }
         }
         if !tracks.isEmpty {
@@ -2335,7 +2337,7 @@ struct NativeReadingScreen: View {
                 guard navigationOptions.indices.contains(index) else { return }
                 navigationUnit = navigationOptions[index].unit
                 navigationFeedback = MusicLocalized.format("Modo de navegación: %@",
-                    navigationOptions[index].label)
+                    MusicLocalized.message(navigationOptions[index].label))
                 actionMessage = nil
             }
         )
@@ -2345,7 +2347,7 @@ struct NativeReadingScreen: View {
         if !navigationFeedback.isEmpty { return navigationFeedback }
         let title = navigationOptions.first(where: { $0.unit == effectiveNavigationUnit })?.label
             ?? "No disponible"
-        return MusicLocalized.format("Modo de navegación: %@", title)
+        return MusicLocalized.format("Modo de navegación: %@", MusicLocalized.message(title))
     }
 
     private func navigateText(to offset: Int, unit: Int) {
@@ -2358,7 +2360,8 @@ struct NativeReadingScreen: View {
         let short = NativeReaderHeadingDisplay.title(sample, limit: 90)
         let unitName = navigationOptions.first(where: { $0.unit == unit })?.label
             ?? "Posición"
-        navigationFeedback = short.isEmpty ? unitName : unitName + ": " + short
+        let localizedUnit = MusicLocalized.message(unitName)
+        navigationFeedback = short.isEmpty ? localizedUnit : localizedUnit + ": " + short
         actionMessage = nil
     }
 
@@ -2742,7 +2745,7 @@ struct NativeReadingScreen: View {
                 ?? String(latest.body.dropFirst(next).prefix(90)
                     .split(separator: "\n").first ?? "")
             navigationFeedback = MusicLocalized.format("%@: %@",
-                unit == 4 ? "Encabezado" : "Capítulo",
+                MusicLocalized.message(unit == 4 ? "Encabezado" : "Capítulo"),
                 NativeReaderHeadingDisplay.title(title, limit: 90))
         }
     }
@@ -2772,7 +2775,7 @@ struct NativeReadingScreen: View {
         let modeName = kind == "Página" ? "Página DAISY"
             : kind == "Referencia" ? "Referencia DAISY"
             : (effectiveNavigationUnit == 4 ? "Encabezado" : "Capítulo")
-        navigationFeedback = MusicLocalized.format("%@: %@", modeName,
+        navigationFeedback = MusicLocalized.format("%@: %@", MusicLocalized.message(modeName),
             NativeReaderHeadingDisplay.title(point.title, limit: 90))
     }
 
@@ -3839,7 +3842,8 @@ struct NativeReadingScreen: View {
                let available = navigationOptions.first {
                 navigationUnit = available.unit
                 navigationFeedback = MusicLocalized.format(
-                    "Modo anterior no disponible. Modo de navegación: %@", available.label)
+                    "Modo anterior no disponible. Modo de navegación: %@",
+                    MusicLocalized.message(available.label))
             }
             // The live reader owns the current cursor, not a stale saved position.
             // Shortcuts invokes this directly; no stop, seek or navigation occurs.

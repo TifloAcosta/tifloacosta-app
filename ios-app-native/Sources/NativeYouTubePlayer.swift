@@ -53,6 +53,35 @@ struct NativeYouTubeVideo: Identifiable {
         durationSeconds = 0
     }
 
+    /// Media catalog entries keep YouTube's official URL; never extract a
+    /// direct stream or bypass the embedded YouTube player.
+    init?(media item: NativeMediaItem) {
+        guard item.type == "video", let url = item.originalURL else { return nil }
+        let host = (url.host ?? "").lowercased()
+        let candidate: String
+        if host == "youtu.be" || host == "www.youtu.be" {
+            candidate = url.pathComponents.last ?? ""
+        } else if ["youtube.com", "www.youtube.com", "m.youtube.com",
+                   "music.youtube.com", "www.youtube-nocookie.com"].contains(host) {
+            let segments = url.pathComponents.filter { $0 != "/" }
+            if ["shorts", "embed", "live"].contains(segments.first ?? "") {
+                candidate = segments.dropFirst().first ?? ""
+            } else {
+                candidate = URLComponents(url: url, resolvingAgainstBaseURL: false)?
+                    .queryItems?.first(where: { $0.name == "v" })?.value ?? ""
+            }
+        } else {
+            return nil
+        }
+        guard Self.validID(candidate) else { return nil }
+        id = candidate
+        title = item.title
+        channelTitle = item.sourceName
+        description = item.summary ?? ""
+        publishedAt = item.publishedAt
+        durationSeconds = 0
+    }
+
     init?(saved item: NativeSavedYouTubeVideo) {
         guard Self.validID(item.id) else { return nil }
         id = item.id

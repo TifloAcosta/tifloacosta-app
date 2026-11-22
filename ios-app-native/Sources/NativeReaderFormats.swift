@@ -371,7 +371,9 @@ enum NativeReaderFormats {
         var paths: [String] = []
         var total: Int64 = 0
         var entries = 0
-        let sizeLimit: Int64 = ext == "zip" ? 750_000_000 : 250_000_000
+        // ZIP and .daisy use the same DAISY/audio package policy. Limit the
+        // sum of uncompressed entries, not only the compressed file size.
+        let sizeLimit: Int64 = (ext == "zip" || ext == "daisy") ? 750_000_000 : 250_000_000
         for entry in archive {
             let path = entry.path.replacingOccurrences(of: "\\", with: "/")
             guard !path.hasPrefix("/"), !path.split(separator: "/").contains(".."),

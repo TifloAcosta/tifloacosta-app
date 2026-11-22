@@ -1055,3 +1055,6 @@
 "Importa el audio en Mi música." = "Importa l’audio in La mia musica.";
 "Retroceder diez segundos" = "Indietro di dieci secondi";
 "Avanzar diez segundos" = "Avanti di dieci secondi";
+"Ya existe una marca en esta posición." = "Esiste già un segnalibro in questa posizione.";
+"No se pudo crear la marca: documento no disponible." = "Impossibile creare il segnalibro: documento non disponibile.";
+"No se pudo guardar la marca. Inténtalo de nuevo." = "Impossibile salvare il segnalibro. Riprova.";

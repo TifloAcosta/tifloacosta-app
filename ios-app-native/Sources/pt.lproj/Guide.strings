@@ -54,3 +54,8 @@
 "guide.13.title" = "A minha música";
 "guide.13.paragraph.1" = "A minha música reúne as tuas canções locais e permite reproduzi-las, organizá-las em listas e pastas inteligentes e ajustar o som com o equalizador.";
 "guide.13.paragraph.2" = "Usa Importar músicas para adicionar ficheiros de áudio. As opções de cópia de segurança permitem guardar o catálogo ou criar uma cópia completa com os ficheiros.";
+
+"guide.14.title" = "Cinemas Acessíveis";
+"guide.14.paragraph.1" = "Em Cinemas Acessíveis encontras fontes de filmes, séries, documentários e curtas-metragens com audiodescrição. Cada elemento identifica a fonte original e as condições de acesso.";
+"guide.14.paragraph.2" = "Usa Pesquisar para encontrar uma obra ou plataforma e os controlos ajustáveis de idioma e tipo de conteúdo. O espanhol de Espanha e o da América Latina são opções separadas.";
+"guide.14.paragraph.3" = "Quando a fonte permite reproduzir dentro do TifloAcosta, encontrarás controlos acessíveis. Nos restantes casos, abre o serviço original; alguns exigem registo ou limitam o acesso por país.";

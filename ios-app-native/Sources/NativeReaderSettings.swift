@@ -9,6 +9,9 @@ struct NativeReaderVoiceProfile: Codable, Equatable {
     var pitchIndex: Int
     var pauseStyle: Int
     var pauseSeconds: [Double]
+    // Optional for backwards compatibility with saved voice profiles.
+    // The default 1.0 preserves the original volume of existing users.
+    var volume: Float? = nil
 
     static let natural = Self(speedIndex: NativeReaderSpeedOptions.storedIndex(for: 5),
         pitchIndex: 2, pauseStyle: 0, pauseSeconds: [0.15, 0.25, 0.25, 0.40, 0.60])
@@ -82,6 +85,7 @@ private final class NativeReaderVoicePreview: ObservableObject {
                     AVSpeechUtteranceDefaultSpeechRate * Float(
                         NativeReaderSpeedOptions.rate(for: profile.speedIndex))))
             utterance.pitchMultiplier = [0.8, 0.9, 1.0, 1.1, 1.2][max(0, min(4, profile.pitchIndex))]
+            utterance.volume = max(0, min(1, profile.volume ?? 1))
             utterance.postUtteranceDelay = segment.delay
             synthesizer.speak(utterance)
         }
@@ -115,6 +119,13 @@ struct NativeReaderVoiceCustomizationControls: View {
         NativeAdjustableChoice(title: "Tono de lectura",
             choices: ["Más grave", "Grave", "Normal", "Agudo", "Más agudo"],
             selectedIndex: $draft.pitchIndex)
+        // Adjust the selected TifloLector voice, never the iPhone or VoiceOver.
+        NativeAdjustableChoice(title: "Volumen de esta voz",
+            choices: (0...20).map { MusicLocalized.format("%d por ciento", $0 * 5) },
+            selectedIndex: Binding(
+                get: { max(0, min(20, Int(((draft.volume ?? 1) * 20).rounded()))) },
+                set: { draft.volume = Float($0) / 20 }
+            ))
         NativeAdjustableChoice(title: "Pausas por puntuación",
             choices: ["Normal", "Mayor", "Expresiva", "Personalizadas"],
             selectedIndex: $draft.pauseStyle)

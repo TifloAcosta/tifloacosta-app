@@ -86,7 +86,8 @@ test("fase 3: metadatos DAISY respetan el idioma seleccionado", () => {
   const audio = readFileSync(new URL("../Sources/NativeGeminiAudioExport.swift", import.meta.url), "utf8");
   assert.match(reader, /NativeAdjustableChoice\(\s*title: "Idioma del contenido"/);
   assert.match(reader, /language: audioExportLanguage/);
-  assert.match(audio, /language: language, progress: progress/);
+  assert.match(audio, /language: language,/);
+  assert.match(audio, /audioOnly202: format == \\.daisyVoiceDream, progress: progress/);
   assert.match(daisy, /xml:lang="\\\(lang\)"/);
   assert.match(daisy, /<dc:Language>\\\(lang\)<\/dc:Language>/);
 });

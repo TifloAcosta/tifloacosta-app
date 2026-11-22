@@ -26,13 +26,13 @@ test('Las miniaturas no añaden elementos a VoiceOver y funcionan con letra gran
   assert.ok(player.includes('var thumbnailURL: URL'));
   assert.ok(player.includes('https://i.ytimg.com/vi/'));
   const thumbnail = screens.split('private struct NativeYouTubeThumbnail: View {')[1]
-    .split('private struct NativeYouTubeVideoRow: View {')[0];
+    .split('struct NativeYouTubeVideoRow: View {')[0];
   for (const token of [
     'AsyncImage(url: video.thumbnailURL)', '.accessibilityHidden(true)',
     'case .empty, .failure', 'Image(systemName: "play.rectangle.fill")'
   ]) assert.ok(thumbnail.includes(token), token);
-  const row = screens.split('private struct NativeYouTubeVideoRow: View {')[1]
-    .split('private struct NativeYouTubeCommentScreen: View {')[0];
+  const row = screens.split('struct NativeYouTubeVideoRow: View {')[1]
+    .split('struct NativeYouTubeCommentScreen: View {')[0];
   for (const token of [
     'NativeYouTubeThumbnail(video: video)', 'dynamicTypeSize.isAccessibilitySize',
     '.accessibilityAction(.default)', 'NativeYouTubeTitleActions',

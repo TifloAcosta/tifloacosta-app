@@ -12,7 +12,9 @@ test('DAISY headings are available even in audio-only books when there are multi
   assert.match(options, /daisySections\.count > 1/);
   assert.match(options, /options\.append\(\(4, "Encabezado"\)\)/);
   const move = part('private func moveUnit(_ direction: Int) {', 'private func moveDaisyPoint(');
-  assert.match(move, /\(unit == 7 \|\| unit == 4\)/);
+  assert.match(move, /if unit == 7 && !tracks.isEmpty && daisyChapterPoints.count > 1/);
+  assert.match(move, /moveDaisyPoint\(direction, kind: "Capítulo"\)/);
+  assert.match(move, /if unit == 4 && !tracks.isEmpty/);
   assert.match(move, /moveDaisyPoint\(direction, kind: nil\)/);
 });
 

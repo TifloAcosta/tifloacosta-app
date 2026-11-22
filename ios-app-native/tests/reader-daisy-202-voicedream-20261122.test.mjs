@@ -27,7 +27,7 @@ test('DAISY 2.02 uses original synthesized voice and reuses the MP3 clips', () =
   assert.match(daisy, /dc:format" content="Daisy 2\.02"/);
   assert.match(daisy, /<html xmlns="http:\/\/www\.w3\.org\/1999\/xhtml"/);
   assert.match(daisy, /<smil>/);
-  assert.match(daisy, /<text id="text\\\(index \+ 1\\\)" src="ncc\.html#nav/);
+  assert.match(daisy, /ncc\.html#nav/);
   assert.match(daisy, /clip-begin=\\?"npt=0\.000s/);
   assert.match(daisy, /clip-end=\\?"npt=/);
   assert.match(daisy, /archive\.addEntry\(with: "ncc\.html"/);

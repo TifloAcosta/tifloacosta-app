@@ -13,6 +13,15 @@ test('braille has controls for TifloLector and directs system-only options to Vo
   assert.match(settings, /@AppStorage\("native-reader-reading-mode"\)/);
 });
 
+test('braille shortcut targets VoiceOver Braille rather than TifloAcosta app settings', () => {
+  const controls = settings.split('struct NativeReaderBrailleControls: View {')[1]?.split('struct NativeReaderSettingsScreen: View {')[0] ?? '';
+  assert.match(controls, /prefs:root=ACCESSIBILITY&path=VOICEOVER_TITLE\/BRAILLE_TITLE/);
+  assert.match(controls, /App-prefs:root=ACCESSIBILITY&path=VOICEOVER_TITLE\/BRAILLE_TITLE/);
+  assert.match(controls, /openVoiceOverBrailleSettings\(\)/);
+  assert.match(controls, /showManualBrailleSettingsHelp/);
+  assert.doesNotMatch(controls, /UIApplication\.openSettingsURLString/);
+});
+
 test('reading mode uses one focus toggle and only displays braille controls in braille mode', () => {
   assert.match(settings, /Toggle\("Foco inicial en Reproducir", isOn: automaticReadingBinding\)/);
   assert.match(settings, /get: \{ readingMode == 1 \}/);

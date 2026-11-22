@@ -1058,3 +1058,9 @@
 "Ya existe una marca en esta posición." = "Un signet existe déjà à cet emplacement.";
 "No se pudo crear la marca: documento no disponible." = "Impossible de créer le signet : document indisponible.";
 "No se pudo guardar la marca. Inténtalo de nuevo." = "Impossible d’enregistrer le signet. Réessayez.";
+"Abrir vídeo en la fuente original" = "Ouvrir la vidéo sur le site d’origine";
+"Reproducir vídeo en TifloAcosta" = "Lire la vidéo dans TifloAcosta";
+"Abrir episodio en la fuente original" = "Ouvrir l’épisode sur le site d’origine";
+"Escuchar episodio en TifloAcosta" = "Écouter l’épisode dans TifloAcosta";
+"Escuchando en TifloAcosta: %@" = "Écoute dans TifloAcosta : %@";
+"Pódcast en reproducción: %@" = "Podcast en cours : %@";

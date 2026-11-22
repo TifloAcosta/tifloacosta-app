@@ -156,6 +156,7 @@ final class NativeYouTubeSearchStore: ObservableObject {
     @Published private(set) var isLoading = false
     @Published private(set) var message: String?
     @Published private(set) var hasSearched = false
+    @Published private(set) var searchFailed = false
 
     private var currentQuery = ""
     private var currentFilter = "video"
@@ -172,6 +173,7 @@ final class NativeYouTubeSearchStore: ObservableObject {
         }
         if loadMore && nextPageToken.isEmpty { return }
         if !loadMore {
+            searchFailed = false
             currentQuery = cleanQuery
             currentFilter = filter
             currentChannelID = channelID
@@ -207,12 +209,23 @@ final class NativeYouTubeSearchStore: ObservableObject {
             guard (200...299).contains(status) else {
                 let code = (try? JSONDecoder().decode(NativeYouTubeSearchFailure.self, from: data).error) ?? ""
                 if code == "QUOTA_EXCEEDED" {
-                    throw SearchError.message("YouTube ha alcanzado temporalmente su límite de búsqueda.")
+                    throw SearchError.message(MusicLocalized.message(
+                        "YouTube ha alcanzado temporalmente su límite de búsqueda."))
                 }
-                if code == "SEARCH_UNAVAILABLE" {
-                    throw SearchError.message("El servicio de búsqueda de YouTube no está disponible.")
+                if code == "SEARCH_UNAVAILABLE" || status == 503 {
+                    throw SearchError.message(MusicLocalized.message(
+                        "El servicio de búsqueda de YouTube no está disponible."))
                 }
-                throw SearchError.message("No se pudo completar la búsqueda. Inténtalo nuevamente.")
+                if code == "RATE_LIMITED" || status == 429 {
+                    throw SearchError.message(MusicLocalized.message(
+                        "Demasiadas búsquedas consecutivas. Inténtalo nuevamente más tarde."))
+                }
+                if code == "ORIGIN_NOT_ALLOWED" || status == 403 {
+                    throw SearchError.message(MusicLocalized.message(
+                        "El servidor rechazó la solicitud de búsqueda de esta aplicación."))
+                }
+                throw SearchError.message(MusicLocalized.message(
+                    "El servicio de YouTube devolvió un error al buscar."))
             }
             let page = try JSONDecoder().decode(NativeYouTubeSearchPage.self, from: data)
             let newVideos = page.items.compactMap(NativeYouTubeVideo.init(result:))
@@ -226,9 +239,42 @@ final class NativeYouTubeSearchStore: ObservableObject {
             message = count == 0 ? "No se encontraron resultados."
                 : "\(count) resultados encontrados hasta el momento."
         } catch {
-            message = (error as? SearchError)?.localizedDescription
-                ?? "No se pudo conectar con la búsqueda de YouTube."
+            if (error as? URLError)?.code == .cancelled { return }
+            searchFailed = true
+            message = searchFailureMessage(error)
         }
+    }
+
+    /// Real network, TLS, service and decoding errors must not all be
+    /// announced as "cannot connect". Do not record queries or API tokens.
+    private func searchFailureMessage(_ error: Error) -> String {
+        if let explicit = error as? SearchError { return explicit.localizedDescription }
+        if error is DecodingError {
+            return MusicLocalized.message(
+                "El servicio de YouTube respondió, pero sus datos no pudieron interpretarse.")
+        }
+        if let network = error as? URLError {
+            switch network.code {
+            case .notConnectedToInternet, .dataNotAllowed, .networkConnectionLost:
+                return MusicLocalized.message(
+                    "El iPhone no tiene una conexión disponible para buscar en YouTube.")
+            case .cannotFindHost, .dnsLookupFailed:
+                return MusicLocalized.message(
+                    "El iPhone no encuentra el servidor de búsqueda de YouTube.")
+            case .timedOut, .cannotConnectToHost:
+                return MusicLocalized.message(
+                    "El servidor de búsqueda de YouTube no responde desde este dispositivo.")
+            case .secureConnectionFailed, .serverCertificateUntrusted,
+                 .serverCertificateHasBadDate, .serverCertificateHasUnknownRoot:
+                return MusicLocalized.message(
+                    "No se pudo establecer una conexión segura con el buscador de YouTube.")
+            default:
+                return MusicLocalized.message(
+                    "Se produjo un error de comunicación con el buscador de YouTube.")
+            }
+        }
+        return MusicLocalized.message(
+            "No fue posible procesar la búsqueda de YouTube en este momento.")
     }
 
     private enum SearchError: LocalizedError {

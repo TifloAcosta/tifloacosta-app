@@ -163,6 +163,29 @@ final class NativeYouTubeSearchStore: ObservableObject {
     private var currentChannelID: String?
     private let endpoint = URL(string: "https://youtube-auth.tifloacosta.com/search")!
 
+    /// Retry once for transient transport/gateway failures, never for
+    /// permission errors or exhausted search quota. This also avoids forcing
+    /// a VoiceOver user to repeat the same search after a brief connection drop.
+    private func fetchWithOneTransientRetry(
+        _ request: URLRequest
+    ) async throws -> (Data, URLResponse) {
+        do {
+            let first = try await URLSession.shared.data(for: request)
+            if let response = first.1 as? HTTPURLResponse,
+               [502, 503, 504].contains(response.statusCode) {
+                try await Task.sleep(nanoseconds: 400_000_000)
+                return try await URLSession.shared.data(for: request)
+            }
+            return first
+        } catch let error as URLError
+            where error.code == .timedOut ||
+                  error.code == .networkConnectionLost ||
+                  error.code == .cannotConnectToHost {
+            try await Task.sleep(nanoseconds: 400_000_000)
+            return try await URLSession.shared.data(for: request)
+        }
+    }
+
     func search(_ text: String, filter: String = "video", channelID: String? = nil,
                 loadMore: Bool = false) async {
         guard !isLoading else { return }
@@ -204,7 +227,7 @@ final class NativeYouTubeSearchStore: ObservableObject {
             // El Worker solo acepta búsquedas del origen TifloAcosta.
             // URLSession no añade Origin automáticamente como un navegador.
             request.setValue("https://tifloacosta.com", forHTTPHeaderField: "Origin")
-            let (data, response) = try await URLSession.shared.data(for: request)
+            let (data, response) = try await fetchWithOneTransientRetry(request)
             let status = (response as? HTTPURLResponse)?.statusCode ?? 0
             guard (200...299).contains(status) else {
                 let code = (try? JSONDecoder().decode(NativeYouTubeSearchFailure.self, from: data).error) ?? ""

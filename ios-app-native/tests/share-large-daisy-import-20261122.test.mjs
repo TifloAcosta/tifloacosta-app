@@ -32,6 +32,8 @@ test('reader applies the same decompressed safety limit to ZIP and .daisy', () =
 
 test('incoming share remains in the inbox on import errors and preserves the source extension', () => {
   assert.match(inbox, /let originalName = URL\(fileURLWithPath: item\.name\)\.lastPathComponent/);
+  assert.match(inbox, /try FileManager\.default\.linkItem\(at: source, to: named\)/);
+  assert.match(inbox, /try FileManager\.default\.copyItem\(at: source, to: named\)/);
   assert.match(inbox, /try library\.importDocuments\(from: \[named\], sharingID: sharingID\)/);
   assert.match(inbox, /failures\.append/);
   assert.match(inbox, /permanecen en Recibidos/);

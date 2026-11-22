@@ -1167,3 +1167,20 @@
 "No fue posible procesar la búsqueda de YouTube en este momento." = "Não foi possível processar a pesquisa do YouTube neste momento.";
 "Reintentar búsqueda" = "Tentar pesquisar novamente";
 "Buscar directamente en YouTube" = "Pesquisar diretamente no YouTube";
+
+// Listas de reproducción de YouTube: búsqueda y reproducción ordenada.
+"Lista de reproducción de YouTube" = "Lista de reprodução do YouTube";
+"%@. Lista de reproducción de YouTube. Canal: %@" = "%@. Lista de reprodução do YouTube. Canal: %@";
+"Compartir lista" = "Partilhar lista";
+"Lista de reproducción" = "Lista de reprodução";
+"Abrir lista original en YouTube" = "Abrir lista original no YouTube";
+"Vídeos en orden de la lista" = "Vídeos pela ordem da lista";
+"Cargando lista de reproducción" = "A carregar lista de reprodução";
+"Reintentar carga de la lista" = "Voltar a carregar a lista";
+"Mostrar veinte vídeos más" = "Mostrar mais vinte vídeos";
+"Posición %d de la lista." = "Posição %d na lista.";
+"No hay vídeos públicos disponibles en esta lista." = "Não há vídeos públicos disponíveis nesta lista.";
+"La respuesta de la lista de YouTube no pudo interpretarse." = "Não foi possível interpretar a resposta da lista do YouTube.";
+"No se pudo cargar la lista de YouTube. Comprueba la conexión y vuelve a intentarlo." = "Não foi possível carregar a lista do YouTube. Verifica a ligação e tenta novamente.";
+"La lista no está disponible públicamente." = "Esta lista não está disponível publicamente.";
+"El servidor no pudo consultar esta lista de YouTube." = "O servidor não conseguiu consultar esta lista do YouTube.";

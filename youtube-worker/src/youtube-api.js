@@ -249,7 +249,10 @@ export async function searchVideos(apiKey, searchTerm, pageToken = '', fetchImpl
   const allowed = new Set(['video', 'all', 'channel', 'short', 'live', 'captions']);
   const filter = String(options.filter || 'video');
   if (!allowed.has(filter)) throw typedError('INVALID_SEARCH', 400);
-  const q = channelId ? '' : validSearchTerm(searchTerm);
+  // Browsing a channel accepts an empty query; searching within it must
+  // preserve the user's words instead of silently discarding them.
+  const normalizedTerm = String(searchTerm || '').trim();
+  const q = channelId && !normalizedTerm ? '' : validSearchTerm(searchTerm);
   const token = validPageToken(pageToken);
   const entries = [
     ['part', 'snippet'],

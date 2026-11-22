@@ -1153,3 +1153,19 @@
 
 "Selecciona tus propios archivos de audio desde una nube conectada. Se importarán a tu colección personal con el idioma y el tipo elegidos arriba." = "Select your own audio files from a connected cloud account. They will be imported into your personal collection using the language and content type selected above.";
 "Archivo incorporado: %@" = "File added: %@";
+
+// Diagnóstico detallado de YouTube y recuperación de búsquedas.
+"YouTube ha alcanzado temporalmente su límite de búsqueda." = "YouTube has temporarily reached its search quota.";
+"El servicio de búsqueda de YouTube no está disponible." = "YouTube search is currently unavailable.";
+"Demasiadas búsquedas consecutivas. Inténtalo nuevamente más tarde." = "Too many searches in a row. Try again later.";
+"El servidor rechazó la solicitud de búsqueda de esta aplicación." = "The server rejected this app's search request.";
+"El servicio de YouTube devolvió un error al buscar." = "The YouTube service returned a search error.";
+"El servicio de YouTube respondió, pero sus datos no pudieron interpretarse." = "YouTube responded, but its data could not be read.";
+"El iPhone no tiene una conexión disponible para buscar en YouTube." = "This iPhone has no available connection for YouTube search.";
+"El iPhone no encuentra el servidor de búsqueda de YouTube." = "This iPhone cannot find the YouTube search server.";
+"El servidor de búsqueda de YouTube no responde desde este dispositivo." = "The YouTube search server is not responding from this device.";
+"No se pudo establecer una conexión segura con el buscador de YouTube." = "A secure connection to YouTube search could not be established.";
+"Se produjo un error de comunicación con el buscador de YouTube." = "A communication error occurred with YouTube search.";
+"No fue posible procesar la búsqueda de YouTube en este momento." = "The YouTube search could not be processed right now.";
+"Reintentar búsqueda" = "Try search again";
+"Buscar directamente en YouTube" = "Search directly on YouTube";

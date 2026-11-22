@@ -1148,3 +1148,6 @@
 "El archivo supera el tamaño máximo permitido de 2 GB." = "Le fichier dépasse la limite de 2 Go.";
 "El archivo ya no está disponible en la biblioteca." = "Ce fichier n'est plus disponible dans la bibliothèque.";
 "No se puede importar este archivo." = "Impossible d'importer ce fichier.";
+
+"Selecciona tus propios archivos de audio desde una nube conectada. Se importarán a tu colección personal con el idioma y el tipo elegidos arriba." = "Sélectionnez vos propres fichiers audio dans un cloud connecté. Ils seront importés dans votre collection personnelle avec la langue et le type choisis ci-dessus.";
+"Archivo incorporado: %@" = "Fichier ajouté : %@";

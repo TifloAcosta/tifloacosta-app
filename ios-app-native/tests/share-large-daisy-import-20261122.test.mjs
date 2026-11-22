@@ -11,7 +11,7 @@ test('DAISY and ZIP use a 750 MB file-transfer ceiling, not the old 100 MB limit
   assert.match(ext, /private let maxArchiveBytes: Int64 = 750_000_000/);
   assert.match(ext, /ext == "zip" \|\| ext == "daisy" \? maxArchiveBytes : maxInMemoryBytes/);
   assert.match(ext, /let limit = fileTransferLimit\(for: clean\)/);
-  assert.match(ext, /Int64\(size\) <= limit/);
+  assert.match(ext, /fileSize\.int64Value <= limit/);
   assert.match(ext, /provider\.loadFileRepresentation\(forTypeIdentifier: identifier\)/);
   assert.match(ext, /try manager\.copyItem\(at: file, to: destination\)/);
   assert.doesNotMatch(ext, /Int64\(size\) <= maxBytes/);

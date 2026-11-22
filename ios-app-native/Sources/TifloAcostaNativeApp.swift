@@ -12,6 +12,9 @@ struct TifloAcostaNativeApp: App {
     @StateObject private var resourceService = NativeResourceService()
     @StateObject private var inbox = NativeShareInbox()
     @StateObject private var podcasts = NativePodcastStore()
+    @StateObject private var podcastPlayer = NativePodcastPlayer()
+    @StateObject private var podcastLibrary = NativePodcastLibrary()
+    @StateObject private var podcastDownloads = NativePodcastDownloads()
     @StateObject private var media = NativeMediaStore()
     @StateObject private var youtubeAccount = NativeYouTubeAccountStore()
     @AppStorage("native-ios-color-scheme") private var schemeIndex = 0
@@ -32,6 +35,9 @@ struct TifloAcostaNativeApp: App {
                 .environmentObject(resourceService)
                 .environmentObject(inbox)
                 .environmentObject(podcasts)
+                .environmentObject(podcastPlayer)
+                .environmentObject(podcastLibrary)
+                .environmentObject(podcastDownloads)
                 .environmentObject(media)
                 .environmentObject(youtubeAccount)
                 .onAppear { inbox.refresh() }

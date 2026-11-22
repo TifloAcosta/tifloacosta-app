@@ -26,8 +26,15 @@ jobs:
       P12_PASSWORD: ${{ secrets.IOS_SIGNING_KEY_PASSPHRASE }}
       GITHUB_TOKEN: ${{ github.token }}
       GITHUB_RUN_NUMBER: ${{ github.run_number }}
-      TIFLO_IOS_MARKETING_VERSION: "1.6"
+      TIFLO_IOS_MARKETING_VERSION: "1.7"
     steps:
+      - name: Confirmar rama única de la beta interna
+        run: |
+          set -euo pipefail
+          if [ "$GITHUB_REF" != "refs/heads/development/next-public-1.6-500200-20261121" ]; then
+            echo "::error::La beta interna solo puede compilarse desde la rama única de la próxima actualización."
+            exit 1
+          fi
       - uses: actions/checkout@v4
       - name: Validar Actualidad, Recursos y diseño sin HTML
         run: |

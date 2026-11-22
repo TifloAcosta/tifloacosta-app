@@ -32,6 +32,14 @@ struct NativeAudioBookmark: Codable, Hashable {
     var seconds: TimeInterval? = nil
 }
 
+/// Report the actual result of writing a bookmark, not just a button press.
+enum NativeBookmarkSaveResult {
+    case saved
+    case alreadyExists
+    case documentUnavailable
+    case failed
+}
+
 struct NativeDaisyNavigationPoint: Codable, Hashable, Identifiable {
     let title: String
     let level: Int
@@ -520,16 +528,26 @@ final class NativeReaderLibrary: ObservableObject {
         try? save()
     }
 
-    func addTextBookmark(_ document: NativeReadingDocument, offset: Int) {
-        guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
+    @discardableResult
+    func addTextBookmark(_ document: NativeReadingDocument, offset: Int) -> NativeBookmarkSaveResult {
+        guard let i = documents.firstIndex(where: { $0.id == document.id }) else {
+            return .documentUnavailable
+        }
         let count = documents[i].body.count
         let value = max(0, min(count, offset))
         let percent = count > 0 ? Int((Double(value) * 100 / Double(count)).rounded()) : 0
-        var bookmarks = documents[i].textBookmarks ?? []
-        guard !bookmarks.contains(where: { $0.offset == value }) else { return }
+        let previous = documents[i].textBookmarks
+        var bookmarks = previous ?? []
+        guard !bookmarks.contains(where: { $0.offset == value }) else { return .alreadyExists }
         bookmarks.append(NativeTextBookmark(offset: value, percent: percent))
         documents[i].textBookmarks = bookmarks.sorted { $0.offset < $1.offset }
-        try? save()
+        do {
+            try save()
+            return .saved
+        } catch {
+            documents[i].textBookmarks = previous
+            return .failed
+        }
     }
 
     func removeTextBookmark(_ document: NativeReadingDocument, offset: Int) {
@@ -538,24 +556,34 @@ final class NativeReaderLibrary: ObservableObject {
         try? save()
     }
 
+    @discardableResult
     func addAudioBookmark(_ document: NativeReadingDocument, track: Int, percent: Int,
-                          seconds: TimeInterval? = nil) {
-        guard let i = documents.firstIndex(where: { $0.id == document.id }), track >= 0 else { return }
+                          seconds: TimeInterval? = nil) -> NativeBookmarkSaveResult {
+        guard let i = documents.firstIndex(where: { $0.id == document.id }), track >= 0 else {
+            return .documentUnavailable
+        }
         let validSeconds = seconds.flatMap { $0.isFinite ? max(0, $0) : nil }
         let mark = NativeAudioBookmark(track: track, percent: max(0, min(100, percent)),
                                        seconds: validSeconds)
-        var saved = documents[i].audioBookmarks ?? []
+        let previous = documents[i].audioBookmarks
+        var saved = previous ?? []
         guard !saved.contains(where: {
             $0.track == track &&
             (validSeconds != nil && $0.seconds != nil
                 ? abs($0.seconds! - validSeconds!) < 0.5
                 : $0.percent == mark.percent)
-        }) else { return }
+        }) else { return .alreadyExists }
         saved.append(mark)
         documents[i].audioBookmarks = saved.sorted {
             $0.track == $1.track ? $0.percent < $1.percent : $0.track < $1.track
         }
-        try? save()
+        do {
+            try save()
+            return .saved
+        } catch {
+            documents[i].audioBookmarks = previous
+            return .failed
+        }
     }
 
     func removeAudioBookmark(_ document: NativeReadingDocument, mark: NativeAudioBookmark) {
@@ -2837,16 +2865,37 @@ struct NativeReadingScreen: View {
     private func addBookmark() {
         let code = NativeAppLanguage.code(for: languageIndex)
         let locale = Locale(identifier: code)
+        let result: NativeBookmarkSaveResult
+        let savedMessage: String
         if tracks.isEmpty {
-            library.addTextBookmark(document, offset: readingOffset)
+            result = library.addTextBookmark(document, offset: readingOffset)
+            let offset = max(0, min(latest.body.count, readingOffset))
+            let percent = latest.body.isEmpty ? 0
+                : Int((Double(offset) * 100 / Double(latest.body.count)).rounded())
             let format = NativeAppLanguage.message("Marca guardada en %d por ciento.", languageCode: code)
-            actionMessage = String(format: format, locale: locale, currentPercent)
+            savedMessage = String(format: format, locale: locale, percent)
         } else {
-            library.addAudioBookmark(document, track: trackIndex, percent: currentPercent,
-                                     seconds: speech.hasAudio ? speech.audioElapsed : nil)
+            result = library.addAudioBookmark(document, track: trackIndex, percent: currentPercent,
+                                              seconds: speech.hasAudio ? speech.audioElapsed : nil)
             let format = NativeAppLanguage.message("Marca guardada en la pista %d, %d por ciento.", languageCode: code)
-            actionMessage = String(format: format, locale: locale, trackIndex + 1, currentPercent)
+            savedMessage = String(format: format, locale: locale, trackIndex + 1, currentPercent)
         }
+
+        switch result {
+        case .saved:
+            actionMessage = savedMessage
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+        case .alreadyExists:
+            actionMessage = NativeAppLanguage.message("Ya existe una marca en esta posición.", languageCode: code)
+            UINotificationFeedbackGenerator().notificationOccurred(.warning)
+        case .documentUnavailable:
+            actionMessage = NativeAppLanguage.message("No se pudo crear la marca: documento no disponible.", languageCode: code)
+            UINotificationFeedbackGenerator().notificationOccurred(.error)
+        case .failed:
+            actionMessage = NativeAppLanguage.message("No se pudo guardar la marca. Inténtalo de nuevo.", languageCode: code)
+            UINotificationFeedbackGenerator().notificationOccurred(.error)
+        }
+
         if let actionMessage {
             UIAccessibility.post(notification: .announcement, argument: actionMessage)
         }
@@ -3151,16 +3200,11 @@ struct NativeReadingScreen: View {
         .background(TifloVisual.surfaceRaised)
     }
 
-    // El botón y la acción general usan el último párrafo recorrido
-    // con VoiceOver cuando no hay reproducción activa.
+    // The button, VoiceOver reader action and shortcut save the same live cursor.
+    // Choosing a previously focused fragment here could silently create an old mark
+    // (or an exact duplicate) when the user moved elsewhere in the book.
     private func addBookmarkFromReaderSelection() {
-        if tracks.isEmpty && !speech.isPlaying,
-           let fragment = focusedFragment ?? lastReaderFragment,
-           textLayout.fragmentStarts.indices.contains(fragment) {
-            bookmarkFromContextMenu(at: fragment)
-        } else {
-            addBookmark()
-        }
+        addBookmark()
     }
 
     private func bookmarkFromContextMenu(at fragment: Int) {

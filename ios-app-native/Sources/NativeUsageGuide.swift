@@ -99,6 +99,21 @@ private enum NativeGuideContent {
             ]
         ),
         NativeGuideSection(
+            id: "14",
+            spanishTitle: "Multicines Accesibles",
+            englishTitle: "Accessible Cinemas",
+            spanishParagraphs: [
+                "En Multicines Accesibles se reúnen fuentes de películas, series, documentales y cortometrajes con audiodescripción. Cada ficha identifica la fuente original y las condiciones de acceso.",
+                "Utiliza Buscar para localizar una obra o plataforma, y los selectores ajustables de idioma y tipo de contenido. El español de España y el de Latinoamérica se presentan por separado.",
+                "Cuando la fuente permite reproducción dentro de TifloAcosta, encontrarás los controles accesibles del reproductor. En los demás casos utiliza el enlace a la plataforma original; algunos servicios exigen registro o están limitados por país."
+            ],
+            englishParagraphs: [
+                "Accessible Cinemas brings together sources of audio-described films, series, documentaries and short films. Each item identifies its original provider and access requirements.",
+                "Use Search to find a work or platform, and the adjustable language and content-type controls. European Spanish and Latin American Spanish are separate choices.",
+                "When the source allows playback within TifloAcosta, accessible player controls are available. Otherwise use the original provider link; some services require registration or are restricted by region."
+            ]
+        ),
+        NativeGuideSection(
             id: "4",
             spanishTitle: "Recibidos",
             englishTitle: "Received items",

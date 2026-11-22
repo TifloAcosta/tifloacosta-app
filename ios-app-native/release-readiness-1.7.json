@@ -1,0 +1,141 @@
+{
+  "version": "1.7",
+  "branch": "development/next-public-1.6-500200-20261121",
+  "source": "Correo TifloAcosta - Próxima actualización - Registro acumulado de cambios, edición 10 (22-11-2026) y decisión posterior de incluir Multicines Accesibles",
+  "policy": "No se puede construir para beta interna hasta que cada funcionalidad obligatoria esté implementada en código. Las pruebas en dispositivo siguen siendo una fase separada.",
+  "requirements": [
+    {
+      "id": 1,
+      "title": "Recursos: Píldoras por años en la app y orden cronológico",
+      "status": "pending",
+      "issue": "#351"
+    },
+    {
+      "id": 2,
+      "title": "DAISY: audio íntegro y secuencia de navegación NCC/NCX/SMIL",
+      "status": "partial",
+      "issue": "#353"
+    },
+    {
+      "id": 3,
+      "title": "Marcas: confirmación fiable y señales sonoras configurables",
+      "status": "partial",
+      "issue": "#353"
+    },
+    {
+      "id": 4,
+      "title": "Volumen individual por voz sin alterar VoiceOver",
+      "status": "pending",
+      "issue": "#353"
+    },
+    {
+      "id": 5,
+      "title": "Importación: estado accesible, progreso y resultado",
+      "status": "pending",
+      "issue": "#353"
+    },
+    {
+      "id": 6,
+      "title": "Importar carpeta completa sin ZIP",
+      "status": "pending",
+      "issue": "#353"
+    },
+    {
+      "id": 7,
+      "title": "Compartir: recepción múltiple externa sin descartar adjuntos",
+      "status": "pending",
+      "issue": "#353"
+    },
+    {
+      "id": 8,
+      "title": "Seleccionar y copiar texto exacto en TifloLector",
+      "status": "pending",
+      "issue": "#354"
+    },
+    {
+      "id": 9,
+      "title": "YouTube: listas de reproducción, búsqueda por canal y traducciones",
+      "status": "pending",
+      "issue": "#356"
+    },
+    {
+      "id": 10,
+      "title": "Píldoras web: suprimir Nuevo repetido",
+      "status": "implemented",
+      "issue": "#357"
+    },
+    {
+      "id": 11,
+      "title": "Auditoría ortográfica y traducciones completas",
+      "status": "partial",
+      "issue": "#358"
+    },
+    {
+      "id": 12,
+      "title": "Abrir ajustes braille de VoiceOver desde TifloLector",
+      "status": "partial",
+      "issue": "#352"
+    },
+    {
+      "id": 13,
+      "title": "Braille: lectura continua y posición estable",
+      "status": "partial",
+      "issue": "#359"
+    },
+    {
+      "id": 14,
+      "title": "Reproducción multimedia dentro de TifloAcosta",
+      "status": "partial",
+      "issue": "#352"
+    },
+    {
+      "id": 15,
+      "title": "DAISY 2.02 con audio compatible con Voice Dream",
+      "status": "partial",
+      "issue": "#343"
+    },
+    {
+      "id": 16,
+      "title": "Importar paquetes ZIP/DAISY grandes de forma segura",
+      "status": "partial",
+      "issue": "#352"
+    },
+    {
+      "id": 17,
+      "title": "Navegación por encabezados DAISY sin locución involuntaria",
+      "status": "partial",
+      "issue": "#352"
+    },
+    {
+      "id": 18,
+      "title": "Anuncios correctos de encabezados y unidades de navegación",
+      "status": "partial",
+      "issue": "#352"
+    },
+    {
+      "id": 19,
+      "title": "Reanudar posición exacta, toque mágico y pendientes de TifloLector",
+      "status": "pending",
+      "issue": "#352"
+    },
+    {
+      "id": 20,
+      "title": "Corregir saltos del cursor braille en RTF",
+      "status": "pending",
+      "issue": "#359"
+    },
+    {
+      "id": 22,
+      "title": "Multicines Accesibles: catálogo de obras, Audesc España/Latino, reproductor y fuentes oficiales con accesibilidad e idiomas",
+      "status": "partial",
+      "issue": "#355"
+    }
+  ],
+  "operational": [
+    {
+      "id": 21,
+      "title": "Flujo TestFlight 1.7 limitado a la rama única",
+      "status": "implemented"
+    }
+  ]
+}

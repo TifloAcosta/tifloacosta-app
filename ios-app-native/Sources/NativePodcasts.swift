@@ -196,7 +196,6 @@ struct NativePodcastScreen: View {
     @EnvironmentObject private var player: NativePodcastPlayer
     @State private var visible = 10
     @AppStorage("native-podcast-continuous-playback") private var continuousPlayback = false
-    @State private var lastProgressSaved = 0.0
     @EnvironmentObject private var library: NativePodcastLibrary
     @EnvironmentObject private var downloads: NativePodcastDownloads
     @State private var choosingOPML = false
@@ -240,7 +239,6 @@ struct NativePodcastScreen: View {
     private func saveCurrentPosition() {
         guard let episode = player.episode else { return }
         library.remember(episode, seconds: player.seconds, duration: player.duration)
-        lastProgressSaved = player.seconds
     }
 
     private func playEpisode(_ episode: NativePodcastEpisode,
@@ -255,7 +253,6 @@ struct NativePodcastScreen: View {
         // Every item in the queue independently prefers its local download
         // while the original podcast URL remains the stable progress identifier.
         player.select(episode, at: library.progress(for: episode), followedBy: upcoming)
-        lastProgressSaved = 0
     }
 
     private func clock(_ value: Double) -> String {
@@ -442,23 +439,9 @@ struct NativePodcastScreen: View {
         }
         .tifloScreenSurface()
         .navigationTitle("Podcasts")
-        .onAppear {
-            player.resolveAudioURL = { episode in
-                downloads.localURL(for: episode.id)
-            }
-            player.onEpisodeFinished = { completed in
-                library.clearProgress(for: completed)
-                lastProgressSaved = 0
-            }
-        }
         .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
-            if player.episode != nil {
-                player.updatePosition()
-                if player.isPlaying && player.duration > 0 &&
-                   abs(player.seconds - lastProgressSaved) >= 10 {
-                    saveCurrentPosition()
-                }
-            }
+            // Only update the visible clock. App-level playback persists globally.
+            if player.episode != nil { player.updatePosition() }
         }
         .onDisappear {
             // Audio continues while the user browses another TifloAcosta section.

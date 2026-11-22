@@ -416,13 +416,19 @@ enum NativeReaderFormats {
                     source.replaceSubrange(range, with: marked)
                 }
             }
-            let normalized = source.replacingOccurrences(
+            var normalized = source.replacingOccurrences(
                 of: "(?i)</(?:a:p|w:p|text:p|text:h|row|c|p)>", with: "\n",
                 options: .regularExpression
-            ).replacingOccurrences(
-                of: "(?i)<h[1-6]\\b[^>]*>", with: "\n# ",
-                options: .regularExpression
             )
+            // Keep the actual heading depth: h3–h6 are headings, not
+            // chapters. The display layer masks the markup for VoiceOver.
+            for level in 1...6 {
+                normalized = normalized.replacingOccurrences(
+                    of: "(?i)<h\(level)\\b[^>]*>",
+                    with: "\n" + String(repeating: "#", count: level) + " ",
+                    options: .regularExpression
+                )
+            }
             let text = NativeDocumentText.extract(
                 Data(normalized.utf8), from: URL(fileURLWithPath: "content.html")
             )

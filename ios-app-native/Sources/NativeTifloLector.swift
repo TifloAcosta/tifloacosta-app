@@ -2286,6 +2286,22 @@ struct NativeReadingScreen: View {
     private var effectiveGeminiVoice: String { latest.readerPreferences?.geminiVoiceID ?? geminiVoice }
     private var effectivePhononVoice: String { latest.readerPreferences?.phononVoiceID ?? phononVoice }
     private var isAudioOnly: Bool { latest.body.isEmpty && !tracks.isEmpty }
+    private var daisyChapterPoints: [NativeDaisyNavigationPoint] {
+        let headings = (latest.daisyNavigation ?? []).filter {
+            $0.kind != "Página" && $0.kind != "Referencia"
+        }
+        guard let shallowest = headings.map(\.level).min() else { return [] }
+        let top = headings.filter { $0.level == shallowest }
+        if top.count > 1 { return top }
+        // A unique top-level entry is normally the book title.
+        // Only its immediate children can count as navigable chapters.
+        if shallowest == 1 {
+            let chapters = headings.filter { $0.level == 2 }
+            if chapters.count > 1 { return chapters }
+        }
+        return []
+    }
+
     private var navigationOptions: [(unit: Int, label: String)] {
         var options: [(unit: Int, label: String)] = []
         let daisySections = (latest.daisyNavigation ?? []).filter {
@@ -2318,7 +2334,7 @@ struct NativeReadingScreen: View {
         if !textLayout.linkStarts.isEmpty || !(latest.textLinks ?? []).isEmpty {
             options.append((8, "Enlaces"))
         }
-        if textLayout.chapterStarts.count > 1 || daisySections.count > 1 {
+        if textLayout.chapterStarts.count > 1 || daisyChapterPoints.count > 1 {
             options.append((7, "Capítulo"))
         }
         return options
@@ -2715,7 +2731,11 @@ struct NativeReadingScreen: View {
             }
             return
         }
-        if (unit == 7 || unit == 4) && !tracks.isEmpty &&
+        if unit == 7 && !tracks.isEmpty && daisyChapterPoints.count > 1 {
+            moveDaisyPoint(direction, kind: "Capítulo")
+            return
+        }
+        if unit == 4 && !tracks.isEmpty &&
             (latest.daisyNavigation ?? []).contains(where: {
                 $0.kind != "Página" && $0.kind != "Referencia"
             }) {
@@ -2750,10 +2770,12 @@ struct NativeReadingScreen: View {
     }
 
     private func moveDaisyPoint(_ direction: Int, kind: String?) {
-        let points = (latest.daisyNavigation ?? []).filter { point in
-            if let kind { return point.kind == kind }
-            return point.kind != "Página" && point.kind != "Referencia"
-        }.sorted {
+        let points = (kind == "Capítulo"
+            ? daisyChapterPoints
+            : (latest.daisyNavigation ?? []).filter { point in
+                if let kind { return point.kind == kind }
+                return point.kind != "Página" && point.kind != "Referencia"
+            }).sorted {
             $0.track == $1.track ? ($0.seconds ?? 0) < ($1.seconds ?? 0) : $0.track < $1.track
         }
         let currentTime = speech.hasAudio ? speech.audioElapsed
@@ -2773,7 +2795,7 @@ struct NativeReadingScreen: View {
         jumpToDaisy(point, announce: false)
         let modeName = kind == "Página" ? "Página DAISY"
             : kind == "Referencia" ? "Referencia DAISY"
-            : (effectiveNavigationUnit == 4 ? "Encabezado" : "Capítulo")
+            : kind == "Capítulo" ? "Capítulo" : "Encabezado"
         navigationFeedback = MusicLocalized.format("%@: %@", MusicLocalized.message(modeName),
             NativeReaderHeadingDisplay.title(point.title, limit: 90))
     }

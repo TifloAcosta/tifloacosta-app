@@ -1983,7 +1983,6 @@ private struct NativeReaderTextLayout {
             if normalized.range(of: #"^(página|pagina|diapositiva|hoja)\s+[0-9]+"#,
                                 options: .regularExpression) != nil {
                 pages.append(lineOffset)
-                headings.append(lineOffset)
                 pageEntries.append(.init(offset: lineOffset, title: line.trimmingCharacters(in: .whitespaces)))
             } else if normalized.range(
                 of: #"^(#{1,6}\s+|capítulo\s+|capitulo\s+|sección\s+|seccion\s+)"#,
@@ -2963,7 +2962,7 @@ struct NativeReadingScreen: View {
                 persistPosition()
                 navigationFeedback = abs(speech.audioElapsed - previous) > 0.01
                     ? MusicLocalized.message(feedback)
-                    : MusicLocalized.message("No se puede avanzar más en esta pista.")
+                    : MusicLocalized.message("No hay más recorrido en esa dirección.")
             } else if tracks.indices.contains(trackIndex),
                       let url = NativeReaderFormats.storedURL(for: tracks[trackIndex]),
                       let audio = try? AVAudioPlayer(contentsOf: url),
@@ -2982,7 +2981,7 @@ struct NativeReadingScreen: View {
                 lastSavedPercent = currentPercent
                 navigationFeedback = abs(target - previous) > 0.01
                     ? MusicLocalized.message(feedback)
-                    : MusicLocalized.message("No se puede avanzar más en esta pista.")
+                    : MusicLocalized.message("No hay más recorrido en esa dirección.")
             } else {
                 navigationFeedback = MusicLocalized.message(
                     "No se pudo consultar la duración de esta pista.")
@@ -2995,7 +2994,7 @@ struct NativeReadingScreen: View {
                     Int(charactersPerMinute * Double(timeStep) / 60.0))))
             if offset == readingOffset {
                 navigationFeedback = MusicLocalized.message(
-                    "No se puede avanzar más en esta posición.")
+                    "No hay más recorrido en esa dirección.")
             } else {
                 navigateText(to: offset, unit: 5)
                 navigationFeedback = MusicLocalized.message(feedback)
@@ -3687,9 +3686,9 @@ struct NativeReadingScreen: View {
                     if !tracks.isEmpty, let points = latest.daisyNavigation, !points.isEmpty {
                         Section("Navegación DAISY") {
                             ForEach(points) { point in
-                                Button(point.kind == "Página" ? "Página. \(point.title)" :
-                                       point.kind == "Referencia" ? "Referencia. \(point.title)" :
-                                       "Nivel \(point.level). \(point.title)") {
+                                Button(point.kind == "Página" ? "Página. \(NativeReaderHeadingDisplay.title(point.title))" :
+                                       point.kind == "Referencia" ? "Referencia. \(NativeReaderHeadingDisplay.title(point.title))" :
+                                       "Nivel \(point.level). \(NativeReaderHeadingDisplay.title(point.title))") {
                                     jumpToDaisy(point)
                                 }
                             }

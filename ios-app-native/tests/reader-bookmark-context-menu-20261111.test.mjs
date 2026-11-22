@@ -30,6 +30,9 @@ test('Crear marca conserva posición y reanuda si estaba reproduciendo', () => {
   assert.match(swift, /accessibilityAction\(named: Text\("Crear marca"\)\)/);
   assert.match(swift, /bookmarkFromContextMenu\(at: index\)/);
   assert.match(swift, /lastReaderFragment = index/);
-  assert.match(swift, /let fragment = focusedFragment \?\? lastReaderFragment/);
+  const buttonHandler = swift.split('private func addBookmarkFromReaderSelection() {')[1]
+    ?.split('private func bookmarkFromContextMenu')[0] ?? '';
+  assert.match(buttonHandler, /addBookmark\(\)/);
+  assert.doesNotMatch(buttonHandler, /focusedFragment|lastReaderFragment|bookmarkFromContextMenu/);
   assert.match(swift, /\.accessibilityAction\(named: Text\("Añadir marca"\)\) \{ addBookmarkFromReaderSelection\(\) \}/);
 });

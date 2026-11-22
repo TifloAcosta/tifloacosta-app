@@ -6,6 +6,9 @@ struct NativeCloudFolderBrowserScreen: View {
     let provider: NativeCloudProvider
     let onImport: (URL) -> Void
     var allowCellularDownloads = true
+    // Optional validated importer: report a real failure rather than
+    // announcing success when the destination rejects this file.
+    var onImportValidated: ((URL) throws -> Void)? = nil
 
     @StateObject private var accounts = NativeCloudAccountStore.shared
     @ObservedObject private var network = NativeMusicConnectionPolicy.shared
@@ -151,7 +154,11 @@ struct NativeCloudFolderBrowserScreen: View {
             let token = try await accounts.validAccessToken(for: provider)
             let storage = try NativeCloudStorage(provider: provider, accessToken: token)
             let file = try await storage.download(item, allowsCellular: allowCellular)
-            onImport(file)
+            if let onImportValidated {
+                try onImportValidated(file)
+            } else {
+                onImport(file)
+            }
             UIAccessibility.post(notification: .announcement, argument: MusicLocalized.format("Importado %@", item.name))
         } catch {
             self.error = error.localizedDescription

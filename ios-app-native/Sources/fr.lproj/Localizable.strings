@@ -1167,3 +1167,20 @@
 "No fue posible procesar la búsqueda de YouTube en este momento." = "Impossible de traiter la recherche YouTube pour le moment.";
 "Reintentar búsqueda" = "Relancer la recherche";
 "Buscar directamente en YouTube" = "Rechercher directement sur YouTube";
+
+// Listas de reproducción de YouTube: búsqueda y reproducción ordenada.
+"Lista de reproducción de YouTube" = "Liste de lecture YouTube";
+"%@. Lista de reproducción de YouTube. Canal: %@" = "%@. Liste de lecture YouTube. Chaîne : %@";
+"Compartir lista" = "Partager la liste";
+"Lista de reproducción" = "Liste de lecture";
+"Abrir lista original en YouTube" = "Ouvrir la liste originale sur YouTube";
+"Vídeos en orden de la lista" = "Vidéos dans l’ordre de la liste";
+"Cargando lista de reproducción" = "Chargement de la liste";
+"Reintentar carga de la lista" = "Réessayer de charger la liste";
+"Mostrar veinte vídeos más" = "Afficher vingt vidéos de plus";
+"Posición %d de la lista." = "Position %d dans la liste.";
+"No hay vídeos públicos disponibles en esta lista." = "Aucune vidéo publique n’est disponible dans cette liste.";
+"La respuesta de la lista de YouTube no pudo interpretarse." = "La réponse de la liste YouTube n’a pas pu être interprétée.";
+"No se pudo cargar la lista de YouTube. Comprueba la conexión y vuelve a intentarlo." = "Impossible de charger la liste YouTube. Vérifiez la connexion et réessayez.";
+"La lista no está disponible públicamente." = "Cette liste n’est pas publique.";
+"El servidor no pudo consultar esta lista de YouTube." = "Le serveur n’a pas pu consulter cette liste YouTube.";

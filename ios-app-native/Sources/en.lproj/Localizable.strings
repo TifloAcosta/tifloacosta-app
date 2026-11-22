@@ -1068,3 +1068,5 @@
 "Pódcast en reproducción: %@" = "Podcast playing: %@";
 "DAISY 2.02 (audio)" = "DAISY 2.02 (audio)";
 "DAISY 2.02 de audio: conserva la voz grabada y permite la navegación por capítulos. No incluye el texto sincronizado." = "DAISY 2.02 audio: preserves the recorded voice and chapter navigation. It does not include synchronized text.";
+"Encabezado: %@. Pulsa Reproducir para escuchar." = "Heading: %@. Press Play to listen.";
+"No hay más encabezados en esa dirección." = "No more headings in that direction.";

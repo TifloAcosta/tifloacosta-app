@@ -39,8 +39,8 @@ test('Todo título del canal o de resultados abre el mismo reproductor accesible
   assert.match(screens, /NativeYouTubeVideo\(catalog: item\)/);
   assert.match(screens, /youtubeSearch\.videos/);
   assert.match(screens, /\.accessibilityAction\(named: Text\("Reproducir"\)\)/);
-  const row = screens.split('private struct NativeYouTubeVideoRow: View {')[1]
-    .split('private struct NativeYouTubeCommentScreen: View {')[0];
+  const row = screens.split('struct NativeYouTubeVideoRow: View {')[1]
+    .split('struct NativeYouTubeCommentScreen: View {')[0];
   assert.match(row, /Button\s*\{\s*onPlay\(video\)\s*\}/);
   assert.doesNotMatch(row, /\.accessibilityElement\(children: \.ignore\)/);
   assert.match(row, /\.accessibilityAction\(\.default\)\s*\{\s*onPlay\(video\)/);

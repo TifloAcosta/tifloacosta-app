@@ -58,24 +58,36 @@ struct NativeReaderContinuousBrailleText: UIViewRepresentable {
 
     func updateUIView(_ view: UITextView, context: Context) {
         context.coordinator.parent = self
-        view.font = UIFont.systemFont(ofSize: CGFloat(textSize),
+        // Assigning fonts on every SwiftUI state refresh can invalidate a long
+        // UITextView layout and move the braille viewport unexpectedly.
+        let requestedFont = UIFont.systemFont(ofSize: CGFloat(textSize),
             weight: strongText ? .bold : .regular)
+        if view.font != requestedFont { view.font = requestedFont }
         if context.coordinator.originalText != text {
             context.coordinator.originalText = text
             context.coordinator.visibleText = Self.maskMarkdownHeadings(text)
         }
         let visibleText = context.coordinator.visibleText
         let textChanged = view.text != visibleText
+        let explicitPositionChange = context.coordinator.requestedOffset != initialOffset
+        guard textChanged || explicitPositionChange else { return }
+
+        // NSTextView selection callbacks are also triggered by replacing text.
+        // Suppress programmatic callbacks across the complete update, rather than
+        // accidentally persisting an intermediate selection at the start/end.
+        context.coordinator.restoring = true
+        defer { context.coordinator.restoring = false }
         if textChanged { view.text = visibleText }
-        if textChanged || context.coordinator.requestedOffset != initialOffset {
-            let offset = max(0, min(text.count, initialOffset))
-            let utf16Offset = String(text.prefix(offset)).utf16.count
-            context.coordinator.restoring = true
-            view.selectedRange = NSRange(location: utf16Offset, length: 0)
-            view.scrollRangeToVisible(view.selectedRange)
-            context.coordinator.requestedOffset = offset
-            context.coordinator.restoring = false
+        let offset = max(0, min(text.count, initialOffset))
+        let utf16Offset = String(text.prefix(offset)).utf16.count
+        let restoredRange = NSRange(location: utf16Offset, length: 0)
+        let movedSelection = view.selectedRange != restoredRange
+        if movedSelection { view.selectedRange = restoredRange }
+        // Scroll only for a newly loaded document or a genuine explicit seek.
+        if textChanged || movedSelection {
+            view.scrollRangeToVisible(restoredRange)
         }
+        context.coordinator.requestedOffset = offset
     }
 
     final class Coordinator: NSObject, UITextViewDelegate {

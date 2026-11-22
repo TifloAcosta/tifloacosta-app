@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-22T15:21:56.074Z",
+  "generatedAt": "2026-11-22T17:10:57.093Z",
   "resources": [
     {
       "kind": "resource",
@@ -6291,24 +6291,6 @@
       "categories": [
         "windows",
         "nvda"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "accessible-android-df4e768e398323a9:en",
-      "sourceId": "accessible-android-df4e768e398323a9",
-      "lang": "en",
-      "title": "Navia: AI Accessible Map",
-      "summary": "Navia is a touchable offline map for blind and low-vision people. Slide a finger across the screen and Navia speaks the street, shop, or place…",
-      "body": "Published 12 November 2026 by Mohammad\n\nNavia is a touchable offline map for blind and low-vision people. Slide a finger across the screen and Navia speaks the street, shop, or place under your finger: its name, what it is, how far away it is, and directions as clock positions (for example, “2 o’clock, 40 meters”), following the way O&M training teaches. Sweeping around the map lets you build a mental picture of an area before you go there.\n\nSafety note: Navia is an extra aid only. Always use a cane, guide dog, or another safe mobility method first.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nI am the developer. Navia was designed around TalkBack from the start rather than adapted afterwards. All buttons and controls are labelled and every dialog can be read with TalkBack.\n\nThe map itself is explored by touch: with TalkBack on, sliding a finger over the map speaks what is under it, and double-tap opens a menu of actions for that place (aim, hear its sounds, open in Google Maps, add to favourites). Voice dictation is available for search, adding points and renaming places.\n\nFor low vision there is an optional drawn map with a different marker shape per kind of place (not colour alone), street labels and a light/dark theme; it can turn itself off while TalkBack is running. Tested with Google TalkBack, including automated tests that run with real TalkBack enabled.\n\nKnown limitations: AI place recognition is experimental, needs a one-time ~240 MB model download and can miss a place; map quality depends on OpenStreetMap coverage in your area. Feedback is very welcome.\n\nLast Tested App version and Android version:\n\nNavia 1.1.12. Android 15\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility.",
-      "sourceName": "Accessible Android",
-      "originalUrl": "https://accessibleandroid.com/app/navia-ai-accessible-map/",
-      "publishedAt": "2026-11-12T15:26:39.000Z",
-      "categories": [
-        "android",
-        "apps-accesibles",
-        "tecnologia-accesibilidad",
-        "ia-accesibilidad"
       ]
     }
   ]

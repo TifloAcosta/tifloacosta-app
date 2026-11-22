@@ -31,14 +31,24 @@
     {
       "id": 5,
       "title": "Importación: estado accesible, progreso y resultado",
-      "status": "pending",
-      "issue": "#353"
+      "status": "partial",
+      "issue": "#353",
+      "evidence": [
+        "ios-app-native/Sources/NativeTifloLector.swift",
+        "ios-app-native/tests/reader-folder-import-20261122.test.mjs"
+      ],
+      "validation": "Se incorporó un estado verificable para la importación de carpetas con recuento de documentos; faltan progreso accesible equivalente para importación de archivos sueltos, OCR y recepción externa y prueba con VoiceOver."
     },
     {
       "id": 6,
       "title": "Importar carpeta completa sin ZIP",
-      "status": "pending",
-      "issue": "#353"
+      "status": "partial",
+      "issue": "#353",
+      "evidence": [
+        "ios-app-native/Sources/NativeTifloLector.swift",
+        "ios-app-native/tests/reader-folder-import-20261122.test.mjs"
+      ],
+      "validation": "Selector de carpetas de Archivos, enumeración de subcarpetas, importación de formatos compatibles y recuento de fallos incluidos en código; pruebas de archivos grandes, iCloud y la interfaz real pendientes."
     },
     {
       "id": 7,
@@ -127,8 +137,14 @@
     {
       "id": 20,
       "title": "Corregir saltos del cursor braille en RTF",
-      "status": "pending",
-      "issue": "#359"
+      "status": "partial",
+      "issue": "#359",
+      "evidence": [
+        "ios-app-native/Sources/NativeReaderContinuousBrailleText.swift",
+        "ios-app-native/Sources/NativeTifloLector.swift",
+        "ios-app-native/tests/reader-rtf-braille-cursor-stability-20261122.test.mjs"
+      ],
+      "validation": "Se evita priorizar un offset guardado desactualizado en el modo braille, se protege la restauración contra callbacks y se limitan desplazamientos redundantes de UITextView; NO se ha confirmado que resuelva el fallo RTF con una línea braille real."
     },
     {
       "id": 22,

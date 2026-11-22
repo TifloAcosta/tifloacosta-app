@@ -54,3 +54,8 @@
 "guide.13.title" = "Meine Musik";
 "guide.13.paragraph.1" = "Meine Musik enthält deine lokalen Titel. Du kannst sie abspielen, in Wiedergabelisten und intelligenten Ordnern organisieren und den Klang mit dem Equalizer anpassen.";
 "guide.13.paragraph.2" = "Verwende Titel importieren, um Audiodateien hinzuzufügen. Die Sicherung kann den Katalog oder eine vollständige Kopie mit Audiodateien speichern.";
+
+"guide.14.title" = "Barrierefreie Kinos";
+"guide.14.paragraph.1" = "Barrierefreie Kinos bündelt Quellen für Filme, Serien, Dokumentationen und Kurzfilme mit Audiodeskription. Jeder Eintrag nennt die Originalquelle und die Zugangsbedingungen.";
+"guide.14.paragraph.2" = "Mit Suche findest du Werke oder Plattformen. Über einstellbare Steuerelemente wählst du Sprache und Inhaltsart. Spanisch aus Spanien und Lateinamerika werden getrennt angeboten.";
+"guide.14.paragraph.3" = "Ist die Wiedergabe in TifloAcosta erlaubt, stehen barrierefreie Player-Steuerelemente bereit. Andernfalls öffnest du die Originalplattform; manche Dienste verlangen ein Konto oder sind regional beschränkt.";

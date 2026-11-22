@@ -4,7 +4,10 @@ import SwiftUI
 /// Resultados multimedia dentro de Actualidad, sin una segunda pantalla ni HTML.
 struct NativeMediaInlineContent: View {
     @EnvironmentObject private var store: NativeMediaStore
+    @EnvironmentObject private var player: NativePodcastPlayer
+    @EnvironmentObject private var podcastLibrary: NativePodcastLibrary
     @Environment(\.openURL) private var openURL
+    @State private var selectedVideo: NativeYouTubeVideo?
 
     let formatIndex: Int // 1: podcasts, 2: YouTube, 3: ambos
     @State private var sourceIndex = 0
@@ -57,7 +60,8 @@ struct NativeMediaInlineContent: View {
     }
 
     private func open(_ item: NativeMediaItem) {
-        if let url = item.directAudioURL ?? item.originalURL { openURL(url) }
+        NativeMediaPlayback.open(item, player: player, library: podcastLibrary,
+            playVideo: { selectedVideo = $0 }, openExternal: { openURL($0) })
     }
 
     var body: some View {
@@ -140,5 +144,8 @@ struct NativeMediaInlineContent: View {
         .onChange(of: languageIndex) { _, _ in visibleCount = 10 }
         .onChange(of: query) { _, _ in visibleCount = 10 }
         .task { await store.refresh() }
+        .sheet(item: $selectedVideo) { video in
+            NavigationStack { NativeYouTubePlayerScreen(video: video) }
+        }
     }
 }

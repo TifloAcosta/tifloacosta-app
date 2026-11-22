@@ -1,5 +1,6 @@
 import SwiftUI
 import UIKit
+import Combine
 
 // Orden acordado de la portada TifloAcosta, con navegación SwiftUI.
 private enum NativeDestination: String, CaseIterable, Hashable, Identifiable {
@@ -68,6 +69,9 @@ private struct NativeBrandMark: View {
 struct NativeHomeScreen: View {
     @EnvironmentObject private var inbox: NativeShareInbox
     @EnvironmentObject private var library: NativeReaderLibrary
+    @EnvironmentObject private var podcastPlayer: NativePodcastPlayer
+    @EnvironmentObject private var podcastLibrary: NativePodcastLibrary
+    @EnvironmentObject private var podcastDownloads: NativePodcastDownloads
     @Environment(\.scenePhase) private var scenePhase
     @StateObject private var sharedReadingSpeech = NativeReadingSpeech()
     @EnvironmentObject private var catalog: NativeCatalogStore
@@ -77,6 +81,9 @@ struct NativeHomeScreen: View {
     @State private var submittedSearch = ""
     @State private var showingSearch = false
     @State private var navigationPath = NavigationPath()
+    @State private var podcastScreenVisible = false
+    @State private var lastPodcastProgressEpisodeID = ""
+    @State private var lastPodcastProgressSeconds = 0.0
 
     private func openRequestedShortcut() {
         let defaults = UserDefaults.standard
@@ -246,6 +253,41 @@ struct NativeHomeScreen: View {
         }
     }
 
+    private func closePodcastPlayback() {
+        podcastPlayer.updatePosition()
+        if let episode = podcastPlayer.episode {
+            podcastLibrary.remember(episode, seconds: podcastPlayer.seconds,
+                                    duration: podcastPlayer.duration)
+        }
+        podcastPlayer.stop()
+    }
+
+    private var persistentPodcastControls: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            if let episode = podcastPlayer.episode {
+                Text("Escuchando en TifloAcosta: \(episode.title)")
+                    .font(.subheadline.weight(.semibold))
+                    .lineLimit(1)
+                    .accessibilityLabel("Pódcast en reproducción: \(episode.title)")
+                HStack(spacing: 12) {
+                    Button(podcastPlayer.isPlaying ? "Pausar" : "Reproducir") {
+                        podcastPlayer.toggle()
+                    }
+                    Button("Retroceder 30 segundos") { podcastPlayer.skip(-30) }
+                    Button("Avanzar 30 segundos") { podcastPlayer.skip(30) }
+                    Button("Cerrar reproductor") { closePodcastPlayback() }
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.small)
+            }
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(TifloVisual.surfaceRaised)
+        .accessibilityElement(children: .contain)
+    }
+
     var body: some View {
         NavigationStack(path: $navigationPath) {
             ScrollView {
@@ -303,11 +345,42 @@ struct NativeHomeScreen: View {
                 case .descargas: NativeDownloadsScreen()
                 case .videos: NativeVideosScreen()
                 case .podcasts: NativePodcastScreen()
+                    .onAppear { podcastScreenVisible = true }
+                    .onDisappear { podcastScreenVisible = false }
                 case .configuracion: NativeSettingsScreen()
                 case .contacto: NativeContactScreen()
                 case .favoritos: NativeFavoritesScreen()
                 case .privacidad: NativePrivacyAccessibilityScreen()
                 }
+            }
+        }
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            if podcastPlayer.episode != nil && !podcastScreenVisible {
+                persistentPodcastControls
+            }
+        }
+        .onAppear {
+            podcastPlayer.resolveAudioURL = { episode in
+                podcastDownloads.localURL(for: episode.id)
+            }
+            podcastPlayer.onEpisodeFinished = { completed in
+                podcastLibrary.clearProgress(for: completed)
+            }
+        }
+        .onReceive(Timer.publish(every: 5, on: .main, in: .common).autoconnect()) { _ in
+            guard let episode = podcastPlayer.episode else {
+                lastPodcastProgressEpisodeID = ""
+                lastPodcastProgressSeconds = 0
+                return
+            }
+            podcastPlayer.updatePosition()
+            guard podcastPlayer.duration > 0 else { return }
+            if episode.id != lastPodcastProgressEpisodeID ||
+               abs(podcastPlayer.seconds - lastPodcastProgressSeconds) >= 10 {
+                podcastLibrary.remember(episode, seconds: podcastPlayer.seconds,
+                                        duration: podcastPlayer.duration)
+                lastPodcastProgressEpisodeID = episode.id
+                lastPodcastProgressSeconds = podcastPlayer.seconds
             }
         }
     }

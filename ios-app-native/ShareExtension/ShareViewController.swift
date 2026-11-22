@@ -409,14 +409,15 @@ final class ShareViewController: UIViewController {
                 message["contentType"] = detected?.preferredMIMEType ?? ""
             }
             if let file = file {
-                let size = try file.resourceValues(forKeys: [.fileSizeKey]).fileSize
-                    ?? (try manager.attributesOfItem(atPath: file.path)[.size] as? NSNumber)?.intValue
-                guard let size, size > 0 else {
+                // Read file metadata without loading the payload into RAM.
+                let attributes = try manager.attributesOfItem(atPath: file.path)
+                guard let fileSize = attributes[.size] as? NSNumber,
+                      fileSize.int64Value > 0 else {
                     finish("No se pudo comprobar el tamaño del archivo recibido.")
                     return
                 }
                 let limit = fileTransferLimit(for: clean)
-                guard Int64(size) <= limit else {
+                guard fileSize.int64Value <= limit else {
                     finish(limit == maxArchiveBytes
                         ? "El ZIP o DAISY supera el límite de 750 MB. El archivo permanece en la aplicación de origen."
                         : "El archivo supera el límite de 100 MB.")

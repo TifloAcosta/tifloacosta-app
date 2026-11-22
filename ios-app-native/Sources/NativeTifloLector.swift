@@ -2500,7 +2500,8 @@ struct NativeReadingScreen: View {
         trackIndex = point.track
         currentPercent = 0
         didRestoreAudioPosition = true
-        pendingDaisyAudioSeconds = max(0, (point.seconds?.isFinite == true ? point.seconds! : 0))
+        let targetSeconds = point.seconds.flatMap { $0.isFinite ? max(0, $0) : nil } ?? 0
+        pendingDaisyAudioSeconds = targetSeconds
         library.saveAudioPosition(document, track: trackIndex, percent: 0,
                                   seconds: pendingDaisyAudioSeconds)
         lastSavedPercent = 0

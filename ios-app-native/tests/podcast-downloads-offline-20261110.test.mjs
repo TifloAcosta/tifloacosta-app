@@ -5,6 +5,7 @@ import { readFileSync } from 'node:fs';
 const read = name => readFileSync(new URL('../Sources/' + name, import.meta.url), 'utf8');
 const downloads = read('NativePodcastDownloads.swift');
 const podcasts = read('NativePodcasts.swift');
+const home = read('NativeScreens.swift');
 
 test('Descargas guardadas en almacenamiento privado y con tamaño límite', () => {
   assert.match(downloads, /struct NativeDownloadedPodcastEpisode: Codable, Identifiable/);
@@ -20,7 +21,8 @@ test('Descargas guardadas en almacenamiento privado y con tamaño límite', () =
 test('Reproducción continua y episodio individual prefieren audio descargado', () => {
   assert.match(podcasts, /var resolveAudioURL: \(\(NativePodcastEpisode\) -> URL\?\)\?/);
   assert.match(podcasts, /resolveAudioURL\?\(episode\) \?\? episode\.audioURL/);
-  assert.match(podcasts, /player\.resolveAudioURL = \{ episode in/);
+  assert.match(home, /podcastPlayer\.resolveAudioURL = \{ episode in/);
+  assert.match(home, /podcastDownloads\.localURL\(for: episode\.id\)/);
   assert.match(podcasts, /downloads\.localURL\(for: episode\.id\)/);
   assert.match(podcasts, /player\.select\(episode, at: library\.progress\(for: episode\)/);
   assert.match(podcasts, /Section\("Episodios descargados"\)/);

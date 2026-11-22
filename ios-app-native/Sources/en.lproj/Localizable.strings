@@ -1066,3 +1066,5 @@
 "Escuchar episodio en TifloAcosta" = "Listen to episode in TifloAcosta";
 "Escuchando en TifloAcosta: %@" = "Listening in TifloAcosta: %@";
 "Pódcast en reproducción: %@" = "Podcast playing: %@";
+"DAISY 2.02 (audio)" = "DAISY 2.02 (audio)";
+"DAISY 2.02 de audio: conserva la voz grabada y permite la navegación por capítulos. No incluye el texto sincronizado." = "DAISY 2.02 audio: preserves the recorded voice and chapter navigation. It does not include synchronized text.";

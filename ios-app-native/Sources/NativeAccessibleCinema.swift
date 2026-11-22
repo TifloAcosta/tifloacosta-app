@@ -1,4 +1,6 @@
 import SwiftUI
+import UniformTypeIdentifiers
+import Combine
 
 /// Multicines Accesibles: native entry point and verified-source directory.
 /// Only the original provider can deliver third-party works unless distribution
@@ -178,6 +180,14 @@ struct NativeAccessibleCinemaScreen: View {
     @State private var searchText = ""
     @State private var languageIndex = 0
     @State private var contentIndex = 0
+    @State private var importLanguageIndex = 1
+    @State private var importKindIndex = 1
+    @State private var selectingPersonalFiles = false
+    @State private var importStatus = ""
+    @State private var pendingDeletion: NativeCinemaLocalItem?
+    @State private var confirmDeletion = false
+    @StateObject private var personalLibrary = NativeCinemaLocalLibrary()
+    @StateObject private var personalPlayer = NativeCinemaAudioPlayer()
 
     private var selectedLanguage: AccessibleCinemaLanguage {
         AccessibleCinemaLanguage.allCases[min(max(0, languageIndex), AccessibleCinemaLanguage.allCases.count - 1)]
@@ -208,6 +218,47 @@ struct NativeAccessibleCinemaScreen: View {
         }
     }
 
+    private var personalItems: [NativeCinemaLocalItem] {
+        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        return personalLibrary.items.filter { item in
+            (selectedLanguage == .all || selectedLanguage == item.language)
+                && (selectedKind == .all || selectedKind == item.kind)
+                && (query.isEmpty || item.title.localizedStandardContains(query))
+        }
+        .sorted { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
+    }
+
+    private func clock(_ seconds: Double) -> String {
+        let value = Int(max(0, min(seconds.isFinite ? seconds : 0, 86_400_000)))
+        return String(format: "%02d:%02d:%02d", value / 3600,
+                      (value % 3600) / 60, value % 60)
+    }
+
+    @MainActor private func importPersonalFiles(_ result: Result<[URL], Error>) {
+        switch result {
+        case .failure(let error):
+            importStatus = error.localizedDescription
+        case .success(let files):
+            var imported = 0
+            var problems: [String] = []
+            let language = AccessibleCinemaLanguage.allCases[
+                min(max(1, importLanguageIndex), AccessibleCinemaLanguage.allCases.count - 1)]
+            let kind = AccessibleCinemaKind.allCases[
+                min(max(1, importKindIndex), AccessibleCinemaKind.allCases.count - 1)]
+            for file in files {
+                do {
+                    try personalLibrary.importAudio(from: file, language: language, kind: kind)
+                    imported += 1
+                } catch {
+                    problems.append(file.lastPathComponent + ": " + error.localizedDescription)
+                }
+            }
+            importStatus = MusicLocalized.format("Archivos importados: %d. Fallos: %d.", imported, problems.count)
+            if let first = problems.first { importStatus += " " + first }
+            UIAccessibility.post(notification: .announcement, argument: importStatus)
+        }
+    }
+
     var body: some View {
         List {
             Section("Explorar Multicines Accesibles") {
@@ -225,6 +276,73 @@ struct NativeAccessibleCinemaScreen: View {
                     choices: AccessibleCinemaKind.allCases.map(\.rawValue),
                     selectedIndex: $contentIndex
                 )
+            }
+            .listRowBackground(TifloVisual.surfaceRaised)
+
+            Section("Mi colección personal") {
+                Text("Añade tus propios archivos de audio o vídeo. Se conservarán en el iPhone para reproducirlos en TifloAcosta, con la última posición de escucha.")
+                    .font(.footnote)
+                NativeAdjustableChoice(
+                    title: "Idioma de los archivos que vas a importar",
+                    choices: Array(AccessibleCinemaLanguage.allCases.dropFirst()).map(\.rawValue),
+                    selectedIndex: Binding(
+                        get: { max(0, importLanguageIndex - 1) },
+                        set: { importLanguageIndex = $0 + 1 }))
+                NativeAdjustableChoice(
+                    title: "Tipo de archivo que vas a importar",
+                    choices: Array(AccessibleCinemaKind.allCases.dropFirst()).map(\.rawValue),
+                    selectedIndex: Binding(
+                        get: { max(0, importKindIndex - 1) },
+                        set: { importKindIndex = $0 + 1 }))
+                Button("Importar audio o vídeo desde Archivos") {
+                    selectingPersonalFiles = true
+                }
+                .frame(minHeight: 44, alignment: .leading)
+                if !importStatus.isEmpty {
+                    Text(importStatus)
+                        .font(.footnote)
+                        .accessibilityAddTraits(.updatesFrequently)
+                }
+                if personalItems.isEmpty {
+                    Text("No hay obras personales para estos filtros.")
+                        .font(.footnote)
+                        .foregroundStyle(TifloVisual.secondaryText)
+                }
+                ForEach(personalItems) { item in
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(item.title)
+                            .font(.headline)
+                            .accessibilityAddTraits(.isHeader)
+                        Text(item.language.rawValue + ", " + item.kind.rawValue)
+                            .font(.subheadline)
+                        Button("Reproducir: \(item.title)") {
+                            do { try personalPlayer.open(item, library: personalLibrary) }
+                            catch { importStatus = error.localizedDescription }
+                        }
+                        .frame(minHeight: 44, alignment: .leading)
+                        if personalPlayer.currentID == item.id {
+                            Text("Posición: \(clock(personalPlayer.seconds)). Duración: \(clock(personalPlayer.duration)).")
+                                .font(.subheadline)
+                            Button(personalPlayer.playing ? "Pausar reproducción" : "Reanudar reproducción") {
+                                personalPlayer.toggle(library: personalLibrary)
+                            }
+                            Button("Retroceder treinta segundos") {
+                                personalPlayer.seek(by: -30, library: personalLibrary)
+                            }
+                            Button("Avanzar treinta segundos") {
+                                personalPlayer.seek(by: 30, library: personalLibrary)
+                            }
+                            Button("Detener reproducción") {
+                                personalPlayer.pauseAndSave(library: personalLibrary)
+                            }
+                        }
+                        Button("Eliminar de mi colección: \(item.title)", role: .destructive) {
+                            pendingDeletion = item
+                            confirmDeletion = true
+                        }
+                    }
+                    .accessibilityElement(children: .contain)
+                }
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
@@ -289,5 +407,31 @@ struct NativeAccessibleCinemaScreen: View {
         }
         .tifloScreenSurface()
         .navigationTitle("Multicines Accesibles")
+        .fileImporter(
+            isPresented: $selectingPersonalFiles,
+            allowedContentTypes: [.audio, .movie],
+            allowsMultipleSelection: true
+        ) { result in
+            Task { @MainActor in importPersonalFiles(result) }
+        }
+        .confirmationDialog(
+            "¿Eliminar esta obra de tu colección personal?",
+            isPresented: $confirmDeletion, titleVisibility: .visible
+        ) {
+            Button("Eliminar archivo personal", role: .destructive) {
+                guard let item = pendingDeletion else { return }
+                if personalPlayer.currentID == item.id {
+                    personalPlayer.pauseAndSave(library: personalLibrary)
+                }
+                do { try personalLibrary.remove(item) }
+                catch { importStatus = error.localizedDescription }
+                pendingDeletion = nil
+            }
+            Button("Cancelar", role: .cancel) { pendingDeletion = nil }
+        }
+        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
+            personalPlayer.refresh(library: personalLibrary)
+        }
+        .onDisappear { personalPlayer.pauseAndSave(library: personalLibrary) }
     }
 }

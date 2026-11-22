@@ -49,8 +49,14 @@
     {
       "id": 8,
       "title": "Seleccionar y copiar texto exacto en TifloLector",
-      "status": "pending",
-      "issue": "#354"
+      "status": "implemented",
+      "issue": "#354",
+      "validation": "Pruebas estáticas de contrato añadidas; funcionamiento con VoiceOver, copiar/pegar y Unicode pendiente de prueba en iPhone.",
+      "evidence": [
+        "ios-app-native/Sources/NativeReaderSelectableText.swift",
+        "ios-app-native/Sources/NativeTifloLector.swift",
+        "ios-app-native/tests/reader-copy-selection-exact-20261122.test.mjs"
+      ]
     },
     {
       "id": 9,
@@ -128,7 +134,13 @@
       "id": 22,
       "title": "Multicines Accesibles: catálogo de obras, Audesc España/Latino, reproductor y fuentes oficiales con accesibilidad e idiomas",
       "status": "partial",
-      "issue": "#355"
+      "issue": "#355",
+      "evidence": [
+        "ios-app-native/Sources/NativeAccessibleCinema.swift",
+        "ios-app-native/Sources/NativeScreens.swift",
+        "ios-app-native/tests/cinema-primary-section-20261122.test.mjs"
+      ],
+      "validation": "Primera pantalla funcional y 16 fuentes oficiales en directorio; pendientes títulos, catálogo Audesc, permisos de reproducción integrada, filtros completos y pruebas reales."
     }
   ],
   "operational": [

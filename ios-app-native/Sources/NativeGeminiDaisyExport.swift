@@ -59,10 +59,134 @@ enum NativeGeminiDaisyExport {
         return result
     }
 
+
+    /// DAISY 2.02 audio/NCC sections keep original generated MP3 clips.
+    /// No full text is bundled: Voice Dream treats full-text DAISY as TTS.
+    private struct AudioOnlyChapter {
+        var title: String
+        var clips: [(file: String, duration: Double)]
+    }
+
+    /// A second export profile for DAISY 2.02 audiobook players. It reuses
+    /// the *same* speech-generation loop and never substitutes another voice.
+    private static func packageAudioOnly202(
+        working: URL, title: String, identifier: String, language: String,
+        chapters: [AudioOnlyChapter], totalSeconds: Double
+    ) throws -> URL {
+        let validChapters = chapters.filter { !$0.clips.isEmpty }
+        guard !validChapters.isEmpty, totalSeconds > 0 else {
+            throw NativeGeminiAudioExport.ExportError.empty
+        }
+        let supportedLanguages: Set<String> = ["es", "en", "pt", "fr", "de", "it"]
+        let lang = supportedLanguages.contains(language) ? language : "es"
+        let titleXML = escape(title)
+        let fixedLocale = Locale(identifier: "en_US_POSIX")
+        func smilDuration(_ value: Double) -> String {
+            String(format: "%.3fs", locale: fixedLocale, value)
+        }
+        let elapsedSeconds = Int(ceil(totalSeconds))
+        let wholeClock = String(format: "%02d:%02d:%02d",
+                                elapsedSeconds / 3600, (elapsedSeconds / 60) % 60,
+                                elapsedSeconds % 60)
+        let date = String(ISO8601DateFormatter().string(from: Date()).prefix(10))
+        let allClips = validChapters.flatMap(\.clips)
+        let nav = validChapters.enumerated().map { index, chapter in
+            let tag = index == 0 ? "h1" : "h2"
+            return "<\(tag) id=\"nav\(index + 1)\"><a href=\"audio.smil#section\(index + 1)\">\(escape(index == 0 ? title : chapter.title))</a></\(tag)>"
+        }.joined(separator: "\n")
+        let ncc = """
+        <?xml version="1.0" encoding="utf-8"?>
+        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="\(lang)" lang="\(lang)">
+          <head>
+            <title>\(titleXML)</title>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <meta name="dc:identifier" content="\(identifier)" />
+            <meta name="dc:title" content="\(titleXML)" />
+            <meta name="dc:date" content="\(date)" />
+            <meta name="dc:language" content="\(lang)" />
+            <meta name="dc:format" content="Daisy 2.02" />
+            <meta name="ncc:charset" content="utf-8" />
+            <meta name="ncc:generator" content="TifloLector" />
+            <meta name="ncc:multimediaType" content="audioNCC" />
+            <meta name="ncc:depth" content="\(validChapters.count == 1 ? 1 : 2)" />
+            <meta name="ncc:tocItems" content="\(validChapters.count)" />
+            <meta name="ncc:pageNormal" content="0" />
+            <meta name="ncc:pageFront" content="0" />
+            <meta name="ncc:pageSpecial" content="0" />
+            <meta name="ncc:totalTime" content="\(wholeClock)" scheme="hh:mm:ss" />
+            <meta name="ncc:files" content="\(2 + allClips.count)" />
+          </head>
+          <body>
+            \(nav)
+          </body>
+        </html>
+        """
+        var clipIndex = 0
+        let smilSections = validChapters.enumerated().map { index, chapter in
+            let audio = chapter.clips.map { clip in
+                clipIndex += 1
+                return "<audio id=\"audio\(clipIndex)\" src=\"\(clip.file)\" clip-begin=\"npt=0.000s\" clip-end=\"npt=\(smilDuration(clip.duration))\" />"
+            }.joined(separator: "\n")
+            return """
+            <par id="section\(index + 1)" endsync="last">
+              <text id="text\(index + 1)" src="ncc.html#nav\(index + 1)" />
+              <seq>
+                \(audio)
+              </seq>
+            </par>
+            """
+        }.joined(separator: "\n")
+        let smil = """
+        <?xml version="1.0" encoding="utf-8"?>
+        <!DOCTYPE smil PUBLIC "-//W3C//DTD SMIL 1.0//EN" "http://www.w3.org/TR/REC-SMIL/SMIL10.dtd">
+        <smil>
+          <head>
+            <meta name="dc:identifier" content="\(identifier)" />
+            <meta name="dc:format" content="Daisy 2.02" />
+            <meta name="ncc:timeInThisSmil" content="\(wholeClock)" />
+          </head>
+          <body>
+            <seq id="narration" dur="\(smilDuration(totalSeconds))">
+              \(smilSections)
+            </seq>
+          </body>
+        </smil>
+        """
+        try ncc.write(to: working.appendingPathComponent("ncc.html"),
+                      atomically: true, encoding: .utf8)
+        try smil.write(to: working.appendingPathComponent("audio.smil"),
+                       atomically: true, encoding: .utf8)
+
+        let output = try NativeGeminiAudioExport.destination(
+            title: title + " DAISY 2.02 audio", fileExtension: "zip")
+        var verified = false
+        defer { if !verified { try? FileManager.default.removeItem(at: output) } }
+        guard let archive = Archive(url: output, accessMode: .create) else {
+            throw NativeGeminiAudioExport.ExportError.unsupportedFormat
+        }
+        try archive.addEntry(with: "ncc.html", relativeTo: working, compressionMethod: .deflate)
+        try archive.addEntry(with: "audio.smil", relativeTo: working, compressionMethod: .deflate)
+        for clip in allClips {
+            try Task.checkCancellation()
+            guard FileManager.default.fileExists(atPath:
+                working.appendingPathComponent(clip.file).path) else {
+                throw NativeGeminiAudioExport.ExportError.unsupportedFormat
+            }
+            try archive.addEntry(with: clip.file, relativeTo: working,
+                                 compressionMethod: .deflate)
+        }
+        try NativeDaisyPackageVerifier.validateAudioOnly202(output)
+        try Task.checkCancellation()
+        verified = true
+        return output
+    }
+
     static func generate(text: String, title: String, voice: String,
                          engine: NativeGeminiAudioExport.Engine = .gemini,
                          speed: Double = 1.0, pitch: Float = 1.0,
                          language: String = "es",
+                         audioOnly202: Bool = false,
                          progress: @escaping @MainActor (Int, Int) -> Void) async throws -> URL {
         let segments = try units(text, engine: engine)
         let uuid = UUID().uuidString
@@ -78,6 +202,7 @@ enum NativeGeminiDaisyExport {
         var headingPoints: [(title: String, par: String)] = []
         var firstPar = ""
         var sectionOpen = false
+        var audioOnlyChapters = [AudioOnlyChapter(title: title, clips: [])]
 
         for (index, segment) in segments.enumerated() {
             try Task.checkCancellation()
@@ -94,7 +219,12 @@ enum NativeGeminiDaisyExport {
                 continue
             }
             if firstPar.isEmpty { firstPar = par }
-            if let heading = segment.heading { headingPoints.append((heading, par)) }
+            if let heading = segment.heading {
+                headingPoints.append((heading, par))
+                if !(audioOnlyChapters.last?.clips.isEmpty ?? true) {
+                    audioOnlyChapters.append(AudioOnlyChapter(title: heading, clips: []))
+                }
+            }
             let bytes = try await NativeGeminiAudioExport.synthesize(
                 spoken, voice: voice, engine: engine, speed: speed, pitch: pitch)
             let pcm = try NativeGeminiAudioExport.pcm(bytes)
@@ -111,12 +241,19 @@ enum NativeGeminiDaisyExport {
             }
             pars.append("<par id=\"\(par)\"><text src=\"book.xml#\(id)\"/><audio src=\"\(file)\" clipBegin=\"00:00:00.000\" clipEnd=\"\(clock(duration))\"/></par>")
             manifest.append("<item id=\"audio\(number)\" href=\"\(file)\" media-type=\"audio/mpeg\"/>")
+            audioOnlyChapters[audioOnlyChapters.count - 1].clips.append(
+                (file: file, duration: duration))
             totalSeconds += duration
             await progress(number, segments.count)
         }
         if sectionOpen { paragraphs.append("</level2>") }
         try Task.checkCancellation()
         guard !pars.isEmpty else { throw NativeGeminiAudioExport.ExportError.empty }
+        if audioOnly202 {
+            return try packageAudioOnly202(
+                working: working, title: title, identifier: identifier, language: language,
+                chapters: audioOnlyChapters, totalSeconds: totalSeconds)
+        }
 
         let supportedLanguages: Set<String> = ["es", "en", "pt", "fr", "de", "it"]
         let lang = supportedLanguages.contains(language) ? language : "es"

@@ -2228,6 +2228,8 @@ struct NativeReadingScreen: View {
     @State private var positionBeforeSearch: Int?
     @State private var programmaticFocusRequest = false
     @State private var actionMessage: String?
+    @State private var navigationFeedback = ""
+    @State private var navigationScrollTarget: Int?
     // DAISY navigation sets a target without starting the reader's audio.
     @State private var pendingDaisyAudioSeconds: TimeInterval?
     @AccessibilityFocusState private var focusedFragment: Int?
@@ -2289,14 +2291,14 @@ struct NativeReadingScreen: View {
         var options: [(unit: Int, label: String)] = []
         if !latest.body.isEmpty {
             options += [(0, "Bloque"), (1, "Párrafo"), (2, "Frase"), (3, "Página")]
-            if !textLayout.headingStarts.isEmpty ||
-                (latest.daisyNavigation ?? []).contains(where: {
-                    $0.kind != "Página" && $0.kind != "Referencia"
-                }) {
-                options.append((4, "Encabezado"))
-            }
+            if !textLayout.headingStarts.isEmpty { options.append((4, "Encabezado")) }
         }
         if !tracks.isEmpty {
+            if (latest.daisyNavigation ?? []).contains(where: {
+                $0.kind != "Página" && $0.kind != "Referencia"
+            }) && !options.contains(where: { $0.unit == 4 }) {
+                options.append((4, "Encabezado"))
+            }
             if (latest.daisyNavigation ?? []).contains(where: { $0.kind == "Página" }) {
                 options.append((9, "Página DAISY"))
             }
@@ -2327,8 +2329,32 @@ struct NativeReadingScreen: View {
             set: { index in
                 guard navigationOptions.indices.contains(index) else { return }
                 navigationUnit = navigationOptions[index].unit
+                navigationFeedback = MusicLocalized.format("Modo de navegación: %@",
+                    navigationOptions[index].label)
+                actionMessage = nil
             }
         )
+    }
+
+    private var navigationAccessibilityValue: String {
+        if !navigationFeedback.isEmpty { return navigationFeedback }
+        let title = navigationOptions.first(where: { $0.unit == effectiveNavigationUnit })?.label
+            ?? "No disponible"
+        return MusicLocalized.format("Modo de navegación: %@", title)
+    }
+
+    private func navigateText(to offset: Int, unit: Int) {
+        // Swipe navigation changes location but never starts speech or steals
+        // VoiceOver's focus from the adjustable playback control.
+        if speech.isPlaying || speech.isPaused { stopPlayback() }
+        jump(to: offset, focusReader: false)
+        navigationScrollTarget = textLayout.fragmentIndex(for: readingOffset)
+        let sample = String(latest.body.dropFirst(readingOffset).prefix(120))
+        let short = NativeReaderHeadingDisplay.title(sample, limit: 90)
+        let unitName = navigationOptions.first(where: { $0.unit == unit })?.label
+            ?? "Posición"
+        navigationFeedback = short.isEmpty ? unitName : unitName + ": " + short
+        actionMessage = nil
     }
 
     private var excerpt: String {
@@ -3195,7 +3221,9 @@ struct NativeReadingScreen: View {
             Button(speech.isPlaying ? "Pausar" : "Reproducir") {
                 activatePlaybackButton()
             }
-            .accessibilityValue(MusicLocalized.format("%d por ciento", currentPercent))
+            // Announce the reached unit, not the unrelated reading percentage.
+            .accessibilityValue(navigationAccessibilityValue)
+            .accessibilityHint("Desliza arriba o abajo para navegar por el modo elegido.")
             .accessibilityAdjustableAction { direction in
                 switch direction {
                 case .increment: moveUnit(1)
@@ -3432,6 +3460,10 @@ struct NativeReadingScreen: View {
                     }
                 }
                 .padding()
+            }
+            .onChange(of: navigationScrollTarget) { _, index in
+                guard let index, textLayout.fragmentStarts.indices.contains(index) else { return }
+                proxy.scrollTo(index, anchor: .center)
             }
             .onChange(of: focusedFragment) { _, index in
                 guard let index, textLayout.fragmentStarts.indices.contains(index) else { return }
@@ -3753,6 +3785,12 @@ struct NativeReadingScreen: View {
                     Int(Double(textLayout.totalCharacters) * Double(initial) / 100)))
                 : Int(Double(textLayout.totalCharacters) * Double(initial) / 100)
             lastSavedPercent = initial
+            if !navigationOptions.contains(where: { $0.unit == navigationUnit }),
+               let available = navigationOptions.first {
+                navigationUnit = available.unit
+                navigationFeedback = MusicLocalized.format(
+                    "Modo anterior no disponible. Modo de navegación: %@", available.label)
+            }
             // The live reader owns the current cursor, not a stale saved position.
             // Shortcuts invokes this directly; no stop, seek or navigation occurs.
             NativeQuickBookmarkBridge.saveActiveReader = { addBookmark() }

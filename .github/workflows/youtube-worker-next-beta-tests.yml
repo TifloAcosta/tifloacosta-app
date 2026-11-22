@@ -1,0 +1,28 @@
+name: Probar servicio YouTube para beta sin desplegar
+on:
+  push:
+    branches:
+      - development/next-public-1.6-500200-20261121
+    paths:
+      - youtube-worker/**
+      - .github/workflows/youtube-worker-next-beta-tests.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test-worker-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar dependencias de pruebas
+        working-directory: youtube-worker
+        run: npm ci --no-audit --no-fund
+      - name: Probar búsqueda, permisos y cuentas con respuestas simuladas
+        working-directory: youtube-worker
+        run: npm test
+      - name: Confirmar que no se ha realizado despliegue
+        run: echo "Solo pruebas: no se conecta a Cloudflare ni se modifica producción."

@@ -1057,3 +1057,6 @@
 "Importa el audio en Mi música." = "Import the audio into My Music.";
 "Retroceder diez segundos" = "Rewind ten seconds";
 "Avanzar diez segundos" = "Forward ten seconds";
+"Ya existe una marca en esta posición." = "There is already a bookmark at this position.";
+"No se pudo crear la marca: documento no disponible." = "Could not create the bookmark: document unavailable.";
+"No se pudo guardar la marca. Inténtalo de nuevo." = "Could not save the bookmark. Try again.";

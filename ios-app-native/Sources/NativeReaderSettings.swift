@@ -737,11 +737,6 @@ struct NativeReaderBrailleControls: View {
             choices: ["Bloque", "Párrafo", "Frase", "Página", "Encabezado"],
             selectedIndex: $navigationUnit
         )
-        Button("Configurar línea braille en VoiceOver") {
-            guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
-            UIApplication.shared.open(url)
-        }
-        .accessibilityHint("Abre Ajustes del iPhone. La línea braille se configura en Accesibilidad, VoiceOver, Braille.")
     }
 }
 

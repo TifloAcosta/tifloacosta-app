@@ -1,0 +1,46 @@
+name: Validar integración nativa de iOS 1.7 sin publicar
+on:
+  push:
+    branches:
+      - development/next-public-1.6-500200-20261121
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ios-17-validate-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ejecutar todas las pruebas de contrato de iOS
+        run: node --test ios-app-native/tests/*.test.mjs
+      - name: Comprobar estado del inventario, sin bloquear la compilación de diagnóstico
+        run: |
+          node ios-app-native/scripts/check-release-readiness.mjs ||             echo "Integración aún incompleta: no activar TestFlight hasta superar el control obligatorio."
+  build-without-distribution:
+    needs: contracts
+    runs-on: macos-15
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@v4
+      - name: Elegir Xcode 26
+        run: |
+          set -euo pipefail
+          XCODE="$(find /Applications -maxdepth 1 -type d -name 'Xcode_26*.app' -print | sort | tail -n 1)"
+          test -n "$XCODE" || { echo "::error::Falta Xcode 26"; exit 1; }
+          sudo xcode-select --switch "$XCODE/Contents/Developer"
+          xcodebuild -version
+      - name: Crear el proyecto nativo con XcodeGen
+        run: |
+          brew install xcodegen
+          (cd ios-app-native && xcodegen generate --spec project.yml)
+      - name: Compilar para simulador sin firma, TestFlight ni publicación
+        run: |
+          xcodebuild -project ios-app-native/TifloAcostaNative.xcodeproj \
+            -scheme TifloAcostaNative -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath "$RUNNER_TEMP/TifloAcosta-17-build" \
+            CODE_SIGNING_ALLOWED=NO build

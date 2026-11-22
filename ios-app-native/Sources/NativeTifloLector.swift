@@ -101,6 +101,13 @@ private enum NativeReaderImportError: LocalizedError {
     }
 }
 
+/// Verified counts from a folder import; individual failures do not stop the batch.
+struct NativeReaderFolderImportSummary {
+    let imported: Int
+    let skipped: Int
+    let failed: [String]
+}
+
 /// New native-only documents are deliberately isolated from the current beta database.
 /// No reading data is silently discarded or overwritten during the migration.
 @MainActor
@@ -155,6 +162,62 @@ final class NativeReaderLibrary: ObservableObject {
                 throw error
             }
         }
+    }
+
+    /// Import a directory picked in Files without requiring a ZIP. The
+    /// security-scoped folder stays available while each child is copied to
+    /// private app storage. Do not follow symlinks outside the selected folder.
+    func importFolder(from folder: URL,
+                      onProgress: @escaping (String) -> Void) async throws
+                      -> NativeReaderFolderImportSummary {
+        let scope = folder.startAccessingSecurityScopedResource()
+        defer { if scope { folder.stopAccessingSecurityScopedResource() } }
+        let attributes = try folder.resourceValues(forKeys: [.isDirectoryKey])
+        guard attributes.isDirectory == true else {
+            throw CocoaError(.fileReadUnsupportedScheme)
+        }
+        let supported: Set<String> = [
+            "pdf", "txt", "text", "html", "htm", "md", "markdown",
+            "csv", "json", "xml", "log", "srt", "rtf", "fb2",
+            "docx", "odt", "pptx", "ppsx", "pptm", "xlsx", "xlsm",
+            "epub", "mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff",
+            "caf", "flac", "mp4", "m4v", "mov", "zip", "daisy",
+            "png", "jpg", "jpeg", "heic", "heif", "tif", "tiff"
+        ]
+        guard let enumerator = FileManager.default.enumerator(
+            at: folder, includingPropertiesForKeys: [.isRegularFileKey, .isSymbolicLinkKey],
+            options: [.skipsHiddenFiles, .skipsPackageDescendants]
+        ) else { throw CocoaError(.fileReadUnknown) }
+        var files: [URL] = []
+        var skipped = 0
+        for case let url as URL in enumerator {
+            if Task.isCancelled { throw CancellationError() }
+            let properties = try? url.resourceValues(forKeys: [.isRegularFileKey, .isSymbolicLinkKey])
+            guard properties?.isSymbolicLink != true,
+                  properties?.isRegularFile == true else { continue }
+            guard files.count + skipped < 750 else {
+                throw NativeReaderFormatError.unsupported(
+                    "Carpeta con más de 750 archivos: divide la importación")
+            }
+            if supported.contains(url.pathExtension.lowercased()) { files.append(url) }
+            else { skipped += 1 }
+        }
+        files.sort { $0.path.localizedStandardCompare($1.path) == .orderedAscending }
+        var imported = 0
+        var failures: [String] = []
+        for (index, file) in files.enumerated() {
+            if Task.isCancelled { throw CancellationError() }
+            onProgress("Importando \(index + 1) de \(files.count): \(file.lastPathComponent)")
+            await Task.yield()
+            do {
+                try importDocuments(from: [file])
+                imported += 1
+            } catch {
+                failures.append(file.lastPathComponent + ": " + error.localizedDescription)
+            }
+        }
+        return NativeReaderFolderImportSummary(
+            imported: imported, skipped: skipped, failed: failures)
     }
 
     func importSharedText(_ text: String, title: String, sharingID: UUID? = nil) throws {
@@ -1221,6 +1284,9 @@ struct NativeReaderLibraryScreen: View {
     @AppStorage("native-ios-language") private var languageIndex = 0
     @StateObject private var speech = NativeReadingSpeech()
     @State private var importPresented = false
+    @State private var importFolderPresented = false
+    @State private var importingFolder = false
+    @State private var importFolderStatus = ""
     @State private var restorePresented = false
     @State private var restoreResult: String?
     @State private var importSourcesPresented = false
@@ -1460,6 +1526,13 @@ struct NativeReaderLibraryScreen: View {
 
     var body: some View {
         List {
+            if !importFolderStatus.isEmpty {
+                Section {
+                    Text(importFolderStatus)
+                        .font(.footnote)
+                        .accessibilityLabel(importFolderStatus)
+                }
+            }
             if let shortcutMessage {
                 Section {
                     Text(shortcutMessage).font(.footnote)
@@ -1625,6 +1698,7 @@ struct NativeReaderLibraryScreen: View {
         .confirmationDialog("Importar", isPresented: $importSourcesPresented,
                             titleVisibility: .visible) {
             Button("Desde Archivos") { importPresented = true }
+            Button("Carpeta completa desde Archivos") { importFolderPresented = true }
             Button("Bibliotecas en línea") { externalCatalogPresented = true }
             Button("Cancelar", role: .cancel) {}
         }
@@ -1685,6 +1759,36 @@ struct NativeReaderLibraryScreen: View {
             case .success(let urls):
                 do { try library.importDocuments(from: urls) }
                 catch { importError = error.localizedDescription }
+            case .failure(let error):
+                importError = error.localizedDescription
+            }
+        }
+        .fileImporter(
+            isPresented: $importFolderPresented,
+            allowedContentTypes: [.folder],
+            allowsMultipleSelection: false
+        ) { result in
+            switch result {
+            case .success(let urls):
+                guard let folder = urls.first, !importingFolder else { return }
+                importingFolder = true
+                importFolderStatus = "Preparando importación de carpeta."
+                Task { @MainActor in
+                    defer { importingFolder = false }
+                    do {
+                        let summary = try await library.importFolder(from: folder) { message in
+                            importFolderStatus = message
+                        }
+                        importFolderStatus = "Importación terminada. Documentos importados: \(summary.imported). Omitidos: \(summary.skipped). Fallidos: \(summary.failed.count)."
+                        if !summary.failed.isEmpty {
+                            importError = summary.failed.prefix(6).joined(separator: "\\n")
+                        }
+                    } catch {
+                        importError = "No se pudo importar la carpeta: " + error.localizedDescription
+                        importFolderStatus = "Importación de carpeta interrumpida."
+                    }
+                    UIAccessibility.post(notification: .announcement, argument: importFolderStatus)
+                }
             case .failure(let error):
                 importError = error.localizedDescription
             }

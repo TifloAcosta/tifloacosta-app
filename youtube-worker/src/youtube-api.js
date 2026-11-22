@@ -1,5 +1,6 @@
 const API_ROOT = 'https://www.googleapis.com/youtube/v3/';
 const VIDEO_ID_RE = /^[A-Za-z0-9_-]{11}$/;
+const PLAYLIST_ID_RE = /^[A-Za-z0-9_-]{10,150}$/;
 
 function typedError(code, status = 400) {
   const error = new Error(code);
@@ -246,7 +247,7 @@ export async function searchVideos(apiKey, searchTerm, pageToken = '', fetchImpl
   if (channelId && !/^UC[A-Za-z0-9_-]{22}$/.test(channelId)) {
     throw typedError('INVALID_CHANNEL', 400);
   }
-  const allowed = new Set(['video', 'all', 'channel', 'short', 'live', 'captions']);
+  const allowed = new Set(['video', 'all', 'channel', 'playlist', 'short', 'live', 'captions']);
   const filter = String(options.filter || 'video');
   if (!allowed.has(filter)) throw typedError('INVALID_SEARCH', 400);
   // Browsing a channel accepts an empty query; searching within it must
@@ -256,7 +257,7 @@ export async function searchVideos(apiKey, searchTerm, pageToken = '', fetchImpl
   const token = validPageToken(pageToken);
   const entries = [
     ['part', 'snippet'],
-    ['type', channelId ? 'video' : filter === 'all' ? 'video,channel' : filter === 'channel' ? 'channel' : 'video'],
+    ['type', channelId ? 'video' : filter === 'all' ? 'video,channel,playlist' : filter === 'channel' ? 'channel' : filter === 'playlist' ? 'playlist' : 'video'],
     ['maxResults', '10'],
     ['safeSearch', 'moderate']
   ];
@@ -301,11 +302,68 @@ export async function searchVideos(apiKey, searchTerm, pageToken = '', fetchImpl
       if (VIDEO_ID_RE.test(id)) {
         return [{ ...result, kind: 'video', id, durationSeconds: durations.get(id) || 0 }];
       }
+      const playlistId = String(item?.id?.playlistId || '').trim();
+      if (PLAYLIST_ID_RE.test(playlistId)) {
+        return [{ ...result, kind: 'playlist', playlistId }];
+      }
       const channel = String(item?.id?.channelId || '').trim();
       return /^UC[A-Za-z0-9_-]{22}$/.test(channel)
         ? [{ ...result, kind: 'channel', channelId: channel }]
         : [];
     }),
     nextPageToken: String(searchData?.nextPageToken || '')
+  };
+}
+
+
+/// Public playlist pages preserve YouTube's original sequence. Inaccessible
+/// entries are skipped, never renamed or re-ordered as if they were playable.
+/// The original YouTube embedded player remains the only playback mechanism.
+export async function listPlaylistVideos(apiKey, playlistId, pageToken = '', fetchImpl = fetch) {
+  const id = String(playlistId || '').trim();
+  if (!PLAYLIST_ID_RE.test(id)) throw typedError('INVALID_PLAYLIST', 400);
+  const token = validPageToken(pageToken);
+  const entries = [
+    ['part', 'snippet,contentDetails'],
+    ['playlistId', id],
+    ['maxResults', '20']
+  ];
+  if (token) entries.push(['pageToken', token]);
+  const data = await youtubeKeyFetch(query('playlistItems', entries), apiKey, fetchImpl);
+  const originals = Array.isArray(data?.items) ? data.items : [];
+  const ordered = originals.flatMap(item => {
+    const videoID = String(item?.contentDetails?.videoId ||
+      item?.snippet?.resourceId?.videoId || '').trim();
+    const snippet = item?.snippet || {};
+    if (!VIDEO_ID_RE.test(videoID) ||
+        ['Private video', 'Deleted video'].includes(String(snippet.title || ''))) {
+      return [];
+    }
+    return [{
+      id: videoID,
+      kind: 'video',
+      title: String(snippet.title || ''),
+      channelTitle: String(snippet.videoOwnerChannelTitle || snippet.channelTitle || ''),
+      description: String(snippet.description || ''),
+      publishedAt: String(snippet.publishedAt || ''),
+      position: Number.isInteger(snippet.position) && snippet.position >= 0
+        ? snippet.position : null,
+      durationSeconds: 0
+    }];
+  });
+  const ids = [...new Set(ordered.map(item => item.id))];
+  let durations = new Map();
+  if (ids.length) {
+    const details = await youtubeKeyFetch(query('videos', [
+      ['part', 'contentDetails'],
+      ['id', ids.join(',')]
+    ]), apiKey, fetchImpl);
+    durations = new Map((Array.isArray(details?.items) ? details.items : []).map(item => [
+      String(item?.id || ''), parseIsoDuration(item?.contentDetails?.duration)
+    ]));
+  }
+  return {
+    items: ordered.map(item => ({ ...item, durationSeconds: durations.get(item.id) || 0 })),
+    nextPageToken: String(data?.nextPageToken || '')
   };
 }

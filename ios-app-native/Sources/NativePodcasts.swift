@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 import AVFoundation
+import MediaPlayer
 import Combine
 import UniformTypeIdentifiers
 
@@ -101,6 +102,7 @@ final class NativePodcastPlayer: ObservableObject {
     private var player: AVPlayer?
     private var endObserver: NSObjectProtocol?
     private var nextEpisodes: [NativePodcastEpisode] = []
+    private var remoteCommandTokens: [Any] = []
     var onEpisodeFinished: ((NativePodcastEpisode) -> Void)?
     var resolveAudioURL: ((NativePodcastEpisode) -> URL?)?
 
@@ -130,14 +132,83 @@ final class NativePodcastPlayer: ObservableObject {
         }
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
         try? AVAudioSession.sharedInstance().setActive(true)
+        NativeRemotePlaybackOwner.onInterrupted(.podcast) { [weak self] in
+            self?.pauseForOtherAudio()
+        }
+        NativeRemotePlaybackOwner.claim(.podcast)
+        registerRemoteCommands()
         player?.play()
         isPlaying = true
+        updateNowPlaying()
     }
 
     func toggle() {
         guard let player else { return }
-        if isPlaying { player.pause() } else { player.play() }
-        isPlaying.toggle()
+        if isPlaying {
+            player.pause()
+            isPlaying = false
+        } else {
+            NativeRemotePlaybackOwner.claim(.podcast)
+            registerRemoteCommands()
+            player.play()
+            isPlaying = true
+        }
+        updateNowPlaying()
+    }
+
+    func pauseForOtherAudio() {
+        guard isPlaying else { return }
+        player?.pause()
+        isPlaying = false
+        updatePosition()
+        updateNowPlaying()
+    }
+
+    private func updateNowPlaying() {
+        guard NativeRemotePlaybackOwner.current == .podcast, let episode else { return }
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+            MPMediaItemPropertyTitle: episode.title,
+            MPMediaItemPropertyPlaybackDuration: duration,
+            MPNowPlayingInfoPropertyElapsedPlaybackTime: seconds,
+            MPNowPlayingInfoPropertyPlaybackRate: isPlaying ? 1.0 : 0.0
+        ]
+    }
+
+    private func registerRemoteCommands() {
+        guard remoteCommandTokens.isEmpty else { return }
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+        let commands = MPRemoteCommandCenter.shared()
+        let play = commands.playCommand.addTarget { [weak self] _ in
+            Task { @MainActor [weak self] in
+                guard NativeRemotePlaybackOwner.current == .podcast, self?.isPlaying == false else { return }
+                self?.toggle()
+            }
+            return .success
+        }
+        let pause = commands.pauseCommand.addTarget { [weak self] _ in
+            Task { @MainActor [weak self] in
+                guard NativeRemotePlaybackOwner.current == .podcast, self?.isPlaying == true else { return }
+                self?.toggle()
+            }
+            return .success
+        }
+        let toggle = commands.togglePlayPauseCommand.addTarget { [weak self] _ in
+            Task { @MainActor [weak self] in
+                guard NativeRemotePlaybackOwner.current == .podcast else { return }
+                self?.toggle()
+            }
+            return .success
+        }
+        remoteCommandTokens = [play, pause, toggle]
+    }
+
+    private func unregisterRemoteCommands() {
+        guard remoteCommandTokens.count == 3 else { return }
+        let commands = MPRemoteCommandCenter.shared()
+        commands.playCommand.removeTarget(remoteCommandTokens[0])
+        commands.pauseCommand.removeTarget(remoteCommandTokens[1])
+        commands.togglePlayPauseCommand.removeTarget(remoteCommandTokens[2])
+        remoteCommandTokens = []
     }
 
     func skip(_ delta: Double) {
@@ -158,6 +229,7 @@ final class NativePodcastPlayer: ObservableObject {
         seconds = time.isFinite ? max(0, time) : 0
         duration = total.isFinite ? max(0, total) : 0
         if player.rate == 0 && isPlaying { isPlaying = false }
+        updateNowPlaying()
     }
 
     func stop() {
@@ -172,6 +244,8 @@ final class NativePodcastPlayer: ObservableObject {
         isPlaying = false
         seconds = 0
         duration = 0
+        unregisterRemoteCommands()
+        NativeRemotePlaybackOwner.release(.podcast)
     }
 }
 

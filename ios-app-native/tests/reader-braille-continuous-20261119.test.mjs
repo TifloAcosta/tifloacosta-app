@@ -21,7 +21,8 @@ test('Braille preserves exact selection and restores position without starting s
   const reader = source('NativeTifloLector.swift');
   const braille = source('NativeReaderContinuousBrailleText.swift');
   assert.match(reader, /saveTextPosition\(document, offset: offset\)/);
-  assert.match(braille, /view\.selectedRange = NSRange\(location: utf16Offset, length: 0\)/);
+  assert.match(braille, /let restoredRange = NSRange\(location: utf16Offset, length: 0\)/);
+  assert.match(braille, /if movedSelection \{ view\.selectedRange = restoredRange \}/);
   assert.match(braille, /textViewDidChangeSelection/);
   assert.match(braille, /onPositionChange\(characterOffset\)/);
   assert.match(braille, /view\.dataDetectorTypes = \[\.link\]/);

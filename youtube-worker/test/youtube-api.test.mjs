@@ -8,7 +8,8 @@ import {
   like,
   unlike,
   comment,
-  searchVideos
+  searchVideos,
+  listPlaylistVideos
 } from '../src/youtube-api.js';
 
 const token = 'access-token';
@@ -335,4 +336,73 @@ test('channel search preserves the search phrase while blank channel browsing re
   assert.equal(params.get('q'), 'braille accesible');
   assert.equal(params.get('type'), 'video');
   assert.equal(params.get('order'), 'date');
+});
+
+
+test('playlist search and the All filter include real YouTube playlists', async () => {
+  const id = 'PL' + 'a'.repeat(32);
+  for (const filter of ['playlist', 'all']) {
+    const requests = [];
+    const page = await searchVideos('key', 'accesibilidad', '', async url => {
+      requests.push(String(url));
+      return jsonResponse({ items: [{
+        id: { playlistId: id },
+        snippet: { title: 'Audiodescripción', channelTitle: 'Ejemplo',
+          description: 'Vídeos descritos' }
+      }], nextPageToken: 'MORE' });
+    }, { filter });
+    assert.equal(page.items.length, 1);
+    assert.deepEqual(page.items[0].kind, 'playlist');
+    assert.equal(page.items[0].playlistId, id);
+    assert.equal(page.nextPageToken, 'MORE');
+    assert.match(new URL(requests[0]).searchParams.get('type'),
+      filter === 'all' ? /playlist/ : /^playlist$/);
+    assert.equal(requests.length, 1, 'search playlists needs no video-duration requests');
+  }
+});
+
+test('playlist items retain source order and handle pagination and private videos', async () => {
+  const id = 'PL' + 'b'.repeat(32);
+  const calls = [];
+  const page = await listPlaylistVideos('key', id, 'NEXT_PAGE', async url => {
+    const target = String(url);
+    calls.push(target);
+    if (target.includes('/playlistItems?')) {
+      return jsonResponse({
+        nextPageToken: 'MORE',
+        items: [
+          { snippet: { title: 'Primera', position: 0, videoOwnerChannelTitle: 'Canal A',
+              resourceId: { videoId: 'abcdefghijk' } }, contentDetails: { videoId: 'abcdefghijk' } },
+          { snippet: { title: 'Private video', position: 1,
+              resourceId: { videoId: '12345678901' } }, contentDetails: { videoId: '12345678901' } },
+          { snippet: { title: 'Segunda', position: 2, videoOwnerChannelTitle: 'Canal B',
+              resourceId: { videoId: 'ABCDEFGHIJK' } }, contentDetails: { videoId: 'ABCDEFGHIJK' } }
+        ]
+      });
+    }
+    if (target.includes('/videos?')) {
+      assert.equal(new URL(target).searchParams.get('id'), 'abcdefghijk,ABCDEFGHIJK');
+      return jsonResponse({ items: [
+        { id: 'abcdefghijk', contentDetails: { duration: 'PT1M' } },
+        { id: 'ABCDEFGHIJK', contentDetails: { duration: 'PT2M' } }
+      ] });
+    }
+    throw new Error('Unexpected service call: ' + target);
+  });
+  assert.equal(new URL(calls[0]).searchParams.get('pageToken'), 'NEXT_PAGE');
+  assert.equal(new URL(calls[0]).searchParams.get('playlistId'), id);
+  assert.deepEqual(page.items.map(item => [item.id, item.position, item.durationSeconds]),
+    [['abcdefghijk', 0, 60], ['ABCDEFGHIJK', 2, 120]]);
+  assert.equal(page.nextPageToken, 'MORE');
+});
+
+test('invalid playlists and missing credentials fail before any API call', async () => {
+  await assert.rejects(
+    () => listPlaylistVideos('key', '../private', '', async () => { throw Error('not called'); }),
+    error => error?.code === 'INVALID_PLAYLIST'
+  );
+  await assert.rejects(
+    () => listPlaylistVideos('', 'PL' + 'z'.repeat(32), '', async () => { throw Error('not called'); }),
+    error => error?.code === 'SEARCH_UNAVAILABLE'
+  );
 });

@@ -34,7 +34,14 @@ test('Media usa el catálogo editorial real, sin mezclar HTML con SwiftUI', () =
   assert.match(media, /\.accessibilityAction\(named: Text\(item\.openLabel\)\)/);
   assert.match(media, /\.accessibilityAction\(named: Text\("Visitar fuente"\)\)/);
   assert.match(media, /\.accessibilityAction\(named: Text\("Compartir"\)\)/);
-  assert.match(media, /item\.directAudioURL \?\? item\.originalURL/);
+  assert.match(media, /NativeMediaPlayback\.open\(item, player: player, library: podcastLibrary/);
+  assert.match(media, /if item\.type == "audio", let audioURL = item\.directAudioURL/);
+  assert.match(media, /player\.select\(episode, at: library\.progress\(for: episode\)\)/);
+  assert.match(media, /NativeYouTubeVideo\(media: item\)/);
+  assert.match(media, /\.sheet\(item: \$selectedVideo\)/);
+  assert.match(inline, /NativeMediaPlayback\.open\(item, player: player, library: podcastLibrary/);
+  assert.match(inline, /\.sheet\(item: \$selectedVideo\)/);
+  assert.doesNotMatch(media + inline, /openURL\(item\.directAudioURL\)/);
   assert.doesNotMatch(media + news, /WKWebView|UIWebView|import Capacitor/);
 });
 

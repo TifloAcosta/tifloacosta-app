@@ -7,8 +7,13 @@
     {
       "id": 1,
       "title": "Recursos: Píldoras por años en la app y orden cronológico",
-      "status": "pending",
-      "issue": "#351"
+      "status": "partial",
+      "issue": "#351",
+      "evidence": [
+        "ios-app-native/Sources/NativeScreens.swift",
+        "ios-app-native/tests/resource-pills-year-order-20261122.test.mjs"
+      ],
+      "validation": "iOS: Píldoras/Pills muestra años con documentos, orden descendente y dentro cada año ediciones recientes primero, conservando acciones de accesibilidad. Cambios en rama única, pendiente comprobar CI Xcode y VoiceOver. Web dispone de agrupación, Android sigue pendiente de verificación/implementación contra versión pública de Play."
     },
     {
       "id": 2,

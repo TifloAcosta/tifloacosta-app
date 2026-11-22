@@ -28,6 +28,16 @@ test('a search error exposes retry and a safe official YouTube escape without au
   assert.match(screen, /if let url = target\.url \{ openURL\(url\) \}/);
 });
 
+test('transient transport and server errors retry only once without resubmitting on quota', () => {
+  assert.match(store, /private func fetchWithOneTransientRetry/);
+  assert.match(store, /\[502, 503, 504\]\.contains\(response\.statusCode\)/);
+  assert.match(store, /error\.code == \.timedOut/);
+  assert.match(store, /error\.code == \.networkConnectionLost/);
+  assert.match(store, /error\.code == \.cannotConnectToHost/);
+  assert.match(store, /let \(data, response\) = try await fetchWithOneTransientRetry\(request\)/);
+  assert.equal(store.split('return try await URLSession.shared.data(for: request)').length - 1, 2);
+});
+
 test('all supported languages translate the new diagnosis and recovery controls', () => {
   const required = [
     'El iPhone no encuentra el servidor de búsqueda de YouTube.',

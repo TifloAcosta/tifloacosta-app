@@ -1109,3 +1109,10 @@
 
 "Colecciones de obras audiodescritas" = "Collections d’œuvres en audiodescription";
 "Explorar colección en la fuente original" = "Explorer la collection à la source";
+
+"Intenta abrir directamente los ajustes de braille de VoiceOver." = "Essayez d’ouvrir directement les réglages braille de VoiceOver.";
+"No se pudieron abrir los ajustes de braille" = "Impossible d’ouvrir les réglages braille";
+"Abre Ajustes > Accesibilidad > VoiceOver > Braille." = "Ouvrez Réglages > Accessibilité > VoiceOver > Braille.";
+"Selecciona el texto que necesites con VoiceOver. Después utiliza el botón Copiar texto seleccionado." = "Sélectionnez le texte souhaité avec VoiceOver, puis utilisez Copier le texte sélectionné.";
+"Copiar texto seleccionado" = "Copier le texte sélectionné";
+"Texto seleccionado copiado." = "Texte sélectionné copié.";

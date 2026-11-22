@@ -1108,3 +1108,6 @@
 "Filtra por nombre o descripción de la fuente." = "Filter by source name or description.";
 "Las plataformas muestran obras audiodescritas según su catálogo, país y permisos. Abrir la web oficial no significa que todas sus películas tengan audiodescripción." = "Platforms offer audio-described works subject to their catalogues, countries and rights. Opening an official website does not mean all its films are audio described.";
 "Los títulos y el reproductor integrado de Audesc se incorporarán cuando se verifique el acceso público a los archivos y la autorización correspondiente." = "Audesc titles and in-app playback will be added after public file access and the necessary permissions have been verified.";
+
+"Colecciones de obras audiodescritas" = "Audio-described collections";
+"Explorar colección en la fuente original" = "Explore collection at original source";

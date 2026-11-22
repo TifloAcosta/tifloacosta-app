@@ -34,13 +34,21 @@ struct NativeReaderContinuousBrailleText: UIViewRepresentable {
         var index = 0
         while index < characters.count {
             if index == 0 || characters[index - 1] == "\n" {
-                var end = index
-                while end < characters.count && end - index < 6 && characters[end] == "#" {
+                // Markdown also permits up to three indentation spaces
+                // before a heading. Keep every character offset unchanged.
+                var markerStart = index
+                while markerStart < characters.count && markerStart - index < 3 &&
+                      (characters[markerStart] == " " || characters[markerStart] == "\t") {
+                    markerStart += 1
+                }
+                var end = markerStart
+                while end < characters.count && end - markerStart < 6 &&
+                      characters[end] == "#" {
                     end += 1
                 }
-                if end > index && end < characters.count &&
+                if end > markerStart && end < characters.count &&
                     (characters[end] == " " || characters[end] == "\t") {
-                    for marker in index..<end { characters[marker] = " " }
+                    for marker in markerStart..<end { characters[marker] = " " }
                 }
             }
             index += 1

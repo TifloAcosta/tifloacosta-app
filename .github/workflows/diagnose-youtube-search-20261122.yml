@@ -1,0 +1,51 @@
+name: Diagnosticar búsqueda YouTube pública sin credenciales
+on:
+  push:
+    branches:
+      - development/next-public-1.6-500200-20261121
+    paths:
+      - .github/workflows/diagnose-youtube-search-20261122.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe-public-search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Comprobar DNS, TLS y respuesta del servicio sin exponer secretos
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Inicio de prueba pública YouTube."
+          for route in health 'search?q=VoiceOver'; do
+            echo "Comprobando /$route"
+            result_file="$(mktemp)"
+            set +e
+            status=$(curl --silent --show-error --location --max-time 15 \
+              --header 'Origin: https://tifloacosta.com' \
+              --header 'Accept: application/json' \
+              --output "$result_file" --write-out '%{http_code}' \
+              "https://youtube-auth.tifloacosta.com/$route")
+            exitcode=$?
+            set -e
+            export PROBE_STATUS="$status" PROBE_FILE="$result_file" PROBE_ROUTE="$route" PROBE_CURL_EXIT="$exitcode"
+            node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const status = process.env.PROBE_STATUS || '000';
+          const route = process.env.PROBE_ROUTE;
+          const exit = Number(process.env.PROBE_CURL_EXIT);
+          let data;
+          try { data = JSON.parse(fs.readFileSync(process.env.PROBE_FILE, 'utf8')); }
+          catch { data = null; }
+          // Deliberately never print query payload, headers, keys or credentials.
+          const code = typeof data?.error === 'string' ? data.error : '';
+          const items = Array.isArray(data?.items) ? data.items.length : null;
+          const ok = route === 'health'
+            ? status === '200' && data?.ok === true
+            : status === '200' && items !== null;
+          console.log(JSON.stringify({ route, status, curlExit: exit, errorCode: code, items, ok }));
+          if (!ok) process.exitCode = 1;
+          NODE
+            rm -f "$result_file"
+          done

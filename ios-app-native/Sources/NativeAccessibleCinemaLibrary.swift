@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 import AVFoundation
+import MediaPlayer
 import UniformTypeIdentifiers
 
 /// Files added by the user for private playback. No third-party audiovisual
@@ -35,6 +36,7 @@ enum NativeCinemaLocalError: LocalizedError {
 /// Audio is copied only after a file is explicitly chosen through Files.
 @MainActor
 final class NativeCinemaLocalLibrary: ObservableObject {
+    static let shared = NativeCinemaLocalLibrary()
     @Published private(set) var items: [NativeCinemaLocalItem] = []
 
     private static var directory: URL {
@@ -139,6 +141,7 @@ final class NativeCinemaLocalLibrary: ObservableObject {
 /// hardware volume, Mi música or TifloLector reading position.
 @MainActor
 final class NativeCinemaAudioPlayer: ObservableObject {
+    static let shared = NativeCinemaAudioPlayer()
     @Published private(set) var currentID: UUID?
     @Published private(set) var playing = false
     @Published private(set) var seconds: Double = 0
@@ -146,6 +149,9 @@ final class NativeCinemaAudioPlayer: ObservableObject {
 
     private var player: AVPlayer?
     private var lastSavedSecond: Double = -10
+    private weak var activeLibrary: NativeCinemaLocalLibrary?
+    private var currentTitle = ""
+    private var remoteCommandTokens: [Any] = []
 
     func open(_ item: NativeCinemaLocalItem, library: NativeCinemaLocalLibrary) throws {
         guard let url = library.fileURL(for: item) else {
@@ -153,14 +159,22 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         }
         pauseAndSave(library: library)
         player = AVPlayer(url: url)
+        activeLibrary = library
+        currentTitle = item.title
         currentID = item.id
         let restored = max(0, item.lastSeconds)
         seconds = restored
         duration = 0
         lastSavedSecond = restored
         player?.seek(to: CMTime(seconds: restored, preferredTimescale: 600))
+        NativeRemotePlaybackOwner.onInterrupted(.cinema) { [weak self] in
+            self?.pauseForOtherAudio()
+        }
+        NativeRemotePlaybackOwner.claim(.cinema)
+        registerRemoteCommands()
         player?.play()
         playing = true
+        updateNowPlaying()
     }
 
     func toggle(library: NativeCinemaLocalLibrary) {
@@ -170,9 +184,12 @@ final class NativeCinemaAudioPlayer: ObservableObject {
             playing = false
             save(library: library, force: true)
         } else {
+            NativeRemotePlaybackOwner.claim(.cinema)
+            registerRemoteCommands()
             player.play()
             playing = true
         }
+        updateNowPlaying()
     }
 
     func seek(by delta: Double, library: NativeCinemaLocalLibrary) {
@@ -183,6 +200,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         player.seek(to: CMTime(seconds: next, preferredTimescale: 600))
         seconds = next
         save(library: library, force: true)
+        updateNowPlaying()
     }
 
     func refresh(library: NativeCinemaLocalLibrary) {
@@ -200,6 +218,65 @@ final class NativeCinemaAudioPlayer: ObservableObject {
             lastSavedSecond = 0
             if let currentID { library.savePosition(0, for: currentID) }
         }
+        updateNowPlaying()
+    }
+
+    func pauseForOtherAudio() {
+        guard playing else { return }
+        player?.pause()
+        playing = false
+        if let activeLibrary { save(library: activeLibrary, force: true) }
+        updateNowPlaying()
+    }
+
+    private func updateNowPlaying() {
+        guard NativeRemotePlaybackOwner.current == .cinema, !currentTitle.isEmpty else { return }
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+            MPMediaItemPropertyTitle: currentTitle,
+            MPMediaItemPropertyPlaybackDuration: duration,
+            MPNowPlayingInfoPropertyElapsedPlaybackTime: seconds,
+            MPNowPlayingInfoPropertyPlaybackRate: playing ? 1.0 : 0.0
+        ]
+    }
+
+    private func registerRemoteCommands() {
+        guard remoteCommandTokens.isEmpty else { return }
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+        let commands = MPRemoteCommandCenter.shared()
+        let play = commands.playCommand.addTarget { [weak self] _ in
+            Task { @MainActor [weak self] in
+                guard NativeRemotePlaybackOwner.current == .cinema,
+                      let self, !self.playing, let library = self.activeLibrary else { return }
+                self.toggle(library: library)
+            }
+            return .success
+        }
+        let pause = commands.pauseCommand.addTarget { [weak self] _ in
+            Task { @MainActor [weak self] in
+                guard NativeRemotePlaybackOwner.current == .cinema,
+                      let self, self.playing, let library = self.activeLibrary else { return }
+                self.toggle(library: library)
+            }
+            return .success
+        }
+        let toggle = commands.togglePlayPauseCommand.addTarget { [weak self] _ in
+            Task { @MainActor [weak self] in
+                guard NativeRemotePlaybackOwner.current == .cinema,
+                      let self, let library = self.activeLibrary else { return }
+                self.toggle(library: library)
+            }
+            return .success
+        }
+        remoteCommandTokens = [play, pause, toggle]
+    }
+
+    private func unregisterRemoteCommands() {
+        guard remoteCommandTokens.count == 3 else { return }
+        let commands = MPRemoteCommandCenter.shared()
+        commands.playCommand.removeTarget(remoteCommandTokens[0])
+        commands.pauseCommand.removeTarget(remoteCommandTokens[1])
+        commands.togglePlayPauseCommand.removeTarget(remoteCommandTokens[2])
+        remoteCommandTokens = []
     }
 
     func pauseAndSave(library: NativeCinemaLocalLibrary) {
@@ -210,6 +287,10 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         currentID = nil
         seconds = 0
         duration = 0
+        currentTitle = ""
+        activeLibrary = nil
+        unregisterRemoteCommands()
+        NativeRemotePlaybackOwner.release(.cinema)
     }
 
     private func save(library: NativeCinemaLocalLibrary, force: Bool) {

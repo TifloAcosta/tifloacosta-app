@@ -38,7 +38,7 @@ test('La guía proporciona títulos y párrafos locales completos en los cuatro 
     const source = readFileSync(new URL('../Sources/' + lang + '.lproj/Guide.strings', import.meta.url), 'utf8');
     const entries = [...source.matchAll(/^"guide\.(\d+)\.(title|paragraph\.\d+)"\s*=\s*"(.+)";$/gm)];
     const keys = entries.map(m => m[1] + '.' + m[2]);
-    assert.equal(keys.length, 55, lang + ' debe cubrir todos los párrafos');
+    assert.equal(keys.length, 59, lang + ' debe cubrir todos los párrafos');
     assert.equal(new Set(keys).size, keys.length, lang + ' incluye claves repetidas');
     for (let section = 1; section <= 12; section++) {
       assert.ok(keys.includes(section + '.title'), lang + ': título ' + section);
@@ -49,6 +49,10 @@ test('La guía proporciona títulos y párrafos locales completos en los cuatro 
     assert.ok(keys.includes('13.title'), lang + ': título Mi Música');
     for (let paragraph = 1; paragraph <= 2; paragraph++) {
       assert.ok(keys.includes('13.paragraph.' + paragraph), lang + ': ayuda de Mi Música ' + paragraph);
+    }
+    assert.ok(keys.includes('14.title'), lang + ': título Multicines Accesibles');
+    for (let paragraph = 1; paragraph <= 3; paragraph++) {
+      assert.ok(keys.includes('14.paragraph.' + paragraph), lang + ': ayuda de Multicines ' + paragraph);
     }
   }
   assert.match(guide, /Bundle\.main\.path\(forResource: languageCode, ofType: "lproj"\)/);

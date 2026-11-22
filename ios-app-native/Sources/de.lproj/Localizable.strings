@@ -1125,3 +1125,26 @@
 "Importación de carpeta interrumpida." = "Ordnerimport unterbrochen.";
 
 "Volumen de esta voz" = "Lautstärke dieser Stimme";
+
+// Multicines Accesibles: biblioteca personal y reproductor.
+"Mi colección personal" = "Meine persönliche Sammlung";
+"Añade tus propios archivos de audio o vídeo. Se conservarán en el iPhone para reproducirlos en TifloAcosta, con la última posición de escucha." = "Füge deine eigenen Audio- oder Videodateien hinzu. Sie bleiben auf dem iPhone gespeichert und können in TifloAcosta mit gespeicherter Wiedergabeposition abgespielt werden.";
+"Idioma de los archivos que vas a importar" = "Sprache der zu importierenden Dateien";
+"Tipo de archivo que vas a importar" = "Art der zu importierenden Dateien";
+"Importar audio o vídeo desde Archivos" = "Audio oder Video aus Dateien importieren";
+"Archivos importados: %d. Fallos: %d." = "Importierte Dateien: %d. Fehler: %d.";
+"No hay obras personales para estos filtros." = "Keine persönlichen Einträge für diese Filter.";
+"Reproducir: %@" = "Abspielen: %@";
+"Posición: %@. Duración: %@." = "Position: %@. Dauer: %@.";
+"Pausar reproducción" = "Wiedergabe pausieren";
+"Reanudar reproducción" = "Wiedergabe fortsetzen";
+"Retroceder treinta segundos" = "Dreißig Sekunden zurück";
+"Avanzar treinta segundos" = "Dreißig Sekunden vor";
+"Detener reproducción" = "Wiedergabe stoppen";
+"Eliminar de mi colección: %@" = "Aus meiner Sammlung entfernen: %@";
+"¿Eliminar esta obra de tu colección personal?" = "Dieses Werk aus deiner persönlichen Sammlung löschen?";
+"Eliminar archivo personal" = "Persönliche Datei löschen";
+"Elige un archivo de audio o vídeo compatible." = "Wähle eine kompatible Audio- oder Videodatei.";
+"El archivo supera el tamaño máximo permitido de 2 GB." = "Die Datei überschreitet die 2-GB-Grenze.";
+"El archivo ya no está disponible en la biblioteca." = "Diese Datei ist in der Bibliothek nicht mehr verfügbar.";
+"No se puede importar este archivo." = "Diese Datei kann nicht importiert werden.";

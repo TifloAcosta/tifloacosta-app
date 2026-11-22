@@ -2197,6 +2197,8 @@ struct NativeReadingScreen: View {
     @State private var showStructure = false
     @State private var showWordTools = false
     @State private var showTextSelection = false
+    @State private var selectedTextToCopy = ""
+    @State private var selectionCopyMessage = ""
     @State private var showAudioSettings = false
     @State private var showVisualSettings = false
     @State private var showAudioExport = false
@@ -3821,14 +3823,34 @@ struct NativeReadingScreen: View {
         .sheet(isPresented: $showTextSelection) {
             NavigationStack {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Selecciona con VoiceOver las palabras o párrafos que necesites y utiliza Copiar. Al cerrar regresarás al mismo punto del libro.")
+                    Text("Selecciona el texto que necesites con VoiceOver. Después utiliza el botón Copiar texto seleccionado.")
                         .font(.footnote)
-                    NativeReaderSelectableText(text: latest.body, requestedOffset: readingOffset)
+                    NativeReaderSelectableText(
+                        text: latest.body,
+                        requestedOffset: readingOffset,
+                        selectedText: $selectedTextToCopy
+                    )
+                    Button("Copiar texto seleccionado") {
+                        guard !selectedTextToCopy.isEmpty else { return }
+                        UIPasteboard.general.string = selectedTextToCopy
+                        selectionCopyMessage = "Texto seleccionado copiado."
+                        UIAccessibility.post(notification: .announcement, argument: selectionCopyMessage)
+                    }
+                    .disabled(selectedTextToCopy.isEmpty)
+                    .buttonStyle(.borderedProminent)
+                    if !selectionCopyMessage.isEmpty {
+                        Text(selectionCopyMessage)
+                            .font(.footnote)
+                    }
                 }
                 .padding(.horizontal, 14)
                 .tifloScreenSurface()
                 .navigationTitle("Seleccionar y copiar texto")
                 .toolbar { Button("Cerrar") { showTextSelection = false } }
+                .onAppear {
+                    selectedTextToCopy = ""
+                    selectionCopyMessage = ""
+                }
             }
         }
         .sheet(isPresented: $showStructure) { structureSheetContent }

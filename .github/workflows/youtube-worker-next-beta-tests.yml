@@ -20,7 +20,7 @@ jobs:
           node-version: '22'
       - name: Instalar dependencias de pruebas
         working-directory: youtube-worker
-        run: npm ci --no-audit --no-fund
+        run: npm install --no-audit --no-fund
       - name: Probar búsqueda, permisos y cuentas con respuestas simuladas
         working-directory: youtube-worker
         run: npm test

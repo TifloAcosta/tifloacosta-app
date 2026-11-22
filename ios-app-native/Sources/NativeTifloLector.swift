@@ -3833,7 +3833,7 @@ struct NativeReadingScreen: View {
                     Button("Copiar texto seleccionado") {
                         guard !selectedTextToCopy.isEmpty else { return }
                         UIPasteboard.general.string = selectedTextToCopy
-                        selectionCopyMessage = "Texto seleccionado copiado."
+                        selectionCopyMessage = MusicLocalized.message("Texto seleccionado copiado.")
                         UIAccessibility.post(notification: .announcement, argument: selectionCopyMessage)
                     }
                     .disabled(selectedTextToCopy.isEmpty)

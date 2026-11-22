@@ -1084,3 +1084,25 @@
 "Página DAISY" = "Page DAISY";
 "Referencia DAISY" = "Référence DAISY";
 "Enlaces" = "Liens";
+
+// Multicines Accesibles: navegación y filtros.
+"Multicines Accesibles" = "Cinémas accessibles";
+"Explorar Multicines Accesibles" = "Explorer les cinémas accessibles";
+"Buscar plataformas y contenidos audiodescritos" = "Rechercher des plateformes et contenus en audiodescription";
+"Idioma de audiodescripción" = "Langue de l’audiodescription";
+"Tipo de contenido" = "Type de contenu";
+"Fuentes de audiodescripción" = "Sources d’audiodescription";
+"Español de España" = "Espagnol d’Espagne";
+"Español de Latinoamérica" = "Espagnol d’Amérique latine";
+"Todos los contenidos" = "Tous les contenus";
+"Películas" = "Films";
+"Series" = "Séries";
+"Documentales" = "Documentaires";
+"Cortometrajes" = "Courts métrages";
+"No hay fuentes para estos filtros" = "Aucune source ne correspond à ces filtres";
+"Prueba otro idioma o tipo de contenido." = "Essayez une autre langue ou un autre type de contenu.";
+"Fuente pendiente de conexión segura" = "Source en attente de connexion sécurisée";
+"Sobre el acceso" = "À propos de l’accès";
+"Filtra por nombre o descripción de la fuente." = "Filtrez par nom ou description de la source.";
+"Las plataformas muestran obras audiodescritas según su catálogo, país y permisos. Abrir la web oficial no significa que todas sus películas tengan audiodescripción." = "Les plateformes proposent des œuvres en audiodescription selon leur catalogue, leur pays et leurs droits. L’ouverture du site officiel ne garantit pas l’audiodescription de tous les films.";
+"Los títulos y el reproductor integrado de Audesc se incorporarán cuando se verifique el acceso público a los archivos y la autorización correspondiente." = "Les titres Audesc et la lecture intégrée seront ajoutés après vérification de l’accès public aux fichiers et des autorisations nécessaires.";

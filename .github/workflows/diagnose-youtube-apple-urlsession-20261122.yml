@@ -16,4 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Probar Origin y decodificación con URLSession real
-        run: swift ios-app-native/scripts/probe-youtube-native-urlsession.swift
+        run: |
+          swiftc -parse-as-library \
+            ios-app-native/scripts/probe-youtube-native-urlsession.swift \
+            -o "$RUNNER_TEMP/youtube-native-probe"
+          "$RUNNER_TEMP/youtube-native-probe"

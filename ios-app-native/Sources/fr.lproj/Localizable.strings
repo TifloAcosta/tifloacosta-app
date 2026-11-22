@@ -1116,3 +1116,10 @@
 "Selecciona el texto que necesites con VoiceOver. Después utiliza el botón Copiar texto seleccionado." = "Sélectionnez le texte souhaité avec VoiceOver, puis utilisez Copier le texte sélectionné.";
 "Copiar texto seleccionado" = "Copier le texte sélectionné";
 "Texto seleccionado copiado." = "Texte sélectionné copié.";
+
+"Carpeta completa desde Archivos" = "Dossier complet depuis Fichiers";
+"Preparando importación de carpeta." = "Préparation de l’importation du dossier.";
+"Importando %d de %d: %@" = "Importation de %d sur %d : %@";
+"Importación terminada. Documentos importados: %d. Omitidos: %d. Fallidos: %d." = "Importation terminée. Documents importés : %d. Ignorés : %d. Échecs : %d.";
+"No se pudo importar la carpeta: %@" = "Impossible d’importer le dossier : %@";
+"Importación de carpeta interrumpida." = "Importation du dossier interrompue.";

@@ -21,8 +21,9 @@ struct NativeReaderSelectableText: UIViewRepresentable {
 
     func updateUIView(_ view: UITextView, context: Context) {
         // A state refresh must not erase the range the user is selecting.
-        guard view.text != text else { return }
-        view.text = text
+        let accessibleText = NativeReaderHeadingDisplay.mask(in: text)
+        guard view.text != accessibleText else { return }
+        view.text = accessibleText
         let validOffset = max(0, min(text.count, requestedOffset))
         let utf16Offset = String(text.prefix(validOffset)).utf16.count
         view.selectedRange = NSRange(location: utf16Offset, length: 0)

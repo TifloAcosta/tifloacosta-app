@@ -2533,7 +2533,7 @@ struct NativeReadingScreen: View {
 
     /// Moving through DAISY headings never begins playback. Playing audio as a
     /// side effect competes with VoiceOver and can make navigation impossible.
-    private func jumpToDaisy(_ point: NativeDaisyNavigationPoint) {
+    private func jumpToDaisy(_ point: NativeDaisyNavigationPoint, announce: Bool = true) {
         guard tracks.indices.contains(point.track) else {
             actionMessage = MusicLocalized.message("La pista indicada no está disponible.")
             return
@@ -2553,10 +2553,13 @@ struct NativeReadingScreen: View {
         // One short announcement, no continuous speech or automatic focus jump.
         actionMessage = nil
         let heading = NativeReaderHeadingDisplay.title(point.title, limit: 90)
-        let message = MusicLocalized.format("Encabezado: %@. Pulsa Reproducir para escuchar.", heading)
-        Task { @MainActor in
-            await Task.yield()
-            UIAccessibility.post(notification: .announcement, argument: message)
+        if announce {
+            let message = MusicLocalized.format(
+                "Encabezado: %@. Pulsa Reproducir para escuchar.", heading)
+            Task { @MainActor in
+                await Task.yield()
+                UIAccessibility.post(notification: .announcement, argument: message)
+            }
         }
     }
 

@@ -25,7 +25,7 @@ test('options exclude absent chapters, headings and fake virtual pages', () => {
   const options = part('private var navigationOptions:', 'private var effectiveNavigationUnit:');
   assert.match(options, /if textLayout\.hasRealPages && textLayout\.namedPages\.count > 1/);
   assert.match(options, /if textLayout\.headingStarts\.count > 1/);
-  assert.match(options, /if textLayout\.chapterStarts\.count > 1 \|\| daisySections\.count > 1/);
+  assert.match(options, /if textLayout\.chapterStarts\.count > 1 \|\| daisyChapterPoints\.count > 1/);
   assert.match(options, /if textLayout\.paragraphStarts\.count > 2/);
   assert.match(options, /if textLayout\.sentenceStarts\.count > 2/);
   assert.match(source, /Modo anterior no disponible\. Modo de navegación:/);

@@ -702,14 +702,7 @@ final class NativeReadingSpeech: ObservableObject {
     // En la voz sustituimos solo esos marcadores por espacios del mismo tamaño:
     // así ningún cursor, marca o posición de lectura cambia.
     private static func textForSpeech(_ source: String) -> String {
-        var result = source
-        if let pattern = try? NSRegularExpression(pattern: #"(?m)^#{1,6}(?=[ \t])"#) {
-            for match in pattern.matches(in: source,
-                                         range: NSRange(source.startIndex..., in: source)).reversed() {
-                guard let range = Range(match.range, in: result) else { continue }
-                result.replaceSubrange(range, with: String(repeating: " ", count: match.range.length))
-            }
-        }
+        var result = NativeReaderHeadingDisplay.mask(in: source)
         // Keep original punctuation in EPUB/DAISY/braille. Some voices read
         // the opening mark aloud; for synthesized speech the closing ! still
         // signals the exclamation. Replace one character with one space so
@@ -1898,6 +1891,30 @@ struct NativeReaderLibraryScreen: View {
 
 /// Split long documents once at import-display time. Avoid putting a complete
 /// EPUB/Office/PDF body into a single enormous SwiftUI Text accessibility node.
+/// Heading markers are structural metadata. Replace them with equally long
+/// spaces in reading surfaces so VoiceOver never speaks "#" and all original
+/// character offsets (bookmarks, links, text selection) remain unchanged.
+enum NativeReaderHeadingDisplay {
+    static func mask(in source: String) -> String {
+        guard let regex = try? NSRegularExpression(
+            pattern: #"(?m)^[ \t]{0,3}#{1,6}(?=[ \t])"#) else { return source }
+        var result = source
+        let range = NSRange(source.startIndex..<source.endIndex, in: source)
+        for match in regex.matches(in: source, range: range).reversed() {
+            guard let part = Range(match.range, in: result) else { continue }
+            result.replaceSubrange(part, with: String(repeating: " ", count: match.range.length))
+        }
+        return result
+    }
+
+    static func title(_ source: String, limit: Int = 160) -> String {
+        let normalized = mask(in: source)
+            .replacingOccurrences(of: #"\s+"#, with: " ", options: .regularExpression)
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        return String(normalized.prefix(limit))
+    }
+}
+
 private struct NativeReaderNavigationPoint: Identifiable {
     let offset: Int
     let title: String
@@ -1956,7 +1973,7 @@ private struct NativeReaderTextLayout {
         sentenceStarts = Array(Set(sentences)).sorted()
 
         var pages: [Int] = [0]
-        var headings: [Int] = [0]
+        var headings: [Int] = []
         var chapters: [Int] = []
         var pageEntries: [NativeReaderNavigationPoint] = []
         var headingEntries: [NativeReaderNavigationPoint] = []
@@ -1973,7 +1990,7 @@ private struct NativeReaderTextLayout {
                 options: .regularExpression) != nil {
                 headings.append(lineOffset)
                 headingEntries.append(.init(offset: lineOffset,
-                    title: line.trimmingCharacters(in: .whitespaces)))
+                    title: NativeReaderHeadingDisplay.title(line)))
                 if normalized.range(of: #"^(capítulo\s+|capitulo\s+|#{1,2}\s+)"#,
                                     options: .regularExpression) != nil {
                     chapters.append(lineOffset)
@@ -1983,7 +2000,7 @@ private struct NativeReaderTextLayout {
         }
         // Sin marcas de página explícitas, los fragmentos hacen de páginas virtuales.
         pageStarts = Array(Set((pages.count > 1 ? pages : offsets) + [0, totalCharacters])).sorted()
-        headingStarts = headings.count > 1 ? Array(Set(headings)).sorted() : []
+        headingStarts = Array(Set(headings)).sorted()
         chapterStarts = Array(Set(chapters)).sorted()
         // Detect only URLs that remain visible in the extracted text. These
         // offsets share the same Character coordinate system as readingOffset.
@@ -2509,7 +2526,7 @@ struct NativeReadingScreen: View {
         showStructure = false
         // One short announcement, no continuous speech or automatic focus jump.
         actionMessage = nil
-        let heading = String(point.title.trimmingCharacters(in: .whitespacesAndNewlines).prefix(90))
+        let heading = NativeReaderHeadingDisplay.title(point.title, limit: 90)
         let message = MusicLocalized.format("Encabezado: %@. Pulsa Reproducir para escuchar.", heading)
         Task { @MainActor in
             await Task.yield()
@@ -2775,11 +2792,7 @@ struct NativeReadingScreen: View {
     // Quitar de las etiquetas de marcas los prefijos Markdown de EPUB.
     // Las posiciones y el documento original permanecen intactos.
     private func spokenBookmarkExcerpt(_ source: String) -> String {
-        source.replacingOccurrences(
-            of: #"^#{1,6}\s+"#,
-            with: "",
-            options: .regularExpression
-        )
+        NativeReaderHeadingDisplay.title(source, limit: 140)
     }
 
     // Resultados contextualizados a partir del texto original de la obra.
@@ -3308,12 +3321,9 @@ struct NativeReadingScreen: View {
     }
 
     private func visibleReaderFragment(at index: Int) -> String {
-        // The imported Markdown heading marks are structural metadata; do not
-        // expose a literal # to VoiceOver or a refreshable braille display.
-        textLayout.fragments[index].replacingOccurrences(
-            of: #"(?m)^#{1,6}(?=[ \t])"#,
-            with: "", options: .regularExpression
-        )
+        // Mask, rather than remove, heading markers. The offset of each
+        // accessible link must still match the original document.
+        NativeReaderHeadingDisplay.mask(in: textLayout.fragments[index])
     }
 
     /// Real hyperlinks inside text must be activatable with a VoiceOver double

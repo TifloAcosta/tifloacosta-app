@@ -13,7 +13,7 @@
         "ios-app-native/Sources/NativeScreens.swift",
         "ios-app-native/tests/resource-pills-year-order-20261122.test.mjs"
       ],
-      "validation": "iOS: Píldoras/Pills muestra años con documentos, orden descendente y dentro cada año ediciones recientes primero, conservando acciones de accesibilidad. Cambios en rama única, pendiente comprobar CI Xcode y VoiceOver. Web dispone de agrupación, Android sigue pendiente de verificación/implementación contra versión pública de Play."
+      "validation": "iOS: Píldoras/Pills muestra años con documentos, orden descendente y dentro cada año ediciones recientes primero, conservando acciones de accesibilidad. Cambios en rama única, CI Xcode y contratos completados con éxito en ejecución 45075795332; pendiente VoiceOver. Web dispone de agrupación, Android sigue pendiente de verificación/implementación contra versión pública de Play."
     },
     {
       "id": 2,
@@ -124,7 +124,17 @@
       "id": 14,
       "title": "Reproducción multimedia dentro de TifloAcosta",
       "status": "partial",
-      "issue": "#352"
+      "issue": "#352",
+      "evidence": [
+        "ios-app-native/Sources/NativeMusicPlayer.swift",
+        "ios-app-native/Sources/NativePodcasts.swift",
+        "ios-app-native/Sources/NativeAccessibleCinemaLibrary.swift",
+        "ios-app-native/Sources/NativeAccessibleCinema.swift",
+        "ios-app-native/Sources/NativeYouTubePlayer.swift",
+        "ios-app-native/Sources/NativeMedia.swift",
+        "ios-app-native/tests/unified-media-playback-coordination-20261122.test.mjs"
+      ],
+      "validation": "22-11-2026: se ha ampliado el arbitraje de audio a nueve propietarios (lector, música local, radio, Audius, Apple Music, Jamendo, pódcast, Multicines y YouTube), con pausa del anterior cuando otra fuente toma el control; Pódcast y Multicines incorporan controles externos de reproducción y metadatos; Multicines mantiene audio al navegar fuera de la pantalla y YouTube oficial integrado se pausa al reproducir otra fuente. Se preservan motores especializados (MusicKit, WebKit oficial, AVPlayer, AVAudioEngine). Falta CI definitivo tras estos commits, validación VoiceOver, controles universales visuales, continuidad/reanudación exacta y resolver los contenidos que exigen abrir fuentes externas. No considerar implementado completo ni distribuir."
     },
     {
       "id": 15,

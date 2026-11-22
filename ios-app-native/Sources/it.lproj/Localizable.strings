@@ -1058,3 +1058,9 @@
 "Ya existe una marca en esta posición." = "Esiste già un segnalibro in questa posizione.";
 "No se pudo crear la marca: documento no disponible." = "Impossibile creare il segnalibro: documento non disponibile.";
 "No se pudo guardar la marca. Inténtalo de nuevo." = "Impossibile salvare il segnalibro. Riprova.";
+"Abrir vídeo en la fuente original" = "Apri il video sul sito originale";
+"Reproducir vídeo en TifloAcosta" = "Riproduci il video in TifloAcosta";
+"Abrir episodio en la fuente original" = "Apri l’episodio sul sito originale";
+"Escuchar episodio en TifloAcosta" = "Ascolta l’episodio in TifloAcosta";
+"Escuchando en TifloAcosta: %@" = "In ascolto in TifloAcosta: %@";
+"Pódcast en reproducción: %@" = "Podcast in riproduzione: %@";

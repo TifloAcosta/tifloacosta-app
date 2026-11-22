@@ -1151,3 +1151,19 @@
 
 "Selecciona tus propios archivos de audio desde una nube conectada. Se importarán a tu colección personal con el idioma y el tipo elegidos arriba." = "Wähle deine eigenen Audiodateien aus einem verbundenen Cloud-Konto. Sie werden mit der oben ausgewählten Sprache und Inhaltsart in deine persönliche Sammlung importiert.";
 "Archivo incorporado: %@" = "Datei hinzugefügt: %@";
+
+// Diagnóstico detallado de YouTube y recuperación de búsquedas.
+"YouTube ha alcanzado temporalmente su límite de búsqueda." = "YouTube hat das Suchkontingent vorübergehend erreicht.";
+"El servicio de búsqueda de YouTube no está disponible." = "Die YouTube-Suche ist momentan nicht verfügbar.";
+"Demasiadas búsquedas consecutivas. Inténtalo nuevamente más tarde." = "Zu viele Suchanfragen hintereinander. Bitte später erneut versuchen.";
+"El servidor rechazó la solicitud de búsqueda de esta aplicación." = "Der Server hat die Suchanfrage dieser App abgelehnt.";
+"El servicio de YouTube devolvió un error al buscar." = "Der YouTube-Dienst hat einen Suchfehler zurückgegeben.";
+"El servicio de YouTube respondió, pero sus datos no pudieron interpretarse." = "YouTube hat geantwortet, aber die Daten konnten nicht gelesen werden.";
+"El iPhone no tiene una conexión disponible para buscar en YouTube." = "Dieses iPhone hat keine verfügbare Verbindung für die YouTube-Suche.";
+"El iPhone no encuentra el servidor de búsqueda de YouTube." = "Dieses iPhone kann den YouTube-Suchserver nicht finden.";
+"El servidor de búsqueda de YouTube no responde desde este dispositivo." = "Der YouTube-Suchserver antwortet von diesem Gerät aus nicht.";
+"No se pudo establecer una conexión segura con el buscador de YouTube." = "Eine sichere Verbindung zur YouTube-Suche konnte nicht hergestellt werden.";
+"Se produjo un error de comunicación con el buscador de YouTube." = "Bei der Kommunikation mit der YouTube-Suche ist ein Fehler aufgetreten.";
+"No fue posible procesar la búsqueda de YouTube en este momento." = "Die YouTube-Suche kann momentan nicht verarbeitet werden.";
+"Reintentar búsqueda" = "Suche erneut versuchen";
+"Buscar directamente en YouTube" = "Direkt auf YouTube suchen";

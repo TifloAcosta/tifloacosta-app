@@ -811,6 +811,9 @@ final class NativeReadingSpeech: ObservableObject {
                 max(AVSpeechUtteranceMinimumSpeechRate,
                     AVSpeechUtteranceDefaultSpeechRate * Float(speed)))
             utterance.pitchMultiplier = max(0.5, min(2, pitch))
+            // This volume is specific to the selected TifloLector voice.
+            // Never change the VoiceOver or hardware audio output volume.
+            utterance.volume = max(0, min(1, NativeReaderVoiceProfileStore.load(for: voiceIdentifier)?.volume ?? 1))
             utterance.voice = (voiceIdentifier.isEmpty ? nil :
                 AVSpeechSynthesisVoice(identifier: voiceIdentifier))
                 ?? AVSpeechSynthesisVoice(language: language)
@@ -982,6 +985,7 @@ final class NativeReadingSpeech: ObservableObject {
                 max(AVSpeechUtteranceMinimumSpeechRate,
                     AVSpeechUtteranceDefaultSpeechRate * Float(speed)))
             utterance.pitchMultiplier = max(0.5, min(2, pitch))
+            utterance.volume = max(0, min(1, NativeReaderVoiceProfileStore.load(for: voiceIdentifier)?.volume ?? 1))
             // El retardo se programa entre frases, sin saturar la cola de AVSpeechSynthesizer.
             utterance.postUtteranceDelay = 0
             let identifier = ObjectIdentifier(utterance)

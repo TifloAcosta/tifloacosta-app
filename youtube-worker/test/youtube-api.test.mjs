@@ -322,3 +322,17 @@ test('channel videos browse does not require entering a search phrase', async ()
   assert.match(firstURL, /order=date/);
   assert.doesNotMatch(firstURL, /q=/);
 });
+
+test('channel search preserves the search phrase while blank channel browsing remains unfiltered', async () => {
+  const channelId = 'UC' + 'c'.repeat(22);
+  let searchURL = '';
+  await searchVideos('api-key', '  braille accesible  ', '', async url => {
+    searchURL ||= String(url);
+    return jsonResponse({ items: [] });
+  }, { channelId });
+  const params = new URL(searchURL).searchParams;
+  assert.equal(params.get('channelId'), channelId);
+  assert.equal(params.get('q'), 'braille accesible');
+  assert.equal(params.get('type'), 'video');
+  assert.equal(params.get('order'), 'date');
+});

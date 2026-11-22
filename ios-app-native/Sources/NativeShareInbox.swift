@@ -106,7 +106,16 @@ final class NativeShareInbox: ObservableObject {
             )
             defer { try? FileManager.default.removeItem(at: temp) }
             let named = temp.appendingPathComponent(originalName)
-            try FileManager.default.copyItem(at: source, to: named)
+            // Sharing a large DAISY should not require another full-sized
+            // temporary copy when App Group and app storage share a volume.
+            // A hard link is safe here: the importer only reads this file,
+            // and the App Group source survives until a successful import.
+            do {
+                try FileManager.default.linkItem(at: source, to: named)
+            } catch {
+                // Cross-volume / unsupported links still import normally.
+                try FileManager.default.copyItem(at: source, to: named)
+            }
             try library.importDocuments(from: [named], sharingID: sharingID)
         case "text":
             try library.importSharedText(item.value ?? "", title: item.name,

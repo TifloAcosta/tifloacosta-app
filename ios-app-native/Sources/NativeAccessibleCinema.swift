@@ -143,6 +143,37 @@ private enum AccessibleCinemaDirectory {
     ]
 }
 
+/// Public collections explicitly described by their official publishers.
+/// A collection is not an individual film and is never presented as one.
+private struct AccessibleCinemaCollection: Identifiable {
+    let id: String
+    let title: String
+    let publisher: String
+    let language: AccessibleCinemaLanguage
+    let kind: AccessibleCinemaKind
+    let summary: String
+    let originalAddress: URL
+}
+
+private enum AccessibleCinemaCollections {
+    static let items: [AccessibleCinemaCollection] = [
+        .init(id: "foal-films",
+              title: "50 películas con audiodescripción",
+              publisher: "Fundación ONCE para América Latina (FOAL)",
+              language: .latino,
+              kind: .film,
+              summary: "Películas completas en formato MP3. La página oficial ofrece acceso a la carpeta de audio sin necesidad de descargar cada película.",
+              originalAddress: URL(string: "https://www.foal.es/es/recursos/ocio-en-audio")!),
+        .init(id: "foal-game-of-thrones",
+              title: "Juego de Tronos, ocho temporadas",
+              publisher: "Fundación ONCE para América Latina (FOAL)",
+              language: .latino,
+              kind: .series,
+              summary: "Serie completa, solo audio con audiodescripción. Enlace al catálogo publicado oficialmente por FOAL.",
+              originalAddress: URL(string: "https://www.foal.es/es/recursos/ocio-en-audio")!)
+    ]
+}
+
 struct NativeAccessibleCinemaScreen: View {
     @State private var searchText = ""
     @State private var languageIndex = 0
@@ -167,6 +198,16 @@ struct NativeAccessibleCinemaScreen: View {
         }
     }
 
+    private var featuredCollections: [AccessibleCinemaCollection] {
+        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        return AccessibleCinemaCollections.items.filter { item in
+            (selectedLanguage == .all || item.language == selectedLanguage)
+                && (selectedKind == .all || item.kind == selectedKind)
+                && (query.isEmpty || [item.title, item.publisher, item.summary]
+                    .contains(where: { $0.localizedStandardContains(query) }))
+        }
+    }
+
     var body: some View {
         List {
             Section("Explorar Multicines Accesibles") {
@@ -186,6 +227,28 @@ struct NativeAccessibleCinemaScreen: View {
                 )
             }
             .listRowBackground(TifloVisual.surfaceRaised)
+
+            if !featuredCollections.isEmpty {
+                Section("Colecciones de obras audiodescritas") {
+                    ForEach(featuredCollections) { item in
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text(item.title)
+                                .font(.headline)
+                                .accessibilityAddTraits(.isHeader)
+                            Text(item.publisher)
+                                .font(.subheadline.weight(.semibold))
+                            Text(item.summary)
+                                .font(.subheadline)
+                                .foregroundStyle(TifloVisual.secondaryText)
+                            Link("Explorar colección en la fuente original",
+                                 destination: item.originalAddress)
+                                .frame(minHeight: 44, alignment: .leading)
+                        }
+                        .accessibilityElement(children: .contain)
+                    }
+                }
+                .listRowBackground(TifloVisual.surfaceRaised)
+            }
 
             Section("Fuentes de audiodescripción") {
                 if filtered.isEmpty {

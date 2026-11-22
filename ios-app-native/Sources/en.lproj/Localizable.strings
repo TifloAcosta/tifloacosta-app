@@ -1169,3 +1169,20 @@
 "No fue posible procesar la búsqueda de YouTube en este momento." = "The YouTube search could not be processed right now.";
 "Reintentar búsqueda" = "Try search again";
 "Buscar directamente en YouTube" = "Search directly on YouTube";
+
+// Listas de reproducción de YouTube: búsqueda y reproducción ordenada.
+"Lista de reproducción de YouTube" = "YouTube playlist";
+"%@. Lista de reproducción de YouTube. Canal: %@" = "%@. YouTube playlist. Channel: %@";
+"Compartir lista" = "Share playlist";
+"Lista de reproducción" = "Playlist";
+"Abrir lista original en YouTube" = "Open original playlist on YouTube";
+"Vídeos en orden de la lista" = "Videos in playlist order";
+"Cargando lista de reproducción" = "Loading playlist";
+"Reintentar carga de la lista" = "Retry loading playlist";
+"Mostrar veinte vídeos más" = "Show twenty more videos";
+"Posición %d de la lista." = "Position %d in playlist.";
+"No hay vídeos públicos disponibles en esta lista." = "No public videos are available in this playlist.";
+"La respuesta de la lista de YouTube no pudo interpretarse." = "The YouTube playlist response could not be read.";
+"No se pudo cargar la lista de YouTube. Comprueba la conexión y vuelve a intentarlo." = "Could not load the YouTube playlist. Check your connection and try again.";
+"La lista no está disponible públicamente." = "This playlist is not publicly available.";
+"El servidor no pudo consultar esta lista de YouTube." = "The server could not retrieve this YouTube playlist.";

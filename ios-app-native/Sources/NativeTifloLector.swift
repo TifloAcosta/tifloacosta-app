@@ -2940,7 +2940,15 @@ struct NativeReadingScreen: View {
                 // The share sheet can fail or be dismissed. Persist the result
                 // first, preserving its original MP3/DAISY package for later.
                 let savedID = UUID()
-                let savedTitle = "\(title) - \(format == .mp3 ? "MP3" : "DAISY")"
+                let formatLabel: String
+                switch format {
+                case .mp3: formatLabel = "MP3"
+                case .m4a: formatLabel = "M4A"
+                case .wav: formatLabel = "WAV"
+                case .daisy: formatLabel = "DAISY 3"
+                case .daisyVoiceDream: formatLabel = "DAISY 2.02 audio"
+                }
+                let savedTitle = "\(title) - \(formatLabel)"
                 try library.importDocuments(from: [url], sharingID: savedID,
                                             preferredTitle: savedTitle)
                 guard let stored = library.documents.first(where: { $0.id == savedID }),
@@ -2973,7 +2981,11 @@ struct NativeReadingScreen: View {
                             set: { audioExportFormat = NativeGeminiAudioExport.Format.allCases[$0] }
                         ))
                 }
-                if audioExportFormat == .daisy {
+                if audioExportFormat == .daisyVoiceDream {
+                    Text("DAISY 2.02 de audio: conserva la voz grabada y permite la navegación por capítulos. No incluye el texto sincronizado.")
+                        .font(.footnote)
+                }
+                if audioExportFormat == .daisy || audioExportFormat == .daisyVoiceDream {
                     Section("Idioma del libro DAISY") {
                         NativeAdjustableChoice(
                             title: "Idioma del contenido",

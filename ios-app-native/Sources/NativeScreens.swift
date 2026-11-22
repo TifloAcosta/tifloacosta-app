@@ -8,6 +8,7 @@ private enum NativeDestination: String, CaseIterable, Hashable, Identifiable {
     case recursos = "Recursos"
     case tifloLector = "TifloLector"
     case miMusica = "Mi Música"
+    case multicines = "Multicines Accesibles"
     case recibidos = "Recibidos"
     case novedades = "Novedades"
     case descargas = "Descargar desde un enlace"
@@ -340,6 +341,7 @@ struct NativeHomeScreen: View {
                 case .recursos: NativeResourcesScreen()
                 case .tifloLector: NativeReaderLibraryScreen()
                 case .miMusica: NativeMyMusicScreen()
+                case .multicines: NativeAccessibleCinemaScreen()
                 case .recibidos: NativeInboxScreen()
                 case .novedades: NativeUpdatesScreen()
                 case .descargas: NativeDownloadsScreen()

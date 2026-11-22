@@ -739,10 +739,10 @@ private struct NativeYouTubeSearchScreen: View {
     @State private var commentingOnVideo: NativeYouTubeVideo?
 
     private let searchFilters = [
-        "Todos", "Vídeos", "Canales", "Vídeos cortos, menos de cuatro minutos",
-        "En directo", "Con subtítulos"
+        "Todos", "Vídeos", "Canales", "Listas de reproducción",
+        "Vídeos cortos, menos de cuatro minutos", "En directo", "Con subtítulos"
     ]
-    private let filterValues = ["all", "video", "channel", "short", "live", "captions"]
+    private let filterValues = ["all", "video", "channel", "playlist", "short", "live", "captions"]
 
     private func search(loadMore: Bool = false) {
         let filter = filterValues[filterIndex]
@@ -810,6 +810,27 @@ private struct NativeYouTubeSearchScreen: View {
                         .accessibilityAction(named: Text(personalVideos.isFollowing(channel.id)
                             ? "Dejar de seguir canal" : "Seguir canal sin cuenta Google")) {
                             personalVideos.toggleFollowed(channel)
+                        }
+                    }
+                    ForEach(youtubeSearch.playlists) { playlist in
+                        NavigationLink {
+                            NativeYouTubePlaylistScreen(playlist: playlist)
+                        } label: {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(playlist.title).font(.headline)
+                                Text("Lista de reproducción de YouTube")
+                                    .font(.subheadline)
+                                    .foregroundStyle(TifloVisual.secondaryText)
+                                Text(playlist.channelTitle)
+                                    .font(.footnote)
+                            }
+                        }
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel(MusicLocalized.format(
+                            "%@. Lista de reproducción de YouTube. Canal: %@",
+                            playlist.title, playlist.channelTitle))
+                        .accessibilityAction(named: Text("Compartir lista")) {
+                            NativeShare.present(url: playlist.url)
                         }
                     }
                     ForEach(youtubeSearch.videos) { video in
@@ -1190,7 +1211,7 @@ private struct NativeYouTubeThumbnail: View {
     }
 }
 
-private struct NativeYouTubeVideoRow: View {
+struct NativeYouTubeVideoRow: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     let video: NativeYouTubeVideo
     let onPlay: (NativeYouTubeVideo) -> Void
@@ -1247,7 +1268,7 @@ private struct NativeYouTubeVideoRow: View {
     }
 }
 
-private struct NativeYouTubeCommentScreen: View {
+struct NativeYouTubeCommentScreen: View {
     @EnvironmentObject private var account: NativeYouTubeAccountStore
     @Environment(\.dismiss) private var dismiss
     let video: NativeYouTubeVideo

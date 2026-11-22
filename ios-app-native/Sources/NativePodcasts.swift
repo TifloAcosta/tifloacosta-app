@@ -193,12 +193,12 @@ struct NativePodcastScreen: View {
     ]
 
     @EnvironmentObject private var store: NativePodcastStore
-    @StateObject private var player = NativePodcastPlayer()
+    @EnvironmentObject private var player: NativePodcastPlayer
     @State private var visible = 10
     @AppStorage("native-podcast-continuous-playback") private var continuousPlayback = false
     @State private var lastProgressSaved = 0.0
-    @StateObject private var library = NativePodcastLibrary()
-    @StateObject private var downloads = NativePodcastDownloads()
+    @EnvironmentObject private var library: NativePodcastLibrary
+    @EnvironmentObject private var downloads: NativePodcastDownloads
     @State private var choosingOPML = false
     @State private var importingOPML = false
     @State private var followedEpisodes: [NativePodcastEpisode] = []
@@ -461,8 +461,8 @@ struct NativePodcastScreen: View {
             }
         }
         .onDisappear {
+            // Audio continues while the user browses another TifloAcosta section.
             saveCurrentPosition()
-            player.stop()
         }
         .fileImporter(isPresented: $choosingOPML,
                       allowedContentTypes: [.xml, UTType(filenameExtension: "opml") ?? .xml],

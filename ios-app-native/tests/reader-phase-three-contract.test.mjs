@@ -30,5 +30,6 @@ test('Índice por estructura y bloques correctamente diferenciados', () => {
     assert.match(r, /namedHeadings/);
     assert.match(r, /hasRealPages/);
     assert.match(r, /jump\(to: point\.offset\)/);
-    assert.match(f, /<h\[1-6\]/);
+    assert.match(f, /for level in 1\.\.\.6/);
+    assert.match(f, /String\(repeating: "#", count: level\)/);
 });

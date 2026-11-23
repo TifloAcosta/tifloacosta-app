@@ -1552,6 +1552,8 @@ struct NativeReaderLibraryScreen: View {
     @State private var shortcutMessage: String?
 
     @AppStorage("native-reading-folder-filter") private var selectedFolder = ""
+    // Stored on-device, rather than resetting folder navigation on reentry.
+    @AppStorage("native-reading-folder-entry-mode") private var folderEntryMode = 0
     @AppStorage("native-reading-filter") private var filterIndex = 0
     @AppStorage("native-reading-sort") private var sortIndex = 0
     @AppStorage("native-reading-speed-index") private var speedIndex = 2
@@ -1941,6 +1943,11 @@ struct NativeReaderLibraryScreen: View {
                 )
             }
             Section("Carpetas") {
+                NativeAdjustableChoice(
+                    title: "Vista al entrar en TifloLector",
+                    choices: ["Vista general", "Carpetas"],
+                    selectedIndex: $folderEntryMode
+                )
                 Button("Ver por carpetas") { showFolderPicker = true }
                     .accessibilityHint("Abre una pantalla de carpetas; la biblioteca general conserva todos sus documentos.")
             }
@@ -1962,7 +1969,14 @@ struct NativeReaderLibraryScreen: View {
         }
         .tifloScreenSurface()
         .navigationTitle("TifloLector")
-        .onAppear { resumeRequestedBook() }
+        .onAppear {
+            // A one-shot Resume Last Book shortcut takes precedence over the
+            // saved folder landing page, avoiding two simultaneous sheets.
+            let resumeShortcut = UserDefaults.standard.bool(
+                forKey: "native-ios-resume-last-book-shortcut-v1")
+            if folderEntryMode == 1 && !resumeShortcut { showFolderPicker = true }
+            resumeRequestedBook()
+        }
         .onDisappear { speech.stop() }
         .confirmationDialog("Importar", isPresented: $importSourcesPresented,
                             titleVisibility: .visible) {
@@ -2215,12 +2229,13 @@ struct NativeReaderLibraryScreen: View {
             }
             Button("Cancelar", role: .cancel) { folderForDocument = nil }
         }
-        .confirmationDialog("Eliminar carpeta",
-                            isPresented: Binding(
-                                get: { folderToDelete != nil },
-                                set: { if !$0 { folderToDelete = nil } }),
-                            titleVisibility: .visible) {
-            Button("Eliminar la carpeta, conservar las obras", role: .destructive) {
+        .confirmationDialog(
+            MusicLocalized.format("¿Eliminar la carpeta «%@»?", folderToDelete ?? ""),
+            isPresented: Binding(
+                get: { folderToDelete != nil },
+                set: { if !$0 { folderToDelete = nil } }),
+            titleVisibility: .visible) {
+            Button("Eliminar carpeta", role: .destructive) {
                 if let folder = folderToDelete {
                     library.deleteFolder(folder)
                     if selectedFolder == folder { selectedFolder = "" }
@@ -2228,6 +2243,8 @@ struct NativeReaderLibraryScreen: View {
                 folderToDelete = nil
             }
             Button("Cancelar", role: .cancel) { folderToDelete = nil }
+        } message: {
+            Text("Las obras de esta carpeta se conservarán en la biblioteca.")
         }
         .sheet(item: $documentToConfigure) { doc in
             NativeReaderDocumentSettingsScreen(document: doc)
@@ -3860,8 +3877,13 @@ struct NativeReadingScreen: View {
             }
             // Announce the reached unit, not the unrelated reading percentage.
             .accessibilityValue(navigationAccessibilityValue)
-            .accessibilityHint("Desliza arriba o abajo para navegar por el modo elegido.")
+            .accessibilityHint(speech.isPlaying
+                ? "Desliza arriba o abajo para navegar por el modo elegido."
+                : "La navegación con gestos solo está disponible mientras se reproduce.")
             .accessibilityAdjustableAction { direction in
+                // Flicks over Reproducir may be accidental. Only navigate
+                // while the button reads Pausar and audio is playing.
+                guard speech.isPlaying else { return }
                 switch direction {
                 case .increment: moveUnit(1)
                 case .decrement: moveUnit(-1)

@@ -220,6 +220,34 @@ final class NativeReaderLibrary: ObservableObject {
             imported: imported, skipped: skipped, failed: failures)
     }
 
+    /// Import a selection of files one by one. A damaged file must not
+    /// discard the other documents in the selection. Report counts, not
+    /// guessed percentages; keep security-scoped access inside each import.
+    func importSelectedFiles(from urls: [URL],
+                             onProgress: @escaping (String) -> Void) async throws
+                             -> NativeReaderFolderImportSummary {
+        guard urls.count <= 750 else {
+            throw NativeReaderFormatError.unsupported(
+                "Selección con más de 750 archivos: divide la importación")
+        }
+        var imported = 0
+        var failures: [String] = []
+        for (index, url) in urls.enumerated() {
+            if Task.isCancelled { throw CancellationError() }
+            onProgress(MusicLocalized.format("Importando %d de %d: %@",
+                                            index + 1, urls.count, url.lastPathComponent))
+            await Task.yield()
+            do {
+                try importDocuments(from: [url])
+                imported += 1
+            } catch {
+                failures.append(url.lastPathComponent + ": " + error.localizedDescription)
+            }
+        }
+        return NativeReaderFolderImportSummary(imported: imported, skipped: 0,
+                                               failed: failures)
+    }
+
     func importSharedText(_ text: String, title: String, sharingID: UUID? = nil) throws {
         guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             throw NativeReaderImportError.noReadableText(title)
@@ -1291,6 +1319,8 @@ struct NativeReaderLibraryScreen: View {
     @State private var importFolderPresented = false
     @State private var importingFolder = false
     @State private var importFolderStatus = ""
+    @State private var importingFiles = false
+    @State private var importFilesStatus = ""
     @State private var restorePresented = false
     @State private var restoreResult: String?
     @State private var importSourcesPresented = false
@@ -1537,6 +1567,13 @@ struct NativeReaderLibraryScreen: View {
                         .accessibilityLabel(importFolderStatus)
                 }
             }
+            if !importFilesStatus.isEmpty {
+                Section {
+                    Text(importFilesStatus)
+                        .font(.footnote)
+                        .accessibilityLabel(importFilesStatus)
+                }
+            }
             if let shortcutMessage {
                 Section {
                     Text(shortcutMessage).font(.footnote)
@@ -1761,8 +1798,29 @@ struct NativeReaderLibraryScreen: View {
         ) { result in
             switch result {
             case .success(let urls):
-                do { try library.importDocuments(from: urls) }
-                catch { importError = error.localizedDescription }
+                guard !urls.isEmpty, !importingFiles else { return }
+                importingFiles = true
+                importFilesStatus = MusicLocalized.message("Preparando importación de archivos.")
+                UIAccessibility.post(notification: .announcement, argument: importFilesStatus)
+                Task { @MainActor in
+                    defer { importingFiles = false }
+                    do {
+                        let summary = try await library.importSelectedFiles(from: urls) { message in
+                            importFilesStatus = message
+                        }
+                        importFilesStatus = MusicLocalized.format(
+                            "Importación terminada. Documentos importados: %d. Omitidos: %d. Fallidos: %d.",
+                            summary.imported, summary.skipped, summary.failed.count)
+                        if !summary.failed.isEmpty {
+                            importError = summary.failed.prefix(6).joined(separator: "\n")
+                        }
+                    } catch {
+                        importError = MusicLocalized.format(
+                            "No se pudieron importar los archivos: %@", error.localizedDescription)
+                        importFilesStatus = MusicLocalized.message("Importación de archivos interrumpida.")
+                    }
+                    UIAccessibility.post(notification: .announcement, argument: importFilesStatus)
+                }
             case .failure(let error):
                 importError = error.localizedDescription
             }

@@ -349,8 +349,19 @@ final class NativeReaderLibrary: ObservableObject {
         return (urls, textFallbackCount)
     }
 
-    /// Exporta todas las pistas de una obra sin confundir un ZIP de audio con DAISY.
+    /// Exporta todas las pistas sin confundir un ZIP de audio con DAISY.
     func exportAudioTracks(_ document: NativeReadingDocument) throws -> URL {
+        try exportAudioTracks(document, mp3OnlyForVoiceDream: false)
+    }
+
+    /// Reutiliza MP3 ya importados o sintetizados: ninguna llamada a TTS.
+    /// Solo admite pistas MP3 para no presentar otros códecs como compatibles.
+    func exportVoiceDreamMP3(_ document: NativeReadingDocument) throws -> URL {
+        try exportAudioTracks(document, mp3OnlyForVoiceDream: true)
+    }
+
+    private func exportAudioTracks(_ document: NativeReadingDocument,
+                                   mp3OnlyForVoiceDream: Bool) throws -> URL {
         let current = latest(document)
         guard let paths = current.trackPaths, !paths.isEmpty else {
             throw NativeReaderFormatError.invalidArchive
@@ -367,10 +378,13 @@ final class NativeReaderLibrary: ObservableObject {
                 throw NativeReaderFormatError.invalidArchive
             }
             let ext = source.pathExtension.lowercased()
-            guard ["mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff", "caf", "flac"].contains(ext) else {
-                throw NativeReaderFormatError.invalidArchive
-            }
-            let filename = String(format: "Pista-%04d", index + 1) + "." + ext
+            let accepted = mp3OnlyForVoiceDream
+                ? ext == "mp3"
+                : ["mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff", "caf", "flac"].contains(ext)
+            guard accepted else { throw NativeReaderFormatError.invalidArchive }
+            let filename = mp3OnlyForVoiceDream
+                ? String(format: "%04d.mp3", index + 1)
+                : String(format: "Pista-%04d", index + 1) + "." + ext
             try manager.copyItem(at: source, to: staging.appendingPathComponent(filename))
         }
 
@@ -380,7 +394,8 @@ final class NativeReaderLibrary: ObservableObject {
         let safeTitle = title.isEmpty ? "Audio" : title
         let outputDirectory = temp.appendingPathComponent(UUID().uuidString, isDirectory: true)
         try manager.createDirectory(at: outputDirectory, withIntermediateDirectories: true)
-        let output = outputDirectory.appendingPathComponent(safeTitle + "-pistas.zip")
+        let suffix = mp3OnlyForVoiceDream ? " Voice Dream MP3.zip" : "-pistas.zip"
+        let output = outputDirectory.appendingPathComponent(safeTitle + suffix)
         try manager.zipItem(at: staging, to: output, shouldKeepParent: false)
         return output
     }
@@ -3485,6 +3500,7 @@ struct NativeReadingScreen: View {
                 case .wav: formatLabel = "WAV"
                 case .daisy: formatLabel = "DAISY 3"
                 case .daisyVoiceDream: formatLabel = "DAISY 2.02 audio"
+                case .voiceDreamMP3Zip: formatLabel = "Voice Dream MP3 ZIP"
                 }
                 let savedTitle = "\(title) - \(formatLabel)"
                 try library.importDocuments(from: [url], sharingID: savedID,
@@ -3521,6 +3537,10 @@ struct NativeReadingScreen: View {
                 }
                 if audioExportFormat == .daisyVoiceDream {
                     Text("DAISY 2.02 de audio: conserva la voz grabada y permite la navegación por capítulos. No incluye el texto sincronizado.")
+                        .font(.footnote)
+                }
+                if audioExportFormat == .voiceDreamMP3Zip {
+                    Text("ZIP de MP3 numerados: conserva la voz sintetizada en esta conversión, sin incluir texto ni estructura DAISY. La compatibilidad con Voice Dream requiere prueba en el dispositivo.")
                         .font(.footnote)
                 }
                 if audioExportFormat == .daisy || audioExportFormat == .daisyVoiceDream {
@@ -4011,6 +4031,20 @@ struct NativeReadingScreen: View {
             }
             if #available(iOS 18.0, *) {
                 Button("Traducir fragmento actual") { showTranslation = true }
+            }
+        }
+        // Repackage existing MP3 without generating or re-encoding audio.
+        // The original DAISY (if any) stays accessible via its own action.
+        if !tracks.isEmpty && tracks.allSatisfy({
+            NativeReaderFormats.storedURL(for: $0)?.pathExtension.lowercased() == "mp3"
+        }) {
+            Button("Audiolibro para Voice Dream (ZIP de MP3)") {
+                do {
+                    NativeShare.present(url: try library.exportVoiceDreamMP3(document))
+                } catch {
+                    actionMessage = MusicLocalized.format(
+                        "No se pudo exportar el ZIP de MP3: %@", error.localizedDescription)
+                }
             }
         }
         // Extract audio without recoding it. A single-track DAISY also gets

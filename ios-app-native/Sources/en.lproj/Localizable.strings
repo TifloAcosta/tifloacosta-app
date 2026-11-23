@@ -1191,3 +1191,6 @@
 "Preparando importación de archivos." = "Preparing file import.";
 "No se pudieron importar los archivos: %@" = "Could not import the files: %@";
 "Importación de archivos interrumpida." = "File import interrupted.";
+
+// Resultado accesible de lotes recibidos desde Compartir.
+"Documentos recibidos importados: %d. Fallidos: %d." = "Shared documents imported: %d. Failed: %d.";

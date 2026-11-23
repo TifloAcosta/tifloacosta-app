@@ -246,7 +246,7 @@ enum NativeGeminiDaisyExport {
         if mp3AudiobookZip {
             return try packageMP3Audiobook(
                 working: working, title: title,
-                clips: audioOnlyChapters.flatMap(\.clips).map(\.file))
+                clips: audioOnlyChapters.flatMap { $0.clips }.map { $0.file })
         }
         if audioOnly202 {
             return try packageAudioOnly202(

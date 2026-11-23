@@ -80,6 +80,70 @@ struct DaisyAudioOrderSmoke {
         precondition(d3 == ["tracks/z.mp3", "tracks/a.mp3"],
                      "NCX order incorrect: \(d3)")
 
+        // One SMIL file may contain several subsections. The NCC can order
+        // those subsections differently from their XML source positions.
+        try write("inside/ncc.html", """
+        <html><body>
+          <h1><a href="book.smil#second">Segundo</a></h1>
+          <h1><a href="book.smil#first">Primero</a></h1>
+        </body></html>
+        """)
+        try write("inside/book.smil", """
+        <smil><body>
+          <seq id="first">
+            <par id="first-a"><audio src="one.mp3" clipBegin="0s" clipEnd="3s"/></par>
+            <par id="first-b"><audio src="one.mp3" clipBegin="3s" clipEnd="5s"/></par>
+          </seq>
+          <seq id="second">
+            <par id="second-a"><audio src="two.mp3" clipBegin="7s" clipEnd="9s"/></par>
+          </seq>
+        </body></smil>
+        """)
+        let insidePaths = ["ncc.html", "book.smil", "one.mp3", "two.mp3"]
+        let insideRoot = root.appendingPathComponent("inside")
+        let insideAudio = NativeDaisyAudioOrder.orderedAudioFiles(
+            in: insideRoot, packagePaths: insidePaths,
+            audioPaths: ["one.mp3", "two.mp3"])
+        precondition(insideAudio == ["two.mp3", "one.mp3"],
+                     "NCC fragment order within a SMIL was ignored: \(insideAudio)")
+        let insideClips = NativeDaisyAudioOrder.orderedClips(
+            in: insideRoot, packagePaths: insidePaths, audioPaths: insideAudio)
+        precondition(insideClips.count == 3, "Repeated SMIL intervals were lost")
+        precondition(insideClips[0].track == 0 && insideClips[0].begin == 7
+                     && insideClips[0].end == 9, "Second NCC section must play first")
+        precondition(insideClips[1].track == 1 && insideClips[1].begin == 0
+                     && insideClips[1].end == 3, "First NCC section was skipped")
+        precondition(insideClips[2].track == 1 && insideClips[2].begin == 3
+                     && insideClips[2].end == 5, "Nested seq/par order was not preserved")
+
+        // DAISY 3 NCX has the same within-file requirement.
+        try write("inside3/book.ncx", """
+        <ncx><navMap>
+          <navPoint id="second"><navLabel><text>Segundo</text></navLabel>
+            <content src="book.smil#second"/></navPoint>
+          <navPoint id="first"><navLabel><text>Primero</text></navLabel>
+            <content src="book.smil#first"/></navPoint>
+        </navMap></ncx>
+        """)
+        try write("inside3/book.smil", """
+        <smil><body>
+          <par id="first"><audio src="one.mp3" clipBegin="0s" clipEnd="3s"/></par>
+          <par id="second"><audio src="two.mp3" clipBegin="7s" clipEnd="9s"/></par>
+        </body></smil>
+        """)
+        let inside3Root = root.appendingPathComponent("inside3")
+        let inside3Paths = ["book.ncx", "book.smil", "one.mp3", "two.mp3"]
+        let inside3Audio = NativeDaisyAudioOrder.orderedAudioFiles(
+            in: inside3Root, packagePaths: inside3Paths,
+            audioPaths: ["one.mp3", "two.mp3"])
+        precondition(inside3Audio == ["two.mp3", "one.mp3"],
+                     "NCX section order within a SMIL was ignored")
+        let inside3Clips = NativeDaisyAudioOrder.orderedClips(
+            in: inside3Root, packagePaths: inside3Paths, audioPaths: inside3Audio)
+        precondition(inside3Clips.count == 2 && inside3Clips[0].track == 0
+                     && inside3Clips[1].track == 1,
+                     "NCX chapter navigation within one SMIL is incorrect")
+
         // An ordinary archive without SMIL retains its original natural order.
         let plain = NativeDaisyAudioOrder.orderedAudioFiles(
             in: root, packagePaths: audio, audioPaths: audio)
@@ -95,6 +159,6 @@ struct DaisyAudioOrderSmoke {
         precondition(ambiguous == ambiguousAudio,
                      "Ambiguous audio filename was incorrectly resolved")
 
-        print("DAISY NCC/NCX/SMIL audio order and repeated clips: five Swift checks passed.")
+        print("DAISY NCC/NCX/SMIL clips and intra-file order: seven Swift checks passed.")
     }
 }

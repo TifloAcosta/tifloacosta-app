@@ -163,6 +163,9 @@ final class NativePhononPreview: ObservableObject {
                 try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
                 try AVAudioSession.sharedInstance().setActive(true)
                 player = try AVAudioPlayer(data: sound)
+                // Phonon preview follows the same per-voice gain as the reader.
+                player?.volume = NativeReaderGeneratedVoiceVolume.gain(
+                    engine: 2, voice: voice)
                 player?.prepareToPlay()
                 playing = player?.play() ?? false
                 message = playing ? "Reproduciendo muestra Phonon." :

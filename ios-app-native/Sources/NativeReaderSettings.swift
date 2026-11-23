@@ -327,6 +327,34 @@ struct NativeReaderPunctuationControls: View {
     }
 }
 
+/// VoiceOver-adjustable output level of one generated voice only.
+struct NativeReaderGeneratedVoiceVolumeControls: View {
+    let engine: Int
+    let voice: String
+    @State private var level = 20
+
+    private func reload() {
+        level = NativeReaderGeneratedVoiceVolume.level(engine: engine, voice: voice)
+    }
+
+    var body: some View {
+        NativeAdjustableChoice(title: "Volumen de esta voz",
+            choices: (0...20).map { MusicLocalized.format("%d por ciento", $0 * 5) },
+            selectedIndex: Binding(
+                get: { level },
+                set: { value in
+                    let adjusted = max(0, min(20, value))
+                    level = adjusted
+                    NativeReaderGeneratedVoiceVolume.setLevel(
+                        adjusted, engine: engine, voice: voice)
+                }
+            ))
+        .onAppear { reload() }
+        .onChange(of: voice) { _, _ in reload() }
+        .onChange(of: engine) { _, _ in reload() }
+    }
+}
+
 /// Reusable VoiceOver-adjustable controls. A document can supply independent
 /// bindings; the general settings keep using the existing AppStorage keys.
 struct NativeReaderAudioControls: View {
@@ -370,6 +398,7 @@ struct NativeReaderAudioControls: View {
         return availableEngines.contains(where: { $0.id == saved }) ? saved : 0
     }
     private var chosenGeminiVoice: String { geminiVoiceSelection?.wrappedValue ?? geminiVoice }
+    private var chosenPhononVoice: String { phononVoiceSelection?.wrappedValue ?? phononVoice }
     private var availableEngines: [(id: Int, title: String)] {
         var engines: [(id: Int, title: String)] = [(0, "Voces del sistema")]
         if geminiValidated && NativeVoiceCredentialStore.hasKey("gemini") {
@@ -462,6 +491,11 @@ struct NativeReaderAudioControls: View {
             if !NativePhononRuntime.isUsable {
                 Text("Configura Phonon en Motores externos antes de utilizarlo.")
             }
+        }
+        if chosenEngine == 1 || chosenEngine == 2 {
+            NativeReaderGeneratedVoiceVolumeControls(
+                engine: chosenEngine,
+                voice: chosenEngine == 1 ? chosenGeminiVoice : chosenPhononVoice)
         }
         if chosenEngine == 0 {
         if speedSelection != nil || pitchSelection != nil {

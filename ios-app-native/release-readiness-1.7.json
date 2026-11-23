@@ -56,11 +56,14 @@
       "title": "Volumen individual por voz sin alterar VoiceOver",
       "status": "partial",
       "issue": "#353",
-      "validation": "En código: volumen individual persistente para cada voz del sistema, con selección accesible 0–100%, aplicación a previsualización y lectura sin alterar VoiceOver; falta validar en iPhone y comprobar motores externos Gemini/Phonon.",
+      "validation": "En código: volumen individual persistente para cada voz del sistema, con selección accesible 0–100%, aplicación a previsualización y lectura sin alterar VoiceOver; falta validar en iPhone y comprobar motores externos Gemini/Phonon. 23-11-2026: añadido control VoiceOver de volumen 0–100% para Gemini y Phonon, independiente por motor y voz (claves de ajustes distintas), aplicado a AVAudioPlayer generado y a muestra Phonon; actualización de volumen durante reproducción sin tocar el volumen de sistema o VoiceOver. Pruebas con ejecución Swift y contratos añadidas; validación CI final pendiente y prueba física de motores externos en iPhone pendiente.",
       "evidence": [
         "ios-app-native/Sources/NativeReaderSettings.swift",
         "ios-app-native/Sources/NativeTifloLector.swift",
-        "ios-app-native/tests/reader-per-voice-volume-20261122.test.mjs"
+        "ios-app-native/tests/reader-per-voice-volume-20261122.test.mjs",
+        "ios-app-native/Sources/NativeReaderGeneratedVoiceVolume.swift",
+        "ios-app-native/tests/reader-generated-voice-volume-smoke.swift",
+        "ios-app-native/tests/reader-external-volume-20261123.test.mjs"
       ]
     },
     {

@@ -1190,6 +1190,10 @@ final class NativeReadingSpeech: ObservableObject {
                 try AVAudioSession.sharedInstance().setActive(true)
                 let audio = try AVAudioPlayer(data: data)
                 audio.delegate = self.audioDelegate
+                // Set the selected generated voice's gain only. Do not
+                // change system output or VoiceOver, including via Bluetooth.
+                audio.volume = NativeReaderGeneratedVoiceVolume.gain(
+                    engine: self.isPhonon ? 2 : 1, voice: self.geminiVoice)
                 audio.prepareToPlay()
                 guard audio.play() else { throw NativeGeminiSpeech.Error.unavailable }
                 self.player = audio
@@ -1202,6 +1206,12 @@ final class NativeReadingSpeech: ObservableObject {
                 self.stop()
             }
         }
+    }
+
+    func updateLiveGeneratedVolume() {
+        guard isGeneratedSpeech, let player else { return }
+        player.volume = NativeReaderGeneratedVoiceVolume.gain(
+            engine: isPhonon ? 2 : 1, voice: geminiVoice)
     }
 
     private func startAudio(_ url: URL, speed: Double, at percent: Int,
@@ -2914,6 +2924,7 @@ struct NativeReadingScreen: View {
         speech.updateLiveSystemSettings(
             speed: speed, pitch: pitch, voiceIdentifier: effectiveVoiceID,
             language: AVSpeechSynthesisVoice(identifier: effectiveVoiceID)?.language ?? "es-ES")
+        speech.updateLiveGeneratedVolume()
     }
 
     private func applySleepTimer(reset: Bool = false) {

@@ -62,6 +62,13 @@ jobs:
             ios-app-native/tests/reader-progress-smoke.swift \
             -o "$RUNNER_TEMP/reader-progress-check"
           "$RUNNER_TEMP/reader-progress-check"
+      - name: Probar volumen independiente de Gemini y Phonon con Swift real
+        run: |
+          set -euo pipefail
+          swiftc ios-app-native/Sources/NativeReaderGeneratedVoiceVolume.swift \
+            ios-app-native/tests/reader-generated-voice-volume-smoke.swift \
+            -o "$RUNNER_TEMP/reader-generated-volume-check"
+          "$RUNNER_TEMP/reader-generated-volume-check"
       - name: Crear el proyecto nativo con XcodeGen
         run: |
           brew install xcodegen

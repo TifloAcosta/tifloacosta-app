@@ -78,3 +78,12 @@ test('personal cinema activates its own background audio session before taking c
   assert.match(open, /NativeRemotePlaybackOwner\.onInterrupted\(\.cinema\)/);
   assert.doesNotMatch(open, /outputVolume|MPVolumeView/);
 });
+
+test('YouTube teardown does not overwrite a new playback owner audio session', () => {
+  assert.match(youtube, /private var ownerAtConfiguration: NativeRemotePlaybackOwner\.Destination\?/);
+  assert.match(youtube, /ownerAtConfiguration = NativeRemotePlaybackOwner\.current/);
+  assert.match(youtube, /let owner = NativeRemotePlaybackOwner\.current/);
+  assert.match(youtube, /if let owner, owner != \.youtube, owner != ownerAtConfiguration \{/);
+  assert.match(youtube, /previousAudio = nil[\s\S]{0,70}ownerAtConfiguration = nil[\s\S]{0,70}return/);
+  assert.match(youtube, /static func dismantleUIView\([\s\S]{0,500}coordinator\.restoreAudioConfiguration\(\)/);
+});

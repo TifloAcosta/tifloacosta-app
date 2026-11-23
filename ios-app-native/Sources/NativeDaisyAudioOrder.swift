@@ -91,6 +91,33 @@ enum NativeDaisyAudioOrder {
         member(reference, relativeTo: base, in: available)
     }
 
+    /// Resolve NCC/NCX playback destinations using the same XML SMIL parser
+    /// and path lookup as the ordered playback sequence. This also accepts
+    /// anchors on <audio> (not only <seq> and <par>) and disambiguates files
+    /// in sibling folders without relying on their common basename.
+    static func navigationAudio(in directory: URL, smil: String,
+                                fragment: String?, audioPaths: [String])
+                                -> (track: Int, seconds: TimeInterval)? {
+        guard let data = try? Data(contentsOf: directory.appendingPathComponent(smil))
+        else { return nil }
+        let items = smilSources(data)
+        let requested = fragment?.removingPercentEncoding ?? fragment
+        let source: NativeDaisySMILSource?
+        if let requested, !requested.isEmpty {
+            source = items.first(where: {
+                $0.ancestorIDs.contains(where: {
+                    $0.caseInsensitiveCompare(requested) == .orderedSame
+                })
+            })
+        } else {
+            source = items.first
+        }
+        guard let source,
+              let audioPath = member(source.file, relativeTo: smil, in: audioPaths),
+              let track = audioPaths.firstIndex(of: audioPath) else { return nil }
+        return (track, seconds(source.begin) ?? 0)
+    }
+
     private static func nccReferences(_ text: String) -> [String] {
         let pattern = #"(?i)\bhref\s*=\s*["']([^"']+\.smil(?:#[^"']*)?)["']"#
         guard let regex = try? NSRegularExpression(pattern: pattern) else { return [] }

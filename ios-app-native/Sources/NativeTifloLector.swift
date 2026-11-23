@@ -397,6 +397,14 @@ final class NativeReaderLibrary: ObservableObject {
         let suffix = mp3OnlyForVoiceDream ? " Voice Dream MP3.zip" : "-pistas.zip"
         let output = outputDirectory.appendingPathComponent(safeTitle + suffix)
         try manager.zipItem(at: staging, to: output, shouldKeepParent: false)
+        if mp3OnlyForVoiceDream {
+            do {
+                try NativeDaisyPackageVerifier.validateVoiceDreamMP3Zip(output)
+            } catch {
+                try? manager.removeItem(at: outputDirectory)
+                throw error
+            }
+        }
         return output
     }
 

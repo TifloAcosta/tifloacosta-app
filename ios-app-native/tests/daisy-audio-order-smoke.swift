@@ -159,6 +159,32 @@ struct DaisyAudioOrderSmoke {
         precondition(ambiguous == ambiguousAudio,
                      "Ambiguous audio filename was incorrectly resolved")
 
-        print("DAISY NCC/NCX/SMIL clips and intra-file order: seven Swift checks passed.")
+        // Distinct books can contain tracks with the same basename.
+        // Chapter navigation must stay inside the referenced directory.
+        let duplicatePaths = [
+            "setA/chapters/first.smil", "setB/chapters/second.smil",
+            "setA/audio/track001.mp3", "setB/audio/track001.mp3"
+        ]
+        let firstSMIL = NativeDaisyAudioOrder.resolvedMember(
+            "setA/chapters/first.smil#start", relativeTo: "ncc.html",
+            available: duplicatePaths)
+        let secondSMIL = NativeDaisyAudioOrder.resolvedMember(
+            "setB/chapters/second.smil#start", relativeTo: "ncc.html",
+            available: duplicatePaths)
+        precondition(firstSMIL == "setA/chapters/first.smil")
+        precondition(secondSMIL == "setB/chapters/second.smil")
+        let audioPaths = duplicatePaths.filter { $0.hasSuffix(".mp3") }
+        let firstTrack = NativeDaisyAudioOrder.resolvedMember(
+            "../audio/track001.mp3", relativeTo: firstSMIL!, available: audioPaths)
+        let secondTrack = NativeDaisyAudioOrder.resolvedMember(
+            "../audio/track001.mp3", relativeTo: secondSMIL!, available: audioPaths)
+        precondition(firstTrack == "setA/audio/track001.mp3")
+        precondition(secondTrack == "setB/audio/track001.mp3")
+        precondition(NativeDaisyAudioOrder.resolvedMember(
+            "track001.mp3", relativeTo: "other/book.smil",
+            available: audioPaths) == nil,
+            "Ambiguous basename must never select an arbitrary recording")
+
+        print("DAISY NCC/NCX/SMIL and duplicate-basename routing: eight Swift checks passed.")
     }
 }

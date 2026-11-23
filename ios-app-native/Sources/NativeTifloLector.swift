@@ -364,7 +364,7 @@ final class NativeReaderLibrary: ObservableObject {
                 throw NativeReaderFormatError.invalidArchive
             }
             let ext = source.pathExtension.lowercased()
-            guard ["mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff", "caf"].contains(ext) else {
+            guard ["mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff", "caf", "flac"].contains(ext) else {
                 throw NativeReaderFormatError.invalidArchive
             }
             let filename = String(format: "Pista-%04d", index + 1) + "." + ext
@@ -3854,7 +3854,7 @@ struct NativeReadingScreen: View {
         }
         if library.originalURL(for: document) != nil {
             if latest.fileExtension?.lowercased() == "daisy" {
-                Button("Compartir libro DAISY completo (ZIP)") {
+                Button("Compartir DAISY original") {
                     shareCurrentDocument()
                 }
             } else {
@@ -3864,7 +3864,7 @@ struct NativeReadingScreen: View {
         if !latest.body.isEmpty {
             Button("Exportar texto") { exportText() }
             Button("Seleccionar y copiar texto") { showTextSelection = true }
-            Button("Convertir a audio o DAISY") { showAudioExport = true }
+            Button("Convertir texto a MP3 o DAISY con voz") { showAudioExport = true }
             Button("Diccionario y pronunciación") {
                 if speech.isPlaying { pausePlayback() }
                 showWordTools = true
@@ -3873,15 +3873,18 @@ struct NativeReadingScreen: View {
                 Button("Traducir fragmento actual") { showTranslation = true }
             }
         }
-        if tracks.count == 1, let track = tracks.first,
-           let url = NativeReaderFormats.storedURL(for: track) {
+        // Extract audio without recoding it. A single-track DAISY also gets
+        // this distinct action; its original navigable archive remains separate.
+        if tracks.count == 1, latest.fileExtension?.lowercased() != "daisy",
+           let track = tracks.first, let url = NativeReaderFormats.storedURL(for: track) {
             Button("Compartir archivo de audio") { NativeShare.present(url: url) }
-        } else if tracks.count > 1 {
-            Button("Compartir todas las pistas de audio (ZIP)") {
+        } else if !tracks.isEmpty {
+            Button("Exportar audio existente (pistas en ZIP)") {
                 do {
                     NativeShare.present(url: try library.exportAudioTracks(document))
                 } catch {
-                    actionMessage = MusicLocalized.format("No se pudieron compartir todas las pistas: %@", error.localizedDescription)
+                    actionMessage = MusicLocalized.format(
+                        "No se pudieron compartir todas las pistas: %@", error.localizedDescription)
                 }
             }
         }

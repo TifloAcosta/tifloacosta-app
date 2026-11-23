@@ -117,6 +117,23 @@ final class NativeReaderLibrary: ObservableObject {
     @Published private(set) var documents: [NativeReadingDocument] = []
     @Published private(set) var folders: [String] = []
     private let folderStorageKey = "native-reader-folders"
+    // One small preference per opened book; opening must not re-encode the
+    // entire text library or emit @Published changes during NavigationLink.
+    private static let lastOpenedPrefix = "native-reader-last-opened-at-"
+
+    func lastOpenedAt(for document: NativeReadingDocument) -> Date? {
+        let key = Self.lastOpenedPrefix + document.id.uuidString
+        return (UserDefaults.standard.object(forKey: key) as? Date)
+            ?? document.lastOpenedAt
+    }
+
+    private func documentsForPersistence() -> [NativeReadingDocument] {
+        documents.map { document in
+            var copy = document
+            copy.lastOpenedAt = lastOpenedAt(for: document)
+            return copy
+        }
+    }
 
     private static var storageURL: URL {
         let directory = FileManager.default.urls(
@@ -419,7 +436,8 @@ final class NativeReaderLibrary: ObservableObject {
 
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-        try encoder.encode(documents).write(to: staging.appendingPathComponent("documentos.json"), options: .atomic)
+        try encoder.encode(documentsForPersistence())
+            .write(to: staging.appendingPathComponent("documentos.json"), options: .atomic)
         try encoder.encode(folders).write(to: staging.appendingPathComponent("carpetas.json"), options: .atomic)
 
         let support = Self.storageURL.deletingLastPathComponent()
@@ -552,9 +570,11 @@ final class NativeReaderLibrary: ObservableObject {
     }
 
     func markOpened(_ document: NativeReadingDocument) {
-        guard let index = documents.firstIndex(where: { $0.id == document.id }) else { return }
-        documents[index].lastOpenedAt = .now
-        try? save()
+        guard documents.contains(where: { $0.id == document.id }) else { return }
+        // UserDefaults writes just this timestamp, not every imported book.
+        // Keep the ObservableObject and its NavigationLink hierarchy stable.
+        UserDefaults.standard.set(Date(),
+            forKey: Self.lastOpenedPrefix + document.id.uuidString)
     }
 
     func toggleFavorite(_ document: NativeReadingDocument) {
@@ -752,7 +772,9 @@ final class NativeReaderLibrary: ObservableObject {
     }
 
     func latest(_ document: NativeReadingDocument) -> NativeReadingDocument {
-        documents.first(where: { $0.id == document.id }) ?? document
+        var resolved = documents.first(where: { $0.id == document.id }) ?? document
+        resolved.lastOpenedAt = lastOpenedAt(for: resolved)
+        return resolved
     }
 
     private func save() throws {
@@ -761,7 +783,8 @@ final class NativeReaderLibrary: ObservableObject {
             at: directory,
             withIntermediateDirectories: true
         )
-        try JSONEncoder().encode(documents).write(to: Self.storageURL, options: .atomic)
+        try JSONEncoder().encode(documentsForPersistence())
+            .write(to: Self.storageURL, options: .atomic)
     }
 }
 
@@ -1602,7 +1625,10 @@ struct NativeReaderLibraryScreen: View {
         case 2: items.sort { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
         case 3: items.sort { $0.title.localizedStandardCompare($1.title) == .orderedDescending }
         case 4: items.sort { $0.formatLabel < $1.formatLabel }
-        case 5: items.sort { ($0.lastOpenedAt ?? .distantPast) > ($1.lastOpenedAt ?? .distantPast) }
+        case 5: items.sort {
+            (library.lastOpenedAt(for: $0) ?? .distantPast)
+                > (library.lastOpenedAt(for: $1) ?? .distantPast)
+        }
         default: items.sort { $0.importedAt > $1.importedAt }
         }
         return items
@@ -1662,8 +1688,11 @@ struct NativeReaderLibraryScreen: View {
         guard defaults.bool(forKey: key) else { return }
         defaults.removeObject(forKey: key)
         // A newly imported document is not necessarily the last one read.
-        guard let document = library.documents.filter({ $0.lastOpenedAt != nil }).max(by: {
-            ($0.lastOpenedAt ?? .distantPast) < ($1.lastOpenedAt ?? .distantPast)
+        guard let document = library.documents.filter({
+            library.lastOpenedAt(for: $0) != nil
+        }).max(by: {
+            (library.lastOpenedAt(for: $0) ?? .distantPast)
+                < (library.lastOpenedAt(for: $1) ?? .distantPast)
         }) else {
             shortcutMessage = MusicLocalized.message("Todavía no hay un libro abierto anteriormente para continuar.")
             UIAccessibility.post(notification: .announcement, argument: shortcutMessage)

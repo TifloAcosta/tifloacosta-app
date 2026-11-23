@@ -279,9 +279,10 @@
         "ios-app-native/Sources/NativeTifloLector.swift",
         "ios-app-native/Sources/NativeReaderProgress.swift",
         "ios-app-native/tests/reader-opening-progress-start-20261123.test.mjs",
-        "ios-app-native/tests/reader-progress-smoke.swift"
+        "ios-app-native/tests/reader-progress-smoke.swift",
+        "ios-app-native/tests/reader-opening-progress-start-20261123.test.mjs"
       ],
-      "validation": "23-11-2026: incidencia comunicada por el usuario en la app instalada. Código 1.7: solicitud de foco diferida hasta que lector esté visible, porcentaje de texto calculado con offset exacto sin redondear al 100 antes del final, porcentaje de audiolibros etiquetado por pista, acción permanente Volver al principio sin auto-reproducción. Pendiente VoiceOver/iPhone, pruebas en bibliotecas reales y determinar si las demoras de apertura se deben a algo más que el foco. No alterar posiciones antiguas masivamente."
+      "validation": "23-11-2026: incidencia comunicada por el usuario en la app instalada. Código 1.7: solicitud de foco diferida hasta que lector esté visible, porcentaje de texto calculado con offset exacto sin redondear al 100 antes del final, porcentaje de audiolibros etiquetado por pista, acción permanente Volver al principio sin auto-reproducción. Pendiente VoiceOver/iPhone, pruebas en bibliotecas reales y determinar si las demoras de apertura se deben a algo más que el foco. No alterar posiciones antiguas masivamente. Segunda fase, 23-11-2026: se ha identificado que marcar «Último abierto» escribía de forma síncrona TODO el JSON de la biblioteca mientras NavigationLink y VoiceOver entraban al lector. markOpened ahora persiste solo la fecha de esa obra en UserDefaults, sin notificar un cambio @Published de todos los documentos. Orden «Último abierto», acción de reanudación del último libro, persistencia en JSON y copia de seguridad consultan también la fecha ligera. Se evitan las escrituras extensas en el instante de apertura; queda confirmar en iPhone si esta era la causa real de las demoras ocasionales."
     }
   ],
   "operational": [

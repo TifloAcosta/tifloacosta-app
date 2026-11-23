@@ -53,3 +53,26 @@ test('reader labels have five translations', () => {
     for(const key of keys) assert.ok(contents.includes('"'+key+'" = "'), lang+': '+key);
   }
 });
+
+test('opening a document saves only its timestamp, without re-encoding the book collection', () => {
+  const mark = between('    func markOpened(_ document: NativeReadingDocument) {','    func toggleFavorite(');
+  assert.match(mark,/UserDefaults[.]standard[.]set[(]Date[(][)]/);
+  assert.doesNotMatch(mark,/try[?]? save[(][)]|documents\[index\][.]lastOpenedAt/);
+  const snapshot = between('    private func documentsForPersistence() -> [NativeReadingDocument] {','    private static var storageURL');
+  assert.match(snapshot,/copy[.]lastOpenedAt = lastOpenedAt[(]for: document[)]/);
+  const backup = between('    func exportBackup() throws -> URL {','    func restoreBackup(');
+  assert.match(backup,/encoder[.]encode[(]documentsForPersistence[(][)][)]/);
+  const persistence = between('    private func save() throws {','struct NativeReaderLibraryScreen: View');
+  assert.match(persistence,/JSONEncoder[(][)][.]encode[(]documentsForPersistence[(][)][)]/);
+});
+
+test('recently opened sort and shortcut use the persisted lightweight timestamp', () => {
+  assert.match(src,/case 5: items[.]sort/);
+  const sort = between('        case 5: items.sort {', '        default: items.sort');
+  assert.match(sort,/library[.]lastOpenedAt[(]for: [$]0[)]/);
+  const shortcut = between('    private func resumeRequestedBook() {','    private func play(_ document:');
+  assert.match(shortcut,/library[.]lastOpenedAt[(]for: [$]0[)]/);
+  assert.match(shortcut,/library[.]lastOpenedAt[(]for: [$]1[)]/);
+  assert.match(src,/func latest[(]_ document: NativeReadingDocument[)] -> NativeReadingDocument/);
+});
+

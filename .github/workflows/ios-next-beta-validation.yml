@@ -33,6 +33,14 @@ jobs:
           test -n "$XCODE" || { echo "::error::Falta Xcode 26"; exit 1; }
           sudo xcode-select --switch "$XCODE/Contents/Developer"
           xcodebuild -version
+      - name: Comprobar el orden DAISY con Swift real
+        run: |
+          set -euo pipefail
+          swiftc ios-app-native/Sources/NativeDaisyNCX.swift \
+            ios-app-native/Sources/NativeDaisyAudioOrder.swift \
+            ios-app-native/tests/daisy-audio-order-smoke.swift \
+            -o "$RUNNER_TEMP/daisy-audio-order-check"
+          "$RUNNER_TEMP/daisy-audio-order-check"
       - name: Crear el proyecto nativo con XcodeGen
         run: |
           brew install xcodegen

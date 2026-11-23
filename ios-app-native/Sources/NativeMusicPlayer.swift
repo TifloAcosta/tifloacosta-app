@@ -454,22 +454,27 @@ final class NativeMusicPlayer: ObservableObject {
     func previous() { index = max(0, index - 1); startCurrent() }
 
     func skip(seconds: TimeInterval) {
-        guard let file else { return }
+        guard let file, file.length > 0, duration > 0, seconds.isFinite else { return }
+        let wasPlaying = isPlaying
         let target = min(max(position + seconds, 0), duration)
         generation += 1
         node.stop()
         startFrame = min(file.length - 1, AVAudioFramePosition(target * file.processingFormat.sampleRate))
         do {
             try schedule(from: startFrame)
-            NativeJamendoPlayer.shared.pauseForOtherAudio()
-            NativeRadioPlayer.shared.pauseForOtherAudio()
-            NativeAppleMusicPlayer.shared.pauseForOtherAudio()
-            NativeAudiusPlayer.shared.pauseForOtherAudio()
-            NativeReaderPlaybackBridge.pauseActiveReader?()
-            NativeRemotePlaybackOwner.claim(.music)
-            registerRemoteCommands()
-            node.play()
-            isPlaying = true
+            // Seeking a paused song must not start playback or interrupt a
+            // podcast, cinema, radio or reader that has since taken control.
+            if wasPlaying {
+                NativeJamendoPlayer.shared.pauseForOtherAudio()
+                NativeRadioPlayer.shared.pauseForOtherAudio()
+                NativeAppleMusicPlayer.shared.pauseForOtherAudio()
+                NativeAudiusPlayer.shared.pauseForOtherAudio()
+                NativeReaderPlaybackBridge.pauseActiveReader?()
+                NativeRemotePlaybackOwner.claim(.music)
+                registerRemoteCommands()
+                node.play()
+            }
+            isPlaying = wasPlaying
             position = target
             updateNowPlaying()
         } catch {

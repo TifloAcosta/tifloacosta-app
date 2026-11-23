@@ -515,7 +515,7 @@ enum NativeReaderFormats {
                 return lower.hasSuffix("ncc.html") || lower.hasSuffix(".smil")
                     || lower.hasSuffix(".ncx")
             }
-            let audioFiles = all.filter { path in
+            let discoveredAudioFiles = all.filter { path in
                 // Mac ZIP metadata (._name.mp3 in __MACOSX) is NOT playable audio.
                 let components = path.split(separator: "/")
                 guard !components.contains(where: {
@@ -525,6 +525,13 @@ enum NativeReaderFormats {
                     URL(fileURLWithPath: path).pathExtension.lowercased()
                 )
             }
+            // Both the native DAISY player and numbered audio ZIP now use
+            // physical track order from NCC/NCX + SMIL, not ZIP name order.
+            // For a plain audio ZIP, retain the previous natural filename order.
+            let audioFiles = isDaisy
+                ? NativeDaisyAudioOrder.orderedAudioFiles(
+                    in: directory, packagePaths: all, audioPaths: discoveredAudioFiles)
+                : discoveredAudioFiles
             guard isDaisy || (ext == "zip" && !audioFiles.isEmpty) else {
                 throw NativeReaderFormatError.invalidArchive
             }

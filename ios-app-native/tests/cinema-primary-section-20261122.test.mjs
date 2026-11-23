@@ -39,3 +39,21 @@ test('partner catalogue stays on the official authenticated site until integrati
   assert.match(cinema, /Catálogo|catálogo|catalogue/);
   assert.doesNotMatch(cinema, /https:\/\/drive\.google\.com\/drive\/folders\//);
 });
+
+test('all source descriptions and collection metadata are translated and searchable in all six app languages', () => {
+  assert.match(cinema, /parts\.map \{ MusicLocalized\.message\(\$0\) \}\.joined\(separator: " "\)/);
+  assert.match(cinema, /Text\(MusicLocalized\.message\(item\.title\)\)/);
+  assert.match(cinema, /Text\(MusicLocalized\.message\(item\.summary\)\)/);
+  assert.match(cinema, /MusicLocalized\.message\(item\.summary\)[\s\S]{0,110}contains\(where:/);
+  const keys = new Set([
+    'Solo audio con audiodescripción.', 'Vídeo con audiodescripción según el título.',
+    ...[...cinema.matchAll(/(?:description|access|geographicNotice|summary|title): "([^"]*)"/g)]
+      .map(match => match[1]).filter(Boolean)
+  ]);
+  for (const language of ['en', 'pt', 'fr', 'it', 'de']) {
+    const catalog = readFileSync(new URL('../Sources/' + language + '.lproj/Localizable.strings', import.meta.url), 'utf8');
+    for (const key of keys) {
+      assert.ok(catalog.includes('"' + key + '" = '), language + ' lacks translation: ' + key);
+    }
+  }
+});

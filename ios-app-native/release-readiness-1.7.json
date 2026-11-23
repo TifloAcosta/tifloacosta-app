@@ -169,8 +169,15 @@
     {
       "id": 19,
       "title": "Reanudar posición exacta, toque mágico y pendientes de TifloLector",
-      "status": "pending",
-      "issue": "#352"
+      "status": "partial",
+      "issue": "#352",
+      "evidence": [
+        "ios-app-native/Sources/NativeTifloLector.swift",
+        "ios-app-native/tests/reader-exact-resume-magic-tap-20261123.test.mjs",
+        "ios-app-native/tests/reader-phase-two-contract.test.mjs",
+        "ios-app-native/tests/reader-library-priority-punctuation-20261109.test.mjs"
+      ],
+      "validation": "23-11-2026: cursor AVSpeech del sistema pasa a registrar el INICIO de la palabra que aún va a pronunciarse, no el final; callbacks tardíos de una voz pausada/cancelada y de otra locución se ignoran; pausa/disappear guardan offset de caracteres vivo, y Reproducir/Pausa, toque mágico y remoto comparten misma alternancia. Pruebas de contrato ajustadas en la misma rama. CI final Xcode/contratos pendiente. No asegura reinicio fonético dentro de la misma palabra, ni se ha validado VoiceOver/iPhone, Gemini/Phonon, reanudación de audio externo, ni otros pendientes de TifloLector (DAISY rotor). Requisito global sigue PARCIAL y no se permite TestFlight."
     },
     {
       "id": 20,

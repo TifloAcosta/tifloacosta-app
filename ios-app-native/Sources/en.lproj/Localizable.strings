@@ -1219,3 +1219,10 @@
 "Pista %d de %d, %d por ciento de esta pista." = "Track %d of %d, %d percent of this track.";
 "Progreso guardado: %d por ciento." = "Saved progress: %d percent.";
 "Sitúa la lectura al principio sin reproducir." = "Moves to the beginning without playing.";
+
+// Audio destinations for shared files and accessible batch import.
+"Audios recibidos en Mi música: %d. Fallidos: %d." = "Audio files received in My Music: %d. Failed: %d.";
+"Los audios fallidos permanecen en Recibidos para reintentar." = "Failed audio files remain in Received for retry.";
+"Audios pendientes" = "Pending audio files";
+"Importar todos los audios pendientes en Mi música" = "Import all pending audio files into My Music";
+"Importar todos los audios pendientes en TifloLector" = "Import all pending audio files into TifloLector";

@@ -1237,3 +1237,5 @@
 "Se eliminará la lista de reproducción, pero no las canciones." = "Die Wiedergabeliste wird gelöscht, die Titel bleiben erhalten.";
 "Se eliminará el archivo guardado en esta colección personal." = "Die in deiner persönlichen Sammlung gespeicherte Datei wird gelöscht.";
 "Se eliminará la descarga local. El episodio seguirá disponible en su fuente." = "Der lokale Download wird gelöscht. Die Folge bleibt bei der ursprünglichen Quelle verfügbar.";
+
+"No se pudo reproducir este archivo. Comprueba que el formato es compatible." = "Diese Datei konnte nicht wiedergegeben werden. Prüfe, ob das Format unterstützt wird.";

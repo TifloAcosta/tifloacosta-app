@@ -52,7 +52,7 @@ test("fase 3: lectura del respaldo y verificación de rutas antes de importar", 
 test("fase 3: exportación de audio multipista empaquetada sin perder pistas", () => {
   assert.match(reader, /func exportAudioTracks\(_ document: NativeReadingDocument\) throws -> URL/);
   assert.match(reader, /for \(index, path\) in paths\.enumerated\(\)/);
-  assert.match(reader, /Button\("Compartir todas las pistas de audio \(ZIP\)"\)/);
+  assert.match(reader, /Button\("Exportar audio existente \(pistas en ZIP\)"\)/);
   assert.match(reader, /NativeShare\.present\(url: try library\.exportAudioTracks\(document\)\)/);
   assert.match(reader, /safeTitle \+ "-pistas\.zip"/);
 });

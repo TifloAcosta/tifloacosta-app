@@ -1237,3 +1237,5 @@
 "Se eliminará la lista de reproducción, pero no las canciones." = "La liste de lecture sera supprimée, mais pas les morceaux.";
 "Se eliminará el archivo guardado en esta colección personal." = "Le fichier enregistré dans votre collection personnelle sera supprimé.";
 "Se eliminará la descarga local. El episodio seguirá disponible en su fuente." = "Le téléchargement local sera supprimé. L’épisode restera accessible depuis sa source.";
+
+"No se pudo reproducir este archivo. Comprueba que el formato es compatible." = "Impossible de lire ce fichier. Vérifiez que son format est compatible.";

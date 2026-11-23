@@ -749,6 +749,7 @@ struct NativeMyMusicScreen: View {
     @State private var editingGenreFile: MusicLocalFile?
     @State private var editingGenreValue = ""
     @State private var pendingRemoval: MusicLocalFile?
+    @State private var pendingCollectionRemoval: (id: UUID, name: String, kind: String)?
     @State private var exportingBackup = false
     @State private var importingBackup = false
     @State private var backupDocument: MusicBackupDocument?
@@ -1057,7 +1058,9 @@ struct NativeMyMusicScreen: View {
                             MusicLocalized.format("%@, carpeta, %d canciones, guardadas en el iPhone", folder.name, folder.trackIds.count) :
                             MusicLocalized.format("%@, %d canciones", folder.name, folder.trackIds.count))
                     Spacer()
-                    Button("Eliminar carpeta \(folder.name)") { library.removeFolder(folder.id) }
+                    Button("Eliminar carpeta \(folder.name)") {
+                        pendingCollectionRemoval = (folder.id, folder.name, "folder")
+                    }
                         .accessibilityHint("Solo elimina esta carpeta virtual; las canciones se conservan.")
                 }
             }
@@ -1135,7 +1138,9 @@ struct NativeMyMusicScreen: View {
                         .disabled(library.playlistEntries(playlist).last?.id == entry.id)
                     }
                 }
-                Button("Eliminar lista \(playlist.name)") { library.removePlaylist(playlist.id) }
+                Button("Eliminar lista \(playlist.name)") {
+                    pendingCollectionRemoval = (playlist.id, playlist.name, "playlist")
+                }
             }
         }
     }
@@ -1151,7 +1156,9 @@ struct NativeMyMusicScreen: View {
                         albumKeysByURL: albumKeysByURL) }
                 }
                 .disabled(matches.isEmpty)
-                Button("Eliminar carpeta inteligente \(folder.name)") { library.removeSmartFolder(folder.id) }
+                Button("Eliminar carpeta inteligente \(folder.name)") {
+                    pendingCollectionRemoval = (folder.id, folder.name, "smartFolder")
+                }
             }
         }
     }
@@ -1284,16 +1291,46 @@ struct NativeMyMusicScreen: View {
             } message: {
                 Text("Este género solo se guardará en tu biblioteca y no modificará el archivo original.")
             }
-            .confirmationDialog("Eliminar de la biblioteca", isPresented: Binding(
-                get: { pendingRemoval != nil },
-                set: { if !$0 { pendingRemoval = nil } }
-            )) {
+            .confirmationDialog(
+                MusicLocalized.format("¿Eliminar «%@»?", pendingRemoval?.name ?? ""),
+                isPresented: Binding(
+                    get: { pendingRemoval != nil },
+                    set: { if !$0 { pendingRemoval = nil } }),
+                titleVisibility: .visible
+            ) {
                 Button("Eliminar de la biblioteca", role: .destructive) {
                     if let file = pendingRemoval { library.removeFromLibrary(file.id) }
                     pendingRemoval = nil
                 }
+                Button("Cancelar", role: .cancel) { pendingRemoval = nil }
             } message: {
                 Text("La canción dejará de aparecer en Mi Música, pero no se borrará el archivo original.")
+            }
+            .confirmationDialog(
+                MusicLocalized.format("¿Eliminar «%@»?", pendingCollectionRemoval?.name ?? ""),
+                isPresented: Binding(
+                    get: { pendingCollectionRemoval != nil },
+                    set: { if !$0 { pendingCollectionRemoval = nil } }),
+                titleVisibility: .visible
+            ) {
+                Button("Eliminar", role: .destructive) {
+                    if let target = pendingCollectionRemoval {
+                        switch target.kind {
+                        case "folder": library.removeFolder(target.id)
+                        case "playlist": library.removePlaylist(target.id)
+                        case "smartFolder": library.removeSmartFolder(target.id)
+                        default: break
+                        }
+                    }
+                    pendingCollectionRemoval = nil
+                }
+                Button("Cancelar", role: .cancel) { pendingCollectionRemoval = nil }
+            } message: {
+                Text(pendingCollectionRemoval?.kind == "folder"
+                    ? "Solo se eliminará la carpeta virtual. Las canciones se conservarán."
+                    : pendingCollectionRemoval?.kind == "smartFolder"
+                        ? "Se eliminará la carpeta inteligente, pero no las canciones."
+                        : "Se eliminará la lista de reproducción, pero no las canciones.")
             }
 
         let musicImports = libraryActions

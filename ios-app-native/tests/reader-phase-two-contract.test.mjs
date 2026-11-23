@@ -11,7 +11,7 @@ const ncx = swift('NativeDaisyNCX.swift');
 
 test('la voz informa el progreso real por palabra sin avanzar al pausar', () => {
   assert.match(reader, /willSpeakRangeOfSpeechString/);
-  assert.match(reader, /guard let self, \(self\.isPlaying \|\| self\.isPaused\)/);
+  assert.match(reader, /guard let self, self\.isPlaying, !self\.isPaused/);
   assert.match(reader, /guard \(!speech\.hasAudio \|\| speech\.isGeneratedSpeech\), speech\.isPlaying else \{ return \}/);
   assert.match(reader, /onReceive\(speech\.\$textPercent\)/);
   assert.match(reader, /baseUTF16:/);
@@ -73,13 +73,14 @@ test('Botón Reproducir usa el modo elegido para los gestos y mantiene doble toq
   assert.match(reader, /if unit == 5 \{/);
   assert.match(reader, /if unit == 6 \{/);
   assert.match(reader, /private func activatePlaybackButton\(\)/);
-  assert.match(reader, /if speech\.isPlaying \{ pausePlayback\(\) \} else \{ play\(\) \}/);
+  assert.match(reader, /private func toggleReaderPlayback\(\) \{/);
+  assert.match(reader, /private func activatePlaybackButton\(\) \{\s*toggleReaderPlayback\(\)/);
 });
 test('Toque mágico solo controla la reproducción actual', () => {
   assert.match(reader, /\.accessibilityAction\(\.magicTap\)/);
   assert.match(reader, /if speech\.isPlaying\s*\{\s*pausePlayback\(\)/);
   assert.match(reader, /if speech\.isPaused \{\s*speech\.resume\(\)/);
-  assert.match(reader, /\.accessibilityAction\(\.magicTap\) \{\s*if speech\.isPlaying \{ pausePlayback\(\) \}\s*else \{ play\(\) \}/);
+  assert.match(reader, /\.accessibilityAction\(\.magicTap\) \{ toggleReaderPlayback\(\) \}/);
 });
 test('Marcas incluyen contexto y borrado anuncia el título exacto', () => {
   assert.match(reader, /private func bookmarkDescription\(at percent: Int\)/);
@@ -129,7 +130,7 @@ test('DAISY conserva encabezados NCC vinculados a SMIL en los metadatos del libr
 
 test('TTS mantiene progreso exacto en caracteres con aviso por palabra', () => {
   assert.match(reader, /@Published private\(set\) var textCharacterOffset = 0/);
-  assert.match(reader, /self\.previousCharacterCount \+= self\.spokenText\.distance/);
+  assert.match(reader, /self\.previousCharacterCount = self\.spokenText\.distance/);
   assert.match(reader, /self\.textCharacterOffset = self\.baseCharacters \+ self\.previousCharacterCount/);
   assert.match(reader, /baseCharacters: readingOffset/);
   assert.match(reader, /\.onReceive\(speech\.\$textCharacterOffset\)/);

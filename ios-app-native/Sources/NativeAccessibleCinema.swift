@@ -364,6 +364,11 @@ struct NativeAccessibleCinemaScreen: View {
                         }
                         .frame(minHeight: 44, alignment: .leading)
                         if personalPlayer.currentID == item.id {
+                            if let playbackError = personalPlayer.playbackError {
+                                Text(playbackError)
+                                    .foregroundStyle(TifloVisual.secondaryText)
+                                    .accessibilityAddTraits(.updatesFrequently)
+                            }
                             if item.isVideoFile, let videoPlayer = personalPlayer.videoPlayer {
                                 NativeCinemaVideoSurface(player: videoPlayer)
                                     .frame(maxWidth: .infinity)
@@ -375,6 +380,7 @@ struct NativeAccessibleCinemaScreen: View {
                             Button(personalPlayer.playing ? "Pausar reproducción" : "Reanudar reproducción") {
                                 personalPlayer.toggle(library: personalLibrary)
                             }
+                            .disabled(personalPlayer.playbackError != nil)
                             Button("Retroceder treinta segundos") {
                                 personalPlayer.seek(by: -30, library: personalLibrary)
                             }

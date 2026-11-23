@@ -771,6 +771,8 @@ final class NativeReadingSpeech: ObservableObject {
     private let progressDelegate = NativeSpeechProgressDelegate()
     private let audioDelegate = NativeAudioFinishDelegate()
     private var playlistURLs: [URL] = []
+    private var daisyClips: [NativeDaisyAudioClip] = []
+    private var daisyClipIndex = 0
     private var playlistIndex = 0
     private var playlistSpeed = 1.0
     private var onTrackChanged: ((Int) -> Void)?
@@ -943,6 +945,11 @@ final class NativeReadingSpeech: ObservableObject {
                         self.isGemini = false
                         self.isPhonon = false
                     }
+                    return
+                }
+                if !self.daisyClips.isEmpty {
+                    if success { self.advanceDaisyClip() }
+                    else { self.onAudioError?("No se pudo completar el fragmento DAISY."); self.stop() }
                     return
                 }
                 self.isPlaying = false
@@ -1149,7 +1156,8 @@ final class NativeReadingSpeech: ObservableObject {
         }
     }
 
-    private func startAudio(_ url: URL, speed: Double, at percent: Int) throws {
+    private func startAudio(_ url: URL, speed: Double, at percent: Int,
+                            atSeconds seconds: TimeInterval? = nil) throws {
         player?.stop()
         player = nil
         try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
@@ -1159,7 +1167,8 @@ final class NativeReadingSpeech: ObservableObject {
         audio.enableRate = true
         audio.rate = Float(max(0.5, min(2.0, speed)))
         audio.prepareToPlay()
-        audio.currentTime = audio.duration * Double(max(0, min(100, percent))) / 100
+        audio.currentTime = seconds.map { max(0, min(audio.duration, $0)) }
+            ?? audio.duration * Double(max(0, min(100, percent))) / 100
         guard audio.play() else { throw NativeReaderFormatError.unsupported(url.pathExtension) }
         player = audio
         isPlaying = true
@@ -1188,6 +1197,72 @@ final class NativeReadingSpeech: ObservableObject {
         } catch {
             stop()
             throw error
+        }
+    }
+
+    /// Play the exact NCC/NCX/SMIL clip sequence, including repeated clips
+    /// from one physical file and out-of-order time ranges. Legacy books
+    /// without this metadata continue using playPlaylist.
+    func playDaisySequence(_ urls: [URL], clips: [NativeDaisyAudioClip],
+                           speed: Double, track: Int, at percent: Int,
+                           seconds: TimeInterval?,
+                           onTrackChanged: @escaping (Int) -> Void,
+                           onError: @escaping (String) -> Void) throws {
+        guard urls.indices.contains(track), !clips.isEmpty,
+              clips.allSatisfy({ urls.indices.contains($0.track) &&
+                $0.begin.isFinite && $0.begin >= 0 &&
+                ($0.end == nil || ($0.end!.isFinite && $0.end! > $0.begin)) })
+        else { throw NativeReaderFormatError.invalidArchive }
+
+        let resumeSeconds: TimeInterval? = seconds.flatMap {
+            $0.isFinite ? max(0, $0) : nil
+        } ?? (percent > 0 ? (try? AVAudioPlayer(contentsOf: urls[track]))
+            .map { $0.duration * Double(percent) / 100 } : nil)
+        let candidate = clips.firstIndex { clip in
+            clip.track == track && (resumeSeconds == nil ||
+                (resumeSeconds! >= clip.begin &&
+                 (clip.end == nil || resumeSeconds! < clip.end!)))
+        } ?? clips.firstIndex(where: { $0.track == track })
+        guard let index = candidate else { throw NativeReaderFormatError.invalidArchive }
+        stop()
+        playlistURLs = urls
+        playlistSpeed = speed
+        self.onTrackChanged = onTrackChanged
+        self.onAudioError = onError
+        daisyClips = clips
+        daisyClipIndex = index
+        let clip = clips[index]
+        let position = max(clip.begin, resumeSeconds ?? clip.begin)
+        do {
+            try startAudio(urls[clip.track], speed: speed, at: 0,
+                           atSeconds: min(position, clip.end ?? position))
+            playlistIndex = clip.track
+        } catch {
+            stop()
+            throw error
+        }
+    }
+
+    private func advanceDaisyClip() {
+        guard daisyClips.indices.contains(daisyClipIndex + 1) else {
+            player?.stop()
+            player = nil
+            isPlaying = false
+            isPaused = false
+            daisyClips = []
+            return
+        }
+        let next = daisyClipIndex + 1
+        let clip = daisyClips[next]
+        do {
+            try startAudio(playlistURLs[clip.track], speed: playlistSpeed,
+                           at: 0, atSeconds: clip.begin)
+            daisyClipIndex = next
+            playlistIndex = clip.track
+            onTrackChanged?(clip.track)
+        } catch {
+            onAudioError?(error.localizedDescription)
+            stop()
         }
     }
 
@@ -1266,6 +1341,15 @@ final class NativeReadingSpeech: ObservableObject {
     }
 
     func refresh() {
+        // AVAudioPlayer finishes at the FILE end, not at the clipEnd in SMIL.
+        // Advance to the next referenced clip before unrelated audio can play.
+        if isPlaying, !isPaused, !daisyClips.isEmpty,
+           daisyClips.indices.contains(daisyClipIndex), let player,
+           let end = daisyClips[daisyClipIndex].end,
+           player.currentTime >= min(end, player.duration) - 0.04 {
+            advanceDaisyClip()
+            return
+        }
         if let player, !player.isPlaying && !isPaused { isPlaying = false }
         if player == nil && !synthesizer.isSpeaking && !isPaused && !isGeneratedSpeech
             && speechQueue.isEmpty {
@@ -1307,6 +1391,8 @@ final class NativeReadingSpeech: ObservableObject {
         player?.stop()
         player = nil
         playlistURLs = []
+        daisyClips = []
+        daisyClipIndex = 0
         playlistIndex = 0
         onTrackChanged = nil
         onAudioError = nil

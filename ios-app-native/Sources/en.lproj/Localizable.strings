@@ -1200,3 +1200,6 @@
 "Sonidos de TifloLector" = "TifloLector sounds";
 "Avisos hablados" = "Spoken announcements";
 "Vibración en avisos" = "Vibration for notifications";
+
+// Tipo de punto DAISY y acción accesible, sin iniciar audio.
+"%@: %@. Pulsa Reproducir para escuchar." = "%@: %@. Press Play to listen.";

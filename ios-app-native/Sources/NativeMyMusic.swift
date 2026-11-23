@@ -1326,11 +1326,12 @@ struct NativeMyMusicScreen: View {
                 }
                 Button("Cancelar", role: .cancel) { pendingCollectionRemoval = nil }
             } message: {
-                Text(pendingCollectionRemoval?.kind == "folder"
-                    ? "Solo se eliminará la carpeta virtual. Las canciones se conservarán."
-                    : pendingCollectionRemoval?.kind == "smartFolder"
-                        ? "Se eliminará la carpeta inteligente, pero no las canciones."
-                        : "Se eliminará la lista de reproducción, pero no las canciones.")
+                Text(MusicLocalized.message(
+                    pendingCollectionRemoval?.kind == "folder"
+                        ? "Solo se eliminará la carpeta virtual. Las canciones se conservarán."
+                        : pendingCollectionRemoval?.kind == "smartFolder"
+                            ? "Se eliminará la carpeta inteligente, pero no las canciones."
+                            : "Se eliminará la lista de reproducción, pero no las canciones."))
             }
 
         let musicImports = libraryActions

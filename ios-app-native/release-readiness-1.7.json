@@ -287,6 +287,20 @@
         "ios-app-native/tests/reader-opening-progress-start-20261123.test.mjs"
       ],
       "validation": "23-11-2026: incidencia comunicada por el usuario en la app instalada. Código 1.7: solicitud de foco diferida hasta que lector esté visible, porcentaje de texto calculado con offset exacto sin redondear al 100 antes del final, porcentaje de audiolibros etiquetado por pista, acción permanente Volver al principio sin auto-reproducción. Pendiente VoiceOver/iPhone, pruebas en bibliotecas reales y determinar si las demoras de apertura se deben a algo más que el foco. No alterar posiciones antiguas masivamente. Segunda fase, 23-11-2026: se ha identificado que marcar «Último abierto» escribía de forma síncrona TODO el JSON de la biblioteca mientras NavigationLink y VoiceOver entraban al lector. markOpened ahora persiste solo la fecha de esa obra en UserDefaults, sin notificar un cambio @Published de todos los documentos. Orden «Último abierto», acción de reanudación del último libro, persistencia en JSON y copia de seguridad consultan también la fecha ligera. Se evitan las escrituras extensas en el instante de apertura; queda confirmar en iPhone si esta era la causa real de las demoras ocasionales."
+    },
+    {
+      "id": 25,
+      "title": "TifloLector: continuidad de lectura TTS con pantalla bloqueada",
+      "status": "partial",
+      "issue": "#362",
+      "evidence": [
+        "ios-app-native/Sources/NativeTifloLector.swift",
+        "ios-app-native/Sources/NativeReaderSpeechQueueWindow.swift",
+        "ios-app-native/tests/reader-lockscreen-tts-20261123.test.mjs",
+        "ios-app-native/tests/reader-speech-queue-background-smoke.swift",
+        "https://github.com/TifloAcosta/tifloacosta-app/issues/362"
+      ],
+      "validation": "23-11-2026: usuarios comunican cese de lectura de texto TTS con la pantalla del iPhone bloqueada tras unos minutos. Se ha detectado posible discontinuidad de audio en pausas entre AVSpeechUtterance, donde Task.sleep tenía que ejecutar la siguiente frase en un proceso suspendible. Corregido en rama iOS 1.7: se mantienen siempre hasta 3 locuciones precargadas en la cola nativa de AVSpeechSynthesizer y las pausas se entregan a postUtteranceDelay del motor de Apple. Sin modificaciones a pausa, reanudación exacta, temporizador o toque mágico. Falta verificar CI integral e iPhone real con VoiceOver, diferentes perfiles de puntuación, auriculares e interrupciones. Si el usuario estaba usando Gemini o Phonon y no voces de iOS, se requerirá investigación independiente."
     }
   ],
   "operational": [

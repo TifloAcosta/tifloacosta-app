@@ -838,7 +838,7 @@ final class NativeReadingSpeech: ObservableObject {
     // Solo una frase en la cola del sintetizador en cada momento.
     private var speechQueue: [(utterance: AVSpeechUtterance, delay: TimeInterval)] = []
     private var speechQueueIndex = 0
-    private var speechDelayTask: Task<Void, Never>?
+    private var speechEnqueuedThroughIndex = 0
     // Al pausar texto se corta el sintetizador y se conserva el cursor para reanudar.
     private var systemSpeechNeedsRestart = false
 
@@ -860,27 +860,27 @@ final class NativeReadingSpeech: ObservableObject {
         return result
     }
 
-    private func speakNextSystemSegment(after delay: TimeInterval = 0) {
-        speechDelayTask?.cancel()
-        speechDelayTask = nil
-        guard !isPaused, speechQueue.indices.contains(speechQueueIndex) else { return }
-        if delay <= 0 {
-            synthesizer.speak(speechQueue[speechQueueIndex].utterance)
-            return
-        }
-        speechDelayTask = Task { @MainActor [weak self] in
-            do { try await Task.sleep(for: .seconds(delay)) }
-            catch { return }
-            guard let self, !Task.isCancelled, !self.isPaused,
-                  self.speechQueue.indices.contains(self.speechQueueIndex) else { return }
-            self.synthesizer.speak(self.speechQueue[self.speechQueueIndex].utterance)
-            self.speechDelayTask = nil
+    /// Always put the next few utterances into Apple's native queue
+    /// before the current one ends. The synthesizer itself controls the
+    /// punctuation gap via postUtteranceDelay, even with a locked screen.
+    private func enqueueSystemLookahead() {
+        guard isPlaying, !isPaused, !systemSpeechNeedsRestart,
+              !speechQueue.isEmpty else { return }
+        let pending = NativeReaderSpeechQueueWindow.pending(
+            current: speechQueueIndex,
+            alreadyQueued: speechEnqueuedThroughIndex,
+            total: speechQueue.count)
+        for index in pending {
+            synthesizer.speak(speechQueue[index].utterance)
+            // Resubmitting an utterance throws an Objective-C exception.
+            speechEnqueuedThroughIndex = index + 1
         }
     }
 
-    /// Existing utterances capture their rate/pitch/voice when queued. Update
-    /// only the not-yet-spoken utterances so the current sentence finishes
-    /// naturally and the next one uses the user's new settings.
+    /// Existing utterances can retain their rate/pitch/voice once queued.
+    /// Update future items; at most a few pre-enqueued sentences may still
+    /// use their previously selected settings. This keeps background audio
+    /// continuous without restarting the currently spoken sentence.
     func updateLiveSystemSettings(speed: Double, pitch: Float,
                                   voiceIdentifier: String, language: String = "es-ES") {
         guard player == nil, !isGeneratedSpeech, !speechQueue.isEmpty else { return }
@@ -952,9 +952,6 @@ final class NativeReadingSpeech: ObservableObject {
                     self.textPercent = max(0, min(100, Int(Double(self.baseUTF16 + completedUTF16)
                         * 100 / Double(max(1, self.totalUTF16)))))
                 }
-                let completedDelay = completedText.last.map {
-                    NativeReaderPauseProfile.duration(for: $0)
-                } ?? 0
                 self.speechQueueIndex += 1
                 if self.lastSpeechUtterance == ObjectIdentifier(utterance) {
                     self.textCharacterOffset = self.baseCharacters + self.spokenText.count
@@ -963,7 +960,7 @@ final class NativeReadingSpeech: ObservableObject {
                     self.isPaused = false
                     self.speechQueue.removeAll()
                 } else if !self.isPaused {
-                    self.speakNextSystemSegment(after: completedDelay)
+                    self.enqueueSystemLookahead()
                 }
             }
         }
@@ -1064,6 +1061,7 @@ final class NativeReadingSpeech: ObservableObject {
         lastSpeechUtterance = nil
         systemSpeechNeedsRestart = false
         speechQueueIndex = 0
+        speechEnqueuedThroughIndex = 0
         speechQueue.removeAll()
         let segments = NativeReaderPauseProfile.segments(Self.textForSpeech(text), voiceIdentifier: voiceIdentifier)
         var utf16Offset = 0
@@ -1078,7 +1076,7 @@ final class NativeReadingSpeech: ObservableObject {
             utterance.pitchMultiplier = max(0.5, min(2, pitch))
             utterance.volume = max(0, min(1, NativeReaderVoiceProfileStore.load(for: voiceIdentifier)?.volume ?? 1))
             // El retardo se programa entre frases, sin saturar la cola de AVSpeechSynthesizer.
-            utterance.postUtteranceDelay = 0
+            utterance.postUtteranceDelay = segment.delay
             let identifier = ObjectIdentifier(utterance)
             utteranceOffsets[identifier] = utf16Offset
             lastSpeechUtterance = identifier
@@ -1087,7 +1085,7 @@ final class NativeReadingSpeech: ObservableObject {
         }
         isPlaying = true
         isPaused = false
-        speakNextSystemSegment()
+        enqueueSystemLookahead()
     }
 
     private func geminiChunks(_ text: String) -> [String] {
@@ -1377,8 +1375,6 @@ final class NativeReadingSpeech: ObservableObject {
         } else {
             // Detener la salida real evita depender de que pauseSpeaking sea respetado
             // por todas las voces instaladas. El cursor queda disponible para reanudar.
-            speechDelayTask?.cancel()
-            speechDelayTask = nil
             systemSpeechNeedsRestart = !speechQueue.isEmpty
             // Mark paused before requesting stop. Any queued delegate event
             // must observe this state and must not overwrite the checkpoint.
@@ -1489,8 +1485,7 @@ final class NativeReadingSpeech: ObservableObject {
         onAudioError = nil
         synthesizer.stopSpeaking(at: .immediate)
         systemSpeechNeedsRestart = false
-        speechDelayTask?.cancel()
-        speechDelayTask = nil
+        speechEnqueuedThroughIndex = 0
         speechQueue.removeAll()
         speechQueueIndex = 0
         utteranceOffsets.removeAll()

@@ -69,6 +69,13 @@ jobs:
             ios-app-native/tests/reader-generated-voice-volume-smoke.swift \
             -o "$RUNNER_TEMP/reader-generated-volume-check"
           "$RUNNER_TEMP/reader-generated-volume-check"
+      - name: Comprobar continuidad de la cola TTS bloqueada con Swift real
+        run: |
+          set -euo pipefail
+          swiftc ios-app-native/Sources/NativeReaderSpeechQueueWindow.swift \
+            ios-app-native/tests/reader-speech-queue-background-smoke.swift \
+            -o "$RUNNER_TEMP/reader-tts-background-queue"
+          "$RUNNER_TEMP/reader-tts-background-queue"
       - name: Crear el proyecto nativo con XcodeGen
         run: |
           brew install xcodegen

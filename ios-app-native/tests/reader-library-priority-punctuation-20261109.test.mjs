@@ -41,14 +41,18 @@ test('Lectura por fragmentos ignora eventos de una reproducción ya cancelada', 
   assert.match(reader, /lastSpeechUtterance = identifier/);
 });
 
-test('La reproducción del sistema respeta cada pausa sin encolar todo el documento', () => {
+test('La voz en segundo plano usa la cola nativa y conserva las pausas', () => {
   assert.match(reader, /private var speechQueue:/);
-  assert.match(reader, /private func speakNextSystemSegment\(after delay:/);
-  assert.match(reader, /Task\.sleep\(for: \.seconds\(delay\)\)/);
-  assert.match(reader, /speechQueue\.append\(\(utterance: utterance, delay: segment\.delay\)\)/);
-  assert.match(reader, /speakNextSystemSegment\(after: completedDelay\)/);
-  assert.match(reader, /synthesizer\.stopSpeaking\(at: \.immediate\)/);
-  assert.match(reader, /speechDelayTask\?\.cancel\(\)/);
+  assert.match(reader, /private var speechEnqueuedThroughIndex = 0/);
+  assert.match(reader, /private func enqueueSystemLookahead\(\)/);
+  assert.match(reader, /NativeReaderSpeechQueueWindow[.]pending\(/);
+  assert.match(reader, /speechQueue[.]append\(\(utterance: utterance, delay: segment[.]delay\)\)/);
+  assert.match(reader, /utterance[.]postUtteranceDelay = segment[.]delay/);
+  assert.match(reader, /self[.]enqueueSystemLookahead\(\)/);
+  const queue = reader.split('private func enqueueSystemLookahead()')[1]?.split('func updateLiveSystemSettings(')[0] ?? '';
+  assert.match(queue, /synthesizer[.]speak\(speechQueue\[index\][.]utterance\)/);
+  assert.doesNotMatch(queue, /Task[.]sleep|speechDelayTask/);
+  assert.match(reader, /synthesizer[.]stopSpeaking\(at: [.]immediate\)/);
   assert.match(reader, /if systemSpeechNeedsRestart && !isGeneratedSpeech && player == nil/);
 });
 

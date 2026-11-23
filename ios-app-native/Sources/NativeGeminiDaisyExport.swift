@@ -163,6 +163,7 @@ enum NativeGeminiDaisyExport {
             try archive.addEntry(with: filename, relativeTo: working,
                                  compressionMethod: .deflate)
         }
+        try NativeDaisyPackageVerifier.validateVoiceDreamMP3Zip(output)
         try Task.checkCancellation()
         verified = true
         return output

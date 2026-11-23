@@ -446,7 +446,7 @@ struct NativeAccessibleCinemaScreen: View {
             Task { @MainActor in importPersonalFiles(result) }
         }
         .confirmationDialog(
-            "¿Eliminar esta obra de tu colección personal?",
+            MusicLocalized.format("¿Eliminar «%@»?", pendingDeletion?.title ?? ""),
             isPresented: $confirmDeletion, titleVisibility: .visible
         ) {
             Button("Eliminar archivo personal", role: .destructive) {
@@ -459,6 +459,8 @@ struct NativeAccessibleCinemaScreen: View {
                 pendingDeletion = nil
             }
             Button("Cancelar", role: .cancel) { pendingDeletion = nil }
+        } message: {
+            Text("Se eliminará el archivo guardado en esta colección personal.")
         }
         .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
             personalPlayer.refresh(library: personalLibrary)

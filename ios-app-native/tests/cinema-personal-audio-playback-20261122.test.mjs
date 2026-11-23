@@ -63,3 +63,27 @@ test('forced pauses persist fractional seconds and a failed audio session never 
   assert.ok(open.indexOf('try AVAudioSession.sharedInstance().setActive(true)') < open.indexOf('player = AVPlayer(url: url)'));
   assert.match(library, /save\(library: library, force: true\)/);
 });
+
+test('cinema remembers language and content filters between visits', () => {
+  assert.match(screen, /@AppStorage\("native-cinema-language-index-v1"\) private var languageIndex = 0/);
+  assert.match(screen, /@AppStorage\("native-cinema-content-index-v1"\) private var contentIndex = 0/);
+  assert.match(screen, /@AppStorage\("native-cinema-import-language-index-v1"\) private var importLanguageIndex = 1/);
+  assert.match(screen, /@AppStorage\("native-cinema-import-kind-index-v1"\) private var importKindIndex = 1/);
+  assert.match(screen, /selectedIndex: \$languageIndex/);
+  assert.match(screen, /selectedIndex: \$contentIndex/);
+});
+
+test('unsupported media errors are reported without announcing false playback', () => {
+  assert.match(library, /@Published private\(set\) var playbackError: String\?/);
+  assert.match(library, /if player\.currentItem\?\.status == \.failed \|\| player\.error != nil/);
+  assert.match(library, /playing = false/);
+  assert.match(library, /NativeRemotePlaybackOwner\.release\(\.cinema\)/);
+  assert.match(library, /guard playbackError == nil else \{ return \}/);
+  assert.match(screen, /if let playbackError = personalPlayer\.playbackError/);
+  assert.match(screen, /\.disabled\(personalPlayer\.playbackError != nil\)/);
+  const key = '"No se pudo reproducir este archivo. Comprueba que el formato es compatible." = ';
+  for (const lang of ['en','pt','fr','it','de']) {
+    const catalog = read(lang + '.lproj/Localizable.strings');
+    assert.ok(catalog.includes(key), 'Missing cinema playback error translation in ' + lang);
+  }
+});

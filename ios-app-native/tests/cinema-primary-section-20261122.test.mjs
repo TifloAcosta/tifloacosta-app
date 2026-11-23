@@ -32,3 +32,10 @@ test('the app never claims all titles at an external provider are audio describe
   assert.match(cinema, /no significa que todas sus películas tengan audiodescripción/);
   assert.match(cinema, /Acceso sujeto a restricciones regionales|restricciones regionales|derechos territoriales/);
 });
+
+test('partner catalogue stays on the official authenticated site until integration is approved', () => {
+  assert.match(cinema, /URL\(string: "https:\/\/audiocinemateca\.com\/catalogo"\)/);
+  assert.match(cinema, /Registro gratuito e inicio de sesión en el servicio original/);
+  assert.match(cinema, /Catálogo|catálogo|catalogue/);
+  assert.doesNotMatch(cinema, /https:\/\/drive\.google\.com\/drive\/folders\//);
+});

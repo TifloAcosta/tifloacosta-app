@@ -99,8 +99,11 @@ private enum AccessibleCinemaDirectory {
               geographicNotice: "", isAudioOnly: true),
         .init(id: "audiocinemateca", name: "Audiocinemateca",
               languages: [.spain, .latino], kinds: [.film, .series, .documentary, .short],
-              address: URL(string: "https://audiocinemateca.com/"),
-              access: "Registro gratuito en el servicio original.",
+              // The catalogue page is accessible after authentication on
+              // Audiocinemateca. No protected API or private download URL is
+              // accessed by TifloAcosta without the partner's agreed contract.
+              address: URL(string: "https://audiocinemateca.com/catalogo"),
+              access: "Registro gratuito e inicio de sesión en el servicio original.",
               description: "Películas, series, documentales y cortos audiodescritos.",
               geographicNotice: "", isAudioOnly: true),
         .init(id: "rtve", name: "RTVE Play",

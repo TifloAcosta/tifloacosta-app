@@ -34,7 +34,9 @@ test('Pausas Normal Mayor Expresiva y Personalizadas ofrecen ajustes reales por 
 });
 
 test('Lectura por fragmentos ignora eventos de una reproducción ya cancelada', () => {
-  assert.match(reader, /guard let segmentBase = self\.utteranceOffsets\[ObjectIdentifier\(utterance\)\] else/);
+  assert.match(reader, /let segmentBase = self\.utteranceOffsets\[ObjectIdentifier\(utterance\)\] else/);
+  assert.match(reader, /self\.isPlaying, !self\.isPaused/);
+  assert.match(reader, /ObjectIdentifier\(self\.speechQueue\[self\.speechQueueIndex\]\.utterance\)/);
   assert.match(reader, /utteranceOffsets\.removeAll\(\)/);
   assert.match(reader, /lastSpeechUtterance = identifier/);
 });
@@ -53,7 +55,8 @@ test('La reproducción del sistema respeta cada pausa sin encolar todo el docume
 test('El gesto mágico funciona tanto en el botón principal como en el lector', () => {
   assert.equal((reader.match(/\.accessibilityAction\(\.magicTap\)/g) || []).length, 1);
   assert.match(reader, /if speech\.isPlaying \{ pausePlayback\(\) \}/);
-  assert.match(reader, /\.accessibilityAction\(\.magicTap\) \{\s*if speech\.isPlaying \{ pausePlayback\(\) \}\s*else \{ play\(\) \}/);
+  assert.match(reader, /\.accessibilityAction\(\.magicTap\) \{ toggleReaderPlayback\(\) \}/);
+  assert.match(reader, /private func toggleReaderPlayback\(\) \{/);
 });
 
 test('El detalle de biblioteca se puede seleccionar en tres niveles', () => {
@@ -69,7 +72,7 @@ test('Pausar TTS corta el motor y reanuda desde el cursor almacenado', () => {
   assert.match(reader, /let resumeCharacters = max\(0, min\(previousCharacterCount/);
   assert.match(reader, /play\(remainder, speed: resumedSpeed, pitch: resumedPitch/);
   assert.match(reader, /&& speechQueue\.isEmpty \{/);
-  assert.match(reader, /\.accessibilityAction\(\.magicTap\) \{\s*if speech\.isPlaying \{ pausePlayback\(\) \}/);
+  assert.match(reader, /\.accessibilityAction\(\.magicTap\) \{ toggleReaderPlayback\(\) \}/);
 });
 
 test('La voz ignora marcadores estructurales de EPUB conservando las posiciones', () => {

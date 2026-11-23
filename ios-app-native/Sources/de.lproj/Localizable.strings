@@ -1201,3 +1201,7 @@
 
 // Tipo de punto DAISY y acción accesible, sin iniciar audio.
 "%@: %@. Pulsa Reproducir para escuchar." = "%@: %@. Zum Anhören Wiedergabe drücken.";
+
+"Compartir DAISY original" = "Original-DAISY teilen";
+"Convertir texto a MP3 o DAISY con voz" = "Text mit einer Stimme in MP3 oder DAISY umwandeln";
+"Exportar audio existente (pistas en ZIP)" = "Vorhandenes Audio exportieren (Titel als ZIP)";

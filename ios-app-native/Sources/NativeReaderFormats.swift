@@ -571,17 +571,17 @@ enum NativeReaderFormats {
                     guard let href = attribute("href", in: tag),
                           let smil = NativeDaisyAudioOrder.resolvedMember(
                             href, relativeTo: ncc, available: smilPaths),
-                          let xml = try? String(
-                            contentsOf: directory.appendingPathComponent(smil),
-                            encoding: .utf8) else { continue }
+                          FileManager.default.fileExists(
+                            atPath: directory.appendingPathComponent(smil).path)
+                    else { continue }
                     let fragment = href.components(separatedBy: "#").dropFirst().first?
                         .removingPercentEncoding
-                    guard let target = daisyAudio(in: xml, fragment: fragment),
-                          let audioPath = NativeDaisyAudioOrder.resolvedMember(
-                            target.file, relativeTo: smil, available: audioFiles),
-                          let track = audioFiles.firstIndex(of: audioPath) else { continue }
-                    let point = NativeDaisyNavigationPoint(title: title, level: level, track: track,
-                                                          seconds: target.seconds)
+                    guard let target = NativeDaisyAudioOrder.navigationAudio(
+                            in: directory, smil: smil, fragment: fragment,
+                            audioPaths: audioFiles) else { continue }
+                    let point = NativeDaisyNavigationPoint(
+                        title: title, level: level, track: target.track,
+                        seconds: target.seconds)
                     if !daisyNavigation.contains(point) { daisyNavigation.append(point) }
                 }
             }
@@ -594,16 +594,14 @@ enum NativeReaderFormats {
                     let parts = link.href.components(separatedBy: "#")
                     guard let smil = NativeDaisyAudioOrder.resolvedMember(
                             link.href, relativeTo: ncx, available: smilPaths),
-                          let xml = try? String(contentsOf: directory.appendingPathComponent(smil),
-                                                encoding: .utf8),
-                          let target = daisyAudio(in: xml,
-                            fragment: parts.count > 1 ? parts[1].removingPercentEncoding : nil),
-                          let audioPath = NativeDaisyAudioOrder.resolvedMember(
-                            target.file, relativeTo: smil, available: audioFiles),
-                          let track = audioFiles.firstIndex(of: audioPath)
+                          let target = NativeDaisyAudioOrder.navigationAudio(
+                            in: directory, smil: smil,
+                            fragment: parts.count > 1 ? parts[1] : nil,
+                            audioPaths: audioFiles)
                     else { continue }
                     let point = NativeDaisyNavigationPoint(
-                        title: link.title, level: link.level, track: track, seconds: target.seconds,
+                        title: link.title, level: link.level, track: target.track,
+                        seconds: target.seconds,
                         kind: link.kind)
                     // Retain NCX pages/references even when NCC supplies chapters.
                     if !daisyNavigation.contains(where: {

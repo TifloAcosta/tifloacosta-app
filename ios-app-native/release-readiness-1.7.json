@@ -64,8 +64,14 @@
     {
       "id": 7,
       "title": "Compartir: recepción múltiple externa sin descartar adjuntos",
-      "status": "pending",
-      "issue": "#353"
+      "status": "partial",
+      "issue": "#353",
+      "evidence": [
+        "ios-app-native/ShareExtension/ShareViewController.swift",
+        "ios-app-native/Sources/NativeShareInbox.swift",
+        "ios-app-native/tests/share-extension-multiple-incoming-20261123.test.mjs"
+      ],
+      "validation": "23-11-2026: extensión Compartir procesa hasta 100 NSItemProvider seleccionados por lote, conserva cada archivo en App Group y añade índice para mantener orden al importar. Continúa tras fallos individuales, informa de la recepción y deja audios pendientes de destino en Recibidos. La bandeja anuncia el recuento importado/fallido y ofrece opciones por archivo. Falta CI final de Xcode, pruebas de varios adjuntos reales desde Archivos/WhatsApp, imágenes de vista previa, importaciones mixtas, audio y VoiceOver. No marcar completado ni distribuir."
     },
     {
       "id": 8,

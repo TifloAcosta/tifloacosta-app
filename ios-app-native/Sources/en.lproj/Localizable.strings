@@ -1186,3 +1186,8 @@
 "No se pudo cargar la lista de YouTube. Comprueba la conexión y vuelve a intentarlo." = "Could not load the YouTube playlist. Check your connection and try again.";
 "La lista no está disponible públicamente." = "This playlist is not publicly available.";
 "El servidor no pudo consultar esta lista de YouTube." = "The server could not retrieve this YouTube playlist.";
+
+// Importación múltiple desde Archivos: mensajes accesibles.
+"Preparando importación de archivos." = "Preparing file import.";
+"No se pudieron importar los archivos: %@" = "Could not import the files: %@";
+"Importación de archivos interrumpida." = "File import interrupted.";

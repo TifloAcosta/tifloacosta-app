@@ -116,10 +116,13 @@ test('playback button explicitly retains VoiceOver focus after a user activation
 
 test('pausing captures the live spoken character offset before saving the position', () => {
   const pause = reader.split('private func pausePlayback() {')[1]?.split('private func registerRemotePlaybackCommands')[0] ?? '';
-  const liveOffset = pause.indexOf('speech.textCharacterOffset');
+  const helper = reader.split('private func checkpointLiveTextPosition() {')[1]
+    ?.split('private func pausePlayback()')[0] ?? '';
+  assert.match(helper, /speech[.]textCharacterOffset/);
+  const liveCheckpoint = pause.indexOf('checkpointLiveTextPosition()');
   const pauseSpeech = pause.indexOf('speech.pause()');
   const persist = pause.indexOf('persistPosition()');
-  assert.ok(liveOffset >= 0 && pauseSpeech > liveOffset && persist > pauseSpeech);
+  assert.ok(liveCheckpoint >= 0 && pauseSpeech > liveCheckpoint && persist > pauseSpeech);
 });
 
 test('word callbacks after pause are ignored and cannot overwrite the saved cursor', () => {

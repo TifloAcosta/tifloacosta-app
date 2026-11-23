@@ -65,7 +65,9 @@ test('pause and view disappearance persist character offsets, not paragraph or r
   assert.match(pause, /speech\.pause\(\)/);
   assert.match(pause, /persistPosition\(\)/);
   const readerBody = inBetween('    var body: some View {\n        readerWithSheets', '.accessibilityAction(.magicTap)');
-  assert.match(readerBody, /if tracks\.isEmpty && \(speech\.isPlaying \|\| speech\.isPaused\)/);
-  assert.match(readerBody, /speech\.textCharacterOffset/);
-  assert.match(readerBody, /persistPosition\(\)/);
+  const helper = inBetween('    private func checkpointLiveTextPosition() {', '    private func pausePlayback() {');
+  assert.match(helper, /tracks[.]isEmpty && [(]speech[.]isPlaying [|][|] speech[.]isPaused[)]/);
+  assert.match(helper, /speech[.]textCharacterOffset/);
+  assert.match(readerBody, /checkpointLiveTextPosition[(][)]/);
+  assert.match(readerBody, /persistPosition[(][)]/);
 });

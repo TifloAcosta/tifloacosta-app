@@ -188,8 +188,10 @@ test('Las marcas de audio guardan segundos exactos con compatibilidad anterior',
 });
 
 test('Detener conserva la posición de audio antes de liberar el reproductor', () => {
-  assert.match(reader, /private func stopPlayback\(\) \{\s*\/\/ Save the exact audio time before stop\(\)/);
+  assert.match(reader, /private func stopPlayback[(][)] [{]\s*\/\/ Capture a live text cursor/);
   const stop = reader.match(/private func stopPlayback\(\) \{([\s\S]*?)\n    \}/)?.[1] ?? '';
+  assert.ok(stop.indexOf('checkpointLiveTextPosition()') >= 0);
+  assert.ok(stop.indexOf('checkpointLiveTextPosition()') < stop.indexOf('persistPosition()'));
   assert.ok(stop.indexOf('persistPosition()') < stop.indexOf('speech.stop()'));
 });
 
@@ -213,7 +215,7 @@ test('NCX mantiene orden de lectura padre-hijo y profundidad de encabezados', ()
 test('El temporizador guarda la posición antes de apagar el audio', () => {
   assert.match(reader, /var onSleepExpired: \(\(\) -> Void\)\?/);
   assert.match(reader, /self\?\.onSleepExpired\?\(\)/);
-  assert.match(reader, /speech\.onSleepExpired = \{ persistPosition\(\) \}/);
+  assert.match(reader, /speech[.]onSleepExpired = [{]\s*checkpointLiveTextPosition[(][)]\s*persistPosition[(][)]/);
   assert.match(reader, /speech\.onSleepExpired = nil/);
   const expired = reader.indexOf('self?.onSleepExpired?()');
   const stopped = reader.indexOf('self?.stop()', expired);

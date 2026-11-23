@@ -37,8 +37,11 @@ test('reproducción automática continúa de pista en pista, sin saltar al pausa
   const disappear = screen.split('        .onDisappear {')[1]?.split('        .accessibilityAction(.magicTap)')[0] ?? '';
   assert.match(disappear, /unregisterRemotePlaybackCommands/);
   assert.match(disappear, /NativeReaderPlaybackBridge/);
-  assert.match(disappear, /speech[.]textCharacterOffset/);
-  assert.ok(disappear.indexOf('speech.textCharacterOffset') < disappear.indexOf('persistPosition()'));
+  const helper = reader.split('private func checkpointLiveTextPosition() {')[1]
+    ?.split('private func pausePlayback()')[0] ?? '';
+  assert.match(helper, /speech[.]textCharacterOffset/);
+  assert.match(disappear, /checkpointLiveTextPosition[(][)]/);
+  assert.ok(disappear.indexOf('checkpointLiveTextPosition()') < disappear.indexOf('persistPosition()'));
   assert.ok(disappear.indexOf('persistPosition()') < disappear.indexOf('speech.stop()'));
 });
 

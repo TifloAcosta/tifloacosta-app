@@ -2767,9 +2767,10 @@ struct NativeReadingScreen: View {
         if let url = NativeReaderFormats.storedURL(for: tracks[point.track]),
            let probe = try? AVAudioPlayer(contentsOf: url),
            probe.duration.isFinite, probe.duration > 0 {
-            pendingDaisyAudioSeconds = min(requestedSeconds, probe.duration)
+            let targetSeconds = min(requestedSeconds, probe.duration)
+            pendingDaisyAudioSeconds = targetSeconds
             currentPercent = max(0, min(100, Int((
-                pendingDaisyAudioSeconds! / probe.duration * 100).rounded())))
+                targetSeconds / probe.duration * 100).rounded())))
         } else {
             pendingDaisyAudioSeconds = requestedSeconds
             currentPercent = 0

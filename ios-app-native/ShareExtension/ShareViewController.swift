@@ -3,7 +3,7 @@ import AVFoundation
 import UniformTypeIdentifiers
 
 // A separate Share Extension process: no Capacitor or WebKit dependency.
-// Accept exactly one input and store it privately until the host imports it.
+// Receive each selected attachment sequentially into the private App Group inbox.
 final class ShareViewController: UIViewController {
     private let groupId = "group.com.tifloacosta.app"
     // Keep ordinary files at the existing limit. DAISY/ZIP archives are
@@ -30,6 +30,15 @@ final class ShareViewController: UIViewController {
     private var receivedText: String?
     private var previewText = ""
     private var saving = false
+    // Copy provider files before advancing: their temporary URLs expire.
+    private var incomingQueue: [(provider: NSItemProvider, title: String)] = []
+    private var incomingIndex = 0
+    private var receivedCount = 0
+    private var failedNames: [String] = []
+    private var pendingAudioCount = 0
+    private var batchID = ""
+    private var lastProgressAnnouncement = Date.distantPast
+    private var itemCompleted: ((Bool, String) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,7 +108,7 @@ final class ShareViewController: UIViewController {
         super.viewDidAppear(animated)
         guard !saving else { return }
         saving = true
-        receiveFirstAttachment()
+        receiveAttachments()
     }
 
     private func finish(_ text: String) {
@@ -204,57 +213,94 @@ final class ShareViewController: UIViewController {
 
     // A provider may publish BOTH a local file and a URL. A file:// URL
     // is never a broken HTTPS link: it is an attachment to copy into App Group.
-    private func receiveFirstAttachment() {
-        guard let context = extensionContext,
-              let incoming = context.inputItems as? [NSExtensionItem] else {
+    private func receiveAttachments() {
+        guard let incoming = extensionContext?.inputItems as? [NSExtensionItem] else {
             finish("No se ha recibido contenido compatible.")
             return
         }
-        // Keep the share sheet aligned with the formats the reader really imports.
+        incomingQueue = incoming.flatMap { item in
+            let rawTitle = item.attributedTitle?.string
+                .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            let title = (!rawTitle.isEmpty && !rawTitle.hasPrefix("http") &&
+                         rawTitle.count <= 240 && rawTitle.lowercased() != "link" &&
+                         rawTitle.lowercased() != "enlace") ? rawTitle : ""
+            return (item.attachments ?? []).map { (provider: $0, title: title) }
+        }
+        guard !incomingQueue.isEmpty else {
+            finish("No se ha recibido contenido compatible.")
+            return
+        }
+        guard incomingQueue.count <= 100 else {
+            finish("Se han seleccionado más de 100 elementos. Comparte los archivos en lotes más pequeños.")
+            return
+        }
+        batchID = UUID().uuidString
+        incomingIndex = 0
+        receivedCount = 0
+        failedNames = []
+        pendingAudioCount = 0
+        receiveNext()
+    }
+
+    private func receiveNext() {
+        guard incomingIndex < incomingQueue.count else {
+            itemCompleted = nil
+            let failed = failedNames.count
+            let result = "Recibidos: \(receivedCount) de \(incomingQueue.count). " +
+                "Fallidos: \(failed). " +
+                (pendingAudioCount > 0
+                    ? "\(pendingAudioCount) archivos de audio pendientes de elegir destino en Recibidos. "
+                    : "") +
+                (failed > 0 ? "Los archivos con errores permanecen en la aplicación de origen. " : "") +
+                "Abre TifloAcosta para incorporar los recibidos."
+            finish(result)
+            return
+        }
+        let item = incomingQueue[incomingIndex]
+        if incomingQueue.count > 1 {
+            statusLabel.text = "Recibiendo \(incomingIndex + 1) de \(incomingQueue.count): " +
+                (item.provider.suggestedName ?? "Elemento")
+            if Date().timeIntervalSince(lastProgressAnnouncement) >= 5 {
+                UIAccessibility.post(notification: .announcement, argument: statusLabel.text)
+                lastProgressAnnouncement = Date()
+            }
+        }
+        itemCompleted = { [weak self] success, message in
+            guard let self else { return }
+            if success { self.receivedCount += 1 }
+            else {
+                let name = item.provider.suggestedName ?? "Elemento \(self.incomingIndex + 1)"
+                self.failedNames.append(name + ": " + message)
+            }
+            self.incomingIndex += 1
+            if self.incomingQueue.count == 1 {
+                self.itemCompleted = nil
+                self.finish(message)
+            } else {
+                self.receiveNext()
+            }
+        }
+        receiveAttachment(provider: item.provider, itemTitle: item.title)
+    }
+
+    private func reportItem(_ success: Bool, _ message: String) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.itemCompleted?(success, message)
+        }
+    }
+
+    private func receiveAttachment(provider: NSItemProvider, itemTitle: String) {
         let supported: Set<String> = [
             "pdf", "txt", "text", "html", "htm", "md", "markdown",
             "csv", "json", "xml", "log", "srt", "rtf", "fb2",
             "docx", "odt", "pptx", "ppsx", "pptm", "xlsx", "xlsm",
             "epub", "mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff",
-            "caf", "mp4", "m4v", "mov", "zip", "daisy", "png", "jpg", "jpeg",
+            "caf", "flac", "mp4", "m4v", "mov", "zip", "daisy", "png", "jpg", "jpeg",
             "heic", "heif", "tif", "tiff"
         ]
-        let providers = incoming.flatMap { $0.attachments ?? [] }
-        let imageExtensions: Set<String> = ["png", "jpg", "jpeg", "heic", "heif", "tif", "tiff"]
-        // WhatsApp may put an image preview before the original EPUB.
-        // A named document/audio always beats an image; a standalone image
-        // remains available for the reader's existing OCR.
-        let provider = providers.first(where: { candidate in
-            let suffix = URL(fileURLWithPath: candidate.suggestedName ?? "")
-                .pathExtension.lowercased()
-            return supported.contains(suffix) && !imageExtensions.contains(suffix)
-        }) ?? providers.first(where: { candidate in
-            candidate.registeredTypeIdentifiers.contains(where: { identifier in
-                guard let type = UTType(identifier) else { return false }
-                let suffix = type.preferredFilenameExtension?.lowercased() ?? ""
-                return !type.conforms(to: .url) && !type.conforms(to: .plainText)
-                    && !type.conforms(to: .image)
-                    && (type.conforms(to: .audio) || type.conforms(to: .data)
-                        || type.conforms(to: .content)
-                        || (supported.contains(suffix) && !imageExtensions.contains(suffix)))
-            })
-        }) ?? providers.first(where: { candidate in
-            let suffix = URL(fileURLWithPath: candidate.suggestedName ?? "")
-                .pathExtension.lowercased()
-            return imageExtensions.contains(suffix)
-        }) ?? providers.first
-        guard let provider = provider else {
-            finish("No se ha recibido contenido compatible.")
-            return
-        }
-
         let suggested = provider.suggestedName ?? ""
         // Prefer a meaningful title supplied by the originating app.
-        let itemTitle = incoming.compactMap { $0.attributedTitle?.string }
-            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-            .first(where: { !$0.isEmpty && !$0.hasPrefix("http") &&
-                $0.count <= 240 && $0.lowercased() != "link" &&
-                $0.lowercased() != "enlace" }) ?? ""
         let namedExtension = URL(fileURLWithPath: suggested).pathExtension.lowercased()
         let namedFile = supported.contains(namedExtension)
         let identifiers = provider.registeredTypeIdentifiers
@@ -281,7 +327,7 @@ final class ShareViewController: UIViewController {
                     provider.loadDataRepresentation(forTypeIdentifier: identifier) { [weak self] data, _ in
                         guard let self = self, let data = data, !data.isEmpty,
                               Int64(data.count) <= self.maxInMemoryBytes else {
-                            self?.finish("No se pudo recibir el archivo. Inténtalo de nuevo desde la aplicación de origen.")
+                            self?.reportItem(false, "No se pudo recibir el archivo. Inténtalo de nuevo desde la aplicación de origen.")
                             return
                         }
                         let suffix = UTType(identifier)?.preferredFilenameExtension?.lowercased() ?? ""
@@ -300,7 +346,7 @@ final class ShareViewController: UIViewController {
                             self.store(kind: "file", title: fallbackName, value: nil,
                                        file: temporary, typeIdentifier: identifier)
                         } catch {
-                            self.finish("No se pudo conservar el archivo recibido.")
+                            self.reportItem(false, "No se pudo conservar el archivo recibido.")
                         }
                         try? FileManager.default.removeItem(at: temporary)
                     }
@@ -335,7 +381,7 @@ final class ShareViewController: UIViewController {
                     let filename = suggested.isEmpty ? url.lastPathComponent : suggested
                     self.store(kind: "file", title: filename, value: nil, file: url)
                 } else {
-                    self.finish("No se pudo acceder al archivo compartido.")
+                    self.reportItem(false, "No se pudo acceder al archivo compartido.")
                 }
             }
             return
@@ -346,7 +392,7 @@ final class ShareViewController: UIViewController {
                 guard let self = self else { return }
                 let address = (value as? URL) ?? (value as? String).flatMap(URL.init(string:))
                 guard let address = address else {
-                    self.finish("No se pudo leer el contenido compartido.")
+                    self.reportItem(false, "No se pudo leer el contenido compartido.")
                     return
                 }
                 if address.isFileURL {
@@ -358,7 +404,7 @@ final class ShareViewController: UIViewController {
                     self.store(kind: "url", title: itemTitle.isEmpty ? (suggested.isEmpty ? "Enlace" : suggested) : itemTitle,
                                value: address.absoluteString, file: nil)
                 } else {
-                    self.finish("El contenido recibido no es un enlace web ni un archivo accesible.")
+                    self.reportItem(false, "El contenido recibido no es un enlace web ni un archivo accesible.")
                 }
             }
             return
@@ -371,18 +417,18 @@ final class ShareViewController: UIViewController {
                     self.store(kind: "text", title: suggested.isEmpty ? "Texto" : suggested,
                                value: String(string.prefix(200_000)), file: nil)
                 } else {
-                    self.finish("No se pudo leer el texto compartido.")
+                    self.reportItem(false, "No se pudo leer el texto compartido.")
                 }
             }
             return
         }
-        finish("Formato no compatible con TifloAcosta.")
+        reportItem(false, "Formato no compatible con TifloAcosta.")
     }
 
     private func store(kind: String, title: String, value: String?, file: URL?,
                        typeIdentifier: String? = nil) {
         guard let group = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupId) else {
-            finish("Falta configurar el grupo compartido de Apple.")
+            reportItem(false, "Falta configurar el grupo compartido de Apple.")
             return
         }
         let manager = FileManager.default
@@ -397,6 +443,11 @@ final class ShareViewController: UIViewController {
                 "id": id, "kind": kind,
                 "name": String(clean.prefix(170)), "createdAt": ISO8601DateFormatter().string(from: Date())
             ]
+            if incomingQueue.count > 1 {
+                message["batchID"] = batchID
+                message["batchIndex"] = String(incomingIndex)
+                message["batchCount"] = String(incomingQueue.count)
+            }
             let audioExtensions: Set<String> = [
                 "mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff", "caf", "flac"
             ]
@@ -413,12 +464,12 @@ final class ShareViewController: UIViewController {
                 let attributes = try manager.attributesOfItem(atPath: file.path)
                 guard let fileSize = attributes[.size] as? NSNumber,
                       fileSize.int64Value > 0 else {
-                    finish("No se pudo comprobar el tamaño del archivo recibido.")
+                    reportItem(false, "No se pudo comprobar el tamaño del archivo recibido.")
                     return
                 }
                 let limit = fileTransferLimit(for: clean)
                 guard fileSize.int64Value <= limit else {
-                    finish(limit == maxArchiveBytes
+                    reportItem(false, limit == maxArchiveBytes
                         ? "El ZIP o DAISY supera el límite de 750 MB. El archivo permanece en la aplicación de origen."
                         : "El archivo supera el límite de 100 MB.")
                     return
@@ -429,7 +480,7 @@ final class ShareViewController: UIViewController {
                 message["storedName"] = storedName
             } else {
                 guard let value = value, !value.isEmpty else {
-                    finish("El contenido estaba vacío.")
+                    reportItem(false, "El contenido estaba vacío.")
                     return
                 }
                 message["value"] = value
@@ -438,6 +489,11 @@ final class ShareViewController: UIViewController {
             let data = try JSONSerialization.data(withJSONObject: message, options: [.sortedKeys])
             try data.write(to: manifest, options: [.atomic])
             DispatchQueue.main.async {
+                if self.incomingQueue.count > 1 {
+                    if isAudio { self.pendingAudioCount += 1 }
+                    self.reportItem(true, "Elemento guardado en Recibidos.")
+                    return
+                }
                 if isAudio {
                     self.pendingAudioID = id
                     self.saveReaderButton.isHidden = false
@@ -455,18 +511,20 @@ final class ShareViewController: UIViewController {
                         URL(fileURLWithPath: clean).pathExtension.lowercased()
                     )))
             }
-            if isAudio {
-                finish("Audio recibido. Elige Guardar en TifloLector o Guardar en Mi música. Si cierras, quedará pendiente en Recibidos.")
-            } else if kind == "file" {
-                finish("Documento guardado para TifloLector. Puedes leerlo ahora si aparece esa opción. Al abrir TifloAcosta se incorporará a la biblioteca y se abrirá directamente.")
-            } else if kind == "url" {
-                finish("Enlace recibido. Estará disponible en Recibidos para abrirlo o analizarlo.")
-            } else {
-                finish("Texto guardado para TifloLector. Puedes leerlo aquí o abrir TifloAcosta para continuar.")
+            if incomingQueue.count == 1 {
+                if isAudio {
+                    reportItem(true, "Audio recibido. Elige Guardar en TifloLector o Guardar en Mi música. Si cierras, quedará pendiente en Recibidos.")
+                } else if kind == "file" {
+                    reportItem(true, "Documento guardado para TifloLector. Puedes leerlo ahora si aparece esa opción. Al abrir TifloAcosta se incorporará a la biblioteca y se abrirá directamente.")
+                } else if kind == "url" {
+                    reportItem(true, "Enlace recibido. Estará disponible en Recibidos para abrirlo o analizarlo.")
+                } else {
+                    reportItem(true, "Texto guardado para TifloLector. Puedes leerlo aquí o abrir TifloAcosta para continuar.")
+                }
             }
         } catch {
             try? manager.removeItem(at: inbox.appendingPathComponent(id + ".data"))
-            finish("No se pudo guardar el contenido. Puedes volver a intentarlo.")
+            reportItem(false, "No se pudo guardar el contenido. Puedes volver a intentarlo.")
         }
     }
 }

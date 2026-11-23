@@ -158,7 +158,13 @@
       "id": 13,
       "title": "Braille: lectura continua y posición estable",
       "status": "partial",
-      "issue": "#359"
+      "issue": "#359",
+      "evidence": [
+        "ios-app-native/Sources/NativeTifloLector.swift",
+        "ios-app-native/tests/reader-braille-continuous-20261119.test.mjs",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/d6179168c5b99a186a11def2c1b08d1404b4494a"
+      ],
+      "validation": "BLOQUE 4 (23-11-2026): el avance del cursor de lectura braille ya no ejecuta saveTextPosition (serialización completa de biblioteca) en cada cambio; usa el guardado diferido compartido de 650 ms, con persistencia al salir del lector y al entrar en segundo plano. Contrato de no-regresión actualizado. Contratos de GitHub Actions 45264386769 SUCCESS; compilación de simulador en curso al registrar el cambio. No confirma estabilidad de RTF prolongados ni continuidad real con línea braille/VoiceOver. ESTADO PARCIAL, sin TestFlight ni App Store."
     },
     {
       "id": 14,
@@ -249,9 +255,11 @@
       "evidence": [
         "ios-app-native/Sources/NativeReaderContinuousBrailleText.swift",
         "ios-app-native/Sources/NativeTifloLector.swift",
-        "ios-app-native/tests/reader-rtf-braille-cursor-stability-20261122.test.mjs"
+        "ios-app-native/tests/reader-rtf-braille-cursor-stability-20261122.test.mjs",
+        "ios-app-native/tests/reader-braille-continuous-20261119.test.mjs",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/d6179168c5b99a186a11def2c1b08d1404b4494a"
       ],
-      "validation": "Se evita priorizar un offset guardado desactualizado en el modo braille, se protege la restauración contra callbacks y se limitan desplazamientos redundantes de UITextView; NO se ha confirmado que resuelva el fallo RTF con una línea braille real."
+      "validation": "Se evita priorizar un offset guardado desactualizado en el modo braille, se protege la restauración contra callbacks y se limitan desplazamientos redundantes de UITextView; NO se ha confirmado que resuelva el fallo RTF con una línea braille real. BLOQUE 4 (23-11-2026): el avance del cursor de lectura braille ya no ejecuta saveTextPosition (serialización completa de biblioteca) en cada cambio; usa el guardado diferido compartido de 650 ms, con persistencia al salir del lector y al entrar en segundo plano. Contrato de no-regresión actualizado. Contratos de GitHub Actions 45264386769 SUCCESS; compilación de simulador en curso al registrar el cambio. No confirma estabilidad de RTF prolongados ni continuidad real con línea braille/VoiceOver. ESTADO PARCIAL, sin TestFlight ni App Store."
     },
     {
       "id": 22,

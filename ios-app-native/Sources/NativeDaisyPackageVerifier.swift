@@ -20,15 +20,16 @@ enum NativeDaisyPackageVerifier {
         guard let archive = Archive(url: url, accessMode: .read) else {
             throw Failure.invalidMP3Zip
         }
-        var nextIndex = 1
+        var filenames = Set<String>()
         var totalBytes: UInt64 = 0
         // The reader importer also caps expanded archives at 750 MB and 4,000 entries.
         // Validate each ZIP entry using bounded memory, including its compressed data.
         for entry in archive {
             try Task.checkCancellation()
-            guard nextIndex <= 4_000,
+            guard filenames.count < 4_000,
                   entry.type == .file,
-                  entry.path == String(format: "%04d.mp3", nextIndex),
+                  entry.path.range(of: #"^[0-9]{4}\.mp3$"#, options: .regularExpression) != nil,
+                  filenames.insert(entry.path).inserted,
                   entry.uncompressedSize > 100,
                   entry.uncompressedSize <= 750_000_000,
                   UInt64(entry.uncompressedSize) <= 750_000_000 - totalBytes else {
@@ -47,9 +48,14 @@ enum NativeDaisyPackageVerifier {
                   zip(header, header.dropFirst()).contains(where: {
                       $0.0 == 0xff && ($0.1 & 0xe0) == 0xe0
                   }) else { throw Failure.invalidMP3Zip }
-            nextIndex += 1
         }
-        guard nextIndex > 1 else { throw Failure.invalidMP3Zip }
+        // ZIP entries need not be stored in lexical order. The numbered filenames,
+        // not the ZIP's directory order, define Voice Dream's chapter sequence.
+        let ordered = filenames.sorted()
+        guard !ordered.isEmpty,
+              ordered.enumerated().allSatisfy({
+                  $0.element == String(format: "%04d.mp3", $0.offset + 1)
+              }) else { throw Failure.invalidMP3Zip }
     }
 
     static func validate(_ url: URL) throws {

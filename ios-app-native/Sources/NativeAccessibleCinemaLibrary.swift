@@ -154,6 +154,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
     @Published private(set) var playing = false
     @Published private(set) var seconds: Double = 0
     @Published private(set) var duration: Double = 0
+    @Published private(set) var playbackError: String?
 
     private var player: AVPlayer?
     /// Expose the same AVPlayer to the native video surface without creating
@@ -170,6 +171,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
             throw NativeCinemaLocalError.missing
         }
         pauseAndSave(library: library)
+        playbackError = nil
         // If session activation fails, do not leave a half-open item with
         // playback state advertised as ready.
         try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
@@ -214,6 +216,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
             playing = false
             save(library: library, force: true)
         } else {
+            guard playbackError == nil else { return }
             NativeRemotePlaybackOwner.claim(.cinema)
             registerRemoteCommands()
             player.play()
@@ -234,7 +237,19 @@ final class NativeCinemaAudioPlayer: ObservableObject {
     }
 
     func refresh(library: NativeCinemaLocalLibrary) {
-        guard let player else { return }
+        guard let player, playbackError == nil else { return }
+        if player.currentItem?.status == .failed || player.error != nil {
+            // A malformed or unsupported local file can fail asynchronously.
+            // Do not continue announcing Pausar when no playback exists.
+            player.pause()
+            playing = false
+            playbackError = MusicLocalized.message(
+                "No se pudo reproducir este archivo. Comprueba que el formato es compatible.")
+            save(library: library, force: true)
+            unregisterRemoteCommands()
+            NativeRemotePlaybackOwner.release(.cinema)
+            return
+        }
         let elapsed = player.currentTime().seconds
         if elapsed.isFinite && elapsed >= 0 { seconds = elapsed }
         let length = player.currentItem?.duration.seconds ?? 0
@@ -323,6 +338,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         duration = 0
         currentTitle = ""
         activeLibrary = nil
+        playbackError = nil
         unregisterRemoteCommands()
         NativeRemotePlaybackOwner.release(.cinema)
     }

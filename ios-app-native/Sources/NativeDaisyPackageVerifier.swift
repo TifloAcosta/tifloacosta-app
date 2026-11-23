@@ -73,6 +73,12 @@ enum NativeDaisyPackageVerifier {
             entries.insert(name)
             let isAudio = name.lowercased().hasSuffix(".mp3")
             // Las pistas se comprueban por cabecera; no se cargan enteras en RAM.
+            // Reject oversized XML/metadata from the ZIP header BEFORE
+            // extracting. Otherwise a maliciously large text member could
+            // allocate hundreds of MB before the post-extraction check.
+            guard isAudio || entry.uncompressedSize < 8 * 1024 * 1024 else {
+                throw Failure.invalid
+            }
             var bytes = Data()
             _ = try archive.extract(entry) { part in
                 if isAudio {
@@ -203,6 +209,12 @@ enum NativeDaisyPackageVerifier {
             guard totalSize < 512 * 1024 * 1024 else { throw Failure.invalid }
             let isAudio = name.lowercased().hasSuffix(".mp3")
             guard isAudio || ["ncc.html", "audio.smil"].contains(name) else {
+                throw Failure.invalid
+            }
+            // Reject oversized XML/metadata from the ZIP header BEFORE
+            // extracting. Otherwise a maliciously large text member could
+            // allocate hundreds of MB before the post-extraction check.
+            guard isAudio || entry.uncompressedSize < 8 * 1024 * 1024 else {
                 throw Failure.invalid
             }
             var bytes = Data()

@@ -122,11 +122,13 @@ test('pausing captures the live spoken character offset before saving the positi
   assert.ok(liveOffset >= 0 && pauseSpeech > liveOffset && persist > pauseSpeech);
 });
 
-test('last word callbacks arriving after pause still update the saved cursor', () => {
+test('word callbacks after pause are ignored and cannot overwrite the saved cursor', () => {
   const delegate = reader.split('progressDelegate.onWord =')[1]?.split('progressDelegate.onFinish =')[0] ?? '';
-  assert.match(delegate, /self\.isPlaying \|\| self\.isPaused/);
+  assert.match(delegate, /self[.]isPlaying, !self[.]isPaused/);
+  assert.match(delegate, /ObjectIdentifier[(]self[.]speechQueue/);
+  assert.match(delegate, /segmentBase [+] range[.]location/);
   const receive = reader.split('.onReceive(speech.$textCharacterOffset) { offset in')[1]
     ?.split('.onReceive(Timer.publish')[0] ?? '';
-  assert.match(receive, /speech\.isPlaying \|\| speech\.isPaused/);
-  assert.match(receive, /if speech\.isPaused \{ persistPosition\(\) \}/);
+  assert.match(receive, /speech[.]isPlaying [|][|] speech[.]isPaused/);
+  assert.match(receive, /if speech[.]isPaused [{] persistPosition[(][)] [}]/);
 });

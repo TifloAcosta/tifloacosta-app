@@ -2839,18 +2839,35 @@ struct NativeReadingScreen: View {
             actionMessage = MusicLocalized.message("Faltan archivos de audio de esta obra.")
             return
         }
+        let onChanged: (Int) -> Void = { next in
+            trackIndex = next
+            currentPercent = speech.audioPercent
+            persistPosition()
+            applySleepTimer()
+        }
+        let onError: (String) -> Void = { error in
+            actionMessage = MusicLocalized.format("No se pudo reproducir: %@", error)
+        }
         do {
-            try speech.playPlaylist(urls, speed: speed, track: trackIndex, at: currentPercent,
-                onTrackChanged: { next in
-                    trackIndex = next
-                    currentPercent = 0
-                    persistPosition()
-                    applySleepTimer()
-                },
-                onError: { error in actionMessage = MusicLocalized.format("No se pudo reproducir: %@", error) })
+            if latest.fileExtension?.lowercased() == "daisy",
+               let clips = latest.daisyClips, !clips.isEmpty {
+                // An explicit heading jump takes precedence over a saved
+                // location. No user gesture for navigation starts playback.
+                let seconds = pendingDaisyAudioSeconds
+                    ?? (trackIndex == (latest.lastTrackIndex ?? 0)
+                        ? latest.lastAudioSeconds : nil)
+                try speech.playDaisySequence(urls, clips: clips, speed: speed,
+                    track: trackIndex, at: currentPercent, seconds: seconds,
+                    onTrackChanged: onChanged, onError: onError)
+            } else {
+                try speech.playPlaylist(urls, speed: speed,
+                    track: trackIndex, at: currentPercent,
+                    onTrackChanged: onChanged, onError: onError)
+            }
             actionMessage = nil
         } catch {
-            actionMessage = MusicLocalized.format("No se pudo reproducir: %@", error.localizedDescription)
+            actionMessage = MusicLocalized.format(
+                "No se pudo reproducir: %@", error.localizedDescription)
         }
     }
 

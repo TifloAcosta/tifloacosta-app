@@ -331,8 +331,9 @@ enum NativeReaderFormats {
         else { return nil }
         let tag = String(segment[audio])
         guard let src = attribute("src", in: tag) else { return nil }
-        let file = URL(fileURLWithPath: src.components(separatedBy: "#")[0])
-            .lastPathComponent.lowercased()
+        // Preserve relative directories: two SMIL folders may refer to
+        // different recordings that share the same MP3 basename.
+        let file = src.components(separatedBy: "#")[0]
         let start = attribute("clipBegin", in: tag) ?? attribute("clip-begin", in: tag)
         return (file, start.flatMap(smilSeconds))
     }
@@ -550,6 +551,7 @@ enum NativeReaderFormats {
             }
             body = isDaisy ? joined(pages) : ""
             format = isDaisy ? "daisy" : "zip"
+            let smilPaths = all.filter { $0.lowercased().hasSuffix(".smil") }
             if isDaisy, let ncc = all.first(where: { $0.lowercased().hasSuffix("ncc.html") }) {
                 let raw = (try? String(contentsOf: directory.appendingPathComponent(ncc), encoding: .utf8)) ?? ""
                 let expression = try? NSRegularExpression(
@@ -565,24 +567,19 @@ enum NativeReaderFormats {
                           let hrefMatch = headingHTML.range(
                             of: #"(?i)href\s*=\s*["']([^"']+\.smil)(?:#[^"']*)?["']"#,
                             options: .regularExpression) else { continue }
-                    let href = String(headingHTML[hrefMatch])
-                    let path = href.replacingOccurrences(
-                        of: #"(?is)^.*?["']([^"']+\.smil)(?:#[^"']*)?["'].*$"#,
-                        with: "$1", options: .regularExpression)
+                    let tag = String(headingHTML[hrefMatch])
+                    guard let href = attribute("href", in: tag),
+                          let smil = NativeDaisyAudioOrder.resolvedMember(
+                            href, relativeTo: ncc, available: smilPaths),
+                          let xml = try? String(
+                            contentsOf: directory.appendingPathComponent(smil),
+                            encoding: .utf8) else { continue }
                     let fragment = href.components(separatedBy: "#").dropFirst().first?
-                        .replacingOccurrences(of: #"["'].*$"#, with: "", options: .regularExpression)
-                    let smilName = URL(fileURLWithPath: path).lastPathComponent.lowercased()
-                    guard let smil = all.first(where: {
-                        $0.lowercased().hasSuffix("/" + smilName) ||
-                        $0.lowercased() == smilName
-                    }), let xml = try? String(contentsOf: directory.appendingPathComponent(smil),
-                                              encoding: .utf8),
-                          let target = daisyAudio(in: xml, fragment: fragment)
-                    else { continue }
-                    let file = target.file
-                    guard let track = audioFiles.firstIndex(where: {
-                        URL(fileURLWithPath: $0).lastPathComponent.lowercased() == file
-                    }) else { continue }
+                        .removingPercentEncoding
+                    guard let target = daisyAudio(in: xml, fragment: fragment),
+                          let audioPath = NativeDaisyAudioOrder.resolvedMember(
+                            target.file, relativeTo: smil, available: audioFiles),
+                          let track = audioFiles.firstIndex(of: audioPath) else { continue }
                     let point = NativeDaisyNavigationPoint(title: title, level: level, track: track,
                                                           seconds: target.seconds)
                     if !daisyNavigation.contains(point) { daisyNavigation.append(point) }
@@ -595,18 +592,15 @@ enum NativeReaderFormats {
                let ncxData = try? Data(contentsOf: directory.appendingPathComponent(ncx)) {
                 for link in NativeDaisyNCX.parse(ncxData) {
                     let parts = link.href.components(separatedBy: "#")
-                    let smilFile = URL(fileURLWithPath: parts[0]).lastPathComponent.lowercased()
-                    guard smilFile.hasSuffix(".smil"),
-                          let smil = all.first(where: {
-                              $0.lowercased().hasSuffix("/" + smilFile) ||
-                              $0.lowercased() == smilFile
-                          }),
+                    guard let smil = NativeDaisyAudioOrder.resolvedMember(
+                            link.href, relativeTo: ncx, available: smilPaths),
                           let xml = try? String(contentsOf: directory.appendingPathComponent(smil),
                                                 encoding: .utf8),
-                          let target = daisyAudio(in: xml, fragment: parts.count > 1 ? parts[1] : nil),
-                          let track = audioFiles.firstIndex(where: {
-                              URL(fileURLWithPath: $0).lastPathComponent.lowercased() == target.file
-                          })
+                          let target = daisyAudio(in: xml,
+                            fragment: parts.count > 1 ? parts[1].removingPercentEncoding : nil),
+                          let audioPath = NativeDaisyAudioOrder.resolvedMember(
+                            target.file, relativeTo: smil, available: audioFiles),
+                          let track = audioFiles.firstIndex(of: audioPath)
                     else { continue }
                     let point = NativeDaisyNavigationPoint(
                         title: link.title, level: link.level, track: track, seconds: target.seconds,

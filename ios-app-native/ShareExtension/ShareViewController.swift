@@ -251,7 +251,10 @@ final class ShareViewController: UIViewController {
                 (pendingAudioCount > 0
                     ? "\(pendingAudioCount) archivos de audio pendientes de elegir destino en Recibidos. "
                     : "") +
-                (failed > 0 ? "Los archivos con errores permanecen en la aplicación de origen. " : "") +
+                (failed > 0
+                    ? "Los archivos con errores permanecen en la aplicación de origen. " +
+                      "Errores: " + failedNames.prefix(3).joined(separator: "; ") + ". "
+                    : "") +
                 "Abre TifloAcosta para incorporar los recibidos."
             finish(result)
             return

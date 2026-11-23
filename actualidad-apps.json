@@ -120,6 +120,18 @@
     "publishedAt": null
   },
   {
+    "id": "applevis-apps-37fb83df8b1221e0",
+    "title": "Mushroom FM",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/music/mushroom-fm",
+    "lang": "en",
+    "platform": "Apple",
+    "summary": "Mushroom FM, the Home of the Fun Guys, brings you four decades of magic Mushroom memories: music from the 50s to the 80s, presented live by a friendly team from New Zealand, Australia, Britain, South Africa, Canada and the US. Commercial-free, apart from the occasional old advert played for nostalgia. Built for VoiceOver from the start. Many of our presenters and listeners are blind or partially sighted, so every screen is designed to be quick and easy with VoiceOver, as well as for sighted listeners. LISTEN LIVE - Mushroom FM at the press of a button, with the show, the presenter and the song playing now. - Pause live radio and carry on where you left off, or go back to the start of the show. - Keeps playing with your iPhone locked, with controls on the Lock Screen and your headphones. - A sleep timer, including \"end of this show\". MUSHROOM ESCAPE Our old-time radio channel: drama, comedy, mystery and science fiction from the golden age of radio, from America, the BBC and beyond, scheduled by hand so your favourite series is on at the same time every week. SCHEDULE AND REMINDERS See the week's shows on both channels, and get a reminder before the shows you don't want to miss. LISTEN AGAIN Missed a show? Play recent shows again. TALK TO THE PRESENTERS Send a written or recorded message to the presenter on air, or to any of the Fun Guys. If you're on Mastodon, toot the presenter and follow what the Mushroom Crowd is saying, right in the app. AND MORE - Siri: \"Play Mushroom FM\" and \"Play Mushroom FM Escape\". - A Home Screen widget. - An Apple Watch app that plays the live stream. Mushroom FM is a licensed internet radio station.",
+    "publishedAt": "2026-11-22T23:46:41.000Z"
+  },
+  {
     "id": "applevis-apps-7c2b684074584292",
     "title": "Bambu Handy",
     "sourceId": "applevis-apps",
@@ -226,17 +238,5 @@
     "platform": "Apple",
     "summary": "Word search at its most satisfying! Read the clue, figure out the word, then swipe across the grid to find it. Every word you find reveals a letter of the Secret Word — crack it before you finish the grid! THE SECRET WORD: A NEW LAYER ON WORD SEARCH Every puzzle hides a Secret Word. Each word you find reveals one of its letters. Guess it before the grid is done: the earlier you crack it, the bigger the bonus. You get 3 guesses! DAILY PUZZLE One puzzle a day, the same for everyone — including the same Secret Word. Keep your streak, share your result with a spoiler-free emoji card and climb the daily Game Center leaderboard. NO WORD LIST, JUST CLUES The words aren't handed to you — you work them out from clues. They hide horizontally, vertically, diagonally, even backwards. PLAY WITH VOICEOVER ScribbleGrid can be played from start to finish with VoiceOver. Clues and grid letters are read aloud; mark a word by double-tapping its first and last letters. Hear a whole row, column or diagonal at once, and hear every letter as you type the Secret Word. A step-by-step VoiceOver guide is built into the game. COMBO SCORING Find words within 10 seconds of each other to push your multiplier up to x5. THREE DIFFICULTY LEVELS Easy: short words, straight directions. Medium: reversed directions join in. Hard: long words in all 8 directions. STATS AND STREAK REMINDERS Track your streak, best times and solved Secret Words. If the puzzle is still waiting, get an optional reminder at 8 PM. TWO LANGUAGES, THOUSANDS OF WORDS Thousands of carefully written clues in English and Turkish. Great for language learners too. PLAY ANYWHERE A 10x10 grid on iPhone, a huge 15x15 grid on iPad. No internet needed — play on a plane, on the subway, anywhere. NO ADS There are no ads in the game. ScribbleGrid Pro adds unlimited hints, 2x coin rewards and instant solve in classic mode — a one-time purchase, no subscription. If you love word games, puzzles and brain teasers, ScribbleGrid is made for you. Download now and crack today's Secret Word!",
     "publishedAt": "2026-11-19T17:48:55.000Z"
-  },
-  {
-    "id": "applevis-apps-4c8fe1dd58aa1c48",
-    "title": "Guest House",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/mac/utilities/guest-house",
-    "lang": "en",
-    "platform": "Apple",
-    "summary": "Guest House: a free Mac app for running Windows and Linux with VoiceOver, no sighted help Hi everyone, I want to tell you about a free Mac app called Guest House. A friend of mine, Amena Thomas, develops it, so I'm not neutral, but I think a lot of people here will want to know it exists. Guest House sets up and runs virtual machines on a Mac, and it is built for VoiceOver users from the start. You can install Windows 11 without sighted help at any step. The app speaks what it is doing through VoiceOver, and when something goes wrong it tells you what happened and what to do next. What it does: - **Windows 11 for ARM:** Guest House can download Windows straight from Microsoft, answer the setup questions for you, and install it. - **A screen reader from the first sign-in:** it can install NVDA for you, and JAWS if you choose it. JAWS needs your own license. - **Linux:** Ubuntu, Debian, Fedora, Kali, AlmaLinux, Rocky Linux and openSUSE Tumbleweed install with no installer questions, with Orca speaking from the first boot. - **macOS:** it can also run macOS virtual machines. - **Braille displays:** you can pass a USB braille display through to Windows. - **Windows apps in Command-Tab:** your Windows apps can appear in the Mac's app switcher. - **Control-Alt keys with VoiceOver on:** VoiceOver keeps Control-Option for itself, so you hold Command-Option instead. Command-Option-Right Arrow reaches Windows as Control-Alt-Right Arrow. - **Everyday extras:** copy and paste between the Mac and Windows, a shared folder, restore points, and a list of Windows apps it can install for you. What you should know: - It needs a Mac with Apple silicon. It does not run on Intel Macs. - It is free and open source, under the GPL version 2. - It is still in early testing, so you may find bugs. Help > Report a Problem puts a report on the clipboard and opens a new issue for you to paste it into. - It grew out of Allison Meloy's Accessible Virtual Machine, and builds on her work. I have been testing this and Amena has been incredibly responsive fixing a show-stopping issue for my specific use case very quickly once reported. She is keen for any feedback so please don't hesitate to get in touch. You can download it and read more here: https://fullcircleat.com/guest-house/",
-    "publishedAt": "2026-11-17T13:29:37.000Z"
   }
 ]

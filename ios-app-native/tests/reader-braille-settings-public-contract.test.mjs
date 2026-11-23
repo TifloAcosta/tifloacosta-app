@@ -42,6 +42,7 @@ test('opening preference focuses play or text without automatic speech', () => {
   assert.match(settings, /Toggle\("Foco inicial en Reproducir", isOn: automaticReadingBinding\)/);
   assert.match(reader, /@AccessibilityFocusState private var playbackButtonFocused: Bool/);
   assert.match(reader, /\.accessibilityFocused\(\$playbackButtonFocused\)/);
-  assert.match(reader, /if presentationMode == 0 && readingMode == 1 \{ playbackButtonFocused = true \}/);
+  assert.match(reader, /guard !Task[.]isCancelled, readerIsVisible,/);
+  assert.match(reader, /presentationMode == 0 && readingMode == 1 else \{ return \}\s*playbackButtonFocused = true/);
   assert.doesNotMatch(reader, /startAutomaticReadingAfterOpening\(/);
 });

@@ -55,7 +55,7 @@ test('all stop paths save the live text cursor, not the stale reader fragment', 
   assert.match(stop, /checkpointLiveTextPosition[(][)]\s*persistPosition[(][)]\s*speech[.]stop[(][)]/);
   const sleep = inBetween('    private func applySleepTimer(reset: Bool = false) {', '    private func playTrack()');
   assert.match(sleep, /speech[.]onSleepExpired = \{\s*checkpointLiveTextPosition[(][)]\s*persistPosition[(][)]/);
-  const disappearance = inBetween('        .onDisappear {\n            unregisterRemotePlaybackCommands()', '        .accessibilityAction(.magicTap)');
+  const disappearance = inBetween('        .onDisappear {\n            readerIsVisible = false', '        .accessibilityAction(.magicTap)');
   assert.match(disappearance, /checkpointLiveTextPosition[(][)]\s*persistPosition[(][)]\s*speech[.]onSleepExpired = nil\s*speech[.]stop[(][)]/);
 });
 

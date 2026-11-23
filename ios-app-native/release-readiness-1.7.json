@@ -56,14 +56,16 @@
       "title": "Volumen individual por voz sin alterar VoiceOver",
       "status": "partial",
       "issue": "#353",
-      "validation": "En código: volumen individual persistente para cada voz del sistema, con selección accesible 0–100%, aplicación a previsualización y lectura sin alterar VoiceOver; falta validar en iPhone y comprobar motores externos Gemini/Phonon. 23-11-2026: añadido control VoiceOver de volumen 0–100% para Gemini y Phonon, independiente por motor y voz (claves de ajustes distintas), aplicado a AVAudioPlayer generado y a muestra Phonon; actualización de volumen durante reproducción sin tocar el volumen de sistema o VoiceOver. Pruebas con ejecución Swift y contratos añadidas; validación CI final pendiente y prueba física de motores externos en iPhone pendiente.",
+      "validation": "En código: volumen individual persistente para cada voz del sistema, con selección accesible 0–100%, aplicación a previsualización y lectura sin alterar VoiceOver; falta validar en iPhone y comprobar motores externos Gemini/Phonon. 23-11-2026: añadido control VoiceOver de volumen 0–100% para Gemini y Phonon, independiente por motor y voz (claves de ajustes distintas), aplicado a AVAudioPlayer generado y a muestra Phonon; actualización de volumen durante reproducción sin tocar el volumen de sistema o VoiceOver. Pruebas con ejecución Swift y contratos añadidas; validación CI final pendiente y prueba física de motores externos en iPhone pendiente. BLOQUE 3 23-11-2026: comprobación de código y contratos de volúmenes individuales en voces de sistema, Gemini y Phonon; reproducción usa ganancia del motor/voz seleccionados, preescucha conserva el perfil y la actualización UserDefaults refresca el volumen activo. No se cambia volumen hardware ni VoiceOver. Se mantiene PARCIAL sin ensayo real con motores externos en iPhone.",
       "evidence": [
         "ios-app-native/Sources/NativeReaderSettings.swift",
         "ios-app-native/Sources/NativeTifloLector.swift",
         "ios-app-native/tests/reader-per-voice-volume-20261122.test.mjs",
         "ios-app-native/Sources/NativeReaderGeneratedVoiceVolume.swift",
         "ios-app-native/tests/reader-generated-voice-volume-smoke.swift",
-        "ios-app-native/tests/reader-external-volume-20261123.test.mjs"
+        "ios-app-native/tests/reader-external-volume-20261123.test.mjs",
+        "ios-app-native/tests/reader-import-rollback-and-folder-status-block3-20261123.test.mjs",
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45256507631"
       ]
     },
     {
@@ -73,9 +75,11 @@
       "issue": "#353",
       "evidence": [
         "ios-app-native/Sources/NativeTifloLector.swift",
-        "ios-app-native/tests/reader-folder-import-20261122.test.mjs"
+        "ios-app-native/tests/reader-folder-import-20261122.test.mjs",
+        "ios-app-native/tests/reader-import-rollback-and-folder-status-block3-20261123.test.mjs",
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45256507631"
       ],
-      "validation": "Se incorporó un estado verificable para la importación de carpetas con recuento de documentos; faltan progreso accesible equivalente para importación de archivos sueltos, OCR y recepción externa y prueba con VoiceOver."
+      "validation": "Se incorporó un estado verificable para la importación de carpetas con recuento de documentos; faltan progreso accesible equivalente para importación de archivos sueltos, OCR y recepción externa y prueba con VoiceOver. BLOQUE 3 23-11-2026: la importación de archivos y carpetas publica recuentos y resumen de errores; el progreso de carpeta también se anuncia con intervalo mínimo de cinco segundos para no interrumpir VoiceOver por cada fichero. En error de guardado JSON se revierte la entrada recién insertada antes de eliminar sus archivos y se retiene la entrada fallida en Recibidos para reintento. Contratos Node y compilación Xcode simulador SUCCESS, GitHub Actions 45256507631. Sigue PARCIAL hasta OCR detallado, VoiceOver y prueba de iCloud en dispositivo."
     },
     {
       "id": 6,
@@ -84,9 +88,11 @@
       "issue": "#353",
       "evidence": [
         "ios-app-native/Sources/NativeTifloLector.swift",
-        "ios-app-native/tests/reader-folder-import-20261122.test.mjs"
+        "ios-app-native/tests/reader-folder-import-20261122.test.mjs",
+        "ios-app-native/tests/reader-import-rollback-and-folder-status-block3-20261123.test.mjs",
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45256507631"
       ],
-      "validation": "Selector de carpetas de Archivos, enumeración de subcarpetas, importación de formatos compatibles y recuento de fallos incluidos en código; pruebas de archivos grandes, iCloud y la interfaz real pendientes."
+      "validation": "Selector de carpetas de Archivos, enumeración de subcarpetas, importación de formatos compatibles y recuento de fallos incluidos en código; pruebas de archivos grandes, iCloud y la interfaz real pendientes. BLOQUE 3 23-11-2026: selección de carpeta en Archivos con acceso security-scoped, subcarpetas, omisión de enlaces simbólicos, 750 archivos como límite de la enumeración, fallos parciales no abortan el lote. Corrección de rollback al fallar guardado, anuncio de progreso a intervalos de cinco segundos. Código https://github.com/TifloAcosta/tifloacosta-app/commit/eba0748ba12b99be1d02454a3252544d75dc54b6 ; validación iOS https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45256507631 SUCCESS. Pendientes carpeta iCloud grande y uso real de VoiceOver."
     },
     {
       "id": 7,

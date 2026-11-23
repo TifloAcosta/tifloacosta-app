@@ -880,7 +880,15 @@ private struct NativeYouTubeSearchScreen: View {
                         .accessibilityAddTraits(.updatesFrequently)
                 }
                 if youtubeSearch.searchFailed {
-                    Button("Reintentar búsqueda") { search() }
+                    Button("Reintentar búsqueda") {
+                        // Preserve results already loaded if only the next
+                        // page failed; do not make VoiceOver start over.
+                        let retryMore = !youtubeSearch.nextPageToken.isEmpty &&
+                            (!youtubeSearch.videos.isEmpty ||
+                             !youtubeSearch.channels.isEmpty ||
+                             !youtubeSearch.playlists.isEmpty)
+                        search(loadMore: retryMore)
+                    }
                         .disabled(youtubeSearch.isLoading)
                     Button("Buscar directamente en YouTube") {
                         let term = searchText.trimmingCharacters(in: .whitespacesAndNewlines)

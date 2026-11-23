@@ -52,3 +52,20 @@ test('the user can inspect batch members and failures are not silently discarded
   assert.ok(extension.includes('incomingQueue.count <= 100'));
   assert.ok(inbox.includes('Text("Archivo '));
 });
+
+test('imported batch summary is accessible and keeps failed items in Recibidos', () => {
+  assert.match(inbox, /@Published private\(set\) var importSummary: String\?/);
+  assert.match(inbox, /importedCount \+= 1/);
+  assert.match(inbox, /Documentos recibidos importados: %d\. Fallidos: %d\./);
+  assert.match(inbox, /UIAccessibility\.post\(notification: \.announcement, argument: importSummary\)/);
+  assert.match(inbox, /Text\(summary\)/);
+  assert.match(inbox, /failures\.append/);
+  assert.match(inbox, /permanecen en Recibidos/);
+});
+
+for (const lang of ['en', 'pt', 'fr', 'it', 'de']) {
+  test('imported batch summary is localized in ' + lang, () => {
+    const strings = readFileSync(new URL('../Sources/' + lang + '.lproj/Localizable.strings', import.meta.url), 'utf8');
+    assert.ok(strings.includes('"Documentos recibidos importados: %d. Fallidos: %d." = '));
+  });
+}

@@ -204,7 +204,7 @@ struct NativeAccessibleCinemaScreen: View {
         return AccessibleCinemaDirectory.sources.filter { source in
             let languageMatches = selectedLanguage == .all || source.languages.contains(selectedLanguage)
             let typeMatches = selectedKind == .all || source.kinds.contains(selectedKind)
-            let queryMatches = query.isEmpty || [source.name, source.description, source.detail]
+            let queryMatches = query.isEmpty || [MusicLocalized.message(source.name), source.description, source.detail]
                 .contains(where: { $0.localizedStandardContains(query) })
             return languageMatches && typeMatches && queryMatches
         }
@@ -422,7 +422,7 @@ struct NativeAccessibleCinemaScreen: View {
                 }
                 ForEach(filtered) { source in
                     VStack(alignment: .leading, spacing: 8) {
-                        Text(source.name)
+                        Text(MusicLocalized.message(source.name))
                             .font(.headline)
                             .accessibilityAddTraits(.isHeader)
                         Text(source.detail)
@@ -430,7 +430,7 @@ struct NativeAccessibleCinemaScreen: View {
                             .foregroundStyle(TifloVisual.secondaryText)
                             .fixedSize(horizontal: false, vertical: true)
                         if let address = source.address {
-                            Link("Abrir plataforma original: \(source.name)", destination: address)
+                            Link("Abrir plataforma original: \(MusicLocalized.message(source.name))", destination: address)
                                 .font(.body.weight(.semibold))
                                 .frame(minHeight: 44, alignment: .leading)
                         } else {

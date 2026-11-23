@@ -255,6 +255,44 @@ private final class NativeMusicLibrary: ObservableObject {
         }
     }
 
+    /// A file received from iOS Share has a stable manifest UUID. Use it as
+    /// its music library ID so retrying after a crash/cleanup failure never
+    /// adds the same received track twice.
+    func importSharedFile(_ url: URL, sharingID: UUID) throws {
+        if let existing = files.first(where: { $0.id == sharingID }) {
+            // A stale index must not make us throw away the only copy in Recibidos.
+            guard FileManager.default.fileExists(atPath: audioURL(for: existing).path) else {
+                throw CocoaError(.fileNoSuchFile)
+            }
+            return
+        }
+        let allowed: Set<String> = [
+            "mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff", "caf", "flac"
+        ]
+        let ext = url.pathExtension.lowercased()
+        guard allowed.contains(ext) else { throw CocoaError(.fileReadUnsupportedScheme) }
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        let targetName = sharingID.uuidString + "." + ext
+        let target = directory.appendingPathComponent(targetName)
+        let previouslyStored = files
+        // If a previous attempt copied audio but never saved the index, retry
+        // with the same deterministic destination and no orphan duplicate.
+        let wasAlreadyCopied = FileManager.default.fileExists(atPath: target.path)
+        if !wasAlreadyCopied { try FileManager.default.copyItem(at: url, to: target) }
+        let newTrack = MusicLocalFile(id: sharingID,
+            name: url.deletingPathExtension().lastPathComponent,
+            fileName: targetName, importedAt: Date(), playCount: 0)
+        files.append(newTrack)
+        do {
+            try save()
+        } catch {
+            files = previouslyStored
+            if !wasAlreadyCopied { try? FileManager.default.removeItem(at: target) }
+            throw error
+        }
+        Task { await refreshAlbumMetadata(for: [sharingID]) }
+    }
+
     func importFolder(_ folder: URL) {
         let accessed = folder.startAccessingSecurityScopedResource()
         defer { if accessed { folder.stopAccessingSecurityScopedResource() } }
@@ -1322,16 +1360,10 @@ struct NativeMyMusicScreen: View {
 }
 
 // Punto de entrada para los audios recibidos desde la extensión Compartir.
-// Mantiene privada la biblioteca y utiliza exactamente su importador habitual.
+// Importación idempotente: el UUID del manifiesto es también el ID musical.
 @MainActor
 enum NativeMusicSharedAudio {
-    static func importFile(_ url: URL) throws {
-        let library = NativeMusicLibrary.shared
-        let previousCount = library.files.count
-        library.error = nil
-        library.importFiles([url])
-        guard library.files.count == previousCount + 1 else {
-            throw CocoaError(.fileReadUnknown)
-        }
+    static func importFile(_ url: URL, sharingID: UUID) throws {
+        try NativeMusicLibrary.shared.importSharedFile(url, sharingID: sharingID)
     }
 }

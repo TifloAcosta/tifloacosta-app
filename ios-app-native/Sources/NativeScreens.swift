@@ -320,7 +320,14 @@ struct NativeHomeScreen: View {
                 NativeReadingScreen(document: document, speech: sharedReadingSpeech)
             }
             .onAppear {
+                let receivedMusic = inbox.importPendingMusicContent()
                 inbox.importPendingReaderContent(into: library)
+                // An explicit music choice from Share leads to Mi música,
+                // unless a newly imported document is already opening.
+                if receivedMusic && inbox.readyToRead == nil {
+                    navigationPath = NavigationPath()
+                    navigationPath.append(NativeDestination.miMusica)
+                }
                 openRequestedShortcut()
             }
             .onReceive(NotificationCenter.default.publisher(for: .nativeShortcutRouteRequested)) { _ in
@@ -328,7 +335,12 @@ struct NativeHomeScreen: View {
             }
             .onChange(of: scenePhase) { _, phase in
                 if phase == .active {
+                    let receivedMusic = inbox.importPendingMusicContent()
                     inbox.importPendingReaderContent(into: library)
+                    if receivedMusic && inbox.readyToRead == nil {
+                        navigationPath = NavigationPath()
+                        navigationPath.append(NativeDestination.miMusica)
+                    }
                     openRequestedShortcut()
                 }
             }

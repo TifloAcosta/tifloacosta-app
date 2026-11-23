@@ -154,10 +154,11 @@ final class NativeShareInbox: ObservableObject {
         return document
     }
 
-    /// Importación hacia Mi música: la extensión original se reconstruye solo
-    /// en una carpeta temporal y se elimina la bandeja tras copiar con éxito.
+    /// A chosen music destination is consumed on the next app activation;
+    /// the inbox payload remains untouched until the library commit succeeds.
     func importToMusic(_ item: NativeShareMessage) throws {
-        guard item.isAudioFile, let source = fileURL(for: item) else {
+        guard item.isAudioFile, let source = fileURL(for: item),
+              let sharingID = UUID(uuidString: item.id) else {
             throw CocoaError(.fileReadUnsupportedScheme)
         }
         let safeName = URL(fileURLWithPath: item.name).lastPathComponent
@@ -169,9 +170,82 @@ final class NativeShareInbox: ObservableObject {
         try FileManager.default.createDirectory(at: temp, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: temp) }
         let named = temp.appendingPathComponent(safeName)
-        try FileManager.default.copyItem(at: source, to: named)
-        try NativeMusicSharedAudio.importFile(named)
+        // Avoid a second large data copy on the same volume where possible.
+        do { try FileManager.default.linkItem(at: source, to: named) }
+        catch { try FileManager.default.copyItem(at: source, to: named) }
+        try NativeMusicSharedAudio.importFile(named, sharingID: sharingID)
         complete(item)
+    }
+
+    /// Automatically fulfill explicit "Mi música" choices from the extension.
+    /// Unchosen audio never gets routed to the reader or music silently.
+    @discardableResult
+    func importPendingMusicContent() -> Bool {
+        refresh()
+        let selected = items.reversed().filter {
+            $0.kind == "file" && $0.isAudioFile && $0.destination == "music"
+        }
+        guard !selected.isEmpty else { return false }
+        var imported = 0
+        var failed: [String] = []
+        for item in selected {
+            do {
+                try importToMusic(item)
+                imported += 1
+            } catch {
+                failed.append("«\(item.name)»: \(error.localizedDescription)")
+            }
+        }
+        importSummary = MusicLocalized.format(
+            "Audios recibidos en Mi música: %d. Fallidos: %d.",
+            imported, failed.count)
+        if !failed.isEmpty {
+            error = MusicLocalized.message(
+                "Los audios fallidos permanecen en Recibidos para reintentar.")
+                + " " + failed.joined(separator: " ")
+        }
+        if NativeReaderFeedback.spokenAnnouncementsEnabled {
+            UIAccessibility.post(notification: .announcement, argument: importSummary)
+        }
+        return imported > 0
+    }
+
+    /// One deliberate batch action applies the chosen destination to all
+    /// otherwise pending audio files; errors retain their original manifests.
+    func importPendingAudioBatch(to destination: String,
+                                 library: NativeReaderLibrary) {
+        guard destination == "music" || destination == "reader" else { return }
+        refresh()
+        let pending = items.reversed().filter { $0.needsAudioDestination }
+        guard !pending.isEmpty else { return }
+        var count = 0
+        var failed: [String] = []
+        var lastReader: NativeReadingDocument?
+        for item in pending {
+            do {
+                if destination == "music" {
+                    try importToMusic(item)
+                } else {
+                    lastReader = try importToReader(item, library: library)
+                }
+                count += 1
+            } catch {
+                failed.append("«\(item.name)»: \(error.localizedDescription)")
+            }
+        }
+        if let lastReader { readyToRead = lastReader }
+        let template = destination == "music"
+            ? "Audios recibidos en Mi música: %d. Fallidos: %d."
+            : "Documentos recibidos importados: %d. Fallidos: %d."
+        importSummary = MusicLocalized.format(template, count, failed.count)
+        if !failed.isEmpty {
+            error = MusicLocalized.message(
+                "Los audios fallidos permanecen en Recibidos para reintentar.")
+                + " " + failed.joined(separator: " ")
+        }
+        if NativeReaderFeedback.spokenAnnouncementsEnabled {
+            UIAccessibility.post(notification: .announcement, argument: importSummary)
+        }
     }
 
     /// Share files are queued by the iOS share extension without launching our app.
@@ -252,6 +326,17 @@ struct NativeInboxScreen: View {
 
     var body: some View {
         List {
+            let unassignedAudioCount = inbox.items.filter { $0.needsAudioDestination }.count
+            if unassignedAudioCount > 1 {
+                Section("Audios pendientes") {
+                    Button("Importar todos los audios pendientes en Mi música") {
+                        inbox.importPendingAudioBatch(to: "music", library: library)
+                    }
+                    Button("Importar todos los audios pendientes en TifloLector") {
+                        inbox.importPendingAudioBatch(to: "reader", library: library)
+                    }
+                }
+            }
             if let summary = inbox.importSummary {
                 Text(summary)
                     .font(.footnote)

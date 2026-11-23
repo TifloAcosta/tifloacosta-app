@@ -96,9 +96,10 @@
       "evidence": [
         "ios-app-native/ShareExtension/ShareViewController.swift",
         "ios-app-native/Sources/NativeShareInbox.swift",
-        "ios-app-native/tests/share-extension-multiple-incoming-20261123.test.mjs"
+        "ios-app-native/tests/share-extension-multiple-incoming-20261123.test.mjs",
+        "ios-app-native/tests/share-music-auto-routing-20261123.test.mjs"
       ],
-      "validation": "23-11-2026: extensión Compartir procesa hasta 100 NSItemProvider seleccionados por lote, conserva cada archivo en App Group y añade índice para mantener orden al importar. Continúa tras fallos individuales, informa de la recepción y deja audios pendientes de destino en Recibidos. La bandeja anuncia el recuento importado/fallido y ofrece opciones por archivo. Falta CI final de Xcode, pruebas de varios adjuntos reales desde Archivos/WhatsApp, imágenes de vista previa, importaciones mixtas, audio y VoiceOver. No marcar completado ni distribuir."
+      "validation": "23-11-2026: extensión Compartir procesa hasta 100 NSItemProvider seleccionados por lote, conserva cada archivo en App Group y añade índice para mantener orden al importar. Continúa tras fallos individuales, informa de la recepción y deja audios pendientes de destino en Recibidos. La bandeja anuncia el recuento importado/fallido y ofrece opciones por archivo. Falta CI final de Xcode, pruebas de varios adjuntos reales desde Archivos/WhatsApp, imágenes de vista previa, importaciones mixtas, audio y VoiceOver. No marcar completado ni distribuir. 23-11-2026: envío de audios desde Compartir a Mi música ya existía como elección en la extensión, pero exigía terminar la importación manualmente en Recibidos. Ahora el destino explícito «Mi música» se consume automáticamente al abrir/activar la app y navega a la sección. Se conserva la elección manual para audio sin destino. La biblioteca de Mi música importa con UUID del manifiesto como ID estable para evitar duplicados en reintentos y conserva Recibidos si falta audio o falla la persistencia. En Recibidos se añaden botones de importación por lotes a Mi música o TifloLector. Falta CI final y prueba de extremo a extremo desde otras apps/VoiceOver."
     },
     {
       "id": 8,

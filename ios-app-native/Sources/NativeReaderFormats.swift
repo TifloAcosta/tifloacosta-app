@@ -373,17 +373,25 @@ enum NativeReaderFormats {
         var paths: [String] = []
         var total: Int64 = 0
         var entries = 0
+        var extractedPaths: Set<String> = []
         // ZIP and .daisy use the same DAISY/audio package policy. Limit the
         // sum of uncompressed entries, not only the compressed file size.
         let sizeLimit: Int64 = (ext == "zip" || ext == "daisy") ? 750_000_000 : 250_000_000
         for entry in archive {
             let path = entry.path.replacingOccurrences(of: "\\", with: "/")
-            guard !path.hasPrefix("/"), !path.split(separator: "/").contains(".."),
+            guard !path.isEmpty, !path.hasPrefix("/"),
+                  !path.split(separator: "/").contains(".."),
                   !path.contains(":"), entry.type == .file else { continue }
             entries += 1
-            guard entries <= 4000 else { throw NativeReaderFormatError.oversizedArchive }
+            guard entries <= 4000,
+                  // Two ZIP members with the same path (or just casing
+                  // differences on iOS) must never overwrite one another.
+                  extractedPaths.insert(path.lowercased()).inserted,
+                  // Check BEFORE adding: a crafted ZIP header may claim an
+                  // enormous uncompressedSize that overflows Int64.
+                  entry.uncompressedSize <= UInt64(sizeLimit - total)
+            else { throw NativeReaderFormatError.oversizedArchive }
             total += Int64(entry.uncompressedSize)
-            guard total <= sizeLimit else { throw NativeReaderFormatError.oversizedArchive }
             let target = directory.appendingPathComponent(path)
             try FileManager.default.createDirectory(
                 at: target.deletingLastPathComponent(), withIntermediateDirectories: true

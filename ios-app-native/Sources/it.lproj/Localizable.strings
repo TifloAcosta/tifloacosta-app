@@ -1237,3 +1237,5 @@
 "Se eliminará la lista de reproducción, pero no las canciones." = "Verrà eliminata la playlist, ma non i brani.";
 "Se eliminará el archivo guardado en esta colección personal." = "Il file salvato nella raccolta personale verrà eliminato.";
 "Se eliminará la descarga local. El episodio seguirá disponible en su fuente." = "Il download locale verrà eliminato. L’episodio resterà disponibile dalla fonte originale.";
+
+"No se pudo reproducir este archivo. Comprueba que el formato es compatible." = "Impossibile riprodurre questo file. Verifica che il formato sia compatibile.";

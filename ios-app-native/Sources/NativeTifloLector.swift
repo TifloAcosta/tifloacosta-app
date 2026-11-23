@@ -175,7 +175,14 @@ final class NativeReaderLibrary: ObservableObject {
                         textLinks: payload.textLinks
                     ), at: 0
                 )
-                try save()
+                do {
+                    try save()
+                } catch {
+                    // Roll back the visible record if persistence failed;
+                    // otherwise the book remains listed with missing media.
+                    documents.removeAll { $0.id == identifier }
+                    throw error
+                }
             } catch {
                 NativeReaderFormats.deleteStoredFiles(for: identifier)
                 NativeReaderFormats.deleteOriginal(for: identifier)
@@ -2072,8 +2079,16 @@ struct NativeReaderLibraryScreen: View {
                 Task { @MainActor in
                     defer { importingFolder = false }
                     do {
+                        // Announce large-folder progress at most every five
+                        // seconds; VoiceOver can inspect the live status
+                        // without an announcement on each imported file.
+                        var lastAnnouncement = Date()
                         let summary = try await library.importFolder(from: folder) { message in
                             importFolderStatus = message
+                            if Date().timeIntervalSince(lastAnnouncement) >= 5 {
+                                UIAccessibility.post(notification: .announcement, argument: message)
+                                lastAnnouncement = Date()
+                            }
                         }
                         importFolderStatus = MusicLocalized.format("Importación terminada. Documentos importados: %d. Omitidos: %d. Fallidos: %d.", summary.imported, summary.skipped, summary.failed.count)
                         if !summary.failed.isEmpty {

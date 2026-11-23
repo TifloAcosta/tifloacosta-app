@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-23T03:09:50.338Z",
+  "generatedAt": "2026-11-23T12:52:06.445Z",
   "resources": [
     {
       "kind": "resource",
@@ -5646,6 +5646,87 @@
   "news": [
     {
       "kind": "news",
+      "id": "9to5mac-0bee88a16529cd9a:en",
+      "sourceId": "9to5mac-0bee88a16529cd9a",
+      "lang": "en",
+      "title": "Five recent tech outages were not due to AI; the next round will be",
+      "summary": "Five major tech outages in quick succession earlier this month led to speculation that they were connected, with some inevitably believing them to be AI-related. That wasn’t the case, but the US Director of National Intelligence is one of a number of experts warning that we should expect AI-powered outages in the near future … more…",
+      "body": "Five major tech outages in quick succession earlier this month led to speculation that they were connected, with some inevitably believing them to be AI-related.\n\nThat wasn’t the case, but the US Director of National Intelligence is one of a number of experts warning that we should expect AI-powered outages in the near future …\n\nEarlier this month saw five tech outages, one after the other. A widespread Microsoft 365 outage occurred when two unrelated issues coincided . The next day saw a nationwide ground stop of US air traffic due to a communication issue affecting all air traffic control centers. A few days later, a bug in a Chase bank system saw disruption not only to the bank itself, but also other banks where Chase was a party to a transaction. Many Apple services went offline later the same week, with retail stores also affected. Finally, United Airlines had its own widespread IT outage that grounded a significant number of flights.\n\nEach had their own unrelated causes, with the White House stating that rumors of an AI-facilitated systemic attack by a hostile state were false.\n\nHowever, Director of National Intelligence Jay Clayton has warned that we should expect future tech outages as a result of attacks facilitated by AI-discovered vulnerabilities. CNBC reports him issuing the warning on CNN’s State of the Union .\n\nThe American people should be prepared for a great deal of investment in upgrading our systems; they should be prepared for investment in cybersecurity, and they should be prepared that any time there is a step change in technology, a step change in both compute and applications, there will be bumps in the road.\n\nYou prepare by knowing that systems are going to be upgraded; they may be interrupted for a period of time and that companies and government are dealing with this on the front foot.\n\nWe already saw an example of this last month when a vulnerability discovered in PHP saw a significant number of websites being taken offline .\n\nMicrosoft President Brad Smith says it isn’t just a question of bad actors exploiting vulnerabilities discovered by AI, but companies rushing to patch these may inadvertently cause systems to fail, as Newsweek reports.\n\nWhat AI did earlier this year was basically make it much easier for people to find vulnerabilities in code, and then you can either use that knowledge to patch the code, or if you’re a bad actor, you can use that knowledge to try to hack into systems.\n\nEspecially when you have older infrastructure, especially when you’re trying to patch at such a pace, especially when you have to go so fast that you can’t take as much time to test what you’re changing in the code, you do increase the risk of something going wrong.\n\nMajor IT failures look set to be a routine event in the coming weeks and months.\n\nVia The Verge .",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/23/five-recent-tech-outages-were-not-due-to-ai-the-next-round-will-be/",
+      "publishedAt": "2026-11-23T12:06:58.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "ars-technica-a41f3140e93b68a8:en",
+      "sourceId": "ars-technica-a41f3140e93b68a8",
+      "lang": "en",
+      "title": "Review: The Asus ProArt P16 offers a glimpse of a future powered by local AI",
+      "summary": "The new Asus ProArt laptop costs up to $7,000, but it can run a gaggle of local AI agents.",
+      "body": "Buying a new computer in the last few years has meant wading through all manner of AI branding nonsense . Most of the AI pitches for laptops are little more than marketing hype, but the launch of Nvidia RTX Spark could bring a meaningful improvement in AI capabilities to the device you use every day. Asus has adopted Nvidia's new chip in its latest ProArt lineup, offering a staggering amount of memory to run local AI models.\n\nWhile it doesn't have a traditional GPU, the Asus ProArt P16 , with up to 128GB of memory, can also be your primary gaming and productivity machine, but this unified experience comes at a high price. If you want to run a small army of agents on your laptop, you're looking at $7,000 for the top-end ProArt P16, and despite being more approachable on Windows, local AI still requires a lot of trial and error.\n\nBefore we dive into the AI agents, let's talk about the ProArt P16 as a laptop. Nvidia's pitch is that the RTX Spark can be your one true machine for AI, productivity, and gaming. And it doesn't skimp on the specs.\n\nRead full article\n\nComments",
+      "sourceName": "Ars Technica",
+      "originalUrl": "https://arstechnica.com/reviews/2026/11/review-the-asus-proart-p16-offers-a-glimpse-of-a-future-powered-by-local-ai/",
+      "publishedAt": "2026-11-23T12:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "applevis-apps-cc609486e7b07418:en",
+      "sourceId": "applevis-apps-cc609486e7b07418",
+      "lang": "en",
+      "title": "Tripod — Podcast Player",
+      "summary": "Tripod is a brand new podcast app designed to make it easy to stay up to date with your favourite shows. It’s built around an inbox for new episodes and queues for what you’re listening to. Audio & Playback Tripod has integrated EQ settings, can trim silence, and balance audio levels across episodes, for the smoothest listening experience. You can skip chapters or use the transcript to jump to a specific line. It also has an innovative playback scrubber that snaps to the starts of chapters, glides over skipped chapters, and uses haptic feedback for extra precision. Inbox The inbox is where new episodes arrive and you can decide whether to keep or ignore episodes. For the shows where you listen to every episode, you can send them straight to the queue. Queues Instead of playlists you have to manually manage, Tripod has automatic queues. There’s a main queue, favourites, shorts, in-progress, and each genre gets its own queue. There’s also a special queue called Someday, which lets you keep episodes that you know you want to listen to, but you don’t need to be reminded of every time you open the app. It’s ideal for podcasts discussing books or movies that you haven’t seen yet. Innovative Controls Building on decade of experience with Obscura, my award-winning camera app, Tripod uses haptics and gestures to create delightful interactions throughout the app. Intelligence On supported devices, Tripod will use Apple Intelligence to transcribe episodes, generate chapters, and determine hosts and guests for the shows you listen to, and even recommended other shows that they’ve guested on. Appearance Every view and control in Tripod is designed to adapt its appearance to what you’re listening to, making the app feel personal and vibrant. You can also choose a tint color or make the whole app monochrome if you prefer. There’s also a few app icon choices to best fit your Home Screen. Apple Watch Tripod has an Apple Watch companion app that lets you control what you listen to, skip chapters and change audio settings. Handy, or should I say… wristy? CarPlay Tripod also has a CarPlay app so you can drive safe while listening to what moves you. Well the car moves you. But art can also move you. Are podcasts not art? Who is to say. Shortcuts & Intents For the automation sickos, Tripod has actions for controlling playback and audio settings, getting and editing the contents of your queues and inbox, and more. Widgets Yeah. It’s got widgets too. Yeah, for your Home Screen! Spotlight Integration Quickly find your shows from anywhere on your device. Sleep Timers Time based or end of chapter or end of episode. And so much more. ———— Privacy Policy: http://benricemccarthy.com/tripod/privacy Terms of use: http://benricemccarthy.com/tripod/terms",
+      "body": "Tripod is a brand new podcast app designed to make it easy to stay up to date with your favourite shows. It’s built around an inbox for new episodes and queues for what you’re listening to.\n\nAudio & Playback Tripod has integrated EQ settings, can trim silence, and balance audio levels across episodes, for the smoothest listening experience. You can skip chapters or use the transcript to jump to a specific line. It also has an innovative playback scrubber that snaps to the starts of chapters, glides over skipped chapters, and uses haptic feedback for extra precision.\n\nInbox The inbox is where new episodes arrive and you can decide whether to keep or ignore episodes. For the shows where you listen to every episode, you can send them straight to the queue.\n\nQueues Instead of playlists you have to manually manage, Tripod has automatic queues. There’s a main queue, favourites, shorts, in-progress, and each genre gets its own queue. There’s also a special queue called Someday, which lets you keep episodes that you know you want to listen to, but you don’t need to be reminded of every time you open the app. It’s ideal for podcasts discussing books or movies that you haven’t seen yet.\n\nInnovative Controls Building on decade of experience with Obscura, my award-winning camera app, Tripod uses haptics and gestures to create delightful interactions throughout the app.\n\nIntelligence On supported devices, Tripod will use Apple Intelligence to transcribe episodes, generate chapters, and determine hosts and guests for the shows you listen to, and even recommended other shows that they’ve guested on.\n\nAppearance Every view and control in Tripod is designed to adapt its appearance to what you’re listening to, making the app feel personal and vibrant. You can also choose a tint color or make the whole app monochrome if you prefer. There’s also a few app icon choices to best fit your Home Screen.\n\nApple Watch Tripod has an Apple Watch companion app that lets you control what you listen to, skip chapters and change audio settings. Handy, or should I say… wristy?\n\nCarPlay Tripod also has a CarPlay app so you can drive safe while listening to what moves you. Well the car moves you. But art can also move you. Are podcasts not art? Who is to say.\n\nShortcuts & Intents For the automation sickos, Tripod has actions for controlling playback and audio settings, getting and editing the contents of your queues and inbox, and more.\n\nWidgets Yeah. It’s got widgets too. Yeah, for your Home Screen!\n\nSpotlight Integration Quickly find your shows from anywhere on your device.\n\nSleep Timers Time based or end of chapter or end of episode.\n\nAnd so much more.\n\n————\n\nPrivacy Policy: http://benricemccarthy.com/tripod/privacy Terms of use: http://benricemccarthy.com/tripod/terms",
+      "sourceName": "AppleVis Apps",
+      "originalUrl": "https://www.applevis.com/apps/ios/entertainment/tripod-podcast-player",
+      "publishedAt": "2026-11-23T11:16:29.000Z",
+      "categories": [
+        "apple",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "conticgo-fd7ee0bc15dd1c7d:es",
+      "sourceId": "conticgo-fd7ee0bc15dd1c7d",
+      "lang": "es",
+      "title": "RayNeo iO: unas gafas inteligentes con inteligencia artificial que proyectan información directamente en el campo visual",
+      "summary": "Las nuevas gafas de RayNeo incorporan una pantalla MicroLED transparente, traducción en tiempo real y asistencia mediante inteligencia artificial. Cada vez son más los fabricantes que incorporan pantallas, asistentes de inteligencia artificial y nuevas funciones para facilitar el acceso a la información en el día a día. Uno de los últimos lanzamientos en este ámbito […] La entrada RayNeo iO: unas gafas inteligentes con inteligencia artificial que proyectan información directamente en el campo visual se publicó primero en Conticgo .",
+      "body": "Las nuevas gafas de RayNeo incorporan una pantalla MicroLED transparente, traducción en tiempo real y asistencia mediante inteligencia artificial.\n\nCada vez son más los fabricantes que incorporan pantallas, asistentes de inteligencia artificial y nuevas funciones para facilitar el acceso a la información en el día a día. Uno de los últimos lanzamientos en este ámbito son las RayNeo iO , unas gafas inteligentes que apuestan por integrar una pequeña pantalla directamente en el campo visual del usuario.\n\nLas RayNeo iO incorporan una pantalla MicroLED binocular que proyecta información en color verde directamente delante de los ojos. Según el fabricante, esta pantalla ofrece una experiencia equivalente a contemplar una pantalla virtual de 33 pulgadas.\n\nUno de sus aspectos más destacados es su transparencia del 97 %, que permite mantener una visión amplia del entorno mientras se consulta la información proyectada.\n\nCon un peso de apenas 33 gramos, las gafas están diseñadas para utilizarse durante buena parte del día. También cuentan con un brillo máximo de 1.300 nits y una batería que, según RayNeo, puede alcanzar las 48 horas de uso habitual.\n\nEntre sus principales funciones encontramos la traducción simultánea y los subtítulos que aparecen directamente en el campo visual.\n\nTambién incorporan un asistente de inteligencia artificial al que se puede acceder mediante comandos de voz. Esta herramienta permite consultar información, recibir respuestas y gestionar diferentes tareas cotidianas.\n\nLas gafas también permiten consultar notificaciones y otros datos sin necesidad de sacar el teléfono móvil.\n\nAunque algunas de sus características podrían resultar interesantes para determinados usuarios con discapacidad visual, es importante analizar sus limitaciones.\n\nLa pantalla integrada podría facilitar el acceso a información digital a personas que conservan suficiente resto visual para distinguir los elementos proyectados.\n\nNo cuentan con cámara, por lo que no pueden utilizarse para reconocer objetos, leer textos del entorno mediante OCR o describir escenas. Su pantalla es monocromática y no consta que permita adaptar la información mediante herramientas específicas de accesibilidad, como la inversión de colores o la modificación del contraste.\n\nAunque pueden ofrecer algunas ventajas a usuarios con determinadas necesidades visuales, no es un dispositivo diseñado específicamente para personas con baja visión.\n\nLas RayNeo iO representan un nuevo paso en la integración de la inteligencia artificial y las pantallas transparentes en dispositivos de uso cotidiano.\n\nNo obstante, su utilidad para las personas con discapacidad visual dependerá de las características de cada usuario y de su capacidad para percibir la información proyectada.\n\nLa tecnología accesible no consiste únicamente en incorporar inteligencia artificial o pantallas a nuevos dispositivos. También requiere diseñar herramientas que respondan a las necesidades reales de las personas con discapacidad visual.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuente: Web oficil RayNeo",
+      "sourceName": "Conticgo",
+      "originalUrl": "https://conticgo.net/rayneo-io-unas-gafas-inteligentes-con-inteligencia-artificial-que-proyectan-informacion-directamente-en-el-campo-visual/",
+      "publishedAt": "2026-11-23T06:50:35.000Z",
+      "categories": [
+        "tecnologia-accesibilidad",
+        "gafas-inteligentes",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-18776ae1e1833fe6:en",
+      "sourceId": "the-verge-18776ae1e1833fe6",
+      "lang": "en",
+      "title": "Kodak’s next collectible is a tiny digital photo frame that doubles as a tracker",
+      "summary": "After expanding its Charmera collection with a Millennium Edition featuring Y2K-inspired designs earlier this year, Reto's follow-up to its tiny Kodak camera is an equally small digital photo frame you can use to display your shots. But while the Charmera's usefulness stopped at snapping grainy photos and terrible videos, the Kodak SlideTag goes one step […]",
+      "body": "After expanding its Charmera collection with a Millennium Edition featuring Y2K-inspired designs earlier this year, Reto's follow-up to its tiny Kodak camera is an equally small digital photo frame you can use to display your shots. But while the Charmera's usefulness stopped at snapping grainy photos and terrible videos , the Kodak SlideTag goes one step further. It also functions as a Bluetooth tracker that's compatible with either Apple's Find My or Google's Find Hub tracking networks.\n\nThe Kodak SlideTag will be available for $34.99 each and, like the Charmera, will feature a series of retro designs distributed in mystery boxes so you don …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/tech/1038650/kodak-slidetag-keychain-photo-display-tracker-find-my-hub-google-apple-e-ink",
+      "publishedAt": "2026-11-23T03:00:00.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "engadget-50d3495569ef9ce4:en",
       "sourceId": "engadget-50d3495569ef9ce4",
       "lang": "en",
@@ -5838,23 +5919,6 @@
     },
     {
       "kind": "news",
-      "id": "9to5mac-68dc3dd19d54bb3c:en",
-      "sourceId": "9to5mac-68dc3dd19d54bb3c",
-      "lang": "en",
-      "title": "iOS 27: My favorite new iPhone features (other than AI)",
-      "summary": "When Apple released iOS 27 in September, Siri Ai stole a lot of the headline. However, the update also includes plenty of non-AI features that I’ve come to really enjoy. Here are a few of my favorite iOS 27 features (other than Siri and AI). 9to5Mac is supported by Sony : Score Sony’s ULT Field 1 Bluetooth speaker for 51% off . Powerful bass, room-filling sound, up to 12 hours of battery life, IP67 durability, stereo pairing support, and much more. more…",
-      "body": "When Apple released iOS 27 in September, Siri Ai stole a lot of the headline. However, the update also includes plenty of non-AI features that I’ve come to really enjoy.\n\nHere are a few of my favorite iOS 27 features (other than Siri and AI).\n\n9to5Mac is supported by Sony : Score Sony’s ULT Field 1 Bluetooth speaker for 51% off . Powerful bass, room-filling sound, up to 12 hours of battery life, IP67 durability, stereo pairing support, and much more.\n\nThe new Siri AI and Apple Intelligence features are fantastic in iOS 27, but there are some others:\n\nWhat are your favorite non-AI features in iOS 27? Let us know down in the comments.\n\nFollow Chance : Threads , Bluesky , Instagram , and Mastodon .",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/21/ios-27-my-favorite-new-iphone-features-other-than-ai/",
-      "publishedAt": "2026-11-21T22:22:26.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "techcrunch-1de6274d3726f353:en",
       "sourceId": "techcrunch-1de6274d3726f353",
       "lang": "en",
@@ -5932,22 +5996,6 @@
       "sourceName": "Ars Technica",
       "originalUrl": "https://arstechnica.com/ai/2026/11/meta-reconsiders-2030-net-zero-goal-amid-record-emissions-from-ai-data-centers/",
       "publishedAt": "2026-11-20T21:47:10.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "ars-technica-7bd62e67c7b68117:en",
-      "sourceId": "ars-technica-7bd62e67c7b68117",
-      "lang": "en",
-      "title": "Researcher plants 2m canaries into the AI supply chain. A privacy disaster surfaced.",
-      "summary": "Test using prompts with unique, trackable secrets proves that data doesn't stay private.",
-      "body": "Researchers planted 2 million digital tripwires in requests sent through a sprawling network of AI services to find out what happened to sensitive information entrusted to them. What they discovered was an ecosystem that leaked highly sensitive data like a sieve.\n\nThe exposure was found through an ingenious experiment designed to test if sensitive information can leak through the vast chain of widely used AI services and how that information is exploited when it does. Many of today’s AI apps use services such as OpenRouter or Vercel that act as brokers. These “AI routers,” sometimes also known as “AI gateways,” receive large numbers of prompts sent from AI app end users and route them to an available inference engine based on criteria such as the one charging the lowest price or being best suited for the given task. Instead of using Anthropic, OpenAI, or another big provider, the developer hires an AI router to find the most suitable model.\n\nUpdate, Nov 21: Posts on both Hacker News and X report that OpenRouter has sent customers an email notifying them that some of their prompts may have been read. OpenRouter cited the research and said that it received a report that the potential exposure involved prompts sent to MiniMax, a China-based model provider. OpenRouter said the researchers' planted URLs were accessed whether the prompts were sent to MiniMax directly or through three other resellers: AtlasCloud, Novita, and StreamLake. OpenRouter has removed a \"Zero Data Retention\" label from MiniMax-model endpoints. Hat tip: Sulat.com .\n\nRead full article\n\nComments",
-      "sourceName": "Ars Technica",
-      "originalUrl": "https://arstechnica.com/security/2026/11/a-leaky-ai-supply-chain-is-exposing-secret-user-data-at-an-alarming-rate/",
-      "publishedAt": "2026-11-20T20:59:08.000Z",
       "categories": [
         "tecnologia-general",
         "ia-accesibilidad"
@@ -6049,22 +6097,6 @@
       "sourceName": "AppleVis Apps",
       "originalUrl": "https://www.applevis.com/apps/ios/games/i-have-garden",
       "publishedAt": "2026-11-19T19:48:08.000Z",
-      "categories": [
-        "apple",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "applevis-apps-9069daf9a9107466:en",
-      "sourceId": "applevis-apps-9069daf9a9107466",
-      "lang": "en",
-      "title": "ScribbleGrid: Word Search",
-      "summary": "Word search at its most satisfying! Read the clue, figure out the word, then swipe across the grid to find it. Every word you find reveals a letter of the Secret Word — crack it before you finish the grid! THE SECRET WORD: A NEW LAYER ON WORD SEARCH Every puzzle hides a Secret Word. Each word you find reveals one of its letters. Guess it before the grid is done: the earlier you crack it, the bigger the bonus. You get 3 guesses! DAILY PUZZLE One puzzle a day, the same for everyone — including the same Secret Word. Keep your streak, share your result with a spoiler-free emoji card and climb the daily Game Center leaderboard. NO WORD LIST, JUST CLUES The words aren't handed to you — you work them out from clues. They hide horizontally, vertically, diagonally, even backwards. PLAY WITH VOICEOVER ScribbleGrid can be played from start to finish with VoiceOver. Clues and grid letters are read aloud; mark a word by double-tapping its first and last letters. Hear a whole row, column or diagonal at once, and hear every letter as you type the Secret Word. A step-by-step VoiceOver guide is built into the game. COMBO SCORING Find words within 10 seconds of each other to push your multiplier up to x5. THREE DIFFICULTY LEVELS Easy: short words, straight directions. Medium: reversed directions join in. Hard: long words in all 8 directions. STATS AND STREAK REMINDERS Track your streak, best times and solved Secret Words. If the puzzle is still waiting, get an optional reminder at 8 PM. TWO LANGUAGES, THOUSANDS OF WORDS Thousands of carefully written clues in English and Turkish. Great for language learners too. PLAY ANYWHERE A 10x10 grid on iPhone, a huge 15x15 grid on iPad. No internet needed — play on a plane, on the subway, anywhere. NO ADS There are no ads in the game. ScribbleGrid Pro adds unlimited hints, 2x coin rewards and instant solve in classic mode — a one-time purchase, no subscription. If you love word games, puzzles and brain teasers, ScribbleGrid is made for you. Download now and crack today's Secret Word!",
-      "body": "Word search at its most satisfying! Read the clue, figure out the word, then swipe across the grid to find it. Every word you find reveals a letter of the Secret Word — crack it before you finish the grid!\n\nTHE SECRET WORD: A NEW LAYER ON WORD SEARCH Every puzzle hides a Secret Word. Each word you find reveals one of its letters. Guess it before the grid is done: the earlier you crack it, the bigger the bonus. You get 3 guesses!\n\nDAILY PUZZLE One puzzle a day, the same for everyone — including the same Secret Word. Keep your streak, share your result with a spoiler-free emoji card and climb the daily Game Center leaderboard.\n\nNO WORD LIST, JUST CLUES The words aren't handed to you — you work them out from clues. They hide horizontally, vertically, diagonally, even backwards.\n\nPLAY WITH VOICEOVER ScribbleGrid can be played from start to finish with VoiceOver. Clues and grid letters are read aloud; mark a word by double-tapping its first and last letters. Hear a whole row, column or diagonal at once, and hear every letter as you type the Secret Word. A step-by-step VoiceOver guide is built into the game.\n\nCOMBO SCORING Find words within 10 seconds of each other to push your multiplier up to x5.\n\nTHREE DIFFICULTY LEVELS Easy: short words, straight directions. Medium: reversed directions join in. Hard: long words in all 8 directions.\n\nSTATS AND STREAK REMINDERS Track your streak, best times and solved Secret Words. If the puzzle is still waiting, get an optional reminder at 8 PM.\n\nTWO LANGUAGES, THOUSANDS OF WORDS Thousands of carefully written clues in English and Turkish. Great for language learners too.\n\nPLAY ANYWHERE A 10x10 grid on iPhone, a huge 15x15 grid on iPad. No internet needed — play on a plane, on the subway, anywhere.\n\nNO ADS There are no ads in the game. ScribbleGrid Pro adds unlimited hints, 2x coin rewards and instant solve in classic mode — a one-time purchase, no subscription.\n\nIf you love word games, puzzles and brain teasers, ScribbleGrid is made for you. Download now and crack today's Secret Word!",
-      "sourceName": "AppleVis Apps",
-      "originalUrl": "https://www.applevis.com/apps/ios/games/scribblegrid-word-search",
-      "publishedAt": "2026-11-19T17:48:55.000Z",
       "categories": [
         "apple",
         "apps-accesibles"
@@ -6257,22 +6289,6 @@
       "categories": [
         "windows",
         "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "nvaccess-in-process-ea9e28f33285918e:en",
-      "sourceId": "nvaccess-in-process-ea9e28f33285918e",
-      "lang": "en",
-      "title": "In-Process 13th November 2026",
-      "summary": "This week, we’ve updated NVDA, and some documentation, we hear from our user group in Japan, plus there are tips for File Explorer and more! NVDA 2026.3.1 Updated VPAT / ACR NVDA on show in Japan Unassigned gestures File Explorer shortcuts NVDA 2026.3.1 NV Access is pleased to announce that version 2026.3.1 of NVDA, the… Read More",
-      "body": "This week, we’ve updated NVDA, and some documentation, we hear from our user group in Japan, plus there are tips for File Explorer and more!\n\nNV Access is pleased to announce that version 2026.3.1 of NVDA , the free screen reader for Microsoft Windows, is now available for download. We encourage all users to upgrade to this version.\n\nHighlights This is a patch release to fix security issues. A bug fix is also included for an issue introduced in 2026.3 with the task switcher in Windows 10. The Brazilian Portuguese eSpeak voice was restored to the behaviour in 2026.2.\n\nRead the full changes and download at the NVDA 2026.3.1 release announcement .\n\nWe’ve updated our VPAT. Actually we’ve updated our ACR , but whatever you call it, there’s a new one. Mostly of interest to companies who use NVDA and need to keep a copy on file for any software they use, the activity of completing it is useful, even for us as a screen reader manufacturer. VPAT stands for Voluntary Product Accessibility Template – it’s a large document which gives you points to consider and rate your software and website on many aspects of accessibility. VPAT is technically the blank template. The Accessibility Conformance Report (ACR) is the completed report about a product.\n\nNVDA is, as you would expect, quite good at all the things someone who is blind might need. However, through this process, over the years, we have previously identified and fixed several issues which may affect other users. The newest version of this document doesn’t dramatically change any of our ratings or identify or fix any new issues, but it is up to date for NVDA 2026.3.1. So, if your organisation needs a copy, head over to the VPAT section of the Corporate and Government page and you’ll find it there.\n\nWe love to hear from our communities all around the world. There is a very active community of users, and contributors in Japan. They have a website devoted to the local community: https://www.nvda.jp/ and recently attended the Sight World 2026 conference in Tokyo https://www.sight-world.com/sightworld2026\n\nNobuyuki and the team presented at the conference on four main themes: Screen sharing using Copilot Add-on Store NVDA Coach New Forms of Learning with NVDA\n\nThey wrote to advise us that the event was a huge success, and they had around 100 people in attendance at their presentation. They sent us photographs and a link to their video presentation:\n\nThe Video is in Japanese, and includes a message from NV Access Training & Support manager Quentin Christensen (in English).\n\nA banner from the NVDA Japanese Team session titled “NVDAではじめる、新しい「学び」のかたち” (“A New Form of ‘Learning’ Starting with NVDA”), presented at Sight World 2026 in Tokyo.\n\nUnassigned gestures The last couple of releases I’ve highlighted the unassigned gestures, so let’s do that again. Unassigned gestures are things which you can do with a keystroke or touch action etc, but we didn’t set one up by default. There are only two this time around: Magnifier: A new unassigned command has been added to move the mouse cursor to the center of the magnified view. Added an unassigned Quick Navigation Command for jumping to the next/previous clickable element in browse mode.\n\nThe magnifier command is thanks to Cyrille, and the clickable one thanks to Cary. Thank you to them and ALL of our amazing NVDA community contributors!\n\nOne of the fixes in NVDA 2026.3.1 is with reporting switching Windows in Windows 10. I was thinking of writing a post on using alt+tab and the other ways of switching Windows – there are a few! But I realised, I already wrote a piece on switching Windows .\n\nI’d forgotten about alt+escape ; I’m going to get back into using that! But that got me thinking about other general Windows keystrokes we might not know or (like me) might have forgotten. Another recent fix in NVDA (from NVDA 2026.3) is with File Explorer, so I thought we’d have a look at a couple of shortcuts which are well worth knowing, and some you may find useful:\n\nFirstly, to start File Explorer, press Windows+e Open a new File Explorer window (from within File Explorer), with control+n\n\nNavigating Move to next area: tab Move to previous area: shift+tab The focus starts in the “Items view list” – the contents of the currently selected folder. From here: Press shift+tab once to the folder list (you had to press it twice in some versions). Press tab to the “Split button” which is the name of the field the item list is sorted on. Once on the split button, use the arrows to select a field and enter or space to sort on it – if you select the same field, it will reverse the sort).\n\nWhen in the items list view, you can customise the view. Windows provides shortcuts for the various views: control+shift+1 : Extra-large icons control+shift+2 : Large icons control+shift+3 : Medium icons control+shift+4 : Small icons control+shift+5 : List view control+shift+6 : Details view control+shift+7 : Tiles control+shift+8 : Content Note that in some versions of Windows (such as recent builds of Windows 11) these shortcuts do NOT work, but control+ALT+number works, for instance control+alt+6 for details view. The “details” view is the one I would personally recommend, as everything is in one list, and you get the most information about each item (file type, size, date modified etc) and can sort on any of those fields as needed. In details view, use the up and down arrow keys to move through the list. In most other view types, e.g. the icons views, use the left and right arrow keys .\n\nTabs Like browsers, you can have multiple folders open in different tabs or different windows: New blank tab: control+t Move to next tab: control+tab Move to previous tab: control+shift+tab\n\nI cannot find a keystroke to open the current folder in a new tab. If you know one, please let me know! In the meantime, the following would work: Press shift+f6 once from the folder list to move to the tab control list. Press the applications key (or shift+f10 ) to open the context menu. Press the up arrow once to “Duplicate tab”. Press enter to open a new tab with the current folder.\n\nTo close a tab without closing all the other tabs, press control+w .\n\nAddress bar Move the focus to the address bar: alt+d . On the address bar, you can type the name of the folder or paste it from elsewhere, then press enter to load that folder.\n\nWindows has several special folders. If you email us for help with an issue, we might ask you to send us your NVDA log, which you can find in your %temp% folder. To get to your %temp% folder: In File Explorer, press alt+d to go to the address bar Type: %temp% (That is, the word ‘temp’ with a percent sign either side) Press enter Windows will load a folder such as C:\\Users\\YourName\\AppData\\Local\\Temp which is where it is storing your temporary files. There are others such as %onedrive% for your OneDrive folder (if setup), as well as system folders which are worth being careful around.\n\nFile properties One other quirk in File Explorer is opening file properties. In the file list, once you have located a file, press alt+enter to open the file properties for that file. This only works from the file list, even though you can access “ Properties ” in the context menu on folders in the folder list and it notes the alt+enter shortcut.\n\nThat’s all for this fortnight. We’ll be back towards the end of the month with more news, tips and tricks. I’m not sure what will be in that edition, but after all those lists of things in the file manager section, I’m going to aim for zero lists next fortnight – keep an eye out for that to see if I can do it!\n\nDo keep the conversation going in the NVDA users email group , and remember, if you’d like to receive this blog by email, you can! Just go to https://www.nvaccess.org/newsletter and you can sign up for the blog, for details as new versions of NVDA drop, and more.",
-      "sourceName": "NV Access",
-      "originalUrl": "https://www.nvaccess.org/post/in-process-13th-november-2026/",
-      "publishedAt": "2026-11-13T05:40:41.000Z",
-      "categories": [
-        "windows",
-        "nvda"
       ]
     }
   ]

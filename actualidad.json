@@ -1,5 +1,126 @@
 [
   {
+    "id": "9to5mac-0bee88a16529cd9a",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/23/five-recent-tech-outages-were-not-due-to-ai-the-next-round-will-be/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-23T12:06:58.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Five recent tech outages were not due to AI; the next round will be",
+        "summary": "Five major tech outages in quick succession earlier this month led to speculation that they were connected, with some inevitably believing them to be AI-related. That wasn’t the case, but the US Director of National Intelligence is one of a number of experts warning that we should expect AI-powered outages in the near future … more…",
+        "body": "Five major tech outages in quick succession earlier this month led to speculation that they were connected, with some inevitably believing them to be AI-related.\n\nThat wasn’t the case, but the US Director of National Intelligence is one of a number of experts warning that we should expect AI-powered outages in the near future …\n\nEarlier this month saw five tech outages, one after the other. A widespread Microsoft 365 outage occurred when two unrelated issues coincided . The next day saw a nationwide ground stop of US air traffic due to a communication issue affecting all air traffic control centers. A few days later, a bug in a Chase bank system saw disruption not only to the bank itself, but also other banks where Chase was a party to a transaction. Many Apple services went offline later the same week, with retail stores also affected. Finally, United Airlines had its own widespread IT outage that grounded a significant number of flights.\n\nEach had their own unrelated causes, with the White House stating that rumors of an AI-facilitated systemic attack by a hostile state were false.\n\nHowever, Director of National Intelligence Jay Clayton has warned that we should expect future tech outages as a result of attacks facilitated by AI-discovered vulnerabilities. CNBC reports him issuing the warning on CNN’s State of the Union .\n\nThe American people should be prepared for a great deal of investment in upgrading our systems; they should be prepared for investment in cybersecurity, and they should be prepared that any time there is a step change in technology, a step change in both compute and applications, there will be bumps in the road.\n\nYou prepare by knowing that systems are going to be upgraded; they may be interrupted for a period of time and that companies and government are dealing with this on the front foot.\n\nWe already saw an example of this last month when a vulnerability discovered in PHP saw a significant number of websites being taken offline .\n\nMicrosoft President Brad Smith says it isn’t just a question of bad actors exploiting vulnerabilities discovered by AI, but companies rushing to patch these may inadvertently cause systems to fail, as Newsweek reports.\n\nWhat AI did earlier this year was basically make it much easier for people to find vulnerabilities in code, and then you can either use that knowledge to patch the code, or if you’re a bad actor, you can use that knowledge to try to hack into systems.\n\nEspecially when you have older infrastructure, especially when you’re trying to patch at such a pace, especially when you have to go so fast that you can’t take as much time to test what you’re changing in the code, you do increase the risk of something going wrong.\n\nMajor IT failures look set to be a routine event in the coming weeks and months.\n\nVia The Verge ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-a41f3140e93b68a8",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/reviews/2026/11/review-the-asus-proart-p16-offers-a-glimpse-of-a-future-powered-by-local-ai/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-23T12:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Review: The Asus ProArt P16 offers a glimpse of a future powered by local AI",
+        "summary": "The new Asus ProArt laptop costs up to $7,000, but it can run a gaggle of local AI agents.",
+        "body": "Buying a new computer in the last few years has meant wading through all manner of AI branding nonsense . Most of the AI pitches for laptops are little more than marketing hype, but the launch of Nvidia RTX Spark could bring a meaningful improvement in AI capabilities to the device you use every day. Asus has adopted Nvidia's new chip in its latest ProArt lineup, offering a staggering amount of memory to run local AI models.\n\nWhile it doesn't have a traditional GPU, the Asus ProArt P16 , with up to 128GB of memory, can also be your primary gaming and productivity machine, but this unified experience comes at a high price. If you want to run a small army of agents on your laptop, you're looking at $7,000 for the top-end ProArt P16, and despite being more approachable on Windows, local AI still requires a lot of trial and error.\n\nBefore we dive into the AI agents, let's talk about the ProArt P16 as a laptop. Nvidia's pitch is that the RTX Spark can be your one true machine for AI, productivity, and gaming. And it doesn't skimp on the specs.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-apps-cc609486e7b07418",
+    "type": "news",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/entertainment/tripod-podcast-player",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-23T11:16:29.000Z",
+    "categories": [
+      "apple",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Tripod — Podcast Player",
+        "summary": "Tripod is a brand new podcast app designed to make it easy to stay up to date with your favourite shows. It’s built around an inbox for new episodes and queues for what you’re listening to. Audio & Playback Tripod has integrated EQ settings, can trim silence, and balance audio levels across episodes, for the smoothest listening experience. You can skip chapters or use the transcript to jump to a specific line. It also has an innovative playback scrubber that snaps to the starts of chapters, glides over skipped chapters, and uses haptic feedback for extra precision. Inbox The inbox is where new episodes arrive and you can decide whether to keep or ignore episodes. For the shows where you listen to every episode, you can send them straight to the queue. Queues Instead of playlists you have to manually manage, Tripod has automatic queues. There’s a main queue, favourites, shorts, in-progress, and each genre gets its own queue. There’s also a special queue called Someday, which lets you keep episodes that you know you want to listen to, but you don’t need to be reminded of every time you open the app. It’s ideal for podcasts discussing books or movies that you haven’t seen yet. Innovative Controls Building on decade of experience with Obscura, my award-winning camera app, Tripod uses haptics and gestures to create delightful interactions throughout the app. Intelligence On supported devices, Tripod will use Apple Intelligence to transcribe episodes, generate chapters, and determine hosts and guests for the shows you listen to, and even recommended other shows that they’ve guested on. Appearance Every view and control in Tripod is designed to adapt its appearance to what you’re listening to, making the app feel personal and vibrant. You can also choose a tint color or make the whole app monochrome if you prefer. There’s also a few app icon choices to best fit your Home Screen. Apple Watch Tripod has an Apple Watch companion app that lets you control what you listen to, skip chapters and change audio settings. Handy, or should I say… wristy? CarPlay Tripod also has a CarPlay app so you can drive safe while listening to what moves you. Well the car moves you. But art can also move you. Are podcasts not art? Who is to say. Shortcuts & Intents For the automation sickos, Tripod has actions for controlling playback and audio settings, getting and editing the contents of your queues and inbox, and more. Widgets Yeah. It’s got widgets too. Yeah, for your Home Screen! Spotlight Integration Quickly find your shows from anywhere on your device. Sleep Timers Time based or end of chapter or end of episode. And so much more. ———— Privacy Policy: http://benricemccarthy.com/tripod/privacy Terms of use: http://benricemccarthy.com/tripod/terms",
+        "body": "Tripod is a brand new podcast app designed to make it easy to stay up to date with your favourite shows. It’s built around an inbox for new episodes and queues for what you’re listening to.\n\nAudio & Playback Tripod has integrated EQ settings, can trim silence, and balance audio levels across episodes, for the smoothest listening experience. You can skip chapters or use the transcript to jump to a specific line. It also has an innovative playback scrubber that snaps to the starts of chapters, glides over skipped chapters, and uses haptic feedback for extra precision.\n\nInbox The inbox is where new episodes arrive and you can decide whether to keep or ignore episodes. For the shows where you listen to every episode, you can send them straight to the queue.\n\nQueues Instead of playlists you have to manually manage, Tripod has automatic queues. There’s a main queue, favourites, shorts, in-progress, and each genre gets its own queue. There’s also a special queue called Someday, which lets you keep episodes that you know you want to listen to, but you don’t need to be reminded of every time you open the app. It’s ideal for podcasts discussing books or movies that you haven’t seen yet.\n\nInnovative Controls Building on decade of experience with Obscura, my award-winning camera app, Tripod uses haptics and gestures to create delightful interactions throughout the app.\n\nIntelligence On supported devices, Tripod will use Apple Intelligence to transcribe episodes, generate chapters, and determine hosts and guests for the shows you listen to, and even recommended other shows that they’ve guested on.\n\nAppearance Every view and control in Tripod is designed to adapt its appearance to what you’re listening to, making the app feel personal and vibrant. You can also choose a tint color or make the whole app monochrome if you prefer. There’s also a few app icon choices to best fit your Home Screen.\n\nApple Watch Tripod has an Apple Watch companion app that lets you control what you listen to, skip chapters and change audio settings. Handy, or should I say… wristy?\n\nCarPlay Tripod also has a CarPlay app so you can drive safe while listening to what moves you. Well the car moves you. But art can also move you. Are podcasts not art? Who is to say.\n\nShortcuts & Intents For the automation sickos, Tripod has actions for controlling playback and audio settings, getting and editing the contents of your queues and inbox, and more.\n\nWidgets Yeah. It’s got widgets too. Yeah, for your Home Screen!\n\nSpotlight Integration Quickly find your shows from anywhere on your device.\n\nSleep Timers Time based or end of chapter or end of episode.\n\nAnd so much more.\n\n————\n\nPrivacy Policy: http://benricemccarthy.com/tripod/privacy Terms of use: http://benricemccarthy.com/tripod/terms"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "conticgo-fd7ee0bc15dd1c7d",
+    "type": "news",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/rayneo-io-unas-gafas-inteligentes-con-inteligencia-artificial-que-proyectan-informacion-directamente-en-el-campo-visual/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-11-23T06:50:35.000Z",
+    "categories": [
+      "tecnologia-accesibilidad",
+      "gafas-inteligentes",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "RayNeo iO: unas gafas inteligentes con inteligencia artificial que proyectan información directamente en el campo visual",
+        "summary": "Las nuevas gafas de RayNeo incorporan una pantalla MicroLED transparente, traducción en tiempo real y asistencia mediante inteligencia artificial. Cada vez son más los fabricantes que incorporan pantallas, asistentes de inteligencia artificial y nuevas funciones para facilitar el acceso a la información en el día a día. Uno de los últimos lanzamientos en este ámbito […] La entrada RayNeo iO: unas gafas inteligentes con inteligencia artificial que proyectan información directamente en el campo visual se publicó primero en Conticgo .",
+        "body": "Las nuevas gafas de RayNeo incorporan una pantalla MicroLED transparente, traducción en tiempo real y asistencia mediante inteligencia artificial.\n\nCada vez son más los fabricantes que incorporan pantallas, asistentes de inteligencia artificial y nuevas funciones para facilitar el acceso a la información en el día a día. Uno de los últimos lanzamientos en este ámbito son las RayNeo iO , unas gafas inteligentes que apuestan por integrar una pequeña pantalla directamente en el campo visual del usuario.\n\nLas RayNeo iO incorporan una pantalla MicroLED binocular que proyecta información en color verde directamente delante de los ojos. Según el fabricante, esta pantalla ofrece una experiencia equivalente a contemplar una pantalla virtual de 33 pulgadas.\n\nUno de sus aspectos más destacados es su transparencia del 97 %, que permite mantener una visión amplia del entorno mientras se consulta la información proyectada.\n\nCon un peso de apenas 33 gramos, las gafas están diseñadas para utilizarse durante buena parte del día. También cuentan con un brillo máximo de 1.300 nits y una batería que, según RayNeo, puede alcanzar las 48 horas de uso habitual.\n\nEntre sus principales funciones encontramos la traducción simultánea y los subtítulos que aparecen directamente en el campo visual.\n\nTambién incorporan un asistente de inteligencia artificial al que se puede acceder mediante comandos de voz. Esta herramienta permite consultar información, recibir respuestas y gestionar diferentes tareas cotidianas.\n\nLas gafas también permiten consultar notificaciones y otros datos sin necesidad de sacar el teléfono móvil.\n\nAunque algunas de sus características podrían resultar interesantes para determinados usuarios con discapacidad visual, es importante analizar sus limitaciones.\n\nLa pantalla integrada podría facilitar el acceso a información digital a personas que conservan suficiente resto visual para distinguir los elementos proyectados.\n\nNo cuentan con cámara, por lo que no pueden utilizarse para reconocer objetos, leer textos del entorno mediante OCR o describir escenas. Su pantalla es monocromática y no consta que permita adaptar la información mediante herramientas específicas de accesibilidad, como la inversión de colores o la modificación del contraste.\n\nAunque pueden ofrecer algunas ventajas a usuarios con determinadas necesidades visuales, no es un dispositivo diseñado específicamente para personas con baja visión.\n\nLas RayNeo iO representan un nuevo paso en la integración de la inteligencia artificial y las pantallas transparentes en dispositivos de uso cotidiano.\n\nNo obstante, su utilidad para las personas con discapacidad visual dependerá de las características de cada usuario y de su capacidad para percibir la información proyectada.\n\nLa tecnología accesible no consiste únicamente en incorporar inteligencia artificial o pantallas a nuevos dispositivos. También requiere diseñar herramientas que respondan a las necesidades reales de las personas con discapacidad visual.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuente: Web oficil RayNeo"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-18776ae1e1833fe6",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1038650/kodak-slidetag-keychain-photo-display-tracker-find-my-hub-google-apple-e-ink",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-23T03:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Kodak’s next collectible is a tiny digital photo frame that doubles as a tracker",
+        "summary": "After expanding its Charmera collection with a Millennium Edition featuring Y2K-inspired designs earlier this year, Reto's follow-up to its tiny Kodak camera is an equally small digital photo frame you can use to display your shots. But while the Charmera's usefulness stopped at snapping grainy photos and terrible videos, the Kodak SlideTag goes one step […]",
+        "body": "After expanding its Charmera collection with a Millennium Edition featuring Y2K-inspired designs earlier this year, Reto's follow-up to its tiny Kodak camera is an equally small digital photo frame you can use to display your shots. But while the Charmera's usefulness stopped at snapping grainy photos and terrible videos , the Kodak SlideTag goes one step further. It also functions as a Bluetooth tracker that's compatible with either Apple's Find My or Google's Find Hub tracking networks.\n\nThe Kodak SlideTag will be available for $34.99 each and, like the Charmera, will feature a series of retro designs distributed in mystery boxes so you don …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
     "id": "engadget-50d3495569ef9ce4",
     "type": "news",
     "sourceId": "engadget",
@@ -288,31 +409,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-68dc3dd19d54bb3c",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/21/ios-27-my-favorite-new-iphone-features-other-than-ai/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-21T22:22:26.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27: My favorite new iPhone features (other than AI)",
-        "summary": "When Apple released iOS 27 in September, Siri Ai stole a lot of the headline. However, the update also includes plenty of non-AI features that I’ve come to really enjoy. Here are a few of my favorite iOS 27 features (other than Siri and AI). 9to5Mac is supported by Sony : Score Sony’s ULT Field 1 Bluetooth speaker for 51% off . Powerful bass, room-filling sound, up to 12 hours of battery life, IP67 durability, stereo pairing support, and much more. more…",
-        "body": "When Apple released iOS 27 in September, Siri Ai stole a lot of the headline. However, the update also includes plenty of non-AI features that I’ve come to really enjoy.\n\nHere are a few of my favorite iOS 27 features (other than Siri and AI).\n\n9to5Mac is supported by Sony : Score Sony’s ULT Field 1 Bluetooth speaker for 51% off . Powerful bass, room-filling sound, up to 12 hours of battery life, IP67 durability, stereo pairing support, and much more.\n\nThe new Siri AI and Apple Intelligence features are fantastic in iOS 27, but there are some others:\n\nWhat are your favorite non-AI features in iOS 27? Let us know down in the comments.\n\nFollow Chance : Threads , Bluesky , Instagram , and Mastodon ."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "techcrunch-1de6274d3726f353",
     "type": "news",
     "sourceId": "techcrunch",
@@ -432,30 +528,6 @@
         "title": "Meta reconsiders 2030 net-zero goal amid record emissions from AI data centers",
         "summary": "Meta is “re-evaluating” 2030 sustainability goals. Will others follow?",
         "body": "Meta’s executives are rethinking the company’s original goal of achieving net-zero emissions by 2030. That revelation in Meta’s latest sustainability report comes as the company reported a record percentage increase in greenhouse gas emissions that exceeds any other Big Tech competitor racing to build new AI data centers.\n\nThe company’s 2026 sustainability report claims that “our long-term ambitions haven’t changed, but our operating environment has,” according to an introduction from Rachel Peterson, vice president of data centers at Meta, and Blair Swedeen, global head of net zero and sustainability at Meta. In the November 19, 2026, report, they attributed the changing conditions and the need for a rethink to how “demand for AI infrastructure has grown faster than almost anyone projected.”\n\n“We are re-evaluating our timelines, sequencing, and interim milestones—including the 2030 timeframe for our net zero emissions goal and our near-term intensity targets—so our approach reflects current operating realities while keeping progress transparent year over year,” Peterson and Swedeen wrote in the report.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-7bd62e67c7b68117",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/security/2026/11/a-leaky-ai-supply-chain-is-exposing-secret-user-data-at-an-alarming-rate/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-20T20:59:08.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Researcher plants 2m canaries into the AI supply chain. A privacy disaster surfaced.",
-        "summary": "Test using prompts with unique, trackable secrets proves that data doesn't stay private.",
-        "body": "Researchers planted 2 million digital tripwires in requests sent through a sprawling network of AI services to find out what happened to sensitive information entrusted to them. What they discovered was an ecosystem that leaked highly sensitive data like a sieve.\n\nThe exposure was found through an ingenious experiment designed to test if sensitive information can leak through the vast chain of widely used AI services and how that information is exploited when it does. Many of today’s AI apps use services such as OpenRouter or Vercel that act as brokers. These “AI routers,” sometimes also known as “AI gateways,” receive large numbers of prompts sent from AI app end users and route them to an available inference engine based on criteria such as the one charging the lowest price or being best suited for the given task. Instead of using Anthropic, OpenAI, or another big provider, the developer hires an AI router to find the most suitable model.\n\nUpdate, Nov 21: Posts on both Hacker News and X report that OpenRouter has sent customers an email notifying them that some of their prompts may have been read. OpenRouter cited the research and said that it received a report that the potential exposure involved prompts sent to MiniMax, a China-based model provider. OpenRouter said the researchers' planted URLs were accessed whether the prompts were sent to MiniMax directly or through three other resellers: AtlasCloud, Novita, and StreamLake. OpenRouter has removed a \"Zero Data Retention\" label from MiniMax-model endpoints. Hat tip: Sulat.com .\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -605,30 +677,6 @@
         "title": "I Have a Garden",
         "summary": "One zucchini plant. 48 real days. Here the game's time is your time. You water it tonight and by tomorrow the soil will be a little drier. It gets light and dark at the same time as it does outside your window. The stems, the leaves and the flowers are drawn by an algorithm that imitates how a plant really grows. No two games give you the same shape, or the same harvest. Once you have the zucchini figured out, try the tomato plant: twice the days, up to twenty tomatoes, suckers to prune and a plant that climbs tied to its stake. It brings its own seeds, its own chimera tomato and new achievements. And for a third challenge, the pepper plant: 72 days, and snails that climb the stem to eat its leaves and peppers, which you pick off with your gloves. Each pepper turns from green to yellow to red, and you have to pick it at the right moment. It brings its own chimera pepper, its own seeds and new achievements. You unlock it with a single purchase, which also removes the ads. All three plants grow at the same time, each in its own plot. WHAT YOU'LL DO You check on it, water or feed it if it's time, look for pests and pull the odd weed. For as long as you feel like. HOW THE CYCLE GOES You start by preparing the soil and burying the seed. Until flowering you have to look after it as well as you can, because that stretch decides how many flowers open. When they do, the bees arrive to pollinate them, and if you've kept it up, every one sets fruit. The last stretch takes the most attention: each zucchini has its right moment, and picking it early or leaving it too long costs you points. IMPROVE YOUR PLANT When the cycle ends, you can take the seeds out of the Prime and Overripe zucchini you harvested. There are four qualities: Wild, Adapted, Selected and Heirloom. The better the seed, the more main branches the stem puts out. That raises your chances of getting a chimera zucchini, the hardest thing in the game to pull off. ACHIEVEMENTS There are twenty-seven achievements to earn along the way, gardener's ranks among them: when you gather the harvest you get a score and the rank you earned with the plant. WHAT IT DOESN'T DO No account, no email. No lives, no paying your way forward: the only purchase is the pepper plant, and it's optional. No leaderboard, nobody to beat. And it doesn't message you for the sake of it: a notification arrives when the plant actually needs something, at most one a day, not every evening at seven. It's free and kept going by advertising. If you'd rather support it another way, the pepper purchase removes the ads for good. ALSO You can put a widget on your home screen with the water and feed gauges, without opening the game. A notebook inside that explains every mechanic with real numbers, if you want to know why. A daily graph of water, feed and pests since the day you planted the seed. And a few more surprises. Thank you for playing.",
         "body": "One zucchini, 48 real days. It keeps growing while the app is closed. From December 1, overripe tomatoes turn into Christmas baubles.\n\nOne zucchini plant. 48 real days.\n\nHere the game's time is your time. You water it tonight and by tomorrow the soil will be a little drier. It gets light and dark at the same time as it does outside your window. The stems, the leaves and the flowers are drawn by an algorithm that imitates how a plant really grows. No two games give you the same shape, or the same harvest.\n\nOnce you have the zucchini figured out, try the tomato plant: twice the days, up to twenty tomatoes, suckers to prune and a plant that climbs tied to its stake. It brings its own seeds, its own chimera tomato and new achievements. And for a third challenge, the pepper plant: 72 days, and snails that climb the stem to eat its leaves and peppers, which you pick off with your gloves. Each pepper turns from green to yellow to red, and you have to pick it at the right moment. It brings its own chimera pepper, its own seeds and new achievements. You unlock it with a single purchase, which also removes the ads.\n\nAll three plants grow at the same time, each in its own plot.\n\nWHAT YOU'LL DO You check on it, water or feed it if it's time, look for pests and pull the odd weed. For as long as you feel like.\n\nHOW THE CYCLE GOES You start by preparing the soil and burying the seed. Until flowering you have to look after it as well as you can, because that stretch decides how many flowers open. When they do, the bees arrive to pollinate them, and if you've kept it up, every one sets fruit. The last stretch takes the most attention: each zucchini has its right moment, and picking it early or leaving it too long costs you points.\n\nIMPROVE YOUR PLANT When the cycle ends, you can take the seeds out of the Prime and Overripe zucchini you harvested. There are four qualities: Wild, Adapted, Selected and Heirloom. The better the seed, the more main branches the stem puts out. That raises your chances of getting a chimera zucchini, the hardest thing in the game to pull off.\n\nACHIEVEMENTS There are twenty-seven achievements to earn along the way, gardener's ranks among them: when you gather the harvest you get a score and the rank you earned with the plant.\n\nWHAT IT DOESN'T DO No account, no email. No lives, no paying your way forward: the only purchase is the pepper plant, and it's optional. No leaderboard, nobody to beat. And it doesn't message you for the sake of it: a notification arrives when the plant actually needs something, at most one a day, not every evening at seven. It's free and kept going by advertising. If you'd rather support it another way, the pepper purchase removes the ads for good.\n\nALSO You can put a widget on your home screen with the water and feed gauges, without opening the game. A notebook inside that explains every mechanic with real numbers, if you want to know why. A daily graph of water, feed and pests since the day you planted the seed. And a few more surprises.\n\nThank you for playing."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-apps-9069daf9a9107466",
-    "type": "news",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/scribblegrid-word-search",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-19T17:48:55.000Z",
-    "categories": [
-      "apple",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "ScribbleGrid: Word Search",
-        "summary": "Word search at its most satisfying! Read the clue, figure out the word, then swipe across the grid to find it. Every word you find reveals a letter of the Secret Word — crack it before you finish the grid! THE SECRET WORD: A NEW LAYER ON WORD SEARCH Every puzzle hides a Secret Word. Each word you find reveals one of its letters. Guess it before the grid is done: the earlier you crack it, the bigger the bonus. You get 3 guesses! DAILY PUZZLE One puzzle a day, the same for everyone — including the same Secret Word. Keep your streak, share your result with a spoiler-free emoji card and climb the daily Game Center leaderboard. NO WORD LIST, JUST CLUES The words aren't handed to you — you work them out from clues. They hide horizontally, vertically, diagonally, even backwards. PLAY WITH VOICEOVER ScribbleGrid can be played from start to finish with VoiceOver. Clues and grid letters are read aloud; mark a word by double-tapping its first and last letters. Hear a whole row, column or diagonal at once, and hear every letter as you type the Secret Word. A step-by-step VoiceOver guide is built into the game. COMBO SCORING Find words within 10 seconds of each other to push your multiplier up to x5. THREE DIFFICULTY LEVELS Easy: short words, straight directions. Medium: reversed directions join in. Hard: long words in all 8 directions. STATS AND STREAK REMINDERS Track your streak, best times and solved Secret Words. If the puzzle is still waiting, get an optional reminder at 8 PM. TWO LANGUAGES, THOUSANDS OF WORDS Thousands of carefully written clues in English and Turkish. Great for language learners too. PLAY ANYWHERE A 10x10 grid on iPhone, a huge 15x15 grid on iPad. No internet needed — play on a plane, on the subway, anywhere. NO ADS There are no ads in the game. ScribbleGrid Pro adds unlimited hints, 2x coin rewards and instant solve in classic mode — a one-time purchase, no subscription. If you love word games, puzzles and brain teasers, ScribbleGrid is made for you. Download now and crack today's Secret Word!",
-        "body": "Word search at its most satisfying! Read the clue, figure out the word, then swipe across the grid to find it. Every word you find reveals a letter of the Secret Word — crack it before you finish the grid!\n\nTHE SECRET WORD: A NEW LAYER ON WORD SEARCH Every puzzle hides a Secret Word. Each word you find reveals one of its letters. Guess it before the grid is done: the earlier you crack it, the bigger the bonus. You get 3 guesses!\n\nDAILY PUZZLE One puzzle a day, the same for everyone — including the same Secret Word. Keep your streak, share your result with a spoiler-free emoji card and climb the daily Game Center leaderboard.\n\nNO WORD LIST, JUST CLUES The words aren't handed to you — you work them out from clues. They hide horizontally, vertically, diagonally, even backwards.\n\nPLAY WITH VOICEOVER ScribbleGrid can be played from start to finish with VoiceOver. Clues and grid letters are read aloud; mark a word by double-tapping its first and last letters. Hear a whole row, column or diagonal at once, and hear every letter as you type the Secret Word. A step-by-step VoiceOver guide is built into the game.\n\nCOMBO SCORING Find words within 10 seconds of each other to push your multiplier up to x5.\n\nTHREE DIFFICULTY LEVELS Easy: short words, straight directions. Medium: reversed directions join in. Hard: long words in all 8 directions.\n\nSTATS AND STREAK REMINDERS Track your streak, best times and solved Secret Words. If the puzzle is still waiting, get an optional reminder at 8 PM.\n\nTWO LANGUAGES, THOUSANDS OF WORDS Thousands of carefully written clues in English and Turkish. Great for language learners too.\n\nPLAY ANYWHERE A 10x10 grid on iPhone, a huge 15x15 grid on iPad. No internet needed — play on a plane, on the subway, anywhere.\n\nNO ADS There are no ads in the game. ScribbleGrid Pro adds unlimited hints, 2x coin rewards and instant solve in classic mode — a one-time purchase, no subscription.\n\nIf you love word games, puzzles and brain teasers, ScribbleGrid is made for you. Download now and crack today's Secret Word!"
       }
     },
     "media": null
@@ -956,30 +1004,6 @@
         "title": "Navia: AI Accessible Map",
         "summary": "Navia is a touchable offline map for blind and low-vision people. Slide a finger across the screen and Navia speaks the street, shop, or place…",
         "body": "Published 12 November 2026 by Mohammad\n\nNavia is a touchable offline map for blind and low-vision people. Slide a finger across the screen and Navia speaks the street, shop, or place under your finger: its name, what it is, how far away it is, and directions as clock positions (for example, “2 o’clock, 40 meters”), following the way O&M training teaches. Sweeping around the map lets you build a mental picture of an area before you go there.\n\nSafety note: Navia is an extra aid only. Always use a cane, guide dog, or another safe mobility method first.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nI am the developer. Navia was designed around TalkBack from the start rather than adapted afterwards. All buttons and controls are labelled and every dialog can be read with TalkBack.\n\nThe map itself is explored by touch: with TalkBack on, sliding a finger over the map speaks what is under it, and double-tap opens a menu of actions for that place (aim, hear its sounds, open in Google Maps, add to favourites). Voice dictation is available for search, adding points and renaming places.\n\nFor low vision there is an optional drawn map with a different marker shape per kind of place (not colour alone), street labels and a light/dark theme; it can turn itself off while TalkBack is running. Tested with Google TalkBack, including automated tests that run with real TalkBack enabled.\n\nKnown limitations: AI place recognition is experimental, needs a one-time ~240 MB model download and can miss a place; map quality depends on OpenStreetMap coverage in your area. Feedback is very welcome.\n\nLast Tested App version and Android version:\n\nNavia 1.1.12. Android 15\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "conticgo-4728c3a5598d72c8",
-    "type": "news",
-    "sourceId": "conticgo",
-    "sourceName": "Conticgo",
-    "sourceUrl": "https://conticgo.net/",
-    "originalUrl": "https://conticgo.net/retina-artificial-luz-infrarroja/",
-    "originalLanguage": "es",
-    "publishedAt": "2026-11-12T08:29:51.000Z",
-    "categories": [
-      "tecnologia-accesibilidad",
-      "proyectos-prototipos"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "Una retina artificial convierte la luz infrarroja en señales eléctricas para estimular las neuronas del ojo",
-        "summary": "Una investigación publicada en Nature Electronics presenta un implante retiniano capaz de transformar la luz infrarroja cercana en impulsos eléctricos. El dispositivo ha conseguido generar respuestas neuronales en ratones con degeneración de la retina y abre nuevas posibilidades para el desarrollo de prótesis visuales. La ingeniería biomédica continúa explorando nuevas formas de recuperar parcialmente la […] La entrada Una retina artificial convierte la luz infrarroja en señales eléctricas para estimular las neuronas del ojo se publicó primero en Conticgo .",
-        "body": "Una investigación publicada en Nature Electronics presenta un implante retiniano capaz de transformar la luz infrarroja cercana en impulsos eléctricos. El dispositivo ha conseguido generar respuestas neuronales en ratones con degeneración de la retina y abre nuevas posibilidades para el desarrollo de prótesis visuales.\n\nLa ingeniería biomédica continúa explorando nuevas formas de recuperar parcialmente la percepción visual en personas con enfermedades degenerativas de la retina. Una de las últimas investigaciones en este campo propone una solución basada en una retina artificial capaz de transformar la luz infrarroja cercana en señales eléctricas que estimulan directamente las neuronas del ojo.\n\nEl trabajo, publicado en abril de 2026 en la revista científica Nature Electronics , ha sido desarrollado por investigadores de distintas instituciones de Corea del Sur. Su propuesta combina sensores fotosensibles, microelectrodos de metal líquido y un sistema electrónico implantable que permite activar determinadas células de la retina.\n\nLos experimentos realizados en ratones, incluidos animales con degeneración retiniana, han demostrado que el dispositivo puede provocar respuestas neuronales ante estímulos de luz infrarroja.\n\nLa visión natural comienza cuando los fotorreceptores de la retina, conocidos como conos y bastones, detectan la luz y la transforman en señales eléctricas. Estas señales se procesan en diferentes capas retinianas y posteriormente se transmiten al cerebro a través del nervio óptico.\n\nSin embargo, enfermedades como la retinosis pigmentaria provocan la degeneración progresiva de los fotorreceptores. Aunque estas células pueden llegar a desaparecer, otras estructuras de la retina, como las células ganglionares, pueden conservar parte de su funcionalidad.\n\nLa nueva tecnología pretende aprovechar precisamente esta capacidad.\n\nEl implante incorpora una matriz de fototransistores sensibles a la luz infrarroja cercana. Estos pequeños componentes detectan la radiación y generan una respuesta eléctrica que se transmite a través de unos microelectrodos situados en contacto con las neuronas retinianas.\n\nDe esta manera, el dispositivo evita depender de los fotorreceptores dañados y utiliza una vía alternativa para transmitir información visual al cerebro.\n\nUno de los aspectos más innovadores de esta investigación es el material empleado para fabricar los electrodos.\n\nLos investigadores han desarrollado unos pequeños pilares tridimensionales de metal líquido, elaborados a partir de una aleación de galio e indio. Su estructura flexible permite adaptarse mejor a la superficie irregular de la retina y establecer un contacto más cercano con las células ganglionares.\n\nEsta característica es importante porque los electrodos rígidos convencionales pueden generar problemas cuando se implantan en tejidos biológicos tan delicados.\n\nAdemás, los extremos de estos microelectrodos incorporan nanopartículas de platino que mejoran la transmisión de carga eléctrica y facilitan la estimulación neuronal.\n\nEl dispositivo también incluye un filtro óptico ultrafino, de aproximadamente 360 nanómetros de grosor, diseñado para permitir el paso de determinadas longitudes de onda infrarrojas y controlar la entrada de luz visible en los sensores.\n\nPara comprobar el funcionamiento de esta retina artificial, el equipo realizó diferentes experimentos tanto en tejidos retinianos aislados como en animales vivos.\n\nLas pruebas incluyeron ratones sanos y ratones con degeneración retiniana, utilizados como modelo experimental de ceguera asociada a la pérdida de fotorreceptores.\n\nLos investigadores observaron que, cuando el dispositivo recibía luz infrarroja cercana, los fototransistores generaban impulsos eléctricos capaces de activar las células ganglionares.\n\nAdemás, mediante registros de actividad cerebral y pruebas de comportamiento, comprobaron que los estímulos llegaban hasta la corteza visual de los animales.\n\nUno de los resultados más relevantes fue que los ratones con degeneración retiniana también mostraron respuestas ante la estimulación infrarroja. Esto indica que el sistema puede aprovechar determinadas neuronas que permanecen funcionales incluso cuando los fotorreceptores han sufrido un deterioro importante.\n\nLos estudios de biocompatibilidad también mostraron resultados iniciales favorables. En los animales evaluados durante seis meses no se observaron signos relevantes de inflamación o deterioro del tejido asociados al implante.\n\nLa investigación podría abrir una nueva vía para desarrollar prótesis visuales destinadas a personas que han perdido los fotorreceptores como consecuencia de enfermedades degenerativas de la retina.\n\nEn patologías como la retinosis pigmentaria, la pérdida progresiva de conos y bastones puede provocar una reducción importante de la visión e incluso llegar a causar ceguera.\n\nSin embargo, las células ganglionares y otras neuronas internas pueden permanecer relativamente conservadas durante determinadas fases de la enfermedad.\n\nLa propuesta de los investigadores consiste en aprovechar esas estructuras para transmitir información mediante estimulación eléctrica, sin depender de los fotorreceptores originales.\n\nOtro aspecto interesante es que el dispositivo trabaja con luz infrarroja cercana, una región del espectro electromagnético que el ojo humano no puede percibir de forma natural. Esto permitiría crear un canal artificial de percepción que complemente la visión visible que todavía conserve la persona.\n\nLos investigadores también plantean que esta tecnología podría adaptarse en el futuro para detectar otras longitudes de onda, aunque todavía es necesario estudiar sus posibilidades.\n\nA pesar de los resultados obtenidos, esta retina artificial todavía se encuentra en una fase experimental.\n\nLos ensayos se han realizado en ratones y no existen resultados que permitan afirmar que el dispositivo pueda utilizarse ya en personas con retinosis pigmentaria u otras enfermedades degenerativas.\n\nAntes de plantear su aplicación clínica será necesario estudiar su seguridad a largo plazo, mejorar su miniaturización, reducir el consumo energético y comprobar su estabilidad después de periodos prolongados de implantación.\n\nTambién será fundamental investigar cómo se traduce la estimulación eléctrica en una percepción visual útil para las personas. Activar las neuronas retinianas no significa recuperar automáticamente una visión natural.\n\nNo obstante, el trabajo publicado en Nature Electronics representa un avance relevante en el desarrollo de prótesis visuales y demuestra cómo la combinación de microelectrónica y materiales biocompatibles puede abrir nuevas posibilidades para intervenir sobre el sistema visual.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuente: Nature"
       }
     },
     "media": null

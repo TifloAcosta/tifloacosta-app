@@ -32,7 +32,7 @@ test('Navegación, marcas y apagado preceden al texto; ajustes secundarios queda
 test('Toque mágico pausa, reanuda e inicia la lectura a petición', () => {
   const chrome = source.slice(source.lastIndexOf('.accessibilityAction(.magicTap)'), source.lastIndexOf('.accessibilityAction(named: Text("Añadir marca"))'));
   assert.match(chrome, /\.accessibilityAction\(\.magicTap\)/);
-  assert.match(chrome, /if speech\.isPlaying/);
+  assert.match(chrome, /toggleReaderPlayback\(\)/);
   assert.match(source, /if speech\.isPaused \{\s*speech\.resume\(\)/);
-  assert.match(chrome, /else \{ play\(\) \}/);
+  assert.match(source, /private func toggleReaderPlayback\(\) \{\s*if speech\.isPlaying \{ pausePlayback\(\) \}\s*else \{ play\(\) \}/);
 });

@@ -59,3 +59,22 @@ test('third-party restrictions remain respected rather than bypassing source pla
   assert.match(appleMusic, /ApplicationMusicPlayer\.shared/);
   assert.doesNotMatch(owner, /AVAudioSession\.sharedInstance\(\)\.outputVolume/);
 });
+
+test('seeking a paused local song does not resume playback or interrupt another media section', () => {
+  const seek = owner.slice(owner.indexOf('func skip(seconds: TimeInterval)'), owner.indexOf('func changeRepeat()'));
+  assert.match(seek, /let wasPlaying = isPlaying/);
+  assert.match(seek, /guard let file, file\.length > 0, duration > 0, seconds\.isFinite else \{ return \}/);
+  assert.match(seek, /if wasPlaying \{[\s\S]*NativeRemotePlaybackOwner\.claim\(\.music\)[\s\S]*node\.play\(\)/);
+  assert.match(seek, /isPlaying = wasPlaying/);
+  assert.match(seek, /position = target/);
+  assert.doesNotMatch(seek.split('if wasPlaying {')[0], /NativeRemotePlaybackOwner\.claim\(\.music\)|node\.play\(\)/);
+});
+
+test('personal cinema activates its own background audio session before taking control', () => {
+  const open = cinema.slice(cinema.indexOf('func open(_ item:'), cinema.indexOf('private func beginProgressTracking'));
+  assert.match(open, /try AVAudioSession\.sharedInstance\(\)\.setCategory\(\.playback, mode: \.moviePlayback\)/);
+  assert.match(open, /try AVAudioSession\.sharedInstance\(\)\.setActive\(true\)/);
+  assert.ok(open.indexOf('setActive(true)') < open.indexOf('NativeRemotePlaybackOwner.claim(.cinema)'));
+  assert.match(open, /NativeRemotePlaybackOwner\.onInterrupted\(\.cinema\)/);
+  assert.doesNotMatch(open, /outputVolume|MPVolumeView/);
+});

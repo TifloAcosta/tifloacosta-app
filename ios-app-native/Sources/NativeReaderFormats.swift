@@ -10,6 +10,7 @@ struct NativeReaderImportedPayload {
     let fileExtension: String
     let trackPaths: [String]
     var daisyNavigation: [NativeDaisyNavigationPoint] = []
+    var daisyClips: [NativeDaisyAudioClip] = []
     var textLinks: [NativeReaderTextLink] = []
 }
 
@@ -441,6 +442,7 @@ enum NativeReaderFormats {
         let format: String
         var media: [String] = []
         var daisyNavigation: [NativeDaisyNavigationPoint] = []
+        var daisyClips: [NativeDaisyAudioClip] = []
         var textLinks: [NativeReaderTextLink] = []
         switch ext {
         case "docx":
@@ -532,6 +534,10 @@ enum NativeReaderFormats {
                 ? NativeDaisyAudioOrder.orderedAudioFiles(
                     in: directory, packagePaths: all, audioPaths: discoveredAudioFiles)
                 : discoveredAudioFiles
+            if isDaisy {
+                daisyClips = NativeDaisyAudioOrder.orderedClips(
+                    in: directory, packagePaths: all, audioPaths: audioFiles)
+            }
             guard isDaisy || (ext == "zip" && !audioFiles.isEmpty) else {
                 throw NativeReaderFormatError.invalidArchive
             }
@@ -623,6 +629,7 @@ enum NativeReaderFormats {
             throw NativeReaderFormatError.empty(url.lastPathComponent)
         }
         return .init(body: body, fileExtension: format, trackPaths: media,
-                     daisyNavigation: daisyNavigation, textLinks: textLinks)
+                     daisyNavigation: daisyNavigation, daisyClips: daisyClips,
+                     textLinks: textLinks)
     }
 }

@@ -1237,3 +1237,5 @@
 "Se eliminará la lista de reproducción, pero no las canciones." = "A lista de reprodução será eliminada, mas não as músicas.";
 "Se eliminará el archivo guardado en esta colección personal." = "O ficheiro guardado nesta coleção pessoal será eliminado.";
 "Se eliminará la descarga local. El episodio seguirá disponible en su fuente." = "A transferência local será eliminada. O episódio continuará disponível na origem.";
+
+"No se pudo reproducir este archivo. Comprueba que el formato es compatible." = "Não foi possível reproduzir este ficheiro. Verifica se o formato é compatível.";

@@ -18,7 +18,7 @@ test('reader controls and settings precede uninterrupted text', () => {
 });
 
 test('a saved DAISY can be shared as the full original ZIP', () => {
-  assert.match(reader, /Compartir libro DAISY completo \(ZIP\)/);
+  assert.match(reader, /Compartir DAISY original/);
 });
 
 test('opening playback is manual and the selected focus is applied', () => {

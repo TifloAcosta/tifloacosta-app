@@ -1224,3 +1224,16 @@
 "Audios pendientes" = "File audio in attesa";
 "Importar todos los audios pendientes en Mi música" = "Importa tutti i file audio in attesa in La mia musica";
 "Importar todos los audios pendientes en TifloLector" = "Importa tutti i file audio in attesa in TifloLector";
+
+// Bloque de incidencias nuevas de TifloLector y confirmación de eliminaciones.
+"Vista al entrar en TifloLector" = "Vista all’apertura di TifloLector";
+"Vista general" = "Vista generale";
+"La navegación con gestos solo está disponible mientras se reproduce." = "La navigazione con i gesti è disponibile solo durante la riproduzione.";
+"¿Eliminar la carpeta «%@»?" = "Eliminare la cartella «%@»?";
+"Las obras de esta carpeta se conservarán en la biblioteca." = "I documenti di questa cartella rimarranno nella biblioteca.";
+"¿Eliminar «%@»?" = "Eliminare «%@»?";
+"Solo se eliminará la carpeta virtual. Las canciones se conservarán." = "Verrà eliminata solo la cartella virtuale. I brani saranno conservati.";
+"Se eliminará la carpeta inteligente, pero no las canciones." = "Verrà eliminata la cartella intelligente, ma non i brani.";
+"Se eliminará la lista de reproducción, pero no las canciones." = "Verrà eliminata la playlist, ma non i brani.";
+"Se eliminará el archivo guardado en esta colección personal." = "Il file salvato nella raccolta personale verrà eliminato.";
+"Se eliminará la descarga local. El episodio seguirá disponible en su fuente." = "Il download locale verrà eliminato. L’episodio resterà disponibile dalla fonte originale.";

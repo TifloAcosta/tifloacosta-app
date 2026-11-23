@@ -1289,3 +1289,19 @@
 "Películas completas en formato MP3. La página oficial ofrece acceso a la carpeta de audio sin necesidad de descargar cada película." = "Films complets au format MP3. Le site officiel donne accès au dossier audio sans devoir télécharger chaque film.";
 "Juego de Tronos, ocho temporadas" = "Game of Thrones, huit saisons";
 "Serie completa, solo audio con audiodescripción. Enlace al catálogo publicado oficialmente por FOAL." = "Série complète, audio uniquement avec audiodescription. Lien vers le catalogue officiellement publié par la FOAL.";
+
+// Multicines: accessible dedicated sources and language-specific AD collections.
+"Audesc España" = "Audesc Espagne";
+"Audesc Latino" = "Audesc Latino";
+"FOAL, ocio en audio" = "FOAL, loisirs audio";
+"Audiocinemateca" = "Audiocinemateca";
+"AMI-tv y AMI+" = "AMI-tv et AMI+";
+"AMI-télé" = "AMI-télé";
+"ARD Mediathek, audiodescripción" = "ARD Mediathek, audiodescription";
+"ARTE (francés)" = "ARTE (français)";
+"ARTE (alemán)" = "ARTE (allemand)";
+"Servicio especializado en programas con descripción integrada." = "Service spécialisé dans les programmes avec description intégrée.";
+"Programación accesible en francés con descripción integrada." = "Programmes accessibles en français avec description intégrée.";
+"Colección oficial de audiodescripción." = "Collection officielle de programmes audiodécrits.";
+"Programas en francés seleccionados por audiodescripción." = "Programmes en français sélectionnés pour leur audiodescription.";
+"Programas en alemán seleccionados por audiodescripción." = "Programmes en allemand sélectionnés pour leur audiodescription.";

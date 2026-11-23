@@ -24,7 +24,10 @@ test('minute navigation is one selection, not a second interval control', () => 
 
 test('magic tap can start playback and external controls use the same play pause path', () => {
   const magic = section(reader, '.accessibilityAction(.magicTap)', '.accessibilityAction(named: Text("Añadir marca")');
-  assert.match(magic, /else\s*\{\s*play\(\)/);
+  assert.match(magic, /toggleReaderPlayback\(\)/);
+  const toggle = section(reader, 'private func toggleReaderPlayback()', 'private func activatePlaybackButton()');
+  assert.match(toggle, /if speech\.isPlaying \{ pausePlayback\(\) \}/);
+  assert.match(toggle, /else \{ play\(\) \}/);
   assert.match(reader, /MPRemoteCommandCenter/);
   assert.match(reader, /remoteCommandCenter\.playCommand/);
   assert.match(reader, /remoteCommandCenter\.pauseCommand/);

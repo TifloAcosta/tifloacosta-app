@@ -20,7 +20,7 @@ test('ZIP: audiolibros de varias pistas y DAISY, sin aceptar ZIP arbitrarios', (
   assert.match(formats, /isDaisy \|\| \(ext == "zip" && !audioFiles\.isEmpty\)/);
   assert.match(formats, /localizedStandardCompare/);
   assert.match(formats, /format = isDaisy \? "daisy" : "zip"/);
-  assert.match(formats, /total <= sizeLimit/);
+  assert.ok(formats.includes('entry.uncompressedSize <= UInt64(sizeLimit - total)'));
   assert.match(formats, /entries <= 4000/);
   assert.match(formats, /!path\.hasPrefix\("\/"\)/);
   assert.match(formats, /NativeReaderFormatError\.invalidArchive/);

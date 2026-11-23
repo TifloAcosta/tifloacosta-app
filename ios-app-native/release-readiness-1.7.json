@@ -24,8 +24,19 @@
     {
       "id": 3,
       "title": "Marcas: confirmación fiable y señales sonoras configurables",
-      "status": "partial",
-      "issue": "#353"
+      "status": "implemented",
+      "issue": "#353",
+      "validation": "23-11-2026: implementación de código completada y VALIDADA por los contratos de iOS y compilación nativa de Xcode 26 para simulador (GitHub Actions 45139735926 SUCCESS). Las marcas de texto/audio solo confirman tras persistir realmente, con sonidos PCM breves distintos para éxito/duplicado/error y controles persistentes Sonidos/Avisos hablados/Vibración. Crear marca desde párrafo de VoiceOver conserva cursor y no pausa/reinicia voz. Los lotes de importación desde Archivos, carpetas y Compartir tienen una sola señal al finalizar o fallar; cinco idiomas adicionales traducidos. Queda verificación experiencial de sonidos, avisos y convivencia con TTS/VoiceOver/Bluetooth en iPhone, que no altera el estado de implementación del código. Otros requisitos siguen bloqueando TestFlight.",
+      "evidence": [
+        "ios-app-native/Sources/NativeReaderFeedback.swift",
+        "ios-app-native/Sources/NativeReaderSettings.swift",
+        "ios-app-native/Sources/NativeTifloLector.swift",
+        "ios-app-native/Sources/NativeShareInbox.swift",
+        "ios-app-native/tests/reader-feedback-sounds-20261123.test.mjs",
+        "ios-app-native/tests/reader-bookmark-confirmation-20261122.test.mjs",
+        "ios-app-native/tests/reader-bookmark-context-menu-20261111.test.mjs",
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45139735926"
+      ]
     },
     {
       "id": 4,

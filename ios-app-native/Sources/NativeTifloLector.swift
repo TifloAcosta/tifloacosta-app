@@ -78,6 +78,8 @@ struct NativeReadingDocument: Codable, Identifiable, Hashable {
     var lastAudioSeconds: TimeInterval? = nil
     var audioBookmarks: [NativeAudioBookmark]? = nil
     var daisyNavigation: [NativeDaisyNavigationPoint]? = nil
+    // Optional so books imported by earlier TestFlight builds still decode.
+    var daisyClips: [NativeDaisyAudioClip]? = nil
     var textLinks: [NativeReaderTextLink]? = nil
     var folderName: String? = nil
     var readerPreferences: NativeReaderPreferences? = nil
@@ -152,6 +154,7 @@ final class NativeReaderLibrary: ObservableObject {
                         originalRelativePath: originalPath,
                         trackPaths: payload.trackPaths,
                         daisyNavigation: payload.daisyNavigation,
+                        daisyClips: payload.daisyClips,
                         textLinks: payload.textLinks
                     ), at: 0
                 )

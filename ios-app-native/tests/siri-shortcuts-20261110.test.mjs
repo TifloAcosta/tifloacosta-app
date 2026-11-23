@@ -36,9 +36,12 @@ test('Siri continúa el último libro abierto desde posición guardada', () => {
   assert.match(home, /case "resumeReader":/);
   assert.match(home, /native-ios-resume-last-book-shortcut-v1/);
   assert.match(reader, /private func resumeRequestedBook\(\)/);
-  assert.match(reader, /library\.documents\.filter\(\{ \$0\.lastOpenedAt != nil \}\)\.max\(by:/);
+  const shortcut = reader.split('private func resumeRequestedBook() {')[1]?.split('private func play(_ document:')[0] ?? '';
+  assert.match(shortcut, /library[.]documents[.]filter[(]/);
+  assert.match(shortcut, /library[.]lastOpenedAt[(]for: [$]0[)]/);
+  assert.match(shortcut, /library[.]lastOpenedAt[(]for: [$]1[)]/);
   assert.match(reader, /importError = nil/);
-  assert.match(reader, /lastOpenedAt \?\? \.distantPast/);
+  assert.match(shortcut, /[.]distantPast/);
   assert.match(reader, /play\(document\)/);
   assert.match(reader, /defaults\.removeObject\(forKey: key\)/);
   assert.match(reader, /\.onAppear \{ resumeRequestedBook\(\) \}/);

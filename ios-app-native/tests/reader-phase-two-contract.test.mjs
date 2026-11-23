@@ -115,7 +115,10 @@ test('La posición exacta del texto se guarda y recupera sin romper bibliotecas 
   assert.match(reader, /library\.saveTextPosition\(document, offset: readingOffset\)/);
   assert.match(reader, /latest\.lastTextOffset \?\?/);
   assert.match(reader, /startPercent == nil \? \(latest\.lastTextOffset/);
-  assert.match(reader, /try JSONEncoder\(\)\.encode\(documents\)\.write\(to: Self\.storageURL, options: \.atomic\)/);
+  // A whole-library JSON write still preserves precise positions, but now
+  // it occurs for actual changes, not every NavigationLink opening.
+  assert.match(reader, /try JSONEncoder[(][)][.]encode[(]documentsForPersistence[(][)][)][)]/);
+  assert.match(reader, /copy[.]lastOpenedAt = lastOpenedAt[(]for: document[)]/);
 });
 
 test('DAISY conserva encabezados NCC vinculados a SMIL en los metadatos del libro', () => {

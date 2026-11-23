@@ -1184,3 +1184,8 @@
 "No se pudo cargar la lista de YouTube. Comprueba la conexión y vuelve a intentarlo." = "Não foi possível carregar a lista do YouTube. Verifica a ligação e tenta novamente.";
 "La lista no está disponible públicamente." = "Esta lista não está disponível publicamente.";
 "El servidor no pudo consultar esta lista de YouTube." = "O servidor não conseguiu consultar esta lista do YouTube.";
+
+// Importación múltiple desde Archivos: mensajes accesibles.
+"Preparando importación de archivos." = "A preparar a importação de ficheiros.";
+"No se pudieron importar los archivos: %@" = "Não foi possível importar os ficheiros: %@";
+"Importación de archivos interrumpida." = "Importação de ficheiros interrompida.";

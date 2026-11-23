@@ -9,7 +9,11 @@ const guardScript = readFileSync(new URL('../scripts/check-release-readiness.mjs
 test('the approved update preserves earlier requirements and adds the TTS lock-screen regression', () => {
   const ids = manifest.requirements.map(x => x.id);
   assert.equal(manifest.version, '1.7');
-  assert.deepEqual(ids, [...Array(20)].map((_, i) => i + 1).concat([22, 23, 24, 25]));
+  assert.deepEqual(ids, [...Array(20)].map((_, i) => i + 1).concat([22, 23, 24, 25, 26, 27, 28, 29]));
+  for (const id of [26, 27, 28, 29]) {
+    assert.equal(manifest.requirements.find(x => x.id === id).issue, '#363');
+    assert.equal(manifest.requirements.find(x => x.id === id).status, 'partial');
+  }
   assert.equal(manifest.requirements.find(x => x.id === 25).issue, '#362');
   assert.equal(manifest.requirements.find(x => x.id === 25).status, 'partial');
   assert.equal(manifest.requirements.find(x => x.id === 24).issue, '#361');

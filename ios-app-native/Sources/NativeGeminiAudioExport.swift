@@ -34,6 +34,7 @@ enum NativeGeminiAudioExport {
         case wav = "WAV"
         case daisy = "DAISY"
         case daisyVoiceDream = "DAISY 2.02 (audio)"
+        case voiceDreamMP3Zip = "Audiolibro para Voice Dream (ZIP de MP3)"
         var id: String { rawValue }
     }
 
@@ -255,11 +256,13 @@ enum NativeGeminiAudioExport {
                        engine: Engine = .system, speed: Double = 1.0, pitch: Float = 1.0,
                        language: String = "es",
                        progress: @escaping @MainActor (Int, Int) -> Void) async throws -> URL {
-        if format == .daisy || format == .daisyVoiceDream {
+        if format == .daisy || format == .daisyVoiceDream || format == .voiceDreamMP3Zip {
             return try await NativeGeminiDaisyExport.generate(
                 text: text, title: title, voice: voice, engine: engine,
                 speed: speed, pitch: pitch, language: language,
-                audioOnly202: format == .daisyVoiceDream, progress: progress)
+                audioOnly202: format == .daisyVoiceDream,
+                mp3AudiobookZip: format == .voiceDreamMP3Zip,
+                progress: progress)
         }
         let segments = try chunks(text, engine: engine)
         let file = try destination(title: title, fileExtension: "wav")

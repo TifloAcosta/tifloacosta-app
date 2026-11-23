@@ -1192,3 +1192,9 @@
 
 // Resultado accesible de lotes recibidos desde Compartir.
 "Documentos recibidos importados: %d. Fallidos: %d." = "Documenti ricevuti importati: %d. Non riusciti: %d.";
+
+"Sonidos y avisos" = "Suoni e avvisi";
+"Confirmaciones de TifloLector" = "Conferme di TifloLector";
+"Sonidos de TifloLector" = "Suoni di TifloLector";
+"Avisos hablados" = "Avvisi vocali";
+"Vibración en avisos" = "Vibrazione per gli avvisi";

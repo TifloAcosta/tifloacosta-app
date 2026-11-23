@@ -123,7 +123,8 @@ test('La posición exacta del texto se guarda y recupera sin romper bibliotecas 
 
 test('DAISY conserva encabezados NCC vinculados a SMIL en los metadatos del libro', () => {
   assert.match(formats, /ncc\.html/);
-  assert.match(formats, /NativeDaisyNavigationPoint\(title: title, level: level, track: track,/);
+  assert.match(formats, /NativeDaisyNavigationPoint\\(/);
+  assert.match(formats, /track: target[.]track/);
   assert.match(formats, /daisyNavigation: daisyNavigation/);
   assert.match(reader, /var daisyNavigation: \[NativeDaisyNavigationPoint\]\? = nil/);
   assert.match(reader, /daisyNavigation: payload\.daisyNavigation/);
@@ -141,9 +142,9 @@ test('TTS mantiene progreso exacto en caracteres con aviso por palabra', () => {
 });
 
 test('El índice DAISY respeta fragmentos SMIL y tiempos dentro de las pistas', () => {
-  assert.match(formats, /private static func daisyAudio\(in xml: String, fragment: String\?\)/);
-  assert.match(formats, /private static func smilSeconds\(_ clock: String\)/);
-  assert.match(formats, /attribute\("clipBegin", in: tag\)/);
+  assert.match(formats, /NativeDaisyAudioOrder[.]navigationAudio/);
+  assert.match(order, /private static func seconds\(_ clock: String\\?\)/);
+  assert.match(order, /seconds\(source[.]begin\)/);
   assert.match(formats, /seconds: target\.seconds/);
   assert.match(reader, /var seconds: TimeInterval\? = nil/);
   assert.match(reader, /func seek\(toSeconds seconds: TimeInterval\)/);
@@ -160,7 +161,7 @@ test('DAISY 3 admite un índice NCX con jerarquía y fragmentos de audio', () =>
   assert.match(formats, /NativeDaisyNCX\.parse\(ncxData\)/);
   assert.match(formats, /if isDaisy,\s*let ncx/);
   assert.match(formats, /if !daisyNavigation\.contains\(where:/);
-  assert.match(formats, /daisyAudio\(in: xml, fragment: parts\.count > 1/);
+  assert.match(formats, /fragment: parts[.]count > 1 \\? parts\\[1\\] : nil/);
 });
 
 test('NCX conserva páginas y puntos especiales además de encabezados', () => {

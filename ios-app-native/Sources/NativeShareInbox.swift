@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import UIKit
 
 /// Reads the same private App Group inbox as the existing iOS share extension.
 /// It never clears items on inspection; an item is removed only after a successful import
@@ -39,6 +40,7 @@ struct NativeShareMessage: Decodable, Identifiable {
 final class NativeShareInbox: ObservableObject {
     @Published private(set) var items: [NativeShareMessage] = []
     @Published private(set) var error: String?
+    @Published private(set) var importSummary: String?
     @Published var readyToRead: NativeReadingDocument?
 
     private var inboxURL: URL? {
@@ -179,17 +181,25 @@ final class NativeShareInbox: ObservableObject {
         refresh()
         let oldToNew = items.reversed()
         var lastImported: NativeReadingDocument?
+        var importedCount = 0
         var failures: [String] = []
         for item in oldToNew where (item.kind == "file" || item.kind == "text")
             && item.destination != "pending" && item.destination != "music"
             && !item.needsAudioDestination {
             do {
                 lastImported = try importToReader(item, library: library)
+                importedCount += 1
             } catch {
                 failures.append("«\(item.name)»: \(error.localizedDescription)")
             }
         }
         if let lastImported { readyToRead = lastImported }
+        if importedCount > 0 || !failures.isEmpty {
+            importSummary = MusicLocalized.format(
+                "Documentos recibidos importados: %d. Fallidos: %d.",
+                importedCount, failures.count)
+            UIAccessibility.post(notification: .announcement, argument: importSummary)
+        }
         if !failures.isEmpty {
             error = "Algunos elementos no se pudieron importar y permanecen en Recibidos. " +
                 failures.joined(separator: " ")
@@ -238,6 +248,11 @@ struct NativeInboxScreen: View {
 
     var body: some View {
         List {
+            if let summary = inbox.importSummary {
+                Text(summary)
+                    .font(.footnote)
+                    .accessibilityLabel(summary)
+            }
             if let error = inbox.error {
                 Text(error).foregroundStyle(.secondary)
             }

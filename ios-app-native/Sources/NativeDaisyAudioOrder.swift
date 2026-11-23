@@ -83,6 +83,14 @@ enum NativeDaisyAudioOrder {
         return matches.count == 1 ? matches[0] : nil
     }
 
+    /// Share the same archive-relative, ambiguity-safe member resolution
+    /// with the reader's NCC/NCX navigation. Never select a track solely by
+    /// basename when multiple chapters have identically named MP3 files.
+    static func resolvedMember(_ reference: String, relativeTo base: String,
+                               available: [String]) -> String? {
+        member(reference, relativeTo: base, in: available)
+    }
+
     private static func nccReferences(_ text: String) -> [String] {
         let pattern = #"(?i)\bhref\s*=\s*["']([^"']+\.smil(?:#[^"']*)?)["']"#
         guard let regex = try? NSRegularExpression(pattern: pattern) else { return [] }

@@ -335,6 +335,56 @@
         "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45250919389"
       ],
       "validation": "23-11-2026: usuarios comunican cese de lectura de texto TTS con la pantalla del iPhone bloqueada tras unos minutos. Se ha detectado posible discontinuidad de audio en pausas entre AVSpeechUtterance, donde Task.sleep tenía que ejecutar la siguiente frase en un proceso suspendible. Corregido en rama iOS 1.7: se mantienen siempre hasta 3 locuciones precargadas en la cola nativa de AVSpeechSynthesizer y las pausas se entregan a postUtteranceDelay del motor de Apple. Sin modificaciones a pausa, reanudación exacta, temporizador o toque mágico. Falta verificar CI integral e iPhone real con VoiceOver, diferentes perfiles de puntuación, auriculares e interrupciones. Si el usuario estaba usando Gemini o Phonon y no voces de iOS, se requerirá investigación independiente. BLOQUE 1 (23-11-2026): la cola nativa anticipada del sintetizador pasó de tres a ocho utterances, evitando depender de un despertador entre frases. Se eliminó la referencia obsoleta a speakNextSystemSegment() en resume y se vuelve a utilizar enqueueSystemLookahead. Se añadió reactivación de AVAudioSession en resume y recepción explícita de interruptionNotification: pausa con posición exacta y reanuda únicamente si estaba reproduciendo y iOS establece shouldResume; ninguna reanudación automática tras pausa voluntaria. En segundo plano se guarda checkpoint SIN stop del audio. Contratos iOS en ejecución 45250919389 SUCCESS; validación Xcode del último cambio pendiente. iPhone con lectura TTS larga y perfiles de pausa, Bluetooth/interrupciones y motores externos sin verificar. No levantar bloqueo TestFlight."
+    },
+    {
+      "id": 26,
+      "title": "TifloLector: los gestos sobre Reproducir solo navegan cuando está sonando",
+      "status": "partial",
+      "issue": "#363",
+      "evidence": [
+        "ios-app-native/Sources/NativeTifloLector.swift",
+        "ios-app-native/Sources/../tests/reader-folder-delete-media-current-20261123.test.mjs",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/8078e89a4017dd167ad4eca487a7dcbb09356515"
+      ],
+      "validation": "La acción ajustable de VoiceOver se protege mediante guard speech.isPlaying; con etiqueta Reproducir no cambia cursor. Código incorporado el 23-11-2026; falta ensayo de gestos reales con lector activo/en pausa, interrupciones y toque mágico en iPhone."
+    },
+    {
+      "id": 27,
+      "title": "TifloLector: recordar de forma opcional la vista por carpetas",
+      "status": "partial",
+      "issue": "#363",
+      "evidence": [
+        "ios-app-native/Sources/NativeTifloLector.swift",
+        "ios-app-native/Sources/../tests/reader-folder-delete-media-current-20261123.test.mjs"
+      ],
+      "validation": "Nuevo selector persistente Vista al entrar: Vista general o Carpetas. Preferencia AppStorage y apertura automática de carpeta al entrar si está seleccionada; atajo reanudar último libro tiene prioridad. Falta verificar entrada/reentrada VoiceOver, creación de carpetas y cambios de pestaña en iPhone."
+    },
+    {
+      "id": 28,
+      "title": "Confirmación con nombre del elemento antes de eliminar archivos y colecciones",
+      "status": "partial",
+      "issue": "#363",
+      "evidence": [
+        "ios-app-native/Sources/NativeTifloLector.swift",
+        "ios-app-native/Sources/NativeMyMusic.swift",
+        "ios-app-native/Sources/NativePodcasts.swift",
+        "ios-app-native/Sources/NativeAccessibleCinema.swift",
+        "ios-app-native/Sources/../tests/reader-folder-delete-media-current-20261123.test.mjs"
+      ],
+      "validation": "TifloLector identifica carpeta a eliminar y aclara que conserva las obras; libros y lote ya estaban identificados. Mi música confirma canción, carpeta virtual, lista y carpeta inteligente; Pódcast confirma descarga y Multicines personal confirma archivo. Todos ofrecen Cancelar. Se añadieron traducciones EN/PT/FR/IT/DE. Falta auditoría manual de otras acciones destructivas y ensayo de lector de pantalla."
+    },
+    {
+      "id": 29,
+      "title": "Actualidad: pódcast y vídeos usan sus reproductores integrados respectivos",
+      "status": "partial",
+      "issue": "#363",
+      "evidence": [
+        "ios-app-native/Sources/NativeMedia.swift",
+        "ios-app-native/Sources/NativePodcasts.swift",
+        "ios-app-native/Sources/NativeYouTubePlayer.swift",
+        "ios-app-native/Sources/../tests/reader-folder-delete-media-current-20261123.test.mjs"
+      ],
+      "validation": "Auditoría del código 23-11-2026: NativeMediaPlayback.open enruta audio directo a NativePodcastPlayer y vídeo YouTube válido a NativeYouTubePlayerScreen con API IFrame oficial; ambos puntos de entrada de Actualidad usan este despachador. Se añade prueba de contrato de no-regresión. Es verificación estructural; pendiente comprobar audio y vídeo reales, VoiceOver, foco, cierre y fallback externo en dispositivo."
     }
   ],
   "operational": [

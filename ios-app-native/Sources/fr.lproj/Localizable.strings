@@ -1189,3 +1189,6 @@
 "Preparando importación de archivos." = "Préparation de l’importation des fichiers.";
 "No se pudieron importar los archivos: %@" = "Impossible d’importer les fichiers : %@";
 "Importación de archivos interrumpida." = "Importation des fichiers interrompue.";
+
+// Resultado accesible de lotes recibidos desde Compartir.
+"Documentos recibidos importados: %d. Fallidos: %d." = "Documents reçus importés : %d. Échecs : %d.";

@@ -123,12 +123,61 @@ enum NativeGeminiDaisyExport {
         return output
     }
 
+    /// A plain MP3 audiobook ZIP for players that ignore audio in full-text DAISY.
+    /// Move the files already synthesized for this export into numbered entries;
+    /// do not synthesize, decode or encode them a second time.
+    private static func packageMP3Audiobook(
+        working: URL, title: String, clips: [String]
+    ) throws -> URL {
+        guard !clips.isEmpty, Set(clips).count == clips.count else {
+            throw NativeGeminiAudioExport.ExportError.unsupportedFormat
+        }
+        let manager = FileManager.default
+        var numberedFiles: [String] = []
+        for (index, file) in clips.enumerated() {
+            try Task.checkCancellation()
+            guard URL(fileURLWithPath: file).lastPathComponent == file,
+                  file.lowercased().hasSuffix(".mp3") else {
+                throw NativeGeminiAudioExport.ExportError.unsupportedFormat
+            }
+            let source = working.appendingPathComponent(file)
+            let filename = String(format: "%04d.mp3", index + 1)
+            let target = working.appendingPathComponent(filename)
+            guard manager.fileExists(atPath: source.path),
+                  (try source.resourceValues(forKeys: [.fileSizeKey]).fileSize ?? 0) > 0,
+                  !manager.fileExists(atPath: target.path) else {
+                throw NativeGeminiAudioExport.ExportError.unsupportedFormat
+            }
+            try manager.moveItem(at: source, to: target)
+            numberedFiles.append(filename)
+        }
+        let output = try NativeGeminiAudioExport.destination(
+            title: title + " Voice Dream MP3", fileExtension: "zip")
+        var verified = false
+        defer { if !verified { try? manager.removeItem(at: output) } }
+        guard let archive = Archive(url: output, accessMode: .create) else {
+            throw NativeGeminiAudioExport.ExportError.unsupportedFormat
+        }
+        for filename in numberedFiles {
+            try Task.checkCancellation()
+            try archive.addEntry(with: filename, relativeTo: working,
+                                 compressionMethod: .deflate)
+        }
+        try Task.checkCancellation()
+        verified = true
+        return output
+    }
+
     static func generate(text: String, title: String, voice: String,
                          engine: NativeGeminiAudioExport.Engine = .gemini,
                          speed: Double = 1.0, pitch: Float = 1.0,
                          language: String = "es",
                          audioOnly202: Bool = false,
+                         mp3AudiobookZip: Bool = false,
                          progress: @escaping @MainActor (Int, Int) -> Void) async throws -> URL {
+        guard !(audioOnly202 && mp3AudiobookZip) else {
+            throw NativeGeminiAudioExport.ExportError.unsupportedFormat
+        }
         let segments = try units(text, engine: engine)
         let uuid = UUID().uuidString
         let working = FileManager.default.temporaryDirectory
@@ -194,6 +243,11 @@ enum NativeGeminiDaisyExport {
         if sectionOpen { paragraphs.append("</level2>") }
         try Task.checkCancellation()
         guard !pars.isEmpty else { throw NativeGeminiAudioExport.ExportError.empty }
+        if mp3AudiobookZip {
+            return try packageMP3Audiobook(
+                working: working, title: title,
+                clips: audioOnlyChapters.flatMap(\.clips).map(\.file))
+        }
         if audioOnly202 {
             return try packageAudioOnly202(
                 working: working, title: title, identifier: identifier, language: language,

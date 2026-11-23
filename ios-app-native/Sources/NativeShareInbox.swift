@@ -198,7 +198,11 @@ final class NativeShareInbox: ObservableObject {
             importSummary = MusicLocalized.format(
                 "Documentos recibidos importados: %d. Fallidos: %d.",
                 importedCount, failures.count)
-            UIAccessibility.post(notification: .announcement, argument: importSummary)
+            // One optional end-of-batch cue; no sounds on individual files.
+            NativeReaderFeedback.confirm(failures.isEmpty ? .imported : .error)
+            if NativeReaderFeedback.spokenAnnouncementsEnabled {
+                UIAccessibility.post(notification: .announcement, argument: importSummary)
+            }
         }
         if !failures.isEmpty {
             error = "Algunos elementos no se pudieron importar y permanecen en Recibidos. " +

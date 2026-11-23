@@ -14,6 +14,12 @@ struct NativeCinemaLocalItem: Codable, Hashable, Identifiable {
     let kind: AccessibleCinemaKind
     var lastSeconds: Double
     let importedAt: Date
+
+    /// Video and audio share playback progress but only video needs a layer.
+    var isVideoFile: Bool {
+        ["mp4", "m4v", "mov"].contains(
+            URL(fileURLWithPath: storedName).pathExtension.lowercased())
+    }
 }
 
 enum NativeCinemaLocalError: LocalizedError {
@@ -114,7 +120,9 @@ final class NativeCinemaLocalLibrary: ObservableObject {
     func savePosition(_ seconds: Double, for id: UUID) {
         guard seconds.isFinite, seconds >= 0,
               let index = items.firstIndex(where: { $0.id == id }),
-              abs(items[index].lastSeconds - seconds) >= 1 else { return }
+              items[index].lastSeconds != seconds else { return }
+        // The caller already batches periodic saves. Forced pause/close saves
+        // must retain fractional seconds rather than losing up to 0.99 s.
         var updated = items
         updated[index].lastSeconds = seconds
         guard (try? persist(updated)) != nil else { return }
@@ -148,6 +156,9 @@ final class NativeCinemaAudioPlayer: ObservableObject {
     @Published private(set) var duration: Double = 0
 
     private var player: AVPlayer?
+    /// Expose the same AVPlayer to the native video surface without creating
+    /// a second, competing playback engine or duplicate transport controls.
+    var videoPlayer: AVPlayer? { player }
     private var lastSavedSecond: Double = -10
     private weak var activeLibrary: NativeCinemaLocalLibrary?
     private var currentTitle = ""
@@ -159,6 +170,10 @@ final class NativeCinemaAudioPlayer: ObservableObject {
             throw NativeCinemaLocalError.missing
         }
         pauseAndSave(library: library)
+        // If session activation fails, do not leave a half-open item with
+        // playback state advertised as ready.
+        try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
+        try AVAudioSession.sharedInstance().setActive(true)
         player = AVPlayer(url: url)
         activeLibrary = library
         currentTitle = item.title
@@ -168,11 +183,6 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         duration = 0
         lastSavedSecond = restored
         player?.seek(to: CMTime(seconds: restored, preferredTimescale: 600))
-        // Explicitly request background-capable playback even when Multicines
-        // opens after a section that configured a different audio mode.
-        // Do not change device or VoiceOver volume.
-        try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
-        try AVAudioSession.sharedInstance().setActive(true)
         NativeRemotePlaybackOwner.onInterrupted(.cinema) { [weak self] in
             self?.pauseForOtherAudio()
         }

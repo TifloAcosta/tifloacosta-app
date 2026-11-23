@@ -168,8 +168,15 @@
     {
       "id": 17,
       "title": "Navegación por encabezados DAISY sin locución involuntaria",
-      "status": "partial",
-      "issue": "#352"
+      "status": "implemented",
+      "issue": "#352",
+      "validation": "23-11-2026: navegación por encabezados/páginas/referencias DAISY completada en código y validada con pruebas de contrato y compilación real de Xcode 26 para simulador, GitHub Actions 45144299300 SUCCESS. jumpToDaisy detiene audio previo y NO llama reproducción; selecciona destino SMIL en segundos, consulta duración local sin reproducir y guarda también porcentaje real, con espera de Play explícito. El anuncio VoiceOver diferencia Encabezado/Página DAISY/Referencia DAISY/Capítulo en ES/EN/PT/FR/IT/DE. Deslizamientos por puntos DAISY sólo actualizan valor de navegación, sin anuncio extra de voz. Pendiente contrastar comportamiento físico con VoiceOver y audio DAISY real; la implementación del código no sustituye esa prueba. Los otros requisitos 1.7 siguen bloqueando TestFlight.",
+      "evidence": [
+        "ios-app-native/Sources/NativeTifloLector.swift",
+        "ios-app-native/tests/reader-daisy-heading-navigation-safe-20261122.test.mjs",
+        "ios-app-native/tests/reader-daisy-precise-target-20261123.test.mjs",
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45144299300"
+      ]
     },
     {
       "id": 18,

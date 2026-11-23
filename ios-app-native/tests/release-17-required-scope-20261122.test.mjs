@@ -6,10 +6,12 @@ const manifest = JSON.parse(readFileSync(new URL('../release-readiness-1.7.json'
 const workflow = readFileSync(new URL('../../.github/workflows/ios-native-testflight-upload.yml', import.meta.url), 'utf8');
 const guardScript = readFileSync(new URL('../scripts/check-release-readiness.mjs', import.meta.url), 'utf8');
 
-test('the approved update preserves the original 22 requirements and the new reader-opening requirement', () => {
+test('the approved update preserves earlier requirements and adds the TTS lock-screen regression', () => {
   const ids = manifest.requirements.map(x => x.id);
   assert.equal(manifest.version, '1.7');
-  assert.deepEqual(ids, [...Array(20)].map((_, i) => i + 1).concat([22, 23, 24]));
+  assert.deepEqual(ids, [...Array(20)].map((_, i) => i + 1).concat([22, 23, 24, 25]));
+  assert.equal(manifest.requirements.find(x => x.id === 25).issue, '#362');
+  assert.equal(manifest.requirements.find(x => x.id === 25).status, 'partial');
   assert.equal(manifest.requirements.find(x => x.id === 24).issue, '#361');
   assert.match(manifest.requirements.find(x => x.id === 22).title, /Multicines Accesibles/);
   assert.ok(manifest.requirements.some(x => /RTF/.test(x.title)));

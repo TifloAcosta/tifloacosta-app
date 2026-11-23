@@ -272,6 +272,7 @@ struct NativePodcastScreen: View {
     @AppStorage("native-podcast-continuous-playback") private var continuousPlayback = false
     @EnvironmentObject private var library: NativePodcastLibrary
     @EnvironmentObject private var downloads: NativePodcastDownloads
+    @State private var pendingDownloadedRemoval: NativeDownloadedPodcastEpisode?
     @State private var choosingOPML = false
     @State private var importingOPML = false
     @State private var followedEpisodes: [NativePodcastEpisode] = []
@@ -401,7 +402,7 @@ struct NativePodcastScreen: View {
                             }
                         }
                         Button("Eliminar descarga: \(item.title)") {
-                            downloads.delete(item)
+                            pendingDownloadedRemoval = item
                         }
                     }
                 }
@@ -520,6 +521,21 @@ struct NativePodcastScreen: View {
         .onDisappear {
             // Audio continues while the user browses another TifloAcosta section.
             saveCurrentPosition()
+        }
+        .confirmationDialog(
+            MusicLocalized.format("¿Eliminar «%@»?", pendingDownloadedRemoval?.title ?? ""),
+            isPresented: Binding(
+                get: { pendingDownloadedRemoval != nil },
+                set: { if !$0 { pendingDownloadedRemoval = nil } }),
+            titleVisibility: .visible
+        ) {
+            Button("Eliminar descarga", role: .destructive) {
+                if let item = pendingDownloadedRemoval { downloads.delete(item) }
+                pendingDownloadedRemoval = nil
+            }
+            Button("Cancelar", role: .cancel) { pendingDownloadedRemoval = nil }
+        } message: {
+            Text("Se eliminará la descarga local. El episodio seguirá disponible en su fuente.")
         }
         .fileImporter(isPresented: $choosingOPML,
                       allowedContentTypes: [.xml, UTType(filenameExtension: "opml") ?? .xml],

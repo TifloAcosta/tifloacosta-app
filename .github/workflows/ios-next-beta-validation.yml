@@ -41,6 +41,13 @@ jobs:
             ios-app-native/tests/daisy-audio-order-smoke.swift \
             -o "$RUNNER_TEMP/daisy-audio-order-check"
           "$RUNNER_TEMP/daisy-audio-order-check"
+      - name: Validar DAISY 2.02 de audio con Swift y XML real
+        run: |
+          set -euo pipefail
+          swiftc ios-app-native/Sources/NativeDaisy202AudioLayout.swift \
+            ios-app-native/tests/daisy-202-layout-smoke.swift \
+            -o "$RUNNER_TEMP/daisy-202-layout-check"
+          "$RUNNER_TEMP/daisy-202-layout-check"
       - name: Crear el proyecto nativo con XcodeGen
         run: |
           brew install xcodegen

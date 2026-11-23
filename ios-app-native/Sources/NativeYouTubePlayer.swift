@@ -541,6 +541,7 @@ private struct NativeYouTubeOfficialPlayer: UIViewRepresentable {
         private var previousAudio: (category: AVAudioSession.Category,
                                     mode: AVAudioSession.Mode,
                                     options: AVAudioSession.CategoryOptions)?
+        private var ownerAtConfiguration: NativeRemotePlaybackOwner.Destination?
 
         init(engine: NativeYouTubePlayerEngine) { self.engine = engine }
 
@@ -553,6 +554,7 @@ private struct NativeYouTubeOfficialPlayer: UIViewRepresentable {
                 try session.setCategory(.playback, mode: .moviePlayback, options: [.mixWithOthers])
                 try session.setActive(true)
                 previousAudio = prior
+                ownerAtConfiguration = NativeRemotePlaybackOwner.current
             } catch {
                 try? session.setCategory(prior.category, mode: prior.mode, options: prior.options)
             }
@@ -560,10 +562,19 @@ private struct NativeYouTubeOfficialPlayer: UIViewRepresentable {
 
         func restoreAudioConfiguration() {
             guard let prior = previousAudio else { return }
+            let owner = NativeRemotePlaybackOwner.current
+            // A different player may acquire the shared session while this
+            // iframe is closing. Preserve the new owner's audio mode.
+            if let owner, owner != .youtube, owner != ownerAtConfiguration {
+                previousAudio = nil
+                ownerAtConfiguration = nil
+                return
+            }
             try? AVAudioSession.sharedInstance().setCategory(
                 prior.category, mode: prior.mode, options: prior.options
             )
             previousAudio = nil
+            ownerAtConfiguration = nil
         }
 
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {

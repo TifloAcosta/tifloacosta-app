@@ -2571,6 +2571,7 @@ struct NativeReadingScreen: View {
     @EnvironmentObject private var library: NativeReaderLibrary
     @Environment(\.dismiss) private var dismiss
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.scenePhase) private var scenePhase
     @AppStorage("native-reading-text-size") private var textSize = 20.0
     @AppStorage("native-reading-speed-index") private var speedIndex = 2
     @AppStorage("native-reading-pitch-index") private var pitchIndex = 2
@@ -2591,6 +2592,7 @@ struct NativeReadingScreen: View {
     @State private var currentPercent = 0
     @State private var readingOffset = 0
     @State private var lastSavedPercent = -1
+    @State private var delayedManualPositionSave: Task<Void, Never>?
     @State private var trackIndex = 0
     @State private var didRestoreAudioPosition = false
     @State private var elapsedSpeakingSeconds = 0
@@ -2822,6 +2824,19 @@ struct NativeReadingScreen: View {
                                           : (pendingDaisyAudioSeconds ?? latest.lastAudioSeconds))
         }
         lastSavedPercent = currentPercent
+    }
+
+    /// VoiceOver can traverse dozens of text fragments in a few seconds.
+    /// Persist the final cursor, not the entire JSON library on every swipe.
+    /// App backgrounding and reader exit flush this pending position.
+    private func scheduleManualPositionSave() {
+        delayedManualPositionSave?.cancel()
+        delayedManualPositionSave = Task { @MainActor in
+            do { try await Task.sleep(for: .milliseconds(650)) }
+            catch { return }
+            guard !Task.isCancelled, readerIsVisible, !speech.isPlaying else { return }
+            persistPosition()
+        }
     }
 
     private func move(to percent: Int) {
@@ -3138,8 +3153,8 @@ struct NativeReadingScreen: View {
 
     private func jump(to offset: Int, focusReader: Bool = true) {
         readingOffset = max(0, min(textLayout.totalCharacters, offset))
-        let ratio = Double(readingOffset) / Double(max(1, textLayout.totalCharacters))
-        currentPercent = min(100, Int((ratio * 100).rounded()))
+        currentPercent = NativeReaderProgress.textPercent(
+            length: textLayout.totalCharacters, offset: readingOffset)
         persistPosition()
         if focusReader {
             let index = textLayout.fragmentIndex(for: readingOffset)
@@ -4058,8 +4073,8 @@ struct NativeReadingScreen: View {
                     currentPercent = min(100, Int(Double(readingOffset) * 100 /
                         Double(max(1, textLayout.totalCharacters))))
                     // Braille/manual reading is a real reading position too.
-                    // A five-percent threshold could lose several chapters.
-                    persistPosition()
+                    // Debounce full-library writes while navigating rapidly.
+                    scheduleManualPositionSave()
                 }
             }
             .task {
@@ -4454,10 +4469,28 @@ struct NativeReadingScreen: View {
             }
         }
         .onReceive(speech.$textCharacterOffset) { offset in
-            guard (!speech.hasAudio || speech.isGeneratedSpeech),
-                  (speech.isPlaying || speech.isPaused) else { return }
-            readingOffset = max(0, min(textLayout.totalCharacters, offset))
-            if speech.isPaused { persistPosition() }
+            guard (!speech.hasAudio || speech.isGeneratedSpeech) else { return }
+            let clamped = max(0, min(textLayout.totalCharacters, offset))
+            // The last AVSpeechSynthesizer callback may arrive after isPlaying
+            // became false. Save real completion rather than a stale 99%.
+            guard speech.isPlaying || speech.isPaused ||
+                  (clamped == textLayout.totalCharacters &&
+                   textLayout.totalCharacters > 0) else { return }
+            readingOffset = clamped
+            if clamped == textLayout.totalCharacters {
+                currentPercent = NativeReaderProgress.textPercent(
+                    length: textLayout.totalCharacters, offset: clamped)
+                persistPosition()
+            } else if speech.isPaused { persistPosition() }
+        }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .background {
+                // Locking the screen saves a checkpoint; it must NOT stop
+                // TTS, deactivate the audio session or release remote control.
+                delayedManualPositionSave?.cancel()
+                checkpointLiveTextPosition()
+                persistPosition()
+            }
         }
         .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
             speech.refresh()
@@ -4473,6 +4506,7 @@ struct NativeReadingScreen: View {
         }
         .onDisappear {
             readerIsVisible = false
+            delayedManualPositionSave?.cancel()
             unregisterRemotePlaybackCommands()
             NativeRemotePlaybackOwner.release(.reader)
             NativeQuickBookmarkBridge.saveActiveReader = nil

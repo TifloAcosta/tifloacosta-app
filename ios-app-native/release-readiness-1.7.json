@@ -282,9 +282,17 @@
         "ios-app-native/Sources/NativeAccessibleCinemaLibrary.swift",
         "ios-app-native/Sources/NativeScreens.swift",
         "ios-app-native/tests/cinema-primary-section-20261122.test.mjs",
-        "ios-app-native/tests/cinema-personal-audio-playback-20261122.test.mjs"
+        "ios-app-native/tests/cinema-personal-audio-playback-20261122.test.mjs",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/105c426d3af56254f3f8d5c249f639aa7b2c6859",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/12a0531f3cc02a8cdd2125162536d4e5e455e0c5",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/27898de6ecbf6ade9e0abc2f879ea15f8cffeae5",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/ef91f79452f96c24760cf718caf9f0feae3c63e3",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/8f072e82cea05b9e48316475d117bea203965463",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/b540620568bce1f7d1f3512636434fa8e1a2f222",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/fcbc1fae32215d83ef0a1ab8b065a0da5ace11d5",
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45274069215"
       ],
-      "validation": "Pantalla nativa y 16 fuentes, dos colecciones FOAL y filtros, además de biblioteca personal local: importar audio/vídeo desde Archivos, reproducir, pausar, saltar 30 segundos, guardar/recuperar posición y eliminar. Localizado a seis idiomas. PENDIENTE catálogo de obras Audesc España/Latino, permisos de acceso, reproducción remota autorizada, validación VoiceOver y pruebas reales."
+      "validation": "Pantalla nativa y 16 fuentes, dos colecciones FOAL y filtros, además de biblioteca personal local: importar audio/vídeo desde Archivos, reproducir, pausar, saltar 30 segundos, guardar/recuperar posición y eliminar. Localizado a seis idiomas. PENDIENTE catálogo de obras Audesc España/Latino, permisos de acceso, reproducción remota autorizada, validación VoiceOver y pruebas reales. BLOQUE 7 (23-11-2026): los vídeos personales MP4/M4V/MOV muestran AVPlayerLayer con motor AVPlayer compartido y controles SwiftUI accesibles únicos, sin duplicar elementos en VoiceOver; pausa/cierre guardan segundos exactos, incluidos decimales, conservando consolidación periódica de 5 s; si AVPlayerItem falla se anuncia error y se deja de simular reproducción. Filtros de idioma, tipo e importación persistidos con AppStorage. El enlace de Audiocinemateca abre el catálogo oficial bajo autenticación; no se consumen catálogos firmados o credenciales sin acuerdo. Las 48 descripciones dinámicas del directorio y las colecciones se traducen a los otros cinco idiomas y participan en búsqueda localizada. Contratos GitHub Actions 45274069215 SUCCESS, compilación para simulador todavía pendiente al actualizar inventario. Falta catálogo de títulos Audesc España/Latino con metadatos/autorización, reglas de acceso de Audiocinemateca, prueba física con VoiceOver y reproducción de formatos. ESTADO PARCIAL; sin distribución."
     },
     {
       "id": 23,

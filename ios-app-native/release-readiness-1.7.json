@@ -19,7 +19,17 @@
       "id": 2,
       "title": "DAISY: audio íntegro y secuencia de navegación NCC/NCX/SMIL",
       "status": "partial",
-      "issue": "#353"
+      "issue": "#353",
+      "validation": "23-11-2026: implementación parcial avanzada. NativeDaisyAudioOrder utiliza el orden de referencias NCC (DAISY 2.02) y NCX (DAISY 3) y el orden de etiquetas de audio SMIL para organizar los archivos físicos, con deduplicación de pistas y conservación de audios sin referencia. Las posiciones de navegación siguen el mismo índice y la exportación ZIP copia todas las pistas originales como Pista-0001, Pista-0002... sin recodificar. Soporta FLAC, acciones diferenciadas para original DAISY/extraer audio/conversión con voz, localizadas ES/EN/PT/FR/IT/DE. Validación GitHub Actions 45150265497 SUCCESS: contratos Node, cuatro pruebas funcionales Swift en macOS con NCC/NCX/SMIL no alfabéticos y compilación Xcode 26 para simulador. AÚN PARCIAL: no preserva la reproducción por fragmentos repetidos/no lineales en el ZIP de pistas (para ello se conserva el DAISY original), faltan libros reales complejos, compatibilidad Voice Dream y pruebas con VoiceOver en iPhone. No desbloquear TestFlight.",
+      "evidence": [
+        "ios-app-native/Sources/NativeDaisyAudioOrder.swift",
+        "ios-app-native/Sources/NativeReaderFormats.swift",
+        "ios-app-native/Sources/NativeTifloLector.swift",
+        "ios-app-native/tests/daisy-audio-order-smoke.swift",
+        "ios-app-native/tests/reader-daisy-audio-sequence-20261123.test.mjs",
+        ".github/workflows/ios-next-beta-validation.yml",
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45150265497"
+      ]
     },
     {
       "id": 3,

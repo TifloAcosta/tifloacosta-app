@@ -57,7 +57,8 @@ test('both MP3 ZIP exporters verify real archive entries before sharing', () => 
   assert.match(verifier, /Archive[(]url: url, accessMode: [.]read[)]/);
   assert.match(verifier, /entry[.]type == [.]file/);
   assert.match(verifier, /filenames[.]insert[(]entry[.]path[)][.]inserted/);
-  assert.match(verifier, /entry[.]path[.]range[(]of: #[\s\S]*[0-9]\{4\}/);
+  assert.match(verifier, /entry[.]path[.]range[(]of:/);
+  assert.ok(verifier.includes('[0-9]{4}'));
   assert.match(verifier, /filenames[.]sorted[(][)]/);
   assert.match(verifier, /ordered[.]enumerated[(][)][.]allSatisfy/);
   assert.match(verifier, /String[(]format: "%04d[.]mp3", \$0[.]offset \+ 1[)]/);

@@ -20,15 +20,14 @@
       "title": "DAISY: audio íntegro y secuencia de navegación NCC/NCX/SMIL",
       "status": "partial",
       "issue": "#353",
-      "validation": "23-11-2026: implementación parcial avanzada. NativeDaisyAudioOrder utiliza el orden de referencias NCC (DAISY 2.02) y NCX (DAISY 3) y el orden de etiquetas de audio SMIL para organizar los archivos físicos, con deduplicación de pistas y conservación de audios sin referencia. Las posiciones de navegación siguen el mismo índice y la exportación ZIP copia todas las pistas originales como Pista-0001, Pista-0002... sin recodificar. Soporta FLAC, acciones diferenciadas para original DAISY/extraer audio/conversión con voz, localizadas ES/EN/PT/FR/IT/DE. Validación GitHub Actions 45150265497 SUCCESS: contratos Node, cuatro pruebas funcionales Swift en macOS con NCC/NCX/SMIL no alfabéticos y compilación Xcode 26 para simulador. AÚN PARCIAL: no preserva la reproducción por fragmentos repetidos/no lineales en el ZIP de pistas (para ello se conserva el DAISY original), faltan libros reales complejos, compatibilidad Voice Dream y pruebas con VoiceOver en iPhone. No desbloquear TestFlight.",
+      "validation": "23-11-2026: avance funcional validado GitHub Actions 45155234219 SUCCESS (contratos de iOS, Swift con NCC/NCX/SMIL y compilación Xcode 26 para simulador). Se registran por libro los fragmentos SMIL como pista/clipBegin/clipEnd, conservando referencias repetidas a un MP3 con distintas posiciones sin deduplicar segmentos. NativeReadingSpeech incluye reproducción de clips en orden, inicio en segundo exacto y salto al siguiente clip incluso dentro de un mismo archivo; una alarma de baja carga y ajustada a la velocidad aplica clipEnd, se cancela y recalcula con pausa, reanudación y saltos. Datos opcionales para bibliotecas antiguas que mantienen reproducción convencional. Conserva compartición del DAISY original y exportación ZIP de pistas físicas. AÚN PARCIAL: sin validación física con VoiceOver, con libros DAISY complejos auténticos ni secuencias con puntos NCX/NCC que alteren el orden dentro de un mismo archivo SMIL. El ZIP de pistas no es un paquete DAISY navegable ni reconstruye clips. Voice Dream pendiente de prueba independiente. Bloqueo TestFlight intacto.",
       "evidence": [
         "ios-app-native/Sources/NativeDaisyAudioOrder.swift",
         "ios-app-native/Sources/NativeReaderFormats.swift",
         "ios-app-native/Sources/NativeTifloLector.swift",
         "ios-app-native/tests/daisy-audio-order-smoke.swift",
-        "ios-app-native/tests/reader-daisy-audio-sequence-20261123.test.mjs",
-        ".github/workflows/ios-next-beta-validation.yml",
-        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45150265497"
+        "ios-app-native/tests/reader-daisy-smil-playback-20261123.test.mjs",
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45155234219"
       ]
     },
     {
@@ -167,7 +166,13 @@
       "id": 15,
       "title": "DAISY 2.02 con audio compatible con Voice Dream",
       "status": "partial",
-      "issue": "#343"
+      "issue": "#343",
+      "validation": "DAISY 2.02 con audioNCC/ncc.html/audio.smil y verificador estructural continúa en código y contratos anteriores; la nueva lectura por intervalos SMIL mejora el motor propio, pero NO acredita todavía que Voice Dream interprete correctamente un exportado real. Pendiente probar el archivo en Voice Dream y ajustar las incompatibilidades observadas. No dar por implementado ni levantar el bloqueo.",
+      "evidence": [
+        "ios-app-native/Sources/NativeGeminiDaisyExport.swift",
+        "ios-app-native/Sources/NativeDaisyPackageVerifier.swift",
+        "ios-app-native/tests/reader-daisy-202-voicedream-20261122.test.mjs"
+      ]
     },
     {
       "id": 16,

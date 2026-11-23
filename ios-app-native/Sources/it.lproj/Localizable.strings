@@ -1198,3 +1198,6 @@
 "Sonidos de TifloLector" = "Suoni di TifloLector";
 "Avisos hablados" = "Avvisi vocali";
 "Vibración en avisos" = "Vibrazione per gli avvisi";
+
+// Tipo de punto DAISY y acción accesible, sin iniciar audio.
+"%@: %@. Pulsa Reproducir para escuchar." = "%@: %@. Premi Riproduci per ascoltare.";

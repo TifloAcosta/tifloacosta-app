@@ -1209,3 +1209,4 @@
 "Audiolibro para Voice Dream (ZIP de MP3)" = "Audiolibro per Voice Dream (ZIP MP3)";
 "ZIP de MP3 numerados: conserva la voz sintetizada en esta conversión, sin incluir texto ni estructura DAISY. La compatibilidad con Voice Dream requiere prueba en el dispositivo." = "ZIP di MP3 numerati: mantiene la voce sintetizzata durante questa conversione, senza testo né struttura DAISY. La compatibilità con Voice Dream deve essere verificata sul dispositivo.";
 "No se pudo exportar el ZIP de MP3: %@" = "Impossibile esportare lo ZIP MP3: %@";
+"El ZIP de MP3 está incompleto o contiene pistas no válidas." = "Lo ZIP MP3 è incompleto o contiene tracce non valide.";

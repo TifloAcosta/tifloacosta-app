@@ -21,7 +21,7 @@ test('native AVSpeech queue stays one or more utterances ahead without app timer
   assert.match(helper,/synthesizer[.]speak\(speechQueue\[index\][.]utterance\)/);
   assert.match(helper,/speechEnqueuedThroughIndex = index \+ 1/);
   assert.doesNotMatch(helper,/Task[.]sleep|speechDelayTask/);
-  assert.match(queue,/lookahead: Int = 3/);
+  assert.match(queue,/lookahead: Int = 8/);
   assert.match(queue,/max\(2, lookahead\)/);
   const callback=reader.split('progressDelegate.onFinish =')[1]?.split('synthesizer.delegate = progressDelegate')[0]??'';
   assert.match(callback,/self[.]speechQueueIndex \+= 1/);

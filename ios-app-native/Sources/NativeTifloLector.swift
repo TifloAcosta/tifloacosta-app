@@ -2872,7 +2872,11 @@ struct NativeReadingScreen: View {
             speech.sleep(after: 0)
             return
         }
-        speech.onSleepExpired = { persistPosition() }
+        speech.onSleepExpired = {
+            checkpointLiveTextPosition()
+            persistPosition()
+            sleepDeadline = nil
+        }
         if reset || sleepDeadline == nil {
             sleepDeadline = Date().addingTimeInterval(TimeInterval(minutes * 60))
         }
@@ -2985,14 +2989,18 @@ struct NativeReadingScreen: View {
         }
     }
 
+    /// Capture the latest synthesizer checkpoint before any stop or view exit.
+    /// The UI's last displayed fragment or rounded percentage may be stale.
+    /// This method never moves the VoiceOver focus or restarts the voice.
+    private func checkpointLiveTextPosition() {
+        guard tracks.isEmpty && (speech.isPlaying || speech.isPaused) else { return }
+        readingOffset = max(0, min(textLayout.totalCharacters, speech.textCharacterOffset))
+        currentPercent = max(0, min(100, Int(Double(readingOffset) * 100 /
+            Double(max(1, textLayout.totalCharacters)))))
+    }
+
     private func pausePlayback() {
-        if tracks.isEmpty {
-            // A live text checkpoint is more precise than the percentage,
-            // visible fragment or last persisted paragraph.
-            readingOffset = max(0, min(textLayout.totalCharacters, speech.textCharacterOffset))
-            currentPercent = max(0, min(100, Int(Double(readingOffset) * 100 /
-                Double(max(1, textLayout.totalCharacters)))))
-        }
+        checkpointLiveTextPosition()
         speech.pause()
         if NativeRemotePlaybackOwner.current == .reader {
             var info = MPNowPlayingInfoCenter.default().nowPlayingInfo ?? [:]
@@ -3045,7 +3053,9 @@ struct NativeReadingScreen: View {
     }
 
     private func stopPlayback() {
-        // Save the exact audio time before stop() discards the AVAudioPlayer.
+        // Capture a live text cursor, or the exact audio time, before the
+        // active synthesizer/player is discarded by stop().
+        checkpointLiveTextPosition()
         persistPosition()
         speech.stop()
         sleepDeadline = nil
@@ -4363,14 +4373,9 @@ struct NativeReadingScreen: View {
             NativeRemotePlaybackOwner.release(.reader)
             NativeQuickBookmarkBridge.saveActiveReader = nil
             NativeReaderPlaybackBridge.pauseActiveReader = nil
-            // SwiftUI might not have delivered the last @Published cursor
-            // before navigation away. Save the synthesizer's live checkpoint.
-            if tracks.isEmpty && (speech.isPlaying || speech.isPaused) {
-                readingOffset = max(0, min(textLayout.totalCharacters,
-                                           speech.textCharacterOffset))
-                currentPercent = max(0, min(100, Int(Double(readingOffset) * 100 /
-                    Double(max(1, textLayout.totalCharacters)))))
-            }
+            // Save the live synthesizer checkpoint even if @Published has not
+            // delivered its last update; then release playback resources.
+            checkpointLiveTextPosition()
             persistPosition()
             speech.onSleepExpired = nil
             speech.stop()

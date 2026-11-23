@@ -44,9 +44,24 @@ test('button, Magic Tap and remote play-pause use the same toggle', () => {
   assert.match(remote, /toggleReaderPlayback\(\)/);
 });
 
+test('all stop paths save the live text cursor, not the stale reader fragment', () => {
+  const helper = inBetween('    private func checkpointLiveTextPosition() {', '    private func pausePlayback() {');
+  assert.match(helper, /speech[.]isPlaying [|][|] speech[.]isPaused/);
+  assert.match(helper, /speech[.]textCharacterOffset/);
+  assert.match(helper, /readingOffset = max[(]0, min[(]textLayout[.]totalCharacters/);
+  assert.doesNotMatch(helper, /focusedFragment|lastReaderFragment/);
+
+  const stop = inBetween('    private func stopPlayback() {', '    private func changeTrack(');
+  assert.match(stop, /checkpointLiveTextPosition[(][)]\s*persistPosition[(][)]\s*speech[.]stop[(][)]/);
+  const sleep = inBetween('    private func applySleepTimer(reset: Bool = false) {', '    private func playTrack()');
+  assert.match(sleep, /speech[.]onSleepExpired = \{\s*checkpointLiveTextPosition[(][)]\s*persistPosition[(][)]/);
+  const disappearance = inBetween('        .onDisappear {\n            unregisterRemotePlaybackCommands()', '        .accessibilityAction(.magicTap)');
+  assert.match(disappearance, /checkpointLiveTextPosition[(][)]\s*persistPosition[(][)]\s*speech[.]onSleepExpired = nil\s*speech[.]stop[(][)]/);
+});
+
 test('pause and view disappearance persist character offsets, not paragraph or rounded percent', () => {
   const pause = inBetween('private func pausePlayback() {', 'private func registerRemotePlaybackCommands()');
-  assert.match(pause, /speech\.textCharacterOffset/);
+  assert.match(pause, /checkpointLiveTextPosition\(\)/);
   assert.match(pause, /speech\.pause\(\)/);
   assert.match(pause, /persistPosition\(\)/);
   const readerBody = inBetween('    var body: some View {\n        readerWithSheets', '.accessibilityAction(.magicTap)');

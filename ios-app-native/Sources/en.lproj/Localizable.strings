@@ -1239,3 +1239,5 @@
 "Se eliminará la lista de reproducción, pero no las canciones." = "The playlist will be deleted, but not the songs.";
 "Se eliminará el archivo guardado en esta colección personal." = "The file stored in your personal collection will be deleted.";
 "Se eliminará la descarga local. El episodio seguirá disponible en su fuente." = "The local download will be deleted. The episode will still be available from its source.";
+
+"No se pudo reproducir este archivo. Comprueba que el formato es compatible." = "This file could not be played. Check that its format is supported.";

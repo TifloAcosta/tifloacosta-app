@@ -71,7 +71,7 @@ private struct AccessibleCinemaSource: Identifiable {
     var detail: String {
         let format = isAudioOnly ? "Solo audio con audiodescripción." : "Vídeo con audiodescripción según el título."
         let parts = [description, format, access, geographicNotice].filter { !$0.isEmpty }
-        return parts.joined(separator: " ")
+        return parts.map { MusicLocalized.message($0) }.joined(separator: " ")
     }
 }
 
@@ -250,8 +250,10 @@ struct NativeAccessibleCinemaScreen: View {
         return AccessibleCinemaCollections.items.filter { item in
             (selectedLanguage == .all || item.language == selectedLanguage)
                 && (selectedKind == .all || item.kind == selectedKind)
-                && (query.isEmpty || [item.title, item.publisher, item.summary]
-                    .contains(where: { $0.localizedStandardContains(query) }))
+                && (query.isEmpty || [
+                    MusicLocalized.message(item.title), item.publisher,
+                    MusicLocalized.message(item.summary)
+                ].contains(where: { $0.localizedStandardContains(query) }))
         }
     }
 
@@ -429,12 +431,12 @@ struct NativeAccessibleCinemaScreen: View {
                 Section("Colecciones de obras audiodescritas") {
                     ForEach(featuredCollections) { item in
                         VStack(alignment: .leading, spacing: 8) {
-                            Text(item.title)
+                            Text(MusicLocalized.message(item.title))
                                 .font(.headline)
                                 .accessibilityAddTraits(.isHeader)
                             Text(item.publisher)
                                 .font(.subheadline.weight(.semibold))
-                            Text(item.summary)
+                            Text(MusicLocalized.message(item.summary))
                                 .font(.subheadline)
                                 .foregroundStyle(TifloVisual.secondaryText)
                             Link("Explorar colección en la fuente original",

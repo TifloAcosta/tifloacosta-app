@@ -19,13 +19,14 @@ test('Crear marca conserva posición y reanuda si estaba reproduciendo', () => {
   const start = swift.indexOf('private func bookmarkFromContextMenu(at fragment: Int)');
   const end = swift.indexOf('private func readerFragment(', start);
   const action = swift.slice(start, end);
-  assert.match(action, /let wasPlaying = speech\.isPlaying/);
-  assert.match(action, /if wasPlaying \{ pausePlayback\(\) \}/);
   assert.match(action, /addBookmark\(\)/);
   assert.match(action, /textLayout\.fragmentStarts\[fragment\]/);
   assert.match(action, /guard textLayout\.fragmentStarts\.indices\.contains\(fragment\) else \{ return \}/);
-  assert.doesNotMatch(action, /!speech\.isPaused/);
-  assert.match(action, /if speech\.isPaused \{ speech\.resume\(\); applySleepTimer\(\) \}/);
+  assert.match(action, /let previousOffset = readingOffset/);
+  assert.match(action, /let previousPercent = currentPercent/);
+  assert.match(action, /readingOffset = previousOffset/);
+  assert.match(action, /currentPercent = previousPercent/);
+  assert.doesNotMatch(action, /pausePlayback\(\)|speech\.resume\(\)|Task\.sleep/);
   assert.match(swift, /Button\("Añadir marca"\) \{ addBookmarkFromReaderSelection\(\) \}/);
   assert.match(swift, /accessibilityAction\(named: Text\("Crear marca"\)\)/);
   assert.match(swift, /bookmarkFromContextMenu\(at: index\)/);

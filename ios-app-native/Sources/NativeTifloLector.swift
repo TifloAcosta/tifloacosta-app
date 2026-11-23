@@ -3878,8 +3878,8 @@ struct NativeReadingScreen: View {
             // Announce the reached unit, not the unrelated reading percentage.
             .accessibilityValue(navigationAccessibilityValue)
             .accessibilityHint(speech.isPlaying
-                ? "Desliza arriba o abajo para navegar por el modo elegido."
-                : "La navegación con gestos solo está disponible mientras se reproduce.")
+                ? Text("Desliza arriba o abajo para navegar por el modo elegido.")
+                : Text("La navegación con gestos solo está disponible mientras se reproduce."))
             .accessibilityAdjustableAction { direction in
                 // Flicks over Reproducir may be accidental. Only navigate
                 // while the button reads Pausar and audio is playing.

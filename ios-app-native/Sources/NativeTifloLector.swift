@@ -773,6 +773,7 @@ final class NativeReadingSpeech: ObservableObject {
     private var playlistURLs: [URL] = []
     private var daisyClips: [NativeDaisyAudioClip] = []
     private var daisyClipIndex = 0
+    private var daisyBoundaryTask: Task<Void, Never>?
     private var playlistIndex = 0
     private var playlistSpeed = 1.0
     private var onTrackChanged: ((Int) -> Void)?
@@ -1173,6 +1174,7 @@ final class NativeReadingSpeech: ObservableObject {
         player = audio
         isPlaying = true
         isPaused = false
+        scheduleDaisyBoundary()
     }
 
     func playAudio(_ url: URL, speed: Double = 1.0, at percent: Int = 0) throws {
@@ -1243,7 +1245,31 @@ final class NativeReadingSpeech: ObservableObject {
         }
     }
 
+    /// One cancellable boundary alarm per clip (not a high-frequency polling
+    /// timer). It follows playback rate and is rescheduled after Pause/Seek.
+    private func scheduleDaisyBoundary() {
+        daisyBoundaryTask?.cancel()
+        daisyBoundaryTask = nil
+        guard daisyClips.indices.contains(daisyClipIndex),
+              let end = daisyClips[daisyClipIndex].end,
+              let player, player.isPlaying, end < player.duration else { return }
+        let expected = ObjectIdentifier(player)
+        let remaining = max(0, end - player.currentTime)
+        let delay = max(0.02, remaining / Double(max(0.5, player.rate)))
+        daisyBoundaryTask = Task { @MainActor [weak self] in
+            do { try await Task.sleep(for: .seconds(delay)) }
+            catch { return }
+            guard let self, !Task.isCancelled, self.isPlaying, !self.isPaused,
+                  let current = self.player,
+                  ObjectIdentifier(current) == expected else { return }
+            if current.currentTime >= end - 0.04 { self.advanceDaisyClip() }
+            else { self.scheduleDaisyBoundary() }
+        }
+    }
+
     private func advanceDaisyClip() {
+        daisyBoundaryTask?.cancel()
+        daisyBoundaryTask = nil
         guard daisyClips.indices.contains(daisyClipIndex + 1) else {
             player?.stop()
             player = nil
@@ -1254,10 +1280,10 @@ final class NativeReadingSpeech: ObservableObject {
         }
         let next = daisyClipIndex + 1
         let clip = daisyClips[next]
+        daisyClipIndex = next
         do {
             try startAudio(playlistURLs[clip.track], speed: playlistSpeed,
                            at: 0, atSeconds: clip.begin)
-            daisyClipIndex = next
             playlistIndex = clip.track
             onTrackChanged?(clip.track)
         } catch {
@@ -1269,19 +1295,24 @@ final class NativeReadingSpeech: ObservableObject {
     func seek(to percent: Int) {
         guard let player else { return }
         player.currentTime = player.duration * Double(max(0, min(100, percent))) / 100
+        scheduleDaisyBoundary()
     }
 
     func seek(toSeconds seconds: TimeInterval) {
         guard let player, seconds.isFinite else { return }
         player.currentTime = max(0, min(player.duration, seconds))
+        scheduleDaisyBoundary()
     }
 
     func skip(seconds: TimeInterval) {
         guard let player else { return }
         player.currentTime = max(0, min(player.duration, player.currentTime + seconds))
+        scheduleDaisyBoundary()
     }
 
     func pause() {
+        daisyBoundaryTask?.cancel()
+        daisyBoundaryTask = nil
         if let player { player.pause() }
         else if isGeneratedSpeech {
             geminiGeneration += 1
@@ -1338,6 +1369,7 @@ final class NativeReadingSpeech: ObservableObject {
         else if synthesizer.isPaused { _ = synthesizer.continueSpeaking() }
         else { speakNextSystemSegment() }
         isPlaying = true
+        scheduleDaisyBoundary()
     }
 
     func refresh() {
@@ -1378,6 +1410,8 @@ final class NativeReadingSpeech: ObservableObject {
     }
 
     func stop() {
+        daisyBoundaryTask?.cancel()
+        daisyBoundaryTask = nil
         sleepTask?.cancel()
         sleepTask = nil
         geminiGeneration += 1

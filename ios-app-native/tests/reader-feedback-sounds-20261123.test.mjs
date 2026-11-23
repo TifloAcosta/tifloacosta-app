@@ -67,6 +67,16 @@ test('batch importing has an optional final cue, not an intrusive sound per file
   assert.doesNotMatch(folderProgress, /NativeReaderFeedback[.]confirm/);
 });
 
+test('shared-file batches use one end cue and retain the text status', () => {
+  const inbox = source('NativeShareInbox.swift');
+  const importer = section(inbox, 'func importPendingReaderContent(into library:',
+                            'func complete(_ item:');
+  assert.ok(importer.includes('importedCount > 0 || !failures.isEmpty'));
+  assert.ok(importer.includes('NativeReaderFeedback.confirm(failures.isEmpty ? .imported : .error)'));
+  assert.ok(importer.includes('NativeReaderFeedback.spokenAnnouncementsEnabled'));
+  assert.ok(importer.includes('importSummary = MusicLocalized.format('));
+});
+
 test('sound and announcement labels are translated into all five additional languages', () => {
   const keys = ['Sonidos y avisos', 'Confirmaciones de TifloLector',
     'Sonidos de TifloLector','Avisos hablados','Vibración en avisos'];

@@ -8,6 +8,7 @@ const office = swift('NativeOfficeText.swift');
 const settings = swift('NativeReaderSettings.swift');
 const plist = swift('Info.plist');
 const ncx = swift('NativeDaisyNCX.swift');
+const order = swift('NativeDaisyAudioOrder.swift');
 
 test('la voz informa el progreso real por palabra sin avanzar al pausar', () => {
   assert.match(reader, /willSpeakRangeOfSpeechString/);

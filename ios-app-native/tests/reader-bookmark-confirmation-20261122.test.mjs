@@ -36,8 +36,9 @@ test('VoiceOver confirms only actual saves and reports duplicates and errors', (
   for (const code of ['.saved', '.alreadyExists', '.failed', '.documentUnavailable']) {
     assert.ok(functionBody.includes('case ' + code + ':'), 'missing ' + code);
   }
-  assert.match(functionBody, /UINotificationFeedbackGenerator\(\)\.notificationOccurred\(\.success\)/);
-  assert.match(functionBody, /UIAccessibility\.post\(notification: \.announcement, argument: actionMessage\)/);
+  assert.match(functionBody, /NativeReaderFeedback[.]confirm[(][.]saved[)]/);
+  assert.match(functionBody, /NativeReaderFeedback[.]spokenAnnouncementsEnabled/);
+  assert.match(functionBody, /UIAccessibility[.]post[(]notification: [. ]announcement, argument: actionMessage[)]/);
   assert.match(functionBody, /Ya existe una marca en esta posición/);
   assert.match(functionBody, /No se pudo guardar la marca/);
 });

@@ -1830,10 +1830,16 @@ struct NativeReaderLibraryScreen: View {
                         if !summary.failed.isEmpty {
                             importError = summary.failed.prefix(6).joined(separator: "\n")
                         }
+                        if !summary.failed.isEmpty {
+                            NativeReaderFeedback.confirm(.error)
+                        } else if summary.imported > 0 {
+                            NativeReaderFeedback.confirm(.imported)
+                        }
                     } catch {
                         importError = MusicLocalized.format(
                             "No se pudieron importar los archivos: %@", error.localizedDescription)
                         importFilesStatus = MusicLocalized.message("Importación de archivos interrumpida.")
+                        NativeReaderFeedback.confirm(.error)
                     }
                     UIAccessibility.post(notification: .announcement, argument: importFilesStatus)
                 }
@@ -1861,9 +1867,15 @@ struct NativeReaderLibraryScreen: View {
                         if !summary.failed.isEmpty {
                             importError = summary.failed.prefix(6).joined(separator: "\n")
                         }
+                        if !summary.failed.isEmpty {
+                            NativeReaderFeedback.confirm(.error)
+                        } else if summary.imported > 0 {
+                            NativeReaderFeedback.confirm(.imported)
+                        }
                     } catch {
                         importError = MusicLocalized.format("No se pudo importar la carpeta: %@", error.localizedDescription)
                         importFolderStatus = MusicLocalized.message("Importación de carpeta interrumpida.")
+                        NativeReaderFeedback.confirm(.error)
                     }
                     UIAccessibility.post(notification: .announcement, argument: importFolderStatus)
                 }

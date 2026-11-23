@@ -33,6 +33,8 @@ final class NativeYouTubePlaylistStore: ObservableObject {
     func load(_ playlist: NativeYouTubePlaylist, loadMore: Bool = false) async {
         guard !isLoading else { return }
         if loadMore && (nextPageToken.isEmpty || currentPlaylistID != playlist.id) { return }
+        // Capture this page's token; a broken backend must never loop forever.
+        let requestedPageToken = loadMore ? nextPageToken : ""
         if !loadMore {
             currentPlaylistID = playlist.id
             entries = []
@@ -59,22 +61,29 @@ final class NativeYouTubePlaylistStore: ObservableObject {
             guard (200...299).contains(status) else {
                 let code = (try? JSONDecoder().decode(
                     NativeYouTubePlaylistError.self, from: data).error) ?? ""
-                if status == 403 || status == 404 || code == "INVALID_PLAYLIST" {
+                if code == "INVALID_PLAYLIST" {
                     throw PlaylistLoadError.unavailable
                 }
+                // A 404 may mean that the public route is not deployed, not
+                // that the user's playlist has been removed or made private.
                 throw PlaylistLoadError.service
             }
             let page = try JSONDecoder().decode(NativeYouTubePlaylistPage.self, from: data)
+            // Retain two occurrences of a video at different positions,
+            // but never duplicate the same position after a repeated page.
+            var seenPositions = Set(entries.map { "\($0.position):\($0.video.id)" })
             for (index, item) in page.items.enumerated() {
                 guard let video = NativeYouTubeVideo(result: item) else { continue }
                 let position = item.position ?? (seenSourceItems + index)
+                let entryKey = "\(position):\(video.id)"
+                guard seenPositions.insert(entryKey).inserted else { continue }
                 entries.append(NativeYouTubePlaylistEntry(
-                    id: "\(position):\(video.id):\(index)",
-                    position: position, video: video
+                    id: entryKey, position: position, video: video
                 ))
             }
             seenSourceItems += page.items.count
-            nextPageToken = page.nextPageToken
+            nextPageToken = page.nextPageToken == requestedPageToken
+                ? "" : page.nextPageToken
             hasLoaded = true
             if entries.isEmpty {
                 message = MusicLocalized.message("No hay vídeos públicos disponibles en esta lista.")
@@ -139,7 +148,10 @@ struct NativeYouTubePlaylistScreen: View {
                         .foregroundStyle(TifloVisual.secondaryText)
                         .accessibilityAddTraits(.updatesFrequently)
                     Button("Reintentar carga de la lista") {
-                        Task { await store.load(playlist) }
+                        // Retry only the failed page when previous entries exist.
+                        // Restart from page one only if the initial request failed.
+                        Task { await store.load(playlist,
+                            loadMore: store.hasLoaded && !store.nextPageToken.isEmpty) }
                     }
                     .disabled(store.isLoading)
                 }

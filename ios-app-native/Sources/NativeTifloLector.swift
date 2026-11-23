@@ -1420,7 +1420,13 @@ final class NativeReadingSpeech: ObservableObject {
             if let player { player.play() } else { playNextGeminiSegment() }
         } else if let player { player.play() }
         else if synthesizer.isPaused { _ = synthesizer.continueSpeaking() }
-        else { speakNextSystemSegment() }
+        else {
+            // A stopped system synthesizer uses the native lookahead queue;
+            // the old one-at-a-time helper no longer exists. Restore the
+            // playing flag first so enqueueSystemLookahead can advance.
+            isPlaying = true
+            enqueueSystemLookahead()
+        }
         isPlaying = true
         scheduleDaisyBoundary()
     }

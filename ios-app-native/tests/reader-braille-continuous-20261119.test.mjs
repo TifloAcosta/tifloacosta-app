@@ -20,7 +20,12 @@ test('Braille renders one continuous scrollable text surface rather than requiri
 test('Braille preserves exact selection and restores position without starting speech', () => {
   const reader = source('NativeTifloLector.swift');
   const braille = source('NativeReaderContinuousBrailleText.swift');
-  assert.match(reader, /saveTextPosition\(document, offset: offset\)/);
+  // A braille pan records its live offset, but does not synchronously
+  // serialize the whole library after each change of selection.
+  assert.match(reader, /onPositionChange: \\{ offset in[\\s\\S]{0,800}scheduleManualPositionSave\\(\\)/);
+  assert.doesNotMatch(reader, /onPositionChange: \\{ offset in[\\s\\S]{0,800}library\\.saveTextPosition\\(document, offset: offset\\)/);
+  // The shared persistence path still writes the exact offset.
+  assert.match(reader, /private func persistPosition\\(\\) \\{[\\s\\S]{0,180}library\\.saveTextPosition\\(document, offset: readingOffset\\)/);
   assert.match(braille, /let restoredRange = NSRange\(location: utf16Offset, length: 0\)/);
   assert.match(braille, /if movedSelection \{ view\.selectedRange = restoredRange \}/);
   assert.match(braille, /textViewDidChangeSelection/);

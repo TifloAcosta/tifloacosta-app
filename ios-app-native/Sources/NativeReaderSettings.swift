@@ -820,6 +820,15 @@ struct NativeReaderSettingsScreen: View {
             NavigationLink("Motores externos") { NativeReaderExternalVoiceSettingsScreen() }
                 .accessibilityHint("Prepara Gemini o Phonon antes de seleccionarlos para leer.")
             NavigationLink("Creación rápida de marcas") { NativeQuickBookmarkHelpScreen() }
+            NavigationLink("Sonidos y avisos") {
+                List {
+                    Section("Confirmaciones de TifloLector") {
+                        NativeReaderFeedbackControls()
+                    }
+                }
+                .tifloScreenSurface()
+                .navigationTitle("Sonidos y avisos")
+            }
             NavigationLink("OCR y reconocimiento") { NativeReaderOCRSettingsScreen() }
             NavigationLink("Navegación y avances") {
                 List {

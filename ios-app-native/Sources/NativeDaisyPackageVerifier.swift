@@ -36,18 +36,11 @@ enum NativeDaisyPackageVerifier {
                 throw Failure.invalidMP3Zip
             }
             totalBytes += UInt64(entry.uncompressedSize)
-            var prefix = Data()
-            _ = try archive.extract(entry) { part in
-                let remaining = max(0, 262_144 - prefix.count)
-                if remaining > 0 { prefix.append(contentsOf: part.prefix(remaining)) }
-            }
-            let header = Array(prefix)
-            // A renamed WAV or an ID3-only file is not a playable MP3.
-            // MPEG sync is a structural check; playback still needs a real device.
-            guard !header.starts(with: Array("RIFF".utf8)),
-                  zip(header, header.dropFirst()).contains(where: {
-                      $0.0 == 0xff && ($0.1 & 0xe0) == 0xe0
-                  }) else { throw Failure.invalidMP3Zip }
+            var mp3Probe = NativeMP3HeaderProbe()
+            // ZIPFoundation streams the entire entry (CRC checked) while the probe
+            // retains at most ten ID3 bytes and four bytes of the first audio frame.
+            _ = try archive.extract(entry) { part in mp3Probe.consume(part) }
+            guard mp3Probe.hasMPEGFrame else { throw Failure.invalidMP3Zip }
         }
         // ZIP entries need not be stored in lexical order. The numbered filenames,
         // not the ZIP's directory order, define Voice Dream's chapter sequence.

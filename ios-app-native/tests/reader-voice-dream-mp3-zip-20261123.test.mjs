@@ -65,8 +65,14 @@ test('both MP3 ZIP exporters verify real archive entries before sharing', () => 
   assert.match(verifier, /750_000_000 - totalBytes/);
   assert.match(verifier, /filenames[.]count < 4_000/);
   assert.match(verifier, /archive[.]extract[(]entry[)]/);
-  assert.match(verifier, /262_144 - prefix[.]count/);
-  assert.match(verifier, /!header[.]starts[(]with: Array[(]"RIFF"[.]utf8[)][)]/);
+  assert.match(verifier, /var mp3Probe = NativeMP3HeaderProbe[(][)]/);
+  assert.match(verifier, /mp3Probe[.]consume[(]part[)]/);
+  assert.match(verifier, /mp3Probe[.]hasMPEGFrame/);
+  const probeSource = swift('NativeMP3HeaderProbe.swift');
+  assert.match(probeSource, /frameOffset = 10 \+ size \+ footer/);
+  assert.match(probeSource, /frameHeader[.]count == 4/);
+  const workflow = readFileSync(new URL('../../.github/workflows/ios-next-beta-validation.yml', import.meta.url), 'utf8');
+  assert.match(workflow, /mp3-header-probe-smoke[.]swift/);
   assert.match(verifier, /try Task[.]checkCancellation[(][)]/);
 });
 

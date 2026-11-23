@@ -48,6 +48,13 @@ jobs:
             ios-app-native/tests/daisy-202-layout-smoke.swift \
             -o "$RUNNER_TEMP/daisy-202-layout-check"
           "$RUNNER_TEMP/daisy-202-layout-check"
+      - name: Probar validación MPEG y metadatos ID3 grandes con Swift real
+        run: |
+          set -euo pipefail
+          swiftc ios-app-native/Sources/NativeMP3HeaderProbe.swift \
+            ios-app-native/tests/mp3-header-probe-smoke.swift \
+            -o "$RUNNER_TEMP/mp3-header-probe-check"
+          "$RUNNER_TEMP/mp3-header-probe-check"
       - name: Crear el proyecto nativo con XcodeGen
         run: |
           brew install xcodegen

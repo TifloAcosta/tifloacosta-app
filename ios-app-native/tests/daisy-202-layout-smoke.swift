@@ -1,5 +1,4 @@
 import Foundation
-import FoundationXML
 
 /// Runs the actual DAISY 2.02 XML layout from the app, not a copied template.
 @main

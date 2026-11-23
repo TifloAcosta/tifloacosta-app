@@ -2237,8 +2237,8 @@ private struct NativeReaderTextLayout {
         default: boundaries = fragmentStarts + [totalCharacters]
         }
         return direction > 0
-            ? boundaries.first(where: { $0 > offset })
-            : boundaries.last(where: { $0 < offset })
+            ? boundaries.first(where: { $0 > offset && $0 < totalCharacters })
+            : boundaries.last(where: { $0 < offset && $0 < totalCharacters })
     }
 
     func fragmentIndex(for offset: Int) -> Int {
@@ -2561,18 +2561,41 @@ struct NativeReadingScreen: View {
         return MusicLocalized.format("Modo de navegación: %@", MusicLocalized.message(title))
     }
 
+    private func textNavigationFeedback(at offset: Int, unit: Int) -> String {
+        let unitName = navigationOptions.first(where: { $0.unit == unit })?.label
+            ?? "Bloque"
+        let localizedUnit = MusicLocalized.message(unitName)
+        // Real page titles already identify their unit; don't double announce it.
+        if unit == 3, let page = textLayout.namedPages.first(where: { $0.offset == offset }) {
+            let title = NativeReaderHeadingDisplay.title(page.title, limit: 90)
+            if !title.isEmpty { return title }
+        }
+        // Prefer actual structure over the first 120 arbitrary characters.
+        if (unit == 4 || unit == 7),
+           let heading = textLayout.namedHeadings.first(where: { $0.offset == offset }) {
+            let title = NativeReaderHeadingDisplay.title(heading.title, limit: 90)
+            if !title.isEmpty {
+                return title.lowercased().hasPrefix(localizedUnit.lowercased())
+                    ? title : MusicLocalized.format("%@: %@", localizedUnit, title)
+            }
+        }
+        // Sentence and paragraph gestures may not read into the NEXT unit.
+        let end = textLayout.nearbyOffset(offset, direction: 1, unit: unit)
+            ?? textLayout.totalCharacters
+        let length = max(0, min(120, end - offset))
+        let sample = String(latest.body.dropFirst(offset).prefix(length))
+        let excerpt = NativeReaderHeadingDisplay.title(sample, limit: 90)
+        return excerpt.isEmpty ? localizedUnit
+            : MusicLocalized.format("%@: %@", localizedUnit, excerpt)
+    }
+
     private func navigateText(to offset: Int, unit: Int) {
-        // Swipe navigation changes location but never starts speech or steals
-        // VoiceOver's focus from the adjustable playback control.
+        // Gestures update the announced unit, never the reading percentage.
+        // Moving through structure does not initiate playback or steal focus.
         if speech.isPlaying || speech.isPaused { stopPlayback() }
         jump(to: offset, focusReader: false)
         navigationScrollTarget = textLayout.fragmentIndex(for: readingOffset)
-        let sample = String(latest.body.dropFirst(readingOffset).prefix(120))
-        let short = NativeReaderHeadingDisplay.title(sample, limit: 90)
-        let unitName = navigationOptions.first(where: { $0.unit == unit })?.label
-            ?? "Posición"
-        let localizedUnit = MusicLocalized.message(unitName)
-        navigationFeedback = short.isEmpty ? localizedUnit : localizedUnit + ": " + short
+        navigationFeedback = textNavigationFeedback(at: readingOffset, unit: unit)
         actionMessage = nil
     }
 
@@ -2976,14 +2999,6 @@ struct NativeReadingScreen: View {
             return
         }
         navigateText(to: next, unit: unit)
-        if unit == 4 || unit == 7 {
-            let title = textLayout.namedHeadings.first(where: { $0.offset == next })?.title
-                ?? String(latest.body.dropFirst(next).prefix(90)
-                    .split(separator: "\n").first ?? "")
-            navigationFeedback = MusicLocalized.format("%@: %@",
-                MusicLocalized.message(unit == 4 ? "Encabezado" : "Capítulo"),
-                NativeReaderHeadingDisplay.title(title, limit: 90))
-        }
     }
 
     private func moveDaisyPoint(_ direction: Int, kind: String?) {

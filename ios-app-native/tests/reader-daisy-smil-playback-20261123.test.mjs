@@ -41,6 +41,10 @@ test('DAISY player changes clips exactly at clipEnd and keeps legacy playlist', 
   assert.match(player, /advanceDaisyClip\(\)/);
   assert.match(player, /func playPlaylist\(/);
   assert.match(player, /daisyClips = \[\]/);
+  assert.match(player, /private func scheduleDaisyBoundary\\(\\)/);
+  assert.match(player, /Task\\.sleep\\(for: \\.seconds\\(delay\\)\\)/);
+  assert.match(player, /daisyBoundaryTask\\?\\.cancel\\(\\)/);
+  assert.match(player, /scheduleDaisyBoundary\\(\\)/);
 });
 
 test('TifloLector starts SMIL playback only on explicit Play', () => {

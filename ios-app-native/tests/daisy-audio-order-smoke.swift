@@ -187,13 +187,13 @@ struct DaisyAudioOrderSmoke {
 
         // The actual SMIL XML parser must also follow <audio id> anchors
         // and select the right recording despite duplicate file basenames.
-        try write("dupes/part-a/book.smil", """
+        try write("dupes/part-a/chapters/book.smil", """
         <smil><body><seq id="chapter-a">
           <par id="unit-a"><audio id="voice-a" src="../audio/track001.mp3"
             clipBegin="npt=9.500s" clipEnd="npt=12.500s"/></par>
         </seq></body></smil>
         """)
-        try write("dupes/part-b/book.smil", """
+        try write("dupes/part-b/chapters/book.smil", """
         <smil><body><seq id="chapter-b">
           <par id="unit-b"><audio id="voice-b" src="../audio/track001.mp3"
             clipBegin="npt=21.250s" clipEnd="npt=26.500s"/></par>
@@ -203,17 +203,17 @@ struct DaisyAudioOrderSmoke {
         let duplicatedTracks = ["part-b/audio/track001.mp3",
                                 "part-a/audio/track001.mp3"]
         let anchorA = NativeDaisyAudioOrder.navigationAudio(
-            in: dupesRoot, smil: "part-a/book.smil", fragment: "voice-a",
+            in: dupesRoot, smil: "part-a/chapters/book.smil", fragment: "voice-a",
             audioPaths: duplicatedTracks)
         let anchorB = NativeDaisyAudioOrder.navigationAudio(
-            in: dupesRoot, smil: "part-b/book.smil", fragment: "chapter-b",
+            in: dupesRoot, smil: "part-b/chapters/book.smil", fragment: "chapter-b",
             audioPaths: duplicatedTracks)
         precondition(anchorA?.track == 1 && anchorA?.seconds == 9.5,
                      "DAISY <audio id> anchor resolved the wrong folder or clip")
         precondition(anchorB?.track == 0 && anchorB?.seconds == 21.25,
                      "DAISY <seq id> anchor resolved the wrong folder or clip")
         precondition(NativeDaisyAudioOrder.navigationAudio(
-            in: dupesRoot, smil: "part-b/book.smil", fragment: "unknown",
+            in: dupesRoot, smil: "part-b/chapters/book.smil", fragment: "unknown",
             audioPaths: duplicatedTracks) == nil,
             "An unknown SMIL anchor must not silently start a different chapter")
 

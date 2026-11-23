@@ -16,7 +16,8 @@ test('Multicines Accesibles is a native primary destination, not a placeholder',
 test('the directory distinguishes Spain and Latin America and lists official providers', () => {
   assert.match(cinema, /case spain = "Español de España"/);
   assert.match(cinema, /case latino = "Español de Latinoamérica"/);
-  for (const provider of ['audesc-es', 'audesc-latino', 'foal', 'audiocinemateca', 'rtve', 'nfb']) {
+  for (const provider of ['audesc-es', 'audesc-latino', 'foal', 'audiocinemateca',
+                          'ami', 'ami-fr', 'ard', 'arte', 'arte-de']) {
     assert.ok(cinema.includes('id: "' + provider + '"'), 'Falta fuente ' + provider);
   }
 });
@@ -56,4 +57,25 @@ test('all source descriptions and collection metadata are translated and searcha
       assert.ok(catalog.includes('"' + key + '" = '), language + ' lacks translation: ' + key);
     }
   }
+});
+
+test('the main cinema directory excludes general TV landing pages and routes to AD-only collections', () => {
+  const directory = cinema.slice(
+    cinema.indexOf('private enum AccessibleCinemaDirectory'),
+    cinema.indexOf('private struct AccessibleCinemaCollection')
+  );
+  const ids = [...directory.matchAll(/\.init\(id: "([^"]+)", name:/g)].map(match => match[1]);
+  assert.deepEqual(ids, ['audesc-es', 'audesc-latino', 'foal', 'audiocinemateca',
+    'ami', 'ami-fr', 'ard', 'arte', 'arte-de']);
+  for (const excluded of ['rtve', 'nfb', 'pbs', 'itvx', 'channel4', 'five', 'abc', 'tubi', 'pluto']) {
+    assert.ok(!ids.includes(excluded), 'Generalist homepage leaked into directory: ' + excluded);
+  }
+  assert.doesNotMatch(directory, /https:\/\/(www\.)?rtve\.es\/play\//);
+  assert.doesNotMatch(directory, /https:\/\/www\.arte\.tv\/"\)/);
+  assert.match(directory, /id: "ard"[\s\S]*?https:\/\/www\.ardmediathek\.de\/audiodeskription/);
+  assert.match(directory, /id: "arte"[\s\S]*?languages: \[\.french\][\s\S]*?https:\/\/www\.arte\.tv\/fr\/videos\/programmes-en-audiodescription\//);
+  assert.match(directory, /id: "arte-de"[\s\S]*?languages: \[\.german\][\s\S]*?https:\/\/www\.arte\.tv\/de\/videos\/programme-mit-audiodeskription\//);
+  assert.match(directory, /id: "ami"[\s\S]*?languages: \[\.english\]/);
+  assert.match(directory, /id: "ami-fr"[\s\S]*?languages: \[\.french\]/);
+  assert.match(cinema, /MusicLocalized\.message\(source\.name\)/);
 });

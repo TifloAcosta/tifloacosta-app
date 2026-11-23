@@ -6,6 +6,7 @@ const swift = file => readFileSync(new URL('../Sources/' + file, import.meta.url
 const exportAudio = swift('NativeGeminiAudioExport.swift');
 const daisy = swift('NativeGeminiDaisyExport.swift');
 const reader = swift('NativeTifloLector.swift');
+const verifier = swift('NativeDaisyPackageVerifier.swift');
 
 test('Voice Dream MP3 ZIP is a separate option; DAISY 3 and 2.02 are retained', () => {
   assert.match(exportAudio, /case daisy = "DAISY"/);
@@ -48,11 +49,32 @@ test('MP3 already present in a document is repackaged without TTS, DAISY origina
   assert.doesNotMatch(packaging, /synthesize[(]|NativeGeminiSpeech[.]generate/);
 });
 
+test('both MP3 ZIP exporters verify real archive entries before sharing', () => {
+  assert.match(daisy, /try NativeDaisyPackageVerifier[.]validateVoiceDreamMP3Zip[(]output[)]/);
+  assert.match(reader, /try NativeDaisyPackageVerifier[.]validateVoiceDreamMP3Zip[(]output[)]/);
+  assert.match(reader, /try[?] manager[.]removeItem[(]at: outputDirectory[)]/);
+  assert.match(verifier, /static func validateVoiceDreamMP3Zip[(]_ url: URL[)] throws/);
+  assert.match(verifier, /Archive[(]url: url, accessMode: [.]read[)]/);
+  assert.match(verifier, /entry[.]type == [.]file/);
+  assert.match(verifier, /filenames[.]insert[(]entry[.]path[)][.]inserted/);
+  assert.match(verifier, /entry[.]path[.]range[(]of: #[\s\S]*[0-9]\{4\}/);
+  assert.match(verifier, /filenames[.]sorted[(][)]/);
+  assert.match(verifier, /ordered[.]enumerated[(][)][.]allSatisfy/);
+  assert.match(verifier, /String[(]format: "%04d[.]mp3", \$0[.]offset \+ 1[)]/);
+  assert.match(verifier, /750_000_000 - totalBytes/);
+  assert.match(verifier, /filenames[.]count < 4_000/);
+  assert.match(verifier, /archive[.]extract[(]entry[)]/);
+  assert.match(verifier, /262_144 - prefix[.]count/);
+  assert.match(verifier, /!header[.]starts[(]with: Array[(]"RIFF"[.]utf8[)][)]/);
+  assert.match(verifier, /try Task[.]checkCancellation[(][)]/);
+});
+
 test('the MP3 ZIP option and its caution are available in all five translations', () => {
   const keys = [
     'Audiolibro para Voice Dream (ZIP de MP3)',
     'ZIP de MP3 numerados: conserva la voz sintetizada en esta conversión, sin incluir texto ni estructura DAISY. La compatibilidad con Voice Dream requiere prueba en el dispositivo.',
-    'No se pudo exportar el ZIP de MP3: %@'
+    'No se pudo exportar el ZIP de MP3: %@',
+    'El ZIP de MP3 está incompleto o contiene pistas no válidas.'
   ];
   for (const language of ['en', 'pt', 'fr', 'it', 'de']) {
     const lines = swift(language + '.lproj/Localizable.strings');

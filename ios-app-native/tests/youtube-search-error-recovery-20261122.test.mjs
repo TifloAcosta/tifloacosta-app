@@ -21,7 +21,8 @@ test('YouTube search errors are separated by source rather than all called a con
 test('a search error exposes retry and a safe official YouTube escape without auto-opening', () => {
   assert.match(store, /@Published private\(set\) var searchFailed = false/);
   assert.match(screen, /if youtubeSearch\.searchFailed \{/);
-  assert.match(screen, /Button\("Reintentar búsqueda"\) \{ search\(\) \}/);
+  assert.match(screen, /Button\("Reintentar búsqueda"\) \{/);
+  assert.match(screen, /search\(loadMore: retryMore\)/);
   assert.match(screen, /Button\("Buscar directamente en YouTube"\)/);
   assert.match(screen, /URLComponents\(string: "https:\/\/www\.youtube\.com\/results"\)/);
   assert.match(screen, /URLQueryItem\(name: "search_query", value: term\)/);
@@ -50,4 +51,15 @@ test('all supported languages translate the new diagnosis and recovery controls'
       assert.ok(catalog.includes('"' + item + '" = '), lang + ': ' + item);
     }
   }
+});
+
+test('new YouTube searches clear stale results and paginated retries preserve earlier rows', () => {
+  assert.match(store, /if !loadMore && channelID == nil && cleanQuery\.count < 2/);
+  assert.match(store, /hasSearched = false[\s\S]{0,200}searchFailed = false[\s\S]{0,200}videos = \[\]/);
+  assert.match(store, /var videoIDs = Set\(videos\.map\(\\\.id\)\)/);
+  assert.match(store, /videoIDs\.insert\(video\.id\)\.inserted/);
+  assert.match(store, /channelIDs\.insert\(channel\.id\)\.inserted/);
+  assert.match(store, /playlistIDs\.insert\(playlist\.id\)\.inserted/);
+  assert.match(store, /nextPageToken = page\.nextPageToken == requestedPageToken/);
+  assert.match(store, /searchFailed = false/);
 });

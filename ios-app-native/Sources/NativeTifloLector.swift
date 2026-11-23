@@ -2760,21 +2760,37 @@ struct NativeReadingScreen: View {
         // Cancel any ongoing audio/TTS before changing the track or announcing.
         if speech.isPlaying || speech.isPaused { stopPlayback() }
         trackIndex = point.track
-        currentPercent = 0
         didRestoreAudioPosition = true
-        let targetSeconds = point.seconds.flatMap { $0.isFinite ? max(0, $0) : nil } ?? 0
-        pendingDaisyAudioSeconds = targetSeconds
-        library.saveAudioPosition(document, track: trackIndex, percent: 0,
+        let requestedSeconds = point.seconds.flatMap { $0.isFinite ? max(0, $0) : nil } ?? 0
+        // Inspect the duration without starting the player. A target at 12
+        // minutes must not be stored or displayed as 0% of the track.
+        if let url = NativeReaderFormats.storedURL(for: tracks[point.track]),
+           let probe = try? AVAudioPlayer(contentsOf: url),
+           probe.duration.isFinite, probe.duration > 0 {
+            pendingDaisyAudioSeconds = min(requestedSeconds, probe.duration)
+            currentPercent = max(0, min(100, Int((
+                pendingDaisyAudioSeconds! / probe.duration * 100).rounded())))
+        } else {
+            pendingDaisyAudioSeconds = requestedSeconds
+            currentPercent = 0
+        }
+        library.saveAudioPosition(document, track: trackIndex, percent: currentPercent,
                                   seconds: pendingDaisyAudioSeconds)
-        lastSavedPercent = 0
+        lastSavedPercent = currentPercent
         sleepDeadline = nil
         showStructure = false
-        // One short announcement, no continuous speech or automatic focus jump.
+        // Only the user pressing Play can start audio. This short VoiceOver
+        // message identifies the actual navigation type, not every point as a
+        // heading (DAISY pages and references have their own semantics).
         actionMessage = nil
         let heading = NativeReaderHeadingDisplay.title(point.title, limit: 90)
         if announce {
+            let type = point.kind == "Página" ? "Página DAISY"
+                : point.kind == "Referencia" ? "Referencia DAISY"
+                : point.kind == "Capítulo" ? "Capítulo" : "Encabezado"
             let message = MusicLocalized.format(
-                "Encabezado: %@. Pulsa Reproducir para escuchar.", heading)
+                "%@: %@. Pulsa Reproducir para escuchar.",
+                MusicLocalized.message(type), heading)
             Task { @MainActor in
                 await Task.yield()
                 UIAccessibility.post(notification: .announcement, argument: message)

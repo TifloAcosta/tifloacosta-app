@@ -1805,8 +1805,15 @@ struct NativeReaderLibraryScreen: View {
                 Task { @MainActor in
                     defer { importingFiles = false }
                     do {
+                        // Announce progress sparingly in large batches. Status text
+                        // always reflects the current item for VoiceOver review.
+                        var lastAnnouncement = Date()
                         let summary = try await library.importSelectedFiles(from: urls) { message in
                             importFilesStatus = message
+                            if Date().timeIntervalSince(lastAnnouncement) >= 5 {
+                                UIAccessibility.post(notification: .announcement, argument: message)
+                                lastAnnouncement = Date()
+                            }
                         }
                         importFilesStatus = MusicLocalized.format(
                             "Importación terminada. Documentos importados: %d. Omitidos: %d. Fallidos: %d.",

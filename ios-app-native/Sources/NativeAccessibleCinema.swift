@@ -211,10 +211,10 @@ private enum AccessibleCinemaCollections {
 
 struct NativeAccessibleCinemaScreen: View {
     @State private var searchText = ""
-    @State private var languageIndex = 0
-    @State private var contentIndex = 0
-    @State private var importLanguageIndex = 1
-    @State private var importKindIndex = 1
+    @AppStorage("native-cinema-language-index-v1") private var languageIndex = 0
+    @AppStorage("native-cinema-content-index-v1") private var contentIndex = 0
+    @AppStorage("native-cinema-import-language-index-v1") private var importLanguageIndex = 1
+    @AppStorage("native-cinema-import-kind-index-v1") private var importKindIndex = 1
     @State private var selectingPersonalFiles = false
     @State private var importStatus = ""
     @State private var pendingDeletion: NativeCinemaLocalItem?

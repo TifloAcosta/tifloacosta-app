@@ -16,26 +16,36 @@ private struct NativeDaisySMILSource {
     let file: String
     let begin: String?
     let end: String?
+    // IDs of the enclosing <seq>/<par>, and the <audio> itself. NCC/NCX
+    // references can target any of these structural points.
+    let ancestorIDs: [String]
 }
 
 private final class NativeDaisySMILAudioDelegate: NSObject, XMLParserDelegate {
     private(set) var sources: [NativeDaisySMILSource] = []
+    private var elementIDs: [String?] = []
 
     func parser(_ parser: XMLParser, didStartElement elementName: String,
                 namespaceURI: String?, qualifiedName qName: String?,
                 attributes attributeDict: [String: String] = [:]) {
         let tag = elementName.split(separator: ":").last?.lowercased()
-        guard tag == "audio" else { return }
         func value(_ names: Set<String>) -> String? {
             attributeDict.first(where: {
                 names.contains($0.key.split(separator: ":").last.map(String.init)?
                     .lowercased() ?? "")
             })?.value
         }
-        guard let file = value(["src"]) else { return }
+        elementIDs.append(value(["id"]))
+        guard tag == "audio", let file = value(["src"]) else { return }
         sources.append(.init(file: file,
             begin: value(["clipbegin", "clip-begin"]),
-            end: value(["clipend", "clip-end"])))
+            end: value(["clipend", "clip-end"]),
+            ancestorIDs: elementIDs.compactMap { $0 }))
+    }
+
+    func parser(_ parser: XMLParser, didEndElement elementName: String,
+                namespaceURI: String?, qualifiedName qName: String?) {
+        if !elementIDs.isEmpty { elementIDs.removeLast() }
     }
 }
 
@@ -107,7 +117,8 @@ enum NativeDaisyAudioOrder {
             guard let file = attribute("src", in: tag) else { return nil }
             return NativeDaisySMILSource(file: file,
                 begin: attribute("clipBegin", in: tag) ?? attribute("clip-begin", in: tag),
-                end: attribute("clipEnd", in: tag) ?? attribute("clip-end", in: tag))
+                end: attribute("clipEnd", in: tag) ?? attribute("clip-end", in: tag),
+                ancestorIDs: [])
         }
     }
 

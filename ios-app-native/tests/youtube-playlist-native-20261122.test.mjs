@@ -56,3 +56,14 @@ test('playlist actions and failures are translated into the other five app langu
     }
   }
 });
+
+test('pagination keeps earlier playlist entries when retrying and cannot loop repeated pages', () => {
+  assert.match(lists, /let requestedPageToken = loadMore \? nextPageToken : ""/);
+  assert.match(lists, /var seenPositions = Set\(entries\.map/);
+  assert.match(lists, /guard seenPositions\.insert\(entryKey\)\.inserted else \{ continue \}/);
+  assert.match(lists, /nextPageToken = page\.nextPageToken == requestedPageToken/);
+  assert.match(lists, /loadMore: store\.hasLoaded && !store\.nextPageToken\.isEmpty/);
+  assert.match(lists, /if code == "INVALID_PLAYLIST"/);
+  assert.doesNotMatch(lists, /status == 403 \|\| status == 404/);
+  assert.match(lists, /Link\("Abrir lista original en YouTube"/);
+});

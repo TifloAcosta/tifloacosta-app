@@ -208,20 +208,54 @@ enum NativeDaisyPackageVerifier {
         }
         let chapterIDs = captures(ncc, pattern: #"<a\b[^>]*href="audio\.smil#([^"]+)""#)
         let navigationIDs = captures(ncc, pattern: #"<(?:h1|h2)\b[^>]*id="([^"]+)""#)
+        let parBlocks = captures(smil, pattern: #"(?s)(<par\b[^>]*>.*?</par>)"#)
+        let parIDs = captures(smil, pattern: #"<par\b[^>]*id="([^"]+)""#)
         let smilTextIDs = captures(smil, pattern: #"<text\b[^>]*src="ncc\.html#([^"]+)""#)
         let audioRefs = captures(smil, pattern: #"<audio\b[^>]*src="([^"]+)""#)
+        let audioBegins = captures(smil, pattern: #"<audio\b[^>]*clip-begin="npt=([0-9]+(?:\.[0-9]+)?)s""#)
         let audioEnds = captures(smil, pattern: #"<audio\b[^>]*clip-end="npt=([0-9]+(?:\.[0-9]+)?)s""#)
+        let nccFileCount = captures(ncc, pattern:
+            #"<meta\b[^>]*name="ncc:files"[^>]*content="([0-9]+)""#)
+        let nccChapterCount = captures(ncc, pattern:
+            #"<meta\b[^>]*name="ncc:tocItems"[^>]*content="([0-9]+)""#)
+        let chapterStarts = chapterIDs.compactMap { parIDs.firstIndex(of: $0) }
         guard !chapterIDs.isEmpty,
               chapterIDs.count == navigationIDs.count,
-              smilTextIDs.count == chapterIDs.count,
+              Set(chapterIDs).count == chapterIDs.count,
+              Set(navigationIDs).count == navigationIDs.count,
+              chapterStarts.count == chapterIDs.count,
+              chapterStarts.first == 0,
+              chapterStarts == chapterStarts.sorted(),
               !audioRefs.isEmpty,
+              parBlocks.count == audioRefs.count,
+              parIDs.count == audioRefs.count,
+              Set(parIDs).count == parIDs.count,
+              smilTextIDs.count == audioRefs.count,
+              audioRefs.count == audioBegins.count,
               audioRefs.count == audioEnds.count,
               Set(audioRefs).count == audioRefs.count,
               Set(audioRefs) == Set(audioHeaders.keys),
+              nccFileCount.first.flatMap(Int.init) == entries.count,
+              nccChapterCount.first.flatMap(Int.init) == chapterIDs.count,
               chapterIDs.allSatisfy({ smil.contains("id=\"\($0)\"") }),
               smilTextIDs.allSatisfy({ navigationIDs.contains($0) }),
+              audioBegins.allSatisfy({ (Double($0) ?? -1) == 0 }),
               audioEnds.allSatisfy({ (Double($0) ?? 0) > 0 }) else {
             throw Failure.invalid
+        }
+        // Every SMIL <par> must point to exactly one NCC heading and one
+        // recorded MP3, and its heading must match the enclosing chapter.
+        // A manifest with plausible counts but incorrect links is rejected.
+        for index in parBlocks.indices {
+            let block = parBlocks[index]
+            let section = chapterStarts.lastIndex(where: { $0 <= index })
+            guard let section,
+                  captures(block, pattern:
+                    #"<text\b[^>]*src="ncc\.html#([^"]+)""#) == [navigationIDs[section]],
+                  captures(block, pattern: #"<audio\b[^>]*src="([^"]+)""#).count == 1,
+                  block.contains("endsync=\"last\"") else {
+                throw Failure.invalid
+            }
         }
         for filename in audioRefs {
             guard let header = audioHeaders[filename], let size = audioSizes[filename],

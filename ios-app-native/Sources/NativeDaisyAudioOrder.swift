@@ -115,8 +115,11 @@ enum NativeDaisyAudioOrder {
             }
         }
 
-        // Preserve audio from unindexed chapters, too: no tracks may be lost.
-        for smil in smilFiles { addSMIL(smil, relativeTo: smil) }
+        // Preserve unindexed chapters even if different folders contain
+        // the same SMIL basename. These paths already belong to the archive.
+        for smil in smilFiles where seenSMIL.insert(smil.lowercased()).inserted {
+            orderedSMIL.append(smil)
+        }
 
         var orderedAudio: [String] = []
         var seenAudio: Set<String> = []

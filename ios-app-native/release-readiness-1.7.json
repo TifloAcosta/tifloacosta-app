@@ -343,7 +343,7 @@
       "issue": "#363",
       "evidence": [
         "ios-app-native/Sources/NativeTifloLector.swift",
-        "ios-app-native/Sources/../tests/reader-folder-delete-media-current-20261123.test.mjs",
+        "ios-app-native/tests/reader-folder-delete-media-current-20261123.test.mjs",
         "https://github.com/TifloAcosta/tifloacosta-app/commit/8078e89a4017dd167ad4eca487a7dcbb09356515"
       ],
       "validation": "La acción ajustable de VoiceOver se protege mediante guard speech.isPlaying; con etiqueta Reproducir no cambia cursor. Código incorporado el 23-11-2026; falta ensayo de gestos reales con lector activo/en pausa, interrupciones y toque mágico en iPhone."
@@ -355,7 +355,7 @@
       "issue": "#363",
       "evidence": [
         "ios-app-native/Sources/NativeTifloLector.swift",
-        "ios-app-native/Sources/../tests/reader-folder-delete-media-current-20261123.test.mjs"
+        "ios-app-native/tests/reader-folder-delete-media-current-20261123.test.mjs"
       ],
       "validation": "Nuevo selector persistente Vista al entrar: Vista general o Carpetas. Preferencia AppStorage y apertura automática de carpeta al entrar si está seleccionada; atajo reanudar último libro tiene prioridad. Falta verificar entrada/reentrada VoiceOver, creación de carpetas y cambios de pestaña en iPhone."
     },
@@ -369,7 +369,7 @@
         "ios-app-native/Sources/NativeMyMusic.swift",
         "ios-app-native/Sources/NativePodcasts.swift",
         "ios-app-native/Sources/NativeAccessibleCinema.swift",
-        "ios-app-native/Sources/../tests/reader-folder-delete-media-current-20261123.test.mjs"
+        "ios-app-native/tests/reader-folder-delete-media-current-20261123.test.mjs"
       ],
       "validation": "TifloLector identifica carpeta a eliminar y aclara que conserva las obras; libros y lote ya estaban identificados. Mi música confirma canción, carpeta virtual, lista y carpeta inteligente; Pódcast confirma descarga y Multicines personal confirma archivo. Todos ofrecen Cancelar. Se añadieron traducciones EN/PT/FR/IT/DE. Falta auditoría manual de otras acciones destructivas y ensayo de lector de pantalla."
     },
@@ -382,7 +382,7 @@
         "ios-app-native/Sources/NativeMedia.swift",
         "ios-app-native/Sources/NativePodcasts.swift",
         "ios-app-native/Sources/NativeYouTubePlayer.swift",
-        "ios-app-native/Sources/../tests/reader-folder-delete-media-current-20261123.test.mjs"
+        "ios-app-native/tests/reader-folder-delete-media-current-20261123.test.mjs"
       ],
       "validation": "Auditoría del código 23-11-2026: NativeMediaPlayback.open enruta audio directo a NativePodcastPlayer y vídeo YouTube válido a NativeYouTubePlayerScreen con API IFrame oficial; ambos puntos de entrada de Actualidad usan este despachador. Se añade prueba de contrato de no-regresión. Es verificación estructural; pendiente comprobar audio y vídeo reales, VoiceOver, foco, cierre y fallback externo en dispositivo."
     }

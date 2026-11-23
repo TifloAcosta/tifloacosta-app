@@ -33,7 +33,8 @@ test('reproducción automática continúa de pista en pista, sin saltar al pausa
   assert.match(reader, /self\.onTrackChanged\?\(next\)/);
   assert.match(reader, /player\.pause\(\)/);
   // Save the current speech checkpoint before the reader engine stops.
-  const disappear = reader.split('        .onDisappear {')[1]?.split('        .accessibilityAction(.magicTap)')[0] ?? '';
+  const screen = reader.split('    var body: some View {\n        readerWithSheets')[1] ?? '';
+  const disappear = screen.split('        .onDisappear {')[1]?.split('        .accessibilityAction(.magicTap)')[0] ?? '';
   assert.match(disappear, /unregisterRemotePlaybackCommands/);
   assert.match(disappear, /NativeReaderPlaybackBridge/);
   assert.match(disappear, /speech[.]textCharacterOffset/);

@@ -32,7 +32,13 @@ test('reproducción automática continúa de pista en pista, sin saltar al pausa
   assert.match(reader, /self\.playlistIndex = next/);
   assert.match(reader, /self\.onTrackChanged\?\(next\)/);
   assert.match(reader, /player\.pause\(\)/);
-  assert.match(reader, /onDisappear \{\s*unregisterRemotePlaybackCommands\(\)\s*NativeRemotePlaybackOwner\.release\(\.reader\)\s*NativeQuickBookmarkBridge\.saveActiveReader = nil\s*NativeReaderPlaybackBridge\.pauseActiveReader = nil\s*persistPosition\(\)\s*speech\.onSleepExpired = nil\s*speech\.stop\(\)/);
+  // Save the current speech checkpoint before the reader engine stops.
+  const disappear = reader.split('        .onDisappear {')[1]?.split('        .accessibilityAction(.magicTap)')[0] ?? '';
+  assert.match(disappear, /unregisterRemotePlaybackCommands/);
+  assert.match(disappear, /NativeReaderPlaybackBridge/);
+  assert.match(disappear, /speech[.]textCharacterOffset/);
+  assert.ok(disappear.indexOf('speech.textCharacterOffset') < disappear.indexOf('persistPosition()'));
+  assert.ok(disappear.indexOf('persistPosition()') < disappear.indexOf('speech.stop()'));
 });
 
 test('progreso conserva pista y porcentaje; marcas de audio distinguen capítulos', () => {

@@ -47,8 +47,8 @@ test('text navigation and headings use one semantic announcement without autopla
 test('the artificial end position is not announced as an empty block or page', () => {
   const offset = part('func nearbyOffset(_ offset: Int, direction: Int, unit: Int) -> Int? {',
                       'func fragmentIndex(for offset: Int) -> Int {');
-  assert.match(offset, /boundaries[.]first[(]where: [{$]0 > offset && [}]0 < totalCharacters [}][)]/);
-  assert.match(offset, /boundaries[.]last[(]where: [{$]0 < offset && [}]0 < totalCharacters [}][)]/);
+  assert.ok(offset.includes('boundaries.first(where: { $0 > offset && $0 < totalCharacters })'));
+  assert.ok(offset.includes('boundaries.last(where: { $0 < offset && $0 < totalCharacters })'));
 });
 
 test('structural navigation retains DAISY chapter/page labels and minute feedback', () => {

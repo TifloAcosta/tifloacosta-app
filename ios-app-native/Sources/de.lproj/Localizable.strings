@@ -1210,3 +1210,10 @@
 "ZIP de MP3 numerados: conserva la voz sintetizada en esta conversión, sin incluir texto ni estructura DAISY. La compatibilidad con Voice Dream requiere prueba en el dispositivo." = "ZIP mit nummerierten MP3-Dateien: behält die bei dieser Konvertierung erzeugte Stimme bei, ohne Text oder DAISY-Struktur. Die Kompatibilität mit Voice Dream muss auf dem Gerät getestet werden.";
 "No se pudo exportar el ZIP de MP3: %@" = "MP3-ZIP konnte nicht exportiert werden: %@";
 "El ZIP de MP3 está incompleto o contiene pistas no válidas." = "Die MP3-ZIP-Datei ist unvollständig oder enthält ungültige Audiodateien.";
+
+// Reader opening, progress and direct return to beginning.
+"Volver al principio" = "Zum Anfang";
+"Posición inicial. Pulsa Reproducir para comenzar." = "Am Anfang. Zum Starten auf Wiedergabe tippen.";
+"Pista %d de %d, %d por ciento de esta pista." = "Titel %d von %d, %d Prozent dieses Titels.";
+"Progreso guardado: %d por ciento." = "Gespeicherter Fortschritt: %d Prozent.";
+"Sitúa la lectura al principio sin reproducir." = "Zum Anfang springen, ohne abzuspielen.";

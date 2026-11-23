@@ -3238,19 +3238,19 @@ struct NativeReadingScreen: View {
         switch result {
         case .saved:
             actionMessage = savedMessage
-            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            NativeReaderFeedback.confirm(.saved)
         case .alreadyExists:
             actionMessage = NativeAppLanguage.message("Ya existe una marca en esta posición.", languageCode: code)
-            UINotificationFeedbackGenerator().notificationOccurred(.warning)
+            NativeReaderFeedback.confirm(.duplicate)
         case .documentUnavailable:
             actionMessage = NativeAppLanguage.message("No se pudo crear la marca: documento no disponible.", languageCode: code)
-            UINotificationFeedbackGenerator().notificationOccurred(.error)
+            NativeReaderFeedback.confirm(.error)
         case .failed:
             actionMessage = NativeAppLanguage.message("No se pudo guardar la marca. Inténtalo de nuevo.", languageCode: code)
-            UINotificationFeedbackGenerator().notificationOccurred(.error)
+            NativeReaderFeedback.confirm(.error)
         }
 
-        if let actionMessage {
+        if NativeReaderFeedback.spokenAnnouncementsEnabled, let actionMessage {
             UIAccessibility.post(notification: .announcement, argument: actionMessage)
         }
     }
@@ -3584,22 +3584,19 @@ struct NativeReadingScreen: View {
     }
 
     private func bookmarkFromContextMenu(at fragment: Int) {
-        let wasPlaying = speech.isPlaying
-        if wasPlaying { pausePlayback() }
-        // La marca siempre pertenece al párrafo sobre el que actuó VoiceOver,
-        // aunque la reproducción estuviera en pausa o todavía activa.
+        // Create the mark on the VoiceOver-selected fragment. Never pause a
+        // playing voice or move the active reading cursor just to save a mark.
         guard textLayout.fragmentStarts.indices.contains(fragment) else { return }
+        let previousOffset = readingOffset
+        let previousPercent = currentPercent
         readingOffset = textLayout.fragmentStarts[fragment]
         currentPercent = min(100, Int(Double(readingOffset) * 100 /
             Double(max(1, textLayout.totalCharacters))))
         addBookmark()
-        // No reanudar una lectura detenida de antemano.
-        if wasPlaying {
-            Task { @MainActor in
-                try? await Task.sleep(for: .milliseconds(1000))
-                if speech.isPaused { speech.resume(); applySleepTimer() }
-            }
-        }
+        // The bookmark has its own stored offset. Restore the spoken/visual
+        // cursor regardless of a successful save, duplicate or storage error.
+        readingOffset = previousOffset
+        currentPercent = previousPercent
     }
 
     /// Restore manual VoiceOver/braille reading without starting audio or

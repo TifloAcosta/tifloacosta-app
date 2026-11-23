@@ -22,6 +22,10 @@ test('DAISY heading jump preserves audio location without starting playback', ()
   const jump = part('private func jumpToDaisy(', 'private func pausePlayback()');
   assert.match(jump, /if speech\.isPlaying \|\| speech\.isPaused \{ stopPlayback\(\) \}/);
   assert.match(jump, /pendingDaisyAudioSeconds = targetSeconds/);
+  assert.match(jump, /AVAudioPlayer\(contentsOf: url\)/);
+  assert.match(jump, /probe\.duration\.isFinite, probe\.duration > 0/);
+  assert.match(jump, /targetSeconds \/ probe\.duration \* 100/);
+  assert.match(jump, /library\.saveAudioPosition\(document, track: trackIndex, percent: currentPercent/);
   assert.match(jump, /library\.saveAudioPosition\(/);
   assert.match(jump, /showStructure = false/);
   assert.match(jump, /if announce \{/);

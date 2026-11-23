@@ -171,7 +171,7 @@
       "title": "DAISY 2.02 con audio compatible con Voice Dream",
       "status": "partial",
       "issue": "#343",
-      "validation": "23-11-2026: perfil DAISY 2.02 audioNCC reforzado y verificado EN CÓDIGO. NativeDaisy202AudioLayout genera NCC XHTML y SMIL 1.0 con un <par> directo por MP3 (cada uno con texto NCC y audio), anclas sectionN por capítulo, títulos de encabezados iniciales y metadatos ncc:tocItems/ncc:files/duración calculados. La síntesis de voz no se repite: se reutilizan los MP3 generados. NativeDaisyPackageVerifier verifica cada par, referencias entre capítulos, pistas únicas y cantidad real de archivos del ZIP. GitHub Actions 45160888947 SUCCESS el 23-11-2026 11:02:05 UTC: contratos iOS SUCCESS; prueba Swift real del renderizador/XML SUCCESS (libro con varios capítulos, una pista y rechazo de rutas inseguras); compilación Xcode 26 para simulador SUCCESS. Sigue PARCIAL hasta abrir un ZIP exportado realmente en Voice Dream Reader y comprobar la reproducción de sus MP3 y controles; queda también completar/validar la alternativa ZIP de MP3 prevista en #343. Sin TestFlight.",
+      "validation": "23-11-2026: perfil DAISY 2.02 audioNCC reforzado y verificado EN CÓDIGO. NativeDaisy202AudioLayout genera NCC XHTML y SMIL 1.0 con un <par> directo por MP3 (cada uno con texto NCC y audio), anclas sectionN por capítulo, títulos de encabezados iniciales y metadatos ncc:tocItems/ncc:files/duración calculados. La síntesis de voz no se repite: se reutilizan los MP3 generados. NativeDaisyPackageVerifier verifica cada par, referencias entre capítulos, pistas únicas y cantidad real de archivos del ZIP. GitHub Actions 45160888947 SUCCESS el 23-11-2026 11:02:05 UTC: contratos iOS SUCCESS; prueba Swift real del renderizador/XML SUCCESS (libro con varios capítulos, una pista y rechazo de rutas inseguras); compilación Xcode 26 para simulador SUCCESS. Sigue PARCIAL hasta abrir un ZIP exportado realmente en Voice Dream Reader y comprobar la reproducción de sus MP3 y controles; queda también completar/validar la alternativa ZIP de MP3 prevista en #343. Sin TestFlight. 23-11-2026, fase ZIP MP3 para Voice Dream: opción de salida independiente con pistas 0001.mp3, 0002.mp3, etc., usando el mismo ciclo de síntesis de la exportación, sin segunda codificación ni síntesis; opción para reempaquetar pistas MP3 ya conservadas en la biblioteca sin llamar al TTS, y conservando acciones DAISY original y ZIP genérico. Interfaz traducida ES/EN/PT/FR/IT/DE; contratos nuevos en reader-voice-dream-mp3-zip-20261123.test.mjs. Pendiente CI definitivo para compilación Xcode de estos cambios y ensayo de importación/reproducción en Voice Dream en iPhone con obra real; no declararlo compatible sin esa prueba. Estado PARCIAL y bloqueo TestFlight permanecen.",
       "evidence": [
         "ios-app-native/Sources/NativeDaisy202AudioLayout.swift",
         "ios-app-native/Sources/NativeGeminiDaisyExport.swift",
@@ -179,7 +179,11 @@
         "ios-app-native/tests/daisy-202-layout-smoke.swift",
         "ios-app-native/tests/reader-daisy-202-voicedream-20261122.test.mjs",
         ".github/workflows/ios-next-beta-validation.yml",
-        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45160888947"
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45160888947",
+        "ios-app-native/Sources/NativeGeminiAudioExport.swift",
+        "ios-app-native/Sources/NativeTifloLector.swift",
+        "ios-app-native/tests/reader-voice-dream-mp3-zip-20261123.test.mjs",
+        "ios-app-native/tests/reader-phase3-original-preservation-20261109.test.mjs"
       ]
     },
     {

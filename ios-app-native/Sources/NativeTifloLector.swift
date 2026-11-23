@@ -851,30 +851,35 @@ final class NativeReadingSpeech: ObservableObject {
     init() {
         progressDelegate.onWord = { [weak self] range, utterance in
             Task { @MainActor [weak self] in
-                guard let self, (self.isPlaying || self.isPaused), self.player == nil,
-                      self.totalUTF16 > 0 else { return }
-                // Los callbacks de una reproducción cancelada nunca deben
-                // modificar la posición de la siguiente reproducción.
-                guard let segmentBase = self.utteranceOffsets[ObjectIdentifier(utterance)] else {
+                // A cancelled or paused utterance can still post a callback on
+                // the next run loop. It must never advance the saved cursor.
+                guard let self, self.isPlaying, !self.isPaused, self.player == nil,
+                      self.totalUTF16 > 0,
+                      self.speechQueue.indices.contains(self.speechQueueIndex),
+                      ObjectIdentifier(self.speechQueue[self.speechQueueIndex].utterance)
+                        == ObjectIdentifier(utterance),
+                      let segmentBase = self.utteranceOffsets[ObjectIdentifier(utterance)] else {
                     return
                 }
-                let utf16End = max(0, min(self.spokenText.utf16.count,
-                                         segmentBase + range.location + range.length))
-                if utf16End >= self.previousUTF16 {
-                    let lower = String.Index(utf16Offset: self.previousUTF16, in: self.spokenText)
-                    let upper = String.Index(utf16Offset: utf16End, in: self.spokenText)
-                    self.previousCharacterCount += self.spokenText.distance(from: lower, to: upper)
-                    self.previousUTF16 = utf16End
-                    self.textCharacterOffset = self.baseCharacters + self.previousCharacterCount
-                }
-                let count = self.baseUTF16 + utf16End
+                // willSpeakRange announces the word BEFORE it has been spoken.
+                // Its end would skip the current word on Pause or Magic Tap.
+                // Resume at that word's beginning rather than at a paragraph.
+                let utf16Start = max(0, min(self.spokenText.utf16.count,
+                                           segmentBase + range.location))
+                guard utf16Start >= self.previousUTF16 else { return }
+                let cursor = String.Index(utf16Offset: utf16Start, in: self.spokenText)
+                self.previousUTF16 = utf16Start
+                self.previousCharacterCount = self.spokenText.distance(
+                    from: self.spokenText.startIndex, to: cursor)
+                self.textCharacterOffset = self.baseCharacters + self.previousCharacterCount
+                let count = self.baseUTF16 + utf16Start
                 self.textPercent = max(0, min(100,
                     Int(Double(count) * 100 / Double(self.totalUTF16))))
             }
         }
         progressDelegate.onFinish = { [weak self] utterance in
             Task { @MainActor [weak self] in
-                guard let self, self.player == nil,
+                guard let self, self.isPlaying, !self.isPaused, self.player == nil,
                       self.utteranceOffsets[ObjectIdentifier(utterance)] != nil,
                       self.speechQueue.indices.contains(self.speechQueueIndex),
                       ObjectIdentifier(self.speechQueue[self.speechQueueIndex].utterance) == ObjectIdentifier(utterance) else { return }
@@ -1209,6 +1214,10 @@ final class NativeReadingSpeech: ObservableObject {
             speechDelayTask?.cancel()
             speechDelayTask = nil
             systemSpeechNeedsRestart = !speechQueue.isEmpty
+            // Mark paused before requesting stop. Any queued delegate event
+            // must observe this state and must not overwrite the checkpoint.
+            isPlaying = false
+            isPaused = true
             _ = synthesizer.stopSpeaking(at: .immediate)
         }
         sleep(after: 0) // Al pausar no sigue corriendo la cuenta del apagado.
@@ -2763,7 +2772,11 @@ struct NativeReadingScreen: View {
 
     private func pausePlayback() {
         if tracks.isEmpty {
+            // A live text checkpoint is more precise than the percentage,
+            // visible fragment or last persisted paragraph.
             readingOffset = max(0, min(textLayout.totalCharacters, speech.textCharacterOffset))
+            currentPercent = max(0, min(100, Int(Double(readingOffset) * 100 /
+                Double(max(1, textLayout.totalCharacters)))))
         }
         speech.pause()
         if NativeRemotePlaybackOwner.current == .reader {
@@ -2800,7 +2813,7 @@ struct NativeReadingScreen: View {
         let toggleToken = remoteCommandCenter.togglePlayPauseCommand.addTarget { _ in
             DispatchQueue.main.async {
                 guard NativeRemotePlaybackOwner.current == .reader else { return }
-                if speech.isPlaying { pausePlayback() } else { play() }
+                toggleReaderPlayback()
             }
             return .success
         }
@@ -3449,8 +3462,15 @@ struct NativeReadingScreen: View {
         return "\(position) Voz reproducida \(formatDuration(elapsedSpeakingSeconds)). Tiempo restante estimado \(formatDuration(remaining))."
     }
 
+    /// The regular button and VoiceOver Magic Tap share the exact same
+    /// pause/resume decision; neither starts a new paragraph implicitly.
+    private func toggleReaderPlayback() {
+        if speech.isPlaying { pausePlayback() }
+        else { play() }
+    }
+
     private func activatePlaybackButton() {
-        if speech.isPlaying { pausePlayback() } else { play() }
+        toggleReaderPlayback()
         // The label changes from Reproducir to Pausar. Reapply focus after
         // SwiftUI has replaced the accessible label, not to the toolbar.
         if presentationMode == 0 && readingMode == 1 {
@@ -4117,14 +4137,19 @@ struct NativeReadingScreen: View {
             NativeRemotePlaybackOwner.release(.reader)
             NativeQuickBookmarkBridge.saveActiveReader = nil
             NativeReaderPlaybackBridge.pauseActiveReader = nil
+            // SwiftUI might not have delivered the last @Published cursor
+            // before navigation away. Save the synthesizer's live checkpoint.
+            if tracks.isEmpty && (speech.isPlaying || speech.isPaused) {
+                readingOffset = max(0, min(textLayout.totalCharacters,
+                                           speech.textCharacterOffset))
+                currentPercent = max(0, min(100, Int(Double(readingOffset) * 100 /
+                    Double(max(1, textLayout.totalCharacters)))))
+            }
             persistPosition()
             speech.onSleepExpired = nil
             speech.stop()
         }
-        .accessibilityAction(.magicTap) {
-            if speech.isPlaying { pausePlayback() }
-            else { play() }
-        }
+        .accessibilityAction(.magicTap) { toggleReaderPlayback() }
         .accessibilityAction(named: Text("Añadir marca")) { addBookmarkFromReaderSelection() }
         .accessibilityAction(named: Text("Seleccionar y copiar texto")) {
             if !latest.body.isEmpty { showTextSelection = true }

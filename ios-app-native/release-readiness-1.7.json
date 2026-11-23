@@ -229,7 +229,7 @@
         "ios-app-native/tests/reader-phase-two-contract.test.mjs",
         "ios-app-native/tests/reader-library-priority-punctuation-20261109.test.mjs"
       ],
-      "validation": "23-11-2026: cursor AVSpeech del sistema pasa a registrar el INICIO de la palabra que aún va a pronunciarse, no el final; callbacks tardíos de una voz pausada/cancelada y de otra locución se ignoran; pausa/disappear guardan offset de caracteres vivo, y Reproducir/Pausa, toque mágico y remoto comparten misma alternancia. Pruebas de contrato ajustadas en la misma rama. CI de esta primera corrección y compilación Xcode final VALIDADO en ejecución 45174853459 SUCCESS (23-11-2026). NUEVA FASE: se centraliza la captura del offset vivo antes de pausa, detención por navegación, apagado automático y salida de la pantalla; queda pendiente nueva ejecución CI de este ajuste. No asegura reinicio fonético dentro de la misma palabra, ni se ha validado VoiceOver/iPhone, Gemini/Phonon, reanudación de audio externo, ni otros pendientes de TifloLector (DAISY rotor). Requisito global sigue PARCIAL y no se permite TestFlight."
+      "validation": "23-11-2026: cursor AVSpeech del sistema pasa a registrar el INICIO de la palabra que aún va a pronunciarse, no el final; callbacks tardíos de una voz pausada/cancelada y de otra locución se ignoran; pausa/disappear guardan offset de caracteres vivo, y Reproducir/Pausa, toque mágico y remoto comparten misma alternancia. Pruebas de contrato ajustadas en la misma rama. CI de esta primera corrección y compilación Xcode final VALIDADO en ejecución 45174853459 SUCCESS (23-11-2026). NUEVA FASE: se centraliza la captura del offset vivo antes de pausa, detención por navegación, apagado automático y salida de la pantalla; queda pendiente nueva ejecución CI de este ajuste. No asegura reinicio fonético dentro de la misma palabra, ni se ha validado VoiceOver/iPhone, Gemini/Phonon, reanudación de audio externo, ni otros pendientes de TifloLector (DAISY rotor). Requisito global sigue PARCIAL y no se permite TestFlight. El usuario confirma el 23-11-2026 que la pausa y reanudación mediante botones y toque mágico funcionan bien en su aplicación instalada. No equivale a validación física de la rama 1.7 no distribuida."
     },
     {
       "id": 20,
@@ -269,6 +269,19 @@
         ".github/workflows/diagnose-youtube-search-20261122.yml"
       ],
       "validation": "Servicio probado 22-11-2026 mediante GitHub Actions: health HTTP 200, búsqueda HTTP 200 con 10 resultados; en la app se han incorporado diagnóstico por causa y botones Reintentar/Abrir YouTube. No consta reproducción del fallo ni validación física en el iPhone; no declarar resuelta."
+    },
+    {
+      "id": 24,
+      "title": "TifloLector: apertura con foco fiable, progreso real y retorno directo al comienzo",
+      "status": "partial",
+      "issue": "#361",
+      "evidence": [
+        "ios-app-native/Sources/NativeTifloLector.swift",
+        "ios-app-native/Sources/NativeReaderProgress.swift",
+        "ios-app-native/tests/reader-opening-progress-start-20261123.test.mjs",
+        "ios-app-native/tests/reader-progress-smoke.swift"
+      ],
+      "validation": "23-11-2026: incidencia comunicada por el usuario en la app instalada. Código 1.7: solicitud de foco diferida hasta que lector esté visible, porcentaje de texto calculado con offset exacto sin redondear al 100 antes del final, porcentaje de audiolibros etiquetado por pista, acción permanente Volver al principio sin auto-reproducción. Pendiente VoiceOver/iPhone, pruebas en bibliotecas reales y determinar si las demoras de apertura se deben a algo más que el foco. No alterar posiciones antiguas masivamente."
     }
   ],
   "operational": [

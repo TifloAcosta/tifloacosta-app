@@ -728,7 +728,8 @@ final class NativeReaderLibrary: ObservableObject {
         guard let i = documents.firstIndex(where: { $0.id == document.id }) else { return }
         let textLength = documents[i].body.count
         let value = max(0, min(textLength, offset))
-        let percent = textLength > 0 ? Int((Double(value) * 100 / Double(textLength)).rounded()) : 0
+        // A position close to the end is not a fully completed book.
+        let percent = NativeReaderProgress.textPercent(length: textLength, offset: value)
         if documents[i].lastTextOffset != value || documents[i].lastPercent != percent {
             documents[i].lastTextOffset = value
             documents[i].lastPercent = percent
@@ -1541,9 +1542,30 @@ struct NativeReaderLibraryScreen: View {
     private func documentRowLabel(_ doc: NativeReadingDocument) -> String {
         let code = NativeAppLanguage.code(for: languageIndex)
         let locale = Locale(identifier: code)
-        let progress = max(0, min(100, library.latest(doc).lastPercent ?? 0))
-        let progressText = String(format: NativeAppLanguage.message("%d por ciento leído", languageCode: code),
-                                  locale: locale, progress)
+        let saved = library.latest(doc)
+        let progress = max(0, min(100, saved.lastPercent ?? 0))
+        let progressText: String
+        if let paths = saved.trackPaths, !paths.isEmpty {
+            // lastPercent means percent of THIS track, not the entire audiobook.
+            let track = max(0, min(paths.count - 1, saved.lastTrackIndex ?? 0))
+            let template = NativeAppLanguage.message(
+                "Pista %d de %d, %d por ciento de esta pista.", languageCode: code)
+            progressText = String(format: template, locale: locale, track + 1, paths.count, progress)
+        } else if !saved.body.isEmpty, let offset = saved.lastTextOffset {
+            let exact = NativeReaderProgress.textPercent(length: saved.body.count, offset: offset)
+            progressText = String(format:
+                NativeAppLanguage.message("%d por ciento leído", languageCode: code),
+                locale: locale, exact)
+        } else if saved.lastPercent != nil {
+            // Legacy progress without a cursor does not prove book completion.
+            progressText = String(format:
+                NativeAppLanguage.message("Progreso guardado: %d por ciento.", languageCode: code),
+                locale: locale, progress)
+        } else {
+            progressText = String(format:
+                NativeAppLanguage.message("%d por ciento leído", languageCode: code),
+                locale: locale, 0)
+        }
         let shortLabel = "\(doc.title), \(progressText)"
         if voiceOverDetailIndex == 0 { return shortLabel }
         let formatText = String(format: NativeAppLanguage.message("formato %@", languageCode: code),
@@ -2568,6 +2590,7 @@ struct NativeReadingScreen: View {
     @State private var documentSearchText = ""
     @State private var positionBeforeSearch: Int?
     @State private var programmaticFocusRequest = false
+    @State private var readerIsVisible = false
     @State private var actionMessage: String?
     @State private var navigationFeedback = ""
     @State private var navigationScrollTarget: Int?
@@ -3703,6 +3726,32 @@ struct NativeReadingScreen: View {
         }
     }
 
+    /// One activation returns to the start without auto-playing any voice.
+    private func returnToBeginning() {
+        speech.stop()
+        sleepDeadline = nil
+        readingOffset = 0
+        currentPercent = 0
+        trackIndex = 0
+        lastSavedPercent = 0
+        if tracks.isEmpty {
+            pendingDaisyAudioSeconds = nil
+        } else {
+            pendingDaisyAudioSeconds = 0
+            didRestoreAudioPosition = true
+        }
+        persistPosition()
+        if !textLayout.fragmentStarts.isEmpty { navigationScrollTarget = 0 }
+        navigationFeedback = MusicLocalized.message(
+            "Posición inicial. Pulsa Reproducir para comenzar.")
+        actionMessage = nil
+        if NativeRemotePlaybackOwner.current == .reader {
+            var info = MPNowPlayingInfoCenter.default().nowPlayingInfo ?? [:]
+            info[MPNowPlayingInfoPropertyPlaybackRate] = 0.0
+            MPNowPlayingInfoCenter.default().nowPlayingInfo = info
+        }
+    }
+
     private var playbackRow: some View {
         AnyLayout(
             dynamicTypeSize.isAccessibilitySize
@@ -3726,7 +3775,8 @@ struct NativeReadingScreen: View {
                 activateCurrentLink()
             }
             .accessibilityFocused($playbackButtonFocused)
-
+            Button("Volver al principio") { returnToBeginning() }
+                .accessibilityHint("Sitúa la lectura al principio sin reproducir.")
         }
         .buttonStyle(.bordered)
         .controlSize(.small)
@@ -4297,9 +4347,16 @@ struct NativeReadingScreen: View {
     var body: some View {
         readerWithSheets
         .onAppear {
+            readerIsVisible = true
             registerRemotePlaybackCommands()
             if startWithConversion { showAudioExport = true }
-            let initial = max(0, min(100, startPercent ?? latest.lastPercent ?? 0))
+            let initial: Int
+            if tracks.isEmpty && startPercent == nil, let offset = latest.lastTextOffset {
+                initial = NativeReaderProgress.textPercent(
+                    length: textLayout.totalCharacters, offset: offset)
+            } else {
+                initial = max(0, min(100, startPercent ?? latest.lastPercent ?? 0))
+            }
             trackIndex = min(max(0, startTrack ?? latest.lastTrackIndex ?? 0),
                              max(0, tracks.count - 1))
             currentPercent = initial
@@ -4324,9 +4381,14 @@ struct NativeReadingScreen: View {
             if !didApplyOpeningMode {
                 didApplyOpeningMode = true
                 if presentationMode == 0 && readingMode == 1 {
+                    // Navigation and the last-opened catalog update may still be
+                    // settling. Request focus only after the reader is visible.
                     Task { @MainActor in
-                        await Task.yield()
-                        if presentationMode == 0 && readingMode == 1 { playbackButtonFocused = true }
+                        do { try await Task.sleep(for: .milliseconds(300)) }
+                        catch { return }
+                        guard !Task.isCancelled, readerIsVisible,
+                              presentationMode == 0 && readingMode == 1 else { return }
+                        playbackButtonFocused = true
                     }
                 }
             }
@@ -4369,6 +4431,7 @@ struct NativeReadingScreen: View {
             }
         }
         .onDisappear {
+            readerIsVisible = false
             unregisterRemotePlaybackCommands()
             NativeRemotePlaybackOwner.release(.reader)
             NativeQuickBookmarkBridge.saveActiveReader = nil

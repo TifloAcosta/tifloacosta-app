@@ -1184,3 +1184,8 @@
 "No se pudo cargar la lista de YouTube. Comprueba la conexión y vuelve a intentarlo." = "Impossible de charger la liste YouTube. Vérifiez la connexion et réessayez.";
 "La lista no está disponible públicamente." = "Cette liste n’est pas publique.";
 "El servidor no pudo consultar esta lista de YouTube." = "Le serveur n’a pas pu consulter cette liste YouTube.";
+
+// Importación múltiple desde Archivos: mensajes accesibles.
+"Preparando importación de archivos." = "Préparation de l’importation des fichiers.";
+"No se pudieron importar los archivos: %@" = "Impossible d’importer les fichiers : %@";
+"Importación de archivos interrumpida." = "Importation des fichiers interrompue.";

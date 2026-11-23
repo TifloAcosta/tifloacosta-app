@@ -6,7 +6,50 @@ import ZIPFoundation
 enum NativeDaisyPackageVerifier {
     enum Failure: LocalizedError {
         case invalid
-        var errorDescription: String? { "El DAISY generado tiene enlaces o archivos incompletos." }
+        case invalidMP3Zip
+        var errorDescription: String? {
+            switch self {
+            case .invalid: return "El DAISY generado tiene enlaces o archivos incompletos."
+            case .invalidMP3Zip: return NSLocalizedString(
+                "El ZIP de MP3 está incompleto o contiene pistas no válidas.", comment: "")
+            }
+        }
+    }
+
+    static func validateVoiceDreamMP3Zip(_ url: URL) throws {
+        guard let archive = Archive(url: url, accessMode: .read) else {
+            throw Failure.invalidMP3Zip
+        }
+        var nextIndex = 1
+        var totalBytes: UInt64 = 0
+        // The reader importer also caps expanded archives at 750 MB and 4,000 entries.
+        // Validate each ZIP entry using bounded memory, including its compressed data.
+        for entry in archive {
+            try Task.checkCancellation()
+            guard nextIndex <= 4_000,
+                  entry.type == .file,
+                  entry.path == String(format: "%04d.mp3", nextIndex),
+                  entry.uncompressedSize > 100,
+                  entry.uncompressedSize <= 750_000_000,
+                  UInt64(entry.uncompressedSize) <= 750_000_000 - totalBytes else {
+                throw Failure.invalidMP3Zip
+            }
+            totalBytes += UInt64(entry.uncompressedSize)
+            var prefix = Data()
+            _ = try archive.extract(entry) { part in
+                let remaining = max(0, 262_144 - prefix.count)
+                if remaining > 0 { prefix.append(contentsOf: part.prefix(remaining)) }
+            }
+            let header = Array(prefix)
+            // A renamed WAV or an ID3-only file is not a playable MP3.
+            // MPEG sync is a structural check; playback still needs a real device.
+            guard !header.starts(with: Array("RIFF".utf8)),
+                  zip(header, header.dropFirst()).contains(where: {
+                      $0.0 == 0xff && ($0.1 & 0xe0) == 0xe0
+                  }) else { throw Failure.invalidMP3Zip }
+            nextIndex += 1
+        }
+        guard nextIndex > 1 else { throw Failure.invalidMP3Zip }
     }
 
     static func validate(_ url: URL) throws {

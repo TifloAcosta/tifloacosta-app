@@ -11,7 +11,10 @@ const workflow = readFileSync(new URL('../../.github/workflows/ios-next-beta-val
 test('DAISY reading order uses NCC links, NCX navPoints and each SMIL audio source', () => {
   assert.match(order, /nccReferences\(text\)/);
   assert.match(order, /NativeDaisyNCX[.]parse\(data\)/);
-  assert.match(order, /for source in smilSources\(data\)/);
+  assert.match(order, /sources\[smil\] = smilSources\(data\)/);
+  assert.match(order, /for anchor in anchors/);
+  assert.match(order, /boundaries\[anchor\.smil/);
+  assert.match(order, /orderedSources\(in: directory/);
   assert.match(order, /NativeDaisySMILAudioDelegate/);
   assert.match(order, /XMLParser\(data: data\)/);
   assert.match(order, /orderedSMIL[.]append\(path\)/);

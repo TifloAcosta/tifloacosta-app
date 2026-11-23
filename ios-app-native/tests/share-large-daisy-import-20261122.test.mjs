@@ -26,7 +26,7 @@ test('data-only providers remain bounded to 100 MiB to avoid allocating huge buf
 test('reader applies the same decompressed safety limit to ZIP and .daisy', () => {
   assert.match(formats, /\(ext == "zip" \|\| ext == "daisy"\) \? 750_000_000 : 250_000_000/);
   assert.match(formats, /entries <= 4000/);
-  assert.match(formats, /total <= sizeLimit/);
+  assert.ok(formats.includes('entry.uncompressedSize <= UInt64(sizeLimit - total)'));
   assert.match(formats, /guard isDaisy \|\| \(ext == "zip" && !audioFiles\.isEmpty\)/);
 });
 

@@ -54,7 +54,7 @@ test("fase 3: exportación de audio multipista empaquetada sin perder pistas", (
   assert.match(reader, /for \(index, path\) in paths\.enumerated\(\)/);
   assert.match(reader, /Button\("Exportar audio existente \(pistas en ZIP\)"\)/);
   assert.match(reader, /NativeShare\.present\(url: try library\.exportAudioTracks\(document\)\)/);
-  assert.match(reader, /safeTitle \+ "-pistas\.zip"/);
+  assert.match(reader, /mp3OnlyForVoiceDream \? " Voice Dream MP3.zip" : "-pistas.zip"/);
 });
 test("fase 3: el nombre de exportación conserva Unicode y evita colisiones temporales", () => {
   assert.doesNotMatch(reader, /\[\^A-Za-z0-9 _\.\-\]/);
@@ -87,7 +87,9 @@ test("fase 3: metadatos DAISY respetan el idioma seleccionado", () => {
   assert.match(reader, /NativeAdjustableChoice\(\s*title: "Idioma del contenido"/);
   assert.match(reader, /language: audioExportLanguage/);
   assert.match(audio, /language: language,/);
-  assert.match(audio, /audioOnly202: format == \.daisyVoiceDream, progress: progress/);
+  assert.match(audio, /audioOnly202: format == \.daisyVoiceDream,/);
+  assert.match(audio, /mp3AudiobookZip: format == \.voiceDreamMP3Zip,/);
+  assert.match(audio, /progress: progress\)/);
   assert.match(daisy, /xml:lang="\\\(lang\)"/);
   assert.match(daisy, /<dc:Language>\\\(lang\)<\/dc:Language>/);
 });

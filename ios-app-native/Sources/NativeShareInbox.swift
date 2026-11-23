@@ -12,6 +12,15 @@ struct NativeShareMessage: Decodable, Identifiable {
     let value: String?
     let storedName: String?
     let createdAt: String?
+    // Optional for compatibility with manifests created by previous releases.
+    let batchID: String?
+    let batchIndex: String?
+    let batchCount: String?
+
+    var batchPosition: Int? {
+        guard let raw = batchIndex, let index = Int(raw) else { return nil }
+        return index + 1
+    }
 
     var isAudioFile: Bool {
         guard kind == "file" else { return false }
@@ -52,7 +61,20 @@ final class NativeShareInbox: ObservableObject {
                 guard let data = try? Data(contentsOf: url) else { return nil }
                 return try? JSONDecoder().decode(NativeShareMessage.self, from: data)
             }
-            .sorted { ($0.createdAt ?? "") > ($1.createdAt ?? "") }
+            .sorted { left, right in
+                // Newest first across shares. For items saved in the same second,
+                // reverse the batch index so importPendingReaderContent.reversed()
+                // replays attachments in their original order.
+                if left.createdAt != right.createdAt {
+                    return (left.createdAt ?? "") > (right.createdAt ?? "")
+                }
+                if left.batchID == right.batchID,
+                   let a = Int(left.batchIndex ?? ""), let b = Int(right.batchIndex ?? ""),
+                   a != b {
+                    return a > b
+                }
+                return left.id > right.id
+            }
         error = nil
     }
 
@@ -228,6 +250,11 @@ struct NativeInboxScreen: View {
                 } label: {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(item.name).font(.body)
+                        if let position = item.batchPosition,
+                           let count = item.batchCount, !count.isEmpty {
+                            Text("Archivo \(position) de \(count)")
+                                .font(.caption).foregroundStyle(.secondary)
+                        }
                         Text(item.kind == "url" ? "Abrir enlace" :
                             item.needsAudioDestination ? "Elegir destino del audio" :
                             item.destination == "music" ? "Importar en Mi música" :
@@ -235,7 +262,9 @@ struct NativeInboxScreen: View {
                             .font(.caption).foregroundStyle(.secondary)
                     }
                 }
-                .accessibilityLabel(item.name)
+                .accessibilityLabel(item.batchPosition.map { position in
+                    "\(item.name). Archivo \(position) de \(item.batchCount ?? "?")"
+                } ?? item.name)
                 .accessibilityHint(item.kind == "url" ? "Abre el enlace recibido." :
                     item.needsAudioDestination ? "Elige TifloLector o Mi música." :
                     item.destination == "music" ? "Importa el audio en Mi música." :

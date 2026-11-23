@@ -26,11 +26,13 @@ test('DAISY reading order uses NCC links, NCX navPoints and each SMIL audio sour
 test('DAISY track index is created in navigation order before mapping SMIL to tracks', () => {
   const discover = formats.indexOf('let discoveredAudioFiles = all.filter');
   const ordered = formats.indexOf('let audioFiles = isDaisy');
-  const map = formats.indexOf('audioFiles.firstIndex(where:');
+  const map = formats.indexOf('NativeDaisyAudioOrder.navigationAudio(');
   const stored = formats.indexOf('for path in audioFiles {');
   assert.ok(discover >= 0 && ordered > discover && map > ordered && stored > map);
   assert.match(formats, /NativeDaisyAudioOrder[.]orderedAudioFiles/);
   assert.match(formats, /daisyNavigation: daisyNavigation/);
+  assert.match(formats, /NativeDaisyAudioOrder[.]resolvedMember/);
+  assert.match(formats, /NativeDaisyAudioOrder[.]navigationAudio/);
 });
 
 test('exporting existing audio preserves every original track, handles FLAC, and creates stable numbered ZIP', () => {

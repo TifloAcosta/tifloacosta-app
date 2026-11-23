@@ -25,7 +25,10 @@ test('clip reader uses SMIL begin and end, retains repeated physical tracks', ()
   assert.match(audio, /begin: value\(\["clipbegin", "clip-begin"\]\)/);
   assert.match(audio, /end: value\(\["clipend", "clip-end"\]\)/);
   const parse = audio.split('static func orderedClips(')[1]?.split('static func orderedAudioFiles(')[0] ?? '';
-  assert.match(parse, /for source in smilSources\(data\)/);
+  assert.match(parse, /for located in orderedSources\(/);
+  assert.match(audio, /sources\[smil\] = smilSources\(data\)/);
+  assert.match(audio, /ancestorIDs: elementIDs\.compactMap/);
+  assert.match(audio, /navigationAnchors\(in: directory/);
   assert.match(parse, /let begin = seconds\(source\.begin\) \?\? 0/);
   assert.match(parse, /let end = seconds\(source\.end\)/);
   assert.match(parse, /clips\.append\(\.init\(track: track, begin: begin, end: end\)\)/);

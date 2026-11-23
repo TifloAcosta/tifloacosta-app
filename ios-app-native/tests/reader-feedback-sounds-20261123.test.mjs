@@ -59,7 +59,12 @@ test('batch importing has an optional final cue, not an intrusive sound per file
                                    '.fileImporter(isPresented: $restorePresented');
   assert.ok(imports.includes('NativeReaderFeedback.confirm(.imported)'));
   assert.ok(imports.includes('NativeReaderFeedback.confirm(.error)'));
-  assert.doesNotMatch(imports, /onProgress[^]*NativeReaderFeedback\.confirm\(/);
+  const filesProgress = section(imports, 'importSelectedFiles(from: urls) { message in',
+                                '}\n                        importFilesStatus =');
+  const folderProgress = section(imports, 'importFolder(from: folder) { message in',
+                                '}\n                        importFolderStatus =');
+  assert.doesNotMatch(filesProgress, /NativeReaderFeedback[.]confirm/);
+  assert.doesNotMatch(folderProgress, /NativeReaderFeedback[.]confirm/);
 });
 
 test('sound and announcement labels are translated into all five additional languages', () => {

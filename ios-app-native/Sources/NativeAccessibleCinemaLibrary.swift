@@ -168,6 +168,11 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         duration = 0
         lastSavedSecond = restored
         player?.seek(to: CMTime(seconds: restored, preferredTimescale: 600))
+        // Explicitly request background-capable playback even when Multicines
+        // opens after a section that configured a different audio mode.
+        // Do not change device or VoiceOver volume.
+        try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
+        try AVAudioSession.sharedInstance().setActive(true)
         NativeRemotePlaybackOwner.onInterrupted(.cinema) { [weak self] in
             self?.pauseForOtherAudio()
         }

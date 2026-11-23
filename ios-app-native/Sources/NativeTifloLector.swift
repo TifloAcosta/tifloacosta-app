@@ -1388,6 +1388,10 @@ final class NativeReadingSpeech: ObservableObject {
     }
 
     func resume() {
+        // After Siri/calls or another audio-session interruption, playback
+        // must reactivate its session before resuming a queued utterance.
+        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
+        try? AVAudioSession.sharedInstance().setActive(true)
         if systemSpeechNeedsRestart && !isGeneratedSpeech && player == nil {
             let resumeUTF16 = max(0, min(previousUTF16, spokenText.utf16.count))
             let resumeCharacters = max(0, min(previousCharacterCount, spokenText.count))
@@ -2593,6 +2597,7 @@ struct NativeReadingScreen: View {
     @State private var readingOffset = 0
     @State private var lastSavedPercent = -1
     @State private var delayedManualPositionSave: Task<Void, Never>?
+    @State private var interruptedWhilePlaying = false
     @State private var trackIndex = 0
     @State private var didRestoreAudioPosition = false
     @State private var elapsedSpeakingSeconds = 0
@@ -3076,6 +3081,27 @@ struct NativeReadingScreen: View {
         readingOffset = max(0, min(textLayout.totalCharacters, speech.textCharacterOffset))
         currentPercent = max(0, min(100, Int(Double(readingOffset) * 100 /
             Double(max(1, textLayout.totalCharacters)))))
+    }
+
+    private func handleAudioInterruption(_ notification: Notification) {
+        guard let raw = notification.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt,
+              let kind = AVAudioSession.InterruptionType(rawValue: raw) else { return }
+        switch kind {
+        case .began:
+            // A real system interruption is not a user-requested pause.
+            // Preserve the exact word/track position once.
+            interruptedWhilePlaying = speech.isPlaying
+            if interruptedWhilePlaying { pausePlayback() }
+        case .ended:
+            let rawOptions = notification.userInfo?[AVAudioSessionInterruptionOptionKey] as? UInt ?? 0
+            let options = AVAudioSession.InterruptionOptions(rawValue: rawOptions)
+            if interruptedWhilePlaying && options.contains(.shouldResume) && speech.isPaused {
+                play()
+            }
+            interruptedWhilePlaying = false
+        @unknown default:
+            break
+        }
     }
 
     private func pausePlayback() {
@@ -4482,6 +4508,9 @@ struct NativeReadingScreen: View {
                     length: textLayout.totalCharacters, offset: clamped)
                 persistPosition()
             } else if speech.isPaused { persistPosition() }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: AVAudioSession.interruptionNotification)) { notification in
+            handleAudioInterruption(notification)
         }
         .onChange(of: scenePhase) { _, phase in
             if phase == .background {

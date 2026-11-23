@@ -181,8 +181,15 @@
     {
       "id": 18,
       "title": "Anuncios correctos de encabezados y unidades de navegación",
-      "status": "partial",
-      "issue": "#352"
+      "status": "implemented",
+      "issue": "#352",
+      "validation": "23-11-2026: anuncios semánticos de VoiceOver implementados en código y VALIDADOS con pruebas de contrato y compilación Xcode 26 para simulador, GitHub Actions 45147280642 SUCCESS (09:32:50 UTC). La acción ajustable de Reproducir/Pausa ofrece la unidad elegida y el elemento alcanzado en vez de porcentajes; bloques, párrafos y frases leen solo el contenido de su unidad; encabezados/capítulos el título real; páginas la etiqueta original una sola vez. Los límites EOF se excluyen para no presentar unidades vacías; el porcentaje queda reservado para Ir a posición. Contratos nuevos de navegación y regresiones existentes aprobados. Pendiente verificar anuncios reales con VoiceOver en el iPhone y con distintos documentos. El resto de requisitos 1.7 todavía bloquea TestFlight.",
+      "evidence": [
+        "ios-app-native/Sources/NativeTifloLector.swift",
+        "ios-app-native/tests/reader-navigation-units-not-percent-20261123.test.mjs",
+        "ios-app-native/tests/reader-navigation-voiceover-semantic-20261122.test.mjs",
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45147280642"
+      ]
     },
     {
       "id": 19,

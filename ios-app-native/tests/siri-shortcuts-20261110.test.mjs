@@ -44,7 +44,8 @@ test('Siri continúa el último libro abierto desde posición guardada', () => {
   assert.match(shortcut, /[.]distantPast/);
   assert.match(reader, /play\(document\)/);
   assert.match(reader, /defaults\.removeObject\(forKey: key\)/);
-  assert.match(reader, /\.onAppear \{ resumeRequestedBook\(\) \}/);
+  assert.match(reader, /\.onAppear \{[\s\S]{0,450}resumeRequestedBook\(\)/);
+  assert.match(reader, /if folderEntryMode == 1 && !resumeShortcut \{ showFolderPicker = true \}/);
 });
 
 test('VoiceOver mantiene un título breve por defecto y detalle opcional en una sola línea', () => {

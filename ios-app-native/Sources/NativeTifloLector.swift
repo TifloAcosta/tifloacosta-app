@@ -4069,7 +4069,10 @@ struct NativeReadingScreen: View {
                     readingOffset = offset
                     currentPercent = min(100, Int(Double(offset) * 100 /
                         Double(max(1, textLayout.totalCharacters))))
-                    library.saveTextPosition(document, offset: offset)
+                    // Braille panning can generate many selection updates. Coalesce
+                    // persistence like manual VoiceOver navigation instead of
+                    // rewriting the complete library after every movement.
+                    scheduleManualPositionSave()
                 }
             )
             .accessibilityFocused($continuousBrailleFocused)

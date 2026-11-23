@@ -41,3 +41,25 @@ test('import checks permitted local types, size and link safety', () => {
   assert.match(library, /maximumFileSize: Int64 = 2_000_000_000/);
   assert.match(library, /try bytes\.write\(to: Self\.indexURL, options: \.atomic\)/);
 });
+
+test('local video uses a visible AVPlayer layer with one native transport and no extra VoiceOver stops', () => {
+  assert.match(library, /var isVideoFile: Bool/);
+  assert.match(library, /\["mp4", "m4v", "mov"\]\.contains/);
+  assert.match(library, /var videoPlayer: AVPlayer\? \{ player \}/);
+  assert.match(screen, /private final class NativeCinemaVideoUIView: UIView/);
+  assert.match(screen, /override class var layerClass: AnyClass \{ AVPlayerLayer\.self \}/);
+  assert.match(screen, /private struct NativeCinemaVideoSurface: UIViewRepresentable/);
+  assert.match(screen, /if item\.isVideoFile, let videoPlayer = personalPlayer\.videoPlayer \{/);
+  assert.match(screen, /NativeCinemaVideoSurface\(player: videoPlayer\)/);
+  assert.match(screen, /view\.accessibilityElementsHidden = true/);
+  assert.match(screen, /Button\(personalPlayer\.playing \? "Pausar reproducción" : "Reanudar reproducción"\)/);
+});
+
+test('forced pauses persist fractional seconds and a failed audio session never leaves a false playable item', () => {
+  assert.match(library, /items\[index\]\.lastSeconds != seconds/);
+  assert.doesNotMatch(library, /abs\(items\[index\]\.lastSeconds - seconds\) >= 1/);
+  assert.match(library, /player\?\.seek\(to: CMTime\(seconds: restored, preferredTimescale: 600\)\)/);
+  const open = library.slice(library.indexOf('func open(_ item:'), library.indexOf('private func beginProgressTracking'));
+  assert.ok(open.indexOf('try AVAudioSession.sharedInstance().setActive(true)') < open.indexOf('player = AVPlayer(url: url)'));
+  assert.match(library, /save\(library: library, force: true\)/);
+});

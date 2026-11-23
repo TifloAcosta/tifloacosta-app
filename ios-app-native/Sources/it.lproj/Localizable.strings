@@ -1205,3 +1205,7 @@
 "Compartir DAISY original" = "Condividi DAISY originale";
 "Convertir texto a MP3 o DAISY con voz" = "Converti il testo in MP3 o DAISY con una voce";
 "Exportar audio existente (pistas en ZIP)" = "Esporta l’audio esistente (tracce in ZIP)";
+
+"Audiolibro para Voice Dream (ZIP de MP3)" = "Audiolibro per Voice Dream (ZIP MP3)";
+"ZIP de MP3 numerados: conserva la voz sintetizada en esta conversión, sin incluir texto ni estructura DAISY. La compatibilidad con Voice Dream requiere prueba en el dispositivo." = "ZIP di MP3 numerati: mantiene la voce sintetizzata durante questa conversione, senza testo né struttura DAISY. La compatibilità con Voice Dream deve essere verificata sul dispositivo.";
+"No se pudo exportar el ZIP de MP3: %@" = "Impossibile esportare lo ZIP MP3: %@";

@@ -1,6 +1,39 @@
 import SwiftUI
+import UIKit
+import AVFoundation
 import UniformTypeIdentifiers
 import Combine
+
+/// Renders local video with the same AVPlayer used by the accessible native
+/// pause, seek and stop buttons. The visual layer exposes no duplicate VoiceOver
+/// controls and it does not capture the user's accessibility focus.
+private final class NativeCinemaVideoUIView: UIView {
+    override class var layerClass: AnyClass { AVPlayerLayer.self }
+    var playerLayer: AVPlayerLayer { layer as! AVPlayerLayer }
+}
+
+private struct NativeCinemaVideoSurface: UIViewRepresentable {
+    let player: AVPlayer
+
+    func makeUIView(context: Context) -> NativeCinemaVideoUIView {
+        let view = NativeCinemaVideoUIView()
+        view.playerLayer.videoGravity = .resizeAspect
+        view.playerLayer.player = player
+        view.isAccessibilityElement = false
+        view.accessibilityElementsHidden = true
+        return view
+    }
+
+    func updateUIView(_ uiView: NativeCinemaVideoUIView, context: Context) {
+        if uiView.playerLayer.player !== player {
+            uiView.playerLayer.player = player
+        }
+    }
+
+    static func dismantleUIView(_ uiView: NativeCinemaVideoUIView, coordinator: ()) {
+        uiView.playerLayer.player = nil
+    }
+}
 
 /// Multicines Accesibles: native entry point and verified-source directory.
 /// Only the original provider can deliver third-party works unless distribution
@@ -331,6 +364,12 @@ struct NativeAccessibleCinemaScreen: View {
                         }
                         .frame(minHeight: 44, alignment: .leading)
                         if personalPlayer.currentID == item.id {
+                            if item.isVideoFile, let videoPlayer = personalPlayer.videoPlayer {
+                                NativeCinemaVideoSurface(player: videoPlayer)
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 210)
+                                    .accessibilityHidden(true)
+                            }
                             Text("Posición: \(clock(personalPlayer.seconds)). Duración: \(clock(personalPlayer.duration)).")
                                 .font(.subheadline)
                             Button(personalPlayer.playing ? "Pausar reproducción" : "Reanudar reproducción") {

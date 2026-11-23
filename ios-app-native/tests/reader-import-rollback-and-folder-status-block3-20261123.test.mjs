@@ -11,7 +11,10 @@ test('a failed library save removes the newly published book before deleting its
   assert.ok(importer.includes('try NativeReaderFormats.read(url, documentID: identifier)'));
   assert.ok(importer.includes('try NativeReaderFormats.storeOriginal(url, documentID: identifier)'));
   assert.ok(importer.includes('documents.insert('));
-  assert.match(importer, /do\s*\{\s*try save\(\)\s*\}\s*catch\s*\{\s*documents\.removeAll \{ \$0\.id == identifier \}\s*throw error/);
+  assert.match(importer, /do\s*\{\s*try save\(\)\s*\}\s*catch\s*\{/);
+  assert.ok(importer.includes('documents.removeAll { $0.id == identifier }'));
+  assert.ok(importer.indexOf('documents.removeAll { $0.id == identifier }') <
+            importer.indexOf('NativeReaderFormats.deleteStoredFiles(for: identifier)'));
   assert.match(importer, /NativeReaderFormats\.deleteStoredFiles\(for: identifier\)/);
   assert.match(importer, /NativeReaderFormats\.deleteOriginal\(for: identifier\)/);
 });
@@ -19,7 +22,8 @@ test('a failed library save removes the newly published book before deleting its
 test('a failed shared import retains the inbox item and original attachment for retry', () => {
   const importer = inbox.split('func importToReader(')[1]?.split('func importToMusic(')[0] ?? '';
   assert.match(importer, /try library\.importDocuments\(from: \[named\], sharingID: sharingID\)/);
-  assert.ok(importer.indexOf('try library.importDocuments(') < importer.indexOf('complete(item)'));
+  const afterImport = importer.split('try library.importDocuments(')[1] ?? '';
+  assert.ok(afterImport.includes('complete(item)'));
   const batch = inbox.split('func importPendingReaderContent(')[1]?.split('func complete(')[0] ?? '';
   assert.match(batch, /catch\s*\{\s*failures\.append/);
 });

@@ -217,10 +217,19 @@ final class NativeYouTubeSearchStore: ObservableObject {
         guard !isLoading else { return }
         let cleanQuery = text.trimmingCharacters(in: .whitespacesAndNewlines)
         if !loadMore && channelID == nil && cleanQuery.count < 2 {
-            message = "Escribe al menos dos caracteres para buscar en YouTube."
+            // Invalid new queries cannot leave an unrelated old result list.
+            hasSearched = false
+            searchFailed = false
+            nextPageToken = ""
+            videos = []
+            channels = []
+            playlists = []
+            message = MusicLocalized.message(
+                "Escribe al menos dos caracteres para buscar en YouTube.")
             return
         }
         if loadMore && nextPageToken.isEmpty { return }
+        let requestedPageToken = loadMore ? nextPageToken : ""
         if !loadMore {
             searchFailed = false
             currentQuery = cleanQuery
@@ -278,16 +287,25 @@ final class NativeYouTubeSearchStore: ObservableObject {
                     "El servicio de YouTube devolvió un error al buscar."))
             }
             let page = try JSONDecoder().decode(NativeYouTubeSearchPage.self, from: data)
-            let newVideos = page.items.compactMap(NativeYouTubeVideo.init(result:))
-            let previousIDs = Set(videos.map(\.id))
-            videos += newVideos.filter { !previousIDs.contains($0.id) }
-            let newChannels = page.items.compactMap(NativeYouTubeChannel.init(search:))
-            let previousChannelIDs = Set(channels.map(\.id))
-            channels += newChannels.filter { !previousChannelIDs.contains($0.id) }
-            let newPlaylists = page.items.compactMap(NativeYouTubePlaylist.init(search:))
-            let previousPlaylistIDs = Set(playlists.map(\.id))
-            playlists += newPlaylists.filter { !previousPlaylistIDs.contains($0.id) }
-            nextPageToken = page.nextPageToken
+            // Deduplicate within the current page as well as across earlier
+            // pages; one result must remain one VoiceOver focus stop.
+            var videoIDs = Set(videos.map(\.id))
+            for video in page.items.compactMap(NativeYouTubeVideo.init(result:)) {
+                if videoIDs.insert(video.id).inserted { videos.append(video) }
+            }
+            var channelIDs = Set(channels.map(\.id))
+            for channel in page.items.compactMap(NativeYouTubeChannel.init(search:)) {
+                if channelIDs.insert(channel.id).inserted { channels.append(channel) }
+            }
+            var playlistIDs = Set(playlists.map(\.id))
+            for playlist in page.items.compactMap(NativeYouTubePlaylist.init(search:)) {
+                if playlistIDs.insert(playlist.id).inserted { playlists.append(playlist) }
+            }
+            // Avoid exposing a permanent "show more" action if the upstream
+            // mistakenly sends the same pagination token twice.
+            nextPageToken = page.nextPageToken == requestedPageToken
+                ? "" : page.nextPageToken
+            searchFailed = false
             let count = videos.count + channels.count + playlists.count
             message = count == 0 ? "No se encontraron resultados."
                 : "\(count) resultados encontrados hasta el momento."

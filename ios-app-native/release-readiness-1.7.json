@@ -132,9 +132,15 @@
         "ios-app-native/Sources/NativeYouTubePlaylist.swift",
         "ios-app-native/Sources/NativeYouTubePlayer.swift",
         "ios-app-native/Sources/NativeScreens.swift",
-        "ios-app-native/tests/youtube-playlist-native-20261122.test.mjs"
+        "ios-app-native/tests/youtube-playlist-native-20261122.test.mjs",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/062d075e8835ca1b2535146adcd75d91cfd040ef",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/85f3fc228942b73a00657c84d6162958414490f4",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/e22ceea1b26a889bf2449eb2c44e39f4de42539c",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/a4145e8db12c07cc7ada447a8dbc88637609be5d",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/42a1945c38bc2951870909ef495b2bc4299be912",
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45265935734"
       ],
-      "validation": "En rama única: búsqueda de listas y filtro Todos, lectura de vídeos en orden con páginas de 20, reproductor oficial integrado y navegación VoiceOver, traducciones de controles en seis idiomas. Worker unit tests SUCCESS; ruta /playlist-items NO desplegada a producción, compilación iOS más reciente pendiente y prueba física con VoiceOver no realizada. Auditoría completa de traducciones todavía pendiente."
+      "validation": "En rama única: búsqueda de listas y filtro Todos, lectura de vídeos en orden con páginas de 20, reproductor oficial integrado y navegación VoiceOver, traducciones de controles en seis idiomas. Worker unit tests SUCCESS; ruta /playlist-items NO desplegada a producción, compilación iOS más reciente pendiente y prueba física con VoiceOver no realizada. Auditoría completa de traducciones todavía pendiente. BLOQUE 5 (23-11-2026): se reforzó la recuperación de búsqueda/listas en iOS 1.7: el error de una página nueva permite reintentarla sin borrar los resultados anteriores; se descartan duplicados de vídeos/canales/listas y se corta la paginación si el servidor devuelve repetido el mismo token. Las listas conservan dos apariciones de un vídeo solo cuando tienen posiciones distintas. Se evita llamar «lista privada» a un HTTP 404 que también puede corresponder a una ruta no desplegada. Consulta nueva inválida ya no muestra resultados antiguos. Contratos del bloque 5 SUCCESS (GitHub Actions 45265935734), compilación Xcode de simulador en ejecución al redactar. La ruta /playlist-items del Worker sigue sin despliegue confirmado en producción; causa del fallo original en iPhone sin aislar; pendientes pruebas con VoiceOver, listas reales, Wi-Fi/datos y seis idiomas. Requisito PARCIAL, sin publicación."
     },
     {
       "id": 10,
@@ -284,9 +290,15 @@
         "ios-app-native/Sources/NativeYouTubePlayer.swift",
         "ios-app-native/Sources/NativeScreens.swift",
         "ios-app-native/tests/youtube-search-error-recovery-20261122.test.mjs",
-        ".github/workflows/diagnose-youtube-search-20261122.yml"
+        ".github/workflows/diagnose-youtube-search-20261122.yml",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/062d075e8835ca1b2535146adcd75d91cfd040ef",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/85f3fc228942b73a00657c84d6162958414490f4",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/e22ceea1b26a889bf2449eb2c44e39f4de42539c",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/a4145e8db12c07cc7ada447a8dbc88637609be5d",
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/42a1945c38bc2951870909ef495b2bc4299be912",
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45265935734"
       ],
-      "validation": "Servicio probado 22-11-2026 mediante GitHub Actions: health HTTP 200, búsqueda HTTP 200 con 10 resultados; en la app se han incorporado diagnóstico por causa y botones Reintentar/Abrir YouTube. No consta reproducción del fallo ni validación física en el iPhone; no declarar resuelta."
+      "validation": "Servicio probado 22-11-2026 mediante GitHub Actions: health HTTP 200, búsqueda HTTP 200 con 10 resultados; en la app se han incorporado diagnóstico por causa y botones Reintentar/Abrir YouTube. No consta reproducción del fallo ni validación física en el iPhone; no declarar resuelta. BLOQUE 5 (23-11-2026): se reforzó la recuperación de búsqueda/listas en iOS 1.7: el error de una página nueva permite reintentarla sin borrar los resultados anteriores; se descartan duplicados de vídeos/canales/listas y se corta la paginación si el servidor devuelve repetido el mismo token. Las listas conservan dos apariciones de un vídeo solo cuando tienen posiciones distintas. Se evita llamar «lista privada» a un HTTP 404 que también puede corresponder a una ruta no desplegada. Consulta nueva inválida ya no muestra resultados antiguos. Contratos del bloque 5 SUCCESS (GitHub Actions 45265935734), compilación Xcode de simulador en ejecución al redactar. La ruta /playlist-items del Worker sigue sin despliegue confirmado en producción; causa del fallo original en iPhone sin aislar; pendientes pruebas con VoiceOver, listas reales, Wi-Fi/datos y seis idiomas. Requisito PARCIAL, sin publicación."
     },
     {
       "id": 24,

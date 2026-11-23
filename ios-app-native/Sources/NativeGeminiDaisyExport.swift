@@ -77,82 +77,23 @@ enum NativeGeminiDaisyExport {
         guard !validChapters.isEmpty, totalSeconds > 0 else {
             throw NativeGeminiAudioExport.ExportError.empty
         }
-        let supportedLanguages: Set<String> = ["es", "en", "pt", "fr", "de", "it"]
-        let lang = supportedLanguages.contains(language) ? language : "es"
-        let titleXML = escape(title)
-        let fixedLocale = Locale(identifier: "en_US_POSIX")
-        func smilDuration(_ value: Double) -> String {
-            String(format: "%.3fs", locale: fixedLocale, value)
-        }
-        let elapsedSeconds = Int(ceil(totalSeconds))
-        let wholeClock = String(format: "%02d:%02d:%02d",
-                                elapsedSeconds / 3600, (elapsedSeconds / 60) % 60,
-                                elapsedSeconds % 60)
+        // The layout is shared with executable DAISY 2.02 XML tests, not a
+        // separate approximation of what the export actually writes to ZIP.
         let date = String(ISO8601DateFormatter().string(from: Date()).prefix(10))
+        let layoutChapters = validChapters.map { chapter in
+            NativeDaisy202AudioLayout.Chapter(
+                title: chapter.title,
+                clips: chapter.clips.map {
+                    NativeDaisy202AudioLayout.Clip(file: $0.file, duration: $0.duration)
+                })
+        }
+        guard let layout = NativeDaisy202AudioLayout.render(
+            title: title, identifier: identifier, language: language,
+            chapters: layoutChapters, date: date)
+        else { throw NativeGeminiAudioExport.ExportError.unsupportedFormat }
+        let ncc = layout.ncc
+        let smil = layout.smil
         let allClips = validChapters.flatMap(\.clips)
-        let nav = validChapters.enumerated().map { index, chapter in
-            let tag = index == 0 ? "h1" : "h2"
-            return "<\(tag) id=\"nav\(index + 1)\"><a href=\"audio.smil#section\(index + 1)\">\(escape(index == 0 ? title : chapter.title))</a></\(tag)>"
-        }.joined(separator: "\n")
-        let ncc = """
-        <?xml version="1.0" encoding="utf-8"?>
-        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-        <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="\(lang)" lang="\(lang)">
-          <head>
-            <title>\(titleXML)</title>
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-            <meta name="dc:identifier" content="\(identifier)" />
-            <meta name="dc:title" content="\(titleXML)" />
-            <meta name="dc:date" content="\(date)" />
-            <meta name="dc:language" content="\(lang)" />
-            <meta name="dc:format" content="Daisy 2.02" />
-            <meta name="ncc:charset" content="utf-8" />
-            <meta name="ncc:generator" content="TifloLector" />
-            <meta name="ncc:multimediaType" content="audioNCC" />
-            <meta name="ncc:depth" content="\(validChapters.count == 1 ? 1 : 2)" />
-            <meta name="ncc:tocItems" content="\(validChapters.count)" />
-            <meta name="ncc:pageNormal" content="0" />
-            <meta name="ncc:pageFront" content="0" />
-            <meta name="ncc:pageSpecial" content="0" />
-            <meta name="ncc:totalTime" content="\(wholeClock)" scheme="hh:mm:ss" />
-            <meta name="ncc:files" content="\(2 + allClips.count)" />
-          </head>
-          <body>
-            \(nav)
-          </body>
-        </html>
-        """
-        var clipIndex = 0
-        let smilSections = validChapters.enumerated().map { index, chapter in
-            let audio = chapter.clips.map { clip in
-                clipIndex += 1
-                return "<audio id=\"audio\(clipIndex)\" src=\"\(clip.file)\" clip-begin=\"npt=0.000s\" clip-end=\"npt=\(smilDuration(clip.duration))\" />"
-            }.joined(separator: "\n")
-            return """
-            <par id="section\(index + 1)" endsync="last">
-              <text id="text\(index + 1)" src="ncc.html#nav\(index + 1)" />
-              <seq>
-                \(audio)
-              </seq>
-            </par>
-            """
-        }.joined(separator: "\n")
-        let smil = """
-        <?xml version="1.0" encoding="utf-8"?>
-        <!DOCTYPE smil PUBLIC "-//W3C//DTD SMIL 1.0//EN" "http://www.w3.org/TR/REC-SMIL/SMIL10.dtd">
-        <smil>
-          <head>
-            <meta name="dc:identifier" content="\(identifier)" />
-            <meta name="dc:format" content="Daisy 2.02" />
-            <meta name="ncc:timeInThisSmil" content="\(wholeClock)" />
-          </head>
-          <body>
-            <seq id="narration" dur="\(smilDuration(totalSeconds))">
-              \(smilSections)
-            </seq>
-          </body>
-        </smil>
-        """
         try ncc.write(to: working.appendingPathComponent("ncc.html"),
                       atomically: true, encoding: .utf8)
         try smil.write(to: working.appendingPathComponent("audio.smil"),
@@ -221,7 +162,11 @@ enum NativeGeminiDaisyExport {
             if firstPar.isEmpty { firstPar = par }
             if let heading = segment.heading {
                 headingPoints.append((heading, par))
-                if !(audioOnlyChapters.last?.clips.isEmpty ?? true) {
+                if audioOnlyChapters.last?.clips.isEmpty == true {
+                    // An opening chapter heading must not be announced as the
+                    // book title in the NCC; the title remains in metadata.
+                    audioOnlyChapters[audioOnlyChapters.count - 1].title = heading
+                } else {
                     audioOnlyChapters.append(AudioOnlyChapter(title: heading, clips: []))
                 }
             }

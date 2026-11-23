@@ -117,7 +117,7 @@ test('La posición exacta del texto se guarda y recupera sin romper bibliotecas 
   assert.match(reader, /startPercent == nil \? \(latest\.lastTextOffset/);
   // A whole-library JSON write still preserves precise positions, but now
   // it occurs for actual changes, not every NavigationLink opening.
-  assert.match(reader, /try JSONEncoder[(][)][.]encode[(]documentsForPersistence[(][)][)][)]/);
+  assert.match(reader, /try JSONEncoder\(\)\.encode\(documentsForPersistence\(\)\)/);
   assert.match(reader, /copy[.]lastOpenedAt = lastOpenedAt[(]for: document[)]/);
 });
 

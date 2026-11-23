@@ -14,7 +14,12 @@ test('Compartir con TifloAcosta anuncia formatos leíbles por el lector', () => 
   }
   assert.ok(!share.includes('"flac", "zip"'), 'No se debe ofrecer FLAC como descodificador probado');
   assert.ok(!share.includes('"jpeg", "webp"'), 'No se debe ofrecer WEBP sin OCR probado');
-  assert.ok(share.includes('imageExtensions'));
+  // All selected attachment providers now enter the queue. An extra preview
+  // image from a third-party app is not silently discarded as a selected item.
+  assert.ok(share.includes('incomingQueue = incoming.flatMap'));
+  assert.ok(share.includes('receiveAttachment(provider: item.provider'));
+  assert.ok(share.includes('reportItem(false,'));
+
 });
 
 test('FictionBook FB2 elimina las imágenes base64 antes de extraer texto', () => {

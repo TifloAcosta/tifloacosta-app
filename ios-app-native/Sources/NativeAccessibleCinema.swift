@@ -91,12 +91,6 @@ private enum AccessibleCinemaDirectory {
               address: nil, access: "Enlace oficial pendiente de incorporación segura.",
               description: "Biblioteca con audiodescripción y voces del ámbito latinoamericano.",
               geographicNotice: "", isAudioOnly: true),
-        .init(id: "foal", name: "FOAL, ocio en audio",
-              languages: [.latino, .spain], kinds: [.film, .series],
-              address: URL(string: "https://www.foal.es/es/recursos/ocio-en-audio"),
-              access: "Acceso gratuito desde la página oficial.",
-              description: "La Fundación ONCE para América Latina enlaza películas y una serie completas en MP3.",
-              geographicNotice: "", isAudioOnly: true),
         .init(id: "audiocinemateca", name: "Audiocinemateca",
               languages: [.spain, .latino], kinds: [.film, .series, .documentary, .short],
               // The catalogue page is accessible after authentication on
@@ -146,37 +140,6 @@ private enum AccessibleCinemaDirectory {
     ]
 }
 
-/// Public collections explicitly described by their official publishers.
-/// A collection is not an individual film and is never presented as one.
-private struct AccessibleCinemaCollection: Identifiable {
-    let id: String
-    let title: String
-    let publisher: String
-    let language: AccessibleCinemaLanguage
-    let kind: AccessibleCinemaKind
-    let summary: String
-    let originalAddress: URL
-}
-
-private enum AccessibleCinemaCollections {
-    static let items: [AccessibleCinemaCollection] = [
-        .init(id: "foal-films",
-              title: "50 películas con audiodescripción",
-              publisher: "Fundación ONCE para América Latina (FOAL)",
-              language: .latino,
-              kind: .film,
-              summary: "Películas completas en formato MP3. La página oficial ofrece acceso a la carpeta de audio sin necesidad de descargar cada película.",
-              originalAddress: URL(string: "https://bit.ly/2yMtJrk")!),
-        .init(id: "foal-game-of-thrones",
-              title: "Juego de Tronos, ocho temporadas",
-              publisher: "Fundación ONCE para América Latina (FOAL)",
-              language: .latino,
-              kind: .series,
-              summary: "Serie completa, solo audio con audiodescripción. Enlace al catálogo publicado oficialmente por FOAL.",
-              originalAddress: URL(string: "https://bit.ly/3bND3dg")!)
-    ]
-}
-
 struct NativeAccessibleCinemaScreen: View {
     @State private var searchText = ""
     @AppStorage("native-cinema-language-index-v1") private var languageIndex = 0
@@ -207,18 +170,6 @@ struct NativeAccessibleCinemaScreen: View {
             let queryMatches = query.isEmpty || [MusicLocalized.message(source.name), source.description, source.detail]
                 .contains(where: { $0.localizedStandardContains(query) })
             return languageMatches && typeMatches && queryMatches
-        }
-    }
-
-    private var featuredCollections: [AccessibleCinemaCollection] {
-        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-        return AccessibleCinemaCollections.items.filter { item in
-            (selectedLanguage == .all || item.language == selectedLanguage)
-                && (selectedKind == .all || item.kind == selectedKind)
-                && (query.isEmpty || [
-                    MusicLocalized.message(item.title), item.publisher,
-                    MusicLocalized.message(item.summary)
-                ].contains(where: { $0.localizedStandardContains(query) }))
         }
     }
 
@@ -392,28 +343,6 @@ struct NativeAccessibleCinemaScreen: View {
             }
             .listRowBackground(TifloVisual.surfaceRaised)
 
-            if !featuredCollections.isEmpty {
-                Section("Colecciones de obras audiodescritas") {
-                    ForEach(featuredCollections) { item in
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text(MusicLocalized.message(item.title))
-                                .font(.headline)
-                                .accessibilityAddTraits(.isHeader)
-                            Text(item.publisher)
-                                .font(.subheadline.weight(.semibold))
-                            Text(MusicLocalized.message(item.summary))
-                                .font(.subheadline)
-                                .foregroundStyle(TifloVisual.secondaryText)
-                            Link("Explorar colección en la fuente original",
-                                 destination: item.originalAddress)
-                                .frame(minHeight: 44, alignment: .leading)
-                        }
-                        .accessibilityElement(children: .contain)
-                    }
-                }
-                .listRowBackground(TifloVisual.surfaceRaised)
-            }
-
             Section("Fuentes de audiodescripción") {
                 if filtered.isEmpty {
                     ContentUnavailableView("No hay fuentes para estos filtros",
@@ -429,29 +358,14 @@ struct NativeAccessibleCinemaScreen: View {
                             .font(.subheadline)
                             .foregroundStyle(TifloVisual.secondaryText)
                             .fixedSize(horizontal: false, vertical: true)
-                        if ["audesc-es", "audesc-latino", "foal"].contains(source.id) {
+                        if ["audesc-es", "audesc-latino"].contains(source.id) {
                             if NativeCinemaPublicDrive.configuredKey != nil {
-                                if source.id == "foal" {
-                                    NavigationLink("50 películas con audiodescripción") {
-                                        NativeCinemaPublishedDriveBrowser(
-                                            sourceID: source.id,
-                                            sourceName: MusicLocalized.message("FOAL, películas"),
-                                            foalCollection: "foal-films")
-                                    }
-                                    NavigationLink("Juego de Tronos, ocho temporadas") {
-                                        NativeCinemaPublishedDriveBrowser(
-                                            sourceID: source.id,
-                                            sourceName: MusicLocalized.message("FOAL, serie"),
-                                            foalCollection: "foal-game-of-thrones")
-                                    }
-                                } else {
                                     NavigationLink("Explorar catálogo audiodescrito") {
                                         NativeCinemaPublishedDriveBrowser(
                                             sourceID: source.id,
                                             sourceName: MusicLocalized.message(source.name),
                                             foalCollection: nil)
                                     }
-                                }
                             }
                             NavigationLink("Explorar carpeta de Google Drive") {
                                 NativeCinemaDriveBrowser(

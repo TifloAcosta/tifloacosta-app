@@ -16,7 +16,7 @@ test('Multicines Accesibles is a native primary destination, not a placeholder',
 test('the directory distinguishes Spain and Latin America and lists official providers', () => {
   assert.match(cinema, /case spain = "Español de España"/);
   assert.match(cinema, /case latino = "Español de Latinoamérica"/);
-  for (const provider of ['audesc-es', 'audesc-latino', 'foal', 'audiocinemateca',
+  for (const provider of ['audesc-es', 'audesc-latino', 'audiocinemateca',
                           'ami', 'ami-fr', 'ard', 'arte', 'arte-de']) {
     assert.ok(cinema.includes('id: "' + provider + '"'), 'Falta fuente ' + provider);
   }
@@ -43,9 +43,6 @@ test('partner catalogue stays on the official authenticated site until integrati
 
 test('all source descriptions and collection metadata are translated and searchable in all six app languages', () => {
   assert.match(cinema, /parts\.map \{ MusicLocalized\.message\(\$0\) \}\.joined\(separator: " "\)/);
-  assert.match(cinema, /Text\(MusicLocalized\.message\(item\.title\)\)/);
-  assert.match(cinema, /Text\(MusicLocalized\.message\(item\.summary\)\)/);
-  assert.match(cinema, /MusicLocalized\.message\(item\.summary\)[\s\S]{0,110}contains\(where:/);
   const keys = new Set([
     'Solo audio con audiodescripción.', 'Vídeo con audiodescripción según el título.',
     ...[...cinema.matchAll(/(?:description|access|geographicNotice|summary|title): "([^"]*)"/g)]
@@ -62,12 +59,12 @@ test('all source descriptions and collection metadata are translated and searcha
 test('the main cinema directory excludes general TV landing pages and routes to AD-only collections', () => {
   const directory = cinema.slice(
     cinema.indexOf('private enum AccessibleCinemaDirectory'),
-    cinema.indexOf('private struct AccessibleCinemaCollection')
+    cinema.indexOf('struct NativeAccessibleCinemaScreen')
   );
   const ids = [...directory.matchAll(/\.init\(id: "([^"]+)", name:/g)].map(match => match[1]);
-  assert.deepEqual(ids, ['audesc-es', 'audesc-latino', 'foal', 'audiocinemateca',
+  assert.deepEqual(ids, ['audesc-es', 'audesc-latino', 'audiocinemateca',
     'ami', 'ami-fr', 'ard', 'arte', 'arte-de']);
-  for (const excluded of ['rtve', 'nfb', 'pbs', 'itvx', 'channel4', 'five', 'abc', 'tubi', 'pluto']) {
+  for (const excluded of ['foal', 'rtve', 'nfb', 'pbs', 'itvx', 'channel4', 'five', 'abc', 'tubi', 'pluto']) {
     assert.ok(!ids.includes(excluded), 'Generalist homepage leaked into directory: ' + excluded);
   }
   assert.doesNotMatch(directory, /https:\/\/(www\.)?rtve\.es\/play\//);

@@ -79,7 +79,7 @@ test('the new public directory text is translated into every supported language'
     'Biblioteca de audiodescripción', 'Obras disponibles',
     'No hay obras compatibles en esta carpeta.',
     'El catálogo público de Google Drive necesita terminar su configuración.',
-    'Reproducir: ', 'No se ha podido recuperar la carpeta oficial de FOAL.',
+    'Reproducir: ',
     'Explorar catálogo audiodescrito',
     'Los catálogos públicos se actualizan desde Google Drive cuando la conexión pública está configurada. También puedes elegir carpetas autorizadas con tu propia cuenta.'
   ];

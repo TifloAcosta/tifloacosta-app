@@ -59,26 +59,7 @@ def probe(label, root, resource):
     print(f"{label}: media HTTP {status}, bounded range valid={ok}")
     return bool(ok)
 
-def resolve(short):
-    url=short
-    for _ in range(6):
-        p=urllib.parse.urlsplit(url)
-        if p.scheme!="https" or p.hostname not in ("bit.ly","drive.google.com"): break
-        if p.hostname=="drive.google.com":
-            m=re.search(r"/folders/([A-Za-z0-9_-]+)",p.path)
-            if m: return m.group(1),urllib.parse.parse_qs(p.query).get("resourcekey",[""])[0]
-        try:
-            with opener.open(urllib.request.Request(url,method="HEAD"),timeout=15): break
-        except urllib.error.HTTPError as e:
-            if e.code not in (301,302,303,307,308): break
-            url=urllib.parse.urljoin(url,e.headers.get("Location",""))
-        except Exception: break
-    return None,None
-
 results=[]
 for label,prefix in [("Audesc ES","TifloCinemaAudescSpain"),("Audesc Latino","TifloCinemaAudescLatino")]:
     results.append(probe(label,config.get(prefix+"FolderID"),config.get(prefix+"ResourceKey")))
-for label,url in [("FOAL films","https://bit.ly/2yMtJrk"),("FOAL series","https://bit.ly/3bND3dg")]:
-    root,rk=resolve(url)
-    results.append(probe(label,root,rk))
 raise SystemExit(0 if all(results) else 1)

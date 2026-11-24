@@ -23,6 +23,8 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.tifloacosta.app
+        SWIFT_OBJC_BRIDGING_HEADER: Sources/NativeCinemaCompression.h
+        OTHER_LDFLAGS: "$(inherited) -lbz2 -lz"
         GENERATE_INFOPLIST_FILE: NO
         INFOPLIST_FILE: Sources/Info.plist
         INFOPLIST_KEY_CFBundleDisplayName: "TifloAcosta"

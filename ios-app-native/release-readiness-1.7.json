@@ -71,41 +71,46 @@
     {
       "id": 5,
       "title": "Importación: estado accesible, progreso y resultado",
-      "status": "partial",
+      "status": "implemented",
       "issue": "#353",
       "evidence": [
         "ios-app-native/Sources/NativeTifloLector.swift",
         "ios-app-native/tests/reader-folder-import-20261122.test.mjs",
         "ios-app-native/tests/reader-import-rollback-and-folder-status-block3-20261123.test.mjs",
-        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45256507631"
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45256507631",
+        "ios-app-native/Sources/NativeShareInbox.swift",
+        "ios-app-native/Sources/NativeScreens.swift",
+        "ios-app-native/tests/reader-import-background-storage-20261124.test.mjs"
       ],
-      "validation": "Se incorporó un estado verificable para la importación de carpetas con recuento de documentos; faltan progreso accesible equivalente para importación de archivos sueltos, OCR y recepción externa y prueba con VoiceOver. BLOQUE 3 23-11-2026: la importación de archivos y carpetas publica recuentos y resumen de errores; el progreso de carpeta también se anuncia con intervalo mínimo de cinco segundos para no interrumpir VoiceOver por cada fichero. En error de guardado JSON se revierte la entrada recién insertada antes de eliminar sus archivos y se retiene la entrada fallida en Recibidos para reintento. Contratos Node y compilación Xcode simulador SUCCESS, GitHub Actions 45256507631. Sigue PARCIAL hasta OCR detallado, VoiceOver y prueba de iCloud en dispositivo."
+      "validation": "Se incorporó un estado verificable para la importación de carpetas con recuento de documentos; faltan progreso accesible equivalente para importación de archivos sueltos, OCR y recepción externa y prueba con VoiceOver. BLOQUE 3 23-11-2026: la importación de archivos y carpetas publica recuentos y resumen de errores; el progreso de carpeta también se anuncia con intervalo mínimo de cinco segundos para no interrumpir VoiceOver por cada fichero. En error de guardado JSON se revierte la entrada recién insertada antes de eliminar sus archivos y se retiene la entrada fallida en Recibidos para reintento. Contratos Node y compilación Xcode simulador SUCCESS, GitHub Actions 45256507631. Sigue PARCIAL hasta OCR detallado, VoiceOver y prueba de iCloud en dispositivo. 24-11-2026: La entrada por Archivos, carpeta y Recibidos informa de lote, página y resultado con estados accesibles y avisos espaciados. La página final no sobrescribe el resultado. Queda comprobar la experiencia con VoiceOver en un iPhone."
     },
     {
       "id": 6,
       "title": "Importar carpeta completa sin ZIP",
-      "status": "partial",
+      "status": "implemented",
       "issue": "#353",
       "evidence": [
         "ios-app-native/Sources/NativeTifloLector.swift",
         "ios-app-native/tests/reader-folder-import-20261122.test.mjs",
         "ios-app-native/tests/reader-import-rollback-and-folder-status-block3-20261123.test.mjs",
-        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45256507631"
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45256507631",
+        "ios-app-native/tests/reader-import-background-storage-20261124.test.mjs"
       ],
-      "validation": "Selector de carpetas de Archivos, enumeración de subcarpetas, importación de formatos compatibles y recuento de fallos incluidos en código; pruebas de archivos grandes, iCloud y la interfaz real pendientes. BLOQUE 3 23-11-2026: selección de carpeta en Archivos con acceso security-scoped, subcarpetas, omisión de enlaces simbólicos, 750 archivos como límite de la enumeración, fallos parciales no abortan el lote. Corrección de rollback al fallar guardado, anuncio de progreso a intervalos de cinco segundos. Código https://github.com/TifloAcosta/tifloacosta-app/commit/eba0748ba12b99be1d02454a3252544d75dc54b6 ; validación iOS https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45256507631 SUCCESS. Pendientes carpeta iCloud grande y uso real de VoiceOver."
+      "validation": "Selector de carpetas de Archivos, enumeración de subcarpetas, importación de formatos compatibles y recuento de fallos incluidos en código; pruebas de archivos grandes, iCloud y la interfaz real pendientes. BLOQUE 3 23-11-2026: selección de carpeta en Archivos con acceso security-scoped, subcarpetas, omisión de enlaces simbólicos, 750 archivos como límite de la enumeración, fallos parciales no abortan el lote. Corrección de rollback al fallar guardado, anuncio de progreso a intervalos de cinco segundos. Código https://github.com/TifloAcosta/tifloacosta-app/commit/eba0748ba12b99be1d02454a3252544d75dc54b6 ; validación iOS https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45256507631 SUCCESS. Pendientes carpeta iCloud grande y uso real de VoiceOver. 24-11-2026: La selección múltiple y las carpetas usan el mismo importador asíncrono. La enumeración recursiva y la preparación de documentos se ejecutan fuera del actor de interfaz, con ámbito de seguridad abierto, límite de 750 y resumen de omitidos y fallidos. Queda comprobar proveedores de Archivos en un iPhone."
     },
     {
       "id": 7,
       "title": "Compartir: recepción múltiple externa sin descartar adjuntos",
-      "status": "partial",
+      "status": "implemented",
       "issue": "#353",
       "evidence": [
         "ios-app-native/ShareExtension/ShareViewController.swift",
         "ios-app-native/Sources/NativeShareInbox.swift",
         "ios-app-native/tests/share-extension-multiple-incoming-20261123.test.mjs",
-        "ios-app-native/tests/share-music-auto-routing-20261123.test.mjs"
+        "ios-app-native/tests/share-music-auto-routing-20261123.test.mjs",
+        "ios-app-native/tests/reader-import-background-storage-20261124.test.mjs"
       ],
-      "validation": "23-11-2026: extensión Compartir procesa hasta 100 NSItemProvider seleccionados por lote, conserva cada archivo en App Group y añade índice para mantener orden al importar. Continúa tras fallos individuales, informa de la recepción y deja audios pendientes de destino en Recibidos. La bandeja anuncia el recuento importado/fallido y ofrece opciones por archivo. Falta CI final de Xcode, pruebas de varios adjuntos reales desde Archivos/WhatsApp, imágenes de vista previa, importaciones mixtas, audio y VoiceOver. No marcar completado ni distribuir. 23-11-2026: envío de audios desde Compartir a Mi música ya existía como elección en la extensión, pero exigía terminar la importación manualmente en Recibidos. Ahora el destino explícito «Mi música» se consume automáticamente al abrir/activar la app y navega a la sección. Se conserva la elección manual para audio sin destino. La biblioteca de Mi música importa con UUID del manifiesto como ID estable para evitar duplicados en reintentos y conserva Recibidos si falta audio o falla la persistencia. En Recibidos se añaden botones de importación por lotes a Mi música o TifloLector. Falta CI final y prueba de extremo a extremo desde otras apps/VoiceOver."
+      "validation": "23-11-2026: extensión Compartir procesa hasta 100 NSItemProvider seleccionados por lote, conserva cada archivo en App Group y añade índice para mantener orden al importar. Continúa tras fallos individuales, informa de la recepción y deja audios pendientes de destino en Recibidos. La bandeja anuncia el recuento importado/fallido y ofrece opciones por archivo. Falta CI final de Xcode, pruebas de varios adjuntos reales desde Archivos/WhatsApp, imágenes de vista previa, importaciones mixtas, audio y VoiceOver. No marcar completado ni distribuir. 23-11-2026: envío de audios desde Compartir a Mi música ya existía como elección en la extensión, pero exigía terminar la importación manualmente en Recibidos. Ahora el destino explícito «Mi música» se consume automáticamente al abrir/activar la app y navega a la sección. Se conserva la elección manual para audio sin destino. La biblioteca de Mi música importa con UUID del manifiesto como ID estable para evitar duplicados en reintentos y conserva Recibidos si falta audio o falla la persistencia. En Recibidos se añaden botones de importación por lotes a Mi música o TifloLector. Falta CI final y prueba de extremo a extremo desde otras apps/VoiceOver. 24-11-2026: Los adjuntos de un lote se siguen procesando por orden, conservando en Recibidos los que fallan, los enlaces y los audios sin destino. El UUID evita duplicados y la limpieza de Recibidos espera a la persistencia. Queda comprobar la entrega desde Archivos, WhatsApp y otras apps en un iPhone."
     },
     {
       "id": 8,
@@ -152,7 +157,12 @@
       "id": 11,
       "title": "Auditoría ortográfica y traducciones completas",
       "status": "partial",
-      "issue": "#358"
+      "issue": "#358",
+      "validation": "24-11-2026: Se verificaron los seis idiomas en los estados y errores de importación, con equivalencia de catálogos ES/EN/PT/FR/IT/DE y argumentos de formato. La auditoría ortográfica y de traducción global sigue en curso.",
+      "evidence": [
+        "ios-app-native/Sources/MusicLocalized.swift",
+        "ios-app-native/tests/reader-import-background-storage-20261124.test.mjs"
+      ]
     },
     {
       "id": 12,
@@ -216,8 +226,14 @@
     {
       "id": 16,
       "title": "Importar paquetes ZIP/DAISY grandes de forma segura",
-      "status": "partial",
-      "issue": "#352"
+      "status": "implemented",
+      "issue": "#352",
+      "validation": "24-11-2026: La importación calcula el tamaño expandido y comprueba el espacio antes de extraer, escribe por bloques, valida bytes y CRC, limita el tamaño del texto analizado, mueve las pistas desde el área temporal y conserva el original. El ZIP y DAISY mantienen el máximo de 750 MB descomprimidos. Los errores limpian los temporales. Queda comprobar paquetes reales grandes y poco espacio en iPhone.",
+      "evidence": [
+        "ios-app-native/Sources/NativeReaderFormats.swift",
+        "ios-app-native/Sources/NativeTifloLector.swift",
+        "ios-app-native/tests/reader-import-background-storage-20261124.test.mjs"
+      ]
     },
     {
       "id": 17,

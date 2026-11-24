@@ -41,7 +41,19 @@ final class NativeShareInbox: ObservableObject {
     @Published private(set) var items: [NativeShareMessage] = []
     @Published private(set) var error: String?
     @Published private(set) var importSummary: String?
+    @Published private(set) var readerImportProgress: String?
+    @Published private(set) var activeReaderImportID: String?
     @Published var readyToRead: NativeReadingDocument?
+    private var lastReaderAnnouncement = Date.distantPast
+
+    private func reportReaderProgress(_ message: String) {
+        readerImportProgress = message
+        if NativeReaderFeedback.spokenAnnouncementsEnabled,
+           Date().timeIntervalSince(lastReaderAnnouncement) >= 3 {
+            lastReaderAnnouncement = Date()
+            UIAccessibility.post(notification: .announcement, argument: message)
+        }
+    }
 
     private var inboxURL: URL? {
         FileManager.default.containerURL(
@@ -108,14 +120,24 @@ final class NativeShareInbox: ObservableObject {
     /// The manifest id doubles as the library id to prevent duplicate imports
     /// after an interruption between library saving and inbox cleanup.
     @discardableResult
-    func importToReader(_ item: NativeShareMessage, library: NativeReaderLibrary) throws -> NativeReadingDocument {
+    func importToReader(_ item: NativeShareMessage, library: NativeReaderLibrary,
+                        position: Int = 1, total: Int = 1) async throws -> NativeReadingDocument {
         guard let sharingID = UUID(uuidString: item.id) else {
             throw CocoaError(.fileReadCorruptFile)
+        }
+        guard activeReaderImportID == nil else { throw CocoaError(.fileWriteFileExists) }
+        activeReaderImportID = item.id
+        defer {
+            readerImportProgress = nil
+            activeReaderImportID = nil
         }
         if let existing = library.documents.first(where: { $0.id == sharingID }) {
             complete(item)
             return existing
         }
+        let started = MusicLocalized.format("Importando %d de %d: %@", position, total, item.name)
+        if position == 1 { lastReaderAnnouncement = .distantPast }
+        reportReaderProgress(started)
         switch item.kind {
         case "file":
             guard let source = fileURL(for: item) else { throw CocoaError(.fileNoSuchFile) }
@@ -123,24 +145,10 @@ final class NativeShareInbox: ObservableObject {
             guard !originalName.isEmpty && originalName != "." && originalName != ".." else {
                 throw CocoaError(.fileReadInvalidFileName)
             }
-            let temp = FileManager.default.temporaryDirectory
-                .appendingPathComponent("SharedReader-" + item.id, isDirectory: true)
-            try FileManager.default.createDirectory(
-                at: temp, withIntermediateDirectories: true
-            )
-            defer { try? FileManager.default.removeItem(at: temp) }
-            let named = temp.appendingPathComponent(originalName)
-            // Sharing a large DAISY should not require another full-sized
-            // temporary copy when App Group and app storage share a volume.
-            // A hard link is safe here: the importer only reads this file,
-            // and the App Group source survives until a successful import.
-            do {
-                try FileManager.default.linkItem(at: source, to: named)
-            } catch {
-                // Cross-volume / unsupported links still import normally.
-                try FileManager.default.copyItem(at: source, to: named)
+            try await library.importFile(from: source, sharingID: sharingID,
+                                         originalName: originalName) { message in
+                self.reportReaderProgress(message)
             }
-            try library.importDocuments(from: [named], sharingID: sharingID)
         case "text":
             try library.importSharedText(item.value ?? "", title: item.name,
                                          sharingID: sharingID)
@@ -210,10 +218,15 @@ final class NativeShareInbox: ObservableObject {
         return imported > 0
     }
 
+    private var readerBatchRunning = false
+
     /// One deliberate batch action applies the chosen destination to all
     /// otherwise pending audio files; errors retain their original manifests.
     func importPendingAudioBatch(to destination: String,
-                                 library: NativeReaderLibrary) {
+                                 library: NativeReaderLibrary) async {
+        guard !readerBatchRunning, activeReaderImportID == nil else { return }
+        readerBatchRunning = true
+        defer { readerBatchRunning = false }
         guard destination == "music" || destination == "reader" else { return }
         refresh()
         let pending = items.reversed().filter { $0.needsAudioDestination }
@@ -221,12 +234,14 @@ final class NativeShareInbox: ObservableObject {
         var count = 0
         var failed: [String] = []
         var lastReader: NativeReadingDocument?
-        for item in pending {
+        for (index, item) in pending.enumerated() {
+            if Task.isCancelled { break }
             do {
                 if destination == "music" {
                     try importToMusic(item)
                 } else {
-                    lastReader = try importToReader(item, library: library)
+                    lastReader = try await importToReader(item, library: library,
+                                                         position: index + 1, total: pending.count)
                 }
                 count += 1
             } catch {
@@ -251,17 +266,24 @@ final class NativeShareInbox: ObservableObject {
     /// Share files are queued by the iOS share extension without launching our app.
     /// On the next foreground activation, they join the reader automatically.
     /// Only true files/text are consumed. URLs remain in Recibidos for URL actions.
-    func importPendingReaderContent(into library: NativeReaderLibrary) {
+    func importPendingReaderContent(into library: NativeReaderLibrary) async {
+        guard !readerBatchRunning, activeReaderImportID == nil else { return }
+        readerBatchRunning = true
+        defer { readerBatchRunning = false }
         refresh()
-        let oldToNew = items.reversed()
+        let pending = items.reversed().filter { item in
+            (item.kind == "file" || item.kind == "text")
+                && item.destination != "pending" && item.destination != "music"
+                && !item.needsAudioDestination
+        }
         var lastImported: NativeReadingDocument?
         var importedCount = 0
         var failures: [String] = []
-        for item in oldToNew where (item.kind == "file" || item.kind == "text")
-            && item.destination != "pending" && item.destination != "music"
-            && !item.needsAudioDestination {
+        for (index, item) in pending.enumerated() {
+            if Task.isCancelled { break }
             do {
-                lastImported = try importToReader(item, library: library)
+                lastImported = try await importToReader(item, library: library,
+                                                       position: index + 1, total: pending.count)
                 importedCount += 1
             } catch {
                 failures.append("«\(item.name)»: \(error.localizedDescription)")
@@ -279,8 +301,8 @@ final class NativeShareInbox: ObservableObject {
             }
         }
         if !failures.isEmpty {
-            error = "Algunos elementos no se pudieron importar y permanecen en Recibidos. " +
-                failures.joined(separator: " ")
+            error = MusicLocalized.message("Algunos elementos no se pudieron importar y permanecen en Recibidos.")
+                + " " + failures.joined(separator: " ")
         }
     }
 
@@ -301,7 +323,7 @@ struct NativeInboxScreen: View {
     @State private var importError: String?
     @State private var pendingAudioChoice: NativeShareMessage?
 
-    private func perform(_ item: NativeShareMessage, destination: String? = nil) {
+    private func perform(_ item: NativeShareMessage, destination: String? = nil) async {
         if destination == nil && item.needsAudioDestination {
             pendingAudioChoice = item
             return
@@ -317,10 +339,14 @@ struct NativeInboxScreen: View {
             } else if destination == "music" || (destination == nil && item.destination == "music") {
                 try inbox.importToMusic(item)
             } else {
-                inbox.readyToRead = try inbox.importToReader(item, library: library)
+                inbox.readyToRead = try await inbox.importToReader(item, library: library)
             }
         } catch {
-            importError = "No se pudo abrir «\(item.name)»: \(error.localizedDescription). El elemento permanece en Recibidos."
+            importError = MusicLocalized.format("No se pudo abrir «%@»: %@. El elemento permanece en Recibidos.",
+                                                item.name, error.localizedDescription)
+            if NativeReaderFeedback.spokenAnnouncementsEnabled {
+                UIAccessibility.post(notification: .announcement, argument: importError)
+            }
         }
     }
 
@@ -330,11 +356,16 @@ struct NativeInboxScreen: View {
             if unassignedAudioCount > 1 {
                 Section("Audios pendientes") {
                     Button("Importar todos los audios pendientes en Mi música") {
-                        inbox.importPendingAudioBatch(to: "music", library: library)
+                        Task { await inbox.importPendingAudioBatch(to: "music", library: library) }
                     }
                     Button("Importar todos los audios pendientes en TifloLector") {
-                        inbox.importPendingAudioBatch(to: "reader", library: library)
+                        Task { await inbox.importPendingAudioBatch(to: "reader", library: library) }
                     }
+                }
+            }
+            if let progress = inbox.readerImportProgress {
+                ProgressView {
+                    Text(progress)
                 }
             }
             if let summary = inbox.importSummary {
@@ -350,7 +381,7 @@ struct NativeInboxScreen: View {
             }
             ForEach(inbox.items) { item in
                 Button {
-                    perform(item)
+                    Task { await perform(item) }
                 } label: {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(item.name).font(.body)
@@ -366,6 +397,7 @@ struct NativeInboxScreen: View {
                             .font(.caption).foregroundStyle(.secondary)
                     }
                 }
+                .disabled(inbox.activeReaderImportID == item.id)
                 .accessibilityLabel(item.batchPosition.map { position in
                     "\(item.name). Archivo \(position) de \(item.batchCount ?? "?")"
                 } ?? item.name)
@@ -379,7 +411,7 @@ struct NativeInboxScreen: View {
                     }
                 }
                 .accessibilityAction(named: Text("Eliminar de Recibidos")) {
-                    inbox.complete(item)
+                    if inbox.activeReaderImportID != item.id { inbox.complete(item) }
                 }
             }
         }
@@ -389,11 +421,11 @@ struct NativeInboxScreen: View {
             set: { if !$0 { pendingAudioChoice = nil } }
         )) {
             Button("TifloLector") {
-                if let item = pendingAudioChoice { perform(item, destination: "reader") }
+                if let item = pendingAudioChoice { Task { await perform(item, destination: "reader") } }
                 pendingAudioChoice = nil
             }
             Button("Mi música") {
-                if let item = pendingAudioChoice { perform(item, destination: "music") }
+                if let item = pendingAudioChoice { Task { await perform(item, destination: "music") } }
                 pendingAudioChoice = nil
             }
             Button("Cancelar", role: .cancel) { pendingAudioChoice = nil }

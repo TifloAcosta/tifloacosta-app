@@ -12,7 +12,12 @@ test('the approved update preserves earlier requirements and adds the TTS lock-s
   assert.deepEqual(ids, [...Array(20)].map((_, i) => i + 1).concat([22, 23, 24, 25, 26, 27, 28, 29]));
   for (const id of [26, 27, 28, 29]) {
     assert.equal(manifest.requirements.find(x => x.id === id).issue, '#363');
-    assert.equal(manifest.requirements.find(x => x.id === id).status, 'partial');
+    const requirement = manifest.requirements.find(x => x.id === id);
+    assert.ok(['partial', 'implemented'].includes(requirement.status));
+    if (requirement.status === 'implemented') {
+      assert.ok(requirement.evidence?.some(path => path.startsWith('ios-app-native/')));
+      assert.ok(requirement.validation?.trim());
+    }
   }
   assert.equal(manifest.requirements.find(x => x.id === 25).issue, '#362');
   assert.equal(manifest.requirements.find(x => x.id === 25).status, 'partial');

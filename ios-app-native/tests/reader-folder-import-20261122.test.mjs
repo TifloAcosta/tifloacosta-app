@@ -15,13 +15,13 @@ test('folder enumeration stays within a scoped URL and skips symlinks', () => {
   assert.match(reader, /folder\.startAccessingSecurityScopedResource\(\)/);
   assert.match(reader, /defer \{ if scope \{ folder\.stopAccessingSecurityScopedResource\(\) \} \}/);
   assert.match(reader, /\.skipsHiddenFiles, \.skipsPackageDescendants/);
-  assert.match(reader, /properties\?\.isSymbolicLink != true/);
-  assert.match(reader, /files\.count \+ skipped < 750/);
+  assert.match(reader, /properties\.isSymbolicLink == true/);
+  assert.match(reader, /files\.count \+ skipped \+ failures\.count < 750/);
 });
 
 test('folder progress reports real document counts and continues on individual failures', () => {
   assert.match(reader, /MusicLocalized\.format\("Importando %d de %d: %@"/);
-  assert.match(reader, /try importDocuments\(from: \[file\]\)/);
+  assert.match(reader, /try await importSelectedFiles\(from: files, onProgress: onProgress\)/);
   assert.match(reader, /failures\.append\(/);
   assert.match(reader, /Importación terminada\. Documentos importados: %d\. Omitidos: %d\. Fallidos: %d\./);
   assert.match(reader, /UIAccessibility\.post\(notification: \.announcement, argument: importFolderStatus\)/);

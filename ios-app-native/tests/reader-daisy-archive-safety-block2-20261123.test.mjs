@@ -31,7 +31,7 @@ test('NCC/NCX can point directly at an SMIL audio ID and retain clipBegin', () =
 test('large ZIP and DAISY imports reject duplicate members and prevent size overflow', () => {
   const unpack = formats.split('private static func readPackage(')[1]?.split('func extractedText(')[0] ?? '';
   assert.ok(unpack.includes('var extractedPaths: Set<String> = []'));
-  assert.ok(unpack.includes('extractedPaths.insert(path.lowercased()).inserted'));
+  assert.ok(unpack.includes('extractedPaths.insert(path.precomposedStringWithCanonicalMapping.lowercased()).inserted'));
   assert.ok(unpack.includes('entry.uncompressedSize <= UInt64(sizeLimit - total)'));
   assert.ok(unpack.includes('total += Int64(entry.uncompressedSize)'));
   assert.ok(unpack.indexOf('entry.uncompressedSize <= UInt64(sizeLimit - total)') <
@@ -39,7 +39,7 @@ test('large ZIP and DAISY imports reject duplicate members and prevent size over
   assert.ok(unpack.includes('entries <= 4000'));
   assert.ok(unpack.includes('750_000_000'));
   assert.ok(unpack.includes('entry.type == .file'));
-  assert.ok(unpack.includes('!path.split(separator: "/").contains("..")'));
+  assert.ok(unpack.includes('!components.contains("..")'));
 });
 
 test('DAISY originals and the separate Voice Dream ZIP remain available', () => {

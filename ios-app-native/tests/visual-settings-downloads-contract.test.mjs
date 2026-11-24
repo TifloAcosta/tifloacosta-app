@@ -39,7 +39,7 @@ test('Descargar en TifloAcosta guarda localmente y permite importar o compartir'
   assert.match(downloads, /"Descargar en TifloAcosta"/);
   assert.match(downloads, /FileManager\.default\.copyItem\(at: temporary, to: destination\)/);
   assert.match(downloads, /Section\("Mis descargas"\)/);
-  assert.match(downloads, /library\.importDocuments\(from: \[file\.url\]\)/);
+  assert.match(downloads, /await library\.importFile\(from: file\.url\)/);
   assert.match(downloads, /NativeShare\.present\(url: file\.url\)/);
   assert.match(downloads, /NativeDriveTransfer\.download\(item\)/);
 });

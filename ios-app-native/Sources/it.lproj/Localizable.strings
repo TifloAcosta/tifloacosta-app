@@ -1406,3 +1406,12 @@
 "Animación" = "Animazione";
 
 "Procesando página %d de %d: %@" = "Elaborazione della pagina %d di %d: %@";
+"No hay espacio suficiente para importar el archivo." = "Spazio insufficiente per importare il file.";
+"El archivo comprimido supera los límites de seguridad de tamaño o cantidad de ficheros." = "L’archivio supera i limiti di sicurezza per dimensione o numero di file.";
+"La importación admite hasta 750 archivos por lote." = "Puoi importare fino a 750 file per volta.";
+"El formato %@ todavía no dispone de un lector compatible." = "Il formato %@ non è ancora supportato.";
+"No se ha encontrado contenido legible en «%@»." = "Non è stato trovato contenuto leggibile in «%@».";
+"No se ha podido abrir el paquete o el ZIP no contiene un libro DAISY ni pistas de audio reconocibles." = "Impossibile aprire il pacchetto oppure il file ZIP non contiene un libro DAISY né tracce audio riconoscibili.";
+"Algunos elementos no se pudieron importar y permanecen en Recibidos." = "Non è stato possibile importare alcuni elementi, che restano in Ricevuti.";
+"No se pudo abrir «%@»: %@. El elemento permanece en Recibidos." = "Impossibile aprire «%@»: %@. L’elemento resta in Ricevuti.";
+"PDF con más de 150 páginas escaneadas. Divide el archivo para realizar OCR." = "Il PDF contiene più di 150 pagine scansionate. Dividi il file per eseguire l’OCR.";

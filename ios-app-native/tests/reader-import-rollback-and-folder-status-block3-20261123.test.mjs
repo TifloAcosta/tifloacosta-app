@@ -5,24 +5,23 @@ import { readFileSync } from 'node:fs';
 const source = readFileSync(new URL('../Sources/NativeTifloLector.swift', import.meta.url), 'utf8');
 const inbox = readFileSync(new URL('../Sources/NativeShareInbox.swift', import.meta.url), 'utf8');
 
-test('a failed library save removes the newly published book before deleting its media', () => {
-  const importer = source.split('func importDocuments(from urls: [URL]')[1]
-    ?.split('func importFolder(from folder: URL')[0] ?? '';
-  assert.ok(importer.includes('try NativeReaderFormats.read(url, documentID: identifier)'));
-  assert.ok(importer.includes('try NativeReaderFormats.storeOriginal(url, documentID: identifier)'));
-  assert.ok(importer.includes('documents.insert('));
-  assert.match(importer, /do\s*\{\s*try save\(\)\s*\}\s*catch\s*\{/);
-  assert.ok(importer.includes('documents.removeAll { $0.id == identifier }'));
-  assert.ok(importer.indexOf('documents.removeAll { $0.id == identifier }') <
-            importer.indexOf('NativeReaderFormats.deleteStoredFiles(for: identifier)'));
+test('file imports clean staged media on failure and publish only after the atomic commit', () => {
+  const importer = source.split('func importFile(from url: URL')[1]
+    .split('func importFolder(from folder: URL')[0];
+  assert.match(importer, /try NativeReaderFormats\.read\(url, documentID: identifier,/);
+  assert.match(importer, /try NativeReaderFormats\.storeOriginal\(\s*url, documentID: identifier, filename: filename\)/);
+  assert.match(importer, /try await persistImportedDocument\(document\)/);
+  assert.match(importer, /guard revision == documentsRevision else \{ continue \}/);
+  assert.ok(importer.indexOf('rename(staged.path, storage.path)') <
+            importer.indexOf('documents.insert(document, at: 0)'));
   assert.match(importer, /NativeReaderFormats\.deleteStoredFiles\(for: identifier\)/);
   assert.match(importer, /NativeReaderFormats\.deleteOriginal\(for: identifier\)/);
 });
 
 test('a failed shared import retains the inbox item and original attachment for retry', () => {
   const importer = inbox.split('func importToReader(')[1]?.split('func importToMusic(')[0] ?? '';
-  assert.match(importer, /try library\.importDocuments\(from: \[named\], sharingID: sharingID\)/);
-  const afterImport = importer.split('try library.importDocuments(')[1] ?? '';
+  assert.match(importer, /try await library\.importFile\(from: source, sharingID: sharingID,\s*originalName: originalName\)/);
+  const afterImport = importer.split('try await library.importFile(')[1] ?? '';
   assert.ok(afterImport.includes('complete(item)'));
   const batch = inbox.split('func importPendingReaderContent(')[1]?.split('func complete(')[0] ?? '';
   assert.match(batch, /catch\s*\{\s*failures\.append/);

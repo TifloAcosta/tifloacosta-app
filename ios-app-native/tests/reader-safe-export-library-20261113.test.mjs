@@ -8,7 +8,7 @@ const end = src.indexOf('private var audioExportSheet: some View', start);
 const exportFlow = src.slice(start, end);
 
 test('completed MP3 and DAISY exports enter the durable library before user sharing', () => {
-  assert.match(exportFlow, /library\.importDocuments\(from: \[url\]/);
+  assert.match(exportFlow, /await library\.importFile\(from: url, sharingID: savedID/);
   assert.match(exportFlow, /originalRelativePath/);
   assert.doesNotMatch(exportFlow, /NativeShare\.present\(url: url\)/);
 });

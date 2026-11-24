@@ -477,6 +477,12 @@ final class ShareViewController: UIViewController {
                         : "El archivo supera el límite de 100 MB.")
                     return
                 }
+                let volume = try manager.attributesOfFileSystem(forPath: inbox.path)
+                if let free = volume[.systemFreeSize] as? NSNumber,
+                   free.int64Value - fileSize.int64Value < 16_000_000 {
+                    reportItem(false, String(localized: "No hay espacio suficiente para importar el archivo."))
+                    return
+                }
                 let storedName = id + ".data"
                 let destination = inbox.appendingPathComponent(storedName)
                 try manager.copyItem(at: file, to: destination)

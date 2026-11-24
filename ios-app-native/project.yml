@@ -47,6 +47,7 @@ targets:
     sources:
       - path: ShareExtension/ShareViewController.swift
       - path: ShareExtension/ShareReadingPreview.swift
+      - path: ShareExtension/Localizations
     # Keep the source-controlled plist intact: XcodeGen info.path would regenerate it,
     # removing NSExtensionPointIdentifier and making App Store Connect reject the IPA.
     entitlements:

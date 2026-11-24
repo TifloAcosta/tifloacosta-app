@@ -270,9 +270,8 @@ private enum NativeOPDSService {
         }
         let prepared = FileManager.default.temporaryDirectory
             .appendingPathComponent(UUID().uuidString).appendingPathExtension(format)
-        try FileManager.default.copyItem(at: temporary, to: prepared)
-        defer { try? FileManager.default.removeItem(at: prepared) }
-        try library.importDocuments(from: [prepared], preferredTitle: title)
+        try await library.importFile(from: temporary, originalName: prepared.lastPathComponent,
+                                     preferredTitle: title)
     }
 }
 

@@ -160,11 +160,13 @@ struct NativeDownloadsScreen: View {
     }
 
     private func importFile(_ file: NativeDownload) {
-        do {
-            try library.importDocuments(from: [file.url])
-            alertText = "«\(file.title)» importado a TifloLector."
-        } catch {
-            alertText = "No se pudo importar «\(file.title)»: \(error.localizedDescription)"
+        Task {
+            do {
+                try await library.importFile(from: file.url)
+                alertText = "«\(file.title)» importado a TifloLector."
+            } catch {
+                alertText = "No se pudo importar «\(file.title)»: \(error.localizedDescription)"
+            }
         }
     }
 

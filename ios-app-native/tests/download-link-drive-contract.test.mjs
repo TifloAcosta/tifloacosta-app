@@ -33,7 +33,7 @@ test('Descargas presenta errores de servidor sin guardar páginas de Google', ()
 
 test('Mis descargas conserva importar, compartir y eliminar accesibles', () => {
   assert.ok(downloads.includes('Section("Mis descargas")'));
-  assert.ok(downloads.includes('library.importDocuments(from: [file.url])'));
+  assert.ok(downloads.includes('await library.importFile(from: file.url)'));
   for (const label of ['Importar en TifloLector','Compartir','Eliminar']) {
     assert.ok(downloads.includes('.accessibilityAction(named: Text("' + label + '"))'));
   }

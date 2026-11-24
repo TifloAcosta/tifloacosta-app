@@ -24,9 +24,9 @@ test('Favoritos tiene almacén persistente, pantalla nativa y acciones VoiceOver
 });
 test('Compartir EPUB importa en lector y no obliga a volver a compartir', () => {
   assert.ok(share.includes('func importToReader(_ item: NativeShareMessage'));
-  assert.ok(share.includes('library.importDocuments(from: [named], sharingID: sharingID)'));
+  assert.ok(share.includes('library.importFile(from: source, sharingID: sharingID'));
   assert.ok(share.includes('func importPendingReaderContent(into library: NativeReaderLibrary)'));
-  assert.ok(share.includes('inbox.readyToRead = try inbox.importToReader(item, library: library)'));
+  assert.ok(share.includes('inbox.readyToRead = try await inbox.importToReader(item, library: library)'));
   assert.ok(!share.includes('pathExtension.lowercased() == "epub"'));
   assert.ok(share.includes('Eliminar de Recibidos')); // delete remains optional
   assert.ok(home.includes('.navigationDestination(item: $inbox.readyToRead)'));

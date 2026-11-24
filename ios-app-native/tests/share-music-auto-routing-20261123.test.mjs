@@ -11,7 +11,8 @@ test('sharing an audio explicitly to Mi música imports automatically on foregro
   assert.match(inbox,/func importPendingMusicContent\(\) -> Bool/);
   assert.match(inbox,/[$]0[.]kind == "file" && [$]0[.]isAudioFile && [$]0[.]destination == "music"/);
   assert.match(home,/let receivedMusic = inbox[.]importPendingMusicContent\(\)/);
-  assert.ok(home.split('let receivedMusic = inbox.importPendingMusicContent()').length >= 3);
+  assert.match(home, /\.onAppear \{\s*processSharedContent\(\)/);
+  assert.match(home, /if phase == \.active \{\s*processSharedContent\(\)/);
   assert.match(home,/receivedMusic && inbox[.]readyToRead == nil/);
   assert.match(home,/navigationPath[.]append\(NativeDestination[.]miMusica\)/);
   assert.match(inbox,/item[.]destination != "pending" && item[.]destination != "music"/);
@@ -43,5 +44,5 @@ test('multiple pending audios can go to one explicitly chosen destination', () =
   assert.match(inbox,/Button\("Importar todos los audios pendientes en Mi música"\)/);
   assert.match(inbox,/Button\("Importar todos los audios pendientes en TifloLector"\)/);
   assert.match(inbox,/if destination == "music" \{/);
-  assert.match(inbox,/lastReader = try importToReader\(item, library: library\)/);
+  assert.match(inbox,/lastReader = try await importToReader\(item, library: library,\s*position: index \+ 1, total: pending\.count\)/);
 });

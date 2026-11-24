@@ -8,7 +8,7 @@ test('Files multi-selection imports each document without stopping on the first 
   assert.match(source, /allowsMultipleSelection: true/);
   assert.match(source, /func importSelectedFiles\(from urls: \[URL\]/);
   assert.match(source, /for \(index, url\) in urls\.enumerated\(\)/);
-  assert.match(source, /try importDocuments\(from: \[url\]\)/);
+  assert.match(source, /try await importFile\(from: url, onProgress: onProgress\)/);
   assert.match(source, /failures\.append\(url\.lastPathComponent/);
   assert.match(source, /importSelectedFiles\(from: urls\)/);
 });

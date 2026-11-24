@@ -16,9 +16,9 @@ test('una única entrada Importar conserva Archivos e incorpora bibliotecas en l
 
 test('se preservan títulos de catálogo, biblioteca local y opciones de importación anteriores', () => {
     assert.match(reader, /preferredTitle: String\? = nil/);
-    assert.match(reader, /NativeReaderFormats\.read\(url, documentID: identifier\)/);
+    assert.match(reader, /NativeReaderFormats\.read\(url, documentID: identifier,\s*filename: filename\)/);
     assert.match(reader, /NativeReaderFormats\.deleteStoredFiles\(for: identifier\)/);
-    assert.match(catalogs, /library\.importDocuments\(from: \[prepared\], preferredTitle: title\)/);
+    assert.match(catalogs, /await library\.importFile\(from: temporary, originalName: prepared\.lastPathComponent,\s*preferredTitle: title\)/);
 });
 
 test('Proyecto Gutenberg y catálogos OPDS 1 y 2 se exploran con búsqueda y paginación', () => {

@@ -1,3 +1,4 @@
+import Darwin
 import SwiftUI
 import MediaPlayer
 import PDFKit
@@ -114,7 +115,11 @@ struct NativeReaderFolderImportSummary {
 /// No reading data is silently discarded or overwritten during the migration.
 @MainActor
 final class NativeReaderLibrary: ObservableObject {
-    @Published private(set) var documents: [NativeReadingDocument] = []
+    @Published private(set) var documents: [NativeReadingDocument] = [] {
+        didSet { documentsRevision &+= 1 }
+    }
+    private var documentsRevision = 0
+    private var pendingFileImports: Set<UUID> = []
     @Published private(set) var folders: [String] = []
     private let folderStorageKey = "native-reader-folders"
     // One small preference per opened book; opening must not re-encode the
@@ -150,89 +155,97 @@ final class NativeReaderLibrary: ObservableObject {
         }
     }
 
-    func importDocuments(from urls: [URL], sharingID: UUID? = nil,
-                         preferredTitle: String? = nil) throws {
-        for url in urls {
-            let accessed = url.startAccessingSecurityScopedResource()
-            defer { if accessed { url.stopAccessingSecurityScopedResource() } }
-            let identifier = sharingID ?? UUID()
-            if documents.contains(where: { $0.id == identifier }) { continue }
-            do {
-                let payload = try NativeReaderFormats.read(url, documentID: identifier)
-                let originalPath = try NativeReaderFormats.storeOriginal(url, documentID: identifier)
-                documents.insert(
-                    NativeReadingDocument(
-                        id: identifier,
-                        title: (preferredTitle?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
-                                ? preferredTitle! : url.deletingPathExtension().lastPathComponent),
-                        body: payload.body,
-                        importedAt: .now,
-                        fileExtension: payload.fileExtension,
-                        originalRelativePath: originalPath,
-                        trackPaths: payload.trackPaths,
-                        daisyNavigation: payload.daisyNavigation,
-                        daisyClips: payload.daisyClips,
-                        textLinks: payload.textLinks
-                    ), at: 0
-                )
-                do {
-                    try save()
-                } catch {
-                    // Roll back the visible record if persistence failed;
-                    // otherwise the book remains listed with missing media.
-                    documents.removeAll { $0.id == identifier }
-                    throw error
-                }
-            } catch {
-                NativeReaderFormats.deleteStoredFiles(for: identifier)
-                NativeReaderFormats.deleteOriginal(for: identifier)
-                throw error
+    /// Decode and stage originals and media off the UI actor. Commit only
+    /// after the staged library file has been written successfully.
+    @discardableResult
+    func importFile(from url: URL, sharingID: UUID? = nil,
+                    originalName: String? = nil, preferredTitle: String? = nil,
+                    onProgress: @escaping (String) -> Void = { _ in }) async throws -> NativeReadingDocument {
+        let identifier = sharingID ?? UUID()
+        if let existing = documents.first(where: { $0.id == identifier }) { return existing }
+        guard pendingFileImports.insert(identifier).inserted else {
+            throw CocoaError(.fileWriteFileExists)
+        }
+        defer { pendingFileImports.remove(identifier) }
+
+        let filename = originalName ?? url.lastPathComponent
+        let progress = AsyncStream<(Int, Int)>.makeStream(bufferingPolicy: .bufferingNewest(1))
+        let progressTask = Task { @MainActor in
+            for await (page, total) in progress.stream {
+                guard !Task.isCancelled else { break }
+                onProgress(MusicLocalized.format("Procesando página %d de %d: %@", page, total, filename))
             }
         }
-    }
-
-    /// PDF and image decoding can take seconds per page. Keep the existing
-    /// synchronous import for other callers, but move OCR work off the UI actor.
-    private func importWithPageProgress(from url: URL,
-                                        onProgress: @escaping (String) -> Void) async throws {
-        let ocrTypes: Set<String> = ["pdf", "jpg", "jpeg", "png", "heic", "heif", "tif", "tiff"]
-        guard ocrTypes.contains(url.pathExtension.lowercased()) else {
-            try importDocuments(from: [url])
-            return
-        }
-        let identifier = UUID()
-        let filename = url.lastPathComponent
-        var acceptingProgress = true
-        defer { acceptingProgress = false }
+        defer { progress.continuation.finish(); progressTask.cancel() }
         do {
-            let (payload, originalPath) = try await Task.detached(priority: .userInitiated) {
+            let worker = Task.detached(priority: .userInitiated) {
+                defer { progress.continuation.finish() }
                 let accessed = url.startAccessingSecurityScopedResource()
                 defer { if accessed { url.stopAccessingSecurityScopedResource() } }
-                let payload = try NativeReaderFormats.read(url, documentID: identifier) { page, total in
-                    Task { @MainActor in
-                        guard acceptingProgress else { return }
-                        onProgress(MusicLocalized.format("Procesando página %d de %d: %@", page, total, filename))
-                    }
+                let attributes = try url.resourceValues(forKeys: [.isRegularFileKey, .isSymbolicLinkKey])
+                guard attributes.isRegularFile == true, attributes.isSymbolicLink != true else {
+                    throw CocoaError(.fileReadUnsupportedScheme)
                 }
-                let originalPath = try NativeReaderFormats.storeOriginal(url, documentID: identifier)
+                let payload = try NativeReaderFormats.read(url, documentID: identifier,
+                    filename: filename) { page, total in
+                    progress.continuation.yield((page, total))
+                }
+                try Task.checkCancellation()
+                let originalPath = try NativeReaderFormats.storeOriginal(
+                    url, documentID: identifier, filename: filename)
                 return (payload, originalPath)
-            }.value
-            acceptingProgress = false
-            try Task.checkCancellation()
-            documents.insert(NativeReadingDocument(
-                id: identifier, title: url.deletingPathExtension().lastPathComponent,
+            }
+            let (payload, originalPath) = try await withTaskCancellationHandler {
+                try await worker.value
+            } onCancel: {
+                worker.cancel()
+            }
+            await progressTask.value
+            let title = preferredTitle?.trimmingCharacters(in: .whitespacesAndNewlines)
+            let document = NativeReadingDocument(
+                id: identifier,
+                title: title.flatMap { $0.isEmpty ? nil : $0 }
+                    ?? URL(fileURLWithPath: filename).deletingPathExtension().lastPathComponent,
                 body: payload.body, importedAt: .now, fileExtension: payload.fileExtension,
                 originalRelativePath: originalPath, trackPaths: payload.trackPaths,
                 daisyNavigation: payload.daisyNavigation, daisyClips: payload.daisyClips,
-                textLinks: payload.textLinks), at: 0)
-            do { try save() } catch {
-                documents.removeAll { $0.id == identifier }
-                throw error
-            }
+                textLinks: payload.textLinks)
+            try await persistImportedDocument(document)
+            return document
         } catch {
-            NativeReaderFormats.deleteStoredFiles(for: identifier)
-            NativeReaderFormats.deleteOriginal(for: identifier)
+            progressTask.cancel()
+            await Task.detached {
+                NativeReaderFormats.deleteStoredFiles(for: identifier)
+                NativeReaderFormats.deleteOriginal(for: identifier)
+            }.value
             throw error
+        }
+    }
+
+    private func persistImportedDocument(_ document: NativeReadingDocument) async throws {
+        let storage = Self.storageURL
+        while true {
+            try Task.checkCancellation()
+            let revision = documentsRevision
+            let updated = [document] + documentsForPersistence()
+            let directory = storage.deletingLastPathComponent()
+            let staged = directory.appendingPathComponent("reader-import-\(UUID().uuidString).tmp")
+            defer { try? FileManager.default.removeItem(at: staged) }
+            try await Task.detached(priority: .userInitiated) {
+                try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+                try JSONEncoder().encode(updated).write(to: staged)
+            }.value
+            try Task.checkCancellation()
+            // A bookmark, playback position, or concurrent import may have
+            // changed during encoding. Retry with the current snapshot.
+            guard revision == documentsRevision else { continue }
+            // The staged file is in the same directory, so rename replaces
+            // the previous index atomically with no large I/O on this actor.
+            guard rename(staged.path, storage.path) == 0 else {
+                throw POSIXError(POSIXErrorCode(rawValue: errno) ?? .EIO)
+            }
+            documents.insert(document, at: 0)
+            return
         }
     }
 
@@ -244,56 +257,60 @@ final class NativeReaderLibrary: ObservableObject {
                       -> NativeReaderFolderImportSummary {
         let scope = folder.startAccessingSecurityScopedResource()
         defer { if scope { folder.stopAccessingSecurityScopedResource() } }
-        let attributes = try folder.resourceValues(forKeys: [.isDirectoryKey])
-        guard attributes.isDirectory == true else {
-            throw CocoaError(.fileReadUnsupportedScheme)
-        }
-        let supported: Set<String> = [
-            "pdf", "txt", "text", "html", "htm", "md", "markdown",
-            "csv", "json", "xml", "log", "srt", "rtf", "fb2",
-            "docx", "odt", "pptx", "ppsx", "pptm", "xlsx", "xlsm",
-            "epub", "mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff",
-            "caf", "flac", "mp4", "m4v", "mov", "zip", "daisy",
-            "png", "jpg", "jpeg", "heic", "heif", "tif", "tiff"
-        ]
-        guard let enumerator = FileManager.default.enumerator(
-            at: folder, includingPropertiesForKeys: [.isRegularFileKey, .isSymbolicLinkKey],
-            options: [.skipsHiddenFiles, .skipsPackageDescendants]
-        ) else { throw CocoaError(.fileReadUnknown) }
-        var files: [URL] = []
-        var skipped = 0
-        for case let url as URL in enumerator {
-            if Task.isCancelled { throw CancellationError() }
-            let properties = try? url.resourceValues(forKeys: [.isRegularFileKey, .isSymbolicLinkKey])
-            guard properties?.isSymbolicLink != true,
-                  properties?.isRegularFile == true else { continue }
-            guard files.count + skipped < 750 else {
-                throw NativeReaderFormatError.unsupported(
-                    "Carpeta con más de 750 archivos: divide la importación")
+        let scan = Task.detached(priority: .userInitiated) { () throws -> ([URL], Int, [String]) in
+            let attributes = try folder.resourceValues(forKeys: [.isDirectoryKey, .isSymbolicLinkKey])
+            guard attributes.isDirectory == true, attributes.isSymbolicLink != true else {
+                throw CocoaError(.fileReadUnsupportedScheme)
             }
-            if supported.contains(url.pathExtension.lowercased()) { files.append(url) }
-            else { skipped += 1 }
-        }
-        files.sort { $0.path.localizedStandardCompare($1.path) == .orderedAscending }
-        var imported = 0
-        var failures: [String] = []
-        for (index, file) in files.enumerated() {
-            if Task.isCancelled { throw CancellationError() }
-            onProgress(MusicLocalized.format("Importando %d de %d: %@", index + 1, files.count, file.lastPathComponent))
-            await Task.yield()
-            do {
-                if ["pdf", "jpg", "jpeg", "png", "heic", "heif", "tif", "tiff"].contains(file.pathExtension.lowercased()) {
-                    try await importWithPageProgress(from: file, onProgress: onProgress)
-                } else {
-                    try importDocuments(from: [file])
+            let supported: Set<String> = [
+                "pdf", "txt", "text", "html", "htm", "md", "markdown",
+                "csv", "json", "xml", "log", "srt", "rtf", "fb2",
+                "docx", "odt", "pptx", "ppsx", "pptm", "xlsx", "xlsm",
+                "epub", "mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff",
+                "caf", "flac", "mp4", "m4v", "mov", "zip", "daisy",
+                "png", "jpg", "jpeg", "heic", "heif", "tif", "tiff"
+            ]
+            var failures: [String] = []
+            guard let enumerator = FileManager.default.enumerator(
+                at: folder, includingPropertiesForKeys: [.isRegularFileKey, .isSymbolicLinkKey],
+                options: [.skipsHiddenFiles, .skipsPackageDescendants],
+                errorHandler: { url, error in
+                    failures.append(url.lastPathComponent + ": " + error.localizedDescription)
+                    return failures.count < 750
                 }
-                imported += 1
-            } catch {
-                failures.append(file.lastPathComponent + ": " + error.localizedDescription)
+            ) else { throw CocoaError(.fileReadUnknown) }
+            var files: [URL] = []
+            var skipped = 0
+            for case let url as URL in enumerator {
+                if Task.isCancelled { throw CancellationError() }
+                if let properties = try? url.resourceValues(forKeys: [.isRegularFileKey, .isSymbolicLinkKey]) {
+                    if properties.isSymbolicLink == true {
+                        guard files.count + skipped + failures.count < 750 else {
+                            throw NativeReaderFormatError.tooManyFiles
+                        }
+                        enumerator.skipDescendants()
+                        skipped += 1
+                        continue
+                    }
+                    guard properties.isRegularFile == true else { continue }
+                }
+                guard files.count + skipped + failures.count < 750 else {
+                    throw NativeReaderFormatError.tooManyFiles
+                }
+                if supported.contains(url.pathExtension.lowercased()) { files.append(url) }
+                else { skipped += 1 }
             }
+            files.sort { $0.path.localizedStandardCompare($1.path) == .orderedAscending }
+            return (files, skipped, failures)
         }
-        return NativeReaderFolderImportSummary(
-            imported: imported, skipped: skipped, failed: failures)
+        let (files, skipped, scanFailures) = try await withTaskCancellationHandler {
+            try await scan.value
+        } onCancel: {
+            scan.cancel()
+        }
+        let summary = try await importSelectedFiles(from: files, onProgress: onProgress)
+        return NativeReaderFolderImportSummary(imported: summary.imported,
+                                               skipped: skipped, failed: scanFailures + summary.failed)
     }
 
     /// Import a selection of files one by one. A damaged file must not
@@ -303,8 +320,7 @@ final class NativeReaderLibrary: ObservableObject {
                              onProgress: @escaping (String) -> Void) async throws
                              -> NativeReaderFolderImportSummary {
         guard urls.count <= 750 else {
-            throw NativeReaderFormatError.unsupported(
-                "Selección con más de 750 archivos: divide la importación")
+            throw NativeReaderFormatError.tooManyFiles
         }
         var imported = 0
         var failures: [String] = []
@@ -312,14 +328,11 @@ final class NativeReaderLibrary: ObservableObject {
             if Task.isCancelled { throw CancellationError() }
             onProgress(MusicLocalized.format("Importando %d de %d: %@",
                                             index + 1, urls.count, url.lastPathComponent))
-            await Task.yield()
             do {
-                if ["pdf", "jpg", "jpeg", "png", "heic", "heif", "tif", "tiff"].contains(url.pathExtension.lowercased()) {
-                    try await importWithPageProgress(from: url, onProgress: onProgress)
-                } else {
-                    try importDocuments(from: [url])
-                }
+                try await importFile(from: url, onProgress: onProgress)
                 imported += 1
+            } catch is CancellationError {
+                throw CancellationError()
             } catch {
                 failures.append(url.lastPathComponent + ": " + error.localizedDescription)
             }
@@ -3711,7 +3724,7 @@ struct NativeReadingScreen: View {
                 case .voiceDreamMP3Zip: formatLabel = "Voice Dream MP3 ZIP"
                 }
                 let savedTitle = "\(title) - \(formatLabel)"
-                try library.importDocuments(from: [url], sharingID: savedID,
+                try await library.importFile(from: url, sharingID: savedID,
                                             preferredTitle: savedTitle)
                 guard let stored = library.documents.first(where: { $0.id == savedID }),
                       let relativePath = stored.originalRelativePath,

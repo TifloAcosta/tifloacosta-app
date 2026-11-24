@@ -19,13 +19,19 @@ enum NativeReaderFormatError: LocalizedError {
     case empty(String)
     case invalidArchive
     case oversizedArchive
+    case insufficientStorage
+    case tooManyFiles
+    case tooManyScannedPages
 
     var errorDescription: String? {
         switch self {
-        case .unsupported(let ext): return "El formato \(ext) todavía no dispone de un lector compatible."
-        case .empty(let name): return "No se ha encontrado contenido legible en «\(name)»."
-        case .invalidArchive: return "No se ha podido abrir el paquete o el ZIP no contiene un libro DAISY ni pistas de audio reconocibles."
-        case .oversizedArchive: return "El archivo comprimido supera los límites de seguridad de tamaño o cantidad de ficheros."
+        case .unsupported(let ext): return MusicLocalized.format("El formato %@ todavía no dispone de un lector compatible.", ext)
+        case .empty(let name): return MusicLocalized.format("No se ha encontrado contenido legible en «%@».", name)
+        case .invalidArchive: return MusicLocalized.message("No se ha podido abrir el paquete o el ZIP no contiene un libro DAISY ni pistas de audio reconocibles.")
+        case .oversizedArchive: return MusicLocalized.message("El archivo comprimido supera los límites de seguridad de tamaño o cantidad de ficheros.")
+        case .tooManyScannedPages: return MusicLocalized.message("PDF con más de 150 páginas escaneadas. Divide el archivo para realizar OCR.")
+        case .tooManyFiles: return MusicLocalized.message("La importación admite hasta 750 archivos por lote.")
+        case .insufficientStorage: return MusicLocalized.message("No hay espacio suficiente para importar el archivo.")
         }
     }
 }
@@ -147,34 +153,39 @@ enum NativeReaderFormats {
         "txt", "text", "md", "markdown", "csv", "json", "xml", "log", "srt"
     ]
 
-    static func read(_ url: URL, documentID: UUID, onPage: ((Int, Int) -> Void)? = nil) throws -> NativeReaderImportedPayload {
-        let ext = url.pathExtension.lowercased()
+    static func read(_ url: URL, documentID: UUID, filename: String? = nil, onPage: ((Int, Int) -> Void)? = nil) throws -> NativeReaderImportedPayload {
+        try Task.checkCancellation()
+        let namedURL = filename.map { URL(fileURLWithPath: $0) } ?? url
+        let ext = namedURL.pathExtension.lowercased()
         if audioExtensions.contains(ext) || videoExtensions.contains(ext) {
-            let saved = try storeMedia(url, documentID: documentID)
+            let saved = try storeMedia(url, documentID: documentID, extension: ext)
             return .init(body: "", fileExtension: ext, trackPaths: [saved])
         }
         if ["epub", "docx", "odt", "pptx", "ppsx", "pptm", "xlsx", "xlsm", "zip", "daisy"].contains(ext) {
             return try readPackage(url, documentID: documentID, ext: ext)
         }
 
-        let data = try Data(contentsOf: url)
+        let data = ext == "pdf" ? Data() : try Data(contentsOf: url, options: .mappedIfSafe)
         let text: String
         var textLinks: [NativeReaderTextLink] = []
         switch ext {
         case "pdf":
-            guard let pdf = PDFDocument(data: data) else {
+            guard let pdf = PDFDocument(url: url)
+                ?? (try? Data(contentsOf: url, options: .mappedIfSafe)).flatMap(PDFDocument.init(data:))
+            else {
                 throw NativeReaderFormatError.empty(url.lastPathComponent)
             }
             var pages: [String] = []
             var scannedPages = 0
             for index in 0..<pdf.pageCount {
+                try Task.checkCancellation()
                 onPage?(index + 1, pdf.pageCount)
                 var pageText = pdf.page(at: index)?.string?
                     .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
                 if pageText.isEmpty {
                     scannedPages += 1
                     guard scannedPages <= 150 else {
-                        throw NativeReaderFormatError.unsupported("PDF con más de 150 páginas escaneadas; divide el archivo para realizar OCR")
+                        throw NativeReaderFormatError.tooManyScannedPages
                     }
                     pageText = try autoreleasepool { try ocrPDFPage(pdf, at: index) }
                 }
@@ -185,7 +196,7 @@ enum NativeReaderFormats {
             onPage?(1, 1)
             text = try autoreleasepool { try recognizeText(in: data) }
         case "html", "htm", "rtf":
-            text = NativeDocumentText.extract(data, from: url)
+            text = NativeDocumentText.extract(data, from: namedURL)
             if ext != "rtf", let html = String(data: data, encoding: .utf8) {
                 textLinks = Self.textLinks(in: html, extracted: text)
             }
@@ -223,17 +234,18 @@ enum NativeReaderFormats {
 
     /// Guarda el archivo importado sin modificar su nombre ni su formato.
     /// La copia permanece dentro del contenedor de la aplicación para compartirla después.
-    static func storeOriginal(_ source: URL, documentID: UUID) throws -> String {
+    static func storeOriginal(_ source: URL, documentID: UUID, filename: String? = nil) throws -> String {
         let directory = supportDirectory
             .appendingPathComponent("ReaderOriginals", isDirectory: true)
             .appendingPathComponent(documentID.uuidString, isDirectory: true)
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
-        let filename = source.lastPathComponent
-        guard !filename.isEmpty, filename != ".", filename != ".." else {
+        let filename = filename ?? source.lastPathComponent
+        guard !filename.isEmpty, filename != ".", filename != "..",
+              !filename.contains("/"), !filename.contains("\0") else {
             throw NativeReaderFormatError.invalidArchive
         }
         let destination = directory.appendingPathComponent(filename, isDirectory: false)
-        try FileManager.default.copyItem(at: source, to: destination)
+        try copyWithStorageCheck(source, to: destination)
         return "ReaderOriginals/\(documentID.uuidString)/\(filename)"
     }
 
@@ -260,10 +272,32 @@ enum NativeReaderFormats {
         return dir
     }
 
-    private static func storeMedia(_ source: URL, documentID: UUID) throws -> String {
+    private static func requireStorage(_ bytes: UInt64, at directory: URL) throws {
+        let attributes = try FileManager.default.attributesOfFileSystem(forPath: directory.path)
+        guard let free = attributes[.systemFreeSize] as? NSNumber,
+              free.uint64Value >= bytes,
+              free.uint64Value - bytes >= 16_000_000 else {
+            throw NativeReaderFormatError.insufficientStorage
+        }
+    }
+
+    private static func copyWithStorageCheck(_ source: URL, to destination: URL) throws {
+        let size = try source.resourceValues(forKeys: [.fileSizeKey]).fileSize
+        guard let size, size >= 0 else { throw CocoaError(.fileReadUnknown) }
+        try requireStorage(UInt64(size), at: destination.deletingLastPathComponent())
+        try FileManager.default.copyItem(at: source, to: destination)
+    }
+
+    private static func storeMedia(_ source: URL, documentID: UUID,
+                                   extension ext: String? = nil, move: Bool = false) throws -> String {
         let dir = try mediaDirectory(for: documentID)
-        let name = UUID().uuidString + "." + source.pathExtension.lowercased()
-        try FileManager.default.copyItem(at: source, to: dir.appendingPathComponent(name))
+        let name = UUID().uuidString + "." + (ext ?? source.pathExtension.lowercased())
+        let destination = dir.appendingPathComponent(name)
+        if move {
+            try FileManager.default.moveItem(at: source, to: destination)
+        } else {
+            try copyWithStorageCheck(source, to: destination)
+        }
         return "ReaderMedia/\(documentID.uuidString)/\(name)"
     }
 
@@ -372,7 +406,7 @@ enum NativeReaderFormats {
             .appendingPathComponent("reader-\(UUID().uuidString)", isDirectory: true)
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: directory) }
-        var paths: [String] = []
+        var members: [(Entry, String)] = []
         var total: Int64 = 0
         var entries = 0
         var extractedPaths: Set<String> = []
@@ -380,33 +414,73 @@ enum NativeReaderFormats {
         // sum of uncompressed entries, not only the compressed file size.
         let sizeLimit: Int64 = (ext == "zip" || ext == "daisy") ? 750_000_000 : 250_000_000
         var scannedEntries = 0
+        var textBytes: UInt64 = 0
+        let parsedExtensions: Set<String> = ["html", "htm", "xhtml", "xml", "opf", "ncx", "smil"]
         for entry in archive {
             // Count directories and rejected members too: otherwise a malformed
             // archive can consume unbounded enumeration time without extracting files.
+            try Task.checkCancellation()
             scannedEntries += 1
             guard scannedEntries <= 8000 else { throw NativeReaderFormatError.oversizedArchive }
-            let path = entry.path.replacingOccurrences(of: "\\", with: "/")
-            guard !path.isEmpty, !path.hasPrefix("/"),
-                  !path.split(separator: "/").contains(".."),
-                  !path.contains(":"), entry.type == .file else { continue }
+            let rawPath = entry.path.replacingOccurrences(of: "\\", with: "/")
+            let components = rawPath.split(separator: "/")
+            guard !components.isEmpty, !rawPath.hasPrefix("/"),
+                  !components.contains(".."), !rawPath.contains(":"),
+                  !rawPath.contains("\0"), entry.type == .file else { continue }
+            let path = components.filter { $0 != "." }.joined(separator: "/")
+            guard !path.isEmpty else { continue }
             entries += 1
             guard entries <= 4000,
                   // Two ZIP members with the same path (or just casing
                   // differences on iOS) must never overwrite one another.
-                  extractedPaths.insert(path.lowercased()).inserted,
+                  extractedPaths.insert(path.precomposedStringWithCanonicalMapping.lowercased()).inserted,
                   // Check BEFORE adding: a crafted ZIP header may claim an
                   // enormous uncompressedSize that overflows Int64.
                   entry.uncompressedSize <= UInt64(sizeLimit - total)
             else { throw NativeReaderFormatError.oversizedArchive }
+            if parsedExtensions.contains(URL(fileURLWithPath: path).pathExtension.lowercased()) {
+                guard entry.uncompressedSize <= 32 * 1024 * 1024,
+                      entry.uncompressedSize <= 128 * 1024 * 1024 - textBytes else {
+                    throw NativeReaderFormatError.oversizedArchive
+                }
+                textBytes += entry.uncompressedSize
+            }
             total += Int64(entry.uncompressedSize)
+            members.append((entry, path))
+        }
+        let originalSize = try url.resourceValues(forKeys: [.fileSizeKey]).fileSize
+        guard let originalSize, originalSize >= 0 else { throw CocoaError(.fileReadUnknown) }
+        let (needed, overflow) = UInt64(total).addingReportingOverflow(UInt64(originalSize))
+        guard !overflow else { throw NativeReaderFormatError.oversizedArchive }
+        try requireStorage(needed, at: directory)
+        for (entry, path) in members {
+            try Task.checkCancellation()
             let target = directory.appendingPathComponent(path)
             try FileManager.default.createDirectory(
                 at: target.deletingLastPathComponent(), withIntermediateDirectories: true
             )
-            _ = try archive.extract(entry, to: target)
-            paths.append(path)
+            guard FileManager.default.createFile(atPath: target.path, contents: nil) else {
+                throw CocoaError(.fileWriteUnknown)
+            }
+            let output = try FileHandle(forWritingTo: target)
+            defer { try? output.close() }
+            var written: UInt64 = 0
+            let checksum = try archive.extract(entry) { chunk in
+                try Task.checkCancellation()
+                guard UInt64(chunk.count) <= entry.uncompressedSize - written else {
+                    throw NativeReaderFormatError.oversizedArchive
+                }
+                try output.write(contentsOf: chunk)
+                written += UInt64(chunk.count)
+            }
+            guard written == entry.uncompressedSize, checksum == entry.checksum else {
+                throw NativeReaderFormatError.invalidArchive
+            }
+            try output.close()
         }
-        let all = paths.sorted { $0.localizedStandardCompare($1) == .orderedAscending }
+        let all = members.map { $0.1 }.sorted {
+            $0.localizedStandardCompare($1) == .orderedAscending
+        }
         func extractedText(_ path: String) -> String {
             let file = directory.appendingPathComponent(path)
             guard let data = try? Data(contentsOf: file) else { return "" }
@@ -628,7 +702,8 @@ enum NativeReaderFormats {
                 }
             }
             for path in audioFiles {
-                let copy = try storeMedia(directory.appendingPathComponent(path), documentID: documentID)
+                try Task.checkCancellation()
+                let copy = try storeMedia(directory.appendingPathComponent(path), documentID: documentID, move: true)
                 media.append(copy)
             }
         }

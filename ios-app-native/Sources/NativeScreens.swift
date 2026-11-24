@@ -86,6 +86,17 @@ struct NativeHomeScreen: View {
     @State private var lastPodcastProgressEpisodeID = ""
     @State private var lastPodcastProgressSeconds = 0.0
 
+    private func processSharedContent() {
+        let receivedMusic = inbox.importPendingMusicContent()
+        Task {
+            await inbox.importPendingReaderContent(into: library)
+            if receivedMusic && inbox.readyToRead == nil {
+                navigationPath = NavigationPath()
+                navigationPath.append(NativeDestination.miMusica)
+            }
+        }
+    }
+
     private func openRequestedShortcut() {
         let defaults = UserDefaults.standard
         guard let route = defaults.string(forKey: NativeShortcutRoute.key) else { return }
@@ -315,19 +326,22 @@ struct NativeHomeScreen: View {
             .background(TifloVisual.canvas)
             .tifloScreenSurface()
             .navigationTitle("Inicio")
+            .safeAreaInset(edge: .bottom) {
+                if let progress = inbox.readerImportProgress {
+                    ProgressView {
+                        Text(progress)
+                    }
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(.regularMaterial)
+                }
+            }
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(item: $inbox.readyToRead) { document in
                 NativeReadingScreen(document: document, speech: sharedReadingSpeech)
             }
             .onAppear {
-                let receivedMusic = inbox.importPendingMusicContent()
-                inbox.importPendingReaderContent(into: library)
-                // An explicit music choice from Share leads to Mi música,
-                // unless a newly imported document is already opening.
-                if receivedMusic && inbox.readyToRead == nil {
-                    navigationPath = NavigationPath()
-                    navigationPath.append(NativeDestination.miMusica)
-                }
+                processSharedContent()
                 openRequestedShortcut()
             }
             .onReceive(NotificationCenter.default.publisher(for: .nativeShortcutRouteRequested)) { _ in
@@ -335,12 +349,7 @@ struct NativeHomeScreen: View {
             }
             .onChange(of: scenePhase) { _, phase in
                 if phase == .active {
-                    let receivedMusic = inbox.importPendingMusicContent()
-                    inbox.importPendingReaderContent(into: library)
-                    if receivedMusic && inbox.readyToRead == nil {
-                        navigationPath = NavigationPath()
-                        navigationPath.append(NativeDestination.miMusica)
-                    }
+                    processSharedContent()
                     openRequestedShortcut()
                 }
             }

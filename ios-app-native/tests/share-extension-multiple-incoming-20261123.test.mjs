@@ -34,7 +34,7 @@ test('batch manifests preserve an original order and individual audio destinatio
   assert.match(inbox, /let batchID: String\?/);
   assert.match(inbox, /let batchIndex: String\?/);
   assert.match(inbox, /return a > b/);
-  assert.match(inbox, /let oldToNew = items\.reversed\(\)/);
+  assert.match(inbox, /let pending = items\.reversed\(\)\.filter/);
 });
 
 test('single incoming files keep immediate preview and destination controls', () => {

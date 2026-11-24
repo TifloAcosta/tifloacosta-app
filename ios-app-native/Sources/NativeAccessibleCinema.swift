@@ -81,12 +81,12 @@ private struct AccessibleCinemaSource: Identifiable {
 /// never publish a personally shared Drive link in a public source repository.
 private enum AccessibleCinemaDirectory {
     static let sources: [AccessibleCinemaSource] = [
-        .init(id: "audesc-es", name: "Audesc España",
+        .init(id: "audesc-es", name: "Universo Audesc España",
               languages: [.spain], kinds: [.film, .series, .documentary, .short],
               address: nil, access: "Enlace oficial pendiente de incorporación segura.",
               description: "Biblioteca de películas, series, documentales y cortometrajes audiodescritos.",
               geographicNotice: "", isAudioOnly: true),
-        .init(id: "audesc-latino", name: "Audesc Latino",
+        .init(id: "audesc-latino", name: "Universo Audesc Latina",
               languages: [.latino], kinds: [.film, .series, .documentary],
               address: nil, access: "Enlace oficial pendiente de incorporación segura.",
               description: "Biblioteca con audiodescripción y voces del ámbito latinoamericano.",

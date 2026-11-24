@@ -425,6 +425,11 @@ struct NativeAccessibleCinemaScreen: View {
                                     .frame(minHeight: 44, alignment: .leading)
                             }
                         }
+                        if source.id == "movies-for-the-blind" {
+                            NavigationLink("Explorar catálogo audiodescrito") {
+                                NativeMoviesForTheBlindScreen()
+                            }
+                        }
                         if source.id == "audiocinemateca" {
                             NavigationLink("Explorar catálogo audiodescrito") {
                                 NativeAudiocinematecaBrowser()

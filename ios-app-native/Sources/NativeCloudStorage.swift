@@ -205,13 +205,41 @@ final class NativeCloudStorage {
         return NativeCloudItem(id: id, name: name, isFolder: folder, size: bytes, provider: provider)
     }
 
+    /// Cinema can handle larger authorized audio/video works without changing the
+    /// 250 MiB music import ceiling. Returns a private temporary file only.
+    /// The caller must clean up after playback. This is a full-file download,
+    /// not progressive streaming; never describe it as instantaneous playback.
+    func downloadCinema(_ item: NativeCloudItem, allowsCellular: Bool = true) async throws -> URL {
+        try await downloadItem(
+            item,
+            allowsCellular: allowsCellular,
+            permittedExtensions: ["mp3", "m4a", "m4b", "aac", "wav", "aif",
+                                  "aiff", "caf", "flac", "mp4", "m4v", "mov"],
+            limit: 2_000_000_000
+        )
+    }
+
     /// A temporary file is returned; the consumer must explicitly import or discard it.
     func download(_ item: NativeCloudItem, allowsCellular: Bool = true) async throws -> URL {
+        try await downloadItem(
+            item,
+            allowsCellular: allowsCellular,
+            permittedExtensions: ["mp3", "m4a", "aac", "wav", "flac", "ogg"],
+            limit: Self.maximumAudioBytes
+        )
+    }
+
+    private func downloadItem(
+        _ item: NativeCloudItem,
+        allowsCellular: Bool,
+        permittedExtensions: Set<String>,
+        limit: Int64
+    ) async throws -> URL {
         guard item.provider == provider, !item.isFolder,
-              ["mp3", "m4a", "aac", "wav", "flac", "ogg"].contains((item.name as NSString).pathExtension.lowercased()) else {
+              permittedExtensions.contains((item.name as NSString).pathExtension.lowercased()) else {
             throw NativeCloudStorageError.unsupportedFile
         }
-        if let size = item.size, size > Self.maximumAudioBytes { throw NativeCloudStorageError.oversized }
+        if let size = item.size, size > limit { throw NativeCloudStorageError.oversized }
         var request: URLRequest
         switch provider {
         case .googleDrive:
@@ -231,7 +259,7 @@ final class NativeCloudStorage {
         let (temporary, response) = try await session.download(for: request)
         _ = try validated(response, allowDownloadHost: provider == .oneDrive)
         let size = (try FileManager.default.attributesOfItem(atPath: temporary.path)[.size] as? NSNumber)?.int64Value ?? 0
-        guard size > 0, size <= Self.maximumAudioBytes else { throw NativeCloudStorageError.oversized }
+        guard size > 0, size <= limit else { throw NativeCloudStorageError.oversized }
         let ext = (item.name as NSString).pathExtension.lowercased()
         // Keep the title shown in the user's library; isolate the remote filename
         // under an unpredictable local directory rather than trusting its path.

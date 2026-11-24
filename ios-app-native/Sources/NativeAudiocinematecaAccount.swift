@@ -60,7 +60,7 @@ struct NativeAudiocinematecaAccountScreen: View {
         Form {
             Section("Cuenta de Audiocinemateca") {
                 if saved {
-                    Text("Credenciales guardadas en este dispositivo. Acceso al catálogo pendiente de validación.")
+                    Text("Credenciales guardadas de forma segura.")
                     Button("Olvidar credenciales", role: .destructive) {
                         confirmRemove = true
                     }

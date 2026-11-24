@@ -1,0 +1,21 @@
+name: Diagnóstico de catálogos públicos Multicines
+on:
+  push:
+    branches:
+      - development/next-public-1.6-500200-20261121
+    paths:
+      - '.github/workflows/cinema-public-drive-probe.yml'
+      - 'ios-app-native/scripts/probe-cinema-public-drive.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  public-drive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Consultar catálogos sin OAuth y comprobar Range
+        env:
+          TIFLO_CINEMA_PUBLIC_DRIVE_API_KEY: ${{ secrets.TIFLO_CINEMA_PUBLIC_DRIVE_API_KEY }}
+        run: python3 ios-app-native/scripts/probe-cinema-public-drive.py

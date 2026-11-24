@@ -61,49 +61,52 @@ enum NativeDocumentConversion {
         let filename = URL(fileURLWithPath: input.filename).lastPathComponent
         let stem = input.format.isEmpty ? filename : (filename as NSString).deletingPathExtension
         let safeStem = stem.isEmpty || stem == "." || stem == ".." ? "document" : stem
-        let output = destination.appendingPathComponent(safeStem).appendingPathExtension(format.fileExtension)
-        try FileManager.default.createDirectory(at: destination, withIntermediateDirectories: true)
-        do {
-            if format == .txt || (format == .md && ["md", "markdown"].contains(input.format)) {
-                try Data(input.text.utf8).write(to: output, options: .atomic)
-            } else {
-                let markup: NativeConversionMarkup.Document?
-                do {
-                    markup = try NativeConversionMarkup.read(input, for: format)
-                } catch is CancellationError {
-                    throw CancellationError()
-                } catch {
-                    markup = nil
-                }
-                let paragraphs = try parse(input) { onProgress($0 * 0.6) }
-                onProgress(0.6)
-                let title = xml(input.title)
-                switch format {
-                case .txt: break
-                case .md: try write(try markdown(paragraphs), to: output)
-                case .rtf: try write(try rtf(paragraphs, title: input.title), to: output)
-                case .html:
-                    let contents = try markup?.xhtml() ?? xhtml(paragraphs, title: title)
-                    try write("<!DOCTYPE html>\n" + contents, to: output)
-                case .epub: try epub(paragraphs, title: title, markup: markup, output: output)
-                case .docx: try docx(paragraphs, title: title, output: output)
-                case .odt: try odt(paragraphs, title: title, markup: markup, output: output)
-                case .fb2: try fb2(paragraphs, title: title, output: output)
-                case .daisy: try daisy(paragraphs, title: title, markup: markup, output: output)
-                case .daisy3: try daisy3(paragraphs, title: title, markup: markup, output: output)
-                case .pdf: try pdf(paragraphs, title: input.title, markup: markup, output: output) { onProgress(0.6 + $0 * 0.4) }
-                }
+        let finalURL = destination.appendingPathComponent(safeStem).appendingPathExtension(format.fileExtension)
+        let files = FileManager.default
+        try files.createDirectory(at: destination, withIntermediateDirectories: true)
+        let staging = destination.appendingPathComponent(".conversion-" + UUID().uuidString, isDirectory: true)
+        try files.createDirectory(at: staging, withIntermediateDirectories: false)
+        defer { try? files.removeItem(at: staging) }
+        let output = staging.appendingPathComponent(finalURL.lastPathComponent)
+
+        if format == .txt || (format == .md && ["md", "markdown"].contains(input.format)) {
+            try Data(input.text.utf8).write(to: output, options: .atomic)
+        } else {
+            let markup: NativeConversionMarkup.Document?
+            do {
+                markup = try NativeConversionMarkup.read(input, for: format)
+            } catch is CancellationError {
+                throw CancellationError()
+            } catch {
+                markup = nil
             }
-            try Task.checkCancellation()
-            guard try output.resourceValues(forKeys: [.fileSizeKey]).fileSize ?? 0 > 0 else {
-                throw Failure.invalidOutput
+            let usesOnlyMarkup = markup != nil && [.html, .epub, .odt].contains(format)
+            let paragraphs = usesOnlyMarkup ? [] : try parse(input) { onProgress($0 * 0.6) }
+            onProgress(0.6)
+            let title = xml(input.title)
+            switch format {
+            case .txt: break
+            case .md: try write(try markdown(paragraphs), to: output)
+            case .rtf: try write(try rtf(paragraphs, title: input.title), to: output)
+            case .html:
+                let contents = try markup?.xhtml() ?? xhtml(paragraphs, title: title)
+                try write("<!DOCTYPE html>\n" + contents, to: output)
+            case .epub: try epub(paragraphs, title: title, markup: markup, output: output)
+            case .docx: try docx(paragraphs, title: title, output: output)
+            case .odt: try odt(paragraphs, title: title, markup: markup, output: output)
+            case .fb2: try fb2(paragraphs, title: title, output: output)
+            case .daisy: try daisy(paragraphs, title: title, markup: markup, output: output)
+            case .daisy3: try daisy3(paragraphs, title: title, markup: markup, output: output)
+            case .pdf: try pdf(paragraphs, title: input.title, markup: markup, output: output) { onProgress(0.6 + $0 * 0.39) }
             }
-            onProgress(1)
-            return output
-        } catch {
-            try? FileManager.default.removeItem(at: output)
-            throw error
         }
+        try Task.checkCancellation()
+        guard try output.resourceValues(forKeys: [.fileSizeKey]).fileSize ?? 0 > 0 else {
+            throw Failure.invalidOutput
+        }
+        try files.moveItem(at: output, to: finalURL)
+        onProgress(1)
+        return finalURL
     }
 
     private static func parse(_ input: NativeConversionSource, onProgress: (Double) -> Void) throws -> [Paragraph] {
@@ -631,7 +634,7 @@ enum NativeDocumentConversion {
             CTFrameGetLineOrigins(frame, CFRange(location: 0, length: 0), &origins)
             var openParagraph: Int?
             for (line, origin) in zip(lines, origins) {
-                try Task.checkCancellation()
+                if Task.isCancelled { break }
                 let range = CTLineGetStringRange(line)
                 while paragraphIndex + 1 < paragraphStarts.count,
                       paragraphStarts[paragraphIndex + 1] <= range.location { paragraphIndex += 1 }
@@ -675,6 +678,7 @@ enum NativeDocumentConversion {
             }
             if openParagraph != nil { CGPDFContextEndTag(context) }
             context.endPDFPage()
+            try Task.checkCancellation()
             offset += visible.length
             onProgress(Double(offset) / Double(text.length))
         }

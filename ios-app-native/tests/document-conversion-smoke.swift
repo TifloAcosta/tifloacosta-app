@@ -147,6 +147,27 @@ struct DocumentConversionSmoke {
         let didCancel = try await cancelled.value
         precondition(didCancel && !FileManager.default.fileExists(atPath: root.appendingPathComponent("cancelled").path))
 
+        let badZIP = root.appendingPathComponent("Dañado.epub")
+        try Data([0x50, 0x4b, 0x03, 0x04]).write(to: badZIP)
+        let damaged = NativeConversionSource(filename: badZIP.lastPathComponent, title: "Dañado",
+            format: "epub", text: "Texto disponible en la biblioteca", links: [], original: badZIP)
+        let fallbackHTML = try NativeDocumentConversion.convert(damaged, to: .html,
+            in: root.appendingPathComponent("damaged"))
+        let fallbackText = try String(contentsOf: fallbackHTML, encoding: .utf8)
+        precondition(fallbackText.contains("Texto disponible en la biblioteca"))
+
+        let collision = root.appendingPathComponent("collision", isDirectory: true)
+        try FileManager.default.createDirectory(at: collision, withIntermediateDirectories: true)
+        let existing = collision.appendingPathComponent("Largo.txt")
+        try "Original intacto".write(to: existing, atomically: true, encoding: .utf8)
+        do {
+            _ = try NativeDocumentConversion.convert(longInput, to: .txt, in: collision)
+            fatalError("The converter overwrote an existing destination")
+        } catch {}
+        let remaining = try FileManager.default.contentsOfDirectory(atPath: collision.path)
+        let original = try String(contentsOf: existing, encoding: .utf8)
+        precondition(original == "Original intacto" && remaining == ["Largo.txt"])
+
         let xhtml = root.appendingPathComponent("Original.xhtml")
         let png = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9Zr9kAAAAASUVORK5CYII="
         try """

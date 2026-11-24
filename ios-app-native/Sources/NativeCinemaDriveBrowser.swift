@@ -59,7 +59,7 @@ struct NativeCinemaDriveBrowser: View {
                     }
                     .disabled(loading || downloadingID != nil)
                     if !folders.isEmpty {
-                        Text("Carpeta: " + folders.map(\.name).joined(separator: " / "))
+                        Text(MusicLocalized.message("Carpeta: ") + folders.map(\.name).joined(separator: " / "))
                             .font(.subheadline)
                         if folders.count > 1 {
                             Button("Volver a la carpeta anterior") {
@@ -95,7 +95,7 @@ struct NativeCinemaDriveBrowser: View {
                     }
                     ForEach(shownFiles) { item in
                         if item.isFolder {
-                            Button("Abrir carpeta: " + item.name) {
+                            Button(MusicLocalized.message("Abrir carpeta: ") + item.name) {
                                 folders.append(item)
                                 search = ""
                                 Task { await loadFolder(reset: true) }
@@ -103,8 +103,8 @@ struct NativeCinemaDriveBrowser: View {
                             .disabled(loading || downloadingID != nil)
                         } else {
                             Button(downloadingID == item.id
-                                ? "Descargando: " + item.name
-                                : "Descargar temporalmente y reproducir: " + item.name) {
+                                ? MusicLocalized.message("Descargando: ") + item.name
+                                : MusicLocalized.message("Descargar temporalmente y reproducir: ") + item.name) {
                                 Task { await loadAndPlay(item) }
                             }
                             .disabled(loading || downloadingID != nil)
@@ -179,7 +179,7 @@ struct NativeCinemaDriveBrowser: View {
         if accounts.connected.contains(.googleDrive) {
             await loadFolder(reset: true)
         } else {
-            message = "Vuelve a elegir la carpeta para autorizar el acceso con Google Drive."
+            message = MusicLocalized.message("Vuelve a elegir la carpeta para autorizar el acceso con Google Drive.")
         }
     }
 
@@ -191,7 +191,7 @@ struct NativeCinemaDriveBrowser: View {
             let selected = try await accounts.selectGoogleDriveFiles()
             guard let folder = selected.first(where: \.isFolder) else {
                 // Picker may offer individual files; do not treat one as a folder.
-                message = "Selecciona una carpeta en Google Drive, no un archivo."
+                message = MusicLocalized.message("Selecciona una carpeta en Google Drive, no un archivo.")
                 return
             }
             folders = [folder]
@@ -201,7 +201,7 @@ struct NativeCinemaDriveBrowser: View {
             message = nil
             loading = false
             await loadFolder(reset: true)
-            UIAccessibility.post(notification: .announcement, argument: "Carpeta seleccionada: " + folder.name)
+            UIAccessibility.post(notification: .announcement, argument: MusicLocalized.message("Carpeta seleccionada: ") + folder.name)
         } catch is CancellationError {
             // Cancellation is not an authorization error.
         } catch {
@@ -220,23 +220,24 @@ struct NativeCinemaDriveBrowser: View {
             if reset { files = page.items } else { files.append(contentsOf: page.items) }
             nextCursor = page.nextCursor
             message = nil
-            UIAccessibility.post(notification: .announcement, argument: "\(files.count) elementos en " + folder.name)
+            UIAccessibility.post(notification: .announcement, argument: MusicLocalized.format("%d elementos en %@", files.count, folder.name))
         } catch {
             // No fallback to broad Drive scopes or undocumented public sharing.
             nextCursor = nil
-            alertMessage = "No se pudo leer esta carpeta con los permisos actuales de Google Drive. " +
-                "Vuelve a elegirla con Google Picker o consulta el enlace original. " + error.localizedDescription
+            alertMessage = MusicLocalized.message("No se pudo leer esta carpeta con los permisos actuales de Google Drive. ") +
+                MusicLocalized.message("Vuelve a elegirla con Google Picker o consulta el enlace original. ") + error.localizedDescription
         }
     }
 
     private func loadAndPlay(_ item: NativeCloudItem) async {
         guard downloadingID == nil, !loading else { return }
         guard network.canDownload(allowCellular: allowCellularDownloads) else {
-            alertMessage = "La descarga está limitada a Wi-Fi. Activa los datos móviles si quieres permitirla."
+            alertMessage = MusicLocalized.message("La descarga está limitada a Wi-Fi. Activa los datos móviles si quieres permitirla.")
             return
         }
         downloadingID = item.id
-        message = "Descargando " + item.name + ". La reproducción comenzará al terminar."
+        message = MusicLocalized.message("Descargando ") + item.name +
+            MusicLocalized.message(". La reproducción comenzará al terminar.")
         defer { downloadingID = nil }
         var temporary: URL?
         do {
@@ -250,7 +251,7 @@ struct NativeCinemaDriveBrowser: View {
                 library: personalLibrary
             )
             temporary = nil // NativeCinemaAudioPlayer owns file and cleanup.
-            message = "Reproduciendo: " + item.name
+            message = MusicLocalized.message("Reproduciendo: ") + item.name
             UIAccessibility.post(notification: .announcement, argument: message)
         } catch {
             if let temporary {

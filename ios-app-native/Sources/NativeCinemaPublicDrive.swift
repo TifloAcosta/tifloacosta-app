@@ -29,7 +29,7 @@ struct NativeCinemaPublicDrivePage {
 
 enum NativeCinemaPublicDriveError: LocalizedError {
     case unconfigured, invalidFolder, badResponse, denied, noLongerAvailable,
-         unavailable, oversized, unsupported, invalidShortcut
+         unavailable, oversized, unsupported
 
     var errorDescription: String? {
         switch self {
@@ -49,8 +49,6 @@ enum NativeCinemaPublicDriveError: LocalizedError {
             return MusicLocalized.message("El archivo supera el tamaño máximo permitido de 2 GB.")
         case .unsupported:
             return MusicLocalized.message("Este formato no se puede reproducir desde Google Drive.")
-        case .invalidShortcut:
-            return MusicLocalized.message("No se ha podido recuperar la carpeta oficial de FOAL.")
         }
     }
 }
@@ -62,22 +60,6 @@ private final class NativeCinemaPublicDriveRedirects: NSObject, URLSessionTaskDe
                     completionHandler: @escaping (URLRequest?) -> Void) {
         // Do not send API keys to any Google Drive download redirection host.
         completionHandler(nil)
-    }
-}
-
-private final class NativeCinemaFOALRedirects: NSObject, URLSessionTaskDelegate {
-    func urlSession(_ session: URLSession, task: URLSessionTask,
-                    willPerformHTTPRedirection response: HTTPURLResponse,
-                    newRequest request: URLRequest,
-                    completionHandler: @escaping (URLRequest?) -> Void) {
-        let hosts: Set<String> = ["bit.ly", "drive.google.com"]
-        guard let next = request.url,
-              next.scheme == "https",
-              hosts.contains(next.host?.lowercased() ?? "") else {
-            completionHandler(nil)
-            return
-        }
-        completionHandler(request)
     }
 }
 
@@ -284,44 +266,4 @@ final class NativeCinemaPublicDrive {
         }
     }
 
-    /// FOAL publicly publishes two bit.ly links that point to Drive folders.
-    /// Resolve only those exact official shortcuts, never an arbitrary redirect
-    /// from user-supplied text. No key, bearer token or cookies are sent.
-    static func resolveFOAL(collection: String) async throws -> NativeCinemaPublicDriveEntry {
-        let address: String
-        switch collection {
-        case "foal-films": address = "https://bit.ly/2yMtJrk"
-        case "foal-game-of-thrones": address = "https://bit.ly/3bND3dg"
-        default: throw NativeCinemaPublicDriveError.invalidShortcut
-        }
-        let config = URLSessionConfiguration.ephemeral
-        let session = URLSession(
-            configuration: config, delegate: NativeCinemaFOALRedirects(),
-            delegateQueue: nil
-        )
-        var request = URLRequest(url: URL(string: address)!)
-        request.httpMethod = "HEAD"
-        request.timeoutInterval = 15
-        let (_, response) = try await session.data(for: request)
-        guard let target = response.url, target.scheme == "https",
-              target.host == "drive.google.com" else {
-            throw NativeCinemaPublicDriveError.invalidShortcut
-        }
-        let pathParts = target.pathComponents
-        guard let folderIndex = pathParts.firstIndex(of: "folders"),
-              folderIndex + 1 < pathParts.count,
-              Self.isValidID(pathParts[folderIndex + 1]) else {
-            throw NativeCinemaPublicDriveError.invalidShortcut
-        }
-        let id = pathParts[folderIndex + 1]
-        let resourceKey = URLComponents(url: target, resolvingAgainstBaseURL: false)?
-            .queryItems?.first(where: { $0.name == "resourcekey" })?.value
-        return NativeCinemaPublicDriveEntry(
-            id: id,
-            name: collection == "foal-films" ? "50 películas con audiodescripción" :
-                "Juego de Tronos, ocho temporadas",
-            isFolder: true, size: nil,
-            resourceKey: resourceKey.flatMap { Self.isValidID($0) ? $0 : nil }
-        )
-    }
 }

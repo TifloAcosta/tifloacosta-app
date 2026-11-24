@@ -13,8 +13,8 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self,*args,**kwargs): return None
 opener = urllib.request.build_opener(NoRedirect())
 def request(path, params, keys, media=False):
-    url = "https://www.googleapis.com/drive/v3/files"+path+"?"+urllib.parse.urlencode(params)
-    headers={"X-Ios-Bundle-Identifier":"com.tifloacosta.app","X-Goog-Api-Key":key}
+    url = "https://www.googleapis.com/drive/v3/files"+path+"?"+urllib.parse.urlencode({**params,"key":key})
+    headers={"X-Ios-Bundle-Identifier":"com.tifloacosta.app"}
     if keys: headers["X-Goog-Drive-Resource-Keys"]=",".join(keys)
     if media: headers["Range"]="bytes=0-4095"
     try:

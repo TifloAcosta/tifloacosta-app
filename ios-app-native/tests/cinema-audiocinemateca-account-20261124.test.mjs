@@ -9,7 +9,8 @@ test('Audiocinemateca credentials are device-only and never reported as authenti
   assert.match(account,/SecItemDelete/);
   assert.match(account,/SecureField/);
   assert.match(account,/textContentType\(\.password\)/);
-  assert.match(account,/Acceso al catálogo pendiente de validación/);
+  assert.match(account,/Credenciales guardadas de forma segura/);
+  assert.doesNotMatch(account,/Acceso al catálogo pendiente de validación/);
   assert.doesNotMatch(account,/UserDefaults|AppStorage|print\(/);
   assert.match(read('NativeAccessibleCinema.swift'),/NativeAudiocinematecaBrowser\(\)/);
   assert.match(read('NativeAudiocinematecaBrowser.swift'),/NativeAudiocinematecaAccountScreen\(\)/);

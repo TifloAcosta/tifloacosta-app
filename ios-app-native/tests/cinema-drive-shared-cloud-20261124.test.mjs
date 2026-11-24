@@ -24,7 +24,7 @@ test('folder selection is explicit and local; browsing paginates subfolders and 
   assert.match(browser, /UserDefaults\.standard\.set\(folder\.id, forKey: storedFolderKey\)/);
   assert.match(browser, /storage\.listFolder\(id: folder\.id, cursor: reset \? nil : nextCursor\)/);
   assert.match(browser, /files\.append\(contentsOf: page\.items\)/);
-  assert.match(browser, /Button\("Abrir carpeta: " \+ item\.name\)/);
+  assert.match(browser, /Button\(MusicLocalized\.message\("Abrir carpeta: "\) \+ item\.name\)/);
   assert.match(browser, /Button\("Volver a la carpeta anterior"\)/);
   assert.match(browser, /Button\("Actualizar esta carpeta"\)/);
   assert.match(browser, /Vuelve a elegir la carpeta para autorizar el acceso/);

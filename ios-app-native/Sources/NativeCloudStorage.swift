@@ -225,7 +225,7 @@ final class NativeCloudStorage {
             item,
             allowsCellular: allowsCellular,
             permittedExtensions: ["mp3", "m4a", "aac", "wav", "flac", "ogg"],
-            limit: Self.maximumAudioBytes
+            limit: Int64(Self.maximumAudioBytes)
         )
     }
 
@@ -260,7 +260,6 @@ final class NativeCloudStorage {
         _ = try validated(response, allowDownloadHost: provider == .oneDrive)
         let size = (try FileManager.default.attributesOfItem(atPath: temporary.path)[.size] as? NSNumber)?.int64Value ?? 0
         guard size > 0, size <= limit else { throw NativeCloudStorageError.oversized }
-        let ext = (item.name as NSString).pathExtension.lowercased()
         // Keep the title shown in the user's library; isolate the remote filename
         // under an unpredictable local directory rather than trusting its path.
         let folder = FileManager.default.temporaryDirectory

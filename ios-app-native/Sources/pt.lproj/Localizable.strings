@@ -1383,3 +1383,16 @@
 "Credenciales retiradas de este dispositivo." = "Credenciais removidas deste dispositivo.";
 "No se pudieron retirar las credenciales." = "Não foi possível remover as credenciais.";
 "Tu cuenta de Audiocinemateca seguirá existiendo." = "A sua conta da Audiocinemateca continuará a existir.";
+
+"Actualizar catálogo" = "Atualizar catálogo";
+"Actualizando catálogo" = "A atualizar catálogo";
+"Resultados: %d" = "Resultados: %d";
+"Cargar más resultados" = "Carregar mais resultados";
+"Buscar obras" = "Pesquisar obras";
+"Audiocinemateca ha rechazado el acceso. Revisa tu cuenta." = "A Audiocinemateca recusou o acesso. Verifique a sua conta.";
+"No se ha podido actualizar el catálogo." = "Não foi possível atualizar o catálogo.";
+"Ficha de la obra" = "Ficha da obra";
+"Temporada %@" = "Temporada %@";
+"Episodio %@: %@" = "Episódio %@: %@";
+"Partes de la obra" = "Partes da obra";
+"Parte %@" = "Parte %@";

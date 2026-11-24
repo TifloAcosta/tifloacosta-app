@@ -1337,3 +1337,26 @@
 "Reproduciendo: " = "Lecture : ";
 "Elegir carpeta autorizada" = "Choisir un dossier autorisé";
 "Carpeta seleccionada" = "Dossier sélectionné";
+
+// Multicines: public Google Drive catalogues and authorized progressive playback.
+"Biblioteca de audiodescripción" = "Bibliothèque d'audiodescription";
+"Obras disponibles" = "Œuvres disponibles";
+"No hay obras compatibles en esta carpeta." = "Aucune œuvre compatible dans ce dossier.";
+"No se ha podido abrir el catálogo público de esta fuente." = "Impossible d'ouvrir le catalogue public de cette source.";
+"Reintentar conexión" = "Réessayer la connexion";
+"Descargar temporalmente y reproducir" = "Télécharger temporairement et lire";
+"Las carpetas y los títulos se consultan directamente al proveedor. Los estrenos pueden desaparecer cuando venza su disponibilidad." = "Les dossiers et les titres sont consultés directement auprès du fournisseur. Les nouveautés peuvent disparaître à la fin de leur période de disponibilité.";
+"Reproducir: " = "Lire : ";
+"El catálogo público de Google Drive necesita terminar su configuración." = "La configuration du catalogue public Google Drive n'est pas terminée.";
+"El enlace a la carpeta no es válido." = "Le lien vers le dossier n'est pas valide.";
+"Google Drive ha devuelto un catálogo que no se puede leer." = "Google Drive a renvoyé un catalogue illisible.";
+"Google Drive no permite consultar esta obra con los permisos publicados." = "Google Drive ne permet pas d'accéder à cette œuvre avec les autorisations publiées.";
+"Esta obra ya no está disponible en el catálogo." = "Cette œuvre n'est plus disponible dans le catalogue.";
+"No se ha podido contactar con Google Drive." = "Impossible de joindre Google Drive.";
+"Este formato no se puede reproducir desde Google Drive." = "Ce format ne peut pas être lu depuis Google Drive.";
+"No se ha podido recuperar la carpeta oficial de FOAL." = "Impossible de récupérer le dossier officiel de FOAL.";
+"Explorar catálogo audiodescrito" = "Explorer le catalogue audiodécrit";
+"Los catálogos públicos se actualizan desde Google Drive cuando la conexión pública está configurada. También puedes elegir carpetas autorizadas con tu propia cuenta." = "Les catalogues publics sont mis à jour depuis Google Drive une fois l'accès public configuré. Vous pouvez aussi choisir des dossiers autorisés avec votre compte.";
+"FOAL, películas" = "FOAL, films";
+"FOAL, serie" = "FOAL, série";
+"Abrir carpeta original en Google Drive" = "Ouvrir le dossier d'origine dans Google Drive";

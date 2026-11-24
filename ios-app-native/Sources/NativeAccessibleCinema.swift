@@ -363,8 +363,7 @@ struct NativeAccessibleCinemaScreen: View {
                                     NavigationLink("Explorar catálogo audiodescrito") {
                                         NativeCinemaPublishedDriveBrowser(
                                             sourceID: source.id,
-                                            sourceName: MusicLocalized.message(source.name),
-                                            foalCollection: nil)
+                                            sourceName: MusicLocalized.message(source.name))
                                     }
                             }
                             NavigationLink("Explorar carpeta de Google Drive") {

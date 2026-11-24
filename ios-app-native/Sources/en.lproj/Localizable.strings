@@ -1406,3 +1406,5 @@
 "Películas gratuitas" = "Free films";
 
 "Animación" = "Animation";
+
+"Procesando página %d de %d: %@" = "Processing page %d of %d: %@";

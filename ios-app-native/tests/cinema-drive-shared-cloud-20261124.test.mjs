@@ -11,7 +11,7 @@ const library = read('NativeAccessibleCinemaLibrary.swift');
 
 test('Audesc España, Audesc Latino and FOAL reuse one authorized Drive explorer', () => {
   assert.match(screen, /\["audesc-es", "audesc-latino", "foal"\]\.contains\(source\.id\)/);
-  assert.match(screen, /NativeCinemaDriveBrowser\(sourceID: source\.id/);
+  assert.match(screen, /NativeCinemaDriveBrowser\(\s*sourceID: source\.id/);
   assert.match(browser, /NativeCloudAccountStore\.shared/);
   assert.match(browser, /NativeCloudStorage\(provider: \.googleDrive, accessToken: token\)/);
   assert.match(auth, /https:\/\/www\.googleapis\.com\/auth\/drive\.file/);

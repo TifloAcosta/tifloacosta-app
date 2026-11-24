@@ -49,7 +49,7 @@ struct NativeMoviesForTheBlindScreen: View {
     var body: some View {
         List {
             if let episode = player.episode, works.contains(where: { $0.parts.contains(where: { $0.id == episode.id }) }) {
-                Section("Reproductor de Podcast") {
+                Section("Reproductor") {
                     Text(episode.title)
                     Button(player.isPlaying ? "Pausar" : "Reproducir") { player.toggle() }
                     Button("Retroceder treinta segundos") { player.skip(-30) }

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-24T00:55:16.260Z",
+  "generatedAt": "2026-11-24T10:58:44.462Z",
   "resources": [
     {
       "kind": "resource",
@@ -5646,6 +5646,85 @@
   "news": [
     {
       "kind": "news",
+      "id": "engadget-9ac5b582127138fb:en",
+      "sourceId": "engadget-9ac5b582127138fb",
+      "lang": "en",
+      "title": "OpenAI employee who secretly recorded meetings allegedly affiliated with the Saudi government",
+      "summary": "The OpenAI employee who was charged for implanting a recording device uploaded files to Dropbox and took photos of confidential files, prosecutors say.",
+      "body": "He uploaded recordings to Dropbox and took photos of confidential documents, prosecutors say.\n\nAbdulrahman Alfozan, the OpenAI employee who was charged for hiding a recording device at OpenAI's headquarters, was allegedly \"in frequent communication with various people affiliated with the Saudi government.\" The prosecutors have submitted a filing to ask the court to deny Alfozan's request for bail, according to Bloomberg , arguing that he might try to go back to his native Saudi Arabia due to his weak ties to the United States. They accused him of having links with the Saudi government in that filing.\n\nProsecutors also said that the authorities found hundreds of audio files in Alfozan's computer, dozens of which were recordings of meetings and conversations that took place at OpenAI throughout September 2026. Many of those recordings involved \"what may be trade secrets,\" they said, and he uploaded some of them to Dropbox. Alfozan allegedly made AI-generated transcripts of the recordings, as well, categorizing them by date and renaming them based on their contents.\n\nAlfozan was arrested in October after the company's staff discovered a recording device behind a TV in an executive conference room. He was fired on the same day. In addition to the recordings, authorities also apparently found images in Alfozan's phone of a \"strategic partnership\" document marked \"confidential.\"\n\nThe former OpenAI employee denies he was stealing the company's trade secrets for Saudi and is asking the court to set a $1 million bond for him. Bloomberg says US District Judge Vince Chhabria is already doubting whether he should remain in custody without the evidence to support a more serious charge. Still, the court will hear his bond request today in San Francisco.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2326288/openai-employee-recorded-meetings-allegedly-affiliated-saudi-government/",
+      "publishedAt": "2026-11-24T09:24:09.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-5c37cacb9057cc05:en",
+      "sourceId": "engadget-5c37cacb9057cc05",
+      "lang": "en",
+      "title": "Honor teams up with cinema camera-maker Arri on the Magic 9 Pro Max",
+      "summary": "Honor's Magic 9 Pro Max looks familiar, doesn't it?",
+      "body": "Once again, Honor wants to burnish its Hollywood bona fides.\n\nIf there's one thing to expect from the launch of a new Honor phone, it's an attempt to burnish its Hollywood bona fides. The advent of the new Magic 9 Pro Max is a chance for the Chinese giant to, as usual, tell the world about how it's once again redefined mobile cinematography . It's the first proper Honor flagship — and second only to the Robot Phone — to benefit from its partnership with Arri. If you're unfamiliar, the German giant makes the Alexa cinema camera , which has shot at least six films which went on to win an Academy Award for cinematography. If nothing else, if your Instagram reel doesn't at least garner a nomination, you know it's not the hardware's fault.\n\nThe Magic 9 Pro Max is the first Honor flagship to use the company's new industrial design first seen on its lower-end N series models. That includes a new camera plateau, albeit with a new color contrast back panel around the frame which puts me in mind of... something . Similarly, this is the first Honor flagship to get the Pro Max moniker, a suffix I don't think I've seen elsewhere in the rest of the mobile industry, but which sounds so cool that you think it might inspire copycats .\n\nNestled inside, you'll find a Snapdragon 8 Elite Extreme Gen 6 system-on-chip with either 12GB or 16GB RAM and the choice of 256GB, 512GB or 1TB storage. Up front, it's packing a 6.8-inch, 2,868 x 1,320 LTPO OLED display with a 1-120Hz refresh rate and 10,000 nits peak brightness. That's paired with an 8,000mAh battery which can support up to 100W wired or 80W wireless charging. Rounding out the useful specs are Wi-Fi 7, space for two SIM cards as well as an eSIM and a 55-megapixel front-facing camera.\n\nOf course, these are all just supporting players for the main event, the Arriflex-inspired triple camera system 'round back. It's equipped with a 200-megapixel, f/1.57 OIS primary lens and a 200-megapixel f/2.6 OIS telephoto, as well as a 50-megapixel f/2.0 ultra-wide camera. Of note is that Honor claims the primary lens has \"gimbal\" levels of optical stabilization to keep your shots as smooth as possible, no matter how you old it.\n\nTo make use of all those megapixels, Honor is launching its first dedicated imaging processor, the H1, and grabbed plenty of Arri's know-how. Honor says the Magic 9 Pro Max uses an end-to-end cinematic workflow, shooting high-end video in Arri LogC3 — the company's version of Log — as well as a series of Arri-created filters and color profiles you can apply to your footage. You'll have a pick of up to 87 Arri looks to apply to your footage, and you can even shoot in Cinema ratios like 2.39:1.\n\nTo further bolster its credentials in this arena, Honor is launching a series of accessories in partnership with SmallRig. Equip your phone with the SmallRig camera cage and you'll be able to attach it to either the Honor-branded Teleconverter G200 or the Teleconverter G500. They'll increase the phone's focal length by either 200mm or 500mm, enabling you to shoot distances you'd struggle to capture with AI-enhanced imaging.\n\nHonor's Magic 9 Pro Max is debuting in Malaysia, priced at RM 5,999 (approx $1,455) for the 12GB RAM / 512GB storage option. It'll arrive in the Middle East next month, and take its first bow in the West at some point in January.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2325316/honor-teams-up-with-cinema-camera-maker-arri-on-the-magic-9-pro-max/",
+      "publishedAt": "2026-11-24T09:00:00.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "accessible-android-32b76d2a409e283b:en",
+      "sourceId": "accessible-android-32b76d2a409e283b",
+      "lang": "en",
+      "title": "BusNeighbor",
+      "summary": "BusNeighbor shows the live positions of SEPTA buses and trolleys in Philadelphia and the surrounding counties, refreshed every 30 seconds. It is free, with no…",
+      "body": "Published 24 November 2026 by BusNeighborDev\n\nBusNeighbor shows the live positions of SEPTA buses and trolleys in Philadelphia and the surrounding counties, refreshed every 30 seconds. It is free, with no ads, no accounts, and no tracking. Location is optional, and the app never asks for it when it starts.\n\nIf you ride SEPTA buses or trolleys, you know the question: where is my bus right now, and is it coming down my street or detoured around the block? I built a free app called BusNeighbor that answers that question with VoiceOver and TalkBack. I made BusNeighbor because I needed a super-clear map I could read quickly so I’d never miss a bus. When I met a friend with low vision, I realized how an easy-to-read map could help him, too.\n\nBusNeighbor is not affiliated with SEPTA. It uses SEPTA’s public data. Search for BusNeighbor in the App Store or Google Play, or visit bus.dydx.org. Questions and bug reports are welcome at bu * @ ** dx.org .\n\nAccessibility and User Comments:\n\nHere is one way to use it: checking on your bus from home before you walk to the stop.\n\n1. Choose the routes you ride. Double-tap the large Actions Menu button near the bottom of the screen, then choose Add/Remove Buses. Under \"Choose your routes for display,\" double-tap each route you ride, then close the list. The app keeps those routes in view.\n\n2. Turn on the list of nearby vehicles. It is off by default, so you only do this once: double-tap Accessibility Settings at the top of the screen (the eye button) and turn on Closest Vehicles Readout. A list called Closest Vehicles then appears at the bottom of the map. Each bus is read as its route, nearest intersection, and distance.\n\n3. Find out where a bus is headed next. Double-tap a bus on the map to open its details. BusNeighbor names the next stop it will serve. If the bus is off its regular route, it says \"On a detour now.\" If buses are skipping stops on the road ahead, it names the stops being skipped. Before you head out, you'll know whether the bus is really coming to your stop.\n\n4. Listen for the data age. The app tells you how old its information is, and a bus that has stopped reporting is marked differently from a live one, so you won't wait for a bus that isn't coming.\n\nDetours: When SEPTA detours a route, BusNeighbor shows a detour card that lists, turn by turn, the streets buses take instead, and says whether the detour is in effect. It also marks where recent buses actually went.\n\nLow vision: There are twelve contrast-tuned map color schemes and support for large text. Each route you pick is drawn in its own color, under the street names.\n\nSharing: An instructor or family member can send a link, or print a QR code, that opens BusNeighbor with a set of routes already chosen.\n\nLast Tested App version and Android version:\n\n1.1.8. Android 17\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility.",
+      "sourceName": "Accessible Android",
+      "originalUrl": "https://accessibleandroid.com/app/busneighbor/",
+      "publishedAt": "2026-11-24T06:32:46.000Z",
+      "categories": [
+        "android",
+        "apps-accesibles",
+        "tecnologia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-c94e71e727842e04:en",
+      "sourceId": "9to5mac-c94e71e727842e04",
+      "lang": "en",
+      "title": "These are my two must-have iPhone Duo accessories",
+      "summary": "If you’re an iPhone Duo user, two must-have Apple accessories are at all-time low prices today. These are great additions to any iPhone Duo setup: Apple Pencil (USB-C) $49 (Reg. $79) Apple 40W Dynamic Power Adapter with 60W Max $29 (Reg. $39) more…",
+      "body": "If you’re an iPhone Duo user, two must-have Apple accessories are at all-time low prices today. These are great additions to any iPhone Duo setup:\n\nI’ve been using an Apple Pencil with my iPhone Duo since iOS 27.2 added support. It’s a great way to interact with the foldable iPhone form factor. In particular, I’m using it a lot with Marco Arment’s new app Fineliner , which is a delightful new note-taking app. I won’t spoil it, but Fineliner has the most enjoyable setup process of any app I’ve tried in a long time.\n\nMeanwhile, Apple’s 40W Dynamic Power Adapter with 60W Max allows you to fast-charge the iPhone Duo. It features foldable prongs so it fits right in your backpack. I have a couple of these now that I keep around for my iPhone Duo and other Apple gear. For iPhone Duo specifically, you can get up to 50 percent battery in around 20 minutes.\n\nIt’s designed to dynamically deliver up to 60W of output. “With Dynamic Power, you get many of the same benefits of higher-wattage chargers in a compact, pocket-size form factor to make charging at home, in the office, or on the go faster and more convenient than ever,” Apple explains.\n\nFor more iPhone Duo accessory recommendations, check out Ryan’s full post .\n\nMore Black Friday Apple deals:\n\nFollow Chance : Threads , X , and Instagram",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/23/these-are-my-two-must-have-iphone-duo-accessories/",
+      "publishedAt": "2026-11-24T01:30:09.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-84990e9ac0fcb5fb:en",
+      "sourceId": "engadget-84990e9ac0fcb5fb",
+      "lang": "en",
+      "title": "The three DISM commands you should know to fix your Windows system images",
+      "summary": "Check and repair damaged system files with these DISM commands.",
+      "body": "Check and repair damaged system files with these DISM commands.\n\nYour Windows installation depends on a collection of important system files to run applications, install updates and perform everyday computing tasks. If these files get damaged or go missing, your system may behave erratically. You may encounter system errors, features not working as expected, freezes or other unexpected behavior. Sometimes restarting your computer or running the usual troubleshooting steps aren't enough to restore damaged system files. For such cases, Windows provides a built-in repair utility called Deployment Image Servicing and Management (DISM).\n\nDISM is a command line tool that can scan Windows system images for corrupt system files and attempt repairs. Particularly, there are three useful DISM commands that achieve this purpose: CheckHealth , ScanHealth and RestoreHealth . You can run DISM commands in either the command prompt or the PowerShell, but both CLIs require administrator privileges to make system-level changes. It's worth noting that DISM exclusively scans and repairs system files; your personal files remain untouched.\n\nAll three DISM commands in question follow a specific syntax that begins with DISM /Online /Cleanup-Image . The parts following \"DISM\" in the syntax are called command-line options. The / Online CLI option specifies DISM to take action on the currently running Windows installation, while / Cleanup-Image performs recovery operations on the selected installation.\n\nThe first command is DISM /Online /Cleanup-Image /CheckHealth . It checks whether Windows has already flagged corrupt system files and whether the corruption is repairable. This is the first recommended step when investigating corrupt system files as it takes very little time to complete.\n\nThe next command is DISM /Online /Cleanup-Image /ScanHealth and it works slightly differently from the CheckHealth command. Unlike CheckHealth , the ScanHealth DISM command performs a fresh scan of your system files and reports any its findings. The ScanHealth operation may take several minutes to complete, but it provides you with a fresh report on the component store's health.\n\nFinally, the DISM /Online /Cleanup-Image /RestoreHealth command both scans the component store for corruption and attempts to repair them automatically. By default, RestoreHealth uses Windows Update to obtain the necessary system files needed to repair the component store. The Windows component store is a protected internal repository that contains important system files. Windows requires these files to service, update and customize the operating system .\n\nSometimes system file damage can also break Windows Update, preventing DISM from downloading replacement files. When this happens, you can use an official Windows installation media to supply DISM with the necessary repair files. You can download a Windows ISO from Microsoft's official download page . Once downloaded, right click the ISO file and select mount. Windows will create a virtual drive for the ISO, assign it a drive letter and make its contents available.\n\nNext, you'll need to check the Windows editions available in the downloaded installation media. You can do that by launching the command prompt as an administrator and running the DISM /Get-ImageInfo /ImageFile:D:sourcesinstall.wim command. This command lists the Windows editions available on the installation media along with their index numbers. Make a note of the index number corresponding to your installed edition before proceeding to the next step.\n\nNow, run the DISM /Online /Cleanup-Image /RestoreHealth /Source:WIM:D:sourcesinstall.wim:6 /LimitAccess command. Replace D: with the drive letter assigned to the mounted Windows ISO and 6 with the index number corresponding to your Windows edition. This directs DISM to use the installation media as its repair source instead of downloading files from Windows Update.\n\nOnce DISM completes its operation, run the sfc /scannow command to repair damaged or missing system files. Microsoft recommends running the DISM repair utility before System File Checker (SFC) because DISM repairs the Windows component store, which SFC relies on to replace corrupted system files.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2320620/dism-commands-for-windows-system-image-repair/",
+      "publishedAt": "2026-11-24T01:30:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "windows"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "9to5mac-36a3e3825cbf83c8:en",
       "sourceId": "9to5mac-36a3e3825cbf83c8",
       "lang": "en",
@@ -5690,38 +5769,6 @@
       "publishedAt": "2026-11-24T00:02:52.000Z",
       "categories": [
         "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-303b2534432933b4:en",
-      "sourceId": "engadget-303b2534432933b4",
-      "lang": "en",
-      "title": "Commons reasons your Android phone's icons won't move and how to fix it",
-      "summary": "It's most likely your home screen settings.",
-      "body": "It’s most likely your home screen settings.\n\nAndroid phones offer plenty of customization options to help you organize your apps. Some settings, unbeknownst to users, can reorganize your phone's icons or prevent you from moving them at all. A home screen that keeps changing can be frustrating, but the good news is you can fix it without much troubleshooting.\n\nMany Android phones can auto-arrange icons in your app drawer, usually called automatic sorting. This causes your phone to organize icons in alphabetical order, by install date or by other listed criteria. App or OS updates can also change your home screen grid, so don't be alarmed if icons rearrange after a major software update.\n\nIf your icons aren't moving at all, check your home screen and launcher cache settings. A locked home screen is the main culprit on most phones. However, if you're using a Google Pixel or stock Android without a locked home screen setting, clearing your launcher cache is another option. Employing either solution is fairly straightforward.\n\nThe most likely cause of locked icons is a locked home screen. Many Android manufacturers enable locked home screens by default, preventing you from moving icons. You can fix this by going into your phone's home screen settings and turning the setting off.\n\nMost Samsung phones let you access this setting by going to Settings and searching for \"Home Screen.\" From there, look for the option \"Lock Home Screen Layout.\" Toggle it off to enable icon movement again. If you are using another type of Android device, you can usually find this setting under the \"Home\" tab of your device.\n\nOnce you've unlocked your home screen, you might notice that your icons will sometimes reorganize themselves without your input. This could be due to some auto-sort options in your phone settings. You can find these sorting options in your home screen settings—on Samsung phones, under \"Settings,\" while on some Android phones, under \"Home.\" If your home screen layout is still not to your liking, consider resetting your home screen and restart your phone .\n\nOn Android devices without a locked home screen layout, such as Google Pixel phones, you may want to clear your launcher cache instead. Your phone's launcher cache saves all temporary data related to your home screen. If this cache gets bloated, it can make your phone more prone to crashing and cause inconsistent home screen behavior, including frozen icons.\n\nClearing the launcher cache is similar across Android phones, though the launcher app varies by manufacturer. Head to your phone's settings menu and look through your apps. You're looking for your phone's launcher. Google Pixel uses the Pixel Launcher; Samsung phones use One UI. Select the app and head to its storage settings. You should see an option to clear its cache. After you clear it, you should notice your home screen is more responsive. We also suggest rebooting your phone once you've cleared the cache to ensure it actually gets cleared out. If your phone remains unresponsive , restart your phone in safe mode to see whether a third-party app is causing the problem.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2320294/reasons-android-phone-icons-wont-move-fix/",
-      "publishedAt": "2026-11-24T00:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "android"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-c18b9da1554d2be3:en",
-      "sourceId": "engadget-c18b9da1554d2be3",
-      "lang": "en",
-      "title": "What you can do with your old, discontinued Mac Pro",
-      "summary": "Apple is discontinuing Mac Pro, but there are several ways you can still get use out of the computer, even without Apple support.",
-      "body": "Mac Pros are becoming obsolete. Do they still have use?\n\nEarlier this year, Apple discontinued its Mac Pro desktop workstation , marking an end to one of the company's longest-running product lines. Starting at $5,999 for the entry-level 2019 model and costing tens of thousands of dollars when fully equipped, the Mac Pro was (and still is) a serious investment for most people and companies. Thankfully, even though Apple has stopped making new Mac Pros, your discontinued workstation is hardly worthless.\n\nWhether you decide to sell your Mac Pro to finance an upgrade to a new Mac Studio, repurpose the existing hardware with a new operating system or simply continue to use the workstation for years to come, you have plenty of options. The secondhand market for Mac Pros remains strong, while the modular nature of the Mac Pro means that running alternative operating systems to keep the device current is easier than it is with newer Mac products. Plus, if it's in working condition, there's nothing stopping you from continuing to use it as intended, even if its hardware is showing its age. Regardless of what you're looking to do, here's everything you need to know about what comes next for your discontinued Mac Pro and how to get the most value out of it.\n\nApple discontinued the Mac Pro in March 2026 in order to prioritize the new Mac Studio line of workstations . With the move to Apple silicon , which uses a highly integrated system-on-a-chip (SoC) design, a modular desktop workstation like the Mac Pro no longer makes sense. Drop-in cards like GPUs aren't compatible with Apple's in-house silicon due to Apple's use of a unified memory architecture for the Apple M-series chips. This architecture shares memory resources across the CPU, GPU and other system components, and there simply isn't a good way to introduce some third-party components commonly used with the 2019 Mac Pro. The 2023 Mac Pro, meanwhile, uses the Apple M2 Ultra SoC and lacks the modularity of the 2019 model, so it's essentially a Mac Studio in a Mac Pro shell.\n\nApple is also streamlining macOS around its SoC design, something that developers for popular professional software like Adobe Premiere Pro are also doing. Since it would be too cumbersome to develop this kind of sophisticated software for two different kinds of Apple architectures, Apple and its partners are focusing on what's new rather than trying to continue supporting an increasingly obsolete architecture. Without sufficient software support, it makes little sense to continue producing the Mac Pro.\n\nWhile Apple isn't producing new Mac Pros, that doesn't mean you have to get rid of yours. Developers are streamlining their apps for Apple M-series Macs, but some app support for Intel-based Macs will likely continue for another couple of years, like security updates and minor fixes. This support will vary between developers, though, and Apple's latest macOS 27 Golden Gate doesn't support the Intel-based Mac Pro.\n\nIf you have the 2023 Mac Pro, you don't have anything to worry about right now. It will be supported for years to come, and that support includes macOS 27 Golden Gate. Third-party apps will also support the 2023 Mac Pro for as long as they support the Apple M2 Ultra SoC.\n\nIf you're not getting the support you need from macOS on your old Mac Pro, you can install a new OS, either with a virtual machine or through a completely new installation. A guest OS doesn't get rid of macOS, and paid apps like Parallels make installing Ubuntu Linux and Windows 11 relatively painless. There are also free VM options that can help extend your discontinued Mac Pro's life.\n\nAttempting a full install of a new OS might also be an option, but it's a complicated process and comes with some risk of bricking your Mac Pro for good. There are online resources to walk you through the process, but you'll need some technical know-how, so if you aren't comfortable with that, do not attempt it.\n\nIf you're going to get rid of your old Mac Pro, don't just recycle it — plenty of people will be willing to buy it from you. Many professional workflows, like video editing or running a network server, require a lot of memory but don't necessarily need the fastest processors. Professionals and students in those fields might jump at the chance to pick up a working Mac Pro for relatively cheap. Online marketplaces are good places to start, but a handwritten bulletin board notice at your local university can work just as well.\n\nIf you have a 2019 Mac Pro, its internal components might also be worth selling individually. Memory and large-capacity storage drives are especially in-demand right now, so even though stripping your Mac Pro for parts might feel unseemly, if you can't find a buyer for the whole system, this might be the way to go. Some money is better than nothing.\n\nIf you plan on getting rid of your Mac Pro, make sure to do a few things beforehand. Read through this support page on Apple's website and follow the instructions for backing up your files, logging out of accounts and performing a factory reset. The last thing you want is to give someone all your sensitive data after saying goodbye to your old Mac Pro for good.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2320292/what-do-with-old-discontinued-mac-pro/",
-      "publishedAt": "2026-11-23T23:30:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple"
       ]
     },
     {
@@ -5774,23 +5821,6 @@
     },
     {
       "kind": "news",
-      "id": "9to5mac-ef1d9702e2597805:en",
-      "sourceId": "9to5mac-ef1d9702e2597805",
-      "lang": "en",
-      "title": "YouTube’s iconic iOS app icon may soon return with new customizable icons [Gallery]",
-      "summary": "The iconic YouTube app icon that looked like a retro TV found on iOS might be making a comeback, with new customizable icons showing up behind the scenes of a new YouTube update. more…",
-      "body": "The iconic YouTube app icon that looked like a retro TV found on iOS might be making a comeback, with new customizable icons showing up behind the scenes of a new YouTube update.\n\nIn the early days of the iPhone, Apple built a custom app for YouTube on iOS before Google built its own. That included an app icon that looked like a retro TV and it was later replaced when YouTube’s official app launched on the platform.\n\nNow, that icon might be coming back.\n\nAndroid Authority spotted several new app icons YouTube for Android is testing in its latest beta update (v21.47.483-BETA). These icons seem to be tied to a new feature that would allow users to customize the homescreen icon for YouTube, and includes seven designs in total including two throwback designs. One is the aforementioned retro TV icon used on iOS, which was never on YouTube for Android, and another is an old stacked YouTube logo design.\n\nUsers would be able to change the app icon via a new setting in the app near the “Appearance” section, but nothing is live just yet. We also don’t know if this is Android-only, if this is limited to Premium subscribers, or when this might debut.\n\nThat said, it’s very fun to get these throwbacks, and we’ll be excited to see this functionality go live.\n\nFollow Ben: Twitter/X , Threads , Bluesky , and Instagram",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5google.com/2026/11/23/youtube-custom-icons-ios-tv-return/",
-      "publishedAt": "2026-11-23T21:46:26.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "the-verge-7cded186ebb4dbdf:en",
       "sourceId": "the-verge-7cded186ebb4dbdf",
       "lang": "en",
@@ -5819,21 +5849,6 @@
       "categories": [
         "apple",
         "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-ffdf356563e8cc04:en",
-      "sourceId": "engadget-ffdf356563e8cc04",
-      "lang": "en",
-      "title": "How to connect your Bluetooth headphones to your Xbox Series X",
-      "summary": "Connecting Bluetooth headphones to your Xbox Series X can be frustrating due to incompatibility. However, there are a few workarounds to solve this problem.",
-      "body": "Since the Xbox Series consoles lack support for Bluetooth headphones, here's how you can work around the problem.\n\nHaving the best audio can elevate any game, and sometimes TV speakers just don't cut it. But while Bluetooth headphones are supported on virtually every device from smartphones to laptops, the same isn't true of game consoles. Out of the box, an Xbox Series X can't connect directly to Bluetooth headphones, but there are a few workarounds if you want to get more out of your game's sound than your TV can provide.\n\nThe problem with using even the best wireless Bluetooth headphones for gaming is latency. Sending audio over Bluetooth introduces a tiny delay before your headphones actually receive it. Most of the time, that's not an issue, but when your game's sound is even a fraction of a second off, it can be distracting. Worse, it can make rhythm games that rely on audio cues nearly unplayable. If you do want wireless audio from your Xbox Series X, there are a few solutions, but none are perfect.\n\nOne simple but costly route is to buy the official Xbox Wireless Headset , which retails for $120. Microsoft uses its own wireless standard for these headphones to connect with extremely low latency, and since Bluetooth isn't an option, you have to pay more for the first-party version if you want wireless audio. Some third-party manufacturers like Audeze and SteelSeries also make Xbox-compatible wireless headsets, but they can be just as expensive as Microsoft's version or more. Third-party headsets that support Xbox's wireless protocol need to be licensed by Microsoft, and you'll see the Xbox logo on the box.\n\nAnother option is to route Bluetooth audio through an adapter or your TV. Some Bluetooth adapters are made to plug into the Xbox controller's headphone jack and transmit the audio coming through it, while others connect to the console's USB port and transmit from there. Higher-end headphones like the SteelSeries Arctis Nova Elite that come with a dedicated low-latency dongle are the best choice for sound quality, but they also tend to be more expensive. If you already own a smart TV that can transmit a Bluetooth signal, you can also set your console to output to the TV, then connect it to your headphones. Any of these options will be cheaper than buying an entirely new set of headphones.\n\nThe cheapest way to connect your headphones to your Xbox Series X is just to use the controller's audio jack as it's intended. Some Bluetooth headphones include a jack and audio cable as a wired backup, but that's not always the case. If you have any headphones that support wired connections, though, using the controller jack is the best way to avoid latency. It's not actually wireless, of course, but connecting your headphones to the controller won't compromise your audio quality.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2320288/how-to-connect-bluetooth-headphones-xbox-series-x/",
-      "publishedAt": "2026-11-23T19:30:00.000Z",
-      "categories": [
-        "tecnologia-general"
       ]
     },
     {
@@ -6243,23 +6258,6 @@
       "sourceName": "Accessible Android",
       "originalUrl": "https://accessibleandroid.com/app/acessgallery/",
       "publishedAt": "2026-11-14T17:24:33.000Z",
-      "categories": [
-        "android",
-        "apps-accesibles",
-        "tecnologia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "accessible-android-283e15533a6a9ecd:en",
-      "sourceId": "accessible-android-283e15533a6a9ecd",
-      "lang": "en",
-      "title": "Easy Voice",
-      "summary": "Easy Voice is a free text-to-speech routing app for Android. It does not synthesize speech itself; instead, it sits between Android and the TTS engines…",
-      "body": "Published 14 November 2026 by Syed Sharib Ali\n\nEasy Voice is a free text-to-speech routing app for Android. It does not synthesize speech itself; instead, it sits between Android and the TTS engines already installed on the device, routing text to the engine best suited to the detected language and selected mode.\n\nDual Languages Mode uses a primary and secondary language, routing Latin-script text through the primary language and matching non-Latin text to the configured secondary engine.\n\nAuto Language Mode can use as many configured languages as needed and sends each complete block of text to a single matching engine.\n\nMixed Mode processes words and languages with their own configured TTS engines, making it better suited to content that frequently switches languages.\n\nEasy Voice also includes advanced options for smart number processing, punctuation handling, quick character reading, accessibility-volume output, and Keep Alive behavior.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nSetting up Easy Voice takes only a few minutes. Follow these steps:\n\nThe Configurations tab gives you detailed control over every language. You can enable, disable, or remove languages at any time. There is also a checkbox that invokes the corresponding TTS engine immediately, with no delay. This is especially useful when a TTS engine supports only one language.\n\nThe Advanced tab offers several options for tuning how Easy Voice behaves:\n\nLast Tested App version and Android version:\n\n1.1. Android 17\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility.\n\nPublished in General",
-      "sourceName": "Accessible Android",
-      "originalUrl": "https://accessibleandroid.com/app/easy-voice/",
-      "publishedAt": "2026-11-14T07:01:30.000Z",
       "categories": [
         "android",
         "apps-accesibles",

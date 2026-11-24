@@ -30,6 +30,7 @@ struct NativeAudiocinematecaCatalogueClient {
         let url = URL(string: "https://audiocinemateca.com/system/files/catalogo/" + resource.rawValue)!
         var request = URLRequest(url: url)
         request.timeoutInterval = 45
+        request.setValue("identity", forHTTPHeaderField: "Accept-Encoding")
         let credentials = Data((account.username + ":" + account.password).utf8)
         request.setValue("Basic " + credentials.base64EncodedString(), forHTTPHeaderField: "Authorization")
         return request

@@ -181,7 +181,13 @@ private struct NativeAudiocinematecaPlaybackRow: View {
         VStack(alignment: .leading) {
             if player.currentCloudReference == reference {
                 Text(label)
-                if let error = player.playbackError { Text(error) }
+                if let error = player.playbackError {
+                    Text(error)
+                    Link("Abrir Audiocinemateca en la web", destination: URL(string: "https://audiocinemateca.com/catalogo")!)
+                    Button("Volver a intentar") {
+                        player.pauseAndSave(library: library)
+                    }
+                }
                 Button(player.playing ? "Pausar" : "Reproducir") {
                     player.toggle(library: library)
                 }

@@ -380,8 +380,8 @@ struct NativeAccessibleCinemaScreen: View {
                             }
                         }
                         if source.id == "audiocinemateca" {
-                            NavigationLink("Cuenta de Audiocinemateca") {
-                                NativeAudiocinematecaAccountScreen()
+                            NavigationLink("Explorar catálogo audiodescrito") {
+                                NativeAudiocinematecaBrowser()
                             }
                             .frame(minHeight: 44, alignment: .leading)
                         }

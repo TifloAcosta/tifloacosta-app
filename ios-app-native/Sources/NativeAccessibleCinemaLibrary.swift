@@ -248,6 +248,60 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         updateNowPlaying()
     }
 
+    /// Playback directly through Google's public media endpoint, with
+    /// progressive byte-range loading handled by AVPlayer. This is only
+    /// offered for public files with a restricted Drive API key; it must not
+    /// be used to bypass resource-key or OAuth-protected downloads.
+    func openPublicStream(
+        url: URL,
+        title: String,
+        reference: String,
+        isVideo: Bool,
+        library: NativeCinemaLocalLibrary
+    ) throws {
+        guard url.scheme == "https", url.host == "www.googleapis.com",
+              url.path.hasPrefix("/drive/v3/files/"),
+              URLComponents(url: url, resolvingAgainstBaseURL: false)?
+                .queryItems?.contains(where: {
+                    $0.name == "alt" && $0.value == "media"
+                }) == true,
+              !reference.isEmpty,
+              let configuredKey = NativeCinemaPublicDrive.configuredKey,
+              URLComponents(url: url, resolvingAgainstBaseURL: false)?
+                .queryItems?.contains(where: {
+                    $0.name == "key" && $0.value == configuredKey
+                }) == true else {
+            throw NativeCinemaPublicDriveError.denied
+        }
+        pauseAndSave(library: library)
+        try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
+        try AVAudioSession.sharedInstance().setActive(true)
+        player = AVPlayer(url: url)
+        activeLibrary = library
+        playbackError = nil
+        currentTitle = title
+        currentID = UUID()
+        currentCloudReference = reference
+        currentCloudIsVideo = isVideo
+        let restored = max(0, UserDefaults.standard.double(
+            forKey: "cinema.cloud.position." + reference))
+        seconds = restored
+        duration = 0
+        lastSavedSecond = restored
+        if restored > 0 {
+            player?.seek(to: CMTime(seconds: restored, preferredTimescale: 600))
+        }
+        NativeRemotePlaybackOwner.onInterrupted(.cinema) { [weak self] in
+            self?.pauseForOtherAudio()
+        }
+        NativeRemotePlaybackOwner.claim(.cinema)
+        registerRemoteCommands()
+        player?.play()
+        playing = true
+        beginProgressTracking(library: library)
+        updateNowPlaying()
+    }
+
     private func cleanUpTemporaryPlayback() {
         guard let file = temporaryPlaybackFile else { return }
         temporaryPlaybackFile = nil

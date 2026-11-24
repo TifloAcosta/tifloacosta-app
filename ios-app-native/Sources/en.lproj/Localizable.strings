@@ -1362,3 +1362,26 @@
 "FOAL, películas" = "FOAL, films";
 "FOAL, serie" = "FOAL, series";
 "Abrir carpeta original en Google Drive" = "Open original folder in Google Drive";
+
+
+"Cuenta de Audiocinemateca" = "Audiocinemateca account";
+"Credenciales guardadas en este dispositivo. Acceso al catálogo pendiente de validación." = "Credentials saved on this device. Catalogue access has not yet been validated.";
+"Olvidar credenciales" = "Forget credentials";
+"Nombre de usuario" = "Username";
+"Contraseña" = "Password";
+"Guardar credenciales" = "Save credentials";
+"Credenciales guardadas de forma segura." = "Credentials saved securely.";
+"No se pudieron guardar las credenciales." = "Could not save credentials.";
+"¿Todavía no tienes cuenta?" = "Don't have an account yet?";
+"Crear cuenta gratuita" = "Create a free account";
+"Completa el formulario oficial y espera el correo de aprobación. Después vuelve aquí con tu nombre de usuario y contraseña." = "Complete the official form and wait for the approval email. Then return here with your username and password.";
+"Ayuda con la cuenta" = "Account help";
+"Recuperar contraseña" = "Reset password";
+"Guía oficial de cuentas" = "Official account guide";
+"Contactar con Audiocinemateca" = "Contact Audiocinemateca";
+"Abrir Audiocinemateca en la web" = "Open Audiocinemateca on the web";
+"Si utilizas autenticación en dos pasos, conserva esa protección y accede desde la web oficial." = "If you use two-factor authentication, keep it enabled and use the official website.";
+"¿Olvidar las credenciales guardadas?" = "Forget saved credentials?";
+"Credenciales retiradas de este dispositivo." = "Credentials removed from this device.";
+"No se pudieron retirar las credenciales." = "Could not remove credentials.";
+"Tu cuenta de Audiocinemateca seguirá existiendo." = "Your Audiocinemateca account will still exist.";

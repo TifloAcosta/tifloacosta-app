@@ -29,7 +29,7 @@ struct NativeCloudPage {
 }
 
 enum NativeCloudStorageError: LocalizedError {
-    case unauthenticated, unauthorized, unavailable, notFound, invalidResponse, oversized, unsupportedFile
+    case unauthenticated, unauthorized, unavailable, notFound, invalidResponse, oversized, oversizedCinema, unsupportedFile
 
     var errorDescription: String? {
         switch self {
@@ -39,6 +39,8 @@ enum NativeCloudStorageError: LocalizedError {
         case .notFound: return "El archivo ya no está disponible en esa ubicación."
         case .invalidResponse: return "El servicio de nube devolvió una respuesta no reconocida."
         case .oversized: return "El archivo supera el límite de importación de 250 MB."
+        case .oversizedCinema:
+            return MusicLocalized.message("El archivo supera el tamaño máximo permitido de 2 GB.")
         case .unsupportedFile: return "Selecciona un archivo musical compatible."
         }
     }
@@ -239,7 +241,10 @@ final class NativeCloudStorage {
               permittedExtensions.contains((item.name as NSString).pathExtension.lowercased()) else {
             throw NativeCloudStorageError.unsupportedFile
         }
-        if let size = item.size, size > limit { throw NativeCloudStorageError.oversized }
+        if let size = item.size, size > limit {
+            throw limit > Int64(Self.maximumAudioBytes)
+                ? NativeCloudStorageError.oversizedCinema : NativeCloudStorageError.oversized
+        }
         var request: URLRequest
         switch provider {
         case .googleDrive:
@@ -259,7 +264,10 @@ final class NativeCloudStorage {
         let (temporary, response) = try await session.download(for: request)
         _ = try validated(response, allowDownloadHost: provider == .oneDrive)
         let size = (try FileManager.default.attributesOfItem(atPath: temporary.path)[.size] as? NSNumber)?.int64Value ?? 0
-        guard size > 0, size <= limit else { throw NativeCloudStorageError.oversized }
+        guard size > 0, size <= limit else {
+            throw limit > Int64(Self.maximumAudioBytes)
+                ? NativeCloudStorageError.oversizedCinema : NativeCloudStorageError.oversized
+        }
         // Keep the title shown in the user's library; isolate the remote filename
         // under an unpredictable local directory rather than trusting its path.
         let folder = FileManager.default.temporaryDirectory

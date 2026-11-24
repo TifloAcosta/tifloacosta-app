@@ -9,7 +9,6 @@ import UIKit
 struct NativeCinemaPublishedDriveBrowser: View {
     let sourceID: String
     let sourceName: String
-    let foalCollection: String?
 
     @ObservedObject private var player = NativeCinemaAudioPlayer.shared
     @ObservedObject private var network = NativeMusicConnectionPolicy.shared
@@ -28,7 +27,7 @@ struct NativeCinemaPublishedDriveBrowser: View {
 
     private var currentFolder: NativeCinemaPublicDriveEntry? { path.last }
     private var activeSourcePrefix: String {
-        "gdrive-public:" + sourceID + ":" + (foalCollection ?? "") + ":"
+        "gdrive-public:" + sourceID + ":" + ":"
     }
     private var isThisSourcePlaying: Bool {
         player.currentCloudReference?.hasPrefix(activeSourcePrefix) == true
@@ -186,16 +185,8 @@ struct NativeCinemaPublishedDriveBrowser: View {
             guard NativeCinemaPublicDrive.configuredKey != nil else {
                 throw NativeCinemaPublicDriveError.unconfigured
             }
-            let root: NativeCinemaPublicDriveEntry
-            if let foalCollection {
-                root = try await NativeCinemaPublicDrive.resolveFOAL(
-                    collection: foalCollection)
-            } else {
-                guard let fromConfiguration = NativeCinemaPublicDrive.publisherRoot(
-                    for: sourceID) else {
-                    throw NativeCinemaPublicDriveError.invalidFolder
-                }
-                root = fromConfiguration
+            guard let root = NativeCinemaPublicDrive.publisherRoot(for: sourceID) else {
+                throw NativeCinemaPublicDriveError.invalidFolder
             }
             path = [root]
             loading = false

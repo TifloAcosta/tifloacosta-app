@@ -1,4 +1,5 @@
 import SwiftUI
+import CryptoKit
 
 struct NativeAudiocinematecaBrowser: View {
     @State private var entries: [NativeAudiocinematecaCatalogueIndex.Entry] = []
@@ -144,21 +145,69 @@ private struct NativeAudiocinematecaDetail: View {
                             ForEach(entry.parts.filter { $0.season == season }.sorted {
                                 $0.number.localizedStandardCompare($1.number) == .orderedAscending
                             }) { part in
-                                Text(MusicLocalized.format("Episodio %@: %@", part.number, part.title))
+                                NativeAudiocinematecaPlaybackRow(entry: entry, part: part, label: MusicLocalized.format("Episodio %@: %@", part.number, part.title))
                             }
                         }
                         .navigationTitle(MusicLocalized.format("Temporada %@", season))
                     }
                 }
-            } else if entry.parts.count > 1 {
+            } else if !entry.parts.isEmpty {
                 Section("Partes de la obra") {
                     ForEach(entry.parts) { part in
-                        Text(MusicLocalized.format("Parte %@", part.number))
+                        NativeAudiocinematecaPlaybackRow(entry: entry, part: part, label: entry.parts.count == 1 ? MusicLocalized.message("Reproducir") : MusicLocalized.format("Parte %@", part.number))
                     }
                 }
             }
             Link("Abrir Audiocinemateca en la web", destination: URL(string: "https://audiocinemateca.com/catalogo")!)
         }
         .navigationTitle(entry.title)
+    }
+}
+
+private struct NativeAudiocinematecaPlaybackRow: View {
+    let entry: NativeAudiocinematecaCatalogueIndex.Entry
+    let part: NativeAudiocinematecaCatalogueIndex.Part
+    let label: String
+    @ObservedObject private var player = NativeCinemaAudioPlayer.shared
+    @ObservedObject private var library = NativeCinemaLocalLibrary.shared
+    @State private var failed = false
+
+    private var reference: String {
+        let identity = entry.id + ":" + (part.season ?? "") + ":" + part.number + ":" + part.url.absoluteString
+        return "audiocinemateca:" + SHA256.hash(data: Data(identity.utf8)).map { String(format: "%02x", $0) }.joined()
+    }
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            if player.currentCloudReference == reference {
+                Text(label)
+                if let error = player.playbackError { Text(error) }
+                Button(player.playing ? "Pausar" : "Reproducir") {
+                    player.toggle(library: library)
+                }
+                .disabled(player.playbackError != nil)
+                Button("Retroceder treinta segundos") { player.seek(by: -30, library: library) }
+                Button("Avanzar treinta segundos") { player.seek(by: 30, library: library) }
+                Button("Detener reproducción") { player.pauseAndSave(library: library) }
+            } else {
+                Button(label) {
+                    failed = false
+                    guard let account = NativeAudiocinematecaCredentials.load(),
+                          let loader = NativeAudiocinematecaResourceLoader(url: part.url, account: account, allowsCellular: true) else {
+                        failed = true
+                        return
+                    }
+                    do {
+                        try player.openAudiocinematecaStream(asset: loader.makeAsset(), loader: loader,
+                            title: entry.title + (part.title.isEmpty ? "" : " — " + part.title),
+                            reference: reference, isVideo: false, library: library)
+                    } catch {
+                        loader.cancel()
+                        failed = true
+                    }
+                }
+            }
+            if failed { Text("No se pudo reproducir este archivo. Comprueba que el formato es compatible.") }
+        }
     }
 }

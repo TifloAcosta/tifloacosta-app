@@ -115,6 +115,21 @@ final class NativeCinemaPublicDrive {
         )
     }
 
+    /// A safe original-provider fallback independent of any API key.
+    /// The official Drive interface remains accessible when the native
+    /// catalogue connector is not yet enabled or a request is refused.
+    static func originalFolderURL(for sourceID: String) -> URL? {
+        guard let folder = publisherRoot(for: sourceID) else { return nil }
+        var url = URLComponents()
+        url.scheme = "https"
+        url.host = "drive.google.com"
+        url.path = "/drive/folders/" + folder.id
+        if let resourceKey = folder.resourceKey {
+            url.queryItems = [URLQueryItem(name: "resourcekey", value: resourceKey)]
+        }
+        return url.url
+    }
+
     private let key: String
     private let session: URLSession
     private static let sizeLimit: Int64 = 2_000_000_000

@@ -109,6 +109,10 @@ struct NativeAudiocinematecaAccountScreen: View {
             Button("Olvidar credenciales", role: .destructive) {
                 do {
                     try NativeAudiocinematecaCredentials.remove()
+                    if NativeCinemaAudioPlayer.shared.currentCloudReference?.hasPrefix("audiocinemateca:") == true {
+                        NativeCinemaAudioPlayer.shared.pauseAndSave(library: NativeCinemaLocalLibrary.shared)
+                    }
+                    try? NativeAudiocinematecaCache.clear()
                     saved = false
                     status = MusicLocalized.message("Credenciales retiradas de este dispositivo.")
                 } catch {

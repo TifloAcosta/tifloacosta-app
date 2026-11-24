@@ -438,6 +438,20 @@
         "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45455489911"
       ],
       "validation": "Auditoría del código 23-11-2026: NativeMediaPlayback.open enruta audio directo a NativePodcastPlayer y vídeo YouTube válido a NativeYouTubePlayerScreen con API IFrame oficial; ambos puntos de entrada de Actualidad usan este despachador. Se añade prueba de contrato de no-regresión. Es verificación estructural; pendiente comprobar audio y vídeo reales, VoiceOver, foco, cierre y fallback externo en dispositivo. Conciliación 24-11-2026: Enrutamiento de audio directo al motor de Pódcast y vídeo YouTube al reproductor oficial integrado, desde ambos puntos de Actualidad; contrato específico comprobado. Fuentes sin URL multimedia compatible mantienen su alternativa externa. Ejecución 477: contratos y compilación de simulador correctos. Prueba física pendiente como fase independiente."
+    },
+    {
+      "id": 30,
+      "title": "TifloLector: conversión local de documentos y OCR a formatos de texto",
+      "status": "partial",
+      "issue": "#365",
+      "evidence": [
+        "ios-app-native/Sources/NativeDocumentConversion.swift",
+        "ios-app-native/Sources/NativeConversionMarkup.swift",
+        "ios-app-native/Sources/NativeDocumentConversionScreen.swift",
+        "ios-app-native/tests/document-conversion-smoke.swift",
+        "ios-app-native/scripts/test-document-conversion.sh"
+      ],
+      "validation": "TXT, RTF, DOCX, HTML, EPUB, PDF, Markdown, ODT y FB2. Conversión por lotes, cancelación, progreso, biblioteca y hoja del sistema para Archivos o proveedores configurados. PDF con texto seleccionable y estructura parcial de encabezados/párrafos. El contenido enriquecido se conserva entre HTML/XHTML y EPUB cuando puede recuperarse con fiabilidad; los demás cruces usan contenido disponible en el lector. DAISY de texto queda pendiente de validar como paquete navegable. Se conserva la exportación DAISY de audio."
     }
   ],
   "operational": [

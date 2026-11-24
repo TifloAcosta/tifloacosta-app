@@ -489,6 +489,12 @@ enum NativeReaderFormats {
             // DOCX styles identify real chapters even when their visible text
             // does not begin with a word such as “Capítulo”.
             var source = raw
+            if ext == "odt", path == "content.xml" {
+                source = source.replacingOccurrences(of: #"<text:s\s*/>"#, with: " ", options: .regularExpression)
+                    .replacingOccurrences(of: #"<text:tab\s*/>"#, with: "\t", options: .regularExpression)
+                    .replacingOccurrences(of: #"(?i)<text:h\b[^>]*text:outline-level="([1-6])"[^>]*>"#,
+                                          with: "<h$1>", options: .regularExpression)
+            }
             if path == "word/document.xml",
                let matcher = try? NSRegularExpression(
                    pattern: #"(?is)<w:p\b[^>]*>.*?</w:p>"#) {

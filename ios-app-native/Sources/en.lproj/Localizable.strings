@@ -1419,3 +1419,17 @@
 "PDF con más de 150 páginas escaneadas. Divide el archivo para realizar OCR." = "The PDF has more than 150 scanned pages. Split the file to run OCR.";
 "Muestra la ruta para llegar a los ajustes de braille." = "Shows how to find braille settings.";
 "Ajustes de braille de VoiceOver" = "VoiceOver Braille Settings";
+"Convertir documento" = "Convert document";
+"Convertir documentos seleccionados" = "Convert selected documents";
+"Formato de destino" = "Output format";
+"Se conserva el texto reconocido o importado. Según el origen y el destino, pueden perderse imágenes, listas, tablas y otros detalles." = "Recognized or imported text is preserved. Images, lists, tables and other details may be lost depending on the source and output formats.";
+"PDF con texto seleccionable y etiquetas de párrafo y encabezado. La accesibilidad completa depende del documento de origen." = "PDF with selectable text and paragraph and heading tags. Full accessibility depends on the source document.";
+"Convirtiendo documento %d de %d." = "Converting document %d of %d.";
+"Cancelar conversión" = "Cancel conversion";
+"Iniciar conversión" = "Start conversion";
+"Guardar en la biblioteca" = "Save to library";
+"Compartir o exportar a Archivos y nubes" = "Share or export to Files and cloud storage";
+"No se pudo convertir «%@»." = "Could not convert “%@”.";
+"Conversión cancelada." = "Conversion cancelled.";
+"Documentos convertidos: %d. Fallidos: %d." = "Documents converted: %d. Failed: %d.";
+"Documentos guardados: %d. Fallidos: %d." = "Documents saved: %d. Failed: %d.";

@@ -1417,3 +1417,17 @@
 "PDF con más de 150 páginas escaneadas. Divide el archivo para realizar OCR." = "Il PDF contiene più di 150 pagine scansionate. Dividi il file per eseguire l’OCR.";
 "Muestra la ruta para llegar a los ajustes de braille." = "Mostra come accedere alle impostazioni braille.";
 "Ajustes de braille de VoiceOver" = "Impostazioni braille di VoiceOver";
+"Convertir documento" = "Converti documento";
+"Convertir documentos seleccionados" = "Converti i documenti selezionati";
+"Formato de destino" = "Formato di destinazione";
+"Se conserva el texto reconocido o importado. Según el origen y el destino, pueden perderse imágenes, listas, tablas y otros detalles." = "Il testo riconosciuto o importato viene conservato. Immagini, elenchi, tabelle e altri dettagli possono andare persi a seconda del formato di origine e di destinazione.";
+"PDF con texto seleccionable y etiquetas de párrafo y encabezado. La accesibilidad completa depende del documento de origen." = "PDF con testo selezionabile e tag di paragrafo e intestazione. L’accessibilità completa dipende dal documento di origine.";
+"Convirtiendo documento %d de %d." = "Conversione del documento %d di %d.";
+"Cancelar conversión" = "Annulla conversione";
+"Iniciar conversión" = "Avvia conversione";
+"Guardar en la biblioteca" = "Salva nella libreria";
+"Compartir o exportar a Archivos y nubes" = "Condividi o esporta in File e nel cloud";
+"No se pudo convertir «%@»." = "Impossibile convertire «%@».";
+"Conversión cancelada." = "Conversione annullata.";
+"Documentos convertidos: %d. Fallidos: %d." = "Documenti convertiti: %d. Non riusciti: %d.";
+"Documentos guardados: %d. Fallidos: %d." = "Documenti salvati: %d. Non riusciti: %d.";

@@ -76,6 +76,8 @@ jobs:
             ios-app-native/tests/reader-speech-queue-background-smoke.swift \
             -o "$RUNNER_TEMP/reader-tts-background-queue"
           "$RUNNER_TEMP/reader-tts-background-queue"
+      - name: Abrir y verificar los nueve formatos de conversión local
+        run: bash ios-app-native/scripts/test-document-conversion.sh
       - name: Preparar credencial de catálogo público Google Drive si está configurada
         env:
           TIFLO_CINEMA_PUBLIC_DRIVE_API_KEY: ${{ secrets.TIFLO_CINEMA_PUBLIC_DRIVE_API_KEY }}

@@ -46,7 +46,7 @@ test('Audio polling never rewinds on each 2-percent progress increment', () => {
 
 test('Reader document actions remain real and VoiceOver-usable', () => {
   for (const action of [
-    'Añadir marca', 'Exportar texto', 'Traducir fragmento actual',
+    'Añadir marca', 'Convertir documento', 'Traducir fragmento actual',
     'Modo de navegación', 'accessibilityAdjustableAction', 'Avanzar cinco por ciento'
   ]) assert.ok(reader.includes(action), 'Missing action ' + action);
 });

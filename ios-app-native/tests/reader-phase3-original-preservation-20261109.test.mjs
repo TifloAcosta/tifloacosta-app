@@ -20,7 +20,7 @@ test("fase 3: documento original accesible en las acciones de VoiceOver y del le
   assert.match(reader, /NativeShare\.present\(url: try library\.shareableOriginalURL\(for: document\)\)/);
 });
 test("fase 3: no confundir texto extraído con archivo de origen", () => {
-  assert.match(reader, /Button\("Exportar texto"\)/);
+  assert.match(reader, /Button\("Convertir documento"\)/);
   assert.match(reader, /No se pudo compartir el documento completo/);
 });
 

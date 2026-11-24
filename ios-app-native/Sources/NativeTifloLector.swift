@@ -1618,6 +1618,7 @@ struct NativeReaderLibraryScreen: View {
     @State private var folderForDocument: NativeReadingDocument?
     @State private var documentToConfigure: NativeReadingDocument?
     @State private var documentToConvert: NativeReadingDocument?
+    @State private var documentConversion: NativeConversionSelection?
     @State private var documentToTranslate: NativeReadingDocument?
     @State private var selectionMode = false
     @State private var selectedDocumentIDs: Set<UUID> = []
@@ -1858,6 +1859,10 @@ struct NativeReaderLibraryScreen: View {
         }
     }
 
+    private func openDocumentConversion(_ document: NativeReadingDocument) {
+        documentConversion = NativeConversionSelection(sources: [library.latest(document).conversionSource])
+    }
+
     private func shareDocumentFromLibrary(_ document: NativeReadingDocument) {
         do {
             if document.fileExtension?.lowercased() == "daisy" {
@@ -1926,11 +1931,20 @@ struct NativeReaderLibraryScreen: View {
                                 .onAppear { library.markOpened(document) }
                         }
                     } label: { Text(documentRowLabel(document)) }
+                    .contextMenu {
+                        if !document.body.isEmpty {
+                            Button("Convertir documento") { openDocumentConversion(document) }
+                        }
+                        Button("Compartir documento") { shareDocumentFromLibrary(document) }
+                    }
                     .accessibilityLabel(documentRowLabel(document))
                     .accessibilityActions {
                         Button("Reproducir") { play(document) }
                         Button("Compartir documento") { shareDocumentFromLibrary(document) }
                         if !document.body.isEmpty {
+                            Button("Convertir documento") {
+                                openDocumentConversion(document)
+                            }
                             Button("Convertir a audio o DAISY") {
                             documentToConvert = document
                             }
@@ -1990,6 +2004,13 @@ struct NativeReaderLibraryScreen: View {
                         }
                     }
                     .disabled(visibleSelection.isEmpty)
+                    let conversionDocuments = shownDocuments.filter { visibleSelection.contains($0.id) }
+                    if !conversionDocuments.isEmpty && conversionDocuments.allSatisfy({ !$0.body.isEmpty }) {
+                        Button("Convertir documentos seleccionados") {
+                            documentConversion = NativeConversionSelection(
+                                sources: conversionDocuments.map { library.latest($0).conversionSource })
+                        }
+                    }
                     Button("Mover seleccionados a carpeta") { showBulkMove = true }
                         .disabled(visibleSelection.isEmpty)
                     Button("Eliminar seleccionados") { showBulkDelete = true }
@@ -2394,6 +2415,9 @@ struct NativeReaderLibraryScreen: View {
         } message: {
             Text(importError ?? "")
         }
+        .sheet(item: $documentConversion) { request in
+            NativeDocumentConversionScreen(sources: request.sources)
+        }
         .sheet(item: $information) { document in
             NavigationStack {
                 Form {
@@ -2739,6 +2763,7 @@ struct NativeReadingScreen: View {
     @State private var selectionCopyMessage = ""
     @State private var showAudioSettings = false
     @State private var showVisualSettings = false
+    @State private var showDocumentConversion = false
     @State private var showAudioExport = false
     @State private var audioExportBusy = false
     @State private var audioExportProgress = ""
@@ -4313,7 +4338,7 @@ struct NativeReadingScreen: View {
             }
         }
         if !latest.body.isEmpty {
-            Button("Exportar texto") { exportText() }
+            Button("Convertir documento") { showDocumentConversion = true }
             Button("Seleccionar y copiar texto") { showTextSelection = true }
             Button("Convertir texto a MP3 o DAISY con voz") { showAudioExport = true }
             Button("Diccionario y pronunciación") {
@@ -4473,6 +4498,9 @@ struct NativeReadingScreen: View {
             }
         }
         .sheet(isPresented: $showAudioExport) { audioExportSheet }
+        .sheet(isPresented: $showDocumentConversion) {
+            NativeDocumentConversionScreen(sources: [latest.conversionSource])
+        }
         .alert("Conversión completada. Archivo guardado en la biblioteca",
                isPresented: $showExportCompleted) {
             Button("Compartir") {

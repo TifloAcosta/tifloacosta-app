@@ -123,7 +123,7 @@ final class NativeCinemaPublicDrive {
         }
         self.key = key
         self.session = URLSession(
-            configuration: .ephemeral,
+            configuration: URLSessionConfiguration.ephemeral,
             delegate: NativeCinemaPublicDriveRedirects(),
             delegateQueue: nil
         )

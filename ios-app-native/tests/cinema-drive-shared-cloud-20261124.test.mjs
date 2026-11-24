@@ -36,7 +36,7 @@ test('cinema download supports bounded long audio and video without changing the
   assert.match(storage, /limit: 2_000_000_000/);
   assert.match(storage, /"flac", "mp4", "m4v", "mov"/);
   assert.match(storage, /func download\(_ item: NativeCloudItem, allowsCellular: Bool = true\)/);
-  assert.match(storage, /limit: Self\.maximumAudioBytes/);
+  assert.match(storage, /limit: Int64\(Self\.maximumAudioBytes\)/);
   assert.match(storage, /guard size > 0, size <= limit/);
   assert.match(storage, /request\.allowsCellularAccess = allowsCellular/);
 });

@@ -153,6 +153,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
     @Published private(set) var currentID: UUID?
     /// Distinguish a temporary Drive preview from a permanently imported item.
     @Published private(set) var currentCloudReference: String?
+    @Published private(set) var currentCloudIsVideo = false
     @Published private(set) var playing = false
     @Published private(set) var seconds: Double = 0
     @Published private(set) var duration: Double = 0
@@ -175,6 +176,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         }
         pauseAndSave(library: library)
         currentCloudReference = nil
+        currentCloudIsVideo = false
         playbackError = nil
         // If session activation fails, do not leave a half-open item with
         // playback state advertised as ready.
@@ -227,9 +229,14 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         currentTitle = title
         currentID = UUID()
         currentCloudReference = reference
-        seconds = 0
+        currentCloudIsVideo = ["mp4", "m4v", "mov"].contains(file.pathExtension.lowercased())
+        let restored = max(0, UserDefaults.standard.double(forKey: "cinema.cloud.position." + reference))
+        seconds = restored
         duration = 0
-        lastSavedSecond = 0
+        lastSavedSecond = restored
+        if restored > 0 {
+            player?.seek(to: CMTime(seconds: restored, preferredTimescale: 600))
+        }
         NativeRemotePlaybackOwner.onInterrupted(.cinema) { [weak self] in
             self?.pauseForOtherAudio()
         }
@@ -317,7 +324,11 @@ final class NativeCinemaAudioPlayer: ObservableObject {
             player.seek(to: .zero)
             seconds = 0
             lastSavedSecond = 0
-            if let currentID { library.savePosition(0, for: currentID) }
+            if let reference = currentCloudReference {
+                UserDefaults.standard.set(0.0, forKey: "cinema.cloud.position." + reference)
+            } else if let currentID {
+                library.savePosition(0, for: currentID)
+            }
         }
         updateNowPlaying()
     }
@@ -392,6 +403,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         playing = false
         currentID = nil
         currentCloudReference = nil
+        currentCloudIsVideo = false
         seconds = 0
         duration = 0
         currentTitle = ""
@@ -404,7 +416,11 @@ final class NativeCinemaAudioPlayer: ObservableObject {
     private func save(library: NativeCinemaLocalLibrary, force: Bool) {
         guard let currentID else { return }
         if force || abs(seconds - lastSavedSecond) >= 5 {
-            library.savePosition(seconds, for: currentID)
+            if let reference = currentCloudReference {
+                UserDefaults.standard.set(seconds, forKey: "cinema.cloud.position." + reference)
+            } else {
+                library.savePosition(seconds, for: currentID)
+            }
             lastSavedSecond = seconds
         }
     }

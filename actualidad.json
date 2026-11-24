@@ -1,15 +1,158 @@
 [
   {
-    "id": "9to5mac-0bee88a16529cd9a",
+    "id": "9to5mac-36a3e3825cbf83c8",
     "type": "news",
     "sourceId": "9to5mac",
     "sourceName": "9to5Mac",
     "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/23/five-recent-tech-outages-were-not-due-to-ai-the-next-round-will-be/",
+    "originalUrl": "https://9to5mac.com/2026/11/23/apple-pay-is-getting-even-better-with-four-new-features/",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-23T12:06:58.000Z",
+    "publishedAt": "2026-11-24T00:31:59.000Z",
     "categories": [
       "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Apple Pay just got even better with four new features and more",
+        "summary": "Apple Pay is a go-to feature for iPhone users when shopping in stores, online, and in apps. Apple recently announced four new features that make Apple Pay even better. Here’s how they work, plus one major expansion that’s rolling out now. 9to5Mac is sponsored by Sony : Score Sony’s INZONE noise-canceling earbuds for 38% off . These deliver immersive 360 Spatial Sound, active noise canceling, low-latency wireless connectivity, and much more. more…",
+        "body": "Apple Pay is a go-to feature for iPhone users when shopping in stores, online, and in apps. Apple recently announced four new features that make Apple Pay even better. Here’s how they work, plus one major expansion that’s rolling out now.\n\n9to5Mac is sponsored by Sony : Score Sony’s INZONE noise-canceling earbuds for 38% off . These deliver immersive 360 Spatial Sound, active noise canceling, low-latency wireless connectivity, and much more.\n\nOne of my favorite changes in iOS 27 is the redesigned Apple Pay checkout interface . The new interface makes it much easier to switch between different cards during the checkout flow on websites and in apps.\n\nIn the new design, you can easily swipe between cards on the main Apple Pay checkout screen. You can also tap on a card to view a grid of all your available Apple Pay cards.\n\nThe design also makes it easier to see information about individual cards, including rewards, balances, pay later options, and more.\n\niOS 27 was released to everyone last week. You can update in the Settings app on your iPhone.\n\nApple and American Express recently announced a new partnership that lets you pay with American Express rewards points.\n\nWhen shopping online or in apps with an American Express card, you’ll see a new “Use Rewards” option alongside your available Membership Rewards points balance. You can apply points to cover all or part of your purchase, right in the Apple Pay checkout flow.\n\nAmerican Express points redeemed via Apple Pay are valued at 0.7 cents each. For example, this means 10,000 points can be redeemed for $70 applied towards your purchase.\n\nIn iOS 27, Apple is adding a new “Tap to Share” feature that integrates with Apple Pay on iPhone for in-store shopping.\n\nThis feature is an extension of Tap to Pay on iPhone. Apple explains:\n\nWith just a tap, customers can connect to a participating merchant’s iPhone for a more personalized and faster in-store purchase experience that allows for secure sharing of information, such as email and other contact information, shipping address, loyalty rewards information, and more.\n\nCustomers will also be able to view the items in their basket in real time so they can keep track of what they’ve purchased and ensure all sales and discounts are properly applied.\n\nWhen done, shoppers can complete the checkout on their iPhone using Apple Pay.\n\niPhone users with select banks can manage their debit card balances directly in the Apple Pay interface. According to Apple, you’ll be able to use Apple Pay to add money to a supported debit card directly in Apple Wallet or when checking out.\n\nThis one isn’t really a new feature developed by Apple. Instead, it’s something that should’ve happened years ago finally coming to fruition. Walmart has announced that it is finally starting to roll out support for Apple Pay. Apple Pay is also rolling out to Sam’s Club as part of this initiative.\n\nAs of November, Walmart’s roll out of Apple Pay across the United States is complete.\n\nAs Apple Pay continues to increase in popularity and prevalence among retailers, it’s great to see Apple continue to improve the experience. Personally, Apple Pay is my checkout payment method of choice basically everywhere I shop — whether that’s online or in store.\n\nHow often do you use Apple Pay? What are your favorite Apple Pay features? Let us know down in the comments.\n\nFollow Chance : Threads , Bluesky , Instagram , and Mastodon ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-ebb15832548339da",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/23/ios-27-2-just-upgraded-apple-photos-in-two-ways-heres-whats-new/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-24T00:19:18.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "iOS 27.2 upgraded Apple Photos in two ways, here’s what’s new",
+        "summary": "Apple Photos got a lot of new features in iOS 27, but the recent release of iOS 27.2 brought even more improvements. Here’s what’s new. more…",
+        "body": "Apple Photos got a lot of new features in iOS 27, but the recent release of iOS 27.2 brought even more improvements. Here’s what’s new.\n\nShared Albums are among my favorite features in the Photos app. I don’t post on social media often, but I love using Shared Albums because they provide a social media-style experience in a private way that lives right inside Photos.\n\niOS 27 brought a variety of big improvements to Shared Albums. And in iOS 27.2, Apple introduced four more.\n\nPer Apple’s release notes , here’s what’s new:\n\nTo get these new features, you’ll need to make sure your Shared Albums have been upgraded for iOS 27.\n\nOne complication introduced by AI is that it can be hard to know if an image is real or AI-generated.\n\nThis challenge extends to AI-edited photos too, which might have key details changed by tools like iOS 27’s Extend, Reframe, and Clean Up features in Photos.\n\nApple is tackling the issue with its new Reference Image feature in iPhone 18 Pro, and also through a software enhancement that rolled out in iOS 27.2.\n\nPer Apple , its latest software update adds the following:\n\nSupport for SynthID watermarking to help identify whether an image was generated or modified with generative tools in Photos and Image Playground\n\nSynthID is a cross-platform standard developed by Google that embeds unnoticeable digital watermarks into AI-modified photos. Users won’t see a visible watermark, but anyone who checks for a SynthID marker will find it.\n\nWhat do you think of the latest Apple Photos changes in iOS 27.2? Let us know in the comments."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-ea8828595801104a",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1041000/kagi-mail-email-google-gmail-alternative",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-24T00:02:52.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google alternative Kagi launches an email service",
+        "summary": "Kagi, which already offers a paid alternative to Google Search and its own Orion browser as a rival to Chrome, is taking on another Google service: Gmail. Today, Kagi announced a public beta of Kagi Mail, a new email service that has \"no surveillance, no ads, open standards, and no lock-in.\" With Kagi Mail, you […]",
+        "body": "Kagi, which already offers a paid alternative to Google Search and its own Orion browser as a rival to Chrome, is taking on another Google service: Gmail. Today, Kagi announced a public beta of Kagi Mail, a new email service that has \"no surveillance, no ads, open standards, and no lock-in.\"\n\nWith Kagi Mail, you get an @ kagimail.com address, but the service also supports unlimited aliases and domains. It also offers 50GB of storage and a built-in calendar. On the roadmap, you can expect contacts and an address book in Q1 2027, but native mobile apps aren't expected to arrive until Q3 2027.\n\n\"Does the world need another email service? We aske …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-303b2534432933b4",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2320294/reasons-android-phone-icons-wont-move-fix/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-24T00:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Commons reasons your Android phone's icons won't move and how to fix it",
+        "summary": "It's most likely your home screen settings.",
+        "body": "It’s most likely your home screen settings.\n\nAndroid phones offer plenty of customization options to help you organize your apps. Some settings, unbeknownst to users, can reorganize your phone's icons or prevent you from moving them at all. A home screen that keeps changing can be frustrating, but the good news is you can fix it without much troubleshooting.\n\nMany Android phones can auto-arrange icons in your app drawer, usually called automatic sorting. This causes your phone to organize icons in alphabetical order, by install date or by other listed criteria. App or OS updates can also change your home screen grid, so don't be alarmed if icons rearrange after a major software update.\n\nIf your icons aren't moving at all, check your home screen and launcher cache settings. A locked home screen is the main culprit on most phones. However, if you're using a Google Pixel or stock Android without a locked home screen setting, clearing your launcher cache is another option. Employing either solution is fairly straightforward.\n\nThe most likely cause of locked icons is a locked home screen. Many Android manufacturers enable locked home screens by default, preventing you from moving icons. You can fix this by going into your phone's home screen settings and turning the setting off.\n\nMost Samsung phones let you access this setting by going to Settings and searching for \"Home Screen.\" From there, look for the option \"Lock Home Screen Layout.\" Toggle it off to enable icon movement again. If you are using another type of Android device, you can usually find this setting under the \"Home\" tab of your device.\n\nOnce you've unlocked your home screen, you might notice that your icons will sometimes reorganize themselves without your input. This could be due to some auto-sort options in your phone settings. You can find these sorting options in your home screen settings—on Samsung phones, under \"Settings,\" while on some Android phones, under \"Home.\" If your home screen layout is still not to your liking, consider resetting your home screen and restart your phone .\n\nOn Android devices without a locked home screen layout, such as Google Pixel phones, you may want to clear your launcher cache instead. Your phone's launcher cache saves all temporary data related to your home screen. If this cache gets bloated, it can make your phone more prone to crashing and cause inconsistent home screen behavior, including frozen icons.\n\nClearing the launcher cache is similar across Android phones, though the launcher app varies by manufacturer. Head to your phone's settings menu and look through your apps. You're looking for your phone's launcher. Google Pixel uses the Pixel Launcher; Samsung phones use One UI. Select the app and head to its storage settings. You should see an option to clear its cache. After you clear it, you should notice your home screen is more responsive. We also suggest rebooting your phone once you've cleared the cache to ensure it actually gets cleared out. If your phone remains unresponsive , restart your phone in safe mode to see whether a third-party app is causing the problem."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-c18b9da1554d2be3",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2320292/what-do-with-old-discontinued-mac-pro/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-23T23:30:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "What you can do with your old, discontinued Mac Pro",
+        "summary": "Apple is discontinuing Mac Pro, but there are several ways you can still get use out of the computer, even without Apple support.",
+        "body": "Mac Pros are becoming obsolete. Do they still have use?\n\nEarlier this year, Apple discontinued its Mac Pro desktop workstation , marking an end to one of the company's longest-running product lines. Starting at $5,999 for the entry-level 2019 model and costing tens of thousands of dollars when fully equipped, the Mac Pro was (and still is) a serious investment for most people and companies. Thankfully, even though Apple has stopped making new Mac Pros, your discontinued workstation is hardly worthless.\n\nWhether you decide to sell your Mac Pro to finance an upgrade to a new Mac Studio, repurpose the existing hardware with a new operating system or simply continue to use the workstation for years to come, you have plenty of options. The secondhand market for Mac Pros remains strong, while the modular nature of the Mac Pro means that running alternative operating systems to keep the device current is easier than it is with newer Mac products. Plus, if it's in working condition, there's nothing stopping you from continuing to use it as intended, even if its hardware is showing its age. Regardless of what you're looking to do, here's everything you need to know about what comes next for your discontinued Mac Pro and how to get the most value out of it.\n\nApple discontinued the Mac Pro in March 2026 in order to prioritize the new Mac Studio line of workstations . With the move to Apple silicon , which uses a highly integrated system-on-a-chip (SoC) design, a modular desktop workstation like the Mac Pro no longer makes sense. Drop-in cards like GPUs aren't compatible with Apple's in-house silicon due to Apple's use of a unified memory architecture for the Apple M-series chips. This architecture shares memory resources across the CPU, GPU and other system components, and there simply isn't a good way to introduce some third-party components commonly used with the 2019 Mac Pro. The 2023 Mac Pro, meanwhile, uses the Apple M2 Ultra SoC and lacks the modularity of the 2019 model, so it's essentially a Mac Studio in a Mac Pro shell.\n\nApple is also streamlining macOS around its SoC design, something that developers for popular professional software like Adobe Premiere Pro are also doing. Since it would be too cumbersome to develop this kind of sophisticated software for two different kinds of Apple architectures, Apple and its partners are focusing on what's new rather than trying to continue supporting an increasingly obsolete architecture. Without sufficient software support, it makes little sense to continue producing the Mac Pro.\n\nWhile Apple isn't producing new Mac Pros, that doesn't mean you have to get rid of yours. Developers are streamlining their apps for Apple M-series Macs, but some app support for Intel-based Macs will likely continue for another couple of years, like security updates and minor fixes. This support will vary between developers, though, and Apple's latest macOS 27 Golden Gate doesn't support the Intel-based Mac Pro.\n\nIf you have the 2023 Mac Pro, you don't have anything to worry about right now. It will be supported for years to come, and that support includes macOS 27 Golden Gate. Third-party apps will also support the 2023 Mac Pro for as long as they support the Apple M2 Ultra SoC.\n\nIf you're not getting the support you need from macOS on your old Mac Pro, you can install a new OS, either with a virtual machine or through a completely new installation. A guest OS doesn't get rid of macOS, and paid apps like Parallels make installing Ubuntu Linux and Windows 11 relatively painless. There are also free VM options that can help extend your discontinued Mac Pro's life.\n\nAttempting a full install of a new OS might also be an option, but it's a complicated process and comes with some risk of bricking your Mac Pro for good. There are online resources to walk you through the process, but you'll need some technical know-how, so if you aren't comfortable with that, do not attempt it.\n\nIf you're going to get rid of your old Mac Pro, don't just recycle it — plenty of people will be willing to buy it from you. Many professional workflows, like video editing or running a network server, require a lot of memory but don't necessarily need the fastest processors. Professionals and students in those fields might jump at the chance to pick up a working Mac Pro for relatively cheap. Online marketplaces are good places to start, but a handwritten bulletin board notice at your local university can work just as well.\n\nIf you have a 2019 Mac Pro, its internal components might also be worth selling individually. Memory and large-capacity storage drives are especially in-demand right now, so even though stripping your Mac Pro for parts might feel unseemly, if you can't find a buyer for the whole system, this might be the way to go. Some money is better than nothing.\n\nIf you plan on getting rid of your Mac Pro, make sure to do a few things beforehand. Read through this support page on Apple's website and follow the instructions for backing up your files, logging out of accounts and performing a factory reset. The last thing you want is to give someone all your sensitive data after saying goodbye to your old Mac Pro for good."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-783f3004d50b9d63",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1040872/ladybird-indie-browser-engine-alpha-testing",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-23T22:38:09.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Ladybird, the first new browser engine in years, is now available to test",
+        "summary": "Ladybird, an independent web browser with a built-from-scratch engine, is finally available for testing. On Monday, Ladybird developer Andreas Kling announced that the browser is launching in alpha on macOS and Linux following more than four years of development. The release makes Ladybird the first browser in years to arrive with an entirely new engine. […]",
+        "body": "Ladybird, an independent web browser with a built-from-scratch engine, is finally available for testing. On Monday, Ladybird developer Andreas Kling announced that the browser is launching in alpha on macOS and Linux following more than four years of development.\n\nThe release makes Ladybird the first browser in years to arrive with an entirely new engine. We've seen many engines emerge over time, but the most popular browsers use just three today: Gecko, Blink, and WebKit. While Gecko, now used in Mozilla Firefox, first appeared in Netscape 6 in 2000 , Apple's WebKit arrived in Safari in 2003 as a fork of KDE's KHTML. A decade later, the Goog …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-c0f02429d69a42b5",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/23/anthropic-launches-claude-ship-letting-ai-agents-review-fix-and-approve-code-changes/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-23T22:05:50.000Z",
+    "categories": [
       "tecnologia-general",
       "ia-accesibilidad"
     ],
@@ -17,9 +160,178 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Five recent tech outages were not due to AI; the next round will be",
-        "summary": "Five major tech outages in quick succession earlier this month led to speculation that they were connected, with some inevitably believing them to be AI-related. That wasn’t the case, but the US Director of National Intelligence is one of a number of experts warning that we should expect AI-powered outages in the near future … more…",
-        "body": "Five major tech outages in quick succession earlier this month led to speculation that they were connected, with some inevitably believing them to be AI-related.\n\nThat wasn’t the case, but the US Director of National Intelligence is one of a number of experts warning that we should expect AI-powered outages in the near future …\n\nEarlier this month saw five tech outages, one after the other. A widespread Microsoft 365 outage occurred when two unrelated issues coincided . The next day saw a nationwide ground stop of US air traffic due to a communication issue affecting all air traffic control centers. A few days later, a bug in a Chase bank system saw disruption not only to the bank itself, but also other banks where Chase was a party to a transaction. Many Apple services went offline later the same week, with retail stores also affected. Finally, United Airlines had its own widespread IT outage that grounded a significant number of flights.\n\nEach had their own unrelated causes, with the White House stating that rumors of an AI-facilitated systemic attack by a hostile state were false.\n\nHowever, Director of National Intelligence Jay Clayton has warned that we should expect future tech outages as a result of attacks facilitated by AI-discovered vulnerabilities. CNBC reports him issuing the warning on CNN’s State of the Union .\n\nThe American people should be prepared for a great deal of investment in upgrading our systems; they should be prepared for investment in cybersecurity, and they should be prepared that any time there is a step change in technology, a step change in both compute and applications, there will be bumps in the road.\n\nYou prepare by knowing that systems are going to be upgraded; they may be interrupted for a period of time and that companies and government are dealing with this on the front foot.\n\nWe already saw an example of this last month when a vulnerability discovered in PHP saw a significant number of websites being taken offline .\n\nMicrosoft President Brad Smith says it isn’t just a question of bad actors exploiting vulnerabilities discovered by AI, but companies rushing to patch these may inadvertently cause systems to fail, as Newsweek reports.\n\nWhat AI did earlier this year was basically make it much easier for people to find vulnerabilities in code, and then you can either use that knowledge to patch the code, or if you’re a bad actor, you can use that knowledge to try to hack into systems.\n\nEspecially when you have older infrastructure, especially when you’re trying to patch at such a pace, especially when you have to go so fast that you can’t take as much time to test what you’re changing in the code, you do increase the risk of something going wrong.\n\nMajor IT failures look set to be a routine event in the coming weeks and months.\n\nVia The Verge ."
+        "title": "Anthropic launches Claude Ship, letting AI agents review, fix, and approve code changes",
+        "summary": "As AI-generated code piles up, Anthropic's new developer tools aim to eliminate another bottleneck by letting agents handle routine approvals.",
+        "body": "Anthropic is moving from having Claude write code to helping developers decide when that code is ready to ship. On Monday, the newly public AI company announced the launch of Claude Ship , a suite of AI agents for automating code reviews, fixes, and approvals of routine code changes.\n\nThe latter is the more interesting part of this new set of tools, as AI coding tools already offered code review features before now. What’s notable about Claude Ship is not just that it can review proposed code changes and identify and address problems, but that it also includes an agent that can approve code changes automatically based on policies set by a development team.\n\nThe launch arrives at a time when AI coding agents have become increasingly capable of generating substantial amounts of code, leading to bottlenecks in reviewing and approving the code changes before they go live. With Claude Ship, the idea is to automate even more of the work involved in the development process, essentially by delegating approval authority to an AI agent itself.\n\n“Most teams want a person to approve every change, and that’s easy to keep up with when people write every line. But a lot of developers build with agents now,” a company blog post explains. “On the Claude Code team, Claude writes most of our code, and we wanted everything after the PR to move that fast too.”\n\nClaude Ship is launching in beta, allowing early adopters to use it to review pull requests (PRs), and then decide what’s ready to merge.\n\nThe new offering consists of Code Review, which is already generally available , and two new agents now in beta: PR Steward and Claude Approvals. PR Steward focuses on addressing issues such as failing CI checks, merge conflicts, and feedback from Code Review. It also comments after every push on what it changed and how to roll it back, if needed.\n\nClaude Approvals then applies an approval policy that the team writes as a file in the repository. This approval process can incorporate various signals, including Code Review findings or the company’s own classifiers, with policies written in natural language.\n\nBecause the offering is still in beta, Anthropic suggests running the approval functionality in observe-only mode first. Teams can also choose to start with just one repository and set monthly spending limits to have more control over the process.\n\nAnthropic says teams will also still remain in control of where Claude Ship runs, which review settings to use (e.g., Quick, Standard, or Deep), and which changes should be escalated to a human for a decision.\n\nClaude Ship is rolling out to Claude Team and Enterprise plans for repositories on GitHub. Code Review is generally available, while PR Steward and Claude Approvals are in beta."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-d3d04a1d0bc1668a",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/23/supertake-raises-20m-to-let-ai-agents-turn-your-market-predictions-into-stock-portfolios/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-23T22:02:05.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Supertake raises $20M to let AI agents turn your market predictions into stock portfolios",
+        "summary": "Think you know where the market is headed? A startup called Supertake lets you put money behind your ideas without having to pick the stocks yourself.",
+        "body": "AI investing startup Supertake has an interesting premise: What if your “takes” on the market could make you money without you having to pick stocks yourself? The service lets people turn their ideas into real investment portfolios, using frontier AI models and trading agents.\n\nNow, the company has raised $20 million in seed funding to grow its business. The round was led by venture firm Adjacent (Nico Wittenborn), with participation from Coinbase Ventures and Union Square Ventures (USV). Numerous angel investors also joined, including Nat Friedman , who’s currently head of product at Meta Superintelligence Labs; Vercel CEO Guillermo Rauch; renowned product manager Nikita Bier; investor Scott Belsky; and Nemil Dalal, a former Coinbase exec who is now a visiting partner at Y Combinator.\n\nMichael Mignano originally incubated the startup at USV. He is the co-founder and former CEO of the podcasting platform Anchor, which Spotify acquired in 2019 for over $150 million. After leading Spotify’s podcasting business as “Head of Talk” for a few years, he joined the team at Lightspeed as a venture partner, betting on AI companies like Suno and Granola. He also co-founded Oboe, an AI education startup, and joined USV as a general partner in April.\n\n“We really believed there was an opportunity to make investing more democratized…and give everyone and anyone the ability to invest in their own insights and beliefs and ideas,” Mignano said. While he will continue in his role as founder and executive chairman, he’s now brought in a team to run the company day to day.\n\nThe team includes co-founders Lincoln Murr (CEO) and John Peterson (CTO). Both joined from Coinbase, where, Mignano notes, they were the heads of AI product and engineering, leading launches like Coinbase advisor, Coinbase for agents, agentic wallets, and others.\n\nThe startup arrives as AI continues to make inroads into financial services, but allowing AI to take over people’s actual investments requires a new level of trust. Supertake is betting that people will ultimately be willing to take that leap, given recent improvements in frontier AI models.\n\nCurrently, Supertake works with Coinbase and Robinhood, and the company intends to expand to more brokerages over time. The idea is that you can explain, in broad, natural language, what you believe about how the world is going to change, and Supertake’s AI will iterate with you back and forth to turn that idea into a “take” that’s investable.\n\nUnder the hood, the startup is leveraging frontier AI technology and tools, combined with its own proprietary software that directs and limits what the AI can do.\n\nSupertake’s users’ ideas are tracked on a leaderboard on the site, so others who agree can invest alongside them. For instance, there’s currently an idea on the leaderboard about looksmaxxing and longevity becoming more of a trend, where the portfolio includes certain pharma and cosmetic companies that could potentially benefit.\n\nFor now, these portfolios consist of stock picks, but the team wants to expand the service over time to handle other types of transactions, like shorts, derivatives, perpetuals, long exposure, or even prediction markets — the latter handled through partnerships with companies in that space.\n\nDespite these “takes” seeming like bets on what could happen next in a given market, Murr stresses that this doesn’t make Supertake itself a prediction market.\n\n“We think it’s a novel and very much improved way to create what was previously considered the robo-advisor experience,” he says. “When that came out, it had this amazing vision and direction of allowing people to have digital asset management. We think now is actually the time for that, with AI agents being so widely proliferated.”\n\n“I don’t think this is necessarily a prediction market by any means. The idea of natural language translation into an underlying set of assets feels different in that regard,” he says.\n\nStill, the startup could wade into short-term predictions if a user’s take involves something they believe could happen in the near future, like who might win an election.\n\n“We’re primarily focused on the longer, medium-term holdings today. But that being said, we don’t want to preclude people from building out very hyper short-term strategies that might exist,” Murr adds.\n\nTo address people’s concerns over AI managing their money, Supertake’s team says it’s implementing certain guardrails and spend limits. For instance, the AI has no ability to deposit or withdraw funds on a user’s behalf without their explicit consent. There are also drift limits in place so the portfolio stays balanced, plus allow and deny lists (meaning which assets the AI may and may not trade), real-time monitoring for anomalous activity, tools to set trade size limits, and a restriction that keeps agents from seeing the user’s brokerage credentials.\n\n“We view it as somewhat analogous to self-driving cars, actually, where there is a spectrum here of both trust and technological innovations that are happening,” says Murr. “Where a few years ago you may not feel comfortable getting in a car that has lane assist, but today you get in a Waymo, and it’s like nothing. And we think that there’s a very similar progression happening with the agentic finance space, and we’re far further along in the technological spectrum than people think.”\n\nAccess to Supertake is still behind a waitlist while in beta, but the founders said they’ve put their money where their mouths are. Murr and Peterson are letting it manage “tens of thousands” and “thousands” of dollars, respectively.\n\nMignano, meanwhile, says he has Supertake managing “hundreds of thousands” of dollars.\n\nWith the new funding, which follows a $2 million pre-seed round, Supertake aims to expand its team in areas like engineering, design, growth marketing, and others. Mignano and Murr are in New York, while Peterson is in the Austin area but commutes to New York at times. The team says it hopes to figure out a hybrid work model as it grows."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-ef1d9702e2597805",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5google.com/2026/11/23/youtube-custom-icons-ios-tv-return/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-23T21:46:26.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "YouTube’s iconic iOS app icon may soon return with new customizable icons [Gallery]",
+        "summary": "The iconic YouTube app icon that looked like a retro TV found on iOS might be making a comeback, with new customizable icons showing up behind the scenes of a new YouTube update. more…",
+        "body": "The iconic YouTube app icon that looked like a retro TV found on iOS might be making a comeback, with new customizable icons showing up behind the scenes of a new YouTube update.\n\nIn the early days of the iPhone, Apple built a custom app for YouTube on iOS before Google built its own. That included an app icon that looked like a retro TV and it was later replaced when YouTube’s official app launched on the platform.\n\nNow, that icon might be coming back.\n\nAndroid Authority spotted several new app icons YouTube for Android is testing in its latest beta update (v21.47.483-BETA). These icons seem to be tied to a new feature that would allow users to customize the homescreen icon for YouTube, and includes seven designs in total including two throwback designs. One is the aforementioned retro TV icon used on iOS, which was never on YouTube for Android, and another is an old stacked YouTube logo design.\n\nUsers would be able to change the app icon via a new setting in the app near the “Appearance” section, but nothing is live just yet. We also don’t know if this is Android-only, if this is limited to Premium subscribers, or when this might debut.\n\nThat said, it’s very fun to get these throwbacks, and we’ll be excited to see this functionality go live.\n\nFollow Ben: Twitter/X , Threads , Bluesky , and Instagram"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-7cded186ebb4dbdf",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/science/1040497/ai-data-centers-electricity-un-climate-summit",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-23T21:09:37.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "AI data centers throw another wrench into chaotic UN climate talks",
+        "summary": "The clean energy revolution hinges on electrifying the entire global economy just as power-hungry data centers are surging. It's a challenge delegates from all over the world had to grapple with during the United Nations climate conference, called COP31, that came to a chaotic and unsatisfying close in Antalya, Turkey, on Sunday. Each year, attendees […]",
+        "body": "The clean energy revolution hinges on electrifying the entire global economy just as power-hungry data centers are surging. It's a challenge delegates from all over the world had to grapple with during the United Nations climate conference, called COP31, that came to a chaotic and unsatisfying close in Antalya, Turkey, on Sunday.\n\nEach year, attendees try to make good on the commitment to stop climate change as part of the 2015 Paris climate accord. Preventing extreme weather from growing more terrifying, coastal communities from flooding, and droughts from wrecking food and water systems requires slashing greenhouse gas emissions. But in or …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-apps-052139769732f51b",
+    "type": "news",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/medical/dozo-pill-reminder-tracker",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-23T20:44:11.000Z",
+    "categories": [
+      "apple",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Dozo: Pill Reminder & Tracker",
+        "summary": "Dozo is a simple reminder for anyone who takes pills, vitamins or injections and doesn't want to miss a dose. Set it up for yourself, or for a parent, in a few minutes. One move from the Lock Screen When a reminder arrives, choose Taken, Skip or Snooze right in the notification, without opening the app. With VoiceOver, these are in the rotor. Every kind of schedule • Set times every day • Every 8 hours and other intervals: pick the first time, the rest follow • Certain weekdays, every few days, or cycles like 21 days on, 7 off • Weekly injections or every few weeks, with site rotation • Fixed-length courses, as-needed medications, tapering doses Hard to forget A missed dose is reminded again at the interval you choose. Today tells you clearly what's next and what's late. With Siri Say \"I took my medicine in Dozo\" or \"What's my next medication in Dozo\". For your doctor Share your history as a PDF or web page, and print your medication list. Privacy Your information stays on your iPhone. No account, no ads, no tracking. Move to a new phone with a backup file. Easy for everyone No cluttered screens; each step asks one question. Dozo also works fully with VoiceOver, large text and Voice Control, and dose actions are available as buttons or menus and in the rotor. Free and Full Package Two active medications and all features are free. For more medications, get the Full Package with a one-time lifetime purchase or a yearly subscription. Dozo does not give medical advice; ask your doctor or pharmacist about your medication. Terms of Use: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/ Privacy Policy: https://forali.app/dozo-privacy/",
+        "body": "Dozo is a simple reminder for anyone who takes pills, vitamins or injections and doesn't want to miss a dose. Set it up for yourself, or for a parent, in a few minutes.\n\nOne move from the Lock Screen When a reminder arrives, choose Taken, Skip or Snooze right in the notification, without opening the app. With VoiceOver, these are in the rotor.\n\nEvery kind of schedule • Set times every day • Every 8 hours and other intervals: pick the first time, the rest follow • Certain weekdays, every few days, or cycles like 21 days on, 7 off • Weekly injections or every few weeks, with site rotation • Fixed-length courses, as-needed medications, tapering doses\n\nHard to forget A missed dose is reminded again at the interval you choose. Today tells you clearly what's next and what's late.\n\nWith Siri Say \"I took my medicine in Dozo\" or \"What's my next medication in Dozo\".\n\nFor your doctor Share your history as a PDF or web page, and print your medication list.\n\nPrivacy Your information stays on your iPhone. No account, no ads, no tracking. Move to a new phone with a backup file.\n\nEasy for everyone No cluttered screens; each step asks one question. Dozo also works fully with VoiceOver, large text and Voice Control, and dose actions are available as buttons or menus and in the rotor.\n\nFree and Full Package Two active medications and all features are free. For more medications, get the Full Package with a one-time lifetime purchase or a yearly subscription.\n\nDozo does not give medical advice; ask your doctor or pharmacist about your medication.\n\nTerms of Use: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/ Privacy Policy: https://forali.app/dozo-privacy/"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-ffdf356563e8cc04",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2320288/how-to-connect-bluetooth-headphones-xbox-series-x/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-23T19:30:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "How to connect your Bluetooth headphones to your Xbox Series X",
+        "summary": "Connecting Bluetooth headphones to your Xbox Series X can be frustrating due to incompatibility. However, there are a few workarounds to solve this problem.",
+        "body": "Since the Xbox Series consoles lack support for Bluetooth headphones, here's how you can work around the problem.\n\nHaving the best audio can elevate any game, and sometimes TV speakers just don't cut it. But while Bluetooth headphones are supported on virtually every device from smartphones to laptops, the same isn't true of game consoles. Out of the box, an Xbox Series X can't connect directly to Bluetooth headphones, but there are a few workarounds if you want to get more out of your game's sound than your TV can provide.\n\nThe problem with using even the best wireless Bluetooth headphones for gaming is latency. Sending audio over Bluetooth introduces a tiny delay before your headphones actually receive it. Most of the time, that's not an issue, but when your game's sound is even a fraction of a second off, it can be distracting. Worse, it can make rhythm games that rely on audio cues nearly unplayable. If you do want wireless audio from your Xbox Series X, there are a few solutions, but none are perfect.\n\nOne simple but costly route is to buy the official Xbox Wireless Headset , which retails for $120. Microsoft uses its own wireless standard for these headphones to connect with extremely low latency, and since Bluetooth isn't an option, you have to pay more for the first-party version if you want wireless audio. Some third-party manufacturers like Audeze and SteelSeries also make Xbox-compatible wireless headsets, but they can be just as expensive as Microsoft's version or more. Third-party headsets that support Xbox's wireless protocol need to be licensed by Microsoft, and you'll see the Xbox logo on the box.\n\nAnother option is to route Bluetooth audio through an adapter or your TV. Some Bluetooth adapters are made to plug into the Xbox controller's headphone jack and transmit the audio coming through it, while others connect to the console's USB port and transmit from there. Higher-end headphones like the SteelSeries Arctis Nova Elite that come with a dedicated low-latency dongle are the best choice for sound quality, but they also tend to be more expensive. If you already own a smart TV that can transmit a Bluetooth signal, you can also set your console to output to the TV, then connect it to your headphones. Any of these options will be cheaper than buying an entirely new set of headphones.\n\nThe cheapest way to connect your headphones to your Xbox Series X is just to use the controller's audio jack as it's intended. Some Bluetooth headphones include a jack and audio cable as a wired backup, but that's not always the case. If you have any headphones that support wired connections, though, using the controller jack is the best way to avoid latency. It's not actually wireless, of course, but connecting your headphones to the controller won't compromise your audio quality."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-dd9ed5c7c188aaa9",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/23/google-searchs-ai-mode-can-now-tap-into-drive-and-wallet-for-more-personalized-responses/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-23T19:14:46.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Google Search’s AI Mode can now tap into Drive and Wallet for more personalized responses",
+        "summary": "By bringing Personal Intelligence in AI Mode to Drive, Wallet, and the Gemini app, Google is leveraging the wealth of user data that's already within its ecosystem",
+        "body": "Google announced on Monday that it’s expanding Personal Intelligence in Search’s AI Mode with integrations for Google Drive, Google Wallet, and the Gemini app. Personal Intelligence is designed to offer users more personalized, context-aware answers by connecting to their Google apps and drawing on information from their digital lives. The feature can already connect to apps like Gmail, Google Calendar, and Google Photos.\n\nBy bringing Personal Intelligence in AI Mode to Drive, Wallet, and the Gemini app, Google is leveraging the wealth of user data that’s already within its ecosystem. Since users rely on these services, the tech giant can deliver more personalized experiences that rivals aren’t able to match. Of course, not everyone wants AI looking at their Wallet and Drive, so connecting the apps is optional, and you can turn Personal Intelligence on or off at any time.\n\nGoogle says that connecting Google Wallet to Personal Intelligence lets users track their financial goals, cut everyday spending, and make better use of credit card rewards. The tech giant notes that if users choose to connect their Wallet, AI Mode can only read information from accounts and isn’t able to move or manage their money.\n\nAs for Drive, the company says important information related to a project or major decision is often scattered across documents and spreadsheets. By connecting Google Drive to Personal Intelligence, AI can draw on those files to provide more relevant, personalized answers, such as creating a tailored plan for tax season.\n\nUsers will also be able to share context between their Gemini app and AI Mode in Search, which means that if they explore an idea in the Gemini app, they won’t have to start over with AI Mode because it will already have the information, and vice versa.\n\nAdditionally, Google says users will soon be able to view the context that AI Mode uses via a new “Personalization” icon that will appear below responses.\n\nThe company also announced on Monday that users will start to see more personally relevant responses in AI Overviews and AI Mode that will be tailored to users’ recent search context."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-apps-16abac8e61382f79",
+    "type": "news",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/mac/utilities/downaudible",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-23T13:46:10.000Z",
+    "categories": [
+      "apple",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "DownAudible",
+        "summary": "DownAudible is a MacOS app that allows you to download selected books or your entire library in the best possible quality. It also allows you to convert your books to standard M4B files, with chapters and metadata intact, and you can even convert books to M4A or MP3 with a file per chapter. If you have a folder of audible files already, DownAudible will match them to your existing library so you don't have to download them again. You can also convert existing files, freeing them to be played on any device of your choosing where those files are supported.",
+        "body": "DownAudible is a MacOS app that allows you to download selected books or your entire library in the best possible quality. It also allows you to convert your books to standard M4B files, with chapters and metadata intact, and you can even convert books to M4A or MP3 with a file per chapter. If you have a folder of audible files already, DownAudible will match them to your existing library so you don't have to download them again. You can also convert existing files, freeing them to be played on any device of your choosing where those files are supported."
       }
     },
     "media": null
@@ -98,102 +410,6 @@
     "media": null
   },
   {
-    "id": "the-verge-18776ae1e1833fe6",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1038650/kodak-slidetag-keychain-photo-display-tracker-find-my-hub-google-apple-e-ink",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-23T03:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Kodak’s next collectible is a tiny digital photo frame that doubles as a tracker",
-        "summary": "After expanding its Charmera collection with a Millennium Edition featuring Y2K-inspired designs earlier this year, Reto's follow-up to its tiny Kodak camera is an equally small digital photo frame you can use to display your shots. But while the Charmera's usefulness stopped at snapping grainy photos and terrible videos, the Kodak SlideTag goes one step […]",
-        "body": "After expanding its Charmera collection with a Millennium Edition featuring Y2K-inspired designs earlier this year, Reto's follow-up to its tiny Kodak camera is an equally small digital photo frame you can use to display your shots. But while the Charmera's usefulness stopped at snapping grainy photos and terrible videos , the Kodak SlideTag goes one step further. It also functions as a Bluetooth tracker that's compatible with either Apple's Find My or Google's Find Hub tracking networks.\n\nThe Kodak SlideTag will be available for $34.99 each and, like the Charmera, will feature a series of retro designs distributed in mystery boxes so you don …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-50d3495569ef9ce4",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2319565/vorssaint-free-swiss-army-knife-macos-replace-utility-apps/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-23T00:45:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "This free 'Swiss Army Knife' for macOS can replace your utility apps",
-        "summary": "Vorssaint is a powerful, modular utility suite, provided permissions are carefully managed.",
-        "body": "Vorssaint is a powerful, modular utility suite, provided permissions are carefully managed.\n\nmacOS offers one of the most refined desktop experiences, but users looking for more granular control of their desktops might find the OS' native options limiting. Unlike Microsoft's PowerToys , which includes a collection of over 25 productivity and customization tools, Mac users must often turn to a fragmented selection of third-party applications to achieve similar levels of control. For example, macOS' native window tiling is serviceable at best, allowing for only a few tiling options regardless of screen size. Similarly, the OS doesn't natively support independent volume control and output device selection for individual applications. This is where Vorssaint, the Swiss Army Knife of macOS utility apps, comes into the picture.\n\nVorssaint is a third-party, open source application that aims to resolve macOS' productivity and customization pain points with a single menu-bar application. The app groups together a range of utility tools and nifty quick toggles to streamline productivity. The project is hosted on GitHub , and has earned over 33,000 stars and 230 contributors.\n\nVorssaint includes an impressive collection of utilities that aims to improve how users interact with their Macs. Its window-tiling feature offers more control over how users arrange their application windows, including edge snapping and shortcuts. The app also includes a toggle for clamshell mode, enabling MacBooks to continue running even with their lids closed, while its \"Keep Awake\" feature allows users to control when or if their Macs can enter a sleep state.\n\nThe application suite also includes several handy tools that streamline daily workflows. For example, its screenshot utility supports scrolling screenshots, which makes it possible to capture content that extends beyond what's visible on the screen. Users can also edit captured screenshots with the app's in-built image editing tool. Similarly, Vorssaint's media tool is capable of video compression, image conversion and text extraction from images. Meanwhile, its system monitoring tool extends beyond Mac's Activity Monitor, providing valuable information on thermals, memory usage and network speed.\n\nThese are just a few examples of what Vorssaint offers. The suite also includes a graphical interface for Homebrew, URL cleaner and a powerful command bar. The command bar is akin to Apple's Spotlight search , but a lot more exciting. Its functionality extends beyond just searching apps and files; it can also be used to perform quick mathematical calculations, unit conversions and access most of Vorssaint's utilities by simply searching for them.\n\nVorssaint's robust utility stack undoubtedly makes it a promising productivity suite for power users. However, some of its powerful tools require sensitive macOS permissions. Depending on what features users install, the app may request permissions for Accessibility, Screen Recording, Full Disk Access and Automation. While granting these permissions is necessary to allow Vorssaint to perform some of its functions like taking screenshots, uninstalling applications and other system-level operations, users must understand what it means to grant system-level permissions to applications, especially those built by third-party developers.\n\nThis is where Vorssaint's modular design becomes particularly useful, allowing users to choose specific modules according to their requirements. For example, someone particularly interested in streamlining window management can choose to install only the Window layout module, and need not grant it screen recording and app management permissions. This selective approach lets users retain the modules they without having to risk granting sensitive permissions.\n\nFinally, according to Vorssaint's privacy documentation, the app emphasizes an open-source and local-first approach. It doesn't require users to set up an account, subscribe to a service or share usage analytics with the developer. However, it's worth noting that an application being open source does not validate its security. Therefore, users are advised to consider the app's privacy trade-off before choosing to install it on their Macs."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-2eb90e9314f768f4",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2311788/headphone-dac-amp-combo-vs-stack/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-23T00:30:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Should you go with a headphone DAC/amp combo or a stack?",
-        "summary": "If your computer's headphone jack isn't cutting it anymore, it's time to get a DAC and headphone amp. But do you go for a combo DAC/amp or a stack?",
-        "body": "Both will do a fine job, and it depends on what you need from your gear.\n\nYou don't always need a DAC and amp to enjoy music through headphones. If your computer or laptop's headphone jack already delivers clean audio at a comfortable volume, then you're probably fine. Some MacBooks from 2021 and later, for example, support both low- and high-impedance headphones and can deliver up to 3 volts RMS through their headphone jacks when you use headphones rated between 150 and 1,000 ohms. If your headphone jack isn't quite as capable, or if you're not satisfied with the sound, though, then it's time to spend on some hardware.\n\nA DAC and a headphone amp can come together in a single unit (usually known as a DAC/amp) or as a stack of separate units. And while the latter seems like the more serious setup, it doesn't necessarily mean you'll enjoy a better listening experience. The main job of a DAC is to turn digital audio signals into analog signals, while the amplifier takes those analog signals and makes them loud enough to power your headphones. Both a DAC/amp combo and a stack do the same thing, and which you go for largely depends on your headphones, how much flexibility you need and, of course, your budget.\n\nFor most listeners, a DAC/amp is the way to go, especially if you're trying to improve your computer's audio without taking up too much space. Not only is a single unit more convenient, but it also means fewer cables dangling around and one less power adapter to worry about. You can even use a portable USB-C DAC/amp dongle designed for smartphones , but desktop versions usually offer better connectivity and power.\n\nDAC/amps can also offer better value than separates, too. Schiit's Magni 6 sells for $169 with its optional internal USB DAC. Conversely, you can buy the Magni 6 sans DAC for $99 and pair it with the Modi 5 DAC for $149 (or $164 with a power adapter). That brings the total to over $250, and you don't even get an interconnect cable. The Modi 5 has optical and coaxial inputs, sure, but that doesn't automatically equate to better sound.\n\nDAC/amp combos don't necessarily have to come with major compromises, either. The $549 JDS Labs Element IV delivers up to 3.2 watts per channel into 32 ohms, and comes with features like automatic gain switching, EQ and even preamp outputs for powered speakers. That's more than enough for many demanding headphones, eliminating the need for a dedicated amplifier. The downside, of course, is that you're stuck with the combo and can't upgrade piecemeal.\n\nWhile DAC/amp combos are great, a stack can still make sense for audiophiles who use a wide variety of headphones or who like to tinker with their hi-fi setup. Going with separates gives you the freedom to upgrade the amplifier down the line without giving up a perfectly capable DAC, or vice versa.\n\nCertain headphones may also benefit from the power a dedicated amp can provide. Some high-impedance headphones just ask for a lot of power, while planar magnetic models, for example, can combine low impedance and low sensitivity. Let's take the HiFiMAN Susvara Unveiled, for example, which has a 45-ohm impedance and only 86 dB sensitivity. The Absolute Sound advises at least 6 watts of amplification, so a standalone amp may be the better choice here. However, too much power can be a bad thing, too: a very powerful amp may result in audible hiss with very sensitive headphones. So start by checking your headphones' power requirements and the amplifier's noise performance instead of just assuming that you need a beefy amp.\n\nYou may also get extra analog inputs, more gain settings or extra headphone outputs (such as balanced connectors) when you go for a dedicated amplifier . This extra flexibility is not unique to separates, but you're more likely to get these bonuses with a dedicated amp. There is, however, a price to pay for these perks, as higher-end headphone amps like Topping's $499 A70 Pro can cost more than many DAC/amps on their own. You'll also have to deal with the potential hassle of accommodating a pair of interconnects and an extra power cable. It's unavoidable if you need what a stack offers, but not everyone will."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-425cb184307f95ce",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2317781/windows-apps-remove-from-pc/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-23T00:15:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "8 Windows apps you should probably remove from your PC",
-        "summary": "From pre-installed junk to popular apps that have better alternatives, these are the apps you should clean off your PC if they're present.",
-        "body": "Not every app on your PC deserves a permanent place.\n\nBloatware and adware aren't new, but they feel far more prevalent these days. Not only do they take up SSD space (which is more precious than ever because of soaring storage prices ), but they can also consume RAM and annoy you with alerts you don't care about.\n\nThe ubiquity of these annoyances, including junk built into Windows itself, means that debloating a fresh Windows PC has become a common practice. Some apps (both preinstalled and common third-party tools), aren't actively detrimental. But, depending on how you use your PC, it may be worth upgrading them with superior — and often inexpensive or free — options. Here are several such Windows apps you should replace or remove outright.\n\nMedia Player, not to be confused with the classic Windows Media Player from prior Windows versions, is the out-of-the-box way to listen to music or watch videos on your PC. And while it does a suitable job of playing both audio and video files from a broad range of formats, it can't compete with the features you get from alternative apps like VLC .\n\nVLC can play tons of video formats (even rare ones) without the need for additional codecs or extensions. It can also handle media file conversions quickly and easily. If you love subtitles but have a video file that lacks them, VLC can take dragged-and-dropped .srt or .vtt files from the web. The totally-free app can do so much more once you dig into it.\n\nIt's never been easier to get into content creation, which can blossom into a potentially profitable side hustle. Even if not, it's fun sharing your creativity with close friends and anyone the algorithm pushes you towards. Microsoft Clipchamp is included in Windows 11 and offers a user-friendly way to crop, cut and edit videos in up to 1080p. Unfortunately, it keeps a lot of its flashier features, like Copilot integration and 4K exporting, along with access to premium stock assets, filters and effects, behind the Microsoft 365 paywall.\n\nAs someone who edits video almost every day, it's difficult for me to recommend anything else but CapCut to amateur creators. It's approachable for beginners while also providing plenty of features that professionals will love. And as someone leery about shoehorned AI features, I find those in CapCut actually useful (some of them, anyway).\n\nThere's a subscription here too if you want to take full advantage, starting at $19.99 per month. But it's one of the few apps on this payment model that provides substantial value.\n\nWhile it might sound shallow to say, uTorrent is one of the most hideous-looking modern apps. Like many programs that offer free versions, it's full of ads and foists extra junk apps on you during installation. In 2015, uTorrent received backlash after it secretly installed Epic Scale, a Litecoin miner , with every new installation. We're more than a decade removed from this, but it's the kind of cynical action that people never really forget.\n\nThere are countless replacements, with two highlights depending on what you're after. For a uTorrent-like experience without the bloat or ads, there's qBittorrent . It's got a slightly larger footprint than uTorrent, has built-in search engines, and is widely accepted on private trackers. If you prefer a slimmed-down, barebones approach, Transmission is hard to beat.\n\nSetting up a new PC is exciting, but also comes with some frustrations. You'll probably be dismayed to see, after dropping big bucks on a new piece of tech, that you still have to contend with pre-installed software like Norton or McAfee. It's annoying to get bombarded with alerts that your trial (which you never wanted) is ending, especially since Windows Defender is more than enough for most people .\n\nConsidering how good Defender is, McAfee, Norton, and other antivirus apps don't simply provide protection from viruses. Their paid versions add other security services such as a VPN , scam detection and support for restoring your identity if it's stolen. But if you're just looking for bog-standard protection from viruses, Defender should be vigilant enough to keep your PC safe.\n\nDoes anyone actually use these? Despite their default presence in the world's most popular desktop OS, I've never once heard of anyone actually implementing the built-in news and weather apps in their regular workflow. It's almost impressive that Microsoft still supports these, which probably see less regular use than Minesweeper .\n\nThe Weather app isn't terrible, but there's nothing particularly exciting about it and it also has annoying ads to work around. Plenty of weather sites give you more data in a cleaner experience. The News app is considerably worse, cramming tons of low-quality and clickbait stories amongst more ads. You'll have far better results curating a feed with RSS, following your favorite news publications on social media or getting alerts from their dedicated apps.\n\nWhile Xbox still has dedicated consoles, Microsoft's dedicated gaming brand has taken on a more nebulous definition. It's a console, but also an app and a store, with games you can stream to many other devices. If you're a gamer, the Xbox app for Windows has plenty of features and tools like Xbox mode that come close to providing a console-like experience with the power of your PC. It's constantly updated, supports cloud gaming, lets you easily connect with friends and aggregates all your games from various storefronts in one convenient place.\n\nBut if you're not a gamer, it does little more than take up resources. Even if you are a gamer, those who stick to Steam for their games can get by without the Xbox app. That's also the case for anyone who's hopped off the Game Pass bandwagon recently.\n\nIf you want a simple example of how cynical adware has gotten in recent years, just remind yourself that in the not-too-distant past, Minesweeper and Solitaire came standard with every copy of Windows and weren't bogged down with ads like they are today. You can pay for the premium edition of Microsoft Solitaire Collection for $1.49 per month, which won't break the bank, but still feels unnecessarily rent-seeking.\n\nBut with games as simple as these, there are, luckily, many free alternatives easily accessible from your web browser. Solitaire for Free and Minesweeper for Free are exactly what they're poised as: classic versions of these games with no nonsense. Minesweeper doesn't offer much customization outside of difficulty, but Solitaire has more than 30 variations, plus light customization of its cards and background.\n\nIf you want an alternative that you can play offline, Free Solitaire on Steam is tough to beat. There are tons of different game modes and variants, lots of card customization (including personalized art if you want) and zero ads.\n\nOne of the irrefutable facts of life is that \"nothing beats free.\" Sure, there are outliers, but if I had to cite my source for this ancient adage, it would be Google Docs and the rest of Google Workspace. Google's productivity suite features everything most people need for personal documents, spreadsheets and presentations. And web links make them easy to share with whoever needs them.\n\nIt's not a one-to-one match for Microsoft Office, which is why many professionals still need the full Microsoft suite. Microsoft Office extensions like .docx and .xlsx are the corporate standard, and while Google Docs can export to these, doing so can result in some wonky formatting.\n\nUnfortunately, accessing Microsoft Office applications requires paying at least $9.99 per month or $99.99 per year for Microsoft 365. If you prefer the feel of a dedicated app, or are leery of letting Google take over another part of your life, there are plenty of great Microsoft Office alternatives . One is OnlyOffice , which provides a comparable Office experience while also being free (with paid options for businesses and developers).\n\nNo matter which option you choose, you can uninstall the free Microsoft Office trials that come with Windows and only serve to push you into signing up for a subscription when you open an Office file."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-apps-37fb83df8b1221e0",
     "type": "news",
     "sourceId": "applevis-apps",
@@ -213,125 +429,6 @@
         "title": "Mushroom FM",
         "summary": "Mushroom FM, the Home of the Fun Guys, brings you four decades of magic Mushroom memories: music from the 50s to the 80s, presented live by a friendly team from New Zealand, Australia, Britain, South Africa, Canada and the US. Commercial-free, apart from the occasional old advert played for nostalgia. Built for VoiceOver from the start. Many of our presenters and listeners are blind or partially sighted, so every screen is designed to be quick and easy with VoiceOver, as well as for sighted listeners. LISTEN LIVE - Mushroom FM at the press of a button, with the show, the presenter and the song playing now. - Pause live radio and carry on where you left off, or go back to the start of the show. - Keeps playing with your iPhone locked, with controls on the Lock Screen and your headphones. - A sleep timer, including \"end of this show\". MUSHROOM ESCAPE Our old-time radio channel: drama, comedy, mystery and science fiction from the golden age of radio, from America, the BBC and beyond, scheduled by hand so your favourite series is on at the same time every week. SCHEDULE AND REMINDERS See the week's shows on both channels, and get a reminder before the shows you don't want to miss. LISTEN AGAIN Missed a show? Play recent shows again. TALK TO THE PRESENTERS Send a written or recorded message to the presenter on air, or to any of the Fun Guys. If you're on Mastodon, toot the presenter and follow what the Mushroom Crowd is saying, right in the app. AND MORE - Siri: \"Play Mushroom FM\" and \"Play Mushroom FM Escape\". - A Home Screen widget. - An Apple Watch app that plays the live stream. Mushroom FM is a licensed internet radio station.",
         "body": "Mushroom FM, the Home of the Fun Guys, brings you four decades of magic Mushroom memories: music from the 50s to the 80s, presented live by a friendly team from New Zealand, Australia, Britain, South Africa, Canada and the US. Commercial-free, apart from the occasional old advert played for nostalgia.\n\nBuilt for VoiceOver from the start. Many of our presenters and listeners are blind or partially sighted, so every screen is designed to be quick and easy with VoiceOver, as well as for sighted listeners.\n\nLISTEN LIVE - Mushroom FM at the press of a button, with the show, the presenter and the song playing now. - Pause live radio and carry on where you left off, or go back to the start of the show. - Keeps playing with your iPhone locked, with controls on the Lock Screen and your headphones. - A sleep timer, including \"end of this show\".\n\nMUSHROOM ESCAPE Our old-time radio channel: drama, comedy, mystery and science fiction from the golden age of radio, from America, the BBC and beyond, scheduled by hand so your favourite series is on at the same time every week.\n\nSCHEDULE AND REMINDERS See the week's shows on both channels, and get a reminder before the shows you don't want to miss.\n\nLISTEN AGAIN Missed a show? Play recent shows again.\n\nTALK TO THE PRESENTERS Send a written or recorded message to the presenter on air, or to any of the Fun Guys. If you're on Mastodon, toot the presenter and follow what the Mushroom Crowd is saying, right in the app.\n\nAND MORE - Siri: \"Play Mushroom FM\" and \"Play Mushroom FM Escape\". - A Home Screen widget. - An Apple Watch app that plays the live stream.\n\nMushroom FM is a licensed internet radio station."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-148106ecedd9fa9c",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/22/ios-27-has-a-clever-fix-for-unreliable-wi-fi-connections/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-22T22:02:43.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27 has a clever fix for unreliable Wi-Fi connections",
-        "summary": "9to5Mac is brought to you by Tello Mobile. Switching to Tello Mobile can bring the cost of your plan down to as little as $5 a month, or an unlimited plan for just $25 a month, all on America’s largest 5G network. See all of the available plans at tello.com . iOS 27 includes a really clever new feature that aims to solve the awkward middle ground between cellular and Wi-Fi connectivity. Here’s how it works and how you can turn it on. more…",
-        "body": "9to5Mac is brought to you by Tello Mobile. Switching to Tello Mobile can bring the cost of your plan down to as little as $5 a month, or an unlimited plan for just $25 a month, all on America’s largest 5G network. See all of the available plans at tello.com .\n\niOS 27 includes a really clever new feature that aims to solve the awkward middle ground between cellular and Wi-Fi connectivity. Here’s how it works and how you can turn it on.\n\nIn a support document , Apple explains that Connectivity Assist uses cellular data to improve your connection when Wi-Fi is slow or unusable. Apple uses examples like your backyard or driveway, as well as “coffee shops, airports, sports venues, and everywhere in between.”\n\nEssentially, the feature detects when your Wi-Fi connection is weak or unusable and intelligently uses cellular data to keep you connected.\n\nOne practical example I’ve noticed is when I walk out of my house and get in my car. Oftentimes, my iPhone will cling to my house’s weak Wi-Fi connection, making it hard to start playing Apple Music and queue up directions in Apple Maps.\n\nConnectivity Assist solves that problem. My phone can now intelligently use cellular data to help that transition away from Wi-Fi. It’s one of many really nice quality-of-life improvements in iOS 27.\n\nYou can turn Connectivity Assist on or off with these steps:\n\nHere are a couple of tidbits from Apple:\n\nAnother thing to be aware of is that you might use more cellular data with Connectivity Assist turned on. You can monitor your data usage via your carrier’s app or website, as well as in the Settings app on iPhone.\n\nWhat do you think of the new Connectivity Assist feature in iOS 27? Have you found it useful? Let us know down in the comments.\n\n9to5Mac is brought to you by Tello Mobile. Switching to Tello Mobile can bring the cost of your plan down to as little as $5 a month, or an unlimited plan for just $25 a month, all on America’s largest 5G network. See all of the available plans at tello.com .\n\nFollow Chance : Threads , Bluesky , Instagram , and Mastodon ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-d300576acc98d316",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/22/openais-chief-scientist-has-thoughts-on-how-to-limit-ai-development/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-22T21:14:07.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "OpenAI’s chief scientist has thoughts on how to limit AI development",
-        "summary": "To establish a speed limit on AI development, you need to agree on how to measure speed.",
-        "body": "A new blog post from OpenAI’s chief scientist Jakub Pachocki discusses potential limits on AI development, with a focus on a measurement called perplexity.\n\nSlowing AI development became a particularly hot topic after a former OpenAI and Anthropic researcher said the companies were “gambling with our lives,” and even Anthropic’s IPO filing suggested that the technology could pose “catastrophic or existential risks to society.”\n\nAnthropic CEO Dario Amodei then published a plan to “pace the frontier,” seemingly endorsed by OpenAI CEO Sam Altman and SpaceX CEO Elon Musk. Among other things, Amodei called for companies to agree to “common safety standards as well as limits on the rate of unchecked AI progress.”\n\nBut to establish a speed limit on AI development, you need to agree on how you measure speed. Pachocki’s post — described by Altman as “the most important thing OpenAI has published in a while” — suggests perplexity (not to be confused with the company of the same name ) could be that measurement.\n\nIn Pachochki’s argument, benchmarks that focus on AI’s “downstream capabilities” have quickly become outdated as the technology advances. But perplexity — which “measures how well a model predicts the next token on average; lower perplexity means better predictions” — has remained “informative.”\n\nPachochki’s post includes a chart of how the perplexity of OpenAI’s models has fallen since GPT 3.5.\n\n“GPT‑4, at ~0.91, was proficient at utilizing chain-of-thought reasoning productively, which motivated the subsequent targeted elicitation of this capability and the creation of modern reasoning models,” he wrote. “Now, as we have reached losses below 0.8, we have seen the emergence of transformative capabilities in fields like cybersecurity and mathematics.”\n\nSo in his view, perplexity could provide the basis for “a shared benchmark for general intelligence,” which AI companies could then use to establish “common limits.” With perplexity serving as a standard measurement for AI progress, the companies would commit not to go past a certain threshold “until our ability to understand and monitor AI behavior achieves a certain concrete milestone.”"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-bffebd611a59e8a6",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/22/techcrunch-mobility-a-b-testing-robots-vs-humans/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-22T17:06:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "TechCrunch Mobility: A/B testing robots vs. humans",
-        "summary": "Welcome back to TechCrunch Mobility, your hub for the future of transportation and, now more than ever, the role AI is playing in it.",
-        "body": "Welcome back to TechCrunch Mobility , your hub for the future of transportation and, now more than ever, the role AI is playing in it. To get this in your inbox, sign up here for free — just click TechCrunch Mobility !\n\nWaymo pulling its robotaxis off freeways (again) and Zoox robotaxis launching on the Uber app illustrate the push and pull between progress and setbacks in the autonomous vehicle industry.\n\nThere are signs of growth. For instance, Tesla has now surpassed Waymo in Texas in the number of robotaxis registered with the state (Tesla has 1,507 and Waymo has 1,345). But does that translate to market dominance?\n\nA better metric, if we’re trying to gauge who is leading, would be commercial driverless miles. And if we’re measuring cost-efficiency, another useful metric would be driverless miles per vehicle. By those measures, Waymo is still ahead, based on data available to me. But with Waymo’s recent freeways setback and Tesla’s push to expand its robotaxi fleet with Cybercabs, that lead could shrink.\n\nNot that there needs to be a winner, by the way. Transportation is deeply fragmented, and there is room for multiple players in the U.S., not to mention the rest of the world.\n\nA recent discussion with my Autonocast co-host Ed Niedermeyer, whose book, “Elon Take the Wheel,” comes out December 1, got me thinking about how Las Vegas could soon become a real world A/B test of sorts for human-driven vs. autonomous ride-hailing services.\n\nUber, as mentioned above, just added Zoox to its ride-hailing app in Las Vegas. For now, riders don’t have much of a choice. Uber customers can increase their chances of getting a Zoox robotaxi, and they can always decline a robot ride. But they can’t directly select a robotaxi. Instead, Uber riders will be matched with one if it’s available.\n\nUber said that will soon change. The company plans to introduce a dedicated autonomous option in its app as “availability and reliability improve,” Uber CEO Dara Khosrowshahi said during the company’s third-quarter earnings call in November.\n\nLas Vegas will also become the first U.S. city where riders can access two fully driverless partners through the Uber app, he said. (Hyundai’s self-driving subsidiary Motional is also an Uber partner.)\n\nThat would give Uber riders a meaningful choice: a human driver or a robotaxi, and potentially even which autonomous service to use. And it could offer a revealing look at what customers actually prefer when given that choice. Price could tip the balance, too.\n\nIt makes me wonder whether Las Vegas will become the next battleground for organized labor as robotaxis begin competing directly with human drivers.\n\nYou might have seen the Wall Street Journal scoop that General Motors is working with an executive search firm to identify possible candidates to replace CEO Mary Barra . Rumors of her imminent departure have swirled for months, but this time there appears to be real work happening behind the scenes.\n\nI reached out to a few little birds to learn more and here’s what they’re telling me. And, for the record, GM declined to comment.\n\nGM has hired executive search firm Heidrick & Struggles, according to one source, who noted it’s possible that the board has other executive search firms working on this as well. The board is taking a two-track approach to its search, which is occurring simultaneously.\n\nThe first is focused on traditional yet transformative automotive CEOs. One name that has come up from the executive search firm is José Muñoz, who is president and CEO of Hyundai. The board is also interested in someone less traditional. The firm has apparently floated names like Doug Field, who recently became CEO of Mind Robotics, and Larry Culp of GE, according to a source with direct information.\n\nThere are internal GM folks who are also in the mix, including Sterling Anderson, co-founder of self-driving trucks company Aurora who became chief product officer at GM in May 2025, and Paul Jacobson, the company’s executive vice president and chief financial officer.\n\nGot a tip for us? Email Kirsten Korosec at [email protected] .\n\nElysian Aircraft , the Dutch aerospace company developing aviation electrification technologies, raised €12 million in private and public funding from FideFlux, SecFund, and ROM InWest, as well as from individual investors and family offices.\n\nMahindra Last Mile Mobility , an electric three-wheeler business under Mahindra & Mahindra, is looking at an IPO in about 18 months, per Bloomberg .\n\nNuma , a startup developing an AI operating system for dealerships, raised a $45 million Series C round led by New York-based Blue Cloud Ventures. Threshold Ventures, Costanoa, Touring Capital, Gradient Ventures, and Tokio Marine Future Fund also participated.\n\nStark Future , a European electric motorcycle company, raised at least €150 million in equity, Reuters reported. The raise was led by Highland Europe, alongside Morgan Stanley Investment Management’s 1GT and Axon Partners Group.\n\nVincue , an automotive tech company that sells software to dealerships, raised $93 million in a round led by Wavecrest Growth Partners, with continued backing from FM Capital.\n\nAlso , the electric micromobility startup that spun out of Rivian last year, has paused deliveries of its new e-bike over problems with its software and batteries, The Verge reported .\n\nEdmunds released new data that found the average new vehicle is selling for a record $50,087.\n\nRedwood Materials is using computer vision and machine learning to identify and sort batteries by chemistry before they’re fed into the company’s rotary calciner — a massive cylindrical industrial furnace used to process 40,000 metric tons of raw feedstock a year.\n\nTesla said it will spend about $3.3 billion to expand its Berlin gigafactory to produce Cybercabs — yet another signal of the company’s global autonomy ambitions.\n\nOver the weekend, Tesla invited “select customers” to preorder the company’s autonomous, golden Cybercab “for personal use.” The Cybercab is priced at $29,990, but there is a lot more to ownership. The company will charge owners $299 a month to use the vehicles, delivery will only occur in a handful of cities, and operations will be limited to specific locations.\n\nUber opened its ride-hailing service to children as young as 10 in three U.S. cities. Uber already has a service for teenagers. If this program proves successful, it would open Uber up to another market of customers: busy families.\n\nMeanwhile, Uber said it’s notifying close to 150,000 drivers that their personal information was stolen in an October data breach.\n\nZipline continues to scale its autonomous drone delivery business, this time in its partnership with Uber. The companies had previously announced a partnership for drones to deliver for Uber Eats, but it officially launched this week in a Houston suburb. The aim is a big one: Uber and Zipline say they aim to make 1 million deliveries a day using the startup’s drones by the end of 2029.\n\nI had a chance to catch up with (and interview) Ro Gupta , the head of Woven Capital — Toyota’s growth fund.\n\nI’ve known Gupta for years; we first met when I worked at Fortune and he had a startup called Carmera. A lot has happened since those AV 1.0 days, and Gupta caught us up on this next era of AV innovation and where Toyota is interested in investing. It’s not enough to simply state “AI.” There’s more to it than that. Take a listen ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-73a869dc99303d9a",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/22/macbook-neo-2-likely-to-launch-around-march-could-feature-new-colors-report/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-22T15:38:23.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "MacBook Neo 2 likely to launch around March, could feature new colors: report",
-        "summary": "One of Apple’s most beloved products this year was undoubtedly the MacBook Neo . Unlike some of its other budget products, Apple seems interested in updating the MacBook Neo on an annual cycle, and we may get the next MacBook Neo around March. more…",
-        "body": "One of Apple’s most beloved products this year was undoubtedly the MacBook Neo . Unlike some of its other budget products, Apple seems interested in updating the MacBook Neo on an annual cycle, and we may get the next MacBook Neo around March.\n\nAccording to Bloomberg’s Mark Gurman , Apple is targeting the iOS/macOS 27.4 release cycle for the release of the new MacBook Neo , as well as the A19 budget iPad, iPhone 18, iPhone 18e, and OLED iPad Air.\n\nWhile he notes that this cycle runs between February and March, it doesn’t necessarily mean the products will launch on the earlier end of that spectrum. Apple is also expected to release the iPhone Air 2, OLED iPad Air, and a new iPad Pro within the first half of the year, but they’ll likely come a bit later than the aforementioned products.\n\nAs expected, the next MacBook Neo will bump up from the A18 Pro chip with 8GB of RAM to the A19 Pro chip with 12GB of RAM.\n\nApple will also introduce new colors on the MacBook Neo “frequently,” though it’s unclear if we’ll see that with the next iteration. From the Power On newsletter :\n\nThe other thing I’ve heard is that Apple plans to refresh the MacBook Neo’s colors frequently. We’ll see if that trend starts with the first follow-up.\n\nI’m certainly excited to see the next generation MacBook Neo , especially with 12GB of unified memory. While 8GB is certainly fine, heavy multitaskers will notice it, especially with unoptimized software.\n\nThe bigger question is: will the next MacBook Neo have a price increase? With additional RAM included, it feels inevitable.\n\nApple increased the price of MacBook Neo from $599 to $699 back in June, and in October the company also silently decreased the education discount by $50, meaning the education price has increased from $499 to $649 since launch.\n\nIf there is a price increase, it likely won’t be too major, maybe $50 – leaving the computer at $749. Compared to the rest of the laptop landscape, MacBook Neo would still be a good value. We’ll see what happens.\n\nSome of my favorite Apple accessory recommendations:\n\nFollow Michael: X/Twitter , Bluesky , Instagram"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-d9ffe9f3c782ec5f",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1038879/off-broadway-love-me-auracast",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-22T14:00:00.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "‘The show is starting soon. Please turn on your headphones.’",
-        "summary": "Up a few concrete steps and through the front door of a 200-year-old row house in New York City, I follow a crowd of people into the 178-seat SoHo Playhouse. As we filter to our seats, ushers hand each person a black drawstring bag with a pair of wired headphones connected to a small Auracast […]",
-        "body": "Up a few concrete steps and through the front door of a 200-year-old row house in New York City, I follow a crowd of people into the 178-seat SoHo Playhouse. As we filter to our seats, ushers hand each person a black drawstring bag with a pair of wired headphones connected to a small Auracast receiver . Then, soon after the play begins, we're instructed to put them on.\n\nThe headphones are an integral storytelling tool of Love Me - a one-man show from the minds of stand-up comedian and former Saturday Night Live writer Drew Michael and director Prashanth Venkataramanujam. It's a show about love and the bid for connection, told in five chapters …\n\nRead the full story at The Verge."
       }
     },
     "media": null
@@ -409,33 +506,6 @@
     "media": null
   },
   {
-    "id": "techcrunch-1de6274d3726f353",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/21/signal-restricts-mobile-screenshots-as-it-confronts-existential-threat-of-ai-surveillance/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-21T21:37:10.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple",
-      "android",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Signal restricts mobile screenshots as it confronts ‘existential threat’ of AI surveillance",
-        "summary": "Signal is limiting users' ability to take screenshots in both its Android and iOS apps.",
-        "body": "Posted:\n\nSignal announced Friday that it’s limiting users’ ability to take screenshots within the secure messaging app — a response to what President Meredith Whittaker described as the “existential threat” of operating systems that integrate agentic AI.\n\nWhittaker wrote that by giving AI agents the ability to “scan” the information on users’ screens, Windows, Android, and macOS/iOS “are undermining Signal’s ability to independently guarantee privacy.”\n\n“Now, in service of AI agentic capabilities, your sensitive data is being captured, stored, and made accessible to whatever local database or remote server an OS-level AI agent is using at that moment,” she said. “All of this is outside of Signal’s control once the data has been captured, and imperils the privacy of all the participants in a conversation.”\n\nSignal already sought to limit these risks by blocking screenshots of its Windows app by default. Now it’s adding similar restrictions in Android and iOS.\n\nThat said, users can disable this setting if they wish, which Whittaker said would “break our privacy guarantees.” She also admitted this is an “incomplete” solution, as it doesn’t “address other more sneaky ways AI agents could potentially access application data.”"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-apps-b9f78db7af37ce65",
     "type": "news",
     "sourceId": "applevis-apps",
@@ -503,7 +573,7 @@
       "en": {
         "title": "Google rolls out new search homepage with AI chat history and no search button",
         "summary": "Google search is making it even easier to access AI tools on the search page.",
-        "body": "Google's flagship search experience is evolving into an AI experience with stunning speed. Even time-tested elements of search are getting AI makeovers, and the latest to get this treatment is the search homepage on Google.com. A redesign that's been in testing for the last few weeks is now official, bringing easier access to AI chats and dropping the dedicated search button entirely.\n\nGoogle search VP Robby Stein confirmed on X that Google is deploying the new desktop search page after a successful test. The page will now have a few more buttons under the search bar, all connected to AI features. There's an image generation button, one for analyzing files, and one for brainstorming with Gemini. The \"I'm Feeling Lucky\" button remains, but the Google Search button that used to sit next to it is gone.\n\nThe search button has obviously been a part of Google's search page forever. However, it wasn't in a very convenient location in the modern interface. When you begin typing a query, the autocomplete suggestions cover that button. You have to click out of the text field to access the button, which is an extra step compared to simply mashing the Enter key to run your search.\n\nRead full article\n\nComments"
+        "body": "Google's flagship search experience is evolving into an AI experience with stunning speed. Even time-tested elements of search are getting AI makeovers, and the latest to get this treatment is the search homepage on Google.com. A redesign that has been in testing for the past few weeks is now official, bringing easier access to AI chats and dropping the dedicated search button entirely.\n\nGoogle search VP Robby Stein confirmed on X that Google is deploying the new desktop search page after a successful test. The page will now have a few more buttons under the search bar, all connected to AI features. There's an image-generation button, one for analyzing files, and one for brainstorming with Gemini. The \"I'm Feeling Lucky\" button remains, but the Google Search button that sat next to it is gone.\n\nThe search button has obviously been a part of Google's search page forever. However, it wasn't in a very convenient location in the modern interface. When you begin typing a query, the autocomplete suggestions cover that button. You have to click out of the text field to access the button, which is an extra step compared to simply mashing the Enter key to run your search.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -626,57 +696,6 @@
         "title": "El audio espacial y los auriculares «open-ear» revolucionan la movilidad de las personas con discapacidad visual",
         "summary": "La unión entre el sonido binaural en 360 grados y los dispositivos de oído abierto resuelve uno de los mayores dilemas de la tiflotecnología. Gracias a este avance, las personas ciegas pueden recibir indicaciones GPS sin aislarse del ruido de la calle. Para una persona ciega o con baja visión, el oído funciona como un […] La entrada El audio espacial y los auriculares «open-ear» revolucionan la movilidad de las personas con discapacidad visual se publicó primero en Conticgo .",
         "body": "La unión entre el sonido binaural en 360 grados y los dispositivos de oído abierto resuelve uno de los mayores dilemas de la tiflotecnología. Gracias a este avance, las personas ciegas pueden recibir indicaciones GPS sin aislarse del ruido de la calle.\n\nPara una persona ciega o con baja visión, el oído funciona como un radar constante. Escuchar el tráfico, los pasos o el eco de las paredes resulta vital para caminar con seguridad. Sin embargo, usar el móvil o una aplicación GPS en la calle siempre obligaba a elegir entre dos malas opciones. Podías ponerte ambos auriculares y perder el contacto con el entorno, o llevar solo uno y sacrificar la orientación estéreo. Hoy, la combinación de audio espacial y auriculares open-ear acaba por fin con este dilema.\n\nEl audio espacial va mucho más allá del sonido estéreo tradicional. Mediante algoritmos binaurales y sensores de movimiento integrados en los auriculares, el sistema sitúa los sonidos en un espacio tridimensional de 360 grados alrededor del usuario.\n\nAplicaciones de navegación accesible como Soundscape Community o VoiceVista aprovechan esta tecnología para crear balizas sonoras virtuales. Por ejemplo, si tienes una cafetería o un paso de peatones a tu derecha, escucharás el aviso exactamente desde ese punto. Además, gracias al seguimiento dinámico de cabeza ( head tracking ), si giras el cuello para mirar hacia otro lado, el sonido permanece anclado en la ubicación física real.\n\nLa segunda pieza de esta revolución es el diseño de oído abierto ( open-ear ). A diferencia de los auriculares tradicionales de botón o de diadema cerrada, estos modelos dejan el canal auditivo completamente despejado. De este modo, el usuario percibe el sonido digital de su teléfono mezclado de forma natural con el ambiente de la calle.\n\nActualmente, existen tres formatos principales que compiten en el día a día de la comunidad ciega:\n\nConducción ósea: Dispositivos como los Shokz OpenRun Pro 2 transmiten el sonido mediante suaves vibraciones a través de los pómulos. Son extremadamente ligeros, resistentes al sudor y dejan el oído libre al cien por cien para la ecolocalización natural.\n\nConducción aérea direccional (OWS): Modelos como los Cleer ARC 5 , los Bose Ultra Open o los Shokz OpenFit colocan pequeños altavoces justo encima del canal auditivo. Ofrecen una calidad de graves superior y reproducen el audio espacial 3D con mucha mayor precisión.\n\nIntraurales con modo transparencia: Auriculares como los AirPods Pro logran un audio espacial sobresaliente, pero recrean el sonido exterior mediante micrófonos. Aunque resultan muy eficaces, muchos usuarios prefieren la naturalidad de no llevar nada dentro del oído.\n\nEl impacto de combinar audio espacial y auriculares open-ear no se limita a los desplazamientos urbanos. En el ámbito deportivo, permite correr o entrenar siguiendo métricas por voz sin perder de vista el entorno.\n\nAsimismo, el sector del gaming accesible está sacando un enorme partido a esta tecnología. Los audiogames y videojuegos con diseño sonoro 3D permiten identificar la posición exacta de enemigos, objetos o puertas mediante el sonido. Con unos buenos auriculares de oído abierto, disfrutar de estas experiencias resulta mucho más cómodo y evita la fatiga auditiva tras varias horas de uso.\n\nFuentes: Estudio sobre movilidad urbana y audio espacial en discapacidad visual , VoiceVista (ficha oficial en la App Store de Apple) ,"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-apps-30f30f87434f2762",
-    "type": "news",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/news/top-tech-tidbits",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-20T00:27:09.000Z",
-    "categories": [
-      "apple",
-      "apps-accesibles",
-      "jaws",
-      "braille",
-      "sordoceguera"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Top Tech Tidbits",
-        "summary": "Top Tech Tidbits is a free weekly newsletter on access technology for people who are blind, low vision, deaf, hard of hearing, deafblind, neurodivergent and/or disabled. Founded in 2004 and read by over 48,000 people each week, it gathers human-curated news, tips and how-tos every Thursday morning. The app opens the newest issue the moment you open it, and keeps recent issues, and every older issue you open, on your iPhone and iPad, so you can read with no connection. MADE FOR BLIND AND LOW-VISION READERS FIRST • Built for VoiceOver and braille: every section and tidbit is a heading, every control is named, and Apple's accessibility audit checks every main screen in every version. • Larger Text up to the largest sizes, Light and Dark, Bold Text, the Atkinson Hyperlegible font, high-contrast colors and wider line spacing. • Listen: your iPhone reads the issue aloud in the voice and speed you choose, keeps reading when the screen locks, skips a whole section at a time, and stops on a sleep timer. Listen to all your saved tidbits in a row. • \"Hey Siri, read me the latest Top Tech Tidbits\" and \"Hey Siri, search Top Tech Tidbits\". • Keyboard commands for a keyboard connected to your iPhone or iPad. EVERY ISSUE SINCE 2008 • Past Issues lists this year's issues, then every earlier year back to 2008. • Search every issue from 2008 to today, tidbit by tidbit, even with no connection, and find tidbits from the iPhone's own search. • Topic Alerts: follow words or names, such as JAWS or braille, and get an alert when a new issue mentions them. Your iPhone looks through the issue itself, so your topics never reach us; only your own Apple devices and your iCloud account have them. • Events lists the upcoming events from the issues, soonest first; add any of them to your calendar in two taps. • A link to an issue, in an email or a message, opens right in the app at the tidbit it points to. • Stories open in Reader View: just their words, without the website's menus and ads. • Translate an issue into another language with Apple's own translation, on your device (iOS 18 or later). KEEP, NOTE AND SHARE • Save tidbits for later, add your own notes, and highlight passages; VoiceOver and braille say where each highlight starts and ends. All of it follows you to your other Apple devices through your iCloud account, with your settings and the place you left each issue. • Share any tidbit with a link that opens the issue right at it, or share a whole issue as a link, a text file or an EPUB book for the Books app or a braille notetaker. • Send Top Tech Tidbits a story from any app's Share button. ALWAYS THE NEWEST • An optional notification each Thursday, normally at 6:00 AM Eastern, with a Listen button; the issue is already downloaded, ready to read. A 1 on the app's icon means a new issue you have not opened yet. • Home Screen and Lock Screen widgets, a Control Center button that starts Listen (iOS 18 or later), and shortcuts on the app's icon. • On iPad, the issue's sections or your saved tidbits sit beside the issue. PRIVACY No account, no advertising added by the app, and no tracking. To learn what readers find most useful the app keeps anonymous counts of which issues and tidbits are opened; you can turn them off in Settings. Details: https://toptechtidbits.com/app-privacy/ Questions and ideas: publisher@toptechtidbits.com",
-        "body": "Top Tech Tidbits is a free weekly newsletter on access technology for people who are blind, low vision, deaf, hard of hearing, deafblind, neurodivergent and/or disabled. Founded in 2004 and read by over 48,000 people each week, it gathers human-curated news, tips and how-tos every Thursday morning. The app opens the newest issue the moment you open it, and keeps recent issues, and every older issue you open, on your iPhone and iPad, so you can read with no connection.\n\nMADE FOR BLIND AND LOW-VISION READERS FIRST • Built for VoiceOver and braille: every section and tidbit is a heading, every control is named, and Apple's accessibility audit checks every main screen in every version. • Larger Text up to the largest sizes, Light and Dark, Bold Text, the Atkinson Hyperlegible font, high-contrast colors and wider line spacing. • Listen: your iPhone reads the issue aloud in the voice and speed you choose, keeps reading when the screen locks, skips a whole section at a time, and stops on a sleep timer. Listen to all your saved tidbits in a row. • \"Hey Siri, read me the latest Top Tech Tidbits\" and \"Hey Siri, search Top Tech Tidbits\". • Keyboard commands for a keyboard connected to your iPhone or iPad.\n\nEVERY ISSUE SINCE 2008 • Past Issues lists this year's issues, then every earlier year back to 2008. • Search every issue from 2008 to today, tidbit by tidbit, even with no connection, and find tidbits from the iPhone's own search. • Topic Alerts: follow words or names, such as JAWS or braille, and get an alert when a new issue mentions them. Your iPhone looks through the issue itself, so your topics never reach us; only your own Apple devices and your iCloud account have them. • Events lists the upcoming events from the issues, soonest first; add any of them to your calendar in two taps. • A link to an issue, in an email or a message, opens right in the app at the tidbit it points to. • Stories open in Reader View: just their words, without the website's menus and ads. • Translate an issue into another language with Apple's own translation, on your device (iOS 18 or later).\n\nKEEP, NOTE AND SHARE • Save tidbits for later, add your own notes, and highlight passages; VoiceOver and braille say where each highlight starts and ends. All of it follows you to your other Apple devices through your iCloud account, with your settings and the place you left each issue. • Share any tidbit with a link that opens the issue right at it, or share a whole issue as a link, a text file or an EPUB book for the Books app or a braille notetaker. • Send Top Tech Tidbits a story from any app's Share button.\n\nALWAYS THE NEWEST • An optional notification each Thursday, normally at 6:00 AM Eastern, with a Listen button; the issue is already downloaded, ready to read. A 1 on the app's icon means a new issue you have not opened yet. • Home Screen and Lock Screen widgets, a Control Center button that starts Listen (iOS 18 or later), and shortcuts on the app's icon. • On iPad, the issue's sections or your saved tidbits sit beside the issue.\n\nPRIVACY No account, no advertising added by the app, and no tracking. To learn what readers find most useful the app keeps anonymous counts of which issues and tidbits are opened; you can turn them off in Settings. Details: https://toptechtidbits.com/app-privacy/\n\nQuestions and ideas: [email protected]"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-apps-71a9f1c9a9e7885b",
-    "type": "news",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/i-have-garden",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-19T19:48:08.000Z",
-    "categories": [
-      "apple",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "I Have a Garden",
-        "summary": "One zucchini plant. 48 real days. Here the game's time is your time. You water it tonight and by tomorrow the soil will be a little drier. It gets light and dark at the same time as it does outside your window. The stems, the leaves and the flowers are drawn by an algorithm that imitates how a plant really grows. No two games give you the same shape, or the same harvest. Once you have the zucchini figured out, try the tomato plant: twice the days, up to twenty tomatoes, suckers to prune and a plant that climbs tied to its stake. It brings its own seeds, its own chimera tomato and new achievements. And for a third challenge, the pepper plant: 72 days, and snails that climb the stem to eat its leaves and peppers, which you pick off with your gloves. Each pepper turns from green to yellow to red, and you have to pick it at the right moment. It brings its own chimera pepper, its own seeds and new achievements. You unlock it with a single purchase, which also removes the ads. All three plants grow at the same time, each in its own plot. WHAT YOU'LL DO You check on it, water or feed it if it's time, look for pests and pull the odd weed. For as long as you feel like. HOW THE CYCLE GOES You start by preparing the soil and burying the seed. Until flowering you have to look after it as well as you can, because that stretch decides how many flowers open. When they do, the bees arrive to pollinate them, and if you've kept it up, every one sets fruit. The last stretch takes the most attention: each zucchini has its right moment, and picking it early or leaving it too long costs you points. IMPROVE YOUR PLANT When the cycle ends, you can take the seeds out of the Prime and Overripe zucchini you harvested. There are four qualities: Wild, Adapted, Selected and Heirloom. The better the seed, the more main branches the stem puts out. That raises your chances of getting a chimera zucchini, the hardest thing in the game to pull off. ACHIEVEMENTS There are twenty-seven achievements to earn along the way, gardener's ranks among them: when you gather the harvest you get a score and the rank you earned with the plant. WHAT IT DOESN'T DO No account, no email. No lives, no paying your way forward: the only purchase is the pepper plant, and it's optional. No leaderboard, nobody to beat. And it doesn't message you for the sake of it: a notification arrives when the plant actually needs something, at most one a day, not every evening at seven. It's free and kept going by advertising. If you'd rather support it another way, the pepper purchase removes the ads for good. ALSO You can put a widget on your home screen with the water and feed gauges, without opening the game. A notebook inside that explains every mechanic with real numbers, if you want to know why. A daily graph of water, feed and pests since the day you planted the seed. And a few more surprises. Thank you for playing.",
-        "body": "One zucchini, 48 real days. It keeps growing while the app is closed. From December 1, overripe tomatoes turn into Christmas baubles.\n\nOne zucchini plant. 48 real days.\n\nHere the game's time is your time. You water it tonight and by tomorrow the soil will be a little drier. It gets light and dark at the same time as it does outside your window. The stems, the leaves and the flowers are drawn by an algorithm that imitates how a plant really grows. No two games give you the same shape, or the same harvest.\n\nOnce you have the zucchini figured out, try the tomato plant: twice the days, up to twenty tomatoes, suckers to prune and a plant that climbs tied to its stake. It brings its own seeds, its own chimera tomato and new achievements. And for a third challenge, the pepper plant: 72 days, and snails that climb the stem to eat its leaves and peppers, which you pick off with your gloves. Each pepper turns from green to yellow to red, and you have to pick it at the right moment. It brings its own chimera pepper, its own seeds and new achievements. You unlock it with a single purchase, which also removes the ads.\n\nAll three plants grow at the same time, each in its own plot.\n\nWHAT YOU'LL DO You check on it, water or feed it if it's time, look for pests and pull the odd weed. For as long as you feel like.\n\nHOW THE CYCLE GOES You start by preparing the soil and burying the seed. Until flowering you have to look after it as well as you can, because that stretch decides how many flowers open. When they do, the bees arrive to pollinate them, and if you've kept it up, every one sets fruit. The last stretch takes the most attention: each zucchini has its right moment, and picking it early or leaving it too long costs you points.\n\nIMPROVE YOUR PLANT When the cycle ends, you can take the seeds out of the Prime and Overripe zucchini you harvested. There are four qualities: Wild, Adapted, Selected and Heirloom. The better the seed, the more main branches the stem puts out. That raises your chances of getting a chimera zucchini, the hardest thing in the game to pull off.\n\nACHIEVEMENTS There are twenty-seven achievements to earn along the way, gardener's ranks among them: when you gather the harvest you get a score and the rank you earned with the plant.\n\nWHAT IT DOESN'T DO No account, no email. No lives, no paying your way forward: the only purchase is the pepper plant, and it's optional. No leaderboard, nobody to beat. And it doesn't message you for the sake of it: a notification arrives when the plant actually needs something, at most one a day, not every evening at seven. It's free and kept going by advertising. If you'd rather support it another way, the pepper purchase removes the ads for good.\n\nALSO You can put a widget on your home screen with the water and feed gauges, without opening the game. A notebook inside that explains every mechanic with real numbers, if you want to know why. A daily graph of water, feed and pests since the day you planted the seed. And a few more surprises.\n\nThank you for playing."
       }
     },
     "media": null

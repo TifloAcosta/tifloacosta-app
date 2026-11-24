@@ -127,7 +127,7 @@ struct NativeCinemaDriveBrowser: View {
                         Text(error)
                             .accessibilityAddTraits(.updatesFrequently)
                     }
-                    if let video = player.videoPlayer {
+                    if player.currentCloudIsVideo, let video = player.videoPlayer {
                         NativeCinemaVideoSurface(player: video)
                             .frame(maxWidth: .infinity)
                             .frame(height: 210)

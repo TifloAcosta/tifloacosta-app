@@ -12,7 +12,7 @@ struct NativePodcastEpisode: Identifiable {
     let publicationDate: String
 }
 
-private final class NativeRSSParser: NSObject, XMLParserDelegate {
+final class NativeRSSParser: NSObject, XMLParserDelegate {
     var episodes: [NativePodcastEpisode] = []
     private var insideItem = false
     private var readingTitle = false

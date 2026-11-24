@@ -68,6 +68,24 @@ struct NativeAudiocinematecaCatalogueClient {
 }
 
 struct NativeAudiocinematecaCatalogueIndex {
+    struct Part: Identifiable {
+        let id: String
+        let season: String?
+        let number: String
+        let title: String
+        let url: URL
+    }
+
+    static func mediaURL(_ reference: String) -> URL? {
+        guard !reference.isEmpty, !reference.hasPrefix("//"),
+              let base = URL(string: "https://audiocinemateca.com/"),
+              let url = URL(string: reference, relativeTo: base)?.absoluteURL,
+              url.scheme == "https", url.host == "audiocinemateca.com",
+              url.user == nil, url.password == nil, url.port == nil,
+              url.fragment == nil else { return nil }
+        return url
+    }
+
     struct Entry: Identifiable {
         let id: String
         let title: String
@@ -76,6 +94,7 @@ struct NativeAudiocinematecaCatalogueIndex {
         let genre: String
         let languageCode: String
         let synopsis: String
+        let parts: [Part]
     }
 
     static func parse(_ data: Data) throws -> [Entry] {
@@ -100,9 +119,32 @@ struct NativeAudiocinematecaCatalogueIndex {
                 guard !title.isEmpty, !sourceID.isEmpty else { continue }
                 let id = category + ":" + sourceID
                 guard seen.insert(id).inserted else { continue }
+                var parts: [Part] = []
+                func appendPart(_ ref: String, season: String?, number: String, title: String) {
+                    guard let url = mediaURL(ref) else { return }
+                    parts.append(.init(id: id + ":" + String(parts.count), season: season,
+                                       number: number, title: title, url: url))
+                }
+                if category == "peliculas" {
+                    for (index, ref) in (row["enlaces"] as? [String] ?? []).enumerated() {
+                        appendPart(ref, season: nil, number: String(index + 1), title: "")
+                    }
+                } else if category == "series" {
+                    if let seasons = row["capitulos"] as? [String: [[String: Any]]] {
+                        for season in seasons.keys.sorted(by: { $0.localizedStandardCompare($1) == .orderedAscending }) {
+                            for episode in seasons[season] ?? [] {
+                                let number = (episode["capitulo"] as? String) ?? (episode["capitulo"] as? NSNumber)?.stringValue ?? ""
+                                appendPart(episode["enlace"] as? String ?? "", season: season,
+                                           number: number, title: episode["titulo"] as? String ?? "")
+                            }
+                        }
+                    }
+                } else {
+                    appendPart(field("enlace"), season: nil, number: "1", title: "")
+                }
                 entries.append(.init(id: id, title: title, category: category,
                                      year: field("anio"), genre: field("genero"),
-                                     languageCode: field("idioma"), synopsis: field("sinopsis")))
+                                     languageCode: field("idioma"), synopsis: field("sinopsis"), parts: parts))
             }
         }
         return entries

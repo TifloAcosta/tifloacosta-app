@@ -20,14 +20,9 @@ test('Audesc Spain/Latino public roots are source-approved and public mode is ga
   assert.match(home, /NativeCinemaDriveBrowser/);
 });
 
-test('official FOAL shortcuts resolve only to Google Drive folders', () => {
-  assert.match(publicDrive, /case "foal-films": address = "https:\/\/bit\.ly\/2yMtJrk"/);
-  assert.match(publicDrive, /case "foal-game-of-thrones": address = "https:\/\/bit\.ly\/3bND3dg"/);
-  assert.match(publicDrive, /target\.host == "drive\.google\.com"/);
-  assert.match(publicDrive, /NativeCinemaFOALRedirects/);
+test('only the two Audesc public catalogues remain in the directory', () => {
   assert.match(home, /NativeCinemaPublishedDriveBrowser/);
-  assert.match(home, /https:\/\/bit\.ly\/2yMtJrk/);
-  assert.match(home, /https:\/\/bit\.ly\/3bND3dg/);
+  assert.doesNotMatch(home, /foal-films|foal-game-of-thrones|id: "foal"|bit\.ly/);
 });
 
 test('public directory is read-only, does not mix OAuth, and supports pagination and resource keys', () => {

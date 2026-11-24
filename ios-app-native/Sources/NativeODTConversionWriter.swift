@@ -1,0 +1,96 @@
+import Foundation
+
+/// Writes the supported subset of the shared, sanitized XHTML document as ODF.
+final class NativeODTConversionWriter: NSObject, XMLParserDelegate {
+    private let assets: [String: NativeConversionMarkup.Asset]
+    private var output = ""
+    private var frames: [(element: String, wrapsInline: Bool)] = []
+    private var nextImage = 0
+    private var paragraphDepth = 0
+    private let escape = NativeDocumentConversion.xml
+
+    init(assets: [NativeConversionMarkup.Asset]) {
+        self.assets = Dictionary(uniqueKeysWithValues: assets.map { ($0.path, $0) })
+    }
+
+    func write(_ body: String) throws -> String {
+        let parser = XMLParser(data: Data("<body>\(body)</body>".utf8))
+        parser.shouldResolveExternalEntities = false
+        parser.delegate = self
+        guard parser.parse() else {
+            try Task.checkCancellation()
+            throw NativeDocumentConversion.Failure.invalidOutput
+        }
+        return output
+    }
+
+    func parser(_ parser: XMLParser, didStartElement tag: String,
+                namespaceURI: String?, qualifiedName: String?, attributes: [String: String]) {
+        if Task.isCancelled { parser.abortParsing(); return }
+        let mapping: (String, String)
+        switch tag {
+        case "p", "div", "blockquote", "pre", "figcaption", "caption":
+            mapping = paragraphDepth == 0 && tag != "div" ? ("text:p", "") : ("", "")
+        case "h1", "h2", "h3", "h4", "h5", "h6":
+            mapping = ("text:h", " text:outline-level=\"\(tag.suffix(1))\"")
+        case "ol", "ul":
+            mapping = ("text:list", " text:style-name=\"\(tag == "ol" ? "Numbered" : "Bullets")\"")
+        case "li":
+            let start = attributes["value"].flatMap(Int.init).flatMap { $0 > 0 ? $0 : nil }
+            mapping = ("text:list-item", start.map { " text:start-value=\"\($0)\"" } ?? "")
+        case "table":
+            mapping = ("table:table", "")
+        case "thead": mapping = ("table:table-header-rows", "")
+        case "tbody": mapping = ("table:table-rows", "")
+        case "tr": mapping = ("table:table-row", "")
+        case "th", "td":
+            mapping = ("table:table-cell", "")
+        case "a":
+            mapping = attributes["href"].map { ("text:a", " xlink:type=\"simple\" xlink:href=\"\(escape($0))\"") } ?? ("", "")
+        case "strong", "b": mapping = ("text:span", " text:style-name=\"Bold\"")
+        case "em", "i": mapping = ("text:span", " text:style-name=\"Italic\"")
+        case "br":
+            appendInline("<text:line-break/>")
+            mapping = ("", "")
+        case "img":
+            if let path = attributes["src"], assets[path] != nil {
+                nextImage += 1
+                let alt = attributes["alt"].map { "<svg:desc>\(escape($0))</svg:desc>" } ?? ""
+                appendInline("<draw:frame draw:name=\"Image\(nextImage)\" text:anchor-type=\"as-char\" svg:width=\"3cm\" svg:height=\"3cm\"><draw:image xlink:href=\"Pictures/\(escape(path))\" xlink:type=\"simple\" xlink:show=\"embed\" xlink:actuate=\"onLoad\"/>\(alt)</draw:frame>")
+            } else if let alt = attributes["alt"] { appendInline(escape(alt)) }
+            mapping = ("", "")
+        default: mapping = ("", "")
+        }
+
+        let element = mapping.0
+        let wrapsInline = paragraphDepth == 0 && ["text:a", "text:span"].contains(element)
+        if wrapsInline { output += "<text:p>"; paragraphDepth += 1 }
+        if !element.isEmpty { output += "<\(element)\(mapping.1)>" }
+        if element == "text:p" || element == "text:h" { paragraphDepth += 1 }
+        if let id = attributes["id"], paragraphDepth > 0 {
+            output += "<text:bookmark text:name=\"\(escape(id))\"/>"
+        }
+        frames.append((element, wrapsInline))
+    }
+
+    func parser(_ parser: XMLParser, didEndElement tag: String,
+                namespaceURI: String?, qualifiedName: String?) {
+        guard let frame = frames.popLast() else { return }
+        if !frame.element.isEmpty { output += "</\(frame.element)>" }
+        if frame.element == "text:p" || frame.element == "text:h" { paragraphDepth -= 1 }
+        if frame.wrapsInline { output += "</text:p>"; paragraphDepth -= 1 }
+    }
+
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
+        if paragraphDepth > 0 {
+            output += escape(string)
+        } else if !string.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            appendInline(escape(string))
+        }
+    }
+
+    private func appendInline(_ xml: String) {
+        if paragraphDepth > 0 { output += xml }
+        else { output += "<text:p>\(xml)</text:p>" }
+    }
+}

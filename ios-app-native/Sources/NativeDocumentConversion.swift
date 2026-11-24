@@ -87,7 +87,7 @@ enum NativeDocumentConversion {
                     try write("<!DOCTYPE html>\n" + contents, to: output)
                 case .epub: try epub(paragraphs, title: title, markup: markup, output: output)
                 case .docx: try docx(paragraphs, title: title, output: output)
-                case .odt: try odt(paragraphs, title: title, output: output)
+                case .odt: try odt(paragraphs, title: title, markup: markup, output: output)
                 case .fb2: try fb2(paragraphs, title: title, output: output)
                 case .daisy: try daisy(paragraphs, title: title, markup: markup, output: output)
                 case .daisy3: try daisy3(paragraphs, title: title, markup: markup, output: output)
@@ -471,10 +471,10 @@ enum NativeDocumentConversion {
         ], output: output)
     }
 
-    private static func odt(_ paragraphs: [Paragraph], title: String, output: URL) throws {
+    private static func odt(_ paragraphs: [Paragraph], title: String, markup: NativeConversionMarkup.Document?, output: URL) throws {
         let mime = "application/vnd.oasis.opendocument.text"
         let office = "urn:oasis:names:tc:opendocument:xmlns:office:1.0"
-        let body = try paragraphs.map { paragraph in
+        let plainBody = try paragraphs.map { paragraph in
             try Task.checkCancellation()
             let tag = paragraph.level > 0 ? "h" : "p"
             let level = paragraph.level > 0 ? " text:outline-level=\"\(paragraph.level)\"" : ""
@@ -486,11 +486,29 @@ enum NativeDocumentConversion {
             }.joined()
             return "<text:\(tag)\(level)><text:bookmark text:name=\"p\(paragraph.offset)\"/>\(content)</text:\(tag)>"
         }.joined()
+        let body = try markup.map { try NativeODTConversionWriter(assets: $0.assets).write($0.body) } ?? plainBody
+        let assetEntries = (markup?.assets ?? []).map {
+            NativeConversionMarkup.Asset(path: "Pictures/" + $0.path, mediaType: $0.mediaType, data: $0.data)
+        }
+        let assetManifest = assetEntries.map {
+            "<manifest:file-entry manifest:full-path=\"\(xml($0.path))\" manifest:media-type=\"\(xml($0.mediaType))\"/>"
+        }.joined()
+        let metadata = [("author", "creator"), ("description", "description"), ("keywords", "subject")].compactMap { key, tag in
+            markup?.metadata[key].map { "<dc:\(tag)>\(xml($0))</dc:\(tag)>" }
+        }.joined() + (markup?.language.map { "<dc:language>\(xml($0))</dc:language>" } ?? "")
+        let automaticStyles = """
+        <office:automatic-styles>
+        <style:style style:name="Bold" style:family="text"><style:text-properties fo:font-weight="bold"/></style:style>
+        <style:style style:name="Italic" style:family="text"><style:text-properties fo:font-style="italic"/></style:style>
+        <text:list-style style:name="Bullets"><text:list-level-style-bullet text:level="1" text:bullet-char="•"/></text:list-style>
+        <text:list-style style:name="Numbered"><text:list-level-style-number text:level="1" style:num-format="1"/></text:list-style>
+        </office:automatic-styles>
+        """
         try package([
-            ("content.xml", "<office:document-content xmlns:office=\"\(office)\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" office:version=\"1.2\"><office:body><office:text>\(body)</office:text></office:body></office:document-content>"),
-            ("meta.xml", "<office:document-meta xmlns:office=\"\(office)\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" office:version=\"1.2\"><office:meta><dc:title>\(title)</dc:title></office:meta></office:document-meta>"),
-            ("META-INF/manifest.xml", "<manifest:manifest xmlns:manifest=\"urn:oasis:names:tc:opendocument:xmlns:manifest:1.0\" manifest:version=\"1.2\"><manifest:file-entry manifest:full-path=\"/\" manifest:media-type=\"\(mime)\"/><manifest:file-entry manifest:full-path=\"content.xml\" manifest:media-type=\"text/xml\"/><manifest:file-entry manifest:full-path=\"meta.xml\" manifest:media-type=\"text/xml\"/></manifest:manifest>")
-        ], mime: mime, output: output)
+            ("content.xml", "<office:document-content xmlns:office=\"\(office)\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" xmlns:table=\"urn:oasis:names:tc:opendocument:xmlns:table:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" office:version=\"1.2\">\(markup == nil ? "" : automaticStyles)<office:body><office:text>\(body)</office:text></office:body></office:document-content>"),
+            ("meta.xml", "<office:document-meta xmlns:office=\"\(office)\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" office:version=\"1.2\"><office:meta><dc:title>\(markup.map { xml($0.title) } ?? title)</dc:title>\(metadata)</office:meta></office:document-meta>"),
+            ("META-INF/manifest.xml", "<manifest:manifest xmlns:manifest=\"urn:oasis:names:tc:opendocument:xmlns:manifest:1.0\" manifest:version=\"1.2\"><manifest:file-entry manifest:full-path=\"/\" manifest:media-type=\"\(mime)\"/><manifest:file-entry manifest:full-path=\"content.xml\" manifest:media-type=\"text/xml\"/><manifest:file-entry manifest:full-path=\"meta.xml\" manifest:media-type=\"text/xml\"/>\(assetManifest)</manifest:manifest>")
+        ], mime: mime, assets: assetEntries, output: output)
     }
 
     private static func fb2(_ paragraphs: [Paragraph], title: String, output: URL) throws {
@@ -585,11 +603,12 @@ enum NativeDocumentConversion {
             "<dc:description><rdf:Alt><rdf:li xml:lang=\"x-default\">\(xml($0))</rdf:li></rdf:Alt></dc:description>"
         } ?? ""
         let languageXML = language.map { "<dc:language><rdf:Bag><rdf:li>\(xml($0))</rdf:li></rdf:Bag></dc:language>" } ?? ""
+        let translatedTitle = language.map { "<rdf:li xml:lang=\"\(xml($0))\">\(xml(title))</rdf:li>" } ?? ""
         let xmp = """
         <x:xmpmeta xmlns:x="adobe:ns:meta/">
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
             <rdf:Description rdf:about="" xmlns:dc="http://purl.org/dc/elements/1.1/">
-              <dc:title><rdf:Alt><rdf:li xml:lang="x-default">\(xml(title))</rdf:li></rdf:Alt></dc:title>
+              <dc:title><rdf:Alt><rdf:li xml:lang="x-default">\(xml(title))</rdf:li>\(translatedTitle)</rdf:Alt></dc:title>
               \(creatorXML)\(descriptionXML)\(languageXML)
             </rdf:Description>
           </rdf:RDF>
@@ -612,6 +631,7 @@ enum NativeDocumentConversion {
             CTFrameGetLineOrigins(frame, CFRange(location: 0, length: 0), &origins)
             var openParagraph: Int?
             for (line, origin) in zip(lines, origins) {
+                try Task.checkCancellation()
                 let range = CTLineGetStringRange(line)
                 while paragraphIndex + 1 < paragraphStarts.count,
                       paragraphStarts[paragraphIndex + 1] <= range.location { paragraphIndex += 1 }

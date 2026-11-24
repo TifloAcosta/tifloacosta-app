@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-sample="$1"
+test "$#" -gt 0
 work="$(mktemp -d)"
 trap 'rm -rf "$work"' EXIT
 curl -fsSL --retry 2 --max-time 60 https://software.verapdf.org/releases/verapdf-installer.zip -o "$work/installer.zip"
@@ -22,6 +22,8 @@ cat > "$work/install.xml" <<XML
 </AutomatedInstallation>
 XML
 java -jar "$work"/verapdf-greenfield-*/verapdf-izpack-installer-*.jar "$work/install.xml"
+for sample in "$@"; do
+  echo "Auditing ${sample##*/}"
 result=0
 "$work/cli/verapdf" --flavour ua1 --format xml --verbose "$sample" > "$work/report.xml" || result=$?
 test "$result" -le 1
@@ -41,3 +43,4 @@ else:
         if rule.attrib.get("status") == "failed":
             print(rule.attrib, rule.findtext("description", ""))
 PYTHON
+done

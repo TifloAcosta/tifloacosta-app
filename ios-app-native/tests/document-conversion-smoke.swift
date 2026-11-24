@@ -176,6 +176,32 @@ struct DocumentConversionSmoke {
         precondition(table.contains("<table>") && table.contains(png) && table.contains("href=\"#c0-") &&
             table.contains("xml:lang=\"fr\"") && table.contains("role=\"doc-footnote\"") &&
             table.contains("Hinweis – opinião."))
+        let richODT = try NativeDocumentConversion.convert(reopened, to: .odt, in: richOutput)
+        let odtPackage = try members(richODT, mime: "application/vnd.oasis.opendocument.text")
+        let contentXML = odtPackage["content.xml"]!
+        xml(contentXML)
+        precondition(contentXML.contains("<table:table>") && contentXML.contains("<text:list ") &&
+            contentXML.contains("Imagen de prueba") && contentXML.contains("text:outline-level=\"2\""))
+        precondition(odtPackage["META-INF/manifest.xml"]!.contains("Pictures/assets/image-1.png"))
+        let asODT = NativeConversionSource(filename: richODT.lastPathComponent, title: "Original",
+            format: "odt", text: "Fallback", links: [], original: richODT)
+        let recoveredEPUB = try NativeDocumentConversion.convert(asODT, to: .epub,
+            in: richOutput.appendingPathComponent("odt-roundtrip"))
+        let recoveredBook = try members(recoveredEPUB, mime: "application/epub+zip")["EPUB/book.xhtml"]!
+        precondition(recoveredBook.contains("<table>") && recoveredBook.contains("<ul>") &&
+            recoveredBook.contains("alt=\"Imagen de prueba\"") && recoveredBook.contains("Hinweis – opinião."))
+        if CommandLine.arguments.count > 2 {
+            let samples = URL(fileURLWithPath: CommandLine.arguments[2], isDirectory: true)
+            let pdfText = "# Tabla\n\n## Primera sección\n\n" + longBody
+            let pdfSource = NativeConversionSource(filename: "Multilingue.xhtml", title: "Documento multilingüe",
+                format: "xhtml", text: pdfText + "\nRésumé — Ελληνικά — 会議", links: [], original: xhtml)
+            let richPDF = try NativeDocumentConversion.convert(pdfSource, to: .pdf,
+                in: root.appendingPathComponent("pdf-multipage"))
+            let reopenedPDF = PDFDocument(url: richPDF)!
+            precondition(reopenedPDF.pageCount > 1 && reopenedPDF.string!.contains("Primera sección"))
+            try FileManager.default.copyItem(at: richPDF, to: samples.appendingPathComponent("conversion-multipage.pdf"))
+        }
+
         let complexODT = root.appendingPathComponent("Complejo.odt")
         let archive = try Archive(url: complexODT, accessMode: .create)
         let odtSource = """

@@ -1,0 +1,22 @@
+name: Diagnóstico autenticado Audiocinemateca
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - development/next-public-1.6-500200-20261121
+    paths:
+      - '.github/workflows/audiocinemateca-probe.yml'
+      - 'ios-app-native/scripts/probe-audiocinemateca.py'
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - name: Consultar catálogo y un fragmento MP3
+        env:
+          AUDIOCINEMATECA_USERNAME: ${{ secrets.AUDIOCINEMATECA_USERNAME }}
+          AUDIOCINEMATECA_PASSWORD: ${{ secrets.AUDIOCINEMATECA_PASSWORD }}
+        run: python3 ios-app-native/scripts/probe-audiocinemateca.py

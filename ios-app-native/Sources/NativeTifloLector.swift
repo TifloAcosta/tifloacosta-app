@@ -241,7 +241,7 @@ final class NativeReaderLibrary: ObservableObject {
             guard revision == documentsRevision else { continue }
             // The staged file is in the same directory, so rename replaces
             // the previous index atomically with no large I/O on this actor.
-            guard rename(staged.path, storage.path) == 0 else {
+            guard Darwin.rename(staged.path, storage.path) == 0 else {
                 throw POSIXError(POSIXErrorCode(rawValue: errno) ?? .EIO)
             }
             documents.insert(document, at: 0)
@@ -257,51 +257,8 @@ final class NativeReaderLibrary: ObservableObject {
                       -> NativeReaderFolderImportSummary {
         let scope = folder.startAccessingSecurityScopedResource()
         defer { if scope { folder.stopAccessingSecurityScopedResource() } }
-        let scan = Task.detached(priority: .userInitiated) { () throws -> ([URL], Int, [String]) in
-            let attributes = try folder.resourceValues(forKeys: [.isDirectoryKey, .isSymbolicLinkKey])
-            guard attributes.isDirectory == true, attributes.isSymbolicLink != true else {
-                throw CocoaError(.fileReadUnsupportedScheme)
-            }
-            let supported: Set<String> = [
-                "pdf", "txt", "text", "html", "htm", "md", "markdown",
-                "csv", "json", "xml", "log", "srt", "rtf", "fb2",
-                "docx", "odt", "pptx", "ppsx", "pptm", "xlsx", "xlsm",
-                "epub", "mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff",
-                "caf", "flac", "mp4", "m4v", "mov", "zip", "daisy",
-                "png", "jpg", "jpeg", "heic", "heif", "tif", "tiff"
-            ]
-            var failures: [String] = []
-            guard let enumerator = FileManager.default.enumerator(
-                at: folder, includingPropertiesForKeys: [.isRegularFileKey, .isSymbolicLinkKey],
-                options: [.skipsHiddenFiles, .skipsPackageDescendants],
-                errorHandler: { url, error in
-                    failures.append(url.lastPathComponent + ": " + error.localizedDescription)
-                    return failures.count < 750
-                }
-            ) else { throw CocoaError(.fileReadUnknown) }
-            var files: [URL] = []
-            var skipped = 0
-            for case let url as URL in enumerator {
-                if Task.isCancelled { throw CancellationError() }
-                if let properties = try? url.resourceValues(forKeys: [.isRegularFileKey, .isSymbolicLinkKey]) {
-                    if properties.isSymbolicLink == true {
-                        guard files.count + skipped + failures.count < 750 else {
-                            throw NativeReaderFormatError.tooManyFiles
-                        }
-                        enumerator.skipDescendants()
-                        skipped += 1
-                        continue
-                    }
-                    guard properties.isRegularFile == true else { continue }
-                }
-                guard files.count + skipped + failures.count < 750 else {
-                    throw NativeReaderFormatError.tooManyFiles
-                }
-                if supported.contains(url.pathExtension.lowercased()) { files.append(url) }
-                else { skipped += 1 }
-            }
-            files.sort { $0.path.localizedStandardCompare($1.path) == .orderedAscending }
-            return (files, skipped, failures)
+        let scan = Task.detached(priority: .userInitiated) {
+            try Self.scanImportFolder(folder)
         }
         let (files, skipped, scanFailures) = try await withTaskCancellationHandler {
             try await scan.value
@@ -311,6 +268,53 @@ final class NativeReaderLibrary: ObservableObject {
         let summary = try await importSelectedFiles(from: files, onProgress: onProgress)
         return NativeReaderFolderImportSummary(imported: summary.imported,
                                                skipped: skipped, failed: scanFailures + summary.failed)
+    }
+
+    nonisolated private static func scanImportFolder(_ folder: URL) throws -> ([URL], Int, [String]) {
+        let attributes = try folder.resourceValues(forKeys: [.isDirectoryKey, .isSymbolicLinkKey])
+        guard attributes.isDirectory == true, attributes.isSymbolicLink != true else {
+            throw CocoaError(.fileReadUnsupportedScheme)
+        }
+        let supported: Set<String> = [
+            "pdf", "txt", "text", "html", "htm", "md", "markdown",
+            "csv", "json", "xml", "log", "srt", "rtf", "fb2",
+            "docx", "odt", "pptx", "ppsx", "pptm", "xlsx", "xlsm",
+            "epub", "mp3", "m4a", "m4b", "aac", "wav", "aif", "aiff",
+            "caf", "flac", "mp4", "m4v", "mov", "zip", "daisy",
+            "png", "jpg", "jpeg", "heic", "heif", "tif", "tiff"
+        ]
+        var failures: [String] = []
+        guard let enumerator = FileManager.default.enumerator(
+            at: folder, includingPropertiesForKeys: [.isRegularFileKey, .isSymbolicLinkKey],
+            options: [.skipsHiddenFiles, .skipsPackageDescendants],
+            errorHandler: { url, error in
+                failures.append(url.lastPathComponent + ": " + error.localizedDescription)
+                return failures.count < 750
+            }
+        ) else { throw CocoaError(.fileReadUnknown) }
+        var files: [URL] = []
+        var skipped = 0
+        for case let url as URL in enumerator {
+            if Task.isCancelled { throw CancellationError() }
+            if let properties = try? url.resourceValues(forKeys: [.isRegularFileKey, .isSymbolicLinkKey]) {
+                if properties.isSymbolicLink == true {
+                    guard files.count + skipped + failures.count < 750 else {
+                        throw NativeReaderFormatError.tooManyFiles
+                    }
+                    enumerator.skipDescendants()
+                    skipped += 1
+                    continue
+                }
+                guard properties.isRegularFile == true else { continue }
+            }
+            guard files.count + skipped + failures.count < 750 else {
+                throw NativeReaderFormatError.tooManyFiles
+            }
+            if supported.contains(url.pathExtension.lowercased()) { files.append(url) }
+            else { skipped += 1 }
+        }
+        files.sort { $0.path.localizedStandardCompare($1.path) == .orderedAscending }
+        return (files, skipped, failures)
     }
 
     /// Import a selection of files one by one. A damaged file must not

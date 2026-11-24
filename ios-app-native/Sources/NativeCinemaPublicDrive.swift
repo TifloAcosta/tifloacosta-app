@@ -157,6 +157,8 @@ final class NativeCinemaPublicDrive {
         var request = URLRequest(url: url)
         request.timeoutInterval = 45
         request.cachePolicy = .reloadIgnoringLocalCacheData
+        request.setValue(Bundle.main.bundleIdentifier ?? "com.tifloacosta.app",
+                         forHTTPHeaderField: "X-Ios-Bundle-Identifier")
         let keys = resourceKeys.compactMap { item -> String? in
             guard Self.isValidID(item.id),
                   let key = item.resourceKey, Self.isValidID(key) else { return nil }
@@ -224,23 +226,6 @@ final class NativeCinemaPublicDrive {
         return NativeCinemaPublicDrivePage(
             entries: entries,
             nextCursor: root["nextPageToken"] as? String
-        )
-    }
-
-    /// AVPlayer can request HTTP byte ranges from Google's public media
-    /// endpoint. This is conditional: incompatible media, rate limits or
-    /// resource-key-protected items must use the authorized download fallback.
-    /// No OAuth token or cookie is passed to AVPlayer.
-    func progressiveURL(for item: NativeCinemaPublicDriveEntry) throws -> URL {
-        guard !item.isFolder, item.isSupportedMedia else {
-            throw NativeCinemaPublicDriveError.unsupported
-        }
-        guard item.resourceKey == nil else {
-            throw NativeCinemaPublicDriveError.denied
-        }
-        return try endpoint(
-            for: item.id,
-            query: [URLQueryItem(name: "alt", value: "media")]
         )
     }
 

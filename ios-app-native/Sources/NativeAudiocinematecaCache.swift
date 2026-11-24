@@ -2,8 +2,8 @@ import Foundation
 import CryptoKit
 
 enum NativeCinemaDecompression {
-    static func decode(_ input: Data, gzip: Bool) throws -> Data {
-        let limit = gzip ? 1024 * 1024 : 128 * 1024 * 1024
+    static func decode(_ input: Data, gzip: Bool, version: Bool = false) throws -> Data {
+        let limit = version ? 1024 * 1024 : 128 * 1024 * 1024
         var output = Data(count: limit)
         var size = limit
         let result = input.withUnsafeBytes { src in
@@ -55,13 +55,13 @@ actor NativeAudiocinematecaCache {
               snapshot.accountID == digest(Data(account.username.utf8)),
               let current = NativeAudiocinematecaCredentials.load(),
               current.username == account.username, current.password == account.password else { return [] }
-        return try NativeAudiocinematecaCatalogueIndex.parse(NativeCinemaDecompression.decode(snapshot.compressed, gzip: false))
+        return try NativeAudiocinematecaCatalogueIndex.parse(NativeCinemaDecompression.decode(snapshot.compressed, gzip: snapshot.compressed.starts(with: [31,139])))
     }
 
     func refresh(account: NativeAudiocinematecaCredentials.Account) async throws -> [NativeAudiocinematecaCatalogueIndex.Entry] {
         let accountID = digest(Data(account.username.utf8))
         let rawVersion = try await NativeAudiocinematecaCatalogueClient.fetch(.version, account: account)
-        let versionData = try NativeCinemaDecompression.decode(rawVersion, gzip: true)
+        let versionData = try NativeCinemaDecompression.decode(rawVersion, gzip: true, version: true)
         _ = try JSONSerialization.jsonObject(with: versionData)
         guard let current = NativeAudiocinematecaCredentials.load(),
               current.username == account.username, current.password == account.password else {
@@ -74,12 +74,17 @@ actor NativeAudiocinematecaCache {
            let data = try? Data(contentsOf: url),
            let cache = try? PropertyListDecoder().decode(Snapshot.self, from: data),
            cache.accountID == accountID, cache.version == version,
-           let decoded = try? NativeCinemaDecompression.decode(cache.compressed, gzip: false),
+           let decoded = try? NativeCinemaDecompression.decode(cache.compressed, gzip: cache.compressed.starts(with: [31,139])),
            let entries = try? NativeAudiocinematecaCatalogueIndex.parse(decoded), !entries.isEmpty {
             return entries
         }
-        let compressed = try await NativeAudiocinematecaCatalogueClient.fetch(.catalogue, account: account)
-        let decoded = try NativeCinemaDecompression.decode(compressed, gzip: false)
+        let compressed: Data
+        do {
+            compressed = try await NativeAudiocinematecaCatalogueClient.fetch(.catalogue, account: account)
+        } catch NativeAudiocinematecaCatalogueError.invalidResponse {
+            compressed = try await NativeAudiocinematecaCatalogueClient.fetch(.catalogueGzip, account: account)
+        }
+        let decoded = try NativeCinemaDecompression.decode(compressed, gzip: compressed.starts(with: [31,139]))
         let entries = try NativeAudiocinematecaCatalogueIndex.parse(decoded)
         guard !entries.isEmpty else { throw NativeAudiocinematecaCatalogueError.invalidCatalogue }
         // Check current account after suspension before publishing a cache.

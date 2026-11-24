@@ -82,7 +82,7 @@ struct NativeMoviesForTheBlindScreen: View {
                 } header: { Text(work.title) }
             }
         }
-        .navigationTitle("Movies for the Blind")
+        .navigationTitle(Text(verbatim: "Movies for the Blind"))
         .searchable(text: $search, prompt: Text("Buscar obras"))
         .task { if works.isEmpty { await refresh() } }
         .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in

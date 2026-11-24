@@ -63,7 +63,8 @@ test('the main cinema directory excludes general TV landing pages and routes to 
   );
   const ids = [...directory.matchAll(/\.init\(id: "([^"]+)", name:/g)].map(match => match[1]);
   assert.deepEqual(ids, ['audesc-es', 'audesc-latino', 'audiocinemateca',
-    'ami', 'ami-fr', 'ard', 'arte', 'arte-de']);
+    'mercosur-pt', 'tape-territory', 'movies-for-the-blind', 'cinema-accessibile',
+    'rai-play-sound', 'ami', 'ami-fr', 'ard', 'arte', 'arte-de']);
   for (const excluded of ['foal', 'rtve', 'nfb', 'pbs', 'itvx', 'channel4', 'five', 'abc', 'tubi', 'pluto']) {
     assert.ok(!ids.includes(excluded), 'Generalist homepage leaked into directory: ' + excluded);
   }

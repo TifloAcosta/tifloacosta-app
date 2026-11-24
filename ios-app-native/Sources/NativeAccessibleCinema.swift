@@ -459,6 +459,12 @@ struct NativeAccessibleCinemaScreen: View {
                                     sourceName: MusicLocalized.message(source.name))
                             }
                             .frame(minHeight: 44, alignment: .leading)
+                            if let originalFolder = NativeCinemaPublicDrive.originalFolderURL(
+                                for: source.id) {
+                                Link("Abrir carpeta original en Google Drive",
+                                     destination: originalFolder)
+                                    .frame(minHeight: 44, alignment: .leading)
+                            }
                         }
                         if let address = source.address {
                             Link("Abrir plataforma original: \(MusicLocalized.message(source.name))", destination: address)

@@ -7,7 +7,7 @@ import Combine
 /// Renders local video with the same AVPlayer used by the accessible native
 /// pause, seek and stop buttons. The visual layer exposes no duplicate VoiceOver
 /// controls and it does not capture the user's accessibility focus.
-private final class NativeCinemaVideoUIView: UIView {
+final class NativeCinemaVideoUIView: UIView {
     override class var layerClass: AnyClass { AVPlayerLayer.self }
     var playerLayer: AVPlayerLayer { layer as! AVPlayerLayer }
 }

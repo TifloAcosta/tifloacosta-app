@@ -159,11 +159,18 @@ enum NativeDaisyAudioOrder {
 
     private static func seconds(_ clock: String?) -> TimeInterval? {
         guard let clock else { return nil }
-        let normalized = clock.trimmingCharacters(in: .whitespacesAndNewlines)
-            .replacingOccurrences(of: "npt=", with: "", options: .caseInsensitive)
-        let value = normalized.lowercased().hasSuffix("s")
-            ? String(normalized.dropLast()) : normalized
-        let parts = value.split(separator: ":")
+        var value = clock.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        if value.hasPrefix("npt=") { value.removeFirst(4) }
+        if !value.contains(":") {
+            for (suffix, multiplier) in [("min", 60.0), ("ms", 0.001), ("h", 3600.0), ("s", 1.0)] {
+                if value.hasSuffix(suffix) {
+                    guard let amount = Double(value.dropLast(suffix.count)), amount >= 0 else { return nil }
+                    let seconds = amount * multiplier
+                    return seconds.isFinite ? seconds : nil
+                }
+            }
+        }
+        let parts = value.split(separator: ":", omittingEmptySubsequences: false)
         guard !parts.isEmpty, parts.count <= 3 else { return nil }
         var result = 0.0
         for part in parts {

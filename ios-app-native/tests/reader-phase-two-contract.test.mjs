@@ -135,7 +135,7 @@ test('DAISY conserva encabezados NCC vinculados a SMIL en los metadatos del libr
 
 test('TTS mantiene progreso exacto en caracteres con aviso por palabra', () => {
   assert.match(reader, /@Published private\(set\) var textCharacterOffset = 0/);
-  assert.match(reader, /self\.previousCharacterCount = self\.spokenText\.distance/);
+  assert.match(reader, /self\.previousCharacterCount = self\.spokenOffsets\.characterOffset/);
   assert.match(reader, /self\.textCharacterOffset = self\.baseCharacters \+ self\.previousCharacterCount/);
   assert.match(reader, /baseCharacters: readingOffset/);
   assert.match(reader, /\.onReceive\(speech\.\$textCharacterOffset\)/);

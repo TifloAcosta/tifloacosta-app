@@ -8,7 +8,7 @@ const finish = source.slice(source.indexOf('progressDelegate.onFinish ='), sourc
 test('terminar una frase consolida el cursor absoluto antes de pasar a la siguiente', () => {
   assert.match(finish, /segmentBase\s*\+\s*completedText\.utf16\.count/);
   assert.match(finish, /self\.previousUTF16\s*=\s*completedUTF16/);
-  assert.match(finish, /self\.previousCharacterCount\s*=\s*self\.spokenText\.distance\(/);
+  assert.match(finish, /self\.previousCharacterCount\s*=\s*self\.spokenOffsets\.characterOffset\(forUTF16:/);
   assert.ok(finish.indexOf('self.previousUTF16 = completedUTF16') < finish.indexOf('self.speechQueueIndex += 1'));
 });
 

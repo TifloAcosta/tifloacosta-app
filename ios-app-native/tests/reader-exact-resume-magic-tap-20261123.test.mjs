@@ -10,7 +10,7 @@ test('AVSpeech cursor checkpoints the beginning of the active word, not its unsp
   assert.match(callback, /self\.isPlaying, !self\.isPaused/);
   assert.match(callback, /self\.speechQueue\.indices\.contains\(self\.speechQueueIndex\)/);
   assert.match(callback, /ObjectIdentifier\(self\.speechQueue\[self\.speechQueueIndex\]\.utterance\)/);
-  assert.match(callback, /let utf16Start = max\(0, min\(self\.spokenText\.utf16\.count,/);
+  assert.match(callback, /let utf16Start = max\(0, min\(self\.spokenOffsets\.utf16Length,/);
   assert.match(callback, /segmentBase \+ range\.location\)/);
   assert.doesNotMatch(callback, /range\.location \+ range\.length/);
   assert.match(callback, /self\.previousUTF16 = utf16Start/);

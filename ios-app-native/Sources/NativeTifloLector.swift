@@ -907,6 +907,7 @@ final class NativeReadingSpeech: ObservableObject {
     @Published private(set) var textPercent = 0
     @Published private(set) var textCharacterOffset = 0
     private var spokenText = ""
+    private var spokenOffsets = NativeReaderTextOffsets("")
     private var baseCharacters = 0
     private var previousUTF16 = 0
     private var previousCharacterCount = 0
@@ -918,6 +919,15 @@ final class NativeReadingSpeech: ObservableObject {
     private var speechEnqueuedThroughIndex = 0
     // Al pausar texto se corta el sintetizador y se conserva el cursor para reanudar.
     private var systemSpeechNeedsRestart = false
+    private var liveSystemSettings: SystemSpeechSettings?
+
+    private struct SystemSpeechSettings: Equatable {
+        let speed: Double
+        let pitch: Float
+        let voiceIdentifier: String
+        let language: String
+        let gain: Float
+    }
 
     // Los encabezados importados de EPUB/HTML conservan # para la navegación.
     // En la voz sustituimos solo esos marcadores por espacios del mismo tamaño:
@@ -961,6 +971,13 @@ final class NativeReadingSpeech: ObservableObject {
     func updateLiveSystemSettings(speed: Double, pitch: Float,
                                   voiceIdentifier: String, language: String = "es-ES") {
         guard player == nil, !isGeneratedSpeech, !speechQueue.isEmpty else { return }
+        let volume = NativeReaderVoiceProfileStore.load(for: voiceIdentifier)?.volume ?? 1
+        let settings = SystemSpeechSettings(speed: speed, pitch: pitch,
+            voiceIdentifier: voiceIdentifier, language: language, gain: volume)
+        guard settings != liveSystemSettings else { return }
+        liveSystemSettings = settings
+        let voice = (voiceIdentifier.isEmpty ? nil : AVSpeechSynthesisVoice(identifier: voiceIdentifier))
+            ?? AVSpeechSynthesisVoice(language: language)
         let first = systemSpeechNeedsRestart ? speechQueueIndex : speechQueueIndex + 1
         guard first < speechQueue.count else { return }
         for index in first..<speechQueue.count {
@@ -971,10 +988,8 @@ final class NativeReadingSpeech: ObservableObject {
             utterance.pitchMultiplier = max(0.5, min(2, pitch))
             // This volume is specific to the selected TifloLector voice.
             // Never change the VoiceOver or hardware audio output volume.
-            utterance.volume = max(0, min(1, NativeReaderVoiceProfileStore.load(for: voiceIdentifier)?.volume ?? 1))
-            utterance.voice = (voiceIdentifier.isEmpty ? nil :
-                AVSpeechSynthesisVoice(identifier: voiceIdentifier))
-                ?? AVSpeechSynthesisVoice(language: language)
+            utterance.volume = max(0, min(1, volume))
+            utterance.voice = voice
         }
     }
 
@@ -994,17 +1009,15 @@ final class NativeReadingSpeech: ObservableObject {
                 // willSpeakRange announces the word BEFORE it has been spoken.
                 // Its end would skip the current word on Pause or Magic Tap.
                 // Resume at that word's beginning rather than at a paragraph.
-                let utf16Start = max(0, min(self.spokenText.utf16.count,
+                let utf16Start = max(0, min(self.spokenOffsets.utf16Length,
                                            segmentBase + range.location))
                 guard utf16Start >= self.previousUTF16 else { return }
-                let cursor = String.Index(utf16Offset: utf16Start, in: self.spokenText)
                 self.previousUTF16 = utf16Start
-                self.previousCharacterCount = self.spokenText.distance(
-                    from: self.spokenText.startIndex, to: cursor)
+                self.previousCharacterCount = self.spokenOffsets.characterOffset(forUTF16: utf16Start)
                 self.textCharacterOffset = self.baseCharacters + self.previousCharacterCount
-                let count = self.baseUTF16 + utf16Start
-                self.textPercent = max(0, min(100,
-                    Int(Double(count) * 100 / Double(self.totalUTF16))))
+                self.textPercent = NativeReaderProgress.textPercent(
+                    length: self.baseCharacters + self.spokenOffsets.length,
+                    offset: self.baseCharacters + self.previousCharacterCount)
             }
         }
         progressDelegate.onFinish = { [weak self] utterance in
@@ -1015,19 +1028,17 @@ final class NativeReadingSpeech: ObservableObject {
                       ObjectIdentifier(self.speechQueue[self.speechQueueIndex].utterance) == ObjectIdentifier(utterance) else { return }
                 let completedText = self.speechQueue[self.speechQueueIndex].utterance.speechString
                 let segmentBase = self.utteranceOffsets[ObjectIdentifier(utterance)] ?? 0
-                let completedUTF16 = min(self.spokenText.utf16.count,
+                let completedUTF16 = min(self.spokenOffsets.utf16Length,
                                          segmentBase + completedText.utf16.count)
                 // El último callback de palabra puede no llegar al cerrar una frase.
                 // Consolidar su final evita reanudar desde el párrafo anterior.
                 if completedUTF16 >= self.previousUTF16 {
                     self.previousUTF16 = completedUTF16
-                    let completedIndex = String.Index(utf16Offset: completedUTF16,
-                                                      in: self.spokenText)
-                    self.previousCharacterCount = self.spokenText.distance(
-                        from: self.spokenText.startIndex, to: completedIndex)
+                    self.previousCharacterCount = self.spokenOffsets.characterOffset(forUTF16: completedUTF16)
                     self.textCharacterOffset = self.baseCharacters + self.previousCharacterCount
-                    self.textPercent = max(0, min(100, Int(Double(self.baseUTF16 + completedUTF16)
-                        * 100 / Double(max(1, self.totalUTF16)))))
+                    self.textPercent = NativeReaderProgress.textPercent(
+                        length: self.baseCharacters + self.spokenOffsets.length,
+                        offset: self.baseCharacters + self.previousCharacterCount)
                 }
                 self.speechQueueIndex += 1
                 if self.lastSpeechUtterance == ObjectIdentifier(utterance) {
@@ -1123,14 +1134,15 @@ final class NativeReadingSpeech: ObservableObject {
         stop()
         guard !text.isEmpty else { return }
         self.spokenText = text
+        self.spokenOffsets = NativeReaderTextOffsets(text)
         self.baseCharacters = baseCharacters
         self.previousUTF16 = 0
         self.previousCharacterCount = 0
         self.textCharacterOffset = baseCharacters
         self.baseUTF16 = baseUTF16
         self.totalUTF16 = max(1, totalUTF16 ?? text.utf16.count)
-        textPercent = max(0, min(100,
-            Int(Double(baseUTF16) * 100 / Double(self.totalUTF16))))
+        textPercent = NativeReaderProgress.textPercent(
+            length: baseCharacters + spokenOffsets.length, offset: baseCharacters)
         // La voz sigue sonando con la pantalla bloqueada y otras apps abiertas.
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
         try? AVAudioSession.sharedInstance().setActive(true)
@@ -1142,16 +1154,19 @@ final class NativeReadingSpeech: ObservableObject {
         speechQueue.removeAll()
         let segments = NativeReaderPauseProfile.segments(Self.textForSpeech(text), voiceIdentifier: voiceIdentifier)
         var utf16Offset = 0
-        for (index, segment) in segments.enumerated() {
+        let voice = (voiceIdentifier.isEmpty ? nil : AVSpeechSynthesisVoice(identifier: voiceIdentifier))
+            ?? AVSpeechSynthesisVoice(language: language)
+        let voiceVolume = NativeReaderVoiceProfileStore.load(for: voiceIdentifier)?.volume ?? 1
+        liveSystemSettings = SystemSpeechSettings(speed: speed, pitch: pitch,
+            voiceIdentifier: voiceIdentifier, language: language, gain: voiceVolume)
+        for segment in segments {
             let utterance = AVSpeechUtterance(string: segment.text)
-            utterance.voice = (voiceIdentifier.isEmpty ? nil :
-                AVSpeechSynthesisVoice(identifier: voiceIdentifier))
-                ?? AVSpeechSynthesisVoice(language: language)
+            utterance.voice = voice
             utterance.rate = min(AVSpeechUtteranceMaximumSpeechRate,
                 max(AVSpeechUtteranceMinimumSpeechRate,
                     AVSpeechUtteranceDefaultSpeechRate * Float(speed)))
             utterance.pitchMultiplier = max(0.5, min(2, pitch))
-            utterance.volume = max(0, min(1, NativeReaderVoiceProfileStore.load(for: voiceIdentifier)?.volume ?? 1))
+            utterance.volume = max(0, min(1, voiceVolume))
             // El retardo se programa entre frases, sin saturar la cola de AVSpeechSynthesizer.
             utterance.postUtteranceDelay = segment.delay
             let identifier = ObjectIdentifier(utterance)
@@ -1169,12 +1184,11 @@ final class NativeReadingSpeech: ObservableObject {
         var result: [String] = []
         var remaining = text[...]
         while !remaining.isEmpty {
-            let end = remaining.index(remaining.startIndex,
-                offsetBy: min(1200, remaining.count))
+            let end = remaining.index(remaining.startIndex, offsetBy: 1200,
+                                      limitedBy: remaining.endIndex) ?? remaining.endIndex
             var split = end
             if end < remaining.endIndex {
-                let minOffset = remaining.index(remaining.startIndex,
-                    offsetBy: min(600, remaining.count))
+                let minOffset = remaining.index(remaining.startIndex, offsetBy: 600)
                 var at = end
                 while at > minOffset {
                     let preceding = remaining[remaining.index(before: at)]
@@ -1353,9 +1367,11 @@ final class NativeReadingSpeech: ObservableObject {
         } ?? (percent > 0 ? (try? AVAudioPlayer(contentsOf: urls[track]))
             .map { $0.duration * Double(percent) / 100 } : nil)
         let candidate = clips.firstIndex { clip in
-            clip.track == track && (resumeSeconds == nil ||
-                (resumeSeconds! >= clip.begin &&
-                 (clip.end == nil || resumeSeconds! < clip.end!)))
+            guard clip.track == track else { return false }
+            guard let resumeSeconds else { return true }
+            return resumeSeconds >= clip.begin && (clip.end.map { resumeSeconds < $0 } ?? true)
+        } ?? clips.firstIndex { clip in
+            clip.track == track && (resumeSeconds.map { clip.begin >= $0 } ?? false)
         } ?? clips.firstIndex(where: { $0.track == track })
         guard let index = candidate else { throw NativeReaderFormatError.invalidArchive }
         stop()
@@ -1366,10 +1382,11 @@ final class NativeReadingSpeech: ObservableObject {
         daisyClips = clips
         daisyClipIndex = index
         let clip = clips[index]
-        let position = max(clip.begin, resumeSeconds ?? clip.begin)
+        let position = resumeSeconds.flatMap { seconds in
+            seconds >= clip.begin && (clip.end.map { seconds < $0 } ?? true) ? seconds : nil
+        } ?? clip.begin
         do {
-            try startAudio(urls[clip.track], speed: speed, at: 0,
-                           atSeconds: min(position, clip.end ?? position))
+            try startAudio(urls[clip.track], speed: speed, at: 0, atSeconds: position)
             playlistIndex = clip.track
         } catch {
             stop()
@@ -1550,6 +1567,7 @@ final class NativeReadingSpeech: ObservableObject {
     }
 
     func stop() {
+        liveSystemSettings = nil
         daisyBoundaryTask?.cancel()
         daisyBoundaryTask = nil
         sleepTask?.cancel()
@@ -1820,14 +1838,22 @@ struct NativeReaderLibraryScreen: View {
             let startingTrack = min(max(0, latest.lastTrackIndex ?? 0), urls.count - 1)
             let targetLibrary = library
             do {
-                try speech.playPlaylist(urls, speed: speed, track: startingTrack,
-                    at: latest.lastPercent ?? 0,
-                    onTrackChanged: { [weak targetLibrary] index in
-                        targetLibrary?.saveAudioPosition(document, track: index, percent: 0)
-                    },
-                    onError: { error in importError = "No se pudo reproducir: " + error })
-                if let seconds = latest.lastAudioSeconds {
-                    speech.seek(toSeconds: seconds)
+                let onTrackChanged: (Int) -> Void = { [weak targetLibrary, weak speech = self.speech] index in
+                    targetLibrary?.saveAudioPosition(document, track: index,
+                        percent: speech?.audioPercent ?? 0, seconds: speech?.audioElapsed)
+                }
+                let onError: (String) -> Void = {
+                    importError = MusicLocalized.format("No se pudo reproducir: %@", $0)
+                }
+                if latest.fileExtension?.lowercased() == "daisy",
+                   let clips = latest.daisyClips, !clips.isEmpty {
+                    try speech.playDaisySequence(urls, clips: clips, speed: speed,
+                        track: startingTrack, at: latest.lastPercent ?? 0, seconds: latest.lastAudioSeconds,
+                        onTrackChanged: onTrackChanged, onError: onError)
+                } else {
+                    try speech.playPlaylist(urls, speed: speed, track: startingTrack,
+                        at: latest.lastPercent ?? 0, onTrackChanged: onTrackChanged, onError: onError)
+                    if let seconds = latest.lastAudioSeconds { speech.seek(toSeconds: seconds) }
                 }
             } catch { importError = error.localizedDescription }
         } else {
@@ -2386,8 +2412,18 @@ struct NativeReaderLibraryScreen: View {
                         document.importedAt.formatted(date: .abbreviated, time: .shortened))
                     LabeledContent("Marcas", value: "\(library.latest(document).bookmarks.count)")
                     LabeledContent("Carpeta", value: library.latest(document).folderName ?? "Sin carpeta")
-                    LabeledContent("Leído", value: "\(library.latest(document).lastPercent ?? 0) por ciento")
-                    LabeledContent("Pendiente", value: "\(100 - (library.latest(document).lastPercent ?? 0)) por ciento")
+                    let saved = library.latest(document)
+                    if let paths = saved.trackPaths, !paths.isEmpty {
+                        let track = max(0, min(paths.count - 1, saved.lastTrackIndex ?? 0))
+                        Text(MusicLocalized.format("Pista %d de %d, %d por ciento de esta pista.",
+                            track + 1, paths.count, max(0, min(100, saved.lastPercent ?? 0))))
+                    } else if let offset = saved.lastTextOffset {
+                        let percent = NativeReaderProgress.textPercent(length: saved.body.count, offset: offset)
+                        LabeledContent("Leído", value: MusicLocalized.format("%d por ciento", percent))
+                        LabeledContent("Pendiente", value: MusicLocalized.format("%d por ciento", 100 - percent))
+                    } else if let percent = saved.lastPercent {
+                        Text(MusicLocalized.format("Progreso guardado: %d por ciento.", max(0, min(100, percent))))
+                    }
                 }
                 .tifloScreenSurface()
                 .navigationTitle("Información")
@@ -3025,12 +3061,14 @@ struct NativeReadingScreen: View {
         } else if !tracks.isEmpty {
             playTrack()
             if let targetSeconds = pendingDaisyAudioSeconds, speech.hasAudio {
-                speech.seek(toSeconds: targetSeconds)
+                if latest.daisyClips?.isEmpty != false {
+                    speech.seek(toSeconds: targetSeconds)
+                }
                 currentPercent = speech.audioPercent
                 pendingDaisyAudioSeconds = nil
                 persistPosition()
             } else if !didRestoreAudioPosition {
-                restoreAudioPosition()
+                if latest.daisyClips?.isEmpty != false { restoreAudioPosition() }
                 didRestoreAudioPosition = true
             }
         } else {
@@ -4159,8 +4197,8 @@ struct NativeReadingScreen: View {
                 onPositionChange: { offset in
                     guard !speech.isPlaying else { return }
                     readingOffset = offset
-                    currentPercent = min(100, Int(Double(offset) * 100 /
-                        Double(max(1, textLayout.totalCharacters))))
+                    currentPercent = NativeReaderProgress.textPercent(
+                        length: textLayout.totalCharacters, offset: offset)
                     // Braille panning can generate many selection updates. Coalesce
                     // persistence like manual VoiceOver navigation instead of
                     // rewriting the complete library after every movement.
@@ -4168,9 +4206,11 @@ struct NativeReadingScreen: View {
                 }
             )
             .accessibilityFocused($continuousBrailleFocused)
-            .task {
-                guard brailleFocusText, !speech.isPlaying else { return }
+            .task(id: readerIsVisible) {
+                guard readerIsVisible, brailleFocusText, !speech.isPlaying,
+                      !startWithConversion, UIAccessibility.isVoiceOverRunning else { return }
                 await Task.yield()
+                guard !Task.isCancelled, readerIsVisible else { return }
                 continuousBrailleFocused = true
             }
         } else {
@@ -4570,20 +4610,17 @@ struct NativeReadingScreen: View {
             // Shortcuts invokes this directly; no stop, seek or navigation occurs.
             NativeQuickBookmarkBridge.saveActiveReader = { addBookmark() }
             NativeReaderPlaybackBridge.pauseActiveReader = { if speech.isPlaying { pausePlayback() } }
-            if !didApplyOpeningMode {
-                didApplyOpeningMode = true
-                if presentationMode == 0 && readingMode == 1 {
-                    // Navigation and the last-opened catalog update may still be
-                    // settling. Request focus only after the reader is visible.
-                    Task { @MainActor in
-                        do { try await Task.sleep(for: .milliseconds(300)) }
-                        catch { return }
-                        guard !Task.isCancelled, readerIsVisible,
-                              presentationMode == 0 && readingMode == 1 else { return }
-                        playbackButtonFocused = true
-                    }
-                }
-            }
+        }
+        .task(id: readerIsVisible) {
+            guard readerIsVisible, !didApplyOpeningMode,
+                  !startWithConversion, UIAccessibility.isVoiceOverRunning,
+                  presentationMode == 0, readingMode == 1 else { return }
+            didApplyOpeningMode = true
+            do { try await Task.sleep(for: .milliseconds(300)) }
+            catch { return }
+            guard !Task.isCancelled, readerIsVisible,
+                  presentationMode == 0 && readingMode == 1 else { return }
+            playbackButtonFocused = true
         }
         .onChange(of: sleepIndex) { _, _ in
             applySleepTimer(reset: true)
@@ -4658,6 +4695,7 @@ struct NativeReadingScreen: View {
             speech.stop()
         }
         .accessibilityAction(.magicTap) { toggleReaderPlayback() }
+        .accessibilityAction(named: Text("Volver al principio")) { returnToBeginning() }
         .accessibilityAction(named: Text("Añadir marca")) { addBookmarkFromReaderSelection() }
         .accessibilityAction(named: Text("Seleccionar y copiar texto")) {
             if !latest.body.isEmpty { showTextSelection = true }

@@ -16,7 +16,7 @@ test('per-voice volume remains optional for older saved profiles', () => {
 
 test('voice preview and actual speech apply the saved utterance volume', () => {
   assert.match(settings, /utterance\.volume = max\(0, min\(1, profile\.volume \?\? 1\)\)/);
-  assert.match(reader, /utterance\.volume = max\(0, min\(1, NativeReaderVoiceProfileStore\.load\(for: voiceIdentifier\)\?\.volume \?\? 1\)\)/);
+  assert.match(reader, /utterance\.volume = max\(0, min\(1, voiceVolume\)\)/);
   assert.ok(reader.split('utterance.volume = max(').length >= 3);
   assert.doesNotMatch(reader, /MPVolumeView|outputVolume\s*=/);
 });

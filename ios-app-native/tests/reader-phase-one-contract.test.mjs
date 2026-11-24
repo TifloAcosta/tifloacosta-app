@@ -12,7 +12,7 @@ test('The reading opening focus preference is persistent, opt-in and applied onc
   assert.match(reader, /@AppStorage\("native-reader-reading-mode"\) private var readingMode = 0/);
   assert.match(settings, /Toggle\("Foco inicial en Reproducir", isOn: automaticReadingBinding\)/);
   assert.match(settings, /get: \{ readingMode == 1 \}/);
-  assert.match(reader, /if !didApplyOpeningMode/);
+  assert.match(reader, /guard readerIsVisible, !didApplyOpeningMode/);
   assert.match(reader, /guard !Task[.]isCancelled, readerIsVisible,/);
   assert.match(reader, /presentationMode == 0 && readingMode == 1 else \{ return \}\s*playbackButtonFocused = true/);
 });

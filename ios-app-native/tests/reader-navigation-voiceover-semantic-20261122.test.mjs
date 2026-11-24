@@ -40,7 +40,7 @@ test('Markdown hash prefixes are never read in headings, selectable text, or bra
   assert.match(source, /title: NativeReaderHeadingDisplay\.title\(line\)/);
   assert.match(source, /NativeReaderHeadingDisplay\.title\(point\.title/);
   assert.match(selectable, /NativeReaderHeadingDisplay\.mask\(in: text\)/);
-  assert.match(braille, /for marker in markerStart\.\.<end \{ characters\[marker\] = " " \}/);
+  assert.match(braille, /NativeReaderHeadingDisplay\.mask\(in: text\)/);
   const textLayout = part('private struct NativeReaderTextLayout {', '// Reproductor local de vídeo');
   assert.match(textLayout, /var headings: \[Int\] = \[\]/);
   assert.doesNotMatch(textLayout, /var headings: \[Int\] = \[0\]/);

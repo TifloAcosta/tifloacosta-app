@@ -14,7 +14,7 @@ struct Daisy202LayoutSmoke {
                 clips: [.init(file: "audio0003.mp3", duration: 5.125)])
         ]
         guard let package = NativeDaisy202AudioLayout.render(
-            title: "Novela <Íntegra>", identifier: "urn:uuid:123",
+            title: "Novela <Íntegra>\u{0}", identifier: "urn:uuid:123",
             language: "es", chapters: chapters, date: "2026-11-23")
         else { fatalError("Layout returned no DAISY documents") }
         precondition(package.files == [
@@ -29,6 +29,7 @@ struct Daisy202LayoutSmoke {
             precondition(parser.parse(), "DAISY 2.02 XML malformed: " +
                          (parser.parserError?.localizedDescription ?? "unknown"))
         }
+        precondition(!package.ncc.contains("\u{0}"), "Invalid XML control character preserved")
         precondition(package.ncc.contains("Novela &lt;Íntegra&gt;"),
                      "XML-escaped title lost")
         precondition(package.ncc.contains("Capítulo &amp; Prólogo"),

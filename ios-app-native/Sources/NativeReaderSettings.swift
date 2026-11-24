@@ -774,32 +774,6 @@ struct NativeReaderBrailleControls: View {
     @AppStorage("native-reader-braille-initial-text-focus") private var brailleFocusText = true
     @State private var showManualBrailleSettingsHelp = false
 
-    // iOS does not expose VoiceOver > Braille through the public settings API.
-    // These Settings URLs are best-effort; keep their failure path in-app.
-    private func openVoiceOverBrailleSettings() {
-        let destinations = [
-            "prefs:root=ACCESSIBILITY&path=VOICEOVER_TITLE/BRAILLE_TITLE",
-            "App-prefs:root=ACCESSIBILITY&path=VOICEOVER_TITLE/BRAILLE_TITLE"
-        ]
-
-        func tryDestination(_ index: Int) {
-            guard index < destinations.count else {
-                showManualBrailleSettingsHelp = true
-                return
-            }
-            guard let url = URL(string: destinations[index]) else {
-                tryDestination(index + 1)
-                return
-            }
-            UIApplication.shared.open(url, options: [:]) { didOpen in
-                guard !didOpen else { return }
-                DispatchQueue.main.async { tryDestination(index + 1) }
-            }
-        }
-
-        tryDestination(0)
-    }
-
     var body: some View {
         Text("Lectura braille continua activada")
             .font(.footnote)
@@ -810,10 +784,10 @@ struct NativeReaderBrailleControls: View {
             selectedIndex: $navigationUnit
         )
         Button("Configurar línea braille en VoiceOver") {
-            openVoiceOverBrailleSettings()
+            showManualBrailleSettingsHelp = true
         }
-        .accessibilityHint("Intenta abrir directamente los ajustes de braille de VoiceOver.")
-        .alert("No se pudieron abrir los ajustes de braille", isPresented: $showManualBrailleSettingsHelp) {
+        .accessibilityHint("Muestra la ruta para llegar a los ajustes de braille.")
+        .alert("Ajustes de braille de VoiceOver", isPresented: $showManualBrailleSettingsHelp) {
             Button("Cerrar", role: .cancel) {}
         } message: {
             Text("Abre Ajustes > Accesibilidad > VoiceOver > Braille.")

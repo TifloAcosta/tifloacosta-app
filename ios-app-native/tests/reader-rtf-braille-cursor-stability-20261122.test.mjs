@@ -20,6 +20,6 @@ test('SwiftUI repaint does not overwrite the braille selection or scroll on unch
 });
 
 test('actual navigation still reports the UTF-16 selection as character offset', () => {
-  assert.match(braille, /let prefix = \(view\.text as NSString\)\.substring\(to: utf16Offset\)/);
+  assert.match(braille, /offsets\.characterOffset\(forUTF16: view\.selectedRange\.location\)/);
   assert.match(braille, /parent\.onPositionChange\(characterOffset\)/);
 });

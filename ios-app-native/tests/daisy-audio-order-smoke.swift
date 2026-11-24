@@ -29,7 +29,7 @@ struct DaisyAudioOrderSmoke {
         try write("chapters/first.smil", """
         <smil><body><seq><par id="p1">
           <audio src="../audio/z-first.mp3" clipBegin="npt=0:00:00.000" clipEnd="npt=0:00:12.500"/>
-          <audio src="../audio/z-first.mp3" clipBegin="npt=0:01:00.000" clipEnd="npt=0:01:10.000"/>
+          <audio src="../audio/z-first.mp3" clipBegin="npt=1min" clipEnd="70000ms"/>
         </par></seq></body></smil>
         """)
         try write("chapters/second.smil", """

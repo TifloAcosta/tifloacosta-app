@@ -1415,3 +1415,5 @@
 "Algunos elementos no se pudieron importar y permanecen en Recibidos." = "Não foi possível importar alguns elementos, que permanecem em Recebidos.";
 "No se pudo abrir «%@»: %@. El elemento permanece en Recibidos." = "Não foi possível abrir «%@»: %@. O elemento permanece em Recebidos.";
 "PDF con más de 150 páginas escaneadas. Divide el archivo para realizar OCR." = "O PDF tem mais de 150 páginas digitalizadas. Divida o ficheiro para executar o OCR.";
+"Muestra la ruta para llegar a los ajustes de braille." = "Mostra como chegar às definições de braille.";
+"Ajustes de braille de VoiceOver" = "Definições de braille do VoiceOver";

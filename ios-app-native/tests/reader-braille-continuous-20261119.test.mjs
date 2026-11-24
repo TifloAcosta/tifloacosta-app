@@ -35,7 +35,7 @@ test('Braille preserves exact selection and restores position without starting s
 
 test('Braille hides markdown heading markers while preserving text offsets', () => {
   const braille = source('NativeReaderContinuousBrailleText.swift');
-  assert.match(braille, /maskMarkdownHeadings\(_ original: String\) -> String/);
-  assert.match(braille, /characters\[marker\] = " "/);
-  assert.match(braille, /context\.coordinator\.visibleText = Self\.maskMarkdownHeadings\(text\)/);
+  assert.match(braille, /NativeReaderHeadingDisplay\.mask\(in: text\)/);
+  assert.match(braille, /NativeReaderTextOffsets\(context\.coordinator\.visibleText\)/);
+  assert.match(braille, /context\.coordinator\.visibleText = NativeReaderHeadingDisplay\.mask\(in: text\)/);
 });

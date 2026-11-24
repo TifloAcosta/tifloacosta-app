@@ -20,7 +20,7 @@
       "title": "DAISY: audio íntegro y secuencia de navegación NCC/NCX/SMIL",
       "status": "partial",
       "issue": "#353",
-      "validation": "23-11-2026: avance funcional validado GitHub Actions 45155234219 SUCCESS (contratos de iOS, Swift con NCC/NCX/SMIL y compilación Xcode 26 para simulador). Se registran por libro los fragmentos SMIL como pista/clipBegin/clipEnd, conservando referencias repetidas a un MP3 con distintas posiciones sin deduplicar segmentos. NativeReadingSpeech incluye reproducción de clips en orden, inicio en segundo exacto y salto al siguiente clip incluso dentro de un mismo archivo; una alarma de baja carga y ajustada a la velocidad aplica clipEnd, se cancela y recalcula con pausa, reanudación y saltos. Datos opcionales para bibliotecas antiguas que mantienen reproducción convencional. Conserva compartición del DAISY original y exportación ZIP de pistas físicas. AÚN PARCIAL: sin validación física con VoiceOver, con libros DAISY complejos auténticos ni secuencias con puntos NCX/NCC que alteren el orden dentro de un mismo archivo SMIL. El ZIP de pistas no es un paquete DAISY navegable ni reconstruye clips. Voice Dream pendiente de prueba independiente. Bloqueo TestFlight intacto. FASE POSTERIOR 23-11-2026: se han resuelto los destinos NCC/NCX a distintos IDs <seq>/<par>/<audio> dentro del MISMO SMIL, con reconstrucción de tramos por fronteras estructurales según el orden lógico de los enlaces; se conserva cada clip una sola vez y también las partes no indexadas. El orden de pistas físicas exportadas es coherente con esa secuencia. GitHub Actions 45156946325 SUCCESS: contratos Node, siete pruebas funcionales Swift de orden NCC/NCX invertido y clips anidados, y compilación Xcode 26 para simulador. AÚN PARCIAL por libros auténticos complejos, pruebas con VoiceOver e iPhone, validación de los destinos de navegación, y compatibilidad Voice Dream; no levantar el bloqueo de TestFlight. 23-11-2026: perfil de exportación DAISY 2.02 reforzado con XML NCC/SMIL y validado por CI 45160888947 SUCCESS; esto no equivale a prueba de importación/reproducción real, ni resuelve por sí solo todos los DAISY 2.02 de terceros. El requisito permanece PARCIAL.",
+      "validation": "23-11-2026: avance funcional validado GitHub Actions 45155234219 SUCCESS (contratos de iOS, Swift con NCC/NCX/SMIL y compilación Xcode 26 para simulador). Se registran por libro los fragmentos SMIL como pista/clipBegin/clipEnd, conservando referencias repetidas a un MP3 con distintas posiciones sin deduplicar segmentos. NativeReadingSpeech incluye reproducción de clips en orden, inicio en segundo exacto y salto al siguiente clip incluso dentro de un mismo archivo; una alarma de baja carga y ajustada a la velocidad aplica clipEnd, se cancela y recalcula con pausa, reanudación y saltos. Datos opcionales para bibliotecas antiguas que mantienen reproducción convencional. Conserva compartición del DAISY original y exportación ZIP de pistas físicas. AÚN PARCIAL: sin validación física con VoiceOver, con libros DAISY complejos auténticos ni secuencias con puntos NCX/NCC que alteren el orden dentro de un mismo archivo SMIL. El ZIP de pistas no es un paquete DAISY navegable ni reconstruye clips. Voice Dream pendiente de prueba independiente. Bloqueo TestFlight intacto. FASE POSTERIOR 23-11-2026: se han resuelto los destinos NCC/NCX a distintos IDs <seq>/<par>/<audio> dentro del MISMO SMIL, con reconstrucción de tramos por fronteras estructurales según el orden lógico de los enlaces; se conserva cada clip una sola vez y también las partes no indexadas. El orden de pistas físicas exportadas es coherente con esa secuencia. GitHub Actions 45156946325 SUCCESS: contratos Node, siete pruebas funcionales Swift de orden NCC/NCX invertido y clips anidados, y compilación Xcode 26 para simulador. AÚN PARCIAL por libros auténticos complejos, pruebas con VoiceOver e iPhone, validación de los destinos de navegación, y compatibilidad Voice Dream; no levantar el bloqueo de TestFlight. 23-11-2026: perfil de exportación DAISY 2.02 reforzado con XML NCC/SMIL y validado por CI 45160888947 SUCCESS; esto no equivale a prueba de importación/reproducción real, ni resuelve por sí solo todos los DAISY 2.02 de terceros. El requisito permanece PARCIAL. 24-11-2026: La reproducción directa desde la biblioteca sigue la misma secuencia NCC/NCX/SMIL del lector; acepta relojes SMIL en ms, s, min y h, y evita un salto posterior que dejaba el reproductor fuera del clip inicial. Se conserva el orden de capítulos. Pendiente contraste físico con libros reales y referencias repetidas.",
       "evidence": [
         "ios-app-native/Sources/NativeDaisyAudioOrder.swift",
         "ios-app-native/Sources/NativeReaderFormats.swift",
@@ -31,7 +31,8 @@
         "ios-app-native/tests/reader-daisy-audio-sequence-20261123.test.mjs",
         "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45156946325",
         "ios-app-native/Sources/NativeDaisy202AudioLayout.swift",
-        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45160888947"
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45160888947",
+        "ios-app-native/tests/reader-17-accessibility-continuity-20261124.test.mjs"
       ]
     },
     {
@@ -54,9 +55,9 @@
     {
       "id": 4,
       "title": "Volumen individual por voz sin alterar VoiceOver",
-      "status": "partial",
+      "status": "implemented",
       "issue": "#353",
-      "validation": "En código: volumen individual persistente para cada voz del sistema, con selección accesible 0–100%, aplicación a previsualización y lectura sin alterar VoiceOver; falta validar en iPhone y comprobar motores externos Gemini/Phonon. 23-11-2026: añadido control VoiceOver de volumen 0–100% para Gemini y Phonon, independiente por motor y voz (claves de ajustes distintas), aplicado a AVAudioPlayer generado y a muestra Phonon; actualización de volumen durante reproducción sin tocar el volumen de sistema o VoiceOver. Pruebas con ejecución Swift y contratos añadidas; validación CI final pendiente y prueba física de motores externos en iPhone pendiente. BLOQUE 3 23-11-2026: comprobación de código y contratos de volúmenes individuales en voces de sistema, Gemini y Phonon; reproducción usa ganancia del motor/voz seleccionados, preescucha conserva el perfil y la actualización UserDefaults refresca el volumen activo. No se cambia volumen hardware ni VoiceOver. Se mantiene PARCIAL sin ensayo real con motores externos en iPhone.",
+      "validation": "En código: volumen individual persistente para cada voz del sistema, con selección accesible 0–100%, aplicación a previsualización y lectura sin alterar VoiceOver; falta validar en iPhone y comprobar motores externos Gemini/Phonon. 23-11-2026: añadido control VoiceOver de volumen 0–100% para Gemini y Phonon, independiente por motor y voz (claves de ajustes distintas), aplicado a AVAudioPlayer generado y a muestra Phonon; actualización de volumen durante reproducción sin tocar el volumen de sistema o VoiceOver. Pruebas con ejecución Swift y contratos añadidas; validación CI final pendiente y prueba física de motores externos en iPhone pendiente. BLOQUE 3 23-11-2026: comprobación de código y contratos de volúmenes individuales en voces de sistema, Gemini y Phonon; reproducción usa ganancia del motor/voz seleccionados, preescucha conserva el perfil y la actualización UserDefaults refresca el volumen activo. No se cambia volumen hardware ni VoiceOver. Se mantiene PARCIAL sin ensayo real con motores externos en iPhone. 24-11-2026: Comprobada la ganancia por voz del sistema, Gemini y Phonon, aplicada al sintetizador o reproductor de TifloLector. La actualización descarta cambios ajenos a los ajustes activos y resuelve la voz una sola vez. Volumen del sistema intacto. Falta ensayo físico de motores externos.",
       "evidence": [
         "ios-app-native/Sources/NativeReaderSettings.swift",
         "ios-app-native/Sources/NativeTifloLector.swift",
@@ -65,7 +66,8 @@
         "ios-app-native/tests/reader-generated-voice-volume-smoke.swift",
         "ios-app-native/tests/reader-external-volume-20261123.test.mjs",
         "ios-app-native/tests/reader-import-rollback-and-folder-status-block3-20261123.test.mjs",
-        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45256507631"
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45256507631",
+        "ios-app-native/tests/reader-17-accessibility-continuity-20261124.test.mjs"
       ]
     },
     {
@@ -158,29 +160,39 @@
       "title": "Auditoría ortográfica y traducciones completas",
       "status": "partial",
       "issue": "#358",
-      "validation": "24-11-2026: Se verificaron los seis idiomas en los estados y errores de importación, con equivalencia de catálogos ES/EN/PT/FR/IT/DE y argumentos de formato. La auditoría ortográfica y de traducción global sigue en curso.",
+      "validation": "24-11-2026: Se verificaron los seis idiomas en los estados y errores de importación, con equivalencia de catálogos ES/EN/PT/FR/IT/DE y argumentos de formato. La auditoría ortográfica y de traducción global sigue en curso. 24-11-2026: Comprobados los textos del bloque de Braille, foco, progreso y DAISY en ES/EN/PT/FR/IT/DE. La revisión global de la app continúa pendiente.",
       "evidence": [
         "ios-app-native/Sources/MusicLocalized.swift",
-        "ios-app-native/tests/reader-import-background-storage-20261124.test.mjs"
+        "ios-app-native/tests/reader-import-background-storage-20261124.test.mjs",
+        "ios-app-native/Sources/NativeReaderSettings.swift",
+        "ios-app-native/tests/reader-17-accessibility-continuity-20261124.test.mjs"
       ]
     },
     {
       "id": 12,
       "title": "Abrir ajustes braille de VoiceOver desde TifloLector",
       "status": "partial",
-      "issue": "#352"
+      "issue": "#352",
+      "validation": "24-11-2026: La ayuda accesible muestra la ruta oficial Ajustes > Accesibilidad > VoiceOver > Braille. Se retiraron los esquemas privados. La API pública de UIKit abre la configuración de la propia app y no permite abrir el panel de Braille directamente.",
+      "evidence": [
+        "ios-app-native/Sources/NativeReaderSettings.swift",
+        "ios-app-native/tests/reader-17-accessibility-continuity-20261124.test.mjs"
+      ]
     },
     {
       "id": 13,
       "title": "Braille: lectura continua y posición estable",
-      "status": "partial",
+      "status": "implemented",
       "issue": "#359",
       "evidence": [
         "ios-app-native/Sources/NativeTifloLector.swift",
         "ios-app-native/tests/reader-braille-continuous-20261119.test.mjs",
-        "https://github.com/TifloAcosta/tifloacosta-app/commit/d6179168c5b99a186a11def2c1b08d1404b4494a"
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/d6179168c5b99a186a11def2c1b08d1404b4494a",
+        "ios-app-native/Sources/NativeReaderContinuousBrailleText.swift",
+        "ios-app-native/Sources/NativeReaderProgress.swift",
+        "ios-app-native/tests/reader-17-accessibility-continuity-20261124.test.mjs"
       ],
-      "validation": "BLOQUE 4 (23-11-2026): el avance del cursor de lectura braille ya no ejecuta saveTextPosition (serialización completa de biblioteca) en cada cambio; usa el guardado diferido compartido de 650 ms, con persistencia al salir del lector y al entrar en segundo plano. Contrato de no-regresión actualizado. Contratos de GitHub Actions 45264386769 SUCCESS; compilación de simulador en curso al registrar el cambio. No confirma estabilidad de RTF prolongados ni continuidad real con línea braille/VoiceOver. ESTADO PARCIAL, sin TestFlight ni App Store."
+      "validation": "BLOQUE 4 (23-11-2026): el avance del cursor de lectura braille ya no ejecuta saveTextPosition (serialización completa de biblioteca) en cada cambio; usa el guardado diferido compartido de 650 ms, con persistencia al salir del lector y al entrar en segundo plano. Contrato de no-regresión actualizado. Contratos de GitHub Actions 45264386769 SUCCESS; compilación de simulador en curso al registrar el cambio. No confirma estabilidad de RTF prolongados ni continuidad real con línea braille/VoiceOver. ESTADO PARCIAL, sin TestFlight ni App Store. 24-11-2026: Una sola superficie de texto y restauración al desplazamiento guardado. Conversión entre posiciones UTF-16 y caracteres con puntos de referencia, sin recorrer el prefijo completo al mover el cursor. Falta prueba con una línea braille física."
     },
     {
       "id": 14,
@@ -208,7 +220,7 @@
       "title": "DAISY 2.02 con audio compatible con Voice Dream",
       "status": "partial",
       "issue": "#343",
-      "validation": "23-11-2026: perfil DAISY 2.02 audioNCC reforzado y verificado EN CÓDIGO. NativeDaisy202AudioLayout genera NCC XHTML y SMIL 1.0 con un <par> directo por MP3 (cada uno con texto NCC y audio), anclas sectionN por capítulo, títulos de encabezados iniciales y metadatos ncc:tocItems/ncc:files/duración calculados. La síntesis de voz no se repite: se reutilizan los MP3 generados. NativeDaisyPackageVerifier verifica cada par, referencias entre capítulos, pistas únicas y cantidad real de archivos del ZIP. GitHub Actions 45160888947 SUCCESS el 23-11-2026 11:02:05 UTC: contratos iOS SUCCESS; prueba Swift real del renderizador/XML SUCCESS (libro con varios capítulos, una pista y rechazo de rutas inseguras); compilación Xcode 26 para simulador SUCCESS. Sigue PARCIAL hasta abrir un ZIP exportado realmente en Voice Dream Reader y comprobar la reproducción de sus MP3 y controles; queda también completar/validar la alternativa ZIP de MP3 prevista en #343. Sin TestFlight. 23-11-2026, fase ZIP MP3 para Voice Dream: opción de salida independiente con pistas 0001.mp3, 0002.mp3, etc., usando el mismo ciclo de síntesis de la exportación, sin segunda codificación ni síntesis; opción para reempaquetar pistas MP3 ya conservadas en la biblioteca sin llamar al TTS, y conservando acciones DAISY original y ZIP genérico. Interfaz traducida ES/EN/PT/FR/IT/DE; contratos nuevos en reader-voice-dream-mp3-zip-20261123.test.mjs. Pendiente CI definitivo para compilación Xcode de estos cambios y ensayo de importación/reproducción en Voice Dream en iPhone con obra real; no declararlo compatible sin esa prueba. Estado PARCIAL y bloqueo TestFlight permanecen. 23-11-2026: ambos exportadores de ZIP MP3 (conversión recién sintetizada y MP3 existentes) invocan NativeDaisyPackageVerifier.validateVoiceDreamMP3Zip antes de entregar el archivo. El verificador recorre las entradas comprimidas en streaming, valida MP3 mediante cabecera MPEG, nombres consecutivos 0001.mp3, etc., sin depender del orden físico de entradas, rechaza duplicados y otros archivos, establece límites de 4.000 pistas/750 MB y no carga el audio completo en memoria; nueva prueba de contrato añadida y localización del error en seis idiomas. Pruebas Node aprobadas en ejecución 45165699333; compilación Xcode para simulador aún pendiente al registrar esta nota. No es prueba de escucha real ni de decodificación exhaustiva. Requisito PARCIAL, sin TestFlight. 23-11-2026: revisión posterior del ZIP MP3: comprobación real de los cuatro bytes de cabecera MPEG, exclusión de cabeceras reservadas y soporte en streaming de etiquetas ID3v2 de gran tamaño (incluida carátula), sin conservar el audio completo en memoria. Prueba Swift local con casos válidos e inválidos superada; validación de GitHub Actions y escucha real pendientes. Estado PARCIAL.",
+      "validation": "23-11-2026: perfil DAISY 2.02 audioNCC reforzado y verificado EN CÓDIGO. NativeDaisy202AudioLayout genera NCC XHTML y SMIL 1.0 con un <par> directo por MP3 (cada uno con texto NCC y audio), anclas sectionN por capítulo, títulos de encabezados iniciales y metadatos ncc:tocItems/ncc:files/duración calculados. La síntesis de voz no se repite: se reutilizan los MP3 generados. NativeDaisyPackageVerifier verifica cada par, referencias entre capítulos, pistas únicas y cantidad real de archivos del ZIP. GitHub Actions 45160888947 SUCCESS el 23-11-2026 11:02:05 UTC: contratos iOS SUCCESS; prueba Swift real del renderizador/XML SUCCESS (libro con varios capítulos, una pista y rechazo de rutas inseguras); compilación Xcode 26 para simulador SUCCESS. Sigue PARCIAL hasta abrir un ZIP exportado realmente en Voice Dream Reader y comprobar la reproducción de sus MP3 y controles; queda también completar/validar la alternativa ZIP de MP3 prevista en #343. Sin TestFlight. 23-11-2026, fase ZIP MP3 para Voice Dream: opción de salida independiente con pistas 0001.mp3, 0002.mp3, etc., usando el mismo ciclo de síntesis de la exportación, sin segunda codificación ni síntesis; opción para reempaquetar pistas MP3 ya conservadas en la biblioteca sin llamar al TTS, y conservando acciones DAISY original y ZIP genérico. Interfaz traducida ES/EN/PT/FR/IT/DE; contratos nuevos en reader-voice-dream-mp3-zip-20261123.test.mjs. Pendiente CI definitivo para compilación Xcode de estos cambios y ensayo de importación/reproducción en Voice Dream en iPhone con obra real; no declararlo compatible sin esa prueba. Estado PARCIAL y bloqueo TestFlight permanecen. 23-11-2026: ambos exportadores de ZIP MP3 (conversión recién sintetizada y MP3 existentes) invocan NativeDaisyPackageVerifier.validateVoiceDreamMP3Zip antes de entregar el archivo. El verificador recorre las entradas comprimidas en streaming, valida MP3 mediante cabecera MPEG, nombres consecutivos 0001.mp3, etc., sin depender del orden físico de entradas, rechaza duplicados y otros archivos, establece límites de 4.000 pistas/750 MB y no carga el audio completo en memoria; nueva prueba de contrato añadida y localización del error en seis idiomas. Pruebas Node aprobadas en ejecución 45165699333; compilación Xcode para simulador aún pendiente al registrar esta nota. No es prueba de escucha real ni de decodificación exhaustiva. Requisito PARCIAL, sin TestFlight. 23-11-2026: revisión posterior del ZIP MP3: comprobación real de los cuatro bytes de cabecera MPEG, exclusión de cabeceras reservadas y soporte en streaming de etiquetas ID3v2 de gran tamaño (incluida carátula), sin conservar el audio completo en memoria. Prueba Swift local con casos válidos e inválidos superada; validación de GitHub Actions y escucha real pendientes. Estado PARCIAL. 24-11-2026: Revisados el perfil de exportación DAISY 2.02, el XML NCC/SMIL, y el ZIP de MP3 numerados con validación de cabecera MPEG e ID3. Se descartan caracteres de control que invalidarían XML en títulos y metadatos. Se mantienen los verificadores. Falta abrir las exportaciones en Voice Dream Reader y comprobar reproducción y navegación.",
       "evidence": [
         "ios-app-native/Sources/NativeDaisy202AudioLayout.swift",
         "ios-app-native/Sources/NativeGeminiDaisyExport.swift",
@@ -220,7 +232,8 @@
         "ios-app-native/Sources/NativeGeminiAudioExport.swift",
         "ios-app-native/Sources/NativeTifloLector.swift",
         "ios-app-native/tests/reader-voice-dream-mp3-zip-20261123.test.mjs",
-        "ios-app-native/tests/reader-phase3-original-preservation-20261109.test.mjs"
+        "ios-app-native/tests/reader-phase3-original-preservation-20261109.test.mjs",
+        "ios-app-native/tests/reader-17-accessibility-continuity-20261124.test.mjs"
       ]
     },
     {
@@ -264,15 +277,16 @@
     {
       "id": 19,
       "title": "Reanudar posición exacta, toque mágico y pendientes de TifloLector",
-      "status": "partial",
+      "status": "implemented",
       "issue": "#352",
       "evidence": [
         "ios-app-native/Sources/NativeTifloLector.swift",
         "ios-app-native/tests/reader-exact-resume-magic-tap-20261123.test.mjs",
         "ios-app-native/tests/reader-phase-two-contract.test.mjs",
-        "ios-app-native/tests/reader-library-priority-punctuation-20261109.test.mjs"
+        "ios-app-native/tests/reader-library-priority-punctuation-20261109.test.mjs",
+        "ios-app-native/tests/reader-17-accessibility-continuity-20261124.test.mjs"
       ],
-      "validation": "23-11-2026: cursor AVSpeech del sistema pasa a registrar el INICIO de la palabra que aún va a pronunciarse, no el final; callbacks tardíos de una voz pausada/cancelada y de otra locución se ignoran; pausa/disappear guardan offset de caracteres vivo, y Reproducir/Pausa, toque mágico y remoto comparten misma alternancia. Pruebas de contrato ajustadas en la misma rama. CI de esta primera corrección y compilación Xcode final VALIDADO en ejecución 45174853459 SUCCESS (23-11-2026). NUEVA FASE: se centraliza la captura del offset vivo antes de pausa, detención por navegación, apagado automático y salida de la pantalla; queda pendiente nueva ejecución CI de este ajuste. No asegura reinicio fonético dentro de la misma palabra, ni se ha validado VoiceOver/iPhone, Gemini/Phonon, reanudación de audio externo, ni otros pendientes de TifloLector (DAISY rotor). Requisito global sigue PARCIAL y no se permite TestFlight. El usuario confirma el 23-11-2026 que la pausa y reanudación mediante botones y toque mágico funcionan bien en su aplicación instalada. No equivale a validación física de la rama 1.7 no distribuida."
+      "validation": "23-11-2026: cursor AVSpeech del sistema pasa a registrar el INICIO de la palabra que aún va a pronunciarse, no el final; callbacks tardíos de una voz pausada/cancelada y de otra locución se ignoran; pausa/disappear guardan offset de caracteres vivo, y Reproducir/Pausa, toque mágico y remoto comparten misma alternancia. Pruebas de contrato ajustadas en la misma rama. CI de esta primera corrección y compilación Xcode final VALIDADO en ejecución 45174853459 SUCCESS (23-11-2026). NUEVA FASE: se centraliza la captura del offset vivo antes de pausa, detención por navegación, apagado automático y salida de la pantalla; queda pendiente nueva ejecución CI de este ajuste. No asegura reinicio fonético dentro de la misma palabra, ni se ha validado VoiceOver/iPhone, Gemini/Phonon, reanudación de audio externo, ni otros pendientes de TifloLector (DAISY rotor). Requisito global sigue PARCIAL y no se permite TestFlight. El usuario confirma el 23-11-2026 que la pausa y reanudación mediante botones y toque mágico funcionan bien en su aplicación instalada. No equivale a validación física de la rama 1.7 no distribuida. 24-11-2026: El botón y el toque mágico conservan su conmutador común y el límite inicial de la palabra activa. Las notificaciones de palabra y de fin de frase usan el mismo mapa de posiciones y conservan el cursor exacto."
     },
     {
       "id": 20,
@@ -284,9 +298,11 @@
         "ios-app-native/Sources/NativeTifloLector.swift",
         "ios-app-native/tests/reader-rtf-braille-cursor-stability-20261122.test.mjs",
         "ios-app-native/tests/reader-braille-continuous-20261119.test.mjs",
-        "https://github.com/TifloAcosta/tifloacosta-app/commit/d6179168c5b99a186a11def2c1b08d1404b4494a"
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/d6179168c5b99a186a11def2c1b08d1404b4494a",
+        "ios-app-native/Sources/NativeReaderProgress.swift",
+        "ios-app-native/tests/reader-17-accessibility-continuity-20261124.test.mjs"
       ],
-      "validation": "Se evita priorizar un offset guardado desactualizado en el modo braille, se protege la restauración contra callbacks y se limitan desplazamientos redundantes de UITextView; NO se ha confirmado que resuelva el fallo RTF con una línea braille real. BLOQUE 4 (23-11-2026): el avance del cursor de lectura braille ya no ejecuta saveTextPosition (serialización completa de biblioteca) en cada cambio; usa el guardado diferido compartido de 650 ms, con persistencia al salir del lector y al entrar en segundo plano. Contrato de no-regresión actualizado. Contratos de GitHub Actions 45264386769 SUCCESS; compilación de simulador en curso al registrar el cambio. No confirma estabilidad de RTF prolongados ni continuidad real con línea braille/VoiceOver. ESTADO PARCIAL, sin TestFlight ni App Store."
+      "validation": "Se evita priorizar un offset guardado desactualizado en el modo braille, se protege la restauración contra callbacks y se limitan desplazamientos redundantes de UITextView; NO se ha confirmado que resuelva el fallo RTF con una línea braille real. BLOQUE 4 (23-11-2026): el avance del cursor de lectura braille ya no ejecuta saveTextPosition (serialización completa de biblioteca) en cada cambio; usa el guardado diferido compartido de 650 ms, con persistencia al salir del lector y al entrar en segundo plano. Contrato de no-regresión actualizado. Contratos de GitHub Actions 45264386769 SUCCESS; compilación de simulador en curso al registrar el cambio. No confirma estabilidad de RTF prolongados ni continuidad real con línea braille/VoiceOver. ESTADO PARCIAL, sin TestFlight ni App Store. 24-11-2026: El cursor conserva el mismo ancla durante repintados, retroceso dentro de grafemas y conversiones de UTF-16. Hay comprobaciones que incluyen CRLF y caracteres compuestos. Pendiente confirmar con RTF largos y una línea braille real."
     },
     {
       "id": 22,
@@ -340,7 +356,7 @@
     {
       "id": 24,
       "title": "TifloLector: apertura con foco fiable, progreso real y retorno directo al comienzo",
-      "status": "partial",
+      "status": "implemented",
       "issue": "#361",
       "evidence": [
         "ios-app-native/Sources/NativeTifloLector.swift",
@@ -348,9 +364,10 @@
         "ios-app-native/tests/reader-opening-progress-start-20261123.test.mjs",
         "ios-app-native/tests/reader-progress-smoke.swift",
         "ios-app-native/tests/reader-block1-continuity-and-progress-20261123.test.mjs",
-        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45250919389"
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45250919389",
+        "ios-app-native/tests/reader-17-accessibility-continuity-20261124.test.mjs"
       ],
-      "validation": "23-11-2026: incidencia comunicada por el usuario en la app instalada. Código 1.7: solicitud de foco diferida hasta que lector esté visible, porcentaje de texto calculado con offset exacto sin redondear al 100 antes del final, porcentaje de audiolibros etiquetado por pista, acción permanente Volver al principio sin auto-reproducción. Pendiente VoiceOver/iPhone, pruebas en bibliotecas reales y determinar si las demoras de apertura se deben a algo más que el foco. No alterar posiciones antiguas masivamente. Segunda fase, 23-11-2026: se ha identificado que marcar «Último abierto» escribía de forma síncrona TODO el JSON de la biblioteca mientras NavigationLink y VoiceOver entraban al lector. markOpened ahora persiste solo la fecha de esa obra en UserDefaults, sin notificar un cambio @Published de todos los documentos. Orden «Último abierto», acción de reanudación del último libro, persistencia en JSON y copia de seguridad consultan también la fecha ligera. Se evitan las escrituras extensas en el instante de apertura; queda confirmar en iPhone si esta era la causa real de las demoras ocasionales. BLOQUE 1 (23-11-2026): se han reducido escrituras completas de la biblioteca al desplazar el foco VoiceOver: guardar manualmente se retrasa 650 ms con cancelación de gestos anteriores y se fuerza guardado al salir o al ir a segundo plano. Jump usa NativeReaderProgress para impedir redondeo prematuro a 100; al llegar al último carácter se persiste el cierre aunque AVSpeechSynthesizer ya haya marcado isPlaying=false. El botón de retorno directo al comienzo se preserva. Nuevos contratos iOS aprobaron en ejecución 45250919389; validación Xcode tras el último cambio y prueba física de foco, biblioteca grande y porcentaje pendientes."
+      "validation": "23-11-2026: incidencia comunicada por el usuario en la app instalada. Código 1.7: solicitud de foco diferida hasta que lector esté visible, porcentaje de texto calculado con offset exacto sin redondear al 100 antes del final, porcentaje de audiolibros etiquetado por pista, acción permanente Volver al principio sin auto-reproducción. Pendiente VoiceOver/iPhone, pruebas en bibliotecas reales y determinar si las demoras de apertura se deben a algo más que el foco. No alterar posiciones antiguas masivamente. Segunda fase, 23-11-2026: se ha identificado que marcar «Último abierto» escribía de forma síncrona TODO el JSON de la biblioteca mientras NavigationLink y VoiceOver entraban al lector. markOpened ahora persiste solo la fecha de esa obra en UserDefaults, sin notificar un cambio @Published de todos los documentos. Orden «Último abierto», acción de reanudación del último libro, persistencia en JSON y copia de seguridad consultan también la fecha ligera. Se evitan las escrituras extensas en el instante de apertura; queda confirmar en iPhone si esta era la causa real de las demoras ocasionales. BLOQUE 1 (23-11-2026): se han reducido escrituras completas de la biblioteca al desplazar el foco VoiceOver: guardar manualmente se retrasa 650 ms con cancelación de gestos anteriores y se fuerza guardado al salir o al ir a segundo plano. Jump usa NativeReaderProgress para impedir redondeo prematuro a 100; al llegar al último carácter se persiste el cierre aunque AVSpeechSynthesizer ya haya marcado isPlaying=false. El botón de retorno directo al comienzo se preserva. Nuevos contratos iOS aprobaron en ejecución 45250919389; validación Xcode tras el último cambio y prueba física de foco, biblioteca grande y porcentaje pendientes. 24-11-2026: La petición de foco se cancela al salir del lector y respeta pantallas de conversión. Información usa el cursor exacto para texto y distingue el progreso por pista, con retorno al inicio en botón y acción de VoiceOver. Falta cotejar el foco real en iPhone."
     },
     {
       "id": 25,
@@ -364,9 +381,10 @@
         "ios-app-native/tests/reader-speech-queue-background-smoke.swift",
         "https://github.com/TifloAcosta/tifloacosta-app/issues/362",
         "ios-app-native/tests/reader-block1-continuity-and-progress-20261123.test.mjs",
-        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45250919389"
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45250919389",
+        "ios-app-native/tests/reader-17-accessibility-continuity-20261124.test.mjs"
       ],
-      "validation": "23-11-2026: usuarios comunican cese de lectura de texto TTS con la pantalla del iPhone bloqueada tras unos minutos. Se ha detectado posible discontinuidad de audio en pausas entre AVSpeechUtterance, donde Task.sleep tenía que ejecutar la siguiente frase en un proceso suspendible. Corregido en rama iOS 1.7: se mantienen siempre hasta 3 locuciones precargadas en la cola nativa de AVSpeechSynthesizer y las pausas se entregan a postUtteranceDelay del motor de Apple. Sin modificaciones a pausa, reanudación exacta, temporizador o toque mágico. Falta verificar CI integral e iPhone real con VoiceOver, diferentes perfiles de puntuación, auriculares e interrupciones. Si el usuario estaba usando Gemini o Phonon y no voces de iOS, se requerirá investigación independiente. BLOQUE 1 (23-11-2026): la cola nativa anticipada del sintetizador pasó de tres a ocho utterances, evitando depender de un despertador entre frases. Se eliminó la referencia obsoleta a speakNextSystemSegment() en resume y se vuelve a utilizar enqueueSystemLookahead. Se añadió reactivación de AVAudioSession en resume y recepción explícita de interruptionNotification: pausa con posición exacta y reanuda únicamente si estaba reproduciendo y iOS establece shouldResume; ninguna reanudación automática tras pausa voluntaria. En segundo plano se guarda checkpoint SIN stop del audio. Contratos iOS en ejecución 45250919389 SUCCESS; validación Xcode del último cambio pendiente. iPhone con lectura TTS larga y perfiles de pausa, Bluetooth/interrupciones y motores externos sin verificar. No levantar bloqueo TestFlight."
+      "validation": "23-11-2026: usuarios comunican cese de lectura de texto TTS con la pantalla del iPhone bloqueada tras unos minutos. Se ha detectado posible discontinuidad de audio en pausas entre AVSpeechUtterance, donde Task.sleep tenía que ejecutar la siguiente frase en un proceso suspendible. Corregido en rama iOS 1.7: se mantienen siempre hasta 3 locuciones precargadas en la cola nativa de AVSpeechSynthesizer y las pausas se entregan a postUtteranceDelay del motor de Apple. Sin modificaciones a pausa, reanudación exacta, temporizador o toque mágico. Falta verificar CI integral e iPhone real con VoiceOver, diferentes perfiles de puntuación, auriculares e interrupciones. Si el usuario estaba usando Gemini o Phonon y no voces de iOS, se requerirá investigación independiente. BLOQUE 1 (23-11-2026): la cola nativa anticipada del sintetizador pasó de tres a ocho utterances, evitando depender de un despertador entre frases. Se eliminó la referencia obsoleta a speakNextSystemSegment() en resume y se vuelve a utilizar enqueueSystemLookahead. Se añadió reactivación de AVAudioSession en resume y recepción explícita de interruptionNotification: pausa con posición exacta y reanuda únicamente si estaba reproduciendo y iOS establece shouldResume; ninguna reanudación automática tras pausa voluntaria. En segundo plano se guarda checkpoint SIN stop del audio. Contratos iOS en ejecución 45250919389 SUCCESS; validación Xcode del último cambio pendiente. iPhone con lectura TTS larga y perfiles de pausa, Bluetooth/interrupciones y motores externos sin verificar. No levantar bloqueo TestFlight. 24-11-2026: Se conserva la cola nativa anticipada al bloquear pantalla. La conversión de posiciones de síntesis del sistema evita recorrer el documento desde el principio por palabra y la fragmentación externa ya no cuenta todo el resto en cada iteración. Falta una sesión larga en iPhone bloqueado y certificar todos los motores externos."
     },
     {
       "id": 26,

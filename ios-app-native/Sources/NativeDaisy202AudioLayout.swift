@@ -19,7 +19,15 @@ enum NativeDaisy202AudioLayout {
     }
 
     private static func xml(_ value: String) -> String {
-        value.replacingOccurrences(of: "&", with: "&amp;")
+        let valid = value.unicodeScalars.filter { scalar in
+            switch scalar.value {
+            case 0x9, 0xA, 0xD, 0x20...0xD7FF, 0xE000...0xFFFD, 0x10000...0x10FFFF:
+                return true
+            default:
+                return false
+            }
+        }
+        return String(String.UnicodeScalarView(valid)).replacingOccurrences(of: "&", with: "&amp;")
             .replacingOccurrences(of: "<", with: "&lt;")
             .replacingOccurrences(of: ">", with: "&gt;")
             .replacingOccurrences(of: "\"", with: "&quot;")

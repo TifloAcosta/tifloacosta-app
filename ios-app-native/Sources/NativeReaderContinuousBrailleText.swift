@@ -27,35 +27,6 @@ struct NativeReaderContinuousBrailleText: UIViewRepresentable {
         return view
     }
 
-    /// Replace heading-only Markdown # with same-length spaces: VoiceOver
-    /// does not announce "hash" and saved character offsets remain stable.
-    private static func maskMarkdownHeadings(_ original: String) -> String {
-        var characters = Array(original)
-        var index = 0
-        while index < characters.count {
-            if index == 0 || characters[index - 1] == "\n" {
-                // Markdown also permits up to three indentation spaces
-                // before a heading. Keep every character offset unchanged.
-                var markerStart = index
-                while markerStart < characters.count && markerStart - index < 3 &&
-                      (characters[markerStart] == " " || characters[markerStart] == "\t") {
-                    markerStart += 1
-                }
-                var end = markerStart
-                while end < characters.count && end - markerStart < 6 &&
-                      characters[end] == "#" {
-                    end += 1
-                }
-                if end > markerStart && end < characters.count &&
-                    (characters[end] == " " || characters[end] == "\t") {
-                    for marker in markerStart..<end { characters[marker] = " " }
-                }
-            }
-            index += 1
-        }
-        return String(characters)
-    }
-
     func updateUIView(_ view: UITextView, context: Context) {
         context.coordinator.parent = self
         // Assigning fonts on every SwiftUI state refresh can invalidate a long
@@ -63,23 +34,23 @@ struct NativeReaderContinuousBrailleText: UIViewRepresentable {
         let requestedFont = UIFont.systemFont(ofSize: CGFloat(textSize),
             weight: strongText ? .bold : .regular)
         if view.font != requestedFont { view.font = requestedFont }
-        if context.coordinator.originalText != text {
+        let textChanged = context.coordinator.originalText != text
+        if textChanged {
             context.coordinator.originalText = text
-            context.coordinator.visibleText = Self.maskMarkdownHeadings(text)
+            context.coordinator.visibleText = NativeReaderHeadingDisplay.mask(in: text)
+            context.coordinator.offsets = NativeReaderTextOffsets(context.coordinator.visibleText)
         }
-        let visibleText = context.coordinator.visibleText
-        let textChanged = view.text != visibleText
         let explicitPositionChange = context.coordinator.requestedOffset != initialOffset
         guard textChanged || explicitPositionChange else { return }
 
-        // NSTextView selection callbacks are also triggered by replacing text.
+        // UITextView selection callbacks are also triggered by replacing text.
         // Suppress programmatic callbacks across the complete update, rather than
         // accidentally persisting an intermediate selection at the start/end.
         context.coordinator.restoring = true
         defer { context.coordinator.restoring = false }
-        if textChanged { view.text = visibleText }
-        let offset = max(0, min(text.count, initialOffset))
-        let utf16Offset = String(text.prefix(offset)).utf16.count
+        if textChanged { view.text = context.coordinator.visibleText }
+        let offset = max(0, min(context.coordinator.offsets.length, initialOffset))
+        let utf16Offset = context.coordinator.offsets.utf16Offset(for: offset)
         let restoredRange = NSRange(location: utf16Offset, length: 0)
         let movedSelection = view.selectedRange != restoredRange
         if movedSelection { view.selectedRange = restoredRange }
@@ -96,14 +67,13 @@ struct NativeReaderContinuousBrailleText: UIViewRepresentable {
         var requestedOffset = -1
         var originalText = ""
         var visibleText = ""
+        var offsets = NativeReaderTextOffsets("")
 
         init(_ parent: NativeReaderContinuousBrailleText) { self.parent = parent }
 
         func textViewDidChangeSelection(_ view: UITextView) {
             guard !restoring, !view.text.isEmpty else { return }
-            let utf16Offset = max(0, min((view.text as NSString).length, view.selectedRange.location))
-            let prefix = (view.text as NSString).substring(to: utf16Offset)
-            let characterOffset = prefix.count
+            let characterOffset = offsets.characterOffset(forUTF16: view.selectedRange.location)
             guard characterOffset != requestedOffset else { return }
             requestedOffset = characterOffset
             parent.onPositionChange(characterOffset)

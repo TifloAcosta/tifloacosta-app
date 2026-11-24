@@ -185,7 +185,7 @@ private struct NativeAudiocinematecaPlaybackRow: View {
                     Text(error)
                     Link("Abrir Audiocinemateca en la web", destination: URL(string: "https://audiocinemateca.com/catalogo")!)
                     Button("Volver a intentar") {
-                        player.pauseAndSave(library: library)
+                        startPlayback()
                     }
                 }
                 Button(player.playing ? "Pausar" : "Reproducir") {
@@ -193,27 +193,33 @@ private struct NativeAudiocinematecaPlaybackRow: View {
                 }
                 .disabled(player.playbackError != nil)
                 Button("Retroceder treinta segundos") { player.seek(by: -30, library: library) }
+                    .disabled(player.playbackError != nil)
                 Button("Avanzar treinta segundos") { player.seek(by: 30, library: library) }
+                    .disabled(player.playbackError != nil)
                 Button("Detener reproducción") { player.pauseAndSave(library: library) }
             } else {
                 Button(label) {
-                    failed = false
-                    guard let account = NativeAudiocinematecaCredentials.load(),
-                          let loader = NativeAudiocinematecaResourceLoader(url: part.url, account: account, allowsCellular: true) else {
-                        failed = true
-                        return
-                    }
-                    do {
-                        try player.openAudiocinematecaStream(asset: loader.makeAsset(), loader: loader,
-                            title: entry.title + (part.title.isEmpty ? "" : " — " + part.title),
-                            reference: reference, isVideo: false, library: library)
-                    } catch {
-                        loader.cancel()
-                        failed = true
-                    }
+                    startPlayback()
                 }
             }
             if failed { Text("No se pudo reproducir este archivo. Comprueba que el formato es compatible.") }
+        }
+    }
+
+    @MainActor private func startPlayback() {
+        failed = false
+        guard let account = NativeAudiocinematecaCredentials.load(),
+              let loader = NativeAudiocinematecaResourceLoader(url: part.url, account: account, allowsCellular: true) else {
+            failed = true
+            return
+        }
+        do {
+            try player.openAudiocinematecaStream(asset: loader.makeAsset(), loader: loader,
+                title: entry.title + (part.title.isEmpty ? "" : " — " + part.title),
+                reference: reference, isVideo: false, library: library)
+        } catch {
+            loader.cancel()
+            failed = true
         }
     }
 }

@@ -1305,3 +1305,35 @@
 "Colección oficial de audiodescripción." = "Raccolta ufficiale di contenuti con audiodescrizione.";
 "Programas en francés seleccionados por audiodescripción." = "Programmi in francese selezionati per l’audiodescrizione.";
 "Programas en alemán seleccionados por audiodescripción." = "Programmi in tedesco selezionati per l’audiodescrizione.";
+
+// Multicines: Google Drive authorized-folder navigation and temporary playback.
+"Explorar carpeta de Google Drive" = "Esplora cartella Google Drive";
+"Para Audesc y FOAL puedes elegir una carpeta de Google Drive autorizada. La reproducción temporal requiere completar la descarga; el acceso automático a catálogos compartidos está pendiente de validar los permisos y enlaces oficiales." = "Per Audesc e FOAL puoi scegliere una cartella Google Drive autorizzata. La riproduzione temporanea inizia dopo il download; l'accesso automatico ai cataloghi condivisi richiede ancora la verifica dei permessi e dei link ufficiali.";
+"Carpeta compartida de Google Drive" = "Cartella Google Drive condivisa";
+"Se utilizará tu conexión segura de Google Drive. Elige una carpeta que tengas permiso para consultar. Solo se descargarán las obras que selecciones." = "Verrà usata la tua connessione sicura a Google Drive. Scegli una cartella a cui hai accesso. Verranno scaricate solo le opere selezionate.";
+"Carpeta: " = "Cartella: ";
+"Actualizar esta carpeta" = "Aggiorna questa cartella";
+"Cambiar carpeta de origen" = "Cambia cartella di origine";
+"Permitir descargas mediante datos móviles" = "Consenti i download tramite rete mobile";
+"Archivos y subcarpetas" = "File e sottocartelle";
+"Buscar dentro de esta carpeta" = "Cerca in questa cartella";
+"Consultando la carpeta…" = "Caricamento della cartella…";
+"No hay archivos de audio o vídeo compatibles en esta carpeta." = "Questa cartella non contiene file audio o video compatibili.";
+"Abrir carpeta: " = "Apri cartella: ";
+"Cargar más archivos de esta carpeta" = "Carica altri file da questa cartella";
+"Reproducción desde Google Drive" = "Riproduzione da Google Drive";
+"El archivo se ha descargado temporalmente para reproducirse. No se ha importado a tu colección personal." = "Il file è stato scaricato temporaneamente per la riproduzione. Non è stato aggiunto alla tua raccolta personale.";
+"Descargando: " = "Download: ";
+"Descargar temporalmente y reproducir: " = "Scarica temporaneamente e riproduci: ";
+"Vuelve a elegir la carpeta para autorizar el acceso con Google Drive." = "Seleziona di nuovo la cartella per autorizzare l'accesso tramite Google Drive.";
+"Selecciona una carpeta en Google Drive, no un archivo." = "Seleziona una cartella in Google Drive, non un file.";
+"Carpeta seleccionada: " = "Cartella selezionata: ";
+"%d elementos en %@" = "%d elementi in %@";
+"No se pudo leer esta carpeta con los permisos actuales de Google Drive. " = "Impossibile leggere questa cartella con le autorizzazioni Google Drive attuali. ";
+"Vuelve a elegirla con Google Picker o consulta el enlace original. " = "Selezionala di nuovo con Google Picker oppure apri il link originale. ";
+"La descarga está limitada a Wi-Fi. Activa los datos móviles si quieres permitirla." = "I download sono limitati al Wi-Fi. Attiva i dati mobili se desideri consentirli.";
+"Descargando " = "Download di ";
+". La reproducción comenzará al terminar." = ". La riproduzione inizierà al termine del download.";
+"Reproduciendo: " = "Riproduzione: ";
+"Elegir carpeta autorizada" = "Scegli cartella autorizzata";
+"Carpeta seleccionada" = "Cartella selezionata";

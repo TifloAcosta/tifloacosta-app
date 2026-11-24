@@ -31,6 +31,12 @@
         <key>UIApplicationSupportsMultipleScenes</key><false/>
     </dict>
     <key>UILaunchScreen</key><dict/>
+    <!-- Public, source-authorized Google Drive folders; IDs are not credentials. -->
+    <key>TifloCinemaAudescSpainFolderID</key><string>1FMlPtKEpEFPPUtTL0Th58IpBJhKkoTse</string>
+    <key>TifloCinemaAudescLatinoFolderID</key><string>1QLdGMKfZBKo7KtCyXGQM4UJUoL7P8id0</string>
+    <!-- A separate Google Cloud Drive API-only, iOS-bundle-restricted key must be
+         configured before anonymous public-folder listing is enabled. -->
+    <key>TifloCinemaPublicDriveAPIKey</key><string></string>
     <key>CloudOAuthGoogleClientID</key><string>559558644861-tiepud65eqshl9639u2hpqjmo75ema0i.apps.googleusercontent.com</string>
     <key>CloudOAuthGoogleRedirectURI</key><string>com.googleusercontent.apps.559558644861-tiepud65eqshl9639u2hpqjmo75ema0i:/oauthredirect</string>
     <key>CloudOAuthDropboxClientID</key><string>malbkwdta42k68y</string>

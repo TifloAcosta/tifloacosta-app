@@ -66,7 +66,7 @@ test('preview playback is transparent about the full temporary download and neve
 });
 
 test('source selection is not confused with automatic public-catalogue authorization', () => {
-  assert.match(browser, /not progressive streaming/);
+  assert.match(storage, /not progressive streaming/);
   assert.match(browser, /No fallback to broad Drive scopes/);
   assert.match(browser, /No se pudo leer esta carpeta con los permisos actuales/);
   assert.doesNotMatch(browser, /drive\.readonly|auth\/drive"|"api[_-]?key"/i);

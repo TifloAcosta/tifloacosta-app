@@ -28,3 +28,13 @@ test('versioned cache is private and removed on account logout',()=>{
   assert.match(cache,/completeFileProtection/);
   assert.match(read('NativeAudiocinematecaAccount.swift'),/NativeAudiocinematecaCache\.clear\(\)/);
 });
+
+test('retry creates a fresh authenticated stream with the same position reference',()=>{
+  assert.match(browser,/Button\("Volver a intentar"\)\s*\{\s*startPlayback\(\)/);
+  assert.match(browser,/Button\(label\)\s*\{\s*startPlayback\(\)/);
+  const action=browser.slice(browser.indexOf('private func startPlayback()'));
+  assert.match(action,/NativeAudiocinematecaResourceLoader\(url: part.url/);
+  assert.match(action,/player\.openAudiocinematecaStream/);
+  assert.match(action,/reference: reference/);
+  assert.doesNotMatch(read('NativeAudiocinematecaAccount.swift'),/Acceso al catálogo pendiente de validación/);
+});

@@ -147,7 +147,7 @@ enum NativeReaderFormats {
         "txt", "text", "md", "markdown", "csv", "json", "xml", "log", "srt"
     ]
 
-    static func read(_ url: URL, documentID: UUID) throws -> NativeReaderImportedPayload {
+    static func read(_ url: URL, documentID: UUID, onPage: ((Int, Int) -> Void)? = nil) throws -> NativeReaderImportedPayload {
         let ext = url.pathExtension.lowercased()
         if audioExtensions.contains(ext) || videoExtensions.contains(ext) {
             let saved = try storeMedia(url, documentID: documentID)
@@ -168,6 +168,7 @@ enum NativeReaderFormats {
             var pages: [String] = []
             var scannedPages = 0
             for index in 0..<pdf.pageCount {
+                onPage?(index + 1, pdf.pageCount)
                 var pageText = pdf.page(at: index)?.string?
                     .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
                 if pageText.isEmpty {
@@ -175,13 +176,14 @@ enum NativeReaderFormats {
                     guard scannedPages <= 150 else {
                         throw NativeReaderFormatError.unsupported("PDF con más de 150 páginas escaneadas; divide el archivo para realizar OCR")
                     }
-                    pageText = try ocrPDFPage(pdf, at: index)
+                    pageText = try autoreleasepool { try ocrPDFPage(pdf, at: index) }
                 }
                 if !pageText.isEmpty { pages.append("Página \(index + 1)\n\n\(pageText)") }
             }
             text = pages.joined(separator: "\n\n")
         case "jpg", "jpeg", "png", "heic", "heif", "tif", "tiff":
-            text = try recognizeText(in: data)
+            onPage?(1, 1)
+            text = try autoreleasepool { try recognizeText(in: data) }
         case "html", "htm", "rtf":
             text = NativeDocumentText.extract(data, from: url)
             if ext != "rtf", let html = String(data: data, encoding: .utf8) {

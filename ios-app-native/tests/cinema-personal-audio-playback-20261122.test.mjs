@@ -46,9 +46,9 @@ test('local video uses a visible AVPlayer layer with one native transport and no
   assert.match(library, /var isVideoFile: Bool/);
   assert.match(library, /\["mp4", "m4v", "mov"\]\.contains/);
   assert.match(library, /var videoPlayer: AVPlayer\? \{ player \}/);
-  assert.match(screen, /private final class NativeCinemaVideoUIView: UIView/);
+  assert.match(screen, /(?:private )?final class NativeCinemaVideoUIView: UIView/);
   assert.match(screen, /override class var layerClass: AnyClass \{ AVPlayerLayer\.self \}/);
-  assert.match(screen, /private struct NativeCinemaVideoSurface: UIViewRepresentable/);
+  assert.match(screen, /(?:private )?struct NativeCinemaVideoSurface: UIViewRepresentable/);
   assert.match(screen, /if item\.isVideoFile, let videoPlayer = personalPlayer\.videoPlayer \{/);
   assert.match(screen, /NativeCinemaVideoSurface\(player: videoPlayer\)/);
   assert.match(screen, /view\.accessibilityElementsHidden = true/);

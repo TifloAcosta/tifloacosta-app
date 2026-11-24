@@ -233,7 +233,7 @@ enum NativeDocumentConversion {
             return "<par id=\"s\(id)\" endsync=\"last\"><text id=\"t\(id)\" src=\"book.xhtml#p\(id)\"/></par>"
         }.joined()
         let smil = declaration + "\n" + smilDTD + "\n" +
-            "<smil><head><meta name=\"dc:format\" content=\"Daisy 2.02\"/><meta name=\"dc:identifier\" content=\"\(identifier)\"/></head><body><seq dur=\"0.0s\">\(segments)</seq></body></smil>"
+            "<smil><head><meta name=\"dc:format\" content=\"Daisy 2.02\"/><meta name=\"dc:identifier\" content=\"\(identifier)\"/><layout><region id=\"txtView\"/></layout></head><body><seq dur=\"0.0s\">\(segments)</seq></body></smil>"
         let book = try declaration + "\n" + xhtmlDTD + "\n" +
             xhtml(paragraphs, title: title, header: encoding)
         try package([("ncc.html", ncc), ("book.smil", smil), ("book.xhtml", book)], output: output)

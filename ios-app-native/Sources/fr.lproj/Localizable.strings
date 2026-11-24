@@ -1360,3 +1360,26 @@
 "FOAL, películas" = "FOAL, films";
 "FOAL, serie" = "FOAL, série";
 "Abrir carpeta original en Google Drive" = "Ouvrir le dossier d'origine dans Google Drive";
+
+
+"Cuenta de Audiocinemateca" = "Compte Audiocinemateca";
+"Credenciales guardadas en este dispositivo. Acceso al catálogo pendiente de validación." = "Identifiants enregistrés sur cet appareil. Accès au catalogue en attente de validation.";
+"Olvidar credenciales" = "Oublier les identifiants";
+"Nombre de usuario" = "Nom d’utilisateur";
+"Contraseña" = "Mot de passe";
+"Guardar credenciales" = "Enregistrer les identifiants";
+"Credenciales guardadas de forma segura." = "Identifiants enregistrés de manière sécurisée.";
+"No se pudieron guardar las credenciales." = "Impossible d’enregistrer les identifiants.";
+"¿Todavía no tienes cuenta?" = "Pas encore de compte ?";
+"Crear cuenta gratuita" = "Créer un compte gratuit";
+"Completa el formulario oficial y espera el correo de aprobación. Después vuelve aquí con tu nombre de usuario y contraseña." = "Remplissez le formulaire officiel et attendez le courriel d’approbation. Revenez ensuite ici avec votre nom d’utilisateur et votre mot de passe.";
+"Ayuda con la cuenta" = "Aide sur le compte";
+"Recuperar contraseña" = "Réinitialiser le mot de passe";
+"Guía oficial de cuentas" = "Guide officiel des comptes";
+"Contactar con Audiocinemateca" = "Contacter Audiocinemateca";
+"Abrir Audiocinemateca en la web" = "Ouvrir Audiocinemateca sur le Web";
+"Si utilizas autenticación en dos pasos, conserva esa protección y accede desde la web oficial." = "Si vous utilisez l’authentification à deux facteurs, conservez cette protection et utilisez le site officiel.";
+"¿Olvidar las credenciales guardadas?" = "Oublier les identifiants enregistrés ?";
+"Credenciales retiradas de este dispositivo." = "Identifiants supprimés de cet appareil.";
+"No se pudieron retirar las credenciales." = "Impossible de supprimer les identifiants.";
+"Tu cuenta de Audiocinemateca seguirá existiendo." = "Votre compte Audiocinemateca continuera d’exister.";

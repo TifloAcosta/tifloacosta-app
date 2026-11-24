@@ -20,8 +20,8 @@ struct NativeAudiocinematecaBrowser: View {
         let needle = query.trimmingCharacters(in: .whitespacesAndNewlines)
         return entries.filter { entry in
             (kind == .all || entry.category == categories[kind]) &&
-            (language == .all || (language == .spain && entry.languageCode == "0") ||
-                (language == .latino && entry.languageCode == "1")) &&
+            (language == .all || (language == .spain && entry.languageCode == "1") ||
+                (language == .latino && entry.languageCode == "2")) &&
             (needle.isEmpty || [entry.title, entry.year, entry.genre, entry.synopsis].contains {
                 $0.range(of: needle, options: [.caseInsensitive, .diacriticInsensitive]) != nil
             })
@@ -131,8 +131,8 @@ struct NativeAudiocinematecaDetail: View {
                 Text(entry.title).accessibilityAddTraits(.isHeader)
                 if !entry.year.isEmpty { Text(entry.year) }
                 if !entry.genre.isEmpty { Text(entry.genre) }
-                if entry.languageCode == "0" { Text("Español de España") }
-                if entry.languageCode == "1" { Text("Español de Latinoamérica") }
+                if entry.languageCode == "1" { Text("Español de España") }
+                if entry.languageCode == "2" { Text("Español de Latinoamérica") }
                 if !entry.synopsis.isEmpty { Text(entry.synopsis) }
             }
             if entry.category == "series" {

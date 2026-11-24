@@ -123,7 +123,7 @@ struct NativeAudiocinematecaBrowser: View {
     }
 }
 
-private struct NativeAudiocinematecaDetail: View {
+struct NativeAudiocinematecaDetail: View {
     let entry: NativeAudiocinematecaCatalogueIndex.Entry
     var body: some View {
         List {

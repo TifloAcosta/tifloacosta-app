@@ -24,6 +24,7 @@ jobs:
       API_ISSUER: ${{ secrets.APPSTORE_API_ISSUER_ID }}
       API_PRIVATE: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
       P12_PASSWORD: ${{ secrets.IOS_SIGNING_KEY_PASSPHRASE }}
+      TIFLO_CINEMA_PUBLIC_DRIVE_API_KEY: ${{ secrets.TIFLO_CINEMA_PUBLIC_DRIVE_API_KEY }}
       GITHUB_TOKEN: ${{ github.token }}
       GITHUB_RUN_NUMBER: ${{ github.run_number }}
       TIFLO_IOS_MARKETING_VERSION: "1.7"
@@ -79,6 +80,7 @@ jobs:
         run: |
           set -euo pipefail
           node ios-app-native/scripts/prepare-testflight-project.mjs
+          python3 ios-app-native/scripts/configure-cinema-drive-key.py --require
           swift ios-app-native/scripts/make-app-icon.swift tifloacosta-icon-512.png ios-app-native/Sources/Assets.xcassets/AppIcon.appiconset/AppIcon.png
           test -s ios-app-native/Sources/Assets.xcassets/AppIcon.appiconset/AppIcon.png
           (cd ios-app-native && xcodegen generate --spec project.yml)

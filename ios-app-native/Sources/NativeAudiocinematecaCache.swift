@@ -46,6 +46,18 @@ actor NativeAudiocinematecaCache {
     private func digest(_ data: Data) -> String {
         SHA256.hash(data: data).map { String(format: "%02x", $0) }.joined()
     }
+    func cachedEntries(account: NativeAudiocinematecaCredentials.Account) throws -> [NativeAudiocinematecaCatalogueIndex.Entry] {
+        let url = try Self.location()
+        guard let attributes = try? FileManager.default.attributesOfItem(atPath: url.path),
+              let length = attributes[.size] as? NSNumber, length.int64Value <= 40 * 1024 * 1024,
+              let data = try? Data(contentsOf: url),
+              let snapshot = try? PropertyListDecoder().decode(Snapshot.self, from: data),
+              snapshot.accountID == digest(Data(account.username.utf8)),
+              let current = NativeAudiocinematecaCredentials.load(),
+              current.username == account.username, current.password == account.password else { return [] }
+        return try NativeAudiocinematecaCatalogueIndex.parse(NativeCinemaDecompression.decode(snapshot.compressed, gzip: false))
+    }
+
     func refresh(account: NativeAudiocinematecaCredentials.Account) async throws -> [NativeAudiocinematecaCatalogueIndex.Entry] {
         let accountID = digest(Data(account.username.utf8))
         let rawVersion = try await NativeAudiocinematecaCatalogueClient.fetch(.version, account: account)

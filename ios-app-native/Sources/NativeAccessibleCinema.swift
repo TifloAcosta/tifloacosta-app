@@ -425,6 +425,11 @@ struct NativeAccessibleCinemaScreen: View {
                                     .frame(minHeight: 44, alignment: .leading)
                             }
                         }
+                        if source.id == "rai-play-sound" {
+                            NavigationLink("Explorar catálogo audiodescrito") {
+                                NativeRaiPlaySoundScreen(kind: selectedKind)
+                            }
+                        }
                         if source.id == "movies-for-the-blind" {
                             NavigationLink("Explorar catálogo audiodescrito") {
                                 NativeMoviesForTheBlindScreen()

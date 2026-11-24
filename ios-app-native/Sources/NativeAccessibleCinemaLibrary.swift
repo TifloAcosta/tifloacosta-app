@@ -161,6 +161,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
 
     private var player: AVPlayer?
     private var temporaryPlaybackFile: URL?
+    private var publicDriveLoader: NativeCinemaDriveResourceLoader?
     /// Expose the same AVPlayer to the native video surface without creating
     /// a second, competing playback engine or duplicate transport controls.
     var videoPlayer: AVPlayer? { player }
@@ -248,35 +249,25 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         updateNowPlaying()
     }
 
-    /// Playback directly through Google's public media endpoint, with
-    /// progressive byte-range loading handled by AVPlayer. This is only
-    /// offered for public files with a restricted Drive API key; it must not
-    /// be used to bypass resource-key or OAuth-protected downloads.
+    /// Streams an explicitly selected public Drive work with AVFoundation's
+    /// supported custom-scheme resource loader. It can send the required iOS
+    /// bundle and resource-key HTTP headers, unlike an unconfigured AVPlayer URL.
     func openPublicStream(
-        url: URL,
+        asset: AVURLAsset,
+        loader: NativeCinemaDriveResourceLoader,
         title: String,
         reference: String,
         isVideo: Bool,
         library: NativeCinemaLocalLibrary
     ) throws {
-        guard url.scheme == "https", url.host == "www.googleapis.com",
-              url.path.hasPrefix("/drive/v3/files/"),
-              URLComponents(url: url, resolvingAgainstBaseURL: false)?
-                .queryItems?.contains(where: {
-                    $0.name == "alt" && $0.value == "media"
-                }) == true,
-              !reference.isEmpty,
-              let configuredKey = NativeCinemaPublicDrive.configuredKey,
-              URLComponents(url: url, resolvingAgainstBaseURL: false)?
-                .queryItems?.contains(where: {
-                    $0.name == "key" && $0.value == configuredKey
-                }) == true else {
+        guard !reference.isEmpty, NativeCinemaPublicDrive.configuredKey != nil else {
             throw NativeCinemaPublicDriveError.denied
         }
         pauseAndSave(library: library)
         try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
         try AVAudioSession.sharedInstance().setActive(true)
-        player = AVPlayer(url: url)
+        publicDriveLoader = loader
+        player = AVPlayer(playerItem: AVPlayerItem(asset: asset))
         activeLibrary = library
         playbackError = nil
         currentTitle = title
@@ -453,6 +444,8 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         progressTimer?.invalidate()
         progressTimer = nil
         player = nil
+        publicDriveLoader?.cancel()
+        publicDriveLoader = nil
         cleanUpTemporaryPlayback()
         playing = false
         currentID = nil

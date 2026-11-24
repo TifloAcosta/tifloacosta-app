@@ -51,6 +51,10 @@ actor NativeAudiocinematecaCache {
         let rawVersion = try await NativeAudiocinematecaCatalogueClient.fetch(.version, account: account)
         let versionData = try NativeCinemaDecompression.decode(rawVersion, gzip: true)
         _ = try JSONSerialization.jsonObject(with: versionData)
+        guard let current = NativeAudiocinematecaCredentials.load(),
+              current.username == account.username, current.password == account.password else {
+            throw NativeAudiocinematecaCatalogueError.invalidAccount
+        }
         let version = digest(versionData)
         let url = try Self.location()
         if let attributes = try? FileManager.default.attributesOfItem(atPath: url.path),
@@ -67,8 +71,8 @@ actor NativeAudiocinematecaCache {
         let entries = try NativeAudiocinematecaCatalogueIndex.parse(decoded)
         guard !entries.isEmpty else { throw NativeAudiocinematecaCatalogueError.invalidCatalogue }
         // Check current account after suspension before publishing a cache.
-        guard let current = NativeAudiocinematecaCredentials.load(),
-              current.username == account.username, current.password == account.password else {
+        guard let latest = NativeAudiocinematecaCredentials.load(),
+              latest.username == account.username, latest.password == account.password else {
             throw NativeAudiocinematecaCatalogueError.invalidAccount
         }
         let encoder = PropertyListEncoder()

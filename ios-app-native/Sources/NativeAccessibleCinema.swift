@@ -166,14 +166,14 @@ private enum AccessibleCinemaCollections {
               language: .latino,
               kind: .film,
               summary: "Películas completas en formato MP3. La página oficial ofrece acceso a la carpeta de audio sin necesidad de descargar cada película.",
-              originalAddress: URL(string: "https://www.foal.es/es/recursos/ocio-en-audio")!),
+              originalAddress: URL(string: "https://bit.ly/2yMtJrk")!),
         .init(id: "foal-game-of-thrones",
               title: "Juego de Tronos, ocho temporadas",
               publisher: "Fundación ONCE para América Latina (FOAL)",
               language: .latino,
               kind: .series,
               summary: "Serie completa, solo audio con audiodescripción. Enlace al catálogo publicado oficialmente por FOAL.",
-              originalAddress: URL(string: "https://www.foal.es/es/recursos/ocio-en-audio")!)
+              originalAddress: URL(string: "https://bit.ly/3bND3dg")!)
     ]
 }
 
@@ -430,9 +430,33 @@ struct NativeAccessibleCinemaScreen: View {
                             .foregroundStyle(TifloVisual.secondaryText)
                             .fixedSize(horizontal: false, vertical: true)
                         if ["audesc-es", "audesc-latino", "foal"].contains(source.id) {
+                            if NativeCinemaPublicDrive.configuredKey != nil {
+                                if source.id == "foal" {
+                                    NavigationLink("50 películas con audiodescripción") {
+                                        NativeCinemaPublishedDriveBrowser(
+                                            sourceID: source.id,
+                                            sourceName: "FOAL, películas",
+                                            foalCollection: "foal-films")
+                                    }
+                                    NavigationLink("Juego de Tronos, ocho temporadas") {
+                                        NativeCinemaPublishedDriveBrowser(
+                                            sourceID: source.id,
+                                            sourceName: "FOAL, serie",
+                                            foalCollection: "foal-game-of-thrones")
+                                    }
+                                } else {
+                                    NavigationLink("Explorar catálogo audiodescrito") {
+                                        NativeCinemaPublishedDriveBrowser(
+                                            sourceID: source.id,
+                                            sourceName: MusicLocalized.message(source.name),
+                                            foalCollection: nil)
+                                    }
+                                }
+                            }
                             NavigationLink("Explorar carpeta de Google Drive") {
-                                NativeCinemaDriveBrowser(sourceID: source.id,
-                                                         sourceName: MusicLocalized.message(source.name))
+                                NativeCinemaDriveBrowser(
+                                    sourceID: source.id,
+                                    sourceName: MusicLocalized.message(source.name))
                             }
                             .frame(minHeight: 44, alignment: .leading)
                         }
@@ -454,7 +478,7 @@ struct NativeAccessibleCinemaScreen: View {
             Section("Sobre el acceso") {
                 Text("Las plataformas muestran obras audiodescritas según su catálogo, país y permisos. Abrir la web oficial no significa que todas sus películas tengan audiodescripción.")
                     .font(.footnote)
-                Text("Para Audesc y FOAL puedes elegir una carpeta de Google Drive autorizada. La reproducción temporal requiere completar la descarga; el acceso automático a catálogos compartidos está pendiente de validar los permisos y enlaces oficiales.")
+                Text("Los catálogos públicos se actualizan desde Google Drive cuando la conexión pública está configurada. También puedes elegir carpetas autorizadas con tu propia cuenta.")
                     .font(.footnote)
             }
         }

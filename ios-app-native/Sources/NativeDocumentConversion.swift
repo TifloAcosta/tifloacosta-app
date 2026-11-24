@@ -57,7 +57,14 @@ enum NativeDocumentConversion {
             if format == .txt || (format == .md && ["md", "markdown"].contains(input.format)) {
                 try Data(input.text.utf8).write(to: output, options: .atomic)
             } else {
-                let markup = try NativeConversionMarkup.read(input, for: format)
+                let markup: NativeConversionMarkup.Document?
+                do {
+                    markup = try NativeConversionMarkup.read(input, for: format)
+                } catch is CancellationError {
+                    throw CancellationError()
+                } catch {
+                    markup = nil
+                }
                 let paragraphs = try parse(input) { onProgress($0 * 0.6) }
                 onProgress(0.6)
                 let title = xml(input.title)
@@ -328,8 +335,15 @@ enum NativeDocumentConversion {
     }
 
     private static func fb2(_ paragraphs: [Paragraph], title: String, output: URL) throws {
-        var body = "<section>"
-        var openSection = true
+        var body = ""
+        var openSection = false
+        var sectionHasContent = false
+        func closeSection() {
+            if openSection {
+                if !sectionHasContent { body += "<empty-line/>" }
+                body += "</section>"
+            }
+        }
         for paragraph in paragraphs {
             try Task.checkCancellation()
             let text = paragraph.runs.map { run in
@@ -338,15 +352,22 @@ enum NativeDocumentConversion {
                 return href.map { "<a l:href=\"\(xml($0))\">\(label)</a>" } ?? label
             }.joined()
             if paragraph.level > 0 {
-                if openSection { body += "</section>" }
+                closeSection()
                 body += "<section id=\"p\(paragraph.offset)\"><title><p>\(text)</p></title>"
                 openSection = true
+                sectionHasContent = false
             } else {
+                if !openSection {
+                    body += "<section>"
+                    openSection = true
+                }
+                sectionHasContent = true
                 body += "<p id=\"p\(paragraph.offset)\">\(text)</p>"
             }
         }
-        if openSection { body += "</section>" }
-        let contents = "<FictionBook xmlns=\"http://www.gribuser.ru/xml/fictionbook/2.0\" xmlns:l=\"http://www.w3.org/1999/xlink\"><description><title-info><genre>unrecognised</genre><author><nickname/></author><book-title>\(title)</book-title><lang>und</lang></title-info><document-info><author><nickname/></author><id>\(UUID().uuidString)</id><version>1.0</version></document-info></description><body>\(body)</body></FictionBook>"
+        closeSection()
+        let date = String(ISO8601DateFormatter().string(from: Date()).prefix(10))
+        let contents = "<FictionBook xmlns=\"http://www.gribuser.ru/xml/fictionbook/2.0\" xmlns:l=\"http://www.w3.org/1999/xlink\"><description><title-info><genre>unrecognised</genre><author><nickname/></author><book-title>\(title)</book-title><lang>und</lang></title-info><document-info><author><nickname/></author><date value=\"\(date)\">\(date)</date><id>\(UUID().uuidString)</id><version>1.0</version></document-info></description><body>\(body)</body></FictionBook>"
         try write(contents, to: output)
     }
 

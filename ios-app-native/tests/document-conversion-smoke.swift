@@ -8,7 +8,7 @@ enum NativeReaderFormatError: Error { case invalidArchive }
 
 @main
 struct DocumentConversionSmoke {
-    static func main() throws {
+    @MainActor static func main() async throws {
         let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: root) }
@@ -44,6 +44,14 @@ struct DocumentConversionSmoke {
         let fb2 = try text(.fb2)
         xml(fb2)
         precondition(fb2.contains("<title><p>Capítulo &amp; prólogo</p></title>") && fb2.contains("Última línea."))
+        if CommandLine.arguments.count > 1 {
+            let schemaCheck = Process()
+            schemaCheck.executableURL = URL(fileURLWithPath: "/usr/bin/xmllint")
+            schemaCheck.arguments = ["--nonet", "--noout", "--schema", CommandLine.arguments[1], results[.fb2]!.path]
+            try schemaCheck.run()
+            schemaCheck.waitUntilExit()
+            precondition(schemaCheck.terminationStatus == 0, "FB2 failed its format schema")
+        }
         let docx = try members(results[.docx]!)
         for name in ["[Content_Types].xml", "_rels/.rels", "word/document.xml", "word/styles.xml", "word/_rels/document.xml.rels", "docProps/core.xml"] {
             xml(docx[name]!)
@@ -55,6 +63,13 @@ struct DocumentConversionSmoke {
         for name in ["content.xml", "META-INF/manifest.xml", "meta.xml"] { xml(odt[name]!) }
         precondition(odt["content.xml"]!.contains("text:outline-level=\"1\"") &&
             odt["content.xml"]!.contains("pingüino"))
+        for (format, type) in [(NativeDocumentFormat.docx, NSAttributedString.DocumentType.officeOpenXML),
+                               (.odt, .openDocument), (.html, .html)] {
+            let opened = try NSAttributedString(url: results[format]!,
+                options: [.documentType: type], documentAttributes: nil)
+            precondition(opened.string.contains("café y pingüino") &&
+                opened.string.contains("Última línea."), "\(format.label) lost readable text")
+        }
         let epub = try members(results[.epub]!, mime: "application/epub+zip")
         for name in ["EPUB/book.xhtml", "EPUB/book.opf", "EPUB/nav.xhtml", "META-INF/container.xml"] { xml(epub[name]!) }
         precondition(epub["EPUB/book.xhtml"]!.contains("café y pingüino") &&
@@ -69,6 +84,23 @@ struct DocumentConversionSmoke {
         var structure: CGPDFDictionaryRef?
         precondition(CGPDFDictionaryGetDictionary(catalog, "StructTreeRoot", &structure), "PDF lacks structure tags")
         precondition(pdf.page(at: 0)!.annotations.contains { $0.url?.host == "example.com" })
+
+        let longBody = (0..<220).map { "Línea \($0): contenido extenso para paginación." }.joined(separator: "\n")
+        let longInput = NativeConversionSource(filename: "Largo.txt", title: "Largo", format: "txt",
+            text: longBody, links: [])
+        let longPDF = try NativeDocumentConversion.convert(longInput, to: .pdf, in: root)
+        let openedLong = PDFDocument(url: longPDF)!
+        precondition(openedLong.pageCount > 1 && openedLong.page(at: 0)!.string!.contains("Línea 0:"))
+        precondition(openedLong.page(at: openedLong.pageCount - 1)!.string!.contains("Línea 219:"))
+        let cancelled = Task.detached { () throws -> Bool in
+            withUnsafeCurrentTask { $0?.cancel() }
+            do {
+                _ = try NativeDocumentConversion.convert(longInput, to: .html, in: root.appendingPathComponent("cancelled"))
+                return false
+            } catch is CancellationError { return true }
+        }
+        let didCancel = try await cancelled.value
+        precondition(didCancel && !FileManager.default.fileExists(atPath: root.appendingPathComponent("cancelled").path))
 
         let xhtml = root.appendingPathComponent("Original.xhtml")
         let png = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9Zr9kAAAAASUVORK5CYII="

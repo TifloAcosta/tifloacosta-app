@@ -21,4 +21,10 @@ let package = Package(
     )]
 )
 SWIFT
-swift run --package-path "$work" ConversionSmoke
+schema="$work/fb2-schema"
+mkdir -p "$schema"
+revision=4d3740e319039911c30d291abb0c8b26ec99703b
+for file in FictionBook.xsd FictionBookLinks.xsd FictionBookGenres.xsd FictionBookLang.xsd; do
+  curl -fsSL --retry 3 "https://raw.githubusercontent.com/gribuser/fb2/$revision/$file" -o "$schema/$file"
+done
+swift run --package-path "$work" ConversionSmoke "$schema/FictionBook.xsd"

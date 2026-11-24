@@ -101,6 +101,10 @@ struct DocumentConversionSmoke {
         var structure: CGPDFDictionaryRef?
         precondition(CGPDFDictionaryGetDictionary(catalog, "StructTreeRoot", &structure), "PDF lacks structure tags")
         precondition(pdf.page(at: 0)!.annotations.contains { $0.url?.host == "example.com" })
+        precondition(pdf.page(at: 0)!.annotations.contains { $0.destination?.page != nil || $0.action is PDFActionGoTo },
+                     "PDF lost its internal heading link")
+        var pdfMetadata: CGPDFStreamRef?
+        precondition(CGPDFDictionaryGetStream(catalog, "Metadata", &pdfMetadata), "PDF lacks XMP metadata")
 
         let reopenedODT = NativeConversionSource(filename: "Obra.versión.odt", title: "Fallback",
             format: "odt", text: "Text fallback", links: [], original: results[.odt]!)

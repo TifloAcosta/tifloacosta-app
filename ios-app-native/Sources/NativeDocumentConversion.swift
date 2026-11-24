@@ -88,7 +88,7 @@ enum NativeDocumentConversion {
                 case .odt: try odt(paragraphs, title: title, output: output)
                 case .fb2: try fb2(paragraphs, title: title, output: output)
                 case .daisy: try daisy(paragraphs, title: title, markup: markup, output: output)
-                case .pdf: try pdf(paragraphs, title: input.title, author: markup?.metadata["author"], output: output) { onProgress(0.6 + $0 * 0.4) }
+                case .pdf: try pdf(paragraphs, title: input.title, markup: markup, output: output) { onProgress(0.6 + $0 * 0.4) }
                 }
             }
             try Task.checkCancellation()
@@ -425,7 +425,7 @@ enum NativeDocumentConversion {
         try write(contents, to: output)
     }
 
-    private static func pdf(_ paragraphs: [Paragraph], title: String, author: String?, output: URL,
+    private static func pdf(_ paragraphs: [Paragraph], title: String, markup: NativeConversionMarkup.Document?, output: URL,
                             onProgress: (Double) -> Void) throws {
         let text = NSMutableAttributedString(string: "")
         let key = NSAttributedString.Key(kCTFontAttributeName as String)
@@ -433,15 +433,25 @@ enum NativeDocumentConversion {
         let heading = CTFontCreateWithName("Helvetica-Bold" as CFString, 15, nil)
         let headerTags: [CGPDFTagType] = [.paragraph, .header1, .header2, .header3, .header4, .header5, .header6]
         var paragraphStarts: [Int] = []
-        var linkRanges: [(NSRange, URL)] = []
+        var linkRanges: [(range: NSRange, url: URL?, anchor: String?)] = []
+        var destinationNames: Set<String> = []
+        let language = markup?.language?.trimmingCharacters(in: .whitespacesAndNewlines)
+        var tagProperties: [String: String] = [:]
+        if let language, !language.isEmpty {
+            tagProperties[CGPDFTagProperty.languageText.rawValue as String] = language
+        }
         for paragraph in paragraphs {
             try Task.checkCancellation()
             paragraphStarts.append(text.length)
             var lineOffset = text.length
             for run in paragraph.runs {
                 let length = run.text.utf16.count
-                if length > 0, let url = run.url {
-                    linkRanges.append((NSRange(location: lineOffset, length: length), url))
+                if length > 0 {
+                    let target = anchor(for: run.target, in: paragraphs)
+                    if let target { destinationNames.insert(target) }
+                    if run.url != nil || target != nil {
+                        linkRanges.append((NSRange(location: lineOffset, length: length), run.url, target))
+                    }
                 }
                 lineOffset += length
             }
@@ -450,10 +460,29 @@ enum NativeDocumentConversion {
         }
         let framesetter = CTFramesetterCreateWithAttributedString(text)
         var page = CGRect(x: 0, y: 0, width: 595, height: 842)
-        var metadata = [kCGPDFContextTitle as String: title]
+        let author = markup?.metadata["author"]
+        let description = markup?.metadata["description"]
+        var metadata = [kCGPDFContextTitle as String: title, kCGPDFContextCreator as String: "TifloAcosta"]
         if let author { metadata[kCGPDFContextAuthor as String] = author }
+        if let description { metadata[kCGPDFContextSubject as String] = description }
         guard let context = CGContext(output as CFURL, mediaBox: &page, metadata as CFDictionary) else { throw Failure.invalidOutput }
         defer { context.closePDF() }
+        let creatorXML = author.map { "<dc:creator><rdf:Seq><rdf:li>\(xml($0))</rdf:li></rdf:Seq></dc:creator>" } ?? ""
+        let descriptionXML = description.map {
+            "<dc:description><rdf:Alt><rdf:li xml:lang=\"x-default\">\(xml($0))</rdf:li></rdf:Alt></dc:description>"
+        } ?? ""
+        let languageXML = language.map { "<dc:language><rdf:Bag><rdf:li>\(xml($0))</rdf:li></rdf:Bag></dc:language>" } ?? ""
+        let xmp = """
+        <x:xmpmeta xmlns:x="adobe:ns:meta/">
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+            <rdf:Description rdf:about="" xmlns:dc="http://purl.org/dc/elements/1.1/">
+              <dc:title><rdf:Alt><rdf:li xml:lang="x-default">\(xml(title))</rdf:li></rdf:Alt></dc:title>
+              \(creatorXML)\(descriptionXML)\(languageXML)
+            </rdf:Description>
+          </rdf:RDF>
+        </x:xmpmeta>
+        """
+        context.addDocumentMetadata(Data(xmp.utf8) as CFData)
         let path = CGPath(rect: page.insetBy(dx: 48, dy: 48), transform: nil)
         var offset = 0
         var paragraphIndex = 0
@@ -475,10 +504,16 @@ enum NativeDocumentConversion {
                       paragraphStarts[paragraphIndex + 1] <= range.location { paragraphIndex += 1 }
                 if openParagraph != paragraphIndex {
                     if openParagraph != nil { CGPDFContextEndTag(context) }
-                    CGPDFContextBeginTag(context, headerTags[paragraphs[paragraphIndex].level], [:] as CFDictionary)
+                    CGPDFContextBeginTag(context, headerTags[paragraphs[paragraphIndex].level], tagProperties as CFDictionary)
                     openParagraph = paragraphIndex
                 }
                 let point = CGPoint(x: origin.x + path.boundingBox.minX, y: origin.y + path.boundingBox.minY)
+                if range.location == paragraphStarts[paragraphIndex] {
+                    let destination = "p\(paragraphs[paragraphIndex].offset)"
+                    if destinationNames.contains(destination) {
+                        context.addDestination(destination as CFString, at: point)
+                    }
+                }
                 context.textPosition = point
                 CTLineDraw(line, context)
                 let lineEnd = range.location + range.length
@@ -486,7 +521,7 @@ enum NativeDocumentConversion {
                       NSMaxRange(linkRanges[linkIndex].0) <= range.location { linkIndex += 1 }
                 var index = linkIndex
                 while index < linkRanges.count, linkRanges[index].0.location < lineEnd {
-                    let (link, url) = linkRanges[index]
+                    let (link, url, anchor) = linkRanges[index]
                     let bounds = NSIntersectionRange(link, NSRange(location: range.location, length: range.length))
                     let startX = CTLineGetOffsetForStringIndex(line, bounds.location, nil)
                     let endX = CTLineGetOffsetForStringIndex(line, NSMaxRange(bounds), nil)
@@ -494,8 +529,10 @@ enum NativeDocumentConversion {
                     var descent: CGFloat = 0
                     CTLineGetTypographicBounds(line, &ascent, &descent, nil)
                     if bounds.length > 0, endX != startX {
-                        context.setURL(url as CFURL, for: CGRect(x: point.x + min(startX, endX),
-                            y: point.y - descent, width: abs(endX - startX), height: ascent + descent))
+                        let rect = CGRect(x: point.x + min(startX, endX), y: point.y - descent,
+                            width: abs(endX - startX), height: ascent + descent)
+                        if let anchor { context.setDestination(anchor as CFString, for: rect) }
+                        else if let url { context.setURL(url as CFURL, for: rect) }
                     }
                     index += 1
                 }

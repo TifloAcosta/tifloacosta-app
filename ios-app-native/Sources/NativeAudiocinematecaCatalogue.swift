@@ -17,6 +17,7 @@ private final class NativeAudiocinematecaNoRedirect: NSObject, URLSessionTaskDel
 struct NativeAudiocinematecaCatalogueClient {
     enum Resource: String {
         case catalogue = "catalogo.json.bz2"
+        case catalogueGzip = "catalogo.json.gz"
         case version = "version.json.gz"
     }
 
@@ -52,7 +53,7 @@ struct NativeAudiocinematecaCatalogueClient {
             throw NativeAudiocinematecaCatalogueError.denied
         }
         guard http.statusCode == 200 else { throw NativeAudiocinematecaCatalogueError.invalidResponse }
-        let limit = resource == .catalogue ? 32 * 1024 * 1024 : 256 * 1024
+        let limit = resource == .version ? 256 * 1024 : 32 * 1024 * 1024
         guard http.expectedContentLength <= Int64(limit) else {
             throw NativeAudiocinematecaCatalogueError.tooLarge
         }

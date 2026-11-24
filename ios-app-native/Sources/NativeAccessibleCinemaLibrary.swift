@@ -162,6 +162,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
     private var player: AVPlayer?
     private var temporaryPlaybackFile: URL?
     private var publicDriveLoader: NativeCinemaDriveResourceLoader?
+    private var audiocinematecaLoader: NativeAudiocinematecaResourceLoader?
     /// Expose the same AVPlayer to the native video surface without creating
     /// a second, competing playback engine or duplicate transport controls.
     var videoPlayer: AVPlayer? { player }
@@ -267,6 +268,47 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
         try AVAudioSession.sharedInstance().setActive(true)
         publicDriveLoader = loader
+        player = AVPlayer(playerItem: AVPlayerItem(asset: asset))
+        activeLibrary = library
+        playbackError = nil
+        currentTitle = title
+        currentID = UUID()
+        currentCloudReference = reference
+        currentCloudIsVideo = isVideo
+        let restored = max(0, UserDefaults.standard.double(
+            forKey: "cinema.cloud.position." + reference))
+        seconds = restored
+        duration = 0
+        lastSavedSecond = restored
+        if restored > 0 {
+            player?.seek(to: CMTime(seconds: restored, preferredTimescale: 600))
+        }
+        NativeRemotePlaybackOwner.onInterrupted(.cinema) { [weak self] in
+            self?.pauseForOtherAudio()
+        }
+        NativeRemotePlaybackOwner.claim(.cinema)
+        registerRemoteCommands()
+        player?.play()
+        playing = true
+        beginProgressTracking(library: library)
+        updateNowPlaying()
+    }
+
+    func openAudiocinematecaStream(
+        asset: AVURLAsset,
+        loader: NativeAudiocinematecaResourceLoader,
+        title: String,
+        reference: String,
+        isVideo: Bool,
+        library: NativeCinemaLocalLibrary
+    ) throws {
+        guard reference.hasPrefix("audiocinemateca:") else {
+            throw NativeAudiocinematecaCatalogueError.denied
+        }
+        pauseAndSave(library: library)
+        try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
+        try AVAudioSession.sharedInstance().setActive(true)
+        audiocinematecaLoader = loader
         player = AVPlayer(playerItem: AVPlayerItem(asset: asset))
         activeLibrary = library
         playbackError = nil
@@ -446,6 +488,8 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         player = nil
         publicDriveLoader?.cancel()
         publicDriveLoader = nil
+        audiocinematecaLoader?.cancel()
+        audiocinematecaLoader = nil
         cleanUpTemporaryPlayback()
         playing = false
         currentID = nil

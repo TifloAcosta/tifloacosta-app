@@ -12,7 +12,7 @@ private final class NativeCinemaVideoUIView: UIView {
     var playerLayer: AVPlayerLayer { layer as! AVPlayerLayer }
 }
 
-private struct NativeCinemaVideoSurface: UIViewRepresentable {
+struct NativeCinemaVideoSurface: UIViewRepresentable {
     let player: AVPlayer
 
     func makeUIView(context: Context) -> NativeCinemaVideoUIView {
@@ -429,11 +429,18 @@ struct NativeAccessibleCinemaScreen: View {
                             .font(.subheadline)
                             .foregroundStyle(TifloVisual.secondaryText)
                             .fixedSize(horizontal: false, vertical: true)
+                        if ["audesc-es", "audesc-latino", "foal"].contains(source.id) {
+                            NavigationLink("Explorar carpeta de Google Drive") {
+                                NativeCinemaDriveBrowser(sourceID: source.id,
+                                                         sourceName: MusicLocalized.message(source.name))
+                            }
+                            .frame(minHeight: 44, alignment: .leading)
+                        }
                         if let address = source.address {
                             Link("Abrir plataforma original: \(MusicLocalized.message(source.name))", destination: address)
                                 .font(.body.weight(.semibold))
                                 .frame(minHeight: 44, alignment: .leading)
-                        } else {
+                        } else if !["audesc-es", "audesc-latino"].contains(source.id) {
                             Text("Fuente pendiente de conexión segura")
                                 .font(.subheadline)
                                 .foregroundStyle(TifloVisual.secondaryText)
@@ -447,7 +454,7 @@ struct NativeAccessibleCinemaScreen: View {
             Section("Sobre el acceso") {
                 Text("Las plataformas muestran obras audiodescritas según su catálogo, país y permisos. Abrir la web oficial no significa que todas sus películas tengan audiodescripción.")
                     .font(.footnote)
-                Text("Los títulos y el reproductor integrado de Audesc se incorporarán cuando se verifique el acceso público a los archivos y la autorización correspondiente.")
+                Text("Para Audesc y FOAL puedes elegir una carpeta de Google Drive autorizada. La reproducción temporal requiere completar la descarga; el acceso automático a catálogos compartidos está pendiente de validar los permisos y enlaces oficiales.")
                     .font(.footnote)
             }
         }

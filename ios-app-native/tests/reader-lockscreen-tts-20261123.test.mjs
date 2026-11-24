@@ -35,7 +35,7 @@ test('system speech pause and exact restart still work with a queued window', ()
   assert.match(pause,/systemSpeechNeedsRestart = !speechQueue[.]isEmpty/);
   assert.match(pause,/synthesizer[.]stopSpeaking\(at: [.]immediate\)/);
   assert.match(resume,/spokenText[.]dropFirst\(resumeCharacters\)/);
-  assert.match(resume,/play\(remainder, speed: resumedSpeed/);
+  assert.match(resume,/play\(remainder, speed: settings\.speed/);
   assert.match(reader,/speechEnqueuedThroughIndex = 0/);
 });
 

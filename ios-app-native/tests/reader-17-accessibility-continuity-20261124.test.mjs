@@ -16,6 +16,13 @@ test('braille and speech seek through cached grapheme boundaries', () => {
   assert.match(reader, /guard settings != liveSystemSettings else \{ return \}/);
 });
 
+test('system speech resumes with the selected voice identifier and gain profile', () => {
+  const resume = reader.split('    func resume() {')[1].split('    func refresh() {')[0];
+  assert.match(resume, /let settings = liveSystemSettings/);
+  assert.match(resume, /play\(remainder, speed: settings\.speed, pitch: settings\.pitch,\s*language: settings\.language, voiceIdentifier: settings\.voiceIdentifier,/);
+  assert.doesNotMatch(resume, /utterance\.voice\?\.identifier/);
+});
+
 test('opening focus follows the lifetime of the reader and skips the conversion sheet', () => {
   assert.match(reader, /\.task\(id: readerIsVisible\) \{\s*guard readerIsVisible, !didApplyOpeningMode,[\s\S]*?!startWithConversion, UIAccessibility\.isVoiceOverRunning/);
   assert.match(reader, /accessibilityAction\(named: Text\("Volver al principio"\)\) \{ returnToBeginning\(\) \}/);

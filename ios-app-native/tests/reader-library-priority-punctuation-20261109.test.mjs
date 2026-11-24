@@ -74,7 +74,7 @@ test('Pausar TTS corta el motor y reanuda desde el cursor almacenado', () => {
   assert.match(reader, /systemSpeechNeedsRestart = !speechQueue\.isEmpty/);
   assert.match(reader, /let resumeUTF16 = max\(0, min\(previousUTF16/);
   assert.match(reader, /let resumeCharacters = max\(0, min\(previousCharacterCount/);
-  assert.match(reader, /play\(remainder, speed: resumedSpeed, pitch: resumedPitch/);
+  assert.match(reader, /play\(remainder, speed: settings\.speed, pitch: settings\.pitch/);
   assert.match(reader, /&& speechQueue\.isEmpty \{/);
   assert.match(reader, /\.accessibilityAction\(\.magicTap\) \{ toggleReaderPlayback\(\) \}/);
 });

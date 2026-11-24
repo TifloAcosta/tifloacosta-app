@@ -1486,27 +1486,18 @@ final class NativeReadingSpeech: ObservableObject {
         // must reactivate its session before resuming a queued utterance.
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio)
         try? AVAudioSession.sharedInstance().setActive(true)
-        if systemSpeechNeedsRestart && !isGeneratedSpeech && player == nil {
-            let resumeUTF16 = max(0, min(previousUTF16, spokenText.utf16.count))
-            let resumeCharacters = max(0, min(previousCharacterCount, spokenText.count))
+        if systemSpeechNeedsRestart && !isGeneratedSpeech && player == nil,
+           let settings = liveSystemSettings {
+            let resumeUTF16 = max(0, min(previousUTF16, spokenOffsets.utf16Length))
+            let resumeCharacters = max(0, min(previousCharacterCount, spokenOffsets.length))
             let remainder = String(spokenText.dropFirst(resumeCharacters))
-            let resumedVoice = speechQueue.indices.contains(speechQueueIndex)
-                ? speechQueue[speechQueueIndex].utterance.voice?.identifier ?? "" : ""
-            let resumedLanguage = speechQueue.indices.contains(speechQueueIndex)
-                ? speechQueue[speechQueueIndex].utterance.voice?.language ?? "es-ES" : "es-ES"
-            let currentUtterance = speechQueue.indices.contains(speechQueueIndex)
-                ? speechQueue[speechQueueIndex].utterance : nil
-            let resumedSpeed = currentUtterance.map {
-                Double($0.rate / AVSpeechUtteranceDefaultSpeechRate)
-            } ?? 1.0
-            let resumedPitch = currentUtterance?.pitchMultiplier ?? 1.0
             let total = totalUTF16
             let base = baseUTF16 + resumeUTF16
             let characterBase = baseCharacters + resumeCharacters
             systemSpeechNeedsRestart = false
             if !remainder.isEmpty {
-                play(remainder, speed: resumedSpeed, pitch: resumedPitch,
-                     language: resumedLanguage, voiceIdentifier: resumedVoice,
+                play(remainder, speed: settings.speed, pitch: settings.pitch,
+                     language: settings.language, voiceIdentifier: settings.voiceIdentifier,
                      baseUTF16: base, totalUTF16: total, baseCharacters: characterBase)
             } else { stop() }
             return

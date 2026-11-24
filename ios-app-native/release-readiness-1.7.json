@@ -277,7 +277,7 @@
     {
       "id": 19,
       "title": "Reanudar posición exacta, toque mágico y pendientes de TifloLector",
-      "status": "implemented",
+      "status": "partial",
       "issue": "#352",
       "evidence": [
         "ios-app-native/Sources/NativeTifloLector.swift",
@@ -286,7 +286,7 @@
         "ios-app-native/tests/reader-library-priority-punctuation-20261109.test.mjs",
         "ios-app-native/tests/reader-17-accessibility-continuity-20261124.test.mjs"
       ],
-      "validation": "23-11-2026: cursor AVSpeech del sistema pasa a registrar el INICIO de la palabra que aún va a pronunciarse, no el final; callbacks tardíos de una voz pausada/cancelada y de otra locución se ignoran; pausa/disappear guardan offset de caracteres vivo, y Reproducir/Pausa, toque mágico y remoto comparten misma alternancia. Pruebas de contrato ajustadas en la misma rama. CI de esta primera corrección y compilación Xcode final VALIDADO en ejecución 45174853459 SUCCESS (23-11-2026). NUEVA FASE: se centraliza la captura del offset vivo antes de pausa, detención por navegación, apagado automático y salida de la pantalla; queda pendiente nueva ejecución CI de este ajuste. No asegura reinicio fonético dentro de la misma palabra, ni se ha validado VoiceOver/iPhone, Gemini/Phonon, reanudación de audio externo, ni otros pendientes de TifloLector (DAISY rotor). Requisito global sigue PARCIAL y no se permite TestFlight. El usuario confirma el 23-11-2026 que la pausa y reanudación mediante botones y toque mágico funcionan bien en su aplicación instalada. No equivale a validación física de la rama 1.7 no distribuida. 24-11-2026: El botón y el toque mágico conservan su conmutador común y el límite inicial de la palabra activa. Las notificaciones de palabra y de fin de frase usan el mismo mapa de posiciones y conservan el cursor exacto."
+      "validation": "23-11-2026: cursor AVSpeech del sistema pasa a registrar el INICIO de la palabra que aún va a pronunciarse, no el final; callbacks tardíos de una voz pausada/cancelada y de otra locución se ignoran; pausa/disappear guardan offset de caracteres vivo, y Reproducir/Pausa, toque mágico y remoto comparten misma alternancia. Pruebas de contrato ajustadas en la misma rama. CI de esta primera corrección y compilación Xcode final VALIDADO en ejecución 45174853459 SUCCESS (23-11-2026). NUEVA FASE: se centraliza la captura del offset vivo antes de pausa, detención por navegación, apagado automático y salida de la pantalla; queda pendiente nueva ejecución CI de este ajuste. No asegura reinicio fonético dentro de la misma palabra, ni se ha validado VoiceOver/iPhone, Gemini/Phonon, reanudación de audio externo, ni otros pendientes de TifloLector (DAISY rotor). Requisito global sigue PARCIAL y no se permite TestFlight. El usuario confirma el 23-11-2026 que la pausa y reanudación mediante botones y toque mágico funcionan bien en su aplicación instalada. No equivale a validación física de la rama 1.7 no distribuida. 24-11-2026: El botón y el toque mágico conservan su conmutador común y el límite inicial de la palabra activa. Las notificaciones de palabra y de fin de frase usan el mismo mapa de posiciones y conservan el cursor exacto. Al reanudar se conserva el identificador configurado, incluso con la voz automática. El requisito global sigue parcial: la reapertura de locuciones externas conserva posiciones de segmentos, y quedan comprobaciones físicas."
     },
     {
       "id": 20,

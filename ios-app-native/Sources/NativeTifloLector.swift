@@ -202,18 +202,22 @@ final class NativeReaderLibrary: ObservableObject {
         }
         let identifier = UUID()
         let filename = url.lastPathComponent
+        var acceptingProgress = true
+        defer { acceptingProgress = false }
         do {
             let (payload, originalPath) = try await Task.detached(priority: .userInitiated) {
                 let accessed = url.startAccessingSecurityScopedResource()
                 defer { if accessed { url.stopAccessingSecurityScopedResource() } }
                 let payload = try NativeReaderFormats.read(url, documentID: identifier) { page, total in
                     Task { @MainActor in
+                        guard acceptingProgress else { return }
                         onProgress(MusicLocalized.format("Procesando página %d de %d: %@", page, total, filename))
                     }
                 }
                 let originalPath = try NativeReaderFormats.storeOriginal(url, documentID: identifier)
                 return (payload, originalPath)
             }.value
+            acceptingProgress = false
             try Task.checkCancellation()
             documents.insert(NativeReadingDocument(
                 id: identifier, title: url.deletingPathExtension().lastPathComponent,

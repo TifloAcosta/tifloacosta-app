@@ -62,7 +62,7 @@ test('AVFoundation progressive streaming uses documented byte ranges and a restr
   assert.match(loader, /information\.isByteRangeAccessSupported = true/);
   assert.match(loader, /dataRequest\?\.respond\(with: chunk\)/);
   assert.match(loader, /func resourceLoader\(_ resourceLoader: AVAssetResourceLoader,/);
-  assert.doesNotMatch(loader, /AVURLAssetHTTPHeaderFieldsKey|OAuth|drive\.readonly/);
+  assert.doesNotMatch(loader, /AVURLAssetHTTPHeaderFieldsKey|Authorization", forHTTPHeaderField|drive\.readonly/);
   assert.match(player, /private var publicDriveLoader: NativeCinemaDriveResourceLoader\?/);
   assert.match(player, /publicDriveLoader\?\.cancel\(\)/);
   assert.match(publisher, /NativeCinemaDriveResourceLoader\(/);

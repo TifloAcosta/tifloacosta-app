@@ -1433,5 +1433,6 @@
 "Documentos convertidos: %d. Fallidos: %d." = "Documents converted: %d. Failed: %d.";
 "Documentos guardados: %d. Fallidos: %d." = "Documents saved: %d. Failed: %d.";
 
-"DAISY de texto" = "Text-only DAISY";
+"DAISY 2.02 de texto" = "DAISY 2.02 text";
+"DAISY 3 de texto" = "DAISY 3 text";
 "Se conservará el texto. Si el original contiene imágenes, tablas, listas, notas o estilos, pueden perderse." = "Text will be kept. Images, tables, lists, notes and styles in the original may be lost.";

@@ -22,7 +22,7 @@ struct DocumentConversionSmoke {
         var results: [NativeDocumentFormat: URL] = [:]
         for format in NativeDocumentFormat.allCases {
             var lastProgress = 0.0
-            let url = try NativeDocumentConversion.convert(source, to: format, in: root) { value in
+            let url = try NativeDocumentConversion.convert(source, to: format, in: root.appendingPathComponent(format.rawValue)) { value in
                 precondition(value >= lastProgress && value <= 1)
                 lastProgress = value
             }
@@ -89,6 +89,14 @@ struct DocumentConversionSmoke {
             for (name, contents) in daisy {
                 try contents.write(to: samples.appendingPathComponent(name), atomically: true, encoding: .utf8)
             }
+            let version3 = samples.appendingPathComponent("daisy3", isDirectory: true)
+            try FileManager.default.createDirectory(at: version3, withIntermediateDirectories: true)
+            let daisy3 = try members(results[.daisy3]!)
+            precondition(Set(daisy3.keys) == ["book.opf", "book.ncx", "book.smil", "book.xml"])
+            for (name, contents) in daisy3 {
+                xml(contents)
+                try contents.write(to: version3.appendingPathComponent(name), atomically: true, encoding: .utf8)
+            }
             try FileManager.default.copyItem(at: results[.pdf]!, to: samples.appendingPathComponent("conversion.pdf"))
         }
 
@@ -105,6 +113,14 @@ struct DocumentConversionSmoke {
                      "PDF lost its internal heading link")
         var pdfMetadata: CGPDFStreamRef?
         precondition(CGPDFDictionaryGetStream(catalog, "Metadata", &pdfMetadata), "PDF lacks XMP metadata")
+
+        let reopenedDOCX = NativeConversionSource(filename: "Obra.versión.docx", title: "DOCX",
+            format: "docx", text: "Text fallback", links: [], original: results[.docx]!)
+        let docxHTML = try NativeDocumentConversion.convert(reopenedDOCX, to: .html,
+            in: root.appendingPathComponent("docx-roundtrip"))
+        let docxMarkup = try String(contentsOf: docxHTML, encoding: .utf8)
+        precondition(docxMarkup.contains("<h2") && docxMarkup.contains("Ελληνικά") &&
+            docxMarkup.contains("href=\"#c0-p0\">Volver"))
 
         let reopenedODT = NativeConversionSource(filename: "Obra.versión.odt", title: "Fallback",
             format: "odt", text: "Text fallback", links: [], original: results[.odt]!)
@@ -196,7 +212,7 @@ struct DocumentConversionSmoke {
         precondition(complexBook.contains("<thead><tr><th>") && complexBook.contains("<ul><li>") &&
             complexBook.contains("alt=\"Descripción de la imagen\"") && complexBook.contains("会議"))
         precondition(complexFiles["EPUB/book.opf"]!.contains("assets/image-1.png"))
-        print("Ten local formats opened and validated; EPUB/HTML structure and assets, PDF text and tags verified.")
+        print("Eleven local formats opened and validated; EPUB/HTML structure and assets, PDF text and tags verified.")
     }
 
     static func xml(_ string: String) {

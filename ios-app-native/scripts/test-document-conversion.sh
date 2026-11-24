@@ -6,7 +6,7 @@ work="$(mktemp -d)"
 trap 'rm -rf "$work"' EXIT
 
 mkdir -p "$work/Sources/ConversionSmoke"
-cp "$root/Sources/NativeDocumentConversion.swift"   "$root/Sources/NativeConversionMarkup.swift"   "$root/Sources/NativeODTConversionMarkup.swift"   "$root/Sources/NativeEpubSpine.swift"   "$root/tests/document-conversion-smoke.swift" "$work/Sources/ConversionSmoke/"
+cp "$root/Sources/NativeDocumentConversion.swift"   "$root/Sources/NativeConversionMarkup.swift"   "$root/Sources/NativeODTConversionMarkup.swift" "$root/Sources/NativeDOCXConversionMarkup.swift"   "$root/Sources/NativeEpubSpine.swift"   "$root/tests/document-conversion-smoke.swift" "$work/Sources/ConversionSmoke/"
 cat > "$work/Package.swift" <<'SWIFT'
 // swift-tools-version: 5.9
 import PackageDescription
@@ -40,3 +40,29 @@ curl -fsSL --retry 3 https://www.w3.org/TR/1998/REC-smil-19980615/SMIL10.dtd -o 
 xmllint --nonet --noout --dtdvalid "$dtd/xhtml1-transitional.dtd" "$samples/ncc.html" "$samples/book.xhtml"
 xmllint --nonet --noout --dtdvalid "$dtd/SMIL10.dtd" "$samples/book.smil"
 python3 "$root/scripts/check-text-daisy.py" "$samples"
+
+revision=deaab821336558ed5dc673dd38af71db49608c94
+base="https://raw.githubusercontent.com/daisy/pipeline/$revision/modules"
+while read -r module file; do
+  curl -fsSL --retry 3 "$base/$module/src/main/resources/xml/dtd/$file" -o "$dtd/$file"
+done <<'DTDS'
+daisy3-utils oeb12.ent
+daisy3-utils oebpkg12.dtd
+daisy3-utils ncx-2005-1.dtd
+dtbook-utils dtbook-2005-3.dtd
+smil-utils dtbsmil-2005-1.dtd
+DTDS
+cat > "$dtd/catalog.xml" <<'XML'
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <system systemId="http://openebook.org/dtds/oeb-1.2/oeb12.ent" uri="oeb12.ent"/>
+</catalog>
+XML
+while read -r extension file; do
+  XML_CATALOG_FILES="$dtd/catalog.xml" xmllint --nonet --noout --dtdvalid "$dtd/$file" "$samples/daisy3/book.$extension"
+done <<'DTDS'
+opf oebpkg12.dtd
+ncx ncx-2005-1.dtd
+xml dtbook-2005-3.dtd
+smil dtbsmil-2005-1.dtd
+DTDS
+python3 "$root/scripts/check-text-daisy3.py" "$samples/daisy3"

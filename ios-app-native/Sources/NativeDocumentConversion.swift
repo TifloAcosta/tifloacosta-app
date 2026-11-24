@@ -1,21 +1,23 @@
 import Foundation
 import CoreGraphics
 import CoreText
+import NaturalLanguage
 import ZIPFoundation
 
 enum NativeDocumentFormat: String, CaseIterable, Identifiable, Sendable {
-    case txt, rtf, docx, html, epub, pdf, md, odt, fb2, daisy
+    case txt, rtf, docx, html, epub, pdf, md, odt, fb2, daisy, daisy3
 
     var id: String { rawValue }
     var label: String {
         switch self {
         case .md: return "Markdown"
-        case .daisy: return NSLocalizedString("DAISY de texto", comment: "Text-only DAISY export")
+        case .daisy: return NSLocalizedString("DAISY 2.02 de texto", comment: "Text-only DAISY 2.02 export")
+        case .daisy3: return NSLocalizedString("DAISY 3 de texto", comment: "Text-only DAISY 3 export")
         default: return rawValue.uppercased()
         }
     }
 
-    var fileExtension: String { self == .daisy ? "zip" : rawValue }
+    var fileExtension: String { self == .daisy || self == .daisy3 ? "zip" : rawValue }
 }
 
 struct NativeConversionSource: Sendable {
@@ -88,6 +90,7 @@ enum NativeDocumentConversion {
                 case .odt: try odt(paragraphs, title: title, output: output)
                 case .fb2: try fb2(paragraphs, title: title, output: output)
                 case .daisy: try daisy(paragraphs, title: title, markup: markup, output: output)
+                case .daisy3: try daisy3(paragraphs, title: title, markup: markup, output: output)
                 case .pdf: try pdf(paragraphs, title: input.title, markup: markup, output: output) { onProgress(0.6 + $0 * 0.4) }
                 }
             }
@@ -237,6 +240,108 @@ enum NativeDocumentConversion {
         let book = try declaration + "\n" + xhtmlDTD + "\n" +
             xhtml(paragraphs, title: title, header: encoding)
         try package([("ncc.html", ncc), ("book.smil", smil), ("book.xhtml", book)], output: output)
+    }
+
+    private static func daisy3(_ paragraphs: [Paragraph], title: String,
+                               markup: NativeConversionMarkup.Document?, output: URL) throws {
+        let language = xml(markup?.language ?? "und")
+        let uid = "urn:uuid:" + UUID().uuidString.lowercased()
+        let declaration = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+        var book = ""
+        var smil = ""
+        var navigation = ""
+        var level = 0
+        var headingNeedsBody = false
+        var navigationLevels: [Int] = []
+        var headingDepth = 1
+        var playOrder = 0
+
+        func navPoint(_ text: String, id: Int) -> String {
+            playOrder += 1
+            return "<navPoint id=\"nav\(id)\" playOrder=\"\(playOrder)\"><navLabel><text>\(text)</text></navLabel><content src=\"book.smil#s\(id)\"/>"
+        }
+
+        for paragraph in paragraphs {
+            try Task.checkCancellation()
+            let id = paragraph.offset
+            let isHeading = paragraph.level > 0 && !paragraph.text.trimmingCharacters(in: .whitespaces).isEmpty
+            let tag: String
+            if isHeading {
+                let nextLevel = min(paragraph.level, level + 1)
+                while level >= nextLevel {
+                    if headingNeedsBody { book += "<p/>"; headingNeedsBody = false }
+                    book += "</level\(level)>"
+                    level -= 1
+                }
+                level = nextLevel
+                book += "<level\(level)>"
+                tag = "h\(level)"
+                headingNeedsBody = true
+                while let last = navigationLevels.last, last >= level {
+                    navigation += "</navPoint>"
+                    navigationLevels.removeLast()
+                }
+                navigation += navPoint(xml(paragraph.text), id: id)
+                navigationLevels.append(level)
+                headingDepth = max(headingDepth, navigationLevels.count)
+            } else {
+                if level == 0 {
+                    level = 1
+                    book += "<level1>"
+                    navigation += navPoint(title, id: id)
+                    navigationLevels.append(1)
+                }
+                tag = "p"
+                headingNeedsBody = false
+            }
+            let body = paragraph.runs.map { run in
+                let label = xml(run.text)
+                let href = anchor(for: run.target, in: paragraphs).map { "#" + $0 } ?? run.url?.absoluteString
+                return href.map { "<a href=\"\(xml($0))\">\(label)</a>" } ?? label
+            }.joined()
+            book += "<\(tag) id=\"p\(id)\" smilref=\"book.smil#s\(id)\">\(body)</\(tag)>"
+            smil += "<par id=\"s\(id)\"><text id=\"t\(id)\" src=\"book.xml#p\(id)\"/></par>"
+        }
+        if headingNeedsBody { book += "<p/>" }
+        while level > 0 {
+            book += "</level\(level)>"
+            level -= 1
+        }
+        navigation += String(repeating: "</navPoint>", count: navigationLevels.count)
+        let author = markup?.metadata["author"].map { "<dc:Creator>\(xml($0))</dc:Creator>" } ?? ""
+        let description = markup?.metadata["description"].map { "<dc:Description>\(xml($0))</dc:Description>" } ?? ""
+        let dtbook = """
+        <!DOCTYPE dtbook PUBLIC "-//NISO//DTD dtbook 2005-3//EN" "http://www.daisy.org/z3986/2005/dtbook-2005-3.dtd">
+        <dtbook xmlns="http://www.daisy.org/z3986/2005/dtbook/" version="2005-3" xml:lang="\(language)">
+          <head><meta name="dtb:uid" content="\(uid)"/><meta name="dc:Title" content="\(title)"/></head>
+          <book><bodymatter>\(book)</bodymatter></book>
+        </dtbook>
+        """
+        let ncx = """
+        <!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+        <ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="\(language)">
+          <head><meta name="dtb:uid" content="\(uid)"/><meta name="dtb:depth" content="\(headingDepth)"/><meta name="dtb:totalPageCount" content="0"/><meta name="dtb:maxPageNumber" content="0"/></head>
+          <docTitle><text>\(title)</text></docTitle><navMap>\(navigation)</navMap>
+        </ncx>
+        """
+        let timing = """
+        <!DOCTYPE smil PUBLIC "-//NISO//DTD dtbsmil 2005-1//EN" "http://www.daisy.org/z3986/2005/dtbsmil-2005-1.dtd">
+        <smil xmlns="http://www.w3.org/2001/SMIL20/">
+          <head><meta name="dtb:uid" content="\(uid)"/><meta name="dtb:totalElapsedTime" content="00:00:00"/></head>
+          <body><seq id="sequence">\(smil)</seq></body>
+        </smil>
+        """
+        let opf = """
+        <!DOCTYPE package PUBLIC "+//ISBN 0-9673008-1-9//DTD OEB 1.2 Package//EN" "http://www.daisy.org/z3986/2005/oebpkg12.dtd">
+        <package xmlns="http://openebook.org/namespaces/oeb-package/1.0/" unique-identifier="uid">
+          <metadata><dc-metadata xmlns:dc="http://purl.org/dc/elements/1.1/"><dc:Title>\(title)</dc:Title><dc:Identifier id="uid">\(uid)</dc:Identifier><dc:Language>\(language)</dc:Language>\(author)\(description)</dc-metadata>
+          <x-metadata><meta name="dtb:multimediaType" content="textNCX"/><meta name="dtb:multimediaContent" content="text"/><meta name="dtb:totalTime" content="00:00:00"/></x-metadata></metadata>
+          <manifest><item id="package" href="book.opf" media-type="text/xml"/><item id="book" href="book.xml" media-type="application/x-dtbook+xml"/><item id="nav" href="book.ncx" media-type="application/x-dtbncx+xml"/><item id="timing" href="book.smil" media-type="application/smil"/></manifest>
+          <spine><itemref idref="timing"/></spine>
+        </package>
+        """
+        try package([("book.opf", opf), ("book.ncx", ncx), ("book.smil", timing), ("book.xml", dtbook)]
+            .map { ($0.0, declaration + $0.1) }, output: output)
     }
 
     private static func markdown(_ paragraphs: [Paragraph]) throws -> String {
@@ -435,11 +540,19 @@ enum NativeDocumentConversion {
         var paragraphStarts: [Int] = []
         var linkRanges: [(range: NSRange, url: URL?, anchor: String?)] = []
         var destinationNames: Set<String> = []
-        let language = markup?.language?.trimmingCharacters(in: .whitespacesAndNewlines)
-        var tagProperties: [String: String] = [:]
-        if let language, !language.isEmpty {
-            tagProperties[CGPDFTagProperty.languageText.rawValue as String] = language
+        let declaredLanguage = markup?.language?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let languageKey = CGPDFTagProperty.languageText.rawValue as String
+        let recognizer = NLLanguageRecognizer()
+        func detectedLanguage(_ text: String) -> String? {
+            let sample = String(text.prefix(1_024))
+            guard sample.unicodeScalars.filter({ CharacterSet.letters.contains($0) }).count >= 32 else { return nil }
+            recognizer.reset()
+            recognizer.processString(sample)
+            guard let match = recognizer.languageHypotheses(withMaximum: 1).first, match.value >= 0.95 else { return nil }
+            return match.key.rawValue
         }
+        let language = declaredLanguage.flatMap { $0.isEmpty || $0 == "und" ? nil : $0 }
+            ?? detectedLanguage(paragraphs.prefix(12).map { String($0.text.prefix(256)) }.joined(separator: " "))
         for paragraph in paragraphs {
             try Task.checkCancellation()
             paragraphStarts.append(text.length)
@@ -504,7 +617,10 @@ enum NativeDocumentConversion {
                       paragraphStarts[paragraphIndex + 1] <= range.location { paragraphIndex += 1 }
                 if openParagraph != paragraphIndex {
                     if openParagraph != nil { CGPDFContextEndTag(context) }
-                    CGPDFContextBeginTag(context, headerTags[paragraphs[paragraphIndex].level], tagProperties as CFDictionary)
+                    let paragraph = paragraphs[paragraphIndex]
+                    let tagLanguage = detectedLanguage(paragraph.text) ?? language
+                    let properties = tagLanguage.map { [languageKey: $0] } ?? [:]
+                    CGPDFContextBeginTag(context, headerTags[paragraph.level], properties as CFDictionary)
                     openParagraph = paragraphIndex
                 }
                 let point = CGPoint(x: origin.x + path.boundingBox.minX, y: origin.y + path.boundingBox.minY)

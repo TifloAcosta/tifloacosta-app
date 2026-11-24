@@ -16,7 +16,7 @@ test('conversion operates on a snapshot and saves a separate document through th
   assert.doesNotMatch(screen, /delete\(document|markOpened|URLSession/);
 });
 
-test('the ten outputs are reopened through the native validation workflow', () => {
+test('the eleven outputs are reopened through the native validation workflow', () => {
   const workflow = read('../.github/workflows/ios-next-beta-validation.yml');
   const smoke = read('tests/document-conversion-smoke.swift');
   assert.match(workflow, /bash ios-app-native\/scripts\/test-document-conversion.sh/);
@@ -27,7 +27,7 @@ test('the ten outputs are reopened through the native validation workflow', () =
 });
 
 test('conversion actions and status descriptions are available in six languages', () => {
-  const keys = ['Convertir documento', 'Formato de destino', 'DAISY de texto',
+  const keys = ['Convertir documento', 'Formato de destino', 'DAISY 2.02 de texto', 'DAISY 3 de texto',
     'Se conservará el texto. Si el original contiene imágenes, tablas, listas, notas o estilos, pueden perderse.', 'Cancelar conversión',
     'Convirtiendo documento %d de %d.', 'Documentos convertidos: %d. Fallidos: %d.',
     'Compartir o exportar a Archivos y nubes'];

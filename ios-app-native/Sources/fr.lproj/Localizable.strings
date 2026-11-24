@@ -1431,5 +1431,6 @@
 "Documentos convertidos: %d. Fallidos: %d." = "Documents convertis : %d. Échecs : %d.";
 "Documentos guardados: %d. Fallidos: %d." = "Documents enregistrés : %d. Échecs : %d.";
 
-"DAISY de texto" = "DAISY texte seul";
+"DAISY 2.02 de texto" = "DAISY 2.02 texte seul";
+"DAISY 3 de texto" = "DAISY 3 texte seul";
 "Se conservará el texto. Si el original contiene imágenes, tablas, listas, notas o estilos, pueden perderse." = "Le texte sera conservé. Les images, tableaux, listes, notes et styles du document original peuvent être perdus.";

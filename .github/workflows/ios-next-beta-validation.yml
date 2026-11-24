@@ -76,7 +76,7 @@ jobs:
             ios-app-native/tests/reader-speech-queue-background-smoke.swift \
             -o "$RUNNER_TEMP/reader-tts-background-queue"
           "$RUNNER_TEMP/reader-tts-background-queue"
-      - name: Abrir y verificar los diez formatos de conversión local
+      - name: Abrir y verificar los once formatos de conversión local
         env:
           CONVERSION_SAMPLES_DIR: ${{ runner.temp }}/conversion-samples
         run: bash ios-app-native/scripts/test-document-conversion.sh

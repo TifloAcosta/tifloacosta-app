@@ -33,7 +33,7 @@ enum NativeConversionMarkup {
                                      "jpeg": "image/jpeg", "gif": "image/gif"]
 
     static func read(_ input: NativeConversionSource, for format: NativeDocumentFormat) throws -> Document? {
-        guard [.html, .epub, .daisy, .pdf].contains(format), let source = input.original else { return nil }
+        guard [.html, .epub, .daisy, .daisy3, .pdf].contains(format), let source = input.original else { return nil }
         if ["html", "htm", "xhtml"].contains(input.format) {
             guard let size = try? source.resourceValues(forKeys: [.fileSizeKey]).fileSize,
                   size <= maximumTextBytes,
@@ -41,8 +41,15 @@ enum NativeConversionMarkup {
             return try parse([(path: "book.xhtml", data: data)], fallbackTitle: input.title,
                              packageImages: format == .epub) { _, _ in nil }
         }
-        guard ["epub", "odt"].contains(input.format),
+        guard ["epub", "odt", "docx"].contains(input.format),
               let archive = Archive(url: source, accessMode: .read) else { return nil }
+        if input.format == "docx" {
+            guard let entry = archive["word/document.xml"], entry.type == .file,
+                  let content = try entryData(entry, in: archive, limit: maximumTextBytes),
+                  let xhtml = NativeDOCXConversionMarkup.xhtml(content: content, title: input.title) else { return nil }
+            return try parse([(path: "book.xhtml", data: xhtml)], fallbackTitle: input.title,
+                             packageImages: format == .epub) { _, _ in nil }
+        }
         if input.format == "odt" {
             func xmlMember(_ name: String) throws -> Data? {
                 guard let entry = archive[name], entry.type == .file else { return nil }

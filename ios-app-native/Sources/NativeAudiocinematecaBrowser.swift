@@ -10,6 +10,7 @@ struct NativeAudiocinematecaBrowser: View {
     @State private var errorMessage = ""
     @State private var limit = 100
     @State private var hasAccount = false
+    @State private var accountScreen = false
 
     private var filtered: [NativeAudiocinematecaCatalogueIndex.Entry] {
         let categories: [AccessibleCinemaKind: String] = [
@@ -29,8 +30,9 @@ struct NativeAudiocinematecaBrowser: View {
     var body: some View {
         List {
             if !hasAccount {
-                NavigationLink("Cuenta de Audiocinemateca") { NativeAudiocinematecaAccountScreen() }
+                Button("Cuenta de Audiocinemateca") { accountScreen = true }
             } else {
+                Button("Cuenta de Audiocinemateca") { accountScreen = true }
                 Button("Actualizar catálogo") { Task { await refresh() } }
                     .disabled(loading)
                 if loading { ProgressView("Actualizando catálogo") }
@@ -68,6 +70,17 @@ struct NativeAudiocinematecaBrowser: View {
             }
         }
         .navigationTitle("Audiocinemateca")
+        .sheet(isPresented: $accountScreen, onDismiss: {
+            entries = []
+            loaded = false
+            hasAccount = NativeAudiocinematecaCredentials.load() != nil
+            if hasAccount { Task { await refresh() } }
+        }) {
+            NavigationStack {
+                NativeAudiocinematecaAccountScreen()
+                    .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Cerrar") { accountScreen = false } } }
+            }
+        }
         .searchable(text: $query, prompt: Text("Buscar obras"))
         .onChange(of: query) { _, _ in limit = 100 }
         .onChange(of: kind) { _, _ in limit = 100 }
@@ -120,6 +133,29 @@ private struct NativeAudiocinematecaDetail: View {
                 if entry.languageCode == "0" { Text("Español de España") }
                 if entry.languageCode == "1" { Text("Español de Latinoamérica") }
                 if !entry.synopsis.isEmpty { Text(entry.synopsis) }
+            }
+            if entry.category == "series" {
+                let seasons = Set(entry.parts.compactMap(\.season)).sorted {
+                    $0.localizedStandardCompare($1) == .orderedAscending
+                }
+                ForEach(seasons, id: \.self) { season in
+                    NavigationLink(MusicLocalized.format("Temporada %@", season)) {
+                        List {
+                            ForEach(entry.parts.filter { $0.season == season }.sorted {
+                                $0.number.localizedStandardCompare($1.number) == .orderedAscending
+                            }) { part in
+                                Text(MusicLocalized.format("Episodio %@: %@", part.number, part.title))
+                            }
+                        }
+                        .navigationTitle(MusicLocalized.format("Temporada %@", season))
+                    }
+                }
+            } else if entry.parts.count > 1 {
+                Section("Partes de la obra") {
+                    ForEach(entry.parts) { part in
+                        Text(MusicLocalized.format("Parte %@", part.number))
+                    }
+                }
             }
             Link("Abrir Audiocinemateca en la web", destination: URL(string: "https://audiocinemateca.com/catalogo")!)
         }

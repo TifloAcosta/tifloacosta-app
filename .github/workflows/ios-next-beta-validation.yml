@@ -76,6 +76,10 @@ jobs:
             ios-app-native/tests/reader-speech-queue-background-smoke.swift \
             -o "$RUNNER_TEMP/reader-tts-background-queue"
           "$RUNNER_TEMP/reader-tts-background-queue"
+      - name: Preparar credencial de catálogo público Google Drive si está configurada
+        env:
+          TIFLO_CINEMA_PUBLIC_DRIVE_API_KEY: ${{ secrets.TIFLO_CINEMA_PUBLIC_DRIVE_API_KEY }}
+        run: python3 ios-app-native/scripts/configure-cinema-drive-key.py
       - name: Crear el proyecto nativo con XcodeGen
         run: |
           brew install xcodegen

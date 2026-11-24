@@ -11,7 +11,8 @@ test('Audiocinemateca credentials are device-only and never reported as authenti
   assert.match(account,/textContentType\(\.password\)/);
   assert.match(account,/Acceso al catálogo pendiente de validación/);
   assert.doesNotMatch(account,/UserDefaults|AppStorage|print\(/);
-  assert.match(read('NativeAccessibleCinema.swift'),/NativeAudiocinematecaAccountScreen\(\)/);
+  assert.match(read('NativeAccessibleCinema.swift'),/NativeAudiocinematecaBrowser\(\)/);
+  assert.match(read('NativeAudiocinematecaBrowser.swift'),/NativeAudiocinematecaAccountScreen\(\)/);
 });
 test('official signup, password recovery and secure web fallback are available',()=>{
   for (const path of ['usuario/register','usuario/password','ayuda','contact']) assert.ok(account.includes('https://audiocinemateca.com/'+path));

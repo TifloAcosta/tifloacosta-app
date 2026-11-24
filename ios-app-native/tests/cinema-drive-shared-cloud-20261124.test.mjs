@@ -62,7 +62,7 @@ test('preview playback is transparent about the full temporary download and neve
   assert.doesNotMatch(browser, /try\s+personalLibrary\.import/);
   assert.match(browser, /try await storage\.downloadCinema\(item, allowsCellular: allowCellularDownloads\)/);
   assert.match(browser, /guard network\.canDownload\(allowCellular: allowCellularDownloads\)/);
-  assert.match(browser, /\\.accessibilityAddTraits\(\.updatesFrequently\)/);
+  assert.match(browser, /\.accessibilityAddTraits\(\.updatesFrequently\)/);
 });
 
 test('source selection is not confused with automatic public-catalogue authorization', () => {

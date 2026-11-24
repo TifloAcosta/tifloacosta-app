@@ -299,6 +299,18 @@ struct NativeAccessibleCinemaScreen: View {
                 }
             }
 
+            if selectedLanguage == .all || selectedLanguage == .english || selectedLanguage == .french {
+                Section("Dónde ver una película") {
+                    if selectedLanguage == .all || selectedLanguage == .english {
+                        Link("Audio Description Project", destination: URL(string: "https://adp.acb.org/adp-search")!)
+                    }
+                    if selectedLanguage == .all || selectedLanguage == .french {
+                        Link("Portail de l’audiodescription", destination: URL(string: "https://audiodescription.culture.gouv.fr/")!)
+                        Link("Películas gratuitas", destination: URL(string: "https://audiodescription.beta.gouv.fr/recherche?is_free=1")!)
+                    }
+                }
+            }
+
             Section("Mi colección personal") {
                 Text("Añade tus propios archivos de audio o vídeo. Se conservarán en el iPhone para reproducirlos en TifloAcosta, con la última posición de escucha.")
                     .font(.footnote)

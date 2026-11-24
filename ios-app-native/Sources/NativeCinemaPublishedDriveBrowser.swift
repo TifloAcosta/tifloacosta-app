@@ -250,10 +250,15 @@ struct NativeCinemaPublishedDriveBrowser: View {
         }
         lastSelected = entry
         do {
-            let service = try NativeCinemaPublicDrive()
-            let url = try service.progressiveURL(for: entry)
+            guard let loader = NativeCinemaDriveResourceLoader(
+                item: entry, ancestors: path,
+                allowsCellular: allowCellularDownloads) else {
+                throw NativeCinemaPublicDriveError.unsupported
+            }
+            let asset = loader.makeAsset()
             try player.openPublicStream(
-                url: url, title: entry.name,
+                asset: asset, loader: loader,
+                title: entry.name,
                 reference: reference(for: entry),
                 isVideo: entry.isVideo, library: library
             )

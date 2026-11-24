@@ -191,6 +191,47 @@ final class NativeReaderLibrary: ObservableObject {
         }
     }
 
+    /// PDF and image decoding can take seconds per page. Keep the existing
+    /// synchronous import for other callers, but move OCR work off the UI actor.
+    private func importWithPageProgress(from url: URL,
+                                        onProgress: @escaping (String) -> Void) async throws {
+        let ocrTypes: Set<String> = ["pdf", "jpg", "jpeg", "png", "heic", "heif", "tif", "tiff"]
+        guard ocrTypes.contains(url.pathExtension.lowercased()) else {
+            try importDocuments(from: [url])
+            return
+        }
+        let identifier = UUID()
+        let filename = url.lastPathComponent
+        do {
+            let (payload, originalPath) = try await Task.detached(priority: .userInitiated) {
+                let accessed = url.startAccessingSecurityScopedResource()
+                defer { if accessed { url.stopAccessingSecurityScopedResource() } }
+                let payload = try NativeReaderFormats.read(url, documentID: identifier) { page, total in
+                    Task { @MainActor in
+                        onProgress(MusicLocalized.format("Procesando página %d de %d: %@", page, total, filename))
+                    }
+                }
+                let originalPath = try NativeReaderFormats.storeOriginal(url, documentID: identifier)
+                return (payload, originalPath)
+            }.value
+            try Task.checkCancellation()
+            documents.insert(NativeReadingDocument(
+                id: identifier, title: url.deletingPathExtension().lastPathComponent,
+                body: payload.body, importedAt: .now, fileExtension: payload.fileExtension,
+                originalRelativePath: originalPath, trackPaths: payload.trackPaths,
+                daisyNavigation: payload.daisyNavigation, daisyClips: payload.daisyClips,
+                textLinks: payload.textLinks), at: 0)
+            do { try save() } catch {
+                documents.removeAll { $0.id == identifier }
+                throw error
+            }
+        } catch {
+            NativeReaderFormats.deleteStoredFiles(for: identifier)
+            NativeReaderFormats.deleteOriginal(for: identifier)
+            throw error
+        }
+    }
+
     /// Import a directory picked in Files without requiring a ZIP. The
     /// security-scoped folder stays available while each child is copied to
     /// private app storage. Do not follow symlinks outside the selected folder.
@@ -237,7 +278,11 @@ final class NativeReaderLibrary: ObservableObject {
             onProgress(MusicLocalized.format("Importando %d de %d: %@", index + 1, files.count, file.lastPathComponent))
             await Task.yield()
             do {
-                try importDocuments(from: [file])
+                if ["pdf", "jpg", "jpeg", "png", "heic", "heif", "tif", "tiff"].contains(file.pathExtension.lowercased()) {
+                    try await importWithPageProgress(from: file, onProgress: onProgress)
+                } else {
+                    try importDocuments(from: [file])
+                }
                 imported += 1
             } catch {
                 failures.append(file.lastPathComponent + ": " + error.localizedDescription)
@@ -265,7 +310,11 @@ final class NativeReaderLibrary: ObservableObject {
                                             index + 1, urls.count, url.lastPathComponent))
             await Task.yield()
             do {
-                try importDocuments(from: [url])
+                if ["pdf", "jpg", "jpeg", "png", "heic", "heif", "tif", "tiff"].contains(url.pathExtension.lowercased()) {
+                    try await importWithPageProgress(from: url, onProgress: onProgress)
+                } else {
+                    try importDocuments(from: [url])
+                }
                 imported += 1
             } catch {
                 failures.append(url.lastPathComponent + ": " + error.localizedDescription)

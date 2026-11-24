@@ -142,6 +142,8 @@ private enum AccessibleCinemaDirectory {
 
 struct NativeAccessibleCinemaScreen: View {
     @State private var searchText = ""
+    @State private var audiocinematecaResults: [NativeAudiocinematecaCatalogueIndex.Entry] = []
+    @State private var cinemaSearchLimit = 50
     @AppStorage("native-cinema-language-index-v1") private var languageIndex = 0
     @AppStorage("native-cinema-content-index-v1") private var contentIndex = 0
     @AppStorage("native-cinema-import-language-index-v1") private var importLanguageIndex = 1
@@ -171,6 +173,20 @@ struct NativeAccessibleCinemaScreen: View {
                 .contains(where: { $0.localizedStandardContains(query) })
             return languageMatches && typeMatches && queryMatches
         }
+    }
+
+    private var matchingAudiocinemateca: [NativeAudiocinematecaCatalogueIndex.Entry] {
+        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !query.isEmpty, NativeAudiocinematecaCredentials.load() != nil else { return [] }
+        let categories: [AccessibleCinemaKind: String] = [
+            .film: "peliculas", .series: "series", .documentary: "documentales", .short: "cortometrajes"
+        ]
+        return audiocinematecaResults.filter { item in
+            (selectedKind == .all || item.category == categories[selectedKind]) &&
+            (selectedLanguage == .all || (selectedLanguage == .spain && item.languageCode == "0") ||
+             (selectedLanguage == .latino && item.languageCode == "1")) &&
+            [item.title, item.year, item.genre, item.synopsis].contains { $0.localizedStandardContains(query) }
+        }.sorted { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
     }
 
     private var personalItems: [NativeCinemaLocalItem] {
@@ -229,7 +245,7 @@ struct NativeAccessibleCinemaScreen: View {
                 TextField("Buscar plataformas y contenidos audiodescritos", text: $searchText)
                     .textInputAutocapitalization(.sentences)
                     .submitLabel(.search)
-                    .accessibilityHint("Filtra por nombre o descripción de la fuente.")
+                    .accessibilityHint("Busca títulos y fuentes.")
                 NativeAdjustableChoice(
                     title: "Idioma de audiodescripción",
                     choices: AccessibleCinemaLanguage.allCases.map(\.rawValue),
@@ -242,6 +258,26 @@ struct NativeAccessibleCinemaScreen: View {
                 )
             }
             .listRowBackground(TifloVisual.surfaceRaised)
+
+            if !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                Section("Audiocinemateca") {
+                    if NativeAudiocinematecaCredentials.load() != nil {
+                        ForEach(matchingAudiocinemateca.prefix(cinemaSearchLimit)) { item in
+                            NavigationLink {
+                                NativeAudiocinematecaDetail(entry: item)
+                            } label: {
+                                Text(item.title)
+                            }
+                        }
+                        if matchingAudiocinemateca.count > cinemaSearchLimit {
+                            Button("Cargar más resultados") { cinemaSearchLimit += 50 }
+                        }
+                    }
+                    NavigationLink("Explorar catálogo audiodescrito") {
+                        NativeAudiocinematecaBrowser()
+                    }
+                }
+            }
 
             Section("Mi colección personal") {
                 Text("Añade tus propios archivos de audio o vídeo. Se conservarán en el iPhone para reproducirlos en TifloAcosta, con la última posición de escucha.")
@@ -409,6 +445,16 @@ struct NativeAccessibleCinemaScreen: View {
         }
         .tifloScreenSurface()
         .navigationTitle("Multicines Accesibles")
+        .onChange(of: searchText) { _, _ in cinemaSearchLimit = 50 }
+        .task {
+            audiocinematecaResults = []
+            if let account = NativeAudiocinematecaCredentials.load(),
+               let entries = try? await NativeAudiocinematecaCache.shared.cachedEntries(account: account),
+               let current = NativeAudiocinematecaCredentials.load(),
+               current.username == account.username, current.password == account.password {
+                audiocinematecaResults = entries
+            }
+        }
         .fileImporter(
             isPresented: $selectingPersonalFiles,
             allowedContentTypes: [.audio, .movie],

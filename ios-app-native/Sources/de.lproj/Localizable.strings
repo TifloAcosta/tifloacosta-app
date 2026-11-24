@@ -1420,7 +1420,6 @@
 "Convertir documento" = "Dokument konvertieren";
 "Convertir documentos seleccionados" = "Ausgewählte Dokumente konvertieren";
 "Formato de destino" = "Zielformat";
-"Se conserva el texto reconocido o importado. Según el origen y el destino, pueden perderse imágenes, listas, tablas y otros detalles." = "Erkannter oder importierter Text bleibt erhalten. Je nach Quell- und Zielformat können Bilder, Listen, Tabellen und andere Details verloren gehen.";
 "PDF con texto seleccionable y etiquetas de párrafo y encabezado. La accesibilidad completa depende del documento de origen." = "PDF mit auswählbarem Text und Tags für Absätze und Überschriften. Die vollständige Barrierefreiheit hängt vom Quelldokument ab.";
 "Convirtiendo documento %d de %d." = "Dokument %d von %d wird konvertiert.";
 "Cancelar conversión" = "Konvertierung abbrechen";
@@ -1431,3 +1430,6 @@
 "Conversión cancelada." = "Konvertierung abgebrochen.";
 "Documentos convertidos: %d. Fallidos: %d." = "Konvertierte Dokumente: %d. Fehlgeschlagen: %d.";
 "Documentos guardados: %d. Fallidos: %d." = "Gespeicherte Dokumente: %d. Fehlgeschlagen: %d.";
+
+"DAISY de texto" = "DAISY nur mit Text";
+"Se conservará el texto. Si el original contiene imágenes, tablas, listas, notas o estilos, pueden perderse." = "Der Text bleibt erhalten. Bilder, Tabellen, Listen, Anmerkungen und Formatvorlagen aus dem Original können verloren gehen.";

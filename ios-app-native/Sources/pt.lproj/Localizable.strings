@@ -1420,7 +1420,6 @@
 "Convertir documento" = "Converter documento";
 "Convertir documentos seleccionados" = "Converter documentos selecionados";
 "Formato de destino" = "Formato de destino";
-"Se conserva el texto reconocido o importado. Según el origen y el destino, pueden perderse imágenes, listas, tablas y otros detalles." = "O texto reconhecido ou importado é conservado. Consoante a origem e o destino, podem perder-se imagens, listas, tabelas e outros detalhes.";
 "PDF con texto seleccionable y etiquetas de párrafo y encabezado. La accesibilidad completa depende del documento de origen." = "PDF com texto selecionável e etiquetas de parágrafo e título. A acessibilidade completa depende do documento de origem.";
 "Convirtiendo documento %d de %d." = "A converter o documento %d de %d.";
 "Cancelar conversión" = "Cancelar conversão";
@@ -1431,3 +1430,6 @@
 "Conversión cancelada." = "Conversão cancelada.";
 "Documentos convertidos: %d. Fallidos: %d." = "Documentos convertidos: %d. Falhas: %d.";
 "Documentos guardados: %d. Fallidos: %d." = "Documentos guardados: %d. Falhas: %d.";
+
+"DAISY de texto" = "DAISY apenas com texto";
+"Se conservará el texto. Si el original contiene imágenes, tablas, listas, notas o estilos, pueden perderse." = "O texto será mantido. Imagens, tabelas, listas, notas e estilos do original podem perder-se.";

@@ -37,14 +37,24 @@ struct NativeDocumentConversionScreen: View {
     private let formats = NativeDocumentFormat.allCases
     private var format: NativeDocumentFormat { formats[formatIndex] }
 
+    private var showsLossNotice: Bool {
+        let plainFormats = ["", "txt", "text"]
+        return sources.contains { source in
+            if plainFormats.contains(source.format) { return false }
+            return !(format == .md && ["md", "markdown"].contains(source.format))
+        }
+    }
+
     var body: some View {
         NavigationStack {
             Form {
                 NativeAdjustableChoice(title: "Formato de destino",
                     choices: formats.map(\.label), selectedIndex: $formatIndex)
                     .disabled(job != nil || saving)
-                Text("Se conserva el texto reconocido o importado. Según el origen y el destino, pueden perderse imágenes, listas, tablas y otros detalles.")
-                    .font(.footnote)
+                if job == nil && showsLossNotice {
+                    Text("Se conservará el texto. Si el original contiene imágenes, tablas, listas, notas o estilos, pueden perderse.")
+                        .font(.footnote)
+                }
                 if format == .pdf {
                     Text("PDF con texto seleccionable y etiquetas de párrafo y encabezado. La accesibilidad completa depende del documento de origen.")
                         .font(.footnote)

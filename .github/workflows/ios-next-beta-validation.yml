@@ -76,7 +76,9 @@ jobs:
             ios-app-native/tests/reader-speech-queue-background-smoke.swift \
             -o "$RUNNER_TEMP/reader-tts-background-queue"
           "$RUNNER_TEMP/reader-tts-background-queue"
-      - name: Abrir y verificar los nueve formatos de conversión local
+      - name: Abrir y verificar los diez formatos de conversión local
+        env:
+          CONVERSION_SAMPLES_DIR: ${{ runner.temp }}/conversion-samples
         run: bash ios-app-native/scripts/test-document-conversion.sh
       - name: Preparar credencial de catálogo público Google Drive si está configurada
         env:
@@ -93,3 +95,5 @@ jobs:
             -destination 'generic/platform=iOS Simulator' \
             -derivedDataPath "$RUNNER_TEMP/TifloAcosta-17-build" \
             CODE_SIGNING_ALLOWED=NO build
+      - name: Auditar la muestra PDF con veraPDF (PDF/UA-1)
+        run: bash ios-app-native/scripts/audit-conversion-pdf-ua.sh "$RUNNER_TEMP/conversion-samples/conversion.pdf"

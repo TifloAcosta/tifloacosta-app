@@ -646,6 +646,18 @@ enum NativeReaderFormats {
             }
             body = isDaisy ? joined(pages) : ""
             format = isDaisy ? "daisy" : "zip"
+            if isDaisy, audioFiles.isEmpty, pages.count == 1, let page = pages.first,
+               let html = try? String(contentsOf: directory.appendingPathComponent(page), encoding: .utf8) {
+                textLinks = Self.textLinks(in: html, extracted: body, includeInternal: true).compactMap { link in
+                    if link.url.hasPrefix("#"),
+                       let offset = Self.targetOffset(fragment: String(link.url.dropFirst()), html: html, text: body) {
+                        return .init(offset: link.offset, title: link.title, url: link.url, targetOffset: offset)
+                    }
+                    guard let url = URL(string: link.url), ["http", "https"].contains(url.scheme?.lowercased() ?? ""),
+                          url.host != nil else { return nil }
+                    return link
+                }
+            }
             let smilPaths = all.filter { $0.lowercased().hasSuffix(".smil") }
             if isDaisy, let ncc = all.first(where: { $0.lowercased().hasSuffix("ncc.html") }) {
                 let raw = (try? String(contentsOf: directory.appendingPathComponent(ncc), encoding: .utf8)) ?? ""

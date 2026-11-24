@@ -4,10 +4,18 @@ import CoreText
 import ZIPFoundation
 
 enum NativeDocumentFormat: String, CaseIterable, Identifiable, Sendable {
-    case txt, rtf, docx, html, epub, pdf, md, odt, fb2
+    case txt, rtf, docx, html, epub, pdf, md, odt, fb2, daisy
 
     var id: String { rawValue }
-    var label: String { self == .md ? "Markdown" : rawValue.uppercased() }
+    var label: String {
+        switch self {
+        case .md: return "Markdown"
+        case .daisy: return NSLocalizedString("DAISY de texto", comment: "Text-only DAISY export")
+        default: return rawValue.uppercased()
+        }
+    }
+
+    var fileExtension: String { self == .daisy ? "zip" : rawValue }
 }
 
 struct NativeConversionSource: Sendable {
@@ -51,7 +59,7 @@ enum NativeDocumentConversion {
         let filename = URL(fileURLWithPath: input.filename).lastPathComponent
         let stem = input.format.isEmpty ? filename : (filename as NSString).deletingPathExtension
         let safeStem = stem.isEmpty || stem == "." || stem == ".." ? "document" : stem
-        let output = destination.appendingPathComponent(safeStem).appendingPathExtension(format.rawValue)
+        let output = destination.appendingPathComponent(safeStem).appendingPathExtension(format.fileExtension)
         try FileManager.default.createDirectory(at: destination, withIntermediateDirectories: true)
         do {
             if format == .txt || (format == .md && ["md", "markdown"].contains(input.format)) {
@@ -79,7 +87,8 @@ enum NativeDocumentConversion {
                 case .docx: try docx(paragraphs, title: title, output: output)
                 case .odt: try odt(paragraphs, title: title, output: output)
                 case .fb2: try fb2(paragraphs, title: title, output: output)
-                case .pdf: try pdf(paragraphs, title: input.title, output: output) { onProgress(0.6 + $0 * 0.4) }
+                case .daisy: try daisy(paragraphs, title: title, markup: markup, output: output)
+                case .pdf: try pdf(paragraphs, title: input.title, author: markup?.metadata["author"], output: output) { onProgress(0.6 + $0 * 0.4) }
                 }
             }
             try Task.checkCancellation()
@@ -95,7 +104,7 @@ enum NativeDocumentConversion {
     }
 
     private static func parse(_ input: NativeConversionSource, onProgress: (Double) -> Void) throws -> [Paragraph] {
-        let headingFormats: Set<String> = ["html", "htm", "epub", "md", "markdown", "docx", "odt", "daisy"]
+        let headingFormats: Set<String> = ["html", "htm", "xhtml", "epub", "md", "markdown", "docx", "odt", "daisy"]
         let links = input.links.filter { $0.offset >= 0 && !$0.title.isEmpty }.sorted { $0.offset < $1.offset }
         var linkIndex = 0
         var offset = 0
@@ -171,7 +180,8 @@ enum NativeDocumentConversion {
         return "p\(paragraphs[lower].offset)"
     }
 
-    private static func xhtml(_ paragraphs: [Paragraph], title: String) throws -> String {
+    private static func xhtml(_ paragraphs: [Paragraph], title: String,
+                              header: String = "<meta charset=\"utf-8\"/>") throws -> String {
         let body = try paragraphs.map { paragraph in
             try Task.checkCancellation()
             let tag = paragraph.level > 0 ? "h\(paragraph.level)" : "p"
@@ -182,7 +192,51 @@ enum NativeDocumentConversion {
             }.joined()
             return "<\(tag) id=\"p\(paragraph.offset)\">\(text)</\(tag)>"
         }.joined(separator: "\n")
-        return "<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><meta charset=\"utf-8\"/><title>\(title)</title></head><body>\(body)</body></html>"
+        return "<html xmlns=\"http://www.w3.org/1999/xhtml\"><head>\(header)<title>\(title)</title></head><body>\(body)</body></html>"
+    }
+
+    private static func daisy(_ paragraphs: [Paragraph], title: String,
+                              markup: NativeConversionMarkup.Document?, output: URL) throws {
+        let declaration = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+        let xhtmlDTD = #"<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">"#
+        let smilDTD = #"<!DOCTYPE smil PUBLIC "-//W3C//DTD SMIL 1.0//EN" "http://www.w3.org/TR/REC-smil/SMIL10.dtd">"#
+        let encoding = #"<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>"#
+        let identifier = "urn:uuid:" + UUID().uuidString.lowercased()
+        let date = String(ISO8601DateFormatter().string(from: Date()).prefix(10))
+        let headings = paragraphs.filter { $0.level > 0 && !$0.text.trimmingCharacters(in: .whitespaces).isEmpty }
+        // The NCC requires a title entry at level 1, even when the source has no headings.
+        let first = paragraphs[0].offset
+        var index = "<h1 id=\"start\" class=\"title\"><a href=\"book.smil#s\(first)\">\(title)</a></h1>"
+        for heading in headings {
+            try Task.checkCancellation()
+            index += "<h\(heading.level) id=\"n\(heading.offset)\"><a href=\"book.smil#s\(heading.offset)\">\(xml(heading.text))</a></h\(heading.level)>"
+        }
+        var metadata = [
+            "dc:title": title, "dc:format": "Daisy 2.02", "dc:identifier": identifier,
+            "dc:publisher": "TifloAcosta", "dc:date": date, "dc:language": xml(markup?.language ?? "und"),
+            "ncc:charset": "UTF-8", "ncc:multimediaType": "textNcc", "ncc:totalTime": "00:00:00",
+            "ncc:tocItems": String(headings.count + 1), "ncc:files": "3",
+            "ncc:pageFront": "0", "ncc:pageNormal": "0", "ncc:pageSpecial": "0",
+            "ncc:depth": String(headings.map(\.level).max() ?? 1)
+        ]
+        for (source, target) in [("author", "dc:creator"), ("description", "dc:description")] {
+            if let value = markup?.metadata[source] { metadata[target] = xml(value) }
+        }
+        let meta = metadata.sorted { $0.key < $1.key }.map {
+            "<meta name=\"\($0.key)\" content=\"\($0.value)\"/>"
+        }.joined()
+        let ncc = declaration + "\n" + xhtmlDTD + "\n" +
+            "<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>\(title)</title>\(encoding)\(meta)</head><body>\(index)</body></html>"
+        let segments = try paragraphs.map { paragraph in
+            try Task.checkCancellation()
+            let id = paragraph.offset
+            return "<par id=\"s\(id)\" endsync=\"last\"><text id=\"t\(id)\" src=\"book.xhtml#p\(id)\"/></par>"
+        }.joined()
+        let smil = declaration + "\n" + smilDTD + "\n" +
+            "<smil><head><meta name=\"dc:format\" content=\"Daisy 2.02\"/><meta name=\"dc:identifier\" content=\"\(identifier)\"/></head><body><seq dur=\"0.0s\">\(segments)</seq></body></smil>"
+        let book = try declaration + "\n" + xhtmlDTD + "\n" +
+            xhtml(paragraphs, title: title, header: encoding)
+        try package([("ncc.html", ncc), ("book.smil", smil), ("book.xhtml", book)], output: output)
     }
 
     private static func markdown(_ paragraphs: [Paragraph]) throws -> String {
@@ -371,7 +425,7 @@ enum NativeDocumentConversion {
         try write(contents, to: output)
     }
 
-    private static func pdf(_ paragraphs: [Paragraph], title: String, output: URL,
+    private static func pdf(_ paragraphs: [Paragraph], title: String, author: String?, output: URL,
                             onProgress: (Double) -> Void) throws {
         let text = NSMutableAttributedString(string: "")
         let key = NSAttributedString.Key(kCTFontAttributeName as String)
@@ -396,8 +450,9 @@ enum NativeDocumentConversion {
         }
         let framesetter = CTFramesetterCreateWithAttributedString(text)
         var page = CGRect(x: 0, y: 0, width: 595, height: 842)
-        guard let context = CGContext(output as CFURL, mediaBox: &page,
-            [kCGPDFContextTitle as String: title] as CFDictionary) else { throw Failure.invalidOutput }
+        var metadata = [kCGPDFContextTitle as String: title]
+        if let author { metadata[kCGPDFContextAuthor as String] = author }
+        guard let context = CGContext(output as CFURL, mediaBox: &page, metadata as CFDictionary) else { throw Failure.invalidOutput }
         defer { context.closePDF() }
         let path = CGPath(rect: page.insetBy(dx: 48, dy: 48), transform: nil)
         var offset = 0

@@ -12,11 +12,13 @@ struct DocumentConversionSmoke {
         let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: root) }
-        let body = "# Capítulo & prólogo\n\nLeer guía: café y pingüino.\n\nÚltima línea."
+        let body = "# Capítulo & prólogo\n\nLeer guía: café y pingüino.\n\n## 第二章 – Ελληνικά\n\nVolver. Última línea."
         let linkOffset = body.distance(from: body.startIndex, to: body.range(of: "Leer guía")!.lowerBound)
         let source = NativeConversionSource(filename: "Obra.versión.md", title: "Obra & título",
             format: "md", text: body,
-            links: [.init(offset: linkOffset, title: "Leer guía", url: "https://example.com/a?x=1&y=2", targetOffset: nil)])
+            links: [.init(offset: linkOffset, title: "Leer guía", url: "https://example.com/a?x=1&y=2", targetOffset: nil),
+                .init(offset: body.distance(from: body.startIndex, to: body.range(of: "Volver")!.lowerBound),
+                      title: "Volver", url: "#chapter", targetOffset: 0)])
         var results: [NativeDocumentFormat: URL] = [:]
         for format in NativeDocumentFormat.allCases {
             var lastProgress = 0.0
@@ -25,7 +27,7 @@ struct DocumentConversionSmoke {
                 lastProgress = value
             }
             precondition(lastProgress == 1)
-            precondition(url.lastPathComponent == "Obra.versión.\(format.rawValue)")
+            precondition(url.lastPathComponent == "Obra.versión.\(format.fileExtension)")
             results[format] = url
         }
         func text(_ format: NativeDocumentFormat) throws -> String {
@@ -75,6 +77,21 @@ struct DocumentConversionSmoke {
         precondition(epub["EPUB/book.xhtml"]!.contains("café y pingüino") &&
             epub["EPUB/nav.xhtml"]!.contains("book.xhtml#p0"))
 
+        let daisy = try members(results[.daisy]!)
+        precondition(Set(daisy.keys) == ["ncc.html", "book.smil", "book.xhtml"])
+        for document in daisy.values { xml(document) }
+        precondition(daisy["ncc.html"]!.contains("textNcc") && daisy["ncc.html"]!.contains("第二章"))
+        precondition(daisy["book.xhtml"]!.contains("href=\"#p0\">Volver") &&
+            daisy["book.xhtml"]!.contains("Ελληνικά"))
+        precondition(!daisy["book.smil"]!.contains("<audio"))
+        if CommandLine.arguments.count > 2 {
+            let samples = URL(fileURLWithPath: CommandLine.arguments[2], isDirectory: true)
+            for (name, contents) in daisy {
+                try contents.write(to: samples.appendingPathComponent(name), atomically: true, encoding: .utf8)
+            }
+            try FileManager.default.copyItem(at: results[.pdf]!, to: samples.appendingPathComponent("conversion.pdf"))
+        }
+
         let pdf = PDFDocument(url: results[.pdf]!)!
         let plain = pdf.string!
         precondition(pdf.pageCount == 1 && plain.range(of: "Capítulo & prólogo")!.lowerBound <
@@ -109,7 +126,9 @@ struct DocumentConversionSmoke {
         <h2 id="tabla">Tabla</h2><ul><li>Primero</li></ul>
         <table><caption>Datos</caption><tr><th scope="col">Valor</th><td>Ñ</td></tr></table>
         <img src="data:image/png;base64,\(png)" alt="Imagen de prueba" onload="bad()"/>
-        <script>bad()</script><a href="#tabla">Volver</a></body></html>
+        <script>bad()</script><a href="#tabla">Volver</a>
+        <p xml:lang="fr">Déjà vu <a href="#nota" role="doc-noteref">1</a></p>
+        <aside id="nota" role="doc-footnote"><p>Hinweis – opinião.</p></aside></body></html>
         """.write(to: xhtml, atomically: true, encoding: .utf8)
         let rich = NativeConversionSource(filename: "Original.xhtml", title: "Original", format: "xhtml",
             text: "Tabla\nDatos", links: [], original: xhtml)
@@ -126,8 +145,10 @@ struct DocumentConversionSmoke {
             text: "Tabla", links: [], original: richEpub)
         let richHTML = try NativeDocumentConversion.convert(reopened, to: .html, in: richOutput)
         let table = try String(contentsOf: richHTML, encoding: .utf8)
-        precondition(table.contains("<table>") && table.contains(png) && table.contains("href=\"#c0-"))
-        print("Nine local formats opened and validated; EPUB/HTML structure and assets, PDF text and tags verified.")
+        precondition(table.contains("<table>") && table.contains(png) && table.contains("href=\"#c0-") &&
+            table.contains("xml:lang=\"fr\"") && table.contains("role=\"doc-footnote\"") &&
+            table.contains("Hinweis – opinião."))
+        print("Ten local formats opened and validated; EPUB/HTML structure and assets, PDF text and tags verified.")
     }
 
     static func xml(_ string: String) {

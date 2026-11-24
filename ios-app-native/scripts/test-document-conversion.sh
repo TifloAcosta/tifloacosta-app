@@ -27,4 +27,16 @@ revision=4d3740e319039911c30d291abb0c8b26ec99703b
 for file in FictionBook.xsd FictionBookLinks.xsd FictionBookGenres.xsd FictionBookLang.xsd; do
   curl -fsSL --retry 3 "https://raw.githubusercontent.com/gribuser/fb2/$revision/$file" -o "$schema/$file"
 done
-swift run --package-path "$work" ConversionSmoke "$schema/FictionBook.xsd"
+samples="${CONVERSION_SAMPLES_DIR:-$work/samples}"
+mkdir -p "$samples"
+swift run --package-path "$work" ConversionSmoke "$schema/FictionBook.xsd" "$samples"
+
+dtd="$work/dtd"
+mkdir -p "$dtd"
+for file in xhtml1-transitional.dtd xhtml-lat1.ent xhtml-special.ent xhtml-symbol.ent; do
+  curl -fsSL --retry 3 "https://www.w3.org/TR/xhtml1/DTD/$file" -o "$dtd/$file"
+done
+curl -fsSL --retry 3 https://www.w3.org/TR/1998/REC-smil-19980615/SMIL10.dtd -o "$dtd/SMIL10.dtd"
+xmllint --nonet --noout --dtdvalid "$dtd/xhtml1-transitional.dtd" "$samples/ncc.html" "$samples/book.xhtml"
+xmllint --nonet --noout --dtdvalid "$dtd/SMIL10.dtd" "$samples/book.smil"
+python3 "$root/scripts/check-text-daisy.py" "$samples"

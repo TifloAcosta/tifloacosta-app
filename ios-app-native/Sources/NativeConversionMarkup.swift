@@ -23,7 +23,7 @@ enum NativeConversionMarkup {
             let meta = metadata.sorted { $0.key < $1.key }.map {
                 "<meta name=\"\(escape($0.key))\" content=\"\(escape($0.value))\"/>"
             }.joined()
-            return "<html xmlns=\"http://www.w3.org/1999/xhtml\"\(lang)><head><meta charset=\"utf-8\"/><title>\(escape(title))</title>\(meta)</head><body>\(body)</body></html>"
+            return "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:epub=\"http://www.idpf.org/2007/ops\"\(lang)><head><meta charset=\"utf-8\"/><title>\(escape(title))</title>\(meta)</head><body>\(body)</body></html>"
         }
     }
 
@@ -33,7 +33,7 @@ enum NativeConversionMarkup {
                                      "jpeg": "image/jpeg", "gif": "image/gif"]
 
     static func read(_ input: NativeConversionSource, for format: NativeDocumentFormat) throws -> Document? {
-        guard [.html, .epub].contains(format), let source = input.original else { return nil }
+        guard [.html, .epub, .daisy, .pdf].contains(format), let source = input.original else { return nil }
         if ["html", "htm", "xhtml"].contains(input.format) {
             guard let size = try? source.resourceValues(forKeys: [.fileSizeKey]).fileSize,
                   size <= maximumTextBytes,
@@ -174,7 +174,7 @@ enum NativeConversionMarkup {
         private let allowed: Set<String> = [
             "p", "h1", "h2", "h3", "h4", "h5", "h6", "ul", "ol", "li", "dl", "dt", "dd", "div",
             "span", "br", "hr", "a", "strong", "em", "b", "i", "u", "small", "sub", "sup",
-            "blockquote", "pre", "code", "main", "article", "section", "figure", "figcaption",
+            "blockquote", "pre", "code", "main", "article", "section", "figure", "figcaption", "aside", "footer",
             "table", "caption", "thead", "tbody", "tfoot", "tr", "th", "td"
         ]
         private var stack: [String?] = []
@@ -243,8 +243,12 @@ enum NativeConversionMarkup {
             if tag == "a", let href = attributes["href"], let destination = anchor(href) {
                 renderedAttributes += " href=\"\(escape(destination))\""
             }
-            for name in ["scope", "rowspan", "colspan", "start", "lang", "dir"] {
+            for name in ["scope", "rowspan", "colspan", "start", "value", "lang", "xml:lang", "dir", "epub:type"] {
                 if let value = attributes[name] { renderedAttributes += " \(name)=\"\(escape(value))\"" }
+            }
+            if let role = attributes["role"], ["doc-noteref", "doc-footnote", "doc-endnote",
+                                                "doc-endnotes", "doc-backlink"].contains(role) {
+                renderedAttributes += " role=\"\(role)\""
             }
             if let names = attributes["headers"] {
                 renderedAttributes += " headers=\"\(escape(names.split(separator: " ").map { id + "-" + $0 }.joined(separator: " ")))\""

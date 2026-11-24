@@ -102,6 +102,14 @@ struct DocumentConversionSmoke {
         precondition(CGPDFDictionaryGetDictionary(catalog, "StructTreeRoot", &structure), "PDF lacks structure tags")
         precondition(pdf.page(at: 0)!.annotations.contains { $0.url?.host == "example.com" })
 
+        let reopenedODT = NativeConversionSource(filename: "Obra.versión.odt", title: "Fallback",
+            format: "odt", text: "Text fallback", links: [], original: results[.odt]!)
+        let reopenedHTML = try NativeDocumentConversion.convert(reopenedODT, to: .html,
+            in: root.appendingPathComponent("roundtrip"))
+        let odtHTML = try String(contentsOf: reopenedHTML, encoding: .utf8)
+        precondition(odtHTML.contains("Obra &amp; título") && odtHTML.contains("<h2") &&
+            odtHTML.contains("href=\"#c0-p0\">Volver") && odtHTML.contains("Ελληνικά"))
+
         let longBody = (0..<220).map { "Línea \($0): contenido extenso para paginación." }.joined(separator: "\n")
         let longInput = NativeConversionSource(filename: "Largo.txt", title: "Largo", format: "txt",
             text: longBody, links: [])
@@ -148,6 +156,42 @@ struct DocumentConversionSmoke {
         precondition(table.contains("<table>") && table.contains(png) && table.contains("href=\"#c0-") &&
             table.contains("xml:lang=\"fr\"") && table.contains("role=\"doc-footnote\"") &&
             table.contains("Hinweis – opinião."))
+        let complexODT = root.appendingPathComponent("Complejo.odt")
+        let archive = try Archive(url: complexODT, accessMode: .create)
+        let odtSource = """
+        <office:document-content xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
+          xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0"
+          xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0"
+          xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0"
+          xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0"
+          xmlns:xlink="http://www.w3.org/1999/xlink">
+          <office:body><office:text>
+            <text:h text:outline-level="2">Reunión – 会議</text:h>
+            <text:list><text:list-item><text:p>Café</text:p></text:list-item></text:list>
+            <table:table><table:table-header-rows><table:table-row><table:table-cell>
+              <text:p>Résumé</text:p>
+            </table:table-cell></table:table-row></table:table-header-rows></table:table>
+            <text:p><draw:frame><draw:image xlink:href="Pictures/frame.png"/>
+              <svg:desc>Descripción de la imagen</svg:desc></draw:frame></text:p>
+          </office:text></office:body>
+        </office:document-content>
+        """
+        for (path, bytes) in [("content.xml", Data(odtSource.utf8)),
+                              ("Pictures/frame.png", Data(base64Encoded: png)!)] {
+            try archive.addEntry(with: path, type: .file, uncompressedSize: Int64(bytes.count)) { offset, size in
+                let start = Int(offset)
+                return bytes.subdata(in: start..<min(bytes.count, start + size))
+            }
+        }
+        let complex = NativeConversionSource(filename: complexODT.lastPathComponent, title: "Complejo",
+            format: "odt", text: "Text fallback", links: [], original: complexODT)
+        let complexEPUB = try NativeDocumentConversion.convert(complex, to: .epub, in: richOutput)
+        let complexFiles = try members(complexEPUB, mime: "application/epub+zip")
+        let complexBook = complexFiles["EPUB/book.xhtml"]!
+        xml(complexBook)
+        precondition(complexBook.contains("<thead><tr><th>") && complexBook.contains("<ul><li>") &&
+            complexBook.contains("alt=\"Descripción de la imagen\"") && complexBook.contains("会議"))
+        precondition(complexFiles["EPUB/book.opf"]!.contains("assets/image-1.png"))
         print("Ten local formats opened and validated; EPUB/HTML structure and assets, PDF text and tags verified.")
     }
 

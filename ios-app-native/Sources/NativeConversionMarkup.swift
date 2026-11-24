@@ -41,7 +41,26 @@ enum NativeConversionMarkup {
             return try parse([(path: "book.xhtml", data: data)], fallbackTitle: input.title,
                              packageImages: format == .epub) { _, _ in nil }
         }
-        guard input.format == "epub", let archive = Archive(url: source, accessMode: .read) else { return nil }
+        guard ["epub", "odt"].contains(input.format),
+              let archive = Archive(url: source, accessMode: .read) else { return nil }
+        if input.format == "odt" {
+            func xmlMember(_ name: String) throws -> Data? {
+                guard let entry = archive[name], entry.type == .file else { return nil }
+                return try entryData(entry, in: archive, limit: maximumTextBytes / 3)
+            }
+            guard let content = try xmlMember("content.xml"),
+                  let xhtml = try NativeODTConversionMarkup.xhtml(content: content,
+                    styles: xmlMember("styles.xml"), metadata: xmlMember("meta.xml"), title: input.title)
+            else { return nil }
+            return try parse([(path: "book.xhtml", data: xhtml)], fallbackTitle: input.title,
+                             packageImages: format == .epub) { href, chapter in
+                guard let path = member(href, relativeTo: chapter), path.hasPrefix("Pictures/"),
+                      let type = imageTypes[URL(fileURLWithPath: path).pathExtension.lowercased()],
+                      let entry = archive[path], entry.type == .file,
+                      let data = try entryData(entry, in: archive, limit: maximumImageBytes) else { return nil }
+                return (type, data)
+            }
+        }
         let temporary = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         defer { try? FileManager.default.removeItem(at: temporary) }
         var total = 0

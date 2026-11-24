@@ -435,13 +435,13 @@ struct NativeAccessibleCinemaScreen: View {
                                     NavigationLink("50 películas con audiodescripción") {
                                         NativeCinemaPublishedDriveBrowser(
                                             sourceID: source.id,
-                                            sourceName: "FOAL, películas",
+                                            sourceName: MusicLocalized.message("FOAL, películas"),
                                             foalCollection: "foal-films")
                                     }
                                     NavigationLink("Juego de Tronos, ocho temporadas") {
                                         NativeCinemaPublishedDriveBrowser(
                                             sourceID: source.id,
-                                            sourceName: "FOAL, serie",
+                                            sourceName: MusicLocalized.message("FOAL, serie"),
                                             foalCollection: "foal-game-of-thrones")
                                     }
                                 } else {

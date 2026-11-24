@@ -294,9 +294,13 @@
         "ios-app-native/cinema-source-selection-20261123.md",
         "https://github.com/TifloAcosta/tifloacosta-app/commit/588d2baa7fbd0aa0f10d38dd65bcfc52d3c6aa3e",
         "https://github.com/TifloAcosta/tifloacosta-app/commit/d432506bc27a625506039b1fd074db97ec65ba54",
-        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45278256276"
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45278256276",
+        "ios-app-native/Sources/NativeMoviesForTheBlind.swift",
+        "ios-app-native/Sources/NativeRaiPlaySoundScreen.swift",
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45455489911",
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45406133567"
       ],
-      "validation": "Pantalla nativa y 16 fuentes, dos colecciones FOAL y filtros, además de biblioteca personal local: importar audio/vídeo desde Archivos, reproducir, pausar, saltar 30 segundos, guardar/recuperar posición y eliminar. Localizado a seis idiomas. PENDIENTE catálogo de obras Audesc España/Latino, permisos de acceso, reproducción remota autorizada, validación VoiceOver y pruebas reales. BLOQUE 7 (23-11-2026): los vídeos personales MP4/M4V/MOV muestran AVPlayerLayer con motor AVPlayer compartido y controles SwiftUI accesibles únicos, sin duplicar elementos en VoiceOver; pausa/cierre guardan segundos exactos, incluidos decimales, conservando consolidación periódica de 5 s; si AVPlayerItem falla se anuncia error y se deja de simular reproducción. Filtros de idioma, tipo e importación persistidos con AppStorage. El enlace de Audiocinemateca abre el catálogo oficial bajo autenticación; no se consumen catálogos firmados o credenciales sin acuerdo. Las 48 descripciones dinámicas del directorio y las colecciones se traducen a los otros cinco idiomas y participan en búsqueda localizada. Contratos GitHub Actions 45274069215 SUCCESS, compilación para simulador todavía pendiente al actualizar inventario. Falta catálogo de títulos Audesc España/Latino con metadatos/autorización, reglas de acceso de Audiocinemateca, prueba física con VoiceOver y reproducción de formatos. ESTADO PARCIAL; sin distribución. CRITERIO EDITORIAL POSTERIOR (23-11-2026): se excluyen del directorio principal las portadas generalistas RTVE Play, NFB, PBS, ITVX, Channel 4, 5, ABC iview, Tubi y Pluto TV; sus referencias permanecen documentadas para fichas verificadas o territorios compatibles. Nueve accesos seleccionados: Audesc España, Audesc Latino, FOAL, Audiocinemateca, AMI-tv/AMI+ (inglés), AMI-télé (francés), ARD sección AD (alemán), ARTE colección AD francés, ARTE colección AD alemán. Se conservan etiquetas de limitación territorial y el bloqueo de catálogos remotos sin acuerdo; no se presenta una televisión generalista como exclusivamente audiodescrita. Cinco idiomas traducidos para nuevos nombres y descripciones. Contratos de ejecución 45278256276 SUCCESS; Xcode todavía no confirmado al registrar. Requisito 22 PARCIAL, sin despliegue. 24-11-2026: FOAL retirado por confirmación del usuario de que ambas carpetas están vacías. Ocho fuentes restantes, únicamente Audesc España y Latino por Google Drive. Clave configurada; diagnóstico anónimo y Range pendiente de resultado."
+      "validation": "24-11-2026: pantalla nativa, biblioteca personal audio/vídeo, filtros de idioma y tipo; integraciones españolas completadas a nivel de desarrollo conforme al registro de trabajo, Audiocinemateca con prueba autenticada y Range HTTP 206 (ejecución 45406133567). Directorio internacional ampliado, Movies for the Blind con agrupación completa de partes, RaiPlay Sound con colecciones oficiales, buscadores de títulos en inglés y francés separados de la reproducción. Dieciséis solicitudes de colaboración enviadas; dos acuses automáticos. Ejecución 477: contratos y compilación de simulador correctos. Parcial: comprobar enlaces, catálogo real y reproducción de fuentes internacionales, integración nativa autorizada donde proceda y pruebas físicas. No distribución."
     },
     {
       "id": 23,
@@ -351,25 +355,27 @@
     {
       "id": 26,
       "title": "TifloLector: los gestos sobre Reproducir solo navegan cuando está sonando",
-      "status": "partial",
+      "status": "implemented",
       "issue": "#363",
       "evidence": [
         "ios-app-native/Sources/NativeTifloLector.swift",
         "ios-app-native/tests/reader-folder-delete-media-current-20261123.test.mjs",
-        "https://github.com/TifloAcosta/tifloacosta-app/commit/8078e89a4017dd167ad4eca487a7dcbb09356515"
+        "https://github.com/TifloAcosta/tifloacosta-app/commit/8078e89a4017dd167ad4eca487a7dcbb09356515",
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45455489911"
       ],
-      "validation": "La acción ajustable de VoiceOver se protege mediante guard speech.isPlaying; con etiqueta Reproducir no cambia cursor. Código incorporado el 23-11-2026; falta ensayo de gestos reales con lector activo/en pausa, interrupciones y toque mágico en iPhone."
+      "validation": "La acción ajustable de VoiceOver se protege mediante guard speech.isPlaying; con etiqueta Reproducir no cambia cursor. Código incorporado el 23-11-2026; falta ensayo de gestos reales con lector activo/en pausa, interrupciones y toque mágico en iPhone. Conciliación 24-11-2026: La protección de la acción ajustable mediante guard speech.isPlaying está implementada; el contrato comprueba que ambos gestos navegan únicamente durante reproducción. Ejecución 477: contratos y compilación de simulador correctos. Prueba física pendiente como fase independiente."
     },
     {
       "id": 27,
       "title": "TifloLector: recordar de forma opcional la vista por carpetas",
-      "status": "partial",
+      "status": "implemented",
       "issue": "#363",
       "evidence": [
         "ios-app-native/Sources/NativeTifloLector.swift",
-        "ios-app-native/tests/reader-folder-delete-media-current-20261123.test.mjs"
+        "ios-app-native/tests/reader-folder-delete-media-current-20261123.test.mjs",
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45455489911"
       ],
-      "validation": "Nuevo selector persistente Vista al entrar: Vista general o Carpetas. Preferencia AppStorage y apertura automática de carpeta al entrar si está seleccionada; atajo reanudar último libro tiene prioridad. Falta verificar entrada/reentrada VoiceOver, creación de carpetas y cambios de pestaña en iPhone."
+      "validation": "Nuevo selector persistente Vista al entrar: Vista general o Carpetas. Preferencia AppStorage y apertura automática de carpeta al entrar si está seleccionada; atajo reanudar último libro tiene prioridad. Falta verificar entrada/reentrada VoiceOver, creación de carpetas y cambios de pestaña en iPhone. Conciliación 24-11-2026: Preferencia persistente de vista general/carpetas implementada, con prioridad del atajo de último libro; contrato específico comprobado. Ejecución 477: contratos y compilación de simulador correctos. Prueba física pendiente como fase independiente."
     },
     {
       "id": 28,
@@ -388,15 +394,16 @@
     {
       "id": 29,
       "title": "Actualidad: pódcast y vídeos usan sus reproductores integrados respectivos",
-      "status": "partial",
+      "status": "implemented",
       "issue": "#363",
       "evidence": [
         "ios-app-native/Sources/NativeMedia.swift",
         "ios-app-native/Sources/NativePodcasts.swift",
         "ios-app-native/Sources/NativeYouTubePlayer.swift",
-        "ios-app-native/tests/reader-folder-delete-media-current-20261123.test.mjs"
+        "ios-app-native/tests/reader-folder-delete-media-current-20261123.test.mjs",
+        "https://github.com/TifloAcosta/tifloacosta-app/actions/runs/45455489911"
       ],
-      "validation": "Auditoría del código 23-11-2026: NativeMediaPlayback.open enruta audio directo a NativePodcastPlayer y vídeo YouTube válido a NativeYouTubePlayerScreen con API IFrame oficial; ambos puntos de entrada de Actualidad usan este despachador. Se añade prueba de contrato de no-regresión. Es verificación estructural; pendiente comprobar audio y vídeo reales, VoiceOver, foco, cierre y fallback externo en dispositivo."
+      "validation": "Auditoría del código 23-11-2026: NativeMediaPlayback.open enruta audio directo a NativePodcastPlayer y vídeo YouTube válido a NativeYouTubePlayerScreen con API IFrame oficial; ambos puntos de entrada de Actualidad usan este despachador. Se añade prueba de contrato de no-regresión. Es verificación estructural; pendiente comprobar audio y vídeo reales, VoiceOver, foco, cierre y fallback externo en dispositivo. Conciliación 24-11-2026: Enrutamiento de audio directo al motor de Pódcast y vídeo YouTube al reproductor oficial integrado, desde ambos puntos de Actualidad; contrato específico comprobado. Fuentes sin URL multimedia compatible mantienen su alternativa externa. Ejecución 477: contratos y compilación de simulador correctos. Prueba física pendiente como fase independiente."
     }
   ],
   "operational": [

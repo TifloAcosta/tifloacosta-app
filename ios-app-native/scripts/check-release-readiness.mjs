@@ -9,12 +9,13 @@ if (manifest.version !== '1.7' || manifest.branch !== expectedBranch) {
   throw Error('La versión o rama del inventario no corresponde a la beta 1.7.');
 }
 const requirements = manifest.requirements;
-if (!Array.isArray(requirements) || requirements.length !== 22) {
-  throw Error('El inventario de la versión 1.7 no conserva los 22 requisitos obligatorios.');
+const mandatoryIDs = Array.from({ length: 29 }, (_, index) => index + 1).filter(id => id !== 21);
+if (!Array.isArray(requirements) || requirements.length < mandatoryIDs.length) {
+  throw Error('El inventario de la versión 1.7 no conserva todos los requisitos obligatorios.');
 }
 const ids = requirements.map(item => item.id);
-if (new Set(ids).size !== ids.length || !ids.includes(22) || !ids.includes(23) || ids.includes(21)) {
-  throw Error('El inventario de requisitos contiene identificadores repetidos o falta Multicines o la búsqueda de YouTube.');
+if (new Set(ids).size !== ids.length || mandatoryIDs.some(id => !ids.includes(id)) || ids.includes(21) || ids.some(id => !Number.isSafeInteger(id) || id < 1)) {
+  throw Error('El inventario contiene identificadores inválidos, repetidos o requisitos obligatorios ausentes.');
 }
 const incomplete = requirements.filter(item => item.status !== 'implemented');
 console.log('TifloAcosta iOS 1.7: ' + (requirements.length - incomplete.length)

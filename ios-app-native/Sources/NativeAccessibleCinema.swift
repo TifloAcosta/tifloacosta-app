@@ -183,8 +183,8 @@ struct NativeAccessibleCinemaScreen: View {
         ]
         return audiocinematecaResults.filter { item in
             (selectedKind == .all || item.category == categories[selectedKind]) &&
-            (selectedLanguage == .all || (selectedLanguage == .spain && item.languageCode == "0") ||
-             (selectedLanguage == .latino && item.languageCode == "1")) &&
+            (selectedLanguage == .all || (selectedLanguage == .spain && item.languageCode == "1") ||
+             (selectedLanguage == .latino && item.languageCode == "2")) &&
             [item.title, item.year, item.genre, item.synopsis].contains { $0.localizedStandardContains(query) }
         }.sorted { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
     }

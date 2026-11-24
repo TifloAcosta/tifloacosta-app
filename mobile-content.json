@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-24T10:58:44.462Z",
+  "generatedAt": "2026-11-24T21:15:10.187Z",
   "resources": [
     {
       "kind": "resource",
@@ -6245,23 +6245,6 @@
         "apps-accesibles",
         "tecnologia-accesibilidad",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "accessible-android-4ff0db36f595ad3f:en",
-      "sourceId": "accessible-android-4ff0db36f595ad3f",
-      "lang": "en",
-      "title": "AcessGallery",
-      "summary": "AcessGallery is a photo and video gallery built from the ground up for blind and low-vision people who use a screen reader. Instead of simply…",
-      "body": "Published 14 November 2026 by Marco Rafael\n\nAcessGallery is a photo and video gallery built from the ground up for blind and low-vision people who use a screen reader. Instead of simply announcing “Image” and a date, it uses AI to describe what is in your photos, narrate what happens in your videos, read text found in pictures, and answer your questions about any image.\n\nThe app also works as a complete gallery, with albums, a photos/videos filter, and support for Android’s “Open with” option. There are no ads and no account to create. The AI features use the Google Gemini API and can be enabled in two ways: with your own free API key, which is stored only on your device, or with the optional Facilitator plan, a monthly subscription for people who cannot or prefer not to create a key.\n\nFree or paid:\n\nAccessibility and User Comments:\n\nI am the developer of AcessGallery. The app was designed for screen reader users from the start and every screen was tested with TalkBack. All buttons and controls have descriptive labels, state changes—such as a description finishing or a filter being applied—are announced, and touch targets are large to make them easy to find and activate.\n\nWith TalkBack, you can move through your photos and videos with standard gestures, double-tap a photo, and then ask for a description, have its text read aloud, or ask a question about it.\n\nTo use the AI features, you can create a free Gemini API key in Google AI Studio and paste it into the app’s settings. Since this setup can be difficult for less experienced users, the Facilitator plan offers a simpler alternative: subscribe and the AI features work right away, with no key to create or configure.\n\nThe AI features require an internet connection, and images are sent for processing by Google’s Gemini service. Face detection runs entirely on the device.\n\nNo accessibility ratings yet. Be the first to rate this app.\n\nPlease use this rating only for accessibility. For feedback about the app’s features, price, overall quality, or your general experience, use the comments section below.\n\nPlease log in to rate this app’s accessibility.",
-      "sourceName": "Accessible Android",
-      "originalUrl": "https://accessibleandroid.com/app/acessgallery/",
-      "publishedAt": "2026-11-14T17:24:33.000Z",
-      "categories": [
-        "android",
-        "apps-accesibles",
-        "tecnologia-accesibilidad"
       ]
     }
   ]

@@ -100,6 +100,16 @@ private enum AccessibleCinemaDirectory {
               access: "Registro gratuito e inicio de sesión en el servicio original.",
               description: "Películas, series, documentales y cortos audiodescritos.",
               geographicNotice: "", isAudioOnly: true),
+        .init(id: "movies-for-the-blind", name: "Movies for the Blind",
+              languages: [.english], kinds: [.film],
+              address: URL(string: "https://moviesfortheblind.com/"),
+              access: "Colección oficial de audiodescripción.",
+              description: "", geographicNotice: "", isAudioOnly: true),
+        .init(id: "rai-play-sound", name: "RaiPlay Sound",
+              languages: [.italian], kinds: [.film, .series, .short],
+              address: URL(string: "https://www.raiplaysound.it/generi/audiodescrizioni-film-fiction-programmi-c31adf5d-25c7-459a-9081-66a669298a39.html"),
+              access: "Colección oficial de audiodescripción.",
+              description: "", geographicNotice: "Acceso sujeto a derechos territoriales.", isAudioOnly: true),
         // AMI is dedicated to described media rather than a general-purpose
         // television catalogue. Separate the English and French services so
         // language filters never send users to a mismatched homepage.

@@ -7,30 +7,33 @@ struct NativeMoviesForTheBlindWork: Identifiable {
     let title: String
     let parts: [NativePodcastEpisode]
     static func group(_ episodes: [NativePodcastEpisode]) -> [Self] {
-        var groups: [String: [(Int, NativePodcastEpisode)]] = [:]
+        var groups: [String: [(Int, Int, NativePodcastEpisode)]] = [:]
         var titles: [String: String] = [:]
         var seen = Set<String>()
-        let pattern = try! NSRegularExpression(pattern: #"(?i),?\s+part\s+(\d+)\s+of\s+\d+\s*$"#)
+        let pattern = try! NSRegularExpression(pattern: #"(?i),?\s+part\s+(\d+)\s+of\s+(\d+)\s*$"#)
         for episode in episodes where seen.insert(episode.id).inserted {
             var title = episode.title.replacingOccurrences(of: #"(?i)^episode\s+\d+\s*:\s*"#, with: "", options: .regularExpression)
             var number = 1
+            var total = 1
             if let match = pattern.firstMatch(in: title, range: NSRange(title.startIndex..., in: title)),
                let range = Range(match.range, in: title),
-               let part = Range(match.range(at: 1), in: title) {
-                number = Int(title[part]) ?? 1
+               let part = Range(match.range(at: 1), in: title),
+               let count = Range(match.range(at: 2), in: title) {
+                guard let n = Int(title[part]), let t = Int(title[count]), n > 0, t >= n, t <= 100 else { continue }
+                number = n
+                total = t
                 title = String(title[..<range.lowerBound])
             }
             title = title.trimmingCharacters(in: .whitespacesAndNewlines)
             guard !title.isEmpty else { continue }
             let key = title.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: Locale(identifier: "en_US"))
             titles[key] = title
-            groups[key, default: []].append((number, episode))
+            groups[key, default: []].append((number, total, episode))
         }
-        return groups.map { key, values in
-            Self(id: key, title: titles[key] ?? key, parts: values.sorted {
-                if $0.0 == $1.0 { return $0.1.id < $1.1.id }
-                return $0.0 < $1.0
-            }.map { $0.1 })
+        return groups.compactMap { key, values -> Self? in
+            guard let total = values.first?.1, values.allSatisfy({ $0.1 == total }),
+                  values.count == total, Set(values.map { $0.0 }) == Set(1...total) else { return nil }
+            return Self(id: key, title: titles[key] ?? key, parts: values.sorted { $0.0 < $1.0 }.map { $0.2 })
         }.sorted { $0.title.localizedStandardCompare($1.title) == .orderedAscending }
     }
 }

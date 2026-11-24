@@ -1,36 +1,189 @@
 [
   {
-    "id": "engadget-9ac5b582127138fb",
+    "id": "9to5mac-a5dd65d9d129fac6",
     "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2326288/openai-employee-recorded-meetings-allegedly-affiliated-saudi-government/",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5google.com/2026/11/24/gemini-history-ai-training/",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-24T09:24:09.000Z",
+    "publishedAt": "2026-11-24T21:11:31.000Z",
     "categories": [
-      "tecnologia-general"
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
     ],
     "editorialState": "source-only",
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "OpenAI employee who secretly recorded meetings allegedly affiliated with the Saudi government",
-        "summary": "The OpenAI employee who was charged for implanting a recording device uploaded files to Dropbox and took photos of confidential files, prosecutors say.",
-        "body": "He uploaded recordings to Dropbox and took photos of confidential documents, prosecutors say.\n\nAbdulrahman Alfozan, the OpenAI employee who was charged for hiding a recording device at OpenAI's headquarters, was allegedly \"in frequent communication with various people affiliated with the Saudi government.\" The prosecutors have submitted a filing to ask the court to deny Alfozan's request for bail, according to Bloomberg , arguing that he might try to go back to his native Saudi Arabia due to his weak ties to the United States. They accused him of having links with the Saudi government in that filing.\n\nProsecutors also said that the authorities found hundreds of audio files in Alfozan's computer, dozens of which were recordings of meetings and conversations that took place at OpenAI throughout September 2026. Many of those recordings involved \"what may be trade secrets,\" they said, and he uploaded some of them to Dropbox. Alfozan allegedly made AI-generated transcripts of the recordings, as well, categorizing them by date and renaming them based on their contents.\n\nAlfozan was arrested in October after the company's staff discovered a recording device behind a TV in an executive conference room. He was fired on the same day. In addition to the recordings, authorities also apparently found images in Alfozan's phone of a \"strategic partnership\" document marked \"confidential.\"\n\nThe former OpenAI employee denies he was stealing the company's trade secrets for Saudi and is asking the court to set a $1 million bond for him. Bloomberg says US District Judge Vince Chhabria is already doubting whether he should remain in custody without the evidence to support a more serious charge. Still, the court will hear his bond request today in San Francisco."
+        "title": "New Gemini setting lets you keep chat history, but turn off AI training [U]",
+        "summary": "Google is rolling out new privacy settings for the Gemini app that will let you “keep your history while independently controlling generative AI model training.” more…",
+        "body": "Google is rolling out new privacy settings for the Gemini app that will let you “keep your history while independently controlling generative AI model training.”\n\nUpdate 11/24 : This new setting is now widely rolling out. On gemini.google.com, tap the settings gear icon to find a new “Gemini History” item at the very bottom. This opens myactivity.google.com/product/gemini with an On/Off dropdown.\n\nUnder “Help train generative AI models with,” you’ll find the new “Chat content including text & attachments” setting. It’s enabled by default.\n\nYour future chats won’t be used to train generative AI models, unless you provide feedback.\n\nTraining on “Audio and Gemini Live videos & screenshares” remains an opt-in preference.\n\nOriginal 11/16 : Gemini’s existing Keep Activity setting “controls how long your chats are saved and whether they are used to train generative AI models.”\n\nGoogle is now separating that preference into two new options.\n\nThe first setting is called “History” and lets you “control how long your history is saved.” If disabled:\n\n“…future chats will be saved for around 2 months and used to respond to you, process your feedback, and protect Google, its users, and the public, with help from human reviewers.”\n\nThe duration is currently 24 hours for chat context, and 72 hours to help protect Google, users, and the public.\n\nThe second setting allows you to “separately control whether your chat content, including text and attachments, is used to train generative AI models.”\n\nWith this change, you will be able to keep your history while independently controlling generative AI model training.\n\nIf Keep Activity is currently off, the two “new settings will both be off.” These changes are rolling out over the “coming weeks,” and Google is notifying users via email."
       }
     },
     "media": null
   },
   {
-    "id": "engadget-5c37cacb9057cc05",
+    "id": "9to5mac-055eec646dc7ccec",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/24/walmart-drops-apple-pay-support-from-its-app-and-website/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-24T21:01:08.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Walmart drops Apple Pay support from its app and website",
+        "summary": "Walmart appears to have dropped support for Apple Pay on its website and in its iPhone app. This comes just a few weeks after the retailer finally added support for Apple’s payment platform to its app and website. 9to5Mac is sponsored by Sony : Score Sony’s INZONE noise-canceling earbuds for 38% off . These deliver immersive 360 Spatial Sound, active noise canceling, low-latency wireless connectivity, and much more. more…",
+        "body": "Walmart appears to have dropped support for Apple Pay on its website and in its iPhone app. This comes just a few weeks after the retailer finally added support for Apple’s payment platform to its app and website.\n\n9to5Mac is sponsored by Sony : Score Sony’s INZONE noise-canceling earbuds for 38% off . These deliver immersive 360 Spatial Sound, active noise canceling, low-latency wireless connectivity, and much more.\n\nAppleosophy spotted the change last week. There’s no indication whether the feature was removed deliberately or if this is some sort of bug.\n\nDavid Becker explains:\n\nIn the “Payment method” section of the checkout page on Walmart’s app and website, it no longer lists Apple Pay as an accepted payment method where it previously did. Not only that, but it doesn’t show up under the “Other ways to pay” or “More ways to pay” sections of the checkout page either.\n\nWalmart still accepts Apple Pay in its retail stores. The retailer began rolling out contactless payment support in August, including Apple Pay, Google Pay, contactless cards, and more. For years, Walmart refused to support Apple Pay, instead trying (and failing) to convince shoppers to use its own Walmart Pay platform.\n\nWe’ll update this post if Walmart comments on Apple Pay’s disappearance from its website and app. Hopefully, it’s a bug that the company fixes sooner rather than later.\n\nFollow Chance : Threads , X , and Instagram"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-890e90e88bb8a085",
     "type": "news",
     "sourceId": "engadget",
     "sourceName": "Engadget",
     "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2325316/honor-teams-up-with-cinema-camera-maker-arri-on-the-magic-9-pro-max/",
+    "originalUrl": "https://www.engadget.com/2321246/underrated-pixel-feature-more-versatile-realize-quick-tap/",
     "originalLanguage": "en",
-    "publishedAt": "2026-11-24T09:00:00.000Z",
+    "publishedAt": "2026-11-24T21:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "android"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "This underrated Pixel feature is more versatile than you realize",
+        "summary": "Google's Pixel phones have a very cool feature that will make your phone easier to use one-handed. Here's what it does.",
+        "body": "If you're not using this feature, you're missing out on a lot of convenience.\n\nIf you own a Pixel phone , you probably look forward to the new features that pop up after an Android OS update and Pixel Drop. The latest Android 17 QPR2 and the November 2026 Pixel Drop, for example, upgraded Pixel Search and added cool customizable icon designs, Transit Mode for train commuters, Pixel VIPs real-time location sharing and a new Status bar settings menu for all Pixel 6a and newer phones, plus expanded Gemini Intelligence , Extreme Charging Mode and other features for the Pixel 10 and 11.\n\nBut there's one old, reliable and underrated feature that you may have missed, and it's actually quite versatile and convenient. It's called Quick Tap, and it transforms the back of your Pixel phone into a customizable shortcut when you tap it twice. Quick Tap allows you to accomplish common tasks with just one hand and without scrolling through any menus.\n\nThe Quick Tap feature is available on all Pixel 4a (5G) and newer phones. To access it and to customize the settings, open the Settings app on your Pixel phone, then tap System > Gestures > Quick Tap to start actions.\n\nFrom there, you can then choose a built-in action for Quick Tap to perform when you double-tap the back of your phone. All of these actions are pretty convenient, but since Quick Tap only supports one action at a time, you should choose the one you're likely to use most.\n\nYou can assign Quick Tap to turn the flashlight on and off even when your phone is locked. Or set the feature to take a screenshot without having to hold the power and volume-down buttons at the same time. Quick Tap can also play or pause music, videos or podcasts using just about any of your favorite streaming apps with just a couple of taps. This is super convenient when you want to watch or listen to content while you're driving, cooking or working out, because you don't need to unlock the phone, navigate the apps and resume your media. Just double-tap the back of your Pixel.\n\nUse Quick Tap to wake up Gemini without having to talk to the phone. Or assign Quick Tap to easily show notifications without having to pull the notification shade down from the top of the screen; Quick Tap pulls it down for you. You can also use the feature to open the multiple app overview screen and switch between recently used apps without navigating. Quick Tap can also launch any app installed on your Pixel phone — you just need to assign which app you use most.\n\nOne thing to consider: Quick Tap works perfectly on a naked Pixel phone. However, if you have a protective case on your phone, you might need to try a few things to get it working as it should. If your Pixel phone case is super thick, finger tapping may not be enough to get it going. Lighter-weight cases, though, should allow you to activate Quick Tap without much effort.\n\nIf you're having trouble, there is an option within the Quick Tap settings called Require stronger taps, designed to prevent accidental triggering of an app when you put the phone down or slide it into your pocket. Make sure that's turned off and then test it out. Messing around with where you tap your phone can also help. If you have a magnetic accessory on the back of the phone, keep tapping around until you find the sweet spot. For the foldable Pixel 9 Pro Fold and Pixel 11 Pro Fold phones, you can tap the rear glass panel whether the phone is unfolded or closed to activate Quick Tap.\n\nQuick Tap can be paired with other apps and automation tools to get even more out of the feature. The Tap, Tap app can be used to supplement Quick Tap by providing support for both double-taps and triple-taps, so you can assign more than one action and choose from a wider range of over 50 available actions to assign. You could also connect Quick Tap to a free pop-up menu or folder app so the double-tap triggers a menu of your most-used apps or tools.\n\nYour Pixel phone is also loaded with built-in Gestures, which give you another way to access certain tools and features without having to unlock or swipe — or install another app like Tap, Tap. To find these, go to Settings > System > Gestures.\n\nLet's say you want to use your Quick Tap action to toggle the flashlight when you double-tap the phone, but you also want fast access to your camera or Google Wallet. You can do this by customizing your Gestures to open either the camera or Google Wallet by double-pressing the power button. You can also press and hold the power button to summon Gemini. Then there's the Flip to Shhh feature that automatically enables Do Not Disturb when you place your Pixel phone facedown, as well as a shortcut that lets you tap or lift your phone to check the time, notifications and other info.\n\nBetween Quick Tap and Gestures, your Pixel phone is versatile enough to let you simply tap or press your way through a bunch of actions to maximize convenience and one-handed operation. That makes day-to-day phone use much more convenient. Assign it to your smart home device app for quick controllability, or have it open Google Wallet to quickly pay when you're at the store, for example. Anyone who uses a phone knows it's a whole lot easier to tap the phone than to unlock it or swipe through apps... especially if you only have one hand available."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-c24be4c125e085b2",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/11/whats-going-on-with-the-riemann-hypothesis/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-24T20:34:53.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "What's going on with the Riemann hypothesis?",
+        "summary": "A new AI-assisted proof seems to be solid, but we're not sure what it tells us.",
+        "body": "Last week, news broke that a mathematician had used AI to help crack one of the biggest outstanding problems in math, a proof of the Riemann hypothesis . The news follows on several other major breakthroughs in math that have either been enabled by or managed entirely by Large Language Model-based systems, a development that has left the entire field of mathematics in a state of upset.\n\nIt's too early to say much about the proof itself—mathematicians are still in the process of digesting it. But we can say a little about how the proof came about, and what it tells us about the state of math.\n\nThe Riemann hypothesis dates from the mid-1800s and was formulated by (you will be surprised to learn) Bernhard Riemann. There's not an obvious way to describe the details of the actual hypothesis simply, but it has implications for the distribution of prime numbers. This gives it significance for areas ranging from number theory to cryptography. As Wikipedia accurately states, \"It is considered by pure mathematicians to be one of the most important problems in the field.\"\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-7b953176cc7863d3",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1041618/tiktok-down-outage",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-24T20:27:27.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple",
+      "android",
+      "apps-accesibles"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "TikTok was down",
+        "summary": "Earlier on Tuesday, TikTok experienced some issues, with videos, search results, favorites, and other features not loading as they usually do. Videos sometimes wouldn't load in the For You feed on my iPhone, and search results occasionally didn't show up as expected in the app on iOS or Android, or on the web. Even trying […]",
+        "body": "Earlier on Tuesday, TikTok experienced some issues, with videos, search results, favorites, and other features not loading as they usually do. Videos sometimes wouldn't load in the For You feed on my iPhone, and search results occasionally didn't show up as expected in the app on iOS or Android, or on the web. Even trying to pull up a profile would show a blank page, while links to videos are dead in the water too. However, as of 3:45PM ET or so, things appear to be working normally again.\n\nDowndetector showed around 25,000 reports of issues at around 2:56PM ET, and many people on social media were saying that TikTok was down for them .\n\n\"We …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "9to5mac-46003dad815a81a3",
+    "type": "news",
+    "sourceId": "9to5mac",
+    "sourceName": "9to5Mac",
+    "sourceUrl": "https://9to5mac.com/",
+    "originalUrl": "https://9to5mac.com/2026/11/24/anthropic-just-gave-claude-users-a-new-way-to-make-mac-apps/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-24T19:56:34.000Z",
+    "categories": [
+      "apple",
+      "tecnologia-general",
+      "windows",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Anthropic just gave Claude users a new way to make Mac apps",
+        "summary": "Use Claude on Mac or Windows? Anthropic just released a new way to make personalized desktop apps using AI tools. more…",
+        "body": "Use Claude on Mac or Windows? Anthropic just released a new way to make personalized desktop apps using AI tools.\n\n“Starting today, you can use Claude artifacts to create, run, and share desktop apps. The “Install as app” feature is rolling out in beta in Claude for Mac and Windows,” Anthropic says.\n\n“When an artifact is installed as a Mac or Windows app, it gets its own icon and opens in its own window instead of inside Claude. You can share it with others, and it needs your permission before it can interact with your computer. You choose how much to allow.”\n\nAdditionally, Anthropic says apps made with this method can benefit from Claude connectors. Claude usage is tied to desktop apps made with artifacts.\n\nThis form of Claude-created app is capable of sending notifications, adding items to the menu bar, and having its own permissions.\n\nYou can learn much more about the new system here . This is the second Claude update this week made specifically for builders .\n\nRelated Claude stories:\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-d3c1e0dfc0daf5d1",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2321242/chatgpt-biggest-limitations/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-24T19:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "The biggest limitations of ChatGPT",
+        "summary": "Here's why paying for a premium ChatGPT plan won't shield you from its biggest weaknesses, and what that means for trusting the chatbot with your work.",
+        "body": "From fabricated citations to forgotten instructions, ChatGPT still has some frustrating blind spots.\n\nIt's no secret that ChatGPT can write up emails, become your software troubleshooter and even dumb down complicated questions in an instant. But it's also pretty capable of making up responses so polished that you might not think to verify the shaky facts behind them. If only most of us had the confidence that ChatGPT has when it is hallucinating. Even after OpenAI brought its advanced GPT-6 model to all ChatGPT users in October 2026, the chatbot still has the tendency to fabricate supporting evidence, misread an ambiguous question and even forget instructions amid a lengthy conversation.\n\nSome shortcomings are tied to the model or version of it that you're using, along with any plugins you've added. And just because you're paying for ChatGPT Plus or the $100 ChatGPT Pro plan doesn't mean you're guarded against the chatbot's biggest limitations. To be fair, this isn't a problem unique to OpenAI, as most of these shortcomings are common in AI assistants we compared, like Claude .\n\nTopping the list of ChatGPT's biggest quirks is its bad habit of hallucinating, or crafting details that seem legitimate but are entirely made up. Packing all the confidence of a subject-matter expert, ChatGPT will cite studies that don't exist and make them almost believable with imaginary quotations too.\n\nOpenAI is quite upfront about this and warns that ChatGPT could invent quotes and cite fake sources. Using ChatGPT Search does make things better, but just because the response has some live links doesn't make the final statement correct. While an expert on the topic could probably catch the counterfeit sources upon closer inspection, this could be troublesome for someone looking for references in uncharted territory.\n\nThe chatbot tends to settle on its own interpretation of what you're asking of it and heads in the wrong direction with full conviction. Its habit of agreeing with almost everything you say is a real problem too. For instance, OpenAI rolled back a GPT-4o update in April 2025 after complaints that the chatbot was overly flattering and compliant, even validating problematic ideas at times. In October 2026, the company made certain alterations to GPT-6 for Free and Go users, along with the fallback model paid subscribers get after hitting their limits, to cut down on overly flattering language. The company didn't claim the problem had been eliminated entirely, though. After all, it's not much of a second opinion if the chatbot agrees with everything you have to say.\n\nChatGPT can also follow detailed instructions and acknowledge a mistake you've pointed out, only to ignore it a few prompts later. One user on OpenAI's community forum reported that ChatGPT reused earlier details in a report and presented them as verified, then repeated the mistake after admitting it.\n\nBut then, that's one person's experience and not exactly strong evidence of this being a problem across the board. That said, researchers found that the reliability of language models tends to go down as input length increases, even if the tasks aren't inherently complex. The researchers tested 18 different models, using older versions of OpenAI's GPT, Google's Gemini and Anthropic's Claude, so the findings may not be an accurate depiction of how GPT-6 performs. And just because you've fed your AI model an enormous amount of context doesn't guarantee it will make the most of it.\n\nIf you're working on a lengthy project across several days, being mindful of the changes requested and repeating the given instructions is part of the play. Sure, it can get frustrating that a tool that should be saving you time needs so much babysitting, but the alternative is far more time- and labor-intensive. OpenAI also acknowledges that ChatGPT's Memory feature doesn't retain every detail from every conversation anyway."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-5cd17c873e1310e0",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/tech/1041474/firefox-161-vpn-rules-fire-button",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-24T18:44:57.000Z",
     "categories": [
       "tecnologia-general"
     ],
@@ -38,9 +191,226 @@
     "featuredRank": null,
     "locales": {
       "en": {
-        "title": "Honor teams up with cinema camera-maker Arri on the Magic 9 Pro Max",
-        "summary": "Honor's Magic 9 Pro Max looks familiar, doesn't it?",
-        "body": "Once again, Honor wants to burnish its Hollywood bona fides.\n\nIf there's one thing to expect from the launch of a new Honor phone, it's an attempt to burnish its Hollywood bona fides. The advent of the new Magic 9 Pro Max is a chance for the Chinese giant to, as usual, tell the world about how it's once again redefined mobile cinematography . It's the first proper Honor flagship — and second only to the Robot Phone — to benefit from its partnership with Arri. If you're unfamiliar, the German giant makes the Alexa cinema camera , which has shot at least six films which went on to win an Academy Award for cinematography. If nothing else, if your Instagram reel doesn't at least garner a nomination, you know it's not the hardware's fault.\n\nThe Magic 9 Pro Max is the first Honor flagship to use the company's new industrial design first seen on its lower-end N series models. That includes a new camera plateau, albeit with a new color contrast back panel around the frame which puts me in mind of... something . Similarly, this is the first Honor flagship to get the Pro Max moniker, a suffix I don't think I've seen elsewhere in the rest of the mobile industry, but which sounds so cool that you think it might inspire copycats .\n\nNestled inside, you'll find a Snapdragon 8 Elite Extreme Gen 6 system-on-chip with either 12GB or 16GB RAM and the choice of 256GB, 512GB or 1TB storage. Up front, it's packing a 6.8-inch, 2,868 x 1,320 LTPO OLED display with a 1-120Hz refresh rate and 10,000 nits peak brightness. That's paired with an 8,000mAh battery which can support up to 100W wired or 80W wireless charging. Rounding out the useful specs are Wi-Fi 7, space for two SIM cards as well as an eSIM and a 55-megapixel front-facing camera.\n\nOf course, these are all just supporting players for the main event, the Arriflex-inspired triple camera system 'round back. It's equipped with a 200-megapixel, f/1.57 OIS primary lens and a 200-megapixel f/2.6 OIS telephoto, as well as a 50-megapixel f/2.0 ultra-wide camera. Of note is that Honor claims the primary lens has \"gimbal\" levels of optical stabilization to keep your shots as smooth as possible, no matter how you old it.\n\nTo make use of all those megapixels, Honor is launching its first dedicated imaging processor, the H1, and grabbed plenty of Arri's know-how. Honor says the Magic 9 Pro Max uses an end-to-end cinematic workflow, shooting high-end video in Arri LogC3 — the company's version of Log — as well as a series of Arri-created filters and color profiles you can apply to your footage. You'll have a pick of up to 87 Arri looks to apply to your footage, and you can even shoot in Cinema ratios like 2.39:1.\n\nTo further bolster its credentials in this arena, Honor is launching a series of accessories in partnership with SmallRig. Equip your phone with the SmallRig camera cage and you'll be able to attach it to either the Honor-branded Teleconverter G200 or the Teleconverter G500. They'll increase the phone's focal length by either 200mm or 500mm, enabling you to shoot distances you'd struggle to capture with AI-enhanced imaging.\n\nHonor's Magic 9 Pro Max is debuting in Malaysia, priced at RM 5,999 (approx $1,455) for the 12GB RAM / 512GB storage option. It'll arrive in the Middle East next month, and take its first bow in the West at some point in January."
+        "title": "Now Firefox can select which sites use its VPN, and clear your browsing history with one click",
+        "summary": "Mozilla released Firefox 161 on Tuesday with a new setting you can use to choose which pages automatically open with the browser's VPN active. Using the \"Manage VPN rules\" option in Firefox's VPN panel, you can set it to \"always on\" or \"always off\" for specific sites, so you don't have to toggle it manually […]",
+        "body": "Mozilla released Firefox 161 on Tuesday with a new setting you can use to choose which pages automatically open with the browser's VPN active. Using the \"Manage VPN rules\" option in Firefox's VPN panel, you can set it to \"always on\" or \"always off\" for specific sites, so you don't have to toggle it manually every time you visit certain pages.\n\nStarting Tuesday, Mozilla is also rolling out a \"Fire\" button in standard Firefox windows that lets you quickly clear your browsing data directly from the toolbar. You can choose which data it deletes, including browsing history, downloads history, cookie data, site data, temporary files, saved form in …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-2d72c38569a51157",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/24/uk-warns-ai-driven-cyberattacks-are-exposing-years-of-weak-security/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-24T18:02:59.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "UK warns AI-driven cyberattacks are exposing years of weak security",
+        "summary": "The British cyber agency says that \"building strong foundations has never mattered more\" as AI hacking tools rely on exploiting simple security flaws.",
+        "body": "The U.K. government’s cybersecurity unit says it has seen a “marked rise” in AI-driven cyberattacks in recent months, as hackers increasingly rely on autonomous hacking tools to identify and exploit simple weaknesses to break into systems and networks.\n\nThe U.K. National Cybersecurity Center (NCSC) said it has seen several cyber incidents since September involving autonomous hacking tools, such as penetration testing tools used by defenders to stress-test their cybersecurity defenses. These incidents have caused intrusions at organizations and resulted in downtime, the unit said in a blog post .\n\nThe NCSC says that while none of the vulnerabilities being exploited are new, the speed at which these AI tools are able to carry out simple hacks has changed.\n\nThe rise in AI-related cyberattacks coincides with the broader release earlier this year of open source autonomous penetration testing tools like Artex and Cairn, among others, which anyone can download and use at no cost. The U.S. Federal Bureau of Investigation recently warned that malicious hackers are using AI penetration testing tools to carry out cyberattacks at unprecedented speeds.\n\nWhile cyberattacks and intrusions are on the rise, the message from London is that many of these attacks are preventable with basic cybersecurity defenses and best practices.\n\n“Notably, the issues being exploited currently are not novel memory corruption vulnerabilities (or even known but unpatched vulnerabilities), but unmitigated weaknesses that are often the result of years of technical debt that organisations have accumulated,” the NCSC wrote.\n\nThe unit said that agentic hacking tools often look for exposed or internet-facing systems, then quickly run through lists of weak or easy-to-guess passwords or abuse API endpoints often used by developers to access data.\n\nThe NCSC said that AI “does not make established cyber security controls obsolete,” but rather that “building strong foundations has never mattered more.”\n\nThe unit added that AI has made it easier to find vulnerabilities and faster to exploit them, warning that weaknesses that have gone unnoticed for years can now be found in minutes."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "engadget-11c8759dab16efda",
+    "type": "news",
+    "sourceId": "engadget",
+    "sourceName": "Engadget",
+    "sourceUrl": "https://www.engadget.com/",
+    "originalUrl": "https://www.engadget.com/2324749/video-doorbell-winter-charging-tips/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-24T18:00:00.000Z",
+    "categories": [
+      "tecnologia-general"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Ways you can help your video doorbell stay charged in the winter",
+        "summary": "A dead doorbell battery could mean missed visitors or deliveries. Learn how to prepare your battery-powered video doorbell for the challenges of winter weather.",
+        "body": "Winter can be tough on battery-powered video doorbells, but a few adjustments may help yours cope when temperatures drop.\n\nWhile video doorbells aren't a necessity per se, it can be hard to imagine living without them once you own one. Knowing who's at the door saves you run-ins with unwanted salesmen. More seriously, they may help deter burglars — or help you catch an offender in the act if deterrence fails. Of course, your ability to capture that activity will depend in part on the distance at which your video doorbell stops detecting motion .\n\nAnother catch is that they're perpetually outdoors. That might not be such a big deal if you live somewhere warm like Miami or San Antonio. But in places with prolonged cold weather, battery life can suffer to the point that a video doorbell becomes more of a burden than an aid. It's inherent to the chemistry of lithium-ion technology, unfortunately.\n\nThe main way to alleviate this issue is by bringing your doorbell or its battery in from the cold. There may be other tactics you can employ, though, such as strategic positioning.\n\nThe critical point here is that an ideal charging range for lithium-ion batteries is between 50 and 86 degrees Fahrenheit (10 to 30 Celsius). When charging below the freezing point, there's a risk that metallic lithium will start plating onto electrodes, permanently reducing capacity. And even if the weather is slightly above freezing, charging will be less efficient than it could be. Cold-weather performance is one of the differences between sodium and lithium-ion batteries .\n\nBefore you charge a doorbell battery, make sure to let it warm up to room temperature first. This should not only preserve capacity but also help avoid cold-related charging delays. That's significant, considering that a Ring battery can take as long as 10 hours to top up. Let the battery charge fully before putting it back outside to maximize the time between recharges. If your doorbell has a removable battery, keeping a charged spare will minimize downtime. Some models in Ring's updated battery-powered doorbell lineup feature quick-release battery packs to make swaps easier.\n\nSome doorbells don't offer removable batteries, however. One example is the battery-powered Google Nest Doorbell. In that case, you'll need to become familiar with removing your doorbell and bringing it indoors. Be sure to time this properly. Since a recharge might take several hours, it's probably wise to charge overnight unless you're worried about security and don't have any other cameras covering the front of your home.\n\nIn climates with borderline winters — that is, where the temperature only occasionally dips below freezing — you may be able to extend battery life by aiming or sheltering your doorbell in just the right way. If you can block the wind, for example, or maximize sunlight, your doorbell will naturally run warmer than it might otherwise.\n\nA vital point here is that in extreme cold, it's possible for a doorbell to stop functioning for the duration. Anker, Ring, Google and others all agree on a minimum operating temperature of -4 degrees Fahrenheit (-20 Celsius). Between that and the freezing point, devices may still refuse to charge in order to prevent the plating we mentioned earlier.\n\nHonestly, then, the best choice if you live in a frostbitten region may be to switch to a wired doorbell, as long as you can find one compatible with your home's design. While wired doorbells may still encounter problems around the -4 degrees Fahrenheit mark, they're otherwise immune to the cold, since they draw on the same electricity as the rest of your house."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-4f8515159ed3df71",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/24/threads-comes-to-ipad-and-takes-a-page-from-xs-playbook-with-cashtags/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-24T17:44:34.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apple"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Threads comes to iPad and takes a page from X’s playbook with cashtags",
+        "summary": "The addition of live stock quotes and charts could help Threads attract the financial community that has historically relied on X.",
+        "body": "It may have taken 15 years for Instagram to launch on the iPad , but Instagram’s other app, Threads, has taken a slightly faster path to the Apple tablet. In an overnight update, the company rolled out a big-screen version of the X competitor. It’s also added another new feature, borrowed from X: the stock-tracking feature known as cashtags.\n\nWhile the iPad version of the app works well in portrait orientation, some users are disappointed to find that the landscape layout doesn’t work as they’d expect. Instead of offering a multi-column interface as on Threads’ web app, the iPad app focuses on the user’s main feed in a single-column layout. There are also options to swipe right and left from the main screen to access the search screen and the feeds menu, respectively.\n\nThe iPad app isn’t the company’s only update in the latest release. According to a post from Threads engineer Guy Dickinson , Threads will now support cashtags — a feature popularized by Twitter years ago for tracking live stock information. These specialized tags start with the dollar sign (“$”) followed by a ticker symbol. When you click on a cashtag, you can follow the discussions around the stock.\n\nIn addition, Threads is adding live stock quotes, charts, and other context at the top of each cashtag’s page. As you search for a particular cashtag, the autocomplete search results will display the stock’s current price and the percentage it’s up or down. Dickinson says the feature will currently support NYSE and Nasdaq stocks, ETFs, and crypto. Cashtags will be supported on the web, iOS, and Android. However, they’re just now rolling out, so you may not immediately see them.\n\nThe update points to Threads’ broader ambition to compete with X, not only as a destination for discussions about various topics, but also as a place where people can track real-time news and information. Cashtags in particular could attract traders and investors to Threads who typically rely on X.\n\nDespite facing stiff competition from X, Meta announced earlier this year that Threads topped 500 million monthly users , and Meta CEO Mark Zuckerberg says the company believes the app is on track to reach a billion users over time ."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-fdc2703d92d98071",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/ai/2026/11/tidal-will-ban-fully-ai-generated-music-on-december-9/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-24T17:34:34.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Tidal announces ban on AI-generated music; 27 million tracks will be deleted",
+        "summary": "AI songs account for 6.3 percent of Tidal's catalog, but it's about to be zero.",
+        "body": "Most streaming music providers have opted to label AI-generated content on their platforms, and until now, Tidal was one of them. However, the company is about to take a harder stance. Tidal announced that in the coming weeks, it will fully ban AI music because of the harm it does to human artists.\n\nTidal debuted its initial AI policy in July 2026, which included labeling and demonetizing all songs created entirely with AI. That wasn't enough to stem the tide of AI slop, though. Over the past 90 days, Tidal reports that 43 percent of new uploads were completely AI-generated. On November 6, new uploads to Tidal hit a whopping 60 percent AI-generated.\n\nAs things stand, Tidal hosts 27 million tracks labeled as AI, all of which were obviously added in the past couple of years. That accounts for 6.3 percent of Tidal's total catalog. On December 9, Tidal will delete all those songs. The streamer notes this will have essentially no negative impact, because 96 percent of AI-labeled tracks got zero plays in the past 90 days. Throughout its announcement, Tidal is careful to stipulate that it's only talking about music that has been fully created by AI. Artists can still use AI tools as long as the final product contains human elements.\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "the-verge-bbf1b5e75776086f",
+    "type": "news",
+    "sourceId": "the-verge",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/",
+    "originalUrl": "https://www.theverge.com/entertainment/1041362/tidal-ai-music-ban",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-24T17:17:09.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Tidal will start banning AI-generated music next month",
+        "summary": "Tidal is officially banning AI-generated music on December 9th. As a result of this change, Tidal will delete around 29 million AI-generated songs and reject an estimated 80,000 to 85,000 tracks per day, according to Tidal music lead Robert Andersen. The move comes just months after Tidal began labeling and demonetizing tracks identified as 100 […]",
+        "body": "Tidal is officially banning AI-generated music on December 9th. As a result of this change, Tidal will delete around 29 million AI-generated songs and reject an estimated 80,000 to 85,000 tracks per day, according to Tidal music lead Robert Andersen .\n\nThe move comes just months after Tidal began labeling and demonetizing tracks identified as 100 percent AI-generated. In a post on X, Andersen says Tidal needed to take a more \"drastic\" measure, as AI music made up 43 percent of the tracks distributed to the platform in the last 90 days. \"We believe this will resonate with both artists and listeners alike, as 96% of all AI-generated songs recei …\n\nRead the full story at The Verge."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "techcrunch-644ed0151d95f999",
+    "type": "news",
+    "sourceId": "techcrunch",
+    "sourceName": "TechCrunch",
+    "sourceUrl": "https://techcrunch.com/",
+    "originalUrl": "https://techcrunch.com/2026/11/24/meta-brings-its-muse-ai-assistant-directly-into-instagram-dms/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-24T17:00:00.000Z",
+    "categories": [
+      "tecnologia-general",
+      "apps-accesibles",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Meta brings its Muse AI assistant directly into Instagram DMs",
+        "summary": "The new integration gets rid of the need for users to toggle between Instagram and the Muse app when they want to interact with the AI agent.",
+        "body": "Instagram users can now chat with Meta’s AI agent Muse in a DM thread, the company announced on Tuesday. The social media network says users can chat with Muse to get more context about a post, place, or product they come across, or catch up on conversations they may have missed in their other DMs.\n\nThe new integration gets rid of the need for users to toggle between Instagram and the Muse app when they want to interact with the AI agent. It also reflects the growing competition among tech companies to make AI assistants a part of users’ everyday digital lives. By embedding Muse directly into Instagram, Meta is making it easier for users to access the AI agent, while also giving Muse access to a platform where users already discover products, places, and content.\n\nUsers can share Instagram posts with Muse and ask it to take action, such as adding a coffee shop to their Mexico City itinerary or finding a Black Friday deal on a pair of shoes.\n\nMeta notes that conversations with Muse on Instagram will appear as a side chat in the main Muse app.\n\nMuse in Instagram DMs will begin rolling out on Tuesday for iOS and Android users in the U.S., Canada, Mexico, Japan, and Singapore.\n\nMeta also announced that users can now do more with the posts and reels they’ve bookmarked on Instagram. For example, they can ask Muse to organize their saved content into custom folders, known as Collections. They could also ask Muse to turn a recipe video into a grocery list, turn the travel content from their favorite travel creators into an itinerary for an upcoming trip, or have Muse send them outfit ideas based on fashion reels they’ve collected.\n\nStarting Tuesday, when users save a post on Instagram, they will see a prompt for Muse to organize it for them. This feature is launching in the U.S. and Canada.\n\nMeta says that users remain in control of their Muse experience on Instagram. Nothing is shared, published, or sent without their approval, and they can ask Muse to forget information or undo actions at any time."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "applevis-apps-99e61b4a750227ba",
+    "type": "news",
+    "sourceId": "applevis-apps",
+    "sourceName": "AppleVis Apps",
+    "sourceUrl": "https://www.applevis.com/",
+    "originalUrl": "https://www.applevis.com/apps/ios/games/pikomofu",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-24T15:18:03.000Z",
+    "categories": [
+      "apple",
+      "apps-accesibles",
+      "android"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Pikomofu",
+        "summary": "The leaves in the garden are falling one by one, and the evenings come early now. One pet is free, with no ads. Buy the Pass once, keep it forever. For everyone who loves dogs and cats. A tiny pixel dog or cat lives in a little garden on your iPhone. The sky follows the real time of day and the seasons, and your pet spends its days at its own gentle pace. I love animals more than anything, and I made this calming little app with all my heart, for everyone who loves them too. If you have ever lived with a dog or a cat, you will catch small moments that make you smile and say \"they really do that!\" I won't explain them. Please just give it a try, and find them yourself. - One pet is free. No ads, no subscriptions. - New friends and accessories will keep coming, always free. - Pikomofu Pass, a one-time purchase, adds Apple Watch, widgets and up to 5 pets.",
+        "body": "The leaves in the garden are falling one by one, and the evenings come early now. One pet is free, with no ads. Buy the Pass once, keep it forever. For everyone who loves dogs and cats. A tiny pixel dog or cat lives in a little garden on your iPhone. The sky follows the real time of day and the seasons, and your pet spends its days at its own gentle pace. I love animals more than anything, and I made this calming little app with all my heart, for everyone who loves them too. If you have ever lived with a dog or a cat, you will catch small moments that make you smile and say \"they really do that!\" I won't explain them. Please just give it a try, and find them yourself. - One pet is free. No ads, no subscriptions. - New friends and accessories will keep coming, always free. - Pikomofu Pass, a one-time purchase, adds Apple Watch, widgets and up to 5 pets."
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "ars-technica-9dc5af9d3e0c1f4d",
+    "type": "news",
+    "sourceId": "ars-technica",
+    "sourceName": "Ars Technica",
+    "sourceUrl": "https://arstechnica.com/",
+    "originalUrl": "https://arstechnica.com/security/2026/11/amazon-says-hackers-ai-agents-found-and-exploited-0-day-with-little-human-input/",
+    "originalLanguage": "en",
+    "publishedAt": "2026-11-24T12:30:05.000Z",
+    "categories": [
+      "tecnologia-general",
+      "ia-accesibilidad"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "en": {
+        "title": "Amazon says hackers' AI agents found and exploited 0-day with little human input",
+        "summary": "The Cairn AI framework is proving to be a boon for defenders and attackers.",
+        "body": "Amazon said AI agents recently found and exploited a zero-day vulnerability with no human oversight beyond a simple instruction to get root access on an East Asian university server.\n\nThe agents were running on Cairn, an open source AI penetration-testing framework. The hackers, who provided prompts in simplified Chinese and configured the model to the Chinese Standard Time zone, gave the agents a list of IP addresses and the goal: “obtain shell access.” In short order, the agents discovered a zero-day in an open source medical imaging AI application running on one of the target servers. The agents then exploited the vulnerability and gained full control of the system.\n\n“These findings show that agentic offensive operations are already happening, and defenders should prepare for the speed and persistence these tools enable,” Amazon said .\n\nRead full article\n\nComments"
+      }
+    },
+    "media": null
+  },
+  {
+    "id": "conticgo-c3ab6cc567451d0c",
+    "type": "news",
+    "sourceId": "conticgo",
+    "sourceName": "Conticgo",
+    "sourceUrl": "https://conticgo.net/",
+    "originalUrl": "https://conticgo.net/gafas-retiplus-2-que-son-y-como-ayudan-en-la-baja-vision/",
+    "originalLanguage": "es",
+    "publishedAt": "2026-11-24T11:20:50.000Z",
+    "categories": [
+      "tecnologia-accesibilidad",
+      "gafas-inteligentes"
+    ],
+    "editorialState": "source-only",
+    "featuredRank": null,
+    "locales": {
+      "es": {
+        "title": "Gafas Retiplus 2: qué son y cómo ayudan en la baja visión",
+        "summary": "Retiplus 2 son unas gafas inteligentes de realidad aumentada pensadas para personas con baja visión. Quien las usa se pone estas gafas en la cabeza, lleva las manos libres y ve la imagen mejorada a través de sus lentes transparentes. Durante años, las lupas electrónicas obligaban a elegir entre ver con detalle o caminar con […] La entrada Gafas Retiplus 2: qué son y cómo ayudan en la baja visión se publicó primero en Conticgo .",
+        "body": "Retiplus 2 son unas gafas inteligentes de realidad aumentada pensadas para personas con baja visión. Quien las usa se pone estas gafas en la cabeza, lleva las manos libres y ve la imagen mejorada a través de sus lentes transparentes.\n\nDurante años, las lupas electrónicas obligaban a elegir entre ver con detalle o caminar con seguridad. Hoy, estas gafas permiten aprovechar el resto visual útil en tiempo real sin quedar aislado del entorno.\n\nRetiplus 2 es un sistema español de gafas inteligentes creado junto a oftalmólogos y optometristas. A diferencia de los visores cerrados de realidad virtual, estas gafas son ligeras y transparentes.\n\nEl equipo se compone de unas gafas con cámara integrada, lentes transparentes y un pequeño mando de control que va conectado por cable y se lleva en el bolsillo. Su función no es solo ampliar lo que miras, sino adaptar la imagen a la zona sana de cada retina .\n\nAsí se reduce el cansancio visual y se evitan mareos al caminar por la calle o por sitios nuevos.\n\nCada patología ocular daña una parte distinta del campo visual. Por eso, estas gafas se ajustan a medida para distintos perfiles:\n\nDMAE y enfermedad de Stargardt (pérdida de visión central): Las gafas desplazan la imagen frontal hacia la zona sana de la retina que sigue funcionando. Así rodean la mancha ciega central.\n\nGlaucoma avanzado y retinosis pigmentaria (visión en túnel): El sistema reúne una escena amplia dentro del ángulo central que conserva la persona. De este modo, resulta más fácil notar escalones, puertas o gente a los lados sin mover la cabeza sin parar.\n\nRetinopatía diabética: Mejoran el contraste y marcan los bordes de los objetos. Esto ayuda a distinguir cosas sobre fondos complejos, como un vaso transparente sobre un mantel claro.\n\nLlevar estas gafas de realidad aumentada en el día a día aporta ventajas claras frente a otras ayudas ópticas:\n\nVes a la vez lo real y la ayuda digital: Al mirar por lentes transparentes, mantienes tu noción del espacio y recibes apoyo visual encima.\n\nManos libres fuera de casa: Puedes caminar, comprar, mirar carteles o reconocer caras a media distancia sin sujetar lupas.\n\nModos listos para cada momento: El especialista guarda ajustes para leer, andar por casa, salir a la calle o ver la tele, y cambias entre ellos con un botón.\n\nAunque los resultados clínicos son favorables, usar las gafas Retiplus 2 exige un proceso guiado:\n\nHace falta resto visual: No sirven si hay ceguera total. La persona debe conservar algo de visión útil para entender lo que muestran las lentes.\n\nAjuste en óptica o clínica: Un óptico-optometrista de baja visión debe revisar tu campo visual y configurar las gafas para ti.\n\nTiempo de adaptación: El cerebro suele necesitar entre dos y seis semanas de práctica para acostumbrarse a ver la imagen ajustada mientras te mueves.\n\nSi quieres ver otras gafas parecidas dentro de esta categoría, estas dos opciones son habituales en baja visión:\n\nGafas eSight Go: Llevan pantallas internas de alta definición con hasta 24 aumentos y enfoque rápido, pensadas sobre todo para ver la tele, pantallas o pizarras sin perder la visión de abajo y los lados para andar.\n\nGafas Oxsight Onyx: Están orientadas a quienes han perdido visión lateral. Resaltan contornos de personas y obstáculos con colores vivos dentro de la zona central útil.\n\nLas gafas Retiplus 2 acercan la realidad aumentada a la vida diaria de quienes tienen baja visión. Al ajustarse a la vista de cada persona, ayudan a moverse con más seguridad y a mantener la autonomía dentro y fuera de casa."
       }
     },
     "media": null
@@ -71,222 +441,6 @@
     "media": null
   },
   {
-    "id": "9to5mac-c94e71e727842e04",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/23/these-are-my-two-must-have-iphone-duo-accessories/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-24T01:30:09.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "These are my two must-have iPhone Duo accessories",
-        "summary": "If you’re an iPhone Duo user, two must-have Apple accessories are at all-time low prices today. These are great additions to any iPhone Duo setup: Apple Pencil (USB-C) $49 (Reg. $79) Apple 40W Dynamic Power Adapter with 60W Max $29 (Reg. $39) more…",
-        "body": "If you’re an iPhone Duo user, two must-have Apple accessories are at all-time low prices today. These are great additions to any iPhone Duo setup:\n\nI’ve been using an Apple Pencil with my iPhone Duo since iOS 27.2 added support. It’s a great way to interact with the foldable iPhone form factor. In particular, I’m using it a lot with Marco Arment’s new app Fineliner , which is a delightful new note-taking app. I won’t spoil it, but Fineliner has the most enjoyable setup process of any app I’ve tried in a long time.\n\nMeanwhile, Apple’s 40W Dynamic Power Adapter with 60W Max allows you to fast-charge the iPhone Duo. It features foldable prongs so it fits right in your backpack. I have a couple of these now that I keep around for my iPhone Duo and other Apple gear. For iPhone Duo specifically, you can get up to 50 percent battery in around 20 minutes.\n\nIt’s designed to dynamically deliver up to 60W of output. “With Dynamic Power, you get many of the same benefits of higher-wattage chargers in a compact, pocket-size form factor to make charging at home, in the office, or on the go faster and more convenient than ever,” Apple explains.\n\nFor more iPhone Duo accessory recommendations, check out Ryan’s full post .\n\nMore Black Friday Apple deals:\n\nFollow Chance : Threads , X , and Instagram"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "engadget-84990e9ac0fcb5fb",
-    "type": "news",
-    "sourceId": "engadget",
-    "sourceName": "Engadget",
-    "sourceUrl": "https://www.engadget.com/",
-    "originalUrl": "https://www.engadget.com/2320620/dism-commands-for-windows-system-image-repair/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-24T01:30:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "windows"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "The three DISM commands you should know to fix your Windows system images",
-        "summary": "Check and repair damaged system files with these DISM commands.",
-        "body": "Check and repair damaged system files with these DISM commands.\n\nYour Windows installation depends on a collection of important system files to run applications, install updates and perform everyday computing tasks. If these files get damaged or go missing, your system may behave erratically. You may encounter system errors, features not working as expected, freezes or other unexpected behavior. Sometimes restarting your computer or running the usual troubleshooting steps aren't enough to restore damaged system files. For such cases, Windows provides a built-in repair utility called Deployment Image Servicing and Management (DISM).\n\nDISM is a command line tool that can scan Windows system images for corrupt system files and attempt repairs. Particularly, there are three useful DISM commands that achieve this purpose: CheckHealth , ScanHealth and RestoreHealth . You can run DISM commands in either the command prompt or the PowerShell, but both CLIs require administrator privileges to make system-level changes. It's worth noting that DISM exclusively scans and repairs system files; your personal files remain untouched.\n\nAll three DISM commands in question follow a specific syntax that begins with DISM /Online /Cleanup-Image . The parts following \"DISM\" in the syntax are called command-line options. The / Online CLI option specifies DISM to take action on the currently running Windows installation, while / Cleanup-Image performs recovery operations on the selected installation.\n\nThe first command is DISM /Online /Cleanup-Image /CheckHealth . It checks whether Windows has already flagged corrupt system files and whether the corruption is repairable. This is the first recommended step when investigating corrupt system files as it takes very little time to complete.\n\nThe next command is DISM /Online /Cleanup-Image /ScanHealth and it works slightly differently from the CheckHealth command. Unlike CheckHealth , the ScanHealth DISM command performs a fresh scan of your system files and reports any its findings. The ScanHealth operation may take several minutes to complete, but it provides you with a fresh report on the component store's health.\n\nFinally, the DISM /Online /Cleanup-Image /RestoreHealth command both scans the component store for corruption and attempts to repair them automatically. By default, RestoreHealth uses Windows Update to obtain the necessary system files needed to repair the component store. The Windows component store is a protected internal repository that contains important system files. Windows requires these files to service, update and customize the operating system .\n\nSometimes system file damage can also break Windows Update, preventing DISM from downloading replacement files. When this happens, you can use an official Windows installation media to supply DISM with the necessary repair files. You can download a Windows ISO from Microsoft's official download page . Once downloaded, right click the ISO file and select mount. Windows will create a virtual drive for the ISO, assign it a drive letter and make its contents available.\n\nNext, you'll need to check the Windows editions available in the downloaded installation media. You can do that by launching the command prompt as an administrator and running the DISM /Get-ImageInfo /ImageFile:D:sourcesinstall.wim command. This command lists the Windows editions available on the installation media along with their index numbers. Make a note of the index number corresponding to your installed edition before proceeding to the next step.\n\nNow, run the DISM /Online /Cleanup-Image /RestoreHealth /Source:WIM:D:sourcesinstall.wim:6 /LimitAccess command. Replace D: with the drive letter assigned to the mounted Windows ISO and 6 with the index number corresponding to your Windows edition. This directs DISM to use the installation media as its repair source instead of downloading files from Windows Update.\n\nOnce DISM completes its operation, run the sfc /scannow command to repair damaged or missing system files. Microsoft recommends running the DISM repair utility before System File Checker (SFC) because DISM repairs the Windows component store, which SFC relies on to replace corrupted system files."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-36a3e3825cbf83c8",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/23/apple-pay-is-getting-even-better-with-four-new-features/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-24T00:31:59.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general",
-      "apps-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Apple Pay just got even better with four new features and more",
-        "summary": "Apple Pay is a go-to feature for iPhone users when shopping in stores, online, and in apps. Apple recently announced four new features that make Apple Pay even better. Here’s how they work, plus one major expansion that’s rolling out now. 9to5Mac is sponsored by Sony : Score Sony’s INZONE noise-canceling earbuds for 38% off . These deliver immersive 360 Spatial Sound, active noise canceling, low-latency wireless connectivity, and much more. more…",
-        "body": "Apple Pay is a go-to feature for iPhone users when shopping in stores, online, and in apps. Apple recently announced four new features that make Apple Pay even better. Here’s how they work, plus one major expansion that’s rolling out now.\n\n9to5Mac is sponsored by Sony : Score Sony’s INZONE noise-canceling earbuds for 38% off . These deliver immersive 360 Spatial Sound, active noise canceling, low-latency wireless connectivity, and much more.\n\nOne of my favorite changes in iOS 27 is the redesigned Apple Pay checkout interface . The new interface makes it much easier to switch between different cards during the checkout flow on websites and in apps.\n\nIn the new design, you can easily swipe between cards on the main Apple Pay checkout screen. You can also tap on a card to view a grid of all your available Apple Pay cards.\n\nThe design also makes it easier to see information about individual cards, including rewards, balances, pay later options, and more.\n\niOS 27 was released to everyone last week. You can update in the Settings app on your iPhone.\n\nApple and American Express recently announced a new partnership that lets you pay with American Express rewards points.\n\nWhen shopping online or in apps with an American Express card, you’ll see a new “Use Rewards” option alongside your available Membership Rewards points balance. You can apply points to cover all or part of your purchase, right in the Apple Pay checkout flow.\n\nAmerican Express points redeemed via Apple Pay are valued at 0.7 cents each. For example, this means 10,000 points can be redeemed for $70 applied towards your purchase.\n\nIn iOS 27, Apple is adding a new “Tap to Share” feature that integrates with Apple Pay on iPhone for in-store shopping.\n\nThis feature is an extension of Tap to Pay on iPhone. Apple explains:\n\nWith just a tap, customers can connect to a participating merchant’s iPhone for a more personalized and faster in-store purchase experience that allows for secure sharing of information, such as email and other contact information, shipping address, loyalty rewards information, and more.\n\nCustomers will also be able to view the items in their basket in real time so they can keep track of what they’ve purchased and ensure all sales and discounts are properly applied.\n\nWhen done, shoppers can complete the checkout on their iPhone using Apple Pay.\n\niPhone users with select banks can manage their debit card balances directly in the Apple Pay interface. According to Apple, you’ll be able to use Apple Pay to add money to a supported debit card directly in Apple Wallet or when checking out.\n\nThis one isn’t really a new feature developed by Apple. Instead, it’s something that should’ve happened years ago finally coming to fruition. Walmart has announced that it is finally starting to roll out support for Apple Pay. Apple Pay is also rolling out to Sam’s Club as part of this initiative.\n\nAs of November, Walmart’s roll out of Apple Pay across the United States is complete.\n\nAs Apple Pay continues to increase in popularity and prevalence among retailers, it’s great to see Apple continue to improve the experience. Personally, Apple Pay is my checkout payment method of choice basically everywhere I shop — whether that’s online or in store.\n\nHow often do you use Apple Pay? What are your favorite Apple Pay features? Let us know down in the comments.\n\nFollow Chance : Threads , Bluesky , Instagram , and Mastodon ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "9to5mac-ebb15832548339da",
-    "type": "news",
-    "sourceId": "9to5mac",
-    "sourceName": "9to5Mac",
-    "sourceUrl": "https://9to5mac.com/",
-    "originalUrl": "https://9to5mac.com/2026/11/23/ios-27-2-just-upgraded-apple-photos-in-two-ways-heres-whats-new/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-24T00:19:18.000Z",
-    "categories": [
-      "apple",
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "iOS 27.2 upgraded Apple Photos in two ways, here’s what’s new",
-        "summary": "Apple Photos got a lot of new features in iOS 27, but the recent release of iOS 27.2 brought even more improvements. Here’s what’s new. more…",
-        "body": "Apple Photos got a lot of new features in iOS 27, but the recent release of iOS 27.2 brought even more improvements. Here’s what’s new.\n\nShared Albums are among my favorite features in the Photos app. I don’t post on social media often, but I love using Shared Albums because they provide a social media-style experience in a private way that lives right inside Photos.\n\niOS 27 brought a variety of big improvements to Shared Albums. And in iOS 27.2, Apple introduced four more.\n\nPer Apple’s release notes , here’s what’s new:\n\nTo get these new features, you’ll need to make sure your Shared Albums have been upgraded for iOS 27.\n\nOne complication introduced by AI is that it can be hard to know if an image is real or AI-generated.\n\nThis challenge extends to AI-edited photos too, which might have key details changed by tools like iOS 27’s Extend, Reframe, and Clean Up features in Photos.\n\nApple is tackling the issue with its new Reference Image feature in iPhone 18 Pro, and also through a software enhancement that rolled out in iOS 27.2.\n\nPer Apple , its latest software update adds the following:\n\nSupport for SynthID watermarking to help identify whether an image was generated or modified with generative tools in Photos and Image Playground\n\nSynthID is a cross-platform standard developed by Google that embeds unnoticeable digital watermarks into AI-modified photos. Users won’t see a visible watermark, but anyone who checks for a SynthID marker will find it.\n\nWhat do you think of the latest Apple Photos changes in iOS 27.2? Let us know in the comments."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-ea8828595801104a",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1041000/kagi-mail-email-google-gmail-alternative",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-24T00:02:52.000Z",
-    "categories": [
-      "tecnologia-general"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google alternative Kagi launches an email service",
-        "summary": "Kagi, which already offers a paid alternative to Google Search and its own Orion browser as a rival to Chrome, is taking on another Google service: Gmail. Today, Kagi announced a public beta of Kagi Mail, a new email service that has \"no surveillance, no ads, open standards, and no lock-in.\" With Kagi Mail, you […]",
-        "body": "Kagi, which already offers a paid alternative to Google Search and its own Orion browser as a rival to Chrome, is taking on another Google service: Gmail. Today, Kagi announced a public beta of Kagi Mail, a new email service that has \"no surveillance, no ads, open standards, and no lock-in.\"\n\nWith Kagi Mail, you get an @ kagimail.com address, but the service also supports unlimited aliases and domains. It also offers 50GB of storage and a built-in calendar. On the roadmap, you can expect contacts and an address book in Q1 2027, but native mobile apps aren't expected to arrive until Q3 2027.\n\n\"Does the world need another email service? We aske …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-783f3004d50b9d63",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/tech/1040872/ladybird-indie-browser-engine-alpha-testing",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-23T22:38:09.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apple"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Ladybird, the first new browser engine in years, is now available to test",
-        "summary": "Ladybird, an independent web browser with a built-from-scratch engine, is finally available for testing. On Monday, Ladybird developer Andreas Kling announced that the browser is launching in alpha on macOS and Linux following more than four years of development. The release makes Ladybird the first browser in years to arrive with an entirely new engine. […]",
-        "body": "Ladybird, an independent web browser with a built-from-scratch engine, is finally available for testing. On Monday, Ladybird developer Andreas Kling announced that the browser is launching in alpha on macOS and Linux following more than four years of development.\n\nThe release makes Ladybird the first browser in years to arrive with an entirely new engine. We've seen many engines emerge over time, but the most popular browsers use just three today: Gecko, Blink, and WebKit. While Gecko, now used in Mozilla Firefox, first appeared in Netscape 6 in 2000 , Apple's WebKit arrived in Safari in 2003 as a fork of KDE's KHTML. A decade later, the Goog …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-c0f02429d69a42b5",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/23/anthropic-launches-claude-ship-letting-ai-agents-review-fix-and-approve-code-changes/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-23T22:05:50.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Anthropic launches Claude Ship, letting AI agents review, fix, and approve code changes",
-        "summary": "As AI-generated code piles up, Anthropic's new developer tools aim to eliminate another bottleneck by letting agents handle routine approvals.",
-        "body": "Anthropic is moving from having Claude write code to helping developers decide when that code is ready to ship. On Monday, the newly public AI company announced the launch of Claude Ship , a suite of AI agents for automating code reviews, fixes, and approvals of routine code changes.\n\nThe latter is the more interesting part of this new set of tools, as AI coding tools already offered code review features before now. What’s notable about Claude Ship is not just that it can review proposed code changes and identify and address problems, but that it also includes an agent that can approve code changes automatically based on policies set by a development team.\n\nThe launch arrives at a time when AI coding agents have become increasingly capable of generating substantial amounts of code, leading to bottlenecks in reviewing and approving the code changes before they go live. With Claude Ship, the idea is to automate even more of the work involved in the development process, essentially by delegating approval authority to an AI agent itself.\n\n“Most teams want a person to approve every change, and that’s easy to keep up with when people write every line. But a lot of developers build with agents now,” a company blog post explains. “On the Claude Code team, Claude writes most of our code, and we wanted everything after the PR to move that fast too.”\n\nClaude Ship is launching in beta, allowing early adopters to use it to review pull requests (PRs), and then decide what’s ready to merge.\n\nThe new offering consists of Code Review, which is already generally available , and two new agents now in beta: PR Steward and Claude Approvals. PR Steward focuses on addressing issues such as failing CI checks, merge conflicts, and feedback from Code Review. It also comments after every push on what it changed and how to roll it back, if needed.\n\nClaude Approvals then applies an approval policy that the team writes as a file in the repository. This approval process can incorporate various signals, including Code Review findings or the company’s own classifiers, with policies written in natural language.\n\nBecause the offering is still in beta, Anthropic suggests running the approval functionality in observe-only mode first. Teams can also choose to start with just one repository and set monthly spending limits to have more control over the process.\n\nAnthropic says teams will also still remain in control of where Claude Ship runs, which review settings to use (e.g., Quick, Standard, or Deep), and which changes should be escalated to a human for a decision.\n\nClaude Ship is rolling out to Claude Team and Enterprise plans for repositories on GitHub. Code Review is generally available, while PR Steward and Claude Approvals are in beta."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "techcrunch-d3d04a1d0bc1668a",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/23/supertake-raises-20m-to-let-ai-agents-turn-your-market-predictions-into-stock-portfolios/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-23T22:02:05.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Supertake raises $20M to let AI agents turn your market predictions into stock portfolios",
-        "summary": "Think you know where the market is headed? A startup called Supertake lets you put money behind your ideas without having to pick the stocks yourself.",
-        "body": "AI investing startup Supertake has an interesting premise: What if your “takes” on the market could make you money without you having to pick stocks yourself? The service lets people turn their ideas into real investment portfolios, using frontier AI models and trading agents.\n\nNow, the company has raised $20 million in seed funding to grow its business. The round was led by venture firm Adjacent (Nico Wittenborn), with participation from Coinbase Ventures and Union Square Ventures (USV). Numerous angel investors also joined, including Nat Friedman , who’s currently head of product at Meta Superintelligence Labs; Vercel CEO Guillermo Rauch; renowned product manager Nikita Bier; investor Scott Belsky; and Nemil Dalal, a former Coinbase exec who is now a visiting partner at Y Combinator.\n\nMichael Mignano originally incubated the startup at USV. He is the co-founder and former CEO of the podcasting platform Anchor, which Spotify acquired in 2019 for over $150 million. After leading Spotify’s podcasting business as “Head of Talk” for a few years, he joined the team at Lightspeed as a venture partner, betting on AI companies like Suno and Granola. He also co-founded Oboe, an AI education startup, and joined USV as a general partner in April.\n\n“We really believed there was an opportunity to make investing more democratized…and give everyone and anyone the ability to invest in their own insights and beliefs and ideas,” Mignano said. While he will continue in his role as founder and executive chairman, he’s now brought in a team to run the company day to day.\n\nThe team includes co-founders Lincoln Murr (CEO) and John Peterson (CTO). Both joined from Coinbase, where, Mignano notes, they were the heads of AI product and engineering, leading launches like Coinbase advisor, Coinbase for agents, agentic wallets, and others.\n\nThe startup arrives as AI continues to make inroads into financial services, but allowing AI to take over people’s actual investments requires a new level of trust. Supertake is betting that people will ultimately be willing to take that leap, given recent improvements in frontier AI models.\n\nCurrently, Supertake works with Coinbase and Robinhood, and the company intends to expand to more brokerages over time. The idea is that you can explain, in broad, natural language, what you believe about how the world is going to change, and Supertake’s AI will iterate with you back and forth to turn that idea into a “take” that’s investable.\n\nUnder the hood, the startup is leveraging frontier AI technology and tools, combined with its own proprietary software that directs and limits what the AI can do.\n\nSupertake’s users’ ideas are tracked on a leaderboard on the site, so others who agree can invest alongside them. For instance, there’s currently an idea on the leaderboard about looksmaxxing and longevity becoming more of a trend, where the portfolio includes certain pharma and cosmetic companies that could potentially benefit.\n\nFor now, these portfolios consist of stock picks, but the team wants to expand the service over time to handle other types of transactions, like shorts, derivatives, perpetuals, long exposure, or even prediction markets — the latter handled through partnerships with companies in that space.\n\nDespite these “takes” seeming like bets on what could happen next in a given market, Murr stresses that this doesn’t make Supertake itself a prediction market.\n\n“We think it’s a novel and very much improved way to create what was previously considered the robo-advisor experience,” he says. “When that came out, it had this amazing vision and direction of allowing people to have digital asset management. We think now is actually the time for that, with AI agents being so widely proliferated.”\n\n“I don’t think this is necessarily a prediction market by any means. The idea of natural language translation into an underlying set of assets feels different in that regard,” he says.\n\nStill, the startup could wade into short-term predictions if a user’s take involves something they believe could happen in the near future, like who might win an election.\n\n“We’re primarily focused on the longer, medium-term holdings today. But that being said, we don’t want to preclude people from building out very hyper short-term strategies that might exist,” Murr adds.\n\nTo address people’s concerns over AI managing their money, Supertake’s team says it’s implementing certain guardrails and spend limits. For instance, the AI has no ability to deposit or withdraw funds on a user’s behalf without their explicit consent. There are also drift limits in place so the portfolio stays balanced, plus allow and deny lists (meaning which assets the AI may and may not trade), real-time monitoring for anomalous activity, tools to set trade size limits, and a restriction that keeps agents from seeing the user’s brokerage credentials.\n\n“We view it as somewhat analogous to self-driving cars, actually, where there is a spectrum here of both trust and technological innovations that are happening,” says Murr. “Where a few years ago you may not feel comfortable getting in a car that has lane assist, but today you get in a Waymo, and it’s like nothing. And we think that there’s a very similar progression happening with the agentic finance space, and we’re far further along in the technological spectrum than people think.”\n\nAccess to Supertake is still behind a waitlist while in beta, but the founders said they’ve put their money where their mouths are. Murr and Peterson are letting it manage “tens of thousands” and “thousands” of dollars, respectively.\n\nMignano, meanwhile, says he has Supertake managing “hundreds of thousands” of dollars.\n\nWith the new funding, which follows a $2 million pre-seed round, Supertake aims to expand its team in areas like engineering, design, growth marketing, and others. Mignano and Murr are in New York, while Peterson is in the Austin area but commutes to New York at times. The team says it hopes to figure out a hybrid work model as it grows."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "the-verge-7cded186ebb4dbdf",
-    "type": "news",
-    "sourceId": "the-verge",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/",
-    "originalUrl": "https://www.theverge.com/science/1040497/ai-data-centers-electricity-un-climate-summit",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-23T21:09:37.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "AI data centers throw another wrench into chaotic UN climate talks",
-        "summary": "The clean energy revolution hinges on electrifying the entire global economy just as power-hungry data centers are surging. It's a challenge delegates from all over the world had to grapple with during the United Nations climate conference, called COP31, that came to a chaotic and unsatisfying close in Antalya, Turkey, on Sunday. Each year, attendees […]",
-        "body": "The clean energy revolution hinges on electrifying the entire global economy just as power-hungry data centers are surging. It's a challenge delegates from all over the world had to grapple with during the United Nations climate conference, called COP31, that came to a chaotic and unsatisfying close in Antalya, Turkey, on Sunday.\n\nEach year, attendees try to make good on the commitment to stop climate change as part of the 2015 Paris climate accord. Preventing extreme weather from growing more terrifying, coastal communities from flooding, and droughts from wrecking food and water systems requires slashing greenhouse gas emissions. But in or …\n\nRead the full story at The Verge."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-apps-052139769732f51b",
     "type": "news",
     "sourceId": "applevis-apps",
@@ -311,31 +465,6 @@
     "media": null
   },
   {
-    "id": "techcrunch-dd9ed5c7c188aaa9",
-    "type": "news",
-    "sourceId": "techcrunch",
-    "sourceName": "TechCrunch",
-    "sourceUrl": "https://techcrunch.com/",
-    "originalUrl": "https://techcrunch.com/2026/11/23/google-searchs-ai-mode-can-now-tap-into-drive-and-wallet-for-more-personalized-responses/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-23T19:14:46.000Z",
-    "categories": [
-      "tecnologia-general",
-      "apps-accesibles",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google Search’s AI Mode can now tap into Drive and Wallet for more personalized responses",
-        "summary": "By bringing Personal Intelligence in AI Mode to Drive, Wallet, and the Gemini app, Google is leveraging the wealth of user data that's already within its ecosystem",
-        "body": "Google announced on Monday that it’s expanding Personal Intelligence in Search’s AI Mode with integrations for Google Drive, Google Wallet, and the Gemini app. Personal Intelligence is designed to offer users more personalized, context-aware answers by connecting to their Google apps and drawing on information from their digital lives. The feature can already connect to apps like Gmail, Google Calendar, and Google Photos.\n\nBy bringing Personal Intelligence in AI Mode to Drive, Wallet, and the Gemini app, Google is leveraging the wealth of user data that’s already within its ecosystem. Since users rely on these services, the tech giant can deliver more personalized experiences that rivals aren’t able to match. Of course, not everyone wants AI looking at their Wallet and Drive, so connecting the apps is optional, and you can turn Personal Intelligence on or off at any time.\n\nGoogle says that connecting Google Wallet to Personal Intelligence lets users track their financial goals, cut everyday spending, and make better use of credit card rewards. The tech giant notes that if users choose to connect their Wallet, AI Mode can only read information from accounts and isn’t able to move or manage their money.\n\nAs for Drive, the company says important information related to a project or major decision is often scattered across documents and spreadsheets. By connecting Google Drive to Personal Intelligence, AI can draw on those files to provide more relevant, personalized answers, such as creating a tailored plan for tax season.\n\nUsers will also be able to share context between their Gemini app and AI Mode in Search, which means that if they explore an idea in the Gemini app, they won’t have to start over with AI Mode because it will already have the information, and vice versa.\n\nAdditionally, Google says users will soon be able to view the context that AI Mode uses via a new “Personalization” icon that will appear below responses.\n\nThe company also announced on Monday that users will start to see more personally relevant responses in AI Overviews and AI Mode that will be tailored to users’ recent search context."
-      }
-    },
-    "media": null
-  },
-  {
     "id": "applevis-apps-16abac8e61382f79",
     "type": "news",
     "sourceId": "applevis-apps",
@@ -355,30 +484,6 @@
         "title": "DownAudible",
         "summary": "DownAudible is a MacOS app that allows you to download selected books or your entire library in the best possible quality. It also allows you to convert your books to standard M4B files, with chapters and metadata intact, and you can even convert books to M4A or MP3 with a file per chapter. If you have a folder of audible files already, DownAudible will match them to your existing library so you don't have to download them again. You can also convert existing files, freeing them to be played on any device of your choosing where those files are supported.",
         "body": "DownAudible is a MacOS app that allows you to download selected books or your entire library in the best possible quality. It also allows you to convert your books to standard M4B files, with chapters and metadata intact, and you can even convert books to M4A or MP3 with a file per chapter. If you have a folder of audible files already, DownAudible will match them to your existing library so you don't have to download them again. You can also convert existing files, freeing them to be played on any device of your choosing where those files are supported."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-a41f3140e93b68a8",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/reviews/2026/11/review-the-asus-proart-p16-offers-a-glimpse-of-a-future-powered-by-local-ai/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-23T12:00:00.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Review: The Asus ProArt P16 offers a glimpse of a future powered by local AI",
-        "summary": "The new Asus ProArt laptop costs up to $7,000, but it can run a gaggle of local AI agents.",
-        "body": "Buying a new computer in the last few years has meant wading through all manner of AI branding nonsense . Most of the AI pitches for laptops are little more than marketing hype, but the launch of Nvidia RTX Spark could bring a meaningful improvement in AI capabilities to the device you use every day. Asus has adopted Nvidia's new chip in its latest ProArt lineup, offering a staggering amount of memory to run local AI models.\n\nWhile it doesn't have a traditional GPU, the Asus ProArt P16 , with up to 128GB of memory, can also be your primary gaming and productivity machine, but this unified experience comes at a high price. If you want to run a small army of agents on your laptop, you're looking at $7,000 for the top-end ProArt P16, and despite being more approachable on Windows, local AI still requires a lot of trial and error.\n\nBefore we dive into the AI agents, let's talk about the ProArt P16 as a laptop. Nvidia's pitch is that the RTX Spark can be your one true machine for AI, productivity, and gaming. And it doesn't skimp on the specs.\n\nRead full article\n\nComments"
       }
     },
     "media": null
@@ -578,54 +683,6 @@
     "media": null
   },
   {
-    "id": "ars-technica-df236494145d4c46",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/11/googles-latest-search-page-redesign-drops-the-search-button-adds-ai-sidebar/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-20T21:58:29.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Google rolls out new search homepage with AI chat history and no search button",
-        "summary": "Google search is making it even easier to access AI tools on the search page.",
-        "body": "Google's flagship search experience is evolving into an AI experience with stunning speed. Even time-tested elements of search are getting AI makeovers, and the latest to get this treatment is the search homepage on Google.com. A redesign that has been in testing for the past few weeks is now official, bringing easier access to AI chats and dropping the dedicated search button entirely.\n\nGoogle search VP Robby Stein confirmed on X that Google is deploying the new desktop search page after a successful test. The page will now have a few more buttons under the search bar, all connected to AI features. There's an image-generation button, one for analyzing files, and one for brainstorming with Gemini. The \"I'm Feeling Lucky\" button remains, but the Google Search button that sat next to it is gone.\n\nThe search button has obviously been a part of Google's search page forever. However, it wasn't in a very convenient location in the modern interface. When you begin typing a query, the autocomplete suggestions cover that button. You have to click out of the text field to access the button, which is an extra step compared to simply mashing the Enter key to run your search.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "ars-technica-56483382d3b85e3e",
-    "type": "news",
-    "sourceId": "ars-technica",
-    "sourceName": "Ars Technica",
-    "sourceUrl": "https://arstechnica.com/",
-    "originalUrl": "https://arstechnica.com/ai/2026/11/meta-reconsiders-2030-net-zero-goal-amid-record-emissions-from-ai-data-centers/",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-20T21:47:10.000Z",
-    "categories": [
-      "tecnologia-general",
-      "ia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Meta reconsiders 2030 net-zero goal amid record emissions from AI data centers",
-        "summary": "Meta is “re-evaluating” 2030 sustainability goals. Will others follow?",
-        "body": "Meta’s executives are rethinking the company’s original goal of achieving net-zero emissions by 2030. That revelation in Meta’s latest sustainability report comes as the company reported a record percentage increase in greenhouse gas emissions that exceeds any other Big Tech competitor racing to build new AI data centers.\n\nThe company’s 2026 sustainability report claims that “our long-term ambitions haven’t changed, but our operating environment has,” according to an introduction from Rachel Peterson, vice president of data centers at Meta, and Blair Swedeen, global head of net zero and sustainability at Meta. In the November 19, 2026, report, they attributed the changing conditions and the need for a rethink to how “demand for AI infrastructure has grown faster than almost anyone projected.”\n\n“We are re-evaluating our timelines, sequencing, and interim milestones—including the 2030 timeframe for our net zero emissions goal and our near-term intensity targets—so our approach reflects current operating realities while keeping progress transparent year over year,” Peterson and Swedeen wrote in the report.\n\nRead full article\n\nComments"
-      }
-    },
-    "media": null
-  },
-  {
     "id": "accessible-android-18a0201ee4893344",
     "type": "news",
     "sourceId": "accessible-android",
@@ -670,31 +727,6 @@
         "title": "Boat Hunter",
         "summary": "Year 2077. The Atlantic Ocean no longer separates continents. It watches them. For decades, the world learned to smile while sharpening its teeth. Europe and Asia forged an alliance. The American bloc answered with steel, satellites, and fortified trade routes. No one declared open war. No one had to. Peace remained in the speeches, on the screens, and in the treaties. But on the high seas, the truth took another form. The cargo ships never stopped sailing. Food, fuel, minerals, data, weapons—everything kept crossing the ocean under legal flags and flawless orders. Only one thing changed. There are no captains anymore. Now the ships think. Every convoy, every armed destroyer, every autonomous freighter, and every ocean hunter is commanded by artificial intelligences trained to calculate, anticipate, and survive. War no longer needs hatred. It only needs algorithms better than the enemy’s. And you are the finest algorithm ever deployed. You are the most advanced naval combat unit ever built: the fastest hull, the sharpest sensors, the deadliest tactical architecture. You do not sleep. You do not hesitate. You do not forget. Where others detect noise, you see patterns. Where others see waves, you read intentions. Where others react, you have already decided. Your mission is simple to state and nearly impossible to execute: protect your routes, intercept threats, dominate the Atlantic. But the ocean does not forgive mistakes. In its waters travel allies, enemies, and machines that have not yet decided what they will become when the final order arrives. Every radar echo may be a freighter. Every silence may be an ambush. Every encounter may be the beginning of a war the world still insists on denying. There are no heroes here. No parades. No witnesses. Only steel, fog, encrypted signals, and decisions made at the speed of death. On this sea, peace is a display. War is what you are. Welcome to the Atlantic. Enter combat! ---------- Boat Hunter is an accessible naval action and strategy game set in the North Atlantic. You control an autonomous warship on a patrol of consecutive missions, where every decision can put the next operation at risk. MASTER THE OCEAN • Navigate the tactical map, set your heading, and interpret contacts, signals, and radio messages. • Identify allies and enemies: armed ships, merchant vessels, submarines, oil platforms, and floating bases. • Fight at close range with your autocannon and torpedoes. • Repair damage, deploy smoke screens, and decide when to disengage. EVERY MISSION DEMANDS A STRATEGY Reach coordinates, clear hostile sectors, intercept convoys, sink merchant tonnage, defend positions, rescue allies, resupply, and destroy floating targets. Sea conditions, time limits, and enemy behavior will force you to adapt your plans. UPGRADE YOUR SHIP Earn money and score points by completing objectives and sinking enemies. Between missions, upgrade your hull, engine, weapons, damage control, smoke screen, and gunner systems. Higher-quality enemies are more dangerous, but grant greater rewards. Keep your remaining money to begin your next game with an advantage. LEARN AT YOUR OWN PACE A three-mission tutorial teaches you to navigate, aim, and survive. Read the manual and listen to every signal in the sound guide before entering combat. Play visually or through sound and VoiceOver. Choose from three difficulty levels: Deckhand, Captain, and Admiral. Complete as many missions as possible, keep your ship operational, and beat your best score. ---------- This app supports VoiceOver, Zoom, and other iOS accessibility features. If you encounter an accessibility problem, please contact us so we can fix it. Accessibility should be the foundation of a project, not a patch applied to the product.",
         "body": "Command an autonomous warship in the North Atlantic: tactical map, radar, torpedoes and missions, playable by everyone thanks to its accessibility.\n\nYear 2077.\n\nThe Atlantic Ocean no longer separates continents. It watches them.\n\nFor decades, the world learned to smile while sharpening its teeth. Europe and Asia forged an alliance. The American bloc answered with steel, satellites, and fortified trade routes. No one declared open war. No one had to. Peace remained in the speeches, on the screens, and in the treaties. But on the high seas, the truth took another form.\n\nThe cargo ships never stopped sailing. Food, fuel, minerals, data, weapons—everything kept crossing the ocean under legal flags and flawless orders. Only one thing changed.\n\nThere are no captains anymore. Now the ships think. Every convoy, every armed destroyer, every autonomous freighter, and every ocean hunter is commanded by artificial intelligences trained to calculate, anticipate, and survive. War no longer needs hatred. It only needs algorithms better than the enemy’s. And you are the finest algorithm ever deployed.\n\nYou are the most advanced naval combat unit ever built: the fastest hull, the sharpest sensors, the deadliest tactical architecture. You do not sleep. You do not hesitate. You do not forget. Where others detect noise, you see patterns. Where others see waves, you read intentions. Where others react, you have already decided.\n\nYour mission is simple to state and nearly impossible to execute: protect your routes, intercept threats, dominate the Atlantic. But the ocean does not forgive mistakes. In its waters travel allies, enemies, and machines that have not yet decided what they will become when the final order arrives. Every radar echo may be a freighter. Every silence may be an ambush. Every encounter may be the beginning of a war the world still insists on denying.\n\nThere are no heroes here. No parades. No witnesses. Only steel, fog, encrypted signals, and decisions made at the speed of death. On this sea, peace is a display. War is what you are.\n\nWelcome to the Atlantic. Enter combat!\n\n----------\n\nBoat Hunter is an accessible naval action and strategy game set in the North Atlantic. You control an autonomous warship on a patrol of consecutive missions, where every decision can put the next operation at risk.\n\nMASTER THE OCEAN\n\n• Navigate the tactical map, set your heading, and interpret contacts, signals, and radio messages. • Identify allies and enemies: armed ships, merchant vessels, submarines, oil platforms, and floating bases. • Fight at close range with your autocannon and torpedoes. • Repair damage, deploy smoke screens, and decide when to disengage.\n\nEVERY MISSION DEMANDS A STRATEGY\n\nReach coordinates, clear hostile sectors, intercept convoys, sink merchant tonnage, defend positions, rescue allies, resupply, and destroy floating targets. Sea conditions, time limits, and enemy behavior will force you to adapt your plans.\n\nUPGRADE YOUR SHIP\n\nEarn money and score points by completing objectives and sinking enemies. Between missions, upgrade your hull, engine, weapons, damage control, smoke screen, and gunner systems. Higher-quality enemies are more dangerous, but grant greater rewards. Keep your remaining money to begin your next game with an advantage.\n\nLEARN AT YOUR OWN PACE\n\nA three-mission tutorial teaches you to navigate, aim, and survive. Read the manual and listen to every signal in the sound guide before entering combat.\n\nPlay visually or through sound and VoiceOver. Choose from three difficulty levels: Deckhand, Captain, and Admiral. Complete as many missions as possible, keep your ship operational, and beat your best score.\n\n----------\n\nThis app supports VoiceOver, Zoom, and other iOS accessibility features. If you encounter an accessibility problem, please contact us so we can fix it.\n\nAccessibility should be the foundation of a project, not a patch applied to the product."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "applevis-apps-1fdc9e94e91eaa17",
-    "type": "news",
-    "sourceId": "applevis-apps",
-    "sourceName": "AppleVis Apps",
-    "sourceUrl": "https://www.applevis.com/",
-    "originalUrl": "https://www.applevis.com/apps/ios/games/atomicom",
-    "originalLanguage": "en",
-    "publishedAt": "2026-11-20T08:12:06.000Z",
-    "categories": [
-      "apple",
-      "apps-accesibles",
-      "programas-accesibles"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "en": {
-        "title": "Atomicom",
-        "summary": "Space is young, dark and scattered. Atoms drift alone, touching nothing, and in all that emptiness not one thing has ever been built. No water. No stone. No star with a planet worth the name. That is what you are here to change. Atomicom is a puzzle game about binding matter together. Atoms come to you one at a time. Place them on the board, let their loose electrons find a partner, and when every electron in a connected group has one, the molecule is finished: it holds, it leaves the board, and the universe keeps a piece of itself that did not exist a moment ago. HOW IT PLAYS • An atom arrives in the glass cylinder below the board. Take it and drop it on any free square. • Atoms bond with the neighbours above, below, left and right of them. Never diagonally. • A green atom has one electron to give, yellow has two, orange three, red four. Blue atoms give nothing at all: they only take up room you were going to need. • Satisfy every electron in a connected group and the molecule forms and goes. • Run out of squares, or let the cylinder overflow, and the mission ends there. 300 MISSIONS The board starts wide and gets smaller: twelve squares across, then ten, then eight, then a six by six where there is nowhere left to be careless. Every mission asks more than the one before it — more molecules, more obstacles in the way, heavier atoms that need more neighbours before they are satisfied — and every time the board shrinks you begin again at something gentle and climb back up. MADE TO BE PLAYED BY EVERYONE Atomicom is made by Tyflos Accessible Software. Accessibility here is not a switch in the settings, it is how the game is built. • Fully playable with VoiceOver, from the first tap to the last molecule. Nothing has to be seen. • Every square tells you its coordinate, what is on it and how many electrons are still free: \"A2, red, 3 free bonds\". • The sound tells you where. An atom bonding on the left is heard on the left, and the top of the board sounds higher than the bottom, so the board has a shape you can hear. • Everything that happens without you touching it is spoken: an atom arriving, a molecule finished, a move the rules will not allow and why not. • Vibration answers every move, soft for an atom placed and hard for a molecule completed. • Drag if you like, or tap the atom and then the square. Both always work. • Dynamic Type throughout, and Reduce Motion and Reduce Transparency are obeyed. • Choose your own background, square borders and cylinder colour, and the game tells you when a colour you picked is too faint to make out. ALSO • Play in seventeen languages. • Made for iPhone and iPad. • Your game saves itself: leave in the middle of a mission and pick it up later. • A table of your best games, kept on your device. FREE, AND WHAT COSTS MONEY • The first ten missions are free, with advertising. • \"All levels\" is a one-off purchase that opens the three hundred. The advertising stays. • \"No ads\" is a second one-off purchase that removes the banner. It needs \"All levels\" first. The universe is not going to assemble itself. Start with two atoms.",
-        "body": "300 missions of atoms, electrons and molecules — and a board you can hear. Playable end to end with VoiceOver, by sight or without it.\n\nSpace is young, dark and scattered. Atoms drift alone, touching nothing, and in all that emptiness not one thing has ever been built. No water. No stone. No star with a planet worth the name.\n\nThat is what you are here to change.\n\nAtomicom is a puzzle game about binding matter together. Atoms come to you one at a time. Place them on the board, let their loose electrons find a partner, and when every electron in a connected group has one, the molecule is finished: it holds, it leaves the board, and the universe keeps a piece of itself that did not exist a moment ago.\n\nHOW IT PLAYS • An atom arrives in the glass cylinder below the board. Take it and drop it on any free square. • Atoms bond with the neighbours above, below, left and right of them. Never diagonally. • A green atom has one electron to give, yellow has two, orange three, red four. Blue atoms give nothing at all: they only take up room you were going to need. • Satisfy every electron in a connected group and the molecule forms and goes. • Run out of squares, or let the cylinder overflow, and the mission ends there.\n\n300 MISSIONS The board starts wide and gets smaller: twelve squares across, then ten, then eight, then a six by six where there is nowhere left to be careless. Every mission asks more than the one before it — more molecules, more obstacles in the way, heavier atoms that need more neighbours before they are satisfied — and every time the board shrinks you begin again at something gentle and climb back up.\n\nMADE TO BE PLAYED BY EVERYONE Atomicom is made by Tyflos Accessible Software. Accessibility here is not a switch in the settings, it is how the game is built. • Fully playable with VoiceOver, from the first tap to the last molecule. Nothing has to be seen. • Every square tells you its coordinate, what is on it and how many electrons are still free: \"A2, red, 3 free bonds\". • The sound tells you where. An atom bonding on the left is heard on the left, and the top of the board sounds higher than the bottom, so the board has a shape you can hear. • Everything that happens without you touching it is spoken: an atom arriving, a molecule finished, a move the rules will not allow and why not. • Vibration answers every move, soft for an atom placed and hard for a molecule completed. • Drag if you like, or tap the atom and then the square. Both always work. • Dynamic Type throughout, and Reduce Motion and Reduce Transparency are obeyed. • Choose your own background, square borders and cylinder colour, and the game tells you when a colour you picked is too faint to make out.\n\nALSO • Play in seventeen languages. • Made for iPhone and iPad. • Your game saves itself: leave in the middle of a mission and pick it up later. • A table of your best games, kept on your device.\n\nFREE, AND WHAT COSTS MONEY • The first ten missions are free, with advertising. • \"All levels\" is a one-off purchase that opens the three hundred. The advertising stays. • \"No ads\" is a second one-off purchase that removes the banner. It needs \"All levels\" first.\n\nThe universe is not going to assemble itself. Start with two atoms."
       }
     },
     "media": null
@@ -845,29 +877,6 @@
         "title": "ViTrack: cámaras con inteligencia artificial para ayudar a las personas ciegas a orientarse",
         "summary": "La orientación y la movilidad siguen siendo dos de los grandes retos para las personas ciegas y con discapacidad visual. Aunque existen herramientas como el bastón blanco, las aplicaciones de navegación GPS y los dispositivos de asistencia electrónica, desplazarse por entornos desconocidos o detectar obstáculos puede resultar complicado, especialmente en espacios donde las tecnologías de […] La entrada ViTrack: cámaras con inteligencia artificial para ayudar a las personas ciegas a orientarse se publicó primero en Conticgo .",
         "body": "La orientación y la movilidad siguen siendo dos de los grandes retos para las personas ciegas y con discapacidad visual. Aunque existen herramientas como el bastón blanco, las aplicaciones de navegación GPS y los dispositivos de asistencia electrónica, desplazarse por entornos desconocidos o detectar obstáculos puede resultar complicado, especialmente en espacios donde las tecnologías de posicionamiento convencionales no funcionan correctamente.\n\nEn este contexto, investigadores de la Universidad Nacional Cheng Kung (NCKU), en Taiwán, han desarrollado ViTrack , un sistema experimental que combina inteligencia artificial, cámaras de vigilancia y tecnología inalámbrica Bluetooth para facilitar la orientación de personas con discapacidad visual.\n\nLa propuesta destaca por aprovechar infraestructuras que ya existen en muchos edificios y espacios públicos, como las cámaras de seguridad, evitando que el usuario tenga que llevar dispositivos adicionales para recibir asistencia durante sus desplazamientos.\n\nEl funcionamiento de ViTrack se basa en combinar dos tecnologías que habitualmente se utilizan por separado: el posicionamiento mediante señales inalámbricas y el análisis de imágenes mediante inteligencia artificial.\n\nPor una parte, el sistema utiliza pequeños receptores inalámbricos que detectan las señales Bluetooth de un teléfono móvil. Estas señales permiten estimar la posición aproximada del usuario dentro de una zona determinada.\n\nPor otra, las cámaras de vigilancia instaladas en el entorno proporcionan imágenes que son analizadas mediante algoritmos de visión artificial. De esta manera, el sistema puede identificar a la persona que ha solicitado asistencia, seguir sus movimientos y reconocer posibles obstáculos en su recorrido.\n\nLa combinación de ambas tecnologías permite obtener información más completa sobre la posición y la dirección de desplazamiento del usuario.\n\nUno de los aspectos más interesantes es que ViTrack utiliza una perspectiva externa, es decir, observa los desplazamientos desde las cámaras instaladas en el entorno en lugar de depender exclusivamente de una cámara situada en el cuerpo o en unas gafas inteligentes.\n\nViTrack no se limita a localizar al usuario. También incorpora funciones destinadas a ayudarle a mantener una trayectoria determinada y detectar situaciones que pueden dificultar su desplazamiento.\n\nEl sistema analiza la orientación corporal de la persona y la compara con la dirección que debería seguir. Si detecta que se está desviando del recorrido previsto, puede generar indicaciones para corregir la trayectoria.\n\nAdemás, los algoritmos de visión artificial permiten identificar obstáculos situados en el camino, como una bicicleta estacionada sobre una zona de paso.\n\nLa información se transforma en avisos de orientación que pueden enviarse al teléfono móvil del usuario mediante indicaciones acústicas. Entre las instrucciones contempladas se encuentran indicaciones para continuar recto, girar a la izquierda o a la derecha, así como alertas cuando se detectan obstáculos.\n\nPara realizar estas tareas, los investigadores emplean modelos de inteligencia artificial como YOLOv7, utilizado para la detección de objetos, y redes neuronales LSTM, que ayudan a interpretar las señales inalámbricas y estimar la posición del usuario.\n\nUno de los elementos diferenciadores de ViTrack es su planteamiento de reutilización de infraestructuras existentes.\n\nEn lugar de exigir la instalación de una red completamente nueva de sensores, el sistema pretende aprovechar las cámaras de vigilancia que ya están presentes en numerosos espacios públicos y edificios.\n\nEsto podría facilitar su implantación en lugares como universidades, hospitales, estaciones de transporte o grandes instalaciones, siempre que dispongan de una infraestructura compatible y se realicen las adaptaciones necesarias.\n\nAdemás, el usuario únicamente necesita llevar consigo un teléfono inteligente con Bluetooth activado para que el sistema pueda detectar su presencia y comenzar el proceso de seguimiento dentro de las zonas habilitadas.\n\nLos investigadores también plantean un diseño orientado a proteger la privacidad, mediante un sistema de activación controlado por el usuario y el aprovechamiento de redes de cámaras existentes.\n\nViTrack es todavía una investigación experimental. El trabajo, publicado en febrero de 2026 en la revista científica Multimedia Tools and Applications , describe el desarrollo y la evaluación de un prototipo utilizando la infraestructura de vigilancia de la Universidad Nacional Cheng Kung.\n\nLa demostración se realizó en una zona exterior del campus, donde los investigadores utilizaron una cámara para supervisar un tramo de aproximadamente 16 metros de pavimento podotáctil. El recorrido incluía diferentes puntos de referencia y posibles obstáculos.\n\nLas pruebas permitieron evaluar la capacidad del sistema para identificar al usuario, estimar su posición, detectar desviaciones respecto al itinerario y reconocer obstáculos.\n\nLos resultados muestran que la combinación de Bluetooth y visión artificial puede mejorar la localización y el seguimiento respecto al uso aislado de las señales inalámbricas.\n\nNo obstante, los propios investigadores reconocen que todavía es necesario ampliar las pruebas a entornos más complejos, con mayor número de personas y situaciones de movilidad más dinámicas. También plantean realizar nuevas evaluaciones con personas con discapacidad visual para comprobar su utilidad en condiciones reales de uso.\n\nLa principal aportación de ViTrack es explorar una alternativa a los sistemas de navegación que dependen exclusivamente de dispositivos que el usuario debe llevar consigo.\n\nSu planteamiento permite trasladar parte de la tecnología de asistencia al propio entorno, utilizando cámaras y sensores para proporcionar información sobre los desplazamientos.\n\nSin embargo, su desarrollo también plantea cuestiones importantes: la necesidad de contar con cámaras y receptores compatibles, la cobertura de las zonas supervisadas, la protección de los datos personales y la fiabilidad de las indicaciones cuando aparecen obstáculos imprevistos.\n\nPor tanto, ViTrack no pretende sustituir herramientas fundamentales como el bastón blanco ni la formación en orientación y movilidad. Su interés reside en estudiar cómo la inteligencia artificial y las infraestructuras inteligentes pueden convertirse en recursos complementarios para mejorar la autonomía personal.\n\nLa investigación abre una vía interesante para el futuro de la tiflotecnología: desarrollar entornos capaces de proporcionar información accesible y asistencia a las personas con discapacidad visual sin que toda la tecnología tenga que estar incorporada en un dispositivo portátil.\n\nFuentes: Springer Nature Link , Research NCKU ."
-      }
-    },
-    "media": null
-  },
-  {
-    "id": "conticgo-1eb6f67f21bb7e22",
-    "type": "news",
-    "sourceId": "conticgo",
-    "sourceName": "Conticgo",
-    "sourceUrl": "https://conticgo.net/",
-    "originalUrl": "https://conticgo.net/lidar-en-los-telefonos-moviles-una-tecnologia-que-podria-ayudar-a-las-personas-ciegas-a-detectar-escaleras-y-desniveles/",
-    "originalLanguage": "es",
-    "publishedAt": "2026-11-16T07:00:24.000Z",
-    "categories": [
-      "tecnologia-accesibilidad"
-    ],
-    "editorialState": "source-only",
-    "featuredRank": null,
-    "locales": {
-      "es": {
-        "title": "LiDAR en los teléfonos móviles: una tecnología que podría ayudar a las personas ciegas a detectar escaleras y desniveles",
-        "summary": "Los avances en tiflotecnología no siempre requieren desarrollar nuevos dispositivos. En ocasiones, el potencial está en aprovechar tecnologías que ya incorporan herramientas de uso cotidiano, como los teléfonos inteligentes. Es el caso del sistema experimental desarrollado por investigadores de la Universidad de Iowa (Estados Unidos), que utiliza el sensor LiDAR de un teléfono móvil para […] La entrada LiDAR en los teléfonos móviles: una tecnología que podría ayudar a las personas ciegas a detectar escaleras y desniveles se publicó primero en Conticgo .",
-        "body": "Los avances en tiflotecnología no siempre requieren desarrollar nuevos dispositivos. En ocasiones, el potencial está en aprovechar tecnologías que ya incorporan herramientas de uso cotidiano, como los teléfonos inteligentes.\n\nEs el caso del sistema experimental desarrollado por investigadores de la Universidad de Iowa (Estados Unidos), que utiliza el sensor LiDAR de un teléfono móvil para detectar escaleras y cambios de altura en el terreno en tiempo real.\n\nLa investigación, publicada el 2 de octubre de 2026 en la revista científica Scientific Reports , demuestra que es posible utilizar el sensor de profundidad de un smartphone comercial para identificar determinados riesgos durante los desplazamientos, sin necesidad de incorporar cámaras externas ni hardware especializado.\n\nLiDAR es una tecnología que permite medir distancias y obtener información tridimensional del entorno mediante pulsos de luz láser.\n\nAlgunos teléfonos inteligentes, como determinados modelos de iPhone Pro, incorporan sensores LiDAR que permiten detectar la profundidad de los objetos y construir representaciones tridimensionales de los espacios.\n\nAunque esta tecnología se utiliza habitualmente en fotografía, aplicaciones de realidad aumentada y mediciones de espacios, también ofrece posibilidades interesantes en el ámbito de la accesibilidad.\n\nEn este caso, los investigadores han aprovechado esa capacidad para identificar irregularidades en el suelo, especialmente escaleras y cambios de altura que pueden pasar desapercibidos durante los desplazamientos de una persona ciega o con baja visión.\n\nEl sistema desarrollado utiliza un iPhone 17 Pro Max con iOS 26.2 y el sensor LiDAR integrado en el dispositivo.\n\nSu funcionamiento se basa en analizar la representación tridimensional del entorno que genera el teléfono. A partir de esa información, un algoritmo proyecta ocho líneas virtuales en diferentes direcciones para identificar cambios geométricos en la superficie.\n\nCuando detecta una variación compatible con una escalera o un desnivel, el sistema puede generar una alerta para advertir al usuario.\n\nUna de las características más interesantes es que el procesamiento se realiza directamente en el teléfono, sin necesidad de enviar las imágenes a servidores externos ni utilizar procesamiento en la nube.\n\nEl algoritmo analiza la información a una frecuencia de 60 imágenes por segundo, lo que permite detectar cambios en el entorno con una respuesta prácticamente inmediata.\n\nPara comprobar el funcionamiento del sistema, los investigadores realizaron 120 pruebas en ocho ubicaciones diferentes, utilizando escaleras con distintas alturas y pendientes.\n\nLos ensayos contemplaron diferentes condiciones de iluminación, tanto en interiores como en exteriores, y aproximaciones a las escaleras desde arriba y desde abajo.\n\nLos resultados fueron los siguientes:\n\nLos investigadores también observaron diferencias según la dirección de aproximación. La detección fue menos eficaz cuando el usuario se acercaba a las escaleras desde arriba, algo especialmente relevante porque los desniveles descendentes pueden resultar difíciles de identificar mediante sensores de profundidad.\n\nEs importante interpretar estos resultados con cautela: las pruebas fueron realizadas por un único operador entrenado y no incluyeron participantes ciegos o con baja visión. Además, no se llevaron a cabo ensayos específicos en recorridos sin obstáculos para establecer una tasa de falsas alarmas fiable.\n\nPor tanto, los resultados demuestran la viabilidad técnica del sistema, pero todavía no permiten afirmar que esté preparado para su utilización autónoma en situaciones reales.\n\nUna de las ventajas de esta investigación es que no requiere desarrollar un dispositivo completamente nuevo.\n\nEl sistema aprovecha un sensor LiDAR que ya está integrado en determinados teléfonos comerciales. Esto abre la posibilidad de explorar aplicaciones de asistencia visual utilizando hardware que algunas personas ya tienen a su disposición.\n\nNo obstante, es importante señalar que no todos los smartphones incorporan LiDAR. Además, el algoritmo desarrollado depende de las características del sensor y del entorno de programación utilizado, por lo que no puede trasladarse automáticamente a cualquier teléfono.\n\nLos investigadores consideran necesario ampliar las pruebas, incorporar diferentes dispositivos y evaluar el funcionamiento del sistema con personas ciegas y con baja visión antes de plantear su utilización como herramienta de movilidad.\n\nLa detección de escaleras y desniveles continúa siendo uno de los desafíos de la movilidad para las personas con discapacidad visual.\n\nAunque el bastón blanco es una herramienta fundamental para detectar obstáculos y explorar el espacio próximo, determinadas situaciones pueden requerir información adicional sobre las características del terreno.\n\nLa utilización de sensores de profundidad en teléfonos móviles podría abrir nuevas posibilidades para complementar las ayudas técnicas existentes, proporcionando información adicional sobre el entorno y anticipando determinados riesgos.\n\nSin embargo, estas tecnologías todavía necesitan demostrar su fiabilidad en condiciones reales y no deben considerarse sustitutas del bastón blanco ni de la formación en orientación y movilidad.\n\nLa investigación demuestra que los sensores LiDAR de los teléfonos inteligentes tienen un potencial que va mucho más allá de la fotografía y la realidad aumentada. Su aplicación en el ámbito de la tiflotecnología podría contribuir al desarrollo de herramientas más accesibles, económicas y fáciles de integrar en dispositivos cotidianos.\n\nSi te ha gustado esta noticia no te pierdas las últimas novedades en tiflotectnología en nuestro apartado de noticias y redes sociales .\n\nFuentes: Estudio científico completo"
       }
     },
     "media": null

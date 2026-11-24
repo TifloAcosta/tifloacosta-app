@@ -379,6 +379,12 @@ struct NativeAccessibleCinemaScreen: View {
                                     .frame(minHeight: 44, alignment: .leading)
                             }
                         }
+                        if source.id == "audiocinemateca" {
+                            NavigationLink("Cuenta de Audiocinemateca") {
+                                NativeAudiocinematecaAccountScreen()
+                            }
+                            .frame(minHeight: 44, alignment: .leading)
+                        }
                         if let address = source.address {
                             Link("Abrir plataforma original: \(MusicLocalized.message(source.name))", destination: address)
                                 .font(.body.weight(.semibold))

@@ -151,12 +151,15 @@ final class NativeCinemaLocalLibrary: ObservableObject {
 final class NativeCinemaAudioPlayer: ObservableObject {
     static let shared = NativeCinemaAudioPlayer()
     @Published private(set) var currentID: UUID?
+    /// Distinguish a temporary Drive preview from a permanently imported item.
+    @Published private(set) var currentCloudReference: String?
     @Published private(set) var playing = false
     @Published private(set) var seconds: Double = 0
     @Published private(set) var duration: Double = 0
     @Published private(set) var playbackError: String?
 
     private var player: AVPlayer?
+    private var temporaryPlaybackFile: URL?
     /// Expose the same AVPlayer to the native video surface without creating
     /// a second, competing playback engine or duplicate transport controls.
     var videoPlayer: AVPlayer? { player }
@@ -171,6 +174,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
             throw NativeCinemaLocalError.missing
         }
         pauseAndSave(library: library)
+        currentCloudReference = nil
         playbackError = nil
         // If session activation fails, do not leave a half-open item with
         // playback state advertised as ready.
@@ -194,6 +198,58 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         playing = true
         beginProgressTracking(library: library)
         updateNowPlaying()
+    }
+
+    /// Plays one deliberately selected cloud file after a temporary download.
+    /// This does NOT add it to the user's personal collection or promise
+    /// streaming before the download finishes. Existing remote controls,
+    /// background audio, seek and pause are reused.
+    func openTemporaryFile(
+        _ file: URL,
+        title: String,
+        reference: String,
+        library: NativeCinemaLocalLibrary
+    ) throws {
+        let temporaryRoot = FileManager.default.temporaryDirectory.standardizedFileURL
+        let parent = file.standardizedFileURL.deletingLastPathComponent()
+        guard file.isFileURL, !reference.isEmpty,
+              parent.deletingLastPathComponent().standardizedFileURL == temporaryRoot,
+              FileManager.default.fileExists(atPath: file.path) else {
+            throw NativeCinemaLocalError.invalidFile
+        }
+        pauseAndSave(library: library)
+        try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
+        try AVAudioSession.sharedInstance().setActive(true)
+        player = AVPlayer(url: file)
+        temporaryPlaybackFile = file
+        activeLibrary = library
+        playbackError = nil
+        currentTitle = title
+        currentID = UUID()
+        currentCloudReference = reference
+        seconds = 0
+        duration = 0
+        lastSavedSecond = 0
+        NativeRemotePlaybackOwner.onInterrupted(.cinema) { [weak self] in
+            self?.pauseForOtherAudio()
+        }
+        NativeRemotePlaybackOwner.claim(.cinema)
+        registerRemoteCommands()
+        player?.play()
+        playing = true
+        beginProgressTracking(library: library)
+        updateNowPlaying()
+    }
+
+    private func cleanUpTemporaryPlayback() {
+        guard let file = temporaryPlaybackFile else { return }
+        temporaryPlaybackFile = nil
+        // Storage always writes into a UUID directory directly below tmp.
+        // Never delete a different folder supplied through an arbitrary URL.
+        let folder = file.standardizedFileURL.deletingLastPathComponent()
+        if folder.deletingLastPathComponent() == FileManager.default.temporaryDirectory.standardizedFileURL {
+            try? FileManager.default.removeItem(at: folder)
+        }
     }
 
     private func beginProgressTracking(library: NativeCinemaLocalLibrary) {
@@ -332,8 +388,10 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         progressTimer?.invalidate()
         progressTimer = nil
         player = nil
+        cleanUpTemporaryPlayback()
         playing = false
         currentID = nil
+        currentCloudReference = nil
         seconds = 0
         duration = 0
         currentTitle = ""

@@ -17,10 +17,26 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
     private var cells: [String] = []
     private let escape = NativeDocumentConversion.xml
 
-    static func xhtml(content: Data, title: String) -> Data? {
+    private var links: [String: String] = [:]
+    private var images: [String: String] = [:]
+    private var drawing = false
+    private var embeddedSource: String?
+    private var imageDescription = ""
+
+    static func xhtml(content: Data, relationships: Data?, title: String) -> Data? {
         guard let source = String(data: content, encoding: .utf8),
               !source.localizedCaseInsensitiveContains("<!DOCTYPE") else { return nil }
         let delegate = NativeDOCXConversionMarkup()
+        if let relationships, let xml = String(data: relationships, encoding: .utf8),
+           !xml.localizedCaseInsensitiveContains("<!DOCTYPE") {
+            let relationParser = XMLParser(data: relationships)
+            let relationDelegate = Relationships()
+            relationParser.delegate = relationDelegate
+            if relationParser.parse() {
+                delegate.links = relationDelegate.links
+                delegate.images = relationDelegate.images
+            }
+        }
         let parser = XMLParser(data: content)
         parser.shouldProcessNamespaces = true
         parser.shouldResolveExternalEntities = false
@@ -34,6 +50,15 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
         if Task.isCancelled { parser.abortParsing(); return }
         if ignoredDepth > 0 || (namespaceURI == Self.word && ["del", "moveFrom", "txbxContent"].contains(name)) {
             ignoredDepth += 1
+            return
+        }
+        if drawing {
+            if name == "docPr", namespaceURI == "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" {
+                imageDescription = attributes["descr"] ?? attributes["title"] ?? ""
+            } else if name == "blip", namespaceURI == "http://schemas.openxmlformats.org/drawingml/2006/main",
+                      let id = attributes["r:embed"] {
+                embeddedSource = images[id]
+            }
             return
         }
         guard namespaceURI == Self.word else { return }
@@ -50,6 +75,10 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
         case "b": bold = !["0", "false", "off"].contains(attributes["w:val"] ?? "")
         case "i": italic = !["0", "false", "off"].contains(attributes["w:val"] ?? "")
         case "lang": language = attributes["w:val"]
+        case "drawing":
+            drawing = true
+            embeddedSource = nil
+            imageDescription = ""
         case "t": textDepth += 1
         case "tab": run += "&#9;"
         case "br": run += "<br/>"
@@ -64,8 +93,9 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
         case "bookmarkStart":
             if let id = attributes["w:name"] { paragraph? += "<span id=\"\(escape(id))\"></span>" }
         case "hyperlink":
-            if let target = attributes["w:anchor"] {
-                paragraph? += "<a href=\"#\(escape(target))\">"
+            let target = attributes["w:anchor"].map { "#" + $0 } ?? attributes["r:id"].flatMap { links[$0] }
+            if let target {
+                paragraph? += "<a href=\"\(escape(target))\">"
                 openLink = true
             }
         default: break
@@ -79,6 +109,13 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
         guard namespaceURI == Self.word, inBody else { return }
         switch name {
         case "body": inBody = false
+        case "drawing":
+            drawing = false
+            if let embeddedSource {
+                run += "<img src=\"\(escape(embeddedSource))\" alt=\"\(escape(imageDescription))\"/>"
+            } else {
+                run += escape(imageDescription)
+            }
         case "t": textDepth -= 1
         case "r":
             if bold { run = "<strong>\(run)</strong>" }
@@ -102,5 +139,23 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
 
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         if textDepth > 0 && ignoredDepth == 0 { run += escape(string) }
+    }
+
+    private final class Relationships: NSObject, XMLParserDelegate {
+        var links: [String: String] = [:]
+        var images: [String: String] = [:]
+
+        func parser(_ parser: XMLParser, didStartElement name: String,
+                    namespaceURI: String?, qualifiedName: String?, attributes: [String: String]) {
+            if Task.isCancelled { parser.abortParsing(); return }
+            guard name == "Relationship", let id = attributes["Id"], let target = attributes["Target"],
+                  let type = attributes["Type"] else { return }
+            let prefix = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/"
+            if type == prefix + "hyperlink", attributes["TargetMode"] == "External" {
+                links[id] = target
+            } else if type == prefix + "image", attributes["TargetMode"] != "External" {
+                images[id] = target
+            }
+        }
     }
 }

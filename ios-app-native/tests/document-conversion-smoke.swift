@@ -120,7 +120,7 @@ struct DocumentConversionSmoke {
             in: root.appendingPathComponent("docx-roundtrip"))
         let docxMarkup = try String(contentsOf: docxHTML, encoding: .utf8)
         precondition(docxMarkup.contains("<h2") && docxMarkup.contains("Ελληνικά") &&
-            docxMarkup.contains("href=\"#c0-p0\">Volver"))
+            docxMarkup.contains("href=\"#c0-p0\">Volver") && docxMarkup.contains("https://example.com/a?x=1&amp;y=2"))
 
         let reopenedODT = NativeConversionSource(filename: "Obra.versión.odt", title: "Fallback",
             format: "odt", text: "Text fallback", links: [], original: results[.odt]!)
@@ -212,6 +212,43 @@ struct DocumentConversionSmoke {
         precondition(complexBook.contains("<thead><tr><th>") && complexBook.contains("<ul><li>") &&
             complexBook.contains("alt=\"Descripción de la imagen\"") && complexBook.contains("会議"))
         precondition(complexFiles["EPUB/book.opf"]!.contains("assets/image-1.png"))
+        let complexDOCX = root.appendingPathComponent("Complejo.docx")
+        let wordArchive = try Archive(url: complexDOCX, accessMode: .create)
+        let wordSource = """
+        <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+           xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing"
+           xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"
+           xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+          <w:body><w:tbl><w:tr><w:trPr><w:tblHeader/></w:trPr><w:tc><w:p><w:r>
+            <w:rPr><w:b/><w:lang w:val="fr"/></w:rPr><w:t>Résumé</w:t>
+          </w:r></w:p></w:tc></w:tr></w:tbl><w:p><w:r><w:drawing>
+            <wp:inline><wp:docPr id="1" name="Image" descr="Descripción en DOCX"/><a:blip r:embed="image1"/></wp:inline>
+          </w:drawing></w:r></w:p></w:body>
+        </w:document>
+        """
+        let wordRelations = """
+        <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+          <Relationship Id="image1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/frame.png"/>
+        </Relationships>
+        """
+        for (path, bytes) in [("word/document.xml", Data(wordSource.utf8)),
+                              ("word/_rels/document.xml.rels", Data(wordRelations.utf8)),
+                              ("word/media/frame.png", Data(base64Encoded: png)!)] {
+            try wordArchive.addEntry(with: path, type: .file, uncompressedSize: Int64(bytes.count)) { offset, size in
+                let start = Int(offset)
+                return bytes.subdata(in: start..<min(bytes.count, start + size))
+            }
+        }
+        let wordDocument = NativeConversionSource(filename: complexDOCX.lastPathComponent, title: "DOCX",
+            format: "docx", text: "Text fallback", links: [], original: complexDOCX)
+        let wordEPUB = try NativeDocumentConversion.convert(wordDocument, to: .epub,
+            in: richOutput.appendingPathComponent("word"))
+        let wordFiles = try members(wordEPUB, mime: "application/epub+zip")
+        let wordBook = wordFiles["EPUB/book.xhtml"]!
+        xml(wordBook)
+        precondition(wordBook.contains("<th>") && wordBook.contains("<strong>Résumé</strong>") &&
+            wordBook.contains("xml:lang=\"fr\"") && wordBook.contains("alt=\"Descripción en DOCX\""))
+        precondition(wordFiles["EPUB/book.opf"]!.contains("assets/image-1.png"))
         print("Eleven local formats opened and validated; EPUB/HTML structure and assets, PDF text and tags verified.")
     }
 

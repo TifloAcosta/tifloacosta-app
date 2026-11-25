@@ -216,7 +216,7 @@ private final class NativeMusicLibrary: ObservableObject {
             guard !Task.isCancelled, let current = files.first(where: { $0.id == id }) else { continue }
             let original = audioURL(for: current)
             let asset = AVURLAsset(url: original)
-            guard let metadata = try? await asset.load(.commonMetadata) else { continue }
+            let metadata = (try? await asset.load(.commonMetadata)) ?? []
             func value(_ identifier: AVMetadataIdentifier) async -> String? {
                 guard let item = AVMetadataItem.metadataItems(from: metadata, filteredByIdentifier: identifier).first,
                       let raw = try? await item.load(.stringValue) else { return nil }
@@ -236,7 +236,28 @@ private final class NativeMusicLibrary: ObservableObject {
             if updated.hasEditedTrackInformation != true { updated.artist = updated.artist ?? artist }
             if canRename, let title { updated.name = title }
             try? storeTrack(updated, at: index, rename: canRename && title != nil && artist != nil)
+            if canRename, title == nil || artist == nil,
+               UserDefaults.standard.bool(forKey: "mi-musica-acoustid-auto") {
+                _ = try? await recognizeTrack(id, protectEdits: true)
+            }
         }
+    }
+
+    func recognizeTrack(_ id: UUID, protectEdits: Bool = false) async throws -> Bool {
+        guard let key = NativeMusicRecognition.clientKey,
+              let current = files.first(where: { $0.id == id }),
+              !protectEdits || current.hasEditedTrackInformation != true else { return false }
+        let url = audioURL(for: current)
+        guard let match = try await NativeMusicRecognition.shared.identify(url, client: key) else { return false }
+        try Task.checkCancellation()
+        guard let index = files.firstIndex(where: { $0.id == id }),
+              files[index].fileName == current.fileName, files[index].name == current.name,
+              files[index].artist == current.artist else { return false }
+        var updated = files[index]
+        updated.name = match.title
+        updated.artist = match.artist
+        try storeTrack(updated, at: index, rename: true)
+        return true
     }
 
     func updateTrackInformation(_ id: UUID, title: String, artist: String) throws {
@@ -831,6 +852,28 @@ struct NativeMyMusicScreen: View {
     @State private var newSmartFolderName = ""
     @State private var newSmartFolderKeyword = ""
     @State private var selectedSmartRule = MusicSmartRuleKind.title
+    @AppStorage("mi-musica-acoustid-auto") private var automaticRecognition = false
+    @State private var recognitionSelection: [UUID]?
+    @State private var recognitionTask: Task<Void, Never>?
+    @State private var recognitionResult: String?
+
+    private func identify(_ ids: [UUID]) {
+        recognitionTask = Task {
+            var matched = 0
+            var failed = 0
+            for id in ids {
+                if Task.isCancelled { break }
+                do { if try await library.recognizeTrack(id) { matched += 1 } }
+                catch is CancellationError { break }
+                catch { failed += 1 }
+            }
+            if !Task.isCancelled {
+                recognitionResult = MusicLocalized.format("Identificadas: %d de %d. Errores: %d.", matched, ids.count, failed)
+            }
+            recognitionTask = nil
+        }
+    }
+
     @State private var editingTrackInformation: MusicLocalFile?
     @State private var editedTrackTitle = ""
     @State private var editedTrackArtist = ""
@@ -1123,6 +1166,10 @@ struct NativeMyMusicScreen: View {
                             ForEach(library.folders) { folder in
                                 Button("Añadir a \(folder.name)") { library.assign(file.id, to: folder.id) }
                             }
+                            if NativeMusicRecognition.clientKey != nil {
+                                Button("Identificar canción") { recognitionSelection = [file.id] }
+                                    .disabled(recognitionTask != nil)
+                            }
                             Button("Editar información de la canción") { editTrackInformation(file) }
                             Button("Eliminar de la biblioteca") { pendingRemoval = file }
                         }
@@ -1131,6 +1178,10 @@ struct NativeMyMusicScreen: View {
                         }
                         Spacer()
                         Menu("Acciones de \(file.name)") {
+                            if NativeMusicRecognition.clientKey != nil {
+                                Button("Identificar canción") { recognitionSelection = [file.id] }
+                                    .disabled(recognitionTask != nil)
+                            }
                             Button("Editar información de la canción") { editTrackInformation(file) }
                             Button("Editar género") {
                                 editingGenreFile = file
@@ -1314,9 +1365,21 @@ struct NativeMyMusicScreen: View {
             Menu("Organizar mi música") {
                 Button("Importar canciones") { isImporting = true }
                 Button("Importar carpeta desde Archivos o nube") { isImportingFolder = true }
+                if NativeMusicRecognition.clientKey != nil {
+                    Button("Identificar canciones visibles") { recognitionSelection = visibleFiles.map(\.id) }
+                        .disabled(recognitionTask != nil || visibleFiles.isEmpty)
+                }
                 Button("Crear carpeta") { showingFolderEditor = true }
                 Button("Crear lista de reproducción") { showingPlaylistEditor = true }
                 Button("Crear carpeta inteligente") { showingSmartFolderEditor = true }
+            }
+            if NativeMusicRecognition.clientKey != nil {
+                Toggle("Identificar al importar con AcoustID", isOn: $automaticRecognition)
+                Text("AcoustID recibe la huella acústica y la duración. El audio se queda en el dispositivo.")
+                    .font(.footnote)
+            }
+            if recognitionTask != nil {
+                Button("Cancelar identificación") { recognitionTask?.cancel() }
             }
             NavigationLink("Nubes") { musicClouds }
             NavigationLink("Ajustes") { musicSettings }
@@ -1394,6 +1457,22 @@ struct NativeMyMusicScreen: View {
             }
 
         let libraryActions = smartFolderSheet
+            .confirmationDialog("Identificar con AcoustID", isPresented: Binding(
+                get: { recognitionSelection != nil }, set: { if !$0 { recognitionSelection = nil } }
+            ), titleVisibility: .visible) {
+                Button("Identificar con AcoustID") {
+                    if let ids = recognitionSelection { identify(ids) }
+                    recognitionSelection = nil
+                }
+                Button("Cancelar", role: .cancel) { recognitionSelection = nil }
+            } message: {
+                Text("AcoustID recibe la huella acústica y la duración. El audio se queda en el dispositivo.")
+            }
+            .alert("Identificación musical", isPresented: Binding(
+                get: { recognitionResult != nil }, set: { if !$0 { recognitionResult = nil } }
+            )) {
+                Button("Aceptar", role: .cancel) { recognitionResult = nil }
+            } message: { Text(recognitionResult ?? "") }
             .alert("Editar información de la canción", isPresented: Binding(
                 get: { editingTrackInformation != nil },
                 set: { if !$0 { editingTrackInformation = nil } }

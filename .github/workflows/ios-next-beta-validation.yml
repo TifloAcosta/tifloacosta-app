@@ -144,12 +144,11 @@ jobs:
           from pathlib import Path
           project = Path("ios-app-native/project.yml")
           config = project.read_text()
-          start = config.index("    preBuildScripts:\n")
-          end = config.index("    settings:\n", start)
-          config = config[:start] + config[end:]
+          import re
+          config = re.sub(r'      - name: Preparar qpdf local\n        script: \|\n[^\n]+\n', '', config)
           config = "\n".join(line for line in config.splitlines()
-                             if "DERIVED_FILE_DIR)/TifloPDF/" not in line) + "\n"
-          config = config.replace(" -lqpdf -ljpeg -lz -lc++", " -lz")
+                             if 'cp "$DERIVED_FILE_DIR/TifloPDF/licenses/' not in line) + "\n"
+          config = config.replace(" -lqpdf -ljpeg -lz", " -lz")
           project.write_text(config)
           header = Path("ios-app-native/PDFEngine/TifloPDFPostprocess.h").read_text()
           prototype = header[header.index("int tiflo_pdf_postprocess"):header.index(";")]

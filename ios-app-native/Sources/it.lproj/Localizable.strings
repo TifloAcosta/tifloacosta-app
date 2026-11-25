@@ -1440,3 +1440,12 @@
 "Intérprete" = "Interprete";
 
 "Posible canción duplicada" = "Brano potenzialmente duplicato";
+
+"Identificar canción" = "Identifica brano";
+"Identificar canciones visibles" = "Identifica i brani visibili";
+"Identificar al importar con AcoustID" = "Identifica durante l’importazione con AcoustID";
+"AcoustID recibe la huella acústica y la duración. El audio se queda en el dispositivo." = "AcoustID riceve l’impronta acustica e la durata. L’audio resta sul dispositivo.";
+"Cancelar identificación" = "Annulla identificazione";
+"Identificar con AcoustID" = "Identifica con AcoustID";
+"Identificación musical" = "Identificazione musicale";
+"Identificadas: %d de %d. Errores: %d." = "Identificati: %d di %d. Errori: %d.";

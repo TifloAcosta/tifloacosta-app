@@ -39,6 +39,7 @@
     <key>TifloCinemaPublicDriveAPIKey</key><string></string>
     <key>CloudOAuthGoogleClientID</key><string>559558644861-tiepud65eqshl9639u2hpqjmo75ema0i.apps.googleusercontent.com</string>
     <key>CloudOAuthGoogleRedirectURI</key><string>com.googleusercontent.apps.559558644861-tiepud65eqshl9639u2hpqjmo75ema0i:/oauthredirect</string>
+    <key>TifloAcoustIDClient</key><string>$(TIFLO_ACOUSTID_CLIENT)</string>
     <key>CloudOAuthDropboxClientID</key><string>malbkwdta42k68y</string>
     <key>CloudOAuthDropboxRedirectURI</key><string>db-malbkwdta42k68y://oauthredirect</string>
     <key>CFBundleURLTypes</key><array>

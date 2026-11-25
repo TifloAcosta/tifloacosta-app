@@ -1442,3 +1442,12 @@
 "Intérprete" = "Artist";
 
 "Posible canción duplicada" = "Possible duplicate song";
+
+"Identificar canción" = "Identify song";
+"Identificar canciones visibles" = "Identify visible songs";
+"Identificar al importar con AcoustID" = "Identify on import with AcoustID";
+"AcoustID recibe la huella acústica y la duración. El audio se queda en el dispositivo." = "AcoustID receives the acoustic fingerprint and duration. Audio stays on your device.";
+"Cancelar identificación" = "Cancel identification";
+"Identificar con AcoustID" = "Identify with AcoustID";
+"Identificación musical" = "Music identification";
+"Identificadas: %d de %d. Errores: %d." = "Identified: %d of %d. Errors: %d.";

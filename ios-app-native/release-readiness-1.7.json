@@ -466,7 +466,7 @@
         "ios-app-native/Sources/NativeMusicPlayer.swift",
         "ios-app-native/tests/music-import-rollback-phase5-20261120.test.mjs"
       ],
-      "validation": "La importación y recepción compartida consultan título e intérprete locales. Las copias aptas se nombran Intérprete - Título.ext sin recodificación, con nombres alternativos cuando existe otro archivo, conservando el UUID y guardando el índice antes de retirar la ruta anterior. Mi Música permite editar título e intérprete desde el menú y las acciones de VoiceOver, y conserva la edición ante lecturas asíncronas de etiquetas. Falta ShazamKit, identificación de canciones sin etiquetas fiable de forma individual y por lote, autorización de red, reconocimiento acústico y prueba en dispositivo. Se señalan posibles duplicados por coincidencia normalizada de título e intérprete, sin eliminar archivos."
+      "validation": "La importación y recepción compartida consultan título e intérprete locales. Las copias aptas se nombran Intérprete - Título.ext sin recodificación, con nombres alternativos cuando existe otro archivo, conservando el UUID y guardando el índice antes de retirar la ruta anterior. Mi Música permite editar título e intérprete desde el menú y las acciones de VoiceOver, y conserva la edición ante lecturas asíncronas de etiquetas. Se añade reconocimiento individual, por lote y automático opcional al importar mediante Chromaprint local y AcoustID con metadatos básicos de MusicBrainz. La gestión de discrepancias conserva el nombre original. Faltan registrar la app en AcoustID, configurar el identificador público y validar en iPhone. Se señalan posibles duplicados por coincidencia normalizada de título e intérprete, sin eliminar archivos."
     }
   ],
   "operational": [

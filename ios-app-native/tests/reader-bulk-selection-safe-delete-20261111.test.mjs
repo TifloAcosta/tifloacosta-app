@@ -43,3 +43,10 @@ test('La biblioteca guarda el índice antes de eliminar los archivos y revierte 
   const folder = reader.slice(reader.indexOf('func deleteFolder'), reader.indexOf('func resetPreferences'));
   assert.match(folder, /try save\(\)[\s\S]*?documents = previous\s+throw error[\s\S]*?folders\.removeAll/);
 });
+
+test('Los cambios por lotes restauran el catálogo si no se puede escribir', () => {
+  const changes = reader.slice(reader.indexOf('func moveDocuments'), reader.indexOf('func deleteFolder'));
+  assert.equal([...changes.matchAll(/documents = previous\s+throw error/g)].length, 2);
+  assert.match(reader, /let count = try library\.markFavorites\(/);
+  assert.match(reader, /let count = try library\.moveDocuments\(/);
+});

@@ -423,7 +423,7 @@
         "ios-app-native/Sources/NativeAccessibleCinema.swift",
         "ios-app-native/tests/reader-folder-delete-media-current-20261123.test.mjs"
       ],
-      "validation": "TifloLector identifica carpeta a eliminar y aclara que conserva las obras; libros y lote ya estaban identificados. Mi música confirma canción, carpeta virtual, lista y carpeta inteligente; Pódcast confirma descarga y Multicines personal confirma archivo. Todos ofrecen Cancelar. Se añadieron traducciones EN/PT/FR/IT/DE. TifloLector confirma en una sola escritura la baja del índice antes de retirar los archivos, restaura el índice en memoria si falla el guardado y conserva la carpeta si no se pudo actualizar la biblioteca. Falta auditoría manual de otras acciones destructivas y ensayo de lector de pantalla."
+      "validation": "TifloLector identifica carpeta a eliminar y aclara que conserva las obras; libros y lote ya estaban identificados. Mi música confirma canción, carpeta virtual, lista y carpeta inteligente; Pódcast confirma descarga y Multicines personal confirma archivo. Todos ofrecen Cancelar. Se añadieron traducciones EN/PT/FR/IT/DE. TifloLector confirma en una sola escritura la baja del índice antes de retirar los archivos, restaura el índice en memoria si falla el guardado y conserva la carpeta si no se pudo actualizar la biblioteca. Los movimientos y favoritos por lote restauran el catálogo si falla su guardado, y anuncian el error sin confirmar la operación. Falta ensayo de lector de pantalla y revisión del resto de secciones."
     },
     {
       "id": 29,

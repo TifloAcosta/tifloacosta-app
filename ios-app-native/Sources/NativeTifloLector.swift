@@ -703,17 +703,15 @@ final class NativeReaderLibrary: ObservableObject {
         return true
     }
 
-    func move(_ document: NativeReadingDocument, to folder: String?) {
-        if let folder, !folders.contains(folder) { return }
-        guard let index = documents.firstIndex(where: { $0.id == document.id }) else { return }
-        documents[index].folderName = folder
-        try? save()
+    func move(_ document: NativeReadingDocument, to folder: String?) throws {
+        _ = try moveDocuments(withIDs: [document.id], to: folder)
     }
 
     /// Acciones en lote: una única escritura de la biblioteca por operación.
     @discardableResult
-    func moveDocuments(withIDs ids: Set<UUID>, to folder: String?) -> Int {
+    func moveDocuments(withIDs ids: Set<UUID>, to folder: String?) throws -> Int {
         if let folder, !folders.contains(folder) { return 0 }
+        let previous = documents
         var changed = 0
         for index in documents.indices where ids.contains(documents[index].id) {
             if documents[index].folderName != folder {
@@ -721,12 +719,19 @@ final class NativeReaderLibrary: ObservableObject {
                 changed += 1
             }
         }
-        if changed > 0 { try? save() }
+        if changed > 0 {
+            do { try save() }
+            catch {
+                documents = previous
+                throw error
+            }
+        }
         return changed
     }
 
     @discardableResult
-    func markFavorites(withIDs ids: Set<UUID>, favorite: Bool) -> Int {
+    func markFavorites(withIDs ids: Set<UUID>, favorite: Bool) throws -> Int {
+        let previous = documents
         var changed = 0
         for index in documents.indices where ids.contains(documents[index].id) {
             if (documents[index].isFavorite ?? false) != favorite {
@@ -734,7 +739,13 @@ final class NativeReaderLibrary: ObservableObject {
                 changed += 1
             }
         }
-        if changed > 0 { try? save() }
+        if changed > 0 {
+            do { try save() }
+            catch {
+                documents = previous
+                throw error
+            }
+        }
         return changed
     }
 
@@ -2044,13 +2055,21 @@ struct NativeReaderLibraryScreen: View {
                     Button("Eliminar seleccionados") { showBulkDelete = true }
                         .disabled(visibleSelection.isEmpty)
                     Button("Añadir seleccionados a favoritos") {
-                        let count = library.markFavorites(withIDs: visibleSelection, favorite: true)
-                        finishSelection("\(count) documentos añadidos a favoritos.")
+                        do {
+                            let count = try library.markFavorites(withIDs: visibleSelection, favorite: true)
+                            finishSelection("\(count) documentos añadidos a favoritos.")
+                        } catch {
+                            importError = error.localizedDescription
+                        }
                     }
                     .disabled(visibleSelection.isEmpty)
                     Button("Quitar seleccionados de favoritos") {
-                        let count = library.markFavorites(withIDs: visibleSelection, favorite: false)
-                        finishSelection("\(count) documentos retirados de favoritos.")
+                        do {
+                            let count = try library.markFavorites(withIDs: visibleSelection, favorite: false)
+                            finishSelection("\(count) documentos retirados de favoritos.")
+                        } catch {
+                            importError = error.localizedDescription
+                        }
                     }
                     .disabled(visibleSelection.isEmpty)
                 }
@@ -2298,13 +2317,21 @@ struct NativeReaderLibraryScreen: View {
                 showCreateFolderForSelection = true
             }
             Button("Sin carpeta") {
-                let count = library.moveDocuments(withIDs: visibleSelection, to: nil)
-                finishSelection("\(count) documentos movidos fuera de las carpetas.")
+                do {
+                    let count = try library.moveDocuments(withIDs: visibleSelection, to: nil)
+                    finishSelection("\(count) documentos movidos fuera de las carpetas.")
+                } catch {
+                    importError = error.localizedDescription
+                }
             }
             ForEach(library.folders, id: \.self) { folder in
                 Button(folder) {
-                    let count = library.moveDocuments(withIDs: visibleSelection, to: folder)
-                    finishSelection("\(count) documentos movidos a \(folder).")
+                    do {
+                        let count = try library.moveDocuments(withIDs: visibleSelection, to: folder)
+                        finishSelection("\(count) documentos movidos a \(folder).")
+                    } catch {
+                        importError = error.localizedDescription
+                    }
                 }
             }
             Button("Cancelar", role: .cancel) {}
@@ -2323,8 +2350,13 @@ struct NativeReaderLibraryScreen: View {
                     selectionFeedback = "No se pudo crear la carpeta. Comprueba que el nombre no esté vacío, repetido o sea demasiado largo."
                     return
                 }
-                let count = library.moveDocuments(withIDs: documentIDs, to: name)
-                finishSelection("\(count) documentos movidos a la nueva carpeta \(name).")
+                do {
+                    let count = try library.moveDocuments(withIDs: documentIDs, to: name)
+                    finishSelection("\(count) documentos movidos a la nueva carpeta \(name).")
+                } catch {
+                    try? library.deleteFolder(name)
+                    importError = error.localizedDescription
+                }
             }
             Button("Cancelar", role: .cancel) {}
         } message: {
@@ -2354,12 +2386,18 @@ struct NativeReaderLibraryScreen: View {
                                 set: { if !$0 { folderForDocument = nil } }),
                             titleVisibility: .visible) {
             Button("Sin carpeta") {
-                if let doc = folderForDocument { library.move(doc, to: nil) }
+                if let doc = folderForDocument {
+                    do { try library.move(doc, to: nil) }
+                    catch { importError = error.localizedDescription }
+                }
                 folderForDocument = nil
             }
             ForEach(library.folders, id: \.self) { folder in
                 Button(folder) {
-                    if let doc = folderForDocument { library.move(doc, to: folder) }
+                    if let doc = folderForDocument {
+                        do { try library.move(doc, to: folder) }
+                        catch { importError = error.localizedDescription }
+                    }
                     folderForDocument = nil
                 }
             }

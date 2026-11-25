@@ -4,6 +4,8 @@ on:
     branches:
       - development/next-public-1.6-500200-20261121
   workflow_dispatch:
+env:
+  TIFLO_ACOUSTID_CLIENT: ${{ vars.TIFLO_ACOUSTID_CLIENT }}
 permissions:
   contents: read
 concurrency:
@@ -96,7 +98,7 @@ jobs:
             -scheme TifloAcostaNative -configuration Debug \
             -destination 'generic/platform=iOS Simulator' \
             -derivedDataPath "$RUNNER_TEMP/TifloAcosta-17-build" \
-            ARCHS=arm64 CODE_SIGNING_ALLOWED=NO build
+            ARCHS=arm64 CODE_SIGNING_ALLOWED=NO TIFLO_ACOUSTID_CLIENT="$TIFLO_ACOUSTID_CLIENT" build
       - name: Medir el ejecutable y la aplicación del simulador
         run: |
           app="$(find "$RUNNER_TEMP/TifloAcosta-17-build/Build/Products" -type d -name TifloAcostaNative.app -print -quit)"
@@ -115,7 +117,7 @@ jobs:
             -scheme TifloAcostaNative -configuration Debug \
             -destination 'generic/platform=iOS' \
             -derivedDataPath "$RUNNER_TEMP/TifloAcosta-device-build" \
-            ARCHS=arm64 CODE_SIGNING_ALLOWED=NO build
+            ARCHS=arm64 CODE_SIGNING_ALLOWED=NO TIFLO_ACOUSTID_CLIENT="$TIFLO_ACOUSTID_CLIENT" build
       - name: Conservar las muestras PDF generadas para auditar la estructura
         if: always()
         uses: actions/upload-artifact@v4
@@ -160,7 +162,7 @@ jobs:
             -scheme TifloAcostaNative -configuration Debug \
             -destination 'generic/platform=iOS Simulator' \
             -derivedDataPath "$RUNNER_TEMP/TifloAcosta-baseline" \
-            ARCHS=arm64 CODE_SIGNING_ALLOWED=NO build
+            ARCHS=arm64 CODE_SIGNING_ALLOWED=NO TIFLO_ACOUSTID_CLIENT="$TIFLO_ACOUSTID_CLIENT" build
           app="$(find "$RUNNER_TEMP/TifloAcosta-baseline/Build/Products" -type d -name TifloAcostaNative.app -print -quit)"
           test -n "$app"
           python3 - "$app" <<'PYTHON'

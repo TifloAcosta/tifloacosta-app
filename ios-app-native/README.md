@@ -51,3 +51,9 @@ envía la huella comprimida y la duración, sin enviar el archivo de audio.
 Solo se conservan título e intérprete de los registros básicos de MusicBrainz
 (CC0) ante una coincidencia inequívoca. Se incluye el aviso de licencia de
 Chromaprint en la aplicación compilada.
+
+Desde Ajustes de Mi Música, la cuenta AcoustID se puede vincular con un
+código de autorización o pegando una clave personal. Para buscar, esta
+implementación pide una clave personal incluso antes de enero de 2027.
+La clave queda en el llavero de este iPhone y se envía solo en cabeceras
+HTTPS. El código de vinculación caduca y no se usa para identificar música.

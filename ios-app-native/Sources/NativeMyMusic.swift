@@ -984,6 +984,7 @@ struct NativeMyMusicScreen: View {
     private var musicSettings: some View {
         List {
             NavigationLink("Conexión") { musicConnectionSettings }
+            NavigationLink("Cuenta AcoustID") { NativeAcoustIDAccount() }
             NavigationLink("Información de VoiceOver") { musicVoiceOverSettings }
             NavigationLink("Copias de seguridad") { musicBackupSettings }
             NavigationLink("Ecualizador") { musicEqualizerSettings }
@@ -1372,7 +1373,6 @@ struct NativeMyMusicScreen: View {
                 Button("Crear lista de reproducción") { showingPlaylistEditor = true }
                 Button("Crear carpeta inteligente") { showingSmartFolderEditor = true }
             }
-            NavigationLink("Cuenta AcoustID") { NativeAcoustIDAccount() }
             if recognitionTask != nil {
                 Button("Cancelar identificación") { recognitionTask?.cancel() }
             }

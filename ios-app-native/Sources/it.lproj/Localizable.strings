@@ -1449,3 +1449,21 @@
 "Identificar con AcoustID" = "Identifica con AcoustID";
 "Identificación musical" = "Identificazione musicale";
 "Identificadas: %d de %d. Errores: %d." = "Identificati: %d di %d. Errori: %d.";
+
+"Cuenta AcoustID" = "Account AcoustID";
+"Cuenta vinculada" = "Account collegato";
+"Cuenta sin vincular" = "Account non collegato";
+"Solicitar código de vinculación" = "Richiedi codice di collegamento";
+"Código: %@" = "Codice: %@";
+"Autorizar en AcoustID" = "Autorizza su AcoustID";
+"Cancelar vinculación" = "Annulla collegamento";
+"Desvincular de este iPhone" = "Scollega da questo iPhone";
+"Clave personal de AcoustID" = "Chiave personale AcoustID";
+"Validar y guardar clave" = "Verifica e salva chiave";
+"Abrir la página de mi clave" = "Apri la pagina della mia chiave";
+"Falta configurar el identificador público de TifloAcosta en AcoustID." = "Occorre configurare l’identificativo pubblico AcoustID di TifloAcosta.";
+"Esperando autorización en AcoustID." = "In attesa di autorizzazione su AcoustID.";
+"El código ya no permite vincular la cuenta." = "Questo codice non consente più di collegare l’account.";
+"No se pudo vincular la cuenta de AcoustID." = "Impossibile collegare l’account AcoustID.";
+"La clave personal de AcoustID no es válida." = "La chiave personale AcoustID non è valida.";
+"No se pudo desvincular la cuenta de AcoustID." = "Impossibile scollegare l’account AcoustID.";

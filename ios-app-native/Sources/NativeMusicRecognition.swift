@@ -23,7 +23,51 @@ actor NativeMusicRecognition {
         let results: [Result]?
     }
 
-    private var nextRequest = Date.distantPast
+    private let clock = ContinuousClock()
+    private var lastRequest: ContinuousClock.Instant?
+    private var blockedUntil: ContinuousClock.Instant?
+
+    struct LinkResponse: Decodable {
+        struct User: Decodable {
+            struct Link: Decodable {
+                let code: String
+                let url: URL
+                let expires: String
+            }
+            let apikey: String
+            let link: Link
+        }
+        let status: String
+        let user: User?
+    }
+
+    enum KeyState: String, Decodable {
+        case pending, approved, declined, expired, revoked, unknown
+    }
+
+    private struct KeyResponse: Decodable {
+        struct Key: Decodable { let state: KeyState }
+        let status: String
+        let key: Key?
+    }
+
+    func requestLink(client: String) async throws -> LinkResponse.User {
+        let data = try await request("user/request_link", client: client, fields: [
+            URLQueryItem(name: "device", value: "TifloAcosta iOS")
+        ])
+        let result = try JSONDecoder().decode(LinkResponse.self, from: data)
+        guard result.status == "ok", let user = result.user,
+              user.link.url.scheme == "https", user.link.url.host == "acoustid.org",
+              user.link.url.path == "/link" else { throw URLError(.badServerResponse) }
+        return user
+    }
+
+    func linkStatus(client: String, user: String) async throws -> KeyState {
+        let data = try await request("user/link_status", client: client, user: user)
+        let result = try JSONDecoder().decode(KeyResponse.self, from: data)
+        guard result.status == "ok", let key = result.key else { throw URLError(.badServerResponse) }
+        return key.state
+    }
 
     static var clientKey: String? {
         guard let key = Bundle.main.object(forInfoDictionaryKey: "TifloAcoustIDClient") as? String,
@@ -32,28 +76,14 @@ actor NativeMusicRecognition {
     }
 
     func identify(_ audioURL: URL, client: String) async throws -> Match? {
+        let user = try NativeAcoustIDKeychain.read(.active)
+        guard let user else { throw URLError(.userAuthenticationRequired) }
         let sample = try Self.fingerprint(audioURL)
-        try Task.checkCancellation()
-        let now = Date()
-        let slot = max(now, nextRequest)
-        nextRequest = slot.addingTimeInterval(1)
-        try await Task.sleep(for: .seconds(max(0, slot.timeIntervalSince(now))))
-
-        var fields = URLComponents()
-        fields.queryItems = [
-            URLQueryItem(name: "client", value: client),
+        let data = try await request("lookup", client: client, user: user, fields: [
             URLQueryItem(name: "duration", value: String(sample.duration)),
             URLQueryItem(name: "fingerprint", value: sample.value),
-            URLQueryItem(name: "meta", value: "recordings"),
-            URLQueryItem(name: "format", value: "json")
-        ]
-        var request = URLRequest(url: URL(string: "https://api.acoustid.org/v2/lookup")!)
-        request.httpMethod = "POST"
-        request.timeoutInterval = 20
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.httpBody = fields.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B").data(using: .utf8)
-        let (data, response) = try await URLSession.shared.data(for: request)
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw URLError(.badServerResponse) }
+            URLQueryItem(name: "meta", value: "recordings")
+        ])
         let payload = try JSONDecoder().decode(Response.self, from: data)
         guard payload.status == "ok" else { throw URLError(.badServerResponse) }
 
@@ -69,6 +99,35 @@ actor NativeMusicRecognition {
         }
         // Keep the user's existing metadata when multiple credits disagree.
         return candidates.count == 1 ? candidates.values.first : nil
+    }
+
+    private func request(_ path: String, client: String, user: String? = nil,
+                         fields: [URLQueryItem] = []) async throws -> Data {
+        while true {
+            try Task.checkCancellation()
+            let now = clock.now
+            let next = max(lastRequest?.advanced(by: .seconds(1)) ?? now, blockedUntil ?? now)
+            if next <= now { lastRequest = now; break }
+            try await clock.sleep(until: next)
+        }
+        var form = URLComponents()
+        form.queryItems = fields + [URLQueryItem(name: "format", value: "json")]
+        var request = URLRequest(url: URL(string: "https://api.acoustid.org/v2/" + path)!)
+        request.httpMethod = "POST"
+        request.timeoutInterval = 20
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue(client, forHTTPHeaderField: "Acoustid-App-Key")
+        if let user { request.setValue(user, forHTTPHeaderField: "Acoustid-User-Key") }
+        request.httpBody = form.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B").data(using: .utf8)
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let http = response as? HTTPURLResponse else { throw URLError(.badServerResponse) }
+        if http.statusCode == 429 {
+            let seconds = http.value(forHTTPHeaderField: "Retry-After").flatMap(Int.init) ?? 30
+            let deadline = clock.now.advanced(by: .seconds(max(1, seconds)))
+            blockedUntil = max(blockedUntil ?? deadline, deadline)
+        }
+        guard http.statusCode == 200 else { throw URLError(.badServerResponse) }
+        return data
     }
 
     private static func fingerprint(_ url: URL) throws -> (value: String, duration: Int) {

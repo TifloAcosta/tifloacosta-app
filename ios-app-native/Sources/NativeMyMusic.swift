@@ -852,7 +852,6 @@ struct NativeMyMusicScreen: View {
     @State private var newSmartFolderName = ""
     @State private var newSmartFolderKeyword = ""
     @State private var selectedSmartRule = MusicSmartRuleKind.title
-    @AppStorage("mi-musica-acoustid-auto") private var automaticRecognition = false
     @State private var recognitionSelection: [UUID]?
     @State private var recognitionTask: Task<Void, Never>?
     @State private var recognitionResult: String?
@@ -1373,11 +1372,7 @@ struct NativeMyMusicScreen: View {
                 Button("Crear lista de reproducción") { showingPlaylistEditor = true }
                 Button("Crear carpeta inteligente") { showingSmartFolderEditor = true }
             }
-            if NativeMusicRecognition.clientKey != nil {
-                Toggle("Identificar al importar con AcoustID", isOn: $automaticRecognition)
-                Text("AcoustID recibe la huella acústica y la duración. El audio se queda en el dispositivo.")
-                    .font(.footnote)
-            }
+            NavigationLink("Cuenta AcoustID") { NativeAcoustIDAccount() }
             if recognitionTask != nil {
                 Button("Cancelar identificación") { recognitionTask?.cancel() }
             }

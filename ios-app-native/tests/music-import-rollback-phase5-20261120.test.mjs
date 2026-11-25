@@ -37,5 +37,8 @@ test('AcoustID solo recibe una huella local, con activación voluntaria y coinci
   assert.match(recognition, /candidates\.count == 1/);
   assert.doesNotMatch(recognition, /uploadTask|Data\(contentsOf: audioURL/);
   assert.match(build, /-DFFT_LIB=vdsp -DUSE_INTERNAL_AVRESAMPLE=OFF/);
-  assert.match(music, /@AppStorage\("mi-musica-acoustid-auto"\).* = false/);
+  const account = readFileSync(new URL('../Sources/NativeAcoustIDAccount.swift', import.meta.url), 'utf8');
+  assert.match(account, /@AppStorage\("mi-musica-acoustid-auto"\).* = false/);
+  assert.match(recognition, /Acoustid-User-Key/);
+  assert.match(account, /PasteButton/);
 });

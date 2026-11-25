@@ -9,6 +9,8 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
     private var run = ""
     private var bold = false
     private var italic = false
+    private var underline = false
+    private var verticalAlignment: String?
     private var language: String?
     private var textDepth = 0
     private var ignoredDepth = 0
@@ -121,9 +123,14 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
                let depth = Int(value.dropFirst("heading".count)), (1...6).contains(depth) { heading = depth }
         case "outlineLvl":
             if let raw = attributes["w:val"], let value = Int(raw), (0...5).contains(value) { heading = value + 1 }
-        case "r": run = ""; bold = false; italic = false; language = nil
+        case "r": run = ""; bold = false; italic = false; underline = false; verticalAlignment = nil; language = nil
         case "b": bold = !["0", "false", "off"].contains(attributes["w:val"] ?? "")
         case "i": italic = !["0", "false", "off"].contains(attributes["w:val"] ?? "")
+        case "u": underline = !["none", "0", "false", "off"].contains(attributes["w:val"] ?? "single")
+        case "vertAlign":
+            if let value = attributes["w:val"], ["subscript", "superscript"].contains(value) {
+                verticalAlignment = value
+            }
         case "lang": language = attributes["w:val"]
         case "drawing":
             drawing = true
@@ -182,6 +189,11 @@ final class NativeDOCXConversionMarkup: NSObject, XMLParserDelegate {
         case "r":
             if bold { run = "<strong>\(run)</strong>" }
             if italic { run = "<em>\(run)</em>" }
+            if underline { run = "<u>\(run)</u>" }
+            if let verticalAlignment {
+                let tag = verticalAlignment == "subscript" ? "sub" : "sup"
+                run = "<\(tag)>\(run)</\(tag)>"
+            }
             if let language { run = "<span xml:lang=\"\(escape(language))\">\(run)</span>" }
             paragraph? += run
         case "hyperlink":

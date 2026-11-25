@@ -174,6 +174,19 @@ struct DocumentConversionSmoke {
         let didCancel = try await cancelled.value
         precondition(didCancel && !FileManager.default.fileExists(atPath: root.appendingPathComponent("cancelled").path))
 
+        let interruptedPDF = root.appendingPathComponent("interrupted-pdf")
+        let interrupted = Task.detached { () throws -> Bool in
+            do {
+                _ = try NativeDocumentConversion.convert(source, to: .pdf, in: interruptedPDF) { progress in
+                    if progress == 0.96 { withUnsafeCurrentTask { $0?.cancel() } }
+                }
+                return false
+            } catch is CancellationError { return true }
+        }
+        let interruptedResult = try await interrupted.value
+        let stagedFiles = try FileManager.default.contentsOfDirectory(atPath: interruptedPDF.path)
+        precondition(interruptedResult && stagedFiles.isEmpty, "A cancelled PDF conversion must discard staging")
+
         let badZIP = root.appendingPathComponent("Dañado.epub")
         try Data([0x50, 0x4b, 0x03, 0x04]).write(to: badZIP)
         let damaged = NativeConversionSource(filename: badZIP.lastPathComponent, title: "Dañado",
@@ -199,7 +212,7 @@ struct DocumentConversionSmoke {
         let png = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9Zr9kAAAAASUVORK5CYII="
         try """
         <html lang="es"><head><title>Tabla original</title><meta name="author" content="Autora"/></head><body>
-        <h2 id="tabla">Tabla</h2><ul><li>Primero</li></ul>
+        <h2 id="tabla">Tabla</h2><ul><li>Primero</li></ul><ol type="I" start="3"><li>Romano</li><li value="7">Reinicio</li></ol>
         <table><caption>Datos</caption><tr><th scope="col">Valor</th><td>Ñ</td></tr></table>
         <img src="data:image/png;base64,\(png)" alt="Imagen de prueba" onload="bad()"/>
         <script>bad()</script><a href="#tabla">Volver</a>
@@ -240,7 +253,8 @@ struct DocumentConversionSmoke {
         let rtfMarkup = try String(contentsOf: richRTF, encoding: .utf8)
         precondition(rtfMarkup.contains("\\outlinelevel1") && rtfMarkup.contains("\\pict") &&
             rtfMarkup.contains("Imagen de prueba") && rtfMarkup.contains("HYPERLINK") &&
-            rtfMarkup.contains("\\trowd") && rtfMarkup.contains("\\cellx") && rtfMarkup.contains("\\listtable"))
+            rtfMarkup.contains("\\trowd") && rtfMarkup.contains("\\cellx") && rtfMarkup.contains("\\listtable") && rtfMarkup.contains("\\levelnfc1") &&
+            rtfMarkup.contains("\\levelstartat7") && rtfMarkup.contains("VII.\\tab"))
         let richRTFReader = try NSAttributedString(url: richRTF,
             options: [.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil)
         precondition(richRTFReader.string.contains("Imagen de prueba") && richRTFReader.string.contains("Hinweis – opinião."))

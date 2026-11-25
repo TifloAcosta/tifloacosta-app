@@ -1,5 +1,6 @@
 #include "TifloPDFPostprocess.h"
 #include <qpdf/qpdf-c.h>
+#include <stdio.h>
 
 // Quartz emits a flat number tree for its page marked-content references.
 static int attach_link(qpdf_data pdf, qpdf_oh tree, qpdf_oh numbers,
@@ -34,7 +35,7 @@ static int attach_link(qpdf_data pdf, qpdf_oh tree, qpdf_oh numbers,
 
 // Quartz writes page-local MCIDs and their structure elements but may omit
 // the reverse lookup required by readers and validators.
-static void complete_quartz_parent_tree(qpdf_data pdf, qpdf_oh tree, int pages) {
+static void complete_quartz_parent_tree(qpdf_data pdf, qpdf_oh tree, int pages, int (*cancelled)(void)) {
     if (!qpdf_oh_is_null(pdf, qpdf_oh_get_key(pdf, tree, "/ParentTree"))) return;
     qpdf_oh document = qpdf_oh_get_key(pdf, tree, "/K");
     if (!qpdf_oh_is_dictionary(pdf, document)) return;
@@ -45,6 +46,7 @@ static void complete_quartz_parent_tree(qpdf_data pdf, qpdf_oh tree, int pages) 
     qpdf_oh page_refs = qpdf_oh_new_array(pdf);
     qpdf_oh numbers = qpdf_oh_new_array(pdf);
     for (int i = 0; i < pages; ++i) {
+        if (cancelled && cancelled()) return;
         qpdf_oh refs = qpdf_oh_new_array(pdf);
         qpdf_oh_append_item(pdf, page_refs, refs);
     }
@@ -52,6 +54,7 @@ static void complete_quartz_parent_tree(qpdf_data pdf, qpdf_oh tree, int pages) 
     long long allocated_slots = 0;
     qpdf_oh page = qpdf_get_page_n(pdf, page_index);
     for (int i = 0; i < count; ++i) {
+        if (cancelled && cancelled()) return;
         qpdf_oh child = qpdf_oh_get_array_item(pdf, children, i);
         if (!qpdf_oh_is_indirect(pdf, child) || !qpdf_oh_is_dictionary(pdf, child)) return;
         qpdf_oh content = qpdf_oh_get_key(pdf, child, "/K");
@@ -88,7 +91,8 @@ static void complete_quartz_parent_tree(qpdf_data pdf, qpdf_oh tree, int pages) 
 }
 
 int tiflo_pdf_postprocess(const char *input, const char *output, const char *language,
-                          const char *const *labels, const int *owners, size_t label_count, size_t owner_count) {
+                          const char *const *labels, const int *owners, size_t label_count, size_t owner_count, int (*cancelled)(void)) {
+    if (cancelled && cancelled()) return -1;
     qpdf_data pdf = qpdf_init();
     if (!pdf) return QPDF_ERRORS;
     qpdf_silence_errors(pdf);
@@ -97,6 +101,7 @@ int tiflo_pdf_postprocess(const char *input, const char *output, const char *lan
     int result = qpdf_read(pdf, input, 0) & QPDF_ERRORS;
     if (result != 0 || qpdf_has_error(pdf)) goto failed;
 
+    if (cancelled && cancelled()) goto cancelled_output;
     qpdf_oh root = qpdf_get_root(pdf);
     qpdf_oh preferences = qpdf_oh_get_key(pdf, root, "/ViewerPreferences");
     if (!qpdf_oh_is_dictionary(pdf, preferences)) {
@@ -111,11 +116,13 @@ int tiflo_pdf_postprocess(const char *input, const char *output, const char *lan
     int pages = qpdf_get_num_pages(pdf);
     size_t total_links = 0;
     for (int i = 0; i < pages; ++i) {
+        if (cancelled && cancelled()) goto cancelled_output;
         qpdf_oh page = qpdf_get_page_n(pdf, i);
         qpdf_oh annotations = qpdf_oh_get_key(pdf, page, "/Annots");
         if (!qpdf_oh_is_array(pdf, annotations)) continue;
         int count = qpdf_oh_get_array_n_items(pdf, annotations);
         for (int j = 0; j < count; ++j) {
+            if (cancelled && cancelled()) goto cancelled_output;
             qpdf_oh annotation = qpdf_oh_get_array_item(pdf, annotations, j);
             qpdf_oh subtype = qpdf_oh_get_key(pdf, annotation, "/Subtype");
             if (qpdf_oh_is_name_and_equals(pdf, subtype, "/Link")) ++total_links;
@@ -126,7 +133,8 @@ int tiflo_pdf_postprocess(const char *input, const char *output, const char *lan
     qpdf_oh numbers = 0;
     long long next_key = 0;
     if (qpdf_oh_is_dictionary(pdf, tree)) {
-        complete_quartz_parent_tree(pdf, tree, pages);
+        complete_quartz_parent_tree(pdf, tree, pages, cancelled);
+        if (cancelled && cancelled()) goto cancelled_output;
         qpdf_oh parent_tree = qpdf_oh_get_key(pdf, tree, "/ParentTree");
         if (qpdf_oh_is_dictionary(pdf, parent_tree) &&
             qpdf_oh_is_null(pdf, qpdf_oh_get_key(pdf, parent_tree, "/Kids")) &&
@@ -152,6 +160,7 @@ int tiflo_pdf_postprocess(const char *input, const char *output, const char *lan
         (size_t)qpdf_oh_get_array_n_items(pdf, elements) == owner_count;
     size_t label = 0;
     for (int i = 0; i < pages; ++i) {
+        if (cancelled && cancelled()) goto cancelled_output;
         qpdf_oh page = qpdf_get_page_n(pdf, i);
         qpdf_oh annotations = qpdf_oh_get_key(pdf, page, "/Annots");
         if (!qpdf_oh_is_array(pdf, annotations)) continue;
@@ -159,6 +168,7 @@ int tiflo_pdf_postprocess(const char *input, const char *output, const char *lan
         if (total_links != label_count) continue;
         int count = qpdf_oh_get_array_n_items(pdf, annotations);
         for (int j = 0; j < count; ++j) {
+            if (cancelled && cancelled()) goto cancelled_output;
             qpdf_oh annotation = qpdf_oh_get_array_item(pdf, annotations, j);
             qpdf_oh subtype = qpdf_oh_get_key(pdf, annotation, "/Subtype");
             if (!qpdf_oh_is_name_and_equals(pdf, subtype, "/Link")) continue;
@@ -185,12 +195,19 @@ int tiflo_pdf_postprocess(const char *input, const char *output, const char *lan
     if (numbers && next_key > 0)
         qpdf_oh_replace_key(pdf, tree, "/ParentTreeNextKey", qpdf_oh_new_integer(pdf, next_key));
     if (qpdf_has_error(pdf)) goto failed;
+    if (cancelled && cancelled()) goto cancelled_output;
     result = qpdf_init_write(pdf, output) & QPDF_ERRORS;
     if (result != 0 || qpdf_has_error(pdf)) goto failed;
     result = qpdf_write(pdf) & QPDF_ERRORS;
     if (result != 0 || qpdf_has_error(pdf)) goto failed;
+    if (cancelled && cancelled()) goto cancelled_output;
     qpdf_cleanup(&pdf);
     return 0;
+cancelled_output:
+    qpdf_cleanup(&pdf);
+    // The Swift caller always supplies a new private staging path.
+    remove(output);
+    return -1;
 failed:
     result = QPDF_ERRORS;
     qpdf_cleanup(&pdf);

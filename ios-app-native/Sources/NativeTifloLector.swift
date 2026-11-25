@@ -355,7 +355,12 @@ final class NativeReaderLibrary: ObservableObject {
             NativeReadingDocument(id: identifier, title: title, body: text, importedAt: .now),
             at: 0
         )
-        try save()
+        do {
+            try save()
+        } catch {
+            documents.removeAll { $0.id == identifier }
+            throw error
+        }
     }
 
     func rename(_ document: NativeReadingDocument, to proposedTitle: String) {

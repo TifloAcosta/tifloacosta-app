@@ -8,7 +8,8 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
     private var rowStart: Int?
     private var cells = 0
     private struct ListState {
-        let id: Int
+        var id: Int
+        let format: Int
         var next: Int?
     }
     private var listStates: [ListState] = []
@@ -39,15 +40,6 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
         }
         try Task.checkCancellation()
         return output + "}"
-    }
-
-    private func makeList(start: Int?) -> ListState {
-        let id = lists.count + 1
-        let numberFormat = start == nil ? 23 : 0
-        let levelText = start == nil ? "{\\leveltext\\'01\\u8226?;}{\\levelnumbers;}" : "{\\leveltext\\'02\\'00.;}{\\levelnumbers\\'01;}"
-        lists.append("{\\list\\listtemplateid\(id)\\listsimple1{\\listlevel\\levelnfc\(numberFormat)\\leveljc0\\levelfollow0\\levelstartat\(start ?? 1)\(levelText)}\\listid\(id)}")
-        overrides.append("{\\listoverride\\listid\(id)\\listoverridecount0\\ls\(id)}")
-        return ListState(id: id, next: start)
     }
 
     static func escape(_ text: String) -> String {
@@ -86,23 +78,18 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
         case "br": output += "\\line "
         case "ol", "ul":
             let start = tag == "ol" ? max(1, min(32767, attributes["start"].flatMap(Int.init) ?? 1)) : nil
-            listStates.append(makeList(start: start))
+            let format = tag == "ul" ? 23 : (["I": 1, "i": 2, "A": 3, "a": 4][attributes["type"] ?? ""] ?? 0)
+            listStates.append(ListState(id: registerList(format: format, start: start ?? 1), format: format, next: start))
         case "li":
             let indentation = min(listStates.count, 12) * 360
             output += "{\\pard" + (rowStart == nil ? "" : "\\intbl") + "\\li\(indentation) "
             if var list = listStates.last {
                 if let counter = list.next {
-                    // A new native list definition makes an explicit restart semantic,
-                    // rather than merely changing the visible listtext fallback.
-                    let requested = attributes["value"].flatMap(Int.init)
-                    if let requested, requested != counter, (1...32767).contains(requested) {
-                        list = makeList(start: requested)
-                        listStates[listStates.count - 1] = list
-                    }
-                    let value = list.next ?? counter
-                    output += "\\ls\(list.id)\\ilvl0 "
-                    output += "{\\listtext \(value).\\tab}"
-                    listStates[listStates.count - 1].next = min(value, Int.max - 1) + 1
+                    let value = max(1, min(32767, attributes["value"].flatMap(Int.init) ?? counter))
+                    if value != counter { list.id = registerList(format: list.format, start: value) }
+                    output += "\\ls\(list.id)\\ilvl0 {\\listtext \(Self.listMarker(value, format: list.format)).\\tab}"
+                    list.next = min(32767, value + 1)
+                    listStates[listStates.count - 1] = list
                 } else {
                     output += "\\ls\(list.id)\\ilvl0 {\\listtext\\bullet\\tab}"
                 }
@@ -147,6 +134,33 @@ final class NativeRTFConversionWriter: NSObject, XMLParserDelegate {
         default: break
         }
         endings.append(close)
+    }
+
+    private func registerList(format: Int, start: Int) -> Int {
+        let id = lists.count + 1
+        let levelText = format == 23 ? "{\\leveltext\\'01\\u8226?;}{\\levelnumbers;}" : "{\\leveltext\\'02\\'00.;}{\\levelnumbers\\'01;}"
+        lists.append("{\\list\\listtemplateid\(id)\\listsimple1{\\listlevel\\levelnfc\(format)\\leveljc0\\levelfollow0\\levelstartat\(start)\(levelText)}\\listid\(id)}")
+        overrides.append("{\\listoverride\\listid\(id)\\listoverridecount0\\ls\(id)}")
+        return id
+    }
+
+    private static func listMarker(_ value: Int, format: Int) -> String {
+        if format == 3 || format == 4 {
+            let a = format == 3 ? 65 : 97
+            return String(repeating: String(UnicodeScalar(a + (value - 1) % 26)!), count: (value - 1) / 26 + 1)
+        }
+        if (format == 1 || format == 2) && value < 4000 {
+            var remainder = value
+            var result = ""
+            for (unit, symbol) in [(1000, "M"), (900, "CM"), (500, "D"), (400, "CD"), (100, "C"),
+                                   (90, "XC"), (50, "L"), (40, "XL"), (10, "X"), (9, "IX"),
+                                   (5, "V"), (4, "IV"), (1, "I")] {
+                result += String(repeating: symbol, count: remainder / unit)
+                remainder %= unit
+            }
+            return format == 2 ? result.lowercased() : result
+        }
+        return String(value)
     }
 
     private static func bookmark(_ id: String) -> String {

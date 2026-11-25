@@ -123,14 +123,16 @@ jobs:
           name: conversion-pdf-samples
           path: ${{ runner.temp }}/conversion-samples/conversion*.pdf
           if-no-files-found: ignore
-  size-baseline-506:
+  size-baseline-without-qpdf:
     runs-on: macos-15
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: 41d66483346ced8e92bf8bbf1307f259ead0770f
-      - name: Compilar la referencia 506 arm64 en Debug
+      - name: Preparar credencial de catálogo público Google Drive si está configurada
+        env:
+          TIFLO_CINEMA_PUBLIC_DRIVE_API_KEY: ${{ secrets.TIFLO_CINEMA_PUBLIC_DRIVE_API_KEY }}
+        run: python3 ios-app-native/scripts/configure-cinema-drive-key.py
+      - name: Compilar el mismo commit arm64 sin qpdf para medir su tamaño
         run: |
           set -euo pipefail
           xcode="$(find /Applications -maxdepth 1 -type d -name 'Xcode_26*.app' -print | sort | tail -n 1)"
@@ -138,6 +140,22 @@ jobs:
           export DEVELOPER_DIR="$xcode/Contents/Developer"
           xcodebuild -version
           brew install xcodegen
+          python3 - <<'PYTHON'
+          from pathlib import Path
+          project = Path("ios-app-native/project.yml")
+          config = project.read_text()
+          start = config.index("    preBuildScripts:\n")
+          end = config.index("    settings:\n", start)
+          config = config[:start] + config[end:]
+          config = "\n".join(line for line in config.splitlines()
+                             if "DERIVED_FILE_DIR)/TifloPDF/" not in line) + "\n"
+          config = config.replace(" -lqpdf -ljpeg -lz -lc++", " -lz")
+          project.write_text(config)
+          header = Path("ios-app-native/PDFEngine/TifloPDFPostprocess.h").read_text()
+          prototype = header[header.index("int tiflo_pdf_postprocess"):header.index(";")]
+          Path("ios-app-native/PDFEngine/TifloPDFPostprocess.c").write_text(
+              '#include "TifloPDFPostprocess.h"\n' + prototype + ' { return -1; }\n')
+          PYTHON
           (cd ios-app-native && xcodegen generate --spec project.yml)
           xcodebuild -project ios-app-native/TifloAcostaNative.xcodeproj \
             -scheme TifloAcostaNative -configuration Debug \

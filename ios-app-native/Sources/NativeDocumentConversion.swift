@@ -106,6 +106,7 @@ enum NativeDocumentConversion {
                     onProgress(0.6 + $0 * 0.35)
                 }
                 try Task.checkCancellation()
+                onProgress(0.96)
                 try finishPDF(intermediate, output: output, language: metadata.language, labels: metadata.labels, owners: metadata.owners, ownerCount: metadata.ownerCount)
             }
         }
@@ -569,11 +570,13 @@ enum NativeDocumentConversion {
         let result = pointers.withUnsafeBufferPointer { labels in
             owners.withUnsafeBufferPointer { owners in
                 tiflo_pdf_postprocess(input.path, output.path, language ?? "", labels.baseAddress,
-                                      owners.baseAddress, labels.count, ownerCount)
+                                      owners.baseAddress, labels.count, ownerCount) {
+                    Task.isCancelled ? 1 : 0
+                }
             }
         }
-        guard result == 0 else { throw Failure.invalidOutput }
         try Task.checkCancellation()
+        guard result == 0 else { throw Failure.invalidOutput }
     }
 
     private static func pdf(_ paragraphs: [Paragraph], title: String, markup: NativeConversionMarkup.Document?, output: URL,

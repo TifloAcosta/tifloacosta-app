@@ -295,6 +295,9 @@ enum NativeConversionMarkup {
             for name in ["scope", "rowspan", "colspan", "start", "value", "lang", "xml:lang", "dir", "epub:type"] {
                 if let value = attributes[name] { renderedAttributes += " \(name)=\"\(escape(value))\"" }
             }
+            if tag == "ol", let type = attributes["type"], ["1", "a", "A", "i", "I"].contains(type) {
+                renderedAttributes += " type=\"\(type)\""
+            }
             if let role = attributes["role"], ["doc-noteref", "doc-footnote", "doc-endnote",
                                                 "doc-endnotes", "doc-backlink"].contains(role) {
                 renderedAttributes += " role=\"\(role)\""

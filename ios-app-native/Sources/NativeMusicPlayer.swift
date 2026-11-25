@@ -342,6 +342,10 @@ final class NativeMusicPlayer: ObservableObject {
         equalizer.globalGain = gains.contains(where: { $0 > 0 }) ? -6 : 0
     }
 
+    func hasQueuedLocalFile(_ url: URL) -> Bool {
+        queue.contains { $0.url == url } || originalQueue.contains { $0.url == url }
+    }
+
     func play(name: String, url: URL, queue: [(name: String, url: URL)], playlistID: UUID? = nil,
               albumKeysByURL: [URL: String] = [:]) {
         currentPlaylistID = playlistID

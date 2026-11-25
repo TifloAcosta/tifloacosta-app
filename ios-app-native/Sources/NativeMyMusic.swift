@@ -108,8 +108,8 @@ private struct MusicPortableFolder: Codable {
 
 private struct MusicLocalFile: Identifiable, Codable {
     let id: UUID
-    let name: String
-    let fileName: String
+    var name: String
+    var fileName: String
     var album: String? = nil
     var artist: String? = nil
     var genre: String? = nil
@@ -210,18 +210,79 @@ private final class NativeMusicLibrary: ObservableObject {
         await refreshAlbumMetadata(for: files.filter { $0.album == nil }.map(\.id))
     }
 
-    private func refreshAlbumMetadata(for ids: [UUID]) async {
+    private func refreshAlbumMetadata(for ids: [UUID], renameImports: Bool = false) async {
         for id in ids {
-            guard let index = files.firstIndex(where: { $0.id == id }) else { continue }
-            let asset = AVURLAsset(url: audioURL(for: files[index]))
+            guard !Task.isCancelled, let current = files.first(where: { $0.id == id }) else { continue }
+            let original = audioURL(for: current)
+            let asset = AVURLAsset(url: original)
             guard let metadata = try? await asset.load(.commonMetadata) else { continue }
-            let album = AVMetadataItem.metadataItems(from: metadata, filteredByIdentifier: .commonIdentifierAlbumName).first?.stringValue
-            let artist = AVMetadataItem.metadataItems(from: metadata, filteredByIdentifier: .commonIdentifierArtist).first?.stringValue
-            guard let freshIndex = files.firstIndex(where: { $0.id == id }) else { continue }
-            files[freshIndex].album = album
-            files[freshIndex].artist = artist
+            func value(_ identifier: AVMetadataIdentifier) async -> String? {
+                guard let item = AVMetadataItem.metadataItems(from: metadata, filteredByIdentifier: identifier).first,
+                      let raw = try? await item.load(.stringValue) else { return nil }
+                let cleaned = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+                guard !cleaned.isEmpty, !["unknown", "unknown artist", "unknown title", "untitled", "desconocido",
+                    "artista desconocido", "sin título"].contains(cleaned.lowercased()) else { return nil }
+                return cleaned
+            }
+            let album = await value(.commonIdentifierAlbumName)
+            let artist = await value(.commonIdentifierArtist)
+            let title = await value(.commonIdentifierTitle)
+            guard !Task.isCancelled, let index = files.firstIndex(where: { $0.id == id }),
+                  audioURL(for: files[index]) == original else { continue }
+            var updated = files[index]
+            updated.album = updated.album ?? album
+            updated.artist = updated.artist ?? artist
+            if renameImports, let title { updated.name = title }
+            var renamed: URL?
+            if renameImports, let title, let artist,
+               !NativeMusicPlayer.shared.hasQueuedLocalFile(original) {
+                renamed = linkImportedAudio(original, title: title, artist: artist)
+                if let renamed { updated.fileName = renamed.lastPathComponent }
+            }
+            let previous = files[index]
+            files[index] = updated
+            do { try saveTracks() }
+            catch {
+                files[index] = previous
+                if let renamed { try? FileManager.default.removeItem(at: renamed) }
+                continue
+            }
+            if renamed != nil { try? FileManager.default.removeItem(at: original) }
         }
-        try? save()
+    }
+
+    private func linkImportedAudio(_ source: URL, title: String, artist: String) -> URL? {
+        let forbidden = CharacterSet.controlCharacters.union(CharacterSet(charactersIn: "/\\:"))
+        func component(_ value: String) -> String {
+            let safe = value.components(separatedBy: forbidden).joined(separator: " ")
+                .trimmingCharacters(in: .whitespacesAndNewlines.union(CharacterSet(charactersIn: ".")))
+            var result = ""
+            var size = 0
+            for character in safe {
+                let length = String(character).utf8.count
+                guard size + length <= 96 else { break }
+                result.append(character)
+                size += length
+            }
+            return result
+        }
+        let artistPart = component(artist)
+        let titlePart = component(title)
+        guard !artistPart.isEmpty, !titlePart.isEmpty, !source.pathExtension.isEmpty else { return nil }
+        let name = artistPart + " - " + titlePart
+        for attempt in 1...1000 {
+            let suffix = attempt == 1 ? "" : " (\(attempt))"
+            let candidate = directory.appendingPathComponent(name + suffix).appendingPathExtension(source.pathExtension)
+            do {
+                try FileManager.default.linkItem(at: source, to: candidate)
+                return candidate
+            } catch {
+                // Hard-link creation is exclusive. Never remove or replace an existing track.
+                guard (error as NSError).domain == NSCocoaErrorDomain,
+                      (error as NSError).code == CocoaError.fileWriteFileExists.rawValue else { return nil }
+            }
+        }
+        return nil
     }
 
     func importFiles(_ urls: [URL]) {
@@ -246,7 +307,7 @@ private final class NativeMusicLibrary: ObservableObject {
             }
             try save()
             let importedIDs = newlyImported
-            Task { await refreshAlbumMetadata(for: importedIDs) }
+            Task { await refreshAlbumMetadata(for: importedIDs, renameImports: true) }
         } catch {
             files = previousFiles
             copiedDestinations.forEach { try? FileManager.default.removeItem(at: $0) }
@@ -290,7 +351,7 @@ private final class NativeMusicLibrary: ObservableObject {
             if !wasAlreadyCopied { try? FileManager.default.removeItem(at: target) }
             throw error
         }
-        Task { await refreshAlbumMetadata(for: [sharingID]) }
+        Task { await refreshAlbumMetadata(for: [sharingID], renameImports: true) }
     }
 
     func importFolder(_ folder: URL) {
@@ -316,9 +377,13 @@ private final class NativeMusicLibrary: ObservableObject {
         }
     }
 
-    private func save() throws {
+    private func saveTracks() throws {
         let data = try JSONEncoder().encode(files)
         try data.write(to: directory.appendingPathComponent("library.json"), options: .atomic)
+    }
+
+    private func save() throws {
+        try saveTracks()
         try JSONEncoder().encode(folders).write(to: directory.appendingPathComponent("folders.json"), options: .atomic)
         try JSONEncoder().encode(playlists).write(to: directory.appendingPathComponent("playlists.json"), options: .atomic)
         try JSONEncoder().encode(smartFolders).write(to: directory.appendingPathComponent("smart-folders.json"), options: .atomic)

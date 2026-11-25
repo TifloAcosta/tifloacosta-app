@@ -115,6 +115,7 @@ private struct MusicLocalFile: Identifiable, Codable {
     var genre: String? = nil
     var importedAt: Date? = nil
     var playCount: Int? = nil
+    var hasEditedTrackInformation: Bool? = nil
 
     var albumKey: String? {
         guard let album = album?.trimmingCharacters(in: .whitespacesAndNewlines), !album.isEmpty else { return nil }
@@ -231,24 +232,42 @@ private final class NativeMusicLibrary: ObservableObject {
                   audioURL(for: files[index]) == original else { continue }
             var updated = files[index]
             updated.album = updated.album ?? album
-            updated.artist = updated.artist ?? artist
-            if renameImports, let title { updated.name = title }
-            var renamed: URL?
-            if renameImports, let title, let artist,
-               !NativeMusicPlayer.shared.hasQueuedLocalFile(original) {
-                renamed = linkImportedAudio(original, title: title, artist: artist)
-                if let renamed { updated.fileName = renamed.lastPathComponent }
-            }
-            let previous = files[index]
-            files[index] = updated
-            do { try saveTracks() }
-            catch {
-                files[index] = previous
-                if let renamed { try? FileManager.default.removeItem(at: renamed) }
-                continue
-            }
-            if renamed != nil { try? FileManager.default.removeItem(at: original) }
+            let canRename = renameImports && updated.hasEditedTrackInformation != true
+            if updated.hasEditedTrackInformation != true { updated.artist = updated.artist ?? artist }
+            if canRename, let title { updated.name = title }
+            try? storeTrack(updated, at: index, rename: canRename && title != nil && artist != nil)
         }
+    }
+
+    func updateTrackInformation(_ id: UUID, title: String, artist: String) throws {
+        guard let index = files.firstIndex(where: { $0.id == id }) else { return }
+        let title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        let artist = artist.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !title.isEmpty else { return }
+        var track = files[index]
+        track.name = title
+        track.artist = artist.isEmpty ? nil : artist
+        track.hasEditedTrackInformation = true
+        try storeTrack(track, at: index, rename: !artist.isEmpty)
+    }
+
+    private func storeTrack(_ update: MusicLocalFile, at index: Int, rename: Bool) throws {
+        let previous = files[index]
+        let original = audioURL(for: previous)
+        var updated = update
+        var renamed: URL?
+        if rename, let artist = updated.artist, !NativeMusicPlayer.shared.hasQueuedLocalFile(original) {
+            renamed = linkImportedAudio(original, title: updated.name, artist: artist)
+            if let renamed { updated.fileName = renamed.lastPathComponent }
+        }
+        files[index] = updated
+        do { try saveTracks() }
+        catch {
+            files[index] = previous
+            if let renamed { try? FileManager.default.removeItem(at: renamed) }
+            throw error
+        }
+        if renamed != nil { try? FileManager.default.removeItem(at: original) }
     }
 
     private func linkImportedAudio(_ source: URL, title: String, artist: String) -> URL? {
@@ -273,6 +292,7 @@ private final class NativeMusicLibrary: ObservableObject {
         for attempt in 1...1000 {
             let suffix = attempt == 1 ? "" : " (\(attempt))"
             let candidate = directory.appendingPathComponent(name + suffix).appendingPathExtension(source.pathExtension)
+            if candidate == source { return nil }
             do {
                 try FileManager.default.linkItem(at: source, to: candidate)
                 return candidate
@@ -811,6 +831,9 @@ struct NativeMyMusicScreen: View {
     @State private var newSmartFolderName = ""
     @State private var newSmartFolderKeyword = ""
     @State private var selectedSmartRule = MusicSmartRuleKind.title
+    @State private var editingTrackInformation: MusicLocalFile?
+    @State private var editedTrackTitle = ""
+    @State private var editedTrackArtist = ""
     @State private var editingGenreFile: MusicLocalFile?
     @State private var editingGenreValue = ""
     @State private var pendingRemoval: MusicLocalFile?
@@ -849,6 +872,12 @@ struct NativeMyMusicScreen: View {
         NativeAudiusPlayer.shared.stop()
         NativeJamendoPlayer.shared.stop()
         NativeAppleMusicPlayer.shared.stop()
+    }
+
+    private func editTrackInformation(_ file: MusicLocalFile) {
+        editedTrackTitle = file.name
+        editedTrackArtist = file.artist ?? ""
+        editingTrackInformation = file
     }
 
     private var visibleFiles: [MusicLocalFile] {
@@ -1077,10 +1106,12 @@ struct NativeMyMusicScreen: View {
                             ForEach(library.folders) { folder in
                                 Button("Añadir a \(folder.name)") { library.assign(file.id, to: folder.id) }
                             }
+                            Button("Editar información de la canción") { editTrackInformation(file) }
                             Button("Eliminar de la biblioteca") { pendingRemoval = file }
                         }
                         Spacer()
                         Menu("Acciones de \(file.name)") {
+                            Button("Editar información de la canción") { editTrackInformation(file) }
                             Button("Editar género") {
                                 editingGenreFile = file
                                 editingGenreValue = file.genre ?? ""
@@ -1343,6 +1374,22 @@ struct NativeMyMusicScreen: View {
             }
 
         let libraryActions = smartFolderSheet
+            .alert("Editar información de la canción", isPresented: Binding(
+                get: { editingTrackInformation != nil },
+                set: { if !$0 { editingTrackInformation = nil } }
+            )) {
+                TextField("Título de la canción", text: $editedTrackTitle)
+                TextField("Intérprete", text: $editedTrackArtist)
+                Button("Guardar") {
+                    if let file = editingTrackInformation {
+                        do { try library.updateTrackInformation(file.id, title: editedTrackTitle, artist: editedTrackArtist) }
+                        catch { library.error = error.localizedDescription }
+                    }
+                    editingTrackInformation = nil
+                }
+                .disabled(editedTrackTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                Button("Cancelar", role: .cancel) { editingTrackInformation = nil }
+            }
             .alert("Editar género", isPresented: Binding(
                 get: { editingGenreFile != nil },
                 set: { if !$0 { editingGenreFile = nil } }

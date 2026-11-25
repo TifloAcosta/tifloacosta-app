@@ -466,7 +466,7 @@
         "ios-app-native/Sources/NativeMusicPlayer.swift",
         "ios-app-native/tests/music-import-rollback-phase5-20261120.test.mjs"
       ],
-      "validation": "La importación y recepción compartida consultan título e intérprete locales. Las copias aptas se nombran Intérprete - Título.ext sin recodificación, con nombres alternativos cuando existe otro archivo, conservando el UUID y guardando el índice antes de retirar la ruta anterior. Falta ShazamKit, identificación manual y múltiple, autorización de red, edición, comprobación de duplicados y prueba en el dispositivo."
+      "validation": "La importación y recepción compartida consultan título e intérprete locales. Las copias aptas se nombran Intérprete - Título.ext sin recodificación, con nombres alternativos cuando existe otro archivo, conservando el UUID y guardando el índice antes de retirar la ruta anterior. Mi Música permite editar título e intérprete desde el menú y las acciones de VoiceOver, y conserva la edición ante lecturas asíncronas de etiquetas. Falta ShazamKit, identificación de canciones sin etiquetas fiable de forma individual y por lote, autorización de red, comprobación de duplicados y prueba en dispositivo."
     }
   ],
   "operational": [

@@ -1434,3 +1434,7 @@
 "DAISY 2.02 de texto" = "DAISY 2.02 solo testo";
 "DAISY 3 de texto" = "DAISY 3 solo testo";
 "Se conservará el texto. Si el original contiene imágenes, tablas, listas, notas o estilos, pueden perderse." = "Il testo verrà conservato. Immagini, tabelle, elenchi, note e stili del documento originale potrebbero andare persi.";
+
+"Editar información de la canción" = "Modifica informazioni del brano";
+"Título de la canción" = "Titolo del brano";
+"Intérprete" = "Interprete";

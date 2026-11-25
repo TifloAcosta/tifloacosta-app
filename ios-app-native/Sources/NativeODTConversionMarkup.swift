@@ -6,7 +6,9 @@ final class NativeODTConversionMarkup: NSObject, XMLParserDelegate {
     private static let office = "urn:oasis:names:tc:opendocument:xmlns:office:1.0"
     private var inText = false
     private var suppressDepth = 0
-    private var stack: [String?] = []
+    private var stack: [String] = []
+    private var textStyle: String?
+    private var textStyleProperties: [String: [String: String]] = [:]
     private var metadataField: String?
     private var metadataValue = ""
     private var listStyle: String?
@@ -60,6 +62,10 @@ final class NativeODTConversionMarkup: NSObject, XMLParserDelegate {
                       ["title", "language", "creator", "description"].contains(element) {
                 metadataField = element == "creator" ? "author" : element
                 metadataValue = ""
+            } else if name == "style:style", attributes["style:family"] == "text" {
+                textStyle = attributes["style:name"]
+            } else if name == "style:text-properties", let textStyle {
+                textStyleProperties[textStyle] = attributes
             } else if name == "text:list-style" {
                 listStyle = attributes["style:name"]
             } else if name == "text:list-level-style-number", attributes["text:level"] == "1", let listStyle {
@@ -85,6 +91,7 @@ final class NativeODTConversionMarkup: NSObject, XMLParserDelegate {
 
         var tag: String?
         var htmlAttributes = ""
+        var inlineEmphasis: [String] = []
         switch name {
         case "text:p": tag = "p"
         case "text:h":
@@ -105,7 +112,7 @@ final class NativeODTConversionMarkup: NSObject, XMLParserDelegate {
         case "table:table-header-rows": tag = "thead"
         case "table:table-row": tag = "tr"
         case "table:table-cell":
-            tag = stack.contains("thead") ? "th" : "td"
+            tag = stack.contains("</thead>") ? "th" : "td"
             for (source, target) in [("table:number-columns-spanned", "colspan"),
                                      ("table:number-rows-spanned", "rowspan")] {
                 if let count = attributes[source].flatMap(Int.init), (2...10_000).contains(count) {
@@ -115,7 +122,16 @@ final class NativeODTConversionMarkup: NSObject, XMLParserDelegate {
         case "text:a":
             tag = "a"
             if let href = attributes["xlink:href"] { htmlAttributes += " href=\"\(escape(href))\"" }
-        case "text:span": tag = "span"
+        case "text:span":
+            tag = "span"
+            if let name = attributes["text:style-name"], let style = textStyleProperties[name] {
+                if style["fo:font-weight"] == "bold" { inlineEmphasis.append("strong") }
+                if style["fo:font-style"] == "italic" { inlineEmphasis.append("em") }
+                if let language = style["fo:language"], !language.isEmpty, language != "none" {
+                    let country = style["fo:country"].flatMap { $0 == "none" || $0.isEmpty ? nil : "-" + $0 } ?? ""
+                    htmlAttributes += " lang=\"\(escape(language + country))\""
+                }
+            }
         case "text:bookmark", "text:bookmark-start":
             if let bookmark = attributes["text:name"] { body += "<span id=\"\(escape(bookmark))\"></span>" }
         case "text:line-break": body += "<br/>"
@@ -130,15 +146,18 @@ final class NativeODTConversionMarkup: NSObject, XMLParserDelegate {
 
         if let tag {
             if let id = attributes["xml:id"] { htmlAttributes += " id=\"\(escape(id))\"" }
-            body += "<\(tag)\(htmlAttributes)>"
-        }
-        stack.append(tag)
+            let emphasis = inlineEmphasis.map { "<\($0)>" }.joined()
+            body += "<\(tag)\(htmlAttributes)>\(emphasis)"
+            let close = inlineEmphasis.reversed().map { "</\($0)>" }.joined()
+            stack.append(close + "</\(tag)>")
+        } else { stack.append("") }
     }
 
     func parser(_ parser: XMLParser, didEndElement element: String,
                 namespaceURI: String?, qualifiedName: String?) {
         if !inText {
             if qualifiedName == "text:list-style" { listStyle = nil }
+            if qualifiedName == "style:style" { textStyle = nil }
             if let name = metadataField, namespaceURI == "http://purl.org/dc/elements/1.1/" {
                 let value = metadataValue.trimmingCharacters(in: .whitespacesAndNewlines)
                 if !value.isEmpty { metadata[name] = value }
@@ -164,7 +183,7 @@ final class NativeODTConversionMarkup: NSObject, XMLParserDelegate {
             return
         }
         if element == "text", namespaceURI == Self.office { inText = false; return }
-        if let tag = stack.popLast() ?? nil { body += "</\(tag)>" }
+        body += stack.popLast() ?? ""
     }
 
     func parser(_ parser: XMLParser, foundCharacters string: String) {

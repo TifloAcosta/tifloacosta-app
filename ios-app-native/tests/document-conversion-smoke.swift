@@ -84,8 +84,6 @@ struct DocumentConversionSmoke {
         precondition(daisy["book.xhtml"]!.contains("href=\"#p0\">Volver") &&
             daisy["book.xhtml"]!.contains("Ελληνικά"))
         precondition(!daisy["book.smil"]!.contains("<audio"))
-        precondition(recoveredBook.contains("<ol type=\"I\">") &&
-            recoveredBook.contains("<li value=\"3\">") && recoveredBook.contains("<li value=\"7\">"))
         if CommandLine.arguments.count > 2 {
             let samples = URL(fileURLWithPath: CommandLine.arguments[2], isDirectory: true)
             for (name, contents) in daisy {
@@ -218,7 +216,7 @@ struct DocumentConversionSmoke {
         <table><caption>Datos</caption><tr><th scope="col">Valor</th><td>Ñ</td></tr></table>
         <figure><img src="data:image/png;base64,\(png)" alt="Imagen de prueba" onload="bad()"/><figcaption>Figura original</figcaption></figure>
         <script>bad()</script><a href="#tabla">Volver</a>
-        <p xml:lang="fr">Déjà vu <a href="#nota" role="doc-noteref">1</a></p>
+        <p xml:lang="fr"><strong><em>Déjà vu</em></strong> <a href="#nota" role="doc-noteref">1</a></p>
         <aside id="nota" role="doc-footnote"><p>Hinweis – opinião.</p></aside></body></html>
         """.write(to: xhtml, atomically: true, encoding: .utf8)
         let rich = NativeConversionSource(filename: "Original.xhtml", title: "Original", format: "xhtml",
@@ -316,6 +314,9 @@ struct DocumentConversionSmoke {
         let recoveredBook = try members(recoveredEPUB, mime: "application/epub+zip")["EPUB/book.xhtml"]!
         precondition(recoveredBook.contains("<table>") && recoveredBook.contains("<ul>") &&
             recoveredBook.contains("alt=\"Imagen de prueba\"") && recoveredBook.contains("Hinweis – opinião."))
+        precondition(recoveredBook.contains("<ol type=\"I\">") &&
+            recoveredBook.contains("<li value=\"3\">") && recoveredBook.contains("<li value=\"7\">") &&
+            recoveredBook.contains("<span><strong><span><em>Déjà vu</em></span></strong></span>"))
         if CommandLine.arguments.count > 2 {
             let samples = URL(fileURLWithPath: CommandLine.arguments[2], isDirectory: true)
             let pdfText = "# Tabla\n\n## Primera sección\n\n" + longBody

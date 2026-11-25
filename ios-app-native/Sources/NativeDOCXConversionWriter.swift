@@ -6,6 +6,7 @@ final class NativeDOCXConversionWriter: NSObject, XMLParserDelegate {
         let body: String
         let relationships: String
         let assets: [NativeConversionMarkup.Asset]
+        let footnotes: String?
     }
 
     private let escape = NativeDocumentConversion.xml
@@ -28,19 +29,45 @@ final class NativeDOCXConversionWriter: NSObject, XMLParserDelegate {
         var rowOpen = false
     }
     private var grids: [TableGrid] = []
+    private var noteIDs: [String: Int] = [:]
+    private var noteBodies: [String: String] = [:]
+    private var noteDepth = 0
+    private var referenceDepth = 0
     private var imageCount = 0
     private var images: [String: NativeConversionMarkup.Asset] = [:]
 
     func write(_ markup: NativeConversionMarkup.Document) throws -> Result {
         images = Dictionary(uniqueKeysWithValues: markup.assets.map { ($0.path, $0) })
-        let parser = XMLParser(data: Data("<body>\(markup.body)</body>".utf8))
+        let data = Data("<body>\(markup.body)</body>".utf8)
+        let collector = NoteCollector()
+        let scan = XMLParser(data: data)
+        scan.shouldResolveExternalEntities = false
+        scan.delegate = collector
+        guard scan.parse() else {
+            try Task.checkCancellation()
+            throw NativeDocumentConversion.Failure.invalidOutput
+        }
+        noteBodies = collector.notes
+        for key in collector.references where noteBodies[key] != nil && noteIDs[key] == nil {
+            noteIDs[key] = noteIDs.count + 1
+        }
+        let parser = XMLParser(data: data)
         parser.delegate = self
         parser.shouldResolveExternalEntities = false
         guard parser.parse() else {
             try Task.checkCancellation()
             throw NativeDocumentConversion.Failure.invalidOutput
         }
-        return Result(body: body, relationships: relationships, assets: images.values.sorted { $0.path < $1.path })
+        let notes = noteIDs.sorted { $0.value < $1.value }.map { key, id in
+            let paragraphs = (noteBodies[key] ?? "").components(separatedBy: "\n")
+            let content = paragraphs.enumerated().map { index, text in
+                let marker = index == 0 ? "<w:r><w:rPr><w:vertAlign w:val=\"superscript\"/></w:rPr><w:footnoteRef/></w:r>" : ""
+                return "<w:p>\(marker)<w:r><w:t xml:space=\"preserve\">\(escape(text))</w:t></w:r></w:p>"
+            }.joined()
+            return "<w:footnote w:id=\"\(id)\">\(content)</w:footnote>"
+        }.joined()
+        let footnotes = notes.isEmpty ? nil : "<w:footnotes xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:footnote w:type=\"separator\" w:id=\"-1\"><w:p><w:r><w:separator/></w:r></w:p></w:footnote><w:footnote w:type=\"continuationSeparator\" w:id=\"0\"><w:p><w:r><w:continuationSeparator/></w:r></w:p></w:footnote>\(notes)</w:footnotes>"
+        return Result(body: body, relationships: relationships, assets: images.values.sorted { $0.path < $1.path }, footnotes: footnotes)
     }
 
     private func appendMergeContinuations() {
@@ -72,6 +99,25 @@ final class NativeDOCXConversionWriter: NSObject, XMLParserDelegate {
     func parser(_ parser: XMLParser, didStartElement tag: String, namespaceURI: String?,
                 qualifiedName: String?, attributes: [String: String]) {
         if Task.isCancelled { parser.abortParsing(); return }
+        if noteDepth > 0 { noteDepth += 1; return }
+        if referenceDepth > 0 { referenceDepth += 1; return }
+        if attributes["role"] == "doc-footnote", let id = attributes["id"], noteIDs[id] != nil {
+            noteDepth = 1
+            return
+        }
+        if tag == "a", attributes["role"] == "doc-noteref",
+           let href = attributes["href"], href.hasPrefix("#"),
+           noteBodies[String(href.dropFirst())] != nil {
+            let key = String(href.dropFirst())
+            // Word assigns the display number to the native reference.
+            if noteIDs[key] == nil { noteIDs[key] = noteIDs.count + 1 }
+            if let id = noteIDs[key] {
+                openParagraph()
+                body += "<w:r><w:rPr><w:vertAlign w:val=\"superscript\"/></w:rPr><w:footnoteReference w:id=\"\(id)\"/></w:r>"
+                referenceDepth = 1
+                return
+            }
+        }
         languages.append(attributes["xml:lang"] ?? attributes["lang"] ?? (languages.last ?? nil))
         var end = ""
         switch tag {
@@ -172,6 +218,8 @@ final class NativeDOCXConversionWriter: NSObject, XMLParserDelegate {
     }
 
     func parser(_ parser: XMLParser, didEndElement tag: String, namespaceURI: String?, qualifiedName: String?) {
+        if noteDepth > 0 { noteDepth -= 1; return }
+        if referenceDepth > 0 { referenceDepth -= 1; return }
         _ = languages.popLast()
         guard let end = closing.popLast() else { return }
         switch end {
@@ -207,5 +255,38 @@ final class NativeDOCXConversionWriter: NSObject, XMLParserDelegate {
         body += "<w:r>\(style)<w:t xml:space=\"preserve\">\(escape(text))</w:t></w:r>"
     }
 
-    func parser(_ parser: XMLParser, foundCharacters string: String) { append(string) }
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
+        if noteDepth == 0 && referenceDepth == 0 { append(string) }
+    }
+
+    private final class NoteCollector: NSObject, XMLParserDelegate {
+        var notes: [String: String] = [:]
+        var references: [String] = []
+        private var key: String?
+        private var depth = 0
+        private var text = ""
+        func parser(_ parser: XMLParser, didStartElement tag: String, namespaceURI: String?,
+                    qualifiedName: String?, attributes: [String: String]) {
+            if Task.isCancelled { parser.abortParsing(); return }
+            if depth > 0 { depth += 1; if tag == "br" { text += "\n" }; return }
+            if tag == "a", attributes["role"] == "doc-noteref", let href = attributes["href"], href.hasPrefix("#") {
+                references.append(String(href.dropFirst()))
+            }
+            if attributes["role"] == "doc-footnote", let id = attributes["id"] {
+                key = id; depth = 1; text = ""
+            }
+        }
+        func parser(_ parser: XMLParser, foundCharacters string: String) {
+            if depth > 0 { text += string }
+        }
+        func parser(_ parser: XMLParser, didEndElement tag: String, namespaceURI: String?, qualifiedName: String?) {
+            guard depth > 0 else { return }
+            if tag == "p" { text += "\n" }
+            depth -= 1
+            if depth == 0, let key {
+                notes[key] = text.trimmingCharacters(in: .whitespacesAndNewlines)
+                self.key = nil
+            }
+        }
+    }
 }

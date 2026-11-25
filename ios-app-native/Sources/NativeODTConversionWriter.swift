@@ -6,6 +6,18 @@ final class NativeODTConversionWriter: NSObject, XMLParserDelegate {
     private var output = ""
     private var frames: [(element: String, wrapsInline: Bool)] = []
     private var nextImage = 0
+    private struct Merge {
+        let span: Int
+        let remaining: Int
+    }
+    private struct Grid {
+        var active: [Int: Merge] = [:]
+        var next: [Int: Merge] = [:]
+        var column = 0
+    }
+    private var grids: [Grid] = []
+    private var horizontalSpans: [Int] = []
+    private var listStarts: [Int?] = []
     private var paragraphDepth = 0
     private let escape = NativeDocumentConversion.xml
 
@@ -24,6 +36,19 @@ final class NativeODTConversionWriter: NSObject, XMLParserDelegate {
         return output
     }
 
+    private func coveredCells() {
+        guard !grids.isEmpty else { return }
+        let i = grids.count - 1
+        while let merge = grids[i].active[grids[i].column] {
+            let column = grids[i].column
+            output += String(repeating: "<table:covered-table-cell/>", count: merge.span)
+            if merge.remaining > 1 {
+                grids[i].next[column] = Merge(span: merge.span, remaining: merge.remaining - 1)
+            }
+            grids[i].column += merge.span
+        }
+    }
+
     func parser(_ parser: XMLParser, didStartElement tag: String,
                 namespaceURI: String?, qualifiedName: String?, attributes: [String: String]) {
         if Task.isCancelled { parser.abortParsing(); return }
@@ -34,17 +59,37 @@ final class NativeODTConversionWriter: NSObject, XMLParserDelegate {
         case "h1", "h2", "h3", "h4", "h5", "h6":
             mapping = ("text:h", " text:outline-level=\"\(tag.suffix(1))\"")
         case "ol", "ul":
+            listStarts.append(tag == "ol" ? attributes["start"].flatMap(Int.init).flatMap { $0 > 0 ? $0 : nil } : nil)
             mapping = ("text:list", " text:style-name=\"\(tag == "ol" ? "Numbered" : "Bullets")\"")
         case "li":
-            let start = attributes["value"].flatMap(Int.init).flatMap { $0 > 0 ? $0 : nil }
+            let start = attributes["value"].flatMap(Int.init).flatMap { $0 > 0 ? $0 : nil } ?? (listStarts.last ?? nil)
+            if !listStarts.isEmpty { listStarts[listStarts.count - 1] = nil }
             mapping = ("text:list-item", start.map { " text:start-value=\"\($0)\"" } ?? "")
         case "table":
+            grids.append(Grid())
             mapping = ("table:table", "")
         case "thead": mapping = ("table:table-header-rows", "")
         case "tbody": mapping = ("table:table-rows", "")
-        case "tr": mapping = ("table:table-row", "")
+        case "tr":
+            if !grids.isEmpty {
+                let i = grids.count - 1
+                grids[i].column = 0
+                grids[i].next = [:]
+            }
+            mapping = ("table:table-row", "")
         case "th", "td":
-            mapping = ("table:table-cell", "")
+            coveredCells()
+            let span = attributes["colspan"].flatMap(Int.init).flatMap { (2...100).contains($0) ? $0 : nil } ?? 1
+            let rows = attributes["rowspan"].flatMap(Int.init).flatMap { (2...1000).contains($0) ? $0 : nil } ?? 1
+            horizontalSpans.append(span)
+            var properties = span > 1 ? " table:number-columns-spanned=\"\(span)\"" : ""
+            if rows > 1 { properties += " table:number-rows-spanned=\"\(rows)\"" }
+            if !grids.isEmpty {
+                let i = grids.count - 1
+                if rows > 1 { grids[i].next[grids[i].column] = Merge(span: span, remaining: rows - 1) }
+                grids[i].column += span
+            }
+            mapping = ("table:table-cell", properties)
         case "a":
             mapping = attributes["href"].map { ("text:a", " xlink:type=\"simple\" xlink:href=\"\(escape($0))\"") } ?? ("", "")
         case "strong", "b": mapping = ("text:span", " text:style-name=\"Bold\"")
@@ -76,7 +121,18 @@ final class NativeODTConversionWriter: NSObject, XMLParserDelegate {
     func parser(_ parser: XMLParser, didEndElement tag: String,
                 namespaceURI: String?, qualifiedName: String?) {
         guard let frame = frames.popLast() else { return }
+        if tag == "tr" { coveredCells() }
         if !frame.element.isEmpty { output += "</\(frame.element)>" }
+        if tag == "td" || tag == "th" {
+            let span = horizontalSpans.popLast() ?? 1
+            if span > 1 { output += String(repeating: "<table:covered-table-cell/>", count: span - 1) }
+        }
+        if tag == "tr", !grids.isEmpty {
+            let i = grids.count - 1
+            grids[i].active = grids[i].next
+        }
+        if tag == "table" { _ = grids.popLast() }
+        if tag == "ol" || tag == "ul" { _ = listStarts.popLast() }
         if frame.element == "text:p" || frame.element == "text:h" { paragraphDepth -= 1 }
         if frame.wrapsInline { output += "</text:p>"; paragraphDepth -= 1 }
     }

@@ -21,7 +21,7 @@ test('cinema persists book identity, language, type and exact playback position'
   assert.match(library, /var lastSeconds: Double/);
   assert.match(library, /func savePosition\(_ seconds: Double, for id: UUID\)/);
   assert.match(library, /lastSeconds: 0/);
-  assert.match(library, /player\?\.seek\(to: CMTime\(seconds: restored, preferredTimescale: 600\)\)/);
+  assert.match(library, /pendingRestore = restored > 0 \? restored : nil/);
   assert.match(screen, /personalPlayer\.pauseAndSave\(library: personalLibrary\)/);
 });
 
@@ -58,7 +58,7 @@ test('local video uses a visible AVPlayer layer with one native transport and no
 test('forced pauses persist fractional seconds and a failed audio session never leaves a false playable item', () => {
   assert.match(library, /items\[index\]\.lastSeconds != seconds/);
   assert.doesNotMatch(library, /abs\(items\[index\]\.lastSeconds - seconds\) >= 1/);
-  assert.match(library, /player\?\.seek\(to: CMTime\(seconds: restored, preferredTimescale: 600\)\)/);
+  assert.match(library, /pendingRestore = restored > 0 \? restored : nil/);
   const open = library.slice(library.indexOf('func open(_ item:'), library.indexOf('private func beginProgressTracking'));
   assert.ok(open.indexOf('try AVAudioSession.sharedInstance().setActive(true)') < open.indexOf('player = AVPlayer(url: url)'));
   assert.match(library, /save\(library: library, force: true\)/);

@@ -263,6 +263,7 @@ struct NativeAccessibleCinemaScreen: View {
     // Shared instances allow personal playback to continue after leaving Multicines.
     @StateObject private var personalLibrary = NativeCinemaLocalLibrary.shared
     @StateObject private var personalPlayer = NativeCinemaAudioPlayer.shared
+    @StateObject private var cinemaRecents = NativeCinemaRecentStore.shared
 
     private var selectedLanguage: AccessibleCinemaLanguage {
         AccessibleCinemaLanguage.allCases[min(max(0, languageIndex), AccessibleCinemaLanguage.allCases.count - 1)]
@@ -446,6 +447,32 @@ struct NativeAccessibleCinemaScreen: View {
 
     var body: some View {
         List {
+            if personalPlayer.currentCloudReference != nil {
+                Section("Reproductor") {
+                    Text(personalPlayer.currentTitle).accessibilityAddTraits(.isHeader)
+                    if personalPlayer.currentCloudIsVideo, let video = personalPlayer.videoPlayer {
+                        NativeCinemaVideoSurface(player: video).frame(height: 210).accessibilityHidden(true)
+                    }
+                    if let failure = personalPlayer.playbackError { Text(failure) }
+                    NativeCinemaTransportControls(player: personalPlayer, library: personalLibrary)
+                }
+            }
+            if !cinemaRecents.entries.isEmpty {
+                Section("Continuar viendo o escuchando") {
+                    ForEach(cinemaRecents.entries.filter { !$0.finished }.prefix(12)) { recent in
+                        NavigationLink {
+                            NativeCinemaResumeScreen(recent: recent)
+                        } label: {
+                            VStack(alignment: .leading) {
+                                Text(recent.title)
+                                Text(MusicLocalized.message(recent.providerName))
+                                Text(MusicLocalized.format("Posición: %@. Duración: %@.", NativeCinemaTransportControls.clock(recent.seconds), NativeCinemaTransportControls.clock(recent.duration)))
+                            }.accessibilityElement(children: .combine)
+                        }
+                    }
+                    NavigationLink("Historial de Multicines") { NativeCinemaHistoryScreen() }
+                }
+            }
             Section("Explorar Multicines Accesibles") {
                 TextField("Buscar plataformas y contenidos audiodescritos", text: $searchText)
                     .textInputAutocapitalization(.sentences)
@@ -565,6 +592,7 @@ struct NativeAccessibleCinemaScreen: View {
                                     .frame(height: 210)
                                     .accessibilityHidden(true)
                             }
+                            if personalPlayer.buffering { ProgressView("Cargando reproducción") }
                             Text("Posición: \(clock(personalPlayer.seconds)). Duración: \(clock(personalPlayer.duration)).")
                                 .font(.subheadline)
                             Button(personalPlayer.playing ? "Pausar reproducción" : "Reanudar reproducción") {
@@ -740,7 +768,7 @@ struct NativeAccessibleCinemaScreen: View {
                 if personalPlayer.currentID == item.id {
                     personalPlayer.pauseAndSave(library: personalLibrary)
                 }
-                do { try personalLibrary.remove(item) }
+                do { try personalLibrary.remove(item); cinemaRecents.remove(item.id.uuidString) }
                 catch { importStatus = error.localizedDescription }
                 pendingDeletion = nil
             }

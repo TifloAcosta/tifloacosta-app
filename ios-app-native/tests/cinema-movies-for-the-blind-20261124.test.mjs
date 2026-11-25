@@ -7,8 +7,9 @@ test('Movies for the Blind uses the public RSS and shared player',()=>{
  assert.ok(source.includes('https://media.rss.com/movies-for-the-blind/feed.xml'));
  assert.match(source,/NativeRSSParser\(\)/);
  assert.match(source,/shouldResolveExternalEntities = false/);
- assert.match(source,/NativePodcastPlayer/);
+ assert.match(source,/NativeCinemaAudioPlayer/);
  assert.match(source,/library\.progress\(for: part\)/);
  assert.match(source,/followedBy: Array\(upcoming\)/);
+ assert.match(source,/player\.openMoviePart/);
  assert.match(read('NativeAccessibleCinema.swift'),/NativeMoviesForTheBlindScreen\(\)/);
 });

@@ -133,19 +133,7 @@ struct NativeCinemaDriveBrowser: View {
                             .frame(height: 210)
                             .accessibilityHidden(true)
                     }
-                    Button(player.playing ? "Pausar reproducción" : "Reanudar reproducción") {
-                        player.toggle(library: personalLibrary)
-                    }
-                    .disabled(player.playbackError != nil)
-                    Button("Retroceder treinta segundos") {
-                        player.seek(by: -30, library: personalLibrary)
-                    }
-                    Button("Avanzar treinta segundos") {
-                        player.seek(by: 30, library: personalLibrary)
-                    }
-                    Button("Detener reproducción") {
-                        player.pauseAndSave(library: personalLibrary)
-                    }
+                    NativeCinemaTransportControls(player: player, library: personalLibrary)
                 }
             }
 

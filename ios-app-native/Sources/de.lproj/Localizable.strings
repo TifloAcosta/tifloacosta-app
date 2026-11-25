@@ -1483,3 +1483,13 @@
 "No se encontraron obras en los catálogos consultados." = "Keine Werke in den durchsuchten Katalogen gefunden.";
 "Los servicios externos se consultan en su plataforma original. La búsqueda de Google Drive es limitada y puede no abarcar todas las carpetas." = "Externe Dienste werden auf ihrer Originalplattform durchsucht. Die Google-Drive-Suche erfasst möglicherweise nicht alle Ordner.";
 "Catálogo público de Google Drive." = "Öffentlicher Google-Drive-Katalog.";
+
+"Continuar viendo o escuchando" = "Weiterschauen oder weiterhören";
+"Historial de Multicines" = "Kinoverlauf";
+"Eliminar del historial" = "Aus dem Verlauf entfernen";
+"Borrar historial" = "Verlauf löschen";
+"¿Borrar el historial de Multicines?" = "Kinoverlauf löschen?";
+"Cargando reproducción" = "Wiedergabe wird geladen";
+"Desconocida" = "Unbekannt";
+"No se pudo recuperar la posición de reproducción." = "Die Wiedergabeposition konnte nicht wiederhergestellt werden.";
+"No se ha podido recuperar esta obra del catálogo actual." = "Dieses Werk konnte im aktuellen Katalog nicht gefunden werden.";

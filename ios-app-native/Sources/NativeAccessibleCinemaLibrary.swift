@@ -168,7 +168,15 @@ final class NativeCinemaAudioPlayer: ObservableObject {
     var videoPlayer: AVPlayer? { player }
     private var lastSavedSecond: Double = -10
     private weak var activeLibrary: NativeCinemaLocalLibrary?
-    private var currentTitle = ""
+    @Published private(set) var currentTitle = ""
+    @Published private(set) var buffering = false
+    private var pendingRestore: Double?
+    private var seekToken: UUID?
+    private var endObserver: NSObjectProtocol?
+    private var historyTitle = ""
+    private var completed = false
+    private var movieQueue: [NativePodcastEpisode] = []
+    private var movieWorkTitle = ""
     private var remoteCommandTokens: [Any] = []
     private var progressTimer: Timer?
 
@@ -188,19 +196,23 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         activeLibrary = library
         currentTitle = item.title
         currentID = item.id
+        currentCloudIsVideo = item.isVideoFile
+        historyTitle = item.title
         let restored = max(0, item.lastSeconds)
         seconds = restored
         duration = 0
         lastSavedSecond = restored
-        player?.seek(to: CMTime(seconds: restored, preferredTimescale: 600))
+        pendingRestore = restored > 0 ? restored : nil
         NativeRemotePlaybackOwner.onInterrupted(.cinema) { [weak self] in
             self?.pauseForOtherAudio()
         }
         NativeRemotePlaybackOwner.claim(.cinema)
         registerRemoteCommands()
-        player?.play()
         playing = true
+        buffering = true
+        if pendingRestore == nil { player?.play() }
         beginProgressTracking(library: library)
+        save(library: library, force: true)
         updateNowPlaying()
     }
 
@@ -231,22 +243,23 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         currentTitle = title
         currentID = UUID()
         currentCloudReference = reference
+        historyTitle = title
         currentCloudIsVideo = ["mp4", "m4v", "mov"].contains(file.pathExtension.lowercased())
         let restored = max(0, UserDefaults.standard.double(forKey: "cinema.cloud.position." + reference))
         seconds = restored
         duration = 0
         lastSavedSecond = restored
-        if restored > 0 {
-            player?.seek(to: CMTime(seconds: restored, preferredTimescale: 600))
-        }
+        pendingRestore = restored > 0 ? restored : nil
         NativeRemotePlaybackOwner.onInterrupted(.cinema) { [weak self] in
             self?.pauseForOtherAudio()
         }
         NativeRemotePlaybackOwner.claim(.cinema)
         registerRemoteCommands()
-        player?.play()
         playing = true
+        buffering = true
+        if pendingRestore == nil { player?.play() }
         beginProgressTracking(library: library)
+        save(library: library, force: true)
         updateNowPlaying()
     }
 
@@ -274,23 +287,24 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         currentTitle = title
         currentID = UUID()
         currentCloudReference = reference
+        historyTitle = title
         currentCloudIsVideo = isVideo
         let restored = max(0, UserDefaults.standard.double(
             forKey: "cinema.cloud.position." + reference))
         seconds = restored
         duration = 0
         lastSavedSecond = restored
-        if restored > 0 {
-            player?.seek(to: CMTime(seconds: restored, preferredTimescale: 600))
-        }
+        pendingRestore = restored > 0 ? restored : nil
         NativeRemotePlaybackOwner.onInterrupted(.cinema) { [weak self] in
             self?.pauseForOtherAudio()
         }
         NativeRemotePlaybackOwner.claim(.cinema)
         registerRemoteCommands()
-        player?.play()
         playing = true
+        buffering = true
+        if pendingRestore == nil { player?.play() }
         beginProgressTracking(library: library)
+        save(library: library, force: true)
         updateNowPlaying()
     }
 
@@ -327,24 +341,47 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         currentTitle = title
         currentID = UUID()
         currentCloudReference = reference
+        historyTitle = title
         currentCloudIsVideo = isVideo
         let restored = max(0, UserDefaults.standard.double(
             forKey: "cinema.cloud.position." + reference))
         seconds = restored
         duration = 0
         lastSavedSecond = restored
-        if restored > 0 {
-            player?.seek(to: CMTime(seconds: restored, preferredTimescale: 600))
-        }
+        pendingRestore = restored > 0 ? restored : nil
         NativeRemotePlaybackOwner.onInterrupted(.cinema) { [weak self] in
             self?.pauseForOtherAudio()
         }
         NativeRemotePlaybackOwner.claim(.cinema)
         registerRemoteCommands()
-        player?.play()
         playing = true
+        buffering = true
+        if pendingRestore == nil { player?.play() }
         beginProgressTracking(library: library)
+        save(library: library, force: true)
         updateNowPlaying()
+    }
+
+    func setRecoveryTitle(_ title: String, library: NativeCinemaLocalLibrary) {
+        historyTitle = title
+        save(library: library, force: true)
+    }
+
+    func openMoviePart(_ part: NativePodcastEpisode, workTitle: String,
+                       followedBy remaining: [NativePodcastEpisode], library: NativeCinemaLocalLibrary,
+                       previousPosition: Double = 0) throws {
+        guard part.audioURL.scheme == "https", part.audioURL.host != nil,
+              part.audioURL.user == nil, part.audioURL.password == nil else { throw NativeCinemaLocalError.invalidFile }
+        let reference = "movies-for-the-blind:" + NativeCinemaRecent.digest(part.id)
+        if UserDefaults.standard.object(forKey: "cinema.cloud.position." + reference) == nil,
+           previousPosition.isFinite && previousPosition > 0 {
+            UserDefaults.standard.set(previousPosition, forKey: "cinema.cloud.position." + reference)
+        }
+        try openAuthorizedCinemaStream(asset: AVURLAsset(url: part.audioURL), loader: nil,
+            title: part.title, reference: reference, isVideo: false, library: library)
+        movieQueue = remaining
+        movieWorkTitle = workTitle
+        setRecoveryTitle(workTitle, library: library)
     }
 
     private func cleanUpTemporaryPlayback() {
@@ -360,6 +397,16 @@ final class NativeCinemaAudioPlayer: ObservableObject {
 
     private func beginProgressTracking(library: NativeCinemaLocalLibrary) {
         progressTimer?.invalidate()
+        if let endObserver { NotificationCenter.default.removeObserver(endObserver) }
+        if let item = player?.currentItem {
+            endObserver = NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
+                object: item, queue: .main) { [weak self, weak library] _ in
+                Task { @MainActor [weak self, weak library] in
+                    guard let self, let library, self.player?.currentItem === item else { return }
+                    self.finished(library: library)
+                }
+            }
+        }
         progressTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {
             [weak self, weak library] _ in
             Task { @MainActor [weak self, weak library] in
@@ -376,35 +423,60 @@ final class NativeCinemaAudioPlayer: ObservableObject {
             refresh(library: library)
             player.pause()
             playing = false
+            buffering = false
             save(library: library, force: true)
         } else {
             guard playbackError == nil else { return }
             NativeRemotePlaybackOwner.claim(.cinema)
             registerRemoteCommands()
-            player.play()
+            completed = false
             playing = true
+            buffering = true
+            if pendingRestore == nil && seekToken == nil { player.play() }
         }
         updateNowPlaying()
     }
 
     func seek(by delta: Double, library: NativeCinemaLocalLibrary) {
-        guard let player else { return }
-        let next = max(0, min(duration > 0 ? duration : Double.greatestFiniteMagnitude,
-                              seconds + delta))
+        guard let player, playbackError == nil, player.currentItem?.status == .readyToPlay,
+              pendingRestore == nil, seekToken == nil else { return }
+        let next = max(0, min(duration > 0 ? duration : Double.greatestFiniteMagnitude, seconds + delta))
         guard next.isFinite else { return }
-        player.seek(to: CMTime(seconds: next, preferredTimescale: 600))
-        seconds = next
-        save(library: library, force: true)
-        updateNowPlaying()
+        completed = false
+        performSeek(next, library: library)
+    }
+
+    private func performSeek(_ target: Double, library: NativeCinemaLocalLibrary) {
+        guard let player else { return }
+        let token = UUID()
+        seekToken = token
+        player.seek(to: CMTime(seconds: target, preferredTimescale: 600),
+                    toleranceBefore: .zero, toleranceAfter: .zero) { [weak self, weak library] success in
+            Task { @MainActor [weak self, weak library] in
+                guard let self, let library, self.seekToken == token, self.player === player else { return }
+                self.seekToken = nil
+                if success {
+                    let actual = player.currentTime().seconds
+                    if actual.isFinite && actual >= 0 { self.seconds = actual }
+                    self.save(library: library, force: true)
+                    if self.playing && NativeRemotePlaybackOwner.current == .cinema { player.play() }
+                } else {
+                    self.playing = false
+                    self.buffering = false
+                    player.pause()
+                    self.playbackError = MusicLocalized.message("No se pudo recuperar la posición de reproducción.")
+                }
+                self.updateNowPlaying()
+            }
+        }
     }
 
     func refresh(library: NativeCinemaLocalLibrary) {
         guard let player, playbackError == nil else { return }
         if player.currentItem?.status == .failed || player.error != nil {
-            // A malformed or unsupported local file can fail asynchronously.
-            // Do not continue announcing Pausar when no playback exists.
             player.pause()
             playing = false
+            buffering = false
             playbackError = MusicLocalized.message(
                 "No se pudo reproducir este archivo. Comprueba que el formato es compatible.")
             save(library: library, force: true)
@@ -412,22 +484,41 @@ final class NativeCinemaAudioPlayer: ObservableObject {
             NativeRemotePlaybackOwner.release(.cinema)
             return
         }
-        let elapsed = player.currentTime().seconds
-        if elapsed.isFinite && elapsed >= 0 { seconds = elapsed }
         let length = player.currentItem?.duration.seconds ?? 0
         if length.isFinite && length > 0 { duration = length }
-        save(library: library, force: false)
-        if duration > 0 && seconds >= duration - 0.2 && playing {
-            playing = false
-            player.pause()
-            player.seek(to: .zero)
-            seconds = 0
-            lastSavedSecond = 0
-            if let reference = currentCloudReference {
-                UserDefaults.standard.set(0.0, forKey: "cinema.cloud.position." + reference)
-            } else if let currentID {
-                library.savePosition(0, for: currentID)
-            }
+        if let restored = pendingRestore, player.currentItem?.status == .readyToPlay {
+            pendingRestore = nil
+            performSeek(duration > 0 ? min(restored, duration) : restored, library: library)
+        }
+        buffering = playing && (pendingRestore != nil || seekToken != nil ||
+            player.timeControlStatus == .waitingToPlayAtSpecifiedRate || player.currentItem?.status != .readyToPlay)
+        if !completed && pendingRestore == nil && seekToken == nil && player.currentItem?.status == .readyToPlay {
+            let elapsed = player.currentTime().seconds
+            if elapsed.isFinite && elapsed >= 0 { seconds = elapsed }
+            save(library: library, force: false)
+        }
+        updateNowPlaying()
+    }
+
+    private func finished(library: NativeCinemaLocalLibrary) {
+        guard let player else { return }
+        let remaining = movieQueue
+        let work = movieWorkTitle
+        player.pause()
+        playing = false
+        buffering = false
+        seekToken = nil
+        pendingRestore = nil
+        seconds = 0
+        completed = true
+        save(library: library, force: true)
+        NativeCinemaRecentStore.shared.markFinished(key: historyKey)
+        if let next = remaining.first {
+            do {
+                try openMoviePart(next, workTitle: work, followedBy: Array(remaining.dropFirst()), library: library)
+            } catch { playbackError = error.localizedDescription }
+        } else {
+            performSeek(0, library: library)
         }
         updateNowPlaying()
     }
@@ -437,6 +528,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         if let activeLibrary { refresh(library: activeLibrary) }
         player?.pause()
         playing = false
+        buffering = false
         if let activeLibrary { save(library: activeLibrary, force: true) }
         updateNowPlaying()
     }
@@ -447,7 +539,7 @@ final class NativeCinemaAudioPlayer: ObservableObject {
             MPMediaItemPropertyTitle: currentTitle,
             MPMediaItemPropertyPlaybackDuration: duration,
             MPNowPlayingInfoPropertyElapsedPlaybackTime: seconds,
-            MPNowPlayingInfoPropertyPlaybackRate: playing ? 1.0 : 0.0
+            MPNowPlayingInfoPropertyPlaybackRate: playing && !buffering ? 1.0 : 0.0
         ]
     }
 
@@ -497,6 +589,13 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         player?.pause()
         progressTimer?.invalidate()
         progressTimer = nil
+        if let endObserver { NotificationCenter.default.removeObserver(endObserver); self.endObserver = nil }
+        seekToken = nil
+        pendingRestore = nil
+        buffering = false
+        completed = false
+        movieQueue = []
+        movieWorkTitle = ""
         player = nil
         publicDriveLoader?.cancel()
         publicDriveLoader = nil
@@ -510,11 +609,14 @@ final class NativeCinemaAudioPlayer: ObservableObject {
         seconds = 0
         duration = 0
         currentTitle = ""
+        historyTitle = ""
         activeLibrary = nil
         playbackError = nil
         unregisterRemoteCommands()
         NativeRemotePlaybackOwner.release(.cinema)
     }
+
+    private var historyKey: String { currentCloudReference.map(NativeCinemaRecent.digest) ?? currentID?.uuidString ?? "" }
 
     private func save(library: NativeCinemaLocalLibrary, force: Bool) {
         guard let currentID else { return }
@@ -525,6 +627,10 @@ final class NativeCinemaAudioPlayer: ObservableObject {
                 library.savePosition(seconds, for: currentID)
             }
             lastSavedSecond = seconds
+            if !historyTitle.isEmpty && !completed {
+                let source = currentCloudReference.map(NativeCinemaRecent.source) ?? "personal"
+                NativeCinemaRecentStore.shared.remember(key: historyKey, source: source, title: historyTitle, seconds: seconds, duration: duration)
+            }
         }
     }
 }

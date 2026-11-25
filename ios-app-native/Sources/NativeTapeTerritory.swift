@@ -51,6 +51,7 @@ struct NativeTapeTerritoryScreen: View {
     @State private var films: [NativeTapeTerritoryCatalogue.Film] = []
     @State private var query = ""
     @State private var failed = false
+    @State private var playbackFailed = false
     @State private var loading = false
     init(query: String = "", initialFilms: [NativeTapeTerritoryCatalogue.Film] = []) {
         _query = State(initialValue: query)
@@ -68,6 +69,7 @@ struct NativeTapeTerritoryScreen: View {
         List {
             Link("Audiodescripción de Tape Territory", destination: URL(string: "https://tapeterritory.com/audio-described")!)
             if loading { ProgressView("Cargando catálogo de Tape Territory") }
+            if playbackFailed { Text("No se pudo reproducir este archivo. Comprueba que el formato es compatible.") }
             if failed {
                 Text("No se pudo abrir Tape Territory.").accessibilityAddTraits(.updatesFrequently)
                 Button("Reintentar") { Task { await load() } }
@@ -76,21 +78,17 @@ struct NativeTapeTerritoryScreen: View {
                 Section {
                     if let synopsis = film.synopsis, !synopsis.isEmpty { Text(synopsis) }
                     Button("Reproducir: \(film.title)") {
+                        playbackFailed = false
                         guard let url = film.describedStream else { return }
                         do { try player.openTapeTerritory(url, title: film.title, slug: film.slug, library: library) }
-                        catch { failed = true }
+                        catch { playbackFailed = true }
                     }
                     if player.currentCloudReference == "tape-territory:" + film.slug {
                         if let error = player.playbackError { Text(error).accessibilityAddTraits(.updatesFrequently) }
                         if let video = player.videoPlayer {
                             NativeCinemaVideoSurface(player: video).frame(height: 210).accessibilityHidden(true)
                         }
-                        Button(player.playing ? "Pausar reproducción" : "Reanudar reproducción") {
-                            player.toggle(library: library)
-                        }
-                        Button("Retroceder treinta segundos") { player.seek(by: -30, library: library) }
-                        Button("Avanzar treinta segundos") { player.seek(by: 30, library: library) }
-                        Button("Detener reproducción") { player.pauseAndSave(library: library) }
+                        NativeCinemaTransportControls(player: player, library: library)
                     }
                 } header: {
                     Text("\(film.title) (\(String(film.year)))")

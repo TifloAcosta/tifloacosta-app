@@ -138,19 +138,7 @@ struct NativeCinemaPublishedDriveBrowser: View {
                             .frame(height: 210)
                             .accessibilityHidden(true)
                     }
-                    Button(player.playing ? "Pausar reproducción" : "Reanudar reproducción") {
-                        player.toggle(library: library)
-                    }
-                    .disabled(player.playbackError != nil)
-                    Button("Retroceder treinta segundos") {
-                        player.seek(by: -30, library: library)
-                    }
-                    Button("Avanzar treinta segundos") {
-                        player.seek(by: 30, library: library)
-                    }
-                    Button("Detener reproducción") {
-                        player.pauseAndSave(library: library)
-                    }
+                    NativeCinemaTransportControls(player: player, library: library)
                     if isCurrentPlaybackFailed, let lastSelected {
                         Button("Descargar temporalmente y reproducir") {
                             Task { await downloadAndPlay(lastSelected) }

@@ -1485,3 +1485,13 @@
 "No se encontraron obras en los catálogos consultados." = "No works were found in the catalogues searched.";
 "Los servicios externos se consultan en su plataforma original. La búsqueda de Google Drive es limitada y puede no abarcar todas las carpetas." = "External services are searched on their original platform. Google Drive search is limited and may not cover all folders.";
 "Catálogo público de Google Drive." = "Public Google Drive catalogue.";
+
+"Continuar viendo o escuchando" = "Continue watching or listening";
+"Historial de Multicines" = "Cinema history";
+"Eliminar del historial" = "Remove from history";
+"Borrar historial" = "Clear history";
+"¿Borrar el historial de Multicines?" = "Clear cinema history?";
+"Cargando reproducción" = "Loading playback";
+"Desconocida" = "Unknown";
+"No se pudo recuperar la posición de reproducción." = "Could not restore the playback position.";
+"No se ha podido recuperar esta obra del catálogo actual." = "This work could not be retrieved from the current catalogue.";

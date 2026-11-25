@@ -113,6 +113,7 @@ struct NativeAudiocinematecaAccountScreen: View {
                         NativeCinemaAudioPlayer.shared.pauseAndSave(library: NativeCinemaLocalLibrary.shared)
                     }
                     try? NativeAudiocinematecaCache.clear()
+                    NativeCinemaRecentStore.shared.removeSource("audiocinemateca")
                     saved = false
                     status = MusicLocalized.message("Credenciales retiradas de este dispositivo.")
                 } catch {

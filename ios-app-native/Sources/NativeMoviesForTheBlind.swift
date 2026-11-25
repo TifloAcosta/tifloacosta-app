@@ -58,8 +58,10 @@ struct NativeMoviesForTheBlindWork: Identifiable {
 }
 
 struct NativeMoviesForTheBlindScreen: View {
-    @EnvironmentObject private var player: NativePodcastPlayer
+    @ObservedObject private var player = NativeCinemaAudioPlayer.shared
+    @ObservedObject private var cinemaLibrary = NativeCinemaLocalLibrary.shared
     @EnvironmentObject private var library: NativePodcastLibrary
+    @State private var playbackFailed = false
     @State private var works: [NativeMoviesForTheBlindWork] = []
     @State private var search = ""
     @State private var loading = false
@@ -73,19 +75,14 @@ struct NativeMoviesForTheBlindScreen: View {
     }
     var body: some View {
         List {
-            if let episode = player.episode, works.contains(where: { $0.parts.contains(where: { $0.id == episode.id }) }) {
+            if player.currentCloudReference?.hasPrefix("movies-for-the-blind:") == true {
                 Section("Reproductor") {
-                    Text(episode.title)
-                    Button(player.isPlaying ? "Pausar" : "Reproducir") { player.toggle() }
-                    Button("Retroceder treinta segundos") { player.skip(-30) }
-                    Button("Avanzar treinta segundos") { player.skip(30) }
-                    Button("Detener reproducción") {
-                        player.updatePosition()
-                        library.remember(episode, seconds: player.seconds, duration: player.duration)
-                        player.stop()
-                    }
+                    Text(player.currentTitle)
+                    if let error = player.playbackError { Text(error) }
+                    NativeCinemaTransportControls(player: player, library: cinemaLibrary)
                 }
             }
+            if playbackFailed { Text("No se pudo reproducir este archivo. Comprueba que el formato es compatible.") }
             if loading { ProgressView("Actualizando catálogo") }
             if failed { Text("No se ha podido actualizar el catálogo.") }
             Button("Actualizar catálogo") { Task { await refresh() } }.disabled(loading)
@@ -93,12 +90,12 @@ struct NativeMoviesForTheBlindScreen: View {
                 Section {
                     ForEach(work.parts) { part in
                         Button(part.title) {
-                            if let current = player.episode {
-                                player.updatePosition()
-                                library.remember(current, seconds: player.seconds, duration: player.duration)
-                            }
+                            playbackFailed = false
                             let upcoming = work.parts.drop(while: { $0.id != part.id }).dropFirst()
-                            player.select(part, at: library.progress(for: part), followedBy: Array(upcoming))
+                            do {
+                                try player.openMoviePart(part, workTitle: work.title, followedBy: Array(upcoming),
+                                    library: cinemaLibrary, previousPosition: library.progress(for: part))
+                            } catch { playbackFailed = true }
                         }
                     }
                 } header: { Text(work.title) }
@@ -107,14 +104,6 @@ struct NativeMoviesForTheBlindScreen: View {
         .navigationTitle(Text(verbatim: "Movies for the Blind"))
         .searchable(text: $search, prompt: Text("Buscar obras"))
         .task { if works.isEmpty { await refresh() } }
-        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
-            if player.episode != nil { player.updatePosition() }
-        }
-        .onDisappear {
-            if let episode = player.episode {
-                library.remember(episode, seconds: player.seconds, duration: player.duration)
-            }
-        }
     }
     @MainActor private func refresh() async {
         guard !loading else { return }

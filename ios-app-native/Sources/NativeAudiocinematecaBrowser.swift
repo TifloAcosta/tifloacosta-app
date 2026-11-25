@@ -183,7 +183,7 @@ struct NativeAudiocinematecaDetail: View {
     }
 }
 
-private struct NativeAudiocinematecaPlaybackRow: View {
+struct NativeAudiocinematecaPlaybackRow: View {
     let entry: NativeAudiocinematecaCatalogueIndex.Entry
     let part: NativeAudiocinematecaCatalogueIndex.Part
     let label: String
@@ -191,7 +191,8 @@ private struct NativeAudiocinematecaPlaybackRow: View {
     @ObservedObject private var library = NativeCinemaLocalLibrary.shared
     @State private var failed = false
 
-    private var reference: String {
+    private var reference: String { Self.reference(entry: entry, part: part) }
+    static func reference(entry: NativeAudiocinematecaCatalogueIndex.Entry, part: NativeAudiocinematecaCatalogueIndex.Part) -> String {
         let identity = entry.id + ":" + (part.season ?? "") + ":" + part.number + ":" + part.url.absoluteString
         return "audiocinemateca:" + SHA256.hash(data: Data(identity.utf8)).map { String(format: "%02x", $0) }.joined()
     }
@@ -207,15 +208,7 @@ private struct NativeAudiocinematecaPlaybackRow: View {
                         startPlayback()
                     }
                 }
-                Button(player.playing ? "Pausar" : "Reproducir") {
-                    player.toggle(library: library)
-                }
-                .disabled(player.playbackError != nil)
-                Button("Retroceder treinta segundos") { player.seek(by: -30, library: library) }
-                    .disabled(player.playbackError != nil)
-                Button("Avanzar treinta segundos") { player.seek(by: 30, library: library) }
-                    .disabled(player.playbackError != nil)
-                Button("Detener reproducción") { player.pauseAndSave(library: library) }
+                NativeCinemaTransportControls(player: player, library: library)
             } else {
                 Button(label) {
                     startPlayback()
@@ -236,6 +229,7 @@ private struct NativeAudiocinematecaPlaybackRow: View {
             try player.openAudiocinematecaStream(asset: loader.makeAsset(), loader: loader,
                 title: entry.title + (part.title.isEmpty ? "" : " — " + part.title),
                 reference: reference, isVideo: false, library: library)
+            player.setRecoveryTitle(entry.title, library: library)
         } catch {
             loader.cancel()
             failed = true

@@ -340,6 +340,7 @@ struct DocumentConversionSmoke {
         let recoveredBook = try members(recoveredEPUB, mime: "application/epub+zip")["EPUB/book.xhtml"]!
         precondition(recoveredBook.contains("<table>") && recoveredBook.contains("<ul>") &&
             recoveredBook.contains("alt=\"Imagen de prueba\"") && recoveredBook.contains("Hinweis – opinião."))
+        precondition(recoveredBook.contains("lang=\"fr\""))
         precondition(recoveredBook.contains("role=\"doc-footnote\"") && recoveredBook.contains("role=\"doc-noteref\""))
         precondition(recoveredBook.contains("<ol type=\"I\">") &&
             recoveredBook.contains("<li value=\"3\">") && recoveredBook.contains("<li value=\"7\">") &&

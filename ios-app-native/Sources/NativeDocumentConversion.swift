@@ -528,7 +528,10 @@ enum NativeDocumentConversion {
             }.joined()
             return "<text:\(tag)\(level)><text:bookmark text:name=\"p\(paragraph.offset)\"/>\(content)</text:\(tag)>"
         }.joined()
-        let body = try markup.map { try NativeODTConversionWriter(assets: $0.assets).write($0.body) } ?? plainBody
+        let writer = markup.map { NativeODTConversionWriter(assets: $0.assets) }
+        let body: String
+        if let writer, let markup { body = try writer.write(markup.body) }
+        else { body = plainBody }
         let assetEntries = (markup?.assets ?? []).map {
             NativeConversionMarkup.Asset(path: "Pictures/" + $0.path, mediaType: $0.mediaType, data: $0.data)
         }
@@ -542,7 +545,7 @@ enum NativeDocumentConversion {
         <office:automatic-styles>
         <style:style style:name="Bold" style:family="text"><style:text-properties fo:font-weight="bold"/></style:style>
         <style:style style:name="Italic" style:family="text"><style:text-properties fo:font-style="italic"/></style:style>
-        \(NativeODTConversionWriter.listStyles)
+        \(NativeODTConversionWriter.listStyles)\(writer?.languageStyles ?? "")
         </office:automatic-styles>
         """
         try package([

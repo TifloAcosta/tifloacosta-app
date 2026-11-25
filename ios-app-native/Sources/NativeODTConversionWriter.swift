@@ -18,7 +18,31 @@ final class NativeODTConversionWriter: NSObject, XMLParserDelegate {
 
     private let assets: [String: NativeConversionMarkup.Asset]
     private var output = ""
-    private var frames: [(element: String, wrapsInline: Bool)] = []
+    private var frames: [(element: String, wrapsInline: Bool, languageSpan: Bool)] = []
+    private var passageStyles: [String: (name: String, language: String, country: String)] = [:]
+
+    var languageStyles: String {
+        passageStyles.values.sorted { $0.name < $1.name }.map {
+            "<style:style style:name=\"\($0.name)\" style:family=\"text\"><style:text-properties fo:language=\"\($0.language)\" fo:country=\"\($0.country)\"/></style:style>"
+        }.joined()
+    }
+
+    private func languageSpan(_ value: String?) -> String? {
+        guard let value else { return nil }
+        let parts = value.split(separator: "-")
+        guard let language = parts.first, (2...8).contains(language.count),
+              language.utf8.allSatisfy({ (65...90).contains($0) || (97...122).contains($0) }),
+              language.lowercased() != "und" else { return nil }
+        let country = parts.dropFirst().first {
+            $0.count == 2 && $0.utf8.allSatisfy { (65...90).contains($0) || (97...122).contains($0) }
+        }?.uppercased() ?? "none"
+        let code = language.lowercased()
+        let key = code + "-" + country
+        if passageStyles[key] == nil {
+            passageStyles[key] = ("Passage\(passageStyles.count + 1)", code, country)
+        }
+        return passageStyles[key]?.name
+    }
     private var nextImage = 0
     private struct Merge {
         let span: Int
@@ -162,14 +186,18 @@ final class NativeODTConversionWriter: NSObject, XMLParserDelegate {
         }
 
         let element = mapping.0
-        let wrapsInline = paragraphDepth == 0 && ["text:a", "text:span"].contains(element)
+        let passage = languageSpan(attributes["xml:lang"] ?? attributes["lang"])
+        let wrapsInline = paragraphDepth == 0 && (["text:a", "text:span"].contains(element) ||
+            (element.isEmpty && passage != nil && tag == "span"))
         if wrapsInline { output += "<text:p>"; paragraphDepth += 1 }
         if !element.isEmpty { output += "<\(element)\(mapping.1)>" }
         if element == "text:p" || element == "text:h" { paragraphDepth += 1 }
         if let id = attributes["id"], paragraphDepth > 0 {
             output += "<text:bookmark text:name=\"\(escape(id))\"/>"
         }
-        frames.append((element, wrapsInline))
+        let appliesLanguage = paragraphDepth > 0 && passage != nil
+        if let passage, appliesLanguage { output += "<text:span text:style-name=\"\(passage)\">" }
+        frames.append((element, wrapsInline, appliesLanguage))
     }
 
     func parser(_ parser: XMLParser, didEndElement tag: String,
@@ -185,6 +213,7 @@ final class NativeODTConversionWriter: NSObject, XMLParserDelegate {
         }
         guard let frame = frames.popLast() else { return }
         if tag == "tr" { coveredCells() }
+        if frame.languageSpan { output += "</text:span>" }
         if !frame.element.isEmpty { output += "</\(frame.element)>" }
         if tag == "td" || tag == "th" {
             let span = horizontalSpans.popLast() ?? 1

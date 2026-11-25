@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-25T04:17:48.088Z",
+  "generatedAt": "2026-11-25T04:19:06.664Z",
   "resources": [
     {
       "kind": "resource",
@@ -5646,6 +5646,119 @@
   "news": [
     {
       "kind": "news",
+      "id": "9to5mac-90c2599b6327770c:en",
+      "sourceId": "9to5mac-90c2599b6327770c",
+      "lang": "en",
+      "title": "PrismML’s Bonsai 2.5 brings better coding and tool use to on-device AI",
+      "summary": "Back in July, PrismML claimed its roughly 4 GB, 1-bit Bonsai 27B was the first AI model of its size to run on an iPhone. Now PrismML has released Ternary Bonsai 2.5 27B, an update to the model it introduced in September. more…",
+      "body": "Back in July, PrismML claimed its roughly 4 GB, 1-bit Bonsai 27B was the first AI model of its size to run on an iPhone. Now PrismML has released Ternary Bonsai 2.5 27B, an update to the model it introduced in September.\n\nThe startup also drew attention when CEO Babak Hassibi told CNBC that Apple was evaluating its technology, as we reported at the time .\n\nThe new model is based on Qwen3.8 27B and keeps the same 5.9 GB footprint in its most compact format. This time, PrismML focused on helping the model handle longer tasks, including figuring out what to do when a tool returns an unexpected result or a step fails.\n\nBonsai 2.5 improved on six of the seven benchmarks PrismML highlights . Its SWE-bench Verified coding score rose from 60.8 to 75.6, while its AppWorld tool-use score jumped from 51.2 to 90.5. LiveCodeBench v6 dipped from 83.8 to 83.0.\n\nWhat could that look like on a Mac? A coding assistant could inspect a private project, make a change, run the tests, and use the results to revise its fix. A document app could summarize a folder of sensitive files while keeping the processing on the device.\n\nPrismML says Bonsai 2.5 runs on Mac, iPhone, and iPad through MLX. Its Apple silicon package is about 8.9 GB, and the model card walks through setup on a Mac . The weights are available for free under Apache 2.0.\n\nFor a closer look at how the model was compressed and tested, read PrismML’s technical white paper .\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/24/prismmls-bonsai-2-5-brings-better-coding-and-tool-use-to-on-device-ai/",
+      "publishedAt": "2026-11-25T01:08:37.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "the-verge-1ae969345ae72a70:en",
+      "sourceId": "the-verge-1ae969345ae72a70",
+      "lang": "en",
+      "title": "US financial crimes bureau discloses ‘cybersecurity incident’",
+      "summary": "The Financial Crimes Enforcement Network (FinCEN) disclosed on Tuesday that it's investigating a \"cybersecurity incident.\" The bureau, which is part of the Treasury Department, said it's looking into an \"incident that resulted in unauthorized access to a limited subset of its systems.\" It hasn't offered any information about the full scope or source of the […]",
+      "body": "The Financial Crimes Enforcement Network (FinCEN) disclosed on Tuesday that it's investigating a \"cybersecurity incident.\" The bureau, which is part of the Treasury Department, said it's looking into an \"incident that resulted in unauthorized access to a limited subset of its systems.\" It hasn't offered any information about the full scope or source of the breach, but FinCEN has taken some systems offline as a precaution.\n\nThe news comes hours after The New York Times reported that the Central Intelligence Agency and Office of the Director of National Security discovered a breach of an open source intelligence system, exposing unclassified i …\n\nRead the full story at The Verge.",
+      "sourceName": "The Verge",
+      "originalUrl": "https://www.theverge.com/policy/1041957/fincen-treasury-cybersecurity-incident",
+      "publishedAt": "2026-11-25T01:00:00.000Z",
+      "categories": [
+        "tecnologia-general"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "9to5mac-92b55f5cd8dcb56b:en",
+      "sourceId": "9to5mac-92b55f5cd8dcb56b",
+      "lang": "en",
+      "title": "Apple Mail added four convenient new features in iOS 27",
+      "summary": "iOS 27 brought new features to Apple Wallet , Maps , Notes , Messages , and more —and it includes key upgrades for the Mail app too. Here’s everything new for Apple Mail in iOS 27. more…",
+      "body": "iOS 27 brought new features to Apple Wallet , Maps , Notes , Messages , and more —and it includes key upgrades for the Mail app too. Here’s everything new for Apple Mail in iOS 27.\n\nIf you have much history using Apple Mail, you’ll know that its search feature hasn’t always been the best. But in iOS 27, search has gotten a big upgrade .\n\nFrom Apple’s website :\n\nMore relevant search in Mail. A new ranking system brings the most relevant results to the top to help you find what you need right away — even if it’s buried deep in your inbox.\n\nI can’t count the number of times search has previously failed to find messages that I knew existed. So far in my usage, iOS 27 has fixed that.\n\nSuggestions at the top of messages have been in Apple Mail for years. But in iOS 27, they have a new, more flexible design and expand to support third-party apps.\n\nWhen Mail detects that you might want to take action on the contents of an email, a suggestion might appear at the top of the message. These include: directions in Maps, creating events in Calendar, tracking a shipment with Apple Wallet, and more.\n\nIn iOS 27, third-party apps can offer suggestions too. And when multiple apps are available with suggested actions, there’s a drop-down menu to show you all available options.\n\nSmart Reply is a keyboard feature that automatically surfaces reply options you can utilize with a single tap.\n\nIn iOS 27, the next generation of Apple Intelligence comes with improvements to Smart Reply.\n\nApple says that Smart Reply “can now draw on a user’s personalized writing style.” Essentially, rather than offering fairly generic reply options, now Smart Reply suggestions will actually sound a lot more like you.\n\nApple has added ‘Ask Siri’ buttons throughout Apple Mail, just like the rest of its system apps. And Siri AI brings a bunch of new powers for Mail users.\n\nOne example I’ve seen several times on social media is that you can ask Siri to delete all messages from a specific sender that’s spamming you.\n\nBeyond new features, Apple also says that iOS 27 makes the Mail app run better than ever thanks to bug fixes and performance improvements. Here are some specific examples given :\n\nWhich new Apple Mail features in iOS 27 are most exciting to you? Let us know in the comments.",
+      "sourceName": "9to5Mac",
+      "originalUrl": "https://9to5mac.com/2026/11/24/heres-everything-new-for-apple-mail-in-ios-27/",
+      "publishedAt": "2026-11-24T23:56:12.000Z",
+      "categories": [
+        "apple",
+        "tecnologia-general",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-f8ee14b2c4743610:en",
+      "sourceId": "engadget-f8ee14b2c4743610",
+      "lang": "en",
+      "title": "The battery in your Fitbit Edge is replaceable, but it's not as easy as you'd think",
+      "summary": "Google partnered with iFixit for a step-by-step guide to replacing the Fitbit Edge's battery.",
+      "body": "You can get a manual from iFixit for free to guide you through the process.\n\nAfter a brief period of people worrying that Google that was abandoning Fitbit devices in favor of the Pixel Watch , the company recently assuaged those fears by releasing two new devices, led by the Fitbit Edge . It's an obvious successor to the Charge series, albeit without Google Pay, or EDA scans for measuring stress.\n\nAn enhancement that might've caught your attention is the product's user-replaceable battery. The dirty secret of most fitness trackers (and smartwatches, for that matter) is that while they can last for years, if their batteries aren't replaced, their capacity will inevitably shrink until it becomes unusable. In theory, as long Google maintains app support and compatible batteries are still in warehouses, an Edge can last indefinitely.\n\nThis isn't quite like replacing the AAs in a flashlight, however, or even the coin battery you might find in an analog watch. You need specialized gear, and the process is delicate enough that there's a risk of sabotaging your Fitbit if you make a mistake.\n\nGoogle's partner on this is iFixit, which provides a free PDF manual once you've signed into their website. Before you begin, however, you need to buy specialized parts and tools, including not just a fresh battery, but replacement screws for the surrounding equipment. That might seem strange, but iFixit says that these replacement parts can only be used once, a claim which may or may not say anything about the original parts as well.\n\nWhere things get risky is after you've managed to pry open the Edge's case. Its O-ring can fall out, and you'll need to reassemble that if you want your device to retain any water resistance. You'll also need a pair of tweezers, and needless to say, poking circuits could accidentally break something, as could static shock. iFixit recommends precautions like a grounding mat, and even avoiding any clothing that could build up a static charge, such as fleece.\n\nFor some owners, the major hurdle is going to be the scale of the operation. The screws and connectors involved are tiny, even by the standards of most electronics. If your hands aren't steady, this process could prove frustrating or outright impossible, speaking as someone who's hand-assembled desktop PCs.\n\nOfficially, no. If you don't want to perform the procedure yourself, Google doesn't offer a paid replacement service. The company might conceivably perform a free swap if you've got a defective battery and you're still under warranty, but you're otherwise expected to handle things yourself. If you do qualify for a battery fix, there's a chance that Google will simply send you a replacement Edge.\n\nAs time goes on, third-party options might arrive, yet Google cautions against using unofficial parts, stating that \"a non-qualified battery and improper disposal may present a risk of fire, explosion, leakage, and/or other hazards.\" The company is, of course, covering itself legally — but there's a grain of truth in that there's no telling what the quality of a generic part may be. Lithium-ion batteries can burst into flames if they're damaged or defective. Even with Google's official parts, you should be prepared to dispose of a battery in a fireproof container.\n\nAll this helps to explain why more wearables haven't gone the replaceable route. Companies don't want to be on the hook for their customers' mistakes, and it remains to be seen how many people will actually take advantage of the option. By the time an Edge's battery wears out, you might be more inclined to buy a newer device than resuscitate last-gen hardware.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2321249/fitbit-edge-replaceable-battery-not-easy/",
+      "publishedAt": "2026-11-24T23:30:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "windows"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "engadget-eec3d810cdc805ad:en",
+      "sourceId": "engadget-eec3d810cdc805ad",
+      "lang": "en",
+      "title": "Improve your Starlink Wi-Fi speed with this app setting",
+      "summary": "See how a single setting in the Starlink app can improve your home internet speed, and figure out whether switching it on makes sense for your setup.",
+      "body": "Is your Starlink Wi-Fi slower than it should be? A simple change in the app can help, though it comes with a few trade-offs worth knowing first.\n\nWhile Starlink has had a lot of bad press in 2026 — mostly because of reported slowdowns in Ukraine and its general association with Tesla and SpaceX CEO Elon Musk — there's no denying that for some people, it may be their best or only internet option. That's because Starlink satellites have wide global coverage, reaching areas inaccessible not just to landline connections but potentially competing cellular and satellite services as well.\n\nThere are a variety of ways Starlink can be optimized, an obvious one being dish placement. Less obvious, though, is controlling how your system broadcasts Wi-Fi. You'd think the hard part would be capturing signals from space, after all, not bouncing them a few more feet to your laptop or TV.\n\nWhat we're specifically talking about here is splitting your Wi-Fi into separate 2.4 and 5GHz networks in the Starlink app. We'll explain what that means, why it can be beneficial and when you may want to stick with the normal unified setting.\n\nIf you already know why you'd want to split Wi-Fi, let's cut to the chase. All you have to do is find and select the Add Network option, then toggle Split Network . You'll be asked to name the two new networks, which should probably include \"2.4\" and \"5\" so you can tell which network your devices are connecting to.\n\nFor everyone else, it helps to know that most Wi-Fi routers are dual-band , broadcasting over two main frequency bands, 2.4 and 5GHz. Starlink's bundled hardware doesn't currently support the newer 6GHz band, even when it's equipped with Wi-Fi 7. The reason a split might help is that 5GHz is inherently faster than 2.4GHz. Shorter wavelengths translate not just into higher potential speeds but more non-overlapping channels. Overlap can result in congestion and interference. For devices that support 5GHz, then, forcing them to use the band all the time may result in noticeable speed boosts. As with any Wi-Fi network, exact performance figures are going to depend on a variety of factors, including not just your router but the range and kinds of devices connecting to your network.\n\nAs if that weren't enough, some low-power devices, such as many Wi-Fi smart LED light bulbs , are 2.4GHz-only. If they're competing with devices that could be on 5GHz, they might be encountering unnecessary congestion of their own.\n\nThe first potential issue here is range. The 2.4GHz band offers the greatest reach of any Wi-Fi band, typically up to 150 feet (45 meters) indoors, versus 5GHz's 50 to 75 feet (15 to 25 meters). It also offers better penetration through walls and other obstacles. In some scenarios, then, limiting devices to 5GHz may result in a flaky signal or none at all where things were previously stable. Under a unified network, devices can flip between bands automatically as needed.\n\nThe other major concern is that devices on one network ID might not be able to talk to those on the other. They should be able to on paper, and naturally, that won't matter if all they have to do is communicate with the internet. But if you do encounter this issue, it can wreak havoc, particularly with a mix of smart home accessories that require specific bands. You may not be able to configure them all to work together, let alone trigger complex automations.\n\nOne final problem is convenience. Reassigning a bunch of devices to new networks can be a hassle, and to deal with range, you may have to manually switch some mobile devices every time you take them into a particular room. If you're not encountering any performance barriers with your existing setup, you might want to leave Starlink untouched.",
+      "sourceName": "Engadget",
+      "originalUrl": "https://www.engadget.com/2321248/starlink-wifi-speed-split-network-app-setting/",
+      "publishedAt": "2026-11-24T23:00:00.000Z",
+      "categories": [
+        "tecnologia-general",
+        "apps-accesibles"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-36d1c11bf4e01ea1:en",
+      "sourceId": "techcrunch-36d1c11bf4e01ea1",
+      "lang": "en",
+      "title": "Even the best AI agents struggle with everyday life",
+      "summary": "As millions embrace personal AI assistants, a new benchmark reveals that even the most advanced AI models struggle to complete everyday tasks reliably and safely without introducing potential new problems.",
+      "body": "AI companies have spent the last couple of months marketing personal AI agents as tools to take over the digital drudgery of human existence — and millions have been sold on the vision, handing over their shopping schedules, travel plans, and everyday responsibilities to AI assistants. But new research suggests that even the most advanced AI models struggle to reliably and safely navigate the messy details of people’s lives.\n\nAccording to ShellBench, a new benchmark for everyday agent work, even the most advanced models from OpenAI, Anthropic, and Meta failed more than a third of the time. Across all models tested, 15.7% of attempts failed at least one safety requirement, often leading to unintended consequences.\n\nShellBench was developed in collaboration with researchers at The OpenClaw Foundation, Parsewave, Hugging Face, Red Hat, and UC Berkeley, drawing on more than 10 million anonymized, real-world AI agent interactions to see how agents perform on the everyday work people actually delegate to them.\n\nThe research comes as personal AI assistants are finding new popularity among developers, with Meta, OpenAI, and Anthropic all fighting for a piece of the market with Muse, Dots , and Claude Duet , respectively.\n\nIn October, Meta said more than 10 million people in the U.S. and Canada had set up its personal AI agent, Muse, within six weeks of launch, with about a quarter using it daily. That number is expected to grow as Meta implants Muse directly into Instagram DMs . Despite growing popularity among consumers, we still have little evidence about how reliable AI personal assistant products actually are.\n\nShellBench suggests that the unreliable nature of most everyday data sources still causes problems for many state-of-the-art systems. A successful agent should be able to navigate messy personal workspaces containing emails, calendar entries, spreadsheets, receipts, chat logs, outdated information, and phishing attempts, and figure out which information is relevant, what is private, and how to deliver the requested outcome without creating new problems.\n\nIt seems many of today’s AI agents are still not up to the task. Not only did even the highest-performing agents frequently fail to meet the requirements of a task, but they also lacked consistency. When researchers ran each task three times under identical conditions, OpenAI’s GPT-6 Astra, the highest-scoring model, nailed all three attempts less than half the time.\n\nFor autonomous assistants that are meant to run in the background without supervision, it’s a problem if users need to run an agent multiple times to get a result they trust.\n\nAdditionally, about 10% of otherwise correct attempts failed at least one safety criterion. Across the models and harnesses tested, agents failed to, for example, adequately account for a child’s school pickup 79.5% of the time. When handling laptop custody records, agents failed a requirement to identify and withhold a sensitive bank upload token in 18.6% of attempts. In another task, agents recommended duplicate or incorrect invoice payments 40.3% of the time.\n\nThe findings highlight a major issue for users adopting consumer personal AI assistants, namely that there’s always a risk that an agent can create more headaches in the course of trying to fulfill an otherwise ordinary request.\n\nWhile AI benchmarks have largely focused on coding, professional work, or testing on specific tasks, ShellBench is attempting to evaluate how models perform on multi-step personal tasks within different agent harnesses — the software that controls how a model accesses information, uses tools, and takes actions.\n\nWhile the researchers found model choice had a greater overall impact on performance than harness choice, among the more capable models, AI agent performance became more dependent on the harness.\n\nFor example, OpenAI’s GPT-6 Astra outperformed Anthropic’s Claude Fable 5.2 when operating within the Pi harness, but it performed worse when both models were tested within Claude Code.\n\nMeta’s Muse Wonder Full scored 56% in Pi, but only 38.1% in Claude Code. Meta’s Muse Wonder 1.0, meanwhile, averaged a success rate of 39.7% across the five harnesses tested.\n\nNotably, while the researchers tested models from Meta, OpenAI, and Anthropic, they didn’t evaluate them within the native harnesses of Muse, Dots, or Claude Duet, so the results may not be representative of the experience millions of consumers are having with the product today.\n\nTechCrunch has reached out to Meta, OpenAI, Anthropic, and the researchers in the study.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/11/24/even-the-best-ai-agents-struggle-with-everyday-life/",
+      "publishedAt": "2026-11-24T21:33:29.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
+      "id": "techcrunch-8454585f08a675c6:en",
+      "sourceId": "techcrunch-8454585f08a675c6",
+      "lang": "en",
+      "title": "Maple raises $5.3M to build AI products that protect your data, even from itself",
+      "summary": "The startup's encrypted AI architecture is designed to prevent even the company itself from accessing users' private data.",
+      "body": "As AI assistants evolve into more capable agents that can access our files, emails, calendar, browser, and more, the amount of trust we’re expected to place in AI companies is growing. One startup called Maple , co-founded by a former Apple engineer who worked on privacy-preserving technologies, is taking a different approach with its AI app, where users’ data remains private — even from the company itself.\n\n“We wanted to build something that was not only encrypted but also could be proven, and that people could go look at the open-source code, and then they could look at what we call trusted execution environments,” explains Maple co-founder and CEO Mark Suman . “They can look at and verify the code that’s running on our servers, so they don’t really have to take our word for it.”\n\n“They can audit everything themselves and know how their data is being handled,” he adds.\n\nThe idea of trust is Maple’s larger theme, as the startup proposes that there’s a way to build an AI app where consumers don’t have to trade privacy for convenience, as its competitors often require with their invasive privacy policies and data collection practices , and sometimes even training on users’ personal data .\n\nInstead of asking users to trust that Maple won’t misuse their personal data, it’s attempting to build a business where it can’t access that data in the first place.\n\nLike other AI apps on the market, Maple allows users to engage in a chat experience where they ask questions and get answers. Meanwhile, its newly launched desktop app, Maple Work , offers a more agentic experience where the AI can control your computer, work with your files and apps, and control your browser to get online tasks handled.\n\nWith the company’s recently closed $5.3 million round, it’s moving on to its next product — a cloud-based agent that will be able to continue its work even if your computer isn’t on. This addition would make Maple more competitive with other popular consumer AI services, like Meta’s Muse , Instinct , and other AI agents that work over chat.\n\nThe oversubscribed seed round was led by Epic Ventures, with participation from Draper Associates, Planetary VC, and Epoch VC, and follows a pre-seed angel round of under a million. Maple plans to raise a Series A in the first half of 2027, given the investor interest.\n\nSuman, who previously spent six years at Apple, already had a background where AI and privacy overlapped, he tells TechCrunch.\n\nAt Apple, he worked on AI and machine learning with a particular focus on computer vision. Given Apple’s stance on consumer privacy, the challenge he faced was building products that would protect people’s identity while benefiting from computer vision techniques. His co-founder, Anthony Ronning (CTO), has a background in defense tech, security, and networking.\n\nRonning started the company that later became Maple AI back in 2023, initially as a privacy-focused fintech. When Suman teamed up with Ronning in August 2024, the idea to create Maple AI was born. The following January, the product became available to the public as a mobile app.\n\nThe app offers a familiar interface for those used to AI chatbots, but under the hood it runs a variety of open models, including versions of DeepSeek , Kimi , GLM , Inkling from Thinking Machines, Google’s Gemma , and OpenAI’s GPT OSS . Users can pick and choose the models they want or, for a simpler experience, just toggle between a quick model and the more powerful one.\n\nThe models themselves run inside a trusted execution environment (TEE) — meaning a server with hardware encryption on it — within a U.S.-based data center. (Maple also offers support for European customers through a partner that runs its server in Europe.)\n\n“We actually don’t have access to [the data] while it’s inside the TEE,” explains Suman. “The data gets encrypted first on your device using a unique password that’s only known by you, the user — we don’t have access to it. It then goes into this TEE, and it gets decrypted inside there. The AI does its thing, and then it re-encrypts it with your password and sends it back to you,” he continues. “So we provide an end-to-end experience that’s very easy for the user, but we actually don’t have access to the raw data as it’s in flight or even when it’s at rest,” he adds.\n\nThis allows Maple to protect its users’ data, even from outsiders — like if hackers breached its system or the government came with a subpoena, for instance. All it could do would be to hand over an encrypted file.\n\n“We just simply don’t want access to it,” Suman says of customers’ data. “That’s not part of our business model. And we also don’t want it to be part of our threat model.”\n\nWith the new desktop app, Maple is looking to small businesses that may want to benefit from AI without the data privacy risks. Inside the app, there’s an integration store where users can connect with other apps, like their Gmail or calendar. The desktop app can also spin up a subagent that works inside another AI app you may have on your desktop, like Claude, Codex, or others that support the Agent Client Protocol (ACP). This allows customers to use their preferred AI app for specific tasks, without having to give it all their information — just what’s needed for the given task.\n\nNext year, Maple plans to enter the enterprise market with pilot work, where it will offer its own version of zero data retention. (Maple doesn’t retain most of the customers’ data, but when it has to, that data is encrypted.) It’s now in the process of completing SOC 2 compliance and security audits to get ready for this expansion.\n\nThe company declined to share its registered customer numbers but noted it’s seen 60x growth over the past three months, as people have been looking for ways to increase their security with AI.\n\nMaple currently generates revenue via subscriptions, which are comparable to those from other AI model providers. Its Pro plan is $20 per month, and it offers two Max plans, Max and Max Plus, at $100 and $200 per month, respectively.\n\nThe Austin- and San Francisco-based startup is a team of four and is actively hiring.",
+      "sourceName": "TechCrunch",
+      "originalUrl": "https://techcrunch.com/2026/11/24/maple-raises-5-3m-to-build-ai-products-that-protect-your-data-even-from-itself/",
+      "publishedAt": "2026-11-24T21:19:52.000Z",
+      "categories": [
+        "tecnologia-general",
+        "ia-accesibilidad"
+      ]
+    },
+    {
+      "kind": "news",
       "id": "9to5mac-a5dd65d9d129fac6:en",
       "sourceId": "9to5mac-a5dd65d9d129fac6",
       "lang": "en",
@@ -5660,23 +5773,6 @@
         "tecnologia-general",
         "apps-accesibles",
         "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-055eec646dc7ccec:en",
-      "sourceId": "9to5mac-055eec646dc7ccec",
-      "lang": "en",
-      "title": "Walmart drops Apple Pay support from its app and website",
-      "summary": "Walmart appears to have dropped support for Apple Pay on its website and in its iPhone app. This comes just a few weeks after the retailer finally added support for Apple’s payment platform to its app and website. 9to5Mac is sponsored by Sony : Score Sony’s INZONE noise-canceling earbuds for 38% off . These deliver immersive 360 Spatial Sound, active noise canceling, low-latency wireless connectivity, and much more. more…",
-      "body": "Walmart appears to have dropped support for Apple Pay on its website and in its iPhone app. This comes just a few weeks after the retailer finally added support for Apple’s payment platform to its app and website.\n\n9to5Mac is sponsored by Sony : Score Sony’s INZONE noise-canceling earbuds for 38% off . These deliver immersive 360 Spatial Sound, active noise canceling, low-latency wireless connectivity, and much more.\n\nAppleosophy spotted the change last week. There’s no indication whether the feature was removed deliberately or if this is some sort of bug.\n\nDavid Becker explains:\n\nIn the “Payment method” section of the checkout page on Walmart’s app and website, it no longer lists Apple Pay as an accepted payment method where it previously did. Not only that, but it doesn’t show up under the “Other ways to pay” or “More ways to pay” sections of the checkout page either.\n\nWalmart still accepts Apple Pay in its retail stores. The retailer began rolling out contactless payment support in August, including Apple Pay, Google Pay, contactless cards, and more. For years, Walmart refused to support Apple Pay, instead trying (and failing) to convince shoppers to use its own Walmart Pay platform.\n\nWe’ll update this post if Walmart comments on Apple Pay’s disappearance from its website and app. Hopefully, it’s a bug that the company fixes sooner rather than later.\n\nFollow Chance : Threads , X , and Instagram",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/24/walmart-drops-apple-pay-support-from-its-app-and-website/",
-      "publishedAt": "2026-11-24T21:01:08.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "apps-accesibles"
       ]
     },
     {
@@ -5702,7 +5798,7 @@
       "lang": "en",
       "title": "What's going on with the Riemann hypothesis?",
       "summary": "A new AI-assisted proof seems to be solid, but we're not sure what it tells us.",
-      "body": "Last week, news broke that a mathematician had used AI to help crack one of the biggest outstanding problems in math, a proof of the Riemann hypothesis . The news follows on several other major breakthroughs in math that have either been enabled by or managed entirely by Large Language Model-based systems, a development that has left the entire field of mathematics in a state of upset.\n\nIt's too early to say much about the proof itself—mathematicians are still in the process of digesting it. But we can say a little about how the proof came about, and what it tells us about the state of math.\n\nThe Riemann hypothesis dates from the mid-1800s and was formulated by (you will be surprised to learn) Bernhard Riemann. There's not an obvious way to describe the details of the actual hypothesis simply, but it has implications for the distribution of prime numbers. This gives it significance for areas ranging from number theory to cryptography. As Wikipedia accurately states, \"It is considered by pure mathematicians to be one of the most important problems in the field.\"\n\nRead full article\n\nComments",
+      "body": "Last week, news broke that a mathematician had used AI to help crack one of the biggest outstanding problems in math: a proof of the Riemann hypothesis . The news follows several other major breakthroughs in math that have either been enabled by or managed entirely by large language model-based systems, a development that has left the entire field of mathematics in a state of upset.\n\nIt's too early to say much about the proof itself—mathematicians are still in the process of digesting it. But we can say a little about how the proof came about, and what it tells us about the state of math.\n\nThe Riemann hypothesis dates from the mid-1800s and was formulated by (you will be surprised to learn) Bernhard Riemann. There's not an obvious way to describe the details of the actual hypothesis simply, but it has implications for the distribution of prime numbers. This gives it significance for areas ranging from number theory to cryptography. As Wikipedia accurately states, \"It is considered by pure mathematicians to be one of the most important problems in the field.\"\n\nRead full article\n\nComments",
       "sourceName": "Ars Technica",
       "originalUrl": "https://arstechnica.com/ai/2026/11/whats-going-on-with-the-riemann-hypothesis/",
       "publishedAt": "2026-11-24T20:34:53.000Z",
@@ -5717,66 +5813,14 @@
       "sourceId": "the-verge-7b953176cc7863d3",
       "lang": "en",
       "title": "TikTok was down",
-      "summary": "Earlier on Tuesday, TikTok experienced some issues, with videos, search results, favorites, and other features not loading as they usually do. Videos sometimes wouldn't load in the For You feed on my iPhone, and search results occasionally didn't show up as expected in the app on iOS or Android, or on the web. Even trying […]",
-      "body": "Earlier on Tuesday, TikTok experienced some issues, with videos, search results, favorites, and other features not loading as they usually do. Videos sometimes wouldn't load in the For You feed on my iPhone, and search results occasionally didn't show up as expected in the app on iOS or Android, or on the web. Even trying to pull up a profile would show a blank page, while links to videos are dead in the water too. However, as of 3:45PM ET or so, things appear to be working normally again.\n\nDowndetector showed around 25,000 reports of issues at around 2:56PM ET, and many people on social media were saying that TikTok was down for them .\n\n\"We …\n\nRead the full story at The Verge.",
+      "summary": "Earlier on Tuesday, TikTok experienced some issues, with videos, search results, favorites, and other features not loading as they usually do, following a slew of other outages over the past couple of weeks. Videos sometimes wouldn't load in the For You feed on my iPhone, and search results occasionally didn't show up as expected in […]",
+      "body": "Earlier on Tuesday, TikTok experienced some issues, with videos, search results, favorites, and other features not loading as they usually do, following a slew of other outages over the past couple of weeks . Videos sometimes wouldn't load in the For You feed on my iPhone, and search results occasionally didn't show up as expected in the app on iOS or Android, or on the web.\n\nEven trying to pull up a profile would show a blank page, while links to videos are dead in the water too. However, as of 3:45PM ET or so, things appear to be working normally again. Downdetector showed around 25,000 reports of issues at around 2:56PM ET, and many peopl …\n\nRead the full story at The Verge.",
       "sourceName": "The Verge",
       "originalUrl": "https://www.theverge.com/tech/1041618/tiktok-down-outage",
       "publishedAt": "2026-11-24T20:27:27.000Z",
       "categories": [
         "tecnologia-general",
-        "apple",
-        "android",
-        "apps-accesibles"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "9to5mac-46003dad815a81a3:en",
-      "sourceId": "9to5mac-46003dad815a81a3",
-      "lang": "en",
-      "title": "Anthropic just gave Claude users a new way to make Mac apps",
-      "summary": "Use Claude on Mac or Windows? Anthropic just released a new way to make personalized desktop apps using AI tools. more…",
-      "body": "Use Claude on Mac or Windows? Anthropic just released a new way to make personalized desktop apps using AI tools.\n\n“Starting today, you can use Claude artifacts to create, run, and share desktop apps. The “Install as app” feature is rolling out in beta in Claude for Mac and Windows,” Anthropic says.\n\n“When an artifact is installed as a Mac or Windows app, it gets its own icon and opens in its own window instead of inside Claude. You can share it with others, and it needs your permission before it can interact with your computer. You choose how much to allow.”\n\nAdditionally, Anthropic says apps made with this method can benefit from Claude connectors. Claude usage is tied to desktop apps made with artifacts.\n\nThis form of Claude-created app is capable of sending notifications, adding items to the menu bar, and having its own permissions.\n\nYou can learn much more about the new system here . This is the second Claude update this week made specifically for builders .\n\nRelated Claude stories:\n\nDo more with your Apple products\n\nAirPods 5 | Apple’s newest wireless headphones\n\nApple AirTag 2 | Add Find My tracking to keys, bags, bikes, more\n\nAirPods Pro 3 | Apple’s best wireless headphones\n\nWireless CarPlay Adapter | No more plugging in required\n\nBeats USB-A to USB-C Cable | The official CarPlay cable",
-      "sourceName": "9to5Mac",
-      "originalUrl": "https://9to5mac.com/2026/11/24/anthropic-just-gave-claude-users-a-new-way-to-make-mac-apps/",
-      "publishedAt": "2026-11-24T19:56:34.000Z",
-      "categories": [
-        "apple",
-        "tecnologia-general",
-        "windows",
-        "apps-accesibles",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "engadget-d3c1e0dfc0daf5d1:en",
-      "sourceId": "engadget-d3c1e0dfc0daf5d1",
-      "lang": "en",
-      "title": "The biggest limitations of ChatGPT",
-      "summary": "Here's why paying for a premium ChatGPT plan won't shield you from its biggest weaknesses, and what that means for trusting the chatbot with your work.",
-      "body": "From fabricated citations to forgotten instructions, ChatGPT still has some frustrating blind spots.\n\nIt's no secret that ChatGPT can write up emails, become your software troubleshooter and even dumb down complicated questions in an instant. But it's also pretty capable of making up responses so polished that you might not think to verify the shaky facts behind them. If only most of us had the confidence that ChatGPT has when it is hallucinating. Even after OpenAI brought its advanced GPT-6 model to all ChatGPT users in October 2026, the chatbot still has the tendency to fabricate supporting evidence, misread an ambiguous question and even forget instructions amid a lengthy conversation.\n\nSome shortcomings are tied to the model or version of it that you're using, along with any plugins you've added. And just because you're paying for ChatGPT Plus or the $100 ChatGPT Pro plan doesn't mean you're guarded against the chatbot's biggest limitations. To be fair, this isn't a problem unique to OpenAI, as most of these shortcomings are common in AI assistants we compared, like Claude .\n\nTopping the list of ChatGPT's biggest quirks is its bad habit of hallucinating, or crafting details that seem legitimate but are entirely made up. Packing all the confidence of a subject-matter expert, ChatGPT will cite studies that don't exist and make them almost believable with imaginary quotations too.\n\nOpenAI is quite upfront about this and warns that ChatGPT could invent quotes and cite fake sources. Using ChatGPT Search does make things better, but just because the response has some live links doesn't make the final statement correct. While an expert on the topic could probably catch the counterfeit sources upon closer inspection, this could be troublesome for someone looking for references in uncharted territory.\n\nThe chatbot tends to settle on its own interpretation of what you're asking of it and heads in the wrong direction with full conviction. Its habit of agreeing with almost everything you say is a real problem too. For instance, OpenAI rolled back a GPT-4o update in April 2025 after complaints that the chatbot was overly flattering and compliant, even validating problematic ideas at times. In October 2026, the company made certain alterations to GPT-6 for Free and Go users, along with the fallback model paid subscribers get after hitting their limits, to cut down on overly flattering language. The company didn't claim the problem had been eliminated entirely, though. After all, it's not much of a second opinion if the chatbot agrees with everything you have to say.\n\nChatGPT can also follow detailed instructions and acknowledge a mistake you've pointed out, only to ignore it a few prompts later. One user on OpenAI's community forum reported that ChatGPT reused earlier details in a report and presented them as verified, then repeated the mistake after admitting it.\n\nBut then, that's one person's experience and not exactly strong evidence of this being a problem across the board. That said, researchers found that the reliability of language models tends to go down as input length increases, even if the tasks aren't inherently complex. The researchers tested 18 different models, using older versions of OpenAI's GPT, Google's Gemini and Anthropic's Claude, so the findings may not be an accurate depiction of how GPT-6 performs. And just because you've fed your AI model an enormous amount of context doesn't guarantee it will make the most of it.\n\nIf you're working on a lengthy project across several days, being mindful of the changes requested and repeating the given instructions is part of the play. Sure, it can get frustrating that a tool that should be saving you time needs so much babysitting, but the alternative is far more time- and labor-intensive. OpenAI also acknowledges that ChatGPT's Memory feature doesn't retain every detail from every conversation anyway.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2321242/chatgpt-biggest-limitations/",
-      "publishedAt": "2026-11-24T19:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "the-verge-5cd17c873e1310e0:en",
-      "sourceId": "the-verge-5cd17c873e1310e0",
-      "lang": "en",
-      "title": "Now Firefox can select which sites use its VPN, and clear your browsing history with one click",
-      "summary": "Mozilla released Firefox 161 on Tuesday with a new setting you can use to choose which pages automatically open with the browser's VPN active. Using the \"Manage VPN rules\" option in Firefox's VPN panel, you can set it to \"always on\" or \"always off\" for specific sites, so you don't have to toggle it manually […]",
-      "body": "Mozilla released Firefox 161 on Tuesday with a new setting you can use to choose which pages automatically open with the browser's VPN active. Using the \"Manage VPN rules\" option in Firefox's VPN panel, you can set it to \"always on\" or \"always off\" for specific sites, so you don't have to toggle it manually every time you visit certain pages.\n\nStarting Tuesday, Mozilla is also rolling out a \"Fire\" button in standard Firefox windows that lets you quickly clear your browsing data directly from the toolbar. You can choose which data it deletes, including browsing history, downloads history, cookie data, site data, temporary files, saved form in …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/tech/1041474/firefox-161-vpn-rules-fire-button",
-      "publishedAt": "2026-11-24T18:44:57.000Z",
-      "categories": [
-        "tecnologia-general"
+        "apple"
       ]
     },
     {
@@ -5797,37 +5841,6 @@
     },
     {
       "kind": "news",
-      "id": "engadget-11c8759dab16efda:en",
-      "sourceId": "engadget-11c8759dab16efda",
-      "lang": "en",
-      "title": "Ways you can help your video doorbell stay charged in the winter",
-      "summary": "A dead doorbell battery could mean missed visitors or deliveries. Learn how to prepare your battery-powered video doorbell for the challenges of winter weather.",
-      "body": "Winter can be tough on battery-powered video doorbells, but a few adjustments may help yours cope when temperatures drop.\n\nWhile video doorbells aren't a necessity per se, it can be hard to imagine living without them once you own one. Knowing who's at the door saves you run-ins with unwanted salesmen. More seriously, they may help deter burglars — or help you catch an offender in the act if deterrence fails. Of course, your ability to capture that activity will depend in part on the distance at which your video doorbell stops detecting motion .\n\nAnother catch is that they're perpetually outdoors. That might not be such a big deal if you live somewhere warm like Miami or San Antonio. But in places with prolonged cold weather, battery life can suffer to the point that a video doorbell becomes more of a burden than an aid. It's inherent to the chemistry of lithium-ion technology, unfortunately.\n\nThe main way to alleviate this issue is by bringing your doorbell or its battery in from the cold. There may be other tactics you can employ, though, such as strategic positioning.\n\nThe critical point here is that an ideal charging range for lithium-ion batteries is between 50 and 86 degrees Fahrenheit (10 to 30 Celsius). When charging below the freezing point, there's a risk that metallic lithium will start plating onto electrodes, permanently reducing capacity. And even if the weather is slightly above freezing, charging will be less efficient than it could be. Cold-weather performance is one of the differences between sodium and lithium-ion batteries .\n\nBefore you charge a doorbell battery, make sure to let it warm up to room temperature first. This should not only preserve capacity but also help avoid cold-related charging delays. That's significant, considering that a Ring battery can take as long as 10 hours to top up. Let the battery charge fully before putting it back outside to maximize the time between recharges. If your doorbell has a removable battery, keeping a charged spare will minimize downtime. Some models in Ring's updated battery-powered doorbell lineup feature quick-release battery packs to make swaps easier.\n\nSome doorbells don't offer removable batteries, however. One example is the battery-powered Google Nest Doorbell. In that case, you'll need to become familiar with removing your doorbell and bringing it indoors. Be sure to time this properly. Since a recharge might take several hours, it's probably wise to charge overnight unless you're worried about security and don't have any other cameras covering the front of your home.\n\nIn climates with borderline winters — that is, where the temperature only occasionally dips below freezing — you may be able to extend battery life by aiming or sheltering your doorbell in just the right way. If you can block the wind, for example, or maximize sunlight, your doorbell will naturally run warmer than it might otherwise.\n\nA vital point here is that in extreme cold, it's possible for a doorbell to stop functioning for the duration. Anker, Ring, Google and others all agree on a minimum operating temperature of -4 degrees Fahrenheit (-20 Celsius). Between that and the freezing point, devices may still refuse to charge in order to prevent the plating we mentioned earlier.\n\nHonestly, then, the best choice if you live in a frostbitten region may be to switch to a wired doorbell, as long as you can find one compatible with your home's design. While wired doorbells may still encounter problems around the -4 degrees Fahrenheit mark, they're otherwise immune to the cold, since they draw on the same electricity as the rest of your house.",
-      "sourceName": "Engadget",
-      "originalUrl": "https://www.engadget.com/2324749/video-doorbell-winter-charging-tips/",
-      "publishedAt": "2026-11-24T18:00:00.000Z",
-      "categories": [
-        "tecnologia-general"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-4f8515159ed3df71:en",
-      "sourceId": "techcrunch-4f8515159ed3df71",
-      "lang": "en",
-      "title": "Threads comes to iPad and takes a page from X’s playbook with cashtags",
-      "summary": "The addition of live stock quotes and charts could help Threads attract the financial community that has historically relied on X.",
-      "body": "It may have taken 15 years for Instagram to launch on the iPad , but Instagram’s other app, Threads, has taken a slightly faster path to the Apple tablet. In an overnight update, the company rolled out a big-screen version of the X competitor. It’s also added another new feature, borrowed from X: the stock-tracking feature known as cashtags.\n\nWhile the iPad version of the app works well in portrait orientation, some users are disappointed to find that the landscape layout doesn’t work as they’d expect. Instead of offering a multi-column interface as on Threads’ web app, the iPad app focuses on the user’s main feed in a single-column layout. There are also options to swipe right and left from the main screen to access the search screen and the feeds menu, respectively.\n\nThe iPad app isn’t the company’s only update in the latest release. According to a post from Threads engineer Guy Dickinson , Threads will now support cashtags — a feature popularized by Twitter years ago for tracking live stock information. These specialized tags start with the dollar sign (“$”) followed by a ticker symbol. When you click on a cashtag, you can follow the discussions around the stock.\n\nIn addition, Threads is adding live stock quotes, charts, and other context at the top of each cashtag’s page. As you search for a particular cashtag, the autocomplete search results will display the stock’s current price and the percentage it’s up or down. Dickinson says the feature will currently support NYSE and Nasdaq stocks, ETFs, and crypto. Cashtags will be supported on the web, iOS, and Android. However, they’re just now rolling out, so you may not immediately see them.\n\nThe update points to Threads’ broader ambition to compete with X, not only as a destination for discussions about various topics, but also as a place where people can track real-time news and information. Cashtags in particular could attract traders and investors to Threads who typically rely on X.\n\nDespite facing stiff competition from X, Meta announced earlier this year that Threads topped 500 million monthly users , and Meta CEO Mark Zuckerberg says the company believes the app is on track to reach a billion users over time .",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/11/24/threads-comes-to-ipad-and-takes-a-page-from-xs-playbook-with-cashtags/",
-      "publishedAt": "2026-11-24T17:44:34.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apple"
-      ]
-    },
-    {
-      "kind": "news",
       "id": "ars-technica-fdc2703d92d98071:en",
       "sourceId": "ars-technica-fdc2703d92d98071",
       "lang": "en",
@@ -5844,47 +5857,14 @@
     },
     {
       "kind": "news",
-      "id": "the-verge-bbf1b5e75776086f:en",
-      "sourceId": "the-verge-bbf1b5e75776086f",
+      "id": "applevis-apps-5492509645148c2d:en",
+      "sourceId": "applevis-apps-5492509645148c2d",
       "lang": "en",
-      "title": "Tidal will start banning AI-generated music next month",
-      "summary": "Tidal is officially banning AI-generated music on December 9th. As a result of this change, Tidal will delete around 29 million AI-generated songs and reject an estimated 80,000 to 85,000 tracks per day, according to Tidal music lead Robert Andersen. The move comes just months after Tidal began labeling and demonetizing tracks identified as 100 […]",
-      "body": "Tidal is officially banning AI-generated music on December 9th. As a result of this change, Tidal will delete around 29 million AI-generated songs and reject an estimated 80,000 to 85,000 tracks per day, according to Tidal music lead Robert Andersen .\n\nThe move comes just months after Tidal began labeling and demonetizing tracks identified as 100 percent AI-generated. In a post on X, Andersen says Tidal needed to take a more \"drastic\" measure, as AI music made up 43 percent of the tracks distributed to the platform in the last 90 days. \"We believe this will resonate with both artists and listeners alike, as 96% of all AI-generated songs recei …\n\nRead the full story at The Verge.",
-      "sourceName": "The Verge",
-      "originalUrl": "https://www.theverge.com/entertainment/1041362/tidal-ai-music-ban",
-      "publishedAt": "2026-11-24T17:17:09.000Z",
-      "categories": [
-        "tecnologia-general",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "techcrunch-644ed0151d95f999:en",
-      "sourceId": "techcrunch-644ed0151d95f999",
-      "lang": "en",
-      "title": "Meta brings its Muse AI assistant directly into Instagram DMs",
-      "summary": "The new integration gets rid of the need for users to toggle between Instagram and the Muse app when they want to interact with the AI agent.",
-      "body": "Instagram users can now chat with Meta’s AI agent Muse in a DM thread, the company announced on Tuesday. The social media network says users can chat with Muse to get more context about a post, place, or product they come across, or catch up on conversations they may have missed in their other DMs.\n\nThe new integration gets rid of the need for users to toggle between Instagram and the Muse app when they want to interact with the AI agent. It also reflects the growing competition among tech companies to make AI assistants a part of users’ everyday digital lives. By embedding Muse directly into Instagram, Meta is making it easier for users to access the AI agent, while also giving Muse access to a platform where users already discover products, places, and content.\n\nUsers can share Instagram posts with Muse and ask it to take action, such as adding a coffee shop to their Mexico City itinerary or finding a Black Friday deal on a pair of shoes.\n\nMeta notes that conversations with Muse on Instagram will appear as a side chat in the main Muse app.\n\nMuse in Instagram DMs will begin rolling out on Tuesday for iOS and Android users in the U.S., Canada, Mexico, Japan, and Singapore.\n\nMeta also announced that users can now do more with the posts and reels they’ve bookmarked on Instagram. For example, they can ask Muse to organize their saved content into custom folders, known as Collections. They could also ask Muse to turn a recipe video into a grocery list, turn the travel content from their favorite travel creators into an itinerary for an upcoming trip, or have Muse send them outfit ideas based on fashion reels they’ve collected.\n\nStarting Tuesday, when users save a post on Instagram, they will see a prompt for Muse to organize it for them. This feature is launching in the U.S. and Canada.\n\nMeta says that users remain in control of their Muse experience on Instagram. Nothing is shared, published, or sent without their approval, and they can ask Muse to forget information or undo actions at any time.",
-      "sourceName": "TechCrunch",
-      "originalUrl": "https://techcrunch.com/2026/11/24/meta-brings-its-muse-ai-assistant-directly-into-instagram-dms/",
-      "publishedAt": "2026-11-24T17:00:00.000Z",
-      "categories": [
-        "tecnologia-general",
-        "apps-accesibles",
-        "ia-accesibilidad"
-      ]
-    },
-    {
-      "kind": "news",
-      "id": "applevis-apps-99e61b4a750227ba:en",
-      "sourceId": "applevis-apps-99e61b4a750227ba",
-      "lang": "en",
-      "title": "Pikomofu",
-      "summary": "The leaves in the garden are falling one by one, and the evenings come early now. One pet is free, with no ads. Buy the Pass once, keep it forever. For everyone who loves dogs and cats. A tiny pixel dog or cat lives in a little garden on your iPhone. The sky follows the real time of day and the seasons, and your pet spends its days at its own gentle pace. I love animals more than anything, and I made this calming little app with all my heart, for everyone who loves them too. If you have ever lived with a dog or a cat, you will catch small moments that make you smile and say \"they really do that!\" I won't explain them. Please just give it a try, and find them yourself. - One pet is free. No ads, no subscriptions. - New friends and accessories will keep coming, always free. - Pikomofu Pass, a one-time purchase, adds Apple Watch, widgets and up to 5 pets.",
-      "body": "The leaves in the garden are falling one by one, and the evenings come early now. One pet is free, with no ads. Buy the Pass once, keep it forever. For everyone who loves dogs and cats. A tiny pixel dog or cat lives in a little garden on your iPhone. The sky follows the real time of day and the seasons, and your pet spends its days at its own gentle pace. I love animals more than anything, and I made this calming little app with all my heart, for everyone who loves them too. If you have ever lived with a dog or a cat, you will catch small moments that make you smile and say \"they really do that!\" I won't explain them. Please just give it a try, and find them yourself. - One pet is free. No ads, no subscriptions. - New friends and accessories will keep coming, always free. - Pikomofu Pass, a one-time purchase, adds Apple Watch, widgets and up to 5 pets.",
+      "title": "Pikomofu - Cozy Virtual Pet",
+      "summary": "For everyone who loves dogs and cats. A tiny pixel dog or cat lives in a little garden on your iPhone. The sky follows the real time of day and the seasons, and your pet spends its days at its own gentle pace. I love animals more than anything, and I made this calming little app with all my heart, for everyone who loves them too. If you have ever lived with a dog or a cat, you will catch small moments that make you smile and say \"they really do that!\" I won't explain them. Please just give it a try, and find them yourself. - One pet is free. No ads, no subscriptions. - New friends and accessories will keep coming, always free. - Pikomofu Pass, a one-time purchase, adds Apple Watch, widgets and up to 5 pets.",
+      "body": "For everyone who loves dogs and cats.\n\nA tiny pixel dog or cat lives in a little garden on your iPhone. The sky follows the real time of day and the seasons, and your pet spends its days at its own gentle pace.\n\nI love animals more than anything, and I made this calming little app with all my heart, for everyone who loves them too. If you have ever lived with a dog or a cat, you will catch small moments that make you smile and say \"they really do that!\" I won't explain them. Please just give it a try, and find them yourself.\n\n- One pet is free. No ads, no subscriptions. - New friends and accessories will keep coming, always free. - Pikomofu Pass, a one-time purchase, adds Apple Watch, widgets and up to 5 pets.",
       "sourceName": "AppleVis Apps",
-      "originalUrl": "https://www.applevis.com/apps/ios/games/pikomofu",
+      "originalUrl": "https://www.applevis.com/apps/ios/lifestyle/pikomofu-cozy-virtual-pet",
       "publishedAt": "2026-11-24T15:18:03.000Z",
       "categories": [
         "apple",

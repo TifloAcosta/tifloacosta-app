@@ -97,55 +97,9 @@ jobs:
             CODE_SIGNING_ALLOWED=NO build
       - name: Auditar la muestra PDF con veraPDF (PDF/UA-1)
         run: bash ios-app-native/scripts/audit-conversion-pdf-ua.sh "$RUNNER_TEMP/conversion-samples/"conversion*.pdf
-  pdf-engine-link-probe:
-    runs-on: macos-15
-    timeout-minutes: 25
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - sdk: iphoneos
-            triplet: arm64-ios
-          - sdk: iphonesimulator
-            triplet: arm64-ios-simulator
-    steps:
-      - uses: actions/checkout@v4
-      - name: Compilar y enlazar Cairo y qpdf para iOS
-        env:
-          IOS_SDK: ${{ matrix.sdk }}
-          VCPKG_TARGET_TRIPLET: ${{ matrix.triplet }}
+      - name: Medir el ejecutable y la aplicación del simulador
         run: |
-          set -euo pipefail
-          xcode="$(find /Applications -maxdepth 1 -type d -name 'Xcode_26*.app' -print | sort | tail -n 1)"
-          test -n "$xcode"
-          export DEVELOPER_DIR="$xcode/Contents/Developer"
-          xcodebuild -version
-          root="$RUNNER_TEMP/pdf-vcpkg"
-          git init -q "$root"
-          git -C "$root" fetch --depth=1 https://github.com/microsoft/vcpkg.git 7281d8d64321f945f296e696d8561f68c8186c67
-          git -C "$root" checkout --detach FETCH_HEAD
-          "$root/bootstrap-vcpkg.sh" -disableMetrics
-          mkdir -p "$RUNNER_TEMP/tiflo-triplets"
-          cat > "$RUNNER_TEMP/tiflo-triplets/$VCPKG_TARGET_TRIPLET.cmake" <<TRIPLET
-          set(VCPKG_TARGET_ARCHITECTURE arm64)
-          set(VCPKG_CRT_LINKAGE dynamic)
-          set(VCPKG_LIBRARY_LINKAGE static)
-          set(VCPKG_CMAKE_SYSTEM_NAME iOS)
-          set(VCPKG_OSX_SYSROOT $IOS_SDK)
-          set(VCPKG_OSX_DEPLOYMENT_TARGET 17.0)
-          TRIPLET
-          cd "$root"
-          ./vcpkg install --overlay-triplets="$RUNNER_TEMP/tiflo-triplets" --triplet="$VCPKG_TARGET_TRIPLET" 'cairo[core]' 'qpdf[core]'
-          prefix="$root/installed/$VCPKG_TARGET_TRIPLET"
-          export PKG_CONFIG_PATH="$prefix/lib/pkgconfig:$prefix/share/pkgconfig"
-          cmake -S "$GITHUB_WORKSPACE/ios-app-native/tests/pdf-engine-ios" -B "$RUNNER_TEMP/pdf-probe" -G Ninja \
-            -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT="$IOS_SDK" \
-            -DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_OSX_DEPLOYMENT_TARGET=17.0 \
-            -DCMAKE_TOOLCHAIN_FILE="$root/scripts/buildsystems/vcpkg.cmake" \
-            -DVCPKG_TARGET_TRIPLET="$VCPKG_TARGET_TRIPLET" -DVCPKG_OVERLAY_TRIPLETS="$RUNNER_TEMP/tiflo-triplets"
-          cmake --build "$RUNNER_TEMP/pdf-probe"
-          probe="$RUNNER_TEMP/pdf-probe/pdf-engine-probe"
-          xcrun vtool -show-build "$probe"
-          xcrun otool -L "$probe"
-          wc -c "$probe"
-          find "$prefix/share" -name copyright -print
+          app="$(find "$RUNNER_TEMP/TifloAcosta-17-build/Build/Products" -type d -name TifloAcostaNative.app -print -quit)"
+          test -n "$app"
+          wc -c "$app/TifloAcostaNative"
+          du -sk "$app"

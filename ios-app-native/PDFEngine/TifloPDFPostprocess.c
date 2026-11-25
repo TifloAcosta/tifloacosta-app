@@ -1,12 +1,15 @@
 #include "TifloPDFPostprocess.h"
 #include <qpdf/qpdf-c.h>
-#include <string.h>
 
 int tiflo_pdf_postprocess(const char *input, const char *output, const char *language,
                           const char *const *labels, size_t label_count) {
     qpdf_data pdf = qpdf_init();
-    int result = qpdf_read(pdf, input, 0);
-    if (result != 0) goto done;
+    if (!pdf) return QPDF_ERRORS;
+    qpdf_silence_errors(pdf);
+    qpdf_set_suppress_warnings(pdf, 1);
+    // Quartz may emit unused objects at offset zero. qpdf repairs these on output.
+    int result = qpdf_read(pdf, input, 0) & QPDF_ERRORS;
+    if (result != 0 || qpdf_has_error(pdf)) goto failed;
 
     qpdf_oh root = qpdf_get_root(pdf);
     qpdf_oh preferences = qpdf_oh_get_key(pdf, root, "/ViewerPreferences");
@@ -52,9 +55,15 @@ int tiflo_pdf_postprocess(const char *input, const char *output, const char *lan
         }
     }
 
-    result = qpdf_init_write(pdf, output);
-    if (result == 0) result = qpdf_write(pdf);
-done:
+    if (qpdf_has_error(pdf)) goto failed;
+    result = qpdf_init_write(pdf, output) & QPDF_ERRORS;
+    if (result != 0 || qpdf_has_error(pdf)) goto failed;
+    result = qpdf_write(pdf) & QPDF_ERRORS;
+    if (result != 0 || qpdf_has_error(pdf)) goto failed;
+    qpdf_cleanup(&pdf);
+    return 0;
+failed:
+    result = QPDF_ERRORS;
     qpdf_cleanup(&pdf);
     return result;
 }

@@ -42,3 +42,10 @@ test('AcoustID solo recibe una huella local, con activación voluntaria y coinci
   assert.match(recognition, /Acoustid-User-Key/);
   assert.match(account, /PasteButton/);
 });
+
+test('La identificación sin cuenta lleva al formulario y nunca reenvía una clave por redirección', () => {
+  const recognition = readFileSync(new URL('../Sources/NativeMusicRecognition.swift', import.meta.url), 'utf8');
+  assert.match(recognition, /willPerformHTTPRedirection[\s\S]*?completionHandler\(nil\)/);
+  assert.match(recognition, /URLSessionConfiguration\.ephemeral/);
+  assert.match(music, /guard NativeMusicRecognition\.hasActiveAccount else \{\s*showRecognitionAccount = true/);
+});

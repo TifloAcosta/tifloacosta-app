@@ -38,11 +38,20 @@ Las compilaciones que sustituyen a la beta híbrida previa pueden necesitar migr
 
 ### Identificación musical con AcoustID
 
-Registra el cliente de TifloAcosta en https://acoustid.org/new-application si
-cumple las condiciones del servicio gratuito para uso no comercial. Configura
-el identificador público como ajuste de compilación `TIFLO_ACOUSTID_CLIENT`.
-La app deja desactivada la consulta si se construye sin ese valor. El usuario
-elige la opción durante la importación o confirma las consultas manuales.
+1. Confirma que el uso de AcoustID por TifloAcosta es no comercial.
+2. Inicia sesión en https://acoustid.org/new-application, registra la aplicación
+   con el nombre TifloAcosta y copia únicamente el identificador de aplicación.
+3. En el repositorio, abre Settings → Secrets and variables → Actions → Variables
+   y guarda ese identificador público como `TIFLO_ACOUSTID_CLIENT`. La validación
+   iOS sin distribución lo pasa a Xcode como ajuste de compilación del mismo nombre.
+   Una compilación local también puede recibirlo como ajuste de Xcode.
+4. En una compilación configurada, abre Mi Música → Ajustes → Cuenta AcoustID.
+   Vincula una cuenta de prueba y comprueba reconocimiento individual, de canciones
+   visibles y durante la importación, además de cancelación y desvinculación.
+
+La app desactiva la consulta si se construye sin el identificador. La clave
+personal se introduce en el iPhone y queda fuera de GitHub y de la compilación.
+El usuario elige la opción durante la importación o confirma las consultas manuales.
 
 La compilación fija Chromaprint 1.6.2, usa vDSP y prescinde de FFmpeg y de su
 remuestreador incluido. AVFoundation decodifica y convierte un máximo de 120

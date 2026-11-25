@@ -278,6 +278,10 @@ struct DocumentConversionSmoke {
             rtfMarkup.contains("Imagen de prueba") && rtfMarkup.contains("HYPERLINK") &&
             rtfMarkup.contains("\\trowd") && rtfMarkup.contains("\\cellx") && rtfMarkup.contains("\\listtable") && rtfMarkup.contains("\\levelnfc1") &&
             rtfMarkup.contains("\\levelstartat7") && rtfMarkup.contains("VII.\\tab"))
+        let rtfRoundtrip = try NativeRTFConversionMarkup.xhtml(Data(rtfMarkup.utf8), title: "Prueba")
+            .flatMap { String(data: $0, encoding: .utf8) } ?? ""
+        precondition(rtfRoundtrip.contains("role=\"doc-footnote\"") && rtfRoundtrip.contains("role=\"doc-noteref\"") &&
+            rtfRoundtrip.contains("Hinweis – opinião."))
         let richRTFReader = try NSAttributedString(url: richRTF,
             options: [.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil)
         precondition(richRTFReader.string.contains("Imagen de prueba") && richRTFReader.string.contains("Déjà vu"))

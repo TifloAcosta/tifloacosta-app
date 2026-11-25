@@ -34,11 +34,119 @@ enum NativeRTFConversionMarkup {
         }
     }
 
+    private struct Footnotes {
+        let document: Data
+        let prefix: String
+        let bodies: [String]
+
+        func insertLinks(in html: String) -> String {
+            var result = ""
+            var cursor = html.startIndex
+            for index in bodies.indices {
+                let key = "\(prefix)\(index)X"
+                guard let range = html.range(of: key, range: cursor..<html.endIndex) else { continue }
+                result += html[cursor..<range.lowerBound]
+                result += "<a href=\"#rtf-note-\(index)\" role=\"doc-noteref\">\(index + 1)</a>"
+                cursor = range.upperBound
+            }
+            result += html[cursor...]
+            for (index, body) in bodies.enumerated() {
+                let paragraphs = body.components(separatedBy: .newlines).map {
+                    "<p>\(NativeDocumentConversion.xml($0))</p>"
+                }.joined()
+                result += "<aside id=\"rtf-note-\(index)\" role=\"doc-footnote\">\(paragraphs)</aside>"
+            }
+            return result
+        }
+    }
+
+    /// Finds RTF destinations using the same group and binary boundaries as the native reader.
+    /// Only recognized footnotes are replaced, and their contents still use the native decoder.
+    private static func footnotes(in input: Data) throws -> Footnotes? {
+        let bytes = Array(input)
+        let prefix = "TifloNote" + UUID().uuidString.replacingOccurrences(of: "-", with: "") + "X"
+        struct Group {
+            let start: Int
+            var noteStart: Int?
+        }
+        var stack: [Group] = []
+        var ranges: [(whole: Range<Int>, note: Range<Int>)] = []
+        var codePage: Int?
+        var cursor = 0
+        func letter(_ value: UInt8) -> Bool { (65...90).contains(value) || (97...122).contains(value) }
+        func digit(_ value: UInt8) -> Bool { (48...57).contains(value) }
+        while cursor < bytes.count {
+            if cursor % 2048 == 0 { try Task.checkCancellation() }
+            switch bytes[cursor] {
+            case 123:
+                guard stack.count < 512 else { return nil }
+                stack.append(Group(start: cursor))
+                cursor += 1
+            case 125:
+                guard let group = stack.popLast() else { return nil }
+                if let note = group.noteStart, ranges.count < 1024, !stack.contains(where: { $0.noteStart != nil }) {
+                    ranges.append((group.start..<(cursor + 1), note..<cursor))
+                }
+                cursor += 1
+            case 92:
+                let backslash = cursor
+                cursor += 1
+                guard cursor < bytes.count else { return nil }
+                if bytes[cursor] == 39 {
+                    guard bytes.count - cursor >= 3 else { return nil }
+                    cursor += 3
+                } else if letter(bytes[cursor]) {
+                    let nameStart = cursor
+                    while cursor < bytes.count, letter(bytes[cursor]) { cursor += 1 }
+                    let nameEnd = cursor
+                    let numberStart = cursor
+                    if cursor < bytes.count, bytes[cursor] == 45 { cursor += 1 }
+                    while cursor < bytes.count, digit(bytes[cursor]) { cursor += 1 }
+                    let numberEnd = cursor
+                    if cursor < bytes.count, bytes[cursor] == 32 { cursor += 1 }
+                    let name = bytes[nameStart..<nameEnd]
+                    if name.elementsEqual("bin".utf8) {
+                        guard let number = Int(String(decoding: bytes[numberStart..<numberEnd], as: UTF8.self)),
+                              number >= 0, number <= bytes.count - cursor else { return nil }
+                        cursor += number
+                    } else if name.elementsEqual("footnote".utf8),
+                              let group = stack.last, backslash == group.start + 1 {
+                        stack[stack.count - 1].noteStart = cursor
+                    } else if name.elementsEqual("ansicpg".utf8), stack.count == 1, codePage == nil {
+                        codePage = Int(String(decoding: bytes[numberStart..<numberEnd], as: UTF8.self))
+                    }
+                } else { cursor += 1 }
+            default: cursor += 1
+            }
+        }
+        guard stack.isEmpty, !ranges.isEmpty else { return nil }
+        var original = Data()
+        var bodies: [String] = []
+        var end = 0
+        let header = "{\\rtf1\\ansi" + (codePage.map { "\\ansicpg\($0)" } ?? "") + " "
+        for entry in ranges {
+            try Task.checkCancellation()
+            var note = Data(header.utf8)
+            note.append(contentsOf: bytes[entry.note])
+            note.append(125)
+            guard let text = try? NSAttributedString(data: note,
+                options: [.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil) else { continue }
+            original.append(contentsOf: bytes[end..<entry.whole.lowerBound])
+            original.append(contentsOf: "{\(prefix)\(bodies.count)X}".utf8)
+            end = entry.whole.upperBound
+            bodies.append(text.string.trimmingCharacters(in: .whitespacesAndNewlines))
+        }
+        guard !bodies.isEmpty else { return nil }
+        original.append(contentsOf: bytes[end...])
+        return Footnotes(document: original, prefix: prefix, bodies: bodies)
+    }
+
     static func xhtml(_ data: Data, title: String) throws -> Data? {
         try Task.checkCancellation()
         // RTFD has external attachments. This reader accepts only the plain RTF stream.
         guard data.starts(with: Data("{\\rtf".utf8)) else { return nil }
-        let original = try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.rtf],
+        let notes = try footnotes(in: data)
+        let original = try NSAttributedString(data: notes?.document ?? data, options: [.documentType: NSAttributedString.DocumentType.rtf],
                                               documentAttributes: nil)
         let escape = NativeDocumentConversion.xml
         let text = original.string as NSString
@@ -146,6 +254,6 @@ enum NativeRTFConversionMarkup {
         closeLists()
         closeTables(from: 0)
         try Task.checkCancellation()
-        return Data("<html><head><title>\(escape(title))</title></head><body>\(body)</body></html>".utf8)
+        return Data("<html><head><title>\(escape(title))</title></head><body>\(notes?.insertLinks(in: body) ?? body)</body></html>".utf8)
     }
 }

@@ -125,6 +125,26 @@ private enum AccessibleCinemaDirectory {
               address: URL(string: "https://www.raiplaysound.it/generi/audiodescrizioni-film-fiction-programmi-c31adf5d-25c7-459a-9081-66a669298a39.html"),
               access: "Colección oficial de audiodescripción.",
               description: "", geographicNotice: "Acceso sujeto a derechos territoriales.", isAudioOnly: true),
+        .init(id: "tubi", name: "Tubi (EE. UU.)",
+              languages: [.english], kinds: [.film, .series],
+              address: URL(string: "https://tubitv.com/category/audio_description"),
+              access: "Colección oficial de audiodescripción.",
+              description: "", geographicNotice: "Acceso sujeto a derechos territoriales.", isAudioOnly: false),
+        .init(id: "pluto", name: "Pluto TV (EE. UU.)",
+              languages: [.english], kinds: [.film, .series],
+              address: URL(string: "https://pluto.tv/us/category/1a9072ea-901f-415c-aca0-c4ce3264389f/"),
+              access: "Colección oficial de audiodescripción.",
+              description: "", geographicNotice: "Acceso sujeto a derechos territoriales.", isAudioOnly: false),
+        .init(id: "plex-ad", name: "Plex",
+              languages: [.english], kinds: [.film, .series],
+              address: URL(string: "https://watch.plex.tv/on-demand/category/descriptive-audio"),
+              access: "Colección oficial de audiodescripción.",
+              description: "", geographicNotice: "Acceso sujeto a derechos territoriales.", isAudioOnly: false),
+        .init(id: "play-suisse-de", name: "Play Suisse (DE)",
+              languages: [.german], kinds: [.film, .series],
+              address: URL(string: "https://www.playsuisse.ch/de/browse/genre/audio_description?audioDescriptionLanguageFilter=de"),
+              access: "Colección oficial de audiodescripción.",
+              description: "", geographicNotice: "Acceso sujeto a derechos territoriales.", isAudioOnly: false),
         // AMI is dedicated to described media rather than a general-purpose
         // television catalogue. Separate the English and French services so
         // language filters never send users to a mismatched homepage.
@@ -304,7 +324,7 @@ struct NativeAccessibleCinemaScreen: View {
                 }
             }
 
-            if selectedLanguage == .all || selectedLanguage == .english || selectedLanguage == .french {
+            if selectedLanguage == .all || selectedLanguage == .english || selectedLanguage == .french || selectedLanguage == .german || selectedLanguage == .italian {
                 Section("Dónde ver una película") {
                     if selectedLanguage == .all || selectedLanguage == .english {
                         Link("Audio Description Project", destination: URL(string: "https://adp.acb.org/adp-search")!)
@@ -312,6 +332,12 @@ struct NativeAccessibleCinemaScreen: View {
                     if selectedLanguage == .all || selectedLanguage == .french {
                         Link("Portail de l’audiodescription", destination: URL(string: "https://audiodescription.culture.gouv.fr/")!)
                         Link("Películas gratuitas", destination: URL(string: "https://audiodescription.beta.gouv.fr/recherche?is_free=1")!)
+                    }
+                    if selectedLanguage == .all || selectedLanguage == .german {
+                        Link("hörfilm.info", destination: URL(string: "https://hoerfilm.info/mediatheken.html")!)
+                    }
+                    if selectedLanguage == .all || selectedLanguage == .italian {
+                        Link("CiecandoScherzando", destination: URL(string: "https://ciecandoscherzando.it/audiodescrizioni/")!)
                     }
                 }
             }
